@@ -1,76 +1,56 @@
+// API Route: /api/generate.js
+// Next.js Serverless Function for AI Brand Store Generation
+// Deploy to Vercel with ANTHROPIC_API_KEY environment variable
+
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const { brandName, marketplace, category, additionalInfo, existingStore, refinement } = req.body;
+  if (!brandName && !existingStore) return res.status(400).json({ error: 'Brand name required' });
 
-  try {
-    // Build the prompt based on whether it's initial generation or refinement
-    const isRefinement = existingStore && refinement;
-    
-    let systemPrompt = `You are an expert Amazon Brand Store designer. You create professional, high-converting brand stores.
+  const isRefinement = existingStore && refinement;
+  const langMap = { de: 'German', com: 'English', 'co.uk': 'English', fr: 'French', it: 'Italian', es: 'Spanish' };
+  const currMap = { de: 'EUR (€)', com: 'USD ($)', 'co.uk': 'GBP (£)', fr: 'EUR (€)', it: 'EUR (€)', es: 'EUR (€)' };
 
-CRITICAL RULES:
-- NEVER use placeholder text like "Überschrift hier" or "Text hier"
-- ALWAYS create specific, brand-appropriate content
-- Use web search to research the brand FIRST
-- Return valid JSON only
+  const systemPrompt = `You are an expert Amazon Brand Store architect with deep knowledge of what converts.
 
-Available module types: hero_banner, hero_product, hero_seasonal, product_grid, category_grid, usp_icons, testimonials, certifications, stats_metrics, ingredients_grid, howto_steps, bundle_promo, seasonal_offer, image_text, text_block, video, cta_button
+CRITICAL:
+- Use web search to research the brand
+- Create 5-20 pages depending on brand complexity
+- 6-12 modules per page, all with real content
+- NEVER use placeholder text
+- Return ONLY valid JSON
 
-Brand types: premium (sophisticated, education-focused), d2c (fun, colorful, community), mission (impact-driven, transparent)`;
+MODULE TYPES: hero_banner, hero_product, hero_seasonal, hero_mission, product_grid, product_slider, bestseller_auto, recommended_auto, category_grid, category_split, testimonials, certifications, stats_metrics, founder_story, text_block, image_text, image_gallery, video, usp_icons, howto_steps, bundle_promo, cta_button
 
-    let userPrompt;
-    
-    if (isRefinement) {
-      userPrompt = `Refine this existing brand store for "${brandName}":
-
-CURRENT STORE:
-${JSON.stringify(existingStore, null, 2)}
-
-REQUESTED CHANGE:
-${refinement}
-
-Apply ONLY the requested change. Keep everything else the same. Return the complete updated store as JSON.`;
-    } else {
-      userPrompt = `Create an Amazon Brand Store for "${brandName}" on Amazon.${marketplace}.
-
-${category ? `Category: ${category}` : ''}
-${additionalInfo ? `Additional info: ${additionalInfo}` : ''}
-
-STEPS:
-1. Research the brand using web search
-2. Identify brand type (premium/d2c/mission)
-3. Create appropriate store structure
-4. Generate compelling, brand-specific content
-5. Include realistic product ASINs if found
-
-Return JSON with this structure:
+JSON SCHEMA:
 {
   "brandType": "premium|d2c|mission",
-  "brandColors": {"primary": "#HEX", "secondary": "#HEX", "accent": "#HEX"},
-  "menu": [{"name": "STARTSEITE", "pageId": "homepage"}, ...],
+  "brandColors": {"primary":"#HEX","secondary":"#HEX","accent":"#HEX"},
+  "brandDescription": "string",
+  "menu": [{"name":"string","pageId":"string"}],
   "pages": [{
-    "id": "homepage",
-    "name": "Homepage",
+    "id": "string",
+    "name": "string",
     "modules": [{
-      "type": "hero_banner",
-      "content": {"headline": "Real headline here", "subheadline": "...", ...}
-    }, {
-      "type": "product_grid",
-      "content": {"headline": "...", "products": [{"asin": "B0XXXXXXXX", "name": "Product name"}]}
+      "type": "module_type",
+      "content": { /* type-specific fields */ }
     }]
   }]
-}
+}`;
 
-IMPORTANT:
-- Create 6-12 modules for homepage
-- Use concrete, emotional copy (not generic!)
-- Include at least one product_grid
-- Make it look professional and ready to use`;
-    }
+  let userPrompt;
+  if (isRefinement) {
+    userPrompt = `Refine this existing store:\n${JSON.stringify(existingStore, null, 2)}\n\nCHANGE: ${refinement}\n\nApply ONLY the change. Return complete JSON.`;
+  } else {
+    userPrompt = `Create Amazon Brand Store for "${brandName}" on Amazon.${marketplace}.
+${category ? `Category: ${category}` : ''}
+${additionalInfo ? `Context: ${additionalInfo}` : ''}
+Language: ${langMap[marketplace] || 'German'}, Currency: ${currMap[marketplace] || 'EUR'}
+Return ONLY JSON.`;
+  }
 
+  try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -80,53 +60,42 @@ IMPORTANT:
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 8000,
+        max_tokens: 16000,
         system: systemPrompt,
-        messages: [{
-          role: 'user',
-          content: userPrompt
-        }],
-        tools: [
-          {
-            type: "web_search_20250305",
-            name: "web_search"
-          }
-        ]
+        messages: [{ role: 'user', content: userPrompt }],
+        tools: isRefinement ? undefined : [{ type: 'web_search_20250305', name: 'web_search' }]
       })
     });
 
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      throw new Error(err.error?.message || `API ${response.status}`);
+    }
+
     const data = await response.json();
-    
-    // Extract text from response (handling tool use)
-    let fullText = '';
-    for (const block of data.content || []) {
-      if (block.type === 'text') {
-        fullText += block.text;
-      }
-    }
-    
-    if (!fullText) {
-      throw new Error('Keine AI Antwort erhalten');
-    }
+    let fullText = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
+    if (!fullText) throw new Error('Empty AI response');
 
-    // Extract JSON from response
+    // Extract and parse JSON
     const jsonMatch = fullText.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) {
-      console.error('AI Response:', fullText);
-      throw new Error('Kein gültiges JSON in AI Antwort');
-    }
+    if (!jsonMatch) throw new Error('No JSON in response');
 
-    const result = JSON.parse(jsonMatch[0]);
-    
-    // Validate result
-    if (!result.pages || !Array.isArray(result.pages)) {
-      throw new Error('Ungültige Store-Struktur');
-    }
+    let cleaned = jsonMatch[0].replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
+    const result = JSON.parse(cleaned);
+
+    if (!result.pages?.length) throw new Error('No pages generated');
+
+    // Validate
+    result.pages.forEach((p, i) => {
+      if (!p.id) p.id = `page_${i}`;
+      if (!p.modules) p.modules = [];
+      p.modules = p.modules.filter(m => m?.type);
+      p.modules.forEach(m => { if (!m.content) m.content = {}; });
+    });
 
     res.status(200).json(result);
-
   } catch (error) {
-    console.error('AI Error:', error);
+    console.error('Generate Error:', error);
     res.status(500).json({ error: error.message });
   }
 }
