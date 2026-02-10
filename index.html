@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Brand Store Builder Pro</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background: #EAEDED; overflow: hidden; }
+        .app { display: flex; height: 100vh; }
+        .sidebar { width: 340px; background: #232F3E; color: white; display: flex; flex-direction: column; flex-shrink: 0; }
+        .tabs { display: flex; background: #131A22; border-bottom: 1px solid #37475A; }
+        .tab { flex: 1; padding: 14px 8px; text-align: center; cursor: pointer; font-size: 12px; font-weight: 700; border-bottom: 3px solid transparent; transition: all 0.2s; }
+        .tab:hover { background: #1a2332; }
+        .tab.active { border-bottom-color: #FF9900; background: #232F3E; }
+        .tab-content { flex: 1; overflow-y: auto; padding: 20px; }
+        .add-btn { width: 100%; padding: 11px; background: #FF9900; color: #0F1111; border: none; border-radius: 6px; cursor: pointer; font-weight: 700; margin-bottom: 15px; }
+        .page-item { padding: 12px; margin-bottom: 8px; background: #37475A; border-radius: 6px; cursor: pointer; display: flex; justify-content: space-between; }
+        .page-item:hover { background: #485769; }
+        .page-item.active { background: #FF9900; color: #0F1111; }
+        .module-cat { margin-bottom: 20px; }
+        .cat-title { font-size: 11px; font-weight: 700; text-transform: uppercase; color: #AAB7B8; margin-bottom: 10px; }
+        .draggable { padding: 12px; margin-bottom: 8px; background: #37475A; border-radius: 6px; cursor: grab; }
+        .draggable:hover { background: #485769; border-color: #FF9900; }
+        .ai-section { margin-bottom: 20px; }
+        .ai-label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 8px; color: #AAB7B8; }
+        .ai-input { width: 100%; padding: 12px; background: #131A22; border: 2px solid #37475A; border-radius: 6px; color: white; font-size: 13px; }
+        .gen-btn { width: 100%; padding: 13px; background: linear-gradient(135deg, #FF9900, #FF6B00); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 700; }
+        .gen-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .info-box { background: #1a2332; padding: 12px; font-size: 11px; color: #AAB7B8; margin-top: 12px; border-radius: 6px; }
+        .canvas { flex: 1; display: flex; flex-direction: column; background: #F3F3F3; }
+        .toolbar { background: white; padding: 15px 20px; border-bottom: 1px solid #DDD; display: flex; justify-content: space-between; }
+        .view-toggle { display: flex; gap: 0; background: #F0F2F2; border-radius: 4px; padding: 3px; }
+        .view-btn { padding: 7px 14px; border: none; background: transparent; cursor: pointer; font-size: 12px; border-radius: 3px; }
+        .view-btn.active { background: white; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .btn { padding: 9px 16px; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 12px; border: none; }
+        .btn-primary { background: #FF9900; color: #0F1111; }
+        .viewport { flex: 1; overflow-y: auto; padding: 30px; }
+        .preview { max-width: 1500px; margin: 0 auto; background: white; box-shadow: 0 2px 12px rgba(0,0,0,0.08); border-radius: 8px; }
+        .preview.mobile { max-width: 375px; }
+        .store-header { background: #131921; padding: 12px 20px; color: white; font-weight: 700; }
+        .store-nav { background: white; border-bottom: 1px solid #DDD; display: flex; padding: 0 20px; gap: 20px; }
+        .nav-item { padding: 16px 0; border-bottom: 3px solid transparent; cursor: pointer; }
+        .nav-item.active { border-bottom-color: #FF9900; }
+        .content { padding: 20px; min-height: 400px; }
+        .drop-zone { border: 3px dashed #D5D9D9; border-radius: 8px; padding: 60px; text-align: center; background: #FAFAFA; min-height: 300px; }
+        .tile { margin-bottom: 20px; border: 2px solid transparent; border-radius: 8px; position: relative; }
+        .tile:hover { border-color: #FF9900; }
+        .tile.selected { border-color: #FF9900; box-shadow: 0 0 0 3px rgba(255,153,0,0.15); }
+        .tile-controls { position: absolute; top: 12px; right: 12px; opacity: 0; }
+        .tile:hover .tile-controls { opacity: 1; }
+        .tile-btn { width: 34px; height: 34px; border-radius: 4px; background: white; border: 1px solid #D5D9D9; cursor: pointer; }
+        .module-hero { height: 400px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
+        .module-text { padding: 30px; }
+        .module-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 20px; }
+        .product-card { border: 1px solid #DDD; padding: 15px; border-radius: 6px; }
+        .product-img { width: 100%; aspect-ratio: 1; background: #F5F5F5; border: 2px dashed #D5D9D9; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; font-size: 36px; }
+        .properties { width: 360px; background: white; border-left: 1px solid #DDD; overflow-y: auto; }
+        .prop-header { padding: 20px; background: #F7F8F8; border-bottom: 1px solid #DDD; }
+        .prop-content { padding: 20px; }
+        .prop-group { margin-bottom: 20px; }
+        .prop-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+        .prop-input, .prop-textarea { width: 100%; padding: 11px; border: 1px solid #D5D9D9; border-radius: 6px; font-size: 14px; }
+        .prop-textarea { min-height: 100px; resize: vertical; }
+        .upload-area { border: 2px dashed #D5D9D9; border-radius: 8px; padding: 30px; text-align: center; background: #FAFAFA; cursor: pointer; position: relative; }
+        .upload-area input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+        .preview-img { width: 100%; max-height: 200px; object-fit: contain; margin-top: 10px; border-radius: 6px; }
+        .toast { position: fixed; bottom: 30px; right: 30px; background: #067D62; color: white; padding: 16px 22px; border-radius: 8px; z-index: 1001; }
+        .toast.error { background: #C40000; }
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        .modal { background: white; padding: 30px; border-radius: 8px; max-width: 500px; width: 90%; }
+        .modal h3 { margin-bottom: 20px; }
+        .modal-input { width: 100%; padding: 11px; border: 1px solid #D5D9D9; border-radius: 6px; margin-bottom: 15px; }
+        .modal-btns { display: flex; gap: 10px; margin-top: 20px; }
+        .modal-btns button { flex: 1; padding: 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState } = React;
+        const API_KEY = '';
+        const MODULES = [
+            { id: 'hero', name: 'Hero', icon: '🎯', cat: 'visual', spec: '3000×600-1200px' },
+            { id: 'image', name: 'Image', icon: '🖼️', cat: 'visual', spec: '3000×1500px' },
+            { id: 'imageText', name: 'Image + Text', icon: '📝', cat: 'visual', spec: '1500×1500px' },
+            { id: 'text', name: 'Text', icon: '📄', cat: 'content', spec: 'Max 20 lines' },
+            { id: 'video', name: 'Video', icon: '🎬', cat: 'visual', spec: '1280×640px' },
+            { id: 'productGrid', name: 'Product Grid', icon: '📦', cat: 'products', spec: '4-100' },
+            { id: 'shoppableImage', name: 'Shoppable', icon: '🛍️', cat: 'products', spec: '3000×1500px' },
+            { id: 'bestSellers', name: 'Best Sellers', icon: '⭐', cat: 'products', spec: 'Auto', auto: true },
+            { id: 'recommended', name: 'Recommended', icon: '💡', cat: 'products', spec: 'Auto', auto: true },
+            { id: 'deals', name: 'Deals', icon: '🏷️', cat: 'products', spec: 'Auto', auto: true },
+            { id: 'gallery', name: 'Gallery', icon: '🎨', cat: 'visual', spec: '3-8 images' },
+            { id: 'bgVideo', name: 'BG Video', icon: '🎥', cat: 'visual', spec: 'Max 4' },
+            { id: 'split', name: 'Split', icon: '⚡', cat: 'layout', spec: '2-3 tiles' },
+        ];
+
+        function App() {
+            const [tab, setTab] = useState('pages');
+            const [pages, setPages] = useState([{ id: 1, name: 'Homepage', modules: [] }]);
+            const [pageId, setPageId] = useState(1);
+            const [moduleId, setModuleId] = useState(null);
+            const [view, setView] = useState('desktop');
+            const [showModal, setShowModal] = useState(false);
+            const [toast, setToast] = useState(null);
+            const page = pages.find(p => p.id === pageId) || pages[0];
+            const module = page?.modules?.find(m => m.id === moduleId);
+
+            const showToast = (msg, type = 'success') => {
+                setToast({ msg, type });
+                setTimeout(() => setToast(null), 3000);
+            };
+
+            const addPage = (name) => {
+                const newPage = { id: Date.now(), name, modules: [] };
+                setPages([...pages, newPage]);
+                setPageId(newPage.id);
+                setShowModal(false);
+                showToast('Seite erstellt!');
+            };
+
+            const delPage = (id) => {
+                if (pages.length === 1) return;
+                setPages(pages.filter(p => p.id !== id));
+                if (pageId === id) setPageId(pages[0].id);
+            };
+
+            const dropModule = (e) => {
+                e.preventDefault();
+                const type = JSON.parse(e.dataTransfer.getData('module'));
+                const newMod = { id: Date.now(), type: type.id, heading: '', description: '', imageUrl: null };
+                setPages(pages.map(p => p.id === pageId ? { ...p, modules: [...p.modules, newMod] } : p));
+                setModuleId(newMod.id);
+                showToast(type.name + ' hinzugefügt!');
+            };
+
+            const updateModule = (id, data) => {
+                setPages(pages.map(p => p.id === pageId ? {
+                    ...p, modules: p.modules.map(m => m.id === id ? { ...m, ...data } : m)
+                } : p));
+            };
+
+            const delModule = (id) => {
+                setPages(pages.map(p => p.id === pageId ? { ...p, modules: p.modules.filter(m => m.id !== id) } : p));
+                setModuleId(null);
+                showToast('Modul gelöscht');
+            };
+
+            const uploadImage = (e, id) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    updateModule(id, { imageUrl: ev.target.result });
+                    showToast('Bild hochgeladen!');
+                };
+                reader.readAsDataURL(file);
+            };
+
+            const exportJSON = () => {
+                const json = JSON.stringify({ pages }, null, 2);
+                const blob = new Blob([json], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'store.json';
+                a.click();
+                showToast('Exportiert!');
+            };
+
+            const generateAI = async (brandName, marketplace) => {
+                try {
+                    const res = await fetch('https://api.anthropic.com/v1/messages', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-api-key': API_KEY,
+                            'anthropic-version': '2023-06-01'
+                        },
+                        body: JSON.stringify({
+                            model: 'claude-sonnet-4-20250514',
+                            max_tokens: 6000,
+                            messages: [{ role: 'user', content: `Erstelle Amazon Brand Store für "${brandName}" auf Amazon.${marketplace}. Erstelle Homepage (6-8 Module), 2 Kategorieseiten, Über uns. JSON Format: {"pages":[{"name":"Homepage","modules":[{"type":"hero","heading":"Überschrift","description":"Text"}]}]}` }]
+                        })
+                    });
+                    const data = await res.json();
+                    if (!data.content?.[0]?.text) throw new Error('Keine Antwort');
+                    const text = data.content[0].text;
+                    const result = JSON.parse(text.match(/\{[\s\S]*\}/)?.[0]);
+                    const base = Date.now();
+                    const aiPages = result.pages.map((p, i) => ({
+                        id: base + i,
+                        name: p.name,
+                        modules: p.modules.map((m, j) => ({
+                            id: (base + i) * 1000 + j,
+                            type: m.type,
+                            heading: m.heading || '',
+                            description: m.description || '',
+                            imageUrl: null
+                        }))
+                    }));
+                    setPages(aiPages);
+                    setPageId(aiPages[0].id);
+                    setTab('pages');
+                    showToast('✨ Store generiert!');
+                } catch (err) {
+                    console.error(err);
+                    throw err;
+                }
+            };
+
+            return (
+                <div className="app">
+                    <Sidebar tab={tab} setTab={setTab} pages={pages} pageId={pageId} setPageId={setPageId} delPage={delPage} onAddPage={() => setShowModal(true)} generateAI={generateAI} showToast={showToast} />
+                    <div className="canvas">
+                        <Toolbar view={view} setView={setView} onExport={exportJSON} />
+                        <div className="viewport">
+                            <Preview page={page} pages={pages} view={view} moduleId={moduleId} setModuleId={setModuleId} delModule={delModule} onDrop={dropModule} />
+                        </div>
+                    </div>
+                    <Properties module={module} updateModule={updateModule} delModule={delModule} uploadImage={(e) => uploadImage(e, moduleId)} />
+                    {showModal && <Modal onClose={() => setShowModal(false)} onAdd={addPage} />}
+                    {toast && <div className={'toast ' + (toast.type || '')}>{toast.msg}</div>}
+                </div>
+            );
+        }
+
+        function Sidebar({ tab, setTab, pages, pageId, setPageId, delPage, onAddPage, generateAI, showToast }) {
+            const [brandName, setBrandName] = useState('');
+            const [marketplace, setMarketplace] = useState('de');
+            const [generating, setGenerating] = useState(false);
+            const handleGenerate = async () => {
+                if (!brandName.trim() || generating) return;
+                setGenerating(true);
+                try {
+                    await generateAI(brandName.trim(), marketplace);
+                } catch (err) {
+                    showToast('Fehler: ' + err.message, 'error');
+                } finally {
+                    setGenerating(false);
+                }
+            };
+            return (
+                <div className="sidebar">
+                    <div className="tabs">
+                        <div className={'tab ' + (tab === 'pages' ? 'active' : '')} onClick={() => setTab('pages')}>📄 Seiten</div>
+                        <div className={'tab ' + (tab === 'modules' ? 'active' : '')} onClick={() => setTab('modules')}>🧩 Module</div>
+                        <div className={'tab ' + (tab === 'ai' ? 'active' : '')} onClick={() => setTab('ai')}>🤖 AI</div>
+                    </div>
+                    <div className="tab-content">
+                        {tab === 'pages' && (<><button className="add-btn" onClick={onAddPage}>➕ Seite</button>{pages.map(p => <div key={p.id} className={'page-item ' + (p.id === pageId ? 'active' : '')} onClick={() => setPageId(p.id)}><span>{p.name}</span>{pages.length > 1 && <span onClick={(e) => { e.stopPropagation(); delPage(p.id); }}>🗑️</span>}</div>)}</>)}
+                        {tab === 'modules' && (<>{['visual', 'content', 'products', 'layout'].map(cat => { const mods = MODULES.filter(m => m.cat === cat); if (!mods.length) return null; const names = { visual: 'Visuelle', content: 'Content', products: 'Produkte', layout: 'Layout' }; return <div key={cat} className="module-cat"><div className="cat-title">{names[cat]}</div>{mods.map(m => <div key={m.id} className="draggable" draggable onDragStart={e => e.dataTransfer.setData('module', JSON.stringify(m))}><div>{m.icon} {m.name}</div><div style={{fontSize: '11px', color: '#AAB7B8'}}>{m.spec}</div></div>)}</div>; })}</>)}
+                        {tab === 'ai' && (<><div className="ai-section"><label className="ai-label">Brand Name</label><input className="ai-input" value={brandName} onChange={e => setBrandName(e.target.value)} placeholder="z.B. Natural Elements" disabled={generating} /></div><div className="ai-section"><label className="ai-label">Marketplace</label><select className="ai-input" value={marketplace} onChange={e => setMarketplace(e.target.value)} disabled={generating} style={{cursor: 'pointer'}}><option value="de">🇩🇪 Amazon.de</option><option value="com">🇺🇸 Amazon.com</option><option value="uk">🇬🇧 Amazon.co.uk</option></select><div className="info-box">💡 AI generiert kompletten Store</div></div><button className="gen-btn" onClick={handleGenerate} disabled={generating || !brandName.trim()}>{generating ? '🤖 Generiert...' : '✨ Store Generieren'}</button></>)}
+                    </div>
+                </div>
+            );
+        }
+
+        function Toolbar({ view, setView, onExport }) {
+            return <div className="toolbar"><div style={{fontWeight: 700}}>Amazon Store Builder</div><div style={{display: 'flex', gap: '15px'}}><div className="view-toggle"><button className={'view-btn ' + (view === 'desktop' ? 'active' : '')} onClick={() => setView('desktop')}>🖥️ Desktop</button><button className={'view-btn ' + (view === 'mobile' ? 'active' : '')} onClick={() => setView('mobile')}>📱 Mobile</button></div><button className="btn btn-primary" onClick={onExport}>💾 Export</button></div></div>;
+        }
+
+        function Preview({ page, pages, view, moduleId, setModuleId, delModule, onDrop }) {
+            return <div className={'preview ' + view}><div className="store-header">amazon.de</div><div className="store-nav">{pages.map(p => <div key={p.id} className={'nav-item ' + (p.id === page.id ? 'active' : '')}>{p.name}</div>)}</div><div className="content">{page.modules.length === 0 ? <div className="drop-zone" onDrop={onDrop} onDragOver={e => e.preventDefault()}><div style={{fontSize: '56px'}}>📦</div><div style={{fontSize: '20px', fontWeight: 700, marginTop: '10px'}}>Module hierher ziehen</div></div> : <>{page.modules.map(m => <Tile key={m.id} module={m} selected={m.id === moduleId} onClick={() => setModuleId(m.id)} onDel={() => delModule(m.id)} />)}<div className="drop-zone" onDrop={onDrop} onDragOver={e => e.preventDefault()} style={{marginTop: '20px', minHeight: '120px', padding: '40px'}}><div style={{fontSize: '32px'}}>➕</div></div></>}</div></div>;
+        }
+
+        function Tile({ module, selected, onClick, onDel }) {
+            const modType = MODULES.find(t => t.id === module.type);
+            let content;
+            if (module.type === 'hero') {
+                const style = module.imageUrl ? { backgroundImage: `url(${module.imageUrl})` } : {};
+                content = <div className="module-hero" style={style}><div style={{textAlign: 'center', padding: '40px', background: 'rgba(0,0,0,0.3)', borderRadius: '12px'}}><h1 style={{fontSize: '48px'}}>{module.heading || 'Hero'}</h1><p style={{fontSize: '20px', marginTop: '10px'}}>{module.description || 'Text'}</p></div></div>;
+            } else if (module.type === 'text') {
+                content = <div className="module-text"><h3 style={{fontSize: '24px', marginBottom: '15px'}}>{module.heading || 'Überschrift'}</h3><p>{module.description || 'Text...'}</p></div>;
+            } else if (module.type === 'productGrid' || module.type === 'bestSellers') {
+                content = <div>{module.heading && <h3 style={{padding: '20px'}}>{module.heading}</h3>}<div className="module-grid">{[1,2,3,4,5,6,7,8].map(i => <div key={i} className="product-card"><div className="product-img">📦</div><div>Product {i}</div><div style={{fontWeight: 700, color: '#B12704'}}>€29,99</div></div>)}</div></div>;
+            } else {
+                content = <div style={{padding: '60px', textAlign: 'center', background: '#F5F5F5', border: '2px dashed #D5D9D9', minHeight: '300px'}}>{module.imageUrl ? <img src={module.imageUrl} style={{maxWidth: '100%', maxHeight: '400px'}} alt="" /> : <><div style={{fontSize: '48px'}}>{modType?.icon || '📦'}</div><div>{modType?.name || 'Modul'}</div></>}</div>;
+            }
+            return <div className={'tile ' + (selected ? 'selected' : '')} onClick={onClick}><div className="tile-controls"><button className="tile-btn" onClick={(e) => { e.stopPropagation(); onDel(); }}>🗑️</button></div>{content}</div>;
+        }
+
+        function Properties({ module, updateModule, delModule, uploadImage }) {
+            if (!module) return <div className="properties"><div className="prop-header"><h3>⚙️ Eigenschaften</h3><p>Kein Modul ausgewählt</p></div></div>;
+            const modType = MODULES.find(t => t.id === module.type);
+            return <div className="properties"><div className="prop-header"><h3>{modType?.icon} {modType?.name}</h3></div><div className="prop-content">{!['image', 'video'].includes(module.type) && <div className="prop-group"><label className="prop-label">Überschrift</label><input className="prop-input" value={module.heading || ''} onChange={e => updateModule(module.id, { heading: e.target.value })} /></div>}{['hero', 'imageText', 'text', 'productGrid'].includes(module.type) && <div className="prop-group"><label className="prop-label">Beschreibung</label><textarea className="prop-textarea" value={module.description || ''} onChange={e => updateModule(module.id, { description: e.target.value })} /></div>}{['hero', 'image', 'imageText', 'shoppableImage'].includes(module.type) && <div className="prop-group"><label className="prop-label">Bild</label><div className="upload-area"><input type="file" accept="image/*" onChange={uploadImage} /><div style={{fontSize: '36px'}}>📁</div><div style={{fontWeight: 600}}>Hochladen</div></div>{module.imageUrl && <img src={module.imageUrl} className="preview-img" alt="" />}</div>}<button onClick={() => delModule(module.id)} style={{width: '100%', padding: '12px', background: '#FEE', color: '#C00', border: '1px solid #FCC', borderRadius: '6px', cursor: 'pointer', fontWeight: 700}}>🗑️ Löschen</button></div></div>;
+        }
+
+        function Modal({ onClose, onAdd }) {
+            const [name, setName] = useState('');
+            return <div className="modal-overlay" onClick={onClose}><div className="modal" onClick={e => e.stopPropagation()}><h3>➕ Neue Seite</h3><input className="modal-input" value={name} onChange={e => setName(e.target.value)} placeholder="Seitenname..." autoFocus /><div className="modal-btns"><button style={{background: '#F0F0F0'}} onClick={onClose}>Abbrechen</button><button style={{background: '#FF9900', color: '#0F1111'}} onClick={() => name.trim() && onAdd(name)}>Erstellen</button></div></div></div>;
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
