@@ -174,23 +174,23 @@
 
             const generateAI = async (brandName, marketplace) => {
                 try {
-                    const res = await fetch('https://api.anthropic.com/v1/messages', {
+                    const res = await fetch('/api/generate', {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json',
-                            'x-api-key': API_KEY,
-                            'anthropic-version': '2023-06-01'
+                            'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            model: 'claude-sonnet-4-20250514',
-                            max_tokens: 6000,
-                            messages: [{ role: 'user', content: `Erstelle Amazon Brand Store für "${brandName}" auf Amazon.${marketplace}. Erstelle Homepage (6-8 Module), 2 Kategorieseiten, Über uns. JSON Format: {"pages":[{"name":"Homepage","modules":[{"type":"hero","heading":"Überschrift","description":"Text"}]}]}` }]
+                            brandName,
+                            marketplace
                         })
                     });
-                    const data = await res.json();
-                    if (!data.content?.[0]?.text) throw new Error('Keine Antwort');
-                    const text = data.content[0].text;
-                    const result = JSON.parse(text.match(/\{[\s\S]*\}/)?.[0]);
+                    
+                    if (!res.ok) {
+                        const error = await res.json();
+                        throw new Error(error.error || 'Server Fehler');
+                    }
+                    
+                    const result = await res.json();
                     const base = Date.now();
                     const aiPages = result.pages.map((p, i) => ({
                         id: base + i,
