@@ -133,14 +133,13 @@ export default function Home() {
   };
 
   // ═══════════════════════════════════════════════════
-  // MULTI-STEP GENERATION
+  // MULTI-STEP GENERATION (4 steps: research, architecture, content, validate)
   // ═══════════════════════════════════════════════════
   const generate = async () => {
     if(!aiBrand.trim()) return showToast("Markenname fehlt!","err");
     setAiModal(false); setGenerating(true); setGenLog([]);
     const steps = [
-      {name:"Marke recherchieren", desc:"Web Search: Website, Werte, Farben, Ton..."},
-      {name:"Amazon-Daten sammeln", desc:"ASINs, Preise, Kategorien, bestehender Store..."},
+      {name:"Marke & Amazon recherchieren", desc:"Web Search: Website, Produkte, ASINs, Kategorien..."},
       {name:"Store-Architektur erstellen", desc:"Seiten, Navigation, Tile-Sequenzen..."},
       {name:"Inhalte generieren", desc:"Texte, Bild-Briefings pro Seite..."},
       {name:"Validieren & aufbauen", desc:"Prüfen, Auto-Fix, Store zusammensetzen..."},
@@ -148,36 +147,31 @@ export default function Home() {
     setGenSteps(steps);
 
     try {
-      // STEP 1
-      setGenStep(0); addLog("🔍 Starte Markenrecherche...");
+      // STEP 1: Combined brand + Amazon research
+      setGenStep(0); addLog("🔍 Recherchiere Marke & Amazon-Produkte...");
       const brandProfile = await callStep("research", { brandName:aiBrand, marketplace:aiMp, category:aiCat, additionalInfo:aiInfo });
-      addLog(`✅ Brand: ${brandProfile.type}, ${brandProfile.categories?.length||0} Kategorien, Ton: ${brandProfile.tone}`);
+      addLog(`✅ Brand: ${brandProfile.type}, ${brandProfile.categories?.length||0} Kategorien, ${brandProfile.products?.length||0} Produkte`);
 
-      // STEP 2
-      setGenStep(1); addLog("🛒 Suche Amazon-Produkte...");
-      const amazonData = await callStep("amazon", { brandName:aiBrand, marketplace:aiMp, brandProfile });
-      addLog(`✅ ${amazonData.products?.length||0} Produkte, ${amazonData.amazonCategories?.length||0} Kategorien`);
-
-      // STEP 3
-      setGenStep(2); addLog("🏗️ Erstelle Store-Architektur...");
-      const architecture = await callStep("architecture", { brandName:aiBrand, marketplace:aiMp, brandProfile, amazonData });
+      // STEP 2: Architecture
+      setGenStep(1); addLog("🏗️ Erstelle Store-Architektur...");
+      const architecture = await callStep("architecture", { marketplace:aiMp, brandProfile });
       addLog(`✅ ${architecture.pages?.length||0} Seiten geplant`);
       architecture.pages?.forEach(p => addLog(`   📄 ${p.name}: ${p.purpose?.slice(0,60)}...`));
 
-      // STEP 4
-      setGenStep(3);
+      // STEP 3: Content per page
+      setGenStep(2);
       const builtPages = [];
       for(let i=0; i<(architecture.pages||[]).length; i++) {
         const pagePlan = architecture.pages[i];
         addLog(`📝 Seite ${i+1}/${architecture.pages.length}: "${pagePlan.name}"...`);
-        const pageContent = await callStep("content", { marketplace:aiMp, brandProfile, amazonData, pagePlan });
+        const pageContent = await callStep("content", { marketplace:aiMp, brandProfile, pagePlan });
         const validTiles = (pageContent.tiles||[]).filter(t=>TILES[t.type]).map(t=>mkTile(t.type,t.size,t.content||{},t.imageBriefing||""));
         builtPages.push({ id:pagePlan.id||`page_${i}`, name:pageContent.pageName||pagePlan.name, heroImageBriefing:pageContent.heroImageBriefing||"", tiles:validTiles });
         addLog(`   ✅ ${validTiles.length} Tiles, ${validTiles.filter(t=>t.imageBriefing).length} Briefings`);
       }
 
-      // STEP 5
-      setGenStep(4); addLog("🔍 Validiere...");
+      // STEP 4: Validate
+      setGenStep(3); addLog("🔍 Validiere...");
       let warnings = 0;
       builtPages.forEach(p => {
         if(p.tiles.filter(t=>t.type==="product_grid").length>1){ p.tiles=p.tiles.filter((t,i)=>t.type!=="product_grid"||p.tiles.findIndex(x=>x.type==="product_grid")===i); warnings++; }
@@ -186,7 +180,7 @@ export default function Home() {
       });
       addLog(`✅ ${warnings} Warnungen`);
 
-      setStore({ brandName:aiBrand, brandProfile, amazonData, pages:builtPages });
+      setStore({ brandName:aiBrand, brandProfile, amazonData:null, pages:builtPages });
       setCurPage(builtPages[0]?.id); setSelTile(null);
       const tot = builtPages.reduce((a,p)=>a+p.tiles.length,0);
       addLog(`\n🎉 FERTIG: ${builtPages.length} Seiten, ${tot} Tiles`);
