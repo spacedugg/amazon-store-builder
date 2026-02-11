@@ -111,16 +111,25 @@ export default function Home() {
     r.readAsDataURL(file);
   };
 
-  // ── API call via /api/generate ──
-  const callStep = async (step, body) => {
-    const resp = await fetch("/api/generate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "step", step, ...body }),
-    });
-    const data = await resp.json();
-    if (data.error) throw new Error(data.error);
-    return data.data;
+  // ── API call via /api/generate with retry for rate limits ──
+  const callStep = async (step, body, maxRetries = 3) => {
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      const resp = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "step", step, ...body }),
+      });
+      const data = await resp.json();
+      if (data.error && data.error.includes("429") && attempt < maxRetries) {
+        const wait = 15 * (attempt + 1);
+        addLog(`⏳ Rate limit — warte ${wait}s vor Retry ${attempt+1}/${maxRetries}...`);
+        await new Promise(r => setTimeout(r, wait * 1000));
+        continue;
+      }
+      if (data.error) throw new Error(data.error);
+      return data.data;
+    }
+    throw new Error("Rate limit nach allen Retries. Bitte 1 Minute warten.");
   };
 
   // ═══════════════════════════════════════════════════
