@@ -159,8 +159,11 @@ RULES:
 const LANG_MAP = { de:"German", com:"English", "co.uk":"English", fr:"French", it:"Italian", es:"Spanish" };
 const CURR_MAP = { de:"€ (EUR)", com:"$ (USD)", "co.uk":"£ (GBP)", fr:"€ (EUR)", it:"€ (EUR)", es:"€ (EUR)" };
 
-// ── Claude API call helper ──
-async function callClaude(system, userMessage, useSearch = false) {
+// ── Helper: delay ──
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+// ── Claude API call helper with retry for rate limits ──
+async function callClaude(system, userMessage, useSearch = false, retries = 3) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) throw new Error("ANTHROPIC_API_KEY environment variable is not set");
 
@@ -174,29 +177,42 @@ async function callClaude(system, userMessage, useSearch = false) {
     body.tools = [{ type: "web_search_20250305", name: "web_search" }];
   }
 
-  const response = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": apiKey,
-      "anthropic-version": "2023-06-01",
-    },
-    body: JSON.stringify(body),
-  });
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": apiKey,
+        "anthropic-version": "2023-06-01",
+      },
+      body: JSON.stringify(body),
+    });
 
-  if (!response.ok) {
-    const err = await response.json().catch(() => ({}));
-    throw new Error(`Anthropic API ${response.status}: ${err.error?.message || response.statusText}`);
+    // Rate limit — wait and retry
+    if (response.status === 429 && attempt < retries) {
+      const retryAfter = response.headers.get("retry-after");
+      const waitMs = retryAfter ? parseInt(retryAfter) * 1000 : (15000 * (attempt + 1));
+      console.log(`Rate limited (429). Waiting ${waitMs/1000}s before retry ${attempt + 1}/${retries}...`);
+      await sleep(waitMs);
+      continue;
+    }
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      throw new Error(`Anthropic API ${response.status}: ${err.error?.message || response.statusText}`);
+    }
+
+    const data = await response.json();
+    if (data.error) throw new Error(data.error.message || JSON.stringify(data.error));
+
+    const text = (data.content || []).filter(b => b.type === "text").map(b => b.text).join("");
+    const match = text.match(/\{[\s\S]*\}/);
+    if (!match) throw new Error("No valid JSON in AI response. Raw: " + text.slice(0, 200));
+
+    return JSON.parse(match[0]);
   }
 
-  const data = await response.json();
-  if (data.error) throw new Error(data.error.message || JSON.stringify(data.error));
-
-  const text = (data.content || []).filter(b => b.type === "text").map(b => b.text).join("");
-  const match = text.match(/\{[\s\S]*\}/);
-  if (!match) throw new Error("No valid JSON in AI response. Raw: " + text.slice(0, 200));
-
-  return JSON.parse(match[0]);
+  throw new Error("Rate limit exceeded after all retries. Please try again in a minute.");
 }
 
 // ── Validation & Auto-Fix ──
