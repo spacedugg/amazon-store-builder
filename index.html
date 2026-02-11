@@ -1,989 +1,808 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amazon Brand Store Builder — Professional Edition</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--amazon:#FF9900;--amazon-dk:#E88B00;--accent:#232F3E;--accent-lt:#37475A;--blue:#007EB9;--green:#067D62;--red:#CC0C39;--surf:#fff;--bg:#F5F6F8;--bg2:#EBEDF0;--brd:#DCE0E6;--brd-lt:#EBEDF0;--tx:#0F1111;--tx2:#565959;--tx3:#8D9096;--sh-s:0 1px 3px rgba(0,0,0,.06);--sh-m:0 4px 12px rgba(0,0,0,.08);--sh-l:0 12px 40px rgba(0,0,0,.12);--r-s:6px;--r-m:10px;--r-l:14px;--r-xl:20px;--font:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;--mono:'JetBrains Mono',monospace;--side:280px;--prop:340px;--hdr:56px}
-html{font-size:14px}
-body{font-family:var(--font);background:var(--bg);color:var(--tx);height:100vh;overflow:hidden}
-.app{display:flex;flex-direction:column;height:100vh}
+import { useState, useRef, useCallback, useEffect } from "react";
 
-/* HEADER */
-.hdr{height:var(--hdr);background:var(--accent);display:flex;align-items:center;padding:0 16px;gap:12px;z-index:100;flex-shrink:0}
-.hdr-brand{display:flex;align-items:center;gap:8px;color:#fff;font-weight:700;font-size:.95rem;white-space:nowrap}
-.hdr-brand svg{flex-shrink:0}
-.hdr-pro{background:var(--amazon);color:var(--accent);padding:1px 7px;border-radius:3px;font-size:.65rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
-.hdr-center{flex:1;display:flex;align-items:center;justify-content:center;gap:2px}
-.mode-btn{padding:6px 14px;border:none;border-radius:var(--r-s);font-family:var(--font);font-weight:600;font-size:.78rem;cursor:pointer;transition:all .15s;background:0;color:rgba(255,255,255,.55)}
-.mode-btn:hover{color:rgba(255,255,255,.8)}
-.mode-btn.active{background:rgba(255,255,255,.12);color:#fff}
-.hdr-acts{display:flex;gap:6px}
-.hb{padding:6px 12px;border:1px solid rgba(255,255,255,.18);border-radius:var(--r-s);background:0;color:rgba(255,255,255,.8);font-family:var(--font);font-weight:600;font-size:.76rem;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:5px;white-space:nowrap}
-.hb:hover{background:rgba(255,255,255,.1);color:#fff}
-.hb.pri{background:var(--amazon);color:var(--accent);border-color:var(--amazon)}
-.hb.pri:hover{background:var(--amazon-dk)}
+/* ═══════════════════════════════════════════════════════════════
+   AMAZON BRAND STORE BUILDER — MULTI-STEP AI GENERATION
+   5 sequential API calls, each focused on one job.
+   ═══════════════════════════════════════════════════════════════ */
 
-/* MAIN */
-.mn{display:flex;flex:1;overflow:hidden}
-
-/* SIDEBAR */
-.side{width:var(--side);background:var(--surf);border-right:1px solid var(--brd);display:flex;flex-direction:column;flex-shrink:0}
-.side-hdr{padding:12px 14px;border-bottom:1px solid var(--brd-lt);font-weight:700;font-size:.75rem;color:var(--tx3);text-transform:uppercase;letter-spacing:.7px}
-.side-sc{flex:1;overflow-y:auto;padding:10px}
-.mg{margin-bottom:14px}
-.mg-t{font-size:.68rem;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;padding:3px 8px;margin-bottom:4px}
-.mi{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:var(--r-s);cursor:grab;transition:all .12s;border:1px solid transparent;margin-bottom:1px}
-.mi:hover{background:var(--bg);border-color:var(--brd)}
-.mi:active{cursor:grabbing;opacity:.7}
-.mi-ic{width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:4px;font-size:.85rem;flex-shrink:0}
-.mi-nm{font-weight:600;font-size:.78rem;color:var(--tx)}
-.mi-ds{font-size:.68rem;color:var(--tx3)}
-
-/* CANVAS */
-.cv{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--bg2)}
-.pgbar{display:flex;align-items:center;gap:5px;padding:8px 16px;background:var(--surf);border-bottom:1px solid var(--brd);overflow-x:auto;flex-shrink:0}
-.pgt{padding:5px 12px;border-radius:var(--r-s);font-size:.76rem;font-weight:600;cursor:pointer;white-space:nowrap;border:1px solid var(--brd);background:var(--surf);color:var(--tx2);transition:all .12s;display:flex;align-items:center;gap:5px;font-family:var(--font)}
-.pgt:hover{border-color:var(--accent);color:var(--tx)}
-.pgt.act{background:var(--accent);color:#fff;border-color:var(--accent)}
-.pgt .x{font-size:.65rem;opacity:.5;cursor:pointer;line-height:1}
-.pgt .x:hover{opacity:1}
-.apb{padding:5px 9px;border:1px dashed var(--brd);border-radius:var(--r-s);background:0;cursor:pointer;font-size:.76rem;color:var(--tx3);font-family:var(--font);transition:all .12s}
-.apb:hover{border-color:var(--accent);color:var(--tx)}
-.cvsc{flex:1;overflow-y:auto;padding:20px}
-.cvin{max-width:1100px;margin:0 auto;min-height:300px}
-.cdz{border:2px dashed var(--brd);border-radius:var(--r-l);padding:50px 30px;text-align:center;color:var(--tx3);transition:all .2s;background:var(--surf)}
-.cdz.dov{border-color:var(--amazon);background:rgba(255,153,0,.04)}
-.cdz h3{font-size:1rem;margin-bottom:6px;color:var(--tx2)}
-.cdz p{font-size:.82rem}
-
-/* MODULE WRAPPER */
-.mw{background:var(--surf);border-radius:var(--r-m);overflow:hidden;box-shadow:var(--sh-s);border:2px solid transparent;transition:all .15s;position:relative;margin-bottom:14px;cursor:pointer}
-.mw:hover{border-color:var(--brd);box-shadow:var(--sh-m)}
-.mw.sel{border-color:var(--amazon);box-shadow:0 0 0 3px rgba(255,153,0,.15)}
-.mw:hover .mtb{opacity:1}
-.mbdg{position:absolute;top:8px;left:8px;background:var(--accent);color:#fff;padding:2px 8px;border-radius:3px;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;z-index:5;pointer-events:none}
-.mtb{position:absolute;top:6px;right:6px;display:flex;gap:3px;opacity:0;transition:opacity .15s;z-index:5}
-.tb{width:26px;height:26px;border:none;border-radius:4px;background:rgba(255,255,255,.92);box-shadow:var(--sh-s);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.72rem;transition:all .12s}
-.tb:hover{background:var(--accent);color:#fff}
-.tb.dng:hover{background:var(--red);color:#fff}
-
-/* HERO */
-.mh{min-height:280px;display:flex;align-items:center;justify-content:center;text-align:center;padding:44px 36px;position:relative;overflow:hidden;color:#fff}
-.mh::before{content:'';position:absolute;inset:0;background:inherit;filter:brightness(.65);z-index:0}
-.mhc{position:relative;z-index:1;max-width:650px}
-.mh h1{font-size:2.1rem;font-weight:800;margin-bottom:10px;text-shadow:0 2px 10px rgba(0,0,0,.3);line-height:1.15}
-.mh p{font-size:1rem;opacity:.9;line-height:1.5}
-.cta-b{display:inline-block;margin-top:16px;padding:10px 28px;background:var(--amazon);color:var(--accent);border-radius:var(--r-s);font-weight:700;font-size:.88rem}
-
-/* PRODUCTS */
-.mp{padding:28px}
-.mp h2,.mc h2,.mu h2,.mt h2,.mts h2,.mce h2,.mst h2,.mfo h2,.mvd h2,.mho h2,.mga h2,.mbu h2,.mct h2,.msl h2{font-size:1.3rem;font-weight:700;margin-bottom:20px}
-.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
-.pc{border:1px solid var(--brd);border-radius:var(--r-m);padding:14px;transition:all .15s;background:var(--surf)}
-.pc:hover{box-shadow:var(--sh-m);transform:translateY(-2px)}
-.pi{height:140px;background:var(--bg);border-radius:var(--r-s);display:flex;align-items:center;justify-content:center;font-size:2.2rem;color:var(--tx3);margin-bottom:10px}
-.pn{font-weight:600;font-size:.8rem;margin-bottom:3px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.pa{font-size:.65rem;color:var(--tx3);font-family:var(--mono);margin-bottom:6px}
-.ps{color:#FFA41C;font-size:.75rem;margin-bottom:4px}
-.pp{font-size:1.05rem;font-weight:700;color:var(--red)}
-.prm{font-size:.65rem;color:var(--blue);font-weight:600;margin-top:2px}
-
-/* CATEGORIES */
-.mc{padding:28px}
-.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
-.cc{background:linear-gradient(135deg,var(--bg),var(--bg2));border-radius:var(--r-m);padding:26px 20px;text-align:center;cursor:pointer;transition:all .2s;border:1px solid var(--brd-lt)}
-.cc:hover{transform:translateY(-3px);box-shadow:var(--sh-m)}
-.cci{font-size:2.4rem;margin-bottom:10px}
-.ccn{font-size:.95rem;font-weight:700;margin-bottom:4px}
-.ccd{font-size:.75rem;color:var(--tx2)}
-.ccl{display:inline-block;margin-top:8px;color:var(--blue);font-size:.75rem;font-weight:600}
-
-/* USP */
-.mu{padding:28px;background:var(--bg)}
-.ug{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:20px}
-.ui{text-align:center}
-.uic{width:56px;height:56px;border-radius:50%;background:var(--surf);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:0 auto 10px;box-shadow:var(--sh-s)}
-.ut{font-weight:600;font-size:.8rem}
-
-/* TESTIMONIALS */
-.mts{padding:28px}
-.tg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
-.tc{background:var(--bg);padding:20px;border-radius:var(--r-m);border-left:3px solid var(--amazon)}
-.tst{color:#FFA41C;font-size:.9rem;margin-bottom:8px}
-.ttx{font-size:.85rem;line-height:1.6;margin-bottom:12px;color:var(--tx2);font-style:italic}
-.tau{display:flex;align-items:center;gap:8px}
-.tav{width:32px;height:32px;border-radius:50%;background:var(--brd);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:var(--tx3)}
-.tan{font-weight:600;font-size:.78rem}
-.tvr{font-size:.65rem;color:var(--green);font-weight:600}
-
-/* TEXT */
-.mt{padding:28px}
-.mt p{font-size:.9rem;line-height:1.7;color:var(--tx2);max-width:750px}
-
-/* IMAGE+TEXT */
-.mit{display:grid;grid-template-columns:1fr 1fr;min-height:240px}
-.miti{background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:2.6rem;color:var(--tx3);min-height:240px}
-.mitc{padding:36px;display:flex;flex-direction:column;justify-content:center}
-.mitc h2{font-size:1.2rem;font-weight:700;margin-bottom:10px}
-.mitc p{font-size:.85rem;line-height:1.6;color:var(--tx2)}
-
-/* VIDEO */
-.mvd{padding:28px}
-.vp{background:var(--accent);border-radius:var(--r-m);height:300px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:3rem;cursor:pointer;position:relative}
-.vp::after{content:'Video';position:absolute;bottom:14px;font-size:.75rem;color:rgba(255,255,255,.35)}
-
-/* CERTS */
-.mce{padding:28px;background:var(--bg)}
-.ceg{display:flex;justify-content:center;gap:28px;flex-wrap:wrap}
-.cei{text-align:center}
-.ceb{width:64px;height:64px;border-radius:50%;background:var(--surf);display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin:0 auto 8px;box-shadow:var(--sh-s);border:2px solid var(--brd-lt)}
-.cen{font-weight:600;font-size:.75rem}
-
-/* STATS */
-.mst{padding:28px;background:var(--accent);color:#fff}
-.stg{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:20px}
-.sti{text-align:center}
-.stv{font-size:1.9rem;font-weight:800;color:var(--amazon)}
-.stl{font-size:.78rem;opacity:.75;margin-top:3px}
-
-/* FOUNDER */
-.mfo{padding:28px}
-.fol{display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:start}
-.foi{width:180px;height:180px;border-radius:var(--r-m);background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:2.6rem;color:var(--tx3)}
-.fot p{font-size:.85rem;line-height:1.7;color:var(--tx2)}
-.fon{font-weight:700;margin-top:10px}
-.foti{font-size:.78rem;color:var(--tx3)}
-
-/* HOWTO */
-.mho{padding:28px}
-.hog{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px}
-.hos{text-align:center}
-.hon{width:42px;height:42px;border-radius:50%;background:var(--amazon);color:var(--accent);font-weight:800;font-size:1.1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
-.hot{font-weight:700;margin-bottom:4px;font-size:.85rem}
-.hod{font-size:.78rem;color:var(--tx2)}
-
-/* BUNDLE */
-.mbu{padding:28px;background:linear-gradient(135deg,#FFF3E0,#FFF8E1);border:2px solid var(--amazon);border-radius:0}
-.bus{color:var(--red);font-weight:700;font-size:1rem;margin-bottom:12px}
-.mbu p{color:var(--tx2);font-size:.88rem}
-
-/* CTA */
-.mct{padding:36px;text-align:center;background:var(--bg)}
-.mct p{color:var(--tx2);margin-bottom:16px;font-size:.88rem}
-.ctm{display:inline-block;padding:12px 36px;background:var(--amazon);color:var(--accent);border-radius:var(--r-s);font-weight:700;font-size:.92rem}
-
-/* SLIDER */
-.msl{padding:28px}
-.slt{display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x mandatory}
-.slt::-webkit-scrollbar{height:5px}
-.slt::-webkit-scrollbar-track{background:var(--bg);border-radius:3px}
-.slt::-webkit-scrollbar-thumb{background:var(--brd);border-radius:3px}
-.slt .pc{min-width:180px;scroll-snap-align:start;flex-shrink:0}
-
-/* GALLERY */
-.mga{padding:28px}
-.gag{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
-.gai{aspect-ratio:1;background:var(--bg2);border-radius:var(--r-s);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--tx3);cursor:pointer;transition:all .15s}
-.gai:hover{transform:scale(1.03);box-shadow:var(--sh-m)}
-
-/* GENERIC */
-.mge{padding:36px;text-align:center;color:var(--tx3)}
-.mge .gi{font-size:2.2rem;margin-bottom:10px}
-.mge h3{font-size:.92rem;color:var(--tx2);margin-bottom:3px}
-.mge p{font-size:.78rem}
-
-/* PROPERTIES */
-.pp-panel{width:var(--prop);background:var(--surf);border-left:1px solid var(--brd);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden}
-.pp-hdr{padding:12px 14px;border-bottom:1px solid var(--brd-lt);font-weight:700;font-size:.75rem;color:var(--tx3);text-transform:uppercase;letter-spacing:.7px;display:flex;justify-content:space-between;align-items:center}
-.pp-hdr span{font-size:.65rem;color:var(--amazon)}
-.pp-sc{flex:1;overflow-y:auto;padding:14px}
-.pp-em{text-align:center;padding:36px 16px;color:var(--tx3);font-size:.82rem}
-.pp-em .pei{font-size:1.8rem;margin-bottom:8px;opacity:.4}
-.prg{margin-bottom:14px}
-.prl{display:block;margin-bottom:4px;font-weight:600;color:var(--tx2);font-size:.72rem;text-transform:uppercase;letter-spacing:.3px}
-.pri,.prt,.prs{width:100%;padding:8px 10px;border:1px solid var(--brd);border-radius:var(--r-s);font-size:.82rem;font-family:var(--font);transition:all .12s;background:var(--surf)}
-.pri:focus,.prt:focus,.prs:focus{outline:none;border-color:var(--amazon);box-shadow:0 0 0 3px rgba(255,153,0,.08)}
-.prt{min-height:60px;resize:vertical}
-.prc{width:100%;height:32px;padding:2px;cursor:pointer;border:1px solid var(--brd);border-radius:var(--r-s)}
-.si{background:var(--bg);padding:8px;border-radius:var(--r-s);margin-bottom:6px;border:1px solid var(--brd-lt)}
-.si input,.si textarea,.si select{width:100%;padding:6px 8px;border:1px solid var(--brd);border-radius:3px;font-size:.78rem;font-family:var(--font);margin-bottom:4px;background:var(--surf)}
-.si input:focus,.si textarea:focus{outline:none;border-color:var(--amazon)}
-.si textarea{min-height:40px;resize:vertical}
-.sdl{width:100%;padding:4px;background:0;border:1px solid var(--brd);border-radius:3px;cursor:pointer;font-size:.7rem;color:var(--red);font-family:var(--font);transition:all .12s}
-.sdl:hover{background:var(--red);color:#fff;border-color:var(--red)}
-.asb{width:100%;padding:7px;border:1px dashed var(--brd);border-radius:var(--r-s);background:0;cursor:pointer;font-size:.78rem;color:var(--tx3);font-family:var(--font);font-weight:600;transition:all .12s}
-.asb:hover{border-color:var(--amazon);color:var(--amazon)}
-
-/* REFINE BAR */
-.rfb{display:flex;gap:6px;padding:10px 16px;background:var(--surf);border-top:1px solid var(--brd);flex-shrink:0}
-.rfi{flex:1;padding:8px 12px;border:1px solid var(--brd);border-radius:var(--r-m);font-size:.82rem;font-family:var(--font)}
-.rfi:focus{outline:none;border-color:var(--amazon)}
-.rfgo{padding:8px 18px;background:var(--amazon);color:var(--accent);border:none;border-radius:var(--r-m);font-weight:700;font-family:var(--font);cursor:pointer;white-space:nowrap;font-size:.82rem}
-.rfgo:hover{background:var(--amazon-dk)}
-
-/* MODAL */
-.mbg{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:1000;backdrop-filter:blur(3px)}
-.mbg.hid{display:none}
-.mdl{background:var(--surf);border-radius:var(--r-xl);max-width:480px;width:92%;max-height:88vh;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,.18)}
-.mdl-h{padding:20px 20px 0}
-.mdl-h h2{font-size:1.2rem;font-weight:800;margin-bottom:3px}
-.mdl-h p{color:var(--tx3);font-size:.82rem}
-.mdl-b{padding:16px 20px}
-.mdl-f{padding:14px 20px;border-top:1px solid var(--brd-lt);display:flex;justify-content:flex-end;gap:6px}
-.mdl-f button{padding:8px 18px;border-radius:var(--r-s);font-family:var(--font);font-weight:600;font-size:.82rem;cursor:pointer;transition:all .12s}
-.mc-btn{background:var(--bg);border:1px solid var(--brd);color:var(--tx2)}
-.mc-btn:hover{background:var(--bg2)}
-.mg-btn{background:var(--amazon);border:none;color:var(--accent);font-weight:700}
-.mg-btn:hover{background:var(--amazon-dk)}
-
-/* LOADING */
-.lbg{position:fixed;inset:0;background:rgba(15,17,17,.82);display:flex;align-items:center;justify-content:center;z-index:2000}
-.lbg.hid{display:none}
-.lbx{background:var(--surf);padding:40px;border-radius:var(--r-xl);text-align:center;max-width:380px;width:90%}
-.lsp{width:42px;height:42px;border:3px solid var(--brd);border-top-color:var(--amazon);border-radius:50%;animation:sp .8s linear infinite;margin:0 auto 16px}
-@keyframes sp{to{transform:rotate(360deg)}}
-.ltx{font-size:1rem;font-weight:700;margin-bottom:4px}
-.lsu{font-size:.82rem;color:var(--tx3)}
-.lst{margin-top:16px;text-align:left}
-.ls{padding:5px 0;font-size:.78rem;color:var(--tx3);display:flex;align-items:center;gap:6px}
-.ls.done{color:var(--green);font-weight:600}
-.ls.act{color:var(--tx);font-weight:600}
-
-/* TOAST */
-.tcon{position:fixed;top:16px;right:16px;z-index:3000;display:flex;flex-direction:column;gap:6px}
-.tst-t{padding:10px 16px;border-radius:var(--r-m);font-size:.82rem;font-weight:600;box-shadow:var(--sh-l);animation:ti .3s ease;display:flex;align-items:center;gap:6px;max-width:320px}
-.tst-t.ok{background:#065F46;color:#fff}
-.tst-t.err{background:var(--red);color:#fff}
-.tst-t.inf{background:var(--accent);color:#fff}
-@keyframes ti{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
-
-/* PREVIEW */
-.prev .side,.prev .pp-panel,.prev .rfb,.prev .mtb,.prev .mbdg{display:none!important}
-.prev .mw{border:none!important;box-shadow:none!important;border-radius:0!important;margin-bottom:0!important}
-.prev .cvin{max-width:100%;padding:0}
-.prev .cvsc{padding:0;background:var(--surf)}
-.prev .cv{background:var(--surf)}
-
-/* SCROLLBAR */
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--brd);border-radius:3px}
-::-webkit-scrollbar-thumb:hover{background:var(--tx3)}
-
-@media(max-width:1200px){.pp-panel{width:280px}}
-@media(max-width:900px){.side,.pp-panel{display:none}}
-</style>
-</head>
-<body>
-<div class="app" id="app">
-<header class="hdr">
-<div class="hdr-brand">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="#FF9900"/><path d="M6 13c0 0 3 3.5 6 3.5s6-3.5 6-3.5" stroke="#232F3E" stroke-width="2.2" stroke-linecap="round"/><path d="M12 7v5m0 0l2.5-2.5M12 12l-2.5-2.5" stroke="#232F3E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-Store Builder <span class="hdr-pro">PRO</span>
-</div>
-<div class="hdr-center">
-<button class="mode-btn active" onclick="setMode('builder')">✏️ Builder</button>
-<button class="mode-btn" onclick="setMode('preview')">👁️ Preview</button>
-</div>
-<div class="hdr-acts">
-<button class="hb pri" onclick="showAIModal()">✨ AI Generieren</button>
-<button class="hb" onclick="saveStore()">💾 Speichern</button>
-<button class="hb" onclick="exportJSON()">📥 Export</button>
-<button class="hb" onclick="importJSON()">📤 Import</button>
-</div>
-</header>
-<div class="mn">
-<aside class="side"><div class="side-hdr">Module</div><div class="side-sc" id="modLib"></div></aside>
-<div class="cv">
-<div class="pgbar" id="pgBar"></div>
-<div class="cvsc" id="cvSc"><div class="cvin" id="cvIn"></div></div>
-<div class="rfb">
-<input class="rfi" id="rfIn" placeholder="AI Anweisung: z.B. 'Füge Testimonials hinzu', 'Ändere den Ton zu Premium'..." onkeydown="if(event.key==='Enter')refineAI()">
-<button class="rfgo" onclick="refineAI()">✨ Verfeinern</button>
-</div>
-</div>
-<aside class="pp-panel">
-<div class="pp-hdr">Eigenschaften <span id="ppType"></span></div>
-<div class="pp-sc" id="ppC"><div class="pp-em"><div class="pei">🎯</div><p>Wähle ein Modul oder generiere mit AI</p></div></div>
-</aside>
-</div>
-</div>
-
-<!-- AI MODAL -->
-<div class="mbg hid" id="aiMod">
-<div class="mdl">
-<div class="mdl-h"><h2>✨ AI Store Generator</h2><p>Erstelle einen kompletten Brand Store</p></div>
-<div class="mdl-b">
-<div class="prg"><label class="prl">Markenname *</label><input class="pri" id="aiBr" placeholder="z.B. HOLY Energy, Kärcher, Natural Elements..."></div>
-<div class="prg"><label class="prl">Marktplatz</label><select class="prs" id="aiMp">
-<option value="de">🇩🇪 Amazon.de</option><option value="com">🇺🇸 Amazon.com</option><option value="co.uk">🇬🇧 Amazon.co.uk</option>
-<option value="fr">🇫🇷 Amazon.fr</option><option value="it">🇮🇹 Amazon.it</option><option value="es">🇪🇸 Amazon.es</option>
-</select></div>
-<div class="prg"><label class="prl">Kategorie (optional)</label><input class="pri" id="aiCt" placeholder="z.B. Nahrungsergänzung, Haushalt..."></div>
-<div class="prg"><label class="prl">Zusätzliche Infos (optional)</label><textarea class="prt" id="aiIn" placeholder="Positionierung, Website, Zielgruppe..."></textarea></div>
-</div>
-<div class="mdl-f">
-<button class="mc-btn" onclick="hideAIModal()">Abbrechen</button>
-<button class="mg-btn" onclick="genAI()">🚀 Generieren</button>
-</div>
-</div>
-</div>
-
-<!-- LOADING -->
-<div class="lbg hid" id="ldBg">
-<div class="lbx">
-<div class="lsp"></div>
-<div class="ltx" id="ldTx">Generiere Store...</div>
-<div class="lsu" id="ldSu">Bitte warten</div>
-<div class="lst" id="ldSt"></div>
-</div>
-</div>
-
-<div class="tcon" id="tcon"></div>
-<input type="file" id="impF" accept=".json" style="display:none" onchange="doImp(event)">
-<script>
-// ══════════════ STATE ══════════════
-const S={mode:'builder',curPg:null,selMod:null,store:{brandName:'',brandType:'',brandColors:{},brandDescription:'',menu:[],pages:[]}};
-
-// ══════════════ MODULE DEFS ══════════════
-const MDEFS=[
-{g:'Hero',items:[
-{t:'hero_banner',ic:'🎯',n:'Hero Banner',d:'Full-width Banner'},
-{t:'hero_product',ic:'📦',n:'Product Hero',d:'Produkt-Showcase'},
-{t:'hero_seasonal',ic:'🎄',n:'Seasonal Hero',d:'Saisonaler Banner'},
-{t:'hero_mission',ic:'🌱',n:'Mission Hero',d:'Marken-Mission'}
-]},
-{g:'Produkte',items:[
-{t:'product_grid',ic:'🛍️',n:'Product Grid',d:'Produkt-Raster'},
-{t:'product_slider',ic:'↔️',n:'Product Slider',d:'Horizontal Scroll'},
-{t:'bestseller_auto',ic:'🏆',n:'Bestseller',d:'Auto-Bestseller'},
-{t:'recommended_auto',ic:'💡',n:'Empfehlungen',d:'AI Empfehlungen'}
-]},
-{g:'Kategorien',items:[
-{t:'category_grid',ic:'📂',n:'Category Grid',d:'Übersicht'},
-{t:'category_split',ic:'↕️',n:'Category Split',d:'Zweier-Layout'}
-]},
-{g:'Trust',items:[
-{t:'testimonials',ic:'⭐',n:'Testimonials',d:'Kundenbewertungen'},
-{t:'certifications',ic:'🏅',n:'Zertifikate',d:'Trust-Badges'},
-{t:'stats_metrics',ic:'📊',n:'Statistiken',d:'Kennzahlen'},
-{t:'founder_story',ic:'👤',n:'Gründerstory',d:'Über den Gründer'}
-]},
-{g:'Content',items:[
-{t:'text_block',ic:'📝',n:'Text Block',d:'Freitext'},
-{t:'image_text',ic:'🖼️',n:'Bild + Text',d:'Split-Layout'},
-{t:'image_gallery',ic:'🎨',n:'Galerie',d:'Bilder-Grid'},
-{t:'video',ic:'🎥',n:'Video',d:'Video einbetten'}
-]},
-{g:'Aktion',items:[
-{t:'usp_icons',ic:'✓',n:'USP Icons',d:'Vorteile-Grid'},
-{t:'howto_steps',ic:'📋',n:'How-To',d:'Schritte'},
-{t:'bundle_promo',ic:'🎁',n:'Bundle Promo',d:'Bundle-Angebot'},
-{t:'cta_button',ic:'👆',n:'CTA Button',d:'Call to Action'}
-]}
-];
-
-function getDef(type){
-const D={
-hero_banner:{headline:'Willkommen',subheadline:'Entdecke Premium-Qualität',ctaText:'Jetzt entdecken',backgroundColor:'#232F3E'},
-hero_product:{headline:'Unser Bestseller',subheadline:'Meistverkauft',ctaText:'Jetzt kaufen',backgroundColor:'#37475A'},
-hero_seasonal:{headline:'Saisonale Angebote',subheadline:'Limitierte Deals',ctaText:'Deals ansehen',backgroundColor:'#CC0C39'},
-hero_mission:{headline:'Unsere Mission',subheadline:'Was uns antreibt',ctaText:'Mehr erfahren',backgroundColor:'#067D62'},
-product_grid:{headline:'Unsere Produkte',products:[]},
-product_slider:{headline:'Entdecke mehr',products:[]},
-bestseller_auto:{headline:'Bestseller',count:8,products:[]},
-recommended_auto:{headline:'Empfehlungen',count:6,products:[]},
-category_grid:{headline:'Kategorien',categories:[]},
-category_split:{headline:'Zwei Welten',categories:[]},
-testimonials:{headline:'Kundenstimmen',testimonials:[]},
-certifications:{headline:'Qualität',certs:[]},
-stats_metrics:{headline:'Zahlen die überzeugen',stats:[]},
-founder_story:{headline:'Unsere Geschichte',name:'',title:'',text:''},
-text_block:{headline:'Überschrift',text:'Hier steht Ihr Text...'},
-image_text:{headline:'Überschrift',text:'Beschreibung...',imagePosition:'left'},
-image_gallery:{headline:'Galerie',images:[{},{},{},{}]},
-video:{headline:'Video',videoUrl:'',description:''},
-usp_icons:{headline:'Unsere Vorteile',icons:[]},
-howto_steps:{headline:'So funktioniert es',steps:[]},
-bundle_promo:{headline:'Bundle-Angebot',description:'Spare mit unserem Bundle',saveText:'Spare 20%',products:[]},
-cta_button:{headline:'Bereit?',text:'Entdecke unsere Produkte',ctaText:'Jetzt shoppen'}
+// ── Real Amazon Store Tile Types & Specs ──
+const TILES = {
+  hero_image:     { name:"Hero Image", icon:"🖼️", grp:"Header", sizes:["full_width"], needsImage:true,
+    specs:{ full_width:{ min:"3000×600px", rec:"3000×1200px", max:"5MB", safe:"Mittlere 70%", fmt:"JPG/PNG" }}},
+  image:          { name:"Image", icon:"🖼️", grp:"Content", sizes:["full_width","large","medium","small"], needsImage:true,
+    specs:{ full_width:{min:"1500×20px",rec:"3000px Breite",max:"5MB"}, large:{min:"1500×1500px"}, medium:{min:"1500×750px"}, small:{min:"750×750px"}}},
+  image_with_text:{ name:"Image + Text", icon:"📝🖼️", grp:"Content", sizes:["full_width","large","medium","small"], needsImage:true,
+    specs:{ full_width:{min:"3000×1500px (Overlay) / 1500×1500px (Beside)",max:"5MB"}, large:{min:"1500×1500px"}, medium:{min:"1500×750px / 750×750px"}, small:{min:"750×750px"}}},
+  shoppable_image:{ name:"Shoppable Image", icon:"🛒", grp:"Content", sizes:["full_width","large","medium","small"], needsImage:true,
+    specs:{ full_width:{min:"1500×750px",rec:"3000×1500px",max:"5MB",note:"Bis zu 6 Produkt-Hotspots"}}},
+  text:           { name:"Text", icon:"📝", grp:"Content", sizes:["full_width","large","medium","small"], needsImage:false },
+  video:          { name:"Video", icon:"🎥", grp:"Media", sizes:["full_width","large","medium"], needsImage:true,
+    specs:{ full_width:{cover:"3000×1500px",video:"1280×640px",ratio:"6:4–8:3",fmt:"MP4 H.264"}}},
+  background_video:{ name:"Background Video", icon:"🎬", grp:"Media", sizes:["full_width","large","medium"], needsImage:false,
+    specs:{ full_width:{video:"1280×640px",dur:"2–20s",note:"Auto-play, stumm, max 4/Seite"}}},
+  gallery:        { name:"Gallery", icon:"🎨", grp:"Content", sizes:["full_width"], needsImage:true,
+    specs:{ full_width:{min:"1500×750px",count:"3–8 Bilder",note:"Alle gleiche Größe"}}},
+  product:        { name:"Product", icon:"📦", grp:"Produkte", sizes:["full_width","large","medium","small"], needsImage:false },
+  product_grid:   { name:"Product Grid", icon:"🛍️", grp:"Produkte", sizes:["full_width"], needsImage:false,
+    specs:{ full_width:{note:"4–500 Produkte, Standard oder Tall, max 1/Seite"}}},
+  best_sellers:   { name:"Best Sellers", icon:"🏆", grp:"Produkte", sizes:["full_width"], needsImage:false },
+  recommended:    { name:"Recommended", icon:"💡", grp:"Produkte", sizes:["full_width"], needsImage:false },
+  featured_deals: { name:"Featured Deals", icon:"🏷️", grp:"Produkte", sizes:["full_width"], needsImage:false },
 };
-return JSON.parse(JSON.stringify(D[type]||{}));
-}
 
-function modName(t){for(const g of MDEFS)for(const m of g.items)if(m.t===t)return m.n;return t;}
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function getPage(id){return S.store.pages.find(p=>p.id===(id||S.curPg));}
-// ══════════════ RENDER ALL ══════════════
-function renderAll(){renderPgBar();renderCv();renderProps();}
+const SIZE_LABELS = { full_width:"Full Width", large:"Large", medium:"Medium", small:"Small" };
+const GROUPS = ["Header","Content","Media","Produkte"];
 
-function renderModLib(){
-const el=document.getElementById('modLib');
-el.innerHTML=MDEFS.map(g=>`<div class="mg"><div class="mg-t">${g.g}</div>${g.items.map(m=>`<div class="mi" draggable="true" data-type="${m.t}"><div class="mi-ic">${m.ic}</div><div><div class="mi-nm">${m.n}</div><div class="mi-ds">${m.d}</div></div></div>`).join('')}</div>`).join('');
-el.querySelectorAll('.mi').forEach(i=>{
-i.addEventListener('dragstart',e=>{e.dataTransfer.setData('mt',i.dataset.type);e.dataTransfer.effectAllowed='copy';});
-i.addEventListener('click',()=>addMod(i.dataset.type));
+// ── Helpers ──
+const uid = () => `${Date.now()}_${Math.random().toString(36).slice(2,7)}`;
+const mkTile = (type,size="full_width",content={},briefing="") => ({
+  id:uid(), type, size: TILES[type]?.sizes.includes(size)?size:(TILES[type]?.sizes[0]||"full_width"),
+  content, imageBriefing:briefing, image:null, imageFile:"", imgW:0, imgH:0
 });
-}
+const mkPage = (name,id) => ({ id:id||uid(), name, heroImageBriefing:"", tiles:[] });
 
-function renderPgBar(){
-const el=document.getElementById('pgBar');
-el.innerHTML=S.store.pages.map(p=>`<button class="pgt ${p.id===S.curPg?'act':''}" onclick="selPg('${p.id}')">${esc(p.name)}${S.store.pages.length>1?`<span class="x" onclick="event.stopPropagation();delPg('${p.id}')">✕</span>`:''}</button>`).join('')+`<button class="apb" onclick="promptPg()">+ Seite</button>`;
-}
+// ── System prompts for each step ──
+const SYSTEM_RESEARCH = `You are a brand research analyst. Given a brand name and marketplace, research the brand thoroughly using web search.
 
-function renderCv(){
-const pg=getPage();const el=document.getElementById('cvIn');
-if(!pg||pg.modules.length===0){
-el.innerHTML=`<div class="cdz" id="dz"><h3>Keine Module</h3><p>Ziehe Module aus der Bibliothek oder starte mit AI ✨</p></div>`;return;
-}
-el.innerHTML=pg.modules.map((m,i)=>renderMod(m,i)).join('');
-el.querySelectorAll('.mw').forEach(w=>{
-w.addEventListener('click',e=>{if(!e.target.closest('.tb'))selMod(parseInt(w.dataset.i));});
-});
-}
+Search for:
+1. The brand's website, mission, values, founding story
+2. Their product categories and range
+3. Their visual identity (colors, style, tone)
+4. Their Amazon presence (if any)
+5. Key competitors
 
-function renderMod(mod,idx){
-const c=mod.content||{};const bg=c.backgroundColor||'#232F3E';let h='';
-switch(mod.type){
-case 'hero_banner':case 'hero_product':case 'hero_seasonal':case 'hero_mission':
-h=`<div class="mh" style="background:${bg}"><div class="mhc"><h1>${esc(c.headline)}</h1><p>${esc(c.subheadline)}</p>${c.ctaText?`<span class="cta-b">${esc(c.ctaText)}</span>`:''}</div></div>`;break;
+Return ONLY valid JSON:
+{
+  "brandName": "...",
+  "description": "2-3 sentence summary",
+  "type": "premium|d2c|mission|mass_market",
+  "tone": "e.g. premium-warm, energetic-fun, clinical-trust, functional-clean",
+  "colors": { "primary": "#hex", "secondary": "#hex", "accent": "#hex" },
+  "categories": ["Category 1", "Category 2", ...],
+  "usps": ["USP 1", "USP 2", "USP 3"],
+  "founderStory": "Brief founder/origin story or empty string",
+  "targetAudience": "Who buys this",
+  "priceRange": "e.g. €15-€45 mid-range",
+  "competitorBrands": ["Competitor 1", "Competitor 2"]
+}`;
 
-case 'product_grid':case 'bestseller_auto':case 'recommended_auto':
-const pr=c.products||[];
-h=`<div class="mp"><h2>${esc(c.headline)}</h2><div class="pg">${pr.length?pr.map(p=>pCard(p)).join(''):`<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--tx3)">${mod.type!=='product_grid'?'⚡ Auto-befüllt von Amazon':'Produkte hinzufügen'}</div>`}</div></div>`;break;
+const SYSTEM_AMAZON = `You are an Amazon marketplace analyst. Given a brand name and marketplace domain, find their actual Amazon products.
 
-case 'product_slider':
-const sp=c.products||[];
-h=`<div class="msl"><h2>${esc(c.headline)}</h2><div class="slt">${sp.length?sp.map(p=>`<div class="pc" style="min-width:180px;flex-shrink:0">${pCardIn(p)}</div>`).join(''):`<div style="padding:30px;color:var(--tx3);width:100%;text-align:center">Produkte hinzufügen</div>`}</div></div>`;break;
+Search Amazon for this brand. Find:
+1. Real product names and ASINs (format: B0XXXXXXXXX)
+2. Product categories as they appear on Amazon
+3. Price points
+4. Whether they have an existing Brand Store
+5. Their bestselling products
 
-case 'category_grid':case 'category_split':
-const cs=c.categories||[];
-h=`<div class="mc"><h2>${esc(c.headline)}</h2><div class="cg">${cs.length?cs.map(ct=>`<div class="cc"><div class="cci">${ct.icon||'📂'}</div><div class="ccn">${esc(ct.name)}</div><div class="ccd">${esc(ct.description)}</div><span class="ccl">Entdecken →</span></div>`).join(''):`<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--tx3)">Kategorien hinzufügen</div>`}</div></div>`;break;
+Return ONLY valid JSON:
+{
+  "hasExistingStore": true/false,
+  "existingStorePages": ["page names if found"],
+  "products": [
+    { "name": "Product Name", "asin": "B0XXXXXXXXX", "price": "€XX.XX", "category": "Category", "isBestseller": true/false }
+  ],
+  "amazonCategories": ["Category as on Amazon"],
+  "totalProducts": 42,
+  "averageRating": 4.5
+}`;
 
-case 'usp_icons':
-const ic=c.icons||[];
-h=`<div class="mu"><h2>${esc(c.headline)}</h2><div class="ug">${ic.length?ic.map(u=>`<div class="ui"><div class="uic">${u.icon||'✓'}</div><div class="ut">${esc(u.text)}</div></div>`).join(''):`<div style="grid-column:1/-1;text-align:center;padding:16px;color:var(--tx3)">USPs hinzufügen</div>`}</div></div>`;break;
+const SYSTEM_ARCHITECTURE = `You are an Amazon Brand Store architect. Based on the brand profile and Amazon product data provided, create the optimal page structure.
 
-case 'testimonials':
-const ts=c.testimonials||[];
-h=`<div class="mts"><h2>${esc(c.headline)}</h2><div class="tg">${ts.length?ts.map(t=>`<div class="tc"><div class="tst">${'★'.repeat(t.stars||5)}${'☆'.repeat(5-(t.stars||5))}</div><div class="ttx">"${esc(t.text)}"</div><div class="tau"><div class="tav">${(t.author||'?')[0].toUpperCase()}</div><div><div class="tan">${esc(t.author||'Anonym')}</div><div class="tvr">✓ Verifiziert</div></div></div></div>`).join(''):`<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--tx3)">Bewertungen hinzufügen</div>`}</div></div>`;break;
+RULES:
+- Homepage is always first
+- One page per major product category
+- Additional pages based on brand type:
+  * Premium: "About/Mission" page, fewer but more editorial pages
+  * D2C: "Bestseller", "Starter Sets/Bundles", "Für Neukunden" pages
+  * Mission: "Our Mission/Impact" page with stats
+  * Mass Market: "Deals/Angebote", many category pages
+- Min 4 pages, max 15 pages
+- Each page gets a purpose description
 
-case 'certifications':
-const ce=c.certs||[];
-h=`<div class="mce"><h2>${esc(c.headline)}</h2><div class="ceg">${ce.length?ce.map(c2=>`<div class="cei"><div class="ceb">${c2.icon||'🏅'}</div><div class="cen">${esc(c2.name)}</div></div>`).join(''):`<div style="text-align:center;padding:16px;color:var(--tx3)">Zertifikate hinzufügen</div>`}</div></div>`;break;
+Return ONLY valid JSON:
+{
+  "pages": [
+    {
+      "id": "homepage",
+      "name": "Homepage",
+      "purpose": "Brand introduction, category navigation, bestseller highlights",
+      "tileSequence": [
+        "hero_image describing the brand",
+        "image tiles for category navigation (medium, 3-4 tiles)",
+        "product_grid with bestsellers",
+        "image_with_text for brand story",
+        "shoppable_image with lifestyle shot",
+        "best_sellers auto-tile"
+      ]
+    }
+  ],
+  "navigationOrder": ["Homepage", "Page2", ...]
+}`;
 
-case 'stats_metrics':
-const st=c.stats||[];
-h=`<div class="mst"><h2>${esc(c.headline)}</h2><div class="stg">${st.length?st.map(s=>`<div class="sti"><div class="stv">${esc(s.value)}</div><div class="stl">${esc(s.label)}</div></div>`).join(''):`<div style="grid-column:1/-1;text-align:center;padding:16px;color:rgba(255,255,255,.5)">Statistiken hinzufügen</div>`}</div></div>`;break;
+const SYSTEM_CONTENT = `You are an Amazon Brand Store content creator and designer briefing specialist. You create content for ONE specific store page.
 
-case 'founder_story':
-h=`<div class="mfo"><h2>${esc(c.headline)}</h2><div class="fol"><div class="foi">👤</div><div><div class="fot"><p>${esc(c.text||'Die Geschichte...')}</p></div><div class="fon">${esc(c.name)}</div><div class="foti">${esc(c.title)}</div></div></div></div>`;break;
+You will receive:
+- Brand profile (type, colors, tone, USPs)
+- Amazon product data (real ASINs, names, prices)
+- Page specification (name, purpose, tile sequence)
 
-case 'text_block':
-h=`<div class="mt"><h2>${esc(c.headline)}</h2><p>${esc(c.text)}</p></div>`;break;
-
-case 'image_text':
-const lf=(c.imagePosition||'left')==='left';
-h=`<div class="mit" style="${!lf?'direction:rtl':''}"><div class="miti" style="${!lf?'direction:ltr':''}">🖼️</div><div class="mitc" style="${!lf?'direction:ltr':''}"><h2>${esc(c.headline)}</h2><p>${esc(c.text)}</p></div></div>`;break;
-
-case 'image_gallery':
-const gi=c.images||[{},{},{},{}];
-h=`<div class="mga"><h2>${esc(c.headline)}</h2><div class="gag">${gi.map(()=>`<div class="gai">🖼️</div>`).join('')}</div></div>`;break;
-
-case 'video':
-h=`<div class="mvd"><h2>${esc(c.headline)}</h2><div class="vp">▶</div></div>`;break;
-
-case 'howto_steps':
-const hs=c.steps||[];
-h=`<div class="mho"><h2>${esc(c.headline)}</h2><div class="hog">${hs.length?hs.map((s,i)=>`<div class="hos"><div class="hon">${i+1}</div><div class="hot">${esc(s.title)}</div><div class="hod">${esc(s.description)}</div></div>`).join(''):`<div style="grid-column:1/-1;text-align:center;padding:16px;color:var(--tx3)">Schritte hinzufügen</div>`}</div></div>`;break;
-
-case 'bundle_promo':
-h=`<div class="mbu"><h2>${esc(c.headline)}</h2><div class="bus">${esc(c.saveText)}</div><p>${esc(c.description)}</p></div>`;break;
-
-case 'cta_button':
-h=`<div class="mct"><h2>${esc(c.headline)}</h2><p>${esc(c.text)}</p><span class="ctm">${esc(c.ctaText||'Jetzt kaufen')}</span></div>`;break;
-
-default:
-h=`<div class="mge"><div class="gi">📦</div><h3>${mod.type}</h3><p>Modul-Vorschau</p></div>`;
-}
-
-return `<div class="mw${S.selMod===idx?' sel':''}" data-i="${idx}"><div class="mbdg">${modName(mod.type)}</div><div class="mtb"><button class="tb" onclick="event.stopPropagation();movMod(${idx},-1)" title="↑">↑</button><button class="tb" onclick="event.stopPropagation();movMod(${idx},1)" title="↓">↓</button><button class="tb" onclick="event.stopPropagation();dupMod(${idx})" title="Kopieren">⧉</button><button class="tb dng" onclick="event.stopPropagation();delMod(${idx})" title="Löschen">✕</button></div>${h}</div>`;
-}
-
-function pCard(p){return `<div class="pc">${pCardIn(p)}</div>`;}
-function pCardIn(p){return `<div class="pi">📦</div><div class="pn">${esc(p.name||'Produkt')}</div><div class="pa">${esc(p.asin||'B0XXXXXXXXX')}</div><div class="ps">★★★★★</div><div class="pp">${esc(p.price||'€29,99')}</div><div class="prm">✓ Prime</div>`;}
-// ══════════════ PROPERTIES PANEL ══════════════
-function renderProps(){
-const el=document.getElementById('ppC');const te=document.getElementById('ppType');
-if(S.selMod===null){te.textContent='';el.innerHTML=`<div class="pp-em"><div class="pei">🎯</div><p>Wähle ein Modul</p></div>`;return;}
-const pg=getPage();if(!pg)return;const mod=pg.modules[S.selMod];if(!mod)return;
-const c=mod.content||{};const i=S.selMod;te.textContent=mod.type;let h='';
-
-if(mod.type.startsWith('hero_')){
-h+=pI('Überschrift',c.headline,i,'headline')+pI('Subtext',c.subheadline,i,'subheadline')+pI('CTA Text',c.ctaText,i,'ctaText')+pC('Hintergrund',c.backgroundColor||'#232F3E',i,'backgroundColor');
-}
-else if(['product_grid','product_slider','bundle_promo'].includes(mod.type)){
-h+=pI('Überschrift',c.headline,i,'headline');
-if(mod.type==='bundle_promo'){h+=pI('Spar-Text',c.saveText,i,'saveText')+pT('Beschreibung',c.description,i,'description');}
-h+=arrEdit(i,'products',c.products||[],['name:Name','asin:ASIN','price:Preis'],{name:'',asin:'',price:'€29,99'});
-}
-else if(['category_grid','category_split'].includes(mod.type)){
-h+=pI('Überschrift',c.headline,i,'headline');
-h+=arrEdit(i,'categories',c.categories||[],['icon:Icon','name:Name','description:Beschreibung'],{icon:'📂',name:'',description:''});
-}
-else if(mod.type==='usp_icons'){
-h+=pI('Überschrift',c.headline,i,'headline');
-h+=arrEdit(i,'icons',c.icons||[],['icon:Icon','text:Text'],{icon:'✓',text:''});
-}
-else if(mod.type==='testimonials'){
-h+=pI('Überschrift',c.headline,i,'headline');
-h+=arrEditTest(i,c.testimonials||[]);
-}
-else if(mod.type==='certifications'){
-h+=pI('Überschrift',c.headline,i,'headline');
-h+=arrEdit(i,'certs',c.certs||[],['icon:Icon','name:Name'],{icon:'🏅',name:''});
-}
-else if(mod.type==='stats_metrics'){
-h+=pI('Überschrift',c.headline,i,'headline');
-h+=arrEdit(i,'stats',c.stats||[],['value:Wert','label:Label'],{value:'',label:''});
-}
-else if(mod.type==='founder_story'){
-h+=pI('Überschrift',c.headline,i,'headline')+pI('Name',c.name,i,'name')+pI('Rolle',c.title,i,'title')+pT('Geschichte',c.text,i,'text');
-}
-else if(mod.type==='text_block'){h+=pI('Überschrift',c.headline,i,'headline')+pT('Text',c.text,i,'text');}
-else if(mod.type==='image_text'){
-h+=pI('Überschrift',c.headline,i,'headline')+pT('Text',c.text,i,'text');
-h+=`<div class="prg"><label class="prl">Bild-Position</label><select class="prs" onchange="uC(${i},'imagePosition',this.value);renderCv()"><option value="left" ${c.imagePosition!=='right'?'selected':''}>Links</option><option value="right" ${c.imagePosition==='right'?'selected':''}>Rechts</option></select></div>`;
-}
-else if(mod.type==='video'){h+=pI('Überschrift',c.headline,i,'headline')+pI('Video URL',c.videoUrl,i,'videoUrl')+pT('Beschreibung',c.description,i,'description');}
-else if(mod.type==='howto_steps'){
-h+=pI('Überschrift',c.headline,i,'headline');
-h+=arrEdit(i,'steps',c.steps||[],['title:Titel','description:Beschreibung'],{title:'',description:''});
-}
-else if(mod.type==='cta_button'){h+=pI('Überschrift',c.headline,i,'headline')+pT('Text',c.text,i,'text')+pI('Button Text',c.ctaText,i,'ctaText');}
-else if(['bestseller_auto','recommended_auto'].includes(mod.type)){
-h+=pI('Überschrift',c.headline,i,'headline');
-h+=`<div class="prg"><label class="prl">Anzahl</label><input class="pri" type="number" min="1" max="20" value="${c.count||8}" onchange="uC(${i},'count',parseInt(this.value));renderCv()"></div>`;
-}
-else if(mod.type==='image_gallery'){
-h+=pI('Überschrift',c.headline,i,'headline');
-h+=`<div class="prg"><label class="prl">Anzahl Bilder</label><input class="pri" type="number" min="1" max="12" value="${(c.images||[]).length||4}" onchange="resGal(${i},parseInt(this.value))"></div>`;
-}
-else{h+=`<p style="color:var(--tx3);font-size:.82rem">Keine Eigenschaften verfügbar.</p>`;}
-el.innerHTML=h;
-}
-
-// Property helpers
-function pI(l,v,i,k){return `<div class="prg"><label class="prl">${l}</label><input class="pri" value="${esc(v||'')}" onchange="uC(${i},'${k}',this.value);renderCv()"></div>`;}
-function pT(l,v,i,k){return `<div class="prg"><label class="prl">${l}</label><textarea class="prt" onchange="uC(${i},'${k}',this.value);renderCv()">${esc(v||'')}</textarea></div>`;}
-function pC(l,v,i,k){return `<div class="prg"><label class="prl">${l}</label><input class="prc" type="color" value="${v}" onchange="uC(${i},'${k}',this.value);renderCv()"></div>`;}
-
-function arrEdit(mi,key,arr,fields,def){
-let h=`<div class="prg"><label class="prl">${key} (${arr.length})</label>`;
-arr.forEach((item,ai)=>{
-h+=`<div class="si">`;
-fields.forEach(f=>{const[fk,fl]=f.split(':');
-if(fk==='description'||fk==='text'){h+=`<textarea placeholder="${fl}" onchange="uA(${mi},'${key}',${ai},'${fk}',this.value);renderCv()">${esc(item[fk]||'')}</textarea>`;}
-else{h+=`<input placeholder="${fl}" value="${esc(item[fk]||'')}" onchange="uA(${mi},'${key}',${ai},'${fk}',this.value);renderCv()">`;}
-});
-h+=`<button class="sdl" onclick="dA(${mi},'${key}',${ai})">Entfernen</button></div>`;
-});
-h+=`<button class="asb" onclick="aA(${mi},'${key}',${JSON.stringify(def).replace(/"/g,'&quot;')})">+ Hinzufügen</button></div>`;
-return h;
-}
-
-function arrEditTest(mi,arr){
-let h=`<div class="prg"><label class="prl">Bewertungen (${arr.length})</label>`;
-arr.forEach((t,ti)=>{
-h+=`<div class="si"><textarea placeholder="Text" onchange="uA(${mi},'testimonials',${ti},'text',this.value);renderCv()">${esc(t.text||'')}</textarea><input placeholder="Autor" value="${esc(t.author||'')}" onchange="uA(${mi},'testimonials',${ti},'author',this.value);renderCv()"><select onchange="uA(${mi},'testimonials',${ti},'stars',parseInt(this.value));renderCv()">${[5,4,3,2,1].map(s=>`<option value="${s}" ${(t.stars||5)==s?'selected':''}>${s} ★</option>`).join('')}</select><button class="sdl" onclick="dA(${mi},'testimonials',${ti})">Entfernen</button></div>`;
-});
-h+=`<button class="asb" onclick="aA(${mi},'testimonials',{text:'',author:'',stars:5})">+ Bewertung</button></div>`;
-return h;
-}
-
-// ══════════════ STATE OPS ══════════════
-function uC(mi,k,v){const pg=getPage();if(pg&&pg.modules[mi])pg.modules[mi].content[k]=v;save();}
-function uA(mi,key,ai,fk,v){const pg=getPage();if(pg&&pg.modules[mi]){if(!pg.modules[mi].content[key])pg.modules[mi].content[key]=[];pg.modules[mi].content[key][ai][fk]=v;}save();}
-function aA(mi,key,def){const pg=getPage();if(!pg)return;if(!pg.modules[mi].content[key])pg.modules[mi].content[key]=[];pg.modules[mi].content[key].push(typeof def==='string'?JSON.parse(def):JSON.parse(JSON.stringify(def)));renderCv();renderProps();save();}
-function dA(mi,key,ai){const pg=getPage();if(pg&&pg.modules[mi])pg.modules[mi].content[key].splice(ai,1);renderCv();renderProps();save();}
-function resGal(mi,n){const pg=getPage();if(!pg)return;pg.modules[mi].content.images=Array(Math.max(1,Math.min(12,n))).fill({});renderCv();save();}
-
-function selPg(id){S.curPg=id;S.selMod=null;renderAll();}
-function selMod(i){S.selMod=i;renderCv();renderProps();}
-function promptPg(){const n=prompt('Seitenname:');if(!n)return;addPg(n);S.curPg=S.store.pages[S.store.pages.length-1].id;renderAll();save();}
-function addPg(name,id){const pid=id||'page_'+Date.now();S.store.pages.push({id:pid,name:name,modules:[]});return pid;}
-function delPg(id){if(S.store.pages.length<=1)return toast('Min. 1 Seite','err');if(!confirm('Seite löschen?'))return;S.store.pages=S.store.pages.filter(p=>p.id!==id);if(S.curPg===id)S.curPg=S.store.pages[0].id;S.selMod=null;renderAll();save();}
-
-function addMod(type,content){
-const pg=getPage();if(!pg)return;
-const def=getDef(type);
-pg.modules.push({type,content:{...def,...(content||{})}});
-S.selMod=pg.modules.length-1;
-renderCv();renderProps();save();
-toast(modName(type)+' hinzugefügt','ok');
-}
-
-function delMod(i){const pg=getPage();if(!pg)return;pg.modules.splice(i,1);if(S.selMod===i)S.selMod=null;else if(S.selMod>i)S.selMod--;renderAll();save();}
-function movMod(i,dir){const pg=getPage();if(!pg)return;const j=i+dir;if(j<0||j>=pg.modules.length)return;[pg.modules[i],pg.modules[j]]=[pg.modules[j],pg.modules[i]];if(S.selMod===i)S.selMod=j;else if(S.selMod===j)S.selMod=i;renderAll();save();}
-function dupMod(i){const pg=getPage();if(!pg)return;const clone=JSON.parse(JSON.stringify(pg.modules[i]));pg.modules.splice(i+1,0,clone);S.selMod=i+1;renderAll();save();toast('Modul dupliziert','ok');}
-
-// ══════════════ DRAG & DROP ══════════════
-function setupDnD(){
-const cv=document.getElementById('cvSc');
-cv.addEventListener('dragover',e=>{e.preventDefault();e.dataTransfer.dropEffect='copy';const dz=document.getElementById('dz');if(dz)dz.classList.add('dov');});
-cv.addEventListener('dragleave',()=>{const dz=document.getElementById('dz');if(dz)dz.classList.remove('dov');});
-cv.addEventListener('drop',e=>{e.preventDefault();const t=e.dataTransfer.getData('mt');if(t)addMod(t);const dz=document.getElementById('dz');if(dz)dz.classList.remove('dov');});
-}
-
-// ══════════════ MODE ══════════════
-function setMode(m){
-S.mode=m;
-document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
-document.querySelectorAll('.mode-btn').forEach(b=>{if(b.textContent.toLowerCase().includes(m))b.classList.add('active');});
-const app=document.getElementById('app');
-if(m==='preview')app.classList.add('prev');else app.classList.remove('prev');
-}
-
-// ══════════════ STORAGE ══════════════
-function save(){try{localStorage.setItem('absb_store',JSON.stringify(S.store));}catch(e){}}
-function loadStore(){try{const d=localStorage.getItem('absb_store');if(d){S.store=JSON.parse(d);if(S.store.pages.length>0)S.curPg=S.store.pages[0].id;}}catch(e){}}
-
-function saveStore(){
-save();
-toast('Store gespeichert!','ok');
-}
-
-function exportJSON(){
-const d=JSON.stringify(S.store,null,2);
-const b=new Blob([d],{type:'application/json'});
-const u=URL.createObjectURL(b);
-const a=document.createElement('a');a.href=u;a.download=`${S.store.brandName||'store'}_export.json`;a.click();
-URL.revokeObjectURL(u);
-toast('JSON exportiert','ok');
-}
-
-function importJSON(){document.getElementById('impF').click();}
-function doImp(e){
-const f=e.target.files[0];if(!f)return;
-const r=new FileReader();
-r.onload=ev=>{
-try{
-const d=JSON.parse(ev.target.result);
-if(!d.pages||!Array.isArray(d.pages))throw new Error('Ungültiges Format');
-S.store=d;S.curPg=d.pages[0]?.id||null;S.selMod=null;
-renderAll();save();toast('Store importiert!','ok');
-}catch(err){toast('Import-Fehler: '+err.message,'err');}
-};
-r.readAsText(f);e.target.value='';
-}
-
-// ══════════════ TOAST ══════════════
-function toast(msg,type='inf'){
-const c=document.getElementById('tcon');
-const t=document.createElement('div');
-t.className=`tst-t ${type}`;
-t.innerHTML=`${type==='ok'?'✓':type==='err'?'✕':'ℹ'} ${msg}`;
-c.appendChild(t);
-setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(50px)';t.style.transition='all .3s';setTimeout(()=>t.remove(),300);},3000);
-}
-// ══════════════ AI MODAL ══════════════
-function showAIModal(){document.getElementById('aiMod').classList.remove('hid');}
-function hideAIModal(){document.getElementById('aiMod').classList.add('hid');}
-
-function showLoad(t,s,steps){
-document.getElementById('ldTx').textContent=t;
-document.getElementById('ldSu').textContent=s||'';
-document.getElementById('ldSt').innerHTML=(steps||[]).map((st,i)=>`<div class="ls" id="ls${i}">${st}</div>`).join('');
-document.getElementById('ldBg').classList.remove('hid');
-}
-function hideLoad(){document.getElementById('ldBg').classList.add('hid');}
-function ldStep(i,state){const el=document.getElementById('ls'+i);if(el){el.className='ls '+state;if(state==='done')el.innerHTML='✓ '+el.textContent;else if(state==='act')el.innerHTML='⟳ '+el.textContent;}}
-
-// ══════════════ AI GENERATE ══════════════
-async function genAI(){
-const brand=document.getElementById('aiBr').value.trim();
-const mp=document.getElementById('aiMp').value;
-const cat=document.getElementById('aiCt').value.trim();
-const info=document.getElementById('aiIn').value.trim();
-if(!brand){toast('Markenname erforderlich!','err');return;}
-
-hideAIModal();
-showLoad('Generiere Store...',`Analysiere "${brand}"`,['Marke analysieren...','Struktur erstellen...','Inhalte generieren...','Store aufbauen...']);
-
-setTimeout(()=>ldStep(0,'act'),300);
-
-try{
-const sysPr=`You are an expert Amazon Brand Store architect. You analyze brands deeply and create complete, professional store structures.
-
-CRITICAL REQUIREMENTS:
-- Research the brand using web search
-- Identify ALL product categories
-- Create AS MANY pages as needed (4-20+)
-- Each page should have 6-12 relevant modules
-- NEVER use placeholder text like "[text here]" or "..."
-- Generate concrete, brand-specific content in the marketplace language
-- Include realistic product ASINs when possible
-
-MODULE TYPES AVAILABLE:
-Hero: hero_banner, hero_product, hero_seasonal, hero_mission
-Products: product_grid, product_slider, bestseller_auto, recommended_auto
-Categories: category_grid, category_split
-Trust: testimonials, certifications, stats_metrics, founder_story
-Education: usp_icons, howto_steps
-Promo: bundle_promo, cta_button
-Content: image_text, text_block, video, image_gallery
-
-BRAND TYPES:
-- premium: Sophisticated, education-heavy (like Nespresso, AG1)
-- d2c: Fun, colorful, community-driven (like SNOCKS, HOLY, Bears with Benefits)
-- mission: Impact-focused, transparent (like nucao, BACHGOLD)
-
-IMPORTANT JSON RULES:
-- Return ONLY valid JSON, no markdown, no backticks
-- Every string value must be concrete brand-specific text
-- products array items need: name, asin (format B0XXXXXXXXX), price
-- categories array items need: icon (emoji), name, description
-- icons array items need: icon (emoji), text
-- testimonials need: text, author, stars (1-5)
-- certs need: icon (emoji), name
-- stats need: value (string like "10.000+"), label
-- steps need: title, description
-
-Return this exact JSON structure:
-{"brandType":"premium|d2c|mission","brandColors":{"primary":"#HEX","secondary":"#HEX","accent":"#HEX"},"brandDescription":"Brief summary","menu":[{"name":"PAGE","pageId":"id"}],"pages":[{"id":"homepage","name":"Homepage","modules":[{"type":"hero_banner","content":{"headline":"...","subheadline":"...","ctaText":"...","backgroundColor":"#232F3E"}},{"type":"category_grid","content":{"headline":"...","categories":[{"icon":"emoji","name":"...","description":"..."}]}},{"type":"product_grid","content":{"headline":"...","products":[{"name":"...","asin":"B0XX...","price":"€XX,XX"}]}}]}]}`;
-
-const langMap={de:'German',com:'English','co.uk':'English',fr:'French',it:'Italian',es:'Spanish'};
-const currMap={de:'EUR (€)',com:'USD ($)','co.uk':'GBP (£)',fr:'EUR (€)',it:'EUR (€)',es:'EUR (€)'};
-
-const usrPr=`Create a complete Amazon Brand Store for "${brand}" on Amazon.${mp}.
-
-${cat?'Known category: '+cat:''}
-${info?'Additional context: '+info:''}
-
-Generate ALL content in ${langMap[mp]||'German'}.
-Use ${currMap[mp]||'EUR (€)'} for prices.
-
-Create:
-1. Homepage with hero, categories, bestsellers, trust elements, brand story
-2. One page per main product category (with product grids)
-3. About/Mission page if the brand has a strong story
-4. Additional pages as needed (bundles, deals, starter sets, etc.)
-
-CRITICAL: 
-- Create 5-15 pages depending on brand complexity
-- 6-12 modules per page
+CRITICAL RULES:
+- Use ONLY these real Amazon tile types: hero_image, image, image_with_text, shoppable_image, text, video, background_video, gallery, product, product_grid, best_sellers, recommended, featured_deals
+- Every image tile MUST have a detailed imageBriefing for the designer
+- imageBriefing MUST include: exact pixel dimensions, what's in the image, text overlays with exact wording, colors with hex codes, mood/style, safe zone notes, mobile considerations
+- All text content in the marketplace language
+- Use real ASINs from the product data
 - No placeholder text whatsoever
-- Return ONLY the JSON object, nothing else`;
+- Max 20 tiles per page
+- Max 1 product_grid, 1 gallery, 1 featured_deals per page
 
-const resp=await fetch('https://api.anthropic.com/v1/messages',{
-method:'POST',
-headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01'},
-body:JSON.stringify({
-model:'claude-sonnet-4-20250514',
-max_tokens:16000,
-system:sysPr,
-messages:[{role:'user',content:usrPr}],
-tools:[{type:'web_search_20250305',name:'web_search'}]
-})
-});
+Image briefing format:
+"DIMENSIONS: 3000×1000px, JPG, max 5MB | SAFE ZONE: mittlere 70% | CONTENT: [what's in the image] | TEXT IN IMAGE: '[exact headline]' (white, centered), '[subline]' (smaller, below) | COLORS: primary #hex, gradient from X to Y | MOOD: [style description] | MOBILE: text must stay in center 60%"
 
-setTimeout(()=>{ldStep(0,'done');ldStep(1,'act');},2000);
+Return ONLY valid JSON:
+{
+  "pageName": "...",
+  "heroImageBriefing": "detailed briefing for hero image of this page",
+  "tiles": [
+    {
+      "type": "image_with_text",
+      "size": "full_width",
+      "content": { "layout": "text_over", "headline": "...", "body": "...", "linkText": "..." },
+      "imageBriefing": "DIMENSIONS: ... | CONTENT: ... | TEXT IN IMAGE: ... | COLORS: ... | MOOD: ..."
+    }
+  ]
+}`;
 
-const data=await resp.json();
+// ═══════════════════════════════════════════════════════
+// MAIN APP
+// ═══════════════════════════════════════════════════════
+export default function App() {
+  // Store state
+  const [store, setStore] = useState({ brandName:"", brandProfile:null, amazonData:null, pages:[mkPage("Homepage","homepage")] });
+  const [curPage, setCurPage] = useState("homepage");
+  const [selTile, setSelTile] = useState(null);
+  const [mode, setMode] = useState("builder");
 
-setTimeout(()=>{ldStep(1,'done');ldStep(2,'act');},500);
+  // AI state
+  const [aiModal, setAiModal] = useState(false);
+  const [aiBrand, setAiBrand] = useState("");
+  const [aiMp, setAiMp] = useState("de");
+  const [aiCat, setAiCat] = useState("");
+  const [aiInfo, setAiInfo] = useState("");
+  const [generating, setGenerating] = useState(false);
+  const [genStep, setGenStep] = useState(0);
+  const [genSteps, setGenSteps] = useState([]);
+  const [genLog, setGenLog] = useState([]);
+  const [refine, setRefine] = useState("");
+  const [toast, setToast] = useState(null);
 
-let fullText='';
-for(const block of data.content||[]){if(block.type==='text')fullText+=block.text;}
+  const page = store.pages.find(p=>p.id===curPage) || store.pages[0];
+  const tile = page?.tiles.find(t=>t.id===selTile);
+  const tileDef = tile ? TILES[tile.type] : null;
 
-if(!fullText)throw new Error('Keine AI-Antwort erhalten');
+  const showToast = (m,t="ok") => { setToast({m,t}); setTimeout(()=>setToast(null),4000); };
+  const addLog = (msg) => setGenLog(prev=>[...prev, `[${new Date().toLocaleTimeString()}] ${msg}`]);
 
-// Extract JSON
-let jsonStr=fullText;
-const jsonMatch=fullText.match(/\{[\s\S]*\}/);
-if(jsonMatch)jsonStr=jsonMatch[0];
+  // ── Store mutations ──
+  const up = (fn) => setStore(prev => { const n=JSON.parse(JSON.stringify(prev)); fn(n); return n; });
+  const upPage = (fn) => up(s=>{ const p=s.pages.find(pg=>pg.id===curPage); if(p)fn(p); });
+  const upTile = (fn) => upPage(p=>{ const t=p.tiles.find(ti=>ti.id===selTile); if(t)fn(t); });
 
-// Clean common issues
-jsonStr=jsonStr.replace(/```json\s*/g,'').replace(/```\s*/g,'').trim();
+  const addTile = (type) => { const t=mkTile(type); upPage(p=>p.tiles.push(t)); setSelTile(t.id); };
+  const delTile = (id) => { upPage(p=>{p.tiles=p.tiles.filter(t=>t.id!==id);}); if(selTile===id)setSelTile(null); };
+  const moveTile = (id,d) => upPage(p=>{ const i=p.tiles.findIndex(t=>t.id===id); const j=i+d; if(j>=0&&j<p.tiles.length)[p.tiles[i],p.tiles[j]]=[p.tiles[j],p.tiles[i]]; });
+  const addPage = (name) => { const p=mkPage(name||"Neue Seite"); up(s=>s.pages.push(p)); setCurPage(p.id); setSelTile(null); };
+  const delPage = (id) => { if(store.pages.length<=1)return; up(s=>{s.pages=s.pages.filter(p=>p.id!==id);}); if(curPage===id)setCurPage(store.pages.find(p=>p.id!==id)?.id); };
 
-let result;
-try{result=JSON.parse(jsonStr);}
-catch(e){
-// Try to fix truncated JSON
-jsonStr=fixJSON(jsonStr);
-result=JSON.parse(jsonStr);
+  // ── Image upload ──
+  const fileRef = useRef(null);
+  const handleImg = (file) => {
+    if(!file||!selTile)return;
+    const r=new FileReader();
+    r.onload=(e)=>{ const img=new Image(); img.onload=()=>{
+      upTile(t=>{t.image=e.target.result;t.imageFile=file.name;t.imgW=img.width;t.imgH=img.height;t.imgSize=`${(file.size/1048576).toFixed(1)}MB`;});
+      showToast(`Bild: ${img.width}×${img.height}px`);
+    }; img.src=e.target.result; };
+    r.readAsDataURL(file);
+  };
+
+  // ── AI Call Helper ──
+  const callAI = async (system, user, useSearch=false) => {
+    const body = {
+      model: "claude-sonnet-4-20250514", max_tokens: 8000,
+      system, messages: [{ role:"user", content:user }],
+    };
+    if(useSearch) body.tools = [{ type:"web_search_20250305", name:"web_search" }];
+    const resp = await fetch("https://api.anthropic.com/v1/messages", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify(body),
+    });
+    const data = await resp.json();
+    if(data.error) throw new Error(data.error.message || JSON.stringify(data.error));
+    const text = (data.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("");
+    const match = text.match(/\{[\s\S]*\}/);
+    if(!match) throw new Error("No JSON in response");
+    return JSON.parse(match[0]);
+  };
+
+  // ═══════════════════════════════════════════════════
+  // MULTI-STEP AI GENERATION
+  // ═══════════════════════════════════════════════════
+  const generate = async () => {
+    if(!aiBrand.trim()) return showToast("Markenname fehlt!","err");
+    setAiModal(false); setGenerating(true); setGenLog([]);
+    const lang = {de:"German",com:"English","co.uk":"English",fr:"French",it:"Italian",es:"Spanish"}[aiMp]||"German";
+    const curr = {de:"€ (EUR)",com:"$ (USD)","co.uk":"£ (GBP)",fr:"€ (EUR)"}[aiMp]||"€ (EUR)";
+    const steps = [
+      {name:"Marke recherchieren", desc:"Web Search: Website, Werte, Farben, Ton..."},
+      {name:"Amazon-Daten sammeln", desc:"ASINs, Preise, Kategorien, bestehender Store..."},
+      {name:"Store-Architektur erstellen", desc:"Seiten, Navigation, Tile-Sequenzen..."},
+      {name:"Inhalte generieren", desc:"Texte, Bild-Briefings pro Seite..."},
+      {name:"Validieren & aufbauen", desc:"Prüfen, Auto-Fix, Store zusammensetzen..."},
+    ];
+    setGenSteps(steps);
+
+    try {
+      // ── STEP 1: Brand Research ──
+      setGenStep(0); addLog("🔍 Starte Markenrecherche...");
+      const brandProfile = await callAI(
+        SYSTEM_RESEARCH,
+        `Research the brand "${aiBrand}" for marketplace Amazon.${aiMp}.\n${aiCat?`Category hint: ${aiCat}`:""}${aiInfo?`\nAdditional info: ${aiInfo}`:""}\nRespond in English for the JSON structure, but brand-specific content in ${lang}.`,
+        true
+      );
+      addLog(`✅ Brand: ${brandProfile.type}, ${brandProfile.categories?.length||0} Kategorien, Ton: ${brandProfile.tone}`);
+
+      // ── STEP 2: Amazon Data ──
+      setGenStep(1); addLog("🛒 Suche Amazon-Produkte...");
+      const amazonData = await callAI(
+        SYSTEM_AMAZON,
+        `Find Amazon products for brand "${aiBrand}" on Amazon.${aiMp}. Search for "${aiBrand}" on amazon.${aiMp} and find real products with ASINs.\nKnown categories: ${(brandProfile.categories||[]).join(", ")}`,
+        true
+      );
+      addLog(`✅ ${amazonData.products?.length||0} Produkte gefunden, ${amazonData.amazonCategories?.length||0} Kategorien`);
+      if(amazonData.hasExistingStore) addLog(`ℹ️ Bestehender Store gefunden mit Seiten: ${(amazonData.existingStorePages||[]).join(", ")}`);
+
+      // ── STEP 3: Architecture ──
+      setGenStep(2); addLog("🏗️ Erstelle Store-Architektur...");
+      const architecture = await callAI(
+        SYSTEM_ARCHITECTURE,
+        `Create store architecture for:\n\nBRAND PROFILE:\n${JSON.stringify(brandProfile,null,2)}\n\nAMAZON DATA:\n- ${amazonData.products?.length||0} products\n- Categories: ${(amazonData.amazonCategories||[]).join(", ")}\n- Has existing store: ${amazonData.hasExistingStore}\n${amazonData.hasExistingStore?`- Existing pages: ${(amazonData.existingStorePages||[]).join(", ")}`:""}\n\nMarketplace: Amazon.${aiMp}, Language: ${lang}`,
+        false
+      );
+      addLog(`✅ Architektur: ${architecture.pages?.length||0} Seiten geplant`);
+      architecture.pages?.forEach(p => addLog(`   📄 ${p.name}: ${p.purpose?.slice(0,60)}...`));
+
+      // ── STEP 4: Content per page ──
+      setGenStep(3);
+      const builtPages = [];
+      for(let i=0; i<(architecture.pages||[]).length; i++) {
+        const pagePlan = architecture.pages[i];
+        addLog(`📝 Generiere Seite ${i+1}/${architecture.pages.length}: "${pagePlan.name}"...`);
+
+        const pageContent = await callAI(
+          SYSTEM_CONTENT,
+          `Create content for this store page:\n\nPAGE: ${JSON.stringify(pagePlan)}\n\nBRAND PROFILE:\n${JSON.stringify(brandProfile)}\n\nAMAZON PRODUCTS (use real ASINs!):\n${JSON.stringify(amazonData.products?.slice(0,20))}\n\nMarketplace: Amazon.${aiMp}\nLanguage: ${lang}\nCurrency: ${curr}\nBrand colors: ${JSON.stringify(brandProfile.colors)}`,
+          false
+        );
+
+        const validTiles = (pageContent.tiles||[])
+          .filter(t => TILES[t.type])
+          .map(t => mkTile(t.type, t.size, t.content||{}, t.imageBriefing||""));
+
+        builtPages.push({
+          id: pagePlan.id || `page_${i}`,
+          name: pageContent.pageName || pagePlan.name,
+          heroImageBriefing: pageContent.heroImageBriefing || "",
+          tiles: validTiles,
+        });
+
+        addLog(`   ✅ ${validTiles.length} Tiles, ${validTiles.filter(t=>t.imageBriefing).length} mit Bild-Briefing`);
+      }
+
+      // ── STEP 5: Validation ──
+      setGenStep(4); addLog("🔍 Validiere Store...");
+      let warnings = 0;
+      builtPages.forEach(p => {
+        const pgCount = p.tiles.filter(t=>t.type==="product_grid").length;
+        if(pgCount>1){ p.tiles = p.tiles.filter((t,i)=>t.type!=="product_grid"||p.tiles.findIndex(x=>x.type==="product_grid")===i); warnings++; }
+        const galCount = p.tiles.filter(t=>t.type==="gallery").length;
+        if(galCount>1){ p.tiles = p.tiles.filter((t,i)=>t.type!=="gallery"||p.tiles.findIndex(x=>x.type==="gallery")===i); warnings++; }
+        if(p.tiles.length>20){ p.tiles=p.tiles.slice(0,20); warnings++; addLog(`⚠️ ${p.name}: auf 20 Tiles gekürzt`); }
+        p.tiles.forEach(t => {
+          if(TILES[t.type]?.needsImage && !t.imageBriefing) { warnings++; addLog(`⚠️ ${p.name}: ${TILES[t.type]?.name} ohne Bild-Briefing`); }
+        });
+      });
+      addLog(`✅ Validierung abgeschlossen: ${warnings} Warnungen`);
+
+      // ── BUILD STORE ──
+      setStore({
+        brandName: aiBrand,
+        brandProfile,
+        amazonData,
+        pages: builtPages,
+      });
+      setCurPage(builtPages[0]?.id);
+      setSelTile(null);
+
+      const totalTiles = builtPages.reduce((a,p)=>a+p.tiles.length,0);
+      const totalBriefings = builtPages.reduce((a,p)=>a+p.tiles.filter(t=>t.imageBriefing).length,0);
+      addLog(`\n🎉 FERTIG: ${builtPages.length} Seiten, ${totalTiles} Tiles, ${totalBriefings} Bild-Briefings`);
+      showToast(`Store generiert: ${builtPages.length} Seiten, ${totalTiles} Tiles`);
+
+    } catch(e) {
+      addLog(`❌ FEHLER: ${e.message}`);
+      showToast(`Fehler: ${e.message}`,"err");
+    } finally {
+      setGenerating(false);
+    }
+  };
+
+  // ── Refine ──
+  const doRefine = async () => {
+    if(!refine.trim()||!store.pages.length) return;
+    setGenerating(true); setGenStep(0);
+    setGenSteps([{name:"Verfeinere Store...",desc:refine}]);
+    setGenLog([]); addLog(`✏️ Verfeinerung: "${refine}"`);
+    const storeClean = JSON.parse(JSON.stringify(store));
+    storeClean.pages.forEach(p=>p.tiles.forEach(t=>{t.image=null;}));
+    try {
+      const result = await callAI(
+        `You refine an Amazon Brand Store. Use ONLY real Amazon tile types: ${Object.keys(TILES).join(", ")}. Include imageBriefing for every image tile. Return the COMPLETE store as JSON with the same structure.`,
+        `CURRENT STORE:\n${JSON.stringify(storeClean,null,2)}\n\nCHANGE: ${refine}\n\nReturn complete updated JSON.`,
+        false
+      );
+      if(result.pages?.length) {
+        const pages = result.pages.map((p,i)=>({
+          ...mkPage(p.name, p.id||`page_${i}`),
+          heroImageBriefing: p.heroImageBriefing||"",
+          tiles: (p.tiles||[]).filter(t=>TILES[t.type]).map(t=>mkTile(t.type,t.size,t.content||{},t.imageBriefing||""))
+        }));
+        up(s=>{ s.pages=pages; s.brandProfile=result.brandProfile||s.brandProfile; });
+        setCurPage(pages[0]?.id);
+        addLog("✅ Store verfeinert");
+        showToast("Store verfeinert!");
+      }
+    } catch(e) { addLog(`❌ ${e.message}`); showToast(e.message,"err"); }
+    finally { setGenerating(false); setRefine(""); }
+  };
+
+  // ── Export Designer Briefing ──
+  const exportBriefing = () => {
+    const bp = store.brandProfile;
+    let md = `# Designer Briefing: ${store.brandName}\n\n`;
+    if(bp) {
+      md += `## Brand Profile\n- **Typ:** ${bp.type}\n- **Ton:** ${bp.tone}\n- **Farben:** Primary ${bp.colors?.primary}, Secondary ${bp.colors?.secondary}, Accent ${bp.colors?.accent}\n- **USPs:** ${(bp.usps||[]).join(" | ")}\n- **Zielgruppe:** ${bp.targetAudience}\n\n`;
+    }
+    md += `## Brand Logo\n- **Spec:** 400×400px, max 5MB, JPG/PNG\n\n---\n\n`;
+    store.pages.forEach((pg,pi) => {
+      md += `# Seite ${pi+1}: ${pg.name}\n\n`;
+      md += `## Hero Image\n- **Spec:** 3000×600px min, max 5MB, Safe Zone mittlere 70%\n- **Briefing:** ${pg.heroImageBriefing||"—"}\n\n`;
+      pg.tiles.forEach((t,ti) => {
+        const def = TILES[t.type];
+        md += `### ${ti+1}. ${def?.name||t.type} (${SIZE_LABELS[t.size]||t.size})\n`;
+        const spec = def?.specs?.[t.size] || (def?.specs ? Object.values(def.specs)[0] : null);
+        if(spec) { Object.entries(spec).forEach(([k,v])=>{ md += `- **${k}:** ${v}\n`; }); }
+        if(t.imageBriefing) md += `- **🎨 BRIEFING:** ${t.imageBriefing}\n`;
+        if(t.image) md += `- **✅ Bild:** ${t.imageFile} (${t.imgW}×${t.imgH}px, ${t.imgSize})\n`;
+        else if(def?.needsImage) md += `- **⚠️ Bild fehlt**\n`;
+        const c = t.content||{};
+        if(c.headline) md += `- **Headline:** ${c.headline}\n`;
+        if(c.body) md += `- **Body:** ${c.body}\n`;
+        if(c.text) md += `- **Text:** ${c.text}\n`;
+        if(c.asin) md += `- **ASIN:** ${c.asin}\n`;
+        md += `\n`;
+      });
+      md += `---\n\n`;
+    });
+    const blob = new Blob([md],{type:"text/markdown"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `${store.brandName||"store"}_designer_briefing.md`;
+    a.click();
+    showToast("Designer-Briefing exportiert!");
+  };
+
+  const exportJSON = () => {
+    const d = JSON.parse(JSON.stringify(store));
+    d.pages.forEach(p=>p.tiles.forEach(t=>{t.image=null;}));
+    const blob = new Blob([JSON.stringify(d,null,2)],{type:"application/json"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `${store.brandName||"store"}.json`;
+    a.click();
+    showToast("JSON exportiert!");
+  };
+
+  // ═══════════════════════════════════════════════════
+  // RENDER
+  // ═══════════════════════════════════════════════════
+  const accent = store.brandProfile?.colors?.primary || "#FF9900";
+  const dark = "#1a1a2e";
+
+  return (
+    <div className="flex flex-col h-screen overflow-hidden" style={{fontFamily:"'Segoe UI',system-ui,sans-serif",background:"#f0f1f3"}}>
+      {/* ── HEADER ── */}
+      <header className="flex items-center h-13 px-4 gap-3 flex-shrink-0" style={{background:dark,height:52}}>
+        <div className="flex items-center gap-2 text-white font-bold text-sm">
+          <span className="text-base">🏪</span>
+          <span>Store Builder</span>
+          <span className="text-xs px-1.5 py-0.5 rounded font-extrabold" style={{background:"#FF9900",color:dark,fontSize:9}}>MULTI-STEP AI</span>
+        </div>
+        {store.brandProfile && (
+          <div className="flex items-center gap-2 ml-3 px-2 py-1 rounded" style={{background:"rgba(255,255,255,.08)"}}>
+            <span className="w-3 h-3 rounded-full" style={{background:accent}} />
+            <span className="text-xs text-gray-300">{store.brandName} · {store.brandProfile.type}</span>
+          </div>
+        )}
+        <div className="flex-1 flex justify-center gap-1">
+          {[["builder","✏️ Builder"],["preview","👁️ Preview"],["briefing","📋 Briefing"]].map(([m,l])=>(
+            <button key={m} onClick={()=>setMode(m)}
+              className={`px-3 py-1 rounded text-xs font-semibold ${mode===m?"text-white":"text-gray-500 hover:text-gray-300"}`}
+              style={mode===m?{background:"rgba(255,255,255,.12)"}:{}}>
+              {l}
+            </button>
+          ))}
+        </div>
+        <div className="flex gap-1.5">
+          <button onClick={()=>setAiModal(true)} className="px-3 py-1.5 rounded text-xs font-bold" style={{background:"#FF9900",color:dark}}>✨ AI Generieren</button>
+          <button onClick={exportBriefing} className="px-2.5 py-1.5 rounded text-xs font-semibold border border-gray-600 text-gray-400 hover:text-white">📋 Briefing</button>
+          <button onClick={exportJSON} className="px-2.5 py-1.5 rounded text-xs font-semibold border border-gray-600 text-gray-400 hover:text-white">📥 JSON</button>
+        </div>
+      </header>
+
+      {/* ── MAIN ── */}
+      <div className="flex flex-1 overflow-hidden">
+
+        {/* ── SIDEBAR ── */}
+        {mode==="builder" && (
+          <aside className="w-56 bg-white border-r flex flex-col flex-shrink-0 overflow-hidden" style={{borderColor:"#e2e4e8"}}>
+            <div className="p-2.5 border-b text-xs font-bold text-gray-400 uppercase tracking-wider" style={{borderColor:"#e2e4e8",fontSize:10}}>Amazon Tiles</div>
+            <div className="flex-1 overflow-y-auto p-1.5">
+              {GROUPS.map(g=>(
+                <div key={g} className="mb-2">
+                  <div className="text-xs font-bold text-gray-400 uppercase px-2 mb-0.5" style={{fontSize:9,letterSpacing:".5px"}}>{g}</div>
+                  {Object.entries(TILES).filter(([,v])=>v.grp===g).map(([k,v])=>(
+                    <button key={k} onClick={()=>addTile(k)}
+                      className="w-full flex items-center gap-1.5 px-2 py-1.5 rounded text-left hover:bg-gray-50 mb-px transition-all"
+                      style={{fontSize:12}}>
+                      <span className="text-sm flex-shrink-0">{v.icon}</span>
+                      <span className="font-medium text-gray-700 truncate">{v.name}</span>
+                    </button>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </aside>
+        )}
+
+        {/* ── CANVAS ── */}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          {/* Page tabs */}
+          <div className="flex items-center gap-1 px-3 py-1.5 bg-white border-b overflow-x-auto flex-shrink-0" style={{borderColor:"#e2e4e8"}}>
+            {store.pages.map(p=>(
+              <button key={p.id} onClick={()=>{setCurPage(p.id);setSelTile(null);}}
+                className={`px-2.5 py-1 rounded text-xs font-semibold border whitespace-nowrap flex items-center gap-1 ${p.id===curPage?"text-white":"text-gray-500 border-gray-200 hover:border-gray-400"}`}
+                style={p.id===curPage?{background:dark,borderColor:dark}:{}}>
+                {p.name}
+                {store.pages.length>1 && <span onClick={e=>{e.stopPropagation();delPage(p.id);}} className="opacity-40 hover:opacity-100 ml-1" style={{fontSize:10}}>✕</span>}
+              </button>
+            ))}
+            <button onClick={()=>{const n=prompt("Seitenname:");if(n)addPage(n);}} className="px-2 py-1 border border-dashed border-gray-300 rounded text-xs text-gray-400 hover:text-gray-600">+ Seite</button>
+          </div>
+
+          {/* Canvas scroll area */}
+          <div className="flex-1 overflow-y-auto p-4">
+            <div className="max-w-4xl mx-auto">
+              {page && (
+                <>
+                  {/* Hero area */}
+                  {mode!=="preview" && (
+                    <div className="mb-3 rounded-lg border-2 border-dashed border-gray-300 overflow-hidden" style={{minHeight:100,background:`linear-gradient(135deg,${dark},#2d2d5e)`}}>
+                      <div className="flex flex-col items-center justify-center p-6 text-white/50 text-center">
+                        <span className="text-xl mb-1">🖼️</span>
+                        <div className="text-xs font-semibold">Hero Image · 3000×600px · Safe Zone 70%</div>
+                        {page.heroImageBriefing && <div className="text-xs mt-1 text-white/30 italic max-w-lg truncate">"{page.heroImageBriefing.slice(0,80)}..."</div>}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Tiles */}
+                  {page.tiles.length===0 && mode!=="preview" && (
+                    <div className="border-2 border-dashed border-gray-300 rounded-xl p-10 text-center text-gray-400 bg-white">
+                      <div className="text-2xl mb-2">📦</div>
+                      <div className="font-semibold text-gray-500 text-sm">Keine Tiles</div>
+                      <div className="text-xs mt-1">Klicke links auf ein Tile oder starte mit ✨ AI Generieren</div>
+                    </div>
+                  )}
+
+                  {page.tiles.map(t => {
+                    const def = TILES[t.type];
+                    const isSel = selTile===t.id;
+                    const c = t.content||{};
+                    const hasImg = !!t.image;
+
+                    // Tile inner content
+                    let inner;
+                    if(t.type==="text") {
+                      inner = <div className="p-5"><p className="text-sm text-gray-600 leading-relaxed" style={{textAlign:c.alignment||"left"}}>{c.text||"Text..."}</p></div>;
+                    } else if(t.type==="image_with_text") {
+                      inner = (
+                        <div className={`flex ${c.layout==="text_beside"?"flex-row":"flex-col"}`} style={{minHeight:180}}>
+                          <div className="flex-1 bg-gray-100 flex items-center justify-center text-gray-300 text-3xl" style={{minHeight:140}}>
+                            {hasImg ? <img src={t.image} alt="" className="w-full h-auto" /> : "🖼️"}
+                          </div>
+                          <div className="flex-1 p-5 flex flex-col justify-center">
+                            {c.headline && <h3 className="font-bold text-base mb-2">{c.headline}</h3>}
+                            {c.body && <p className="text-sm text-gray-500 leading-relaxed">{c.body}</p>}
+                            {c.linkText && <span className="text-sm font-semibold mt-2" style={{color:"#007EB9"}}>{c.linkText} →</span>}
+                          </div>
+                        </div>
+                      );
+                    } else if(t.type==="product_grid") {
+                      inner = <div className="p-5"><div className="text-sm font-semibold mb-2">Product Grid ({c.layout||"standard"})</div><div className="grid grid-cols-4 gap-2">{[1,2,3,4,5,6,7,8].map(i=><div key={i} className="bg-gray-50 border rounded p-2 text-center"><div className="w-full aspect-square bg-gray-100 rounded mb-1 flex items-center justify-center text-gray-300">📦</div><div className="text-xs text-gray-400 truncate">{c.asins?.[i-1]||`Produkt ${i}`}</div></div>)}</div></div>;
+                    } else if(t.type==="product") {
+                      inner = <div className="p-4 flex items-center gap-3"><div className="w-16 h-16 bg-gray-100 rounded flex items-center justify-center text-xl text-gray-300">📦</div><div><div className="font-semibold text-sm">{c.customTitle||c.name||"Produkt"}</div><div className="text-xs text-gray-400 font-mono mt-0.5">{c.asin||"ASIN"}</div>{c.price&&<div className="text-sm font-bold mt-0.5" style={{color:"#CC0C39"}}>{c.price}</div>}</div></div>;
+                    } else if(t.type==="best_sellers") {
+                      inner = <div className="p-5 text-center bg-gradient-to-r from-amber-50 to-orange-50"><span className="text-lg">🏆</span><div className="text-sm font-semibold mt-1">Best Sellers</div><div className="text-xs text-gray-400">Auto — Top 5 Produkte</div></div>;
+                    } else if(t.type==="recommended") {
+                      inner = <div className="p-5 text-center bg-blue-50"><span className="text-lg">💡</span><div className="text-sm font-semibold mt-1">Recommended Products</div><div className="text-xs text-gray-400">Personalisiert</div></div>;
+                    } else if(t.type==="featured_deals") {
+                      inner = <div className="p-5 text-center bg-orange-50"><span className="text-lg">🏷️</span><div className="text-sm font-semibold mt-1">Featured Deals</div><div className="text-xs text-gray-400">Aktive Promotions</div></div>;
+                    } else if(t.type==="gallery") {
+                      inner = <div className="p-4"><div className="grid grid-cols-4 gap-2">{[1,2,3,4].map(i=><div key={i} className="aspect-square bg-gray-100 rounded flex items-center justify-center text-gray-300 text-xl">🖼️</div>)}</div></div>;
+                    } else if(t.type==="video"||t.type==="background_video") {
+                      inner = <div className="flex items-center justify-center p-8 text-4xl" style={{background:dark,minHeight:160,color:"rgba(255,255,255,.3)"}}>▶<div className="absolute text-xs" style={{bottom:8}}>{ t.type==="background_video"?"BG Video (stumm)":"Video"}</div></div>;
+                    } else if(t.type==="shoppable_image") {
+                      inner = hasImg
+                        ? <div className="relative"><img src={t.image} alt="" className="w-full h-auto" /><div className="absolute top-2 right-2 px-2 py-0.5 bg-white/90 rounded text-xs font-semibold shadow">🛒 Shoppable</div></div>
+                        : <div className="flex flex-col items-center justify-center p-8 bg-gray-100 text-gray-400" style={{minHeight:180}}><span className="text-3xl mb-2">🛒🖼️</span><div className="text-xs">Shoppable Image · bis 6 Hotspots</div></div>;
+                    } else {
+                      // image, hero_image
+                      inner = hasImg
+                        ? <img src={t.image} alt="" className="w-full h-auto block" />
+                        : <div className="flex flex-col items-center justify-center p-8 bg-gray-100 text-gray-400" style={{minHeight:140}}>
+                            <span className="text-3xl mb-2">🖼️</span>
+                            <div className="text-xs font-semibold">{def?.name}</div>
+                            {t.imageBriefing && <div className="text-xs mt-1 text-gray-400 italic max-w-md text-center truncate">"{t.imageBriefing.slice(0,80)}..."</div>}
+                          </div>;
+                    }
+
+                    if(mode==="preview") return <div key={t.id} className="mb-0">{inner}</div>;
+
+                    return (
+                      <div key={t.id} onClick={()=>setSelTile(t.id)}
+                        className={`bg-white rounded-lg overflow-hidden shadow-sm mb-2.5 cursor-pointer transition-all relative group border-2 ${isSel?"shadow-md":"hover:shadow-md hover:border-gray-200"}`}
+                        style={{borderColor:isSel?accent:"transparent"}}>
+                        <div className="absolute top-1.5 left-1.5 z-10 px-1.5 py-0.5 rounded text-white font-bold" style={{background:dark,fontSize:9}}>{def?.name} · {SIZE_LABELS[t.size]}</div>
+                        <div className="absolute top-1.5 right-1.5 z-10 flex gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <button onClick={e=>{e.stopPropagation();moveTile(t.id,-1);}} className="w-5 h-5 bg-white/90 shadow rounded flex items-center justify-center hover:bg-gray-800 hover:text-white" style={{fontSize:10}}>↑</button>
+                          <button onClick={e=>{e.stopPropagation();moveTile(t.id,1);}} className="w-5 h-5 bg-white/90 shadow rounded flex items-center justify-center hover:bg-gray-800 hover:text-white" style={{fontSize:10}}>↓</button>
+                          <button onClick={e=>{e.stopPropagation();delTile(t.id);}} className="w-5 h-5 bg-white/90 shadow rounded flex items-center justify-center hover:bg-red-600 hover:text-white" style={{fontSize:10}}>✕</button>
+                        </div>
+                        {t.imageBriefing && !hasImg && <div className="absolute bottom-1.5 right-1.5 z-10 px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded font-semibold" style={{fontSize:9}}>📋 Briefing</div>}
+                        {hasImg && <div className="absolute bottom-1.5 left-1.5 z-10 px-1.5 py-0.5 bg-green-100 text-green-700 rounded font-semibold" style={{fontSize:9}}>✓ {t.imgW}×{t.imgH}</div>}
+                        {inner}
+                      </div>
+                    );
+                  })}
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Refine bar */}
+          {mode==="builder" && (
+            <div className="flex gap-2 p-2.5 bg-white border-t flex-shrink-0" style={{borderColor:"#e2e4e8"}}>
+              <input value={refine} onChange={e=>setRefine(e.target.value)} onKeyDown={e=>e.key==="Enter"&&doRefine()}
+                className="flex-1 px-3 py-1.5 border rounded-lg text-sm" placeholder="AI-Anweisung: 'Füge Bundle-Seite hinzu', 'Mehr Lifestyle-Bilder'..." style={{borderColor:"#ddd"}} />
+              <button onClick={doRefine} className="px-4 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap" style={{background:"#FF9900",color:dark}}>✨ Verfeinern</button>
+            </div>
+          )}
+        </div>
+
+        {/* ── PROPERTIES PANEL ── */}
+        {mode==="builder" && (
+          <aside className="w-72 bg-white border-l flex flex-col flex-shrink-0 overflow-hidden" style={{borderColor:"#e2e4e8"}}>
+            <div className="p-2.5 border-b text-xs font-bold text-gray-400 uppercase tracking-wider flex justify-between" style={{borderColor:"#e2e4e8",fontSize:10}}>
+              Eigenschaften {tile && <span style={{color:accent,textTransform:"none",fontWeight:500}}>{tile.type}</span>}
+            </div>
+            <div className="flex-1 overflow-y-auto p-2.5">
+              {!tile ? (
+                <div className="text-center text-gray-400 pt-8"><div className="text-xl mb-2 opacity-30">🎯</div><div className="text-xs">Tile auswählen</div></div>
+              ) : (
+                <div className="space-y-3">
+                  {/* Size */}
+                  <div>
+                    <label className="text-xs font-semibold text-gray-500 uppercase block mb-1" style={{fontSize:10}}>Tile-Größe</label>
+                    <select value={tile.size} onChange={e=>upTile(t=>{t.size=e.target.value;})} className="w-full px-2 py-1 border rounded text-xs" style={{borderColor:"#ddd"}}>
+                      {tileDef?.sizes.map(s=><option key={s} value={s}>{SIZE_LABELS[s]}</option>)}
+                    </select>
+                  </div>
+
+                  {/* Image Specs */}
+                  {tileDef?.needsImage && tileDef.specs && (
+                    <div className="bg-amber-50 border border-amber-200 rounded p-2.5">
+                      <div className="text-xs font-bold text-amber-700 mb-1.5" style={{fontSize:10}}>📐 Bild-Spezifikationen</div>
+                      {Object.entries(tileDef.specs[tile.size]||tileDef.specs[Object.keys(tileDef.specs)[0]]||{}).map(([k,v])=>(
+                        <div key={k} className="text-xs text-amber-800"><b>{k}:</b> {v}</div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Image Upload */}
+                  {tileDef?.needsImage && (
+                    <div>
+                      <label className="text-xs font-semibold text-gray-500 uppercase block mb-1" style={{fontSize:10}}>Bild hochladen</label>
+                      <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={e=>handleImg(e.target.files?.[0])} />
+                      <button onClick={()=>fileRef.current?.click()}
+                        className="w-full py-2 border-2 border-dashed rounded-lg text-xs text-gray-500 hover:border-amber-400 hover:text-amber-600 transition-all"
+                        style={{borderColor:tile.image?"#86efac":"#ddd"}}>
+                        {tile.image ? `✓ ${tile.imageFile} (${tile.imgW}×${tile.imgH})` : "📁 Bild wählen..."}
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Designer Briefing */}
+                  {tileDef?.needsImage && (
+                    <div>
+                      <label className="text-xs font-semibold text-gray-500 uppercase block mb-1" style={{fontSize:10}}>🎨 Designer-Briefing</label>
+                      <textarea value={tile.imageBriefing||""} onChange={e=>upTile(t=>{t.imageBriefing=e.target.value;})}
+                        className="w-full px-2 py-1.5 border rounded text-xs resize-y" style={{borderColor:"#ddd",minHeight:80}}
+                        placeholder="DIMENSIONS: ... | CONTENT: ... | TEXT IN IMAGE: ... | COLORS: ... | MOOD: ..." />
+                    </div>
+                  )}
+
+                  {/* Content fields */}
+                  {tile.type==="image_with_text" && <>
+                    <Sel label="Layout" value={tile.content.layout} opts={[["text_over","Text über Bild"],["text_beside","Text neben Bild"]]} onChange={v=>upTile(t=>{t.content.layout=v;})} />
+                    <Inp label="Headline" value={tile.content.headline} onChange={v=>upTile(t=>{t.content.headline=v;})} />
+                    <Txt label="Body" value={tile.content.body} onChange={v=>upTile(t=>{t.content.body=v;})} />
+                    <Inp label="Link-Text" value={tile.content.linkText} onChange={v=>upTile(t=>{t.content.linkText=v;})} />
+                  </>}
+                  {tile.type==="text" && <>
+                    <Txt label="Text" value={tile.content.text} onChange={v=>upTile(t=>{t.content.text=v;})} />
+                    <Sel label="Ausrichtung" value={tile.content.alignment} opts={[["left","Links"],["center","Zentriert"],["right","Rechts"],["justified","Block"]]} onChange={v=>upTile(t=>{t.content.alignment=v;})} />
+                  </>}
+                  {tile.type==="product" && <>
+                    <Inp label="ASIN" value={tile.content.asin} onChange={v=>upTile(t=>{t.content.asin=v;})} ph="B0XXXXXXXXX" />
+                    <Inp label="Titel" value={tile.content.customTitle||tile.content.name} onChange={v=>upTile(t=>{t.content.customTitle=v;})} />
+                    <Inp label="Preis" value={tile.content.price} onChange={v=>upTile(t=>{t.content.price=v;})} />
+                  </>}
+                  {tile.type==="product_grid" && <>
+                    <Sel label="Layout" value={tile.content.layout} opts={[["standard","Standard"],["tall","Tall (Fashion)"]]} onChange={v=>upTile(t=>{t.content.layout=v;})} />
+                    <Txt label="ASINs (eine/Zeile)" value={(tile.content.asins||[]).join("\n")} onChange={v=>upTile(t=>{t.content.asins=v.split("\n").filter(Boolean);})} ph="B0XXXXXXXXX" />
+                  </>}
+                  {(tile.type==="image"||tile.type==="hero_image") && <>
+                    <Inp label="Alt-Text" value={tile.content.altText} onChange={v=>upTile(t=>{t.content.altText=v;})} />
+                  </>}
+                  {(tile.type==="video"||tile.type==="background_video") && <>
+                    <Txt label="Video-Beschreibung" value={tile.content.videoDescription} onChange={v=>upTile(t=>{t.content.videoDescription=v;})} ph="Was zeigt das Video?" />
+                  </>}
+                </div>
+              )}
+            </div>
+          </aside>
+        )}
+
+        {/* ── BRIEFING PANEL ── */}
+        {mode==="briefing" && (
+          <aside className="w-80 bg-white border-l flex flex-col flex-shrink-0 overflow-hidden" style={{borderColor:"#e2e4e8"}}>
+            <div className="p-2.5 border-b text-xs font-bold text-gray-400 uppercase tracking-wider" style={{borderColor:"#e2e4e8",fontSize:10}}>📐 Bild-Specs & Briefings</div>
+            <div className="flex-1 overflow-y-auto p-2.5">
+              {/* Brand info */}
+              {store.brandProfile && (
+                <div className="bg-gray-50 border rounded p-2.5 mb-3" style={{borderColor:"#e2e4e8"}}>
+                  <div className="text-xs font-bold mb-1">{store.brandName}</div>
+                  <div className="flex gap-1 mb-1">{Object.values(store.brandProfile.colors||{}).map((c,i)=><span key={i} className="w-4 h-4 rounded-full border" style={{background:c,borderColor:"#ddd"}} />)}</div>
+                  <div className="text-xs text-gray-500">{store.brandProfile.type} · {store.brandProfile.tone}</div>
+                </div>
+              )}
+              {/* Hero */}
+              <div className="bg-blue-50 border border-blue-200 rounded p-2.5 mb-2">
+                <div className="text-xs font-bold text-blue-800">Hero Image</div>
+                <div className="text-xs text-blue-700 mt-0.5">3000×600px | max 5MB | Safe Zone 70%</div>
+                {page?.heroImageBriefing && <div className="text-xs text-blue-600 mt-1 italic">{page.heroImageBriefing}</div>}
+              </div>
+              {/* Tiles */}
+              {page?.tiles.map((t,i) => {
+                const def = TILES[t.type];
+                const needsImg = def?.needsImage;
+                return (
+                  <div key={t.id} className={`rounded p-2.5 mb-1.5 border ${needsImg?"bg-amber-50 border-amber-200":"bg-gray-50 border-gray-200"}`}>
+                    <div className="text-xs font-bold" style={{color:needsImg?"#92400e":"#6b7280"}}>{i+1}. {def?.name} ({SIZE_LABELS[t.size]})</div>
+                    {needsImg && def.specs && Object.entries(def.specs[t.size]||Object.values(def.specs)[0]||{}).map(([k,v])=>(
+                      <div key={k} className="text-xs text-amber-700"><b>{k}:</b> {v}</div>
+                    ))}
+                    {t.imageBriefing && <div className="text-xs mt-1 p-1.5 bg-white rounded border border-amber-100">🎨 {t.imageBriefing}</div>}
+                    {t.image ? <div className="text-xs text-green-700 font-semibold mt-1">✓ {t.imageFile} ({t.imgW}×{t.imgH})</div>
+                             : needsImg && <div className="text-xs text-red-600 font-semibold mt-1">⚠ Bild fehlt</div>}
+                  </div>
+                );
+              })}
+            </div>
+          </aside>
+        )}
+      </div>
+
+      {/* ── AI MODAL ── */}
+      {aiModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 backdrop-blur-sm" onClick={()=>setAiModal(false)}>
+          <div className="bg-white rounded-2xl max-w-md w-11/12 shadow-2xl" onClick={e=>e.stopPropagation()}>
+            <div className="p-5 pb-2">
+              <h2 className="text-lg font-extrabold">✨ Multi-Step AI Generator</h2>
+              <p className="text-xs text-gray-400 mt-0.5">5 fokussierte AI-Calls statt 1 generischer</p>
+            </div>
+            <div className="p-5 pt-2 space-y-2.5">
+              <div><label className="text-xs font-semibold text-gray-500 uppercase block mb-0.5" style={{fontSize:10}}>Markenname *</label>
+                <input value={aiBrand} onChange={e=>setAiBrand(e.target.value)} className="w-full px-3 py-2 border rounded-lg text-sm" placeholder="z.B. natural elements, HOLY Energy, Kärcher..." style={{borderColor:"#ddd"}} /></div>
+              <div><label className="text-xs font-semibold text-gray-500 uppercase block mb-0.5" style={{fontSize:10}}>Marktplatz</label>
+                <select value={aiMp} onChange={e=>setAiMp(e.target.value)} className="w-full px-3 py-2 border rounded-lg text-sm" style={{borderColor:"#ddd"}}>
+                  <option value="de">🇩🇪 Amazon.de</option><option value="com">🇺🇸 Amazon.com</option><option value="co.uk">🇬🇧 Amazon.co.uk</option>
+                  <option value="fr">🇫🇷 Amazon.fr</option><option value="it">🇮🇹 Amazon.it</option><option value="es">🇪🇸 Amazon.es</option>
+                </select></div>
+              <div><label className="text-xs font-semibold text-gray-500 uppercase block mb-0.5" style={{fontSize:10}}>Kategorie (optional)</label>
+                <input value={aiCat} onChange={e=>setAiCat(e.target.value)} className="w-full px-3 py-2 border rounded-lg text-sm" style={{borderColor:"#ddd"}} /></div>
+              <div><label className="text-xs font-semibold text-gray-500 uppercase block mb-0.5" style={{fontSize:10}}>Zusätzliche Infos (optional)</label>
+                <textarea value={aiInfo} onChange={e=>setAiInfo(e.target.value)} className="w-full px-3 py-2 border rounded-lg text-sm" rows={2} style={{borderColor:"#ddd"}} /></div>
+            </div>
+            <div className="p-5 pt-1 flex justify-end gap-2">
+              <button onClick={()=>setAiModal(false)} className="px-4 py-2 rounded-lg text-xs font-semibold bg-gray-100 border text-gray-600" style={{borderColor:"#ddd"}}>Abbrechen</button>
+              <button onClick={generate} className="px-5 py-2 rounded-lg text-xs font-bold" style={{background:"#FF9900",color:dark}}>🚀 Generieren (5 Steps)</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── GENERATION OVERLAY ── */}
+      {generating && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl max-w-lg w-11/12 shadow-2xl overflow-hidden">
+            <div className="p-5 pb-3">
+              <div className="text-base font-bold mb-3">Store wird generiert...</div>
+              {/* Steps */}
+              <div className="space-y-1.5 mb-4">
+                {genSteps.map((s,i) => (
+                  <div key={i} className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs ${i<genStep?"bg-green-50 text-green-700":i===genStep?"bg-amber-50 text-amber-800 font-semibold":"bg-gray-50 text-gray-400"}`}>
+                    <span className="text-sm w-5 text-center">{i<genStep?"✅":i===genStep?"⏳":"⬜"}</span>
+                    <div><div className="font-semibold">{s.name}</div><div className="font-normal opacity-70">{s.desc}</div></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            {/* Live log */}
+            <div className="bg-gray-900 p-4 max-h-48 overflow-y-auto" style={{fontFamily:"'Menlo','Consolas',monospace"}}>
+              {genLog.map((l,i) => <div key={i} className="text-xs text-green-400 leading-relaxed">{l}</div>)}
+              {genLog.length>0 && <div className="text-xs text-green-400 animate-pulse mt-1">_</div>}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── TOAST ── */}
+      {toast && (
+        <div className="fixed top-4 right-4 z-50">
+          <div className={`px-4 py-2.5 rounded-xl text-xs font-semibold shadow-xl text-white ${toast.t==="err"?"bg-red-600":"bg-emerald-700"}`}>
+            {toast.t==="ok"?"✓":"✕"} {toast.m}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
-if(!result.pages||!Array.isArray(result.pages)||result.pages.length===0)throw new Error('Keine Seiten generiert');
-
-setTimeout(()=>{ldStep(2,'done');ldStep(3,'act');},300);
-
-// Validate and fix
-result=validateStore(result);
-
-S.store={
-brandName:brand,
-brandType:result.brandType||'d2c',
-brandColors:result.brandColors||{primary:'#232F3E',secondary:'#FF9900',accent:'#007EB9'},
-brandDescription:result.brandDescription||'',
-menu:result.menu||[],
-pages:result.pages
-};
-S.curPg=result.pages[0].id;
-S.selMod=null;
-
-setTimeout(()=>{
-ldStep(3,'done');
-setTimeout(()=>{
-hideLoad();
-renderAll();save();
-toast(`Store generiert! ${result.pages.length} Seiten, ${result.pages.reduce((a,p)=>a+p.modules.length,0)} Module`,'ok');
-},500);
-},500);
-
-}catch(err){
-hideLoad();
-console.error('AI Error:',err);
-toast('Fehler: '+err.message,'err');
+// ── Form components ──
+function Inp({label,value,onChange,ph}) {
+  return <div><label className="text-xs font-semibold text-gray-500 uppercase block mb-0.5" style={{fontSize:10}}>{label}</label>
+    <input value={value||""} onChange={e=>onChange(e.target.value)} className="w-full px-2 py-1 border rounded text-xs" style={{borderColor:"#ddd"}} placeholder={ph} /></div>;
 }
+function Txt({label,value,onChange,ph}) {
+  return <div><label className="text-xs font-semibold text-gray-500 uppercase block mb-0.5" style={{fontSize:10}}>{label}</label>
+    <textarea value={value||""} onChange={e=>onChange(e.target.value)} className="w-full px-2 py-1 border rounded text-xs resize-y" style={{borderColor:"#ddd",minHeight:56}} placeholder={ph} /></div>;
 }
-
-// ══════════════ AI REFINE ══════════════
-async function refineAI(){
-const input=document.getElementById('rfIn').value.trim();
-if(!input){toast('Bitte Anweisung eingeben','err');return;}
-if(!S.store.pages.length){toast('Erst einen Store erstellen','err');return;}
-
-showLoad('Verfeinere Store...',input);
-
-try{
-const sysPr=`You are an Amazon Brand Store expert. You will receive an existing store structure and a change request. Apply ONLY the requested change. Return the COMPLETE updated store JSON. Keep all existing content intact unless specifically asked to change it. Return ONLY valid JSON.`;
-
-const usrPr=`CURRENT STORE:
-${JSON.stringify(S.store,null,2)}
-
-CHANGE REQUEST: ${input}
-
-Apply the change and return the complete updated JSON structure. Return ONLY the JSON object.`;
-
-const resp=await fetch('https://api.anthropic.com/v1/messages',{
-method:'POST',
-headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01'},
-body:JSON.stringify({
-model:'claude-sonnet-4-20250514',
-max_tokens:16000,
-system:sysPr,
-messages:[{role:'user',content:usrPr}]
-})
-});
-
-const data=await resp.json();
-let fullText='';
-for(const block of data.content||[]){if(block.type==='text')fullText+=block.text;}
-
-if(!fullText)throw new Error('Keine AI-Antwort');
-
-let jsonStr=fullText;
-const jsonMatch=fullText.match(/\{[\s\S]*\}/);
-if(jsonMatch)jsonStr=jsonMatch[0];
-jsonStr=jsonStr.replace(/```json\s*/g,'').replace(/```\s*/g,'').trim();
-
-let result;
-try{result=JSON.parse(jsonStr);}catch(e){jsonStr=fixJSON(jsonStr);result=JSON.parse(jsonStr);}
-
-if(!result.pages||result.pages.length===0)throw new Error('Ungültige Antwort');
-
-result=validateStore(result);
-S.store=result;
-S.curPg=result.pages[0]?.id||null;
-S.selMod=null;
-
-hideLoad();renderAll();save();
-document.getElementById('rfIn').value='';
-toast('Store verfeinert!','ok');
-
-}catch(err){
-hideLoad();
-console.error('Refine Error:',err);
-toast('Fehler: '+err.message,'err');
+function Sel({label,value,opts,onChange}) {
+  return <div><label className="text-xs font-semibold text-gray-500 uppercase block mb-0.5" style={{fontSize:10}}>{label}</label>
+    <select value={value||opts[0]?.[0]} onChange={e=>onChange(e.target.value)} className="w-full px-2 py-1 border rounded text-xs" style={{borderColor:"#ddd"}}>
+      {opts.map(([v,l])=><option key={v} value={v}>{l}</option>)}
+    </select></div>;
 }
-}
-
-// ══════════════ VALIDATION ══════════════
-function validateStore(data){
-// Ensure all pages have IDs
-data.pages.forEach((p,i)=>{
-if(!p.id)p.id='page_'+i+'_'+Date.now();
-if(!p.name)p.name='Seite '+(i+1);
-if(!p.modules)p.modules=[];
-// Ensure all modules have valid content
-p.modules=p.modules.filter(m=>m&&m.type);
-p.modules.forEach(m=>{
-if(!m.content)m.content={};
-// Fix common issues
-if(m.type.startsWith('hero_')&&!m.content.backgroundColor)m.content.backgroundColor='#232F3E';
-if(m.content.products&&!Array.isArray(m.content.products))m.content.products=[];
-if(m.content.categories&&!Array.isArray(m.content.categories))m.content.categories=[];
-if(m.content.icons&&!Array.isArray(m.content.icons))m.content.icons=[];
-if(m.content.testimonials&&!Array.isArray(m.content.testimonials))m.content.testimonials=[];
-if(m.content.certs&&!Array.isArray(m.content.certs))m.content.certs=[];
-if(m.content.stats&&!Array.isArray(m.content.stats))m.content.stats=[];
-if(m.content.steps&&!Array.isArray(m.content.steps))m.content.steps=[];
-if(m.content.images&&!Array.isArray(m.content.images))m.content.images=[];
-});
-});
-
-// Build menu from pages if missing
-if(!data.menu||data.menu.length===0){
-data.menu=data.pages.map(p=>({name:p.name.toUpperCase(),pageId:p.id}));
-}
-return data;
-}
-
-function fixJSON(str){
-// Try to fix truncated JSON by closing brackets
-let depth=0;let inStr=false;let esc=false;
-for(let i=0;i<str.length;i++){
-const c=str[i];
-if(esc){esc=false;continue;}
-if(c==='\\'){esc=true;continue;}
-if(c==='"'){inStr=!inStr;continue;}
-if(inStr)continue;
-if(c==='{'||c==='[')depth++;
-if(c==='}'||c===']')depth--;
-}
-// Close unclosed brackets
-while(depth>0){
-// Try to determine if we need } or ]
-const lastOpen=str.lastIndexOf('{')>str.lastIndexOf('[')?'}':']';
-str+=lastOpen;
-depth--;
-}
-return str;
-}
-// ══════════════ INIT ══════════════
-function init(){
-loadStore();
-if(S.store.pages.length===0)addPg('Homepage','homepage');
-if(!S.curPg)S.curPg=S.store.pages[0]?.id;
-renderModLib();
-renderAll();
-setupDnD();
-}
-
-window.addEventListener('DOMContentLoaded',init);
-
-// Keyboard shortcuts
-document.addEventListener('keydown',e=>{
-if(e.ctrlKey&&e.key==='s'){e.preventDefault();saveStore();}
-if(e.ctrlKey&&e.key==='e'){e.preventDefault();exportJSON();}
-if(e.key==='Delete'&&S.selMod!==null&&!e.target.closest('input,textarea,select')){delMod(S.selMod);}
-if(e.key==='Escape'){S.selMod=null;renderCv();renderProps();hideAIModal();}
-});
-</script>
-</body>
-</html>
