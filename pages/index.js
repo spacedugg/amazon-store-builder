@@ -81,6 +81,9 @@ export default function Home() {
   const [refine, setRefine] = useState("");
   const [toast, setToast] = useState(null);
   const [hoveredTile, setHoveredTile] = useState(null);
+  const [errorLog, setErrorLog] = useState([]);
+  const [showErrors, setShowErrors] = useState(false);
+  const addError = (msg, detail) => setErrorLog(prev=>[...prev, { time:new Date().toLocaleTimeString(), msg, detail: detail||"" }]);
 
   const page = store.pages.find(p=>p.id===curPage) || store.pages[0];
   const tile = page?.tiles.find(t=>t.id===selTile);
@@ -114,22 +117,45 @@ export default function Home() {
   // ── API call via /api/generate with retry for rate limits ──
   const callStep = async (step, body, maxRetries = 3) => {
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
-      const resp = await fetch("/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "step", step, ...body }),
-      });
-      const data = await resp.json();
-      if (data.error && data.error.includes("429") && attempt < maxRetries) {
+      let resp;
+      try {
+        resp = await fetch("/api/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "step", step, ...body }),
+        });
+      } catch(networkErr) {
+        const msg = `Network error at step "${step}": ${networkErr.message}`;
+        addError(msg, networkErr.stack);
+        addLog(`❌ ${msg}`);
+        throw new Error(msg);
+      }
+      let data;
+      const rawText = await resp.text();
+      try {
+        data = JSON.parse(rawText);
+      } catch(parseErr) {
+        const msg = `JSON parse error at step "${step}" (HTTP ${resp.status})`;
+        addError(msg, rawText.slice(0, 2000));
+        addLog(`❌ ${msg}`);
+        throw new Error(`${msg}: ${rawText.slice(0, 200)}`);
+      }
+      if (data.error && (data.error.includes("429") || data.error.includes("rate")) && attempt < maxRetries) {
         const wait = 15 * (attempt + 1);
         addLog(`⏳ Rate limit — warte ${wait}s vor Retry ${attempt+1}/${maxRetries}...`);
         await new Promise(r => setTimeout(r, wait * 1000));
         continue;
       }
-      if (data.error) throw new Error(data.error);
+      if (data.error) {
+        const msg = `Step "${step}" failed: ${data.error}`;
+        addError(msg, JSON.stringify(data, null, 2));
+        throw new Error(data.error);
+      }
       return data.data;
     }
-    throw new Error("Rate limit nach allen Retries. Bitte 1 Minute warten.");
+    const msg = "Rate limit nach allen Retries. Bitte 1 Minute warten.";
+    addError(msg);
+    throw new Error(msg);
   };
 
   // ═══════════════════════════════════════════════════
@@ -186,8 +212,10 @@ export default function Home() {
       addLog(`\n🎉 FERTIG: ${builtPages.length} Seiten, ${tot} Tiles`);
       showToast(`Store: ${builtPages.length} Seiten, ${tot} Tiles`);
     } catch(e) {
-      addLog(`❌ ${e.message}`); showToast(e.message,"err");
-    } finally { setGenerating(false); }
+      addLog(`❌ FEHLER: ${e.message}`);
+      addError(`Generation failed: ${e.message}`, e.stack);
+      showToast(e.message,"err");
+    } finally { setGenerating(false); setShowErrors(true); }
   };
 
   // ── Refine ──
@@ -271,6 +299,7 @@ export default function Home() {
           </div>
           <div style={{display:"flex",gap:6}}>
             <button onClick={()=>setAiModal(true)} style={S.btn(S.orange,S.dark)}>✨ AI Generieren</button>
+            {errorLog.length>0 && <button onClick={()=>setShowErrors(!showErrors)} style={{...S.btnOutline, color:"#ef4444", borderColor:"#ef4444"}}> 🐛 {errorLog.length} Errors</button>}
             <button onClick={exportBriefing} style={S.btnOutline}>📋 Briefing</button>
             <button onClick={exportJSON} style={S.btnOutline}>📥 JSON</button>
           </div>
@@ -546,16 +575,16 @@ export default function Home() {
             </div>
             <div style={{padding:20,paddingTop:4,display:"flex",justifyContent:"flex-end",gap:8}}>
               <button onClick={()=>setAiModal(false)} style={{...S.btnOutline,color:"#6b7280"}}>Abbrechen</button>
-              <button onClick={generate} style={S.btn(S.orange,S.dark)}>🚀 Generieren (5 Steps)</button>
+              <button onClick={generate} style={S.btn(S.orange,S.dark)}>🚀 Generieren</button>
             </div>
           </div>
         </div>
       )}
 
-      {/* GENERATION OVERLAY */}
+      {/* GENERATION OVERLAY — stays open until dismissed */}
       {generating && (
         <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,.8)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:50}}>
-          <div style={{background:"#fff",borderRadius:16,maxWidth:520,width:"92%",boxShadow:"0 25px 50px rgba(0,0,0,.3)",overflow:"hidden"}}>
+          <div style={{background:"#fff",borderRadius:16,maxWidth:600,width:"92%",boxShadow:"0 25px 50px rgba(0,0,0,.3)",overflow:"hidden",maxHeight:"80vh",display:"flex",flexDirection:"column"}}>
             <div style={{padding:20,paddingBottom:12}}>
               <div style={{fontSize:16,fontWeight:700,marginBottom:12}}>Store wird generiert...</div>
               {genSteps.map((s,i) => (
@@ -567,9 +596,33 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <div style={{background:"#111827",padding:16,maxHeight:200,overflowY:"auto",fontFamily:"'Menlo','Consolas',monospace"}}>
-              {genLog.map((l,i) => <div key={i} style={{fontSize:12,color:"#4ade80",lineHeight:1.6}}>{l}</div>)}
+            <div style={{background:"#111827",padding:16,overflowY:"auto",flex:1,fontFamily:"'Menlo','Consolas',monospace"}}>
+              {genLog.map((l,i) => <div key={i} style={{fontSize:11,color:l.includes("❌")?"#f87171":"#4ade80",lineHeight:1.7,wordBreak:"break-all"}}>{l}</div>)}
               {genLog.length>0 && <div style={{fontSize:12,color:"#4ade80",animation:"pulse 1s infinite"}}>_</div>}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ERROR LOG PANEL */}
+      {showErrors && !generating && errorLog.length>0 && (
+        <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,.6)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:50}} onClick={()=>setShowErrors(false)}>
+          <div style={{background:"#fff",borderRadius:16,maxWidth:700,width:"92%",maxHeight:"80vh",display:"flex",flexDirection:"column",boxShadow:"0 25px 50px rgba(0,0,0,.3)"}} onClick={e=>e.stopPropagation()}>
+            <div style={{padding:16,borderBottom:"1px solid #e5e7eb",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+              <div style={{fontSize:16,fontWeight:700,color:"#dc2626"}}>🐛 Error Log ({errorLog.length})</div>
+              <div style={{display:"flex",gap:8}}>
+                <button onClick={()=>{setErrorLog([]);setShowErrors(false);}} style={{padding:"4px 12px",borderRadius:6,fontSize:12,fontWeight:600,background:"#f3f4f6",border:"1px solid #ddd"}}>Clear All</button>
+                <button onClick={()=>setShowErrors(false)} style={{padding:"4px 12px",borderRadius:6,fontSize:12,fontWeight:600,background:"#f3f4f6",border:"1px solid #ddd"}}>✕ Close</button>
+              </div>
+            </div>
+            <div style={{flex:1,overflowY:"auto",padding:12}}>
+              {errorLog.map((e,i) => (
+                <div key={i} style={{marginBottom:12,padding:12,background:"#fef2f2",border:"1px solid #fecaca",borderRadius:8}}>
+                  <div style={{fontSize:11,color:"#9ca3af",marginBottom:4}}>{e.time}</div>
+                  <div style={{fontSize:13,fontWeight:600,color:"#dc2626",marginBottom:4,wordBreak:"break-all"}}>{e.msg}</div>
+                  {e.detail && <pre style={{fontSize:10,color:"#6b7280",background:"#fff",padding:8,borderRadius:4,border:"1px solid #e5e7eb",overflow:"auto",maxHeight:200,whiteSpace:"pre-wrap",wordBreak:"break-all"}}>{e.detail}</pre>}
+                </div>
+              ))}
             </div>
           </div>
         </div>
