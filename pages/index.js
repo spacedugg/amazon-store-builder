@@ -114,56 +114,78 @@ export default function Home() {
     r.readAsDataURL(file);
   };
 
-  // ── API call via /api/generate with retry for rate limits ──
-  const callStep = async (step, body, maxRetries = 3) => {
-    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+  // ── Prompts ──
+  const PROMPTS = {
+    research: `You research brands for Amazon Brand Store creation. Use web search to find:
+1. Brand website, mission, values, visual identity (colors, style)
+2. Product categories and range
+3. Amazon presence: product names, ASINs (B0XXXXXXXXX format), categories
+Do NOT collect prices. Return ONLY valid JSON:
+{"brandName":"...","description":"1-2 sentences","type":"premium|d2c|mission|mass_market","tone":"...","colors":{"primary":"#hex","secondary":"#hex","accent":"#hex"},"categories":["Cat1"],"usps":["USP1","USP2","USP3"],"targetAudience":"...","products":[{"name":"...","asin":"B0XX","category":"Cat"}],"amazonCategories":["..."],"hasExistingStore":false}`,
+    architecture: `You plan Amazon Brand Store page structures. Homepage first, then 1 page per major category. Premium: About page. D2C: Bestseller/Bundles. Mission: Impact page. Mass Market: Deals + categories. 4-12 pages.
+Tile types: hero_image, image, image_with_text, shoppable_image, text, video, background_video, gallery, product, product_grid, best_sellers, recommended, featured_deals
+Return ONLY valid JSON:
+{"pages":[{"id":"homepage","name":"Homepage","purpose":"...","tileSequence":["hero_image: keyvisual","image x3 medium: categories"]}]}`,
+    content: `You create content for ONE Amazon Brand Store page with designer image briefings.
+ONLY real tile types: hero_image, image, image_with_text, shoppable_image, text, video, background_video, gallery, product, product_grid, best_sellers, recommended, featured_deals. Max 20 tiles, max 1 product_grid, max 1 gallery. Every image tile MUST have imageBriefing: DIMENSIONS (px) | CONTENT | TEXT IN IMAGE | COLORS (hex) | MOOD | MOBILE. All text in marketplace language, no placeholders.
+Return ONLY valid JSON:
+{"pageName":"...","heroImageBriefing":"...","tiles":[{"type":"image_with_text","size":"full_width","content":{"headline":"...","body":"..."},"imageBriefing":"DIMENSIONS: 3000x1500px | CONTENT: ... | TEXT: ... | COLORS: ... | MOOD: ..."}]}`,
+    refine: `Refine an Amazon Brand Store. ONLY real tile types: hero_image, image, image_with_text, shoppable_image, text, video, background_video, gallery, product, product_grid, best_sellers, recommended, featured_deals. Keep imageBriefings. Return COMPLETE store JSON.`
+  };
+  const LANG = { de:"German", com:"English", "co.uk":"English", fr:"French", it:"Italian", es:"Spanish" };
+
+  // ── Direct call via edge proxy (no timeout, key stays server-side) ──
+  const callAI = async (system, user, useSearch = false) => {
+    const body = {
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 6000,
+      system,
+      messages: [{ role: "user", content: user }],
+    };
+    if (useSearch) body.tools = [{ type: "web_search_20250305", name: "web_search" }];
+
+    for (let attempt = 0; attempt < 3; attempt++) {
       let resp;
       try {
-        resp = await fetch("/api/generate", {
+        resp = await fetch("/api/proxy", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ action: "step", step, ...body }),
+          body: JSON.stringify(body),
         });
-      } catch(networkErr) {
-        const msg = `Network error at step "${step}": ${networkErr.message}`;
-        addError(msg, networkErr.stack);
-        addLog(`❌ ${msg}`);
-        throw new Error(msg);
+      } catch (netErr) {
+        const msg = `Network error: ${netErr.message}`;
+        addError(msg); throw new Error(msg);
       }
-      let data;
-      const rawText = await resp.text();
-      try {
-        data = JSON.parse(rawText);
-      } catch(parseErr) {
-        const msg = `JSON parse error at step "${step}" (HTTP ${resp.status})`;
-        addError(msg, rawText.slice(0, 2000));
-        addLog(`❌ ${msg}`);
-        throw new Error(`${msg}: ${rawText.slice(0, 200)}`);
-      }
-      if (data.error && (data.error.includes("429") || data.error.includes("rate")) && attempt < maxRetries) {
+      if (resp.status === 429 && attempt < 2) {
         const wait = 15 * (attempt + 1);
-        addLog(`⏳ Rate limit — warte ${wait}s vor Retry ${attempt+1}/${maxRetries}...`);
+        addLog(`⏳ Rate limit — warte ${wait}s...`);
         await new Promise(r => setTimeout(r, wait * 1000));
         continue;
       }
-      if (data.error) {
-        const msg = `Step "${step}" failed: ${data.error}`;
-        addError(msg, JSON.stringify(data, null, 2));
-        throw new Error(data.error);
+      if (!resp.ok) {
+        const raw = await resp.text();
+        const msg = `API ${resp.status}: ${raw.slice(0, 300)}`;
+        addError(msg, raw); throw new Error(msg);
       }
-      return data.data;
+      const data = await resp.json();
+      const text = (data.content || []).filter(b => b.type === "text").map(b => b.text).join("");
+      const match = text.match(/\{[\s\S]*\}/);
+      if (!match) {
+        const msg = "No JSON in AI response";
+        addError(msg, text.slice(0, 1000)); throw new Error(msg);
+      }
+      return JSON.parse(match[0]);
     }
-    const msg = "Rate limit nach allen Retries. Bitte 1 Minute warten.";
-    addError(msg);
-    throw new Error(msg);
+    throw new Error("Rate limit nach Retries. 1 Minute warten.");
   };
 
   // ═══════════════════════════════════════════════════
-  // MULTI-STEP GENERATION (4 steps: research, architecture, content, validate)
+  // MULTI-STEP GENERATION — direct browser→Anthropic calls
   // ═══════════════════════════════════════════════════
   const generate = async () => {
     if(!aiBrand.trim()) return showToast("Markenname fehlt!","err");
     setAiModal(false); setGenerating(true); setGenLog([]);
+    const lang = LANG[aiMp] || "German";
     const steps = [
       {name:"Marke & Amazon recherchieren", desc:"Web Search: Website, Produkte, ASINs, Kategorien..."},
       {name:"Store-Architektur erstellen", desc:"Seiten, Navigation, Tile-Sequenzen..."},
@@ -173,24 +195,28 @@ export default function Home() {
     setGenSteps(steps);
 
     try {
-      // STEP 1: Combined brand + Amazon research
+      // STEP 1: Research with web search
       setGenStep(0); addLog("🔍 Recherchiere Marke & Amazon-Produkte...");
-      const brandProfile = await callStep("research", { brandName:aiBrand, marketplace:aiMp, category:aiCat, additionalInfo:aiInfo });
+      const brandProfile = await callAI(PROMPTS.research,
+        `Research "${aiBrand}" for Amazon.${aiMp}. ${aiCat ? `Category: ${aiCat}.` : ""} ${aiInfo || ""} JSON in English, brand content in ${lang}.`, true);
       addLog(`✅ Brand: ${brandProfile.type}, ${brandProfile.categories?.length||0} Kategorien, ${brandProfile.products?.length||0} Produkte`);
 
       // STEP 2: Architecture
       setGenStep(1); addLog("🏗️ Erstelle Store-Architektur...");
-      const architecture = await callStep("architecture", { marketplace:aiMp, brandProfile });
+      const architecture = await callAI(PROMPTS.architecture,
+        `Brand: ${JSON.stringify(brandProfile)}\nCategories: ${(brandProfile.amazonCategories || brandProfile.categories || []).join(", ")}\nProducts: ${brandProfile.products?.length || 0}\nLanguage: ${lang}`);
       addLog(`✅ ${architecture.pages?.length||0} Seiten geplant`);
       architecture.pages?.forEach(p => addLog(`   📄 ${p.name}: ${p.purpose?.slice(0,60)}...`));
 
       // STEP 3: Content per page
       setGenStep(2);
+      const products = (brandProfile.products || []).slice(0, 15).map(p => `${p.name} (${p.asin})`).join(", ");
       const builtPages = [];
       for(let i=0; i<(architecture.pages||[]).length; i++) {
         const pagePlan = architecture.pages[i];
         addLog(`📝 Seite ${i+1}/${architecture.pages.length}: "${pagePlan.name}"...`);
-        const pageContent = await callStep("content", { marketplace:aiMp, brandProfile, pagePlan });
+        const pageContent = await callAI(PROMPTS.content,
+          `PAGE: ${JSON.stringify(pagePlan)}\nBRAND: type=${brandProfile.type}, tone=${brandProfile.tone}, colors=${JSON.stringify(brandProfile.colors)}, USPs=${(brandProfile.usps||[]).join(", ")}\nPRODUCTS: ${products}\nLanguage: ${lang}`);
         const validTiles = (pageContent.tiles||[]).filter(t=>TILES[t.type]).map(t=>mkTile(t.type,t.size,t.content||{},t.imageBriefing||""));
         builtPages.push({ id:pagePlan.id||`page_${i}`, name:pageContent.pageName||pagePlan.name, heroImageBriefing:pageContent.heroImageBriefing||"", tiles:validTiles });
         addLog(`   ✅ ${validTiles.length} Tiles, ${validTiles.filter(t=>t.imageBriefing).length} Briefings`);
@@ -226,10 +252,8 @@ export default function Home() {
     const storeClean = JSON.parse(JSON.stringify(store));
     storeClean.pages.forEach(p=>p.tiles.forEach(t=>{t.image=null;}));
     try {
-      const resp = await fetch("/api/generate", { method:"POST", headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({ action:"refine", store:storeClean, instruction:refine })});
-      const result = await resp.json();
-      if(result.error) throw new Error(result.error);
+      const result = await callAI(PROMPTS.refine,
+        `STORE:\n${JSON.stringify(storeClean, null, 2)}\n\nCHANGE: ${refine}\n\nReturn complete JSON.`);
       if(result.pages?.length) {
         const pages = result.pages.map((p,i)=>({
           ...mkPage(p.name, p.id||`page_${i}`), heroImageBriefing:p.heroImageBriefing||"",
@@ -238,7 +262,7 @@ export default function Home() {
         up(s=>{ s.pages=pages; s.brandProfile=result.brandProfile||s.brandProfile; });
         setCurPage(pages[0]?.id); addLog("✅ Verfeinert"); showToast("Store verfeinert!");
       }
-    } catch(e) { addLog(`❌ ${e.message}`); showToast(e.message,"err"); }
+    } catch(e) { addLog(`❌ ${e.message}`); addError(e.message); showToast(e.message,"err"); }
     finally { setGenerating(false); setRefine(""); }
   };
 
@@ -299,7 +323,7 @@ export default function Home() {
           </div>
           <div style={{display:"flex",gap:6}}>
             <button onClick={()=>setAiModal(true)} style={S.btn(S.orange,S.dark)}>✨ AI Generieren</button>
-            {errorLog.length>0 && <button onClick={()=>setShowErrors(!showErrors)} style={{...S.btnOutline, color:"#ef4444", borderColor:"#ef4444"}}> 🐛 {errorLog.length} Errors</button>}
+            {errorLog.length>0 && <button onClick={()=>setShowErrors(!showErrors)} style={{...S.btnOutline, color:"#ef4444", borderColor:"#ef4444"}}> 🐛 {errorLog.length}</button>}
             <button onClick={exportBriefing} style={S.btnOutline}>📋 Briefing</button>
             <button onClick={exportJSON} style={S.btnOutline}>📥 JSON</button>
           </div>
