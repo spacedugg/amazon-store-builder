@@ -3,535 +3,644 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amazon Brand Store Builder — Multi-Step AI</title>
+<title>Amazon Brand Store Builder</title>
 <style>
-:root { --orange:#FF9900; --dark:#1a1a2e; --blue:#007EB9; --green:#059669; --red:#dc2626; --gray:#6b7280; --border:#e2e4e8; --bg:#f0f1f3; }
+:root{--amz:#FF9900;--amz-dark:#232F3E;--amz-blue:#007EB9;--amz-teal:#008296;--green:#059669;--red:#dc2626;--gray:#6b7280;--border:#d5d9d9;--bg:#f0f2f2;--card:#fff;--text:#0F1111;--text2:#565959}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--dark);-webkit-font-smoothing:antialiased}
-button{cursor:pointer;border:none;background:none;font-family:inherit}
-input,textarea,select{font-family:inherit;outline:none}
-::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
+body{font-family:'Amazon Ember','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;-webkit-font-smoothing:antialiased}
+button{cursor:pointer;border:none;background:none;font-family:inherit;font-size:inherit}
+input,textarea,select{font-family:inherit;outline:none;font-size:13px}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
 
-#app{display:flex;flex-direction:column;height:100vh}
+/* Top bar */
+.topbar{display:flex;align-items:center;height:44px;padding:0 16px;gap:12px;background:var(--amz-dark);flex-shrink:0;color:#fff;font-size:13px}
+.topbar .logo{font-weight:700;font-size:14px;display:flex;align-items:center;gap:6px}
+.topbar .logo span{color:var(--amz)}
+.topbar .spacer{flex:1}
+.topbar-btn{padding:5px 14px;border-radius:3px;font-size:13px;font-weight:600;border:1px solid #888;color:#fff}
+.topbar-btn:hover{background:rgba(255,255,255,.08)}
+.topbar-btn.primary{background:var(--amz);color:var(--amz-dark);border-color:var(--amz)}
 
-/* Header */
-header{display:flex;align-items:center;height:52px;padding:0 16px;gap:12px;background:var(--dark);flex-shrink:0}
-.logo{display:flex;align-items:center;gap:8px;color:#fff;font-weight:700;font-size:14px}
-.badge{display:inline-block;padding:2px 6px;border-radius:4px;font-size:9px;font-weight:800;background:var(--orange);color:var(--dark)}
-.brand-info{display:flex;align-items:center;gap:8px;margin-left:12px;padding:4px 8px;border-radius:6px;background:rgba(255,255,255,.08)}
-.brand-dot{width:12px;height:12px;border-radius:50%}
-.brand-text{font-size:12px;color:#9ca3af}
-.modes{flex:1;display:flex;justify-content:center;gap:4px}
-.mode-btn{padding:4px 12px;border-radius:6px;font-size:12px;font-weight:600;color:#6b7280}
-.mode-btn.active{color:#fff;background:rgba(255,255,255,.12)}
-.actions{display:flex;gap:6px}
-.btn{padding:6px 12px;border-radius:8px;font-size:12px;font-weight:700;background:var(--orange);color:var(--dark)}
-.btn-out{padding:6px 10px;border-radius:8px;font-size:12px;font-weight:600;color:#9ca3af;border:1px solid #4b5563}
-.btn-out:hover{color:#fff}
-.btn-err{padding:6px 10px;border-radius:8px;font-size:12px;font-weight:600;color:var(--red);border:1px solid var(--red)}
+/* Toolbar */
+.toolbar{display:flex;align-items:center;height:40px;padding:0 16px;gap:12px;background:#fff;border-bottom:1px solid var(--border);flex-shrink:0}
+.device-toggle{display:flex;border:1px solid var(--border);border-radius:3px;overflow:hidden}
+.device-toggle button{padding:4px 12px;font-size:12px;font-weight:600;background:#fff;border-right:1px solid var(--border)}
+.device-toggle button:last-child{border-right:none}
+.device-toggle button.active{background:var(--amz-dark);color:#fff}
+.toolbar .spacer{flex:1}
+.undo-redo{display:flex;gap:4px}
+.undo-redo button{width:28px;height:28px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--gray);border:1px solid var(--border)}
 
-/* Main */
-.main{display:flex;flex:1;overflow:hidden}
+/* Layout */
+.layout{display:flex;flex:1;overflow:hidden}
 
-/* Sidebar */
-.sidebar{width:220px;background:#fff;border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
-.sidebar-title{padding:10px;border-bottom:1px solid var(--border);font-size:10px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px}
-.sidebar-scroll{flex:1;overflow-y:auto;padding:6px}
-.grp-label{font-size:9px;font-weight:700;color:#9ca3af;text-transform:uppercase;padding:0 8px;margin:8px 0 2px;letter-spacing:.5px}
-.tile-btn{width:100%;display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:6px;text-align:left;font-size:12px}
-.tile-btn:hover{background:#f5f5f5}
-.tile-btn .icon{font-size:14px;flex-shrink:0}
-.tile-btn .name{font-weight:500;color:#374151}
+/* Left sidebar — Pages */
+.sidebar-left{width:220px;background:#fff;border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
+.sl-header{padding:12px;border-bottom:1px solid var(--border)}
+.sl-header h2{font-size:18px;font-weight:800;margin-bottom:4px}
+.sl-header .link{font-size:12px;color:var(--amz-blue);text-decoration:none}
+.add-page-btn{display:flex;align-items:center;gap:6px;padding:8px 12px;margin:8px 12px;border:1px solid var(--border);border-radius:4px;font-size:13px;font-weight:600;background:#fff}
+.add-page-btn:hover{background:#f7fafa}
+.page-list{flex:1;overflow-y:auto;padding:4px 8px}
+.page-item{display:flex;align-items:center;gap:4px;padding:8px 8px;border-left:3px solid transparent;border-radius:0 4px 4px 0;font-size:13px;font-weight:500;margin-bottom:2px;cursor:pointer}
+.page-item:hover{background:#f7fafa}
+.page-item.active{border-left-color:var(--amz-blue);background:#e6f3f8;font-weight:700}
+.page-item .drag{color:#bbb;cursor:grab;font-size:16px;letter-spacing:-2px}
+.page-item .name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.page-item .menu-btn{color:var(--gray);font-size:16px;line-height:1}
 
 /* Canvas */
 .canvas-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.page-tabs{display:flex;align-items:center;gap:4px;padding:6px 12px;background:#fff;border-bottom:1px solid var(--border);overflow-x:auto;flex-shrink:0}
-.ptab{padding:4px 10px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap;border:1px solid #e5e7eb;color:#6b7280;display:flex;align-items:center;gap:4px}
-.ptab.active{background:var(--dark);border-color:var(--dark);color:#fff}
-.ptab .del{opacity:.4;margin-left:4px;font-size:10px;cursor:pointer}.ptab .del:hover{opacity:1}
-.add-page{padding:4px 8px;border:1px dashed #d1d5db;border-radius:6px;font-size:12px;color:#9ca3af}
-.canvas{flex:1;overflow-y:auto;padding:16px}
-.canvas-inner{max-width:900px;margin:0 auto}
+.canvas{flex:1;overflow-y:auto;background:var(--bg);padding:16px}
+.canvas-inner{max-width:960px;margin:0 auto}
 
-/* Hero */
-.hero{margin-bottom:12px;border-radius:12px;border:2px dashed #d1d5db;min-height:100px;background:linear-gradient(135deg,var(--dark),#2d2d5e);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;color:rgba(255,255,255,.4);text-align:center}
-.hero .emoji{font-size:20px;margin-bottom:4px}.hero .spec{font-size:12px;font-weight:600}.hero .brief{font-size:11px;margin-top:4px;color:rgba(255,255,255,.25);font-style:italic}
+/* Store header preview */
+.store-header{background:#fff;border:2px solid transparent;border-radius:4px;margin-bottom:12px;cursor:pointer;transition:border-color .15s}
+.store-header:hover,.store-header.sel{border-color:var(--amz-blue)}
+.store-header-inner{display:flex;align-items:center;padding:12px 20px;gap:12px}
+.store-logo{width:48px;height:48px;background:#f3f4f6;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.store-brand{font-weight:700;font-size:14px}
+.store-nav{display:flex;gap:20px;padding:0 20px 10px;font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase}
+.store-nav span{cursor:pointer;padding-bottom:4px}
+.store-nav span.active{color:var(--amz-blue);border-bottom:2px solid var(--amz-blue)}
 
-/* Tile card */
-.tile-card{background:#fff;border-radius:12px;overflow:hidden;margin-bottom:10px;cursor:pointer;position:relative;border:2px solid transparent;box-shadow:0 1px 3px rgba(0,0,0,.04);transition:all .15s}
-.tile-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.tile-card.selected{box-shadow:0 4px 16px rgba(0,0,0,.1)}
-.tile-badge{position:absolute;top:6px;left:6px;z-index:10;padding:2px 6px;border-radius:4px;font-size:9px;font-weight:700;background:var(--dark);color:#fff}
-.tile-toolbar{position:absolute;top:6px;right:6px;z-index:10;display:none;gap:3px}
-.tile-card:hover .tile-toolbar,.tile-card.selected .tile-toolbar{display:flex}
-.tb-btn{width:22px;height:22px;border-radius:4px;background:rgba(255,255,255,.9);box-shadow:0 1px 4px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;font-size:10px}
-.tb-btn:hover{background:var(--dark);color:#fff}
-.briefing-badge{position:absolute;bottom:6px;right:6px;z-index:10;padding:2px 6px;border-radius:4px;font-size:9px;font-weight:700;background:#fef3c7;color:#92400e}
-.img-badge{position:absolute;bottom:6px;left:6px;z-index:10;padding:2px 6px;border-radius:4px;font-size:9px;font-weight:700;background:#dcfce7;color:#166534}
+/* Section */
+.section{background:#fff;border:2px solid transparent;border-radius:4px;margin-bottom:12px;cursor:pointer;transition:border-color .15s;position:relative}
+.section:hover,.section.sel{border-color:var(--amz-blue)}
+.section-label{position:absolute;top:-10px;left:12px;background:var(--amz-blue);color:#fff;font-size:10px;font-weight:700;padding:1px 8px;border-radius:3px;z-index:5;display:none}
+.section:hover .section-label,.section.sel .section-label{display:block}
 
-/* Tile placeholders */
-.tile-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;background:#f3f4f6;color:#9ca3af;min-height:140}
-.tile-ph .emoji{font-size:30px;margin-bottom:8px}.tile-ph .label{font-size:12px;font-weight:600}.tile-ph .brief{font-size:11px;margin-top:4px;font-style:italic;max-width:400px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.tile-product{padding:20px;text-align:center}.tile-auto{padding:20px;text-align:center}
-.tile-text{padding:20px}
+/* Layout grid in section */
+.layout-grid{display:grid;gap:0;min-height:120px}
+.layout-cell{border:1px dashed #d5d9d9;display:flex;align-items:center;justify-content:center;min-height:100px;background:#fafafa;transition:background .15s;position:relative}
+.layout-cell:hover{background:#fff7ed}
+.layout-cell.filled{background:#fff;border-style:solid}
+.cell-placeholder{display:flex;flex-direction:column;align-items:center;gap:4px;color:#bbb;font-size:13px;font-weight:500}
 
-/* Properties */
-.props{width:280px;background:#fff;border-left:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
-.props-title{padding:10px;border-bottom:1px solid var(--border);font-size:10px;font-weight:700;color:#9ca3af;text-transform:uppercase}
-.props-scroll{flex:1;overflow-y:auto;padding:10px}
-.spec-box{background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;padding:10px;margin-bottom:12px;font-size:12px;color:#92400e}
-.spec-box b{display:inline}
-.field{margin-bottom:12px}
-.field label{display:block;margin-bottom:3px;font-size:10px;font-weight:600;color:#9ca3af;text-transform:uppercase;letter-spacing:.3px}
-.field input,.field select,.field textarea{width:100%;padding:6px 10px;border-radius:8px;font-size:12px;border:1px solid #ddd}
-.field textarea{resize:vertical;min-height:60px}
+/* Tile in cell */
+.tile-in-cell{width:100%;height:100%;display:flex;flex-direction:column}
+.tile-badge-small{position:absolute;top:4px;left:4px;background:rgba(0,0,0,.6);color:#fff;font-size:9px;font-weight:700;padding:1px 6px;border-radius:2px;z-index:5}
+.tile-img-ph{flex:1;display:flex;align-items:center;justify-content:center;background:#f3f4f6;color:#d1d5db;font-size:28px;min-height:80px}
+.tile-text-area{padding:10px;font-size:13px;color:var(--text2);line-height:1.5}
+.tile-product-ph{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:16px}
+.tile-auto-ph{padding:20px;text-align:center;background:linear-gradient(135deg,#f0f7ff,#fff7ed);font-weight:600;font-size:13px}
 
-/* Briefing panel */
-.briefing-panel{width:320px;background:#fff;border-left:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
-.bp-scroll{flex:1;overflow-y:auto;padding:10px}
-.bp-brand{background:#f9fafb;border:1px solid var(--border);border-radius:8px;padding:10px;margin-bottom:12px}
-.bp-hero{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px;margin-bottom:8px}
-.bp-tile{border-radius:8px;padding:10px;margin-bottom:6px;border:1px solid #fcd34d;background:#fffbeb}
-.bp-tile.no-img{border-color:#e5e7eb;background:#f9fafb}
+/* Right sidebar — Properties */
+.sidebar-right{width:300px;background:#fff;border-left:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
+.sr-header{padding:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.sr-header h3{font-size:15px;font-weight:700}
+.sr-header .close-btn{font-size:12px;color:var(--amz-blue);font-weight:600}
+.sr-scroll{flex:1;overflow-y:auto;padding:12px}
+.sr-section{margin-bottom:16px}
+.sr-section h4{font-size:13px;font-weight:700;margin-bottom:8px}
+.sr-field{margin-bottom:12px}
+.sr-field label{display:block;font-size:12px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.sr-field .hint{font-size:11px;color:var(--text2);margin-top:2px}
+.sr-field input,.sr-field textarea,.sr-field select{width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:3px}
+.sr-field textarea{resize:vertical;min-height:60px}
+.sr-upload{width:100%;padding:16px;border:1px dashed var(--border);border-radius:4px;text-align:center;color:var(--text2);font-size:13px;cursor:pointer;background:#fafafa}
+.sr-upload:hover{background:#f0f7ff;border-color:var(--amz-blue)}
+.sr-upload.has-img{border-color:var(--green);background:#ecfdf5}
+.sr-specs{background:#fef9e7;border:1px solid #f7dc6f;border-radius:4px;padding:8px;font-size:11px;color:#7d6608;margin-bottom:12px}
+.sr-specs b{font-weight:700}
 
-/* Refine bar */
-.refine-bar{display:flex;gap:8px;padding:10px;background:#fff;border-top:1px solid var(--border);flex-shrink:0}
-.refine-bar input{flex:1;padding:6px 10px;border-radius:8px;font-size:12px;border:1px solid #ddd}
+/* Add section button */
+.add-section-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border:1px solid var(--border);border-radius:4px;font-size:13px;font-weight:600;background:#fff;margin-bottom:12px;width:100%}
+.add-section-btn:hover{background:#f7fafa}
 
-/* Modal */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:50;backdrop-filter:blur(4px)}
-.modal{background:#fff;border-radius:16px;max-width:420px;width:92%;box-shadow:0 25px 50px rgba(0,0,0,.25)}
-.modal h2{font-size:18px;font-weight:800}
-.modal p{font-size:12px;color:#9ca3af;margin-top:2px}
+/* Layout picker modal */
+.layout-picker{position:fixed;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;z-index:50}
+.lp-box{background:#fff;border-radius:8px;width:380px;max-height:80vh;overflow-y:auto;box-shadow:0 20px 40px rgba(0,0,0,.2)}
+.lp-header{padding:16px;border-bottom:1px solid var(--border);font-size:16px;font-weight:800}
+.lp-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:16px}
+.lp-option{border:2px solid var(--border);border-radius:4px;padding:8px;cursor:pointer;display:grid;gap:3px;min-height:60px;transition:border-color .15s}
+.lp-option:hover{border-color:var(--amz)}
+.lp-option.sel{border-color:var(--amz-blue)}
+.lp-cell{background:#e8e8e8;border-radius:2px;min-height:20px}
+
+/* Tile picker modal */
+.tile-picker{position:fixed;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;z-index:50}
+.tp-box{background:#fff;border-radius:8px;width:360px;max-height:80vh;overflow-y:auto;box-shadow:0 20px 40px rgba(0,0,0,.2)}
+.tp-header{padding:16px;border-bottom:1px solid var(--border);font-size:16px;font-weight:800}
+.tp-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #f3f3f3;cursor:pointer;transition:background .1s}
+.tp-item:hover{background:#f7fafa}
+.tp-item .icon{font-size:20px;width:32px;text-align:center}
+.tp-item .info h5{font-size:13px;font-weight:700;margin-bottom:2px}
+.tp-item .info p{font-size:11px;color:var(--text2)}
 
 /* Generation overlay */
 .gen-bg{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:50}
-.gen-box{background:#fff;border-radius:16px;max-width:600px;width:92%;box-shadow:0 25px 50px rgba(0,0,0,.3);overflow:hidden;max-height:80vh;display:flex;flex-direction:column}
-.gen-step{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;margin-bottom:6px;font-size:12px}
+.gen-box{background:#fff;border-radius:8px;max-width:560px;width:92%;max-height:80vh;display:flex;flex-direction:column;overflow:hidden}
+.gen-steps{padding:16px}
+.gen-step{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:6px;margin-bottom:4px;font-size:12px}
 .gen-step.done{background:#ecfdf5;color:#166534}.gen-step.active{background:#fffbeb;color:#92400e;font-weight:600}.gen-step.pending{background:#f9fafb;color:#9ca3af}
-.gen-log{background:#111827;padding:16px;overflow-y:auto;flex:1;font-family:'Menlo','Consolas',monospace}
-.gen-log div{font-size:11px;color:#4ade80;line-height:1.7;word-break:break-all}
+.gen-log{background:#111827;padding:12px;overflow-y:auto;flex:1;font-family:'Menlo','Consolas',monospace}
+.gen-log div{font-size:11px;color:#4ade80;line-height:1.6;word-break:break-all}
 .gen-log div.err{color:#f87171}
 
+/* Modal generic */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:50}
+.modal{background:#fff;border-radius:8px;max-width:440px;width:92%;box-shadow:0 20px 40px rgba(0,0,0,.2)}
+
 /* Error panel */
-.err-panel{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:50}
-.err-box{background:#fff;border-radius:16px;max-width:700px;width:92%;max-height:80vh;display:flex;flex-direction:column;box-shadow:0 25px 50px rgba(0,0,0,.3)}
-.err-item{margin-bottom:12px;padding:12px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px}
-.err-item .time{font-size:11px;color:#9ca3af;margin-bottom:4px}
-.err-item .msg{font-size:13px;font-weight:600;color:var(--red);margin-bottom:4px;word-break:break-all}
-.err-item pre{font-size:10px;color:var(--gray);background:#fff;padding:8px;border-radius:4px;border:1px solid #e5e7eb;overflow:auto;max-height:200px;white-space:pre-wrap;word-break:break-all}
+.err-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:60}
+.err-box{background:#fff;border-radius:8px;max-width:700px;width:92%;max-height:80vh;display:flex;flex-direction:column}
+.err-item{margin-bottom:8px;padding:10px;background:#fef2f2;border:1px solid #fecaca;border-radius:4px}
+.err-item .time{font-size:10px;color:#9ca3af}.err-item .msg{font-size:12px;font-weight:600;color:var(--red);word-break:break-all}
+.err-item pre{font-size:10px;color:var(--gray);background:#fff;padding:6px;border-radius:3px;border:1px solid #eee;max-height:150px;overflow:auto;white-space:pre-wrap;word-break:break-all;margin-top:4px}
 
 /* Toast */
-.toast{position:fixed;top:16px;right:16px;z-index:60;padding:10px 16px;border-radius:12px;font-size:12px;font-weight:600;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.toast{position:fixed;top:12px;right:12px;z-index:70;padding:8px 16px;border-radius:4px;font-size:13px;font-weight:600;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15)}
 .toast.ok{background:var(--green)}.toast.err{background:var(--red)}
 
-/* Empty */
-.empty{border:2px dashed #d1d5db;border-radius:16px;padding:40px;text-align:center;color:#9ca3af;background:#fff}
+/* Refine bar */
+.refine-bar{display:flex;gap:8px;padding:8px 12px;background:#fff;border-top:1px solid var(--border);flex-shrink:0}
+.refine-bar input{flex:1;padding:6px 10px;border-radius:4px;font-size:13px;border:1px solid var(--border)}
 </style>
 </head>
 <body>
 <div id="app"></div>
 <script>
-// ══════════════════════════════════════════════════
-// AMAZON BRAND STORE BUILDER — Single HTML, Direct API
-// ══════════════════════════════════════════════════
-
-const TILES = {
-  hero_image:{name:"Hero Image",icon:"🖼️",grp:"Header",sizes:["full_width"],needsImage:true,specs:{full_width:{min:"3000×600px",rec:"3000×1200px",max:"5MB",safe:"Mittlere 70%",fmt:"JPG/PNG"}}},
-  image:{name:"Image",icon:"🖼️",grp:"Content",sizes:["full_width","large","medium","small"],needsImage:true,specs:{full_width:{min:"1500×20px",rec:"3000px Breite",max:"5MB"},large:{min:"1500×1500px"},medium:{min:"1500×750px"},small:{min:"750×750px"}}},
-  image_with_text:{name:"Image + Text",icon:"📝",grp:"Content",sizes:["full_width","large","medium","small"],needsImage:true,specs:{full_width:{min:"3000×1500px",max:"5MB"},large:{min:"1500×1500px"},medium:{min:"1500×750px"},small:{min:"750×750px"}}},
-  shoppable_image:{name:"Shoppable Image",icon:"🛒",grp:"Content",sizes:["full_width","large","medium","small"],needsImage:true,specs:{full_width:{min:"1500×750px",rec:"3000×1500px",max:"5MB",note:"Bis zu 6 Hotspots"}}},
-  text:{name:"Text",icon:"📝",grp:"Content",sizes:["full_width","large","medium","small"],needsImage:false},
-  video:{name:"Video",icon:"🎥",grp:"Media",sizes:["full_width","large","medium"],needsImage:true,specs:{full_width:{cover:"3000×1500px",video:"1280×640px",fmt:"MP4 H.264"}}},
-  background_video:{name:"BG Video",icon:"🎬",grp:"Media",sizes:["full_width","large","medium"],needsImage:false,specs:{full_width:{video:"1280×640px",dur:"2–20s",note:"Max 4/Seite"}}},
-  gallery:{name:"Gallery",icon:"🎨",grp:"Content",sizes:["full_width"],needsImage:true,specs:{full_width:{min:"1500×750px",count:"3–8 Bilder"}}},
-  product:{name:"Product",icon:"📦",grp:"Produkte",sizes:["full_width","large","medium","small"],needsImage:false},
-  product_grid:{name:"Product Grid",icon:"🛍️",grp:"Produkte",sizes:["full_width"],needsImage:false,specs:{full_width:{note:"Max 1/Seite"}}},
-  best_sellers:{name:"Best Sellers",icon:"🏆",grp:"Produkte",sizes:["full_width"],needsImage:false},
-  recommended:{name:"Recommended",icon:"💡",grp:"Produkte",sizes:["full_width"],needsImage:false},
-  featured_deals:{name:"Featured Deals",icon:"🏷️",grp:"Produkte",sizes:["full_width"],needsImage:false},
+// ══════════════════════════════════════════
+// TILE TYPES — matches real Amazon Store Builder
+// ══════════════════════════════════════════
+const TILE_TYPES = {
+  product_selection:{name:"Produktauswahl",icon:"🧩",desc:"Interaktives Quiz für Produktempfehlungen",grp:"Interaktiv",needsImage:false},
+  video_reveal:{name:"Video-Enthüllung",icon:"🎬",desc:"Video mit Reveal-Effekt",grp:"Media",needsImage:true},
+  split:{name:"Abschnitt Teilen",icon:"➗",desc:"Verwandte Inhalte teilen",grp:"Layout",needsImage:false},
+  text:{name:"Text",icon:"📝",desc:"Marken- und Produktgeschichte",grp:"Content",needsImage:false},
+  image:{name:"Bild",icon:"🖼️",desc:"Marke oder Produkte präsentieren",grp:"Content",needsImage:true,specs:{min:"1500×750px",rec:"3000×1500px",max:"5MB",fmt:"PNG, JPG, GIF"}},
+  image_text:{name:"Bild mit Text",icon:"📝🖼️",desc:"Bild mit Titel oder Beschreibung",grp:"Content",needsImage:true,specs:{min:"1500×750px",max:"5MB"}},
+  shoppable_image:{name:"Shoppable-Bild",icon:"🛒",desc:"Produkte auf einem Bild markieren",grp:"Content",needsImage:true,specs:{min:"3000×1500px",max:"5MB"}},
+  product:{name:"Produkt",icon:"📦",desc:"Einzelnes Produkt anzeigen",grp:"Produkte",needsImage:false},
+  product_grid:{name:"Produktraster",icon:"🛍️",desc:"Mehrere Produkte präsentieren",grp:"Produkte",needsImage:false,isNew:true},
+  product_collection:{name:"Produktsammlung",icon:"📚",desc:"Sammlung verwandter Produkte",grp:"Produkte",needsImage:false,isNew:true},
+  featured_deals:{name:"Empfohlene Angebote",icon:"🏷️",desc:"Produkte mit Angeboten markieren",grp:"Produkte",needsImage:false},
+  best_sellers:{name:"Meistverkaufte Produkte",icon:"🏆",desc:"Automatisch meistverkaufte anzeigen",grp:"Produkte",needsImage:false},
+  recommended:{name:"Empfohlene Produkte",icon:"💡",desc:"Automatische Empfehlungen",grp:"Produkte",needsImage:false},
+  video:{name:"Video",icon:"🎥",desc:"Geschichte mit Bewegung und Ton",grp:"Media",needsImage:true,specs:{cover:"3000×1500px",video:"1280×640px",fmt:"MP4 H.264"}},
+  bg_video:{name:"Hintergrundvideo",icon:"🎬",desc:"Visuelles Interesse mit stillem Video",grp:"Media",needsImage:false,specs:{video:"1280×640px",dur:"2–20s"}},
+  gallery:{name:"Galerie",icon:"🎨",desc:"3-8 Bilder im Slider",grp:"Content",needsImage:true,specs:{min:"1500×750px",count:"3–8 Bilder"}},
 };
-const SIZE_LABELS = {full_width:"Full Width",large:"Large",medium:"Medium",small:"Small"};
-const GROUPS = ["Header","Content","Media","Produkte"];
-const LANG = {de:"German",com:"English","co.uk":"English",fr:"French",it:"Italian",es:"Spanish"};
+const TILE_GROUPS=["Interaktiv","Content","Media","Produkte","Layout"];
 
-const uid = ()=>`${Date.now()}_${Math.random().toString(36).slice(2,7)}`;
-const mkTile = (type,size="full_width",content={},briefing="")=>({id:uid(),type,size:TILES[type]?.sizes.includes(size)?size:(TILES[type]?.sizes[0]||"full_width"),content,imageBriefing:briefing,image:null,imageFile:"",imgW:0,imgH:0});
-const mkPage = (name,id)=>({id:id||uid(),name,heroImageBriefing:"",tiles:[]});
+// ══════════════════════════════════════════
+// LAYOUT TEMPLATES
+// ══════════════════════════════════════════
+const LAYOUTS = [
+  {id:"1",name:"Full Width",cols:"1fr",rows:1,cells:1},
+  {id:"1-1",name:"2 gleich",cols:"1fr 1fr",rows:1,cells:2},
+  {id:"2-1",name:"Groß + Klein",cols:"2fr 1fr",rows:1,cells:2},
+  {id:"1-2",name:"Klein + Groß",cols:"1fr 2fr",rows:1,cells:2},
+  {id:"1-1-1",name:"3 gleich",cols:"1fr 1fr 1fr",rows:1,cells:3},
+  {id:"1-1-1-1",name:"4 gleich",cols:"1fr 1fr 1fr 1fr",rows:1,cells:4},
+  {id:"2-1-1",name:"Groß + 2 Klein",cols:"2fr 1fr 1fr",rows:1,cells:3},
+  {id:"1-1-2",name:"2 Klein + Groß",cols:"1fr 1fr 2fr",rows:1,cells:3},
+];
 
-// ── State ──
-let state = {
-  store:{brandName:"",brandProfile:null,pages:[mkPage("Homepage","homepage")]},
-  curPage:"homepage", selTile:null, mode:"builder",
-  generating:false, genStep:0, genSteps:[], genLog:[],
-  errorLog:[], showErrors:false, toast:null,
+// ══════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════
+const uid=()=>`${Date.now()}_${Math.random().toString(36).slice(2,6)}`;
+const esc=s=>String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const mkTile=(type,content={},briefing="")=>({id:uid(),type,content,imageBriefing:briefing,image:null,imageFile:"",imgW:0,imgH:0});
+const mkSection=(layoutId="1")=>{const l=LAYOUTS.find(x=>x.id===layoutId)||LAYOUTS[0];return{id:uid(),layoutId:l.id,tiles:Array(l.cells).fill(null)}};
+const mkPage=(name,id)=>({id:id||uid(),name,sections:[mkSection("1")]});
+
+// ══════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════
+let S={
+  store:{brandName:"Mein Store",brandProfile:null,pages:[mkPage("Homepage","homepage")]},
+  curPage:"homepage",selSection:null,selCell:null,
+  mode:"builder",generating:false,genStep:0,genSteps:[],genLog:[],
+  errorLog:[],showErrors:false,toast:null,
+  showLayoutPicker:null,showTilePicker:null,showGenModal:false,
 };
-let apiKey = localStorage.getItem("asb_api_key")||"";
+let apiKey=localStorage.getItem("asb_api_key")||"";
 
-// ── Prompts ──
-const PROMPTS = {
+// ══════════════════════════════════════════
+// AI PROMPTS
+// ══════════════════════════════════════════
+const LANG_MAP={de:"German",com:"English","co.uk":"English",fr:"French",it:"Italian",es:"Spanish"};
+const PROMPTS={
   research:`You research brands for Amazon Brand Store creation. Use web search to find:
 1. Brand website, mission, values, visual identity (colors, style)
 2. Product categories and range
 3. Amazon presence: product names, ASINs (B0XXXXXXXXX format), categories
 Do NOT collect prices. Return ONLY valid JSON:
 {"brandName":"...","description":"1-2 sentences","type":"premium|d2c|mission|mass_market","tone":"...","colors":{"primary":"#hex","secondary":"#hex","accent":"#hex"},"categories":["Cat1"],"usps":["USP1","USP2","USP3"],"targetAudience":"...","products":[{"name":"...","asin":"B0XX","category":"Cat"}],"amazonCategories":["..."],"hasExistingStore":false}`,
-  architecture:`You plan Amazon Brand Store page structures. Homepage first, then 1 page per major category. Premium: About page. D2C: Bestseller/Bundles. Mission: Impact page. Mass Market: Deals + categories. 4-12 pages. Tile types: hero_image, image, image_with_text, shoppable_image, text, video, background_video, gallery, product, product_grid, best_sellers, recommended, featured_deals
+
+  architecture:`You plan Amazon Brand Store structures. A store has PAGES, each page has SECTIONS. Each section has a LAYOUT (grid) and TILES in cells.
+
+Available layouts: "1" (full width), "1-1" (2 equal), "2-1" (large+small), "1-2" (small+large), "1-1-1" (3 equal), "1-1-1-1" (4 equal), "2-1-1" (large+2small), "1-1-2" (2small+large)
+
+Available tile types: product_selection, video_reveal, split, text, image, image_text, shoppable_image, product, product_grid, product_collection, featured_deals, best_sellers, recommended, video, bg_video, gallery
+
+Rules: Homepage first, then category pages. Premium: About page. D2C: Bestsellers. Mission: Impact page. 4-10 pages, 3-8 sections per page.
+
 Return ONLY valid JSON:
-{"pages":[{"id":"homepage","name":"Homepage","purpose":"...","tileSequence":["hero_image: keyvisual","image x3 medium: categories"]}]}`,
-  content:`You create content for ONE Amazon Brand Store page with designer image briefings. ONLY real tile types: hero_image, image, image_with_text, shoppable_image, text, video, background_video, gallery, product, product_grid, best_sellers, recommended, featured_deals. Max 20 tiles, max 1 product_grid, max 1 gallery. Every image tile MUST have imageBriefing: DIMENSIONS (px) | CONTENT | TEXT IN IMAGE | COLORS (hex) | MOOD | MOBILE. All text in marketplace language, no placeholders.
+{"pages":[{"id":"homepage","name":"Homepage","purpose":"...","sections":[{"layoutId":"1","tiles":["image: hero banner"]},{"layoutId":"1-1-1","tiles":["image: cat1","image: cat2","image: cat3"]},{"layoutId":"1","tiles":["product_grid: bestsellers"]}]}]}`,
+
+  content:`You create content for ONE Amazon Brand Store page. For each section you receive a layout and tile descriptions. Fill in actual content.
+
+Available tile types: product_selection, video_reveal, split, text, image, image_text, shoppable_image, product, product_grid, product_collection, featured_deals, best_sellers, recommended, video, bg_video, gallery
+
+Every image tile MUST have imageBriefing with: DIMENSIONS | CONTENT | TEXT IN IMAGE | COLORS (hex) | MOOD | MOBILE notes. All text in marketplace language.
+
 Return ONLY valid JSON:
-{"pageName":"...","heroImageBriefing":"...","tiles":[{"type":"image_with_text","size":"full_width","content":{"headline":"...","body":"..."},"imageBriefing":"DIMENSIONS: 3000x1500px | CONTENT: ... | TEXT: ... | COLORS: ... | MOOD: ..."}]}`,
-  refine:`Refine an Amazon Brand Store. ONLY real tile types. Keep imageBriefings. Return COMPLETE store JSON with all pages.`
+{"pageName":"...","sections":[{"layoutId":"1-1-1","tiles":[{"type":"image","content":{"alt":"..."},"imageBriefing":"DIMENSIONS: 1500x750px | CONTENT: ... | COLORS: ... | MOOD: ..."},{"type":"image","content":{"alt":"..."},"imageBriefing":"..."},{"type":"image","content":{"alt":"..."},"imageBriefing":"..."}]}]}`,
+
+  refine:`Refine an Amazon Brand Store. Keep structure: pages > sections > tiles. Return COMPLETE JSON.`
 };
 
-// ── API ──
-async function callAI(system, user, useSearch=false) {
-  if(!apiKey) throw new Error("API Key fehlt!");
-  const body = {model:"claude-sonnet-4-20250514",max_tokens:6000,system,messages:[{role:"user",content:user}]};
-  if(useSearch) body.tools=[{type:"web_search_20250305",name:"web_search"}];
+// ══════════════════════════════════════════
+// API
+// ══════════════════════════════════════════
+async function callAI(system,user,useSearch=false,model="claude-sonnet-4-20250514"){
+  if(!apiKey)throw new Error("API Key fehlt!");
+  const body={model,max_tokens:useSearch?4000:6000,system,messages:[{role:"user",content:user}]};
+  if(useSearch)body.tools=[{type:"web_search_20250305",name:"web_search"}];
   for(let a=0;a<3;a++){
     let r;
-    try{
-      r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify(body)});
-    }catch(e){throw new Error("Network: "+e.message)}
-    if(r.status===429&&a<2){addLog("⏳ Rate limit, warte "+(15*(a+1))+"s...");await new Promise(x=>setTimeout(x,15000*(a+1)));continue}
+    try{r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify(body)})}
+    catch(e){throw new Error("Network: "+e.message)}
+    if(r.status===429){if(a>=2){const t=await r.text();addErr("Rate limit 3x",t);throw new Error("Rate limit — 2 Min warten")}
+      const w=60*(a+1);addLog("⏳ Rate limit, warte "+w+"s...");render();await new Promise(x=>setTimeout(x,w*1000));continue}
     if(!r.ok){const t=await r.text();addErr("API "+r.status,t);throw new Error("API "+r.status+": "+t.slice(0,200))}
-    const d=await r.json();
-    const txt=(d.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("");
-    const m=txt.match(/\{[\s\S]*\}/);
+    const d=await r.json(),txt=(d.content||[]).filter(b=>b.type==="text").map(b=>b.text).join(""),m=txt.match(/\{[\s\S]*\}/);
     if(!m){addErr("No JSON",txt.slice(0,500));throw new Error("No JSON in response")}
     return JSON.parse(m[0]);
   }
   throw new Error("Rate limit nach Retries");
 }
+function addLog(m){S.genLog.push("["+new Date().toLocaleTimeString()+"] "+m);render()}
+function addErr(m,d){S.errorLog.push({time:new Date().toLocaleTimeString(),msg:m,detail:d||""});render()}
+function toast(m,t){S.toast={m,t:t||"ok"};render();setTimeout(()=>{S.toast=null;render()},4000)}
 
-function addLog(msg){state.genLog.push("["+new Date().toLocaleTimeString()+"] "+msg);render()}
-function addErr(msg,detail){state.errorLog.push({time:new Date().toLocaleTimeString(),msg,detail:detail||""});render()}
-function toast(m,t){state.toast={m,t:t||"ok"};render();setTimeout(()=>{state.toast=null;render()},4000)}
-
-// ── Getters ──
-function curPage(){return state.store.pages.find(p=>p.id===state.curPage)||state.store.pages[0]}
-function curTile(){const p=curPage();return p?p.tiles.find(t=>t.id===state.selTile):null}
-
-// ── Generation ──
+// ══════════════════════════════════════════
+// GENERATION
+// ══════════════════════════════════════════
 async function generate(brand,mp,cat,info){
   if(!apiKey){promptKey();return}
-  state.generating=true;state.genLog=[];
-  const lang=LANG[mp]||"German";
-  state.genSteps=[{name:"Recherche",desc:"Marke & Amazon..."},{name:"Architektur",desc:"Seiten & Tiles..."},{name:"Content",desc:"Texte & Briefings..."},{name:"Validierung",desc:"Prüfen..."}];
-  state.genStep=0;render();
+  S.generating=true;S.genLog=[];
+  const lang=LANG_MAP[mp]||"German";
+  S.genSteps=[{n:"Recherche",d:"Marke & Amazon..."},{n:"Architektur",d:"Seiten & Layouts..."},{n:"Content",d:"Texte & Briefings..."},{n:"Validierung",d:"Prüfen..."}];
+  S.genStep=0;render();
   try{
     addLog("🔍 Recherchiere "+brand+"...");
-    const bp=await callAI(PROMPTS.research,`Research "${brand}" for Amazon.${mp}. ${cat?`Category: ${cat}.`:""} ${info||""} JSON in English, brand content in ${lang}.`,true);
-    addLog("✅ "+bp.type+", "+(bp.categories?.length||0)+" Kategorien, "+(bp.products?.length||0)+" Produkte");
-    state.genStep=1;render();
+    const bp=await callAI(PROMPTS.research,`Research "${brand}" for Amazon.${mp}. ${cat?`Category: ${cat}.`:""} ${info||""} JSON in English, brand content in ${lang}.`,true,"claude-haiku-4-5-20251001");
+    addLog("✅ "+bp.type+", "+(bp.categories?.length||0)+" Kat, "+(bp.products?.length||0)+" Produkte");
+    S.genStep=1;render();await new Promise(x=>setTimeout(x,5000));
 
     addLog("🏗️ Architektur...");
     const arch=await callAI(PROMPTS.architecture,`Brand: ${JSON.stringify(bp)}\nCategories: ${(bp.amazonCategories||bp.categories||[]).join(", ")}\nProducts: ${bp.products?.length||0}\nLanguage: ${lang}`);
     addLog("✅ "+(arch.pages?.length||0)+" Seiten");
-    (arch.pages||[]).forEach(p=>addLog("   📄 "+p.name));
-    state.genStep=2;render();
+    S.genStep=2;render();await new Promise(x=>setTimeout(x,5000));
 
     const prods=(bp.products||[]).slice(0,15).map(p=>`${p.name} (${p.asin})`).join(", ");
     const pages=[];
     for(let i=0;i<(arch.pages||[]).length;i++){
       const pp=arch.pages[i];
-      addLog("📝 "+(i+1)+"/"+(arch.pages.length)+": "+pp.name+"...");render();
+      addLog("📝 "+(i+1)+"/"+arch.pages.length+": "+pp.name+"...");render();
       const pc=await callAI(PROMPTS.content,`PAGE: ${JSON.stringify(pp)}\nBRAND: type=${bp.type}, tone=${bp.tone}, colors=${JSON.stringify(bp.colors)}, USPs=${(bp.usps||[]).join(", ")}\nPRODUCTS: ${prods}\nLanguage: ${lang}`);
-      const tiles=(pc.tiles||[]).filter(t=>TILES[t.type]).map(t=>mkTile(t.type,t.size,t.content||{},t.imageBriefing||""));
-      pages.push({id:pp.id||"page_"+i,name:pc.pageName||pp.name,heroImageBriefing:pc.heroImageBriefing||"",tiles});
-      addLog("   ✅ "+tiles.length+" Tiles");
-    }
-
-    state.genStep=3;addLog("🔍 Validiere...");render();
-    let w=0;
-    pages.forEach(p=>{
-      ["product_grid","gallery","featured_deals","recommended"].forEach(type=>{let f=false;p.tiles=p.tiles.filter(t=>{if(t.type===type){if(f)return false;f=true}return true})});
-      if(p.tiles.length>20){p.tiles=p.tiles.slice(0,20);w++}
-    });
-    addLog("✅ "+w+" Warnungen");
-
-    state.store={brandName:brand,brandProfile:bp,pages};
-    state.curPage=pages[0]?.id;state.selTile=null;
-    const tot=pages.reduce((a,p)=>a+p.tiles.length,0);
-    addLog("\n🎉 FERTIG: "+pages.length+" Seiten, "+tot+" Tiles");
-    toast(pages.length+" Seiten, "+tot+" Tiles");
-  }catch(e){
-    addLog("❌ "+e.message);addErr("Generation: "+e.message,e.stack);toast(e.message,"err");
-  }finally{state.generating=false;render()}
-}
-
-async function doRefine(instruction){
-  if(!apiKey){promptKey();return}
-  if(!instruction.trim())return;
-  state.generating=true;state.genSteps=[{name:"Verfeinere...",desc:instruction}];state.genStep=0;state.genLog=[];render();
-  addLog('✏️ "'+instruction+'"');
-  const clean=JSON.parse(JSON.stringify(state.store));
-  clean.pages.forEach(p=>p.tiles.forEach(t=>{t.image=null}));
-  try{
-    const r=await callAI(PROMPTS.refine,`STORE:\n${JSON.stringify(clean)}\n\nCHANGE: ${instruction}\n\nReturn complete JSON.`);
-    if(r.pages?.length){
-      state.store.pages=r.pages.map((p,i)=>({...mkPage(p.name,p.id||"page_"+i),heroImageBriefing:p.heroImageBriefing||"",tiles:(p.tiles||[]).filter(t=>TILES[t.type]).map(t=>mkTile(t.type,t.size,t.content||{},t.imageBriefing||""))}));
-      if(r.brandProfile)state.store.brandProfile=r.brandProfile;
-      state.curPage=state.store.pages[0]?.id;
-      addLog("✅ Verfeinert");toast("Store verfeinert!");
-    }
-  }catch(e){addLog("❌ "+e.message);addErr(e.message);toast(e.message,"err")}
-  finally{state.generating=false;render()}
-}
-
-// ── Exports ──
-function exportBriefing(){
-  const s=state.store,bp=s.brandProfile;
-  let md="# Designer Briefing: "+s.brandName+"\n\n";
-  if(bp)md+="## Brand\n- Typ: "+bp.type+"\n- Ton: "+bp.tone+"\n- Farben: "+(bp.colors?Object.values(bp.colors).join(", "):"")+"\n- USPs: "+(bp.usps||[]).join(" | ")+"\n\n---\n\n";
-  s.pages.forEach((pg,pi)=>{
-    md+="# Seite "+(pi+1)+": "+pg.name+"\n\n## Hero\n- 3000×600px, max 5MB, Safe Zone 70%\n- "+(pg.heroImageBriefing||"—")+"\n\n";
-    pg.tiles.forEach((t,ti)=>{
-      const d=TILES[t.type];md+="### "+(ti+1)+". "+(d?.name||t.type)+" ("+SIZE_LABELS[t.size]+")\n";
-      if(t.imageBriefing)md+="🎨 "+t.imageBriefing+"\n";
-      if(t.image)md+="✅ "+t.imageFile+" ("+t.imgW+"×"+t.imgH+")\n";
-      else if(d?.needsImage)md+="⚠ Bild fehlt\n";
-      md+="\n";
-    });md+="---\n\n";
-  });
-  dl(md,s.brandName+"_briefing.md","text/markdown");
-}
-function exportJSON(){
-  const d=JSON.parse(JSON.stringify(state.store));d.pages.forEach(p=>p.tiles.forEach(t=>{t.image=null}));
-  dl(JSON.stringify(d,null,2),state.store.brandName+"_store.json","application/json");
-}
-function dl(content,name,type){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click()}
-
-// ── Key prompt ──
-function promptKey(){
-  const k=prompt("Anthropic API Key eingeben (sk-ant-...):",apiKey);
-  if(k){apiKey=k;localStorage.setItem("asb_api_key",k);toast("Key gespeichert")}
-}
-
-// ── Image upload ──
-function uploadImg(tileId){
-  const inp=document.createElement("input");inp.type="file";inp.accept="image/*";
-  inp.onchange=()=>{
-    const f=inp.files[0];if(!f)return;
-    const r=new FileReader();r.onload=e=>{
-      const img=new Image();img.onload=()=>{
-        const p=curPage();const t=p.tiles.find(x=>x.id===tileId);if(!t)return;
-        t.image=e.target.result;t.imageFile=f.name;t.imgW=img.width;t.imgH=img.height;
-        toast(img.width+"×"+img.height+"px");render();
-      };img.src=e.target.result;
-    };r.readAsDataURL(f);
-  };inp.click();
-}
-
-// ══════════════════════════════════════════════════
-// RENDER
-// ══════════════════════════════════════════════════
-function render(){
-  const s=state, st=s.store, pg=curPage(), tl=curTile(), td=tl?TILES[tl.type]:null;
-  const bp=st.brandProfile, accent=bp?.colors?.primary||"#FF9900";
-  let h='';
-
-  // Header
-  h+='<header><div class="logo"><span>🏪</span><span>Store Builder</span><span class="badge">MULTI-STEP AI</span></div>';
-  if(bp)h+='<div class="brand-info"><span class="brand-dot" style="background:'+accent+'"></span><span class="brand-text">'+st.brandName+' · '+bp.type+'</span></div>';
-  h+='<div class="modes">';
-  ["builder","preview","briefing"].forEach(m=>{
-    const icons={builder:"✏️ Builder",preview:"👁️ Preview",briefing:"📋 Briefing"};
-    h+='<button class="mode-btn'+(s.mode===m?" active":"")+'" onclick="state.mode=\''+m+'\';state.selTile=null;render()">'+icons[m]+'</button>';
-  });
-  h+='</div><div class="actions">';
-  h+='<button class="btn" onclick="showGenModal()">✨ AI Generieren</button>';
-  if(s.errorLog.length)h+='<button class="btn-err" onclick="state.showErrors=true;render()">🐛 '+s.errorLog.length+'</button>';
-  h+='<button class="btn-out" onclick="exportBriefing()">📋</button>';
-  h+='<button class="btn-out" onclick="exportJSON()">📥</button>';
-  h+='<button class="btn-out" onclick="promptKey()">🔑</button>';
-  h+='</div></header>';
-
-  // Main
-  h+='<div class="main">';
-
-  // Sidebar
-  if(s.mode==="builder"){
-    h+='<div class="sidebar"><div class="sidebar-title">Amazon Tiles</div><div class="sidebar-scroll">';
-    GROUPS.forEach(g=>{
-      h+='<div class="grp-label">'+g+'</div>';
-      Object.entries(TILES).filter(([,v])=>v.grp===g).forEach(([k,v])=>{
-        h+='<button class="tile-btn" onclick="addTile(\''+k+'\')"><span class="icon">'+v.icon+'</span><span class="name">'+v.name+'</span></button>';
+      const secs=(pc.sections||[]).map(sec=>{
+        const layout=LAYOUTS.find(l=>l.id===sec.layoutId)||LAYOUTS[0];
+        const tiles=(sec.tiles||[]).slice(0,layout.cells).map(t=>{
+          if(!t||typeof t==="string")return null;
+          if(!TILE_TYPES[t.type])return null;
+          return mkTile(t.type,t.content||{},t.imageBriefing||"");
+        });
+        while(tiles.length<layout.cells)tiles.push(null);
+        return{id:uid(),layoutId:layout.id,tiles};
       });
-    });
-    h+='</div></div>';
-  }
+      pages.push({id:pp.id||"page_"+i,name:pc.pageName||pp.name,sections:secs.length?secs:[mkSection("1")]});
+      addLog("   ✅ "+secs.length+" Abschnitte");
+      if(i<arch.pages.length-1)await new Promise(x=>setTimeout(x,5000));
+    }
+
+    S.genStep=3;addLog("🔍 Validiere...");render();
+    S.store={brandName:brand,brandProfile:bp,pages};
+    S.curPage=pages[0]?.id;S.selSection=null;S.selCell=null;
+    addLog("🎉 FERTIG: "+pages.length+" Seiten");
+    toast(pages.length+" Seiten generiert");
+  }catch(e){addLog("❌ "+e.message);addErr("Gen: "+e.message,e.stack);toast(e.message,"err")}
+  finally{S.generating=false;render()}
+}
+
+// ══════════════════════════════════════════
+// ACTIONS
+// ══════════════════════════════════════════
+function curPage(){return S.store.pages.find(p=>p.id===S.curPage)||S.store.pages[0]}
+function addPage(){const n=prompt("Seitenname:");if(n){const p=mkPage(n);S.store.pages.push(p);S.curPage=p.id;S.selSection=null;render()}}
+function delPage(id){if(S.store.pages.length<=1)return;S.store.pages=S.store.pages.filter(p=>p.id!==id);if(S.curPage===id)S.curPage=S.store.pages[0]?.id;render()}
+function addSection(layoutId){const pg=curPage();pg.sections.push(mkSection(layoutId));render()}
+function delSection(secId){const pg=curPage();pg.sections=pg.sections.filter(s=>s.id!==secId);if(S.selSection===secId){S.selSection=null;S.selCell=null}render()}
+function moveSection(secId,dir){const pg=curPage(),ss=pg.sections,i=ss.findIndex(s=>s.id===secId),j=i+dir;if(j>=0&&j<ss.length)[ss[i],ss[j]]=[ss[j],ss[i]];render()}
+function setTileInCell(secId,cellIdx,tile){const pg=curPage(),sec=pg.sections.find(s=>s.id===secId);if(sec)sec.tiles[cellIdx]=tile;render()}
+function removeTileFromCell(secId,cellIdx){setTileInCell(secId,cellIdx,null)}
+function selectCell(secId,cellIdx){S.selSection=secId;S.selCell=cellIdx;render()}
+function uploadImg(secId,cellIdx){
+  const inp=document.createElement("input");inp.type="file";inp.accept="image/*";
+  inp.onchange=()=>{const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const img=new Image();img.onload=()=>{
+    const pg=curPage(),sec=pg.sections.find(s=>s.id===secId);if(!sec||!sec.tiles[cellIdx])return;
+    sec.tiles[cellIdx].image=e.target.result;sec.tiles[cellIdx].imageFile=f.name;sec.tiles[cellIdx].imgW=img.width;sec.tiles[cellIdx].imgH=img.height;
+    toast(img.width+"×"+img.height+"px");render()};img.src=e.target.result};r.readAsDataURL(f)};inp.click();
+}
+function exportJSON(){const d=JSON.parse(JSON.stringify(S.store));d.pages.forEach(p=>p.sections.forEach(s=>s.tiles.forEach((t,i)=>{if(t)t.image=null})));dl(JSON.stringify(d,null,2),S.store.brandName+"_store.json","application/json")}
+function exportBriefing(){
+  const st=S.store,bp=st.brandProfile;let md="# "+st.brandName+" — Designer Briefing\n\n";
+  if(bp)md+="**Typ:** "+bp.type+" | **Ton:** "+bp.tone+" | **Farben:** "+(bp.colors?Object.values(bp.colors).join(", "):"")+"\n\n---\n\n";
+  st.pages.forEach((pg,pi)=>{md+="## Seite "+(pi+1)+": "+pg.name+"\n\n";
+    pg.sections.forEach((sec,si)=>{const l=LAYOUTS.find(x=>x.id===sec.layoutId)||LAYOUTS[0];md+="### Abschnitt "+(si+1)+" ("+l.name+")\n";
+      sec.tiles.forEach((t,ci)=>{if(!t)return;const td=TILE_TYPES[t.type];md+="- **Zelle "+(ci+1)+":** "+td.name+"\n";if(t.imageBriefing)md+="  🎨 "+t.imageBriefing+"\n";if(t.image)md+="  ✅ "+t.imageFile+"\n";else if(td.needsImage)md+="  ⚠ Bild fehlt\n"});
+      md+="\n"});md+="---\n\n"});
+  dl(md,st.brandName+"_briefing.md","text/markdown");
+}
+function dl(c,n,t){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([c],{type:t}));a.download=n;a.click()}
+function promptKey(){const k=prompt("Anthropic API Key:",apiKey);if(k){apiKey=k;localStorage.setItem("asb_api_key",k);toast("Key gespeichert")}}
+
+// ══════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════
+function render(){
+  const st=S.store,pg=curPage(),bp=st.brandProfile,accent=bp?.colors?.primary||"#FF9900";
+  let h="";
+
+  // Top bar
+  h+='<div class="topbar"><div class="logo">🏪 <span>Store</span> Builder</div><div class="spacer"></div>';
+  if(S.errorLog.length)h+='<button class="topbar-btn" style="color:#f87171;border-color:#f87171" onclick="S.showErrors=true;render()">🐛 '+S.errorLog.length+'</button>';
+  h+='<button class="topbar-btn" onclick="promptKey()">🔑</button>';
+  h+='<button class="topbar-btn" onclick="exportBriefing()">📋 Briefing</button>';
+  h+='<button class="topbar-btn" onclick="exportJSON()">📥 JSON</button>';
+  h+='<button class="topbar-btn primary" onclick="S.showGenModal=true;render()">✨ AI Generieren</button>';
+  h+='<button class="topbar-btn primary" style="background:#2ea44f;border-color:#2ea44f;color:#fff">Zur Veröffentlichung</button>';
+  h+='</div>';
+
+  // Toolbar
+  h+='<div class="toolbar"><div class="device-toggle"><button class="active">🖥 Desktop</button><button>📱 Mobil</button></div><div class="spacer"></div><div class="undo-redo"><button>↩</button><button>↪</button></div></div>';
+
+  // Layout
+  h+='<div class="layout">';
+
+  // Left sidebar — Pages
+  h+='<div class="sidebar-left"><div class="sl-header"><h2>Seiten</h2></div>';
+  h+='<button class="add-page-btn" onclick="addPage()">✦ Seite hinzufügen</button>';
+  h+='<div class="page-list">';
+  st.pages.forEach(p=>{
+    h+='<div class="page-item'+(p.id===S.curPage?" active":"")+'" onclick="S.curPage=\''+p.id+'\';S.selSection=null;S.selCell=null;render()">';
+    h+='<span class="drag">⫶</span><span class="name">'+esc(p.name)+'</span>';
+    h+='<button class="menu-btn" onclick="event.stopPropagation();if(confirm(\'Seite löschen?\'))delPage(\''+p.id+'\')">⋮</button></div>';
+  });
+  h+='</div></div>';
 
   // Canvas
-  h+='<div class="canvas-wrap">';
-  // Page tabs
-  h+='<div class="page-tabs">';
-  st.pages.forEach(p=>{
-    h+='<button class="ptab'+(p.id===s.curPage?" active":"")+'" onclick="state.curPage=\''+p.id+'\';state.selTile=null;render()">'+esc(p.name);
-    if(st.pages.length>1)h+='<span class="del" onclick="event.stopPropagation();delPage(\''+p.id+'\')">✕</span>';
-    h+='</button>';
-  });
-  h+='<button class="add-page" onclick="addPage()">+ Seite</button></div>';
+  h+='<div class="canvas-wrap"><div class="canvas"><div class="canvas-inner">';
 
-  // Canvas area
-  h+='<div class="canvas"><div class="canvas-inner">';
+  // Store header
+  h+='<div class="store-header'+(S.selSection==="header"?" sel":"")+'" onclick="S.selSection=\'header\';S.selCell=null;render()">';
+  h+='<div class="store-header-inner"><div class="store-logo">'+(bp?'<div style="width:36px;height:36px;border-radius:50%;background:'+accent+'"></div>':'🏪')+'</div><div class="store-brand">'+esc(st.brandName)+'</div></div>';
+  h+='<div class="store-nav">';
+  st.pages.forEach(p=>{h+='<span'+(p.id===S.curPage?' class="active"':'')+' onclick="event.stopPropagation();S.curPage=\''+p.id+'\';render()">'+esc(p.name)+'</span>'});
+  h+='</div></div>';
+
+  // Sections
   if(pg){
-    if(s.mode!=="preview")h+='<div class="hero"><span class="emoji">🖼️</span><div class="spec">Hero Image · 3000×600px · Safe Zone 70%</div>'+(pg.heroImageBriefing?'<div class="brief">"'+esc(pg.heroImageBriefing).slice(0,80)+'..."</div>':'')+'</div>';
-    if(pg.tiles.length===0&&s.mode!=="preview")h+='<div class="empty"><div style="font-size:24px;margin-bottom:8px">📦</div><div style="font-weight:600;color:#6b7280">Keine Tiles</div><div style="font-size:12px;margin-top:4px">Links ein Tile klicken oder ✨ AI Generieren</div></div>';
-    pg.tiles.forEach(t=>{
-      const def=TILES[t.type],isSel=s.selTile===t.id,c=t.content||{};
-      if(s.mode==="preview"){h+=renderTileInner(t,def,c);return}
-      h+='<div class="tile-card'+(isSel?" selected":"")+'" style="border-color:'+(isSel?accent:"transparent")+'" onclick="state.selTile=\''+t.id+'\';render()">';
-      h+='<span class="tile-badge">'+def.name+' · '+SIZE_LABELS[t.size]+'</span>';
-      h+='<div class="tile-toolbar"><button class="tb-btn" onclick="event.stopPropagation();moveTile(\''+t.id+'\',-1)">↑</button><button class="tb-btn" onclick="event.stopPropagation();moveTile(\''+t.id+'\',1)">↓</button><button class="tb-btn" onclick="event.stopPropagation();delTile(\''+t.id+'\')">✕</button></div>';
-      if(t.imageBriefing&&!t.image)h+='<span class="briefing-badge">📋 Briefing</span>';
-      if(t.image)h+='<span class="img-badge">✓ '+t.imgW+'×'+t.imgH+'</span>';
-      h+=renderTileInner(t,def,c);
-      h+='</div>';
+    pg.sections.forEach((sec,si)=>{
+      const layout=LAYOUTS.find(l=>l.id===sec.layoutId)||LAYOUTS[0];
+      const isSel=S.selSection===sec.id;
+      h+='<div class="section'+(isSel?" sel":"")+'" onclick="S.selSection=\''+sec.id+'\';S.selCell=null;render()">';
+      h+='<span class="section-label">'+(si+1)+'. '+layout.name+'</span>';
+      h+='<div class="layout-grid" style="grid-template-columns:'+layout.cols+'">';
+      sec.tiles.forEach((tile,ci)=>{
+        const filled=tile!==null;
+        h+='<div class="layout-cell'+(filled?" filled":"")+'" onclick="event.stopPropagation();selectCell(\''+sec.id+'\','+ci+')">';
+        if(filled){
+          const td=TILE_TYPES[tile.type];
+          h+='<span class="tile-badge-small">'+td.icon+' '+td.name+'</span>';
+          h+=renderTile(tile,td);
+        }else{
+          h+='<div class="cell-placeholder" onclick="event.stopPropagation();S.showTilePicker={secId:\''+sec.id+'\',cellIdx:'+ci+'};render()"><span style="font-size:20px">+</span><span>Kachel hinzufügen</span></div>';
+        }
+        h+='</div>';
+      });
+      h+='</div></div>';
     });
+
+    // Add section
+    h+='<button class="add-section-btn" onclick="S.showLayoutPicker=true;render()">+ Neuen Abschnitt hinzufügen</button>';
   }
+
   h+='</div></div>';
 
   // Refine bar
-  if(s.mode==="builder")h+='<div class="refine-bar"><input id="refine-input" placeholder="AI: \'Füge Bundle-Seite hinzu\', \'Mehr Lifestyle\'..." onkeydown="if(event.key===\'Enter\')doRefineFromInput()"><button class="btn" onclick="doRefineFromInput()">✨ Verfeinern</button></div>';
-  h+='</div>'; // canvas-wrap
+  h+='<div class="refine-bar"><input id="refine-input" placeholder="AI: \'Füge Bundle-Seite hinzu\', \'Mehr Lifestyle\'..." onkeydown="if(event.key===\'Enter\')doRefineUI()"><button class="topbar-btn primary" onclick="doRefineUI()" style="font-size:12px">✨</button></div>';
+  h+='</div>';
 
-  // Properties panel
-  if(s.mode==="builder"){
-    h+='<div class="props"><div class="props-title">Eigenschaften'+(tl?' <span style="color:'+accent+';text-transform:none;font-weight:500">'+tl.type+'</span>':'')+'</div><div class="props-scroll">';
-    if(!tl){h+='<div style="text-align:center;color:#9ca3af;padding-top:32px"><div style="font-size:20px;opacity:.3">🎯</div><div style="font-size:12px">Tile auswählen</div></div>'}
-    else{
-      h+='<div class="field"><label>Tile-Größe</label><select onchange="setTileProp(\'size\',this.value)">';
-      td.sizes.forEach(sz=>{h+='<option value="'+sz+'"'+(tl.size===sz?' selected':'')+'>'+SIZE_LABELS[sz]+'</option>'});
-      h+='</select></div>';
-      if(td.needsImage&&td.specs){
-        h+='<div class="spec-box"><div style="font-size:10px;font-weight:700;margin-bottom:4px">📐 Bild-Spezifikationen</div>';
-        const sp=td.specs[tl.size]||Object.values(td.specs)[0]||{};
-        Object.entries(sp).forEach(([k,v])=>{h+='<div><b>'+k+':</b> '+v+'</div>'});
-        h+='</div>';
-      }
-      if(td.needsImage)h+='<div class="field"><label>Bild hochladen</label><button style="width:100%;padding:8px;border:2px dashed '+(tl.image?"#86efac":"#ddd")+';border-radius:8px;font-size:12px;color:#6b7280" onclick="uploadImg(\''+tl.id+'\')">'+(tl.image?"✓ "+tl.imageFile:"📁 Bild wählen...")+'</button></div>';
-      if(td.needsImage)h+='<div class="field"><label>🎨 Designer-Briefing</label><textarea id="briefing-ta" oninput="setTileProp(\'imageBriefing\',this.value)" placeholder="DIMENSIONS: ... | CONTENT: ... | COLORS: ... | MOOD: ...">'+esc(tl.imageBriefing||"")+'</textarea></div>';
-      if(tl.type==="image_with_text"){
-        h+=selField("Layout","content.layout",[["text_over","Text über Bild"],["text_beside","Text neben Bild"]],tl.content.layout);
-        h+=inpField("Headline","content.headline",tl.content.headline);
-        h+=txtField("Body","content.body",tl.content.body);
-        h+=inpField("Link-Text","content.linkText",tl.content.linkText);
-      }
-      if(tl.type==="text"){h+=txtField("Text","content.text",tl.content.text)}
-      if(tl.type==="product"){h+=inpField("ASIN","content.asin",tl.content.asin);h+=inpField("Titel","content.customTitle",tl.content.customTitle)}
-      if(tl.type==="product_grid"){h+=txtField("ASINs (eine/Zeile)","content.asins",(tl.content.asins||[]).join("\n"))}
-    }
-    h+='</div></div>';
-  }
+  // Right sidebar
+  h+='<div class="sidebar-right">';
+  h+=renderProperties();
+  h+='</div>';
 
-  // Briefing panel
-  if(s.mode==="briefing"){
-    h+='<div class="briefing-panel"><div class="props-title">📐 Bild-Specs & Briefings</div><div class="bp-scroll">';
-    if(bp){
-      h+='<div class="bp-brand"><div style="font-size:12px;font-weight:700">'+st.brandName+'</div>';
-      if(bp.colors)h+='<div style="display:flex;gap:4px;margin:4px 0">'+Object.values(bp.colors).map(c=>'<span style="width:16px;height:16px;border-radius:50%;border:1px solid #ddd;background:'+c+'"></span>').join("")+'</div>';
-      h+='<div style="font-size:11px;color:#6b7280">'+bp.type+' · '+bp.tone+'</div></div>';
-    }
-    h+='<div class="bp-hero"><div style="font-size:12px;font-weight:700;color:#1e40af">Hero Image</div><div style="font-size:11px;color:#1d4ed8;margin-top:2px">3000×600px | max 5MB | Safe Zone 70%</div>'+(pg?.heroImageBriefing?'<div style="font-size:11px;color:#2563eb;margin-top:4px;font-style:italic">'+esc(pg.heroImageBriefing)+'</div>':'')+'</div>';
-    (pg?.tiles||[]).forEach((t,i)=>{
-      const def=TILES[t.type],ni=def?.needsImage;
-      h+='<div class="bp-tile'+(ni?'':' no-img')+'"><div style="font-size:12px;font-weight:700;color:'+(ni?"#92400e":"#6b7280")+'">'+(i+1)+'. '+def.name+' ('+SIZE_LABELS[t.size]+')</div>';
-      if(ni&&def.specs){const sp=def.specs[t.size]||Object.values(def.specs)[0]||{};Object.entries(sp).forEach(([k,v])=>{h+='<div style="font-size:11px;color:#92400e"><b>'+k+':</b> '+v+'</div>'})}
-      if(t.imageBriefing)h+='<div style="font-size:11px;margin-top:4px;padding:6px;background:#fff;border-radius:4px;border:1px solid #fde68a">🎨 '+esc(t.imageBriefing)+'</div>';
-      if(t.image)h+='<div style="font-size:11px;color:#166534;font-weight:600;margin-top:4px">✓ '+t.imageFile+'</div>';
-      else if(ni)h+='<div style="font-size:11px;color:#dc2626;font-weight:600;margin-top:4px">⚠ Bild fehlt</div>';
-      h+='</div>';
-    });
-    h+='</div></div>';
-  }
+  h+='</div>'; // layout
 
-  h+='</div>'; // main
-
-  // Generation overlay
-  if(s.generating){
-    h+='<div class="gen-bg"><div class="gen-box"><div style="padding:20px 20px 12px"><div style="font-size:16px;font-weight:700;margin-bottom:12px">Store wird generiert...</div>';
-    s.genSteps.forEach((st,i)=>{
-      const cls=i<s.genStep?"done":i===s.genStep?"active":"pending";
-      h+='<div class="gen-step '+cls+'"><span style="font-size:14px;width:20px;text-align:center">'+(i<s.genStep?"✅":i===s.genStep?"⏳":"⬜")+'</span><div><div style="font-weight:600">'+st.name+'</div><div style="font-weight:400;opacity:.7">'+st.desc+'</div></div></div>';
-    });
-    h+='</div><div class="gen-log">';
-    s.genLog.forEach(l=>{h+='<div'+(l.includes("❌")?' class="err"':"")+'>'+esc(l)+'</div>'});
-    h+='<div>_</div></div></div></div>';
-  }
-
-  // Error panel
-  if(s.showErrors&&!s.generating&&s.errorLog.length){
-    h+='<div class="err-panel" onclick="state.showErrors=false;render()"><div class="err-box" onclick="event.stopPropagation()"><div style="padding:16px;border-bottom:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center"><div style="font-size:16px;font-weight:700;color:#dc2626">🐛 Error Log ('+s.errorLog.length+')</div><div style="display:flex;gap:8px"><button style="padding:4px 12px;border-radius:6px;font-size:12px;font-weight:600;background:#f3f4f6;border:1px solid #ddd" onclick="state.errorLog=[];state.showErrors=false;render()">Clear</button><button style="padding:4px 12px;border-radius:6px;font-size:12px;font-weight:600;background:#f3f4f6;border:1px solid #ddd" onclick="state.showErrors=false;render()">✕</button></div></div><div style="flex:1;overflow-y:auto;padding:12px">';
-    s.errorLog.forEach(e=>{h+='<div class="err-item"><div class="time">'+e.time+'</div><div class="msg">'+esc(e.msg)+'</div>'+(e.detail?'<pre>'+esc(e.detail)+'</pre>':'')+'</div>'});
-    h+='</div></div></div>';
-  }
-
-  // Toast
-  if(s.toast)h+='<div class="toast '+(s.toast.t==="err"?"err":"ok")+'">'+(s.toast.t==="ok"?"✓":"✕")+' '+esc(s.toast.m)+'</div>';
+  // Modals
+  if(S.showLayoutPicker)h+=renderLayoutPicker();
+  if(S.showTilePicker)h+=renderTilePicker();
+  if(S.showGenModal)h+=renderGenModal();
+  if(S.generating)h+=renderGenOverlay();
+  if(S.showErrors)h+=renderErrorPanel();
+  if(S.toast)h+='<div class="toast '+(S.toast.t==="err"?"err":"ok")+'">'+(S.toast.t==="ok"?"✓":"✕")+" "+esc(S.toast.m)+'</div>';
 
   document.getElementById("app").innerHTML=h;
 }
 
-// ── Tile inner render ──
-function renderTileInner(t,def,c){
-  if(t.type==="text")return'<div class="tile-text"><p style="font-size:14px;color:#6b7280;line-height:1.6">'+(esc(c.text)||"Text...")+'</p></div>';
-  if(t.type==="image_with_text")return'<div style="display:flex;flex-direction:'+(c.layout==="text_beside"?"row":"column")+';min-height:180px"><div style="flex:1;background:#f3f4f6;display:flex;align-items:center;justify-content:center;color:#d1d5db;font-size:30px;min-height:140px">'+(t.image?'<img src="'+t.image+'" style="width:100%;height:auto">':"🖼️")+'</div><div style="flex:1;padding:20px;display:flex;flex-direction:column;justify-content:center">'+(c.headline?'<h3 style="font-weight:700;font-size:16px;margin-bottom:8px">'+esc(c.headline)+'</h3>':'')+(c.body?'<p style="font-size:14px;color:#6b7280;line-height:1.6">'+esc(c.body)+'</p>':'')+(c.linkText?'<span style="font-size:14px;font-weight:600;margin-top:8px;color:#007EB9">'+esc(c.linkText)+' →</span>':'')+'</div></div>';
-  if(t.type==="product_grid")return'<div class="tile-product"><div style="font-size:14px;font-weight:600;margin-bottom:8px">Product Grid</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">'+"📦📦📦📦📦📦📦📦".split("").slice(0,8).map(()=>'<div style="background:#fafafa;border:1px solid #eee;border-radius:6px;padding:12px;text-align:center">📦</div>').join("")+'</div></div>';
-  if(t.type==="best_sellers")return'<div class="tile-auto" style="background:linear-gradient(to right,#fffbeb,#fff7ed)">🏆<div style="font-size:14px;font-weight:600;margin-top:4px">Best Sellers</div></div>';
-  if(t.type==="recommended")return'<div class="tile-auto" style="background:#eff6ff">💡<div style="font-size:14px;font-weight:600;margin-top:4px">Recommended</div></div>';
-  if(t.type==="featured_deals")return'<div class="tile-auto" style="background:#fff7ed">🏷️<div style="font-size:14px;font-weight:600;margin-top:4px">Featured Deals</div></div>';
-  if(t.type==="product")return'<div style="padding:16px;display:flex;align-items:center;gap:12px"><div style="width:64px;height:64px;background:#f3f4f6;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px">📦</div><div><div style="font-weight:600;font-size:14px">'+(esc(c.customTitle||c.name)||"Produkt")+'</div><div style="font-size:11px;color:#9ca3af;font-family:monospace;margin-top:2px">'+(c.asin||"ASIN")+'</div></div></div>';
-  if(t.type==="gallery")return'<div style="padding:16px"><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">'+"1234".split("").map(()=>'<div style="aspect-ratio:1;background:#f3f4f6;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#d1d5db;font-size:20px">🖼️</div>').join("")+'</div></div>';
-  if(t.type==="video"||t.type==="background_video")return'<div style="display:flex;align-items:center;justify-content:center;padding:32px;font-size:36px;background:#1a1a2e;min-height:160px;color:rgba(255,255,255,.3)">▶</div>';
-  if(t.type==="shoppable_image")return t.image?'<div style="position:relative"><img src="'+t.image+'" style="width:100%;height:auto"><div style="position:absolute;top:8px;right:8px;padding:2px 8px;background:rgba(255,255,255,.9);border-radius:6px;font-size:12px;font-weight:600">🛒</div></div>':'<div class="tile-ph"><span class="emoji">🛒🖼️</span><div class="label">Shoppable Image</div></div>';
-  // Default image tile
-  return t.image?'<img src="'+t.image+'" style="width:100%;height:auto;display:block">':'<div class="tile-ph"><span class="emoji">🖼️</span><div class="label">'+def.name+'</div>'+(t.imageBriefing?'<div class="brief">"'+esc(t.imageBriefing).slice(0,80)+'..."</div>':'')+'</div>';
+// ── Tile render ──
+function renderTile(t,td){
+  const c=t.content||{};
+  if(t.type==="text")return'<div class="tile-text-area">'+esc(c.text||"Text...")+'</div>';
+  if(t.type==="image_text")return'<div style="display:flex;flex-direction:column;height:100%"><div class="tile-img-ph">'+(t.image?'<img src="'+t.image+'" style="width:100%;height:auto">':'🖼️')+'</div><div style="padding:8px"><div style="font-weight:700;font-size:13px">'+esc(c.headline||"")+'</div><div style="font-size:12px;color:#565959">'+esc(c.body||"")+'</div></div></div>';
+  if(t.type==="product"||t.type==="product_grid"||t.type==="product_collection")return'<div class="tile-product-ph"><span style="font-size:24px">'+td.icon+'</span><div><div style="font-weight:600;font-size:12px">'+td.name+'</div><div style="font-size:11px;color:#999">'+(c.asin||c.asins||"")+'</div></div></div>';
+  if(t.type==="best_sellers"||t.type==="recommended"||t.type==="featured_deals")return'<div class="tile-auto-ph">'+td.icon+' '+td.name+'</div>';
+  if(t.type==="video"||t.type==="bg_video"||t.type==="video_reveal")return'<div style="display:flex;align-items:center;justify-content:center;min-height:100px;background:#1a1a2e;color:rgba(255,255,255,.3);font-size:30px">▶</div>';
+  if(t.type==="shoppable_image")return t.image?'<div style="position:relative"><img src="'+t.image+'" style="width:100%;height:auto"><span style="position:absolute;top:6px;right:6px;background:rgba(255,255,255,.9);padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600">🛒</span></div>':'<div class="tile-img-ph">🛒🖼️</div>';
+  if(t.type==="gallery")return'<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:8px">'+"1234".split("").map(()=>'<div style="aspect-ratio:1;background:#f3f4f6;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#ddd">🖼️</div>').join("")+'</div>';
+  // Default image
+  return t.image?'<img src="'+t.image+'" style="width:100%;height:auto;display:block">':'<div class="tile-img-ph">'+(t.imageBriefing?'<div style="font-size:11px;color:#bbb;padding:8px;text-align:center">'+esc(t.imageBriefing).slice(0,80)+'...</div>':td.icon)+'</div>';
 }
 
-// ── Field helpers ──
-function inpField(label,path,val){return'<div class="field"><label>'+label+'</label><input value="'+esc(val||"")+'" oninput="setTileProp(\''+path+'\',this.value)"></div>'}
-function txtField(label,path,val){return'<div class="field"><label>'+label+'</label><textarea oninput="setTileProp(\''+path+'\',this.value)">'+esc(val||"")+'</textarea></div>'}
-function selField(label,path,opts,val){return'<div class="field"><label>'+label+'</label><select onchange="setTileProp(\''+path+'\',this.value)">'+opts.map(([v,l])=>'<option value="'+v+'"'+(val===v?' selected':'')+'>'+l+'</option>').join("")+'</select></div>'}
-function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+// ── Properties panel ──
+function renderProperties(){
+  const pg=curPage();
+  if(!pg)return'<div class="sr-header"><h3>Eigenschaften</h3></div><div class="sr-scroll"><p style="color:#999;text-align:center;padding:20px">Keine Seite</p></div>';
 
-// ── Actions ──
-function addTile(type){const t=mkTile(type);curPage().tiles.push(t);state.selTile=t.id;render()}
-function delTile(id){const p=curPage();p.tiles=p.tiles.filter(t=>t.id!==id);if(state.selTile===id)state.selTile=null;render()}
-function moveTile(id,d){const p=curPage(),ts=p.tiles,i=ts.findIndex(t=>t.id===id),j=i+d;if(j>=0&&j<ts.length)[ts[i],ts[j]]=[ts[j],ts[i]];render()}
-function addPage(){const n=prompt("Seitenname:");if(n){const p=mkPage(n);state.store.pages.push(p);state.curPage=p.id;state.selTile=null;render()}}
-function delPage(id){if(state.store.pages.length<=1)return;state.store.pages=state.store.pages.filter(p=>p.id!==id);if(state.curPage===id)state.curPage=state.store.pages[0]?.id;render()}
-function setTileProp(path,val){
-  const t=curTile();if(!t)return;
-  if(path==="size"){t.size=val}
-  else if(path==="imageBriefing"){t.imageBriefing=val}
-  else if(path==="content.asins"){t.content.asins=val.split("\n").filter(Boolean)}
-  else if(path.startsWith("content.")){const k=path.split(".")[1];t.content[k]=val}
-  render();
+  // Header selected
+  if(S.selSection==="header"){
+    return'<div class="sr-header"><h3>Bearbeitung: Header</h3><button class="close-btn" onclick="S.selSection=null;render()">< Fertig</button></div><div class="sr-scroll"><div class="sr-section"><h4>Header-Bild</h4><div class="sr-specs"><b>Mindestens</b> 3.000 × 600 Pixel<br><b>Max</b> 5 MB</div><div class="sr-field"><div class="sr-upload" onclick="toast(\'Header-Bild Upload TODO\')">Bild hochladen</div></div></div></div>';
+  }
+
+  // Tile selected
+  if(S.selSection&&S.selCell!==null){
+    const sec=pg.sections.find(s=>s.id===S.selSection);
+    if(sec&&sec.tiles[S.selCell]){
+      const t=sec.tiles[S.selCell],td=TILE_TYPES[t.type];
+      let h='<div class="sr-header"><h3>'+td.icon+' '+td.name+'</h3><button class="close-btn" onclick="removeTileFromCell(\''+sec.id+'\','+S.selCell+');S.selCell=null;render()">🗑 Löschen</button></div><div class="sr-scroll">';
+
+      // Specs
+      if(td.specs){h+='<div class="sr-specs">';Object.entries(td.specs).forEach(([k,v])=>{h+='<b>'+k+':</b> '+v+'<br>'});h+='</div>'}
+
+      // Image upload
+      if(td.needsImage){
+        h+='<div class="sr-section"><h4>Bild</h4><div class="sr-field"><div class="sr-upload'+(t.image?" has-img":"")+'" onclick="uploadImg(\''+sec.id+'\','+S.selCell+')">'+(t.image?"✓ "+t.imageFile+" ("+t.imgW+"×"+t.imgH+")":"Bild hochladen")+'</div></div></div>';
+      }
+
+      // Briefing
+      if(td.needsImage){
+        h+='<div class="sr-section"><h4>🎨 Designer-Briefing</h4><div class="sr-field"><textarea id="sr-briefing" oninput="updTileProp(\'imageBriefing\',this.value)">'+esc(t.imageBriefing||"")+'</textarea></div></div>';
+      }
+
+      // Type-specific fields
+      if(t.type==="text"){
+        h+='<div class="sr-section"><h4>Text</h4><div class="sr-field"><label>Titel</label><input value="'+esc(t.content.title||"")+'" oninput="updTileContent(\'title\',this.value)"></div><div class="sr-field"><label>Text</label><textarea oninput="updTileContent(\'text\',this.value)">'+esc(t.content.text||"")+'</textarea><div class="hint">0 von 3 Zeilen</div></div></div>';
+      }
+      if(t.type==="image_text"){
+        h+='<div class="sr-section"><h4>Text</h4><div class="sr-field"><label>Headline</label><input value="'+esc(t.content.headline||"")+'" oninput="updTileContent(\'headline\',this.value)"></div><div class="sr-field"><label>Body</label><textarea oninput="updTileContent(\'body\',this.value)">'+esc(t.content.body||"")+'</textarea></div><div class="sr-field"><label>Link-Text</label><input value="'+esc(t.content.linkText||"")+'" oninput="updTileContent(\'linkText\',this.value)"></div></div>';
+      }
+      if(t.type==="product"){
+        h+='<div class="sr-section"><h4>Produkt</h4><div class="sr-field"><label>ASIN</label><input value="'+esc(t.content.asin||"")+'" oninput="updTileContent(\'asin\',this.value)" placeholder="B0XXXXXXXXX"></div></div>';
+      }
+      if(t.type==="product_grid"||t.type==="product_collection"){
+        h+='<div class="sr-section"><h4>Produkte</h4><div class="sr-field"><label>ASINs (eine pro Zeile)</label><textarea oninput="updTileContent(\'asins\',this.value)">'+esc(t.content.asins||"")+'</textarea></div></div>';
+      }
+
+      h+='</div>';
+      return h;
+    }
+  }
+
+  // Section selected (no cell)
+  if(S.selSection){
+    const sec=pg.sections.find(s=>s.id===S.selSection);
+    if(sec){
+      const l=LAYOUTS.find(x=>x.id===sec.layoutId)||LAYOUTS[0];
+      let h='<div class="sr-header"><h3>Abschnitt: '+l.name+'</h3></div><div class="sr-scroll">';
+      h+='<div class="sr-section"><h4>'+l.cells+' Kacheln</h4>';
+      sec.tiles.forEach((t,ci)=>{
+        h+='<div style="padding:8px;border:1px solid #eee;border-radius:4px;margin-bottom:6px;font-size:12px;display:flex;align-items:center;justify-content:space-between">';
+        if(t){const td=TILE_TYPES[t.type];h+='<span>'+td.icon+' '+td.name+'</span><button style="color:var(--red);font-size:11px" onclick="removeTileFromCell(\''+sec.id+'\','+ci+')">✕</button>'}
+        else h+='<span style="color:#bbb">Leer</span><button style="color:var(--amz-blue);font-size:11px" onclick="S.showTilePicker={secId:\''+sec.id+'\',cellIdx:'+ci+'};render()">+ Kachel</button>';
+        h+='</div>';
+      });
+      h+='</div>';
+      h+='<div class="sr-section"><h4>Aktionen</h4>';
+      h+='<button style="width:100%;padding:8px;border:1px solid #eee;border-radius:4px;margin-bottom:4px;text-align:left;font-size:12px" onclick="moveSection(\''+sec.id+'\',-1)">↑ Abschnitt nach oben</button>';
+      h+='<button style="width:100%;padding:8px;border:1px solid #eee;border-radius:4px;margin-bottom:4px;text-align:left;font-size:12px" onclick="moveSection(\''+sec.id+'\',1)">↓ Abschnitt nach unten</button>';
+      h+='<button style="width:100%;padding:8px;border:1px solid #fecaca;border-radius:4px;text-align:left;font-size:12px;color:var(--red)" onclick="delSection(\''+sec.id+'\')">🗑 Abschnitt löschen</button>';
+      h+='</div></div>';
+      return h;
+    }
+  }
+
+  // Default — page overview
+  let h='<div class="sr-header"><h3>'+esc(pg.name)+'</h3></div><div class="sr-scroll">';
+  h+='<div class="sr-section"><h4>Seitenabschnitte</h4><p style="font-size:12px;color:#999;margin-bottom:8px">Abschnitte hinzufügen, entfernen und neu ordnen.</p>';
+  h+='<button class="add-section-btn" onclick="S.showLayoutPicker=true;render()">Neuen Abschnitt hinzufügen</button>';
+  pg.sections.forEach((sec,si)=>{
+    const l=LAYOUTS.find(x=>x.id===sec.layoutId)||LAYOUTS[0];
+    h+='<div style="padding:8px;border:1px solid #eee;border-radius:4px;margin-bottom:4px;font-size:12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="S.selSection=\''+sec.id+'\';render()">';
+    h+='<span>'+(si+1)+'. '+l.name+' ('+sec.tiles.filter(Boolean).length+'/'+l.cells+' Kacheln)</span>';
+    h+='<span style="color:#999">⋮</span></div>';
+  });
+  h+='</div></div>';
+  return h;
 }
-function doRefineFromInput(){const el=document.getElementById("refine-input");if(el){doRefine(el.value);el.value=""}}
+
+// ── Update tile helpers ──
+function updTileProp(prop,val){const pg=curPage(),sec=pg.sections.find(s=>s.id===S.selSection);if(sec&&sec.tiles[S.selCell])sec.tiles[S.selCell][prop]=val;render()}
+function updTileContent(key,val){const pg=curPage(),sec=pg.sections.find(s=>s.id===S.selSection);if(sec&&sec.tiles[S.selCell]){if(!sec.tiles[S.selCell].content)sec.tiles[S.selCell].content={};sec.tiles[S.selCell].content[key]=val}render()}
+
+// ── Layout picker ──
+function renderLayoutPicker(){
+  let h='<div class="layout-picker" onclick="S.showLayoutPicker=null;render()"><div class="lp-box" onclick="event.stopPropagation()">';
+  h+='<div class="lp-header">< Layout auswählen</div><div class="lp-grid">';
+  LAYOUTS.forEach(l=>{
+    h+='<div class="lp-option" style="grid-template-columns:'+l.cols+'" onclick="addSection(\''+l.id+'\');S.showLayoutPicker=null;render()">';
+    for(let i=0;i<l.cells;i++)h+='<div class="lp-cell"></div>';
+    h+='</div>';
+  });
+  h+='</div></div></div>';
+  return h;
+}
+
+// ── Tile picker ──
+function renderTilePicker(){
+  const tp=S.showTilePicker;
+  let h='<div class="tile-picker" onclick="S.showTilePicker=null;render()"><div class="tp-box" onclick="event.stopPropagation()">';
+  h+='<div class="tp-header">Kacheltyp wählen</div>';
+  TILE_GROUPS.forEach(g=>{
+    const items=Object.entries(TILE_TYPES).filter(([,v])=>v.grp===g);
+    if(!items.length)return;
+    items.forEach(([k,v])=>{
+      h+='<div class="tp-item" onclick="setTileInCell(\''+tp.secId+'\','+tp.cellIdx+',mkTile(\''+k+'\'));S.showTilePicker=null;render()">';
+      h+='<div class="icon">'+v.icon+'</div><div class="info"><h5>'+v.name+(v.isNew?' <span style="background:#e8daef;color:#6c3483;font-size:9px;padding:1px 4px;border-radius:3px">Neu</span>':'')+'</h5><p>'+v.desc+'</p></div></div>';
+    });
+  });
+  h+='</div></div>';
+  return h;
+}
 
 // ── Gen modal ──
-function showGenModal(){
-  const d=document.createElement("div");d.className="modal-bg";d.onclick=e=>{if(e.target===d)d.remove()};
-  d.innerHTML='<div class="modal"><div style="padding:20px 20px 8px"><h2>✨ Multi-Step AI Generator</h2><p>Recherche → Architektur → Content → Validierung</p></div><div style="padding:20px;padding-top:8px;display:flex;flex-direction:column;gap:10px"><div class="field"><label>Markenname *</label><input id="gen-brand" placeholder="z.B. natural elements, HOLY, Kärcher..."></div><div class="field"><label>Marktplatz</label><select id="gen-mp"><option value="de">🇩🇪 Amazon.de</option><option value="com">🇺🇸 Amazon.com</option><option value="co.uk">🇬🇧 Amazon.co.uk</option><option value="fr">🇫🇷 Amazon.fr</option></select></div><div class="field"><label>Kategorie (optional)</label><input id="gen-cat"></div><div class="field"><label>Zusätzliche Infos (optional)</label><textarea id="gen-info" rows="2"></textarea></div></div><div style="padding:20px;padding-top:4px;display:flex;justify-content:flex-end;gap:8px"><button class="btn-out" onclick="this.closest(\'.modal-bg\').remove()">Abbrechen</button><button class="btn" onclick="startGen()">🚀 Generieren</button></div></div>';
-  document.body.appendChild(d);
+function renderGenModal(){
+  return'<div class="modal-bg" onclick="S.showGenModal=false;render()"><div class="modal" onclick="event.stopPropagation()"><div style="padding:16px;border-bottom:1px solid #eee"><h3 style="font-size:16px;font-weight:800">✨ AI Store Generator</h3><p style="font-size:12px;color:#999">Recherche → Architektur → Content → Validierung</p></div><div style="padding:16px;display:flex;flex-direction:column;gap:10px"><div class="sr-field"><label>Markenname *</label><input id="gen-brand" placeholder="z.B. Kärcher, HOLY, natural elements..."></div><div class="sr-field"><label>Marktplatz</label><select id="gen-mp"><option value="de">🇩🇪 Amazon.de</option><option value="com">🇺🇸 Amazon.com</option><option value="co.uk">🇬🇧 Amazon.co.uk</option><option value="fr">🇫🇷 Amazon.fr</option></select></div><div class="sr-field"><label>Kategorie (optional)</label><input id="gen-cat"></div><div class="sr-field"><label>Zusätzliche Infos (optional)</label><textarea id="gen-info" rows="2"></textarea></div></div><div style="padding:16px;display:flex;justify-content:flex-end;gap:8px"><button class="topbar-btn" onclick="S.showGenModal=false;render()">Abbrechen</button><button class="topbar-btn primary" onclick="startGen()">🚀 Generieren</button></div></div></div>';
 }
-function startGen(){
-  const b=document.getElementById("gen-brand").value;
-  const m=document.getElementById("gen-mp").value;
-  const c=document.getElementById("gen-cat").value;
-  const i=document.getElementById("gen-info").value;
-  document.querySelector(".modal-bg")?.remove();
-  generate(b,m,c,i);
+function startGen(){const b=document.getElementById("gen-brand").value,m=document.getElementById("gen-mp").value,c=document.getElementById("gen-cat").value,i=document.getElementById("gen-info").value;S.showGenModal=false;generate(b,m,c,i)}
+
+// ── Gen overlay ──
+function renderGenOverlay(){
+  let h='<div class="gen-bg"><div class="gen-box"><div class="gen-steps"><div style="font-size:16px;font-weight:700;margin-bottom:8px">Store wird generiert...</div>';
+  S.genSteps.forEach((s,i)=>{const cls=i<S.genStep?"done":i===S.genStep?"active":"pending";h+='<div class="gen-step '+cls+'"><span style="width:18px;text-align:center">'+(i<S.genStep?"✅":i===S.genStep?"⏳":"⬜")+'</span><div><b>'+s.n+'</b> <span style="opacity:.6">'+s.d+'</span></div></div>'});
+  h+='</div><div class="gen-log">';
+  S.genLog.forEach(l=>{h+='<div'+(l.includes("❌")?' class="err"':"")+'>'+esc(l)+'</div>'});
+  h+='<div style="color:#4ade80">_</div></div></div></div>';
+  return h;
 }
 
-// Initial render
+// ── Error panel ──
+function renderErrorPanel(){
+  let h='<div class="err-bg" onclick="S.showErrors=false;render()"><div class="err-box" onclick="event.stopPropagation()"><div style="padding:12px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center"><h3 style="font-size:15px;font-weight:700;color:var(--red)">🐛 Errors ('+S.errorLog.length+')</h3><div style="display:flex;gap:6px"><button class="topbar-btn" onclick="S.errorLog=[];S.showErrors=false;render()">Clear</button><button class="topbar-btn" onclick="S.showErrors=false;render()">✕</button></div></div><div style="flex:1;overflow-y:auto;padding:12px">';
+  S.errorLog.forEach(e=>{h+='<div class="err-item"><div class="time">'+e.time+'</div><div class="msg">'+esc(e.msg)+'</div>'+(e.detail?'<pre>'+esc(e.detail)+'</pre>':'')+'</div>'});
+  h+='</div></div></div>';
+  return h;
+}
+
+// ── Refine ──
+function doRefineUI(){const el=document.getElementById("refine-input");if(el&&el.value.trim()){doRefine(el.value);el.value=""}}
+async function doRefine(instruction){
+  if(!apiKey){promptKey();return}
+  S.generating=true;S.genSteps=[{n:"Verfeinere...",d:instruction}];S.genStep=0;S.genLog=[];render();
+  addLog('✏️ "'+instruction+'"');
+  const clean=JSON.parse(JSON.stringify(S.store));clean.pages.forEach(p=>p.sections.forEach(s=>s.tiles.forEach((t,i)=>{if(t)t.image=null})));
+  try{
+    const r=await callAI(PROMPTS.refine,`STORE:\n${JSON.stringify(clean)}\n\nCHANGE: ${instruction}\n\nReturn complete JSON.`);
+    if(r.pages?.length){
+      S.store.pages=r.pages.map((p,i)=>({id:p.id||"p_"+i,name:p.name||"Seite",sections:(p.sections||[]).map(sec=>{
+        const l=LAYOUTS.find(x=>x.id===sec.layoutId)||LAYOUTS[0];
+        const tiles=(sec.tiles||[]).slice(0,l.cells).map(t=>t&&TILE_TYPES[t.type]?mkTile(t.type,t.content||{},t.imageBriefing||""):null);
+        while(tiles.length<l.cells)tiles.push(null);
+        return{id:uid(),layoutId:l.id,tiles}
+      })}));
+      if(r.brandProfile)S.store.brandProfile=r.brandProfile;
+      S.curPage=S.store.pages[0]?.id;
+      addLog("✅ Verfeinert");toast("Store verfeinert!");
+    }
+  }catch(e){addLog("❌ "+e.message);addErr(e.message);toast(e.message,"err")}
+  finally{S.generating=false;render()}
+}
+
+// Init
 render();
-if(!apiKey)setTimeout(()=>{promptKey()},500);
+if(!apiKey)setTimeout(promptKey,300);
 </script>
 </body>
 </html>
