@@ -169,18 +169,29 @@ CRITICAL: Your ENTIRE response must be ONLY a JSON object. No text before or aft
 arch:`Plan Amazon Store structure. Pages > Sections > Layout grid > Tiles.
 Layouts: "1"(full),"1-1"(2eq),"2-1"(big+sm),"1-2"(sm+big),"1-1-1"(3eq),"1-1-1-1"(4eq),"2-1-1"(big+2sm),"1-1-2"(2sm+big)
 Tiles: product_selection,video_reveal,split,text,image,image_text,shoppable_image,product,product_grid,product_collection,featured_deals,best_sellers,recommended,video,bg_video,gallery
-Rules: Homepage first, then categories. 4-8 pages, 3-6 sections/page. Keep text tiles SHORT (max 2 sentences). Prefer image_text over long text blocks. Split long content into multiple sections.
+Rules: Homepage first, then category pages. 4-8 pages, 3-6 sections/page. Use real ASINs from product list in product/product_grid/product_collection tiles. Keep text tiles concise. Include FAQ sections where helpful.
 Return ONLY JSON:
-{"pages":[{"id":"homepage","name":"Homepage","sections":[{"layoutId":"1","tiles":["image: hero"]},{"layoutId":"1-1-1","tiles":["image: cat1","image: cat2","image: cat3"]}]}]}`,
-content:`Create content for ONE Amazon Store page. CRITICAL RULES:
-- Text tiles: MAX 2 short sentences. No long paragraphs. If more text needed, split into multiple sections.
-- Every image tile MUST have imageBriefing (in English for designer): DIMENSIONS | CONTENT | TEXT OVERLAY (in store language) | COLORS | MOOD
-- All customer-facing text (headlines, body) in marketplace language
-- Keep content concise, punchy, on-brand
+{"pages":[{"id":"homepage","name":"Homepage","sections":[{"layoutId":"1","tiles":["image: hero banner"]},{"layoutId":"1-1-1","tiles":["image_text: category 1","image_text: category 2","image_text: category 3"]},{"layoutId":"1","tiles":["product_grid: bestsellers with ASINs"]}]}]}`,
+content:`Create COMPLETE content for ONE Amazon Store page. You MUST fill in ALL content fields — no empty values allowed.
+
+TILE CONTENT RULES (follow exactly):
+- "text" → {"type":"text","content":{"title":"Short Title","text":"1-2 concise sentences in marketplace language."}}
+- "image" → {"type":"image","content":{"alt":"description"},"imageBriefing":"DIMENSIONS: WxH | SUBJECT: what to show | TEXT OVERLAY: exact text in store language | COLORS: #hex values | MOOD: adjective"}
+- "image_text" → {"type":"image_text","content":{"headline":"Catchy Headline","body":"1-2 sentences","linkText":"Mehr erfahren"},"imageBriefing":"DIMENSIONS: WxH | SUBJECT: ... | COLORS: ..."}
+- "shoppable_image" → {"type":"shoppable_image","content":{"alt":"desc","products":["ASIN1","ASIN2"]},"imageBriefing":"..."}
+- "product" → {"type":"product","content":{"asin":"B0REALASINFROMLIST"}}
+- "product_grid" → {"type":"product_grid","content":{"asins":"B0ASIN1\\nB0ASIN2\\nB0ASIN3","title":"Section Title"}}
+- "product_collection" → {"type":"product_collection","content":{"asins":"B0ASIN1\\nB0ASIN2","title":"Collection Name"}}
+- "product_selection" → {"type":"product_selection","content":{"introTitle":"Find Your Perfect Product","introText":"Answer a few questions","questions":[{"q":"What is your main need?","answers":[{"a":"Clean drinking water","nextQ":1,"products":["B0ASIN1"]},{"a":"Shower filtration","nextQ":1,"products":["B0ASIN2"]}]},{"q":"How many people?","answers":[{"a":"1-2","products":["B0ASIN1"]},{"a":"3+","products":["B0ASIN3"]}]}],"resultsTitle":"Our Recommendations"}}
+- "video"/"bg_video"/"video_reveal" → {"type":"video","content":{"alt":"description"},"imageBriefing":"VIDEO: subject, duration, mood"}
+- "gallery" → {"type":"gallery","content":{"images":["desc1","desc2","desc3"]},"imageBriefing":"GALLERY: 3-6 images showing..."}
+- "best_sellers"/"recommended"/"featured_deals" → {"type":"best_sellers","content":{"category":"optional filter"}}
+
+CRITICAL: Use REAL ASINs from the product list. ALL text/headline/body fields MUST contain actual content in marketplace language. No placeholders. No empty strings.
 Return ONLY JSON:
-{"pageName":"...","sections":[{"layoutId":"...","tiles":[{"type":"...","content":{...},"imageBriefing":"ENGLISH briefing for designer..."}]}]}`,
-refine:`Refine Amazon Store. Structure: pages>sections(layoutId+tiles). Keep text SHORT (max 2 sentences per tile). Return ONLY valid JSON with ALL pages:
-{"pages":[...],"brandProfile":{...}}`
+{"pageName":"...","sections":[{"layoutId":"...","tiles":[...]}]}`,
+refine:`Refine Amazon Store. Structure: pages>sections(layoutId+tiles). ALL text fields must have content. Use real ASINs. Return ONLY valid JSON with ALL pages:
+{"pages":[...]}`
 };
 
 async function callAI(sys,usr,ws=false,mdl="claude-sonnet-4-20250514"){
@@ -249,11 +260,12 @@ async function generate(brand,mp,cat,info){
     const arch=await callAI(PR.arch,`Brand: ${JSON.stringify(bp)}\nProducts: ${bp.products?.length||0}\nLang: ${lang}${userReqs}`);
     log("✅ "+(arch.pages?.length||0)+" Seiten");S.gs=2;R();await new Promise(x=>setTimeout(x,5000));
 
-    const prods=(bp.products||[]).slice(0,12).map(p=>`${p.name} (${p.asin})`).join(", ");
+    const prods=(bp.products||[]).slice(0,15);
+    const prodStr=prods.map(p=>`${p.name} (${p.asin}) [${p.category||""}]`).join(", ");
     const pages=[];
     for(let i=0;i<(arch.pages||[]).length;i++){
       const pp=arch.pages[i];log("📝 "+(i+1)+"/"+arch.pages.length+": "+pp.name);R();
-      const pc=await callAI(PR.content,`PAGE: ${JSON.stringify(pp)}\nBRAND: ${bp.type}, ${bp.tone}, colors=${JSON.stringify(bp.colors)}\nPRODS: ${prods}\nLang: ${lang}${userReqs}\nDesigner briefings in ENGLISH. Customer text in ${lang}.`);
+      const pc=await callAI(PR.content,`PAGE: ${JSON.stringify(pp)}\nBRAND: ${bp.type}, ${bp.tone}, colors=${JSON.stringify(bp.colors)}\nPRODUCTS (use these real ASINs): ${prodStr}\nLang: ${lang}${userReqs}\nDesigner briefings in ENGLISH. Customer text in ${lang}. Use real ASINs from the product list above.`);
       const secs=(pc.sections||[]).map(s=>{
         const l=LY.find(x=>x.id===s.layoutId)||LY[0];
         const tiles=(s.tiles||[]).slice(0,l.cells).map(t=>{
@@ -339,7 +351,19 @@ function genBriefing(){
         md+="**Cell "+(ci+1)+": "+td.n+"**\n";
         if(td.sp)Object.entries(td.sp).forEach(([k,v])=>{md+="- "+k+": "+v+"\n"});
         if(t.ib)md+="- 🎨 Briefing: "+t.ib+"\n";
-        if(t.content){const c=t.content;if(c.headline)md+="- Headline ("+lang+"): "+c.headline+"\n";if(c.body)md+="- Body ("+lang+"): "+c.body+"\n";if(c.text)md+="- Text ("+lang+"): "+c.text+"\n"}
+        if(t.content){const c=t.content;
+          if(c.headline)md+="- Headline ("+lang+"): "+c.headline+"\n";
+          if(c.body)md+="- Body ("+lang+"): "+c.body+"\n";
+          if(c.title)md+="- Title ("+lang+"): "+c.title+"\n";
+          if(c.text)md+="- Text ("+lang+"): "+c.text+"\n";
+          if(c.asin)md+="- ASIN: "+c.asin+"\n";
+          if(c.asins)md+="- ASINs:\n"+c.asins.split("\n").map(a=>"  - "+a).join("\n")+"\n";
+          if(c.questions){md+="- **Quiz Flow:**\n";
+            (c.questions||[]).forEach((q,qi)=>{md+="  - Q"+(qi+1)+": "+q.q+"\n";
+              (q.answers||[]).forEach(a=>{md+="    - \""+a.a+"\" → Products: "+(a.products||[]).join(", ")+"\n"})})
+          }
+          if(c.images)md+="- Gallery images: "+(c.images||[]).join(" | ")+"\n";
+        }
         if(t.img)md+="- ✅ Image: "+t.ifile+" ("+t.iw+"×"+t.ih+")\n";
         else if(td.img)md+="- ⚠ Image needed\n";
         md+="\n"});md+="\n"});md+="---\n\n"});
@@ -413,10 +437,11 @@ function R(){
 }
 function rT(t,td){
   const c=t.content||{};
-  if(t.type==="text")return'<div class="ttxt">'+(c.title?'<b>'+esc(c.title)+'</b><br>':'')+esc(c.text||"Text...")+'</div>';
-  if(t.type==="image_text")return'<div style="display:flex;flex-direction:column;height:100%"><div class="timgph">'+(t.img?'<img src="'+t.img+'" style="width:100%;height:auto">':'🖼️')+'</div><div style="padding:6px"><div style="font-weight:700;font-size:12px">'+esc(c.headline||"")+'</div><div style="font-size:11px;color:#666">'+esc(c.body||"")+'</div></div></div>';
-  if(["product","product_grid","product_collection"].includes(t.type))return'<div class="tprod">'+td.i+'<div><b style="font-size:11px">'+td.n+'</b><div style="font-size:10px;color:#999">'+(c.asin||c.asins||"")+'</div></div></div>';
-  if(["best_sellers","recommended","featured_deals"].includes(t.type))return'<div class="tauto">'+td.i+' '+td.n+'</div>';
+  if(t.type==="text")return'<div class="ttxt">'+(c.title?'<b>'+esc(c.title)+'</b><br>':'')+esc(c.text||"[Text fehlt]")+'</div>';
+  if(t.type==="image_text")return'<div style="display:flex;flex-direction:column;height:100%"><div class="timgph">'+(t.img?'<img src="'+t.img+'" style="width:100%;height:auto">':'🖼️')+'</div><div style="padding:6px"><div style="font-weight:700;font-size:12px">'+esc(c.headline||"[Headline]")+'</div><div style="font-size:11px;color:#666">'+esc(c.body||"")+'</div></div></div>';
+  if(t.type==="product_selection"){const qs=c.questions||[];return'<div style="padding:10px;background:linear-gradient(135deg,#eef2ff,#fef3c7)"><div style="font-weight:700;font-size:13px;margin-bottom:4px">🧩 '+esc(c.introTitle||"Produktauswahl-Quiz")+'</div><div style="font-size:11px;color:#666;margin-bottom:6px">'+esc(c.introText||"")+'</div><div style="font-size:10px;color:#888">'+qs.length+' Fragen</div>'+(qs.length?'<div style="margin-top:4px;padding:4px 6px;background:#fff;border-radius:3px;font-size:10px;color:#444">❓ '+esc(qs[0].q||"")+'</div>':'')+'</div>'}
+  if(["product","product_grid","product_collection"].includes(t.type)){const asins=c.asins?c.asins.split('\n').filter(Boolean):c.asin?[c.asin]:[];return'<div class="tprod"><div style="text-align:center">'+td.i+'<div style="font-weight:600;font-size:11px">'+td.n+'</div>'+(asins.length?'<div style="font-size:9px;color:#888;margin-top:2px">'+asins.length+' ASIN'+(asins.length>1?"s":"")+'</div>':'')+'</div></div>'}
+  if(["best_sellers","recommended","featured_deals"].includes(t.type))return'<div class="tauto">'+td.i+' '+td.n+(c.category?' <span style="font-size:10px;opacity:.6">('+esc(c.category)+')</span>':'')+'</div>';
   if(["video","bg_video","video_reveal"].includes(t.type))return'<div style="display:flex;align-items:center;justify-content:center;min-height:70px;background:#1a1a2e;color:rgba(255,255,255,.3);font-size:24px">'+(t.ifile?'📁 '+esc(t.ifile):'▶')+'</div>';
   if(t.type==="shoppable_image")return t.img?'<div style="position:relative"><img src="'+t.img+'" style="width:100%;height:auto"><span style="position:absolute;top:4px;right:4px;background:rgba(255,255,255,.9);padding:1px 6px;border-radius:3px;font-size:10px">🛒</span></div>':'<div class="timgph">🛒🖼️</div>';
   if(t.type==="gallery")return'<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px;padding:6px">'+"1234".split("").map(()=>'<div style="aspect-ratio:1;background:#f3f4f6;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#ddd;font-size:14px">🖼️</div>').join("")+'</div>';
@@ -438,6 +463,23 @@ function rProps(){
         h+='<div class="sf"><label>Link-Text</label><input value="'+esc(t.content.linkText||"")+'" oninput="uTC(\'linkText\',this.value)"></div>'}
       if(t.type==="product")h+='<div class="sf"><label>ASIN</label><input value="'+esc(t.content.asin||"")+'" oninput="uTC(\'asin\',this.value)" placeholder="B0XXXXXXXXX"></div>';
       if(["product_grid","product_collection"].includes(t.type))h+='<div class="sf"><label>ASINs (je Zeile)</label><textarea oninput="uTC(\'asins\',this.value)">'+esc(t.content.asins||"")+'</textarea></div>';
+      if(t.type==="shoppable_image")h+='<div class="sf"><label>Produkt-ASINs (je Zeile)</label><textarea oninput="uTC(\'products\',this.value)">'+esc((t.content.products||[]).join("\\n"))+'</textarea></div>';
+      if(t.type==="product_selection"){
+        h+='<div class="sf"><label>Intro-Titel</label><input value="'+esc(t.content.introTitle||"")+'" oninput="uTC(\'introTitle\',this.value)"></div>';
+        h+='<div class="sf"><label>Intro-Text</label><textarea oninput="uTC(\'introText\',this.value)">'+esc(t.content.introText||"")+'</textarea></div>';
+        h+='<div class="sf"><label>Ergebnis-Titel</label><input value="'+esc(t.content.resultsTitle||"")+'" oninput="uTC(\'resultsTitle\',this.value)"></div>';
+        const qs=t.content.questions||[];
+        h+='<div class="sf"><label>Fragen ('+qs.length+')</label>';
+        qs.forEach((q,qi)=>{
+          h+='<div style="padding:6px;border:1px solid #eee;border-radius:3px;margin-bottom:4px;font-size:10px">';
+          h+='<div style="font-weight:700;margin-bottom:2px">Frage '+(qi+1)+': '+esc(q.q||"")+'</div>';
+          (q.answers||[]).forEach((a,ai)=>{
+            h+='<div style="padding:2px 0;color:#555">→ '+esc(a.a||"")+(a.products?.length?' <span style="color:#888">['+a.products.join(",")+']</span>':'')+'</div>'});
+          h+='</div>'});
+        h+='<div class="ht">Quiz-Daten bearbeiten: JSON direkt im Feld unten</div>';
+        h+='<textarea style="font-family:monospace;font-size:10px;min-height:100px" oninput="try{uTC(\'questions\',JSON.parse(this.value))}catch(e){}">'+esc(JSON.stringify(qs,null,1))+'</textarea></div>'
+      }
+      if(t.type==="gallery"){h+='<div class="sf"><label>Bilderbeschreibungen</label><textarea oninput="uTC(\'images\',this.value.split(\'\\n\'))">'+esc((t.content.images||[]).join("\\n"))+'</textarea><div class="ht">Eine Beschreibung pro Zeile (3-8)</div></div>'}
       return h+'</div>'}}
   if(S.ss){const sec=pg.sections.find(x=>x.id===S.ss);
     if(sec){const l=LY.find(x=>x.id===sec.lid)||LY[0];
