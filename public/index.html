@@ -163,8 +163,9 @@ let apiKey=localStorage.getItem("asb_api_key")||"";
 
 // ── AI ──
 const PR={
-research:`Research brands for Amazon Store. Use web search. Find: brand info, products, ASINs. No prices. Return ONLY JSON:
-{"brandName":"...","description":"...","type":"premium|d2c|mission|mass_market","tone":"...","colors":{"primary":"#hex","secondary":"#hex","accent":"#hex"},"categories":["..."],"usps":["..."],"targetAudience":"...","products":[{"name":"...","asin":"B0XX","category":"..."}],"amazonCategories":[]}`,
+research:`You research brands for Amazon Brand Stores. Use web search to find brand info, product categories, and Amazon ASINs. 
+CRITICAL: Your ENTIRE response must be ONLY a JSON object. No text before or after. No markdown. No explanations. Just raw JSON:
+{"brandName":"...","description":"1-2 sentences","type":"premium|d2c|mission|mass_market","tone":"...","colors":{"primary":"#hex","secondary":"#hex","accent":"#hex"},"categories":["..."],"usps":["..."],"targetAudience":"...","products":[{"name":"...","asin":"B0XX","category":"..."}],"amazonCategories":[]}`,
 arch:`Plan Amazon Store structure. Pages > Sections > Layout grid > Tiles.
 Layouts: "1"(full),"1-1"(2eq),"2-1"(big+sm),"1-2"(sm+big),"1-1-1"(3eq),"1-1-1-1"(4eq),"2-1-1"(big+2sm),"1-1-2"(2sm+big)
 Tiles: product_selection,video_reveal,split,text,image,image_text,shoppable_image,product,product_grid,product_collection,featured_deals,best_sellers,recommended,video,bg_video,gallery
@@ -184,7 +185,7 @@ refine:`Refine Amazon Store. Structure: pages>sections(layoutId+tiles). Keep tex
 
 async function callAI(sys,usr,ws=false,mdl="claude-sonnet-4-20250514"){
   if(!apiKey)throw new Error("API Key fehlt!");
-  const b={model:mdl,max_tokens:ws?4000:6000,system:sys,messages:[{role:"user",content:usr}]};
+  const b={model:mdl,max_tokens:ws?8000:6000,system:sys,messages:[{role:"user",content:usr}]};
   if(ws)b.tools=[{type:"web_search_20250305",name:"web_search"}];
   for(let a=0;a<3;a++){
     let r;
@@ -193,7 +194,9 @@ async function callAI(sys,usr,ws=false,mdl="claude-sonnet-4-20250514"){
     if(r.status===429){if(a>=2)throw new Error("Rate limit — 2 Min warten");
       const w=60*(a+1);log("⏳ Rate limit, "+w+"s...");R();await new Promise(x=>setTimeout(x,w*1000));continue}
     if(!r.ok){const t=await r.text();err("API "+r.status,t);throw new Error("API "+r.status+": "+t.slice(0,200))}
-    const d=await r.json(),txt=(d.content||[]).filter(x=>x.type==="text").map(x=>x.text).join("");
+    const d=await r.json(),rawTxt=(d.content||[]).filter(x=>x.type==="text").map(x=>x.text).join("");
+    // Strip markdown codeblocks
+    const txt=rawTxt.replace(/```json\s*/gi,"").replace(/```\s*/g,"").trim();
     // Robust JSON extraction
     let json;
     try{
@@ -204,8 +207,12 @@ async function callAI(sys,usr,ws=false,mdl="claude-sonnet-4-20250514"){
       // Try to fix common issues: trailing commas, truncated JSON
       try{
         let fixed=txt.match(/\{[\s\S]*/)?.[0]||"";
+        // Remove trailing incomplete string values
+        fixed=fixed.replace(/,"[^"]*$/,"").replace(/,\s*"[^"]*":\s*"[^"]*$/,"");
         // Remove trailing incomplete entries
         fixed=fixed.replace(/,\s*\]}/g,"]}").replace(/,\s*}/g,"}").replace(/,\s*$/,"");
+        // Close unclosed strings (if last char is inside a string)
+        if((fixed.split('"').length-1)%2!==0)fixed+='"';
         // Try to close unclosed brackets
         let opens=0,closes=0;
         for(const ch of fixed){if(ch==='{')opens++;if(ch==='}')closes++}
@@ -234,18 +241,19 @@ async function generate(brand,mp,cat,info){
   S.gs=0;R();
   try{
     log("🔍 "+brand+"...");
-    const bp=await callAI(PR.research,`Research "${brand}" for Amazon.${mp}. ${cat?"Category: "+cat+".":""} ${info||""} Return JSON.`,true,"claude-haiku-4-5-20251001");
+    const bp=await callAI(PR.research,`Research "${brand}" for Amazon.${mp}. ${cat?"Category: "+cat+".":""} Return ONLY the JSON object, nothing else.`,true,"claude-haiku-4-5-20251001");
     log("✅ "+(bp.products?.length||0)+" Produkte");S.gs=1;R();await new Promise(x=>setTimeout(x,5000));
 
     log("🏗️ Architektur...");
-    const arch=await callAI(PR.arch,`Brand: ${JSON.stringify(bp)}\nProducts: ${bp.products?.length||0}\nLang: ${lang}`);
+    const userReqs=info?`\nUSER REQUIREMENTS (must follow): ${info}`:"";
+    const arch=await callAI(PR.arch,`Brand: ${JSON.stringify(bp)}\nProducts: ${bp.products?.length||0}\nLang: ${lang}${userReqs}`);
     log("✅ "+(arch.pages?.length||0)+" Seiten");S.gs=2;R();await new Promise(x=>setTimeout(x,5000));
 
     const prods=(bp.products||[]).slice(0,12).map(p=>`${p.name} (${p.asin})`).join(", ");
     const pages=[];
     for(let i=0;i<(arch.pages||[]).length;i++){
       const pp=arch.pages[i];log("📝 "+(i+1)+"/"+arch.pages.length+": "+pp.name);R();
-      const pc=await callAI(PR.content,`PAGE: ${JSON.stringify(pp)}\nBRAND: ${bp.type}, ${bp.tone}, colors=${JSON.stringify(bp.colors)}\nPRODS: ${prods}\nLang: ${lang}\nDesigner briefings in ENGLISH. Customer text in ${lang}.`);
+      const pc=await callAI(PR.content,`PAGE: ${JSON.stringify(pp)}\nBRAND: ${bp.type}, ${bp.tone}, colors=${JSON.stringify(bp.colors)}\nPRODS: ${prods}\nLang: ${lang}${userReqs}\nDesigner briefings in ENGLISH. Customer text in ${lang}.`);
       const secs=(pc.sections||[]).map(s=>{
         const l=LY.find(x=>x.id===s.layoutId)||LY[0];
         const tiles=(s.tiles||[]).slice(0,l.cells).map(t=>{
