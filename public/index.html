@@ -9,6 +9,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
 body{font-family:'Amazon Ember','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;-webkit-font-smoothing:antialiased}
+#app{display:flex;flex-direction:column;height:100vh}
 button{cursor:pointer;border:none;background:none;font-family:inherit;font-size:inherit}
 input,textarea,select{font-family:inherit;outline:none;font-size:13px}
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
@@ -33,7 +34,7 @@ input,textarea,select{font-family:inherit;outline:none;font-size:13px}
 .undo-redo button{width:28px;height:28px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--gray);border:1px solid var(--border)}
 
 /* Layout */
-.layout{display:flex;flex:1;overflow:hidden}
+.layout{display:flex;flex:1;overflow:hidden;min-height:0}
 
 /* Left sidebar — Pages */
 .sidebar-left{width:220px;background:#fff;border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
@@ -51,9 +52,9 @@ input,textarea,select{font-family:inherit;outline:none;font-size:13px}
 .page-item .menu-btn{color:var(--gray);font-size:16px;line-height:1}
 
 /* Canvas */
-.canvas-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.canvas-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0}
 .canvas{flex:1;overflow-y:auto;background:var(--bg);padding:16px}
-.canvas-inner{max-width:960px;margin:0 auto}
+.canvas-inner{max-width:960px;margin:0 auto;transition:max-width .3s ease}
 
 /* Store header preview */
 .store-header{background:#fff;border:2px solid transparent;border-radius:4px;margin-bottom:12px;cursor:pointer;transition:border-color .15s}
@@ -214,7 +215,7 @@ const mkPage=(name,id)=>({id:id||uid(),name,sections:[mkSection("1")]});
 let S={
   store:{brandName:"Mein Store",brandProfile:null,pages:[mkPage("Homepage","homepage")]},
   curPage:"homepage",selSection:null,selCell:null,
-  mode:"builder",generating:false,genStep:0,genSteps:[],genLog:[],
+  device:"desktop",generating:false,genStep:0,genSteps:[],genLog:[],
   errorLog:[],showErrors:false,toast:null,
   showLayoutPicker:null,showTilePicker:null,showGenModal:false,
 };
@@ -335,6 +336,14 @@ async function generate(brand,mp,cat,info){
 function curPage(){return S.store.pages.find(p=>p.id===S.curPage)||S.store.pages[0]}
 function addPage(){const n=prompt("Seitenname:");if(n){const p=mkPage(n);S.store.pages.push(p);S.curPage=p.id;S.selSection=null;render()}}
 function delPage(id){if(S.store.pages.length<=1)return;S.store.pages=S.store.pages.filter(p=>p.id!==id);if(S.curPage===id)S.curPage=S.store.pages[0]?.id;render()}
+function showPageMenu(id,idx){
+  const action=prompt("Seite: "+S.store.pages[idx].name+"\n\n1 = Umbenennen\n2 = Nach oben\n3 = Nach unten\n4 = Löschen\n\nNummer eingeben:");
+  if(action==="1"){const n=prompt("Neuer Name:",S.store.pages[idx].name);if(n)S.store.pages[idx].name=n}
+  else if(action==="2"&&idx>0)[S.store.pages[idx-1],S.store.pages[idx]]=[S.store.pages[idx],S.store.pages[idx-1]];
+  else if(action==="3"&&idx<S.store.pages.length-1)[S.store.pages[idx],S.store.pages[idx+1]]=[S.store.pages[idx+1],S.store.pages[idx]];
+  else if(action==="4"&&S.store.pages.length>1){if(confirm("Seite löschen?"))delPage(id)}
+  render();
+}
 function addSection(layoutId){const pg=curPage();pg.sections.push(mkSection(layoutId));render()}
 function delSection(secId){const pg=curPage();pg.sections=pg.sections.filter(s=>s.id!==secId);if(S.selSection===secId){S.selSection=null;S.selCell=null}render()}
 function moveSection(secId,dir){const pg=curPage(),ss=pg.sections,i=ss.findIndex(s=>s.id===secId),j=i+dir;if(j>=0&&j<ss.length)[ss[i],ss[j]]=[ss[j],ss[i]];render()}
@@ -360,6 +369,12 @@ function exportBriefing(){
 }
 function dl(c,n,t){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([c],{type:t}));a.download=n;a.click()}
 function promptKey(){const k=prompt("Anthropic API Key:",apiKey);if(k){apiKey=k;localStorage.setItem("asb_api_key",k);toast("Key gespeichert")}}
+function uploadHeaderImg(){
+  const inp=document.createElement("input");inp.type="file";inp.accept="image/*";
+  inp.onchange=()=>{const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const img=new Image();img.onload=()=>{
+    const pg=curPage();pg.headerImage=e.target.result;pg.headerFile=f.name;pg.headerW=img.width;pg.headerH=img.height;
+    toast("Header: "+img.width+"×"+img.height+"px");render()};img.src=e.target.result};r.readAsDataURL(f)};inp.click();
+}
 
 // ══════════════════════════════════════════
 // RENDER
@@ -375,11 +390,11 @@ function render(){
   h+='<button class="topbar-btn" onclick="exportBriefing()">📋 Briefing</button>';
   h+='<button class="topbar-btn" onclick="exportJSON()">📥 JSON</button>';
   h+='<button class="topbar-btn primary" onclick="S.showGenModal=true;render()">✨ AI Generieren</button>';
-  h+='<button class="topbar-btn primary" style="background:#2ea44f;border-color:#2ea44f;color:#fff">Zur Veröffentlichung</button>';
+  h+='<button class="topbar-btn primary" style="background:#2ea44f;border-color:#2ea44f;color:#fff" onclick="exportJSON();toast(\'Store als JSON exportiert\')">Zur Veröffentlichung</button>';
   h+='</div>';
 
   // Toolbar
-  h+='<div class="toolbar"><div class="device-toggle"><button class="active">🖥 Desktop</button><button>📱 Mobil</button></div><div class="spacer"></div><div class="undo-redo"><button>↩</button><button>↪</button></div></div>';
+  h+='<div class="toolbar"><div class="device-toggle"><button class="'+(S.device==="desktop"?"active":"")+'" onclick="S.device=\'desktop\';render()">🖥 Desktop</button><button class="'+(S.device==="mobil"?"active":"")+'" onclick="S.device=\'mobil\';render()">📱 Mobil</button></div><div class="spacer"></div></div>';
 
   // Layout
   h+='<div class="layout">';
@@ -388,18 +403,21 @@ function render(){
   h+='<div class="sidebar-left"><div class="sl-header"><h2>Seiten</h2></div>';
   h+='<button class="add-page-btn" onclick="addPage()">✦ Seite hinzufügen</button>';
   h+='<div class="page-list">';
-  st.pages.forEach(p=>{
+  st.pages.forEach((p,pi)=>{
     h+='<div class="page-item'+(p.id===S.curPage?" active":"")+'" onclick="S.curPage=\''+p.id+'\';S.selSection=null;S.selCell=null;render()">';
     h+='<span class="drag">⫶</span><span class="name">'+esc(p.name)+'</span>';
-    h+='<button class="menu-btn" onclick="event.stopPropagation();if(confirm(\'Seite löschen?\'))delPage(\''+p.id+'\')">⋮</button></div>';
+    h+='<button class="menu-btn" onclick="event.stopPropagation();showPageMenu(\''+p.id+'\','+pi+')">⋮</button></div>';
   });
   h+='</div></div>';
 
   // Canvas
-  h+='<div class="canvas-wrap"><div class="canvas"><div class="canvas-inner">';
+  h+='<div class="canvas-wrap"><div class="canvas"><div class="canvas-inner" style="max-width:'+(S.device==="mobil"?"400px":"960px")+'">';
 
   // Store header
   h+='<div class="store-header'+(S.selSection==="header"?" sel":"")+'" onclick="S.selSection=\'header\';S.selCell=null;render()">';
+  if(pg&&pg.headerImage){
+    h+='<img src="'+pg.headerImage+'" style="width:100%;height:auto;display:block;border-radius:2px 2px 0 0">';
+  }
   h+='<div class="store-header-inner"><div class="store-logo">'+(bp?'<div style="width:36px;height:36px;border-radius:50%;background:'+accent+'"></div>':'🏪')+'</div><div class="store-brand">'+esc(st.brandName)+'</div></div>';
   h+='<div class="store-nav">';
   st.pages.forEach(p=>{h+='<span'+(p.id===S.curPage?' class="active"':'')+' onclick="event.stopPropagation();S.curPage=\''+p.id+'\';render()">'+esc(p.name)+'</span>'});
@@ -477,7 +495,8 @@ function renderProperties(){
 
   // Header selected
   if(S.selSection==="header"){
-    return'<div class="sr-header"><h3>Bearbeitung: Header</h3><button class="close-btn" onclick="S.selSection=null;render()">< Fertig</button></div><div class="sr-scroll"><div class="sr-section"><h4>Header-Bild</h4><div class="sr-specs"><b>Mindestens</b> 3.000 × 600 Pixel<br><b>Max</b> 5 MB</div><div class="sr-field"><div class="sr-upload" onclick="toast(\'Header-Bild Upload TODO\')">Bild hochladen</div></div></div></div>';
+    const pg2=curPage();
+    return'<div class="sr-header"><h3>Bearbeitung: Header</h3><button class="close-btn" onclick="S.selSection=null;render()">< Fertig</button></div><div class="sr-scroll"><div class="sr-section"><h4>Header-Bild</h4><div class="sr-specs"><b>Mindestens</b> 3.000 × 600 Pixel<br><b>Max</b> 5 MB<br><b>Format</b> PNG, JPG</div><div class="sr-field"><label>Mobil / Desktop</label><div class="device-toggle" style="margin-bottom:8px"><button class="'+(S.device==="desktop"?"active":"")+'">Desktop</button><button class="'+(S.device==="mobil"?"active":"")+'">Mobil</button></div></div><div class="sr-field"><div class="sr-upload" onclick="uploadHeaderImg()">Bild hochladen</div></div></div></div>';
   }
 
   // Tile selected
@@ -556,9 +575,11 @@ function renderProperties(){
   return h;
 }
 
-// ── Update tile helpers ──
-function updTileProp(prop,val){const pg=curPage(),sec=pg.sections.find(s=>s.id===S.selSection);if(sec&&sec.tiles[S.selCell])sec.tiles[S.selCell][prop]=val;render()}
-function updTileContent(key,val){const pg=curPage(),sec=pg.sections.find(s=>s.id===S.selSection);if(sec&&sec.tiles[S.selCell]){if(!sec.tiles[S.selCell].content)sec.tiles[S.selCell].content={};sec.tiles[S.selCell].content[key]=val}render()}
+// ── Update tile helpers — don't re-render on typing ──
+let _renderTimer=null;
+function updTileProp(prop,val){const pg=curPage(),sec=pg.sections.find(s=>s.id===S.selSection);if(sec&&sec.tiles[S.selCell])sec.tiles[S.selCell][prop]=val;deferRender()}
+function updTileContent(key,val){const pg=curPage(),sec=pg.sections.find(s=>s.id===S.selSection);if(sec&&sec.tiles[S.selCell]){if(!sec.tiles[S.selCell].content)sec.tiles[S.selCell].content={};sec.tiles[S.selCell].content[key]=val}deferRender()}
+function deferRender(){clearTimeout(_renderTimer);_renderTimer=setTimeout(render,800)}
 
 // ── Layout picker ──
 function renderLayoutPicker(){
