@@ -125,8 +125,8 @@ const TT={
   video_reveal:{n:"Video-Enthüllung",i:"🎬",d:"Video mit Reveal-Effekt",g:"Media",img:true},
   split:{n:"Abschnitt Teilen",i:"➗",d:"Verwandte Inhalte teilen",g:"Layout",img:false},
   text:{n:"Text",i:"📝",d:"Marken- und Produktgeschichte",g:"Content",img:false},
-  image:{n:"Bild",i:"🖼️",d:"Marke oder Produkte",g:"Content",img:true,sp:{min:"1500×750px",rec:"3000×1500px",max:"5MB",fmt:"PNG, JPG, GIF"}},
-  image_text:{n:"Bild mit Text",i:"📝🖼️",d:"Bild mit Titel/Beschreibung",g:"Content",img:true,sp:{min:"1500×750px",max:"5MB"}},
+  image:{n:"Bild",i:"🖼️",d:"Marke oder Produkte",g:"Content",img:true,dual:true,sp:{desktop:"min 3000px breit, 16–2400px hoch",mobile:"min 1680px breit, 20–3000px hoch",max:"5MB",fmt:"PNG, JPG, GIF"}},
+  image_text:{n:"Bild mit Text",i:"📝🖼️",d:"Bild mit Titel/Beschreibung",g:"Content",img:true,dual:true,sp:{desktop:"min 3000px breit, 16–2400px hoch",mobile:"min 1680px breit, 20–3000px hoch",max:"5MB"}},
   shoppable_image:{n:"Shoppable-Bild",i:"🛒",d:"Produkte auf Bild markieren",g:"Content",img:true,sp:{min:"3000×1500px",max:"5MB"}},
   product:{n:"Produkt",i:"📦",d:"Einzelnes Produkt",g:"Produkte",img:false},
   product_grid:{n:"Produktraster",i:"🛍️",d:"Mehrere Produkte",g:"Produkte",img:false,nw:true},
@@ -140,18 +140,27 @@ const TT={
 };
 const TG=["Interaktiv","Content","Media","Produkte","Layout"];
 const LY=[
-  {id:"1",n:"Full Width",c:"1fr",mc:"1fr",cells:1},
-  {id:"1-1",n:"2 gleich",c:"1fr 1fr",mc:"1fr",cells:2},
-  {id:"2-1",n:"Groß+Klein",c:"2fr 1fr",mc:"1fr",cells:2},
-  {id:"1-2",n:"Klein+Groß",c:"1fr 2fr",mc:"1fr",cells:2},
-  {id:"1-1-1",n:"3 gleich",c:"1fr 1fr 1fr",mc:"1fr",cells:3},
-  {id:"1-1-1-1",n:"4 gleich",c:"1fr 1fr 1fr 1fr",mc:"1fr 1fr",cells:4},
-  {id:"2-1-1",n:"Groß+2Klein",c:"2fr 1fr 1fr",mc:"1fr",cells:3},
-  {id:"1-1-2",n:"2Klein+Groß",c:"1fr 1fr 2fr",mc:"1fr",cells:3},
+  // Variable Höhe
+  {id:"1",n:"Full Width",c:"1fr",mc:"1fr",cells:1,cat:"Variable"},
+  {id:"1-1",n:"2 gleich",c:"1fr 1fr",mc:"1fr",cells:2,cat:"Variable"},
+  {id:"2-1",n:"Groß+Klein",c:"2fr 1fr",mc:"1fr",cells:2,cat:"Variable"},
+  {id:"1-2",n:"Klein+Groß",c:"1fr 2fr",mc:"1fr",cells:2,cat:"Variable"},
+  {id:"1-1-1",n:"3 gleich",c:"1fr 1fr 1fr",mc:"1fr",cells:3,cat:"Variable"},
+  {id:"1-1-1-1",n:"4 gleich",c:"1fr 1fr 1fr 1fr",mc:"1fr 1fr",cells:4,cat:"Variable"},
+  {id:"2-1-1",n:"Groß+2Klein",c:"2fr 1fr 1fr",mc:"1fr",cells:3,cat:"Variable"},
+  {id:"1-1-2",n:"2Klein+Groß",c:"1fr 1fr 2fr",mc:"1fr",cells:3,cat:"Variable"},
+  // Basis (from Amazon — fixed height rows)
+  {id:"b-1-1",n:"Basis 1:1",c:"1fr 1fr",mc:"1fr",cells:2,cat:"Basis"},
+  {id:"b-2s-1",n:"Basis Groß+2",c:"1fr 1fr 1fr/1fr span2",mc:"1fr",cells:3,cat:"Basis",grid:"grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr",areas:true,tpl:'"a b" "a c"'},
+  {id:"b-1-2s",n:"Basis 2+Groß",c:"1fr 1fr",mc:"1fr",cells:3,cat:"Basis",grid:"grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr",areas:true,tpl:'"a c" "b c"'},
+  {id:"b-1-1-1",n:"Basis 3 gleich",c:"1fr 1fr 1fr",mc:"1fr",cells:3,cat:"Basis"},
+  {id:"b-1-1-1-1",n:"Basis 4 gleich",c:"1fr 1fr 1fr 1fr",mc:"1fr 1fr",cells:4,cat:"Basis"},
+  {id:"b-3-2",n:"Basis 3+2",c:"1fr 1fr 1fr",mc:"1fr 1fr",cells:5,cat:"Basis",grid:"grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr",custom:true},
+  {id:"b-2-3",n:"Basis 2+3",c:"1fr 1fr",mc:"1fr",cells:5,cat:"Basis",grid:"grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr",custom:true},
 ];
 const uid=()=>`${Date.now()}_${Math.random().toString(36).slice(2,6)}`;
 const esc=s=>String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-const mkT=(type,content={},br="")=>({id:uid(),type,content,ib:br,img:null,ifile:"",iw:0,ih:0});
+const mkT=(type,content={},br="",comp=null)=>({id:uid(),type,content,ib:br,img:null,ifile:"",iw:0,ih:0,imgM:null,ifileM:"",iwM:0,ihM:0,composition:comp});
 const mkSec=(lid="1")=>{const l=LY.find(x=>x.id===lid)||LY[0];return{id:uid(),lid:l.id,tiles:Array(l.cells).fill(null)}};
 const mkP=(name,id)=>({id:id||uid(),name,himg:null,hfile:"",sections:[mkSec("1")]});
 const LANG={de:"German",com:"English","co.uk":"English",fr:"French",it:"Italian",es:"Spanish"};
@@ -166,28 +175,74 @@ const PR={
 research:`You research brands for Amazon Brand Stores. Use web search to find brand info, product categories, and Amazon ASINs. 
 CRITICAL: Your ENTIRE response must be ONLY a JSON object. No text before or after. No markdown. No explanations. Just raw JSON:
 {"brandName":"...","description":"1-2 sentences","type":"premium|d2c|mission|mass_market","tone":"...","colors":{"primary":"#hex","secondary":"#hex","accent":"#hex"},"categories":["..."],"usps":["..."],"targetAudience":"...","products":[{"name":"...","asin":"B0XX","category":"..."}],"amazonCategories":[]}`,
-arch:`Plan Amazon Store structure. Pages > Sections > Layout grid > Tiles.
-Layouts: "1"(full),"1-1"(2eq),"2-1"(big+sm),"1-2"(sm+big),"1-1-1"(3eq),"1-1-1-1"(4eq),"2-1-1"(big+2sm),"1-1-2"(2sm+big)
+arch:`Plan Amazon Store structure based on how top brands (Nespresso, Kärcher, ESN, SNOCKS, Holy) build their stores.
+Layouts: "1"(full),"1-1"(2eq),"2-1"(big+sm),"1-2"(sm+big),"1-1-1"(3eq),"1-1-1-1"(4eq),"2-1-1"(big+2sm),"1-1-2"(2sm+big),"b-1-1"(basis 2),"b-2s-1"(basis big+2stack),"b-1-2s"(basis 2stack+big),"b-1-1-1"(basis 3),"b-1-1-1-1"(basis 4)
 Tiles: product_selection,video_reveal,split,text,image,image_text,shoppable_image,product,product_grid,product_collection,featured_deals,best_sellers,recommended,video,bg_video,gallery
-Rules: Homepage first, then category pages. 4-8 pages, 3-6 sections/page. Use real ASINs from product list in product/product_grid/product_collection tiles. Keep text tiles concise. Include FAQ sections where helpful.
+
+PROVEN HOMEPAGE STRUCTURE (follow this order):
+1. Full-width hero image (brand claim + key products) — layoutId:"1"
+2. Campaign/offer banner (optional) — layoutId:"1"
+3. Category grid — ALL category subpages as clickable image tiles. Use "b-1-1-1-1" for 4 cats, "b-1-1" for 2, "1-1-1" for 3. Each tile = lifestyle photo + category name overlay + CTA
+4. Product highlight section — shoppable_image or product_grid with real ASINs
+5. Brand story / USP section — split layout with lifestyle image + text/image
+6. Interactive element (quiz/product_selection) if applicable
+7. Footer banner — "Mehr entdecken" or seasonal CTA
+
+CRITICAL RULES:
+- 85-95% of all tiles should be "image" type. Text is designed INTO images by designer.
+- "text" tiles ONLY for FAQ sections or legal text.
+- Homepage: category tiles MUST link to their subpage (use "link":"page_id" in content)
+- Non-category pages (About Us, FAQ) appear lower, NOT in main category grid
+- Each category subpage: hero image + product_grid/collection + USP images
+- Use real ASINs from product list
+- 4-8 pages, 3-6 sections/page
+
 Return ONLY JSON:
-{"pages":[{"id":"homepage","name":"Homepage","sections":[{"layoutId":"1","tiles":["image: hero banner"]},{"layoutId":"1-1-1","tiles":["image_text: category 1","image_text: category 2","image_text: category 3"]},{"layoutId":"1","tiles":["product_grid: bestsellers with ASINs"]}]}]}`,
-content:`Create COMPLETE content for ONE Amazon Store page. You MUST fill in ALL content fields — no empty values allowed.
+{"pages":[{"id":"homepage","name":"Homepage","sections":[{"layoutId":"1","tiles":["image: hero"]},{"layoutId":"b-1-1-1-1","tiles":["image: cat1","image: cat2","image: cat3","image: cat4"]},{"layoutId":"1","tiles":["product_grid: bestsellers"]}]},{"id":"cat1","name":"Category 1","sections":[...]}]}`,
+content:`Create COMPLETE content for ONE Amazon Store page.
 
-TILE CONTENT RULES (follow exactly):
-- "text" → {"type":"text","content":{"title":"Short Title","text":"1-2 concise sentences in marketplace language."}}
-- "image" → {"type":"image","content":{"alt":"description"},"imageBriefing":"DIMENSIONS: WxH | SUBJECT: what to show | TEXT OVERLAY: exact text in store language | COLORS: #hex values | MOOD: adjective"}
-- "image_text" → {"type":"image_text","content":{"headline":"Catchy Headline","body":"1-2 sentences","linkText":"Mehr erfahren"},"imageBriefing":"DIMENSIONS: WxH | SUBJECT: ... | COLORS: ..."}
-- "shoppable_image" → {"type":"shoppable_image","content":{"alt":"desc","products":["ASIN1","ASIN2"]},"imageBriefing":"..."}
+DESIGN PHILOSOPHY based on analysis of Nespresso, Kärcher, ESN, SNOCKS, Holy, nucao stores:
+- ~74% of modules are pure IMAGE tiles (text designed into the image by designer)
+- ~13% are PRODUCT tiles (Amazon-native product widgets with price/rating)
+- ~5% are IMAGE_TEXT tiles (image with native Amazon text below — for ingredient labels, category names)
+- ~3% are TEXT tiles (ONLY for section headings between blocks, or compliance/legal text)
+- ~4% are SHOPPABLE_IMAGE tiles
+- ~1% are VIDEO tiles
+
+WHEN TO USE EACH MODULE:
+- "image" → Heroes, campaign banners, category links (with name+CTA designed into image), lifestyle shots, brand story, testimonials, USP graphics. ALL text is IN the image.
+- "image_text" → When you need a photo ABOVE with a short label/title BELOW (like AG1 ingredient cards, SNOCKS category cards with "Tennissocken." label)
+- "text" → ONLY for standalone headings between sections (e.g. "ZWEI EINZIGARTIGE KAFFEE-ERLEBNISSE") or legal/compliance text. MAX 1-2 per page.
+- "product"/"product_grid" → Amazon-native product widgets. Use with real ASINs.
+- "shoppable_image" → Product-in-use photos with tagged ASINs (like Bears with Benefits model holding product)
+- "video" → MAX 1 per page, for brand/product videos
+
+TILE CONTENT RULES:
+- "image" → {"type":"image","content":{"alt":"desc","link":"page_id or empty","w":3000,"h":1200},"imageBriefing":"DESKTOP: 3000×1200px | MOBILE: 1680×840px | SUBJECT: ... | TEXT OVERLAY: exact text in store language | COLORS: #hex | STYLE: photo/illustration","composition":{"bg":"lifestyle-photo|solid-color|gradient|product-scene","textPos":"top-left|top-center|center|bottom-left|bottom-center","textLines":["Headline","Subline"],"ctaText":"CTA or empty","ctaPos":"bottom-center|bottom-right","productPos":"right|left|center|none","productCount":0,"accentColor":"#hex"}}
+- "text" → RARE. Only for FAQ, legal. {"type":"text","content":{"title":"Title","text":"Short text."}}
+- "image_text" → Use when Amazon text overlay is acceptable. {"type":"image_text","content":{"headline":"...","body":"...","linkText":"..."},"imageBriefing":"..."}
+- "shoppable_image" → {"type":"shoppable_image","content":{"alt":"desc","products":["ASIN1"]},"imageBriefing":"..."}
 - "product" → {"type":"product","content":{"asin":"B0REALASINFROMLIST"}}
-- "product_grid" → {"type":"product_grid","content":{"asins":"B0ASIN1\\nB0ASIN2\\nB0ASIN3","title":"Section Title"}}
-- "product_collection" → {"type":"product_collection","content":{"asins":"B0ASIN1\\nB0ASIN2","title":"Collection Name"}}
-- "product_selection" → {"type":"product_selection","content":{"introTitle":"Find Your Perfect Product","introText":"Answer a few questions","questions":[{"q":"What is your main need?","answers":[{"a":"Clean drinking water","nextQ":1,"products":["B0ASIN1"]},{"a":"Shower filtration","nextQ":1,"products":["B0ASIN2"]}]},{"q":"How many people?","answers":[{"a":"1-2","products":["B0ASIN1"]},{"a":"3+","products":["B0ASIN3"]}]}],"resultsTitle":"Our Recommendations"}}
-- "video"/"bg_video"/"video_reveal" → {"type":"video","content":{"alt":"description"},"imageBriefing":"VIDEO: subject, duration, mood"}
-- "gallery" → {"type":"gallery","content":{"images":["desc1","desc2","desc3"]},"imageBriefing":"GALLERY: 3-6 images showing..."}
-- "best_sellers"/"recommended"/"featured_deals" → {"type":"best_sellers","content":{"category":"optional filter"}}
+- "product_grid" → {"type":"product_grid","content":{"asins":"B0ASIN1\\nB0ASIN2\\nB0ASIN3","title":"Title"}}
+- "product_collection" → {"type":"product_collection","content":{"asins":"B0ASIN1\\nB0ASIN2","title":"Name"}}
+- "product_selection" → Full quiz: {"type":"product_selection","content":{"introTitle":"...","introText":"...","questions":[{"q":"...","answers":[{"a":"...","nextQ":1,"products":["ASIN"]}]}],"resultsTitle":"..."}}
+- "video"/"bg_video" → {"type":"video","content":{"alt":"desc"},"imageBriefing":"VIDEO: subject, mood"}
+- "gallery" → {"type":"gallery","content":{"images":["desc1","desc2"]},"imageBriefing":"GALLERY: ..."}
+- "best_sellers"/"recommended"/"featured_deals" → {"type":"best_sellers","content":{"category":"filter"}}
 
-CRITICAL: Use REAL ASINs from the product list. ALL text/headline/body fields MUST contain actual content in marketplace language. No placeholders. No empty strings.
+IMAGE BRIEFING MUST include: exact text overlay in store language (headlines, sublines, CTAs), desktop AND mobile dimensions, visual description, brand colors, mood/style.
+
+COMPOSITION FIELD is REQUIRED for every image/image_text/shoppable_image tile. It drives automatic wireframe sketches for the designer.
+
+IMAGE DIMENSION GUIDELINES (choose based on purpose, within Amazon limits):
+- Hero banner: w:3000, h:1000-1500 (wide cinematic)
+- Category link tiles: w:1000, h:1000 (square in grid) or w:1500, h:750 (landscape)
+- USP/Feature banner: w:3000, h:800 (slim banner)
+- Lifestyle/Story: w:3000, h:1500 (standard)
+- Brand story/About: w:3000, h:2000 (tall immersive)
+Set w and h in content to specify exact recommended pixels.
+
+CRITICAL: Use REAL ASINs. ALL fields filled. Prefer image tiles. imageBriefing in English except text overlays which are in store language.
 Return ONLY JSON:
 {"pageName":"...","sections":[{"layoutId":"...","tiles":[...]}]}`,
 refine:`Refine Amazon Store. Structure: pages>sections(layoutId+tiles). ALL text fields must have content. Use real ASINs. Return ONLY valid JSON with ALL pages:
@@ -196,7 +251,7 @@ refine:`Refine Amazon Store. Structure: pages>sections(layoutId+tiles). ALL text
 
 async function callAI(sys,usr,ws=false,mdl="claude-sonnet-4-20250514"){
   if(!apiKey)throw new Error("API Key fehlt!");
-  const b={model:mdl,max_tokens:ws?8000:6000,system:sys,messages:[{role:"user",content:usr}]};
+  const b={model:mdl,max_tokens:ws?8000:8000,system:sys,messages:[{role:"user",content:usr}]};
   if(ws)b.tools=[{type:"web_search_20250305",name:"web_search"}];
   for(let a=0;a<3;a++){
     let r;
@@ -271,7 +326,7 @@ async function generate(brand,mp,cat,info){
         const tiles=(s.tiles||[]).slice(0,l.cells).map(t=>{
           if(!t||typeof t==="string")return null;
           if(!TT[t.type])return null;
-          return mkT(t.type,t.content||{},t.imageBriefing||"");
+          return mkT(t.type,t.content||{},t.imageBriefing||"",t.composition||null);
         });
         while(tiles.length<l.cells)tiles.push(null);
         return{id:uid(),lid:l.id,tiles}
@@ -297,7 +352,7 @@ async function doRefine(inst){
     if(r.pages?.length){
       S.store.pages=r.pages.map((p,i)=>({id:p.id||"p_"+i,name:p.name||"Seite",sections:(p.sections||[]).map(s=>{
         const l=LY.find(x=>x.id===(s.layoutId||s.lid))||LY[0];
-        const tiles=(s.tiles||[]).slice(0,l.cells).map(t=>t&&TT[t.type]?mkT(t.type,t.content||{},t.imageBriefing||t.ib||""):null);
+        const tiles=(s.tiles||[]).slice(0,l.cells).map(t=>t&&TT[t.type]?mkT(t.type,t.content||{},t.imageBriefing||t.ib||"",t.composition||null):null);
         while(tiles.length<l.cells)tiles.push(null);
         return{id:uid(),lid:l.id,tiles}
       })}));
@@ -323,14 +378,15 @@ function delSec(sid){const pg=cp();pg.sections=pg.sections.filter(s=>s.id!==sid)
 function mvSec(sid,d){const ss=cp().sections,i=ss.findIndex(s=>s.id===sid),j=i+d;if(j>=0&&j<ss.length)[ss[i],ss[j]]=[ss[j],ss[i]];R()}
 function setT(sid,ci,t){const s=cp().sections.find(x=>x.id===sid);if(s)s.tiles[ci]=t;R()}
 function selC(sid,ci){S.ss=sid;S.sc=ci;R()}
-function upImg(sid,ci){
+function upImg(sid,ci,target){
   const inp=document.createElement("input");inp.type="file";inp.accept="image/*,video/*";
   inp.onchange=()=>{const f=inp.files[0];if(!f)return;
     if(f.type.startsWith("video/")){const s=cp().sections.find(x=>x.id===sid);if(s&&s.tiles[ci]){s.tiles[ci].ifile=f.name;toast("Video: "+f.name)}R();return}
     const r=new FileReader();r.onload=e=>{const img=new Image();img.onload=()=>{
       const s=cp().sections.find(x=>x.id===sid);if(!s||!s.tiles[ci])return;
-      s.tiles[ci].img=e.target.result;s.tiles[ci].ifile=f.name;s.tiles[ci].iw=img.width;s.tiles[ci].ih=img.height;
-      toast(img.width+"×"+img.height+"px");R()};img.src=e.target.result};r.readAsDataURL(f)};inp.click()}
+      if(target==="mobile"){s.tiles[ci].imgM=e.target.result;s.tiles[ci].ifileM=f.name;s.tiles[ci].iwM=img.width;s.tiles[ci].ihM=img.height}
+      else{s.tiles[ci].img=e.target.result;s.tiles[ci].ifile=f.name;s.tiles[ci].iw=img.width;s.tiles[ci].ih=img.height}
+      toast((target==="mobile"?"📱":"🖥")+" "+img.width+"×"+img.height+"px");R()};img.src=e.target.result};r.readAsDataURL(f)};inp.click()}
 function upHdr(){
   const inp=document.createElement("input");inp.type="file";inp.accept="image/*";
   inp.onchange=()=>{const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const img=new Image();img.onload=()=>{
@@ -342,6 +398,29 @@ function genBriefing(){
   const st=S.store,bp=st.bp,lang=LANG[st.mp||"de"]||"German";
   let md="# Designer Briefing: "+st.brandName+"\n\n";
   md+="**Target marketplace language for all image text overlays: "+lang+"**\n\n";
+  // Designer Guide
+  md+="## 📖 Amazon Brand Store — Guide for Designers\n\n";
+  md+="An Amazon Brand Store is a brand's own storefront within Amazon. It consists of multiple pages (Homepage + category subpages) built from **modular sections**. Each section has a grid layout with cells that contain **tiles** (modules).\n\n";
+  md+="### How images work in Brand Stores:\n";
+  md+="- **Every image has TWO versions**: Desktop (min 3000px wide) and Mobile (min 1680px wide)\n";
+  md+="- Desktop images display at full width on the store page (~1500px rendered)\n";
+  md+="- Mobile images display on phones (~414px rendered) — text must be LARGER\n";
+  md+="- **Text on images IS the primary content** — Amazon's native text modules look generic. Top brands (Nespresso, Kärcher, ESN) design ALL text into their images for full brand control\n";
+  md+="- Images can link to category subpages, ASINs, or external URLs\n";
+  md+="- **CTA buttons** should be designed INTO the image (not Amazon native)\n\n";
+  md+="### Image types by purpose:\n";
+  md+="| Purpose | Desktop Size | Aspect | Notes |\n|---------|-------------|--------|-------|\n";
+  md+="| Header/Hero | 3000×600–1500 | 5:1 to 2:1 | Brand claim, key visual |\n";
+  md+="| Category tile | 750–1500 per cell | 1:1 to 4:3 | Lifestyle + category name overlay |\n";
+  md+="| USP banner | 3000×600–800 | Wide | Feature highlights |\n";
+  md+="| Brand story | 3000×1500–2000 | 2:1 to 3:2 | Immersive lifestyle |\n";
+  md+="| Campaign | 3000×1000–1500 | 3:1 to 2:1 | Offers, seasonal |\n\n";
+  md+="### Best practice from top stores:\n";
+  md+="- 85–95% of modules are custom images (not text modules)\n";
+  md+="- Category grid on homepage uses lifestyle photos with category name as bold text overlay\n";
+  md+="- Consistent color palette throughout (brand primary + secondary)\n";
+  md+="- CTAs in brand accent color (e.g. Kärcher: yellow bar, Nespresso: gold pill)\n";
+  md+="- Mobile: text must be ~50% larger than desktop to remain readable\n\n---\n\n";
   if(bp){md+="## Brand Overview\n- Type: "+bp.type+"\n- Tone: "+bp.tone+"\n- Colors: "+(bp.colors?Object.entries(bp.colors).map(([k,v])=>k+": "+v).join(", "):"")+"\n- USPs: "+(bp.usps||[]).join(" | ")+"\n- Target: "+(bp.targetAudience||"")+"\n\n---\n\n"}
   st.pages.forEach((pg,pi)=>{md+="## Page "+(pi+1)+": "+pg.name+"\n\n";
     md+="### Header Image\n- Minimum: 3000×600px, max 5MB\n- Safe zone: center 70%\n"+(pg.hfile?"- ✅ Uploaded: "+pg.hfile+"\n":"- ⚠ Image needed\n")+"\n";
@@ -351,6 +430,14 @@ function genBriefing(){
         md+="**Cell "+(ci+1)+": "+td.n+"**\n";
         if(td.sp)Object.entries(td.sp).forEach(([k,v])=>{md+="- "+k+": "+v+"\n"});
         if(t.ib)md+="- 🎨 Briefing: "+t.ib+"\n";
+        const comp=t.composition||t.content?.composition;
+        if(comp){
+          md+="- 📐 Composition: bg="+comp.bg+", text="+comp.textPos+"\n";
+          if(comp.textLines?.length)md+="- 📝 Text lines: "+comp.textLines.map(l=>'"'+l+'"').join(" / ")+"\n";
+          if(comp.ctaText)md+="- 🔘 CTA: \""+comp.ctaText+"\" ("+comp.ctaPos+")\n";
+          if(comp.productPos!=="none"&&comp.productCount)md+="- 📦 Products: "+comp.productCount+"× at "+comp.productPos+"\n";
+        }
+        if(t.content?.w)md+="- 📏 Recommended: "+t.content.w+"×"+t.content.h+"px (Desktop)\n";
         if(t.content){const c=t.content;
           if(c.headline)md+="- Headline ("+lang+"): "+c.headline+"\n";
           if(c.body)md+="- Body ("+lang+"): "+c.body+"\n";
@@ -364,8 +451,10 @@ function genBriefing(){
           }
           if(c.images)md+="- Gallery images: "+(c.images||[]).join(" | ")+"\n";
         }
-        if(t.img)md+="- ✅ Image: "+t.ifile+" ("+t.iw+"×"+t.ih+")\n";
-        else if(td.img)md+="- ⚠ Image needed\n";
+        if(t.img)md+="- ✅ Desktop image: "+t.ifile+" ("+t.iw+"×"+t.ih+")\n";
+        else if(td.img)md+="- ⚠ Desktop image needed\n";
+        if(t.imgM)md+="- ✅ Mobile image: "+t.ifileM+" ("+t.iwM+"×"+t.ihM+")\n";
+        else if(td.dual)md+="- ⚠ Mobile image needed\n";
         md+="\n"});md+="\n"});md+="---\n\n"});
   return md;
 }
@@ -380,6 +469,78 @@ function exportJSON(){const d=JSON.parse(JSON.stringify(S.store));d.pages.forEac
 
 // ── Render helpers ──
 let _rt;function dR(){clearTimeout(_rt);_rt=setTimeout(R,600)}
+function getGridStyle(l,mob){
+  if(mob)return'grid-template-columns:'+l.mc;
+  if(l.areas)return l.grid+';grid-template-areas:'+l.tpl;
+  if(l.custom&&l.id==="b-3-2")return'grid-template-columns:repeat(6,1fr);grid-template-rows:1fr 1fr';
+  if(l.custom&&l.id==="b-2-3")return'grid-template-columns:repeat(6,1fr);grid-template-rows:1fr 1fr';
+  return'grid-template-columns:'+l.c;
+}
+// ── SVG Wireframe Generator ──
+function mkWireframe(t,w,h){
+  const comp=t.content?.composition||t.composition||{};
+  const c=comp.accentColor||S.store.bp?.colors?.primary||'#FF9900';
+  const c2=S.store.bp?.colors?.secondary||'#232F3E';
+  const lines=comp.textLines||[];
+  const tPos=comp.textPos||'center';
+  const bg=comp.bg||'lifestyle-photo';
+  const cta=comp.ctaText||'';
+  const pPos=comp.productPos||'none';
+  const pCnt=comp.productCount||0;
+  const vw=w||300,vh=h||150;
+  let svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${vw} ${vh}" style="width:100%;height:auto;display:block">`;
+  // Background
+  if(bg==='solid-color')svg+=`<rect width="${vw}" height="${vh}" fill="${c}" opacity="0.15"/>`;
+  else if(bg==='gradient')svg+=`<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${c}" stop-opacity="0.2"/><stop offset="100%" stop-color="${c2}" stop-opacity="0.15"/></linearGradient></defs><rect width="${vw}" height="${vh}" fill="url(#g)"/>`;
+  else{svg+=`<rect width="${vw}" height="${vh}" fill="#f0f0f0"/>`;
+    // Landscape sketch lines for lifestyle
+    svg+=`<line x1="0" y1="${vh*.7}" x2="${vw}" y2="${vh*.65}" stroke="#ddd" stroke-width="0.5"/>`;
+    svg+=`<line x1="0" y1="${vh*.75}" x2="${vw}" y2="${vh*.72}" stroke="#e0e0e0" stroke-width="0.5"/>`;
+    // Diagonal cross for "image placeholder"
+    svg+=`<line x1="${vw*.1}" y1="${vh*.1}" x2="${vw*.9}" y2="${vh*.9}" stroke="#e5e5e5" stroke-width="0.3"/>`;
+    svg+=`<line x1="${vw*.9}" y1="${vh*.1}" x2="${vw*.1}" y2="${vh*.9}" stroke="#e5e5e5" stroke-width="0.3"/>`}
+  // Product placeholder (right side circle/box)
+  if(pPos!=='none'&&pCnt>0){
+    const px=pPos==='left'?vw*.15:pPos==='center'?vw*.5:vw*.75;
+    const py=vh*.45;const pr=Math.min(vw,vh)*.2;
+    for(let i=0;i<Math.min(pCnt,3);i++){
+      const ox=i*(pr*.8);
+      svg+=`<rect x="${px-pr/2+ox}" y="${py-pr/2}" width="${pr*.7}" height="${pr}" rx="3" fill="#ddd" stroke="#bbb" stroke-width="0.5"/>`;
+      svg+=`<circle cx="${px+ox}" cy="${py-pr*.1}" r="${pr*.2}" fill="#ccc"/>` // product icon
+    }}
+  // Text lines (wavy lines representing text)
+  const txMap={
+    'top-left':{x:vw*.05,y:vh*.12,ax:'start'},
+    'top-center':{x:vw*.5,y:vh*.12,ax:'middle'},
+    'center':{x:vw*.5,y:vh*.4,ax:'middle'},
+    'bottom-left':{x:vw*.05,y:vh*.7,ax:'start'},
+    'bottom-center':{x:vw*.5,y:vh*.7,ax:'middle'}
+  };
+  const tp=txMap[tPos]||txMap['center'];
+  lines.forEach((line,i)=>{
+    const ly=tp.y+i*14;
+    const lw=Math.min(line.length*4,vw*.7);
+    const lx=tp.ax==='middle'?tp.x-lw/2:tp.x;
+    const fs=i===0?9:7;const fw=i===0?'bold':'normal';
+    // Wavy text-indicating line
+    let path=`M${lx},${ly}`;
+    for(let j=0;j<lw;j+=6)path+=`q3,-${1+Math.random()*2} 6,0`;
+    svg+=`<path d="${path}" fill="none" stroke="${c2}" stroke-width="${i===0?1.5:0.8}" opacity="0.5"/>`;
+  });
+  // CTA button
+  if(cta){
+    const cy=comp.ctaPos==='bottom-right'?vh*.85:vh*.85;
+    const cx=comp.ctaPos==='bottom-right'?vw*.75:vw*.5;
+    const bw=cta.length*4+20;
+    svg+=`<rect x="${cx-bw/2}" y="${cy-8}" width="${bw}" height="16" rx="3" fill="${c}" opacity="0.7"/>`;
+    svg+=`<line x1="${cx-bw/4}" y1="${cy}" x2="${cx+bw/4}" y2="${cy}" stroke="#fff" stroke-width="1"/>` // text line in button
+  }
+  // Dimension label
+  const dw=t.content?.w||3000,dh=t.content?.h||1500;
+  svg+=`<text x="${vw-4}" y="10" font-size="6" fill="#999" text-anchor="end" font-family="monospace">${dw}×${dh}</text>`;
+  svg+='</svg>';
+  return svg;
+}
 function uTP(p,v){const s=cp().sections.find(x=>x.id===S.ss);if(s&&s.tiles[S.sc])s.tiles[S.sc][p]=v;dR()}
 function uTC(k,v){const s=cp().sections.find(x=>x.id===S.ss);if(s&&s.tiles[S.sc]){if(!s.tiles[S.sc].content)s.tiles[S.sc].content={};s.tiles[S.sc].content[k]=v}dR()}
 
@@ -416,9 +577,10 @@ function R(){
     const l=LY.find(x=>x.id===sec.lid)||LY[0];
     h+='<div class="sec'+(S.ss===sec.id?" s":"")+'" onclick="S.ss=\''+sec.id+'\';S.sc=null;R()">';
     h+='<span class="sec-lbl">'+(si+1)+'. '+l.n+'</span>';
-    h+='<div class="lg" style="grid-template-columns:'+(mob?l.mc:l.c)+'">';
+    h+='<div class="lg" style="'+getGridStyle(l,mob)+'">';
     sec.tiles.forEach((t,ci)=>{
-      h+='<div class="lc'+(t?" f":"")+'" onclick="event.stopPropagation();selC(\''+sec.id+'\','+ci+')">';
+      const areaStyle=l.areas?'grid-area:'+String.fromCharCode(97+ci):'';
+      h+='<div class="lc'+(t?" f":"")+'" style="'+areaStyle+'" onclick="event.stopPropagation();selC(\''+sec.id+'\','+ci+')">';
       if(t){const td=TT[t.type];h+='<span class="tbdg">'+td.i+' '+td.n+'</span>'+rT(t,td)}
       else h+='<div class="ph" onclick="event.stopPropagation();S.stp={s:\''+sec.id+'\',c:'+ci+'};R()"><span style="font-size:16px">+</span><span>Kachel</span></div>';
       h+='</div>'});
@@ -445,7 +607,15 @@ function rT(t,td){
   if(["video","bg_video","video_reveal"].includes(t.type))return'<div style="display:flex;align-items:center;justify-content:center;min-height:70px;background:#1a1a2e;color:rgba(255,255,255,.3);font-size:24px">'+(t.ifile?'📁 '+esc(t.ifile):'▶')+'</div>';
   if(t.type==="shoppable_image")return t.img?'<div style="position:relative"><img src="'+t.img+'" style="width:100%;height:auto"><span style="position:absolute;top:4px;right:4px;background:rgba(255,255,255,.9);padding:1px 6px;border-radius:3px;font-size:10px">🛒</span></div>':'<div class="timgph">🛒🖼️</div>';
   if(t.type==="gallery")return'<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px;padding:6px">'+"1234".split("").map(()=>'<div style="aspect-ratio:1;background:#f3f4f6;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#ddd;font-size:14px">🖼️</div>').join("")+'</div>';
-  return t.img?'<img src="'+t.img+'" style="width:100%;height:auto;display:block">':'<div class="timgph">'+(t.ib?'<div style="font-size:9px;color:#bbb;padding:6px;text-align:center">'+esc(t.ib).slice(0,60)+'...</div>':td.i)+'</div>';
+  const mob=S.dev==="mobil";
+  const hasImg=mob&&t.imgM?t.imgM:t.img;
+  if(hasImg)return'<img src="'+hasImg+'" style="width:100%;height:auto;display:block">';
+  // Show wireframe if composition data exists or imageBriefing exists
+  if(t.ib||t.content?.composition||t.composition){
+    const ar=t.content?.w&&t.content?.h?t.content.w/t.content.h:2;
+    return mkWireframe(t,300,Math.round(300/ar));
+  }
+  return'<div class="timgph">'+td.i+'</div>';
 }
 function rProps(){
   const pg=cp();if(!pg)return'<div class="sr-h"><h3>—</h3></div>';
@@ -454,7 +624,14 @@ function rProps(){
     if(sec&&sec.tiles[S.sc]){const t=sec.tiles[S.sc],td=TT[t.type];
       let h='<div class="sr-h"><h3>'+td.i+' '+td.n+'</h3><button class="cb" onclick="setT(\''+sec.id+'\','+S.sc+',null);S.sc=null;R()">🗑</button></div><div class="sr-s">';
       if(td.sp){h+='<div class="specs">';Object.entries(td.sp).forEach(([k,v])=>{h+='<b>'+k+':</b> '+v+'<br>'});h+='</div>'}
-      if(td.img)h+='<div class="sf"><label>Bild / Video</label><div class="sup'+(t.img?" ok":"")+'" onclick="upImg(\''+sec.id+'\','+S.sc+')">'+(t.img?"✓ "+t.ifile+" ("+t.iw+"×"+t.ih+")":t.ifile||"Hochladen")+'</div></div>';
+      if(td.img&&td.dual){
+        const dw=t.content?.w||3000,dh=t.content?.h||1500;
+        h+='<div class="sf"><label>Empfohlene Größe</label><div style="display:flex;gap:4px"><input style="width:50%" value="'+dw+'" oninput="uTC(\'w\',parseInt(this.value)||3000)" placeholder="Breite"><input style="width:50%" value="'+dh+'" oninput="uTC(\'h\',parseInt(this.value)||1500)" placeholder="Höhe"></div><div class="ht">Desktop: min 3000 breit | Mobil: min 1680 breit</div></div>';
+        h+='<div class="sf"><label>🖥 Desktop-Bild</label><div class="sup'+(t.img?" ok":"")+'" onclick="upImg(\''+sec.id+'\','+S.sc+',\'desktop\')">'+(t.img?"✓ "+t.ifile+" ("+t.iw+"×"+t.ih+")":"Desktop hochladen")+'</div></div>';
+        h+='<div class="sf"><label>📱 Mobil-Bild</label><div class="sup'+(t.imgM?" ok":"")+'" onclick="upImg(\''+sec.id+'\','+S.sc+',\'mobile\')">'+(t.imgM?"✓ "+t.ifileM+" ("+t.iwM+"×"+t.ihM+")":"Mobil hochladen")+'</div></div>';
+      } else if(td.img){
+        h+='<div class="sf"><label>Bild / Video</label><div class="sup'+(t.img?" ok":"")+'" onclick="upImg(\''+sec.id+'\','+S.sc+',\'desktop\')">'+(t.img?"✓ "+t.ifile+" ("+t.iw+"×"+t.ih+")":t.ifile||"Hochladen")+'</div></div>';
+      }
       if(td.img)h+='<div class="sf"><label>🎨 Designer Briefing (EN)</label><textarea oninput="uTP(\'ib\',this.value)">'+esc(t.ib||"")+'</textarea></div>';
       if(t.type==="text"){h+='<div class="sf"><label>Titel</label><input value="'+esc(t.content.title||"")+'" oninput="uTC(\'title\',this.value)"></div>';
         h+='<div class="sf"><label>Text</label><textarea oninput="uTC(\'text\',this.value)">'+esc(t.content.text||"")+'</textarea><div class="ht">Max 2-3 kurze Sätze</div></div>'}
@@ -498,9 +675,12 @@ function rProps(){
     h+='<div style="padding:6px;border:1px solid #eee;border-radius:3px;margin-bottom:3px;font-size:11px;cursor:pointer;display:flex;justify-content:space-between" onclick="S.ss=\''+s.id+'\';R()"><span>'+(i+1)+'. '+l.n+'</span><span style="color:#999">'+s.tiles.filter(Boolean).length+'/'+l.cells+'</span></div>'});
   return h+'</div>';
 }
-function rLP(){let h='<div class="mbg" onclick="S.slp=null;R()"><div class="mbox" style="max-width:360px" onclick="event.stopPropagation()"><div style="padding:12px;font-weight:800;border-bottom:1px solid #eee">Layout auswählen</div><div class="lpg">';
-  LY.forEach(l=>{h+='<div class="lpo" style="grid-template-columns:'+l.c+'" onclick="addSec(\''+l.id+'\');S.slp=null;R()">';for(let i=0;i<l.cells;i++)h+='<div class="c"></div>';h+='</div>'});
-  return h+'</div></div></div>'}
+function rLP(){let h='<div class="mbg" onclick="S.slp=null;R()"><div class="mbox" style="max-width:380px;max-height:80vh;overflow-y:auto" onclick="event.stopPropagation()"><div style="padding:12px;font-weight:800;border-bottom:1px solid #eee">Layout auswählen</div>';
+  ["Variable","Basis"].forEach(cat=>{
+    h+='<div style="padding:8px 12px 4px;font-size:11px;font-weight:700;color:#888;text-transform:uppercase">'+cat+' Höhe</div><div class="lpg">';
+    LY.filter(l=>l.cat===cat).forEach(l=>{h+='<div class="lpo" style="grid-template-columns:'+l.c+'" onclick="addSec(\''+l.id+'\');S.slp=null;R()">';for(let i=0;i<Math.min(l.cells,6);i++)h+='<div class="c"></div>';h+='</div>'});
+    h+='</div>'});
+  return h+'</div></div>'}
 function rTP(){const p=S.stp;let h='<div class="mbg" onclick="S.stp=null;R()"><div class="mbox" style="max-width:340px;max-height:70vh;overflow-y:auto" onclick="event.stopPropagation()"><div style="padding:12px;font-weight:800;border-bottom:1px solid #eee">Kacheltyp</div>';
   TG.forEach(g=>{Object.entries(TT).filter(([,v])=>v.g===g).forEach(([k,v])=>{
     h+='<div class="tpi" onclick="setT(\''+p.s+'\','+p.c+',mkT(\''+k+'\'));S.stp=null;R()"><div class="ic">'+v.i+'</div><div><h5>'+v.n+(v.nw?' <span style="background:#e8daef;color:#6c3483;font-size:8px;padding:0 3px;border-radius:2px">Neu</span>':'')+'</h5><p>'+v.d+'</p></div></div>'})});
