@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -121,40 +121,40 @@ input,textarea,select{font-family:inherit;outline:none;font-size:13px}
 <div id="app"></div>
 <script>
 const TT={
-  product_selection:{n:"Produktauswahl",i:"🧩",d:"Interaktives Quiz",g:"Interaktiv",img:false},
-  video_reveal:{n:"Video-Enthüllung",i:"🎬",d:"Video mit Reveal-Effekt",g:"Media",img:true},
-  split:{n:"Abschnitt Teilen",i:"➗",d:"Verwandte Inhalte teilen",g:"Layout",img:false},
-  text:{n:"Text",i:"📝",d:"Marken- und Produktgeschichte",g:"Content",img:false},
-  image:{n:"Bild",i:"🖼️",d:"Marke oder Produkte",g:"Content",img:true,dual:true,sp:{desktop:"min 3000px breit, 16–2400px hoch",mobile:"min 1680px breit, 20–3000px hoch",max:"5MB",fmt:"PNG, JPG, GIF"}},
-  image_text:{n:"Bild mit Text",i:"📝🖼️",d:"Bild mit Titel/Beschreibung",g:"Content",img:true,dual:true,sp:{desktop:"min 3000px breit, 16–2400px hoch",mobile:"min 1680px breit, 20–3000px hoch",max:"5MB"}},
-  shoppable_image:{n:"Shoppable-Bild",i:"🛒",d:"Produkte auf Bild markieren",g:"Content",img:true,sp:{min:"3000×1500px",max:"5MB"}},
-  product:{n:"Produkt",i:"📦",d:"Einzelnes Produkt",g:"Produkte",img:false},
-  product_grid:{n:"Produktraster",i:"🛍️",d:"Mehrere Produkte",g:"Produkte",img:false,nw:true},
-  product_collection:{n:"Produktsammlung",i:"📚",d:"Verwandte Produkte",g:"Produkte",img:false,nw:true},
-  featured_deals:{n:"Empfohlene Angebote",i:"🏷️",d:"Produkte mit Angeboten",g:"Produkte",img:false},
-  best_sellers:{n:"Meistverkaufte",i:"🏆",d:"Automatisch meistverkaufte",g:"Produkte",img:false},
-  recommended:{n:"Empfohlene",i:"💡",d:"Automatische Empfehlungen",g:"Produkte",img:false},
-  video:{n:"Video",i:"🎥",d:"Bewegung und Ton",g:"Media",img:true,sp:{cover:"3000×1500px",video:"1280×640px",fmt:"MP4"}},
-  bg_video:{n:"Hintergrundvideo",i:"🎬",d:"Stilles Loop-Video",g:"Media",img:false,sp:{video:"1280×640px",dur:"2–20s"}},
-  gallery:{n:"Galerie",i:"🎨",d:"3-8 Bilder im Slider",g:"Content",img:true,sp:{min:"1500×750px",count:"3–8"}}
+  product_selection:{n:"Product Selection",i:"🧩",d:"Interactive quiz",g:"Interactive",img:false},
+  video_reveal:{n:"Video Reveal",i:"🎬",d:"Video with reveal effect",g:"Media",img:true},
+  split:{n:"Split Section",i:"➗",d:"Split related content",g:"Layout",img:false},
+  text:{n:"Text",i:"📝",d:"Brand or product story",g:"Content",img:false},
+  image:{n:"Image",i:"🖼️",d:"Brand or products",g:"Content",img:true,dual:true,sp:{desktop:"min 3000px wide, 16–2400px tall",mobile:"min 1680px wide, 20–3000px tall",max:"5MB",fmt:"PNG, JPG, GIF"}},
+  image_text:{n:"Image + Text",i:"📝🖼️",d:"Image with title/description",g:"Content",img:true,dual:true,sp:{desktop:"min 3000px wide, 16–2400px tall",mobile:"min 1680px wide, 20–3000px tall",max:"5MB"}},
+  shoppable_image:{n:"Shoppable Image",i:"🛒",d:"Tag products on image",g:"Content",img:true,sp:{min:"3000×1500px",max:"5MB"}},
+  product:{n:"Product",i:"📦",d:"Single product",g:"Products",img:false},
+  product_grid:{n:"Product Grid",i:"🛍️",d:"Multiple products",g:"Products",img:false,nw:true},
+  product_collection:{n:"Product Collection",i:"📚",d:"Related products",g:"Products",img:false,nw:true},
+  featured_deals:{n:"Featured Deals",i:"🏷️",d:"Products with deals",g:"Products",img:false},
+  best_sellers:{n:"Best Sellers",i:"🏆",d:"Auto best sellers",g:"Products",img:false},
+  recommended:{n:"Recommended",i:"💡",d:"Auto recommendations",g:"Products",img:false},
+  video:{n:"Video",i:"🎥",d:"Motion and sound",g:"Media",img:true,sp:{cover:"3000×1500px",video:"1280×640px",fmt:"MP4"}},
+  bg_video:{n:"Background Video",i:"🎬",d:"Silent loop video",g:"Media",img:false,sp:{video:"1280×640px",dur:"2–20s"}},
+  gallery:{n:"Gallery",i:"🎨",d:"3-8 images in slider",g:"Content",img:true,sp:{min:"1500×750px",count:"3–8"}}
 };
-const TG=["Interaktiv","Content","Media","Produkte","Layout"];
+const TG=["Interactive","Content","Media","Products","Layout"];
 const LY=[
-  // Variable Höhe
+  // Variable Height
   {id:"1",n:"Full Width",c:"1fr",mc:"1fr",cells:1,cat:"Variable"},
-  {id:"1-1",n:"2 gleich",c:"1fr 1fr",mc:"1fr",cells:2,cat:"Variable"},
-  {id:"2-1",n:"Groß+Klein",c:"2fr 1fr",mc:"1fr",cells:2,cat:"Variable"},
-  {id:"1-2",n:"Klein+Groß",c:"1fr 2fr",mc:"1fr",cells:2,cat:"Variable"},
-  {id:"1-1-1",n:"3 gleich",c:"1fr 1fr 1fr",mc:"1fr",cells:3,cat:"Variable"},
-  {id:"1-1-1-1",n:"4 gleich",c:"1fr 1fr 1fr 1fr",mc:"1fr 1fr",cells:4,cat:"Variable"},
-  {id:"2-1-1",n:"Groß+2Klein",c:"2fr 1fr 1fr",mc:"1fr",cells:3,cat:"Variable"},
-  {id:"1-1-2",n:"2Klein+Groß",c:"1fr 1fr 2fr",mc:"1fr",cells:3,cat:"Variable"},
+  {id:"1-1",n:"2 Equal",c:"1fr 1fr",mc:"1fr",cells:2,cat:"Variable"},
+  {id:"2-1",n:"Large+Small",c:"2fr 1fr",mc:"1fr",cells:2,cat:"Variable"},
+  {id:"1-2",n:"Small+Large",c:"1fr 2fr",mc:"1fr",cells:2,cat:"Variable"},
+  {id:"1-1-1",n:"3 Equal",c:"1fr 1fr 1fr",mc:"1fr",cells:3,cat:"Variable"},
+  {id:"1-1-1-1",n:"4 Equal",c:"1fr 1fr 1fr 1fr",mc:"1fr 1fr",cells:4,cat:"Variable"},
+  {id:"2-1-1",n:"Large+2Small",c:"2fr 1fr 1fr",mc:"1fr",cells:3,cat:"Variable"},
+  {id:"1-1-2",n:"2Small+Large",c:"1fr 1fr 2fr",mc:"1fr",cells:3,cat:"Variable"},
   // Basis (from Amazon — fixed height rows)
   {id:"b-1-1",n:"Basis 1:1",c:"1fr 1fr",mc:"1fr",cells:2,cat:"Basis"},
-  {id:"b-2s-1",n:"Basis Groß+2",c:"1fr 1fr 1fr/1fr span2",mc:"1fr",cells:3,cat:"Basis",grid:"grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr",areas:true,tpl:'"a b" "a c"'},
-  {id:"b-1-2s",n:"Basis 2+Groß",c:"1fr 1fr",mc:"1fr",cells:3,cat:"Basis",grid:"grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr",areas:true,tpl:'"a c" "b c"'},
-  {id:"b-1-1-1",n:"Basis 3 gleich",c:"1fr 1fr 1fr",mc:"1fr",cells:3,cat:"Basis"},
-  {id:"b-1-1-1-1",n:"Basis 4 gleich",c:"1fr 1fr 1fr 1fr",mc:"1fr 1fr",cells:4,cat:"Basis"},
+  {id:"b-2s-1",n:"Basis Large+2",c:"1fr 1fr 1fr/1fr span2",mc:"1fr",cells:3,cat:"Basis",grid:"grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr",areas:true,tpl:'"a b" "a c"'},
+  {id:"b-1-2s",n:"Basis 2+Large",c:"1fr 1fr",mc:"1fr",cells:3,cat:"Basis",grid:"grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr",areas:true,tpl:'"a c" "b c"'},
+  {id:"b-1-1-1",n:"Basis 3 Equal",c:"1fr 1fr 1fr",mc:"1fr",cells:3,cat:"Basis"},
+  {id:"b-1-1-1-1",n:"Basis 4 Equal",c:"1fr 1fr 1fr 1fr",mc:"1fr 1fr",cells:4,cat:"Basis"},
   {id:"b-3-2",n:"Basis 3+2",c:"1fr 1fr 1fr",mc:"1fr 1fr",cells:5,cat:"Basis",grid:"grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr",custom:true},
   {id:"b-2-3",n:"Basis 2+3",c:"1fr 1fr",mc:"1fr",cells:5,cat:"Basis",grid:"grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr",custom:true},
 ];
@@ -165,9 +165,9 @@ const mkSec=(lid="1")=>{const l=LY.find(x=>x.id===lid)||LY[0];return{id:uid(),li
 const mkP=(name,id)=>({id:id||uid(),name,himg:null,hfile:"",sections:[mkSec("1")]});
 const LANG={de:"German",com:"English","co.uk":"English",fr:"French",it:"Italian",es:"Spanish"};
 
-let S={store:{brandName:"Mein Store",bp:null,pages:[mkP("Homepage","homepage")],mp:"de"},
+let S={store:{brandName:"My Store",bp:null,pages:[mkP("Homepage","homepage")],mp:"de",asins:[]},
   cp:"homepage",ss:null,sc:null,dev:"desktop",gen:false,gs:0,gss:[],gl:[],
-  el:[],se:false,toast:null,slp:null,stp:null,sgm:false,sbf:null};
+  el:[],se:false,toast:null,slp:null,stp:null,sgm:false,sbf:null,sap:false};
 let apiKey=localStorage.getItem("asb_api_key")||"";
 
 // ── AI ──
@@ -262,6 +262,14 @@ Set w and h in content to specify exact recommended pixels.
 
 CRITICAL: Use REAL ASINs. ALL fields filled. Prefer image tiles. imageBriefing in English except text overlays which are in store language.
 NEVER refuse to create content for ANY product type. For regulated/sensitive products: ONLY paraphrase existing brand claims found in the research data. Do NOT invent new health claims, efficacy promises, or certifications. Use the brand's own language and messaging.
+
+TEXT GUIDELINES (from analysis of 12 real Amazon Brand Stores):
+- Category/subcategory tiles: Use the actual category name as-is. Keep it short naturally, but use as many words as needed for accuracy (e.g. "HOCHDRUCKREINIGER", "TASCHEN & RUCKSÄCKE", "KLEINER FREUND").
+- Category tiles with CTA: Category name + a short CTA like "JETZT ENTDECKEN". Keep to 2 text lines.
+- Hero/campaign banners: Use the brand's actual slogan or campaign message. Keep concise but never truncate to fit an arbitrary limit.
+- Brand story/USP images: These can be longer — sentences about mission, values, founding story are fine here.
+- Sale/promo banners: Typically very short ("SALE", "NEU"), but use what fits.
+- General principle: Keep text concise. Categories are labels, not descriptions. But always prioritize accuracy over brevity.
 Return ONLY JSON:
 {"pageName":"...","sections":[{"layoutId":"...","tiles":[...]}]}`,
 refine:`Refine Amazon Store. NEVER refuse for any product type. For sensitive products, only paraphrase existing brand claims. Structure: pages>sections(layoutId+tiles). ALL text fields must have content. Use real ASINs. Return ONLY valid JSON with ALL pages:
@@ -322,7 +330,7 @@ async function generate(brand,mp,cat,info){
   if(!apiKey){pKey();return}
   S.gen=true;S.gl=[];S.store.mp=mp;
   const lang=LANG[mp]||"German";
-  S.gss=[{n:"Recherche",d:"Marke & Amazon"},{n:"Architektur",d:"Seiten & Layouts"},{n:"Content",d:"Texte & Briefings"},{n:"Check",d:"Validierung"}];
+  S.gss=[{n:"Research",d:"Brand & Amazon"},{n:"Architecture",d:"Pages & Layouts"},{n:"Content",d:"Text & Briefings"},{n:"Check",d:"Validation"}];
   S.gs=0;R();
   try{
     log("🔍 "+brand+"...");
@@ -331,20 +339,23 @@ async function generate(brand,mp,cat,info){
       bp=await callAI(PR.research,`Research "${brand}" for Amazon.${mp}. ${cat?"Category: "+cat+".":""} Return ONLY the JSON object, nothing else.`,true,"claude-haiku-4-5-20251001");
     }catch(researchErr){
       // Retry with Sonnet if Haiku refused
-      log("⚠ Haiku verweigert, versuche Sonnet...");
+      log("⚠ Haiku refused, trying Sonnet...");
       try{
         bp=await callAI(PR.research,`Research "${brand}" for Amazon.${mp}. ${cat?"Category: "+cat+".":""} This brand sells on Amazon and needs a Brand Store. Return ONLY the JSON object with all factual information you can find.`,true);
       }catch(retryErr){
-        throw new Error("Research fehlgeschlagen: AI verweigert Antwort für diese Marke. Bitte versuche es erneut oder gib mehr Kontext im Info-Feld.");
+        throw new Error("Research failed: AI refused response for this brand. Please try again or add more context in the info field.");
       }
     }
     if(!bp.brandName)bp.brandName=brand;
-    log("✅ "+(bp.products?.length||0)+" Produkte");S.gs=1;R();await new Promise(x=>setTimeout(x,5000));
+    log("✅ "+(bp.products?.length||0)+" products");
+    // Populate ASIN list from research
+    if(bp.products)S.store.asins=(bp.products||[]).map(p=>({asin:p.asin||"",name:p.name||"",category:p.category||""})).filter(a=>a.asin);
+    S.gs=1;R();await new Promise(x=>setTimeout(x,5000));
 
-    log("🏗️ Architektur...");
+    log("🏗️ Architecture...");
     const userReqs=info?`\nUSER REQUIREMENTS (must follow): ${info}`:"";
     const arch=await callAI(PR.arch,`Brand: ${JSON.stringify(bp)}\nProducts: ${bp.products?.length||0}\nLang: ${lang}${userReqs}`);
-    log("✅ "+(arch.pages?.length||0)+" Seiten");S.gs=2;R();await new Promise(x=>setTimeout(x,5000));
+    log("✅ "+(arch.pages?.length||0)+" pages");S.gs=2;R();await new Promise(x=>setTimeout(x,5000));
 
     const prods=(bp.products||[]).slice(0,15);
     const prodStr=prods.map(p=>`${p.name} (${p.asin}) [${p.category||""}]`).join(", ");
@@ -366,22 +377,22 @@ async function generate(brand,mp,cat,info){
       log("   ✅ "+secs.length+" Secs");
       if(i<arch.pages.length-1)await new Promise(x=>setTimeout(x,5000));
     }
-    S.gs=3;log("✅ Fertig: "+pages.length+" Seiten");
+    S.gs=3;log("✅ Done: "+pages.length+" pages");
     S.store={brandName:brand,bp,pages,mp};S.cp=pages[0]?.id;S.ss=null;S.sc=null;
-    toast(pages.length+" Seiten generiert");
+    toast(pages.length+" pages generated");
   }catch(e){log("❌ "+e.message);err("Gen",e.stack);toast(e.message,"err")}
   finally{S.gen=false;R()}
 }
 async function doRefine(inst){
   if(!apiKey){pKey();return}
-  S.gen=true;S.gss=[{n:"Verfeinere",d:inst}];S.gs=0;S.gl=[];R();
+  S.gen=true;S.gss=[{n:"Refine",d:inst}];S.gs=0;S.gl=[];R();
   log('✏️ "'+inst+'"');
   const clean=JSON.parse(JSON.stringify(S.store));
   clean.pages.forEach(p=>p.sections.forEach(s=>s.tiles.forEach((t,i)=>{if(t){t.img=null}})));
   try{
     const r=await callAI(PR.refine,`STORE:\n${JSON.stringify(clean)}\n\nCHANGE: ${inst}\n\nReturn COMPLETE valid JSON with pages array.`);
     if(r.pages?.length){
-      S.store.pages=r.pages.map((p,i)=>({id:p.id||"p_"+i,name:p.name||"Seite",sections:(p.sections||[]).map(s=>{
+      S.store.pages=r.pages.map((p,i)=>({id:p.id||"p_"+i,name:p.name||"Page",sections:(p.sections||[]).map(s=>{
         const l=LY.find(x=>x.id===(s.layoutId||s.lid))||LY[0];
         const tiles=(s.tiles||[]).slice(0,l.cells).map(t=>t&&TT[t.type]?mkT(t.type,t.content||{},t.imageBriefing||t.ib||"",t.composition||null):null);
         while(tiles.length<l.cells)tiles.push(null);
@@ -389,17 +400,17 @@ async function doRefine(inst){
       })}));
       if(r.brandProfile||r.bp)S.store.bp=r.brandProfile||r.bp;
       S.cp=S.store.pages[0]?.id;
-      log("✅ Verfeinert");toast("Store verfeinert!");
-    }else{log("⚠ Keine pages in Antwort");toast("Keine Änderung","err")}
+      log("✅ Refined");toast("Store refined!");
+    }else{log("⚠ No pages in response");toast("No changes","err")}
   }catch(e){log("❌ "+e.message);err(e.message);toast(e.message,"err")}
   finally{S.gen=false;R()}
 }
 
 // ── Actions ──
 function cp(){return S.store.pages.find(p=>p.id===S.cp)||S.store.pages[0]}
-function addP(){const n=prompt("Seitenname:");if(n){const p=mkP(n);S.store.pages.push(p);S.cp=p.id;R()}}
+function addP(){const n=prompt("Page name:");if(n){const p=mkP(n);S.store.pages.push(p);S.cp=p.id;R()}}
 function delP(id){if(S.store.pages.length<=1)return;S.store.pages=S.store.pages.filter(p=>p.id!==id);if(S.cp===id)S.cp=S.store.pages[0]?.id;R()}
-function pmenu(id,i){const a=prompt(S.store.pages[i].name+":\n1=Umbenennen 2=↑ 3=↓ 4=Löschen");
+function pmenu(id,i){const a=prompt(S.store.pages[i].name+":\n1=Rename 2=↑ 3=↓ 4=Delete");
   if(a==="1"){const n=prompt("Name:",S.store.pages[i].name);if(n)S.store.pages[i].name=n}
   else if(a==="2"&&i>0)[S.store.pages[i-1],S.store.pages[i]]=[S.store.pages[i],S.store.pages[i-1]];
   else if(a==="3"&&i<S.store.pages.length-1)[S.store.pages[i],S.store.pages[i+1]]=[S.store.pages[i+1],S.store.pages[i]];
@@ -422,7 +433,7 @@ function upHdr(){
   const inp=document.createElement("input");inp.type="file";inp.accept="image/*";
   inp.onchange=()=>{const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const img=new Image();img.onload=()=>{
     const pg=cp();pg.himg=e.target.result;pg.hfile=f.name;toast("Header: "+img.width+"×"+img.height);R()};img.src=e.target.result};r.readAsDataURL(f)};inp.click()}
-function pKey(){const k=prompt("Anthropic API Key:",apiKey);if(k){apiKey=k;localStorage.setItem("asb_api_key",k);toast("Key gespeichert")}}
+function pKey(){const k=prompt("Anthropic API Key:",apiKey);if(k){apiKey=k;localStorage.setItem("asb_api_key",k);toast("Key saved")}}
 
 // ── Briefing ──
 function genBriefing(){
@@ -494,9 +505,84 @@ function exportBriefing(){
   const ta=document.getElementById("bf-ta");
   const content=ta?ta.value:S.sbf;
   const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([content],{type:"text/markdown"}));
-  a.download=S.store.brandName+"_briefing.md";a.click();toast("Briefing exportiert");S.sbf=null;R()}
+  a.download=S.store.brandName+"_briefing.md";a.click();toast("Briefing exported");S.sbf=null;R()}
 function exportJSON(){const d=JSON.parse(JSON.stringify(S.store));d.pages.forEach(p=>p.sections.forEach(s=>s.tiles.forEach((t)=>{if(t)t.img=null})));
-  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(d,null,2)],{type:"application/json"}));a.download=S.store.brandName+"_store.json";a.click();toast("JSON exportiert")}
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(d,null,2)],{type:"application/json"}));a.download=S.store.brandName+"_store.json";a.click();toast("JSON exported")}
+
+// ── ASIN Management ──
+function uploadAsins(){
+  const inp=document.createElement("input");inp.type="file";inp.accept=".csv,.txt,.tsv";
+  inp.onchange=e=>{const f=e.target.files[0];if(!f)return;
+    const r=new FileReader();r.onload=ev=>{
+      const text=ev.target.result;
+      const lines=text.split(/[\r\n]+/).filter(Boolean);
+      const asins=[];
+      lines.forEach(line=>{
+        const cols=line.split(/[,;\t]/);
+        // Try to find ASIN in each column (B0... pattern)
+        const asinCol=cols.find(c=>/^B0[A-Z0-9]{8,}$/i.test(c.trim()));
+        if(asinCol){
+          const asin=asinCol.trim().toUpperCase();
+          const name=cols.filter(c=>c.trim()!==asinCol.trim()&&c.trim().length>2)[0]?.trim()||"";
+          const cat=cols.filter(c=>c.trim()!==asinCol.trim()&&c.trim()!==name&&c.trim().length>1)[0]?.trim()||"";
+          if(!asins.find(a=>a.asin===asin))asins.push({asin,name,category:cat});
+        }else{
+          // Maybe just an ASIN per line
+          const m=line.match(/B0[A-Z0-9]{8,}/i);
+          if(m){const asin=m[0].toUpperCase();if(!asins.find(a=>a.asin===asin))asins.push({asin,name:"",category:""})}
+        }
+      });
+      S.store.asins=asins;
+      // Also merge into bp products
+      if(S.store.bp){
+        asins.forEach(a=>{if(!S.store.bp.products.find(p=>p.asin===a.asin))S.store.bp.products.push({name:a.name,asin:a.asin,category:a.category})});
+      }
+      toast(asins.length+" ASINs imported");R();
+    };r.readAsText(f)};inp.click();
+}
+function getAsinMap(){
+  // Build map: which ASINs are used where
+  const all=S.store.asins||[];
+  if(S.store.bp?.products)S.store.bp.products.forEach(p=>{if(p.asin&&!all.find(a=>a.asin===p.asin))all.push({asin:p.asin,name:p.name||"",category:p.category||""})});
+  const used={};
+  S.store.pages.forEach(pg=>{pg.sections.forEach(sec=>{sec.tiles.forEach(t=>{if(!t)return;const c=t.content||{};
+    const asins=[];
+    if(c.asin)asins.push(c.asin);
+    if(c.asins)c.asins.split(/[\n,]/).filter(Boolean).forEach(a=>asins.push(a.trim()));
+    if(c.products)c.products.forEach(a=>asins.push(a));
+    asins.forEach(a=>{if(!used[a])used[a]=[];used[a].push(pg.name)});
+  })})});
+  return{all,used};
+}
+function rAP(){
+  const{all,used}=getAsinMap();
+  const cats={};all.forEach(a=>{const c=a.category||"Uncategorized";if(!cats[c])cats[c]=[];cats[c].push(a)});
+  const usedSet=new Set(Object.keys(used));
+  const unusedCount=all.filter(a=>!usedSet.has(a.asin)).length;
+  let h='<div class="mbg" onclick="S.sap=false;R()"><div class="mbox" style="max-width:700px;max-height:80vh;display:flex;flex-direction:column" onclick="event.stopPropagation()">';
+  h+='<div style="padding:12px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center"><div><h3 style="font-size:15px;font-weight:800">📦 ASIN Overview</h3>';
+  h+='<div style="font-size:11px;color:#666;margin-top:2px">'+all.length+' total · '+usedSet.size+' assigned · <span style="color:'+(unusedCount?'#dc2626':'#059669')+'">'+unusedCount+' unassigned</span></div></div>';
+  h+='<div style="display:flex;gap:6px"><button class="tb p" onclick="uploadAsins()">📁 Import CSV</button><button class="tb" onclick="S.sap=false;R()">✕</button></div></div>';
+  h+='<div style="flex:1;overflow-y:auto;padding:12px">';
+  if(all.length===0)h+='<div style="text-align:center;padding:40px;color:#999"><div style="font-size:24px;margin-bottom:8px">📦</div>No ASINs yet.<br>Import a CSV file or generate a store to populate ASINs.<br><br><div style="font-size:11px;color:#bbb">CSV format: ASIN, Product Name, Category<br>or just one ASIN per line</div></div>';
+  else{
+    Object.entries(cats).sort((a,b)=>a[0].localeCompare(b[0])).forEach(([cat,items])=>{
+      h+='<div style="margin-bottom:12px"><div style="font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;padding-bottom:3px;border-bottom:1px solid #eee">'+esc(cat)+' ('+items.length+')</div>';
+      items.forEach(a=>{
+        const pages=used[a.asin]||[];
+        const isUsed=pages.length>0;
+        h+='<div style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:11px">';
+        h+='<span style="color:'+(isUsed?'#059669':'#dc2626')+';font-size:9px">'+(isUsed?'●':'○')+'</span>';
+        h+='<code style="background:#f3f3f3;padding:1px 4px;border-radius:2px;font-size:10px;color:#555">'+esc(a.asin)+'</code>';
+        h+='<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#444">'+esc(a.name||"—")+'</span>';
+        if(isUsed)h+='<span style="font-size:9px;color:#888;white-space:nowrap">→ '+pages.join(", ")+'</span>';
+        else h+='<span style="font-size:9px;color:#dc2626">not assigned</span>';
+        h+='</div>'});
+      h+='</div>'});
+  }
+  h+='</div></div></div>';
+  return h;
+}
 
 // ── Render helpers ──
 let _rt;function dR(){clearTimeout(_rt);_rt=setTimeout(R,600)}
@@ -519,55 +605,79 @@ function mkWireframe(t,w,h){
   const vw=w||300,vh=h||150;
   let svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${vw} ${vh}" style="width:100%;height:auto;display:block">`;
   // Background
-  svg+=`<rect width="${vw}" height="${vh}" fill="#f5f5f5" stroke="#ddd" stroke-width="0.5"/>`;
+  svg+=`<rect width="${vw}" height="${vh}" fill="#f3f3f3" rx="2"/>`;
   if(bg==='lifestyle-photo'||bg==='product-scene'){
-    svg+=`<line x1="0" y1="0" x2="${vw}" y2="${vh}" stroke="#e8e8e8" stroke-width="0.5"/>`;
-    svg+=`<line x1="${vw}" y1="0" x2="0" y2="${vh}" stroke="#e8e8e8" stroke-width="0.5"/>`;
-    svg+=`<text x="${vw/2}" y="${vh/2-5}" font-size="7" fill="#ccc" text-anchor="middle" font-family="sans-serif">${bg==='product-scene'?'PRODUCT SCENE':'LIFESTYLE PHOTO'}</text>`;
+    svg+=`<line x1="0" y1="0" x2="${vw}" y2="${vh}" stroke="#e5e5e5" stroke-width="0.4"/>`;
+    svg+=`<line x1="${vw}" y1="0" x2="0" y2="${vh}" stroke="#e5e5e5" stroke-width="0.4"/>`;
   }
-  // Product area — show as clear rectangular zone
+  // Product area — free-floating bottle/box shapes, proportionally sized
   if(pPos!=='none'&&pCnt>0){
-    const pw=Math.min(vw*.3,vw/pCnt*.4);
-    const phh=vh*.5;
-    const startX=pPos==='left'?vw*.05:pPos==='center'?(vw-pCnt*pw-(pCnt-1)*4)/2:vw-(pCnt*pw+(pCnt-1)*4)-vw*.05;
-    const py=(vh-phh)/2;
+    const zone=pPos==='left'?{cx:vw*.22,w:vw*.35}:pPos==='center'?{cx:vw*.5,w:vw*.4}:{cx:vw*.75,w:vw*.4};
+    const prodH=vh*.55;const prodW=prodH*.35;
+    const gap=prodW*.4;
+    const totalW=pCnt*prodW+(pCnt-1)*gap;
+    const startX=zone.cx-totalW/2;
+    const cy=vh*.48;
     for(let i=0;i<Math.min(pCnt,4);i++){
-      const px=startX+i*(pw+4);
-      svg+=`<rect x="${px}" y="${py}" width="${pw}" height="${phh}" rx="4" fill="#e8e8e8" stroke="#ccc" stroke-width="0.8"/>`;
-      svg+=`<rect x="${px+pw*.2}" y="${py+phh*.15}" width="${pw*.6}" height="${phh*.4}" rx="2" fill="#ddd"/>`;
-      svg+=`<text x="${px+pw/2}" y="${py+phh*.75}" font-size="5" fill="#aaa" text-anchor="middle">Produkt</text>`;
+      const px=startX+i*(prodW+gap);
+      const py=cy-prodH/2;
+      // Bottle/product silhouette (rounded body + neck)
+      const neckW=prodW*.35,neckH=prodH*.15;
+      svg+=`<rect x="${px}" y="${py+neckH}" width="${prodW}" height="${prodH-neckH}" rx="${prodW*.12}" fill="#ddd" stroke="#bbb" stroke-width="0.6"/>`;
+      svg+=`<rect x="${px+(prodW-neckW)/2}" y="${py}" width="${neckW}" height="${neckH+4}" rx="${neckW*.2}" fill="#ccc" stroke="#bbb" stroke-width="0.4"/>`;
+      // Label area on product
+      svg+=`<rect x="${px+prodW*.15}" y="${py+neckH+prodH*.2}" width="${prodW*.7}" height="${prodH*.25}" rx="1.5" fill="#c4c4c4" opacity="0.5"/>`;
     }
   }
-  // Text area — clear block with lines
+  // Text area — actual text from composition if short enough, else placeholder lines
   const txZones={
-    'top-left':{x:vw*.04,y:vh*.08,w:vw*.55,anc:'start'},
-    'top-center':{x:vw*.15,y:vh*.08,w:vw*.7,anc:'start'},
-    'center':{x:vw*.15,y:vh*.3,w:vw*.7,anc:'start'},
-    'bottom-left':{x:vw*.04,y:vh*.6,w:vw*.55,anc:'start'},
-    'bottom-center':{x:vw*.15,y:vh*.6,w:vw*.7,anc:'start'}
+    'top-left':{x:vw*.05,y:vh*.15,w:vw*.5,anc:'start'},
+    'top-center':{x:vw*.5,y:vh*.15,w:vw*.7,anc:'middle'},
+    'center':{x:vw*.5,y:vh*.45,w:vw*.6,anc:'middle'},
+    'bottom-left':{x:vw*.05,y:vh*.65,w:vw*.5,anc:'start'},
+    'bottom-center':{x:vw*.5,y:vh*.65,w:vw*.7,anc:'middle'}
   };
+  // Adjust text zone when products take up space
   const tz=txZones[tPos]||txZones['center'];
+  if(pPos==='right'&&(tPos==='center'||tPos==='top-center')){tz.x=vw*.25;tz.anc='middle'}
+  if(pPos==='left'&&(tPos==='center'||tPos==='top-center')){tz.x=vw*.7;tz.anc='middle'}
   if(lines.length){
     let cy=tz.y;
     lines.forEach((line,i)=>{
-      const lw=Math.min(line.length*3.5,tz.w);
-      const lh=i===0?3:2;
-      svg+=`<rect x="${tz.x}" y="${cy}" width="${lw}" height="${lh}" rx="1" fill="#999" opacity="${i===0?0.5:0.3}"/>`;
-      cy+=i===0?10:7;
+      const maxChars=Math.floor(tz.w/4);
+      const txt=line.length<=maxChars?line:line;
+      const fs=i===0?Math.min(9,vw/35):Math.min(7,vw/45);
+      // Show actual text if short (≤30 chars), else show placeholder bar
+      if(txt.length<=35){
+        svg+=`<text x="${tz.x}" y="${cy+fs}" font-size="${fs}" fill="#777" text-anchor="${tz.anc}" font-family="system-ui,sans-serif" font-weight="${i===0?'700':'400'}" opacity="${i===0?0.6:0.4}">${txt.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</text>`;
+      }else{
+        const lw=Math.min(txt.length*3,tz.w);
+        const lx=tz.anc==='middle'?tz.x-lw/2:tz.x;
+        svg+=`<rect x="${lx}" y="${cy}" width="${lw}" height="${i===0?4:2.5}" rx="1.2" fill="#999" opacity="${i===0?0.45:0.25}"/>`;
+      }
+      cy+=i===0?fs+6:fs+4;
     });
   }
-  // CTA button — clear rounded rectangle
+  // CTA button — show actual text if short
   if(cta){
-    const bw=Math.min(cta.length*4.5+16,vw*.4);
-    const bh=14;
-    const bx=comp.ctaPos==='bottom-right'?vw-bw-vw*.05:vw/2-bw/2;
-    const by=vh*.82;
-    svg+=`<rect x="${bx}" y="${by}" width="${bw}" height="${bh}" rx="${bh/2}" fill="#666" opacity="0.6"/>`;
-    svg+=`<rect x="${bx+bw*.2}" y="${by+bh/2-1}" width="${bw*.6}" height="2" rx="1" fill="#fff" opacity="0.8"/>`;
+    const fs=Math.min(6.5,vw/50);
+    const bw=Math.min(cta.length*fs*.7+16,vw*.35);
+    const bh=fs+8;
+    let bx,by=vh*.82;
+    if(comp.ctaPos==='bottom-right')bx=vw-bw-vw*.05;
+    else if(comp.ctaPos==='bottom-left')bx=vw*.05;
+    else bx=tz.anc==='middle'?tz.x-bw/2:tz.x;
+    by=Math.min(by,vh-bh-4);
+    svg+=`<rect x="${bx}" y="${by}" width="${bw}" height="${bh}" rx="${bh/2}" fill="#777" opacity="0.45"/>`;
+    if(cta.length<=25){
+      svg+=`<text x="${bx+bw/2}" y="${by+bh/2+fs*.35}" font-size="${fs}" fill="#fff" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="600">${cta.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</text>`;
+    }else{
+      svg+=`<rect x="${bx+bw*.2}" y="${by+bh/2-1}" width="${bw*.6}" height="2" rx="1" fill="#fff" opacity="0.7"/>`;
+    }
   }
   // Dimension label
   const dw=t.content?.w||3000,dh=t.content?.h||1500;
-  svg+=`<text x="${vw-3}" y="8" font-size="5.5" fill="#bbb" text-anchor="end" font-family="monospace">${dw}×${dh}</text>`;
+  svg+=`<text x="${vw-3}" y="8" font-size="5" fill="#bbb" text-anchor="end" font-family="monospace">${dw}×${dh}</text>`;
   svg+='</svg>';
   return svg;
 }
@@ -577,22 +687,23 @@ function uTC(k,v){const s=cp().sections.find(x=>x.id===S.ss);if(s&&s.tiles[S.sc]
 // ══════════════ RENDER ══════════════
 function R(){
   const st=S.store,pg=cp(),bp=st.bp,ac=bp?.colors?.primary||"#FF9900";
-  const mob=S.dev==="mobil";
+  const mob=S.dev==="mobile";
   let h="";
   // Topbar
   h+='<div class="topbar"><div class="logo">🏪 <b>Store</b> Builder</div><div class="spacer"></div>';
   if(S.el.length)h+='<button class="tb" style="color:#f87171;border-color:#f87171" onclick="S.se=true;R()">🐛 '+S.el.length+'</button>';
   h+='<button class="tb" onclick="pKey()">🔑</button>';
   h+='<button class="tb" onclick="showBriefing()">📋 Briefing</button>';
+  h+='<button class="tb" onclick="S.sap=true;R()">📦 ASINs</button>';
   h+='<button class="tb" onclick="exportJSON()">📥 JSON</button>';
   h+='<button class="tb p" onclick="S.sgm=true;R()">✨ AI</button>';
   h+='</div>';
   // Toolbar
-  h+='<div class="toolbar"><div class="dtog"><button class="'+(mob?"":"a")+'" onclick="S.dev=\'desktop\';R()">🖥 Desktop</button><button class="'+(mob?"a":"")+'" onclick="S.dev=\'mobil\';R()">📱 Mobil</button></div><div class="spacer"></div></div>';
+  h+='<div class="toolbar"><div class="dtog"><button class="'+(mob?"":"a")+'" onclick="S.dev=\'desktop\';R()">🖥 Desktop</button><button class="'+(mob?"a":"")+'" onclick="S.dev=\'mobile\';R()">📱 Mobile</button></div><div class="spacer"></div></div>';
   // Main
   h+='<div class="main">';
   // Left
-  h+='<div class="sl"><h2>Seiten</h2><button class="abtn" onclick="addP()">✦ Seite hinzufügen</button><div class="plist">';
+  h+='<div class="sl"><h2>Pages</h2><button class="abtn" onclick="addP()">✦ Add page</button><div class="plist">';
   st.pages.forEach((p,i)=>{h+='<div class="pi'+(p.id===S.cp?" a":"")+'" onclick="S.cp=\''+p.id+'\';S.ss=null;S.sc=null;R()"><span class="n">'+esc(p.name)+'</span><button class="m" onclick="event.stopPropagation();pmenu(\''+p.id+'\','+i+')">⋮</button></div>'});
   h+='</div></div>';
   // Canvas
@@ -612,34 +723,36 @@ function R(){
       const areaStyle=l.areas?'grid-area:'+String.fromCharCode(97+ci):'';
       h+='<div class="lc'+(t?" f":"")+'" style="'+areaStyle+'" onclick="event.stopPropagation();selC(\''+sec.id+'\','+ci+')">';
       if(t){const td=TT[t.type];h+='<span class="tbdg">'+td.i+' '+td.n+'</span>'+rT(t,td)}
-      else h+='<div class="ph" onclick="event.stopPropagation();S.stp={s:\''+sec.id+'\',c:'+ci+'};R()"><span style="font-size:16px">+</span><span>Kachel</span></div>';
+      else h+='<div class="ph" onclick="event.stopPropagation();S.stp={s:\''+sec.id+'\',c:'+ci+'};R()"><span style="font-size:16px">+</span><span>Tile</span></div>';
       h+='</div>'});
     h+='</div></div>'});
-  if(pg)h+='<button class="asb" onclick="S.slp=true;R()">+ Neuen Abschnitt</button>';
+  if(pg)h+='<button class="asb" onclick="S.slp=true;R()">+ New section</button>';
   h+='</div></div>';
   // Refine
-  h+='<div class="rbar"><input id="ri" placeholder="AI Anweisung..." onkeydown="if(event.key===\'Enter\'){doRefine(this.value);this.value=\'\'}"><button class="tb p" style="font-size:11px" onclick="var e=document.getElementById(\'ri\');doRefine(e.value);e.value=\'\'">✨</button></div></div>';
+  h+='<div class="rbar"><input id="ri" placeholder="AI instruction..." onkeydown="if(event.key===\'Enter\'){doRefine(this.value);this.value=\'\'}"><button class="tb p" style="font-size:11px" onclick="var e=document.getElementById(\'ri\');doRefine(e.value);e.value=\'\'">✨</button></div></div>';
   // Right
   h+='<div class="sr">'+rProps()+'</div>';
   h+='</div>';
   // Modals
-  if(S.slp)h+=rLP();if(S.stp)h+=rTP();if(S.sgm)h+=rGM();if(S.gen)h+=rGO();if(S.se)h+=rEP();if(S.sbf!==null)h+=rBF();
+  if(S.slp)h+=rLP();if(S.stp)h+=rTP();if(S.sgm)h+=rGM();if(S.gen)h+=rGO();if(S.se)h+=rEP();if(S.sbf!==null)h+=rBF();if(S.sap)h+=rAP();
   if(S.toast)h+='<div class="toast '+(S.toast.t==="err"?"err":"ok")+'">'+(S.toast.t==="ok"?"✓":"✕")+" "+esc(S.toast.m)+'</div>';
-  // Save scroll position before re-render
+  // Save scroll positions BEFORE replacing DOM
   const cwEl=document.querySelector('.cw');
   const savedScroll=cwEl?cwEl.scrollTop:0;
   const srEl=document.querySelector('.sr');
   const savedSrScroll=srEl?srEl.scrollTop:0;
   document.getElementById("app").innerHTML=h;
-  // Restore scroll position
-  const cwNew=document.querySelector('.cw');
-  if(cwNew)cwNew.scrollTop=savedScroll;
-  const srNew=document.querySelector('.sr');
-  if(srNew)srNew.scrollTop=savedSrScroll;
+  // Restore scroll positions AFTER replacing DOM
+  requestAnimationFrame(()=>{
+    const cwNew=document.querySelector('.cw');
+    if(cwNew)cwNew.scrollTop=savedScroll;
+    const srNew=document.querySelector('.sr');
+    if(srNew)srNew.scrollTop=savedSrScroll;
+  });
 }
 function rT(t,td){
   const c=t.content||{};
-  if(t.type==="text")return'<div class="ttxt">'+(c.title?'<b>'+esc(c.title)+'</b><br>':'')+esc(c.text||"[Text fehlt]")+'</div>';
+  if(t.type==="text")return'<div class="ttxt">'+(c.title?'<b>'+esc(c.title)+'</b><br>':'')+esc(c.text||"[Text missing]")+'</div>';
   if(t.type==="image_text")return'<div style="display:flex;flex-direction:column;height:100%"><div class="timgph">'+(t.img?'<img src="'+t.img+'" style="width:100%;height:auto">':'🖼️')+'</div><div style="padding:6px"><div style="font-weight:700;font-size:12px">'+esc(c.headline||"[Headline]")+'</div><div style="font-size:11px;color:#666">'+esc(c.body||"")+'</div></div></div>';
   if(t.type==="product_selection"){const qs=c.questions||[];return'<div style="padding:10px;background:linear-gradient(135deg,#eef2ff,#fef3c7)"><div style="font-weight:700;font-size:13px;margin-bottom:4px">🧩 '+esc(c.introTitle||"Produktauswahl-Quiz")+'</div><div style="font-size:11px;color:#666;margin-bottom:6px">'+esc(c.introText||"")+'</div><div style="font-size:10px;color:#888">'+qs.length+' Fragen</div>'+(qs.length?'<div style="margin-top:4px;padding:4px 6px;background:#fff;border-radius:3px;font-size:10px;color:#444">❓ '+esc(qs[0].q||"")+'</div>':'')+'</div>'}
   if(["product","product_grid","product_collection"].includes(t.type)){const asins=c.asins?c.asins.split('\n').filter(Boolean):c.asin?[c.asin]:[];return'<div class="tprod"><div style="text-align:center">'+td.i+'<div style="font-weight:600;font-size:11px">'+td.n+'</div>'+(asins.length?'<div style="font-size:9px;color:#888;margin-top:2px">'+asins.length+' ASIN'+(asins.length>1?"s":"")+'</div>':'')+'</div></div>'}
@@ -647,7 +760,7 @@ function rT(t,td){
   if(["video","bg_video","video_reveal"].includes(t.type))return'<div style="display:flex;align-items:center;justify-content:center;min-height:70px;background:#1a1a2e;color:rgba(255,255,255,.3);font-size:24px">'+(t.ifile?'📁 '+esc(t.ifile):'▶')+'</div>';
   if(t.type==="shoppable_image")return t.img?'<div style="position:relative"><img src="'+t.img+'" style="width:100%;height:auto"><span style="position:absolute;top:4px;right:4px;background:rgba(255,255,255,.9);padding:1px 6px;border-radius:3px;font-size:10px">🛒</span></div>':'<div class="timgph">🛒🖼️</div>';
   if(t.type==="gallery")return'<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px;padding:6px">'+"1234".split("").map(()=>'<div style="aspect-ratio:1;background:#f3f4f6;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#ddd;font-size:14px">🖼️</div>').join("")+'</div>';
-  const mob=S.dev==="mobil";
+  const mob=S.dev==="mobile";
   const hasImg=mob&&t.imgM?t.imgM:t.img;
   if(hasImg)return'<img src="'+hasImg+'" style="width:100%;height:auto;display:block">';
   // Show wireframe if composition data exists or imageBriefing exists
@@ -659,16 +772,16 @@ function rT(t,td){
 }
 function rProps(){
   const pg=cp();if(!pg)return'<div class="sr-h"><h3>—</h3></div>';
-  if(S.ss==="h")return'<div class="sr-h"><h3>Header</h3><button class="cb" onclick="S.ss=null;R()">< Fertig</button></div><div class="sr-s"><div class="specs"><b>Min:</b> 3000×600px<br><b>Max:</b> 5 MB<br><b>Format:</b> PNG, JPG</div><div class="sf"><div class="sup'+(pg.himg?" ok":"")+'" onclick="upHdr()">'+(pg.himg?"✓ "+pg.hfile:"Bild hochladen")+'</div></div></div>';
+  if(S.ss==="h")return'<div class="sr-h"><h3>Header</h3><button class="cb" onclick="S.ss=null;R()">< Done</button></div><div class="sr-s"><div class="specs"><b>Min:</b> 3000×600px<br><b>Max:</b> 5 MB<br><b>Format:</b> PNG, JPG</div><div class="sf"><div class="sup'+(pg.himg?" ok":"")+'" onclick="upHdr()">'+(pg.himg?"✓ "+pg.hfile:"Upload image")+'</div></div></div>';
   if(S.ss&&S.sc!==null){const sec=pg.sections.find(x=>x.id===S.ss);
     if(sec&&sec.tiles[S.sc]){const t=sec.tiles[S.sc],td=TT[t.type];
       let h='<div class="sr-h"><h3>'+td.i+' '+td.n+'</h3><button class="cb" onclick="setT(\''+sec.id+'\','+S.sc+',null);S.sc=null;R()">🗑</button></div><div class="sr-s">';
       if(td.sp){h+='<div class="specs">';Object.entries(td.sp).forEach(([k,v])=>{h+='<b>'+k+':</b> '+v+'<br>'});h+='</div>'}
       if(td.img&&td.dual){
         const dw=t.content?.w||3000,dh=t.content?.h||1500;
-        h+='<div class="sf"><label>Empfohlene Größe</label><div style="display:flex;gap:4px"><input style="width:50%" value="'+dw+'" oninput="uTC(\'w\',parseInt(this.value)||3000)" placeholder="Breite"><input style="width:50%" value="'+dh+'" oninput="uTC(\'h\',parseInt(this.value)||1500)" placeholder="Höhe"></div><div class="ht">Desktop: min 3000 breit | Mobil: min 1680 breit</div></div>';
-        h+='<div class="sf"><label>🖥 Desktop-Bild</label><div class="sup'+(t.img?" ok":"")+'" onclick="upImg(\''+sec.id+'\','+S.sc+',\'desktop\')">'+(t.img?"✓ "+t.ifile+" ("+t.iw+"×"+t.ih+")":"Desktop hochladen")+'</div></div>';
-        h+='<div class="sf"><label>📱 Mobil-Bild</label><div class="sup'+(t.imgM?" ok":"")+'" onclick="upImg(\''+sec.id+'\','+S.sc+',\'mobile\')">'+(t.imgM?"✓ "+t.ifileM+" ("+t.iwM+"×"+t.ihM+")":"Mobil hochladen")+'</div></div>';
+        h+='<div class="sf"><label>Recommended size</label><div style="display:flex;gap:4px"><input style="width:50%" value="'+dw+'" oninput="uTC(\'w\',parseInt(this.value)||3000)" placeholder="Breite"><input style="width:50%" value="'+dh+'" oninput="uTC(\'h\',parseInt(this.value)||1500)" placeholder="Höhe"></div><div class="ht">Desktop: min 3000 wide | Mobile: min 1680 wide</div></div>';
+        h+='<div class="sf"><label>🖥 Desktop image</label><div class="sup'+(t.img?" ok":"")+'" onclick="upImg(\''+sec.id+'\','+S.sc+',\'desktop\')">'+(t.img?"✓ "+t.ifile+" ("+t.iw+"×"+t.ih+")":"Upload desktop")+'</div></div>';
+        h+='<div class="sf"><label>📱 Mobileile image</label><div class="sup'+(t.imgM?" ok":"")+'" onclick="upImg(\''+sec.id+'\','+S.sc+',\'mobile\')">'+(t.imgM?"✓ "+t.ifileM+" ("+t.iwM+"×"+t.ihM+")":"Upload mobile")+'</div></div>';
       } else if(td.img){
         h+='<div class="sf"><label>Bild / Video</label><div class="sup'+(t.img?" ok":"")+'" onclick="upImg(\''+sec.id+'\','+S.sc+',\'desktop\')">'+(t.img?"✓ "+t.ifile+" ("+t.iw+"×"+t.ih+")":t.ifile||"Hochladen")+'</div></div>';
       }
@@ -700,33 +813,33 @@ function rProps(){
       return h+'</div>'}}
   if(S.ss){const sec=pg.sections.find(x=>x.id===S.ss);
     if(sec){const l=LY.find(x=>x.id===sec.lid)||LY[0];
-      let h='<div class="sr-h"><h3>'+l.n+'</h3></div><div class="sr-s"><div class="sf"><label>'+l.cells+' Kacheln</label>';
+      let h='<div class="sr-h"><h3>'+l.n+'</h3></div><div class="sr-s"><div class="sf"><label>'+l.cells+' Tiles</label>';
       sec.tiles.forEach((t,ci)=>{h+='<div style="padding:6px;border:1px solid #eee;border-radius:3px;margin-bottom:4px;font-size:11px;display:flex;justify-content:space-between">';
         if(t){h+='<span>'+TT[t.type].i+' '+TT[t.type].n+'</span><button style="color:var(--red);font-size:10px" onclick="setT(\''+sec.id+'\','+ci+',null)">✕</button>'}
         else h+='<span style="color:#bbb">—</span><button style="color:var(--blue);font-size:10px" onclick="S.stp={s:\''+sec.id+'\',c:'+ci+'};R()">+</button>';
         h+='</div>'});
-      h+='</div><div class="sf"><label>Aktionen</label>';
-      h+='<button class="asb" onclick="mvSec(\''+sec.id+'\',-1)">↑ Nach oben</button>';
-      h+='<button class="asb" onclick="mvSec(\''+sec.id+'\',1)">↓ Nach unten</button>';
-      h+='<button class="asb" style="color:var(--red);border-color:#fecaca" onclick="delSec(\''+sec.id+'\')">🗑 Löschen</button>';
+      h+='</div><div class="sf"><label>Actions</label>';
+      h+='<button class="asb" onclick="mvSec(\''+sec.id+'\',-1)">↑ Move up</button>';
+      h+='<button class="asb" onclick="mvSec(\''+sec.id+'\',1)">↓ Move down</button>';
+      h+='<button class="asb" style="color:var(--red);border-color:#fecaca" onclick="delSec(\''+sec.id+'\')">🗑 Delete</button>';
       return h+'</div></div>'}}
-  let h='<div class="sr-h"><h3>'+esc(pg.name)+'</h3></div><div class="sr-s"><button class="asb" onclick="S.slp=true;R()">+ Abschnitt</button>';
+  let h='<div class="sr-h"><h3>'+esc(pg.name)+'</h3></div><div class="sr-s"><button class="asb" onclick="S.slp=true;R()">+ Section</button>';
   pg.sections.forEach((s,i)=>{const l=LY.find(x=>x.id===s.lid)||LY[0];
     h+='<div style="padding:6px;border:1px solid #eee;border-radius:3px;margin-bottom:3px;font-size:11px;cursor:pointer;display:flex;justify-content:space-between" onclick="S.ss=\''+s.id+'\';R()"><span>'+(i+1)+'. '+l.n+'</span><span style="color:#999">'+s.tiles.filter(Boolean).length+'/'+l.cells+'</span></div>'});
   return h+'</div>';
 }
-function rLP(){let h='<div class="mbg" onclick="S.slp=null;R()"><div class="mbox" style="max-width:380px;max-height:80vh;overflow-y:auto" onclick="event.stopPropagation()"><div style="padding:12px;font-weight:800;border-bottom:1px solid #eee">Layout auswählen</div>';
+function rLP(){let h='<div class="mbg" onclick="S.slp=null;R()"><div class="mbox" style="max-width:380px;max-height:80vh;overflow-y:auto" onclick="event.stopPropagation()"><div style="padding:12px;font-weight:800;border-bottom:1px solid #eee">Choose layout</div>';
   ["Variable","Basis"].forEach(cat=>{
     h+='<div style="padding:8px 12px 4px;font-size:11px;font-weight:700;color:#888;text-transform:uppercase">'+cat+' Höhe</div><div class="lpg">';
     LY.filter(l=>l.cat===cat).forEach(l=>{h+='<div class="lpo" style="grid-template-columns:'+l.c+'" onclick="addSec(\''+l.id+'\');S.slp=null;R()">';for(let i=0;i<Math.min(l.cells,6);i++)h+='<div class="c"></div>';h+='</div>'});
     h+='</div>'});
   return h+'</div></div>'}
-function rTP(){const p=S.stp;let h='<div class="mbg" onclick="S.stp=null;R()"><div class="mbox" style="max-width:340px;max-height:70vh;overflow-y:auto" onclick="event.stopPropagation()"><div style="padding:12px;font-weight:800;border-bottom:1px solid #eee">Kacheltyp</div>';
+function rTP(){const p=S.stp;let h='<div class="mbg" onclick="S.stp=null;R()"><div class="mbox" style="max-width:340px;max-height:70vh;overflow-y:auto" onclick="event.stopPropagation()"><div style="padding:12px;font-weight:800;border-bottom:1px solid #eee">Tile type</div>';
   TG.forEach(g=>{Object.entries(TT).filter(([,v])=>v.g===g).forEach(([k,v])=>{
     h+='<div class="tpi" onclick="setT(\''+p.s+'\','+p.c+',mkT(\''+k+'\'));S.stp=null;R()"><div class="ic">'+v.i+'</div><div><h5>'+v.n+(v.nw?' <span style="background:#e8daef;color:#6c3483;font-size:8px;padding:0 3px;border-radius:2px">Neu</span>':'')+'</h5><p>'+v.d+'</p></div></div>'})});
   return h+'</div></div>'}
-function rGM(){return'<div class="mbg" onclick="S.sgm=false;R()"><div class="mbox" onclick="event.stopPropagation()"><div style="padding:14px;border-bottom:1px solid #eee"><h3 style="font-size:15px;font-weight:800">✨ AI Store Generator</h3></div><div style="padding:14px;display:flex;flex-direction:column;gap:8px"><div class="sf"><label>Markenname *</label><input id="gb" placeholder="z.B. Kärcher, HOLY..."></div><div class="sf"><label>Marktplatz</label><select id="gm"><option value="de">🇩🇪 de</option><option value="com">🇺🇸 com</option><option value="co.uk">🇬🇧 uk</option><option value="fr">🇫🇷 fr</option></select></div><div class="sf"><label>Kategorie</label><input id="gc"></div><div class="sf"><label>Info</label><textarea id="gi" rows="2"></textarea></div></div><div style="padding:14px;display:flex;justify-content:flex-end;gap:6px"><button class="tb" onclick="S.sgm=false;R()">Abbrechen</button><button class="tb p" onclick="S.sgm=false;generate(document.getElementById(\'gb\').value,document.getElementById(\'gm\').value,document.getElementById(\'gc\').value,document.getElementById(\'gi\').value)">🚀 Los</button></div></div></div>'}
-function rGO(){let h='<div class="gbg"><div class="gbox"><div style="padding:14px"><div style="font-weight:700;margin-bottom:6px">Generiere...</div>';
+function rGM(){return'<div class="mbg" onclick="S.sgm=false;R()"><div class="mbox" onclick="event.stopPropagation()"><div style="padding:14px;border-bottom:1px solid #eee"><h3 style="font-size:15px;font-weight:800">✨ AI Store Generator</h3></div><div style="padding:14px;display:flex;flex-direction:column;gap:8px"><div class="sf"><label>Brand name *</label><input id="gb" placeholder="e.g. Kärcher, HOLY..."></div><div class="sf"><label>Marketplace</label><select id="gm"><option value="de">🇩🇪 de</option><option value="com">🇺🇸 com</option><option value="co.uk">🇬🇧 uk</option><option value="fr">🇫🇷 fr</option></select></div><div class="sf"><label>Category</label><input id="gc" placeholder="optional filter"></div><div class="sf"><label>Info / instructions</label><textarea id="gi" rows="2" placeholder="Optional: special requirements, focus areas..."></textarea></div><div style="font-size:10px;color:#888;padding:4px 0">💡 For complete ASIN coverage, import a CSV via 📦 ASINs button after generation</div></div><div style="padding:14px;display:flex;justify-content:flex-end;gap:6px"><button class="tb" onclick="S.sgm=false;R()">Cancel</button><button class="tb p" onclick="S.sgm=false;generate(document.getElementById(\'gb\').value,document.getElementById(\'gm\').value,document.getElementById(\'gc\').value,document.getElementById(\'gi\').value)">🚀 Generate</button></div></div></div>'}
+function rGO(){let h='<div class="gbg"><div class="gbox"><div style="padding:14px"><div style="font-weight:700;margin-bottom:6px">Generating...</div>';
   S.gss.forEach((s,i)=>{const c=i<S.gs?"done":i===S.gs?"act":"pen";h+='<div class="gst '+c+'">'+(i<S.gs?"✅":i===S.gs?"⏳":"⬜")+' <b>'+s.n+'</b> <span style="opacity:.6">'+s.d+'</span></div>'});
   h+='</div><div class="glog">';S.gl.forEach(l=>{h+='<div'+(l.includes("❌")?' class="e"':"")+'>'+esc(l)+'</div>'});
   return h+'<div style="color:#4ade80">_</div></div></div></div>'}
