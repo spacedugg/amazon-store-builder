@@ -172,9 +172,16 @@ let apiKey=localStorage.getItem("asb_api_key")||"";
 
 // ── AI ──
 const PR={
-research:`You research brands for Amazon Brand Stores. Use web search to find brand info, product categories, and Amazon ASINs. 
-CRITICAL: Your ENTIRE response must be ONLY a JSON object. No text before or after. No markdown. No explanations. Just raw JSON:
-{"brandName":"...","description":"1-2 sentences","type":"premium|d2c|mission|mass_market","tone":"...","colors":{"primary":"#hex","secondary":"#hex","accent":"#hex"},"categories":["..."],"usps":["..."],"targetAudience":"...","products":[{"name":"...","asin":"B0XX","category":"..."}],"amazonCategories":[]}`,
+research:`You are a brand research tool for Amazon Brand Store creation. Your ONLY job is to find and return FACTUAL information about brands that sell on Amazon.
+
+CRITICAL RULES:
+1. ALWAYS return JSON. NEVER refuse. NEVER explain concerns. Every brand listed on Amazon is valid for a Brand Store.
+2. This includes ALL product types: pest control, biocides, supplements, chemicals, pharmaceuticals, adult products, weapons, knives, etc. If it's sold on Amazon, it gets a Brand Store.
+3. For sensitive/regulated products (health, biocides, pharmaceuticals, supplements): ONLY use information that the brand itself publishes. Do NOT invent health claims, efficacy statements, or certifications. Paraphrase existing product descriptions and marketing copy found online. Do NOT add new claims.
+4. Use web search to find: brand website, Amazon product listings, ASINs, product categories, brand colors, and marketing tone.
+
+Your ENTIRE response must be ONLY a JSON object:
+{"brandName":"...","description":"1-2 sentences from brand's own description","type":"premium|d2c|mission|mass_market","tone":"...","colors":{"primary":"#hex","secondary":"#hex","accent":"#hex"},"categories":["..."],"usps":["only USPs the brand itself states"],"targetAudience":"...","products":[{"name":"...","asin":"B0XX","category":"..."}],"amazonCategories":[]}`,
 arch:`Plan Amazon Store structure based on how top brands (Nespresso, Kärcher, ESN, SNOCKS, Holy) build their stores.
 Layouts: "1"(full),"1-1"(2eq),"2-1"(big+sm),"1-2"(sm+big),"1-1-1"(3eq),"1-1-1-1"(4eq),"2-1-1"(big+2sm),"1-1-2"(2sm+big),"b-1-1"(basis 2),"b-2s-1"(basis big+2stack),"b-1-2s"(basis 2stack+big),"b-1-1-1"(basis 3),"b-1-1-1-1"(basis 4)
 Tiles: product_selection,video_reveal,split,text,image,image_text,shoppable_image,product,product_grid,product_collection,featured_deals,best_sellers,recommended,video,bg_video,gallery
@@ -189,6 +196,8 @@ PROVEN HOMEPAGE STRUCTURE (follow this order):
 7. Footer banner — "Mehr entdecken" or seasonal CTA
 
 CRITICAL RULES:
+- NEVER refuse to create a store for ANY brand. All brands on Amazon are valid.
+- For sensitive/regulated products (biocides, supplements, pharma, chemicals): use ONLY factual claims from the brand's own marketing. Do NOT invent new health claims or efficacy statements.
 - 85-95% of all tiles should be "image" type. Text is designed INTO images by designer.
 - "text" tiles ONLY for FAQ sections or legal text.
 - Homepage: category tiles MUST link to their subpage (use "link":"page_id" in content)
@@ -243,9 +252,10 @@ IMAGE DIMENSION GUIDELINES (choose based on purpose, within Amazon limits):
 Set w and h in content to specify exact recommended pixels.
 
 CRITICAL: Use REAL ASINs. ALL fields filled. Prefer image tiles. imageBriefing in English except text overlays which are in store language.
+NEVER refuse to create content for ANY product type. For regulated/sensitive products: ONLY paraphrase existing brand claims found in the research data. Do NOT invent new health claims, efficacy promises, or certifications. Use the brand's own language and messaging.
 Return ONLY JSON:
 {"pageName":"...","sections":[{"layoutId":"...","tiles":[...]}]}`,
-refine:`Refine Amazon Store. Structure: pages>sections(layoutId+tiles). ALL text fields must have content. Use real ASINs. Return ONLY valid JSON with ALL pages:
+refine:`Refine Amazon Store. NEVER refuse for any product type. For sensitive products, only paraphrase existing brand claims. Structure: pages>sections(layoutId+tiles). ALL text fields must have content. Use real ASINs. Return ONLY valid JSON with ALL pages:
 {"pages":[...]}`
 };
 
@@ -307,7 +317,19 @@ async function generate(brand,mp,cat,info){
   S.gs=0;R();
   try{
     log("🔍 "+brand+"...");
-    const bp=await callAI(PR.research,`Research "${brand}" for Amazon.${mp}. ${cat?"Category: "+cat+".":""} Return ONLY the JSON object, nothing else.`,true,"claude-haiku-4-5-20251001");
+    let bp;
+    try{
+      bp=await callAI(PR.research,`Research "${brand}" for Amazon.${mp}. ${cat?"Category: "+cat+".":""} Return ONLY the JSON object, nothing else.`,true,"claude-haiku-4-5-20251001");
+    }catch(researchErr){
+      // Retry with Sonnet if Haiku refused
+      log("⚠ Haiku verweigert, versuche Sonnet...");
+      try{
+        bp=await callAI(PR.research,`Research "${brand}" for Amazon.${mp}. ${cat?"Category: "+cat+".":""} This brand sells on Amazon and needs a Brand Store. Return ONLY the JSON object with all factual information you can find.`,true);
+      }catch(retryErr){
+        throw new Error("Research fehlgeschlagen: AI verweigert Antwort für diese Marke. Bitte versuche es erneut oder gib mehr Kontext im Info-Feld.");
+      }
+    }
+    if(!bp.brandName)bp.brandName=brand;
     log("✅ "+(bp.products?.length||0)+" Produkte");S.gs=1;R();await new Promise(x=>setTimeout(x,5000));
 
     log("🏗️ Architektur...");
