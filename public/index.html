@@ -178,36 +178,45 @@ CRITICAL RULES:
 1. ALWAYS return JSON. NEVER refuse. NEVER explain concerns. Every brand listed on Amazon is valid for a Brand Store.
 2. This includes ALL product types: pest control, biocides, supplements, chemicals, pharmaceuticals, adult products, weapons, knives, etc. If it's sold on Amazon, it gets a Brand Store.
 3. For sensitive/regulated products (health, biocides, pharmaceuticals, supplements): ONLY use information that the brand itself publishes. Do NOT invent health claims, efficacy statements, or certifications. Paraphrase existing product descriptions and marketing copy found online. Do NOT add new claims.
-4. Use web search to find: brand website, Amazon product listings, ASINs, product categories, brand colors, and marketing tone.
+4. Use web search to find: brand website, Amazon product listings, ASINs, product categories, and marketing tone. Do NOT include brand colors/hex codes — design is the designer's job.
+5. CRITICAL: Find ALL parent ASINs for this brand. Search "brand name" on Amazon, look through ALL result pages. Include EVERY product category. A store with missing categories is broken. Search multiple times with different terms if the brand has many products.
 
 Your ENTIRE response must be ONLY a JSON object:
-{"brandName":"...","description":"1-2 sentences from brand's own description","type":"premium|d2c|mission|mass_market","tone":"...","colors":{"primary":"#hex","secondary":"#hex","accent":"#hex"},"categories":["..."],"usps":["only USPs the brand itself states"],"targetAudience":"...","products":[{"name":"...","asin":"B0XX","category":"..."}],"amazonCategories":[]}`,
-arch:`Plan Amazon Store structure based on how top brands (Nespresso, Kärcher, ESN, SNOCKS, Holy) build their stores.
+{"brandName":"...","description":"1-2 sentences from brand's own description","type":"premium|d2c|mission|mass_market","tone":"...","categories":["..."],"usps":["only USPs the brand itself states"],"targetAudience":"...","products":[{"name":"...","asin":"B0XX","category":"..."}],"amazonCategories":[]}`,
+arch:`Plan Amazon Store structure. The PRIMARY goal is CUSTOMER NAVIGATION — helping customers find the right product category and products quickly. NOT explaining products (Amazon product pages do that).
+
+Based on analysis of top stores (Kurkraft, Affenzahn, Minecraft, Nespresso, Kärcher, ESN):
+- Homepage = category overview. Show ALL product categories as clickable image tiles.
+- Category subpages = subcategory overview + product grids. If a category has subcategories, show them as image tiles first, then product grids.
+- Keep it CLEAN and STRUCTURED. No content overload. Max 1-2 text lines per image.
+- Each image tile in a grid = ONE separate image that gets uploaded to ONE cell in Amazon. NOT one big image split visually into tiles.
+
 Layouts: "1"(full),"1-1"(2eq),"2-1"(big+sm),"1-2"(sm+big),"1-1-1"(3eq),"1-1-1-1"(4eq),"2-1-1"(big+2sm),"1-1-2"(2sm+big),"b-1-1"(basis 2),"b-2s-1"(basis big+2stack),"b-1-2s"(basis 2stack+big),"b-1-1-1"(basis 3),"b-1-1-1-1"(basis 4)
 Tiles: product_selection,video_reveal,split,text,image,image_text,shoppable_image,product,product_grid,product_collection,featured_deals,best_sellers,recommended,video,bg_video,gallery
 
-PROVEN HOMEPAGE STRUCTURE (follow this order):
-1. Full-width hero image (brand claim + key products) — layoutId:"1"
-2. Campaign/offer banner (optional) — layoutId:"1"
-3. Category grid — ALL category subpages as clickable image tiles. Use "b-1-1-1-1" for 4 cats, "b-1-1" for 2, "1-1-1" for 3. Each tile = lifestyle photo + category name overlay + CTA
-4. Product highlight section — shoppable_image or product_grid with real ASINs
-5. Brand story / USP section — split layout with lifestyle image + text/image
-6. Interactive element (quiz/product_selection) if applicable
-7. Footer banner — "Mehr entdecken" or seasonal CTA
+HOMEPAGE STRUCTURE:
+1. Hero image (full-width) — brand message, 1 line max
+2. Category grid — ONE image tile per category, each links to its subpage. Choose layout based on category count (2→"b-1-1", 3→"1-1-1", 4→"b-1-1-1-1", 6→two rows of "1-1-1", 8→two rows of "b-1-1-1-1")
+3. Optional: bestseller product_grid (1 section max)
+4. Optional: brand story (1 image, keep minimal)
 
-CRITICAL RULES:
-- NEVER refuse to create a store for ANY brand. All brands on Amazon are valid.
-- For sensitive/regulated products (biocides, supplements, pharma, chemicals): use ONLY factual claims from the brand's own marketing. Do NOT invent new health claims or efficacy statements.
-- 85-95% of all tiles should be "image" type. Text is designed INTO images by designer.
-- "text" tiles ONLY for FAQ sections or legal text.
-- Homepage: category tiles MUST link to their subpage (use "link":"page_id" in content)
-- Non-category pages (About Us, FAQ) appear lower, NOT in main category grid
-- Each category subpage: hero image + product_grid/collection + USP images
-- Use real ASINs from product list
-- 4-8 pages, 3-6 sections/page
+CATEGORY SUBPAGE STRUCTURE:
+1. Category hero image (full-width)
+2. If subcategories exist: subcategory image tiles (same grid pattern)
+3. product_grid with ASINs from this category
+4. Optional: 1 lifestyle/shoppable image
+
+RULES:
+- NEVER refuse for any product type
+- For sensitive products, only paraphrase existing brand claims
+- ALL product categories from the research must have a page
+- Use "b-1-1-1-1" for 4+ category tiles (Basis layout = equal height = clean grid)
+- Each tile in a grid = separate image uploaded to separate cell
+- 90%+ tiles are "image" type
+- "text" tiles: MAX 1-2 per entire store, only for headings or legal
 
 Return ONLY JSON:
-{"pages":[{"id":"homepage","name":"Homepage","sections":[{"layoutId":"1","tiles":["image: hero"]},{"layoutId":"b-1-1-1-1","tiles":["image: cat1","image: cat2","image: cat3","image: cat4"]},{"layoutId":"1","tiles":["product_grid: bestsellers"]}]},{"id":"cat1","name":"Category 1","sections":[...]}]}`,
+{"pages":[{"id":"homepage","name":"Homepage","sections":[{"layoutId":"1","tiles":["image: hero"]},{"layoutId":"b-1-1-1-1","tiles":["image: cat1","image: cat2","image: cat3","image: cat4"]}]},{"id":"cat1","name":"Category 1","sections":[...]}]}`,
 content:`Create COMPLETE content for ONE Amazon Store page.
 
 DESIGN PHILOSOPHY based on analysis of Nespresso, Kärcher, ESN, SNOCKS, Holy, nucao stores:
@@ -227,7 +236,7 @@ WHEN TO USE EACH MODULE:
 - "video" → MAX 1 per page, for brand/product videos
 
 TILE CONTENT RULES:
-- "image" → {"type":"image","content":{"alt":"desc","link":"page_id or empty","w":3000,"h":1200},"imageBriefing":"DESKTOP: 3000×1200px | MOBILE: 1680×840px | SUBJECT: ... | TEXT OVERLAY: exact text in store language | COLORS: #hex | STYLE: photo/illustration","composition":{"bg":"lifestyle-photo|solid-color|gradient|product-scene","textPos":"top-left|top-center|center|bottom-left|bottom-center","textLines":["Headline","Subline"],"ctaText":"CTA or empty","ctaPos":"bottom-center|bottom-right","productPos":"right|left|center|none","productCount":0,"accentColor":"#hex"}}
+- "image" → {"type":"image","content":{"alt":"desc","link":"page_id or empty","w":3000,"h":1200},"imageBriefing":"DESKTOP: 3000×1200px | MOBILE: 1680×840px | SUBJECT: ... | TEXT OVERLAY: exact text in store language | STYLE: photo/illustration","composition":{"bg":"lifestyle-photo|solid-color|gradient|product-scene","textPos":"top-left|top-center|center|bottom-left|bottom-center","textLines":["Headline","Subline"],"ctaText":"CTA or empty","ctaPos":"bottom-center|bottom-right","productPos":"right|left|center|none","productCount":0,"accentColor":"#888"}}
 - "text" → RARE. Only for FAQ, legal. {"type":"text","content":{"title":"Title","text":"Short text."}}
 - "image_text" → Use when Amazon text overlay is acceptable. {"type":"image_text","content":{"headline":"...","body":"...","linkText":"..."},"imageBriefing":"..."}
 - "shoppable_image" → {"type":"shoppable_image","content":{"alt":"desc","products":["ASIN1"]},"imageBriefing":"..."}
@@ -239,7 +248,7 @@ TILE CONTENT RULES:
 - "gallery" → {"type":"gallery","content":{"images":["desc1","desc2"]},"imageBriefing":"GALLERY: ..."}
 - "best_sellers"/"recommended"/"featured_deals" → {"type":"best_sellers","content":{"category":"filter"}}
 
-IMAGE BRIEFING MUST include: exact text overlay in store language (headlines, sublines, CTAs), desktop AND mobile dimensions, visual description, brand colors, mood/style.
+IMAGE BRIEFING: Include exact text overlay in store language, dimensions, visual concept, mood. Do NOT include hex colors or font styles — design is the designer's job. Keep text minimal (max 1 headline + 1 subline per image). Focus on STRUCTURE and NAVIGATION, not content.
 
 COMPOSITION FIELD is REQUIRED for every image/image_text/shoppable_image tile. It drives automatic wireframe sketches for the designer.
 
@@ -443,7 +452,7 @@ function genBriefing(){
   md+="- Consistent color palette throughout (brand primary + secondary)\n";
   md+="- CTAs in brand accent color (e.g. Kärcher: yellow bar, Nespresso: gold pill)\n";
   md+="- Mobile: text must be ~50% larger than desktop to remain readable\n\n---\n\n";
-  if(bp){md+="## Brand Overview\n- Type: "+bp.type+"\n- Tone: "+bp.tone+"\n- Colors: "+(bp.colors?Object.entries(bp.colors).map(([k,v])=>k+": "+v).join(", "):"")+"\n- USPs: "+(bp.usps||[]).join(" | ")+"\n- Target: "+(bp.targetAudience||"")+"\n\n---\n\n"}
+  if(bp){md+="## Brand Overview\n- Type: "+bp.type+"\n- Tone: "+bp.tone+"\n- USPs: "+(bp.usps||[]).join(" | ")+"\n- Target: "+(bp.targetAudience||"")+"\n- Categories: "+(bp.categories||[]).join(", ")+"\n- Products found: "+(bp.products?.length||0)+"\n\n---\n\n"}
   st.pages.forEach((pg,pi)=>{md+="## Page "+(pi+1)+": "+pg.name+"\n\n";
     md+="### Header Image\n- Minimum: 3000×600px, max 5MB\n- Safe zone: center 70%\n"+(pg.hfile?"- ✅ Uploaded: "+pg.hfile+"\n":"- ⚠ Image needed\n")+"\n";
     pg.sections.forEach((sec,si)=>{const l=LY.find(x=>x.id===sec.lid)||LY[0];
@@ -501,8 +510,6 @@ function getGridStyle(l,mob){
 // ── SVG Wireframe Generator ──
 function mkWireframe(t,w,h){
   const comp=t.content?.composition||t.composition||{};
-  const c=comp.accentColor||S.store.bp?.colors?.primary||'#FF9900';
-  const c2=S.store.bp?.colors?.secondary||'#232F3E';
   const lines=comp.textLines||[];
   const tPos=comp.textPos||'center';
   const bg=comp.bg||'lifestyle-photo';
@@ -512,54 +519,55 @@ function mkWireframe(t,w,h){
   const vw=w||300,vh=h||150;
   let svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${vw} ${vh}" style="width:100%;height:auto;display:block">`;
   // Background
-  if(bg==='solid-color')svg+=`<rect width="${vw}" height="${vh}" fill="${c}" opacity="0.15"/>`;
-  else if(bg==='gradient')svg+=`<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${c}" stop-opacity="0.2"/><stop offset="100%" stop-color="${c2}" stop-opacity="0.15"/></linearGradient></defs><rect width="${vw}" height="${vh}" fill="url(#g)"/>`;
-  else{svg+=`<rect width="${vw}" height="${vh}" fill="#f0f0f0"/>`;
-    // Landscape sketch lines for lifestyle
-    svg+=`<line x1="0" y1="${vh*.7}" x2="${vw}" y2="${vh*.65}" stroke="#ddd" stroke-width="0.5"/>`;
-    svg+=`<line x1="0" y1="${vh*.75}" x2="${vw}" y2="${vh*.72}" stroke="#e0e0e0" stroke-width="0.5"/>`;
-    // Diagonal cross for "image placeholder"
-    svg+=`<line x1="${vw*.1}" y1="${vh*.1}" x2="${vw*.9}" y2="${vh*.9}" stroke="#e5e5e5" stroke-width="0.3"/>`;
-    svg+=`<line x1="${vw*.9}" y1="${vh*.1}" x2="${vw*.1}" y2="${vh*.9}" stroke="#e5e5e5" stroke-width="0.3"/>`}
-  // Product placeholder (right side circle/box)
+  svg+=`<rect width="${vw}" height="${vh}" fill="#f5f5f5" stroke="#ddd" stroke-width="0.5"/>`;
+  if(bg==='lifestyle-photo'||bg==='product-scene'){
+    svg+=`<line x1="0" y1="0" x2="${vw}" y2="${vh}" stroke="#e8e8e8" stroke-width="0.5"/>`;
+    svg+=`<line x1="${vw}" y1="0" x2="0" y2="${vh}" stroke="#e8e8e8" stroke-width="0.5"/>`;
+    svg+=`<text x="${vw/2}" y="${vh/2-5}" font-size="7" fill="#ccc" text-anchor="middle" font-family="sans-serif">${bg==='product-scene'?'PRODUCT SCENE':'LIFESTYLE PHOTO'}</text>`;
+  }
+  // Product area — show as clear rectangular zone
   if(pPos!=='none'&&pCnt>0){
-    const px=pPos==='left'?vw*.15:pPos==='center'?vw*.5:vw*.75;
-    const py=vh*.45;const pr=Math.min(vw,vh)*.2;
-    for(let i=0;i<Math.min(pCnt,3);i++){
-      const ox=i*(pr*.8);
-      svg+=`<rect x="${px-pr/2+ox}" y="${py-pr/2}" width="${pr*.7}" height="${pr}" rx="3" fill="#ddd" stroke="#bbb" stroke-width="0.5"/>`;
-      svg+=`<circle cx="${px+ox}" cy="${py-pr*.1}" r="${pr*.2}" fill="#ccc"/>` // product icon
-    }}
-  // Text lines (wavy lines representing text)
-  const txMap={
-    'top-left':{x:vw*.05,y:vh*.12,ax:'start'},
-    'top-center':{x:vw*.5,y:vh*.12,ax:'middle'},
-    'center':{x:vw*.5,y:vh*.4,ax:'middle'},
-    'bottom-left':{x:vw*.05,y:vh*.7,ax:'start'},
-    'bottom-center':{x:vw*.5,y:vh*.7,ax:'middle'}
+    const pw=Math.min(vw*.3,vw/pCnt*.4);
+    const phh=vh*.5;
+    const startX=pPos==='left'?vw*.05:pPos==='center'?(vw-pCnt*pw-(pCnt-1)*4)/2:vw-(pCnt*pw+(pCnt-1)*4)-vw*.05;
+    const py=(vh-phh)/2;
+    for(let i=0;i<Math.min(pCnt,4);i++){
+      const px=startX+i*(pw+4);
+      svg+=`<rect x="${px}" y="${py}" width="${pw}" height="${phh}" rx="4" fill="#e8e8e8" stroke="#ccc" stroke-width="0.8"/>`;
+      svg+=`<rect x="${px+pw*.2}" y="${py+phh*.15}" width="${pw*.6}" height="${phh*.4}" rx="2" fill="#ddd"/>`;
+      svg+=`<text x="${px+pw/2}" y="${py+phh*.75}" font-size="5" fill="#aaa" text-anchor="middle">Produkt</text>`;
+    }
+  }
+  // Text area — clear block with lines
+  const txZones={
+    'top-left':{x:vw*.04,y:vh*.08,w:vw*.55,anc:'start'},
+    'top-center':{x:vw*.15,y:vh*.08,w:vw*.7,anc:'start'},
+    'center':{x:vw*.15,y:vh*.3,w:vw*.7,anc:'start'},
+    'bottom-left':{x:vw*.04,y:vh*.6,w:vw*.55,anc:'start'},
+    'bottom-center':{x:vw*.15,y:vh*.6,w:vw*.7,anc:'start'}
   };
-  const tp=txMap[tPos]||txMap['center'];
-  lines.forEach((line,i)=>{
-    const ly=tp.y+i*14;
-    const lw=Math.min(line.length*4,vw*.7);
-    const lx=tp.ax==='middle'?tp.x-lw/2:tp.x;
-    const fs=i===0?9:7;const fw=i===0?'bold':'normal';
-    // Wavy text-indicating line
-    let path=`M${lx},${ly}`;
-    for(let j=0;j<lw;j+=6)path+=`q3,-${1+Math.random()*2} 6,0`;
-    svg+=`<path d="${path}" fill="none" stroke="${c2}" stroke-width="${i===0?1.5:0.8}" opacity="0.5"/>`;
-  });
-  // CTA button
+  const tz=txZones[tPos]||txZones['center'];
+  if(lines.length){
+    let cy=tz.y;
+    lines.forEach((line,i)=>{
+      const lw=Math.min(line.length*3.5,tz.w);
+      const lh=i===0?3:2;
+      svg+=`<rect x="${tz.x}" y="${cy}" width="${lw}" height="${lh}" rx="1" fill="#999" opacity="${i===0?0.5:0.3}"/>`;
+      cy+=i===0?10:7;
+    });
+  }
+  // CTA button — clear rounded rectangle
   if(cta){
-    const cy=comp.ctaPos==='bottom-right'?vh*.85:vh*.85;
-    const cx=comp.ctaPos==='bottom-right'?vw*.75:vw*.5;
-    const bw=cta.length*4+20;
-    svg+=`<rect x="${cx-bw/2}" y="${cy-8}" width="${bw}" height="16" rx="3" fill="${c}" opacity="0.7"/>`;
-    svg+=`<line x1="${cx-bw/4}" y1="${cy}" x2="${cx+bw/4}" y2="${cy}" stroke="#fff" stroke-width="1"/>` // text line in button
+    const bw=Math.min(cta.length*4.5+16,vw*.4);
+    const bh=14;
+    const bx=comp.ctaPos==='bottom-right'?vw-bw-vw*.05:vw/2-bw/2;
+    const by=vh*.82;
+    svg+=`<rect x="${bx}" y="${by}" width="${bw}" height="${bh}" rx="${bh/2}" fill="#666" opacity="0.6"/>`;
+    svg+=`<rect x="${bx+bw*.2}" y="${by+bh/2-1}" width="${bw*.6}" height="2" rx="1" fill="#fff" opacity="0.8"/>`;
   }
   // Dimension label
   const dw=t.content?.w||3000,dh=t.content?.h||1500;
-  svg+=`<text x="${vw-4}" y="10" font-size="6" fill="#999" text-anchor="end" font-family="monospace">${dw}×${dh}</text>`;
+  svg+=`<text x="${vw-3}" y="8" font-size="5.5" fill="#bbb" text-anchor="end" font-family="monospace">${dw}×${dh}</text>`;
   svg+='</svg>';
   return svg;
 }
@@ -617,7 +625,17 @@ function R(){
   // Modals
   if(S.slp)h+=rLP();if(S.stp)h+=rTP();if(S.sgm)h+=rGM();if(S.gen)h+=rGO();if(S.se)h+=rEP();if(S.sbf!==null)h+=rBF();
   if(S.toast)h+='<div class="toast '+(S.toast.t==="err"?"err":"ok")+'">'+(S.toast.t==="ok"?"✓":"✕")+" "+esc(S.toast.m)+'</div>';
+  // Save scroll position before re-render
+  const cwEl=document.querySelector('.cw');
+  const savedScroll=cwEl?cwEl.scrollTop:0;
+  const srEl=document.querySelector('.sr');
+  const savedSrScroll=srEl?srEl.scrollTop:0;
   document.getElementById("app").innerHTML=h;
+  // Restore scroll position
+  const cwNew=document.querySelector('.cw');
+  if(cwNew)cwNew.scrollTop=savedScroll;
+  const srNew=document.querySelector('.sr');
+  if(srNew)srNew.scrollTop=savedSrScroll;
 }
 function rT(t,td){
   const c=t.content||{};
