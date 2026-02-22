@@ -1,6 +1,13 @@
 # Amazon Brand Store Builder
 
-AI-powered Amazon Brand Store concept generator.
+AI-powered Amazon Brand Store concept generator with real product data from Amazon.
+
+## How it works
+
+1. Enter brand name → tool searches Amazon via Bright Data
+2. Bright Data scrapes real product data (names, descriptions, prices, categories)
+3. AI analyzes the products and builds a complete store concept
+4. You fine-tune the result
 
 ## Setup
 
@@ -8,15 +15,11 @@ AI-powered Amazon Brand Store concept generator.
 npm install
 ```
 
-## Local Development
-
-Create a `.env` file:
-
+Create `.env`:
 ```
-VITE_ANTHROPIC_API_KEY=sk-ant-api03-xxxxx
+VITE_ANTHROPIC_API_KEY=sk-ant-xxx
+BRIGHT_DATA_API_KEY=your-bright-data-api-key
 ```
-
-Then:
 
 ```bash
 npm run dev
@@ -24,18 +27,9 @@ npm run dev
 
 ## Deploy to Vercel
 
-1. Push this repo to GitHub
-2. Go to [vercel.com](https://vercel.com) → Import Project → select repo
-3. Add environment variable:
-   - Key: `VITE_ANTHROPIC_API_KEY`
-   - Value: your Anthropic API key
+1. Push to GitHub
+2. Vercel → Import → select repo
+3. Environment Variables:
+   - `VITE_ANTHROPIC_API_KEY` = your Anthropic key
+   - `BRIGHT_DATA_API_KEY` = your Bright Data key
 4. Deploy
-
-## Usage
-
-1. Click **Generate**
-2. Upload a CSV/TXT with your ASINs (format: `ASIN, Product Name, Category`)
-3. Enter brand name and marketplace
-4. Click **Generate Store**
-5. Click tiles to edit properties, upload images
-6. Use the **ASINs** button to check coverage
