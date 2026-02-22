@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback } from 'react';
 import { LAYOUTS, LANGS, TILE_TYPES, uid, emptyTile } from './constants';
-import { searchAndWait, buildPrompt, generateStore } from './api';
+import { searchAmazon, buildPrompt, generateStore } from './api';
 import { SectionView } from './Tiles';
 import PropertiesPanel from './PropertiesPanel';
 import AsinPanel from './AsinPanel';
@@ -73,8 +73,8 @@ export default function App() {
 
     try {
       // STEP 1: Search Amazon via Bright Data
-      log('🔍 Step 1: Searching Amazon for "' + brand + '"...');
-      const searchResult = await searchAndWait(brand, domain, 50, log);
+      log('🔍 Step 1: Searching Amazon for "' + brand + '" (this can take 30-90s)...');
+      const searchResult = await searchAmazon(brand, 50);
       const products = searchResult.products || [];
 
       if (products.length === 0) throw new Error('No products found for "' + brand + '" on Amazon');
