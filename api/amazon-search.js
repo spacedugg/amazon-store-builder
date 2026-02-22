@@ -7,17 +7,20 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  var body = req.method === 'POST' ? req.body : req.query;
-  var keyword = body.keyword;
+  var body = req.method === 'POST' ? req.body : {};
+  var asins = body.asins;
   var domain = body.domain || 'https://www.amazon.de';
-  var limit = parseInt(body.limit) || 50;
-  var pages = parseInt(body.pages) || 5;
 
-  if (!keyword) return res.status(400).json({ error: 'Missing keyword' });
+  if (!asins || !asins.length) return res.status(400).json({ error: 'Missing asins array' });
   if (!BRIGHT_DATA_TOKEN) return res.status(500).json({ error: 'BRIGHT_DATA_API_KEY not configured' });
 
   try {
-    var url = 'https://api.brightdata.com/datasets/v3/scrape?dataset_id=' + DATASET_ID + '&include_errors=true&type=discover_new&discover_by=keyword&limit_per_input=' + limit;
+    // Build input array: one object per ASIN, matching Bright Data's exact format
+    var inputItems = asins.map(function(asin) {
+      return { url: domain + '/dp/' + asin };
+    });
+
+    var url = 'https://api.brightdata.com/datasets/v3/scrape?dataset_id=' + DATASET_ID + '&notify=false&include_errors=true';
 
     var resp = await fetch(url, {
       method: 'POST',
@@ -25,11 +28,7 @@ export default async function handler(req, res) {
         'Authorization': 'Bearer ' + BRIGHT_DATA_TOKEN,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify([{
-        keyword: keyword,
-        url: domain,
-        pages_to_search: pages,
-      }]),
+      body: JSON.stringify({ input: inputItems }),
     });
 
     if (!resp.ok) {
