@@ -1,29 +1,29 @@
-const ANTHROPIC_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY || '';
+var ANTHROPIC_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY || '';
 
-// Search Amazon via Bright Data (through our serverless proxy)
-export async function searchAmazon(keyword, domain, limit) {
-  const resp = await fetch('/api/amazon-search', {
+// Scrape product details for a list of ASINs via Bright Data
+export async function scrapeAsins(asins, domain) {
+  var resp = await fetch('/api/amazon-search', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ keyword, domain: domain || 'https://www.amazon.de', limit: limit || 50, pages: 5 }),
+    body: JSON.stringify({ asins: asins, domain: domain || 'https://www.amazon.de' }),
   });
   if (!resp.ok) {
-    const e = await resp.json().catch(() => ({}));
-    throw new Error(e.error || e.detail || 'Amazon search failed');
+    var e = await resp.json().catch(function() { return {}; });
+    throw new Error(e.error || e.detail || 'Scrape failed');
   }
   return resp.json();
 }
 
 // AI prompt
-const SYSTEM_PROMPT = "You are an Amazon Brand Store architect. Create COMPLETE store concepts as JSON.\n\nREAL PATTERNS from Kaercher, Nespresso, ESN, Affenzahn, AG1, SNOCKS, Bears with Benefits, Holy Energy, nucao:\n\nHOMEPAGE: 1) Hero image (layout \"1\") with brand message 2) Category grid: ONE image per category. Layout: 2=\"1-1\", 3=\"1-1-1\", 4=\"1-1-1-1\", 5-6=two rows, 7-8=\"1-1-1-1\"+\"1-1-1-1\" 3) Optional bestseller product_grid 4) Optional brand story image\n\nCATEGORY SUBPAGE: 1) Category hero (layout \"1\") 2) Optional lifestyle image 3) product_grid with ALL ASINs from that category 4) Optional brand element\n\nMIX: ~75% image, ~15% product_grid, ~5% video, ~5% other. Almost NO text modules.\n\nTILE TYPES:\n- \"image\": brief (EN), textOverlay (store lang), ctaText, dimensions {w,h}\n- \"product_grid\": asins array\n- \"video\": brief\n- \"text\": RARE, max 1 per store\n\nDIMENSIONS: Hero w:3000 h:600-800, Category tiles w:3000 h:1000-1200, Lifestyle w:3000 h:1200-1500\n\nCRITICAL: Group products into logical categories from their ACTUAL names/descriptions. Every category MUST have subpage. Every ASIN in exactly one product_grid. No duplicates. No invented categories.\n\nReturn ONLY valid JSON.";
+var SYSTEM_PROMPT = "You are an Amazon Brand Store architect. Create COMPLETE store concepts as JSON.\n\nREAL PATTERNS from Kaercher, Nespresso, ESN, Affenzahn, AG1, SNOCKS, Bears with Benefits, Holy Energy, nucao:\n\nHOMEPAGE: 1) Hero image (layout \"1\") with brand message 2) Category grid: ONE image per category. Layout: 2=\"1-1\", 3=\"1-1-1\", 4=\"1-1-1-1\", 5-6=two rows, 7-8=\"1-1-1-1\"+\"1-1-1-1\" 3) Optional bestseller product_grid 4) Optional brand story image\n\nCATEGORY SUBPAGE: 1) Category hero (layout \"1\") 2) Optional lifestyle image 3) product_grid with ALL ASINs from that category 4) Optional brand element\n\nMIX: ~75% image, ~15% product_grid, ~5% video, ~5% other. Almost NO text modules.\n\nTILE TYPES:\n- \"image\": brief (EN), textOverlay (store lang), ctaText, dimensions {w,h}\n- \"product_grid\": asins array\n- \"video\": brief\n- \"text\": RARE, max 1 per store\n\nDIMENSIONS: Hero w:3000 h:600-800, Category tiles w:3000 h:1000-1200, Lifestyle w:3000 h:1200-1500\n\nCRITICAL: Group products into logical categories from their ACTUAL names/descriptions. Every category MUST have subpage. Every ASIN in exactly one product_grid. No duplicates. No invented categories.\n\nReturn ONLY valid JSON.";
 
 export function buildPrompt(brand, mp, lang, products, info) {
   var list = products.map(function(p) {
     var cats = Array.isArray(p.categories) ? p.categories.join(' > ') : '';
-    return '- ' + p.asin + ': "' + p.name + '" | ' + (p.description || '').slice(0,100) + ' | ' + p.price + ' ' + p.currency + (cats ? ' | ' + cats : '');
+    return '- ' + p.asin + ': "' + p.name + '" | ' + (p.description || '').slice(0,150) + ' | ' + p.price + ' ' + p.currency + (cats ? ' | ' + cats : '');
   }).join('\n');
   var prompt = 'Create a COMPLETE Amazon Brand Store for "' + brand + '" on Amazon.' + mp + '.\n\n';
-  prompt += 'ALL ' + products.length + ' real products:\n' + list + '\n\n';
+  prompt += 'ALL ' + products.length + ' real products with scraped data:\n' + list + '\n\n';
   prompt += 'IMPORTANT: Derive categories from product names/descriptions. Do NOT invent.\n\n';
   prompt += 'Store language: ' + lang + '\nBriefings: English\nText overlays: ' + lang + '\n';
   if (info) prompt += '\nRequirements: ' + info + '\n';
