@@ -1,9 +1,16 @@
 import { useState, useRef, useCallback } from 'react';
 import { LAYOUTS, LANGS, TILE_TYPES, uid, emptyTile } from './constants';
-import { callAI, buildPrompt } from './api';
+import { searchAndWait, buildPrompt, generateStore } from './api';
 import { SectionView } from './Tiles';
 import PropertiesPanel from './PropertiesPanel';
 import AsinPanel from './AsinPanel';
+
+const DOMAINS = {
+  de: 'https://www.amazon.de',
+  com: 'https://www.amazon.com',
+  'co.uk': 'https://www.amazon.co.uk',
+  fr: 'https://www.amazon.fr',
+};
 
 function parseAsinFile(text) {
   const asins = [];
@@ -17,9 +24,7 @@ function parseAsinFile(text) {
       if (end - idx >= 10) {
         const asin = upper.slice(idx, end);
         const rest = line.replace(line.slice(idx, end), '').split(/[,;\t]/).map(s => s.trim()).filter(Boolean);
-        if (!asins.find(a => a.asin === asin)) {
-          asins.push({ asin, name: rest[0] || '', category: rest[1] || '' });
-        }
+        if (!asins.find(a => a.asin === asin)) asins.push({ asin, name: rest[0] || '', category: rest[1] || '' });
       }
     }
   });
@@ -31,7 +36,7 @@ export default function App() {
   const [showAsins, setShowAsins] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [genLog, setGenLog] = useState([]);
-  const [store, setStore] = useState({ brandName: '', asins: [], pages: [] });
+  const [store, setStore] = useState({ brandName: '', products: [], asins: [], pages: [] });
   const [curPage, setCurPage] = useState('');
   const [sel, setSel] = useState(null);
   const [formBrand, setFormBrand] = useState('');
@@ -54,26 +59,50 @@ export default function App() {
     if (fileRef.current) fileRef.current.value = '';
   };
 
+  // ── MAIN GENERATE FLOW ──
   const generate = async () => {
-    if (!formBrand.trim()) return;
-    if (!store.asins.length) { alert('Please upload an ASIN list first'); return; }
+    const brand = formBrand.trim();
+    if (!brand) return;
 
     setShowGen(false);
     setGenerating(true);
     setGenLog([]);
 
     const lang = LANGS[formMp] || 'German';
-    const asins = store.asins;
-    const categories = [...new Set(asins.map(a => a.category).filter(Boolean))];
+    const domain = DOMAINS[formMp] || DOMAINS.de;
 
     try {
-      log('Building store for "' + formBrand + '"...');
-      log(asins.length + ' ASINs, ' + categories.length + ' categories: ' + categories.join(', '));
-      log('Generating concept (~30s)...');
+      // STEP 1: Search Amazon via Bright Data
+      log('🔍 Step 1: Searching Amazon for "' + brand + '"...');
+      const searchResult = await searchAndWait(brand, domain, 50, log);
+      const products = searchResult.products || [];
 
-      const result = await callAI(buildPrompt(formBrand, formMp, lang, asins, categories, formInfo));
+      if (products.length === 0) throw new Error('No products found for "' + brand + '" on Amazon');
+
+      log('✅ Found ' + products.length + ' products');
+      log('📦 Examples: ' + products.slice(0, 3).map(p => p.name.slice(0, 50)).join(', '));
+
+      // Merge with manually uploaded ASINs if any
+      const manualAsins = store.asins || [];
+      if (manualAsins.length) {
+        log('📎 Merging ' + manualAsins.length + ' manually uploaded ASINs...');
+        manualAsins.forEach(a => {
+          if (!products.find(p => p.asin === a.asin)) {
+            products.push({ asin: a.asin, name: a.name, brand: brand, description: '', price: 0, currency: 'EUR', categories: [a.category].filter(Boolean) });
+          }
+        });
+      }
+
+      setStore(s => ({ ...s, products }));
+
+      // STEP 2: AI generates store from real product data
+      log('🤖 Step 2: AI analyzing products and building store concept...');
+      const prompt = buildPrompt(brand, formMp, lang, products, formInfo);
+      const result = await generateStore(prompt);
+
       if (!result.pages?.length) throw new Error('AI returned no pages');
 
+      // Normalize pages
       const pages = result.pages.map(pg => ({
         id: pg.id || uid(),
         name: pg.name || 'Page',
@@ -92,20 +121,21 @@ export default function App() {
         }),
       }));
 
-      log('Done! ' + pages.length + ' pages: ' + pages.map(p => p.name).join(', '));
+      log('✅ Store complete! ' + pages.length + ' pages: ' + pages.map(p => p.name).join(', '));
 
       // Check ASIN coverage
       const usedA = new Set();
       pages.forEach(pg => pg.sections.forEach(sec => sec.tiles.forEach(t => (t.asins || []).forEach(a => usedA.add(a)))));
-      const missing = asins.filter(a => !usedA.has(a.asin));
-      if (missing.length) log('Warning: ' + missing.length + ' ASINs not assigned');
-      else log('All ASINs assigned!');
+      const allAsins = products.map(p => ({ asin: p.asin, name: p.name, category: (p.categories || [])[0] || '' }));
+      const missing = allAsins.filter(a => !usedA.has(a.asin));
+      if (missing.length) log('⚠️ ' + missing.length + '/' + allAsins.length + ' ASINs not assigned');
+      else log('✅ All ' + allAsins.length + ' ASINs assigned!');
 
-      setStore(s => ({ ...s, brandName: formBrand, pages }));
+      setStore(s => ({ ...s, brandName: brand, pages, asins: allAsins }));
       setCurPage(pages[0]?.id || '');
       setSel(null);
     } catch (e) {
-      log('ERROR: ' + e.message);
+      log('❌ ' + e.message);
     } finally {
       setTimeout(() => setGenerating(false), 1500);
     }
@@ -124,16 +154,14 @@ export default function App() {
     }));
   };
 
-  const selTile = sel && page
-    ? page.sections.find(s => s.id === sel.sid)?.tiles[sel.ti] || null
-    : null;
+  const selTile = sel && page ? page.sections.find(s => s.id === sel.sid)?.tiles[sel.ti] || null : null;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
       {/* TOPBAR */}
       <div style={{ display: 'flex', alignItems: 'center', height: 44, padding: '0 16px', gap: 8, background: '#232F3E', color: '#fff', flexShrink: 0 }}>
         <div style={{ fontWeight: 700, fontSize: 14 }}>🏪 <span style={{ color: '#FF9900' }}>Store</span> Builder</div>
-        {store.brandName && <div style={{ fontSize: 12, color: '#9ca3af', marginLeft: 8 }}>— {store.brandName}</div>}
+        {store.brandName && <div style={{ fontSize: 12, color: '#9ca3af', marginLeft: 8 }}>— {store.brandName} ({store.products.length} products)</div>}
         <div style={{ flex: 1 }} />
         {store.asins.length > 0 && <button className="btn" onClick={() => setShowAsins(true)}>📦 ASINs ({store.asins.length})</button>}
         <button className="btn btn-primary" onClick={() => setShowGen(true)}>✨ Generate</button>
@@ -141,7 +169,7 @@ export default function App() {
 
       {/* MAIN */}
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
-        {/* LEFT: Pages */}
+        {/* LEFT */}
         <div style={{ width: 170, background: '#fff', borderRight: '1px solid #e5e5e5', display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
           <div style={{ padding: '10px 12px', fontWeight: 800, fontSize: 13, borderBottom: '1px solid #eee' }}>Pages</div>
           <div style={{ flex: 1, overflowY: 'auto', padding: 6 }}>
@@ -149,17 +177,15 @@ export default function App() {
             {store.pages.map(pg => (
               <div key={pg.id} onClick={() => { setCurPage(pg.id); setSel(null); }}
                 style={{ padding: '6px 8px', borderRadius: 4, cursor: 'pointer', fontSize: 12,
-                  fontWeight: pg.id === curPage ? 700 : 400,
-                  background: pg.id === curPage ? '#e8f4f8' : 'transparent',
-                  borderLeft: `3px solid ${pg.id === curPage ? '#007EB9' : 'transparent'}`,
-                  marginBottom: 1 }}>
+                  fontWeight: pg.id === curPage ? 700 : 400, background: pg.id === curPage ? '#e8f4f8' : 'transparent',
+                  borderLeft: `3px solid ${pg.id === curPage ? '#007EB9' : 'transparent'}`, marginBottom: 1 }}>
                 {pg.name}
               </div>
             ))}
           </div>
         </div>
 
-        {/* CENTER: Canvas */}
+        {/* CANVAS */}
         <div style={{ flex: 1, overflowY: 'auto', background: '#f0f1f3', padding: 16 }}>
           <div style={{ maxWidth: 900, margin: '0 auto' }}>
             {page && (
@@ -182,22 +208,19 @@ export default function App() {
               <div style={{ textAlign: 'center', padding: 60, color: '#bbb' }}>
                 <div style={{ fontSize: 36, marginBottom: 12 }}>🏪</div>
                 <div style={{ fontSize: 15, fontWeight: 600 }}>Amazon Brand Store Builder</div>
-                <div style={{ fontSize: 12, marginTop: 6 }}>Click <b>✨ Generate</b> → upload ASINs → generate</div>
+                <div style={{ fontSize: 12, marginTop: 6 }}>Click <b>✨ Generate</b> — enter brand name — the tool scrapes Amazon and builds your store</div>
               </div>
             )}
           </div>
         </div>
 
-        {/* RIGHT: Properties */}
+        {/* RIGHT */}
         <div style={{ width: 250, background: '#fff', borderLeft: '1px solid #e5e5e5', display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
           <div style={{ padding: '10px 12px', fontWeight: 800, fontSize: 13, borderBottom: '1px solid #eee' }}>Properties</div>
-          <div style={{ flex: 1, overflowY: 'auto' }}>
-            <PropertiesPanel tile={selTile} onChange={updateTile} />
-          </div>
+          <div style={{ flex: 1, overflowY: 'auto' }}><PropertiesPanel tile={selTile} onChange={updateTile} /></div>
         </div>
       </div>
 
-      {/* Hidden file input */}
       <input ref={fileRef} type="file" accept=".csv,.txt,.tsv" style={{ display: 'none' }} onChange={onFileChange} />
 
       {/* GENERATE MODAL */}
@@ -206,17 +229,11 @@ export default function App() {
           <div onClick={e => e.stopPropagation()} style={{ background: '#fff', borderRadius: 8, padding: 20, maxWidth: 420, width: '92%' }}>
             <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 14 }}>✨ Generate Brand Store</div>
 
-            <label className="label">1. Upload ASIN List *</label>
-            <button className={'btn' + (store.asins.length ? ' btn-green' : '')} style={{ width: '100%', padding: 8 }}
-              onClick={() => fileRef.current?.click()}>
-              {store.asins.length ? '✓ ' + store.asins.length + ' ASINs loaded' : '📁 Upload CSV / TXT file'}
-            </button>
-            <div style={{ fontSize: 10, color: '#888', marginTop: 3 }}>Format: ASIN, Product Name, Category</div>
+            <label className="label">1. Brand name *</label>
+            <input value={formBrand} onChange={e => setFormBrand(e.target.value)} className="input" placeholder='e.g. "Futura" or "Kärcher Schädlingsbekämpfung"' />
+            <div style={{ fontSize: 10, color: '#888', marginTop: 2 }}>This is used as Amazon search keyword — be specific</div>
 
-            <label className="label" style={{ marginTop: 12 }}>2. Brand name *</label>
-            <input value={formBrand} onChange={e => setFormBrand(e.target.value)} className="input" placeholder="e.g. Kärcher, Affenzahn..." />
-
-            <label className="label">3. Marketplace</label>
+            <label className="label" style={{ marginTop: 10 }}>2. Marketplace</label>
             <select value={formMp} onChange={e => setFormMp(e.target.value)} className="input">
               <option value="de">🇩🇪 Amazon.de</option>
               <option value="com">🇺🇸 Amazon.com</option>
@@ -224,12 +241,25 @@ export default function App() {
               <option value="fr">🇫🇷 Amazon.fr</option>
             </select>
 
-            <label className="label">4. Instructions (optional)</label>
-            <textarea value={formInfo} onChange={e => setFormInfo(e.target.value)} className="input" rows={2} placeholder="Special requirements..." />
+            <label className="label" style={{ marginTop: 10 }}>3. Instructions (optional)</label>
+            <textarea value={formInfo} onChange={e => setFormInfo(e.target.value)} className="input" rows={2} placeholder="e.g. Focus on outdoor products, emphasize eco-friendly..." />
+
+            <label className="label" style={{ marginTop: 10 }}>4. Additional ASINs (optional)</label>
+            <button className={'btn' + (store.asins?.length ? ' btn-green' : '')} style={{ width: '100%', padding: 6 }}
+              onClick={() => fileRef.current?.click()}>
+              {store.asins?.length ? '✓ ' + store.asins.length + ' extra ASINs' : '📁 Upload CSV (optional)'}
+            </button>
+            <div style={{ fontSize: 10, color: '#888', marginTop: 2 }}>Products are scraped from Amazon automatically. CSV is only for ASINs not found via search.</div>
+
+            <div style={{ background: '#f8f9fa', borderRadius: 4, padding: 8, marginTop: 12, fontSize: 11, color: '#666' }}>
+              <b>How it works:</b> The tool searches Amazon for "{formBrand || '...'}" via Bright Data, gets real product data (names, descriptions, prices, categories), then AI builds a complete store concept.
+            </div>
 
             <div style={{ display: 'flex', gap: 6, marginTop: 14, justifyContent: 'flex-end' }}>
               <button className="btn" onClick={() => setShowGen(false)}>Cancel</button>
-              <button className="btn btn-primary" style={{ padding: '6px 16px' }} onClick={generate}>🚀 Generate Store</button>
+              <button className="btn btn-primary" style={{ padding: '6px 16px' }} onClick={generate} disabled={!formBrand.trim()}>
+                🔍 Search Amazon & Generate
+              </button>
             </div>
           </div>
         </div>
@@ -238,19 +268,18 @@ export default function App() {
       {/* PROGRESS */}
       {generating && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 60 }}>
-          <div style={{ background: '#fff', borderRadius: 8, maxWidth: 480, width: '92%', maxHeight: '70vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+          <div style={{ background: '#fff', borderRadius: 8, maxWidth: 500, width: '92%', maxHeight: '80vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
             <div style={{ padding: 14, fontWeight: 700, borderBottom: '1px solid #eee' }}>Generating Store...</div>
-            <div style={{ background: '#111', padding: 10, flex: 1, overflowY: 'auto', fontFamily: 'monospace', minHeight: 140 }}>
+            <div style={{ background: '#111', padding: 10, flex: 1, overflowY: 'auto', fontFamily: 'monospace', minHeight: 160 }}>
               {genLog.map((m, i) => (
                 <div key={i} style={{ fontSize: 11, lineHeight: 1.7,
-                  color: m.startsWith('ERROR') ? '#f87171' : m.startsWith('Warning') ? '#fbbf24' : '#4ade80' }}>{m}</div>
+                  color: m.startsWith('❌') ? '#f87171' : m.startsWith('⚠') ? '#fbbf24' : m.startsWith('✅') ? '#4ade80' : '#9ca3af' }}>{m}</div>
               ))}
             </div>
           </div>
         </div>
       )}
 
-      {/* ASIN PANEL */}
       {showAsins && <AsinPanel asins={store.asins} pages={store.pages} onClose={() => setShowAsins(false)} />}
     </div>
   );
