@@ -1,11 +1,11 @@
 const ANTHROPIC_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY || '';
 
 // Search Amazon via Bright Data (through our serverless proxy)
-export async function searchAmazon(keyword, limit) {
+export async function searchAmazon(keyword, domain, limit) {
   const resp = await fetch('/api/amazon-search', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ keyword, limit: limit || 50 }),
+    body: JSON.stringify({ keyword, domain: domain || 'https://www.amazon.de', limit: limit || 50, pages: 5 }),
   });
   if (!resp.ok) {
     const e = await resp.json().catch(() => ({}));
