@@ -1,276 +1,366 @@
-import { useState, useRef, useCallback } from 'react';
-import { LAYOUTS, LANGS, TILE_TYPES, uid, emptyTile } from './constants';
-import { scrapeAsins, buildStoreDeterministic, enrichWithAI } from './api';
-import { SectionView } from './Tiles';
-import PropertiesPanel from './PropertiesPanel';
-import AsinPanel from './AsinPanel';
+import { useState, useCallback, useEffect } from 'react';
+import { uid, emptyTile, LAYOUTS, LANGS, DOMAINS, validateStore } from './constants';
+import { scrapeAsins } from './api';
+import { generateStore, aiRefineStore, applyOperations } from './storeBuilder';
+import { saveStore, loadSavedStores, loadStore, deleteSavedStore } from './storage';
+import { generateBriefingDocx, downloadBlob } from './exportBriefing';
+import Topbar from './components/Topbar';
+import PageList from './components/PageList';
+import Canvas from './components/Canvas';
+import PropertiesPanel from './components/PropertiesPanel';
+import AsinPanel from './components/AsinPanel';
+import GenerateModal from './components/GenerateModal';
+import ProgressModal from './components/ProgressModal';
+import AIChat from './components/AIChat';
 
-var DOMAINS = {
-  de: 'https://www.amazon.de',
-  com: 'https://www.amazon.com',
-  'co.uk': 'https://www.amazon.co.uk',
-  fr: 'https://www.amazon.fr',
-};
-
-function parseAsinFile(text) {
-  var asins = [];
-  var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  text.split(/[\r\n]+/).filter(Boolean).forEach(function(line) {
-    var upper = line.toUpperCase();
-    var idx = upper.indexOf('B0');
-    if (idx >= 0) {
-      var end = idx + 2;
-      while (end < upper.length && CHARS.indexOf(upper[end]) >= 0) end++;
-      if (end - idx >= 10) {
-        var asin = upper.slice(idx, end);
-        if (asins.indexOf(asin) < 0) asins.push(asin);
-      }
-    }
-  });
-  return asins;
-}
+var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '' };
 
 export default function App() {
+  var [store, setStore] = useState(EMPTY_STORE);
+  var [curPage, setCurPage] = useState('');
+  var [sel, setSel] = useState(null);
   var [showGen, setShowGen] = useState(false);
   var [showAsins, setShowAsins] = useState(false);
   var [generating, setGenerating] = useState(false);
   var [genLog, setGenLog] = useState([]);
-  var [store, setStore] = useState({ brandName: '', products: [], asins: [], pages: [] });
-  var [curPage, setCurPage] = useState('');
-  var [sel, setSel] = useState(null);
-  var [formBrand, setFormBrand] = useState('');
-  var [formMp, setFormMp] = useState('de');
-  var [formInfo, setFormInfo] = useState('');
-  var [uploadedAsins, setUploadedAsins] = useState([]);
-  var fileRef = useRef(null);
+  var [genDone, setGenDone] = useState(false);
+  var [chatBusy, setChatBusy] = useState(false);
+  var [chatResponse, setChatResponse] = useState('');
+  var [savedStores, setSavedStores] = useState([]);
+  var [warnings, setWarnings] = useState([]);
+
+  // Load saved stores on mount
+  useEffect(function() { setSavedStores(loadSavedStores()); }, []);
+
+  // Auto-save and validate whenever store changes
+  useEffect(function() {
+    if (store.pages.length > 0) {
+      saveStore(store);
+      setSavedStores(loadSavedStores());
+      setWarnings(validateStore(store));
+    }
+  }, [store]);
 
   var log = useCallback(function(m) { setGenLog(function(p) { return p.concat([m]); }); }, []);
-  var page = store.pages.find(function(p) { return p.id === curPage; }) || store.pages[0];
 
-  var onFileChange = function(e) {
-    var f = e.target.files && e.target.files[0];
-    if (!f) return;
-    var reader = new FileReader();
-    reader.onload = function(ev) { setUploadedAsins(parseAsinFile(ev.target.result)); };
-    reader.readAsText(f);
-    if (fileRef.current) fileRef.current.value = '';
-  };
+  var page = store.pages.find(function(p) { return p.id === curPage; }) || store.pages[0] || null;
 
-  var generate = async function() {
-    var brand = formBrand.trim();
-    if (!brand || !uploadedAsins.length) return;
-
+  // ─── GENERATION ───
+  var handleGenerate = async function(params) {
     setShowGen(false);
     setGenerating(true);
+    setGenDone(false);
     setGenLog([]);
+    setSel(null);
 
-    var lang = LANGS[formMp] || 'German';
-    var domain = DOMAINS[formMp] || DOMAINS.de;
+    var lang = LANGS[params.marketplace] || 'German';
+    var domain = DOMAINS[params.marketplace] || DOMAINS.de;
 
     try {
-      // STEP 1: Scrape ASINs
-      log('🔍 Step 1: Scraping ' + uploadedAsins.length + ' ASINs from Amazon.' + formMp + '...');
-      var scrapeResult = await scrapeAsins(uploadedAsins, domain);
+      // Step 1: Scrape
+      log('🔍 Scraping ' + params.asins.length + ' ASINs from Amazon.' + params.marketplace + '...');
+      var scrapeResult = await scrapeAsins(params.asins, domain);
       var products = scrapeResult.products || [];
       if (!products.length) throw new Error('No products returned from Bright Data');
-      log('✅ Scraped ' + products.length + '/' + uploadedAsins.length + ' products');
+      log('✅ Scraped ' + products.length + '/' + params.asins.length + ' products');
 
-      // STEP 2: Group products into categories
-      log('📊 Step 2: Analyzing product categories...');
-      var groups = {};
-      products.forEach(function(p) {
-        var cat = '';
-        if (p.categories && p.categories.length > 0) {
-          var cats = p.categories;
-          cat = Array.isArray(cats) ? (cats[cats.length - 1] || cats[0] || '') : String(cats);
-        }
-        if (!cat) cat = 'Sonstige';
-        if (!groups[cat]) groups[cat] = [];
-        groups[cat].push(p);
-      });
+      // Step 2-4: AI generation
+      var storeData = await generateStore(
+        params.asins, products, params.brand, params.marketplace, lang,
+        params.instructions, log
+      );
 
-      var catNames = Object.keys(groups);
-      // Merge small categories
-      if (catNames.length > 8) {
-        var sonstige = groups['Sonstige'] || [];
-        catNames.forEach(function(c) {
-          if (c !== 'Sonstige' && groups[c].length < 2) {
-            sonstige = sonstige.concat(groups[c]);
-            delete groups[c];
-          }
-        });
-        if (sonstige.length > 0) groups['Sonstige'] = sonstige;
-      }
-
-      catNames = Object.keys(groups);
-      log('📦 Found ' + catNames.length + ' categories: ' + catNames.join(', '));
-      catNames.forEach(function(c) { log('  · ' + c + ': ' + groups[c].length + ' products'); });
-
-      // STEP 3: Build store structure (deterministic, no AI)
-      log('🏗️ Step 3: Building store structure (best-practice patterns)...');
-      var storeData = buildStoreDeterministic(brand, lang, products, groups);
-      log('✅ Structure: ' + storeData.pages.length + ' pages — ' + storeData.pages.map(function(p) { return p.name; }).join(', '));
-
-      // STEP 4: AI enrichment (text content)
-      log('🤖 Step 4: AI generating text content (hero, briefs, CTAs)...');
-      storeData = await enrichWithAI(storeData, brand, lang, products);
-      log('✅ Text content generated');
-
-      // Verify ASIN coverage
-      var usedA = {};
-      storeData.pages.forEach(function(pg) { pg.sections.forEach(function(sec) { sec.tiles.forEach(function(t) { (t.asins || []).forEach(function(a) { usedA[a] = true; }); }); }); });
-      var allAsins = products.map(function(p) { return { asin: p.asin, name: p.name, category: (p.categories || [])[0] || '' }; });
-      var assigned = allAsins.filter(function(a) { return usedA[a.asin]; }).length;
-      log('✅ ' + assigned + '/' + allAsins.length + ' ASINs assigned to product grids');
-
-      setStore({ brandName: brand, products: products, pages: storeData.pages, asins: allAsins });
+      setStore(storeData);
       setCurPage(storeData.pages[0] ? storeData.pages[0].id : '');
-      setSel(null);
-      log('🎉 Done! Click through pages on the left to review.');
+      log('🎉 Store complete! ' + storeData.pages.length + ' pages, ' + products.length + ' products.');
     } catch (e) {
       log('❌ ' + e.message);
     } finally {
-      setTimeout(function() { setGenerating(false); }, 1500);
+      setGenDone(true);
+      setTimeout(function() { setGenerating(false); }, 2000);
     }
   };
 
+  // ─── TILE UPDATE ───
   var updateTile = function(updated) {
     if (!sel) return;
     setStore(function(s) {
-      return { ...s, pages: s.pages.map(function(pg) {
-        return { ...pg, sections: pg.sections.map(function(sec) {
-          if (sec.id !== sel.sid) return sec;
-          return { ...sec, tiles: sec.tiles.map(function(t, i) { return i === sel.ti ? updated : t; }) };
-        }) };
-      }) };
+      return Object.assign({}, s, {
+        pages: s.pages.map(function(pg) {
+          return Object.assign({}, pg, {
+            sections: pg.sections.map(function(sec) {
+              if (sec.id !== sel.sid) return sec;
+              return Object.assign({}, sec, {
+                tiles: sec.tiles.map(function(t, i) { return i === sel.ti ? updated : t; }),
+              });
+            }),
+          });
+        }),
+      });
     });
   };
 
-  var selTile = sel && page ? (function() {
+  // ─── SECTION MANAGEMENT ───
+  var addSection = function() {
+    if (!page) return;
+    var newSec = {
+      id: uid(),
+      layoutId: '1',
+      tiles: [emptyTile()],
+    };
+    setStore(function(s) {
+      return Object.assign({}, s, {
+        pages: s.pages.map(function(pg) {
+          if (pg.id !== page.id) return pg;
+          return Object.assign({}, pg, { sections: pg.sections.concat([newSec]) });
+        }),
+      });
+    });
+  };
+
+  var deleteSection = function(sectionId) {
+    if (!page) return;
+    setStore(function(s) {
+      return Object.assign({}, s, {
+        pages: s.pages.map(function(pg) {
+          if (pg.id !== page.id) return pg;
+          return Object.assign({}, pg, {
+            sections: pg.sections.filter(function(sec) { return sec.id !== sectionId; }),
+          });
+        }),
+      });
+    });
+    if (sel && sel.sid === sectionId) setSel(null);
+  };
+
+  var moveSection = function(sectionId, newIndex) {
+    if (!page) return;
+    setStore(function(s) {
+      return Object.assign({}, s, {
+        pages: s.pages.map(function(pg) {
+          if (pg.id !== page.id) return pg;
+          var sections = pg.sections.slice();
+          var idx = sections.findIndex(function(sec) { return sec.id === sectionId; });
+          if (idx < 0) return pg;
+          var item = sections.splice(idx, 1)[0];
+          sections.splice(newIndex, 0, item);
+          return Object.assign({}, pg, { sections: sections });
+        }),
+      });
+    });
+  };
+
+  var changeLayout = function(sectionId, layoutId) {
+    var layout = LAYOUTS.find(function(l) { return l.id === layoutId; });
+    if (!layout) return;
+    setStore(function(s) {
+      return Object.assign({}, s, {
+        pages: s.pages.map(function(pg) {
+          if (pg.id !== page.id) return pg;
+          return Object.assign({}, pg, {
+            sections: pg.sections.map(function(sec) {
+              if (sec.id !== sectionId) return sec;
+              var tiles = sec.tiles.slice();
+              while (tiles.length < layout.cells) tiles.push(emptyTile());
+              if (tiles.length > layout.cells) tiles = tiles.slice(0, layout.cells);
+              return Object.assign({}, sec, { layoutId: layoutId, tiles: tiles });
+            }),
+          });
+        }),
+      });
+    });
+  };
+
+  // ─── PAGE MANAGEMENT ───
+  var addPage = function() {
+    var name = 'New Page';
+    var idx = 1;
+    var names = store.pages.map(function(p) { return p.name; });
+    while (names.indexOf(name) >= 0) { idx++; name = 'New Page ' + idx; }
+    var newPage = {
+      id: uid(),
+      name: name,
+      sections: [{
+        id: uid(), layoutId: '1',
+        tiles: [emptyTile()],
+      }],
+    };
+    setStore(function(s) {
+      return Object.assign({}, s, { pages: s.pages.concat([newPage]) });
+    });
+    setCurPage(newPage.id);
+    setSel(null);
+  };
+
+  var renamePage = function(pageId, newName) {
+    setStore(function(s) {
+      return Object.assign({}, s, {
+        pages: s.pages.map(function(pg) {
+          if (pg.id !== pageId) return pg;
+          return Object.assign({}, pg, { name: newName });
+        }),
+      });
+    });
+  };
+
+  var deletePage = function(pageId) {
+    if (store.pages.length <= 1) return;
+    setStore(function(s) {
+      var newPages = s.pages.filter(function(pg) { return pg.id !== pageId; });
+      return Object.assign({}, s, { pages: newPages });
+    });
+    if (curPage === pageId) {
+      var fallback = store.pages.find(function(p) { return p.id !== pageId; });
+      setCurPage(fallback ? fallback.id : '');
+    }
+    setSel(null);
+  };
+
+  var reorderPage = function(fromIdx, toIdx) {
+    setStore(function(s) {
+      var pages = s.pages.slice();
+      var item = pages.splice(fromIdx, 1)[0];
+      pages.splice(toIdx, 0, item);
+      return Object.assign({}, s, { pages: pages });
+    });
+  };
+
+  // ─── SAVED STORES ───
+  var handleLoadSaved = function(id) {
+    var data = loadStore(id);
+    if (data) {
+      setStore(data);
+      setCurPage(data.pages[0] ? data.pages[0].id : '');
+      setSel(null);
+    }
+  };
+
+  var handleDeleteSaved = function(id) {
+    deleteSavedStore(id);
+    setSavedStores(loadSavedStores());
+  };
+
+  // ─── EXPORT ───
+  var handleExport = async function() {
+    try {
+      var blob = await generateBriefingDocx(store);
+      var filename = (store.brandName || 'store').replace(/[^a-zA-Z0-9]/g, '_') + '_briefing.docx';
+      downloadBlob(blob, filename);
+    } catch (e) {
+      alert('Export failed: ' + e.message);
+    }
+  };
+
+  // ─── AI CHAT ───
+  var handleChatSend = async function(command) {
+    if (!store.pages.length) return;
+    setChatBusy(true);
+    setChatResponse('Processing...');
+    try {
+      var lang = LANGS[store.marketplace] || 'German';
+      var result = await aiRefineStore(store, command, store.brandName, lang);
+      if (result.operations && result.operations.length > 0) {
+        var newStore = applyOperations(store, result.operations);
+        setStore(function(s) {
+          return Object.assign({}, newStore, { products: s.products, asins: s.asins, brandName: s.brandName, marketplace: s.marketplace });
+        });
+        setChatResponse(result.explanation || 'Changes applied.');
+      } else {
+        setChatResponse(result.explanation || 'No changes needed.');
+      }
+    } catch (e) {
+      setChatResponse('Error: ' + e.message);
+    } finally {
+      setChatBusy(false);
+    }
+  };
+
+  // ─── SELECTED TILE ───
+  var selTile = null;
+  if (sel && page) {
     var sec = page.sections.find(function(s) { return s.id === sel.sid; });
-    return sec ? sec.tiles[sel.ti] || null : null;
-  })() : null;
+    selTile = sec ? (sec.tiles[sel.ti] || null) : null;
+  }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-      <div style={{ display: 'flex', alignItems: 'center', height: 44, padding: '0 16px', gap: 8, background: '#232F3E', color: '#fff', flexShrink: 0 }}>
-        <div style={{ fontWeight: 700, fontSize: 14 }}>🏪 <span style={{ color: '#FF9900' }}>Store</span> Builder</div>
-        {store.brandName && <div style={{ fontSize: 12, color: '#9ca3af', marginLeft: 8 }}>— {store.brandName} ({store.products.length} products)</div>}
-        <div style={{ flex: 1 }} />
-        {store.asins.length > 0 && <button className="btn" onClick={function() { setShowAsins(true); }}>📦 ASINs ({store.asins.length})</button>}
-        <button className="btn btn-primary" onClick={function() { setShowGen(true); }}>✨ Generate</button>
+    <div className="app-root">
+      <Topbar
+        store={store}
+        onGenerate={function() { setShowGen(true); }}
+        onShowAsins={function() { setShowAsins(true); }}
+        onExport={handleExport}
+      />
+
+      <div className="app-body">
+        <PageList
+          pages={store.pages}
+          curPage={page ? page.id : ''}
+          onSelect={function(id) { setCurPage(id); setSel(null); }}
+          onAddPage={addPage}
+          onRenamePage={renamePage}
+          onDeletePage={deletePage}
+          onReorderPage={reorderPage}
+          savedStores={savedStores}
+          onLoadSaved={handleLoadSaved}
+          onDeleteSaved={handleDeleteSaved}
+        />
+
+        <Canvas
+          store={store}
+          page={page}
+          curPage={page ? page.id : ''}
+          onSelectPage={function(id) { setCurPage(id); setSel(null); }}
+          sel={sel}
+          onSelect={setSel}
+          onAddSection={addSection}
+          onDeleteSection={deleteSection}
+          onMoveSection={moveSection}
+          onChangeLayout={changeLayout}
+        />
+
+        <PropertiesPanel
+          tile={selTile}
+          onChange={updateTile}
+          products={store.products}
+        />
       </div>
 
-      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
-        <div style={{ width: 170, background: '#fff', borderRight: '1px solid #e5e5e5', display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
-          <div style={{ padding: '10px 12px', fontWeight: 800, fontSize: 13, borderBottom: '1px solid #eee' }}>Pages</div>
-          <div style={{ flex: 1, overflowY: 'auto', padding: 6 }}>
-            {store.pages.length === 0 && <div style={{ padding: 16, color: '#ccc', fontSize: 11, textAlign: 'center' }}>Generate a store first</div>}
-            {store.pages.map(function(pg) {
-              return <div key={pg.id} onClick={function() { setCurPage(pg.id); setSel(null); }}
-                style={{ padding: '6px 8px', borderRadius: 4, cursor: 'pointer', fontSize: 12,
-                  fontWeight: pg.id === curPage ? 700 : 400, background: pg.id === curPage ? '#e8f4f8' : 'transparent',
-                  borderLeft: '3px solid ' + (pg.id === curPage ? '#007EB9' : 'transparent'), marginBottom: 1 }}>
-                {pg.name}
-              </div>;
-            })}
-          </div>
-        </div>
+      {store.pages.length > 0 && (
+        <AIChat
+          onSend={handleChatSend}
+          disabled={chatBusy}
+          lastResponse={chatResponse}
+        />
+      )}
 
-        <div style={{ flex: 1, overflowY: 'auto', background: '#f0f1f3', padding: 16 }}>
-          <div style={{ maxWidth: 900, margin: '0 auto' }}>
-            {page && (
-              <div style={{ background: '#fff', borderRadius: 4, marginBottom: 8, padding: '10px 16px' }}>
-                <div style={{ fontWeight: 700, fontSize: 14 }}>{store.brandName || 'Brand Store'}</div>
-                <div style={{ display: 'flex', gap: 12, marginTop: 4, fontSize: 11, color: '#888', flexWrap: 'wrap' }}>
-                  {store.pages.map(function(pg) {
-                    return <span key={pg.id} onClick={function() { setCurPage(pg.id); setSel(null); }}
-                      style={{ cursor: 'pointer', fontWeight: pg.id === curPage ? 700 : 400,
-                        color: pg.id === curPage ? '#007EB9' : '#888',
-                        borderBottom: pg.id === curPage ? '2px solid #007EB9' : 'none', paddingBottom: 2 }}>
-                      {pg.name}
-                    </span>;
-                  })}
-                </div>
-              </div>
-            )}
-            {page && page.sections.map(function(sec, si) {
-              return <SectionView key={sec.id} section={sec} idx={si} sel={sel} onSelect={setSel} />;
-            })}
-            {!page && (
-              <div style={{ textAlign: 'center', padding: 60, color: '#bbb' }}>
-                <div style={{ fontSize: 36, marginBottom: 12 }}>🏪</div>
-                <div style={{ fontSize: 15, fontWeight: 600 }}>Amazon Brand Store Builder</div>
-                <div style={{ fontSize: 12, marginTop: 6 }}>Click <b>✨ Generate</b> → upload ASIN list → generate store</div>
-              </div>
-            )}
-          </div>
+      {/* Validation warnings */}
+      {warnings.length > 0 && store.pages.length > 0 && (
+        <div className="warnings-bar">
+          {warnings.filter(function(w) { return w.level === 'error' || w.level === 'warning'; }).slice(0, 3).map(function(w, i) {
+            return <span key={i} className={'warning-item ' + w.level}>{w.message}</span>;
+          })}
         </div>
-
-        <div style={{ width: 250, background: '#fff', borderLeft: '1px solid #e5e5e5', display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
-          <div style={{ padding: '10px 12px', fontWeight: 800, fontSize: 13, borderBottom: '1px solid #eee' }}>Properties</div>
-          <div style={{ flex: 1, overflowY: 'auto' }}><PropertiesPanel tile={selTile} onChange={updateTile} /></div>
-        </div>
-      </div>
-
-      <input ref={fileRef} type="file" accept=".csv,.txt,.tsv" style={{ display: 'none' }} onChange={onFileChange} />
+      )}
 
       {showGen && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50 }} onClick={function() { setShowGen(false); }}>
-          <div onClick={function(e) { e.stopPropagation(); }} style={{ background: '#fff', borderRadius: 8, padding: 20, maxWidth: 420, width: '92%' }}>
-            <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 14 }}>✨ Generate Brand Store</div>
-            <label className="label">1. Upload ASIN List *</label>
-            <button className={'btn' + (uploadedAsins.length ? ' btn-green' : '')} style={{ width: '100%', padding: 8 }}
-              onClick={function() { fileRef.current && fileRef.current.click(); }}>
-              {uploadedAsins.length ? '✓ ' + uploadedAsins.length + ' ASINs loaded' : '📁 Upload CSV / TXT file'}
-            </button>
-            <div style={{ fontSize: 10, color: '#888', marginTop: 2 }}>One ASIN per line (B0XXXXXXXXXX)</div>
-            {uploadedAsins.length > 0 && (
-              <div style={{ fontSize: 10, color: '#555', marginTop: 4, maxHeight: 50, overflowY: 'auto', background: '#f8f8f8', padding: 4, borderRadius: 3, fontFamily: 'monospace' }}>
-                {uploadedAsins.slice(0, 6).join(', ')}{uploadedAsins.length > 6 ? ' +' + (uploadedAsins.length - 6) + ' more' : ''}
-              </div>
-            )}
-            <label className="label" style={{ marginTop: 10 }}>2. Brand name *</label>
-            <input value={formBrand} onChange={function(e) { setFormBrand(e.target.value); }} className="input" placeholder='e.g. Futum, Kärcher' />
-            <label className="label">3. Marketplace</label>
-            <select value={formMp} onChange={function(e) { setFormMp(e.target.value); }} className="input">
-              <option value="de">🇩🇪 Amazon.de</option>
-              <option value="com">🇺🇸 Amazon.com</option>
-              <option value="co.uk">🇬🇧 Amazon.co.uk</option>
-              <option value="fr">🇫🇷 Amazon.fr</option>
-            </select>
-            <label className="label" style={{ marginTop: 10 }}>4. Instructions (optional)</label>
-            <textarea value={formInfo} onChange={function(e) { setFormInfo(e.target.value); }} className="input" rows={2} placeholder="Special requirements..." />
-            <div style={{ display: 'flex', gap: 6, marginTop: 14, justifyContent: 'flex-end' }}>
-              <button className="btn" onClick={function() { setShowGen(false); }}>Cancel</button>
-              <button className="btn btn-primary" style={{ padding: '6px 16px' }} onClick={generate}
-                disabled={!formBrand.trim() || !uploadedAsins.length}>
-                🚀 Scrape & Generate ({uploadedAsins.length} ASINs)
-              </button>
-            </div>
-          </div>
-        </div>
+        <GenerateModal
+          onClose={function() { setShowGen(false); }}
+          onGenerate={handleGenerate}
+        />
       )}
 
       {generating && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 60 }}>
-          <div style={{ background: '#fff', borderRadius: 8, maxWidth: 500, width: '92%', maxHeight: '80vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-            <div style={{ padding: 14, fontWeight: 700, borderBottom: '1px solid #eee' }}>Generating Store...</div>
-            <div style={{ background: '#111', padding: 10, flex: 1, overflowY: 'auto', fontFamily: 'monospace', minHeight: 180 }}>
-              {genLog.map(function(m, i) {
-                var color = '#9ca3af';
-                if (m.indexOf('❌') === 0) color = '#f87171';
-                else if (m.indexOf('⚠') === 0) color = '#fbbf24';
-                else if (m.indexOf('✅') === 0 || m.indexOf('🎉') === 0) color = '#4ade80';
-                else if (m.indexOf('  ·') === 0) color = '#6b7280';
-                return <div key={i} style={{ fontSize: 11, lineHeight: 1.7, color: color }}>{m}</div>;
-              })}
-            </div>
-          </div>
-        </div>
+        <ProgressModal logs={genLog} done={genDone} />
       )}
 
-      {showAsins && <AsinPanel asins={store.asins} pages={store.pages} onClose={function() { setShowAsins(false); }} />}
+      {showAsins && (
+        <AsinPanel
+          asins={store.asins || []}
+          pages={store.pages}
+          products={store.products}
+          onClose={function() { setShowAsins(false); }}
+        />
+      )}
     </div>
   );
 }
