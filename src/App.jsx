@@ -1,9 +1,10 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { uid, emptyTile, LAYOUTS, LANGS, DOMAINS, validateStore } from './constants';
+import { uid, emptyTile, LAYOUTS, LANGS, DOMAINS, validateStore, PRICING, countStoreAssets } from './constants';
 import { scrapeAsins } from './api';
 import { generateStore, aiRefineStore, applyOperations } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave } from './storage';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
+import { t } from './i18n';
 import Topbar from './components/Topbar';
 import PageList from './components/PageList';
 import Canvas from './components/Canvas';
@@ -12,8 +13,9 @@ import AsinPanel from './components/AsinPanel';
 import GenerateModal from './components/GenerateModal';
 import ProgressModal from './components/ProgressModal';
 import AIChat from './components/AIChat';
+import PriceCalculator from './components/PriceCalculator';
 
-var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null };
+var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, complexity: 2, category: 'generic', briefingLang: 'en' };
 
 export default function App() {
   var [store, setStore] = useState(EMPTY_STORE);
@@ -21,6 +23,7 @@ export default function App() {
   var [sel, setSel] = useState(null);
   var [showGen, setShowGen] = useState(false);
   var [showAsins, setShowAsins] = useState(false);
+  var [showPrice, setShowPrice] = useState(false);
   var [generating, setGenerating] = useState(false);
   var [genLog, setGenLog] = useState([]);
   var [genDone, setGenDone] = useState(false);
@@ -30,16 +33,16 @@ export default function App() {
   var [warnings, setWarnings] = useState([]);
   var [viewMode, setViewMode] = useState('desktop');
   var [requestedAsins, setRequestedAsins] = useState([]);
+  var [uiLang, setUiLang] = useState('en');
+  var [showSaved, setShowSaved] = useState(false);
   var headerBannerInputRef = useRef(null);
 
-  // Load saved stores on mount + check for auto-save
+  // Load saved stores on mount. Do NOT auto-load last store.
+  // Show fresh empty state so user starts with the generate dialog.
   useEffect(function() {
     setSavedStores(loadSavedStores());
-    var autoSaved = loadAutoSave();
-    if (autoSaved && autoSaved.pages && autoSaved.pages.length > 0) {
-      setStore(autoSaved);
-      setCurPage(autoSaved.pages[0] ? autoSaved.pages[0].id : '');
-    }
+    // Check if auto-saved data exists but don't load it automatically.
+    // User can access it from saved stores.
   }, []);
 
   // Auto-save and validate whenever store changes
@@ -74,11 +77,16 @@ export default function App() {
       if (!products.length) throw new Error('No products returned from Bright Data');
       log('Scraped ' + products.length + '/' + params.asins.length + ' products');
 
-      // Step 2-4: AI generation
+      // Step 2-4: AI generation (with complexity, category)
       var storeData = await generateStore(
         params.asins, products, params.brand, params.marketplace, lang,
-        params.instructions, log
+        params.instructions, log, params.complexity, params.category
       );
+
+      // Store meta
+      storeData.complexity = params.complexity;
+      storeData.category = params.category;
+      storeData.briefingLang = params.briefingLang || 'en';
 
       setStore(storeData);
       setCurPage(storeData.pages[0] ? storeData.pages[0].id : '');
@@ -241,13 +249,22 @@ export default function App() {
     var id = saveStore(store);
     if (id) {
       setSavedStores(loadSavedStores());
-      alert('Store saved! (' + (store.brandName || 'Untitled') + ')');
+      alert(t('app.storeSaved', uiLang) + ' (' + (store.brandName || 'Untitled') + ')');
     }
   };
 
   var handleLoadSaved = function(id) {
     var data = loadStore(id);
     if (data) {
+      setStore(data);
+      setCurPage(data.pages[0] ? data.pages[0].id : '');
+      setSel(null);
+    }
+  };
+
+  var handleLoadAutoSave = function() {
+    var data = loadAutoSave();
+    if (data && data.pages && data.pages.length > 0) {
       setStore(data);
       setCurPage(data.pages[0] ? data.pages[0].id : '');
       setSel(null);
@@ -328,16 +345,26 @@ export default function App() {
     selTile = sec ? (sec.tiles[sel.ti] || null) : null;
   }
 
+  // Check if an auto-save exists for the "Continue last session" button
+  var hasAutoSave = false;
+  try {
+    var autoData = loadAutoSave();
+    hasAutoSave = autoData && autoData.pages && autoData.pages.length > 0;
+  } catch(e) { /* ignore */ }
+
   return (
     <div className="app-root">
       <Topbar
         store={store}
         onGenerate={function() { setShowGen(true); }}
         onShowAsins={function() { setShowAsins(true); }}
+        onShowPrice={function() { setShowPrice(true); }}
         onExport={handleExport}
         onSave={handleSave}
         viewMode={viewMode}
         onToggleView={handleToggleView}
+        uiLang={uiLang}
+        onChangeLang={setUiLang}
       />
 
       <div className="app-body">
@@ -352,6 +379,9 @@ export default function App() {
           savedStores={savedStores}
           onLoadSaved={handleLoadSaved}
           onDeleteSaved={handleDeleteSaved}
+          uiLang={uiLang}
+          showSaved={showSaved}
+          onToggleSaved={function() { setShowSaved(!showSaved); }}
         />
 
         <Canvas
@@ -368,6 +398,10 @@ export default function App() {
           viewMode={viewMode}
           onHeaderBannerUpload={handleHeaderBannerUpload}
           products={store.products}
+          uiLang={uiLang}
+          hasAutoSave={hasAutoSave}
+          onLoadAutoSave={handleLoadAutoSave}
+          onGenerate={function() { setShowGen(true); }}
         />
 
         <PropertiesPanel
@@ -375,6 +409,7 @@ export default function App() {
           onChange={updateTile}
           products={store.products}
           viewMode={viewMode}
+          uiLang={uiLang}
         />
       </div>
 
@@ -383,6 +418,7 @@ export default function App() {
           onSend={handleChatSend}
           disabled={chatBusy}
           lastResponse={chatResponse}
+          uiLang={uiLang}
         />
       )}
 
@@ -399,11 +435,12 @@ export default function App() {
         <GenerateModal
           onClose={function() { setShowGen(false); }}
           onGenerate={handleGenerate}
+          uiLang={uiLang}
         />
       )}
 
       {generating && (
-        <ProgressModal logs={genLog} done={genDone} />
+        <ProgressModal logs={genLog} done={genDone} uiLang={uiLang} />
       )}
 
       {showAsins && (
@@ -413,6 +450,15 @@ export default function App() {
           products={store.products}
           requestedAsins={requestedAsins}
           onClose={function() { setShowAsins(false); }}
+          uiLang={uiLang}
+        />
+      )}
+
+      {showPrice && (
+        <PriceCalculator
+          store={store}
+          onClose={function() { setShowPrice(false); }}
+          uiLang={uiLang}
         />
       )}
 

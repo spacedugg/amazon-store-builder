@@ -1,14 +1,14 @@
 import { PRODUCT_TILE_TYPES, TILE_TYPE_LABELS } from '../constants';
 import Wireframe from './Wireframe';
 
-function ProductCardWireframe({ asins, products, tileType }) {
+function ProductCardWireframe({ asins, products, tileType, bgColor }) {
   var productMap = {};
   (products || []).forEach(function(p) { productMap[p.asin] = p; });
   var items = (asins || []).slice(0, 5).map(function(a) { return productMap[a] || { asin: a }; });
   var label = TILE_TYPE_LABELS[tileType] || 'Products';
 
   return (
-    <div className="product-card-grid">
+    <div className="product-card-grid" style={bgColor ? { background: bgColor } : undefined}>
       <div className="pcg-header">{label} ({(asins || []).length})</div>
       <div className="pcg-cards">
         {items.map(function(p, i) {
@@ -36,12 +36,13 @@ function ProductCardWireframe({ asins, products, tileType }) {
 export default function TileView({ tile, selected, onClick, viewMode, products }) {
   var cls = 'tile' + (selected ? ' tile-selected' : '');
   var dims = (viewMode === 'mobile' ? tile.mobileDimensions : tile.dimensions) || tile.dimensions || { w: 3000, h: 1200 };
+  var bgColor = tile.bgColor || '';
 
   // Product tile types
   if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0) {
     return (
-      <div className={cls} onClick={onClick}>
-        <ProductCardWireframe asins={tile.asins} products={products} tileType={tile.type} />
+      <div className={cls} onClick={onClick} style={bgColor ? { background: bgColor } : undefined}>
+        <ProductCardWireframe asins={tile.asins} products={products} tileType={tile.type} bgColor={bgColor} />
       </div>
     );
   }
@@ -51,7 +52,7 @@ export default function TileView({ tile, selected, onClick, viewMode, products }
     var displayH = Math.round(200 / aspect);
     return (
       <div className={cls} onClick={onClick}>
-        <div className="tile-video" style={{ minHeight: Math.max(80, displayH) }}>
+        <div className="tile-video" style={Object.assign({ minHeight: Math.max(80, displayH) }, bgColor ? { background: bgColor } : {})}>
           {tile.videoThumbnail ? (
             <img src={tile.videoThumbnail} className="tile-video-thumb" alt="" />
           ) : (
@@ -68,7 +69,7 @@ export default function TileView({ tile, selected, onClick, viewMode, products }
 
   if (tile.type === 'text') {
     return (
-      <div className={cls} onClick={onClick}>
+      <div className={cls} onClick={onClick} style={bgColor ? { background: bgColor } : undefined}>
         <div className="tile-text-native">
           <div className="tile-text-content">{tile.textOverlay || '[Text Module]'}</div>
         </div>
@@ -79,10 +80,10 @@ export default function TileView({ tile, selected, onClick, viewMode, products }
   if (tile.type === 'image_text') {
     var img = (viewMode === 'mobile' ? tile.uploadedImageMobile : tile.uploadedImage) || tile.uploadedImage;
     return (
-      <div className={cls} onClick={onClick}>
+      <div className={cls} onClick={onClick} style={bgColor ? { background: bgColor } : undefined}>
         {img
           ? <img src={img} className="tile-uploaded-img" alt="" />
-          : <Wireframe tile={tile} viewMode={viewMode} />
+          : <Wireframe tile={tile} viewMode={viewMode} bgColor={bgColor} />
         }
         {tile.textOverlay && <div className="tile-it-text">{tile.textOverlay}</div>}
       </div>
@@ -92,10 +93,10 @@ export default function TileView({ tile, selected, onClick, viewMode, products }
   // image or shoppable_image
   var imgSrc = (viewMode === 'mobile' ? tile.uploadedImageMobile : tile.uploadedImage) || tile.uploadedImage;
   return (
-    <div className={cls} onClick={onClick}>
+    <div className={cls} onClick={onClick} style={bgColor ? { background: bgColor } : undefined}>
       {imgSrc
         ? <img src={imgSrc} className="tile-uploaded-img" alt="" />
-        : <Wireframe tile={tile} viewMode={viewMode} />
+        : <Wireframe tile={tile} viewMode={viewMode} bgColor={bgColor} />
       }
       {tile.type === 'shoppable_image' && <div className="tile-shoppable-badge">Shoppable</div>}
       {tile.linkAsin && <div className="tile-link-badge">ASIN: {tile.linkAsin}</div>}

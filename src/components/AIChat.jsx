@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { t } from '../i18n';
 
-export default function AIChat({ onSend, disabled, lastResponse }) {
+export default function AIChat({ onSend, disabled, lastResponse, uiLang }) {
   var [text, setText] = useState('');
 
   var handleSend = function() {
@@ -21,11 +22,11 @@ export default function AIChat({ onSend, disabled, lastResponse }) {
           value={text}
           onChange={function(e) { setText(e.target.value); }}
           onKeyDown={function(e) { if (e.key === 'Enter') handleSend(); }}
-          placeholder={disabled ? 'Processing...' : 'AI: "Add a lifestyle section before the product grid..."'}
+          placeholder={disabled ? 'Processing...' : t('chat.placeholder', uiLang)}
           disabled={disabled}
         />
         <button className="btn btn-primary ai-chat-send" onClick={handleSend} disabled={disabled || !text.trim()}>
-          Send
+          {t('chat.send', uiLang)}
         </button>
       </div>
     </div>

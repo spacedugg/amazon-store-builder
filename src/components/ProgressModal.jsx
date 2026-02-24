@@ -1,8 +1,10 @@
-export default function ProgressModal({ logs, done }) {
+import { t } from '../i18n';
+
+export default function ProgressModal({ logs, done, uiLang }) {
   return (
     <div className="modal-overlay" style={{ zIndex: 60 }}>
       <div className="modal-box" style={{ maxWidth: 520 }}>
-        <div className="modal-title">{done ? 'Generation Complete' : 'Generating Store...'}</div>
+        <div className="modal-title">{done ? t('progress.done', uiLang) : t('progress.title', uiLang)}</div>
         <div className="progress-log">
           {logs.map(function(m, i) {
             var cls = 'log-line';

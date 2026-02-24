@@ -1,4 +1,4 @@
-import { uid, LAYOUTS, REFERENCE_STORES, STORE_PRINCIPLES, MODULE_BAUKASTEN, PRODUCT_COMPLEXITY } from './constants';
+import { uid, LAYOUTS, REFERENCE_STORES, STORE_PRINCIPLES, MODULE_BAUKASTEN, PRODUCT_COMPLEXITY, COMPLEXITY_LEVELS, CATEGORY_STYLE_HINTS } from './constants';
 
 var ANTHROPIC_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY || '';
 
@@ -37,7 +37,7 @@ function extractJSON(text) {
 }
 
 // ─── STEP 1: ANALYSIS & PAGE STRUCTURE ───
-export async function aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions) {
+export async function aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions, category) {
   var productList = products.map(function(p) {
     return {
       asin: p.asin,
@@ -74,8 +74,17 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
     '- Look at the product descriptions to determine if products have notable features worth highlighting',
     '- If products come in many variants (colors, materials, sizes), flag as variantRich',
     '',
+    category && category !== 'generic' && CATEGORY_STYLE_HINTS[category]
+      ? [
+          'PRODUCT NICHE: ' + category,
+          'TONE: ' + CATEGORY_STYLE_HINTS[category].tone,
+          'VISUAL STYLE: ' + CATEGORY_STYLE_HINTS[category].visualStyle,
+          CATEGORY_STYLE_HINTS[category].trustFocus ? 'TRUST FOCUS: Include trust elements, certifications, and USPs prominently.' : '',
+        ].filter(Boolean).join('\n')
+      : '',
+    '',
     'Return ONLY valid JSON, no other text.',
-  ].join('\n');
+  ].filter(Boolean).join('\n');
 
   var user = [
     'Brand: "' + brand + '"',
@@ -137,7 +146,7 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
 }
 
 // ─── STEP 2: LAYOUT PER PAGE ───
-export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, isHomepage, allCategories, analysis, userInstructions) {
+export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, isHomepage, allCategories, analysis, userInstructions, complexityLevel, category) {
   var productList = pageProducts.map(function(p) {
     return { asin: p.asin, name: p.name, price: p.price, rating: p.rating, reviews: p.reviews, description: (p.description || '').slice(0, 100) };
   });
@@ -179,12 +188,12 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     'COMPOSITION PRINCIPLES:',
     STORE_PRINCIPLES.general.join('\n'),
     '',
-    'PRODUCT COMPLEXITY: ' + analysis.productComplexity + ' — ' + complexity.description,
+    'PRODUCT COMPLEXITY: ' + analysis.productComplexity + ':' + complexity.description,
     'APPROACH: ' + complexity.approach,
     '',
     'BRAND TONE: ' + (analysis.brandTone || 'professional'),
     analysis.keyFeatures ? 'KEY FEATURES: ' + analysis.keyFeatures.join(', ') : '',
-    analysis.hasVariants ? 'VARIANTS: ' + (analysis.variantTypes || []).join(', ') + ' — use variant showcase layouts (lg-4grid, lg-6grid)' : '',
+    analysis.hasVariants ? 'VARIANTS: ' + (analysis.variantTypes || []).join(', ') + ':use variant showcase layouts (lg-4grid, lg-6grid)' : '',
     '',
     'DIMENSION RULES:',
     '- Hero: 3000 x 600-800. Category tiles: 3000 x 1000-1200. Lifestyle: 3000 x 1200-1500.',
@@ -195,6 +204,30 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '- ctaText: CTA button designed into image. In store language.',
     '- brief: ENGLISH instructions for the designer.',
     '- Native text: ONLY for section headings. NOT for marketing.',
+    '',
+    complexityLevel && COMPLEXITY_LEVELS[complexityLevel]
+      ? [
+          '',
+          'STORE COMPLEXITY LEVEL: ' + complexityLevel + ' (' + COMPLEXITY_LEVELS[complexityLevel].name + ')',
+          COMPLEXITY_LEVELS[complexityLevel].description,
+          isHomepage
+            ? 'Target sections for homepage: ' + COMPLEXITY_LEVELS[complexityLevel].sectionsPerHomepage.min + ' to ' + COMPLEXITY_LEVELS[complexityLevel].sectionsPerHomepage.max
+            : 'Target sections for category page: ' + COMPLEXITY_LEVELS[complexityLevel].sectionsPerCategoryPage.min + ' to ' + COMPLEXITY_LEVELS[complexityLevel].sectionsPerCategoryPage.max,
+          COMPLEXITY_LEVELS[complexityLevel].includeVideos ? 'Include up to ' + (COMPLEXITY_LEVELS[complexityLevel].videoMax || 1) + ' video section(s).' : 'No video sections needed.',
+          COMPLEXITY_LEVELS[complexityLevel].includeFollowCTA ? 'Include a follow/subscribe CTA section.' : '',
+          COMPLEXITY_LEVELS[complexityLevel].includeTrustElements ? 'Include trust/certification elements.' : '',
+          COMPLEXITY_LEVELS[complexityLevel].includeBrandStory ? 'Include brand story elements.' : '',
+        ].filter(Boolean).join('\n')
+      : '',
+    '',
+    category && category !== 'generic' && CATEGORY_STYLE_HINTS[category]
+      ? [
+          'PRODUCT NICHE: ' + category,
+          'NICHE TONE: ' + CATEGORY_STYLE_HINTS[category].tone,
+          'VISUAL STYLE: ' + CATEGORY_STYLE_HINTS[category].visualStyle,
+          CATEGORY_STYLE_HINTS[category].trustFocus ? 'TRUST FOCUS: Include trust elements, certifications, quality seals, and USPs prominently.' : '',
+        ].filter(Boolean).join('\n')
+      : '',
     '',
     'CRITICAL RULES:',
     '- Tile count per section MUST match layout. layout "1-1-1" = exactly 3 tiles. "lg-4grid" = exactly 5 tiles. "lg-6grid" = exactly 7 tiles.',
@@ -247,7 +280,7 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
           '2. Category navigation (choose layout based on count: 2=1-1, 3=1-1-1, 4=1-1-1-1, 5+=lg-4grid or two rows).',
           '   Each category tile = lifestyle photo + category name overlay + CTA.',
           '3. Optional: Bestseller product_grid (top 5 by rating).',
-          '4. Optional: Lifestyle section — use 1-1 with one tile showing product name, other showing product as shoppable_image.',
+          '4. Optional: Lifestyle section:use 1-1 with one tile showing product name, other showing product as shoppable_image.',
           '5. Optional: Video module (for complex/technical products).',
           '6. Optional: Brand story / trust section.',
           '7. Optional: Footer category navigation (1-1-1-1).',
@@ -262,7 +295,7 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
             ? '2. Feature/USP sections. Use lg-2stack (large product + 2 feature details) or lg-4grid (product + 4 features) or featureSplit (1-1).'
             : '2. Optional: Product name tile + shoppable product image (1-1 layout).',
           '3. Product grid with ALL ' + pageProducts.length + ' ASINs.',
-          '4. Optional: Lifestyle split (1-1) — two different use-case images.',
+          '4. Optional: Lifestyle split (1-1):two different use-case images.',
           analysis.hasVariants ? '5. Variant showcase: Use lg-4grid or lg-6grid (large product hero + variant tiles in grid).' : '',
           '6. Optional: Cross-sell to related categories.',
           '',
@@ -466,14 +499,18 @@ export function applyOperations(store, operations) {
 }
 
 // ─── FULL GENERATION WORKFLOW ───
-export async function generateStore(asins, products, brand, marketplace, lang, userInstructions, onLog) {
+export async function generateStore(asins, products, brand, marketplace, lang, userInstructions, onLog, complexityLevel, category) {
   var log = onLog || function() {};
+  var cLevel = complexityLevel || 2;
+  var cConfig = COMPLEXITY_LEVELS[cLevel] || COMPLEXITY_LEVELS[2];
 
   // STEP 1: AI Analysis
   log('AI analyzing product catalog and planning store structure...');
+  log('   Complexity: Level ' + cLevel + ' (' + cConfig.name + ')');
+  if (category && category !== 'generic') log('   Niche: ' + category);
   var analysis;
   try {
-    analysis = await aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions);
+    analysis = await aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions, category);
   } catch (err) {
     log('AI analysis failed (' + err.message + '), falling back to deterministic grouping...');
     analysis = fallbackAnalysis(products, brand, lang);
@@ -502,7 +539,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   try {
     var homeResult = await aiGeneratePageLayout(
       'Homepage', homepageProducts, brand, lang, true,
-      analysis.categories || [], analysis, userInstructions
+      analysis.categories || [], analysis, userInstructions, cLevel, category
     );
     pages.push({ id: 'homepage', name: 'Homepage', sections: homeResult.sections || [] });
     log('Homepage: ' + (homeResult.sections || []).length + ' sections');
@@ -522,7 +559,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     try {
       var catResult = await aiGeneratePageLayout(
         cat.name, catProducts, brand, lang, false,
-        categories, analysis, userInstructions
+        categories, analysis, userInstructions, cLevel, category
       );
       pages.push({ id: 'cat-' + ci, name: cat.name, sections: catResult.sections || [] });
       log(cat.name + ': ' + (catResult.sections || []).length + ' sections');
@@ -564,6 +601,110 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     }
   }
 
+  // STEP 5: Extra pages for Standard/Premium complexity
+  if (cConfig.extraPages && cConfig.extraPageTypes) {
+    var extraTypes = cConfig.extraPageTypes;
+
+    // Bestsellers page
+    if (extraTypes.indexOf('bestsellers') >= 0) {
+      var bestProducts = products.slice().sort(function(a, b) { return (b.reviews || 0) - (a.reviews || 0); }).slice(0, 12);
+      if (bestProducts.length >= 3) {
+        log('Creating Bestsellers page...');
+        var bestSections = [
+          {
+            id: uid(), layoutId: '1',
+            tiles: [{ type: 'image', brief: 'Bestseller hero banner for ' + brand + '. Showcase top-rated products with an aspirational message. Brand tone: ' + (analysis.brandTone || 'professional') + '.', textOverlay: lang === 'German' ? 'Unsere Bestseller' : 'Our Bestsellers', ctaText: '', dimensions: { w: 3000, h: 700 }, asins: [] }],
+          },
+          {
+            id: uid(), layoutId: '1',
+            tiles: [{ type: 'product_grid', brief: '', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: bestProducts.map(function(p) { return p.asin; }) }],
+          },
+        ];
+        pages.push({ id: uid(), name: lang === 'German' ? 'Bestseller' : 'Bestsellers', sections: bestSections });
+      }
+    }
+
+    // About Us page
+    if (extraTypes.indexOf('about_us') >= 0) {
+      log('Creating About Us page...');
+      var aboutSections = [
+        {
+          id: uid(), layoutId: '1',
+          tiles: [{ type: 'image', brief: 'About Us hero for ' + brand + '. Communicate brand values, origin story, and mission visually. Brand tone: ' + (analysis.brandTone || 'professional') + '.', textOverlay: lang === 'German' ? 'Wir sind ' + brand : 'We are ' + brand, ctaText: '', dimensions: { w: 3000, h: 800 }, asins: [] }],
+        },
+        {
+          id: uid(), layoutId: '1-1',
+          tiles: [
+            { type: 'image', brief: 'Brand story image: team, workshop, or production. Authentic and personal.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+            { type: 'image', brief: 'Brand values image: quality, sustainability, or craftsmanship.', textOverlay: analysis.brandStory || '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+          ],
+        },
+      ];
+      if (cLevel >= 3) {
+        aboutSections.push({
+          id: uid(), layoutId: '1-1-1',
+          tiles: [
+            { type: 'image', brief: 'Trust/value pillar 1: Quality, craftsmanship, or expertise.', textOverlay: lang === 'German' ? 'Qualität' : 'Quality', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+            { type: 'image', brief: 'Trust/value pillar 2: Innovation or sustainability.', textOverlay: lang === 'German' ? 'Innovation' : 'Innovation', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+            { type: 'image', brief: 'Trust/value pillar 3: Customer focus or community.', textOverlay: lang === 'German' ? 'Für dich' : 'For You', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+          ],
+        });
+      }
+      pages.push({ id: uid(), name: lang === 'German' ? 'Über uns' : 'About Us', sections: aboutSections });
+    }
+
+    // Features/How It Works page (Premium only, for complex products)
+    if (extraTypes.indexOf('features') >= 0 && (analysis.productComplexity === 'complex' || analysis.productComplexity === 'variantRich')) {
+      log('Creating Features page...');
+      var featSections = [
+        {
+          id: uid(), layoutId: '1',
+          tiles: [{ type: 'image', brief: 'Features/technology hero banner for ' + brand + '. Highlight innovation and product capabilities.', textOverlay: lang === 'German' ? 'So funktioniert es' : 'How It Works', ctaText: '', dimensions: { w: 3000, h: 700 }, asins: [] }],
+        },
+        {
+          id: uid(), layoutId: 'lg-4grid',
+          tiles: [
+            { type: 'image', brief: 'Large product hero shot showing the main product in detail.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+            { type: 'image', brief: 'Feature 1: ' + ((analysis.keyFeatures || [])[0] || 'Key feature highlighted visually.'), textOverlay: (analysis.keyFeatures || [])[0] || '', ctaText: '', dimensions: { w: 1500, h: 600 }, asins: [] },
+            { type: 'image', brief: 'Feature 2: ' + ((analysis.keyFeatures || [])[1] || 'Second feature highlighted.'), textOverlay: (analysis.keyFeatures || [])[1] || '', ctaText: '', dimensions: { w: 1500, h: 600 }, asins: [] },
+            { type: 'image', brief: 'Feature 3: ' + ((analysis.keyFeatures || [])[2] || 'Third feature.'), textOverlay: (analysis.keyFeatures || [])[2] || '', ctaText: '', dimensions: { w: 1500, h: 600 }, asins: [] },
+            { type: 'image', brief: 'Feature 4: ' + ((analysis.keyFeatures || [])[3] || 'Fourth feature or USP.'), textOverlay: (analysis.keyFeatures || [])[3] || '', ctaText: '', dimensions: { w: 1500, h: 600 }, asins: [] },
+          ],
+        },
+      ];
+      if (cConfig.includeVideos) {
+        featSections.push({
+          id: uid(), layoutId: '1',
+          tiles: [{ type: 'video', brief: 'Product demonstration video showing the product in action.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1688 }, mobileDimensions: { w: 1242, h: 699 }, asins: [] }],
+        });
+      }
+      pages.push({ id: uid(), name: lang === 'German' ? 'Funktionen' : 'Features', sections: featSections });
+    }
+
+    // Certifications page (Premium only, for trust-focused categories)
+    if (extraTypes.indexOf('certifications') >= 0 && CATEGORY_STYLE_HINTS[category] && CATEGORY_STYLE_HINTS[category].trustFocus) {
+      log('Creating Certifications page...');
+      pages.push({
+        id: uid(),
+        name: lang === 'German' ? 'Zertifizierungen' : 'Certifications',
+        sections: [
+          {
+            id: uid(), layoutId: '1',
+            tiles: [{ type: 'image', brief: 'Certifications hero: showcase trust badges, quality seals, and third-party certifications for ' + brand + '.', textOverlay: lang === 'German' ? 'Unsere Zertifizierungen' : 'Our Certifications', ctaText: '', dimensions: { w: 3000, h: 700 }, asins: [] }],
+          },
+          {
+            id: uid(), layoutId: '1-1-1',
+            tiles: [
+              { type: 'image', brief: 'Certification badge 1 with explanation.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+              { type: 'image', brief: 'Certification badge 2 with explanation.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+              { type: 'image', brief: 'Certification badge 3 with explanation.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+            ],
+          },
+        ],
+      });
+    }
+  }
+
   // Build ASIN info list
   var asinList = products.map(function(p) {
     var catName = '';
@@ -587,7 +728,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
 
   if (assignedCount < products.length) {
     var unassigned = products.filter(function(p) { return !usedAsins[p.asin]; });
-    log(unassigned.length + ' unassigned ASINs — adding to nearest category page...');
+    log(unassigned.length + ' unassigned ASINs:adding to nearest category page...');
     var added = false;
     for (var pi = 1; pi < pages.length && !added; pi++) {
       var pg = pages[pi];

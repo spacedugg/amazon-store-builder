@@ -1,13 +1,24 @@
 import SectionView from './SectionView';
+import { t } from '../i18n';
 
-export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onMoveSection, onChangeLayout, viewMode, onHeaderBannerUpload, products }) {
+export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onMoveSection, onChangeLayout, viewMode, onHeaderBannerUpload, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate }) {
   if (!page) {
     return (
       <div className="canvas">
         <div className="canvas-empty">
-          <div style={{ fontSize: 36, marginBottom: 12 }}>&#x1F3EA;</div>
-          <div style={{ fontSize: 15, fontWeight: 600 }}>Amazon Brand Store Builder</div>
-          <div style={{ fontSize: 12, marginTop: 6 }}>Click <b>Generate</b> to upload ASINs and generate a store concept</div>
+          <div className="empty-icon">&#x1F3EA;</div>
+          <div className="empty-title">Amazon Brand Store Builder</div>
+          <div className="empty-subtitle">{t('canvas.empty', uiLang)}</div>
+          <div className="empty-actions">
+            <button className="btn btn-primary" style={{ padding: '10px 28px', fontSize: 13 }} onClick={onGenerate}>
+              {t('app.generate', uiLang)}
+            </button>
+            {hasAutoSave && (
+              <button className="btn" style={{ padding: '10px 20px', fontSize: 12, marginLeft: 10 }} onClick={onLoadAutoSave}>
+                Continue last session
+              </button>
+            )}
+          </div>
         </div>
       </div>
     );
@@ -27,7 +38,7 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
             <img src={bannerSrc} className="header-banner-img" alt="" />
           ) : (
             <div className="header-banner-placeholder">
-              <span>Header Banner ({isMobile ? '1242 x 450' : '3000 x 600'})</span>
+              <span>{t('canvas.headerBanner', uiLang)} ({isMobile ? '1242 x 450' : '3000 x 600'})</span>
               <span className="header-banner-hint">Click to upload</span>
             </div>
           )}
@@ -60,12 +71,13 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
               onChangeLayout={function(layoutId) { onChangeLayout(sec.id, layoutId); }}
               viewMode={viewMode}
               products={products}
+              uiLang={uiLang}
             />
           );
         })}
 
         <div className="add-section-bar">
-          <button className="btn add-section-btn" onClick={onAddSection}>+ Add Section</button>
+          <button className="btn add-section-btn" onClick={onAddSection}>+ {t('canvas.addSection', uiLang)}</button>
         </div>
       </div>
     </div>
