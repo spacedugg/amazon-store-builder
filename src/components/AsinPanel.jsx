@@ -1,4 +1,4 @@
-export default function AsinPanel({ asins, pages, products, requestedAsins, onClose }) {
+export default function AsinPanel({ asins, pages, products, requestedAsins, onClose, uiLang }) {
   // Build usage map
   var used = {};
   var pageMap = {};
@@ -79,7 +79,7 @@ export default function AsinPanel({ asins, pages, products, requestedAsins, onCl
                     <div key={a.asin} className="asin-row">
                       <span className={'asin-dot ' + status}></span>
                       <code className="asin-code">{a.asin}</code>
-                      <span className="asin-name">{a.name || (p && p.name) || '—'}</span>
+                      <span className="asin-name">{a.name || (p && p.name) || '...'}</span>
                       {p && p.price > 0 && <span className="asin-price">{p.currency || '€'}{p.price}</span>}
                       {pageMap[a.asin] && <span className="asin-page">{pageMap[a.asin]}</span>}
                     </div>

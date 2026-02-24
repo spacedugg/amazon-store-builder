@@ -1,7 +1,7 @@
 import {
   Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,
   WidthType, AlignmentType, HeadingLevel, BorderStyle, ShadingType,
-  PageBreak,
+  PageBreak, TableLayoutType, VerticalAlign,
 } from 'docx';
 import { LAYOUTS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES } from './constants';
 
@@ -21,33 +21,122 @@ function divider() {
     children: [new TextRun({ text: '', size: 8 })] });
 }
 
-function layoutAsciiArt(section) {
+// ─── LAYOUT PATTERN VISUAL TABLE ───
+// Creates a table-based visual showing how tiles are arranged in the section
+function layoutPatternTable(section) {
   var layout = LAYOUTS.find(function(l) { return l.id === section.layoutId; }) || LAYOUTS[0];
   var tiles = section.tiles || [];
-  var parts = [];
+  var g = layout.grid;
+  var cellBorder = { style: BorderStyle.SINGLE, size: 1, color: '999999' };
+  var borders = { top: cellBorder, bottom: cellBorder, left: cellBorder, right: cellBorder };
 
-  // Desktop layout
-  if (layout.stacked) {
-    parts.push('Desktop Layout: ' + layout.name);
-    if (layout.stacked === 'right') {
-      parts.push('┌──────────┬──────┐');
-      parts.push('│  T1      │  T2  │');
-      parts.push('│ (' + (tiles[0] ? tiles[0].type : '?') + ')├──────┤');
-      parts.push('│          │  T3  │');
-      parts.push('└──────────┴──────┘');
-    } else {
-      parts.push('┌──────┬──────────┐');
-      parts.push('│  T1  │          │');
-      parts.push('├──────┤  T3      │');
-      parts.push('│  T2  │ (' + (tiles[2] ? tiles[2].type : '?') + ')│');
-      parts.push('└──────┴──────────┘');
+  function tileCell(idx, rowSpan, colSpan, widthPct) {
+    var tile = tiles[idx];
+    var label = tile ? ('T' + (idx + 1)) : '?';
+    var typeName = tile ? (TILE_TYPE_LABELS[tile.type] || tile.type) : '';
+    var dims = tile && tile.dimensions ? (tile.dimensions.w + 'x' + tile.dimensions.h) : '';
+    var briefShort = tile && tile.brief ? tile.brief.slice(0, 40) : '';
+    var textOv = tile && tile.textOverlay ? ('"' + tile.textOverlay.slice(0, 30) + '"') : '';
+    var colorHint = tile && tile.bgColor ? ('[Color: ' + tile.bgColor + ']') : '';
+
+    var children = [
+      new Paragraph({ spacing: { before: 40, after: 20 }, alignment: AlignmentType.CENTER,
+        children: [new TextRun({ text: label, bold: true, size: 22, color: 'FF9900' })] }),
+      new Paragraph({ spacing: { after: 20 }, alignment: AlignmentType.CENTER,
+        children: [new TextRun({ text: typeName, size: 16, color: '666666' })] }),
+    ];
+    if (dims) {
+      children.push(new Paragraph({ spacing: { after: 10 }, alignment: AlignmentType.CENTER,
+        children: [new TextRun({ text: dims, size: 14, color: '999999', font: 'Courier New' })] }));
     }
-  } else {
-    var cols = tiles.map(function(t, i) { return ' T' + (i + 1) + ':' + t.type + ' '; });
-    parts.push('Desktop: [' + cols.join('|') + ']');
+    if (textOv) {
+      children.push(new Paragraph({ spacing: { after: 10 }, alignment: AlignmentType.CENTER,
+        children: [new TextRun({ text: textOv, size: 14, italics: true, color: '333333' })] }));
+    }
+    if (briefShort) {
+      children.push(new Paragraph({ spacing: { after: 10 }, alignment: AlignmentType.CENTER,
+        children: [new TextRun({ text: briefShort, size: 12, color: '888888' })] }));
+    }
+    if (colorHint) {
+      children.push(new Paragraph({ spacing: { after: 10 }, alignment: AlignmentType.CENTER,
+        children: [new TextRun({ text: colorHint, size: 12, color: '6644AA' })] }));
+    }
+
+    var cellProps = {
+      children: children,
+      borders: borders,
+      shading: { type: ShadingType.SOLID, color: tile && tile.bgColor ? tile.bgColor.replace('#', '') : 'F8F8F8' },
+      verticalAlign: VerticalAlign.CENTER,
+      width: { size: widthPct, type: WidthType.PERCENTAGE },
+    };
+    if (rowSpan && rowSpan > 1) cellProps.rowSpan = rowSpan;
+    if (colSpan && colSpan > 1) cellProps.columnSpan = colSpan;
+    return new TableCell(cellProps);
   }
-  parts.push('Mobile: tiles stack vertically (top to bottom)');
-  return parts.join('\n');
+
+  function emptyCell(widthPct) {
+    return new TableCell({
+      children: [new Paragraph({ children: [new TextRun({ text: '', size: 8 })] })],
+      borders: { top: { style: BorderStyle.NONE }, bottom: { style: BorderStyle.NONE }, left: { style: BorderStyle.NONE }, right: { style: BorderStyle.NONE } },
+      width: { size: widthPct, type: WidthType.PERCENTAGE },
+    });
+  }
+
+  var rows = [];
+
+  // Build grid based on layout type
+  if (g === 'lg-2stack') {
+    // Row 1: T1(large, rowSpan 2) | T2
+    // Row 2: (merged)             | T3
+    rows.push(new TableRow({ children: [tileCell(0, 2, 1, 66), tileCell(1, 1, 1, 34)] }));
+    rows.push(new TableRow({ children: [tileCell(2, 1, 1, 34)] }));
+
+  } else if (g === '2stack-lg') {
+    rows.push(new TableRow({ children: [tileCell(0, 1, 1, 34), tileCell(2, 2, 1, 66)] }));
+    rows.push(new TableRow({ children: [tileCell(1, 1, 1, 34)] }));
+
+  } else if (g === 'lg-4grid') {
+    // Row 1: T1(large, rowSpan 2) | T2 | T3
+    // Row 2: (merged)             | T4 | T5
+    rows.push(new TableRow({ children: [tileCell(0, 2, 1, 50), tileCell(1, 1, 1, 25), tileCell(2, 1, 1, 25)] }));
+    rows.push(new TableRow({ children: [tileCell(3, 1, 1, 25), tileCell(4, 1, 1, 25)] }));
+
+  } else if (g === '4grid-lg') {
+    rows.push(new TableRow({ children: [tileCell(0, 1, 1, 25), tileCell(1, 1, 1, 25), tileCell(4, 2, 1, 50)] }));
+    rows.push(new TableRow({ children: [tileCell(2, 1, 1, 25), tileCell(3, 1, 1, 25)] }));
+
+  } else if (g === 'lg-6grid') {
+    // Row 1: T1(large, rowSpan 3) | T2 | T3
+    // Row 2: (merged)             | T4 | T5
+    // Row 3: (merged)             | T6 | T7
+    rows.push(new TableRow({ children: [tileCell(0, 3, 1, 50), tileCell(1, 1, 1, 25), tileCell(2, 1, 1, 25)] }));
+    rows.push(new TableRow({ children: [tileCell(3, 1, 1, 25), tileCell(4, 1, 1, 25)] }));
+    rows.push(new TableRow({ children: [tileCell(5, 1, 1, 25), tileCell(6, 1, 1, 25)] }));
+
+  } else if (g === '6grid-lg') {
+    rows.push(new TableRow({ children: [tileCell(0, 1, 1, 25), tileCell(1, 1, 1, 25), tileCell(6, 3, 1, 50)] }));
+    rows.push(new TableRow({ children: [tileCell(2, 1, 1, 25), tileCell(3, 1, 1, 25)] }));
+    rows.push(new TableRow({ children: [tileCell(4, 1, 1, 25), tileCell(5, 1, 1, 25)] }));
+
+  } else {
+    // Simple row layout (1, 1-1, 1-1-1, 1-1-1-1, 2-1, 1-2, 2-1-1, 1-1-2)
+    var colCount = tiles.length || 1;
+    var cellWidth = Math.floor(100 / colCount);
+    var rowCells = tiles.map(function(t, i) {
+      return tileCell(i, 1, 1, cellWidth);
+    });
+    if (rowCells.length > 0) {
+      rows.push(new TableRow({ children: rowCells }));
+    }
+  }
+
+  if (rows.length === 0) return null;
+
+  return new Table({
+    rows: rows,
+    width: { size: 100, type: WidthType.PERCENTAGE },
+    layout: TableLayoutType.FIXED,
+  });
 }
 
 function tileDescription(tile, tileIndex, productMap) {
@@ -61,11 +150,10 @@ function tileDescription(tile, tileIndex, productMap) {
     parts.push(boldPara('Type: ', typeName));
     parts.push(boldPara('ASINs: ', asins.join(', ') || 'Auto-selected by Amazon'));
     parts.push(boldPara('Product Count: ', String(asins.length)));
-    // List product names
     asins.slice(0, 10).forEach(function(a) {
       var p = productMap[a];
       if (p) parts.push(new Paragraph({ spacing: { before: 20, after: 20 },
-        children: [new TextRun({ text: '  • ' + a + ' — ' + (p.name || '').slice(0, 60), size: 20, color: '666666' })] }));
+        children: [new TextRun({ text: '  ' + a + ': ' + (p.name || '').slice(0, 60), size: 20, color: '666666' })] }));
     });
     if (asins.length > 10) parts.push(new Paragraph({ children: [new TextRun({ text: '  ... +' + (asins.length - 10) + ' more', size: 20, color: '999999' })] }));
   } else if (tile.type === 'video') {
@@ -74,11 +162,11 @@ function tileDescription(tile, tileIndex, productMap) {
     if (tile.brief) parts.push(boldPara('Brief: ', tile.brief));
     parts.push(boldPara('Thumbnail: ', tile.videoThumbnail ? 'Uploaded' : 'Not set'));
   } else {
-    // Image / shoppable / image_text / text
     var dims = tile.dimensions || {};
     var mDims = tile.mobileDimensions || {};
     if (dims.w) parts.push(boldPara('Desktop: ', dims.w + ' x ' + dims.h + ' px'));
     if (mDims.w) parts.push(boldPara('Mobile: ', mDims.w + ' x ' + mDims.h + ' px'));
+    if (tile.bgColor) parts.push(boldPara('Color Preview: ', tile.bgColor));
     if (tile.textOverlay) parts.push(boldPara('Text Overlay: ', '"' + tile.textOverlay + '"'));
     if (tile.ctaText) parts.push(boldPara('CTA Button: ', '"' + tile.ctaText + '"'));
     if (tile.brief) parts.push(boldPara('Designer Brief: ', tile.brief));
@@ -114,14 +202,15 @@ export async function generateBriefingDocx(store) {
   children.push(boldPara('Categories: ', catNames.join(', ') || 'None'));
   if (store.brandTone) children.push(boldPara('Brand Tone: ', store.brandTone));
   if (store.heroMessage) children.push(boldPara('Hero Message: ', '"' + store.heroMessage + '"'));
+  if (store.category && store.category !== 'generic') children.push(boldPara('Niche: ', store.category));
   children.push(divider());
 
   // ─── IMPORTANT NOTES ───
   children.push(heading('Image Specifications', HeadingLevel.HEADING_2));
   children.push(new Paragraph({ spacing: { before: 60, after: 60 },
     children: [new TextRun({ text: 'Each image tile requires TWO versions:', bold: true, size: 22 })] }));
-  children.push(new Paragraph({ children: [new TextRun({ text: '• Desktop version (typically 3000px wide)', size: 22 })] }));
-  children.push(new Paragraph({ children: [new TextRun({ text: '• Mobile version (typically 1242px wide)', size: 22 })] }));
+  children.push(new Paragraph({ children: [new TextRun({ text: 'Desktop version (typically 3000px wide)', size: 22 })] }));
+  children.push(new Paragraph({ children: [new TextRun({ text: 'Mobile version (typically 1242px wide)', size: 22 })] }));
   children.push(new Paragraph({ spacing: { before: 40 },
     children: [new TextRun({ text: 'Exact dimensions are specified per tile below. If only one dimension is given, create both versions with appropriate cropping.', size: 20, italics: true, color: '666666' })] }));
   children.push(divider());
@@ -143,11 +232,17 @@ export async function generateBriefingDocx(store) {
       var layout = LAYOUTS.find(function(l) { return l.id === section.layoutId; }) || LAYOUTS[0];
       children.push(heading('Section ' + (si + 1) + ': ' + layout.name, HeadingLevel.HEADING_2));
 
-      // Visual layout representation
-      var ascii = layoutAsciiArt(section);
-      children.push(new Paragraph({ spacing: { before: 60, after: 60 },
-        shading: { type: ShadingType.SOLID, color: 'F5F5F5' },
-        children: [new TextRun({ text: ascii, size: 18, font: 'Courier New', color: '555555' })] }));
+      // ─── VISUAL LAYOUT PATTERN TABLE ───
+      children.push(new Paragraph({ spacing: { before: 60, after: 30 },
+        children: [new TextRun({ text: 'Layout Pattern:', bold: true, size: 20, color: '475467' })] }));
+
+      var patternTable = layoutPatternTable(section);
+      if (patternTable) {
+        children.push(patternTable);
+      }
+
+      children.push(new Paragraph({ spacing: { before: 20, after: 40 },
+        children: [new TextRun({ text: 'Mobile: tiles stack vertically (top to bottom)', size: 18, italics: true, color: '999999' })] }));
 
       // Tile details
       (section.tiles || []).forEach(function(tile, ti) {
@@ -169,7 +264,6 @@ export async function generateBriefingDocx(store) {
     }),
   });
 
-  // Build page assignment map
   var asinPageMap = {};
   (store.pages || []).forEach(function(pg) {
     (pg.sections || []).forEach(function(sec) {
@@ -184,7 +278,7 @@ export async function generateBriefingDocx(store) {
     (store.asins || []).forEach(function(a) { if (a.asin === p.asin) catName = a.category || ''; });
     return new TableRow({
       children: [p.asin || '', (p.name || '').slice(0, 40), catName,
-        p.price ? (p.currency || '€') + '' + p.price : '', p.rating ? p.rating + ' (' + (p.reviews || 0) + ')' : '',
+        p.price ? (p.currency || 'EUR') + '' + p.price : '', p.rating ? p.rating + ' (' + (p.reviews || 0) + ')' : '',
         asinPageMap[p.asin] || 'Unassigned',
       ].map(function(val) {
         return new TableCell({ width: { size: 16, type: WidthType.PERCENTAGE },

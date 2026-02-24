@@ -1,6 +1,18 @@
-import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, DIMENSION_PRESETS } from '../constants';
+import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES } from '../constants';
+import { t } from '../i18n';
 
-function fileUpload(label, value, onSet, onRemove) {
+var PRESET_COLORS = [
+  '#f5f5f5', '#e0e0e0', '#bdbdbd', '#9e9e9e',
+  '#1a1a2e', '#232F3E', '#37474f', '#455a64',
+  '#fff3e0', '#ffe0b2', '#ffcc80', '#FF9900',
+  '#e8f5e9', '#c8e6c9', '#a5d6a7', '#66bb6a',
+  '#e3f2fd', '#bbdefb', '#90caf9', '#42a5f5',
+  '#fce4ec', '#f8bbd0', '#f48fb1', '#ec407a',
+  '#f3e5f5', '#e1bee7', '#ce93d8', '#ab47bc',
+  '#fffde7', '#fff9c4', '#fff176', '#ffee58',
+];
+
+function fileUpload(label, value, onSet, onRemove, uiLang) {
   return (
     <div className="props-section">
       <label className="label">{label}</label>
@@ -12,17 +24,17 @@ function fileUpload(label, value, onSet, onRemove) {
           reader.onload = function(ev) { onSet(ev.target.result); };
           reader.readAsDataURL(f);
         }} />
-      {value && <button className="btn" style={{ marginTop: 4 }} onClick={onRemove}>Remove</button>}
+      {value && <button className="btn" style={{ marginTop: 4 }} onClick={onRemove}>{t('props.remove', uiLang)}</button>}
     </div>
   );
 }
 
-export default function PropertiesPanel({ tile, onChange, products, viewMode }) {
+export default function PropertiesPanel({ tile, onChange, products, viewMode, uiLang }) {
   if (!tile) {
     return (
       <div className="props-panel">
-        <div className="props-header">Properties</div>
-        <div className="props-empty">Click a tile to edit</div>
+        <div className="props-header">{t('props.title', uiLang)}</div>
+        <div className="props-empty">{t('props.clickTile', uiLang)}</div>
       </div>
     );
   }
@@ -41,48 +53,88 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode }) 
 
   return (
     <div className="props-panel">
-      <div className="props-header">Properties</div>
+      <div className="props-header">{t('props.title', uiLang)}</div>
 
       {/* Tile type */}
       <div className="props-section">
-        <label className="label">Tile Type</label>
+        <label className="label">{t('props.tileType', uiLang)}</label>
         <select className="input" value={tile.type}
           onChange={function(e) {
-            var t = e.target.value;
-            var up = Object.assign({}, tile, { type: t });
+            var tt = e.target.value;
+            var up = Object.assign({}, tile, { type: tt });
             if (isProductType && !up.asins) up.asins = [];
-            if (t === 'video' && !up.dimensions) up.dimensions = { w: 3000, h: 1688 };
-            if (t === 'video' && !up.mobileDimensions) up.mobileDimensions = { w: 1242, h: 699 };
+            if (tt === 'video' && !up.dimensions) up.dimensions = { w: 3000, h: 1688 };
+            if (tt === 'video' && !up.mobileDimensions) up.mobileDimensions = { w: 1242, h: 699 };
             onChange(up);
           }}>
-          {TILE_TYPES.map(function(t) {
-            return <option key={t} value={t}>{TILE_TYPE_LABELS[t] || t}</option>;
+          {TILE_TYPES.map(function(tt) {
+            return <option key={tt} value={tt}>{TILE_TYPE_LABELS[tt] || tt}</option>;
           })}
         </select>
+      </div>
+
+      {/* TILE BACKGROUND COLOR */}
+      <div className="props-section">
+        <label className="label">{t('props.tileColor', uiLang)}</label>
+        <div className="color-picker-grid">
+          {PRESET_COLORS.map(function(c) {
+            var isActive = tile.bgColor === c;
+            return (
+              <button
+                key={c}
+                className={'color-swatch' + (isActive ? ' active' : '')}
+                style={{ background: c }}
+                onClick={function() { u('bgColor', c); }}
+                title={c}
+              />
+            );
+          })}
+        </div>
+        <div style={{ display: 'flex', gap: 6, marginTop: 6, alignItems: 'center' }}>
+          <input
+            type="color"
+            value={tile.bgColor || '#ffffff'}
+            onChange={function(e) { u('bgColor', e.target.value); }}
+            style={{ width: 28, height: 28, border: 'none', cursor: 'pointer', borderRadius: 4 }}
+          />
+          <input
+            value={tile.bgColor || ''}
+            onChange={function(e) { u('bgColor', e.target.value); }}
+            className="input"
+            placeholder="#RRGGBB"
+            style={{ flex: 1, fontFamily: 'monospace', fontSize: 11 }}
+          />
+          {tile.bgColor && (
+            <button className="btn" style={{ fontSize: 10, padding: '4px 8px' }} onClick={function() { u('bgColor', ''); }}>
+              {t('props.clearColor', uiLang)}
+            </button>
+          )}
+        </div>
+        <div className="hint">{t('props.tileColorHint', uiLang)}</div>
       </div>
 
       {/* IMAGE / SHOPPABLE / IMAGE_TEXT */}
       {isImageType && (
         <>
           <div className="props-section">
-            <label className="label">Designer Brief (EN)</label>
+            <label className="label">{t('props.designerBrief', uiLang)}</label>
             <textarea value={tile.brief || ''} onChange={function(e) { u('brief', e.target.value); }}
               rows={3} className="input" placeholder="Describe what the image should show..." />
           </div>
           <div className="props-section">
-            <label className="label">Text Overlay</label>
+            <label className="label">{t('props.textOverlay', uiLang)}</label>
             <input value={tile.textOverlay || ''} onChange={function(e) { u('textOverlay', e.target.value); }}
               className="input" placeholder="Text designed into the image" />
           </div>
           <div className="props-section">
-            <label className="label">CTA Text</label>
+            <label className="label">{t('props.ctaText', uiLang)}</label>
             <input value={tile.ctaText || ''} onChange={function(e) { u('ctaText', e.target.value); }}
               className="input" placeholder='"Jetzt entdecken"' />
           </div>
 
           {/* Desktop Dimensions */}
           <div className="props-section">
-            <label className="label">Desktop Dimensions (px)</label>
+            <label className="label">{t('props.desktopDimensions', uiLang)}</label>
             <div className="props-dims">
               <input type="number" value={(tile.dimensions || {}).w || 3000}
                 onChange={function(e) { ud('desktop', 'w', parseInt(e.target.value) || 3000); }} className="input" />
@@ -94,7 +146,7 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode }) 
 
           {/* Mobile Dimensions */}
           <div className="props-section">
-            <label className="label">Mobile Dimensions (px)</label>
+            <label className="label">{t('props.mobileDimensions', uiLang)}</label>
             <div className="props-dims">
               <input type="number" value={(tile.mobileDimensions || {}).w || 1242}
                 onChange={function(e) { ud('mobile', 'w', parseInt(e.target.value) || 1242); }} className="input" />
@@ -106,24 +158,23 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode }) 
 
           {/* Link / ASIN */}
           <div className="props-section">
-            <label className="label">Link ASIN (clickable)</label>
+            <label className="label">{t('props.linkAsin', uiLang)}</label>
             <input value={tile.linkAsin || ''} onChange={function(e) { u('linkAsin', e.target.value.trim()); }}
               className="input input-mono" placeholder="B0XXXXXXXXXX" />
-            <div className="hint">Links this image to a product page or category</div>
           </div>
 
           {/* Image uploads */}
-          {fileUpload('Desktop Image', tile.uploadedImage,
-            function(v) { u('uploadedImage', v); }, function() { u('uploadedImage', null); })}
-          {fileUpload('Mobile Image', tile.uploadedImageMobile,
-            function(v) { u('uploadedImageMobile', v); }, function() { u('uploadedImageMobile', null); })}
+          {fileUpload(t('props.desktopImage', uiLang), tile.uploadedImage,
+            function(v) { u('uploadedImage', v); }, function() { u('uploadedImage', null); }, uiLang)}
+          {fileUpload(t('props.mobileImage', uiLang), tile.uploadedImageMobile,
+            function(v) { u('uploadedImageMobile', v); }, function() { u('uploadedImageMobile', null); }, uiLang)}
         </>
       )}
 
       {/* PRODUCT TYPES */}
       {isProductType && (
         <div className="props-section">
-          <label className="label">ASINs (one per line)</label>
+          <label className="label">{t('props.asins', uiLang)}</label>
           <textarea value={(tile.asins || []).join('\n')}
             onChange={function(e) { u('asins', e.target.value.split('\n').map(function(s) { return s.trim(); }).filter(Boolean)); }}
             rows={8} className="input input-mono" placeholder="B0XXXXXXXXXX" />
@@ -153,7 +204,7 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode }) 
       {/* TEXT */}
       {tile.type === 'text' && (
         <div className="props-section">
-          <label className="label">Text Content</label>
+          <label className="label">{t('props.textContent', uiLang)}</label>
           <textarea value={tile.textOverlay || ''} onChange={function(e) { u('textOverlay', e.target.value); }}
             rows={4} className="input" placeholder="Native text content..." />
           <div className="hint">Only for section headings or legal text.</div>
@@ -164,12 +215,12 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode }) 
       {tile.type === 'video' && (
         <>
           <div className="props-section">
-            <label className="label">Video Brief (EN)</label>
+            <label className="label">{t('props.videoBrief', uiLang)}</label>
             <textarea value={tile.brief || ''} onChange={function(e) { u('brief', e.target.value); }}
               rows={3} className="input" placeholder="Describe the video content..." />
           </div>
           <div className="props-section">
-            <label className="label">Desktop Dimensions</label>
+            <label className="label">{t('props.desktopDimensions', uiLang)}</label>
             <div className="props-dims">
               <input type="number" value={(tile.dimensions || {}).w || 3000}
                 onChange={function(e) { ud('desktop', 'w', parseInt(e.target.value) || 3000); }} className="input" />
@@ -179,7 +230,7 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode }) 
             </div>
           </div>
           <div className="props-section">
-            <label className="label">Mobile Dimensions</label>
+            <label className="label">{t('props.mobileDimensions', uiLang)}</label>
             <div className="props-dims">
               <input type="number" value={(tile.mobileDimensions || {}).w || 1242}
                 onChange={function(e) { ud('mobile', 'w', parseInt(e.target.value) || 1242); }} className="input" />
@@ -188,8 +239,8 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode }) 
                 onChange={function(e) { ud('mobile', 'h', parseInt(e.target.value) || 699); }} className="input" />
             </div>
           </div>
-          {fileUpload('Video Thumbnail', tile.videoThumbnail,
-            function(v) { u('videoThumbnail', v); }, function() { u('videoThumbnail', null); })}
+          {fileUpload(t('props.videoThumbnail', uiLang), tile.videoThumbnail,
+            function(v) { u('videoThumbnail', v); }, function() { u('videoThumbnail', null); }, uiLang)}
         </>
       )}
     </div>

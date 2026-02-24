@@ -1,4 +1,4 @@
-export default function Wireframe({ tile, width, viewMode }) {
+export default function Wireframe({ tile, width, viewMode, bgColor }) {
   var dims = (viewMode === 'mobile' ? tile.mobileDimensions : tile.dimensions) || tile.dimensions || { w: 3000, h: 1200 };
   var w = width || 280;
   var ht = Math.max(30, Math.round(w / (dims.w / dims.h)));
@@ -16,12 +16,36 @@ export default function Wireframe({ tile, width, viewMode }) {
   var isLifestyleHint = briefLower.indexOf('lifestyle') >= 0 || briefLower.indexOf('person') >= 0 ||
     briefLower.indexOf('use') >= 0 || briefLower.indexOf('action') >= 0;
 
-  // Choose background based on content type
-  var bgFill = '#f0f0f0';
+  // Use custom bgColor if provided, otherwise detect from content
+  var bgFill = bgColor || '#f0f0f0';
   var crossColor = '#e0e0e0';
-  if (isShoppable) { bgFill = '#f5f0e8'; crossColor = '#e8dcc8'; }
-  else if (isLifestyleHint) { bgFill = '#eef2f0'; crossColor = '#d8e0dc'; }
-  else if (isProductHint) { bgFill = '#f0f0f5'; crossColor = '#dcdce8'; }
+  if (!bgColor) {
+    if (isShoppable) { bgFill = '#f5f0e8'; crossColor = '#e8dcc8'; }
+    else if (isLifestyleHint) { bgFill = '#eef2f0'; crossColor = '#d8e0dc'; }
+    else if (isProductHint) { bgFill = '#f0f0f5'; crossColor = '#dcdce8'; }
+  } else {
+    // Lighten cross color relative to bgColor
+    crossColor = 'rgba(0,0,0,0.06)';
+  }
+
+  // Determine text color contrast based on bg brightness
+  var textFill = '#444';
+  var dimsFill = '#bbb';
+  var briefFill = '#999';
+  if (bgColor) {
+    var hex = bgColor.replace('#', '');
+    if (hex.length === 3) hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+    var r = parseInt(hex.slice(0,2), 16) || 0;
+    var g = parseInt(hex.slice(2,4), 16) || 0;
+    var b = parseInt(hex.slice(4,6), 16) || 0;
+    var luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    if (luminance < 0.5) {
+      textFill = '#e0e0e0';
+      dimsFill = 'rgba(255,255,255,.4)';
+      briefFill = 'rgba(255,255,255,.5)';
+      crossColor = 'rgba(255,255,255,0.08)';
+    }
+  }
 
   return (
     <svg viewBox={'0 0 ' + w + ' ' + ht} style={{ width: '100%', display: 'block' }}>
@@ -72,7 +96,7 @@ export default function Wireframe({ tile, width, viewMode }) {
       {/* Text overlay */}
       {text && (
         <text x={w * 0.06} y={ht * 0.42} fontSize={Math.min(11, w / 24)}
-          fontWeight="700" fill="#444" fontFamily="system-ui, sans-serif" opacity=".8">
+          fontWeight="700" fill={textFill} fontFamily="system-ui, sans-serif" opacity=".8">
           {text.length > 45 ? text.slice(0, 42) + '...' : text}
         </text>
       )}
@@ -90,7 +114,7 @@ export default function Wireframe({ tile, width, viewMode }) {
 
       {/* Brief text (shown when no overlay text and no silhouette) */}
       {!text && !isProductHint && !isLifestyleHint && brief && (
-        <text x={w / 2} y={ht / 2 + 3} fontSize="6.5" fill="#999"
+        <text x={w / 2} y={ht / 2 + 3} fontSize="6.5" fill={briefFill}
           textAnchor="middle" fontFamily="system-ui, sans-serif" fontStyle="italic">
           {brief.length > 60 ? brief.slice(0, 57) + '...' : brief}
         </text>
@@ -98,7 +122,7 @@ export default function Wireframe({ tile, width, viewMode }) {
 
       {/* Brief text below silhouette for product/lifestyle hints */}
       {!text && (isProductHint || isLifestyleHint) && brief && (
-        <text x={w / 2} y={ht * 0.88} fontSize="5.5" fill="#aaa"
+        <text x={w / 2} y={ht * 0.88} fontSize="5.5" fill={briefFill}
           textAnchor="middle" fontFamily="system-ui, sans-serif" fontStyle="italic">
           {brief.length > 50 ? brief.slice(0, 47) + '...' : brief}
         </text>
@@ -117,13 +141,20 @@ export default function Wireframe({ tile, width, viewMode }) {
       )}
 
       {/* Dimensions label */}
-      <text x={w - 4} y={10} fontSize="5" fill="#bbb" textAnchor="end" fontFamily="monospace">
+      <text x={w - 4} y={10} fontSize="5" fill={dimsFill} textAnchor="end" fontFamily="monospace">
         {dims.w}&times;{dims.h}
       </text>
 
       {/* Device indicator */}
       {viewMode === 'mobile' && (
         <text x={4} y={10} fontSize="5" fill="#007EB9" fontFamily="monospace">M</text>
+      )}
+
+      {/* Color indicator */}
+      {bgColor && (
+        <g>
+          <rect x="3" y="3" width="6" height="6" rx="1" fill={bgColor} stroke="rgba(0,0,0,.2)" strokeWidth=".3" />
+        </g>
       )}
     </svg>
   );

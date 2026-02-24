@@ -26,7 +26,7 @@ export var LAYOUTS = [
 export var TILE_TYPES = ['image', 'product_grid', 'best_sellers', 'recommended', 'deals', 'video', 'text', 'shoppable_image', 'image_text'];
 
 export var TILE_TYPE_LABELS = {
-  image: 'Image', product_grid: 'Product Grid (ASIN-based)', best_sellers: 'Best Sellers',
+  image: 'Image', product_grid: 'Product Grid (ASIN)', best_sellers: 'Best Sellers',
   recommended: 'Recommended Products', deals: 'Deals / Offers', video: 'Video',
   text: 'Text (native)', shoppable_image: 'Shoppable Image', image_text: 'Image with Text',
 };
@@ -50,6 +50,7 @@ export function emptyTile() {
     dimensions: { w: 3000, h: 1200 }, mobileDimensions: { w: 1242, h: 1200 },
     asins: [], linkAsin: '', linkUrl: '',
     uploadedImage: null, uploadedImageMobile: null, videoThumbnail: null,
+    bgColor: '',
   };
 }
 
@@ -59,8 +60,110 @@ export var DIMENSION_PRESETS = {
   headerBanner: { desktop: { w: 3000, h: 600 }, mobile: { w: 1242, h: 450 } },
 };
 
+// ─── AMAZON PRODUCT CATEGORIES ───
+// Top-level categories to influence store tone/style
+export var AMAZON_CATEGORIES = [
+  { id: 'generic', name: 'General / Other' },
+  { id: 'electronics', name: 'Electronics & Computers' },
+  { id: 'home_kitchen', name: 'Home & Kitchen' },
+  { id: 'beauty', name: 'Beauty & Personal Care' },
+  { id: 'health', name: 'Health & Wellness' },
+  { id: 'sports', name: 'Sports & Outdoors' },
+  { id: 'fashion', name: 'Clothing, Shoes & Jewelry' },
+  { id: 'baby', name: 'Baby & Kids' },
+  { id: 'toys', name: 'Toys & Games' },
+  { id: 'food', name: 'Grocery & Gourmet Food' },
+  { id: 'supplements', name: 'Vitamins & Supplements' },
+  { id: 'pets', name: 'Pet Supplies' },
+  { id: 'garden', name: 'Garden & Outdoor' },
+  { id: 'automotive', name: 'Automotive' },
+  { id: 'tools', name: 'Tools & Home Improvement' },
+  { id: 'office', name: 'Office Products' },
+  { id: 'books', name: 'Books & Media' },
+  { id: 'handmade', name: 'Handmade & Craft' },
+  { id: 'industrial', name: 'Industrial & Scientific' },
+  { id: 'cleaning', name: 'Cleaning & Household' },
+];
+
+// Style guidance per category for AI prompts
+export var CATEGORY_STYLE_HINTS = {
+  generic: { tone: 'neutral, professional', visualStyle: 'clean and versatile', trustFocus: false },
+  electronics: { tone: 'technical, innovative, modern', visualStyle: 'dark backgrounds, product renders, tech aesthetic', trustFocus: true },
+  home_kitchen: { tone: 'warm, inviting, practical', visualStyle: 'lifestyle shots in home setting, warm lighting', trustFocus: false },
+  beauty: { tone: 'elegant, aspirational, sensory', visualStyle: 'soft tones, close-ups, lifestyle beauty shots', trustFocus: false },
+  health: { tone: 'trustworthy, scientific, reassuring', visualStyle: 'clean whites, certifications prominent, trust badges', trustFocus: true },
+  sports: { tone: 'energetic, bold, performance-driven', visualStyle: 'action shots, strong colors, athletic imagery', trustFocus: false },
+  fashion: { tone: 'trendy, stylish, aspirational', visualStyle: 'model shots, lookbook style, lifestyle focus', trustFocus: false },
+  baby: { tone: 'gentle, caring, safe, playful', visualStyle: 'soft pastels, happy families, safety certifications', trustFocus: true },
+  toys: { tone: 'fun, colorful, playful, exciting', visualStyle: 'bright colors, children playing, animated feel', trustFocus: true },
+  food: { tone: 'appetizing, natural, authentic', visualStyle: 'food photography, ingredients, origin stories', trustFocus: false },
+  supplements: { tone: 'scientific, healthy, trustworthy', visualStyle: 'clean design, ingredient highlights, certifications', trustFocus: true },
+  pets: { tone: 'loving, caring, fun', visualStyle: 'happy pets, lifestyle shots, warm colors', trustFocus: false },
+  garden: { tone: 'natural, fresh, outdoor', visualStyle: 'garden settings, greenery, seasonal imagery', trustFocus: false },
+  automotive: { tone: 'technical, reliable, precise', visualStyle: 'product detail shots, installation context, dark tones', trustFocus: true },
+  tools: { tone: 'practical, durable, professional', visualStyle: 'workshop settings, product in use, technical detail', trustFocus: false },
+  office: { tone: 'professional, productive, organized', visualStyle: 'office settings, clean desk aesthetic, minimal', trustFocus: false },
+  books: { tone: 'intellectual, creative, storytelling', visualStyle: 'reading scenes, atmospheric, cozy', trustFocus: false },
+  handmade: { tone: 'artisanal, unique, personal', visualStyle: 'craft process, maker story, warm textures', trustFocus: false },
+  industrial: { tone: 'professional, precise, reliable', visualStyle: 'industrial settings, technical specs, clean layout', trustFocus: true },
+  cleaning: { tone: 'clean, effective, eco-conscious', visualStyle: 'before/after, clean spaces, ingredient focus', trustFocus: false },
+};
+
+// ─── STORE COMPLEXITY LEVELS ───
+// Controls section count, extra pages, and overall depth
+export var COMPLEXITY_LEVELS = {
+  1: {
+    name: 'Basic',
+    sectionsPerCategoryPage: { min: 2, max: 3 },
+    sectionsPerHomepage: { min: 3, max: 5 },
+    extraPages: false,
+    includeVideos: false,
+    includeFollowCTA: false,
+    includeTrustElements: false,
+    includeBrandStory: false,
+    description: 'Product categories with clean, direct structure. All products easily findable.',
+  },
+  2: {
+    name: 'Standard',
+    sectionsPerCategoryPage: { min: 3, max: 5 },
+    sectionsPerHomepage: { min: 5, max: 8 },
+    extraPages: true,
+    extraPageTypes: ['bestsellers', 'about_us'],
+    includeVideos: true,
+    videoMax: 1,
+    includeFollowCTA: false,
+    includeTrustElements: true,
+    includeBrandStory: true,
+    description: 'Categories plus extra pages (Bestsellers, About Us). Lifestyle imagery, optional video.',
+  },
+  3: {
+    name: 'Premium',
+    sectionsPerCategoryPage: { min: 4, max: 7 },
+    sectionsPerHomepage: { min: 7, max: 12 },
+    extraPages: true,
+    extraPageTypes: ['bestsellers', 'about_us', 'features', 'certifications', 'sustainability'],
+    includeVideos: true,
+    videoMax: 3,
+    includeFollowCTA: true,
+    includeTrustElements: true,
+    includeBrandStory: true,
+    includeDetailedShowcases: true,
+    description: 'Full experience with extra pages, videos, trust elements, follow CTA, and detailed showcases.',
+  },
+};
+
+// ─── PRICING CONFIGURATION ───
+// Market-rate estimates for brand store design
+export var PRICING = {
+  imagePrice: 45,
+  videoPrice: 250,
+  baseSetupFee: 150,
+  currency: 'EUR',
+  password: 'agentur2024',
+};
+
 // ─── MODULE BAUKASTEN (Building Blocks for Amazon Brand Stores) ───
-// Composable modules — the AI picks and combines them based on brand,
+// Composable modules: the AI picks and combines them based on brand,
 // product complexity, and available content. NOT rigid templates.
 
 export var MODULE_BAUKASTEN = {
@@ -149,6 +252,12 @@ export var MODULE_BAUKASTEN = {
     crossSellBanner: { description: 'Cross-sell banner linking to related category', layout: '1' },
     crossSellSplit: { description: 'Two cross-sell tiles linking to other categories', layout: '1-1' },
   },
+
+  // === FOLLOW / ENGAGEMENT (Premium) ===
+  engagement: {
+    followBanner: { description: 'Follow button CTA banner encouraging store follows', layout: '1', tileType: 'image' },
+    followSplit: { description: 'Brand story left + follow CTA right', layout: '1-1' },
+  },
 };
 
 // ─── PRODUCT COMPLEXITY CLASSIFICATION ───
@@ -229,6 +338,30 @@ export var STORE_PRINCIPLES = {
     'VARIANT-RICH products: Variant showcase modules, color/material grids.',
   ],
 };
+
+// ─── HELPER: Count images and videos in a store ───
+export function countStoreAssets(store) {
+  var images = 0;
+  var videos = 0;
+  var hasHeader = store.headerBanner || store.headerBannerMobile ? 1 : 0;
+  // Header banner counts as 1 image (desktop+mobile = 1 asset)
+  images += hasHeader ? 0 : 1; // always need header designed
+
+  (store.pages || []).forEach(function(pg) {
+    (pg.sections || []).forEach(function(sec) {
+      (sec.tiles || []).forEach(function(tile) {
+        if (tile.type === 'video') {
+          videos++;
+        } else if (PRODUCT_TILE_TYPES.indexOf(tile.type) < 0 && tile.type !== 'text') {
+          // image, shoppable_image, image_text all need design
+          images++;
+        }
+      });
+    });
+  });
+
+  return { images: images, videos: videos };
+}
 
 // ─── VALIDATION HELPERS ───
 

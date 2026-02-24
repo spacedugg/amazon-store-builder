@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { uid } from '../constants';
+import { t } from '../i18n';
 
-export default function PageList({ pages, curPage, onSelect, onAddPage, onRenamePage, onDeletePage, onReorderPage, savedStores, onLoadSaved, onDeleteSaved }) {
+export default function PageList({ pages, curPage, onSelect, onAddPage, onRenamePage, onDeletePage, onReorderPage, savedStores, onLoadSaved, onDeleteSaved, uiLang, showSaved, onToggleSaved }) {
   var [editingId, setEditingId] = useState(null);
   var [editName, setEditName] = useState('');
 
@@ -29,12 +29,12 @@ export default function PageList({ pages, curPage, onSelect, onAddPage, onRename
   return (
     <div className="page-list">
       <div className="page-list-header">
-        <span>Pages</span>
-        <button className="btn-icon" onClick={onAddPage} title="Add page">+</button>
+        <span>{t('pages.title', uiLang)}</span>
+        <button className="btn-icon" onClick={onAddPage} title={t('pages.addPage', uiLang)}>+</button>
       </div>
       <div className="page-list-body">
         {pages.length === 0 && (
-          <div className="page-list-empty">Generate a store first</div>
+          <div className="page-list-empty">{t('pages.generateFirst', uiLang)}</div>
         )}
         {pages.map(function(pg, idx) {
           var active = pg.id === curPage;
@@ -57,36 +57,41 @@ export default function PageList({ pages, curPage, onSelect, onAddPage, onRename
               )}
               {active && editingId !== pg.id && (
                 <div className="page-actions" onClick={function(e) { e.stopPropagation(); }}>
-                  {idx > 0 && <button className="btn-icon-sm" onClick={function() { movePage(pg.id, -1); }} title="Move up">&uarr;</button>}
-                  {idx < pages.length - 1 && <button className="btn-icon-sm" onClick={function() { movePage(pg.id, 1); }} title="Move down">&darr;</button>}
-                  <button className="btn-icon-sm" onClick={function() { startRename(pg); }} title="Rename">R</button>
-                  {pages.length > 1 && <button className="btn-icon-sm btn-icon-danger" onClick={function() { onDeletePage(pg.id); }} title="Delete">&times;</button>}
+                  {idx > 0 && <button className="btn-icon-sm" onClick={function() { movePage(pg.id, -1); }} title={t('pages.moveUp', uiLang)}>&uarr;</button>}
+                  {idx < pages.length - 1 && <button className="btn-icon-sm" onClick={function() { movePage(pg.id, 1); }} title={t('pages.moveDown', uiLang)}>&darr;</button>}
+                  <button className="btn-icon-sm" onClick={function() { startRename(pg); }} title={t('pages.rename', uiLang)}>R</button>
+                  {pages.length > 1 && <button className="btn-icon-sm btn-icon-danger" onClick={function() { onDeletePage(pg.id); }} title={t('pages.delete', uiLang)}>&times;</button>}
                 </div>
               )}
             </div>
           );
         })}
       </div>
+
+      {/* Saved stores section: collapsed by default, toggle to show */}
       {savedStores && savedStores.length > 0 && (
         <>
-          <div className="page-list-header" style={{ marginTop: 4 }}>
-            <span>Saved Stores</span>
+          <div className="page-list-header saved-header" style={{ marginTop: 4, cursor: 'pointer' }} onClick={onToggleSaved}>
+            <span>{t('pages.savedStores', uiLang)}</span>
+            <span className="btn-icon-sm" style={{ fontSize: 10, fontWeight: 700 }}>{showSaved ? '\u25B2' : '\u25BC'}</span>
           </div>
-          <div className="page-list-body">
-            {savedStores.map(function(s) {
-              return (
-                <div key={s.id} className="saved-store-item">
-                  <div className="saved-store-name" onClick={function() { onLoadSaved(s.id); }}>
-                    {s.brandName}
+          {showSaved && (
+            <div className="page-list-body">
+              {savedStores.map(function(s) {
+                return (
+                  <div key={s.id} className="saved-store-item">
+                    <div className="saved-store-name" onClick={function() { onLoadSaved(s.id); }}>
+                      {s.brandName}
+                    </div>
+                    <div className="saved-store-meta">
+                      {s.pageCount}p &middot; {s.productCount} ASINs
+                    </div>
+                    <button className="btn-icon-sm btn-icon-danger" onClick={function() { onDeleteSaved(s.id); }} title={t('pages.delete', uiLang)}>&times;</button>
                   </div>
-                  <div className="saved-store-meta">
-                    {s.pageCount}p &middot; {s.productCount} ASINs
-                  </div>
-                  <button className="btn-icon-sm btn-icon-danger" onClick={function() { onDeleteSaved(s.id); }} title="Delete">&times;</button>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          )}
         </>
       )}
     </div>

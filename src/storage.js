@@ -11,7 +11,7 @@ export function loadSavedStores() {
   } catch (e) { return []; }
 }
 
-// Manual save — creates a named entry
+// Manual save: creates a named entry
 export function saveStore(store) {
   try {
     var stores = loadSavedStores();
@@ -31,7 +31,7 @@ export function saveStore(store) {
   } catch (e) { console.warn('Save failed:', e.message); return null; }
 }
 
-// Auto-save — overwrites a single slot (no duplicates)
+// Auto-save: overwrites a single slot (no duplicates)
 export function autoSave(store) {
   try {
     localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(store));

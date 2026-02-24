@@ -111,7 +111,7 @@ function getGridConfig(layout, isMobile) {
   };
 }
 
-export default function SectionView({ section, idx, totalSections, sel, onSelect, onDelete, onMoveUp, onMoveDown, onChangeLayout, viewMode, products }) {
+export default function SectionView({ section, idx, totalSections, sel, onSelect, onDelete, onMoveUp, onMoveDown, onChangeLayout, viewMode, products, uiLang }) {
   var layout = LAYOUTS.find(function(l) { return l.id === section.layoutId; }) || LAYOUTS[0];
   var isMobile = viewMode === 'mobile';
   var config = getGridConfig(layout, isMobile);
