@@ -1,8 +1,8 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { uid, emptyTile, LAYOUTS, LANGS, DOMAINS, validateStore } from './constants';
 import { scrapeAsins } from './api';
 import { generateStore, aiRefineStore, applyOperations } from './storeBuilder';
-import { saveStore, loadSavedStores, loadStore, deleteSavedStore } from './storage';
+import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave } from './storage';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
 import Topbar from './components/Topbar';
 import PageList from './components/PageList';
@@ -13,7 +13,7 @@ import GenerateModal from './components/GenerateModal';
 import ProgressModal from './components/ProgressModal';
 import AIChat from './components/AIChat';
 
-var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '' };
+var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null };
 
 export default function App() {
   var [store, setStore] = useState(EMPTY_STORE);
@@ -28,15 +28,24 @@ export default function App() {
   var [chatResponse, setChatResponse] = useState('');
   var [savedStores, setSavedStores] = useState([]);
   var [warnings, setWarnings] = useState([]);
+  var [viewMode, setViewMode] = useState('desktop');
+  var [requestedAsins, setRequestedAsins] = useState([]);
+  var headerBannerInputRef = useRef(null);
 
-  // Load saved stores on mount
-  useEffect(function() { setSavedStores(loadSavedStores()); }, []);
+  // Load saved stores on mount + check for auto-save
+  useEffect(function() {
+    setSavedStores(loadSavedStores());
+    var autoSaved = loadAutoSave();
+    if (autoSaved && autoSaved.pages && autoSaved.pages.length > 0) {
+      setStore(autoSaved);
+      setCurPage(autoSaved.pages[0] ? autoSaved.pages[0].id : '');
+    }
+  }, []);
 
   // Auto-save and validate whenever store changes
   useEffect(function() {
     if (store.pages.length > 0) {
-      saveStore(store);
-      setSavedStores(loadSavedStores());
+      autoSave(store);
       setWarnings(validateStore(store));
     }
   }, [store]);
@@ -52,17 +61,18 @@ export default function App() {
     setGenDone(false);
     setGenLog([]);
     setSel(null);
+    setRequestedAsins(params.asins.slice());
 
     var lang = LANGS[params.marketplace] || 'German';
     var domain = DOMAINS[params.marketplace] || DOMAINS.de;
 
     try {
       // Step 1: Scrape
-      log('🔍 Scraping ' + params.asins.length + ' ASINs from Amazon.' + params.marketplace + '...');
+      log('Scraping ' + params.asins.length + ' ASINs from Amazon.' + params.marketplace + '...');
       var scrapeResult = await scrapeAsins(params.asins, domain);
       var products = scrapeResult.products || [];
       if (!products.length) throw new Error('No products returned from Bright Data');
-      log('✅ Scraped ' + products.length + '/' + params.asins.length + ' products');
+      log('Scraped ' + products.length + '/' + params.asins.length + ' products');
 
       // Step 2-4: AI generation
       var storeData = await generateStore(
@@ -72,9 +82,9 @@ export default function App() {
 
       setStore(storeData);
       setCurPage(storeData.pages[0] ? storeData.pages[0].id : '');
-      log('🎉 Store complete! ' + storeData.pages.length + ' pages, ' + products.length + ' products.');
+      log('Store complete! ' + storeData.pages.length + ' pages, ' + products.length + ' products.');
     } catch (e) {
-      log('❌ ' + e.message);
+      log('Error: ' + e.message);
     } finally {
       setGenDone(true);
       setTimeout(function() { setGenerating(false); }, 2000);
@@ -226,6 +236,15 @@ export default function App() {
   };
 
   // ─── SAVED STORES ───
+  var handleSave = function() {
+    if (!store.pages.length) return;
+    var id = saveStore(store);
+    if (id) {
+      setSavedStores(loadSavedStores());
+      alert('Store saved! (' + (store.brandName || 'Untitled') + ')');
+    }
+  };
+
   var handleLoadSaved = function(id) {
     var data = loadStore(id);
     if (data) {
@@ -238,6 +257,33 @@ export default function App() {
   var handleDeleteSaved = function(id) {
     deleteSavedStore(id);
     setSavedStores(loadSavedStores());
+  };
+
+  // ─── VIEW MODE ───
+  var handleToggleView = function(mode) {
+    setViewMode(mode);
+  };
+
+  // ─── HEADER BANNER ───
+  var handleHeaderBannerUpload = function() {
+    if (!headerBannerInputRef.current) return;
+    headerBannerInputRef.current.click();
+  };
+
+  var handleHeaderBannerFile = function(e) {
+    var f = e.target.files && e.target.files[0];
+    if (!f) return;
+    var reader = new FileReader();
+    reader.onload = function(ev) {
+      var data = ev.target.result;
+      if (viewMode === 'mobile') {
+        setStore(function(s) { return Object.assign({}, s, { headerBannerMobile: data }); });
+      } else {
+        setStore(function(s) { return Object.assign({}, s, { headerBanner: data }); });
+      }
+    };
+    reader.readAsDataURL(f);
+    e.target.value = '';
   };
 
   // ─── EXPORT ───
@@ -289,6 +335,9 @@ export default function App() {
         onGenerate={function() { setShowGen(true); }}
         onShowAsins={function() { setShowAsins(true); }}
         onExport={handleExport}
+        onSave={handleSave}
+        viewMode={viewMode}
+        onToggleView={handleToggleView}
       />
 
       <div className="app-body">
@@ -316,12 +365,16 @@ export default function App() {
           onDeleteSection={deleteSection}
           onMoveSection={moveSection}
           onChangeLayout={changeLayout}
+          viewMode={viewMode}
+          onHeaderBannerUpload={handleHeaderBannerUpload}
+          products={store.products}
         />
 
         <PropertiesPanel
           tile={selTile}
           onChange={updateTile}
           products={store.products}
+          viewMode={viewMode}
         />
       </div>
 
@@ -358,9 +411,15 @@ export default function App() {
           asins={store.asins || []}
           pages={store.pages}
           products={store.products}
+          requestedAsins={requestedAsins}
           onClose={function() { setShowAsins(false); }}
         />
       )}
+
+      {/* Hidden file input for header banner upload */}
+      <input ref={headerBannerInputRef} type="file" accept="image/*"
+        style={{ display: 'none' }}
+        onChange={handleHeaderBannerFile} />
     </div>
   );
 }

@@ -1,23 +1,33 @@
-// ─── LAYOUTS ───
-export const LAYOUTS = [
-  { id: '1', name: 'Full Width', cols: '1fr', cells: 1 },
-  { id: '1-1', name: '2 Equal', cols: '1fr 1fr', cells: 2 },
-  { id: '1-1-1', name: '3 Equal', cols: '1fr 1fr 1fr', cells: 3 },
-  { id: '1-1-1-1', name: '4 Equal', cols: 'repeat(4,1fr)', cells: 4 },
-  { id: '2-1', name: 'Large + Small', cols: '2fr 1fr', cells: 2 },
-  { id: '1-2', name: 'Small + Large', cols: '1fr 2fr', cells: 2 },
-  { id: '2-1-1', name: 'Large + 2 Small', cols: '2fr 1fr 1fr', cells: 3 },
+// ─── LAYOUTS (Desktop + Mobile) ───
+export var LAYOUTS = [
+  { id: '1', name: 'Full Width', cols: '1fr', cells: 1, mobileCols: '1fr' },
+  { id: '1-1', name: '2 Equal', cols: '1fr 1fr', cells: 2, mobileCols: '1fr' },
+  { id: '1-1-1', name: '3 Equal', cols: '1fr 1fr 1fr', cells: 3, mobileCols: '1fr' },
+  { id: '1-1-1-1', name: '4 Equal', cols: 'repeat(4,1fr)', cells: 4, mobileCols: '1fr 1fr' },
+  { id: '2-1', name: 'Large + Small', cols: '2fr 1fr', cells: 2, mobileCols: '1fr' },
+  { id: '1-2', name: 'Small + Large', cols: '1fr 2fr', cells: 2, mobileCols: '1fr' },
+  { id: '2-1-1', name: 'Large + 2 Small', cols: '2fr 1fr 1fr', cells: 3, mobileCols: '1fr' },
+  { id: '1-1-2', name: '2 Small + Large', cols: '1fr 1fr 2fr', cells: 3, mobileCols: '1fr' },
+  // Stacked variants
+  { id: 'lg-2stack', name: 'Large Left + 2 Stacked Right', cols: '2fr 1fr', cells: 3, stacked: 'right', mobileCols: '1fr' },
+  { id: '2stack-lg', name: '2 Stacked Left + Large Right', cols: '1fr 2fr', cells: 3, stacked: 'left', mobileCols: '1fr' },
 ];
 
-export const TILE_TYPES = ['image', 'product_grid', 'video', 'text', 'shoppable_image'];
+export var TILE_TYPES = ['image', 'product_grid', 'best_sellers', 'recommended', 'deals', 'video', 'text', 'shoppable_image', 'image_text'];
 
-export const LANGS = { de: 'German', com: 'English', 'co.uk': 'English', fr: 'French' };
+export var TILE_TYPE_LABELS = {
+  image: 'Image', product_grid: 'Product Grid (ASIN-based)', best_sellers: 'Best Sellers',
+  recommended: 'Recommended Products', deals: 'Deals / Offers', video: 'Video',
+  text: 'Text (native)', shoppable_image: 'Shoppable Image', image_text: 'Image with Text',
+};
 
-export const DOMAINS = {
-  de: 'https://www.amazon.de',
-  com: 'https://www.amazon.com',
-  'co.uk': 'https://www.amazon.co.uk',
-  fr: 'https://www.amazon.fr',
+export var PRODUCT_TILE_TYPES = ['product_grid', 'best_sellers', 'recommended', 'deals'];
+
+export var LANGS = { de: 'German', com: 'English', 'co.uk': 'English', fr: 'French' };
+
+export var DOMAINS = {
+  de: 'https://www.amazon.de', com: 'https://www.amazon.com',
+  'co.uk': 'https://www.amazon.co.uk', fr: 'https://www.amazon.fr',
 };
 
 export function uid() {
@@ -27,13 +37,21 @@ export function uid() {
 export function emptyTile() {
   return {
     type: 'image', brief: '', textOverlay: '', ctaText: '',
-    dimensions: { w: 3000, h: 1200 }, asins: [],
+    dimensions: { w: 3000, h: 1200 }, mobileDimensions: { w: 1242, h: 1200 },
+    asins: [], linkAsin: '', linkUrl: '',
+    uploadedImage: null, uploadedImageMobile: null, videoThumbnail: null,
   };
 }
 
+export var DIMENSION_PRESETS = {
+  desktop: { hero: { w: 3000, h: 600 }, category: { w: 3000, h: 1200 }, lifestyle: { w: 3000, h: 1500 }, video: { w: 3000, h: 1688 } },
+  mobile: { hero: { w: 1242, h: 450 }, category: { w: 1242, h: 1200 }, lifestyle: { w: 1242, h: 1500 }, video: { w: 1242, h: 699 } },
+  headerBanner: { desktop: { w: 3000, h: 600 }, mobile: { w: 1242, h: 450 } },
+};
+
 // ─── BEST-PRACTICE STORE PATTERNS (from real top-performing Brand Stores) ───
 
-export const REFERENCE_STORES = [
+export var REFERENCE_STORES = [
   {
     brand: 'Kaercher',
     style: 'professional/technical, yellow brand color',
@@ -99,7 +117,7 @@ export const REFERENCE_STORES = [
   },
 ];
 
-export const STORE_PATTERNS = {
+export var STORE_PATTERNS = {
   homepage: {
     description: 'Typical structure of successful Amazon Brand Stores',
     sections: [

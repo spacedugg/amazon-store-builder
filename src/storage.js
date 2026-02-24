@@ -1,4 +1,5 @@
 var STORAGE_KEY = 'amazon-store-builder';
+var AUTOSAVE_KEY = 'amazon-store-builder-autosave';
 var MAX_SAVED = 3;
 
 export function loadSavedStores() {
@@ -7,17 +8,15 @@ export function loadSavedStores() {
     if (!raw) return [];
     var stores = JSON.parse(raw);
     return Array.isArray(stores) ? stores : [];
-  } catch (e) {
-    return [];
-  }
+  } catch (e) { return []; }
 }
 
+// Manual save — creates a named entry
 export function saveStore(store) {
   try {
     var stores = loadSavedStores();
-    // Remove existing store with same brand + timestamp combo
     var entry = {
-      id: store.id || Date.now().toString(36),
+      id: Date.now().toString(36) + Math.random().toString(36).slice(2, 5),
       brandName: store.brandName,
       marketplace: store.marketplace || 'de',
       savedAt: new Date().toISOString(),
@@ -25,16 +24,26 @@ export function saveStore(store) {
       productCount: (store.products || []).length,
       data: store,
     };
-    // Prepend
     stores.unshift(entry);
-    // Keep only last MAX_SAVED
     if (stores.length > MAX_SAVED) stores = stores.slice(0, MAX_SAVED);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(stores));
     return entry.id;
-  } catch (e) {
-    console.warn('Failed to save store:', e.message);
-    return null;
-  }
+  } catch (e) { console.warn('Save failed:', e.message); return null; }
+}
+
+// Auto-save — overwrites a single slot (no duplicates)
+export function autoSave(store) {
+  try {
+    localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(store));
+  } catch (e) { /* ignore */ }
+}
+
+export function loadAutoSave() {
+  try {
+    var raw = localStorage.getItem(AUTOSAVE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch (e) { return null; }
 }
 
 export function loadStore(id) {
@@ -48,7 +57,5 @@ export function deleteSavedStore(id) {
     var stores = loadSavedStores();
     stores = stores.filter(function(s) { return s.id !== id; });
     localStorage.setItem(STORAGE_KEY, JSON.stringify(stores));
-  } catch (e) {
-    console.warn('Failed to delete store:', e.message);
-  }
+  } catch (e) { console.warn('Delete failed:', e.message); }
 }
