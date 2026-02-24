@@ -1,4 +1,4 @@
-import { uid, LAYOUTS, REFERENCE_STORES, STORE_PATTERNS } from './constants';
+import { uid, LAYOUTS, REFERENCE_STORES, STORE_PRINCIPLES, MODULE_BAUKASTEN, PRODUCT_COMPLEXITY } from './constants';
 
 var ANTHROPIC_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY || '';
 
@@ -43,7 +43,7 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
       asin: p.asin,
       name: p.name,
       brand: p.brand,
-      description: (p.description || '').slice(0, 150),
+      description: (p.description || '').slice(0, 200),
       price: p.price,
       rating: p.rating,
       reviews: p.reviews,
@@ -52,20 +52,27 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
   });
 
   var system = [
-    'You are an Amazon Brand Store strategist. Analyze the product catalog and create an optimal store structure.',
+    'You are an expert Amazon Brand Store strategist who has analyzed hundreds of top-performing Brand Stores.',
     '',
-    'REFERENCE STORES (best practices):',
+    'YOUR TASK: Analyze the product catalog and create an optimal store structure.',
+    '',
+    'PRODUCT COMPLEXITY CLASSIFICATION (determines store depth):',
+    JSON.stringify(PRODUCT_COMPLEXITY, null, 1),
+    '',
+    'REFERENCE STORES for inspiration:',
     JSON.stringify(REFERENCE_STORES, null, 1),
     '',
-    'MODULE MIX (average of successful stores): 74% image, 13% product_grid, 5% image_text, 4% shoppable_image, 3% text, 1% video',
-    '',
-    'RULES:',
+    'PRINCIPLES:',
     '- Every ASIN must be assigned to exactly ONE category',
     '- Categories should be based on actual product types/use cases, NOT Amazon taxonomy',
     '- If products include multipacks/bundles/sets, create a "Bundles & Sparen" page',
     '- Homepage always exists as the first page',
     '- 2-8 category pages depending on product variety',
+    '- Classify the product complexity: simple, medium, complex, or variantRich',
+    '- The complexity classification drives how many feature/lifestyle/video modules the store needs',
     '- Brand tone must match the product category (technical, lifestyle, playful, premium, etc.)',
+    '- Look at the product descriptions to determine if products have notable features worth highlighting',
+    '- If products come in many variants (colors, materials, sizes), flag as variantRich',
     '',
     'Return ONLY valid JSON, no other text.',
   ].join('\n');
@@ -86,11 +93,18 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
     '  "bundleAsins": ["B0XXX"],',
     '  "suggestedPages": ["Homepage", "Category1", "Category2", ...],',
     '  "brandTone": "professional/technical" or "lifestyle/premium" or "playful/colorful" or "sporty/bold" or "clean/minimal",',
+    '  "productComplexity": "simple" or "medium" or "complex" or "variantRich",',
     '  "heroMessage": "Brand slogan in ' + lang + ' (max 6 words)",',
-    '  "brandStory": "One sentence brand story in ' + lang + '"',
+    '  "brandStory": "One sentence brand story in ' + lang + '",',
+    '  "keyFeatures": ["Feature 1", "Feature 2", ...],',
+    '  "hasVariants": true/false,',
+    '  "variantTypes": ["Colors", "Sizes", ...] or []',
     '}',
     '',
-    'IMPORTANT: Every ASIN from the product list must appear in exactly one category. Do not skip any ASINs.',
+    'IMPORTANT:',
+    '- Every ASIN from the product list must appear in exactly one category. Do not skip any ASINs.',
+    '- Determine productComplexity by looking at product descriptions: simple products need less explanation, complex/technical products need more.',
+    '- keyFeatures: Extract 3-5 notable product features from descriptions that could be highlighted visually.',
   ].filter(Boolean).join('\n');
 
   var text = await callClaude(system, user, 4000);
@@ -108,7 +122,6 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
 
   var missing = allAsins.filter(function(a) { return !assignedAsins[a]; });
   if (missing.length > 0) {
-    // Add missing ASINs to a catch-all category
     var lastCat = result.categories[result.categories.length - 1];
     if (lastCat) {
       lastCat.asins = lastCat.asins.concat(missing);
@@ -118,30 +131,44 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
     }
   }
 
+  if (!result.productComplexity) result.productComplexity = 'medium';
+
   return result;
 }
 
 // ─── STEP 2: LAYOUT PER PAGE ───
-export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, isHomepage, allCategories, brandTone, userInstructions) {
+export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, isHomepage, allCategories, analysis, userInstructions) {
   var productList = pageProducts.map(function(p) {
-    return { asin: p.asin, name: p.name, price: p.price, rating: p.rating, reviews: p.reviews };
+    return { asin: p.asin, name: p.name, price: p.price, rating: p.rating, reviews: p.reviews, description: (p.description || '').slice(0, 100) };
   });
 
   var validLayouts = LAYOUTS.map(function(l) {
     return l.id + ' (' + l.name + ', ' + l.cells + ' tiles)';
   });
 
-  var patternRef = isHomepage ? STORE_PATTERNS.homepage : STORE_PATTERNS.categoryPage;
+  var complexity = PRODUCT_COMPLEXITY[analysis.productComplexity] || PRODUCT_COMPLEXITY.medium;
 
   var system = [
-    'You are an Amazon Brand Store layout designer. Create the section layout for a single page.',
+    'You are an Amazon Brand Store layout designer who creates visually compelling store pages.',
+    'You think in IMAGES, not text. 90% of your modules are image-based.',
     '',
     'VALID LAYOUTS: ' + validLayouts.join(', '),
     '',
-    'VALID TILE TYPES: image, product_grid, video, text, shoppable_image',
+    'VALID TILE TYPES: image, product_grid, video, text, shoppable_image, image_text',
     '',
-    'PAGE PATTERN REFERENCE:',
-    JSON.stringify(patternRef, null, 1),
+    'AVAILABLE MODULE PATTERNS (pick and combine freely):',
+    JSON.stringify(MODULE_BAUKASTEN, null, 1),
+    '',
+    'COMPOSITION PRINCIPLES:',
+    JSON.stringify(STORE_PRINCIPLES, null, 1),
+    '',
+    'PRODUCT COMPLEXITY: ' + analysis.productComplexity + ' — ' + complexity.description,
+    'APPROACH: ' + complexity.approach,
+    'TARGET MIX: ~' + complexity.imagePct + '% image, ~' + (complexity.productGridPct || 15) + '% product_grid' + (complexity.videoPct ? ', ~' + complexity.videoPct + '% video' : ''),
+    '',
+    'BRAND TONE: ' + (analysis.brandTone || 'professional'),
+    analysis.keyFeatures ? 'KEY FEATURES TO HIGHLIGHT: ' + analysis.keyFeatures.join(', ') : '',
+    analysis.hasVariants ? 'PRODUCT VARIANTS: ' + (analysis.variantTypes || []).join(', ') + ' — consider variant showcase modules' : '',
     '',
     'DIMENSION RULES:',
     '- Hero images: 3000 x 600-800',
@@ -151,19 +178,21 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '- All tiles in a row have the SAME height',
     '',
     'TEXT RULES:',
-    '- textOverlay: The text that will be designed INTO the image (headlines, slogans, category names). In store language.',
+    '- textOverlay: Text designed INTO the image (headlines, slogans, category names). In store language.',
     '- ctaText: CTA button text designed into image ("Jetzt entdecken", "Shop now"). In store language.',
-    '- brief: ENGLISH instructions for the designer describing what the image should show (style, mood, content).',
-    '- Native text module: ONLY for section headings between image blocks, or for legal/compliance text. NOT for marketing.',
+    '- brief: ENGLISH instructions for the designer describing image content/style/mood.',
+    '- Native text module: ONLY for section headings between image blocks. NOT for marketing.',
     '',
-    'BRAND TONE: ' + brandTone,
-    '',
-    'IMPORTANT:',
+    'CRITICAL RULES:',
     '- Number of tiles per section MUST match the layout (e.g. layout "1-1-1" = exactly 3 tiles)',
     '- ALL ASINs must be placed in exactly ONE product_grid tile',
     '- product_grid tiles need asins array. Image tiles need brief + dimensions.',
+    '- Use VARIED layouts. Not all sections should be full-width. Mix 1-col, 2-col, 3-col, stacked.',
+    '- Create visual rhythm: alternate between wide/narrow, image/product, lifestyle/feature.',
+    '- For simple products: fewer sections, more product grids, lifestyle imagery.',
+    '- For complex products: more feature modules, videos, detailed briefs.',
     '- Return ONLY valid JSON, no other text.',
-  ].join('\n');
+  ].filter(Boolean).join('\n');
 
   var user = [
     'Page: "' + pageName + '" (' + (isHomepage ? 'HOMEPAGE' : 'Category subpage') + ')',
@@ -183,32 +212,38 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '      "role": "hero",',
     '      "tiles": [{',
     '        "type": "image",',
-    '        "brief": "English designer instruction...",',
+    '        "brief": "English designer instruction describing the image...",',
     '        "textOverlay": "Brand slogan in store language",',
     '        "ctaText": "CTA text or empty",',
     '        "dimensions": {"w": 3000, "h": 700}',
     '      }]',
     '    },',
-    '    {',
-    '      "layoutId": "1-1-1",',
-    '      "role": "categories",',
-    '      "tiles": [',
-    '        {"type": "image", "brief": "...", "textOverlay": "Cat Name", "ctaText": "Jetzt entdecken", "dimensions": {"w": 3000, "h": 1200}},',
-    '        {"type": "image", "brief": "...", "textOverlay": "Cat Name", "ctaText": "Jetzt entdecken", "dimensions": {"w": 3000, "h": 1200}},',
-    '        {"type": "image", "brief": "...", "textOverlay": "Cat Name", "ctaText": "Jetzt entdecken", "dimensions": {"w": 3000, "h": 1200}}',
-    '      ]',
-    '    },',
-    '    {',
-    '      "layoutId": "1",',
-    '      "role": "products",',
-    '      "tiles": [{"type": "product_grid", "brief": "", "textOverlay": "", "ctaText": "", "dimensions": {"w": 3000, "h": 1200}, "asins": ["B0XXX", ...]}]',
-    '    }',
+    '    ... more sections',
     '  ]',
     '}',
     '',
     isHomepage
-      ? 'For homepage: Include hero, category tiles linking to subpages, bestseller product grid (top 5 by rating), and optionally lifestyle/brand story sections.'
-      : 'For category page: Include category hero, optional feature/lifestyle sections, and a product grid with ALL ' + pageProducts.length + ' ASINs for this category.',
+      ? [
+          'For homepage: Build a compelling brand entrance.',
+          '1. Hero banner with brand slogan.',
+          '2. Category navigation tiles (choose layout based on number of categories).',
+          '3. Optional: Bestseller product grid (top 5 by rating).',
+          '4. Optional: Lifestyle/brand story section.',
+          '5. Optional: Video module (if complex/technical products).',
+          '6. Optional: Trust/testimonial section.',
+          'Use varied layouts. Create visual interest through different section widths.',
+        ].join('\n')
+      : [
+          'For category page "' + pageName + '": Showcase this category.',
+          '1. Category hero banner (lifestyle shot of category products).',
+          analysis.productComplexity === 'complex' || analysis.productComplexity === 'variantRich'
+            ? '2. Feature/USP sections showing product benefits (use varied layouts like lg-2stack, 1-1, 1-1-1).'
+            : '2. Optional: Lifestyle section showing products in use.',
+          '3. Product grid with ALL ' + pageProducts.length + ' ASINs.',
+          analysis.hasVariants ? '4. Optional: Variant showcase if products come in multiple variants.' : '',
+          '5. Optional: Cross-sell section linking to related categories.',
+          'Mix image and product_grid sections. Create visual breathing room.',
+        ].filter(Boolean).join('\n'),
   ].filter(Boolean).join('\n');
 
   var text = await callClaude(system, user, 4000);
@@ -221,7 +256,6 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
       sec.layoutId = '1';
       layout = LAYOUTS[0];
     }
-    // Ensure tile count matches layout
     while (sec.tiles.length < layout.cells) {
       sec.tiles.push({
         type: 'image', brief: 'Additional image tile', textOverlay: '', ctaText: '',
@@ -231,7 +265,6 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     if (sec.tiles.length > layout.cells) {
       sec.tiles = sec.tiles.slice(0, layout.cells);
     }
-    // Ensure every tile has required fields
     sec.tiles.forEach(function(t) {
       if (!t.type) t.type = 'image';
       if (!t.brief) t.brief = '';
@@ -240,7 +273,6 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
       if (!t.dimensions) t.dimensions = { w: 3000, h: 1200 };
       if (!t.asins) t.asins = [];
     });
-    // Add uid
     sec.id = uid();
   });
 
@@ -282,7 +314,10 @@ export async function aiRefineStore(store, command, brand, lang) {
     storeSnapshot,
     '',
     'Valid layouts: ' + validLayouts.join(', '),
-    'Valid tile types: image, product_grid, video, text, shoppable_image',
+    'Valid tile types: image, product_grid, video, text, shoppable_image, image_text',
+    '',
+    'Available module patterns for inspiration:',
+    JSON.stringify(MODULE_BAUKASTEN, null, 1),
     '',
     'Return a JSON object describing the changes to make. Possible operations:',
     '{',
@@ -408,20 +443,24 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   var log = onLog || function() {};
 
   // STEP 1: AI Analysis
-  log('📊 AI analyzing product catalog and planning store structure...');
+  log('AI analyzing product catalog and planning store structure...');
   var analysis;
   try {
     analysis = await aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions);
   } catch (err) {
-    log('⚠️ AI analysis failed (' + err.message + '), falling back to deterministic grouping...');
+    log('AI analysis failed (' + err.message + '), falling back to deterministic grouping...');
     analysis = fallbackAnalysis(products, brand, lang);
   }
 
-  log('✅ Structure planned: ' + (analysis.suggestedPages || []).length + ' pages');
+  log('Structure planned: ' + (analysis.suggestedPages || []).length + ' pages');
   log('   Brand tone: ' + (analysis.brandTone || 'professional'));
+  log('   Product complexity: ' + (analysis.productComplexity || 'medium'));
   log('   Hero: "' + (analysis.heroMessage || brand) + '"');
+  if (analysis.keyFeatures && analysis.keyFeatures.length > 0) {
+    log('   Key features: ' + analysis.keyFeatures.join(', '));
+  }
   (analysis.categories || []).forEach(function(cat) {
-    log('   · ' + cat.name + ': ' + (cat.asins || []).length + ' products');
+    log('   ' + cat.name + ': ' + (cat.asins || []).length + ' products');
   });
 
   // Build product lookup
@@ -431,18 +470,18 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   var pages = [];
 
   // STEP 2: Generate Homepage Layout
-  log('🏗️ AI designing Homepage layout...');
+  log('AI designing Homepage layout...');
   var homepageProducts = products.slice().sort(function(a, b) { return (b.reviews || 0) - (a.reviews || 0); }).slice(0, 10);
   try {
     var homeResult = await aiGeneratePageLayout(
       'Homepage', homepageProducts, brand, lang, true,
-      analysis.categories || [], analysis.brandTone || 'professional', userInstructions
+      analysis.categories || [], analysis, userInstructions
     );
     pages.push({ id: 'homepage', name: 'Homepage', sections: homeResult.sections || [] });
-    log('✅ Homepage: ' + (homeResult.sections || []).length + ' sections');
+    log('Homepage: ' + (homeResult.sections || []).length + ' sections');
   } catch (err) {
-    log('⚠️ AI homepage failed (' + err.message + '), using fallback...');
-    pages.push(fallbackHomepage(brand, lang, analysis.categories || [], products));
+    log('AI homepage failed (' + err.message + '), using fallback...');
+    pages.push(fallbackHomepage(brand, lang, analysis.categories || [], products, analysis));
   }
 
   // STEP 3: Generate Category Pages
@@ -452,17 +491,17 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     var catProducts = (cat.asins || []).map(function(a) { return productMap[a]; }).filter(Boolean);
     if (catProducts.length === 0) continue;
 
-    log('🏗️ AI designing "' + cat.name + '" page (' + catProducts.length + ' products)...');
+    log('AI designing "' + cat.name + '" page (' + catProducts.length + ' products)...');
     try {
       var catResult = await aiGeneratePageLayout(
         cat.name, catProducts, brand, lang, false,
-        categories, analysis.brandTone || 'professional', userInstructions
+        categories, analysis, userInstructions
       );
       pages.push({ id: 'cat-' + ci, name: cat.name, sections: catResult.sections || [] });
-      log('✅ ' + cat.name + ': ' + (catResult.sections || []).length + ' sections');
+      log(cat.name + ': ' + (catResult.sections || []).length + ' sections');
     } catch (err) {
-      log('⚠️ "' + cat.name + '" failed (' + err.message + '), using fallback...');
-      pages.push(fallbackCategoryPage('cat-' + ci, cat.name, catProducts, lang));
+      log('"' + cat.name + '" failed (' + err.message + '), using fallback...');
+      pages.push(fallbackCategoryPage('cat-' + ci, cat.name, catProducts, lang, analysis));
     }
   }
 
@@ -470,7 +509,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   if (analysis.hasBundles && analysis.bundleAsins && analysis.bundleAsins.length > 0) {
     var bundleProducts = (analysis.bundleAsins || []).map(function(a) { return productMap[a]; }).filter(Boolean);
     if (bundleProducts.length > 0) {
-      log('🏗️ Creating Bundles & Sparen page...');
+      log('Creating Bundles & Sparen page...');
       pages.push({
         id: 'bundles',
         name: lang === 'German' ? 'Bundles & Sparen' : 'Bundles & Savings',
@@ -479,7 +518,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
             id: uid(), layoutId: '1',
             tiles: [{
               type: 'image',
-              brief: 'Bundle/savings hero banner for ' + brand + '. Show multiple products together with savings messaging.',
+              brief: 'Bundle/savings hero banner for ' + brand + '. Show multiple products together with savings messaging. Brand tone: ' + (analysis.brandTone || 'professional') + '.',
               textOverlay: lang === 'German' ? 'Bundles & Sparen' : 'Bundles & Savings',
               ctaText: '', dimensions: { w: 3000, h: 700 }, asins: [],
             }],
@@ -494,7 +533,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
           },
         ],
       });
-      log('✅ Bundles page: ' + bundleProducts.length + ' products');
+      log('Bundles page: ' + bundleProducts.length + ' products');
     }
   }
 
@@ -517,12 +556,11 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     });
   });
   var assignedCount = products.filter(function(p) { return usedAsins[p.asin]; }).length;
-  log('✅ ' + assignedCount + '/' + products.length + ' ASINs assigned to product grids');
+  log(assignedCount + '/' + products.length + ' ASINs assigned to product grids');
 
   if (assignedCount < products.length) {
     var unassigned = products.filter(function(p) { return !usedAsins[p.asin]; });
-    log('⚠️ ' + unassigned.length + ' unassigned ASINs — adding to nearest category page...');
-    // Find first category page with a product_grid and add them
+    log(unassigned.length + ' unassigned ASINs — adding to nearest category page...');
     var added = false;
     for (var pi = 1; pi < pages.length && !added; pi++) {
       var pg = pages[pi];
@@ -539,7 +577,6 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       }
     }
     if (!added && pages.length > 0) {
-      // Create a catch-all section on the last page
       var lastPage = pages[pages.length - 1];
       lastPage.sections.push({
         id: uid(), layoutId: '1',
@@ -552,12 +589,16 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     }
   }
 
+  log('Store generation complete!');
+
   return {
     brandName: brand,
     marketplace: marketplace,
     brandTone: analysis.brandTone || 'professional',
+    productComplexity: analysis.productComplexity || 'medium',
     heroMessage: analysis.heroMessage || brand,
     brandStory: analysis.brandStory || '',
+    keyFeatures: analysis.keyFeatures || [],
     products: products,
     pages: pages,
     asins: asinList,
@@ -603,22 +644,28 @@ function fallbackAnalysis(products, brand, lang) {
     bundleAsins: [],
     suggestedPages: suggestedPages,
     brandTone: 'professional',
+    productComplexity: 'medium',
     heroMessage: brand,
     brandStory: '',
+    keyFeatures: [],
+    hasVariants: false,
+    variantTypes: [],
   };
 }
 
-function fallbackHomepage(brand, lang, categories, products) {
+function fallbackHomepage(brand, lang, categories, products, analysis) {
   var sections = [];
   var cta = lang === 'German' ? 'Jetzt entdecken' : 'Shop now';
+  var complexity = (analysis && analysis.productComplexity) || 'medium';
 
   // Hero
   sections.push({
     id: uid(), layoutId: '1',
     tiles: [{
       type: 'image',
-      brief: 'Hero banner for ' + brand + '. Lifestyle photo showcasing the brand world.',
-      textOverlay: brand, ctaText: '', dimensions: { w: 3000, h: 700 }, asins: [],
+      brief: 'Hero banner for ' + brand + '. Lifestyle photo showcasing the brand world. Brand tone: ' + (analysis.brandTone || 'professional') + '.',
+      textOverlay: (analysis && analysis.heroMessage) || brand,
+      ctaText: '', dimensions: { w: 3000, h: 700 }, asins: [],
     }],
   });
 
@@ -629,7 +676,7 @@ function fallbackHomepage(brand, lang, categories, products) {
     sections.push({
       id: uid(), layoutId: layoutId,
       tiles: catNames.map(function(cat) {
-        return { type: 'image', brief: 'Category tile for "' + cat + '".', textOverlay: cat, ctaText: cta, dimensions: { w: 3000, h: 1200 }, asins: [] };
+        return { type: 'image', brief: 'Category tile for "' + cat + '". Lifestyle photo with category name overlay.', textOverlay: cat, ctaText: cta, dimensions: { w: 3000, h: 1200 }, asins: [] };
       }),
     });
   } else if (catNames.length > 4) {
@@ -638,7 +685,7 @@ function fallbackHomepage(brand, lang, categories, products) {
     sections.push({
       id: uid(), layoutId: '1-1-1-1',
       tiles: row1.map(function(cat) {
-        return { type: 'image', brief: 'Category tile for "' + cat + '".', textOverlay: cat, ctaText: cta, dimensions: { w: 3000, h: 1200 }, asins: [] };
+        return { type: 'image', brief: 'Category tile for "' + cat + '". Lifestyle photo with category name overlay.', textOverlay: cat, ctaText: cta, dimensions: { w: 3000, h: 1200 }, asins: [] };
       }),
     });
     if (row2.length > 0) {
@@ -646,7 +693,7 @@ function fallbackHomepage(brand, lang, categories, products) {
       sections.push({
         id: uid(), layoutId: lid,
         tiles: row2.map(function(cat) {
-          return { type: 'image', brief: 'Category tile for "' + cat + '".', textOverlay: cat, ctaText: cta, dimensions: { w: 3000, h: 1200 }, asins: [] };
+          return { type: 'image', brief: 'Category tile for "' + cat + '". Lifestyle photo with category name overlay.', textOverlay: cat, ctaText: cta, dimensions: { w: 3000, h: 1200 }, asins: [] };
         }),
       });
     }
@@ -661,12 +708,23 @@ function fallbackHomepage(brand, lang, categories, products) {
     });
   }
 
+  // Lifestyle section (for medium/complex)
+  if (complexity !== 'simple') {
+    sections.push({
+      id: uid(), layoutId: '1-1',
+      tiles: [
+        { type: 'image', brief: 'Lifestyle shot showing ' + brand + ' products in real-world use. ' + (analysis.brandTone || 'Professional') + ' mood.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+        { type: 'image', brief: 'Second lifestyle image for ' + brand + '. Different use case or target audience.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+      ],
+    });
+  }
+
   // Brand story
   sections.push({
     id: uid(), layoutId: '1',
     tiles: [{
       type: 'image',
-      brief: 'Brand story image for ' + brand + '.',
+      brief: 'Brand story banner for ' + brand + '. Communicate brand values and identity.',
       textOverlay: lang === 'German' ? 'Unsere Geschichte' : 'Our Story',
       ctaText: '', dimensions: { w: 3000, h: 600 }, asins: [],
     }],
@@ -675,20 +733,35 @@ function fallbackHomepage(brand, lang, categories, products) {
   return { id: 'homepage', name: 'Homepage', sections: sections };
 }
 
-function fallbackCategoryPage(id, name, catProducts, lang) {
+function fallbackCategoryPage(id, name, catProducts, lang, analysis) {
   var cta = lang === 'German' ? 'Jetzt entdecken' : 'Shop now';
   var sections = [];
+  var complexity = (analysis && analysis.productComplexity) || 'medium';
 
+  // Hero
   sections.push({
     id: uid(), layoutId: '1',
     tiles: [{
       type: 'image',
-      brief: 'Category hero for "' + name + '". Lifestyle photo showing products in use.',
+      brief: 'Category hero for "' + name + '". Lifestyle photo showing ' + name + ' products in use. Brand tone: ' + ((analysis && analysis.brandTone) || 'professional') + '.',
       textOverlay: name, ctaText: '', dimensions: { w: 3000, h: 700 }, asins: [],
     }],
   });
 
-  if (catProducts.length >= 5) {
+  // Feature section for complex products
+  if ((complexity === 'complex' || complexity === 'variantRich') && catProducts.length >= 3) {
+    sections.push({
+      id: uid(), layoutId: '1-1-1',
+      tiles: [
+        { type: 'image', brief: 'Feature/USP tile 1 for "' + name + '". Show a key product benefit with icon or visual.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+        { type: 'image', brief: 'Feature/USP tile 2 for "' + name + '". Second key benefit.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+        { type: 'image', brief: 'Feature/USP tile 3 for "' + name + '". Third key benefit.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+      ],
+    });
+  }
+
+  // Lifestyle for medium+ complexity
+  if (complexity !== 'simple' && catProducts.length >= 5) {
     sections.push({
       id: uid(), layoutId: '1',
       tiles: [{
@@ -699,6 +772,7 @@ function fallbackCategoryPage(id, name, catProducts, lang) {
     });
   }
 
+  // Product grid
   sections.push({
     id: uid(), layoutId: '1',
     tiles: [{
