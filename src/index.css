@@ -103,11 +103,9 @@ textarea.input { resize: vertical; min-height: 44px; }
 .section-actions { margin-left: auto; display: flex; gap: 2px; }
 .section-tiles { display: grid; gap: 3px; padding: 3px; }
 
-/* Stacked layouts: grid-row spanning */
-.section-tiles-stacked-right { grid-template-rows: 1fr 1fr; }
-.section-tiles-stacked-right > *:first-child { grid-row: 1 / 3; }
-.section-tiles-stacked-left { grid-template-rows: 1fr 1fr; }
-.section-tiles-stacked-left > *:nth-child(3) { grid-row: 1 / 3; grid-column: 2; }
+/* Grid tiles fill their cells properly */
+.section-tiles > div { min-height: 0; }
+.section-tiles > div > .tile { height: 100%; }
 
 /* ─── ADD SECTION ─── */
 .add-section-bar { text-align: center; padding: 10px; }
