@@ -49,129 +49,135 @@ export var DIMENSION_PRESETS = {
   headerBanner: { desktop: { w: 3000, h: 600 }, mobile: { w: 1242, h: 450 } },
 };
 
-// ─── BEST-PRACTICE STORE PATTERNS (from real top-performing Brand Stores) ───
+// ─── MODULE BAUKASTEN (Building Blocks for Amazon Brand Stores) ───
+// Composable modules — the AI picks and combines them based on brand,
+// product complexity, and available content. NOT rigid templates.
 
+export var MODULE_BAUKASTEN = {
+  hero: {
+    fullWidthHero: { description: 'Full-width hero banner with brand message or campaign', layout: '1', tileType: 'image', dims: { w: 3000, h: [600, 800] } },
+    splitHero: { description: 'Hero split into two halves (lifestyle left + product right)', layout: '1-1', tileType: 'image', dims: { w: 3000, h: [800, 1200] } },
+  },
+  categoryNav: {
+    grid2col: { description: '2-column category tiles with lifestyle + category name overlay', layout: '1-1', tileType: 'image' },
+    grid3col: { description: '3-column category tiles', layout: '1-1-1', tileType: 'image' },
+    grid4col: { description: '4-column category tiles', layout: '1-1-1-1', tileType: 'image' },
+    largeAndSmall: { description: 'One large category + 2 stacked smaller ones', layout: 'lg-2stack', tileType: 'image' },
+  },
+  products: {
+    fullWidthGrid: { description: 'Full-width product grid with category ASINs', layout: '1', tileType: 'product_grid' },
+    productLifestylePairing: { description: 'Product grid next to lifestyle image (alternate sides for rhythm)', layout: '1-1' },
+    shoppableImage: { description: 'Shoppable lifestyle image with clickable products', layout: '1', tileType: 'shoppable_image' },
+  },
+  lifestyle: {
+    fullWidthLifestyle: { description: 'Full-width lifestyle image showing products in context', layout: '1', tileType: 'image', dims: { w: 3000, h: [1200, 1500] } },
+    lifestyleSplit: { description: 'Two lifestyle images side by side (different use cases)', layout: '1-1', tileType: 'image' },
+    alternatingPairing: { description: 'Alternating: Lifestyle left+Product right, then reversed next section', layout: '1-1' },
+  },
+  features: {
+    featureGrid3col: { description: '3-column feature/benefit tiles (icon+text designed into image)', layout: '1-1-1', tileType: 'image' },
+    featureGrid4col: { description: '4-column feature tiles', layout: '1-1-1-1', tileType: 'image' },
+    featureLargeAndDetails: { description: 'Large feature image left + 2 stacked detail images right', layout: 'lg-2stack', tileType: 'image' },
+    featureSplit: { description: 'Product photo left, USP bullets designed into image right', layout: '1-1', tileType: 'image' },
+  },
+  video: {
+    fullWidthVideo: { description: 'Full-width video section', layout: '1', tileType: 'video', dims: { w: 3000, h: 1688 } },
+    videoWithContext: { description: 'Video next to lifestyle/feature image', layout: '1-1' },
+  },
+  text: {
+    sectionHeading: { description: 'Native text as section heading ONLY', layout: '1', tileType: 'text' },
+  },
+  trust: {
+    testimonialBanner: { description: 'Customer quotes/reviews designed into banner', layout: '1', tileType: 'image' },
+    certificationGrid: { description: 'Certification/trust badges in a row', layout: '1-1-1', tileType: 'image' },
+    trustSplit: { description: 'Brand story / about us split section', layout: '1-1', tileType: 'image' },
+  },
+  variants: {
+    colorShowcase: { description: 'Product in multiple colors/variants as grid', layout: '1-1-1-1', tileType: 'image' },
+    variantBanner: { description: 'All variants in one designed banner', layout: '1', tileType: 'image' },
+  },
+  footer: {
+    categoryNavFooter: { description: 'Category navigation tiles at page bottom', layout: '1-1-1-1', tileType: 'image' },
+    crossSellBanner: { description: 'Cross-sell banner linking to related category', layout: '1', tileType: 'image' },
+  },
+};
+
+// ─── PRODUCT COMPLEXITY CLASSIFICATION ───
+export var PRODUCT_COMPLEXITY = {
+  simple: {
+    description: 'Simple, self-explanatory products (socks, basic clothing, accessories)',
+    approach: 'Heavy on product grids and lifestyle imagery. Minimal feature explanation.',
+    imagePct: 80, productGridPct: 15, otherPct: 5,
+  },
+  medium: {
+    description: 'Products with some USPs (organic food, special materials, branded items)',
+    approach: 'Mix of product display and feature highlights. Some USP modules.',
+    imagePct: 70, productGridPct: 15, otherPct: 15,
+  },
+  complex: {
+    description: 'Technical/feature-rich products (electronics, appliances, equipment)',
+    approach: 'Rich feature showcases, videos, technical details alongside product grids.',
+    imagePct: 65, productGridPct: 10, videoPct: 10, otherPct: 15,
+  },
+  variantRich: {
+    description: 'Products with many colors/sizes/materials (furniture, fashion, customizable)',
+    approach: 'Showcase variants prominently. Color/material grids alongside product grids.',
+    imagePct: 75, productGridPct: 15, otherPct: 10,
+  },
+};
+
+// ─── REFERENCE STORES (real top-performing Amazon Brand Stores) ───
 export var REFERENCE_STORES = [
-  {
-    brand: 'Kaercher',
-    style: 'professional/technical, yellow brand color',
-    homepage: '8 categories in 4x2 grid, image-only, yellow bar overlay with category name',
-    modules: '85% image, 15% product grid, NO native text',
-    keyPattern: 'Category tiles with lifestyle photo + colored overlay bar with text',
-  },
-  {
-    brand: 'Nespresso',
-    style: 'premium/luxury, dark tones',
-    homepage: 'Hero + campaign banner + 2 category blocks (Original/Vertuo) in 2-1-1 layout + quiz section + accessories grid + sustainability text + footer',
-    modules: '75% image, 15% native text, 10% product grid',
-    keyPattern: 'Uses native text for section headings and sustainability content. image_text for quiz section.',
-  },
-  {
-    brand: 'ESN',
-    style: 'dark/sporty, bold, athletic',
-    homepage: 'Hero + lifestyle B/W + 2x2 category tiles + product band + brand story split',
-    modules: '95% image, 5% product grid, NO native text',
-    keyPattern: 'Categories as 2-col image tiles with CTA buttons designed into the image',
-  },
-  {
-    brand: 'Affenzahn',
-    style: 'colorful, playful, children-oriented',
-    homepage: 'Colorful images, animal characters, category tiles',
-    modules: '80% image, 20% product grid',
-    keyPattern: 'Character-based category navigation, bright colors',
-  },
-  {
-    brand: 'AG1',
-    style: 'clean/health, green tones, single-product focus',
-    homepage: 'Hero + product banner + product grid + ingredients section (image_text modules)',
-    modules: '50% image, 25% image_text, 25% product grid',
-    keyPattern: 'Uses image_text modules for ingredient/feature highlights in a 3x2 grid',
-  },
-  {
-    brand: 'SNOCKS',
-    style: 'minimalist, clean, modern',
-    homepage: 'Category grid as 4x2 image_text tiles with lifestyle photo + category label overlay',
-    modules: '95% image/image_text, 5% product grid',
-    keyPattern: 'Subcategory-focused grid layout, each tile = lifestyle + text label',
-  },
-  {
-    brand: 'Bears with Benefits',
-    style: 'pink/lifestyle, feminine, testimonial-heavy',
-    homepage: 'Hero split + shoppable image + alternating lifestyle/icon tiles + testimonials',
-    modules: '80% image, 10% shoppable, 10% product grid',
-    keyPattern: 'Shoppable images for product discovery, testimonial sections with designed quotes',
-  },
-  {
-    brand: 'Holy Energy',
-    style: 'bold colors, energetic, youth-oriented',
-    homepage: 'Hero + banner + VIDEO module + more image sections',
-    modules: '85% image, 10% video, 5% product grid',
-    keyPattern: 'Video module for product unboxing/experience',
-  },
-  {
-    brand: 'nucao',
-    style: 'pink/playful, sustainable, food',
-    homepage: 'Hero with slogan + 2-col category tiles + product grid dominant',
-    modules: '75% image, 25% product grid',
-    keyPattern: 'Product grid-heavy, fewer image sections, fun brand voice',
-  },
+  { brand: 'Kaercher', style: 'professional/technical, yellow brand color', complexity: 'complex',
+    keyPattern: 'Category tiles with lifestyle photo + colored overlay bar. 85% image. No native text.' },
+  { brand: 'Nespresso', style: 'premium/luxury, dark tones', complexity: 'medium',
+    keyPattern: 'Native text ONLY for section headings. image_text for quiz. Dark lifestyle + gold accents. Large+2stack layout.' },
+  { brand: 'ESN', style: 'dark/sporty, bold, athletic', complexity: 'medium',
+    keyPattern: '2-col category tiles with CTA designed into images. 95% image, no native text.' },
+  { brand: 'Affenzahn', style: 'colorful, playful, children-oriented', complexity: 'simple',
+    keyPattern: 'Character-based category nav, bright colors, playful CTAs.' },
+  { brand: 'AG1', style: 'clean/health, green tones', complexity: 'medium',
+    keyPattern: 'image_text modules for ingredient highlights in 3x2 grid.' },
+  { brand: 'SNOCKS', style: 'minimalist, clean, modern', complexity: 'simple',
+    keyPattern: '4x2 image_text tiles (lifestyle+label). Large-left/2-stacked-right layout.' },
+  { brand: 'Bears with Benefits', style: 'pink/feminine, testimonial-heavy', complexity: 'medium',
+    keyPattern: 'Shoppable images. Alternating lifestyle/icon tiles. Testimonials with designed quotes.' },
+  { brand: 'Dyson', style: 'premium/tech, dark backgrounds', complexity: 'complex',
+    keyPattern: 'Background video tiles per product line. Feature-heavy with exploded views.' },
+  { brand: 'air up', style: 'colorful/modern, Gen-Z oriented', complexity: 'variantRich',
+    keyPattern: 'Alternating ASIN/lifestyle pairings. Variant showcase. 4-col category nav footer.' },
+  { brand: 'Desktronic', style: 'modern/tech, clean', complexity: 'complex',
+    keyPattern: 'Background video tiles. Feature comparison. Variant/color showcase grid.' },
 ];
 
-export var STORE_PATTERNS = {
-  homepage: {
-    description: 'Typical structure of successful Amazon Brand Stores',
-    sections: [
-      { role: 'hero', description: 'Full-width hero banner with brand message/slogan', layout: '1', tileType: 'image', dims: { w: 3000, h: [600, 800] } },
-      { role: 'categories', description: 'Category grid, layout depends on number of categories (2-col, 3-col, 4-col, or 4x2)', tileType: 'image' },
-      { role: 'bestsellers', description: 'Optional: Top products as Product Grid (based on ratings/reviews)', tileType: 'product_grid' },
-      { role: 'lifestyle', description: 'Optional: Lifestyle/brand-story image showing products in use', layout: '1', tileType: 'image', dims: { w: 3000, h: [1200, 1500] } },
-      { role: 'video', description: 'Optional: Brand video for product experience', layout: '1', tileType: 'video' },
-      { role: 'trust', description: 'Optional: Testimonials, certifications, trust elements', tileType: 'image' },
-    ],
-  },
-  categoryPage: {
-    description: 'Typical structure of a category subpage',
-    sections: [
-      { role: 'hero', description: 'Category hero with lifestyle photo of category products', layout: '1', tileType: 'image', dims: { w: 3000, h: [600, 800] } },
-      { role: 'features', description: 'Optional: USPs/features of the category (2-col or 3-col image tiles)', tileType: 'image' },
-      { role: 'products', description: 'Product Grid with ALL category ASINs', layout: '1', tileType: 'product_grid' },
-      { role: 'lifestyle', description: 'Optional: Additional lifestyle images showing products in context', tileType: 'image' },
-      { role: 'crosssell', description: 'Optional: Related categories as image links', tileType: 'image' },
-    ],
-  },
-  bundlePage: {
-    description: 'For brands with bundles/multipacks/savings offers',
-    sections: [
-      { role: 'hero', description: 'Bundle hero with savings message', layout: '1', tileType: 'image', dims: { w: 3000, h: [600, 800] } },
-      { role: 'products', description: 'All bundle ASINs in a product grid', layout: '1', tileType: 'product_grid' },
-    ],
-  },
-  moduleMix: {
-    image: 0.74,
-    product_grid: 0.13,
-    image_text: 0.05,
-    shoppable_image: 0.04,
-    text: 0.03,
-    video: 0.01,
-  },
-  textRules: {
-    heroOverlay: 'Max 6 words, brand slogan or main message',
-    categoryOverlay: 'Category name, optionally with subtitle',
-    cta: "Short: 'Jetzt entdecken', 'Mehr erfahren', 'Shop now'",
-    brief: 'English, for the designer, describes image content/style/mood',
-    nativeText: 'ONLY for section headings or legal text, NOT for marketing content',
-  },
-  imageDimensions: {
-    hero: { w: 3000, h: [600, 800] },
-    categoryTile: { w: 3000, h: [1000, 1200] },
-    lifestyle: { w: 3000, h: [1200, 1500] },
-    brandStory: { w: 3000, h: [400, 600] },
-  },
-  nativeTextUsage: [
-    'Section headings between image sections (like Nespresso: "ZWEI EINZIGARTIGE KAFFEE-ERLEBNISSE")',
-    'Longer body text for sustainability/compliance/legal (like Nespresso B-Corp)',
-    'image_text subtitle labels (like AG1 ingredient labels "MINERALSTOFFE")',
-    'NEVER for main content messaging - that goes INTO images as designed text overlays',
+// ─── STORE COMPOSITION PRINCIPLES ───
+export var STORE_PRINCIPLES = {
+  general: [
+    '90% of modules are image-based (image, shoppable_image, image_text). Text is designed INTO images.',
+    'Native text modules ONLY for section headings or legal/compliance. NEVER for marketing.',
+    'Visual communication beats text. Show, dont tell.',
+    'Every page: Hero -> Content -> Products -> Cross-sell.',
+    'CTA text and headlines are designed INTO images, not as separate text modules.',
+    'Each tile in a row must have the SAME height.',
+    'Think in image pairs and trios, not isolated tiles.',
+  ],
+  homepage: [
+    'Homepage = brand entrance. Communicate brand world visually.',
+    'Hero banner with slogan/campaign. Category navigation tiles linking to subpages.',
+    'Optional: Bestseller grid, brand story, lifestyle, video.',
+    'Homepage does NOT show all products. It navigates to categories.',
+  ],
+  categoryPage: [
+    'Start with category hero (lifestyle shot).',
+    'Product grid with ALL category ASINs is the core.',
+    'Mix lifestyle/feature images between product grids for breathing room.',
+    'Simple products: product grid dominates. Complex products: feature modules + videos.',
+  ],
+  adaptToComplexity: [
+    'SIMPLE products: More direct product tiles, less explanation. Lifestyle sells.',
+    'MEDIUM products: Some feature modules to highlight USPs.',
+    'COMPLEX products: Rich feature sections, videos, technical breakdowns.',
+    'VARIANT-RICH products: Variant showcase modules, color/material grids.',
   ],
 };
 
@@ -185,7 +191,6 @@ export function validateStore(store) {
     return warnings;
   }
 
-  // Check unique page names
   var pageNames = {};
   store.pages.forEach(function(pg) {
     if (pageNames[pg.name]) {
@@ -194,14 +199,12 @@ export function validateStore(store) {
     pageNames[pg.name] = true;
   });
 
-  // Check each page has at least 1 section
   store.pages.forEach(function(pg) {
     if (!pg.sections || pg.sections.length === 0) {
       warnings.push({ level: 'warning', message: 'Page "' + pg.name + '" has no sections' });
     }
   });
 
-  // Check tile counts match layouts
   store.pages.forEach(function(pg) {
     (pg.sections || []).forEach(function(sec, si) {
       var layout = LAYOUTS.find(function(l) { return l.id === sec.layoutId; });
@@ -215,7 +218,6 @@ export function validateStore(store) {
     });
   });
 
-  // Check ASIN coverage
   var asinUsage = {};
   store.pages.forEach(function(pg) {
     (pg.sections || []).forEach(function(sec) {
@@ -232,7 +234,6 @@ export function validateStore(store) {
     });
   });
 
-  // Check tile validity
   store.pages.forEach(function(pg) {
     (pg.sections || []).forEach(function(sec, si) {
       sec.tiles.forEach(function(t, ti) {
