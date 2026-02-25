@@ -101,14 +101,14 @@ export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSub
             <div className="page-list-body">
               {savedStores.map(function(s) {
                 return (
-                  <div key={s.id} className="saved-store-item">
-                    <div className="saved-store-name" onClick={function() { onLoadSaved(s.id); }}>
-                      {s.brandName}
+                  <div key={s.id} className="saved-store-item" onClick={function() { onLoadSaved(s.id); }}>
+                    <div className="saved-store-name">
+                      {s.brandName || 'Untitled'}
                     </div>
                     <div className="saved-store-meta">
                       {s.pageCount}p &middot; {s.productCount} ASINs
                     </div>
-                    <button className="btn-icon-sm btn-icon-danger" onClick={function() { onDeleteSaved(s.id); }} title={t('pages.delete', uiLang)}>&times;</button>
+                    <button className="btn-icon-sm btn-icon-danger" onClick={function(e) { e.stopPropagation(); onDeleteSaved(s.id); }} title={t('pages.delete', uiLang)}>&times;</button>
                   </div>
                 );
               })}
