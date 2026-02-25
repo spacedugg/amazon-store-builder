@@ -14,8 +14,9 @@ import GenerateModal from './components/GenerateModal';
 import ProgressModal from './components/ProgressModal';
 import AIChat from './components/AIChat';
 import PriceCalculator from './components/PriceCalculator';
+import ExportModal from './components/ExportModal';
 
-var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, complexity: 2, category: 'generic', briefingLang: 'en' };
+var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, complexity: 2, category: 'generic' };
 
 export default function App() {
   var [store, setStore] = useState(EMPTY_STORE);
@@ -35,6 +36,7 @@ export default function App() {
   var [requestedAsins, setRequestedAsins] = useState([]);
   var [uiLang, setUiLang] = useState('en');
   var [showSaved, setShowSaved] = useState(false);
+  var [showExport, setShowExport] = useState(false);
   var headerBannerInputRef = useRef(null);
 
   // Load saved stores on mount. Do NOT auto-load last store.
@@ -86,7 +88,6 @@ export default function App() {
       // Store meta
       storeData.complexity = params.complexity;
       storeData.category = params.category;
-      storeData.briefingLang = params.briefingLang || 'en';
 
       setStore(storeData);
       setCurPage(storeData.pages[0] ? storeData.pages[0].id : '');
@@ -190,11 +191,11 @@ export default function App() {
   };
 
   // ─── PAGE MANAGEMENT ───
-  var addPage = function() {
-    var name = 'New Page';
+  var addPage = function(parentId) {
+    var name = parentId ? 'New Sub-Page' : 'New Page';
     var idx = 1;
     var names = store.pages.map(function(p) { return p.name; });
-    while (names.indexOf(name) >= 0) { idx++; name = 'New Page ' + idx; }
+    while (names.indexOf(name) >= 0) { idx++; name = (parentId ? 'New Sub-Page ' : 'New Page ') + idx; }
     var newPage = {
       id: uid(),
       name: name,
@@ -203,7 +204,20 @@ export default function App() {
         tiles: [emptyTile()],
       }],
     };
+    if (parentId) newPage.parentId = parentId;
     setStore(function(s) {
+      // Insert subpage right after parent and its existing children
+      if (parentId) {
+        var pages = s.pages.slice();
+        var parentIdx = pages.findIndex(function(p) { return p.id === parentId; });
+        if (parentIdx >= 0) {
+          // Find the last child of this parent
+          var insertIdx = parentIdx + 1;
+          while (insertIdx < pages.length && pages[insertIdx].parentId === parentId) insertIdx++;
+          pages.splice(insertIdx, 0, newPage);
+          return Object.assign({}, s, { pages: pages });
+        }
+      }
       return Object.assign({}, s, { pages: s.pages.concat([newPage]) });
     });
     setCurPage(newPage.id);
@@ -223,12 +237,14 @@ export default function App() {
 
   var deletePage = function(pageId) {
     if (store.pages.length <= 1) return;
+    // Also delete child pages
+    var childIds = store.pages.filter(function(p) { return p.parentId === pageId; }).map(function(p) { return p.id; });
     setStore(function(s) {
-      var newPages = s.pages.filter(function(pg) { return pg.id !== pageId; });
+      var newPages = s.pages.filter(function(pg) { return pg.id !== pageId && childIds.indexOf(pg.id) < 0; });
       return Object.assign({}, s, { pages: newPages });
     });
-    if (curPage === pageId) {
-      var fallback = store.pages.find(function(p) { return p.id !== pageId; });
+    if (curPage === pageId || childIds.indexOf(curPage) >= 0) {
+      var fallback = store.pages.find(function(p) { return p.id !== pageId && childIds.indexOf(p.id) < 0; });
       setCurPage(fallback ? fallback.id : '');
     }
     setSel(null);
@@ -304,14 +320,15 @@ export default function App() {
   };
 
   // ─── EXPORT ───
-  var handleExport = async function() {
+  var handleExport = async function(briefingLang) {
     try {
-      var blob = await generateBriefingDocx(store);
+      var blob = await generateBriefingDocx(store, briefingLang || 'en');
       var filename = (store.brandName || 'store').replace(/[^a-zA-Z0-9]/g, '_') + '_briefing.docx';
       downloadBlob(blob, filename);
     } catch (e) {
       alert('Export failed: ' + e.message);
     }
+    setShowExport(false);
   };
 
   // ─── AI CHAT ───
@@ -359,7 +376,7 @@ export default function App() {
         onGenerate={function() { setShowGen(true); }}
         onShowAsins={function() { setShowAsins(true); }}
         onShowPrice={function() { setShowPrice(true); }}
-        onExport={handleExport}
+        onExport={function() { setShowExport(true); }}
         onSave={handleSave}
         viewMode={viewMode}
         onToggleView={handleToggleView}
@@ -373,6 +390,7 @@ export default function App() {
           curPage={page ? page.id : ''}
           onSelect={function(id) { setCurPage(id); setSel(null); }}
           onAddPage={addPage}
+          onAddSubPage={function(parentId) { addPage(parentId); }}
           onRenamePage={renamePage}
           onDeletePage={deletePage}
           onReorderPage={reorderPage}
@@ -458,6 +476,14 @@ export default function App() {
         <PriceCalculator
           store={store}
           onClose={function() { setShowPrice(false); }}
+          uiLang={uiLang}
+        />
+      )}
+
+      {showExport && (
+        <ExportModal
+          onClose={function() { setShowExport(false); }}
+          onExport={handleExport}
           uiLang={uiLang}
         />
       )}
