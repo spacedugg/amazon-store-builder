@@ -59,7 +59,7 @@ export default function PriceCalculator({ store, onClose, uiLang }) {
             </div>
             <div className="price-divider" />
             <div className="price-row price-row-detail">
-              <span className="price-label">Setup</span>
+              <span className="price-label">{t('price.setup', uiLang)}</span>
               <span className="price-value">{PRICING.baseSetupFee} {PRICING.currency}</span>
             </div>
             <div className="price-row price-row-detail">
@@ -68,7 +68,7 @@ export default function PriceCalculator({ store, onClose, uiLang }) {
             </div>
             {assets.videos > 0 && (
               <div className="price-row price-row-detail">
-                <span className="price-label">{assets.videos} x {PRICING.videoPrice} {PRICING.currency} (Video)</span>
+                <span className="price-label">{assets.videos} x {PRICING.videoPrice} {PRICING.currency}</span>
                 <span className="price-value">{videoTotal} {PRICING.currency}</span>
               </div>
             )}

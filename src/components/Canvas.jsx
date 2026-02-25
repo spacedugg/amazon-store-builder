@@ -15,7 +15,7 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
             </button>
             {hasAutoSave && (
               <button className="btn" style={{ padding: '10px 20px', fontSize: 12, marginLeft: 10 }} onClick={onLoadAutoSave}>
-                Continue last session
+                {t('canvas.continueSession', uiLang)}
               </button>
             )}
           </div>
@@ -39,7 +39,7 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
           ) : (
             <div className="header-banner-placeholder">
               <span>{t('canvas.headerBanner', uiLang)} ({isMobile ? '1242 x 450' : '3000 x 600'})</span>
-              <span className="header-banner-hint">Click to upload</span>
+              <span className="header-banner-hint">{t('canvas.clickToUpload', uiLang)}</span>
             </div>
           )}
         </div>

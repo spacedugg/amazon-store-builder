@@ -14,7 +14,7 @@ export default function ProgressModal({ logs, done, uiLang }) {
             else if (m.indexOf('   ') === 0) cls += ' log-detail';
             return <div key={i} className={cls}>{m}</div>;
           })}
-          {!done && <div className="log-line log-detail" style={{ opacity: 0.5 }}>Processing...</div>}
+          {!done && <div className="log-line log-detail" style={{ opacity: 0.5 }}>{t('progress.processing', uiLang)}</div>}
         </div>
       </div>
     </div>

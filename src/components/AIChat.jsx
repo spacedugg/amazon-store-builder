@@ -22,7 +22,7 @@ export default function AIChat({ onSend, disabled, lastResponse, uiLang }) {
           value={text}
           onChange={function(e) { setText(e.target.value); }}
           onKeyDown={function(e) { if (e.key === 'Enter') handleSend(); }}
-          placeholder={disabled ? 'Processing...' : t('chat.placeholder', uiLang)}
+          placeholder={disabled ? t('chat.processing', uiLang) : t('chat.placeholder', uiLang)}
           disabled={disabled}
         />
         <button className="btn btn-primary ai-chat-send" onClick={handleSend} disabled={disabled || !text.trim()}>

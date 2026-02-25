@@ -1,7 +1,8 @@
 import { PRODUCT_TILE_TYPES, TILE_TYPE_LABELS } from '../constants';
+import { t } from '../i18n';
 import Wireframe from './Wireframe';
 
-function ProductCardWireframe({ asins, products, tileType, bgColor }) {
+function ProductCardWireframe({ asins, products, tileType, bgColor, uiLang }) {
   var productMap = {};
   (products || []).forEach(function(p) { productMap[p.asin] = p; });
   var items = (asins || []).slice(0, 5).map(function(a) { return productMap[a] || { asin: a }; });
@@ -26,14 +27,14 @@ function ProductCardWireframe({ asins, products, tileType, bgColor }) {
           );
         })}
         {(asins || []).length > 5 && (
-          <div className="pcg-card pcg-card-more">+{(asins || []).length - 5} more</div>
+          <div className="pcg-card pcg-card-more">+{(asins || []).length - 5} {t('tile.more', uiLang)}</div>
         )}
       </div>
     </div>
   );
 }
 
-export default function TileView({ tile, selected, onClick, viewMode, products }) {
+export default function TileView({ tile, selected, onClick, viewMode, products, uiLang }) {
   var cls = 'tile' + (selected ? ' tile-selected' : '');
   var dims = (viewMode === 'mobile' ? tile.mobileDimensions : tile.dimensions) || tile.dimensions || { w: 3000, h: 1200 };
   var bgColor = tile.bgColor || '';
@@ -42,7 +43,7 @@ export default function TileView({ tile, selected, onClick, viewMode, products }
   if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0) {
     return (
       <div className={cls} onClick={onClick} style={bgColor ? { background: bgColor } : undefined}>
-        <ProductCardWireframe asins={tile.asins} products={products} tileType={tile.type} bgColor={bgColor} />
+        <ProductCardWireframe asins={tile.asins} products={products} tileType={tile.type} bgColor={bgColor} uiLang={uiLang} />
       </div>
     );
   }
@@ -58,7 +59,7 @@ export default function TileView({ tile, selected, onClick, viewMode, products }
           ) : (
             <>
               <span className="tile-video-play">&#9654;</span>
-              <div className="tile-video-label">Video</div>
+              <div className="tile-video-label">{t('tile.video', uiLang)}</div>
             </>
           )}
           <div className="tile-video-dims">{dims.w}&times;{dims.h}</div>
@@ -71,7 +72,7 @@ export default function TileView({ tile, selected, onClick, viewMode, products }
     return (
       <div className={cls} onClick={onClick} style={bgColor ? { background: bgColor } : undefined}>
         <div className="tile-text-native">
-          <div className="tile-text-content">{tile.textOverlay || '[Text Module]'}</div>
+          <div className="tile-text-content">{tile.textOverlay || t('tile.textModule', uiLang)}</div>
         </div>
       </div>
     );
@@ -98,7 +99,7 @@ export default function TileView({ tile, selected, onClick, viewMode, products }
         ? <img src={imgSrc} className="tile-uploaded-img" alt="" />
         : <Wireframe tile={tile} viewMode={viewMode} bgColor={bgColor} />
       }
-      {tile.type === 'shoppable_image' && <div className="tile-shoppable-badge">Shoppable</div>}
+      {tile.type === 'shoppable_image' && <div className="tile-shoppable-badge">{t('tile.shoppable', uiLang)}</div>}
       {tile.linkAsin && <div className="tile-link-badge">ASIN: {tile.linkAsin}</div>}
     </div>
   );
