@@ -236,6 +236,7 @@ textarea.input { resize: vertical; min-height: 44px; }
 .price-total { padding-top: 12px; font-size: 16px; font-weight: 800; color: #0f172a; }
 .price-total .price-value { color: #FF9900; font-size: 18px; }
 .price-divider { height: 1px; background: #e2e8f0; margin: 4px 0; }
+.price-section-header { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #94a3b8; padding: 8px 0 2px; }
 .price-error { color: #dc2626; font-size: 12px; margin-top: 8px; font-weight: 600; }
 
 /* ─── PROGRESS LOG ─── */

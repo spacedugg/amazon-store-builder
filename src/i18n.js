@@ -471,6 +471,30 @@ var translations = {
     en: 'Estimated total', de: 'Geschätzter Gesamtpreis', uk: 'Орієнтовна вартість', ru: 'Ориентировочная стоимость',
     id: 'Estimasi total', ky: 'Болжолдуу жалпы', bg: 'Приблизителна обща цена', es: 'Total estimado',
   },
+  'price.customerPrice': {
+    en: 'Customer Price', de: 'Kundenpreis', uk: 'Ціна для клієнта', ru: 'Цена для клиента',
+    id: 'Harga Pelanggan', ky: 'Кардар баасы', bg: 'Цена за клиент', es: 'Precio cliente',
+  },
+  'price.images': {
+    en: 'Images', de: 'Bilder', uk: 'Зображення', ru: 'Изображения',
+    id: 'Gambar', ky: 'Сүрөттөр', bg: 'Изображения', es: 'Imágenes',
+  },
+  'price.videos': {
+    en: 'Videos', de: 'Videos', uk: 'Відео', ru: 'Видео',
+    id: 'Video', ky: 'Видеолор', bg: 'Видеа', es: 'Videos',
+  },
+  'price.internalCost': {
+    en: 'Internal Cost', de: 'Interner Einsatz', uk: 'Внутрішні витрати', ru: 'Внутренние затраты',
+    id: 'Biaya Internal', ky: 'Ички чыгымдар', bg: 'Вътрешни разходи', es: 'Coste interno',
+  },
+  'price.productionCost': {
+    en: 'Production', de: 'Produktion', uk: 'Виробництво', ru: 'Производство',
+    id: 'Produksi', ky: 'Өндүрүш', bg: 'Продукция', es: 'Producción',
+  },
+  'price.margin': {
+    en: 'Margin', de: 'Marge', uk: 'Маржа', ru: 'Маржа',
+    id: 'Margin', ky: 'Маржа', bg: 'Маржа', es: 'Margen',
+  },
   'price.close': {
     en: 'Close', de: 'Schliessen', uk: 'Закрити', ru: 'Закрыть',
     id: 'Tutup', ky: 'Жабуу', bg: 'Затвори', es: 'Cerrar',

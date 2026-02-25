@@ -156,8 +156,9 @@ export var COMPLEXITY_LEVELS = {
 // Market-rate estimates for brand store design
 export var PRICING = {
   imagePrice: 45,
-  videoPrice: 250,
-  baseSetupFee: 150,
+  videoPrice: 650,
+  baseSetupFee: 750,
+  imageCost: 5,
   currency: 'EUR',
   password: 'agentur2024',
 };
