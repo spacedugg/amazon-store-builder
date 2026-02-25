@@ -14,7 +14,7 @@ async function callClaude(systemPrompt, userPrompt, maxTokens) {
       'anthropic-dangerous-direct-browser-access': 'true',
     },
     body: JSON.stringify({
-      model: 'claude-sonnet-4-5-20250929',
+      model: 'claude-sonnet-4-6',
       max_tokens: maxTokens || 4000,
       system: systemPrompt,
       messages: [{ role: 'user', content: userPrompt }],
@@ -63,16 +63,14 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
     JSON.stringify(REFERENCE_STORES, null, 1),
     '',
     'PRINCIPLES:',
-    '- Every ASIN must be assigned to exactly ONE category or subcategory',
+    '- Every ASIN must be assigned to exactly ONE category',
     '- Categories should be based on actual product types/use cases, NOT Amazon taxonomy',
+    '- Create 2-8 meaningful category names based on what the products actually ARE (e.g. "Schuhe", "Taschen", "Accessoires")',
     '- If products include multipacks/bundles/sets, create a "Bundles & Sparen" page',
     '- Homepage always exists as the first page',
-    '- 2-8 top-level category pages depending on product variety',
-    '- Top-level categories MAY have subcategories (2-level navigation, like Amazon Brand Stores)',
-    '- Use subcategories when a top-level category has many products (8+) that split naturally into sub-groups',
-    '- Not every top-level category needs subcategories - only where it makes sense',
+    '- OPTIONAL: A category with 8+ products MAY have subcategories to split into sub-groups',
+    '- Most categories should NOT have subcategories - only use when it clearly makes sense',
     '- Classify the product complexity: simple, medium, complex, or variantRich',
-    '- The complexity classification drives how many feature/lifestyle/video modules the store needs',
     '- Brand tone must match the product category (technical, lifestyle, playful, premium, etc.)',
     '- Look at the product descriptions to determine if products have notable features worth highlighting',
     '- If products come in many variants (colors, materials, sizes), flag as variantRich',
@@ -123,11 +121,13 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
     '}',
     '',
     'IMPORTANT:',
-    '- Every ASIN from the product list must appear in exactly one category or subcategory. Do not skip any ASINs.',
-    '- If a category has subcategories, the "asins" field of the parent category should be EMPTY (asins live in subcategories).',
-    '- If a category has NO subcategories, omit "subcategories" or set it to an empty array.',
-    '- Use subcategories when a category naturally splits into 2-6 sub-groups (e.g. "Shoes" -> "Sandals", "Boots", "Sneakers").',
-    '- Real-world examples: Kaercher has "Hochdruckreiniger" with subs like "Mobile Reinigung", "Zubehoer". DJI has "Drohnen" with "Mavic Serie", "Mini Serie".',
+    '- FOCUS ON CATEGORIZATION: Group products into 2-8 meaningful categories based on PRODUCT TYPE, not brand taxonomy.',
+    '- Examples: "Reinigungsgeräte", "Zubehör", "Pflegemittel" or "Shirts", "Hosen", "Jacken", "Schuhe".',
+    '- NEVER put all products into one single category like "Sonstige" or "Alle Produkte". Always find meaningful sub-groups.',
+    '- Every ASIN from the product list must appear in exactly one category. Do not skip any ASINs.',
+    '- If a category has subcategories, put the ASINs in the subcategories, NOT in the parent category.',
+    '- If a category has NO subcategories, put ASINs directly in the category and omit "subcategories".',
+    '- Most categories should NOT have subcategories. Only use them for very large groups (8+ products) with natural sub-divisions.',
     '- Determine productComplexity by looking at product descriptions: simple products need less explanation, complex/technical products need more.',
     '- keyFeatures: Extract 3-5 notable product features from descriptions that could be highlighted visually.',
   ].filter(Boolean).join('\n');
@@ -545,12 +545,20 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   var analysis;
   try {
     analysis = await aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions, category);
+    // Validate that we got actual categories
+    if (!analysis.categories || analysis.categories.length === 0) {
+      log('AI returned no categories, using fallback grouping...');
+      analysis = fallbackAnalysis(products, brand, lang);
+    } else if (analysis.categories.length === 1 && analysis.categories[0].name.match(/sonstige|andere|other|misc|all/i)) {
+      log('AI grouped everything into one generic category, using smarter fallback...');
+      analysis = fallbackAnalysis(products, brand, lang);
+    }
   } catch (err) {
     log('AI analysis failed (' + err.message + '), falling back to deterministic grouping...');
     analysis = fallbackAnalysis(products, brand, lang);
   }
 
-  log('Structure planned: ' + (analysis.suggestedPages || []).length + ' pages');
+  log('Structure planned: ' + (analysis.categories || []).length + ' categories, ' + (analysis.suggestedPages || []).length + ' pages');
   log('   Brand tone: ' + (analysis.brandTone || 'professional'));
   log('   Product complexity: ' + (analysis.productComplexity || 'medium'));
   log('   Hero: "' + (analysis.heroMessage || brand) + '"');
@@ -558,7 +566,13 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     log('   Key features: ' + analysis.keyFeatures.join(', '));
   }
   (analysis.categories || []).forEach(function(cat) {
-    log('   ' + cat.name + ': ' + (cat.asins || []).length + ' products');
+    var totalAsins = (cat.asins || []).length;
+    if (cat.subcategories && cat.subcategories.length > 0) {
+      cat.subcategories.forEach(function(sub) { totalAsins += (sub.asins || []).length; });
+      log('   ' + cat.name + ': ' + totalAsins + ' products (' + cat.subcategories.length + ' sub-categories)');
+    } else {
+      log('   ' + cat.name + ': ' + totalAsins + ' products');
+    }
   });
 
   // Build product lookup
@@ -847,32 +861,102 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
 
 function fallbackAnalysis(products, brand, lang) {
   var groups = {};
+
+  // Strategy 1: Try scraped Amazon categories (use the most specific one)
   products.forEach(function(p) {
     var cat = '';
     if (p.categories && p.categories.length > 0) {
       var cats = p.categories;
-      cat = Array.isArray(cats) ? (cats[cats.length - 1] || cats[0] || '') : String(cats);
+      if (Array.isArray(cats)) {
+        // Use 2nd-level category if available (more specific than top-level, less specific than leaf)
+        cat = cats.length >= 2 ? cats[1] : cats[0] || '';
+      } else {
+        cat = String(cats);
+      }
     }
-    if (!cat) cat = 'Sonstige';
+    if (!cat) cat = '__uncat__';
     if (!groups[cat]) groups[cat] = [];
     groups[cat].push(p.asin);
   });
 
-  var catNames = Object.keys(groups);
-  if (catNames.length > 8) {
-    var sonstige = groups['Sonstige'] || [];
-    catNames.forEach(function(c) {
-      if (c !== 'Sonstige' && groups[c].length < 2) {
-        sonstige = sonstige.concat(groups[c]);
-        delete groups[c];
+  // If too many products ended up in one bucket or __uncat__, try name-based grouping
+  var uncatCount = (groups['__uncat__'] || []).length;
+  var largestGroup = 0;
+  Object.keys(groups).forEach(function(k) { if (groups[k].length > largestGroup) largestGroup = groups[k].length; });
+
+  if (uncatCount > products.length * 0.5 || largestGroup > products.length * 0.7 || Object.keys(groups).length <= 1) {
+    // Reset and try keyword-based grouping from product names
+    groups = {};
+    var keywords = {};
+
+    // Extract common keywords from product names
+    products.forEach(function(p) {
+      var name = (p.name || '').toLowerCase();
+      // Extract significant words (>3 chars, not common filler)
+      var filler = ['with', 'für', 'for', 'and', 'und', 'the', 'von', 'aus', 'set', 'pack', 'stück', 'stk', 'pcs', 'size', 'color', 'black', 'white', 'blue', 'red', 'green', 'grey', 'pink', 'braun', 'schwarz', 'weiß', 'grün', 'blau', 'rot', 'amazon', 'prime'];
+      var words = name.replace(/[^a-zäöüß\s]/g, ' ').split(/\s+/).filter(function(w) {
+        return w.length > 3 && filler.indexOf(w) < 0;
+      });
+      words.forEach(function(w) {
+        if (!keywords[w]) keywords[w] = [];
+        keywords[w].push(p.asin);
+      });
+    });
+
+    // Find the best grouping keywords (appear in 2+ products but not ALL products)
+    var sortedKw = Object.keys(keywords).filter(function(k) {
+      return keywords[k].length >= 2 && keywords[k].length < products.length * 0.8;
+    }).sort(function(a, b) {
+      return keywords[b].length - keywords[a].length;
+    });
+
+    // Greedy assignment: assign each product to the best keyword group
+    var assigned = {};
+    sortedKw.slice(0, 8).forEach(function(kw) {
+      var groupAsins = keywords[kw].filter(function(a) { return !assigned[a]; });
+      if (groupAsins.length >= 2) {
+        // Capitalize keyword for display
+        var label = kw.charAt(0).toUpperCase() + kw.slice(1);
+        groups[label] = groupAsins;
+        groupAsins.forEach(function(a) { assigned[a] = true; });
       }
     });
-    if (sonstige.length > 0) groups['Sonstige'] = sonstige;
+
+    // Remaining unassigned products
+    var remaining = products.filter(function(p) { return !assigned[p.asin]; }).map(function(p) { return p.asin; });
+    if (remaining.length > 0) {
+      var remLabel = lang === 'German' ? 'Weitere Produkte' : 'More Products';
+      groups[remLabel] = remaining;
+    }
+  } else {
+    // Clean up __uncat__ bucket
+    if (groups['__uncat__'] && groups['__uncat__'].length > 0) {
+      var remLabel2 = lang === 'German' ? 'Weitere Produkte' : 'More Products';
+      groups[remLabel2] = groups['__uncat__'];
+    }
+    delete groups['__uncat__'];
+  }
+
+  // Consolidate: merge tiny groups, limit to 8
+  var catNames = Object.keys(groups);
+  if (catNames.length > 8) {
+    var overflow = lang === 'German' ? 'Weitere Produkte' : 'More Products';
+    if (!groups[overflow]) groups[overflow] = [];
+    catNames.sort(function(a, b) { return groups[a].length - groups[b].length; });
+    while (Object.keys(groups).length > 8) {
+      var smallest = Object.keys(groups).sort(function(a, b) { return groups[a].length - groups[b].length; })[0];
+      if (smallest === overflow) break;
+      groups[overflow] = groups[overflow].concat(groups[smallest]);
+      delete groups[smallest];
+    }
   }
 
   var categories = Object.keys(groups).map(function(name) {
     return { name: name, asins: groups[name], productCount: groups[name].length };
   });
+
+  // Sort by product count descending
+  categories.sort(function(a, b) { return b.productCount - a.productCount; });
 
   var suggestedPages = ['Homepage'].concat(categories.map(function(c) { return c.name; }));
 
