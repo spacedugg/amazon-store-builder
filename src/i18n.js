@@ -85,6 +85,10 @@ var translations = {
     en: 'Move down', de: 'Nach unten', uk: 'Вниз', ru: 'Вниз',
     id: 'Pindah ke bawah', ky: 'Ылдый', bg: 'Надолу', es: 'Mover abajo',
   },
+  'pages.addSubPage': {
+    en: 'Add sub-page', de: 'Unterseite hinzufuegen', uk: 'Додати підсторінку', ru: 'Добавить подстраницу',
+    id: 'Tambah sub-halaman', ky: 'Суб-барак кошуу', bg: 'Добави подстраница', es: 'Anadir subpagina',
+  },
 
   // ─── CANVAS ───
   'canvas.empty': {
@@ -732,6 +736,34 @@ var translations = {
   'brief.unassigned': {
     en: 'Unassigned', de: 'Nicht zugewiesen', uk: 'Не призначено', ru: 'Не назначено',
     id: 'Belum ditugaskan', ky: 'Дайындалган эмес', bg: 'Неразпределен', es: 'Sin asignar',
+  },
+  'brief.subPage': {
+    en: 'Sub-Page', de: 'Unterseite', uk: 'Підсторінка', ru: 'Подстраница',
+    id: 'Sub-Halaman', ky: 'Суб-барак', bg: 'Подстраница', es: 'Subpagina',
+  },
+
+  // ─── EXPORT MODAL ───
+  'export.title': {
+    en: 'Export Briefing', de: 'Briefing exportieren', uk: 'Експорт брифінгу', ru: 'Экспорт брифинга',
+    id: 'Ekspor Briefing', ky: 'Брифинг экспорту', bg: 'Експорт на брифинг', es: 'Exportar briefing',
+  },
+  'export.briefingLanguage': {
+    en: 'Briefing Language', de: 'Briefing-Sprache', uk: 'Мова брифінгу', ru: 'Язык брифинга',
+    id: 'Bahasa Briefing', ky: 'Брифинг тили', bg: 'Език на брифинга', es: 'Idioma del briefing',
+  },
+  'export.briefingLanguageHint': {
+    en: 'All headings and labels in the DOCX will use this language. Image texts and content stay as-is.',
+    de: 'Alle Ueberschriften und Labels im DOCX verwenden diese Sprache. Bildtexte und Inhalte bleiben wie sie sind.',
+    uk: 'Всі заголовки та мітки в DOCX будуть цією мовою. Тексти зображень та контент залишаються як є.',
+    ru: 'Все заголовки и метки в DOCX будут на этом языке. Тексты изображений и контент остаются как есть.',
+    id: 'Semua judul dan label di DOCX akan menggunakan bahasa ini. Teks gambar dan konten tetap seperti semula.',
+    ky: 'DOCX-догу бардык аталыштар жана энбелгилер бул тилде болот. Сүрөт тексттери жана мазмун өзгөрүүсүз калат.',
+    bg: 'Всички заглавия и етикети в DOCX ще бъдат на този език. Текстовете на изображения и съдържанието остават непроменени.',
+    es: 'Todos los titulos y etiquetas en el DOCX usaran este idioma. Los textos de imagen y contenido permanecen igual.',
+  },
+  'export.download': {
+    en: 'Download DOCX', de: 'DOCX herunterladen', uk: 'Завантажити DOCX', ru: 'Скачать DOCX',
+    id: 'Unduh DOCX', ky: 'DOCX жүктөө', bg: 'Изтегли DOCX', es: 'Descargar DOCX',
   },
 };
 

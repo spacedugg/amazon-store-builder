@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { t } from '../i18n';
 
-export default function PageList({ pages, curPage, onSelect, onAddPage, onRenamePage, onDeletePage, onReorderPage, savedStores, onLoadSaved, onDeleteSaved, uiLang, showSaved, onToggleSaved }) {
+export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSubPage, onRenamePage, onDeletePage, onReorderPage, savedStores, onLoadSaved, onDeleteSaved, uiLang, showSaved, onToggleSaved }) {
   var [editingId, setEditingId] = useState(null);
   var [editName, setEditName] = useState('');
 
@@ -26,45 +26,67 @@ export default function PageList({ pages, curPage, onSelect, onAddPage, onRename
     onReorderPage(idx, newIdx);
   };
 
+  // Build tree: top-level pages and their children
+  var topLevel = pages.filter(function(p) { return !p.parentId; });
+
+  var getChildren = function(parentId) {
+    return pages.filter(function(p) { return p.parentId === parentId; });
+  };
+
+  var renderPage = function(pg, idx, isChild) {
+    var active = pg.id === curPage;
+    var children = isChild ? [] : getChildren(pg.id);
+    var hasChildren = children.length > 0;
+
+    return (
+      <div key={pg.id}>
+        <div
+          className={'page-item' + (active ? ' active' : '') + (isChild ? ' page-item-child' : '')}
+          onClick={function() { onSelect(pg.id); }}>
+          {editingId === pg.id ? (
+            <input
+              className="page-rename-input"
+              value={editName}
+              onChange={function(e) { setEditName(e.target.value); }}
+              onBlur={finishRename}
+              onKeyDown={function(e) { if (e.key === 'Enter') finishRename(); if (e.key === 'Escape') setEditingId(null); }}
+              autoFocus
+              onClick={function(e) { e.stopPropagation(); }}
+            />
+          ) : (
+            <span className="page-name">
+              {isChild ? '\u2514 ' : ''}{pg.name}
+            </span>
+          )}
+          {active && editingId !== pg.id && (
+            <div className="page-actions" onClick={function(e) { e.stopPropagation(); }}>
+              {idx > 0 && <button className="btn-icon-sm" onClick={function() { movePage(pg.id, -1); }} title={t('pages.moveUp', uiLang)}>&uarr;</button>}
+              {idx < pages.length - 1 && <button className="btn-icon-sm" onClick={function() { movePage(pg.id, 1); }} title={t('pages.moveDown', uiLang)}>&darr;</button>}
+              <button className="btn-icon-sm" onClick={function() { startRename(pg); }} title={t('pages.rename', uiLang)}>R</button>
+              {!isChild && <button className="btn-icon-sm" onClick={function() { onAddSubPage(pg.id); }} title={t('pages.addSubPage', uiLang)}>+</button>}
+              {pages.length > 1 && <button className="btn-icon-sm btn-icon-danger" onClick={function() { onDeletePage(pg.id); }} title={t('pages.delete', uiLang)}>&times;</button>}
+            </div>
+          )}
+        </div>
+        {hasChildren && children.map(function(child, ci) {
+          return renderPage(child, ci, true);
+        })}
+      </div>
+    );
+  };
+
   return (
     <div className="page-list">
       <div className="page-list-header">
         <span>{t('pages.title', uiLang)}</span>
-        <button className="btn-icon" onClick={onAddPage} title={t('pages.addPage', uiLang)}>+</button>
+        <button className="btn-icon" onClick={function() { onAddPage(); }} title={t('pages.addPage', uiLang)}>+</button>
       </div>
       <div className="page-list-body">
         {pages.length === 0 && (
           <div className="page-list-empty">{t('pages.generateFirst', uiLang)}</div>
         )}
-        {pages.map(function(pg, idx) {
-          var active = pg.id === curPage;
-          return (
-            <div key={pg.id}
-              className={'page-item' + (active ? ' active' : '')}
-              onClick={function() { onSelect(pg.id); }}>
-              {editingId === pg.id ? (
-                <input
-                  className="page-rename-input"
-                  value={editName}
-                  onChange={function(e) { setEditName(e.target.value); }}
-                  onBlur={finishRename}
-                  onKeyDown={function(e) { if (e.key === 'Enter') finishRename(); if (e.key === 'Escape') setEditingId(null); }}
-                  autoFocus
-                  onClick={function(e) { e.stopPropagation(); }}
-                />
-              ) : (
-                <span className="page-name">{pg.name}</span>
-              )}
-              {active && editingId !== pg.id && (
-                <div className="page-actions" onClick={function(e) { e.stopPropagation(); }}>
-                  {idx > 0 && <button className="btn-icon-sm" onClick={function() { movePage(pg.id, -1); }} title={t('pages.moveUp', uiLang)}>&uarr;</button>}
-                  {idx < pages.length - 1 && <button className="btn-icon-sm" onClick={function() { movePage(pg.id, 1); }} title={t('pages.moveDown', uiLang)}>&darr;</button>}
-                  <button className="btn-icon-sm" onClick={function() { startRename(pg); }} title={t('pages.rename', uiLang)}>R</button>
-                  {pages.length > 1 && <button className="btn-icon-sm btn-icon-danger" onClick={function() { onDeletePage(pg.id); }} title={t('pages.delete', uiLang)}>&times;</button>}
-                </div>
-              )}
-            </div>
-          );
+        {topLevel.map(function(pg, idx) {
+          return renderPage(pg, idx, false);
         })}
       </div>
 

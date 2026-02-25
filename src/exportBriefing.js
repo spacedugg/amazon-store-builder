@@ -232,8 +232,8 @@ function tileDescription(tile, tileIndex, productMap, lang) {
 
 // ─── MAIN EXPORT ───
 
-export async function generateBriefingDocx(store) {
-  var lang = store.briefingLang || 'en';
+export async function generateBriefingDocx(store, briefingLang) {
+  var lang = briefingLang || 'en';
   var children = [];
   var productMap = {};
   (store.products || []).forEach(function(p) { productMap[p.asin] = p; });
@@ -252,8 +252,15 @@ export async function generateBriefingDocx(store) {
   children.push(heading(t('brief.overview', lang), HeadingLevel.HEADING_1));
   children.push(boldPara(t('brief.pages', lang) + ': ', String((store.pages || []).length)));
   children.push(boldPara(t('brief.products', lang) + ': ', String((store.products || []).length)));
-  var catNames = (store.pages || []).filter(function(p) { return p.id !== 'homepage'; }).map(function(p) { return p.name; });
-  children.push(boldPara(t('brief.categories', lang) + ': ', catNames.join(', ') || t('brief.none', lang)));
+
+  // Show page hierarchy
+  var topPages = (store.pages || []).filter(function(p) { return !p.parentId; });
+  var pageTree = topPages.map(function(p) {
+    var subs = (store.pages || []).filter(function(c) { return c.parentId === p.id; });
+    if (subs.length > 0) return p.name + ' (' + subs.map(function(s) { return s.name; }).join(', ') + ')';
+    return p.name;
+  });
+  children.push(boldPara(t('brief.categories', lang) + ': ', pageTree.join(', ') || t('brief.none', lang)));
   if (store.brandTone) children.push(boldPara(t('brief.brandTone', lang) + ': ', store.brandTone));
   if (store.heroMessage) children.push(boldPara(t('brief.heroMessage', lang) + ': ', '"' + store.heroMessage + '"'));
   if (store.category && store.category !== 'generic') children.push(boldPara(t('brief.niche', lang) + ': ', store.category));
@@ -281,7 +288,12 @@ export async function generateBriefingDocx(store) {
   for (var pi = 0; pi < (store.pages || []).length; pi++) {
     var page = store.pages[pi];
     children.push(new Paragraph({ children: [new PageBreak()] }));
-    children.push(heading(t('brief.page', lang) + ': ' + page.name, HeadingLevel.HEADING_1));
+    var pageTitle = t('brief.page', lang) + ': ' + page.name;
+    if (page.parentId) {
+      var parentPage = (store.pages || []).find(function(p) { return p.id === page.parentId; });
+      if (parentPage) pageTitle = t('brief.subPage', lang) + ': ' + page.name + ' (' + parentPage.name + ')';
+    }
+    children.push(heading(pageTitle, HeadingLevel.HEADING_1));
 
     for (var si = 0; si < (page.sections || []).length; si++) {
       var section = page.sections[si];

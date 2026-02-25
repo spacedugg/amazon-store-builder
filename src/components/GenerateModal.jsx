@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { AMAZON_CATEGORIES, COMPLEXITY_LEVELS } from '../constants';
-import { t, UI_LANGUAGES } from '../i18n';
+import { t } from '../i18n';
 
 function parseAsinFile(text) {
   var asins = [];
@@ -29,7 +29,6 @@ export default function GenerateModal({ onClose, onGenerate, uiLang }) {
   var [pasteText, setPasteText] = useState('');
   var [complexity, setComplexity] = useState(2);
   var [category, setCategory] = useState('generic');
-  var [briefingLang, setBriefingLang] = useState(uiLang || 'en');
   var fileRef = useRef(null);
 
   var onFileChange = function(e) {
@@ -145,17 +144,8 @@ export default function GenerateModal({ onClose, onGenerate, uiLang }) {
           </div>
         </div>
 
-        {/* 6. Briefing Language */}
-        <label className="label" style={{ marginTop: 10 }}>6. {t('gen.briefingLanguage', uiLang)}</label>
-        <select value={briefingLang} onChange={function(e) { setBriefingLang(e.target.value); }} className="input">
-          {UI_LANGUAGES.map(function(lang) {
-            return <option key={lang.code} value={lang.code}>{lang.native} ({lang.name})</option>;
-          })}
-        </select>
-        <div className="hint">{t('gen.briefingLanguageHint', uiLang)}</div>
-
-        {/* 7. Instructions */}
-        <label className="label" style={{ marginTop: 10 }}>7. {t('gen.instructions', uiLang)}</label>
+        {/* 6. Instructions */}
+        <label className="label" style={{ marginTop: 10 }}>6. {t('gen.instructions', uiLang)}</label>
         <textarea
           value={instructions}
           onChange={function(e) { setInstructions(e.target.value); }}
@@ -177,7 +167,6 @@ export default function GenerateModal({ onClose, onGenerate, uiLang }) {
                 asins: asins,
                 complexity: complexity,
                 category: category,
-                briefingLang: briefingLang,
               });
             }}
           >

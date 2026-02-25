@@ -63,11 +63,14 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
     JSON.stringify(REFERENCE_STORES, null, 1),
     '',
     'PRINCIPLES:',
-    '- Every ASIN must be assigned to exactly ONE category',
+    '- Every ASIN must be assigned to exactly ONE category or subcategory',
     '- Categories should be based on actual product types/use cases, NOT Amazon taxonomy',
     '- If products include multipacks/bundles/sets, create a "Bundles & Sparen" page',
     '- Homepage always exists as the first page',
-    '- 2-8 category pages depending on product variety',
+    '- 2-8 top-level category pages depending on product variety',
+    '- Top-level categories MAY have subcategories (2-level navigation, like Amazon Brand Stores)',
+    '- Use subcategories when a top-level category has many products (8+) that split naturally into sub-groups',
+    '- Not every top-level category needs subcategories - only where it makes sense',
     '- Classify the product complexity: simple, medium, complex, or variantRich',
     '- The complexity classification drives how many feature/lifestyle/video modules the store needs',
     '- Brand tone must match the product category (technical, lifestyle, playful, premium, etc.)',
@@ -97,7 +100,16 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
     '',
     'Analyze the products and return this JSON structure:',
     '{',
-    '  "categories": [{"name": "CategoryName", "asins": ["B0XXX", ...], "productCount": N}],',
+    '  "categories": [',
+    '    {',
+    '      "name": "CategoryName",',
+    '      "asins": ["B0XXX", ...],',
+    '      "productCount": N,',
+    '      "subcategories": [',
+    '        {"name": "SubcategoryName", "asins": ["B0XXX", ...], "productCount": N}',
+    '      ]',
+    '    }',
+    '  ],',
     '  "hasBundles": true/false,',
     '  "bundleAsins": ["B0XXX"],',
     '  "suggestedPages": ["Homepage", "Category1", "Category2", ...],',
@@ -111,7 +123,11 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
     '}',
     '',
     'IMPORTANT:',
-    '- Every ASIN from the product list must appear in exactly one category. Do not skip any ASINs.',
+    '- Every ASIN from the product list must appear in exactly one category or subcategory. Do not skip any ASINs.',
+    '- If a category has subcategories, the "asins" field of the parent category should be EMPTY (asins live in subcategories).',
+    '- If a category has NO subcategories, omit "subcategories" or set it to an empty array.',
+    '- Use subcategories when a category naturally splits into 2-6 sub-groups (e.g. "Shoes" -> "Sandals", "Boots", "Sneakers").',
+    '- Real-world examples: Kaercher has "Hochdruckreiniger" with subs like "Mobile Reinigung", "Zubehoer". DJI has "Drohnen" with "Mavic Serie", "Mini Serie".',
     '- Determine productComplexity by looking at product descriptions: simple products need less explanation, complex/technical products need more.',
     '- keyFeatures: Extract 3-5 notable product features from descriptions that could be highlighted visually.',
   ].filter(Boolean).join('\n');
@@ -119,11 +135,14 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
   var text = await callClaude(system, user, 4000);
   var result = extractJSON(text);
 
-  // Validate: every ASIN must be in a category
+  // Validate: every ASIN must be in a category or subcategory
   var allAsins = products.map(function(p) { return p.asin; });
   var assignedAsins = {};
   (result.categories || []).forEach(function(cat) {
     (cat.asins || []).forEach(function(a) { assignedAsins[a] = cat.name; });
+    (cat.subcategories || []).forEach(function(sub) {
+      (sub.asins || []).forEach(function(a) { assignedAsins[a] = cat.name + ' > ' + sub.name; });
+    });
   });
   if (result.bundleAsins) {
     result.bundleAsins.forEach(function(a) { assignedAsins[a] = 'Bundles'; });
@@ -133,10 +152,16 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
   if (missing.length > 0) {
     var lastCat = result.categories[result.categories.length - 1];
     if (lastCat) {
-      lastCat.asins = lastCat.asins.concat(missing);
-      lastCat.productCount = lastCat.asins.length;
+      if (lastCat.subcategories && lastCat.subcategories.length > 0) {
+        var lastSub = lastCat.subcategories[lastCat.subcategories.length - 1];
+        lastSub.asins = lastSub.asins.concat(missing);
+        lastSub.productCount = lastSub.asins.length;
+      } else {
+        lastCat.asins = (lastCat.asins || []).concat(missing);
+        lastCat.productCount = (lastCat.asins || []).length;
+      }
     } else {
-      result.categories.push({ name: 'Weitere Produkte', asins: missing, productCount: missing.length });
+      result.categories.push({ name: 'Weitere Produkte', asins: missing, productCount: missing.length, subcategories: [] });
     }
   }
 
@@ -346,6 +371,7 @@ export async function aiRefineStore(store, command, brand, lang) {
       return {
         id: pg.id,
         name: pg.name,
+        parentId: pg.parentId || null,
         sections: pg.sections.map(function(sec, si) {
           return {
             index: si,
@@ -387,9 +413,10 @@ export async function aiRefineStore(store, command, brand, lang) {
     '    {"op": "move_section", "pageId": "...", "sectionId": "...", "newIndex": 0},',
     '    {"op": "update_tile", "pageId": "...", "sectionId": "...", "tileIndex": 0, "changes": {textOverlay: "...", brief: "..."}},',
     '    {"op": "change_layout", "pageId": "...", "sectionId": "...", "newLayoutId": "1-1"},',
-    '    {"op": "add_page", "page": {name: "...", sections: [...]}},',
+    '    {"op": "add_page", "page": {name: "...", sections: [...]}, "parentId": "optional-parent-page-id"},',
     '    {"op": "remove_page", "pageId": "..."},',
-    '    {"op": "rename_page", "pageId": "...", "newName": "..."}',
+    '    {"op": "rename_page", "pageId": "...", "newName": "..."},',
+    '    {"op": "set_parent", "pageId": "...", "parentId": "new-parent-id-or-null"}',
     '  ],',
     '  "explanation": "What was changed and why"',
     '}',
@@ -470,6 +497,7 @@ export function applyOperations(store, operations) {
       case 'add_page': {
         var newPage = op.page || {};
         newPage.id = uid();
+        if (op.parentId) newPage.parentId = op.parentId;
         (newPage.sections || []).forEach(function(s) {
           s.id = uid();
           (s.tiles || []).forEach(function(t) {
@@ -485,11 +513,17 @@ export function applyOperations(store, operations) {
         break;
       }
       case 'remove_page': {
-        newStore.pages = newStore.pages.filter(function(p) { return p.id !== op.pageId; });
+        // Also remove child pages when removing a parent
+        var childIds = newStore.pages.filter(function(p) { return p.parentId === op.pageId; }).map(function(p) { return p.id; });
+        newStore.pages = newStore.pages.filter(function(p) { return p.id !== op.pageId && childIds.indexOf(p.id) < 0; });
         break;
       }
       case 'rename_page': {
         if (page) page.name = op.newName || page.name;
+        break;
+      }
+      case 'set_parent': {
+        if (page) page.parentId = op.parentId || undefined;
         break;
       }
     }
@@ -548,24 +582,60 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     pages.push(fallbackHomepage(brand, lang, analysis.categories || [], products, analysis));
   }
 
-  // STEP 3: Generate Category Pages
+  // STEP 3: Generate Category Pages (with subcategory support)
   var categories = analysis.categories || [];
   for (var ci = 0; ci < categories.length; ci++) {
     var cat = categories[ci];
-    var catProducts = (cat.asins || []).map(function(a) { return productMap[a]; }).filter(Boolean);
-    if (catProducts.length === 0) continue;
+    var hasSubs = cat.subcategories && cat.subcategories.length > 0;
+    var parentPageId = 'cat-' + ci;
 
-    log('AI designing "' + cat.name + '" page (' + catProducts.length + ' products)...');
+    // Gather all ASINs for the parent category (including subcategory ASINs)
+    var allCatAsins = (cat.asins || []).slice();
+    if (hasSubs) {
+      cat.subcategories.forEach(function(sub) {
+        allCatAsins = allCatAsins.concat(sub.asins || []);
+      });
+    }
+    var allCatProducts = allCatAsins.map(function(a) { return productMap[a]; }).filter(Boolean);
+    if (allCatProducts.length === 0) continue;
+
+    // Generate the parent category page
+    log('AI designing "' + cat.name + '" page (' + allCatProducts.length + ' products)...');
     try {
       var catResult = await aiGeneratePageLayout(
-        cat.name, catProducts, brand, lang, false,
+        cat.name, allCatProducts, brand, lang, false,
         categories, analysis, userInstructions, cLevel, category
       );
-      pages.push({ id: 'cat-' + ci, name: cat.name, sections: catResult.sections || [] });
+      pages.push({ id: parentPageId, name: cat.name, sections: catResult.sections || [] });
       log(cat.name + ': ' + (catResult.sections || []).length + ' sections');
     } catch (err) {
       log('"' + cat.name + '" failed (' + err.message + '), using fallback...');
-      pages.push(fallbackCategoryPage('cat-' + ci, cat.name, catProducts, lang, analysis));
+      pages.push(fallbackCategoryPage(parentPageId, cat.name, allCatProducts, lang, analysis));
+    }
+
+    // Generate subcategory pages
+    if (hasSubs) {
+      for (var si = 0; si < cat.subcategories.length; si++) {
+        var sub = cat.subcategories[si];
+        var subProducts = (sub.asins || []).map(function(a) { return productMap[a]; }).filter(Boolean);
+        if (subProducts.length === 0) continue;
+
+        var subPageId = parentPageId + '-sub-' + si;
+        log('  AI designing sub-page "' + sub.name + '" (' + subProducts.length + ' products)...');
+        try {
+          var subResult = await aiGeneratePageLayout(
+            sub.name, subProducts, brand, lang, false,
+            categories, analysis, userInstructions, cLevel, category
+          );
+          pages.push({ id: subPageId, name: sub.name, parentId: parentPageId, sections: subResult.sections || [] });
+          log('  ' + sub.name + ': ' + (subResult.sections || []).length + ' sections');
+        } catch (err) {
+          log('  "' + sub.name + '" failed (' + err.message + '), using fallback...');
+          var fbPage = fallbackCategoryPage(subPageId, sub.name, subProducts, lang, analysis);
+          fbPage.parentId = parentPageId;
+          pages.push(fbPage);
+        }
+      }
     }
   }
 

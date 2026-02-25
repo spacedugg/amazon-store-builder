@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import SectionView from './SectionView';
 import { t } from '../i18n';
 
 export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onMoveSection, onChangeLayout, viewMode, onHeaderBannerUpload, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate }) {
+  var [hoveredNav, setHoveredNav] = useState(null);
   if (!page) {
     return (
       <div className="canvas">
@@ -44,17 +46,39 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
           )}
         </div>
 
-        {/* Store nav bar */}
+        {/* Store nav bar (2-level) */}
         <div className="canvas-store-header">
           <div className="store-brand-name">{store.brandName || 'Brand Store'}</div>
           <div className="store-nav-tabs">
-            {store.pages.map(function(pg) {
+            {store.pages.filter(function(pg) { return !pg.parentId; }).map(function(pg) {
+              var children = store.pages.filter(function(cp) { return cp.parentId === pg.id; });
+              var isActive = pg.id === curPage || children.some(function(c) { return c.id === curPage; });
+              var hasDropdown = children.length > 0;
+
               return (
-                <span key={pg.id}
-                  className={'store-nav-tab' + (pg.id === curPage ? ' active' : '')}
-                  onClick={function() { onSelectPage(pg.id); }}>
-                  {pg.name}
-                </span>
+                <div key={pg.id} className="store-nav-item"
+                  onMouseEnter={function() { if (hasDropdown) setHoveredNav(pg.id); }}
+                  onMouseLeave={function() { setHoveredNav(null); }}>
+                  <span
+                    className={'store-nav-tab' + (isActive ? ' active' : '') + (hasDropdown ? ' has-dropdown' : '')}
+                    onClick={function() { onSelectPage(pg.id); }}>
+                    {pg.name}
+                    {hasDropdown && <span className="nav-dropdown-arrow">{'\u25BE'}</span>}
+                  </span>
+                  {hasDropdown && hoveredNav === pg.id && (
+                    <div className="nav-dropdown">
+                      {children.map(function(child) {
+                        return (
+                          <div key={child.id}
+                            className={'nav-dropdown-item' + (child.id === curPage ? ' active' : '')}
+                            onClick={function() { onSelectPage(child.id); setHoveredNav(null); }}>
+                            {child.name}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
               );
             })}
           </div>
