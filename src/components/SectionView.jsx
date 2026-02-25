@@ -1,4 +1,5 @@
 import { LAYOUTS } from '../constants';
+import { t } from '../i18n';
 import TileView from './TileView';
 
 // Compute grid style and per-tile positioning for complex layouts
@@ -119,7 +120,7 @@ export default function SectionView({ section, idx, totalSections, sel, onSelect
   return (
     <div className="section-container">
       <div className="section-header">
-        <span className="section-label">Section {idx + 1}</span>
+        <span className="section-label">{t('canvas.section', uiLang)} {idx + 1}</span>
         <select className="section-layout-select" value={section.layoutId}
           onChange={function(e) { onChangeLayout(e.target.value); }}
           onClick={function(e) { e.stopPropagation(); }}>
@@ -128,9 +129,9 @@ export default function SectionView({ section, idx, totalSections, sel, onSelect
           })}
         </select>
         <div className="section-actions">
-          {onMoveUp && <button className="btn-icon-sm" onClick={onMoveUp} title="Move up">&uarr;</button>}
-          {onMoveDown && <button className="btn-icon-sm" onClick={onMoveDown} title="Move down">&darr;</button>}
-          {totalSections > 1 && <button className="btn-icon-sm btn-icon-danger" onClick={onDelete} title="Delete section">&times;</button>}
+          {onMoveUp && <button className="btn-icon-sm" onClick={onMoveUp} title={t('section.moveUp', uiLang)}>&uarr;</button>}
+          {onMoveDown && <button className="btn-icon-sm" onClick={onMoveDown} title={t('section.moveDown', uiLang)}>&darr;</button>}
+          {totalSections > 1 && <button className="btn-icon-sm btn-icon-danger" onClick={onDelete} title={t('section.delete', uiLang)}>&times;</button>}
         </div>
       </div>
       <div className="section-tiles" style={config.gridStyle}>
@@ -142,6 +143,7 @@ export default function SectionView({ section, idx, totalSections, sel, onSelect
                 onClick={function() { onSelect({ sid: section.id, ti: i }); }}
                 viewMode={viewMode}
                 products={products}
+                uiLang={uiLang}
               />
             </div>
           );

@@ -19,7 +19,7 @@ export default function Topbar({ store, onGenerate, onShowAsins, onShowPrice, on
         className="topbar-lang-select"
         value={uiLang}
         onChange={function(e) { onChangeLang(e.target.value); }}
-        title="UI Language"
+        title={t('app.title', uiLang)}
       >
         {UI_LANGUAGES.map(function(lang) {
           return <option key={lang.code} value={lang.code}>{lang.native}</option>;

@@ -119,12 +119,12 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
           <div className="props-section">
             <label className="label">{t('props.designerBrief', uiLang)}</label>
             <textarea value={tile.brief || ''} onChange={function(e) { u('brief', e.target.value); }}
-              rows={3} className="input" placeholder="Describe what the image should show..." />
+              rows={3} className="input" placeholder={t('props.designerBriefPlaceholder', uiLang)} />
           </div>
           <div className="props-section">
             <label className="label">{t('props.textOverlay', uiLang)}</label>
             <input value={tile.textOverlay || ''} onChange={function(e) { u('textOverlay', e.target.value); }}
-              className="input" placeholder="Text designed into the image" />
+              className="input" placeholder={t('props.textOverlayPlaceholder', uiLang)} />
           </div>
           <div className="props-section">
             <label className="label">{t('props.ctaText', uiLang)}</label>
@@ -193,9 +193,9 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
           )}
           {tile.type !== 'product_grid' && (
             <div className="hint">
-              {tile.type === 'best_sellers' && 'Amazon auto-selects best sellers. ASINs are optional filter.'}
-              {tile.type === 'recommended' && 'Amazon algorithm picks products. ASINs are optional.'}
-              {tile.type === 'deals' && 'Shows products with active deals from your catalog.'}
+              {tile.type === 'best_sellers' && t('props.bestSellersHint', uiLang)}
+              {tile.type === 'recommended' && t('props.recommendedHint', uiLang)}
+              {tile.type === 'deals' && t('props.dealsHint', uiLang)}
             </div>
           )}
         </div>
@@ -206,8 +206,8 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
         <div className="props-section">
           <label className="label">{t('props.textContent', uiLang)}</label>
           <textarea value={tile.textOverlay || ''} onChange={function(e) { u('textOverlay', e.target.value); }}
-            rows={4} className="input" placeholder="Native text content..." />
-          <div className="hint">Only for section headings or legal text.</div>
+            rows={4} className="input" placeholder={t('props.nativeTextPlaceholder', uiLang)} />
+          <div className="hint">{t('props.nativeTextHint', uiLang)}</div>
         </div>
       )}
 
@@ -217,7 +217,7 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
           <div className="props-section">
             <label className="label">{t('props.videoBrief', uiLang)}</label>
             <textarea value={tile.brief || ''} onChange={function(e) { u('brief', e.target.value); }}
-              rows={3} className="input" placeholder="Describe the video content..." />
+              rows={3} className="input" placeholder={t('props.videoBriefPlaceholder', uiLang)} />
           </div>
           <div className="props-section">
             <label className="label">{t('props.desktopDimensions', uiLang)}</label>

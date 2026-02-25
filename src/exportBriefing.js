@@ -1,9 +1,12 @@
 import {
   Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,
   WidthType, AlignmentType, HeadingLevel, BorderStyle, ShadingType,
-  PageBreak, TableLayoutType, VerticalAlign,
+  PageBreak, ImageRun,
 } from 'docx';
 import { LAYOUTS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES } from './constants';
+import { t } from './i18n';
+
+// ─── HELPERS ───
 
 function heading(text, level) {
   return new Paragraph({ heading: level || HeadingLevel.HEADING_1, spacing: { before: 300, after: 120 },
@@ -21,243 +24,307 @@ function divider() {
     children: [new TextRun({ text: '', size: 8 })] });
 }
 
-// ─── LAYOUT PATTERN VISUAL TABLE ───
-// Creates a table-based visual showing how tiles are arranged in the section
-function layoutPatternTable(section) {
+// ─── LAYOUT CELL POSITIONS ───
+// Each cell: [x, y, width, height] as fractions of total dimensions
+var LAYOUT_CELLS = {
+  '1': [[0, 0, 1, 1]],
+  '1-1': [[0, 0, .5, 1], [.5, 0, .5, 1]],
+  '1-1-1': [[0, 0, .333, 1], [.333, 0, .334, 1], [.667, 0, .333, 1]],
+  '1-1-1-1': [[0, 0, .25, 1], [.25, 0, .25, 1], [.5, 0, .25, 1], [.75, 0, .25, 1]],
+  '2-1': [[0, 0, .667, 1], [.667, 0, .333, 1]],
+  '1-2': [[0, 0, .333, 1], [.333, 0, .667, 1]],
+  '2-1-1': [[0, 0, .5, 1], [.5, 0, .25, 1], [.75, 0, .25, 1]],
+  '1-1-2': [[0, 0, .25, 1], [.25, 0, .25, 1], [.5, 0, .5, 1]],
+  'lg-2stack': [[0, 0, .667, 1], [.667, 0, .333, .5], [.667, .5, .333, .5]],
+  '2stack-lg': [[0, 0, .333, .5], [0, .5, .333, .5], [.333, 0, .667, 1]],
+  'lg-4grid': [[0, 0, .5, 1], [.5, 0, .25, .5], [.75, 0, .25, .5], [.5, .5, .25, .5], [.75, .5, .25, .5]],
+  '4grid-lg': [[0, 0, .25, .5], [.25, 0, .25, .5], [0, .5, .25, .5], [.25, .5, .25, .5], [.5, 0, .5, 1]],
+  'lg-6grid': [[0, 0, .5, 1], [.5, 0, .25, .333], [.75, 0, .25, .333], [.5, .333, .25, .334], [.75, .333, .25, .334], [.5, .667, .25, .333], [.75, .667, .25, .333]],
+  '6grid-lg': [[0, 0, .25, .333], [.25, 0, .25, .333], [0, .333, .25, .334], [.25, .333, .25, .334], [0, .667, .25, .333], [.25, .667, .25, .333], [.5, 0, .5, 1]],
+};
+
+// Colors per tile type
+var TILE_COLORS = {
+  image: '#dbeafe',
+  shoppable_image: '#fef3c7',
+  image_text: '#e0e7ff',
+  product_grid: '#dcfce7',
+  best_sellers: '#d1fae5',
+  recommended: '#cffafe',
+  deals: '#fce7f3',
+  video: '#ede9fe',
+  text: '#fef9c3',
+};
+
+// ─── CANVAS-BASED LAYOUT IMAGE ───
+// Renders a section layout as a PNG image using Canvas API
+
+async function renderLayoutImage(section) {
   var layout = LAYOUTS.find(function(l) { return l.id === section.layoutId; }) || LAYOUTS[0];
   var tiles = section.tiles || [];
-  var g = layout.grid;
-  var cellBorder = { style: BorderStyle.SINGLE, size: 1, color: '999999' };
-  var borders = { top: cellBorder, bottom: cellBorder, left: cellBorder, right: cellBorder };
+  var cells = LAYOUT_CELLS[layout.id] || LAYOUT_CELLS[layout.grid] || null;
 
-  function tileCell(idx, rowSpan, colSpan, widthPct) {
+  // Fallback: generate cells for unknown layouts
+  if (!cells) {
+    var count = tiles.length || 1;
+    cells = [];
+    for (var ci = 0; ci < count; ci++) {
+      cells.push([ci / count, 0, 1 / count, 1]);
+    }
+  }
+
+  var W = 760;
+  var H = 380;
+  var gap = 8;
+
+  var canvas = document.createElement('canvas');
+  canvas.width = W;
+  canvas.height = H;
+  var ctx = canvas.getContext('2d');
+
+  // Background
+  ctx.fillStyle = '#f1f5f9';
+  ctx.fillRect(0, 0, W, H);
+
+  // Draw each cell
+  cells.forEach(function(cell, idx) {
     var tile = tiles[idx];
-    var label = tile ? ('T' + (idx + 1)) : '?';
+
+    var cx = Math.round(cell[0] * (W - gap) + gap);
+    var cy = Math.round(cell[1] * (H - gap) + gap);
+    var cw = Math.round(cell[2] * (W - gap) - gap);
+    var ch = Math.round(cell[3] * (H - gap) - gap);
+
+    // Background color
+    var bgColor = (tile && tile.bgColor) ? tile.bgColor : (tile ? (TILE_COLORS[tile.type] || '#e2e8f0') : '#e2e8f0');
+    ctx.fillStyle = bgColor;
+    ctx.beginPath();
+    roundRect(ctx, cx, cy, cw, ch, 6);
+    ctx.fill();
+
+    // Border
+    ctx.strokeStyle = '#94a3b8';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    roundRect(ctx, cx, cy, cw, ch, 6);
+    ctx.stroke();
+
+    // Tile content
+    var label = 'T' + (idx + 1);
     var typeName = tile ? (TILE_TYPE_LABELS[tile.type] || tile.type) : '';
     var dims = tile && tile.dimensions ? (tile.dimensions.w + 'x' + tile.dimensions.h) : '';
-    var briefShort = tile && tile.brief ? tile.brief.slice(0, 40) : '';
-    var textOv = tile && tile.textOverlay ? ('"' + tile.textOverlay.slice(0, 30) + '"') : '';
-    var colorHint = tile && tile.bgColor ? ('[Color: ' + tile.bgColor + ']') : '';
+    var textOv = tile && tile.textOverlay ? ('"' + tile.textOverlay.slice(0, 20) + '"') : '';
 
-    var children = [
-      new Paragraph({ spacing: { before: 40, after: 20 }, alignment: AlignmentType.CENTER,
-        children: [new TextRun({ text: label, bold: true, size: 22, color: 'FF9900' })] }),
-      new Paragraph({ spacing: { after: 20 }, alignment: AlignmentType.CENTER,
-        children: [new TextRun({ text: typeName, size: 16, color: '666666' })] }),
-    ];
-    if (dims) {
-      children.push(new Paragraph({ spacing: { after: 10 }, alignment: AlignmentType.CENTER,
-        children: [new TextRun({ text: dims, size: 14, color: '999999', font: 'Courier New' })] }));
-    }
-    if (textOv) {
-      children.push(new Paragraph({ spacing: { after: 10 }, alignment: AlignmentType.CENTER,
-        children: [new TextRun({ text: textOv, size: 14, italics: true, color: '333333' })] }));
-    }
-    if (briefShort) {
-      children.push(new Paragraph({ spacing: { after: 10 }, alignment: AlignmentType.CENTER,
-        children: [new TextRun({ text: briefShort, size: 12, color: '888888' })] }));
-    }
-    if (colorHint) {
-      children.push(new Paragraph({ spacing: { after: 10 }, alignment: AlignmentType.CENTER,
-        children: [new TextRun({ text: colorHint, size: 12, color: '6644AA' })] }));
-    }
+    // Contrast-aware text color
+    var textColor = getContrastText(bgColor);
 
-    var cellProps = {
-      children: children,
-      borders: borders,
-      shading: { type: ShadingType.SOLID, color: tile && tile.bgColor ? tile.bgColor.replace('#', '') : 'F8F8F8' },
-      verticalAlign: VerticalAlign.CENTER,
-      width: { size: widthPct, type: WidthType.PERCENTAGE },
-    };
-    if (rowSpan && rowSpan > 1) cellProps.rowSpan = rowSpan;
-    if (colSpan && colSpan > 1) cellProps.columnSpan = colSpan;
-    return new TableCell(cellProps);
-  }
+    var centerX = cx + cw / 2;
+    var centerY = cy + ch / 2;
+    var lineH = 18;
+    var lines = [label];
+    if (typeName) lines.push(typeName);
+    if (dims) lines.push(dims);
+    if (textOv && ch > 100) lines.push(textOv);
 
-  function emptyCell(widthPct) {
-    return new TableCell({
-      children: [new Paragraph({ children: [new TextRun({ text: '', size: 8 })] })],
-      borders: { top: { style: BorderStyle.NONE }, bottom: { style: BorderStyle.NONE }, left: { style: BorderStyle.NONE }, right: { style: BorderStyle.NONE } },
-      width: { size: widthPct, type: WidthType.PERCENTAGE },
+    var startY = centerY - ((lines.length - 1) * lineH) / 2;
+
+    lines.forEach(function(line, li) {
+      if (li === 0) {
+        ctx.font = 'bold 18px Arial, sans-serif';
+      } else if (li === 1) {
+        ctx.font = '13px Arial, sans-serif';
+      } else {
+        ctx.font = '11px Arial, sans-serif';
+      }
+      ctx.fillStyle = textColor;
+      if (li >= 2) ctx.globalAlpha = 0.7;
+
+      // Truncate if wider than cell
+      var maxW = cw - 12;
+      var txt = line;
+      while (ctx.measureText(txt).width > maxW && txt.length > 4) {
+        txt = txt.slice(0, -2) + '..';
+      }
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(txt, centerX, startY + li * lineH);
+      ctx.globalAlpha = 1.0;
     });
-  }
+  });
 
-  var rows = [];
-
-  // Build grid based on layout type
-  if (g === 'lg-2stack') {
-    // Row 1: T1(large, rowSpan 2) | T2
-    // Row 2: (merged)             | T3
-    rows.push(new TableRow({ children: [tileCell(0, 2, 1, 66), tileCell(1, 1, 1, 34)] }));
-    rows.push(new TableRow({ children: [tileCell(2, 1, 1, 34)] }));
-
-  } else if (g === '2stack-lg') {
-    rows.push(new TableRow({ children: [tileCell(0, 1, 1, 34), tileCell(2, 2, 1, 66)] }));
-    rows.push(new TableRow({ children: [tileCell(1, 1, 1, 34)] }));
-
-  } else if (g === 'lg-4grid') {
-    // Row 1: T1(large, rowSpan 2) | T2 | T3
-    // Row 2: (merged)             | T4 | T5
-    rows.push(new TableRow({ children: [tileCell(0, 2, 1, 50), tileCell(1, 1, 1, 25), tileCell(2, 1, 1, 25)] }));
-    rows.push(new TableRow({ children: [tileCell(3, 1, 1, 25), tileCell(4, 1, 1, 25)] }));
-
-  } else if (g === '4grid-lg') {
-    rows.push(new TableRow({ children: [tileCell(0, 1, 1, 25), tileCell(1, 1, 1, 25), tileCell(4, 2, 1, 50)] }));
-    rows.push(new TableRow({ children: [tileCell(2, 1, 1, 25), tileCell(3, 1, 1, 25)] }));
-
-  } else if (g === 'lg-6grid') {
-    // Row 1: T1(large, rowSpan 3) | T2 | T3
-    // Row 2: (merged)             | T4 | T5
-    // Row 3: (merged)             | T6 | T7
-    rows.push(new TableRow({ children: [tileCell(0, 3, 1, 50), tileCell(1, 1, 1, 25), tileCell(2, 1, 1, 25)] }));
-    rows.push(new TableRow({ children: [tileCell(3, 1, 1, 25), tileCell(4, 1, 1, 25)] }));
-    rows.push(new TableRow({ children: [tileCell(5, 1, 1, 25), tileCell(6, 1, 1, 25)] }));
-
-  } else if (g === '6grid-lg') {
-    rows.push(new TableRow({ children: [tileCell(0, 1, 1, 25), tileCell(1, 1, 1, 25), tileCell(6, 3, 1, 50)] }));
-    rows.push(new TableRow({ children: [tileCell(2, 1, 1, 25), tileCell(3, 1, 1, 25)] }));
-    rows.push(new TableRow({ children: [tileCell(4, 1, 1, 25), tileCell(5, 1, 1, 25)] }));
-
-  } else {
-    // Simple row layout (1, 1-1, 1-1-1, 1-1-1-1, 2-1, 1-2, 2-1-1, 1-1-2)
-    var colCount = tiles.length || 1;
-    var cellWidth = Math.floor(100 / colCount);
-    var rowCells = tiles.map(function(t, i) {
-      return tileCell(i, 1, 1, cellWidth);
-    });
-    if (rowCells.length > 0) {
-      rows.push(new TableRow({ children: rowCells }));
-    }
-  }
-
-  if (rows.length === 0) return null;
-
-  return new Table({
-    rows: rows,
-    width: { size: 100, type: WidthType.PERCENTAGE },
-    layout: TableLayoutType.FIXED,
+  // Convert canvas to PNG Uint8Array
+  return new Promise(function(resolve) {
+    canvas.toBlob(function(blob) {
+      var reader = new FileReader();
+      reader.onload = function() {
+        resolve(new Uint8Array(reader.result));
+      };
+      reader.readAsArrayBuffer(blob);
+    }, 'image/png');
   });
 }
 
-function tileDescription(tile, tileIndex, productMap) {
+// Rounded rect path helper
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.arcTo(x + w, y, x + w, y + r, r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.arcTo(x + w, y + h, x + w - r, y + h, r);
+  ctx.lineTo(x + r, y + h);
+  ctx.arcTo(x, y + h, x, y + h - r, r);
+  ctx.lineTo(x, y + r);
+  ctx.arcTo(x, y, x + r, y, r);
+  ctx.closePath();
+}
+
+// Contrast text color based on background luminance
+function getContrastText(hex) {
+  if (!hex || hex.charAt(0) !== '#') return '#1e293b';
+  var r = parseInt(hex.slice(1, 3), 16) || 0;
+  var g = parseInt(hex.slice(3, 5), 16) || 0;
+  var b = parseInt(hex.slice(5, 7), 16) || 0;
+  var lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return lum > 0.55 ? '#1e293b' : '#f8fafc';
+}
+
+// ─── TILE DESCRIPTION ───
+
+function tileDescription(tile, tileIndex, productMap, lang) {
   var parts = [];
   var typeName = TILE_TYPE_LABELS[tile.type] || tile.type;
   parts.push(new Paragraph({ spacing: { before: 100, after: 40 },
-    children: [new TextRun({ text: 'Tile ' + (tileIndex + 1) + ': ' + typeName, bold: true, size: 24, color: '333333' })] }));
+    children: [new TextRun({ text: t('brief.tile', lang) + ' ' + (tileIndex + 1) + ': ' + typeName, bold: true, size: 24, color: '333333' })] }));
 
   if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0) {
     var asins = tile.asins || [];
-    parts.push(boldPara('Type: ', typeName));
-    parts.push(boldPara('ASINs: ', asins.join(', ') || 'Auto-selected by Amazon'));
-    parts.push(boldPara('Product Count: ', String(asins.length)));
+    parts.push(boldPara(t('brief.type', lang) + ': ', typeName));
+    parts.push(boldPara('ASINs: ', asins.join(', ') || t('brief.autoSelected', lang)));
+    parts.push(boldPara(t('brief.productCount', lang) + ': ', String(asins.length)));
     asins.slice(0, 10).forEach(function(a) {
       var p = productMap[a];
       if (p) parts.push(new Paragraph({ spacing: { before: 20, after: 20 },
         children: [new TextRun({ text: '  ' + a + ': ' + (p.name || '').slice(0, 60), size: 20, color: '666666' })] }));
     });
-    if (asins.length > 10) parts.push(new Paragraph({ children: [new TextRun({ text: '  ... +' + (asins.length - 10) + ' more', size: 20, color: '999999' })] }));
+    if (asins.length > 10) parts.push(new Paragraph({ children: [new TextRun({ text: '  ... +' + (asins.length - 10), size: 20, color: '999999' })] }));
   } else if (tile.type === 'video') {
-    parts.push(boldPara('Desktop: ', (tile.dimensions || {}).w + ' x ' + (tile.dimensions || {}).h + ' px'));
-    parts.push(boldPara('Mobile: ', (tile.mobileDimensions || {}).w + ' x ' + (tile.mobileDimensions || {}).h + ' px'));
-    if (tile.brief) parts.push(boldPara('Brief: ', tile.brief));
-    parts.push(boldPara('Thumbnail: ', tile.videoThumbnail ? 'Uploaded' : 'Not set'));
+    parts.push(boldPara(t('brief.desktop', lang) + ': ', (tile.dimensions || {}).w + ' x ' + (tile.dimensions || {}).h + ' px'));
+    parts.push(boldPara(t('brief.mobile', lang) + ': ', (tile.mobileDimensions || {}).w + ' x ' + (tile.mobileDimensions || {}).h + ' px'));
+    if (tile.brief) parts.push(boldPara(t('brief.brief', lang) + ': ', tile.brief));
+    parts.push(boldPara(t('brief.thumbnail', lang) + ': ', tile.videoThumbnail ? t('brief.uploaded', lang) : t('brief.notSet', lang)));
   } else {
     var dims = tile.dimensions || {};
     var mDims = tile.mobileDimensions || {};
-    if (dims.w) parts.push(boldPara('Desktop: ', dims.w + ' x ' + dims.h + ' px'));
-    if (mDims.w) parts.push(boldPara('Mobile: ', mDims.w + ' x ' + mDims.h + ' px'));
-    if (tile.bgColor) parts.push(boldPara('Color Preview: ', tile.bgColor));
-    if (tile.textOverlay) parts.push(boldPara('Text Overlay: ', '"' + tile.textOverlay + '"'));
-    if (tile.ctaText) parts.push(boldPara('CTA Button: ', '"' + tile.ctaText + '"'));
-    if (tile.brief) parts.push(boldPara('Designer Brief: ', tile.brief));
-    if (tile.linkAsin) parts.push(boldPara('Link ASIN: ', tile.linkAsin));
-    if (tile.linkUrl) parts.push(boldPara('Link URL: ', tile.linkUrl));
-    parts.push(boldPara('Desktop Image: ', tile.uploadedImage ? 'Uploaded' : 'Needs design'));
-    parts.push(boldPara('Mobile Image: ', tile.uploadedImageMobile ? 'Uploaded' : (tile.uploadedImage ? 'Uses desktop' : 'Needs design')));
+    if (dims.w) parts.push(boldPara(t('brief.desktop', lang) + ': ', dims.w + ' x ' + dims.h + ' px'));
+    if (mDims.w) parts.push(boldPara(t('brief.mobile', lang) + ': ', mDims.w + ' x ' + mDims.h + ' px'));
+    if (tile.bgColor) parts.push(boldPara(t('brief.colorPreview', lang) + ': ', tile.bgColor));
+    if (tile.textOverlay) parts.push(boldPara(t('brief.textOverlay', lang) + ': ', '"' + tile.textOverlay + '"'));
+    if (tile.ctaText) parts.push(boldPara(t('brief.ctaButton', lang) + ': ', '"' + tile.ctaText + '"'));
+    if (tile.brief) parts.push(boldPara(t('brief.designerBrief', lang) + ': ', tile.brief));
+    if (tile.linkAsin) parts.push(boldPara(t('brief.linkAsin', lang) + ': ', tile.linkAsin));
+    if (tile.linkUrl) parts.push(boldPara(t('brief.linkUrl', lang) + ': ', tile.linkUrl));
+    parts.push(boldPara(t('brief.desktopImage', lang) + ': ', tile.uploadedImage ? t('brief.uploaded', lang) : t('brief.needsDesign', lang)));
+    parts.push(boldPara(t('brief.mobileImage', lang) + ': ', tile.uploadedImageMobile ? t('brief.uploaded', lang) : (tile.uploadedImage ? t('brief.usesDesktop', lang) : t('brief.needsDesign', lang))));
   }
 
   return parts;
 }
 
+// ─── MAIN EXPORT ───
+
 export async function generateBriefingDocx(store) {
+  var lang = store.briefingLang || 'en';
   var children = [];
   var productMap = {};
   (store.products || []).forEach(function(p) { productMap[p.asin] = p; });
 
   // ─── TITLE PAGE ───
   children.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 1200, after: 200 },
-    children: [new TextRun({ text: 'Amazon Brand Store Briefing', bold: true, size: 48, color: '232F3E' })] }));
+    children: [new TextRun({ text: t('brief.docTitle', lang), bold: true, size: 48, color: '232F3E' })] }));
   children.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 120 },
     children: [new TextRun({ text: store.brandName || 'Brand Store', bold: true, size: 36, color: 'FF9900' })] }));
   children.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 60 },
-    children: [new TextRun({ text: 'Date: ' + new Date().toLocaleDateString('de-DE'), size: 24, color: '666666' })] }));
+    children: [new TextRun({ text: t('brief.date', lang) + ': ' + new Date().toLocaleDateString('de-DE'), size: 24, color: '666666' })] }));
   children.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 400 },
-    children: [new TextRun({ text: 'Marketplace: Amazon.' + (store.marketplace || 'de'), size: 24, color: '666666' })] }));
+    children: [new TextRun({ text: t('brief.marketplace', lang) + ': Amazon.' + (store.marketplace || 'de'), size: 24, color: '666666' })] }));
 
   // ─── OVERVIEW ───
-  children.push(heading('Overview', HeadingLevel.HEADING_1));
-  children.push(boldPara('Pages: ', String((store.pages || []).length)));
-  children.push(boldPara('Products: ', String((store.products || []).length)));
+  children.push(heading(t('brief.overview', lang), HeadingLevel.HEADING_1));
+  children.push(boldPara(t('brief.pages', lang) + ': ', String((store.pages || []).length)));
+  children.push(boldPara(t('brief.products', lang) + ': ', String((store.products || []).length)));
   var catNames = (store.pages || []).filter(function(p) { return p.id !== 'homepage'; }).map(function(p) { return p.name; });
-  children.push(boldPara('Categories: ', catNames.join(', ') || 'None'));
-  if (store.brandTone) children.push(boldPara('Brand Tone: ', store.brandTone));
-  if (store.heroMessage) children.push(boldPara('Hero Message: ', '"' + store.heroMessage + '"'));
-  if (store.category && store.category !== 'generic') children.push(boldPara('Niche: ', store.category));
+  children.push(boldPara(t('brief.categories', lang) + ': ', catNames.join(', ') || t('brief.none', lang)));
+  if (store.brandTone) children.push(boldPara(t('brief.brandTone', lang) + ': ', store.brandTone));
+  if (store.heroMessage) children.push(boldPara(t('brief.heroMessage', lang) + ': ', '"' + store.heroMessage + '"'));
+  if (store.category && store.category !== 'generic') children.push(boldPara(t('brief.niche', lang) + ': ', store.category));
   children.push(divider());
 
-  // ─── IMPORTANT NOTES ───
-  children.push(heading('Image Specifications', HeadingLevel.HEADING_2));
+  // ─── IMAGE SPECIFICATIONS ───
+  children.push(heading(t('brief.imageSpecs', lang), HeadingLevel.HEADING_2));
   children.push(new Paragraph({ spacing: { before: 60, after: 60 },
-    children: [new TextRun({ text: 'Each image tile requires TWO versions:', bold: true, size: 22 })] }));
-  children.push(new Paragraph({ children: [new TextRun({ text: 'Desktop version (typically 3000px wide)', size: 22 })] }));
-  children.push(new Paragraph({ children: [new TextRun({ text: 'Mobile version (typically 1242px wide)', size: 22 })] }));
+    children: [new TextRun({ text: t('brief.twoVersions', lang), bold: true, size: 22 })] }));
+  children.push(new Paragraph({ children: [new TextRun({ text: t('brief.desktopVersion', lang), size: 22 })] }));
+  children.push(new Paragraph({ children: [new TextRun({ text: t('brief.mobileVersion', lang), size: 22 })] }));
   children.push(new Paragraph({ spacing: { before: 40 },
-    children: [new TextRun({ text: 'Exact dimensions are specified per tile below. If only one dimension is given, create both versions with appropriate cropping.', size: 20, italics: true, color: '666666' })] }));
+    children: [new TextRun({ text: t('brief.dimensionsNote', lang), size: 20, italics: true, color: '666666' })] }));
   children.push(divider());
 
   // ─── HEADER BANNER ───
-  children.push(heading('Header Banner', HeadingLevel.HEADING_2));
-  children.push(boldPara('Desktop: ', '3000 x 600 px'));
-  children.push(boldPara('Mobile: ', '1242 x 450 px'));
-  children.push(boldPara('Status: ', store.headerBanner ? 'Uploaded' : 'Needs design'));
-  children.push(new Paragraph({ children: [new TextRun({ text: 'Shown above the navigation on every page. Can be overridden per page.', size: 20, color: '666666' })] }));
+  children.push(heading(t('brief.headerBanner', lang), HeadingLevel.HEADING_2));
+  children.push(boldPara(t('brief.desktop', lang) + ': ', '3000 x 600 px'));
+  children.push(boldPara(t('brief.mobile', lang) + ': ', '1242 x 450 px'));
+  children.push(boldPara(t('brief.status', lang) + ': ', store.headerBanner ? t('brief.uploaded', lang) : t('brief.needsDesign', lang)));
+  children.push(new Paragraph({ children: [new TextRun({ text: t('brief.headerBannerNote', lang), size: 20, color: '666666' })] }));
   children.push(divider());
 
   // ─── PER PAGE ───
-  (store.pages || []).forEach(function(page) {
+  for (var pi = 0; pi < (store.pages || []).length; pi++) {
+    var page = store.pages[pi];
     children.push(new Paragraph({ children: [new PageBreak()] }));
-    children.push(heading('Page: ' + page.name, HeadingLevel.HEADING_1));
+    children.push(heading(t('brief.page', lang) + ': ' + page.name, HeadingLevel.HEADING_1));
 
-    (page.sections || []).forEach(function(section, si) {
+    for (var si = 0; si < (page.sections || []).length; si++) {
+      var section = page.sections[si];
       var layout = LAYOUTS.find(function(l) { return l.id === section.layoutId; }) || LAYOUTS[0];
-      children.push(heading('Section ' + (si + 1) + ': ' + layout.name, HeadingLevel.HEADING_2));
+      children.push(heading(t('brief.section', lang) + ' ' + (si + 1) + ': ' + layout.name, HeadingLevel.HEADING_2));
 
-      // ─── VISUAL LAYOUT PATTERN TABLE ───
+      // ─── WIREFRAME IMAGE ───
       children.push(new Paragraph({ spacing: { before: 60, after: 30 },
-        children: [new TextRun({ text: 'Layout Pattern:', bold: true, size: 20, color: '475467' })] }));
+        children: [new TextRun({ text: t('brief.layoutPattern', lang) + ':', bold: true, size: 20, color: '475467' })] }));
 
-      var patternTable = layoutPatternTable(section);
-      if (patternTable) {
-        children.push(patternTable);
+      try {
+        var imageData = await renderLayoutImage(section);
+        children.push(new Paragraph({
+          alignment: AlignmentType.CENTER,
+          children: [new ImageRun({
+            data: imageData,
+            transformation: { width: 580, height: 290 },
+            type: 'png',
+          })],
+        }));
+      } catch (e) {
+        // Fallback text if canvas rendering fails
+        children.push(new Paragraph({ children: [new TextRun({ text: '[' + layout.name + ' - ' + layout.cells + ' tiles]', size: 20, color: '999999' })] }));
       }
 
       children.push(new Paragraph({ spacing: { before: 20, after: 40 },
-        children: [new TextRun({ text: 'Mobile: tiles stack vertically (top to bottom)', size: 18, italics: true, color: '999999' })] }));
+        children: [new TextRun({ text: t('brief.mobileStacking', lang), size: 18, italics: true, color: '999999' })] }));
 
       // Tile details
       (section.tiles || []).forEach(function(tile, ti) {
-        tileDescription(tile, ti, productMap).forEach(function(p) { children.push(p); });
+        tileDescription(tile, ti, productMap, lang).forEach(function(p) { children.push(p); });
       });
       children.push(divider());
-    });
-  });
+    }
+  }
 
   // ─── ASIN TABLE ───
   children.push(new Paragraph({ children: [new PageBreak()] }));
-  children.push(heading('ASIN Overview', HeadingLevel.HEADING_1));
+  children.push(heading(t('brief.asinOverview', lang), HeadingLevel.HEADING_1));
 
+  var headerLabels = ['ASIN', t('brief.productName', lang), t('brief.category', lang), t('brief.price', lang), t('brief.rating', lang), t('brief.page', lang)];
   var headerRow = new TableRow({
-    children: ['ASIN', 'Product Name', 'Category', 'Price', 'Rating', 'Page'].map(function(h) {
+    children: headerLabels.map(function(h) {
       return new TableCell({ width: { size: 16, type: WidthType.PERCENTAGE },
         shading: { type: ShadingType.SOLID, color: '232F3E' },
         children: [new Paragraph({ children: [new TextRun({ text: h, bold: true, size: 18, color: 'FFFFFF' })] })] });
@@ -267,8 +334,8 @@ export async function generateBriefingDocx(store) {
   var asinPageMap = {};
   (store.pages || []).forEach(function(pg) {
     (pg.sections || []).forEach(function(sec) {
-      sec.tiles.forEach(function(t) {
-        (t.asins || []).forEach(function(a) { asinPageMap[a] = pg.name; });
+      sec.tiles.forEach(function(tl) {
+        (tl.asins || []).forEach(function(a) { asinPageMap[a] = pg.name; });
       });
     });
   });
@@ -279,7 +346,7 @@ export async function generateBriefingDocx(store) {
     return new TableRow({
       children: [p.asin || '', (p.name || '').slice(0, 40), catName,
         p.price ? (p.currency || 'EUR') + '' + p.price : '', p.rating ? p.rating + ' (' + (p.reviews || 0) + ')' : '',
-        asinPageMap[p.asin] || 'Unassigned',
+        asinPageMap[p.asin] || t('brief.unassigned', lang),
       ].map(function(val) {
         return new TableCell({ width: { size: 16, type: WidthType.PERCENTAGE },
           children: [new Paragraph({ children: [new TextRun({ text: String(val), size: 16 })] })] });

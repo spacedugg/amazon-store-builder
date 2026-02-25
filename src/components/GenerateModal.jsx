@@ -93,13 +93,13 @@ export default function GenerateModal({ onClose, onGenerate, uiLang }) {
         <div className="hint">{t('gen.asinHint', uiLang)}</div>
         {asins.length > 0 && (
           <div className="asin-preview">
-            {asins.slice(0, 6).join(', ')}{asins.length > 6 ? ' +' + (asins.length - 6) + ' more' : ''}
+            {asins.slice(0, 6).join(', ')}{asins.length > 6 ? ' +' + (asins.length - 6) + ' ' + t('gen.more', uiLang) : ''}
           </div>
         )}
 
         {/* 2. Brand Name */}
         <label className="label" style={{ marginTop: 10 }}>2. {t('gen.brandName', uiLang)} *</label>
-        <input value={brand} onChange={function(e) { setBrand(e.target.value); }} className="input" placeholder="e.g. Futum, Kaercher, Nespresso" />
+        <input value={brand} onChange={function(e) { setBrand(e.target.value); }} className="input" placeholder={t('gen.brandNamePlaceholder', uiLang)} />
 
         {/* 3. Marketplace */}
         <label className="label">3. {t('gen.marketplace', uiLang)}</label>
