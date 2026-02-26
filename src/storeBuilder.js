@@ -1,32 +1,62 @@
 import { uid, LAYOUTS, REFERENCE_STORES, STORE_PRINCIPLES, MODULE_BAUKASTEN, PRODUCT_COMPLEXITY, COMPLEXITY_LEVELS, CATEGORY_STYLE_HINTS } from './constants';
 
 var ANTHROPIC_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY || '';
+var PRIMARY_MODEL = 'claude-opus-4-6';
+var FALLBACK_MODEL = 'claude-sonnet-4-6';
 
-// ─── CLAUDE API CALL ───
+// ─── CLAUDE API CALL (with retry + fallback) ───
 async function callClaude(systemPrompt, userPrompt, maxTokens) {
   if (!ANTHROPIC_KEY) throw new Error('VITE_ANTHROPIC_API_KEY not configured');
-  var resp = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': ANTHROPIC_KEY,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true',
-    },
-    body: JSON.stringify({
-      model: 'claude-opus-4-6',
-      max_tokens: maxTokens || 4000,
-      system: systemPrompt,
-      messages: [{ role: 'user', content: userPrompt }],
-    }),
-  });
-  if (!resp.ok) {
-    var err = await resp.text();
-    throw new Error('Claude API error: ' + resp.status + ' ' + err);
+
+  var models = [PRIMARY_MODEL, PRIMARY_MODEL, FALLBACK_MODEL];
+  var delays = [2000, 4000, 0];
+
+  for (var attempt = 0; attempt < models.length; attempt++) {
+    var model = models[attempt];
+    try {
+      var resp = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': ANTHROPIC_KEY,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true',
+        },
+        body: JSON.stringify({
+          model: model,
+          max_tokens: maxTokens || 4000,
+          system: systemPrompt,
+          messages: [{ role: 'user', content: userPrompt }],
+        }),
+      });
+
+      if (resp.status === 529 || resp.status === 503 || resp.status === 429) {
+        if (attempt < models.length - 1) {
+          console.warn('API ' + resp.status + ' with ' + model + ', retrying in ' + (delays[attempt] / 1000) + 's...');
+          if (delays[attempt] > 0) await new Promise(function(r) { setTimeout(r, delays[attempt]); });
+          continue;
+        }
+      }
+
+      if (!resp.ok) {
+        var err = await resp.text();
+        throw new Error('Claude API error: ' + resp.status + ' ' + err);
+      }
+
+      var data = await resp.json();
+      var text = (data.content || []).map(function(b) { return b.text || ''; }).join('');
+      return text;
+    } catch (e) {
+      if (attempt < models.length - 1 && (e.message.indexOf('529') >= 0 || e.message.indexOf('503') >= 0 || e.message.indexOf('overload') >= 0 || e.message.indexOf('fetch') >= 0)) {
+        console.warn('Call failed (' + e.message + '), retrying...');
+        if (delays[attempt] > 0) await new Promise(function(r) { setTimeout(r, delays[attempt]); });
+        continue;
+      }
+      throw e;
+    }
   }
-  var data = await resp.json();
-  var text = (data.content || []).map(function(b) { return b.text || ''; }).join('');
-  return text;
+
+  throw new Error('All API attempts failed');
 }
 
 function extractJSON(text) {
@@ -132,7 +162,7 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
     '- keyFeatures: Extract 3-5 notable product features from descriptions that could be highlighted visually.',
   ].filter(Boolean).join('\n');
 
-  var text = await callClaude(system, user, 4000);
+  var text = await callClaude(system, user, 8000);
   var result = extractJSON(text);
 
   // Validate: every ASIN must be in a category or subcategory
