@@ -216,6 +216,13 @@ textarea.input { resize: vertical; min-height: 44px; }
 .modal-footer { display: flex; gap: 8px; margin-top: 20px; justify-content: flex-end; }
 .modal-scroll-body { flex: 1; overflow-y: auto; max-height: 60vh; }
 
+/* ─── INPUT MODE TABS ─── */
+.input-mode-tabs { display: flex; gap: 0; margin-bottom: 6px; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0; }
+.input-mode-tab { flex: 1; padding: 7px 12px; font-size: 11px; font-weight: 600; border: none; background: #f8fafc; color: #64748b; cursor: pointer; transition: all .15s; }
+.input-mode-tab:not(:last-child) { border-right: 1px solid #e2e8f0; }
+.input-mode-tab.active { background: #0f172a; color: #fff; }
+.input-mode-tab:hover:not(.active) { background: #f1f5f9; }
+
 /* ─── COMPLEXITY SLIDER ─── */
 .complexity-slider { margin-top: 6px; }
 .complexity-track { display: flex; gap: 4px; }

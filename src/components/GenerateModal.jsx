@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { AMAZON_CATEGORIES, COMPLEXITY_LEVELS } from '../constants';
+import { discoverBrandProducts } from '../api';
 import { t } from '../i18n';
 
 function parseAsinFile(text) {
@@ -29,13 +30,17 @@ export default function GenerateModal({ onClose, onGenerate, uiLang }) {
   var [pasteText, setPasteText] = useState('');
   var [complexity, setComplexity] = useState(2);
   var [category, setCategory] = useState('generic');
+  var [inputMode, setInputMode] = useState('file'); // 'file', 'paste', 'brandUrl'
+  var [brandUrl, setBrandUrl] = useState('');
+  var [brandDiscovering, setBrandDiscovering] = useState(false);
+  var [brandDiscoverError, setBrandDiscoverError] = useState('');
   var fileRef = useRef(null);
 
   var onFileChange = function(e) {
     var f = e.target.files && e.target.files[0];
     if (!f) return;
     var reader = new FileReader();
-    reader.onload = function(ev) { setAsins(parseAsinFile(ev.target.result)); };
+    reader.onload = function(ev) { setAsins(parseAsinFile(ev.target.result)); setInputMode('file'); };
     reader.readAsText(f);
     if (fileRef.current) fileRef.current.value = '';
   };
@@ -43,7 +48,30 @@ export default function GenerateModal({ onClose, onGenerate, uiLang }) {
   var onPasteConfirm = function() {
     if (pasteText.trim()) {
       setAsins(parseAsinFile(pasteText));
-      setPasteMode(false);
+      setInputMode('file');
+    }
+  };
+
+  var onBrandDiscover = async function() {
+    if (!brandUrl.trim()) return;
+    setBrandDiscovering(true);
+    setBrandDiscoverError('');
+    try {
+      var result = await discoverBrandProducts(brandUrl.trim());
+      if (result.asins && result.asins.length > 0) {
+        setAsins(result.asins);
+        // Auto-detect brand name from first product if not set
+        if (!brand.trim() && result.products && result.products[0] && result.products[0].brand) {
+          setBrand(result.products[0].brand);
+        }
+        setInputMode('file');
+      } else {
+        setBrandDiscoverError(t('gen.brandDiscoverEmpty', uiLang));
+      }
+    } catch (err) {
+      setBrandDiscoverError(err.message);
+    } finally {
+      setBrandDiscovering(false);
     }
   };
 
@@ -55,25 +83,45 @@ export default function GenerateModal({ onClose, onGenerate, uiLang }) {
       <div className="modal-box" onClick={function(e) { e.stopPropagation(); }} style={{ maxWidth: 520, maxHeight: '90vh', overflow: 'auto' }}>
         <div className="modal-title">{t('gen.title', uiLang)}</div>
 
-        {/* 1. ASIN Upload */}
+        {/* 1. Product Input */}
         <label className="label">1. {t('gen.uploadAsins', uiLang)} *</label>
-        {!pasteMode ? (
-          <>
-            <input ref={fileRef} type="file" accept=".csv,.txt,.tsv" style={{ display: 'none' }} onChange={onFileChange} />
-            <div style={{ display: 'flex', gap: 6 }}>
-              <button
-                className={'btn' + (asins.length ? ' btn-green' : '')}
-                style={{ flex: 1, padding: 8 }}
-                onClick={function() { fileRef.current && fileRef.current.click(); }}
-              >
-                {asins.length ? asins.length + ' ' + t('gen.asinsLoaded', uiLang) : t('gen.uploadCsv', uiLang)}
-              </button>
-              <button className="btn" style={{ padding: 8 }} onClick={function() { setPasteMode(true); }}>
-                {t('gen.paste', uiLang)}
-              </button>
-            </div>
-          </>
-        ) : (
+
+        {/* Input mode tabs */}
+        <div className="input-mode-tabs">
+          <button
+            className={'input-mode-tab' + (inputMode === 'file' || inputMode === 'paste' ? ' active' : '')}
+            onClick={function() { setInputMode('file'); }}
+          >
+            {t('gen.asinList', uiLang)}
+          </button>
+          <button
+            className={'input-mode-tab' + (inputMode === 'brandUrl' ? ' active' : '')}
+            onClick={function() { setInputMode('brandUrl'); }}
+          >
+            {t('gen.brandUrl', uiLang)}
+          </button>
+        </div>
+
+        {inputMode === 'brandUrl' ? (
+          <div style={{ marginTop: 6 }}>
+            <input
+              className="input"
+              value={brandUrl}
+              onChange={function(e) { setBrandUrl(e.target.value); }}
+              placeholder={t('gen.brandUrlPlaceholder', uiLang)}
+            />
+            <div className="hint">{t('gen.brandUrlHint', uiLang)}</div>
+            <button
+              className="btn btn-primary"
+              style={{ marginTop: 6, padding: '8px 16px' }}
+              disabled={!brandUrl.trim() || brandDiscovering}
+              onClick={onBrandDiscover}
+            >
+              {brandDiscovering ? t('gen.discovering', uiLang) : t('gen.discoverProducts', uiLang)}
+            </button>
+            {brandDiscoverError && <div className="price-error" style={{ marginTop: 4 }}>{brandDiscoverError}</div>}
+          </div>
+        ) : inputMode === 'paste' ? (
           <>
             <textarea
               className="input"
@@ -84,11 +132,28 @@ export default function GenerateModal({ onClose, onGenerate, uiLang }) {
               autoFocus
             />
             <div style={{ display: 'flex', gap: 6, marginTop: 4 }}>
-              <button className="btn" onClick={function() { setPasteMode(false); }}>{t('gen.cancel', uiLang)}</button>
+              <button className="btn" onClick={function() { setInputMode('file'); }}>{t('gen.cancel', uiLang)}</button>
               <button className="btn btn-primary" onClick={onPasteConfirm}>{t('gen.parseAsins', uiLang)}</button>
             </div>
           </>
+        ) : (
+          <>
+            <input ref={fileRef} type="file" accept=".csv,.txt,.tsv" style={{ display: 'none' }} onChange={onFileChange} />
+            <div style={{ display: 'flex', gap: 6 }}>
+              <button
+                className={'btn' + (asins.length ? ' btn-green' : '')}
+                style={{ flex: 1, padding: 8 }}
+                onClick={function() { fileRef.current && fileRef.current.click(); }}
+              >
+                {asins.length ? asins.length + ' ' + t('gen.asinsLoaded', uiLang) : t('gen.uploadCsv', uiLang)}
+              </button>
+              <button className="btn" style={{ padding: 8 }} onClick={function() { setInputMode('paste'); }}>
+                {t('gen.paste', uiLang)}
+              </button>
+            </div>
+          </>
         )}
+
         <div className="hint">{t('gen.asinHint', uiLang)}</div>
         {asins.length > 0 && (
           <div className="asin-preview">

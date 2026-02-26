@@ -399,6 +399,40 @@ var translations = {
     en: 'more', de: 'weitere', uk: 'ще', ru: 'ещё',
     id: 'lagi', ky: 'дагы', bg: 'още', es: 'más',
   },
+  'gen.asinList': {
+    en: 'ASIN List', de: 'ASIN-Liste', uk: 'Список ASIN', ru: 'Список ASIN',
+    id: 'Daftar ASIN', ky: 'ASIN тизмеси', bg: 'ASIN списък', es: 'Lista ASIN',
+  },
+  'gen.brandUrl': {
+    en: 'Brand / Seller URL', de: 'Marken- / Seller-URL', uk: 'URL бренду / продавця', ru: 'URL бренда / продавца',
+    id: 'URL Merek / Penjual', ky: 'Бренд / Сатуучу URL', bg: 'URL на бранд / продавач', es: 'URL Marca / Vendedor',
+  },
+  'gen.brandUrlPlaceholder': {
+    en: 'https://www.amazon.de/s?me=SELLER_ID...', de: 'https://www.amazon.de/s?me=SELLER_ID...', uk: 'https://www.amazon.de/s?me=SELLER_ID...', ru: 'https://www.amazon.de/s?me=SELLER_ID...',
+    id: 'https://www.amazon.de/s?me=SELLER_ID...', ky: 'https://www.amazon.de/s?me=SELLER_ID...', bg: 'https://www.amazon.de/s?me=SELLER_ID...', es: 'https://www.amazon.de/s?me=SELLER_ID...',
+  },
+  'gen.brandUrlHint': {
+    en: 'Paste the Amazon seller/brand page URL to auto-discover all products',
+    de: 'Amazon Seller-/Markenseite-URL einfügen, um alle Produkte automatisch zu finden',
+    uk: 'Вставте URL сторінки продавця/бренду Amazon для автоматичного пошуку всіх продуктів',
+    ru: 'Вставьте URL страницы продавца/бренда Amazon для автоматического поиска всех продуктов',
+    id: 'Tempel URL halaman penjual/merek Amazon untuk menemukan semua produk secara otomatis',
+    ky: 'Бардык продукттарды автоматтык табуу үчүн Amazon сатуучу/бренд барагынын URL\'ин коюңуз',
+    bg: 'Поставете URL на страницата на продавач/бранд в Amazon за автоматично откриване на всички продукти',
+    es: 'Pega la URL de la página del vendedor/marca de Amazon para descubrir todos los productos automáticamente',
+  },
+  'gen.discoverProducts': {
+    en: 'Discover Products', de: 'Produkte finden', uk: 'Знайти продукти', ru: 'Найти продукты',
+    id: 'Temukan Produk', ky: 'Продукттарды табуу', bg: 'Открий продукти', es: 'Descubrir productos',
+  },
+  'gen.discovering': {
+    en: 'Discovering...', de: 'Suche läuft...', uk: 'Пошук...', ru: 'Поиск...',
+    id: 'Mencari...', ky: 'Издөөдө...', bg: 'Търсене...', es: 'Buscando...',
+  },
+  'gen.brandDiscoverEmpty': {
+    en: 'No products found at this URL', de: 'Keine Produkte unter dieser URL gefunden', uk: 'Продукти не знайдено за цим URL', ru: 'Продукты не найдены по этому URL',
+    id: 'Tidak ada produk ditemukan di URL ini', ky: 'Бул URL\'де продукт табылган жок', bg: 'Не са намерени продукти на този URL', es: 'No se encontraron productos en esta URL',
+  },
 
   // ─── AI CHAT ───
   'chat.placeholder': {
