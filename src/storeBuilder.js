@@ -67,7 +67,7 @@ function extractJSON(text) {
 }
 
 // ─── STEP 1: ANALYSIS & PAGE STRUCTURE ───
-export async function aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions, category) {
+export async function aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions) {
   var productList = products.map(function(p) {
     return {
       asin: p.asin,
@@ -81,11 +81,27 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
     };
   });
 
+  // Detect if user provided a menu/category structure
+  var hasMenuStructure = userInstructions && (
+    userInstructions.indexOf('-') >= 0 ||
+    userInstructions.match(/kategori|menu|struktur|categor|structur|page|seite|unterseite/i)
+  );
+
   var system = [
     'You are an expert Amazon Brand Store strategist who has analyzed hundreds of top-performing Brand Stores.',
     '',
     'YOUR TASK: Analyze the product catalog and create an optimal store structure.',
     '',
+    hasMenuStructure ? [
+      '*** CRITICAL: USER HAS PROVIDED A SPECIFIC MENU STRUCTURE ***',
+      'The user has given you an EXACT menu structure below.',
+      'You MUST use this structure as-is. Do NOT change category names, do NOT reorder, do NOT merge or split categories.',
+      'Your job is ONLY to assign each ASIN to the correct category/subcategory based on product names and descriptions.',
+      'Categories prefixed with "-" are subcategories of the category above them.',
+      'If an ASIN does not clearly fit any user-defined category, place it in the closest matching one.',
+      '***',
+      '',
+    ].join('\n') : '',
     'PRODUCT COMPLEXITY CLASSIFICATION (determines store depth):',
     JSON.stringify(PRODUCT_COMPLEXITY, null, 1),
     '',
@@ -93,26 +109,16 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
     JSON.stringify(REFERENCE_STORES, null, 1),
     '',
     'PRINCIPLES:',
-    '- Every ASIN must be assigned to exactly ONE category',
-    '- Categories should be based on actual product types/use cases, NOT Amazon taxonomy',
-    '- Create 2-8 meaningful category names based on what the products actually ARE (e.g. "Schuhe", "Taschen", "Accessoires")',
-    '- If products include multipacks/bundles/sets, create a "Bundles & Sparen" page',
+    '- Every ASIN must be assigned to exactly ONE category or subcategory',
+    hasMenuStructure
+      ? '- USE THE EXACT CATEGORY NAMES PROVIDED BY THE USER. Do not rename them.'
+      : '- Create 2-8 meaningful category names based on what the products actually ARE (e.g. "Schuhe", "Taschen", "Accessoires")',
+    '- If products include multipacks/bundles/sets, create a "Bundles & Sparen" page (unless user specified otherwise)',
     '- Homepage always exists as the first page',
-    '- OPTIONAL: A category with 8+ products MAY have subcategories to split into sub-groups',
-    '- Most categories should NOT have subcategories - only use when it clearly makes sense',
     '- Classify the product complexity: simple, medium, complex, or variantRich',
     '- Brand tone must match the product category (technical, lifestyle, playful, premium, etc.)',
     '- Look at the product descriptions to determine if products have notable features worth highlighting',
     '- If products come in many variants (colors, materials, sizes), flag as variantRich',
-    '',
-    category && category !== 'generic' && CATEGORY_STYLE_HINTS[category]
-      ? [
-          'PRODUCT NICHE: ' + category,
-          'TONE: ' + CATEGORY_STYLE_HINTS[category].tone,
-          'VISUAL STYLE: ' + CATEGORY_STYLE_HINTS[category].visualStyle,
-          CATEGORY_STYLE_HINTS[category].trustFocus ? 'TRUST FOCUS: Include trust elements, certifications, and USPs prominently.' : '',
-        ].filter(Boolean).join('\n')
-      : '',
     '',
     'Return ONLY valid JSON, no other text.',
   ].filter(Boolean).join('\n');
@@ -121,8 +127,13 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
     'Brand: "' + brand + '"',
     'Marketplace: Amazon.' + marketplace,
     'Language: ' + lang,
-    userInstructions ? 'User instructions: ' + userInstructions : '',
     '',
+    userInstructions ? [
+      '=== USER INSTRUCTIONS (MUST BE FOLLOWED) ===',
+      userInstructions,
+      '=== END USER INSTRUCTIONS ===',
+      '',
+    ].join('\n') : '',
     'Products (' + products.length + '):',
     JSON.stringify(productList, null, 1),
     '',
@@ -151,13 +162,14 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
     '}',
     '',
     'IMPORTANT:',
-    '- FOCUS ON CATEGORIZATION: Group products into 2-8 meaningful categories based on PRODUCT TYPE, not brand taxonomy.',
-    '- Examples: "Reinigungsgeräte", "Zubehör", "Pflegemittel" or "Shirts", "Hosen", "Jacken", "Schuhe".',
+    hasMenuStructure
+      ? '- THE USER PROVIDED A SPECIFIC MENU STRUCTURE. Use those EXACT category and subcategory names. Assign ASINs to the matching categories based on product name and description.'
+      : '- FOCUS ON CATEGORIZATION: Group products into 2-8 meaningful categories based on PRODUCT TYPE, not brand taxonomy.',
+    hasMenuStructure ? '' : '- Examples: "Reinigungsgeräte", "Zubehör", "Pflegemittel" or "Shirts", "Hosen", "Jacken", "Schuhe".',
     '- NEVER put all products into one single category like "Sonstige" or "Alle Produkte". Always find meaningful sub-groups.',
     '- Every ASIN from the product list must appear in exactly one category. Do not skip any ASINs.',
     '- If a category has subcategories, put the ASINs in the subcategories, NOT in the parent category.',
     '- If a category has NO subcategories, put ASINs directly in the category and omit "subcategories".',
-    '- Most categories should NOT have subcategories. Only use them for very large groups (8+ products) with natural sub-divisions.',
     '- Determine productComplexity by looking at product descriptions: simple products need less explanation, complex/technical products need more.',
     '- keyFeatures: Extract 3-5 notable product features from descriptions that could be highlighted visually.',
   ].filter(Boolean).join('\n');
@@ -563,7 +575,7 @@ export function applyOperations(store, operations) {
 }
 
 // ─── FULL GENERATION WORKFLOW ───
-export async function generateStore(asins, products, brand, marketplace, lang, userInstructions, onLog, complexityLevel, category) {
+export async function generateStore(asins, products, brand, marketplace, lang, userInstructions, onLog, complexityLevel) {
   var log = onLog || function() {};
   var cLevel = complexityLevel || 2;
   var cConfig = COMPLEXITY_LEVELS[cLevel] || COMPLEXITY_LEVELS[2];
@@ -571,10 +583,9 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   // STEP 1: AI Analysis
   log('AI analyzing product catalog and planning store structure...');
   log('   Complexity: Level ' + cLevel + ' (' + cConfig.name + ')');
-  if (category && category !== 'generic') log('   Niche: ' + category);
   var analysis;
   try {
-    analysis = await aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions, category);
+    analysis = await aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions);
     // Validate that we got actual categories
     if (!analysis.categories || analysis.categories.length === 0) {
       log('AI returned no categories, using fallback grouping...');

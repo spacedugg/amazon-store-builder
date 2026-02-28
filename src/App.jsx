@@ -4,7 +4,6 @@ import { scrapeAsins } from './api';
 import { generateStore, aiRefineStore, applyOperations } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave } from './storage';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
-import { t } from './i18n';
 import Topbar from './components/Topbar';
 import PageList from './components/PageList';
 import Canvas from './components/Canvas';
@@ -34,7 +33,6 @@ export default function App() {
   var [warnings, setWarnings] = useState([]);
   var [viewMode, setViewMode] = useState('desktop');
   var [requestedAsins, setRequestedAsins] = useState([]);
-  var [uiLang, setUiLang] = useState('en');
   var [showSaved, setShowSaved] = useState(false);
   var [showExport, setShowExport] = useState(false);
   var headerBannerInputRef = useRef(null);
@@ -82,12 +80,11 @@ export default function App() {
       // Step 2-4: AI generation (with complexity, category)
       var storeData = await generateStore(
         params.asins, products, params.brand, params.marketplace, lang,
-        params.instructions, log, params.complexity, params.category
+        params.instructions, log, params.complexity
       );
 
       // Store meta
       storeData.complexity = params.complexity;
-      storeData.category = params.category;
 
       setStore(storeData);
       setCurPage(storeData.pages[0] ? storeData.pages[0].id : '');
@@ -265,7 +262,7 @@ export default function App() {
     var id = saveStore(store);
     if (id) {
       setSavedStores(loadSavedStores());
-      alert(t('app.storeSaved', uiLang) + ' (' + (store.brandName || 'Untitled') + ')');
+      alert('Store saved! (' + (store.brandName || 'Untitled') + ')');
     }
   };
 
@@ -290,6 +287,16 @@ export default function App() {
   var handleDeleteSaved = function(id) {
     deleteSavedStore(id);
     setSavedStores(loadSavedStores());
+  };
+
+  // ─── NEW STORE (reset) ───
+  var handleNewStore = function() {
+    if (store.pages.length > 0 && !confirm('Start a new store? Unsaved changes will be lost.')) return;
+    setStore(EMPTY_STORE);
+    setCurPage('');
+    setSel(null);
+    setWarnings([]);
+    setRequestedAsins([]);
   };
 
   // ─── VIEW MODE ───
@@ -380,8 +387,7 @@ export default function App() {
         onSave={handleSave}
         viewMode={viewMode}
         onToggleView={handleToggleView}
-        uiLang={uiLang}
-        onChangeLang={setUiLang}
+        onNewStore={handleNewStore}
       />
 
       <div className="app-body">
