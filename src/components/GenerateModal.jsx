@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { COMPLEXITY_LEVELS } from '../constants';
+import { COMPLEXITY_LEVELS, STORE_TEMPLATES } from '../constants';
 import { discoverBrandProducts } from '../api';
 
 function parseAsinFile(text) {
@@ -27,10 +27,13 @@ export default function GenerateModal({ onClose, onGenerate }) {
   var [asins, setAsins] = useState([]);
   var [pasteText, setPasteText] = useState('');
   var [complexity, setComplexity] = useState(2);
+  var [selectedTemplate, setSelectedTemplate] = useState(null);
+  var [showTemplateDetail, setShowTemplateDetail] = useState(null);
   var [inputMode, setInputMode] = useState('file'); // 'file', 'paste', 'brandUrl'
   var [brandUrl, setBrandUrl] = useState('');
   var [brandDiscovering, setBrandDiscovering] = useState(false);
   var [brandDiscoverError, setBrandDiscoverError] = useState('');
+  var [brandDiscoverProgress, setBrandDiscoverProgress] = useState('');
   var fileRef = useRef(null);
 
   var onFileChange = function(e) {
@@ -53,21 +56,26 @@ export default function GenerateModal({ onClose, onGenerate }) {
     if (!brandUrl.trim()) return;
     setBrandDiscovering(true);
     setBrandDiscoverError('');
+    setBrandDiscoverProgress('Starting discovery...');
     try {
-      var result = await discoverBrandProducts(brandUrl.trim());
+      var result = await discoverBrandProducts(brandUrl.trim(), function(msg) {
+        setBrandDiscoverProgress(msg);
+      });
       if (result.asins && result.asins.length > 0) {
         setAsins(result.asins);
         if (!brand.trim() && result.products && result.products[0] && result.products[0].brand) {
           setBrand(result.products[0].brand);
         }
         setInputMode('file');
+        setBrandDiscoverProgress('');
       } else {
-        setBrandDiscoverError('No products found at this URL');
+        setBrandDiscoverError('No products found at this URL. Make sure this is a valid Amazon seller/brand store page.');
       }
     } catch (err) {
       setBrandDiscoverError(err.message);
     } finally {
       setBrandDiscovering(false);
+      setBrandDiscoverProgress('');
     }
   };
 
@@ -115,6 +123,9 @@ export default function GenerateModal({ onClose, onGenerate }) {
             >
               {brandDiscovering ? 'Discovering...' : 'Discover Products'}
             </button>
+            {brandDiscovering && brandDiscoverProgress && (
+              <div style={{ marginTop: 4, fontSize: 11, color: '#64748b' }}>{brandDiscoverProgress}</div>
+            )}
             {brandDiscoverError && <div className="price-error" style={{ marginTop: 4 }}>{brandDiscoverError}</div>}
           </div>
         ) : inputMode === 'paste' ? (
@@ -194,8 +205,73 @@ export default function GenerateModal({ onClose, onGenerate }) {
           </div>
         </div>
 
-        {/* 5. Instructions */}
-        <label className="label" style={{ marginTop: 10 }}>5. Instructions (optional)</label>
+        {/* 5. Store Template */}
+        <label className="label" style={{ marginTop: 10 }}>5. Layout Template (optional)</label>
+        <div className="template-selector">
+          <div className="template-grid">
+            <button
+              className={'template-card' + (selectedTemplate === null ? ' active' : '')}
+              onClick={function() { setSelectedTemplate(null); setShowTemplateDetail(null); }}
+            >
+              <div className="template-card-name">No Template</div>
+              <div className="template-card-desc">AI generates layout freely</div>
+            </button>
+            {STORE_TEMPLATES.map(function(tmpl) {
+              var isSelected = selectedTemplate === tmpl.id;
+              return (
+                <button
+                  key={tmpl.id}
+                  className={'template-card' + (isSelected ? ' active' : '')}
+                  onClick={function() { setSelectedTemplate(tmpl.id); }}
+                >
+                  <div className="template-card-name">{tmpl.name}</div>
+                  <div className="template-card-desc">{tmpl.description}</div>
+                  <div className="template-card-inspo">e.g. {tmpl.inspiration}</div>
+                  <button
+                    className="template-detail-btn"
+                    onClick={function(e) {
+                      e.stopPropagation();
+                      setShowTemplateDetail(showTemplateDetail === tmpl.id ? null : tmpl.id);
+                    }}
+                  >
+                    {showTemplateDetail === tmpl.id ? 'Hide Preview' : 'Preview Layout'}
+                  </button>
+                </button>
+              );
+            })}
+          </div>
+          {showTemplateDetail && (function() {
+            var tmpl = STORE_TEMPLATES.find(function(t) { return t.id === showTemplateDetail; });
+            if (!tmpl) return null;
+            return (
+              <div className="template-preview">
+                <div className="template-preview-title">{tmpl.name} — Homepage Layout Pattern</div>
+                {tmpl.homepage.map(function(sec, i) {
+                  return (
+                    <div key={i} className="template-preview-section">
+                      <span className="template-preview-layout">{sec.layout}</span>
+                      <span className="template-preview-purpose">{sec.purpose}</span>
+                      <span className="template-preview-tiles">{sec.tiles.length} tile{sec.tiles.length > 1 ? 's' : ''}</span>
+                    </div>
+                  );
+                })}
+                <div className="template-preview-title" style={{ marginTop: 8 }}>Category Page Pattern</div>
+                {tmpl.categoryPage.map(function(sec, i) {
+                  return (
+                    <div key={i} className="template-preview-section">
+                      <span className="template-preview-layout">{sec.layout}</span>
+                      <span className="template-preview-purpose">{sec.purpose}</span>
+                      <span className="template-preview-tiles">{sec.tiles.length} tile{sec.tiles.length > 1 ? 's' : ''}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })()}
+        </div>
+
+        {/* 6. Instructions */}
+        <label className="label" style={{ marginTop: 10 }}>6. Instructions (optional)</label>
         <div className="instructions-area">
           <textarea
             value={instructions}
@@ -251,6 +327,7 @@ export default function GenerateModal({ onClose, onGenerate }) {
                 instructions: instructions,
                 asins: asins,
                 complexity: complexity,
+                template: selectedTemplate,
               });
             }}
           >

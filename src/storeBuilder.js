@@ -66,6 +66,42 @@ function extractJSON(text) {
   return JSON.parse(text.slice(s, e + 1));
 }
 
+// ─── PARSE MENU STRUCTURE FROM USER INSTRUCTIONS ───
+function parseMenuStructure(instructions) {
+  if (!instructions) return null;
+  var lines = instructions.split('\n');
+  var categories = [];
+  var notes = [];
+  var currentParent = null;
+
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i];
+    var trimmed = line.trim();
+    if (!trimmed) continue;
+
+    // Lines starting with "- " are subcategories
+    if (/^\s*-\s+/.test(line)) {
+      var subName = trimmed.replace(/^-\s+/, '');
+      if (currentParent) {
+        if (!currentParent.subcategories) currentParent.subcategories = [];
+        currentParent.subcategories.push({ name: subName });
+      }
+    }
+    // Lines that look like category names (short, no punctuation, not a sentence)
+    else if (trimmed.length <= 60 && !trimmed.match(/[.!?:;]$/) && !trimmed.match(/^(brand|marke|ton|style|ziel|target|fokus|focus|hinweis|note|premium|qualit)/i)) {
+      currentParent = { name: trimmed, subcategories: [] };
+      categories.push(currentParent);
+    }
+    // Everything else is a note/hint for the AI
+    else {
+      notes.push(trimmed);
+    }
+  }
+
+  if (categories.length === 0) return null;
+  return { categories: categories, notes: notes };
+}
+
 // ─── STEP 1: ANALYSIS & PAGE STRUCTURE ───
 export async function aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions) {
   var productList = products.map(function(p) {
@@ -81,46 +117,38 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
     };
   });
 
-  // Detect if user provided a menu/category structure
-  var hasMenuStructure = userInstructions && (
-    userInstructions.indexOf('-') >= 0 ||
-    userInstructions.match(/kategori|menu|struktur|categor|structur|page|seite|unterseite/i)
-  );
+  // Parse menu structure from instructions
+  var parsed = parseMenuStructure(userInstructions);
+  var hasMenuStructure = parsed && parsed.categories.length > 0;
+  var additionalNotes = parsed ? parsed.notes.join('\n') : (userInstructions || '');
 
   var system = [
-    'You are an expert Amazon Brand Store strategist who has analyzed hundreds of top-performing Brand Stores.',
+    'You are an expert Amazon Brand Store strategist.',
     '',
-    'YOUR TASK: Analyze the product catalog and create an optimal store structure.',
+    'YOUR TASK: Analyze the product catalog and assign each product to the correct category.',
     '',
     hasMenuStructure ? [
-      '*** CRITICAL: USER HAS PROVIDED A SPECIFIC MENU STRUCTURE ***',
-      'The user has given you an EXACT menu structure below.',
-      'You MUST use this structure as-is. Do NOT change category names, do NOT reorder, do NOT merge or split categories.',
-      'Your job is ONLY to assign each ASIN to the correct category/subcategory based on product names and descriptions.',
-      'Categories prefixed with "-" are subcategories of the category above them.',
-      'If an ASIN does not clearly fit any user-defined category, place it in the closest matching one.',
-      '***',
+      '╔══════════════════════════════════════════════════════════════╗',
+      '║  MANDATORY: USE THE EXACT MENU STRUCTURE PROVIDED BELOW    ║',
+      '║  Do NOT rename, reorder, merge, split, or skip categories. ║',
+      '║  Do NOT add new categories. Do NOT remove any.             ║',
+      '║  Your ONLY job: assign each ASIN to the best-matching one. ║',
+      '╚══════════════════════════════════════════════════════════════╝',
+      '',
+      'EXACT MENU STRUCTURE TO USE:',
+      JSON.stringify(parsed.categories, null, 2),
       '',
     ].join('\n') : '',
-    'PRODUCT COMPLEXITY CLASSIFICATION (determines store depth):',
-    JSON.stringify(PRODUCT_COMPLEXITY, null, 1),
-    '',
-    'REFERENCE STORES for inspiration:',
-    JSON.stringify(REFERENCE_STORES, null, 1),
-    '',
     'PRINCIPLES:',
     '- Every ASIN must be assigned to exactly ONE category or subcategory',
     hasMenuStructure
-      ? '- USE THE EXACT CATEGORY NAMES PROVIDED BY THE USER. Do not rename them.'
-      : '- Create 2-8 meaningful category names based on what the products actually ARE (e.g. "Schuhe", "Taschen", "Accessoires")',
-    '- If products include multipacks/bundles/sets, create a "Bundles & Sparen" page (unless user specified otherwise)',
-    '- Homepage always exists as the first page',
-    '- Classify the product complexity: simple, medium, complex, or variantRich',
-    '- Brand tone must match the product category (technical, lifestyle, playful, premium, etc.)',
-    '- Look at the product descriptions to determine if products have notable features worth highlighting',
-    '- If products come in many variants (colors, materials, sizes), flag as variantRich',
+      ? '- Copy category/subcategory names VERBATIM from the structure above. Character-for-character identical.'
+      : '- Create 2-8 meaningful categories based on what products ARE (e.g. "Schuhe", "Taschen")',
+    '- Classify product complexity: simple, medium, complex, or variantRich',
+    '- Detect brand tone from product descriptions and images',
+    '- Extract 3-5 key product features that could be highlighted visually',
     '',
-    'Return ONLY valid JSON, no other text.',
+    'Return ONLY valid JSON.',
   ].filter(Boolean).join('\n');
 
   var user = [
@@ -128,32 +156,42 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
     'Marketplace: Amazon.' + marketplace,
     'Language: ' + lang,
     '',
-    userInstructions ? [
-      '=== USER INSTRUCTIONS (MUST BE FOLLOWED) ===',
-      userInstructions,
-      '=== END USER INSTRUCTIONS ===',
+    hasMenuStructure ? [
+      '=== MANDATORY MENU STRUCTURE (use these EXACT names) ===',
+      parsed.categories.map(function(cat) {
+        var s = cat.name;
+        if (cat.subcategories && cat.subcategories.length > 0) {
+          s += '\n' + cat.subcategories.map(function(sub) { return '  - ' + sub.name; }).join('\n');
+        }
+        return s;
+      }).join('\n'),
+      '=== END MENU STRUCTURE ===',
+      '',
+    ].join('\n') : '',
+    additionalNotes ? [
+      'Additional context from user: ' + additionalNotes,
       '',
     ].join('\n') : '',
     'Products (' + products.length + '):',
     JSON.stringify(productList, null, 1),
     '',
-    'Analyze the products and return this JSON structure:',
+    'Return this JSON (use the EXACT category names from above if provided):',
     '{',
     '  "categories": [',
     '    {',
-    '      "name": "CategoryName",',
+    '      "name": "EXACT category name from menu structure",',
     '      "asins": ["B0XXX", ...],',
     '      "productCount": N,',
     '      "subcategories": [',
-    '        {"name": "SubcategoryName", "asins": ["B0XXX", ...], "productCount": N}',
+    '        {"name": "EXACT subcategory name", "asins": ["B0XXX", ...], "productCount": N}',
     '      ]',
     '    }',
     '  ],',
     '  "hasBundles": true/false,',
     '  "bundleAsins": ["B0XXX"],',
-    '  "suggestedPages": ["Homepage", "Category1", "Category2", ...],',
-    '  "brandTone": "professional/technical" or "lifestyle/premium" or "playful/colorful" or "sporty/bold" or "clean/minimal",',
-    '  "productComplexity": "simple" or "medium" or "complex" or "variantRich",',
+    '  "suggestedPages": ["Homepage", "Category1", ...],',
+    '  "brandTone": "professional/technical"|"lifestyle/premium"|"playful/colorful"|"sporty/bold"|"clean/minimal",',
+    '  "productComplexity": "simple"|"medium"|"complex"|"variantRich",',
     '  "heroMessage": "Brand slogan in ' + lang + ' (max 6 words)",',
     '  "brandStory": "One sentence brand story in ' + lang + '",',
     '  "keyFeatures": ["Feature 1", "Feature 2", ...],',
@@ -161,17 +199,11 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
     '  "variantTypes": ["Colors", "Sizes", ...] or []',
     '}',
     '',
-    'IMPORTANT:',
-    hasMenuStructure
-      ? '- THE USER PROVIDED A SPECIFIC MENU STRUCTURE. Use those EXACT category and subcategory names. Assign ASINs to the matching categories based on product name and description.'
-      : '- FOCUS ON CATEGORIZATION: Group products into 2-8 meaningful categories based on PRODUCT TYPE, not brand taxonomy.',
-    hasMenuStructure ? '' : '- Examples: "Reinigungsgeräte", "Zubehör", "Pflegemittel" or "Shirts", "Hosen", "Jacken", "Schuhe".',
-    '- NEVER put all products into one single category like "Sonstige" or "Alle Produkte". Always find meaningful sub-groups.',
-    '- Every ASIN from the product list must appear in exactly one category. Do not skip any ASINs.',
-    '- If a category has subcategories, put the ASINs in the subcategories, NOT in the parent category.',
-    '- If a category has NO subcategories, put ASINs directly in the category and omit "subcategories".',
-    '- Determine productComplexity by looking at product descriptions: simple products need less explanation, complex/technical products need more.',
-    '- keyFeatures: Extract 3-5 notable product features from descriptions that could be highlighted visually.',
+    'RULES:',
+    hasMenuStructure ? '- You MUST output EXACTLY the categories from the menu structure. Same names, same order, same subcategories.' : '- Group into 2-8 meaningful categories by product type.',
+    '- Every ASIN from the list must appear in exactly one category/subcategory.',
+    '- If a category has subcategories, put ASINs in subcategories ONLY (not in parent).',
+    '- If a category has NO subcategories, put ASINs directly in the category.',
   ].filter(Boolean).join('\n');
 
   var text = await callClaude(system, user, 8000);
@@ -213,7 +245,7 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
 }
 
 // ─── STEP 2: LAYOUT PER PAGE ───
-export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, isHomepage, allCategories, analysis, userInstructions, complexityLevel, category) {
+export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, isHomepage, allCategories, analysis, userInstructions, complexityLevel, category, template) {
   var productList = pageProducts.map(function(p) {
     return { asin: p.asin, name: p.name, price: p.price, rating: p.rating, reviews: p.reviews, description: (p.description || '').slice(0, 100) };
   });
@@ -296,13 +328,58 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
         ].filter(Boolean).join('\n')
       : '',
     '',
+    // ─── TEMPLATE BLUEPRINT (if selected) ───
+    template ? [
+      '',
+      '╔══════════════════════════════════════════════════════════════╗',
+      '║  TEMPLATE: ' + template.name.toUpperCase() + ' (inspired by ' + template.inspiration + ')',
+      '║  FOLLOW this template\'s structure, visual style, and flow. ║',
+      '║  Adapt content to the current brand but keep the LOOK.     ║',
+      '╚══════════════════════════════════════════════════════════════╝',
+      '',
+      '=== VISUAL DNA (follow these design rules) ===',
+      'Colors: primary=' + template.visualDNA.colors.primary + ', secondary=' + template.visualDNA.colors.secondary + ', accent=' + template.visualDNA.colors.accent,
+      'Backgrounds: ' + template.visualDNA.colors.backgrounds.join(', '),
+      'Section alternation pattern: ' + template.visualDNA.colors.sectionAlternation,
+      'Text style: ratio=' + (template.visualDNA.textStyle.ratio * 100) + '% text, headlines=' + template.visualDNA.textStyle.headlines + ', overlay=' + template.visualDNA.textStyle.overlayStyle,
+      'CTA style: ' + template.visualDNA.textStyle.ctaStyle,
+      'Product display: primary=' + template.visualDNA.productDisplay.primary + ', secondary=' + template.visualDNA.productDisplay.secondary,
+      'Photography style: ' + template.visualDNA.productDisplay.photography,
+      template.visualDNA.sectionVariety.videoPresence ? 'Include video sections.' : 'No video sections.',
+      template.visualDNA.sectionVariety.shoppableImages ? 'Use shoppable images generously.' : '',
+      template.visualDNA.sectionVariety.trustElements ? 'Include trust/certification elements.' : '',
+      template.visualDNA.sectionVariety.brandStory ? 'Include brand story section.' : '',
+      '',
+      '=== SECTION BLUEPRINT (follow this order and structure) ===',
+      'Generate sections following this template pattern. Adapt briefs to the current brand "' + brand + '" but keep the same layout flow:',
+      '',
+      (isHomepage ? template.homepage : template.categoryPage).map(function(sec, i) {
+        return (i + 1) + '. Layout "' + sec.layout + '" — ' + sec.purpose + ': ' + sec.brief;
+      }).join('\n'),
+      '',
+      'IMPORTANT: The section blueprint above is a GUIDE. Adapt the content to "' + brand + '" products.',
+      '- Replace [product] references with actual products from the product list.',
+      '- Adjust section count if needed (add more product grids for large catalogs).',
+      '- Keep the visual DNA consistent: colors, photography style, text ratios.',
+      '',
+    ].filter(Boolean).join('\n') : '',
     'CRITICAL RULES:',
-    '- Tile count per section MUST match layout. layout "1-1-1" = exactly 3 tiles. "lg-4grid" = exactly 5 tiles. "lg-6grid" = exactly 7 tiles.',
+    '- Tile count per section MUST match layout. "1-1-1" = 3 tiles. "lg-4grid" = 5 tiles. "lg-6grid" = 7 tiles.',
     '- ALL ASINs must be placed in exactly ONE product_grid tile.',
-    '- Use VARIED layouts. Not just full-width! Mix 1-1, 1-1-1, lg-2stack, lg-4grid etc.',
-    '- Sections must flow logically. Each section connects to the next.',
-    '- Do NOT just alternate between full-width images and product grids. Be creative.',
-    '- Think about what makes tiles in a section work TOGETHER as a visual unit.',
+    '- Use VARIED layouts. NEVER use more than 2 full-width "1" layouts per page. Mix 1-1, 1-1-1, lg-2stack, lg-4grid, 2-1, 1-2 etc.',
+    '- Sections flow: Hero → Feature/USP → Product showcase → Lifestyle → Product grid → Cross-sell.',
+    '- Do NOT just alternate full-width image + product grid. That is the WORST pattern.',
+    '- Each section must have a PURPOSE. Name it in a comment-like brief.',
+    '',
+    'BRIEF QUALITY RULES (the "brief" field is a designer instruction):',
+    '- Be SPECIFIC: "Lifestyle photo: woman using the steam cleaner on hardwood floor, bright modern kitchen, product clearly visible" is GOOD.',
+    '- Be VAGUE: "lifestyle image" is BAD.',
+    '- Always mention: subject, setting/background, mood, product placement, brand tone.',
+    '- For shoppable_image: describe the exact product photo needed (e.g. "Clean packshot of B0XXXXX on white background, 45-degree angle, shadow underneath").',
+    '- For feature tiles: describe what feature to highlight and how (e.g. "Close-up of the nozzle mechanism with annotation arrows showing 3 spray modes").',
+    '',
+    'MINIMUM SECTIONS:',
+    isHomepage ? '- Homepage MUST have at least 6 sections. Aim for 8-10.' : '- Category page MUST have at least 4 sections. Aim for 5-7.',
     '- Return ONLY valid JSON.',
   ].filter(Boolean).join('\n');
 
@@ -342,38 +419,38 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '',
     isHomepage
       ? [
-          'HOMEPAGE GUIDELINES:',
-          '1. Hero banner (full-width) with brand slogan.',
-          '2. Category navigation (choose layout based on count: 2=1-1, 3=1-1-1, 4=1-1-1-1, 5+=lg-4grid or two rows).',
-          '   Each category tile = lifestyle photo + category name overlay + CTA.',
-          '3. Optional: Bestseller product_grid (top 5 by rating).',
-          '4. Optional: Lifestyle section:use 1-1 with one tile showing product name, other showing product as shoppable_image.',
-          '5. Optional: Video module (for complex/technical products).',
-          '6. Optional: Brand story / trust section.',
-          '7. Optional: Footer category navigation (1-1-1-1).',
+          'HOMEPAGE SECTIONS (generate ALL of these, in this order):',
+          '1. HERO BANNER (layout "1"): Full-width brand hero image with brand slogan as textOverlay and CTA.',
+          '2. CATEGORY NAVIGATION (layout based on count: 2="1-1", 3="1-1-1", 4="1-1-1-1", 5+="lg-4grid" or "lg-6grid"):',
+          '   Each tile = lifestyle image of that category + category name as textOverlay + "Jetzt entdecken" CTA.',
+          '   Brief must describe a specific lifestyle scene for each category.',
+          '3. BESTSELLER SHOWCASE (layout "1-1" or "lg-2stack"): Large hero product left + feature tiles right. Use shoppable_image with linkAsin for the hero product.',
+          '4. PRODUCT GRID (layout "1"): type "product_grid" with top 5-8 products by rating.',
+          '5. LIFESTYLE SPLIT (layout "1-1"): Left = lifestyle action shot. Right = product as shoppable_image. Tiles relate to each other.',
+          '6. FEATURE HIGHLIGHTS (layout "1-1-1"): Three key USPs/features. Each tile = image with textOverlay showing the feature name.',
+          '7. BRAND STORY (layout "2-1" or "1-2"): Large brand/team image + smaller text-on-image tile with brand values.',
+          '8. FOOTER NAV (layout "1-1-1-1" or "1-1-1"): Category tiles repeated for easy navigation at bottom.',
           '',
-          'IMPORTANT: Use varied layouts! If you have 5+ categories, consider lg-4grid or lg-6grid instead of just rows of 1-1-1-1.',
-          'Create sections where tiles relate to each other (name tile + product tile, lifestyle + shoppable, etc.).',
+          'For 5+ categories, use lg-4grid (5 tiles) or lg-6grid (7 tiles) for the category nav instead of multiple rows.',
+          'Each tile brief must be a SPECIFIC designer instruction, not just "lifestyle image".',
         ].join('\n')
       : [
-          'CATEGORY PAGE "' + pageName + '" GUIDELINES:',
-          '1. Category hero (lifestyle shot of category products).',
+          'CATEGORY PAGE "' + pageName + '" SECTIONS (generate ALL of these):',
+          '1. CATEGORY HERO (layout "1"): Full-width lifestyle image showing products from "' + pageName + '" in use. Specific scene description in brief.',
+          '2. PRODUCT HIGHLIGHT (layout "1-1" or "lg-2stack"): Left = large shoppable_image of the bestseller product (with linkAsin). Right = feature description image or secondary product.',
+          '3. FEATURE/USP SECTION (layout "1-1-1" or "lg-4grid"): Highlight 3-4 key features of products in this category. Each tile shows one feature with textOverlay.',
+          '4. PRODUCT GRID (layout "1"): type "product_grid" with ALL ' + pageProducts.length + ' ASINs for this category. This is MANDATORY.',
+          '5. LIFESTYLE ACTION (layout "1-1"): Two complementary lifestyle images showing products in real-world scenarios. Specific scenes in brief.',
           analysis.productComplexity === 'complex' || analysis.productComplexity === 'variantRich'
-            ? '2. Feature/USP sections. Use lg-2stack (large product + 2 feature details) or lg-4grid (product + 4 features) or featureSplit (1-1).'
-            : '2. Optional: Product name tile + shoppable product image (1-1 layout).',
-          '3. Product grid with ALL ' + pageProducts.length + ' ASINs.',
-          '4. Optional: Lifestyle split (1-1):two different use-case images.',
-          analysis.hasVariants ? '5. Variant showcase: Use lg-4grid or lg-6grid (large product hero + variant tiles in grid).' : '',
-          '6. Optional: Cross-sell to related categories.',
+            ? '6. VARIANT SHOWCASE (layout "lg-4grid" or "lg-6grid"): Large product hero + variant/color/size tiles in grid.'
+            : '6. CROSS-SELL (layout "1-1-1"): Three tiles linking to related categories with shoppable_image type.',
           '',
-          'IMPORTANT: Do NOT just stack full-width images and product grids.',
-          'Create interconnected sections: e.g. product name tile left + shoppable_image right.',
-          'Use shoppable_image for clean product photos that should be clickable.',
-          'Use varied layouts including lg-2stack, lg-4grid for richer compositions.',
+          'MINIMUM 5 sections per category page. Each brief must describe a specific image/scene, not generic text.',
+          'Use shoppable_image (with linkAsin) for any product that should be clickable.',
         ].filter(Boolean).join('\n'),
   ].filter(Boolean).join('\n');
 
-  var text = await callClaude(system, user, 4000);
+  var text = await callClaude(system, user, 8000);
   var result = extractJSON(text);
 
   // Validate and fix sections
@@ -575,7 +652,7 @@ export function applyOperations(store, operations) {
 }
 
 // ─── FULL GENERATION WORKFLOW ───
-export async function generateStore(asins, products, brand, marketplace, lang, userInstructions, onLog, complexityLevel) {
+export async function generateStore(asins, products, brand, marketplace, lang, userInstructions, onLog, complexityLevel, template) {
   var log = onLog || function() {};
   var cLevel = complexityLevel || 2;
   var cConfig = COMPLEXITY_LEVELS[cLevel] || COMPLEXITY_LEVELS[2];
@@ -583,6 +660,9 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   // STEP 1: AI Analysis
   log('AI analyzing product catalog and planning store structure...');
   log('   Complexity: Level ' + cLevel + ' (' + cConfig.name + ')');
+  if (template) {
+    log('   Template: ' + template.name + ' (inspired by ' + template.inspiration + ')');
+  }
   var analysis;
   try {
     analysis = await aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions);
@@ -616,6 +696,22 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     }
   });
 
+  // Derive product category from analysis brand tone (maps to CATEGORY_STYLE_HINTS keys)
+  var category = 'generic';
+  var toneToCategory = {
+    'professional/technical': 'tools',
+    'lifestyle/premium': 'beauty',
+    'playful/colorful': 'toys',
+    'sporty/bold': 'sports',
+    'clean/minimal': 'fashion',
+    'natural/organic': 'health',
+  };
+  if (template && template.style && toneToCategory[template.style]) {
+    category = toneToCategory[template.style];
+  } else if (analysis.brandTone && toneToCategory[analysis.brandTone]) {
+    category = toneToCategory[analysis.brandTone];
+  }
+
   // Build product lookup
   var productMap = {};
   products.forEach(function(p) { productMap[p.asin] = p; });
@@ -628,7 +724,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   try {
     var homeResult = await aiGeneratePageLayout(
       'Homepage', homepageProducts, brand, lang, true,
-      analysis.categories || [], analysis, userInstructions, cLevel, category
+      analysis.categories || [], analysis, userInstructions, cLevel, category, template
     );
     pages.push({ id: 'homepage', name: 'Homepage', sections: homeResult.sections || [] });
     log('Homepage: ' + (homeResult.sections || []).length + ' sections');
@@ -659,7 +755,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     try {
       var catResult = await aiGeneratePageLayout(
         cat.name, allCatProducts, brand, lang, false,
-        categories, analysis, userInstructions, cLevel, category
+        categories, analysis, userInstructions, cLevel, category, template
       );
       pages.push({ id: parentPageId, name: cat.name, sections: catResult.sections || [] });
       log(cat.name + ': ' + (catResult.sections || []).length + ' sections');
@@ -680,7 +776,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
         try {
           var subResult = await aiGeneratePageLayout(
             sub.name, subProducts, brand, lang, false,
-            categories, analysis, userInstructions, cLevel, category
+            categories, analysis, userInstructions, cLevel, category, template
           );
           pages.push({ id: subPageId, name: sub.name, parentId: parentPageId, sections: subResult.sections || [] });
           log('  ' + sub.name + ': ' + (subResult.sections || []).length + ' sections');
