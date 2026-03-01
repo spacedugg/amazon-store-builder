@@ -696,6 +696,22 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     }
   });
 
+  // Derive product category from analysis brand tone (maps to CATEGORY_STYLE_HINTS keys)
+  var category = 'generic';
+  var toneToCategory = {
+    'professional/technical': 'tools',
+    'lifestyle/premium': 'beauty',
+    'playful/colorful': 'toys',
+    'sporty/bold': 'sports',
+    'clean/minimal': 'fashion',
+    'natural/organic': 'health',
+  };
+  if (template && template.style && toneToCategory[template.style]) {
+    category = toneToCategory[template.style];
+  } else if (analysis.brandTone && toneToCategory[analysis.brandTone]) {
+    category = toneToCategory[analysis.brandTone];
+  }
+
   // Build product lookup
   var productMap = {};
   products.forEach(function(p) { productMap[p.asin] = p; });
