@@ -340,6 +340,7 @@ export var STORE_TEMPLATES = [
       { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: 'Full-width lifestyle: person using [category product] in realistic setting (garden, kitchen, etc.). Category name as large overlay.' },
       { layout: 'lg-2stack', purpose: 'Product + features', tileTypes: ['shoppable_image','image','image'], brief: 'Large: hero product of category, floating on white/brand-color. Right stack: two feature close-ups with text overlay explaining key specs.' },
       { layout: '1-1-1', purpose: 'Technical specs visual', tileTypes: ['image','image','image'], brief: 'Three spec/feature tiles: each shows a product detail close-up with specification number/text overlay (e.g., "180 bar", "500 l/h", "3-in-1 nozzle").' },
+      { layout: '1', purpose: 'Product demo video', tileTypes: ['video'], brief: 'Product demonstration video: show how the product works in real conditions. Technical close-ups of key mechanisms, water pressure tests, cleaning results. Professional quality, informative.' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: 'ALL category ASINs' },
       { layout: '1-1', purpose: 'Comparison / usage scenarios', tileTypes: ['image','image'], brief: 'Left: before/after or product comparison chart designed as image. Right: product in professional use setting.' },
       { layout: '1-1-1', purpose: 'Accessories cross-sell', tileTypes: ['image','image','image'], brief: 'Three accessory/addon tiles linking to accessories subpage. Each shows accessory product with name overlay.' },
@@ -392,6 +393,7 @@ export var STORE_TEMPLATES = [
     categoryPage: [
       { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: 'Full-width: products from this category arranged in premium setting. Dark, moody. Category name in elegant typography.' },
       { layout: '1-1', purpose: 'Product spotlight', tileTypes: ['shoppable_image','image'], brief: 'Left: shoppable image of hero product (editorial photo, warm lighting). Right: ingredients/feature close-up or product detail.' },
+      { layout: '1', purpose: 'Brand lifestyle video', tileTypes: ['video'], brief: 'Premium lifestyle video: elegant product usage scene with warm lighting. Show the aspirational world of the brand. Moody, cinematic, editorial quality. Product preparation or unboxing experience.' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: 'ALL category ASINs' },
       { layout: '1-1-1', purpose: 'Variant showcase', tileTypes: ['image','image','image'], brief: 'Three variant/flavor tiles: each showing a different variant with color-coded accent and name overlay.' },
       { layout: '1-1', purpose: 'Lifestyle storytelling', tileTypes: ['image','image'], brief: 'Two complementary lifestyle scenes: product in different usage contexts. Aspirational, warm, premium feel.' },
@@ -445,6 +447,7 @@ export var STORE_TEMPLATES = [
       { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: 'Full-width: product range lineup on black, dramatic lighting. Category name in heavy uppercase white.' },
       { layout: '1-1', purpose: 'Product + benefits', tileTypes: ['shoppable_image','image'], brief: 'Left: hero product shoppable image, dramatic packshot. Right: ingredient/benefit infographic on dark bg.' },
       { layout: '1-1-1', purpose: 'Flavor/variant showcase', tileTypes: ['shoppable_image','shoppable_image','shoppable_image'], brief: 'Three flavor variants: each packshot on dark bg with flavor-colored accent. Shoppable, clickable.' },
+      { layout: '1', purpose: 'Performance training video', tileTypes: ['video'], brief: 'High-energy training/workout video: athlete using the product during intense exercise. Fast cuts, dramatic lighting, motivational music. Show real results and performance.' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: 'ALL category ASINs' },
       { layout: 'lg-4grid', purpose: 'Feature deep-dive', tileTypes: ['image','image','image','image','image'], brief: 'Large: product beauty shot. Grid: 4 detail tiles — nutrition facts, ingredients, usage instruction, lab-test badge. Black bg, white text.' },
     ],
@@ -527,7 +530,7 @@ export var STORE_TEMPLATES = [
       },
       sectionVariety: {
         floatingWhiteBg: true,
-        videoPresence: false,
+        videoPresence: true,
         shoppableImages: true,
         trustElements: true,       // Bio-certified, lab-tested, vegan, plastic-free
         brandStory: true,          // Founder story, sustainability mission
@@ -539,6 +542,7 @@ export var STORE_TEMPLATES = [
       { layout: '1-1', purpose: 'Ingredient spotlight', tileTypes: ['image','shoppable_image'], brief: 'Left: close-up of key ingredient (turmeric, ashwagandha, etc.) with benefit text overlay on green bg. Right: product containing that ingredient, shoppable, on cream bg.' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: '' },
       { layout: '1-1-1-1', purpose: 'Trust badges', tileTypes: ['image','image','image','image'], brief: 'Four certification tiles on cream bg: Bio-certified, Lab-tested, Vegan, Recyclable. Each with icon and short label. Clean, trustworthy.' },
+      { layout: '1', purpose: 'Brand origin video', tileTypes: ['video'], brief: 'Authentic brand video: founder telling the story, sourcing footage, production behind-the-scenes. Green fields, natural light. Shows the people and values behind the products.' },
       { layout: '1', purpose: 'Brand story', tileTypes: ['image'], brief: 'Full-width: founder story or sustainability mission. Nature background (forest, field, garden). White text overlay with brand values. Warm, authentic.' },
       { layout: '1-1', purpose: 'Lifestyle + social proof', tileTypes: ['image','image'], brief: 'Left: person in nature or kitchen using product, warm tones. Right: customer review quote or "Bestseller" badge designed as image with star rating.' },
       { layout: '1-1-1', purpose: 'Footer category links', tileTypes: ['image','image','image'], brief: 'Three category thumbnails with ingredients-around-product style. Links to subpages.' },
@@ -547,6 +551,7 @@ export var STORE_TEMPLATES = [
       { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: 'Full-width: category products with relevant raw ingredients. Warm natural lighting. Category name in warm type on nature/cream bg.' },
       { layout: '1-1', purpose: 'Benefit + product', tileTypes: ['image','shoppable_image'], brief: 'Left: ingredient/benefit infographic on green bg (what it does, how it works). Right: product shoppable image on cream bg.' },
       { layout: '1-1-1', purpose: 'Key features', tileTypes: ['image','image','image'], brief: 'Three benefit tiles: each with ingredient close-up and short benefit text. Cream bg, green accent text.' },
+      { layout: '1', purpose: 'Ingredient journey video', tileTypes: ['video'], brief: 'Nature-inspired video: show the journey from raw ingredients to finished product. Fields, harvesting, production, packaging. Warm, authentic, green tones. Trustworthy and educational.' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: 'ALL category ASINs' },
       { layout: '1-1', purpose: 'Trust + origin', tileTypes: ['image','image'], brief: 'Left: sourcing/origin story (where ingredients come from). Right: certification badges for this product line.' },
     ],
@@ -598,6 +603,7 @@ export var STORE_TEMPLATES = [
     categoryPage: [
       { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: 'Full-width: category products on vibrant color gradient. Fun, energetic. Category name in bold playful type.' },
       { layout: '1-1-1', purpose: 'Top picks', tileTypes: ['shoppable_image','shoppable_image','shoppable_image'], brief: 'Three hero products from category, each on its flavor/variant color. Shoppable. Bold product names.' },
+      { layout: '1', purpose: 'Energetic brand video', tileTypes: ['video'], brief: 'Vibrant, fast-paced video: young people enjoying the product with friends. Bright colors, energetic music, fun lifestyle. Taste tests, reactions, sharing moments. Gen-Z appeal.' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: 'ALL category ASINs' },
       { layout: 'lg-4grid', purpose: 'Flavor exploration', tileTypes: ['image','shoppable_image','shoppable_image','shoppable_image','shoppable_image'], brief: 'Large: lifestyle action shot. Grid: 4 variants on color backgrounds. Shoppable. Creates discovery moment.' },
       { layout: '1-1', purpose: 'Fun fact + cross-sell', tileTypes: ['image','image'], brief: 'Left: fun ingredient/product fact on bold color bg. Right: related category link with playful visual.' },
@@ -638,6 +644,16 @@ export var STORE_PRINCIPLES = {
     'MEDIUM products: Some feature modules to highlight USPs.',
     'COMPLEX products: Rich feature sections, videos, technical breakdowns.',
     'VARIANT-RICH products: Variant showcase modules, color/material grids.',
+  ],
+  visualHarmony: [
+    'SECTION RHYTHM: Alternate between wide (full-width) and multi-column layouts. Never 3+ consecutive same-width sections.',
+    'TILE PAIRING: In 2-column layouts, tiles relate to each other: (product name tile + product packshot), (lifestyle + shoppable product), (feature text + close-up photo).',
+    'BACKGROUND ALTERNATION: Sections alternate between light and dark backgrounds. The pattern follows the template visual DNA.',
+    'PRODUCT GRID SPACING: Never place two product_grid sections adjacent. Always insert lifestyle/feature imagery between grids.',
+    'VISUAL BREATHING: After information-dense sections (feature grids, specs), follow with a visually simple section (full-width lifestyle, video).',
+    'COLOR BLOCKING: In multi-tile sections, one tile can be a bold brand-color text tile paired with a clean product photo.',
+    'SHOPPABLE PAIRS: Every shoppable_image should be paired with a context tile (lifestyle, name, or feature) in the same section.',
+    'VIDEO PLACEMENT: Videos work best after product introduction sections, providing depth/demonstration after the viewer has seen the product.',
   ],
 };
 
