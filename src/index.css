@@ -216,6 +216,26 @@ textarea.input { resize: vertical; min-height: 44px; }
 .modal-footer { display: flex; gap: 8px; margin-top: 20px; justify-content: flex-end; }
 .modal-scroll-body { flex: 1; overflow-y: auto; max-height: 60vh; }
 
+/* ─── INSTRUCTIONS LEGEND ─── */
+.instructions-area { display: flex; gap: 10px; }
+.instructions-area textarea { flex: 1; min-width: 0; }
+.instructions-legend { width: 200px; flex-shrink: 0; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 10px; line-height: 1.5; color: #475569; overflow-y: auto; max-height: 240px; }
+.legend-title { font-weight: 800; font-size: 11px; color: #0f172a; margin-bottom: 8px; letter-spacing: -.01em; }
+.legend-section { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid #e2e8f0; }
+.legend-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.legend-heading { font-weight: 700; font-size: 10px; color: #1e293b; margin-bottom: 3px; }
+.legend-item { padding: 1px 0; }
+.legend-code { font-family: monospace; background: #e2e8f0; padding: 1px 4px; border-radius: 3px; font-size: 9px; margin-right: 4px; }
+.legend-example { font-family: monospace; background: #fff; border: 1px solid #e2e8f0; border-radius: 4px; padding: 6px 8px; margin: 4px 0; font-size: 9px; line-height: 1.6; color: #334155; white-space: pre-line; }
+.legend-note { font-style: italic; color: #64748b; font-size: 9px; margin-top: 3px; }
+
+/* ─── INPUT MODE TABS ─── */
+.input-mode-tabs { display: flex; gap: 0; margin-bottom: 6px; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0; }
+.input-mode-tab { flex: 1; padding: 7px 12px; font-size: 11px; font-weight: 600; border: none; background: #f8fafc; color: #64748b; cursor: pointer; transition: all .15s; }
+.input-mode-tab:not(:last-child) { border-right: 1px solid #e2e8f0; }
+.input-mode-tab.active { background: #0f172a; color: #fff; }
+.input-mode-tab:hover:not(.active) { background: #f1f5f9; }
+
 /* ─── COMPLEXITY SLIDER ─── */
 .complexity-slider { margin-top: 6px; }
 .complexity-track { display: flex; gap: 4px; }
@@ -274,3 +294,10 @@ textarea.input { resize: vertical; min-height: 44px; }
 .warning-item { font-size: 10px; white-space: nowrap; font-weight: 500; }
 .warning-item.error { color: #dc2626; }
 .warning-item.warning { color: #d97706; }
+
+/* ─── SHARE VIEW (designer read-only) ─── */
+.share-mode { background: #f8fafc; }
+.share-topbar { display: flex; align-items: center; gap: 16px; padding: 12px 24px; background: #fff; border-bottom: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+.share-brand { font-size: 15px; font-weight: 700; color: #0f172a; }
+.share-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; background: #dbeafe; color: #1d4ed8; padding: 3px 10px; border-radius: 20px; }
+.share-view-loading, .share-view-error { display: flex; align-items: center; justify-content: center; height: 100vh; font-size: 16px; color: #64748b; }

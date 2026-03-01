@@ -1,5 +1,5 @@
 var BRIGHT_DATA_TOKEN = process.env.BRIGHT_DATA_API_KEY;
-var DATASET_ID = 'gd_l7q7dkf244hwjntr0';
+var GLOBAL_DATASET_ID = 'gd_lwhideng15g8jg63s7';
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -8,18 +8,18 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   var body = req.method === 'POST' ? req.body : {};
-  var asins = body.asins;
-  var domain = body.domain || 'https://www.amazon.de';
+  var brandUrl = body.brandUrl;
 
-  if (!asins || !asins.length) return res.status(400).json({ error: 'Missing asins array' });
+  if (!brandUrl) return res.status(400).json({ error: 'Missing brandUrl' });
   if (!BRIGHT_DATA_TOKEN) return res.status(500).json({ error: 'BRIGHT_DATA_API_KEY not configured' });
 
-  try {
-    var inputItems = asins.map(function(asin) {
-      return { url: domain + '/dp/' + asin };
-    });
+  // Validate URL format (should be an Amazon seller/brand page)
+  if (brandUrl.indexOf('amazon.') < 0) {
+    return res.status(400).json({ error: 'URL must be an Amazon seller or brand page' });
+  }
 
-    var url = 'https://api.brightdata.com/datasets/v3/scrape?dataset_id=' + DATASET_ID + '&notify=false&include_errors=true';
+  try {
+    var url = 'https://api.brightdata.com/datasets/v3/scrape?dataset_id=' + GLOBAL_DATASET_ID + '&notify=false&include_errors=true&type=discover_new&discover_by=brand';
 
     var resp = await fetch(url, {
       method: 'POST',
@@ -27,7 +27,7 @@ module.exports = async function handler(req, res) {
         'Authorization': 'Bearer ' + BRIGHT_DATA_TOKEN,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ input: inputItems }),
+      body: JSON.stringify({ input: [{ url: brandUrl }] }),
     });
 
     if (!resp.ok) {
@@ -35,6 +35,7 @@ module.exports = async function handler(req, res) {
       return res.status(resp.status).json({ error: 'Bright Data error', detail: errText });
     }
 
+    // Handle both JSON array and NDJSON
     var rawText = await resp.text();
     var rawData;
 
@@ -54,7 +55,7 @@ module.exports = async function handler(req, res) {
     if (!Array.isArray(rawData)) rawData = [rawData];
 
     var products = rawData
-      .filter(function(p) { return p && !p.error; })
+      .filter(function(p) { return p && !p.error && p.asin; })
       .map(function(p) {
         return {
           asin: p.asin || '',
@@ -71,9 +72,20 @@ module.exports = async function handler(req, res) {
         };
       });
 
-    return res.status(200).json({ products: products, count: products.length });
+    // Deduplicate by ASIN
+    var seen = {};
+    products = products.filter(function(p) {
+      if (seen[p.asin]) return false;
+      seen[p.asin] = true;
+      return true;
+    });
+
+    // Extract ASINs for convenience
+    var asins = products.map(function(p) { return p.asin; });
+
+    return res.status(200).json({ products: products, asins: asins, count: products.length });
 
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
-};
+}
