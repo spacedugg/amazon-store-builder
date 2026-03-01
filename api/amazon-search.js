@@ -1,7 +1,7 @@
 var BRIGHT_DATA_TOKEN = process.env.BRIGHT_DATA_API_KEY;
 var DATASET_ID = 'gd_l7q7dkf244hwjntr0';
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -15,7 +15,6 @@ export default async function handler(req, res) {
   if (!BRIGHT_DATA_TOKEN) return res.status(500).json({ error: 'BRIGHT_DATA_API_KEY not configured' });
 
   try {
-    // Build input array: one object per ASIN, matching Bright Data's exact format
     var inputItems = asins.map(function(asin) {
       return { url: domain + '/dp/' + asin };
     });
@@ -36,7 +35,6 @@ export default async function handler(req, res) {
       return res.status(resp.status).json({ error: 'Bright Data error', detail: errText });
     }
 
-    // Handle both JSON array and NDJSON
     var rawText = await resp.text();
     var rawData;
 
@@ -78,4 +76,4 @@ export default async function handler(req, res) {
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
-}
+};
