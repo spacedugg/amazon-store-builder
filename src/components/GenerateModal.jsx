@@ -31,6 +31,7 @@ export default function GenerateModal({ onClose, onGenerate }) {
   var [brandUrl, setBrandUrl] = useState('');
   var [brandDiscovering, setBrandDiscovering] = useState(false);
   var [brandDiscoverError, setBrandDiscoverError] = useState('');
+  var [brandDiscoverProgress, setBrandDiscoverProgress] = useState('');
   var fileRef = useRef(null);
 
   var onFileChange = function(e) {
@@ -53,21 +54,26 @@ export default function GenerateModal({ onClose, onGenerate }) {
     if (!brandUrl.trim()) return;
     setBrandDiscovering(true);
     setBrandDiscoverError('');
+    setBrandDiscoverProgress('Starting discovery...');
     try {
-      var result = await discoverBrandProducts(brandUrl.trim());
+      var result = await discoverBrandProducts(brandUrl.trim(), function(msg) {
+        setBrandDiscoverProgress(msg);
+      });
       if (result.asins && result.asins.length > 0) {
         setAsins(result.asins);
         if (!brand.trim() && result.products && result.products[0] && result.products[0].brand) {
           setBrand(result.products[0].brand);
         }
         setInputMode('file');
+        setBrandDiscoverProgress('');
       } else {
-        setBrandDiscoverError('No products found at this URL');
+        setBrandDiscoverError('No products found at this URL. Make sure this is a valid Amazon seller/brand store page.');
       }
     } catch (err) {
       setBrandDiscoverError(err.message);
     } finally {
       setBrandDiscovering(false);
+      setBrandDiscoverProgress('');
     }
   };
 
@@ -115,6 +121,9 @@ export default function GenerateModal({ onClose, onGenerate }) {
             >
               {brandDiscovering ? 'Discovering...' : 'Discover Products'}
             </button>
+            {brandDiscovering && brandDiscoverProgress && (
+              <div style={{ marginTop: 4, fontSize: 11, color: '#64748b' }}>{brandDiscoverProgress}</div>
+            )}
             {brandDiscoverError && <div className="price-error" style={{ marginTop: 4 }}>{brandDiscoverError}</div>}
           </div>
         ) : inputMode === 'paste' ? (
