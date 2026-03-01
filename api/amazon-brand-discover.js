@@ -67,6 +67,31 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'URL must be an Amazon seller or brand page' });
   }
 
+  // Clean the URL: remove tracking parameters and decode entities
+  var cleanedUrl = brandUrl;
+  try {
+    // Fix HTML entity artifacts
+    cleanedUrl = cleanedUrl.replace(/&amp;/g, '&');
+    var urlObj = new URL(cleanedUrl);
+    // Remove common tracking parameters
+    ['ingress', 'lp_context_asin', 'lp_context_query', 'visitId', 'ref',
+     'lp_asin', 'store_ref', 'byline_logo_guardrail_passed'].forEach(function(p) {
+      urlObj.searchParams.delete(p);
+    });
+    cleanedUrl = urlObj.toString();
+    // Remove trailing underscore (common copy-paste artifact)
+    if (cleanedUrl.endsWith('_')) cleanedUrl = cleanedUrl.slice(0, -1);
+  } catch (e) { /* keep original if URL parsing fails */ }
+
+  // For /stores/BRAND/page/UUID URLs, also try the base store URL
+  var discoverUrl = cleanedUrl;
+  var storeMatch = cleanedUrl.match(/\/stores\/([^/]+)\/page\//);
+  if (storeMatch) {
+    // Extract base store URL (without page-specific path) for broader discovery
+    var baseUrl = cleanedUrl.replace(/\/page\/[A-F0-9-]+.*$/i, '');
+    discoverUrl = baseUrl;
+  }
+
   try {
     // Trigger async discovery (do NOT wait for results)
     var triggerUrl = 'https://api.brightdata.com/datasets/v3/trigger?dataset_id=' + GLOBAL_DATASET_ID + '&include_errors=true&type=discover_new&discover_by=brand';
@@ -77,8 +102,20 @@ module.exports = async function handler(req, res) {
         'Authorization': 'Bearer ' + BRIGHT_DATA_TOKEN,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify([{ url: brandUrl }]),
+      body: JSON.stringify([{ url: discoverUrl }]),
     });
+
+    // If the cleaned/base URL failed, retry with the original cleaned URL
+    if (!resp.ok && discoverUrl !== cleanedUrl) {
+      resp = await fetch(triggerUrl, {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + BRIGHT_DATA_TOKEN,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify([{ url: cleanedUrl }]),
+      });
+    }
 
     if (!resp.ok) {
       var errText = await resp.text();
