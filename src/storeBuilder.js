@@ -245,7 +245,7 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
 }
 
 // ─── STEP 2: LAYOUT PER PAGE ───
-export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, isHomepage, allCategories, analysis, userInstructions, complexityLevel, category) {
+export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, isHomepage, allCategories, analysis, userInstructions, complexityLevel, category, template) {
   var productList = pageProducts.map(function(p) {
     return { asin: p.asin, name: p.name, price: p.price, rating: p.rating, reviews: p.reviews, description: (p.description || '').slice(0, 100) };
   });
@@ -328,6 +328,41 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
         ].filter(Boolean).join('\n')
       : '',
     '',
+    // ─── TEMPLATE BLUEPRINT (if selected) ───
+    template ? [
+      '',
+      '╔══════════════════════════════════════════════════════════════╗',
+      '║  TEMPLATE: ' + template.name.toUpperCase() + ' (inspired by ' + template.inspiration + ')',
+      '║  FOLLOW this template\'s structure, visual style, and flow. ║',
+      '║  Adapt content to the current brand but keep the LOOK.     ║',
+      '╚══════════════════════════════════════════════════════════════╝',
+      '',
+      '=== VISUAL DNA (follow these design rules) ===',
+      'Colors: primary=' + template.visualDNA.colors.primary + ', secondary=' + template.visualDNA.colors.secondary + ', accent=' + template.visualDNA.colors.accent,
+      'Backgrounds: ' + template.visualDNA.colors.backgrounds.join(', '),
+      'Section alternation pattern: ' + template.visualDNA.colors.sectionAlternation,
+      'Text style: ratio=' + (template.visualDNA.textStyle.ratio * 100) + '% text, headlines=' + template.visualDNA.textStyle.headlines + ', overlay=' + template.visualDNA.textStyle.overlayStyle,
+      'CTA style: ' + template.visualDNA.textStyle.ctaStyle,
+      'Product display: primary=' + template.visualDNA.productDisplay.primary + ', secondary=' + template.visualDNA.productDisplay.secondary,
+      'Photography style: ' + template.visualDNA.productDisplay.photography,
+      template.visualDNA.sectionVariety.videoPresence ? 'Include video sections.' : 'No video sections.',
+      template.visualDNA.sectionVariety.shoppableImages ? 'Use shoppable images generously.' : '',
+      template.visualDNA.sectionVariety.trustElements ? 'Include trust/certification elements.' : '',
+      template.visualDNA.sectionVariety.brandStory ? 'Include brand story section.' : '',
+      '',
+      '=== SECTION BLUEPRINT (follow this order and structure) ===',
+      'Generate sections following this template pattern. Adapt briefs to the current brand "' + brand + '" but keep the same layout flow:',
+      '',
+      (isHomepage ? template.homepage : template.categoryPage).map(function(sec, i) {
+        return (i + 1) + '. Layout "' + sec.layout + '" — ' + sec.purpose + ': ' + sec.brief;
+      }).join('\n'),
+      '',
+      'IMPORTANT: The section blueprint above is a GUIDE. Adapt the content to "' + brand + '" products.',
+      '- Replace [product] references with actual products from the product list.',
+      '- Adjust section count if needed (add more product grids for large catalogs).',
+      '- Keep the visual DNA consistent: colors, photography style, text ratios.',
+      '',
+    ].filter(Boolean).join('\n') : '',
     'CRITICAL RULES:',
     '- Tile count per section MUST match layout. "1-1-1" = 3 tiles. "lg-4grid" = 5 tiles. "lg-6grid" = 7 tiles.',
     '- ALL ASINs must be placed in exactly ONE product_grid tile.',
@@ -617,7 +652,7 @@ export function applyOperations(store, operations) {
 }
 
 // ─── FULL GENERATION WORKFLOW ───
-export async function generateStore(asins, products, brand, marketplace, lang, userInstructions, onLog, complexityLevel) {
+export async function generateStore(asins, products, brand, marketplace, lang, userInstructions, onLog, complexityLevel, template) {
   var log = onLog || function() {};
   var cLevel = complexityLevel || 2;
   var cConfig = COMPLEXITY_LEVELS[cLevel] || COMPLEXITY_LEVELS[2];
@@ -625,6 +660,9 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   // STEP 1: AI Analysis
   log('AI analyzing product catalog and planning store structure...');
   log('   Complexity: Level ' + cLevel + ' (' + cConfig.name + ')');
+  if (template) {
+    log('   Template: ' + template.name + ' (inspired by ' + template.inspiration + ')');
+  }
   var analysis;
   try {
     analysis = await aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions);
@@ -670,7 +708,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   try {
     var homeResult = await aiGeneratePageLayout(
       'Homepage', homepageProducts, brand, lang, true,
-      analysis.categories || [], analysis, userInstructions, cLevel, category
+      analysis.categories || [], analysis, userInstructions, cLevel, category, template
     );
     pages.push({ id: 'homepage', name: 'Homepage', sections: homeResult.sections || [] });
     log('Homepage: ' + (homeResult.sections || []).length + ' sections');
@@ -701,7 +739,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     try {
       var catResult = await aiGeneratePageLayout(
         cat.name, allCatProducts, brand, lang, false,
-        categories, analysis, userInstructions, cLevel, category
+        categories, analysis, userInstructions, cLevel, category, template
       );
       pages.push({ id: parentPageId, name: cat.name, sections: catResult.sections || [] });
       log(cat.name + ': ' + (catResult.sections || []).length + ' sections');
@@ -722,7 +760,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
         try {
           var subResult = await aiGeneratePageLayout(
             sub.name, subProducts, brand, lang, false,
-            categories, analysis, userInstructions, cLevel, category
+            categories, analysis, userInstructions, cLevel, category, template
           );
           pages.push({ id: subPageId, name: sub.name, parentId: parentPageId, sections: subResult.sections || [] });
           log('  ' + sub.name + ': ' + (subResult.sections || []).length + ' sections');

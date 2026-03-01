@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { uid, emptyTile, LAYOUTS, LANGS, DOMAINS, validateStore, PRICING, countStoreAssets } from './constants';
+import { uid, emptyTile, LAYOUTS, LANGS, DOMAINS, validateStore, PRICING, countStoreAssets, STORE_TEMPLATES } from './constants';
 import { scrapeAsins } from './api';
 import { generateStore, aiRefineStore, applyOperations } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, loadStoreByShareToken } from './storage';
@@ -159,14 +159,21 @@ export default function App() {
       if (!products.length) throw new Error('No products returned from Bright Data');
       log('Scraped ' + products.length + '/' + params.asins.length + ' products');
 
-      // Step 2-4: AI generation (with complexity, category)
+      // Resolve template data if selected
+      var templateData = null;
+      if (params.template) {
+        templateData = STORE_TEMPLATES.find(function(t) { return t.id === params.template; }) || null;
+      }
+
+      // Step 2-4: AI generation (with complexity, category, template)
       var storeData = await generateStore(
         params.asins, products, params.brand, params.marketplace, lang,
-        params.instructions, log, params.complexity
+        params.instructions, log, params.complexity, templateData
       );
 
       // Store meta
       storeData.complexity = params.complexity;
+      if (templateData) storeData.templateId = templateData.id;
 
       setStore(storeData);
       setCurPage(storeData.pages[0] ? storeData.pages[0].id : '');

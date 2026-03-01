@@ -327,6 +327,7 @@ export default function GenerateModal({ onClose, onGenerate }) {
                 instructions: instructions,
                 asins: asins,
                 complexity: complexity,
+                template: selectedTemplate,
               });
             }}
           >
