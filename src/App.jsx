@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { uid, emptyTile, LAYOUTS, LANGS, DOMAINS, validateStore, PRICING, countStoreAssets } from './constants';
 import { scrapeAsins } from './api';
 import { generateStore, aiRefineStore, applyOperations } from './storeBuilder';
-import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave } from './storage';
+import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, loadStoreByShareToken } from './storage';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
 import Topbar from './components/Topbar';
 import PageList from './components/PageList';
@@ -17,7 +17,89 @@ import ExportModal from './components/ExportModal';
 
 var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, complexity: 2, category: 'generic' };
 
+// ─── SHARE VIEW (read-only for designers) ───
+function ShareView() {
+  var [sharedStore, setSharedStore] = useState(null);
+  var [loading, setLoading] = useState(true);
+  var [error, setError] = useState(null);
+  var [viewMode, setViewMode] = useState('desktop');
+  var [curPage, setCurPage] = useState('');
+
+  var token = window.location.pathname.split('/share/')[1];
+
+  useEffect(function() {
+    if (!token) { setError('No share token'); setLoading(false); return; }
+    loadStoreByShareToken(token).then(function(result) {
+      if (!result || !result.data) { setError('Store not found or link expired'); setLoading(false); return; }
+      setSharedStore(result.data);
+      setCurPage(result.data.pages && result.data.pages[0] ? result.data.pages[0].id : '');
+      setLoading(false);
+    }).catch(function(e) { setError(e.message); setLoading(false); });
+  }, [token]);
+
+  if (loading) return <div className="share-view-loading">Loading briefing...</div>;
+  if (error) return <div className="share-view-error">{error}</div>;
+  if (!sharedStore) return null;
+
+  var page = sharedStore.pages.find(function(p) { return p.id === curPage; }) || sharedStore.pages[0] || null;
+
+  return (
+    <div className="app-root share-mode">
+      <div className="share-topbar">
+        <span className="share-brand">{sharedStore.brandName || 'Store'} — Designer Briefing</span>
+        <span className="share-badge">Read Only</span>
+        <div className="view-toggle">
+          <button className={viewMode === 'desktop' ? 'active' : ''} onClick={function() { setViewMode('desktop'); }}>Desktop</button>
+          <button className={viewMode === 'mobile' ? 'active' : ''} onClick={function() { setViewMode('mobile'); }}>Mobile</button>
+        </div>
+      </div>
+      <div className="app-body">
+        <PageList
+          pages={sharedStore.pages}
+          curPage={curPage}
+          onSelect={function(id) { setCurPage(id); }}
+          onAddPage={function() {}}
+          onAddSubPage={function() {}}
+          onRenamePage={function() {}}
+          onDeletePage={function() {}}
+          onReorderPage={function() {}}
+          savedStores={[]}
+          onLoadSaved={function() {}}
+          onDeleteSaved={function() {}}
+          uiLang="en"
+          showSaved={false}
+          onToggleSaved={function() {}}
+        />
+        <Canvas
+          store={sharedStore}
+          page={page}
+          curPage={curPage}
+          onSelectPage={function(id) { setCurPage(id); }}
+          sel={null}
+          onSelect={function() {}}
+          onAddSection={function() {}}
+          onDeleteSection={function() {}}
+          onMoveSection={function() {}}
+          onChangeLayout={function() {}}
+          viewMode={viewMode}
+          onHeaderBannerUpload={function() {}}
+          products={sharedStore.products || []}
+          uiLang="en"
+          hasAutoSave={false}
+          onLoadAutoSave={function() {}}
+          onGenerate={function() {}}
+        />
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
+  // Check if this is a share link
+  if (window.location.pathname.indexOf('/share/') === 0) {
+    return <ShareView />;
+  }
+
   var uiLang = 'en';
   var [store, setStore] = useState(EMPTY_STORE);
   var [curPage, setCurPage] = useState('');
@@ -38,12 +120,11 @@ export default function App() {
   var [showExport, setShowExport] = useState(false);
   var headerBannerInputRef = useRef(null);
 
-  // Load saved stores on mount. Do NOT auto-load last store.
-  // Show fresh empty state so user starts with the generate dialog.
+  // Load saved stores on mount
   useEffect(function() {
-    setSavedStores(loadSavedStores());
-    // Check if auto-saved data exists but don't load it automatically.
-    // User can access it from saved stores.
+    loadSavedStores().then(function(stores) {
+      setSavedStores(stores);
+    });
   }, []);
 
   // Auto-save and validate whenever store changes
@@ -258,17 +339,21 @@ export default function App() {
   };
 
   // ─── SAVED STORES ───
-  var handleSave = function() {
+  var handleSave = async function() {
     if (!store.pages.length) return;
-    var id = saveStore(store);
-    if (id) {
-      setSavedStores(loadSavedStores());
-      alert('Store saved! (' + (store.brandName || 'Untitled') + ')');
+    var result = await saveStore(store);
+    if (result) {
+      var stores = await loadSavedStores();
+      setSavedStores(stores);
+      var shareUrl = result.shareToken ? (window.location.origin + '/share/' + result.shareToken) : null;
+      var msg = 'Store saved! (' + (store.brandName || 'Untitled') + ')';
+      if (shareUrl) msg += '\n\nDesigner share link:\n' + shareUrl;
+      alert(msg);
     }
   };
 
-  var handleLoadSaved = function(id) {
-    var data = loadStore(id);
+  var handleLoadSaved = async function(id) {
+    var data = await loadStore(id);
     if (data) {
       setStore(data);
       setCurPage(data.pages[0] ? data.pages[0].id : '');
@@ -285,9 +370,10 @@ export default function App() {
     }
   };
 
-  var handleDeleteSaved = function(id) {
-    deleteSavedStore(id);
-    setSavedStores(loadSavedStores());
+  var handleDeleteSaved = async function(id) {
+    await deleteSavedStore(id);
+    var stores = await loadSavedStores();
+    setSavedStores(stores);
   };
 
   // ─── NEW STORE (reset) ───

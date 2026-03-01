@@ -294,3 +294,10 @@ textarea.input { resize: vertical; min-height: 44px; }
 .warning-item { font-size: 10px; white-space: nowrap; font-weight: 500; }
 .warning-item.error { color: #dc2626; }
 .warning-item.warning { color: #d97706; }
+
+/* ─── SHARE VIEW (designer read-only) ─── */
+.share-mode { background: #f8fafc; }
+.share-topbar { display: flex; align-items: center; gap: 16px; padding: 12px 24px; background: #fff; border-bottom: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+.share-brand { font-size: 15px; font-weight: 700; color: #0f172a; }
+.share-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; background: #dbeafe; color: #1d4ed8; padding: 3px 10px; border-radius: 20px; }
+.share-view-loading, .share-view-error { display: flex; align-items: center; justify-content: center; height: 100vh; font-size: 16px; color: #64748b; }
