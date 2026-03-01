@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { COMPLEXITY_LEVELS, STORE_TEMPLATES } from '../constants';
+import { COMPLEXITY_LEVELS, STORE_TEMPLATES, LAYOUTS } from '../constants';
 import { discoverBrandProducts } from '../api';
 
 function parseAsinFile(text) {
@@ -52,13 +52,32 @@ export default function GenerateModal({ onClose, onGenerate }) {
     }
   };
 
+  var cleanBrandUrl = function(url) {
+    // Clean Amazon store URLs: remove tracking params, decode entities
+    var cleaned = url.trim();
+    // Fix HTML entity artifacts from copy-paste (e.g., &amp; → &)
+    cleaned = cleaned.replace(/&amp;/g, '&');
+    // Remove common tracking parameters
+    try {
+      var urlObj = new URL(cleaned);
+      var paramsToRemove = ['ingress', 'lp_context_asin', 'lp_context_query', 'visitId', 'ref',
+        'lp_asin', 'store_ref', 'byline_logo_guardrail_passed'];
+      paramsToRemove.forEach(function(p) { urlObj.searchParams.delete(p); });
+      cleaned = urlObj.toString();
+      // Remove trailing underscore (common copy-paste artifact)
+      if (cleaned.endsWith('_')) cleaned = cleaned.slice(0, -1);
+    } catch (e) { /* keep original if URL parsing fails */ }
+    return cleaned;
+  };
+
   var onBrandDiscover = async function() {
     if (!brandUrl.trim()) return;
     setBrandDiscovering(true);
     setBrandDiscoverError('');
     setBrandDiscoverProgress('Starting discovery...');
     try {
-      var result = await discoverBrandProducts(brandUrl.trim(), function(msg) {
+      var cleanedUrl = cleanBrandUrl(brandUrl);
+      var result = await discoverBrandProducts(cleanedUrl, function(msg) {
         setBrandDiscoverProgress(msg);
       });
       if (result.asins && result.asins.length > 0) {
@@ -112,9 +131,9 @@ export default function GenerateModal({ onClose, onGenerate }) {
               className="input"
               value={brandUrl}
               onChange={function(e) { setBrandUrl(e.target.value); }}
-              placeholder="https://www.amazon.de/s?me=SELLER_ID..."
+              placeholder="https://www.amazon.de/stores/BRAND/page/..."
             />
-            <div className="hint">Paste the Amazon seller/brand page URL to auto-discover all products</div>
+            <div className="hint">Paste an Amazon Brand Store or seller page URL to auto-discover all products</div>
             <button
               className="btn btn-primary"
               style={{ marginTop: 6, padding: '8px 16px' }}
@@ -243,28 +262,85 @@ export default function GenerateModal({ onClose, onGenerate }) {
           {showTemplateDetail && (function() {
             var tmpl = STORE_TEMPLATES.find(function(t) { return t.id === showTemplateDetail; });
             if (!tmpl) return null;
+            var tileColors = {
+              image: '#94a3b8', shoppable_image: '#f59e0b', product_grid: '#3b82f6',
+              video: '#ef4444', text: '#8b5cf6', image_text: '#10b981',
+            };
+            var tileLabels = {
+              image: 'IMG', shoppable_image: 'SHOP', product_grid: 'GRID',
+              video: 'VID', text: 'TXT', image_text: 'I+T',
+            };
+            function renderSectionPreview(sec, i) {
+              var layout = LAYOUTS.find(function(l) { return l.id === sec.layout; });
+              var tileTypes = sec.tileTypes || [];
+              var cols = layout ? layout.cols : '1fr';
+              var isComplexGrid = layout && layout.grid;
+              return (
+                <div key={i} className="template-preview-section" style={{ flexDirection: 'column', alignItems: 'stretch', gap: 4 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span className="template-preview-layout">{sec.layout}</span>
+                    <span className="template-preview-purpose">{sec.purpose}</span>
+                    <span className="template-preview-tiles">{tileTypes.length} tile{tileTypes.length > 1 ? 's' : ''}</span>
+                  </div>
+                  <div style={{
+                    display: isComplexGrid ? 'grid' : 'flex',
+                    gridTemplateColumns: !isComplexGrid ? undefined : cols,
+                    gridTemplateRows: !isComplexGrid ? undefined :
+                      (layout.grid.indexOf('6grid') >= 0 ? '1fr 1fr 1fr' : '1fr 1fr'),
+                    gap: 2, height: isComplexGrid ? 32 : 16, marginLeft: 4
+                  }}>
+                    {tileTypes.map(function(type, ti) {
+                      var color = tileColors[type] || '#94a3b8';
+                      var label = tileLabels[type] || '';
+                      var tileStyle = { background: color, borderRadius: 2, opacity: 0.7, minWidth: 0,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center' };
+                      if (!isComplexGrid) {
+                        var flexVal = 1;
+                        if ((sec.layout === '2-1' || sec.layout === '2-1-1') && ti === 0) flexVal = 2;
+                        if ((sec.layout === '1-2' || sec.layout === '1-1-2') && ti === tileTypes.length - 1) flexVal = 2;
+                        tileStyle.flex = flexVal;
+                      } else {
+                        // Complex grid positioning
+                        if (layout.grid === 'lg-2stack') {
+                          if (ti === 0) { tileStyle.gridRow = '1 / 3'; tileStyle.gridColumn = '1'; }
+                        } else if (layout.grid === '2stack-lg') {
+                          if (ti === 2) { tileStyle.gridRow = '1 / 3'; tileStyle.gridColumn = '2'; }
+                        } else if (layout.grid === 'lg-4grid') {
+                          if (ti === 0) { tileStyle.gridRow = '1 / 3'; tileStyle.gridColumn = '1'; }
+                        } else if (layout.grid === '4grid-lg') {
+                          if (ti === 4) { tileStyle.gridRow = '1 / 3'; tileStyle.gridColumn = '3'; }
+                        } else if (layout.grid === 'lg-6grid') {
+                          if (ti === 0) { tileStyle.gridRow = '1 / 4'; tileStyle.gridColumn = '1'; }
+                        } else if (layout.grid === '6grid-lg') {
+                          if (ti === 6) { tileStyle.gridRow = '1 / 4'; tileStyle.gridColumn = '3'; }
+                        }
+                      }
+                      return (
+                        <div key={ti} style={tileStyle} title={type}>
+                          <span style={{ fontSize: 6, color: '#fff', fontWeight: 700, textTransform: 'uppercase' }}>{label}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            }
             return (
               <div className="template-preview">
-                <div className="template-preview-title">{tmpl.name} — Homepage Layout Pattern</div>
-                {tmpl.homepage.map(function(sec, i) {
-                  return (
-                    <div key={i} className="template-preview-section">
-                      <span className="template-preview-layout">{sec.layout}</span>
-                      <span className="template-preview-purpose">{sec.purpose}</span>
-                      <span className="template-preview-tiles">{sec.tiles.length} tile{sec.tiles.length > 1 ? 's' : ''}</span>
-                    </div>
-                  );
-                })}
-                <div className="template-preview-title" style={{ marginTop: 8 }}>Category Page Pattern</div>
-                {tmpl.categoryPage.map(function(sec, i) {
-                  return (
-                    <div key={i} className="template-preview-section">
-                      <span className="template-preview-layout">{sec.layout}</span>
-                      <span className="template-preview-purpose">{sec.purpose}</span>
-                      <span className="template-preview-tiles">{sec.tiles.length} tile{sec.tiles.length > 1 ? 's' : ''}</span>
-                    </div>
-                  );
-                })}
+                <div className="template-preview-title">{tmpl.name} — Homepage Layout</div>
+                {tmpl.homepage.map(renderSectionPreview)}
+                <div className="template-preview-title" style={{ marginTop: 8 }}>Category Page Layout</div>
+                {tmpl.categoryPage.map(renderSectionPreview)}
+                <div style={{ display: 'flex', gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
+                  {Object.keys(tileColors).map(function(type) {
+                    return (
+                      <span key={type} style={{ display: 'flex', alignItems: 'center', gap: 3, fontSize: 8, color: '#64748b' }}>
+                        <span style={{ width: 8, height: 8, borderRadius: 2, background: tileColors[type], opacity: 0.7, display: 'inline-block' }} />
+                        {type.replace('_', ' ')}
+                      </span>
+                    );
+                  })}
+                </div>
               </div>
             );
           })()}
