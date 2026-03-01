@@ -305,9 +305,11 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
 
   // ─── ENFORCE MENU STRUCTURE: Replace AI category names with user's exact names ───
   if (hasMenuStructure) {
+    console.log('[aiAnalyzeProducts] Enforcing user menu structure over AI categories');
     var enforceAsins = products.map(function(p) { return p.asin; });
     result.categories = enforceMenuCategories(parsed.categories, result.categories, enforceAsins);
     result.suggestedPages = ['Homepage'].concat(result.categories.map(function(c) { return c.name; }));
+    result._menuSource = 'user';
   }
 
   // Validate: every ASIN must be in a category or subcategory
@@ -828,23 +830,50 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   if (template) {
     log('   Template: ' + template.name + ' (inspired by ' + template.inspiration + ')');
   }
+  // Check if user provided a menu structure BEFORE calling AI
+  var parsedMenu = parseMenuStructure(userInstructions);
+  var userHasMenu = parsedMenu && parsedMenu.categories.length > 0;
+  if (userHasMenu) {
+    log('Menu structure detected: ' + parsedMenu.categories.map(function(c) {
+      var s = c.name;
+      if (c.subcategories && c.subcategories.length > 0) s += ' (' + c.subcategories.map(function(sc) { return sc.name; }).join(', ') + ')';
+      return s;
+    }).join(' | '));
+  } else {
+    log('No menu structure detected — AI will create categories from products.');
+  }
+
   var analysis;
   try {
     analysis = await aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions);
     // Validate that we got actual categories
     if (!analysis.categories || analysis.categories.length === 0) {
       log('AI returned no categories, using fallback grouping...');
-      analysis = fallbackAnalysis(products, brand, lang);
+      analysis = fallbackAnalysis(products, brand, lang, userInstructions);
     } else if (analysis.categories.length === 1 && analysis.categories[0].name.match(/sonstige|andere|other|misc|all/i)) {
       log('AI grouped everything into one generic category, using smarter fallback...');
-      analysis = fallbackAnalysis(products, brand, lang);
+      analysis = fallbackAnalysis(products, brand, lang, userInstructions);
     }
   } catch (err) {
     log('AI analysis failed (' + err.message + '), falling back to deterministic grouping...');
-    analysis = fallbackAnalysis(products, brand, lang);
+    analysis = fallbackAnalysis(products, brand, lang, userInstructions);
   }
 
-  log('Structure planned: ' + (analysis.categories || []).length + ' categories, ' + (analysis.suggestedPages || []).length + ' pages');
+  // SAFETY NET: If user provided menu structure but analysis categories don't match, force-apply it
+  if (userHasMenu) {
+    var userCatNames = parsedMenu.categories.map(function(c) { return c.name.toLowerCase().trim(); });
+    var analysisCatNames = (analysis.categories || []).map(function(c) { return c.name.toLowerCase().trim(); });
+    var menuMatches = userCatNames.filter(function(n) { return analysisCatNames.indexOf(n) >= 0; }).length;
+    if (menuMatches < userCatNames.length * 0.5) {
+      log('WARNING: AI categories do not match user menu structure. Force-applying user menu...');
+      var allAsins = products.map(function(p) { return p.asin; });
+      analysis.categories = enforceMenuCategories(parsedMenu.categories, analysis.categories, allAsins);
+      analysis.suggestedPages = ['Homepage'].concat(analysis.categories.map(function(c) { return c.name; }));
+      analysis._menuSource = 'user';
+    }
+  }
+
+  log('Structure planned: ' + (analysis.categories || []).length + ' categories' + (analysis._menuSource === 'user' ? ' (from YOUR menu structure)' : ' (AI-generated)'));
   log('   Brand tone: ' + (analysis.brandTone || 'professional'));
   log('   Product complexity: ' + (analysis.productComplexity || 'medium'));
   log('   Hero: "' + (analysis.heroMessage || brand) + '"');
@@ -1006,7 +1035,8 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   }
 
   // STEP 5: Extra pages for Standard/Premium complexity
-  if (cConfig.extraPages && cConfig.extraPageTypes) {
+  // SKIP extra pages if user provided a specific menu structure — they control the pages
+  if (cConfig.extraPages && cConfig.extraPageTypes && !userHasMenu) {
     var extraTypes = cConfig.extraPageTypes;
 
     // Bestsellers page
@@ -1179,7 +1209,70 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
 
 // ─── FALLBACK: Deterministic store building ───
 
-function fallbackAnalysis(products, brand, lang) {
+function fallbackAnalysis(products, brand, lang, userInstructions) {
+  // ─── PRIORITY: If user provided a menu structure, use it directly ───
+  var parsed = parseMenuStructure(userInstructions);
+  if (parsed && parsed.categories.length > 0) {
+    console.log('[fallbackAnalysis] User menu structure detected with ' + parsed.categories.length + ' categories — using it directly');
+    var allAsins = products.map(function(p) { return p.asin; });
+    // Distribute ASINs across user categories using simple keyword matching
+    var productAssigned = {};
+    var userCats = parsed.categories.map(function(uc) {
+      var catAsins = [];
+      var catKeywords = uc.name.toLowerCase().split(/[\s\/&,]+/).filter(function(w) { return w.length > 2; });
+      products.forEach(function(p) {
+        if (productAssigned[p.asin]) return;
+        var pText = ((p.name || '') + ' ' + (p.description || '') + ' ' + ((p.categories || []).join(' '))).toLowerCase();
+        var matches = catKeywords.filter(function(kw) { return pText.indexOf(kw) >= 0; }).length;
+        if (matches > 0) {
+          catAsins.push(p.asin);
+          productAssigned[p.asin] = true;
+        }
+      });
+      var subcategories = (uc.subcategories || []).map(function(us) {
+        var subAsins = [];
+        var subKeywords = us.name.toLowerCase().split(/[\s\/&,]+/).filter(function(w) { return w.length > 2; });
+        products.forEach(function(p) {
+          if (productAssigned[p.asin]) return;
+          var pText = ((p.name || '') + ' ' + (p.description || '') + ' ' + ((p.categories || []).join(' '))).toLowerCase();
+          var matches = subKeywords.filter(function(kw) { return pText.indexOf(kw) >= 0; }).length;
+          if (matches > 0) {
+            subAsins.push(p.asin);
+            productAssigned[p.asin] = true;
+          }
+        });
+        return { name: us.name, asins: subAsins, productCount: subAsins.length };
+      });
+      return { name: uc.name, asins: catAsins, productCount: catAsins.length, subcategories: subcategories };
+    });
+    // Distribute unassigned products evenly
+    var unassigned = allAsins.filter(function(a) { return !productAssigned[a]; });
+    for (var ui = 0; ui < unassigned.length; ui++) {
+      var target = userCats[ui % userCats.length];
+      if (target.subcategories && target.subcategories.length > 0) {
+        target.subcategories[ui % target.subcategories.length].asins.push(unassigned[ui]);
+        target.subcategories[ui % target.subcategories.length].productCount++;
+      } else {
+        target.asins.push(unassigned[ui]);
+      }
+      target.productCount++;
+    }
+    return {
+      categories: userCats,
+      hasBundles: false,
+      bundleAsins: [],
+      suggestedPages: ['Homepage'].concat(userCats.map(function(c) { return c.name; })),
+      brandTone: 'professional',
+      productComplexity: 'medium',
+      heroMessage: brand,
+      brandStory: '',
+      keyFeatures: [],
+      hasVariants: false,
+      variantTypes: [],
+      _menuSource: 'user',
+    };
+  }
+
   var groups = {};
 
   // Strategy 1: Try scraped Amazon categories (use the most specific one)
