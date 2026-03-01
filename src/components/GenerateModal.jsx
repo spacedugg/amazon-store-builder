@@ -76,7 +76,7 @@ export default function GenerateModal({ onClose, onGenerate }) {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-box" onClick={function(e) { e.stopPropagation(); }} style={{ maxWidth: 520, maxHeight: '90vh', overflow: 'auto' }}>
+      <div className="modal-box" onClick={function(e) { e.stopPropagation(); }} style={{ maxWidth: 700, maxHeight: '90vh', overflow: 'auto' }}>
         <div className="modal-title">Generate Brand Store</div>
 
         {/* 1. Product Input */}
@@ -196,14 +196,48 @@ export default function GenerateModal({ onClose, onGenerate }) {
 
         {/* 5. Instructions */}
         <label className="label" style={{ marginTop: 10 }}>5. Instructions (optional)</label>
-        <textarea
-          value={instructions}
-          onChange={function(e) { setInstructions(e.target.value); }}
-          className="input"
-          rows={5}
-          placeholder={"You can provide a specific menu structure here.\nExample:\nPhysikalische Insektenabwehr\n- Ameisen / Termiten\n- Bettwanzen / Floh\nHolzwurm\nMarder\n\nOr general instructions like: 'Focus on lifestyle imagery, premium feel'"}
-        />
-        <div className="hint">If you provide a menu structure with categories (use "-" for subcategories), it will be followed exactly.</div>
+        <div className="instructions-area">
+          <textarea
+            value={instructions}
+            onChange={function(e) { setInstructions(e.target.value); }}
+            className="input"
+            rows={8}
+            placeholder={"Physikalische Insektenabwehr\n- Ameisen / Termiten\n- Bettwanzen / Floh\n- Milben / Spinnen\nHolzwurm\nMarder\nHaustierpflege\n- Spot On Katzen\n- Spot On Hunde"}
+          />
+          <div className="instructions-legend">
+            <div className="legend-title">Input Guide</div>
+            <div className="legend-section">
+              <div className="legend-heading">Menu Structure</div>
+              <div className="legend-item"><span className="legend-code">Category Name</span> Top-level page</div>
+              <div className="legend-item"><span className="legend-code">- Subcategory</span> Child page (with dash)</div>
+              <div className="legend-example">
+                Shoes<br/>
+                - Sandals<br/>
+                - Boots<br/>
+                Bags
+              </div>
+              <div className="legend-note">Menu structures are followed exactly as written.</div>
+            </div>
+            <div className="legend-section">
+              <div className="legend-heading">Additional Notes</div>
+              <div className="legend-item">Brand info, tone, style hints</div>
+              <div className="legend-item">Product highlights or USPs</div>
+              <div className="legend-item">Target audience details</div>
+              <div className="legend-note">Notes are analyzed by AI and integrated where relevant.</div>
+            </div>
+            <div className="legend-section">
+              <div className="legend-heading">You can combine both</div>
+              <div className="legend-example">
+                Cleaning Devices<br/>
+                - Pressure Washers<br/>
+                - Steam Cleaners<br/>
+                Accessories<br/><br/>
+                Premium brand, focus on<br/>
+                quality and durability
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div className="modal-footer">
           <button className="btn" onClick={onClose}>Cancel</button>
