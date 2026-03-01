@@ -18,6 +18,7 @@ import ExportModal from './components/ExportModal';
 var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, complexity: 2, category: 'generic' };
 
 export default function App() {
+  var uiLang = 'en';
   var [store, setStore] = useState(EMPTY_STORE);
   var [curPage, setCurPage] = useState('');
   var [sel, setSel] = useState(null);
