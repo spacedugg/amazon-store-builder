@@ -4,7 +4,32 @@ var ANTHROPIC_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY || '';
 var PRIMARY_MODEL = 'claude-opus-4-6';
 var FALLBACK_MODEL = 'claude-sonnet-4-6';
 
-// ─── CLAUDE API CALL (with retry + fallback) ───
+// ─── TIMEOUT-AWARE FETCH ───
+function fetchWithTimeout(url, options, timeoutMs) {
+  return new Promise(function(resolve, reject) {
+    var controller = new AbortController();
+    var timer = setTimeout(function() {
+      controller.abort();
+      reject(new Error('Request timed out after ' + Math.round(timeoutMs / 1000) + 's'));
+    }, timeoutMs);
+    var fetchOptions = Object.assign({}, options, { signal: controller.signal });
+    fetch(url, fetchOptions).then(function(resp) {
+      clearTimeout(timer);
+      resolve(resp);
+    }).catch(function(err) {
+      clearTimeout(timer);
+      if (err.name === 'AbortError') {
+        reject(new Error('Request timed out after ' + Math.round(timeoutMs / 1000) + 's'));
+      } else {
+        reject(err);
+      }
+    });
+  });
+}
+
+// ─── CLAUDE API CALL (with retry + fallback + timeout) ───
+var CLAUDE_TIMEOUT_MS = 90000; // 90s per API call
+
 async function callClaude(systemPrompt, userPrompt, maxTokens) {
   if (!ANTHROPIC_KEY) throw new Error('VITE_ANTHROPIC_API_KEY not configured');
 
@@ -14,7 +39,7 @@ async function callClaude(systemPrompt, userPrompt, maxTokens) {
   for (var attempt = 0; attempt < models.length; attempt++) {
     var model = models[attempt];
     try {
-      var resp = await fetch('https://api.anthropic.com/v1/messages', {
+      var resp = await fetchWithTimeout('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -28,7 +53,7 @@ async function callClaude(systemPrompt, userPrompt, maxTokens) {
           system: systemPrompt,
           messages: [{ role: 'user', content: userPrompt }],
         }),
-      });
+      }, CLAUDE_TIMEOUT_MS);
 
       if (resp.status === 529 || resp.status === 503 || resp.status === 429) {
         if (attempt < models.length - 1) {
@@ -47,7 +72,7 @@ async function callClaude(systemPrompt, userPrompt, maxTokens) {
       var text = (data.content || []).map(function(b) { return b.text || ''; }).join('');
       return text;
     } catch (e) {
-      if (attempt < models.length - 1 && (e.message.indexOf('529') >= 0 || e.message.indexOf('503') >= 0 || e.message.indexOf('overload') >= 0 || e.message.indexOf('fetch') >= 0)) {
+      if (attempt < models.length - 1 && (e.message.indexOf('529') >= 0 || e.message.indexOf('503') >= 0 || e.message.indexOf('overload') >= 0 || e.message.indexOf('fetch') >= 0 || e.message.indexOf('timed out') >= 0)) {
         console.warn('Call failed (' + e.message + '), retrying...');
         if (delays[attempt] > 0) await new Promise(function(r) { setTimeout(r, delays[attempt]); });
         continue;

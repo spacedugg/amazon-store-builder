@@ -140,6 +140,8 @@ export default function App() {
   var page = store.pages.find(function(p) { return p.id === curPage; }) || store.pages[0] || null;
 
   // ─── GENERATION ───
+  var GENERATION_TIMEOUT_MS = 300000; // 5 minutes overall timeout
+
   var handleGenerate = async function(params) {
     setShowGen(false);
     setGenerating(true);
@@ -150,13 +152,25 @@ export default function App() {
 
     var lang = LANGS[params.marketplace] || 'German';
     var domain = DOMAINS[params.marketplace] || DOMAINS.de;
+    var timedOut = false;
+
+    // Overall timeout: auto-abort after 5 minutes
+    var timeoutTimer = setTimeout(function() {
+      timedOut = true;
+      log('');
+      log('ERROR: Generation timed out after 5 minutes.');
+      log('This can happen when the AI API or product scraping is slow.');
+      log('Please try again — if it keeps happening, try with fewer ASINs.');
+      setGenDone(true);
+    }, GENERATION_TIMEOUT_MS);
 
     try {
       // Step 1: Scrape
       log('Scraping ' + params.asins.length + ' ASINs from Amazon.' + params.marketplace + '...');
       var scrapeResult = await scrapeAsins(params.asins, domain);
+      if (timedOut) return;
       var products = scrapeResult.products || [];
-      if (!products.length) throw new Error('No products returned from Bright Data');
+      if (!products.length) throw new Error('No products returned from Bright Data. Check your ASINs and try again.');
       log('Scraped ' + products.length + '/' + params.asins.length + ' products');
 
       // Resolve template data if selected
@@ -170,6 +184,7 @@ export default function App() {
         params.asins, products, params.brand, params.marketplace, lang,
         params.instructions, log, params.complexity, templateData
       );
+      if (timedOut) return;
 
       // Store meta
       storeData.complexity = params.complexity;
@@ -179,10 +194,17 @@ export default function App() {
       setCurPage(storeData.pages[0] ? storeData.pages[0].id : '');
       log('Store complete! ' + storeData.pages.length + ' pages, ' + products.length + ' products.');
     } catch (e) {
-      log('Error: ' + e.message);
+      if (!timedOut) {
+        log('');
+        log('ERROR: ' + e.message);
+        if (e.message.indexOf('timed out') >= 0) {
+          log('The API did not respond in time. Please try again.');
+        }
+      }
     } finally {
+      clearTimeout(timeoutTimer);
       setGenDone(true);
-      setTimeout(function() { setGenerating(false); }, 2000);
+      setTimeout(function() { setGenerating(false); }, 4000);
     }
   };
 
