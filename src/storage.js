@@ -113,6 +113,26 @@ export async function loadStoreByShareToken(shareToken) {
   return json;
 }
 
+// Import a store into your history by share link or token.
+// Loads the store via shareToken, then saves a copy under your own id.
+export async function importStoreByShareLink(input) {
+  // Extract share token from URL or use raw token
+  var token = input.trim();
+  var match = token.match(/\/share\/([a-z0-9]+)/i);
+  if (match) token = match[1];
+  if (!token) return { error: 'Invalid link' };
+
+  // Load store data via share token
+  var storeData = await loadStoreByShareToken(token);
+  if (!storeData || !storeData.data) return { error: 'Store not found' };
+
+  // Save a copy to the database (generates a new id for the importer)
+  var result = await saveStore(storeData.data, null, null);
+  if (!result) return { error: 'Could not save imported store' };
+
+  return { id: result.id, shareToken: result.shareToken, data: storeData.data };
+}
+
 // Auto-save stays in localStorage (frequent writes, no need for DB)
 export function autoSave(store) {
   try {

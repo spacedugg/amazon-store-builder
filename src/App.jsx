@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { uid, emptyTile, emptyTileForLayout, LAYOUTS, LANGS, DOMAINS, validateStore, PRICING, countStoreAssets, STORE_TEMPLATES } from './constants';
 import { scrapeAsins } from './api';
 import { generateStore, aiRefineStore, applyOperations } from './storeBuilder';
-import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, loadStoreByShareToken } from './storage';
+import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, loadStoreByShareToken, importStoreByShareLink } from './storage';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
 import Topbar from './components/Topbar';
 import PageList from './components/PageList';
@@ -315,6 +315,26 @@ export default function App() {
     setSavedStores(stores);
   };
 
+  // ─── IMPORT STORE BY SHARE LINK ───
+  var handleImportStore = async function(url) {
+    try {
+      var result = await importStoreByShareLink(url);
+      if (result.error) return result.error;
+      // Load the imported store into the editor
+      setStore(result.data);
+      setStoreId(result.id);
+      setShareToken(result.shareToken || null);
+      setCurPage(result.data.pages && result.data.pages[0] ? result.data.pages[0].id : '');
+      setSel(null);
+      // Refresh saved stores list
+      var stores = await loadSavedStores();
+      setSavedStores(stores);
+      return null; // no error
+    } catch (e) {
+      return e.message || 'Import failed';
+    }
+  };
+
   // ─── NEW STORE (reset) ───
   var handleNewStore = function() {
     if (store.pages.length > 0 && !confirm('Start a new store? Unsaved changes will be lost.')) return;
@@ -463,6 +483,7 @@ export default function App() {
           savedStores={savedStores}
           onLoadSaved={handleLoadSaved}
           onDeleteSaved={handleDeleteSaved}
+          onImportStore={handleImportStore}
           uiLang={uiLang}
           showSaved={showSaved}
           onToggleSaved={function() { setShowSaved(!showSaved); }}
