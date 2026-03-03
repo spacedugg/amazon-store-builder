@@ -14,90 +14,14 @@ import ProgressModal from './components/ProgressModal';
 import AIChat from './components/AIChat';
 import PriceCalculator from './components/PriceCalculator';
 import ExportModal from './components/ExportModal';
+import BriefingView from './components/BriefingView';
 
-var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, complexity: 2, category: 'generic' };
-
-// ─── SHARE VIEW (read-only for designers) ───
-function ShareView() {
-  var [sharedStore, setSharedStore] = useState(null);
-  var [loading, setLoading] = useState(true);
-  var [error, setError] = useState(null);
-  var [viewMode, setViewMode] = useState('desktop');
-  var [curPage, setCurPage] = useState('');
-
-  var token = window.location.pathname.split('/share/')[1];
-
-  useEffect(function() {
-    if (!token) { setError('No share token'); setLoading(false); return; }
-    loadStoreByShareToken(token).then(function(result) {
-      if (!result || !result.data) { setError('Store not found or link expired'); setLoading(false); return; }
-      setSharedStore(result.data);
-      setCurPage(result.data.pages && result.data.pages[0] ? result.data.pages[0].id : '');
-      setLoading(false);
-    }).catch(function(e) { setError(e.message); setLoading(false); });
-  }, [token]);
-
-  if (loading) return <div className="share-view-loading">Loading briefing...</div>;
-  if (error) return <div className="share-view-error">{error}</div>;
-  if (!sharedStore) return null;
-
-  var page = sharedStore.pages.find(function(p) { return p.id === curPage; }) || sharedStore.pages[0] || null;
-
-  return (
-    <div className="app-root share-mode">
-      <div className="share-topbar">
-        <span className="share-brand">{sharedStore.brandName || 'Store'} — Designer Briefing</span>
-        <span className="share-badge">Read Only</span>
-        <div className="view-toggle">
-          <button className={viewMode === 'desktop' ? 'active' : ''} onClick={function() { setViewMode('desktop'); }}>Desktop</button>
-          <button className={viewMode === 'mobile' ? 'active' : ''} onClick={function() { setViewMode('mobile'); }}>Mobile</button>
-        </div>
-      </div>
-      <div className="app-body">
-        <PageList
-          pages={sharedStore.pages}
-          curPage={curPage}
-          onSelect={function(id) { setCurPage(id); }}
-          onAddPage={function() {}}
-          onAddSubPage={function() {}}
-          onRenamePage={function() {}}
-          onDeletePage={function() {}}
-          onReorderPage={function() {}}
-          savedStores={[]}
-          onLoadSaved={function() {}}
-          onDeleteSaved={function() {}}
-          uiLang="en"
-          showSaved={false}
-          onToggleSaved={function() {}}
-        />
-        <Canvas
-          store={sharedStore}
-          page={page}
-          curPage={curPage}
-          onSelectPage={function(id) { setCurPage(id); }}
-          sel={null}
-          onSelect={function() {}}
-          onAddSection={function() {}}
-          onDeleteSection={function() {}}
-          onMoveSection={function() {}}
-          onChangeLayout={function() {}}
-          viewMode={viewMode}
-          onHeaderBannerUpload={function() {}}
-          products={sharedStore.products || []}
-          uiLang="en"
-          hasAutoSave={false}
-          onLoadAutoSave={function() {}}
-          onGenerate={function() {}}
-        />
-      </div>
-    </div>
-  );
-}
+var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, complexity: 2, category: 'generic', googleDriveUrl: '' };
 
 export default function App() {
-  // Check if this is a share link
+  // Check if this is a share link — render full BriefingView
   if (window.location.pathname.indexOf('/share/') === 0) {
-    return <ShareView />;
+    return <BriefingView />;
   }
 
   var uiLang = 'en';
@@ -118,6 +42,8 @@ export default function App() {
   var [requestedAsins, setRequestedAsins] = useState([]);
   var [showSaved, setShowSaved] = useState(false);
   var [showExport, setShowExport] = useState(false);
+  var [storeId, setStoreId] = useState(null);
+  var [shareToken, setShareToken] = useState(null);
   var headerBannerInputRef = useRef(null);
 
   // Load saved stores on mount
@@ -353,22 +279,23 @@ export default function App() {
   // ─── SAVED STORES ───
   var handleSave = async function() {
     if (!store.pages.length) return;
-    var result = await saveStore(store);
+    var result = await saveStore(store, storeId, shareToken);
     if (result) {
+      if (result.id) setStoreId(result.id);
+      if (result.shareToken) setShareToken(result.shareToken);
       var stores = await loadSavedStores();
       setSavedStores(stores);
-      var shareUrl = result.shareToken ? (window.location.origin + '/share/' + result.shareToken) : null;
-      var msg = 'Store saved! (' + (store.brandName || 'Untitled') + ')';
-      if (shareUrl) msg += '\n\nDesigner share link:\n' + shareUrl;
-      alert(msg);
+      alert('Store saved! (' + (store.brandName || 'Untitled') + ')');
     }
   };
 
   var handleLoadSaved = async function(id) {
-    var data = await loadStore(id);
-    if (data) {
-      setStore(data);
-      setCurPage(data.pages[0] ? data.pages[0].id : '');
+    var result = await loadStore(id);
+    if (result && result.data) {
+      setStore(result.data);
+      setStoreId(id);
+      if (result.shareToken) setShareToken(result.shareToken);
+      setCurPage(result.data.pages[0] ? result.data.pages[0].id : '');
       setSel(null);
     }
   };
@@ -396,6 +323,8 @@ export default function App() {
     setSel(null);
     setWarnings([]);
     setRequestedAsins([]);
+    setStoreId(null);
+    setShareToken(null);
   };
 
   // ─── VIEW MODE ───
@@ -425,8 +354,37 @@ export default function App() {
     e.target.value = '';
   };
 
-  // ─── EXPORT ───
-  var handleExport = async function(briefingLang) {
+  // ─── EXPORT (generate share link) ───
+  var handleExport = async function() {
+    if (!store.pages.length) return;
+    try {
+      // Save first (or re-save) to ensure we have a share token
+      var result = await saveStore(store, storeId, shareToken);
+      if (result && result.shareToken) {
+        if (result.id) setStoreId(result.id);
+        setShareToken(result.shareToken);
+        var shareUrl = window.location.origin + '/share/' + result.shareToken;
+        // Copy to clipboard
+        try {
+          await navigator.clipboard.writeText(shareUrl);
+          alert('Designer briefing link copied to clipboard!\n\n' + shareUrl);
+        } catch (clipErr) {
+          // Fallback: prompt user to copy
+          prompt('Copy this link and share it with your designer:', shareUrl);
+        }
+        // Also refresh saved stores list
+        var stores = await loadSavedStores();
+        setSavedStores(stores);
+      } else {
+        alert('Export failed: could not generate share link.');
+      }
+    } catch (e) {
+      alert('Export failed: ' + e.message);
+    }
+  };
+
+  // ─── EXPORT DOCX (keep as secondary option) ───
+  var handleExportDocx = async function(briefingLang) {
     try {
       var blob = await generateBriefingDocx(store, briefingLang || 'en');
       var filename = (store.brandName || 'store').replace(/[^a-zA-Z0-9]/g, '_') + '_briefing.docx';
@@ -482,11 +440,14 @@ export default function App() {
         onGenerate={function() { setShowGen(true); }}
         onShowAsins={function() { setShowAsins(true); }}
         onShowPrice={function() { setShowPrice(true); }}
-        onExport={function() { setShowExport(true); }}
+        onExport={handleExport}
+        onExportDocx={function() { setShowExport(true); }}
         onSave={handleSave}
         viewMode={viewMode}
         onToggleView={handleToggleView}
         onNewStore={handleNewStore}
+        onGoogleDriveChange={function(url) { setStore(function(s) { return Object.assign({}, s, { googleDriveUrl: url }); }); }}
+        googleDriveUrl={store.googleDriveUrl || ''}
       />
 
       <div className="app-body">
@@ -588,7 +549,7 @@ export default function App() {
       {showExport && (
         <ExportModal
           onClose={function() { setShowExport(false); }}
-          onExport={handleExport}
+          onExport={handleExportDocx}
           uiLang={uiLang}
         />
       )}
