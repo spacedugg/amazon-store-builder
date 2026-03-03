@@ -285,8 +285,7 @@ export default function GenerateModal({ onClose, onGenerate }) {
                   <div style={{
                     display: isComplexGrid ? 'grid' : 'flex',
                     gridTemplateColumns: !isComplexGrid ? undefined : cols,
-                    gridTemplateRows: !isComplexGrid ? undefined :
-                      (layout.grid.indexOf('6grid') >= 0 ? '1fr 1fr 1fr' : '1fr 1fr'),
+                    gridTemplateRows: !isComplexGrid ? undefined : '1fr 1fr',
                     gap: 2, height: isComplexGrid ? 32 : 16, marginLeft: 4
                   }}>
                     {tileTypes.map(function(type, ti) {
@@ -309,10 +308,6 @@ export default function GenerateModal({ onClose, onGenerate }) {
                           if (ti === 0) { tileStyle.gridRow = '1 / 3'; tileStyle.gridColumn = '1'; }
                         } else if (layout.grid === '4grid-lg') {
                           if (ti === 4) { tileStyle.gridRow = '1 / 3'; tileStyle.gridColumn = '3'; }
-                        } else if (layout.grid === 'lg-6grid') {
-                          if (ti === 0) { tileStyle.gridRow = '1 / 4'; tileStyle.gridColumn = '1'; }
-                        } else if (layout.grid === '6grid-lg') {
-                          if (ti === 6) { tileStyle.gridRow = '1 / 4'; tileStyle.gridColumn = '3'; }
                         }
                       }
                       return (

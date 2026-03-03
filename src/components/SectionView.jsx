@@ -70,41 +70,6 @@ function getGridConfig(layout, isMobile) {
     };
   }
 
-  // lg-6grid: Large left (spans 3 rows) + 2x3 grid right
-  // T1 = large left, T2-T7 = 2x3 grid right
-  if (g === 'lg-6grid') {
-    return {
-      gridStyle: { gridTemplateColumns: '2fr 1fr 1fr', gridTemplateRows: '1fr 1fr 1fr' },
-      getTileStyle: function(i) {
-        if (i === 0) return { gridRow: '1 / 4', gridColumn: '1' };
-        if (i === 1) return { gridRow: '1', gridColumn: '2' };
-        if (i === 2) return { gridRow: '1', gridColumn: '3' };
-        if (i === 3) return { gridRow: '2', gridColumn: '2' };
-        if (i === 4) return { gridRow: '2', gridColumn: '3' };
-        if (i === 5) return { gridRow: '3', gridColumn: '2' };
-        if (i === 6) return { gridRow: '3', gridColumn: '3' };
-        return {};
-      },
-    };
-  }
-
-  // 6grid-lg: 2x3 grid left + Large right (spans 3 rows)
-  if (g === '6grid-lg') {
-    return {
-      gridStyle: { gridTemplateColumns: '1fr 1fr 2fr', gridTemplateRows: '1fr 1fr 1fr' },
-      getTileStyle: function(i) {
-        if (i === 0) return { gridRow: '1', gridColumn: '1' };
-        if (i === 1) return { gridRow: '1', gridColumn: '2' };
-        if (i === 2) return { gridRow: '2', gridColumn: '1' };
-        if (i === 3) return { gridRow: '2', gridColumn: '2' };
-        if (i === 4) return { gridRow: '3', gridColumn: '1' };
-        if (i === 5) return { gridRow: '3', gridColumn: '2' };
-        if (i === 6) return { gridRow: '1 / 4', gridColumn: '3' };
-        return {};
-      },
-    };
-  }
-
   // Default: simple column layout
   return {
     gridStyle: { gridTemplateColumns: layout.cols },
