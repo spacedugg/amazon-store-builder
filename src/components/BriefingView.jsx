@@ -1,18 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
-import { LAYOUTS, LAYOUT_TILE_DIMS, AMAZON_IMG_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES } from '../constants';
+import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES } from '../constants';
 import { loadStoreByShareToken } from '../storage';
 import SectionView from './SectionView';
+
+var noop = function() {};
 
 // ─── INSPIRATION LIBRARY ───
 var INSPIRATION_LINKS = [
   { brand: 'Anker', url: 'https://www.amazon.de/stores/Anker/page/17CAD5AC-A4B2-4DC2-B567-1E4E0C8B6B3A', category: 'Electronics' },
   { brand: 'LEVOIT', url: 'https://www.amazon.de/stores/LEVOIT/page/C7C58B0F-E7D7-40D5-8E43-A18C6C5EC1F6', category: 'Home & Kitchen' },
-  { brand: 'Pampers', url: 'https://www.amazon.de/stores/Pampers/page/2A2E5C1D-E9FE-4028-BCF9-3C3E3E5E3E3E', category: 'Baby' },
-  { brand: 'Samsung', url: 'https://www.amazon.de/stores/Samsung/page/C9E9C6E8-49E3-4F6A-BD92-4CC9C8A8A8A8', category: 'Electronics' },
-  { brand: 'Bosch Home', url: 'https://www.amazon.de/stores/BoschHome/page/E7F3FE5C-DEBB-45E6-9EC1-F3E3E3E3E3E3', category: 'Home & Kitchen' },
-  { brand: 'L\'Oreal Paris', url: 'https://www.amazon.de/stores/LOr%C3%A9alParis/page/1F1C1F1C-1F1C-1F1C-1F1C-1F1C1F1C1F1C', category: 'Beauty' },
-  { brand: 'Pedigree', url: 'https://www.amazon.de/stores/Pedigree/page/A0A0A0A0-A0A0-A0A0-A0A0-A0A0A0A0A0A0', category: 'Pets' },
-  { brand: 'Under Armour', url: 'https://www.amazon.de/stores/UnderArmour/page/B1B1B1B1-B1B1-B1B1-B1B1-B1B1B1B1B1B1', category: 'Sports & Fashion' },
+  { brand: 'Samsung', url: 'https://www.amazon.de/stores/Samsung/page/44F51E3C-4D49-4230-9E96-B5E2163A9E78', category: 'Electronics' },
+  { brand: 'Bosch Home', url: 'https://www.amazon.de/stores/BoschProfessional/page/3E0B7B1E-6BBB-4FA1-B41D-9E18C2C0A1B3', category: 'Home & Kitchen' },
+  { brand: 'L\'Oreal Paris', url: 'https://www.amazon.de/stores/L%27Or%C3%A9alParis/page/30B1B25C-B632-47FE-B1A7-3AE8E3C49327', category: 'Beauty' },
+  { brand: 'Pampers', url: 'https://www.amazon.de/stores/Pampers/page/1E7F9B1A-67C1-4E49-B8C8-A4C2E3D5F6A7', category: 'Baby' },
 ];
 
 // ─── TILE DETAIL CARD ───
@@ -108,11 +108,11 @@ function SectionBriefing({ section, sectionIndex, viewMode, products }) {
           idx={sectionIndex}
           totalSections={1}
           sel={null}
-          onSelect={function() {}}
-          onDelete={function() {}}
+          onSelect={noop}
+          onDelete={noop}
           onMoveUp={null}
           onMoveDown={null}
-          onChangeLayout={function() {}}
+          onChangeLayout={noop}
           viewMode={viewMode}
           products={products || []}
           uiLang="en"
@@ -174,6 +174,7 @@ export default function BriefingView() {
   var [updateBanner, setUpdateBanner] = useState(false);
   var prevStoreRef = useRef(null);
   var pollRef = useRef(null);
+  var bannerTimeoutRef = useRef(null);
 
   var token = window.location.pathname.split('/share/')[1];
 
@@ -192,15 +193,15 @@ export default function BriefingView() {
 
   // ─── POLLING FOR CHANGES (every 15s) ───
   useEffect(function() {
-    if (!token || !store) return;
+    if (!token) return;
 
     pollRef.current = setInterval(function() {
+      if (!prevStoreRef.current) return; // not loaded yet
       loadStoreByShareToken(token).then(function(result) {
         if (!result || !result.data) return;
         var newJson = JSON.stringify(result.data);
         var oldJson = prevStoreRef.current;
         if (newJson !== oldJson) {
-          // Detect changes
           var highlights = detectChanges(
             oldJson ? JSON.parse(oldJson) : null,
             result.data
@@ -210,28 +211,32 @@ export default function BriefingView() {
           setStore(result.data);
           setLastUpdated(result.updatedAt || new Date().toISOString());
           prevStoreRef.current = newJson;
-          // Auto-dismiss banner after 30s
-          setTimeout(function() { setUpdateBanner(false); }, 30000);
+          // Auto-dismiss banner after 30s (cancel previous timer)
+          if (bannerTimeoutRef.current) clearTimeout(bannerTimeoutRef.current);
+          bannerTimeoutRef.current = setTimeout(function() { setUpdateBanner(false); }, 30000);
         }
       }).catch(function() { /* silent retry */ });
     }, 15000);
 
-    return function() { if (pollRef.current) clearInterval(pollRef.current); };
-  }, [token, store]);
+    return function() {
+      if (pollRef.current) clearInterval(pollRef.current);
+      if (bannerTimeoutRef.current) clearTimeout(bannerTimeoutRef.current);
+    };
+  }, [token]);
 
   // ─── CHANGE DETECTION ───
   function detectChanges(oldStore, newStore) {
     if (!oldStore || !newStore) return {};
     var highlights = {};
 
-    // Compare pages
+    // Compare new pages against old
     (newStore.pages || []).forEach(function(page) {
       var oldPage = (oldStore.pages || []).find(function(p) { return p.id === page.id; });
       if (!oldPage) {
         highlights['page-' + page.id] = 'added';
         return;
       }
-      // Compare sections
+      // Compare new sections against old
       (page.sections || []).forEach(function(sec) {
         var oldSec = (oldPage.sections || []).find(function(s) { return s.id === sec.id; });
         if (!oldSec) {
@@ -250,6 +255,11 @@ export default function BriefingView() {
             highlights['tile-' + sec.id + '-' + ti] = 'modified';
           }
         });
+      });
+      // Detect removed sections
+      (oldPage.sections || []).forEach(function(sec) {
+        var exists = (page.sections || []).find(function(s) { return s.id === sec.id; });
+        if (!exists) highlights['sec-' + sec.id] = 'removed';
       });
     });
 
@@ -286,6 +296,12 @@ export default function BriefingView() {
 
   var pages = store.pages || [];
   var topPages = pages.filter(function(p) { return !p.parentId; });
+
+  // Precompute children map to avoid duplicate filtering
+  var childrenMap = {};
+  topPages.forEach(function(pg) {
+    childrenMap[pg.id] = pages.filter(function(cp) { return cp.parentId === pg.id; });
+  });
 
   // Google Drive URL
   var googleDriveUrl = store.googleDriveUrl || '';
@@ -325,7 +341,7 @@ export default function BriefingView() {
           <div className="briefing-sidebar-section">
             <div className="briefing-sidebar-title">Pages</div>
             {topPages.map(function(pg, pi) {
-              var children = pages.filter(function(cp) { return cp.parentId === pg.id; });
+              var children = childrenMap[pg.id] || [];
               var isActive = curPage === pg.id;
               return (
                 <div key={pg.id}>
@@ -425,7 +441,7 @@ export default function BriefingView() {
           {showAllPages ? (
             // Show all pages
             topPages.map(function(pg, pi) {
-              var children = pages.filter(function(cp) { return cp.parentId === pg.id; });
+              var children = childrenMap[pg.id] || [];
               return (
                 <div key={pg.id}>
                   <PageBriefing page={pg} pageIndex={pi} isSubPage={false} viewMode={viewMode} products={store.products || []} />

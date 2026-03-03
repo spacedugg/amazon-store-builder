@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Topbar({ store, onGenerate, onShowAsins, onShowPrice, onExport, onExportDocx, onSave, viewMode, onToggleView, onNewStore, onGoogleDriveChange, googleDriveUrl }) {
   var [showDriveInput, setShowDriveInput] = useState(false);
   var [driveUrl, setDriveUrl] = useState(googleDriveUrl || '');
+
+  // Sync local state when prop changes (e.g. after loading a saved store)
+  useEffect(function() { setDriveUrl(googleDriveUrl || ''); }, [googleDriveUrl]);
 
   return (
     <div className="topbar">
