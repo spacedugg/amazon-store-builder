@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { uid, emptyTile, LAYOUTS, LANGS, DOMAINS, validateStore, PRICING, countStoreAssets, STORE_TEMPLATES } from './constants';
+import { uid, emptyTile, emptyTileForLayout, LAYOUTS, LANGS, DOMAINS, validateStore, PRICING, countStoreAssets, STORE_TEMPLATES } from './constants';
 import { scrapeAsins } from './api';
 import { generateStore, aiRefineStore, applyOperations } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, loadStoreByShareToken } from './storage';
@@ -271,7 +271,7 @@ export default function App() {
             sections: pg.sections.map(function(sec) {
               if (sec.id !== sectionId) return sec;
               var tiles = sec.tiles.slice();
-              while (tiles.length < layout.cells) tiles.push(emptyTile());
+              while (tiles.length < layout.cells) tiles.push(emptyTileForLayout(layoutId, tiles.length));
               if (tiles.length > layout.cells) tiles = tiles.slice(0, layout.cells);
               return Object.assign({}, sec, { layoutId: layoutId, tiles: tiles });
             }),

@@ -1,4 +1,4 @@
-import { uid, LAYOUTS, REFERENCE_STORES, STORE_PRINCIPLES, MODULE_BAUKASTEN, PRODUCT_COMPLEXITY, COMPLEXITY_LEVELS, CATEGORY_STYLE_HINTS } from './constants';
+import { uid, LAYOUTS, LAYOUT_TILE_DIMS, REFERENCE_STORES, STORE_PRINCIPLES, MODULE_BAUKASTEN, PRODUCT_COMPLEXITY, COMPLEXITY_LEVELS, CATEGORY_STYLE_HINTS } from './constants';
 
 var ANTHROPIC_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY || '';
 var PRIMARY_MODEL = 'claude-opus-4-6';
@@ -627,21 +627,27 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
       sec.layoutId = '1';
       layout = LAYOUTS[0];
     }
+    var tileDims = LAYOUT_TILE_DIMS[sec.layoutId];
     while (sec.tiles.length < layout.cells) {
+      var idx = sec.tiles.length;
+      var dd = tileDims && tileDims[idx] ? tileDims[idx] : { w: 3000, h: 1200 };
       sec.tiles.push({
         type: 'image', brief: 'Additional image tile', textOverlay: '', ctaText: '',
-        dimensions: { w: 3000, h: 1200 }, asins: [],
+        dimensions: { w: dd.w, h: dd.h }, asins: [],
       });
     }
     if (sec.tiles.length > layout.cells) {
       sec.tiles = sec.tiles.slice(0, layout.cells);
     }
-    sec.tiles.forEach(function(t) {
+    sec.tiles.forEach(function(t, ti) {
       if (!t.type) t.type = 'image';
       if (!t.brief) t.brief = '';
       if (!t.textOverlay) t.textOverlay = '';
       if (!t.ctaText) t.ctaText = '';
-      if (!t.dimensions) t.dimensions = { w: 3000, h: 1200 };
+      if (!t.dimensions) {
+        var dd = tileDims && tileDims[ti] ? tileDims[ti] : { w: 3000, h: 1200 };
+        t.dimensions = { w: dd.w, h: dd.h };
+      }
       if (!t.asins) t.asins = [];
     });
     sec.id = uid();
@@ -729,12 +735,16 @@ export function applyOperations(store, operations) {
         var newSec = op.section || {};
         newSec.id = uid();
         if (!newSec.tiles) newSec.tiles = [];
-        newSec.tiles.forEach(function(t) {
+        var addDims = LAYOUT_TILE_DIMS[newSec.layoutId];
+        newSec.tiles.forEach(function(t, ti) {
           if (!t.type) t.type = 'image';
           if (!t.brief) t.brief = '';
           if (!t.textOverlay) t.textOverlay = '';
           if (!t.ctaText) t.ctaText = '';
-          if (!t.dimensions) t.dimensions = { w: 3000, h: 1200 };
+          if (!t.dimensions) {
+            var dd = addDims && addDims[ti] ? addDims[ti] : { w: 3000, h: 1200 };
+            t.dimensions = { w: dd.w, h: dd.h };
+          }
           if (!t.asins) t.asins = [];
         });
         var idx = typeof op.afterIndex === 'number' ? op.afterIndex + 1 : page.sections.length;
@@ -770,8 +780,11 @@ export function applyOperations(store, operations) {
           var newLayout = LAYOUTS.find(function(l) { return l.id === op.newLayoutId; });
           if (newLayout) {
             sec2.layoutId = op.newLayoutId;
+            var chDims = LAYOUT_TILE_DIMS[op.newLayoutId];
             while (sec2.tiles.length < newLayout.cells) {
-              sec2.tiles.push({ type: 'image', brief: '', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] });
+              var ci = sec2.tiles.length;
+              var dd = chDims && chDims[ci] ? chDims[ci] : { w: 3000, h: 1200 };
+              sec2.tiles.push({ type: 'image', brief: '', textOverlay: '', ctaText: '', dimensions: { w: dd.w, h: dd.h }, asins: [] });
             }
             if (sec2.tiles.length > newLayout.cells) {
               sec2.tiles = sec2.tiles.slice(0, newLayout.cells);
@@ -786,12 +799,16 @@ export function applyOperations(store, operations) {
         if (op.parentId) newPage.parentId = op.parentId;
         (newPage.sections || []).forEach(function(s) {
           s.id = uid();
-          (s.tiles || []).forEach(function(t) {
+          var pgDims = LAYOUT_TILE_DIMS[s.layoutId];
+          (s.tiles || []).forEach(function(t, ti) {
             if (!t.type) t.type = 'image';
             if (!t.brief) t.brief = '';
             if (!t.textOverlay) t.textOverlay = '';
             if (!t.ctaText) t.ctaText = '';
-            if (!t.dimensions) t.dimensions = { w: 3000, h: 1200 };
+            if (!t.dimensions) {
+              var dd = pgDims && pgDims[ti] ? pgDims[ti] : { w: 3000, h: 1200 };
+              t.dimensions = { w: dd.w, h: dd.h };
+            }
             if (!t.asins) t.asins = [];
           });
         });

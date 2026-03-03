@@ -1,23 +1,53 @@
 // ─── LAYOUTS (Desktop + Mobile) ───
 // Based on all available Amazon Brand Store section types
+// Desktop image types: Large Square (1500×1500), Small Square (750×750), Wide (1500×700)
+// Mobile: variable ratio (min 1680px wide, 20–3000px high)
 export var LAYOUTS = [
-  // Basic
+  // ─── Existing layouts (generic / legacy) ───
   { id: '1', name: 'Full Width', cols: '1fr', cells: 1, mobileCols: '1fr' },
   { id: '1-1', name: '2 Equal', cols: '1fr 1fr', cells: 2, mobileCols: '1fr' },
   { id: '1-1-1', name: '3 Equal', cols: '1fr 1fr 1fr', cells: 3, mobileCols: '1fr' },
   { id: '1-1-1-1', name: '4 Equal', cols: 'repeat(4,1fr)', cells: 4, mobileCols: '1fr 1fr' },
   // Asymmetric 2-col
-  { id: '2-1', name: 'Large + Small', cols: '2fr 1fr', cells: 2, mobileCols: '1fr' },
-  { id: '1-2', name: 'Small + Large', cols: '1fr 2fr', cells: 2, mobileCols: '1fr' },
+  { id: '2-1', name: 'Large + Small', cols: '2fr 1fr', cells: 2, mobileCols: '1fr 1fr' },
+  { id: '1-2', name: 'Small + Large', cols: '1fr 2fr', cells: 2, mobileCols: '1fr 1fr' },
   // Asymmetric 3-col
   { id: '2-1-1', name: 'Large + 2 Small', cols: '2fr 1fr 1fr', cells: 3, mobileCols: '1fr' },
   { id: '1-1-2', name: '2 Small + Large', cols: '1fr 1fr 2fr', cells: 3, mobileCols: '1fr' },
-  // Stacked: Large + 2 stacked
-  { id: 'lg-2stack', name: 'Large Left + 2 Stacked Right', cols: '2fr 1fr', cells: 3, grid: 'lg-2stack', mobileCols: '1fr' },
-  { id: '2stack-lg', name: '2 Stacked Left + Large Right', cols: '1fr 2fr', cells: 3, grid: '2stack-lg', mobileCols: '1fr' },
+  // Stacked: Large + 2 stacked (Amazon Desktop #3 + mirror)
+  { id: 'lg-2stack', name: 'Large Left + 2 Stacked Right', cols: '2fr 1fr', cells: 3, grid: 'lg-2stack', mobileCols: '1fr 1fr', mobileGrid: 'lg-2stack' },
+  { id: '2stack-lg', name: '2 Stacked Left + Large Right', cols: '1fr 2fr', cells: 3, grid: '2stack-lg', mobileCols: '1fr 1fr', mobileGrid: '2stack-lg' },
   // Large + 2x2 Grid (5 tiles)
-  { id: 'lg-4grid', name: 'Large Left + 2x2 Grid Right', cols: '2fr 1fr 1fr', cells: 5, grid: 'lg-4grid', mobileCols: '1fr 1fr' },
-  { id: '4grid-lg', name: '2x2 Grid Left + Large Right', cols: '1fr 1fr 2fr', cells: 5, grid: '4grid-lg', mobileCols: '1fr 1fr' },
+  { id: 'lg-4grid', name: 'Large Left + 2x2 Grid Right', cols: '2fr 1fr 1fr', cells: 5, grid: 'lg-4grid', mobileCols: '1fr 1fr', mobileGrid: 'lg-4grid' },
+  { id: '4grid-lg', name: '2x2 Grid Left + Large Right', cols: '1fr 1fr 2fr', cells: 5, grid: '4grid-lg', mobileCols: '1fr 1fr', mobileGrid: '4grid-lg' },
+
+  // ─── Amazon Desktop #4: Large + (Wide over 2 Small) ───
+  // Mobile: wide → 2 small → wide (t0 spans, t1+t2 side-by-side, t3 spans)
+  { id: 'lg-w2s', name: 'Large + Wide & 2 Small', cols: '2fr 1fr 1fr', cells: 4, grid: 'lg-w2s', mobileCols: '1fr 1fr', mobileGrid: 'lg-w2s' },
+  // Mirror: (Wide over 2 Small) + Large
+  { id: 'w2s-lg', name: 'Wide & 2 Small + Large', cols: '1fr 1fr 2fr', cells: 4, grid: 'w2s-lg', mobileCols: '1fr 1fr', mobileGrid: 'w2s-lg' },
+
+  // ─── Amazon Desktop #5: 2×2 Wide Grid (full width) ───
+  // Mobile: tiles flow in 2-column pairs
+  { id: '2x2wide', name: '2×2 Wide Grid', cols: '1fr 1fr', cells: 4, grid: '2x2wide', mobileCols: '1fr 1fr' },
+
+  // ─── Amazon Desktop #6: 2 Stacked + 2×2 Small Grid ───
+  // Mobile: 3 rows of 2 small tiles
+  { id: '2s-4grid', name: '2 Stacked + 2×2 Grid', cols: '1fr 1fr 1fr', cells: 6, grid: '2s-4grid', mobileCols: '1fr 1fr' },
+  // Mirror: 2×2 Grid + 2 Stacked
+  // Mobile: 2 small → wide → 2 small → wide (t2,t5 span)
+  { id: '4grid-2s', name: '2×2 Grid + 2 Stacked', cols: '1fr 1fr 1fr', cells: 6, grid: '4grid-2s', mobileCols: '1fr 1fr', mobileGrid: '4grid-2s' },
+
+  // ─── Amazon Desktop #7: (Wide + 2 Small) + 2×2 Grid ───
+  // Mobile: wide → 2 small → 2 small → 2 small (t0 spans)
+  { id: 'w2s-4grid', name: 'Wide & 2 Small + 2×2 Grid', cols: '1fr 1fr 1fr 1fr', cells: 7, grid: 'w2s-4grid', mobileCols: '1fr 1fr', mobileGrid: 'w2s-4grid' },
+  // Mirror: 2×2 Grid + (Wide + 2 Small)
+  // Mobile: 2 small → 2 small → wide → 2 small (t4 spans)
+  { id: '4grid-w2s', name: '2×2 Grid + Wide & 2 Small', cols: '1fr 1fr 1fr 1fr', cells: 7, grid: '4grid-w2s', mobileCols: '1fr 1fr', mobileGrid: '4grid-w2s' },
+
+  // ─── Amazon Desktop #8: 4×2 Grid (full width, 8 small tiles) ───
+  // Mobile: 4 rows of 2 small tiles
+  { id: '4x2grid', name: '4×2 Grid', cols: '1fr 1fr 1fr 1fr', cells: 8, grid: '4x2grid', mobileCols: '1fr 1fr' },
 ];
 
 export var TILE_TYPES = ['image', 'product_grid', 'best_sellers', 'recommended', 'deals', 'video', 'text', 'shoppable_image', 'image_text'];
@@ -56,6 +86,51 @@ export var DIMENSION_PRESETS = {
   mobile: { hero: { w: 1242, h: 450 }, category: { w: 1242, h: 1200 }, lifestyle: { w: 1242, h: 1500 }, video: { w: 1242, h: 699 } },
   headerBanner: { desktop: { w: 3000, h: 600 }, mobile: { w: 1242, h: 450 } },
 };
+
+// ─── AMAZON DESKTOP IMAGE TYPES ───
+// Strict desktop formats — mobile is always variable (min 1680px wide, 20–3000px high)
+export var AMAZON_IMG_TYPES = {
+  LARGE_SQUARE: { w: 1500, h: 1500, label: 'Large Square' },
+  SMALL_SQUARE: { w: 750, h: 750, label: 'Small Square' },
+  WIDE: { w: 1500, h: 700, label: 'Wide' },
+  FULL_WIDTH: { w: 3000, h: 600, label: 'Full Width' },
+};
+
+// ─── PER-LAYOUT TILE DIMENSIONS (Desktop) ───
+// Maps layout id → array of desktop dimension objects per tile index (mobile order)
+var I = AMAZON_IMG_TYPES;
+export var LAYOUT_TILE_DIMS = {
+  '1':          [I.FULL_WIDTH],
+  '2-1':        [I.LARGE_SQUARE, I.SMALL_SQUARE],
+  '1-2':        [I.SMALL_SQUARE, I.LARGE_SQUARE],
+  'lg-2stack':  [I.LARGE_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
+  '2stack-lg':  [I.SMALL_SQUARE, I.SMALL_SQUARE, I.LARGE_SQUARE],
+  'lg-w2s':     [I.LARGE_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.WIDE],
+  'w2s-lg':     [I.WIDE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.LARGE_SQUARE],
+  '2x2wide':    [I.WIDE, I.WIDE, I.WIDE, I.WIDE],
+  '2s-4grid':   [I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
+  '4grid-2s':   [I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
+  'w2s-4grid':  [I.WIDE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
+  '4grid-w2s':  [I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.WIDE, I.SMALL_SQUARE, I.SMALL_SQUARE],
+  '4x2grid':    [I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
+  // Legacy layouts (5-tile): Large + 2x2
+  'lg-4grid':   [I.LARGE_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
+  '4grid-lg':   [I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.LARGE_SQUARE],
+};
+
+// Helper: create empty tile with correct dimensions for a specific layout position
+export function emptyTileForLayout(layoutId, tileIndex) {
+  var dims = LAYOUT_TILE_DIMS[layoutId];
+  var d = dims && dims[tileIndex] ? dims[tileIndex] : { w: 3000, h: 1200 };
+  return {
+    type: 'image', brief: '', textOverlay: '', ctaText: '',
+    dimensions: { w: d.w, h: d.h },
+    mobileDimensions: { w: 1680, h: Math.round(1680 * d.h / d.w) },
+    asins: [], linkAsin: '', linkUrl: '',
+    uploadedImage: null, uploadedImageMobile: null, videoThumbnail: null,
+    bgColor: '',
+  };
+}
 
 // ─── AMAZON PRODUCT CATEGORIES ───
 // Top-level categories to influence store tone/style
@@ -178,6 +253,9 @@ export var MODULE_BAUKASTEN = {
     grid4col: { description: '4 category tiles in a row', layout: '1-1-1-1' },
     largeAndStacked: { description: 'Main category large + 2 subcategories stacked', layout: 'lg-2stack' },
     largeAnd4grid: { description: 'Main category large + 4 subcategories in 2x2 grid', layout: 'lg-4grid' },
+    grid6tiles: { description: '6 category tiles in 3×2 grid (2 stacked + 2×2)', layout: '2s-4grid' },
+    grid8tiles: { description: '8 category tiles in 4×2 grid', layout: '4x2grid' },
+    wideGrid4: { description: '4 wide category tiles in 2×2 grid', layout: '2x2wide' },
   },
 
   // === PRODUCT DISPLAY ===
@@ -191,8 +269,12 @@ export var MODULE_BAUKASTEN = {
       example: 'Left: large product/bundle shoppable image. Right top: USP/feature tile. Right bottom: another product or CTA tile.' },
     productWith4Details: { description: 'Large product image left + 4 detail/variant tiles in 2x2 right', layout: 'lg-4grid',
       example: 'Left: hero product shot. Right 2x2: four detail tiles (features, variants, angles, or 4 smaller shoppable products).' },
+    productWithWideAndSmall: { description: 'Large product left + wide banner top-right + 2 detail tiles bottom-right', layout: 'lg-w2s',
+      example: 'Left: large hero product. Right top: wide feature/promo banner. Right bottom: 2 smaller detail or variant tiles.' },
     bundleShowcase: { description: 'Bundle displayed as large image + small component products', layout: 'lg-2stack',
       example: 'Left: bundle shoppable_image. Right: individual products as smaller shoppable tiles.' },
+    productGrid2x2wide: { description: '4 product lifestyle shots as wide tiles in 2×2 grid', layout: '2x2wide',
+      example: 'Four wide product/lifestyle tiles showing different use cases or product lines.' },
   },
 
   // === LIFESTYLE / BRAND STORYTELLING ===
@@ -213,6 +295,10 @@ export var MODULE_BAUKASTEN = {
     featureSplit: { description: 'Product photo left + USP bullets designed into image right', layout: '1-1' },
     featureWith4Grid: { description: 'Large product left + 4 feature tiles in 2x2 grid right', layout: 'lg-4grid',
       example: 'Left: product hero. Right: 4 tiles each highlighting one feature/benefit.' },
+    featureWide2x2: { description: 'Wide feature overview + 2 detail tiles on left, 2×2 grid of feature icons on right', layout: 'w2s-4grid',
+      example: 'Left top: wide feature overview banner. Left bottom: 2 detail tiles. Right: 4 individual feature icons/tiles.' },
+    featureGrid8: { description: '8 feature/benefit tiles in 4×2 grid', layout: '4x2grid',
+      example: 'Eight small tiles, each showing one feature or benefit with icon and short text.' },
   },
 
   // === VIDEO ===
@@ -238,6 +324,8 @@ export var MODULE_BAUKASTEN = {
     colorShowcase4: { description: '4 color/variant tiles in a row', layout: '1-1-1-1' },
     variantBanner: { description: 'All variants in one designed banner', layout: '1' },
     variantLargeAnd4: { description: 'Product hero left + 4 color variants in 2x2 right', layout: 'lg-4grid' },
+    variantGrid6: { description: '6 variant tiles in 3×2 grid', layout: '2s-4grid' },
+    variantGrid8: { description: '8 variant/color tiles in 4×2 grid', layout: '4x2grid' },
   },
 
   // === FOOTER / CROSS-SELL ===
