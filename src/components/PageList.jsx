@@ -1,9 +1,28 @@
 import { useState } from 'react';
 import { t } from '../i18n';
 
-export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSubPage, onRenamePage, onDeletePage, onReorderPage, savedStores, onLoadSaved, onDeleteSaved, uiLang, showSaved, onToggleSaved }) {
+export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSubPage, onRenamePage, onDeletePage, onReorderPage, savedStores, onLoadSaved, onDeleteSaved, onImportStore, uiLang, showSaved, onToggleSaved }) {
   var [editingId, setEditingId] = useState(null);
   var [editName, setEditName] = useState('');
+  var [showImport, setShowImport] = useState(false);
+  var [importUrl, setImportUrl] = useState('');
+  var [importBusy, setImportBusy] = useState(false);
+  var [importError, setImportError] = useState('');
+
+  var handleImport = function() {
+    if (!importUrl.trim() || importBusy) return;
+    setImportBusy(true);
+    setImportError('');
+    onImportStore(importUrl).then(function(err) {
+      setImportBusy(false);
+      if (err) {
+        setImportError(err);
+      } else {
+        setImportUrl('');
+        setShowImport(false);
+      }
+    });
+  };
 
   var startRename = function(pg) {
     setEditingId(pg.id);
@@ -115,6 +134,40 @@ export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSub
             </div>
           )}
         </>
+      )}
+
+      {/* Import store by share link */}
+      <div className="page-list-header" style={{ marginTop: 4 }}>
+        <span
+          style={{ cursor: 'pointer', fontSize: 11, opacity: 0.8 }}
+          onClick={function() { setShowImport(!showImport); setImportError(''); }}
+        >
+          {showImport ? '\u25B2' : '+'} {t('pages.importStore', uiLang)}
+        </span>
+      </div>
+      {showImport && (
+        <div style={{ padding: '4px 8px 8px' }}>
+          <input
+            className="input"
+            type="url"
+            placeholder={t('pages.importPlaceholder', uiLang)}
+            value={importUrl}
+            onChange={function(e) { setImportUrl(e.target.value); setImportError(''); }}
+            onKeyDown={function(e) { if (e.key === 'Enter') handleImport(); }}
+            style={{ width: '100%', fontSize: 11, marginBottom: 4 }}
+          />
+          <button
+            className="btn btn-primary"
+            style={{ width: '100%', fontSize: 11, padding: '3px 0' }}
+            onClick={handleImport}
+            disabled={importBusy || !importUrl.trim()}
+          >
+            {importBusy ? 'Importing...' : t('pages.importBtn', uiLang)}
+          </button>
+          {importError && (
+            <div style={{ color: '#e74c3c', fontSize: 10, marginTop: 3 }}>{importError}</div>
+          )}
+        </div>
       )}
     </div>
   );

@@ -1,4 +1,12 @@
-export default function Topbar({ store, onGenerate, onShowAsins, onShowPrice, onExport, onSave, viewMode, onToggleView, onNewStore }) {
+import { useState, useEffect } from 'react';
+
+export default function Topbar({ store, onGenerate, onShowAsins, onShowPrice, onExport, onExportDocx, onSave, viewMode, onToggleView, onNewStore, onGoogleDriveChange, googleDriveUrl }) {
+  var [showDriveInput, setShowDriveInput] = useState(false);
+  var [driveUrl, setDriveUrl] = useState(googleDriveUrl || '');
+
+  // Sync local state when prop changes (e.g. after loading a saved store)
+  useEffect(function() { setDriveUrl(googleDriveUrl || ''); }, [googleDriveUrl]);
+
   return (
     <div className="topbar">
       <div className="topbar-brand">
@@ -25,8 +33,33 @@ export default function Topbar({ store, onGenerate, onShowAsins, onShowPrice, on
           </div>
           <button className="btn" onClick={onShowAsins} title="ASIN Overview">ASINs ({(store.asins || []).length})</button>
           <button className="btn" onClick={onShowPrice} title="Price Estimate">&#8364;</button>
+
+          {/* Google Drive URL */}
+          <div style={{ position: 'relative' }}>
+            <button className="btn" onClick={function() { setShowDriveInput(!showDriveInput); }} title="Google Drive Link">
+              Drive
+            </button>
+            {showDriveInput && (
+              <div className="topbar-drive-dropdown">
+                <div className="topbar-drive-label">Google Drive output folder URL</div>
+                <input
+                  className="input"
+                  type="url"
+                  placeholder="https://drive.google.com/drive/folders/..."
+                  value={driveUrl}
+                  onChange={function(e) { setDriveUrl(e.target.value); }}
+                  onBlur={function() { if (onGoogleDriveChange) onGoogleDriveChange(driveUrl); }}
+                  onKeyDown={function(e) { if (e.key === 'Enter') { if (onGoogleDriveChange) onGoogleDriveChange(driveUrl); setShowDriveInput(false); } }}
+                  style={{ width: 300, fontSize: 11 }}
+                />
+                <div className="topbar-drive-hint">Designer will upload assets here</div>
+              </div>
+            )}
+          </div>
+
           <button className="btn" onClick={onSave} title="Save">Save</button>
-          <button className="btn" onClick={onExport} title="Export DOCX">Export DOCX</button>
+          <button className="btn btn-green" onClick={onExport} title="Generate share link for designer">Export</button>
+          <button className="btn" onClick={onExportDocx} title="Download DOCX briefing">DOCX</button>
           <button className="btn" onClick={onNewStore} title="Start a new store">New Store</button>
         </>
       )}

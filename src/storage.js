@@ -29,12 +29,16 @@ export async function loadSavedStores() {
   }
 }
 
-export async function saveStore(store) {
+// Save store to DB. Pass existing id/shareToken to update rather than create.
+export async function saveStore(store, existingId, existingShareToken) {
   try {
+    var body = { data: store };
+    if (existingId) body.id = existingId;
+    if (existingShareToken) body.shareToken = existingShareToken;
     var resp = await fetch('/api/stores', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data: store }),
+      body: JSON.stringify(body),
     });
     if (!resp.ok) throw new Error('API error');
     var json = await resp.json();
@@ -42,11 +46,13 @@ export async function saveStore(store) {
   } catch (e) {
     console.warn('DB save failed, using localStorage fallback:', e.message);
     try {
-      var id = Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+      var id = existingId || (Date.now().toString(36) + Math.random().toString(36).slice(2, 5));
       var stores = [];
       var raw = localStorage.getItem('amazon-store-builder');
       if (raw) stores = JSON.parse(raw);
-      stores.unshift({
+      // Update existing or add new
+      var idx = stores.findIndex(function(s) { return s.id === id; });
+      var entry = {
         id: id,
         brandName: store.brandName,
         marketplace: store.marketplace || 'de',
@@ -54,7 +60,12 @@ export async function saveStore(store) {
         pageCount: (store.pages || []).length,
         productCount: (store.products || []).length,
         data: store,
-      });
+      };
+      if (idx >= 0) {
+        stores[idx] = entry;
+      } else {
+        stores.unshift(entry);
+      }
       if (stores.length > 20) stores = stores.slice(0, 20);
       localStorage.setItem('amazon-store-builder', JSON.stringify(stores));
       return { id: id, shareToken: null };
@@ -67,16 +78,16 @@ export async function loadStore(id) {
     var resp = await fetch('/api/stores?id=' + encodeURIComponent(id));
     if (!resp.ok) throw new Error('API error');
     var json = await resp.json();
-    return json.data || null;
+    return { data: json.data || null, shareToken: json.shareToken || null };
   } catch (e) {
     console.warn('DB load failed, using localStorage fallback:', e.message);
     try {
       var raw = localStorage.getItem('amazon-store-builder');
-      if (!raw) return null;
+      if (!raw) return { data: null, shareToken: null };
       var stores = JSON.parse(raw);
       var entry = stores.find(function(s) { return s.id === id; });
-      return entry ? entry.data : null;
-    } catch (e2) { return null; }
+      return entry ? { data: entry.data, shareToken: null } : { data: null, shareToken: null };
+    } catch (e2) { return { data: null, shareToken: null }; }
   }
 }
 
@@ -100,6 +111,26 @@ export async function loadStoreByShareToken(shareToken) {
   if (!resp.ok) return null;
   var json = await resp.json();
   return json;
+}
+
+// Import a store into your history by share link or token.
+// Loads the store via shareToken, then saves a copy under your own id.
+export async function importStoreByShareLink(input) {
+  // Extract share token from URL or use raw token
+  var token = input.trim();
+  var match = token.match(/\/share\/([a-z0-9]+)/i);
+  if (match) token = match[1];
+  if (!token) return { error: 'Invalid link' };
+
+  // Load store data via share token
+  var storeData = await loadStoreByShareToken(token);
+  if (!storeData || !storeData.data) return { error: 'Store not found' };
+
+  // Save a copy to the database (generates a new id for the importer)
+  var result = await saveStore(storeData.data, null, null);
+  if (!result) return { error: 'Could not save imported store' };
+
+  return { id: result.id, shareToken: result.shareToken, data: storeData.data };
 }
 
 // Auto-save stays in localStorage (frequent writes, no need for DB)

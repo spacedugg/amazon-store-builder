@@ -69,6 +69,18 @@ var translations = {
     en: 'Saved Stores', de: 'Gespeicherte Stores', uk: 'Збережені Stores', ru: 'Сохранённые Stores',
     id: 'Store Tersimpan', ky: 'Сакталган Stores', bg: 'Запазени Stores', es: 'Stores guardados',
   },
+  'pages.importStore': {
+    en: 'Import Store', de: 'Store importieren', uk: 'Імпортувати Store', ru: 'Импортировать Store',
+    id: 'Impor Store', ky: 'Store импорттоо', bg: 'Импортирай Store', es: 'Importar Store',
+  },
+  'pages.importPlaceholder': {
+    en: 'Paste share link...', de: 'Share-Link einfügen...', uk: 'Вставте посилання...', ru: 'Вставьте ссылку...',
+    id: 'Tempel tautan...', ky: 'Шилтемени чаптаңыз...', bg: 'Поставете линк...', es: 'Pegar enlace...',
+  },
+  'pages.importBtn': {
+    en: 'Import', de: 'Importieren', uk: 'Імпортувати', ru: 'Импортировать',
+    id: 'Impor', ky: 'Импорттоо', bg: 'Импортирай', es: 'Importar',
+  },
   'pages.rename': {
     en: 'Rename', de: 'Umbenennen', uk: 'Перейменувати', ru: 'Переименовать',
     id: 'Ganti nama', ky: 'Атын өзгөртүү', bg: 'Преименувай', es: 'Renombrar',
