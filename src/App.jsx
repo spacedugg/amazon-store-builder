@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { uid, emptyTile, LAYOUTS, LANGS, DOMAINS, validateStore, PRICING, countStoreAssets, STORE_TEMPLATES } from './constants';
+import { uid, emptyTile, emptyTileForLayout, LAYOUTS, LANGS, DOMAINS, validateStore, PRICING, countStoreAssets, STORE_TEMPLATES } from './constants';
 import { scrapeAsins } from './api';
 import { generateStore, aiRefineStore, applyOperations } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, loadStoreByShareToken } from './storage';
@@ -140,6 +140,7 @@ export default function App() {
   var page = store.pages.find(function(p) { return p.id === curPage; }) || store.pages[0] || null;
 
   // ─── GENERATION ───
+
   var handleGenerate = async function(params) {
     setShowGen(false);
     setGenerating(true);
@@ -156,7 +157,7 @@ export default function App() {
       log('Scraping ' + params.asins.length + ' ASINs from Amazon.' + params.marketplace + '...');
       var scrapeResult = await scrapeAsins(params.asins, domain);
       var products = scrapeResult.products || [];
-      if (!products.length) throw new Error('No products returned from Bright Data');
+      if (!products.length) throw new Error('No products returned from Bright Data. Check your ASINs and try again.');
       log('Scraped ' + products.length + '/' + params.asins.length + ' products');
 
       // Resolve template data if selected
@@ -179,10 +180,14 @@ export default function App() {
       setCurPage(storeData.pages[0] ? storeData.pages[0].id : '');
       log('Store complete! ' + storeData.pages.length + ' pages, ' + products.length + ' products.');
     } catch (e) {
-      log('Error: ' + e.message);
+      log('');
+      log('ERROR: ' + e.message);
+      if (e.message.indexOf('timed out') >= 0) {
+        log('The API did not respond in time. Please try again.');
+      }
     } finally {
       setGenDone(true);
-      setTimeout(function() { setGenerating(false); }, 2000);
+      setTimeout(function() { setGenerating(false); }, 4000);
     }
   };
 
@@ -266,7 +271,7 @@ export default function App() {
             sections: pg.sections.map(function(sec) {
               if (sec.id !== sectionId) return sec;
               var tiles = sec.tiles.slice();
-              while (tiles.length < layout.cells) tiles.push(emptyTile());
+              while (tiles.length < layout.cells) tiles.push(emptyTileForLayout(layoutId, tiles.length));
               if (tiles.length > layout.cells) tiles = tiles.slice(0, layout.cells);
               return Object.assign({}, sec, { layoutId: layoutId, tiles: tiles });
             }),

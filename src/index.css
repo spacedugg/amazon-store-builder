@@ -262,9 +262,9 @@ textarea.input { resize: vertical; min-height: 44px; }
 /* ─── PROGRESS LOG ─── */
 .progress-log { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 18px; border-radius: 10px; min-height: 200px; max-height: 400px; overflow-y: auto; font-family: 'SF Mono', 'JetBrains Mono', 'Cascadia Code', 'Consolas', monospace; }
 .log-line { font-size: 11px; line-height: 1.8; color: #94a3b8; }
-.log-error { color: #f87171; }
-.log-warn { color: #fbbf24; }
-.log-success { color: #4ade80; }
+.log-error { color: #f87171; font-weight: 600; }
+.log-warn { color: #fbbf24; font-weight: 500; }
+.log-success { color: #4ade80; font-weight: 500; }
 .log-detail { color: #64748b; }
 
 /* ─── ASIN PANEL ─── */

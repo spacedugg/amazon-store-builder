@@ -1,26 +1,53 @@
 // ─── LAYOUTS (Desktop + Mobile) ───
 // Based on all available Amazon Brand Store section types
+// Desktop image types: Large Square (1500×1500), Small Square (750×750), Wide (1500×700)
+// Mobile: variable ratio (min 1680px wide, 20–3000px high)
 export var LAYOUTS = [
-  // Basic
+  // ─── Existing layouts (generic / legacy) ───
   { id: '1', name: 'Full Width', cols: '1fr', cells: 1, mobileCols: '1fr' },
   { id: '1-1', name: '2 Equal', cols: '1fr 1fr', cells: 2, mobileCols: '1fr' },
   { id: '1-1-1', name: '3 Equal', cols: '1fr 1fr 1fr', cells: 3, mobileCols: '1fr' },
   { id: '1-1-1-1', name: '4 Equal', cols: 'repeat(4,1fr)', cells: 4, mobileCols: '1fr 1fr' },
   // Asymmetric 2-col
-  { id: '2-1', name: 'Large + Small', cols: '2fr 1fr', cells: 2, mobileCols: '1fr' },
-  { id: '1-2', name: 'Small + Large', cols: '1fr 2fr', cells: 2, mobileCols: '1fr' },
+  { id: '2-1', name: 'Large + Small', cols: '2fr 1fr', cells: 2, mobileCols: '1fr 1fr' },
+  { id: '1-2', name: 'Small + Large', cols: '1fr 2fr', cells: 2, mobileCols: '1fr 1fr' },
   // Asymmetric 3-col
   { id: '2-1-1', name: 'Large + 2 Small', cols: '2fr 1fr 1fr', cells: 3, mobileCols: '1fr' },
   { id: '1-1-2', name: '2 Small + Large', cols: '1fr 1fr 2fr', cells: 3, mobileCols: '1fr' },
-  // Stacked: Large + 2 stacked
-  { id: 'lg-2stack', name: 'Large Left + 2 Stacked Right', cols: '2fr 1fr', cells: 3, grid: 'lg-2stack', mobileCols: '1fr' },
-  { id: '2stack-lg', name: '2 Stacked Left + Large Right', cols: '1fr 2fr', cells: 3, grid: '2stack-lg', mobileCols: '1fr' },
+  // Stacked: Large + 2 stacked (Amazon Desktop #3 + mirror)
+  { id: 'lg-2stack', name: 'Large Left + 2 Stacked Right', cols: '2fr 1fr', cells: 3, grid: 'lg-2stack', mobileCols: '1fr 1fr', mobileGrid: 'lg-2stack' },
+  { id: '2stack-lg', name: '2 Stacked Left + Large Right', cols: '1fr 2fr', cells: 3, grid: '2stack-lg', mobileCols: '1fr 1fr', mobileGrid: '2stack-lg' },
   // Large + 2x2 Grid (5 tiles)
-  { id: 'lg-4grid', name: 'Large Left + 2x2 Grid Right', cols: '2fr 1fr 1fr', cells: 5, grid: 'lg-4grid', mobileCols: '1fr 1fr' },
-  { id: '4grid-lg', name: '2x2 Grid Left + Large Right', cols: '1fr 1fr 2fr', cells: 5, grid: '4grid-lg', mobileCols: '1fr 1fr' },
-  // Large + 2x3 Grid (7 tiles)
-  { id: 'lg-6grid', name: 'Large Left + 2x3 Grid Right', cols: '2fr 1fr 1fr', cells: 7, grid: 'lg-6grid', mobileCols: '1fr 1fr' },
-  { id: '6grid-lg', name: '2x3 Grid Left + Large Right', cols: '1fr 1fr 2fr', cells: 7, grid: '6grid-lg', mobileCols: '1fr 1fr' },
+  { id: 'lg-4grid', name: 'Large Left + 2x2 Grid Right', cols: '2fr 1fr 1fr', cells: 5, grid: 'lg-4grid', mobileCols: '1fr 1fr', mobileGrid: 'lg-4grid' },
+  { id: '4grid-lg', name: '2x2 Grid Left + Large Right', cols: '1fr 1fr 2fr', cells: 5, grid: '4grid-lg', mobileCols: '1fr 1fr', mobileGrid: '4grid-lg' },
+
+  // ─── Amazon Desktop #4: Large + (Wide over 2 Small) ───
+  // Mobile: wide → 2 small → wide (t0 spans, t1+t2 side-by-side, t3 spans)
+  { id: 'lg-w2s', name: 'Large + Wide & 2 Small', cols: '2fr 1fr 1fr', cells: 4, grid: 'lg-w2s', mobileCols: '1fr 1fr', mobileGrid: 'lg-w2s' },
+  // Mirror: (Wide over 2 Small) + Large
+  { id: 'w2s-lg', name: 'Wide & 2 Small + Large', cols: '1fr 1fr 2fr', cells: 4, grid: 'w2s-lg', mobileCols: '1fr 1fr', mobileGrid: 'w2s-lg' },
+
+  // ─── Amazon Desktop #5: 2×2 Wide Grid (full width) ───
+  // Mobile: tiles flow in 2-column pairs
+  { id: '2x2wide', name: '2×2 Wide Grid', cols: '1fr 1fr', cells: 4, grid: '2x2wide', mobileCols: '1fr 1fr' },
+
+  // ─── Amazon Desktop #6: 2 Stacked + 2×2 Small Grid ───
+  // Mobile: 3 rows of 2 small tiles
+  { id: '2s-4grid', name: '2 Stacked + 2×2 Grid', cols: '1fr 1fr 1fr', cells: 6, grid: '2s-4grid', mobileCols: '1fr 1fr' },
+  // Mirror: 2×2 Grid + 2 Stacked
+  // Mobile: 2 small → wide → 2 small → wide (t2,t5 span)
+  { id: '4grid-2s', name: '2×2 Grid + 2 Stacked', cols: '1fr 1fr 1fr', cells: 6, grid: '4grid-2s', mobileCols: '1fr 1fr', mobileGrid: '4grid-2s' },
+
+  // ─── Amazon Desktop #7: (Wide + 2 Small) + 2×2 Grid ───
+  // Mobile: wide → 2 small → 2 small → 2 small (t0 spans)
+  { id: 'w2s-4grid', name: 'Wide & 2 Small + 2×2 Grid', cols: '1fr 1fr 1fr 1fr', cells: 7, grid: 'w2s-4grid', mobileCols: '1fr 1fr', mobileGrid: 'w2s-4grid' },
+  // Mirror: 2×2 Grid + (Wide + 2 Small)
+  // Mobile: 2 small → 2 small → wide → 2 small (t4 spans)
+  { id: '4grid-w2s', name: '2×2 Grid + Wide & 2 Small', cols: '1fr 1fr 1fr 1fr', cells: 7, grid: '4grid-w2s', mobileCols: '1fr 1fr', mobileGrid: '4grid-w2s' },
+
+  // ─── Amazon Desktop #8: 4×2 Grid (full width, 8 small tiles) ───
+  // Mobile: 4 rows of 2 small tiles
+  { id: '4x2grid', name: '4×2 Grid', cols: '1fr 1fr 1fr 1fr', cells: 8, grid: '4x2grid', mobileCols: '1fr 1fr' },
 ];
 
 export var TILE_TYPES = ['image', 'product_grid', 'best_sellers', 'recommended', 'deals', 'video', 'text', 'shoppable_image', 'image_text'];
@@ -59,6 +86,51 @@ export var DIMENSION_PRESETS = {
   mobile: { hero: { w: 1242, h: 450 }, category: { w: 1242, h: 1200 }, lifestyle: { w: 1242, h: 1500 }, video: { w: 1242, h: 699 } },
   headerBanner: { desktop: { w: 3000, h: 600 }, mobile: { w: 1242, h: 450 } },
 };
+
+// ─── AMAZON DESKTOP IMAGE TYPES ───
+// Strict desktop formats — mobile is always variable (min 1680px wide, 20–3000px high)
+export var AMAZON_IMG_TYPES = {
+  LARGE_SQUARE: { w: 1500, h: 1500, label: 'Large Square' },
+  SMALL_SQUARE: { w: 750, h: 750, label: 'Small Square' },
+  WIDE: { w: 1500, h: 700, label: 'Wide' },
+  FULL_WIDTH: { w: 3000, h: 600, label: 'Full Width' },
+};
+
+// ─── PER-LAYOUT TILE DIMENSIONS (Desktop) ───
+// Maps layout id → array of desktop dimension objects per tile index (mobile order)
+var I = AMAZON_IMG_TYPES;
+export var LAYOUT_TILE_DIMS = {
+  '1':          [I.FULL_WIDTH],
+  '2-1':        [I.LARGE_SQUARE, I.SMALL_SQUARE],
+  '1-2':        [I.SMALL_SQUARE, I.LARGE_SQUARE],
+  'lg-2stack':  [I.LARGE_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
+  '2stack-lg':  [I.SMALL_SQUARE, I.SMALL_SQUARE, I.LARGE_SQUARE],
+  'lg-w2s':     [I.LARGE_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.WIDE],
+  'w2s-lg':     [I.WIDE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.LARGE_SQUARE],
+  '2x2wide':    [I.WIDE, I.WIDE, I.WIDE, I.WIDE],
+  '2s-4grid':   [I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
+  '4grid-2s':   [I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
+  'w2s-4grid':  [I.WIDE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
+  '4grid-w2s':  [I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.WIDE, I.SMALL_SQUARE, I.SMALL_SQUARE],
+  '4x2grid':    [I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
+  // Legacy layouts (5-tile): Large + 2x2
+  'lg-4grid':   [I.LARGE_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
+  '4grid-lg':   [I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.LARGE_SQUARE],
+};
+
+// Helper: create empty tile with correct dimensions for a specific layout position
+export function emptyTileForLayout(layoutId, tileIndex) {
+  var dims = LAYOUT_TILE_DIMS[layoutId];
+  var d = dims && dims[tileIndex] ? dims[tileIndex] : { w: 3000, h: 1200 };
+  return {
+    type: 'image', brief: '', textOverlay: '', ctaText: '',
+    dimensions: { w: d.w, h: d.h },
+    mobileDimensions: { w: 1680, h: Math.round(1680 * d.h / d.w) },
+    asins: [], linkAsin: '', linkUrl: '',
+    uploadedImage: null, uploadedImageMobile: null, videoThumbnail: null,
+    bgColor: '',
+  };
+}
 
 // ─── AMAZON PRODUCT CATEGORIES ───
 // Top-level categories to influence store tone/style
@@ -181,7 +253,9 @@ export var MODULE_BAUKASTEN = {
     grid4col: { description: '4 category tiles in a row', layout: '1-1-1-1' },
     largeAndStacked: { description: 'Main category large + 2 subcategories stacked', layout: 'lg-2stack' },
     largeAnd4grid: { description: 'Main category large + 4 subcategories in 2x2 grid', layout: 'lg-4grid' },
-    largeAnd6grid: { description: 'Main category large + 6 subcategories in 2x3 grid', layout: 'lg-6grid' },
+    grid6tiles: { description: '6 category tiles in 3×2 grid (2 stacked + 2×2)', layout: '2s-4grid' },
+    grid8tiles: { description: '8 category tiles in 4×2 grid', layout: '4x2grid' },
+    wideGrid4: { description: '4 wide category tiles in 2×2 grid', layout: '2x2wide' },
   },
 
   // === PRODUCT DISPLAY ===
@@ -195,8 +269,12 @@ export var MODULE_BAUKASTEN = {
       example: 'Left: large product/bundle shoppable image. Right top: USP/feature tile. Right bottom: another product or CTA tile.' },
     productWith4Details: { description: 'Large product image left + 4 detail/variant tiles in 2x2 right', layout: 'lg-4grid',
       example: 'Left: hero product shot. Right 2x2: four detail tiles (features, variants, angles, or 4 smaller shoppable products).' },
+    productWithWideAndSmall: { description: 'Large product left + wide banner top-right + 2 detail tiles bottom-right', layout: 'lg-w2s',
+      example: 'Left: large hero product. Right top: wide feature/promo banner. Right bottom: 2 smaller detail or variant tiles.' },
     bundleShowcase: { description: 'Bundle displayed as large image + small component products', layout: 'lg-2stack',
       example: 'Left: bundle shoppable_image. Right: individual products as smaller shoppable tiles.' },
+    productGrid2x2wide: { description: '4 product lifestyle shots as wide tiles in 2×2 grid', layout: '2x2wide',
+      example: 'Four wide product/lifestyle tiles showing different use cases or product lines.' },
   },
 
   // === LIFESTYLE / BRAND STORYTELLING ===
@@ -217,8 +295,10 @@ export var MODULE_BAUKASTEN = {
     featureSplit: { description: 'Product photo left + USP bullets designed into image right', layout: '1-1' },
     featureWith4Grid: { description: 'Large product left + 4 feature tiles in 2x2 grid right', layout: 'lg-4grid',
       example: 'Left: product hero. Right: 4 tiles each highlighting one feature/benefit.' },
-    featureWith6Grid: { description: 'Large product left + 6 feature tiles in 2x3 grid right', layout: 'lg-6grid',
-      example: 'Left: product/lifestyle. Right: 6 tiles for ingredients, benefits, certifications etc.' },
+    featureWide2x2: { description: 'Wide feature overview + 2 detail tiles on left, 2×2 grid of feature icons on right', layout: 'w2s-4grid',
+      example: 'Left top: wide feature overview banner. Left bottom: 2 detail tiles. Right: 4 individual feature icons/tiles.' },
+    featureGrid8: { description: '8 feature/benefit tiles in 4×2 grid', layout: '4x2grid',
+      example: 'Eight small tiles, each showing one feature or benefit with icon and short text.' },
   },
 
   // === VIDEO ===
@@ -244,7 +324,8 @@ export var MODULE_BAUKASTEN = {
     colorShowcase4: { description: '4 color/variant tiles in a row', layout: '1-1-1-1' },
     variantBanner: { description: 'All variants in one designed banner', layout: '1' },
     variantLargeAnd4: { description: 'Product hero left + 4 color variants in 2x2 right', layout: 'lg-4grid' },
-    variantLargeAnd6: { description: 'Product hero left + 6 variants in 2x3 right', layout: 'lg-6grid' },
+    variantGrid6: { description: '6 variant tiles in 3×2 grid', layout: '2s-4grid' },
+    variantGrid8: { description: '8 variant/color tiles in 4×2 grid', layout: '4x2grid' },
   },
 
   // === FOOTER / CROSS-SELL ===
@@ -326,24 +407,24 @@ export var STORE_TEMPLATES = [
     },
     // ─── SECTION BLUEPRINT ───
     homepage: [
-      { layout: '1', purpose: 'Hero banner', tileTypes: ['image'], brief: 'Full-width lifestyle hero: person using [product] outdoors. Brand color accent bar at bottom. Bold headline overlay with brand tagline. Background: lifestyle photo with brand-color elements.' },
-      { layout: '1-1-1-1', purpose: 'Category navigation', tileTypes: ['image','image','image','image'], brief: 'Each tile: category lifestyle photo showing product in use. Category name as large white text overlay. Semi-transparent dark overlay for text readability. Each links to category subpage.' },
-      { layout: 'lg-4grid', purpose: 'Hero product spotlight', tileTypes: ['shoppable_image','image','image','image','image'], brief: 'Large left: flagship product floating on brand-color background, dramatic frontal angle. Grid: 4 feature close-ups with short text overlay each (e.g., "600+ Patents", "Since 1935").' },
+      { layout: '1', purpose: 'Hero banner', tileTypes: ['image'], brief: '[LIFESTYLE] [product] in outdoor use, brand-color accent bar, bold tagline' },
+      { layout: '1-1-1-1', purpose: 'Category navigation', tileTypes: ['image','image','image','image'], brief: '[CREATIVE] category name on dark overlay, lifestyle background' },
+      { layout: 'lg-4grid', purpose: 'Hero product spotlight', tileTypes: ['shoppable_image','image','image','image','image'], brief: '[SHOPPABLE] flagship product on brand-color bg + [CREATIVE] 4 feature close-ups with specs' },
       { layout: '1', purpose: 'Product grid bestsellers', tileTypes: ['product_grid'], brief: '' },
-      { layout: '1-1', purpose: 'Brand heritage / technology', tileTypes: ['image','image'], brief: 'Left: historical/heritage brand image or innovation showcase. Right: technology diagram or infographic showing product internals. Dark background, white text.' },
+      { layout: '1-1', purpose: 'Brand heritage / technology', tileTypes: ['image','image'], brief: '[CREATIVE] heritage/innovation showcase + technology infographic' },
       { layout: '1', purpose: 'Product grid by category', tileTypes: ['product_grid'], brief: '' },
-      { layout: '1-1-1', purpose: 'Trust / certification elements', tileTypes: ['image','image','image'], brief: 'Three trust badges: certification, award, sustainability. Each on white background with icon and short text overlay. Clean, minimal.' },
-      { layout: '1', purpose: 'Deals / promo banner', tileTypes: ['image'], brief: 'Full-width promotional banner on brand-color background. Bold savings messaging. CTA button designed into image.' },
-      { layout: '1-1-1-1', purpose: 'Footer category navigation', tileTypes: ['image','image','image','image'], brief: 'Repeat category tiles for bottom-of-page navigation. Smaller, thumbnail-style with category names.' },
+      { layout: '1-1-1', purpose: 'Trust / certification elements', tileTypes: ['image','image','image'], brief: '[CREATIVE] trust badge with icon on white — certification, award, sustainability' },
+      { layout: '1', purpose: 'Deals / promo banner', tileTypes: ['image'], brief: '[CREATIVE] promo banner on brand-color, bold savings messaging' },
+      { layout: '1-1-1-1', purpose: 'Footer category navigation', tileTypes: ['image','image','image','image'], brief: '[CREATIVE] category thumbnail with name overlay for bottom nav' },
     ],
     categoryPage: [
-      { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: 'Full-width lifestyle: person using [category product] in realistic setting (garden, kitchen, etc.). Category name as large overlay.' },
-      { layout: 'lg-2stack', purpose: 'Product + features', tileTypes: ['shoppable_image','image','image'], brief: 'Large: hero product of category, floating on white/brand-color. Right stack: two feature close-ups with text overlay explaining key specs.' },
-      { layout: '1-1-1', purpose: 'Technical specs visual', tileTypes: ['image','image','image'], brief: 'Three spec/feature tiles: each shows a product detail close-up with specification number/text overlay (e.g., "180 bar", "500 l/h", "3-in-1 nozzle").' },
-      { layout: '1', purpose: 'Product demo video', tileTypes: ['video'], brief: 'Product demonstration video: show how the product works in real conditions. Technical close-ups of key mechanisms, water pressure tests, cleaning results. Professional quality, informative.' },
+      { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: '[LIFESTYLE] [category product] in realistic setting, category name overlay' },
+      { layout: 'lg-2stack', purpose: 'Product + features', tileTypes: ['shoppable_image','image','image'], brief: '[SHOPPABLE] hero product on white + [CREATIVE] 2 feature close-ups with specs' },
+      { layout: '1-1-1', purpose: 'Technical specs visual', tileTypes: ['image','image','image'], brief: '[CREATIVE] spec/feature detail with number overlay (e.g. "180 bar")' },
+      { layout: '1', purpose: 'Product demo video', tileTypes: ['video'], brief: 'Product demo video: product in real conditions, technical close-ups' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: 'ALL category ASINs' },
-      { layout: '1-1', purpose: 'Comparison / usage scenarios', tileTypes: ['image','image'], brief: 'Left: before/after or product comparison chart designed as image. Right: product in professional use setting.' },
-      { layout: '1-1-1', purpose: 'Accessories cross-sell', tileTypes: ['image','image','image'], brief: 'Three accessory/addon tiles linking to accessories subpage. Each shows accessory product with name overlay.' },
+      { layout: '1-1', purpose: 'Comparison / usage scenarios', tileTypes: ['image','image'], brief: '[CREATIVE] before/after comparison + [LIFESTYLE] product in professional use' },
+      { layout: '1-1-1', purpose: 'Accessories cross-sell', tileTypes: ['image','image','image'], brief: '[SHOPPABLE] accessory product with name overlay' },
     ],
   },
   {
@@ -381,22 +462,22 @@ export var STORE_TEMPLATES = [
       },
     },
     homepage: [
-      { layout: '1', purpose: 'Hero banner', tileTypes: ['image'], brief: 'Full-width premium lifestyle: product in elegant setting (marble counter, modern kitchen). Dark, moody, warm lighting. Minimal text — just brand name or short tagline in elegant white type.' },
-      { layout: '1-1-1', purpose: 'Category navigation', tileTypes: ['image','image','image'], brief: 'Three category tiles: each a lifestyle photo with the product category artfully displayed. Category name in clean white sans-serif on dark-toned image. Subtle CTA ("Entdecken").' },
-      { layout: '1', purpose: 'Shoppable lifestyle', tileTypes: ['shoppable_image'], brief: 'Full-width shoppable lifestyle image: premium setting with multiple products visible, each tagged with clickable hotspots. Warm lighting, dark background, products as heroes.' },
+      { layout: '1', purpose: 'Hero banner', tileTypes: ['image'], brief: '[LIFESTYLE] product in elegant premium setting, dark moody warm lighting' },
+      { layout: '1-1-1', purpose: 'Category navigation', tileTypes: ['image','image','image'], brief: '[LIFESTYLE] category lifestyle on dark tone, white category name overlay' },
+      { layout: '1', purpose: 'Shoppable lifestyle', tileTypes: ['shoppable_image'], brief: '[SHOPPABLE] premium setting with products, warm lighting, dark bg' },
       { layout: '1', purpose: 'Product grid bestsellers', tileTypes: ['product_grid'], brief: '' },
-      { layout: '1-1', purpose: 'Brand story / sustainability', tileTypes: ['image','image'], brief: 'Left: brand origin/heritage image (founder, production, ingredients). Right: sustainability messaging (recycling, certifications, eco-values). Dark backgrounds, gold accent text.' },
+      { layout: '1-1', purpose: 'Brand story / sustainability', tileTypes: ['image','image'], brief: '[CREATIVE] brand heritage/origin + sustainability values, dark bg, gold accent' },
       { layout: '1', purpose: 'Product grid secondary', tileTypes: ['product_grid'], brief: '' },
-      { layout: '1-1-1', purpose: 'Trust / values', tileTypes: ['image','image','image'], brief: 'Three value pillars: each an icon or lifestyle close-up with one-word value overlay (Quality, Sustainability, Craft). Dark bg, gold text.' },
-      { layout: '1', purpose: 'Footer promo', tileTypes: ['image'], brief: 'Full-width brand statement or seasonal campaign. Dark, elegant, minimal text.' },
+      { layout: '1-1-1', purpose: 'Trust / values', tileTypes: ['image','image','image'], brief: '[CREATIVE] value pillar icon with one-word overlay, dark bg, gold text' },
+      { layout: '1', purpose: 'Footer promo', tileTypes: ['image'], brief: '[CREATIVE] brand statement, dark elegant minimal text' },
     ],
     categoryPage: [
-      { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: 'Full-width: products from this category arranged in premium setting. Dark, moody. Category name in elegant typography.' },
-      { layout: '1-1', purpose: 'Product spotlight', tileTypes: ['shoppable_image','image'], brief: 'Left: shoppable image of hero product (editorial photo, warm lighting). Right: ingredients/feature close-up or product detail.' },
-      { layout: '1', purpose: 'Brand lifestyle video', tileTypes: ['video'], brief: 'Premium lifestyle video: elegant product usage scene with warm lighting. Show the aspirational world of the brand. Moody, cinematic, editorial quality. Product preparation or unboxing experience.' },
+      { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: '[LIFESTYLE] category products in premium dark moody setting' },
+      { layout: '1-1', purpose: 'Product spotlight', tileTypes: ['shoppable_image','image'], brief: '[SHOPPABLE] hero product editorial photo + [PRODUCT] feature close-up' },
+      { layout: '1', purpose: 'Brand lifestyle video', tileTypes: ['video'], brief: 'Premium lifestyle video: elegant product usage, moody cinematic quality' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: 'ALL category ASINs' },
-      { layout: '1-1-1', purpose: 'Variant showcase', tileTypes: ['image','image','image'], brief: 'Three variant/flavor tiles: each showing a different variant with color-coded accent and name overlay.' },
-      { layout: '1-1', purpose: 'Lifestyle storytelling', tileTypes: ['image','image'], brief: 'Two complementary lifestyle scenes: product in different usage contexts. Aspirational, warm, premium feel.' },
+      { layout: '1-1-1', purpose: 'Variant showcase', tileTypes: ['image','image','image'], brief: '[PRODUCT] variant/flavor with color-coded accent and name overlay' },
+      { layout: '1-1', purpose: 'Lifestyle storytelling', tileTypes: ['image','image'], brief: '[LIFESTYLE] product in different aspirational usage contexts' },
     ],
   },
   {
@@ -434,22 +515,22 @@ export var STORE_TEMPLATES = [
       },
     },
     homepage: [
-      { layout: '1', purpose: 'Hero banner', tileTypes: ['image'], brief: 'Full-width: athlete/fitness model with product, black background, dramatic lighting. Bold angular slash motif. Brand tagline in heavy white uppercase. High energy, performance feel.' },
-      { layout: '1-1-1', purpose: 'Category navigation', tileTypes: ['image','image','image'], brief: 'Three category tiles: each with product packshot on black, flavor-colored accent stripe. Category name in bold white uppercase. Angular crop/frame.' },
-      { layout: 'lg-2stack', purpose: 'Bestseller spotlight', tileTypes: ['shoppable_image','image','image'], brief: 'Large: hero product (flagship protein/supplement) dramatic packshot on dark bg. Right stack: key ingredient/benefit tile + flavor photography tile. Bold, high-contrast.' },
-      { layout: '1', purpose: 'Video section', tileTypes: ['video'], brief: 'Brand or product video: training footage, product demo, athlete endorsement. Dark, energetic.' },
+      { layout: '1', purpose: 'Hero banner', tileTypes: ['image'], brief: '[LIFESTYLE] athlete with product, dark bg, dramatic lighting, bold tagline' },
+      { layout: '1-1-1', purpose: 'Category navigation', tileTypes: ['image','image','image'], brief: '[PRODUCT] packshot on dark bg, flavor-colored accent stripe, bold category name' },
+      { layout: 'lg-2stack', purpose: 'Bestseller spotlight', tileTypes: ['shoppable_image','image','image'], brief: '[SHOPPABLE] flagship product dramatic packshot + [CREATIVE] ingredient/benefit tiles, high-contrast' },
+      { layout: '1', purpose: 'Video section', tileTypes: ['video'], brief: 'Training footage, product demo, athlete endorsement. Dark, energetic.' },
       { layout: '1', purpose: 'Product grid bestsellers', tileTypes: ['product_grid'], brief: '' },
-      { layout: '1-1-1', purpose: 'Performance USPs', tileTypes: ['image','image','image'], brief: 'Three bold stat tiles: each with large number/metric (e.g., "30g Protein", "Lab Tested", "Zero Sugar"). White text on black, accent color highlight.' },
-      { layout: '1-1', purpose: 'Athlete / social proof', tileTypes: ['image','image'], brief: 'Left: athlete using product, motivational. Right: community results or testimonial designed as bold quote card. Black bg.' },
-      { layout: '1', purpose: 'Brand mission', tileTypes: ['image'], brief: 'Full-width mission statement: bold typography on black. Angular slash motif. "For the Win" style messaging.' },
+      { layout: '1-1-1', purpose: 'Performance USPs', tileTypes: ['image','image','image'], brief: '[CREATIVE] bold stat/metric tile (e.g. "30g Protein"), white on dark, accent highlight' },
+      { layout: '1-1', purpose: 'Athlete / social proof', tileTypes: ['image','image'], brief: '[LIFESTYLE] athlete using product + [CREATIVE] testimonial quote card on dark bg' },
+      { layout: '1', purpose: 'Brand mission', tileTypes: ['image'], brief: '[CREATIVE] bold mission statement typography on dark bg, angular motif' },
     ],
     categoryPage: [
-      { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: 'Full-width: product range lineup on black, dramatic lighting. Category name in heavy uppercase white.' },
-      { layout: '1-1', purpose: 'Product + benefits', tileTypes: ['shoppable_image','image'], brief: 'Left: hero product shoppable image, dramatic packshot. Right: ingredient/benefit infographic on dark bg.' },
-      { layout: '1-1-1', purpose: 'Flavor/variant showcase', tileTypes: ['shoppable_image','shoppable_image','shoppable_image'], brief: 'Three flavor variants: each packshot on dark bg with flavor-colored accent. Shoppable, clickable.' },
-      { layout: '1', purpose: 'Performance training video', tileTypes: ['video'], brief: 'High-energy training/workout video: athlete using the product during intense exercise. Fast cuts, dramatic lighting, motivational music. Show real results and performance.' },
+      { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: '[PRODUCT] product range lineup on dark bg, dramatic lighting, category name' },
+      { layout: '1-1', purpose: 'Product + benefits', tileTypes: ['shoppable_image','image'], brief: '[SHOPPABLE] hero product dramatic packshot + [CREATIVE] benefit infographic on dark bg' },
+      { layout: '1-1-1', purpose: 'Flavor/variant showcase', tileTypes: ['shoppable_image','shoppable_image','shoppable_image'], brief: '[SHOPPABLE] flavor variant packshot on dark bg, flavor-colored accent' },
+      { layout: '1', purpose: 'Performance training video', tileTypes: ['video'], brief: 'High-energy training video: athlete using product, fast cuts, dramatic lighting' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: 'ALL category ASINs' },
-      { layout: 'lg-4grid', purpose: 'Feature deep-dive', tileTypes: ['image','image','image','image','image'], brief: 'Large: product beauty shot. Grid: 4 detail tiles — nutrition facts, ingredients, usage instruction, lab-test badge. Black bg, white text.' },
+      { layout: 'lg-4grid', purpose: 'Feature deep-dive', tileTypes: ['image','image','image','image','image'], brief: '[PRODUCT] large beauty shot + [CREATIVE] 4 detail tiles (nutrition, ingredients, usage, lab-test)' },
     ],
   },
   {
@@ -487,19 +568,19 @@ export var STORE_TEMPLATES = [
       },
     },
     homepage: [
-      { layout: '1', purpose: 'Hero banner', tileTypes: ['image'], brief: 'Full-width: clean product arrangement on white/light background. Minimal bold headline. Product is the star — no distracting elements. Soft shadow underneath.' },
-      { layout: '1-1', purpose: 'Category navigation', tileTypes: ['image','image'], brief: 'Two category tiles: each a product flat-lay or lifestyle on white/light bg. Category name in clean dark sans-serif. Lots of white space around text.' },
-      { layout: 'lg-2stack', purpose: 'Bestseller spotlight', tileTypes: ['shoppable_image','image','image'], brief: 'Large: hero product floating on white, soft shadow. Right stack: two benefit tiles with minimal icon + short text on white bg.' },
+      { layout: '1', purpose: 'Hero banner', tileTypes: ['image'], brief: '[PRODUCT] clean product arrangement on white, minimal headline, soft shadow' },
+      { layout: '1-1', purpose: 'Category navigation', tileTypes: ['image','image'], brief: '[PRODUCT] product flat-lay on white, clean category name, lots of whitespace' },
+      { layout: 'lg-2stack', purpose: 'Bestseller spotlight', tileTypes: ['shoppable_image','image','image'], brief: '[SHOPPABLE] hero product on white, soft shadow + [CREATIVE] minimal benefit icons on white' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: '' },
-      { layout: '1-1', purpose: 'Lifestyle', tileTypes: ['image','shoppable_image'], brief: 'Left: minimal lifestyle, person wearing/using product, neutral tones. Right: same product clean packshot on white, shoppable.' },
-      { layout: '1-1-1', purpose: 'USPs', tileTypes: ['image','image','image'], brief: 'Three tiles: each with minimal icon + one USP word on white (Quality, Comfort, Value). Super clean, lots of negative space.' },
-      { layout: '1', purpose: 'Brand statement', tileTypes: ['image'], brief: 'Full-width: large typography brand statement on white. One sentence. Minimal.' },
+      { layout: '1-1', purpose: 'Lifestyle', tileTypes: ['image','shoppable_image'], brief: '[LIFESTYLE] minimal, person using product, neutral tones + [SHOPPABLE] packshot on white' },
+      { layout: '1-1-1', purpose: 'USPs', tileTypes: ['image','image','image'], brief: '[CREATIVE] minimal icon + one USP word on white, lots of negative space' },
+      { layout: '1', purpose: 'Brand statement', tileTypes: ['image'], brief: '[CREATIVE] large typography brand statement on white, one sentence, minimal' },
     ],
     categoryPage: [
-      { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: 'Products from category arranged as flat-lay on white. Category name in clean type.' },
-      { layout: '1-1', purpose: 'Product detail', tileTypes: ['image','shoppable_image'], brief: 'Left: material/quality close-up, minimal styling. Right: product on white, shoppable.' },
+      { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: '[PRODUCT] category products flat-lay on white, clean category name' },
+      { layout: '1-1', purpose: 'Product detail', tileTypes: ['image','shoppable_image'], brief: '[PRODUCT] material/quality close-up + [SHOPPABLE] product on white' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: 'ALL category ASINs' },
-      { layout: '1-1-1', purpose: 'Quality details', tileTypes: ['image','image','image'], brief: 'Three tiles: material close-up, sizing visual, care instruction. All on white, minimal text.' },
+      { layout: '1-1-1', purpose: 'Quality details', tileTypes: ['image','image','image'], brief: '[PRODUCT] material close-up, sizing visual, care instruction on white' },
     ],
   },
   {
@@ -537,23 +618,23 @@ export var STORE_TEMPLATES = [
       },
     },
     homepage: [
-      { layout: '1', purpose: 'Hero banner', tileTypes: ['image'], brief: 'Full-width: product range with raw natural ingredients scattered around (herbs, seeds, leaves). Warm earthy tones. Brand name in warm serif or rounded sans-serif. Forest green accent.' },
-      { layout: '1-1-1', purpose: 'Category navigation', tileTypes: ['image','image','image'], brief: 'Three tiles: each with product + key ingredient on cream background. Category name in warm type. Earthy, natural styling. Subtle green accent.' },
-      { layout: '1-1', purpose: 'Ingredient spotlight', tileTypes: ['image','shoppable_image'], brief: 'Left: close-up of key ingredient (turmeric, ashwagandha, etc.) with benefit text overlay on green bg. Right: product containing that ingredient, shoppable, on cream bg.' },
+      { layout: '1', purpose: 'Hero banner', tileTypes: ['image'], brief: '[LIFESTYLE] products with natural ingredients (herbs, seeds), warm earthy tones, green accent' },
+      { layout: '1-1-1', purpose: 'Category navigation', tileTypes: ['image','image','image'], brief: '[PRODUCT] product + key ingredient on cream bg, warm category name' },
+      { layout: '1-1', purpose: 'Ingredient spotlight', tileTypes: ['image','shoppable_image'], brief: '[CREATIVE] ingredient close-up with benefit text on green bg + [SHOPPABLE] product on cream bg' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: '' },
-      { layout: '1-1-1-1', purpose: 'Trust badges', tileTypes: ['image','image','image','image'], brief: 'Four certification tiles on cream bg: Bio-certified, Lab-tested, Vegan, Recyclable. Each with icon and short label. Clean, trustworthy.' },
-      { layout: '1', purpose: 'Brand origin video', tileTypes: ['video'], brief: 'Authentic brand video: founder telling the story, sourcing footage, production behind-the-scenes. Green fields, natural light. Shows the people and values behind the products.' },
-      { layout: '1', purpose: 'Brand story', tileTypes: ['image'], brief: 'Full-width: founder story or sustainability mission. Nature background (forest, field, garden). White text overlay with brand values. Warm, authentic.' },
-      { layout: '1-1', purpose: 'Lifestyle + social proof', tileTypes: ['image','image'], brief: 'Left: person in nature or kitchen using product, warm tones. Right: customer review quote or "Bestseller" badge designed as image with star rating.' },
-      { layout: '1-1-1', purpose: 'Footer category links', tileTypes: ['image','image','image'], brief: 'Three category thumbnails with ingredients-around-product style. Links to subpages.' },
+      { layout: '1-1-1-1', purpose: 'Trust badges', tileTypes: ['image','image','image','image'], brief: '[CREATIVE] certification icon on cream bg (Bio, Lab-tested, Vegan, Recyclable)' },
+      { layout: '1', purpose: 'Brand origin video', tileTypes: ['video'], brief: 'Authentic brand video: founder story, sourcing, production. Green fields, natural light.' },
+      { layout: '1', purpose: 'Brand story', tileTypes: ['image'], brief: '[CREATIVE] founder story on nature background, white text overlay, warm authentic' },
+      { layout: '1-1', purpose: 'Lifestyle + social proof', tileTypes: ['image','image'], brief: '[LIFESTYLE] person using product in nature/kitchen + [CREATIVE] review quote or bestseller badge' },
+      { layout: '1-1-1', purpose: 'Footer category links', tileTypes: ['image','image','image'], brief: '[PRODUCT] category thumbnail with ingredients-around-product style' },
     ],
     categoryPage: [
-      { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: 'Full-width: category products with relevant raw ingredients. Warm natural lighting. Category name in warm type on nature/cream bg.' },
-      { layout: '1-1', purpose: 'Benefit + product', tileTypes: ['image','shoppable_image'], brief: 'Left: ingredient/benefit infographic on green bg (what it does, how it works). Right: product shoppable image on cream bg.' },
-      { layout: '1-1-1', purpose: 'Key features', tileTypes: ['image','image','image'], brief: 'Three benefit tiles: each with ingredient close-up and short benefit text. Cream bg, green accent text.' },
-      { layout: '1', purpose: 'Ingredient journey video', tileTypes: ['video'], brief: 'Nature-inspired video: show the journey from raw ingredients to finished product. Fields, harvesting, production, packaging. Warm, authentic, green tones. Trustworthy and educational.' },
+      { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: '[LIFESTYLE] category products with raw ingredients, warm natural lighting' },
+      { layout: '1-1', purpose: 'Benefit + product', tileTypes: ['image','shoppable_image'], brief: '[CREATIVE] ingredient benefit infographic on green bg + [SHOPPABLE] product on cream bg' },
+      { layout: '1-1-1', purpose: 'Key features', tileTypes: ['image','image','image'], brief: '[PRODUCT] ingredient close-up with benefit text, cream bg, green accent' },
+      { layout: '1', purpose: 'Ingredient journey video', tileTypes: ['video'], brief: 'Nature-inspired video: ingredients to product journey. Fields, harvesting, production. Warm authentic.' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: 'ALL category ASINs' },
-      { layout: '1-1', purpose: 'Trust + origin', tileTypes: ['image','image'], brief: 'Left: sourcing/origin story (where ingredients come from). Right: certification badges for this product line.' },
+      { layout: '1-1', purpose: 'Trust + origin', tileTypes: ['image','image'], brief: '[CREATIVE] sourcing/origin story + certification badges' },
     ],
   },
   {
@@ -591,22 +672,22 @@ export var STORE_TEMPLATES = [
       },
     },
     homepage: [
-      { layout: '1', purpose: 'Hero banner', tileTypes: ['image'], brief: 'Full-width: vibrant, colorful hero with product range displayed on gradient or multi-color background. Bold playful headline. Energetic, young, fun. Props that match brand world.' },
-      { layout: '1-1-1', purpose: 'Category navigation', tileTypes: ['image','image','image'], brief: 'Three tiles: each category on its signature color background. Product floating with fun props. Bold playful category name. Each links to subpage.' },
-      { layout: '1-1', purpose: 'Hero product + lifestyle', tileTypes: ['shoppable_image','image'], brief: 'Left: hero product on bold color bg, shoppable. Right: young person using product, energetic lifestyle, vibrant colors.' },
-      { layout: 'lg-6grid', purpose: 'Variant showcase', tileTypes: ['image','shoppable_image','shoppable_image','shoppable_image','shoppable_image','shoppable_image','shoppable_image'], brief: 'Large left: lifestyle/group shot. Grid: 6 product variants, each on its flavor color. Shoppable. Creates a rainbow/palette effect.' },
+      { layout: '1', purpose: 'Hero banner', tileTypes: ['image'], brief: '[LIFESTYLE] vibrant products on gradient/multi-color bg, bold playful headline, fun props' },
+      { layout: '1-1-1', purpose: 'Category navigation', tileTypes: ['image','image','image'], brief: '[PRODUCT] product on signature color bg with fun props, bold playful category name' },
+      { layout: '1-1', purpose: 'Hero product + lifestyle', tileTypes: ['shoppable_image','image'], brief: '[SHOPPABLE] hero product on bold color bg + [LIFESTYLE] young person using product, vibrant' },
+      { layout: 'lg-4grid', purpose: 'Variant showcase', tileTypes: ['image','shoppable_image','shoppable_image','shoppable_image','shoppable_image'], brief: '[LIFESTYLE] large group shot + [SHOPPABLE] 4 variants on flavor colors' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: '' },
-      { layout: '1-1', purpose: 'Social proof / community', tileTypes: ['image','image'], brief: 'Left: user-generated content collage or influencer shot. Right: community stat or testimonial on brand color.' },
-      { layout: '1', purpose: 'Video', tileTypes: ['video'], brief: 'Energetic brand video: product in action, lifestyle montage, music-driven.' },
-      { layout: '1-1-1-1', purpose: 'Footer nav', tileTypes: ['image','image','image','image'], brief: 'Four category tiles with product icons on matching colors. Playful, small.' },
+      { layout: '1-1', purpose: 'Social proof / community', tileTypes: ['image','image'], brief: '[LIFESTYLE] UGC/influencer shot + [CREATIVE] community stat on brand color' },
+      { layout: '1', purpose: 'Video', tileTypes: ['video'], brief: 'Energetic brand video: product in action, lifestyle montage, music-driven' },
+      { layout: '1-1-1-1', purpose: 'Footer nav', tileTypes: ['image','image','image','image'], brief: '[CREATIVE] category icon on matching color, playful thumbnail' },
     ],
     categoryPage: [
-      { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: 'Full-width: category products on vibrant color gradient. Fun, energetic. Category name in bold playful type.' },
-      { layout: '1-1-1', purpose: 'Top picks', tileTypes: ['shoppable_image','shoppable_image','shoppable_image'], brief: 'Three hero products from category, each on its flavor/variant color. Shoppable. Bold product names.' },
-      { layout: '1', purpose: 'Energetic brand video', tileTypes: ['video'], brief: 'Vibrant, fast-paced video: young people enjoying the product with friends. Bright colors, energetic music, fun lifestyle. Taste tests, reactions, sharing moments. Gen-Z appeal.' },
+      { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: '[LIFESTYLE] category products on vibrant gradient, fun bold category name' },
+      { layout: '1-1-1', purpose: 'Top picks', tileTypes: ['shoppable_image','shoppable_image','shoppable_image'], brief: '[SHOPPABLE] hero product on flavor/variant color bg, bold product name' },
+      { layout: '1', purpose: 'Energetic brand video', tileTypes: ['video'], brief: 'Vibrant fast-paced video: young people enjoying product, bright colors, energetic' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: 'ALL category ASINs' },
-      { layout: 'lg-4grid', purpose: 'Flavor exploration', tileTypes: ['image','shoppable_image','shoppable_image','shoppable_image','shoppable_image'], brief: 'Large: lifestyle action shot. Grid: 4 variants on color backgrounds. Shoppable. Creates discovery moment.' },
-      { layout: '1-1', purpose: 'Fun fact + cross-sell', tileTypes: ['image','image'], brief: 'Left: fun ingredient/product fact on bold color bg. Right: related category link with playful visual.' },
+      { layout: 'lg-4grid', purpose: 'Flavor exploration', tileTypes: ['image','shoppable_image','shoppable_image','shoppable_image','shoppable_image'], brief: '[LIFESTYLE] large action shot + [SHOPPABLE] 4 variants on color backgrounds' },
+      { layout: '1-1', purpose: 'Fun fact + cross-sell', tileTypes: ['image','image'], brief: '[CREATIVE] fun product fact on bold color bg + category link with playful visual' },
     ],
   },
 ];
