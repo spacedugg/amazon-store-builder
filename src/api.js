@@ -21,7 +21,7 @@ function fetchWithTimeout(url, options, timeoutMs) {
   });
 }
 
-var SCRAPE_TIMEOUT_MS = 120000; // 2 minutes for scraping
+var SCRAPE_TIMEOUT_MS = 300000; // 5 minutes — Bright Data can be slow for large ASIN lists
 
 // ─── BRIGHT DATA: Scrape ASINs ───
 export async function scrapeAsins(asins, domain) {

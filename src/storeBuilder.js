@@ -28,7 +28,7 @@ function fetchWithTimeout(url, options, timeoutMs) {
 }
 
 // ─── CLAUDE API CALL (with retry + fallback + timeout) ───
-var CLAUDE_TIMEOUT_MS = 90000; // 90s per API call
+var CLAUDE_TIMEOUT_MS = 180000; // 3 minutes per API call — complex stores need more time
 
 async function callClaude(systemPrompt, userPrompt, maxTokens) {
   if (!ANTHROPIC_KEY) throw new Error('VITE_ANTHROPIC_API_KEY not configured');
