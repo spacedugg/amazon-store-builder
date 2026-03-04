@@ -20,7 +20,7 @@ function parseAsinFile(text) {
   return asins;
 }
 
-export default function GenerateModal({ onClose, onGenerate }) {
+export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onGoogleDriveChange }) {
   var [brand, setBrand] = useState('');
   var [marketplace, setMarketplace] = useState('de');
   var [instructions, setInstructions] = useState('');
@@ -38,6 +38,7 @@ export default function GenerateModal({ onClose, onGenerate }) {
   var [websiteData, setWebsiteData] = useState(null);
   var [websiteScraping, setWebsiteScraping] = useState(false);
   var [websiteError, setWebsiteError] = useState('');
+  var [driveUrl, setDriveUrl] = useState(googleDriveUrl || '');
   var fileRef = useRef(null);
 
   var onFileChange = function(e) {
@@ -440,12 +441,25 @@ export default function GenerateModal({ onClose, onGenerate }) {
           </div>
         </div>
 
+        {/* 8. Google Drive Folder */}
+        <label className="label" style={{ marginTop: 10 }}>8. Google Drive Folder (optional)</label>
+        <input
+          className="input"
+          type="url"
+          placeholder="https://drive.google.com/drive/folders/..."
+          value={driveUrl}
+          onChange={function(e) { setDriveUrl(e.target.value); }}
+          onBlur={function() { if (onGoogleDriveChange) onGoogleDriveChange(driveUrl); }}
+        />
+        <div className="hint">Designer will upload finished assets to this Google Drive folder.</div>
+
         <div className="modal-footer">
           <button className="btn" onClick={onClose}>Cancel</button>
           <button
             className="btn btn-primary"
             disabled={!canGenerate}
             onClick={function() {
+              if (onGoogleDriveChange && driveUrl !== (googleDriveUrl || '')) onGoogleDriveChange(driveUrl);
               onGenerate({
                 brand: brand.trim(),
                 marketplace: marketplace,

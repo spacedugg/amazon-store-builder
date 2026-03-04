@@ -301,6 +301,30 @@ function getGridConfig(layout, isMobile) {
   };
 }
 
+// Mobile layout display names — describe what the mobile rendering looks like
+var MOBILE_LAYOUT_NAMES = {
+  '1': 'Full Width',
+  '1-1': 'Stacked (1 col)',
+  '1-1-1': 'Stacked (1 col)',
+  '1-1-1-1': '2-Column Grid',
+  '2-1': '2-Column',
+  '1-2': '2-Column',
+  '2-1-1': 'Stacked (1 col)',
+  '1-1-2': 'Stacked (1 col)',
+  'lg-2stack': 'Wide + 2 Small',
+  '2stack-lg': '2 Small + Wide',
+  'lg-4grid': 'Wide + 2x2 Grid',
+  '4grid-lg': '2x2 Grid + Wide',
+  'lg-w2s': 'Wide + 2 Small + Wide',
+  'w2s-lg': 'Wide + 2 Small + Wide',
+  '2x2wide': '2-Column Grid',
+  '2s-4grid': '2-Column Grid',
+  '4grid-2s': '2 Small + Wide (x2)',
+  'w2s-4grid': 'Wide + 3x2 Grid',
+  '4grid-w2s': '2x2 + Wide + 2 Small',
+  '4x2grid': '2-Column Grid (4 rows)',
+};
+
 export default function SectionView({ section, idx, totalSections, sel, onSelect, onDelete, onMoveUp, onMoveDown, onChangeLayout, viewMode, products, uiLang }) {
   var layout = LAYOUTS.find(function(l) { return l.id === section.layoutId; }) || LAYOUTS[0];
   var isMobile = viewMode === 'mobile';
@@ -314,7 +338,8 @@ export default function SectionView({ section, idx, totalSections, sel, onSelect
           onChange={function(e) { onChangeLayout(e.target.value); }}
           onClick={function(e) { e.stopPropagation(); }}>
           {LAYOUTS.map(function(l) {
-            return <option key={l.id} value={l.id}>{l.name} ({l.cells})</option>;
+            var displayName = isMobile ? (MOBILE_LAYOUT_NAMES[l.id] || l.name) : l.name;
+            return <option key={l.id} value={l.id}>{displayName} ({l.cells})</option>;
           })}
         </select>
         <div className="section-actions">
