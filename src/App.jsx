@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { uid, emptyTile, emptyTileForLayout, LAYOUTS, LANGS, DOMAINS, validateStore, PRICING, countStoreAssets, STORE_TEMPLATES } from './constants';
+import { uid, emptyTile, emptyTileForLayout, LAYOUTS, LANGS, DOMAINS, validateStore, PRICING, countStoreAssets, STORE_TEMPLATES, findLayout } from './constants';
 import { scrapeAsins } from './api';
 import { generateStore, aiRefineStore, applyOperations } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, loadStoreByShareToken, importStoreByShareLink } from './storage';
@@ -239,7 +239,7 @@ export default function App() {
   };
 
   var changeLayout = function(sectionId, layoutId) {
-    var layout = LAYOUTS.find(function(l) { return l.id === layoutId; });
+    var layout = findLayout(layoutId);
     if (!layout) return;
     setStoreWithUndo(function(s) {
       return Object.assign({}, s, {

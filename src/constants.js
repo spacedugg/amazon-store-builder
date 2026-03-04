@@ -1,54 +1,76 @@
 // ─── LAYOUTS (Desktop + Mobile) ───
-// Based on all available Amazon Brand Store section types
-// Desktop image types: Large Square (1500×1500), Small Square (750×750), Wide (1500×700)
-// Mobile: variable ratio (min 1680px wide, 20–3000px high)
+// Amazon Brand Store: Desktop always 4-column grid. NO vertical images on desktop.
+//
+// CATEGORIES:
+//   Full Width: single-image section (not Standard or VH)
+//   Standard: 2-row layouts (4 cols × 2 rows). Tiles can span cols+rows.
+//   VH (Variable Height): 1-row layouts (4 cols × 1 row). Single row, tiles horizontal.
+//
+// Desktop image types:
+//   Full Width (FW): min 3000px wide, 16–2400px high
+//   Large Square (LS): 1500×1500 (2 cols × 2 rows, Standard only)
+//   Wide (W): 1500×700 (2 cols × 1 row)
+//   Small Square (SS): 750×750 (1 col × 1 row)
+//
+// Mobile:
+//   Standard: default = desktop dims, height variable
+//   VH: fixed min 1500×750
+//
+// IMPORTANT: VH desktop ↔ VH mobile ONLY. Standard desktop ↔ Standard mobile ONLY.
+
 export var LAYOUTS = [
-  // ─── Existing layouts (generic / legacy) ───
-  { id: '1', name: 'Full Width', cols: '1fr', cells: 1, mobileCols: '1fr' },
-  { id: '1-1', name: '2 Equal', cols: '1fr 1fr', cells: 2, mobileCols: '1fr' },
-  { id: '1-1-1', name: '3 Equal', cols: '1fr 1fr 1fr', cells: 3, mobileCols: '1fr' },
-  { id: '1-1-1-1', name: '4 Equal', cols: 'repeat(4,1fr)', cells: 4, mobileCols: '1fr 1fr' },
-  // Asymmetric 2-col
-  { id: '2-1', name: 'Large + Small', cols: '2fr 1fr', cells: 2, mobileCols: '1fr 1fr' },
-  { id: '1-2', name: 'Small + Large', cols: '1fr 2fr', cells: 2, mobileCols: '1fr 1fr' },
-  // Asymmetric 3-col
-  { id: '2-1-1', name: 'Large + 2 Small', cols: '2fr 1fr 1fr', cells: 3, mobileCols: '1fr' },
-  { id: '1-1-2', name: '2 Small + Large', cols: '1fr 1fr 2fr', cells: 3, mobileCols: '1fr' },
-  // Stacked: Large + 2 stacked (Amazon Desktop #3 + mirror)
-  { id: 'lg-2stack', name: 'Large Left + 2 Stacked Right', cols: '2fr 1fr', cells: 3, grid: 'lg-2stack', mobileCols: '1fr 1fr', mobileGrid: 'lg-2stack' },
-  { id: '2stack-lg', name: '2 Stacked Left + Large Right', cols: '1fr 2fr', cells: 3, grid: '2stack-lg', mobileCols: '1fr 1fr', mobileGrid: '2stack-lg' },
-  // Large + 2x2 Grid (5 tiles)
-  { id: 'lg-4grid', name: 'Large Left + 2x2 Grid Right', cols: '2fr 1fr 1fr', cells: 5, grid: 'lg-4grid', mobileCols: '1fr 1fr', mobileGrid: 'lg-4grid' },
-  { id: '4grid-lg', name: '2x2 Grid Left + Large Right', cols: '1fr 1fr 2fr', cells: 5, grid: '4grid-lg', mobileCols: '1fr 1fr', mobileGrid: '4grid-lg' },
+  // ─── Full Width (single-image section) ───
+  { id: '1', name: 'Full Width', type: 'fullwidth', cols: '1fr', cells: 1, mobileCols: '1fr' },
 
-  // ─── Amazon Desktop #4: Large + (Wide over 2 Small) ───
-  // Mobile: wide → 2 small → wide (t0 spans, t1+t2 side-by-side, t3 spans)
-  { id: 'lg-w2s', name: 'Large + Wide & 2 Small', cols: '2fr 1fr 1fr', cells: 4, grid: 'lg-w2s', mobileCols: '1fr 1fr', mobileGrid: 'lg-w2s' },
-  // Mirror: (Wide over 2 Small) + Large
-  { id: 'w2s-lg', name: 'Wide & 2 Small + Large', cols: '1fr 1fr 2fr', cells: 4, grid: 'w2s-lg', mobileCols: '1fr 1fr', mobileGrid: 'w2s-lg' },
+  // ─── Standard Layouts (Desktop: 4 cols × 2 rows) ───
+  // Mobile: LS/W tiles span full width, SS tiles pair side-by-side
+  { id: 'std-2equal', name: '2 Equal', type: 'standard', cells: 2, grid: 'std-2equal', mobileCols: '1fr' },
+  { id: 'lg-2stack', name: 'Large + 2 Stacked', type: 'standard', cells: 3, grid: 'lg-2stack', mobileCols: '1fr 1fr', mobileGrid: 'std-auto' },
+  { id: '2stack-lg', name: '2 Stacked + Large', type: 'standard', cells: 3, grid: '2stack-lg', mobileCols: '1fr 1fr', mobileGrid: 'std-auto' },
+  { id: 'lg-w2s', name: 'Large + Wide & 2 Small', type: 'standard', cells: 4, grid: 'lg-w2s', mobileCols: '1fr 1fr', mobileGrid: 'std-auto' },
+  { id: 'w2s-lg', name: 'Wide & 2 Small + Large', type: 'standard', cells: 4, grid: 'w2s-lg', mobileCols: '1fr 1fr', mobileGrid: 'std-auto' },
+  { id: '2x2wide', name: '4 Equal (2×2 Wide)', type: 'standard', cells: 4, grid: '2x2wide', mobileCols: '1fr' },
+  { id: 'lg-4grid', name: 'Large + 2×2 Grid', type: 'standard', cells: 5, grid: 'lg-4grid', mobileCols: '1fr 1fr', mobileGrid: 'std-auto' },
+  { id: '4grid-lg', name: '2×2 Grid + Large', type: 'standard', cells: 5, grid: '4grid-lg', mobileCols: '1fr 1fr', mobileGrid: 'std-auto' },
+  { id: '2s-4grid', name: '2 Stacked + 2×2 Grid', type: 'standard', cells: 6, grid: '2s-4grid', mobileCols: '1fr 1fr', mobileGrid: 'std-auto' },
+  { id: '4grid-2s', name: '2×2 Grid + 2 Stacked', type: 'standard', cells: 6, grid: '4grid-2s', mobileCols: '1fr 1fr', mobileGrid: 'std-auto' },
+  { id: '4x2grid', name: '4×2 Grid', type: 'standard', cells: 8, grid: '4x2grid', mobileCols: '1fr 1fr' },
 
-  // ─── Amazon Desktop #5: 2×2 Wide Grid (full width) ───
-  // Mobile: tiles flow in 2-column pairs
-  { id: '2x2wide', name: '2×2 Wide Grid', cols: '1fr 1fr', cells: 4, grid: '2x2wide', mobileCols: '1fr 1fr' },
-
-  // ─── Amazon Desktop #6: 2 Stacked + 2×2 Small Grid ───
-  // Mobile: 3 rows of 2 small tiles
-  { id: '2s-4grid', name: '2 Stacked + 2×2 Grid', cols: '1fr 1fr 1fr', cells: 6, grid: '2s-4grid', mobileCols: '1fr 1fr' },
-  // Mirror: 2×2 Grid + 2 Stacked
-  // Mobile: 2 small → wide → 2 small → wide (t2,t5 span)
-  { id: '4grid-2s', name: '2×2 Grid + 2 Stacked', cols: '1fr 1fr 1fr', cells: 6, grid: '4grid-2s', mobileCols: '1fr 1fr', mobileGrid: '4grid-2s' },
-
-  // ─── Amazon Desktop #7: (Wide + 2 Small) + 2×2 Grid ───
-  // Mobile: wide → 2 small → 2 small → 2 small (t0 spans)
-  { id: 'w2s-4grid', name: 'Wide & 2 Small + 2×2 Grid', cols: '1fr 1fr 1fr 1fr', cells: 7, grid: 'w2s-4grid', mobileCols: '1fr 1fr', mobileGrid: 'w2s-4grid' },
-  // Mirror: 2×2 Grid + (Wide + 2 Small)
-  // Mobile: 2 small → 2 small → wide → 2 small (t4 spans)
-  { id: '4grid-w2s', name: '2×2 Grid + Wide & 2 Small', cols: '1fr 1fr 1fr 1fr', cells: 7, grid: '4grid-w2s', mobileCols: '1fr 1fr', mobileGrid: '4grid-w2s' },
-
-  // ─── Amazon Desktop #8: 4×2 Grid (full width, 8 small tiles) ───
-  // Mobile: 4 rows of 2 small tiles
-  { id: '4x2grid', name: '4×2 Grid', cols: '1fr 1fr 1fr 1fr', cells: 8, grid: '4x2grid', mobileCols: '1fr 1fr' },
+  // ─── Variable Height Layouts (Desktop: 4 cols × 1 row) ───
+  // Mobile: W tiles span full width, SS tiles pair side-by-side
+  { id: 'vh-2equal', name: '2 Equal (VH)', type: 'vh', cells: 2, grid: 'vh-2equal', mobileCols: '1fr' },
+  { id: 'vh-w2s', name: 'Wide + 2 Squares (VH)', type: 'vh', cells: 3, grid: 'vh-w2s', mobileCols: '1fr 1fr', mobileGrid: 'std-auto' },
+  { id: 'vh-2sw', name: '2 Squares + Wide (VH)', type: 'vh', cells: 3, grid: 'vh-2sw', mobileCols: '1fr 1fr', mobileGrid: 'std-auto' },
 ];
+
+// ─── LEGACY LAYOUT ID MAPPING ───
+// Maps removed/renamed layout IDs to their closest valid replacement
+export var LEGACY_LAYOUT_MAP = {
+  '1-1': 'std-2equal',
+  '1-1-1': 'vh-w2s',
+  '1-1-1-1': '2x2wide',
+  '2-1': 'lg-2stack',
+  '1-2': '2stack-lg',
+  '2-1-1': 'lg-2stack',
+  '1-1-2': '2stack-lg',
+  'w2s-4grid': '2s-4grid',
+  '4grid-w2s': '4grid-2s',
+};
+
+// Resolve a layout ID (handles legacy IDs)
+export function resolveLayoutId(id) {
+  if (LAYOUTS.find(function(l) { return l.id === id; })) return id;
+  return LEGACY_LAYOUT_MAP[id] || 'std-2equal';
+}
+
+// Find layout by ID (with legacy fallback)
+export function findLayout(id) {
+  var layout = LAYOUTS.find(function(l) { return l.id === id; });
+  if (layout) return layout;
+  var resolved = LEGACY_LAYOUT_MAP[id];
+  if (resolved) return LAYOUTS.find(function(l) { return l.id === resolved; });
+  return LAYOUTS[0];
+}
 
 export var TILE_TYPES = ['image', 'product_grid', 'best_sellers', 'recommended', 'deals', 'video', 'text', 'shoppable_image', 'image_text'];
 
@@ -88,7 +110,9 @@ export var DIMENSION_PRESETS = {
 };
 
 // ─── AMAZON DESKTOP IMAGE TYPES ───
-// Strict desktop formats — mobile is always variable (min 1680px wide, 20–3000px high)
+// Desktop formats based on 4-column grid. No vertical images on desktop.
+// Standard mobile: default = desktop dims (height variable)
+// VH mobile: fixed min 1500×750
 export var AMAZON_IMG_TYPES = {
   LARGE_SQUARE: { w: 1500, h: 1500, label: 'Large Square' },
   SMALL_SQUARE: { w: 750, h: 750, label: 'Small Square' },
@@ -97,35 +121,49 @@ export var AMAZON_IMG_TYPES = {
 };
 
 // ─── PER-LAYOUT TILE DIMENSIONS (Desktop) ───
-// Maps layout id → array of desktop dimension objects per tile index (mobile order)
+// Maps layout id → array of desktop dimension objects per tile index
+// Tile order = visual reading order (desktop: left→right, top→bottom)
 var I = AMAZON_IMG_TYPES;
 export var LAYOUT_TILE_DIMS = {
+  // Full Width
   '1':          [I.FULL_WIDTH],
-  '2-1':        [I.LARGE_SQUARE, I.SMALL_SQUARE],
-  '1-2':        [I.SMALL_SQUARE, I.LARGE_SQUARE],
-  'lg-2stack':  [I.LARGE_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
-  '2stack-lg':  [I.SMALL_SQUARE, I.SMALL_SQUARE, I.LARGE_SQUARE],
-  'lg-w2s':     [I.LARGE_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.WIDE],
+  // Standard layouts (2-row)
+  'std-2equal': [I.LARGE_SQUARE, I.LARGE_SQUARE],
+  'lg-2stack':  [I.LARGE_SQUARE, I.WIDE, I.WIDE],
+  '2stack-lg':  [I.WIDE, I.WIDE, I.LARGE_SQUARE],
+  'lg-w2s':     [I.LARGE_SQUARE, I.WIDE, I.SMALL_SQUARE, I.SMALL_SQUARE],
   'w2s-lg':     [I.WIDE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.LARGE_SQUARE],
   '2x2wide':    [I.WIDE, I.WIDE, I.WIDE, I.WIDE],
-  '2s-4grid':   [I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
-  '4grid-2s':   [I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
-  'w2s-4grid':  [I.WIDE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
-  '4grid-w2s':  [I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.WIDE, I.SMALL_SQUARE, I.SMALL_SQUARE],
-  '4x2grid':    [I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
-  // Legacy layouts (5-tile): Large + 2x2
   'lg-4grid':   [I.LARGE_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
   '4grid-lg':   [I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.LARGE_SQUARE],
+  '2s-4grid':   [I.WIDE, I.WIDE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
+  '4grid-2s':   [I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.WIDE, I.WIDE],
+  '4x2grid':    [I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
+  // VH layouts (1-row)
+  'vh-2equal':  [I.WIDE, I.WIDE],
+  'vh-w2s':     [I.WIDE, I.SMALL_SQUARE, I.SMALL_SQUARE],
+  'vh-2sw':     [I.SMALL_SQUARE, I.SMALL_SQUARE, I.WIDE],
 };
 
 // Helper: create empty tile with correct dimensions for a specific layout position
 export function emptyTileForLayout(layoutId, tileIndex) {
-  var dims = LAYOUT_TILE_DIMS[layoutId];
+  var resolved = resolveLayoutId(layoutId);
+  var dims = LAYOUT_TILE_DIMS[resolved];
   var d = dims && dims[tileIndex] ? dims[tileIndex] : { w: 3000, h: 1200 };
+  var layout = findLayout(resolved);
+  // VH mobile: fixed min 1500×750. Standard mobile: default = desktop dims.
+  var mobileW, mobileH;
+  if (layout && layout.type === 'vh') {
+    mobileW = 1500;
+    mobileH = 750;
+  } else {
+    mobileW = d.w;
+    mobileH = d.h;
+  }
   return {
     type: 'image', brief: '', textOverlay: '', ctaText: '',
     dimensions: { w: d.w, h: d.h },
-    mobileDimensions: { w: 1680, h: Math.round(1680 * d.h / d.w) },
+    mobileDimensions: { w: mobileW, h: mobileH },
     asins: [], linkAsin: '', linkUrl: '',
     uploadedImage: null, uploadedImageMobile: null, videoThumbnail: null,
     bgColor: '',
@@ -243,36 +281,35 @@ export var MODULE_BAUKASTEN = {
   // === HERO MODULES ===
   hero: {
     fullWidthHero: { description: 'Full-width hero banner with brand message or campaign', layout: '1', tileType: 'image' },
-    splitHero: { description: 'Hero split: lifestyle left + product/message right', layout: '1-1', tileType: 'image' },
+    splitHero: { description: 'Hero split: lifestyle left + product/message right (2 large squares)', layout: 'std-2equal', tileType: 'image' },
   },
 
   // === CATEGORY NAVIGATION ===
   categoryNav: {
-    grid2col: { description: '2 category tiles with lifestyle + category name overlay', layout: '1-1' },
-    grid3col: { description: '3 category tiles', layout: '1-1-1' },
-    grid4col: { description: '4 category tiles in a row', layout: '1-1-1-1' },
-    largeAndStacked: { description: 'Main category large + 2 subcategories stacked', layout: 'lg-2stack' },
-    largeAnd4grid: { description: 'Main category large + 4 subcategories in 2x2 grid', layout: 'lg-4grid' },
-    grid6tiles: { description: '6 category tiles in 3×2 grid (2 stacked + 2×2)', layout: '2s-4grid' },
+    grid2col: { description: '2 category tiles as large squares side by side', layout: 'std-2equal' },
+    wideAnd2squares: { description: 'Main category wide + 2 subcategory squares (VH)', layout: 'vh-w2s' },
+    largeAndStacked: { description: 'Main category large + 2 subcategories stacked as wides', layout: 'lg-2stack' },
+    largeAnd4grid: { description: 'Main category large + 4 subcategories in 2×2 grid', layout: 'lg-4grid' },
+    grid4wide: { description: '4 category tiles as 2×2 wide grid', layout: '2x2wide' },
+    grid6tiles: { description: '6 category tiles (2 stacked wides + 2×2 squares)', layout: '2s-4grid' },
     grid8tiles: { description: '8 category tiles in 4×2 grid', layout: '4x2grid' },
-    wideGrid4: { description: '4 wide category tiles in 2×2 grid', layout: '2x2wide' },
   },
 
   // === PRODUCT DISPLAY ===
   products: {
     fullWidthGrid: { description: 'Full-width ASIN product grid', layout: '1', tileType: 'product_grid' },
-    productPlusLifestyle: { description: 'Product grid left + lifestyle image right (or reversed)', layout: '1-1' },
+    productPlusLifestyle: { description: 'Product grid left + lifestyle image right (2 large squares)', layout: 'std-2equal' },
     shoppableFullWidth: { description: 'Full-width shoppable image (clean product photo, clickable hotspots)', layout: '1', tileType: 'shoppable_image' },
-    shoppableSplit: { description: 'Shoppable image left + product name/text tile right (or reversed)', layout: '1-1',
+    shoppableSplit: { description: 'Shoppable image left + product name/text tile right (2 large squares)', layout: 'std-2equal',
       example: 'Left: clean product image as shoppable_image. Right: image with just the product name designed in.' },
-    productShowcaseLarge: { description: 'Large product shoppable_image left + 2 stacked detail tiles right', layout: 'lg-2stack',
-      example: 'Left: large product/bundle shoppable image. Right top: USP/feature tile. Right bottom: another product or CTA tile.' },
-    productWith4Details: { description: 'Large product image left + 4 detail/variant tiles in 2x2 right', layout: 'lg-4grid',
-      example: 'Left: hero product shot. Right 2x2: four detail tiles (features, variants, angles, or 4 smaller shoppable products).' },
+    productShowcaseLarge: { description: 'Large product shoppable_image left + 2 stacked wide tiles right', layout: 'lg-2stack',
+      example: 'Left: large product/bundle shoppable image. Right top: USP/feature wide tile. Right bottom: another product or CTA wide tile.' },
+    productWith4Details: { description: 'Large product image left + 4 detail/variant tiles in 2×2 right', layout: 'lg-4grid',
+      example: 'Left: hero product shot. Right 2×2: four detail tiles (features, variants, angles, or 4 smaller shoppable products).' },
     productWithWideAndSmall: { description: 'Large product left + wide banner top-right + 2 detail tiles bottom-right', layout: 'lg-w2s',
       example: 'Left: large hero product. Right top: wide feature/promo banner. Right bottom: 2 smaller detail or variant tiles.' },
-    bundleShowcase: { description: 'Bundle displayed as large image + small component products', layout: 'lg-2stack',
-      example: 'Left: bundle shoppable_image. Right: individual products as smaller shoppable tiles.' },
+    bundleShowcase: { description: 'Bundle displayed as large image + 2 stacked wide component tiles', layout: 'lg-2stack',
+      example: 'Left: bundle shoppable_image. Right: individual products as wide tiles stacked.' },
     productGrid2x2wide: { description: '4 product lifestyle shots as wide tiles in 2×2 grid', layout: '2x2wide',
       example: 'Four wide product/lifestyle tiles showing different use cases or product lines.' },
   },
@@ -280,23 +317,21 @@ export var MODULE_BAUKASTEN = {
   // === LIFESTYLE / BRAND STORYTELLING ===
   lifestyle: {
     fullWidthLifestyle: { description: 'Full-width lifestyle image showing products in context', layout: '1', tileType: 'image' },
-    lifestyleSplit: { description: 'Two lifestyle images side by side (different use cases)', layout: '1-1' },
-    alternatingPairing: { description: 'Section A: lifestyle left + product right. Section B: product left + lifestyle right.', layout: '1-1',
+    lifestyleSplit: { description: 'Two lifestyle images side by side as large squares', layout: 'std-2equal' },
+    alternatingPairing: { description: 'Section A: lifestyle left + product right. Section B: product left + lifestyle right.', layout: 'std-2equal',
       note: 'Use across 2 consecutive sections, mirroring arrangement for visual rhythm.' },
-    nameAndProduct: { description: 'Product/category name tile left + clean product image right', layout: '1-1',
+    nameAndProduct: { description: 'Product/category name tile left + clean product image right (large squares)', layout: 'std-2equal',
       example: 'Left: image with just product name designed in, minimal. Right: product packshot or shoppable_image.' },
   },
 
   // === FEATURE / USP MODULES ===
   features: {
-    featureGrid3col: { description: '3-column feature/benefit tiles (icon+text designed into image)', layout: '1-1-1' },
-    featureGrid4col: { description: '4-column feature tiles', layout: '1-1-1-1' },
-    featureLargeAndDetails: { description: 'Large feature image + 2 stacked detail tiles', layout: 'lg-2stack' },
-    featureSplit: { description: 'Product photo left + USP bullets designed into image right', layout: '1-1' },
-    featureWith4Grid: { description: 'Large product left + 4 feature tiles in 2x2 grid right', layout: 'lg-4grid',
+    featureWideAnd2: { description: 'Wide feature banner + 2 square benefit tiles (VH, 3 tiles)', layout: 'vh-w2s' },
+    featureLargeAndDetails: { description: 'Large feature image + 2 stacked wide detail tiles', layout: 'lg-2stack' },
+    featureSplit: { description: 'Product photo left + USP bullets designed into image right (large squares)', layout: 'std-2equal' },
+    featureWith4Grid: { description: 'Large product left + 4 feature tiles in 2×2 grid right', layout: 'lg-4grid',
       example: 'Left: product hero. Right: 4 tiles each highlighting one feature/benefit.' },
-    featureWide2x2: { description: 'Wide feature overview + 2 detail tiles on left, 2×2 grid of feature icons on right', layout: 'w2s-4grid',
-      example: 'Left top: wide feature overview banner. Left bottom: 2 detail tiles. Right: 4 individual feature icons/tiles.' },
+    featureGrid4wide: { description: '4 feature tiles as wide images in 2×2 grid', layout: '2x2wide' },
     featureGrid8: { description: '8 feature/benefit tiles in 4×2 grid', layout: '4x2grid',
       example: 'Eight small tiles, each showing one feature or benefit with icon and short text.' },
   },
@@ -304,7 +339,7 @@ export var MODULE_BAUKASTEN = {
   // === VIDEO ===
   video: {
     fullWidthVideo: { description: 'Full-width video section', layout: '1', tileType: 'video' },
-    videoWithContext: { description: 'Video next to lifestyle/feature image', layout: '1-1' },
+    videoWithContext: { description: 'Video next to lifestyle/feature image (2 large squares)', layout: 'std-2equal' },
   },
 
   // === TEXT (use sparingly!) ===
@@ -315,30 +350,30 @@ export var MODULE_BAUKASTEN = {
   // === TRUST / SOCIAL PROOF ===
   trust: {
     testimonialBanner: { description: 'Customer reviews/quotes designed into banner', layout: '1' },
-    certificationGrid: { description: 'Certification/trust badges in a row', layout: '1-1-1' },
-    trustSplit: { description: 'Brand story / about us split', layout: '1-1' },
+    certificationWide2s: { description: 'Certification wide banner + 2 trust badge squares (VH)', layout: 'vh-w2s' },
+    trustSplit: { description: 'Brand story / about us split (large squares)', layout: 'std-2equal' },
   },
 
   // === VARIANT / COLOR SHOWCASE ===
   variants: {
-    colorShowcase4: { description: '4 color/variant tiles in a row', layout: '1-1-1-1' },
+    colorShowcase4wide: { description: '4 color/variant tiles as wide images in 2×2 grid', layout: '2x2wide' },
     variantBanner: { description: 'All variants in one designed banner', layout: '1' },
-    variantLargeAnd4: { description: 'Product hero left + 4 color variants in 2x2 right', layout: 'lg-4grid' },
-    variantGrid6: { description: '6 variant tiles in 3×2 grid', layout: '2s-4grid' },
+    variantLargeAnd4: { description: 'Product hero left + 4 color variants in 2×2 right', layout: 'lg-4grid' },
+    variantGrid6: { description: '6 variant tiles (2 stacked wides + 2×2 squares)', layout: '2s-4grid' },
     variantGrid8: { description: '8 variant/color tiles in 4×2 grid', layout: '4x2grid' },
   },
 
   // === FOOTER / CROSS-SELL ===
   footer: {
-    categoryNavFooter: { description: 'Category navigation tiles at page bottom', layout: '1-1-1-1' },
+    categoryNavFooter: { description: 'Category navigation as 4 wide tiles in 2×2', layout: '2x2wide' },
     crossSellBanner: { description: 'Cross-sell banner linking to related category', layout: '1' },
-    crossSellSplit: { description: 'Two cross-sell tiles linking to other categories', layout: '1-1' },
+    crossSellSplit: { description: 'Two cross-sell tiles as large squares', layout: 'std-2equal' },
   },
 
   // === FOLLOW / ENGAGEMENT (Premium) ===
   engagement: {
     followBanner: { description: 'Follow button CTA banner encouraging store follows', layout: '1', tileType: 'image' },
-    followSplit: { description: 'Brand story left + follow CTA right', layout: '1-1' },
+    followSplit: { description: 'Brand story left + follow CTA right (large squares)', layout: 'std-2equal' },
   },
 };
 
@@ -408,23 +443,23 @@ export var STORE_TEMPLATES = [
     // ─── SECTION BLUEPRINT ───
     homepage: [
       { layout: '1', purpose: 'Hero banner', tileTypes: ['image'], brief: '[LIFESTYLE] [product] in outdoor use, brand-color accent bar, bold tagline' },
-      { layout: '1-1-1-1', purpose: 'Category navigation', tileTypes: ['image','image','image','image'], brief: '[CREATIVE] category name on dark overlay, lifestyle background' },
+      { layout: '2x2wide', purpose: 'Category navigation', tileTypes: ['image','image','image','image'], brief: '[CREATIVE] category name on dark overlay, lifestyle background' },
       { layout: 'lg-4grid', purpose: 'Hero product spotlight', tileTypes: ['shoppable_image','image','image','image','image'], brief: '[SHOPPABLE] flagship product on brand-color bg + [CREATIVE] 4 feature close-ups with specs' },
       { layout: '1', purpose: 'Product grid bestsellers', tileTypes: ['product_grid'], brief: '' },
-      { layout: '1-1', purpose: 'Brand heritage / technology', tileTypes: ['image','image'], brief: '[CREATIVE] heritage/innovation showcase + technology infographic' },
+      { layout: 'std-2equal', purpose: 'Brand heritage / technology', tileTypes: ['image','image'], brief: '[CREATIVE] heritage/innovation showcase + technology infographic' },
       { layout: '1', purpose: 'Product grid by category', tileTypes: ['product_grid'], brief: '' },
-      { layout: '1-1-1', purpose: 'Trust / certification elements', tileTypes: ['image','image','image'], brief: '[CREATIVE] trust badge with icon on white — certification, award, sustainability' },
+      { layout: 'vh-w2s', purpose: 'Trust / certification elements', tileTypes: ['image','image','image'], brief: '[CREATIVE] trust wide banner + 2 square badges — certification, award, sustainability' },
       { layout: '1', purpose: 'Deals / promo banner', tileTypes: ['image'], brief: '[CREATIVE] promo banner on brand-color, bold savings messaging' },
-      { layout: '1-1-1-1', purpose: 'Footer category navigation', tileTypes: ['image','image','image','image'], brief: '[CREATIVE] category thumbnail with name overlay for bottom nav' },
+      { layout: '2x2wide', purpose: 'Footer category navigation', tileTypes: ['image','image','image','image'], brief: '[CREATIVE] category thumbnail with name overlay for bottom nav' },
     ],
     categoryPage: [
       { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: '[LIFESTYLE] [category product] in realistic setting, category name overlay' },
-      { layout: 'lg-2stack', purpose: 'Product + features', tileTypes: ['shoppable_image','image','image'], brief: '[SHOPPABLE] hero product on white + [CREATIVE] 2 feature close-ups with specs' },
-      { layout: '1-1-1', purpose: 'Technical specs visual', tileTypes: ['image','image','image'], brief: '[CREATIVE] spec/feature detail with number overlay (e.g. "180 bar")' },
+      { layout: 'lg-2stack', purpose: 'Product + features', tileTypes: ['shoppable_image','image','image'], brief: '[SHOPPABLE] hero product on white + [CREATIVE] 2 feature wide close-ups with specs' },
+      { layout: 'vh-w2s', purpose: 'Technical specs visual', tileTypes: ['image','image','image'], brief: '[CREATIVE] wide spec overview + 2 square detail tiles (e.g. "180 bar")' },
       { layout: '1', purpose: 'Product demo video', tileTypes: ['video'], brief: 'Product demo video: product in real conditions, technical close-ups' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: 'ALL category ASINs' },
-      { layout: '1-1', purpose: 'Comparison / usage scenarios', tileTypes: ['image','image'], brief: '[CREATIVE] before/after comparison + [LIFESTYLE] product in professional use' },
-      { layout: '1-1-1', purpose: 'Accessories cross-sell', tileTypes: ['image','image','image'], brief: '[SHOPPABLE] accessory product with name overlay' },
+      { layout: 'std-2equal', purpose: 'Comparison / usage scenarios', tileTypes: ['image','image'], brief: '[CREATIVE] before/after comparison + [LIFESTYLE] product in professional use' },
+      { layout: 'vh-w2s', purpose: 'Accessories cross-sell', tileTypes: ['image','image','image'], brief: '[SHOPPABLE] wide accessory overview + 2 square product tiles' },
     ],
   },
   {
@@ -463,21 +498,21 @@ export var STORE_TEMPLATES = [
     },
     homepage: [
       { layout: '1', purpose: 'Hero banner', tileTypes: ['image'], brief: '[LIFESTYLE] product in elegant premium setting, dark moody warm lighting' },
-      { layout: '1-1-1', purpose: 'Category navigation', tileTypes: ['image','image','image'], brief: '[LIFESTYLE] category lifestyle on dark tone, white category name overlay' },
+      { layout: 'vh-w2s', purpose: 'Category navigation', tileTypes: ['image','image','image'], brief: '[LIFESTYLE] wide category lifestyle on dark tone + 2 square subcategory tiles, white name overlay' },
       { layout: '1', purpose: 'Shoppable lifestyle', tileTypes: ['shoppable_image'], brief: '[SHOPPABLE] premium setting with products, warm lighting, dark bg' },
       { layout: '1', purpose: 'Product grid bestsellers', tileTypes: ['product_grid'], brief: '' },
-      { layout: '1-1', purpose: 'Brand story / sustainability', tileTypes: ['image','image'], brief: '[CREATIVE] brand heritage/origin + sustainability values, dark bg, gold accent' },
+      { layout: 'std-2equal', purpose: 'Brand story / sustainability', tileTypes: ['image','image'], brief: '[CREATIVE] brand heritage/origin + sustainability values, dark bg, gold accent' },
       { layout: '1', purpose: 'Product grid secondary', tileTypes: ['product_grid'], brief: '' },
-      { layout: '1-1-1', purpose: 'Trust / values', tileTypes: ['image','image','image'], brief: '[CREATIVE] value pillar icon with one-word overlay, dark bg, gold text' },
+      { layout: 'vh-w2s', purpose: 'Trust / values', tileTypes: ['image','image','image'], brief: '[CREATIVE] wide value banner + 2 square pillar icons, dark bg, gold text' },
       { layout: '1', purpose: 'Footer promo', tileTypes: ['image'], brief: '[CREATIVE] brand statement, dark elegant minimal text' },
     ],
     categoryPage: [
       { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: '[LIFESTYLE] category products in premium dark moody setting' },
-      { layout: '1-1', purpose: 'Product spotlight', tileTypes: ['shoppable_image','image'], brief: '[SHOPPABLE] hero product editorial photo + [PRODUCT] feature close-up' },
+      { layout: 'std-2equal', purpose: 'Product spotlight', tileTypes: ['shoppable_image','image'], brief: '[SHOPPABLE] hero product editorial photo + [PRODUCT] feature close-up' },
       { layout: '1', purpose: 'Brand lifestyle video', tileTypes: ['video'], brief: 'Premium lifestyle video: elegant product usage, moody cinematic quality' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: 'ALL category ASINs' },
-      { layout: '1-1-1', purpose: 'Variant showcase', tileTypes: ['image','image','image'], brief: '[PRODUCT] variant/flavor with color-coded accent and name overlay' },
-      { layout: '1-1', purpose: 'Lifestyle storytelling', tileTypes: ['image','image'], brief: '[LIFESTYLE] product in different aspirational usage contexts' },
+      { layout: 'vh-w2s', purpose: 'Variant showcase', tileTypes: ['image','image','image'], brief: '[PRODUCT] wide variant overview + 2 square flavor tiles with color-coded accent' },
+      { layout: 'std-2equal', purpose: 'Lifestyle storytelling', tileTypes: ['image','image'], brief: '[LIFESTYLE] product in different aspirational usage contexts' },
     ],
   },
   {
@@ -516,18 +551,18 @@ export var STORE_TEMPLATES = [
     },
     homepage: [
       { layout: '1', purpose: 'Hero banner', tileTypes: ['image'], brief: '[LIFESTYLE] athlete with product, dark bg, dramatic lighting, bold tagline' },
-      { layout: '1-1-1', purpose: 'Category navigation', tileTypes: ['image','image','image'], brief: '[PRODUCT] packshot on dark bg, flavor-colored accent stripe, bold category name' },
-      { layout: 'lg-2stack', purpose: 'Bestseller spotlight', tileTypes: ['shoppable_image','image','image'], brief: '[SHOPPABLE] flagship product dramatic packshot + [CREATIVE] ingredient/benefit tiles, high-contrast' },
+      { layout: 'vh-w2s', purpose: 'Category navigation', tileTypes: ['image','image','image'], brief: '[PRODUCT] wide category overview + 2 square packshots on dark bg, flavor-colored accent stripe' },
+      { layout: 'lg-2stack', purpose: 'Bestseller spotlight', tileTypes: ['shoppable_image','image','image'], brief: '[SHOPPABLE] flagship product dramatic packshot + [CREATIVE] ingredient/benefit wide tiles, high-contrast' },
       { layout: '1', purpose: 'Video section', tileTypes: ['video'], brief: 'Training footage, product demo, athlete endorsement. Dark, energetic.' },
       { layout: '1', purpose: 'Product grid bestsellers', tileTypes: ['product_grid'], brief: '' },
-      { layout: '1-1-1', purpose: 'Performance USPs', tileTypes: ['image','image','image'], brief: '[CREATIVE] bold stat/metric tile (e.g. "30g Protein"), white on dark, accent highlight' },
-      { layout: '1-1', purpose: 'Athlete / social proof', tileTypes: ['image','image'], brief: '[LIFESTYLE] athlete using product + [CREATIVE] testimonial quote card on dark bg' },
+      { layout: 'vh-w2s', purpose: 'Performance USPs', tileTypes: ['image','image','image'], brief: '[CREATIVE] wide stat banner + 2 square metric tiles (e.g. "30g Protein"), white on dark' },
+      { layout: 'std-2equal', purpose: 'Athlete / social proof', tileTypes: ['image','image'], brief: '[LIFESTYLE] athlete using product + [CREATIVE] testimonial quote card on dark bg' },
       { layout: '1', purpose: 'Brand mission', tileTypes: ['image'], brief: '[CREATIVE] bold mission statement typography on dark bg, angular motif' },
     ],
     categoryPage: [
       { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: '[PRODUCT] product range lineup on dark bg, dramatic lighting, category name' },
-      { layout: '1-1', purpose: 'Product + benefits', tileTypes: ['shoppable_image','image'], brief: '[SHOPPABLE] hero product dramatic packshot + [CREATIVE] benefit infographic on dark bg' },
-      { layout: '1-1-1', purpose: 'Flavor/variant showcase', tileTypes: ['shoppable_image','shoppable_image','shoppable_image'], brief: '[SHOPPABLE] flavor variant packshot on dark bg, flavor-colored accent' },
+      { layout: 'std-2equal', purpose: 'Product + benefits', tileTypes: ['shoppable_image','image'], brief: '[SHOPPABLE] hero product dramatic packshot + [CREATIVE] benefit infographic on dark bg' },
+      { layout: 'vh-w2s', purpose: 'Flavor/variant showcase', tileTypes: ['image','image','image'], brief: '[SHOPPABLE] wide variant overview + 2 square flavor packshots on dark bg' },
       { layout: '1', purpose: 'Performance training video', tileTypes: ['video'], brief: 'High-energy training video: athlete using product, fast cuts, dramatic lighting' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: 'ALL category ASINs' },
       { layout: 'lg-4grid', purpose: 'Feature deep-dive', tileTypes: ['image','image','image','image','image'], brief: '[PRODUCT] large beauty shot + [CREATIVE] 4 detail tiles (nutrition, ingredients, usage, lab-test)' },
@@ -569,18 +604,18 @@ export var STORE_TEMPLATES = [
     },
     homepage: [
       { layout: '1', purpose: 'Hero banner', tileTypes: ['image'], brief: '[PRODUCT] clean product arrangement on white, minimal headline, soft shadow' },
-      { layout: '1-1', purpose: 'Category navigation', tileTypes: ['image','image'], brief: '[PRODUCT] product flat-lay on white, clean category name, lots of whitespace' },
-      { layout: 'lg-2stack', purpose: 'Bestseller spotlight', tileTypes: ['shoppable_image','image','image'], brief: '[SHOPPABLE] hero product on white, soft shadow + [CREATIVE] minimal benefit icons on white' },
+      { layout: 'std-2equal', purpose: 'Category navigation', tileTypes: ['image','image'], brief: '[PRODUCT] product flat-lay on white, clean category name, lots of whitespace' },
+      { layout: 'lg-2stack', purpose: 'Bestseller spotlight', tileTypes: ['shoppable_image','image','image'], brief: '[SHOPPABLE] hero product on white, soft shadow + [CREATIVE] minimal benefit wide tiles on white' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: '' },
-      { layout: '1-1', purpose: 'Lifestyle', tileTypes: ['image','shoppable_image'], brief: '[LIFESTYLE] minimal, person using product, neutral tones + [SHOPPABLE] packshot on white' },
-      { layout: '1-1-1', purpose: 'USPs', tileTypes: ['image','image','image'], brief: '[CREATIVE] minimal icon + one USP word on white, lots of negative space' },
+      { layout: 'std-2equal', purpose: 'Lifestyle', tileTypes: ['image','shoppable_image'], brief: '[LIFESTYLE] minimal, person using product, neutral tones + [SHOPPABLE] packshot on white' },
+      { layout: 'vh-w2s', purpose: 'USPs', tileTypes: ['image','image','image'], brief: '[CREATIVE] wide minimal USP banner + 2 square icon tiles on white, lots of negative space' },
       { layout: '1', purpose: 'Brand statement', tileTypes: ['image'], brief: '[CREATIVE] large typography brand statement on white, one sentence, minimal' },
     ],
     categoryPage: [
       { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: '[PRODUCT] category products flat-lay on white, clean category name' },
-      { layout: '1-1', purpose: 'Product detail', tileTypes: ['image','shoppable_image'], brief: '[PRODUCT] material/quality close-up + [SHOPPABLE] product on white' },
+      { layout: 'std-2equal', purpose: 'Product detail', tileTypes: ['image','shoppable_image'], brief: '[PRODUCT] material/quality close-up + [SHOPPABLE] product on white' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: 'ALL category ASINs' },
-      { layout: '1-1-1', purpose: 'Quality details', tileTypes: ['image','image','image'], brief: '[PRODUCT] material close-up, sizing visual, care instruction on white' },
+      { layout: 'vh-w2s', purpose: 'Quality details', tileTypes: ['image','image','image'], brief: '[PRODUCT] wide material overview + 2 square detail tiles (sizing, care)' },
     ],
   },
   {
@@ -619,22 +654,22 @@ export var STORE_TEMPLATES = [
     },
     homepage: [
       { layout: '1', purpose: 'Hero banner', tileTypes: ['image'], brief: '[LIFESTYLE] products with natural ingredients (herbs, seeds), warm earthy tones, green accent' },
-      { layout: '1-1-1', purpose: 'Category navigation', tileTypes: ['image','image','image'], brief: '[PRODUCT] product + key ingredient on cream bg, warm category name' },
-      { layout: '1-1', purpose: 'Ingredient spotlight', tileTypes: ['image','shoppable_image'], brief: '[CREATIVE] ingredient close-up with benefit text on green bg + [SHOPPABLE] product on cream bg' },
+      { layout: 'vh-w2s', purpose: 'Category navigation', tileTypes: ['image','image','image'], brief: '[PRODUCT] wide category overview + 2 square product+ingredient tiles on cream bg' },
+      { layout: 'std-2equal', purpose: 'Ingredient spotlight', tileTypes: ['image','shoppable_image'], brief: '[CREATIVE] ingredient close-up with benefit text on green bg + [SHOPPABLE] product on cream bg' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: '' },
-      { layout: '1-1-1-1', purpose: 'Trust badges', tileTypes: ['image','image','image','image'], brief: '[CREATIVE] certification icon on cream bg (Bio, Lab-tested, Vegan, Recyclable)' },
+      { layout: '2x2wide', purpose: 'Trust badges', tileTypes: ['image','image','image','image'], brief: '[CREATIVE] certification icon on cream bg (Bio, Lab-tested, Vegan, Recyclable)' },
       { layout: '1', purpose: 'Brand origin video', tileTypes: ['video'], brief: 'Authentic brand video: founder story, sourcing, production. Green fields, natural light.' },
       { layout: '1', purpose: 'Brand story', tileTypes: ['image'], brief: '[CREATIVE] founder story on nature background, white text overlay, warm authentic' },
-      { layout: '1-1', purpose: 'Lifestyle + social proof', tileTypes: ['image','image'], brief: '[LIFESTYLE] person using product in nature/kitchen + [CREATIVE] review quote or bestseller badge' },
-      { layout: '1-1-1', purpose: 'Footer category links', tileTypes: ['image','image','image'], brief: '[PRODUCT] category thumbnail with ingredients-around-product style' },
+      { layout: 'std-2equal', purpose: 'Lifestyle + social proof', tileTypes: ['image','image'], brief: '[LIFESTYLE] person using product in nature/kitchen + [CREATIVE] review quote or bestseller badge' },
+      { layout: 'vh-w2s', purpose: 'Footer category links', tileTypes: ['image','image','image'], brief: '[PRODUCT] wide category banner + 2 square thumbnails with ingredients-around-product style' },
     ],
     categoryPage: [
       { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: '[LIFESTYLE] category products with raw ingredients, warm natural lighting' },
-      { layout: '1-1', purpose: 'Benefit + product', tileTypes: ['image','shoppable_image'], brief: '[CREATIVE] ingredient benefit infographic on green bg + [SHOPPABLE] product on cream bg' },
-      { layout: '1-1-1', purpose: 'Key features', tileTypes: ['image','image','image'], brief: '[PRODUCT] ingredient close-up with benefit text, cream bg, green accent' },
+      { layout: 'std-2equal', purpose: 'Benefit + product', tileTypes: ['image','shoppable_image'], brief: '[CREATIVE] ingredient benefit infographic on green bg + [SHOPPABLE] product on cream bg' },
+      { layout: 'vh-w2s', purpose: 'Key features', tileTypes: ['image','image','image'], brief: '[PRODUCT] wide ingredient overview + 2 square close-up tiles, cream bg, green accent' },
       { layout: '1', purpose: 'Ingredient journey video', tileTypes: ['video'], brief: 'Nature-inspired video: ingredients to product journey. Fields, harvesting, production. Warm authentic.' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: 'ALL category ASINs' },
-      { layout: '1-1', purpose: 'Trust + origin', tileTypes: ['image','image'], brief: '[CREATIVE] sourcing/origin story + certification badges' },
+      { layout: 'std-2equal', purpose: 'Trust + origin', tileTypes: ['image','image'], brief: '[CREATIVE] sourcing/origin story + certification badges' },
     ],
   },
   {
@@ -673,21 +708,21 @@ export var STORE_TEMPLATES = [
     },
     homepage: [
       { layout: '1', purpose: 'Hero banner', tileTypes: ['image'], brief: '[LIFESTYLE] vibrant products on gradient/multi-color bg, bold playful headline, fun props' },
-      { layout: '1-1-1', purpose: 'Category navigation', tileTypes: ['image','image','image'], brief: '[PRODUCT] product on signature color bg with fun props, bold playful category name' },
-      { layout: '1-1', purpose: 'Hero product + lifestyle', tileTypes: ['shoppable_image','image'], brief: '[SHOPPABLE] hero product on bold color bg + [LIFESTYLE] young person using product, vibrant' },
+      { layout: 'vh-w2s', purpose: 'Category navigation', tileTypes: ['image','image','image'], brief: '[PRODUCT] wide category overview + 2 square product tiles on signature color bg with fun props' },
+      { layout: 'std-2equal', purpose: 'Hero product + lifestyle', tileTypes: ['shoppable_image','image'], brief: '[SHOPPABLE] hero product on bold color bg + [LIFESTYLE] young person using product, vibrant' },
       { layout: 'lg-4grid', purpose: 'Variant showcase', tileTypes: ['image','shoppable_image','shoppable_image','shoppable_image','shoppable_image'], brief: '[LIFESTYLE] large group shot + [SHOPPABLE] 4 variants on flavor colors' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: '' },
-      { layout: '1-1', purpose: 'Social proof / community', tileTypes: ['image','image'], brief: '[LIFESTYLE] UGC/influencer shot + [CREATIVE] community stat on brand color' },
+      { layout: 'std-2equal', purpose: 'Social proof / community', tileTypes: ['image','image'], brief: '[LIFESTYLE] UGC/influencer shot + [CREATIVE] community stat on brand color' },
       { layout: '1', purpose: 'Video', tileTypes: ['video'], brief: 'Energetic brand video: product in action, lifestyle montage, music-driven' },
-      { layout: '1-1-1-1', purpose: 'Footer nav', tileTypes: ['image','image','image','image'], brief: '[CREATIVE] category icon on matching color, playful thumbnail' },
+      { layout: '2x2wide', purpose: 'Footer nav', tileTypes: ['image','image','image','image'], brief: '[CREATIVE] category icon on matching color, playful thumbnail' },
     ],
     categoryPage: [
       { layout: '1', purpose: 'Category hero', tileTypes: ['image'], brief: '[LIFESTYLE] category products on vibrant gradient, fun bold category name' },
-      { layout: '1-1-1', purpose: 'Top picks', tileTypes: ['shoppable_image','shoppable_image','shoppable_image'], brief: '[SHOPPABLE] hero product on flavor/variant color bg, bold product name' },
+      { layout: 'vh-w2s', purpose: 'Top picks', tileTypes: ['image','image','image'], brief: '[SHOPPABLE] wide hero product + 2 square variant tiles on flavor/variant color bg' },
       { layout: '1', purpose: 'Energetic brand video', tileTypes: ['video'], brief: 'Vibrant fast-paced video: young people enjoying product, bright colors, energetic' },
       { layout: '1', purpose: 'Product grid', tileTypes: ['product_grid'], brief: 'ALL category ASINs' },
       { layout: 'lg-4grid', purpose: 'Flavor exploration', tileTypes: ['image','shoppable_image','shoppable_image','shoppable_image','shoppable_image'], brief: '[LIFESTYLE] large action shot + [SHOPPABLE] 4 variants on color backgrounds' },
-      { layout: '1-1', purpose: 'Fun fact + cross-sell', tileTypes: ['image','image'], brief: '[CREATIVE] fun product fact on bold color bg + category link with playful visual' },
+      { layout: 'std-2equal', purpose: 'Fun fact + cross-sell', tileTypes: ['image','image'], brief: '[CREATIVE] fun product fact on bold color bg + category link with playful visual' },
     ],
   },
 ];
@@ -788,7 +823,7 @@ export function validateStore(store) {
 
   store.pages.forEach(function(pg) {
     (pg.sections || []).forEach(function(sec, si) {
-      var layout = LAYOUTS.find(function(l) { return l.id === sec.layoutId; });
+      var layout = findLayout(sec.layoutId);
       if (!layout) {
         warnings.push({ level: 'error', message: 'Page "' + pg.name + '" section ' + (si + 1) + ': invalid layout "' + sec.layoutId + '"' });
         return;

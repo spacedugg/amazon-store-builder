@@ -1,121 +1,117 @@
-import { LAYOUTS } from '../constants';
+import { LAYOUTS, LAYOUT_TILE_DIMS, findLayout } from '../constants';
 import { t } from '../i18n';
 import TileView from './TileView';
+
+// Check if a tile at given index in a layout is a "spanning" type (LS or W = spans full width on mobile)
+function isTileSpanning(layoutId, tileIndex) {
+  var dims = LAYOUT_TILE_DIMS[layoutId];
+  if (!dims || !dims[tileIndex]) return true; // default: span
+  var d = dims[tileIndex];
+  // LS (1500×1500) and W (1500×700) and FW (3000×600) all span full width on mobile
+  // Only SS (750×750) does NOT span
+  return d.w > 750;
+}
 
 // Compute grid style and per-tile positioning for complex layouts
 function getGridConfig(layout, isMobile) {
   var g = layout.grid;
-  var mg = layout.mobileGrid;
 
   // ─── MOBILE ───
   if (isMobile) {
-    var mobileCols = layout.mobileCols || '1fr';
-
-    // Mobile grids with tile spanning (wide tiles span 2 columns)
-    if (mg === 'lg-2stack') {
-      // Mobile #3: wide → 2 small (t0 spans)
+    // Standard/VH mobile: use "std-auto" which auto-detects spanning from tile dims
+    // LS and W tiles span full width, SS tiles pair side-by-side
+    if (layout.mobileGrid === 'std-auto' || g === 'std-2equal' || g === 'vh-2equal' || g === '2x2wide') {
       return {
         gridStyle: { gridTemplateColumns: '1fr 1fr' },
         getTileStyle: function(i) {
-          if (i === 0) return { gridColumn: '1 / 3' };
-          return {};
-        },
-      };
-    }
-    if (mg === '2stack-lg') {
-      // Mobile #6: 2 small → wide (t2 spans)
-      return {
-        gridStyle: { gridTemplateColumns: '1fr 1fr' },
-        getTileStyle: function(i) {
-          if (i === 2) return { gridColumn: '1 / 3' };
-          return {};
-        },
-      };
-    }
-    if (mg === 'lg-4grid') {
-      // Mobile: wide → pairs of small (t0 spans)
-      return {
-        gridStyle: { gridTemplateColumns: '1fr 1fr' },
-        getTileStyle: function(i) {
-          if (i === 0) return { gridColumn: '1 / 3' };
-          return {};
-        },
-      };
-    }
-    if (mg === '4grid-lg') {
-      // Mobile: pairs of small → wide (last tile spans)
-      return {
-        gridStyle: { gridTemplateColumns: '1fr 1fr' },
-        getTileStyle: function(i) {
-          if (i === 4) return { gridColumn: '1 / 3' };
-          return {};
-        },
-      };
-    }
-    if (mg === 'lg-w2s') {
-      // Mobile #4: wide → 2 small → wide (t0, t3 span)
-      return {
-        gridStyle: { gridTemplateColumns: '1fr 1fr' },
-        getTileStyle: function(i) {
-          if (i === 0 || i === 3) return { gridColumn: '1 / 3' };
-          return {};
-        },
-      };
-    }
-    if (mg === 'w2s-lg') {
-      // Mobile #10: wide → 2 small → wide (t0, t3 span)
-      return {
-        gridStyle: { gridTemplateColumns: '1fr 1fr' },
-        getTileStyle: function(i) {
-          if (i === 0 || i === 3) return { gridColumn: '1 / 3' };
-          return {};
-        },
-      };
-    }
-    if (mg === '4grid-2s') {
-      // Mobile #12: 2 small → wide → 2 small → wide (t2, t5 span)
-      return {
-        gridStyle: { gridTemplateColumns: '1fr 1fr' },
-        getTileStyle: function(i) {
-          if (i === 2 || i === 5) return { gridColumn: '1 / 3' };
-          return {};
-        },
-      };
-    }
-    if (mg === 'w2s-4grid') {
-      // Mobile #11: wide → 2 small → 2 small → 2 small (t0 spans)
-      return {
-        gridStyle: { gridTemplateColumns: '1fr 1fr' },
-        getTileStyle: function(i) {
-          if (i === 0) return { gridColumn: '1 / 3' };
-          return {};
-        },
-      };
-    }
-    if (mg === '4grid-w2s') {
-      // Mobile (mirror of #7): 2 small → 2 small → wide → 2 small (t4 spans)
-      return {
-        gridStyle: { gridTemplateColumns: '1fr 1fr' },
-        getTileStyle: function(i) {
-          if (i === 4) return { gridColumn: '1 / 3' };
+          if (isTileSpanning(layout.id, i)) return { gridColumn: '1 / 3' };
           return {};
         },
       };
     }
 
-    // Default mobile: simple columns, no spanning
+    // 4x2grid mobile: all SS, pair side-by-side (4 rows of 2)
+    if (g === '4x2grid') {
+      return {
+        gridStyle: { gridTemplateColumns: '1fr 1fr' },
+        getTileStyle: function() { return {}; },
+      };
+    }
+
+    // VH w2s / 2sw mobile: W spans, SS pair
+    if (g === 'vh-w2s' || g === 'vh-2sw') {
+      return {
+        gridStyle: { gridTemplateColumns: '1fr 1fr' },
+        getTileStyle: function(i) {
+          if (isTileSpanning(layout.id, i)) return { gridColumn: '1 / 3' };
+          return {};
+        },
+      };
+    }
+
+    // Default mobile: single column
     return {
-      gridStyle: { gridTemplateColumns: mobileCols },
+      gridStyle: { gridTemplateColumns: layout.mobileCols || '1fr' },
       getTileStyle: function() { return {}; },
     };
   }
 
   // ─── DESKTOP ───
 
-  // lg-2stack: Large left (spans 2 rows) + 2 stacked right
+  // Full Width
+  if (!g) {
+    return {
+      gridStyle: { gridTemplateColumns: layout.cols || '1fr' },
+      getTileStyle: function() { return {}; },
+    };
+  }
+
+  // Standard: 2 Equal (2 Large Squares, each 2 cols × 2 rows)
+  if (g === 'std-2equal') {
+    return {
+      gridStyle: { gridTemplateColumns: '1fr 1fr', aspectRatio: '2' },
+      getTileStyle: function() { return {}; },
+    };
+  }
+
+  // VH: 2 Equal (2 Wides, each 2 cols × 1 row)
+  if (g === 'vh-2equal') {
+    return {
+      gridStyle: { gridTemplateColumns: '1fr 1fr', aspectRatio: '4.3' },
+      getTileStyle: function() { return {}; },
+    };
+  }
+
+  // VH: Wide + 2 Squares (W=2cols, SS=1col, SS=1col)
+  if (g === 'vh-w2s') {
+    return {
+      gridStyle: { gridTemplateColumns: '1fr 1fr 1fr 1fr', aspectRatio: '4' },
+      getTileStyle: function(i) {
+        if (i === 0) return { gridColumn: '1 / 3' };
+        if (i === 1) return { gridColumn: '3' };
+        if (i === 2) return { gridColumn: '4' };
+        return {};
+      },
+    };
+  }
+
+  // VH: 2 Squares + Wide (SS=1col, SS=1col, W=2cols)
+  if (g === 'vh-2sw') {
+    return {
+      gridStyle: { gridTemplateColumns: '1fr 1fr 1fr 1fr', aspectRatio: '4' },
+      getTileStyle: function(i) {
+        if (i === 0) return { gridColumn: '1' };
+        if (i === 1) return { gridColumn: '2' };
+        if (i === 2) return { gridColumn: '3 / 5' };
+        return {};
+      },
+    };
+  }
+
+  // lg-2stack: Large Square left (2cols × 2rows) + 2 Wides stacked right (2cols × 1row each)
   if (g === 'lg-2stack') {
     return {
-      gridStyle: { gridTemplateColumns: '2fr 1fr', gridTemplateRows: '1fr 1fr' },
+      gridStyle: { gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', aspectRatio: '2' },
       getTileStyle: function(i) {
         if (i === 0) return { gridRow: '1 / 3', gridColumn: '1' };
         if (i === 1) return { gridRow: '1', gridColumn: '2' };
@@ -125,10 +121,10 @@ function getGridConfig(layout, isMobile) {
     };
   }
 
-  // 2stack-lg: 2 stacked left + Large right (spans 2 rows)
+  // 2stack-lg: 2 Wides stacked left + Large Square right
   if (g === '2stack-lg') {
     return {
-      gridStyle: { gridTemplateColumns: '1fr 2fr', gridTemplateRows: '1fr 1fr' },
+      gridStyle: { gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', aspectRatio: '2' },
       getTileStyle: function(i) {
         if (i === 0) return { gridRow: '1', gridColumn: '1' };
         if (i === 1) return { gridRow: '2', gridColumn: '1' };
@@ -138,70 +134,38 @@ function getGridConfig(layout, isMobile) {
     };
   }
 
-  // lg-4grid: Large left (spans 2 rows) + 2x2 grid right
-  if (g === 'lg-4grid') {
-    return {
-      gridStyle: { gridTemplateColumns: '2fr 1fr 1fr', gridTemplateRows: '1fr 1fr' },
-      getTileStyle: function(i) {
-        if (i === 0) return { gridRow: '1 / 3', gridColumn: '1' };
-        if (i === 1) return { gridRow: '1', gridColumn: '2' };
-        if (i === 2) return { gridRow: '1', gridColumn: '3' };
-        if (i === 3) return { gridRow: '2', gridColumn: '2' };
-        if (i === 4) return { gridRow: '2', gridColumn: '3' };
-        return {};
-      },
-    };
-  }
-
-  // 4grid-lg: 2x2 grid left + Large right (spans 2 rows)
-  if (g === '4grid-lg') {
-    return {
-      gridStyle: { gridTemplateColumns: '1fr 1fr 2fr', gridTemplateRows: '1fr 1fr' },
-      getTileStyle: function(i) {
-        if (i === 0) return { gridRow: '1', gridColumn: '1' };
-        if (i === 1) return { gridRow: '1', gridColumn: '2' };
-        if (i === 2) return { gridRow: '2', gridColumn: '1' };
-        if (i === 3) return { gridRow: '2', gridColumn: '2' };
-        if (i === 4) return { gridRow: '1 / 3', gridColumn: '3' };
-        return {};
-      },
-    };
-  }
-
-  // lg-w2s: Large left (spans 2 rows) + Wide top-right + 2 Small bottom-right
-  // Tiles in mobile order: [large, small, small, wide]
+  // lg-w2s: LS (2×2) + W (2×1 top-right) + 2 SS (1×1 bottom-right)
   if (g === 'lg-w2s') {
     return {
-      gridStyle: { gridTemplateColumns: '2fr 1fr 1fr', gridTemplateRows: '1fr 1fr' },
+      gridStyle: { gridTemplateColumns: '1fr 1fr 1fr 1fr', gridTemplateRows: '1fr 1fr', aspectRatio: '2' },
       getTileStyle: function(i) {
-        if (i === 0) return { gridRow: '1 / 3', gridColumn: '1' };
-        if (i === 1) return { gridRow: '2', gridColumn: '2' };
+        if (i === 0) return { gridRow: '1 / 3', gridColumn: '1 / 3' };
+        if (i === 1) return { gridRow: '1', gridColumn: '3 / 5' };
         if (i === 2) return { gridRow: '2', gridColumn: '3' };
-        if (i === 3) return { gridRow: '1', gridColumn: '2 / 4' };
+        if (i === 3) return { gridRow: '2', gridColumn: '4' };
         return {};
       },
     };
   }
 
-  // w2s-lg: Wide top-left + 2 Small bottom-left + Large right (spans 2 rows)
-  // Tiles in mobile order: [wide, small, small, large]
+  // w2s-lg: W (2×1 top-left) + 2 SS (1×1 bottom-left) + LS (2×2 right)
   if (g === 'w2s-lg') {
     return {
-      gridStyle: { gridTemplateColumns: '1fr 1fr 2fr', gridTemplateRows: '1fr 1fr' },
+      gridStyle: { gridTemplateColumns: '1fr 1fr 1fr 1fr', gridTemplateRows: '1fr 1fr', aspectRatio: '2' },
       getTileStyle: function(i) {
         if (i === 0) return { gridRow: '1', gridColumn: '1 / 3' };
         if (i === 1) return { gridRow: '2', gridColumn: '1' };
         if (i === 2) return { gridRow: '2', gridColumn: '2' };
-        if (i === 3) return { gridRow: '1 / 3', gridColumn: '3' };
+        if (i === 3) return { gridRow: '1 / 3', gridColumn: '3 / 5' };
         return {};
       },
     };
   }
 
-  // 2x2wide: 2×2 grid of 4 wide tiles (full width)
+  // 2x2wide: 4 Wides in 2×2 (each 2cols × 1row)
   if (g === '2x2wide') {
     return {
-      gridStyle: { gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr' },
+      gridStyle: { gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', aspectRatio: '2.14' },
       getTileStyle: function(i) {
         if (i === 0) return { gridRow: '1', gridColumn: '1' };
         if (i === 1) return { gridRow: '1', gridColumn: '2' };
@@ -212,80 +176,72 @@ function getGridConfig(layout, isMobile) {
     };
   }
 
-  // 2s-4grid: 2 stacked left + 2×2 grid right (6 tiles)
-  // Tiles: [left-top, left-bottom, right-top-1, right-top-2, right-btm-1, right-btm-2]
-  if (g === '2s-4grid') {
+  // lg-4grid: LS (2×2) + 4 SS in 2×2 grid right
+  if (g === 'lg-4grid') {
     return {
-      gridStyle: { gridTemplateColumns: '1fr 1fr 1fr', gridTemplateRows: '1fr 1fr' },
+      gridStyle: { gridTemplateColumns: '1fr 1fr 1fr 1fr', gridTemplateRows: '1fr 1fr', aspectRatio: '2' },
       getTileStyle: function(i) {
-        if (i === 0) return { gridRow: '1', gridColumn: '1' };
-        if (i === 1) return { gridRow: '2', gridColumn: '1' };
-        if (i === 2) return { gridRow: '1', gridColumn: '2' };
-        if (i === 3) return { gridRow: '1', gridColumn: '3' };
-        if (i === 4) return { gridRow: '2', gridColumn: '2' };
-        if (i === 5) return { gridRow: '2', gridColumn: '3' };
+        if (i === 0) return { gridRow: '1 / 3', gridColumn: '1 / 3' };
+        if (i === 1) return { gridRow: '1', gridColumn: '3' };
+        if (i === 2) return { gridRow: '1', gridColumn: '4' };
+        if (i === 3) return { gridRow: '2', gridColumn: '3' };
+        if (i === 4) return { gridRow: '2', gridColumn: '4' };
         return {};
       },
     };
   }
 
-  // 4grid-2s: 2×2 grid left + 2 stacked right (6 tiles, mirror of 2s-4grid)
-  // Tiles: [left-top-1, left-top-2, right-top, left-btm-1, left-btm-2, right-btm]
-  if (g === '4grid-2s') {
+  // 4grid-lg: 4 SS in 2×2 grid left + LS (2×2) right
+  if (g === '4grid-lg') {
     return {
-      gridStyle: { gridTemplateColumns: '1fr 1fr 1fr', gridTemplateRows: '1fr 1fr' },
+      gridStyle: { gridTemplateColumns: '1fr 1fr 1fr 1fr', gridTemplateRows: '1fr 1fr', aspectRatio: '2' },
       getTileStyle: function(i) {
         if (i === 0) return { gridRow: '1', gridColumn: '1' };
         if (i === 1) return { gridRow: '1', gridColumn: '2' };
-        if (i === 2) return { gridRow: '1', gridColumn: '3' };
-        if (i === 3) return { gridRow: '2', gridColumn: '1' };
-        if (i === 4) return { gridRow: '2', gridColumn: '2' };
-        if (i === 5) return { gridRow: '2', gridColumn: '3' };
+        if (i === 2) return { gridRow: '2', gridColumn: '1' };
+        if (i === 3) return { gridRow: '2', gridColumn: '2' };
+        if (i === 4) return { gridRow: '1 / 3', gridColumn: '3 / 5' };
         return {};
       },
     };
   }
 
-  // w2s-4grid: (Wide + 2 Small) left + 2×2 grid right (7 tiles)
-  // Tiles: [wide-top-left, sm-btm-left-1, sm-btm-left-2, sm-top-right-1, sm-top-right-2, sm-btm-right-1, sm-btm-right-2]
-  if (g === 'w2s-4grid') {
+  // 2s-4grid: 2 Wides stacked left (2cols each) + 4 SS in 2×2 grid right
+  if (g === '2s-4grid') {
     return {
-      gridStyle: { gridTemplateColumns: '1fr 1fr 1fr 1fr', gridTemplateRows: '1fr 1fr' },
+      gridStyle: { gridTemplateColumns: '1fr 1fr 1fr 1fr', gridTemplateRows: '1fr 1fr', aspectRatio: '2' },
       getTileStyle: function(i) {
         if (i === 0) return { gridRow: '1', gridColumn: '1 / 3' };
-        if (i === 1) return { gridRow: '2', gridColumn: '1' };
-        if (i === 2) return { gridRow: '2', gridColumn: '2' };
-        if (i === 3) return { gridRow: '1', gridColumn: '3' };
-        if (i === 4) return { gridRow: '1', gridColumn: '4' };
-        if (i === 5) return { gridRow: '2', gridColumn: '3' };
-        if (i === 6) return { gridRow: '2', gridColumn: '4' };
+        if (i === 1) return { gridRow: '2', gridColumn: '1 / 3' };
+        if (i === 2) return { gridRow: '1', gridColumn: '3' };
+        if (i === 3) return { gridRow: '1', gridColumn: '4' };
+        if (i === 4) return { gridRow: '2', gridColumn: '3' };
+        if (i === 5) return { gridRow: '2', gridColumn: '4' };
         return {};
       },
     };
   }
 
-  // 4grid-w2s: 2×2 grid left + (Wide + 2 Small) right (7 tiles, mirror)
-  // Tiles: [sm-top-left-1, sm-top-left-2, sm-btm-left-1, sm-btm-left-2, wide-top-right, sm-btm-right-1, sm-btm-right-2]
-  if (g === '4grid-w2s') {
+  // 4grid-2s: 4 SS in 2×2 grid left + 2 Wides stacked right
+  if (g === '4grid-2s') {
     return {
-      gridStyle: { gridTemplateColumns: '1fr 1fr 1fr 1fr', gridTemplateRows: '1fr 1fr' },
+      gridStyle: { gridTemplateColumns: '1fr 1fr 1fr 1fr', gridTemplateRows: '1fr 1fr', aspectRatio: '2' },
       getTileStyle: function(i) {
         if (i === 0) return { gridRow: '1', gridColumn: '1' };
         if (i === 1) return { gridRow: '1', gridColumn: '2' };
         if (i === 2) return { gridRow: '2', gridColumn: '1' };
         if (i === 3) return { gridRow: '2', gridColumn: '2' };
         if (i === 4) return { gridRow: '1', gridColumn: '3 / 5' };
-        if (i === 5) return { gridRow: '2', gridColumn: '3' };
-        if (i === 6) return { gridRow: '2', gridColumn: '4' };
+        if (i === 5) return { gridRow: '2', gridColumn: '3 / 5' };
         return {};
       },
     };
   }
 
-  // 4x2grid: 4×2 grid of 8 small tiles (full width)
+  // 4x2grid: 8 SS in 4×2 grid
   if (g === '4x2grid') {
     return {
-      gridStyle: { gridTemplateColumns: '1fr 1fr 1fr 1fr', gridTemplateRows: '1fr 1fr' },
+      gridStyle: { gridTemplateColumns: '1fr 1fr 1fr 1fr', gridTemplateRows: '1fr 1fr', aspectRatio: '2' },
       getTileStyle: function(i) {
         var row = Math.floor(i / 4) + 1;
         var col = (i % 4) + 1;
@@ -296,37 +252,39 @@ function getGridConfig(layout, isMobile) {
 
   // Default: simple column layout
   return {
-    gridStyle: { gridTemplateColumns: layout.cols },
+    gridStyle: { gridTemplateColumns: layout.cols || '1fr' },
     getTileStyle: function() { return {}; },
   };
 }
 
-// Mobile layout display names — describe what the mobile rendering looks like
+// Mobile layout display names
 var MOBILE_LAYOUT_NAMES = {
   '1': 'Full Width',
-  '1-1': 'Stacked (1 col)',
-  '1-1-1': 'Stacked (1 col)',
-  '1-1-1-1': '2-Column Grid',
-  '2-1': '2-Column',
-  '1-2': '2-Column',
-  '2-1-1': 'Stacked (1 col)',
-  '1-1-2': 'Stacked (1 col)',
-  'lg-2stack': 'Wide + 2 Small',
-  '2stack-lg': '2 Small + Wide',
-  'lg-4grid': 'Wide + 2x2 Grid',
-  '4grid-lg': '2x2 Grid + Wide',
-  'lg-w2s': 'Wide + 2 Small + Wide',
-  'w2s-lg': 'Wide + 2 Small + Wide',
-  '2x2wide': '2-Column Grid',
-  '2s-4grid': '2-Column Grid',
-  '4grid-2s': '2 Small + Wide (x2)',
-  'w2s-4grid': 'Wide + 3x2 Grid',
-  '4grid-w2s': '2x2 + Wide + 2 Small',
-  '4x2grid': '2-Column Grid (4 rows)',
+  'std-2equal': 'Stacked (2 Squares)',
+  'lg-2stack': 'LS + W + W stacked',
+  '2stack-lg': 'W + W + LS stacked',
+  'lg-w2s': 'LS + W + SS pair',
+  'w2s-lg': 'W + SS pair + LS',
+  '2x2wide': '4 Wides stacked',
+  'lg-4grid': 'LS + SS pairs',
+  '4grid-lg': 'SS pairs + LS',
+  '2s-4grid': 'W + W + SS pairs',
+  '4grid-2s': 'SS pairs + W + W',
+  '4x2grid': 'SS pairs (4 rows)',
+  'vh-2equal': 'Stacked (2 Wides)',
+  'vh-w2s': 'W + SS pair',
+  'vh-2sw': 'SS pair + W',
 };
 
+// Group layouts for the dropdown
+var LAYOUT_GROUPS = [
+  { label: 'Full Width', type: 'fullwidth' },
+  { label: 'Standard (2 Zeilen)', type: 'standard' },
+  { label: 'Variable H\u00F6he (1 Zeile)', type: 'vh' },
+];
+
 export default function SectionView({ section, idx, totalSections, sel, onSelect, onDelete, onMoveUp, onMoveDown, onChangeLayout, viewMode, products, uiLang }) {
-  var layout = LAYOUTS.find(function(l) { return l.id === section.layoutId; }) || LAYOUTS[0];
+  var layout = findLayout(section.layoutId);
   var isMobile = viewMode === 'mobile';
   var config = getGridConfig(layout, isMobile);
 
@@ -337,9 +295,17 @@ export default function SectionView({ section, idx, totalSections, sel, onSelect
         <select className="section-layout-select" value={section.layoutId}
           onChange={function(e) { onChangeLayout(e.target.value); }}
           onClick={function(e) { e.stopPropagation(); }}>
-          {LAYOUTS.map(function(l) {
-            var displayName = isMobile ? (MOBILE_LAYOUT_NAMES[l.id] || l.name) : l.name;
-            return <option key={l.id} value={l.id}>{displayName} ({l.cells})</option>;
+          {LAYOUT_GROUPS.map(function(group) {
+            var groupLayouts = LAYOUTS.filter(function(l) { return l.type === group.type; });
+            if (groupLayouts.length === 0) return null;
+            return (
+              <optgroup key={group.type} label={group.label}>
+                {groupLayouts.map(function(l) {
+                  var displayName = isMobile ? (MOBILE_LAYOUT_NAMES[l.id] || l.name) : l.name;
+                  return <option key={l.id} value={l.id}>{displayName} ({l.cells})</option>;
+                })}
+              </optgroup>
+            );
           })}
         </select>
         <div className="section-actions">

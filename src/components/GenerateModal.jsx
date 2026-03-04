@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { COMPLEXITY_LEVELS, STORE_TEMPLATES, LAYOUTS } from '../constants';
+import { COMPLEXITY_LEVELS, STORE_TEMPLATES, LAYOUTS, findLayout } from '../constants';
 import { discoverBrandProducts, scrapeWebsite } from '../api';
 
 function parseAsinFile(text) {
@@ -326,7 +326,7 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
               video: 'VID', text: 'TXT', image_text: 'I+T',
             };
             function renderSectionPreview(sec, i) {
-              var layout = LAYOUTS.find(function(l) { return l.id === sec.layout; });
+              var layout = findLayout(sec.layout);
               var tileTypes = sec.tileTypes || [];
               var cols = layout ? layout.cols : '1fr';
               var isComplexGrid = layout && layout.grid;

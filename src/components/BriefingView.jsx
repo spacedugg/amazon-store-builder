@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES } from '../constants';
+import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, findLayout } from '../constants';
 import { loadStoreByShareToken } from '../storage';
 import { generateBriefingDocx, downloadBlob } from '../exportBriefing';
 import SectionView from './SectionView';
@@ -8,12 +8,18 @@ var noop = function() {};
 
 // ─── INSPIRATION LIBRARY ───
 var INSPIRATION_LINKS = [
-  { brand: 'Anker', url: 'https://www.amazon.de/stores/Anker/page/17CAD5AC-A4B2-4DC2-B567-1E4E0C8B6B3A', category: 'Electronics' },
-  { brand: 'LEVOIT', url: 'https://www.amazon.de/stores/LEVOIT/page/C7C58B0F-E7D7-40D5-8E43-A18C6C5EC1F6', category: 'Home & Kitchen' },
-  { brand: 'Samsung', url: 'https://www.amazon.de/stores/Samsung/page/44F51E3C-4D49-4230-9E96-B5E2163A9E78', category: 'Electronics' },
-  { brand: 'Bosch Home', url: 'https://www.amazon.de/stores/BoschProfessional/page/3E0B7B1E-6BBB-4FA1-B41D-9E18C2C0A1B3', category: 'Home & Kitchen' },
-  { brand: 'L\'Oreal Paris', url: 'https://www.amazon.de/stores/L%27Or%C3%A9alParis/page/30B1B25C-B632-47FE-B1A7-3AE8E3C49327', category: 'Beauty' },
-  { brand: 'Pampers', url: 'https://www.amazon.de/stores/Pampers/page/1E7F9B1A-67C1-4E49-B8C8-A4C2E3D5F6A7', category: 'Baby' },
+  { brand: 'Hansegr\u00FCn', url: 'https://www.amazon.de/stores/page/BC9A9642-4612-460E-81B4-985E9AF6A7D2', category: 'Natural' },
+  { brand: 'Desktronic', url: 'https://www.amazon.de/stores/Desktronic/page/1A862649-6CEA-4E30-855F-0C27A1F99A6C', category: 'Office' },
+  { brand: 'Nespresso', url: 'https://www.amazon.de/stores/page/2429E3F3-8BFA-466A-9185-35FB47867B06', category: 'Premium' },
+  { brand: 'Snocks', url: 'https://www.amazon.de/stores/SNOCKS/page/C0392661-40E4-498F-992D-2FFEB9086ABB', category: 'Fashion' },
+  { brand: 'Bears with Benefits', url: 'https://www.amazon.de/stores/BearswithBenefits/page/AFC77FAF-F173-4A4E-A7DF-8779F7E16E97', category: 'Health' },
+  { brand: 'K\u00E4rcher', url: 'https://www.amazon.de/stores/K%C3%A4rcher/page/EFE3653A-1163-432C-A85B-0486A31C0E3D', category: 'Tools' },
+  { brand: 'Holy', url: 'https://www.amazon.de/stores/HOLYEnergy/page/7913E121-CB43-4349-A8D2-9F0843B226E4', category: 'Food & Drinks' },
+  { brand: 'Nucao', url: 'https://www.amazon.de/stores/thenucompany/page/A096FF51-79D5-440D-8789-6255E9DFE87D', category: 'Food' },
+  { brand: 'ESN', url: 'https://www.amazon.de/stores/ESN/page/F5F8CAD5-7990-44CF-9F5B-61DFFF5E8581', category: 'Sports Nutrition' },
+  { brand: 'Blackroll', url: 'https://www.amazon.de/stores/page/870649DE-4F7E-421F-B141-C4C47864D539', category: 'Fitness' },
+  { brand: 'AG1', url: 'https://www.amazon.de/stores/AG1/page/E676C84A-8A86-4F92-B978-3343F367DD0C', category: 'Health' },
+  { brand: 'North Face', url: 'https://www.amazon.de/stores/THENORTHFACE/page/91172724-C342-482B-A300-564D9EA5E09F', category: 'Outdoor' },
 ];
 
 // Section color palette for visual distinction
@@ -109,7 +115,7 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor }) {
 
 // ─── SECTION BRIEFING (visual preview only — no inline details) ───
 function SectionBriefing({ section, sectionIndex, viewMode, products, sectionColor }) {
-  var layout = LAYOUTS.find(function(l) { return l.id === section.layoutId; }) || LAYOUTS[0];
+  var layout = findLayout(section.layoutId);
 
   return (
     <div className="briefing-section" style={{ borderLeft: '3px solid ' + sectionColor.border, background: sectionColor.bg }}>
