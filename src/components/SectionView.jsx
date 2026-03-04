@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from 'react';
 import { LAYOUTS, LAYOUT_TILE_DIMS, findLayout } from '../constants';
 import { t } from '../i18n';
 import TileView from './TileView';
@@ -257,31 +258,120 @@ function getGridConfig(layout, isMobile) {
   };
 }
 
-// Mobile layout display names
-var MOBILE_LAYOUT_NAMES = {
-  '1': 'Full Width',
-  'std-2equal': 'Stacked (2 Squares)',
-  'lg-2stack': 'LS + W + W stacked',
-  '2stack-lg': 'W + W + LS stacked',
-  'lg-w2s': 'LS + W + SS pair',
-  'w2s-lg': 'W + SS pair + LS',
-  '2x2wide': '4 Wides stacked',
-  'lg-4grid': 'LS + SS pairs',
-  '4grid-lg': 'SS pairs + LS',
-  '2s-4grid': 'W + W + SS pairs',
-  '4grid-2s': 'SS pairs + W + W',
-  '4x2grid': 'SS pairs (4 rows)',
-  'vh-2equal': 'Stacked (2 Wides)',
-  'vh-w2s': 'W + SS pair',
-  'vh-2sw': 'SS pair + W',
-};
+// ─── Mini layout preview thumbnail ───
+// Renders a tiny grid preview of a layout for the dropdown picker
+var TILE_COLORS = ['#6366f1', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#06b6d4', '#f97316', '#ef4444'];
+
+function LayoutThumb({ layout, isMobile, size }) {
+  var w = size || 48;
+  var config = getGridConfig(layout, isMobile);
+  var gs = config.gridStyle;
+  // Determine aspect ratio for thumbnail height
+  var ar = parseFloat(gs.aspectRatio || '0');
+  var h;
+  if (layout.type === 'fullwidth') {
+    h = Math.round(w * 0.25);
+  } else if (ar > 0) {
+    h = Math.round(w / ar);
+  } else {
+    h = Math.round(w * 0.5);
+  }
+
+  var tiles = [];
+  for (var i = 0; i < layout.cells; i++) {
+    var ts = config.getTileStyle(i);
+    tiles.push(
+      <div key={i} style={Object.assign({
+        background: TILE_COLORS[i % TILE_COLORS.length],
+        borderRadius: 2,
+        minHeight: 0,
+        minWidth: 0,
+        opacity: 0.85,
+      }, ts)} />
+    );
+  }
+
+  // Build grid container style — only use grid properties, not aspectRatio
+  var containerStyle = {
+    display: 'grid',
+    gap: 1,
+    width: w,
+    height: h,
+  };
+  if (gs.gridTemplateColumns) containerStyle.gridTemplateColumns = gs.gridTemplateColumns;
+  if (gs.gridTemplateRows) containerStyle.gridTemplateRows = gs.gridTemplateRows;
+
+  return <div style={containerStyle}>{tiles}</div>;
+}
 
 // Group layouts for the dropdown
 var LAYOUT_GROUPS = [
   { label: 'Full Width', type: 'fullwidth' },
-  { label: 'Standard (2 Zeilen)', type: 'standard' },
-  { label: 'Variable H\u00F6he (1 Zeile)', type: 'vh' },
+  { label: 'Standard', type: 'standard' },
+  { label: 'Variable Height', type: 'vh' },
 ];
+
+// ─── Custom layout picker dropdown ───
+function LayoutPicker({ value, onChange, isMobile }) {
+  var ref = useRef(null);
+  var open = useState(false);
+  var isOpen = open[0];
+  var setOpen = open[1];
+
+  // Close on outside click
+  useEffect(function() {
+    if (!isOpen) return;
+    function handleClick(e) {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    }
+    document.addEventListener('mousedown', handleClick);
+    return function() { document.removeEventListener('mousedown', handleClick); };
+  }, [isOpen]);
+
+  var current = findLayout(value) || LAYOUTS[0];
+
+  return (
+    <div ref={ref} className="layout-picker" onClick={function(e) { e.stopPropagation(); }}>
+      <button
+        className="layout-picker-trigger"
+        onClick={function() { setOpen(!isOpen); }}
+        title={current.name}
+      >
+        <LayoutThumb layout={current} isMobile={isMobile} size={44} />
+        <span className="layout-picker-arrow">{isOpen ? '\u25B2' : '\u25BC'}</span>
+      </button>
+      {isOpen && (
+        <div className="layout-picker-dropdown">
+          {LAYOUT_GROUPS.map(function(group) {
+            var groupLayouts = LAYOUTS.filter(function(l) { return l.type === group.type; });
+            if (groupLayouts.length === 0) return null;
+            return (
+              <div key={group.type} className="layout-picker-group">
+                <div className="layout-picker-group-label">{group.label}</div>
+                <div className="layout-picker-grid">
+                  {groupLayouts.map(function(l) {
+                    var isSelected = l.id === value;
+                    return (
+                      <button
+                        key={l.id}
+                        className={'layout-picker-item' + (isSelected ? ' selected' : '')}
+                        onClick={function() { onChange(l.id); setOpen(false); }}
+                        title={l.name + ' (' + l.cells + ' tiles)'}
+                      >
+                        <LayoutThumb layout={l} isMobile={isMobile} size={56} />
+                        <span className="layout-picker-item-label">{l.name}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function SectionView({ section, idx, totalSections, sel, onSelect, onDelete, onMoveUp, onMoveDown, onChangeLayout, viewMode, products, uiLang }) {
   var layout = findLayout(section.layoutId);
@@ -292,22 +382,7 @@ export default function SectionView({ section, idx, totalSections, sel, onSelect
     <div className="section-container">
       <div className="section-header">
         <span className="section-label">{t('canvas.section', uiLang)} {idx + 1}</span>
-        <select className="section-layout-select" value={section.layoutId}
-          onChange={function(e) { onChangeLayout(e.target.value); }}
-          onClick={function(e) { e.stopPropagation(); }}>
-          {LAYOUT_GROUPS.map(function(group) {
-            var groupLayouts = LAYOUTS.filter(function(l) { return l.type === group.type; });
-            if (groupLayouts.length === 0) return null;
-            return (
-              <optgroup key={group.type} label={group.label}>
-                {groupLayouts.map(function(l) {
-                  var displayName = isMobile ? (MOBILE_LAYOUT_NAMES[l.id] || l.name) : l.name;
-                  return <option key={l.id} value={l.id}>{displayName} ({l.cells})</option>;
-                })}
-              </optgroup>
-            );
-          })}
-        </select>
+        <LayoutPicker value={section.layoutId} onChange={onChangeLayout} isMobile={isMobile} />
         <div className="section-actions">
           {onMoveUp && <button className="btn-icon-sm" onClick={onMoveUp} title={t('section.moveUp', uiLang)}>&uarr;</button>}
           {onMoveDown && <button className="btn-icon-sm" onClick={onMoveDown} title={t('section.moveDown', uiLang)}>&darr;</button>}
