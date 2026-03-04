@@ -92,10 +92,10 @@ export default function App() {
         templateData = STORE_TEMPLATES.find(function(t) { return t.id === params.template; }) || null;
       }
 
-      // Step 2-4: AI generation (with complexity, category, template)
+      // Step 2-4: AI generation (with complexity, category, template, websiteData)
       var storeData = await generateStore(
         params.asins, products, params.brand, params.marketplace, lang,
-        params.instructions, log, params.complexity, templateData
+        params.instructions, log, params.complexity, templateData, params.websiteData
       );
 
       // Store meta

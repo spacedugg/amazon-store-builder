@@ -5,7 +5,8 @@
   "functions": {
     "api/amazon-search.js": { "maxDuration": 300 },
     "api/amazon-brand-discover.js": { "maxDuration": 60 },
-    "api/stores.js": { "maxDuration": 30 }
+    "api/stores.js": { "maxDuration": 30 },
+    "api/scrape-website.js": { "maxDuration": 30 }
   },
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },

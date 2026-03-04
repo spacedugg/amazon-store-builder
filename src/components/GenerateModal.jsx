@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { COMPLEXITY_LEVELS, STORE_TEMPLATES, LAYOUTS } from '../constants';
-import { discoverBrandProducts } from '../api';
+import { discoverBrandProducts, scrapeWebsite } from '../api';
 
 function parseAsinFile(text) {
   var asins = [];
@@ -34,6 +34,10 @@ export default function GenerateModal({ onClose, onGenerate }) {
   var [brandDiscovering, setBrandDiscovering] = useState(false);
   var [brandDiscoverError, setBrandDiscoverError] = useState('');
   var [brandDiscoverProgress, setBrandDiscoverProgress] = useState('');
+  var [websiteUrl, setWebsiteUrl] = useState('');
+  var [websiteData, setWebsiteData] = useState(null);
+  var [websiteScraping, setWebsiteScraping] = useState(false);
+  var [websiteError, setWebsiteError] = useState('');
   var fileRef = useRef(null);
 
   var onFileChange = function(e) {
@@ -95,6 +99,24 @@ export default function GenerateModal({ onClose, onGenerate }) {
     } finally {
       setBrandDiscovering(false);
       setBrandDiscoverProgress('');
+    }
+  };
+
+  var onWebsiteScrape = async function() {
+    if (!websiteUrl.trim()) return;
+    setWebsiteScraping(true);
+    setWebsiteError('');
+    try {
+      var data = await scrapeWebsite(websiteUrl.trim());
+      setWebsiteData(data);
+      // Auto-fill brand name from website if empty
+      if (!brand.trim() && data.brandName) {
+        setBrand(data.brandName);
+      }
+    } catch (err) {
+      setWebsiteError(err.message);
+    } finally {
+      setWebsiteScraping(false);
     }
   };
 
@@ -191,8 +213,40 @@ export default function GenerateModal({ onClose, onGenerate }) {
         <label className="label" style={{ marginTop: 10 }}>2. Brand Name *</label>
         <input value={brand} onChange={function(e) { setBrand(e.target.value); }} className="input" placeholder="e.g. Futum, Kaercher, Nespresso" />
 
-        {/* 3. Marketplace */}
-        <label className="label">3. Marketplace</label>
+        {/* 3. Brand Website (optional) */}
+        <label className="label" style={{ marginTop: 10 }}>3. Brand Website (optional)</label>
+        <div style={{ display: 'flex', gap: 6 }}>
+          <input
+            className="input"
+            style={{ flex: 1 }}
+            value={websiteUrl}
+            onChange={function(e) { setWebsiteUrl(e.target.value); setWebsiteError(''); setWebsiteData(null); }}
+            placeholder="https://www.brand-shop.de"
+          />
+          <button
+            className={'btn' + (websiteData ? ' btn-green' : ' btn-primary')}
+            style={{ padding: '8px 14px', whiteSpace: 'nowrap' }}
+            disabled={!websiteUrl.trim() || websiteScraping}
+            onClick={onWebsiteScrape}
+          >
+            {websiteScraping ? 'Scanning...' : websiteData ? 'Scanned' : 'Scan'}
+          </button>
+        </div>
+        <div className="hint">Enter the brand's own online store / website. AI will extract brand info, USPs, and style to enrich the store design.</div>
+        {websiteError && <div className="price-error" style={{ marginTop: 4 }}>{websiteError}</div>}
+        {websiteData && (
+          <div style={{ marginTop: 4, padding: '6px 8px', background: '#f0fdf4', borderRadius: 4, fontSize: 11, color: '#166534', border: '1px solid #bbf7d0' }}>
+            {websiteData.title && <div><strong>{websiteData.title}</strong></div>}
+            {websiteData.description && <div style={{ marginTop: 2, opacity: 0.8 }}>{websiteData.description.slice(0, 150)}{websiteData.description.length > 150 ? '...' : ''}</div>}
+            {websiteData.certifications && websiteData.certifications.length > 0 && (
+              <div style={{ marginTop: 2, opacity: 0.8 }}>Certifications/USPs found: {websiteData.certifications.length}</div>
+            )}
+            {websiteData.aboutText && <div style={{ marginTop: 2, opacity: 0.8 }}>Brand story content found</div>}
+          </div>
+        )}
+
+        {/* 4. Marketplace */}
+        <label className="label" style={{ marginTop: 10 }}>4. Marketplace</label>
         <select value={marketplace} onChange={function(e) { setMarketplace(e.target.value); }} className="input">
           <option value="de">Amazon.de (Germany)</option>
           <option value="com">Amazon.com (USA)</option>
@@ -200,8 +254,8 @@ export default function GenerateModal({ onClose, onGenerate }) {
           <option value="fr">Amazon.fr (France)</option>
         </select>
 
-        {/* 4. Complexity Slider */}
-        <label className="label" style={{ marginTop: 10 }}>4. Store Complexity</label>
+        {/* 5. Complexity Slider */}
+        <label className="label" style={{ marginTop: 10 }}>5. Store Complexity</label>
         <div className="complexity-slider">
           <div className="complexity-track">
             {[1, 2, 3].map(function(level) {
@@ -224,8 +278,8 @@ export default function GenerateModal({ onClose, onGenerate }) {
           </div>
         </div>
 
-        {/* 5. Store Template */}
-        <label className="label" style={{ marginTop: 10 }}>5. Layout Template (optional)</label>
+        {/* 6. Store Template */}
+        <label className="label" style={{ marginTop: 10 }}>6. Layout Template (optional)</label>
         <div className="template-selector">
           <div className="template-grid">
             <button
@@ -341,8 +395,8 @@ export default function GenerateModal({ onClose, onGenerate }) {
           })()}
         </div>
 
-        {/* 6. Instructions */}
-        <label className="label" style={{ marginTop: 10 }}>6. Instructions (optional)</label>
+        {/* 7. Instructions */}
+        <label className="label" style={{ marginTop: 10 }}>7. Instructions (optional)</label>
         <div className="instructions-area">
           <textarea
             value={instructions}
@@ -399,6 +453,7 @@ export default function GenerateModal({ onClose, onGenerate }) {
                 asins: asins,
                 complexity: complexity,
                 template: selectedTemplate,
+                websiteData: websiteData || null,
               });
             }}
           >

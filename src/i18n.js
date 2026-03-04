@@ -445,6 +445,36 @@ var translations = {
     en: 'No products found at this URL', de: 'Keine Produkte unter dieser URL gefunden', uk: 'Продукти не знайдено за цим URL', ru: 'Продукты не найдены по этому URL',
     id: 'Tidak ada produk ditemukan di URL ini', ky: 'Бул URL\'де продукт табылган жок', bg: 'Не са намерени продукти на този URL', es: 'No se encontraron productos en esta URL',
   },
+  'gen.websiteLabel': {
+    en: 'Brand Website (optional)', de: 'Marken-Website (optional)', uk: 'Вебсайт бренду (необов.)', ru: 'Сайт бренда (необяз.)',
+    id: 'Situs Web Merek (opsional)', ky: 'Бренд веб-сайты (милдеттүү эмес)', bg: 'Уебсайт на бранда (незадължително)', es: 'Sitio web de la marca (opcional)',
+  },
+  'gen.websitePlaceholder': {
+    en: 'https://www.brand-shop.de', de: 'https://www.marken-shop.de', uk: 'https://www.brand-shop.de', ru: 'https://www.brand-shop.de',
+    id: 'https://www.brand-shop.de', ky: 'https://www.brand-shop.de', bg: 'https://www.brand-shop.de', es: 'https://www.tienda-marca.es',
+  },
+  'gen.websiteHint': {
+    en: 'Enter the brand\'s own online store / website. AI will extract brand info, USPs, and style to enrich the store design.',
+    de: 'Gib die eigene Website / den Onlineshop der Marke ein. KI extrahiert Markeninfos, USPs und Stil für ein besseres Store-Design.',
+    uk: 'Введіть власний сайт / інтернет-магазин бренду. ШІ витягне інформацію про бренд, USP та стиль для покращення дизайну.',
+    ru: 'Введите собственный сайт / интернет-магазин бренда. ИИ извлечет информацию о бренде, USP и стиль для улучшения дизайна.',
+    id: 'Masukkan situs web / toko online merek. AI akan mengekstrak info merek, USP, dan gaya untuk memperkaya desain toko.',
+    ky: 'Бренддин өзүнүн веб-сайтын / онлайн дүкөнүн киргизиңиз. AI бренд маалыматын, USP жана стилди чыгарып алат.',
+    bg: 'Въведете собствения уебсайт / онлайн магазин на бранда. AI ще извлече информация за бранда, USP и стил за обогатяване на дизайна.',
+    es: 'Ingresa el sitio web / tienda online propia de la marca. La IA extraerá información de marca, USPs y estilo para enriquecer el diseño.',
+  },
+  'gen.websiteScan': {
+    en: 'Scan', de: 'Scannen', uk: 'Сканувати', ru: 'Сканировать',
+    id: 'Pindai', ky: 'Сканерлөө', bg: 'Сканирай', es: 'Escanear',
+  },
+  'gen.websiteScanning': {
+    en: 'Scanning...', de: 'Scannen...', uk: 'Сканування...', ru: 'Сканирование...',
+    id: 'Memindai...', ky: 'Сканерлөөдө...', bg: 'Сканиране...', es: 'Escaneando...',
+  },
+  'gen.websiteScanned': {
+    en: 'Scanned', de: 'Gescannt', uk: 'Сканировано', ru: 'Сканировано',
+    id: 'Dipindai', ky: 'Сканерленди', bg: 'Сканирано', es: 'Escaneado',
+  },
 
   // ─── AI CHAT ───
   'chat.placeholder': {
