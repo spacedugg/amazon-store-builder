@@ -28,7 +28,7 @@ function fetchWithTimeout(url, options, timeoutMs) {
 }
 
 // ─── CLAUDE API CALL (with retry + fallback + timeout) ───
-var CLAUDE_TIMEOUT_MS = 90000; // 90s per API call
+var CLAUDE_TIMEOUT_MS = 180000; // 3 minutes per API call — complex stores need more time
 
 async function callClaude(systemPrompt, userPrompt, maxTokens) {
   if (!ANTHROPIC_KEY) throw new Error('VITE_ANTHROPIC_API_KEY not configured');
@@ -89,6 +89,49 @@ function extractJSON(text) {
   var e = text.lastIndexOf('}');
   if (s < 0 || e < 0) throw new Error('No JSON found in AI response');
   return JSON.parse(text.slice(s, e + 1));
+}
+
+// ─── FORMAT WEBSITE DATA FOR AI CONTEXT ───
+function formatWebsiteContext(websiteData) {
+  if (!websiteData) return '';
+  var parts = [];
+  parts.push('=== BRAND WEBSITE INTELLIGENCE (scraped from ' + (websiteData.url || 'brand website') + ') ===');
+  if (websiteData.title) parts.push('Website title: ' + websiteData.title);
+  if (websiteData.description) parts.push('Website description: ' + websiteData.description);
+  if (websiteData.tagline) parts.push('Brand tagline: ' + websiteData.tagline);
+  if (websiteData.aboutText) {
+    parts.push('Brand story / About: ' + websiteData.aboutText.slice(0, 800));
+  }
+  if (websiteData.certifications && websiteData.certifications.length > 0) {
+    parts.push('Certifications & trust signals: ' + websiteData.certifications.slice(0, 8).join(' | '));
+  }
+  if (websiteData.features && websiteData.features.length > 0) {
+    parts.push('Product features / USPs: ' + websiteData.features.slice(0, 10).join(' | '));
+  }
+  if (websiteData.productInfo && websiteData.productInfo.length > 0) {
+    parts.push('Product info from website: ' + websiteData.productInfo.slice(0, 3).join(' | '));
+  }
+  if (websiteData.socialProof && websiteData.socialProof.length > 0) {
+    parts.push('Customer testimonials / social proof: ' + websiteData.socialProof.slice(0, 3).join(' | '));
+  }
+  if (websiteData.rawTextSections && websiteData.rawTextSections.length > 0) {
+    var keyContent = websiteData.rawTextSections
+      .filter(function(s) { return s.source === 'heading' || s.text.length > 50; })
+      .slice(0, 8)
+      .map(function(s) { return s.text; })
+      .join(' | ');
+    if (keyContent) parts.push('Key website content: ' + keyContent);
+  }
+  parts.push('=== END BRAND WEBSITE INTELLIGENCE ===');
+  parts.push('');
+  parts.push('USE this brand intelligence to:');
+  parts.push('- Adapt brand tone, messaging, and visual style to match the brand\'s actual identity');
+  parts.push('- Include real brand USPs, certifications, and story elements in the store');
+  parts.push('- Use actual taglines, slogans, or key phrases from the brand website');
+  parts.push('- Reference real product features and benefits mentioned on the website');
+  parts.push('- Integrate trust signals (certifications, awards, quality seals) into appropriate sections');
+  parts.push('');
+  return parts.join('\n');
 }
 
 // ─── PARSE MENU STRUCTURE FROM USER INSTRUCTIONS ───
@@ -222,7 +265,7 @@ function enforceMenuCategories(userCategories, aiCategories, allAsins) {
 }
 
 // ─── STEP 1: ANALYSIS & PAGE STRUCTURE ───
-export async function aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions) {
+export async function aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions, websiteData) {
   var productList = products.map(function(p) {
     return {
       asin: p.asin,
@@ -291,6 +334,7 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
       'Additional context from user: ' + additionalNotes,
       '',
     ].join('\n') : '',
+    formatWebsiteContext(websiteData),
     'Products (' + products.length + '):',
     JSON.stringify(productList, null, 1),
     '',
@@ -373,7 +417,7 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
 }
 
 // ─── STEP 2: LAYOUT PER PAGE ───
-export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, isHomepage, allCategories, analysis, userInstructions, complexityLevel, category, template) {
+export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, isHomepage, allCategories, analysis, userInstructions, complexityLevel, category, template, websiteData) {
   var productList = pageProducts.map(function(p) {
     return { asin: p.asin, name: p.name, price: p.price, rating: p.rating, reviews: p.reviews, description: (p.description || '').slice(0, 100) };
   });
@@ -425,6 +469,7 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     analysis.keyFeatures ? 'KEY FEATURES: ' + analysis.keyFeatures.join(', ') : '',
     analysis.hasVariants ? 'VARIANTS: ' + (analysis.variantTypes || []).join(', ') + ':use variant showcase layouts (lg-4grid)' : '',
     '',
+    formatWebsiteContext(websiteData),
     'DIMENSION RULES:',
     '- Hero: 3000 x 600-800. Category tiles: 3000 x 1000-1200. Lifestyle: 3000 x 1200-1500.',
     '- All tiles in a row have the SAME height.',
@@ -894,7 +939,7 @@ function ensureMinimumSections(sections, pageName, brand, lang, analysis, templa
 }
 
 // ─── FULL GENERATION WORKFLOW ───
-export async function generateStore(asins, products, brand, marketplace, lang, userInstructions, onLog, complexityLevel, template) {
+export async function generateStore(asins, products, brand, marketplace, lang, userInstructions, onLog, complexityLevel, template, websiteData) {
   var log = onLog || function() {};
   var cLevel = complexityLevel || 2;
   var cConfig = COMPLEXITY_LEVELS[cLevel] || COMPLEXITY_LEVELS[2];
@@ -904,6 +949,11 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   log('   Complexity: Level ' + cLevel + ' (' + cConfig.name + ')');
   if (template) {
     log('   Template: ' + template.name + ' (inspired by ' + template.inspiration + ')');
+  }
+  if (websiteData) {
+    log('   Brand website: ' + (websiteData.title || websiteData.url || 'scanned'));
+    if (websiteData.aboutText) log('   Brand story content found');
+    if (websiteData.certifications && websiteData.certifications.length > 0) log('   Certifications/USPs: ' + websiteData.certifications.length + ' found');
   }
   // Check if user provided a menu structure BEFORE calling AI
   var parsedMenu = parseMenuStructure(userInstructions);
@@ -920,7 +970,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
 
   var analysis;
   try {
-    analysis = await aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions);
+    analysis = await aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions, websiteData);
     // Validate that we got actual categories
     if (!analysis.categories || analysis.categories.length === 0) {
       log('AI returned no categories, using fallback grouping...');
@@ -993,7 +1043,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   try {
     var homeResult = await aiGeneratePageLayout(
       'Homepage', homepageProducts, brand, lang, true,
-      analysis.categories || [], analysis, userInstructions, cLevel, category, template
+      analysis.categories || [], analysis, userInstructions, cLevel, category, template, websiteData
     );
     var homeSections = ensureMinimumSections(homeResult.sections || [], 'Homepage', brand, lang, analysis, template, true);
     pages.push({ id: 'homepage', name: 'Homepage', sections: homeSections });
@@ -1040,7 +1090,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     try {
       var catResult = await aiGeneratePageLayout(
         cat.name, allCatProducts, brand, lang, false,
-        categories, analysis, userInstructions, cLevel, category, template
+        categories, analysis, userInstructions, cLevel, category, template, websiteData
       );
       var catSections = ensureMinimumSections(catResult.sections || [], cat.name, brand, lang, analysis, template, false);
       pages.push({ id: parentPageId, name: cat.name, sections: catSections });
@@ -1062,7 +1112,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
         try {
           var subResult = await aiGeneratePageLayout(
             sub.name, subProducts, brand, lang, false,
-            categories, analysis, userInstructions, cLevel, category, template
+            categories, analysis, userInstructions, cLevel, category, template, websiteData
           );
           var subSections = ensureMinimumSections(subResult.sections || [], sub.name, brand, lang, analysis, template, false);
           pages.push({ id: subPageId, name: sub.name, parentId: parentPageId, sections: subSections });

@@ -21,7 +21,7 @@ function fetchWithTimeout(url, options, timeoutMs) {
   });
 }
 
-var SCRAPE_TIMEOUT_MS = 120000; // 2 minutes for scraping
+var SCRAPE_TIMEOUT_MS = 300000; // 5 minutes — Bright Data can be slow for large ASIN lists
 
 // ─── BRIGHT DATA: Scrape ASINs ───
 export async function scrapeAsins(asins, domain) {
@@ -87,4 +87,18 @@ export async function discoverBrandProducts(brandUrl, onProgress) {
   }
 
   throw new Error('Brand discovery timed out after 3 minutes. The brand page may have too many products. Try again or paste ASINs manually.');
+}
+
+// ─── SCRAPE BRAND WEBSITE: Extract brand info from online store ───
+export async function scrapeWebsite(url) {
+  var resp = await fetchWithTimeout('/api/scrape-website', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ url: url }),
+  }, 30000); // 30s timeout
+  if (!resp.ok) {
+    var e = await resp.json().catch(function() { return {}; });
+    throw new Error(e.error || 'Failed to scrape website');
+  }
+  return resp.json();
 }

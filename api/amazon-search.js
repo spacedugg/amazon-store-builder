@@ -21,9 +21,9 @@ module.exports = async function handler(req, res) {
 
     var url = 'https://api.brightdata.com/datasets/v3/scrape?dataset_id=' + DATASET_ID + '&notify=false&include_errors=true';
 
-    // Timeout for Bright Data API: 90 seconds
+    // Timeout for Bright Data API: 4 minutes (large ASIN lists need more time)
     var controller = new AbortController();
-    var timeout = setTimeout(function() { controller.abort(); }, 90000);
+    var timeout = setTimeout(function() { controller.abort(); }, 240000);
 
     var resp;
     try {
@@ -39,7 +39,7 @@ module.exports = async function handler(req, res) {
     } catch (fetchErr) {
       clearTimeout(timeout);
       if (fetchErr.name === 'AbortError') {
-        return res.status(504).json({ error: 'Bright Data API timed out after 90s. Please try again with fewer ASINs.' });
+        return res.status(504).json({ error: 'Bright Data API timed out after 4 minutes. Please try again with fewer ASINs.' });
       }
       throw fetchErr;
     }

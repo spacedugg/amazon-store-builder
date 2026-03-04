@@ -92,10 +92,10 @@ export default function App() {
         templateData = STORE_TEMPLATES.find(function(t) { return t.id === params.template; }) || null;
       }
 
-      // Step 2-4: AI generation (with complexity, category, template)
+      // Step 2-4: AI generation (with complexity, category, template, websiteData)
       var storeData = await generateStore(
         params.asins, products, params.brand, params.marketplace, lang,
-        params.instructions, log, params.complexity, templateData
+        params.instructions, log, params.complexity, templateData, params.websiteData
       );
 
       // Store meta
@@ -109,11 +109,16 @@ export default function App() {
       log('');
       log('ERROR: ' + e.message);
       if (e.message.indexOf('timed out') >= 0) {
-        log('The API did not respond in time. Please try again.');
+        log('The request timed out. Try again with fewer ASINs or choose a lower complexity level.');
+      } else if (e.message.indexOf('fetch') >= 0 || e.message.indexOf('network') >= 0 || e.message.indexOf('Failed to fetch') >= 0) {
+        log('Network error — check your internet connection and try again.');
+      } else if (e.message.indexOf('API error') >= 0 || e.message.indexOf('529') >= 0 || e.message.indexOf('overload') >= 0) {
+        log('The AI service is temporarily overloaded. Please wait a minute and try again.');
       }
     } finally {
       setGenDone(true);
-      setTimeout(function() { setGenerating(false); }, 4000);
+      // Keep the modal visible longer so the user can read the error
+      setTimeout(function() { setGenerating(false); }, 8000);
     }
   };
 
