@@ -1,4 +1,4 @@
-import { uid, LAYOUTS, LAYOUT_TILE_DIMS, REFERENCE_STORES, STORE_PRINCIPLES, MODULE_BAUKASTEN, PRODUCT_COMPLEXITY, COMPLEXITY_LEVELS, CATEGORY_STYLE_HINTS } from './constants';
+import { uid, LAYOUTS, LAYOUT_TILE_DIMS, REFERENCE_STORES, STORE_PRINCIPLES, MODULE_BAUKASTEN, PRODUCT_COMPLEXITY, COMPLEXITY_LEVELS, CATEGORY_STYLE_HINTS, findLayout, resolveLayoutId } from './constants';
 
 var ANTHROPIC_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY || '';
 var PRIMARY_MODEL = 'claude-opus-4-6';
@@ -542,21 +542,32 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
       '',
     ].filter(Boolean).join('\n') : '',
     'CRITICAL RULES:',
-    '- Tile count per section MUST match layout. "1-1-1" = 3 tiles. "lg-4grid" = 5 tiles.',
+    '- Tile count per section MUST match layout cell count.',
     '- ALL ASINs must be placed in exactly ONE product_grid tile.',
-    '- Use VARIED layouts. NEVER use more than 2 full-width "1" layouts per page. Mix 1-1, 1-1-1, lg-2stack, lg-4grid, 2-1, 1-2 etc.',
+    '- Use VARIED layouts. NEVER use more than 2 full-width "1" layouts per page.',
+    '- Mix std-2equal, lg-2stack, lg-4grid, 2x2wide, vh-w2s, 2s-4grid etc.',
     '- Sections flow: Hero → Feature/USP → Product showcase → Lifestyle → Product grid → Cross-sell.',
     '- Do NOT just alternate full-width image + product grid. That is the WORST pattern.',
     '',
-    '=== LAYOUT MIRRORING (Desktop ↔ Mobile) ===',
-    'Asymmetric layouts can be horizontally mirrored:',
-    '- "2-1" (large left) mirrors to "1-2" (large right) and vice versa.',
-    '- "lg-2stack" (large left + 2 stacked right) mirrors to "2stack-lg" (2 stacked left + large right).',
-    '- "lg-4grid" (large left + 2x2 grid right) mirrors to "4grid-lg" (2x2 grid left + large right).',
-    'The mirroring affects how tiles are displayed on mobile (stacked vertically).',
-    'Desktop and mobile layouts are ALWAYS connected — the mobile layout is derived from the desktop layout.',
-    'Example: "1-1-1-1" = 4 tiles. On mobile = 2x2 grid. Left two tiles stacked, right two tiles stacked.',
-    'You can pair tiles meaningfully: e.g. category name on colored bg + shoppable bestseller, repeated.',
+    '=== AVAILABLE LAYOUTS ===',
+    'Full Width: "1" (1 tile)',
+    'Standard (2-row, 4-col grid):',
+    '  "std-2equal" (2 tiles: 2 Large Squares)',
+    '  "lg-2stack" (3 tiles: LS + 2 Wides stacked) / "2stack-lg" (mirror)',
+    '  "lg-w2s" (4 tiles: LS + Wide + 2 Small Squares) / "w2s-lg" (mirror)',
+    '  "2x2wide" (4 tiles: 4 Wides in 2×2)',
+    '  "lg-4grid" (5 tiles: LS + 4 SS in 2×2) / "4grid-lg" (mirror)',
+    '  "2s-4grid" (6 tiles: 2 Wides + 4 SS) / "4grid-2s" (mirror)',
+    '  "4x2grid" (8 tiles: 8 SS in 4×2)',
+    'Variable Height (1-row, 4-col grid):',
+    '  "vh-2equal" (2 tiles: 2 Wides)',
+    '  "vh-w2s" (3 tiles: Wide + 2 SS) / "vh-2sw" (mirror: 2 SS + Wide)',
+    '',
+    '=== LAYOUT MIRRORING ===',
+    'Mirrored layouts swap left/right and affect mobile stacking order:',
+    '- "lg-2stack" → "2stack-lg": On mobile, the Large Square moves to bottom.',
+    '- "lg-4grid" → "4grid-lg": On mobile, the Large Square moves to bottom.',
+    '- "vh-w2s" → "vh-2sw": On mobile, the Wide moves to bottom.',
     '',
     '=== BRIEF FORMAT (concise designer instruction) ===',
     'Each brief MUST start with an IMAGE TYPE tag, then a SHORT concept:',
@@ -619,10 +630,10 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '      }]',
     '    },',
     '    {',
-    '      "layoutId": "1-1",',
+    '      "layoutId": "std-2equal",',
     '      "tiles": [',
-    '        {"type": "image", "brief": "[CREATIVE] ' + brand + ' category name on brand-color background, bold typography", "textOverlay": "[Category Name]", "ctaText": "", "dimensions": {"w": 3000, "h": 1200}},',
-    '        {"type": "shoppable_image", "brief": "[SHOPPABLE] ' + brand + ' bestseller packshot on white, soft shadow", "textOverlay": "", "ctaText": "", "dimensions": {"w": 3000, "h": 1200}, "linkAsin": "' + (pageProducts[0] ? pageProducts[0].asin : 'B0XXXXXXXXXX') + '"}',
+    '        {"type": "image", "brief": "[CREATIVE] ' + brand + ' category name on brand-color background, bold typography", "textOverlay": "[Category Name]", "ctaText": "", "dimensions": {"w": 1500, "h": 1500}},',
+    '        {"type": "shoppable_image", "brief": "[SHOPPABLE] ' + brand + ' bestseller packshot on white, soft shadow", "textOverlay": "", "ctaText": "", "dimensions": {"w": 1500, "h": 1500}, "linkAsin": "' + (pageProducts[0] ? pageProducts[0].asin : 'B0XXXXXXXXXX') + '"}',
     '      ]',
     '    },',
     '    ... more sections',
@@ -633,29 +644,29 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
       ? [
           'HOMEPAGE SECTIONS (generate ALL of these, in this order):',
           '1. HERO BANNER (layout "1"): [LIFESTYLE] brand hero. textOverlay = slogan in ' + lang + '.',
-          '2. CATEGORY NAVIGATION (layout based on count: 2="1-1", 3="1-1-1", 4="1-1-1-1", 5+="lg-4grid"):',
+          '2. CATEGORY NAVIGATION (layout based on count: 2="std-2equal", 4="std-4equal" or "2x2wide", 5+="lg-4grid"):',
           '   Each tile = [CREATIVE] category name on brand-color bg OR [LIFESTYLE] category scene. textOverlay = EXACT category name.',
-          '   MIRRORING TIP: Use "1-1-1-1" for 4 categories — on mobile becomes 2x2 grid. Pair category-name tiles with shoppable-bestseller tiles.',
-          '3. BESTSELLER SHOWCASE (layout "1-1" or "lg-2stack"): [SHOPPABLE] hero product + [PRODUCT] or [CREATIVE] feature tiles. Use real ASIN as linkAsin.',
+          '   TIP: Use "std-4equal" for 4 categories. Pair category-name tiles with shoppable-bestseller tiles.',
+          '3. BESTSELLER SHOWCASE (layout "std-2equal" or "lg-2stack"): [SHOPPABLE] hero product + [PRODUCT] or [CREATIVE] feature tiles. Use real ASIN as linkAsin.',
           '4. PRODUCT GRID (layout "1"): type "product_grid" with top 5-8 products by rating.',
-          '5. LIFESTYLE SPLIT (layout "1-1"): [LIFESTYLE] product in use + [SHOPPABLE] product with linkAsin.',
-          '6. FEATURE HIGHLIGHTS (layout "1-1-1"): [CREATIVE] three key USPs. Each textOverlay = feature name in ' + lang + '.',
-          '7. BRAND STORY (layout "2-1" or "1-2"): [LIFESTYLE] large brand image + [CREATIVE] brand values tile.',
-          '8. FOOTER NAV (layout "1-1-1-1" or "1-1-1"): [CREATIVE] category tiles repeated for bottom navigation.',
+          '5. LIFESTYLE SPLIT (layout "std-2equal"): [LIFESTYLE] product in use + [SHOPPABLE] product with linkAsin.',
+          '6. FEATURE HIGHLIGHTS (layout "vh-w2s"): [CREATIVE] wide feature tile + two square USP tiles. Each textOverlay = feature name in ' + lang + '.',
+          '7. BRAND STORY (layout "lg-2stack" or "2stack-lg"): [LIFESTYLE] large brand image + [CREATIVE] brand values wide tiles.',
+          '8. FOOTER NAV (layout "std-4equal" or "2x2wide"): [CREATIVE] category tiles repeated for bottom navigation.',
           '',
-          'For 5+ categories, use lg-4grid (5 tiles) or split into two rows of 1-1-1 / 1-1-1-1.',
+          'For 5+ categories, use lg-4grid (5 tiles) or split into two rows.',
           'EVERY brief must name specific ' + brand + ' products — generic briefs are FORBIDDEN.',
         ].join('\n')
       : [
           'CATEGORY PAGE "' + pageName + '" SECTIONS (generate ALL of these):',
           '1. CATEGORY HERO (layout "1"): [LIFESTYLE] ' + pageName + ' products in use. Name specific products.',
-          '2. PRODUCT HIGHLIGHT (layout "1-1" or "lg-2stack"): [SHOPPABLE] bestseller with real ASIN + [PRODUCT] or [CREATIVE] feature tile.',
-          '3. FEATURE/USP SECTION (layout "1-1-1" or "lg-4grid"): [CREATIVE] 3-4 key features. Each textOverlay = feature name in ' + lang + '.',
+          '2. PRODUCT HIGHLIGHT (layout "std-2equal" or "lg-2stack"): [SHOPPABLE] bestseller with real ASIN + [PRODUCT] or [CREATIVE] feature tile.',
+          '3. FEATURE/USP SECTION (layout "vh-w2s" or "lg-4grid"): [CREATIVE] 3-4 key features. Each textOverlay = feature name in ' + lang + '.',
           '4. PRODUCT GRID (layout "1"): type "product_grid" with ALL ' + pageProducts.length + ' ASINs. MANDATORY.',
-          '5. LIFESTYLE ACTION (layout "1-1"): [LIFESTYLE] two complementary scenes with ' + pageName + ' products.',
+          '5. LIFESTYLE ACTION (layout "std-2equal"): [LIFESTYLE] two complementary scenes with ' + pageName + ' products.',
           analysis.productComplexity === 'complex' || analysis.productComplexity === 'variantRich'
             ? '6. VARIANT SHOWCASE (layout "lg-4grid"): [PRODUCT] large hero + [SHOPPABLE] 4 variant tiles in 2x2 grid.'
-            : '6. CROSS-SELL (layout "1-1-1"): [SHOPPABLE] three tiles linking to related categories.',
+            : '6. CROSS-SELL (layout "vh-w2s"): [SHOPPABLE] wide tile + two square tiles linking to related categories.',
           '',
           'MINIMUM 5 sections. EVERY brief must start with [PRODUCT], [LIFESTYLE], [CREATIVE], or [SHOPPABLE] tag + name specific ' + brand + ' products.',
           'Use shoppable_image (with real linkAsin) for any clickable product.',
@@ -667,7 +678,8 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
 
   // Validate and fix sections
   (result.sections || []).forEach(function(sec) {
-    var layout = LAYOUTS.find(function(l) { return l.id === sec.layoutId; });
+    sec.layoutId = resolveLayoutId(sec.layoutId);
+    var layout = findLayout(sec.layoutId);
     if (!layout) {
       sec.layoutId = '1';
       layout = LAYOUTS[0];
@@ -822,7 +834,8 @@ export function applyOperations(store, operations) {
         if (!page) break;
         var sec2 = page.sections.find(function(s) { return s.id === op.sectionId; });
         if (sec2) {
-          var newLayout = LAYOUTS.find(function(l) { return l.id === op.newLayoutId; });
+          op.newLayoutId = resolveLayoutId(op.newLayoutId);
+          var newLayout = findLayout(op.newLayoutId);
           if (newLayout) {
             sec2.layoutId = op.newLayoutId;
             var chDims = LAYOUT_TILE_DIMS[op.newLayoutId];
@@ -897,7 +910,7 @@ function ensureMinimumSections(sections, pageName, brand, lang, analysis, templa
     var idx = sections.length;
     if (blueprint && blueprint[idx]) {
       var bp = blueprint[idx];
-      var layout = LAYOUTS.find(function(l) { return l.id === bp.layout; }) || LAYOUTS[0];
+      var layout = findLayout(resolveLayoutId(bp.layout)) || LAYOUTS[0];
       var tiles = (bp.tileTypes || ['image']).map(function(type) {
         var dim = type === 'video' ? { w: 3000, h: 1688 } : { w: 3000, h: 1200 };
         return {

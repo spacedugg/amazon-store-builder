@@ -3,7 +3,7 @@ import {
   WidthType, AlignmentType, HeadingLevel, BorderStyle, ShadingType,
   PageBreak, ImageRun,
 } from 'docx';
-import { LAYOUTS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES } from './constants';
+import { LAYOUTS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, findLayout } from './constants';
 import { t } from './i18n';
 
 // ─── HELPERS ───
@@ -26,32 +26,35 @@ function divider() {
 
 // ─── LAYOUT CELL POSITIONS ───
 // Each cell: [x, y, width, height] as fractions of total dimensions
+// Standard layouts (2-row): height ratio 1.0 = full 2-row height
+// VH layouts (1-row): height 1.0 = single row
 var LAYOUT_CELLS = {
+  // Full Width
   '1': [[0, 0, 1, 1]],
-  '1-1': [[0, 0, .5, 1], [.5, 0, .5, 1]],
-  '1-1-1': [[0, 0, .333, 1], [.333, 0, .334, 1], [.667, 0, .333, 1]],
-  '1-1-1-1': [[0, 0, .25, 1], [.25, 0, .25, 1], [.5, 0, .25, 1], [.75, 0, .25, 1]],
-  '2-1': [[0, 0, .667, 1], [.667, 0, .333, 1]],
-  '1-2': [[0, 0, .333, 1], [.333, 0, .667, 1]],
-  '2-1-1': [[0, 0, .5, 1], [.5, 0, .25, 1], [.75, 0, .25, 1]],
-  '1-1-2': [[0, 0, .25, 1], [.25, 0, .25, 1], [.5, 0, .5, 1]],
-  'lg-2stack': [[0, 0, .667, 1], [.667, 0, .333, .5], [.667, .5, .333, .5]],
-  '2stack-lg': [[0, 0, .333, .5], [0, .5, .333, .5], [.333, 0, .667, 1]],
+  // Standard: 2 Equal (2 Large Squares)
+  'std-2equal': [[0, 0, .5, 1], [.5, 0, .5, 1]],
+  // Standard: Large + 2 Stacked (LS left + 2W right)
+  'lg-2stack': [[0, 0, .5, 1], [.5, 0, .5, .5], [.5, .5, .5, .5]],
+  '2stack-lg': [[0, 0, .5, .5], [0, .5, .5, .5], [.5, 0, .5, 1]],
+  // Standard: Large + Wide & 2 Small (LS + W + 2SS)
+  'lg-w2s': [[0, 0, .5, 1], [.5, 0, .5, .5], [.5, .5, .25, .5], [.75, .5, .25, .5]],
+  'w2s-lg': [[0, 0, .5, .5], [0, .5, .25, .5], [.25, .5, .25, .5], [.5, 0, .5, 1]],
+  // Standard: 4 Equal / 2×2 Wide
+  '2x2wide': [[0, 0, .5, .5], [.5, 0, .5, .5], [0, .5, .5, .5], [.5, .5, .5, .5]],
+  // Standard: Large + 2×2 Grid (LS + 4SS)
   'lg-4grid': [[0, 0, .5, 1], [.5, 0, .25, .5], [.75, 0, .25, .5], [.5, .5, .25, .5], [.75, .5, .25, .5]],
   '4grid-lg': [[0, 0, .25, .5], [.25, 0, .25, .5], [0, .5, .25, .5], [.25, .5, .25, .5], [.5, 0, .5, 1]],
-  // Amazon Desktop #4: Large + (Wide + 2 Small)
-  'lg-w2s': [[0, 0, .5, 1], [.5, .5, .25, .5], [.75, .5, .25, .5], [.5, 0, .5, .5]],
-  'w2s-lg': [[0, 0, .5, .5], [0, .5, .25, .5], [.25, .5, .25, .5], [.5, 0, .5, 1]],
-  // Amazon Desktop #5: 2×2 Wide
-  '2x2wide': [[0, 0, .5, .5], [.5, 0, .5, .5], [0, .5, .5, .5], [.5, .5, .5, .5]],
-  // Amazon Desktop #6: 2 Stacked + 2×2 Grid
-  '2s-4grid': [[0, 0, .333, .5], [0, .5, .333, .5], [.333, 0, .333, .5], [.667, 0, .333, .5], [.333, .5, .333, .5], [.667, .5, .333, .5]],
-  '4grid-2s': [[0, 0, .333, .5], [.333, 0, .333, .5], [.667, 0, .333, .5], [0, .5, .333, .5], [.333, .5, .333, .5], [.667, .5, .333, .5]],
-  // Amazon Desktop #7: (Wide + 2 Small) + 2×2 Grid
-  'w2s-4grid': [[0, 0, .5, .5], [0, .5, .25, .5], [.25, .5, .25, .5], [.5, 0, .25, .5], [.75, 0, .25, .5], [.5, .5, .25, .5], [.75, .5, .25, .5]],
-  '4grid-w2s': [[0, 0, .25, .5], [.25, 0, .25, .5], [0, .5, .25, .5], [.25, .5, .25, .5], [.5, 0, .5, .5], [.5, .5, .25, .5], [.75, .5, .25, .5]],
-  // Amazon Desktop #8: 4×2 Grid
+  // Standard: 2 Stacked + 2×2 Grid (2W left + 4SS right)
+  '2s-4grid': [[0, 0, .5, .5], [0, .5, .5, .5], [.5, 0, .25, .5], [.75, 0, .25, .5], [.5, .5, .25, .5], [.75, .5, .25, .5]],
+  '4grid-2s': [[0, 0, .25, .5], [.25, 0, .25, .5], [0, .5, .25, .5], [.25, .5, .25, .5], [.5, 0, .5, .5], [.5, .5, .5, .5]],
+  // Standard: 4×2 Grid (8 SS)
   '4x2grid': [[0, 0, .25, .5], [.25, 0, .25, .5], [.5, 0, .25, .5], [.75, 0, .25, .5], [0, .5, .25, .5], [.25, .5, .25, .5], [.5, .5, .25, .5], [.75, .5, .25, .5]],
+  // VH: 2 Equal (2 Wides)
+  'vh-2equal': [[0, 0, .5, 1], [.5, 0, .5, 1]],
+  // VH: Wide + 2 Squares
+  'vh-w2s': [[0, 0, .5, 1], [.5, 0, .25, 1], [.75, 0, .25, 1]],
+  // VH: 2 Squares + Wide
+  'vh-2sw': [[0, 0, .25, 1], [.25, 0, .25, 1], [.5, 0, .5, 1]],
 };
 
 // Colors per tile type
@@ -71,7 +74,7 @@ var TILE_COLORS = {
 // Renders a section layout as a PNG image using Canvas API
 
 async function renderLayoutImage(section) {
-  var layout = LAYOUTS.find(function(l) { return l.id === section.layoutId; }) || LAYOUTS[0];
+  var layout = findLayout(section.layoutId);
   var tiles = section.tiles || [];
   var cells = LAYOUT_CELLS[layout.id] || LAYOUT_CELLS[layout.grid] || null;
 
@@ -308,7 +311,7 @@ export async function generateBriefingDocx(store, briefingLang) {
 
     for (var si = 0; si < (page.sections || []).length; si++) {
       var section = page.sections[si];
-      var layout = LAYOUTS.find(function(l) { return l.id === section.layoutId; }) || LAYOUTS[0];
+      var layout = findLayout(section.layoutId);
       children.push(heading(t('brief.section', lang) + ' ' + (si + 1) + ': ' + layout.name, HeadingLevel.HEADING_2));
 
       // ─── WIREFRAME IMAGE ───

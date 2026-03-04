@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { uid, emptyTile, emptyTileForLayout, LAYOUTS, LANGS, DOMAINS, validateStore, PRICING, countStoreAssets, STORE_TEMPLATES } from './constants';
+import { uid, emptyTile, emptyTileForLayout, LAYOUTS, LANGS, DOMAINS, validateStore, PRICING, countStoreAssets, STORE_TEMPLATES, findLayout } from './constants';
 import { scrapeAsins } from './api';
 import { generateStore, aiRefineStore, applyOperations } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, loadStoreByShareToken, importStoreByShareLink } from './storage';
@@ -45,6 +45,53 @@ export default function App() {
   var [storeId, setStoreId] = useState(null);
   var [shareToken, setShareToken] = useState(null);
   var headerBannerInputRef = useRef(null);
+
+  // ─── UNDO HISTORY ───
+  var undoStackRef = useRef([]);
+  var skipHistoryRef = useRef(false);
+  var MAX_UNDO = 50;
+
+  var pushUndo = useCallback(function(prevStore) {
+    if (!prevStore || !prevStore.pages || prevStore.pages.length === 0) return;
+    undoStackRef.current = undoStackRef.current.slice(-(MAX_UNDO - 1)).concat([JSON.stringify(prevStore)]);
+  }, []);
+
+  var handleUndo = useCallback(function() {
+    if (undoStackRef.current.length === 0) return;
+    var prev = undoStackRef.current.pop();
+    skipHistoryRef.current = true;
+    var parsed = JSON.parse(prev);
+    setStore(parsed);
+    setCurPage(parsed.pages && parsed.pages[0] ? parsed.pages[0].id : '');
+    setSel(null);
+  }, []);
+
+  // Wrap setStore to track undo history
+  var setStoreWithUndo = useCallback(function(updater) {
+    setStore(function(prev) {
+      var next = typeof updater === 'function' ? updater(prev) : updater;
+      if (!skipHistoryRef.current && prev.pages.length > 0) {
+        pushUndo(prev);
+      }
+      skipHistoryRef.current = false;
+      return next;
+    });
+  }, [pushUndo]);
+
+  // Keyboard shortcut: Ctrl+Z for undo
+  useEffect(function() {
+    var handler = function(e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) {
+        // Don't undo if focus is in a text input
+        var tag = document.activeElement && document.activeElement.tagName;
+        if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+        e.preventDefault();
+        handleUndo();
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return function() { window.removeEventListener('keydown', handler); };
+  }, [handleUndo]);
 
   // Load saved stores on mount
   useEffect(function() {
@@ -125,7 +172,7 @@ export default function App() {
   // ─── TILE UPDATE ───
   var updateTile = function(updated) {
     if (!sel) return;
-    setStore(function(s) {
+    setStoreWithUndo(function(s) {
       return Object.assign({}, s, {
         pages: s.pages.map(function(pg) {
           return Object.assign({}, pg, {
@@ -149,7 +196,7 @@ export default function App() {
       layoutId: '1',
       tiles: [emptyTile()],
     };
-    setStore(function(s) {
+    setStoreWithUndo(function(s) {
       return Object.assign({}, s, {
         pages: s.pages.map(function(pg) {
           if (pg.id !== page.id) return pg;
@@ -161,7 +208,7 @@ export default function App() {
 
   var deleteSection = function(sectionId) {
     if (!page) return;
-    setStore(function(s) {
+    setStoreWithUndo(function(s) {
       return Object.assign({}, s, {
         pages: s.pages.map(function(pg) {
           if (pg.id !== page.id) return pg;
@@ -176,7 +223,7 @@ export default function App() {
 
   var moveSection = function(sectionId, newIndex) {
     if (!page) return;
-    setStore(function(s) {
+    setStoreWithUndo(function(s) {
       return Object.assign({}, s, {
         pages: s.pages.map(function(pg) {
           if (pg.id !== page.id) return pg;
@@ -192,9 +239,9 @@ export default function App() {
   };
 
   var changeLayout = function(sectionId, layoutId) {
-    var layout = LAYOUTS.find(function(l) { return l.id === layoutId; });
+    var layout = findLayout(layoutId);
     if (!layout) return;
-    setStore(function(s) {
+    setStoreWithUndo(function(s) {
       return Object.assign({}, s, {
         pages: s.pages.map(function(pg) {
           if (pg.id !== page.id) return pg;
@@ -227,7 +274,7 @@ export default function App() {
       }],
     };
     if (parentId) newPage.parentId = parentId;
-    setStore(function(s) {
+    setStoreWithUndo(function(s) {
       // Insert subpage right after parent and its existing children
       if (parentId) {
         var pages = s.pages.slice();
@@ -247,7 +294,7 @@ export default function App() {
   };
 
   var renamePage = function(pageId, newName) {
-    setStore(function(s) {
+    setStoreWithUndo(function(s) {
       return Object.assign({}, s, {
         pages: s.pages.map(function(pg) {
           if (pg.id !== pageId) return pg;
@@ -261,7 +308,7 @@ export default function App() {
     if (store.pages.length <= 1) return;
     // Also delete child pages
     var childIds = store.pages.filter(function(p) { return p.parentId === pageId; }).map(function(p) { return p.id; });
-    setStore(function(s) {
+    setStoreWithUndo(function(s) {
       var newPages = s.pages.filter(function(pg) { return pg.id !== pageId && childIds.indexOf(pg.id) < 0; });
       return Object.assign({}, s, { pages: newPages });
     });
@@ -273,7 +320,7 @@ export default function App() {
   };
 
   var reorderPage = function(fromIdx, toIdx) {
-    setStore(function(s) {
+    setStoreWithUndo(function(s) {
       var pages = s.pages.slice();
       var item = pages.splice(fromIdx, 1)[0];
       pages.splice(toIdx, 0, item);
@@ -370,9 +417,9 @@ export default function App() {
     reader.onload = function(ev) {
       var data = ev.target.result;
       if (viewMode === 'mobile') {
-        setStore(function(s) { return Object.assign({}, s, { headerBannerMobile: data }); });
+        setStoreWithUndo(function(s) { return Object.assign({}, s, { headerBannerMobile: data }); });
       } else {
-        setStore(function(s) { return Object.assign({}, s, { headerBanner: data }); });
+        setStoreWithUndo(function(s) { return Object.assign({}, s, { headerBanner: data }); });
       }
     };
     reader.readAsDataURL(f);
@@ -430,7 +477,7 @@ export default function App() {
       var result = await aiRefineStore(store, command, store.brandName, lang);
       if (result.operations && result.operations.length > 0) {
         var newStore = applyOperations(store, result.operations);
-        setStore(function(s) {
+        setStoreWithUndo(function(s) {
           return Object.assign({}, newStore, { products: s.products, asins: s.asins, brandName: s.brandName, marketplace: s.marketplace });
         });
         setChatResponse(result.explanation || 'Changes applied.');
@@ -463,16 +510,13 @@ export default function App() {
       <Topbar
         store={store}
         onGenerate={function() { setShowGen(true); }}
-        onShowAsins={function() { setShowAsins(true); }}
-        onShowPrice={function() { setShowPrice(true); }}
         onExport={handleExport}
-        onExportDocx={function() { setShowExport(true); }}
         onSave={handleSave}
         viewMode={viewMode}
         onToggleView={handleToggleView}
         onNewStore={handleNewStore}
-        onGoogleDriveChange={function(url) { setStore(function(s) { return Object.assign({}, s, { googleDriveUrl: url }); }); }}
-        googleDriveUrl={store.googleDriveUrl || ''}
+        onUndo={handleUndo}
+        canUndo={undoStackRef.current.length > 0}
       />
 
       <div className="app-body">
@@ -546,6 +590,8 @@ export default function App() {
           onClose={function() { setShowGen(false); }}
           onGenerate={handleGenerate}
           uiLang={uiLang}
+          googleDriveUrl={store.googleDriveUrl || ''}
+          onGoogleDriveChange={function(url) { setStoreWithUndo(function(s) { return Object.assign({}, s, { googleDriveUrl: url }); }); }}
         />
       )}
 
