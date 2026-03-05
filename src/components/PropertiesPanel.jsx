@@ -1,4 +1,4 @@
-import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES } from '../constants';
+import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES } from '../constants';
 import { t } from '../i18n';
 
 var PRESET_COLORS = [
@@ -72,6 +72,24 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
           })}
         </select>
       </div>
+
+      {/* IMAGE CATEGORY (for image-based tiles) */}
+      {isImageType && (
+        <div className="props-section">
+          <label className="label">{t('props.imageCategory', uiLang)}</label>
+          <select className="input" value={tile.imageCategory || ''}
+            onChange={function(e) { u('imageCategory', e.target.value); }}>
+            <option value="">{t('props.imageCategoryNone', uiLang)}</option>
+            {Object.keys(IMAGE_CATEGORIES).map(function(catId) {
+              var cat = IMAGE_CATEGORIES[catId];
+              return <option key={catId} value={catId}>{cat.name}</option>;
+            })}
+          </select>
+          {tile.imageCategory && IMAGE_CATEGORIES[tile.imageCategory] && (
+            <div className="hint">{IMAGE_CATEGORIES[tile.imageCategory].description}</div>
+          )}
+        </div>
+      )}
 
       {/* TILE BACKGROUND COLOR */}
       <div className="props-section">

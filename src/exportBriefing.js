@@ -3,7 +3,7 @@ import {
   WidthType, AlignmentType, HeadingLevel, BorderStyle, ShadingType,
   PageBreak, ImageRun,
 } from 'docx';
-import { LAYOUTS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, findLayout } from './constants';
+import { LAYOUTS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, findLayout } from './constants';
 import { t } from './i18n';
 
 // ─── HELPERS ───
@@ -227,6 +227,10 @@ function tileDescription(tile, tileIndex, productMap, lang) {
     if (tile.brief) parts.push(boldPara(t('brief.brief', lang) + ': ', tile.brief));
     parts.push(boldPara(t('brief.thumbnail', lang) + ': ', tile.videoThumbnail ? t('brief.uploaded', lang) : t('brief.notSet', lang)));
   } else {
+    // Image category
+    if (tile.imageCategory && IMAGE_CATEGORIES[tile.imageCategory]) {
+      parts.push(boldPara(t('brief.imageCategory', lang) + ': ', IMAGE_CATEGORIES[tile.imageCategory].name));
+    }
     var dims = tile.dimensions || {};
     var mDims = tile.mobileDimensions || {};
     if (dims.w) parts.push(boldPara(t('brief.desktop', lang) + ': ', dims.w + ' x ' + dims.h + ' px'));

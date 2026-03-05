@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, findLayout } from '../constants';
+import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, findLayout } from '../constants';
 import { loadStoreByShareToken } from '../storage';
 import { generateBriefingDocx, downloadBlob } from '../exportBriefing';
 import SectionView from './SectionView';
@@ -50,6 +50,11 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor }) {
       <div className="briefing-tile-header">
         <span className="briefing-tile-index">Tile {tileIndex + 1}</span>
         <span className="briefing-tile-type">{tileLabel}</span>
+        {tile.imageCategory && IMAGE_CATEGORIES[tile.imageCategory] && (
+          <span className="briefing-tile-imgcat" style={{ background: '#f0f0f0', borderRadius: 3, padding: '1px 6px', fontSize: 10, fontWeight: 600 }}>
+            {IMAGE_CATEGORIES[tile.imageCategory].name}
+          </span>
+        )}
         {desktopType && <span className="briefing-tile-imgtype">{desktopType.label} ({desktopType.w}&times;{desktopType.h})</span>}
       </div>
 
