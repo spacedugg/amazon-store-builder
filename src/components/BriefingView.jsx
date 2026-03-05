@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, findLayout } from '../constants';
+import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_TYPES, findLayout } from '../constants';
 import { loadStoreByShareToken } from '../storage';
 import { generateBriefingDocx, downloadBlob } from '../exportBriefing';
 import SectionView from './SectionView';
@@ -24,19 +24,28 @@ var INSPIRATION_LINKS = [
 
 // Section color palette for visual distinction
 var SECTION_COLORS = [
-  { bg: '#eff6ff', border: '#3b82f6', label: '#1d4ed8' },  // blue
-  { bg: '#f0fdf4', border: '#22c55e', label: '#15803d' },  // green
-  { bg: '#fdf4ff', border: '#d946ef', label: '#a21caf' },  // fuchsia
-  { bg: '#fff7ed', border: '#f97316', label: '#c2410c' },  // orange
-  { bg: '#faf5ff', border: '#a855f7', label: '#7e22ce' },  // purple
-  { bg: '#fefce8', border: '#eab308', label: '#a16207' },  // yellow
-  { bg: '#f0fdfa', border: '#14b8a6', label: '#0f766e' },  // teal
-  { bg: '#fef2f2', border: '#ef4444', label: '#b91c1c' },  // red
+  { bg: '#eff6ff', border: '#3b82f6', label: '#1d4ed8' },
+  { bg: '#f0fdf4', border: '#22c55e', label: '#15803d' },
+  { bg: '#fdf4ff', border: '#d946ef', label: '#a21caf' },
+  { bg: '#fff7ed', border: '#f97316', label: '#c2410c' },
+  { bg: '#faf5ff', border: '#a855f7', label: '#7e22ce' },
+  { bg: '#fefce8', border: '#eab308', label: '#a16207' },
+  { bg: '#f0fdfa', border: '#14b8a6', label: '#0f766e' },
+  { bg: '#fef2f2', border: '#ef4444', label: '#b91c1c' },
 ];
 
 function getSectionColor(index) {
   return SECTION_COLORS[index % SECTION_COLORS.length];
 }
+
+// ─── IMAGE TYPE TAG COLORS ───
+var IMAGE_TYPE_COLORS = {
+  benefit: '#10b981',
+  creative: '#6366f1',
+  lifestyle: '#f59e0b',
+  product: '#3b82f6',
+  textimage: '#ec4899',
+};
 
 // ─── TILE DETAIL CARD (for right panel) ───
 function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor }) {
@@ -45,42 +54,46 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor }) {
   var tileLabel = TILE_TYPE_LABELS[tile.type] || tile.type;
   var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
 
+  // Parse image type tag from brief
+  var imageTypeKey = null;
+  if (tile.brief) {
+    var match = tile.brief.match(/^\[(\w+)\]/);
+    if (match) {
+      var tag = match[1].toLowerCase();
+      if (IMAGE_TYPES[tag]) imageTypeKey = tag;
+    }
+  }
+
   return (
     <div className="briefing-tile-detail" style={{ borderLeft: '3px solid ' + sectionColor.border }}>
       <div className="briefing-tile-header">
-        <span className="briefing-tile-index">Tile {tileIndex + 1}</span>
+        <span className="briefing-tile-index">T{tileIndex + 1}</span>
         <span className="briefing-tile-type">{tileLabel}</span>
+        {imageTypeKey && (
+          <span className="briefing-tile-imgtag" style={{ background: IMAGE_TYPE_COLORS[imageTypeKey] + '18', color: IMAGE_TYPE_COLORS[imageTypeKey] }}>
+            {IMAGE_TYPES[imageTypeKey].name}
+          </span>
+        )}
         {desktopType && <span className="briefing-tile-imgtype">{desktopType.label} ({desktopType.w}&times;{desktopType.h})</span>}
       </div>
 
       {tile.brief && (
         <div className="briefing-field">
-          <span className="briefing-field-label">Design Brief:</span>
-          <span className="briefing-field-value">{tile.brief}</span>
+          <span className="briefing-field-value">{tile.brief.replace(/^\[\w+\]\s*/, '')}</span>
         </div>
       )}
 
       {tile.textOverlay && (
         <div className="briefing-field">
-          <span className="briefing-field-label">Text on Image:</span>
+          <span className="briefing-field-label">Text:</span>
           <span className="briefing-field-value briefing-field-text">"{tile.textOverlay}"</span>
         </div>
       )}
 
       {tile.ctaText && (
         <div className="briefing-field">
-          <span className="briefing-field-label">CTA Button:</span>
+          <span className="briefing-field-label">CTA:</span>
           <span className="briefing-field-value briefing-field-cta">"{tile.ctaText}"</span>
-        </div>
-      )}
-
-      {tile.bgColor && (
-        <div className="briefing-field">
-          <span className="briefing-field-label">Background Color:</span>
-          <span className="briefing-field-value">
-            <span className="briefing-color-swatch" style={{ background: tile.bgColor }} />
-            {tile.bgColor}
-          </span>
         </div>
       )}
 
@@ -93,27 +106,21 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor }) {
 
       {tile.linkAsin && (
         <div className="briefing-field">
-          <span className="briefing-field-label">Link ASIN:</span>
+          <span className="briefing-field-label">Link:</span>
           <span className="briefing-field-value briefing-field-mono">{tile.linkAsin}</span>
         </div>
       )}
 
-      {tile.linkUrl && (
-        <div className="briefing-field">
-          <span className="briefing-field-label">Link URL:</span>
-          <span className="briefing-field-value briefing-field-mono">{tile.linkUrl}</span>
-        </div>
-      )}
-
       <div className="briefing-tile-dims-row">
-        <span className="briefing-dim">Desktop: {tile.dimensions ? (tile.dimensions.w + '\u00D7' + tile.dimensions.h) : 'N/A'}</span>
-        <span className="briefing-dim">Mobile: {tile.mobileDimensions ? (tile.mobileDimensions.w + '\u00D7' + tile.mobileDimensions.h) : 'N/A'}</span>
+        <span className="briefing-dim">{tile.dimensions ? (tile.dimensions.w + '\u00D7' + tile.dimensions.h) : 'N/A'}</span>
+        <span className="briefing-dim-sep">/</span>
+        <span className="briefing-dim">{tile.mobileDimensions ? (tile.mobileDimensions.w + '\u00D7' + tile.mobileDimensions.h) : 'N/A'}</span>
       </div>
     </div>
   );
 }
 
-// ─── SECTION BRIEFING (visual preview only — no inline details) ───
+// ─── SECTION BRIEFING (visual preview only) ───
 function SectionBriefing({ section, sectionIndex, viewMode, products, sectionColor }) {
   var layout = findLayout(section.layoutId);
 
@@ -121,10 +128,9 @@ function SectionBriefing({ section, sectionIndex, viewMode, products, sectionCol
     <div className="briefing-section" style={{ borderLeft: '3px solid ' + sectionColor.border, background: sectionColor.bg }}>
       <div className="briefing-section-header">
         <span className="briefing-section-label" style={{ color: sectionColor.label }}>Section {sectionIndex + 1}</span>
-        <span className="briefing-section-layout">{layout.name} ({layout.cells} tiles)</span>
+        <span className="briefing-section-layout">{layout.name}</span>
       </div>
 
-      {/* Visual preview */}
       <div className="briefing-section-preview">
         <SectionView
           section={section}
@@ -145,27 +151,44 @@ function SectionBriefing({ section, sectionIndex, viewMode, products, sectionCol
   );
 }
 
-// ─── PAGE BRIEFING (center content — visual only) ───
-function PageBriefing({ page, pageIndex, isSubPage, viewMode, products, sectionStartIndex }) {
-  return (
-    <div className={'briefing-page' + (isSubPage ? ' briefing-subpage' : '')}>
-      <div className="briefing-page-header">
-        <span className="briefing-page-name">{isSubPage ? '\u2514 ' : ''}{page.name || ('Page ' + (pageIndex + 1))}</span>
-        <span className="briefing-page-count">{page.sections.length} section{page.sections.length !== 1 ? 's' : ''}</span>
-      </div>
+// ─── IMAGE TYPE LIBRARY PANEL ───
+function ImageTypeLibrary({ onClose }) {
+  var typeKeys = Object.keys(IMAGE_TYPES);
 
-      {page.sections.map(function(sec, si) {
-        return (
-          <SectionBriefing
-            key={sec.id}
-            section={sec}
-            sectionIndex={si}
-            viewMode={viewMode}
-            products={products}
-            sectionColor={getSectionColor(sectionStartIndex + si)}
-          />
-        );
-      })}
+  return (
+    <div className="imglib-overlay" onClick={onClose}>
+      <div className="imglib-panel" onClick={function(e) { e.stopPropagation(); }}>
+        <div className="imglib-header">
+          <span className="imglib-title">Image Type Library</span>
+          <button className="imglib-close" onClick={onClose}>&times;</button>
+        </div>
+        <div className="imglib-body">
+          {typeKeys.map(function(key) {
+            var type = IMAGE_TYPES[key];
+            var color = IMAGE_TYPE_COLORS[key];
+            return (
+              <div key={key} className="imglib-type">
+                <div className="imglib-type-header">
+                  <span className="imglib-type-tag" style={{ background: color + '18', color: color }}>{type.tag}</span>
+                  <span className="imglib-type-name">{type.name}</span>
+                </div>
+                <p className="imglib-type-desc">{type.description}</p>
+                <div className="imglib-type-components">
+                  <span className="imglib-components-label">Components:</span>
+                  <ul>
+                    {type.components.map(function(c, i) {
+                      return <li key={i}>{c}</li>;
+                    })}
+                  </ul>
+                </div>
+                <div className="imglib-type-usage">
+                  <span className="imglib-components-label">Used for:</span> {type.usedFor}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }
@@ -181,6 +204,7 @@ export default function BriefingView() {
   var [lastUpdated, setLastUpdated] = useState(null);
   var [changeHighlights, setChangeHighlights] = useState({});
   var [updateBanner, setUpdateBanner] = useState(false);
+  var [showImageLib, setShowImageLib] = useState(false);
   var prevStoreRef = useRef(null);
   var pollRef = useRef(null);
   var bannerTimeoutRef = useRef(null);
@@ -303,7 +327,6 @@ export default function BriefingView() {
   });
   var googleDriveUrl = store.googleDriveUrl || '';
 
-  // Find the currently-shown page for the right panel
   var activePage = showAllPages ? null : (pages.find(function(p) { return p.id === curPage; }) || pages[0]);
 
   // Gather all visible sections for the right panel
@@ -329,6 +352,9 @@ export default function BriefingView() {
     });
   }
 
+  // Hovered nav for dropdown
+  var [hoveredNav, setHoveredNav] = useState(null);
+
   return (
     <div className="briefing-root">
       {/* Header */}
@@ -339,7 +365,10 @@ export default function BriefingView() {
           <span className="briefing-readonly-badge">Read Only</span>
         </div>
         <div className="briefing-header-right">
-          <button className="btn" style={{ background: 'rgba(255,255,255,.08)', border: '1px solid rgba(255,255,255,.15)', color: '#fff', fontSize: 11, padding: '5px 12px' }} onClick={handleDocxDownload} title="Download DOCX briefing">
+          <button className="btn briefing-header-btn" onClick={function() { setShowImageLib(true); }} title="Image Type Library">
+            Image Types
+          </button>
+          <button className="btn briefing-header-btn" onClick={handleDocxDownload} title="Download DOCX briefing">
             DOCX
           </button>
           <div className="briefing-view-toggle">
@@ -361,96 +390,63 @@ export default function BriefingView() {
       )}
 
       <div className="briefing-body">
-        {/* LEFT SIDEBAR: Structure + Info */}
+        {/* LEFT SIDEBAR: Compact info */}
         <div className="briefing-sidebar">
-          {/* Page navigation — color-coded */}
+          {/* Store info — compact */}
           <div className="briefing-sidebar-section">
-            <div className="briefing-sidebar-title" style={{ color: '#6366f1' }}>Store Structure</div>
-            {topPages.map(function(pg, pi) {
-              var children = childrenMap[pg.id] || [];
-              var isActive = curPage === pg.id;
-              return (
-                <div key={pg.id}>
-                  <div className={'briefing-nav-item' + (isActive ? ' active' : '') + getHighlightClass('page-' + pg.id)}
-                    onClick={function() { setCurPage(pg.id); setShowAllPages(false); }}
-                    style={{ borderLeft: '3px solid ' + getSectionColor(pi).border, marginLeft: 0 }}>
-                    {pg.name || ('Page ' + (pi + 1))}
-                    <span style={{ fontSize: 9, color: '#94a3b8', marginLeft: 4 }}>({pg.sections.length}s)</span>
-                  </div>
-                  {children.map(function(child) {
-                    return (
-                      <div key={child.id}
-                        className={'briefing-nav-item briefing-nav-sub' + (curPage === child.id ? ' active' : '') + getHighlightClass('page-' + child.id)}
-                        onClick={function() { setCurPage(child.id); setShowAllPages(false); }}>
-                        {child.name}
-                      </div>
-                    );
-                  })}
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Store info — highlighted */}
-          <div className="briefing-sidebar-section" style={{ background: '#f8fafc', borderRadius: 8, margin: '0 8px', padding: '10px 12px' }}>
-            <div className="briefing-sidebar-title" style={{ color: '#0f766e' }}>Store Info</div>
-            <div className="briefing-info-row"><span>Brand:</span> <strong>{store.brandName || 'N/A'}</strong></div>
-            <div className="briefing-info-row"><span>Marketplace:</span> <strong>Amazon.{store.marketplace || 'de'}</strong></div>
-            <div className="briefing-info-row"><span>Pages:</span> <strong>{pages.length}</strong></div>
-            <div className="briefing-info-row"><span>Products:</span> <strong>{(store.products || []).length}</strong></div>
+            <div className="briefing-info-compact">
+              <span>{store.brandName || 'N/A'}</span>
+              <span className="briefing-info-sep">&middot;</span>
+              <span>Amazon.{store.marketplace || 'de'}</span>
+              <span className="briefing-info-sep">&middot;</span>
+              <span>{pages.length} pages</span>
+              <span className="briefing-info-sep">&middot;</span>
+              <span>{(store.products || []).length} products</span>
+            </div>
             {lastUpdated && (
-              <div className="briefing-info-row"><span>Last Updated:</span> <strong>{new Date(lastUpdated).toLocaleString('en-US')}</strong></div>
+              <div className="briefing-info-updated">Updated: {new Date(lastUpdated).toLocaleString('de-DE')}</div>
             )}
           </div>
 
-          {/* Google Drive — highlighted */}
+          {/* Google Drive */}
           {googleDriveUrl && (
             <div className="briefing-sidebar-section">
-              <div className="briefing-sidebar-title" style={{ color: '#1d4ed8' }}>Asset Upload</div>
               <a href={googleDriveUrl} target="_blank" rel="noopener noreferrer" className="briefing-drive-link">
-                Open Google Drive Folder
+                Google Drive Folder
               </a>
             </div>
           )}
 
-          {/* Upload Instructions — highlighted */}
-          <div className="briefing-sidebar-section" style={{ background: '#fef9c3', borderRadius: 8, margin: '0 8px', padding: '10px 12px' }}>
-            <div className="briefing-sidebar-title" style={{ color: '#a16207' }}>Upload Instructions</div>
-            <div className="briefing-legend">
-              <p>Upload finished assets to the shared Google Drive folder.</p>
-              <p><strong>Folder structure:</strong></p>
-              <ul>
-                <li>One subfolder per page (e.g. "Homepage")</li>
-                <li>Name: "S1_T1_desktop.jpg"</li>
-                <li>Both desktop + mobile versions</li>
-                <li>Use exact dimensions per tile</li>
-              </ul>
+          {/* Image Dimensions Reference — compact */}
+          <div className="briefing-sidebar-section">
+            <div className="briefing-sidebar-title">Tile Dimensions</div>
+            <div className="briefing-dims-compact">
+              <div><strong>LS</strong> 1500&times;1500</div>
+              <div><strong>SS</strong> 750&times;750</div>
+              <div><strong>W</strong> 1500&times;700</div>
+              <div><strong>FW</strong> 3000&times;var</div>
+            </div>
+            <div className="briefing-dims-note">Header: 3000&times;600 / 1242&times;450</div>
+          </div>
+
+          {/* Upload Instructions — compact */}
+          <div className="briefing-sidebar-section">
+            <div className="briefing-sidebar-title">Upload</div>
+            <div className="briefing-upload-compact">
+              <div>Subfolder per page</div>
+              <div>Name: S1_T1_desktop.jpg</div>
+              <div>Desktop + Mobile versions</div>
             </div>
           </div>
 
-          {/* Image type reference — highlighted */}
-          <div className="briefing-sidebar-section" style={{ background: '#ede9fe', borderRadius: 8, margin: '0 8px', padding: '10px 12px' }}>
-            <div className="briefing-sidebar-title" style={{ color: '#7e22ce' }}>Desktop Image Types</div>
-            <div className="briefing-legend">
-              <div className="briefing-imgtype-ref">
-                <div><span className="briefing-imgtype-badge large">LS</span> Large Square: 1500 &times; 1500</div>
-                <div><span className="briefing-imgtype-badge small">SS</span> Small Square: 750 &times; 750</div>
-                <div><span className="briefing-imgtype-badge wide">W</span> Wide: 1500 &times; 700</div>
-                <div><span className="briefing-imgtype-badge full">FW</span> Full Width: 3000 &times; 600</div>
-              </div>
-              <p style={{ marginTop: 6, fontSize: 10 }}>Header: 3000&times;600 (desktop), 1242&times;450 (mobile)</p>
-            </div>
-          </div>
-
-          {/* Inspiration — highlighted */}
-          <div className="briefing-sidebar-section" style={{ background: '#ecfdf5', borderRadius: 8, margin: '0 8px', padding: '10px 12px' }}>
-            <div className="briefing-sidebar-title" style={{ color: '#15803d' }}>Inspiration Library</div>
-            <div className="briefing-inspiration">
+          {/* Inspiration */}
+          <div className="briefing-sidebar-section">
+            <div className="briefing-sidebar-title">Inspiration</div>
+            <div className="briefing-inspiration-compact">
               {INSPIRATION_LINKS.map(function(link, i) {
                 return (
-                  <a key={i} href={link.url} target="_blank" rel="noopener noreferrer" className="briefing-inspiration-link">
-                    <span className="briefing-inspiration-brand">{link.brand}</span>
-                    <span className="briefing-inspiration-cat">{link.category}</span>
+                  <a key={i} href={link.url} target="_blank" rel="noopener noreferrer" className="briefing-insp-link">
+                    {link.brand}
                   </a>
                 );
               })}
@@ -458,36 +454,122 @@ export default function BriefingView() {
           </div>
         </div>
 
-        {/* CENTER: Store visual preview */}
+        {/* CENTER: Store visual preview with integrated nav */}
         <div className="briefing-content">
-          {showAllPages ? (
-            (function() {
-              var globalSectionIdx = 0;
-              return topPages.map(function(pg, pi) {
+          {/* Amazon-style Store Navigation Bar */}
+          <div className="briefing-store-chrome">
+            <div className="briefing-store-brand">{store.brandName || 'Brand Store'}</div>
+            <div className="briefing-store-nav">
+              {topPages.map(function(pg) {
                 var children = childrenMap[pg.id] || [];
-                var startIdx = globalSectionIdx;
-                globalSectionIdx += pg.sections.length;
-                children.forEach(function(c) { globalSectionIdx += c.sections.length; });
+                var isActive = showAllPages
+                  ? false
+                  : (pg.id === curPage || children.some(function(c) { return c.id === curPage; }));
+                var hasDropdown = children.length > 0;
+
                 return (
-                  <div key={pg.id}>
-                    <PageBriefing page={pg} pageIndex={pi} isSubPage={false} viewMode={viewMode} products={store.products || []} sectionStartIndex={startIdx} />
-                    {children.map(function(child, ci) {
-                      var childStart = startIdx + pg.sections.length;
-                      for (var k = 0; k < ci; k++) childStart += children[k].sections.length;
-                      return <PageBriefing key={child.id} page={child} pageIndex={ci} isSubPage={true} viewMode={viewMode} products={store.products || []} sectionStartIndex={childStart} />;
-                    })}
+                  <div key={pg.id} className="briefing-nav-tab-wrap"
+                    onMouseEnter={function() { if (hasDropdown) setHoveredNav(pg.id); }}
+                    onMouseLeave={function() { setHoveredNav(null); }}>
+                    <span
+                      className={'briefing-nav-tab' + (isActive ? ' active' : '')}
+                      onClick={function() { setCurPage(pg.id); setShowAllPages(false); }}>
+                      {pg.name}
+                      {hasDropdown && <span className="briefing-nav-arrow">{'\u25BE'}</span>}
+                    </span>
+                    {hasDropdown && hoveredNav === pg.id && (
+                      <div className="briefing-nav-dropdown">
+                        {children.map(function(child) {
+                          return (
+                            <div key={child.id}
+                              className={'briefing-nav-dd-item' + (child.id === curPage ? ' active' : '')}
+                              onClick={function() { setCurPage(child.id); setShowAllPages(false); setHoveredNav(null); }}>
+                              {child.name}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
                 );
-              });
-            })()
-          ) : (
-            (function() {
-              var pg = pages.find(function(p) { return p.id === curPage; }) || pages[0];
-              if (!pg) return <div className="briefing-empty">No pages found.</div>;
-              var pi = pages.indexOf(pg);
-              return <PageBriefing page={pg} pageIndex={pi} isSubPage={!!pg.parentId} viewMode={viewMode} products={store.products || []} sectionStartIndex={0} />;
-            })()
-          )}
+              })}
+              <span
+                className={'briefing-nav-tab briefing-nav-all' + (showAllPages ? ' active' : '')}
+                onClick={function() { setShowAllPages(true); }}>
+                All Pages
+              </span>
+            </div>
+          </div>
+
+          {/* Page content */}
+          <div className="briefing-pages-area">
+            {showAllPages ? (
+              (function() {
+                var globalSectionIdx = 0;
+                return topPages.map(function(pg, pi) {
+                  var children = childrenMap[pg.id] || [];
+                  var startIdx = globalSectionIdx;
+                  globalSectionIdx += pg.sections.length;
+                  children.forEach(function(c) { globalSectionIdx += c.sections.length; });
+                  return (
+                    <div key={pg.id}>
+                      <div className="briefing-page-divider">{pg.name}</div>
+                      {pg.sections.map(function(sec, si) {
+                        return (
+                          <SectionBriefing
+                            key={sec.id}
+                            section={sec}
+                            sectionIndex={si}
+                            viewMode={viewMode}
+                            products={store.products || []}
+                            sectionColor={getSectionColor(startIdx + si)}
+                          />
+                        );
+                      })}
+                      {children.map(function(child, ci) {
+                        var childStart = startIdx + pg.sections.length;
+                        for (var k = 0; k < ci; k++) childStart += children[k].sections.length;
+                        return (
+                          <div key={child.id}>
+                            <div className="briefing-page-divider briefing-page-divider-sub">{child.name}</div>
+                            {child.sections.map(function(sec, si) {
+                              return (
+                                <SectionBriefing
+                                  key={sec.id}
+                                  section={sec}
+                                  sectionIndex={si}
+                                  viewMode={viewMode}
+                                  products={store.products || []}
+                                  sectionColor={getSectionColor(childStart + si)}
+                                />
+                              );
+                            })}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                });
+              })()
+            ) : (
+              (function() {
+                var pg = pages.find(function(p) { return p.id === curPage; }) || pages[0];
+                if (!pg) return <div className="briefing-empty">No pages found.</div>;
+                return pg.sections.map(function(sec, si) {
+                  return (
+                    <SectionBriefing
+                      key={sec.id}
+                      section={sec}
+                      sectionIndex={si}
+                      viewMode={viewMode}
+                      products={store.products || []}
+                      sectionColor={getSectionColor(si)}
+                    />
+                  );
+                });
+              })()
+            )}
+          </div>
         </div>
 
         {/* RIGHT PANEL: Designer Instructions */}
@@ -502,7 +584,7 @@ export default function BriefingView() {
                 <div key={idx} className="briefing-right-section-group">
                   <div className="briefing-right-section-header" style={{ background: color.bg, borderLeft: '3px solid ' + color.border }}>
                     <span style={{ fontWeight: 700, color: color.label, fontSize: 11 }}>{item.pageName}</span>
-                    <span style={{ fontSize: 10, color: '#64748b' }}> &middot; Section {item.sectionIndex + 1}</span>
+                    <span style={{ fontSize: 10, color: '#64748b' }}> &middot; S{item.sectionIndex + 1}</span>
                   </div>
                   {item.section.tiles.map(function(tile, ti) {
                     return (
@@ -522,6 +604,9 @@ export default function BriefingView() {
           </div>
         </div>
       </div>
+
+      {/* Image Type Library Modal */}
+      {showImageLib && <ImageTypeLibrary onClose={function() { setShowImageLib(false); }} />}
     </div>
   );
 }

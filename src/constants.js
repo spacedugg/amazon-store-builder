@@ -195,6 +195,47 @@ export var AMAZON_CATEGORIES = [
   { id: 'cleaning', name: 'Cleaning & Household' },
 ];
 
+// ─── IMAGE TYPE CATEGORIES ───
+// Used in briefs to classify what kind of image the designer should create.
+// These map to the designer's example library for reference.
+export var IMAGE_TYPES = {
+  benefit: {
+    tag: '[BENEFIT]',
+    name: 'Benefit / USP',
+    description: 'Narrow image showing product/brand benefits, USPs, or key features. Compact, supportive — not dominant.',
+    components: ['Icons or small illustrations', 'Short benefit text', 'Brand colors as background', 'Minimal product imagery'],
+    usedFor: 'Feature highlights, USP bars, trust elements, certification badges',
+  },
+  creative: {
+    tag: '[CREATIVE]',
+    name: 'Creative',
+    description: 'Designed composition merging lifestyle/product imagery with text, color blocks, and graphic elements. The broadest and most common image type.',
+    components: ['Product or lifestyle photo as base', 'Overlaid text and headlines', 'Brand color accents and shapes', 'CTA buttons or call-to-action elements'],
+    usedFor: 'Category navigation, brand story, hero sections, feature showcases',
+  },
+  lifestyle: {
+    tag: '[LIFESTYLE]',
+    name: 'Lifestyle',
+    description: 'Products or people shown in real-world use. Scene, mood, and atmosphere are dominant — text is secondary or absent.',
+    components: ['People using the product', 'Real-world environment/setting', 'Natural or styled lighting', 'Minimal or no text overlay'],
+    usedFor: 'Hero banners, brand atmosphere, product-in-use sections',
+  },
+  product: {
+    tag: '[PRODUCT]',
+    name: 'Product',
+    description: 'Clean product shot on a simple, solid-color or subtly textured background. Often product renderings.',
+    components: ['Product centered or arranged', 'Solid color or gradient background', 'Brand colors for background', 'No or minimal text'],
+    usedFor: 'Product spotlights, variant showcases, shoppable tiles',
+  },
+  textimage: {
+    tag: '[TEXTIMAGE]',
+    name: 'Text Image',
+    description: 'Image where text is the primary content. Used because Amazon Brand Stores do not support native text styling — all text is designed into images.',
+    components: ['Headlines and body text', 'Brand typography and colors', 'Background color or subtle pattern', 'Optional CTA buttons'],
+    usedFor: 'Brand statements, category headers, promotional banners, USP sections',
+  },
+};
+
 // Style guidance per category for AI prompts
 export var CATEGORY_STYLE_HINTS = {
   generic: { tone: 'neutral, professional', visualStyle: 'clean and versatile', trustFocus: false },
