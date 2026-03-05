@@ -488,8 +488,10 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '',
     formatWebsiteContext(websiteData),
     'DIMENSION RULES:',
-    '- Hero: 3000 x 600-800. Category tiles: 3000 x 1000-1200. Lifestyle: 3000 x 1200-1500.',
-    '- All tiles in a row have the SAME height.',
+    '- Full-width images: 3000 x VARIABLE height (600, 700, 800, 1000, 1200 — choose what fits the content).',
+    '- Heights are FLEXIBLE, especially for full-width layouts. A hero can be 3000x800, a lifestyle banner 3000x1000.',
+    '- Multi-tile layouts: all tiles in a row have the SAME height.',
+    '- Standard tile sizes: LS=1500x1500, SS=750x750, W=1500x700, FW=3000x600+ (height variable).',
     '',
     'TEXT RULES:',
     '- textOverlay: Text designed INTO the image. In store language.',
@@ -573,7 +575,10 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     ].filter(Boolean).join('\n') : '',
     'CRITICAL RULES:',
     '- Tile count per section MUST match layout cell count.',
-    '- ALL ASINs must be placed in exactly ONE product_grid tile.',
+    '- ASIN GRID RULES: product_grid tiles are only needed when there are many products to browse.',
+    '  If a page has few products (2-4) that are already shown as shoppable_image tiles with linkAsin,',
+    '  a product_grid is UNNECESSARY. Only add product_grid when it adds value (5+ products to browse).',
+    '  Every image tile can have a linkAsin to make it clickable — this often replaces the need for a grid.',
     '- Use VARIED layouts. NEVER use more than 2 full-width "1" layouts per page.',
     '- Mix std-2equal, lg-2stack, lg-4grid, 2x2wide, vh-w2s, 2s-4grid etc.',
     '- Sections flow: Hero → Feature/USP → Product showcase → Lifestyle → Product grid → Cross-sell.',
@@ -655,7 +660,11 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '- NEVER place two identical image categories directly adjacent (e.g. two LIFESTYLE sections in a row).',
     '',
     'MINIMUM SECTIONS:',
-    isHomepage ? '- Homepage MUST have at least 6 sections. Aim for 8-10.' : '- Category page MUST have at least 4 sections. Aim for 5-7.',
+    complexityLevel === 1
+      ? (isHomepage ? '- Minimal tier: Homepage 3-5 sections. Hero + category nav + optional benefit/brand.' : '- Minimal tier: Category page 2-3 sections. Hero/header + product display. No product_grid if products shown as shoppable_image.')
+      : complexityLevel === 3
+        ? (isHomepage ? '- Premium tier: Homepage 7-12 sections. Rich variety of all image categories.' : '- Premium tier: Category page 4-7 sections. Full range of image categories.')
+        : (isHomepage ? '- Standard tier: Homepage 5-8 sections. Good variety.' : '- Standard tier: Category page 3-5 sections.'),
     '- Return ONLY valid JSON.',
   ].filter(Boolean).join('\n');
 
@@ -972,8 +981,15 @@ export function applyOperations(store, operations) {
 }
 
 // ─── ENSURE MINIMUM SECTIONS PER PAGE ───
-function ensureMinimumSections(sections, pageName, brand, lang, analysis, template, isHomepage) {
-  var minSections = isHomepage ? 6 : 4;
+function ensureMinimumSections(sections, pageName, brand, lang, analysis, template, isHomepage, complexityLevel) {
+  var minSections;
+  if (complexityLevel === 1) {
+    minSections = isHomepage ? 3 : 2;
+  } else if (complexityLevel === 3) {
+    minSections = isHomepage ? 7 : 4;
+  } else {
+    minSections = isHomepage ? 5 : 3;
+  }
   if (sections.length >= minSections) return sections;
 
   // Use template blueprint to fill missing sections
@@ -1136,7 +1152,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       'Homepage', homepageProducts, brand, lang, true,
       analysis.categories || [], analysis, userInstructions, cLevel, category, template, websiteData
     );
-    var homeSections = ensureMinimumSections(homeResult.sections || [], 'Homepage', brand, lang, analysis, template, true);
+    var homeSections = ensureMinimumSections(homeResult.sections || [], 'Homepage', brand, lang, analysis, template, true, cLevel);
     pages.push({ id: 'homepage', name: 'Homepage', sections: homeSections });
     log('Homepage: ' + homeSections.length + ' sections');
   } catch (err) {
@@ -1183,7 +1199,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
         cat.name, allCatProducts, brand, lang, false,
         categories, analysis, userInstructions, cLevel, category, template, websiteData
       );
-      var catSections = ensureMinimumSections(catResult.sections || [], cat.name, brand, lang, analysis, template, false);
+      var catSections = ensureMinimumSections(catResult.sections || [], cat.name, brand, lang, analysis, template, false, cLevel);
       pages.push({ id: parentPageId, name: cat.name, sections: catSections });
       log(cat.name + ': ' + catSections.length + ' sections');
     } catch (err) {
@@ -1205,7 +1221,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
             sub.name, subProducts, brand, lang, false,
             categories, analysis, userInstructions, cLevel, category, template, websiteData
           );
-          var subSections = ensureMinimumSections(subResult.sections || [], sub.name, brand, lang, analysis, template, false);
+          var subSections = ensureMinimumSections(subResult.sections || [], sub.name, brand, lang, analysis, template, false, cLevel);
           pages.push({ id: subPageId, name: sub.name, parentId: parentPageId, sections: subSections });
           log('  ' + sub.name + ': ' + subSections.length + ' sections');
         } catch (err) {
