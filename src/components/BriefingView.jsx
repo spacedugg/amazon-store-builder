@@ -22,6 +22,85 @@ var INSPIRATION_LINKS = [
   { brand: 'North Face', url: 'https://www.amazon.de/stores/THENORTHFACE/page/91172724-C342-482B-A300-564D9EA5E09F', category: 'Outdoor' },
 ];
 
+// ─── IMAGE CATEGORY EXAMPLES (Google Drive folders with reference images) ───
+var IMAGE_CATEGORY_EXAMPLES = [
+  { id: 'store_hero', name: 'Store Hero', color: '#8B5CF6', desc: 'First image above menu. Represents the brand instantly.', folder: '' },
+  { id: 'benefit', name: 'Benefit', color: '#10B981', desc: 'USPs, trust signals, quality markers. Icons + short labels, no product photos.', folder: '' },
+  { id: 'product', name: 'Product', color: '#3B82F6', desc: 'Product on clean background. Optional name, CTA, badge.', folder: '' },
+  { id: 'creative', name: 'Creative', color: '#F59E0B', desc: 'Complex composition: product + text + graphics. Engagement AND information.', folder: '' },
+  { id: 'lifestyle', name: 'Lifestyle', color: '#EC4899', desc: 'Lifestyle photo dominates (70-80%+). Emotional, product in use.', folder: '' },
+  { id: 'text_image', name: 'Text Image', color: '#6B7280', desc: 'Text/graphics dominant. Full typographic control. No product/lifestyle photos.', folder: '' },
+];
+
+// ─── BRIEFING STORE NAV BAR ───
+function BriefingStoreNav({ store, curPage, onSelectPage, viewMode }) {
+  var [showMore, setShowMore] = useState(false);
+  var pages = store.pages || [];
+  var topPages = pages.filter(function(p) { return !p.parentId; });
+  var childrenMap = {};
+  topPages.forEach(function(pg) {
+    childrenMap[pg.id] = pages.filter(function(cp) { return cp.parentId === pg.id; });
+  });
+
+  var isMobile = viewMode === 'mobile';
+  // For desktop: show as many tabs as fit, then "Mehr" for overflow
+  var MAX_VISIBLE = isMobile ? 999 : 6;
+  var visiblePages = topPages.slice(0, MAX_VISIBLE);
+  var overflowPages = topPages.slice(MAX_VISIBLE);
+  var hasOverflow = overflowPages.length > 0;
+
+  return (
+    <div className="briefing-store-nav">
+      <div className="briefing-store-brand">{store.brandName || 'Brand Store'}</div>
+      <div className="briefing-nav-tabs">
+        {visiblePages.map(function(pg) {
+          var isActive = pg.id === curPage || (childrenMap[pg.id] || []).some(function(c) { return c.id === curPage; });
+          return (
+            <div key={pg.id} className="briefing-nav-tab-item">
+              <button className={'briefing-nav-tab' + (isActive ? ' active' : '')}
+                onClick={function() { onSelectPage(pg.id); }}>
+                {pg.name}
+              </button>
+            </div>
+          );
+        })}
+        {hasOverflow && (
+          <div className="briefing-nav-tab-item" style={{ position: 'relative' }}>
+            <button className="briefing-nav-tab-more" onClick={function() { setShowMore(!showMore); }}>
+              Mehr &#9662;
+            </button>
+            {showMore && (
+              <div className="briefing-nav-more-menu">
+                {topPages.map(function(pg) {
+                  var children = childrenMap[pg.id] || [];
+                  var isActive = pg.id === curPage;
+                  return (
+                    <div key={pg.id}>
+                      <button className={'briefing-nav-more-item' + (isActive ? ' active' : '')}
+                        onClick={function() { onSelectPage(pg.id); setShowMore(false); }}>
+                        {pg.name}
+                      </button>
+                      {children.map(function(child) {
+                        return (
+                          <button key={child.id}
+                            className={'briefing-nav-more-item briefing-nav-more-sub' + (child.id === curPage ? ' active' : '')}
+                            onClick={function() { onSelectPage(child.id); setShowMore(false); }}>
+                            {child.name}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // Section color palette for visual distinction
 var SECTION_COLORS = [
   { bg: '#eff6ff', border: '#3b82f6', label: '#1d4ed8' },  // blue
@@ -368,32 +447,27 @@ export default function BriefingView() {
       <div className="briefing-body">
         {/* LEFT SIDEBAR: Structure + Info */}
         <div className="briefing-sidebar">
-          {/* Page navigation — color-coded */}
-          <div className="briefing-sidebar-section">
-            <div className="briefing-sidebar-title" style={{ color: '#6366f1' }}>Store Structure</div>
-            {topPages.map(function(pg, pi) {
-              var children = childrenMap[pg.id] || [];
-              var isActive = curPage === pg.id;
-              return (
-                <div key={pg.id}>
-                  <div className={'briefing-nav-item' + (isActive ? ' active' : '') + getHighlightClass('page-' + pg.id)}
-                    onClick={function() { setCurPage(pg.id); setShowAllPages(false); }}
-                    style={{ borderLeft: '3px solid ' + getSectionColor(pi).border, marginLeft: 0 }}>
-                    {pg.name || ('Page ' + (pi + 1))}
-                    <span style={{ fontSize: 9, color: '#94a3b8', marginLeft: 4 }}>({pg.sections.length}s)</span>
+          {/* Image Category Legend */}
+          <div className="briefing-sidebar-section" style={{ background: '#faf5ff', borderRadius: 8, margin: '0 8px', padding: '10px 12px' }}>
+            <div className="briefing-sidebar-title" style={{ color: '#7e22ce' }}>Image Categories (6 Types)</div>
+            <div className="briefing-imgcat-legend">
+              {IMAGE_CATEGORY_EXAMPLES.map(function(cat) {
+                return (
+                  <div key={cat.id} className="briefing-imgcat-item">
+                    <span className="briefing-imgcat-badge" style={{ background: cat.color }}>{cat.name}</span>
+                    <span className="briefing-imgcat-desc">
+                      {cat.desc}
+                      {cat.folder && (
+                        <a href={cat.folder} target="_blank" rel="noopener noreferrer" className="briefing-imgcat-link">Examples</a>
+                      )}
+                    </span>
                   </div>
-                  {children.map(function(child) {
-                    return (
-                      <div key={child.id}
-                        className={'briefing-nav-item briefing-nav-sub' + (curPage === child.id ? ' active' : '') + getHighlightClass('page-' + child.id)}
-                        onClick={function() { setCurPage(child.id); setShowAllPages(false); }}>
-                        {child.name}
-                      </div>
-                    );
-                  })}
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
+            <div style={{ marginTop: 8, fontSize: 10, color: '#64748b', lineHeight: 1.4 }}>
+              Every image tile is one of these 6 types. The category badge appears on each tile in the preview and briefing.
+            </div>
           </div>
 
           {/* Store info — highlighted */}
@@ -441,9 +515,10 @@ export default function BriefingView() {
                 <div><span className="briefing-imgtype-badge large">LS</span> Large Square: 1500 &times; 1500</div>
                 <div><span className="briefing-imgtype-badge small">SS</span> Small Square: 750 &times; 750</div>
                 <div><span className="briefing-imgtype-badge wide">W</span> Wide: 1500 &times; 700</div>
-                <div><span className="briefing-imgtype-badge full">FW</span> Full Width: 3000 &times; 600</div>
+                <div><span className="briefing-imgtype-badge full">FW</span> Full Width: 3000 &times; 600+</div>
               </div>
-              <p style={{ marginTop: 6, fontSize: 10 }}>Header: 3000&times;600 (desktop), 1242&times;450 (mobile)</p>
+              <p style={{ marginTop: 6, fontSize: 10, color: '#64748b' }}>Header: 3000&times;600 (desktop), 1242&times;450 (mobile)</p>
+              <p style={{ marginTop: 4, fontSize: 10, color: '#a16207', fontWeight: 600 }}>Full-width images can have variable heights (e.g. 3000&times;800, 3000&times;1000). The dimensions per tile are guidelines, not rigid constraints.</p>
             </div>
           </div>
 
@@ -464,7 +539,10 @@ export default function BriefingView() {
         </div>
 
         {/* CENTER: Store visual preview */}
-        <div className="briefing-content">
+        <div className={'briefing-content' + (viewMode === 'mobile' ? ' briefing-mobile' : '')}>
+          {/* Store nav bar (clickable, like in the real Brand Store) */}
+          <BriefingStoreNav store={store} curPage={curPage} onSelectPage={function(id) { setCurPage(id); setShowAllPages(false); }} viewMode={viewMode} />
+
           {showAllPages ? (
             (function() {
               var globalSectionIdx = 0;
