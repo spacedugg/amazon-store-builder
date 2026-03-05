@@ -32,9 +32,60 @@ var IMAGE_CATEGORY_EXAMPLES = [
   { id: 'text_image', name: 'Text Image', color: '#6B7280', desc: 'Text/graphics dominant. Full typographic control. No product/lifestyle photos.', folder: '' },
 ];
 
+// Map category IDs to colors for inline highlighting
+var CATEGORY_COLOR_MAP = {};
+IMAGE_CATEGORY_EXAMPLES.forEach(function(cat) { CATEGORY_COLOR_MAP[cat.id] = cat.color; });
+
+// Category tag patterns for highlighting in brief text
+var CATEGORY_TAG_MAP = {
+  '[STORE_HERO]': { id: 'store_hero', color: '#8B5CF6' },
+  '[BENEFIT]': { id: 'benefit', color: '#10B981' },
+  '[PRODUCT]': { id: 'product', color: '#3B82F6' },
+  '[CREATIVE]': { id: 'creative', color: '#F59E0B' },
+  '[LIFESTYLE]': { id: 'lifestyle', color: '#EC4899' },
+  '[TEXT_IMAGE]': { id: 'text_image', color: '#6B7280' },
+};
+
+// Render brief text with colored category tags
+function BriefTextHighlighted({ text }) {
+  if (!text) return null;
+  var parts = [];
+  var remaining = text;
+  var key = 0;
+  while (remaining.length > 0) {
+    var earliest = -1;
+    var earliestTag = null;
+    var earliestInfo = null;
+    Object.keys(CATEGORY_TAG_MAP).forEach(function(tag) {
+      var idx = remaining.indexOf(tag);
+      if (idx >= 0 && (earliest < 0 || idx < earliest)) {
+        earliest = idx;
+        earliestTag = tag;
+        earliestInfo = CATEGORY_TAG_MAP[tag];
+      }
+    });
+    if (earliest < 0) {
+      parts.push(<span key={key++}>{remaining}</span>);
+      break;
+    }
+    if (earliest > 0) {
+      parts.push(<span key={key++}>{remaining.substring(0, earliest)}</span>);
+    }
+    parts.push(
+      <span key={key++} className="briefing-cat-tag-inline" style={{ background: earliestInfo.color, color: '#fff', padding: '1px 6px', borderRadius: 3, fontWeight: 700, fontSize: 10 }}>
+        {earliestTag}
+      </span>
+    );
+    remaining = remaining.substring(earliest + earliestTag.length);
+  }
+  return <span>{parts}</span>;
+}
+
 // ─── BRIEFING STORE NAV BAR ───
 function BriefingStoreNav({ store, curPage, onSelectPage, viewMode }) {
   var [showMore, setShowMore] = useState(false);
+  var [drillParent, setDrillParent] = useState(null); // parent page id for subcategory drill-down
+  var moreRef = useRef(null);
   var pages = store.pages || [];
   var topPages = pages.filter(function(p) { return !p.parentId; });
   var childrenMap = {};
@@ -43,18 +94,111 @@ function BriefingStoreNav({ store, curPage, onSelectPage, viewMode }) {
   });
 
   var isMobile = viewMode === 'mobile';
-  // For desktop: show as many tabs as fit, then "Mehr" for overflow
   var MAX_VISIBLE = isMobile ? 999 : 6;
   var visiblePages = topPages.slice(0, MAX_VISIBLE);
   var overflowPages = topPages.slice(MAX_VISIBLE);
   var hasOverflow = overflowPages.length > 0;
 
+  // Close popup when clicking outside
+  useEffect(function() {
+    if (!showMore) return;
+    function handleClickOutside(e) {
+      if (moreRef.current && !moreRef.current.contains(e.target)) {
+        setShowMore(false);
+        setDrillParent(null);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return function() { document.removeEventListener('mousedown', handleClickOutside); };
+  }, [showMore]);
+
+  function handleOpenMore() {
+    setShowMore(!showMore);
+    setDrillParent(null);
+  }
+
+  function handleSelectPage(pageId) {
+    onSelectPage(pageId);
+    setShowMore(false);
+    setDrillParent(null);
+  }
+
+  function handleDrillInto(parentId) {
+    setDrillParent(parentId);
+  }
+
+  function handleDrillBack() {
+    setDrillParent(null);
+  }
+
+  // Determine what the popup shows
+  var popupContent = null;
+  if (showMore) {
+    if (drillParent) {
+      // Show subcategories of the drilled parent
+      var parentPage = topPages.find(function(p) { return p.id === drillParent; });
+      var children = childrenMap[drillParent] || [];
+      popupContent = (
+        <div className="briefing-nav-popup">
+          <button className="briefing-nav-popup-back" onClick={handleDrillBack}>
+            &#8592; Back
+          </button>
+          <button
+            className={'briefing-nav-popup-item' + (curPage === drillParent ? ' active' : '')}
+            onClick={function() { handleSelectPage(drillParent); }}
+          >
+            {parentPage ? parentPage.name : 'Category'}
+            <span className="briefing-nav-popup-hint">Overview</span>
+          </button>
+          {children.map(function(child) {
+            return (
+              <button
+                key={child.id}
+                className={'briefing-nav-popup-item briefing-nav-popup-sub' + (child.id === curPage ? ' active' : '')}
+                onClick={function() { handleSelectPage(child.id); }}
+              >
+                {child.name}
+              </button>
+            );
+          })}
+        </div>
+      );
+    } else {
+      // Show all top-level pages
+      popupContent = (
+        <div className="briefing-nav-popup">
+          {topPages.map(function(pg) {
+            var children = childrenMap[pg.id] || [];
+            var hasChildren = children.length > 0;
+            return (
+              <button
+                key={pg.id}
+                className={'briefing-nav-popup-item' + (pg.id === curPage ? ' active' : '')}
+                onClick={function() {
+                  if (hasChildren) {
+                    handleDrillInto(pg.id);
+                  } else {
+                    handleSelectPage(pg.id);
+                  }
+                }}
+              >
+                <span>{pg.name}</span>
+                {hasChildren && <span className="briefing-nav-popup-arrow">&#9656;</span>}
+              </button>
+            );
+          })}
+        </div>
+      );
+    }
+  }
+
   return (
     <div className="briefing-store-nav">
-      <div className="briefing-store-brand">{store.brandName || 'Brand Store'}</div>
       <div className="briefing-nav-tabs">
         {visiblePages.map(function(pg) {
           var isActive = pg.id === curPage || (childrenMap[pg.id] || []).some(function(c) { return c.id === curPage; });
+          var children = childrenMap[pg.id] || [];
+          var hasChildren = children.length > 0;
           return (
             <div key={pg.id} className="briefing-nav-tab-item">
               <button className={'briefing-nav-tab' + (isActive ? ' active' : '')}
@@ -65,35 +209,11 @@ function BriefingStoreNav({ store, curPage, onSelectPage, viewMode }) {
           );
         })}
         {hasOverflow && (
-          <div className="briefing-nav-tab-item" style={{ position: 'relative' }}>
-            <button className="briefing-nav-tab-more" onClick={function() { setShowMore(!showMore); }}>
+          <div className="briefing-nav-tab-item" style={{ position: 'relative' }} ref={moreRef}>
+            <button className="briefing-nav-tab-more" onClick={handleOpenMore}>
               Mehr &#9662;
             </button>
-            {showMore && (
-              <div className="briefing-nav-more-menu">
-                {topPages.map(function(pg) {
-                  var children = childrenMap[pg.id] || [];
-                  var isActive = pg.id === curPage;
-                  return (
-                    <div key={pg.id}>
-                      <button className={'briefing-nav-more-item' + (isActive ? ' active' : '')}
-                        onClick={function() { onSelectPage(pg.id); setShowMore(false); }}>
-                        {pg.name}
-                      </button>
-                      {children.map(function(child) {
-                        return (
-                          <button key={child.id}
-                            className={'briefing-nav-more-item briefing-nav-more-sub' + (child.id === curPage ? ' active' : '')}
-                            onClick={function() { onSelectPage(child.id); setShowMore(false); }}>
-                            {child.name}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
+            {popupContent}
           </div>
         )}
       </div>
@@ -103,14 +223,14 @@ function BriefingStoreNav({ store, curPage, onSelectPage, viewMode }) {
 
 // Section color palette for visual distinction
 var SECTION_COLORS = [
-  { bg: '#eff6ff', border: '#3b82f6', label: '#1d4ed8' },  // blue
-  { bg: '#f0fdf4', border: '#22c55e', label: '#15803d' },  // green
-  { bg: '#fdf4ff', border: '#d946ef', label: '#a21caf' },  // fuchsia
-  { bg: '#fff7ed', border: '#f97316', label: '#c2410c' },  // orange
-  { bg: '#faf5ff', border: '#a855f7', label: '#7e22ce' },  // purple
-  { bg: '#fefce8', border: '#eab308', label: '#a16207' },  // yellow
-  { bg: '#f0fdfa', border: '#14b8a6', label: '#0f766e' },  // teal
-  { bg: '#fef2f2', border: '#ef4444', label: '#b91c1c' },  // red
+  { bg: '#eff6ff', border: '#3b82f6', label: '#1d4ed8' },
+  { bg: '#f0fdf4', border: '#22c55e', label: '#15803d' },
+  { bg: '#fdf4ff', border: '#d946ef', label: '#a21caf' },
+  { bg: '#fff7ed', border: '#f97316', label: '#c2410c' },
+  { bg: '#faf5ff', border: '#a855f7', label: '#7e22ce' },
+  { bg: '#fefce8', border: '#eab308', label: '#a16207' },
+  { bg: '#f0fdfa', border: '#14b8a6', label: '#0f766e' },
+  { bg: '#fef2f2', border: '#ef4444', label: '#b91c1c' },
 ];
 
 function getSectionColor(index) {
@@ -124,13 +244,16 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor }) {
   var tileLabel = TILE_TYPE_LABELS[tile.type] || tile.type;
   var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
 
+  // Get category color for the badge
+  var catColor = tile.imageCategory && CATEGORY_COLOR_MAP[tile.imageCategory] ? CATEGORY_COLOR_MAP[tile.imageCategory] : null;
+
   return (
     <div className="briefing-tile-detail" style={{ borderLeft: '3px solid ' + sectionColor.border }}>
       <div className="briefing-tile-header">
         <span className="briefing-tile-index">Tile {tileIndex + 1}</span>
         <span className="briefing-tile-type">{tileLabel}</span>
         {tile.imageCategory && IMAGE_CATEGORIES[tile.imageCategory] && (
-          <span className="briefing-tile-imgcat" style={{ background: '#f0f0f0', borderRadius: 3, padding: '1px 6px', fontSize: 10, fontWeight: 600 }}>
+          <span className="briefing-tile-imgcat" style={{ background: catColor || '#94a3b8', color: '#fff', borderRadius: 3, padding: '1px 8px', fontSize: 10, fontWeight: 700 }}>
             {IMAGE_CATEGORIES[tile.imageCategory].name}
           </span>
         )}
@@ -140,7 +263,7 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor }) {
       {tile.brief && (
         <div className="briefing-field">
           <span className="briefing-field-label">Design Brief:</span>
-          <span className="briefing-field-value">{tile.brief}</span>
+          <span className="briefing-field-value"><BriefTextHighlighted text={tile.brief} /></span>
         </div>
       )}
 
@@ -197,7 +320,7 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor }) {
   );
 }
 
-// ─── SECTION BRIEFING (visual preview only — no inline details) ───
+// ─── SECTION BRIEFING (visual preview only) ───
 function SectionBriefing({ section, sectionIndex, viewMode, products, sectionColor }) {
   var layout = findLayout(section.layoutId);
 
@@ -229,12 +352,12 @@ function SectionBriefing({ section, sectionIndex, viewMode, products, sectionCol
   );
 }
 
-// ─── PAGE BRIEFING (center content — visual only) ───
-function PageBriefing({ page, pageIndex, isSubPage, viewMode, products, sectionStartIndex }) {
+// ─── PAGE BRIEFING (center content — visual only, single page) ───
+function PageBriefing({ page, viewMode, products, sectionStartIndex }) {
   return (
-    <div className={'briefing-page' + (isSubPage ? ' briefing-subpage' : '')}>
+    <div className="briefing-page">
       <div className="briefing-page-header">
-        <span className="briefing-page-name">{isSubPage ? '\u2514 ' : ''}{page.name || ('Page ' + (pageIndex + 1))}</span>
+        <span className="briefing-page-name">{page.name || 'Page'}</span>
         <span className="briefing-page-count">{page.sections.length} section{page.sections.length !== 1 ? 's' : ''}</span>
       </div>
 
@@ -254,6 +377,39 @@ function PageBriefing({ page, pageIndex, isSubPage, viewMode, products, sectionS
   );
 }
 
+// ─── STORE HERO BANNER (above nav) ───
+function StoreHeroBanner({ store, viewMode }) {
+  // Find the first store_hero tile across all pages
+  var heroTile = null;
+  (store.pages || []).forEach(function(page) {
+    if (heroTile) return;
+    (page.sections || []).forEach(function(sec) {
+      if (heroTile) return;
+      (sec.tiles || []).forEach(function(tile) {
+        if (!heroTile && tile.imageCategory === 'store_hero') {
+          heroTile = tile;
+        }
+      });
+    });
+  });
+
+  var isDesktop = viewMode === 'desktop';
+  var width = isDesktop ? 3000 : 1242;
+  var height = isDesktop ? 600 : 450;
+
+  return (
+    <div className="briefing-hero-banner">
+      <div className="briefing-hero-placeholder">
+        <div className="briefing-hero-label">Store Hero Image</div>
+        <div className="briefing-hero-dims">{width} &times; {height}px</div>
+        {heroTile && heroTile.brief && (
+          <div className="briefing-hero-brief"><BriefTextHighlighted text={heroTile.brief} /></div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // ─── MAIN BRIEFING VIEW ───
 export default function BriefingView() {
   var [store, setStore] = useState(null);
@@ -261,7 +417,6 @@ export default function BriefingView() {
   var [error, setError] = useState(null);
   var [viewMode, setViewMode] = useState('desktop');
   var [curPage, setCurPage] = useState('');
-  var [showAllPages, setShowAllPages] = useState(true);
   var [lastUpdated, setLastUpdated] = useState(null);
   var [changeHighlights, setChangeHighlights] = useState({});
   var [updateBanner, setUpdateBanner] = useState(false);
@@ -345,14 +500,6 @@ export default function BriefingView() {
     return highlights;
   }
 
-  function getHighlightClass(key) {
-    var h = changeHighlights[key];
-    if (h === 'added') return ' briefing-highlight-added';
-    if (h === 'modified') return ' briefing-highlight-modified';
-    if (h === 'removed') return ' briefing-highlight-removed';
-    return '';
-  }
-
   // ─── DOCX DOWNLOAD ───
   var handleDocxDownload = async function() {
     if (!store) return;
@@ -387,27 +534,12 @@ export default function BriefingView() {
   });
   var googleDriveUrl = store.googleDriveUrl || '';
 
-  // Find the currently-shown page for the right panel
-  var activePage = showAllPages ? null : (pages.find(function(p) { return p.id === curPage; }) || pages[0]);
+  // Always single-page mode: find the active page
+  var activePage = pages.find(function(p) { return p.id === curPage; }) || pages[0];
 
-  // Gather all visible sections for the right panel
+  // Right panel: only show sections for the currently visible page
   var rightPanelSections = [];
-  if (showAllPages) {
-    var globalIdx = 0;
-    topPages.forEach(function(pg) {
-      var children = childrenMap[pg.id] || [];
-      pg.sections.forEach(function(sec, si) {
-        rightPanelSections.push({ section: sec, sectionIndex: si, pageName: pg.name, colorIndex: globalIdx, layoutId: sec.layoutId });
-        globalIdx++;
-      });
-      children.forEach(function(child) {
-        child.sections.forEach(function(sec, si) {
-          rightPanelSections.push({ section: sec, sectionIndex: si, pageName: child.name, colorIndex: globalIdx, layoutId: sec.layoutId });
-          globalIdx++;
-        });
-      });
-    });
-  } else if (activePage) {
+  if (activePage) {
     activePage.sections.forEach(function(sec, si) {
       rightPanelSections.push({ section: sec, sectionIndex: si, pageName: activePage.name, colorIndex: si, layoutId: sec.layoutId });
     });
@@ -430,9 +562,6 @@ export default function BriefingView() {
             <button className={'briefing-view-btn' + (viewMode === 'desktop' ? ' active' : '')} onClick={function() { setViewMode('desktop'); }}>Desktop</button>
             <button className={'briefing-view-btn' + (viewMode === 'mobile' ? ' active' : '')} onClick={function() { setViewMode('mobile'); }}>Mobile</button>
           </div>
-          <button className={'briefing-view-btn' + (showAllPages ? ' active' : '')} onClick={function() { setShowAllPages(!showAllPages); }}>
-            {showAllPages ? 'All Pages' : 'Single Page'}
-          </button>
         </div>
       </div>
 
@@ -445,11 +574,12 @@ export default function BriefingView() {
       )}
 
       <div className="briefing-body">
-        {/* LEFT SIDEBAR: Structure + Info */}
+        {/* LEFT SIDEBAR */}
         <div className="briefing-sidebar">
-          {/* Image Category Legend */}
-          <div className="briefing-sidebar-section" style={{ background: '#faf5ff', borderRadius: 8, margin: '0 8px', padding: '10px 12px' }}>
-            <div className="briefing-sidebar-title" style={{ color: '#7e22ce' }}>Image Categories (6 Types)</div>
+          {/* Image Category Legend — PROMINENT */}
+          <div className="briefing-sidebar-section briefing-imgcat-section">
+            <div className="briefing-imgcat-title">Image Categories</div>
+            <div className="briefing-imgcat-subtitle">6 image types used throughout this briefing</div>
             <div className="briefing-imgcat-legend">
               {IMAGE_CATEGORY_EXAMPLES.map(function(cat) {
                 return (
@@ -465,24 +595,24 @@ export default function BriefingView() {
                 );
               })}
             </div>
-            <div style={{ marginTop: 8, fontSize: 10, color: '#64748b', lineHeight: 1.4 }}>
-              Every image tile is one of these 6 types. The category badge appears on each tile in the preview and briefing.
+          </div>
+
+          {/* Inspiration Library */}
+          <div className="briefing-sidebar-section" style={{ background: '#ecfdf5', borderRadius: 8, margin: '0 8px', padding: '10px 12px' }}>
+            <div className="briefing-sidebar-title" style={{ color: '#15803d' }}>Inspiration Library</div>
+            <div className="briefing-inspiration">
+              {INSPIRATION_LINKS.map(function(link, i) {
+                return (
+                  <a key={i} href={link.url} target="_blank" rel="noopener noreferrer" className="briefing-inspiration-link">
+                    <span className="briefing-inspiration-brand">{link.brand}</span>
+                    <span className="briefing-inspiration-cat">{link.category}</span>
+                  </a>
+                );
+              })}
             </div>
           </div>
 
-          {/* Store info — highlighted */}
-          <div className="briefing-sidebar-section" style={{ background: '#f8fafc', borderRadius: 8, margin: '0 8px', padding: '10px 12px' }}>
-            <div className="briefing-sidebar-title" style={{ color: '#0f766e' }}>Store Info</div>
-            <div className="briefing-info-row"><span>Brand:</span> <strong>{store.brandName || 'N/A'}</strong></div>
-            <div className="briefing-info-row"><span>Marketplace:</span> <strong>Amazon.{store.marketplace || 'de'}</strong></div>
-            <div className="briefing-info-row"><span>Pages:</span> <strong>{pages.length}</strong></div>
-            <div className="briefing-info-row"><span>Products:</span> <strong>{(store.products || []).length}</strong></div>
-            {lastUpdated && (
-              <div className="briefing-info-row"><span>Last Updated:</span> <strong>{new Date(lastUpdated).toLocaleString('en-US')}</strong></div>
-            )}
-          </div>
-
-          {/* Google Drive — highlighted */}
+          {/* Google Drive */}
           {googleDriveUrl && (
             <div className="briefing-sidebar-section">
               <div className="briefing-sidebar-title" style={{ color: '#1d4ed8' }}>Asset Upload</div>
@@ -492,7 +622,7 @@ export default function BriefingView() {
             </div>
           )}
 
-          {/* Upload Instructions — highlighted */}
+          {/* Upload Instructions — moved to bottom */}
           <div className="briefing-sidebar-section" style={{ background: '#fef9c3', borderRadius: 8, margin: '0 8px', padding: '10px 12px' }}>
             <div className="briefing-sidebar-title" style={{ color: '#a16207' }}>Upload Instructions</div>
             <div className="briefing-legend">
@@ -507,76 +637,42 @@ export default function BriefingView() {
             </div>
           </div>
 
-          {/* Image type reference — highlighted */}
-          <div className="briefing-sidebar-section" style={{ background: '#ede9fe', borderRadius: 8, margin: '0 8px', padding: '10px 12px' }}>
-            <div className="briefing-sidebar-title" style={{ color: '#7e22ce' }}>Desktop Image Types</div>
-            <div className="briefing-legend">
-              <div className="briefing-imgtype-ref">
-                <div><span className="briefing-imgtype-badge large">LS</span> Large Square: 1500 &times; 1500</div>
-                <div><span className="briefing-imgtype-badge small">SS</span> Small Square: 750 &times; 750</div>
-                <div><span className="briefing-imgtype-badge wide">W</span> Wide: 1500 &times; 700</div>
-                <div><span className="briefing-imgtype-badge full">FW</span> Full Width: 3000 &times; 600+</div>
-              </div>
-              <p style={{ marginTop: 6, fontSize: 10, color: '#64748b' }}>Header: 3000&times;600 (desktop), 1242&times;450 (mobile)</p>
-              <p style={{ marginTop: 4, fontSize: 10, color: '#a16207', fontWeight: 600 }}>Full-width images can have variable heights (e.g. 3000&times;800, 3000&times;1000). The dimensions per tile are guidelines, not rigid constraints.</p>
-            </div>
-          </div>
-
-          {/* Inspiration — highlighted */}
-          <div className="briefing-sidebar-section" style={{ background: '#ecfdf5', borderRadius: 8, margin: '0 8px', padding: '10px 12px' }}>
-            <div className="briefing-sidebar-title" style={{ color: '#15803d' }}>Inspiration Library</div>
-            <div className="briefing-inspiration">
-              {INSPIRATION_LINKS.map(function(link, i) {
-                return (
-                  <a key={i} href={link.url} target="_blank" rel="noopener noreferrer" className="briefing-inspiration-link">
-                    <span className="briefing-inspiration-brand">{link.brand}</span>
-                    <span className="briefing-inspiration-cat">{link.category}</span>
-                  </a>
-                );
-              })}
-            </div>
+          {/* Store Info — moved to very bottom */}
+          <div className="briefing-sidebar-section" style={{ background: '#f8fafc', borderRadius: 8, margin: '0 8px', padding: '10px 12px' }}>
+            <div className="briefing-sidebar-title" style={{ color: '#0f766e' }}>Store Info</div>
+            <div className="briefing-info-row"><span>Brand:</span> <strong>{store.brandName || 'N/A'}</strong></div>
+            <div className="briefing-info-row"><span>Marketplace:</span> <strong>Amazon.{store.marketplace || 'de'}</strong></div>
+            <div className="briefing-info-row"><span>Pages:</span> <strong>{pages.length}</strong></div>
+            <div className="briefing-info-row"><span>Products:</span> <strong>{(store.products || []).length}</strong></div>
+            {lastUpdated && (
+              <div className="briefing-info-row"><span>Last Updated:</span> <strong>{new Date(lastUpdated).toLocaleString('en-US')}</strong></div>
+            )}
           </div>
         </div>
 
         {/* CENTER: Store visual preview */}
         <div className={'briefing-content' + (viewMode === 'mobile' ? ' briefing-mobile' : '')}>
-          {/* Store nav bar (clickable, like in the real Brand Store) */}
-          <BriefingStoreNav store={store} curPage={curPage} onSelectPage={function(id) { setCurPage(id); setShowAllPages(false); }} viewMode={viewMode} />
+          {/* Store Hero Banner above nav */}
+          <StoreHeroBanner store={store} viewMode={viewMode} />
 
-          {showAllPages ? (
-            (function() {
-              var globalSectionIdx = 0;
-              return topPages.map(function(pg, pi) {
-                var children = childrenMap[pg.id] || [];
-                var startIdx = globalSectionIdx;
-                globalSectionIdx += pg.sections.length;
-                children.forEach(function(c) { globalSectionIdx += c.sections.length; });
-                return (
-                  <div key={pg.id}>
-                    <PageBriefing page={pg} pageIndex={pi} isSubPage={false} viewMode={viewMode} products={store.products || []} sectionStartIndex={startIdx} />
-                    {children.map(function(child, ci) {
-                      var childStart = startIdx + pg.sections.length;
-                      for (var k = 0; k < ci; k++) childStart += children[k].sections.length;
-                      return <PageBriefing key={child.id} page={child} pageIndex={ci} isSubPage={true} viewMode={viewMode} products={store.products || []} sectionStartIndex={childStart} />;
-                    })}
-                  </div>
-                );
-              });
-            })()
-          ) : (
-            (function() {
-              var pg = pages.find(function(p) { return p.id === curPage; }) || pages[0];
-              if (!pg) return <div className="briefing-empty">No pages found.</div>;
-              var pi = pages.indexOf(pg);
-              return <PageBriefing page={pg} pageIndex={pi} isSubPage={!!pg.parentId} viewMode={viewMode} products={store.products || []} sectionStartIndex={0} />;
-            })()
-          )}
+          {/* Brand logo + Store nav bar */}
+          <div className="briefing-store-brand-bar">
+            <span className="briefing-store-brand">{store.brandName || 'Brand Store'}</span>
+          </div>
+          <BriefingStoreNav store={store} curPage={curPage} onSelectPage={function(id) { setCurPage(id); }} viewMode={viewMode} />
+
+          {/* Single page content */}
+          {(function() {
+            if (!activePage) return <div className="briefing-empty">No pages found.</div>;
+            return <PageBriefing page={activePage} viewMode={viewMode} products={store.products || []} sectionStartIndex={0} />;
+          })()}
         </div>
 
-        {/* RIGHT PANEL: Designer Instructions */}
+        {/* RIGHT PANEL: Designer Instructions (page-specific) */}
         <div className="briefing-right-panel">
           <div className="briefing-sidebar-title" style={{ padding: '14px 16px', borderBottom: '1px solid #f1f5f9', color: '#dc2626', margin: 0 }}>
             Designer Instructions
+            {activePage && <span style={{ fontSize: 10, color: '#64748b', fontWeight: 400, marginLeft: 8 }}>{activePage.name}</span>}
           </div>
           <div className="briefing-right-panel-body">
             {rightPanelSections.map(function(item, idx) {
