@@ -23,16 +23,14 @@ var INSPIRATION_LINKS = [
 ];
 
 // ─── IMAGE CATEGORY EXAMPLES (Google Drive folders with reference images) ───
-// Google Drive example folders per image category
-// To update: replace the folder IDs below with your shared Drive folder links
-var IMAGE_CATEGORY_FOLDER_BASE = 'https://drive.google.com/drive/folders/';
+// Image category examples — link to real Amazon Brand Stores that showcase each type
 var IMAGE_CATEGORY_EXAMPLES = [
-  { id: 'store_hero', name: 'Store Hero', color: '#8B5CF6', desc: 'First image above menu. Represents the brand instantly.', folder: IMAGE_CATEGORY_FOLDER_BASE + '1StoreHero_REPLACE_WITH_REAL_ID' },
-  { id: 'benefit', name: 'Benefit', color: '#10B981', desc: 'USPs, trust signals, quality markers. Icons + short labels, no product photos.', folder: IMAGE_CATEGORY_FOLDER_BASE + '1Benefit_REPLACE_WITH_REAL_ID' },
-  { id: 'product', name: 'Product', color: '#3B82F6', desc: 'Product on clean background. Optional name, CTA, badge.', folder: IMAGE_CATEGORY_FOLDER_BASE + '1Product_REPLACE_WITH_REAL_ID' },
-  { id: 'creative', name: 'Creative', color: '#F59E0B', desc: 'Complex composition: product + text + graphics. Engagement AND information.', folder: IMAGE_CATEGORY_FOLDER_BASE + '1Creative_REPLACE_WITH_REAL_ID' },
-  { id: 'lifestyle', name: 'Lifestyle', color: '#EC4899', desc: 'Lifestyle photo dominates (70-80%+). Emotional, product in use.', folder: IMAGE_CATEGORY_FOLDER_BASE + '1Lifestyle_REPLACE_WITH_REAL_ID' },
-  { id: 'text_image', name: 'Text Image', color: '#6B7280', desc: 'Text/graphics dominant. Full typographic control. No product/lifestyle photos.', folder: IMAGE_CATEGORY_FOLDER_BASE + '1TextImage_REPLACE_WITH_REAL_ID' },
+  { id: 'store_hero', name: 'Store Hero', color: '#8B5CF6', desc: 'First image above menu. Represents the brand instantly.', example: 'Nespresso', exampleUrl: 'https://www.amazon.de/stores/page/2429E3F3-8BFA-466A-9185-35FB47867B06' },
+  { id: 'benefit', name: 'Benefit', color: '#10B981', desc: 'USPs, trust signals, quality markers. Icons + short labels, no product photos.', example: 'Bears with Benefits', exampleUrl: 'https://www.amazon.de/stores/BearswithBenefits/page/AFC77FAF-F173-4A4E-A7DF-8779F7E16E97' },
+  { id: 'product', name: 'Product', color: '#3B82F6', desc: 'Product on clean background. Optional name, CTA, badge.', example: 'ESN', exampleUrl: 'https://www.amazon.de/stores/ESN/page/F5F8CAD5-7990-44CF-9F5B-61DFFF5E8581' },
+  { id: 'creative', name: 'Creative', color: '#F59E0B', desc: 'Complex composition: product + text + graphics. Engagement AND information.', example: 'Snocks', exampleUrl: 'https://www.amazon.de/stores/SNOCKS/page/C0392661-40E4-498F-992D-2FFEB9086ABB' },
+  { id: 'lifestyle', name: 'Lifestyle', color: '#EC4899', desc: 'Lifestyle photo dominates (70-80%+). Emotional, product in use.', example: 'North Face', exampleUrl: 'https://www.amazon.de/stores/THENORTHFACE/page/91172724-C342-482B-A300-564D9EA5E09F' },
+  { id: 'text_image', name: 'Text Image', color: '#6B7280', desc: 'Text/graphics dominant. Full typographic control. No product/lifestyle photos.', example: 'Holy', exampleUrl: 'https://www.amazon.de/stores/HOLYEnergy/page/7913E121-CB43-4349-A8D2-9F0843B226E4' },
 ];
 
 // Map category IDs to colors for inline highlighting
@@ -91,6 +89,7 @@ function BriefingStoreNav({ store, curPage, onSelectPage, viewMode }) {
   var [popupPos, setPopupPos] = useState({ top: 0, left: 0 });
   var moreRef = useRef(null);
   var moreBtnRef = useRef(null);
+  var popupRef = useRef(null);
   var pages = store.pages || [];
   var topPages = pages.filter(function(p) { return !p.parentId; });
   var childrenMap = {};
@@ -104,11 +103,13 @@ function BriefingStoreNav({ store, curPage, onSelectPage, viewMode }) {
   var overflowPages = topPages.slice(MAX_VISIBLE);
   var hasOverflow = overflowPages.length > 0;
 
-  // Close popup when clicking outside
+  // Close popup when clicking outside (check both the button area and the popup itself)
   useEffect(function() {
     if (!showMore) return;
     function handleClickOutside(e) {
-      if (moreRef.current && !moreRef.current.contains(e.target)) {
+      var insideBtn = moreRef.current && moreRef.current.contains(e.target);
+      var insidePopup = popupRef.current && popupRef.current.contains(e.target);
+      if (!insideBtn && !insidePopup) {
         setShowMore(false);
         setDrillParent(null);
       }
@@ -148,7 +149,7 @@ function BriefingStoreNav({ store, curPage, onSelectPage, viewMode }) {
       var parentPage = topPages.find(function(p) { return p.id === drillParent; });
       var children = childrenMap[drillParent] || [];
       popupContent = (
-        <div className="briefing-nav-popup" style={{ top: popupPos.top, left: popupPos.left }}>
+        <div className="briefing-nav-popup" ref={popupRef} style={{ top: popupPos.top, left: popupPos.left }}>
           <button className="briefing-nav-popup-back" onClick={handleDrillBack}>
             &#8592; Back
           </button>
@@ -175,7 +176,7 @@ function BriefingStoreNav({ store, curPage, onSelectPage, viewMode }) {
     } else {
       // Show all top-level pages
       popupContent = (
-        <div className="briefing-nav-popup" style={{ top: popupPos.top, left: popupPos.left }}>
+        <div className="briefing-nav-popup" ref={popupRef} style={{ top: popupPos.top, left: popupPos.left }}>
           {topPages.map(function(pg) {
             var children = childrenMap[pg.id] || [];
             var hasChildren = children.length > 0;
@@ -596,8 +597,8 @@ export default function BriefingView() {
                     <span className="briefing-imgcat-badge" style={{ background: cat.color }}>{cat.name}</span>
                     <span className="briefing-imgcat-desc">
                       {cat.desc}
-                      {cat.folder && (
-                        <a href={cat.folder} target="_blank" rel="noopener noreferrer" className="briefing-imgcat-link">Examples</a>
+                      {cat.exampleUrl && (
+                        <a href={cat.exampleUrl} target="_blank" rel="noopener noreferrer" className="briefing-imgcat-link">Example: {cat.example}</a>
                       )}
                     </span>
                   </div>
