@@ -196,6 +196,165 @@ export var AMAZON_CATEGORIES = [
 ];
 
 // Style guidance per category for AI prompts
+// ─── IMAGE CATEGORIES (6 types used in Amazon Brand Stores) ───
+// Each category describes a type of image that can appear in store tiles.
+// The AI assigns one category per image tile during store conception.
+// This drives layout decisions, briefing content, and designer instructions.
+
+export var IMAGE_CATEGORIES = {
+  store_hero: {
+    id: 'store_hero',
+    name: 'Store Hero',
+    description: 'First image in store, above menu bar. Represents the brand instantly.',
+    placement: 'Always and exclusively as the first image above store navigation.',
+    allowedElements: ['headline', 'claim', 'logo', 'lifestyle_photo', 'product', 'texture', 'abstract'],
+    noCTA: true,
+    requiredDecisions: [
+      'claimOrSlogan', // string or null
+      'showLogo',      // boolean + prominence
+      'showProduct',   // boolean + which products
+      'lifestyleElement', // boolean + scene type
+      'abstractTexture',  // boolean (purely abstract/texture-based)
+    ],
+    tierBehavior: {
+      1: 'Single hero for all pages, can be simple (logo + texture or logo + simple claim)',
+      2: 'Single hero for all pages, but higher quality and more polished',
+      3: 'Individual hero per subpage/category, each tailored to the page theme',
+    },
+  },
+  benefit: {
+    id: 'benefit',
+    name: 'Benefit',
+    description: 'USPs, quality markers, trust signals, or brand values at a glance. One statement per element.',
+    placement: 'Between other sections as trust and information anchors.',
+    forms: ['single_banner', 'grid'],
+    typicalElements: ['icons', 'illustrations', 'award_logos', 'text_labels', 'solid_backgrounds'],
+    excludedElements: ['cta_button', 'product_photos', 'persons'],
+    variations: ['serious_awards', 'playful_illustrations', 'pure_typographic'],
+    requiredDecisions: [
+      'specificBenefits',  // string[] - which USPs
+      'format',            // 'banner' | 'grid'
+      'benefitCount',      // number
+      'iconStyle',         // 'line' | 'illustration' | 'award_logo' | 'typographic'
+      'backgroundColor',   // string
+    ],
+    tierBehavior: {
+      1: 'Simple USP banner, homepage only',
+      2: 'Varied types (awards, value grids), occasionally on subpages',
+      3: 'Category-specific benefits on EVERY subpage, multiple presentation forms',
+    },
+  },
+  product: {
+    id: 'product',
+    name: 'Product',
+    description: 'Product clearly in visual focus. Background and elements support, never distract.',
+    placement: 'Product grid sections, category tiles for navigation, highlight displays.',
+    typicalElements: ['product_photo', 'solid_background', 'product_name', 'category_name', 'cta_button', 'badge'],
+    excludedElements: ['body_text', 'long_descriptions'],
+    variations: ['single', 'lineup', 'set', 'macro_detail'],
+    backgroundStyles: ['white', 'light_gray', 'pastel', 'brand_color'],
+    requiredDecisions: [
+      'products',       // which product(s)
+      'singleOrGroup',  // 'single' | 'lineup' | 'set'
+      'showName',       // boolean + product or category name
+      'showCTA',        // boolean + CTA text
+      'showBadge',      // boolean + badge text (e.g. 'NEW', 'Bestseller')
+      'backgroundStyle', // string
+      'perspective',     // 'frontal' | 'angle' | 'overhead' | 'dynamic' | 'macro'
+    ],
+    coreRule: 'Product takes up the majority of the image area. Everything else is subordinate.',
+    tierBehavior: {
+      1: 'Simple product tiles',
+      2: 'Differentiated (lineups, details, category tiles with CTA)',
+      3: 'Full range: single, lineups, detail views, sets, macro shots',
+    },
+  },
+  creative: {
+    id: 'creative',
+    name: 'Creative',
+    description: 'Most complex category. Mix of product, lifestyle, color, text, CTAs. Drives engagement AND explains.',
+    placement: 'Central storytelling and engagement element throughout the store.',
+    coreProperty: 'Combines 2-3+ element types. Text always present and plays active role.',
+    dualGoal: 'Engagement (emotion, brand, curiosity) AND Information (explain product, assign category, trigger action)',
+    typicalElements: ['product_photo', 'headline', 'subline', 'cta_button', 'color_blocks', 'gradients', 'split_layouts', 'icons', 'badges', 'lifestyle_photo', 'infographic', 'logo'],
+    functionVariations: ['category_navigation', 'product_explanation', 'promotion', 'brand_storytelling', 'service_promotion'],
+    emotionVsInfo: ['strong_emotional', 'strong_informational', 'balanced'],
+    requiredDecisions: [
+      'function',       // 'navigation' | 'explanation' | 'promotion' | 'storytelling' | 'service'
+      'elements',       // which elements combined
+      'layoutType',     // 'split' | 'banner' | 'square' | 'infographic'
+      'emotionOrInfo',  // 'emotional' | 'informational' | 'balanced'
+      'headline',       // string
+      'ctaText',        // string
+    ],
+    tierBehavior: {
+      1: 'Sparse or none. If used, simple banner (headline + product + CTA)',
+      2: 'Targeted: bestseller banners, new product teasers, feature explanations',
+      3: 'Central element: infographics, exploded views, split layouts, storytelling, service promotions',
+    },
+  },
+  lifestyle: {
+    id: 'lifestyle',
+    name: 'Lifestyle',
+    description: 'Product in use or target audience shown. Atmosphere and emotional identification.',
+    placement: 'Emotional anchors between information-heavy sections.',
+    coreRule: 'Lifestyle photo dominates (70-80%+ of image area). Text stays subordinate.',
+    typicalElements: ['lifestyle_photo', 'product_in_use', 'logo_small', 'headline_overlay', 'category_label'],
+    excludedElements: ['infographic', 'icons', 'feature_lists', 'prominent_cta'],
+    variations: ['person_using', 'product_in_environment', 'detail_hand_shot'],
+    textPresence: ['none', 'logo_only', 'short_claim_overlay', 'headline_subline'],
+    settings: ['outdoor_nature', 'indoor_home', 'studio_near'],
+    requiredDecisions: [
+      'sceneType',      // 'indoor' | 'outdoor' | 'studio' | specific setting
+      'showPerson',     // boolean + target audience description
+      'productVisible', // which product in use
+      'textOverlay',    // string or null
+      'showLogo',       // boolean
+    ],
+    differentiationFromCreative: 'Lifestyle: photo dominates (>70%). Creative: composition of multiple equal elements. 80% photo + 20% text = Lifestyle. 50% photo + 50% text/graphic = Creative.',
+    tierBehavior: {
+      1: 'Optional, not on every page',
+      2: 'Regular as emotional anchors',
+      3: 'Consistent on nearly every page, varied scenes and target audience perspectives',
+    },
+  },
+  text_image: {
+    id: 'text_image',
+    name: 'Text Image',
+    description: 'Text and/or graphics are dominant. Replaces Amazon text fields for full design control.',
+    placement: 'Section headings, explanation blocks, feature descriptions, claims, dividers.',
+    coreRule: 'Text is primary content. No product photos, no lifestyle photos. Graphics/icons/diagrams may support.',
+    reason: 'Full control over typography, color, layout, and visual elements vs Amazon text input.',
+    typicalElements: ['headline', 'subline', 'body_text', 'cta_button', 'icons', 'diagrams', 'rating_scales', 'progress_bars', 'solid_background'],
+    excludedElements: ['product_photos', 'lifestyle_photos'],
+    functionVariations: ['section_heading', 'feature_explanation', 'category_entry_cta', 'brand_storytelling', 'brand_claim', 'tech_specs', 'taste_profile'],
+    requiredDecisions: [
+      'function',        // 'heading' | 'explanation' | 'claim' | 'specs' | etc.
+      'exactText',       // string - the actual text content
+      'graphicElements', // boolean + type (icons, diagrams, scales)
+      'showCTA',         // boolean + CTA text
+      'backgroundColor', // string
+      'typographyHierarchy', // what is headline, subline, body
+    ],
+    tierBehavior: {
+      1: 'Simple headings and dividers only',
+      2: 'Headings + feature explanations + claims',
+      3: 'Full range: specs, impact numbers, technical details, taste profiles',
+    },
+  },
+};
+
+// ─── IMAGE CATEGORY DECISION LOGIC ───
+// Used by AI to determine which category fits a module
+export var IMAGE_CATEGORY_DECISION_TREE = [
+  { question: 'Is it the very first image above the menu bar?', yes: 'store_hero' },
+  { question: 'Is content conveyed purely through text and/or graphics (no photo)?', yes: 'text_image' },
+  { question: 'Is a product on a plain background the clear visual focus?', yes: 'product' },
+  { question: 'Does a lifestyle photo dominate (>70% area) with only subtle text?', yes: 'lifestyle' },
+  { question: 'Are only USPs/icons/awards shown without product photos?', yes: 'benefit' },
+  { question: 'Does it combine 2-3 elements equally (product + text + graphic + maybe lifestyle)?', yes: 'creative' },
+];
+
 export var CATEGORY_STYLE_HINTS = {
   generic: { tone: 'neutral, professional', visualStyle: 'clean and versatile', trustFocus: false },
   electronics: { tone: 'technical, innovative, modern', visualStyle: 'dark backgrounds, product renders, tech aesthetic', trustFocus: true },
@@ -223,7 +382,7 @@ export var CATEGORY_STYLE_HINTS = {
 // Controls section count, extra pages, and overall depth
 export var COMPLEXITY_LEVELS = {
   1: {
-    name: 'Basic',
+    name: 'Minimal',
     sectionsPerCategoryPage: { min: 2, max: 3 },
     sectionsPerHomepage: { min: 3, max: 5 },
     extraPages: false,
@@ -231,7 +390,19 @@ export var COMPLEXITY_LEVELS = {
     includeFollowCTA: false,
     includeTrustElements: false,
     includeBrandStory: false,
-    description: 'Product categories with clean, direct structure. All products easily findable.',
+    description: 'Lean and functional. Focus on conversion with minimal image category variety.',
+    // ─── Tier-specific image category rules ───
+    imageCategoryRules: {
+      store_hero: 'required_single', // 1 hero for ALL pages, can be simple
+      benefit: 'simple_banner_homepage_only', // Single USP banner, homepage only
+      product: 'basic_tiles', // Simple product tiles
+      creative: 'sparse_or_none', // Sparingly or not at all
+      lifestyle: 'optional', // Not on every page
+      text_image: 'headings_only', // Simple headings and dividers
+    },
+    noStorytelling: true,
+    noInfographics: true,
+    noServicePromotions: true,
   },
   2: {
     name: 'Standard',
@@ -244,7 +415,16 @@ export var COMPLEXITY_LEVELS = {
     includeFollowCTA: false,
     includeTrustElements: true,
     includeBrandStory: true,
-    description: 'Categories plus extra pages (Bestsellers, About Us). Lifestyle imagery, optional video.',
+    description: 'Balanced — informative and emotional. Professional brand presence with sensible structure.',
+    imageCategoryRules: {
+      store_hero: 'required_single_polished', // 1 hero for all pages, high quality
+      benefit: 'varied_types', // Awards, value grids, occasionally on subpages
+      product: 'differentiated', // Lineups, details, category tiles with CTA
+      creative: 'targeted', // Bestseller banners, new product teasers, feature explanations
+      lifestyle: 'regular', // Regular emotional anchors
+      text_image: 'headings_and_features', // Headings + feature explanations + claims
+    },
+    firstStorytellingApproaches: true,
   },
   3: {
     name: 'Premium',
@@ -258,7 +438,17 @@ export var COMPLEXITY_LEVELS = {
     includeTrustElements: true,
     includeBrandStory: true,
     includeDetailedShowcases: true,
-    description: 'Full experience with extra pages, videos, trust elements, follow CTA, and detailed showcases.',
+    description: 'Comprehensive brand presence with maximum depth, storytelling, and detailed product explanations.',
+    imageCategoryRules: {
+      store_hero: 'individual_per_page', // Individual hero per subpage/category
+      benefit: 'category_specific_every_page', // Category-specific benefits on EVERY subpage
+      product: 'full_range', // Single, lineups, details, sets, macro shots
+      creative: 'central_element', // Infographics, exploded views, split layouts, storytelling, service promotions
+      lifestyle: 'pervasive', // On nearly every page, varied scenes and perspectives
+      text_image: 'full_range', // Specs, impact numbers, technical details
+    },
+    specialPages: ['about_us', 'technology', 'sustainability'],
+    maxCategoryVariety: true,
   },
 };
 
@@ -735,13 +925,55 @@ export var REFERENCE_STORES = STORE_TEMPLATES.map(function(t) {
 // ─── STORE COMPOSITION PRINCIPLES ───
 export var STORE_PRINCIPLES = {
   general: [
-    '90% of modules are image-based (image, shoppable_image, image_text). Text is designed INTO images.',
+    '90% of modules are image-based (image, shoppable_image, image_text). Text is designed INTO images as TEXT_IMAGE category.',
     'Native text modules ONLY for section headings or legal/compliance. NEVER for marketing.',
     'Visual communication beats text. Show, dont tell.',
-    'Every page: Hero -> Content -> Products -> Cross-sell.',
     'CTA text and headlines are designed INTO images, not as separate text modules.',
     'Each tile in a row must have the SAME height.',
     'Think in image pairs and trios, not isolated tiles.',
+    'Every text element in the store is a designed image (TEXT_IMAGE or CREATIVE), not an Amazon text field.',
+  ],
+  // ─── IMAGE CATEGORY RULES ───
+  imageCategories: [
+    'Every image tile MUST have an imageCategory: store_hero, benefit, product, creative, lifestyle, or text_image.',
+    'Store Hero: ALWAYS first image, above menu. One per page (except Minimal tier: one for all pages).',
+    'Benefit: At least 1 on homepage. USPs/icons/awards only, no product photos or people.',
+    'Product: Product dominates image. Clean background. Optional name, CTA, badge.',
+    'Creative: Combines 2-3+ elements equally. Text always present. Dual goal: engagement + information.',
+    'Lifestyle: Photo dominates 70-80%+. Text subordinate. Emotional anchor between info sections.',
+    'Text Image: Text/graphics dominant. No product/lifestyle photos. Full typographic control.',
+    'NEVER two identical image categories directly adjacent (e.g. two LIFESTYLE in a row).',
+  ],
+  // ─── SECTION FLOW RECOMMENDATIONS ───
+  homepageFlow: [
+    'STORE_HERO → CREATIVE or LIFESTYLE (emotional entry)',
+    '→ PRODUCT (category navigation or highlights)',
+    '→ TEXT_IMAGE (section divider / heading)',
+    '→ BENEFIT (USPs / trust signals)',
+    '→ CREATIVE (product explanation or promotion)',
+    '→ PRODUCT (more products)',
+    '→ LIFESTYLE (emotional closing or application scene)',
+    '→ BENEFIT (awards / trust as closing)',
+  ],
+  categoryPageFlow: [
+    'STORE_HERO or CREATIVE (page header)',
+    '→ TEXT_IMAGE (category headline / explanation)',
+    '→ PRODUCT (category products)',
+    '→ CREATIVE (feature explanation or infographic)',
+    '→ BENEFIT (category-specific USPs)',
+    '→ PRODUCT (more products)',
+    '→ LIFESTYLE (application scene for this category)',
+  ],
+  // ─── QUALITY CRITERIA ───
+  qualityCriteria: [
+    'VARIETY: Never two identical image categories directly adjacent.',
+    'BALANCE: Emotional (lifestyle, creative) vs informational (benefit, text_image, product) is balanced.',
+    'FLOW: Page reads top-to-bottom logically — emotional entry to detailed information.',
+    'CONSISTENCY: All modules share brand CI (colors, fonts, tonality).',
+    'CONVERSION: Product modules and CTA-bearing creatives placed to drive purchases.',
+    'TRUST: Benefit modules placed strategically where purchase barriers exist.',
+    'TIER CONSISTENCY: Tier determines variety and depth of image categories, not total module count.',
+    'DECISION CLARITY: AI provides clear directives to designer, not open option menus.',
   ],
   homepage: [
     'Homepage = brand entrance. Communicate brand world visually.',

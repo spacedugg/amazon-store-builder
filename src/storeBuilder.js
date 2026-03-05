@@ -1,4 +1,4 @@
-import { uid, LAYOUTS, LAYOUT_TILE_DIMS, REFERENCE_STORES, STORE_PRINCIPLES, MODULE_BAUKASTEN, PRODUCT_COMPLEXITY, COMPLEXITY_LEVELS, CATEGORY_STYLE_HINTS, findLayout, resolveLayoutId } from './constants';
+import { uid, LAYOUTS, LAYOUT_TILE_DIMS, REFERENCE_STORES, STORE_PRINCIPLES, MODULE_BAUKASTEN, PRODUCT_COMPLEXITY, COMPLEXITY_LEVELS, CATEGORY_STYLE_HINTS, IMAGE_CATEGORIES, IMAGE_CATEGORY_DECISION_TREE, findLayout, resolveLayoutId } from './constants';
 
 var ANTHROPIC_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY || '';
 var PRIMARY_MODEL = 'claude-opus-4-6';
@@ -89,6 +89,23 @@ function extractJSON(text) {
   var e = text.lastIndexOf('}');
   if (s < 0 || e < 0) throw new Error('No JSON found in AI response');
   return JSON.parse(text.slice(s, e + 1));
+}
+
+// ─── INFER IMAGE CATEGORY FROM BRIEF TAG ───
+function inferImageCategory(brief, tileType) {
+  if (!brief) return 'creative';
+  var b = brief.toUpperCase();
+  if (b.indexOf('[STORE_HERO]') >= 0) return 'store_hero';
+  if (b.indexOf('[BENEFIT]') >= 0) return 'benefit';
+  if (b.indexOf('[TEXT_IMAGE]') >= 0) return 'text_image';
+  if (b.indexOf('[LIFESTYLE]') >= 0) return 'lifestyle';
+  if (b.indexOf('[PRODUCT]') >= 0) return 'product';
+  if (b.indexOf('[SHOPPABLE]') >= 0) return 'product';
+  if (b.indexOf('[CREATIVE]') >= 0) return 'creative';
+  // Fallback: infer from tile type
+  if (tileType === 'shoppable_image') return 'product';
+  if (tileType === 'image_text') return 'creative';
+  return 'creative';
 }
 
 // ─── FORMAT WEBSITE DATA FOR AI CONTEXT ───
@@ -481,18 +498,31 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '- Native text: ONLY for section headings. NOT for marketing.',
     '',
     complexityLevel && COMPLEXITY_LEVELS[complexityLevel]
-      ? [
-          '',
-          'STORE COMPLEXITY LEVEL: ' + complexityLevel + ' (' + COMPLEXITY_LEVELS[complexityLevel].name + ')',
-          COMPLEXITY_LEVELS[complexityLevel].description,
-          isHomepage
-            ? 'Target sections for homepage: ' + COMPLEXITY_LEVELS[complexityLevel].sectionsPerHomepage.min + ' to ' + COMPLEXITY_LEVELS[complexityLevel].sectionsPerHomepage.max
-            : 'Target sections for category page: ' + COMPLEXITY_LEVELS[complexityLevel].sectionsPerCategoryPage.min + ' to ' + COMPLEXITY_LEVELS[complexityLevel].sectionsPerCategoryPage.max,
-          COMPLEXITY_LEVELS[complexityLevel].includeVideos ? 'Include up to ' + (COMPLEXITY_LEVELS[complexityLevel].videoMax || 1) + ' video section(s).' : 'No video sections needed.',
-          COMPLEXITY_LEVELS[complexityLevel].includeFollowCTA ? 'Include a follow/subscribe CTA section.' : '',
-          COMPLEXITY_LEVELS[complexityLevel].includeTrustElements ? 'Include trust/certification elements.' : '',
-          COMPLEXITY_LEVELS[complexityLevel].includeBrandStory ? 'Include brand story elements.' : '',
-        ].filter(Boolean).join('\n')
+      ? (function() {
+          var cl = COMPLEXITY_LEVELS[complexityLevel];
+          var rules = cl.imageCategoryRules || {};
+          var categoryRulesText = Object.keys(rules).map(function(cat) {
+            var catName = (IMAGE_CATEGORIES[cat] || {}).name || cat;
+            return '  - ' + catName + ': ' + rules[cat];
+          }).join('\n');
+          return [
+            '',
+            'STORE TIER: ' + complexityLevel + ' (' + cl.name + ')',
+            cl.description,
+            isHomepage
+              ? 'Target sections for homepage: ' + cl.sectionsPerHomepage.min + ' to ' + cl.sectionsPerHomepage.max
+              : 'Target sections for category page: ' + cl.sectionsPerCategoryPage.min + ' to ' + cl.sectionsPerCategoryPage.max,
+            cl.includeVideos ? 'Include up to ' + (cl.videoMax || 1) + ' video section(s).' : 'No video sections needed.',
+            cl.includeFollowCTA ? 'Include a follow/subscribe CTA section.' : '',
+            cl.includeTrustElements ? 'Include trust/certification elements.' : '',
+            cl.includeBrandStory ? 'Include brand story elements.' : '',
+            '',
+            '=== TIER-SPECIFIC IMAGE CATEGORY RULES ===',
+            categoryRulesText,
+            complexityLevel === 1 ? 'Minimal tier: NO storytelling, NO infographics, NO service promotions.' : '',
+            complexityLevel === 3 ? 'Premium tier: Individual hero per subpage. Benefits on EVERY page. Maximum category variety.' : '',
+          ].filter(Boolean).join('\n');
+        })()
       : '',
     '',
     category && category !== 'generic' && CATEGORY_STYLE_HINTS[category]
@@ -569,25 +599,47 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '- "lg-4grid" → "4grid-lg": On mobile, the Large Square moves to bottom.',
     '- "vh-w2s" → "vh-2sw": On mobile, the Wide moves to bottom.',
     '',
-    '=== BRIEF FORMAT (concise designer instruction) ===',
-    'Each brief MUST start with an IMAGE TYPE tag, then a SHORT concept:',
+    '=== IMAGE CATEGORIES (6 types — assign one per image tile) ===',
+    'Each image tile MUST have an "imageCategory" field AND a brief starting with the category tag.',
     '',
-    'IMAGE TYPES:',
-    '- [PRODUCT] = Product only on plain or gradient background. NEVER black background.',
-    '  Examples: "[PRODUCT] ' + brand + ' Spray bottle, 45° angle, light gray bg"',
-    '            "[PRODUCT] ' + brand + ' set of 3 products, arranged side by side, warm beige gradient bg"',
+    'CATEGORIES:',
+    '- [STORE_HERO] = First image in store, above menu. Represents brand instantly.',
+    '  Elements: claim/slogan, logo, product, lifestyle, abstract/texture. NO CTA button.',
+    '  Example: "[STORE_HERO] ' + brand + ' brand world, logo prominent, warm lifestyle backdrop, claim: Best Quality Since 2015"',
     '',
-    '- [LIFESTYLE] = Product in real-world use or setting. People, environments, action.',
-    '  Examples: "[LIFESTYLE] Person applying ' + brand + ' product in garden, sunny day, product prominent"',
-    '            "[LIFESTYLE] Kitchen scene, ' + brand + ' cleaner on countertop, bright natural light"',
+    '- [BENEFIT] = USPs, trust signals, quality markers. One statement per element.',
+    '  Elements: icons, award logos, text labels. NO product photos, NO people, NO CTA.',
+    '  Banner form (single wide image with visual columns) or Grid form (multiple tiles).',
+    '  Example: "[BENEFIT] 6 USP icons in a row: BPA-free, Made in Germany, 100% recycled, etc."',
     '',
-    '- [CREATIVE] = Designed composition — color blocks, graphic elements, typography, half-product half-design.',
-    '  Examples: "[CREATIVE] Split: left half brand-color gradient, right half product close-up"',
-    '            "[CREATIVE] Product features as icon grid on brand-color background with product in center"',
-    '            "[CREATIVE] Category name on bold colored background, clean typography"',
+    '- [PRODUCT] = Product clearly in visual focus. Clean/simple background.',
+    '  Elements: product photo, optional name/CTA/badge. Product takes majority of area.',
+    '  Example: "[PRODUCT] ' + brand + ' Spray bottle, 45° angle, light gray bg, badge: NEW"',
     '',
-    '- [SHOPPABLE] = Clean packshot, meant to be clickable (always use with shoppable_image tile type).',
-    '  Examples: "[SHOPPABLE] ' + brand + ' bestseller, white bg, product centered, soft shadow"',
+    '- [CREATIVE] = Complex composition: product + text + graphics + maybe lifestyle. Text always present.',
+    '  Dual goal: engagement (emotion) AND information (explain/categorize/trigger action).',
+    '  Functions: category navigation, product explanation, promotion, storytelling, service.',
+    '  Example: "[CREATIVE] Split layout: left brand-color gradient with headline, right product close-up + 3 feature icons"',
+    '',
+    '- [LIFESTYLE] = Lifestyle photo dominates (70-80%+). Text is subordinate/optional.',
+    '  Elements: professional photo, product in use, optional small logo, optional short claim overlay.',
+    '  Example: "[LIFESTYLE] Person applying ' + brand + ' product in garden, sunny day, product prominent"',
+    '',
+    '- [TEXT_IMAGE] = Text and/or graphics dominant. NO product/lifestyle photos.',
+    '  Full control over typography. Replaces Amazon text fields.',
+    '  Functions: section heading, feature explanation, brand claim, tech specs.',
+    '  Example: "[TEXT_IMAGE] Section heading: Unsere Bestseller — bold display font, brand blue bg"',
+    '',
+    '- [SHOPPABLE] = Shorthand for PRODUCT category with shoppable_image tile type. Clean packshot, clickable.',
+    '  Example: "[SHOPPABLE] ' + brand + ' bestseller, white bg, product centered, soft shadow"',
+    '',
+    'CATEGORY DECISION LOGIC:',
+    '1. First image above menu? → STORE_HERO',
+    '2. Pure text/graphics, no photo? → TEXT_IMAGE',
+    '3. Product on plain bg as main focus? → PRODUCT',
+    '4. Lifestyle photo >70% with subtle text? → LIFESTYLE',
+    '5. Only USPs/icons/awards, no product photos? → BENEFIT',
+    '6. Combines 2-3 elements equally? → CREATIVE',
     '',
     'BACKGROUND RULES:',
     '- NEVER use pure black (#000) backgrounds for any image type.',
@@ -600,6 +652,7 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '- Name the specific ' + brand + ' product or category from the product list.',
     '- textOverlay MUST be in store language (' + lang + ') — use real product/category names.',
     '- Do NOT use generic placeholders like "[product]" or "lifestyle image".',
+    '- NEVER place two identical image categories directly adjacent (e.g. two LIFESTYLE sections in a row).',
     '',
     'MINIMUM SECTIONS:',
     isHomepage ? '- Homepage MUST have at least 6 sections. Aim for 8-10.' : '- Category page MUST have at least 4 sections. Aim for 5-7.',
@@ -623,17 +676,18 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '      "layoutId": "1",',
     '      "tiles": [{',
     '        "type": "image",',
-    '        "brief": "[LIFESTYLE] ' + brand + ' flagship product in use, warm setting",',
+    '        "imageCategory": "store_hero",',
+    '        "brief": "[STORE_HERO] ' + brand + ' brand world, logo + lifestyle backdrop, claim: ' + (analysis.heroMessage || brand) + '",',
     '        "textOverlay": "' + (analysis.heroMessage || brand) + '",',
-    '        "ctaText": "' + (lang === 'German' ? 'Jetzt entdecken' : 'Shop Now') + '",',
+    '        "ctaText": "",',
     '        "dimensions": {"w": 3000, "h": 700}',
     '      }]',
     '    },',
     '    {',
     '      "layoutId": "std-2equal",',
     '      "tiles": [',
-    '        {"type": "image", "brief": "[CREATIVE] ' + brand + ' category name on brand-color background, bold typography", "textOverlay": "[Category Name]", "ctaText": "", "dimensions": {"w": 1500, "h": 1500}},',
-    '        {"type": "shoppable_image", "brief": "[SHOPPABLE] ' + brand + ' bestseller packshot on white, soft shadow", "textOverlay": "", "ctaText": "", "dimensions": {"w": 1500, "h": 1500}, "linkAsin": "' + (pageProducts[0] ? pageProducts[0].asin : 'B0XXXXXXXXXX') + '"}',
+    '        {"type": "image", "imageCategory": "creative", "brief": "[CREATIVE] ' + brand + ' category name on brand-color background, bold typography + product silhouette", "textOverlay": "[Category Name]", "ctaText": "", "dimensions": {"w": 1500, "h": 1500}},',
+    '        {"type": "shoppable_image", "imageCategory": "product", "brief": "[SHOPPABLE] ' + brand + ' bestseller packshot on white, soft shadow", "textOverlay": "", "ctaText": "", "dimensions": {"w": 1500, "h": 1500}, "linkAsin": "' + (pageProducts[0] ? pageProducts[0].asin : 'B0XXXXXXXXXX') + '"}',
     '      ]',
     '    },',
     '    ... more sections',
@@ -643,32 +697,46 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     isHomepage
       ? [
           'HOMEPAGE SECTIONS (generate ALL of these, in this order):',
-          '1. HERO BANNER (layout "1"): [LIFESTYLE] brand hero. textOverlay = slogan in ' + lang + '.',
+          'Each tile MUST include "imageCategory" field. Follow the recommended flow: STORE_HERO → CREATIVE/LIFESTYLE → PRODUCT → TEXT_IMAGE → BENEFIT → CREATIVE → PRODUCT → LIFESTYLE → BENEFIT.',
+          '',
+          '1. STORE HERO (layout "1"): imageCategory="store_hero". Brand hero image. Logo + claim + optional lifestyle/product. NO CTA.',
           '2. CATEGORY NAVIGATION (layout based on count: 2="std-2equal", 4="std-4equal" or "2x2wide", 5+="lg-4grid"):',
-          '   Each tile = [CREATIVE] category name on brand-color bg OR [LIFESTYLE] category scene. textOverlay = EXACT category name.',
-          '   TIP: Use "std-4equal" for 4 categories. Pair category-name tiles with shoppable-bestseller tiles.',
-          '3. BESTSELLER SHOWCASE (layout "std-2equal" or "lg-2stack"): [SHOPPABLE] hero product + [PRODUCT] or [CREATIVE] feature tiles. Use real ASIN as linkAsin.',
+          '   Each tile imageCategory="creative". Category name on brand-color bg + product silhouette + CTA. textOverlay = EXACT category name.',
+          '3. BESTSELLER SHOWCASE (layout "std-2equal" or "lg-2stack"):',
+          '   Tile 1 imageCategory="product" as shoppable_image with real ASIN.',
+          '   Tile 2 imageCategory="creative" with feature text + product info.',
           '4. PRODUCT GRID (layout "1"): type "product_grid" with top 5-8 products by rating.',
-          '5. LIFESTYLE SPLIT (layout "std-2equal"): [LIFESTYLE] product in use + [SHOPPABLE] product with linkAsin.',
-          '6. FEATURE HIGHLIGHTS (layout "vh-w2s"): [CREATIVE] wide feature tile + two square USP tiles. Each textOverlay = feature name in ' + lang + '.',
-          '7. BRAND STORY (layout "lg-2stack" or "2stack-lg"): [LIFESTYLE] large brand image + [CREATIVE] brand values wide tiles.',
-          '8. FOOTER NAV (layout "std-4equal" or "2x2wide"): [CREATIVE] category tiles repeated for bottom navigation.',
+          '5. BENEFIT SECTION (layout "1" or "vh-w2s"): imageCategory="benefit". USP icons/awards on brand-colored bg. No product photos.',
+          '6. LIFESTYLE SPLIT (layout "std-2equal"):',
+          '   Tile 1 imageCategory="lifestyle" — product in use, photo dominates.',
+          '   Tile 2 imageCategory="product" as shoppable_image with linkAsin.',
+          '7. BRAND STORY (layout "lg-2stack" or "2stack-lg"):',
+          '   Large tile imageCategory="lifestyle". Wide tiles imageCategory="creative" with brand values.',
+          '8. FOOTER NAV (layout "std-4equal" or "2x2wide"): imageCategory="creative" category tiles for bottom navigation.',
           '',
           'For 5+ categories, use lg-4grid (5 tiles) or split into two rows.',
           'EVERY brief must name specific ' + brand + ' products — generic briefs are FORBIDDEN.',
+          'NEVER place two identical imageCategories adjacent (e.g. two lifestyle sections in a row).',
         ].join('\n')
       : [
           'CATEGORY PAGE "' + pageName + '" SECTIONS (generate ALL of these):',
-          '1. CATEGORY HERO (layout "1"): [LIFESTYLE] ' + pageName + ' products in use. Name specific products.',
-          '2. PRODUCT HIGHLIGHT (layout "std-2equal" or "lg-2stack"): [SHOPPABLE] bestseller with real ASIN + [PRODUCT] or [CREATIVE] feature tile.',
-          '3. FEATURE/USP SECTION (layout "vh-w2s" or "lg-4grid"): [CREATIVE] 3-4 key features. Each textOverlay = feature name in ' + lang + '.',
-          '4. PRODUCT GRID (layout "1"): type "product_grid" with ALL ' + pageProducts.length + ' ASINs. MANDATORY.',
-          '5. LIFESTYLE ACTION (layout "std-2equal"): [LIFESTYLE] two complementary scenes with ' + pageName + ' products.',
-          analysis.productComplexity === 'complex' || analysis.productComplexity === 'variantRich'
-            ? '6. VARIANT SHOWCASE (layout "lg-4grid"): [PRODUCT] large hero + [SHOPPABLE] 4 variant tiles in 2x2 grid.'
-            : '6. CROSS-SELL (layout "vh-w2s"): [SHOPPABLE] wide tile + two square tiles linking to related categories.',
+          'Each tile MUST include "imageCategory" field. Follow flow: STORE_HERO/CREATIVE → TEXT_IMAGE → PRODUCT → CREATIVE → BENEFIT → PRODUCT → LIFESTYLE.',
           '',
-          'MINIMUM 5 sections. EVERY brief must start with [PRODUCT], [LIFESTYLE], [CREATIVE], or [SHOPPABLE] tag + name specific ' + brand + ' products.',
+          '1. PAGE HEADER (layout "1"): imageCategory="store_hero" or "creative". ' + pageName + ' products featured. Name specific products.',
+          '2. TEXT_IMAGE HEADING (layout "1"): imageCategory="text_image". Category headline/explanation in ' + lang + '.',
+          '3. PRODUCT HIGHLIGHT (layout "std-2equal" or "lg-2stack"):',
+          '   Tile 1 imageCategory="product" as shoppable_image with real ASIN.',
+          '   Tile 2 imageCategory="creative" — feature tile with headline + product info.',
+          '4. PRODUCT GRID (layout "1"): type "product_grid" with ALL ' + pageProducts.length + ' ASINs. MANDATORY.',
+          '5. BENEFIT SECTION: imageCategory="benefit". Category-specific USPs. No product photos.',
+          '6. LIFESTYLE ACTION (layout "std-2equal"):',
+          '   imageCategory="lifestyle" — complementary scenes with ' + pageName + ' products.',
+          analysis.productComplexity === 'complex' || analysis.productComplexity === 'variantRich'
+            ? '7. VARIANT SHOWCASE (layout "lg-4grid"): imageCategory="product" — large hero + 4 variant tiles.'
+            : '7. CROSS-SELL (layout "vh-w2s"): imageCategory="creative" — wide tile + two square tiles linking to related categories.',
+          '',
+          'MINIMUM 5 sections. EVERY brief must start with [STORE_HERO], [BENEFIT], [PRODUCT], [CREATIVE], [LIFESTYLE], [TEXT_IMAGE], or [SHOPPABLE] tag.',
+          'Every image tile MUST have imageCategory set to one of: store_hero, benefit, product, creative, lifestyle, text_image.',
           'Use shoppable_image (with real linkAsin) for any clickable product.',
         ].filter(Boolean).join('\n'),
   ].filter(Boolean).join('\n');
@@ -706,6 +774,10 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
         t.dimensions = { w: dd.w, h: dd.h };
       }
       if (!t.asins) t.asins = [];
+      // Infer imageCategory from brief tag if not explicitly set
+      if (!t.imageCategory && t.brief && t.type !== 'product_grid' && t.type !== 'text' && t.type !== 'video') {
+        t.imageCategory = inferImageCategory(t.brief, t.type);
+      }
     });
     sec.id = uid();
   });
@@ -730,6 +802,7 @@ export async function aiRefineStore(store, command, brand, lang) {
               return {
                 index: ti,
                 type: t.type,
+                imageCategory: t.imageCategory || '',
                 textOverlay: t.textOverlay,
                 brief: t.brief ? t.brief.slice(0, 80) : '',
                 asins: t.asins || [],
@@ -750,6 +823,8 @@ export async function aiRefineStore(store, command, brand, lang) {
     '',
     'Valid layouts: ' + validLayouts.join(', '),
     'Valid tile types: image, product_grid, video, text, shoppable_image, image_text',
+    'Valid image categories: store_hero, benefit, product, creative, lifestyle, text_image',
+    'Every image tile should have an imageCategory. When adding/updating tiles, always include imageCategory.',
     '',
     'Available module patterns for inspiration:',
     JSON.stringify(MODULE_BAUKASTEN, null, 1),
@@ -803,6 +878,9 @@ export function applyOperations(store, operations) {
             t.dimensions = { w: dd.w, h: dd.h };
           }
           if (!t.asins) t.asins = [];
+          if (!t.imageCategory && t.type !== 'product_grid' && t.type !== 'text' && t.type !== 'video') {
+            t.imageCategory = inferImageCategory(t.brief, t.type);
+          }
         });
         var idx = typeof op.afterIndex === 'number' ? op.afterIndex + 1 : page.sections.length;
         page.sections.splice(idx, 0, newSec);
@@ -931,16 +1009,16 @@ function ensureMinimumSections(sections, pageName, brand, lang, analysis, templa
       // Generic fallback patterns
       var patterns = [
         { layoutId: '1-1', tiles: [
-          { type: 'image', brief: '[LIFESTYLE] ' + brand + ' ' + pageName + ' products in use', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
-          { type: 'shoppable_image', brief: '[SHOPPABLE] ' + brand + ' ' + pageName + ' bestseller packshot on white', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+          { type: 'image', imageCategory: 'lifestyle', brief: '[LIFESTYLE] ' + brand + ' ' + pageName + ' products in use, natural setting', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+          { type: 'shoppable_image', imageCategory: 'product', brief: '[SHOPPABLE] ' + brand + ' ' + pageName + ' bestseller packshot on white', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
         ] },
         { layoutId: '1-1-1', tiles: [
-          { type: 'image', brief: '[CREATIVE] ' + brand + ' ' + pageName + ' USP: key benefit', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
-          { type: 'image', brief: '[CREATIVE] ' + brand + ' ' + pageName + ' USP: second benefit', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
-          { type: 'image', brief: '[CREATIVE] ' + brand + ' ' + pageName + ' USP: third benefit', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+          { type: 'image', imageCategory: 'benefit', brief: '[BENEFIT] ' + brand + ' ' + pageName + ' USP: key benefit — icon + label', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+          { type: 'image', imageCategory: 'benefit', brief: '[BENEFIT] ' + brand + ' ' + pageName + ' USP: second benefit — icon + label', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+          { type: 'image', imageCategory: 'benefit', brief: '[BENEFIT] ' + brand + ' ' + pageName + ' USP: third benefit — icon + label', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
         ] },
         { layoutId: '1', tiles: [
-          { type: 'image', brief: '[CREATIVE] ' + brand + ' brand values statement for ' + pageName, textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 800 }, asins: [] },
+          { type: 'image', imageCategory: 'text_image', brief: '[TEXT_IMAGE] ' + brand + ' brand values statement for ' + pageName + ', bold headline, brand colors', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 800 }, asins: [] },
         ] },
       ];
       var pattern = patterns[(idx - (blueprint ? blueprint.length : 0)) % patterns.length];
@@ -1088,10 +1166,10 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
         id: parentPageId,
         name: cat.name,
         sections: [
-          { id: uid(), layoutId: '1', tiles: [{ type: 'image', brief: 'Category hero for "' + cat.name + '". Lifestyle photo showing ' + brand + ' products related to ' + cat.name + '. Brand tone: ' + (analysis.brandTone || 'professional') + '.', textOverlay: cat.name, ctaText: lang === 'German' ? 'Jetzt entdecken' : 'Shop now', dimensions: { w: 3000, h: 700 }, asins: [] }] },
+          { id: uid(), layoutId: '1', tiles: [{ type: 'image', imageCategory: 'store_hero', brief: '[STORE_HERO] Category hero for "' + cat.name + '". Lifestyle photo showing ' + brand + ' products, logo, brand tone: ' + (analysis.brandTone || 'professional') + '.', textOverlay: cat.name, ctaText: '', dimensions: { w: 3000, h: 700 }, asins: [] }] },
           { id: uid(), layoutId: '1-1', tiles: [
-            { type: 'image', brief: 'Feature/benefit tile for "' + cat.name + '" showing key product advantage.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
-            { type: 'image', brief: 'Lifestyle image: ' + brand + ' ' + cat.name + ' products in real-world use.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+            { type: 'image', imageCategory: 'creative', brief: '[CREATIVE] Feature/benefit tile for "' + cat.name + '" showing key product advantage with headline.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+            { type: 'image', imageCategory: 'lifestyle', brief: '[LIFESTYLE] ' + brand + ' ' + cat.name + ' products in real-world use, natural setting.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
           ] },
         ],
       });
@@ -1153,7 +1231,8 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
             id: uid(), layoutId: '1',
             tiles: [{
               type: 'image',
-              brief: 'Bundle/savings hero banner for ' + brand + '. Show multiple products together with savings messaging. Brand tone: ' + (analysis.brandTone || 'professional') + '.',
+              imageCategory: 'store_hero',
+              brief: '[STORE_HERO] Bundle/savings hero banner for ' + brand + '. Multiple products together, savings messaging, logo. Brand tone: ' + (analysis.brandTone || 'professional') + '.',
               textOverlay: lang === 'German' ? 'Bundles & Sparen' : 'Bundles & Savings',
               ctaText: '', dimensions: { w: 3000, h: 700 }, asins: [],
             }],
@@ -1185,7 +1264,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
         var bestSections = [
           {
             id: uid(), layoutId: '1',
-            tiles: [{ type: 'image', brief: 'Bestseller hero banner for ' + brand + '. Showcase top-rated products with an aspirational message. Brand tone: ' + (analysis.brandTone || 'professional') + '.', textOverlay: lang === 'German' ? 'Unsere Bestseller' : 'Our Bestsellers', ctaText: '', dimensions: { w: 3000, h: 700 }, asins: [] }],
+            tiles: [{ type: 'image', imageCategory: 'store_hero', brief: '[STORE_HERO] Bestseller hero for ' + brand + '. Top-rated products, aspirational mood, logo. Brand tone: ' + (analysis.brandTone || 'professional') + '.', textOverlay: lang === 'German' ? 'Unsere Bestseller' : 'Our Bestsellers', ctaText: '', dimensions: { w: 3000, h: 700 }, asins: [] }],
           },
           {
             id: uid(), layoutId: '1',
@@ -1202,13 +1281,13 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       var aboutSections = [
         {
           id: uid(), layoutId: '1',
-          tiles: [{ type: 'image', brief: 'About Us hero for ' + brand + '. Communicate brand values, origin story, and mission visually. Brand tone: ' + (analysis.brandTone || 'professional') + '.', textOverlay: lang === 'German' ? 'Wir sind ' + brand : 'We are ' + brand, ctaText: '', dimensions: { w: 3000, h: 800 }, asins: [] }],
+          tiles: [{ type: 'image', imageCategory: 'store_hero', brief: '[STORE_HERO] About Us hero for ' + brand + '. Brand values, origin story, mission. Logo prominent. Brand tone: ' + (analysis.brandTone || 'professional') + '.', textOverlay: lang === 'German' ? 'Wir sind ' + brand : 'We are ' + brand, ctaText: '', dimensions: { w: 3000, h: 800 }, asins: [] }],
         },
         {
           id: uid(), layoutId: '1-1',
           tiles: [
-            { type: 'image', brief: 'Brand story image: team, workshop, or production. Authentic and personal.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
-            { type: 'image', brief: 'Brand values image: quality, sustainability, or craftsmanship.', textOverlay: analysis.brandStory || '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+            { type: 'image', imageCategory: 'lifestyle', brief: '[LIFESTYLE] Brand story: team, workshop, or production. Authentic and personal.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+            { type: 'image', imageCategory: 'creative', brief: '[CREATIVE] Brand values: quality, sustainability, or craftsmanship. Text + visual elements.', textOverlay: analysis.brandStory || '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
           ],
         },
       ];
@@ -1216,9 +1295,9 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
         aboutSections.push({
           id: uid(), layoutId: '1-1-1',
           tiles: [
-            { type: 'image', brief: 'Trust/value pillar 1: Quality, craftsmanship, or expertise.', textOverlay: lang === 'German' ? 'Qualität' : 'Quality', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
-            { type: 'image', brief: 'Trust/value pillar 2: Innovation or sustainability.', textOverlay: lang === 'German' ? 'Innovation' : 'Innovation', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
-            { type: 'image', brief: 'Trust/value pillar 3: Customer focus or community.', textOverlay: lang === 'German' ? 'Für dich' : 'For You', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+            { type: 'image', imageCategory: 'benefit', brief: '[BENEFIT] Trust/value pillar 1: Quality, craftsmanship, or expertise. Icon + label.', textOverlay: lang === 'German' ? 'Qualität' : 'Quality', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+            { type: 'image', imageCategory: 'benefit', brief: '[BENEFIT] Trust/value pillar 2: Innovation or sustainability. Icon + label.', textOverlay: lang === 'German' ? 'Innovation' : 'Innovation', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+            { type: 'image', imageCategory: 'benefit', brief: '[BENEFIT] Trust/value pillar 3: Customer focus or community. Icon + label.', textOverlay: lang === 'German' ? 'Für dich' : 'For You', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
           ],
         });
       }
@@ -1231,16 +1310,16 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       var featSections = [
         {
           id: uid(), layoutId: '1',
-          tiles: [{ type: 'image', brief: 'Features/technology hero banner for ' + brand + '. Highlight innovation and product capabilities.', textOverlay: lang === 'German' ? 'So funktioniert es' : 'How It Works', ctaText: '', dimensions: { w: 3000, h: 700 }, asins: [] }],
+          tiles: [{ type: 'image', imageCategory: 'store_hero', brief: '[STORE_HERO] Features/technology hero for ' + brand + '. Innovation, product capabilities, logo.', textOverlay: lang === 'German' ? 'So funktioniert es' : 'How It Works', ctaText: '', dimensions: { w: 3000, h: 700 }, asins: [] }],
         },
         {
           id: uid(), layoutId: 'lg-4grid',
           tiles: [
-            { type: 'image', brief: 'Large product hero shot showing the main product in detail.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
-            { type: 'image', brief: 'Feature 1: ' + ((analysis.keyFeatures || [])[0] || 'Key feature highlighted visually.'), textOverlay: (analysis.keyFeatures || [])[0] || '', ctaText: '', dimensions: { w: 1500, h: 600 }, asins: [] },
-            { type: 'image', brief: 'Feature 2: ' + ((analysis.keyFeatures || [])[1] || 'Second feature highlighted.'), textOverlay: (analysis.keyFeatures || [])[1] || '', ctaText: '', dimensions: { w: 1500, h: 600 }, asins: [] },
-            { type: 'image', brief: 'Feature 3: ' + ((analysis.keyFeatures || [])[2] || 'Third feature.'), textOverlay: (analysis.keyFeatures || [])[2] || '', ctaText: '', dimensions: { w: 1500, h: 600 }, asins: [] },
-            { type: 'image', brief: 'Feature 4: ' + ((analysis.keyFeatures || [])[3] || 'Fourth feature or USP.'), textOverlay: (analysis.keyFeatures || [])[3] || '', ctaText: '', dimensions: { w: 1500, h: 600 }, asins: [] },
+            { type: 'image', imageCategory: 'product', brief: '[PRODUCT] Large product hero shot showing the main product in detail.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+            { type: 'image', imageCategory: 'creative', brief: '[CREATIVE] Feature 1: ' + ((analysis.keyFeatures || [])[0] || 'Key feature') + ' — icon + explanation + product detail.', textOverlay: (analysis.keyFeatures || [])[0] || '', ctaText: '', dimensions: { w: 1500, h: 600 }, asins: [] },
+            { type: 'image', imageCategory: 'creative', brief: '[CREATIVE] Feature 2: ' + ((analysis.keyFeatures || [])[1] || 'Second feature') + ' — icon + explanation.', textOverlay: (analysis.keyFeatures || [])[1] || '', ctaText: '', dimensions: { w: 1500, h: 600 }, asins: [] },
+            { type: 'image', imageCategory: 'creative', brief: '[CREATIVE] Feature 3: ' + ((analysis.keyFeatures || [])[2] || 'Third feature') + ' — icon + explanation.', textOverlay: (analysis.keyFeatures || [])[2] || '', ctaText: '', dimensions: { w: 1500, h: 600 }, asins: [] },
+            { type: 'image', imageCategory: 'creative', brief: '[CREATIVE] Feature 4: ' + ((analysis.keyFeatures || [])[3] || 'Fourth feature') + ' — icon + explanation.', textOverlay: (analysis.keyFeatures || [])[3] || '', ctaText: '', dimensions: { w: 1500, h: 600 }, asins: [] },
           ],
         },
       ];
@@ -1262,14 +1341,14 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
         sections: [
           {
             id: uid(), layoutId: '1',
-            tiles: [{ type: 'image', brief: 'Certifications hero: showcase trust badges, quality seals, and third-party certifications for ' + brand + '.', textOverlay: lang === 'German' ? 'Unsere Zertifizierungen' : 'Our Certifications', ctaText: '', dimensions: { w: 3000, h: 700 }, asins: [] }],
+            tiles: [{ type: 'image', imageCategory: 'store_hero', brief: '[STORE_HERO] Certifications hero: trust badges, quality seals, certifications for ' + brand + '. Logo prominent.', textOverlay: lang === 'German' ? 'Unsere Zertifizierungen' : 'Our Certifications', ctaText: '', dimensions: { w: 3000, h: 700 }, asins: [] }],
           },
           {
             id: uid(), layoutId: '1-1-1',
             tiles: [
-              { type: 'image', brief: 'Certification badge 1 with explanation.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
-              { type: 'image', brief: 'Certification badge 2 with explanation.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
-              { type: 'image', brief: 'Certification badge 3 with explanation.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+              { type: 'image', imageCategory: 'benefit', brief: '[BENEFIT] Certification badge 1 with explanation. Award logo + label.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+              { type: 'image', imageCategory: 'benefit', brief: '[BENEFIT] Certification badge 2 with explanation. Award logo + label.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+              { type: 'image', imageCategory: 'benefit', brief: '[BENEFIT] Certification badge 3 with explanation. Award logo + label.', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
             ],
           },
         ],
@@ -1536,7 +1615,8 @@ function fallbackHomepage(brand, lang, categories, products, analysis) {
     id: uid(), layoutId: '1',
     tiles: [{
       type: 'image',
-      brief: '[LIFESTYLE] ' + brand + ' brand world, ' + (analysis.brandTone || 'professional') + ' mood',
+      imageCategory: 'store_hero',
+      brief: '[STORE_HERO] ' + brand + ' brand world, logo + ' + (analysis.brandTone || 'professional') + ' mood',
       textOverlay: (analysis && analysis.heroMessage) || brand,
       ctaText: '', dimensions: { w: 3000, h: 700 }, asins: [],
     }],
@@ -1549,7 +1629,7 @@ function fallbackHomepage(brand, lang, categories, products, analysis) {
     sections.push({
       id: uid(), layoutId: layoutId,
       tiles: catNames.map(function(cat) {
-        return { type: 'image', brief: '[CREATIVE] "' + cat + '" category name on brand-color background', textOverlay: cat, ctaText: cta, dimensions: { w: 3000, h: 1200 }, asins: [] };
+        return { type: 'image', imageCategory: 'creative', brief: '[CREATIVE] "' + cat + '" category name on brand-color background, product silhouette + CTA', textOverlay: cat, ctaText: cta, dimensions: { w: 3000, h: 1200 }, asins: [] };
       }),
     });
   } else if (catNames.length > 4) {
@@ -1558,7 +1638,7 @@ function fallbackHomepage(brand, lang, categories, products, analysis) {
     sections.push({
       id: uid(), layoutId: '1-1-1-1',
       tiles: row1.map(function(cat) {
-        return { type: 'image', brief: '[CREATIVE] "' + cat + '" category name on brand-color background', textOverlay: cat, ctaText: cta, dimensions: { w: 3000, h: 1200 }, asins: [] };
+        return { type: 'image', imageCategory: 'creative', brief: '[CREATIVE] "' + cat + '" category name on brand-color background, product silhouette + CTA', textOverlay: cat, ctaText: cta, dimensions: { w: 3000, h: 1200 }, asins: [] };
       }),
     });
     if (row2.length > 0) {
@@ -1566,7 +1646,7 @@ function fallbackHomepage(brand, lang, categories, products, analysis) {
       sections.push({
         id: uid(), layoutId: lid,
         tiles: row2.map(function(cat) {
-          return { type: 'image', brief: '[CREATIVE] "' + cat + '" category name on brand-color background', textOverlay: cat, ctaText: cta, dimensions: { w: 3000, h: 1200 }, asins: [] };
+          return { type: 'image', imageCategory: 'creative', brief: '[CREATIVE] "' + cat + '" category name on brand-color background, product silhouette + CTA', textOverlay: cat, ctaText: cta, dimensions: { w: 3000, h: 1200 }, asins: [] };
         }),
       });
     }
@@ -1586,8 +1666,8 @@ function fallbackHomepage(brand, lang, categories, products, analysis) {
     sections.push({
       id: uid(), layoutId: '1-1',
       tiles: [
-        { type: 'image', brief: '[LIFESTYLE] ' + brand + ' products in real-world use', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
-        { type: 'shoppable_image', brief: '[SHOPPABLE] ' + brand + ' bestseller packshot on white', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+        { type: 'image', imageCategory: 'lifestyle', brief: '[LIFESTYLE] ' + brand + ' products in real-world use, natural setting', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+        { type: 'shoppable_image', imageCategory: 'product', brief: '[SHOPPABLE] ' + brand + ' bestseller packshot on white, soft shadow', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
       ],
     });
   }
@@ -1597,7 +1677,8 @@ function fallbackHomepage(brand, lang, categories, products, analysis) {
     id: uid(), layoutId: '1',
     tiles: [{
       type: 'image',
-      brief: '[CREATIVE] ' + brand + ' brand values and identity statement',
+      imageCategory: 'creative',
+      brief: '[CREATIVE] ' + brand + ' brand values and identity statement, split layout with brand colors',
       textOverlay: lang === 'German' ? 'Unsere Geschichte' : 'Our Story',
       ctaText: '', dimensions: { w: 3000, h: 600 }, asins: [],
     }],
@@ -1618,7 +1699,8 @@ function fallbackCategoryPage(id, name, catProducts, lang, analysis) {
     id: uid(), layoutId: '1',
     tiles: [{
       type: 'image',
-      brief: '[LIFESTYLE] ' + (heroProduct ? heroProduct.name : name + ' products') + ' in use',
+      imageCategory: 'store_hero',
+      brief: '[STORE_HERO] ' + name + ' category hero, ' + (heroProduct ? heroProduct.name : name + ' products') + ' in use, brand logo',
       textOverlay: name, ctaText: '', dimensions: { w: 3000, h: 700 }, asins: [],
     }],
   });
@@ -1628,20 +1710,20 @@ function fallbackCategoryPage(id, name, catProducts, lang, analysis) {
     sections.push({
       id: uid(), layoutId: '1-1',
       tiles: [
-        { type: 'image', brief: '[CREATIVE] "' + heroProduct.name.split(' ').slice(0, 4).join(' ') + '" bold name on brand-color background', textOverlay: heroProduct.name.split(' ').slice(0, 4).join(' '), ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
-        { type: 'shoppable_image', brief: '[SHOPPABLE] ' + heroProduct.name + ' packshot on white, soft shadow', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [], linkAsin: heroProduct.asin },
+        { type: 'image', imageCategory: 'creative', brief: '[CREATIVE] "' + heroProduct.name.split(' ').slice(0, 4).join(' ') + '" bold name on brand-color background + product silhouette', textOverlay: heroProduct.name.split(' ').slice(0, 4).join(' '), ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+        { type: 'shoppable_image', imageCategory: 'product', brief: '[SHOPPABLE] ' + heroProduct.name + ' packshot on white, soft shadow', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [], linkAsin: heroProduct.asin },
       ],
     });
   }
 
-  // 3. Feature section
+  // 3. Benefit section
   var features = (analysis && analysis.keyFeatures) || [];
   sections.push({
     id: uid(), layoutId: '1-1-1',
     tiles: [
-      { type: 'image', brief: '[CREATIVE] USP: ' + (features[0] || 'key benefit') + ' — icon or close-up', textOverlay: features[0] || '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
-      { type: 'image', brief: '[CREATIVE] USP: ' + (features[1] || 'second benefit'), textOverlay: features[1] || '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
-      { type: 'image', brief: '[CREATIVE] USP: ' + (features[2] || 'third benefit'), textOverlay: features[2] || '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+      { type: 'image', imageCategory: 'benefit', brief: '[BENEFIT] USP: ' + (features[0] || 'key benefit') + ' — icon + short label', textOverlay: features[0] || '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+      { type: 'image', imageCategory: 'benefit', brief: '[BENEFIT] USP: ' + (features[1] || 'second benefit') + ' — icon + short label', textOverlay: features[1] || '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+      { type: 'image', imageCategory: 'benefit', brief: '[BENEFIT] USP: ' + (features[2] || 'third benefit') + ' — icon + short label', textOverlay: features[2] || '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
     ],
   });
 
@@ -1649,8 +1731,8 @@ function fallbackCategoryPage(id, name, catProducts, lang, analysis) {
   sections.push({
     id: uid(), layoutId: '1-1',
     tiles: [
-      { type: 'image', brief: '[LIFESTYLE] ' + (heroProduct ? heroProduct.name : name + ' products') + ' in real-world setting', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
-      { type: 'shoppable_image', brief: '[SHOPPABLE] ' + (topProducts[1] ? topProducts[1].name : name + ' product') + ' packshot on white', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [], linkAsin: topProducts[1] ? topProducts[1].asin : '' },
+      { type: 'image', imageCategory: 'lifestyle', brief: '[LIFESTYLE] ' + (heroProduct ? heroProduct.name : name + ' products') + ' in real-world setting, natural light', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+      { type: 'shoppable_image', imageCategory: 'product', brief: '[SHOPPABLE] ' + (topProducts[1] ? topProducts[1].name : name + ' product') + ' packshot on white', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [], linkAsin: topProducts[1] ? topProducts[1].asin : '' },
     ],
   });
 
@@ -1669,7 +1751,7 @@ function fallbackCategoryPage(id, name, catProducts, lang, analysis) {
     sections.push({
       id: uid(), layoutId: '1-1-1',
       tiles: topProducts.slice(0, 3).map(function(p) {
-        return { type: 'shoppable_image', brief: '[SHOPPABLE] ' + p.name.split(' ').slice(0, 4).join(' ') + ' packshot on neutral bg', textOverlay: p.name.split(' ').slice(0, 3).join(' '), ctaText: cta, dimensions: { w: 3000, h: 1000 }, asins: [], linkAsin: p.asin };
+        return { type: 'shoppable_image', imageCategory: 'product', brief: '[SHOPPABLE] ' + p.name.split(' ').slice(0, 4).join(' ') + ' packshot on neutral bg', textOverlay: p.name.split(' ').slice(0, 3).join(' '), ctaText: cta, dimensions: { w: 3000, h: 1000 }, asins: [], linkAsin: p.asin };
       }),
     });
   }

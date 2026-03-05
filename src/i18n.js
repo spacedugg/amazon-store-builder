@@ -161,6 +161,14 @@ var translations = {
     en: 'Tile Type', de: 'Kacheltyp', uk: 'Тип плитки', ru: 'Тип плитки',
     id: 'Jenis Tile', ky: 'Плитка түрү', bg: 'Тип на плочка', es: 'Tipo de tile',
   },
+  'props.imageCategory': {
+    en: 'Image Category', de: 'Bildkategorie', uk: 'Категорія зображення', ru: 'Категория изображения',
+    id: 'Kategori Gambar', ky: 'Сүрөт категориясы', bg: 'Категория изображение', es: 'Categoría de imagen',
+  },
+  'props.imageCategoryNone': {
+    en: '— Not set —', de: '— Nicht gesetzt —', uk: '— Не встановлено —', ru: '— Не задано —',
+    id: '— Belum diatur —', ky: '— Белгиленбеген —', bg: '— Не е зададено —', es: '— No definido —',
+  },
   'props.designerBrief': {
     en: 'Designer Brief', de: 'Designer-Briefing', uk: 'Бриф дизайнера', ru: 'Бриф дизайнера',
     id: 'Brief Desainer', ky: 'Дизайнер брифи', bg: 'Бриф за дизайнер', es: 'Brief del diseñador',
@@ -788,6 +796,10 @@ var translations = {
   'brief.ctaButton': {
     en: 'CTA Button', de: 'CTA-Button', uk: 'CTA кнопка', ru: 'CTA кнопка',
     id: 'Tombol CTA', ky: 'CTA баскычы', bg: 'CTA бутон', es: 'Botón CTA',
+  },
+  'brief.imageCategory': {
+    en: 'Image Category', de: 'Bildkategorie', uk: 'Категорія зображення', ru: 'Категория изображения',
+    id: 'Kategori Gambar', ky: 'Сүрөт категориясы', bg: 'Категория изображение', es: 'Categoría de imagen',
   },
   'brief.designerBrief': {
     en: 'Designer Brief', de: 'Designer-Briefing', uk: 'Бриф дизайнера', ru: 'Бриф дизайнера',

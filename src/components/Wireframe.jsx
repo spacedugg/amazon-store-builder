@@ -1,3 +1,20 @@
+var CATEGORY_BADGE_COLORS = {
+  store_hero: '#8B5CF6',
+  benefit: '#10B981',
+  product: '#3B82F6',
+  creative: '#F59E0B',
+  lifestyle: '#EC4899',
+  text_image: '#6B7280',
+};
+var CATEGORY_BADGE_LABELS = {
+  store_hero: 'HERO',
+  benefit: 'BENEFIT',
+  product: 'PRODUCT',
+  creative: 'CREATIVE',
+  lifestyle: 'LIFESTYLE',
+  text_image: 'TEXT IMG',
+};
+
 export default function Wireframe({ tile, width, viewMode, bgColor }) {
   var dims = (viewMode === 'mobile' ? tile.mobileDimensions : tile.dimensions) || tile.dimensions || { w: 3000, h: 1200 };
   var w = width || 280;
@@ -136,6 +153,19 @@ export default function Wireframe({ tile, width, viewMode, bgColor }) {
           <text x="5" y={ht - 5} fontSize="5.5" fill="#fff" fontWeight="700"
             fontFamily="system-ui, sans-serif">
             {isShoppable ? 'SHOPPABLE' : 'IMG+TXT'}
+          </text>
+        </g>
+      )}
+
+      {/* Image category badge */}
+      {tile.imageCategory && CATEGORY_BADGE_COLORS[tile.imageCategory] && (
+        <g>
+          <rect x={w - (CATEGORY_BADGE_LABELS[tile.imageCategory].length * 4.2 + 10)} y={ht - 13}
+            width={CATEGORY_BADGE_LABELS[tile.imageCategory].length * 4.2 + 8} height="10" rx="2"
+            fill={CATEGORY_BADGE_COLORS[tile.imageCategory]} opacity=".75" />
+          <text x={w - (CATEGORY_BADGE_LABELS[tile.imageCategory].length * 4.2 + 6)} y={ht - 5}
+            fontSize="5.5" fill="#fff" fontWeight="700" fontFamily="system-ui, sans-serif">
+            {CATEGORY_BADGE_LABELS[tile.imageCategory]}
           </text>
         </g>
       )}
