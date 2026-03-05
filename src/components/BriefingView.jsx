@@ -23,13 +23,16 @@ var INSPIRATION_LINKS = [
 ];
 
 // ─── IMAGE CATEGORY EXAMPLES (Google Drive folders with reference images) ───
+// Google Drive example folders per image category
+// To update: replace the folder IDs below with your shared Drive folder links
+var IMAGE_CATEGORY_FOLDER_BASE = 'https://drive.google.com/drive/folders/';
 var IMAGE_CATEGORY_EXAMPLES = [
-  { id: 'store_hero', name: 'Store Hero', color: '#8B5CF6', desc: 'First image above menu. Represents the brand instantly.', folder: '' },
-  { id: 'benefit', name: 'Benefit', color: '#10B981', desc: 'USPs, trust signals, quality markers. Icons + short labels, no product photos.', folder: '' },
-  { id: 'product', name: 'Product', color: '#3B82F6', desc: 'Product on clean background. Optional name, CTA, badge.', folder: '' },
-  { id: 'creative', name: 'Creative', color: '#F59E0B', desc: 'Complex composition: product + text + graphics. Engagement AND information.', folder: '' },
-  { id: 'lifestyle', name: 'Lifestyle', color: '#EC4899', desc: 'Lifestyle photo dominates (70-80%+). Emotional, product in use.', folder: '' },
-  { id: 'text_image', name: 'Text Image', color: '#6B7280', desc: 'Text/graphics dominant. Full typographic control. No product/lifestyle photos.', folder: '' },
+  { id: 'store_hero', name: 'Store Hero', color: '#8B5CF6', desc: 'First image above menu. Represents the brand instantly.', folder: IMAGE_CATEGORY_FOLDER_BASE + '1StoreHero_REPLACE_WITH_REAL_ID' },
+  { id: 'benefit', name: 'Benefit', color: '#10B981', desc: 'USPs, trust signals, quality markers. Icons + short labels, no product photos.', folder: IMAGE_CATEGORY_FOLDER_BASE + '1Benefit_REPLACE_WITH_REAL_ID' },
+  { id: 'product', name: 'Product', color: '#3B82F6', desc: 'Product on clean background. Optional name, CTA, badge.', folder: IMAGE_CATEGORY_FOLDER_BASE + '1Product_REPLACE_WITH_REAL_ID' },
+  { id: 'creative', name: 'Creative', color: '#F59E0B', desc: 'Complex composition: product + text + graphics. Engagement AND information.', folder: IMAGE_CATEGORY_FOLDER_BASE + '1Creative_REPLACE_WITH_REAL_ID' },
+  { id: 'lifestyle', name: 'Lifestyle', color: '#EC4899', desc: 'Lifestyle photo dominates (70-80%+). Emotional, product in use.', folder: IMAGE_CATEGORY_FOLDER_BASE + '1Lifestyle_REPLACE_WITH_REAL_ID' },
+  { id: 'text_image', name: 'Text Image', color: '#6B7280', desc: 'Text/graphics dominant. Full typographic control. No product/lifestyle photos.', folder: IMAGE_CATEGORY_FOLDER_BASE + '1TextImage_REPLACE_WITH_REAL_ID' },
 ];
 
 // Map category IDs to colors for inline highlighting
@@ -85,7 +88,9 @@ function BriefTextHighlighted({ text }) {
 function BriefingStoreNav({ store, curPage, onSelectPage, viewMode }) {
   var [showMore, setShowMore] = useState(false);
   var [drillParent, setDrillParent] = useState(null); // parent page id for subcategory drill-down
+  var [popupPos, setPopupPos] = useState({ top: 0, left: 0 });
   var moreRef = useRef(null);
+  var moreBtnRef = useRef(null);
   var pages = store.pages || [];
   var topPages = pages.filter(function(p) { return !p.parentId; });
   var childrenMap = {};
@@ -113,6 +118,10 @@ function BriefingStoreNav({ store, curPage, onSelectPage, viewMode }) {
   }, [showMore]);
 
   function handleOpenMore() {
+    if (!showMore && moreBtnRef.current) {
+      var rect = moreBtnRef.current.getBoundingClientRect();
+      setPopupPos({ top: rect.bottom + 4, left: Math.max(8, rect.right - 260) });
+    }
     setShowMore(!showMore);
     setDrillParent(null);
   }
@@ -139,7 +148,7 @@ function BriefingStoreNav({ store, curPage, onSelectPage, viewMode }) {
       var parentPage = topPages.find(function(p) { return p.id === drillParent; });
       var children = childrenMap[drillParent] || [];
       popupContent = (
-        <div className="briefing-nav-popup">
+        <div className="briefing-nav-popup" style={{ top: popupPos.top, left: popupPos.left }}>
           <button className="briefing-nav-popup-back" onClick={handleDrillBack}>
             &#8592; Back
           </button>
@@ -166,7 +175,7 @@ function BriefingStoreNav({ store, curPage, onSelectPage, viewMode }) {
     } else {
       // Show all top-level pages
       popupContent = (
-        <div className="briefing-nav-popup">
+        <div className="briefing-nav-popup" style={{ top: popupPos.top, left: popupPos.left }}>
           {topPages.map(function(pg) {
             var children = childrenMap[pg.id] || [];
             var hasChildren = children.length > 0;
@@ -209,14 +218,14 @@ function BriefingStoreNav({ store, curPage, onSelectPage, viewMode }) {
           );
         })}
         {hasOverflow && (
-          <div className="briefing-nav-tab-item" style={{ position: 'relative' }} ref={moreRef}>
-            <button className="briefing-nav-tab-more" onClick={handleOpenMore}>
+          <div className="briefing-nav-tab-item" ref={moreRef}>
+            <button className="briefing-nav-tab-more" ref={moreBtnRef} onClick={handleOpenMore}>
               Mehr &#9662;
             </button>
-            {popupContent}
           </div>
         )}
       </div>
+      {popupContent}
     </div>
   );
 }

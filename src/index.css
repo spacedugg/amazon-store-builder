@@ -410,7 +410,7 @@ textarea.input { resize: vertical; min-height: 44px; }
 .briefing-nav-tab-more:hover { color: #4338ca; }
 
 /* Nav popup (Mehr dropdown) */
-.briefing-nav-popup { position: absolute; right: 0; top: calc(100% + 4px); background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; box-shadow: 0 8px 28px rgba(0,0,0,.15); z-index: 30; padding: 6px 0; min-width: 240px; max-height: 420px; overflow-y: auto; }
+.briefing-nav-popup { position: fixed; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; box-shadow: 0 12px 40px rgba(0,0,0,.22); z-index: 9999; padding: 6px 0; min-width: 260px; max-height: 420px; overflow-y: auto; }
 .briefing-nav-popup-back { display: flex; align-items: center; gap: 6px; padding: 8px 16px; font-size: 12px; font-weight: 600; color: #6366f1; border: none; background: none; width: 100%; text-align: left; font-family: inherit; cursor: pointer; border-bottom: 1px solid #f1f5f9; margin-bottom: 4px; }
 .briefing-nav-popup-back:hover { background: #eef2ff; }
 .briefing-nav-popup-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; font-size: 12px; cursor: pointer; color: #475569; white-space: nowrap; border: none; background: none; width: 100%; text-align: left; font-family: inherit; transition: all .15s; }
