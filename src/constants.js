@@ -459,6 +459,8 @@ export var PRICING = {
   videoPrice: 650,
   baseSetupFee: 750,
   imageCost: 5,
+  designerHourlyUsd: 14,
+  usdToEur: 0.92,
   currency: 'EUR',
   password: 'agentur2024',
 };

@@ -133,6 +133,16 @@ export async function importStoreByShareLink(input) {
   return { id: result.id, shareToken: result.shareToken, data: storeData.data };
 }
 
+// Fetch designer timer for a store by shareToken
+export async function fetchDesignerTimer(shareToken) {
+  if (!shareToken) return { seconds: 0, running: false };
+  try {
+    var resp = await fetch('/api/timer?shareToken=' + encodeURIComponent(shareToken));
+    if (!resp.ok) return { seconds: 0, running: false };
+    return resp.json();
+  } catch (e) { return { seconds: 0, running: false }; }
+}
+
 // Auto-save stays in localStorage (frequent writes, no need for DB)
 export function autoSave(store) {
   try {

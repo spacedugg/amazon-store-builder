@@ -1,4 +1,4 @@
-export default function Topbar({ store, onGenerate, onExport, onSave, viewMode, onToggleView, onNewStore, onUndo, canUndo }) {
+export default function Topbar({ store, onGenerate, onExport, onSave, viewMode, onToggleView, onNewStore, onUndo, canUndo, onShowPrice }) {
   return (
     <div className="topbar">
       <div className="topbar-brand">
@@ -32,6 +32,7 @@ export default function Topbar({ store, onGenerate, onExport, onSave, viewMode, 
           </button>
           <button className="btn btn-green" onClick={onSave} title="Save store">Save</button>
           <button className="btn btn-primary" onClick={onExport} title="Generate share link for designer">Export</button>
+          <button className="btn" onClick={onShowPrice} title="Price calculator" style={{ fontSize: 11 }}>&#128176;</button>
           <button className="btn" onClick={onNewStore} title="Start a new store">New Store</button>
         </>
       )}

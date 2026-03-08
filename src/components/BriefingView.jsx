@@ -20,6 +20,8 @@ var INSPIRATION_LINKS = [
   { brand: 'Blackroll', url: 'https://www.amazon.de/stores/page/870649DE-4F7E-421F-B141-C4C47864D539', category: 'Fitness' },
   { brand: 'AG1', url: 'https://www.amazon.de/stores/AG1/page/E676C84A-8A86-4F92-B978-3343F367DD0C', category: 'Health' },
   { brand: 'North Face', url: 'https://www.amazon.de/stores/THENORTHFACE/page/91172724-C342-482B-A300-564D9EA5E09F', category: 'Outdoor' },
+  { brand: 'Store 7AD4', url: 'https://www.amazon.de/stores/page/7AD425C6-C3C5-402D-A69D-D6201F98F888', category: 'General' },
+  { brand: 'Store 34D4', url: 'https://www.amazon.de/stores/page/34D4A812-9A68-4602-A6A0-30565D399620', category: 'General' },
 ];
 
 // ─── IMAGE CATEGORY EXAMPLES (Google Drive folders with reference images) ───
@@ -427,6 +429,136 @@ function StoreHeroBanner({ store, viewMode }) {
   );
 }
 
+// ─── DESIGNER TIMER (synced to server, runs accurately even when tab inactive) ───
+function DesignerTimer({ shareToken }) {
+  var [totalSeconds, setTotalSeconds] = useState(0);
+  var [running, setRunning] = useState(false);
+  var [syncing, setSyncing] = useState(false);
+  var [showHint, setShowHint] = useState(true);
+  var startedAtRef = useRef(null); // local timestamp when we last pressed start
+  var baseSecondsRef = useRef(0); // seconds from server at last sync
+  var intervalRef = useRef(null);
+  var syncIntervalRef = useRef(null);
+
+  // Format seconds as HH:MM:SS
+  function formatTime(s) {
+    var h = Math.floor(s / 3600);
+    var m = Math.floor((s % 3600) / 60);
+    var sec = s % 60;
+    return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m + ':' + (sec < 10 ? '0' : '') + sec;
+  }
+
+  // Fetch timer state from server
+  function fetchTimer() {
+    return fetch('/api/timer?shareToken=' + encodeURIComponent(shareToken))
+      .then(function(r) { return r.ok ? r.json() : null; })
+      .catch(function() { return null; });
+  }
+
+  // Send start/stop action to server
+  function sendAction(action) {
+    return fetch('/api/timer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ shareToken: shareToken, action: action }),
+    }).then(function(r) { return r.ok ? r.json() : null; })
+      .catch(function() { return null; });
+  }
+
+  // Initial load
+  useEffect(function() {
+    if (!shareToken) return;
+    fetchTimer().then(function(data) {
+      if (!data) return;
+      setTotalSeconds(data.seconds);
+      setRunning(data.running);
+      baseSecondsRef.current = data.seconds;
+      if (data.running) {
+        startedAtRef.current = Date.now();
+      }
+    });
+  }, [shareToken]);
+
+  // Accurate local tick using Date.now() difference (not dependent on setInterval accuracy)
+  useEffect(function() {
+    if (running) {
+      if (!startedAtRef.current) startedAtRef.current = Date.now();
+      intervalRef.current = setInterval(function() {
+        var elapsed = Math.floor((Date.now() - startedAtRef.current) / 1000);
+        setTotalSeconds(baseSecondsRef.current + elapsed);
+      }, 1000);
+    } else {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    }
+    return function() { if (intervalRef.current) clearInterval(intervalRef.current); };
+  }, [running]);
+
+  // Sync with server every 30s while running (to keep server state up to date)
+  useEffect(function() {
+    if (running) {
+      syncIntervalRef.current = setInterval(function() {
+        fetchTimer().then(function(data) {
+          if (!data) return;
+          baseSecondsRef.current = data.seconds;
+          startedAtRef.current = Date.now();
+        });
+      }, 30000);
+    } else {
+      if (syncIntervalRef.current) clearInterval(syncIntervalRef.current);
+    }
+    return function() { if (syncIntervalRef.current) clearInterval(syncIntervalRef.current); };
+  }, [running]);
+
+  function handleStart() {
+    setSyncing(true);
+    sendAction('start').then(function(data) {
+      setSyncing(false);
+      if (!data) return;
+      setRunning(true);
+      baseSecondsRef.current = data.seconds;
+      startedAtRef.current = Date.now();
+      setTotalSeconds(data.seconds);
+      setShowHint(false);
+    });
+  }
+
+  function handleStop() {
+    setSyncing(true);
+    sendAction('stop').then(function(data) {
+      setSyncing(false);
+      if (!data) return;
+      setRunning(false);
+      baseSecondsRef.current = data.seconds;
+      startedAtRef.current = null;
+      setTotalSeconds(data.seconds);
+    });
+  }
+
+  return (
+    <div className="briefing-timer-sticky">
+      <div className="briefing-timer-inner">
+        <div className="briefing-timer-display">
+          <span className={'briefing-timer-time' + (running ? ' briefing-timer-running' : '')}>{formatTime(totalSeconds)}</span>
+          {running ? (
+            <button className="briefing-timer-btn briefing-timer-stop" onClick={handleStop} disabled={syncing} title="Pause timer">
+              &#9646;&#9646;
+            </button>
+          ) : (
+            <button className="briefing-timer-btn briefing-timer-start" onClick={handleStart} disabled={syncing} title="Start timer">
+              &#9654;
+            </button>
+          )}
+        </div>
+        {showHint && !running && totalSeconds === 0 && (
+          <div className="briefing-timer-hint">
+            Press Start before you begin working on this store.
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // ─── MAIN BRIEFING VIEW ───
 export default function BriefingView() {
   var [store, setStore] = useState(null);
@@ -638,6 +770,9 @@ export default function BriefingView() {
           </div>
         </div>
       </div>
+
+      {/* Designer Timer — sticky at top */}
+      {token && <DesignerTimer shareToken={token} />}
 
       {/* Update banner */}
       {updateBanner && (

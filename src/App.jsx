@@ -426,10 +426,11 @@ export default function App() {
     e.target.value = '';
   };
 
-  // ─── EXPORT (generate share link) ───
+  // ─── EXPORT (generate share link — always reuses same link per store) ───
   var handleExport = async function() {
     if (!store.pages.length) return;
     try {
+      var hadToken = !!shareToken;
       // Save first (or re-save) to ensure we have a share token
       var result = await saveStore(store, storeId, shareToken);
       if (result && result.shareToken) {
@@ -439,9 +440,12 @@ export default function App() {
         // Copy to clipboard
         try {
           await navigator.clipboard.writeText(shareUrl);
-          alert('Designer briefing link copied to clipboard!\n\n' + shareUrl);
+          if (hadToken) {
+            alert('Store saved & link copied to clipboard (same link as before).\n\n' + shareUrl);
+          } else {
+            alert('Designer briefing link created & copied to clipboard!\n\n' + shareUrl);
+          }
         } catch (clipErr) {
-          // Fallback: prompt user to copy
           prompt('Copy this link and share it with your designer:', shareUrl);
         }
         // Also refresh saved stores list
@@ -517,6 +521,7 @@ export default function App() {
         onNewStore={handleNewStore}
         onUndo={handleUndo}
         canUndo={undoStackRef.current.length > 0}
+        onShowPrice={function() { setShowPrice(true); }}
       />
 
       <div className="app-body">
@@ -615,6 +620,7 @@ export default function App() {
       {showPrice && (
         <PriceCalculator
           store={store}
+          shareToken={shareToken}
           onClose={function() { setShowPrice(false); }}
           uiLang={uiLang}
         />
