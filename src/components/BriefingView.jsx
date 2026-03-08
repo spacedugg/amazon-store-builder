@@ -23,14 +23,14 @@ var INSPIRATION_LINKS = [
 ];
 
 // ─── IMAGE CATEGORY EXAMPLES (Google Drive folders with reference images) ───
-// Image category examples — link to real Amazon Brand Stores that showcase each type
+// Image category examples — link to Google Drive folders with reference images
 var IMAGE_CATEGORY_EXAMPLES = [
-  { id: 'store_hero', name: 'Store Hero', color: '#8B5CF6', desc: 'First image above menu. Represents the brand instantly.', example: 'Nespresso', exampleUrl: 'https://www.amazon.de/stores/page/2429E3F3-8BFA-466A-9185-35FB47867B06' },
-  { id: 'benefit', name: 'Benefit', color: '#10B981', desc: 'USPs, trust signals, quality markers. Icons + short labels, no product photos.', example: 'Bears with Benefits', exampleUrl: 'https://www.amazon.de/stores/BearswithBenefits/page/AFC77FAF-F173-4A4E-A7DF-8779F7E16E97' },
-  { id: 'product', name: 'Product', color: '#3B82F6', desc: 'Product on clean background. Optional name, CTA, badge.', example: 'ESN', exampleUrl: 'https://www.amazon.de/stores/ESN/page/F5F8CAD5-7990-44CF-9F5B-61DFFF5E8581' },
-  { id: 'creative', name: 'Creative', color: '#F59E0B', desc: 'Complex composition: product + text + graphics. Engagement AND information.', example: 'Snocks', exampleUrl: 'https://www.amazon.de/stores/SNOCKS/page/C0392661-40E4-498F-992D-2FFEB9086ABB' },
-  { id: 'lifestyle', name: 'Lifestyle', color: '#EC4899', desc: 'Lifestyle photo dominates (70-80%+). Emotional, product in use.', example: 'North Face', exampleUrl: 'https://www.amazon.de/stores/THENORTHFACE/page/91172724-C342-482B-A300-564D9EA5E09F' },
-  { id: 'text_image', name: 'Text Image', color: '#6B7280', desc: 'Text/graphics dominant. Full typographic control. No product/lifestyle photos.', example: 'Holy', exampleUrl: 'https://www.amazon.de/stores/HOLYEnergy/page/7913E121-CB43-4349-A8D2-9F0843B226E4' },
+  { id: 'store_hero', name: 'Store Hero', color: '#8B5CF6', desc: 'First image above menu. Represents the brand instantly.', example: 'Videos', exampleUrl: 'https://drive.google.com/drive/folders/1vttmLNQKcuyxpbexEIMzqcXyJru6hw3f?usp=share_link' },
+  { id: 'benefit', name: 'Benefit', color: '#10B981', desc: 'USPs, trust signals, quality markers. Icons + short labels, no product photos.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/1uqmEwIbE6YHo0V0Lff76GXqOYYq-71-_?usp=share_link' },
+  { id: 'product', name: 'Product', color: '#3B82F6', desc: 'Product on clean background. Optional name, CTA, badge.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/1T0M9h8eITYbW_RS7L5aCxSM-Zg94EUh-?usp=share_link' },
+  { id: 'creative', name: 'Creative', color: '#F59E0B', desc: 'Complex composition: product + text + graphics. Engagement AND information.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/10DAe3uEmkcp0rBDCanzHCWYg8FtU08uC?usp=share_link' },
+  { id: 'lifestyle', name: 'Lifestyle', color: '#EC4899', desc: 'Lifestyle photo dominates (70-80%+). Emotional, product in use.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/1JVOOwEfXqzW34sN6BJJM6imBD-8U6VBB?usp=share_link' },
+  { id: 'text_image', name: 'Text Image', color: '#6B7280', desc: 'Text/graphics dominant. Full typographic control. No product/lifestyle photos.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/1cI3ldu0or4VBFMLmbvkTVrUOo0MgEZuG?usp=share_link' },
 ];
 
 // Map category IDs to colors for inline highlighting
