@@ -143,6 +143,13 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
             <label className="label">{t('props.textOverlay', uiLang)}</label>
             <input value={tile.textOverlay || ''} onChange={function(e) { u('textOverlay', e.target.value); }}
               className="input" placeholder={t('props.textOverlayPlaceholder', uiLang)} />
+            {tile.textOverlay && (
+              <div className="text-align-picker" style={{ display: 'flex', gap: 2, marginTop: 4 }}>
+                <button className={'btn text-align-btn' + ((!tile.textAlign || tile.textAlign === 'left') ? ' active' : '')} onClick={function() { u('textAlign', 'left'); }} title="Linksbündig" style={{ fontSize: 10, padding: '3px 8px' }}>&#8676; Links</button>
+                <button className={'btn text-align-btn' + (tile.textAlign === 'center' ? ' active' : '')} onClick={function() { u('textAlign', 'center'); }} title="Zentriert" style={{ fontSize: 10, padding: '3px 8px' }}>Mitte</button>
+                <button className={'btn text-align-btn' + (tile.textAlign === 'right' ? ' active' : '')} onClick={function() { u('textAlign', 'right'); }} title="Rechtsbündig" style={{ fontSize: 10, padding: '3px 8px' }}>Rechts &#8677;</button>
+              </div>
+            )}
           </div>
           <div className="props-section">
             <label className="label">{t('props.ctaText', uiLang)}</label>
@@ -225,6 +232,11 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
           <label className="label">{t('props.textContent', uiLang)}</label>
           <textarea value={tile.textOverlay || ''} onChange={function(e) { u('textOverlay', e.target.value); }}
             rows={4} className="input" placeholder={t('props.nativeTextPlaceholder', uiLang)} />
+          <div className="text-align-picker" style={{ display: 'flex', gap: 2, marginTop: 4 }}>
+            <button className={'btn text-align-btn' + ((!tile.textAlign || tile.textAlign === 'left') ? ' active' : '')} onClick={function() { u('textAlign', 'left'); }} title="Linksbündig" style={{ fontSize: 10, padding: '3px 8px' }}>&#8676; Links</button>
+            <button className={'btn text-align-btn' + (tile.textAlign === 'center' ? ' active' : '')} onClick={function() { u('textAlign', 'center'); }} title="Zentriert" style={{ fontSize: 10, padding: '3px 8px' }}>Mitte</button>
+            <button className={'btn text-align-btn' + (tile.textAlign === 'right' ? ' active' : '')} onClick={function() { u('textAlign', 'right'); }} title="Rechtsbündig" style={{ fontSize: 10, padding: '3px 8px' }}>Rechts &#8677;</button>
+          </div>
           <div className="hint">{t('props.nativeTextHint', uiLang)}</div>
         </div>
       )}

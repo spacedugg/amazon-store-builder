@@ -808,6 +808,10 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
       if (!t.imageCategory && t.brief && t.type !== 'product_grid' && t.type !== 'text' && t.type !== 'video') {
         t.imageCategory = inferImageCategory(t.brief, t.type);
       }
+      // Strip category tags from brief text (redundant since category is set via dropdown)
+      if (t.brief) {
+        t.brief = t.brief.replace(/\[(STORE_HERO|BENEFIT|PRODUCT|CREATIVE|LIFESTYLE|TEXT_IMAGE|SHOPPABLE)\]\s*/gi, '').trim();
+      }
     });
     sec.id = uid();
   });
@@ -934,6 +938,10 @@ export function applyOperations(store, operations) {
           if (!t.asins) t.asins = [];
           if (!t.imageCategory && t.type !== 'product_grid' && t.type !== 'text' && t.type !== 'video') {
             t.imageCategory = inferImageCategory(t.brief, t.type);
+          }
+          // Strip category tags from brief text
+          if (t.brief) {
+            t.brief = t.brief.replace(/\[(STORE_HERO|BENEFIT|PRODUCT|CREATIVE|LIFESTYLE|TEXT_IMAGE|SHOPPABLE)\]\s*/gi, '').trim();
           }
         });
         var idx = typeof op.afterIndex === 'number' ? op.afterIndex + 1 : page.sections.length;

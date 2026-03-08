@@ -25,7 +25,7 @@ var INSPIRATION_LINKS = [
 // ─── IMAGE CATEGORY EXAMPLES (Google Drive folders with reference images) ───
 // Image category examples — link to Google Drive folders with reference images
 var IMAGE_CATEGORY_EXAMPLES = [
-  { id: 'store_hero', name: 'Store Hero', color: '#8B5CF6', desc: 'First image above menu. Represents the brand instantly.', example: 'Videos', exampleUrl: 'https://drive.google.com/drive/folders/1vttmLNQKcuyxpbexEIMzqcXyJru6hw3f?usp=share_link' },
+  { id: 'store_hero', name: 'Store Hero', color: '#8B5CF6', desc: 'First image above menu. Represents the brand instantly.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/1mI7t3hpAwCzAL-yOZHDKjTKn1t24pu8m?usp=share_link' },
   { id: 'benefit', name: 'Benefit', color: '#10B981', desc: 'USPs, trust signals, quality markers. Icons + short labels, no product photos.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/1uqmEwIbE6YHo0V0Lff76GXqOYYq-71-_?usp=share_link' },
   { id: 'product', name: 'Product', color: '#3B82F6', desc: 'Product on clean background. Optional name, CTA, badge.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/1T0M9h8eITYbW_RS7L5aCxSM-Zg94EUh-?usp=share_link' },
   { id: 'creative', name: 'Creative', color: '#F59E0B', desc: 'Complex composition: product + text + graphics. Engagement AND information.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/10DAe3uEmkcp0rBDCanzHCWYg8FtU08uC?usp=share_link' },
@@ -280,7 +280,7 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor }) {
       {tile.textOverlay && (
         <div className="briefing-field">
           <span className="briefing-field-label">Text on Image:</span>
-          <span className="briefing-field-value briefing-field-text">"{tile.textOverlay}"</span>
+          <span className="briefing-field-value briefing-field-text">"{tile.textOverlay}"{tile.textAlign && tile.textAlign !== 'left' ? ' (' + (tile.textAlign === 'center' ? 'zentriert' : 'rechtsbündig') + ')' : ''}</span>
         </div>
       )}
 
@@ -636,14 +636,25 @@ export default function BriefingView() {
           <div className="briefing-sidebar-section" style={{ background: '#fef9c3', borderRadius: 8, margin: '0 8px', padding: '10px 12px' }}>
             <div className="briefing-sidebar-title" style={{ color: '#a16207' }}>Upload Instructions</div>
             <div className="briefing-legend">
-              <p>Upload finished assets to the shared Google Drive folder.</p>
-              <p><strong>Folder structure:</strong></p>
+              <p>Alle fertigen Assets in den geteilten Google Drive Ordner hochladen.</p>
+              <p><strong>Ordnerstruktur:</strong></p>
               <ul>
-                <li>One subfolder per page (e.g. "Homepage")</li>
-                <li>Name: "S1_T1_desktop.jpg"</li>
-                <li>Both desktop + mobile versions</li>
-                <li>Use exact dimensions per tile</li>
+                <li>Pro Seite einen Ordner anlegen (z.B. "Homepage")</li>
+                <li>Innerhalb jeder Seite pro Sektion einen Unterordner (z.B. "Sektion 1", "Sektion 2")</li>
+                <li>In jeden Sektions-Ordner die passenden Bilder (Desktop + Mobile)</li>
               </ul>
+              <p style={{ marginTop: 6 }}><strong>Beispiel:</strong></p>
+              <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 6, padding: '6px 8px', fontSize: 10, fontFamily: 'monospace', lineHeight: 1.8 }}>
+                Homepage/<br />
+                &nbsp;&nbsp;Sektion 1/<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;tile1_desktop.jpg<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;tile1_mobile.jpg<br />
+                &nbsp;&nbsp;Sektion 2/<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;tile1_desktop.jpg<br />
+                Kategorie Fitness/<br />
+                &nbsp;&nbsp;Sektion 1/<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;...
+              </div>
             </div>
           </div>
 
