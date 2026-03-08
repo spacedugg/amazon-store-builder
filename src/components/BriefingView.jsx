@@ -23,16 +23,14 @@ var INSPIRATION_LINKS = [
 ];
 
 // ─── IMAGE CATEGORY EXAMPLES (Google Drive folders with reference images) ───
-// Google Drive example folders per image category
-// To update: replace the folder IDs below with your shared Drive folder links
-var IMAGE_CATEGORY_FOLDER_BASE = 'https://drive.google.com/drive/folders/';
+// Image category examples — link to Google Drive folders with reference images
 var IMAGE_CATEGORY_EXAMPLES = [
-  { id: 'store_hero', name: 'Store Hero', color: '#8B5CF6', desc: 'First image above menu. Represents the brand instantly.', folder: IMAGE_CATEGORY_FOLDER_BASE + '1StoreHero_REPLACE_WITH_REAL_ID' },
-  { id: 'benefit', name: 'Benefit', color: '#10B981', desc: 'USPs, trust signals, quality markers. Icons + short labels, no product photos.', folder: IMAGE_CATEGORY_FOLDER_BASE + '1Benefit_REPLACE_WITH_REAL_ID' },
-  { id: 'product', name: 'Product', color: '#3B82F6', desc: 'Product on clean background. Optional name, CTA, badge.', folder: IMAGE_CATEGORY_FOLDER_BASE + '1Product_REPLACE_WITH_REAL_ID' },
-  { id: 'creative', name: 'Creative', color: '#F59E0B', desc: 'Complex composition: product + text + graphics. Engagement AND information.', folder: IMAGE_CATEGORY_FOLDER_BASE + '1Creative_REPLACE_WITH_REAL_ID' },
-  { id: 'lifestyle', name: 'Lifestyle', color: '#EC4899', desc: 'Lifestyle photo dominates (70-80%+). Emotional, product in use.', folder: IMAGE_CATEGORY_FOLDER_BASE + '1Lifestyle_REPLACE_WITH_REAL_ID' },
-  { id: 'text_image', name: 'Text Image', color: '#6B7280', desc: 'Text/graphics dominant. Full typographic control. No product/lifestyle photos.', folder: IMAGE_CATEGORY_FOLDER_BASE + '1TextImage_REPLACE_WITH_REAL_ID' },
+  { id: 'store_hero', name: 'Store Hero', color: '#8B5CF6', desc: 'First image above menu. Represents the brand instantly.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/1mI7t3hpAwCzAL-yOZHDKjTKn1t24pu8m?usp=share_link' },
+  { id: 'benefit', name: 'Benefit', color: '#10B981', desc: 'USPs, trust signals, quality markers. Icons + short labels, no product photos.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/1uqmEwIbE6YHo0V0Lff76GXqOYYq-71-_?usp=share_link' },
+  { id: 'product', name: 'Product', color: '#3B82F6', desc: 'Product on clean background. Optional name, CTA, badge.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/1T0M9h8eITYbW_RS7L5aCxSM-Zg94EUh-?usp=share_link' },
+  { id: 'creative', name: 'Creative', color: '#F59E0B', desc: 'Complex composition: product + text + graphics. Engagement AND information.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/10DAe3uEmkcp0rBDCanzHCWYg8FtU08uC?usp=share_link' },
+  { id: 'lifestyle', name: 'Lifestyle', color: '#EC4899', desc: 'Lifestyle photo dominates (70-80%+). Emotional, product in use.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/1JVOOwEfXqzW34sN6BJJM6imBD-8U6VBB?usp=share_link' },
+  { id: 'text_image', name: 'Text Image', color: '#6B7280', desc: 'Text/graphics dominant. Full typographic control. No product/lifestyle photos.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/1cI3ldu0or4VBFMLmbvkTVrUOo0MgEZuG?usp=share_link' },
 ];
 
 // Map category IDs to colors for inline highlighting
@@ -91,6 +89,7 @@ function BriefingStoreNav({ store, curPage, onSelectPage, viewMode }) {
   var [popupPos, setPopupPos] = useState({ top: 0, left: 0 });
   var moreRef = useRef(null);
   var moreBtnRef = useRef(null);
+  var popupRef = useRef(null);
   var pages = store.pages || [];
   var topPages = pages.filter(function(p) { return !p.parentId; });
   var childrenMap = {};
@@ -104,11 +103,13 @@ function BriefingStoreNav({ store, curPage, onSelectPage, viewMode }) {
   var overflowPages = topPages.slice(MAX_VISIBLE);
   var hasOverflow = overflowPages.length > 0;
 
-  // Close popup when clicking outside
+  // Close popup when clicking outside (check both the button area and the popup itself)
   useEffect(function() {
     if (!showMore) return;
     function handleClickOutside(e) {
-      if (moreRef.current && !moreRef.current.contains(e.target)) {
+      var insideBtn = moreRef.current && moreRef.current.contains(e.target);
+      var insidePopup = popupRef.current && popupRef.current.contains(e.target);
+      if (!insideBtn && !insidePopup) {
         setShowMore(false);
         setDrillParent(null);
       }
@@ -148,7 +149,7 @@ function BriefingStoreNav({ store, curPage, onSelectPage, viewMode }) {
       var parentPage = topPages.find(function(p) { return p.id === drillParent; });
       var children = childrenMap[drillParent] || [];
       popupContent = (
-        <div className="briefing-nav-popup" style={{ top: popupPos.top, left: popupPos.left }}>
+        <div className="briefing-nav-popup" ref={popupRef} style={{ top: popupPos.top, left: popupPos.left }}>
           <button className="briefing-nav-popup-back" onClick={handleDrillBack}>
             &#8592; Back
           </button>
@@ -175,7 +176,7 @@ function BriefingStoreNav({ store, curPage, onSelectPage, viewMode }) {
     } else {
       // Show all top-level pages
       popupContent = (
-        <div className="briefing-nav-popup" style={{ top: popupPos.top, left: popupPos.left }}>
+        <div className="briefing-nav-popup" ref={popupRef} style={{ top: popupPos.top, left: popupPos.left }}>
           {topPages.map(function(pg) {
             var children = childrenMap[pg.id] || [];
             var hasChildren = children.length > 0;
@@ -247,7 +248,7 @@ function getSectionColor(index) {
 }
 
 // ─── TILE DETAIL CARD (for right panel) ───
-function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor }) {
+function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile }) {
   var dims = LAYOUT_TILE_DIMS[layoutId];
   var desktopType = dims && dims[tileIndex] ? dims[tileIndex] : null;
   var tileLabel = TILE_TYPE_LABELS[tile.type] || tile.type;
@@ -257,7 +258,12 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor }) {
   var catColor = tile.imageCategory && CATEGORY_COLOR_MAP[tile.imageCategory] ? CATEGORY_COLOR_MAP[tile.imageCategory] : null;
 
   return (
-    <div className="briefing-tile-detail" style={{ borderLeft: '3px solid ' + sectionColor.border }}>
+    <div
+      id={'tile-detail-' + sectionId + '-' + tileIndex}
+      className={'briefing-tile-detail' + (isSelected ? ' briefing-tile-detail-selected' : '')}
+      style={{ borderLeft: '3px solid ' + sectionColor.border, cursor: 'pointer' }}
+      onClick={function() { if (onClickTile) onClickTile({ sid: sectionId, ti: tileIndex }); }}
+    >
       <div className="briefing-tile-header">
         <span className="briefing-tile-index">Tile {tileIndex + 1}</span>
         <span className="briefing-tile-type">{tileLabel}</span>
@@ -279,7 +285,7 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor }) {
       {tile.textOverlay && (
         <div className="briefing-field">
           <span className="briefing-field-label">Text on Image:</span>
-          <span className="briefing-field-value briefing-field-text">"{tile.textOverlay}"</span>
+          <span className="briefing-field-value briefing-field-text">"{tile.textOverlay}"{tile.textAlign && tile.textAlign !== 'left' ? ' (' + (tile.textAlign === 'center' ? 'zentriert' : 'rechtsbündig') + ')' : ''}</span>
         </div>
       )}
 
@@ -330,7 +336,7 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor }) {
 }
 
 // ─── SECTION BRIEFING (visual preview only) ───
-function SectionBriefing({ section, sectionIndex, viewMode, products, sectionColor }) {
+function SectionBriefing({ section, sectionIndex, viewMode, products, sectionColor, selectedTile, onTileSelect }) {
   var layout = findLayout(section.layoutId);
 
   return (
@@ -341,13 +347,13 @@ function SectionBriefing({ section, sectionIndex, viewMode, products, sectionCol
       </div>
 
       {/* Visual preview */}
-      <div className="briefing-section-preview">
+      <div className="briefing-section-preview briefing-section-clickable">
         <SectionView
           section={section}
           idx={sectionIndex}
           totalSections={1}
-          sel={null}
-          onSelect={noop}
+          sel={selectedTile}
+          onSelect={onTileSelect}
           onDelete={noop}
           onMoveUp={null}
           onMoveDown={null}
@@ -362,7 +368,7 @@ function SectionBriefing({ section, sectionIndex, viewMode, products, sectionCol
 }
 
 // ─── PAGE BRIEFING (center content — visual only, single page) ───
-function PageBriefing({ page, viewMode, products, sectionStartIndex }) {
+function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTile, onTileSelect }) {
   return (
     <div className="briefing-page">
       <div className="briefing-page-header">
@@ -379,6 +385,8 @@ function PageBriefing({ page, viewMode, products, sectionStartIndex }) {
             viewMode={viewMode}
             products={products}
             sectionColor={getSectionColor(sectionStartIndex + si)}
+            selectedTile={selectedTile}
+            onTileSelect={onTileSelect}
           />
         );
       })}
@@ -429,9 +437,11 @@ export default function BriefingView() {
   var [lastUpdated, setLastUpdated] = useState(null);
   var [changeHighlights, setChangeHighlights] = useState({});
   var [updateBanner, setUpdateBanner] = useState(false);
+  var [selectedTile, setSelectedTile] = useState(null); // { sid, ti }
   var prevStoreRef = useRef(null);
   var pollRef = useRef(null);
   var bannerTimeoutRef = useRef(null);
+  var rightPanelRef = useRef(null);
 
   var token = window.location.pathname.split('/share/')[1];
 
@@ -521,6 +531,19 @@ export default function BriefingView() {
     }
   };
 
+  // ─── TILE SELECTION (click tile in preview → scroll right panel) ───
+  function handleTileSelect(sel) {
+    if (!sel) return;
+    setSelectedTile(sel);
+    // Scroll the right panel to the matching tile detail
+    setTimeout(function() {
+      var el = document.getElementById('tile-detail-' + sel.sid + '-' + sel.ti);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 50);
+  }
+
   if (loading) return (
     <div className="briefing-loading">
       <div className="briefing-loading-spinner" />
@@ -596,8 +619,8 @@ export default function BriefingView() {
                     <span className="briefing-imgcat-badge" style={{ background: cat.color }}>{cat.name}</span>
                     <span className="briefing-imgcat-desc">
                       {cat.desc}
-                      {cat.folder && (
-                        <a href={cat.folder} target="_blank" rel="noopener noreferrer" className="briefing-imgcat-link">Examples</a>
+                      {cat.exampleUrl && (
+                        <a href={cat.exampleUrl} target="_blank" rel="noopener noreferrer" className="briefing-imgcat-link">Example: {cat.example}</a>
                       )}
                     </span>
                   </div>
@@ -635,14 +658,25 @@ export default function BriefingView() {
           <div className="briefing-sidebar-section" style={{ background: '#fef9c3', borderRadius: 8, margin: '0 8px', padding: '10px 12px' }}>
             <div className="briefing-sidebar-title" style={{ color: '#a16207' }}>Upload Instructions</div>
             <div className="briefing-legend">
-              <p>Upload finished assets to the shared Google Drive folder.</p>
-              <p><strong>Folder structure:</strong></p>
+              <p>Alle fertigen Assets in den geteilten Google Drive Ordner hochladen.</p>
+              <p><strong>Ordnerstruktur:</strong></p>
               <ul>
-                <li>One subfolder per page (e.g. "Homepage")</li>
-                <li>Name: "S1_T1_desktop.jpg"</li>
-                <li>Both desktop + mobile versions</li>
-                <li>Use exact dimensions per tile</li>
+                <li>Pro Seite einen Ordner anlegen (z.B. "Homepage")</li>
+                <li>Innerhalb jeder Seite pro Sektion einen Unterordner (z.B. "Sektion 1", "Sektion 2")</li>
+                <li>In jeden Sektions-Ordner die passenden Bilder (Desktop + Mobile)</li>
               </ul>
+              <p style={{ marginTop: 6 }}><strong>Beispiel:</strong></p>
+              <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 6, padding: '6px 8px', fontSize: 10, fontFamily: 'monospace', lineHeight: 1.8 }}>
+                Homepage/<br />
+                &nbsp;&nbsp;Sektion 1/<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;tile1_desktop.jpg<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;tile1_mobile.jpg<br />
+                &nbsp;&nbsp;Sektion 2/<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;tile1_desktop.jpg<br />
+                Kategorie Fitness/<br />
+                &nbsp;&nbsp;Sektion 1/<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;...
+              </div>
             </div>
           </div>
 
@@ -673,12 +707,12 @@ export default function BriefingView() {
           {/* Single page content */}
           {(function() {
             if (!activePage) return <div className="briefing-empty">No pages found.</div>;
-            return <PageBriefing page={activePage} viewMode={viewMode} products={store.products || []} sectionStartIndex={0} />;
+            return <PageBriefing page={activePage} viewMode={viewMode} products={store.products || []} sectionStartIndex={0} selectedTile={selectedTile} onTileSelect={handleTileSelect} />;
           })()}
         </div>
 
         {/* RIGHT PANEL: Designer Instructions (page-specific) */}
-        <div className="briefing-right-panel">
+        <div className="briefing-right-panel" ref={rightPanelRef}>
           <div className="briefing-sidebar-title" style={{ padding: '14px 16px', borderBottom: '1px solid #f1f5f9', color: '#dc2626', margin: 0 }}>
             Designer Instructions
             {activePage && <span style={{ fontSize: 10, color: '#64748b', fontWeight: 400, marginLeft: 8 }}>{activePage.name}</span>}
@@ -693,6 +727,7 @@ export default function BriefingView() {
                     <span style={{ fontSize: 10, color: '#64748b' }}> &middot; Section {item.sectionIndex + 1}</span>
                   </div>
                   {item.section.tiles.map(function(tile, ti) {
+                    var isSelected = selectedTile && selectedTile.sid === item.section.id && selectedTile.ti === ti;
                     return (
                       <TileDetail
                         key={ti}
@@ -701,6 +736,9 @@ export default function BriefingView() {
                         layoutId={item.layoutId}
                         viewMode={viewMode}
                         sectionColor={color}
+                        sectionId={item.section.id}
+                        isSelected={isSelected}
+                        onClickTile={handleTileSelect}
                       />
                     );
                   })}

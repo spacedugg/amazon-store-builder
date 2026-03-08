@@ -109,8 +109,8 @@ async function renderLayoutImage(section) {
     var cw = Math.round(cell[2] * (W - gap) - gap);
     var ch = Math.round(cell[3] * (H - gap) - gap);
 
-    // Background color
-    var bgColor = (tile && tile.bgColor) ? tile.bgColor : (tile ? (TILE_COLORS[tile.type] || '#e2e8f0') : '#e2e8f0');
+    // Background color — only use explicit bgColor, otherwise neutral
+    var bgColor = (tile && tile.bgColor) ? tile.bgColor : '#e8ecf0';
     ctx.fillStyle = bgColor;
     ctx.beginPath();
     roundRect(ctx, cx, cy, cw, ch, 6);
@@ -236,7 +236,10 @@ function tileDescription(tile, tileIndex, productMap, lang) {
     if (dims.w) parts.push(boldPara(t('brief.desktop', lang) + ': ', dims.w + ' x ' + dims.h + ' px'));
     if (mDims.w) parts.push(boldPara(t('brief.mobile', lang) + ': ', mDims.w + ' x ' + mDims.h + ' px'));
     if (tile.bgColor) parts.push(boldPara(t('brief.colorPreview', lang) + ': ', tile.bgColor));
-    if (tile.textOverlay) parts.push(boldPara(t('brief.textOverlay', lang) + ': ', '"' + tile.textOverlay + '"'));
+    if (tile.textOverlay) {
+      var alignHint = tile.textAlign && tile.textAlign !== 'left' ? ' (' + (tile.textAlign === 'center' ? 'zentriert' : 'rechtsbündig') + ')' : '';
+      parts.push(boldPara(t('brief.textOverlay', lang) + ': ', '"' + tile.textOverlay + '"' + alignHint));
+    }
     if (tile.ctaText) parts.push(boldPara(t('brief.ctaButton', lang) + ': ', '"' + tile.ctaText + '"'));
     if (tile.brief) parts.push(boldPara(t('brief.designerBrief', lang) + ': ', tile.brief));
     if (tile.linkAsin) parts.push(boldPara(t('brief.linkAsin', lang) + ': ', tile.linkAsin));

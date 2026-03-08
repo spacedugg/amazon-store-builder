@@ -264,7 +264,8 @@ var TILE_COLORS = ['#6366f1', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#06b6
 
 function LayoutThumb({ layout, isMobile, size }) {
   var w = size || 48;
-  var config = getGridConfig(layout, isMobile);
+  // Always use desktop config for the layout thumbnail to show correct proportions
+  var config = getGridConfig(layout, false);
   var gs = config.gridStyle;
   // Determine aspect ratio for thumbnail height
   var ar = parseFloat(gs.aspectRatio || '0');

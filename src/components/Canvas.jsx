@@ -2,8 +2,9 @@ import { useState } from 'react';
 import SectionView from './SectionView';
 import { t } from '../i18n';
 
-export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onMoveSection, onChangeLayout, viewMode, onHeaderBannerUpload, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate }) {
+export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onMoveSection, onChangeLayout, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate }) {
   var [hoveredNav, setHoveredNav] = useState(null);
+  var [showHeroPicker, setShowHeroPicker] = useState(false);
   if (!page) {
     return (
       <div className="canvas">
@@ -35,13 +36,44 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
     <div className="canvas">
       <div className={'canvas-inner' + (isMobile ? ' canvas-mobile' : '')}>
         {/* Header banner (above nav) */}
-        <div className="canvas-header-banner" onClick={function() { onHeaderBannerUpload && onHeaderBannerUpload(); }}>
+        <div className="canvas-header-banner">
           {bannerSrc ? (
-            <img src={bannerSrc} className="header-banner-img" alt="" />
+            <div onClick={function() { onHeaderBannerUpload && onHeaderBannerUpload(); }} style={{ cursor: 'pointer' }}>
+              <img src={bannerSrc} className="header-banner-img" alt="" />
+            </div>
           ) : (
-            <div className="header-banner-placeholder">
+            <div className="header-banner-placeholder" style={headerBannerColor ? { background: headerBannerColor, borderColor: headerBannerColor } : undefined}>
               <span>{t('canvas.headerBanner', uiLang)} ({isMobile ? '1242 x 450' : '3000 x 600'})</span>
-              <span className="header-banner-hint">{t('canvas.clickToUpload', uiLang)}</span>
+              <div className="header-banner-actions">
+                <button className="btn" style={{ fontSize: 10, padding: '4px 10px' }} onClick={function() { onHeaderBannerUpload && onHeaderBannerUpload(); }}>
+                  Bild hochladen
+                </button>
+                <button className="btn" style={{ fontSize: 10, padding: '4px 10px' }} onClick={function(e) { e.stopPropagation(); setShowHeroPicker(!showHeroPicker); }}>
+                  {headerBannerColor ? 'Farbe ändern' : 'Nur Farbe'}
+                </button>
+                {headerBannerColor && (
+                  <button className="btn" style={{ fontSize: 10, padding: '4px 10px' }} onClick={function(e) { e.stopPropagation(); onHeaderBannerColorChange(''); }}>
+                    Farbe entfernen
+                  </button>
+                )}
+              </div>
+              {showHeroPicker && (
+                <div className="header-banner-color-picker" onClick={function(e) { e.stopPropagation(); }}>
+                  <input
+                    type="color"
+                    value={headerBannerColor || '#ffffff'}
+                    onChange={function(e) { onHeaderBannerColorChange(e.target.value); }}
+                    style={{ width: 32, height: 32, border: 'none', cursor: 'pointer', borderRadius: 4 }}
+                  />
+                  <input
+                    value={headerBannerColor || ''}
+                    onChange={function(e) { onHeaderBannerColorChange(e.target.value); }}
+                    className="input"
+                    placeholder="#RRGGBB"
+                    style={{ width: 90, fontFamily: 'monospace', fontSize: 11 }}
+                  />
+                </div>
+              )}
             </div>
           )}
         </div>

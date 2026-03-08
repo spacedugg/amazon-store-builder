@@ -72,7 +72,7 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
     return (
       <div className={cls} onClick={onClick} style={bgColor ? { background: bgColor } : undefined}>
         <div className="tile-text-native">
-          <div className="tile-text-content">{tile.textOverlay || t('tile.textModule', uiLang)}</div>
+          <div className="tile-text-content" style={{ textAlign: tile.textAlign || 'left' }}>{tile.textOverlay || t('tile.textModule', uiLang)}</div>
         </div>
       </div>
     );
@@ -86,7 +86,7 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
           ? <img src={img} className="tile-uploaded-img" alt="" />
           : <Wireframe tile={tile} viewMode={viewMode} bgColor={bgColor} />
         }
-        {tile.textOverlay && <div className="tile-it-text">{tile.textOverlay}</div>}
+        {tile.textOverlay && <div className="tile-it-text" style={{ textAlign: tile.textAlign || 'left' }}>{tile.textOverlay}</div>}
       </div>
     );
   }

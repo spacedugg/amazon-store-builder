@@ -16,7 +16,7 @@ import PriceCalculator from './components/PriceCalculator';
 import ExportModal from './components/ExportModal';
 import BriefingView from './components/BriefingView';
 
-var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, complexity: 2, category: 'generic', googleDriveUrl: '' };
+var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, headerBannerColor: '', complexity: 2, category: 'generic', googleDriveUrl: '' };
 
 export default function App() {
   // Check if this is a share link — render full BriefingView
@@ -551,6 +551,8 @@ export default function App() {
           onChangeLayout={changeLayout}
           viewMode={viewMode}
           onHeaderBannerUpload={handleHeaderBannerUpload}
+          headerBannerColor={store.headerBannerColor || ''}
+          onHeaderBannerColorChange={function(color) { setStoreWithUndo(function(s) { return Object.assign({}, s, { headerBannerColor: color }); }); }}
           products={store.products}
           uiLang={uiLang}
           hasAutoSave={hasAutoSave}
