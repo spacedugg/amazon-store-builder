@@ -55,9 +55,8 @@ export default function PriceCalculator({ store, shareToken, onClose, uiLang }) 
   var designerCostEur = designerCostUsd * PRICING.usdToEur;
   var hourlyEur = PRICING.designerHourlyUsd * PRICING.usdToEur;
 
-  // Internal cost = designer time cost + production cost per image
-  var productionCost = assets.images * PRICING.imageCost;
-  var totalInternalCost = designerCostEur + productionCost;
+  // Internal cost = designer time only
+  var totalInternalCost = designerCostEur;
 
   // Margin
   var margin = sellingPrice - totalInternalCost;
@@ -147,16 +146,7 @@ export default function PriceCalculator({ store, shareToken, onClose, uiLang }) 
 
             {/* Internal Cost */}
             <div className="price-divider" />
-            <div className="price-section-header" style={{ color: '#dc2626' }}>Internal Cost</div>
-            <div className="price-row price-row-detail">
-              <span className="price-label">Designer Time</span>
-              <span className="price-value">{formatEur(designerCostEur)}</span>
-            </div>
-            <div className="price-row price-row-detail">
-              <span className="price-label">{assets.images} x {PRICING.imageCost} {PRICING.currency} ({t('price.productionCost', uiLang)})</span>
-              <span className="price-value">{formatEur(productionCost)}</span>
-            </div>
-            <div className="price-divider" />
+            <div className="price-section-header" style={{ color: '#dc2626' }}>Internal Cost (Designer Time)</div>
             <div className="price-row price-total" style={{ color: '#dc2626' }}>
               <span className="price-label">Total Internal Cost</span>
               <span className="price-value">{formatEur(totalInternalCost)}</span>
