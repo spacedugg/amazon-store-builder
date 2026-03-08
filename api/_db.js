@@ -24,6 +24,9 @@ async function migrate() {
         share_token TEXT UNIQUE,
         page_count INTEGER DEFAULT 0,
         product_count INTEGER DEFAULT 0,
+        timer_seconds INTEGER DEFAULT 0,
+        timer_running INTEGER DEFAULT 0,
+        timer_started_at TEXT DEFAULT NULL,
         created_at TEXT DEFAULT (datetime('now')),
         updated_at TEXT DEFAULT (datetime('now'))
       )`,
@@ -32,6 +35,16 @@ async function migrate() {
       sql: `CREATE INDEX IF NOT EXISTS idx_stores_share_token ON stores(share_token)`,
     },
   ]);
+  // Add timer columns if they don't exist (for existing databases)
+  try {
+    await db.execute({ sql: `ALTER TABLE stores ADD COLUMN timer_seconds INTEGER DEFAULT 0` });
+  } catch (e) { /* column already exists */ }
+  try {
+    await db.execute({ sql: `ALTER TABLE stores ADD COLUMN timer_running INTEGER DEFAULT 0` });
+  } catch (e) { /* column already exists */ }
+  try {
+    await db.execute({ sql: `ALTER TABLE stores ADD COLUMN timer_started_at TEXT DEFAULT NULL` });
+  } catch (e) { /* column already exists */ }
 }
 
 module.exports = { getClient: getClient, migrate: migrate };

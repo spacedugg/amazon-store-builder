@@ -1,16 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { PRICING, countStoreAssets } from '../constants';
+import { fetchDesignerTimer } from '../storage';
 import { t } from '../i18n';
 
-export default function PriceCalculator({ store, onClose, uiLang }) {
+export default function PriceCalculator({ store, shareToken, onClose, uiLang }) {
   var [password, setPassword] = useState('');
   var [unlocked, setUnlocked] = useState(false);
   var [error, setError] = useState('');
+  var [timerSeconds, setTimerSeconds] = useState(0);
+  var [timerLoading, setTimerLoading] = useState(false);
 
   var handleUnlock = function() {
     if (password === PRICING.password) {
       setUnlocked(true);
       setError('');
+      // Fetch timer when unlocked
+      if (shareToken) {
+        setTimerLoading(true);
+        fetchDesignerTimer(shareToken).then(function(data) {
+          setTimerSeconds(data.seconds || 0);
+          setTimerLoading(false);
+        });
+      }
     } else {
       setError(t('price.wrongPassword', uiLang));
       setTimeout(function() {
@@ -20,17 +31,51 @@ export default function PriceCalculator({ store, onClose, uiLang }) {
     }
   };
 
+  // Refresh timer every 30s while unlocked
+  useEffect(function() {
+    if (!unlocked || !shareToken) return;
+    var interval = setInterval(function() {
+      fetchDesignerTimer(shareToken).then(function(data) {
+        setTimerSeconds(data.seconds || 0);
+      });
+    }, 30000);
+    return function() { clearInterval(interval); };
+  }, [unlocked, shareToken]);
+
   var assets = countStoreAssets(store);
+
+  // Selling price calculation
   var imageTotal = assets.images * PRICING.imagePrice;
   var videoTotal = assets.videos * PRICING.videoPrice;
-  var grandTotal = PRICING.baseSetupFee + imageTotal + videoTotal;
-  var internalCost = assets.images * PRICING.imageCost;
-  var margin = grandTotal - internalCost;
-  var marginPct = grandTotal > 0 ? Math.round((margin / grandTotal) * 100) : 0;
+  var sellingPrice = PRICING.baseSetupFee + imageTotal + videoTotal;
+
+  // Designer time cost (USD $14/hr → EUR)
+  var designerHours = timerSeconds / 3600;
+  var designerCostUsd = designerHours * PRICING.designerHourlyUsd;
+  var designerCostEur = designerCostUsd * PRICING.usdToEur;
+  var hourlyEur = PRICING.designerHourlyUsd * PRICING.usdToEur;
+
+  // Internal cost = designer time only
+  var totalInternalCost = designerCostEur;
+
+  // Margin
+  var margin = sellingPrice - totalInternalCost;
+  var marginPct = sellingPrice > 0 ? Math.round((margin / sellingPrice) * 100) : 0;
+
+  function formatTime(s) {
+    var h = Math.floor(s / 3600);
+    var m = Math.floor((s % 3600) / 60);
+    var sec = s % 60;
+    return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m + ':' + (sec < 10 ? '0' : '') + sec;
+  }
+
+  function formatEur(n) {
+    return n.toFixed(2).replace('.', ',') + ' EUR';
+  }
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-box" onClick={function(e) { e.stopPropagation(); }} style={{ maxWidth: 440 }}>
+      <div className="modal-box" onClick={function(e) { e.stopPropagation(); }} style={{ maxWidth: 480 }}>
         <div className="modal-title">{t('price.title', uiLang)}</div>
 
         {!unlocked ? (
@@ -62,9 +107,23 @@ export default function PriceCalculator({ store, onClose, uiLang }) {
               <span className="price-value">{assets.videos}</span>
             </div>
 
-            {/* Customer price */}
+            {/* Designer Time */}
             <div className="price-divider" />
-            <div className="price-section-header">{t('price.customerPrice', uiLang)}</div>
+            <div className="price-section-header">Designer Time</div>
+            <div className="price-row price-row-detail">
+              <span className="price-label">Tracked Time</span>
+              <span className="price-value" style={{ fontFamily: 'monospace' }}>
+                {timerLoading ? '...' : formatTime(timerSeconds)}
+              </span>
+            </div>
+            <div className="price-row price-row-detail">
+              <span className="price-label">Rate: ${PRICING.designerHourlyUsd}/hr ({formatEur(hourlyEur)}/hr)</span>
+              <span className="price-value">{formatEur(designerCostEur)}</span>
+            </div>
+
+            {/* Selling Price (Outcome) */}
+            <div className="price-divider" />
+            <div className="price-section-header" style={{ color: '#1d4ed8' }}>Selling Price (Customer)</div>
             <div className="price-row price-row-detail">
               <span className="price-label">{t('price.setup', uiLang)}</span>
               <span className="price-value">{PRICING.baseSetupFee} {PRICING.currency}</span>
@@ -80,22 +139,24 @@ export default function PriceCalculator({ store, onClose, uiLang }) {
               </div>
             )}
             <div className="price-divider" />
-            <div className="price-row price-total">
-              <span className="price-label">{t('price.estimatedTotal', uiLang)}</span>
-              <span className="price-value">{grandTotal} {PRICING.currency}</span>
+            <div className="price-row price-total" style={{ color: '#1d4ed8' }}>
+              <span className="price-label">Selling Price Total</span>
+              <span className="price-value">{formatEur(sellingPrice)}</span>
             </div>
 
-            {/* Internal cost */}
+            {/* Internal Cost */}
             <div className="price-divider" />
-            <div className="price-section-header">{t('price.internalCost', uiLang)}</div>
-            <div className="price-row price-row-detail">
-              <span className="price-label">{assets.images} x {PRICING.imageCost} {PRICING.currency} ({t('price.productionCost', uiLang)})</span>
-              <span className="price-value">{internalCost} {PRICING.currency}</span>
+            <div className="price-section-header" style={{ color: '#dc2626' }}>Internal Cost (Designer Time)</div>
+            <div className="price-row price-total" style={{ color: '#dc2626' }}>
+              <span className="price-label">Total Internal Cost</span>
+              <span className="price-value">{formatEur(totalInternalCost)}</span>
             </div>
+
+            {/* Margin */}
             <div className="price-divider" />
-            <div className="price-row price-total" style={{ color: '#16a34a' }}>
+            <div className="price-row price-total" style={{ color: margin >= 0 ? '#16a34a' : '#dc2626' }}>
               <span className="price-label">{t('price.margin', uiLang)}</span>
-              <span className="price-value">{margin} {PRICING.currency} ({marginPct}%)</span>
+              <span className="price-value">{formatEur(margin)} ({marginPct}%)</span>
             </div>
           </div>
         )}

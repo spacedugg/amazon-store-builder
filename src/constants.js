@@ -247,7 +247,7 @@ export var IMAGE_CATEGORIES = {
   product: {
     id: 'product',
     name: 'Product',
-    description: 'Product clearly in visual focus. Background and elements support, never distract.',
+    description: 'Product clearly in focus. Background can be clean, colored, or styled freely.',
     placement: 'Product grid sections, category tiles for navigation, highlight displays.',
     typicalElements: ['product_photo', 'solid_background', 'product_name', 'category_name', 'cta_button', 'badge'],
     excludedElements: ['body_text', 'long_descriptions'],
@@ -272,7 +272,7 @@ export var IMAGE_CATEGORIES = {
   creative: {
     id: 'creative',
     name: 'Creative',
-    description: 'Most complex category. Mix of product, lifestyle, color, text, CTAs. Drives engagement AND explains.',
+    description: 'Compositions combining products, text, graphics, or lifestyle elements. Engaging and visually appealing.',
     placement: 'Central storytelling and engagement element throughout the store.',
     coreProperty: 'Combines 2-3+ element types. Text always present and plays active role.',
     dualGoal: 'Engagement (emotion, brand, curiosity) AND Information (explain product, assign category, trigger action)',
@@ -459,6 +459,8 @@ export var PRICING = {
   videoPrice: 650,
   baseSetupFee: 750,
   imageCost: 5,
+  designerHourlyUsd: 14,
+  usdToEur: 0.92,
   currency: 'EUR',
   password: 'agentur2024',
 };
