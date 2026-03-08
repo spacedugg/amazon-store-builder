@@ -248,7 +248,7 @@ function getSectionColor(index) {
 }
 
 // ─── TILE DETAIL CARD (for right panel) ───
-function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor }) {
+function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile }) {
   var dims = LAYOUT_TILE_DIMS[layoutId];
   var desktopType = dims && dims[tileIndex] ? dims[tileIndex] : null;
   var tileLabel = TILE_TYPE_LABELS[tile.type] || tile.type;
@@ -258,7 +258,12 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor }) {
   var catColor = tile.imageCategory && CATEGORY_COLOR_MAP[tile.imageCategory] ? CATEGORY_COLOR_MAP[tile.imageCategory] : null;
 
   return (
-    <div className="briefing-tile-detail" style={{ borderLeft: '3px solid ' + sectionColor.border }}>
+    <div
+      id={'tile-detail-' + sectionId + '-' + tileIndex}
+      className={'briefing-tile-detail' + (isSelected ? ' briefing-tile-detail-selected' : '')}
+      style={{ borderLeft: '3px solid ' + sectionColor.border, cursor: 'pointer' }}
+      onClick={function() { if (onClickTile) onClickTile({ sid: sectionId, ti: tileIndex }); }}
+    >
       <div className="briefing-tile-header">
         <span className="briefing-tile-index">Tile {tileIndex + 1}</span>
         <span className="briefing-tile-type">{tileLabel}</span>
@@ -331,7 +336,7 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor }) {
 }
 
 // ─── SECTION BRIEFING (visual preview only) ───
-function SectionBriefing({ section, sectionIndex, viewMode, products, sectionColor }) {
+function SectionBriefing({ section, sectionIndex, viewMode, products, sectionColor, selectedTile, onTileSelect }) {
   var layout = findLayout(section.layoutId);
 
   return (
@@ -342,13 +347,13 @@ function SectionBriefing({ section, sectionIndex, viewMode, products, sectionCol
       </div>
 
       {/* Visual preview */}
-      <div className="briefing-section-preview">
+      <div className="briefing-section-preview briefing-section-clickable">
         <SectionView
           section={section}
           idx={sectionIndex}
           totalSections={1}
-          sel={null}
-          onSelect={noop}
+          sel={selectedTile}
+          onSelect={onTileSelect}
           onDelete={noop}
           onMoveUp={null}
           onMoveDown={null}
@@ -363,7 +368,7 @@ function SectionBriefing({ section, sectionIndex, viewMode, products, sectionCol
 }
 
 // ─── PAGE BRIEFING (center content — visual only, single page) ───
-function PageBriefing({ page, viewMode, products, sectionStartIndex }) {
+function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTile, onTileSelect }) {
   return (
     <div className="briefing-page">
       <div className="briefing-page-header">
@@ -380,6 +385,8 @@ function PageBriefing({ page, viewMode, products, sectionStartIndex }) {
             viewMode={viewMode}
             products={products}
             sectionColor={getSectionColor(sectionStartIndex + si)}
+            selectedTile={selectedTile}
+            onTileSelect={onTileSelect}
           />
         );
       })}
@@ -430,9 +437,11 @@ export default function BriefingView() {
   var [lastUpdated, setLastUpdated] = useState(null);
   var [changeHighlights, setChangeHighlights] = useState({});
   var [updateBanner, setUpdateBanner] = useState(false);
+  var [selectedTile, setSelectedTile] = useState(null); // { sid, ti }
   var prevStoreRef = useRef(null);
   var pollRef = useRef(null);
   var bannerTimeoutRef = useRef(null);
+  var rightPanelRef = useRef(null);
 
   var token = window.location.pathname.split('/share/')[1];
 
@@ -521,6 +530,19 @@ export default function BriefingView() {
       alert('Export failed: ' + e.message);
     }
   };
+
+  // ─── TILE SELECTION (click tile in preview → scroll right panel) ───
+  function handleTileSelect(sel) {
+    if (!sel) return;
+    setSelectedTile(sel);
+    // Scroll the right panel to the matching tile detail
+    setTimeout(function() {
+      var el = document.getElementById('tile-detail-' + sel.sid + '-' + sel.ti);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 50);
+  }
 
   if (loading) return (
     <div className="briefing-loading">
@@ -685,12 +707,12 @@ export default function BriefingView() {
           {/* Single page content */}
           {(function() {
             if (!activePage) return <div className="briefing-empty">No pages found.</div>;
-            return <PageBriefing page={activePage} viewMode={viewMode} products={store.products || []} sectionStartIndex={0} />;
+            return <PageBriefing page={activePage} viewMode={viewMode} products={store.products || []} sectionStartIndex={0} selectedTile={selectedTile} onTileSelect={handleTileSelect} />;
           })()}
         </div>
 
         {/* RIGHT PANEL: Designer Instructions (page-specific) */}
-        <div className="briefing-right-panel">
+        <div className="briefing-right-panel" ref={rightPanelRef}>
           <div className="briefing-sidebar-title" style={{ padding: '14px 16px', borderBottom: '1px solid #f1f5f9', color: '#dc2626', margin: 0 }}>
             Designer Instructions
             {activePage && <span style={{ fontSize: 10, color: '#64748b', fontWeight: 400, marginLeft: 8 }}>{activePage.name}</span>}
@@ -705,6 +727,7 @@ export default function BriefingView() {
                     <span style={{ fontSize: 10, color: '#64748b' }}> &middot; Section {item.sectionIndex + 1}</span>
                   </div>
                   {item.section.tiles.map(function(tile, ti) {
+                    var isSelected = selectedTile && selectedTile.sid === item.section.id && selectedTile.ti === ti;
                     return (
                       <TileDetail
                         key={ti}
@@ -713,6 +736,9 @@ export default function BriefingView() {
                         layoutId={item.layoutId}
                         viewMode={viewMode}
                         sectionColor={color}
+                        sectionId={item.section.id}
+                        isSelected={isSelected}
+                        onClickTile={handleTileSelect}
                       />
                     );
                   })}

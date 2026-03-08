@@ -457,12 +457,18 @@ textarea.input { resize: vertical; min-height: 44px; }
 
 /* Section preview (reuses SectionView but in read-only mode) */
 .briefing-section-preview { margin-bottom: 12px; pointer-events: none; }
+.briefing-section-clickable { pointer-events: auto; }
+.briefing-section-clickable .section-header { pointer-events: none; }
+.briefing-section-clickable .section-tiles > div { cursor: pointer; transition: outline 0.15s; border-radius: 4px; }
+.briefing-section-clickable .section-tiles > div:hover { outline: 2px solid #3b82f6; outline-offset: -2px; }
 .briefing-section-preview .section-header { display: none; }
 .briefing-section-preview .section-container { margin: 0; border: none; }
 
 /* Tile details */
 .briefing-tile-details { display: flex; flex-direction: column; gap: 8px; }
-.briefing-tile-detail { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 14px; }
+.briefing-tile-detail { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 14px; transition: box-shadow 0.2s, border-color 0.2s, background 0.2s; cursor: pointer; }
+.briefing-tile-detail:hover { background: #f1f5f9; border-color: #cbd5e1; }
+.briefing-tile-detail-selected { background: #eff6ff !important; border-color: #3b82f6 !important; box-shadow: 0 0 0 2px rgba(59,130,246,0.18); }
 .briefing-tile-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
 .briefing-tile-index { font-size: 11px; font-weight: 700; color: #334155; }
 .briefing-tile-type { font-size: 10px; color: #6366f1; background: #eef2ff; padding: 1px 6px; border-radius: 3px; font-weight: 600; }
