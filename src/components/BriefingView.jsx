@@ -27,8 +27,8 @@ var INSPIRATION_LINKS = [
 var IMAGE_CATEGORY_EXAMPLES = [
   { id: 'store_hero', name: 'Store Hero', color: '#8B5CF6', desc: 'First image above menu. Represents the brand instantly.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/1mI7t3hpAwCzAL-yOZHDKjTKn1t24pu8m?usp=share_link' },
   { id: 'benefit', name: 'Benefit', color: '#10B981', desc: 'USPs, trust signals, quality markers. Icons + short labels, no product photos.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/1uqmEwIbE6YHo0V0Lff76GXqOYYq-71-_?usp=share_link' },
-  { id: 'product', name: 'Product', color: '#3B82F6', desc: 'Product on clean background. Optional name, CTA, badge.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/1T0M9h8eITYbW_RS7L5aCxSM-Zg94EUh-?usp=share_link' },
-  { id: 'creative', name: 'Creative', color: '#F59E0B', desc: 'Complex composition: product + text + graphics. Engagement AND information.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/10DAe3uEmkcp0rBDCanzHCWYg8FtU08uC?usp=share_link' },
+  { id: 'product', name: 'Product', color: '#3B82F6', desc: 'Product clearly in focus. Background can be clean, colored, or styled freely.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/1T0M9h8eITYbW_RS7L5aCxSM-Zg94EUh-?usp=share_link' },
+  { id: 'creative', name: 'Creative', color: '#F59E0B', desc: 'Compositions combining products, text, graphics, or lifestyle elements. Engaging and visually appealing.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/10DAe3uEmkcp0rBDCanzHCWYg8FtU08uC?usp=share_link' },
   { id: 'lifestyle', name: 'Lifestyle', color: '#EC4899', desc: 'Lifestyle photo dominates (70-80%+). Emotional, product in use.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/1JVOOwEfXqzW34sN6BJJM6imBD-8U6VBB?usp=share_link' },
   { id: 'text_image', name: 'Text Image', color: '#6B7280', desc: 'Text/graphics dominant. Full typographic control. No product/lifestyle photos.', example: 'Beispiele', exampleUrl: 'https://drive.google.com/drive/folders/1cI3ldu0or4VBFMLmbvkTVrUOo0MgEZuG?usp=share_link' },
 ];
@@ -437,6 +437,7 @@ export default function BriefingView() {
   var [lastUpdated, setLastUpdated] = useState(null);
   var [changeHighlights, setChangeHighlights] = useState({});
   var [updateBanner, setUpdateBanner] = useState(false);
+  var [changeLog, setChangeLog] = useState([]); // [{ time, descriptions[] }]
   var [selectedTile, setSelectedTile] = useState(null); // { sid, ti }
   var prevStoreRef = useRef(null);
   var pollRef = useRef(null);
@@ -469,17 +470,21 @@ export default function BriefingView() {
         var newJson = JSON.stringify(result.data);
         var oldJson = prevStoreRef.current;
         if (newJson !== oldJson) {
-          var highlights = detectChanges(
+          var changeResult = detectChanges(
             oldJson ? JSON.parse(oldJson) : null,
             result.data
           );
-          setChangeHighlights(highlights);
+          setChangeHighlights(changeResult.highlights);
+          var now = new Date();
+          setChangeLog(function(prev) {
+            return [{ time: now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }), descriptions: changeResult.descriptions }].concat(prev).slice(0, 10);
+          });
           setUpdateBanner(true);
           setStore(result.data);
           setLastUpdated(result.updatedAt || new Date().toISOString());
           prevStoreRef.current = newJson;
           if (bannerTimeoutRef.current) clearTimeout(bannerTimeoutRef.current);
-          bannerTimeoutRef.current = setTimeout(function() { setUpdateBanner(false); }, 30000);
+          bannerTimeoutRef.current = setTimeout(function() { setUpdateBanner(false); }, 60000);
         }
       }).catch(function() { /* silent retry */ });
     }, 15000);
@@ -492,31 +497,68 @@ export default function BriefingView() {
 
   // ─── CHANGE DETECTION ───
   function detectChanges(oldStore, newStore) {
-    if (!oldStore || !newStore) return {};
+    if (!oldStore || !newStore) return { highlights: {}, descriptions: [] };
     var highlights = {};
+    var descriptions = [];
     (newStore.pages || []).forEach(function(page) {
       var oldPage = (oldStore.pages || []).find(function(p) { return p.id === page.id; });
-      if (!oldPage) { highlights['page-' + page.id] = 'added'; return; }
-      (page.sections || []).forEach(function(sec) {
+      if (!oldPage) {
+        highlights['page-' + page.id] = 'added';
+        descriptions.push('Page "' + page.name + '" added');
+        return;
+      }
+      if (oldPage.name !== page.name) {
+        descriptions.push('Page "' + oldPage.name + '" renamed to "' + page.name + '"');
+      }
+      (page.sections || []).forEach(function(sec, si) {
         var oldSec = (oldPage.sections || []).find(function(s) { return s.id === sec.id; });
-        if (!oldSec) { highlights['sec-' + sec.id] = 'added'; return; }
-        if (sec.layoutId !== oldSec.layoutId) highlights['sec-' + sec.id] = 'modified';
+        if (!oldSec) {
+          highlights['sec-' + sec.id] = 'added';
+          descriptions.push(page.name + ' — Section ' + (si + 1) + ' added');
+          return;
+        }
+        if (sec.layoutId !== oldSec.layoutId) {
+          highlights['sec-' + sec.id] = 'modified';
+          var newLayout = findLayout(sec.layoutId);
+          descriptions.push(page.name + ' — Section ' + (si + 1) + ' layout changed to "' + (newLayout ? newLayout.name : sec.layoutId) + '"');
+        }
         (sec.tiles || []).forEach(function(tile, ti) {
           var oldTile = oldSec.tiles && oldSec.tiles[ti];
-          if (!oldTile) { highlights['tile-' + sec.id + '-' + ti] = 'added'; }
-          else if (JSON.stringify(tile) !== JSON.stringify(oldTile)) { highlights['tile-' + sec.id + '-' + ti] = 'modified'; }
+          if (!oldTile) {
+            highlights['tile-' + sec.id + '-' + ti] = 'added';
+            descriptions.push(page.name + ' — Section ' + (si + 1) + ', Tile ' + (ti + 1) + ' added');
+          } else if (JSON.stringify(tile) !== JSON.stringify(oldTile)) {
+            highlights['tile-' + sec.id + '-' + ti] = 'modified';
+            var fields = [];
+            if (tile.brief !== oldTile.brief) fields.push('brief');
+            if (tile.textOverlay !== oldTile.textOverlay) fields.push('text');
+            if (tile.ctaText !== oldTile.ctaText) fields.push('CTA');
+            if (tile.bgColor !== oldTile.bgColor) fields.push('color');
+            if (tile.imageCategory !== oldTile.imageCategory) fields.push('category');
+            if (tile.type !== oldTile.type) fields.push('type');
+            if (JSON.stringify(tile.asins) !== JSON.stringify(oldTile.asins)) fields.push('ASINs');
+            if (tile.uploadedImage !== oldTile.uploadedImage || tile.uploadedImageMobile !== oldTile.uploadedImageMobile) fields.push('image');
+            var detail = fields.length > 0 ? ' (' + fields.join(', ') + ')' : '';
+            descriptions.push(page.name + ' — Section ' + (si + 1) + ', Tile ' + (ti + 1) + ' updated' + detail);
+          }
         });
       });
-      (oldPage.sections || []).forEach(function(sec) {
+      (oldPage.sections || []).forEach(function(sec, si) {
         var exists = (page.sections || []).find(function(s) { return s.id === sec.id; });
-        if (!exists) highlights['sec-' + sec.id] = 'removed';
+        if (!exists) {
+          highlights['sec-' + sec.id] = 'removed';
+          descriptions.push(page.name + ' — Section ' + (si + 1) + ' removed');
+        }
       });
     });
     (oldStore.pages || []).forEach(function(page) {
       var exists = (newStore.pages || []).find(function(p) { return p.id === page.id; });
-      if (!exists) highlights['page-' + page.id] = 'removed';
+      if (!exists) {
+        highlights['page-' + page.id] = 'removed';
+        descriptions.push('Page "' + page.name + '" removed');
+      }
     });
-    return highlights;
+    return { highlights: highlights, descriptions: descriptions };
   }
 
   // ─── DOCX DOWNLOAD ───
@@ -600,8 +642,26 @@ export default function BriefingView() {
       {/* Update banner */}
       {updateBanner && (
         <div className="briefing-update-banner">
-          The concept has been updated. Changes are highlighted below.
-          <button className="briefing-dismiss-btn" onClick={function() { setUpdateBanner(false); setChangeHighlights({}); }}>Dismiss</button>
+          <div className="briefing-update-banner-header">
+            <span className="briefing-update-banner-title">Briefing Updated</span>
+            <button className="briefing-dismiss-btn" onClick={function() { setUpdateBanner(false); setChangeHighlights({}); }}>Dismiss</button>
+          </div>
+          {changeLog.length > 0 && (
+            <div className="briefing-update-changes">
+              {changeLog.slice(0, 3).map(function(entry, ei) {
+                return (
+                  <div key={ei} className="briefing-update-entry">
+                    <span className="briefing-update-time">{entry.time}</span>
+                    <div className="briefing-update-details">
+                      {entry.descriptions.map(function(desc, di) {
+                        return <div key={di} className="briefing-update-detail">{desc}</div>;
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       )}
 
@@ -658,23 +718,15 @@ export default function BriefingView() {
           <div className="briefing-sidebar-section" style={{ background: '#fef9c3', borderRadius: 8, margin: '0 8px', padding: '10px 12px' }}>
             <div className="briefing-sidebar-title" style={{ color: '#a16207' }}>Upload Instructions</div>
             <div className="briefing-legend">
-              <p>Alle fertigen Assets in den geteilten Google Drive Ordner hochladen.</p>
-              <p><strong>Ordnerstruktur:</strong></p>
-              <ul>
-                <li>Pro Seite einen Ordner anlegen (z.B. "Homepage")</li>
-                <li>Innerhalb jeder Seite pro Sektion einen Unterordner (z.B. "Sektion 1", "Sektion 2")</li>
-                <li>In jeden Sektions-Ordner die passenden Bilder (Desktop + Mobile)</li>
-              </ul>
-              <p style={{ marginTop: 6 }}><strong>Beispiel:</strong></p>
+              <p>Upload all finished assets to the shared Google Drive folder.</p>
+              <p>Create one folder per store page, and within each page folder, create a subfolder per section. Upload your images (desktop + mobile) into the matching section folder.</p>
+              <p style={{ marginTop: 6 }}><strong>Example:</strong></p>
               <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 6, padding: '6px 8px', fontSize: 10, fontFamily: 'monospace', lineHeight: 1.8 }}>
                 Homepage/<br />
-                &nbsp;&nbsp;Sektion 1/<br />
+                &nbsp;&nbsp;Section 1/<br />
                 &nbsp;&nbsp;&nbsp;&nbsp;tile1_desktop.jpg<br />
                 &nbsp;&nbsp;&nbsp;&nbsp;tile1_mobile.jpg<br />
-                &nbsp;&nbsp;Sektion 2/<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;tile1_desktop.jpg<br />
-                Kategorie Fitness/<br />
-                &nbsp;&nbsp;Sektion 1/<br />
+                &nbsp;&nbsp;Section 2/<br />
                 &nbsp;&nbsp;&nbsp;&nbsp;...
               </div>
             </div>
