@@ -661,10 +661,18 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '',
     'MINIMUM SECTIONS:',
     complexityLevel === 1
-      ? (isHomepage ? '- Minimal tier: Homepage 3-5 sections. Hero + category nav + optional benefit/brand.' : '- Minimal tier: Category page 2-3 sections. Hero/header + product display. No product_grid if products shown as shoppable_image.')
+      ? (isHomepage
+          ? '- Minimal tier: Homepage ' + (pageProducts.length <= 5 ? '2-3' : '3-4') + ' sections MAXIMUM. Hero + category nav is enough for small catalogs. Do NOT repeat the same products across multiple sections.'
+          : '- Minimal tier: Category page 2 sections MAXIMUM. Hero/header + product display. No product_grid if products shown as shoppable_image.')
       : complexityLevel === 3
         ? (isHomepage ? '- Premium tier: Homepage 7-12 sections. Rich variety of all image categories.' : '- Premium tier: Category page 4-7 sections. Full range of image categories.')
         : (isHomepage ? '- Standard tier: Homepage 5-8 sections. Good variety.' : '- Standard tier: Category page 3-5 sections.'),
+    '',
+    'DEDUPLICATION (CRITICAL):',
+    '- NEVER feature the same ASIN or product in more than ONE section on the same page.',
+    '- If there are only ' + pageProducts.length + ' products, each product should appear AT MOST ONCE as a shoppable_image/linkAsin.',
+    '- With ' + pageProducts.length + ' products, you need AT MOST ' + pageProducts.length + ' product-featuring sections (including the category nav).',
+    pageProducts.length <= 5 ? '- SMALL CATALOG (' + pageProducts.length + ' products): Keep it lean. Hero + category nav + 1 optional highlight = DONE. Do NOT pad with repetitive sections.' : '',
     '- Return ONLY valid JSON.',
   ].filter(Boolean).join('\n');
 
@@ -704,29 +712,42 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '}',
     '',
     isHomepage
-      ? [
-          'HOMEPAGE SECTIONS (generate ALL of these, in this order):',
+      ? (pageProducts.length <= 5 && complexityLevel === 1
+        ? [
+          'HOMEPAGE SECTIONS — SMALL CATALOG, MINIMAL TIER (' + pageProducts.length + ' products):',
+          'Generate EXACTLY 2-3 sections. Do NOT generate more. Every product appears AT MOST ONCE.',
+          'Each tile MUST include "imageCategory" field.',
+          '',
+          '1. STORE HERO (layout "1"): imageCategory="store_hero". Brand hero image. Logo + claim. NO CTA.',
+          '2. CATEGORY NAVIGATION (layout based on count: 2="std-2equal", 3="vh-w2s"):',
+          '   Each tile imageCategory="creative". Category name on brand-color bg + product silhouette + CTA. textOverlay = EXACT category name. Each tile links to its category page via linkUrl.',
+          '3. (OPTIONAL, only if it adds value) BENEFIT SECTION (layout "1" or "vh-2equal"):',
+          '   imageCategory="benefit". USPs/quality markers. NO product photos, NO linkAsin.',
+          '',
+          'DO NOT add any more sections. NO bestseller showcase, NO product grid, NO lifestyle split, NO brand story, NO footer nav.',
+          'With only ' + pageProducts.length + ' products, the category pages handle product display. The homepage is just navigation + brand impression.',
+          'EVERY brief must name specific ' + brand + ' products — generic briefs are FORBIDDEN.',
+        ].join('\n')
+        : [
+          'HOMEPAGE SECTIONS (generate sections in this order, adapt count to tier/catalog size):',
           'Each tile MUST include "imageCategory" field. Follow the recommended flow: STORE_HERO → CREATIVE/LIFESTYLE → PRODUCT → TEXT_IMAGE → BENEFIT → CREATIVE → PRODUCT → LIFESTYLE → BENEFIT.',
           '',
           '1. STORE HERO (layout "1"): imageCategory="store_hero". Brand hero image. Logo + claim + optional lifestyle/product. NO CTA.',
           '2. CATEGORY NAVIGATION (layout based on count: 2="std-2equal", 4="std-4equal" or "2x2wide", 5+="lg-4grid"):',
           '   Each tile imageCategory="creative". Category name on brand-color bg + product silhouette + CTA. textOverlay = EXACT category name.',
-          '3. BESTSELLER SHOWCASE (layout "std-2equal" or "lg-2stack"):',
-          '   Tile 1 imageCategory="product" as shoppable_image with real ASIN.',
-          '   Tile 2 imageCategory="creative" with feature text + product info.',
-          '4. PRODUCT GRID (layout "1"): type "product_grid" with top 5-8 products by rating.',
+          pageProducts.length > 5 ? '3. BESTSELLER SHOWCASE (layout "std-2equal" or "lg-2stack"): Tile 1 imageCategory="product" as shoppable_image with real ASIN. Tile 2 imageCategory="creative" with feature text.' : '',
+          pageProducts.length > 8 ? '4. PRODUCT GRID (layout "1"): type "product_grid" with top 5-8 products by rating.' : '',
           '5. BENEFIT SECTION (layout "1" or "vh-w2s"): imageCategory="benefit". USP icons/awards on brand-colored bg. No product photos.',
-          '6. LIFESTYLE SPLIT (layout "std-2equal"):',
-          '   Tile 1 imageCategory="lifestyle" — product in use, photo dominates.',
-          '   Tile 2 imageCategory="product" as shoppable_image with linkAsin.',
-          '7. BRAND STORY (layout "lg-2stack" or "2stack-lg"):',
-          '   Large tile imageCategory="lifestyle". Wide tiles imageCategory="creative" with brand values.',
-          '8. FOOTER NAV (layout "std-4equal" or "2x2wide"): imageCategory="creative" category tiles for bottom navigation.',
+          complexityLevel >= 2 ? '6. LIFESTYLE SPLIT (layout "std-2equal"): Tile 1 imageCategory="lifestyle" — product in use. Tile 2 imageCategory="product" as shoppable_image with linkAsin.' : '',
+          complexityLevel >= 3 ? '7. BRAND STORY (layout "lg-2stack" or "2stack-lg"): Large tile imageCategory="lifestyle". Wide tiles imageCategory="creative".' : '',
+          complexityLevel >= 2 ? '8. FOOTER NAV (layout "std-4equal" or "2x2wide"): imageCategory="creative" category tiles.' : '',
           '',
+          'IMPORTANT: Each product/ASIN must appear AT MOST ONCE across all sections. Do NOT repeat the same product in multiple sections.',
           'For 5+ categories, use lg-4grid (5 tiles) or split into two rows.',
           'EVERY brief must name specific ' + brand + ' products — generic briefs are FORBIDDEN.',
           'NEVER place two identical imageCategories adjacent (e.g. two lifestyle sections in a row).',
-        ].join('\n')
+        ].filter(Boolean).join('\n')
+      )
       : [
           'CATEGORY PAGE "' + pageName + '" SECTIONS (generate ALL of these):',
           'Each tile MUST include "imageCategory" field. Follow flow: STORE_HERO/CREATIVE → TEXT_IMAGE → PRODUCT → CREATIVE → BENEFIT → PRODUCT → LIFESTYLE.',
@@ -790,6 +811,30 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     });
     sec.id = uid();
   });
+
+  // ─── DEDUPLICATION: Remove sections that repeat ASINs already shown ───
+  // For small catalogs especially, this prevents 3 sections showing the same product
+  var seenAsins = {};
+  var deduped = [];
+  (result.sections || []).forEach(function(sec, si) {
+    // Always keep the first section (hero) and category-nav sections (all creative with linkUrl)
+    if (si === 0) { deduped.push(sec); return; }
+    // Check if this section only features ASINs we already have
+    var sectionAsins = [];
+    sec.tiles.forEach(function(t) {
+      if (t.linkAsin) sectionAsins.push(t.linkAsin);
+      if (t.asins) t.asins.forEach(function(a) { sectionAsins.push(a); });
+    });
+    // If ALL ASINs in this section were already seen, skip the section
+    if (sectionAsins.length > 0) {
+      var allDupes = sectionAsins.every(function(a) { return seenAsins[a]; });
+      if (allDupes) return; // skip duplicate section
+    }
+    // Track ASINs from this section
+    sectionAsins.forEach(function(a) { seenAsins[a] = true; });
+    deduped.push(sec);
+  });
+  result.sections = deduped;
 
   return result;
 }
@@ -982,9 +1027,18 @@ export function applyOperations(store, operations) {
 
 // ─── ENSURE MINIMUM SECTIONS PER PAGE ───
 function ensureMinimumSections(sections, pageName, brand, lang, analysis, template, isHomepage, complexityLevel) {
+  // Count total products across all categories to detect small catalogs
+  var totalProducts = 0;
+  (analysis.categories || []).forEach(function(c) { totalProducts += (c.asins || []).length; });
+
   var minSections;
   if (complexityLevel === 1) {
-    minSections = isHomepage ? 3 : 2;
+    // Small catalog: Hero + category nav is enough
+    if (totalProducts <= 5) {
+      minSections = isHomepage ? 2 : 1;
+    } else {
+      minSections = isHomepage ? 3 : 2;
+    }
   } else if (complexityLevel === 3) {
     minSections = isHomepage ? 7 : 4;
   } else {
