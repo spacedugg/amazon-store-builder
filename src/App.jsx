@@ -28,6 +28,7 @@ export default function App() {
   var [store, setStore] = useState(EMPTY_STORE);
   var [curPage, setCurPage] = useState('');
   var [sel, setSel] = useState(null);
+  var [clipboardSection, setClipboardSection] = useState(null);
   var [showGen, setShowGen] = useState(false);
   var [showAsins, setShowAsins] = useState(false);
   var [showPrice, setShowPrice] = useState(false);
@@ -243,6 +244,26 @@ export default function App() {
           });
           sections.splice(idx + 1, 0, clone);
           return Object.assign({}, pg, { sections: sections });
+        }),
+      });
+    });
+  };
+
+  var copySection = function(sectionId) {
+    if (!page) return;
+    var sec = page.sections.find(function(s) { return s.id === sectionId; });
+    if (sec) setClipboardSection(JSON.parse(JSON.stringify(sec)));
+  };
+
+  var pasteSection = function() {
+    if (!page || !clipboardSection) return;
+    var clone = JSON.parse(JSON.stringify(clipboardSection));
+    clone.id = uid();
+    setStoreWithUndo(function(s) {
+      return Object.assign({}, s, {
+        pages: s.pages.map(function(pg) {
+          if (pg.id !== page.id) return pg;
+          return Object.assign({}, pg, { sections: pg.sections.concat([clone]) });
         }),
       });
     });
@@ -580,6 +601,8 @@ export default function App() {
           onAddSection={addSection}
           onDeleteSection={deleteSection}
           onDuplicateSection={duplicateSection}
+          onCopySection={copySection}
+          onPasteSection={clipboardSection ? pasteSection : null}
           onMoveSection={moveSection}
           onChangeLayout={changeLayout}
           viewMode={viewMode}

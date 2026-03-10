@@ -147,6 +147,14 @@ var translations = {
     en: 'Duplicate section', de: 'Sektion duplizieren', uk: 'Дублювати секцію', ru: 'Дублировать секцию',
     id: 'Duplikat seksi', ky: 'Секцияны көчүрүү', bg: 'Дублирай секция', es: 'Duplicar sección',
   },
+  'section.copy': {
+    en: 'Copy section', de: 'Sektion kopieren', uk: 'Копіювати секцію', ru: 'Копировать секцию',
+    id: 'Salin seksi', ky: 'Секцияны көчүрүү', bg: 'Копирай секция', es: 'Copiar sección',
+  },
+  'section.paste': {
+    en: 'Paste section', de: 'Sektion einfügen', uk: 'Вставити секцію', ru: 'Вставить секцию',
+    id: 'Tempel seksi', ky: 'Секцияны коюу', bg: 'Постави секция', es: 'Pegar sección',
+  },
   'section.delete': {
     en: 'Delete section', de: 'Sektion löschen', uk: 'Видалити секцію', ru: 'Удалить секцию',
     id: 'Hapus seksi', ky: 'Секцияны жок кылуу', bg: 'Изтрий секция', es: 'Eliminar sección',
