@@ -116,8 +116,11 @@ export var DIMENSION_PRESETS = {
 export var AMAZON_IMG_TYPES = {
   LARGE_SQUARE: { w: 1500, h: 1500, label: 'Large Square' },
   SMALL_SQUARE: { w: 750, h: 750, label: 'Small Square' },
-  WIDE: { w: 1500, h: 700, label: 'Wide' },
+  WIDE: { w: 1500, h: 750, label: 'Wide' },
   FULL_WIDTH: { w: 3000, h: 600, label: 'Full Width' },
+  // VH-specific (Variable Height layouts)
+  VH_WIDE: { w: 3000, h: 1500, label: 'VH Wide' },
+  VH_SQUARE: { w: 1500, h: 1500, label: 'VH Square' },
 };
 
 // ─── PER-LAYOUT TILE DIMENSIONS (Desktop) ───
@@ -139,10 +142,10 @@ export var LAYOUT_TILE_DIMS = {
   '2s-4grid':   [I.WIDE, I.WIDE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
   '4grid-2s':   [I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.WIDE, I.WIDE],
   '4x2grid':    [I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE, I.SMALL_SQUARE],
-  // VH layouts (1-row)
-  'vh-2equal':  [I.WIDE, I.WIDE],
-  'vh-w2s':     [I.WIDE, I.SMALL_SQUARE, I.SMALL_SQUARE],
-  'vh-2sw':     [I.SMALL_SQUARE, I.SMALL_SQUARE, I.WIDE],
+  // VH layouts (1-row) — use VH-specific dimensions
+  'vh-2equal':  [I.VH_WIDE, I.VH_WIDE],
+  'vh-w2s':     [I.VH_WIDE, I.VH_SQUARE, I.VH_SQUARE],
+  'vh-2sw':     [I.VH_SQUARE, I.VH_SQUARE, I.VH_WIDE],
 };
 
 // Helper: create empty tile with correct dimensions for a specific layout position
