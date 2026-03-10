@@ -221,6 +221,33 @@ export default function App() {
     if (sel && sel.sid === sectionId) setSel(null);
   };
 
+  var duplicateSection = function(sectionId) {
+    if (!page) return;
+    setStoreWithUndo(function(s) {
+      return Object.assign({}, s, {
+        pages: s.pages.map(function(pg) {
+          if (pg.id !== page.id) return pg;
+          var sections = pg.sections.slice();
+          var idx = sections.findIndex(function(sec) { return sec.id === sectionId; });
+          if (idx < 0) return pg;
+          var original = sections[idx];
+          var clone = Object.assign({}, original, {
+            id: uid(),
+            tiles: original.tiles.map(function(tile) {
+              return Object.assign({}, tile, {
+                dimensions: tile.dimensions ? Object.assign({}, tile.dimensions) : null,
+                mobileDimensions: tile.mobileDimensions ? Object.assign({}, tile.mobileDimensions) : null,
+                asins: tile.asins ? tile.asins.slice() : [],
+              });
+            }),
+          });
+          sections.splice(idx + 1, 0, clone);
+          return Object.assign({}, pg, { sections: sections });
+        }),
+      });
+    });
+  };
+
   var moveSection = function(sectionId, newIndex) {
     if (!page) return;
     setStoreWithUndo(function(s) {
@@ -552,6 +579,7 @@ export default function App() {
           onSelect={setSel}
           onAddSection={addSection}
           onDeleteSection={deleteSection}
+          onDuplicateSection={duplicateSection}
           onMoveSection={moveSection}
           onChangeLayout={changeLayout}
           viewMode={viewMode}

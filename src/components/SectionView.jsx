@@ -374,7 +374,7 @@ function LayoutPicker({ value, onChange, isMobile }) {
   );
 }
 
-export default function SectionView({ section, idx, totalSections, sel, onSelect, onDelete, onMoveUp, onMoveDown, onChangeLayout, viewMode, products, uiLang }) {
+export default function SectionView({ section, idx, totalSections, sel, onSelect, onDelete, onDuplicate, onMoveUp, onMoveDown, onChangeLayout, viewMode, products, uiLang }) {
   var layout = findLayout(section.layoutId);
   var isMobile = viewMode === 'mobile';
   var config = getGridConfig(layout, isMobile);
@@ -387,6 +387,7 @@ export default function SectionView({ section, idx, totalSections, sel, onSelect
         <div className="section-actions">
           {onMoveUp && <button className="btn-icon-sm" onClick={onMoveUp} title={t('section.moveUp', uiLang)}>&uarr;</button>}
           {onMoveDown && <button className="btn-icon-sm" onClick={onMoveDown} title={t('section.moveDown', uiLang)}>&darr;</button>}
+          <button className="btn-icon-sm" onClick={onDuplicate} title={t('section.duplicate', uiLang)}>&#x29C9;</button>
           {totalSections > 1 && <button className="btn-icon-sm btn-icon-danger" onClick={onDelete} title={t('section.delete', uiLang)}>&times;</button>}
         </div>
       </div>

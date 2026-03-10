@@ -143,6 +143,10 @@ var translations = {
     en: 'Move down', de: 'Nach unten', uk: 'Вниз', ru: 'Вниз',
     id: 'Pindah ke bawah', ky: 'Ылдый', bg: 'Надолу', es: 'Mover abajo',
   },
+  'section.duplicate': {
+    en: 'Duplicate section', de: 'Sektion duplizieren', uk: 'Дублювати секцію', ru: 'Дублировать секцию',
+    id: 'Duplikat seksi', ky: 'Секцияны көчүрүү', bg: 'Дублирай секция', es: 'Duplicar sección',
+  },
   'section.delete': {
     en: 'Delete section', de: 'Sektion löschen', uk: 'Видалити секцію', ru: 'Удалить секцию',
     id: 'Hapus seksi', ky: 'Секцияны жок кылуу', bg: 'Изтрий секция', es: 'Eliminar sección',
