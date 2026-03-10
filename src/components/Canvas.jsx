@@ -2,7 +2,7 @@ import { useState } from 'react';
 import SectionView from './SectionView';
 import { t } from '../i18n';
 
-export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onMoveSection, onChangeLayout, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate }) {
+export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onChangeLayout, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate }) {
   var [hoveredNav, setHoveredNav] = useState(null);
   var [showHeroPicker, setShowHeroPicker] = useState(false);
   if (!page) {
@@ -123,6 +123,7 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
               totalSections={page.sections.length} sel={sel} onSelect={onSelect}
               onDelete={function() { onDeleteSection(sec.id); }}
               onDuplicate={function() { onDuplicateSection(sec.id); }}
+              onCopy={function() { onCopySection(sec.id); }}
               onMoveUp={si > 0 ? function() { onMoveSection(sec.id, si - 1); } : null}
               onMoveDown={si < page.sections.length - 1 ? function() { onMoveSection(sec.id, si + 1); } : null}
               onChangeLayout={function(layoutId) { onChangeLayout(sec.id, layoutId); }}
@@ -135,6 +136,11 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
 
         <div className="add-section-bar">
           <button className="btn add-section-btn" onClick={onAddSection}>+ {t('canvas.addSection', uiLang)}</button>
+          {onPasteSection && (
+            <button className="btn add-section-btn" onClick={onPasteSection} style={{ marginLeft: 8 }}>
+              {t('section.paste', uiLang)}
+            </button>
+          )}
         </div>
       </div>
     </div>
