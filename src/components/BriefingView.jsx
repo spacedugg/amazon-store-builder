@@ -905,6 +905,68 @@ export default function BriefingView() {
             {activePage && <span style={{ fontSize: 10, color: '#64748b', fontWeight: 400, marginLeft: 8 }}>{activePage.name}</span>}
           </div>
           <div className="briefing-right-panel-body">
+            {/* Store Hero / Header Banner instructions */}
+            {(function() {
+              var heroTile = null;
+              (store.pages || []).forEach(function(pg) {
+                if (heroTile) return;
+                (pg.sections || []).forEach(function(sec) {
+                  if (heroTile) return;
+                  (sec.tiles || []).forEach(function(tile) {
+                    if (!heroTile && tile.imageCategory === 'store_hero') heroTile = tile;
+                  });
+                });
+              });
+              if (!heroTile) return null;
+              var heroColor = { bg: '#fef2f2', border: '#ef4444', label: '#b91c1c' };
+              return (
+                <div className="briefing-right-section-group">
+                  <div className="briefing-right-section-header" style={{ background: heroColor.bg, borderLeft: '3px solid ' + heroColor.border }}>
+                    <span style={{ fontWeight: 700, color: heroColor.label, fontSize: 11 }}>Store Hero Image</span>
+                    <span style={{ fontSize: 10, color: '#64748b' }}> &middot; Header Banner</span>
+                  </div>
+                  <div className="briefing-tile-detail" style={{ borderLeft: '3px solid ' + heroColor.border }}>
+                    <div className="briefing-tile-header">
+                      <span className="briefing-tile-type">Image</span>
+                      <span className="briefing-tile-imgcat" style={{ background: '#ef4444', color: '#fff', borderRadius: 3, padding: '1px 8px', fontSize: 10, fontWeight: 700 }}>
+                        Store Hero
+                      </span>
+                    </div>
+                    {heroTile.brief && (
+                      <div className="briefing-field">
+                        <span className="briefing-field-label">Design Brief:</span>
+                        <span className="briefing-field-value"><BriefTextHighlighted text={heroTile.brief} /></span>
+                      </div>
+                    )}
+                    {heroTile.textOverlay && (
+                      <div className="briefing-field">
+                        <span className="briefing-field-label">Text on Image:</span>
+                        <span className="briefing-field-value briefing-field-text">"{heroTile.textOverlay}"</span>
+                      </div>
+                    )}
+                    {heroTile.ctaText && (
+                      <div className="briefing-field">
+                        <span className="briefing-field-label">CTA Button:</span>
+                        <span className="briefing-field-value briefing-field-cta">"{heroTile.ctaText}"</span>
+                      </div>
+                    )}
+                    {heroTile.bgColor && (
+                      <div className="briefing-field">
+                        <span className="briefing-field-label">Background Color:</span>
+                        <span className="briefing-field-value">
+                          <span className="briefing-color-swatch" style={{ background: heroTile.bgColor }} />
+                          {heroTile.bgColor}
+                        </span>
+                      </div>
+                    )}
+                    <div className="briefing-tile-dims-row">
+                      <span className="briefing-dim">Desktop: 3000&times;600</span>
+                      <span className="briefing-dim">Mobile: 1242&times;450</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
             {rightPanelSections.map(function(item, idx) {
               var color = getSectionColor(item.colorIndex);
               return (
