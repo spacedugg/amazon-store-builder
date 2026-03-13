@@ -297,11 +297,38 @@ export async function generateBriefingDocx(store, briefingLang) {
     children: [new TextRun({ text: t('brief.dimensionsNote', lang), size: 20, italics: true, color: '666666' })] }));
   children.push(divider());
 
-  // ─── HEADER BANNER ───
+  // ─── HEADER BANNER / STORE HERO ───
   children.push(heading(t('brief.headerBanner', lang), HeadingLevel.HEADING_2));
   children.push(boldPara(t('brief.desktop', lang) + ': ', '3000 x 600 px'));
   children.push(boldPara(t('brief.mobile', lang) + ': ', '1242 x 450 px'));
   children.push(boldPara(t('brief.status', lang) + ': ', store.headerBanner ? t('brief.uploaded', lang) : t('brief.needsDesign', lang)));
+
+  // Find store_hero tile and include its designer instructions
+  var heroTile = null;
+  (store.pages || []).forEach(function(pg) {
+    if (heroTile) return;
+    (pg.sections || []).forEach(function(sec) {
+      if (heroTile) return;
+      (sec.tiles || []).forEach(function(tile) {
+        if (!heroTile && tile.imageCategory === 'store_hero') heroTile = tile;
+      });
+    });
+  });
+  if (heroTile) {
+    if (heroTile.imageCategory && IMAGE_CATEGORIES[heroTile.imageCategory]) {
+      children.push(boldPara(t('brief.imageCategory', lang) + ': ', IMAGE_CATEGORIES[heroTile.imageCategory].name));
+    }
+    if (heroTile.bgColor) children.push(boldPara(t('brief.colorPreview', lang) + ': ', heroTile.bgColor));
+    if (heroTile.textOverlay) {
+      var heroAlignHint = heroTile.textAlign && heroTile.textAlign !== 'left' ? ' (' + (heroTile.textAlign === 'center' ? 'zentriert' : 'rechtsbündig') + ')' : '';
+      children.push(boldPara(t('brief.textOverlay', lang) + ': ', '"' + heroTile.textOverlay + '"' + heroAlignHint));
+    }
+    if (heroTile.ctaText) children.push(boldPara(t('brief.ctaButton', lang) + ': ', '"' + heroTile.ctaText + '"'));
+    if (heroTile.brief) children.push(boldPara(t('brief.designerBrief', lang) + ': ', heroTile.brief));
+    children.push(boldPara(t('brief.desktopImage', lang) + ': ', heroTile.uploadedImage ? t('brief.uploaded', lang) : t('brief.needsDesign', lang)));
+    children.push(boldPara(t('brief.mobileImage', lang) + ': ', heroTile.uploadedImageMobile ? t('brief.uploaded', lang) : (heroTile.uploadedImage ? t('brief.usesDesktop', lang) : t('brief.needsDesign', lang))));
+  }
+
   children.push(new Paragraph({ children: [new TextRun({ text: t('brief.headerBannerNote', lang), size: 20, color: '666666' })] }));
   children.push(divider());
 
