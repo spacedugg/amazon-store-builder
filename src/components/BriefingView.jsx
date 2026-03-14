@@ -929,11 +929,45 @@ function PreviewMode({ store, onClose }) {
     setLoadedCount(matchCount);
   }
 
+  var [showReport, setShowReport] = useState(false);
+
   // Find the image URL for a specific tile
   function findTileImage(pageName, sectionIndex, tileIndex, variant) {
     var fn = tileFilename(pageName, sectionIndex, tileIndex, variant).toLowerCase();
     return imageMap[fn] || null;
   }
+
+  // ─── MATCH REPORT: compute which tiles matched and which are missing ───
+  var matchReport = { total: 0, matched: 0, missing: [] };
+  if (loadedCount > 0) {
+    (store.pages || []).forEach(function(pg) {
+      (pg.sections || []).forEach(function(sec, si) {
+        (sec.tiles || []).forEach(function(tile, ti) {
+          if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text') return;
+          if (tile.syncDimensions) {
+            matchReport.total += 1;
+            var fn = tileFilename(pg.name, si, ti, 'sync').toLowerCase();
+            if (imageMap[fn]) {
+              matchReport.matched += 1;
+            } else {
+              matchReport.missing.push({ page: pg.name, section: si + 1, tile: ti + 1, filename: tileFilename(pg.name, si, ti, 'sync') });
+            }
+          } else {
+            matchReport.total += 2;
+            var fnD = tileFilename(pg.name, si, ti, 'desktop').toLowerCase();
+            var fnM = tileFilename(pg.name, si, ti, 'mobile').toLowerCase();
+            if (imageMap[fnD]) { matchReport.matched += 1; } else {
+              matchReport.missing.push({ page: pg.name, section: si + 1, tile: ti + 1, filename: tileFilename(pg.name, si, ti, 'desktop') });
+            }
+            if (imageMap[fnM]) { matchReport.matched += 1; } else {
+              matchReport.missing.push({ page: pg.name, section: si + 1, tile: ti + 1, filename: tileFilename(pg.name, si, ti, 'mobile') });
+            }
+          }
+        });
+      });
+    });
+  }
+  var matchPct = matchReport.total > 0 ? Math.round((matchReport.matched / matchReport.total) * 100) : 0;
 
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 9999, background: '#fff', display: 'flex', flexDirection: 'column' }}>
@@ -947,6 +981,13 @@ function PreviewMode({ store, onClose }) {
             style={{ background: loadedCount > 0 ? '#22c55e' : '#3b82f6', color: '#fff', border: 'none', borderRadius: 4, padding: '4px 14px', fontSize: 11, cursor: 'pointer', fontWeight: 600 }}>
             {loadedCount > 0 ? loadedCount + ' images loaded' : 'Load Image Folder'}
           </button>
+          {/* Match report toggle */}
+          {loadedCount > 0 && (
+            <button onClick={function() { setShowReport(!showReport); }}
+              style={{ background: matchPct === 100 ? 'rgba(34,197,94,.2)' : 'rgba(251,191,36,.2)', color: matchPct === 100 ? '#22c55e' : '#fbbf24', border: '1px solid ' + (matchPct === 100 ? 'rgba(34,197,94,.4)' : 'rgba(251,191,36,.4)'), borderRadius: 4, padding: '4px 12px', fontSize: 11, cursor: 'pointer', fontWeight: 700 }}>
+              {matchPct}% matched
+            </button>
+          )}
           <div style={{ width: 1, height: 20, background: 'rgba(255,255,255,.2)' }} />
           <button onClick={function() { setPvMode('desktop'); }} style={{ background: pvMode === 'desktop' ? '#3b82f6' : 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,.25)', borderRadius: 4, padding: '4px 12px', fontSize: 11, cursor: 'pointer' }}>Desktop</button>
           <button onClick={function() { setPvMode('mobile'); }} style={{ background: pvMode === 'mobile' ? '#3b82f6' : 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,.25)', borderRadius: 4, padding: '4px 12px', fontSize: 11, cursor: 'pointer' }}>Mobile</button>
@@ -959,6 +1000,46 @@ function PreviewMode({ store, onClose }) {
           return <button key={pg.id} onClick={function() { setPvPage(pg.id); }} style={{ background: pg.id === pvPage ? '#3b82f6' : '#fff', color: pg.id === pvPage ? '#fff' : '#334155', border: '1px solid #cbd5e1', borderRadius: 4, padding: '3px 12px', fontSize: 11, cursor: 'pointer' }}>{pg.name}</button>;
         })}
       </div>
+
+      {/* ─── MATCH REPORT PANEL ─── */}
+      {loadedCount > 0 && showReport && (
+        <div style={{ background: matchPct === 100 ? '#f0fdf4' : '#fffbeb', borderBottom: '1px solid ' + (matchPct === 100 ? '#bbf7d0' : '#fde68a'), padding: '12px 20px', maxHeight: 260, overflow: 'auto' }}>
+          {/* Progress bar */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+            <div style={{ flex: 1, height: 6, background: '#e2e8f0', borderRadius: 3, overflow: 'hidden' }}>
+              <div style={{ width: matchPct + '%', height: '100%', background: matchPct === 100 ? '#22c55e' : '#f59e0b', borderRadius: 3, transition: 'width .3s' }} />
+            </div>
+            <span style={{ fontSize: 13, fontWeight: 700, color: matchPct === 100 ? '#16a34a' : '#d97706', minWidth: 40 }}>{matchPct}%</span>
+          </div>
+          <div style={{ fontSize: 12, color: '#334155', marginBottom: 6 }}>
+            <strong>{matchReport.matched}</strong> of <strong>{matchReport.total}</strong> images matched successfully
+            {matchReport.missing.length > 0 && <span style={{ color: '#dc2626' }}> — <strong>{matchReport.missing.length}</strong> missing</span>}
+          </div>
+
+          {/* Missing files list */}
+          {matchReport.missing.length > 0 && (
+            <div style={{ marginTop: 8 }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: '#dc2626', marginBottom: 4 }}>Missing images:</div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                {matchReport.missing.map(function(m, i) {
+                  return (
+                    <div key={i} style={{ background: '#fff', border: '1px solid #fecaca', borderRadius: 4, padding: '3px 8px', fontSize: 10 }}>
+                      <span style={{ color: '#64748b' }}>{m.page} &middot; S{m.section} &middot; T{m.tile}</span>
+                      <span style={{ fontFamily: 'monospace', color: '#dc2626', marginLeft: 6 }}>{m.filename}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* All matched message */}
+          {matchReport.missing.length === 0 && (
+            <div style={{ fontSize: 12, color: '#16a34a', fontWeight: 600 }}>All images matched successfully!</div>
+          )}
+        </div>
+      )}
+
       {/* Instructions banner (if no images loaded) */}
       {loadedCount === 0 && (
         <div style={{ background: '#eff6ff', borderBottom: '1px solid #bfdbfe', padding: '10px 20px', fontSize: 12, color: '#1e40af', textAlign: 'center' }}>
