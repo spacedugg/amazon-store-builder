@@ -24,6 +24,125 @@ function divider() {
     children: [new TextRun({ text: '', size: 8 })] });
 }
 
+// ─── META DESCRIPTION GENERATOR ───
+function generatePageMetaDescription(page, store) {
+  var brand = store.brandName || 'Brand';
+  var marketplace = store.marketplace || 'de';
+  var products = store.products || [];
+  var pageName = page.name || '';
+  var isHomepage = pageName.toLowerCase() === 'homepage' || pageName.toLowerCase() === 'home';
+
+  var pageAsins = {};
+  (page.sections || []).forEach(function(sec) {
+    (sec.tiles || []).forEach(function(tile) {
+      (tile.asins || []).forEach(function(a) { pageAsins[a] = true; });
+      if (tile.linkAsin) pageAsins[tile.linkAsin] = true;
+    });
+  });
+
+  var pageProducts = products.filter(function(p) { return pageAsins[p.asin]; });
+  var categories = {};
+  pageProducts.forEach(function(p) {
+    if (p.category) categories[p.category] = (categories[p.category] || 0) + 1;
+  });
+  var topCategories = Object.keys(categories).sort(function(a, b) { return categories[b] - categories[a]; }).slice(0, 3);
+
+  var keywords = [];
+  (page.sections || []).forEach(function(sec) {
+    (sec.tiles || []).forEach(function(tile) {
+      if (tile.textOverlay && tile.textOverlay.length > 3 && tile.textOverlay.length < 60) {
+        keywords.push(tile.textOverlay);
+      }
+    });
+  });
+
+  var lowerName = pageName.toLowerCase();
+  var isAbout = lowerName.indexOf('about') >= 0 || lowerName.indexOf('über') >= 0 || lowerName.indexOf('story') >= 0 || lowerName.indexOf('geschichte') >= 0;
+  var isBestseller = lowerName.indexOf('bestseller') >= 0 || lowerName.indexOf('best seller') >= 0 || lowerName.indexOf('top') >= 0;
+
+  var desc = '';
+
+  if (marketplace === 'de' || marketplace === 'at') {
+    if (isHomepage) {
+      var catText = topCategories.length > 0 ? topCategories.slice(0, 2).join(', ') : 'Produkte';
+      desc = 'Entdecke ' + brand + ' auf Amazon: ' + catText;
+      if (store.heroMessage) {
+        desc += '. ' + store.heroMessage.replace(/["„"]/g, '').slice(0, 60);
+      } else if (keywords.length > 0) {
+        desc += '. ' + keywords[0].replace(/["„"]/g, '').slice(0, 50);
+      }
+      desc += '. Jetzt den offiziellen ' + brand + ' Store entdecken.';
+    } else if (isAbout) {
+      desc = 'Erfahre mehr über ' + brand;
+      if (store.brandTone) desc += ' — ' + store.brandTone;
+      desc += '. Unsere Geschichte, Werte und was uns antreibt. Jetzt auf Amazon entdecken.';
+    } else if (isBestseller) {
+      desc = 'Die beliebtesten ' + brand + ' Produkte auf Amazon. Top-bewertete Bestseller';
+      if (topCategories.length > 0) desc += ' aus ' + topCategories[0];
+      desc += '. Jetzt entdecken und bestellen.';
+    } else {
+      desc = brand + ' ' + pageName + ' auf Amazon entdecken';
+      if (pageProducts.length > 0) {
+        desc += ': ' + pageProducts.length + ' Produkte';
+        if (topCategories.length > 0 && topCategories[0] !== pageName) desc += ' aus ' + topCategories[0];
+      }
+      if (keywords.length > 0) {
+        desc += '. ' + keywords[0].replace(/["„"]/g, '').slice(0, 50);
+      }
+      desc += '. Jetzt im offiziellen Store shoppen.';
+    }
+  } else if (marketplace === 'es') {
+    if (isHomepage) {
+      var catTextEs = topCategories.length > 0 ? topCategories.slice(0, 2).join(', ') : 'productos';
+      desc = 'Descubre ' + brand + ' en Amazon: ' + catTextEs + '. Explora nuestra colección completa en la tienda oficial.';
+    } else if (isAbout) {
+      desc = 'Conoce ' + brand + ': nuestra historia, valores y misión. Descubre la marca en Amazon.';
+    } else {
+      desc = 'Compra ' + brand + ' ' + pageName + ' en Amazon. ';
+      if (pageProducts.length > 0) desc += pageProducts.length + ' productos disponibles. ';
+      desc += 'Visita la tienda oficial ahora.';
+    }
+  } else {
+    if (isHomepage) {
+      var catTextEn = topCategories.length > 0 ? topCategories.slice(0, 2).join(', ') : 'products';
+      desc = 'Discover ' + brand + ' on Amazon: ' + catTextEn;
+      if (store.heroMessage) {
+        desc += '. ' + store.heroMessage.replace(/["„"]/g, '').slice(0, 60);
+      } else if (keywords.length > 0) {
+        desc += '. ' + keywords[0].replace(/["„"]/g, '').slice(0, 50);
+      }
+      desc += '. Shop the official ' + brand + ' store now.';
+    } else if (isAbout) {
+      desc = 'Learn about ' + brand;
+      if (store.brandTone) desc += ' — ' + store.brandTone;
+      desc += '. Our story, values, and what drives us. Discover more on Amazon.';
+    } else if (isBestseller) {
+      desc = 'Shop ' + brand + '\'s most popular products on Amazon. Top-rated bestsellers';
+      if (topCategories.length > 0) desc += ' in ' + topCategories[0];
+      desc += '. Browse and order now.';
+    } else {
+      desc = 'Shop ' + brand + ' ' + pageName + ' on Amazon';
+      if (pageProducts.length > 0) {
+        desc += ': ' + pageProducts.length + ' products';
+        if (topCategories.length > 0 && topCategories[0] !== pageName) desc += ' in ' + topCategories[0];
+      }
+      if (keywords.length > 0) {
+        desc += '. ' + keywords[0].replace(/["„"]/g, '').slice(0, 50);
+      }
+      desc += '. Visit the official store.';
+    }
+  }
+
+  if (desc.length > 155) {
+    desc = desc.slice(0, 155);
+    var lastSpace = desc.lastIndexOf(' ');
+    if (lastSpace > 120) desc = desc.slice(0, lastSpace);
+    if (!/[.!]$/.test(desc)) desc += '...';
+  }
+
+  return desc;
+}
+
 // ─── LAYOUT CELL POSITIONS ───
 // Each cell: [x, y, width, height] as fractions of total dimensions
 // Standard layouts (2-row): height ratio 1.0 = full 2-row height
@@ -403,6 +522,17 @@ export async function generateBriefingDocx(store, briefingLang) {
       if (parentPage) pageTitle = t('brief.subPage', lang) + ': ' + page.name + ' (' + parentPage.name + ')';
     }
     children.push(heading(pageTitle, HeadingLevel.HEADING_1));
+
+    // Meta Description
+    var metaDesc = generatePageMetaDescription(page, store);
+    if (metaDesc) {
+      children.push(new Paragraph({ spacing: { before: 60, after: 20 },
+        children: [new TextRun({ text: 'Meta Description:', bold: true, size: 22, color: '15803d' })] }));
+      children.push(new Paragraph({ spacing: { before: 0, after: 80 },
+        shading: { type: ShadingType.SOLID, color: 'f0fdf4' },
+        children: [new TextRun({ text: metaDesc, size: 22, italics: true, color: '1e293b' }),
+          new TextRun({ text: '  (' + metaDesc.length + '/155)', size: 18, color: '64748b' })] }));
+    }
 
     for (var si = 0; si < (page.sections || []).length; si++) {
       var section = page.sections[si];
