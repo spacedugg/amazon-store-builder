@@ -49,39 +49,108 @@ var CATEGORY_TAG_MAP = {
   '[TEXT_IMAGE]': { id: 'text_image', color: '#6B7280' },
 };
 
-// Render brief text with colored category tags
+// Generate a content fingerprint for a tile to detect duplicates
+function tileFingerprint(tile) {
+  if (!tile) return '';
+  return [tile.type, tile.brief || '', tile.textOverlay || '', tile.ctaText || '', tile.imageCategory || '', tile.bgColor || '',
+    (tile.dimensions || {}).w + 'x' + (tile.dimensions || {}).h,
+    (tile.asins || []).join(',')].join('|');
+}
+
+// Build a map of tile fingerprints → first occurrence location
+function buildDuplicateMap(store) {
+  var map = {};
+  (store.pages || []).forEach(function(pg) {
+    (pg.sections || []).forEach(function(sec, si) {
+      (sec.tiles || []).forEach(function(tile, ti) {
+        if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text') return;
+        var fp = tileFingerprint(tile);
+        if (!fp || fp === 'image||||||x|') return;
+        if (!map[fp]) {
+          map[fp] = { page: pg.name, section: si + 1, tile: ti + 1, count: 1 };
+        } else {
+          map[fp].count++;
+        }
+      });
+    });
+  });
+  return map;
+}
+
+// Render inline text with **bold**, "quoted", and category tags
+function renderInlineFormatting(text, keyBase) {
+  var parts = [];
+  var k = keyBase || 0;
+  // Process: category tags, **bold**, "quoted"
+  var pattern = /(\[(?:STORE_HERO|BENEFIT|PRODUCT|CREATIVE|LIFESTYLE|TEXT_IMAGE)\]|\*\*(.+?)\*\*|"([^"]+)")/g;
+  var lastIndex = 0;
+  var match;
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(<span key={k++}>{text.substring(lastIndex, match.index)}</span>);
+    }
+    if (CATEGORY_TAG_MAP[match[0]]) {
+      parts.push(
+        <span key={k++} className="briefing-cat-tag-inline" style={{ background: CATEGORY_TAG_MAP[match[0]].color, color: '#fff', padding: '1px 6px', borderRadius: 3, fontWeight: 700, fontSize: 10 }}>
+          {match[0]}
+        </span>
+      );
+    } else if (match[2]) {
+      // **bold**
+      parts.push(<strong key={k++}>{match[2]}</strong>);
+    } else if (match[3]) {
+      // "quoted" — styled as quoted text for designer
+      parts.push(<span key={k++} style={{ fontStyle: 'italic', color: '#0f172a', background: '#fef9c3', padding: '0 3px', borderRadius: 2 }}>&bdquo;{match[3]}&ldquo;</span>);
+    }
+    lastIndex = pattern.lastIndex;
+  }
+  if (lastIndex < text.length) {
+    parts.push(<span key={k++}>{text.substring(lastIndex)}</span>);
+  }
+  return parts;
+}
+
+// Render brief text with bullet points, bold, quotes, and category tags
 function BriefTextHighlighted({ text }) {
   if (!text) return null;
-  var parts = [];
-  var remaining = text;
-  var key = 0;
-  while (remaining.length > 0) {
-    var earliest = -1;
-    var earliestTag = null;
-    var earliestInfo = null;
-    Object.keys(CATEGORY_TAG_MAP).forEach(function(tag) {
-      var idx = remaining.indexOf(tag);
-      if (idx >= 0 && (earliest < 0 || idx < earliest)) {
-        earliest = idx;
-        earliestTag = tag;
-        earliestInfo = CATEGORY_TAG_MAP[tag];
+  // Split into lines to detect bullet points
+  var lines = text.split('\n');
+  var hasBullets = lines.some(function(l) { return /^\s*[-•]\s/.test(l); });
+
+  if (hasBullets) {
+    var bulletItems = [];
+    var textParts = [];
+    var key = 0;
+    lines.forEach(function(line, li) {
+      var bulletMatch = line.match(/^\s*[-•]\s+(.*)/);
+      if (bulletMatch) {
+        // Flush any preceding text
+        if (textParts.length > 0) {
+          bulletItems.push(<span key={key++}>{textParts.map(function(t, i) { return <span key={i}>{renderInlineFormatting(t, i * 100)}{i < textParts.length - 1 ? ' ' : ''}</span>; })}</span>);
+          textParts = [];
+        }
+        bulletItems.push(
+          <li key={key++} style={{ marginBottom: 2 }}>{renderInlineFormatting(bulletMatch[1], li * 100)}</li>
+        );
+      } else if (line.trim()) {
+        textParts.push(line.trim());
       }
     });
-    if (earliest < 0) {
-      parts.push(<span key={key++}>{remaining}</span>);
-      break;
+    if (textParts.length > 0) {
+      bulletItems.push(<span key={key++}>{textParts.map(function(t, i) { return <span key={i}>{renderInlineFormatting(t, i * 100)}</span>; })}</span>);
     }
-    if (earliest > 0) {
-      parts.push(<span key={key++}>{remaining.substring(0, earliest)}</span>);
-    }
-    parts.push(
-      <span key={key++} className="briefing-cat-tag-inline" style={{ background: earliestInfo.color, color: '#fff', padding: '1px 6px', borderRadius: 3, fontWeight: 700, fontSize: 10 }}>
-        {earliestTag}
+    return (
+      <span>
+        {bulletItems.some(function(b) { return b.type === 'li'; }) ? (
+          <ul style={{ margin: '4px 0', paddingLeft: 16, listStyle: 'disc' }}>{bulletItems}</ul>
+        ) : (
+          bulletItems
+        )}
       </span>
     );
-    remaining = remaining.substring(earliest + earliestTag.length);
   }
-  return <span>{parts}</span>;
+
+  return <span>{renderInlineFormatting(text, 0)}</span>;
 }
 
 // ─── BRIEFING STORE NAV BAR ───
@@ -250,7 +319,7 @@ function getSectionColor(index) {
 }
 
 // ─── TILE DETAIL CARD (for right panel) ───
-function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile }) {
+function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile, duplicateInfo }) {
   var dims = LAYOUT_TILE_DIMS[layoutId];
   var desktopType = dims && dims[tileIndex] ? dims[tileIndex] : null;
   var tileLabel = TILE_TYPE_LABELS[tile.type] || tile.type;
@@ -276,6 +345,14 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
         )}
         {desktopType && <span className="briefing-tile-imgtype">{desktopType.label} ({desktopType.w}&times;{desktopType.h})</span>}
       </div>
+
+      {duplicateInfo && duplicateInfo.count > 1 && (
+        <div className="briefing-field" style={{ background: '#ecfdf5', border: '1px solid #6ee7b7', borderRadius: 4, padding: '4px 8px', marginBottom: 4 }}>
+          <span style={{ fontSize: 10, fontWeight: 700, color: '#065f46' }}>
+            &#x2753; Identisch mit {duplicateInfo.page} &middot; Section {duplicateInfo.section} &middot; Tile {duplicateInfo.tile} &mdash; Bild muss nicht erneut erstellt werden
+          </span>
+        </div>
+      )}
 
       {tile.brief && (
         <div className="briefing-field">
@@ -751,6 +828,9 @@ export default function BriefingView() {
     });
   }
 
+  // Build duplicate detection map
+  var duplicateMap = buildDuplicateMap(store);
+
   return (
     <div className="briefing-root">
       {/* Header */}
@@ -977,6 +1057,10 @@ export default function BriefingView() {
                   </div>
                   {item.section.tiles.map(function(tile, ti) {
                     var isSelected = selectedTile && selectedTile.sid === item.section.id && selectedTile.ti === ti;
+                    var fp = tileFingerprint(tile);
+                    var dupInfo = fp && duplicateMap[fp] && duplicateMap[fp].count > 1
+                      && !(duplicateMap[fp].page === item.pageName && duplicateMap[fp].section === item.sectionIndex + 1 && duplicateMap[fp].tile === ti + 1)
+                      ? duplicateMap[fp] : null;
                     return (
                       <TileDetail
                         key={ti}
@@ -988,6 +1072,7 @@ export default function BriefingView() {
                         sectionId={item.section.id}
                         isSelected={isSelected}
                         onClickTile={handleTileSelect}
+                        duplicateInfo={dupInfo}
                       />
                     );
                   })}

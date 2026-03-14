@@ -284,7 +284,7 @@ function enforceMenuCategories(userCategories, aiCategories, allAsins) {
 // ─── STEP 1: ANALYSIS & PAGE STRUCTURE ───
 export async function aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions, websiteData) {
   var productList = products.map(function(p) {
-    return {
+    var item = {
       asin: p.asin,
       name: p.name,
       brand: p.brand,
@@ -294,6 +294,17 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
       reviews: p.reviews,
       categories: p.categories,
     };
+    // Include bullet points from PDP for richer content analysis
+    if (p.bulletPoints && p.bulletPoints.length > 0) {
+      item.bulletPoints = p.bulletPoints.slice(0, 5);
+    }
+    // Include image count and alt texts for visual content analysis
+    if (p.images && p.images.length > 0) {
+      item.imageCount = p.images.length;
+      var alts = p.images.filter(function(img) { return img.alt; }).map(function(img) { return img.alt; });
+      if (alts.length > 0) item.imageAlts = alts.slice(0, 5);
+    }
+    return item;
   });
 
   // Parse menu structure from instructions
@@ -436,7 +447,14 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
 // ─── STEP 2: LAYOUT PER PAGE ───
 export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, isHomepage, allCategories, analysis, userInstructions, complexityLevel, category, template, websiteData) {
   var productList = pageProducts.map(function(p) {
-    return { asin: p.asin, name: p.name, price: p.price, rating: p.rating, reviews: p.reviews, description: (p.description || '').slice(0, 100) };
+    var item = { asin: p.asin, name: p.name, price: p.price, rating: p.rating, reviews: p.reviews, description: (p.description || '').slice(0, 100) };
+    if (p.bulletPoints && p.bulletPoints.length > 0) item.bulletPoints = p.bulletPoints.slice(0, 3);
+    if (p.images && p.images.length > 0) {
+      item.imageCount = p.images.length;
+      var alts = p.images.filter(function(img) { return img.alt; }).map(function(img) { return img.alt; });
+      if (alts.length > 0) item.imageAlts = alts.slice(0, 3);
+    }
+    return item;
   });
 
   var validLayouts = LAYOUTS.map(function(l) {

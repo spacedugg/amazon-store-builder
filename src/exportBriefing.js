@@ -204,11 +204,24 @@ function getContrastText(hex) {
 
 // ─── TILE DESCRIPTION ───
 
-function tileDescription(tile, tileIndex, productMap, lang) {
+// Tile fingerprint for duplicate detection
+function exportTileFingerprint(tile) {
+  if (!tile) return '';
+  return [tile.type, tile.brief || '', tile.textOverlay || '', tile.ctaText || '', tile.imageCategory || '', tile.bgColor || '',
+    (tile.dimensions || {}).w + 'x' + (tile.dimensions || {}).h,
+    (tile.asins || []).join(',')].join('|');
+}
+
+function tileDescription(tile, tileIndex, productMap, lang, duplicateNote) {
   var parts = [];
   var typeName = TILE_TYPE_LABELS[tile.type] || tile.type;
   parts.push(new Paragraph({ spacing: { before: 100, after: 40 },
     children: [new TextRun({ text: t('brief.tile', lang) + ' ' + (tileIndex + 1) + ': ' + typeName, bold: true, size: 24, color: '333333' })] }));
+
+  if (duplicateNote) {
+    parts.push(new Paragraph({ spacing: { before: 20, after: 40 },
+      children: [new TextRun({ text: '\u2753 ' + duplicateNote, bold: true, size: 20, color: '065f46', italics: true })] }));
+  }
 
   if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0) {
     var asins = tile.asins || [];
@@ -241,7 +254,38 @@ function tileDescription(tile, tileIndex, productMap, lang) {
       parts.push(boldPara(t('brief.textOverlay', lang) + ': ', '"' + tile.textOverlay + '"' + alignHint));
     }
     if (tile.ctaText) parts.push(boldPara(t('brief.ctaButton', lang) + ': ', '"' + tile.ctaText + '"'));
-    if (tile.brief) parts.push(boldPara(t('brief.designerBrief', lang) + ': ', tile.brief));
+    if (tile.brief) {
+      // Format brief with bullet points and bold
+      var briefLines = tile.brief.split('\n');
+      var hasBullets = briefLines.some(function(l) { return /^\s*[-•]\s/.test(l); });
+      if (hasBullets) {
+        parts.push(new Paragraph({ spacing: { before: 40, after: 20 },
+          children: [new TextRun({ text: t('brief.designerBrief', lang) + ':', bold: true, size: 22, color: '475467' })] }));
+        briefLines.forEach(function(line) {
+          var bulletMatch = line.match(/^\s*[-•]\s+(.*)/);
+          var content = bulletMatch ? bulletMatch[1] : line.trim();
+          if (!content) return;
+          // Parse **bold** and "quoted"
+          var runs = [];
+          var boldPattern = /(\*\*(.+?)\*\*|"([^"]+)")/g;
+          var lastIdx = 0;
+          var m;
+          while ((m = boldPattern.exec(content)) !== null) {
+            if (m.index > lastIdx) runs.push(new TextRun({ text: content.substring(lastIdx, m.index), size: 22 }));
+            if (m[2]) runs.push(new TextRun({ text: m[2], bold: true, size: 22 }));
+            else if (m[3]) runs.push(new TextRun({ text: '\u201E' + m[3] + '\u201C', italics: true, size: 22 }));
+            lastIdx = boldPattern.lastIndex;
+          }
+          if (lastIdx < content.length) runs.push(new TextRun({ text: content.substring(lastIdx), size: 22 }));
+          if (bulletMatch) {
+            runs.unshift(new TextRun({ text: '  \u2022 ', size: 22 }));
+          }
+          parts.push(new Paragraph({ spacing: { before: 10, after: 10 }, children: runs }));
+        });
+      } else {
+        parts.push(boldPara(t('brief.designerBrief', lang) + ': ', tile.brief));
+      }
+    }
     if (tile.linkAsin) parts.push(boldPara(t('brief.linkAsin', lang) + ': ', tile.linkAsin));
     if (tile.linkUrl) parts.push(boldPara(t('brief.linkUrl', lang) + ': ', tile.linkUrl));
     parts.push(boldPara(t('brief.desktopImage', lang) + ': ', tile.uploadedImage ? t('brief.uploaded', lang) : t('brief.needsDesign', lang)));
@@ -332,6 +376,23 @@ export async function generateBriefingDocx(store, briefingLang) {
   children.push(new Paragraph({ children: [new TextRun({ text: t('brief.headerBannerNote', lang), size: 20, color: '666666' })] }));
   children.push(divider());
 
+  // ─── BUILD DUPLICATE MAP ───
+  var dupMap = {};
+  (store.pages || []).forEach(function(pg) {
+    (pg.sections || []).forEach(function(sec, si) {
+      (sec.tiles || []).forEach(function(tile, ti) {
+        if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text') return;
+        var fp = exportTileFingerprint(tile);
+        if (!fp || fp === 'image||||||x|') return;
+        if (!dupMap[fp]) {
+          dupMap[fp] = { page: pg.name, section: si + 1, tile: ti + 1, count: 1 };
+        } else {
+          dupMap[fp].count++;
+        }
+      });
+    });
+  });
+
   // ─── PER PAGE ───
   for (var pi = 0; pi < (store.pages || []).length; pi++) {
     var page = store.pages[pi];
@@ -372,7 +433,12 @@ export async function generateBriefingDocx(store, briefingLang) {
 
       // Tile details
       (section.tiles || []).forEach(function(tile, ti) {
-        tileDescription(tile, ti, productMap, lang).forEach(function(p) { children.push(p); });
+        var fp = exportTileFingerprint(tile);
+        var dupInfo = fp && dupMap[fp] && dupMap[fp].count > 1
+          && !(dupMap[fp].page === page.name && dupMap[fp].section === si + 1 && dupMap[fp].tile === ti + 1)
+          ? 'Identisch mit ' + dupMap[fp].page + ' / Section ' + dupMap[fp].section + ' / Tile ' + dupMap[fp].tile + ' — Bild muss nicht erneut erstellt werden'
+          : null;
+        tileDescription(tile, ti, productMap, lang, dupInfo).forEach(function(p) { children.push(p); });
       });
       children.push(divider());
     }

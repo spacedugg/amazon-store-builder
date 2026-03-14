@@ -71,6 +71,27 @@ module.exports = async function handler(req, res) {
     var products = rawData
       .filter(function(p) { return p && !p.error; })
       .map(function(p) {
+        // Extract all product images
+        var images = [];
+        if (p.images && Array.isArray(p.images)) {
+          images = p.images.map(function(img) {
+            if (typeof img === 'string') return { url: img, alt: '' };
+            return { url: img.url || img.link || img.src || '', alt: img.alt || img.alt_text || '' };
+          }).filter(function(img) { return img.url; });
+        } else if (p.image || p.main_image) {
+          images = [{ url: p.image || p.main_image, alt: '' }];
+        }
+
+        // Extract feature bullets / product highlights
+        var bulletPoints = [];
+        if (p.feature_bullets && Array.isArray(p.feature_bullets)) {
+          bulletPoints = p.feature_bullets;
+        } else if (p.about_product && Array.isArray(p.about_product)) {
+          bulletPoints = p.about_product;
+        } else if (p.product_information && typeof p.product_information === 'string') {
+          bulletPoints = [p.product_information];
+        }
+
         return {
           asin: p.asin || '',
           name: p.title || p.name || '',
@@ -81,6 +102,8 @@ module.exports = async function handler(req, res) {
           rating: p.rating || 0,
           reviews: p.reviews_count || 0,
           image: p.image || p.main_image || '',
+          images: images,
+          bulletPoints: bulletPoints,
           categories: p.categories || [],
           url: p.url || '',
         };

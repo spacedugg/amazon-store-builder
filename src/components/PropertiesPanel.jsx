@@ -1,5 +1,56 @@
+import { useState, useRef } from 'react';
 import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES } from '../constants';
 import { t } from '../i18n';
+
+// Toggle **bold** around selected text or at cursor
+function toggleBold(ref, value, onChange) {
+  var el = ref.current;
+  if (!el) return;
+  var start = el.selectionStart;
+  var end = el.selectionEnd;
+  if (start === end) return; // no selection
+  var selected = value.substring(start, end);
+  var newValue;
+  // Check if already bold
+  if (value.substring(start - 2, start) === '**' && value.substring(end, end + 2) === '**') {
+    newValue = value.substring(0, start - 2) + selected + value.substring(end + 2);
+    onChange(newValue);
+    setTimeout(function() { el.setSelectionRange(start - 2, end - 2); }, 0);
+  } else if (selected.startsWith('**') && selected.endsWith('**')) {
+    newValue = value.substring(0, start) + selected.slice(2, -2) + value.substring(end);
+    onChange(newValue);
+    setTimeout(function() { el.setSelectionRange(start, end - 4); }, 0);
+  } else {
+    newValue = value.substring(0, start) + '**' + selected + '**' + value.substring(end);
+    onChange(newValue);
+    setTimeout(function() { el.setSelectionRange(start + 2, end + 2); }, 0);
+  }
+}
+
+function TextFieldWithBold({ value, onChange, rows, placeholder, className }) {
+  var ref = useRef(null);
+  var isTextarea = rows && rows > 1;
+  return (
+    <div>
+      <div style={{ display: 'flex', gap: 2, marginBottom: 3 }}>
+        <button
+          type="button"
+          className="btn"
+          style={{ fontSize: 10, padding: '2px 8px', fontWeight: 800, minWidth: 24 }}
+          title="Fett (Text markieren, dann klicken)"
+          onClick={function() { toggleBold(ref, value || '', onChange); }}
+        >B</button>
+      </div>
+      {isTextarea ? (
+        <textarea ref={ref} value={value || ''} onChange={function(e) { onChange(e.target.value); }}
+          rows={rows} className={className || 'input'} placeholder={placeholder} />
+      ) : (
+        <input ref={ref} value={value || ''} onChange={function(e) { onChange(e.target.value); }}
+          className={className || 'input'} placeholder={placeholder} />
+      )}
+    </div>
+  );
+}
 
 var PRESET_COLORS = [
   '#f5f5f5', '#e0e0e0', '#bdbdbd', '#9e9e9e',
@@ -136,13 +187,13 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
         <>
           <div className="props-section">
             <label className="label">{t('props.designerBrief', uiLang)}</label>
-            <textarea value={tile.brief || ''} onChange={function(e) { u('brief', e.target.value); }}
-              rows={3} className="input" placeholder={t('props.designerBriefPlaceholder', uiLang)} />
+            <TextFieldWithBold value={tile.brief || ''} onChange={function(v) { u('brief', v); }}
+              rows={3} placeholder={t('props.designerBriefPlaceholder', uiLang)} className="input" />
           </div>
           <div className="props-section">
             <label className="label">{t('props.textOverlay', uiLang)}</label>
-            <input value={tile.textOverlay || ''} onChange={function(e) { u('textOverlay', e.target.value); }}
-              className="input" placeholder={t('props.textOverlayPlaceholder', uiLang)} />
+            <TextFieldWithBold value={tile.textOverlay || ''} onChange={function(v) { u('textOverlay', v); }}
+              placeholder={t('props.textOverlayPlaceholder', uiLang)} className="input" />
             {tile.textOverlay && (
               <div className="text-align-picker" style={{ display: 'flex', gap: 2, marginTop: 4 }}>
                 <button className={'btn text-align-btn' + ((!tile.textAlign || tile.textAlign === 'left') ? ' active' : '')} onClick={function() { u('textAlign', 'left'); }} title="Linksbündig" style={{ fontSize: 10, padding: '3px 8px' }}>&#8676; Links</button>
@@ -153,8 +204,8 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
           </div>
           <div className="props-section">
             <label className="label">{t('props.ctaText', uiLang)}</label>
-            <input value={tile.ctaText || ''} onChange={function(e) { u('ctaText', e.target.value); }}
-              className="input" placeholder='"Jetzt entdecken"' />
+            <TextFieldWithBold value={tile.ctaText || ''} onChange={function(v) { u('ctaText', v); }}
+              placeholder='"Jetzt entdecken"' className="input" />
           </div>
 
           {/* Desktop Dimensions */}
@@ -230,8 +281,8 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
       {tile.type === 'text' && (
         <div className="props-section">
           <label className="label">{t('props.textContent', uiLang)}</label>
-          <textarea value={tile.textOverlay || ''} onChange={function(e) { u('textOverlay', e.target.value); }}
-            rows={4} className="input" placeholder={t('props.nativeTextPlaceholder', uiLang)} />
+          <TextFieldWithBold value={tile.textOverlay || ''} onChange={function(v) { u('textOverlay', v); }}
+            rows={4} placeholder={t('props.nativeTextPlaceholder', uiLang)} className="input" />
           <div className="text-align-picker" style={{ display: 'flex', gap: 2, marginTop: 4 }}>
             <button className={'btn text-align-btn' + ((!tile.textAlign || tile.textAlign === 'left') ? ' active' : '')} onClick={function() { u('textAlign', 'left'); }} title="Linksbündig" style={{ fontSize: 10, padding: '3px 8px' }}>&#8676; Links</button>
             <button className={'btn text-align-btn' + (tile.textAlign === 'center' ? ' active' : '')} onClick={function() { u('textAlign', 'center'); }} title="Zentriert" style={{ fontSize: 10, padding: '3px 8px' }}>Mitte</button>
@@ -246,8 +297,8 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
         <>
           <div className="props-section">
             <label className="label">{t('props.videoBrief', uiLang)}</label>
-            <textarea value={tile.brief || ''} onChange={function(e) { u('brief', e.target.value); }}
-              rows={3} className="input" placeholder={t('props.videoBriefPlaceholder', uiLang)} />
+            <TextFieldWithBold value={tile.brief || ''} onChange={function(v) { u('brief', v); }}
+              rows={3} placeholder={t('props.videoBriefPlaceholder', uiLang)} className="input" />
           </div>
           <div className="props-section">
             <label className="label">{t('props.desktopDimensions', uiLang)}</label>
