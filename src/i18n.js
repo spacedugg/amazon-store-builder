@@ -209,6 +209,10 @@ var translations = {
     en: 'Mobile Dimensions (px)', de: 'Mobile Masse (px)', uk: 'Мобільні розміри (px)', ru: 'Размеры для мобильного (px)',
     id: 'Dimensi Mobile (px)', ky: 'Мобилдик өлчөмдөр (px)', bg: 'Мобилни размери (px)', es: 'Dimensiones móvil (px)',
   },
+  'props.syncDimensions': {
+    en: 'Use same dimensions for mobile (1 image)', de: 'Gleiche Masse für Mobil übernehmen (1 Bild)', uk: 'Однакові розміри для мобільного (1 зображення)', ru: 'Одинаковые размеры для мобильного (1 изображение)',
+    id: 'Gunakan dimensi sama untuk mobile (1 gambar)', ky: 'Мобилдик үчүн бирдей өлчөм (1 сүрөт)', bg: 'Същите размери за мобилно (1 изображение)', es: 'Mismas dimensiones para móvil (1 imagen)',
+  },
   'props.linkAsin': {
     en: 'Link ASIN (clickable)', de: 'Link-ASIN (klickbar)', uk: 'Посилання ASIN (клікабельне)', ru: 'Ссылка ASIN (кликабельная)',
     id: 'Link ASIN (dapat diklik)', ky: 'Шилтеме ASIN (басылуучу)', bg: 'Линк ASIN (кликаем)', es: 'Enlace ASIN (clicable)',

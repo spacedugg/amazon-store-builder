@@ -6,6 +6,135 @@ import SectionView from './SectionView';
 
 var noop = function() {};
 
+// ─── META DESCRIPTION GENERATOR ───
+// Generates SEO-optimized meta descriptions for Amazon Brand Store pages.
+// Max 155 chars, front-loads brand + primary keywords within first 120 chars.
+function generateMetaDescription(page, store) {
+  var brand = store.brandName || 'Brand';
+  var marketplace = store.marketplace || 'de';
+  var products = store.products || [];
+  var pageName = page.name || '';
+  var isHomepage = pageName.toLowerCase() === 'homepage' || pageName.toLowerCase() === 'home';
+
+  // Collect ASINs used on this page
+  var pageAsins = {};
+  (page.sections || []).forEach(function(sec) {
+    (sec.tiles || []).forEach(function(tile) {
+      (tile.asins || []).forEach(function(a) { pageAsins[a] = true; });
+      if (tile.linkAsin) pageAsins[tile.linkAsin] = true;
+    });
+  });
+
+  // Get product names and categories for this page
+  var pageProducts = products.filter(function(p) { return pageAsins[p.asin]; });
+  var categories = {};
+  pageProducts.forEach(function(p) {
+    if (p.category) categories[p.category] = (categories[p.category] || 0) + 1;
+  });
+  var topCategories = Object.keys(categories).sort(function(a, b) { return categories[b] - categories[a]; }).slice(0, 3);
+
+  // Collect text overlays and CTA texts for keyword hints
+  var keywords = [];
+  (page.sections || []).forEach(function(sec) {
+    (sec.tiles || []).forEach(function(tile) {
+      if (tile.textOverlay && tile.textOverlay.length > 3 && tile.textOverlay.length < 60) {
+        keywords.push(tile.textOverlay);
+      }
+    });
+  });
+
+  // Determine page type for appropriate template
+  var lowerName = pageName.toLowerCase();
+  var isAbout = lowerName.indexOf('about') >= 0 || lowerName.indexOf('über') >= 0 || lowerName.indexOf('story') >= 0 || lowerName.indexOf('geschichte') >= 0;
+  var isBestseller = lowerName.indexOf('bestseller') >= 0 || lowerName.indexOf('best seller') >= 0 || lowerName.indexOf('top') >= 0;
+
+  var desc = '';
+
+  if (marketplace === 'de' || marketplace === 'at') {
+    // German meta descriptions
+    if (isHomepage) {
+      var catText = topCategories.length > 0 ? topCategories.slice(0, 2).join(', ') : 'Produkte';
+      desc = 'Entdecke ' + brand + ' auf Amazon: ' + catText;
+      if (store.heroMessage) {
+        desc += '. ' + store.heroMessage.replace(/["„"]/g, '').slice(0, 60);
+      } else if (keywords.length > 0) {
+        desc += '. ' + keywords[0].replace(/["„"]/g, '').slice(0, 50);
+      }
+      desc += '. Jetzt den offiziellen ' + brand + ' Store entdecken.';
+    } else if (isAbout) {
+      desc = 'Erfahre mehr über ' + brand;
+      if (store.brandTone) desc += ' — ' + store.brandTone;
+      desc += '. Unsere Geschichte, Werte und was uns antreibt. Jetzt auf Amazon entdecken.';
+    } else if (isBestseller) {
+      desc = 'Die beliebtesten ' + brand + ' Produkte auf Amazon. Top-bewertete Bestseller';
+      if (topCategories.length > 0) desc += ' aus ' + topCategories[0];
+      desc += '. Jetzt entdecken und bestellen.';
+    } else {
+      // Category page
+      desc = brand + ' ' + pageName + ' auf Amazon entdecken';
+      if (pageProducts.length > 0) {
+        desc += ': ' + pageProducts.length + ' Produkte';
+        if (topCategories.length > 0 && topCategories[0] !== pageName) desc += ' aus ' + topCategories[0];
+      }
+      if (keywords.length > 0) {
+        desc += '. ' + keywords[0].replace(/["„"]/g, '').slice(0, 50);
+      }
+      desc += '. Jetzt im offiziellen Store shoppen.';
+    }
+  } else if (marketplace === 'es') {
+    if (isHomepage) {
+      var catTextEs = topCategories.length > 0 ? topCategories.slice(0, 2).join(', ') : 'productos';
+      desc = 'Descubre ' + brand + ' en Amazon: ' + catTextEs + '. Explora nuestra colección completa en la tienda oficial.';
+    } else if (isAbout) {
+      desc = 'Conoce ' + brand + ': nuestra historia, valores y misión. Descubre la marca en Amazon.';
+    } else {
+      desc = 'Compra ' + brand + ' ' + pageName + ' en Amazon. ';
+      if (pageProducts.length > 0) desc += pageProducts.length + ' productos disponibles. ';
+      desc += 'Visita la tienda oficial ahora.';
+    }
+  } else {
+    // English (default)
+    if (isHomepage) {
+      var catTextEn = topCategories.length > 0 ? topCategories.slice(0, 2).join(', ') : 'products';
+      desc = 'Discover ' + brand + ' on Amazon: ' + catTextEn;
+      if (store.heroMessage) {
+        desc += '. ' + store.heroMessage.replace(/["„"]/g, '').slice(0, 60);
+      } else if (keywords.length > 0) {
+        desc += '. ' + keywords[0].replace(/["„"]/g, '').slice(0, 50);
+      }
+      desc += '. Shop the official ' + brand + ' store now.';
+    } else if (isAbout) {
+      desc = 'Learn about ' + brand;
+      if (store.brandTone) desc += ' — ' + store.brandTone;
+      desc += '. Our story, values, and what drives us. Discover more on Amazon.';
+    } else if (isBestseller) {
+      desc = 'Shop ' + brand + '\'s most popular products on Amazon. Top-rated bestsellers';
+      if (topCategories.length > 0) desc += ' in ' + topCategories[0];
+      desc += '. Browse and order now.';
+    } else {
+      desc = 'Shop ' + brand + ' ' + pageName + ' on Amazon';
+      if (pageProducts.length > 0) {
+        desc += ': ' + pageProducts.length + ' products';
+        if (topCategories.length > 0 && topCategories[0] !== pageName) desc += ' in ' + topCategories[0];
+      }
+      if (keywords.length > 0) {
+        desc += '. ' + keywords[0].replace(/["„"]/g, '').slice(0, 50);
+      }
+      desc += '. Visit the official store.';
+    }
+  }
+
+  // Truncate to 155 chars without cutting mid-word
+  if (desc.length > 155) {
+    desc = desc.slice(0, 155);
+    var lastSpace = desc.lastIndexOf(' ');
+    if (lastSpace > 120) desc = desc.slice(0, lastSpace);
+    if (!/[.!]$/.test(desc)) desc += '...';
+  }
+
+  return desc;
+}
+
 // ─── INSPIRATION LIBRARY ───
 var INSPIRATION_LINKS = [
   { brand: 'Hansegr\u00FCn', url: 'https://www.amazon.de/stores/page/BC9A9642-4612-460E-81B4-985E9AF6A7D2', category: 'Natural' },
@@ -49,39 +178,108 @@ var CATEGORY_TAG_MAP = {
   '[TEXT_IMAGE]': { id: 'text_image', color: '#6B7280' },
 };
 
-// Render brief text with colored category tags
+// Generate a content fingerprint for a tile to detect duplicates
+function tileFingerprint(tile) {
+  if (!tile) return '';
+  return [tile.type, tile.brief || '', tile.textOverlay || '', tile.ctaText || '', tile.imageCategory || '', tile.bgColor || '',
+    (tile.dimensions || {}).w + 'x' + (tile.dimensions || {}).h,
+    (tile.asins || []).join(',')].join('|');
+}
+
+// Build a map of tile fingerprints → first occurrence location
+function buildDuplicateMap(store) {
+  var map = {};
+  (store.pages || []).forEach(function(pg) {
+    (pg.sections || []).forEach(function(sec, si) {
+      (sec.tiles || []).forEach(function(tile, ti) {
+        if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text') return;
+        var fp = tileFingerprint(tile);
+        if (!fp || fp === 'image||||||x|') return;
+        if (!map[fp]) {
+          map[fp] = { page: pg.name, section: si + 1, tile: ti + 1, count: 1 };
+        } else {
+          map[fp].count++;
+        }
+      });
+    });
+  });
+  return map;
+}
+
+// Render inline text with **bold**, "quoted", and category tags
+function renderInlineFormatting(text, keyBase) {
+  var parts = [];
+  var k = keyBase || 0;
+  // Process: category tags, **bold**, "quoted"
+  var pattern = /(\[(?:STORE_HERO|BENEFIT|PRODUCT|CREATIVE|LIFESTYLE|TEXT_IMAGE)\]|\*\*(.+?)\*\*|"([^"]+)")/g;
+  var lastIndex = 0;
+  var match;
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(<span key={k++}>{text.substring(lastIndex, match.index)}</span>);
+    }
+    if (CATEGORY_TAG_MAP[match[0]]) {
+      parts.push(
+        <span key={k++} className="briefing-cat-tag-inline" style={{ background: CATEGORY_TAG_MAP[match[0]].color, color: '#fff', padding: '1px 6px', borderRadius: 3, fontWeight: 700, fontSize: 10 }}>
+          {match[0]}
+        </span>
+      );
+    } else if (match[2]) {
+      // **bold**
+      parts.push(<strong key={k++}>{match[2]}</strong>);
+    } else if (match[3]) {
+      // "quoted" — styled as quoted text for designer
+      parts.push(<span key={k++} style={{ fontStyle: 'italic', color: '#0f172a', background: '#fef9c3', padding: '0 3px', borderRadius: 2 }}>&bdquo;{match[3]}&ldquo;</span>);
+    }
+    lastIndex = pattern.lastIndex;
+  }
+  if (lastIndex < text.length) {
+    parts.push(<span key={k++}>{text.substring(lastIndex)}</span>);
+  }
+  return parts;
+}
+
+// Render brief text with bullet points, bold, quotes, and category tags
 function BriefTextHighlighted({ text }) {
   if (!text) return null;
-  var parts = [];
-  var remaining = text;
-  var key = 0;
-  while (remaining.length > 0) {
-    var earliest = -1;
-    var earliestTag = null;
-    var earliestInfo = null;
-    Object.keys(CATEGORY_TAG_MAP).forEach(function(tag) {
-      var idx = remaining.indexOf(tag);
-      if (idx >= 0 && (earliest < 0 || idx < earliest)) {
-        earliest = idx;
-        earliestTag = tag;
-        earliestInfo = CATEGORY_TAG_MAP[tag];
+  // Split into lines to detect bullet points
+  var lines = text.split('\n');
+  var hasBullets = lines.some(function(l) { return /^\s*[-•]\s/.test(l); });
+
+  if (hasBullets) {
+    var bulletItems = [];
+    var textParts = [];
+    var key = 0;
+    lines.forEach(function(line, li) {
+      var bulletMatch = line.match(/^\s*[-•]\s+(.*)/);
+      if (bulletMatch) {
+        // Flush any preceding text
+        if (textParts.length > 0) {
+          bulletItems.push(<span key={key++}>{textParts.map(function(t, i) { return <span key={i}>{renderInlineFormatting(t, i * 100)}{i < textParts.length - 1 ? ' ' : ''}</span>; })}</span>);
+          textParts = [];
+        }
+        bulletItems.push(
+          <li key={key++} style={{ marginBottom: 2 }}>{renderInlineFormatting(bulletMatch[1], li * 100)}</li>
+        );
+      } else if (line.trim()) {
+        textParts.push(line.trim());
       }
     });
-    if (earliest < 0) {
-      parts.push(<span key={key++}>{remaining}</span>);
-      break;
+    if (textParts.length > 0) {
+      bulletItems.push(<span key={key++}>{textParts.map(function(t, i) { return <span key={i}>{renderInlineFormatting(t, i * 100)}</span>; })}</span>);
     }
-    if (earliest > 0) {
-      parts.push(<span key={key++}>{remaining.substring(0, earliest)}</span>);
-    }
-    parts.push(
-      <span key={key++} className="briefing-cat-tag-inline" style={{ background: earliestInfo.color, color: '#fff', padding: '1px 6px', borderRadius: 3, fontWeight: 700, fontSize: 10 }}>
-        {earliestTag}
+    return (
+      <span>
+        {bulletItems.some(function(b) { return b.type === 'li'; }) ? (
+          <ul style={{ margin: '4px 0', paddingLeft: 16, listStyle: 'disc' }}>{bulletItems}</ul>
+        ) : (
+          bulletItems
+        )}
       </span>
     );
-    remaining = remaining.substring(earliest + earliestTag.length);
   }
-  return <span>{parts}</span>;
+
+  return <span>{renderInlineFormatting(text, 0)}</span>;
 }
 
 // ─── BRIEFING STORE NAV BAR ───
@@ -250,7 +448,7 @@ function getSectionColor(index) {
 }
 
 // ─── TILE DETAIL CARD (for right panel) ───
-function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile }) {
+function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile, duplicateInfo }) {
   var dims = LAYOUT_TILE_DIMS[layoutId];
   var desktopType = dims && dims[tileIndex] ? dims[tileIndex] : null;
   var tileLabel = TILE_TYPE_LABELS[tile.type] || tile.type;
@@ -276,6 +474,14 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
         )}
         {desktopType && <span className="briefing-tile-imgtype">{desktopType.label} ({desktopType.w}&times;{desktopType.h})</span>}
       </div>
+
+      {duplicateInfo && duplicateInfo.count > 1 && (
+        <div className="briefing-field" style={{ background: '#ecfdf5', border: '1px solid #6ee7b7', borderRadius: 4, padding: '4px 8px', marginBottom: 4 }}>
+          <span style={{ fontSize: 10, fontWeight: 700, color: '#065f46' }}>
+            &#x2753; Identisch mit {duplicateInfo.page} &middot; Section {duplicateInfo.section} &middot; Tile {duplicateInfo.tile} &mdash; Bild muss nicht erneut erstellt werden
+          </span>
+        </div>
+      )}
 
       {tile.brief && (
         <div className="briefing-field">
@@ -332,6 +538,7 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
       <div className="briefing-tile-dims-row">
         <span className="briefing-dim">Desktop: {tile.dimensions ? (tile.dimensions.w + '\u00D7' + tile.dimensions.h) : 'N/A'}</span>
         <span className="briefing-dim">Mobile: {tile.mobileDimensions ? (tile.mobileDimensions.w + '\u00D7' + tile.mobileDimensions.h) : 'N/A'}</span>
+        {tile.syncDimensions && <span className="briefing-dim" style={{ color: '#10B981', fontWeight: 600 }}>= 1 Bild</span>}
       </div>
     </div>
   );
@@ -370,13 +577,39 @@ function SectionBriefing({ section, sectionIndex, viewMode, products, sectionCol
 }
 
 // ─── PAGE BRIEFING (center content — visual only, single page) ───
-function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTile, onTileSelect }) {
+function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTile, onTileSelect, store }) {
+  var [metaCopied, setMetaCopied] = useState(false);
+  var metaDesc = store ? generateMetaDescription(page, store) : '';
+
+  var handleCopyMeta = function() {
+    if (!metaDesc) return;
+    navigator.clipboard.writeText(metaDesc).then(function() {
+      setMetaCopied(true);
+      setTimeout(function() { setMetaCopied(false); }, 2000);
+    });
+  };
+
   return (
     <div className="briefing-page">
       <div className="briefing-page-header">
         <span className="briefing-page-name">{page.name || 'Page'}</span>
         <span className="briefing-page-count">{page.sections.length} section{page.sections.length !== 1 ? 's' : ''}</span>
       </div>
+
+      {/* Meta Description */}
+      {metaDesc && (
+        <div className="briefing-meta-desc" style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 8, padding: '10px 14px', margin: '0 0 12px 0' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+            <span style={{ fontSize: 11, fontWeight: 700, color: '#15803d', letterSpacing: '.3px' }}>META DESCRIPTION</span>
+            <button onClick={handleCopyMeta}
+              style={{ fontSize: 10, padding: '2px 10px', borderRadius: 4, border: '1px solid #86efac', background: metaCopied ? '#22c55e' : '#fff', color: metaCopied ? '#fff' : '#15803d', cursor: 'pointer', fontWeight: 600, transition: 'all .2s' }}>
+              {metaCopied ? 'Copied!' : 'Copy'}
+            </button>
+          </div>
+          <div style={{ fontSize: 12, color: '#1e293b', lineHeight: 1.5, fontFamily: 'system-ui, sans-serif' }}>{metaDesc}</div>
+          <div style={{ fontSize: 10, color: '#64748b', marginTop: 4 }}>{metaDesc.length}/155 characters</div>
+        </div>
+      )}
 
       {page.sections.map(function(sec, si) {
         return (
@@ -751,6 +984,9 @@ export default function BriefingView() {
     });
   }
 
+  // Build duplicate detection map
+  var duplicateMap = buildDuplicateMap(store);
+
   return (
     <div className="briefing-root">
       {/* Header */}
@@ -894,7 +1130,7 @@ export default function BriefingView() {
           {/* Single page content */}
           {(function() {
             if (!activePage) return <div className="briefing-empty">No pages found.</div>;
-            return <PageBriefing page={activePage} viewMode={viewMode} products={store.products || []} sectionStartIndex={0} selectedTile={selectedTile} onTileSelect={handleTileSelect} />;
+            return <PageBriefing page={activePage} viewMode={viewMode} products={store.products || []} sectionStartIndex={0} selectedTile={selectedTile} onTileSelect={handleTileSelect} store={store} />;
           })()}
         </div>
 
@@ -977,6 +1213,10 @@ export default function BriefingView() {
                   </div>
                   {item.section.tiles.map(function(tile, ti) {
                     var isSelected = selectedTile && selectedTile.sid === item.section.id && selectedTile.ti === ti;
+                    var fp = tileFingerprint(tile);
+                    var dupInfo = fp && duplicateMap[fp] && duplicateMap[fp].count > 1
+                      && !(duplicateMap[fp].page === item.pageName && duplicateMap[fp].section === item.sectionIndex + 1 && duplicateMap[fp].tile === ti + 1)
+                      ? duplicateMap[fp] : null;
                     return (
                       <TileDetail
                         key={ti}
@@ -988,6 +1228,7 @@ export default function BriefingView() {
                         sectionId={item.section.id}
                         isSelected={isSelected}
                         onClickTile={handleTileSelect}
+                        duplicateInfo={dupInfo}
                       />
                     );
                   })}

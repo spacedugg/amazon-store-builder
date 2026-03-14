@@ -49,19 +49,42 @@ export default function App() {
 
   // ─── UNDO HISTORY ───
   var undoStackRef = useRef([]);
+  var redoStackRef = useRef([]);
   var skipHistoryRef = useRef(false);
-  var MAX_UNDO = 50;
+  var MAX_UNDO = 10;
 
   var pushUndo = useCallback(function(prevStore) {
     if (!prevStore || !prevStore.pages || prevStore.pages.length === 0) return;
     undoStackRef.current = undoStackRef.current.slice(-(MAX_UNDO - 1)).concat([JSON.stringify(prevStore)]);
+    // Clear redo stack on new action
+    redoStackRef.current = [];
   }, []);
 
   var handleUndo = useCallback(function() {
     if (undoStackRef.current.length === 0) return;
     var prev = undoStackRef.current.pop();
+    // Push current state to redo stack
+    setStore(function(current) {
+      redoStackRef.current = redoStackRef.current.slice(-(MAX_UNDO - 1)).concat([JSON.stringify(current)]);
+      return current;
+    });
     skipHistoryRef.current = true;
     var parsed = JSON.parse(prev);
+    setStore(parsed);
+    setCurPage(parsed.pages && parsed.pages[0] ? parsed.pages[0].id : '');
+    setSel(null);
+  }, []);
+
+  var handleRedo = useCallback(function() {
+    if (redoStackRef.current.length === 0) return;
+    var next = redoStackRef.current.pop();
+    // Push current state to undo stack (without clearing redo)
+    setStore(function(current) {
+      undoStackRef.current = undoStackRef.current.slice(-(MAX_UNDO - 1)).concat([JSON.stringify(current)]);
+      return current;
+    });
+    skipHistoryRef.current = true;
+    var parsed = JSON.parse(next);
     setStore(parsed);
     setCurPage(parsed.pages && parsed.pages[0] ? parsed.pages[0].id : '');
     setSel(null);
@@ -79,20 +102,22 @@ export default function App() {
     });
   }, [pushUndo]);
 
-  // Keyboard shortcut: Ctrl+Z for undo
+  // Keyboard shortcuts: Ctrl+Z for undo, Ctrl+Shift+Z / Ctrl+Y for redo
   useEffect(function() {
     var handler = function(e) {
+      var tag = document.activeElement && document.activeElement.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
       if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) {
-        // Don't undo if focus is in a text input
-        var tag = document.activeElement && document.activeElement.tagName;
-        if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
         e.preventDefault();
         handleUndo();
+      } else if ((e.ctrlKey || e.metaKey) && (e.key === 'z' && e.shiftKey || e.key === 'y')) {
+        e.preventDefault();
+        handleRedo();
       }
     };
     window.addEventListener('keydown', handler);
     return function() { window.removeEventListener('keydown', handler); };
-  }, [handleUndo]);
+  }, [handleUndo, handleRedo]);
 
   // Load saved stores on mount
   useEffect(function() {
@@ -569,6 +594,8 @@ export default function App() {
         onNewStore={handleNewStore}
         onUndo={handleUndo}
         canUndo={undoStackRef.current.length > 0}
+        onRedo={handleRedo}
+        canRedo={redoStackRef.current.length > 0}
         onShowPrice={function() { setShowPrice(true); }}
       />
 
