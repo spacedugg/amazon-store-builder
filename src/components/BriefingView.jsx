@@ -483,6 +483,27 @@ function getSectionColor(index) {
   return SECTION_COLORS[index % SECTION_COLORS.length];
 }
 
+// ─── COPYABLE FILENAME (click to copy with visual feedback) ───
+function CopyableFilename({ filename, label }) {
+  var [copied, setCopied] = useState(false);
+  function handleCopy(e) {
+    e.stopPropagation();
+    navigator.clipboard.writeText(filename).then(function() {
+      setCopied(true);
+      setTimeout(function() { setCopied(false); }, 1500);
+    });
+  }
+  return (
+    <div onClick={handleCopy}
+      style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontFamily: 'monospace', fontSize: 10, color: copied ? '#16a34a' : '#475569', cursor: 'pointer', padding: '2px 6px', borderRadius: 3, background: copied ? '#dcfce7' : '#f1f5f9', border: '1px solid ' + (copied ? '#86efac' : '#e2e8f0'), transition: 'all .2s', userSelect: 'none', maxWidth: '100%' }}
+      title="Click to copy filename">
+      {label && <span style={{ fontWeight: 700, fontSize: 9, color: copied ? '#16a34a' : '#94a3b8', minWidth: 10 }}>{label}</span>}
+      <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{copied ? 'Copied!' : filename}</span>
+      {!copied && <span style={{ fontSize: 9, opacity: 0.5, flexShrink: 0 }}>&#128203;</span>}
+    </div>
+  );
+}
+
 // ─── TILE DETAIL CARD (for right panel) ───
 function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile, duplicateInfo, pageId, pageName, sectionIndex, checks, toggleCheck }) {
   var dims = LAYOUT_TILE_DIMS[layoutId];
@@ -579,15 +600,15 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
         {tile.syncDimensions && <span className="briefing-dim" style={{ color: '#10B981', fontWeight: 600 }}>= 1 image</span>}
       </div>
 
-      {/* ─── FILE NAMES ─── */}
+      {/* ─── FILE NAMES (click to copy) ─── */}
       {isImageTile && pageName != null && sectionIndex != null && (
-        <div style={{ marginTop: 4, padding: '4px 0', fontSize: 10, fontFamily: 'monospace', color: '#64748b', lineHeight: 1.6 }}>
+        <div style={{ marginTop: 4, padding: '4px 0', fontSize: 10, lineHeight: 1.8 }}>
           {tile.syncDimensions ? (
-            <div>{tileFilename(pageName, sectionIndex, tileIndex, 'sync')}</div>
+            <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'sync')} />
           ) : (
-            <div>
-              <div>{tileFilename(pageName, sectionIndex, tileIndex, 'desktop')}</div>
-              <div>{tileFilename(pageName, sectionIndex, tileIndex, 'mobile')}</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'desktop')} label="D" />
+              <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'mobile')} label="M" />
             </div>
           )}
         </div>
@@ -628,18 +649,23 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
 }
 
 // ─── SECTION BRIEFING (visual preview only) ───
+// Section label is positioned to the LEFT of the actual store content,
+// so the store layout itself looks clean (like real Amazon) without colored borders.
 function SectionBriefing({ section, sectionIndex, viewMode, products, sectionColor, selectedTile, onTileSelect }) {
   var layout = findLayout(section.layoutId);
 
   return (
-    <div className="briefing-section" style={{ borderLeft: '3px solid ' + sectionColor.border, background: sectionColor.bg }}>
-      <div className="briefing-section-header">
-        <span className="briefing-section-label" style={{ color: sectionColor.label }}>Section {sectionIndex + 1}</span>
-        <span className="briefing-section-layout">{layout.cells} tile{layout.cells !== 1 ? 's' : ''}</span>
+    <div style={{ display: 'flex', alignItems: 'stretch', position: 'relative' }}>
+      {/* Left gutter label — outside the store layout */}
+      <div style={{ width: 56, flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, borderRight: '2px solid ' + sectionColor.border, background: sectionColor.bg, padding: '6px 2px' }}>
+        <span style={{ fontSize: 9, fontWeight: 700, color: sectionColor.label, whiteSpace: 'nowrap', writingMode: 'vertical-lr', transform: 'rotate(180deg)', letterSpacing: 0.5 }}>
+          S{sectionIndex + 1}
+        </span>
+        <span style={{ fontSize: 8, color: sectionColor.label, opacity: 0.7 }}>{layout.cells}T</span>
       </div>
 
-      {/* Visual preview */}
-      <div className="briefing-section-preview briefing-section-clickable">
+      {/* Store content — clean, no colored borders */}
+      <div style={{ flex: 1, minWidth: 0 }} className="briefing-section-preview briefing-section-clickable">
         <SectionView
           section={section}
           idx={sectionIndex}
@@ -660,16 +686,10 @@ function SectionBriefing({ section, sectionIndex, viewMode, products, sectionCol
 }
 
 // ─── PAGE BRIEFING (center content — visual only, single page) ───
+// No page header inside the store layout — sections connect edge-to-edge like Amazon.
 function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTile, onTileSelect, store }) {
   return (
-    <div className="briefing-page">
-      <div className="briefing-page-header">
-        <span className="briefing-page-name">{page.name || 'Page'}</span>
-        <span className="briefing-page-count">{page.sections.length} section{page.sections.length !== 1 ? 's' : ''}</span>
-      </div>
-
-      {/* Meta descriptions moved to Store Info tab */}
-
+    <div className="briefing-page" style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
       {page.sections.map(function(sec, si) {
         return (
           <SectionBriefing
@@ -891,50 +911,46 @@ function computeProgress(store, checks) {
 function PreviewMode({ store, onClose }) {
   var [pvMode, setPvMode] = useState('desktop');
   var pages = store.pages || [];
+  var topPages = pages.filter(function(p) { return !p.parentId; });
+  var childrenMap = {};
+  topPages.forEach(function(pg) { childrenMap[pg.id] = pages.filter(function(cp) { return cp.parentId === pg.id; }); });
   var [pvPage, setPvPage] = useState(pages[0] ? pages[0].id : '');
+  var [hoveredTab, setHoveredTab] = useState(null);
+  var [moreOpen, setMoreOpen] = useState(false);
+  var morePopupRef = useRef(null);
   var activePg = pages.find(function(p) { return p.id === pvPage; }) || pages[0];
-  var [imageMap, setImageMap] = useState({}); // { canonical_filename_lower -> objectURL }
+  var [imageMap, setImageMap] = useState({});
   var [loadedCount, setLoadedCount] = useState(0);
   var [totalFiles, setTotalFiles] = useState(0);
   var fileInputRef = useRef(null);
+  var [showFilenames, setShowFilenames] = useState(false);
 
-  // Build the filename map for matching
   var fnMap = buildFilenameMap(store);
-
-  var [folderNames, setFolderNames] = useState([]); // track loaded folder names
+  var [folderNames, setFolderNames] = useState([]);
 
   function handleFolderSelect(e) {
     var files = e.target.files;
     if (!files || files.length === 0) return;
-    // Extract folder name from first file's relative path
     var firstPath = files[0] && files[0].webkitRelativePath ? files[0].webkitRelativePath : '';
     var folderName = firstPath ? firstPath.split('/')[0] : 'Folder';
-    // Only add unique image files (filter non-image files from the selection)
     var imageExts = /\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i;
-    // Merge with existing imageMap (accumulate across multiple folder loads)
     var merged = Object.assign({}, imageMap);
-    var newMatchCount = 0;
     for (var i = 0; i < files.length; i++) {
       var file = files[i];
       if (!imageExts.test(file.name)) continue;
       var name = file.name.toLowerCase();
       var nameNoExt = name.replace(/\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i, '');
-      // Try exact match first, then without extension
       if (fnMap[name] && !merged[name]) {
         merged[name] = URL.createObjectURL(file);
-        newMatchCount++;
       } else if (fnMap[nameNoExt + '.jpg'] && !merged[nameNoExt + '.jpg']) {
         merged[nameNoExt + '.jpg'] = URL.createObjectURL(file);
-        newMatchCount++;
       } else {
-        // Try matching by removing extra prefixes/suffixes and normalizing
         var keys = Object.keys(fnMap);
         for (var k = 0; k < keys.length; k++) {
-          if (merged[keys[k]]) continue; // already matched
+          if (merged[keys[k]]) continue;
           var keyBase = keys[k].replace('.jpg', '');
           if (nameNoExt === keyBase || nameNoExt.indexOf(keyBase) >= 0 || keyBase.indexOf(nameNoExt) >= 0) {
             merged[keys[k]] = URL.createObjectURL(file);
-            newMatchCount++;
             break;
           }
         }
@@ -946,12 +962,10 @@ function PreviewMode({ store, onClose }) {
     if (folderNames.indexOf(folderName) < 0) {
       setFolderNames(function(prev) { return prev.concat(folderName); });
     }
-    // Reset file input so the same folder can be re-selected
     e.target.value = '';
   }
 
   function handleResetImages() {
-    // Revoke all object URLs to free memory
     Object.values(imageMap).forEach(function(url) { try { URL.revokeObjectURL(url); } catch(e) {} });
     setImageMap({});
     setLoadedCount(0);
@@ -961,13 +975,22 @@ function PreviewMode({ store, onClose }) {
 
   var [showReport, setShowReport] = useState(false);
 
-  // Find the image URL for a specific tile
   function findTileImage(pageName, sectionIndex, tileIndex, variant) {
     var fn = tileFilename(pageName, sectionIndex, tileIndex, variant).toLowerCase();
     return imageMap[fn] || null;
   }
 
-  // ─── MATCH REPORT: compute which tiles matched and which are missing ───
+  // Close more popup on outside click
+  useEffect(function() {
+    if (!moreOpen) return;
+    function handleClick(e) {
+      if (morePopupRef.current && !morePopupRef.current.contains(e.target)) setMoreOpen(false);
+    }
+    document.addEventListener('mousedown', handleClick);
+    return function() { document.removeEventListener('mousedown', handleClick); };
+  }, [moreOpen]);
+
+  // Match report computation
   var matchReport = { total: 0, matched: 0, missing: [] };
   if (loadedCount > 0) {
     (store.pages || []).forEach(function(pg) {
@@ -977,9 +1000,7 @@ function PreviewMode({ store, onClose }) {
           if (tile.syncDimensions) {
             matchReport.total += 1;
             var fn = tileFilename(pg.name, si, ti, 'sync').toLowerCase();
-            if (imageMap[fn]) {
-              matchReport.matched += 1;
-            } else {
+            if (imageMap[fn]) { matchReport.matched += 1; } else {
               matchReport.missing.push({ page: pg.name, section: si + 1, tile: ti + 1, filename: tileFilename(pg.name, si, ti, 'sync') });
             }
           } else {
@@ -999,169 +1020,273 @@ function PreviewMode({ store, onClose }) {
   }
   var matchPct = matchReport.total > 0 ? Math.round((matchReport.matched / matchReport.total) * 100) : 0;
 
+  // Find hero tile and its image
+  var heroTile = null;
+  var heroPageName = null;
+  var heroSecIdx = 0;
+  var heroTileIdx = 0;
+  (store.pages || []).forEach(function(pg) {
+    if (heroTile) return;
+    (pg.sections || []).forEach(function(sec, si) {
+      if (heroTile) return;
+      (sec.tiles || []).forEach(function(tile, ti) {
+        if (!heroTile && tile.imageCategory === 'store_hero') {
+          heroTile = tile;
+          heroPageName = pg.name;
+          heroSecIdx = si;
+          heroTileIdx = ti;
+        }
+      });
+    });
+  });
+
+  var heroImgSrc = null;
+  if (heroTile && heroPageName) {
+    if (heroTile.syncDimensions) {
+      heroImgSrc = findTileImage(heroPageName, heroSecIdx, heroTileIdx, 'sync');
+    } else {
+      heroImgSrc = findTileImage(heroPageName, heroSecIdx, heroTileIdx, pvMode);
+      if (!heroImgSrc) heroImgSrc = findTileImage(heroPageName, heroSecIdx, heroTileIdx, pvMode === 'desktop' ? 'mobile' : 'desktop');
+      if (!heroImgSrc) heroImgSrc = findTileImage(heroPageName, heroSecIdx, heroTileIdx, 'sync');
+    }
+    if (!heroImgSrc) heroImgSrc = pvMode === 'desktop' ? (heroTile.uploadedImage || null) : (heroTile.uploadedImageMobile || heroTile.uploadedImage || null);
+  }
+
+  var isMobile = pvMode === 'mobile';
+  var storeWidth = isMobile ? 414 : 1500;
+  var MAX_NAV_TABS = isMobile ? 4 : 6;
+  var visibleTabs = topPages.slice(0, MAX_NAV_TABS);
+  var overflowTabs = topPages.slice(MAX_NAV_TABS);
+
   return (
-    <div style={{ position: 'fixed', inset: 0, zIndex: 9999, background: '#fff', display: 'flex', flexDirection: 'column' }}>
-      {/* Preview header */}
-      <div style={{ background: '#1e293b', color: '#fff', padding: '10px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
-        <span style={{ fontWeight: 700, fontSize: 14 }}>Preview — {store.brandName || 'Store'}</span>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          {/* Folder loader */}
+    <div style={{ position: 'fixed', inset: 0, zIndex: 9999, background: '#232f3e', display: 'flex', flexDirection: 'column' }}>
+      {/* ─── TOOLBAR (our app controls) ─── */}
+      <div style={{ background: '#1a1a2e', color: '#fff', padding: '6px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0, fontSize: 12, borderBottom: '1px solid rgba(255,255,255,.1)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <span style={{ fontWeight: 700, fontSize: 13, opacity: 0.7 }}>Preview</span>
           <input ref={fileInputRef} type="file" webkitdirectory="" directory="" multiple style={{ display: 'none' }} onChange={handleFolderSelect} />
           <button onClick={function() { fileInputRef.current && fileInputRef.current.click(); }}
-            style={{ background: loadedCount > 0 ? '#22c55e' : '#3b82f6', color: '#fff', border: 'none', borderRadius: 4, padding: '4px 14px', fontSize: 11, cursor: 'pointer', fontWeight: 600 }}>
-            {loadedCount > 0 ? '+ Add Folder (' + folderNames.length + ' loaded)' : 'Load Image Folder'}
+            style={{ background: loadedCount > 0 ? '#22c55e' : '#3b82f6', color: '#fff', border: 'none', borderRadius: 3, padding: '3px 12px', fontSize: 10, cursor: 'pointer', fontWeight: 600 }}>
+            {loadedCount > 0 ? '+ Folder (' + folderNames.length + ')' : 'Load Folder'}
           </button>
           {loadedCount > 0 && (
-            <button onClick={handleResetImages}
-              style={{ background: 'rgba(239,68,68,.15)', color: '#fca5a5', border: '1px solid rgba(239,68,68,.3)', borderRadius: 4, padding: '4px 10px', fontSize: 10, cursor: 'pointer', fontWeight: 600 }}
-              title="Remove all loaded images">
-              Reset
-            </button>
+            <button onClick={handleResetImages} style={{ background: 'transparent', color: '#fca5a5', border: '1px solid rgba(239,68,68,.3)', borderRadius: 3, padding: '2px 8px', fontSize: 9, cursor: 'pointer' }}>Reset</button>
           )}
-          {/* Match report toggle */}
           {loadedCount > 0 && (
             <button onClick={function() { setShowReport(!showReport); }}
-              style={{ background: matchPct === 100 ? 'rgba(34,197,94,.2)' : 'rgba(251,191,36,.2)', color: matchPct === 100 ? '#22c55e' : '#fbbf24', border: '1px solid ' + (matchPct === 100 ? 'rgba(34,197,94,.4)' : 'rgba(251,191,36,.4)'), borderRadius: 4, padding: '4px 12px', fontSize: 11, cursor: 'pointer', fontWeight: 700 }}>
+              style={{ background: matchPct === 100 ? 'rgba(34,197,94,.15)' : 'rgba(251,191,36,.15)', color: matchPct === 100 ? '#4ade80' : '#fbbf24', border: 'none', borderRadius: 3, padding: '2px 10px', fontSize: 10, cursor: 'pointer', fontWeight: 700 }}>
               {matchPct}% matched
             </button>
           )}
-          <div style={{ width: 1, height: 20, background: 'rgba(255,255,255,.2)' }} />
-          <button onClick={function() { setPvMode('desktop'); }} style={{ background: pvMode === 'desktop' ? '#3b82f6' : 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,.25)', borderRadius: 4, padding: '4px 12px', fontSize: 11, cursor: 'pointer' }}>Desktop</button>
-          <button onClick={function() { setPvMode('mobile'); }} style={{ background: pvMode === 'mobile' ? '#3b82f6' : 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,.25)', borderRadius: 4, padding: '4px 12px', fontSize: 11, cursor: 'pointer' }}>Mobile</button>
-          <button onClick={onClose} style={{ background: '#ef4444', color: '#fff', border: 'none', borderRadius: 4, padding: '4px 14px', fontSize: 11, cursor: 'pointer', fontWeight: 600, marginLeft: 12 }}>Close</button>
+          {loadedCount > 0 && (
+            <button onClick={function() { setShowFilenames(!showFilenames); }}
+              style={{ background: showFilenames ? 'rgba(99,102,241,.3)' : 'transparent', color: '#a5b4fc', border: '1px solid rgba(99,102,241,.3)', borderRadius: 3, padding: '2px 10px', fontSize: 10, cursor: 'pointer', fontWeight: 600 }}>
+              {showFilenames ? 'Hide Names' : 'Show Names'}
+            </button>
+          )}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <button onClick={function() { setPvMode('desktop'); }} style={{ background: pvMode === 'desktop' ? '#3b82f6' : 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,.2)', borderRadius: 3, padding: '2px 10px', fontSize: 10, cursor: 'pointer' }}>Desktop</button>
+          <button onClick={function() { setPvMode('mobile'); }} style={{ background: pvMode === 'mobile' ? '#3b82f6' : 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,.2)', borderRadius: 3, padding: '2px 10px', fontSize: 10, cursor: 'pointer' }}>Mobile</button>
+          <button onClick={onClose} style={{ background: '#ef4444', color: '#fff', border: 'none', borderRadius: 3, padding: '3px 12px', fontSize: 10, cursor: 'pointer', fontWeight: 600, marginLeft: 8 }}>Close</button>
         </div>
       </div>
-      {/* Page tabs */}
-      <div style={{ background: '#f1f5f9', padding: '6px 20px', display: 'flex', gap: 6, flexWrap: 'wrap', borderBottom: '1px solid #e2e8f0', flexShrink: 0 }}>
-        {pages.filter(function(p) { return !p.parentId; }).map(function(pg) {
-          return <button key={pg.id} onClick={function() { setPvPage(pg.id); }} style={{ background: pg.id === pvPage ? '#3b82f6' : '#fff', color: pg.id === pvPage ? '#fff' : '#334155', border: '1px solid #cbd5e1', borderRadius: 4, padding: '3px 12px', fontSize: 11, cursor: 'pointer' }}>{pg.name}</button>;
-        })}
-      </div>
 
-      {/* ─── MATCH REPORT PANEL ─── */}
+      {/* ─── MATCH REPORT (collapsible) ─── */}
       {loadedCount > 0 && showReport && (
-        <div style={{ background: matchPct === 100 ? '#f0fdf4' : '#fffbeb', borderBottom: '1px solid ' + (matchPct === 100 ? '#bbf7d0' : '#fde68a'), padding: '12px 20px', maxHeight: 260, overflow: 'auto' }}>
-          {/* Progress bar */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
-            <div style={{ flex: 1, height: 6, background: '#e2e8f0', borderRadius: 3, overflow: 'hidden' }}>
-              <div style={{ width: matchPct + '%', height: '100%', background: matchPct === 100 ? '#22c55e' : '#f59e0b', borderRadius: 3, transition: 'width .3s' }} />
+        <div style={{ background: matchPct === 100 ? '#f0fdf4' : '#fffbeb', borderBottom: '1px solid ' + (matchPct === 100 ? '#bbf7d0' : '#fde68a'), padding: '10px 20px', maxHeight: 220, overflow: 'auto', flexShrink: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
+            <div style={{ flex: 1, height: 5, background: '#e2e8f0', borderRadius: 3, overflow: 'hidden' }}>
+              <div style={{ width: matchPct + '%', height: '100%', background: matchPct === 100 ? '#22c55e' : '#f59e0b', borderRadius: 3 }} />
             </div>
-            <span style={{ fontSize: 13, fontWeight: 700, color: matchPct === 100 ? '#16a34a' : '#d97706', minWidth: 40 }}>{matchPct}%</span>
+            <span style={{ fontSize: 12, fontWeight: 700, color: matchPct === 100 ? '#16a34a' : '#d97706' }}>{matchPct}%</span>
           </div>
-          <div style={{ fontSize: 12, color: '#334155', marginBottom: 6 }}>
-            <strong>{matchReport.matched}</strong> of <strong>{matchReport.total}</strong> images matched successfully
-            {matchReport.missing.length > 0 && <span style={{ color: '#dc2626' }}> — <strong>{matchReport.missing.length}</strong> missing</span>}
+          <div style={{ fontSize: 11, color: '#334155', marginBottom: 4 }}>
+            <strong>{matchReport.matched}</strong> / <strong>{matchReport.total}</strong> matched
+            {matchReport.missing.length > 0 && <span style={{ color: '#dc2626' }}> — {matchReport.missing.length} missing</span>}
           </div>
-
-          {/* Missing files list */}
           {matchReport.missing.length > 0 && (
-            <div style={{ marginTop: 8 }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: '#dc2626', marginBottom: 4 }}>Missing images:</div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-                {matchReport.missing.map(function(m, i) {
-                  return (
-                    <div key={i} style={{ background: '#fff', border: '1px solid #fecaca', borderRadius: 4, padding: '3px 8px', fontSize: 10 }}>
-                      <span style={{ color: '#64748b' }}>{m.page} &middot; S{m.section} &middot; T{m.tile}</span>
-                      <span style={{ fontFamily: 'monospace', color: '#dc2626', marginLeft: 6 }}>{m.filename}</span>
-                    </div>
-                  );
-                })}
-              </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 3, marginTop: 6 }}>
+              {matchReport.missing.map(function(m, i) {
+                return (
+                  <div key={i} style={{ background: '#fff', border: '1px solid #fecaca', borderRadius: 3, padding: '2px 6px', fontSize: 9 }}>
+                    <span style={{ color: '#64748b' }}>{m.page} S{m.section} T{m.tile}</span>
+                    <span style={{ fontFamily: 'monospace', color: '#dc2626', marginLeft: 4 }}>{m.filename}</span>
+                  </div>
+                );
+              })}
             </div>
           )}
-
-          {/* All matched message */}
           {matchReport.missing.length === 0 && (
-            <div style={{ fontSize: 12, color: '#16a34a', fontWeight: 600 }}>All images matched successfully!</div>
+            <div style={{ fontSize: 11, color: '#16a34a', fontWeight: 600 }}>All images matched!</div>
           )}
         </div>
       )}
 
-      {/* Instructions banner (if no images loaded) */}
-      {loadedCount === 0 && (
-        <div style={{ background: '#eff6ff', borderBottom: '1px solid #bfdbfe', padding: '10px 20px', fontSize: 12, color: '#1e40af', textAlign: 'center' }}>
-          Click <strong>"Load Image Folder"</strong> and select a parent folder — all subfolders are scanned automatically. Images are matched by filename (e.g. <code>Homepage_S1_T1_desktop.jpg</code>). You can load multiple folders and results are merged.
-        </div>
-      )}
-      {/* Loaded folders info */}
-      {folderNames.length > 0 && (
-        <div style={{ background: '#f0f9ff', borderBottom: '1px solid #bae6fd', padding: '6px 20px', fontSize: 11, color: '#0369a1', display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-          <span style={{ fontWeight: 600 }}>{folderNames.length} folder{folderNames.length > 1 ? 's' : ''} loaded:</span>
-          {folderNames.map(function(fn, i) {
-            return <span key={i} style={{ background: '#e0f2fe', padding: '1px 8px', borderRadius: 3, fontSize: 10 }}>{fn}</span>;
-          })}
-          <span style={{ color: '#64748b' }}>&middot; {loadedCount} images matched</span>
-        </div>
-      )}
-      {/* Preview content */}
-      <div style={{ flex: 1, overflow: 'auto', display: 'flex', justifyContent: 'center', background: '#f8fafc', padding: 20 }}>
-        <div style={{ width: pvMode === 'desktop' ? 1500 : 414, maxWidth: '100%' }}>
-          {activePg && activePg.sections.map(function(sec, si) {
-            var layout = findLayout(sec.layoutId);
-            var isMobile = pvMode === 'mobile';
-            var config = getGridConfig(layout, isMobile);
-            var tileDims = LAYOUT_TILE_DIMS[sec.layoutId] || [];
-            // Compute section aspect ratio from the grid config or fallback from first tile
-            var sectionGridStyle = Object.assign({}, config.gridStyle, { display: 'grid', gap: 4, width: '100%' });
-            // For layouts with aspectRatio set by getGridConfig, keep it
-            // For layouts without, compute from tile dimensions
-            if (!sectionGridStyle.aspectRatio && tileDims.length > 0) {
-              var firstDim = tileDims[0] || { w: 1500, h: 600 };
-              // Full width: single tile aspect
-              if (layout.cells === 1) {
-                sectionGridStyle.aspectRatio = String(firstDim.w / firstDim.h);
-              }
-            }
-            return (
-              <div key={sec.id} style={{ marginBottom: 8 }}>
-                <div style={sectionGridStyle}>
-                  {sec.tiles.map(function(tile, ti) {
-                    var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
-                    var tileStyle = Object.assign({}, config.getTileStyle(ti), { position: 'relative', background: tile.bgColor || '#e2e8f0', borderRadius: 4, overflow: 'hidden', minHeight: 0 });
-                    // Try to find matched image from loaded folder
-                    var imgSrc = null;
-                    if (!isProduct && tile.type !== 'text') {
-                      if (tile.syncDimensions) {
-                        imgSrc = findTileImage(activePg.name, si, ti, 'sync');
-                      } else {
-                        imgSrc = findTileImage(activePg.name, si, ti, pvMode);
-                        if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, pvMode === 'desktop' ? 'mobile' : 'desktop');
-                        if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, 'sync');
-                      }
-                    }
-                    // Also fall back to any uploaded image on the tile itself
-                    if (!imgSrc) {
-                      imgSrc = pvMode === 'desktop' ? tile.uploadedImage : (tile.uploadedImageMobile || tile.uploadedImage);
-                    }
-                    var expectedFilename = (!isProduct && tile.type !== 'text') ? tileFilename(activePg.name, si, ti, tile.syncDimensions ? 'sync' : pvMode) : null;
-                    return (
-                      <div key={ti} style={tileStyle}>
-                        {imgSrc ? (
-                          <img src={imgSrc} alt={'Tile ' + (ti + 1)} style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
-                        ) : (
-                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: 12, gap: 4, width: '100%', height: '100%', minHeight: 60 }}>
-                            {isProduct ? 'Product Grid' : (
-                              <span>
-                                {expectedFilename ? (
-                                  <span style={{ fontFamily: 'monospace', fontSize: 10 }}>{expectedFilename}</span>
-                                ) : 'No image'}
-                              </span>
-                            )}
-                          </div>
-                        )}
-                        {tile.textOverlay && (
-                          <div style={{ position: 'absolute', bottom: 12, left: 16, right: 16, color: '#fff', fontSize: 14, fontWeight: 600, textShadow: '0 1px 4px rgba(0,0,0,.5)' }}>{tile.textOverlay}</div>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
+      {/* ─── AMAZON STORE PREVIEW ─── */}
+      <div style={{ flex: 1, overflow: 'auto', background: isMobile ? '#f5f5f5' : '#e3e6e6', display: 'flex', justifyContent: 'center' }}>
+        <div style={{ width: storeWidth, maxWidth: '100%', background: '#fff', minHeight: '100%', boxShadow: isMobile ? 'none' : '0 0 40px rgba(0,0,0,.15)' }}>
+
+          {/* ─── HERO BANNER (full width, like Amazon) ─── */}
+          <div style={{ width: '100%', aspectRatio: isMobile ? '1242/450' : '3000/600', background: '#232f3e', position: 'relative', overflow: 'hidden' }}>
+            {heroImgSrc ? (
+              <img src={heroImgSrc} alt="Store Hero" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', color: 'rgba(255,255,255,.4)' }}>
+                <div style={{ fontSize: isMobile ? 14 : 20, fontWeight: 700, marginBottom: 4 }}>Store Hero Image</div>
+                <div style={{ fontSize: isMobile ? 10 : 13, opacity: 0.6 }}>{isMobile ? '1242 \u00D7 450' : '3000 \u00D7 600'}px</div>
               </div>
-            );
-          })}
-          {(!activePg || activePg.sections.length === 0) && <div style={{ textAlign: 'center', color: '#94a3b8', padding: 40 }}>No sections on this page.</div>}
+            )}
+            {showFilenames && heroTile && heroPageName && (
+              <div style={{ position: 'absolute', bottom: 6, left: 8, background: 'rgba(0,0,0,.7)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 9, padding: '2px 6px', borderRadius: 2 }}>
+                {tileFilename(heroPageName, heroSecIdx, heroTileIdx, heroTile.syncDimensions ? 'sync' : pvMode)}
+              </div>
+            )}
+          </div>
+
+          {/* ─── BRAND BAR (like Amazon brand logo strip) ─── */}
+          <div style={{ background: '#fff', borderBottom: '1px solid #e0e0e0', padding: isMobile ? '10px 12px' : '12px 24px', display: 'flex', alignItems: 'center', gap: 12 }}>
+            <div style={{ width: isMobile ? 36 : 48, height: isMobile ? 36 : 48, borderRadius: '50%', background: '#232f3e', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, fontSize: isMobile ? 14 : 18, flexShrink: 0 }}>
+              {(store.brandName || 'B').charAt(0).toUpperCase()}
+            </div>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: isMobile ? 14 : 18, color: '#0f1111', lineHeight: 1.2 }}>{store.brandName || 'Brand Store'}</div>
+              {store.heroMessage && <div style={{ fontSize: isMobile ? 11 : 12, color: '#565959', marginTop: 2 }}>{store.heroMessage}</div>}
+            </div>
+          </div>
+
+          {/* ─── NAVIGATION BAR (Amazon-style tabs) ─── */}
+          <div style={{ background: '#fff', borderBottom: '2px solid #e0e0e0', padding: '0 ' + (isMobile ? '8px' : '24px'), display: 'flex', alignItems: 'stretch', position: 'relative', overflow: 'visible' }}>
+            {visibleTabs.map(function(pg) {
+              var isActive = pg.id === pvPage || (childrenMap[pg.id] || []).some(function(c) { return c.id === pvPage; });
+              var isHovered = hoveredTab === pg.id;
+              var children = childrenMap[pg.id] || [];
+              return (
+                <div key={pg.id} style={{ position: 'relative' }}
+                  onMouseEnter={function() { setHoveredTab(pg.id); }}
+                  onMouseLeave={function() { setHoveredTab(null); }}>
+                  <button onClick={function() { setPvPage(pg.id); }}
+                    style={{
+                      background: 'transparent', border: 'none', borderBottom: isActive ? '3px solid #e77600' : '3px solid transparent',
+                      padding: isMobile ? '10px 8px' : '12px 16px', fontSize: isMobile ? 11 : 13, fontWeight: isActive ? 700 : 400,
+                      color: isActive ? '#c45500' : '#0f1111', cursor: 'pointer', whiteSpace: 'nowrap',
+                      transition: 'border-color .15s, color .15s'
+                    }}>
+                    {pg.name}
+                  </button>
+                  {/* Submenu dropdown on hover */}
+                  {children.length > 0 && isHovered && (
+                    <div style={{ position: 'absolute', top: '100%', left: 0, background: '#fff', border: '1px solid #d5d9d9', borderRadius: '0 0 4px 4px', boxShadow: '0 4px 12px rgba(0,0,0,.15)', zIndex: 100, minWidth: 180, padding: '4px 0' }}>
+                      {children.map(function(child) {
+                        var childActive = child.id === pvPage;
+                        return (
+                          <button key={child.id} onClick={function() { setPvPage(child.id); setHoveredTab(null); }}
+                            style={{ display: 'block', width: '100%', textAlign: 'left', background: childActive ? '#f0f0f0' : 'transparent', border: 'none', padding: '8px 16px', fontSize: 12, color: childActive ? '#c45500' : '#0f1111', cursor: 'pointer', fontWeight: childActive ? 600 : 400 }}>
+                            {child.name}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+            {overflowTabs.length > 0 && (
+              <div style={{ position: 'relative' }} ref={morePopupRef}>
+                <button onClick={function() { setMoreOpen(!moreOpen); }}
+                  style={{ background: 'transparent', border: 'none', borderBottom: '3px solid transparent', padding: isMobile ? '10px 8px' : '12px 16px', fontSize: isMobile ? 11 : 13, color: '#0f1111', cursor: 'pointer' }}>
+                  Mehr &#9662;
+                </button>
+                {moreOpen && (
+                  <div style={{ position: 'absolute', top: '100%', right: 0, background: '#fff', border: '1px solid #d5d9d9', borderRadius: '0 0 4px 4px', boxShadow: '0 4px 12px rgba(0,0,0,.15)', zIndex: 100, minWidth: 200, padding: '4px 0' }}>
+                    {overflowTabs.map(function(pg) {
+                      return (
+                        <button key={pg.id} onClick={function() { setPvPage(pg.id); setMoreOpen(false); }}
+                          style={{ display: 'block', width: '100%', textAlign: 'left', background: pg.id === pvPage ? '#f0f0f0' : 'transparent', border: 'none', padding: '8px 16px', fontSize: 12, color: pg.id === pvPage ? '#c45500' : '#0f1111', cursor: 'pointer' }}>
+                          {pg.name}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* ─── PAGE CONTENT (sections) ─── */}
+          <div style={{ padding: isMobile ? '0' : '0' }}>
+            {activePg && activePg.sections.map(function(sec, si) {
+              var layout = findLayout(sec.layoutId);
+              var config = getGridConfig(layout, isMobile);
+              var tileDims = LAYOUT_TILE_DIMS[sec.layoutId] || [];
+              var sectionGridStyle = Object.assign({}, config.gridStyle, { display: 'grid', gap: 0, width: '100%' });
+              if (!sectionGridStyle.aspectRatio && tileDims.length > 0) {
+                var firstDim = tileDims[0] || { w: 1500, h: 600 };
+                if (layout.cells === 1) {
+                  sectionGridStyle.aspectRatio = String(firstDim.w / firstDim.h);
+                }
+              }
+              return (
+                <div key={sec.id} style={{ marginBottom: 0 }}>
+                  <div style={sectionGridStyle}>
+                    {sec.tiles.map(function(tile, ti) {
+                      var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
+                      var tileStyle = Object.assign({}, config.getTileStyle(ti), { position: 'relative', background: tile.bgColor || '#f5f5f5', overflow: 'hidden', minHeight: 0 });
+                      var imgSrc = null;
+                      if (!isProduct && tile.type !== 'text') {
+                        if (tile.syncDimensions) {
+                          imgSrc = findTileImage(activePg.name, si, ti, 'sync');
+                        } else {
+                          imgSrc = findTileImage(activePg.name, si, ti, pvMode);
+                          if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, pvMode === 'desktop' ? 'mobile' : 'desktop');
+                          if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, 'sync');
+                        }
+                      }
+                      if (!imgSrc) {
+                        imgSrc = pvMode === 'desktop' ? tile.uploadedImage : (tile.uploadedImageMobile || tile.uploadedImage);
+                      }
+                      var expectedFilename = (!isProduct && tile.type !== 'text') ? tileFilename(activePg.name, si, ti, tile.syncDimensions ? 'sync' : pvMode) : null;
+                      return (
+                        <div key={ti} style={tileStyle}>
+                          {imgSrc ? (
+                            <img src={imgSrc} alt={'Tile ' + (ti + 1)} style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
+                          ) : (
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: isMobile ? 10 : 12, gap: 4, width: '100%', height: '100%', minHeight: isMobile ? 40 : 60, background: tile.bgColor || '#f0f0f0' }}>
+                              {isProduct ? (
+                                <span style={{ fontSize: isMobile ? 9 : 11, color: '#888' }}>Product Grid</span>
+                              ) : (
+                                <span style={{ fontFamily: 'monospace', fontSize: isMobile ? 8 : 10, color: '#aaa' }}>
+                                  {expectedFilename || 'No image'}
+                                </span>
+                              )}
+                            </div>
+                          )}
+                          {/* Filename overlay when toggled */}
+                          {showFilenames && expectedFilename && (
+                            <div style={{ position: 'absolute', bottom: 4, left: 4, background: 'rgba(0,0,0,.75)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 8, padding: '1px 5px', borderRadius: 2, maxWidth: '90%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                              {expectedFilename}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+            {(!activePg || activePg.sections.length === 0) && <div style={{ textAlign: 'center', color: '#94a3b8', padding: 60, fontSize: 14 }}>No sections on this page.</div>}
+          </div>
+
+          {/* End of store content */}
         </div>
       </div>
+
+      {/* Instructions banner (only if no images loaded, floating at bottom) */}
+      {loadedCount === 0 && (
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(30,41,59,.95)', padding: '12px 20px', fontSize: 12, color: '#93c5fd', textAlign: 'center', backdropFilter: 'blur(8px)' }}>
+          Click <strong>"Load Folder"</strong> to select a parent folder — all subfolders are scanned automatically. You can load multiple folders.
+        </div>
+      )}
     </div>
   );
 }
