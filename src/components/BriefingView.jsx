@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, findLayout } from '../constants';
 import { loadStoreByShareToken } from '../storage';
 // DOCX export removed — designer doesn't need it
-import SectionView from './SectionView';
+import SectionView, { getGridConfig } from './SectionView';
 
 var noop = function() {};
 
@@ -594,27 +594,35 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
       )}
 
       {/* ─── IMAGE COMPLETION CHECKMARKS ─── */}
-      {isImageTile && checks && toggleCheck && (
-        <div style={{ marginTop: 6, padding: '6px 0 2px', borderTop: '1px solid #f1f5f9' }}>
+      {isImageTile && checks && toggleCheck && (function() {
+        var syncDone = !!checks[checkBase + '/sync'];
+        var deskDone = !!checks[checkBase + '/desktop'];
+        var mobDone = !!checks[checkBase + '/mobile'];
+        var allDone = tile.syncDimensions ? syncDone : (deskDone && mobDone);
+        var checkBg = allDone ? '#dcfce7' : '#fef2f2';
+        var checkBorder = allDone ? '#86efac' : '#fecaca';
+        return (
+        <div style={{ marginTop: 6, padding: '8px 10px', borderRadius: 6, background: checkBg, border: '1px solid ' + checkBorder, transition: 'all .2s' }}>
           {tile.syncDimensions ? (
-            <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', fontSize: 11, color: checks[checkBase + '/sync'] ? '#16a34a' : '#64748b' }} onClick={function(e) { e.stopPropagation(); }}>
-              <input type="checkbox" checked={!!checks[checkBase + '/sync']} onChange={function() { toggleCheck(checkBase + '/sync'); }} style={{ accentColor: '#22c55e', width: 14, height: 14 }} />
-              Image done
+            <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: syncDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
+              <input type="checkbox" checked={syncDone} onChange={function() { toggleCheck(checkBase + '/sync'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
+              {syncDone ? 'Image done' : 'Image missing'}
             </label>
           ) : (
             <div style={{ display: 'flex', gap: 12 }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer', fontSize: 11, color: checks[checkBase + '/desktop'] ? '#16a34a' : '#64748b' }} onClick={function(e) { e.stopPropagation(); }}>
-                <input type="checkbox" checked={!!checks[checkBase + '/desktop']} onChange={function() { toggleCheck(checkBase + '/desktop'); }} style={{ accentColor: '#22c55e', width: 14, height: 14 }} />
-                Desktop
+              <label style={{ display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: deskDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
+                <input type="checkbox" checked={deskDone} onChange={function() { toggleCheck(checkBase + '/desktop'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
+                Desktop {deskDone ? '\u2713' : '\u2717'}
               </label>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer', fontSize: 11, color: checks[checkBase + '/mobile'] ? '#16a34a' : '#64748b' }} onClick={function(e) { e.stopPropagation(); }}>
-                <input type="checkbox" checked={!!checks[checkBase + '/mobile']} onChange={function() { toggleCheck(checkBase + '/mobile'); }} style={{ accentColor: '#22c55e', width: 14, height: 14 }} />
-                Mobile
+              <label style={{ display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: mobDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
+                <input type="checkbox" checked={mobDone} onChange={function() { toggleCheck(checkBase + '/mobile'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
+                Mobile {mobDone ? '\u2713' : '\u2717'}
               </label>
             </div>
           )}
         </div>
-      )}
+        );
+      })()}
     </div>
   );
 }
@@ -893,40 +901,62 @@ function PreviewMode({ store, onClose }) {
   // Build the filename map for matching
   var fnMap = buildFilenameMap(store);
 
+  var [folderNames, setFolderNames] = useState([]); // track loaded folder names
+
   function handleFolderSelect(e) {
     var files = e.target.files;
     if (!files || files.length === 0) return;
-    setTotalFiles(files.length);
-    var matched = {};
-    var matchCount = 0;
+    // Extract folder name from first file's relative path
+    var firstPath = files[0] && files[0].webkitRelativePath ? files[0].webkitRelativePath : '';
+    var folderName = firstPath ? firstPath.split('/')[0] : 'Folder';
+    // Only add unique image files (filter non-image files from the selection)
+    var imageExts = /\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i;
+    // Merge with existing imageMap (accumulate across multiple folder loads)
+    var merged = Object.assign({}, imageMap);
+    var newMatchCount = 0;
     for (var i = 0; i < files.length; i++) {
       var file = files[i];
-      // Get just the filename without path (webkitRelativePath includes folder structure)
+      if (!imageExts.test(file.name)) continue;
       var name = file.name.toLowerCase();
-      // Also try without extension for flexible matching
-      var nameNoExt = name.replace(/\.(jpg|jpeg|png|webp|gif|svg)$/i, '');
+      var nameNoExt = name.replace(/\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i, '');
       // Try exact match first, then without extension
-      if (fnMap[name]) {
-        matched[name] = URL.createObjectURL(file);
-        matchCount++;
-      } else if (fnMap[nameNoExt + '.jpg']) {
-        matched[nameNoExt + '.jpg'] = URL.createObjectURL(file);
-        matchCount++;
+      if (fnMap[name] && !merged[name]) {
+        merged[name] = URL.createObjectURL(file);
+        newMatchCount++;
+      } else if (fnMap[nameNoExt + '.jpg'] && !merged[nameNoExt + '.jpg']) {
+        merged[nameNoExt + '.jpg'] = URL.createObjectURL(file);
+        newMatchCount++;
       } else {
         // Try matching by removing extra prefixes/suffixes and normalizing
         var keys = Object.keys(fnMap);
         for (var k = 0; k < keys.length; k++) {
+          if (merged[keys[k]]) continue; // already matched
           var keyBase = keys[k].replace('.jpg', '');
           if (nameNoExt === keyBase || nameNoExt.indexOf(keyBase) >= 0 || keyBase.indexOf(nameNoExt) >= 0) {
-            matched[keys[k]] = URL.createObjectURL(file);
-            matchCount++;
+            merged[keys[k]] = URL.createObjectURL(file);
+            newMatchCount++;
             break;
           }
         }
       }
     }
-    setImageMap(matched);
-    setLoadedCount(matchCount);
+    setImageMap(merged);
+    setLoadedCount(Object.keys(merged).length);
+    setTotalFiles(function(prev) { return prev + files.length; });
+    if (folderNames.indexOf(folderName) < 0) {
+      setFolderNames(function(prev) { return prev.concat(folderName); });
+    }
+    // Reset file input so the same folder can be re-selected
+    e.target.value = '';
+  }
+
+  function handleResetImages() {
+    // Revoke all object URLs to free memory
+    Object.values(imageMap).forEach(function(url) { try { URL.revokeObjectURL(url); } catch(e) {} });
+    setImageMap({});
+    setLoadedCount(0);
+    setTotalFiles(0);
+    setFolderNames([]);
   }
 
   var [showReport, setShowReport] = useState(false);
@@ -979,8 +1009,15 @@ function PreviewMode({ store, onClose }) {
           <input ref={fileInputRef} type="file" webkitdirectory="" directory="" multiple style={{ display: 'none' }} onChange={handleFolderSelect} />
           <button onClick={function() { fileInputRef.current && fileInputRef.current.click(); }}
             style={{ background: loadedCount > 0 ? '#22c55e' : '#3b82f6', color: '#fff', border: 'none', borderRadius: 4, padding: '4px 14px', fontSize: 11, cursor: 'pointer', fontWeight: 600 }}>
-            {loadedCount > 0 ? loadedCount + ' images loaded' : 'Load Image Folder'}
+            {loadedCount > 0 ? '+ Add Folder (' + folderNames.length + ' loaded)' : 'Load Image Folder'}
           </button>
+          {loadedCount > 0 && (
+            <button onClick={handleResetImages}
+              style={{ background: 'rgba(239,68,68,.15)', color: '#fca5a5', border: '1px solid rgba(239,68,68,.3)', borderRadius: 4, padding: '4px 10px', fontSize: 10, cursor: 'pointer', fontWeight: 600 }}
+              title="Remove all loaded images">
+              Reset
+            </button>
+          )}
           {/* Match report toggle */}
           {loadedCount > 0 && (
             <button onClick={function() { setShowReport(!showReport); }}
@@ -1043,59 +1080,82 @@ function PreviewMode({ store, onClose }) {
       {/* Instructions banner (if no images loaded) */}
       {loadedCount === 0 && (
         <div style={{ background: '#eff6ff', borderBottom: '1px solid #bfdbfe', padding: '10px 20px', fontSize: 12, color: '#1e40af', textAlign: 'center' }}>
-          Click <strong>"Load Image Folder"</strong> and select your Google Drive sync folder or the folder where you saved the images. Files are matched automatically by filename (e.g. <code>Homepage_S1_T1_desktop.jpg</code>).
+          Click <strong>"Load Image Folder"</strong> and select a parent folder — all subfolders are scanned automatically. Images are matched by filename (e.g. <code>Homepage_S1_T1_desktop.jpg</code>). You can load multiple folders and results are merged.
+        </div>
+      )}
+      {/* Loaded folders info */}
+      {folderNames.length > 0 && (
+        <div style={{ background: '#f0f9ff', borderBottom: '1px solid #bae6fd', padding: '6px 20px', fontSize: 11, color: '#0369a1', display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+          <span style={{ fontWeight: 600 }}>{folderNames.length} folder{folderNames.length > 1 ? 's' : ''} loaded:</span>
+          {folderNames.map(function(fn, i) {
+            return <span key={i} style={{ background: '#e0f2fe', padding: '1px 8px', borderRadius: 3, fontSize: 10 }}>{fn}</span>;
+          })}
+          <span style={{ color: '#64748b' }}>&middot; {loadedCount} images matched</span>
         </div>
       )}
       {/* Preview content */}
       <div style={{ flex: 1, overflow: 'auto', display: 'flex', justifyContent: 'center', background: '#f8fafc', padding: 20 }}>
         <div style={{ width: pvMode === 'desktop' ? 1500 : 414, maxWidth: '100%' }}>
           {activePg && activePg.sections.map(function(sec, si) {
+            var layout = findLayout(sec.layoutId);
+            var isMobile = pvMode === 'mobile';
+            var config = getGridConfig(layout, isMobile);
+            var tileDims = LAYOUT_TILE_DIMS[sec.layoutId] || [];
+            // Compute section aspect ratio from the grid config or fallback from first tile
+            var sectionGridStyle = Object.assign({}, config.gridStyle, { display: 'grid', gap: 4, width: '100%' });
+            // For layouts with aspectRatio set by getGridConfig, keep it
+            // For layouts without, compute from tile dimensions
+            if (!sectionGridStyle.aspectRatio && tileDims.length > 0) {
+              var firstDim = tileDims[0] || { w: 1500, h: 600 };
+              // Full width: single tile aspect
+              if (layout.cells === 1) {
+                sectionGridStyle.aspectRatio = String(firstDim.w / firstDim.h);
+              }
+            }
             return (
-              <div key={sec.id} style={{ marginBottom: 16 }}>
-                {sec.tiles.map(function(tile, ti) {
-                  var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
-                  var dimKey = pvMode === 'desktop' ? 'dimensions' : 'mobileDimensions';
-                  var dims = tile[dimKey] || tile.dimensions || { w: 1500, h: 600 };
-                  var aspect = dims.h / dims.w;
-                  // Try to find matched image from loaded folder
-                  var imgSrc = null;
-                  if (!isProduct && tile.type !== 'text') {
-                    if (tile.syncDimensions) {
-                      imgSrc = findTileImage(activePg.name, si, ti, 'sync');
-                    } else {
-                      imgSrc = findTileImage(activePg.name, si, ti, pvMode);
-                      // Fallback: try the other variant
-                      if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, pvMode === 'desktop' ? 'mobile' : 'desktop');
-                      // Fallback: try sync name
-                      if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, 'sync');
+              <div key={sec.id} style={{ marginBottom: 8 }}>
+                <div style={sectionGridStyle}>
+                  {sec.tiles.map(function(tile, ti) {
+                    var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
+                    var tileStyle = Object.assign({}, config.getTileStyle(ti), { position: 'relative', background: tile.bgColor || '#e2e8f0', borderRadius: 4, overflow: 'hidden', minHeight: 0 });
+                    // Try to find matched image from loaded folder
+                    var imgSrc = null;
+                    if (!isProduct && tile.type !== 'text') {
+                      if (tile.syncDimensions) {
+                        imgSrc = findTileImage(activePg.name, si, ti, 'sync');
+                      } else {
+                        imgSrc = findTileImage(activePg.name, si, ti, pvMode);
+                        if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, pvMode === 'desktop' ? 'mobile' : 'desktop');
+                        if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, 'sync');
+                      }
                     }
-                  }
-                  // Also fall back to any uploaded image on the tile itself
-                  if (!imgSrc) {
-                    imgSrc = pvMode === 'desktop' ? tile.uploadedImage : (tile.uploadedImageMobile || tile.uploadedImage);
-                  }
-                  var expectedFilename = (!isProduct && tile.type !== 'text') ? tileFilename(activePg.name, si, ti, tile.syncDimensions ? 'sync' : pvMode) : null;
-                  return (
-                    <div key={ti} style={{ width: '100%', paddingBottom: (aspect * 100) + '%', position: 'relative', background: tile.bgColor || '#e2e8f0', marginBottom: 4, borderRadius: 4, overflow: 'hidden' }}>
-                      {imgSrc ? (
-                        <img src={imgSrc} alt={'Tile ' + (ti + 1)} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-                      ) : (
-                        <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: 12, gap: 4 }}>
-                          {isProduct ? 'Product Grid' : (
-                            <span>
-                              {expectedFilename ? (
-                                <span style={{ fontFamily: 'monospace', fontSize: 10 }}>{expectedFilename}</span>
-                              ) : 'No image'}
-                            </span>
-                          )}
-                        </div>
-                      )}
-                      {tile.textOverlay && (
-                        <div style={{ position: 'absolute', bottom: 12, left: 16, right: 16, color: '#fff', fontSize: 14, fontWeight: 600, textShadow: '0 1px 4px rgba(0,0,0,.5)' }}>{tile.textOverlay}</div>
-                      )}
-                    </div>
-                  );
-                })}
+                    // Also fall back to any uploaded image on the tile itself
+                    if (!imgSrc) {
+                      imgSrc = pvMode === 'desktop' ? tile.uploadedImage : (tile.uploadedImageMobile || tile.uploadedImage);
+                    }
+                    var expectedFilename = (!isProduct && tile.type !== 'text') ? tileFilename(activePg.name, si, ti, tile.syncDimensions ? 'sync' : pvMode) : null;
+                    return (
+                      <div key={ti} style={tileStyle}>
+                        {imgSrc ? (
+                          <img src={imgSrc} alt={'Tile ' + (ti + 1)} style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
+                        ) : (
+                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: 12, gap: 4, width: '100%', height: '100%', minHeight: 60 }}>
+                            {isProduct ? 'Product Grid' : (
+                              <span>
+                                {expectedFilename ? (
+                                  <span style={{ fontFamily: 'monospace', fontSize: 10 }}>{expectedFilename}</span>
+                                ) : 'No image'}
+                              </span>
+                            )}
+                          </div>
+                        )}
+                        {tile.textOverlay && (
+                          <div style={{ position: 'absolute', bottom: 12, left: 16, right: 16, color: '#fff', fontSize: 14, fontWeight: 600, textShadow: '0 1px 4px rgba(0,0,0,.5)' }}>{tile.textOverlay}</div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             );
           })}

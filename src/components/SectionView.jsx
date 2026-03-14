@@ -14,7 +14,7 @@ function isTileSpanning(layoutId, tileIndex) {
 }
 
 // Compute grid style and per-tile positioning for complex layouts
-function getGridConfig(layout, isMobile) {
+export function getGridConfig(layout, isMobile) {
   var g = layout.grid;
 
   // ─── MOBILE ───
