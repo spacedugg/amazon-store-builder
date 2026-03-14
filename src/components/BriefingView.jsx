@@ -1106,6 +1106,42 @@ function PreviewMode({ store, onClose }) {
   );
 }
 
+// ─── META DESCRIPTIONS PANEL (click-to-copy) ───
+function MetaDescriptionsPanel({ pages, store }) {
+  var [copiedId, setCopiedId] = useState(null);
+
+  function handleCopy(pgId, text) {
+    navigator.clipboard.writeText(text).then(function() {
+      setCopiedId(pgId);
+      setTimeout(function() { setCopiedId(null); }, 1500);
+    });
+  }
+
+  return (
+    <div className="briefing-sidebar-section" style={{ background: '#f0fdf4', borderRadius: 8, margin: '0 8px 10px', padding: '10px 12px' }}>
+      <div className="briefing-sidebar-title" style={{ color: '#15803d', marginBottom: 6 }}>Meta Descriptions</div>
+      <div style={{ fontSize: 9, color: '#64748b', marginBottom: 6 }}>Click to copy</div>
+      {pages.map(function(pg) {
+        var md = generateMetaDescription(pg, store);
+        if (!md) return null;
+        var isCopied = copiedId === pg.id;
+        return (
+          <div key={pg.id}
+            onClick={function() { handleCopy(pg.id, md); }}
+            style={{ marginBottom: 6, padding: '6px 8px', background: isCopied ? '#dcfce7' : '#fff', border: '1px solid ' + (isCopied ? '#86efac' : '#e2e8f0'), borderRadius: 6, cursor: 'pointer', transition: 'all .2s' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ fontSize: 10, fontWeight: 700, color: '#334155' }}>{pg.name}</div>
+              <span style={{ fontSize: 9, color: isCopied ? '#16a34a' : '#94a3b8', fontWeight: 600 }}>{isCopied ? 'Copied!' : 'Click to copy'}</span>
+            </div>
+            <div style={{ fontSize: 10, color: '#475569', lineHeight: 1.4, marginTop: 2 }}>{md}</div>
+            <div style={{ fontSize: 9, color: '#94a3b8', marginTop: 2 }}>{md.length}/155 chars</div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 // ─── MAIN BRIEFING VIEW ───
 export default function BriefingView() {
   var [store, setStore] = useState(null);
@@ -1443,34 +1479,6 @@ export default function BriefingView() {
                 <div style={{ fontSize: 11, color: '#64748b' }}>{progress.done} / {progress.total} images completed</div>
               </div>
 
-              {/* ── Store Info ── */}
-              <div className="briefing-sidebar-section" style={{ background: '#f8fafc', borderRadius: 8, margin: '0 8px 10px', padding: '10px 12px' }}>
-                <div className="briefing-sidebar-title" style={{ color: '#0f766e' }}>Store Info</div>
-                <div className="briefing-info-row"><span>Brand:</span> <strong>{store.brandName || 'N/A'}</strong></div>
-                <div className="briefing-info-row"><span>Marketplace:</span> <strong>Amazon.{store.marketplace || 'de'}</strong></div>
-                <div className="briefing-info-row"><span>Pages:</span> <strong>{pages.length}</strong></div>
-                <div className="briefing-info-row"><span>Products (ASINs):</span> <strong>{(store.products || []).length}</strong></div>
-                {lastUpdated && (
-                  <div className="briefing-info-row"><span>Last Updated:</span> <strong>{new Date(lastUpdated).toLocaleString('en-US')}</strong></div>
-                )}
-              </div>
-
-              {/* ── Meta Descriptions per Page ── */}
-              <div className="briefing-sidebar-section" style={{ background: '#f0fdf4', borderRadius: 8, margin: '0 8px 10px', padding: '10px 12px' }}>
-                <div className="briefing-sidebar-title" style={{ color: '#15803d', marginBottom: 6 }}>Meta Descriptions</div>
-                {pages.map(function(pg) {
-                  var md = generateMetaDescription(pg, store);
-                  if (!md) return null;
-                  return (
-                    <div key={pg.id} style={{ marginBottom: 8 }}>
-                      <div style={{ fontSize: 10, fontWeight: 700, color: '#334155' }}>{pg.name}</div>
-                      <div style={{ fontSize: 10, color: '#475569', lineHeight: 1.4, marginTop: 2 }}>{md}</div>
-                      <div style={{ fontSize: 9, color: '#94a3b8' }}>{md.length}/155 chars</div>
-                    </div>
-                  );
-                })}
-              </div>
-
               {/* ── Upload Instructions ── */}
               <div className="briefing-sidebar-section" style={{ background: '#fef9c3', borderRadius: 8, margin: '0 8px 10px', padding: '10px 12px' }}>
                 <div className="briefing-sidebar-title" style={{ color: '#a16207' }}>Upload Instructions</div>
@@ -1494,6 +1502,21 @@ export default function BriefingView() {
                   </div>
                   <p style={{ marginTop: 6, fontSize: 10, color: '#92400e' }}>Tip: Use the Preview button to verify your images. Select the folder and images are matched automatically.</p>
                 </div>
+              </div>
+
+              {/* ── Meta Descriptions per Page (click to copy) ── */}
+              <MetaDescriptionsPanel pages={pages} store={store} />
+
+              {/* ── Store Info ── */}
+              <div className="briefing-sidebar-section" style={{ background: '#f8fafc', borderRadius: 8, margin: '0 8px 10px', padding: '10px 12px' }}>
+                <div className="briefing-sidebar-title" style={{ color: '#0f766e' }}>Store Info</div>
+                <div className="briefing-info-row"><span>Brand:</span> <strong>{store.brandName || 'N/A'}</strong></div>
+                <div className="briefing-info-row"><span>Marketplace:</span> <strong>Amazon.{store.marketplace || 'de'}</strong></div>
+                <div className="briefing-info-row"><span>Pages:</span> <strong>{pages.length}</strong></div>
+                <div className="briefing-info-row"><span>Products (ASINs):</span> <strong>{(store.products || []).length}</strong></div>
+                {lastUpdated && (
+                  <div className="briefing-info-row"><span>Last Updated:</span> <strong>{new Date(lastUpdated).toLocaleString('en-US')}</strong></div>
+                )}
               </div>
             </div>
           )}
