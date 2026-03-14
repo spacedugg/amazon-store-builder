@@ -594,27 +594,35 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
       )}
 
       {/* ─── IMAGE COMPLETION CHECKMARKS ─── */}
-      {isImageTile && checks && toggleCheck && (
-        <div style={{ marginTop: 6, padding: '6px 0 2px', borderTop: '1px solid #f1f5f9' }}>
+      {isImageTile && checks && toggleCheck && (function() {
+        var syncDone = !!checks[checkBase + '/sync'];
+        var deskDone = !!checks[checkBase + '/desktop'];
+        var mobDone = !!checks[checkBase + '/mobile'];
+        var allDone = tile.syncDimensions ? syncDone : (deskDone && mobDone);
+        var checkBg = allDone ? '#dcfce7' : '#fef2f2';
+        var checkBorder = allDone ? '#86efac' : '#fecaca';
+        return (
+        <div style={{ marginTop: 6, padding: '8px 10px', borderRadius: 6, background: checkBg, border: '1px solid ' + checkBorder, transition: 'all .2s' }}>
           {tile.syncDimensions ? (
-            <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', fontSize: 11, color: checks[checkBase + '/sync'] ? '#16a34a' : '#64748b' }} onClick={function(e) { e.stopPropagation(); }}>
-              <input type="checkbox" checked={!!checks[checkBase + '/sync']} onChange={function() { toggleCheck(checkBase + '/sync'); }} style={{ accentColor: '#22c55e', width: 14, height: 14 }} />
-              Image done
+            <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: syncDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
+              <input type="checkbox" checked={syncDone} onChange={function() { toggleCheck(checkBase + '/sync'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
+              {syncDone ? 'Image done' : 'Image missing'}
             </label>
           ) : (
             <div style={{ display: 'flex', gap: 12 }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer', fontSize: 11, color: checks[checkBase + '/desktop'] ? '#16a34a' : '#64748b' }} onClick={function(e) { e.stopPropagation(); }}>
-                <input type="checkbox" checked={!!checks[checkBase + '/desktop']} onChange={function() { toggleCheck(checkBase + '/desktop'); }} style={{ accentColor: '#22c55e', width: 14, height: 14 }} />
-                Desktop
+              <label style={{ display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: deskDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
+                <input type="checkbox" checked={deskDone} onChange={function() { toggleCheck(checkBase + '/desktop'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
+                Desktop {deskDone ? '\u2713' : '\u2717'}
               </label>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer', fontSize: 11, color: checks[checkBase + '/mobile'] ? '#16a34a' : '#64748b' }} onClick={function(e) { e.stopPropagation(); }}>
-                <input type="checkbox" checked={!!checks[checkBase + '/mobile']} onChange={function() { toggleCheck(checkBase + '/mobile'); }} style={{ accentColor: '#22c55e', width: 14, height: 14 }} />
-                Mobile
+              <label style={{ display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: mobDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
+                <input type="checkbox" checked={mobDone} onChange={function() { toggleCheck(checkBase + '/mobile'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
+                Mobile {mobDone ? '\u2713' : '\u2717'}
               </label>
             </div>
           )}
         </div>
-      )}
+        );
+      })()}
     </div>
   );
 }
