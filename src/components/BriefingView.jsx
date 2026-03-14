@@ -1261,23 +1261,6 @@ function PreviewMode({ store, onClose }) {
                               )}
                             </div>
                           )}
-                          {tile.textOverlay && (
-                            <div style={{ position: 'absolute', bottom: isMobile ? 8 : 16, left: isMobile ? 10 : 20, right: isMobile ? 10 : 20, color: '#fff', fontSize: isMobile ? 12 : 16, fontWeight: 700, textShadow: '0 1px 6px rgba(0,0,0,.6)', lineHeight: 1.3 }}>
-                              {tile.textOverlay}
-                              {tile.ctaText && (
-                                <div style={{ marginTop: 8, display: 'inline-block', background: '#ff9900', color: '#0f1111', padding: isMobile ? '4px 12px' : '6px 18px', borderRadius: 3, fontSize: isMobile ? 10 : 12, fontWeight: 700, textShadow: 'none' }}>
-                                  {tile.ctaText}
-                                </div>
-                              )}
-                            </div>
-                          )}
-                          {!tile.textOverlay && tile.ctaText && (
-                            <div style={{ position: 'absolute', bottom: isMobile ? 8 : 16, left: '50%', transform: 'translateX(-50%)' }}>
-                              <div style={{ background: '#ff9900', color: '#0f1111', padding: isMobile ? '4px 12px' : '6px 18px', borderRadius: 3, fontSize: isMobile ? 10 : 12, fontWeight: 700, whiteSpace: 'nowrap' }}>
-                                {tile.ctaText}
-                              </div>
-                            </div>
-                          )}
                           {/* Filename overlay when toggled */}
                           {showFilenames && expectedFilename && (
                             <div style={{ position: 'absolute', bottom: 4, left: 4, background: 'rgba(0,0,0,.75)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 8, padding: '1px 5px', borderRadius: 2, maxWidth: '90%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -1294,10 +1277,7 @@ function PreviewMode({ store, onClose }) {
             {(!activePg || activePg.sections.length === 0) && <div style={{ textAlign: 'center', color: '#94a3b8', padding: 60, fontSize: 14 }}>No sections on this page.</div>}
           </div>
 
-          {/* ─── FOOTER (Amazon-style) ─── */}
-          <div style={{ background: '#232f3e', padding: isMobile ? '16px 12px' : '24px 40px', color: 'rgba(255,255,255,.5)', fontSize: 11, textAlign: 'center', marginTop: 0 }}>
-            Brand Store Preview — {store.brandName || 'Store'}
-          </div>
+          {/* End of store content */}
         </div>
       </div>
 
