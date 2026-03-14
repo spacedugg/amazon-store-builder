@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, findLayout } from '../constants';
 import { loadStoreByShareToken } from '../storage';
-import { generateBriefingDocx, downloadBlob } from '../exportBriefing';
+// DOCX export removed — designer doesn't need it
 import SectionView from './SectionView';
 
 var noop = function() {};
@@ -184,6 +184,42 @@ function tileFingerprint(tile) {
   return [tile.type, tile.brief || '', tile.textOverlay || '', tile.ctaText || '', tile.imageCategory || '', tile.bgColor || '',
     (tile.dimensions || {}).w + 'x' + (tile.dimensions || {}).h,
     (tile.asins || []).join(',')].join('|');
+}
+
+// ─── TILE FILENAME GENERATOR ───
+// Creates canonical filenames for each image tile so designer + preview can match them.
+// Format: {PageName}_S{n}_T{n}_desktop.jpg / _mobile.jpg / .jpg (if synced)
+function sanitizeName(name) {
+  return (name || 'page').replace(/[^a-zA-Z0-9äöüÄÖÜß]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
+}
+
+function tileFilename(pageName, sectionIndex, tileIndex, variant) {
+  // variant: 'desktop', 'mobile', or 'sync'
+  var base = sanitizeName(pageName) + '_S' + (sectionIndex + 1) + '_T' + (tileIndex + 1);
+  if (variant === 'sync') return base + '.jpg';
+  return base + '_' + variant + '.jpg';
+}
+
+// Build a complete filename map for the entire store: { filename -> { pageId, secId, tileIndex, variant } }
+function buildFilenameMap(store) {
+  var map = {};
+  (store.pages || []).forEach(function(pg) {
+    (pg.sections || []).forEach(function(sec, si) {
+      (sec.tiles || []).forEach(function(tile, ti) {
+        if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text') return;
+        if (tile.syncDimensions) {
+          var fn = tileFilename(pg.name, si, ti, 'sync');
+          map[fn.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'sync' };
+        } else {
+          var fnD = tileFilename(pg.name, si, ti, 'desktop');
+          var fnM = tileFilename(pg.name, si, ti, 'mobile');
+          map[fnD.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'desktop' };
+          map[fnM.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'mobile' };
+        }
+      });
+    });
+  });
+  return map;
 }
 
 // Build a map of tile fingerprints → first occurrence location
@@ -448,11 +484,13 @@ function getSectionColor(index) {
 }
 
 // ─── TILE DETAIL CARD (for right panel) ───
-function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile, duplicateInfo }) {
+function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile, duplicateInfo, pageId, pageName, sectionIndex, checks, toggleCheck }) {
   var dims = LAYOUT_TILE_DIMS[layoutId];
   var desktopType = dims && dims[tileIndex] ? dims[tileIndex] : null;
   var tileLabel = TILE_TYPE_LABELS[tile.type] || tile.type;
   var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
+  var isImageTile = !isProduct && tile.type !== 'text';
+  var checkBase = pageId + '/' + sectionId + '/' + tileIndex;
 
   // Get category color for the badge
   var catColor = tile.imageCategory && CATEGORY_COLOR_MAP[tile.imageCategory] ? CATEGORY_COLOR_MAP[tile.imageCategory] : null;
@@ -472,13 +510,13 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
             {IMAGE_CATEGORIES[tile.imageCategory].name}
           </span>
         )}
-        {desktopType && <span className="briefing-tile-imgtype">{desktopType.label} ({desktopType.w}&times;{desktopType.h})</span>}
+        {/* dimensions shown in dims row below, no need to repeat layout label */}
       </div>
 
       {duplicateInfo && duplicateInfo.count > 1 && (
         <div className="briefing-field" style={{ background: '#ecfdf5', border: '1px solid #6ee7b7', borderRadius: 4, padding: '4px 8px', marginBottom: 4 }}>
           <span style={{ fontSize: 10, fontWeight: 700, color: '#065f46' }}>
-            &#x2753; Identisch mit {duplicateInfo.page} &middot; Section {duplicateInfo.section} &middot; Tile {duplicateInfo.tile} &mdash; Bild muss nicht erneut erstellt werden
+            Duplicate of {duplicateInfo.page} &middot; S{duplicateInfo.section} &middot; T{duplicateInfo.tile} — no new image needed
           </span>
         </div>
       )}
@@ -493,7 +531,7 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
       {tile.textOverlay && (
         <div className="briefing-field">
           <span className="briefing-field-label">Text on Image:</span>
-          <span className="briefing-field-value briefing-field-text">"{tile.textOverlay}"{tile.textAlign && tile.textAlign !== 'left' ? ' (' + (tile.textAlign === 'center' ? 'zentriert' : 'rechtsbündig') + ')' : ''}</span>
+          <span className="briefing-field-value briefing-field-text">"{tile.textOverlay}"{tile.textAlign && tile.textAlign !== 'left' ? ' (' + (tile.textAlign === 'center' ? 'centered' : 'right-aligned') + ')' : ''}</span>
         </div>
       )}
 
@@ -538,8 +576,45 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
       <div className="briefing-tile-dims-row">
         <span className="briefing-dim">Desktop: {tile.dimensions ? (tile.dimensions.w + '\u00D7' + tile.dimensions.h) : 'N/A'}</span>
         <span className="briefing-dim">Mobile: {tile.mobileDimensions ? (tile.mobileDimensions.w + '\u00D7' + tile.mobileDimensions.h) : 'N/A'}</span>
-        {tile.syncDimensions && <span className="briefing-dim" style={{ color: '#10B981', fontWeight: 600 }}>= 1 Bild</span>}
+        {tile.syncDimensions && <span className="briefing-dim" style={{ color: '#10B981', fontWeight: 600 }}>= 1 image</span>}
       </div>
+
+      {/* ─── FILE NAMES ─── */}
+      {isImageTile && pageName != null && sectionIndex != null && (
+        <div style={{ marginTop: 4, padding: '4px 0', fontSize: 10, fontFamily: 'monospace', color: '#64748b', lineHeight: 1.6 }}>
+          {tile.syncDimensions ? (
+            <div>{tileFilename(pageName, sectionIndex, tileIndex, 'sync')}</div>
+          ) : (
+            <div>
+              <div>{tileFilename(pageName, sectionIndex, tileIndex, 'desktop')}</div>
+              <div>{tileFilename(pageName, sectionIndex, tileIndex, 'mobile')}</div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ─── IMAGE COMPLETION CHECKMARKS ─── */}
+      {isImageTile && checks && toggleCheck && (
+        <div style={{ marginTop: 6, padding: '6px 0 2px', borderTop: '1px solid #f1f5f9' }}>
+          {tile.syncDimensions ? (
+            <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', fontSize: 11, color: checks[checkBase + '/sync'] ? '#16a34a' : '#64748b' }} onClick={function(e) { e.stopPropagation(); }}>
+              <input type="checkbox" checked={!!checks[checkBase + '/sync']} onChange={function() { toggleCheck(checkBase + '/sync'); }} style={{ accentColor: '#22c55e', width: 14, height: 14 }} />
+              Image done
+            </label>
+          ) : (
+            <div style={{ display: 'flex', gap: 12 }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer', fontSize: 11, color: checks[checkBase + '/desktop'] ? '#16a34a' : '#64748b' }} onClick={function(e) { e.stopPropagation(); }}>
+                <input type="checkbox" checked={!!checks[checkBase + '/desktop']} onChange={function() { toggleCheck(checkBase + '/desktop'); }} style={{ accentColor: '#22c55e', width: 14, height: 14 }} />
+                Desktop
+              </label>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer', fontSize: 11, color: checks[checkBase + '/mobile'] ? '#16a34a' : '#64748b' }} onClick={function(e) { e.stopPropagation(); }}>
+                <input type="checkbox" checked={!!checks[checkBase + '/mobile']} onChange={function() { toggleCheck(checkBase + '/mobile'); }} style={{ accentColor: '#22c55e', width: 14, height: 14 }} />
+                Mobile
+              </label>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -552,7 +627,7 @@ function SectionBriefing({ section, sectionIndex, viewMode, products, sectionCol
     <div className="briefing-section" style={{ borderLeft: '3px solid ' + sectionColor.border, background: sectionColor.bg }}>
       <div className="briefing-section-header">
         <span className="briefing-section-label" style={{ color: sectionColor.label }}>Section {sectionIndex + 1}</span>
-        <span className="briefing-section-layout">{layout.name} ({layout.cells} tiles)</span>
+        <span className="briefing-section-layout">{layout.cells} tile{layout.cells !== 1 ? 's' : ''}</span>
       </div>
 
       {/* Visual preview */}
@@ -578,17 +653,6 @@ function SectionBriefing({ section, sectionIndex, viewMode, products, sectionCol
 
 // ─── PAGE BRIEFING (center content — visual only, single page) ───
 function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTile, onTileSelect, store }) {
-  var [metaCopied, setMetaCopied] = useState(false);
-  var metaDesc = store ? generateMetaDescription(page, store) : '';
-
-  var handleCopyMeta = function() {
-    if (!metaDesc) return;
-    navigator.clipboard.writeText(metaDesc).then(function() {
-      setMetaCopied(true);
-      setTimeout(function() { setMetaCopied(false); }, 2000);
-    });
-  };
-
   return (
     <div className="briefing-page">
       <div className="briefing-page-header">
@@ -596,20 +660,7 @@ function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTil
         <span className="briefing-page-count">{page.sections.length} section{page.sections.length !== 1 ? 's' : ''}</span>
       </div>
 
-      {/* Meta Description */}
-      {metaDesc && (
-        <div className="briefing-meta-desc" style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 8, padding: '10px 14px', margin: '0 0 12px 0' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
-            <span style={{ fontSize: 11, fontWeight: 700, color: '#15803d', letterSpacing: '.3px' }}>META DESCRIPTION</span>
-            <button onClick={handleCopyMeta}
-              style={{ fontSize: 10, padding: '2px 10px', borderRadius: 4, border: '1px solid #86efac', background: metaCopied ? '#22c55e' : '#fff', color: metaCopied ? '#fff' : '#15803d', cursor: 'pointer', fontWeight: 600, transition: 'all .2s' }}>
-              {metaCopied ? 'Copied!' : 'Copy'}
-            </button>
-          </div>
-          <div style={{ fontSize: 12, color: '#1e293b', lineHeight: 1.5, fontFamily: 'system-ui, sans-serif' }}>{metaDesc}</div>
-          <div style={{ fontSize: 10, color: '#64748b', marginTop: 4 }}>{metaDesc.length}/155 characters</div>
-        </div>
-      )}
+      {/* Meta descriptions moved to Store Info tab */}
 
       {page.sections.map(function(sec, si) {
         return (
@@ -792,6 +843,269 @@ function DesignerTimer({ shareToken }) {
   );
 }
 
+// ─── CHECKMARK HELPERS (localStorage persistence) ───
+function loadChecks(shareToken) {
+  try {
+    var raw = localStorage.getItem('briefing-checks-' + shareToken);
+    return raw ? JSON.parse(raw) : {};
+  } catch (e) { return {}; }
+}
+function saveChecks(shareToken, checks) {
+  try { localStorage.setItem('briefing-checks-' + shareToken, JSON.stringify(checks)); } catch (e) { /* ignore */ }
+}
+
+// Count total images required and how many are checked
+function computeProgress(store, checks) {
+  var total = 0;
+  var done = 0;
+  (store.pages || []).forEach(function(pg) {
+    (pg.sections || []).forEach(function(sec, si) {
+      (sec.tiles || []).forEach(function(tile, ti) {
+        if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text') return;
+        var key = pg.id + '/' + sec.id + '/' + ti;
+        // If syncDimensions (same format desktop=mobile), only 1 image needed
+        if (tile.syncDimensions) {
+          total += 1;
+          if (checks[key + '/sync']) done += 1;
+        } else {
+          total += 2; // desktop + mobile
+          if (checks[key + '/desktop']) done += 1;
+          if (checks[key + '/mobile']) done += 1;
+        }
+      });
+    });
+  });
+  return { total: total, done: done, pct: total > 0 ? Math.round((done / total) * 100) : 0 };
+}
+
+// ─── PREVIEW MODE COMPONENT ───
+// Designer selects a local folder with images. Files are matched by canonical filenames.
+function PreviewMode({ store, onClose }) {
+  var [pvMode, setPvMode] = useState('desktop');
+  var pages = store.pages || [];
+  var [pvPage, setPvPage] = useState(pages[0] ? pages[0].id : '');
+  var activePg = pages.find(function(p) { return p.id === pvPage; }) || pages[0];
+  var [imageMap, setImageMap] = useState({}); // { canonical_filename_lower -> objectURL }
+  var [loadedCount, setLoadedCount] = useState(0);
+  var [totalFiles, setTotalFiles] = useState(0);
+  var fileInputRef = useRef(null);
+
+  // Build the filename map for matching
+  var fnMap = buildFilenameMap(store);
+
+  function handleFolderSelect(e) {
+    var files = e.target.files;
+    if (!files || files.length === 0) return;
+    setTotalFiles(files.length);
+    var matched = {};
+    var matchCount = 0;
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      // Get just the filename without path (webkitRelativePath includes folder structure)
+      var name = file.name.toLowerCase();
+      // Also try without extension for flexible matching
+      var nameNoExt = name.replace(/\.(jpg|jpeg|png|webp|gif|svg)$/i, '');
+      // Try exact match first, then without extension
+      if (fnMap[name]) {
+        matched[name] = URL.createObjectURL(file);
+        matchCount++;
+      } else if (fnMap[nameNoExt + '.jpg']) {
+        matched[nameNoExt + '.jpg'] = URL.createObjectURL(file);
+        matchCount++;
+      } else {
+        // Try matching by removing extra prefixes/suffixes and normalizing
+        var keys = Object.keys(fnMap);
+        for (var k = 0; k < keys.length; k++) {
+          var keyBase = keys[k].replace('.jpg', '');
+          if (nameNoExt === keyBase || nameNoExt.indexOf(keyBase) >= 0 || keyBase.indexOf(nameNoExt) >= 0) {
+            matched[keys[k]] = URL.createObjectURL(file);
+            matchCount++;
+            break;
+          }
+        }
+      }
+    }
+    setImageMap(matched);
+    setLoadedCount(matchCount);
+  }
+
+  var [showReport, setShowReport] = useState(false);
+
+  // Find the image URL for a specific tile
+  function findTileImage(pageName, sectionIndex, tileIndex, variant) {
+    var fn = tileFilename(pageName, sectionIndex, tileIndex, variant).toLowerCase();
+    return imageMap[fn] || null;
+  }
+
+  // ─── MATCH REPORT: compute which tiles matched and which are missing ───
+  var matchReport = { total: 0, matched: 0, missing: [] };
+  if (loadedCount > 0) {
+    (store.pages || []).forEach(function(pg) {
+      (pg.sections || []).forEach(function(sec, si) {
+        (sec.tiles || []).forEach(function(tile, ti) {
+          if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text') return;
+          if (tile.syncDimensions) {
+            matchReport.total += 1;
+            var fn = tileFilename(pg.name, si, ti, 'sync').toLowerCase();
+            if (imageMap[fn]) {
+              matchReport.matched += 1;
+            } else {
+              matchReport.missing.push({ page: pg.name, section: si + 1, tile: ti + 1, filename: tileFilename(pg.name, si, ti, 'sync') });
+            }
+          } else {
+            matchReport.total += 2;
+            var fnD = tileFilename(pg.name, si, ti, 'desktop').toLowerCase();
+            var fnM = tileFilename(pg.name, si, ti, 'mobile').toLowerCase();
+            if (imageMap[fnD]) { matchReport.matched += 1; } else {
+              matchReport.missing.push({ page: pg.name, section: si + 1, tile: ti + 1, filename: tileFilename(pg.name, si, ti, 'desktop') });
+            }
+            if (imageMap[fnM]) { matchReport.matched += 1; } else {
+              matchReport.missing.push({ page: pg.name, section: si + 1, tile: ti + 1, filename: tileFilename(pg.name, si, ti, 'mobile') });
+            }
+          }
+        });
+      });
+    });
+  }
+  var matchPct = matchReport.total > 0 ? Math.round((matchReport.matched / matchReport.total) * 100) : 0;
+
+  return (
+    <div style={{ position: 'fixed', inset: 0, zIndex: 9999, background: '#fff', display: 'flex', flexDirection: 'column' }}>
+      {/* Preview header */}
+      <div style={{ background: '#1e293b', color: '#fff', padding: '10px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
+        <span style={{ fontWeight: 700, fontSize: 14 }}>Preview — {store.brandName || 'Store'}</span>
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          {/* Folder loader */}
+          <input ref={fileInputRef} type="file" webkitdirectory="" directory="" multiple style={{ display: 'none' }} onChange={handleFolderSelect} />
+          <button onClick={function() { fileInputRef.current && fileInputRef.current.click(); }}
+            style={{ background: loadedCount > 0 ? '#22c55e' : '#3b82f6', color: '#fff', border: 'none', borderRadius: 4, padding: '4px 14px', fontSize: 11, cursor: 'pointer', fontWeight: 600 }}>
+            {loadedCount > 0 ? loadedCount + ' images loaded' : 'Load Image Folder'}
+          </button>
+          {/* Match report toggle */}
+          {loadedCount > 0 && (
+            <button onClick={function() { setShowReport(!showReport); }}
+              style={{ background: matchPct === 100 ? 'rgba(34,197,94,.2)' : 'rgba(251,191,36,.2)', color: matchPct === 100 ? '#22c55e' : '#fbbf24', border: '1px solid ' + (matchPct === 100 ? 'rgba(34,197,94,.4)' : 'rgba(251,191,36,.4)'), borderRadius: 4, padding: '4px 12px', fontSize: 11, cursor: 'pointer', fontWeight: 700 }}>
+              {matchPct}% matched
+            </button>
+          )}
+          <div style={{ width: 1, height: 20, background: 'rgba(255,255,255,.2)' }} />
+          <button onClick={function() { setPvMode('desktop'); }} style={{ background: pvMode === 'desktop' ? '#3b82f6' : 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,.25)', borderRadius: 4, padding: '4px 12px', fontSize: 11, cursor: 'pointer' }}>Desktop</button>
+          <button onClick={function() { setPvMode('mobile'); }} style={{ background: pvMode === 'mobile' ? '#3b82f6' : 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,.25)', borderRadius: 4, padding: '4px 12px', fontSize: 11, cursor: 'pointer' }}>Mobile</button>
+          <button onClick={onClose} style={{ background: '#ef4444', color: '#fff', border: 'none', borderRadius: 4, padding: '4px 14px', fontSize: 11, cursor: 'pointer', fontWeight: 600, marginLeft: 12 }}>Close</button>
+        </div>
+      </div>
+      {/* Page tabs */}
+      <div style={{ background: '#f1f5f9', padding: '6px 20px', display: 'flex', gap: 6, flexWrap: 'wrap', borderBottom: '1px solid #e2e8f0', flexShrink: 0 }}>
+        {pages.filter(function(p) { return !p.parentId; }).map(function(pg) {
+          return <button key={pg.id} onClick={function() { setPvPage(pg.id); }} style={{ background: pg.id === pvPage ? '#3b82f6' : '#fff', color: pg.id === pvPage ? '#fff' : '#334155', border: '1px solid #cbd5e1', borderRadius: 4, padding: '3px 12px', fontSize: 11, cursor: 'pointer' }}>{pg.name}</button>;
+        })}
+      </div>
+
+      {/* ─── MATCH REPORT PANEL ─── */}
+      {loadedCount > 0 && showReport && (
+        <div style={{ background: matchPct === 100 ? '#f0fdf4' : '#fffbeb', borderBottom: '1px solid ' + (matchPct === 100 ? '#bbf7d0' : '#fde68a'), padding: '12px 20px', maxHeight: 260, overflow: 'auto' }}>
+          {/* Progress bar */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+            <div style={{ flex: 1, height: 6, background: '#e2e8f0', borderRadius: 3, overflow: 'hidden' }}>
+              <div style={{ width: matchPct + '%', height: '100%', background: matchPct === 100 ? '#22c55e' : '#f59e0b', borderRadius: 3, transition: 'width .3s' }} />
+            </div>
+            <span style={{ fontSize: 13, fontWeight: 700, color: matchPct === 100 ? '#16a34a' : '#d97706', minWidth: 40 }}>{matchPct}%</span>
+          </div>
+          <div style={{ fontSize: 12, color: '#334155', marginBottom: 6 }}>
+            <strong>{matchReport.matched}</strong> of <strong>{matchReport.total}</strong> images matched successfully
+            {matchReport.missing.length > 0 && <span style={{ color: '#dc2626' }}> — <strong>{matchReport.missing.length}</strong> missing</span>}
+          </div>
+
+          {/* Missing files list */}
+          {matchReport.missing.length > 0 && (
+            <div style={{ marginTop: 8 }}>
+              <div style={{ fontSize: 11, fontWeight: 700, color: '#dc2626', marginBottom: 4 }}>Missing images:</div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                {matchReport.missing.map(function(m, i) {
+                  return (
+                    <div key={i} style={{ background: '#fff', border: '1px solid #fecaca', borderRadius: 4, padding: '3px 8px', fontSize: 10 }}>
+                      <span style={{ color: '#64748b' }}>{m.page} &middot; S{m.section} &middot; T{m.tile}</span>
+                      <span style={{ fontFamily: 'monospace', color: '#dc2626', marginLeft: 6 }}>{m.filename}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* All matched message */}
+          {matchReport.missing.length === 0 && (
+            <div style={{ fontSize: 12, color: '#16a34a', fontWeight: 600 }}>All images matched successfully!</div>
+          )}
+        </div>
+      )}
+
+      {/* Instructions banner (if no images loaded) */}
+      {loadedCount === 0 && (
+        <div style={{ background: '#eff6ff', borderBottom: '1px solid #bfdbfe', padding: '10px 20px', fontSize: 12, color: '#1e40af', textAlign: 'center' }}>
+          Click <strong>"Load Image Folder"</strong> and select your Google Drive sync folder or the folder where you saved the images. Files are matched automatically by filename (e.g. <code>Homepage_S1_T1_desktop.jpg</code>).
+        </div>
+      )}
+      {/* Preview content */}
+      <div style={{ flex: 1, overflow: 'auto', display: 'flex', justifyContent: 'center', background: '#f8fafc', padding: 20 }}>
+        <div style={{ width: pvMode === 'desktop' ? 1500 : 414, maxWidth: '100%' }}>
+          {activePg && activePg.sections.map(function(sec, si) {
+            return (
+              <div key={sec.id} style={{ marginBottom: 16 }}>
+                {sec.tiles.map(function(tile, ti) {
+                  var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
+                  var dimKey = pvMode === 'desktop' ? 'dimensions' : 'mobileDimensions';
+                  var dims = tile[dimKey] || tile.dimensions || { w: 1500, h: 600 };
+                  var aspect = dims.h / dims.w;
+                  // Try to find matched image from loaded folder
+                  var imgSrc = null;
+                  if (!isProduct && tile.type !== 'text') {
+                    if (tile.syncDimensions) {
+                      imgSrc = findTileImage(activePg.name, si, ti, 'sync');
+                    } else {
+                      imgSrc = findTileImage(activePg.name, si, ti, pvMode);
+                      // Fallback: try the other variant
+                      if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, pvMode === 'desktop' ? 'mobile' : 'desktop');
+                      // Fallback: try sync name
+                      if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, 'sync');
+                    }
+                  }
+                  // Also fall back to any uploaded image on the tile itself
+                  if (!imgSrc) {
+                    imgSrc = pvMode === 'desktop' ? tile.uploadedImage : (tile.uploadedImageMobile || tile.uploadedImage);
+                  }
+                  var expectedFilename = (!isProduct && tile.type !== 'text') ? tileFilename(activePg.name, si, ti, tile.syncDimensions ? 'sync' : pvMode) : null;
+                  return (
+                    <div key={ti} style={{ width: '100%', paddingBottom: (aspect * 100) + '%', position: 'relative', background: tile.bgColor || '#e2e8f0', marginBottom: 4, borderRadius: 4, overflow: 'hidden' }}>
+                      {imgSrc ? (
+                        <img src={imgSrc} alt={'Tile ' + (ti + 1)} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                      ) : (
+                        <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: 12, gap: 4 }}>
+                          {isProduct ? 'Product Grid' : (
+                            <span>
+                              {expectedFilename ? (
+                                <span style={{ fontFamily: 'monospace', fontSize: 10 }}>{expectedFilename}</span>
+                              ) : 'No image'}
+                            </span>
+                          )}
+                        </div>
+                      )}
+                      {tile.textOverlay && (
+                        <div style={{ position: 'absolute', bottom: 12, left: 16, right: 16, color: '#fff', fontSize: 14, fontWeight: 600, textShadow: '0 1px 4px rgba(0,0,0,.5)' }}>{tile.textOverlay}</div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+          {(!activePg || activePg.sections.length === 0) && <div style={{ textAlign: 'center', color: '#94a3b8', padding: 40 }}>No sections on this page.</div>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── MAIN BRIEFING VIEW ───
 export default function BriefingView() {
   var [store, setStore] = useState(null);
@@ -804,6 +1118,9 @@ export default function BriefingView() {
   var [updateBanner, setUpdateBanner] = useState(false);
   var [changeLog, setChangeLog] = useState([]); // [{ time, descriptions[] }]
   var [selectedTile, setSelectedTile] = useState(null); // { sid, ti }
+  var [sidebarTab, setSidebarTab] = useState('design'); // 'design' or 'info'
+  var [checks, setChecks] = useState({}); // image completion checkmarks
+  var [showPreview, setShowPreview] = useState(false);
   var prevStoreRef = useRef(null);
   var pollRef = useRef(null);
   var bannerTimeoutRef = useRef(null);
@@ -823,6 +1140,21 @@ export default function BriefingView() {
       setLoading(false);
     }).catch(function(e) { setError('Failed to load: ' + e.message); setLoading(false); });
   }, [token]);
+
+  // ─── LOAD CHECKMARKS FROM LOCALSTORAGE ───
+  useEffect(function() {
+    if (token) setChecks(loadChecks(token));
+  }, [token]);
+
+  // Toggle a checkmark and persist
+  function toggleCheck(checkKey) {
+    setChecks(function(prev) {
+      var next = Object.assign({}, prev);
+      if (next[checkKey]) { delete next[checkKey]; } else { next[checkKey] = true; }
+      saveChecks(token, next);
+      return next;
+    });
+  }
 
   // ─── POLLING FOR CHANGES (every 15s) ───
   useEffect(function() {
@@ -926,17 +1258,7 @@ export default function BriefingView() {
     return { highlights: highlights, descriptions: descriptions };
   }
 
-  // ─── DOCX DOWNLOAD ───
-  var handleDocxDownload = async function() {
-    if (!store) return;
-    try {
-      var blob = await generateBriefingDocx(store, 'en');
-      var filename = (store.brandName || 'store').replace(/[^a-zA-Z0-9]/g, '_') + '_briefing.docx';
-      downloadBlob(blob, filename);
-    } catch (e) {
-      alert('Export failed: ' + e.message);
-    }
-  };
+  // DOCX export removed
 
   // ─── TILE SELECTION (click tile in preview → scroll right panel) ───
   function handleTileSelect(sel) {
@@ -980,15 +1302,21 @@ export default function BriefingView() {
   var rightPanelSections = [];
   if (activePage) {
     activePage.sections.forEach(function(sec, si) {
-      rightPanelSections.push({ section: sec, sectionIndex: si, pageName: activePage.name, colorIndex: si, layoutId: sec.layoutId });
+      rightPanelSections.push({ section: sec, sectionIndex: si, pageName: activePage.name, pageId: activePage.id, colorIndex: si, layoutId: sec.layoutId });
     });
   }
 
   // Build duplicate detection map
   var duplicateMap = buildDuplicateMap(store);
 
+  // Compute image progress
+  var progress = store ? computeProgress(store, checks) : { total: 0, done: 0, pct: 0 };
+
   return (
     <div className="briefing-root">
+      {/* Preview mode overlay */}
+      {showPreview && <PreviewMode store={store} onClose={function() { setShowPreview(false); }} />}
+
       {/* Header */}
       <div className="briefing-header">
         <div className="briefing-header-left">
@@ -997,8 +1325,8 @@ export default function BriefingView() {
           <span className="briefing-readonly-badge">Read Only</span>
         </div>
         <div className="briefing-header-right">
-          <button className="btn" style={{ background: 'rgba(255,255,255,.08)', border: '1px solid rgba(255,255,255,.15)', color: '#fff', fontSize: 11, padding: '5px 12px' }} onClick={handleDocxDownload} title="Download DOCX briefing">
-            DOCX
+          <button onClick={function() { setShowPreview(true); }} style={{ background: 'rgba(255,255,255,.08)', border: '1px solid rgba(255,255,255,.15)', color: '#94a3b8', fontSize: 11, padding: '4px 10px', borderRadius: 4, cursor: 'pointer' }} title="Preview store with uploaded images">
+            Preview
           </button>
           <div className="briefing-view-toggle">
             <button className={'briefing-view-btn' + (viewMode === 'desktop' ? ' active' : '')} onClick={function() { setViewMode('desktop'); }}>Desktop</button>
@@ -1037,83 +1365,138 @@ export default function BriefingView() {
       )}
 
       <div className="briefing-body">
-        {/* LEFT SIDEBAR */}
+        {/* LEFT SIDEBAR — TABBED */}
         <div className="briefing-sidebar">
-          {/* Image Category Legend — PROMINENT */}
-          <div className="briefing-sidebar-section briefing-imgcat-section">
-            <div className="briefing-imgcat-title">Image Categories</div>
-            <div className="briefing-imgcat-subtitle">6 image types used throughout this briefing</div>
-            <div className="briefing-imgcat-legend">
-              {IMAGE_CATEGORY_EXAMPLES.map(function(cat) {
-                return (
-                  <div key={cat.id} className="briefing-imgcat-item">
-                    <span className="briefing-imgcat-badge" style={{ background: cat.color }}>{cat.name}</span>
-                    <span className="briefing-imgcat-desc">
-                      {cat.desc}
-                      {cat.exampleUrl && (
-                        <a href={cat.exampleUrl} target="_blank" rel="noopener noreferrer" className="briefing-imgcat-link">Example: {cat.example}</a>
-                      )}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+          {/* Tab switcher */}
+          <div style={{ display: 'flex', borderBottom: '2px solid #e2e8f0', margin: '0 8px 8px' }}>
+            <button onClick={function() { setSidebarTab('design'); }} style={{ flex: 1, padding: '8px 0', fontSize: 11, fontWeight: 700, background: 'none', border: 'none', cursor: 'pointer', borderBottom: sidebarTab === 'design' ? '2px solid #3b82f6' : '2px solid transparent', color: sidebarTab === 'design' ? '#1d4ed8' : '#94a3b8', marginBottom: -2 }}>
+              Design
+            </button>
+            <button onClick={function() { setSidebarTab('info'); }} style={{ flex: 1, padding: '8px 0', fontSize: 11, fontWeight: 700, background: 'none', border: 'none', cursor: 'pointer', borderBottom: sidebarTab === 'info' ? '2px solid #3b82f6' : '2px solid transparent', color: sidebarTab === 'info' ? '#1d4ed8' : '#94a3b8', marginBottom: -2 }}>
+              Store Info
+            </button>
           </div>
 
-          {/* Inspiration Library */}
-          <div className="briefing-sidebar-section" style={{ background: '#ecfdf5', borderRadius: 8, margin: '0 8px', padding: '10px 12px' }}>
-            <div className="briefing-sidebar-title" style={{ color: '#15803d' }}>Inspiration Library</div>
-            <div className="briefing-inspiration">
-              {INSPIRATION_LINKS.map(function(link, i) {
-                return (
-                  <a key={i} href={link.url} target="_blank" rel="noopener noreferrer" className="briefing-inspiration-link">
-                    <span className="briefing-inspiration-brand">{link.brand}</span>
-                    <span className="briefing-inspiration-cat">{link.category}</span>
+          {/* ═══ DESIGN TAB ═══ */}
+          {sidebarTab === 'design' && (
+            <div>
+              {/* Image Category Legend */}
+              <div className="briefing-sidebar-section briefing-imgcat-section">
+                <div className="briefing-imgcat-title">Image Categories</div>
+                <div className="briefing-imgcat-subtitle">6 image types used throughout this briefing</div>
+                <div className="briefing-imgcat-legend">
+                  {IMAGE_CATEGORY_EXAMPLES.map(function(cat) {
+                    return (
+                      <div key={cat.id} className="briefing-imgcat-item">
+                        <span className="briefing-imgcat-badge" style={{ background: cat.color }}>{cat.name}</span>
+                        <span className="briefing-imgcat-desc">
+                          {cat.desc}
+                          {cat.exampleUrl && (
+                            <a href={cat.exampleUrl} target="_blank" rel="noopener noreferrer" className="briefing-imgcat-link">Example: {cat.example}</a>
+                          )}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Inspiration Library */}
+              <div className="briefing-sidebar-section" style={{ background: '#ecfdf5', borderRadius: 8, margin: '0 8px', padding: '10px 12px' }}>
+                <div className="briefing-sidebar-title" style={{ color: '#15803d' }}>Inspiration Library</div>
+                <div className="briefing-inspiration">
+                  {INSPIRATION_LINKS.map(function(link, i) {
+                    return (
+                      <a key={i} href={link.url} target="_blank" rel="noopener noreferrer" className="briefing-inspiration-link">
+                        <span className="briefing-inspiration-brand">{link.brand}</span>
+                        <span className="briefing-inspiration-cat">{link.category}</span>
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Google Drive */}
+              {googleDriveUrl && (
+                <div className="briefing-sidebar-section">
+                  <div className="briefing-sidebar-title" style={{ color: '#1d4ed8' }}>Asset Upload</div>
+                  <a href={googleDriveUrl} target="_blank" rel="noopener noreferrer" className="briefing-drive-link">
+                    Open Google Drive Folder
                   </a>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Google Drive */}
-          {googleDriveUrl && (
-            <div className="briefing-sidebar-section">
-              <div className="briefing-sidebar-title" style={{ color: '#1d4ed8' }}>Asset Upload</div>
-              <a href={googleDriveUrl} target="_blank" rel="noopener noreferrer" className="briefing-drive-link">
-                Open Google Drive Folder
-              </a>
+                </div>
+              )}
             </div>
           )}
 
-          {/* Upload Instructions — moved to bottom */}
-          <div className="briefing-sidebar-section" style={{ background: '#fef9c3', borderRadius: 8, margin: '0 8px', padding: '10px 12px' }}>
-            <div className="briefing-sidebar-title" style={{ color: '#a16207' }}>Upload Instructions</div>
-            <div className="briefing-legend">
-              <p>Upload all finished assets to the shared Google Drive folder.</p>
-              <p>Create one folder per store page, and within each page folder, create a subfolder per section. Upload your images (desktop + mobile) into the matching section folder.</p>
-              <p style={{ marginTop: 6 }}><strong>Example:</strong></p>
-              <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 6, padding: '6px 8px', fontSize: 10, fontFamily: 'monospace', lineHeight: 1.8 }}>
-                Homepage/<br />
-                &nbsp;&nbsp;Section 1/<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;tile1_desktop.jpg<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;tile1_mobile.jpg<br />
-                &nbsp;&nbsp;Section 2/<br />
-                &nbsp;&nbsp;&nbsp;&nbsp;...
+          {/* ═══ STORE INFO TAB ═══ */}
+          {sidebarTab === 'info' && (
+            <div>
+              {/* ── Progress Analysis ── */}
+              <div className="briefing-sidebar-section" style={{ background: '#f0fdf4', borderRadius: 8, margin: '0 8px 10px', padding: '12px' }}>
+                <div className="briefing-sidebar-title" style={{ color: '#15803d', marginBottom: 8 }}>Image Progress</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
+                  <div style={{ flex: 1, height: 8, background: '#e2e8f0', borderRadius: 4, overflow: 'hidden' }}>
+                    <div style={{ width: progress.pct + '%', height: '100%', background: progress.pct === 100 ? '#22c55e' : '#3b82f6', borderRadius: 4, transition: 'width .3s' }} />
+                  </div>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: progress.pct === 100 ? '#16a34a' : '#1e293b', minWidth: 40, textAlign: 'right' }}>{progress.pct}%</span>
+                </div>
+                <div style={{ fontSize: 11, color: '#64748b' }}>{progress.done} / {progress.total} images completed</div>
+              </div>
+
+              {/* ── Store Info ── */}
+              <div className="briefing-sidebar-section" style={{ background: '#f8fafc', borderRadius: 8, margin: '0 8px 10px', padding: '10px 12px' }}>
+                <div className="briefing-sidebar-title" style={{ color: '#0f766e' }}>Store Info</div>
+                <div className="briefing-info-row"><span>Brand:</span> <strong>{store.brandName || 'N/A'}</strong></div>
+                <div className="briefing-info-row"><span>Marketplace:</span> <strong>Amazon.{store.marketplace || 'de'}</strong></div>
+                <div className="briefing-info-row"><span>Pages:</span> <strong>{pages.length}</strong></div>
+                <div className="briefing-info-row"><span>Products (ASINs):</span> <strong>{(store.products || []).length}</strong></div>
+                {lastUpdated && (
+                  <div className="briefing-info-row"><span>Last Updated:</span> <strong>{new Date(lastUpdated).toLocaleString('en-US')}</strong></div>
+                )}
+              </div>
+
+              {/* ── Meta Descriptions per Page ── */}
+              <div className="briefing-sidebar-section" style={{ background: '#f0fdf4', borderRadius: 8, margin: '0 8px 10px', padding: '10px 12px' }}>
+                <div className="briefing-sidebar-title" style={{ color: '#15803d', marginBottom: 6 }}>Meta Descriptions</div>
+                {pages.map(function(pg) {
+                  var md = generateMetaDescription(pg, store);
+                  if (!md) return null;
+                  return (
+                    <div key={pg.id} style={{ marginBottom: 8 }}>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: '#334155' }}>{pg.name}</div>
+                      <div style={{ fontSize: 10, color: '#475569', lineHeight: 1.4, marginTop: 2 }}>{md}</div>
+                      <div style={{ fontSize: 9, color: '#94a3b8' }}>{md.length}/155 chars</div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* ── Upload Instructions ── */}
+              <div className="briefing-sidebar-section" style={{ background: '#fef9c3', borderRadius: 8, margin: '0 8px 10px', padding: '10px 12px' }}>
+                <div className="briefing-sidebar-title" style={{ color: '#a16207' }}>Upload Instructions</div>
+                <div className="briefing-legend">
+                  <p>Upload all finished assets to the shared Google Drive folder.</p>
+                  <p>Use the <strong>exact filenames</strong> shown in the Designer Instructions panel for each tile. This enables the Preview mode to auto-match your images.</p>
+                  <p style={{ marginTop: 6 }}><strong>Naming convention:</strong></p>
+                  <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 6, padding: '6px 8px', fontSize: 10, fontFamily: 'monospace', lineHeight: 1.8 }}>
+                    {'{PageName}'}_S{'{n}'}_T{'{n}'}_desktop.jpg<br />
+                    {'{PageName}'}_S{'{n}'}_T{'{n}'}_mobile.jpg<br />
+                    <span style={{ color: '#64748b' }}>// If same format (synced):</span><br />
+                    {'{PageName}'}_S{'{n}'}_T{'{n}'}.jpg
+                  </div>
+                  <p style={{ marginTop: 6 }}><strong>Example:</strong></p>
+                  <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 6, padding: '6px 8px', fontSize: 10, fontFamily: 'monospace', lineHeight: 1.8 }}>
+                    Homepage_S1_T1_desktop.jpg<br />
+                    Homepage_S1_T1_mobile.jpg<br />
+                    Homepage_S2_T1.jpg<br />
+                    Kategorie_1_S1_T1_desktop.jpg<br />
+                    ...
+                  </div>
+                  <p style={{ marginTop: 6, fontSize: 10, color: '#92400e' }}>Tip: Use the Preview button to verify your images. Select the folder and images are matched automatically.</p>
+                </div>
               </div>
             </div>
-          </div>
-
-          {/* Store Info — moved to very bottom */}
-          <div className="briefing-sidebar-section" style={{ background: '#f8fafc', borderRadius: 8, margin: '0 8px', padding: '10px 12px' }}>
-            <div className="briefing-sidebar-title" style={{ color: '#0f766e' }}>Store Info</div>
-            <div className="briefing-info-row"><span>Brand:</span> <strong>{store.brandName || 'N/A'}</strong></div>
-            <div className="briefing-info-row"><span>Marketplace:</span> <strong>Amazon.{store.marketplace || 'de'}</strong></div>
-            <div className="briefing-info-row"><span>Pages:</span> <strong>{pages.length}</strong></div>
-            <div className="briefing-info-row"><span>Products:</span> <strong>{(store.products || []).length}</strong></div>
-            {lastUpdated && (
-              <div className="briefing-info-row"><span>Last Updated:</span> <strong>{new Date(lastUpdated).toLocaleString('en-US')}</strong></div>
-            )}
-          </div>
+          )}
         </div>
 
         {/* CENTER: Store visual preview */}
@@ -1127,7 +1510,7 @@ export default function BriefingView() {
           </div>
           <BriefingStoreNav store={store} curPage={curPage} onSelectPage={function(id) { setCurPage(id); }} viewMode={viewMode} />
 
-          {/* Single page content */}
+          {/* Single page content — meta descriptions moved to Store Info tab */}
           {(function() {
             if (!activePage) return <div className="briefing-empty">No pages found.</div>;
             return <PageBriefing page={activePage} viewMode={viewMode} products={store.products || []} sectionStartIndex={0} selectedTile={selectedTile} onTileSelect={handleTileSelect} store={store} />;
@@ -1229,6 +1612,11 @@ export default function BriefingView() {
                         isSelected={isSelected}
                         onClickTile={handleTileSelect}
                         duplicateInfo={dupInfo}
+                        pageId={item.pageId}
+                        pageName={item.pageName}
+                        sectionIndex={item.sectionIndex}
+                        checks={checks}
+                        toggleCheck={toggleCheck}
                       />
                     );
                   })}
