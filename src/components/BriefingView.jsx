@@ -901,40 +901,62 @@ function PreviewMode({ store, onClose }) {
   // Build the filename map for matching
   var fnMap = buildFilenameMap(store);
 
+  var [folderNames, setFolderNames] = useState([]); // track loaded folder names
+
   function handleFolderSelect(e) {
     var files = e.target.files;
     if (!files || files.length === 0) return;
-    setTotalFiles(files.length);
-    var matched = {};
-    var matchCount = 0;
+    // Extract folder name from first file's relative path
+    var firstPath = files[0] && files[0].webkitRelativePath ? files[0].webkitRelativePath : '';
+    var folderName = firstPath ? firstPath.split('/')[0] : 'Folder';
+    // Only add unique image files (filter non-image files from the selection)
+    var imageExts = /\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i;
+    // Merge with existing imageMap (accumulate across multiple folder loads)
+    var merged = Object.assign({}, imageMap);
+    var newMatchCount = 0;
     for (var i = 0; i < files.length; i++) {
       var file = files[i];
-      // Get just the filename without path (webkitRelativePath includes folder structure)
+      if (!imageExts.test(file.name)) continue;
       var name = file.name.toLowerCase();
-      // Also try without extension for flexible matching
-      var nameNoExt = name.replace(/\.(jpg|jpeg|png|webp|gif|svg)$/i, '');
+      var nameNoExt = name.replace(/\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i, '');
       // Try exact match first, then without extension
-      if (fnMap[name]) {
-        matched[name] = URL.createObjectURL(file);
-        matchCount++;
-      } else if (fnMap[nameNoExt + '.jpg']) {
-        matched[nameNoExt + '.jpg'] = URL.createObjectURL(file);
-        matchCount++;
+      if (fnMap[name] && !merged[name]) {
+        merged[name] = URL.createObjectURL(file);
+        newMatchCount++;
+      } else if (fnMap[nameNoExt + '.jpg'] && !merged[nameNoExt + '.jpg']) {
+        merged[nameNoExt + '.jpg'] = URL.createObjectURL(file);
+        newMatchCount++;
       } else {
         // Try matching by removing extra prefixes/suffixes and normalizing
         var keys = Object.keys(fnMap);
         for (var k = 0; k < keys.length; k++) {
+          if (merged[keys[k]]) continue; // already matched
           var keyBase = keys[k].replace('.jpg', '');
           if (nameNoExt === keyBase || nameNoExt.indexOf(keyBase) >= 0 || keyBase.indexOf(nameNoExt) >= 0) {
-            matched[keys[k]] = URL.createObjectURL(file);
-            matchCount++;
+            merged[keys[k]] = URL.createObjectURL(file);
+            newMatchCount++;
             break;
           }
         }
       }
     }
-    setImageMap(matched);
-    setLoadedCount(matchCount);
+    setImageMap(merged);
+    setLoadedCount(Object.keys(merged).length);
+    setTotalFiles(function(prev) { return prev + files.length; });
+    if (folderNames.indexOf(folderName) < 0) {
+      setFolderNames(function(prev) { return prev.concat(folderName); });
+    }
+    // Reset file input so the same folder can be re-selected
+    e.target.value = '';
+  }
+
+  function handleResetImages() {
+    // Revoke all object URLs to free memory
+    Object.values(imageMap).forEach(function(url) { try { URL.revokeObjectURL(url); } catch(e) {} });
+    setImageMap({});
+    setLoadedCount(0);
+    setTotalFiles(0);
+    setFolderNames([]);
   }
 
   var [showReport, setShowReport] = useState(false);
@@ -987,8 +1009,15 @@ function PreviewMode({ store, onClose }) {
           <input ref={fileInputRef} type="file" webkitdirectory="" directory="" multiple style={{ display: 'none' }} onChange={handleFolderSelect} />
           <button onClick={function() { fileInputRef.current && fileInputRef.current.click(); }}
             style={{ background: loadedCount > 0 ? '#22c55e' : '#3b82f6', color: '#fff', border: 'none', borderRadius: 4, padding: '4px 14px', fontSize: 11, cursor: 'pointer', fontWeight: 600 }}>
-            {loadedCount > 0 ? loadedCount + ' images loaded' : 'Load Image Folder'}
+            {loadedCount > 0 ? '+ Add Folder (' + folderNames.length + ' loaded)' : 'Load Image Folder'}
           </button>
+          {loadedCount > 0 && (
+            <button onClick={handleResetImages}
+              style={{ background: 'rgba(239,68,68,.15)', color: '#fca5a5', border: '1px solid rgba(239,68,68,.3)', borderRadius: 4, padding: '4px 10px', fontSize: 10, cursor: 'pointer', fontWeight: 600 }}
+              title="Remove all loaded images">
+              Reset
+            </button>
+          )}
           {/* Match report toggle */}
           {loadedCount > 0 && (
             <button onClick={function() { setShowReport(!showReport); }}
@@ -1051,7 +1080,17 @@ function PreviewMode({ store, onClose }) {
       {/* Instructions banner (if no images loaded) */}
       {loadedCount === 0 && (
         <div style={{ background: '#eff6ff', borderBottom: '1px solid #bfdbfe', padding: '10px 20px', fontSize: 12, color: '#1e40af', textAlign: 'center' }}>
-          Click <strong>"Load Image Folder"</strong> and select your Google Drive sync folder or the folder where you saved the images. Files are matched automatically by filename (e.g. <code>Homepage_S1_T1_desktop.jpg</code>).
+          Click <strong>"Load Image Folder"</strong> and select a parent folder — all subfolders are scanned automatically. Images are matched by filename (e.g. <code>Homepage_S1_T1_desktop.jpg</code>). You can load multiple folders and results are merged.
+        </div>
+      )}
+      {/* Loaded folders info */}
+      {folderNames.length > 0 && (
+        <div style={{ background: '#f0f9ff', borderBottom: '1px solid #bae6fd', padding: '6px 20px', fontSize: 11, color: '#0369a1', display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+          <span style={{ fontWeight: 600 }}>{folderNames.length} folder{folderNames.length > 1 ? 's' : ''} loaded:</span>
+          {folderNames.map(function(fn, i) {
+            return <span key={i} style={{ background: '#e0f2fe', padding: '1px 8px', borderRadius: 3, fontSize: 10 }}>{fn}</span>;
+          })}
+          <span style={{ color: '#64748b' }}>&middot; {loadedCount} images matched</span>
         </div>
       )}
       {/* Preview content */}
