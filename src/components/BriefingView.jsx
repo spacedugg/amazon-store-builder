@@ -186,6 +186,42 @@ function tileFingerprint(tile) {
     (tile.asins || []).join(',')].join('|');
 }
 
+// ─── TILE FILENAME GENERATOR ───
+// Creates canonical filenames for each image tile so designer + preview can match them.
+// Format: {PageName}_S{n}_T{n}_desktop.jpg / _mobile.jpg / .jpg (if synced)
+function sanitizeName(name) {
+  return (name || 'page').replace(/[^a-zA-Z0-9äöüÄÖÜß]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
+}
+
+function tileFilename(pageName, sectionIndex, tileIndex, variant) {
+  // variant: 'desktop', 'mobile', or 'sync'
+  var base = sanitizeName(pageName) + '_S' + (sectionIndex + 1) + '_T' + (tileIndex + 1);
+  if (variant === 'sync') return base + '.jpg';
+  return base + '_' + variant + '.jpg';
+}
+
+// Build a complete filename map for the entire store: { filename -> { pageId, secId, tileIndex, variant } }
+function buildFilenameMap(store) {
+  var map = {};
+  (store.pages || []).forEach(function(pg) {
+    (pg.sections || []).forEach(function(sec, si) {
+      (sec.tiles || []).forEach(function(tile, ti) {
+        if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text') return;
+        if (tile.syncDimensions) {
+          var fn = tileFilename(pg.name, si, ti, 'sync');
+          map[fn.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'sync' };
+        } else {
+          var fnD = tileFilename(pg.name, si, ti, 'desktop');
+          var fnM = tileFilename(pg.name, si, ti, 'mobile');
+          map[fnD.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'desktop' };
+          map[fnM.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'mobile' };
+        }
+      });
+    });
+  });
+  return map;
+}
+
 // Build a map of tile fingerprints → first occurrence location
 function buildDuplicateMap(store) {
   var map = {};
@@ -448,7 +484,7 @@ function getSectionColor(index) {
 }
 
 // ─── TILE DETAIL CARD (for right panel) ───
-function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile, duplicateInfo, pageId, checks, toggleCheck }) {
+function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile, duplicateInfo, pageId, pageName, sectionIndex, checks, toggleCheck }) {
   var dims = LAYOUT_TILE_DIMS[layoutId];
   var desktopType = dims && dims[tileIndex] ? dims[tileIndex] : null;
   var tileLabel = TILE_TYPE_LABELS[tile.type] || tile.type;
@@ -543,6 +579,20 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
         {tile.syncDimensions && <span className="briefing-dim" style={{ color: '#10B981', fontWeight: 600 }}>= 1 image</span>}
       </div>
 
+      {/* ─── FILE NAMES ─── */}
+      {isImageTile && pageName != null && sectionIndex != null && (
+        <div style={{ marginTop: 4, padding: '4px 0', fontSize: 10, fontFamily: 'monospace', color: '#64748b', lineHeight: 1.6 }}>
+          {tile.syncDimensions ? (
+            <div>{tileFilename(pageName, sectionIndex, tileIndex, 'sync')}</div>
+          ) : (
+            <div>
+              <div>{tileFilename(pageName, sectionIndex, tileIndex, 'desktop')}</div>
+              <div>{tileFilename(pageName, sectionIndex, tileIndex, 'mobile')}</div>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* ─── IMAGE COMPLETION CHECKMARKS ─── */}
       {isImageTile && checks && toggleCheck && (
         <div style={{ marginTop: 6, padding: '6px 0 2px', borderTop: '1px solid #f1f5f9' }}>
@@ -577,7 +627,7 @@ function SectionBriefing({ section, sectionIndex, viewMode, products, sectionCol
     <div className="briefing-section" style={{ borderLeft: '3px solid ' + sectionColor.border, background: sectionColor.bg }}>
       <div className="briefing-section-header">
         <span className="briefing-section-label" style={{ color: sectionColor.label }}>Section {sectionIndex + 1}</span>
-        <span className="briefing-section-layout">{layout.name} ({layout.cells} tiles)</span>
+        <span className="briefing-section-layout">{layout.cells} tile{layout.cells !== 1 ? 's' : ''}</span>
       </div>
 
       {/* Visual preview */}
@@ -829,11 +879,61 @@ function computeProgress(store, checks) {
 }
 
 // ─── PREVIEW MODE COMPONENT ───
+// Designer selects a local folder with images. Files are matched by canonical filenames.
 function PreviewMode({ store, onClose }) {
   var [pvMode, setPvMode] = useState('desktop');
   var pages = store.pages || [];
   var [pvPage, setPvPage] = useState(pages[0] ? pages[0].id : '');
   var activePg = pages.find(function(p) { return p.id === pvPage; }) || pages[0];
+  var [imageMap, setImageMap] = useState({}); // { canonical_filename_lower -> objectURL }
+  var [loadedCount, setLoadedCount] = useState(0);
+  var [totalFiles, setTotalFiles] = useState(0);
+  var fileInputRef = useRef(null);
+
+  // Build the filename map for matching
+  var fnMap = buildFilenameMap(store);
+
+  function handleFolderSelect(e) {
+    var files = e.target.files;
+    if (!files || files.length === 0) return;
+    setTotalFiles(files.length);
+    var matched = {};
+    var matchCount = 0;
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      // Get just the filename without path (webkitRelativePath includes folder structure)
+      var name = file.name.toLowerCase();
+      // Also try without extension for flexible matching
+      var nameNoExt = name.replace(/\.(jpg|jpeg|png|webp|gif|svg)$/i, '');
+      // Try exact match first, then without extension
+      if (fnMap[name]) {
+        matched[name] = URL.createObjectURL(file);
+        matchCount++;
+      } else if (fnMap[nameNoExt + '.jpg']) {
+        matched[nameNoExt + '.jpg'] = URL.createObjectURL(file);
+        matchCount++;
+      } else {
+        // Try matching by removing extra prefixes/suffixes and normalizing
+        var keys = Object.keys(fnMap);
+        for (var k = 0; k < keys.length; k++) {
+          var keyBase = keys[k].replace('.jpg', '');
+          if (nameNoExt === keyBase || nameNoExt.indexOf(keyBase) >= 0 || keyBase.indexOf(nameNoExt) >= 0) {
+            matched[keys[k]] = URL.createObjectURL(file);
+            matchCount++;
+            break;
+          }
+        }
+      }
+    }
+    setImageMap(matched);
+    setLoadedCount(matchCount);
+  }
+
+  // Find the image URL for a specific tile
+  function findTileImage(pageName, sectionIndex, tileIndex, variant) {
+    var fn = tileFilename(pageName, sectionIndex, tileIndex, variant).toLowerCase();
+    return imageMap[fn] || null;
+  }
 
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 9999, background: '#fff', display: 'flex', flexDirection: 'column' }}>
@@ -841,6 +941,13 @@ function PreviewMode({ store, onClose }) {
       <div style={{ background: '#1e293b', color: '#fff', padding: '10px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
         <span style={{ fontWeight: 700, fontSize: 14 }}>Preview — {store.brandName || 'Store'}</span>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          {/* Folder loader */}
+          <input ref={fileInputRef} type="file" webkitdirectory="" directory="" multiple style={{ display: 'none' }} onChange={handleFolderSelect} />
+          <button onClick={function() { fileInputRef.current && fileInputRef.current.click(); }}
+            style={{ background: loadedCount > 0 ? '#22c55e' : '#3b82f6', color: '#fff', border: 'none', borderRadius: 4, padding: '4px 14px', fontSize: 11, cursor: 'pointer', fontWeight: 600 }}>
+            {loadedCount > 0 ? loadedCount + ' images loaded' : 'Load Image Folder'}
+          </button>
+          <div style={{ width: 1, height: 20, background: 'rgba(255,255,255,.2)' }} />
           <button onClick={function() { setPvMode('desktop'); }} style={{ background: pvMode === 'desktop' ? '#3b82f6' : 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,.25)', borderRadius: 4, padding: '4px 12px', fontSize: 11, cursor: 'pointer' }}>Desktop</button>
           <button onClick={function() { setPvMode('mobile'); }} style={{ background: pvMode === 'mobile' ? '#3b82f6' : 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,.25)', borderRadius: 4, padding: '4px 12px', fontSize: 11, cursor: 'pointer' }}>Mobile</button>
           <button onClick={onClose} style={{ background: '#ef4444', color: '#fff', border: 'none', borderRadius: 4, padding: '4px 14px', fontSize: 11, cursor: 'pointer', fontWeight: 600, marginLeft: 12 }}>Close</button>
@@ -852,6 +959,12 @@ function PreviewMode({ store, onClose }) {
           return <button key={pg.id} onClick={function() { setPvPage(pg.id); }} style={{ background: pg.id === pvPage ? '#3b82f6' : '#fff', color: pg.id === pvPage ? '#fff' : '#334155', border: '1px solid #cbd5e1', borderRadius: 4, padding: '3px 12px', fontSize: 11, cursor: 'pointer' }}>{pg.name}</button>;
         })}
       </div>
+      {/* Instructions banner (if no images loaded) */}
+      {loadedCount === 0 && (
+        <div style={{ background: '#eff6ff', borderBottom: '1px solid #bfdbfe', padding: '10px 20px', fontSize: 12, color: '#1e40af', textAlign: 'center' }}>
+          Click <strong>"Load Image Folder"</strong> and select your Google Drive sync folder or the folder where you saved the images. Files are matched automatically by filename (e.g. <code>Homepage_S1_T1_desktop.jpg</code>).
+        </div>
+      )}
       {/* Preview content */}
       <div style={{ flex: 1, overflow: 'auto', display: 'flex', justifyContent: 'center', background: '#f8fafc', padding: 20 }}>
         <div style={{ width: pvMode === 'desktop' ? 1500 : 414, maxWidth: '100%' }}>
@@ -859,17 +972,41 @@ function PreviewMode({ store, onClose }) {
             return (
               <div key={sec.id} style={{ marginBottom: 16 }}>
                 {sec.tiles.map(function(tile, ti) {
+                  var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
                   var dimKey = pvMode === 'desktop' ? 'dimensions' : 'mobileDimensions';
                   var dims = tile[dimKey] || tile.dimensions || { w: 1500, h: 600 };
                   var aspect = dims.h / dims.w;
-                  var imgSrc = pvMode === 'desktop' ? tile.uploadedImage : (tile.uploadedImageMobile || tile.uploadedImage);
+                  // Try to find matched image from loaded folder
+                  var imgSrc = null;
+                  if (!isProduct && tile.type !== 'text') {
+                    if (tile.syncDimensions) {
+                      imgSrc = findTileImage(activePg.name, si, ti, 'sync');
+                    } else {
+                      imgSrc = findTileImage(activePg.name, si, ti, pvMode);
+                      // Fallback: try the other variant
+                      if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, pvMode === 'desktop' ? 'mobile' : 'desktop');
+                      // Fallback: try sync name
+                      if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, 'sync');
+                    }
+                  }
+                  // Also fall back to any uploaded image on the tile itself
+                  if (!imgSrc) {
+                    imgSrc = pvMode === 'desktop' ? tile.uploadedImage : (tile.uploadedImageMobile || tile.uploadedImage);
+                  }
+                  var expectedFilename = (!isProduct && tile.type !== 'text') ? tileFilename(activePg.name, si, ti, tile.syncDimensions ? 'sync' : pvMode) : null;
                   return (
                     <div key={ti} style={{ width: '100%', paddingBottom: (aspect * 100) + '%', position: 'relative', background: tile.bgColor || '#e2e8f0', marginBottom: 4, borderRadius: 4, overflow: 'hidden' }}>
                       {imgSrc ? (
                         <img src={imgSrc} alt={'Tile ' + (ti + 1)} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
                       ) : (
-                        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: 12 }}>
-                          {tile.type === 'product_grid' ? 'Product Grid' : 'No image uploaded'}
+                        <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: 12, gap: 4 }}>
+                          {isProduct ? 'Product Grid' : (
+                            <span>
+                              {expectedFilename ? (
+                                <span style={{ fontFamily: 'monospace', fontSize: 10 }}>{expectedFilename}</span>
+                              ) : 'No image'}
+                            </span>
+                          )}
                         </div>
                       )}
                       {tile.textOverlay && (
@@ -1258,16 +1395,23 @@ export default function BriefingView() {
                 <div className="briefing-sidebar-title" style={{ color: '#a16207' }}>Upload Instructions</div>
                 <div className="briefing-legend">
                   <p>Upload all finished assets to the shared Google Drive folder.</p>
-                  <p>Create one folder per store page, and within each page folder, create a subfolder per section. Upload your images (desktop + mobile) into the matching section folder.</p>
+                  <p>Use the <strong>exact filenames</strong> shown in the Designer Instructions panel for each tile. This enables the Preview mode to auto-match your images.</p>
+                  <p style={{ marginTop: 6 }}><strong>Naming convention:</strong></p>
+                  <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 6, padding: '6px 8px', fontSize: 10, fontFamily: 'monospace', lineHeight: 1.8 }}>
+                    {'{PageName}'}_S{'{n}'}_T{'{n}'}_desktop.jpg<br />
+                    {'{PageName}'}_S{'{n}'}_T{'{n}'}_mobile.jpg<br />
+                    <span style={{ color: '#64748b' }}>// If same format (synced):</span><br />
+                    {'{PageName}'}_S{'{n}'}_T{'{n}'}.jpg
+                  </div>
                   <p style={{ marginTop: 6 }}><strong>Example:</strong></p>
                   <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 6, padding: '6px 8px', fontSize: 10, fontFamily: 'monospace', lineHeight: 1.8 }}>
-                    Homepage/<br />
-                    &nbsp;&nbsp;Section 1/<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;tile1_desktop.jpg<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;tile1_mobile.jpg<br />
-                    &nbsp;&nbsp;Section 2/<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;...
+                    Homepage_S1_T1_desktop.jpg<br />
+                    Homepage_S1_T1_mobile.jpg<br />
+                    Homepage_S2_T1.jpg<br />
+                    Kategorie_1_S1_T1_desktop.jpg<br />
+                    ...
                   </div>
+                  <p style={{ marginTop: 6, fontSize: 10, color: '#92400e' }}>Tip: Use the Preview button to verify your images. Select the folder and images are matched automatically.</p>
                 </div>
               </div>
             </div>
@@ -1388,6 +1532,8 @@ export default function BriefingView() {
                         onClickTile={handleTileSelect}
                         duplicateInfo={dupInfo}
                         pageId={item.pageId}
+                        pageName={item.pageName}
+                        sectionIndex={item.sectionIndex}
                         checks={checks}
                         toggleCheck={toggleCheck}
                       />
