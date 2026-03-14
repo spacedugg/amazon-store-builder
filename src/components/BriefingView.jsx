@@ -409,6 +409,7 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
       <div className="briefing-tile-dims-row">
         <span className="briefing-dim">Desktop: {tile.dimensions ? (tile.dimensions.w + '\u00D7' + tile.dimensions.h) : 'N/A'}</span>
         <span className="briefing-dim">Mobile: {tile.mobileDimensions ? (tile.mobileDimensions.w + '\u00D7' + tile.mobileDimensions.h) : 'N/A'}</span>
+        {tile.syncDimensions && <span className="briefing-dim" style={{ color: '#10B981', fontWeight: 600 }}>= 1 Bild</span>}
       </div>
     </div>
   );
