@@ -1219,7 +1219,7 @@ function PreviewMode({ store, onClose }) {
               var layout = findLayout(sec.layoutId);
               var config = getGridConfig(layout, isMobile);
               var tileDims = LAYOUT_TILE_DIMS[sec.layoutId] || [];
-              var sectionGridStyle = Object.assign({}, config.gridStyle, { display: 'grid', gap: 0, width: '100%' });
+              var sectionGridStyle = Object.assign({}, config.gridStyle, { display: 'grid', gap: 4, width: '100%' });
               if (!sectionGridStyle.aspectRatio && tileDims.length > 0) {
                 var firstDim = tileDims[0] || { w: 1500, h: 600 };
                 if (layout.cells === 1) {
@@ -1227,7 +1227,7 @@ function PreviewMode({ store, onClose }) {
                 }
               }
               return (
-                <div key={sec.id} style={{ marginBottom: 0 }}>
+                <div key={sec.id} style={{ marginBottom: 4 }}>
                   <div style={sectionGridStyle}>
                     {sec.tiles.map(function(tile, ti) {
                       var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
