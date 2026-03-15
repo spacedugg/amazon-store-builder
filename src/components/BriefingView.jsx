@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, findLayout } from '../constants';
 import { loadStoreByShareToken } from '../storage';
 // DOCX export removed — designer doesn't need it
-import SectionView from './SectionView';
+import SectionView, { getGridConfig } from './SectionView';
+import TileView from './TileView';
 
 var noop = function() {};
 
@@ -1020,6 +1021,15 @@ function PreviewMode({ store, onClose }) {
   }
   var matchPct = matchReport.total > 0 ? Math.round((matchReport.matched / matchReport.total) * 100) : 0;
 
+  // Build a set of missing tile keys for red highlighting in preview
+  var missingTileSet = {};
+  if (loadedCount > 0) {
+    matchReport.missing.forEach(function(m) {
+      // key: "pageName|section|tile" (1-based section/tile)
+      missingTileSet[m.page + '|' + m.section + '|' + m.tile] = true;
+    });
+  }
+
   // Find hero tile and its image
   var heroTile = null;
   var heroPageName = null;
@@ -1053,7 +1063,7 @@ function PreviewMode({ store, onClose }) {
   }
 
   var isMobile = pvMode === 'mobile';
-  var storeWidth = isMobile ? 414 : 1500;
+  var storeWidth = isMobile ? 420 : 1600;
   var MAX_NAV_TABS = isMobile ? 4 : 6;
   var visibleTabs = topPages.slice(0, MAX_NAV_TABS);
   var overflowTabs = topPages.slice(MAX_NAV_TABS);
@@ -1124,8 +1134,8 @@ function PreviewMode({ store, onClose }) {
       )}
 
       {/* ─── AMAZON STORE PREVIEW ─── */}
-      <div style={{ flex: 1, overflow: 'auto', background: isMobile ? '#f5f5f5' : '#e3e6e6', display: 'flex', justifyContent: 'center' }}>
-        <div style={{ width: storeWidth, maxWidth: '100%', background: '#fff', minHeight: '100%', boxShadow: isMobile ? 'none' : '0 0 40px rgba(0,0,0,.15)' }}>
+      <div style={{ flex: 1, overflow: 'auto', background: '#fff', display: 'flex', justifyContent: 'center' }}>
+        <div style={{ width: storeWidth, maxWidth: '100%', background: '#fff', minHeight: '100%' }}>
 
           {/* ─── HERO BANNER (full width, like Amazon) ─── */}
           <div style={{ width: '100%', aspectRatio: isMobile ? '1242/450' : '3000/600', background: '#232f3e', position: 'relative', overflow: 'hidden' }}>
@@ -1136,6 +1146,9 @@ function PreviewMode({ store, onClose }) {
                 <div style={{ fontSize: isMobile ? 14 : 20, fontWeight: 700, marginBottom: 4 }}>Store Hero Image</div>
                 <div style={{ fontSize: isMobile ? 10 : 13, opacity: 0.6 }}>{isMobile ? '1242 \u00D7 450' : '3000 \u00D7 600'}px</div>
               </div>
+            )}
+            {loadedCount > 0 && heroTile && !heroImgSrc && (
+              <div style={{ position: 'absolute', inset: 0, background: 'rgba(239,68,68,0.12)', border: '2px solid #ef4444', pointerEvents: 'none' }} />
             )}
             {showFilenames && heroTile && heroPageName && (
               <div style={{ position: 'absolute', bottom: 6, left: 8, background: 'rgba(0,0,0,.7)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 9, padding: '2px 6px', borderRadius: 2 }}>
@@ -1214,66 +1227,68 @@ function PreviewMode({ store, onClose }) {
           </div>
 
           {/* ─── PAGE CONTENT (sections) ─── */}
-          <div style={{ padding: isMobile ? '10px 12px' : '12px 20px', background: '#fff' }}>
+          <div className="preview-store-content" style={{ background: '#fff' }}>
             {activePg && activePg.sections.map(function(sec, si) {
-              // Build enriched section with loaded folder images injected into tiles
-              var enrichedTiles = sec.tiles.map(function(tile, ti) {
-                var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
-                if (isProduct || tile.type === 'text') return tile;
-                var imgSrc = null;
-                if (tile.syncDimensions) {
-                  imgSrc = findTileImage(activePg.name, si, ti, 'sync');
-                } else {
-                  imgSrc = findTileImage(activePg.name, si, ti, pvMode);
-                  if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, pvMode === 'desktop' ? 'mobile' : 'desktop');
-                  if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, 'sync');
-                }
-                if (!imgSrc) return tile;
-                // Clone tile with loaded image set as uploaded image
-                var enriched = Object.assign({}, tile);
-                if (pvMode === 'mobile') {
-                  enriched.uploadedImageMobile = imgSrc;
-                  if (!enriched.uploadedImage) enriched.uploadedImage = imgSrc;
-                } else {
-                  enriched.uploadedImage = imgSrc;
-                }
-                return enriched;
-              });
-              var enrichedSection = Object.assign({}, sec, { tiles: enrichedTiles });
+              var layout = findLayout(sec.layoutId);
+              var config = getGridConfig(layout, isMobile);
               return (
-                <div key={sec.id} className="briefing-section-preview" style={{ marginBottom: 10 }}>
-                  <SectionView
-                    section={enrichedSection}
-                    idx={si}
-                    totalSections={activePg.sections.length}
-                    sel={null}
-                    onSelect={noop}
-                    onDelete={noop}
-                    onDuplicate={noop}
-                    onCopy={noop}
-                    onMoveUp={null}
-                    onMoveDown={null}
-                    onChangeLayout={noop}
-                    viewMode={pvMode}
-                    products={[]}
-                    uiLang="en"
-                  />
-                  {/* Filename overlays */}
-                  {showFilenames && (
-                    <div style={{ position: 'relative', marginTop: -4 }}>
-                      {sec.tiles.map(function(tile, ti) {
-                        var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
-                        if (isProduct || tile.type === 'text') return null;
-                        var fn = tileFilename(activePg.name, si, ti, tile.syncDimensions ? 'sync' : pvMode);
-                        if (!fn) return null;
-                        return (
-                          <span key={ti} style={{ display: 'inline-block', background: 'rgba(0,0,0,.75)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 8, padding: '1px 5px', borderRadius: 2, margin: '0 2px 2px 0' }}>
-                            {fn}
-                          </span>
-                        );
-                      })}
-                    </div>
-                  )}
+                <div key={sec.id} style={{ marginBottom: 0 }}>
+                  <div style={Object.assign({}, config.gridStyle, { display: 'grid', gap: 0, width: '100%', overflow: 'hidden' })}>
+                    {sec.tiles.map(function(tile, ti) {
+                      var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
+                      var tileStyle = Object.assign({}, config.getTileStyle(ti), { position: 'relative', overflow: 'hidden', minHeight: 0 });
+
+                      // Find loaded image for this tile
+                      var enrichedTile = tile;
+                      if (!isProduct && tile.type !== 'text') {
+                        var imgSrc = null;
+                        if (tile.syncDimensions) {
+                          imgSrc = findTileImage(activePg.name, si, ti, 'sync');
+                        } else {
+                          imgSrc = findTileImage(activePg.name, si, ti, pvMode);
+                          if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, pvMode === 'desktop' ? 'mobile' : 'desktop');
+                          if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, 'sync');
+                        }
+                        if (imgSrc) {
+                          enrichedTile = Object.assign({}, tile);
+                          if (pvMode === 'mobile') {
+                            enrichedTile.uploadedImageMobile = imgSrc;
+                            if (!enrichedTile.uploadedImage) enrichedTile.uploadedImage = imgSrc;
+                          } else {
+                            enrichedTile.uploadedImage = imgSrc;
+                          }
+                        }
+                      }
+
+                      // Check if this tile is missing an image (red highlight)
+                      var isMissing = loadedCount > 0 && !isProduct && tile.type !== 'text' && missingTileSet[activePg.name + '|' + (si + 1) + '|' + (ti + 1)];
+
+                      return (
+                        <div key={ti} style={tileStyle}>
+                          <div style={{ width: '100%', height: '100%' }}>
+                            <TileView
+                              tile={enrichedTile}
+                              selected={false}
+                              onClick={noop}
+                              viewMode={pvMode}
+                              products={[]}
+                              uiLang="en"
+                            />
+                          </div>
+                          {/* Red overlay for missing/unmatched tiles */}
+                          {isMissing && (
+                            <div style={{ position: 'absolute', inset: 0, background: 'rgba(239,68,68,0.12)', border: '2px solid #ef4444', pointerEvents: 'none' }} />
+                          )}
+                          {/* Filename overlay */}
+                          {showFilenames && !isProduct && tile.type !== 'text' && (
+                            <div style={{ position: 'absolute', bottom: 4, left: 4, background: 'rgba(0,0,0,.75)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 8, padding: '1px 5px', borderRadius: 2, maxWidth: '90%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                              {tileFilename(activePg.name, si, ti, tile.syncDimensions ? 'sync' : pvMode)}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               );
             })}
