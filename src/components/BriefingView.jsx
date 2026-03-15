@@ -1214,20 +1214,13 @@ function PreviewMode({ store, onClose }) {
           </div>
 
           {/* ─── PAGE CONTENT (sections) ─── */}
-          <div style={{ padding: isMobile ? '0' : '0' }}>
+          <div style={{ padding: isMobile ? '10px 12px' : '12px 20px', background: '#fff' }}>
             {activePg && activePg.sections.map(function(sec, si) {
               var layout = findLayout(sec.layoutId);
               var config = getGridConfig(layout, isMobile);
-              var tileDims = LAYOUT_TILE_DIMS[sec.layoutId] || [];
-              var sectionGridStyle = Object.assign({}, config.gridStyle, { display: 'grid', gap: 4, width: '100%' });
-              if (!sectionGridStyle.aspectRatio && tileDims.length > 0) {
-                var firstDim = tileDims[0] || { w: 1500, h: 600 };
-                if (layout.cells === 1) {
-                  sectionGridStyle.aspectRatio = String(firstDim.w / firstDim.h);
-                }
-              }
+              var sectionGridStyle = Object.assign({}, config.gridStyle, { display: 'grid', gap: 10, width: '100%', overflow: 'hidden' });
               return (
-                <div key={sec.id} style={{ marginBottom: 4 }}>
+                <div key={sec.id} style={{ marginBottom: 10 }}>
                   <div style={sectionGridStyle}>
                     {sec.tiles.map(function(tile, ti) {
                       var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
@@ -1251,7 +1244,7 @@ function PreviewMode({ store, onClose }) {
                           {imgSrc ? (
                             <img src={imgSrc} alt={'Tile ' + (ti + 1)} style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
                           ) : (
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: isMobile ? 10 : 12, gap: 4, width: '100%', height: '100%', minHeight: isMobile ? 40 : 60, background: tile.bgColor || '#f0f0f0' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: isMobile ? 10 : 12, gap: 4, width: '100%', height: '100%', background: tile.bgColor || '#f0f0f0' }}>
                               {isProduct ? (
                                 <span style={{ fontSize: isMobile ? 9 : 11, color: '#888' }}>Product Grid</span>
                               ) : (
