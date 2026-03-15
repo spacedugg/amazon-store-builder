@@ -738,7 +738,7 @@ function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTil
 }
 
 // ─── STORE HERO BANNER (above nav) ───
-function StoreHeroBanner({ store, viewMode }) {
+function StoreHeroBanner({ store, viewMode, onHeroClick, isSelected }) {
   // Find the first store_hero tile across all pages
   var heroTile = null;
   (store.pages || []).forEach(function(page) {
@@ -758,7 +758,8 @@ function StoreHeroBanner({ store, viewMode }) {
   var height = isDesktop ? 600 : 450;
 
   return (
-    <div className="briefing-hero-banner">
+    <div className="briefing-hero-banner" onClick={onHeroClick}
+      style={{ cursor: onHeroClick ? 'pointer' : 'default', outline: isSelected ? '3px solid #3b82f6' : 'none', outlineOffset: -3, borderRadius: 4, transition: 'outline .15s' }}>
       <div className="briefing-hero-placeholder">
         <div className="briefing-hero-label">Store Hero Image</div>
         <div className="briefing-hero-dims">{width} &times; {height}px</div>
@@ -1258,7 +1259,7 @@ function PreviewMode({ store, onClose }) {
           </div>
 
           {/* ─── PAGE CONTENT (sections) ─── */}
-          <div className="preview-store-content" style={{ background: '#fff' }}>
+          <div className="preview-store-content" style={{ background: '#fff', padding: isMobile ? '0 12px' : '0 24px' }}>
             {activePg && activePg.sections.map(function(sec, si) {
               var layout = findLayout(sec.layoutId);
               var config = getGridConfig(layout, isMobile);
@@ -1785,7 +1786,15 @@ export default function BriefingView() {
         {/* CENTER: Store visual preview */}
         <div className={'briefing-content' + (viewMode === 'mobile' ? ' briefing-mobile' : '')}>
           {/* Store Hero Banner above nav */}
-          <StoreHeroBanner store={store} viewMode={viewMode} />
+          <StoreHeroBanner store={store} viewMode={viewMode}
+            isSelected={selectedTile && selectedTile.sid === '__hero__'}
+            onHeroClick={function() {
+              setSelectedTile({ sid: '__hero__', ti: 0 });
+              setTimeout(function() {
+                var el = document.getElementById('tile-detail-hero');
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }, 50);
+            }} />
 
           {/* Brand logo + Store nav bar */}
           <div className="briefing-store-brand-bar">
@@ -1840,13 +1849,14 @@ export default function BriefingView() {
               var heroAllDone = heroSyncDone || heroDeskDone;
               var heroCheckBg = heroAllDone ? '#dcfce7' : '#fef2f2';
               var heroCheckBorder = heroAllDone ? '#86efac' : '#fecaca';
+              var heroIsSelected = selectedTile && selectedTile.sid === '__hero__';
               return (
-                <div className="briefing-right-section-group">
+                <div id="tile-detail-hero" className="briefing-right-section-group">
                   <div className="briefing-right-section-header" style={{ background: heroColor.bg, borderLeft: '3px solid ' + heroColor.border }}>
                     <span style={{ fontWeight: 700, color: heroColor.label, fontSize: 11 }}>Store Hero Image</span>
                     <span style={{ fontSize: 10, color: '#64748b' }}> &middot; Header Banner</span>
                   </div>
-                  <div className="briefing-tile-detail" style={{ borderLeft: '3px solid ' + heroColor.border }}>
+                  <div className={'briefing-tile-detail' + (heroIsSelected ? ' briefing-tile-detail-selected' : '')} style={{ borderLeft: '3px solid ' + heroColor.border }}>
                     <div className="briefing-tile-header">
                       <span className="briefing-tile-type">Image</span>
                       <span className="briefing-tile-imgcat" style={{ background: '#ef4444', color: '#fff', borderRadius: 3, padding: '1px 8px', fontSize: 10, fontWeight: 700 }}>
