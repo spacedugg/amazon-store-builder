@@ -478,13 +478,15 @@ textarea.input { resize: vertical; min-height: 44px; }
 .briefing-section-layout { font-size: 11px; color: #64748b; background: #f1f5f9; padding: 2px 8px; border-radius: 4px; }
 
 /* Section preview (reuses SectionView but in read-only mode) */
-.briefing-section-preview { margin-bottom: 12px; pointer-events: none; }
+.briefing-section-preview { margin-bottom: 12px; pointer-events: none; padding: 0 16px; }
 .briefing-section-clickable { pointer-events: auto; }
 .briefing-section-clickable .section-header { pointer-events: none; }
 .briefing-section-clickable .section-tiles > div { cursor: pointer; transition: outline 0.15s; border-radius: 4px; }
 .briefing-section-clickable .section-tiles > div:hover { outline: 2px solid #3b82f6; outline-offset: -2px; }
 .briefing-section-preview .section-header { display: none; }
 .briefing-section-preview .section-container { margin: 0; border: none; }
+.briefing-section-preview .tile { overflow: visible; }
+.briefing-section-preview .section-tiles { border-radius: 0; }
 /* Briefing tile gaps — match preview spacing, same gap for sections and tiles */
 .briefing-section-preview .section-tiles { gap: 18px !important; padding: 0 !important; overflow: visible !important; }
 .briefing-page { gap: 18px !important; }
