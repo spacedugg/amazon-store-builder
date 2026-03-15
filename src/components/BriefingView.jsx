@@ -1231,7 +1231,7 @@ function PreviewMode({ store, onClose }) {
               var layout = findLayout(sec.layoutId);
               var config = getGridConfig(layout, isMobile);
               return (
-                <div key={sec.id} style={{ marginBottom: 10 }}>
+                <div key={sec.id} style={{ marginBottom: 20 }}>
                   <div style={Object.assign({}, config.gridStyle, { display: 'grid', gap: 4, width: '100%', overflow: 'hidden' })}>
                     {sec.tiles.map(function(tile, ti) {
                       var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
@@ -1291,7 +1291,13 @@ function PreviewMode({ store, onClose }) {
             {(!activePg || activePg.sections.length === 0) && <div style={{ textAlign: 'center', color: '#94a3b8', padding: 60, fontSize: 14 }}>No sections on this page.</div>}
           </div>
 
-          {/* End of store content */}
+          {/* White spacing + dark footer */}
+          <div style={{ height: 60, background: '#fff' }} />
+          <div style={{ background: '#232f3e', padding: isMobile ? '24px 16px' : '32px 40px', color: 'rgba(255,255,255,.25)', fontSize: 11, textAlign: 'center' }}>
+            <div style={{ borderTop: '1px solid rgba(255,255,255,.1)', paddingTop: 16 }}>
+              Brand Store Footer
+            </div>
+          </div>
         </div>
       </div>
 

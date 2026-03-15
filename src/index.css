@@ -416,7 +416,7 @@ textarea.input { resize: vertical; min-height: 44px; }
 .briefing-inspiration-cat { font-size: 9px; color: #94a3b8; }
 
 /* Main content */
-.briefing-content { flex: 1; overflow-y: auto; padding: 24px; }
+.briefing-content { flex: 1; overflow-y: auto; padding: 16px; max-width: 720px; min-width: 0; }
 .briefing-content.briefing-mobile { max-width: 480px; margin: 0 auto; }
 
 /* Store brand bar above nav */
@@ -484,13 +484,8 @@ textarea.input { resize: vertical; min-height: 44px; }
 .briefing-section-clickable .section-tiles > div { cursor: pointer; transition: outline 0.15s; border-radius: 4px; }
 .briefing-section-clickable .section-tiles > div:hover { outline: 2px solid #3b82f6; outline-offset: -2px; }
 .briefing-section-preview .section-header { display: none; }
-.briefing-section-preview .section-container { margin: 0; border: none; border-radius: 0; box-shadow: none; }
-.briefing-section-preview .section-tiles { border-radius: 0; gap: 0; padding: 0; }
-.briefing-section-preview .tile { border-radius: 0; border: none; }
-.briefing-section-preview .tile-shoppable-badge,
-.briefing-section-preview .tile-link-badge,
-.briefing-section-preview .pcg-header { display: none; }
-/* Preview store content — no rounded corners, no tags */
+.briefing-section-preview .section-container { margin: 0; border: none; }
+/* Preview store content (full-screen preview modal only) — no rounded corners, no tags */
 .preview-store-content .tile { border-radius: 0; border: none; }
 .preview-store-content .tile-shoppable-badge,
 .preview-store-content .tile-link-badge,
