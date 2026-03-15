@@ -1236,14 +1236,14 @@ function PreviewMode({ store, onClose }) {
               var sectionLabel = sec.name || ('Section ' + (si + 1));
               var layoutLabel = layout ? layout.name : sec.layoutId;
               return (
-                <div key={sec.id} style={{ position: 'relative', marginBottom: 20 }}>
+                <div key={sec.id} style={{ position: 'relative', marginBottom: isMobile ? 10 : 20 }}>
                   {/* Section label outside the store mask, positioned to the left */}
                   <div style={{ position: 'absolute', right: '100%', top: 0, paddingRight: 10, whiteSpace: 'nowrap', fontSize: 10, lineHeight: '16px', color: '#94a3b8', fontWeight: 600, textAlign: 'right' }}>
                     <div style={{ color: '#64748b', fontWeight: 700 }}>S{si + 1}</div>
                     <div style={{ fontSize: 9, color: '#94a3b8', maxWidth: 120, overflow: 'hidden', textOverflow: 'ellipsis' }}>{sectionLabel}</div>
                     <div style={{ fontSize: 8, color: '#b0b8c4', fontStyle: 'italic' }}>{layoutLabel}</div>
                   </div>
-                  <div style={Object.assign({}, config.gridStyle, { display: 'grid', gap: 18, width: '100%', overflow: 'hidden' })}>
+                  <div style={Object.assign({}, config.gridStyle, { display: 'grid', gap: isMobile ? 9 : 18, width: '100%', overflow: 'hidden' })}>
                     {sec.tiles.map(function(tile, ti) {
                       var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
                       var tileStyle = Object.assign({}, config.getTileStyle(ti), { position: 'relative', overflow: 'hidden', minHeight: 0 });
