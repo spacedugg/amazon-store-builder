@@ -3,7 +3,6 @@ import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_
 import { loadStoreByShareToken } from '../storage';
 // DOCX export removed — designer doesn't need it
 import SectionView, { getGridConfig } from './SectionView';
-import TileView from './TileView';
 
 var noop = function() {};
 
@@ -1232,31 +1231,24 @@ function PreviewMode({ store, onClose }) {
               var layout = findLayout(sec.layoutId);
               var config = getGridConfig(layout, isMobile);
               return (
-                <div key={sec.id} style={{ marginBottom: 0 }}>
-                  <div style={Object.assign({}, config.gridStyle, { display: 'grid', gap: 0, width: '100%', overflow: 'hidden' })}>
+                <div key={sec.id} style={{ marginBottom: 10 }}>
+                  <div style={Object.assign({}, config.gridStyle, { display: 'grid', gap: 4, width: '100%', overflow: 'hidden' })}>
                     {sec.tiles.map(function(tile, ti) {
                       var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
                       var tileStyle = Object.assign({}, config.getTileStyle(ti), { position: 'relative', overflow: 'hidden', minHeight: 0 });
 
-                      // Find loaded image for this tile
-                      var enrichedTile = tile;
+                      // Determine tile dimensions for aspect ratio
+                      var dims = (isMobile ? tile.mobileDimensions : tile.dimensions) || tile.dimensions || { w: 3000, h: 1200 };
+
+                      // Only show name-matched images from loaded folders — never show editor-uploaded images
+                      var matchedImgSrc = null;
                       if (!isProduct && tile.type !== 'text') {
-                        var imgSrc = null;
                         if (tile.syncDimensions) {
-                          imgSrc = findTileImage(activePg.name, si, ti, 'sync');
+                          matchedImgSrc = findTileImage(activePg.name, si, ti, 'sync');
                         } else {
-                          imgSrc = findTileImage(activePg.name, si, ti, pvMode);
-                          if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, pvMode === 'desktop' ? 'mobile' : 'desktop');
-                          if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, 'sync');
-                        }
-                        if (imgSrc) {
-                          enrichedTile = Object.assign({}, tile);
-                          if (pvMode === 'mobile') {
-                            enrichedTile.uploadedImageMobile = imgSrc;
-                            if (!enrichedTile.uploadedImage) enrichedTile.uploadedImage = imgSrc;
-                          } else {
-                            enrichedTile.uploadedImage = imgSrc;
-                          }
+                          matchedImgSrc = findTileImage(activePg.name, si, ti, pvMode);
+                          if (!matchedImgSrc) matchedImgSrc = findTileImage(activePg.name, si, ti, pvMode === 'desktop' ? 'mobile' : 'desktop');
+                          if (!matchedImgSrc) matchedImgSrc = findTileImage(activePg.name, si, ti, 'sync');
                         }
                       }
 
@@ -1265,26 +1257,30 @@ function PreviewMode({ store, onClose }) {
 
                       return (
                         <div key={ti} style={tileStyle}>
-                          <div style={{ width: '100%', height: '100%' }}>
-                            <TileView
-                              tile={enrichedTile}
-                              selected={false}
-                              onClick={noop}
-                              viewMode={pvMode}
-                              products={[]}
-                              uiLang="en"
-                            />
+                          {/* Fixed aspect ratio container based on tile dimensions */}
+                          <div style={{ width: '100%', aspectRatio: dims.w + '/' + dims.h, background: tile.bgColor || '#f0f0f0', position: 'relative', overflow: 'hidden' }}>
+                            {matchedImgSrc ? (
+                              <img src={matchedImgSrc} alt={'Tile ' + (ti + 1)} style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }} />
+                            ) : isProduct ? (
+                              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', color: '#94a3b8', fontSize: isMobile ? 10 : 12 }}>
+                                <span style={{ color: '#888' }}>Product Grid</span>
+                              </div>
+                            ) : (
+                              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', color: '#bbb' }}>
+                                <span style={{ fontFamily: 'monospace', fontSize: isMobile ? 8 : 10 }}>{dims.w}&times;{dims.h}</span>
+                              </div>
+                            )}
+                            {/* Red overlay for missing/unmatched tiles */}
+                            {isMissing && (
+                              <div style={{ position: 'absolute', inset: 0, background: 'rgba(239,68,68,0.12)', border: '2px solid #ef4444', pointerEvents: 'none' }} />
+                            )}
+                            {/* Filename overlay */}
+                            {showFilenames && !isProduct && tile.type !== 'text' && (
+                              <div style={{ position: 'absolute', bottom: 4, left: 4, background: 'rgba(0,0,0,.75)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 8, padding: '1px 5px', borderRadius: 2, maxWidth: '90%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                {tileFilename(activePg.name, si, ti, tile.syncDimensions ? 'sync' : pvMode)}
+                              </div>
+                            )}
                           </div>
-                          {/* Red overlay for missing/unmatched tiles */}
-                          {isMissing && (
-                            <div style={{ position: 'absolute', inset: 0, background: 'rgba(239,68,68,0.12)', border: '2px solid #ef4444', pointerEvents: 'none' }} />
-                          )}
-                          {/* Filename overlay */}
-                          {showFilenames && !isProduct && tile.type !== 'text' && (
-                            <div style={{ position: 'absolute', bottom: 4, left: 4, background: 'rgba(0,0,0,.75)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 8, padding: '1px 5px', borderRadius: 2, maxWidth: '90%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                              {tileFilename(activePg.name, si, ti, tile.syncDimensions ? 'sync' : pvMode)}
-                            </div>
-                          )}
                         </div>
                       );
                     })}
