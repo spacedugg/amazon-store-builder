@@ -1231,7 +1231,7 @@ function PreviewMode({ store, onClose }) {
               var layout = findLayout(sec.layoutId);
               var config = getGridConfig(layout, isMobile);
               return (
-                <div key={sec.id} style={{ marginBottom: 10 }}>
+                <div key={sec.id} style={{ marginBottom: 20 }}>
                   <div style={Object.assign({}, config.gridStyle, { display: 'grid', gap: 4, width: '100%', overflow: 'hidden' })}>
                     {sec.tiles.map(function(tile, ti) {
                       var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
