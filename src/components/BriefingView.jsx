@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, findLayout } from '../constants';
 import { loadStoreByShareToken } from '../storage';
 // DOCX export removed — designer doesn't need it
-import SectionView, { getGridConfig } from './SectionView';
+import SectionView from './SectionView';
 
 var noop = function() {};
 
@@ -1216,54 +1216,64 @@ function PreviewMode({ store, onClose }) {
           {/* ─── PAGE CONTENT (sections) ─── */}
           <div style={{ padding: isMobile ? '10px 12px' : '12px 20px', background: '#fff' }}>
             {activePg && activePg.sections.map(function(sec, si) {
-              var layout = findLayout(sec.layoutId);
-              var config = getGridConfig(layout, isMobile);
-              var sectionGridStyle = Object.assign({}, config.gridStyle, { display: 'grid', gap: 10, width: '100%', overflow: 'hidden' });
+              // Build enriched section with loaded folder images injected into tiles
+              var enrichedTiles = sec.tiles.map(function(tile, ti) {
+                var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
+                if (isProduct || tile.type === 'text') return tile;
+                var imgSrc = null;
+                if (tile.syncDimensions) {
+                  imgSrc = findTileImage(activePg.name, si, ti, 'sync');
+                } else {
+                  imgSrc = findTileImage(activePg.name, si, ti, pvMode);
+                  if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, pvMode === 'desktop' ? 'mobile' : 'desktop');
+                  if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, 'sync');
+                }
+                if (!imgSrc) return tile;
+                // Clone tile with loaded image set as uploaded image
+                var enriched = Object.assign({}, tile);
+                if (pvMode === 'mobile') {
+                  enriched.uploadedImageMobile = imgSrc;
+                  if (!enriched.uploadedImage) enriched.uploadedImage = imgSrc;
+                } else {
+                  enriched.uploadedImage = imgSrc;
+                }
+                return enriched;
+              });
+              var enrichedSection = Object.assign({}, sec, { tiles: enrichedTiles });
               return (
-                <div key={sec.id} style={{ marginBottom: 10 }}>
-                  <div style={sectionGridStyle}>
-                    {sec.tiles.map(function(tile, ti) {
-                      var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
-                      var tileStyle = Object.assign({}, config.getTileStyle(ti), { position: 'relative', background: tile.bgColor || '#f5f5f5', overflow: 'hidden', minHeight: 0 });
-                      var imgSrc = null;
-                      if (!isProduct && tile.type !== 'text') {
-                        if (tile.syncDimensions) {
-                          imgSrc = findTileImage(activePg.name, si, ti, 'sync');
-                        } else {
-                          imgSrc = findTileImage(activePg.name, si, ti, pvMode);
-                          if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, pvMode === 'desktop' ? 'mobile' : 'desktop');
-                          if (!imgSrc) imgSrc = findTileImage(activePg.name, si, ti, 'sync');
-                        }
-                      }
-                      if (!imgSrc) {
-                        imgSrc = pvMode === 'desktop' ? tile.uploadedImage : (tile.uploadedImageMobile || tile.uploadedImage);
-                      }
-                      var expectedFilename = (!isProduct && tile.type !== 'text') ? tileFilename(activePg.name, si, ti, tile.syncDimensions ? 'sync' : pvMode) : null;
-                      return (
-                        <div key={ti} style={tileStyle}>
-                          {imgSrc ? (
-                            <img src={imgSrc} alt={'Tile ' + (ti + 1)} style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
-                          ) : (
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: isMobile ? 10 : 12, gap: 4, width: '100%', height: '100%', background: tile.bgColor || '#f0f0f0' }}>
-                              {isProduct ? (
-                                <span style={{ fontSize: isMobile ? 9 : 11, color: '#888' }}>Product Grid</span>
-                              ) : (
-                                <span style={{ fontFamily: 'monospace', fontSize: isMobile ? 8 : 10, color: '#aaa' }}>
-                                  {expectedFilename || 'No image'}
-                                </span>
-                              )}
-                            </div>
-                          )}
-                          {/* Filename overlay when toggled */}
-                          {showFilenames && expectedFilename && (
-                            <div style={{ position: 'absolute', bottom: 4, left: 4, background: 'rgba(0,0,0,.75)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 8, padding: '1px 5px', borderRadius: 2, maxWidth: '90%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                              {expectedFilename}
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
+                <div key={sec.id} className="briefing-section-preview" style={{ marginBottom: 10 }}>
+                  <SectionView
+                    section={enrichedSection}
+                    idx={si}
+                    totalSections={activePg.sections.length}
+                    sel={null}
+                    onSelect={noop}
+                    onDelete={noop}
+                    onDuplicate={noop}
+                    onCopy={noop}
+                    onMoveUp={null}
+                    onMoveDown={null}
+                    onChangeLayout={noop}
+                    viewMode={pvMode}
+                    products={[]}
+                    uiLang="en"
+                  />
+                  {/* Filename overlays */}
+                  {showFilenames && (
+                    <div style={{ position: 'relative', marginTop: -4 }}>
+                      {sec.tiles.map(function(tile, ti) {
+                        var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
+                        if (isProduct || tile.type === 'text') return null;
+                        var fn = tileFilename(activePg.name, si, ti, tile.syncDimensions ? 'sync' : pvMode);
+                        if (!fn) return null;
+                        return (
+                          <span key={ti} style={{ display: 'inline-block', background: 'rgba(0,0,0,.75)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 8, padding: '1px 5px', borderRadius: 2, margin: '0 2px 2px 0' }}>
+                            {fn}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               );
             })}
