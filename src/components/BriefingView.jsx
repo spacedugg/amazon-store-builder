@@ -1218,22 +1218,13 @@ function PreviewMode({ store, onClose }) {
             {activePg && activePg.sections.map(function(sec, si) {
               var layout = findLayout(sec.layoutId);
               var config = getGridConfig(layout, isMobile);
-              var tileDims = LAYOUT_TILE_DIMS[sec.layoutId] || [];
-              var sectionGridStyle = Object.assign({}, config.gridStyle, { display: 'grid', gap: 10, width: '100%' });
-              delete sectionGridStyle.aspectRatio;
+              var sectionGridStyle = Object.assign({}, config.gridStyle, { display: 'grid', gap: 10, width: '100%', overflow: 'hidden' });
               return (
                 <div key={sec.id} style={{ marginBottom: 10 }}>
                   <div style={sectionGridStyle}>
                     {sec.tiles.map(function(tile, ti) {
                       var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
-                      var dim = tileDims[ti] || { w: 1500, h: 750 };
-                      var tileAspect;
-                      if (isMobile && layout.type === 'vh') {
-                        tileAspect = '2'; // VH mobile: all tiles 1500×750
-                      } else {
-                        tileAspect = String(dim.w / dim.h);
-                      }
-                      var tileStyle = Object.assign({}, config.getTileStyle(ti), { position: 'relative', background: tile.bgColor || '#f5f5f5', overflow: 'hidden', minHeight: 0, aspectRatio: tileAspect });
+                      var tileStyle = Object.assign({}, config.getTileStyle(ti), { position: 'relative', background: tile.bgColor || '#f5f5f5', overflow: 'hidden', minHeight: 0 });
                       var imgSrc = null;
                       if (!isProduct && tile.type !== 'text') {
                         if (tile.syncDimensions) {
