@@ -416,15 +416,17 @@ textarea.input { resize: vertical; min-height: 44px; }
 .briefing-inspiration-cat { font-size: 9px; color: #94a3b8; }
 
 /* Main content */
-.briefing-content { flex: 1; overflow-y: auto; padding: 16px 40px; min-width: 0; }
-.briefing-content.briefing-mobile { max-width: 480px; margin: 0 auto; padding: 16px 24px; }
+.briefing-content { flex: 1; overflow-y: auto; padding: 16px 0; min-width: 0; }
+.briefing-content.briefing-mobile { max-width: 480px; margin: 0 auto; padding: 16px 0; }
 
 /* Store brand bar above nav */
-.briefing-store-brand-bar { background: #fff; padding: 10px 16px 4px; border-bottom: none; }
+.briefing-store-brand-bar { background: #fff; padding: 10px 10% 4px; border-bottom: none; }
+.briefing-mobile .briefing-store-brand-bar { padding: 10px 5% 4px; }
 .briefing-store-brand { font-weight: 800; font-size: 15px; color: #0f172a; letter-spacing: -.02em; }
 
 /* Store nav in briefing */
-.briefing-store-nav { background: #fff; padding: 4px 16px 0; border-bottom: 1px solid #e2e8f0; margin-bottom: 0; }
+.briefing-store-nav { background: #fff; padding: 4px 10% 0; border-bottom: 1px solid #e2e8f0; margin-bottom: 0; }
+.briefing-mobile .briefing-store-nav { padding: 4px 5% 0; }
 .briefing-nav-tabs { display: flex; gap: 2px; font-size: 11px; flex-wrap: nowrap; overflow-x: auto; position: relative; }
 .briefing-nav-tabs::-webkit-scrollbar { height: 2px; }
 .briefing-nav-tab-item { position: relative; flex-shrink: 0; }
@@ -446,7 +448,8 @@ textarea.input { resize: vertical; min-height: 44px; }
 .briefing-nav-popup-sub { padding-left: 24px; font-size: 11px; }
 
 /* Store Hero Banner */
-.briefing-hero-banner { background: #fff; border-bottom: none; }
+.briefing-hero-banner { background: #fff; border-bottom: none; padding: 0 10%; }
+.briefing-mobile .briefing-hero-banner { padding: 0 5%; }
 .briefing-hero-placeholder { background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 50%, #c4b5fd 100%); padding: 32px 24px; text-align: center; position: relative; min-height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
 .briefing-hero-label { font-size: 13px; font-weight: 800; color: #7c3aed; text-transform: uppercase; letter-spacing: .08em; }
 .briefing-hero-dims { font-size: 11px; color: #8b5cf6; font-family: monospace; }
@@ -478,7 +481,8 @@ textarea.input { resize: vertical; min-height: 44px; }
 .briefing-section-layout { font-size: 11px; color: #64748b; background: #f1f5f9; padding: 2px 8px; border-radius: 4px; }
 
 /* Section preview (reuses SectionView but in read-only mode) */
-.briefing-section-preview { margin-bottom: 12px; pointer-events: none; padding: 0 16px; }
+.briefing-section-preview { margin-bottom: 0; pointer-events: none; padding: 0 10%; }
+.briefing-mobile .briefing-section-preview { padding: 0 5%; }
 .briefing-section-clickable { pointer-events: auto; }
 .briefing-section-clickable .section-header { pointer-events: none; }
 .briefing-section-clickable .section-tiles > div { cursor: pointer; transition: outline 0.15s; border-radius: 4px; }
@@ -487,12 +491,12 @@ textarea.input { resize: vertical; min-height: 44px; }
 .briefing-section-preview .section-container { margin: 0; border: none; }
 .briefing-section-preview .tile { overflow: visible; }
 .briefing-section-preview .section-tiles { border-radius: 0; }
-/* Briefing tile gaps — match preview spacing, same gap for sections and tiles */
-.briefing-section-preview .section-tiles { gap: 18px !important; padding: 0 !important; overflow: visible !important; }
-.briefing-page { gap: 18px !important; }
+/* Briefing tile gaps — match Amazon store spacing */
+.briefing-section-preview .section-tiles { gap: 10px !important; padding: 0 !important; overflow: visible !important; }
+.briefing-page { gap: 10px !important; }
 /* Mobile briefing: halved gaps */
-.briefing-mobile .briefing-section-preview .section-tiles { gap: 9px !important; }
-.briefing-mobile .briefing-page { gap: 9px !important; }
+.briefing-mobile .briefing-section-preview .section-tiles { gap: 6px !important; }
+.briefing-mobile .briefing-page { gap: 6px !important; }
 /* Preview store content (full-screen preview modal only) — no rounded corners, no tags */
 .preview-store-content .tile { border-radius: 0; border: none; }
 .preview-store-content .tile-shoppable-badge,
