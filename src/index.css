@@ -484,7 +484,19 @@ textarea.input { resize: vertical; min-height: 44px; }
 .briefing-section-clickable .section-tiles > div { cursor: pointer; transition: outline 0.15s; border-radius: 4px; }
 .briefing-section-clickable .section-tiles > div:hover { outline: 2px solid #3b82f6; outline-offset: -2px; }
 .briefing-section-preview .section-header { display: none; }
-.briefing-section-preview .section-container { margin: 0; border: none; }
+.briefing-section-preview .section-container { margin: 0; border: none; border-radius: 0; box-shadow: none; }
+.briefing-section-preview .section-tiles { border-radius: 0; gap: 0; padding: 0; }
+.briefing-section-preview .tile { border-radius: 0; border: none; }
+.briefing-section-preview .tile-shoppable-badge,
+.briefing-section-preview .tile-link-badge,
+.briefing-section-preview .pcg-header { display: none; }
+/* Preview store content — no rounded corners, no tags */
+.preview-store-content .tile { border-radius: 0; border: none; }
+.preview-store-content .tile-shoppable-badge,
+.preview-store-content .tile-link-badge,
+.preview-store-content .pcg-header { display: none; }
+.preview-store-content .section-container { border-radius: 0; box-shadow: none; }
+.preview-store-content .section-tiles { border-radius: 0; }
 
 /* Tile details */
 .briefing-tile-details { display: flex; flex-direction: column; gap: 8px; }
