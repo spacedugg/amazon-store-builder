@@ -6,6 +6,18 @@ import SectionView, { getGridConfig } from './SectionView';
 
 var noop = function() {};
 
+// ─── ASPECT RATIO HELPER ───
+// Returns true if desktop and mobile dimensions have the same aspect ratio
+// (e.g. 3000x1500 and 1500x750 are both 2:1, or 1000x1000 and 500x500 are both 1:1)
+function isSameAspectRatio(deskDims, mobDims) {
+  if (!deskDims || !mobDims) return false;
+  if (deskDims.w === mobDims.w && deskDims.h === mobDims.h) return true;
+  // Compare ratios with tolerance for floating point
+  var deskRatio = deskDims.w / deskDims.h;
+  var mobRatio = mobDims.w / mobDims.h;
+  return Math.abs(deskRatio - mobRatio) < 0.01;
+}
+
 // ─── META DESCRIPTION GENERATOR ───
 // Generates SEO-optimized meta descriptions for Amazon Brand Store pages.
 // Max 155 chars, front-loads brand + primary keywords within first 120 chars.
@@ -594,42 +606,60 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
         </div>
       )}
 
-      <div className="briefing-tile-dims-row">
-        <span className="briefing-dim">Desktop: {tile.dimensions ? (tile.dimensions.w + '\u00D7' + tile.dimensions.h) : 'N/A'}</span>
-        <span className="briefing-dim">Mobile: {tile.mobileDimensions ? (tile.mobileDimensions.w + '\u00D7' + tile.mobileDimensions.h) : 'N/A'}</span>
-        {tile.syncDimensions && <span className="briefing-dim" style={{ color: '#10B981', fontWeight: 600 }}>= 1 image</span>}
-      </div>
+      {/* ─── DIMENSIONS ROW ─── */}
+      {(function() {
+        var sameRatio = tile.syncDimensions || isSameAspectRatio(tile.dimensions, tile.mobileDimensions);
+        return (
+          <div className="briefing-tile-dims-row">
+            <span className="briefing-dim">Desktop: {tile.dimensions ? (tile.dimensions.w + '\u00D7' + tile.dimensions.h) : 'N/A'}</span>
+            {!sameRatio && <span className="briefing-dim">Mobile: {tile.mobileDimensions ? (tile.mobileDimensions.w + '\u00D7' + tile.mobileDimensions.h) : 'N/A'}</span>}
+            {sameRatio && <span className="briefing-dim" style={{ color: '#10B981', fontWeight: 600 }}>{tile.syncDimensions ? '= 1 image (sync)' : '= 1 image (same ratio)'}</span>}
+          </div>
+        );
+      })()}
 
       {/* ─── FILE NAMES (click to copy) ─── */}
-      {isImageTile && pageName != null && sectionIndex != null && (
-        <div style={{ marginTop: 4, padding: '4px 0', fontSize: 10, lineHeight: 1.8 }}>
-          {tile.syncDimensions ? (
-            <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'sync')} />
-          ) : (
+      {isImageTile && pageName != null && sectionIndex != null && (function() {
+        var sameRatio = tile.syncDimensions || isSameAspectRatio(tile.dimensions, tile.mobileDimensions);
+        if (sameRatio) {
+          return (
+            <div style={{ marginTop: 4, padding: '4px 0', fontSize: 10, lineHeight: 1.8 }}>
+              <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'sync')} />
+            </div>
+          );
+        }
+        return (
+          <div style={{ marginTop: 4, padding: '4px 0', fontSize: 10, lineHeight: 1.8 }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'desktop')} label="D" />
               <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'mobile')} label="M" />
             </div>
-          )}
-        </div>
-      )}
+          </div>
+        );
+      })()}
 
       {/* ─── IMAGE COMPLETION CHECKMARKS ─── */}
       {isImageTile && checks && toggleCheck && (function() {
+        var sameRatio = tile.syncDimensions || isSameAspectRatio(tile.dimensions, tile.mobileDimensions);
         var syncDone = !!checks[checkBase + '/sync'];
         var deskDone = !!checks[checkBase + '/desktop'];
         var mobDone = !!checks[checkBase + '/mobile'];
-        var allDone = tile.syncDimensions ? syncDone : (deskDone && mobDone);
+        var allDone = sameRatio ? syncDone : (deskDone && mobDone);
         var checkBg = allDone ? '#dcfce7' : '#fef2f2';
         var checkBorder = allDone ? '#86efac' : '#fecaca';
+
+        if (sameRatio) {
+          return (
+            <div style={{ marginTop: 6, padding: '8px 10px', borderRadius: 6, background: checkBg, border: '1px solid ' + checkBorder, transition: 'all .2s' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: syncDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
+                <input type="checkbox" checked={syncDone} onChange={function() { toggleCheck(checkBase + '/sync'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
+                {syncDone ? 'Image done' : 'Image missing'}
+              </label>
+            </div>
+          );
+        }
         return (
-        <div style={{ marginTop: 6, padding: '8px 10px', borderRadius: 6, background: checkBg, border: '1px solid ' + checkBorder, transition: 'all .2s' }}>
-          {tile.syncDimensions ? (
-            <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: syncDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
-              <input type="checkbox" checked={syncDone} onChange={function() { toggleCheck(checkBase + '/sync'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
-              {syncDone ? 'Image done' : 'Image missing'}
-            </label>
-          ) : (
+          <div style={{ marginTop: 6, padding: '8px 10px', borderRadius: 6, background: checkBg, border: '1px solid ' + checkBorder, transition: 'all .2s' }}>
             <div style={{ display: 'flex', gap: 12 }}>
               <label style={{ display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: deskDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
                 <input type="checkbox" checked={deskDone} onChange={function() { toggleCheck(checkBase + '/desktop'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
@@ -640,8 +670,7 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
                 Mobile {mobDone ? '\u2713' : '\u2717'}
               </label>
             </div>
-          )}
-        </div>
+          </div>
         );
       })()}
     </div>
@@ -689,7 +718,7 @@ function SectionBriefing({ section, sectionIndex, viewMode, products, sectionCol
 // No page header inside the store layout — sections connect edge-to-edge like Amazon.
 function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTile, onTileSelect, store }) {
   return (
-    <div className="briefing-page" style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+    <div className="briefing-page" style={{ display: 'flex', flexDirection: 'column' }}>
       {page.sections.map(function(sec, si) {
         return (
           <SectionBriefing
@@ -1571,13 +1600,34 @@ export default function BriefingView() {
           <span className="briefing-readonly-badge">Read Only</span>
         </div>
         <div className="briefing-header-right">
-          <button onClick={function() { setShowPreview(true); }} style={{ background: 'rgba(255,255,255,.08)', border: '1px solid rgba(255,255,255,.15)', color: '#94a3b8', fontSize: 11, padding: '4px 10px', borderRadius: 4, cursor: 'pointer' }} title="Preview store with uploaded images">
+          {/* Desktop/Mobile toggle — prominent, centered */}
+          <div style={{ display: 'flex', gap: 2, background: 'rgba(255,255,255,.06)', borderRadius: 8, padding: 3, border: '1px solid rgba(255,255,255,.1)' }}>
+            <button onClick={function() { setViewMode('desktop'); }}
+              style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 16px', borderRadius: 6, fontSize: 12, fontWeight: 700, border: 'none', cursor: 'pointer', transition: 'all .2s',
+                background: viewMode === 'desktop' ? '#3b82f6' : 'transparent',
+                color: viewMode === 'desktop' ? '#fff' : 'rgba(255,255,255,.45)',
+                boxShadow: viewMode === 'desktop' ? '0 2px 8px rgba(59,130,246,.4)' : 'none' }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" /></svg>
+              Desktop
+            </button>
+            <button onClick={function() { setViewMode('mobile'); }}
+              style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 16px', borderRadius: 6, fontSize: 12, fontWeight: 700, border: 'none', cursor: 'pointer', transition: 'all .2s',
+                background: viewMode === 'mobile' ? '#8b5cf6' : 'transparent',
+                color: viewMode === 'mobile' ? '#fff' : 'rgba(255,255,255,.45)',
+                boxShadow: viewMode === 'mobile' ? '0 2px 8px rgba(139,92,246,.4)' : 'none' }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" /><path d="M12 18h.01" /></svg>
+              Mobile
+            </button>
+          </div>
+          {/* Preview button — secondary, further out */}
+          <button onClick={function() { setShowPreview(true); }}
+            style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(255,255,255,.06)', border: '1px solid rgba(255,255,255,.12)', color: '#94a3b8', fontSize: 11, padding: '5px 12px', borderRadius: 6, cursor: 'pointer', marginLeft: 8, transition: 'all .2s' }}
+            title="Preview store with uploaded images"
+            onMouseEnter={function(e) { e.currentTarget.style.background = 'rgba(255,255,255,.12)'; e.currentTarget.style.color = '#e2e8f0'; }}
+            onMouseLeave={function(e) { e.currentTarget.style.background = 'rgba(255,255,255,.06)'; e.currentTarget.style.color = '#94a3b8'; }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
             Preview
           </button>
-          <div className="briefing-view-toggle">
-            <button className={'briefing-view-btn' + (viewMode === 'desktop' ? ' active' : '')} onClick={function() { setViewMode('desktop'); }}>Desktop</button>
-            <button className={'briefing-view-btn' + (viewMode === 'mobile' ? ' active' : '')} onClick={function() { setViewMode('mobile'); }}>Mobile</button>
-          </div>
         </div>
       </div>
 
@@ -1752,25 +1802,44 @@ export default function BriefingView() {
 
         {/* RIGHT PANEL: Designer Instructions (page-specific) */}
         <div className="briefing-right-panel" ref={rightPanelRef}>
-          <div className="briefing-sidebar-title" style={{ padding: '14px 16px', borderBottom: '1px solid #f1f5f9', color: '#dc2626', margin: 0 }}>
-            Designer Instructions
-            {activePage && <span style={{ fontSize: 10, color: '#64748b', fontWeight: 400, marginLeft: 8 }}>{activePage.name}</span>}
+          <div style={{ padding: '12px 16px', borderBottom: '1px solid #e5e7eb', margin: 0, display: 'flex', alignItems: 'center', gap: 8, background: '#fff' }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></svg>
+            <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.08em', color: '#dc2626' }}>Designer Instructions</span>
+            {activePage && <span style={{ fontSize: 10, color: '#94a3b8', fontWeight: 400 }}>{activePage.name}</span>}
           </div>
           <div className="briefing-right-panel-body">
             {/* Store Hero / Header Banner instructions */}
             {(function() {
               var heroTile = null;
+              var heroPageId = null;
+              var heroPageName = null;
+              var heroSecId = null;
+              var heroSecIdx = -1;
+              var heroTileIdx = -1;
               (store.pages || []).forEach(function(pg) {
                 if (heroTile) return;
-                (pg.sections || []).forEach(function(sec) {
+                (pg.sections || []).forEach(function(sec, si) {
                   if (heroTile) return;
-                  (sec.tiles || []).forEach(function(tile) {
-                    if (!heroTile && tile.imageCategory === 'store_hero') heroTile = tile;
+                  (sec.tiles || []).forEach(function(tile, ti) {
+                    if (!heroTile && tile.imageCategory === 'store_hero') {
+                      heroTile = tile;
+                      heroPageId = pg.id;
+                      heroPageName = pg.name;
+                      heroSecId = sec.id;
+                      heroSecIdx = si;
+                      heroTileIdx = ti;
+                    }
                   });
                 });
               });
               if (!heroTile) return null;
               var heroColor = { bg: '#fef2f2', border: '#ef4444', label: '#b91c1c' };
+              var heroCheckBase = heroPageId + '/' + heroSecId + '/' + heroTileIdx;
+              var heroSyncDone = !!checks[heroCheckBase + '/sync'];
+              var heroDeskDone = !!checks[heroCheckBase + '/desktop'];
+              var heroAllDone = heroSyncDone || heroDeskDone;
+              var heroCheckBg = heroAllDone ? '#dcfce7' : '#fef2f2';
+              var heroCheckBorder = heroAllDone ? '#86efac' : '#fecaca';
               return (
                 <div className="briefing-right-section-group">
                   <div className="briefing-right-section-header" style={{ background: heroColor.bg, borderLeft: '3px solid ' + heroColor.border }}>
@@ -1814,6 +1883,28 @@ export default function BriefingView() {
                     <div className="briefing-tile-dims-row">
                       <span className="briefing-dim">Desktop: 3000&times;600</span>
                       <span className="briefing-dim">Mobile: 1242&times;450</span>
+                    </div>
+                    {/* Hero file names */}
+                    {heroPageName != null && (
+                      <div style={{ marginTop: 4, padding: '4px 0', fontSize: 10, lineHeight: 1.8 }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                          <CopyableFilename filename={tileFilename(heroPageName, heroSecIdx, heroTileIdx, 'desktop')} label="D" />
+                          <CopyableFilename filename={tileFilename(heroPageName, heroSecIdx, heroTileIdx, 'mobile')} label="M" />
+                        </div>
+                      </div>
+                    )}
+                    {/* Hero completion checkmarks */}
+                    <div style={{ marginTop: 6, padding: '8px 10px', borderRadius: 6, background: heroCheckBg, border: '1px solid ' + heroCheckBorder, transition: 'all .2s' }}>
+                      <div style={{ display: 'flex', gap: 12 }}>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: heroDeskDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
+                          <input type="checkbox" checked={heroDeskDone} onChange={function() { toggleCheck(heroCheckBase + '/desktop'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
+                          Desktop {heroDeskDone ? '\u2713' : '\u2717'}
+                        </label>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: heroSyncDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
+                          <input type="checkbox" checked={heroSyncDone} onChange={function() { toggleCheck(heroCheckBase + '/sync'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
+                          Mobile {heroSyncDone ? '\u2713' : '\u2717'}
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </div>
