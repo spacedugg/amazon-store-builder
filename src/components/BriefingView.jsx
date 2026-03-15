@@ -1785,6 +1785,7 @@ export default function BriefingView() {
 
         {/* CENTER: Store visual preview */}
         <div className={'briefing-content' + (viewMode === 'mobile' ? ' briefing-mobile' : '')}>
+          <div style={{ padding: viewMode === 'mobile' ? '0 16px' : '0 100px' }}>
           {/* Store Hero Banner above nav */}
           <StoreHeroBanner store={store} viewMode={viewMode}
             isSelected={selectedTile && selectedTile.sid === '__hero__'}
@@ -1807,6 +1808,7 @@ export default function BriefingView() {
             if (!activePage) return <div className="briefing-empty">No pages found.</div>;
             return <PageBriefing page={activePage} viewMode={viewMode} products={store.products || []} sectionStartIndex={0} selectedTile={selectedTile} onTileSelect={handleTileSelect} store={store} />;
           })()}
+          </div>
         </div>
 
         {/* RIGHT PANEL: Designer Instructions (page-specific) */}
