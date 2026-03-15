@@ -416,7 +416,7 @@ textarea.input { resize: vertical; min-height: 44px; }
 .briefing-inspiration-cat { font-size: 9px; color: #94a3b8; }
 
 /* Main content */
-.briefing-content { flex: 1; overflow-y: auto; padding: 16px; max-width: 720px; min-width: 0; }
+.briefing-content { flex: 1; overflow-y: auto; padding: 16px; min-width: 0; }
 .briefing-content.briefing-mobile { max-width: 480px; margin: 0 auto; }
 
 /* Store brand bar above nav */
