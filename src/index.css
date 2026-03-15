@@ -341,15 +341,15 @@ textarea.input { resize: vertical; min-height: 44px; }
 .topbar-drive-hint { font-size: 10px; color: #94a3b8; margin-top: 4px; }
 
 /* ─── BRIEFING VIEW (designer read-only) ─── */
-.briefing-root { display: flex; flex-direction: column; height: 100vh; background: #f8fafc; font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; }
+.briefing-root { display: flex; flex-direction: column; height: 100vh; background: #f1f5f9; font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; }
 
-/* Header */
-.briefing-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; background: #0f172a; color: #fff; flex-shrink: 0; }
-.briefing-header-left { display: flex; align-items: center; gap: 12px; }
-.briefing-header-right { display: flex; align-items: center; gap: 8px; }
-.briefing-logo { font-size: 14px; font-weight: 800; letter-spacing: -.02em; color: #FF9900; }
-.briefing-brand-name { font-size: 14px; font-weight: 600; color: rgba(255,255,255,.8); }
-.briefing-readonly-badge { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; background: rgba(99,102,241,.25); color: #a5b4fc; padding: 3px 10px; border-radius: 20px; }
+/* Header — modern gradient */
+.briefing-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 24px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #fff; flex-shrink: 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+.briefing-header-left { display: flex; align-items: center; gap: 14px; }
+.briefing-header-right { display: flex; align-items: center; gap: 12px; }
+.briefing-logo { font-size: 15px; font-weight: 800; letter-spacing: -.03em; background: linear-gradient(135deg, #FF9900, #FEBD69); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.briefing-brand-name { font-size: 14px; font-weight: 500; color: rgba(255,255,255,.7); letter-spacing: -.01em; }
+.briefing-readonly-badge { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; background: rgba(99,102,241,.2); color: #a5b4fc; padding: 3px 10px; border-radius: 20px; backdrop-filter: blur(4px); }
 .briefing-view-toggle { display: flex; gap: 2px; background: rgba(255,255,255,.08); border-radius: 6px; padding: 2px; }
 .briefing-view-btn { padding: 5px 12px; border-radius: 5px; font-size: 11px; font-weight: 600; color: rgba(255,255,255,.5); background: transparent; border: none; cursor: pointer; transition: all .15s; }
 .briefing-view-btn:hover { color: rgba(255,255,255,.8); }
@@ -385,10 +385,10 @@ textarea.input { resize: vertical; min-height: 44px; }
 /* Body layout */
 .briefing-body { display: flex; flex: 1; overflow: hidden; }
 
-/* Sidebar */
-.briefing-sidebar { width: 260px; flex-shrink: 0; background: #fff; border-right: 1px solid #e2e8f0; overflow-y: auto; padding: 16px 0; }
+/* Sidebar — modern clean */
+.briefing-sidebar { width: 260px; flex-shrink: 0; background: #fff; border-right: 1px solid #e2e8f0; overflow-y: auto; padding: 12px 0; }
 .briefing-sidebar-section { padding: 12px 16px; border-bottom: 1px solid #f1f5f9; }
-.briefing-sidebar-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #94a3b8; margin-bottom: 8px; }
+.briefing-sidebar-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #64748b; margin-bottom: 8px; }
 .briefing-nav-item { padding: 6px 10px; border-radius: 6px; font-size: 12px; font-weight: 500; color: #475569; cursor: pointer; transition: all .15s; }
 .briefing-nav-item:hover { background: #f1f5f9; color: #0f172a; }
 .briefing-nav-item.active { background: #eff6ff; color: #1d4ed8; font-weight: 600; }
@@ -464,7 +464,7 @@ textarea.input { resize: vertical; min-height: 44px; }
 .briefing-imgcat-link:hover { text-decoration: underline; }
 
 /* Page briefing */
-.briefing-page { margin-bottom: 32px; background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; }
+.briefing-page { margin-bottom: 32px; background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.03); }
 .briefing-subpage { margin-left: 20px; border-color: #e0e7ff; }
 .briefing-page-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-bottom: 1px solid #e2e8f0; }
 .briefing-page-name { font-size: 15px; font-weight: 700; color: #0f172a; }
@@ -485,6 +485,12 @@ textarea.input { resize: vertical; min-height: 44px; }
 .briefing-section-clickable .section-tiles > div:hover { outline: 2px solid #3b82f6; outline-offset: -2px; }
 .briefing-section-preview .section-header { display: none; }
 .briefing-section-preview .section-container { margin: 0; border: none; }
+/* Briefing tile gaps — match preview spacing */
+.briefing-section-preview .section-tiles { gap: 18px !important; padding: 0 !important; }
+.briefing-page { gap: 20px !important; }
+/* Mobile briefing: halved gaps */
+.briefing-mobile .briefing-section-preview .section-tiles { gap: 9px !important; }
+.briefing-mobile .briefing-page { gap: 10px !important; }
 /* Preview store content (full-screen preview modal only) — no rounded corners, no tags */
 .preview-store-content .tile { border-radius: 0; border: none; }
 .preview-store-content .tile-shoppable-badge,
@@ -495,12 +501,12 @@ textarea.input { resize: vertical; min-height: 44px; }
 
 /* Tile details */
 .briefing-tile-details { display: flex; flex-direction: column; gap: 8px; }
-.briefing-tile-detail { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 14px; transition: box-shadow 0.2s, border-color 0.2s, background 0.2s; cursor: pointer; }
-.briefing-tile-detail:hover { background: #f1f5f9; border-color: #cbd5e1; }
-.briefing-tile-detail-selected { background: #eff6ff !important; border-color: #3b82f6 !important; box-shadow: 0 0 0 2px rgba(59,130,246,0.18); }
+.briefing-tile-detail { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px 14px; transition: box-shadow 0.2s, border-color 0.2s, background 0.2s; cursor: pointer; }
+.briefing-tile-detail:hover { background: #f8fafc; border-color: #cbd5e1; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+.briefing-tile-detail-selected { background: #eff6ff !important; border-color: #3b82f6 !important; box-shadow: 0 0 0 2px rgba(59,130,246,0.15); }
 .briefing-tile-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
-.briefing-tile-index { font-size: 11px; font-weight: 700; color: #334155; }
-.briefing-tile-type { font-size: 10px; color: #6366f1; background: #eef2ff; padding: 1px 6px; border-radius: 3px; font-weight: 600; }
+.briefing-tile-index { font-size: 11px; font-weight: 700; color: #1e293b; }
+.briefing-tile-type { font-size: 10px; color: #6366f1; background: #eef2ff; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
 .briefing-tile-imgtype { font-size: 10px; color: #059669; background: #ecfdf5; padding: 1px 6px; border-radius: 3px; font-weight: 600; }
 
 /* Tile detail fields */
@@ -513,11 +519,11 @@ textarea.input { resize: vertical; min-height: 44px; }
 .briefing-color-swatch { display: inline-block; width: 14px; height: 14px; border-radius: 3px; border: 1px solid rgba(0,0,0,.1); vertical-align: middle; margin-right: 4px; }
 .briefing-tile-dims-row { display: flex; gap: 16px; margin-top: 6px; font-size: 10px; color: #94a3b8; font-family: monospace; }
 
-/* Right panel (designer instructions) */
-.briefing-right-panel { width: 320px; flex-shrink: 0; background: #fff; border-left: 1px solid #e2e8f0; display: flex; flex-direction: column; overflow: hidden; }
-.briefing-right-panel-body { flex: 1; overflow-y: auto; padding: 8px; }
-.briefing-right-section-group { margin-bottom: 12px; }
-.briefing-right-section-header { padding: 6px 10px; border-radius: 6px; margin-bottom: 4px; }
+/* Right panel (designer instructions) — modern */
+.briefing-right-panel { width: 340px; flex-shrink: 0; background: #fafbfc; border-left: 1px solid #e2e8f0; display: flex; flex-direction: column; overflow: hidden; }
+.briefing-right-panel-body { flex: 1; overflow-y: auto; padding: 10px; }
+.briefing-right-section-group { margin-bottom: 14px; }
+.briefing-right-section-header { padding: 8px 12px; border-radius: 8px; margin-bottom: 6px; }
 
 /* Change highlights */
 .briefing-highlight-added { box-shadow: inset 3px 0 0 #10b981; background: rgba(16,185,129,.04) !important; }
