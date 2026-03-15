@@ -416,8 +416,8 @@ textarea.input { resize: vertical; min-height: 44px; }
 .briefing-inspiration-cat { font-size: 9px; color: #94a3b8; }
 
 /* Main content */
-.briefing-content { flex: 1; overflow-y: auto; padding: 16px 8%; min-width: 0; }
-.briefing-content.briefing-mobile { max-width: 520px; margin: 0 auto; padding: 16px 4%; }
+.briefing-content { flex: 1; overflow-y: auto; padding: 16px 130px; min-width: 0; }
+.briefing-content.briefing-mobile { max-width: 520px; margin: 0 auto; padding: 16px 20px; }
 
 /* Store brand bar above nav */
 .briefing-store-brand-bar { background: #fff; padding: 10px 0 4px; border-bottom: none; }
