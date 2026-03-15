@@ -1075,9 +1075,12 @@ function PreviewMode({ store, onClose }) {
           <span style={{ fontWeight: 700, fontSize: 13, opacity: 0.7 }}>Preview</span>
           <input ref={fileInputRef} type="file" webkitdirectory="" directory="" multiple style={{ display: 'none' }} onChange={handleFolderSelect} />
           <button onClick={function() { fileInputRef.current && fileInputRef.current.click(); }}
-            style={{ background: loadedCount > 0 ? '#22c55e' : '#3b82f6', color: '#fff', border: 'none', borderRadius: 3, padding: '3px 12px', fontSize: 10, cursor: 'pointer', fontWeight: 600 }}>
-            {loadedCount > 0 ? '+ Folder (' + folderNames.length + ')' : 'Load Folder'}
+            style={{ background: loadedCount > 0 ? '#22c55e' : '#f59e0b', color: loadedCount > 0 ? '#fff' : '#000', border: loadedCount > 0 ? 'none' : '2px solid #fbbf24', borderRadius: 4, padding: '4px 16px', fontSize: 11, cursor: 'pointer', fontWeight: 700, boxShadow: loadedCount > 0 ? 'none' : '0 0 8px rgba(245,158,11,.5)', animation: loadedCount > 0 ? 'none' : 'none' }}>
+            {loadedCount > 0 ? '+ Folder (' + folderNames.length + ')' : '\uD83D\uDCC2 Load Folder'}
           </button>
+          {loadedCount === 0 && (
+            <span style={{ fontSize: 10, color: '#fbbf24', fontWeight: 500 }}>Click to select a parent folder — subfolders are scanned automatically</span>
+          )}
           {loadedCount > 0 && (
             <button onClick={handleResetImages} style={{ background: 'transparent', color: '#fca5a5', border: '1px solid rgba(239,68,68,.3)', borderRadius: 3, padding: '2px 8px', fontSize: 9, cursor: 'pointer' }}>Reset</button>
           )}
@@ -1230,9 +1233,17 @@ function PreviewMode({ store, onClose }) {
             {activePg && activePg.sections.map(function(sec, si) {
               var layout = findLayout(sec.layoutId);
               var config = getGridConfig(layout, isMobile);
+              var sectionLabel = sec.name || ('Section ' + (si + 1));
+              var layoutLabel = layout ? layout.name : sec.layoutId;
               return (
-                <div key={sec.id} style={{ marginBottom: 20 }}>
-                  <div style={Object.assign({}, config.gridStyle, { display: 'grid', gap: 4, width: '100%', overflow: 'hidden' })}>
+                <div key={sec.id} style={{ position: 'relative', marginBottom: 20 }}>
+                  {/* Section label outside the store mask, positioned to the left */}
+                  <div style={{ position: 'absolute', right: '100%', top: 0, paddingRight: 10, whiteSpace: 'nowrap', fontSize: 10, lineHeight: '16px', color: '#94a3b8', fontWeight: 600, textAlign: 'right' }}>
+                    <div style={{ color: '#64748b', fontWeight: 700 }}>S{si + 1}</div>
+                    <div style={{ fontSize: 9, color: '#94a3b8', maxWidth: 120, overflow: 'hidden', textOverflow: 'ellipsis' }}>{sectionLabel}</div>
+                    <div style={{ fontSize: 8, color: '#b0b8c4', fontStyle: 'italic' }}>{layoutLabel}</div>
+                  </div>
+                  <div style={Object.assign({}, config.gridStyle, { display: 'grid', gap: 18, width: '100%', overflow: 'hidden' })}>
                     {sec.tiles.map(function(tile, ti) {
                       var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
                       var tileStyle = Object.assign({}, config.getTileStyle(ti), { position: 'relative', overflow: 'hidden', minHeight: 0 });
@@ -1301,12 +1312,6 @@ function PreviewMode({ store, onClose }) {
         </div>
       </div>
 
-      {/* Instructions banner (only if no images loaded, floating at bottom) */}
-      {loadedCount === 0 && (
-        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(30,41,59,.95)', padding: '12px 20px', fontSize: 12, color: '#93c5fd', textAlign: 'center', backdropFilter: 'blur(8px)' }}>
-          Click <strong>"Load Folder"</strong> to select a parent folder — all subfolders are scanned automatically. You can load multiple folders.
-        </div>
-      )}
     </div>
   );
 }
