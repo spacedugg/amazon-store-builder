@@ -45,6 +45,9 @@ async function migrate() {
   try {
     await db.execute({ sql: `ALTER TABLE stores ADD COLUMN timer_started_at TEXT DEFAULT NULL` });
   } catch (e) { /* column already exists */ }
+  try {
+    await db.execute({ sql: `ALTER TABLE stores ADD COLUMN checks_json TEXT DEFAULT NULL` });
+  } catch (e) { /* column already exists */ }
 }
 
 module.exports = { getClient: getClient, migrate: migrate };
