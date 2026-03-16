@@ -5,6 +5,26 @@ import { t } from '../i18n';
 export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onChangeLayout, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate }) {
   var [hoveredNav, setHoveredNav] = useState(null);
   var [showHeroPicker, setShowHeroPicker] = useState(false);
+
+  // Find hero tile in the current page's sections so we can select it
+  var heroSel = null;
+  if (page) {
+    page.sections.forEach(function(sec) {
+      if (heroSel) return;
+      sec.tiles.forEach(function(tile, ti) {
+        if (!heroSel && tile.imageCategory === 'store_hero') {
+          heroSel = { sid: sec.id, ti: ti };
+        }
+      });
+    });
+  }
+  var isHeroSelected = heroSel && sel && sel.sid === heroSel.sid && sel.ti === heroSel.ti;
+
+  function handleHeroClick() {
+    if (heroSel) {
+      onSelect(heroSel);
+    }
+  }
   if (!page) {
     return (
       <div className="canvas">
@@ -36,16 +56,19 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
     <div className="canvas">
       <div className={'canvas-inner' + (isMobile ? ' canvas-mobile' : '')}>
         {/* Header banner (above nav) */}
-        <div className="canvas-header-banner">
+        <div className="canvas-header-banner" onClick={handleHeroClick} style={{ cursor: heroSel ? 'pointer' : undefined, outline: isHeroSelected ? '2px solid #6366f1' : undefined, outlineOffset: -2, borderRadius: 2, position: 'relative' }}>
+          {isHeroSelected && (
+            <div style={{ position: 'absolute', top: 4, left: 4, zIndex: 2, background: '#6366f1', color: '#fff', fontSize: 9, padding: '2px 6px', borderRadius: 3, fontWeight: 600 }}>Store Hero Image</div>
+          )}
           {bannerSrc ? (
-            <div onClick={function() { onHeaderBannerUpload && onHeaderBannerUpload(); }} style={{ cursor: 'pointer' }}>
+            <div style={{ cursor: 'pointer' }}>
               <img src={bannerSrc} className="header-banner-img" alt="" />
             </div>
           ) : (
             <div className="header-banner-placeholder" style={headerBannerColor ? { background: headerBannerColor, borderColor: headerBannerColor } : undefined}>
               <span>{t('canvas.headerBanner', uiLang)} ({isMobile ? '1242 x 450' : '3000 x 600'})</span>
               <div className="header-banner-actions">
-                <button className="btn" style={{ fontSize: 10, padding: '4px 10px' }} onClick={function() { onHeaderBannerUpload && onHeaderBannerUpload(); }}>
+                <button className="btn" style={{ fontSize: 10, padding: '4px 10px' }} onClick={function(e) { e.stopPropagation(); onHeaderBannerUpload && onHeaderBannerUpload(); }}>
                   Bild hochladen
                 </button>
                 <button className="btn" style={{ fontSize: 10, padding: '4px 10px' }} onClick={function(e) { e.stopPropagation(); setShowHeroPicker(!showHeroPicker); }}>
