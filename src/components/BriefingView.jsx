@@ -952,6 +952,7 @@ function PreviewMode({ store, onClose }) {
   var [imageMap, setImageMap] = useState({});
   var [loadedCount, setLoadedCount] = useState(0);
   var [totalFiles, setTotalFiles] = useState(0);
+  var [folderLoaded, setFolderLoaded] = useState(false); // true once ANY folder was selected
   var fileInputRef = useRef(null);
   var [showFilenames, setShowFilenames] = useState(false);
 
@@ -964,10 +965,12 @@ function PreviewMode({ store, onClose }) {
     var firstPath = files[0] && files[0].webkitRelativePath ? files[0].webkitRelativePath : '';
     var folderName = firstPath ? firstPath.split('/')[0] : 'Folder';
     var imageExts = /\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i;
+    var imageCount = 0;
     var merged = Object.assign({}, imageMap);
     for (var i = 0; i < files.length; i++) {
       var file = files[i];
       if (!imageExts.test(file.name)) continue;
+      imageCount++;
       var name = file.name.toLowerCase();
       var nameNoExt = name.replace(/\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i, '');
       if (fnMap[name] && !merged[name]) {
@@ -989,6 +992,11 @@ function PreviewMode({ store, onClose }) {
     setImageMap(merged);
     setLoadedCount(Object.keys(merged).length);
     setTotalFiles(function(prev) { return prev + files.length; });
+    setFolderLoaded(true);
+    // Auto-show report if nothing matched
+    if (Object.keys(merged).length === 0) {
+      setShowReport(true);
+    }
     if (folderNames.indexOf(folderName) < 0) {
       setFolderNames(function(prev) { return prev.concat(folderName); });
     }
@@ -1001,6 +1009,7 @@ function PreviewMode({ store, onClose }) {
     setLoadedCount(0);
     setTotalFiles(0);
     setFolderNames([]);
+    setFolderLoaded(false);
   }
 
   var [showReport, setShowReport] = useState(false);
@@ -1022,7 +1031,7 @@ function PreviewMode({ store, onClose }) {
 
   // Match report computation
   var matchReport = { total: 0, matched: 0, missing: [] };
-  if (loadedCount > 0) {
+  if (folderLoaded) {
     (store.pages || []).forEach(function(pg) {
       (pg.sections || []).forEach(function(sec, si) {
         (sec.tiles || []).forEach(function(tile, ti) {
@@ -1052,7 +1061,7 @@ function PreviewMode({ store, onClose }) {
 
   // Build a set of missing tile keys for red highlighting in preview
   var missingTileSet = {};
-  if (loadedCount > 0) {
+  if (folderLoaded) {
     matchReport.missing.forEach(function(m) {
       // key: "pageName|section|tile" (1-based section/tile)
       missingTileSet[m.page + '|' + m.section + '|' + m.tile] = true;
@@ -1105,22 +1114,22 @@ function PreviewMode({ store, onClose }) {
           <span style={{ fontWeight: 700, fontSize: 13, opacity: 0.7 }}>Preview</span>
           <input ref={fileInputRef} type="file" webkitdirectory="" directory="" multiple style={{ display: 'none' }} onChange={handleFolderSelect} />
           <button onClick={function() { fileInputRef.current && fileInputRef.current.click(); }}
-            style={{ background: loadedCount > 0 ? '#22c55e' : '#f59e0b', color: loadedCount > 0 ? '#fff' : '#000', border: loadedCount > 0 ? 'none' : '2px solid #fbbf24', borderRadius: 4, padding: '4px 16px', fontSize: 11, cursor: 'pointer', fontWeight: 700, boxShadow: loadedCount > 0 ? 'none' : '0 0 8px rgba(245,158,11,.5)', animation: loadedCount > 0 ? 'none' : 'none' }}>
-            {loadedCount > 0 ? '+ Folder (' + folderNames.length + ')' : '\uD83D\uDCC2 Load Folder'}
+            style={{ background: folderLoaded ? '#22c55e' : '#f59e0b', color: folderLoaded ? '#fff' : '#000', border: folderLoaded ? 'none' : '2px solid #fbbf24', borderRadius: 4, padding: '4px 16px', fontSize: 11, cursor: 'pointer', fontWeight: 700, boxShadow: folderLoaded ? 'none' : '0 0 8px rgba(245,158,11,.5)' }}>
+            {folderLoaded ? '+ Folder (' + folderNames.length + ')' : '\uD83D\uDCC2 Load Folder'}
           </button>
-          {loadedCount === 0 && (
+          {!folderLoaded && (
             <span style={{ fontSize: 10, color: '#fbbf24', fontWeight: 500 }}>Click to select a parent folder — subfolders are scanned automatically</span>
           )}
-          {loadedCount > 0 && (
+          {folderLoaded && (
             <button onClick={handleResetImages} style={{ background: 'transparent', color: '#fca5a5', border: '1px solid rgba(239,68,68,.3)', borderRadius: 3, padding: '2px 8px', fontSize: 9, cursor: 'pointer' }}>Reset</button>
           )}
-          {loadedCount > 0 && (
+          {folderLoaded && (
             <button onClick={function() { setShowReport(!showReport); }}
-              style={{ background: matchPct === 100 ? 'rgba(34,197,94,.15)' : 'rgba(251,191,36,.15)', color: matchPct === 100 ? '#4ade80' : '#fbbf24', border: 'none', borderRadius: 3, padding: '2px 10px', fontSize: 10, cursor: 'pointer', fontWeight: 700 }}>
+              style={{ background: matchPct === 100 ? 'rgba(34,197,94,.15)' : matchPct === 0 ? 'rgba(239,68,68,.2)' : 'rgba(251,191,36,.15)', color: matchPct === 100 ? '#4ade80' : matchPct === 0 ? '#f87171' : '#fbbf24', border: 'none', borderRadius: 3, padding: '2px 10px', fontSize: 10, cursor: 'pointer', fontWeight: 700 }}>
               {matchPct}% matched
             </button>
           )}
-          {loadedCount > 0 && (
+          {folderLoaded && (
             <button onClick={function() { setShowFilenames(!showFilenames); }}
               style={{ background: showFilenames ? 'rgba(99,102,241,.3)' : 'transparent', color: '#a5b4fc', border: '1px solid rgba(99,102,241,.3)', borderRadius: 3, padding: '2px 10px', fontSize: 10, cursor: 'pointer', fontWeight: 600 }}>
               {showFilenames ? 'Hide Names' : 'Show Names'}
@@ -1134,9 +1143,22 @@ function PreviewMode({ store, onClose }) {
         </div>
       </div>
 
+      {/* ─── ERROR BANNER (0% match after folder load) ─── */}
+      {folderLoaded && matchPct === 0 && !showReport && (
+        <div style={{ background: '#fef2f2', borderBottom: '2px solid #fecaca', padding: '12px 20px', flexShrink: 0, display: 'flex', alignItems: 'center', gap: 12 }}>
+          <span style={{ fontSize: 20 }}>&#9888;</span>
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: '#dc2626' }}>No images matched!</div>
+            <div style={{ fontSize: 11, color: '#991b1b', marginTop: 2 }}>
+              None of the uploaded files match the expected filenames. Click <strong>"Show Names"</strong> to see required filenames, or click <strong>"{matchPct}% matched"</strong> for the full report.
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* ─── MATCH REPORT (collapsible) ─── */}
-      {loadedCount > 0 && showReport && (
-        <div style={{ background: matchPct === 100 ? '#f0fdf4' : '#fffbeb', borderBottom: '1px solid ' + (matchPct === 100 ? '#bbf7d0' : '#fde68a'), padding: '10px 20px', maxHeight: 220, overflow: 'auto', flexShrink: 0 }}>
+      {folderLoaded && showReport && (
+        <div style={{ background: matchPct === 100 ? '#f0fdf4' : matchPct === 0 ? '#fef2f2' : '#fffbeb', borderBottom: '1px solid ' + (matchPct === 100 ? '#bbf7d0' : matchPct === 0 ? '#fecaca' : '#fde68a'), padding: '10px 20px', maxHeight: 220, overflow: 'auto', flexShrink: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
             <div style={{ flex: 1, height: 5, background: '#e2e8f0', borderRadius: 3, overflow: 'hidden' }}>
               <div style={{ width: matchPct + '%', height: '100%', background: matchPct === 100 ? '#22c55e' : '#f59e0b', borderRadius: 3 }} />
@@ -1179,7 +1201,7 @@ function PreviewMode({ store, onClose }) {
                 <div style={{ fontSize: isMobile ? 10 : 13, opacity: 0.6 }}>{isMobile ? '1242 \u00D7 450' : '3000 \u00D7 600'}px</div>
               </div>
             )}
-            {loadedCount > 0 && heroTile && !heroImgSrc && (
+            {folderLoaded && heroTile && !heroImgSrc && (
               <div style={{ position: 'absolute', inset: 0, background: 'rgba(239,68,68,0.12)', border: '2px solid #ef4444', pointerEvents: 'none' }} />
             )}
             {showFilenames && heroTile && heroPageName && (
@@ -1294,7 +1316,7 @@ function PreviewMode({ store, onClose }) {
                       }
 
                       // Check if this tile is missing an image (red highlight)
-                      var isMissing = loadedCount > 0 && !isProduct && tile.type !== 'text' && missingTileSet[activePg.name + '|' + (si + 1) + '|' + (ti + 1)];
+                      var isMissing = folderLoaded && !isProduct && tile.type !== 'text' && missingTileSet[activePg.name + '|' + (si + 1) + '|' + (ti + 1)];
 
                       return (
                         <div key={ti} style={tileStyle}>
@@ -1785,7 +1807,7 @@ export default function BriefingView() {
 
         {/* CENTER: Store visual preview */}
         <div className={'briefing-content' + (viewMode === 'mobile' ? ' briefing-mobile' : '')}>
-          <div style={{ padding: viewMode === 'mobile' ? '0 16px' : '0 100px' }}>
+          <div style={viewMode === 'mobile' ? { maxWidth: 420, margin: '0 auto', padding: '0 12px' } : { padding: '0 100px' }}>
           {/* Store Hero Banner above nav */}
           <StoreHeroBanner store={store} viewMode={viewMode}
             isSelected={selectedTile && selectedTile.sid === '__hero__'}
