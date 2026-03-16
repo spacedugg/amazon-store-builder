@@ -901,15 +901,36 @@ function DesignerTimer({ shareToken }) {
   );
 }
 
-// ─── CHECKMARK HELPERS (localStorage persistence) ───
+// ─── CHECKMARK HELPERS (server + localStorage cache) ───
 function loadChecks(shareToken) {
+  // Synchronous: return cached localStorage value immediately
   try {
     var raw = localStorage.getItem('briefing-checks-' + shareToken);
     return raw ? JSON.parse(raw) : {};
   } catch (e) { return {}; }
 }
+function loadChecksFromServer(shareToken) {
+  // Async: fetch from server and merge
+  return fetch('/api/checks?shareToken=' + encodeURIComponent(shareToken))
+    .then(function(resp) { return resp.ok ? resp.json() : null; })
+    .then(function(data) {
+      if (data && data.checks) {
+        try { localStorage.setItem('briefing-checks-' + shareToken, JSON.stringify(data.checks)); } catch (e) {}
+        return data.checks;
+      }
+      return null;
+    })
+    .catch(function() { return null; });
+}
 function saveChecks(shareToken, checks) {
+  // Save to localStorage immediately (fast)
   try { localStorage.setItem('briefing-checks-' + shareToken, JSON.stringify(checks)); } catch (e) { /* ignore */ }
+  // Save to server in background (persistent)
+  fetch('/api/checks', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ shareToken: shareToken, checks: checks }),
+  }).catch(function() { /* ignore network errors, localStorage is fallback */ });
 }
 
 // Count total images required and how many are checked
@@ -954,6 +975,7 @@ function PreviewMode({ store, onClose }) {
   var [totalFiles, setTotalFiles] = useState(0);
   var [folderLoaded, setFolderLoaded] = useState(false); // true once ANY folder was selected
   var fileInputRef = useRef(null);
+  var fileInputFilesRef = useRef(null);
   var [showFilenames, setShowFilenames] = useState(false);
 
   var fnMap = buildFilenameMap(store);
@@ -962,13 +984,22 @@ function PreviewMode({ store, onClose }) {
   function handleFolderSelect(e) {
     var files = e.target.files;
     if (!files || files.length === 0) return;
+    // Determine folder name from webkitRelativePath (folder input) or fallback
     var firstPath = files[0] && files[0].webkitRelativePath ? files[0].webkitRelativePath : '';
-    var folderName = firstPath ? firstPath.split('/')[0] : 'Folder';
+    var folderName = firstPath ? firstPath.split('/')[0] : 'Files';
     var imageExts = /\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i;
     var imageCount = 0;
     var merged = Object.assign({}, imageMap);
+
+    // Collect all files — webkitdirectory already traverses all subdirectories
+    // For direct file selection, files are flat
     for (var i = 0; i < files.length; i++) {
       var file = files[i];
+      // Check path depth for folder uploads (up to 5 levels)
+      if (file.webkitRelativePath) {
+        var pathParts = file.webkitRelativePath.split('/');
+        if (pathParts.length > 6) continue; // root + 5 levels max
+      }
       if (!imageExts.test(file.name)) continue;
       imageCount++;
       var name = file.name.toLowerCase();
@@ -1113,12 +1144,17 @@ function PreviewMode({ store, onClose }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <span style={{ fontWeight: 700, fontSize: 13, opacity: 0.7 }}>Preview</span>
           <input ref={fileInputRef} type="file" webkitdirectory="" directory="" multiple style={{ display: 'none' }} onChange={handleFolderSelect} />
+          <input ref={fileInputFilesRef} type="file" multiple accept="image/*" style={{ display: 'none' }} onChange={handleFolderSelect} />
           <button onClick={function() { fileInputRef.current && fileInputRef.current.click(); }}
             style={{ background: folderLoaded ? '#22c55e' : '#f59e0b', color: folderLoaded ? '#fff' : '#000', border: folderLoaded ? 'none' : '2px solid #fbbf24', borderRadius: 4, padding: '4px 16px', fontSize: 11, cursor: 'pointer', fontWeight: 700, boxShadow: folderLoaded ? 'none' : '0 0 8px rgba(245,158,11,.5)' }}>
             {folderLoaded ? '+ Folder (' + folderNames.length + ')' : '\uD83D\uDCC2 Load Folder'}
           </button>
+          <button onClick={function() { fileInputFilesRef.current && fileInputFilesRef.current.click(); }}
+            style={{ background: 'transparent', color: '#a5b4fc', border: '1px solid rgba(99,102,241,.3)', borderRadius: 4, padding: '4px 12px', fontSize: 11, cursor: 'pointer', fontWeight: 600 }}>
+            {'\uD83D\uDCCE Select Files'}
+          </button>
           {!folderLoaded && (
-            <span style={{ fontSize: 10, color: '#fbbf24', fontWeight: 500 }}>Click to select a parent folder — subfolders are scanned automatically</span>
+            <span style={{ fontSize: 10, color: '#fbbf24', fontWeight: 500 }}>Select a folder (subfolders scanned up to 5 levels) or individual files</span>
           )}
           {folderLoaded && (
             <button onClick={handleResetImages} style={{ background: 'transparent', color: '#fca5a5', border: '1px solid rgba(239,68,68,.3)', borderRadius: 3, padding: '2px 8px', fontSize: 9, cursor: 'pointer' }}>Reset</button>
@@ -1439,9 +1475,15 @@ export default function BriefingView() {
     }).catch(function(e) { setError('Failed to load: ' + e.message); setLoading(false); });
   }, [token]);
 
-  // ─── LOAD CHECKMARKS FROM LOCALSTORAGE ───
+  // ─── LOAD CHECKMARKS (localStorage cache + server) ───
   useEffect(function() {
-    if (token) setChecks(loadChecks(token));
+    if (!token) return;
+    // Instant load from localStorage cache
+    setChecks(loadChecks(token));
+    // Then fetch from server (authoritative) and update if available
+    loadChecksFromServer(token).then(function(serverChecks) {
+      if (serverChecks) setChecks(serverChecks);
+    });
   }, [token]);
 
   // Toggle a checkmark and persist
