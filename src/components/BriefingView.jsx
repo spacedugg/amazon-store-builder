@@ -1868,12 +1868,17 @@ export default function BriefingView() {
               if (!heroTile) return null;
               var heroColor = { bg: '#fef2f2', border: '#ef4444', label: '#b91c1c' };
               var heroCheckBase = heroPageId + '/' + heroSecId + '/' + heroTileIdx;
+              // Hero has different aspect ratios (3000x600=5:1 vs 1242x450=2.76:1) so always needs 2 images
+              var heroSameRatio = heroTile.syncDimensions || isSameAspectRatio(heroTile.dimensions, heroTile.mobileDimensions);
               var heroSyncDone = !!checks[heroCheckBase + '/sync'];
               var heroDeskDone = !!checks[heroCheckBase + '/desktop'];
-              var heroAllDone = heroSyncDone || heroDeskDone;
+              var heroMobDone = !!checks[heroCheckBase + '/mobile'];
+              var heroAllDone = heroSameRatio ? heroSyncDone : (heroDeskDone && heroMobDone);
               var heroCheckBg = heroAllDone ? '#dcfce7' : '#fef2f2';
               var heroCheckBorder = heroAllDone ? '#86efac' : '#fecaca';
               var heroIsSelected = selectedTile && selectedTile.sid === '__hero__';
+              var heroDeskDims = heroTile.dimensions || { w: 3000, h: 600 };
+              var heroMobDims = heroTile.mobileDimensions || { w: 1242, h: 450 };
               return (
                 <div id="tile-detail-hero" className="briefing-right-section-group">
                   <div className="briefing-right-section-header" style={{ background: heroColor.bg, borderLeft: '3px solid ' + heroColor.border }}>
@@ -1914,32 +1919,47 @@ export default function BriefingView() {
                         </span>
                       </div>
                     )}
+                    {/* Dimensions row */}
                     <div className="briefing-tile-dims-row">
-                      <span className="briefing-dim">Desktop: 3000&times;600</span>
-                      <span className="briefing-dim">Mobile: 1242&times;450</span>
+                      <span className="briefing-dim">Desktop: {heroDeskDims.w}&times;{heroDeskDims.h}</span>
+                      {!heroSameRatio && <span className="briefing-dim">Mobile: {heroMobDims.w}&times;{heroMobDims.h}</span>}
+                      {heroSameRatio && <span className="briefing-dim" style={{ color: '#10B981', fontWeight: 600 }}>{heroTile.syncDimensions ? '= 1 image (sync)' : '= 1 image (same ratio)'}</span>}
                     </div>
                     {/* Hero file names */}
                     {heroPageName != null && (
                       <div style={{ marginTop: 4, padding: '4px 0', fontSize: 10, lineHeight: 1.8 }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                          <CopyableFilename filename={tileFilename(heroPageName, heroSecIdx, heroTileIdx, 'desktop')} label="D" />
-                          <CopyableFilename filename={tileFilename(heroPageName, heroSecIdx, heroTileIdx, 'mobile')} label="M" />
-                        </div>
+                        {heroSameRatio ? (
+                          <CopyableFilename filename={tileFilename(heroPageName, heroSecIdx, heroTileIdx, 'sync')} />
+                        ) : (
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                            <CopyableFilename filename={tileFilename(heroPageName, heroSecIdx, heroTileIdx, 'desktop')} label="D" />
+                            <CopyableFilename filename={tileFilename(heroPageName, heroSecIdx, heroTileIdx, 'mobile')} label="M" />
+                          </div>
+                        )}
                       </div>
                     )}
                     {/* Hero completion checkmarks */}
-                    <div style={{ marginTop: 6, padding: '8px 10px', borderRadius: 6, background: heroCheckBg, border: '1px solid ' + heroCheckBorder, transition: 'all .2s' }}>
-                      <div style={{ display: 'flex', gap: 12 }}>
-                        <label style={{ display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: heroDeskDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
-                          <input type="checkbox" checked={heroDeskDone} onChange={function() { toggleCheck(heroCheckBase + '/desktop'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
-                          Desktop {heroDeskDone ? '\u2713' : '\u2717'}
-                        </label>
-                        <label style={{ display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: heroSyncDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
+                    {heroSameRatio ? (
+                      <div style={{ marginTop: 6, padding: '8px 10px', borderRadius: 6, background: heroCheckBg, border: '1px solid ' + heroCheckBorder, transition: 'all .2s' }}>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: heroSyncDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
                           <input type="checkbox" checked={heroSyncDone} onChange={function() { toggleCheck(heroCheckBase + '/sync'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
-                          Mobile {heroSyncDone ? '\u2713' : '\u2717'}
+                          {heroSyncDone ? 'Image done' : 'Image missing'}
                         </label>
                       </div>
-                    </div>
+                    ) : (
+                      <div style={{ marginTop: 6, padding: '8px 10px', borderRadius: 6, background: heroCheckBg, border: '1px solid ' + heroCheckBorder, transition: 'all .2s' }}>
+                        <div style={{ display: 'flex', gap: 12 }}>
+                          <label style={{ display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: heroDeskDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
+                            <input type="checkbox" checked={heroDeskDone} onChange={function() { toggleCheck(heroCheckBase + '/desktop'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
+                            Desktop {heroDeskDone ? '\u2713' : '\u2717'}
+                          </label>
+                          <label style={{ display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: heroMobDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
+                            <input type="checkbox" checked={heroMobDone} onChange={function() { toggleCheck(heroCheckBase + '/mobile'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
+                            Mobile {heroMobDone ? '\u2713' : '\u2717'}
+                          </label>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               );
