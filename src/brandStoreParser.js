@@ -9,7 +9,7 @@ export function parseBrandStoreHTML(html, sourceUrl) {
   var result = {
     url: sourceUrl || '',
     brandName: extractBrandName(doc),
-    navigation: extractNavigation(doc, sourceUrl),
+    navigation: extractNavigationFromRawHTML(html, sourceUrl),
     modules: extractModules(doc),
     images: extractStoreImages(doc),
     texts: extractTexts(doc),
@@ -37,74 +37,73 @@ function extractBrandName(doc) {
   return '';
 }
 
-// ─── SUBPAGE NAVIGATION ───
-function extractNavigation(doc, sourceUrl) {
+// ─── SUBPAGE NAVIGATION (from raw HTML string, NOT DOMParser) ───
+// DOMParser resolves relative URLs against the current page origin (Vercel app),
+// making them unusable. Instead, we extract store page UUIDs directly from the
+// raw HTML string using regex, then build correct Amazon URLs.
+function extractNavigationFromRawHTML(html, sourceUrl) {
   var links = [];
   var seen = {};
 
-  // Extract the brand name from the source URL to filter relevant links
-  var storeBrand = '';
-  var brandMatch = (sourceUrl || '').match(/\/stores\/([^/]+)\/page\//i);
-  if (brandMatch) storeBrand = decodeURIComponent(brandMatch[1]).toLowerCase();
+  // Determine Amazon origin from the source URL
+  var amazonOrigin = 'https://www.amazon.de';
+  try {
+    var srcUrl = new URL(sourceUrl);
+    amazonOrigin = srcUrl.origin;
+  } catch (e) { /* default */ }
 
-  // Extract the store page ID from the source URL
+  // Extract the current page's UUID to skip self-links
   var sourcePageId = '';
-  var pageIdMatch = (sourceUrl || '').match(/\/page\/([A-F0-9-]{36})/i);
-  if (pageIdMatch) sourcePageId = pageIdMatch[1].toUpperCase();
+  var sourceMatch = (sourceUrl || '').match(/page\/([A-F0-9-]{36})/i);
+  if (sourceMatch) sourcePageId = sourceMatch[1].toUpperCase();
 
-  // Search ONLY within the store container, not Amazon header/footer
-  var container = doc.querySelector('.stores-container, .stores-page, [class*="stores"]');
-  var searchRoot = container || doc.body || doc;
+  // Find ALL /stores/page/UUID and /stores/BRAND/page/UUID patterns in raw HTML
+  // This captures both href attributes and any other references
+  var regex = /href=["']([^"']*\/stores\/(?:[^"'\/]+\/)?page\/([A-F0-9-]{36})[^"']*)["']/gi;
+  var match;
 
-  // Find all links matching /stores/page/UUID or /stores/BRAND/page/UUID
-  var allLinks = searchRoot.querySelectorAll('a[href*="/stores/"]');
-  for (var i = 0; i < allLinks.length; i++) {
-    var href = allLinks[i].href || allLinks[i].getAttribute('href') || '';
-    var text = (allLinks[i].textContent || '').trim();
-
-    // MUST contain /page/UUID pattern (real store subpages)
-    var match = href.match(/\/stores\/(?:([^/]+)\/)?page\/([A-F0-9-]{36})/i);
-    if (!match) continue;
-
-    var linkBrand = match[1] ? decodeURIComponent(match[1]).toLowerCase() : '';
+  while ((match = regex.exec(html)) !== null) {
+    var rawPath = match[1];
     var pageId = match[2].toUpperCase();
 
-    // Skip the current page
+    // Skip current page
     if (pageId === sourcePageId) continue;
 
-    // Skip if already seen
+    // Skip already seen
     if (seen[pageId]) continue;
-
-    // If we know the store brand, only accept links from the SAME brand store
-    // This filters out Amazon Basics, other brand store links in the header, etc.
-    if (storeBrand && linkBrand && linkBrand !== storeBrand) continue;
-
     seen[pageId] = true;
 
-    // Build absolute URL
-    var absUrl = href;
-    if (href.indexOf('http') !== 0 && sourceUrl) {
-      try {
-        var base = new URL(sourceUrl);
-        absUrl = base.origin + (href.indexOf('/') === 0 ? href : '/' + href);
-      } catch (e) { absUrl = href; }
+    // Build absolute Amazon URL
+    var absUrl;
+    if (rawPath.indexOf('http') === 0) {
+      // Already absolute
+      absUrl = rawPath;
+    } else {
+      // Relative path → prepend Amazon origin
+      absUrl = amazonOrigin + (rawPath.indexOf('/') === 0 ? rawPath : '/' + rawPath);
     }
 
-    // Clean tracking params from the URL
+    // Clean tracking params
     try {
       var urlObj = new URL(absUrl);
-      ['ref', 'ref_', 'ingress', 'visitId', 'store_ref'].forEach(function(p) {
+      ['ref', 'ref_', 'ingress', 'visitId', 'store_ref', 'lp_asin',
+       'lp_context_asin', 'lp_context_query'].forEach(function(p) {
         urlObj.searchParams.delete(p);
       });
       absUrl = urlObj.toString();
     } catch (e) { /* keep as is */ }
 
+    // Try to extract a name from nearby text (look for text right after the href)
+    var nameMatch = html.slice(match.index, match.index + 500).match(/>([^<]{2,60})</);
+    var name = nameMatch ? nameMatch[1].replace(/\s+/g, ' ').trim() : '';
+
     links.push({
       pageId: pageId,
-      name: text.replace(/\s+/g, ' ').trim().slice(0, 100) || '',
+      name: name,
       url: absUrl,
     });
   }
+
   return links;
 }
 
