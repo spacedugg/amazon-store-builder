@@ -41,29 +41,69 @@ function extractBrandName(doc) {
 function extractNavigation(doc, sourceUrl) {
   var links = [];
   var seen = {};
+
+  // Extract the brand name from the source URL to filter relevant links
+  var storeBrand = '';
+  var brandMatch = (sourceUrl || '').match(/\/stores\/([^/]+)\/page\//i);
+  if (brandMatch) storeBrand = decodeURIComponent(brandMatch[1]).toLowerCase();
+
+  // Extract the store page ID from the source URL
+  var sourcePageId = '';
+  var pageIdMatch = (sourceUrl || '').match(/\/page\/([A-F0-9-]{36})/i);
+  if (pageIdMatch) sourcePageId = pageIdMatch[1].toUpperCase();
+
+  // Search ONLY within the store container, not Amazon header/footer
+  var container = doc.querySelector('.stores-container, .stores-page, [class*="stores"]');
+  var searchRoot = container || doc.body || doc;
+
   // Find all links matching /stores/page/UUID or /stores/BRAND/page/UUID
-  var allLinks = doc.querySelectorAll('a[href*="/stores/"]');
+  var allLinks = searchRoot.querySelectorAll('a[href*="/stores/"]');
   for (var i = 0; i < allLinks.length; i++) {
     var href = allLinks[i].href || allLinks[i].getAttribute('href') || '';
     var text = (allLinks[i].textContent || '').trim();
-    // Extract page UUID pattern
-    var match = href.match(/\/stores\/(?:[^/]+\/)?page\/([A-F0-9-]{36})/i);
-    if (match && !seen[match[1]]) {
-      seen[match[1]] = true;
-      // Build absolute URL
-      var absUrl = href;
-      if (href.indexOf('http') !== 0 && sourceUrl) {
-        try {
-          var base = new URL(sourceUrl);
-          absUrl = base.origin + href;
-        } catch (e) { absUrl = href; }
-      }
-      links.push({
-        pageId: match[1],
-        name: text.slice(0, 100) || '',
-        url: absUrl,
-      });
+
+    // MUST contain /page/UUID pattern (real store subpages)
+    var match = href.match(/\/stores\/(?:([^/]+)\/)?page\/([A-F0-9-]{36})/i);
+    if (!match) continue;
+
+    var linkBrand = match[1] ? decodeURIComponent(match[1]).toLowerCase() : '';
+    var pageId = match[2].toUpperCase();
+
+    // Skip the current page
+    if (pageId === sourcePageId) continue;
+
+    // Skip if already seen
+    if (seen[pageId]) continue;
+
+    // If we know the store brand, only accept links from the SAME brand store
+    // This filters out Amazon Basics, other brand store links in the header, etc.
+    if (storeBrand && linkBrand && linkBrand !== storeBrand) continue;
+
+    seen[pageId] = true;
+
+    // Build absolute URL
+    var absUrl = href;
+    if (href.indexOf('http') !== 0 && sourceUrl) {
+      try {
+        var base = new URL(sourceUrl);
+        absUrl = base.origin + (href.indexOf('/') === 0 ? href : '/' + href);
+      } catch (e) { absUrl = href; }
     }
+
+    // Clean tracking params from the URL
+    try {
+      var urlObj = new URL(absUrl);
+      ['ref', 'ref_', 'ingress', 'visitId', 'store_ref'].forEach(function(p) {
+        urlObj.searchParams.delete(p);
+      });
+      absUrl = urlObj.toString();
+    } catch (e) { /* keep as is */ }
+
+    links.push({
+      pageId: pageId,
+      name: text.replace(/\s+/g, ' ').trim().slice(0, 100) || '',
+      url: absUrl,
+    });
   }
   return links;
 }

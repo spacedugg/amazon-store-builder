@@ -46,18 +46,26 @@ export default function KnowledgeBaseAdmin({ onClose }) {
     loadStores();
   };
 
+  var cancelRef = { current: false };
+
   var handleSeedAll = async function() {
+    cancelRef.current = false;
     setCrawling(true);
     setCrawlLog([]);
     var total = SEED_STORES.length;
     for (var i = 0; i < total; i++) {
+      if (cancelRef.current) {
+        setCrawlLog(function(prev) { return prev.concat(['', '⛔ Crawling cancelled by user']); });
+        break;
+      }
       var seed = SEED_STORES[i];
       setSeedProgress((i + 1) + '/' + total);
-      setCrawlLog(function(prev) { return prev.concat(['', '━━━ Seed Store ' + (i + 1) + '/' + total + ' ━━━']); });
+      setCrawlLog(function(prev) { return prev.concat(['', '━━━ Seed Store ' + (i + 1) + '/' + total + ': ' + (seed.brandHint || seed.url.slice(-20)) + ' ━━━']); });
       try {
         await addStoreToKnowledgeBase(seed.url, seed.category, function(msg) {
           setCrawlLog(function(prev) { return prev.concat([msg]); });
         });
+        setCrawlLog(function(prev) { return prev.concat(['✓ Saved successfully']); });
       } catch (err) {
         setCrawlLog(function(prev) { return prev.concat(['ERROR: ' + err.message]); });
       }
@@ -65,6 +73,10 @@ export default function KnowledgeBaseAdmin({ onClose }) {
     setSeedProgress('');
     setCrawling(false);
     loadStores();
+  };
+
+  var handleCancel = function() {
+    cancelRef.current = true;
   };
 
   return (
@@ -116,7 +128,15 @@ export default function KnowledgeBaseAdmin({ onClose }) {
               {crawling ? 'Crawling ' + seedProgress + '...' : 'Crawl ALL Seed Stores'}
             </button>
           )}
-          {showSeed && <span style={{ fontSize: 11, color: '#666' }}>This will crawl {SEED_STORES.length} stores. Takes ~{SEED_STORES.length * 2} minutes.</span>}
+          {showSeed && crawling && (
+            <button
+              onClick={handleCancel}
+              style={{ padding: '6px 12px', background: '#c00', color: '#fff', border: 'none', borderRadius: 6, fontSize: 12, cursor: 'pointer' }}
+            >
+              Stop
+            </button>
+          )}
+          {showSeed && !crawling && <span style={{ fontSize: 11, color: '#666' }}>This will crawl {SEED_STORES.length} stores. Takes ~{SEED_STORES.length * 2} minutes.</span>}
         </div>
 
         {/* Crawl log */}
