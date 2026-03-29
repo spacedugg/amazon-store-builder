@@ -15,8 +15,12 @@ module.exports = async function handler(req, res) {
   if (!url || typeof url !== 'string') return res.status(400).json({ error: 'Missing url' });
   if (!UNLOCKER_TOKEN) return res.status(500).json({ error: 'BRIGHTDATA_UNLOCKER_TOKEN not configured' });
 
-  // Validate: must be an Amazon Brand Store URL
-  if (url.indexOf('amazon.') < 0 || url.indexOf('/stores') < 0) {
+  // Validate: must be an Amazon URL with a store page path
+  if (url.indexOf('amazon.') < 0) {
+    return res.status(400).json({ error: 'URL must be an Amazon page' });
+  }
+  // Must contain /stores/ or /stores/page/ pattern
+  if (url.indexOf('/stores') < 0 && url.indexOf('/stores/page/') < 0) {
     return res.status(400).json({ error: 'URL must be an Amazon Brand Store page (containing /stores/)' });
   }
 
