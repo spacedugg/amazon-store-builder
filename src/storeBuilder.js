@@ -282,7 +282,7 @@ function enforceMenuCategories(userCategories, aiCategories, allAsins) {
 }
 
 // ─── STEP 1: ANALYSIS & PAGE STRUCTURE ───
-export async function aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions, websiteData) {
+export async function aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions, websiteData, referenceAnalysis) {
   var productList = products.map(function(p) {
     var item = {
       asin: p.asin,
@@ -363,6 +363,7 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
       '',
     ].join('\n') : '',
     formatWebsiteContext(websiteData),
+    referenceAnalysis ? referenceAnalysis : '',
     'Products (' + products.length + '):',
     JSON.stringify(productList, null, 1),
     '',
@@ -445,7 +446,7 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
 }
 
 // ─── STEP 2: LAYOUT PER PAGE ───
-export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, isHomepage, allCategories, analysis, userInstructions, complexityLevel, category, template, websiteData) {
+export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, isHomepage, allCategories, analysis, userInstructions, complexityLevel, category, template, websiteData, referenceAnalysis) {
   var productList = pageProducts.map(function(p) {
     var item = { asin: p.asin, name: p.name, price: p.price, rating: p.rating, reviews: p.reviews, description: (p.description || '').slice(0, 100) };
     if (p.bulletPoints && p.bulletPoints.length > 0) item.bulletPoints = p.bulletPoints.slice(0, 3);
@@ -1126,7 +1127,7 @@ function ensureMinimumSections(sections, pageName, brand, lang, analysis, templa
 }
 
 // ─── FULL GENERATION WORKFLOW ───
-export async function generateStore(asins, products, brand, marketplace, lang, userInstructions, onLog, complexityLevel, template, websiteData) {
+export async function generateStore(asins, products, brand, marketplace, lang, userInstructions, onLog, complexityLevel, template, websiteData, referenceAnalysis) {
   var log = onLog || function() {};
   var cLevel = complexityLevel || 2;
   var cConfig = COMPLEXITY_LEVELS[cLevel] || COMPLEXITY_LEVELS[2];
@@ -1157,7 +1158,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
 
   var analysis;
   try {
-    analysis = await aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions, websiteData);
+    analysis = await aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions, websiteData, referenceAnalysis);
     // Validate that we got actual categories
     if (!analysis.categories || analysis.categories.length === 0) {
       log('AI returned no categories, using fallback grouping...');
@@ -1230,7 +1231,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   try {
     var homeResult = await aiGeneratePageLayout(
       'Homepage', homepageProducts, brand, lang, true,
-      analysis.categories || [], analysis, userInstructions, cLevel, category, template, websiteData
+      analysis.categories || [], analysis, userInstructions, cLevel, category, template, websiteData, referenceAnalysis
     );
     var homeSections = ensureMinimumSections(homeResult.sections || [], 'Homepage', brand, lang, analysis, template, true, cLevel);
     pages.push({ id: 'homepage', name: 'Homepage', sections: homeSections });
@@ -1277,7 +1278,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     try {
       var catResult = await aiGeneratePageLayout(
         cat.name, allCatProducts, brand, lang, false,
-        categories, analysis, userInstructions, cLevel, category, template, websiteData
+        categories, analysis, userInstructions, cLevel, category, template, websiteData, referenceAnalysis
       );
       var catSections = ensureMinimumSections(catResult.sections || [], cat.name, brand, lang, analysis, template, false, cLevel);
       pages.push({ id: parentPageId, name: cat.name, sections: catSections });
@@ -1299,7 +1300,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
         try {
           var subResult = await aiGeneratePageLayout(
             sub.name, subProducts, brand, lang, false,
-            categories, analysis, userInstructions, cLevel, category, template, websiteData
+            categories, analysis, userInstructions, cLevel, category, template, websiteData, referenceAnalysis
           );
           var subSections = ensureMinimumSections(subResult.sections || [], sub.name, brand, lang, analysis, template, false, cLevel);
           pages.push({ id: subPageId, name: sub.name, parentId: parentPageId, sections: subSections });

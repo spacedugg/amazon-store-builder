@@ -89,6 +89,36 @@ export async function discoverBrandProducts(brandUrl, onProgress) {
   throw new Error('Brand discovery timed out after 3 minutes. The brand page may have too many products. Try again or paste ASINs manually.');
 }
 
+// ─── CRAWL BRAND STORE PAGE: Fetch rendered HTML via Web Unlocker ───
+var CRAWL_TIMEOUT_MS = 60000; // 60s — Web Unlocker needs time for JS rendering
+
+export async function crawlBrandStorePage(url) {
+  var resp = await fetchWithTimeout('/api/crawl-brand-store', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ url: url }),
+  }, CRAWL_TIMEOUT_MS);
+  if (!resp.ok) {
+    var e = await resp.json().catch(function() { return {}; });
+    throw new Error(e.error || 'Failed to crawl brand store page');
+  }
+  return resp.json();
+}
+
+// ─── ANALYZE IMAGES: Send images to Gemini Vision API ───
+export async function analyzeStoreImages(images) {
+  var resp = await fetchWithTimeout('/api/analyze-images', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ images: images }),
+  }, 60000);
+  if (!resp.ok) {
+    var e = await resp.json().catch(function() { return {}; });
+    throw new Error(e.error || 'Failed to analyze images');
+  }
+  return resp.json();
+}
+
 // ─── SCRAPE BRAND WEBSITE: Extract brand info from online store ───
 export async function scrapeWebsite(url) {
   var resp = await fetchWithTimeout('/api/scrape-website', {

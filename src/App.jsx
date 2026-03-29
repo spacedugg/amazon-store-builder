@@ -15,6 +15,7 @@ import AIChat from './components/AIChat';
 import PriceCalculator from './components/PriceCalculator';
 import ExportModal from './components/ExportModal';
 import BriefingView from './components/BriefingView';
+import KnowledgeBaseAdmin from './components/KnowledgeBaseAdmin';
 
 var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, headerBannerColor: '', complexity: 2, category: 'generic', googleDriveUrl: '' };
 
@@ -43,6 +44,7 @@ export default function App() {
   var [requestedAsins, setRequestedAsins] = useState([]);
   var [showSaved, setShowSaved] = useState(false);
   var [showExport, setShowExport] = useState(false);
+  var [showKB, setShowKB] = useState(false);
   var [storeId, setStoreId] = useState(null);
   var [shareToken, setShareToken] = useState(null);
   var headerBannerInputRef = useRef(null);
@@ -159,16 +161,54 @@ export default function App() {
       if (!products.length) throw new Error('No products returned from Bright Data. Check your ASINs and try again.');
       log('Scraped ' + products.length + '/' + params.asins.length + ' products');
 
+      // Step 1.5: Crawl & analyze reference stores (if provided)
+      var referenceAnalysis = null;
+      if (params.referenceStoreUrls && params.referenceStoreUrls.length > 0) {
+        var { crawlMultipleStores, analyzeStoreImagesWithGemini, formatReferenceStoreContext } = await import('./referenceStoreService');
+
+        log('Analyzing ' + params.referenceStoreUrls.length + ' reference stores...');
+        var parsedStores = await crawlMultipleStores(params.referenceStoreUrls, log);
+
+        // Gemini image analysis (if available)
+        var imageAnalyses = [];
+        for (var si = 0; si < parsedStores.length; si++) {
+          try {
+            var analyses = await analyzeStoreImagesWithGemini(parsedStores[si], log);
+            imageAnalyses = imageAnalyses.concat(analyses);
+          } catch (e) { log('Image analysis skipped: ' + e.message); }
+        }
+
+        referenceAnalysis = formatReferenceStoreContext(parsedStores, imageAnalyses);
+        log('Reference analysis complete');
+      }
+
+      // Step 1.6: Load knowledge base data for the selected category
+      try {
+        var { loadKnowledgeBaseForCategory, formatKnowledgeBaseContext } = await import('./referenceStoreService');
+        var kbCategory = params.category || 'generic';
+        log('Loading knowledge base for category: ' + kbCategory + '...');
+        var kbData = await loadKnowledgeBaseForCategory(kbCategory);
+        if (kbData && kbData.length > 0) {
+          var kbContext = formatKnowledgeBaseContext(kbData);
+          referenceAnalysis = (referenceAnalysis || '') + '\n' + kbContext;
+          log('Knowledge base: ' + kbData.length + ' reference stores loaded');
+        } else {
+          log('Knowledge base: no reference stores for this category yet');
+        }
+      } catch (kbErr) {
+        log('Knowledge base skipped: ' + kbErr.message);
+      }
+
       // Resolve template data if selected
       var templateData = null;
       if (params.template) {
         templateData = STORE_TEMPLATES.find(function(t) { return t.id === params.template; }) || null;
       }
 
-      // Step 2-4: AI generation (with complexity, category, template, websiteData)
+      // Step 2-4: AI generation (with complexity, category, template, websiteData, referenceAnalysis)
       var storeData = await generateStore(
         params.asins, products, params.brand, params.marketplace, lang,
-        params.instructions, log, params.complexity, templateData, params.websiteData
+        params.instructions, log, params.complexity, templateData, params.websiteData, referenceAnalysis
       );
 
       // Store meta
@@ -597,6 +637,7 @@ export default function App() {
         onRedo={handleRedo}
         canRedo={redoStackRef.current.length > 0}
         onShowPrice={function() { setShowPrice(true); }}
+        onShowKnowledgeBase={function() { setShowKB(true); }}
       />
 
       <div className="app-body">
@@ -702,6 +743,9 @@ export default function App() {
           onClose={function() { setShowPrice(false); }}
           uiLang={uiLang}
         />
+      )}
+      {showKB && (
+        <KnowledgeBaseAdmin onClose={function() { setShowKB(false); }} />
       )}
 
       {showExport && (
