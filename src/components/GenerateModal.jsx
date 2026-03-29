@@ -38,6 +38,10 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
   var [websiteData, setWebsiteData] = useState(null);
   var [websiteScraping, setWebsiteScraping] = useState(false);
   var [websiteError, setWebsiteError] = useState('');
+  var [referenceStoreUrls, setReferenceStoreUrls] = useState(['']);
+  var [referenceUrlErrors, setReferenceUrlErrors] = useState({});
+  var [existingStoreUrl, setExistingStoreUrl] = useState('');
+  var [existingStoreUrlError, setExistingStoreUrlError] = useState('');
   var [driveUrl, setDriveUrl] = useState(googleDriveUrl || '');
   var fileRef = useRef(null);
 
@@ -119,6 +123,49 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
     } finally {
       setWebsiteScraping(false);
     }
+  };
+
+  var validateStoreUrl = function(url) {
+    if (!url.trim()) return '';
+    if (url.indexOf('amazon') < 0 || url.indexOf('/stores/') < 0) {
+      return 'URL must be an Amazon Brand Store URL (must contain "amazon" and "/stores/")';
+    }
+    return '';
+  };
+
+  var handleReferenceUrlChange = function(index, value) {
+    var updated = referenceStoreUrls.slice();
+    updated[index] = value;
+    setReferenceStoreUrls(updated);
+    var errors = Object.assign({}, referenceUrlErrors);
+    if (value.trim()) {
+      var err = validateStoreUrl(value);
+      if (err) { errors[index] = err; } else { delete errors[index]; }
+    } else {
+      delete errors[index];
+    }
+    setReferenceUrlErrors(errors);
+  };
+
+  var addReferenceUrl = function() {
+    if (referenceStoreUrls.length < 5) {
+      setReferenceStoreUrls(referenceStoreUrls.concat(['']));
+    }
+  };
+
+  var removeReferenceUrl = function(index) {
+    var updated = referenceStoreUrls.slice();
+    updated.splice(index, 1);
+    if (updated.length === 0) updated = [''];
+    setReferenceStoreUrls(updated);
+    var errors = {};
+    updated.forEach(function(url, i) {
+      if (url.trim()) {
+        var err = validateStoreUrl(url);
+        if (err) errors[i] = err;
+      }
+    });
+    setReferenceUrlErrors(errors);
   };
 
   var canGenerate = brand.trim() && asins.length > 0;
@@ -245,6 +292,63 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
             {websiteData.aboutText && <div style={{ marginTop: 2, opacity: 0.8 }}>Brand story content found</div>}
           </div>
         )}
+
+        {/* 3b. Reference Brand Stores (optional) */}
+        <label className="label" style={{ marginTop: 10 }}>Reference Brand Stores (optional)</label>
+        <div className="hint" style={{ marginBottom: 6 }}>Enter 2-5 Amazon Brand Store URLs for design inspiration. The AI will analyze their structure, visuals, and layout patterns.</div>
+        {referenceStoreUrls.map(function(url, idx) {
+          return (
+            <div key={idx} style={{ display: 'flex', gap: 6, marginBottom: 4 }}>
+              <input
+                className="input"
+                style={{ flex: 1 }}
+                value={url}
+                onChange={function(e) { handleReferenceUrlChange(idx, e.target.value); }}
+                placeholder="https://www.amazon.de/stores/BRAND/page/..."
+              />
+              <button
+                className="btn"
+                style={{ padding: '6px 10px', minWidth: 28 }}
+                onClick={function() { removeReferenceUrl(idx); }}
+                title="Remove URL"
+              >
+                x
+              </button>
+            </div>
+          );
+        })}
+        {Object.keys(referenceUrlErrors).length > 0 && (
+          <div className="price-error" style={{ marginTop: 2 }}>
+            {referenceUrlErrors[Object.keys(referenceUrlErrors)[0]]}
+          </div>
+        )}
+        {referenceStoreUrls.length < 5 && (
+          <button
+            className="btn"
+            style={{ marginTop: 4, padding: '6px 12px', fontSize: 12 }}
+            onClick={addReferenceUrl}
+          >
+            + Add URL
+          </button>
+        )}
+
+        {/* 3c. Existing Brand Store URL (optional) */}
+        <label className="label" style={{ marginTop: 10 }}>Existing Brand Store URL (optional)</label>
+        <input
+          className="input"
+          value={existingStoreUrl}
+          onChange={function(e) {
+            setExistingStoreUrl(e.target.value);
+            if (e.target.value.trim()) {
+              setExistingStoreUrlError(validateStoreUrl(e.target.value));
+            } else {
+              setExistingStoreUrlError('');
+            }
+          }}
+          placeholder="https://www.amazon.de/stores/BRAND/page/..."
+        />
+        <div className="hint">The client's current Amazon Brand Store URL to optimize/redesign.</div>
+        {existingStoreUrlError && <div className="price-error" style={{ marginTop: 2 }}>{existingStoreUrlError}</div>}
 
         {/* 4. Marketplace */}
         <label className="label" style={{ marginTop: 10 }}>4. Marketplace</label>
@@ -468,6 +572,8 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
                 complexity: complexity,
                 template: selectedTemplate,
                 websiteData: websiteData || null,
+                referenceStoreUrls: referenceStoreUrls.filter(function(u) { return u.trim() && !validateStoreUrl(u); }),
+                existingStoreUrl: existingStoreUrl.trim() && !validateStoreUrl(existingStoreUrl) ? existingStoreUrl.trim() : null,
               });
             }}
           >
