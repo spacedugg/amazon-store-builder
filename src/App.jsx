@@ -15,6 +15,7 @@ import AIChat from './components/AIChat';
 import PriceCalculator from './components/PriceCalculator';
 import ExportModal from './components/ExportModal';
 import BriefingView from './components/BriefingView';
+import KnowledgeBaseAdmin from './components/KnowledgeBaseAdmin';
 
 var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, headerBannerColor: '', complexity: 2, category: 'generic', googleDriveUrl: '' };
 
@@ -43,6 +44,7 @@ export default function App() {
   var [requestedAsins, setRequestedAsins] = useState([]);
   var [showSaved, setShowSaved] = useState(false);
   var [showExport, setShowExport] = useState(false);
+  var [showKB, setShowKB] = useState(false);
   var [storeId, setStoreId] = useState(null);
   var [shareToken, setShareToken] = useState(null);
   var headerBannerInputRef = useRef(null);
@@ -178,6 +180,23 @@ export default function App() {
 
         referenceAnalysis = formatReferenceStoreContext(parsedStores, imageAnalyses);
         log('Reference analysis complete');
+      }
+
+      // Step 1.6: Load knowledge base data for the selected category
+      try {
+        var { loadKnowledgeBaseForCategory, formatKnowledgeBaseContext } = await import('./referenceStoreService');
+        var kbCategory = params.category || 'generic';
+        log('Loading knowledge base for category: ' + kbCategory + '...');
+        var kbData = await loadKnowledgeBaseForCategory(kbCategory);
+        if (kbData && kbData.length > 0) {
+          var kbContext = formatKnowledgeBaseContext(kbData);
+          referenceAnalysis = (referenceAnalysis || '') + '\n' + kbContext;
+          log('Knowledge base: ' + kbData.length + ' reference stores loaded');
+        } else {
+          log('Knowledge base: no reference stores for this category yet');
+        }
+      } catch (kbErr) {
+        log('Knowledge base skipped: ' + kbErr.message);
       }
 
       // Resolve template data if selected
@@ -618,6 +637,7 @@ export default function App() {
         onRedo={handleRedo}
         canRedo={redoStackRef.current.length > 0}
         onShowPrice={function() { setShowPrice(true); }}
+        onShowKnowledgeBase={function() { setShowKB(true); }}
       />
 
       <div className="app-body">
@@ -723,6 +743,9 @@ export default function App() {
           onClose={function() { setShowPrice(false); }}
           uiLang={uiLang}
         />
+      )}
+      {showKB && (
+        <KnowledgeBaseAdmin onClose={function() { setShowKB(false); }} />
       )}
 
       {showExport && (
