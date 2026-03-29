@@ -71,6 +71,12 @@ function extractNavigationFromRawHTML(html, sourceUrl) {
 
     // Skip already seen
     if (seen[pageId]) continue;
+
+    // Skip Amazon header/navigation links (not store subpages)
+    if (rawPath.indexOf('field-lbr_brands') >= 0) continue;
+    if (rawPath.indexOf('ref_=nav_cs') >= 0) continue;
+    if (rawPath.indexOf('ref_=nav_') >= 0 && rawPath.indexOf('ref_=nav_cs') < 0) continue;
+
     seen[pageId] = true;
 
     // Build absolute Amazon URL
@@ -111,14 +117,18 @@ function extractNavigationFromRawHTML(html, sourceUrl) {
 function extractModules(doc) {
   var modules = [];
   // Amazon stores render content inside .stores-page .stores-container
-  var container = doc.querySelector('.stores-container');
-  if (!container) return modules;
+  var container = doc.querySelector('.stores-container, .stores-page, [class*="stores-desktop"]');
+  if (!container) container = doc.body;
 
-  // Each section is typically a .a-row.stores-row with a data-feature or widget content
-  var rows = container.querySelectorAll('.stores-row');
+  // Each section is typically a .a-row.stores-row or a div with store content
+  var rows = container.querySelectorAll('.stores-row, [class*="stores-widget"], [data-component-type]');
+  if (rows.length === 0) {
+    // Fallback: look for any major content divs with images
+    rows = container.querySelectorAll('.a-row, .a-section, [class*="editorial"], [class*="widget"]');
+  }
   for (var i = 0; i < rows.length; i++) {
     var row = rows[i];
-    if (row.offsetHeight === 0 && !row.innerHTML.trim()) continue;
+    if (!row.innerHTML || !row.innerHTML.trim()) continue;
 
     var module = classifyModule(row);
     if (module) modules.push(module);
@@ -249,16 +259,28 @@ function extractHighestResSrcset(srcset) {
 }
 
 function isStoreImage(src) {
-  // Store-designed images are on the al-eu CDN or al-na CDN
-  if (src.indexOf('/images/S/al-') >= 0) return true;
-  // Also include custom store images on media-amazon
-  if (src.indexOf('m.media-amazon.com/images/S/') >= 0) return true;
-  // Skip Amazon UI sprites, icons, tracking pixels
-  if (src.indexOf('/images/G/') >= 0) return false;
-  if (src.indexOf('/images/I/') >= 0 && src.indexOf('._') >= 0) return false; // product thumbs
+  if (!src) return false;
+  // Skip obvious non-content images
   if (src.indexOf('sprite') >= 0) return false;
   if (src.indexOf('pixel') >= 0) return false;
   if (src.indexOf('beacon') >= 0) return false;
+  if (src.indexOf('transparent-pixel') >= 0) return false;
+  if (src.indexOf('loading-') >= 0) return false;
+  if (src.indexOf('data:image') === 0) return false;
+  // Skip Amazon UI assets (navigation sprites, icons, etc.)
+  if (src.indexOf('/images/G/') >= 0) return false;
+  // Skip tiny tracking/ad images
+  if (src.indexOf('adsystem') >= 0) return false;
+  if (src.indexOf('fls-eu') >= 0) return false;
+  // Store-designed images (highest priority)
+  if (src.indexOf('/images/S/al-') >= 0) return true;
+  if (src.indexOf('m.media-amazon.com/images/S/') >= 0) return true;
+  // Product images and other Amazon CDN images (include them!)
+  if (src.indexOf('m.media-amazon.com/images/I/') >= 0) return true;
+  if (src.indexOf('images-eu.ssl-images-amazon.com') >= 0) return true;
+  if (src.indexOf('images-na.ssl-images-amazon.com') >= 0) return true;
+  // Any other amazon media image
+  if (src.indexOf('media-amazon.com') >= 0) return true;
   return false;
 }
 
