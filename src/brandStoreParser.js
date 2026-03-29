@@ -52,6 +52,13 @@ function extractNavigation(doc, sourceUrl) {
   var pageIdMatch = (sourceUrl || '').match(/\/page\/([A-F0-9-]{36})/i);
   if (pageIdMatch) sourcePageId = pageIdMatch[1].toUpperCase();
 
+  // Extract the Amazon origin from the source URL for building absolute URLs
+  var amazonOrigin = '';
+  try {
+    var srcUrl = new URL(sourceUrl);
+    amazonOrigin = srcUrl.origin; // e.g. https://www.amazon.de
+  } catch (e) { amazonOrigin = 'https://www.amazon.de'; }
+
   // Search ONLY within the store container, not Amazon header/footer
   var container = doc.querySelector('.stores-container, .stores-page, [class*="stores"]');
   var searchRoot = container || doc.body || doc;
@@ -59,11 +66,13 @@ function extractNavigation(doc, sourceUrl) {
   // Find all links matching /stores/page/UUID or /stores/BRAND/page/UUID
   var allLinks = searchRoot.querySelectorAll('a[href*="/stores/"]');
   for (var i = 0; i < allLinks.length; i++) {
-    var href = allLinks[i].href || allLinks[i].getAttribute('href') || '';
+    // IMPORTANT: Use getAttribute to get the RAW href, not the resolved one.
+    // DOMParser resolves .href against the current page (Vercel app), not amazon.de
+    var rawHref = allLinks[i].getAttribute('href') || '';
     var text = (allLinks[i].textContent || '').trim();
 
     // MUST contain /page/UUID pattern (real store subpages)
-    var match = href.match(/\/stores\/(?:([^/]+)\/)?page\/([A-F0-9-]{36})/i);
+    var match = rawHref.match(/\/stores\/(?:([^/]+)\/)?page\/([A-F0-9-]{36})/i);
     if (!match) continue;
 
     var linkBrand = match[1] ? decodeURIComponent(match[1]).toLowerCase() : '';
@@ -76,21 +85,22 @@ function extractNavigation(doc, sourceUrl) {
     if (seen[pageId]) continue;
 
     // If we know the store brand, only accept links from the SAME brand store
-    // This filters out Amazon Basics, other brand store links in the header, etc.
     if (storeBrand && linkBrand && linkBrand !== storeBrand) continue;
 
     seen[pageId] = true;
 
-    // Build absolute URL
-    var absUrl = href;
-    if (href.indexOf('http') !== 0 && sourceUrl) {
-      try {
-        var base = new URL(sourceUrl);
-        absUrl = base.origin + (href.indexOf('/') === 0 ? href : '/' + href);
-      } catch (e) { absUrl = href; }
+    // Build absolute URL using the AMAZON origin, not the current page origin
+    var absUrl = rawHref;
+    if (rawHref.indexOf('http') === 0) {
+      // Already absolute — check it's actually amazon
+      if (rawHref.indexOf('amazon.') < 0) continue;
+      absUrl = rawHref;
+    } else {
+      // Relative URL — prepend the Amazon origin
+      absUrl = amazonOrigin + (rawHref.indexOf('/') === 0 ? rawHref : '/' + rawHref);
     }
 
-    // Clean tracking params from the URL
+    // Clean tracking params
     try {
       var urlObj = new URL(absUrl);
       ['ref', 'ref_', 'ingress', 'visitId', 'store_ref'].forEach(function(p) {
