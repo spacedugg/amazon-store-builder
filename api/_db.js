@@ -35,6 +35,31 @@ async function migrate() {
       sql: `CREATE INDEX IF NOT EXISTS idx_stores_share_token ON stores(share_token)`,
     },
   ]);
+  // Reference stores knowledge base table
+  await db.batch([
+    {
+      sql: `CREATE TABLE IF NOT EXISTS reference_stores (
+        id TEXT PRIMARY KEY,
+        brand_name TEXT NOT NULL DEFAULT '',
+        store_url TEXT NOT NULL,
+        marketplace TEXT NOT NULL DEFAULT 'de',
+        category TEXT NOT NULL DEFAULT 'generic',
+        tags TEXT DEFAULT '',
+        page_count INTEGER DEFAULT 0,
+        image_count INTEGER DEFAULT 0,
+        parsed_data TEXT,
+        image_analyses TEXT,
+        claude_analysis TEXT,
+        quality_score INTEGER DEFAULT 0,
+        created_at TEXT DEFAULT (datetime('now')),
+        updated_at TEXT DEFAULT (datetime('now'))
+      )`,
+    },
+    {
+      sql: `CREATE INDEX IF NOT EXISTS idx_ref_stores_category ON reference_stores(category)`,
+    },
+  ]);
+
   // Add timer columns if they don't exist (for existing databases)
   try {
     await db.execute({ sql: `ALTER TABLE stores ADD COLUMN timer_seconds INTEGER DEFAULT 0` });

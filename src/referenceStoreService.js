@@ -172,7 +172,103 @@ export function formatReferenceStoreContext(stores, imageAnalyses) {
   return parts.join('\n');
 }
 
+// ─── KNOWLEDGE BASE: Save analyzed store for future use ───
+export async function saveToKnowledgeBase(store, imageAnalyses, claudeAnalysis, category, qualityScore) {
+  var resp = await fetch('/api/reference-stores', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      brandName: store.brandName,
+      storeUrl: store.storeUrl,
+      marketplace: extractMarketplace(store.storeUrl),
+      category: category || 'generic',
+      pageCount: store.pageCount,
+      imageCount: store.summary.totalImages,
+      parsedData: store,
+      imageAnalyses: imageAnalyses || [],
+      claudeAnalysis: claudeAnalysis || null,
+      qualityScore: qualityScore || 3,
+    }),
+  });
+  if (!resp.ok) throw new Error('Failed to save to knowledge base');
+  return resp.json();
+}
+
+// ─── KNOWLEDGE BASE: Load reference data for a category ───
+export async function loadKnowledgeBaseForCategory(category) {
+  var resp = await fetch('/api/reference-stores?forCategory=' + encodeURIComponent(category || 'generic'));
+  if (!resp.ok) return [];
+  var data = await resp.json();
+  return data.analyses || [];
+}
+
+// ─── KNOWLEDGE BASE: List all reference stores ───
+export async function listKnowledgeBaseStores(category) {
+  var url = '/api/reference-stores';
+  if (category && category !== 'all') url += '?category=' + encodeURIComponent(category);
+  var resp = await fetch(url);
+  if (!resp.ok) return [];
+  var data = await resp.json();
+  return data.stores || [];
+}
+
+// ─── KNOWLEDGE BASE: Delete a reference store ───
+export async function deleteFromKnowledgeBase(id) {
+  var resp = await fetch('/api/reference-stores?id=' + encodeURIComponent(id), { method: 'DELETE' });
+  return resp.ok;
+}
+
+// ─── FULL PIPELINE: Crawl, analyze, and save to knowledge base ───
+export async function addStoreToKnowledgeBase(storeUrl, category, onProgress) {
+  var log = onProgress || function() {};
+
+  // Step 1: Crawl & parse
+  log('Step 1/3: Crawling store...');
+  var store = await crawlAndParseStore(storeUrl, log);
+
+  // Step 2: Gemini image analysis
+  log('Step 2/3: Analyzing images...');
+  var imageAnalyses = [];
+  try {
+    imageAnalyses = await analyzeStoreImagesWithGemini(store, log);
+  } catch (e) { log('Image analysis skipped: ' + e.message); }
+
+  // Step 3: Save to database
+  log('Step 3/3: Saving to knowledge base...');
+  var result = await saveToKnowledgeBase(store, imageAnalyses, null, category, 3);
+  log('Saved! ID: ' + result.id);
+
+  return { id: result.id, store: store, imageAnalyses: imageAnalyses };
+}
+
+// ─── FORMAT KNOWLEDGE BASE DATA FOR AI PROMPTS ───
+export function formatKnowledgeBaseContext(kbAnalyses) {
+  if (!kbAnalyses || kbAnalyses.length === 0) return '';
+
+  var parts = [];
+  parts.push('=== KNOWLEDGE BASE: Best practices from ' + kbAnalyses.length + ' analyzed Brand Stores ===');
+
+  for (var i = 0; i < kbAnalyses.length; i++) {
+    var entry = kbAnalyses[i];
+    if (entry.analysis) {
+      parts.push('• ' + entry.brandName + ' (' + entry.category + '): ' + (typeof entry.analysis === 'string' ? entry.analysis : JSON.stringify(entry.analysis).slice(0, 500)));
+    }
+  }
+
+  parts.push('=== END KNOWLEDGE BASE ===');
+  parts.push('');
+  return parts.join('\n');
+}
+
 // ─── HELPERS ───
+function extractMarketplace(url) {
+  if (!url) return 'de';
+  if (url.indexOf('amazon.com') >= 0) return 'com';
+  if (url.indexOf('amazon.co.uk') >= 0) return 'co.uk';
+  if (url.indexOf('amazon.fr') >= 0) return 'fr';
+  if (url.indexOf('amazon.de') >= 0) return 'de';
+  return 'de';
+}
 function extractPageId(url) {
   var match = (url || '').match(/page\/([A-F0-9-]{36})/i);
   return match ? match[1] : '';
