@@ -19,7 +19,6 @@ module.exports = async function handler(req, res) {
   if (url.indexOf('amazon.') < 0) {
     return res.status(400).json({ error: 'URL must be an Amazon page' });
   }
-  // Must contain /stores/ or /stores/page/ pattern
   if (url.indexOf('/stores') < 0 && url.indexOf('/stores/page/') < 0) {
     return res.status(400).json({ error: 'URL must be an Amazon Brand Store page (containing /stores/)' });
   }
@@ -32,39 +31,18 @@ module.exports = async function handler(req, res) {
       urlObj.searchParams.delete(p);
     });
     url = urlObj.toString();
-  } catch (e) { /* keep original if URL parsing fails */ }
+  } catch (e) { /* keep original */ }
 
   try {
     var controller = new AbortController();
-    var timeout = setTimeout(function() { controller.abort(); }, 55000); // 55s (Vercel max 60s)
+    var timeout = setTimeout(function() { controller.abort(); }, 55000);
 
-    // Request with JavaScript rendering enabled.
-    // Amazon Brand Stores lazy-load most content below the fold.
-    // We need the browser to scroll down and wait for all widgets to render.
+    // First try: simple request (works with all Web Unlocker zones)
     var requestBody = {
       zone: UNLOCKER_ZONE,
       url: url,
       format: 'raw',
     };
-
-    // If the zone supports JavaScript rendering instructions,
-    // add scroll + wait to trigger lazy-loading of all store modules.
-    // This works with Web Unlocker zones that have "Browser (JavaScript rendering)" enabled.
-    requestBody.js_render = true;
-    requestBody.js_instructions = [
-      // Wait for initial page load
-      { wait: 2000 },
-      // Scroll to bottom to trigger lazy-loading of all modules
-      { scroll_y: 2000 },
-      { wait: 1500 },
-      { scroll_y: 5000 },
-      { wait: 1500 },
-      { scroll_y: 10000 },
-      { wait: 2000 },
-      // Scroll back to top (ensures all content is in DOM)
-      { scroll_y: 0 },
-      { wait: 500 },
-    ];
 
     var resp = await fetch('https://api.brightdata.com/request', {
       method: 'POST',
