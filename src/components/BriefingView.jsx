@@ -202,7 +202,10 @@ function tileFingerprint(tile) {
 // Creates canonical filenames for each image tile so designer + preview can match them.
 // Format: {PageName}_S{n}_T{n}_desktop.jpg / _mobile.jpg / .jpg (if synced)
 function sanitizeName(name) {
-  return (name || 'page').replace(/[^a-zA-Z0-9äöüÄÖÜß]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
+  // Normalize unicode (macOS uses NFD for umlauts, JS strings are NFC)
+  var normalized = (name || 'page');
+  if (normalized.normalize) normalized = normalized.normalize('NFC');
+  return normalized.replace(/[^a-zA-Z0-9äöüÄÖÜß]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
 }
 
 function tileFilename(pageName, sectionIndex, tileIndex, variant) {
@@ -1002,7 +1005,11 @@ function PreviewMode({ store, onClose }) {
       }
       if (!imageExts.test(file.name)) continue;
       imageCount++;
-      var name = file.name.toLowerCase();
+      // Normalize unicode: macOS stores umlauts as NFD (ü = u+combining diaeresis),
+      // but JS strings and our generated filenames use NFC (ü = single char).
+      var rawName = file.name;
+      if (rawName.normalize) rawName = rawName.normalize('NFC');
+      var name = rawName.toLowerCase();
       var nameNoExt = name.replace(/\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i, '');
       if (fnMap[name] && !merged[name]) {
         merged[name] = URL.createObjectURL(file);

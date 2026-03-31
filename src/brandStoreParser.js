@@ -63,36 +63,48 @@ export function parseBrandStoreHTML(html, sourceUrl) {
 function extractWidgetConfigs(html) {
   var configs = [];
 
-  // 1. Match "var config = {...};" blocks — server-rendered widgets with full data
-  var regex = /var\s+config\s*=\s*(\{[\s\S]*?\});\s*(?:\n|\r|var\s|window\s|\/\/)/g;
-  var match;
+  // 1. Find ALL "var config = {" positions, then extract JSON via balanced brace counting.
+  // The old regex approach failed on real Web Unlocker HTML because the terminator pattern
+  // (newline/var/window after };) didn't match the actual formatting.
+  var searchPos = 0;
+  while (true) {
+    var idx = html.indexOf('var config', searchPos);
+    if (idx < 0) break;
+    searchPos = idx + 10;
 
-  while ((match = regex.exec(html)) !== null) {
+    // Find the opening brace after "var config ="
+    var eqIdx = html.indexOf('{', idx);
+    if (eqIdx < 0 || eqIdx > idx + 30) continue; // { must be close to "var config"
+
+    // Extract balanced JSON using brace counting
+    var jsonStr = extractBalancedJSON(html, eqIdx);
+    if (!jsonStr) continue;
+
     try {
-      var data = JSON.parse(match[1]);
-      if (data.widgetType || data.sectionType) {
+      var data = JSON.parse(jsonStr);
+      if (data.widgetType || data.sectionType || data.widgetId) {
         configs.push(data);
       }
     } catch (e) {
-      var jsonStr = extractBalancedJSON(html, match.index + match[0].indexOf('{'));
-      if (jsonStr) {
-        try {
-          var data2 = JSON.parse(jsonStr);
-          if (data2.widgetType || data2.sectionType) {
-            configs.push(data2);
-          }
-        } catch (e2) { /* skip */ }
-      }
+      // Skip unparseable configs
     }
   }
 
-  // 2. Match "var slots = [...]" — lazy-loaded widgets (tile skeletons, no images)
-  // These contain the REAL module structure for below-the-fold content
-  var slotsRegex = /var\s+slots\s*=\s*(\[[\s\S]*?\])(?:\s*\.map|\s*;)/g;
-  var slotsMatch;
-  while ((slotsMatch = slotsRegex.exec(html)) !== null) {
+  // 2. Find "var slots = [...]" — lazy-loaded widgets (tile skeletons, no images)
+  var slotsSearchPos = 0;
+  while (true) {
+    var slotsIdx = html.indexOf('var slots', slotsSearchPos);
+    if (slotsIdx < 0) break;
+    slotsSearchPos = slotsIdx + 9;
+
+    var bracketIdx = html.indexOf('[', slotsIdx);
+    if (bracketIdx < 0 || bracketIdx > slotsIdx + 20) continue;
+
+    var slotsJson = extractBalancedBrackets(html, bracketIdx);
+    if (!slotsJson) continue;
+
     try {
-      var slots = JSON.parse(slotsMatch[1]);
+      var slots = JSON.parse(slotsJson);
       for (var i = 0; i < slots.length; i++) {
         var slot = slots[i];
         var skeleton = slot.widgetSkeleton || {};
@@ -115,6 +127,14 @@ function extractWidgetConfigs(html) {
 }
 
 function extractBalancedJSON(html, startPos) {
+  return extractBalanced(html, startPos, '{', '}');
+}
+
+function extractBalancedBrackets(html, startPos) {
+  return extractBalanced(html, startPos, '[', ']');
+}
+
+function extractBalanced(html, startPos, openChar, closeChar) {
   var depth = 0;
   var inString = false;
   var escNext = false;
@@ -125,8 +145,8 @@ function extractBalancedJSON(html, startPos) {
     if (ch === '\\') { escNext = true; continue; }
     if (ch === '"') { inString = !inString; continue; }
     if (inString) continue;
-    if (ch === '{') depth++;
-    if (ch === '}') {
+    if (ch === openChar) depth++;
+    if (ch === closeChar) {
       depth--;
       if (depth === 0) return html.slice(startPos, i + 1);
     }
