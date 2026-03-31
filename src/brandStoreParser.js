@@ -756,11 +756,24 @@ function approximateLayout(tileOrImageCount, hasGrid) {
 }
 
 function normalizeImageUrl(url) {
-  // Remove size variants and query params for dedup
-  return (url || '').split('?')[0]
-    .replace(/_SX\d+_/g, '')
-    .replace(/_CR[^.]+/g, '')
-    .replace(/\._[A-Z0-9,%]+_\./g, '.');
+  // Normalize to base image UUID for dedup.
+  // Amazon image URLs: .../al-eu-ZONE/UUID._CR0,0,W,H_SXN_.ext or .../al-eu-ZONE/UUID.ext
+  // We strip everything between the UUID and the final file extension.
+  var base = (url || '').split('?')[0];
+  base = base.replace(/%2C/gi, ',');
+  // Remove ALL size/crop suffixes: ._anything_anything_.ext → .ext
+  // Match from first ._ after UUID to last _. before extension
+  base = base.replace(/(\.[a-z]{3,4})$/i, function(ext) {
+    // Get everything before the extension
+    var withoutExt = base.slice(0, base.length - ext.length);
+    // Remove ._..._ suffix chain (everything after the UUID's last hex char)
+    var cleaned = withoutExt.replace(/\._.*$/, '');
+    return cleaned + ext;
+  });
+  // Simpler approach: extract the UUID-based path and extension
+  var uuidMatch = base.match(/(\/images\/S\/al-[^/]+\/[a-f0-9-]+)\.[^/]*$/i);
+  if (uuidMatch) return uuidMatch[1];
+  return base;
 }
 
 function mergeImageLists(list1, list2) {
