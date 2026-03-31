@@ -20,6 +20,10 @@ export function parseBrandStoreHTML(html, sourceUrl) {
   // Extract modules from JSON configs (primary) + DOM (supplementary)
   var configModules = extractModulesFromConfigs(widgetConfigs);
   var domModules = extractModulesFromDOM(doc);
+
+  // Enrich config modules with DOM data (interactiveImage tiles have images in DOM but not in config)
+  enrichModulesWithDOM(configModules, widgetConfigs, doc);
+
   // Use config modules if found, otherwise fall back to DOM
   var modules = configModules.length > 0 ? configModules : domModules;
 
@@ -212,6 +216,31 @@ function extractModulesFromConfigs(configs) {
   }
 
   return modules;
+}
+
+// Enrich config-based modules with images from the rendered DOM
+// (interactiveImage / ShoppableImage tiles have images in DOM but not in config JSON)
+function enrichModulesWithDOM(modules, configs, doc) {
+  for (var i = 0; i < modules.length; i++) {
+    var module = modules[i];
+    if (module.source !== 'config') continue;
+
+    // Find the corresponding config to get widgetId
+    var config = configs[i + 1]; // +1 because first config is Header (skipped)
+    if (!config || !config.widgetId) continue;
+
+    // Find the rendered DOM container for this widget
+    var container = doc.querySelector('[id$="-' + config.widgetId + '"]');
+    if (!container) continue;
+
+    // Extract images from the rendered DOM
+    var domImages = extractImagesFromElement(container);
+
+    // If DOM has more images than config, use DOM images (they're more complete)
+    if (domImages.length > module.images.length) {
+      module.images = domImages;
+    }
+  }
 }
 
 // Extract images from JSON widget configs
