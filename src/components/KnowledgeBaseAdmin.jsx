@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { AMAZON_CATEGORIES } from '../constants';
 import { addStoreToKnowledgeBase, listKnowledgeBaseStores, deleteFromKnowledgeBase } from '../referenceStoreService';
 import { SEED_STORES } from '../seedStores';
@@ -26,16 +26,23 @@ export default function KnowledgeBaseAdmin({ onClose }) {
 
   var handleAddStore = async function() {
     if (!newUrl || newUrl.indexOf('/stores') < 0) return;
+    cancelRef.current = false;
     setCrawling(true);
     setCrawlLog([]);
     try {
       await addStoreToKnowledgeBase(newUrl, newCategory, function(msg) {
         setCrawlLog(function(prev) { return prev.concat([msg]); });
-      });
-      setNewUrl('');
-      loadStores();
+      }, cancelRef);
+      if (!cancelRef.current) {
+        setNewUrl('');
+        loadStores();
+      } else {
+        setCrawlLog(function(prev) { return prev.concat(['', '⛔ Crawling cancelled by user']); });
+      }
     } catch (err) {
-      setCrawlLog(function(prev) { return prev.concat(['ERROR: ' + err.message]); });
+      if (!cancelRef.current) {
+        setCrawlLog(function(prev) { return prev.concat(['ERROR: ' + err.message]); });
+      }
     }
     setCrawling(false);
   };
@@ -46,7 +53,7 @@ export default function KnowledgeBaseAdmin({ onClose }) {
     loadStores();
   };
 
-  var cancelRef = { current: false };
+  var cancelRef = useRef(false);
 
   var handleSeedAll = async function() {
     cancelRef.current = false;
@@ -64,9 +71,17 @@ export default function KnowledgeBaseAdmin({ onClose }) {
       try {
         await addStoreToKnowledgeBase(seed.url, seed.category, function(msg) {
           setCrawlLog(function(prev) { return prev.concat([msg]); });
-        });
+        }, cancelRef);
+        if (cancelRef.current) {
+          setCrawlLog(function(prev) { return prev.concat(['', '⛔ Crawling cancelled by user']); });
+          break;
+        }
         setCrawlLog(function(prev) { return prev.concat(['✓ Saved successfully']); });
       } catch (err) {
+        if (cancelRef.current) {
+          setCrawlLog(function(prev) { return prev.concat(['', '⛔ Crawling cancelled by user']); });
+          break;
+        }
         setCrawlLog(function(prev) { return prev.concat(['ERROR: ' + err.message]); });
       }
     }
@@ -109,6 +124,14 @@ export default function KnowledgeBaseAdmin({ onClose }) {
           >
             {crawling ? 'Crawling...' : 'Add & Crawl'}
           </button>
+          {crawling && (
+            <button
+              onClick={handleCancel}
+              style={{ padding: '8px 16px', background: '#c00', color: '#fff', border: 'none', borderRadius: 6, fontSize: 13, cursor: 'pointer' }}
+            >
+              Stop
+            </button>
+          )}
         </div>
 
         {/* Seed button */}

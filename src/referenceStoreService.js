@@ -14,14 +14,16 @@ function delay(ms) {
 }
 
 // ─── CRAWL & PARSE A SINGLE BRAND STORE (ALL PAGES) ───
-export async function crawlAndParseStore(storeUrl, onProgress) {
+export async function crawlAndParseStore(storeUrl, onProgress, cancelRef) {
   var log = onProgress || function() {};
 
   // Step 1: Crawl the main page
   log('Crawling main page: ' + shortenUrl(storeUrl));
   var mainResult = await crawlBrandStorePage(storeUrl);
   var mainPage = parseBrandStoreHTML(mainResult.html, storeUrl);
-  log('Found ' + mainPage.navigation.length + ' subpages, ' + mainPage.images.length + ' images');
+  log('Found ' + mainPage.navigation.length + ' subpages, ' + mainPage.images.length + ' images, ' + mainPage.modules.length + ' modules');
+
+  if (cancelRef && cancelRef.current) return combineStorePages([mainPage]);
 
   var allPages = [mainPage];
 
@@ -32,11 +34,14 @@ export async function crawlAndParseStore(storeUrl, onProgress) {
   }).slice(0, MAX_SUBPAGES);
 
   for (var i = 0; i < subpages.length; i++) {
+    if (cancelRef && cancelRef.current) break;
+
     var sub = subpages[i];
     log('Crawling subpage ' + (i + 1) + '/' + subpages.length + ': ' + (sub.name || sub.pageId.slice(0, 8)));
 
     try {
       await delay(DELAY_BETWEEN_PAGES);
+      if (cancelRef && cancelRef.current) break;
       var subResult = await crawlBrandStorePage(sub.url);
       var subPage = parseBrandStoreHTML(subResult.html, sub.url);
       subPage.pageName = sub.name;
@@ -44,7 +49,6 @@ export async function crawlAndParseStore(storeUrl, onProgress) {
       log('  → ' + subPage.modules.length + ' modules, ' + subPage.images.length + ' images');
     } catch (err) {
       log('  → Failed: ' + err.message);
-      // Continue with other subpages
     }
   }
 
@@ -76,10 +80,10 @@ export async function crawlMultipleStores(urls, onProgress) {
 }
 
 // ─── ANALYZE STORE IMAGES WITH GEMINI ───
-export async function analyzeStoreImagesWithGemini(store, onProgress) {
+export async function analyzeStoreImagesWithGemini(store, onProgress, cancelRef) {
   var log = onProgress || function() {};
 
-  // Select the most relevant images (skip duplicates, tiny images)
+  // Select the most relevant images (only store-designed images with al- pattern)
   var images = store.allImages
     .filter(function(img) { return img.url && img.url.indexOf('/images/S/al-') >= 0; })
     .slice(0, MAX_IMAGES_FOR_ANALYSIS)
@@ -102,6 +106,8 @@ export async function analyzeStoreImagesWithGemini(store, onProgress) {
   var allResults = [];
 
   for (var i = 0; i < images.length; i += batchSize) {
+    if (cancelRef && cancelRef.current) break;
+
     var batch = images.slice(i, i + batchSize);
     log('  Image batch ' + (Math.floor(i / batchSize) + 1) + '/' + Math.ceil(images.length / batchSize) + '...');
 
@@ -219,19 +225,21 @@ export async function deleteFromKnowledgeBase(id) {
 }
 
 // ─── FULL PIPELINE: Crawl, analyze, and save to knowledge base ───
-export async function addStoreToKnowledgeBase(storeUrl, category, onProgress) {
+export async function addStoreToKnowledgeBase(storeUrl, category, onProgress, cancelRef) {
   var log = onProgress || function() {};
 
   // Step 1: Crawl & parse
   log('Step 1/3: Crawling store...');
-  var store = await crawlAndParseStore(storeUrl, log);
+  var store = await crawlAndParseStore(storeUrl, log, cancelRef);
+  if (cancelRef && cancelRef.current) return null;
 
   // Step 2: Gemini image analysis
   log('Step 2/3: Analyzing images...');
   var imageAnalyses = [];
   try {
-    imageAnalyses = await analyzeStoreImagesWithGemini(store, log);
+    imageAnalyses = await analyzeStoreImagesWithGemini(store, log, cancelRef);
   } catch (e) { log('Image analysis skipped: ' + e.message); }
+  if (cancelRef && cancelRef.current) return null;
 
   // Step 3: Save to database
   log('Step 3/3: Saving to knowledge base...');
