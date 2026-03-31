@@ -20,8 +20,13 @@ export async function crawlAndParseStore(storeUrl, onProgress, cancelRef) {
   // Step 1: Crawl the main page
   log('Crawling main page: ' + shortenUrl(storeUrl));
   var mainResult = await crawlBrandStorePage(storeUrl);
+  log('  HTML size: ' + mainResult.html.length + ' chars');
   var mainPage = parseBrandStoreHTML(mainResult.html, storeUrl);
-  log('Found ' + mainPage.navigation.length + ' subpages, ' + mainPage.images.length + ' images, ' + mainPage.modules.length + ' modules');
+  log('  Brand: ' + mainPage.brandName);
+  log('  Navigation: ' + mainPage.navigation.length + ' subpages');
+  log('  Modules: ' + mainPage.modules.length + ' (' + mainPage.modules.map(function(m) { return m.tileCount + ' tiles/' + m.source; }).join(', ') + ')');
+  log('  Images: ' + mainPage.images.length + ' unique');
+  log('  Hero: ' + (mainPage.heroImage ? 'yes' : 'no'));
 
   if (cancelRef && cancelRef.current) return combineStorePages([mainPage]);
 
@@ -46,7 +51,7 @@ export async function crawlAndParseStore(storeUrl, onProgress, cancelRef) {
       var subPage = parseBrandStoreHTML(subResult.html, sub.url);
       subPage.pageName = sub.name;
       allPages.push(subPage);
-      log('  → ' + subPage.modules.length + ' modules, ' + subPage.images.length + ' images');
+      log('  → ' + subPage.modules.length + ' modules (' + subPage.modules.map(function(m) { return m.tileCount + 't/' + m.source; }).join(', ') + '), ' + subPage.images.length + ' images');
     } catch (err) {
       log('  → Failed: ' + err.message);
     }
