@@ -6,14 +6,26 @@ export function parseBrandStoreHTML(html, sourceUrl) {
   var parser = new DOMParser();
   var doc = parser.parseFromString(html, 'text/html');
 
+  // Extract images from both DOM and raw HTML for maximum coverage
+  var domImages = extractStoreImages(doc);
+  var rawImages = extractImagesFromRawHTML(html);
+  var allImages = mergeImageLists(domImages, rawImages);
+
+  // Extract Store Hero image (above menu bar)
+  var heroImage = extractStoreHeroImage(doc, html);
+  if (heroImage && !allImages.some(function(img) { return img.url === heroImage.url; })) {
+    allImages.unshift(heroImage);
+  }
+
   var result = {
     url: sourceUrl || '',
     brandName: extractBrandName(doc),
     navigation: extractNavigationFromRawHTML(html, sourceUrl),
     modules: extractModules(doc),
-    images: extractStoreImages(doc),
+    images: allImages,
     texts: extractTexts(doc),
     meta: extractMeta(doc),
+    heroImage: heroImage,
   };
 
   return result;
@@ -337,6 +349,83 @@ function extractMeta(doc) {
     ogImage: ogImage ? ogImage.content : '',
     description: description ? description.content : '',
   };
+}
+
+// ─── STORE HERO IMAGE (above menu bar) ───
+function extractStoreHeroImage(doc, html) {
+  // Method 1: og:image meta tag (always contains the store hero)
+  var ogImage = doc.querySelector('meta[property="og:image"]');
+  if (ogImage && ogImage.content && ogImage.content.indexOf('media-amazon') >= 0) {
+    return { url: ogImage.content, alt: 'Store Hero', isHero: true };
+  }
+  // Method 2: Look for the header/hero image in raw HTML
+  // Amazon stores typically have a hero image in the first editorial row or header section
+  var heroMatch = html.match(/(?:stores-widget-cf|stores-widget-atf|header)[^]*?src=["'](https:\/\/m\.media-amazon\.com\/images\/S\/[^"']+)["']/i);
+  if (heroMatch) {
+    return { url: heroMatch[1], alt: 'Store Hero', isHero: true };
+  }
+  return null;
+}
+
+// ─── EXTRACT IMAGES FROM RAW HTML (bypasses DOMParser lazy-load issues) ───
+function extractImagesFromRawHTML(html) {
+  var images = [];
+  var seen = {};
+  // Match all image URLs in src, srcset, background-image, and data attributes
+  var patterns = [
+    /src=["'](https:\/\/m\.media-amazon\.com\/images\/[SI]\/[^"']+)["']/gi,
+    /srcset=["']([^"']+)["']/gi,
+    /url\(["']?(https:\/\/m\.media-amazon\.com\/images\/[SI]\/[^"')]+)["']?\)/gi,
+  ];
+
+  // Direct src matches
+  var match;
+  while ((match = patterns[0].exec(html)) !== null) {
+    var url = match[1];
+    if (!seen[url] && isStoreImage(url)) {
+      seen[url] = true;
+      images.push({ url: url, alt: '', width: 0, height: 0 });
+    }
+  }
+
+  // Background image matches
+  while ((match = patterns[2].exec(html)) !== null) {
+    var url2 = match[1];
+    if (!seen[url2] && isStoreImage(url2)) {
+      seen[url2] = true;
+      images.push({ url: url2, alt: '', width: 0, height: 0 });
+    }
+  }
+
+  // Srcset: extract highest resolution
+  while ((match = patterns[1].exec(html)) !== null) {
+    var srcset = match[1];
+    var highRes = extractHighestResSrcset(srcset);
+    if (highRes && !seen[highRes] && isStoreImage(highRes)) {
+      seen[highRes] = true;
+      images.push({ url: highRes, alt: '', width: 0, height: 0 });
+    }
+  }
+
+  return images;
+}
+
+// ─── MERGE IMAGE LISTS (deduplicate) ───
+function mergeImageLists(list1, list2) {
+  var seen = {};
+  var merged = [];
+  function addList(list) {
+    for (var i = 0; i < list.length; i++) {
+      var key = list[i].url.split('?')[0]; // ignore query params for dedup
+      if (!seen[key]) {
+        seen[key] = true;
+        merged.push(list[i]);
+      }
+    }
+  }
+  addList(list1);
+  addList(list2);
+  return merged;
 }
 
 // ─── COMBINE MULTIPLE PAGES INTO FULL STORE ANALYSIS ───
