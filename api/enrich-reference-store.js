@@ -1,4 +1,4 @@
-// ─── GEMINI VISION ENRICHMENT V2: FULL-PAGE ANALYSIS ───
+// âââ GEMINI VISION ENRICHMENT V2: FULL-PAGE ANALYSIS âââ
 // Crawls a reference store + all subpages, extracts ALL images,
 // sends ALL images per page to Gemini for holistic design analysis.
 //
@@ -108,7 +108,7 @@ module.exports = async function handler(req, res) {
   }
 };
 
-// ─── CRAWL PAGE VIA BRIGHTDATA ───
+// âââ CRAWL PAGE VIA BRIGHTDATA âââ
 async function crawlPage(url) {
   var controller = new AbortController();
   var timeout = setTimeout(function() { controller.abort(); }, 55000);
@@ -136,13 +136,13 @@ async function crawlPage(url) {
   }
 }
 
-// ─── EXTRACT ALL IMAGES FROM HTML (NO FILTER!) ───
+// âââ EXTRACT ALL IMAGES FROM HTML (NO FILTER!) âââ
 // Combines: var config blocks, <img> tags, regex for media-amazon URLs
 function extractAllImages(html) {
   var images = [];
   var seen = {};
 
-  // Source 1: var config JSON blocks (highest quality — has alt text, context)
+  // Source 1: var config JSON blocks (highest quality â has alt text, context)
   var configs = extractAllVarConfigs(html);
   for (var i = 0; i < configs.length; i++) {
     var config = configs[i];
@@ -164,7 +164,7 @@ function extractAllImages(html) {
     addImageUnfiltered(images, seen, urlMatch[0], '', 'regex');
   }
 
-  // Source 4: Product images (images/I/) — also part of the store design
+  // Source 4: Product images (images/I/) â also part of the store design
   var productRegex = /https:\/\/m\.media-amazon\.com\/images\/I\/[^"'\s<>)]+\.(jpg|jpeg|png|gif|webp)/gi;
   var prodMatch;
   while ((prodMatch = productRegex.exec(html)) !== null) {
@@ -176,7 +176,7 @@ function extractAllImages(html) {
   return images;
 }
 
-// ─── EXTRACT IMAGES FROM A SINGLE CONFIG BLOCK (RECURSIVE) ───
+// âââ EXTRACT IMAGES FROM A SINGLE CONFIG BLOCK (RECURSIVE) âââ
 function extractConfigImages(obj, images, seen, source) {
   if (!obj || typeof obj !== 'object') return;
 
@@ -228,7 +228,7 @@ function extractConfigImages(obj, images, seen, source) {
   }
 }
 
-// ─── ADD IMAGE WITHOUT FILTER ───
+// âââ ADD IMAGE WITHOUT FILTER âââ
 function addImageUnfiltered(images, seen, url, alt, source) {
   if (!url) return;
   // Skip data URIs, tracking pixels, tiny icons
@@ -244,7 +244,7 @@ function addImageUnfiltered(images, seen, url, alt, source) {
   images.push({ url: url, alt: alt || '', source: source });
 }
 
-// ─── ANALYZE ENTIRE PAGE WITH GEMINI (MULTI-IMAGE) ───
+// âââ ANALYZE ENTIRE PAGE WITH GEMINI (MULTI-IMAGE) âââ
 async function analyzePageWithGemini(pageImages, brandName, pageName) {
   var prompt = [
     'You are analyzing an Amazon Brand Store page for "' + brandName + '" (page: "' + pageName + '").',
@@ -276,22 +276,22 @@ async function analyzePageWithGemini(pageImages, brandName, pageName) {
   for (var i = 0; i < pageImages.length; i++) {
     var imgUrl = pageImages[i].url;
     try {
-      // Skip videos — just note them
+      // Skip videos â just note them
       if (/\.(mp4|webm|m3u8)/i.test(imgUrl)) {
-        parts.push({ text: '[Image ' + i + ': VIDEO — ' + imgUrl + ']' });
+        parts.push({ text: '[Image ' + i + ': VIDEO â ' + imgUrl + ']' });
         continue;
       }
 
       var imgResp = await fetch(imgUrl);
       if (!imgResp.ok) {
-        parts.push({ text: '[Image ' + i + ': FAILED TO LOAD — ' + imgUrl + ']' });
+        parts.push({ text: '[Image ' + i + ': FAILED TO LOAD â ' + imgUrl + ']' });
         continue;
       }
 
       var buffer = await imgResp.arrayBuffer();
       // Skip if > 4MB (Gemini limit per image)
       if (buffer.byteLength > 4 * 1024 * 1024) {
-        parts.push({ text: '[Image ' + i + ': TOO LARGE (' + (buffer.byteLength / 1024 / 1024).toFixed(1) + 'MB) — ' + imgUrl + ']' });
+        parts.push({ text: '[Image ' + i + ': TOO LARGE (' + (buffer.byteLength / 1024 / 1024).toFixed(1) + 'MB) â ' + imgUrl + ']' });
         continue;
       }
 
@@ -300,31 +300,9 @@ async function analyzePageWithGemini(pageImages, brandName, pageName) {
       // Fix mime types
       if (mimeType.indexOf('image/') < 0) mimeType = 'image/jpeg';
 
-      parts.push({ inline_data: { mime_type: mimeType, data: basc(html)) !== null) {
-    // Skip tiny thumbnails (they have small size suffixes like _SX38_, _SS40_)
-    if (/\._[A-Z]{2}\d{2,3}_\./.test(prodMatch[0])) continue;
-    addImageUnfiltered(images, seen, prodMatch[0], '', 'product');
-  }
-
-  return images;
-}
-
-// ─── EXTRACT IMAGES FROM A SINGLE CONFIG BLOCK (RECURSIVE) ───
-function extractConfigImages(obj, images, seen, source) {
-  if (!obj || typeof obj !== 'object') return;
-
-  // Direct imageUrl
-  if (obj.imageUrl) {
-    var url = obj.imageUrl;
-    if (url.indexOf('http') !== 0) url = 'https://m.media-amazon.com/images/S/' + url;
-    addImageUnfiltered(images, seen, url, obj.alt || obj.altText || obj.a11yImageAltText || '', source);
-  }
-
-  // imageKey (alternative format)
-  if (obj.imageKey && !obj.imageUrl) {
-    addImageUnfiltered(images, se64 } });
+      parts.push({ inline_data: { mime_type: mimeType, data: base64 } });
     } catch (e) {
-      parts.push({ text: '[Image ' + i + ': ERROR — ' + e.message + ']' });
+      parts.push({ text: '[Image ' + i + ': ERROR â ' + e.message + ']' });
     }
   }
 
@@ -347,7 +325,7 @@ function extractConfigImages(obj, images, seen, source) {
   return parseGeminiResponse(resp);
 }
 
-// ─── PARSE GEMINI RESPONSE (with markdown stripping + partial extraction) ───
+// âââ PARSE GEMINI RESPONSE (with markdown stripping + partial extraction) âââ
 async function parseGeminiResponse(resp) {
   var data = await resp.json();
   var text = '';
@@ -382,7 +360,7 @@ async function parseGeminiResponse(resp) {
   return result;
 }
 
-// ─── EXTRACT NAVIGATION FROM var config BLOCKS ───
+// âââ EXTRACT NAVIGATION FROM var config BLOCKS âââ
 function extractNavFromConfig(html, mainUrl) {
   var amazonOrigin = 'https://www.amazon.de';
   try { amazonOrigin = new URL(mainUrl).origin; } catch (e) {}
@@ -436,7 +414,7 @@ function extractNavFromConfig(html, mainUrl) {
   return urls;
 }
 
-// ─── EXTRACT ALL var config = {...} BLOCKS ───
+// âââ EXTRACT ALL var config = {...} BLOCKS âââ
 function extractAllVarConfigs(html) {
   var configs = [];
   var searchPos = 0;
@@ -463,7 +441,7 @@ function extractAllVarConfigs(html) {
   return configs;
 }
 
-// ─── BALANCED BRACE EXTRACTION ───
+// âââ BALANCED BRACE EXTRACTION âââ
 function extractBalancedJSON(html, startPos) {
   var depth = 0;
   var inString = false;
@@ -481,7 +459,7 @@ function extractBalancedJSON(html, startPos) {
   return null;
 }
 
-// ─── NORMALIZE IMAGE URL FOR DEDUP ───
+// âââ NORMALIZE IMAGE URL FOR DEDUP âââ
 function normalizeImageUrl(url) {
   return url.replace(/\._[A-Z0-9,%_]+_\./g, '.').replace(/\?.*$/, '');
 }
