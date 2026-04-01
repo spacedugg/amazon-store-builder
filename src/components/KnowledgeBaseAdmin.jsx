@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { AMAZON_CATEGORIES } from '../constants';
-import { addStoreToKnowledgeBase, listKnowledgeBaseStores, deleteFromKnowledgeBase } from '../referenceStoreService';
+import { addStoreToKnowledgeBase, listKnowledgeBaseStores, deleteFromKnowledgeBase, enrichAllReferenceStores } from '../referenceStoreService';
 import { SEED_STORES } from '../seedStores';
 
 export default function KnowledgeBaseAdmin({ onClose }) {
@@ -94,6 +94,29 @@ export default function KnowledgeBaseAdmin({ onClose }) {
     cancelRef.current = true;
   };
 
+  var [enriching, setEnriching] = useState(false);
+  var [enrichProgress, setEnrichProgress] = useState('');
+
+  var handleEnrichAll = async function() {
+    cancelRef.current = false;
+    setEnriching(true);
+    setCrawlLog([]);
+    setCrawlLog(function(prev) { return prev.concat(['=== GEMINI VISION ENRICHMENT ===', 'Enriching all ' + SEED_STORES.length + ' reference stores with Gemini Vision...', '']); });
+
+    try {
+      var results = await enrichAllReferenceStores(SEED_STORES, function(msg) {
+        setCrawlLog(function(prev) { return prev.concat([msg]); });
+      }, cancelRef);
+
+      var successCount = results.filter(function(r) { return !r.error; }).length;
+      setCrawlLog(function(prev) { return prev.concat(['', '=== ENRICHMENT COMPLETE: ' + successCount + '/' + SEED_STORES.length + ' stores enriched ===']); });
+    } catch (err) {
+      setCrawlLog(function(prev) { return prev.concat(['ERROR: ' + err.message]); });
+    }
+
+    setEnriching(false);
+  };
+
   return (
     <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div style={{ background: '#fff', borderRadius: 12, width: '90%', maxWidth: 900, maxHeight: '90vh', overflow: 'auto', padding: 24 }}>
@@ -159,7 +182,27 @@ export default function KnowledgeBaseAdmin({ onClose }) {
               Stop
             </button>
           )}
-          {showSeed && !crawling && <span style={{ fontSize: 11, color: '#666' }}>This will crawl {SEED_STORES.length} stores. Takes ~{SEED_STORES.length * 2} minutes.</span>}
+          {showSeed && !crawling && !enriching && <span style={{ fontSize: 11, color: '#666' }}>This will crawl {SEED_STORES.length} stores. Takes ~{SEED_STORES.length * 2} minutes.</span>}
+        </div>
+
+        {/* Gemini Vision Enrichment */}
+        <div style={{ marginBottom: 16, display: 'flex', gap: 8, alignItems: 'center' }}>
+          <button
+            onClick={handleEnrichAll}
+            disabled={crawling || enriching}
+            style={{ padding: '6px 12px', background: '#4285f4', color: '#fff', border: 'none', borderRadius: 6, fontSize: 12, cursor: 'pointer', opacity: (crawling || enriching) ? 0.5 : 1 }}
+          >
+            {enriching ? 'Enriching...' : 'Enrich ALL with Gemini Vision'}
+          </button>
+          {enriching && (
+            <button
+              onClick={handleCancel}
+              style={{ padding: '6px 12px', background: '#c00', color: '#fff', border: 'none', borderRadius: 6, fontSize: 12, cursor: 'pointer' }}
+            >
+              Stop
+            </button>
+          )}
+          {!enriching && !crawling && <span style={{ fontSize: 11, color: '#666' }}>Crawls each store, sends images to Gemini Vision for visual analysis. Requires GEMINI_API_KEY.</span>}
         </div>
 
         {/* Crawl log */}

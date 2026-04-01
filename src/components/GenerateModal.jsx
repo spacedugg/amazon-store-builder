@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { COMPLEXITY_LEVELS, STORE_TEMPLATES, LAYOUTS, findLayout } from '../constants';
+import { COMPLEXITY_LEVELS, STORE_TEMPLATES, LAYOUTS, findLayout, CATEGORY_STYLE_HINTS } from '../constants';
 import { discoverBrandProducts, scrapeWebsite } from '../api';
 
 function parseAsinFile(text) {
@@ -42,7 +42,11 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
   var [referenceUrlErrors, setReferenceUrlErrors] = useState({});
   var [existingStoreUrl, setExistingStoreUrl] = useState('');
   var [existingStoreUrlError, setExistingStoreUrlError] = useState('');
+  var [existingStoreMode, setExistingStoreMode] = useState('optimize');
   var [driveUrl, setDriveUrl] = useState(googleDriveUrl || '');
+  var [referenceCategory, setReferenceCategory] = useState('generic');
+  var [enableCIDetection, setEnableCIDetection] = useState(false);
+  var [storytellingType, setStorytellingType] = useState('automatic');
   var fileRef = useRef(null);
 
   var onFileChange = function(e) {
@@ -347,8 +351,23 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
           }}
           placeholder="https://www.amazon.de/stores/BRAND/page/..."
         />
-        <div className="hint">The client's current Amazon Brand Store URL to optimize/redesign.</div>
+        <div className="hint">Die aktuelle Amazon Brand Store URL des Kunden.</div>
         {existingStoreUrlError && <div className="price-error" style={{ marginTop: 2 }}>{existingStoreUrlError}</div>}
+
+        {existingStoreUrl.trim() && !existingStoreUrlError && (
+          <div style={{ marginTop: 8 }}>
+            <label className="label">Bestehender Store — Modus</label>
+            <select value={existingStoreMode} onChange={function(e) { setExistingStoreMode(e.target.value); }} className="input">
+              <option value="optimize">Optimieren — Struktur beibehalten, Inhalte verbessern/erweitern</option>
+              <option value="reconceptualize">Neu konzipieren — Komplett neues Konzept, nur CI übernehmen</option>
+            </select>
+            <div className="hint" style={{ marginTop: 2 }}>
+              {existingStoreMode === 'optimize'
+                ? 'Der Store ist bereits gut aufgebaut. Struktur und Seitenaufteilung bleiben erhalten. Nur Inhalte, Texte und neue Produkte werden ergänzt.'
+                : 'Der Store ist grundlegend unteroptimiert. Komplett neues Konzept mit neuer Struktur, neuem Storytelling. Nur die Markenidentität (Farben, Logo, Tonalität) wird übernommen.'}
+            </div>
+          </div>
+        )}
 
         {/* 4. Marketplace */}
         <label className="label" style={{ marginTop: 10 }}>4. Marketplace</label>
@@ -358,6 +377,52 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
           <option value="co.uk">Amazon.co.uk (UK)</option>
           <option value="fr">Amazon.fr (France)</option>
         </select>
+
+        {/* 4b. Reference Category */}
+        <label className="label" style={{ marginTop: 10 }}>4b. Referenz-Kategorie (optional)</label>
+        <select value={referenceCategory} onChange={function(e) { setReferenceCategory(e.target.value); }} className="input">
+          <option value="generic">Allgemein (Standard)</option>
+          <option value="supplements">Nahrungsergänzung</option>
+          <option value="food">Lebensmittel & Getränke</option>
+          <option value="home_kitchen">Haus & Küche</option>
+          <option value="fashion">Mode & Kleidung</option>
+          <option value="beauty">Beauty & Körperpflege</option>
+          <option value="health">Gesundheit & Wellness</option>
+          <option value="sports">Sport & Outdoor</option>
+          <option value="office">Büro & Arbeit</option>
+          <option value="pets">Haustiere</option>
+          <option value="electronics">Elektronik</option>
+          <option value="tools">Werkzeuge</option>
+        </select>
+        <div className="hint">Wählen Sie eine Produktkategorie aus, um kategoriespezifische Stil-Hinweise und Referenzstores zu laden.</div>
+
+        {/* 4c. CI Detection Toggle */}
+        <label className="label" style={{ marginTop: 10 }}>4c. CI-Erkennung</label>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+          <input
+            type="checkbox"
+            checked={enableCIDetection}
+            onChange={function(e) { setEnableCIDetection(e.target.checked); }}
+            style={{ cursor: 'pointer', width: 18, height: 18 }}
+            id="ci-detection-toggle"
+          />
+          <label htmlFor="ci-detection-toggle" style={{ cursor: 'pointer', margin: 0 }}>
+            Automatische Corporate Identity Erkennung aktivieren
+          </label>
+        </div>
+        <div className="hint">Wenn aktiviert, wird die Website aggressiver gescannt, um Farben, Schriften und Stilmerkmale zu extrahieren.</div>
+
+        {/* 4d. Storytelling Type */}
+        <label className="label" style={{ marginTop: 10 }}>4d. Storytelling-Typ (optional)</label>
+        <select value={storytellingType} onChange={function(e) { setStorytellingType(e.target.value); }} className="input">
+          <option value="automatic">Automatisch (Standard)</option>
+          <option value="educational_funnel">Educational Funnel (Problem → Lösung → Beweis → Produkt)</option>
+          <option value="category_navigator">Category Navigator (Hero → Kategorien → Produkte)</option>
+          <option value="purpose_story">Purpose Story (Mission → Werte → Impact → Produkte)</option>
+          <option value="product_showcase">Product Showcase (Hero → Bestseller → Features → Zubehör)</option>
+          <option value="seasonal_hook">Seasonal Hook (Saisonaler Aufhänger → Favoriten → Kategorien)</option>
+        </select>
+        <div className="hint">Bestimmt die narrative Struktur und den Ablauf der Store-Seiten.</div>
 
         {/* 5. Complexity Slider */}
         <label className="label" style={{ marginTop: 10 }}>5. Store Complexity</label>
@@ -574,6 +639,10 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
                 websiteData: websiteData || null,
                 referenceStoreUrls: referenceStoreUrls.filter(function(u) { return u.trim() && !validateStoreUrl(u); }),
                 existingStoreUrl: existingStoreUrl.trim() && !validateStoreUrl(existingStoreUrl) ? existingStoreUrl.trim() : null,
+                existingStoreMode: existingStoreMode,
+                referenceCategory: referenceCategory,
+                enableCIDetection: enableCIDetection,
+                storytellingType: storytellingType,
               });
             }}
           >
