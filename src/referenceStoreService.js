@@ -128,6 +128,301 @@ export async function analyzeStoreImagesWithGemini(store, onProgress, cancelRef)
   return allResults;
 }
 
+// ─── LOAD STATIC REFERENCE DATA FROM _summary.json ───
+export async function loadStaticReferenceData(category) {
+  try {
+    var response = await fetch('/data/reference-stores/_summary.json');
+    if (!response.ok) return null;
+
+    var fullData = await response.json();
+    if (!fullData) return null;
+
+    var parts = [];
+
+    // 1. What makes great stores at different tiers
+    parts.push('=== TIER PATTERNS FOR THIS CATEGORY ===');
+    if (fullData.whatMakesGreatStores) {
+      parts.push('\nTier 5 (Best Practices):');
+      if (fullData.whatMakesGreatStores.tier5Patterns) {
+        fullData.whatMakesGreatStores.tier5Patterns.forEach(function(pattern) {
+          parts.push('  • ' + pattern);
+        });
+      }
+
+      parts.push('\nTier 4 (Good Practices):');
+      if (fullData.whatMakesGreatStores.tier4Patterns) {
+        fullData.whatMakesGreatStores.tier4Patterns.forEach(function(pattern) {
+          parts.push('  • ' + pattern);
+        });
+      }
+
+      parts.push('\nCommon Weaknesses to Avoid:');
+      if (fullData.whatMakesGreatStores.commonWeaknesses) {
+        fullData.whatMakesGreatStores.commonWeaknesses.forEach(function(weakness) {
+          parts.push('  • ' + weakness);
+        });
+      }
+    }
+
+    // 2. Layout combinations
+    parts.push('\n=== RECOMMENDED LAYOUT COMBINATIONS ===');
+    if (fullData.layoutUsagePatterns) {
+      parts.push('\nMost Used Layouts:');
+      if (fullData.layoutUsagePatterns.mostUsedLayouts) {
+        fullData.layoutUsagePatterns.mostUsedLayouts.slice(0, 4).forEach(function(layout) {
+          parts.push('  • ' + layout.name + ' (' + layout.layoutId + '): ' + layout.bestFor);
+          if (layout.examples && layout.examples.length > 0) {
+            parts.push('    Examples: ' + layout.examples.join(', '));
+          }
+        });
+      }
+
+      parts.push('\nLayout Flow Patterns:');
+      if (fullData.layoutUsagePatterns.layoutCombinations) {
+        var combos = fullData.layoutUsagePatterns.layoutCombinations;
+        ['storytelling', 'katalog', 'premium', 'minimal'].forEach(function(key) {
+          if (combos[key]) {
+            parts.push('  ' + key.charAt(0).toUpperCase() + key.slice(1) + ': ' + combos[key]);
+          }
+        });
+      }
+    }
+
+    // 3. Color Palette
+    parts.push('\n=== COLOR PALETTE & VISUAL CONCEPTS ===');
+    if (fullData.imageStrategies) {
+      parts.push('\nLifestyle vs Product Balance:');
+      if (fullData.imageStrategies.lifestyleVsProduct) {
+        var ratio = fullData.imageStrategies.lifestyleVsProduct;
+        parts.push('  Tier 5: ' + ratio.tier5);
+        parts.push('  Tier 4: ' + ratio.tier4);
+        parts.push('  Tier 3: ' + ratio.tier3);
+      }
+
+      parts.push('\nIMPORTANT: Color palettes are ALWAYS brand-specific, never category-based.');
+      parts.push('Derive colors from the client\'s existing CI, website, or logo.');
+      if (fullData.imageStrategies.colorPaletteNote) {
+        parts.push('  ' + fullData.imageStrategies.colorPaletteNote);
+      }
+
+      parts.push('\nUnique Visual Concepts (Differentiation):');
+      if (fullData.imageStrategies.uniqueVisualConcepts) {
+        fullData.imageStrategies.uniqueVisualConcepts.slice(0, 3).forEach(function(concept) {
+          parts.push('  • ' + concept.brand + ': ' + concept.concept);
+          parts.push('    Impact: ' + concept.impact);
+        });
+      }
+
+      parts.push('\nHero Image Patterns:');
+      if (fullData.imageStrategies.heroImagePatterns) {
+        fullData.imageStrategies.heroImagePatterns.forEach(function(pattern) {
+          parts.push('  • ' + pattern);
+        });
+      }
+    }
+
+    // 4. Copywriting Patterns
+    parts.push('\n=== COPYWRITING PATTERNS ===');
+    if (fullData.copywritingPatterns) {
+      parts.push('\nClaim Styles:');
+      if (fullData.copywritingPatterns.claimStyles) {
+        var claims = fullData.copywritingPatterns.claimStyles;
+        Object.keys(claims).forEach(function(style) {
+          parts.push('  ' + style + ': ' + (claims[style].length > 0 ? claims[style][0] : ''));
+        });
+      }
+
+      parts.push('\nHeadline Patterns:');
+      if (fullData.copywritingPatterns.headlinePatterns) {
+        var headlines = fullData.copywritingPatterns.headlinePatterns;
+        Object.keys(headlines).forEach(function(pattern) {
+          var examples = headlines[pattern];
+          if (examples && examples.length > 0) {
+            parts.push('  ' + pattern + ': ' + examples[0]);
+          }
+        });
+      }
+
+      parts.push('\nCTA Patterns:');
+      if (fullData.copywritingPatterns.ctaPatterns) {
+        var ctas = fullData.copywritingPatterns.ctaPatterns;
+        parts.push('  Standard: ' + (ctas.standard ? ctas.standard.slice(0, 2).join(' | ') : ''));
+        if (ctas.arrow_style && ctas.arrow_style.length > 0) {
+          parts.push('  Arrow Style: ' + ctas.arrow_style[0]);
+        }
+      }
+
+      parts.push('\nTonality: Always derived from the brand\'s own voice and positioning, not from the category.');
+    }
+
+    // 5. CI Implementation
+    parts.push('\n=== BRAND IDENTITY IMPLEMENTATION ===');
+    if (fullData.ciImplementationPatterns) {
+      parts.push('\nConsistency Levels:');
+      var levels = fullData.ciImplementationPatterns.consistencyLevels;
+      Object.keys(levels).forEach(function(key) {
+        var level = levels[key];
+        parts.push('  Score ' + level.score + ' (' + key + '): ' + level.pattern);
+      });
+
+      if (fullData.ciImplementationPatterns.brandingElements) {
+        var elements = fullData.ciImplementationPatterns.brandingElements;
+        parts.push('\nKey Branding Elements:');
+        parts.push('  Color System: ' + elements.color_system);
+        parts.push('  Logo Placement: ' + elements.logo_placement);
+        parts.push('  Photography Style: ' + elements.photography_style);
+      }
+    }
+
+    // 6. Conversion & Social Proof
+    parts.push('\n=== CONVERSION & SOCIAL PROOF ELEMENTS ===');
+    if (fullData.conversionElementPatterns) {
+      var conversion = fullData.conversionElementPatterns;
+      if (conversion.socialProof) {
+        parts.push('\nSocial Proof Examples:');
+        parts.push('  Test Seals: ' + (conversion.socialProof.testsiegel ? conversion.socialProof.testsiegel.slice(0, 2).join(', ') : 'N/A'));
+        parts.push('  Numbered Proof: ' + (conversion.socialProof.zahlen ? conversion.socialProof.zahlen[0] : 'Use numbers like 70+, 20M+'));
+      }
+      if (conversion.ctaPlacement) {
+        parts.push('\nCTA Placement Best Practice:');
+        parts.push('  ' + conversion.ctaPlacement.best_practice);
+      }
+      if (conversion.specialElements && conversion.specialElements.length > 0) {
+        parts.push('\nSpecial Conversion Elements:');
+        conversion.specialElements.slice(0, 3).forEach(function(elem) {
+          parts.push('  • ' + elem);
+        });
+      }
+    }
+
+    // 7. Storytelling Archetypes
+    parts.push('\n=== STORYTELLING ARCHETYPES ===');
+    if (fullData.storytellingArchetypes) {
+      var archetypes = fullData.storytellingArchetypes;
+      Object.keys(archetypes).forEach(function(key) {
+        var archetype = archetypes[key];
+        parts.push('  ' + key + ': ' + archetype.description);
+        if (archetype.example) {
+          parts.push('    Example: ' + archetype.example);
+        }
+      });
+    }
+
+    // 8. Subpage strategies
+    parts.push('\n=== SUBPAGE STRUCTURE RECOMMENDATIONS ===');
+    if (fullData.subpageStrategies && fullData.subpageStrategies.byPageCount) {
+      var strategies = fullData.subpageStrategies.byPageCount;
+      Object.keys(strategies).forEach(function(key) {
+        var strategy = strategies[key];
+        parts.push('  ' + key + ': ' + strategy.strategy);
+      });
+    }
+
+    parts.push('\n=== END STATIC REFERENCE DATA ===\n');
+
+    return parts.join('\n');
+  } catch (err) {
+    console.error('Error loading static reference data:', err);
+    return null;
+  }
+}
+
+// ─── LOAD GEMINI ANALYSES FROM INDIVIDUAL STORE JSONS ───
+// Loads the geminiAnalyses field from each reference store JSON
+// This provides real visual intelligence from Gemini Vision
+export async function loadGeminiAnalysesForCategory(category) {
+  try {
+    // Load the list of store files from _summary.json meta
+    var summaryResp = await fetch('/data/reference-stores/_summary.json');
+    if (!summaryResp.ok) return [];
+
+    var summary = await summaryResp.json();
+    if (!summary || !summary.meta || !summary.meta.stores) return [];
+
+    // Filter by category if specified
+    var storeFiles = summary.meta.stores;
+    if (category && category !== 'generic') {
+      storeFiles = storeFiles.filter(function(s) { return s.category === category; });
+    }
+    // Also include top-tier stores from other categories (quality 5)
+    if (category && category !== 'generic') {
+      var otherTopStores = summary.meta.stores.filter(function(s) {
+        return s.category !== category && s.qualityScore >= 5;
+      }).slice(0, 3);
+      storeFiles = storeFiles.concat(otherTopStores);
+    }
+
+    var allAnalyses = [];
+    for (var i = 0; i < storeFiles.length; i++) {
+      try {
+        var storeResp = await fetch('/data/reference-stores/' + storeFiles[i].file);
+        if (!storeResp.ok) continue;
+        var storeData = await storeResp.json();
+        if (storeData.geminiAnalyses && storeData.geminiAnalyses.analyses) {
+          allAnalyses.push({
+            brandName: storeData.brandName,
+            category: storeData.category,
+            qualityScore: storeData.qualityScore,
+            geminiAnalyses: storeData.geminiAnalyses,
+          });
+        }
+      } catch (e) { /* skip this store */ }
+    }
+
+    return allAnalyses;
+  } catch (err) {
+    console.error('Error loading Gemini analyses:', err);
+    return [];
+  }
+}
+
+// Format Gemini analyses from reference stores for AI prompts
+export function formatGeminiAnalysesContext(storeAnalyses) {
+  if (!storeAnalyses || storeAnalyses.length === 0) return '';
+
+  var parts = [];
+  parts.push('=== VISUAL DESIGN INTELLIGENCE (from Gemini Vision analysis of reference stores) ===');
+  parts.push('These are real image analyses from top-performing Amazon Brand Stores.');
+  parts.push('Use them to understand visual patterns, color usage, and design approaches.');
+  parts.push('IMPORTANT: Colors are always brand-specific. Do NOT copy colors from other brands.');
+  parts.push('');
+
+  for (var i = 0; i < storeAnalyses.length; i++) {
+    var store = storeAnalyses[i];
+    parts.push('--- ' + store.brandName + ' (Quality: ' + store.qualityScore + '/5, Category: ' + store.category + ') ---');
+
+    // Aggregated data
+    if (store.geminiAnalyses.aggregated) {
+      var agg = store.geminiAnalyses.aggregated;
+      if (agg.allDominantColors && agg.allDominantColors.length > 0) {
+        parts.push('  Brand Colors: ' + agg.allDominantColors.join(', '));
+      }
+      if (agg.allDesignPatterns && agg.allDesignPatterns.length > 0) {
+        parts.push('  Design Patterns: ' + agg.allDesignPatterns.slice(0, 5).join(', '));
+      }
+    }
+
+    // Top 3 most interesting image analyses
+    var analyses = store.geminiAnalyses.analyses || [];
+    var highlights = analyses
+      .filter(function(a) { return a.summary && !a.error; })
+      .slice(0, 3);
+
+    for (var j = 0; j < highlights.length; j++) {
+      var a = highlights[j];
+      parts.push('  Image ' + (j + 1) + ': ' + a.summary);
+      if (a.textOnImage) parts.push('    Text: "' + a.textOnImage + '"');
+      if (a.typographyStyle) parts.push('    Typography: ' + a.typographyStyle);
+    }
+
+    parts.push('');
+  }
+
+  parts.push('=== END VISUAL DESIGN INTELLIGENCE ===');
+  parts.push('');
+  return parts.join('\n');
+}
+
 // ─── FORMAT REFERENCE DATA FOR AI PROMPTS ───
 export function formatReferenceStoreContext(stores, imageAnalyses) {
   if (!stores || stores.length === 0) return '';
@@ -142,21 +437,57 @@ export function formatReferenceStoreContext(stores, imageAnalyses) {
     parts.push('--- Reference Store ' + (i + 1) + ': ' + store.brandName + ' ---');
     parts.push('Pages: ' + store.pageCount + ' | Images: ' + store.summary.totalImages + ' | Modules: ' + store.summary.totalModules);
 
+    // Visual Flow Pattern
+    parts.push('\nVisual Flow Pattern:');
+    if (store.pages && store.pages.length > 0) {
+      var firstPage = store.pages[0];
+      var moduleFlow = firstPage.modules ? firstPage.modules.map(function(m) {
+        return m.type + (m.tileCount ? '(' + m.tileCount + 't)' : '');
+      }).join(' → ') : 'N/A';
+      parts.push('  ' + moduleFlow);
+    }
+
     // Module patterns
     parts.push('Module types used: ' + JSON.stringify(store.summary.moduleTypes));
     parts.push('Layout patterns: ' + JSON.stringify(store.summary.layoutTypes));
 
-    // Page structure
+    // Page structure with more detail
+    parts.push('\nPage-by-Page Structure:');
     for (var j = 0; j < store.pages.length && j < 5; j++) {
       var page = store.pages[j];
-      var moduleTypes = page.modules.map(function(m) { return m.type; });
-      parts.push('  Page "' + (page.brandName || 'Subpage ' + (j + 1)) + '": ' + moduleTypes.join(' → '));
+      var pageModules = page.modules ? page.modules : [];
+      var moduleTypes = pageModules.map(function(m) { return m.type; });
+      var pageInfo = page.pageName || (j === 0 ? 'Homepage' : 'Subpage ' + (j + 1));
+      parts.push('  ' + pageInfo + ': ' + moduleTypes.join(' → '));
+
+      // Add layout info if available
+      if (page.layoutTypes && page.layoutTypes.length > 0) {
+        parts.push('    Layouts: ' + page.layoutTypes.join(' + '));
+      }
     }
 
     // Key texts (first few headings)
-    var headings = store.allTexts.filter(function(t) { return t.type === 'heading'; }).slice(0, 5);
+    parts.push('\nKey Copywriting:');
+    var headings = store.allTexts ? store.allTexts.filter(function(t) { return t.type === 'heading'; }).slice(0, 5) : [];
     if (headings.length > 0) {
-      parts.push('Key headings: ' + headings.map(function(t) { return '"' + t.text + '"'; }).join(' | '));
+      parts.push('  Headlines: ' + headings.map(function(t) { return '"' + t.text + '"'; }).join(' | '));
+    }
+
+    // Extract any visible claims
+    var claims = store.allTexts ? store.allTexts.filter(function(t) { return t.type === 'claim'; }).slice(0, 3) : [];
+    if (claims.length > 0) {
+      parts.push('  Claims: ' + claims.map(function(t) { return '"' + t.text + '"'; }).join(' | '));
+    }
+
+    // CI insights
+    parts.push('\nBrand Identity:');
+    if (store.summary.dominantColors && store.summary.dominantColors.length > 0) {
+      parts.push('  Colors: ' + store.summary.dominantColors.join(', '));
+    } else {
+      parts.push('  Colors: Requires analysis from images');
+    }
+    if (store.summary.ciConsistency) {
+      parts.push('  CI Consistency Score: ' + store.summary.ciConsistency + '/5');
     }
 
     parts.push('');
@@ -178,6 +509,80 @@ export function formatReferenceStoreContext(stores, imageAnalyses) {
   parts.push('');
   parts.push('INSTRUCTIONS: Use the patterns above as guidance for section flow, module variety, and visual approach.');
   parts.push('Adapt to the current brand\'s products, tone, and category — do not replicate.');
+  parts.push('');
+
+  return parts.join('\n');
+}
+
+// ─── FORMAT STATIC REFERENCE CONTEXT (works without crawled stores) ───
+export async function formatStaticReferenceContext(category) {
+  var staticData = await loadStaticReferenceData(category);
+  if (!staticData) {
+    return formatDefaultReferenceContext(category);
+  }
+
+  var parts = [];
+  parts.push('=== REFERENCE BEST PRACTICES (from analysis of 23+ brand stores) ===');
+  parts.push('These patterns are extracted from top-performing Amazon Brand Stores.');
+  parts.push('Use them as guidance to build a strong store without reinventing the wheel.');
+  parts.push('');
+  parts.push(staticData);
+
+  return parts.join('\n');
+}
+
+// ─── FALLBACK: Default reference context when _summary.json unavailable ───
+function formatDefaultReferenceContext(category) {
+  var parts = [];
+  parts.push('=== REFERENCE BEST PRACTICES (Default Guidance) ===');
+  parts.push('');
+  parts.push('Tier 5 Brand Store Patterns:');
+  parts.push('  • 8-10 modules on homepage with clear narrative arc');
+  parts.push('  • 70% lifestyle photography + 30% product photography');
+  parts.push('  • Strong consistent brand identity: colors, fonts, graphics used throughout');
+  parts.push('  • Social proof: test seals, awards, ratings prominently displayed');
+  parts.push('  • CTAs on EVERY section, not just at the end');
+  parts.push('  • Multiple subpages (8+) with logical structure');
+  parts.push('  • Benefit-focused copywriting (not just product descriptions)');
+  parts.push('');
+
+  parts.push('Most Effective Layout Combinations:');
+  parts.push('  • Storytelling: Full Width Hero → 2 Equal Categories → Section Header → Large + 4 Grid → Product Grid');
+  parts.push('  • Premium: Full Width Hero → 2 Equal Lifestyle → Full Width Video → 2x2 Categories → Full Width Awards');
+  parts.push('  • Minimal: Full Width Hero → 2 Equal Categories → Full Width Text Header');
+  parts.push('');
+
+  parts.push('Color & Visual Strategy:');
+  parts.push('  • Colors are ALWAYS brand-specific — derive from client CI, website, or logo');
+  parts.push('  • Use 2-3 main brand colors + 1-2 accent colors');
+  parts.push('  • Ensure one accent color for CTAs (makes them stand out)');
+  parts.push('  • Maintain consistent photography style across all images');
+  parts.push('  • Consider a unique visual concept for differentiation');
+  parts.push('');
+
+  parts.push('Copywriting Approach:');
+  parts.push('  • Use short, punchy claims (2-3 words or contrasting statements)');
+  parts.push('  • Headlines follow patterns: benefit-first, emotional hook, numbered proof, or wordplay');
+  parts.push('  • CTAs: action-oriented ("Jetzt shoppen", "Mehr erfahren", "Alle Produkte ansehen")');
+  parts.push('  • Tone is ALWAYS brand-specific — derive from the client\'s existing communication style');
+  parts.push('');
+
+  parts.push('Storytelling Archetypes:');
+  parts.push('  • Educational Funnel: Problem → Solution → Proof → Product');
+  parts.push('  • Category Navigator: Hero → Categories → Per-category: Lifestyle + Products');
+  parts.push('  • Purpose Story: Mission → Values → Impact Numbers → Products');
+  parts.push('  • Product Showcase: Hero → Bestseller → Features → Accessories');
+  parts.push('  • Seasonal Hook: Seasonal angle → Current Favorites → Categories');
+  parts.push('');
+
+  parts.push('Conversion & Social Proof:');
+  parts.push('  • Use test seals, awards, certifications prominently');
+  parts.push('  • Add numbered proof (customer count, trees planted, regions served)');
+  parts.push('  • Place CTAs on EVERY section (not just end of page)');
+  parts.push('  • Follow product grids with lifestyle/feature images for breathing room');
+  parts.push('');
+
+  parts.push('=== END DEFAULT REFERENCE GUIDANCE ===');
   parts.push('');
 
   return parts.join('\n');
@@ -260,16 +665,94 @@ export function formatKnowledgeBaseContext(kbAnalyses) {
 
   var parts = [];
   parts.push('=== KNOWLEDGE BASE: Best practices from ' + kbAnalyses.length + ' analyzed Brand Stores ===');
+  parts.push('');
 
+  // Group by category for better organization
+  var byCategory = {};
   for (var i = 0; i < kbAnalyses.length; i++) {
     var entry = kbAnalyses[i];
-    if (entry.analysis) {
-      parts.push('• ' + entry.brandName + ' (' + entry.category + '): ' + (typeof entry.analysis === 'string' ? entry.analysis : JSON.stringify(entry.analysis).slice(0, 500)));
-    }
+    var cat = entry.category || 'generic';
+    if (!byCategory[cat]) byCategory[cat] = [];
+    byCategory[cat].push(entry);
   }
+
+  // Format by category
+  Object.keys(byCategory).forEach(function(category) {
+    var entries = byCategory[category];
+    parts.push('--- ' + category.toUpperCase() + ' (' + entries.length + ' stores) ---');
+
+    entries.forEach(function(entry) {
+      parts.push('\n• ' + entry.brandName);
+
+      // Structure info
+      if (entry.pageCount) {
+        parts.push('  Pages: ' + entry.pageCount);
+      }
+      if (entry.imageCount) {
+        parts.push('  Images: ' + entry.imageCount);
+      }
+
+      // If we have detailed parsed data
+      if (entry.parsedData) {
+        var data = entry.parsedData;
+        if (data.summary) {
+          if (data.summary.moduleTypes && data.summary.moduleTypes.length > 0) {
+            parts.push('  Modules: ' + data.summary.moduleTypes.join(', '));
+          }
+          if (data.summary.layoutTypes && data.summary.layoutTypes.length > 0) {
+            parts.push('  Layouts: ' + data.summary.layoutTypes.join(', '));
+          }
+          if (data.summary.dominantColors && data.summary.dominantColors.length > 0) {
+            parts.push('  Colors: ' + data.summary.dominantColors.join(', '));
+          }
+        }
+      }
+
+      // AI analysis summary (if available)
+      if (entry.claudeAnalysis) {
+        var analysis = typeof entry.claudeAnalysis === 'string'
+          ? entry.claudeAnalysis
+          : JSON.stringify(entry.claudeAnalysis);
+        var summary = analysis.length > 300 ? analysis.slice(0, 300) + '...' : analysis;
+        parts.push('  Insights: ' + summary);
+      } else if (entry.analysis) {
+        var analysisText = typeof entry.analysis === 'string'
+          ? entry.analysis
+          : JSON.stringify(entry.analysis);
+        var analysisSummary = analysisText.length > 300 ? analysisText.slice(0, 300) + '...' : analysisText;
+        parts.push('  Insights: ' + analysisSummary);
+      }
+
+      // Image analysis highlights
+      if (entry.imageAnalyses && entry.imageAnalyses.length > 0) {
+        var visualHighlights = entry.imageAnalyses
+          .slice(0, 2)
+          .map(function(img) { return img.summary || img.description; })
+          .filter(function(x) { return x; });
+        if (visualHighlights.length > 0) {
+          parts.push('  Visual: ' + visualHighlights.join(' | '));
+        }
+      }
+
+      // Quality score
+      if (entry.qualityScore) {
+        var scoreLabel = entry.qualityScore >= 4 ? 'Excellent' : entry.qualityScore >= 3 ? 'Good' : 'Fair';
+        parts.push('  Quality: ' + scoreLabel + ' (' + entry.qualityScore + '/5)');
+      }
+    });
+
+    parts.push('');
+  });
 
   parts.push('=== END KNOWLEDGE BASE ===');
   parts.push('');
+  parts.push('RECOMMENDATIONS:');
+  parts.push('  • Study the module and layout patterns for your category above');
+  parts.push('  • Pay special attention to color schemes and visual concepts from high-quality stores');
+  parts.push('  • Use the copywriting and structure examples as inspiration, not templates');
+  parts.push('  • Adapt proven patterns to your unique brand and product positioning');
+  parts.push('');
+
   return parts.join('\n');
 }
 
@@ -292,4 +775,123 @@ function shortenUrl(url) {
     var u = new URL(url);
     return u.hostname + u.pathname.slice(0, 60) + (u.pathname.length > 60 ? '...' : '');
   } catch (e) { return url.slice(0, 80); }
+}
+
+// ─── GEMINI VISION ENRICHMENT FOR REFERENCE STORES ───
+
+// Enrich a single reference store with Gemini Vision analysis
+export async function enrichReferenceStoreWithGemini(storeUrl, brandName, maxImages, onProgress) {
+  var log = onProgress || function() {};
+  log('Enriching ' + brandName + ' with Gemini Vision...');
+
+  var resp = await fetch('/api/enrich-reference-store', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      storeUrl: storeUrl,
+      brandName: brandName,
+      maxImages: maxImages || 50,
+    }),
+  });
+
+  if (!resp.ok) {
+    var errData = await resp.json().catch(function() { return { error: 'Unknown error' }; });
+    throw new Error('Enrichment failed for ' + brandName + ': ' + (errData.error || resp.status));
+  }
+
+  var result = await resp.json();
+  log('  → ' + result.imageCount + ' images analyzed (' + result.totalImagesFound + ' total found)');
+  return result;
+}
+
+// Batch-enrich all reference stores from SEED_STORES
+export async function enrichAllReferenceStores(seedStores, onProgress, cancelRef) {
+  var log = onProgress || function() {};
+  var results = [];
+
+  for (var i = 0; i < seedStores.length; i++) {
+    if (cancelRef && cancelRef.current) {
+      log('Enrichment cancelled by user');
+      break;
+    }
+
+    var store = seedStores[i];
+    log('');
+    log('━━━ Enriching ' + (i + 1) + '/' + seedStores.length + ': ' + store.brandHint + ' ━━━');
+
+    try {
+      var result = await enrichReferenceStoreWithGemini(
+        store.url,
+        store.brandHint,
+        15,
+        log
+      );
+      results.push(result);
+      log('  ✓ ' + store.brandHint + ' complete');
+    } catch (err) {
+      log('  ✗ ' + store.brandHint + ' failed: ' + err.message);
+      results.push({ brandName: store.brandHint, error: err.message, geminiAnalyses: [] });
+    }
+
+    // Delay between stores to avoid rate limiting
+    if (i < seedStores.length - 1) {
+      log('  Waiting 3s before next store...');
+      await new Promise(function(r) { setTimeout(r, 3000); });
+    }
+  }
+
+  log('');
+  log('━━━ ENRICHMENT COMPLETE ━━━');
+  var successCount = results.filter(function(r) { return !r.error; }).length;
+  log(successCount + '/' + seedStores.length + ' stores successfully enriched');
+
+  return results;
+}
+
+// Merge Gemini analyses into an existing store JSON object
+export function mergeGeminiIntoStoreJson(storeJson, geminiResult) {
+  if (!geminiResult || !geminiResult.geminiAnalyses) return storeJson;
+
+  // Add geminiAnalyses array to the store JSON
+  storeJson.geminiAnalyses = {
+    analyzedAt: geminiResult.analyzedAt || new Date().toISOString(),
+    imageCount: geminiResult.imageCount || 0,
+    analyses: geminiResult.geminiAnalyses.map(function(a) {
+      return {
+        url: a.url || '',
+        page: a.page || '',
+        summary: a.summary || '',
+        imageCategory: a.imageCategory || 'unknown',
+        dominantColors: a.dominantColors || [],
+        textOnImage: a.textOnImage || '',
+        elements: a.elements || [],
+        brandingElements: a.brandingElements || '',
+        designPatterns: a.designPatterns || [],
+      };
+    }),
+  };
+
+  // Also extract aggregated CI data from Gemini analyses
+  var allColors = [];
+  var allPatterns = [];
+  storeJson.geminiAnalyses.analyses.forEach(function(a) {
+    if (a.dominantColors) {
+      a.dominantColors.forEach(function(c) {
+        if (allColors.indexOf(c) < 0) allColors.push(c);
+      });
+    }
+    if (a.designPatterns) {
+      a.designPatterns.forEach(function(p) {
+        if (allPatterns.indexOf(p) < 0) allPatterns.push(p);
+      });
+    }
+  });
+
+  // Add aggregated data
+  storeJson.geminiAnalyses.aggregated = {
+    allDominantColors: allColors.slice(0, 10),
+    allDesignPatterns: allPatterns,
+  };
+
+  return storeJson;
 }

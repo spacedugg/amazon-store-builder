@@ -182,10 +182,54 @@ export default function App() {
         log('Reference analysis complete');
       }
 
+      // Step 1.5b: Analyze existing store with Gemini Vision (if provided)
+      if (params.existingStoreUrl) {
+        try {
+          var refService = await import('./referenceStoreService');
+          var modeLabel = (params.existingStoreMode === 'reconceptualize') ? 'NEU KONZIPIEREN' : 'OPTIMIEREN';
+          log('Analyzing existing brand store (' + modeLabel + '): ' + params.existingStoreUrl);
+          var existingStore = await refService.crawlAndParseStore(params.existingStoreUrl, log);
+
+          // Analyze existing store images with Gemini for CI extraction
+          var existingImageAnalyses = [];
+          try {
+            existingImageAnalyses = await refService.analyzeStoreImagesWithGemini(existingStore, log);
+          } catch (e) { log('Existing store image analysis skipped: ' + e.message); }
+
+          var existingContext = refService.formatReferenceStoreContext([existingStore], existingImageAnalyses);
+          var storeMode = params.existingStoreMode || 'optimize';
+          var existingPrefix;
+          if (storeMode === 'reconceptualize') {
+            existingPrefix = '\n=== EXISTING BRAND STORE (current store — NEEDS COMPLETE RECONCEPTUALIZATION) ===\n'
+              + 'This store is fundamentally underoptimized. DO NOT preserve its structure or layout.\n'
+              + 'CREATE a completely new concept from scratch:\n'
+              + '- ONLY extract and keep: brand colors, logo, typography, and brand voice/tonality\n'
+              + '- IGNORE the existing page structure, navigation hierarchy, and module arrangement\n'
+              + '- Design an entirely new storytelling arc, new page structure, new module flow\n'
+              + '- Use the reference store best practices to build something significantly better\n'
+              + '- The existing store serves ONLY as CI reference, NOT as structural template\n\n';
+          } else {
+            existingPrefix = '\n=== EXISTING BRAND STORE (current store — OPTIMIZE & EXPAND) ===\n'
+              + 'This store has a good foundation. PRESERVE its core structure:\n'
+              + '- KEEP the existing page hierarchy, navigation, and category structure\n'
+              + '- KEEP module arrangements that work well (good flow, clear storytelling)\n'
+              + '- IMPROVE content quality: better headlines, stronger CTAs, richer descriptions\n'
+              + '- EXPAND with new products (from scraped ASINs) into existing categories\n'
+              + '- ADD missing elements: social proof, lifestyle images, benefit sections\n'
+              + '- FIX specific weaknesses while maintaining the overall concept\n'
+              + '- Match CI exactly: same colors, same image style, same tonality\n\n';
+          }
+          referenceAnalysis = (referenceAnalysis || '') + existingPrefix + existingContext;
+          log('Existing store analyzed: ' + existingStore.pageCount + ' pages, ' + existingStore.summary.totalImages + ' images');
+        } catch (existErr) {
+          log('Existing store analysis skipped: ' + existErr.message);
+        }
+      }
+
       // Step 1.6: Load knowledge base data for the selected category
       try {
         var { loadKnowledgeBaseForCategory, formatKnowledgeBaseContext } = await import('./referenceStoreService');
-        var kbCategory = params.category || 'generic';
+        var kbCategory = params.referenceCategory || params.category || 'generic';
         log('Loading knowledge base for category: ' + kbCategory + '...');
         var kbData = await loadKnowledgeBaseForCategory(kbCategory);
         if (kbData && kbData.length > 0) {
@@ -199,16 +243,78 @@ export default function App() {
         log('Knowledge base skipped: ' + kbErr.message);
       }
 
+      // Step 1.7: Load static reference data from _summary.json (always available)
+      try {
+        var { formatStaticReferenceContext } = await import('./referenceStoreService');
+        var refCategory = params.referenceCategory || 'generic';
+        log('Loading static reference patterns for: ' + refCategory + '...');
+        var staticContext = await formatStaticReferenceContext(refCategory);
+        if (staticContext) {
+          referenceAnalysis = (referenceAnalysis || '') + '\n' + staticContext;
+          log('Static reference patterns loaded (from 23 analyzed stores)');
+        }
+      } catch (staticErr) {
+        log('Static reference data skipped: ' + staticErr.message);
+      }
+
+      // Step 1.7b: Load Gemini Vision analyses from reference store JSONs
+      try {
+        var { loadGeminiAnalysesForCategory, formatGeminiAnalysesContext } = await import('./referenceStoreService');
+        var geminiCategory = params.referenceCategory || 'generic';
+        log('Loading Gemini visual intelligence for: ' + geminiCategory + '...');
+        var geminiData = await loadGeminiAnalysesForCategory(geminiCategory);
+        if (geminiData && geminiData.length > 0) {
+          var geminiContext = formatGeminiAnalysesContext(geminiData);
+          referenceAnalysis = (referenceAnalysis || '') + '\n' + geminiContext;
+          log('Gemini visual intelligence: ' + geminiData.length + ' stores with image analyses loaded');
+        } else {
+          log('Gemini visual intelligence: no enriched stores available yet');
+        }
+      } catch (geminiErr) {
+        log('Gemini visual intelligence skipped: ' + geminiErr.message);
+      }
+
+      // Step 1.8: Add storytelling type to instructions if specified
+      if (params.storytellingType && params.storytellingType !== 'automatic') {
+        var storyMap = {
+          'educational': 'Use an EDUCATIONAL FUNNEL storytelling approach: Problem → Solution → Proof → Product. Like AG1 or Kloster Kitchen.',
+          'category-navigator': 'Use a CATEGORY NAVIGATOR storytelling approach: Hero → Categories → Per-Category: Lifestyle + Products. Like Cloudpillo or Feandrea.',
+          'purpose-story': 'Use a PURPOSE STORY storytelling approach: Mission → Values → Impact Numbers → Products. Like the nu company or Hansegrün.',
+          'product-showcase': 'Use a PRODUCT SHOWCASE storytelling approach: Hero → Bestsellers → Features → Accessories. Like Desktronic or Manscaped.',
+          'seasonal-hook': 'Use a SEASONAL HOOK storytelling approach: Seasonal opener → Current Favorites → Categories. Like Feandrea or Bedsure.'
+        };
+        var storyInstruction = storyMap[params.storytellingType];
+        if (storyInstruction) {
+          referenceAnalysis = (referenceAnalysis || '') + '\n\n=== STORYTELLING DIRECTIVE ===\n' + storyInstruction + '\n=== END STORYTELLING DIRECTIVE ===\n';
+          log('Storytelling type: ' + params.storytellingType);
+        }
+      }
+
       // Resolve template data if selected
       var templateData = null;
       if (params.template) {
         templateData = STORE_TEMPLATES.find(function(t) { return t.id === params.template; }) || null;
       }
 
+      // Step 1.9: Enhance website data with CI detection flag
+      var enhancedWebsiteData = params.websiteData || null;
+      if (params.enableCIDetection && enhancedWebsiteData) {
+        enhancedWebsiteData = Object.assign({}, enhancedWebsiteData, { ciDetectionEnabled: true });
+        referenceAnalysis = (referenceAnalysis || '') + '\n\n=== CI DETECTION MODE ===\n'
+          + 'The user has enabled Corporate Identity detection. EXTRACT and USE the brand\'s actual:\n'
+          + '- Primary colors (from website, logo, product images)\n'
+          + '- Typography style (serif/sans-serif, weight, capitalization)\n'
+          + '- Photography style (warm/cool, light/dark, lifestyle/product-focused)\n'
+          + '- Tone of voice (formal/casual, emotional/rational)\n'
+          + 'Apply these consistently across ALL image briefs and text elements.\n'
+          + '=== END CI DETECTION MODE ===\n';
+        log('CI detection enabled — brand identity will be extracted from website data');
+      }
+
       // Step 2-4: AI generation (with complexity, category, template, websiteData, referenceAnalysis)
       var storeData = await generateStore(
         params.asins, products, params.brand, params.marketplace, lang,
-        params.instructions, log, params.complexity, templateData, params.websiteData, referenceAnalysis
+        params.instructions, log, params.complexity, templateData, enhancedWebsiteData, referenceAnalysis
       );
 
       // Store meta
