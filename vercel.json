@@ -8,7 +8,8 @@
     "api/stores.js": { "maxDuration": 30 },
     "api/scrape-website.js": { "maxDuration": 30 },
     "api/crawl-brand-store.js": { "maxDuration": 60 },
-    "api/analyze-images.js": { "maxDuration": 60 }
+    "api/analyze-images.js": { "maxDuration": 60 },
+    "api/enrich-reference-store.js": { "maxDuration": 600 }
   },
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
