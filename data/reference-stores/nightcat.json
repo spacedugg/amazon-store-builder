@@ -1,0 +1,211 @@
+{
+  "brandName": "Night Cat",
+  "storeUrl": "https://www.amazon.de/stores/page/CC609240-DCC5-47C5-A171-3B973268CD34",
+  "category": "sports",
+  "qualityScore": 2,
+  "analyzedAt": "2026-04-01",
+  "ci": {
+    "primaryColors": [
+      "#2d5a27",
+      "#ffffff",
+      "#333333"
+    ],
+    "accentColors": [
+      "#f5a623",
+      "#4a7c59"
+    ],
+    "imageStyle": "Outdoor-Camping-Fotografie. Bergpanorama im Hero. Atmosphärische Nachtszenen (Zelt bei Dämmerung mit Lagerfeuer). Familie beim Camping. Produkte in Naturumgebung. Video-Content mit Hängematten-Setup. China-Brand mit brauchbarer Bildsprache.",
+    "typographyStyle": "Standard Amazon-Fonts. 'Night Cat' Branding minimal. Produktnamen: 'Night Cat Camping-Neuheiten', 'Night Cat Wurfzelt 4 Personen', 'Night Cat Pop Up Zelt'. Kein eigener Font, keine CI-Typografie.",
+    "tonality": "Funktional-sachlich. 'Catch Outdoors Fun' als Sub-Claim. Produktnamen + Preise. Keine emotionale Ansprache, keine Benefits, keine Storytelling-Elemente.",
+    "ciConsistency": 2,
+    "consistencyNotes": "Grün/Outdoor-Farbwelt durch Produktfarben natürlich gegeben. Keine bewusste CI-Implementierung. Lifestyle-Fotos und Video vorhanden, aber kein einheitliches Design-System."
+  },
+  "navigation": {
+    "pageCount": 10,
+    "structurePrinciple": "Nach Zelttyp: Hängemattenzelt, Kuppelzelt, Feldbett Zelt, Wurfzelt, Ultraleichtes Zelt, Strandzelt. Plus Wanderrucksäcke, Wathose, Campingzubehör.",
+    "pages": [
+      {
+        "name": "Startseite",
+        "url": "https://www.amazon.de/stores/page/CC609240-DCC5-47C5-A171-3B973268CD34"
+      },
+      {
+        "name": "Hängemattenzelt",
+        "url": "https://www.amazon.de/stores/page/HAENGEMATTEN"
+      },
+      {
+        "name": "Kuppelzelt",
+        "url": "https://www.amazon.de/stores/page/KUPPELZELT"
+      },
+      {
+        "name": "Feldbett Zelt",
+        "url": "https://www.amazon.de/stores/page/FELDBETT"
+      },
+      {
+        "name": "Wurfzelt",
+        "url": "https://www.amazon.de/stores/page/WURFZELT"
+      },
+      {
+        "name": "Ultraleichtes Zelt",
+        "url": "https://www.amazon.de/stores/page/ULTRALEICHT"
+      },
+      {
+        "name": "Wanderrucksäcke",
+        "url": "https://www.amazon.de/stores/page/RUCKSAECKE"
+      },
+      {
+        "name": "Strandzelt",
+        "url": "https://www.amazon.de/stores/page/STRANDZELT"
+      },
+      {
+        "name": "Wathose",
+        "url": "https://www.amazon.de/stores/page/WATHOSE"
+      },
+      {
+        "name": "Campingzubehör",
+        "url": "https://www.amazon.de/stores/page/ZUBEHOER"
+      }
+    ]
+  },
+  "heroImage": {
+    "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/nightcat-hero.jpeg",
+    "description": "Bergpanorama mit grünen Wiesen und Felsen. Kein Text, kein Logo auf dem Bild.",
+    "textOnImage": {
+      "headline": "",
+      "subtext": "",
+      "cta": ""
+    },
+    "colorMood": "Grün, bergig, natürlich",
+    "designElements": "Reines Landschaftsfoto"
+  },
+  "pages": [
+    {
+      "name": "Startseite",
+      "url": "https://www.amazon.de/stores/page/CC609240-DCC5-47C5-A171-3B973268CD34",
+      "moduleCount": 5,
+      "modules": [
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 1,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Lifestyle-Banner: Familie beim Camping.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Familie campt auf grüner Wiese. Großes Zelt, Campingstühle, Fußball. 'Night Cat Camping-Neuheiten' Text links.",
+              "textOnImage": {
+                "headline": "Night Cat Camping-Neuheiten",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Grün, sonnig, familiär",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "product_grid",
+          "layoutId": "product_grid",
+          "position": 2,
+          "tileCount": 0,
+          "tiles": [],
+          "note": "Camping-Produkte: Familienzelt 499,99€, Wurfzelt 84,68€."
+        },
+        {
+          "type": "video",
+          "layoutId": "1",
+          "position": 3,
+          "tileCount": 1,
+          "tiles": [
+            {
+              "tileType": "video",
+              "imageCategory": "lifestyle",
+              "description": "Video: Camouflage-Hängematten-Zelt Setup im Wald. Hund liegt daneben.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Outdoor, natürlich",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 4,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Nachtszene.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Atmosphärische Camping-Nachtszene: Gelbes Zelt bei Dämmerung, Lagerfeuer-Licht, Berge im Hintergrund.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Dämmerung, warm, atmosphärisch",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "product_grid",
+          "layoutId": "product_grid",
+          "position": 5,
+          "tileCount": 0,
+          "tiles": [],
+          "note": "Weitere Zelte: Pop Up Zelt 110,49€, Trekkingzelt 78,99€, Kuppelzelt 159,99€."
+        }
+      ],
+      "pageTexts": {
+        "headlines": [
+          "Night Cat Camping-Neuheiten"
+        ],
+        "descriptions": [
+          "Catch Outdoors Fun"
+        ],
+        "ctas": [],
+        "nativeTexts": []
+      }
+    }
+  ],
+  "analysis": {
+    "ciImplementation": "Minimale CI. Kein Logo auf den Bildern. Night Cat Branding nur in Produktnamen und Store-Header. Keine eigene Farbwelt — Grün kommt von der Natur-Fotografie.",
+    "imageLanguage": "Gute Outdoor-Fotografie: Bergpanorama, atmosphärische Nachtszenen, Familie beim Camping. Video-Content vorhanden. Keine Produktfotos mit CI-Elementen.",
+    "storytelling": "Kein Storytelling. Produkt-Listing mit Lifestyle-Bildern dazwischen. Keine Benefits, keine Beratung.",
+    "moduleFlow": "Full Width Lifestyle → Product Grid → Video → Full Width Nachtszene → Product Grid",
+    "subpageLogic": "10 Seiten — beeindruckend granular nach Zelttyp. Nische: Camping/Outdoor. China-Brand.",
+    "conversionElements": [
+      "Video-Content",
+      "Prime-Badges sichtbar",
+      "Atmosphärische Nachtszene erzeugt Outdoor-Sehnsucht"
+    ],
+    "copywritingAnalysis": "Fast nicht vorhanden. Nur Produktnamen und Preise. 'Catch Outdoors Fun' als Claim wirkt unbeholfen (China-Brand). Keine emotionale Ansprache.",
+    "strengths": [
+      "Atmosphärische Outdoor-Fotografie (besonders Nachtszene)",
+      "Video-Content vorhanden",
+      "10 granulare Subpages zeigen Sortimentstiefe",
+      "Bergpanorama-Hero erzeugt Outdoor-Stimmung"
+    ],
+    "weaknesses": [
+      "Kein Logo oder Branding auf den Bildern",
+      "Keine eigenen Texte, Benefits oder USPs",
+      "Keine CTAs",
+      "Kein Social Proof",
+      "China-Brand mit holprigem Claim",
+      "Keine Kategorie-Navigation auf der Startseite",
+      "Wirkt wie ein Produkt-Katalog statt einer Brand-Experience"
+    ]
+  }
+}

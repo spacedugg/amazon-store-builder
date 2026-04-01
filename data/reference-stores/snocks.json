@@ -1,0 +1,620 @@
+{
+  "brandName": "SNOCKS",
+  "storeUrl": "https://www.amazon.de/stores/SNOCKS/page/C0392661-40E4-498F-992D-2FFEB9086ABB",
+  "category": "fashion",
+  "qualityScore": 5,
+  "analyzedAt": "2026-04-01",
+  "ci": {
+    "primaryColors": [
+      "#f5f0eb",
+      "#1a1a1a",
+      "#ffffff"
+    ],
+    "accentColors": [
+      "#c8b89a",
+      "#4a9da8"
+    ],
+    "imageStyle": "Warme, natürliche Lifestyle-Fotografie mit Beigetönen. Produkte werden immer getragen/im Kontext gezeigt. Hintergründe: Beige Sofas, Betontreppen, helle Räume mit Pflanzen. Soft Natural Light, nie hartes Studiolicht. Kategorie-Kacheln: Produkte freigestellt auf hellbeigem/grauem Hintergrund mit Label-Text darüber.",
+    "typographyStyle": "Clean Sans-Serif für Kategorie-Labels (All Year, Standard, Lenzing Modal). Hero-Banner: Großer weißer Text zentriert auf Bild. Keine Versalien bei Labels, zurückhaltend. CTA-Buttons: 'Produkte ansehen' in kleiner Schrift.",
+    "tonality": "Modern, zurückhaltend, premium-casual. Weder übertrieben emotional noch kühl-sachlich. Produktnamen als Labels, keine reißerischen Headlines. Du-Ansprache indirekt ('Dein daily Drunter').",
+    "ciConsistency": 4,
+    "consistencyNotes": "Sehr konsistente Bildwelt mit Beigetönen über alle Seiten. Kategorie-Kacheln folgen exakt dem gleichen Schema (3 Produktvarianten auf beigem Grund + Label). Kleine Abzüge: Manche Seiten sind etwas gleichförmig."
+  },
+  "navigation": {
+    "pageCount": 24,
+    "structurePrinciple": "Hierarchisch nach Produkttyp: 7 Hauptkategorien (Startseite, Angebote, Socken, Männer Unterwäsche, Frauen Unterwäsche, Sportkleidung, Essentials). Jede Hauptkategorie hat 3-4 Unterkategorien (z.B. Socken → All Year, Sommer, Winter).",
+    "pages": [
+      {
+        "name": "Startseite",
+        "url": "https://www.amazon.de/stores/SNOCKS/page/C0392661-40E4-498F-992D-2FFEB9086ABB"
+      },
+      {
+        "name": "Angebote",
+        "url": "https://www.amazon.de/stores/page/42E66794-B41B-44E8-A6D0-CC0F8605F20A"
+      },
+      {
+        "name": "Socken",
+        "url": "https://www.amazon.de/stores/page/17B3424A-1755-49D5-A025-73ABB6B3C52D"
+      },
+      {
+        "name": "All Year Socken",
+        "url": "https://www.amazon.de/stores/page/F5CC9211-EEF4-4F0A-88CF-0DEF4EBF6B92",
+        "parent": "Socken"
+      },
+      {
+        "name": "Sommer Socken",
+        "url": "https://www.amazon.de/stores/page/55DEE1A6-4F49-4D33-8F42-B4E79D5070EA",
+        "parent": "Socken"
+      },
+      {
+        "name": "Winter Socken",
+        "url": "https://www.amazon.de/stores/page/EF30D6C0-2481-469F-AE56-226AC97D004F",
+        "parent": "Socken"
+      },
+      {
+        "name": "Männer Unterwäsche",
+        "url": "https://www.amazon.de/stores/page/B4901639-A8F8-4E8C-BC36-A55E1BF3DAF5"
+      },
+      {
+        "name": "Standard",
+        "url": "https://www.amazon.de/stores/page/B4D6B493-07A3-47BC-8327-151CD1D47123",
+        "parent": "Männer Unterwäsche"
+      },
+      {
+        "name": "Lenzing",
+        "url": "https://www.amazon.de/stores/page/5FE2E1F3-DC8E-4AE5-ABA0-3AC4E1FD8EE5",
+        "parent": "Männer Unterwäsche"
+      },
+      {
+        "name": "American",
+        "url": "https://www.amazon.de/stores/page/47A73490-B5AB-4B2C-89C0-FAD4B21211F0",
+        "parent": "Männer Unterwäsche"
+      },
+      {
+        "name": "Specials",
+        "url": "https://www.amazon.de/stores/page/AC8DFF52-A611-493D-83F6-816E6B1035C1",
+        "parent": "Männer Unterwäsche"
+      },
+      {
+        "name": "Frauen Unterwäsche",
+        "url": "https://www.amazon.de/stores/page/94F6DB72-C422-42F6-AC44-549A9BC86D1C"
+      },
+      {
+        "name": "BHs",
+        "url": "https://www.amazon.de/stores/page/0329C7AA-921A-4021-9E5B-40CEF48CCEC0",
+        "parent": "Frauen Unterwäsche"
+      },
+      {
+        "name": "Brazilian",
+        "url": "https://www.amazon.de/stores/page/AC8ADD59-A1EB-48C2-9F9E-CA69E780A5A4",
+        "parent": "Frauen Unterwäsche"
+      },
+      {
+        "name": "Hipster",
+        "url": "https://www.amazon.de/stores/page/A3A450BA-9711-43DF-850E-27B5ACAD2302",
+        "parent": "Frauen Unterwäsche"
+      },
+      {
+        "name": "Tangas",
+        "url": "https://www.amazon.de/stores/page/350643F0-5F8D-4E56-95BC-495FB2CC7F97",
+        "parent": "Frauen Unterwäsche"
+      },
+      {
+        "name": "Sportkleidung",
+        "url": "https://www.amazon.de/stores/page/5DFF47B7-CCA8-4326-8B6F-8A1DDC80341D"
+      },
+      {
+        "name": "Sport Socken",
+        "url": "https://www.amazon.de/stores/page/54DD2F2B-EB3F-41AF-9869-2C29D8F10EFA",
+        "parent": "Sportkleidung"
+      },
+      {
+        "name": "Für Ihn (Sport)",
+        "url": "https://www.amazon.de/stores/page/D5B7A091-6B76-4C03-AE2A-B26E89AD0AC6",
+        "parent": "Sportkleidung"
+      },
+      {
+        "name": "Für Sie (Sport)",
+        "url": "https://www.amazon.de/stores/page/D7A9A9F4-0691-43B8-A247-185A6C80BACD",
+        "parent": "Sportkleidung"
+      },
+      {
+        "name": "Essentials",
+        "url": "https://www.amazon.de/stores/page/555DB690-ED63-42FE-9EA9-A49F765B58BB"
+      },
+      {
+        "name": "Für Ihn (Essentials)",
+        "url": "https://www.amazon.de/stores/page/93756CF2-DB1F-4687-A873-1404EEC16951",
+        "parent": "Essentials"
+      },
+      {
+        "name": "Für Sie (Essentials)",
+        "url": "https://www.amazon.de/stores/page/92971BF4-C3AF-4D16-BA60-74A3733DD12B",
+        "parent": "Essentials"
+      },
+      {
+        "name": "Bestseller",
+        "url": "https://www.amazon.de/stores/page/DA753C2C-2F77-4141-A50C-D7C20798A73D",
+        "parent": "Essentials"
+      }
+    ]
+  },
+  "heroImage": {
+    "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/cbf8e4be-9587-4dba-a606-d10a23a2a07c._CR0%2C0%2C3000%2C600_SX1500_.jpg",
+    "description": "Full-Width Hero-Banner: Weißer 'SNOCKS' Schriftzug zentriert auf unscharfem Hintergrund mit grünen Pflanzenblättern. Natürliche, warme Farbgebung, dezent und premium.",
+    "textOnImage": {
+      "headline": "SNOCKS",
+      "subtext": "",
+      "cta": ""
+    },
+    "colorMood": "Grüntöne mit Beige, warm, natürlich, weich unscharf",
+    "designElements": "Logo-Text zentriert, kein Overlay, kein Rahmen, rein typografisch auf Foto"
+  },
+  "pages": [
+    {
+      "name": "Startseite",
+      "url": "https://www.amazon.de/stores/SNOCKS/page/C0392661-40E4-498F-992D-2FFEB9086ABB",
+      "moduleCount": 3,
+      "modules": [
+        {
+          "type": "video",
+          "layoutId": "1",
+          "position": 1,
+          "tileCount": 1,
+          "visualConnection": "Video zeigt SNOCKS Unterwäsche-Kollektion mit verschiedenen Models und Körpertypen. Warme, natürliche Beleuchtung passend zur CI.",
+          "tiles": [
+            {
+              "tileType": "video",
+              "description": "Brand-Video: SNOCKS präsentiert bequeme Unterwäsche für alle Körpertypen. Warme Beleuchtung, natürliche Settings, diverse Models.",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "lg-w2s",
+          "position": 2,
+          "tileCount": 4,
+          "visualConnection": "Alle 4 Kacheln in derselben warmen Beigewelt. Große Kachel zeigt Männer-Unterwäsche im Lifestyle-Kontext, die 3 kleineren Kacheln zeigen Socken-Lifestyle + Frauen-Unterwäsche-Kategorien. Zusammen bilden sie einen Sortimentsüberblick.",
+          "designRationale": "Große Lifestyle-Kachel als Eyecatcher links, rechts daneben kategorisierte Einstiegspunkte. User bekommt sofort Überblick über Hauptkategorien.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Mann in schwarzer SNOCKS Boxershorts sitzt entspannt auf beigem geschwungenem Sofa in sonnendurchflutetem Raum mit Vorhängen und Pflanze. Warmes natürliches Licht, wohnliches Ambiente.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": "Produkte ansehen"
+              },
+              "imageUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/311b820e-4844-4758-b55b-06453b6e519a._CR0%2C0%2C1680%2C1680_SX750_SY750_.png",
+              "colorMood": "Warm beige, sonnig, wohnlich",
+              "designElements": "Kein Text-Overlay außer CTA-Button unten. Rein fotografisches Bild.",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Nahaufnahme von Füßen in weißen Ankle-Socken, Person sitzt auf beigem Sofa mit Jeans sichtbar. Betonboden-Textur, natürliches Licht.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": "Produkte ansehen"
+              },
+              "imageUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c0d071cf-4534-4b02-ae3c-6dceebe11432._CR0%2C0%2C1500%2C750_SX750_SY375_.png",
+              "colorMood": "Beige, grau, dezent urban",
+              "designElements": "Kein Overlay, CTA-Button",
+              "tilePosition": 2,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Drei Unterwäsche-Teile nebeneinander auf hellbeigem Hintergrund: schwarze Boxershorts, weiße Slips, schwarzer Spitzen-Tanga. Label 'Bestseller' darüber.",
+              "textOnImage": {
+                "headline": "Bestseller",
+                "subtext": "",
+                "cta": ""
+              },
+              "imageUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/ea5d425a-74fc-4ed1-86ae-1834f96b2203._CR0%2C0%2C750%2C750_SX375_SY375_.png",
+              "colorMood": "Hellbeige Hintergrund, clean, minimalistisch",
+              "designElements": "Produkte freigestellt, Label-Text zentriert darüber, kein Rahmen",
+              "tilePosition": 3,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Drei Spitzen-Unterwäsche-Teile für Frauen: schwarz, beige, burgunderrot. Label 'Hipster Fit' darüber. Gleicher hellbeiger Hintergrund wie Bestseller-Kachel.",
+              "textOnImage": {
+                "headline": "Hipster Fit",
+                "subtext": "",
+                "cta": ""
+              },
+              "imageUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/cd8e5d50-b2aa-41b4-b967-2c46fe8d6811._CR0%2C0%2C750%2C750_SX375_SY375_.png",
+              "colorMood": "Hellbeige, clean, Produkt-Fokus",
+              "designElements": "Gleiches Schema wie Bestseller-Kachel: freigestellte Produkte + Label",
+              "tilePosition": 4,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "2stack-lg",
+          "position": 3,
+          "tileCount": 3,
+          "visualConnection": "Gleiche Beigewelt wie Modul 2. Linke Kacheln zeigen Produktkategorien (Socken + Unterwäsche) als Kacheln mit Label und 3 Produktvarianten. Rechts großes Lifestyle-Bild als visueller Abschluss.",
+          "designRationale": "Komplementär zum ersten Modul: Weitere Kategorien-Einstiegspunkte + Lifestyle-Bild das zum Entdecken einlädt.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Drei Paar Socken in Rosa, Grau und Weiß nebeneinander auf hellbeigem Hintergrund. Label 'All Year' darüber.",
+              "textOnImage": {
+                "headline": "All Year",
+                "subtext": "",
+                "cta": ""
+              },
+              "imageUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/ff9b0001-8cd8-4976-8bfe-07ac74af35c7._CR0%2C0%2C750%2C750_SX375_SY375_.png",
+              "colorMood": "Hellbeige, pastellige Sockenfarben",
+              "designElements": "Identisches Schema: 3 Produkte + Label",
+              "tilePosition": 1,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Drei Paar Herren-Boxershorts in Schwarz, Grau und Weiß. Label 'Standard' darüber. Gleicher minimalistischer Style.",
+              "textOnImage": {
+                "headline": "Standard",
+                "subtext": "",
+                "cta": ""
+              },
+              "imageUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/5a1e14d2-8318-4c21-895a-821f0dc44c4c._CR0%2C0%2C750%2C750_SX375_SY375_.png",
+              "colorMood": "Hellbeige, clean, Produkt-Fokus",
+              "designElements": "Identisches Schema",
+              "tilePosition": 2,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Person in weißen Slip-On-Schuhen und heller Hose sitzt auf Betontreppen, Füße sichtbar mit weißen Sneaker-Socken. Urbanes Setting, Tageslicht.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "imageUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/afa7e5f4-c123-4b5a-9e8d-2f1a3c4d5e6f._CR0%2C0%2C1680%2C1680_.png",
+              "colorMood": "Helle Beigetöne, urban, natürlich",
+              "designElements": "Reines Lifestyle-Foto ohne Text",
+              "tilePosition": 3,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            }
+          ]
+        }
+      ],
+      "pageTexts": {
+        "headlines": [],
+        "descriptions": [],
+        "ctas": [
+          "Produkte ansehen",
+          "Teilen"
+        ],
+        "nativeTexts": [
+          "Teilen Sie diese Seite mit Ihren Freunden."
+        ]
+      }
+    },
+    {
+      "name": "Socken",
+      "url": "https://www.amazon.de/stores/page/17B3424A-1755-49D5-A025-73ABB6B3C52D",
+      "moduleCount": 3,
+      "modules": [
+        {
+          "type": "editorial_row",
+          "layoutId": "lg-w2s",
+          "position": 1,
+          "tileCount": 4,
+          "visualConnection": "Lifestyle-Bild links zeigt Frau mit weißen Socken auf Bett. Rechts: Socken-Produktfotos + Kategorie-Kachel 'Summer Socks'. Konsistente beige Farbwelt.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Frau in weißem T-Shirt sitzt auf beigem Bett, trägt weiße Socken. Grüne Pflanzen im Hintergrund, weiches natürliches Licht.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": "Produkte ansehen"
+              },
+              "imageUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c0992a8c-bdc7-41de-bf62-3913e5eed4c9._CR0%2C0%2C1680%2C1680_.png",
+              "colorMood": "Warm beige, hell, natürlich",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Weiße Socken auf weißem Sneaker, Nahaufnahme. Produkt-Fokus auf betoniertem Hintergrund.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": "Produkte ansehen"
+              },
+              "imageUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e84f33c9-dc7c-4153-8bd9-69fcc4a34ded._CR0%2C0%2C1500%2C750_.png",
+              "colorMood": "Weiß, beige, clean",
+              "tilePosition": 2,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Drei Sommer-Socken in Beige, Grau und Hellgrün auf beigem Hintergrund. Label 'Summer Socks'.",
+              "textOnImage": {
+                "headline": "Summer Socks",
+                "subtext": "",
+                "cta": ""
+              },
+              "imageUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/b79e857a-90ea-4f78-ab2c-28c002029d1a._CR0%2C0%2C750%2C750_SX375_SY375_.png",
+              "colorMood": "Hellbeige, pastellig",
+              "tilePosition": 3,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Drei Winter-Socken in Grau, Beige und Schwarz. Label 'Winter Socks'.",
+              "textOnImage": {
+                "headline": "Winter Socks",
+                "subtext": "",
+                "cta": ""
+              },
+              "imageUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/886f4684-1f28-4533-96c4-2f8d36846525._CR0%2C0%2C750%2C750_SX375_SY375_.png",
+              "colorMood": "Beige, gedeckt",
+              "tilePosition": 4,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "2stack-lg",
+          "position": 2,
+          "tileCount": 3,
+          "visualConnection": "Weitere Socken-Kategorien links (All Year, Sport Socks) + Lifestyle-Bild rechts. Gleiches Design-Schema wie Modul 1.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Drei All-Year-Socken in Rosa, Grau, Weiß auf beigem Hintergrund.",
+              "textOnImage": {
+                "headline": "All Year",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Hellbeige, pastellig",
+              "tilePosition": 1,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Drei Sport-Socken in Beige, Gelbgrün, Grau.",
+              "textOnImage": {
+                "headline": "Sport Socks",
+                "subtext": "",
+                "cta": ""
+              },
+              "imageUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/50cc8917-270d-4b93-8ba2-aaa459cae0f0._CR0%2C0%2C1500%2C750_SX750_SY375_.png",
+              "colorMood": "Beige, sportliche Akzentfarben",
+              "tilePosition": 2,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Nahaufnahme von Füßen in weißen Ankle-Socken auf Betontreppe, Person in Jeans. Natürliches Licht, Pflanzen im Hintergrund.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Beige, urban, natürlich",
+              "tilePosition": 3,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            }
+          ]
+        }
+      ],
+      "pageTexts": {
+        "headlines": [
+          "Socken"
+        ],
+        "descriptions": [],
+        "ctas": [
+          "Produkte ansehen"
+        ],
+        "nativeTexts": []
+      }
+    },
+    {
+      "name": "Männer Unterwäsche",
+      "url": "https://www.amazon.de/stores/page/B4901639-A8F8-4E8C-BC36-A55E1BF3DAF5",
+      "moduleCount": 3,
+      "modules": [
+        {
+          "type": "editorial_row",
+          "layoutId": "lg-w2s",
+          "position": 1,
+          "tileCount": 4,
+          "visualConnection": "Große Lifestyle-Kachel mit Mann in Unterwäsche, daneben Produkt-Nahaufnahme und Kategorie-Kacheln (Standard, Lenzing Modal). Konsistente warme Beige-Farbwelt.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Mann sitzt auf beigem Sofa, trägt schwarze SNOCKS Unterwäsche. Sonnendurchfluteter Raum. Text 'Dein daily Drunter' auf dem Bild.",
+              "textOnImage": {
+                "headline": "Dein daily Drunter",
+                "subtext": "",
+                "cta": "Produkte ansehen"
+              },
+              "imageUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c0992a8c-bdc7-41de-bf62-3913e5eed4c9._CR0%2C0%2C1680%2C1680_.png",
+              "colorMood": "Warm beige, sonnig, premium-casual",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Nahaufnahme von Mann in Jeans, SNOCKS-Bund der Unterwäsche sichtbar. Lifestyle-Detail.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": "Produkte ansehen"
+              },
+              "colorMood": "Beige, urban",
+              "tilePosition": 2,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Drei Paar Boxershorts in Schwarz, Grau, Weiß auf beigem Hintergrund. Label 'Standard'.",
+              "textOnImage": {
+                "headline": "Standard",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Hellbeige, minimalistisch",
+              "tilePosition": 3,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Drei Paar Boxershorts in Schwarz, Dunkelgrau, Hellgrau. Label 'Lenzing Modal'.",
+              "textOnImage": {
+                "headline": "Lenzing Modal",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Hellbeige, premium",
+              "tilePosition": 4,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "2stack-lg",
+          "position": 2,
+          "tileCount": 3,
+          "visualConnection": "Weitere Unterwäsche-Kategorien (American, Specials) + Lifestyle-Bild. Gleiche Design-Sprache.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Drei Boxershorts mit Karomuster: Blau, Rot-Gingham, Rosa-Blau-Streifen. Label 'American'.",
+              "textOnImage": {
+                "headline": "American",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Beige Hintergrund, bunte Muster",
+              "tilePosition": 1,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Drei Special-Boxershorts: Schwarz, Schwarz mit Regenbogen-Bund, Olivgrün. Label 'Specials'.",
+              "textOnImage": {
+                "headline": "Specials",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Beige, dunklere Akzente",
+              "tilePosition": 2,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Oberkörperfreier Mann in schwarzer Unterwäsche steht in modernem Wohnzimmer mit beigem Sofa und abstrakter Wandkunst.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Warm beige, wohnlich",
+              "tilePosition": 3,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            }
+          ]
+        }
+      ],
+      "pageTexts": {
+        "headlines": [
+          "Für Ihn"
+        ],
+        "descriptions": [],
+        "ctas": [
+          "Produkte ansehen"
+        ],
+        "nativeTexts": []
+      }
+    }
+  ],
+  "analysis": {
+    "ciImplementation": "Sehr konsequent — durchgängig warme Beigetöne, natürliche Beleuchtung, minimalistisches Design. Die Marke setzt auf eine 'Clean Living'-Ästhetik: helle Räume, natürliche Materialien, Pflanzen als wiederkehrendes Motiv. Jede Unterseite folgt exakt dem gleichen Layout-Schema (lg-w2s + 2stack-lg). Kategorie-Kacheln immer: 3 Produkte freigestellt + Label-Text darüber.",
+    "imageLanguage": "Lifestyle-Bilder dominieren: Produkte werden im Wohn-Kontext gezeigt (Sofa, Bett, Treppe). Models zeigen nur relevante Körperteile (Füße bei Socken, Torso bei Unterwäsche). Hintergründe: Beton, Beige-Textilien, Holz. Produktkacheln: Immer 3 Farbvarianten auf hellem Grund. Keine grellen Farben, keine Störer.",
+    "storytelling": "Kein narrativer Bogen, sondern ein 'Lifestyle-Katalog'-Ansatz: Homepage zeigt die Markenwelt (Video + Sortimentsüberblick), Unterseiten sind Produktkategorien. User navigiert von der Übersicht zur gewünschten Kategorie. Jede Unterseite hat den gleichen Aufbau: Lifestyle-Kontext → Unterkategorien → Lifestyle-Abschluss.",
+    "moduleFlow": "Video (Hero) → lg-w2s (Sortimentsüberblick mit Lifestyle + Kategorien) → 2stack-lg (Weitere Kategorien + Lifestyle). Sehr einfach, nur 3 Module auf der Homepage.",
+    "subpageLogic": "24 Seiten, streng nach Produkttyp hierarchisiert. 7 Hauptkategorien mit je 3-4 Unterkategorien. Jede Hauptseite zeigt ihre Unterkategorien als Kacheln. Unterseiten zeigen dann die Produkte direkt.",
+    "conversionElements": [
+      "CTA-Button 'Produkte ansehen' auf Lifestyle-Bildern",
+      "Kategorie-Kacheln als direkte Einstiegspunkte",
+      "Video als Aufmerksamkeitsfänger"
+    ],
+    "copywritingAnalysis": "Extrem minimalistisch. Fast kein Text auf den Bildern — nur Kategorie-Labels (1-2 Wörter: 'Standard', 'All Year', 'Hipster Fit'). Ein einziger Satz als Headline auf der Unterwäsche-Seite: 'Dein daily Drunter'. CTAs immer gleich: 'Produkte ansehen'. Keine Benefits, keine USPs in Textform — die Bilder sprechen für sich.",
+    "strengths": [
+      "Extrem konsistente visuelle Identität — warme Beigetöne durchgängig über alle 24 Seiten",
+      "Cleveres Kategorie-Kachel-System: 3 Produktvarianten + Label gibt sofort Orientierung",
+      "Professionelle Lifestyle-Fotografie die eine klare Markenwelt aufbaut (Clean Living)",
+      "Einfacher, vorhersehbarer Aufbau — User weiß sofort wo er was findet",
+      "Video auf der Homepage als modernes Branding-Element"
+    ],
+    "weaknesses": [
+      "Sehr wenig Text — keine USPs, keine Benefit-Kommunikation, keine Trust-Elemente",
+      "Unterseiten sind alle identisch aufgebaut — wenig Abwechslung, könnte monoton wirken",
+      "Keine Product Grids mit echten Amazon-Produkten sichtbar auf der Homepage",
+      "Kein Deals/Angebote-Highlight auf der Startseite trotz vorhandener Angebote-Seite",
+      "Keine Bewertungs-Highlights, keine Social Proof Elemente"
+    ]
+  }
+}

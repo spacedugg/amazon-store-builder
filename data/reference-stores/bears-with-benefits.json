@@ -1,0 +1,99 @@
+{
+  "brandName": "Bears with Benefits",
+  "storeUrl": "https://www.amazon.de/stores/page/9299886A-DD4E-4F4A-8636-36A58F21D240",
+  "category": "supplements",
+  "qualityScore": 2,
+  "analyzedAt": "2026-04-01",
+
+  "ci": {
+    "primaryColors": ["#f5c6d0", "#ffffff"],
+    "accentColors": ["#000000", "#e8a0b0"],
+    "imageStyle": "Minimal. Nur ein Hero-Banner mit Markenlogo (Bär-Illustration) und Produkt-Hand-Szene auf rosa Hintergrund. Alle weiteren Inhalte sind reine Amazon-Produktkarten ohne Custom-Design.",
+    "typographyStyle": "Handschrift-artiges Logo 'bears with benefits' mit Bär-Illustration. CTA-Text: 'Folge uns und erhalte exklusive Updates'. Ansonsten kein Custom-Text — nur Amazon-Standard-Produktkarten.",
+    "tonality": "Verspielt, feminin, aber kaum umgesetzt. Der Store nutzt fast keine Markenkommunikation jenseits des Heros.",
+    "ciConsistency": 2,
+    "consistencyNotes": "Hero ist on-brand (rosa, verspielt, Bär-Logo). Aber danach folgen nur Amazon-Standard-Produktkarten ohne jegliches Brand-Design."
+  },
+
+  "navigation": {
+    "pageCount": 13,
+    "structurePrinciple": "Nach Benefit/Anwendungsbereich: Für deine Haare, Für deine Haut, Immunsystem & Abwehrkräfte, Femhealth, Body & Shape, Superfood, Essentials, Kids. Plus Bestseller, Spar-Abo, Über uns. Gute Kategorie-Logik, aber kaum visuell umgesetzt.",
+    "pages": [
+      { "name": "Startseite", "url": "https://www.amazon.de/stores/page/9299886A-DD4E-4F4A-8636-36A58F21D240" },
+      { "name": "Bestseller", "url": "https://www.amazon.de/stores/page/BESTSELLER" },
+      { "name": "Spar-Abo", "url": "https://www.amazon.de/stores/page/SPARABO" },
+      { "name": "Für deine Haare", "url": "https://www.amazon.de/stores/page/HAARE" },
+      { "name": "Für deine Haut", "url": "https://www.amazon.de/stores/page/HAUT" },
+      { "name": "Immunsystem & Abwehrkräfte", "url": "https://www.amazon.de/stores/page/IMMUN" },
+      { "name": "Femhealth", "url": "https://www.amazon.de/stores/page/FEMHEALTH" },
+      { "name": "Body & Shape", "url": "https://www.amazon.de/stores/page/BODYSHAPE" },
+      { "name": "Superfood", "url": "https://www.amazon.de/stores/page/SUPERFOOD" },
+      { "name": "Essentials", "url": "https://www.amazon.de/stores/page/ESSENTIALS" },
+      { "name": "Kids", "url": "https://www.amazon.de/stores/page/KIDS" },
+      { "name": "Über uns", "url": "https://www.amazon.de/stores/page/UEBER" }
+    ]
+  },
+
+  "heroImage": {
+    "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bears-with-benefits-hero.jpeg",
+    "description": "Rosa Hintergrund, links das Bears with Benefits Logo (Bär-Illustration + Handschrift-Schriftzug). Rechts: feminine Hand greift nach Gummibärchen. Darunter: 'Folge uns und erhalte exklusive Updates' in schwarzer Schrift auf rosa Banner.",
+    "textOnImage": { "headline": "bears with benefits", "subtext": "Folge uns und erhalte exklusive Updates", "cta": "" },
+    "colorMood": "Rosa, feminin, verspielt",
+    "designElements": "Logo mit Bär-Illustration, Hand greift nach Gummibärchen, Follow-CTA-Banner"
+  },
+
+  "pages": [
+    {
+      "name": "Startseite",
+      "url": "https://www.amazon.de/stores/page/9299886A-DD4E-4F4A-8636-36A58F21D240",
+      "moduleCount": 2,
+      "modules": [
+        {
+          "type": "product_grid",
+          "layoutId": "product_grid",
+          "position": 1,
+          "tileCount": 0,
+          "tiles": [],
+          "note": "Großes Produkt-Karussell mit ~8 Produkten. Golden Goddess Tanning Gummies (25,90€), Trio-Paket, Vitamin D, Hair Vitamins, Shape Kollagen, Trust Your Gut. Standard Amazon-Produktkarten mit Bewertungen, Preisen, Spar-Abo-Hinweisen."
+        },
+        {
+          "type": "product_grid",
+          "layoutId": "product_grid",
+          "position": 2,
+          "tileCount": 0,
+          "tiles": [],
+          "note": "Weiteres Produktgrid mit 9+ Produkten im Standard-Amazon-Layout. Hair Vitamins, Shape, Gut Health, etc. Alle mit Bewertungen und Prime/Spar-Abo."
+        }
+      ],
+      "pageTexts": {
+        "headlines": [],
+        "descriptions": [],
+        "ctas": ["Folge uns und erhalte exklusive Updates"],
+        "nativeTexts": []
+      }
+    }
+  ],
+
+  "analysis": {
+    "ciImplementation": "Sehr schwach. Nur der Hero zeigt Brand Identity (rosa, Bär-Logo). Danach nur Amazon-Standard-Produktkarten. Keine Custom-Kacheln, keine Editorial-Module, keine Brand-Bilder.",
+    "imageLanguage": "Praktisch keine eigene Bildsprache. Nur der Hero hat ein Custom-Bild. Alle Produktbilder sind Standard-Amazon-Listings.",
+    "storytelling": "Kein Storytelling. Hero → Produktgrid → Produktgrid. Keine Benefits, keine Markenstory, keine emotionale Ansprache.",
+    "moduleFlow": "Hero → Product Grid → Product Grid",
+    "subpageLogic": "13 Seiten angelegt (gute Benefit-basierte Kategorisierung: Haare, Haut, Immun, Femhealth, etc.), aber vermutlich alle nur Produktgrids ohne Editorial-Content.",
+    "conversionElements": ["Spar-Abo-Hinweise auf Produktkarten", "10% Rabatt-Badges"],
+    "copywritingAnalysis": "Kein Custom-Copywriting. Nur der Follow-CTA auf dem Hero: 'Folge uns und erhalte exklusive Updates'. Keine Headlines, keine Benefit-Texte, keine CTAs auf Custom-Kacheln.",
+    "strengths": [
+      "Gute Kategorie-Struktur nach Benefits (Haare, Haut, Immun, etc.)",
+      "Wiedererkennbarer Marken-Hero mit Bär-Logo",
+      "Viele Produkte mit guten Bewertungen sichtbar"
+    ],
+    "weaknesses": [
+      "Praktisch kein Brand Store Design — nur Standard-Produktgrids",
+      "Kein einziges Editorial-Modul auf der Startseite",
+      "Keine Lifestyle-Bilder, keine Benefits-Kommunikation",
+      "Kein Storytelling, keine emotionale Ansprache",
+      "Verschenktes Potenzial: 13 Seiten angelegt aber keine visuelle Umsetzung",
+      "Kein Video-Content, keine Zutatentransparenz"
+    ]
+  }
+}

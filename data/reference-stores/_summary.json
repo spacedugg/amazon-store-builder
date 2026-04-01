@@ -1,0 +1,322 @@
+{
+  "meta": {
+    "totalStoresAnalyzed": 23,
+    "analyzedAt": "2026-04-01",
+    "categories": {
+      "fashion": ["SNOCKS"],
+      "outdoor": ["The North Face"],
+      "supplements": ["ESN", "AG1", "Bears with Benefits", "MORE Nutrition"],
+      "food": ["HOLY Energy", "the nu company", "Kloster Kitchen"],
+      "home_kitchen": ["Hansegrün", "Nespresso", "Cloudpillo", "twentythree", "Bedsure", "Gritin"],
+      "household": ["Kärcher"],
+      "fitness": ["BLACKROLL"],
+      "beauty": ["Manscaped"],
+      "office": ["Desktronic"],
+      "pets": ["Feandrea", "TRIXIE"],
+      "sports": ["Night Cat"],
+      "kitchen": ["MasterChef"]
+    },
+    "qualityDistribution": {
+      "5": ["SNOCKS", "The North Face", "ESN", "AG1", "Nespresso", "Kärcher", "BLACKROLL"],
+      "4": ["MORE Nutrition", "Hansegrün", "HOLY Energy", "Manscaped", "Desktronic", "Cloudpillo", "Bedsure", "Feandrea", "the nu company", "Kloster Kitchen"],
+      "3": ["twentythree", "Gritin", "TRIXIE"],
+      "2": ["Bears with Benefits", "MasterChef", "Night Cat"]
+    },
+    "stores": [
+      { "file": "snocks.json", "brandName": "SNOCKS", "category": "fashion", "qualityScore": 5 },
+      { "file": "the-north-face.json", "brandName": "The North Face", "category": "outdoor", "qualityScore": 5 },
+      { "file": "esn.json", "brandName": "ESN", "category": "supplements", "qualityScore": 5 },
+      { "file": "ag1.json", "brandName": "AG1", "category": "supplements", "qualityScore": 5 },
+      { "file": "bears-with-benefits.json", "brandName": "Bears with Benefits", "category": "supplements", "qualityScore": 2 },
+      { "file": "more-nutrition.json", "brandName": "MORE Nutrition", "category": "supplements", "qualityScore": 4 },
+      { "file": "hansegruen.json", "brandName": "Hansegrün", "category": "home_kitchen", "qualityScore": 4 },
+      { "file": "nespresso.json", "brandName": "Nespresso", "category": "home_kitchen", "qualityScore": 5 },
+      { "file": "holy-energy.json", "brandName": "HOLY Energy", "category": "food", "qualityScore": 4 },
+      { "file": "kaercher.json", "brandName": "Kärcher", "category": "household", "qualityScore": 5 },
+      { "file": "blackroll.json", "brandName": "BLACKROLL", "category": "fitness", "qualityScore": 5 },
+      { "file": "manscaped.json", "brandName": "Manscaped", "category": "beauty", "qualityScore": 4 },
+      { "file": "desktronic.json", "brandName": "Desktronic", "category": "office", "qualityScore": 4 },
+      { "file": "cloudpillo.json", "brandName": "Cloudpillo", "category": "home_kitchen", "qualityScore": 4 },
+      { "file": "twentythree.json", "brandName": "twentythree", "category": "home_kitchen", "qualityScore": 3 },
+      { "file": "bedsure.json", "brandName": "Bedsure", "category": "home_kitchen", "qualityScore": 4 },
+      { "file": "gritin.json", "brandName": "Gritin", "category": "home_kitchen", "qualityScore": 3 },
+      { "file": "feandrea.json", "brandName": "Feandrea", "category": "pets", "qualityScore": 4 },
+      { "file": "trixie.json", "brandName": "TRIXIE", "category": "pets", "qualityScore": 3 },
+      { "file": "nightcat.json", "brandName": "Night Cat", "category": "sports", "qualityScore": 2 },
+      { "file": "nucompany.json", "brandName": "the nu company", "category": "food", "qualityScore": 4 },
+      { "file": "klosterkitchen.json", "brandName": "Kloster Kitchen", "category": "food", "qualityScore": 4 },
+      { "file": "masterchef.json", "brandName": "MasterChef", "category": "home_kitchen", "qualityScore": 2 }
+    ]
+  },
+
+  "whatMakesGreatStores": {
+    "tier5Patterns": [
+      "Mindestens 8-10 Module auf der Startseite mit klarem narrativem Bogen",
+      "Professionelle Lifestyle-Fotografie zeigt Produkte im Anwendungskontext",
+      "Starke CI-Implementierung: Eigene Farben, Fonts, Grafik-Elemente durchgängig",
+      "Social Proof: Testsiegel, Bewertungen, Awards prominent platziert",
+      "Video-Content als Differenzierungsmerkmal",
+      "Mehrere Subpages (8+) mit logischer Struktur",
+      "CTAs auf jeder Sektion mit klarer Handlungsaufforderung",
+      "Benefit-Texte statt reiner Produktbeschreibungen",
+      "Saisonale Aktualisierung zeigt Pflege des Stores"
+    ],
+    "tier4Patterns": [
+      "Grundsolide CI mit erkennbarer Farbwelt und Stilistik",
+      "Mix aus Lifestyle und Produktfotos",
+      "Mindestens 5-7 Module auf der Startseite",
+      "Einige CTAs und Benefit-Texte vorhanden",
+      "Kategorie-Navigation visuell gelöst",
+      "Ein oder zwei besondere Differenzierungsmerkmale (z.B. Wolken-Konzept, Illustrationen, Purpose-Story)"
+    ],
+    "commonWeaknesses": [
+      "Fehlendes Video-Content (nur 3 von 23 Stores haben Videos: Desktronic, TRIXIE, Night Cat)",
+      "Keine Produktvergleiche oder Berater/Finder-Tools",
+      "Kein oder wenig Social Proof bei kleineren Brands",
+      "Keine saisonale Aktualisierung",
+      "China-Brands mit grammatisch unsauberen Texten"
+    ]
+  },
+
+  "layoutUsagePatterns": {
+    "mostUsedLayouts": [
+      {
+        "layoutId": "1",
+        "name": "Full Width",
+        "frequency": "Häufigstes Layout — in JEDEM Store mindestens 1x verwendet",
+        "bestFor": "Hero-Banner, Section Headers, Lifestyle-Banner, Video, Awards-Leisten, Follow-CTAs",
+        "examples": ["Kärcher gelbe Kategorie-Labels", "AG1 Educational Funnels", "Nespresso Marmor-Banner"]
+      },
+      {
+        "layoutId": "std-2equal",
+        "name": "Standard 2 Equal",
+        "frequency": "Zweithäufigstes Layout — in ~80% der Stores",
+        "bestFor": "Zwei Hauptkategorien, Lifestyle+Text Kombination, Vorher/Nachher, Produkt-Paarungen",
+        "examples": ["Desktronic Tisch+Stuhl", "Cloudpillo Kissen-Lifestyle+Benefit", "Hansegrün Produkt-Duos"]
+      },
+      {
+        "layoutId": "2x2wide",
+        "name": "2x2 Grid",
+        "frequency": "In ~50% der Stores",
+        "bestFor": "4 Kategorien, Zubehör-Übersicht, Feature-Icons",
+        "examples": ["Desktronic Zubehör", "Feandrea Tier-Kategorien", "BLACKROLL Kategorie-Grid"]
+      },
+      {
+        "layoutId": "lg-4grid",
+        "name": "Large + 4 Grid",
+        "frequency": "In ~30% der Stores",
+        "bestFor": "Großes Lifestyle-Bild + 4 Kategorie-Kacheln, Hero-Produkt + Varianten",
+        "examples": ["TRIXIE Hund/Katze-Sektionen", "Gritin Buchlampe-Feature"]
+      },
+      {
+        "layoutId": "4x2grid",
+        "name": "4x2 Grid (8 Kacheln)",
+        "frequency": "In ~15% der Stores",
+        "bestFor": "Viele Kategorien auf einen Blick, umfangreiche Sortimente",
+        "examples": ["Kloster Kitchen 8 Produktkategorien"]
+      },
+      {
+        "layoutId": "product_grid",
+        "name": "Product Grid",
+        "frequency": "In ~70% der Stores",
+        "bestFor": "Amazon-native Produktkarussells mit Preisen und Prime-Badges",
+        "examples": ["Zwischen Editorial-Modulen für direkte Kaufmöglichkeit"]
+      }
+    ],
+    "layoutCombinations": {
+      "storytelling": "Full Width Hero → std-2equal Kategorien → Full Width Section Header → lg-4grid Feature → product_grid",
+      "katalog": "Full Width Hero → product_grid → Full Width Banner → product_grid → product_grid",
+      "premium": "Full Width Hero → std-2equal Lifestyle → Full Width Video → 2x2 Kategorien → Full Width Awards",
+      "minimal": "Full Width Hero → std-2equal Kategorien → Full Width Text"
+    }
+  },
+
+  "imageStrategies": {
+    "lifestyleVsProduct": {
+      "tier5": "70% Lifestyle, 30% Produkt — Produkte immer im Kontext gezeigt",
+      "tier4": "50% Lifestyle, 50% Produkt — guter Mix",
+      "tier3": "30% Lifestyle, 70% Produkt — zu produktlastig",
+      "tier2": "0-10% Lifestyle, 90-100% Produkt — reiner Katalog"
+    },
+    "uniqueVisualConcepts": [
+      { "brand": "Cloudpillo", "concept": "Wolken/Himmel als durchgängiges Motiv — Models schweben in Wolken", "impact": "Sofortige Wiedererkennung, differenziert stark" },
+      { "brand": "Feandrea", "concept": "Handgezeichnete Tier-Illustrationen + Orange Deko-Linien", "impact": "Charmant, einzigartig im Pet-Markt" },
+      { "brand": "HOLY Energy", "concept": "Pop-Art/Comic-Stil mit Cartoon-Maskottchen", "impact": "Gen-Z Appeal, sehr hoher Wiedererkennungswert" },
+      { "brand": "Nespresso", "concept": "Marmor/Gold Ultra-Premium Ästhetik", "impact": "Luxury-Positionierung auf Amazon" },
+      { "brand": "the nu company", "concept": "Pink/Lila Gen-Z Street-Style", "impact": "Differenzierung im Food-Markt" },
+      { "brand": "TRIXIE", "concept": "Polaroid-Stil Fotos + Line-Art Icons", "impact": "Einheitliches System, nostalgisch-warm" }
+    ],
+    "colorPaletteNote": "Farbpaletten sind IMMER brand-spezifisch, NIEMALS kategorie-abhängig. Jede Marke hat ihre eigene Farbwelt, die sich aus der Brand Identity ergibt. Beispiele: SNOCKS (Beige/Schwarz), ESN (Schwarz/Rot/Grün), Cloudpillo (Himmelblau/Weiß), nu company (Pink/Lila), Nespresso (Schwarz/Gold). Die Farben werden aus der bestehenden CI des Kunden übernommen oder aus dessen Website/Logo abgeleitet.",
+    "heroImagePatterns": [
+      "Lifestyle-Szene + Logo + Claim (häufigste Variante: ~60%)",
+      "Produkt-Collage + Badges/Siegel (z.B. Nespresso, MasterChef)",
+      "Reines Logo auf dunklem/farbigem Hintergrund (z.B. Desktronic, ESN)",
+      "Natur-/Stimmungsfoto als Fullscreen-Background (z.B. Night Cat, Kloster Kitchen)"
+    ]
+  },
+
+  "copywritingPatterns": {
+    "claimStyles": {
+      "zweiWort": ["Arbeite bequem (Desktronic)", "Lebe deine Träume (Cloudpillo)"],
+      "kontrast": ["Trink, was dir gut tut. Nicht, was nur gut klingt. (Kloster Kitchen)", "Better Than Good (Kloster Kitchen)"],
+      "emotional": ["Friends for Life (TRIXIE)", "Spüre den Unterschied (twentythree)", "Design für Ihren komfortabel Leben (Gritin)"],
+      "purpose": ["The good choc... (nu company)", "Bio. Vegan. Fair. (nu company)"],
+      "provokant": ["Der geilste Schokoriegel der Welt (MORE Nutrition)", "Endlich erholsam durchschlafen (Cloudpillo)"]
+    },
+    "headlinePatterns": {
+      "benefit_first": ["Verbessert die Weichheit des Lichts um 70% (Gritin)", "Für jeden Schlaftyp das passende Kopfkissen (Cloudpillo)", "Ein gemütlicher Ort zum Kuscheln (Feandrea)"],
+      "category_label": ["Bettwäsche (twentythree)", "Kopfkissen (Cloudpillo)", "Kratzbäume (Feandrea/TRIXIE)"],
+      "emotional_hook": ["Frühlings-Favoriten zum Verlieben (Feandrea)", "Tierisch neu, tierisch toll (Feandrea)", "Der Frühling zieht zu Hause ein (Feandrea)"],
+      "numbered_proof": ["70+ Länder & Regionen (Feandrea)", "13.589.202 Bäume gepflanzt (nu company)", "Über 70 pflanzliche Zutaten (Kloster Kitchen)"],
+      "wortspiel": ["nu chocolate on the block (nu company)", "Süße Schale, nicer Kern (nu company)", "Top-Kategorien bereichern Tierleben (Feandrea)"]
+    },
+    "ctaPatterns": {
+      "standard": ["Jetzt shoppen", "Jetzt kaufen", "Jetzt entdecken", "Mehr entdecken"],
+      "category_specific": ["Zur Tafelschokolade (nu company)", "Alle Kissen ansehen (Cloudpillo)", "Alle Bettdecken ansehen (Cloudpillo)"],
+      "arrow_style": ["Jetzt Kaufen ► (Gritin)", "Mehr Erfahren → (Desktronic)", "Jetzt shoppen > (Feandrea)"],
+      "action_oriented": ["Produkte ansehen (Desktronic/Feandrea)", "Jetzt auffrischen (Feandrea)"]
+    },
+    "tonalityByCategory": {
+      "supplements": "Selbstbewusst-wissenschaftlich. Zahlen und Studien. 'Backed by Science'. Du-Ansprache.",
+      "food": "Purpose-driven oder verspielt. Nachhaltigkeit, Bio, Mission. Gen-Z Slang erlaubt.",
+      "home_kitchen": "Ruhig-emotional. 'Spüre den Unterschied', 'Guter Schlaf'. Sensorische Sprache.",
+      "fitness": "Motivierend-benefit. 'Performance', 'Recovery'. Konkrete Ergebnisse.",
+      "pets": "Warm-verspielt. Tier-Wortspiele. Emotionale Bindung zum Haustier.",
+      "office": "Minimalistisch-sachlich. Wenig Text, Bilder sprechen. Premium-Anspruch.",
+      "beauty": "Selbstbewusst-humorvoll. Produktnamen als Wortspiele (Lawn Mower). Maskulin."
+    }
+  },
+
+  "ciImplementationPatterns": {
+    "consistencyLevels": {
+      "excellent": {
+        "score": 5,
+        "brands": ["SNOCKS", "Nespresso", "Kärcher", "ESN"],
+        "pattern": "Eigene Farbwelt + eigene Typografie + eigene Grafik-Elemente + durchgängige Bildsprache auf ALLEN Modulen"
+      },
+      "good": {
+        "score": 4,
+        "brands": ["BLACKROLL", "Cloudpillo", "Feandrea", "nu company", "Kloster Kitchen"],
+        "pattern": "Eigene Farbwelt + erkennbare Bildsprache + ein einzigartiges visuelles Konzept"
+      },
+      "basic": {
+        "score": 3,
+        "brands": ["Gritin", "twentythree", "TRIXIE"],
+        "pattern": "Grundlegende Farbkonsistenz + Logo-Branding, aber keine eigenen Design-Elemente"
+      },
+      "minimal": {
+        "score": 2,
+        "brands": ["MasterChef", "Night Cat", "Bears with Benefits"],
+        "pattern": "Nur Logo als CI-Element, keine konsistente Farbwelt oder Bildsprache"
+      }
+    },
+    "brandingElements": {
+      "logo_placement": "Im Hero + im Store-Header (Amazon-Standard). Beste: Auch als Element in Modulen (Kärcher Logo auf Produkten, nucao auf Verpackungen)",
+      "color_system": "2-3 Hauptfarben + 1-2 Akzentfarben. Akzentfarbe für CTAs (ESN: Grün, Desktronic: Lila, Cloudpillo: Orange)",
+      "graphic_elements": "Eigene Icons (TRIXIE Line-Art, BLACKROLL Pfeil), Deko-Linien (Gritin Orange), Illustrationen (Feandrea), Badges (AG1, Kloster Kitchen BIO)",
+      "photography_style": "Einheitlicher Fotostil als stärkstes CI-Element: Nespresso Marmor, Cloudpillo Wolken, HOLY Energy Pop-Art"
+    }
+  },
+
+  "conversionElementPatterns": {
+    "socialProof": {
+      "testsiegel": ["CHIP Testsieger (Cloudpillo)", "Stiftung Warentest (BLACKROLL)", "German Brand Award (Kloster Kitchen)", "ÖKO-TEST (Hansegrün)"],
+      "zahlen": ["70+ Länder, 20M+ Familien (Feandrea)", "13,5 Mio Bäume (nu company)", "91% positive Bewertungen (TRIXIE)", "6500 Artikel (TRIXIE)"],
+      "amazon_badges": ["Amazon Top Brand (TRIXIE)", "Bestseller-Badges", "Prime-Badges"],
+      "ugc": ["#feandrea Kundenfotos (Feandrea)", "Trustpilot im Hero (Cloudpillo)"]
+    },
+    "ctaPlacement": {
+      "best_practice": "CTA auf JEDER visuellen Kachel — nicht nur am Ende",
+      "tier5_example": "Cloudpillo: Jede Kategorie-Sektion hat einen eigenen orangefarbenen CTA-Button",
+      "common_mistake": "Viele Stores haben gar keine CTAs auf der Startseite (twentythree, TRIXIE, Night Cat)"
+    },
+    "specialElements": [
+      "Follow-Banner ganz oben (Gritin) — Mobile-optimiert",
+      "Spar-Abo als eigene Seite (Kloster Kitchen) — Kundenbindung",
+      "App-Promotion (BLACKROLL) — Cross-Channel",
+      "Saisonale Hooks (Feandrea Frühling, Bedsure Frühlingserwachen) — Aktualität",
+      "UGC-Galerie (Feandrea #feandrea) — Authentizität",
+      "Produkt-Vergleich (Manscaped Lawn Mower 3.0/4.0/5.0) — Upselling"
+    ]
+  },
+
+  "storytellingArchetypes": {
+    "educationalFunnel": {
+      "description": "Problem → Lösung → Beweis → Produkt",
+      "brands": ["AG1", "Kloster Kitchen"],
+      "example": "AG1: 'Was ist AG1?' → Inhaltsstoffe → Studien → Kauf"
+    },
+    "categoryNavigator": {
+      "description": "Hero → Kategorien → Pro Kategorie: Lifestyle + Produkte",
+      "brands": ["Cloudpillo", "Feandrea", "TRIXIE", "Nespresso"],
+      "example": "Cloudpillo: Hero → 4 Kategorien → Kissen-Section → Bettdecken-Section"
+    },
+    "purposeStory": {
+      "description": "Mission → Werte → Impact-Zahlen → Produkte",
+      "brands": ["the nu company", "Hansegrün"],
+      "example": "nu company: Lifestyle → Gründerstory → 13,5 Mio Bäume → Produkte"
+    },
+    "productShowcase": {
+      "description": "Hero → Bestseller → Features → Zubehör",
+      "brands": ["Desktronic", "Manscaped", "BLACKROLL"],
+      "example": "Desktronic: Tisch+Stuhl → Video → Freisteller → Zubehör"
+    },
+    "seasonalHook": {
+      "description": "Saisonaler Aufhänger → Aktuelle Favoriten → Kategorien",
+      "brands": ["Feandrea", "Bedsure"],
+      "example": "Feandrea: Frühling → Frühlings-Favoriten → Kategorien → NEU-Produkte"
+    }
+  },
+
+  "subpageStrategies": {
+    "byPageCount": {
+      "minimal_1_3": {
+        "brands": ["Bears with Benefits", "twentythree", "the nu company"],
+        "strategy": "Nur Startseite + 1-2 Kategorien. Geeignet für sehr kleine Sortimente."
+      },
+      "standard_4_7": {
+        "brands": ["AG1", "Gritin", "Cloudpillo", "MasterChef", "Desktronic", "Manscaped"],
+        "strategy": "Startseite + Produktkategorien + ggf. Deals. Standard für mittlere Sortimente."
+      },
+      "extensive_8_15": {
+        "brands": ["SNOCKS", "ESN", "Feandrea", "BLACKROLL", "TRIXIE", "Night Cat", "Kloster Kitchen"],
+        "strategy": "Startseite + viele Kategorien + Sonderseiten (Über Uns, Nachhaltigkeit, Spar-Abo)."
+      },
+      "mega_15_plus": {
+        "brands": ["The North Face", "Nespresso", "Kärcher", "MORE Nutrition", "HOLY Energy"],
+        "strategy": "Startseite + granulare Produktlinien + Content-Seiten. Für große Sortimente."
+      }
+    },
+    "specialPages": [
+      "Über Uns / Brand Story (Feandrea, Kloster Kitchen) — Vertrauen aufbauen",
+      "Nachhaltigkeit (Feandrea) — Purpose-Kommunikation",
+      "Spar-Abo (Kloster Kitchen) — Kundenbindung",
+      "Neuheiten/NEW (Feandrea, Gritin) — Aktualität",
+      "Geschenkideen/Probiersets (Kloster Kitchen) — Cross-Selling",
+      "Sonderangebote/Deals (Feandrea, MasterChef) — Conversion"
+    ]
+  },
+
+  "recommendationsForStoreBuilder": {
+    "promptImprovements": [
+      "Verwende die 5 Storytelling-Archetypen als Auswahloptionen für den Nutzer",
+      "Generiere Layout-Kombinationen basierend auf tatsächlichen Tier-5 Stores",
+      "Schlage CI-Farbpaletten basierend auf der Kategorie vor",
+      "Integriere Social-Proof-Elemente als Standard-Module",
+      "Generiere CTAs aus den bewährten CTA-Patterns statt generischer Texte"
+    ],
+    "imageBriefingImprovements": [
+      "Beschreibe Lifestyle-Szenen mit konkreten Beispielen: 'Wie Cloudpillo: Models in Wolken schwebend'",
+      "Definiere Foto-Stile pro Kategorie: Supplements=dunkel/scientific, Food=bunt/verspielt",
+      "Spezifiziere Lichtsstimmung: 'warmes goldenes Licht wie bei Desktronic Home-Office'",
+      "Fordere Text-auf-Bild-Elemente an mit konkreten Beispielen für Headline-Platzierung"
+    ],
+    "copywritingImprovements": [
+      "Nutze die Tonality-pro-Kategorie Tabelle als Leitfaden",
+      "Generiere Claims im Stil der besten Brands: Zwei-Wort, Kontrast, Purpose",
+      "Verwende konkrete Zahlen in Benefit-Texten (wie '70% weicheres Licht')",
+      "Integriere CTA-Patterns: Standard + Category-specific + Arrow-style",
+      "Erstelle Headlines nach den 5 Mustern: benefit_first, category_label, emotional_hook, numbered_proof, wortspiel"
+    ]
+  }
+}

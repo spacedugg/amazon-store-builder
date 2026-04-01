@@ -1,0 +1,99 @@
+{
+  "brandName": "MasterChef",
+  "storeUrl": "https://www.amazon.de/stores/page/4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6",
+  "category": "home_kitchen",
+  "qualityScore": 2,
+  "analyzedAt": "2026-04-01",
+
+  "ci": {
+    "primaryColors": ["#000000", "#ffffff", "#c8102e"],
+    "accentColors": ["#f0f0f0", "#333333"],
+    "imageStyle": "Einfache Produktfotos auf weißem Hintergrund. Hero mit Küchenutensilien-Collage. MasterChef Logo prominent. Keine Lifestyle-Fotos, keine Anwendungsbilder.",
+    "typographyStyle": "Standard Amazon-Fonts. MasterChef Logo als einziges Branding-Element. Produktnamen: 'MasterChef Messerset 3-teilig Essentials Kollektion'. Keine eigene Typografie.",
+    "tonality": "Funktional-sachlich. Produktbeschreibungen ohne emotionale Ansprache. Kollektionsnamen: 'Essentials', 'Erde'. Keine Benefits, keine Storytelling-Elemente.",
+    "ciConsistency": 2,
+    "consistencyNotes": "MasterChef Logo als einziges CI-Element. Keine konsistente Farbwelt. Produkte haben unterschiedliche Farbgebungen (schwarz, braun). Sehr basaler Store."
+  },
+
+  "navigation": {
+    "pageCount": 4,
+    "structurePrinciple": "Startseite, Angebote, Kochgeschirr, MEHR.",
+    "pages": [
+      { "name": "Startseite", "url": "https://www.amazon.de/stores/page/4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6" },
+      { "name": "Angebote", "url": "https://www.amazon.de/stores/page/ANGEBOTE" },
+      { "name": "Kochgeschirr", "url": "https://www.amazon.de/stores/page/KOCHGESCHIRR" }
+    ]
+  },
+
+  "heroImage": {
+    "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/masterchef-hero.jpeg",
+    "description": "Collage aus Küchenprodukten: Messer, Pfannen, Kochutensilien. MasterChef Logo zentral. Dunkler Hintergrund.",
+    "textOnImage": { "headline": "MasterChef", "subtext": "", "cta": "" },
+    "colorMood": "Dunkel, funktional",
+    "designElements": "Produkt-Collage, Logo"
+  },
+
+  "pages": [
+    {
+      "name": "Startseite",
+      "url": "https://www.amazon.de/stores/page/4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6",
+      "moduleCount": 3,
+      "modules": [
+        {
+          "type": "product_grid",
+          "layoutId": "product_grid",
+          "position": 1,
+          "tileCount": 0,
+          "tiles": [],
+          "note": "Messerset 3-teilig Essentials Kollektion (14,99€). Standardmäßiges Produkt-Grid."
+        },
+        {
+          "type": "product_grid",
+          "layoutId": "product_grid",
+          "position": 2,
+          "tileCount": 0,
+          "tiles": [],
+          "note": "Messerset 5-teilig Erde Kollektion. Weitere Küchenprodukte."
+        },
+        {
+          "type": "product_grid",
+          "layoutId": "product_grid",
+          "position": 3,
+          "tileCount": 0,
+          "tiles": [],
+          "note": "Weitere MasterChef Küchenartikel."
+        }
+      ],
+      "pageTexts": {
+        "headlines": ["MasterChef"],
+        "descriptions": [],
+        "ctas": [],
+        "nativeTexts": []
+      }
+    }
+  ],
+
+  "analysis": {
+    "ciImplementation": "Minimale CI. MasterChef Logo als einziges Branding-Element. Keine eigene Farbwelt, keine konsistente Bildsprache.",
+    "imageLanguage": "Ausschließlich Standard-Produktfotos auf weißem Hintergrund. Keine Lifestyle-Fotografie, keine Anwendungsbilder, keine kreativen Visuals.",
+    "storytelling": "Kein Storytelling. Reines Produkt-Listing ohne narrativen Bogen.",
+    "moduleFlow": "Hero → Product Grid → Product Grid → Product Grid",
+    "subpageLogic": "~4 Seiten. Einfache Kategoriestruktur: Angebote, Kochgeschirr.",
+    "conversionElements": ["Keine — kein CTA, kein Social Proof, keine Benefits"],
+    "copywritingAnalysis": "Keine eigenen Texte. Nur Produktnamen und Amazon-Standard-Texte. Kollektionsnamen (Essentials, Erde) als einzige Copy-Elemente.",
+    "strengths": [
+      "Bekannte Lizenzmarke mit Wiedererkennungswert",
+      "Hero-Bild zeigt Sortiment auf einen Blick"
+    ],
+    "weaknesses": [
+      "Nur Product Grids — keine Editorial-Module",
+      "Keine Lifestyle-Fotografie",
+      "Keine eigenen Texte oder Benefits",
+      "Kein Social Proof",
+      "Kein Video-Content",
+      "Keine CTAs",
+      "Keine CI-Implementierung über Logo hinaus",
+      "Wirkt wie Auto-generierter Standard-Store"
+    ]
+  }
+}

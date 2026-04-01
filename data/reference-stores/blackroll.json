@@ -1,0 +1,407 @@
+{
+  "brandName": "BLACKROLL",
+  "storeUrl": "https://www.amazon.de/stores/page/03098AB4-BDD5-4A23-A7DD-5C10153C5D58",
+  "category": "fitness",
+  "qualityScore": 5,
+  "analyzedAt": "2026-04-01",
+  "ci": {
+    "primaryColors": [
+      "#000000",
+      "#ffffff",
+      "#2a9d8f"
+    ],
+    "accentColors": [
+      "#4a4a4a",
+      "#e8e8e8",
+      "#f0f0f0"
+    ],
+    "imageStyle": "Premium-Fitness-Fotografie. Athletische, diverse Models nutzen BLACKROLL-Produkte in realen Trainings-Situationen. Natürliches Licht, professionelle Ästhetik. Mix aus Studio (dunkler Hintergrund) und Outdoor (Park, Natur). Produkte immer im Anwendungskontext. Schlaf-Kategorie: Warme, gemütliche Bett-Szenen.",
+    "typographyStyle": "Bold Uppercase Sans-Serif auf dunklem oder hellem Hintergrund: MASSAGEPISTOLE, FASZIENROLLEN, TRAININGSBÄNDER, KISSEN & DECKEN, BÄLLE & TRIGGER. Headlines: 'Dein Leben kennt keine Grenzen – nur Möglichkeiten', 'Trainiere smarter', 'Weniger Nachtschweiß. Mehr Morgenpower.' BLACKROLL-Logo: Kreis mit Schriftzug.",
+    "tonality": "Motivierend, sportlich, empowernd. Du-Ansprache. 'Dein Leben kennt keine Grenzen – nur Möglichkeiten' (Hero). 'Trainiere smarter' (App-CTA). 'Weniger Nachtschweiß. Mehr Morgenpower.' (Schlaf). Benefit-orientiert, nicht produktfokussiert.",
+    "ciConsistency": 5,
+    "consistencyNotes": "100% konsistent. Schwarz/Weiß/Teal als durchgängige Farbpalette. Professionelle Fotografie in jeder Kachel. Kategorie-Labels alle in Bold Uppercase auf Bildüberlagerung. BLACKROLL-Logo konsistent."
+  },
+  "navigation": {
+    "pageCount": 8,
+    "structurePrinciple": "Nach Produktkategorie: Bestseller, Schlaf, Faszienrollen, Massagepistole, Bälle & Trigger, Trainingsbänder, Über BLACKROLL.",
+    "pages": [
+      {
+        "name": "Startseite",
+        "url": "https://www.amazon.de/stores/page/03098AB4-BDD5-4A23-A7DD-5C10153C5D58"
+      },
+      {
+        "name": "Bestseller",
+        "url": "https://www.amazon.de/stores/page/A2470DD2-F6B7-49D3-9DE1-4BC9FBE710B0"
+      },
+      {
+        "name": "Schlaf",
+        "url": "https://www.amazon.de/stores/page/870649DE-4F7E-421F-B141-C4C47864D539"
+      },
+      {
+        "name": "Faszienrollen",
+        "url": "https://www.amazon.de/stores/page/0C47A3FC-C1D2-4C30-B03C-86EDFB3B607A"
+      },
+      {
+        "name": "Massagepistole",
+        "url": "https://www.amazon.de/stores/page/9A8C7424-898F-4E76-9442-CBCDB511CECB"
+      },
+      {
+        "name": "Bälle & Trigger",
+        "url": "https://www.amazon.de/stores/page/DD99AD6C-2ABA-4720-8BE8-06517078F35B"
+      },
+      {
+        "name": "Trainingsbänder",
+        "url": "https://www.amazon.de/stores/page/0EC7448C-FEF3-4672-BB11-15EAD7208270"
+      },
+      {
+        "name": "Über BLACKROLL",
+        "url": "https://www.amazon.de/stores/page/031EB79B-C8A4-4E6D-ADBF-B84F0D3957ED"
+      }
+    ]
+  },
+  "heroImage": {
+    "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/blackroll-hero.jpeg",
+    "description": "Frau lacht beim Training mit BLACKROLL Faszienrolle (grün) auf dem Boden. Helles, natürliches Licht. Links: 'Dein Leben kennt keine Grenzen – nur Möglichkeiten' in weißer Bold-Schrift auf schwarzen Balken. 'Bestseller entdecken' Button in Teal.",
+    "textOnImage": {
+      "headline": "Dein Leben kennt keine Grenzen – nur Möglichkeiten",
+      "subtext": "",
+      "cta": "Bestseller entdecken"
+    },
+    "colorMood": "Hell, sportlich, motivierend",
+    "designElements": "Lifestyle-Foto mit Text-Overlay auf schwarzen Balken"
+  },
+  "pages": [
+    {
+      "name": "Startseite",
+      "url": "https://www.amazon.de/stores/page/03098AB4-BDD5-4A23-A7DD-5C10153C5D58",
+      "moduleCount": 8,
+      "modules": [
+        {
+          "type": "best_sellers",
+          "layoutId": "best_sellers",
+          "position": 1,
+          "tileCount": 0,
+          "tiles": [],
+          "note": "Horizontales Bestseller-Karussell mit ~10 Produkten: Faszienrollen, Recovery Pillow, Fascia Gun, etc."
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "std-2equal",
+          "position": 2,
+          "tileCount": 2,
+          "visualConnection": "Zwei Kacheln: Schlaf links (dunkel), Schlaf-Lifestyle rechts (hell).",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Dunkelgrauer Hintergrund. 'Besser schlafen' Subtitle + 'Weniger Nachtschweiß. Mehr Morgenpower.' in weißer Bold-Schrift. 'Produkte entdecken' Button in Teal.",
+              "textOnImage": {
+                "headline": "Weniger Nachtschweiß. Mehr Morgenpower.",
+                "subtext": "Besser schlafen",
+                "cta": "Produkte entdecken"
+              },
+              "colorMood": "Dunkelgrau, premium, ruhig",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Frau streckt sich morgens im Bett mit BLACKROLL Recovery Pillow. Sonnenlicht durch Fenster. Warme, natürliche Atmosphäre.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Warm, natürlich, morgens",
+              "tilePosition": 2,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "std-2equal",
+          "position": 3,
+          "tileCount": 2,
+          "visualConnection": "Zwei Kacheln: Massagepistole Testsieger links, Massagepistole Benefit-Text rechts.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Mann nutzt BLACKROLL Fascia Gun am Arm. Dunkler Hintergrund. Stiftung Warentest TESTSIEGER Siegel prominent eingeblendet. 'BEFRIEDIGEND (1,7)' Bewertung.",
+              "textOnImage": {
+                "headline": "TESTSIEGER",
+                "subtext": "Stiftung Warentest",
+                "cta": ""
+              },
+              "colorMood": "Dunkel, professionell, vertrauenswürdig",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Dunkelgrauer Hintergrund. 'Massagepistole' Label oben. 'Regeneriere auf Knopfdruck' als Headline. Benefit-Text über Funktionen der Massagepistole.",
+              "textOnImage": {
+                "headline": "Regeneriere auf Knopfdruck",
+                "subtext": "Massagepistole",
+                "cta": ""
+              },
+              "colorMood": "Dunkelgrau, premium",
+              "tilePosition": 2,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 4,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Section-Header: 'Unsere Top Kategorien'.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "text_image",
+              "description": "Weißer Hintergrund mit zentrierter Headline 'Unsere Top Kategorien' in schwarzer Sans-Serif.",
+              "textOnImage": {
+                "headline": "Unsere Top Kategorien",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Weiß, clean",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "2x2wide",
+          "position": 5,
+          "tileCount": 6,
+          "visualConnection": "3×2 Kategorie-Grid mit Lifestyle-Fotos und Bold-Uppercase-Labels.",
+          "designRationale": "Alle Hauptkategorien auf einen Blick — jede Kachel zeigt Produkt in Anwendung.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Mann hält BLACKROLL Recovery Pillow. Grauer Hintergrund. 'KISSEN & DECKEN' Label unten.",
+              "textOnImage": {
+                "headline": "KISSEN & DECKEN",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Grau, premium",
+              "tilePosition": 1,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Mann dehnt sich mit orangem BLACKROLL Trainingsband. 'TRAININGSBÄNDER' Label unten.",
+              "textOnImage": {
+                "headline": "TRAININGSBÄNDER",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Hell, aktiv, Orange-Akzent",
+              "tilePosition": 2,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Nahaufnahme schwarzer BLACKROLL Ball-Textur. 'BÄLLE & TRIGGER' Label unten.",
+              "textOnImage": {
+                "headline": "BÄLLE & TRIGGER",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Dunkel, texturiert",
+              "tilePosition": 3,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Mann nutzt Massagepistole am Arm. Dunkler Hintergrund. 'MASSAGEPISTOLE' Label unten.",
+              "textOnImage": {
+                "headline": "MASSAGEPISTOLE",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Dunkel, professionell",
+              "tilePosition": 4,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Nahaufnahme BLACKROLL Faszienrolle Textur. 'FASZIENROLLEN' Label unten.",
+              "textOnImage": {
+                "headline": "FASZIENROLLEN",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Dunkel, texturiert"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 6,
+          "tileCount": 1,
+          "visualConnection": "Full-Width App-Promotion mit Smartphone-Mockups.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Zwei Smartphones zeigen BLACKROLL App mit Übungen und Trainingsplänen. 'Trainiere smarter — Entdecke effektive Übungen auf unserer Website und in der App' in Bold-Schrift.",
+              "textOnImage": {
+                "headline": "Trainiere smarter",
+                "subtext": "Entdecke effektive Übungen auf unserer Website und in der App",
+                "cta": ""
+              },
+              "colorMood": "Hell, digital, modern",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "std-2equal",
+          "position": 7,
+          "tileCount": 2,
+          "visualConnection": "Nachhaltigkeit + USPs: Yoga-Lifestyle links, USP-Icons rechts.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Älterer Mann und Frau machen Yoga im Park auf BLACKROLL Matten. Natürliches Licht, grüne Wiese.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Grün, natürlich, aktiv",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "benefit",
+              "description": "Dunkler Hintergrund mit 5 USP-Icons in Teal/Grün: 'Recyclebares Material', 'In Deutschland produziert', 'Umweltschonend', 'Robust & langlebig', 'Hohe Qualitätsstandards'.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "Recyclebares Material, In Deutschland produziert, Umweltschonend, Robust & langlebig, Hohe Qualitätsstandards",
+                "cta": ""
+              },
+              "colorMood": "Dunkel mit Teal-Icons",
+              "tilePosition": 2,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 8,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Award-Banner mit Design-Auszeichnungen.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Heller Hintergrund. 4 Award-Logos nebeneinander: German Design Award Winner 2020, German Design Award Winner 2025, ISPO Award 2020 Gold Winner, Made in Germany.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Hell, vertrauenswürdig, premium",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        }
+      ],
+      "pageTexts": {
+        "headlines": [
+          "Dein Leben kennt keine Grenzen – nur Möglichkeiten",
+          "Weniger Nachtschweiß. Mehr Morgenpower.",
+          "Regeneriere auf Knopfdruck",
+          "Unsere Top Kategorien",
+          "Trainiere smarter"
+        ],
+        "descriptions": [
+          "Besser schlafen",
+          "Entdecke effektive Übungen auf unserer Website und in der App",
+          "Recyclebares Material",
+          "In Deutschland produziert",
+          "Umweltschonend",
+          "Robust & langlebig",
+          "Hohe Qualitätsstandards"
+        ],
+        "ctas": [
+          "Bestseller entdecken",
+          "Produkte entdecken"
+        ],
+        "nativeTexts": [
+          "KISSEN & DECKEN",
+          "TRAININGSBÄNDER",
+          "BÄLLE & TRIGGER",
+          "MASSAGEPISTOLE",
+          "FASZIENROLLEN",
+          "TESTSIEGER"
+        ]
+      }
+    }
+  ],
+  "analysis": {
+    "ciImplementation": "Perfekte CI. Schwarz/Weiß/Teal als durchgängige Palette. Premium-Fitness-Fotografie auf höchstem Niveau. BLACKROLL-Logo (Kreis) als Wiedererkennungsmerkmal. Kategorie-Labels konsistent in Bold Uppercase auf Bildern.",
+    "imageLanguage": "Professionelle Lifestyle-Fotografie mit diversen, athletischen Models. Mix aus dunklen Studio-Shots (Massagepistole, Faszienrollen) und hellen Lifestyle-Szenen (Yoga im Park, Schlaf). Produkte immer im Anwendungskontext. Textur-Nahaufnahmen für Produkt-Detail (Bälle, Rollen).",
+    "storytelling": "Motivierend-funktional: Empowerment-Hero → Bestseller → Schlaf-Kategorie (Benefit-first) → Massagepistole (Testsieger) → Kategorien → App → Nachhaltigkeit → Awards. Von Motivation über Produkte zu Vertrauen.",
+    "moduleFlow": "Hero → Bestseller Carousel → std-2equal Schlaf → std-2equal Massagepistole/Testsieger → Section Header → 3x2 Kategorie-Grid → Full Width App → std-2equal Nachhaltigkeit/USPs → Full Width Awards",
+    "subpageLogic": "8 Seiten. Klare Produktkategorien: Schlaf, Faszienrollen, Massagepistole, Bälle & Trigger, Trainingsbänder. Plus Bestseller und Über BLACKROLL.",
+    "conversionElements": [
+      "Bestseller-Karussell als erstes Modul nach Hero",
+      "Stiftung Warentest TESTSIEGER prominent platziert",
+      "App-Promotion für Kundenbindung",
+      "4 Design-Awards als Vertrauenssignal",
+      "5 USP-Icons (Made in Germany, Recycelbar, etc.)"
+    ],
+    "copywritingAnalysis": "Benefit-orientiert statt produktfokussiert. 'Weniger Nachtschweiß. Mehr Morgenpower.' (Problem→Lösung). 'Regeneriere auf Knopfdruck' (Benefit). 'Dein Leben kennt keine Grenzen' (Empowerment). 'Trainiere smarter' (Aufwertung). Du-Ansprache durchgängig.",
+    "strengths": [
+      "Benefit-orientierte Headlines statt reiner Produktnamen",
+      "Stiftung Warentest Testsieger als starker Social Proof",
+      "Diverse, authentische Models in professioneller Fotografie",
+      "App-Promotion als einzigartiges Element",
+      "5 USP-Icons mit Nachhaltigkeit und Made in Germany",
+      "4 Design-Awards als Vertrauens-Fundament",
+      "Schlaf als eigenständige Kategorie — erweitert Markenwahrnehmung"
+    ],
+    "weaknesses": [
+      "Kein Video-Content trotz bewegungs-orientierter Produkte",
+      "Kein Produktberater/Quiz für Einsteiger",
+      "Keine Kundenrezensionen oder Testimonials auf der Startseite",
+      "App-CTA führt nicht zu einem Download — nur informativ"
+    ]
+  }
+}

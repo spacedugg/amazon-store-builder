@@ -1,0 +1,256 @@
+{
+  "brandName": "AG1",
+  "storeUrl": "https://www.amazon.de/stores/AG1/page/E676C84A-8A86-4F92-B978-3343F367DD0C",
+  "category": "supplements",
+  "qualityScore": 5,
+  "analyzedAt": "2026-04-01",
+  "ci": {
+    "primaryColors": [
+      "#1a4a3a",
+      "#f5efe6"
+    ],
+    "accentColors": [
+      "#2d7a5f",
+      "#c9b896",
+      "#ffffff"
+    ],
+    "imageStyle": "Premium-Health-Ästhetik. Warme, natürliche Farbtöne (Beige, Sandstein, Salbei-Grün). Lifestyle-Fotos zeigen diverse, gesundheitsbewusste Menschen im Alltag. Zutatenbilder: hochwertige Food-Fotografie (Orangen, Pilze, Wurzeln) auf neutralem Hintergrund. Produktfotos: AG1 Pouch und Glasflasche auf hellem Beige.",
+    "typographyStyle": "Moderne Serif-Schrift für Headlines (z.B. 'Dein Nährstoff-Boost'), Sans-Serif für Fließtext. Dunkelgrüne Schrift auf beigem Hintergrund. Keine Versalien bei Headlines — natürlicher, premium-gesundheitlicher Ton. Zutatenlabels in Uppercase Sans-Serif.",
+    "tonality": "Wissenschaftlich-warm. Erklärt Benefits mit Sternchen (*Gesundheitsclaims). Ansprache: 'Dein Nährstoff-Boost', 'Im Handumdrehen zubereitet'. Nicht aggressiv verkaufend, sondern edukativ und einladend. Premium-Health-Positionierung.",
+    "ciConsistency": 5,
+    "consistencyNotes": "100% konsistent — durchgängig Beige/Grün-Palette, gleiche Typografie, gleiche Bildsprache. Jedes Modul fühlt sich wie Teil einer einheitlichen Markenwelt an."
+  },
+  "navigation": {
+    "pageCount": 5,
+    "structurePrinciple": "Edukativ orientiert: Startseite (Überblick + Benefits), Zutaten (Deep-Dive in Inhaltsstoffe), Was ist AG1? (Markenstory), Qualitätsstandards (Vertrauen/Zertifizierungen). Wenige Seiten, da nur ein Hauptprodukt.",
+    "pages": [
+      {
+        "name": "Startseite",
+        "url": "https://www.amazon.de/stores/AG1/page/E676C84A-8A86-4F92-B978-3343F367DD0C"
+      },
+      {
+        "name": "Zutaten",
+        "url": "https://www.amazon.de/stores/AG1/page/ZUTATEN"
+      },
+      {
+        "name": "Was ist AG1?",
+        "url": "https://www.amazon.de/stores/AG1/page/WASISTAG1"
+      },
+      {
+        "name": "Qualitätsstandards",
+        "url": "https://www.amazon.de/stores/AG1/page/QUALITAET"
+      }
+    ]
+  },
+  "heroImage": {
+    "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/4ff9d081-e0fd-43d9-9832-27b091d05945._CR0%2C0%2C1280%2C256_SX1500_.jpeg",
+    "description": "AG1 Logo (weiß, zentriert) auf dunkelgrünem Hintergrund mit Wassertropfen-Textur. Minimalistisch, premium, clean.",
+    "textOnImage": {
+      "headline": "AG1",
+      "subtext": "",
+      "cta": ""
+    },
+    "colorMood": "Dunkelgrün mit Wassertropfen, frisch und premium",
+    "designElements": "Zentriertes Logo auf texturiertem dunkelgrünem Hintergrund"
+  },
+  "pages": [
+    {
+      "name": "Startseite",
+      "url": "https://www.amazon.de/stores/AG1/page/E676C84A-8A86-4F92-B978-3343F367DD0C",
+      "moduleCount": 5,
+      "modules": [
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 1,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Produktvorstellung. Links: Headline + Subtext auf beigem Hintergrund. Rechts: AG1 Pouch und Glasflasche als Produktfoto.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Split-Layout: Links beiger Hintergrund mit Text 'Dein Nährstoff-Boost in nur einem Drink. 75 Vitamine, Mineralstoffe und Vollwertzutaten aus echten Lebensmitteln.' Rechts: AG1 Pouch (dunkelgrün) und Glasflasche mit grünem Pulver, arrangiert auf beigem Hintergrund.",
+              "textOnImage": {
+                "headline": "Dein Nährstoff-Boost in nur einem Drink.",
+                "subtext": "75 Vitamine, Mineralstoffe und Vollwertzutaten aus echten Lebensmitteln.",
+                "cta": ""
+              },
+              "colorMood": "Beige mit dunkelgrünem Produkt als Akzent",
+              "designElements": "Split-Layout: Text links, Produkt rechts. Serif-Headline, Sans-Serif Subtext.",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 2,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Zutaten-Übersicht. Links: Text 'Nährstoffe für maximalen Impact'. Rechts: 6er-Grid mit Zutatenkategorien.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Split-Layout: Links beiger Hintergrund mit Headline 'Nährstoffe für maximalen Impact'. Rechts ein 2x3-Grid mit Zutatenkategorien: MINERALSTOFFE (Steine/Kristalle), BALLASTSTOFFE (Getreide), PFLANZENSTOFFE (grüne Blätter), VITAMINE (Orangenscheiben), FUNKTIONELLE PILZE (Reishi-Pilz), NATURSTOFFE (Wurzeln). Jede Kachel zeigt hochwertige Food-Fotografie auf neutralem Hintergrund mit Uppercase-Label darunter.",
+              "textOnImage": {
+                "headline": "Nährstoffe für maximalen Impact",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Beige mit natürlichen Erdtönen der Zutatenfotos",
+              "designElements": "2x3 Zutatengrid, Food-Fotografie, Uppercase Labels",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "4grid-lg",
+          "position": 3,
+          "tileCount": 4,
+          "visualConnection": "Benefit-Modul mit 4 Lifestyle-Kacheln. Jede zeigt eine Person in einer Alltagssituation + Benefit-Label unten.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Lächelnde Frau trinkt AG1 aus Glas, helle Kleidung, Outdoor-Setting mit Pflanzen. Label: 'VERDAUUNG*'",
+              "textOnImage": {
+                "headline": "VERDAUUNG*",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Warm, natürlich, hell",
+              "tilePosition": 1,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Mann auf Rennrad in Naturlandschaft, sportlich-lässig. Label: 'FOKUS & ENERGIE*'",
+              "textOnImage": {
+                "headline": "FOKUS & ENERGIE*",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Erdtöne, aktiv, outdoor",
+              "tilePosition": 2,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Mann entspannt am Pool, Füße im Wasser, mediterran. Label: 'STRESS- UND STIMMUNGSAUSGLEICH*'",
+              "textOnImage": {
+                "headline": "STRESS- UND STIMMUNGSAUSGLEICH*",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Blau/Beige, entspannt, mediterran",
+              "tilePosition": 3,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Älterer Mann trinkt AG1 vor Haustür, bunt gekleidet, aktiv wirkend. Label: 'IMMUNSYSTEM*'",
+              "textOnImage": {
+                "headline": "IMMUNSYSTEM*",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Bunt, urban, lebendig",
+              "tilePosition": 4,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 4,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Zubereitungs-Anleitung auf dunkelgrünem/teal Hintergrund. 3-Schritt-Anleitung mit Produktfotos.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Dunkelgrüner/Teal Hintergrund. Links: 'Im Handumdrehen zubereitet.' als weiße Serif-Headline. Rechts: 3 Schritte nebeneinander: 1. Löffel AG1 wird in Glas Wasser geschüttet ('Mische 1 Löffel AG1 mit 250-350 ml kaltem Wasser.'), 2. AG1 Glasflasche geschüttelt ('Gut schütteln!'), 3. Mann trinkt AG1 ('Genieße den Geschmack von Ananas und Vanille.'). Jeder Schritt mit Nummer und kurzem Text.",
+              "textOnImage": {
+                "headline": "Im Handumdrehen zubereitet.",
+                "subtext": "1. Mische 1 Löffel AG1 mit 250-350 ml kaltem Wasser. 2. Gut schütteln! 3. Genieße den Geschmack von Ananas und Vanille.",
+                "cta": ""
+              },
+              "colorMood": "Dunkelgrün/Teal mit weißem Text, premium-clean",
+              "designElements": "3-Schritt-Anleitung, nummeriert, Produktfotos zu jedem Schritt",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        }
+      ],
+      "pageTexts": {
+        "headlines": [
+          "Dein Nährstoff-Boost in nur einem Drink.",
+          "Nährstoffe für maximalen Impact",
+          "Im Handumdrehen zubereitet."
+        ],
+        "descriptions": [
+          "75 Vitamine, Mineralstoffe und Vollwertzutaten aus echten Lebensmitteln.",
+          "Mische 1 Löffel AG1 mit 250-350 ml kaltem Wasser.",
+          "Gut schütteln!",
+          "Genieße den Geschmack von Ananas und Vanille."
+        ],
+        "ctas": [],
+        "nativeTexts": [
+          "MINERALSTOFFE",
+          "BALLASTSTOFFE",
+          "PFLANZENSTOFFE",
+          "VITAMINE",
+          "FUNKTIONELLE PILZE",
+          "NATURSTOFFE",
+          "VERDAUUNG*",
+          "FOKUS & ENERGIE*",
+          "STRESS- UND STIMMUNGSAUSGLEICH*",
+          "IMMUNSYSTEM*"
+        ]
+      }
+    }
+  ],
+  "analysis": {
+    "ciImplementation": "Perfekte CI-Umsetzung. Durchgängige Beige/Dunkelgrün-Palette. Serif-Headlines für Wärme, Sans-Serif für Information. Jedes Bild folgt der gleichen Premium-Health-Ästhetik. Logo-Grün als dominante Markenfarbe.",
+    "imageLanguage": "Mix aus Lifestyle (diverse, gesundheitsbewusste Menschen im Alltag), Food-Fotografie (Zutaten in Nahaufnahme), und Produktfotos (AG1 Pouch/Flasche). Alles auf warmen, neutralen Hintergründen. Kein Schwarzweiß, keine harten Kontraste — alles weich, natürlich, einladend.",
+    "storytelling": "Klarer edukativer Bogen: Was ist das Produkt? → Was ist drin? → Was bringt es dir? → Wie nutzt du es? Hero → Produktvorstellung → Zutaten-Übersicht → Benefits → Zubereitung. Perfekter Funnel vom Interesse zur Anwendung.",
+    "moduleFlow": "Full Width Produkt → Full Width Zutaten-Grid → 4grid-lg Benefits → Full Width Zubereitung",
+    "subpageLogic": "Nur 5 Seiten — weil AG1 ein Single-Product-Brand ist. Seiten sind edukativ: Zutaten (Transparenz), Was ist AG1? (Markenstory), Qualitätsstandards (Vertrauen). Kein Kategorie-System nötig.",
+    "conversionElements": [
+      "Benefit-Module mit Health Claims als Kaufmotivation",
+      "Einfache 3-Schritt-Zubereitung reduziert Kaufbarrieren",
+      "Zutatentransparenz schafft Vertrauen"
+    ],
+    "copywritingAnalysis": "Edukativ-warm. Headlines in natürlicher Sprache (kein Uppercase-Schreien): 'Dein Nährstoff-Boost in nur einem Drink.' Benefit-Labels mit Sternchen für Claims. Zubereitungsanleitung als Storytelling. Keine aggressiven CTAs — die Marke setzt auf Edukation statt Druck.",
+    "strengths": [
+      "Perfekter edukativer Aufbau: Problem → Lösung → Beweis → Anwendung",
+      "Premium-Health-Ästhetik mit konsistenter Beige/Grün-Palette",
+      "Zutatentransparenz schafft Vertrauen (Zutatengrid mit echten Food-Fotos)",
+      "Diverse Lifestyle-Fotos zeigen verschiedene Lebenssituationen und Altersgruppen",
+      "3-Schritt-Zubereitung nimmt Komplexität raus und senkt Kaufbarriere",
+      "Wenige Seiten, aber jede mit klarem Zweck"
+    ],
+    "weaknesses": [
+      "Kein Product Grid — keine direkte Kauf-Integration auf der Startseite",
+      "Keine Bewertungen oder Social Proof sichtbar",
+      "Keine Video-Inhalte trotz starker Markenstory",
+      "Kein CTA-Button auf keinem einzigen Modul — rein passives Scrollen",
+      "Nur ein Produkt limitiert die Store-Tiefe"
+    ]
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "brandName": "Gritin",
+  "storeUrl": "https://www.amazon.de/stores/page/1758941C-AE87-4628-AB45-62C0A2BDB75C",
+  "category": "home_kitchen",
+  "qualityScore": 3,
+  "analyzedAt": "2026-04-01",
+  "ci": {
+    "primaryColors": [
+      "#f5a623",
+      "#ffffff",
+      "#333333"
+    ],
+    "accentColors": [
+      "#7ed6c8",
+      "#f0f0f0"
+    ],
+    "imageStyle": "Warme Wohnzimmer-Lifestyle-Fotografie. Frau liest mit Buchlampe in gemütlicher Beleuchtung. Produktfotos in Mintgrün/Türkis. Mix aus Lifestyle (Frau liest) und Produkt-Nahaufnahmen. Orange als CI-Farbe in Akzenten und Deko-Elementen.",
+    "typographyStyle": "Sans-Serif Bold für Headlines. 'Gritin — Design für Ihren komfortabel Leben'. Orange Deko-Linien als grafisches Element. Headlines: 'Maßgeschneidert für Alle Buchliebhaber', 'Faltbare Mini-Buchlampe', 'Halo Leselampe'. CTAs: 'Mehr Entdecken', 'Jetzt Kaufen ►'.",
+    "tonality": "Funktional-einladend. 'Design für Ihren komfortabel Leben' (etwas unbeholfen, China-Brand). 'Maßgeschneidert für Alle Buchliebhaber'. Benefit-Texte: 'Mini & Superleicht — Kompakt und tragbar'. Sie-Ansprache.",
+    "ciConsistency": 3,
+    "consistencyNotes": "Orange als CI-Farbe konsistent in Linien und Akzenten. Mintgrüne Produkte als visuelle Konstante. Einige Produkte 'Derzeit nicht verfügbar'. Text stellenweise grammatisch unsauber (China-Brand)."
+  },
+  "navigation": {
+    "pageCount": 5,
+    "structurePrinciple": "Startseite, Alle Angebote, NEW + MEHR.",
+    "pages": [
+      {
+        "name": "Startseite",
+        "url": "https://www.amazon.de/stores/page/1758941C-AE87-4628-AB45-62C0A2BDB75C"
+      },
+      {
+        "name": "Alle Angebote",
+        "url": "https://www.amazon.de/stores/page/ANGEBOTE"
+      },
+      {
+        "name": "NEW",
+        "url": "https://www.amazon.de/stores/page/NEW"
+      }
+    ]
+  },
+  "heroImage": {
+    "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/gritin-hero.jpeg",
+    "description": "Warmer, dunkler Hintergrund. Frau liest Buch bei Lampenlicht. 'Gritin — Design für Ihren komfortabel Leben' in weißer Schrift.",
+    "textOnImage": {
+      "headline": "Gritin",
+      "subtext": "Design für Ihren komfortabel Leben",
+      "cta": ""
+    },
+    "colorMood": "Warm, gemütlich, abendlich",
+    "designElements": "Lifestyle-Foto, warmes Licht"
+  },
+  "pages": [
+    {
+      "name": "Startseite",
+      "url": "https://www.amazon.de/stores/page/1758941C-AE87-4628-AB45-62C0A2BDB75C",
+      "moduleCount": 5,
+      "modules": [
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 1,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Follow-Banner in Orange.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Orange Banner: 'Folgen Uns, Um die Neuesten Angebote als Erster zu Erfahren'.",
+              "textOnImage": {
+                "headline": "Folgen Uns",
+                "subtext": "Um die Neuesten Angebote als Erster zu Erfahren",
+                "cta": ""
+              },
+              "colorMood": "Orange, auffällig",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 2,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Buchliebhaber-Banner.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Gemütliches Sofa mit Leselampen und Büchern. 'Maßgeschneidert für Alle Buchliebhaber'. 'Mehr Entdecken' Button.",
+              "textOnImage": {
+                "headline": "Maßgeschneidert für Alle Buchliebhaber",
+                "subtext": "",
+                "cta": "Mehr Entdecken"
+              },
+              "colorMood": "Warm, gemütlich",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 3,
+          "tileCount": 1,
+          "visualConnection": "Section Header: Faltbare Mini-Buchlampe.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "text_image",
+              "description": "Orange Linien als Deko. 'Faltbare Mini-Buchlampe' in großer schwarzer Schrift.",
+              "textOnImage": {
+                "headline": "Faltbare Mini-Buchlampe",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Weiß mit Orange-Akzenten",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "lg-4grid",
+          "position": 4,
+          "tileCount": 3,
+          "visualConnection": "Produkt-Feature: Buchlampe mit Lifestyle + Produktdetails.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Frau liest mit mintgrüner Buchlampe. 'Jetzt Kaufen ►' Button.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": "Jetzt Kaufen"
+              },
+              "colorMood": "Warm, abendlich",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Mini-Buchlampe. 'Mini & Superleicht — Kompakt und tragbar'.",
+              "textOnImage": {
+                "headline": "Mini & Superleicht",
+                "subtext": "Kompakt und tragbar, perfekt für Reisen und Geschäftsreisen",
+                "cta": ""
+              },
+              "colorMood": "Hell, clean",
+              "tilePosition": 2,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Buchlampe mit Lampenschirm. 'Wabenförmiges Lampenschirmdesign — Verbessert die Weichheit des Lichts um 70%'.",
+              "textOnImage": {
+                "headline": "Wabenförmiges Lampenschirmdesign",
+                "subtext": "Verbessert die Weichheit des Lichts um 70%",
+                "cta": ""
+              },
+              "colorMood": "Warm, golden",
+              "tilePosition": 3,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            }
+          ]
+        }
+      ],
+      "pageTexts": {
+        "headlines": [
+          "Design für Ihren komfortabel Leben",
+          "Maßgeschneidert für Alle Buchliebhaber",
+          "Faltbare Mini-Buchlampe",
+          "Halo Leselampe"
+        ],
+        "descriptions": [
+          "Mini & Superleicht",
+          "Kompakt und tragbar",
+          "Wabenförmiges Lampenschirmdesign",
+          "Verbessert die Weichheit des Lichts um 70%"
+        ],
+        "ctas": [
+          "Mehr Entdecken",
+          "Jetzt Kaufen"
+        ],
+        "nativeTexts": []
+      }
+    }
+  ],
+  "analysis": {
+    "ciImplementation": "Grundlegende CI mit Orange als Markenfarbe. Mintgrüne Produkte als visuelle Konstante. Warme Lifestyle-Fotografie passt zum Leselampen-Thema.",
+    "imageLanguage": "Mix aus warmen Lifestyle-Szenen (Frau liest) und Produktfotos. Orange Linien als grafisches Deko-Element. Mintgrüne/türkise Produkte.",
+    "storytelling": "Produkt-fokussiert: Follow → Buchliebhaber → Buchlampe Feature → Halo Leselampe Feature.",
+    "moduleFlow": "Full Width Follow → Full Width Lifestyle → Section Header → lg-4grid Feature",
+    "subpageLogic": "~5 Seiten. Kleines Sortiment (Leselampen).",
+    "conversionElements": [
+      "Follow-Banner ganz oben",
+      "'Jetzt Kaufen' CTAs",
+      "Benefit-Texte bei jedem Produkt"
+    ],
+    "copywritingAnalysis": "Funktional mit leichten Grammatik-Schwächen (China-Brand). Benefit-orientiert: 'Verbessert die Weichheit des Lichts um 70%'. 'Mini & Superleicht'. Sie-Ansprache.",
+    "strengths": [
+      "Warme Lifestyle-Fotografie passt perfekt zum Leselampen-Thema",
+      "Benefit-Texte direkt bei den Produkten",
+      "Orange als konsistente CI-Farbe"
+    ],
+    "weaknesses": [
+      "Grammatisch unsaubere Texte (China-Brand)",
+      "Einige Produkte 'Derzeit nicht verfügbar'",
+      "Sehr kleines Sortiment",
+      "Kein Social Proof",
+      "Kein Video-Content"
+    ]
+  }
+}

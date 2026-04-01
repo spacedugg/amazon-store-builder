@@ -1,0 +1,505 @@
+{
+  "brandName": "Bedsure",
+  "storeUrl": "https://www.amazon.de/stores/page/7DC5A9F8-2A3D-426B-B2F2-F819AE825B1F",
+  "category": "home_kitchen",
+  "qualityScore": 4,
+  "analyzedAt": "2026-04-01",
+  "ci": {
+    "primaryColors": [
+      "#1a3a4a",
+      "#ffffff",
+      "#f5efe6"
+    ],
+    "accentColors": [
+      "#7ba5a0",
+      "#c4956a",
+      "#e8e0d0"
+    ],
+    "imageStyle": "Warme Home-Living Fotografie. Stilvolle Schlafzimmer-Settings mit Holzmöbeln, warmer Beleuchtung. Models schlafen/kuscheln in Bedsure-Produkten. Erdtöne: Grün, Grau, Beige, Blau. Bild Vergleich und Vergleich.org Testsiegel prominent. Produktfotos zeigen Material-Qualität und Verpackung.",
+    "typographyStyle": "Elegante Serif für Markenname 'Bedsure' + 'Get cozy' als Claim. Section-Headers: 'BIS ZU 50% SPAREN', 'Frühlingserwachen mit BEDSURE'. Kategorie-Labels: Beschreibende Texte auf Bildern wie 'GentleSoft™ Fleecedecke', '100% Perkal-Baumwolle Bettwäsche Set'. CTAs: 'SOFORT KAUFEN', 'FOLGEN SIE UNS'.",
+    "tonality": "Gemütlich, qualitätsbewusst, Sie-Ansprache. 'Get cozy' (Marken-Claim). 'Frische Akzente und grenzenloser Komfort für jeden Moment.' 'Weichheit, die Ihre Haut verwöhnt.' 'Gleichmäßige Wärme – für Sicherheit und Komfort die ganze Nacht.'",
+    "ciConsistency": 4,
+    "consistencyNotes": "Konsistente warme Ästhetik mit Erdtönen. Smiley-Logo als Markenzeichen. Viele verschiedene Produkt-Kategorien, aber einheitlicher Stil. Testsiegel auf mehreren Produkten."
+  },
+  "navigation": {
+    "pageCount": 8,
+    "structurePrinciple": "Startseite, Angebote + MEHR-Dropdown mit Kategorien.",
+    "pages": [
+      {
+        "name": "Startseite",
+        "url": "https://www.amazon.de/stores/page/7DC5A9F8-2A3D-426B-B2F2-F819AE825B1F"
+      },
+      {
+        "name": "Angebote",
+        "url": "https://www.amazon.de/stores/page/ANGEBOTE"
+      },
+      {
+        "name": "Bettwäsche",
+        "url": "https://www.amazon.de/stores/page/BETTWAESCHE"
+      },
+      {
+        "name": "Decken",
+        "url": "https://www.amazon.de/stores/page/DECKEN"
+      },
+      {
+        "name": "Spannbettlaken",
+        "url": "https://www.amazon.de/stores/page/SPANNBETTLAKEN"
+      },
+      {
+        "name": "Kissenbezüge",
+        "url": "https://www.amazon.de/stores/page/KISSENBEZUEGE"
+      },
+      {
+        "name": "Heizdecke",
+        "url": "https://www.amazon.de/stores/page/HEIZDECKE"
+      },
+      {
+        "name": "Alle Produkte",
+        "url": "https://www.amazon.de/stores/page/ALLE"
+      }
+    ]
+  },
+  "heroImage": {
+    "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bedsure-hero.jpeg",
+    "description": "Heller Hintergrund mit Bettwäsche in Grün-/Beigetönen. 'Bedsure — Get cozy' Logo zentriert. Verschiedene Textil-Produkte. 'FOLGEN SIE UNS' Banner oben.",
+    "textOnImage": {
+      "headline": "Bedsure",
+      "subtext": "Get cozy",
+      "cta": "FOLGEN SIE UNS"
+    },
+    "colorMood": "Warm, grün/beige, gemütlich",
+    "designElements": "Logo zentriert, Textil-Hintergrund"
+  },
+  "pages": [
+    {
+      "name": "Startseite",
+      "url": "https://www.amazon.de/stores/page/7DC5A9F8-2A3D-426B-B2F2-F819AE825B1F",
+      "moduleCount": 10,
+      "modules": [
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 1,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Frühlings-Aktion-Banner.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Frau schläft in grüner Bettwäsche. 'BIS ZU 50% SPAREN — Frühlingserwachen mit BEDSURE — Frische Akzente und grenzenloser Komfort für jeden Moment.' 'SOFORT KAUFEN' Button.",
+              "textOnImage": {
+                "headline": "BIS ZU 50% SPAREN",
+                "subtext": "Frühlingserwachen mit BEDSURE",
+                "cta": "SOFORT KAUFEN"
+              },
+              "colorMood": "Grün, frühlingshaft, einladend",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "lg-4grid",
+          "position": 2,
+          "tileCount": 5,
+          "visualConnection": "Bestseller-Grid mit Lifestyle-Fotos und Testsiegeln.",
+          "designRationale": "Mix aus großer Lifestyle-Kachel und kleineren Produkt-Kacheln mit Testsiegeln.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Frau kuschelt in weißer Fleecedecke. Bild Vergleich 'SEHR GUT' Siegel. 'GentleSoft™ Fleecedecke'.",
+              "textOnImage": {
+                "headline": "GentleSoft™ Fleecedecke",
+                "subtext": "Bild Vergleich SEHR GUT",
+                "cta": ""
+              },
+              "colorMood": "Weiß, kuschelig",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Beige Bettwäsche Set. '100% Perkal-Baumwolle Bettwäsche Set'.",
+              "textOnImage": {
+                "headline": "100% Perkal-Baumwolle Bettwäsche Set",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Beige, natürlich",
+              "tilePosition": 2,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Grüne Sherpa Kuscheldecke. 'Sherpa Kuscheldecke'.",
+              "textOnImage": {
+                "headline": "Sherpa Kuscheldecke",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Grün, gemütlich",
+              "tilePosition": 3,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Weiße Bettdecke. Bedsure 1,1 SEHR GUT Siegel. 'Bettdecke inklusive 2 Decken'.",
+              "textOnImage": {
+                "headline": "Bettdecke inklusive 2 Decken",
+                "subtext": "1,1 SEHR GUT",
+                "cta": ""
+              },
+              "colorMood": "Weiß, vertrauenswürdig",
+              "tilePosition": 4,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Frau in Baumwoll-Spannbettlaken. 'Baumwolljersey Spannbettlaken'.",
+              "textOnImage": {
+                "headline": "Baumwolljersey Spannbettlaken",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Grau, modern",
+              "tilePosition": 5,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "lg-4grid",
+          "position": 3,
+          "tileCount": 5,
+          "visualConnection": "Weitere Bestseller und neue Produkte.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Schlafende Frau in gemusterter Bettwäsche. 'Best-Seller 100% Baumwolle' Label.",
+              "textOnImage": {
+                "headline": "Best-Seller 100% Baumwolle",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Grau/Weiß Muster",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Frau kuschelt Katze auf Fleecedecke. 'NEU' Label. 'In Liebe gehüllt — Bedsure Flanell-Fleece Kuscheldecke als Geschenk'.",
+              "textOnImage": {
+                "headline": "In Liebe gehüllt",
+                "subtext": "Flanell-Fleece Kuscheldecke als Geschenk",
+                "cta": ""
+              },
+              "colorMood": "Warm, emotional",
+              "tilePosition": 2,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Graue Bettdecke mit 1,1 SEHR GUT Siegel. 'Daunen-Alternative Bettdecke'.",
+              "textOnImage": {
+                "headline": "Daunen-Alternative Bettdecke",
+                "subtext": "1,1 SEHR GUT",
+                "cta": ""
+              },
+              "colorMood": "Grau, vertrauenswürdig",
+              "tilePosition": 3,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 4,
+          "tileCount": 1,
+          "visualConnection": "Section-Header: Bettwäsche.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "text_image",
+              "description": "'Bettwäsche' Section-Header mit Beschreibung der Materialqualität.",
+              "textOnImage": {
+                "headline": "Bettwäsche",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Beige, warm",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "2x2wide",
+          "position": 5,
+          "tileCount": 6,
+          "visualConnection": "Bettwäsche-Kategorien: verschiedene Materialien und Sets.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Graue Bettwäsche auf Holzbett. '100% Perkal-Baumwolle Bettwäsche Set'.",
+              "textOnImage": {
+                "headline": "100% Perkal-Baumwolle Bettwäsche Set",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Grau, modern",
+              "tilePosition": 1,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Vergleich.org Siegel. '100% Baumwolle Bettwäsche Set Mit Muster'.",
+              "textOnImage": {
+                "headline": "100% Baumwolle Bettwäsche Set Mit Muster",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Bunt, gemustert",
+              "tilePosition": 2,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Dunkle Bettwäsche mit Holzmöbeln. 'Gewaschene Baumwolle Uni Bettwäsche Set'.",
+              "textOnImage": {
+                "headline": "Gewaschene Baumwolle Uni Bettwäsche Set",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Dunkel, premium",
+              "tilePosition": 3,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Gemusterte Bettwäsche. 'Polyester Mikrofaser Bettwäsche Set Mit Muster'.",
+              "textOnImage": {
+                "headline": "Polyester Mikrofaser Bettwäsche Set Mit Muster",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Grau/Weiß Muster",
+              "tilePosition": 4,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Mintgrüne Bettwäsche in stilvollem Schlafzimmer.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Mintgrün, frisch"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 6,
+          "tileCount": 1,
+          "visualConnection": "Section-Header: Kissenbezüge & Spannbettlaken.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "text_image",
+              "description": "'Kissenbezüge & Spannbettlaken — Weichheit, die Ihre Haut verwöhnt.'",
+              "textOnImage": {
+                "headline": "Kissenbezüge & Spannbettlaken",
+                "subtext": "Weichheit, die Ihre Haut verwöhnt.",
+                "cta": ""
+              },
+              "colorMood": "Beige, einladend",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "lg-4grid",
+          "position": 7,
+          "tileCount": 4,
+          "visualConnection": "Kissenbezüge und Spannbettlaken Produkte.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Schlafende Frau auf Perkal-Baumwolle Kissenbezügen.",
+              "textOnImage": {
+                "headline": "Kissenbezüge aus 100% Perkal-Baumwolle",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Beige, weich",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Spannbettlaken auf Holzbett. 'Spannbettlaken extra tiefer Sitz für Matratzen bis 30 cm'.",
+              "textOnImage": {
+                "headline": "Spannbettlaken extra tiefer Sitz",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Grau, funktional",
+              "tilePosition": 2,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Verpackte Spannbettlaken. '100% Baumwolljersey Spannbettlaken'.",
+              "textOnImage": {
+                "headline": "100% Baumwolljersey Spannbettlaken",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Grau/Grün",
+              "tilePosition": 3,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Vorgewaschenes Spannbettlaken in verschiedenen Farben.",
+              "textOnImage": {
+                "headline": "Vorgewaschenes Spannbettlaken",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Bunt, Farbauswahl",
+              "tilePosition": 4,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 8,
+          "tileCount": 1,
+          "visualConnection": "Section-Header: Heizdecke.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "text_image",
+              "description": "'Heizdecke — Gleichmäßige Wärme – für Sicherheit und Komfort die ganze Nacht.'",
+              "textOnImage": {
+                "headline": "Heizdecke",
+                "subtext": "Gleichmäßige Wärme – für Sicherheit und Komfort die ganze Nacht.",
+                "cta": ""
+              },
+              "colorMood": "Beige, warm",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        }
+      ],
+      "pageTexts": {
+        "headlines": [
+          "BIS ZU 50% SPAREN",
+          "Frühlingserwachen mit BEDSURE",
+          "GentleSoft™ Fleecedecke",
+          "Bettwäsche",
+          "Kissenbezüge & Spannbettlaken",
+          "Heizdecke",
+          "In Liebe gehüllt"
+        ],
+        "descriptions": [
+          "Get cozy",
+          "Frische Akzente und grenzenloser Komfort für jeden Moment.",
+          "Weichheit, die Ihre Haut verwöhnt.",
+          "Gleichmäßige Wärme – für Sicherheit und Komfort die ganze Nacht."
+        ],
+        "ctas": [
+          "SOFORT KAUFEN",
+          "FOLGEN SIE UNS"
+        ],
+        "nativeTexts": [
+          "100% Perkal-Baumwolle",
+          "Sherpa Kuscheldecke",
+          "Baumwolljersey",
+          "Best-Seller",
+          "NEU",
+          "Daunen-Alternative"
+        ]
+      }
+    }
+  ],
+  "analysis": {
+    "ciImplementation": "Gute CI mit Smiley-Logo als Markenzeichen. Warme Erdtöne durchgängig. Testsiegel (1,1 SEHR GUT, Bild Vergleich, Vergleich.org) prominent. Material-Qualität als USP in jedem Produktnamen.",
+    "imageLanguage": "Warme Schlafzimmer-Lifestyle-Fotografie mit Holzmöbeln. Models schlafen/kuscheln. Mix aus Lifestyle-Szenen und Produkt-Nahaufnahmen. Stilvolle Räume als Hintergrund. Testsiegel als Overlay auf Bildern.",
+    "storytelling": "Saisonal-kommerziell: Frühlingsangebot → Bestseller → Bettwäsche-Kategorien → Spannbettlaken → Heizdecken. Jede Sektion mit Section-Header und Benefit-Text.",
+    "moduleFlow": "Full Width Aktion → lg-4grid Bestseller × 2 → Section Header Bettwäsche → 2x2 Bettwäsche → Section Header Spannbettlaken → lg-4grid Spannbettlaken → Section Header Heizdecke",
+    "subpageLogic": "~8 Seiten nach Produktkategorie: Bettwäsche, Decken, Spannbettlaken, Kissenbezüge, Heizdecke.",
+    "conversionElements": [
+      "BIS ZU 50% SPAREN als Einstieg",
+      "Multiple Testsiegel (1,1 SEHR GUT)",
+      "Bild Vergleich und Vergleich.org Siegel",
+      "Saisonaler Hook (Frühlingserwachen)",
+      "'SOFORT KAUFEN' CTA"
+    ],
+    "copywritingAnalysis": "Material-fokussiert. Jeder Produktname enthält Material: '100% Perkal-Baumwolle', 'Baumwolljersey', 'Sherpa'. Benefit-Texte: 'Weichheit, die Ihre Haut verwöhnt', 'Gleichmäßige Wärme'. Testsiegel als Copy-Element. Sie-Ansprache.",
+    "strengths": [
+      "Extrem viele Testsiegel schaffen starkes Vertrauen",
+      "Material-Qualität als durchgängiges USP in Produktnamen",
+      "Warme, einladende Lifestyle-Fotografie",
+      "Saisonale Angebote als starker Conversion-Trigger",
+      "Breites Sortiment gut strukturiert in Sektionen",
+      "Smiley-Logo als sofort erkennbares Markenzeichen"
+    ],
+    "weaknesses": [
+      "Sehr lange Startseite — könnte Nutzer überfordern",
+      "Keine interaktiven Elemente (Quiz, Berater)",
+      "Kein Video-Content",
+      "Viele ähnliche Produkte ohne klare Differenzierung",
+      "Keine Gründer-Story oder Über-uns-Element"
+    ]
+  }
+}

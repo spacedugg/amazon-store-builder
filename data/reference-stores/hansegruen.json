@@ -1,0 +1,338 @@
+{
+  "brandName": "Hansegrün",
+  "storeUrl": "https://www.amazon.de/stores/page/BC9A9642-4612-460E-81B4-985E9AF6A7D2",
+  "category": "supplements",
+  "qualityScore": 4,
+  "analyzedAt": "2026-04-01",
+  "ci": {
+    "primaryColors": [
+      "#1a6b5a",
+      "#f5f0e8"
+    ],
+    "accentColors": [
+      "#ffffff",
+      "#2d8c73",
+      "#c4a96a"
+    ],
+    "imageStyle": "Natürlich-premium. Warme Beige-Töne als Hintergrund. Produktfotos mit echten Zutaten (Ingwer, Brokkoli, Zitronen, Beeren). Lifestyle-Fotos: natürlich aussehende Frauen in Outdoor-Settings. Zubereitungsfotos: warme Holztöne, natürliches Licht. Gründerfotos in grauen Hoodies vor Holzwand.",
+    "typographyStyle": "Moderne Serif-Schrift für Headlines (ähnlich AG1). Dunkelgrün (Teal) auf Beige. 'Unsere Bestseller', 'Shoppe ganz nach deinen Bedürfnissen', 'Shot-Zubereitung in Sekunden'. CTAs in dunkelgrünen Buttons: 'JETZT ENTDECKEN', 'LASS DICH HIER BERATEN'. Kategorie-Labels in Serif: 'Sparsets', 'Shots', 'Benefits'.",
+    "tonality": "Persönlich, nahbar, Start-Up-Charme. 'Unterstütze ein junges Start-Up', Gründer mit Vornamen (Lukas & Till). Du-Ansprache: 'Shoppe ganz nach deinen Bedürfnissen', 'Nicht sicher was dein Körper braucht?'. Edukativ und einladend.",
+    "ciConsistency": 4,
+    "consistencyNotes": "Konsistente Beige/Grün-Palette. Alle Module folgen dem gleichen warmen, natürlichen Stil. Logo-Badge (grüner Kreis mit Tropfen) erscheint mehrfach. Leichter Bruch bei der Gründer-Sektion (etwas anderer Stil), aber insgesamt gut."
+  },
+  "navigation": {
+    "pageCount": 8,
+    "structurePrinciple": "Einfach und funktional: Alle Produkte, Neuheiten, Spar-Sets, Shots + MEHR-Dropdown. Wenige Seiten da überschaubares Sortiment.",
+    "pages": [
+      {
+        "name": "Startseite",
+        "url": "https://www.amazon.de/stores/page/BC9A9642-4612-460E-81B4-985E9AF6A7D2"
+      },
+      {
+        "name": "Alle Produkte",
+        "url": "https://www.amazon.de/stores/page/ALLE"
+      },
+      {
+        "name": "Neuheiten",
+        "url": "https://www.amazon.de/stores/page/NEU"
+      },
+      {
+        "name": "Spar-Sets",
+        "url": "https://www.amazon.de/stores/page/SETS"
+      },
+      {
+        "name": "Shots",
+        "url": "https://www.amazon.de/stores/page/SHOTS"
+      }
+    ]
+  },
+  "heroImage": {
+    "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/hansegruen-hero.jpeg",
+    "description": "Links: Frau trinkt Shot im Sonnenlicht, natürliches Setting. Rechts auf dunklem Teal: 'Superfoodpulver im Shotformat — Deutschlands meistverkauftes Bio Shotpulver'. Rechts oben: Hansegrün Siegel-Logo (grüner Kreis mit Tropfen-Icon).",
+    "textOnImage": {
+      "headline": "Deutschlands meistverkauftes Bio Shotpulver",
+      "subtext": "Superfoodpulver im Shotformat",
+      "cta": ""
+    },
+    "colorMood": "Teal/Dunkelgrün mit warmem Lifestyle-Foto",
+    "designElements": "Split-Layout: Lifestyle links, Text+Logo rechts"
+  },
+  "pages": [
+    {
+      "name": "Startseite",
+      "url": "https://www.amazon.de/stores/page/BC9A9642-4612-460E-81B4-985E9AF6A7D2",
+      "moduleCount": 8,
+      "modules": [
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 1,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Bestseller-Banner mit Produkten auf Holzbrett und Gemüse.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Beiger Hintergrund. 'Unsere Bestseller' als Serif-Headline oben. Darunter: 3 Hansegrün Dosen (Ingwer Shots, Bio Daily Shots, Grüne Shots) auf Holzbrett arrangiert mit frischen Zutaten (Ingwer, Brokkoli, Zitrone). 'Produkte ansehen' Button unten links.",
+              "textOnImage": {
+                "headline": "Unsere Bestseller",
+                "subtext": "",
+                "cta": "Produkte ansehen"
+              },
+              "colorMood": "Beige, natürlich, frisch",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 2,
+          "tileCount": 1,
+          "visualConnection": "Full-Width USP-Banner: 100% natürliche Zutaten.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "benefit",
+              "description": "Beiger Hintergrund. Links: Ingwer Shots Dose. Mitte: Hansegrün Logo-Badge. Rechts: '100% natürliche Zutaten' in großer Teal-Serif-Schrift.",
+              "textOnImage": {
+                "headline": "100% natürliche Zutaten",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Beige mit Teal-Text",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 3,
+          "tileCount": 1,
+          "visualConnection": "Section-Header: 'Shoppe ganz nach deinen Bedürfnissen'",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "text_image",
+              "description": "Hellgrüner/beiger Hintergrund. 'Shoppe ganz nach deinen Bedürfnissen' als zentrierte Serif-Headline.",
+              "textOnImage": {
+                "headline": "Shoppe ganz nach deinen Bedürfnissen",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Hellgrün/Beige, einladend",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "std-2equal",
+          "position": 4,
+          "tileCount": 2,
+          "visualConnection": "Zwei Kategorien: Sparsets und Shots.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Beiger Hintergrund. 3 verschiedene Shot-Dosen mit Beeren und Früchten. 'Sparsets' in Serif, 'JETZT ENTDECKEN' Button in Teal.",
+              "textOnImage": {
+                "headline": "Sparsets",
+                "subtext": "",
+                "cta": "JETZT ENTDECKEN"
+              },
+              "colorMood": "Beige mit bunten Frucht-Akzenten",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Beiger Hintergrund. Guarana und Ingwer Shot-Dosen mit Mango und Ingwer. 'Shots' in Serif, 'JETZT ENTDECKEN' Button.",
+              "textOnImage": {
+                "headline": "Shots",
+                "subtext": "",
+                "cta": "JETZT ENTDECKEN"
+              },
+              "colorMood": "Beige mit Gelb/Orange-Akzenten",
+              "tilePosition": 2,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 5,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Benefits-Banner mit Produkten auf grünem Pulver-Explosion-Hintergrund.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Alle 3 Shot-Dosen (Guarana, Ingwer, Grüne Shots) auf dynamischem grünem Pulver-Explosions-Hintergrund. 'Benefits' in Serif rechts. 'JETZT ENTDECKEN' Button.",
+              "textOnImage": {
+                "headline": "Benefits",
+                "subtext": "",
+                "cta": "JETZT ENTDECKEN"
+              },
+              "colorMood": "Grün, dynamisch, energetisch",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 6,
+          "tileCount": 1,
+          "visualConnection": "Produktberater/Quiz-Modul.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Beiger Hintergrund. Links: 'NICHT SICHER WAS DEIN KÖRPER BRAUCHT? LASS DICH HIER BERATEN' in Bold Teal. Rechts: Mockup eines Computers mit Produktquiz-Interface (Frau mit Shot, 'Weißt du was du brauchst?' Ja/Nein/Nicht sicher).",
+              "textOnImage": {
+                "headline": "NICHT SICHER WAS DEIN KÖRPER BRAUCHT?",
+                "subtext": "",
+                "cta": "LASS DICH HIER BERATEN"
+              },
+              "colorMood": "Beige, informativ",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 7,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Neuheiten-Teaser mit Lifestyle-Foto.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Frau mit roter Mütze lächelt in Herbst-Outdoor-Setting. 'STAY TUNED' Label oben links. 'NEUHEITEN' in großer Teal-Schrift rechts.",
+              "textOnImage": {
+                "headline": "NEUHEITEN",
+                "subtext": "STAY TUNED",
+                "cta": ""
+              },
+              "colorMood": "Warm, herbstlich, natürlich",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "4grid-lg",
+          "position": 8,
+          "tileCount": 4,
+          "visualConnection": "4-Schritt Zubereitungsanleitung + Gründer-Story.",
+          "designRationale": "Kombination aus How-To und Brand Story schafft Vertrauen und reduziert Kaufbarrieren.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Header: 'Shot-Zubereitung in Sekunden'. 4 Schritte: 1. Pulver entnehmen (Löffel), 2. Einfüllen (Dose), 3. Kurz schütteln (Flasche), 4. Genießen (Frau trinkt). Warme Holztöne.",
+              "textOnImage": {
+                "headline": "Shot-Zubereitung in Sekunden",
+                "subtext": "1. Pulver entnehmen → 2. Einfüllen → 3. Schütteln → 4. Genießen",
+                "cta": ""
+              },
+              "colorMood": "Warm, natürlich, Holztöne",
+              "tilePosition": 1,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Gründer-Sektion: 'Unterstütze ein junges Start-Up'. 'Die Gründer Lukas & Till' mit Mission Statement. Zwei junge Männer in grauen Hansegrün-Hoodies vor Holzwand.",
+              "textOnImage": {
+                "headline": "Unterstütze ein junges Start-Up",
+                "subtext": "Die Gründer Lukas & Till",
+                "cta": ""
+              },
+              "colorMood": "Grau/Holz, authentisch, nahbar",
+              "tilePosition": 2,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            }
+          ]
+        }
+      ],
+      "pageTexts": {
+        "headlines": [
+          "Unsere Bestseller",
+          "100% natürliche Zutaten",
+          "Shoppe ganz nach deinen Bedürfnissen",
+          "Benefits",
+          "NEUHEITEN",
+          "Shot-Zubereitung in Sekunden",
+          "Unterstütze ein junges Start-Up"
+        ],
+        "descriptions": [
+          "Superfoodpulver im Shotformat",
+          "Deutschlands meistverkauftes Bio Shotpulver",
+          "Die Gründer Lukas & Till",
+          "Unser Ziel ist es, durch einfache, leckere und vor allem gesunde Produkte neue Routinen zu schaffen..."
+        ],
+        "ctas": [
+          "Produkte ansehen",
+          "JETZT ENTDECKEN",
+          "LASS DICH HIER BERATEN"
+        ],
+        "nativeTexts": [
+          "STAY TUNED",
+          "Tipp: Schmeckt am besten mit Apfelsaft"
+        ]
+      }
+    }
+  ],
+  "analysis": {
+    "ciImplementation": "Gute CI mit durchgängiger Beige/Teal-Palette. Serif-Headlines, natürliche Produktfotografie. Logo-Badge wiederholt sich. Ähnliche Premium-Health-Ästhetik wie AG1, aber wärmer und nahbarer durch Start-Up-Charakter.",
+    "imageLanguage": "Mix aus Produktfotos mit echten Zutaten (Food-Styling), Lifestyle (Frau in Natur), Anwendungsfotos (Zubereitung), und Gründer-Porträts. Alles auf warmen, natürlichen Hintergründen (Beige, Holz, Natur). Kein Studio-Weiß.",
+    "storytelling": "Sehr guter narrativer Bogen: Bestseller (Social Proof) → USP (100% natürlich) → Kategorien (Navigation) → Benefits → Beratung (Unsicherheit adressieren) → Neuheiten → How-To → Gründer-Story. Vom Vertrauen zur Anwendung zur emotionalen Bindung.",
+    "moduleFlow": "Full Width Bestseller → Full Width USP → Section Header → std-2equal Kategorien → Full Width Benefits → Full Width Quiz → Full Width Neuheiten → 4-Step How-To → Gründer-Story",
+    "subpageLogic": "~8 Seiten. Überschaubares Sortiment (hauptsächlich Shots), daher wenige Seiten nötig. Alle Produkte, Neuheiten, Spar-Sets, Shots als Hauptkategorien.",
+    "conversionElements": [
+      "Bestseller als erstes Modul (Social Proof)",
+      "Produktquiz/Berater reduziert Kaufunsicherheit",
+      "4-Schritt-Zubereitung senkt Anwendungsbarriere",
+      "Gründer-Story schafft emotionale Bindung",
+      "Spar-Sets als Kategorie (höherer Warenkorbwert)"
+    ],
+    "copywritingAnalysis": "Persönlich und edukativ. Du-Ansprache: 'Shoppe ganz nach deinen Bedürfnissen', 'Nicht sicher was dein Körper braucht?'. Serif-Headlines in natürlicher Sprache (kein Uppercase-Schreien). Gründer mit Vornamen. Mix aus funktionalen CTAs ('JETZT ENTDECKEN') und emotionalen ('LASS DICH HIER BERATEN').",
+    "strengths": [
+      "Perfekter Story-Bogen: Produkte → USP → Navigation → Beratung → How-To → Gründer",
+      "Produktquiz als interaktives Element reduziert Kaufunsicherheit",
+      "Gründer-Story schafft persönliche Verbindung und Start-Up-Sympathie",
+      "4-Schritt-Zubereitung mit echten Fotos senkt Einstiegshürde",
+      "100% natürliche Zutaten als prominenter USP",
+      "Warme, natürliche Ästhetik passt perfekt zum Produkt"
+    ],
+    "weaknesses": [
+      "Kein Video-Content trotz visuell starker Produkte",
+      "Kein Product Grid auf der Startseite — keine direkte Kauf-Integration",
+      "Produktfotos könnten variabler sein (ähnliche Arrangements)",
+      "Kein Social Proof (Bewertungen, Kundenstimmen) auf der Startseite",
+      "Neuheiten-Modul ohne konkreten Inhalt ('STAY TUNED' = leer)"
+    ]
+  }
+}

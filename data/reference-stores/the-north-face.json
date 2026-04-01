@@ -1,0 +1,386 @@
+{
+  "brandName": "The North Face",
+  "storeUrl": "https://www.amazon.de/stores/THENORTHFACE/page/91172724-C342-482B-A300-564D9EA5E09F",
+  "category": "fashion",
+  "qualityScore": 5,
+  "analyzedAt": "2026-04-01",
+  "ci": {
+    "primaryColors": [
+      "#000000",
+      "#ffffff"
+    ],
+    "accentColors": [
+      "#4a7c59",
+      "#d4a843",
+      "#2b6cb0"
+    ],
+    "imageStyle": "Authentische Outdoor-Abenteuer-Fotografie. Echte Berglandschaften, Camping-Szenen, Wanderungen. Natürliches Tageslicht, oft Golden Hour. Diverse Models in Aktion — nie gestellt. Farben der Natur: Grün, Erdtöne, Fels-Grau, Himmelblau. Produktfarben (Jacken) als Farbakzente in der Landschaft.",
+    "typographyStyle": "Weißer Bold Uppercase Text auf schwarzem Hintergrund-Label unten links auf jedem Bild. Kurze Kategorie-Namen: HERREN, DAMEN, NEUHEITEN, SCHUHWERK. Sehr clean, kein Schnörkel.",
+    "tonality": "Abenteuerlich, authentisch, inspirierend. Wenig Text — die Bilder erzählen die Geschichte. Kategorienamen statt Werbeclaims. Premium-Outdoor-Marke die sich nicht verkaufen muss.",
+    "ciConsistency": 5,
+    "consistencyNotes": "Extrem konsistent — jedes Bild könnte aus dem gleichen Fotoshooting stammen. Gleiche Berglandschaften, gleiche Beleuchtung, gleiche Model-Ästhetik. Labels immer identisch formatiert: weiß auf schwarz, unten links."
+  },
+  "navigation": {
+    "pageCount": 18,
+    "structurePrinciple": "Hauptnavigation nach Geschlecht (Herren/Damen) + Produkttyp (Jacken, Oberteile, Schuhwerk, Hosen) + Spezial-Kategorien (Neuheiten SS26, Rucksäcke, Ausrüstung, Über uns). Sehr klassische Fashion-Struktur.",
+    "pages": [
+      {
+        "name": "Startseite",
+        "url": "https://www.amazon.de/stores/THENORTHFACE/page/91172724-C342-482B-A300-564D9EA5E09F"
+      },
+      {
+        "name": "Neuheiten",
+        "url": "https://www.amazon.de/stores/page/96D0DAAD"
+      },
+      {
+        "name": "SS26 Herren",
+        "url": "https://www.amazon.de/stores/page/0861B39E",
+        "parent": "Neuheiten"
+      },
+      {
+        "name": "SS26 Damen",
+        "url": "https://www.amazon.de/stores/page/1D787D3C",
+        "parent": "Neuheiten"
+      },
+      {
+        "name": "Herren",
+        "url": "https://www.amazon.de/stores/page/FDED152D"
+      },
+      {
+        "name": "Herren Jacken",
+        "url": "https://www.amazon.de/stores/page/09C2F218",
+        "parent": "Herren"
+      },
+      {
+        "name": "Herren Oberteile",
+        "url": "https://www.amazon.de/stores/page/E61E7F08",
+        "parent": "Herren"
+      },
+      {
+        "name": "Herren Schuhwerk",
+        "url": "https://www.amazon.de/stores/page/B3AAA5A3",
+        "parent": "Herren"
+      },
+      {
+        "name": "Herren Hosen",
+        "url": "https://www.amazon.de/stores/page/0055DB07",
+        "parent": "Herren"
+      },
+      {
+        "name": "Damen",
+        "url": "https://www.amazon.de/stores/page/6B3AE76A"
+      },
+      {
+        "name": "Damen Jacken",
+        "url": "https://www.amazon.de/stores/page/F7181A1A",
+        "parent": "Damen"
+      },
+      {
+        "name": "Damen Oberteile",
+        "url": "https://www.amazon.de/stores/page/6ED778D6",
+        "parent": "Damen"
+      },
+      {
+        "name": "Damen Schuhwerk",
+        "url": "https://www.amazon.de/stores/page/D006FEB9",
+        "parent": "Damen"
+      },
+      {
+        "name": "Damen Hosen",
+        "url": "https://www.amazon.de/stores/page/EE31B874",
+        "parent": "Damen"
+      },
+      {
+        "name": "Rucksäcke",
+        "url": "https://www.amazon.de/stores/page/2BC820CA"
+      },
+      {
+        "name": "Ausrüstung und Accessories",
+        "url": "https://www.amazon.de/stores/page/97074019"
+      },
+      {
+        "name": "Über uns",
+        "url": "https://www.amazon.de/stores/page/716413ED"
+      }
+    ]
+  },
+  "heroImage": {
+    "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/thenorthface-hero._CR0%2C0%2C3000%2C600_SX1500_.jpg",
+    "description": "Outdoor-Camping-Szene: Gruppe von 3-4 Personen baut Zelte in felsiger Berglandschaft auf. Grüne Wiese, graue Felsen, bunte Outdoor-Kleidung (orange, lila, beige). Authentische Abenteuer-Atmosphäre.",
+    "textOnImage": {
+      "headline": "",
+      "subtext": "",
+      "cta": ""
+    },
+    "colorMood": "Naturfarben — Grün, Grau, Erdtöne mit bunten Jacken als Akzente",
+    "designElements": "Kein Text-Overlay auf Hero. Rein fotografisch, Breitformat-Panorama."
+  },
+  "pages": [
+    {
+      "name": "Startseite",
+      "url": "https://www.amazon.de/stores/THENORTHFACE/page/91172724-C342-482B-A300-564D9EA5E09F",
+      "moduleCount": 8,
+      "modules": [
+        {
+          "type": "editorial_row",
+          "layoutId": "std-2equal",
+          "position": 1,
+          "tileCount": 2,
+          "visualConnection": "Geschlechter-Split: Links HERREN (Mann in blauer Jacke, Nahaufnahme), rechts DAMEN (Frau auf Berggipfel bei Sonnenuntergang). Beide in Outdoor-Action, gleiche Bildqualität und Stimmung.",
+          "designRationale": "Sofortiger Einstieg nach Geschlecht — der wichtigste Filter für Fashion-Stores.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Nahaufnahme eines lächelnden Mannes in blauer TNF-Windbreaker-Jacke mit Sonnenbrille und weißer Kappe. Outdoor-Setting mit Gras im Hintergrund.",
+              "textOnImage": {
+                "headline": "HERREN",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Blau-dominiert, natürlich, aktiv",
+              "designElements": "Weißer Text auf schwarzem Label-Hintergrund, unten links",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Frau mit Rucksack und TNF-Kappe auf Berggrat bei Golden Hour. Bergpanorama im Hintergrund. Warmes Abendlicht.",
+              "textOnImage": {
+                "headline": "DAMEN",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Warme Erdtöne, Golden Hour, episch",
+              "designElements": "Gleiches Label-Design wie HERREN",
+              "tilePosition": 2,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 2,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Lifestyle-Bild als 'Atem-Pause' zwischen Kategorien.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Gruppe von Freunden beim Bergsteigen — lachend, sich gegenseitig helfend. Diverse Models in bunten TNF-Jacken. Natürliche Berglandschaft, authentischer Moment.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Bunt durch Jackenfarben, natürliche Landschaft",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 3,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Neuheiten-Teaser.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Mann in dunkler TNF-Jacke, Halbkörper, Berglandschaft im Hintergrund. Dramatisch, dunklere Töne.",
+              "textOnImage": {
+                "headline": "NEUHEITEN",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Dunkel, dramatisch, modern",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "std-2equal",
+          "position": 4,
+          "tileCount": 2,
+          "visualConnection": "Kategorie-Einstieg für Schuhwerk und Ausrüstung. Gleiche Bildsprache.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Wanderschuhe auf Felsen, Nahaufnahme. TNF-Logo sichtbar. Berglandschaft unscharf im Hintergrund.",
+              "textOnImage": {
+                "headline": "SCHUHWERK",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Blau, Grau, Outdoor",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Schwarzer TNF-Rucksack wird geöffnet, Detailansicht. Person greift in den Rucksack.",
+              "textOnImage": {
+                "headline": "AUSRÜSTUNG",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Schwarz, Rot-Akzente",
+              "tilePosition": 2,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "std-2equal",
+          "position": 5,
+          "tileCount": 2,
+          "visualConnection": "Rucksäcke und Duffels als weitere Equipment-Kategorien.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Paar mit TNF-Rucksäcken vor Bergpanorama, Seitenprofil. Grüne und gelbe Jacken.",
+              "textOnImage": {
+                "headline": "RUCKSÄCKE",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Grün, Berglandschaft",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Drei bunte TNF Base Camp Duffels (grün, gelb, rot) auf Schotterweg. Outdoor-Setting.",
+              "textOnImage": {
+                "headline": "DUFFELS",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Bunt auf neutralem Grund",
+              "tilePosition": 2,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 6,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Lifestyle zum Abschluss der Editorial-Sektion.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Gruppe im Wald bei Regen, TNF-Regenjacken, dynamische Action-Szene. Tropfendes Wasser, Lachen.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Grün, Grau, atmosphärisch",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 7,
+          "tileCount": 1,
+          "visualConnection": "Noch ein Full-Width Bild als Übergang zum Product Grid.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Zwei Personen auf grüner Wiese, Wanderoutfit, Beine im Fokus. Casual-Outdoor-Moment.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Grün, natürlich",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "product_grid",
+          "layoutId": "product_grid",
+          "position": 8,
+          "tileCount": 0,
+          "tiles": [],
+          "note": "Großes Product Grid mit ~20+ Produkten. Filter: 'Auf Lager'. T-Shirts (26-35€), Fleece-Jacken, Trail-Schuhe (75-117€). Amazon-Standard-Produktkarten mit Thumbnails, Preisen, Bewertungen, Farbvarianten, Prime-Badge."
+        }
+      ],
+      "pageTexts": {
+        "headlines": [
+          "HERREN",
+          "DAMEN",
+          "NEUHEITEN",
+          "SCHUHWERK",
+          "AUSRÜSTUNG",
+          "RUCKSÄCKE",
+          "DUFFELS"
+        ],
+        "descriptions": [],
+        "ctas": [],
+        "nativeTexts": [
+          "Filtern nach",
+          "Auf Lager"
+        ]
+      }
+    }
+  ],
+  "analysis": {
+    "ciImplementation": "Perfekte CI-Umsetzung. Jedes einzelne Bild ist authentische Outdoor-Fotografie aus derselben Welt: Berglandschaften, echte Abenteuer, diverse Models in Action. Das Label-System (weißer Bold Text auf schwarzem Kasten, unten links) ist zu 100% konsistent über alle Kategorie-Kacheln. Kein Bild fällt aus der Reihe.",
+    "imageLanguage": "Ausschließlich Lifestyle/Action-Fotografie. Kein einziges Studio-Produktfoto in den Editorial-Modulen. Produkte werden immer im Kontext gezeigt: Jacken beim Wandern, Schuhe auf Felsen, Rucksäcke in der Wildnis. Perspektiven wechseln zwischen Nahaufnahme (Gesicht/Detail) und Totale (Landschaft). Beleuchtung: fast immer natürliches Tageslicht, oft Golden Hour.",
+    "storytelling": "Klarer narrativer Bogen: Hero zeigt die 'Mission' (Camping in den Bergen) → Geschlechter-Split → Lifestyle-Moment (Gemeinschaft) → Neuheiten → Equipment-Kategorien → Lifestyle-Abschluss → Product Grid. Die Bildabfolge erzählt einen Outdoor-Trip: Ankommen → Erleben → Ausrüstung checken → Produkte kaufen.",
+    "moduleFlow": "std-2equal (Herren/Damen) → Full Width Lifestyle → Full Width Neuheiten → std-2equal (Schuhwerk/Ausrüstung) → std-2equal (Rucksäcke/Duffels) → Full Width Lifestyle × 2 → Product Grid",
+    "subpageLogic": "18 Seiten. Primär nach Geschlecht (Herren/Damen), dann nach Produkttyp (Jacken, Oberteile, Schuhwerk, Hosen). Plus Spezial-Seiten: Neuheiten (saisonal: SS26), Rucksäcke, Ausrüstung, Über uns. Klassische Fashion-Brand-Struktur.",
+    "conversionElements": [
+      "Großes Product Grid am Ende mit echten Amazon-Produkten, Preisen, Bewertungen",
+      "Jede Kategorie-Kachel verlinkt auf Unterseite mit Produkten",
+      "Filter 'Auf Lager' im Product Grid"
+    ],
+    "copywritingAnalysis": "Nahezu textfrei. Nur Kategorie-Labels in VERSALIEN: HERREN, DAMEN, NEUHEITEN, SCHUHWERK, AUSRÜSTUNG, RUCKSÄCKE, DUFFELS. Keine Benefits, keine Beschreibungen, keine CTAs. Die Marke lässt die Bilder sprechen. Premium-Strategie: Wer The North Face kennt, braucht keine Erklärung.",
+    "strengths": [
+      "Bildqualität auf Kampagnen-Niveau — jedes Bild ist ein Statement",
+      "100% konsistente CI über alle Module und Seiten",
+      "Authentische Outdoor-Fotografie schafft emotionale Verbindung",
+      "Cleverer Mix aus Editorial-Content (Lifestyle) und Commerce (Product Grid)",
+      "Label-System ist simpel, wiedererkennbar und effektiv",
+      "Full-Width Lifestyle-Bilder als visuelle Pausen zwischen Kategorien"
+    ],
+    "weaknesses": [
+      "Null Textinhalt — für SEO und Accessibility problematisch",
+      "Keine Benefit-Kommunikation (Wasserdichtigkeit, Gore-Tex, etc.)",
+      "Kein Video-Content trotz starker Markengeschichte",
+      "Product Grid ohne Kontext — plötzlicher Bruch von Editorial zu Commerce",
+      "Keine saisonalen Highlights oder Deals auf der Homepage"
+    ]
+  }
+}

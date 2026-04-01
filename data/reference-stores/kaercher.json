@@ -1,0 +1,349 @@
+{
+  "brandName": "Kärcher",
+  "storeUrl": "https://www.amazon.de/stores/page/EFE3653A-1163-432C-A85B-0486A31C0E3D",
+  "category": "household",
+  "qualityScore": 5,
+  "analyzedAt": "2026-04-01",
+  "ci": {
+    "primaryColors": [
+      "#ffd700",
+      "#000000",
+      "#ffffff"
+    ],
+    "accentColors": [
+      "#4a4a4a",
+      "#e60000"
+    ],
+    "imageStyle": "Professionelle Lifestyle-Fotografie. Echte Menschen nutzen Kärcher-Produkte in realen Umgebungen (Einfahrt, Garten, Wohnzimmer, Bad, Fenster). Natürliches Tageslicht, helle Farben. Gelbe Produkte als visuelle Akzente in jeder Szene. Jede Kategorie-Kachel zeigt eine typische Anwendungssituation.",
+    "typographyStyle": "Bold Uppercase Sans-Serif auf gelben Label-Balken am unteren Rand jeder Kachel: HOCHDRUCKREINIGER, GARTEN, ROBOTICS, SAUGER, BODEN, DAMPF, FENSTER, REINIGUNGSMITTEL. Kärcher-Logo in Schwarz. Headlines: 'BEREIT FÜR DEN FRÜHJAHRSPUTZ?', 'EXKLUSIVE EINBLICKE? JETZT FOLGEN!'",
+    "tonality": "Saisonal, aktionsorientiert. 'Bereit für den Frühjahrsputz?' (saisonaler Hook). Cashback-Aktionen prominent. 'Exklusive Einblicke? Jetzt Folgen!' (Community). Professionell aber zugänglich.",
+    "ciConsistency": 5,
+    "consistencyNotes": "100% konsistent. Gelbe Labels auf JEDER Kategorie-Kachel. Lifestyle-Fotos folgen gleicher Ästhetik. Kärcher-Gelb als durchgängiges Designelement."
+  },
+  "navigation": {
+    "pageCount": 45,
+    "structurePrinciple": "Nach Produktkategorie mit tiefer Verschachtelung. Hauptkategorien: Hochdruckreiniger, Garten (Gartengeräte, Pumpen, Bewässerung, Kehrmaschinen), Robotics (Mähroboter, Wisch-/Saugroboter), Dampf, Sauger (6 Unterkategorien), Boden, Fenster, Rund ums Auto, Akku-Plattform. Plus: Cashback Aktion, Neuheiten, Professionelle Reinigung, Support.",
+    "pages": [
+      {
+        "name": "Startseite",
+        "url": "https://www.amazon.de/stores/page/EFE3653A-1163-432C-A85B-0486A31C0E3D"
+      },
+      {
+        "name": "Cashback Aktion",
+        "url": "https://www.amazon.de/stores/page/CASHBACK"
+      },
+      {
+        "name": "Neuheiten",
+        "url": "https://www.amazon.de/stores/page/NEU"
+      },
+      {
+        "name": "Hochdruckreiniger",
+        "url": "https://www.amazon.de/stores/page/HDR"
+      },
+      {
+        "name": "Garten",
+        "url": "https://www.amazon.de/stores/page/GARTEN"
+      },
+      {
+        "name": "Gartengeräte",
+        "parent": "Garten"
+      },
+      {
+        "name": "Tauchpumpen",
+        "parent": "Garten"
+      },
+      {
+        "name": "Bewässerung",
+        "parent": "Garten"
+      },
+      {
+        "name": "Robotics",
+        "url": "https://www.amazon.de/stores/page/ROBOTICS"
+      },
+      {
+        "name": "Mähroboter",
+        "parent": "Robotics"
+      },
+      {
+        "name": "Wisch- und Saugroboter",
+        "parent": "Robotics"
+      },
+      {
+        "name": "Dampf",
+        "url": "https://www.amazon.de/stores/page/DAMPF"
+      },
+      {
+        "name": "Sauger",
+        "url": "https://www.amazon.de/stores/page/SAUGER"
+      },
+      {
+        "name": "Waschsauger",
+        "parent": "Sauger"
+      },
+      {
+        "name": "Boden",
+        "url": "https://www.amazon.de/stores/page/BODEN"
+      },
+      {
+        "name": "Fenster",
+        "url": "https://www.amazon.de/stores/page/FENSTER"
+      },
+      {
+        "name": "Reinigungsmittel",
+        "url": "https://www.amazon.de/stores/page/REINIGUNGSMITTEL"
+      },
+      {
+        "name": "Rund ums Auto",
+        "url": "https://www.amazon.de/stores/page/AUTO"
+      },
+      {
+        "name": "Akku-Plattform",
+        "url": "https://www.amazon.de/stores/page/AKKU"
+      },
+      {
+        "name": "Support",
+        "url": "https://www.amazon.de/stores/page/SUPPORT"
+      }
+    ]
+  },
+  "heroImage": {
+    "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/kaercher-hero.jpeg",
+    "description": "Collage aus 8 Lifestyle-Fotos (4x2 Grid): Menschen reinigen Einfahrt, pflegen Garten, nutzen Sauger, Roboter-Mäher. Rechts: Kärcher Logo + 'BEREIT FÜR DEN FRÜHJAHRSPUTZ? Entdecke aktuelle Angebote.' auf weißem Hintergrund.",
+    "textOnImage": {
+      "headline": "BEREIT FÜR DEN FRÜHJAHRSPUTZ?",
+      "subtext": "Entdecke aktuelle Angebote.",
+      "cta": ""
+    },
+    "colorMood": "Bunt, lebendig, saisonal (Frühling)",
+    "designElements": "Foto-Collage links, Text+Logo rechts"
+  },
+  "pages": [
+    {
+      "name": "Startseite",
+      "url": "https://www.amazon.de/stores/page/EFE3653A-1163-432C-A85B-0486A31C0E3D",
+      "moduleCount": 4,
+      "modules": [
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 1,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Follow-Banner in Kärcher-Gelb.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "text_image",
+              "description": "Gelber Hintergrund. 'EXKLUSIVE EINBLICKE? JETZT FOLGEN!' in schwarzer Bold-Schrift mit Pfeil-Icon.",
+              "textOnImage": {
+                "headline": "EXKLUSIVE EINBLICKE? JETZT FOLGEN!",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Kärcher-Gelb, auffällig",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 2,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Cashback-Aktion-Banner.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Mann mit Kärcher Hochdruckreiniger. Kärcher Logo oben. Text: 'Jetzt Kärcher Mittel- oder Hochdruckreiniger kaufen, online registrieren und Cashback sichern.' Rechts: Rotes Hexagon 'BIS ZU 70€ SPAREN*'. Stiftung Warentest Siegel sichtbar.",
+              "textOnImage": {
+                "headline": "CASHBACK",
+                "subtext": "BIS ZU 70€ SPAREN*",
+                "cta": ""
+              },
+              "colorMood": "Gelb/Grün/Rot, aktionsorientiert",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "4x2grid",
+          "position": 3,
+          "tileCount": 12,
+          "visualConnection": "Großes 4×3 Kategorie-Grid. Jede Kachel: Lifestyle-Foto + gelbes Label.",
+          "designRationale": "Alle Hauptkategorien auf einen Blick — der Kunde findet sofort seine Anwendung.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Mann reinigt Einfahrt mit Hochdruckreiniger. Gelbes Label: 'HOCHDRUCKREINIGER'.",
+              "textOnImage": {
+                "headline": "HOCHDRUCKREINIGER",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Outdoor, aktiv",
+              "tilePosition": 1,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Mann pflegt Garten mit Kärcher-Gerät. Gelbes Label: 'GARTEN'.",
+              "textOnImage": {
+                "headline": "GARTEN",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Grün, Natur",
+              "tilePosition": 2,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Kärcher Mähroboter auf Rasen. Gelbes Label: 'ROBOTICS'.",
+              "textOnImage": {
+                "headline": "ROBOTICS",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Grün, modern",
+              "tilePosition": 3,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Mann saugt Garage mit Kärcher Sauger. Gelbes Label: 'SAUGER'.",
+              "textOnImage": {
+                "headline": "SAUGER",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Grau, praktisch",
+              "tilePosition": 4,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Frau reinigt Boden im Wohnzimmer. Gelbes Label: 'BODEN'.",
+              "textOnImage": {
+                "headline": "BODEN",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Warm, häuslich",
+              "tilePosition": 5,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Mann reinigt Waschbecken mit Dampfreiniger. Gelbes Label: 'DAMPF'.",
+              "textOnImage": {
+                "headline": "DAMPF",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Hell, sauber",
+              "tilePosition": 6,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Frau reinigt Fenster mit Fenstersauger. Gelbes Label: 'FENSTER'.",
+              "textOnImage": {
+                "headline": "FENSTER",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Hell, Tageslicht",
+              "tilePosition": 7,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Kärcher Reinigungsmittel werden angewendet. Gelbes Label: 'REINIGUNGSMITTEL'.",
+              "textOnImage": {
+                "headline": "REINIGUNGSMITTEL",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Blau, sauber",
+              "tilePosition": 8,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            }
+          ]
+        }
+      ],
+      "pageTexts": {
+        "headlines": [
+          "BEREIT FÜR DEN FRÜHJAHRSPUTZ?",
+          "EXKLUSIVE EINBLICKE? JETZT FOLGEN!",
+          "CASHBACK"
+        ],
+        "descriptions": [
+          "Entdecke aktuelle Angebote.",
+          "BIS ZU 70€ SPAREN*",
+          "Jetzt Kärcher Mittel- oder Hochdruckreiniger kaufen, online registrieren und Cashback sichern."
+        ],
+        "ctas": [],
+        "nativeTexts": [
+          "HOCHDRUCKREINIGER",
+          "GARTEN",
+          "ROBOTICS",
+          "SAUGER",
+          "BODEN",
+          "DAMPF",
+          "FENSTER",
+          "REINIGUNGSMITTEL"
+        ]
+      }
+    }
+  ],
+  "analysis": {
+    "ciImplementation": "Perfekte CI. Kärcher-Gelb als durchgängiges Element auf allen Labels. Schwarze Schrift auf Gelb = sofort als Kärcher erkennbar. Lifestyle-Fotografie konsistent: echte Menschen, echte Situationen, natürliches Licht.",
+    "imageLanguage": "Konsequent Lifestyle/Anwendungsfotografie. Jede Kachel zeigt ein Produkt in seiner typischen Anwendung: Mann wäscht Einfahrt, Frau reinigt Fenster, Roboter mäht Rasen. Keine Studio-Produktfotos in den Editorial-Modulen — Produkte werden immer im Kontext gezeigt.",
+    "storytelling": "Saisonal-funktional: Saisonaler Hook (Frühjahrsputz) → Follow-CTA → Cashback-Aktion (Conversion) → Kategorie-Navigation. Saison-bezogene Ansprache als Einstieg in das breite Sortiment.",
+    "moduleFlow": "Hero (saisonal) → Full Width Follow → Full Width Cashback → 4x3 Kategorie-Grid",
+    "subpageLogic": "~45 Seiten. Extrem tiefe Hierarchie nach Produktkategorie und Anwendungsbereich. Sauger allein hat 6 Unterkategorien. Garten hat Gartengeräte, Pumpen, Bewässerung, Kehrmaschinen. Plus Akku-Plattform als Querschnittskategorie.",
+    "conversionElements": [
+      "Cashback-Aktion prominent als zweites Modul",
+      "Stiftung Warentest Siegel für Vertrauen",
+      "Saisonaler Hook motiviert zum sofortigen Kauf",
+      "Follow-CTA für Kundenbindung"
+    ],
+    "copywritingAnalysis": "Saisonal und aktionsorientiert. 'BEREIT FÜR DEN FRÜHJAHRSPUTZ?' (saisonaler Trigger), 'BIS ZU 70€ SPAREN' (preislicher Anreiz). Kategorie-Labels rein funktional: HOCHDRUCKREINIGER, GARTEN, ROBOTICS. Keine emotionale Ansprache — Kärcher setzt auf praktischen Nutzen.",
+    "strengths": [
+      "Gelbe Labels als sofort erkennbares Kärcher-Designelement",
+      "Lifestyle-Fotografie zeigt jedes Produkt in seiner Anwendung",
+      "4x3 Kategorie-Grid bietet kompletten Sortimentsüberblick",
+      "Cashback-Aktion als starker Conversion-Trigger",
+      "Saisonaler Hero-Hook schafft Relevanz",
+      "~45 Seiten mit tiefer Verschachtelung für granulare Navigation"
+    ],
+    "weaknesses": [
+      "Kein Video-Content trotz visuell starker Produkte",
+      "Keine Benefit-Texte oder USPs auf der Startseite",
+      "Keine Kundenberichte oder Social Proof",
+      "Kategorie-Grid könnte überwältigend wirken (12+ Kacheln)",
+      "Keine Produktvergleiche oder Berater-Tools auf der Startseite"
+    ]
+  }
+}

@@ -1,0 +1,186 @@
+{
+  "brandName": "twenty:three",
+  "storeUrl": "https://www.amazon.de/stores/twentythree/page/0E8D9A31-200C-4EC5-BC94-CBBC023B28A4",
+  "category": "home_kitchen",
+  "qualityScore": 3,
+  "analyzedAt": "2026-04-01",
+  "ci": {
+    "primaryColors": [
+      "#2d3e50",
+      "#ffffff",
+      "#f5f0e8"
+    ],
+    "accentColors": [
+      "#87a5b0",
+      "#d4c5a0"
+    ],
+    "imageStyle": "Ruhig-premium Schlafzimmer-Fotografie. Helle, stilvolle Schlafzimmer-Settings mit natürlichem Licht. Bettwäsche in gedeckten Farben (Weiß, Beige, Dunkelblau, Mintgrün). Produkt-Collage im Hero. Nahaufnahmen von Stofftexturen.",
+    "typographyStyle": "Elegante Serif für Headlines. 'twenty : three' Logo in minimalistischer Schrift. 'Spüre den Unterschied.' als Claim. Headlines: 'Dein Traum wird wahr. Guter Schlaf kann so einfach sein.' Kategorie-Labels: Bold Serif 'Bezüge für Kissen', 'Bettwäsche', 'Spannbettlaken für: Topper & Matratzen'.",
+    "tonality": "Ruhig, qualitätsbewusst. 'Spüre den Unterschied.' (taktil). 'Dein Traum wird wahr. Guter Schlaf kann so einfach sein.' (emotional). Du-Ansprache. Premium-Schlaf-Positionierung.",
+    "ciConsistency": 3,
+    "consistencyNotes": "Grundsätzlich konsistentes Dunkelblau/Weiß/Beige. Hero-Collage wirkt etwas zusammengesetzt. Kategorie-Kacheln folgen einheitlichem Stil. Wenige Module begrenzen CI-Bewertungsmöglichkeit."
+  },
+  "navigation": {
+    "pageCount": 4,
+    "structurePrinciple": "Einfach: Startseite, Alle Produkte + MEHR mit Unterkategorien.",
+    "pages": [
+      {
+        "name": "Startseite",
+        "url": "https://www.amazon.de/stores/twentythree/page/0E8D9A31-200C-4EC5-BC94-CBBC023B28A4"
+      },
+      {
+        "name": "Alle Produkte",
+        "url": "https://www.amazon.de/stores/page/ALLE"
+      },
+      {
+        "name": "Bettwäsche",
+        "url": "https://www.amazon.de/stores/page/BETTWAESCHE"
+      },
+      {
+        "name": "Spannbettlaken",
+        "url": "https://www.amazon.de/stores/page/SPANNBETTLAKEN"
+      }
+    ]
+  },
+  "heroImage": {
+    "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/twentythree-hero.jpeg",
+    "description": "Links: Collage aus Schlafzimmer-Fotos (Kissen, Bettwäsche in verschiedenen Farben). Rechts auf dunklem Hintergrund: 'twenty : three' Logo + 'Spüre den Unterschied.'",
+    "textOnImage": {
+      "headline": "twenty : three",
+      "subtext": "Spüre den Unterschied.",
+      "cta": ""
+    },
+    "colorMood": "Dunkelblau/Beige, ruhig, premium",
+    "designElements": "Foto-Collage links, Logo+Claim rechts"
+  },
+  "pages": [
+    {
+      "name": "Startseite",
+      "url": "https://www.amazon.de/stores/twentythree/page/0E8D9A31-200C-4EC5-BC94-CBBC023B28A4",
+      "moduleCount": 4,
+      "modules": [
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 1,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Section-Header: 'Guter Schlaf kann so einfach sein.'",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "text_image",
+              "description": "Dunkler Hintergrund. 'Dein Traum wird wahr. Guter Schlaf kann so einfach sein.' in weißer Serif-Schrift.",
+              "textOnImage": {
+                "headline": "Guter Schlaf kann so einfach sein.",
+                "subtext": "Dein Traum wird wahr.",
+                "cta": ""
+              },
+              "colorMood": "Dunkelblau, elegant",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "std-2equal",
+          "position": 2,
+          "tileCount": 2,
+          "visualConnection": "Zwei Kategorien: Bettwäsche links, Bezüge für Kissen rechts.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Stilvolles Schlafzimmer mit weißer Bettwäsche. Pflanze, Holzmöbel. 'Bettwäsche' Label in Bold Serif.",
+              "textOnImage": {
+                "headline": "Bettwäsche",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Hell, natürlich, wohnlich",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Mintgrüne Kissenbezüge. 'Bezüge für Kissen' Label in Bold Serif.",
+              "textOnImage": {
+                "headline": "Bezüge für Kissen",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Mintgrün, frisch",
+              "tilePosition": 2,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 3,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Spannbettlaken-Kategorie.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Nahaufnahme Stoff-Textur (grau/weiß). 'Spannbettlaken für: Topper & Matratzen' in Bold Serif.",
+              "textOnImage": {
+                "headline": "Spannbettlaken für: Topper & Matratzen",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Grau/Weiß, texturiert",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        }
+      ],
+      "pageTexts": {
+        "headlines": [
+          "Guter Schlaf kann so einfach sein.",
+          "Bettwäsche",
+          "Bezüge für Kissen",
+          "Spannbettlaken für: Topper & Matratzen"
+        ],
+        "descriptions": [
+          "Spüre den Unterschied.",
+          "Dein Traum wird wahr."
+        ],
+        "ctas": [],
+        "nativeTexts": []
+      }
+    }
+  ],
+  "analysis": {
+    "ciImplementation": "Grundsolide CI mit Dunkelblau/Weiß/Beige. Serif-Typografie für Premium-Feeling. Logo minimalistisch. Konsistente Schlafzimmer-Ästhetik.",
+    "imageLanguage": "Ruhige Schlafzimmer-Fotografie mit natürlichem Licht. Bettwäsche in gedeckten Farben. Nahaufnahmen von Stofftexturen. Stilvolle Wohnräume als Hintergrund.",
+    "storytelling": "Minimal: Section Header → 2 Kategorien → 1 Kategorie. Kaum narrativer Bogen.",
+    "moduleFlow": "Full Width Text → std-2equal Kategorien → Full Width Kategorie",
+    "subpageLogic": "~4 Seiten. Kleines Sortiment: Bettwäsche, Kissenbezüge, Spannbettlaken.",
+    "conversionElements": [
+      "Kaum vorhanden — keine CTAs auf der Startseite"
+    ],
+    "copywritingAnalysis": "Emotional aber sparsam. 'Spüre den Unterschied.' (sensorisch). 'Guter Schlaf kann so einfach sein.' (Versprechen). Wenig Text insgesamt.",
+    "strengths": [
+      "Elegante Serif-Typografie für Premium-Positionierung",
+      "Ruhige, stilvolle Bildsprache passt zum Schlaf-Thema",
+      "Claim 'Spüre den Unterschied' ist einprägsam"
+    ],
+    "weaknesses": [
+      "Nur 3-4 Module — viel ungenutztes Potenzial",
+      "Keine CTAs auf den Kategorie-Kacheln",
+      "Kein Social Proof (keine Bewertungen, keine Siegel)",
+      "Kein Video-Content",
+      "Keine Benefit-Texte (Material, Qualität, etc.)",
+      "Keine Produktvergleiche oder Berater"
+    ]
+  }
+}

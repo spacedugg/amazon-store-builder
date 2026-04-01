@@ -1,0 +1,460 @@
+{
+  "brandName": "TRIXIE",
+  "storeUrl": "https://www.amazon.de/stores/page/30552E59-AC22-47B1-BBBB-AEA9225BD614",
+  "category": "pets",
+  "qualityScore": 3,
+  "analyzedAt": "2026-04-01",
+  "ci": {
+    "primaryColors": [
+      "#5a7a8c",
+      "#ffffff",
+      "#c8b89a"
+    ],
+    "accentColors": [
+      "#8ca0b0",
+      "#f0ece4"
+    ],
+    "imageStyle": "Gedämpftes Blau/Beige-Farbsystem mit weißen Line-Art Icons für Kategorien. Lifestyle-Fotos in Polaroid-Stil (schräg, mit Schatten). Warme Outdoor- und Indoor-Szenen mit Haustieren. Video als prominentes Element. Keine produktlastigen Visuals.",
+    "typographyStyle": "TRIXIE Logo in rotem Oval mit weißer Schrift. 'Friends for Life' als Claim in Handschrift. Große Headlines: 'Hund', 'Katze' in heller Serif. Kategorie-Labels unter Icons in weißer Sans-Serif. Kein eigener Font.",
+    "tonality": "Freundlich, vertrauensvoll. 'Friends for Life' als Kern-Claim. 'TRIXIE ist ein Haustierleben lang für euch da!' Du-Ansprache. '6500 vielfältige Artikel'. Sortimentskompetenz-Kommunikation. 'Von Amazon als Top Brand ausgezeichnet'. Sachlich-warm.",
+    "ciConsistency": 3,
+    "consistencyNotes": "Konsistentes Blau/Beige-Farbsystem auf Kategorie-Kacheln. Polaroid-Stil bei Fotos als wiederkehrendes Element. Aber keine eigenen CTAs, wenig Text, keine dynamischen Elemente."
+  },
+  "navigation": {
+    "pageCount": 9,
+    "structurePrinciple": "Nach Tierart mit Unterkategorien: Hund, Katze, Kleintier, Vogel, Terraristik, Tiere im Garten. Plus Trixie Serien und Neuheiten.",
+    "pages": [
+      {
+        "name": "Startseite",
+        "url": "https://www.amazon.de/stores/page/30552E59-AC22-47B1-BBBB-AEA9225BD614"
+      },
+      {
+        "name": "Neuheiten",
+        "url": "https://www.amazon.de/stores/page/NEUHEITEN"
+      },
+      {
+        "name": "Trixie Serien",
+        "url": "https://www.amazon.de/stores/page/SERIEN"
+      },
+      {
+        "name": "Hund",
+        "url": "https://www.amazon.de/stores/page/HUND"
+      },
+      {
+        "name": "Katze",
+        "url": "https://www.amazon.de/stores/page/KATZE"
+      },
+      {
+        "name": "Kleintier",
+        "url": "https://www.amazon.de/stores/page/KLEINTIER"
+      },
+      {
+        "name": "Vogel",
+        "url": "https://www.amazon.de/stores/page/VOGEL"
+      },
+      {
+        "name": "Terraristik",
+        "url": "https://www.amazon.de/stores/page/TERRARISTIK"
+      },
+      {
+        "name": "Tiere im Garten",
+        "url": "https://www.amazon.de/stores/page/GARTEN"
+      }
+    ]
+  },
+  "heroImage": {
+    "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/trixie-hero.jpeg",
+    "description": "TRIXIE Logo (rot, oval) links. 'Friends for Life' Claim. Mann mit Australian Shepherd auf Sofa. Rechts: 'Von Amazon als Top Brand ausgezeichnet', '91% positive Bewertungen', '100.000+ aktuelle Bestellungen'. Social Proof prominent.",
+    "textOnImage": {
+      "headline": "TRIXIE Friends for Life",
+      "subtext": "Von Amazon als Top Brand ausgezeichnet",
+      "cta": ""
+    },
+    "colorMood": "Warm, wohnlich, vertrauensvoll",
+    "designElements": "Logo + Claim links, Lifestyle-Foto Mitte, Trust-Badges rechts"
+  },
+  "pages": [
+    {
+      "name": "Startseite",
+      "url": "https://www.amazon.de/stores/page/30552E59-AC22-47B1-BBBB-AEA9225BD614",
+      "moduleCount": 6,
+      "modules": [
+        {
+          "type": "video",
+          "layoutId": "1",
+          "position": 1,
+          "tileCount": 1,
+          "tiles": [
+            {
+              "tileType": "video",
+              "imageCategory": "lifestyle",
+              "description": "Full-Width Video: Frau mit weißem Hund auf Wohnzimmerboden. Warme, natürliche Atmosphäre.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Warm, natürlich, wohnlich",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "lg-4grid",
+          "position": 2,
+          "tileCount": 5,
+          "visualConnection": "Hund-Sektion: Großes Lifestyle-Bild links (Polaroid-Stil), 4 Kategorie-Icons rechts.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Polaroid-Fotos: Weißer Pudel mit Kind im Garten. 'Hund' Headline in großer heller Schrift.",
+              "textOnImage": {
+                "headline": "Hund",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Warm, Outdoor, Polaroid-Stil",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Line-Art Icon: Hundeleine auf blauem Hintergrund. 'Hundeleinen'.",
+              "textOnImage": {
+                "headline": "Hundeleinen",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Gedämpftes Blau",
+              "tilePosition": 2,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Line-Art Icon: Knochen/Fisch auf beigem Hintergrund. 'Snacks & Ernährung'.",
+              "textOnImage": {
+                "headline": "Snacks & Ernährung",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Beige",
+              "tilePosition": 3,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Line-Art Icon: Hundebett auf blauem Hintergrund. 'Liegeplätze'.",
+              "textOnImage": {
+                "headline": "Liegeplätze",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Gedämpftes Blau",
+              "tilePosition": 4,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Line-Art Icon: Geschirr auf beigem Hintergrund. 'Geschirre'.",
+              "textOnImage": {
+                "headline": "Geschirre",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Beige",
+              "tilePosition": 5,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "4grid-lg",
+          "position": 3,
+          "tileCount": 4,
+          "visualConnection": "Hund-Sektion Fortsetzung: 4 weitere Kategorie-Icons.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Line-Art Icon: Halsband. 'Halsbänder'.",
+              "textOnImage": {
+                "headline": "Halsbänder",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Gedämpftes Blau",
+              "tilePosition": 1,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Line-Art Icon: Spielzeug-Seil. 'Spielzeug'.",
+              "textOnImage": {
+                "headline": "Spielzeug",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Beige",
+              "tilePosition": 2,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Line-Art Icon: Agility. 'Ausbildung & Sport'.",
+              "textOnImage": {
+                "headline": "Ausbildung & Sport",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Gedämpftes Blau",
+              "tilePosition": 3,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Line-Art Icon: Futternapf. 'Zuhause'.",
+              "textOnImage": {
+                "headline": "Zuhause",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Beige",
+              "tilePosition": 4,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "lg-4grid",
+          "position": 4,
+          "tileCount": 5,
+          "visualConnection": "Katze-Sektion: Großes Lifestyle-Bild rechts (Polaroid-Stil), 4 Kategorie-Icons links.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Polaroid-Fotos: Frau mit zwei Katzen (Ragdoll/Birma). 'Katze' Headline in großer heller Schrift.",
+              "textOnImage": {
+                "headline": "Katze",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Warm, Indoor, Polaroid-Stil",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Line-Art Icon: Kratzbaum. 'Kratzbäume'.",
+              "textOnImage": {
+                "headline": "Kratzbäume",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Gedämpftes Blau",
+              "tilePosition": 2,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Line-Art Icon: Fisch. 'Snacks & Ernährung'.",
+              "textOnImage": {
+                "headline": "Snacks & Ernährung",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Beige",
+              "tilePosition": 3,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Line-Art Icon: Katzenbett. 'Liegeplätze'.",
+              "textOnImage": {
+                "headline": "Liegeplätze",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Gedämpftes Blau",
+              "tilePosition": 4,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "creative",
+              "description": "Line-Art Icon: Kratzmatte. 'Kratz- und Kletterartikel'.",
+              "textOnImage": {
+                "headline": "Kratz- und Kletterartikel",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Beige",
+              "tilePosition": 5,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "std-2equal",
+          "position": 5,
+          "tileCount": 2,
+          "visualConnection": "Marken-Info: Foto + Text über TRIXIE.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Polaroid-Foto: Hund auf Kissen. Frau streichelt.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Warm, wohnlich",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "text_image",
+              "description": "Dunkelblauer Hintergrund. Text: '6500 vielfältige Artikel zur Verfügung. Vom Kaninchenstall über den Kratzbaum bis zum Hundebett.' Sortiments-Kommunikation.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "6500 vielfältige Artikel zur Verfügung",
+                "cta": ""
+              },
+              "colorMood": "Dunkelblau, seriös",
+              "tilePosition": 2,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "std-2equal",
+          "position": 6,
+          "tileCount": 2,
+          "visualConnection": "Abschluss: Marken-Versprechen + Lifestyle-Foto.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "text_image",
+              "description": "Dunkelblauer Hintergrund. Text: 'Bei der Auswahl haben wir die unterschiedlichen Vorlieben und Bedürfnisse von Rassen berücksichtigt...' 'TRIXIE ist ein Haustierleben lang für euch da!'",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "TRIXIE ist ein Haustierleben lang für euch da!",
+                "cta": ""
+              },
+              "colorMood": "Dunkelblau, seriös",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Frau mit grau-getigerter Katze auf dem Arm.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Warm, nahbar",
+              "tilePosition": 2,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            }
+          ]
+        }
+      ],
+      "pageTexts": {
+        "headlines": [
+          "Hund",
+          "Katze"
+        ],
+        "descriptions": [
+          "Friends for Life",
+          "Von Amazon als Top Brand ausgezeichnet",
+          "91% positive Bewertungen von mehr als 10.000 Kunden",
+          "Mehr als 100.000 aktuelle Bestellungen auf Amazon",
+          "6500 vielfältige Artikel zur Verfügung",
+          "TRIXIE ist ein Haustierleben lang für euch da!"
+        ],
+        "ctas": [],
+        "nativeTexts": [
+          "Hundeleinen",
+          "Snacks & Ernährung",
+          "Liegeplätze",
+          "Geschirre",
+          "Halsbänder",
+          "Spielzeug",
+          "Ausbildung & Sport",
+          "Zuhause",
+          "Kratzbäume",
+          "Kratz- und Kletterartikel"
+        ]
+      }
+    }
+  ],
+  "analysis": {
+    "ciImplementation": "Grundsolide CI mit Blau/Beige-System. Line-Art Icons als einheitliches Kategorie-Element. Polaroid-Stil bei Lifestyle-Fotos. TRIXIE-Rot nur im Logo. Insgesamt zurückhaltend-klassisch.",
+    "imageLanguage": "Warme Lifestyle-Fotografie im Polaroid-Stil (schräg mit Schatten). Line-Art Icons auf farbigen Kacheln für Kategorien. Video prominent als erstes Element. Keine Produktfotos auf der Startseite.",
+    "storytelling": "Tierart-basiert: Video → Hund-Kategorien → Katze-Kategorien → Marken-Info. Solide aber ohne narrativen Bogen.",
+    "moduleFlow": "Full Width Video → lg-4grid Hund + Icons → 4grid-lg Icons → lg-4grid Katze + Icons → std-2equal Marken-Info → std-2equal Abschluss",
+    "subpageLogic": "9 Seiten. Sehr breites Sortiment: Hund, Katze, Kleintier, Vogel, Terraristik, Garten. Breites Markensortiment.",
+    "conversionElements": [
+      "Amazon Top Brand Badge im Hero",
+      "91% positive Bewertungen",
+      "100.000+ Bestellungen",
+      "Video-Content"
+    ],
+    "copywritingAnalysis": "Sachlich-warm. 'Friends for Life' als emotionaler Claim. '6500 vielfältige Artikel' als Sortimentskompetenz. 'Ein Haustierleben lang für euch da!' als Loyalitäts-Versprechen. Du-Ansprache.",
+    "strengths": [
+      "Amazon Top Brand Badge als starkes Trust-Signal",
+      "Video-Content prominent positioniert",
+      "Line-Art Icons als einheitliches visuelles System",
+      "9 Seiten für breites Sortiment — gute Abdeckung",
+      "Polaroid-Stil bei Fotos als erkennbares Gestaltungselement"
+    ],
+    "weaknesses": [
+      "Keine CTAs auf der gesamten Startseite",
+      "Keine Produktpreise oder Deals sichtbar",
+      "Keine Benefit-Texte oder USPs",
+      "Keine Neuheiten-Highlights auf der Startseite",
+      "Icons ohne Hover/Click-Affordance — unklar ob klickbar",
+      "Kein Social Proof von Kunden (nur Amazon-Metriken)"
+    ]
+  }
+}

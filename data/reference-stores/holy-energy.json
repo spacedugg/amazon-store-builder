@@ -1,0 +1,239 @@
+{
+  "brandName": "HOLY Energy",
+  "storeUrl": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F0843B226E4",
+  "category": "food",
+  "qualityScore": 4,
+  "analyzedAt": "2026-04-01",
+  "ci": {
+    "primaryColors": [
+      "#ff69b4",
+      "#00bfff",
+      "#ffd700"
+    ],
+    "accentColors": [
+      "#ff6347",
+      "#7fff00",
+      "#ff1493",
+      "#40e0d0"
+    ],
+    "imageStyle": "Gen-Z Pop-Art. Extrem bunte Pastell-Hintergrundfarben (Pink, Blau, Grün, Gelb). Cartoon-Mascots auf jeder Dose (Hai, Zitrone, Geist). Produkte werden mit passenden Früchten und Stickern arrangiert. Retro-Checkered Pattern auf einigen Elementen. Flat-Lay-Fotografie mit spielerischem Charakter.",
+    "typographyStyle": "Bold Uppercase Sans-Serif mit Retro-Vibes: 'DIE SOFTDRINK REVOLUTION', 'STARTER-SET DELUXE'. Weiß oder Schwarz auf bunten Hintergründen. Kategorielabels: BESTSELLER, HOLY ENERGY, HOLY ICED TEA, HOLY HYDRATION. HOLY-Logo: gelbes Oval mit schwarzem Bold-Text.",
+    "tonality": "Jung, frech, spaßig. 'Die Softdrink Revolution' als Marken-Claim. 'Alle HOLY Bestseller probieren'. Du-Ansprache. Gaming/Pop-Kultur-Ästhetik. Cartoon-Figuren als Markenbotschafter.",
+    "ciConsistency": 4,
+    "consistencyNotes": "Konsistente Cartoon-Pop-Ästhetik über alle Kacheln. Jede Produktlinie hat eigene Farbe und eigenes Maskottchen. Sticker/Badge-Elemente wiederholen sich. Leichter Konsistenz-Bruch: Product Grid ist Standard-Amazon."
+  },
+  "navigation": {
+    "pageCount": 13,
+    "structurePrinciple": "Nach Produktlinie: Energy, Iced Tea, Hydration, Milkshakes. Plus: Bestseller, Starter Sets, Shaker, Probier-Boxen, Adventskalender, Über uns, Für Neueinsteiger.",
+    "pages": [
+      {
+        "name": "Startseite",
+        "url": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F0843B226E4"
+      },
+      {
+        "name": "Für Neueinsteiger",
+        "url": "https://www.amazon.de/stores/page/NEUEINSTEIGER"
+      },
+      {
+        "name": "Bestseller",
+        "url": "https://www.amazon.de/stores/page/BESTSELLER"
+      },
+      {
+        "name": "Energy",
+        "url": "https://www.amazon.de/stores/page/ENERGY"
+      },
+      {
+        "name": "Iced Tea",
+        "url": "https://www.amazon.de/stores/page/ICEDTEA"
+      },
+      {
+        "name": "Hydration",
+        "url": "https://www.amazon.de/stores/page/HYDRATION"
+      },
+      {
+        "name": "Milkshakes",
+        "url": "https://www.amazon.de/stores/page/MILKSHAKES"
+      },
+      {
+        "name": "Starter Sets",
+        "url": "https://www.amazon.de/stores/page/STARTER"
+      },
+      {
+        "name": "Shaker",
+        "url": "https://www.amazon.de/stores/page/SHAKER"
+      },
+      {
+        "name": "Probier-Boxen",
+        "url": "https://www.amazon.de/stores/page/PROBIERBOXEN"
+      },
+      {
+        "name": "Adventskalender",
+        "url": "https://www.amazon.de/stores/page/ADVENT"
+      },
+      {
+        "name": "Über uns",
+        "url": "https://www.amazon.de/stores/page/UEBER"
+      }
+    ]
+  },
+  "heroImage": {
+    "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/holy-hero.jpeg",
+    "description": "Bunter Hintergrund mit Checkered-Pattern. 'DIE SOFTDRINK REVOLUTION' in weißer Bold-Schrift links. Rechts: HOLY Produkte (Dosen, Shaker, Boxen) mit Cartoon-Stickern und bunten Elementen. Pop-Art-Ästhetik.",
+    "textOnImage": {
+      "headline": "DIE SOFTDRINK REVOLUTION",
+      "subtext": "",
+      "cta": ""
+    },
+    "colorMood": "Bunt, Pop-Art, Retro-Checkered",
+    "designElements": "Checkered Pattern, Cartoon-Sticker, bunte Produktgruppe"
+  },
+  "pages": [
+    {
+      "name": "Startseite",
+      "url": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F0843B226E4",
+      "moduleCount": 4,
+      "modules": [
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 1,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Starter-Set-Deluxe-Banner.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Gelb-gestreifter Hintergrund. Links: 'STARTER-SET DELUXE' Bold + 'Alle HOLY Bestseller probieren, HOLY Energy, HOLY Iced Tea & HOLY Hydration, 42 Portionen inkl. Shaker'. Rechts: Starter-Set Box mit bunten Sachets und Shaker.",
+              "textOnImage": {
+                "headline": "STARTER-SET DELUXE",
+                "subtext": "Alle HOLY Bestseller probieren",
+                "cta": ""
+              },
+              "colorMood": "Gelb, bunt, einladend",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "4grid-lg",
+          "position": 2,
+          "tileCount": 4,
+          "visualConnection": "4-Tile Kategorie-Row mit je einer bunten Farbe pro Produktlinie.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Blauer Hintergrund. HOLY Produkte mit Shaker. 'BESTSELLER' Label unten.",
+              "textOnImage": {
+                "headline": "BESTSELLER",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Blau, energetisch",
+              "tilePosition": 1,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Pink/rosa Hintergrund. HOLY Energy Dose mit Shaker und Stickern. 'HOLY ENERGY' Label.",
+              "textOnImage": {
+                "headline": "HOLY ENERGY",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Pink, verspielt",
+              "tilePosition": 2,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Grüner Hintergrund. HOLY Iced Tea Dose mit Birne und Apfel. 'HOLY ICED TEA' Label.",
+              "textOnImage": {
+                "headline": "HOLY ICED TEA",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Grün, fruchtig",
+              "tilePosition": 3,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Pink/Grapefruit Hintergrund. HOLY Hydration mit Shaker. 'HOLY HYDRATION' Label.",
+              "textOnImage": {
+                "headline": "HOLY HYDRATION",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Pink/Grapefruit",
+              "tilePosition": 4,
+              "tileSize": "Small Square",
+              "tileDimensions": "750x750"
+            }
+          ]
+        },
+        {
+          "type": "product_grid",
+          "layoutId": "product_grid",
+          "position": 3,
+          "tileCount": 0,
+          "tiles": [],
+          "note": "Produktgrid mit ~6 Produkten: Starter Set Trio (49,99€), Strawberry Shark Energy (39,99€), Lemon Hydration (39,99€). Standard Amazon-Karten mit hohen Bewertungen (4.4-4.6)."
+        }
+      ],
+      "pageTexts": {
+        "headlines": [
+          "DIE SOFTDRINK REVOLUTION",
+          "STARTER-SET DELUXE",
+          "BESTSELLER",
+          "HOLY ENERGY",
+          "HOLY ICED TEA",
+          "HOLY HYDRATION"
+        ],
+        "descriptions": [
+          "Alle HOLY Bestseller probieren",
+          "HOLY Energy, HOLY Iced Tea & HOLY Hydration",
+          "42 Portionen inkl. Shaker"
+        ],
+        "ctas": [],
+        "nativeTexts": []
+      }
+    }
+  ],
+  "analysis": {
+    "ciImplementation": "Sehr starke Gen-Z-CI. Jede Produktlinie hat eigenes Farbschema und Maskottchen. Pop-Art/Retro-Ästhetik ist zu 100% konsistent. HOLY-Logo erscheint überall. Cartoon-Charaktere als Wiedererkennungsmerkmal.",
+    "imageLanguage": "Pop-Art Flat-Lay. Produkte auf knallbunten monochromen Hintergründen. Cartoon-Mascots (Hai, Geist, etc.) als Branding-Element auf den Dosen. Retro-Sticker und Checkered Patterns. Früchte als Geschmacks-Visualisierung. Kein einziges Lifestyle-Foto mit echten Menschen.",
+    "storytelling": "Einfach und direkt: Hero → Starter Set (Einstieg) → 4 Kategorien → Produkte. Neueinsteiger-Seite als separates Onboarding.",
+    "moduleFlow": "Full Width Starter Set → 4grid-lg Kategorien → Product Grid",
+    "subpageLogic": "13 Seiten. Nach Produktlinie: Energy, Iced Tea, Hydration, Milkshakes. Plus Starter Sets, Probier-Boxen (Einstieg), Adventskalender (saisonal), Über uns. 'Für Neueinsteiger' als Onboarding-Seite.",
+    "conversionElements": [
+      "Starter-Set als erstes Modul — perfekter Einstieg für Neukunden",
+      "Probier-Boxen als niedrigschwelliger Einstieg",
+      "Für Neueinsteiger Seite als geführtes Onboarding"
+    ],
+    "copywritingAnalysis": "Kurz und punchy. 'DIE SOFTDRINK REVOLUTION' (Marken-Claim). 'STARTER-SET DELUXE' (Premium-Einstieg). Kategorien in HOLY ENERGY/ICED TEA/HYDRATION (Produktnamen=Headlines). Wenig Text, die bunten Bilder sprechen für sich.",
+    "strengths": [
+      "Extrem wiedererkennbare Gen-Z-Ästhetik mit Cartoon-Mascots",
+      "Starter-Set als Einstiegsangebot prominent platziert",
+      "Jede Produktlinie hat eigene Farbwelt — sofortige Orientierung",
+      "'Für Neueinsteiger' als eigene Seite zeigt Onboarding-Fokus",
+      "Pop-Art-Design differenziert sich stark von anderen Supplement-Stores"
+    ],
+    "weaknesses": [
+      "Nur 3-4 Module auf der Startseite — Potenzial für mehr Content",
+      "Keine Benefit-Texte (Inhaltsstoffe, Wirkung, etc.)",
+      "Keine Lifestyle-Fotos — nur Produkt-Flat-Lays",
+      "Kein Video-Content trotz starker visueller Identität",
+      "Kein Social Proof auf der Startseite"
+    ]
+  }
+}

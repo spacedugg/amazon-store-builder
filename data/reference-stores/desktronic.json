@@ -1,0 +1,334 @@
+{
+  "brandName": "Desktronic",
+  "storeUrl": "https://www.amazon.de/stores/Desktronic/page/1A862649-6CEA-4E30-855F-0C27A1F99A6C",
+  "category": "office",
+  "qualityScore": 4,
+  "analyzedAt": "2026-04-01",
+  "ci": {
+    "primaryColors": [
+      "#2d2d2d",
+      "#ffffff",
+      "#f5f0e8"
+    ],
+    "accentColors": [
+      "#5b5fc7",
+      "#c8c8c8",
+      "#d4a574"
+    ],
+    "imageStyle": "Premium Home-Office. Warme Lifestyle-Fotografie in stilvollen Wohnräumen. Natürliches Licht, Holztöne, Pflanzen. Produkte im Raumkontext: Frau am Stehschreibtisch, Person im ergonomischen Stuhl. Zubehör-Kacheln: Clean-Produktfotos auf weißem Hintergrund. Video-Content für Produktpräsentation.",
+    "typographyStyle": "Serifenlose Versalien für Produktnamen: HOME ONE, SIT ONE. Elegante Sans-Serif für Beschreibungen. Lila/violette CTAs: 'Mehr Erfahren →', 'Produkte ansehen'. DESKTRONIC Logo mit O als Punkt-Icon.",
+    "tonality": "Premium, minimalistisch, benefit-orientiert. 'Arbeite bequem' als Claim. 'Höhenverstellbarer Schreibtisch, der die Erwartungen übertrifft.' 'Die Neudefinition von Komfort und Wert in einem ergonomischen Stuhl.' Sie-/formal-frei, sachlich-elegant.",
+    "ciConsistency": 4,
+    "consistencyNotes": "Konsistente warme Premium-Ästhetik. Lila CTAs durchgängig. Lifestyle-Fotos und Produktfotos gut gemischt. Leichter Stilbruch bei Zubehör (reine Produktfotos vs. Lifestyle)."
+  },
+  "navigation": {
+    "pageCount": 7,
+    "structurePrinciple": "Nach Produktlinie: HomeOne/HomePro Schreibtische, SitOne/SitPro Bürostühle, Zubehör, Alle Produkte.",
+    "pages": [
+      {
+        "name": "Startseite",
+        "url": "https://www.amazon.de/stores/Desktronic/page/1A862649-6CEA-4E30-855F-0C27A1F99A6C"
+      },
+      {
+        "name": "HomeOne Schreibtisch",
+        "url": "https://www.amazon.de/stores/page/HOMEONE"
+      },
+      {
+        "name": "HomePro Schreibtisch",
+        "url": "https://www.amazon.de/stores/page/HOMEPRO"
+      },
+      {
+        "name": "SitOne Bürostuhl",
+        "url": "https://www.amazon.de/stores/page/SITONE"
+      },
+      {
+        "name": "SitPro Bürostuhl",
+        "url": "https://www.amazon.de/stores/page/SITPRO"
+      },
+      {
+        "name": "Zubehör",
+        "url": "https://www.amazon.de/stores/page/ZUBEHOER"
+      },
+      {
+        "name": "Alle Produkte",
+        "url": "https://www.amazon.de/stores/page/ALLE"
+      }
+    ]
+  },
+  "heroImage": {
+    "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/desktronic-hero.jpeg",
+    "description": "Dunkelgrauer Hintergrund. 'DESKTRONIC' Logo zentriert in weißer Schrift mit O-Punkt-Icon. Darunter: 'Arbeite bequem' als Claim.",
+    "textOnImage": {
+      "headline": "DESKTRONIC",
+      "subtext": "Arbeite bequem",
+      "cta": ""
+    },
+    "colorMood": "Dunkelgrau, minimalistisch, premium",
+    "designElements": "Zentriertes Logo + Claim auf dunklem Hintergrund"
+  },
+  "pages": [
+    {
+      "name": "Startseite",
+      "url": "https://www.amazon.de/stores/Desktronic/page/1A862649-6CEA-4E30-855F-0C27A1F99A6C",
+      "moduleCount": 6,
+      "modules": [
+        {
+          "type": "editorial_row",
+          "layoutId": "std-2equal",
+          "position": 1,
+          "tileCount": 2,
+          "visualConnection": "Zwei Hauptkategorien: Schreibtisch (HOME ONE) links, Bürostuhl (SIT ONE) rechts.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Frau steht am höhenverstellbaren Schreibtisch HOME ONE. Warmes Licht, stilvolles Wohnzimmer. 'HOME ONE' Label. 'Höhenverstellbarer Schreibtisch, der die Erwartungen übertrifft.' 'Produkte ansehen' Button.",
+              "textOnImage": {
+                "headline": "HOME ONE",
+                "subtext": "Höhenverstellbarer Schreibtisch, der die Erwartungen übertrifft.",
+                "cta": "Produkte ansehen"
+              },
+              "colorMood": "Warm, wohnlich, golden",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "lifestyle",
+              "description": "Person sitzt im ergonomischen Stuhl SIT ONE am Schreibtisch. Modernes Zimmer. 'SIT ONE' Label. 'Die Neudefinition von Komfort und Wert in einem ergonomischen Stuhl.' 'Produkte ansehen' Button.",
+              "textOnImage": {
+                "headline": "SIT ONE",
+                "subtext": "Die Neudefinition von Komfort und Wert in einem ergonomischen Stuhl.",
+                "cta": "Produkte ansehen"
+              },
+              "colorMood": "Warm, modern, einladend",
+              "tilePosition": 2,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            }
+          ]
+        },
+        {
+          "type": "video",
+          "layoutId": "1",
+          "position": 2,
+          "tileCount": 1,
+          "tiles": [
+            {
+              "tileType": "video",
+              "imageCategory": "lifestyle",
+              "description": "Full-Width Video: Frau arbeitet an Desktronic Schreibtisch. Warme Töne, Pflanzen, stilvolles Home-Office.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Warm, natürlich, lifestyle",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "std-2equal",
+          "position": 3,
+          "tileCount": 2,
+          "visualConnection": "Zwei Produkt-Freisteller: Schreibtische in verschiedenen Farben.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Schwarzer höhenverstellbarer Schreibtisch. Clean Freisteller auf weißem Hintergrund.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Weiß, clean, minimal",
+              "tilePosition": 1,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Weißer höhenverstellbarer Schreibtisch. Clean Freisteller auf weißem Hintergrund.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Weiß, clean, minimal",
+              "tilePosition": 2,
+              "tileSize": "Large Square",
+              "tileDimensions": "1500x1500"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 4,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Section Header: 'Zubehör' (impliziert).",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "text_image",
+              "description": "Grauer Hintergrund-Balken als Trenner.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Grau, Trenner",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "2x2wide",
+          "position": 5,
+          "tileCount": 4,
+          "visualConnection": "4 Zubehör-Kacheln: Kabelkanal, Tischplatten, Monitorhalterung, Schublade.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Schwarzer Kabelkanal. Produktfoto auf hellem Hintergrund. 'Kabelkanal' Label. 'Mehr Erfahren →' lila Button.",
+              "textOnImage": {
+                "headline": "Kabelkanal",
+                "subtext": "",
+                "cta": "Mehr Erfahren"
+              },
+              "colorMood": "Hell, clean",
+              "tilePosition": 1,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Verschiedene Tischplatten in Holz/Weiß. 'Tischplatten' Label. Lila Button.",
+              "textOnImage": {
+                "headline": "Tischplatten",
+                "subtext": "",
+                "cta": "Mehr Erfahren"
+              },
+              "colorMood": "Warm, Holztöne",
+              "tilePosition": 2,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Monitorhalterung Freisteller. 'Monitorhalterung' Label. Lila Button.",
+              "textOnImage": {
+                "headline": "Monitorhalterung",
+                "subtext": "",
+                "cta": "Mehr Erfahren"
+              },
+              "colorMood": "Hell, technisch",
+              "tilePosition": 3,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            },
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Schublade für Schreibtisch. 'Schublade' Label. Lila Button.",
+              "textOnImage": {
+                "headline": "Schublade",
+                "subtext": "",
+                "cta": "Mehr Erfahren"
+              },
+              "colorMood": "Dunkel, minimal",
+              "tilePosition": 4,
+              "tileSize": "Wide",
+              "tileDimensions": "1500x750"
+            }
+          ]
+        },
+        {
+          "type": "editorial_row",
+          "layoutId": "1",
+          "position": 6,
+          "tileCount": 1,
+          "visualConnection": "Full-Width Abschluss: Detailaufnahme Tischplattenoberfläche.",
+          "tiles": [
+            {
+              "tileType": "image",
+              "imageCategory": "product",
+              "description": "Extreme Nahaufnahme der Holz-Tischplattenoberfläche. Detail-Textur. Premium-Qualitätseindruck.",
+              "textOnImage": {
+                "headline": "",
+                "subtext": "",
+                "cta": ""
+              },
+              "colorMood": "Warm, Holzmaserung, Detail",
+              "tilePosition": 1,
+              "tileSize": "Full Width",
+              "tileDimensions": "3000x600"
+            }
+          ]
+        }
+      ],
+      "pageTexts": {
+        "headlines": [
+          "DESKTRONIC",
+          "HOME ONE",
+          "SIT ONE"
+        ],
+        "descriptions": [
+          "Arbeite bequem",
+          "Höhenverstellbarer Schreibtisch, der die Erwartungen übertrifft.",
+          "Die Neudefinition von Komfort und Wert in einem ergonomischen Stuhl."
+        ],
+        "ctas": [
+          "Produkte ansehen",
+          "Mehr Erfahren"
+        ],
+        "nativeTexts": [
+          "Kabelkanal",
+          "Tischplatten",
+          "Monitorhalterung",
+          "Schublade"
+        ]
+      }
+    }
+  ],
+  "analysis": {
+    "ciImplementation": "Gute CI mit minimalistischer Premium-Ästhetik. Dunkel/Weiß/Warm als Palette. Lila CTAs als einziges Farbelement. Lifestyle-Fotografie zeigt Produkte in stilvollen Wohnräumen.",
+    "imageLanguage": "Mix aus warmer Lifestyle-Fotografie (Home-Office-Szenen) und cleanen Produkt-Freistellern (Zubehör). Warm-goldenes Licht in Lifestyle-Shots. Detail-Foto als Abschluss zeigt Materialqualität. Video-Content als Highlight.",
+    "storytelling": "Produkt-first: Hauptprodukte (Tisch+Stuhl) → Video → Freisteller → Zubehör → Detail. Einfache Struktur für überschaubares Sortiment.",
+    "moduleFlow": "std-2equal (Tisch + Stuhl) → Full Width Video → std-2equal Freisteller → Trenner → 2x2 Zubehör → Full Width Detail",
+    "subpageLogic": "7 Seiten. Zwei Tisch-Modelle (HomeOne, HomePro), zwei Stuhl-Modelle (SitOne, SitPro), plus Zubehör und Alle Produkte.",
+    "conversionElements": [
+      "Video-Content für Produktpräsentation",
+      "Lila 'Mehr Erfahren' CTAs auf Zubehör-Kacheln",
+      "Lifestyle-Fotos zeigen Produktanwendung"
+    ],
+    "copywritingAnalysis": "Minimalistisch-benefit. 'Arbeite bequem' als 2-Wort-Claim. Benefit-Claims: 'übertrifft Erwartungen', 'Neudefinition von Komfort'. Wenig Text — die Bilder sprechen. Produktnamen als One/Pro-System für einfache Hierarchie.",
+    "strengths": [
+      "Video-Content als einziges analysiertes Store mit Video in dieser Kategorie",
+      "Warme Lifestyle-Fotografie schafft Wohnzimmer-Atmosphäre",
+      "Klare One/Pro-Nomenklatur für Produkthierarchie",
+      "Detail-Foto der Tischplatte zeigt Materialqualität",
+      "Lila CTAs als differenzierendes Farbelement"
+    ],
+    "weaknesses": [
+      "Kein Social Proof (Bewertungen, Zertifikate)",
+      "Keine Benefit-Icons oder USPs",
+      "Keine Größen-/Konfigurationsberatung",
+      "Produkt-Freisteller ohne Text wirken wie Platzhalter",
+      "Kein Follow-CTA oder Community-Element"
+    ]
+  }
+}
