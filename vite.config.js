@@ -2,8 +2,20 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  plugins: [react()],
-  // Note: /api/ endpoints are Vercel serverless functions.
-  // For local development, use "vercel dev" instead of "vite dev".
-  // Or deploy to Vercel where /api/ works automatically.
+  plugins: [
+    react(),
+    {
+      name: 'copy-data-folder',
+      closeBundle: async function() {
+        var fs = await import('fs');
+        var path = await import('path');
+        var src = path.resolve(process.cwd(), 'data');
+        var dest = path.resolve(process.cwd(), 'dist/data');
+        if (fs.existsSync(src)) {
+          fs.cpSync(src, dest, { recursive: true });
+          console.log('Copied data/ to dist/data/');
+        }
+      }
+    }
+  ],
 })
