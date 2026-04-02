@@ -44,7 +44,7 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
   var [existingStoreUrlError, setExistingStoreUrlError] = useState('');
   var [existingStoreMode, setExistingStoreMode] = useState('optimize');
   var [driveUrl, setDriveUrl] = useState(googleDriveUrl || '');
-  var [referenceCategory, setReferenceCategory] = useState('generic');
+  // referenceCategory removed — store design is brand-specific, not category-specific
   var [enableCIDetection, setEnableCIDetection] = useState(false);
   var [storytellingType, setStorytellingType] = useState('automatic');
   var fileRef = useRef(null);
@@ -378,23 +378,7 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
           <option value="fr">Amazon.fr (France)</option>
         </select>
 
-        {/* 4b. Reference Category */}
-        <label className="label" style={{ marginTop: 10 }}>4b. Referenz-Kategorie (optional)</label>
-        <select value={referenceCategory} onChange={function(e) { setReferenceCategory(e.target.value); }} className="input">
-          <option value="generic">Allgemein (Standard)</option>
-          <option value="supplements">Nahrungsergänzung</option>
-          <option value="food">Lebensmittel & Getränke</option>
-          <option value="home_kitchen">Haus & Küche</option>
-          <option value="fashion">Mode & Kleidung</option>
-          <option value="beauty">Beauty & Körperpflege</option>
-          <option value="health">Gesundheit & Wellness</option>
-          <option value="sports">Sport & Outdoor</option>
-          <option value="office">Büro & Arbeit</option>
-          <option value="pets">Haustiere</option>
-          <option value="electronics">Elektronik</option>
-          <option value="tools">Werkzeuge</option>
-        </select>
-        <div className="hint">Wählen Sie eine Produktkategorie aus, um kategoriespezifische Stil-Hinweise und Referenzstores zu laden.</div>
+        {/* 4b. Reference Category — removed, store design is brand-specific */}
 
         {/* 4c. CI Detection Toggle */}
         <label className="label" style={{ marginTop: 10 }}>4c. CI-Erkennung</label>
@@ -640,7 +624,7 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
                 referenceStoreUrls: referenceStoreUrls.filter(function(u) { return u.trim() && !validateStoreUrl(u); }),
                 existingStoreUrl: existingStoreUrl.trim() && !validateStoreUrl(existingStoreUrl) ? existingStoreUrl.trim() : null,
                 existingStoreMode: existingStoreMode,
-                referenceCategory: referenceCategory,
+                // referenceCategory removed
                 enableCIDetection: enableCIDetection,
                 storytellingType: storytellingType,
               });
