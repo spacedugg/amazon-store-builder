@@ -80,6 +80,19 @@ export default function Wireframe({ tile, width, viewMode, bgColor }) {
         </g>
       )}
 
+      {/* Hotspot dots for shoppable_image */}
+      {isShoppable && (tile.hotspots || []).length > 0 && (tile.hotspots || []).map(function(hs, i) {
+        var cx = (hs.x || 0) / 100 * w;
+        var cy = (hs.y || 0) / 100 * ht;
+        return (
+          <g key={i}>
+            <circle cx={cx} cy={cy} r={5} fill="#111827" opacity=".7" />
+            <circle cx={cx} cy={cy} r={3.5} fill="#111827" opacity=".9" />
+            <circle cx={cx} cy={cy} r={1.8} fill="#fff" />
+          </g>
+        );
+      })}
+
       {/* Image category badge */}
       {tile.imageCategory && CATEGORY_BADGE_COLORS[tile.imageCategory] && (
         <g>

@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES } from '../constants';
+import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, MAX_HOTSPOTS } from '../constants';
 import { t } from '../i18n';
 
 // Toggle **bold** around selected text or at cursor
@@ -253,12 +253,76 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
             </div>
           </div>
 
-          {/* Link / ASIN */}
+          {/* Link / ASIN (single click-target for the whole image) */}
           <div className="props-section">
             <label className="label">{t('props.linkAsin', uiLang)}</label>
             <input value={tile.linkAsin || ''} onChange={function(e) { u('linkAsin', e.target.value.trim()); }}
               className="input input-mono" placeholder="B0XXXXXXXXXX" />
           </div>
+
+          {/* HOTSPOTS — only for shoppable_image */}
+          {tile.type === 'shoppable_image' && (
+            <div className="props-section">
+              <label className="label">Hotspots (max {MAX_HOTSPOTS})</label>
+              <div className="hint" style={{ marginBottom: 8, color: '#b45309', fontWeight: 600 }}>
+                ⚠ Hotspots and CTA buttons are Amazon UI overlays — NOT part of the image design!
+                The designer must NOT include hotspot dots or CTA buttons in the image itself.
+              </div>
+              {(tile.hotspots || []).map(function(hs, idx) {
+                return (
+                  <div key={idx} style={{ display: 'flex', gap: 4, alignItems: 'center', marginBottom: 6, padding: 6, background: '#fef3c7', borderRadius: 6 }}>
+                    <span style={{ fontSize: 11, fontWeight: 700, color: '#92400e', minWidth: 16 }}>{idx + 1}</span>
+                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 3 }}>
+                      <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
+                        <label style={{ fontSize: 10, color: '#78716c', minWidth: 14 }}>X%</label>
+                        <input type="number" min="0" max="100" value={hs.x || 0}
+                          onChange={function(e) {
+                            var updated = (tile.hotspots || []).slice();
+                            updated[idx] = Object.assign({}, hs, { x: Math.min(100, Math.max(0, parseInt(e.target.value) || 0)) });
+                            u('hotspots', updated);
+                          }}
+                          className="input input-mono" style={{ width: 50, fontSize: 11 }} />
+                        <label style={{ fontSize: 10, color: '#78716c', minWidth: 14 }}>Y%</label>
+                        <input type="number" min="0" max="100" value={hs.y || 0}
+                          onChange={function(e) {
+                            var updated = (tile.hotspots || []).slice();
+                            updated[idx] = Object.assign({}, hs, { y: Math.min(100, Math.max(0, parseInt(e.target.value) || 0)) });
+                            u('hotspots', updated);
+                          }}
+                          className="input input-mono" style={{ width: 50, fontSize: 11 }} />
+                      </div>
+                      <input value={hs.asin || ''} placeholder="ASIN (B0XXXXXXXXXX)"
+                        onChange={function(e) {
+                          var updated = (tile.hotspots || []).slice();
+                          updated[idx] = Object.assign({}, hs, { asin: e.target.value.trim() });
+                          u('hotspots', updated);
+                        }}
+                        className="input input-mono" style={{ fontSize: 11 }} />
+                    </div>
+                    <button className="btn" style={{ fontSize: 10, padding: '2px 6px', color: '#dc2626' }}
+                      onClick={function() {
+                        var updated = (tile.hotspots || []).slice();
+                        updated.splice(idx, 1);
+                        u('hotspots', updated);
+                      }}>✕</button>
+                  </div>
+                );
+              })}
+              {(tile.hotspots || []).length < MAX_HOTSPOTS && (
+                <button className="btn" style={{ fontSize: 11, padding: '4px 10px', marginTop: 4 }}
+                  onClick={function() {
+                    var updated = (tile.hotspots || []).slice();
+                    updated.push({ x: 50, y: 50, asin: '' });
+                    u('hotspots', updated);
+                  }}>
+                  + Add Hotspot
+                </button>
+              )}
+              <div className="hint" style={{ marginTop: 6 }}>
+                X/Y = position in % (0=left/top, 100=right/bottom). Each hotspot links to a product variant.
+              </div>
+            </div>
+          )}
 
           {/* Image uploads */}
           {fileUpload(t('props.desktopImage', uiLang), tile.uploadedImage,

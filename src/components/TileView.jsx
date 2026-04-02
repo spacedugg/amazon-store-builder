@@ -93,14 +93,41 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
 
   // image or shoppable_image
   var imgSrc = (viewMode === 'mobile' ? tile.uploadedImageMobile : tile.uploadedImage) || tile.uploadedImage;
+  var hasHotspots = tile.type === 'shoppable_image' && (tile.hotspots || []).length > 0;
   return (
-    <div className={cls} onClick={onClick} style={bgColor ? { background: bgColor } : undefined}>
+    <div className={cls} onClick={onClick} style={Object.assign({ position: 'relative' }, bgColor ? { background: bgColor } : {})}>
       {imgSrc
         ? <img src={imgSrc} className="tile-uploaded-img" alt="" />
         : <Wireframe tile={tile} viewMode={viewMode} bgColor={bgColor} />
       }
       {tile.type === 'shoppable_image' && <div className="tile-shoppable-badge">{t('tile.shoppable', uiLang)}</div>}
       {tile.linkAsin && <div className="tile-link-badge">ASIN: {tile.linkAsin}</div>}
+      {hasHotspots && (tile.hotspots || []).map(function(hs, i) {
+        return (
+          <div key={i} className="tile-hotspot-dot" style={{
+            position: 'absolute',
+            left: (hs.x || 0) + '%',
+            top: (hs.y || 0) + '%',
+            transform: 'translate(-50%, -50%)',
+            width: 18, height: 18,
+            borderRadius: '50%',
+            background: 'rgba(17,24,39,0.75)',
+            border: '2px solid rgba(255,255,255,0.9)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            pointerEvents: 'none',
+            zIndex: 2,
+          }}>
+            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#fff' }} />
+          </div>
+        );
+      })}
+      {hasHotspots && (
+        <div style={{
+          position: 'absolute', bottom: 4, right: 4,
+          background: '#FF9900', color: '#fff', fontSize: 9, fontWeight: 700,
+          padding: '1px 5px', borderRadius: 3, pointerEvents: 'none', zIndex: 2,
+        }}>{(tile.hotspots || []).length} Hotspot{(tile.hotspots || []).length > 1 ? 's' : ''}</div>
+      )}
     </div>
   );
 }

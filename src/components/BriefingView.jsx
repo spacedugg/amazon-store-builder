@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, findLayout } from '../constants';
-import { loadStoreByShareToken, acknowledgeChanges } from '../storage';
+import { loadStoreByShareToken } from '../storage';
 // DOCX export removed — designer doesn't need it
 import SectionView, { getGridConfig } from './SectionView';
 
@@ -34,6 +34,7 @@ function generateMetaDescription(page, store) {
     (sec.tiles || []).forEach(function(tile) {
       (tile.asins || []).forEach(function(a) { pageAsins[a] = true; });
       if (tile.linkAsin) pageAsins[tile.linkAsin] = true;
+      (tile.hotspots || []).forEach(function(hs) { if (hs.asin) pageAsins[hs.asin] = true; });
     });
   });
 
@@ -599,6 +600,24 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
         <div className="briefing-field">
           <span className="briefing-field-label">Link ASIN:</span>
           <span className="briefing-field-value briefing-field-mono">{tile.linkAsin}</span>
+        </div>
+      )}
+
+      {(tile.hotspots || []).length > 0 && (
+        <div className="briefing-field" style={{ flexDirection: 'column', gap: 4 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span className="briefing-field-label" style={{ color: '#92400e' }}>Hotspots ({tile.hotspots.length}):</span>
+            <span style={{ fontSize: 10, color: '#b45309', fontStyle: 'italic' }}>⚠ Amazon UI overlay — do NOT design into the image!</span>
+          </div>
+          {tile.hotspots.map(function(hs, hi) {
+            return (
+              <div key={hi} style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 11, padding: '2px 0', paddingLeft: 8 }}>
+                <span style={{ fontWeight: 700, color: '#92400e', minWidth: 14 }}>{hi + 1}.</span>
+                <span style={{ color: '#78716c' }}>X:{hs.x}% Y:{hs.y}%</span>
+                <span className="briefing-field-mono" style={{ fontSize: 10 }}>{hs.asin || '—'}</span>
+              </div>
+            );
+          })}
         </div>
       )}
 
@@ -1459,7 +1478,7 @@ export default function BriefingView() {
   var [updateBanner, setUpdateBanner] = useState(false);
   var [changeLog, setChangeLog] = useState([]); // [{ time, descriptions[] }]
   var [selectedTile, setSelectedTile] = useState(null); // { sid, ti }
-  var [sidebarTab, setSidebarTab] = useState('design'); // 'design', 'info', or 'ci'
+  var [sidebarTab, setSidebarTab] = useState('design'); // 'design' or 'info'
   var [checks, setChecks] = useState({}); // image completion checkmarks
   var [showPreview, setShowPreview] = useState(false);
   var prevStoreRef = useRef(null);
@@ -1711,7 +1730,6 @@ export default function BriefingView() {
         <div className="briefing-update-banner">
           <div className="briefing-update-banner-header">
             <span className="briefing-update-banner-title">Briefing Updated</span>
-            <button style={{ background: '#16a34a', color: '#fff', border: 'none', borderRadius: 6, padding: '5px 14px', fontSize: 12, fontWeight: 700, cursor: 'pointer', marginRight: 6 }} onClick={function() { setUpdateBanner(false); setChangeHighlights({}); if (token) acknowledgeChanges(token); }}>OK — Gesehen</button>
             <button className="briefing-dismiss-btn" onClick={function() { setUpdateBanner(false); setChangeHighlights({}); }}>Dismiss</button>
           </div>
           {changeLog.length > 0 && (
@@ -1744,11 +1762,6 @@ export default function BriefingView() {
             <button onClick={function() { setSidebarTab('info'); }} style={{ flex: 1, padding: '8px 0', fontSize: 11, fontWeight: 700, background: 'none', border: 'none', cursor: 'pointer', borderBottom: sidebarTab === 'info' ? '2px solid #3b82f6' : '2px solid transparent', color: sidebarTab === 'info' ? '#1d4ed8' : '#94a3b8', marginBottom: -2 }}>
               Store Info
             </button>
-            {store.ciData && (
-              <button onClick={function() { setSidebarTab('ci'); }} style={{ flex: 1, padding: '8px 0', fontSize: 11, fontWeight: 700, background: 'none', border: 'none', cursor: 'pointer', borderBottom: sidebarTab === 'ci' ? '2px solid #f59e0b' : '2px solid transparent', color: sidebarTab === 'ci' ? '#d97706' : '#94a3b8', marginBottom: -2 }}>
-                Brand CI
-              </button>
-            )}
           </div>
 
           {/* ═══ DESIGN TAB ═══ */}
@@ -1856,70 +1869,6 @@ export default function BriefingView() {
                   <div className="briefing-info-row"><span>Last Updated:</span> <strong>{new Date(lastUpdated).toLocaleString('en-US')}</strong></div>
                 )}
               </div>
-            </div>
-          )}
-
-          {/* ═══ BRAND CI TAB ═══ */}
-          {sidebarTab === 'ci' && store.ciData && (
-            <div style={{ padding: '0 8px' }}>
-              <div style={{ background: '#fffbeb', borderRadius: 8, padding: '12px 14px', marginBottom: 10 }}>
-                <div style={{ fontSize: 13, fontWeight: 700, color: '#92400e', marginBottom: 8 }}>Brand Identity (Website)</div>
-                {store.ciData.websiteUrl && (
-                  <div style={{ fontSize: 11, marginBottom: 6 }}>
-                    <span style={{ color: '#78716c' }}>Source:</span>{' '}
-                    <a href={store.ciData.websiteUrl} target="_blank" rel="noopener noreferrer" style={{ color: '#2563eb', textDecoration: 'underline' }}>{store.ciData.websiteUrl}</a>
-                  </div>
-                )}
-                {store.ciData.title && (
-                  <div style={{ fontSize: 12, marginBottom: 4 }}><strong>Title:</strong> {store.ciData.title}</div>
-                )}
-                {store.ciData.description && (
-                  <div style={{ fontSize: 12, marginBottom: 8, color: '#57534e' }}>{store.ciData.description}</div>
-                )}
-              </div>
-
-              {store.ciData.certifications && store.ciData.certifications.length > 0 && (
-                <div style={{ background: '#ecfdf5', borderRadius: 8, padding: '10px 14px', marginBottom: 10 }}>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: '#166534', marginBottom: 6 }}>Certifications</div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-                    {store.ciData.certifications.map(function(cert, ci) {
-                      return <span key={ci} style={{ background: '#bbf7d0', color: '#14532d', fontSize: 11, padding: '2px 8px', borderRadius: 12, fontWeight: 600 }}>{cert}</span>;
-                    })}
-                  </div>
-                </div>
-              )}
-
-              {store.ciData.features && store.ciData.features.length > 0 && (
-                <div style={{ background: '#eff6ff', borderRadius: 8, padding: '10px 14px', marginBottom: 10 }}>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: '#1e40af', marginBottom: 6 }}>Features / USPs</div>
-                  {store.ciData.features.map(function(feat, fi) {
-                    return <div key={fi} style={{ fontSize: 11, color: '#1e3a5f', padding: '2px 0', borderBottom: fi < store.ciData.features.length - 1 ? '1px solid #dbeafe' : 'none' }}>{feat}</div>;
-                  })}
-                </div>
-              )}
-
-              {store.ciData.aboutText && (
-                <div style={{ background: '#fff7ed', borderRadius: 8, padding: '10px 14px', marginBottom: 10 }}>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: '#9a3412', marginBottom: 6 }}>Brand Story</div>
-                  <div style={{ fontSize: 11, color: '#78350f', lineHeight: 1.5 }}>{store.ciData.aboutText}</div>
-                </div>
-              )}
-
-              {store.ciData.socialProof && store.ciData.socialProof.length > 0 && (
-                <div style={{ background: '#fefce8', borderRadius: 8, padding: '10px 14px', marginBottom: 10 }}>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: '#854d0e', marginBottom: 6 }}>Social Proof</div>
-                  {store.ciData.socialProof.map(function(sp, si) {
-                    return <div key={si} style={{ fontSize: 11, color: '#713f12', padding: '4px 0', fontStyle: 'italic', borderBottom: si < store.ciData.socialProof.length - 1 ? '1px solid #fef08a' : 'none' }}>"{sp}"</div>;
-                  })}
-                </div>
-              )}
-
-              {store.brandTone && (
-                <div style={{ background: '#f5f3ff', borderRadius: 8, padding: '10px 14px', marginBottom: 10 }}>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: '#5b21b6', marginBottom: 4 }}>Brand Tone</div>
-                  <div style={{ fontSize: 12, color: '#6d28d9', fontWeight: 600 }}>{store.brandTone}</div>
-                </div>
-              )}
             </div>
           )}
         </div>
