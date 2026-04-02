@@ -82,6 +82,7 @@ module.exports = async function handler(req, res) {
         brandName: row.brand_name,
         createdAt: row.created_at,
         updatedAt: row.updated_at,
+        changesAcknowledgedAt: row.changes_acknowledged_at || null,
         data: JSON.parse(row.data),
         readOnly: true,
       });
