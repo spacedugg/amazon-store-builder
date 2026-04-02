@@ -37,6 +37,7 @@ function generatePageMetaDescription(page, store) {
     (sec.tiles || []).forEach(function(tile) {
       (tile.asins || []).forEach(function(a) { pageAsins[a] = true; });
       if (tile.linkAsin) pageAsins[tile.linkAsin] = true;
+      (tile.hotspots || []).forEach(function(hs) { if (hs.asin) pageAsins[hs.asin] = true; });
     });
   });
 
@@ -406,6 +407,24 @@ function tileDescription(tile, tileIndex, productMap, lang, duplicateNote) {
       }
     }
     if (tile.linkAsin) parts.push(boldPara(t('brief.linkAsin', lang) + ': ', tile.linkAsin));
+    if ((tile.hotspots || []).length > 0) {
+      parts.push(new Paragraph({ spacing: { before: 60, after: 20 },
+        children: [
+          new TextRun({ text: 'Hotspots (' + tile.hotspots.length + '):', bold: true, size: 22, color: '92400E' }),
+          new TextRun({ text: '  ⚠ Amazon UI overlay — NOT part of the image design!', size: 20, color: 'B45309', italics: true }),
+        ] }));
+      tile.hotspots.forEach(function(hs, i) {
+        var productName = '';
+        if (hs.asin && productMap && productMap[hs.asin]) productName = ' — ' + (productMap[hs.asin].name || '').slice(0, 40);
+        parts.push(new Paragraph({ spacing: { before: 10, after: 10 },
+          children: [
+            new TextRun({ text: '  ' + (i + 1) + '. ', bold: true, size: 22 }),
+            new TextRun({ text: 'Position: ' + (hs.x || 0) + '% / ' + (hs.y || 0) + '%', size: 22 }),
+            new TextRun({ text: '  ASIN: ' + (hs.asin || '—'), size: 22, font: 'Courier New' }),
+            new TextRun({ text: productName, size: 20, italics: true }),
+          ] }));
+      });
+    }
     if (tile.linkUrl) parts.push(boldPara(t('brief.linkUrl', lang) + ': ', tile.linkUrl));
     parts.push(boldPara(t('brief.desktopImage', lang) + ': ', tile.uploadedImage ? t('brief.uploaded', lang) : t('brief.needsDesign', lang)));
     parts.push(boldPara(t('brief.mobileImage', lang) + ': ', tile.uploadedImageMobile ? t('brief.uploaded', lang) : (tile.uploadedImage ? t('brief.usesDesktop', lang) : t('brief.needsDesign', lang))));

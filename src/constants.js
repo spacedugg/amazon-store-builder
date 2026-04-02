@@ -77,7 +77,7 @@ export var TILE_TYPES = ['image', 'product_grid', 'best_sellers', 'recommended',
 export var TILE_TYPE_LABELS = {
   image: 'Image', product_grid: 'Product Grid (ASIN)', best_sellers: 'Best Sellers',
   recommended: 'Recommended Products', deals: 'Deals / Offers', video: 'Video',
-  text: 'Text (native)', shoppable_image: 'Shoppable Image', image_text: 'Image with Text',
+  text: 'Text (native)', shoppable_image: 'Shoppable Image (Hotspots)', image_text: 'Image with Text',
 };
 
 export var PRODUCT_TILE_TYPES = ['product_grid', 'best_sellers', 'recommended', 'deals'];
@@ -98,6 +98,7 @@ export function emptyTile() {
     type: 'image', brief: '', textOverlay: '', ctaText: '',
     dimensions: { w: 3000, h: 1200 }, mobileDimensions: { w: 1242, h: 1200 },
     asins: [], linkAsin: '', linkUrl: '',
+    hotspots: [], // Array of { x: 0-100, y: 0-100, asin: 'B0...' } — max 5, for shoppable_image tiles
     uploadedImage: null, uploadedImageMobile: null, videoThumbnail: null,
     bgColor: '',
   };
@@ -358,6 +359,12 @@ export var IMAGE_CATEGORY_DECISION_TREE = [
   { question: 'Does it combine 2-3 elements equally (product + text + graphic + maybe lifestyle)?', yes: 'creative' },
 ];
 
+// ─── HOTSPOT RULES ───
+// Shoppable images can have up to 5 hotspots linking to product ASINs.
+// IMPORTANT: Hotspots and CTA buttons are Amazon UI overlays — NOT part of the image design.
+// The designer must NOT design hotspot dots or CTA buttons into the image itself.
+export var MAX_HOTSPOTS = 5;
+
 export var CATEGORY_STYLE_HINTS = {
   generic: { tone: 'neutral, professional', visualStyle: 'clean and versatile', trustFocus: false },
   electronics: { tone: 'technical, innovative, modern', visualStyle: 'dark backgrounds, product renders, tech aesthetic', trustFocus: true },
@@ -386,87 +393,72 @@ export var CATEGORY_STYLE_HINTS = {
 export var COMPLEXITY_LEVELS = {
   1: {
     name: 'Minimal',
-    philosophy: 'Only essential elements. Product display + navigation. No extras.',
-    elements: {
-      hero: true,
-      categoryNavigation: true,
-      productDisplay: true,
-      benefitBanner: 'homepage_only',
-      brandStory: false,
-      lifestyle: false,
-      video: false,
-      followCTA: false,
-      trustElements: false,
-      founderStory: false,
-      certifications: false,
-      extraInfoSections: false,
-    },
+    sectionsPerCategoryPage: { min: 2, max: 3 },
+    sectionsPerHomepage: { min: 3, max: 5 },
     extraPages: false,
-    description: 'Lean and functional. Only necessary elements: hero, category navigation, product grids. No storytelling, no lifestyle imagery, no video. Scale sections with product count — a brand with 1000 products needs more sections than one with 10, but every section must serve a direct purpose (navigation or product display).',
+    includeVideos: false,
+    includeFollowCTA: false,
+    includeTrustElements: false,
+    includeBrandStory: false,
+    description: 'Lean and functional. Focus on conversion with minimal image category variety.',
+    // ─── Tier-specific image category rules ───
     imageCategoryRules: {
-      store_hero: 'required_single',
-      benefit: 'simple_banner_homepage_only',
-      product: 'basic_tiles',
-      creative: 'sparse_or_none',
-      lifestyle: 'none',
-      text_image: 'headings_only',
+      store_hero: 'required_single', // 1 hero for ALL pages, can be simple
+      benefit: 'simple_banner_homepage_only', // Single USP banner, homepage only
+      product: 'basic_tiles', // Simple product tiles
+      creative: 'sparse_or_none', // Sparingly or not at all
+      lifestyle: 'optional', // Not on every page
+      text_image: 'headings_only', // Simple headings and dividers
     },
+    noStorytelling: true,
+    noInfographics: true,
+    noServicePromotions: true,
   },
   2: {
     name: 'Standard',
-    philosophy: 'Professional brand presence. Essential elements plus brand story and trust.',
-    elements: {
-      hero: true,
-      categoryNavigation: true,
-      productDisplay: true,
-      benefitBanner: true,
-      brandStory: true,
-      lifestyle: true,
-      video: 'max_1',
-      followCTA: false,
-      trustElements: true,
-      founderStory: false,
-      certifications: false,
-      extraInfoSections: false,
-    },
+    sectionsPerCategoryPage: { min: 3, max: 5 },
+    sectionsPerHomepage: { min: 5, max: 8 },
     extraPages: true,
-    description: 'Balanced — informative and emotional. Includes brand story, trust elements, lifestyle imagery, and up to 1 video. Extra pages are AI-determined based on brand and products (e.g. Bestsellers, About Us, or any page that fits the brand). Scale sections with product count and brand needs.',
+    extraPageTypes: ['bestsellers', 'about_us'],
+    includeVideos: true,
+    videoMax: 1,
+    includeFollowCTA: false,
+    includeTrustElements: true,
+    includeBrandStory: true,
+    description: 'Balanced — informative and emotional. Professional brand presence with sensible structure.',
     imageCategoryRules: {
-      store_hero: 'required_single_polished',
-      benefit: 'varied_types',
-      product: 'differentiated',
-      creative: 'targeted',
-      lifestyle: 'regular',
-      text_image: 'headings_and_features',
+      store_hero: 'required_single_polished', // 1 hero for all pages, high quality
+      benefit: 'varied_types', // Awards, value grids, occasionally on subpages
+      product: 'differentiated', // Lineups, details, category tiles with CTA
+      creative: 'targeted', // Bestseller banners, new product teasers, feature explanations
+      lifestyle: 'regular', // Regular emotional anchors
+      text_image: 'headings_and_features', // Headings + feature explanations + claims
     },
+    firstStorytellingApproaches: true,
   },
   3: {
     name: 'Premium',
-    philosophy: 'Maximum brand depth. All available elements. Rich storytelling.',
-    elements: {
-      hero: 'individual_per_subpage',
-      categoryNavigation: true,
-      productDisplay: true,
-      benefitBanner: 'category_specific_every_page',
-      brandStory: true,
-      lifestyle: 'pervasive',
-      video: 'max_3',
-      followCTA: true,
-      trustElements: true,
-      founderStory: true,
-      certifications: true,
-      extraInfoSections: true,
-    },
+    sectionsPerCategoryPage: { min: 4, max: 7 },
+    sectionsPerHomepage: { min: 7, max: 12 },
     extraPages: true,
-    description: 'Comprehensive brand presence. Individual hero per subpage, founder stories, follow banners, logo sections, pervasive lifestyle imagery, up to 3 videos, complex layouts, certifications, sustainability info. Extra pages are AI-determined — could be Features, Sustainability, Recipes, Technology, Heritage, FAQ, or anything that fits the brand. Scale sections with product count and brand depth.',
+    extraPageTypes: ['bestsellers', 'about_us', 'features', 'certifications', 'sustainability'],
+    includeVideos: true,
+    videoMax: 3,
+    includeFollowCTA: true,
+    includeTrustElements: true,
+    includeBrandStory: true,
+    includeDetailedShowcases: true,
+    description: 'Comprehensive brand presence with maximum depth, storytelling, and detailed product explanations.',
     imageCategoryRules: {
-      store_hero: 'individual_per_page',
-      benefit: 'category_specific_every_page',
-      product: 'full_range',
-      creative: 'central_element',
-      lifestyle: 'pervasive',
-      text_image: 'full_range',
+      store_hero: 'individual_per_page', // Individual hero per subpage/category
+      benefit: 'category_specific_every_page', // Category-specific benefits on EVERY subpage
+      product: 'full_range', // Single, lineups, details, sets, macro shots
+      creative: 'central_element', // Infographics, exploded views, split layouts, storytelling, service promotions
+      lifestyle: 'pervasive', // On nearly every page, varied scenes and perspectives
+      text_image: 'full_range', // Specs, impact numbers, technical details
     },
+    specialPages: ['about_us', 'technology', 'sustainability'],
+    maxCategoryVariety: true,
   },
 };
 
