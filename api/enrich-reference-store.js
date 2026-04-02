@@ -17,12 +17,13 @@ module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  if (req.method !== 'POST' && req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
 
-  var body = req.body || {};
+  // Support both POST (body) and GET (query params)
+  var body = req.method === 'POST' ? (req.body || {}) : (req.query || {});
   var storeUrl = body.storeUrl;
   var brandName = body.brandName || 'Unknown';
-  var maxImagesPerPage = body.maxImagesPerPage || 20;
+  var maxImagesPerPage = parseInt(body.maxImagesPerPage, 10) || 20;
 
   if (!storeUrl) return res.status(400).json({ error: 'Missing storeUrl' });
   if (!GEMINI_KEY) return res.status(500).json({ error: 'GEMINI_API_KEY not configured' });
