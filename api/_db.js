@@ -60,7 +60,7 @@ async function migrate() {
     },
   ]);
 
-  // Add timer columns if they don't exist (for existing databases)
+  // Add columns if they don't exist (for existing databases)
   try {
     await db.execute({ sql: `ALTER TABLE stores ADD COLUMN timer_seconds INTEGER DEFAULT 0` });
   } catch (e) { /* column already exists */ }
@@ -72,6 +72,9 @@ async function migrate() {
   } catch (e) { /* column already exists */ }
   try {
     await db.execute({ sql: `ALTER TABLE stores ADD COLUMN checks_json TEXT DEFAULT NULL` });
+  } catch (e) { /* column already exists */ }
+  try {
+    await db.execute({ sql: `ALTER TABLE stores ADD COLUMN changes_acknowledged_at TEXT DEFAULT NULL` });
   } catch (e) { /* column already exists */ }
 }
 
