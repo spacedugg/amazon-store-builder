@@ -330,98 +330,153 @@ export async function loadStaticReferenceData(category) {
 // ─── LOAD GEMINI ANALYSES FROM INDIVIDUAL STORE JSONS ───
 // Loads the geminiAnalyses field from each reference store JSON
 // This provides real visual intelligence from Gemini Vision
+// âââ LOAD VISUAL INTELLIGENCE FROM INDIVIDUAL STORE JSONS âââ
+// Loads CI, navigation, page structure, V3 enrichment, and browserCrawl data
+// Uses ALL available data sources: ci, navigation, analysis, pages, geminiVisionV3, browserCrawl
 export async function loadGeminiAnalysesForCategory(category) {
   try {
-    // Load the list of store files from _summary.json meta
     var summaryResp = await fetch('/data/reference-stores/_summary.json');
     if (!summaryResp.ok) return [];
 
     var summary = await summaryResp.json();
     if (!summary || !summary.meta || !summary.meta.stores) return [];
 
-    // Filter by category if specified
+    // Filter by category, always include top-tier stores
     var storeFiles = summary.meta.stores;
     if (category && category !== 'generic') {
-      storeFiles = storeFiles.filter(function(s) { return s.category === category; });
-    }
-    // Also include top-tier stores from other categories (quality 5)
-    if (category && category !== 'generic') {
-      var otherTopStores = summary.meta.stores.filter(function(s) {
-        return s.category !== category && s.qualityScore >= 5;
-      }).slice(0, 3);
-      storeFiles = storeFiles.concat(otherTopStores);
+      var categoryStores = storeFiles.filter(function(s) { return s.category === category; });
+      var otherTopStores = storeFiles.filter(function(s) {
+        return s.category !== category && s.qualityScore >= 4;
+      }).slice(0, 5);
+      storeFiles = categoryStores.concat(otherTopStores);
     }
 
-    var allAnalyses = [];
+    var allStoreData = [];
     for (var i = 0; i < storeFiles.length; i++) {
       try {
         var storeResp = await fetch('/data/reference-stores/' + storeFiles[i].file);
         if (!storeResp.ok) continue;
         var storeData = await storeResp.json();
-        if (storeData.geminiAnalyses && storeData.geminiAnalyses.analyses) {
-          allAnalyses.push({
+
+        // Only include stores that have meaningful data
+        var hasCI = storeData.ci && storeData.ci.primaryColors;
+        var hasPages = storeData.pages && storeData.pages.length > 0;
+        var hasV3 = storeData.geminiVisionV3 && storeData.geminiVisionV3.pages;
+        var hasBrowserCrawl = storeData.browserCrawl && storeData.browserCrawl.pages;
+        var hasNavigation = storeData.navigation && storeData.navigation.pageCount;
+
+        if (hasCI || hasPages || hasV3 || hasBrowserCrawl) {
+          allStoreData.push({
             brandName: storeData.brandName,
             category: storeData.category,
-            qualityScore: storeData.qualityScore,
-            geminiAnalyses: storeData.geminiAnalyses,
+            qualityScore: storeData.qualityScore || 3,
+            ci: storeData.ci || null,
+            navigation: storeData.navigation || null,
+            analysis: storeData.analysis || null,
+            pages: hasPages ? storeData.pages : [],
+            v3: hasV3 ? storeData.geminiVisionV3 : null,
+            browserCrawl: hasBrowserCrawl ? storeData.browserCrawl : null,
           });
         }
       } catch (e) { /* skip this store */ }
     }
 
-    return allAnalyses;
+    return allStoreData;
   } catch (err) {
-    console.error('Error loading Gemini analyses:', err);
+    console.error('Error loading reference store data:', err);
     return [];
   }
 }
 
-// Format Gemini analyses from reference stores for AI prompts
-export function formatGeminiAnalysesContext(storeAnalyses) {
-  if (!storeAnalyses || storeAnalyses.length === 0) return '';
+// Format all reference store intelligence for AI prompts
+export function formatGeminiAnalysesContext(storeDataList) {
+  if (!storeDataList || storeDataList.length === 0) return '';
 
   var parts = [];
-  parts.push('=== VISUAL DESIGN INTELLIGENCE (from Gemini Vision analysis of reference stores) ===');
-  parts.push('These are real image analyses from top-performing Amazon Brand Stores.');
-  parts.push('Use them to understand visual patterns, color usage, and design approaches.');
+  parts.push('=== REFERENCE STORE VISUAL INTELLIGENCE (from ' + storeDataList.length + ' real Amazon Brand Stores) ===');
+  parts.push('Use these as INSPIRATION for structure, visual approach, and design patterns.');
   parts.push('IMPORTANT: Colors are always brand-specific. Do NOT copy colors from other brands.');
   parts.push('');
 
-  for (var i = 0; i < storeAnalyses.length; i++) {
-    var store = storeAnalyses[i];
+  for (var i = 0; i < storeDataList.length; i++) {
+    var store = storeDataList[i];
     parts.push('--- ' + store.brandName + ' (Quality: ' + store.qualityScore + '/5, Category: ' + store.category + ') ---');
 
-    // Aggregated data
-    if (store.geminiAnalyses.aggregated) {
-      var agg = store.geminiAnalyses.aggregated;
-      if (agg.allDominantColors && agg.allDominantColors.length > 0) {
-        parts.push('  Brand Colors: ' + agg.allDominantColors.join(', '));
-      }
-      if (agg.allDesignPatterns && agg.allDesignPatterns.length > 0) {
-        parts.push('  Design Patterns: ' + agg.allDesignPatterns.slice(0, 5).join(', '));
+    // CI data (colors, image style, typography, tonality)
+    if (store.ci) {
+      var ci = store.ci;
+      if (ci.primaryColors) parts.push('  Colors: ' + ci.primaryColors.join(', ') + (ci.accentColors ? ' | Accents: ' + ci.accentColors.join(', ') : ''));
+      if (ci.imageStyle) parts.push('  Image Style: ' + ci.imageStyle.substring(0, 200));
+      if (ci.typographyStyle) parts.push('  Typography: ' + ci.typographyStyle.substring(0, 150));
+      if (ci.tonality) parts.push('  Tonality: ' + ci.tonality.substring(0, 150));
+    }
+
+    // Navigation structure
+    if (store.navigation) {
+      var nav = store.navigation;
+      parts.push('  Pages: ' + (nav.pageCount || 0));
+      if (nav.structurePrinciple) parts.push('  Navigation Logic: ' + nav.structurePrinciple.substring(0, 200));
+    }
+
+    // Analysis insights
+    if (store.analysis) {
+      var an = store.analysis;
+      if (an.ciImplementation) parts.push('  CI Implementation: ' + an.ciImplementation.substring(0, 200));
+      if (an.imageLanguage) parts.push('  Image Language: ' + an.imageLanguage.substring(0, 200));
+      if (an.storytelling) parts.push('  Storytelling: ' + an.storytelling.substring(0, 200));
+    }
+
+    // Page module structure (from original crawl)
+    if (store.pages && store.pages.length > 0) {
+      var homepage = store.pages[0];
+      if (homepage.modules && homepage.modules.length > 0) {
+        var moduleFlow = homepage.modules.map(function(m) {
+          return m.type + (m.tileCount ? '(' + m.tileCount + 't)' : '');
+        }).join(' â ');
+        parts.push('  Homepage Flow: ' + moduleFlow);
+        // Show first 3 module descriptions
+        var modDescs = homepage.modules.slice(0, 3).map(function(m, idx) {
+          var desc = m.visualConnection || '';
+          if (m.tiles && m.tiles.length > 0) {
+            desc += ' | Tiles: ' + m.tiles.map(function(t) { return t.description || t.tileType || ''; }).join('; ').substring(0, 100);
+          }
+          return '    M' + (idx + 1) + ' (' + m.type + '): ' + desc.substring(0, 150);
+        });
+        parts.push(modDescs.join('\n'));
       }
     }
 
-    // Top 3 most interesting image analyses
-    var analyses = store.geminiAnalyses.analyses || [];
-    var highlights = analyses
-      .filter(function(a) { return a.summary && !a.error; })
-      .slice(0, 3);
+    // V3 enrichment data (page structure, image counts, section types)
+    if (store.v3) {
+      var v3 = store.v3;
+      var totals = v3.storeTotals || {};
+      parts.push('  V3 Data: ' + (v3.pagesAnalyzed || 0) + ' pages, ' + (totals.totalImages || 0) + ' images, ' + (totals.totalVideos || 0) + ' videos, ' + (totals.totalAsins || 0) + ' ASINs');
+      if (totals.sectionTypeCounts) {
+        var types = Object.keys(totals.sectionTypeCounts).map(function(k) { return k + ':' + totals.sectionTypeCounts[k]; });
+        parts.push('  Section Types: ' + types.join(', '));
+      }
+    }
 
-    for (var j = 0; j < highlights.length; j++) {
-      var a = highlights[j];
-      parts.push('  Image ' + (j + 1) + ': ' + a.summary);
-      if (a.textOnImage) parts.push('    Text: "' + a.textOnImage + '"');
-      if (a.typographyStyle) parts.push('    Typography: ' + a.typographyStyle);
+    // Browser crawl data (navigation pattern, subpages)
+    if (store.browserCrawl) {
+      var bc = store.browserCrawl;
+      if (bc.storeStructure) {
+        if (bc.storeStructure.navigationPattern) parts.push('  Nav Pattern: ' + bc.storeStructure.navigationPattern.substring(0, 200));
+        if (bc.storeStructure.categoryLogic) parts.push('  Category Logic: ' + bc.storeStructure.categoryLogic);
+      }
+      if (bc.subpageNames && bc.subpageNames.length > 0) {
+        parts.push('  Subpages: ' + bc.subpageNames.slice(0, 10).join(', '));
+      }
     }
 
     parts.push('');
   }
 
-  parts.push('=== END VISUAL DESIGN INTELLIGENCE ===');
+  parts.push('=== END REFERENCE STORE VISUAL INTELLIGENCE ===');
   parts.push('');
   return parts.join('\n');
 }
+
 
 // ─── FORMAT REFERENCE DATA FOR AI PROMPTS ───
 export function formatReferenceStoreContext(stores, imageAnalyses) {
