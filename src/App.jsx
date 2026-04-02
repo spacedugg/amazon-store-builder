@@ -15,7 +15,7 @@ import AIChat from './components/AIChat';
 import PriceCalculator from './components/PriceCalculator';
 import ExportModal from './components/ExportModal';
 import BriefingView from './components/BriefingView';
-import KnowledgeBaseAdmin from './components/KnowledgeBaseAdmin';
+// KnowledgeBaseAdmin removed — reference data loads automatically in background
 
 var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, headerBannerColor: '', complexity: 2, category: 'generic', googleDriveUrl: '' };
 
@@ -44,7 +44,6 @@ export default function App() {
   var [requestedAsins, setRequestedAsins] = useState([]);
   var [showSaved, setShowSaved] = useState(false);
   var [showExport, setShowExport] = useState(false);
-  var [showKB, setShowKB] = useState(false);
   var [storeId, setStoreId] = useState(null);
   var [shareToken, setShareToken] = useState(null);
   var headerBannerInputRef = useRef(null);
@@ -743,8 +742,7 @@ export default function App() {
         onRedo={handleRedo}
         canRedo={redoStackRef.current.length > 0}
         onShowPrice={function() { setShowPrice(true); }}
-        onShowKnowledgeBase={function() { setShowKB(true); }}
-      />
+        />
 
       <div className="app-body">
         <PageList
@@ -849,9 +847,6 @@ export default function App() {
           onClose={function() { setShowPrice(false); }}
           uiLang={uiLang}
         />
-      )}
-      {showKB && (
-        <KnowledgeBaseAdmin onClose={function() { setShowKB(false); }} />
       )}
 
       {showExport && (
