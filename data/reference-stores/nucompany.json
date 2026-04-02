@@ -288,5 +288,55 @@
       "Keine Produktvergleiche oder Geschmacks-Finder",
       "Keine saisonalen Hooks"
     ]
+  },
+  "geminiVisionData": {
+    "analyzedAt": "2026-04-01T20:46:43.056Z",
+    "pagesAnalyzed": 3,
+    "subpagesFound": 2,
+    "subpageNames": [
+      "Schokosnacks",
+      "Schokoriegel"
+    ],
+    "imageCount": 1,
+    "images": [
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/35894376-0fe4-4155-a538-b5830eba86e2._CR1%2C0%2C399%2C400_SX100_.jpg",
+        "page": "Startseite",
+        "summary": "A brand logo for 'nucao' is displayed on a plain white background."
+      }
+    ]
+  },
+  "geminiVisionV3": {
+    "brandName": "the nu company",
+    "storeUrl": "https://www.amazon.de/stores/thenucompany/page/A096FF51-79D5-4F1D-865E-99E1D3E8C3C3",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "storeTotals": {
+      "totalImages": 11,
+      "totalSections": 0,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {}
+    },
+    "analyzedAt": "2026-04-02T02:28:04.907Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/thenucompany/page/A096FF51-79D5-4F1D-865E-99E1D3E8C3C3",
+        "structure": {
+          "sectionCount": 0,
+          "sections": [],
+          "tileCount": 0,
+          "videoCount": 0,
+          "asinCount": 0,
+          "asins": []
+        },
+        "images": {
+          "total": 11,
+          "analyzed": 11
+        }
+      }
+    ]
   }
 }

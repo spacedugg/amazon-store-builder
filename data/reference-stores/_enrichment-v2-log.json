@@ -1,0 +1,143 @@
+{
+  "runAt": "2026-04-01T22:11:36.516Z",
+  "results": [
+    {
+      "brand": "AG1",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.1"
+    },
+    {
+      "brand": "Bears with Benefits",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "Bedsure",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "BLACKROLL",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "Cloudpillo",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "Desktronic",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "ESN",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "Feandrea",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "Gritin",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "Hansegrün",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "HOLY Energy",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "Kärcher",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "Kloster Kitchen",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "MANSCAPED",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "MasterChef",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "MORE Nutrition",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "Nespresso",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "Night Cat",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "the nu company",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "SNOCKS",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "The North Face",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "TRIXIE",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    },
+    {
+      "brand": "twenty:three",
+      "status": "error",
+      "error": "fetch failed",
+      "time": "0.0"
+    }
+  ]
+}

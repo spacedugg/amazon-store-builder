@@ -2,7 +2,7 @@
   "brandName": "TRIXIE",
   "storeUrl": "https://www.amazon.de/stores/page/30552E59-AC22-47B1-BBBB-AEA9225BD614",
   "category": "pets",
-  "qualityScore": 3,
+  "qualityScore": 4,
   "analyzedAt": "2026-04-01",
   "ci": {
     "primaryColors": [
@@ -21,7 +21,7 @@
     "consistencyNotes": "Konsistentes Blau/Beige-Farbsystem auf Kategorie-Kacheln. Polaroid-Stil bei Fotos als wiederkehrendes Element. Aber keine eigenen CTAs, wenig Text, keine dynamischen Elemente."
   },
   "navigation": {
-    "pageCount": 9,
+    "pageCount": 21,
     "structurePrinciple": "Nach Tierart mit Unterkategorien: Hund, Katze, Kleintier, Vogel, Terraristik, Tiere im Garten. Plus Trixie Serien und Neuheiten.",
     "pages": [
       {
@@ -456,5 +456,259 @@
       "Icons ohne Hover/Click-Affordance — unklar ob klickbar",
       "Kein Social Proof von Kunden (nur Amazon-Metriken)"
     ]
+  },
+  "geminiVisionData": {
+    "analyzedAt": "2026-04-01T20:22:08.645Z",
+    "pagesAnalyzed": 21,
+    "subpagesFound": 48,
+    "subpageNames": [
+      "Einrichtung",
+      "Zuhause",
+      "Kratz- & Kletterartikel",
+      "Snacks & Ernährung",
+      "TRIXIE BOHO",
+      "Snacks & Ernährung",
+      "Zuhause",
+      "Kleintier",
+      "Spielzeug",
+      "Gesundheit, Pflege & Hygiene",
+      "Ernährung",
+      "Einrichtung",
+      " Tiere im Garten",
+      "Geschirre",
+      "Wildtiere & Insekten",
+      "Ställe & Gehege",
+      "Liegeplätze",
+      "Terrarienzubehör",
+      "Unterwegs",
+      "Unterwegs",
+      "Terraristik",
+      "Autozubehör",
+      "Neuheiten",
+      "Unterwegs",
+      "Futter & Mineralstoffe",
+      "TRIXIE BE ECO",
+      "Pflege & Hygiene",
+      "DOG ACTIVITY",
+      "Terrarien-Einrichtung",
+      "Kleintierspielzeug",
+      "Hund",
+      "Liegeplätze",
+      "TRIXIE BE NORDIC",
+      "Hundeleinen",
+      "Ausbildung & Sport",
+      "Vögel",
+      "TRIXIE SERIEN",
+      "Leuchthalsbänder, Warnwesten & Co.",
+      "Snacks & Ernährung",
+      "Gesundheit, Pflege & Hygiene",
+      "Kratzbäume",
+      "Katze",
+      "Katzenspielzeug",
+      "Spielzeug",
+      "Katzentoiletten",
+      "Vogel",
+      "CAT ACTIVITY",
+      "Halsbänder"
+    ],
+    "imageCount": 10,
+    "images": [
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/baf0518b-cc43-41dc-8df0-d88bf7bac3dc.png",
+        "page": "Startseite",
+        "summary": "```json\n{\n \"summary\": \"An Amazon Brand Store hero image for TRIXIE featuring a man and a dog on a couch, alongside the"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/1efc217f-26c9-485c-872b-434b19baf12b.jpg",
+        "page": "Startseite",
+        "summary": "```json\n{\n \"summary\": \"A brand logo for 'TRIXIE' featuring white text on a red oval shape, set against a"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/439e86f8-7377-4afa-b013-83708ad1ef34.jpg",
+        "page": "Einrichtung",
+        "summary": "An Amazon Brand Store hero image featuring two rabbits in grass with the TRIXIE logo."
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d895776e-e0ee-46c6-a740-64d3762e9f05.jpg",
+        "page": "Zuhause",
+        "summary": "```json\n{\n \"summary\": \"An Amazon Brand Store hero image features the TRIXIE logo alongside a golden retriever dog lying on"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/ed5b1785-58b4-4950-89d8-7c128259c752.jpg",
+        "page": "Kratz- & Kletterartikel",
+        "summary": "```json\n{\n \"summary\": \"An Amazon Brand Store hero image featuring the TRIXIE logo alongside a close-up of a"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/cc561517-03bc-456f-a087-c8ff91da26ca.jpg",
+        "page": "TRIXIE BOHO",
+        "summary": "An Amazon Brand Store hero image displays various TRIXIE pet products, including beds and a teepee, in a neutral-toned room setting, with the brand logo prominently featured.",
+        "imageCategory": "store_hero",
+        "dominantColors": [
+          "#D1D1D1",
+          "#E8E2D7",
+          "#A17A5A",
+          "#C81E2B",
+          "#A69C92"
+        ],
+        "textOnImage": "TRIXIE",
+        "elements": [
+          "product",
+          "logo",
+          "wooden_ladder",
+          "curtains",
+          "wall",
+          "wooden_floor",
+          "jute_rug"
+        ],
+        "brandingElements": "TRIXIE logo",
+        "designPatterns": [
+          "lifestyle-background",
+          "brand-logo-prominent",
+          "product-grouping"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d4223f27-6cb6-43a4-859e-0a8ef4c62e40.jpg",
+        "page": "Ernährung",
+        "summary": "```json\n{\n \"summary\": \"An Amazon Brand Store hero image displaying the TRIXIE logo on a solid background next to a close"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/cbdc6b2e-c194-4b96-a918-97a9c60afbd5.jpg",
+        "page": " Tiere im Garten",
+        "summary": "An Amazon Brand Store hero image featuring the TRIXIE logo next to a photograph of two birds on moss.",
+        "imageCategory": "store_hero",
+        "dominantColors": [
+          "#CCD1B4",
+          "#BC262E",
+          "#698346"
+        ],
+        "textOnImage": "TRIXIE",
+        "elements": [
+          "animal",
+          "logo",
+          "plant"
+        ],
+        "brandingElements": "TRIXIE logo",
+        "designPatterns": [
+          "split_layout",
+          "lifestyle_background",
+          "logo_on_solid_background"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/dbe5a1c4-b59b-44e4-a8ef-337a5c66d627.jpg",
+        "page": "Geschirre",
+        "summary": "An Amazon Brand Store hero image features a woman petting a white dog, positioned next to the TRIXIE logo and tagline.",
+        "imageCategory": "store_hero",
+        "dominantColors": [
+          "#C8102E",
+          "#D9D9D9",
+          "#F2F2F2"
+        ],
+        "textOnImage": "TRIXIE\nFriends for Life",
+        "elements": [
+          "person",
+          "animal",
+          "logo"
+        ],
+        "brandingElements": "TRIXIE logo, Friends for Life tagline",
+        "designPatterns": [
+          "split-layout",
+          "lifestyle-background",
+          "logo-on-solid-background"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e3ba5c0d-02e0-4cbf-a07f-0c2112ad31a7.jpg",
+        "page": "Terrarienzubehör",
+        "summary": "An Amazon Brand Store hero image featuring the TRIXIE logo alongside a close-up photograph of a green lizard.",
+        "imageCategory": "store_hero",
+        "dominantColors": [
+          "#333333",
+          "#CC0033",
+          "#339933"
+        ],
+        "textOnImage": "TRIXIE",
+        "elements": [
+          "logo",
+          "animal"
+        ],
+        "brandingElements": "TRIXIE logo",
+        "designPatterns": [
+          "split-panel-layout",
+          "animal-close-up",
+          "blurred-background"
+        ]
+      }
+    ]
+  },
+  "geminiVisionV3": {
+    "brandName": "TRIXIE",
+    "storeUrl": "https://www.amazon.de/stores/page/30552E59-AC22-47B1-BBBB-AEB6FC12BAD6",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "storeTotals": {
+      "totalImages": 0,
+      "totalSections": 0,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {}
+    },
+    "analyzedAt": "2026-04-02T02:28:14.717Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/page/30552E59-AC22-47B1-BBBB-AEB6FC12BAD6",
+        "structure": {
+          "sectionCount": 0,
+          "sections": [],
+          "tileCount": 0,
+          "videoCount": 0,
+          "asinCount": 0,
+          "asins": []
+        },
+        "images": {
+          "total": 0,
+          "analyzed": 0,
+          "list": []
+        },
+        "pageAnalysis": null
+      }
+    ]
+  },
+  "browserCrawl": {
+    "crawledAt": "2026-04-02",
+    "method": "chrome-direct",
+    "pagesAnalyzed": 1,
+    "totalImages": 25,
+    "subpageNames": [
+      "Neuheiten",
+      "TRIXIE BE NORDIC",
+      "TRIXIE BE ECO",
+      "TRIXIE BOHO",
+      "DOG ACTIVITY",
+      "CAT ACTIVITY",
+      "Hund",
+      "Katze",
+      "Kleintier",
+      "Vogel",
+      "Terraristik",
+      "Tiere im Garten"
+    ],
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageId": "30552E59-AC22-47B1-BBBB-AEA9225BD614",
+        "imageCount": 25,
+        "hasVideo": true,
+        "asinCount": 3
+      }
+    ],
+    "storeStructure": {
+      "totalUniquePages": 49,
+      "navigationPattern": "Mega-Store: Serien (Be Nordic, Be Eco, Boho) + Tierart (Hund, Katze, Kleintier, Vogel, Terraristik) → Unterkategorien (Halsbänder, Spielzeug, Liegeplätze, etc.)",
+      "categoryLogic": "Tierart → Produktkategorie → Unterkategorie"
+    }
   }
 }

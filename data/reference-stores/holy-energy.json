@@ -2,7 +2,7 @@
   "brandName": "HOLY Energy",
   "storeUrl": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F0843B226E4",
   "category": "food",
-  "qualityScore": 4,
+  "qualityScore": 5,
   "analyzedAt": "2026-04-01",
   "ci": {
     "primaryColors": [
@@ -235,5 +235,87 @@
       "Kein Video-Content trotz starker visueller Identität",
       "Kein Social Proof auf der Startseite"
     ]
+  },
+  "geminiVisionData": {
+    "analyzedAt": "2026-04-01T20:02:06.171Z",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "imageCount": 1,
+    "images": [
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/6fc595b8-9258-43e3-8f47-80e8b2e250eb.png",
+        "page": "Startseite",
+        "summary": "An Amazon Brand Store hero image showcases various 'HOLY Energy' drink products and flavors with accompanying fruits."
+      }
+    ]
+  },
+  "geminiVisionV3": {
+    "brandName": "HOLY Energy",
+    "storeUrl": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F5A959F2C5A",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "storeTotals": {
+      "totalImages": 0,
+      "totalSections": 0,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {}
+    },
+    "analyzedAt": "2026-04-02T02:27:37.136Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F5A959F2C5A",
+        "structure": {
+          "sectionCount": 0,
+          "sections": [],
+          "tileCount": 0,
+          "videoCount": 0,
+          "asinCount": 0,
+          "asins": []
+        },
+        "images": {
+          "total": 0,
+          "analyzed": 0,
+          "list": []
+        },
+        "pageAnalysis": null
+      }
+    ]
+  },
+  "browserCrawl": {
+    "crawledAt": "2026-04-02",
+    "method": "chrome-direct",
+    "pagesAnalyzed": 1,
+    "totalImages": 11,
+    "subpageNames": [
+      "Für Neueinsteiger",
+      "Bestseller",
+      "Energy",
+      "Iced Tea",
+      "Hydration",
+      "Milkshakes",
+      "Starter Sets",
+      "Shaker",
+      "Probier-Boxen",
+      "Adventskalender",
+      "Über uns"
+    ],
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageId": "7913E121-CB43-4349-A8D2-9F0843B226E4",
+        "imageCount": 11,
+        "hasVideo": true,
+        "asinCount": 17
+      }
+    ],
+    "storeStructure": {
+      "totalUniquePages": 12,
+      "navigationPattern": "Produkttyp-basiert: Energy, Iced Tea, Hydration, Milkshakes. Plus Bundles (Starter Sets, Probier-Boxen), Bestseller, Über uns.",
+      "categoryLogic": "Getränketyp → Bundles/Zubehör"
+    }
   }
 }

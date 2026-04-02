@@ -207,5 +207,231 @@
       "Keine Kategorie-Navigation auf der Startseite",
       "Wirkt wie ein Produkt-Katalog statt einer Brand-Experience"
     ]
+  },
+  "geminiVisionData": {
+    "analyzedAt": "2026-04-01T20:12:17.973Z",
+    "pagesAnalyzed": 10,
+    "subpagesFound": 9,
+    "subpageNames": [
+      "Ultraleichtes Zelt ",
+      "Wanderrucksäcke",
+      "Kuppelzelt ",
+      "Strandzelt",
+      "Feldbett Zelt ",
+      "Hängemattenzelt",
+      "Wathose",
+      "WurfZelt",
+      "Campingzubehör"
+    ],
+    "imageCount": 15,
+    "images": [
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/a00cabba-cd2a-42ef-9b6f-a32870a1621b.jpg",
+        "page": "Startseite",
+        "summary": "A panoramic landscape image displays a large lake surrounded by dense evergreen forests and towering mountains under a partially cloudy sky."
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/727942be-f6a3-415d-a9fd-22543c7346dd.png",
+        "page": "Startseite",
+        "summary": "A black and white logo for 'Night Cat' featuring a cat silhouette against a mountain range.",
+        "imageCategory": "store_hero",
+        "dominantColors": [
+          "#000000",
+          "#FFFFFF"
+        ],
+        "textOnImage": "Night Cat",
+        "elements": [
+          "logo",
+          "illustration"
+        ],
+        "brandingElements": "Night Cat logo",
+        "designPatterns": [
+          "logo-centric",
+          "illustration-based"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2f8118b4-a2e9-4acd-abf0-6ecbe059802a.jpg",
+        "page": "Wanderrucksäcke",
+        "summary": "```json\n{\n \"summary\": \"A wide banner image featuring four people camping by a lake with two tents, overlaid with the '"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/f127c4c1-5824-439c-82f7-db3246d7fb08.png",
+        "page": "Kuppelzelt ",
+        "summary": "A man and a boy are setting up two 'Night Cat' camping tents in a grassy, outdoor area.",
+        "imageCategory": "lifestyle",
+        "dominantColors": [
+          "#3A4F32",
+          "#8C735C",
+          "#4A6D8C"
+        ],
+        "textOnImage": "Night Cat",
+        "elements": [
+          "person",
+          "product",
+          "logo"
+        ],
+        "brandingElements": "Night Cat logo and text",
+        "designPatterns": [
+          "lifestyle-background",
+          "product-in-use"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bf9a7d57-ba68-4a8a-b7fb-9a3fd5f02095.mp4",
+        "page": "Kuppelzelt ",
+        "summary": "```json\n{\n \"summary\": \"A family (father and two sons) sets up and enjoys camping with Night Cat tents and gear"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2cbf192b-268c-4196-9747-510b3c183ac4.mp4/r/vtt-en-cc.VTT",
+        "page": "Kuppelzelt ",
+        "summary": "Analysis failed",
+        "error": "Gemini download failed: 400 {\"error\":{\"code\":400,\"message\":\"Unsupported MIME type: application/octet-stream\",\"status\":\"INVALID_ARGUMENT\"}}"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/75dc17cb-2468-484f-b10e-f57e988aec0f.png",
+        "page": "Feldbett Zelt ",
+        "summary": "```json\n{\n \"summary\": \"A man sits in a camping chair drinking from a mug next to a camping tent and cot in an outdoor"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/8633bead-4f75-4802-8227-2807de67fb4e.mp4",
+        "page": "Feldbett Zelt ",
+        "summary": "A man stretches in front of a camping tent and motorcycle with the Night Cat brand logo overlaid."
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/8633bead-4f75-4802-8227-2807de67fb4e.mp4/r/vtt-en-cc.VTT",
+        "page": "Feldbett Zelt ",
+        "summary": "Analysis failed",
+        "error": "Gemini download failed: 400 {\"error\":{\"code\":400,\"message\":\"Unsupported MIME type: application/octet-stream\",\"status\":\"INVALID_ARGUMENT\"}}"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bb195d9d-7c0e-4de8-a839-ab862b02931e.png",
+        "page": "Wathose",
+        "summary": "A man wearing Night Cat fishing waders and holding a fishing rod is shown outdoors.",
+        "imageCategory": "lifestyle",
+        "dominantColors": [
+          "#C0C8D0",
+          "#4A554A",
+          "#404040"
+        ],
+        "textOnImage": "Night Cat",
+        "elements": [
+          "person",
+          "product",
+          "logo"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/a5208f46-23cd-4c7b-9c41-a46c8fe58e11.mp4",
+        "page": "Wathose",
+        "summary": "A person wearing Night Cat fishing waders is shown wading and fishing in a natural water environment."
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/5b869c24-cb94-48c4-aed1-d95a78f08da3.mp4/r/vtt-en-cc.VTT",
+        "page": "Wathose",
+        "summary": "Analysis failed",
+        "error": "Gemini download failed: 400 {\"error\":{\"code\":400,\"message\":\"Unsupported MIME type: application/octet-stream\",\"status\":\"INVALID_ARGUMENT\"}}"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bb61399f-c89a-4c65-a92e-451ff7bbfa10.png",
+        "page": "WurfZelt",
+        "summary": "A person carries a Night Cat camping tent while walking a dog through a natural outdoor landscape.",
+        "imageCategory": "lifestyle",
+        "dominantColors": [
+          "#5C6B4B",
+          "#A8A391",
+          "#D4C25E"
+        ],
+        "textOnImage": "Night Cat",
+        "elements": [
+          "person",
+          "product",
+          "logo",
+          "dog"
+        ],
+        "brandingElements": "Night Cat logo",
+        "designPatterns": [
+          "lifestyle-background",
+          "product-in-use"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2e3814ab-8f97-4f3c-9d0f-ccb8faedf4bc.mp4",
+        "page": "WurfZelt",
+        "summary": "A person is shown setting up a green Night Cat camping tent in an outdoor grassy environment."
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2e3814ab-8f97-4f3c-9d0f-ccb8faedf4bc.mp4/r/vtt-en-cc.VTT",
+        "page": "WurfZelt",
+        "summary": "Analysis failed",
+        "error": "Gemini download failed: 400 {\"error\":{\"code\":400,\"message\":\"Unsupported MIME type: application/octet-stream\",\"status\":\"INVALID_ARGUMENT\"}}"
+      }
+    ]
+  },
+  "geminiVisionV3": {
+    "brandName": "Night Cat",
+    "storeUrl": "https://www.amazon.de/stores/page/CC609240-DCC5-47C5-A171-3BD9F7ACBE41",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "storeTotals": {
+      "totalImages": 0,
+      "totalSections": 0,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {}
+    },
+    "analyzedAt": "2026-04-02T02:27:44.027Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/page/CC609240-DCC5-47C5-A171-3BD9F7ACBE41",
+        "structure": {
+          "sectionCount": 0,
+          "sections": [],
+          "tileCount": 0,
+          "videoCount": 0,
+          "asinCount": 0,
+          "asins": []
+        },
+        "images": {
+          "total": 0,
+          "analyzed": 0,
+          "list": []
+        },
+        "pageAnalysis": null
+      }
+    ]
+  },
+  "browserCrawl": {
+    "crawledAt": "2026-04-02",
+    "method": "chrome-direct",
+    "pagesAnalyzed": 1,
+    "totalImages": 2,
+    "subpageNames": [
+      "Hängemattenzelt",
+      "Kuppelzelt",
+      "Feldbett Zelt",
+      "WurfZelt",
+      "Ultraleichtes Zelt",
+      "Wanderrucksäcke",
+      "Strandzelt",
+      "Wathose",
+      "Campingzubehör"
+    ],
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageId": "CC609240-DCC5-47C5-A171-3B973268CD34",
+        "imageCount": 2,
+        "hasVideo": true,
+        "asinCount": 18
+      }
+    ],
+    "storeStructure": {
+      "totalUniquePages": 10,
+      "navigationPattern": "Produkttyp-basiert: Verschiedene Zelttypen, Rucksäcke, Strandzelt, Wathose, Zubehör.",
+      "categoryLogic": "Produkttyp"
+    }
   }
 }

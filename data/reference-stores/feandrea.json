@@ -361,5 +361,110 @@
       "Keine Produktvergleiche oder Berater (Kratzbaum-Finder)",
       "Illustrationen könnten bei einigen Nutzern 'kindlich' wirken"
     ]
+  },
+  "geminiVisionV3": {
+    "brandName": "Feandrea",
+    "storeUrl": "https://www.amazon.de/stores/page/FB4FA857-CD07-4E92-A32C-CF4FA7187D7C",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "storeTotals": {
+      "totalImages": 0,
+      "totalSections": 0,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {}
+    },
+    "analyzedAt": "2026-04-02T02:27:33.982Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/page/FB4FA857-CD07-4E92-A32C-CF4FA7187D7C",
+        "structure": {
+          "sectionCount": 0,
+          "sections": [],
+          "tileCount": 0,
+          "videoCount": 0,
+          "asinCount": 0,
+          "asins": []
+        },
+        "images": {
+          "total": 0,
+          "analyzed": 0,
+          "list": []
+        },
+        "pageAnalysis": null
+      }
+    ]
+  },
+  "browserCrawl": {
+    "crawledAt": "2026-04-02",
+    "method": "chrome-direct",
+    "pagesAnalyzed": 6,
+    "totalImages": 50,
+    "subpageNames": [
+      "Sonderangebote",
+      "Kratzbäume Angebote",
+      "Katzenklo-Schränke Angebote",
+      "Hundebetten Angebote",
+      "Hundekäfige Angebote",
+      "NEU",
+      "FÜR KATZEN",
+      "Kratzbäume",
+      "Katzenklo-Schränke",
+      "Reisen",
+      "Schlafen",
+      "FÜR HUNDE",
+      "Hundebetten",
+      "Hundekäfige",
+      "Reisen",
+      "Schlafen",
+      "Spielen",
+      "Über uns",
+      "Sonderangebote",
+      "BEST SELLER"
+    ],
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageId": "FB4FA857-CD07-4E92-A32C-CF0CD556ACF6",
+        "imageCount": 17,
+        "hasVideo": false,
+        "asinCount": 20
+      },
+      {
+        "pageName": "FÜR KATZEN",
+        "pageId": "2473A208-0A9B-400F-BEE1-5524BD21C6CE",
+        "imageCount": 6,
+        "hasVideo": false,
+        "asinCount": 26
+      },
+      {
+        "pageName": "FÜR HUNDE",
+        "pageId": "97D6A597-37C0-4276-9466-0273791DE1EF",
+        "imageCount": 6,
+        "hasVideo": false,
+        "asinCount": 15
+      },
+      {
+        "pageName": "NEU",
+        "pageId": "79CD69FF-F2DB-4E27-8F9E-3F695FB9DFB8",
+        "imageCount": 3,
+        "hasVideo": false,
+        "asinCount": 32
+      },
+      {
+        "pageName": "Kratzbäume",
+        "pageId": "0969F474-6991-44A8-864E-BAC3587E4935",
+        "imageCount": 12,
+        "hasVideo": false,
+        "asinCount": 12
+      }
+    ],
+    "storeStructure": {
+      "totalUniquePages": 21,
+      "navigationPattern": "Zwei Hauptkategorien (FÜR KATZEN, FÜR HUNDE) mit je 4-5 Unterkategorien. Plus Sonderangebote, NEU, Bestseller, Über uns.",
+      "categoryLogic": "Tier-basiert (Katze vs Hund) → Produkttyp (Kratzbäume, Betten, Käfige, Reisen, Schlafen)"
+    }
   }
 }

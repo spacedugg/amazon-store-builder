@@ -21,7 +21,7 @@
     "consistencyNotes": "Extrem konsistent — jedes Bild könnte aus dem gleichen Fotoshooting stammen. Gleiche Berglandschaften, gleiche Beleuchtung, gleiche Model-Ästhetik. Labels immer identisch formatiert: weiß auf schwarz, unten links."
   },
   "navigation": {
-    "pageCount": 18,
+    "pageCount": 17,
     "structurePrinciple": "Hauptnavigation nach Geschlecht (Herren/Damen) + Produkttyp (Jacken, Oberteile, Schuhwerk, Hosen) + Spezial-Kategorien (Neuheiten SS26, Rucksäcke, Ausrüstung, Über uns). Sehr klassische Fashion-Struktur.",
     "pages": [
       {
@@ -382,5 +382,133 @@
       "Product Grid ohne Kontext — plötzlicher Bruch von Editorial zu Commerce",
       "Keine saisonalen Highlights oder Deals auf der Homepage"
     ]
+  },
+  "geminiVisionData": {
+    "analyzedAt": "2026-04-01T20:18:48.778Z",
+    "pagesAnalyzed": 17,
+    "subpagesFound": 16,
+    "subpageNames": [
+      "ÜBER UNS",
+      "Damen Hosen",
+      "SS26 Damen",
+      "Damen Jacken",
+      "SS26 Herren",
+      "Herren Schuhwerk",
+      "AUSRÜSTUNG UND ACCESSORIES",
+      "HERREN",
+      "NEUHEITEN",
+      "DAMEN",
+      "RUCKSÄCKE",
+      "Herren Hosen",
+      "Damen Schuhwerk",
+      "Herren Jacken",
+      "Herren Oberteile",
+      "Damen Oberteile"
+    ],
+    "imageCount": 7,
+    "images": [
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bdb1334e-d470-404a-b8a0-6c91dec507d3.jpg",
+        "page": "Startseite",
+        "summary": "Four people are setting up two tents and organizing camping gear in a vast, rocky, grassy outdoor landscape.",
+        "imageCategory": "lifestyle",
+        "dominantColors": [
+          "#6a7c4e",
+          "#9ba7ae",
+          "#d4a572"
+        ],
+        "textOnImage": "THE NORTH FACE",
+        "elements": [
+          "person",
+          "product",
+          "logo"
+        ],
+        "brandingElements": "The North Face logo",
+        "designPatterns": [
+          "lifestyle-background",
+          "product-in-use"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e4a8308c-5f23-4e75-b84e-024a7dc27775.jpg",
+        "page": "Startseite",
+        "summary": "A smiling person wearing The North Face jacket, hat, and sunglasses is lying in dry grass.",
+        "imageCategory": "lifestyle",
+        "dominantColors": [
+          "#2B52FF",
+          "#4A422D",
+          "#E0E0D8"
+        ],
+        "textOnImage": "THE NORTH FACE",
+        "elements": [
+          "person",
+          "product",
+          "logo"
+        ],
+        "brandingElements": "The North Face logo",
+        "designPatterns": [
+          "lifestyle-background",
+          "product-showcase"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/b03fc780-d0b0-4725-a085-74846103ea68.jpg",
+        "page": "Startseite",
+        "summary": "A woman wearing The North Face apparel is trail running or hiking on a rocky mountain ridge.",
+        "imageCategory": "lifestyle"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e5134266-8f90-42d0-aeb5-c2c5cdf6526f.jpg",
+        "page": "ÜBER UNS",
+        "summary": "Four people set up two tents in a rugged, grassy, mountainous landscape.",
+        "imageCategory": "lifestyle",
+        "dominantColors": [
+          "#607050",
+          "#90A0A0",
+          "#C0A070"
+        ],
+        "textOnImage": "THE NORTH FACE",
+        "elements": [
+          "person",
+          "product",
+          "logo"
+        ],
+        "brandingElements": "The North Face logo",
+        "designPatterns": [
+          "lifestyle-background",
+          "product-in-use"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d54cb3bc-63e2-48dd-82d3-979b0412ddd3.jpg",
+        "page": "Damen Hosen",
+        "summary": "```json\n{\n \"summary\": \"A group of four people wearing The North Face winter apparel and carrying bags walk past a rustic stone wall"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/fa5f15c8-d1ab-4df2-a3da-812233fa91ed.jpg",
+        "page": "DAMEN",
+        "summary": "A woman in athletic gear is hiking on a rocky mountain ridge at sunrise or sunset."
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/7568146d-eb9f-45ff-8aa1-f278c06045ee.jpg",
+        "page": "DAMEN",
+        "summary": "A woman in a bucket hat and long-sleeve shirt looks out over a mountain landscape."
+      }
+    ]
+  },
+  "geminiVisionV3": {
+    "brandName": "The North Face",
+    "storeUrl": "https://www.amazon.de/stores/THENORTHFACE/page/91172724-C342-4A68-9C78-ACA1BFA0ED63",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "storeTotals": {
+      "totalImages": 272,
+      "totalSections": 0,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {}
+    },
+    "analyzedAt": "2026-04-02T02:28:36.473Z"
   }
 }

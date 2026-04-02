@@ -340,5 +340,103 @@
       "Kein saisonaler Hook",
       "Produkt-Feature (Vital Flow) nimmt viel Platz ein — andere Produkte kommen zu kurz"
     ]
+  },
+  "geminiVisionData": {
+    "analyzedAt": "2026-04-01T20:02:57.536Z",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "imageCount": 1,
+    "images": [
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c62dc5c8-f812-4754-8a90-674b1f1c66a8.jpg",
+        "page": "Startseite",
+        "summary": "A woman sips from a shot glass next to the Kloster Kitchen logo and slogan on an Amazon Brand Store hero image.",
+        "imageCategory": "store_hero",
+        "dominantColors": [
+          "#4F704A",
+          "#E0DCD4",
+          "#1A1A1A"
+        ],
+        "textOnImage": "KLOSTER KITCHEN\nBETTER THAN GOOD",
+        "elements": [
+          "person",
+          "product",
+          "logo"
+        ],
+        "brandingElements": "Kloster Kitchen logo",
+        "designPatterns": [
+          "lifestyle-background",
+          "text-on-background",
+          "split-layout"
+        ]
+      }
+    ]
+  },
+  "geminiVisionV3": {
+    "brandName": "Kloster Kitchen",
+    "storeUrl": "https://www.amazon.de/stores/page/34D4A812-9A68-4602-A6A0-30B4B3A80DC5",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "storeTotals": {
+      "totalImages": 0,
+      "totalSections": 0,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {}
+    },
+    "analyzedAt": "2026-04-02T02:27:39.334Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/page/34D4A812-9A68-4602-A6A0-30B4B3A80DC5",
+        "structure": {
+          "sectionCount": 0,
+          "sections": [],
+          "tileCount": 0,
+          "videoCount": 0,
+          "asinCount": 0,
+          "asins": []
+        },
+        "images": {
+          "total": 0,
+          "analyzed": 0,
+          "list": []
+        },
+        "pageAnalysis": null
+      }
+    ]
+  },
+  "browserCrawl": {
+    "crawledAt": "2026-04-02",
+    "method": "chrome-direct",
+    "pagesAnalyzed": 1,
+    "totalImages": 14,
+    "subpageNames": [
+      "Ingwer Shots",
+      "Mikronährstoffe",
+      "Saftkuren",
+      "SMOOTHIES",
+      "Shot Kur",
+      "Probiersets / Geschenkidee",
+      "Zubehör",
+      "Spar-Abo",
+      "Über Uns"
+    ],
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageId": "34D4A812-9A68-4602-A6A0-30565D399620",
+        "imageCount": 14,
+        "hasVideo": false,
+        "asinCount": 6
+      }
+    ],
+    "storeStructure": {
+      "totalUniquePages": 10,
+      "navigationPattern": "Produkttyp-basiert: Ingwer Shots, Mikronährstoffe, Saftkuren, Smoothies. Plus Bundles (Probiersets, Shot Kur), Spar-Abo, Über Uns.",
+      "categoryLogic": "Produkttyp → Bundles/Zubehör"
+    }
   }
 }

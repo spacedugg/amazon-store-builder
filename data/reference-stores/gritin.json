@@ -21,7 +21,7 @@
     "consistencyNotes": "Orange als CI-Farbe konsistent in Linien und Akzenten. Mintgrüne Produkte als visuelle Konstante. Einige Produkte 'Derzeit nicht verfügbar'. Text stellenweise grammatisch unsauber (China-Brand)."
   },
   "navigation": {
-    "pageCount": 5,
+    "pageCount": 9,
     "structurePrinciple": "Startseite, Alle Angebote, NEW + MEHR.",
     "pages": [
       {
@@ -221,5 +221,209 @@
       "Kein Social Proof",
       "Kein Video-Content"
     ]
+  },
+  "geminiVisionData": {
+    "analyzedAt": "2026-04-01T20:41:20.406Z",
+    "pagesAnalyzed": 9,
+    "subpagesFound": 8,
+    "subpageNames": [
+      "SUPERHELLE UNTERBAULEUCHTEN",
+      "ALLE ANGEBOTE",
+      "HALS LESELAMPE",
+      "NEW",
+      "SPORT",
+      "FALTBARE MINI-BUCHLAMPE",
+      "CLIP-ON-BUCHLAMPE",
+      "AUGENMASKE"
+    ],
+    "imageCount": 8,
+    "images": [
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/be929c6a-b3c4-481f-a593-9070f8254143.jpg",
+        "page": "Startseite",
+        "summary": "An Amazon Brand Store hero image featuring a woman reading with a clip-on light and brand text.",
+        "imageCategory": "store_hero",
+        "dominantColors": [
+          "#967C6F",
+          "#F7A800",
+          "#FFFFFF"
+        ],
+        "textOnImage": "Gritin\nDesign für Ihren komfortabel Leben",
+        "elements": [
+          "person",
+          "product",
+          "logo"
+        ],
+        "brandingElements": "Gritin",
+        "designPatterns": [
+          "text-on-dark",
+          "lifestyle-background",
+          "product-in-use"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bf126eb8-8eb4-4075-8f14-50574ac0d878._CR0%2C0%2C400%2C400_SX100_.png",
+        "page": "Startseite",
+        "summary": "An Amazon Brand Store image displaying the Gritin brand logo and name."
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/fbf04847-6c93-4788-9776-b29a91f6683d.jpg",
+        "page": "SUPERHELLE UNTERBAULEUCHTEN",
+        "summary": "An Amazon Brand Store hero image showcases Gritin under-cabinet lights illuminating a kitchen counter.",
+        "imageCategory": "store_hero",
+        "dominantColors": [
+          "#5C4A3F",
+          "#E8E0D1",
+          "#FFF8E0"
+        ],
+        "textOnImage": "Gritin Unterbauleuchten\nJede Ecke Mühelos Beleuchtet",
+        "elements": [
+          "product",
+          "logo",
+          "coffee maker",
+          "cups",
+          "coffee bag",
+          "spoon"
+        ],
+        "brandingElements": "Gritin",
+        "designPatterns": [
+          "text-on-dark",
+          "lifestyle-background",
+          "product-in-use"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/a6882d8c-3947-43d9-91b2-c7573664b224.jpg",
+        "page": "HALS LESELAMPE",
+        "summary": "```json\n{\n \"summary\": \"A woman is shown reading a book, illuminated by a Gritin neck-worn book light, with"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/3052e658-7761-4792-a6ed-fc8137c1a840.jpg",
+        "page": "SPORT",
+        "summary": "A woman exercises with a Gritin resistance band in a home setting, promoting a healthy lifestyle.",
+        "imageCategory": "store_hero",
+        "dominantColors": [
+          "#E8E0D8",
+          "#A67B5B",
+          "#3699D8"
+        ],
+        "textOnImage": "Umfassen ein gesundes Leben\nGritin\nMedium",
+        "elements": [
+          "person",
+          "product",
+          "logo"
+        ],
+        "brandingElements": "Gritin",
+        "designPatterns": [
+          "text-on-light",
+          "lifestyle-background",
+          "product-in-use"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/abc12c2f-b3c3-44a3-8088-bab8d877ad12.jpg",
+        "page": "FALTBARE MINI-BUCHLAMPE",
+        "summary": "A woman reads a book using a Gritin book light, with brand and slogan text displayed.",
+        "imageCategory": "store_hero",
+        "dominantColors": [
+          "#967e72",
+          "#FFFFFF",
+          "#80e0e0"
+        ],
+        "textOnImage": "Gritin Buchlampe\nErhellt jeden nächtlichen Lesemoment"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/4e803970-ee1b-4c4b-90ae-dbd745f81c10.jpg",
+        "page": "CLIP-ON-BUCHLAMPE",
+        "summary": "A woman reads a book in bed using a Gritin book lamp, with brand and slogan text.",
+        "imageCategory": "store_hero",
+        "dominantColors": [
+          "#8C7465",
+          "#FFFFFF",
+          "#FF9900"
+        ],
+        "textOnImage": "Gritin Buchlampe\nErhellt jeden nächtlichen Lesemoment",
+        "elements": [
+          "person",
+          "product",
+          "book"
+        ],
+        "designPatterns": [
+          "text-on-dark",
+          "lifestyle-background",
+          "product-in-use"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c66e17a6-5999-467a-82ab-66ef440f5575.jpg",
+        "page": "AUGENMASKE",
+        "summary": "```json\n{\n \"summary\": \"A woman wearing a Gritin sleep mask is shown relaxing in a chair, with brand and benefit text overlaid"
+      }
+    ]
+  },
+  "geminiVisionV3": {
+    "brandName": "Gritin",
+    "storeUrl": "https://www.amazon.de/stores/page/1758941C-AE87-4628-AB45-6284CC97CEF3",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "storeTotals": {
+      "totalImages": 0,
+      "totalSections": 0,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {}
+    },
+    "analyzedAt": "2026-04-02T02:27:35.057Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/page/1758941C-AE87-4628-AB45-6284CC97CEF3",
+        "structure": {
+          "sectionCount": 0,
+          "sections": [],
+          "tileCount": 0,
+          "videoCount": 0,
+          "asinCount": 0,
+          "asins": []
+        },
+        "images": {
+          "total": 0,
+          "analyzed": 0,
+          "list": []
+        },
+        "pageAnalysis": null
+      }
+    ]
+  },
+  "browserCrawl": {
+    "crawledAt": "2026-04-02",
+    "method": "chrome-direct",
+    "pagesAnalyzed": 1,
+    "totalImages": 14,
+    "subpageNames": [
+      "ALLE ANGEBOTE",
+      "NEW",
+      "SUPERHELLE UNTERBAULEUCHTEN",
+      "CLIP-ON-BUCHLAMPE",
+      "FALTBARE MINI-BUCHLAMPE",
+      "HALS LESELAMPE",
+      "AUGENMASKE",
+      "SPORT"
+    ],
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageId": "1758941C-AE87-4628-AB45-62C0A2BDB75C",
+        "imageCount": 14,
+        "hasVideo": false,
+        "asinCount": 15
+      }
+    ],
+    "storeStructure": {
+      "totalUniquePages": 9,
+      "navigationPattern": "Produktkategorie-basiert: Leuchten, Buchlampen, Augenmasken, Sport. Plus Angebote und NEW.",
+      "categoryLogic": "Produkttyp-basiert"
+    }
   }
 }

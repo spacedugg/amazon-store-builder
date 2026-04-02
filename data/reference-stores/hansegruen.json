@@ -21,7 +21,7 @@
     "consistencyNotes": "Konsistente Beige/Grün-Palette. Alle Module folgen dem gleichen warmen, natürlichen Stil. Logo-Badge (grüner Kreis mit Tropfen) erscheint mehrfach. Leichter Bruch bei der Gründer-Sektion (etwas anderer Stil), aber insgesamt gut."
   },
   "navigation": {
-    "pageCount": 8,
+    "pageCount": 19,
     "structurePrinciple": "Einfach und funktional: Alle Produkte, Neuheiten, Spar-Sets, Shots + MEHR-Dropdown. Wenige Seiten da überschaubares Sortiment.",
     "pages": [
       {
@@ -334,5 +334,255 @@
       "Kein Social Proof (Bewertungen, Kundenstimmen) auf der Startseite",
       "Neuheiten-Modul ohne konkreten Inhalt ('STAY TUNED' = leer)"
     ]
+  },
+  "geminiVisionData": {
+    "analyzedAt": "2026-04-01T20:01:45.127Z",
+    "pagesAnalyzed": 19,
+    "subpagesFound": 18,
+    "subpageNames": [
+      "Zahnfunktion",
+      "Stoffwechsel",
+      "Spar-Sets",
+      "Knochenfunktion",
+      "Immunsystem",
+      "Über Uns ",
+      "Produktfinder",
+      "Shots",
+      "Alle Produkte",
+      "Ingwer-Shots",
+      "Hautfunktion ",
+      "Darmfunktion",
+      "Energie & Sport",
+      "Anti-Müdigkeit",
+      "Neuheiten",
+      "Zellschutz",
+      "Eisenaufnahme",
+      "Benefits"
+    ],
+    "imageCount": 14,
+    "images": [
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/7a010a9a-4b55-420c-80d4-ff54042c1759.jpg",
+        "page": "Startseite",
+        "summary": "A woman drinks from a small bottle, promoting Hansegrün superfood powder with German text and a brand logo.",
+        "imageCategory": "store_hero",
+        "dominantColors": [
+          "#706e6b",
+          "#e0d7cd",
+          "#1e6047"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/1ab80067-eb06-4171-b60f-051b5f8567dc._CR0%2C0%2C600%2C600_SX100_.png",
+        "page": "Startseite",
+        "summary": "A circular logo for 'Hansegrün' featuring a stylized white drop icon and German text on a dark green background.",
+        "imageCategory": "brand_story",
+        "dominantColors": [
+          "#1A6B3E",
+          "#FFFFFF"
+        ],
+        "textOnImage": "HANSEGRÜN nachhaltig · gesund · trinken",
+        "elements": [
+          "logo",
+          "icon"
+        ],
+        "brandingElements": "logo",
+        "designPatterns": [
+          "circular-design",
+          "text-on-dark"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/0751d57c-56e9-4993-97af-9e7be94e6248._CR0%2C0%2C3000%2C1500_.jpg",
+        "page": "Startseite",
+        "summary": "```json\n{\n \"summary\": \"Hansegrün's best-selling supplement products are showcased with fresh ingredients on a brand store hero image"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/5a7adc49-c6b1-4629-a00b-fb3dd99219ef.jpg",
+        "page": "Spar-Sets",
+        "summary": "```json\n{\n \"summary\": \"An Amazon Brand Store image showcasing Hansegrün's 'Shot' product sets with accompanying"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/52c81be7-46e8-4ffd-857d-fad1ea5313bf.jpg",
+        "page": "Knochenfunktion",
+        "summary": "```json\n{\n \"summary\": \"A split image showing an active person playing basketball on one side and an icon with text about bone function on the"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/5ed33388-4715-481c-b22d-05f9bb37e7f0.jpg",
+        "page": "Über Uns ",
+        "summary": "An Amazon Brand Store image featuring the German text 'Über uns' (About Us) centered on a solid light background.",
+        "imageCategory": "brand_story",
+        "dominantColors": [
+          "#e8e6e0",
+          "#1c524a"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/9134df4a-0c6f-4767-a8c1-2a2de8880b64.jpg",
+        "page": "Produktfinder",
+        "summary": "```json\n{\n \"summary\": \"An Amazon Brand Store hero image showcases various Hansegrün superfood products and a brand slogan on"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/78cdeb6d-f4cf-40f2-8326-8c027e39c2bc.jpg",
+        "page": "Alle Produkte",
+        "summary": "```json\n{\n \"summary\": \"A graphic displaying the German text 'Alle Produkte' on a solid light background, likely serving as a section header"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/502d7678-fa86-47ec-bbb0-375603de19d4.jpg",
+        "page": "Ingwer-Shots",
+        "summary": "An Amazon Brand Store hero image showcases Hansegrün's organic ginger shot powders and a prepared shot, surrounded by fresh ingredients.",
+        "imageCategory": "store_hero",
+        "dominantColors": [
+          "#332724",
+          "#EAE9E3",
+          "#1E5C3F",
+          "#F08A00"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/14aff728-b0f3-4cb0-b6b4-f4cae916c327.jpg",
+        "page": "Hautfunktion ",
+        "summary": "A split-panel image featuring a smiling woman on the left and an icon with text about normal skin function on the right.",
+        "imageCategory": "benefit_graphic",
+        "dominantColors": [
+          "#EDE7D9",
+          "#333333",
+          "#F0D0B8"
+        ],
+        "textOnImage": "Normale Hautfunktion⁸",
+        "elements": [
+          "person",
+          "icon"
+        ],
+        "designPatterns": [
+          "split-panel",
+          "lifestyle-background",
+          "text-on-light"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/8b769c43-7788-4203-96e6-82737102cc61.jpg",
+        "page": "Energie & Sport",
+        "summary": "A woman stretching on a bridge is featured on the left, while a grey panel on the right displays a lightning bolt icon and German text 'Energie & Sport'.",
+        "imageCategory": "category_tile",
+        "dominantColors": [
+          "#8A8A8A",
+          "#A6B4B0",
+          "#E0E0E0"
+        ],
+        "textOnImage": "Energie & Sport",
+        "elements": [
+          "person",
+          "icon"
+        ],
+        "designPatterns": [
+          "split-layout",
+          "lifestyle-background",
+          "text-on-solid-background"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/7693ca2b-c173-40e5-a554-c5f6fced8f20.jpg",
+        "page": "Neuheiten",
+        "summary": "```json\n{\n \"summary\": \"A smiling woman in a red beanie and plaid shirt is featured next to the German text 'Unsere Neuheiten'"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d861c441-43b5-4688-b980-c51cfbb51279.jpg",
+        "page": "Zellschutz",
+        "summary": "An Amazon Brand Store image featuring a sleeping woman on the left and a cell protection icon with German text on a light blue background on the right.",
+        "imageCategory": "benefit_graphic",
+        "dominantColors": [
+          "#DDE5EA",
+          "#FFFFFF",
+          "#3C3C3C"
+        ],
+        "textOnImage": "Zellschutz⁶",
+        "elements": [
+          "person",
+          "icon"
+        ],
+        "designPatterns": [
+          "split-layout",
+          "lifestyle-background",
+          "icon-with-text"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/7fd13c64-09b2-490a-9ef9-35b94188beda.jpg",
+        "page": "Benefits",
+        "summary": "A woman with closed eyes is shown on a split background with the text 'Unsere Benefits'."
+      }
+    ]
+  },
+  "geminiVisionV3": {
+    "brandName": "Hansegrün",
+    "storeUrl": "https://www.amazon.de/stores/page/BC9A9642-4612-460E-81B4-98D0EF3DBD89",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "storeTotals": {
+      "totalImages": 0,
+      "totalSections": 0,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {}
+    },
+    "analyzedAt": "2026-04-02T02:27:36.158Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/page/BC9A9642-4612-460E-81B4-98D0EF3DBD89",
+        "structure": {
+          "sectionCount": 0,
+          "sections": [],
+          "tileCount": 0,
+          "videoCount": 0,
+          "asinCount": 0,
+          "asins": []
+        },
+        "images": {
+          "total": 0,
+          "analyzed": 0,
+          "list": []
+        },
+        "pageAnalysis": null
+      }
+    ]
+  },
+  "browserCrawl": {
+    "crawledAt": "2026-04-02",
+    "method": "chrome-direct",
+    "pagesAnalyzed": 1,
+    "totalImages": 18,
+    "subpageNames": [
+      "Alle Produkte",
+      "Neuheiten",
+      "Spar-Sets",
+      "Shots",
+      "Ingwer-Shots",
+      "Benefits",
+      "Immunsystem",
+      "Energie & Sport",
+      "Darmfunktion",
+      "Anti-Müdigkeit",
+      "Zahnfunktion",
+      "Zellschutz",
+      "Eisenaufnahme",
+      "Hautfunktion"
+    ],
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageId": "BC9A9642-4612-460E-81B4-985E9AF6A7D2",
+        "imageCount": 18,
+        "hasVideo": false,
+        "asinCount": 3
+      }
+    ],
+    "storeStructure": {
+      "totalUniquePages": 19,
+      "navigationPattern": "Benefit-basiert: Immunsystem, Energie & Sport, Darmfunktion, Anti-Müdigkeit, etc. Plus Produkttypen (Shots, Ingwer-Shots) und Spar-Sets.",
+      "categoryLogic": "Benefit/Wirkung → Produkttyp"
+    }
   }
 }

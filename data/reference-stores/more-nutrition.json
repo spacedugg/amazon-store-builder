@@ -349,5 +349,76 @@
       "Einige Produkte 'Derzeit nicht auf Lager' — schlecht für Brand Store",
       "Farbvielfalt kann auch überladen wirken"
     ]
+  },
+  "geminiVisionV3": {
+    "brandName": "MORE Nutrition",
+    "storeUrl": "https://www.amazon.de/stores/page/7AD425C6-C3C5-402D-A69D-D6B7F5CFC8C3",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "storeTotals": {
+      "totalImages": 0,
+      "totalSections": 0,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {}
+    },
+    "analyzedAt": "2026-04-02T02:27:43.154Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/page/7AD425C6-C3C5-402D-A69D-D6B7F5CFC8C3",
+        "structure": {
+          "sectionCount": 0,
+          "sections": [],
+          "tileCount": 0,
+          "videoCount": 0,
+          "asinCount": 0,
+          "asins": []
+        },
+        "images": {
+          "total": 0,
+          "analyzed": 0,
+          "list": []
+        },
+        "pageAnalysis": null
+      }
+    ]
+  },
+  "browserCrawl": {
+    "crawledAt": "2026-04-02",
+    "method": "chrome-direct",
+    "pagesAnalyzed": 1,
+    "totalImages": 12,
+    "subpageNames": [
+      "DEALS",
+      "ZERUP",
+      "CHUNKY FLAVOUR",
+      "PROTEINE",
+      "PROTEIN MILKSHAKE",
+      "PROTEIN ICED COFFEE",
+      "CLEAR PROTEIN",
+      "CLEAR GLOW PEPTIDES",
+      "VEGAN PROTEIN",
+      "RIEGEL & LIGHT FOOD",
+      "VITALSTOFFE",
+      "BUNDLE",
+      "ALLE PRODUKTE",
+      "PRODUKTSELEKTOR"
+    ],
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageId": "7AD425C6-C3C5-402D-A69D-D6201F98F888",
+        "imageCount": 12,
+        "hasVideo": false,
+        "asinCount": 7
+      }
+    ],
+    "storeStructure": {
+      "totalUniquePages": 15,
+      "navigationPattern": "Produktlinie-basiert: ZERUP, CHUNKY FLAVOUR, diverse Protein-Varianten, Vitalstoffe. Plus Deals, Bundle, Produktselektor.",
+      "categoryLogic": "Produktlinie → Bundle/Deals"
+    }
   }
 }

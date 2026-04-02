@@ -2,37 +2,53 @@
   "brandName": "MasterChef",
   "storeUrl": "https://www.amazon.de/stores/page/4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6",
   "category": "home_kitchen",
-  "qualityScore": 2,
+  "qualityScore": 3,
   "analyzedAt": "2026-04-01",
-
   "ci": {
-    "primaryColors": ["#000000", "#ffffff", "#c8102e"],
-    "accentColors": ["#f0f0f0", "#333333"],
+    "primaryColors": [
+      "#000000",
+      "#ffffff",
+      "#c8102e"
+    ],
+    "accentColors": [
+      "#f0f0f0",
+      "#333333"
+    ],
     "imageStyle": "Einfache Produktfotos auf weißem Hintergrund. Hero mit Küchenutensilien-Collage. MasterChef Logo prominent. Keine Lifestyle-Fotos, keine Anwendungsbilder.",
     "typographyStyle": "Standard Amazon-Fonts. MasterChef Logo als einziges Branding-Element. Produktnamen: 'MasterChef Messerset 3-teilig Essentials Kollektion'. Keine eigene Typografie.",
     "tonality": "Funktional-sachlich. Produktbeschreibungen ohne emotionale Ansprache. Kollektionsnamen: 'Essentials', 'Erde'. Keine Benefits, keine Storytelling-Elemente.",
     "ciConsistency": 2,
     "consistencyNotes": "MasterChef Logo als einziges CI-Element. Keine konsistente Farbwelt. Produkte haben unterschiedliche Farbgebungen (schwarz, braun). Sehr basaler Store."
   },
-
   "navigation": {
-    "pageCount": 4,
+    "pageCount": 20,
     "structurePrinciple": "Startseite, Angebote, Kochgeschirr, MEHR.",
     "pages": [
-      { "name": "Startseite", "url": "https://www.amazon.de/stores/page/4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6" },
-      { "name": "Angebote", "url": "https://www.amazon.de/stores/page/ANGEBOTE" },
-      { "name": "Kochgeschirr", "url": "https://www.amazon.de/stores/page/KOCHGESCHIRR" }
+      {
+        "name": "Startseite",
+        "url": "https://www.amazon.de/stores/page/4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6"
+      },
+      {
+        "name": "Angebote",
+        "url": "https://www.amazon.de/stores/page/ANGEBOTE"
+      },
+      {
+        "name": "Kochgeschirr",
+        "url": "https://www.amazon.de/stores/page/KOCHGESCHIRR"
+      }
     ]
   },
-
   "heroImage": {
     "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/masterchef-hero.jpeg",
     "description": "Collage aus Küchenprodukten: Messer, Pfannen, Kochutensilien. MasterChef Logo zentral. Dunkler Hintergrund.",
-    "textOnImage": { "headline": "MasterChef", "subtext": "", "cta": "" },
+    "textOnImage": {
+      "headline": "MasterChef",
+      "subtext": "",
+      "cta": ""
+    },
     "colorMood": "Dunkel, funktional",
     "designElements": "Produkt-Collage, Logo"
   },
-
   "pages": [
     {
       "name": "Startseite",
@@ -65,21 +81,24 @@
         }
       ],
       "pageTexts": {
-        "headlines": ["MasterChef"],
+        "headlines": [
+          "MasterChef"
+        ],
         "descriptions": [],
         "ctas": [],
         "nativeTexts": []
       }
     }
   ],
-
   "analysis": {
     "ciImplementation": "Minimale CI. MasterChef Logo als einziges Branding-Element. Keine eigene Farbwelt, keine konsistente Bildsprache.",
     "imageLanguage": "Ausschließlich Standard-Produktfotos auf weißem Hintergrund. Keine Lifestyle-Fotografie, keine Anwendungsbilder, keine kreativen Visuals.",
     "storytelling": "Kein Storytelling. Reines Produkt-Listing ohne narrativen Bogen.",
     "moduleFlow": "Hero → Product Grid → Product Grid → Product Grid",
     "subpageLogic": "~4 Seiten. Einfache Kategoriestruktur: Angebote, Kochgeschirr.",
-    "conversionElements": ["Keine — kein CTA, kein Social Proof, keine Benefits"],
+    "conversionElements": [
+      "Keine — kein CTA, kein Social Proof, keine Benefits"
+    ],
     "copywritingAnalysis": "Keine eigenen Texte. Nur Produktnamen und Amazon-Standard-Texte. Kollektionsnamen (Essentials, Erde) als einzige Copy-Elemente.",
     "strengths": [
       "Bekannte Lizenzmarke mit Wiedererkennungswert",
@@ -95,5 +114,129 @@
       "Keine CI-Implementierung über Logo hinaus",
       "Wirkt wie Auto-generierter Standard-Store"
     ]
+  },
+  "geminiVisionData": {
+    "analyzedAt": "2026-04-01T20:05:49.303Z",
+    "pagesAnalyzed": 20,
+    "subpagesFound": 19,
+    "subpageNames": [
+      "Nordische Kolletion",
+      "Werkzeuge und Utensilien",
+      "Kollektionen",
+      "Professionelle Kollektion",
+      "Caption Kollektion",
+      "Kochmessersets",
+      "Erde Kollektion",
+      "Kochgeschirr",
+      "Messer",
+      "Küchengeräte",
+      "Textilien",
+      "Angebote",
+      "Messersets",
+      "Schneidebretter",
+      "Natürliche Kollektion",
+      "Essentials Kollektion",
+      "ALLE PRODUKTE",
+      "Messerblocksets",
+      "Lebendige Kollektion"
+    ],
+    "imageCount": 5,
+    "images": [
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/5a2807ef-eeca-45d1-bda6-5d07e70cb65e.png",
+        "page": "Nordische Kolletion",
+        "summary": "```json\n{\n \"summary\": \"An Amazon Brand Store hero image showcases various MasterChef branded kitchen utensils and knives in a modern kitchen setting"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/70fefebc-5d24-4b1d-b7bc-37420ed14c31.png",
+        "page": "Professionelle Kollektion",
+        "summary": "A collage image showcases MasterChef branded kitchen knives and accessories in various culinary contexts."
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2d2c2fef-2e7a-4f70-82ec-8781fcdb0d6d.jpg",
+        "page": "Professionelle Kollektion",
+        "summary": "A set of MasterChef kitchen knives and a knife roll are displayed against a minimalist gray background."
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/8c6bcbc6-0073-442c-b6d0-6ca21f7f061d.png",
+        "page": "Erde Kollektion",
+        "summary": "```json\n{\n \"summary\": \"An Amazon Brand Store hero image showcases various MasterChef branded kitchen products and a person in a kitchen"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/82f0a38f-740a-4012-a9b2-8e26a68979cd.jpeg",
+        "page": "Angebote",
+        "summary": "MasterChef branded kitchen utensils are displayed in a modern kitchen setting alongside fresh ingredients."
+      }
+    ]
+  },
+  "geminiVisionV3": {
+    "brandName": "MasterChef",
+    "storeUrl": "https://www.amazon.de/stores/page/4E8E4B73-1DA5-45E1-8EFA-5E862F24C8AF",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "storeTotals": {
+      "totalImages": 0,
+      "totalSections": 0,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {}
+    },
+    "analyzedAt": "2026-04-02T02:27:41.415Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/page/4E8E4B73-1DA5-45E1-8EFA-5E862F24C8AF",
+        "structure": {
+          "sectionCount": 0,
+          "sections": [],
+          "tileCount": 0,
+          "videoCount": 0,
+          "asinCount": 0,
+          "asins": []
+        },
+        "images": {
+          "total": 0,
+          "analyzed": 0,
+          "list": []
+        },
+        "pageAnalysis": null
+      }
+    ]
+  },
+  "browserCrawl": {
+    "crawledAt": "2026-04-02",
+    "method": "chrome-direct",
+    "pagesAnalyzed": 1,
+    "totalImages": 9,
+    "subpageNames": [
+      "Angebote",
+      "Kochgeschirr",
+      "Messer",
+      "Messersets",
+      "Schneidebretter",
+      "Küchengeräte",
+      "Textilien",
+      "Werkzeuge und Utensilien",
+      "Kollektionen",
+      "Essentials Kollektion",
+      "Nordische Kolletion",
+      "Professionelle Kollektion",
+      "ALLE PRODUKTE"
+    ],
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageId": "4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6",
+        "imageCount": 9,
+        "hasVideo": false,
+        "asinCount": 19
+      }
+    ],
+    "storeStructure": {
+      "totalUniquePages": 20,
+      "navigationPattern": "Produktkategorie + Kollektionen: Kochgeschirr, Messer, Küchengeräte → Kollektionen (Essentials, Natürlich, Nordisch, Professionell).",
+      "categoryLogic": "Produktkategorie + Design-Kollektion"
+    }
   }
 }

@@ -345,5 +345,106 @@
       "Kategorie-Grid könnte überwältigend wirken (12+ Kacheln)",
       "Keine Produktvergleiche oder Berater-Tools auf der Startseite"
     ]
+  },
+  "geminiVisionData": {
+    "analyzedAt": "2026-04-01T20:02:43.725Z",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "imageCount": 3,
+    "images": [
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/0bef22ae-1bc2-4351-b313-fc6dc46eeac9.png",
+        "page": "Startseite",
+        "summary": "A Kärcher brand store image features a bold call to action for exclusive content."
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/505dcd4f-bdda-4c68-acb7-5945aac94231.png",
+        "page": "Startseite",
+        "summary": "```json\n{\n \"summary\": \"A bright yellow banner with black text and an upward-pointing arrow prompts users to follow the Kärcher"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/4d15b963-85ec-4850-bb8f-6f3c116b34bb.jpg",
+        "page": "Startseite",
+        "summary": "```json\n{\n \"summary\": \"Kärcher's brand store hero image displays a collage of people using various cleaning products in"
+      }
+    ]
+  },
+  "geminiVisionV3": {
+    "brandName": "Kärcher",
+    "storeUrl": "https://www.amazon.de/stores/page/EFE3653A-1163-432C-A85B-04CCA4B6838F",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "storeTotals": {
+      "totalImages": 0,
+      "totalSections": 0,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {}
+    },
+    "analyzedAt": "2026-04-02T02:27:38.160Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/page/EFE3653A-1163-432C-A85B-04CCA4B6838F",
+        "structure": {
+          "sectionCount": 0,
+          "sections": [],
+          "tileCount": 0,
+          "videoCount": 0,
+          "asinCount": 0,
+          "asins": []
+        },
+        "images": {
+          "total": 0,
+          "analyzed": 0,
+          "list": []
+        },
+        "pageAnalysis": null
+      }
+    ]
+  },
+  "browserCrawl": {
+    "crawledAt": "2026-04-02",
+    "method": "chrome-direct",
+    "pagesAnalyzed": 1,
+    "totalImages": 23,
+    "subpageNames": [
+      "Cashback Aktion",
+      "Neuheiten",
+      "Hochdruckreiniger",
+      "Mobile Reinigung",
+      "Zubehör & Reinigungsmittel",
+      "Support",
+      "Robotics",
+      "Mähroboter",
+      "Wisch- und Saugroboter",
+      "Dampfreiniger",
+      "Garten",
+      "Gartengeräte",
+      "Fenster",
+      "Fenstersauger",
+      "Sauger",
+      "Boden",
+      "Hartbodenreiniger",
+      "Luftreiniger",
+      "Rund ums Auto",
+      "Akku-Plattform"
+    ],
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageId": "EFE3653A-1163-432C-A85B-0486A31C0E3D",
+        "imageCount": 23,
+        "hasVideo": false,
+        "asinCount": 3
+      }
+    ],
+    "storeStructure": {
+      "totalUniquePages": 50,
+      "navigationPattern": "Mega-Store mit hierarchischer Kategorie-Navigation: Hauptkategorien (Hochdruckreiniger, Robotics, Dampf, Garten, Fenster, Sauger, Boden, Auto, Akku) → Unterkategorien → Zubehör.",
+      "categoryLogic": "Produktkategorie → Unterkategorie → Zubehör/Reinigungsmittel"
+    }
   }
 }

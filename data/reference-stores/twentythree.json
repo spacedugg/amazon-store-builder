@@ -182,5 +182,52 @@
       "Keine Benefit-Texte (Material, Qualität, etc.)",
       "Keine Produktvergleiche oder Berater"
     ]
+  },
+  "geminiVisionData": {
+    "analyzedAt": "2026-04-01T20:24:22.657Z",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "imageCount": 1,
+    "images": [
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/997ed6bd-0176-42c3-8500-f4e2cdf08c26.png",
+        "page": "Startseite",
+        "summary": "An Amazon Brand Store hero image for 'twenty:three' showcasing various bedding products and lifestyle scenes."
+      }
+    ]
+  },
+  "geminiVisionV3": {
+    "brandName": "twenty:three",
+    "storeUrl": "https://www.amazon.de/stores/twentythree/page/0E8D9A31-200C-41EE-8FA2-0D62E5C5F811",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "storeTotals": {
+      "totalImages": 95,
+      "totalSections": 0,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {}
+    },
+    "analyzedAt": "2026-04-02T02:28:19.738Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/twentythree/page/0E8D9A31-200C-41EE-8FA2-0D62E5C5F811",
+        "structure": {
+          "sectionCount": 0,
+          "sections": [],
+          "tileCount": 0,
+          "videoCount": 0,
+          "asinCount": 0,
+          "asins": []
+        },
+        "images": {
+          "total": 95,
+          "analyzed": 25
+        }
+      }
+    ]
   }
 }

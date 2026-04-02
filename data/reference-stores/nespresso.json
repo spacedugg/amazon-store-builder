@@ -338,5 +338,90 @@
       "Keine Lifestyle-Bilder (Kaffee-Genuss-Momente) im Editorial",
       "Nachhaltigkeit nicht prominent auf Startseite (wichtiges Thema)"
     ]
+  },
+  "geminiVisionData": {
+    "analyzedAt": "2026-04-01T20:07:34.356Z",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "imageCount": 1,
+    "images": [
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/387629c7-1c33-4231-b929-a685f39c3a05.jpg",
+        "page": "Startseite",
+        "summary": "Two people toast with coffee drinks, featuring brand text and a logo on a lifestyle background."
+      }
+    ]
+  },
+  "geminiVisionV3": {
+    "brandName": "Nespresso",
+    "storeUrl": "https://www.amazon.de/stores/page/2429E3F3-8BFA-466A-9185-35E1B25B8B76",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "storeTotals": {
+      "totalImages": 0,
+      "totalSections": 0,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {}
+    },
+    "analyzedAt": "2026-04-02T02:27:42.777Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/page/2429E3F3-8BFA-466A-9185-35E1B25B8B76",
+        "structure": {
+          "sectionCount": 0,
+          "sections": [],
+          "tileCount": 0,
+          "videoCount": 0,
+          "asinCount": 0,
+          "asins": []
+        },
+        "images": {
+          "total": 0,
+          "analyzed": 0,
+          "list": []
+        },
+        "pageAnalysis": null
+      }
+    ]
+  },
+  "browserCrawl": {
+    "crawledAt": "2026-04-02",
+    "method": "chrome-direct",
+    "pagesAnalyzed": 1,
+    "totalImages": 10,
+    "subpageNames": [
+      "Deals",
+      "Original Maschinen",
+      "Atelier",
+      "Citiz",
+      "Essenza Mini",
+      "Vertuo Maschinen",
+      "Vertuo Kaffee",
+      "Accessoires",
+      "Milchaufschäumer",
+      "Registrierung",
+      "Service",
+      "Kaffee-Abonnement",
+      "Nachhaltigkeit",
+      "Professional"
+    ],
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageId": "2429E3F3-8BFA-466A-9185-35FB47867B06",
+        "imageCount": 10,
+        "hasVideo": false,
+        "asinCount": 9
+      }
+    ],
+    "storeStructure": {
+      "totalUniquePages": 43,
+      "navigationPattern": "Premium Mega-Store: Zwei Maschinen-Linien (Original, Vertuo) → Maschinenmodelle → Kaffeesorten → Accessoires → Service/Nachhaltigkeit.",
+      "categoryLogic": "Maschinenlinie → Modell + Kaffeesorte → Zubehör/Service"
+    }
   }
 }

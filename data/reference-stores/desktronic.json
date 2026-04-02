@@ -330,5 +330,78 @@
       "Produkt-Freisteller ohne Text wirken wie Platzhalter",
       "Kein Follow-CTA oder Community-Element"
     ]
+  },
+  "geminiVisionData": {
+    "analyzedAt": "2026-04-01T20:35:35.996Z",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "imageCount": 1,
+    "images": [
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/b9299258-545b-46e6-adcb-cc3482bbf1ca.jpg",
+        "page": "Startseite",
+        "summary": "```json\n{\n \"summary\": \"A brand store hero image displays the 'Desktronic' logo and a German tagline on a dark"
+      }
+    ]
+  },
+  "geminiVisionV2": {
+    "brandName": "Desktronic",
+    "storeUrl": "https://www.amazon.de/stores/Desktronic/page/1A862649-6CEA-4E30-855F-0C27A1F99A6C",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "totalImagesFound": 4,
+    "analyzedAt": "2026-04-02T01:02:46.883Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/Desktronic/page/1A862649-6CEA-4E30-855F-0C27A1F99A6C",
+        "totalImagesFound": 4,
+        "imagesAnalyzed": 4,
+        "images": [
+          {
+            "url": "https://m.media-amazon.com/images/G/03/social_share/amazon_logo._CB633266471_.png",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/G/03/gno/sprites/nav-sprite-global-1x-reorg-privacy._CB546381603_.png",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/G/03/digital/video/gateway/placement/launch/crme/CRME_2026_SWM_XSite_POST_400x39_PV_de-DE_PV00068989._CB784256838_.jpg",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/b9299258-545b-46e6-adcb-cc3482bbf1ca.jpg",
+            "alt": "",
+            "source": "regex"
+          }
+        ],
+        "pageAnalysis": {
+          "pageSummary": "The page features a minimalist brand identity."
+        }
+      }
+    ]
+  },
+  "geminiVisionV3": {
+    "brandName": "Desktronic",
+    "storeUrl": "https://www.amazon.de/stores/Desktronic/page/1A862649-6CEA-4D93-9E12-8F2D4ACF1B23",
+    "pagesAnalyzed": 2,
+    "subpagesFound": 1,
+    "subpageNames": [
+      "Subpage"
+    ],
+    "storeTotals": {
+      "totalImages": 78,
+      "totalSections": 0,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {}
+    },
+    "analyzedAt": "2026-04-02T02:27:32.707Z"
   }
 }

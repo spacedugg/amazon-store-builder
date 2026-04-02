@@ -2,7 +2,7 @@
   "brandName": "MANSCAPED",
   "storeUrl": "https://www.amazon.de/stores/page/44908195-3880-47D6-9EC0-D2A1543EB718",
   "category": "beauty",
-  "qualityScore": 4,
+  "qualityScore": 5,
   "analyzedAt": "2026-04-01",
   "ci": {
     "primaryColors": [
@@ -404,5 +404,81 @@
       "Kopf & Körper-Sektion fehlt auf der Startseite",
       "Seite ist sehr lang — könnte Nutzer überfordern"
     ]
+  },
+  "geminiVisionData": {
+    "analyzedAt": "2026-04-01T20:03:15.363Z",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "imageCount": 1,
+    "images": [
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/5ee3cbaf-bb7c-4112-9d25-a6bf19b68da0.jpg",
+        "page": "Startseite",
+        "summary": "```json\n{\n \"summary\": \"An Amazon Brand Store hero image showcases a wide range of MANSCAPED grooming products and the brand logo"
+      }
+    ]
+  },
+  "geminiVisionV3": {
+    "brandName": "MANSCAPED",
+    "storeUrl": "https://www.amazon.de/stores/page/44908195-3880-47D6-9EC0-D2A8F1C3DE4C",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "storeTotals": {
+      "totalImages": 0,
+      "totalSections": 0,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {}
+    },
+    "analyzedAt": "2026-04-02T02:27:40.475Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/page/44908195-3880-47D6-9EC0-D2A8F1C3DE4C",
+        "structure": {
+          "sectionCount": 0,
+          "sections": [],
+          "tileCount": 0,
+          "videoCount": 0,
+          "asinCount": 0,
+          "asins": []
+        },
+        "images": {
+          "total": 0,
+          "analyzed": 0,
+          "list": []
+        },
+        "pageAnalysis": null
+      }
+    ]
+  },
+  "browserCrawl": {
+    "crawledAt": "2026-04-02",
+    "method": "chrome-direct",
+    "pagesAnalyzed": 1,
+    "totalImages": 33,
+    "subpageNames": [
+      "Bestseller",
+      "Intimpflege",
+      "Bart & Gesicht",
+      "Kopf & Körper",
+      "Alle Produkte"
+    ],
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageId": "44908195-3880-47D6-9EC0-D2A1543EB718",
+        "imageCount": 33,
+        "hasVideo": false,
+        "asinCount": 25
+      }
+    ],
+    "storeStructure": {
+      "totalUniquePages": 6,
+      "navigationPattern": "Körperzone-basiert: Intimpflege, Bart & Gesicht, Kopf & Körper. Plus Bestseller.",
+      "categoryLogic": "Körperzone → Produkttyp"
+    }
   }
 }

@@ -403,5 +403,460 @@
       "Keine Kundenrezensionen oder Testimonials auf der Startseite",
       "App-CTA führt nicht zu einem Download — nur informativ"
     ]
+  },
+  "geminiVisionData": {
+    "analyzedAt": "2026-04-01T19:34:46.273Z",
+    "pagesAnalyzed": 8,
+    "subpagesFound": 7,
+    "subpageNames": [
+      "Faszienrollen",
+      "Trainingsbänder",
+      "Schlaf",
+      "Bälle & Trigger",
+      "Über BLACKROLL",
+      "Massagepistole",
+      "Bestseller"
+    ],
+    "imageCount": 5,
+    "images": [
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e29daa5c-3a2a-465a-808e-ade40456e1e1.jpg",
+        "page": "Startseite",
+        "summary": "The BLACKROLL brand logo is prominently displayed in white text on a dark grey background.",
+        "imageCategory": "store_hero",
+        "dominantColors": [
+          "#212121",
+          "#FFFFFF"
+        ],
+        "textOnImage": "BLACKROLL®",
+        "elements": [
+          "logo"
+        ],
+        "brandingElements": "BLACKROLL logo with registered trademark symbol",
+        "designPatterns": [
+          "text-on-dark"
+        ]
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d7af1d2a-a8a5-485b-8b7f-b2ae8214e3e9.jpg",
+        "page": "Faszienrollen",
+        "summary": "```json\n{\n \"summary\": \"A woman uses a BLACKROLL foam roller on a mat, with overlay text promoting fascia rolling for increased mobility and"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/8e0e44a5-d9fd-4f19-94bf-378fb4b1230b.jpg",
+        "page": "Faszienrollen",
+        "summary": "A woman uses a BLACKROLL fascia roller on a mat, with text promoting mobility and regeneration."
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/5d81d56d-0390-478b-a6fd-9102ced304ca.jpg",
+        "page": "Massagepistole",
+        "summary": "```json\n{\n \"summary\": \"A close-up image features a black massage gun being used on a person's arm, accompanied by"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/12a8b100-01ce-4bd2-a426-2962b2c1d386.jpg",
+        "page": "Massagepistole",
+        "summary": "```json\n{\n \"summary\": \"A person uses a black massage gun on their leg, with overlaid German text promoting efficient recovery at home"
+      }
+    ]
+  },
+  "geminiVisionV2": {
+    "brandName": "BLACKROLL",
+    "storeUrl": "https://www.amazon.de/stores/page/03098AB4-BDD5-4A23-A7DD-5C10153C5D58",
+    "pagesAnalyzed": 8,
+    "subpagesFound": 7,
+    "subpageNames": [
+      "Faszienrollen",
+      "Trainingsbänder",
+      "Schlaf",
+      "Bälle & Trigger",
+      "Über BLACKROLL",
+      "Massagepistole",
+      "Bestseller"
+    ],
+    "totalImagesFound": 36,
+    "analyzedAt": "2026-04-01T22:21:01.633Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/page/03098AB4-BDD5-4A23-A7DD-5C10153C5D58",
+        "totalImagesFound": 4,
+        "imagesAnalyzed": 4,
+        "images": [
+          {
+            "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e29daa5c-3a2a-465a-808e-ade40456e1e1.jpg",
+            "alt": "Text reads BLACKROLL. White text on a black background.",
+            "source": "config"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/G/03/gno/sprites/nav-sprite-global-1x-reorg-privacy._CB546381603_.png",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/G/03/digital/video/gateway/placement/launch/crme/CRME_2026_SWM_XSite_POST_400x39_PV_de-DE_PV00068989._CB784256838_.jpg",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/S/stores-image-uploads-eu-prod/2/AmazonStores/A1PA6795UKMFR9/ed09f4e6c1b447d47e8f7f605c1af234.w800.h800._CR0%2C0%2C800%2C800_SX100_.jpg",
+            "alt": "",
+            "source": "img-tag"
+          }
+        ],
+        "pageAnalysis": {
+          "pageSummary": "The BLACKROLL Brand Store page appears to be extremely minimal, primarily showcasing the brand's logo in different formats.",
+          "designConcept": "The core visual strategy is minimalist brand identity, focusing solely on logo recognition.",
+          "colorScheme": {
+            "primary": "#000000",
+            "secondary": "#FFFFFF",
+            "accent": null,
+            "background": "#212529"
+          },
+          "layoutPattern": "hero-stack",
+          "visualHierarchy": [
+            "The large BLACKROLL text on the dark banner",
+            "The circular BLACKROLL logo"
+          ],
+          "contentMix": {
+            "heroImages": 1,
+            "lifestyleImages": 0,
+            "productImages": 0,
+            "graphicsOrIcons": 1,
+            "videos": 0,
+            "textBanners": 1
+          },
+          "designPatterns": [
+            "full-width-hero",
+            "logo-as-banner",
+            "circular-logo",
+            "text-banner"
+          ],
+          "brandingConsistency": "The brand identity is consistently applied through the use of the official BLACKROLL logo in both its banner and circular icon forms."
+        }
+      },
+      {
+        "pageName": "Faszienrollen",
+        "pageUrl": "https://www.amazon.de/stores/page/0C47A3FC-C1D2-4C30-B03C-86EDFB3B607A",
+        "totalImagesFound": 6,
+        "imagesAnalyzed": 6,
+        "images": [
+          {
+            "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e29daa5c-3a2a-465a-808e-ade40456e1e1.jpg",
+            "alt": "BLACKROLL logo",
+            "source": "config"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/8e0e44a5-d9fd-4f19-94bf-378fb4b1230b.jpg",
+            "alt": "Woman using foam roller - Faszienrollen hero",
+            "source": "config"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d7af1d2a-a8a5-485b-8b7f-b2ae8214e3e9.jpg",
+            "alt": "Woman using foam roller - lifestyle",
+            "source": "config"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/G/03/gno/sprites/nav-sprite-global-1x-reorg-privacy._CB546381603_.png",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/G/03/digital/video/gateway/placement/launch/crme/CRME_2026_SWM_XSite_POST_400x39_PV_de-DE_PV00068989._CB784256838_.jpg",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/S/stores-image-uploads-eu-prod/2/AmazonStores/A1PA6795UKMFR9/ed09f4e6c1b447d47e8f7f605c1af234.w800.h800._CR0%2C0%2C800%2C800_SX100_.jpg",
+            "alt": "",
+            "source": "img-tag"
+          }
+        ],
+        "pageAnalysis": {
+          "pageSummary": "The BLACKROLL Faszienrollen Brand Store page features a clean, minimalist design centered around a strong hero section with lifestyle imagery.",
+          "designConcept": "The core visual strategy is to combine benefit-driven messaging with authentic lifestyle imagery to showcase product utility.",
+          "colorScheme": {
+            "primary": "#1A1A1A",
+            "secondary": "#FFFFFF",
+            "accent": null,
+            "background": "#F5F5F5"
+          },
+          "layoutPattern": "hero-stack",
+          "visualHierarchy": [
+            "The bold text overlay on hero image",
+            "The lifestyle image of woman using BLACKROLL product",
+            "The Faszienrollen category label and BLACKROLL logo"
+          ],
+          "contentMix": {
+            "heroImages": 1,
+            "lifestyleImages": 1,
+            "productImages": 0,
+            "graphicsOrIcons": 1,
+            "videos": 0,
+            "textBanners": 1
+          },
+          "designPatterns": [
+            "full-width-hero",
+            "text-overlay",
+            "brand-logo-banner",
+            "minimalist-color-palette",
+            "benefit-driven-headline"
+          ],
+          "brandingConsistency": "The brand identity is consistently applied through the prominent logo, distinct typography, and cohesive black, white, and dark grey color palette."
+        }
+      },
+      {
+        "pageName": "Trainingsbänder",
+        "pageUrl": "https://www.amazon.de/stores/page/0EC7448C-FEF3-4672-BB11-15EAD7208270",
+        "totalImagesFound": 3,
+        "imagesAnalyzed": 3,
+        "images": [
+          {
+            "url": "https://m.media-amazon.com/images/G/03/gno/sprites/nav-sprite-global-1x-reorg-privacy._CB546381603_.png",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/G/03/digital/video/gateway/placement/launch/crme/CRME_2026_SWM_XSite_POST_400x39_PV_de-DE_PV00068989._CB784256838_.jpg",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e29daa5c-3a2a-465a-808e-ade40456e1e1.jpg",
+            "alt": "",
+            "source": "regex"
+          }
+        ],
+        "pageAnalysis": {
+          "pageSummary": "The provided images do not form a cohesive Amazon Brand Store page for BLACKROLL Trainingsbänder.",
+          "designConcept": "Minimalist and bold branding, using high contrast for strong brand recognition.",
+          "colorScheme": {
+            "primary": "#1A1A1A",
+            "secondary": "#FFFFFF",
+            "accent": "N/A",
+            "background": "#1A1A1A"
+          },
+          "layoutPattern": "mixed"
+        }
+      },
+      {
+        "pageName": "Schlaf",
+        "pageUrl": "https://www.amazon.de/stores/page/870649DE-4F7E-421F-B141-C4C47864D539",
+        "totalImagesFound": 6,
+        "imagesAnalyzed": 6,
+        "images": [
+          {
+            "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e29daa5c-3a2a-465a-808e-ade40456e1e1.jpg",
+            "alt": "BLACKROLL logo",
+            "source": "config"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e6691f63-64d7-4379-ae36-732ab7810331.jpg",
+            "alt": "Schlaf - Fit in den Tag starten durch richtige Regeneration",
+            "source": "config"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/1d776023-7b51-4bf2-a478-f4d4bbe69d0c.jpg",
+            "alt": "Smiling woman lying in bed on white pillow",
+            "source": "config"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/G/03/gno/sprites/nav-sprite-global-1x-reorg-privacy._CB546381603_.png",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/G/03/digital/video/gateway/placement/launch/crme/CRME_2026_SWM_XSite_POST_400x39_PV_de-DE_PV00068989._CB784256838_.jpg",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/S/stores-image-uploads-eu-prod/2/AmazonStores/A1PA6795UKMFR9/ed09f4e6c1b447d47e8f7f605c1af234.w800.h800._CR0%2C0%2C800%2C800_SX100_.jpg",
+            "alt": "",
+            "source": "img-tag"
+          }
+        ],
+        "pageAnalysis": {
+          "pageSummary": "The page attempts to establish a focus on sleep and regeneration through aspirational lifestyle imagery.",
+          "parseError": true,
+          "designConcept": "Promote BLACKROLL sleep-related products through aspirational lifestyle imagery and clear benefit-oriented text.",
+          "layoutPattern": "mixed"
+        }
+      },
+      {
+        "pageName": "Bälle & Trigger",
+        "pageUrl": "https://www.amazon.de/stores/page/DD99AD6C-2ABA-4720-8BE8-06517078F35B",
+        "totalImagesFound": 4,
+        "imagesAnalyzed": 4,
+        "images": [
+          {
+            "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e29daa5c-3a2a-465a-808e-ade40456e1e1.jpg",
+            "alt": "BLACKROLL logo",
+            "source": "config"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/G/03/gno/sprites/nav-sprite-global-1x-reorg-privacy._CB546381603_.png",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/G/03/digital/video/gateway/placement/launch/crme/CRME_2026_SWM_XSite_POST_400x39_PV_de-DE_PV00068989._CB784256838_.jpg",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/S/stores-image-uploads-eu-prod/2/AmazonStores/A1PA6795UKMFR9/ed09f4e6c1b447d47e8f7f605c1af234.w800.h800._CR0%2C0%2C800%2C800_SX100_.jpg",
+            "alt": "",
+            "source": "img-tag"
+          }
+        ],
+        "pageAnalysis": {
+          "parseError": true,
+          "designConcept": "Minimalist and strong, using high contrast to emphasize the brand name.",
+          "layoutPattern": "mixed"
+        }
+      },
+      {
+        "pageName": "Über BLACKROLL",
+        "pageUrl": "https://www.amazon.de/stores/page/031EB79B-C8A4-4E6D-ADBF-B84F0D3957ED",
+        "totalImagesFound": 5,
+        "imagesAnalyzed": 5,
+        "images": [
+          {
+            "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e29daa5c-3a2a-465a-808e-ade40456e1e1.jpg",
+            "alt": "BLACKROLL logo",
+            "source": "config"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/G/03/social_share/amazon_logo._CB633266471_.png",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/G/03/gno/sprites/nav-sprite-global-1x-reorg-privacy._CB546381603_.png",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/G/03/digital/video/gateway/placement/launch/crme/CRME_2026_SWM_XSite_POST_400x39_PV_de-DE_PV00068989._CB784256838_.jpg",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/S/stores-image-uploads-eu-prod/2/AmazonStores/A1PA6795UKMFR9/ed09f4e6c1b447d47e8f7f605c1af234.w800.h800._CR0%2C0%2C800%2C800_SX100_.jpg",
+            "alt": "",
+            "source": "img-tag"
+          }
+        ],
+        "pageAnalysis": {
+          "pageSummary": "Strong brand identity for BLACKROLL through prominent logo placement on a dark background.",
+          "designConcept": "Clear brand recognition using a minimalist, high-contrast logo presentation.",
+          "colorScheme": {
+            "primary": "#282a2e",
+            "secondary": "#FFFFFF",
+            "accent": "#FF9900",
+            "background": "#FFFFFF"
+          },
+          "layoutPattern": "mixed",
+          "designPatterns": [
+            "full-width-banner",
+            "minimalist-logo-design",
+            "text-on-solid-background",
+            "circular-icon"
+          ],
+          "brandingConsistency": "The BLACKROLL brand identity is consistently applied through its distinct logo and core color scheme."
+        }
+      },
+      {
+        "pageName": "Massagepistole",
+        "pageUrl": "https://www.amazon.de/stores/page/9A8C7424-898F-4E76-9442-CBCDB511CECB",
+        "totalImagesFound": 4,
+        "imagesAnalyzed": 4,
+        "images": [
+          {
+            "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e29daa5c-3a2a-465a-808e-ade40456e1e1.jpg",
+            "alt": "BLACKROLL logo",
+            "source": "config"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/G/03/gno/sprites/nav-sprite-global-1x-reorg-privacy._CB546381603_.png",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/G/03/digital/video/gateway/placement/launch/crme/CRME_2026_SWM_XSite_POST_400x39_PV_de-DE_PV00068989._CB784256838_.jpg",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/S/stores-image-uploads-eu-prod/2/AmazonStores/A1PA6795UKMFR9/ed09f4e6c1b447d47e8f7f605c1af234.w800.h800._CR0%2C0%2C800%2C800_SX100_.jpg",
+            "alt": "",
+            "source": "img-tag"
+          }
+        ],
+        "pageAnalysis": {
+          "parseError": true,
+          "designConcept": "Minimalist and strong, using high contrast to emphasize the brand name.",
+          "layoutPattern": "mixed"
+        }
+      },
+      {
+        "pageName": "Bestseller",
+        "pageUrl": "https://www.amazon.de/stores/page/A2470DD2-F6B7-49D3-9DE1-4BC9FBE710B0",
+        "totalImagesFound": 4,
+        "imagesAnalyzed": 4,
+        "images": [
+          {
+            "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e29daa5c-3a2a-465a-808e-ade40456e1e1.jpg",
+            "alt": "BLACKROLL logo",
+            "source": "config"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/G/03/gno/sprites/nav-sprite-global-1x-reorg-privacy._CB546381603_.png",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/G/03/digital/video/gateway/placement/launch/crme/CRME_2026_SWM_XSite_POST_400x39_PV_de-DE_PV00068989._CB784256838_.jpg",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/S/stores-image-uploads-eu-prod/2/AmazonStores/A1PA6795UKMFR9/ed09f4e6c1b447d47e8f7f605c1af234.w800.h800._CR0%2C0%2C800%2C800_SX100_.jpg",
+            "alt": "",
+            "source": "img-tag"
+          }
+        ],
+        "pageAnalysis": {
+          "parseError": true,
+          "designConcept": "Clear brand identity using a minimalist black and white palette.",
+          "layoutPattern": "mixed"
+        }
+      }
+    ]
+  },
+  "geminiVisionV3": {
+    "brandName": "BLACKROLL",
+    "storeUrl": "https://www.amazon.de/stores/page/03098AB4-BDD5-4A23-A7DD-5C10153C5D58",
+    "pagesAnalyzed": 8,
+    "subpagesFound": 7,
+    "subpageNames": [
+      "Faszienrollen",
+      "Trainingsbänder",
+      "Schlaf",
+      "Bälle & Trigger",
+      "Über BLACKROLL",
+      "Massagepistole",
+      "Bestseller"
+    ],
+    "storeTotals": {
+      "totalImages": 36,
+      "totalSections": 2,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {
+        "unknown": 2
+      }
+    },
+    "analyzedAt": "2026-04-02T02:26:45.876Z"
   }
 }

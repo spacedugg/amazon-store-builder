@@ -616,5 +616,38 @@
       "Kein Deals/Angebote-Highlight auf der Startseite trotz vorhandener Angebote-Seite",
       "Keine Bewertungs-Highlights, keine Social Proof Elemente"
     ]
+  },
+  "geminiVisionV3": {
+    "brandName": "SNOCKS",
+    "storeUrl": "https://www.amazon.de/stores/SNOCKS/page/C0392661-40E4-498F-BF6E-6CB8A37CEDE1",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "storeTotals": {
+      "totalImages": 66,
+      "totalSections": 0,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {}
+    },
+    "analyzedAt": "2026-04-02T02:28:13.801Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/SNOCKS/page/C0392661-40E4-498F-BF6E-6CB8A37CEDE1",
+        "structure": {
+          "sectionCount": 0,
+          "sections": [],
+          "tileCount": 0,
+          "videoCount": 0,
+          "asinCount": 0,
+          "asins": []
+        },
+        "images": {
+          "total": 66,
+          "analyzed": 25
+        }
+      }
+    ]
   }
 }

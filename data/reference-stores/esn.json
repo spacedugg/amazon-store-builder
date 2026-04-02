@@ -298,5 +298,38 @@
       "Schwarzes Design kann monoton wirken wenn alle Kacheln gleich aussehen",
       "Kein Video-Content trotz starker Athlet-Marke"
     ]
+  },
+  "geminiVisionV3": {
+    "brandName": "ESN",
+    "storeUrl": "https://www.amazon.de/stores/ESN/page/F5F8CAD5-7990-44CF-9F52-C60A61A5BCBC",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "storeTotals": {
+      "totalImages": 268,
+      "totalSections": 0,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {}
+    },
+    "analyzedAt": "2026-04-02T02:27:41.851Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/ESN/page/F5F8CAD5-7990-44CF-9F52-C60A61A5BCBC",
+        "structure": {
+          "sectionCount": 0,
+          "sections": [],
+          "tileCount": 0,
+          "videoCount": 0,
+          "asinCount": 0,
+          "asins": []
+        },
+        "images": {
+          "total": 268,
+          "analyzed": 25
+        }
+      }
+    ]
   }
 }

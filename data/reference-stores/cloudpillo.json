@@ -328,5 +328,217 @@
       "Topper-Kategorie hat keine eigene Sektion auf der Startseite",
       "Kein Gründer-Story oder Über-uns-Element"
     ]
+  },
+  "geminiVisionData": {
+    "analyzedAt": "2026-04-01T19:35:04.488Z",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "imageCount": 1,
+    "images": [
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/3b313c7c-7aea-47d6-b491-b02a43028884.jpg",
+        "page": "Startseite",
+        "summary": "```json\n{\n \"summary\": \"A brand store hero image for Cloudpillo featuring two people interacting with a pillow in a sky setting,"
+      }
+    ]
+  },
+  "geminiVisionV2": {
+    "brandName": "Cloudpillo",
+    "storeUrl": "https://www.amazon.de/stores/Cloudpillo/page/741141B6-87D5-44F9-BE63-71B55CD51198",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "totalImagesFound": 3,
+    "analyzedAt": "2026-04-02T01:02:30.003Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/Cloudpillo/page/741141B6-87D5-44F9-BE63-71B55CD51198",
+        "totalImagesFound": 3,
+        "imagesAnalyzed": 3,
+        "images": [
+          {
+            "url": "https://m.media-amazon.com/images/G/03/gno/sprites/nav-sprite-global-1x-reorg-privacy._CB546381603_.png",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/G/03/digital/video/gateway/placement/launch/crme/CRME_2026_SWM_XSite_POST_400x39_PV_de-DE_PV00068989._CB784256838_.jpg",
+            "alt": "",
+            "source": "img-tag"
+          },
+          {
+            "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/3b313c7c-7aea-47d6-b491-b02a43028884.jpg",
+            "alt": "",
+            "source": "regex"
+          }
+        ],
+        "pageAnalysis": {
+          "pageSummary": "The page prominently features a single, large hero banner that immediately establishes the brand identity."
+        }
+      }
+    ]
+  },
+  "geminiVisionV3": {
+    "brandName": "Cloudpillo",
+    "storeUrl": "https://www.amazon.de/stores/Cloudpillo/page/741141B6-87D5-4C32-853F-84EB5C36FDA8",
+    "pagesAnalyzed": 1,
+    "subpagesFound": 0,
+    "subpageNames": [],
+    "storeTotals": {
+      "totalImages": 58,
+      "totalSections": 0,
+      "totalVideos": 0,
+      "totalAsins": 0,
+      "sectionTypeCounts": {}
+    },
+    "analyzedAt": "2026-04-02T02:27:10.555Z",
+    "pages": [
+      {
+        "pageName": "Startseite",
+        "pageUrl": "https://www.amazon.de/stores/Cloudpillo/page/741141B6-87D5-4C32-853F-84EB5C36FDA8",
+        "structure": {
+          "sectionCount": 0,
+          "sections": [],
+          "tileCount": 0,
+          "videoCount": 0,
+          "asinCount": 0,
+          "asins": []
+        },
+        "images": {
+          "total": 58,
+          "analyzed": 25,
+          "list": [
+            {
+              "url": "https://m.media-amazon.com/images/G/03/digital/video/gateway/placement/launch/crme/CRME_2026_SWM_XSite_POST_400x39_PV_de-DE_PV00068989._CB784256838_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/391fd5dd-57f8-43e5-a982-e1d473563beb._CR0,0,2528,467_AC_SX130_SY60_CB1169409_QL70_.png",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/51tpQH5Z-yL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/51sKAIhSQdL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/41dXKcNvLiL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/51YKnj9LvRL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/41DgvzDxKzL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/41A8P-XKGkL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/51KVFCCq0NL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/511e3aNQOpL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/31BqBINF4NL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/41f2YvlqVEL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/41nK1UqLRJL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/41Dq7uVJ5oL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/31eWZW3lQvL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/41Mg9BQMYIL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/51KwLlmEX0L._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/41r9jSNLDxL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/41+kV7gVsKL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/41C4JpQ-GDL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/41cH+P1QfrL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/51B5n+Ja2VL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/41tLmhC3mVL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/51x+6iFxWfL._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            },
+            {
+              "url": "https://m.media-amazon.com/images/I/41y50AWWPML._AC_UY218_.jpg",
+              "alt": "",
+              "source": "img-tag"
+            }
+          ]
+        },
+        "pageAnalysis": null
+      }
+    ]
   }
 }
