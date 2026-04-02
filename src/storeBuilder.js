@@ -1402,6 +1402,20 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     }
   }
 
+  // Extract CI data from website scrape for designer briefing
+  var ciData = null;
+  if (websiteData) {
+    ciData = {
+      websiteUrl: websiteData.url || '',
+      title: websiteData.title || '',
+      description: websiteData.description || '',
+      certifications: websiteData.certifications || [],
+      aboutText: (websiteData.aboutText || '').slice(0, 500),
+      features: websiteData.features || [],
+      socialProof: websiteData.socialProof || [],
+    };
+  }
+
   return {
     brandName: brand,
     marketplace: marketplace,
@@ -1413,6 +1427,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     products: products,
     pages: pages,
     asins: asinList,
+    ciData: ciData,
   };
 }
 
