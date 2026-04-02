@@ -1,10 +1,10 @@
-// âââ GEMINI VISION ENRICHMENT V2: FULL-PAGE ANALYSIS âââ
-// Crawls a reference store + all subpages, extracts ALL images,
-// sends ALL images per page to Gemini for holistic design analysis.
+// âââ GEMINI VISION ENRICHMENT V3: FULL STORE STRUCTURE ANALYSIS âââ
+// Crawls a reference store + all subpages, extracts the COMPLETE store
+// structure (sections, widgets, tiles, videos, ASINs, images) from
+// var config blocks, then sends images + structural context to Gemini.
 //
-// POST /api/enrich-reference-store
-// Body: { storeUrl, brandName, maxImagesPerPage?: 20 }
-// Returns: { brandName, pages: [ { pageName, imageCount, pageAnalysis, images } ] }
+// POST|GET /api/enrich-reference-store
+// Body/Query: { storeUrl, brandName, maxImagesPerPage?: 20 }
 
 var GEMINI_KEY = process.env.GEMINI_API_KEY;
 var GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
@@ -19,11 +19,10 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST' && req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
 
-  // Support both POST (body) and GET (query params)
   var body = req.method === 'POST' ? (req.body || {}) : (req.query || {});
   var storeUrl = body.storeUrl;
   var brandName = body.brandName || 'Unknown';
-  var maxImagesPerPage = parseInt(body.maxImagesPerPage, 10) || 20;
+  var maxImagesPerPage = parseInt(body.maxImagesPerPage, 10) || 25;
 
   if (!storeUrl) return res.status(400).json({ error: 'Missing storeUrl' });
   if (!GEMINI_KEY) return res.status(500).json({ error: 'GEMINI_API_KEY not configured' });
@@ -33,7 +32,7 @@ module.exports = async function handler(req, res) {
     // Step 1: Crawl main page
     var mainHtml = await crawlPage(storeUrl);
     if (!mainHtml || mainHtml.length < 1000) {
-      return res.status(502).json({ error: 'Empty or too short response from crawler' });
+      return res.status(502).json({ error: 'Empty or too short response from crawler (' + (mainHtml ? mainHtml.length : 0) + ' chars)' });
     }
 
     // Step 2: Extract subpage URLs from var config nav
@@ -52,33 +51,66 @@ module.exports = async function handler(req, res) {
       } catch (e) { /* skip failed subpage */ }
     }
 
-    // Step 4: For EACH page, extract ALL images and analyze with Gemini
+    // Step 4: For EACH page, extract structure + images and analyze with Gemini
     var pageResults = [];
     var totalImages = 0;
+    var totalSections = 0;
+    var totalVideos = 0;
+    var totalAsins = 0;
 
     for (var pg = 0; pg < allHtmlPages.length; pg++) {
       var page = allHtmlPages[pg];
+
+      // NEW: Extract full page structure from var config blocks
+      var pageStructure = extractPageStructure(page.html);
+
+      // Extract all images (existing logic, improved)
       var pageImages = extractAllImages(page.html);
       totalImages += pageImages.length;
 
-      // Limit images per page for Gemini (keep the most relevant ones)
+      // Collect page-level stats
+      var pageSections = pageStructure.sections || [];
+      var pageVideoCount = 0;
+      var pageAsinList = [];
+      var pageTileCount = 0;
+      for (var si = 0; si < pageSections.length; si++) {
+        var sec = pageSections[si];
+        pageVideoCount += (sec.videoUrls || []).length;
+        pageAsinList = pageAsinList.concat(sec.asins || []);
+        pageTileCount += sec.tileCount || 0;
+      }
+      totalSections += pageSections.length;
+      totalVideos += pageVideoCount;
+      totalAsins += pageAsinList.length;
+
+      // Limit images for Gemini
       var imagesToSend = pageImages.slice(0, maxImagesPerPage);
 
       var pageResult = {
         pageName: page.pageName,
         pageUrl: page.url,
-        totalImagesFound: pageImages.length,
-        imagesAnalyzed: imagesToSend.length,
-        images: imagesToSend.map(function(img) {
-          return { url: img.url, alt: img.alt, source: img.source };
-        }),
+        structure: {
+          sectionCount: pageSections.length,
+          sections: pageSections,
+          tileCount: pageTileCount,
+          videoCount: pageVideoCount,
+          asinCount: pageAsinList.length,
+          asins: pageAsinList.slice(0, 50),
+        },
+        images: {
+          total: pageImages.length,
+          analyzed: imagesToSend.length,
+          list: imagesToSend.map(function(img) {
+            return { url: img.url, alt: img.alt, source: img.source };
+          }),
+        },
         pageAnalysis: null,
       };
 
-      // Step 5: Send ALL page images to Gemini in ONE request
+      // Step 5: Send images + structure context to Gemini
       if (imagesToSend.length > 0) {
         try {
-          var analysis = await analyzePageWithGemini(imagesToSend, brandName, page.pageName);
+          var analysis = await analyzePageWithGemini(imagesToSend, brandName, page.pageName, pageSections);
           pageResult.pageAnalysis = analysis;
         } catch (err) {
           pageResult.pageAnalysis = { error: err.message };
@@ -87,9 +119,18 @@ module.exports = async function handler(req, res) {
 
       pageResults.push(pageResult);
 
-      // Delay between pages
       if (pg < allHtmlPages.length - 1) {
         await new Promise(function(r) { setTimeout(r, 500); });
+      }
+    }
+
+    // Build store-level summary
+    var allSectionTypes = {};
+    for (var pi = 0; pi < pageResults.length; pi++) {
+      var secs = pageResults[pi].structure.sections;
+      for (var sj = 0; sj < secs.length; sj++) {
+        var t = secs[sj].type || 'unknown';
+        allSectionTypes[t] = (allSectionTypes[t] || 0) + 1;
       }
     }
 
@@ -99,7 +140,13 @@ module.exports = async function handler(req, res) {
       pagesAnalyzed: allHtmlPages.length,
       subpagesFound: subpageUrls.length,
       subpageNames: subpageUrls.map(function(s) { return s.name; }),
-      totalImagesFound: totalImages,
+      storeTotals: {
+        totalImages: totalImages,
+        totalSections: totalSections,
+        totalVideos: totalVideos,
+        totalAsins: totalAsins,
+        sectionTypeCounts: allSectionTypes,
+      },
       analyzedAt: new Date().toISOString(),
       pages: pageResults,
     });
@@ -137,8 +184,167 @@ async function crawlPage(url) {
   }
 }
 
+// âââ NEW: EXTRACT FULL PAGE STRUCTURE FROM VAR CONFIG BLOCKS âââ
+// Parses every var config block and classifies it as a store section
+function extractPageStructure(html) {
+  var configs = extractAllVarConfigs(html);
+  var sections = [];
+
+  for (var i = 0; i < configs.length; i++) {
+    var cfg = configs[i];
+    // Skip lazy-loaded placeholders
+    if (cfg.isLazyLoaded) continue;
+    // Skip navigation-only configs
+    if (cfg.content && cfg.content.nav && !cfg.widgetType && !cfg.sectionType) continue;
+
+    var section = classifySection(cfg);
+    if (section) {
+      sections.push(section);
+    }
+  }
+
+  return { sections: sections };
+}
+
+// âââ CLASSIFY A CONFIG BLOCK INTO A STORE SECTION âââ
+function classifySection(cfg) {
+  var widgetType = cfg.widgetType || cfg.sectionType || '';
+  var content = cfg.content || {};
+
+  // Skip pure navigation/chrome widgets
+  if (/^(Nav|Breadcrumb|Footer|Header|SearchBar)$/i.test(widgetType)) return null;
+
+  var section = {
+    widgetType: widgetType,
+    type: mapWidgetToType(widgetType, cfg),
+    tileCount: 0,
+    imageCount: 0,
+    videoUrls: [],
+    asins: [],
+    hasText: false,
+    textContent: [],
+  };
+
+  // Count tiles/items
+  var tiles = content.tiles || content.items || content.cards || [];
+  if (Array.isArray(tiles)) {
+    section.tileCount = tiles.length;
+  }
+
+  // Recursively extract structured data
+  extractStructuredData(cfg, section, 0);
+
+  // Only return sections that have actual store content
+  if (section.type === 'unknown' && section.imageCount === 0 &&
+      section.tileCount === 0 && section.videoUrls.length === 0 &&
+      section.asins.length === 0 && !section.hasText) {
+    return null;
+  }
+
+  // Deduplicate ASINs
+  var seenAsins = {};
+  section.asins = section.asins.filter(function(a) {
+    if (seenAsins[a]) return false;
+    seenAsins[a] = true;
+    return true;
+  });
+
+  // Limit text content to first 5 entries to save space
+  section.textContent = section.textContent.slice(0, 5);
+
+  return section;
+}
+
+// âââ MAP WIDGET TYPE TO SECTION CATEGORY âââ
+function mapWidgetToType(widgetType, cfg) {
+  var wt = (widgetType || '').toLowerCase();
+
+  if (/hero/i.test(wt)) return 'hero';
+  if (/video/i.test(wt)) return 'video';
+  if (/product.*grid|productset|asin|product.*listing|shoppable/i.test(wt)) return 'product-grid';
+  if (/image.*text|text.*image|split/i.test(wt)) return 'image-text';
+  if (/gallery|carousel|slider/i.test(wt)) return 'gallery';
+  if (/image.*tile|tile|imagemap|quadrant/i.test(wt)) return 'image-tiles';
+  if (/banner|full.*image|marquee/i.test(wt)) return 'banner';
+  if (/text|headline|copy|richtext/i.test(wt)) return 'text';
+  if (/brand.*logo|logo|follow/i.test(wt)) return 'brand-element';
+  if (/deal|bestsell|popular|featured/i.test(wt)) return 'deals';
+  if (/navigation|nav|menu/i.test(wt)) return 'navigation';
+
+  // Try to infer from content
+  var content = cfg.content || {};
+  if (content.videoUrl || content.videoId) return 'video';
+  if (content.asin || content.asins || content.productList) return 'product-grid';
+  if (content.heroContent) return 'hero';
+  if (content.tiles && Array.isArray(content.tiles)) return 'image-tiles';
+
+  return 'unknown';
+}
+
+// âââ RECURSIVELY EXTRACT STRUCTURED DATA (IMAGES, VIDEOS, ASINS, TEXT) âââ
+function extractStructuredData(obj, section, depth) {
+  if (!obj || typeof obj !== 'object' || depth > 8) return;
+
+  if (Array.isArray(obj)) {
+    for (var i = 0; i < obj.length; i++) {
+      if (typeof obj[i] === 'object') extractStructuredData(obj[i], section, depth + 1);
+    }
+    return;
+  }
+
+  // Count images
+  if (obj.imageUrl || obj.imageKey || obj.backgroundImageUrl) {
+    section.imageCount++;
+  }
+
+  // Collect video URLs
+  if (obj.videoUrl && /\.(mp4|webm|m3u8)/i.test(obj.videoUrl)) {
+    section.videoUrls.push(obj.videoUrl);
+  }
+  if (obj.videoId) {
+    section.videoUrls.push('video:' + obj.videoId);
+  }
+
+  // Collect ASINs
+  if (obj.asin && typeof obj.asin === 'string' && /^[A-Z0-9]{10}$/.test(obj.asin)) {
+    section.asins.push(obj.asin);
+  }
+  if (obj.asins && Array.isArray(obj.asins)) {
+    for (var ai = 0; ai < obj.asins.length; ai++) {
+      if (typeof obj.asins[ai] === 'string' && /^[A-Z0-9]{10}$/.test(obj.asins[ai])) {
+        section.asins.push(obj.asins[ai]);
+      }
+    }
+  }
+
+  // Collect text content
+  if (obj.text && typeof obj.text === 'string' && obj.text.length > 3 && obj.text.length < 500) {
+    section.hasText = true;
+    if (section.textContent.length < 5) {
+      section.textContent.push(obj.text.slice(0, 200));
+    }
+  }
+  if (obj.headline && typeof obj.headline === 'string') {
+    section.hasText = true;
+    if (section.textContent.length < 5) {
+      section.textContent.push(obj.headline.slice(0, 200));
+    }
+  }
+  if (obj.title && typeof obj.title === 'string' && obj.title.length > 3) {
+    section.hasText = true;
+  }
+
+  // Recurse into nested objects
+  var keys = Object.keys(obj);
+  for (var k = 0; k < keys.length; k++) {
+    var val = obj[keys[k]];
+    if (typeof val === 'object' && val !== null) {
+      extractStructuredData(val, section, depth + 1);
+    }
+  }
+}
+
 // âââ EXTRACT ALL IMAGES FROM HTML (NO FILTER!) âââ
-// Combines: var config blocks, <img> tags, regex for media-amazon URLs
 function extractAllImages(html) {
   var images = [];
   var seen = {};
@@ -158,18 +364,17 @@ function extractAllImages(html) {
     addImageUnfiltered(images, seen, imgMatch[1], '', 'img-tag');
   }
 
-  // Source 3: Regex fallback for ALL media-amazon image URLs
+  // Source 3: Regex fallback for ALL media-amazon image URLs in /images/S/
   var allUrlRegex = /https:\/\/m\.media-amazon\.com\/images\/S\/[^"'\s<>)]+\.(jpg|jpeg|png|gif|webp|svg)/gi;
   var urlMatch;
   while ((urlMatch = allUrlRegex.exec(html)) !== null) {
     addImageUnfiltered(images, seen, urlMatch[0], '', 'regex');
   }
 
-  // Source 4: Product images (images/I/) â also part of the store design
+  // Source 4: Product images (images/I/)
   var productRegex = /https:\/\/m\.media-amazon\.com\/images\/I\/[^"'\s<>)]+\.(jpg|jpeg|png|gif|webp)/gi;
   var prodMatch;
   while ((prodMatch = productRegex.exec(html)) !== null) {
-    // Skip tiny thumbnails (they have small size suffixes like _SX38_, _SS40_)
     if (/\._[A-Z]{2}\d{2,3}_\./.test(prodMatch[0])) continue;
     addImageUnfiltered(images, seen, prodMatch[0], '', 'product');
   }
@@ -177,53 +382,45 @@ function extractAllImages(html) {
   return images;
 }
 
-// âââ EXTRACT IMAGES FROM A SINGLE CONFIG BLOCK (RECURSIVE) âââ
+// âââ EXTRACT IMAGES FROM CONFIG BLOCK (DEEP RECURSIVE â NO KEY FILTER) âââ
 function extractConfigImages(obj, images, seen, source) {
   if (!obj || typeof obj !== 'object') return;
 
-  // Direct imageUrl
   if (obj.imageUrl) {
     var url = obj.imageUrl;
     if (url.indexOf('http') !== 0) url = 'https://m.media-amazon.com/images/S/' + url;
     addImageUnfiltered(images, seen, url, obj.alt || obj.altText || obj.a11yImageAltText || '', source);
   }
 
-  // imageKey (alternative format)
   if (obj.imageKey && !obj.imageUrl) {
     addImageUnfiltered(images, seen, 'https://m.media-amazon.com/images/S/' + obj.imageKey, obj.altText || '', source);
   }
 
-  // backgroundImageUrl
   if (obj.backgroundImageUrl) {
     var bgUrl = obj.backgroundImageUrl;
     if (bgUrl.indexOf('http') !== 0) bgUrl = 'https://m.media-amazon.com/images/S/' + bgUrl;
     addImageUnfiltered(images, seen, bgUrl, 'background', source);
   }
 
-  // videoUrl (for video thumbnails)
   if (obj.videoUrl && /\.(mp4|webm)/.test(obj.videoUrl)) {
     addImageUnfiltered(images, seen, obj.videoUrl, 'video', 'video');
   }
 
-  // Recurse into nested objects
-  var keys = Array.isArray(obj) ? obj : Object.keys(obj);
+  // DEEP recursive â recurse into ALL object properties (not just whitelisted keys)
   if (Array.isArray(obj)) {
     for (var i = 0; i < obj.length; i++) {
-      if (typeof obj[i] === 'object') extractConfigImages(obj[i], images, seen, source);
+      if (typeof obj[i] === 'object' && obj[i] !== null) {
+        extractConfigImages(obj[i], images, seen, source);
+      }
     }
   } else {
     var objKeys = Object.keys(obj);
     for (var k = 0; k < objKeys.length; k++) {
       var val = obj[objKeys[k]];
       if (typeof val === 'object' && val !== null) {
-        // Only recurse into known nested structures (not into nav, ASIN lists, etc.)
-        var key = objKeys[k];
-        if (key === 'content' || key === 'mobileContent' || key === 'tiles' ||
-            key === 'desktop' || key === 'mobile' || key === 'tablet' ||
-            key === 'heroContent' || key === 'items' || key === 'sections' ||
-            key === 'widgets' || key === 'media' || key === 'creative') {
-          extractConfigImages(val, images, seen, source);
-        }
+        // Skip nav to avoid counting navigation icons as store content
+        if (objKeys[k] === 'nav') continue;
+        extractConfigImages(val, images, seen, source);
       }
     }
   }
@@ -232,12 +429,13 @@ function extractConfigImages(obj, images, seen, source) {
 // âââ ADD IMAGE WITHOUT FILTER âââ
 function addImageUnfiltered(images, seen, url, alt, source) {
   if (!url) return;
-  // Skip data URIs, tracking pixels, tiny icons
   if (url.indexOf('data:') === 0) return;
   if (url.indexOf('pixel') >= 0 || url.indexOf('beacon') >= 0) return;
   if (/\.(gif)$/i.test(url) && url.indexOf('transparent') >= 0) return;
-  // Skip VTT subtitle files
   if (/\.VTT$/i.test(url)) return;
+  // Skip Amazon platform images (nav sprites, social share logos, etc.)
+  if (url.indexOf('/gno/sprites/') >= 0) return;
+  if (url.indexOf('social_share') >= 0) return;
 
   var key = normalizeImageUrl(url);
   if (seen[key]) return;
@@ -245,39 +443,77 @@ function addImageUnfiltered(images, seen, url, alt, source) {
   images.push({ url: url, alt: alt || '', source: source });
 }
 
-// âââ ANALYZE ENTIRE PAGE WITH GEMINI (MULTI-IMAGE) âââ
-async function analyzePageWithGemini(pageImages, brandName, pageName) {
+// âââ ANALYZE PAGE WITH GEMINI (IMAGES + STRUCTURE CONTEXT) âââ
+async function analyzePageWithGemini(pageImages, brandName, pageName, pageSections) {
+
+  // Build structural context for Gemini
+  var structureDesc = 'PAGE STRUCTURE (extracted from source code):\n';
+  if (pageSections && pageSections.length > 0) {
+    for (var si = 0; si < pageSections.length; si++) {
+      var sec = pageSections[si];
+      structureDesc += (si + 1) + '. ' + sec.type.toUpperCase() + ' (' + sec.widgetType + ')';
+      if (sec.tileCount > 0) structureDesc += ' â ' + sec.tileCount + ' tiles';
+      if (sec.imageCount > 0) structureDesc += ' â ' + sec.imageCount + ' images';
+      if (sec.videoUrls.length > 0) structureDesc += ' â ' + sec.videoUrls.length + ' video(s)';
+      if (sec.asins.length > 0) structureDesc += ' â ' + sec.asins.length + ' products';
+      if (sec.hasText && sec.textContent.length > 0) structureDesc += ' â text: "' + sec.textContent[0].slice(0, 80) + '"';
+      structureDesc += '\n';
+    }
+  } else {
+    structureDesc += '(No structured sections found â analyze from images only)\n';
+  }
+
   var prompt = [
     'You are analyzing an Amazon Brand Store page for "' + brandName + '" (page: "' + pageName + '").',
-    'I am sending you ALL ' + pageImages.length + ' images from this page.',
+    'I am sending you ' + pageImages.length + ' images from this page, plus the extracted page structure.',
     '',
-    'Analyze the COMPLETE page design and return ONLY valid JSON:',
+    structureDesc,
+    '',
+    'Analyze the COMPLETE page design holistically and return ONLY valid JSON:',
     '{',
-    '  "pageSummary": "2-3 sentences describing the overall page layout, visual concept, and purpose",',
-    '  "designConcept": "1 sentence: the core visual/marketing strategy of this page",',
-    '  "colorScheme": { "primary": "#hex", "secondary": "#hex", "accent": "#hex", "background": "#hex" },',
+    '  "pageSummary": "3-4 sentences describing the overall page layout, sections from top to bottom, and purpose",',
+    '  "designConcept": "1-2 sentences: the core visual/marketing strategy of this page",',
+    '  "colorScheme": { "primary": "#hex", "secondary": "#hex", "accent": "#hex or null", "background": "#hex" },',
     '  "layoutPattern": "grid|hero-stack|editorial|catalog|storytelling|mixed",',
     '  "visualHierarchy": ["what draws attention first", "second", "third"],',
-    '  "contentMix": { "heroImages": 0, "lifestyleImages": 0, "productImages": 0, "graphicsOrIcons": 0, "videos": 0, "textBanners": 0 },',
-    '  "designPatterns": ["e.g. full-width-hero, split-panel, text-overlay, product-grid, benefit-icons"],',
-    '  "brandingConsistency": "1 sentence: how consistently is the brand identity applied?",',
-    '  "textOnImages": ["list ALL visible text from all images"],',
+    '  "sectionFlow": ["section type from top to bottom, e.g. hero -> product-grid -> video -> image-text -> ..."],',
+    '  "contentMix": {',
+    '    "heroImages": 0,',
+    '    "lifestyleImages": 0,',
+    '    "productImages": 0,',
+    '    "graphicsOrIcons": 0,',
+    '    "videos": 0,',
+    '    "textBanners": 0,',
+    '    "productGrids": 0,',
+    '    "imageTiles": 0',
+    '  },',
+    '  "designPatterns": ["e.g. full-width-hero, split-panel, text-overlay, product-grid, benefit-icons, video-section"],',
+    '  "brandingConsistency": "1-2 sentences: how consistently is the brand identity applied across all sections?",',
+    '  "textOnImages": ["list key visible text from images (max 15)"],',
     '  "imageDescriptions": [',
-    '    { "index": 0, "summary": "short description", "role": "hero|lifestyle|product|category|cta|brand|icon" }',
-    '  ]',
+    '    { "index": 0, "summary": "short description", "role": "hero|lifestyle|product|category|cta|brand|icon|banner|infographic" }',
+    '  ],',
+    '  "storeQualityScore": {',
+    '    "overall": 1-10,',
+    '    "designQuality": 1-10,',
+    '    "contentRichness": 1-10,',
+    '    "brandPresence": 1-10,',
+    '    "productPresentation": 1-10,',
+    '    "strengths": ["max 3"],',
+    '    "weaknesses": ["max 3"]',
+    '  }',
     '}',
     '',
-    'For imageDescriptions, describe EVERY image briefly (1 sentence each). The index matches the image order.',
+    'For imageDescriptions, describe EVERY image briefly (1 sentence). Index matches image order.',
+    'For storeQualityScore, rate the page objectively based on Amazon Brand Store best practices.',
   ].join('\n');
 
-  // Build multi-image request parts
   var parts = [{ text: prompt }];
 
   // Download all images and add as inline_data
   for (var i = 0; i < pageImages.length; i++) {
     var imgUrl = pageImages[i].url;
     try {
-      // Skip videos â just note them
       if (/\.(mp4|webm|m3u8)/i.test(imgUrl)) {
         parts.push({ text: '[Image ' + i + ': VIDEO â ' + imgUrl + ']' });
         continue;
@@ -290,7 +526,6 @@ async function analyzePageWithGemini(pageImages, brandName, pageName) {
       }
 
       var buffer = await imgResp.arrayBuffer();
-      // Skip if > 4MB (Gemini limit per image)
       if (buffer.byteLength > 4 * 1024 * 1024) {
         parts.push({ text: '[Image ' + i + ': TOO LARGE (' + (buffer.byteLength / 1024 / 1024).toFixed(1) + 'MB) â ' + imgUrl + ']' });
         continue;
@@ -298,7 +533,6 @@ async function analyzePageWithGemini(pageImages, brandName, pageName) {
 
       var base64 = Buffer.from(buffer).toString('base64');
       var mimeType = imgResp.headers.get('content-type') || 'image/jpeg';
-      // Fix mime types
       if (mimeType.indexOf('image/') < 0) mimeType = 'image/jpeg';
 
       parts.push({ inline_data: { mime_type: mimeType, data: base64 } });
@@ -309,7 +543,7 @@ async function analyzePageWithGemini(pageImages, brandName, pageName) {
 
   var requestBody = {
     contents: [{ parts: parts }],
-    generationConfig: { temperature: 0.2, maxOutputTokens: 4000 },
+    generationConfig: { temperature: 0.2, maxOutputTokens: 6000 },
   };
 
   var resp = await fetch(GEMINI_URL + '?key=' + GEMINI_KEY, {
@@ -326,7 +560,7 @@ async function analyzePageWithGemini(pageImages, brandName, pageName) {
   return parseGeminiResponse(resp);
 }
 
-// âââ PARSE GEMINI RESPONSE (with markdown stripping + partial extraction) âââ
+// âââ PARSE GEMINI RESPONSE âââ
 async function parseGeminiResponse(resp) {
   var data = await resp.json();
   var text = '';
@@ -334,7 +568,6 @@ async function parseGeminiResponse(resp) {
     text = data.candidates[0].content.parts.map(function(p) { return p.text || ''; }).join('');
   }
 
-  // Strip markdown code block wrappers
   var stripped = text.replace(/^[\s\S]*?```(?:json)?\s*\n?/i, '').replace(/\n?\s*```[\s\S]*$/, '');
   if (!stripped || stripped.length < 5) stripped = text;
 
@@ -346,18 +579,13 @@ async function parseGeminiResponse(resp) {
     }
   } catch (err) { /* fall through */ }
 
-  // Partial extraction
   var result = { pageSummary: stripped.slice(0, 500), parseError: true };
-
   var summaryMatch = stripped.match(/"pageSummary"\s*:\s*"((?:[^"\\]|\\.)*)"/);
   if (summaryMatch) result.pageSummary = summaryMatch[1].replace(/\\"/g, '"').replace(/\\n/g, '\n');
-
   var conceptMatch = stripped.match(/"designConcept"\s*:\s*"((?:[^"\\]|\\.)*)"/);
   if (conceptMatch) result.designConcept = conceptMatch[1];
-
   var layoutMatch = stripped.match(/"layoutPattern"\s*:\s*"([^"]+)"/);
   if (layoutMatch) result.layoutPattern = layoutMatch[1];
-
   return result;
 }
 
