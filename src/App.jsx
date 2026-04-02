@@ -228,9 +228,8 @@ export default function App() {
       // Step 1.6: Load knowledge base data for the selected category
       try {
         var { loadKnowledgeBaseForCategory, formatKnowledgeBaseContext } = await import('./referenceStoreService');
-        var kbCategory = params.referenceCategory || params.category || 'generic';
-        log('Loading knowledge base for category: ' + kbCategory + '...');
-        var kbData = await loadKnowledgeBaseForCategory(kbCategory);
+        log('Loading knowledge base...');
+        var kbData = await loadKnowledgeBaseForCategory('generic');
         if (kbData && kbData.length > 0) {
           var kbContext = formatKnowledgeBaseContext(kbData);
           referenceAnalysis = (referenceAnalysis || '') + '\n' + kbContext;
@@ -245,9 +244,8 @@ export default function App() {
       // Step 1.7: Load static reference data from _summary.json (always available)
       try {
         var { formatStaticReferenceContext } = await import('./referenceStoreService');
-        var refCategory = params.referenceCategory || 'generic';
-        log('Loading static reference patterns for: ' + refCategory + '...');
-        var staticContext = await formatStaticReferenceContext(refCategory);
+        log('Loading static reference patterns...');
+        var staticContext = await formatStaticReferenceContext();
         if (staticContext) {
           referenceAnalysis = (referenceAnalysis || '') + '\n' + staticContext;
           log('Static reference patterns loaded (from 23 analyzed stores)');
@@ -259,9 +257,8 @@ export default function App() {
       // Step 1.7b: Load Gemini Vision analyses from reference store JSONs
       try {
         var { loadGeminiAnalysesForCategory, formatGeminiAnalysesContext } = await import('./referenceStoreService');
-        var geminiCategory = params.referenceCategory || 'generic';
-        log('Loading Gemini visual intelligence for: ' + geminiCategory + '...');
-        var geminiData = await loadGeminiAnalysesForCategory(geminiCategory);
+        log('Loading Gemini visual intelligence...');
+        var geminiData = await loadGeminiAnalysesForCategory();
         if (geminiData && geminiData.length > 0) {
           var geminiContext = formatGeminiAnalysesContext(geminiData);
           referenceAnalysis = (referenceAnalysis || '') + '\n' + geminiContext;
