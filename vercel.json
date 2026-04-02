@@ -1,1 +1,42 @@
-{"buildCommand":"vite build","outputDirectory":"dist","framework":"vite","functions":{"api/amazon-search.js":{"maxDuration":300},"api/amazon-brand-discover.js":{"maxDuration":60},"api/stores.js":{"maxDuration":30},"api/scrape-website.js":{"maxDuration":30},"api/crawl-brand-store.js":{"maxDuration":60},"api/analyze-images.js":{"maxDuration":60},"api/enrich-reference-store.js":{"maxDuration":300}},"rewrites":[{"source":"/api/(.*)","destination":"/api/$1"},{"source":"/(.*)","destination":"/index.html"}]}
+{
+  "buildCommand": "vite build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "functions": {
+    "api/amazon-search.js": {
+      "maxDuration": 300
+    },
+    "api/amazon-brand-discover.js": {
+      "maxDuration": 60
+    },
+    "api/stores.js": {
+      "maxDuration": 30
+    },
+    "api/scrape-website.js": {
+      "maxDuration": 30
+    },
+    "api/crawl-brand-store.js": {
+      "maxDuration": 60
+    },
+    "api/analyze-images.js": {
+      "maxDuration": 60
+    },
+    "api/enrich-reference-store.js": {
+      "maxDuration": 300
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/data/(.*)",
+      "destination": "/data/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
