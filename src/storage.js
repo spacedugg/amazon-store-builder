@@ -147,8 +147,8 @@ export async function fetchDesignerTimer(shareToken) {
 export async function acknowledgeChanges(shareToken) {
   if (!shareToken) return null;
   try {
-    var resp = await fetch('/api/acknowledge', {
-      method: 'POST',
+    var resp = await fetch('/api/stores', {
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ shareToken: shareToken }),
     });
