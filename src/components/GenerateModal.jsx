@@ -44,9 +44,14 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
   var [existingStoreUrlError, setExistingStoreUrlError] = useState('');
   var [existingStoreMode, setExistingStoreMode] = useState('optimize');
   var [driveUrl, setDriveUrl] = useState(googleDriveUrl || '');
-  // referenceCategory removed — store design is brand-specific, not category-specific
+  var [referenceCategory, setReferenceCategory] = useState('generic');
   var [enableCIDetection, setEnableCIDetection] = useState(false);
   var [storytellingType, setStorytellingType] = useState('automatic');
+  // G3: New feature opt-ins
+  var [includeQuiz, setIncludeQuiz] = useState(false);
+  var [includeProductVideos, setIncludeProductVideos] = useState(false);
+  var [includeBrandVideo, setIncludeBrandVideo] = useState(false);
+  var [generateWireframes, setGenerateWireframes] = useState(false);
   var fileRef = useRef(null);
 
   var onFileChange = function(e) {
@@ -378,7 +383,23 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
           <option value="fr">Amazon.fr (France)</option>
         </select>
 
-        {/* 4b. Reference Category — removed, store design is brand-specific */}
+        {/* 4b. Reference Category */}
+        <label className="label" style={{ marginTop: 10 }}>4b. Referenz-Kategorie (optional)</label>
+        <select value={referenceCategory} onChange={function(e) { setReferenceCategory(e.target.value); }} className="input">
+          <option value="generic">Allgemein (Standard)</option>
+          <option value="supplements">Nahrungsergänzung</option>
+          <option value="food">Lebensmittel & Getränke</option>
+          <option value="home_kitchen">Haus & Küche</option>
+          <option value="fashion">Mode & Kleidung</option>
+          <option value="beauty">Beauty & Körperpflege</option>
+          <option value="health">Gesundheit & Wellness</option>
+          <option value="sports">Sport & Outdoor</option>
+          <option value="office">Büro & Arbeit</option>
+          <option value="pets">Haustiere</option>
+          <option value="electronics">Elektronik</option>
+          <option value="tools">Werkzeuge</option>
+        </select>
+        <div className="hint">Wählen Sie eine Produktkategorie aus, um kategoriespezifische Stil-Hinweise und Referenzstores zu laden.</div>
 
         {/* 4c. CI Detection Toggle */}
         <label className="label" style={{ marginTop: 10 }}>4c. CI-Erkennung</label>
@@ -407,6 +428,33 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
           <option value="seasonal_hook">Seasonal Hook (Saisonaler Aufhänger → Favoriten → Kategorien)</option>
         </select>
         <div className="hint">Bestimmt die narrative Struktur und den Ablauf der Store-Seiten.</div>
+
+        {/* 4e. Feature Options */}
+        <label className="label" style={{ marginTop: 10 }}>4e. Zusatzfeatures</label>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
+            <input type="checkbox" checked={includeQuiz} onChange={function(e) { setIncludeQuiz(e.target.checked); }} style={{ width: 18, height: 18 }} />
+            <span>Produktberater-Quiz (eigene Subpage mit Entscheidungsbaum)</span>
+          </label>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
+            <input type="checkbox" checked={includeProductVideos} onChange={function(e) { setIncludeProductVideos(e.target.checked); }} style={{ width: 18, height: 18 }} />
+            <span>Produktvideos einbinden (Produktdemos, Anwendung)</span>
+          </label>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
+            <input type="checkbox" checked={includeBrandVideo} onChange={function(e) { setIncludeBrandVideo(e.target.checked); }} style={{ width: 18, height: 18 }} />
+            <span>Markenvideo einbinden (Brand Story, Imagefilm)</span>
+          </label>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
+            <input type="checkbox" checked={generateWireframes} onChange={function(e) { setGenerateWireframes(e.target.checked); }} style={{ width: 18, height: 18 }} />
+            <span>Wireframe-Skizzen generieren (KI-Vorschaubilder pro Kachel)</span>
+          </label>
+          {generateWireframes && (
+            <div style={{ marginLeft: 26, padding: '4px 8px', background: '#fffbeb', borderRadius: 4, fontSize: 11, color: '#92400e', border: '1px solid #fde68a' }}>
+              Generiert minimalistische Skizzen per Gemini/Imagen. Dauert ca. 15-30 Sek. pro Bild-Kachel. Kosten: gering (Sketch-Modus).
+            </div>
+          )}
+        </div>
+        <div className="hint">Diese Features werden bei der Store-Generierung berücksichtigt.</div>
 
         {/* 5. Complexity Slider */}
         <label className="label" style={{ marginTop: 10 }}>5. Store Complexity</label>
@@ -624,9 +672,13 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
                 referenceStoreUrls: referenceStoreUrls.filter(function(u) { return u.trim() && !validateStoreUrl(u); }),
                 existingStoreUrl: existingStoreUrl.trim() && !validateStoreUrl(existingStoreUrl) ? existingStoreUrl.trim() : null,
                 existingStoreMode: existingStoreMode,
-                // referenceCategory removed
+                referenceCategory: referenceCategory,
                 enableCIDetection: enableCIDetection,
                 storytellingType: storytellingType,
+                includeQuiz: includeQuiz,
+                includeProductVideos: includeProductVideos,
+                includeBrandVideo: includeBrandVideo,
+                generateWireframes: generateWireframes,
               });
             }}
           >
