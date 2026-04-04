@@ -119,6 +119,20 @@ export async function analyzeStoreImages(images) {
   return resp.json();
 }
 
+// ─── GENERATE WIREFRAME IMAGE: Use Gemini/Imagen for tile sketch ───
+export async function generateWireframeImage(prompt, aspectRatio) {
+  var resp = await fetchWithTimeout('/api/generate-wireframe', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt: prompt, aspectRatio: aspectRatio || '16:9' }),
+  }, 30000); // 30s timeout per image
+  if (!resp.ok) {
+    var e = await resp.json().catch(function() { return {}; });
+    throw new Error(e.error || 'Failed to generate wireframe image');
+  }
+  return resp.json();
+}
+
 // ─── SCRAPE BRAND WEBSITE: Extract brand info from online store ───
 export async function scrapeWebsite(url) {
   var resp = await fetchWithTimeout('/api/scrape-website', {

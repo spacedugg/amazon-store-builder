@@ -327,13 +327,10 @@ export async function loadStaticReferenceData(category) {
   }
 }
 
-// ─── LOAD GEMINI ANALYSES FROM INDIVIDUAL STORE JSONS ───
-// Loads the geminiAnalyses field from each reference store JSON
-// This provides real visual intelligence from Gemini Vision
-// âââ LOAD VISUAL INTELLIGENCE FROM INDIVIDUAL STORE JSONS âââ
+// ─── LOAD VISUAL INTELLIGENCE FROM INDIVIDUAL STORE JSONS ───
 // Loads CI, navigation, page structure, V3 enrichment, and browserCrawl data
 // Uses ALL available data sources: ci, navigation, analysis, pages, geminiVisionV3, browserCrawl
-export async function loadGeminiAnalysesForCategory() {
+export async function loadGeminiAnalysesForCategory(category) {
   try {
     var summaryResp = await fetch('/data/reference-stores/_summary.json');
     if (!summaryResp.ok) return [];
@@ -341,12 +338,15 @@ export async function loadGeminiAnalysesForCategory() {
     var summary = await summaryResp.json();
     if (!summary || !summary.meta || !summary.meta.stores) return [];
 
-    // Load ALL reference stores sorted by quality — no category filtering
-    // Category-based filtering removed: too few examples per category,
-    // and store design patterns are not category-dependent.
-    var storeFiles = summary.meta.stores.slice().sort(function(a, b) {
-      return (b.qualityScore || 3) - (a.qualityScore || 3);
-    });
+    // Filter by category, always include top-tier stores
+    var storeFiles = summary.meta.stores;
+    if (category && category !== 'generic') {
+      var categoryStores = storeFiles.filter(function(s) { return s.category === category; });
+      var otherTopStores = storeFiles.filter(function(s) {
+        return s.category !== category && s.qualityScore >= 4;
+      }).slice(0, 5);
+      storeFiles = categoryStores.concat(otherTopStores);
+    }
 
     var allStoreData = [];
     for (var i = 0; i < storeFiles.length; i++) {
@@ -429,7 +429,7 @@ export function formatGeminiAnalysesContext(storeDataList) {
       if (homepage.modules && homepage.modules.length > 0) {
         var moduleFlow = homepage.modules.map(function(m) {
           return m.type + (m.tileCount ? '(' + m.tileCount + 't)' : '');
-        }).join(' â ');
+        }).join(' → ');
         parts.push('  Homepage Flow: ' + moduleFlow);
         // Show first 3 module descriptions
         var modDescs = homepage.modules.slice(0, 3).map(function(m, idx) {
@@ -473,7 +473,6 @@ export function formatGeminiAnalysesContext(storeDataList) {
   parts.push('');
   return parts.join('\n');
 }
-
 
 // ─── FORMAT REFERENCE DATA FOR AI PROMPTS ───
 export function formatReferenceStoreContext(stores, imageAnalyses) {

@@ -44,6 +44,7 @@ export default function App() {
   var [requestedAsins, setRequestedAsins] = useState([]);
   var [showSaved, setShowSaved] = useState(false);
   var [showExport, setShowExport] = useState(false);
+
   var [storeId, setStoreId] = useState(null);
   var [shareToken, setShareToken] = useState(null);
   var headerBannerInputRef = useRef(null);
@@ -228,8 +229,9 @@ export default function App() {
       // Step 1.6: Load knowledge base data for the selected category
       try {
         var { loadKnowledgeBaseForCategory, formatKnowledgeBaseContext } = await import('./referenceStoreService');
-        log('Loading knowledge base...');
-        var kbData = await loadKnowledgeBaseForCategory('generic');
+        var kbCategory = params.referenceCategory || params.category || 'generic';
+        log('Loading knowledge base for category: ' + kbCategory + '...');
+        var kbData = await loadKnowledgeBaseForCategory(kbCategory);
         if (kbData && kbData.length > 0) {
           var kbContext = formatKnowledgeBaseContext(kbData);
           referenceAnalysis = (referenceAnalysis || '') + '\n' + kbContext;
@@ -244,8 +246,9 @@ export default function App() {
       // Step 1.7: Load static reference data from _summary.json (always available)
       try {
         var { formatStaticReferenceContext } = await import('./referenceStoreService');
-        log('Loading static reference patterns...');
-        var staticContext = await formatStaticReferenceContext();
+        var refCategory = params.referenceCategory || 'generic';
+        log('Loading static reference patterns for: ' + refCategory + '...');
+        var staticContext = await formatStaticReferenceContext(refCategory);
         if (staticContext) {
           referenceAnalysis = (referenceAnalysis || '') + '\n' + staticContext;
           log('Static reference patterns loaded (from 23 analyzed stores)');
@@ -257,8 +260,9 @@ export default function App() {
       // Step 1.7b: Load Gemini Vision analyses from reference store JSONs
       try {
         var { loadGeminiAnalysesForCategory, formatGeminiAnalysesContext } = await import('./referenceStoreService');
-        log('Loading Gemini visual intelligence...');
-        var geminiData = await loadGeminiAnalysesForCategory();
+        var geminiCategory = params.referenceCategory || 'generic';
+        log('Loading Gemini visual intelligence for: ' + geminiCategory + '...');
+        var geminiData = await loadGeminiAnalysesForCategory(geminiCategory);
         if (geminiData && geminiData.length > 0) {
           var geminiContext = formatGeminiAnalysesContext(geminiData);
           referenceAnalysis = (referenceAnalysis || '') + '\n' + geminiContext;
@@ -310,7 +314,8 @@ export default function App() {
       // Step 2-4: AI generation (with complexity, category, template, websiteData, referenceAnalysis)
       var storeData = await generateStore(
         params.asins, products, params.brand, params.marketplace, lang,
-        params.instructions, log, params.complexity, templateData, enhancedWebsiteData, referenceAnalysis
+        params.instructions, log, params.complexity, templateData, enhancedWebsiteData, referenceAnalysis,
+        { includeQuiz: params.includeQuiz, includeProductVideos: params.includeProductVideos, includeBrandVideo: params.includeBrandVideo, generateWireframes: params.generateWireframes }
       );
 
       // Store meta
@@ -712,9 +717,14 @@ export default function App() {
 
   // ─── SELECTED TILE ───
   var selTile = null;
+  var selLayoutType = null;
   if (sel && page) {
     var sec = page.sections.find(function(s) { return s.id === sel.sid; });
     selTile = sec ? (sec.tiles[sel.ti] || null) : null;
+    if (sec) {
+      var selLayout = findLayout(sec.layoutId);
+      selLayoutType = selLayout ? selLayout.type : null;
+    }
   }
 
   // Check if an auto-save exists for the "Continue last session" button
@@ -739,7 +749,7 @@ export default function App() {
         onRedo={handleRedo}
         canRedo={redoStackRef.current.length > 0}
         onShowPrice={function() { setShowPrice(true); }}
-        />
+      />
 
       <div className="app-body">
         <PageList
@@ -791,6 +801,7 @@ export default function App() {
           products={store.products}
           viewMode={viewMode}
           uiLang={uiLang}
+          layoutType={selLayoutType}
         />
       </div>
 

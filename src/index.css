@@ -159,6 +159,7 @@ textarea.input { resize: vertical; min-height: 44px; }
 .tile:hover { border-color: #cbd5e1; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
 .tile-selected { border: 2px solid #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,.12); }
 .tile-uploaded-img { width: 100%; display: block; }
+.tile-wireframe-img { opacity: 0.85; filter: saturate(0.7); }
 .tile-shoppable-badge { position: absolute; top: 6px; right: 6px; background: linear-gradient(135deg, #FF9900, #e88b00); color: #fff; font-size: 8px; font-weight: 700; padding: 3px 8px; border-radius: 5px; letter-spacing: .03em; }
 .tile-link-badge { position: absolute; bottom: 6px; left: 6px; background: rgba(99,102,241,.9); color: #fff; font-size: 8px; font-weight: 600; padding: 2px 8px; border-radius: 5px; backdrop-filter: blur(4px); }
 

@@ -371,7 +371,15 @@ function tileDescription(tile, tileIndex, productMap, lang, duplicateNote) {
     if (tile.bgColor) parts.push(boldPara(t('brief.colorPreview', lang) + ': ', tile.bgColor));
     if (tile.textOverlay) {
       var alignHint = tile.textAlign && tile.textAlign !== 'left' ? ' (' + (tile.textAlign === 'center' ? 'zentriert' : 'rechtsbündig') + ')' : '';
-      parts.push(boldPara(t('brief.textOverlay', lang) + ': ', '"' + tile.textOverlay + '"' + alignHint));
+      var overlayLines = tile.textOverlay.split('\\n');
+      if (overlayLines.length > 1) {
+        parts.push(boldPara(t('brief.textOverlay', lang) + alignHint + ': ', ''));
+        overlayLines.forEach(function(line) {
+          if (line.trim()) parts.push(new Paragraph({ children: [new TextRun({ text: '  • ' + line.trim(), size: 20 })] }));
+        });
+      } else {
+        parts.push(boldPara(t('brief.textOverlay', lang) + ': ', '"' + tile.textOverlay + '"' + alignHint));
+      }
     }
     if (tile.ctaText) parts.push(boldPara(t('brief.ctaButton', lang) + ': ', '"' + tile.ctaText + '"'));
     if (tile.brief) {
@@ -482,7 +490,7 @@ export async function generateBriefingDocx(store, briefingLang) {
   // ─── HEADER BANNER / STORE HERO ───
   children.push(heading(t('brief.headerBanner', lang), HeadingLevel.HEADING_2));
   children.push(boldPara(t('brief.desktop', lang) + ': ', '3000 x 600 px'));
-  children.push(boldPara(t('brief.mobile', lang) + ': ', '1242 x 450 px'));
+  children.push(boldPara(t('brief.mobile', lang) + ': ', '1680 x 900 px'));
   children.push(boldPara(t('brief.status', lang) + ': ', store.headerBanner ? t('brief.uploaded', lang) : t('brief.needsDesign', lang)));
 
   // Find store_hero tile and include its designer instructions

@@ -710,8 +710,8 @@ var translations = {
     id: 'Versi desktop (biasanya lebar 3000px)', ky: 'Десктоп версиясы (көбүнчө 3000px)', bg: 'Десктоп версия (обикновено 3000px)', es: 'Versión escritorio (normalmente 3000px)',
   },
   'brief.mobileVersion': {
-    en: 'Mobile version (typically 1242px wide)', de: 'Mobile Version (typisch 1242px breit)', uk: 'Мобільна версія (зазвичай 1242px)', ru: 'Мобильная версия (обычно 1242px)',
-    id: 'Versi mobile (biasanya lebar 1242px)', ky: 'Мобилдик версиясы (көбүнчө 1242px)', bg: 'Мобилна версия (обикновено 1242px)', es: 'Versión móvil (normalmente 1242px)',
+    en: 'Mobile version (1680px wide for full-width, or same as desktop for standard tiles)', de: 'Mobile Version (1680px breit für Full-Width, oder gleich wie Desktop für Standard-Kacheln)', uk: 'Мобільна версія (1680px для повної ширини, або як десктоп для стандартних)', ru: 'Мобильная версия (1680px для полной ширины, или как десктоп для стандартных)',
+    id: 'Versi mobile (1680px untuk lebar penuh, atau sama dengan desktop untuk standar)', ky: 'Мобилдик версиясы (1680px толук туурасы үчүн)', bg: 'Мобилна версия (1680px за пълна ширина)', es: 'Versión móvil (1680px para ancho completo)',
   },
   'brief.dimensionsNote': {
     en: 'Exact dimensions are specified per tile below. If only one dimension is given, create both versions with appropriate cropping.',

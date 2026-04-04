@@ -96,7 +96,7 @@ export function uid() {
 export function emptyTile() {
   return {
     type: 'image', brief: '', textOverlay: '', ctaText: '',
-    dimensions: { w: 3000, h: 1200 }, mobileDimensions: { w: 1242, h: 1200 },
+    dimensions: { w: 3000, h: 1200 }, mobileDimensions: { w: 1680, h: 1200 },
     asins: [], linkAsin: '', linkUrl: '',
     hotspots: [], // Array of { x: 0-100, y: 0-100, asin: 'B0...' } — max 5, for shoppable_image tiles
     uploadedImage: null, uploadedImageMobile: null, videoThumbnail: null,
@@ -106,8 +106,8 @@ export function emptyTile() {
 
 export var DIMENSION_PRESETS = {
   desktop: { hero: { w: 3000, h: 600 }, category: { w: 3000, h: 1200 }, lifestyle: { w: 3000, h: 1500 }, video: { w: 3000, h: 1688 } },
-  mobile: { hero: { w: 1242, h: 450 }, category: { w: 1242, h: 1200 }, lifestyle: { w: 1242, h: 1500 }, video: { w: 1242, h: 699 } },
-  headerBanner: { desktop: { w: 3000, h: 600 }, mobile: { w: 1242, h: 450 } },
+  mobile: { hero: { w: 1680, h: 900 }, category: { w: 1680, h: 1200 }, lifestyle: { w: 1680, h: 1500 }, video: { w: 1680, h: 945 } },
+  headerBanner: { desktop: { w: 3000, h: 600 }, mobile: { w: 1680, h: 900 } },
 };
 
 // ─── AMAZON DESKTOP IMAGE TYPES ───
@@ -118,7 +118,7 @@ export var AMAZON_IMG_TYPES = {
   LARGE_SQUARE: { w: 1500, h: 1500, label: 'Large Square' },
   SMALL_SQUARE: { w: 750, h: 750, label: 'Small Square' },
   WIDE: { w: 1500, h: 750, label: 'Wide' },
-  FULL_WIDTH: { w: 3000, h: 600, label: 'Full Width' },
+  FULL_WIDTH: { w: 3000, h: 600, label: 'Full Width', maxRatio: 15, mobileW: 1680, mobileMaxRatio: 5 },
   // VH-specific (Variable Height layouts)
   VH_WIDE: { w: 3000, h: 1500, label: 'VH Wide' },
   VH_SQUARE: { w: 1500, h: 1500, label: 'VH Square' },
@@ -155,11 +155,16 @@ export function emptyTileForLayout(layoutId, tileIndex) {
   var dims = LAYOUT_TILE_DIMS[resolved];
   var d = dims && dims[tileIndex] ? dims[tileIndex] : { w: 3000, h: 1200 };
   var layout = findLayout(resolved);
-  // VH mobile: fixed min 1500×750. Standard mobile: default = desktop dims.
+  // VH mobile: fixed min 1500×750. Full-width mobile: 1680px wide (separate image!). Standard mobile: = desktop dims.
+  // Aspect ratio limits: Desktop max 15:1 (min h = w/15), Mobile max 5:1 (min h = w/5)
   var mobileW, mobileH;
   if (layout && layout.type === 'vh') {
     mobileW = 1500;
     mobileH = 750;
+  } else if (layout && layout.type === 'fullwidth') {
+    // Full-width: mobile is 1680px wide, height set independently (default = desktop height)
+    mobileW = 1680;
+    mobileH = Math.max(d.h, Math.ceil(1680 / 5)); // Enforce mobile max ratio 5:1
   } else {
     mobileW = d.w;
     mobileH = d.h;
@@ -211,11 +216,10 @@ export var IMAGE_CATEGORIES = {
     name: 'Store Hero',
     description: 'First image in store, above menu bar. Represents the brand instantly.',
     placement: 'Always and exclusively as the first image above store navigation.',
-    allowedElements: ['headline', 'claim', 'logo', 'lifestyle_photo', 'product', 'texture', 'abstract'],
+    allowedElements: ['headline', 'slogan', 'lifestyle_photo', 'product', 'texture', 'abstract'],
     noCTA: true,
     requiredDecisions: [
-      'claimOrSlogan', // string or null
-      'showLogo',      // boolean + prominence
+      'headlineOrSlogan', // string or null — the main text on the hero
       'showProduct',   // boolean + which products
       'lifestyleElement', // boolean + scene type
       'abstractTexture',  // boolean (purely abstract/texture-based)
@@ -236,11 +240,11 @@ export var IMAGE_CATEGORIES = {
     excludedElements: ['cta_button', 'product_photos', 'persons'],
     variations: ['serious_awards', 'playful_illustrations', 'pure_typographic'],
     requiredDecisions: [
-      'specificBenefits',  // string[] - which USPs
+      'specificBenefits',  // string[] - which USPs (each = headline + short explanation)
       'format',            // 'banner' | 'grid'
       'benefitCount',      // number
-      'iconStyle',         // 'line' | 'illustration' | 'award_logo' | 'typographic'
       'backgroundColor',   // string
+      // Designer decides icon style — do NOT specify in brief
     ],
     tierBehavior: {
       1: 'Simple USP banner, homepage only',
@@ -306,14 +310,13 @@ export var IMAGE_CATEGORIES = {
     typicalElements: ['lifestyle_photo', 'product_in_use', 'logo_small', 'headline_overlay', 'category_label'],
     excludedElements: ['infographic', 'icons', 'feature_lists', 'prominent_cta'],
     variations: ['person_using', 'product_in_environment', 'detail_hand_shot'],
-    textPresence: ['none', 'logo_only', 'short_claim_overlay', 'headline_subline'],
+    textPresence: ['none', 'short_text_line', 'headline_subline'],
     settings: ['outdoor_nature', 'indoor_home', 'studio_near'],
     requiredDecisions: [
       'sceneType',      // 'indoor' | 'outdoor' | 'studio' | specific setting
       'showPerson',     // boolean + target audience description
       'productVisible', // which product in use
       'textOverlay',    // string or null
-      'showLogo',       // boolean
     ],
     differentiationFromCreative: 'Lifestyle: photo dominates (>70%). Creative: composition of multiple equal elements. 80% photo + 20% text = Lifestyle. 50% photo + 50% text/graphic = Creative.',
     tierBehavior: {
