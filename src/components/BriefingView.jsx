@@ -521,7 +521,7 @@ function CopyableFilename({ filename, label }) {
 }
 
 // ─── TILE DETAIL CARD (for right panel) ───
-function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile, duplicateInfo, pageId, pageName, sectionIndex, checks, toggleCheck }) {
+function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile, duplicateInfo, pageId, pageName, sectionIndex, checks, toggleCheck, products }) {
   var dims = LAYOUT_TILE_DIMS[layoutId];
   var desktopType = dims && dims[tileIndex] ? dims[tileIndex] : null;
   var tileLabel = TILE_TYPE_LABELS[tile.type] || tile.type;
@@ -627,6 +627,53 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
           <span className="briefing-field-value briefing-field-mono">{tile.linkUrl}</span>
         </div>
       )}
+
+      {/* ─── PRODUCT IMAGE REFERENCE (for designer orientation) ─── */}
+      {/* Shows Amazon main images for all ASINs referenced in this tile */}
+      {products && products.length > 0 && (function() {
+        // Collect ALL ASINs from this tile: linkAsin, hotspots, asins array
+        var relevantAsins = [];
+        if (tile.linkAsin) relevantAsins.push(tile.linkAsin);
+        (tile.hotspots || []).forEach(function(hs) {
+          if (hs.asin && relevantAsins.indexOf(hs.asin) < 0) relevantAsins.push(hs.asin);
+        });
+        (tile.asins || []).forEach(function(a) {
+          if (a && relevantAsins.indexOf(a) < 0) relevantAsins.push(a);
+        });
+        if (relevantAsins.length === 0) return null;
+        var productMap = {};
+        products.forEach(function(p) { productMap[p.asin] = p; });
+        var matchedProducts = relevantAsins.map(function(a) { return productMap[a]; }).filter(function(p) { return p && p.image; });
+        if (matchedProducts.length === 0) return null;
+        // For product grids with many items, show max 8 with a "+X more" indicator
+        var displayProducts = matchedProducts.slice(0, 8);
+        var moreCount = matchedProducts.length - displayProducts.length;
+        return (
+          <div style={{ marginTop: 6, padding: '6px 8px', background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 4 }}>
+            <div style={{ fontSize: 10, fontWeight: 700, color: '#0369a1', marginBottom: 4 }}>
+              Product Reference ({matchedProducts.length}):
+            </div>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              {displayProducts.map(function(p, pi) {
+                return (
+                  <div key={pi} style={{ display: 'flex', alignItems: 'center', gap: 5, background: '#fff', borderRadius: 4, padding: '3px 6px', border: '1px solid #e0f2fe', maxWidth: 200 }}>
+                    <img src={p.image} alt="" style={{ width: 36, height: 36, objectFit: 'contain', borderRadius: 2, flexShrink: 0 }} />
+                    <div style={{ fontSize: 9, lineHeight: 1.3, overflow: 'hidden' }}>
+                      <div style={{ fontWeight: 600, color: '#1e293b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name ? p.name.slice(0, 35) : p.asin}</div>
+                      <div style={{ color: '#64748b', fontFamily: 'monospace', fontSize: 8 }}>{p.asin}</div>
+                    </div>
+                  </div>
+                );
+              })}
+              {moreCount > 0 && (
+                <div style={{ display: 'flex', alignItems: 'center', fontSize: 10, color: '#0369a1', fontWeight: 600, padding: '0 6px' }}>
+                  +{moreCount} more
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      })()}
 
       {/* ─── DIMENSIONS ROW ─── */}
       {(function() {
@@ -776,8 +823,8 @@ function StoreHeroBanner({ store, viewMode, onHeroClick, isSelected }) {
   });
 
   var isDesktop = viewMode === 'desktop';
-  var width = isDesktop ? 3000 : 1242;
-  var height = isDesktop ? 600 : 450;
+  var width = isDesktop ? 3000 : 1680;
+  var height = isDesktop ? 600 : 900;
 
   return (
     <div className="briefing-hero-banner" onClick={onHeroClick}
@@ -1254,13 +1301,13 @@ function PreviewMode({ store, onClose }) {
         <div style={{ width: storeWidth, maxWidth: '100%', background: '#fff', minHeight: '100%' }}>
 
           {/* ─── HERO BANNER (full width, like Amazon) ─── */}
-          <div style={{ width: '100%', aspectRatio: isMobile ? '1242/450' : '3000/600', background: '#232f3e', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ width: '100%', aspectRatio: isMobile ? '1680/900' : '3000/600', background: '#232f3e', position: 'relative', overflow: 'hidden' }}>
             {heroImgSrc ? (
               <img src={heroImgSrc} alt="Store Hero" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', color: 'rgba(255,255,255,.4)' }}>
                 <div style={{ fontSize: isMobile ? 14 : 20, fontWeight: 700, marginBottom: 4 }}>Store Hero Image</div>
-                <div style={{ fontSize: isMobile ? 10 : 13, opacity: 0.6 }}>{isMobile ? '1242 \u00D7 450' : '3000 \u00D7 600'}px</div>
+                <div style={{ fontSize: isMobile ? 10 : 13, opacity: 0.6 }}>{isMobile ? '1680 \u00D7 900' : '3000 \u00D7 600'}px</div>
               </div>
             )}
             {folderLoaded && heroTile && !heroImgSrc && (
@@ -1936,7 +1983,7 @@ export default function BriefingView() {
               if (!heroTile) return null;
               var heroColor = { bg: '#fef2f2', border: '#ef4444', label: '#b91c1c' };
               var heroCheckBase = heroPageId + '/' + heroSecId + '/' + heroTileIdx;
-              // Hero has different aspect ratios (3000x600=5:1 vs 1242x450=2.76:1) so always needs 2 images
+              // Hero has different aspect ratios (3000x600=5:1 vs 1680x900=1.87:1) so always needs 2 images
               var heroSameRatio = heroTile.syncDimensions || isSameAspectRatio(heroTile.dimensions, heroTile.mobileDimensions);
               var heroSyncDone = !!checks[heroCheckBase + '/sync'];
               var heroDeskDone = !!checks[heroCheckBase + '/desktop'];
@@ -1946,7 +1993,7 @@ export default function BriefingView() {
               var heroCheckBorder = heroAllDone ? '#86efac' : '#fecaca';
               var heroIsSelected = selectedTile && selectedTile.sid === '__hero__';
               var heroDeskDims = heroTile.dimensions || { w: 3000, h: 600 };
-              var heroMobDims = heroTile.mobileDimensions || { w: 1242, h: 450 };
+              var heroMobDims = heroTile.mobileDimensions || { w: 1680, h: 900 };
               return (
                 <div id="tile-detail-hero" className="briefing-right-section-group">
                   <div className="briefing-right-section-header" style={{ background: heroColor.bg, borderLeft: '3px solid ' + heroColor.border }}>
@@ -2063,6 +2110,7 @@ export default function BriefingView() {
                         sectionIndex={item.sectionIndex}
                         checks={checks}
                         toggleCheck={toggleCheck}
+                        products={store ? store.products : []}
                       />
                     );
                   })}

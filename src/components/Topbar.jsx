@@ -42,6 +42,7 @@ export default function Topbar({ store, onGenerate, onExport, onSave, viewMode, 
           <button className="btn" onClick={onNewStore} title="Start a new store">New Store</button>
         </>
       )}
+
       <button className="btn btn-primary" onClick={onGenerate} style={store.pages.length > 0 ? { marginLeft: 4 } : {}}>Generate</button>
     </div>
   );

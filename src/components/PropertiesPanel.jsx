@@ -80,7 +80,7 @@ function fileUpload(label, value, onSet, onRemove, uiLang) {
   );
 }
 
-export default function PropertiesPanel({ tile, onChange, products, viewMode, uiLang }) {
+export default function PropertiesPanel({ tile, onChange, products, viewMode, uiLang, layoutType }) {
   if (!tile) {
     return (
       <div className="props-panel">
@@ -93,7 +93,7 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
   var u = function(k, v) { onChange(Object.assign({}, tile, { [k]: v })); };
   var ud = function(which, k, v) {
     var key = which === 'mobile' ? 'mobileDimensions' : 'dimensions';
-    var cur = tile[key] || { w: which === 'mobile' ? 1242 : 3000, h: 1200 };
+    var cur = tile[key] || { w: which === 'mobile' ? 1680 : 3000, h: 1200 };
     var updated = { [key]: Object.assign({}, cur, { [k]: v }) };
     // When syncing is on and desktop changes, mirror to mobile
     if (tile.syncDimensions && which === 'desktop') {
@@ -120,10 +120,14 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
             var up = Object.assign({}, tile, { type: tt });
             if (isProductType && !up.asins) up.asins = [];
             if (tt === 'video' && !up.dimensions) up.dimensions = { w: 3000, h: 1688 };
-            if (tt === 'video' && !up.mobileDimensions) up.mobileDimensions = { w: 1242, h: 699 };
+            if (tt === 'video' && !up.mobileDimensions) up.mobileDimensions = { w: 1680, h: 945 };
             onChange(up);
           }}>
-          {TILE_TYPES.map(function(tt) {
+          {TILE_TYPES.filter(function(tt) {
+            // Shoppable images only allowed in Standard layouts, not VH
+            if (tt === 'shoppable_image' && layoutType === 'vh') return false;
+            return true;
+          }).map(function(tt) {
             return <option key={tt} value={tt}>{TILE_TYPE_LABELS[tt] || tt}</option>;
           })}
         </select>
@@ -245,8 +249,8 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
           <div className="props-section">
             <label className="label">{t('props.mobileDimensions', uiLang)}</label>
             <div className="props-dims">
-              <input type="number" value={tile.syncDimensions ? ((tile.dimensions || {}).w || 3000) : ((tile.mobileDimensions || {}).w || 1242)}
-                onChange={function(e) { ud('mobile', 'w', parseInt(e.target.value) || 1242); }} className="input" disabled={!!tile.syncDimensions} />
+              <input type="number" value={tile.syncDimensions ? ((tile.dimensions || {}).w || 3000) : ((tile.mobileDimensions || {}).w || 1680)}
+                onChange={function(e) { ud('mobile', 'w', parseInt(e.target.value) || 1680); }} className="input" disabled={!!tile.syncDimensions} />
               <span className="props-dims-x">&times;</span>
               <input type="number" value={tile.syncDimensions ? ((tile.dimensions || {}).h || 1200) : ((tile.mobileDimensions || {}).h || 1200)}
                 onChange={function(e) { ud('mobile', 'h', parseInt(e.target.value) || 1200); }} className="input" disabled={!!tile.syncDimensions} />
@@ -413,8 +417,8 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
           <div className="props-section">
             <label className="label">{t('props.mobileDimensions', uiLang)}</label>
             <div className="props-dims">
-              <input type="number" value={tile.syncDimensions ? ((tile.dimensions || {}).w || 3000) : ((tile.mobileDimensions || {}).w || 1242)}
-                onChange={function(e) { ud('mobile', 'w', parseInt(e.target.value) || 1242); }} className="input" disabled={!!tile.syncDimensions} />
+              <input type="number" value={tile.syncDimensions ? ((tile.dimensions || {}).w || 3000) : ((tile.mobileDimensions || {}).w || 1680)}
+                onChange={function(e) { ud('mobile', 'w', parseInt(e.target.value) || 1680); }} className="input" disabled={!!tile.syncDimensions} />
               <span className="props-dims-x">&times;</span>
               <input type="number" value={tile.syncDimensions ? ((tile.dimensions || {}).h || 1688) : ((tile.mobileDimensions || {}).h || 699)}
                 onChange={function(e) { ud('mobile', 'h', parseInt(e.target.value) || 699); }} className="input" disabled={!!tile.syncDimensions} />

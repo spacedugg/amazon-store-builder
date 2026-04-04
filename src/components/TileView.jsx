@@ -84,7 +84,9 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
       <div className={cls} onClick={onClick} style={bgColor ? { background: bgColor } : undefined}>
         {img
           ? <img src={img} className="tile-uploaded-img" alt="" />
-          : <Wireframe tile={tile} viewMode={viewMode} bgColor={bgColor} />
+          : tile.wireframeImage
+            ? <img src={tile.wireframeImage} className="tile-uploaded-img tile-wireframe-img" alt="Wireframe" />
+            : <Wireframe tile={tile} viewMode={viewMode} bgColor={bgColor} />
         }
         {tile.textOverlay && <div className="tile-it-text" style={{ textAlign: tile.textAlign || 'left' }}>{tile.textOverlay}</div>}
       </div>
@@ -98,7 +100,9 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
     <div className={cls} onClick={onClick} style={Object.assign({ position: 'relative' }, bgColor ? { background: bgColor } : {})}>
       {imgSrc
         ? <img src={imgSrc} className="tile-uploaded-img" alt="" />
-        : <Wireframe tile={tile} viewMode={viewMode} bgColor={bgColor} />
+        : tile.wireframeImage
+          ? <img src={tile.wireframeImage} className="tile-uploaded-img tile-wireframe-img" alt="Wireframe" />
+          : <Wireframe tile={tile} viewMode={viewMode} bgColor={bgColor} />
       }
       {tile.type === 'shoppable_image' && <div className="tile-shoppable-badge">{t('tile.shoppable', uiLang)}</div>}
       {tile.linkAsin && <div className="tile-link-badge">ASIN: {tile.linkAsin}</div>}

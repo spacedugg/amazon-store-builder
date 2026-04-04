@@ -66,7 +66,7 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
             </div>
           ) : (
             <div className="header-banner-placeholder" style={headerBannerColor ? { background: headerBannerColor, borderColor: headerBannerColor } : undefined}>
-              <span>{t('canvas.headerBanner', uiLang)} ({isMobile ? '1242 x 450' : '3000 x 600'})</span>
+              <span>{t('canvas.headerBanner', uiLang)} ({isMobile ? '1680 x 900' : '3000 x 600'})</span>
               <div className="header-banner-actions">
                 <button className="btn" style={{ fontSize: 10, padding: '4px 10px' }} onClick={function(e) { e.stopPropagation(); onHeaderBannerUpload && onHeaderBannerUpload(); }}>
                   Bild hochladen
