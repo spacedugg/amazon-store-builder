@@ -618,6 +618,7 @@ function extractHighestResSrcset(srcset) {
 
 function isStoreImage(src) {
   if (!src) return false;
+  // Reject tracking, UI elements, and non-content images
   if (src.indexOf('sprite') >= 0) return false;
   if (src.indexOf('pixel') >= 0) return false;
   if (src.indexOf('beacon') >= 0) return false;
@@ -629,10 +630,23 @@ function isStoreImage(src) {
   if (src.indexOf('fls-eu') >= 0) return false;
   if (src.match(/\.(js|css)\??/)) return false;
   if (src.indexOf('1x1') >= 0) return false;
+  if (src.indexOf('icon') >= 0 && src.indexOf('.png') >= 0 && src.indexOf('SX') < 0) return false;
+  if (src.indexOf('nav-sprite') >= 0) return false;
+  if (src.indexOf('amazonui') >= 0) return false;
 
-  // Store-designed images (highest priority)
+  // Store-designed images (al- prefix = custom store content)
   if (src.indexOf('/images/S/al-') >= 0) return true;
+  // Amazon media CDN store images
   if (src.indexOf('m.media-amazon.com/images/S/') >= 0) return true;
+  // Product and content images from Amazon media CDN (also used in stores)
+  if (src.indexOf('m.media-amazon.com/images/I/') >= 0) return true;
+  // Any sufficiently large Amazon-hosted image (SX/SY resize params indicate real content)
+  if (src.indexOf('m.media-amazon.com') >= 0 && (src.indexOf('SX') >= 0 || src.indexOf('SY') >= 0)) return true;
+  // Store images served from images-na.ssl-images-amazon.com
+  if (src.indexOf('images-na.ssl-images-amazon.com/images/') >= 0) return true;
+  // images-eu (European CDN)
+  if (src.indexOf('images-eu.ssl-images-amazon.com/images/') >= 0) return true;
+
   return false;
 }
 
@@ -640,7 +654,7 @@ function extractImagesFromRawHTML(html) {
   var images = [];
   var seen = {};
 
-  // Only store-designed images (al- pattern) from raw HTML
+  // Store-designed images (al- prefix) from raw HTML
   var storeImagePattern = /(?:src|srcset)=["']([^"']*images\/S\/al-[^"'\s,]+)/gi;
   var match;
   while ((match = storeImagePattern.exec(html)) !== null) {
@@ -650,6 +664,30 @@ function extractImagesFromRawHTML(html) {
     if (!seen[key]) {
       seen[key] = true;
       images.push({ url: url, alt: '', width: 0, height: 0 });
+    }
+  }
+
+  // Also extract content images from m.media-amazon.com/images/I/ (product + store content)
+  var mediaImagePattern = /(?:src|srcset)=["'](https?:\/\/m\.media-amazon\.com\/images\/[SI]\/[^"'\s,]+)/gi;
+  while ((match = mediaImagePattern.exec(html)) !== null) {
+    var mUrl = match[1];
+    // Skip tiny images (likely icons/UI)
+    if (mUrl.indexOf('SX50') >= 0 || mUrl.indexOf('SX36') >= 0 || mUrl.indexOf('SX20') >= 0) continue;
+    var mKey = normalizeImageUrl(mUrl);
+    if (!seen[mKey]) {
+      seen[mKey] = true;
+      images.push({ url: mUrl, alt: '', width: 0, height: 0 });
+    }
+  }
+
+  // Also try images-eu and images-na CDN
+  var cdnPattern = /(?:src|srcset)=["'](https?:\/\/images-(?:eu|na)\.ssl-images-amazon\.com\/images\/[^"'\s,]+)/gi;
+  while ((match = cdnPattern.exec(html)) !== null) {
+    var cUrl = match[1];
+    var cKey = normalizeImageUrl(cUrl);
+    if (!seen[cKey]) {
+      seen[cKey] = true;
+      images.push({ url: cUrl, alt: '', width: 0, height: 0 });
     }
   }
 

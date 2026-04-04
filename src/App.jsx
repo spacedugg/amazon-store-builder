@@ -274,20 +274,11 @@ export default function App() {
         log('Gemini visual intelligence skipped: ' + geminiErr.message);
       }
 
-      // Step 1.8: Add storytelling type to instructions if specified
-      if (params.storytellingType && params.storytellingType !== 'automatic') {
-        var storyMap = {
-          'educational': 'Use an EDUCATIONAL FUNNEL storytelling approach: Problem → Solution → Proof → Product. Like AG1 or Kloster Kitchen.',
-          'category-navigator': 'Use a CATEGORY NAVIGATOR storytelling approach: Hero → Categories → Per-Category: Lifestyle + Products. Like Cloudpillo or Feandrea.',
-          'purpose-story': 'Use a PURPOSE STORY storytelling approach: Mission → Values → Impact Numbers → Products. Like the nu company or Hansegrün.',
-          'product-showcase': 'Use a PRODUCT SHOWCASE storytelling approach: Hero → Bestsellers → Features → Accessories. Like Desktronic or Manscaped.',
-          'seasonal-hook': 'Use a SEASONAL HOOK storytelling approach: Seasonal opener → Current Favorites → Categories. Like Feandrea or Bedsure.'
-        };
-        var storyInstruction = storyMap[params.storytellingType];
-        if (storyInstruction) {
-          referenceAnalysis = (referenceAnalysis || '') + '\n\n=== STORYTELLING DIRECTIVE ===\n' + storyInstruction + '\n=== END STORYTELLING DIRECTIVE ===\n';
-          log('Storytelling type: ' + params.storytellingType);
-        }
+      // Step 1.8: Log selected extra pages
+      var selectedExtraPages = params.extraPages || {};
+      var activeExtras = Object.keys(selectedExtraPages).filter(function(k) { return selectedExtraPages[k]; });
+      if (activeExtras.length > 0) {
+        log('Extra subpages: ' + activeExtras.join(', '));
       }
 
       // Resolve template data if selected
@@ -296,31 +287,20 @@ export default function App() {
         templateData = STORE_TEMPLATES.find(function(t) { return t.id === params.template; }) || null;
       }
 
-      // Step 1.9: Enhance website data with CI detection flag
+      // Website data is always used for CI extraction when available
       var enhancedWebsiteData = params.websiteData || null;
-      if (params.enableCIDetection && enhancedWebsiteData) {
-        enhancedWebsiteData = Object.assign({}, enhancedWebsiteData, { ciDetectionEnabled: true });
-        referenceAnalysis = (referenceAnalysis || '') + '\n\n=== CI DETECTION MODE ===\n'
-          + 'The user has enabled Corporate Identity detection. EXTRACT and USE the brand\'s actual:\n'
-          + '- Primary colors (from website, logo, product images)\n'
-          + '- Typography style (serif/sans-serif, weight, capitalization)\n'
-          + '- Photography style (warm/cool, light/dark, lifestyle/product-focused)\n'
-          + '- Tone of voice (formal/casual, emotional/rational)\n'
-          + 'Apply these consistently across ALL image briefs and text elements.\n'
-          + '=== END CI DETECTION MODE ===\n';
-        log('CI detection enabled — brand identity will be extracted from website data');
-      }
 
       // Step 2-4: AI generation (with complexity, category, template, websiteData, referenceAnalysis)
       var storeData = await generateStore(
         params.asins, products, params.brand, params.marketplace, lang,
         params.instructions, log, params.complexity, templateData, enhancedWebsiteData, referenceAnalysis,
-        { includeQuiz: params.includeQuiz, includeProductVideos: params.includeProductVideos, includeBrandVideo: params.includeBrandVideo, generateWireframes: params.generateWireframes }
+        { extraPages: selectedExtraPages, includeProductVideos: params.includeProductVideos, generateWireframes: params.generateWireframes, referenceCategory: params.referenceCategory }
       );
 
       // Store meta
       storeData.complexity = params.complexity;
       if (templateData) storeData.templateId = templateData.id;
+      if (enhancedWebsiteData) storeData.websiteData = enhancedWebsiteData;
 
       setStore(storeData);
       setCurPage(storeData.pages[0] ? storeData.pages[0].id : '');

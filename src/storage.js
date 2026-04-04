@@ -143,20 +143,6 @@ export async function fetchDesignerTimer(shareToken) {
   } catch (e) { return { seconds: 0, running: false }; }
 }
 
-// Acknowledge changes (designer confirms they've seen updates)
-export async function acknowledgeChanges(shareToken) {
-  if (!shareToken) return null;
-  try {
-    var resp = await fetch('/api/stores', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ shareToken: shareToken }),
-    });
-    if (!resp.ok) return null;
-    return resp.json();
-  } catch (e) { return null; }
-}
-
 // Auto-save stays in localStorage (frequent writes, no need for DB)
 export function autoSave(store) {
   try {
