@@ -38,19 +38,35 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
   var [websiteData, setWebsiteData] = useState(null);
   var [websiteScraping, setWebsiteScraping] = useState(false);
   var [websiteError, setWebsiteError] = useState('');
-  var [referenceStoreUrls, setReferenceStoreUrls] = useState(['']);
-  var [referenceUrlErrors, setReferenceUrlErrors] = useState({});
+  // Reference Store URLs removed — had no effect on generation
   var [existingStoreUrl, setExistingStoreUrl] = useState('');
   var [existingStoreUrlError, setExistingStoreUrlError] = useState('');
   var [existingStoreMode, setExistingStoreMode] = useState('optimize');
   var [driveUrl, setDriveUrl] = useState(googleDriveUrl || '');
   var [referenceCategory, setReferenceCategory] = useState('generic');
-  var [enableCIDetection, setEnableCIDetection] = useState(false);
-  var [storytellingType, setStorytellingType] = useState('automatic');
-  // G3: New feature opt-ins
-  var [includeQuiz, setIncludeQuiz] = useState(false);
+  // Extra subpages — each is independently selectable
+  var [extraPages, setExtraPages] = useState({
+    product_selector: false,
+    gift_sets: false,
+    recommendations: false,
+    new_arrivals: false,
+    subscribe_save: false,
+    sample_sets: false,
+    about_us: false,
+    how_it_works: false,
+    bestsellers: false,
+    deals: false,
+    sustainability: false,
+  });
+  var toggleExtraPage = function(key) {
+    setExtraPages(function(prev) {
+      var next = Object.assign({}, prev);
+      next[key] = !prev[key];
+      return next;
+    });
+  };
+  // Other feature options
   var [includeProductVideos, setIncludeProductVideos] = useState(false);
-  var [includeBrandVideo, setIncludeBrandVideo] = useState(false);
   var [generateWireframes, setGenerateWireframes] = useState(false);
   var fileRef = useRef(null);
 
@@ -142,40 +158,7 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
     return '';
   };
 
-  var handleReferenceUrlChange = function(index, value) {
-    var updated = referenceStoreUrls.slice();
-    updated[index] = value;
-    setReferenceStoreUrls(updated);
-    var errors = Object.assign({}, referenceUrlErrors);
-    if (value.trim()) {
-      var err = validateStoreUrl(value);
-      if (err) { errors[index] = err; } else { delete errors[index]; }
-    } else {
-      delete errors[index];
-    }
-    setReferenceUrlErrors(errors);
-  };
-
-  var addReferenceUrl = function() {
-    if (referenceStoreUrls.length < 5) {
-      setReferenceStoreUrls(referenceStoreUrls.concat(['']));
-    }
-  };
-
-  var removeReferenceUrl = function(index) {
-    var updated = referenceStoreUrls.slice();
-    updated.splice(index, 1);
-    if (updated.length === 0) updated = [''];
-    setReferenceStoreUrls(updated);
-    var errors = {};
-    updated.forEach(function(url, i) {
-      if (url.trim()) {
-        var err = validateStoreUrl(url);
-        if (err) errors[i] = err;
-      }
-    });
-    setReferenceUrlErrors(errors);
-  };
+  // Reference Store URL handlers removed
 
   var canGenerate = brand.trim() && asins.length > 0;
   var levelInfo = COMPLEXITY_LEVELS[complexity];
@@ -210,7 +193,7 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
               className="input"
               value={brandUrl}
               onChange={function(e) { setBrandUrl(e.target.value); }}
-              placeholder="https://www.amazon.de/stores/BRAND/page/..."
+              placeholder="https://www.amazon.de/stores/BRAND/page/... oder /stores/page/UUID"
             />
             <div className="hint">Paste an Amazon Brand Store or seller page URL to auto-discover all products</div>
             <button
@@ -302,46 +285,7 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
           </div>
         )}
 
-        {/* 3b. Reference Brand Stores (optional) */}
-        <label className="label" style={{ marginTop: 10 }}>Reference Brand Stores (optional)</label>
-        <div className="hint" style={{ marginBottom: 6 }}>Enter 2-5 Amazon Brand Store URLs for design inspiration. The AI will analyze their structure, visuals, and layout patterns.</div>
-        {referenceStoreUrls.map(function(url, idx) {
-          return (
-            <div key={idx} style={{ display: 'flex', gap: 6, marginBottom: 4 }}>
-              <input
-                className="input"
-                style={{ flex: 1 }}
-                value={url}
-                onChange={function(e) { handleReferenceUrlChange(idx, e.target.value); }}
-                placeholder="https://www.amazon.de/stores/BRAND/page/..."
-              />
-              <button
-                className="btn"
-                style={{ padding: '6px 10px', minWidth: 28 }}
-                onClick={function() { removeReferenceUrl(idx); }}
-                title="Remove URL"
-              >
-                x
-              </button>
-            </div>
-          );
-        })}
-        {Object.keys(referenceUrlErrors).length > 0 && (
-          <div className="price-error" style={{ marginTop: 2 }}>
-            {referenceUrlErrors[Object.keys(referenceUrlErrors)[0]]}
-          </div>
-        )}
-        {referenceStoreUrls.length < 5 && (
-          <button
-            className="btn"
-            style={{ marginTop: 4, padding: '6px 12px', fontSize: 12 }}
-            onClick={addReferenceUrl}
-          >
-            + Add URL
-          </button>
-        )}
-
-        {/* 3c. Existing Brand Store URL (optional) */}
+        {/* 3b. Existing Brand Store URL (optional) */}
         <label className="label" style={{ marginTop: 10 }}>Existing Brand Store URL (optional)</label>
         <input
           className="input"
@@ -354,7 +298,7 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
               setExistingStoreUrlError('');
             }
           }}
-          placeholder="https://www.amazon.de/stores/BRAND/page/..."
+          placeholder="https://www.amazon.de/stores/BRAND/page/... oder /stores/page/UUID"
         />
         <div className="hint">Die aktuelle Amazon Brand Store URL des Kunden.</div>
         {existingStoreUrlError && <div className="price-error" style={{ marginTop: 2 }}>{existingStoreUrlError}</div>}
@@ -401,48 +345,38 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
         </select>
         <div className="hint">Wählen Sie eine Produktkategorie aus, um kategoriespezifische Stil-Hinweise und Referenzstores zu laden.</div>
 
-        {/* 4c. CI Detection Toggle */}
-        <label className="label" style={{ marginTop: 10 }}>4c. CI-Erkennung</label>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-          <input
-            type="checkbox"
-            checked={enableCIDetection}
-            onChange={function(e) { setEnableCIDetection(e.target.checked); }}
-            style={{ cursor: 'pointer', width: 18, height: 18 }}
-            id="ci-detection-toggle"
-          />
-          <label htmlFor="ci-detection-toggle" style={{ cursor: 'pointer', margin: 0 }}>
-            Automatische Corporate Identity Erkennung aktivieren
-          </label>
+        {/* 4c. Zusatzseiten (Checkboxen) */}
+        <label className="label" style={{ marginTop: 10 }}>4c. Zusatzseiten</label>
+        <div className="hint" style={{ marginBottom: 6 }}>Jede angehakte Seite wird als eigene Subpage im Store generiert. Homepage + Kategorie-Seiten entstehen immer automatisch.</div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px 16px' }}>
+          {[
+            { key: 'product_selector', label: 'Produktselektor' },
+            { key: 'gift_sets', label: 'Geschenk-Sets' },
+            { key: 'recommendations', label: 'Unsere Empfehlungen' },
+            { key: 'new_arrivals', label: 'Neuheiten' },
+            { key: 'subscribe_save', label: 'Spar-Abo' },
+            { key: 'sample_sets', label: 'Probiersets' },
+            { key: 'about_us', label: 'Über uns' },
+            { key: 'how_it_works', label: 'So funktioniert\'s' },
+            { key: 'bestsellers', label: 'Bestseller' },
+            { key: 'deals', label: 'Angebote' },
+            { key: 'sustainability', label: 'Nachhaltigkeit' },
+          ].map(function(opt) {
+            return (
+              <label key={opt.key} style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', fontSize: 12, padding: '3px 0' }}>
+                <input type="checkbox" checked={extraPages[opt.key]} onChange={function() { toggleExtraPage(opt.key); }} style={{ width: 16, height: 16 }} />
+                <span>{opt.label}</span>
+              </label>
+            );
+          })}
         </div>
-        <div className="hint">Wenn aktiviert, wird die Website aggressiver gescannt, um Farben, Schriften und Stilmerkmale zu extrahieren.</div>
 
-        {/* 4d. Storytelling Type */}
-        <label className="label" style={{ marginTop: 10 }}>4d. Storytelling-Typ (optional)</label>
-        <select value={storytellingType} onChange={function(e) { setStorytellingType(e.target.value); }} className="input">
-          <option value="automatic">Automatisch (Standard)</option>
-          <option value="educational_funnel">Educational Funnel (Problem → Lösung → Beweis → Produkt)</option>
-          <option value="category_navigator">Category Navigator (Hero → Kategorien → Produkte)</option>
-          <option value="purpose_story">Purpose Story (Mission → Werte → Impact → Produkte)</option>
-          <option value="product_showcase">Product Showcase (Hero → Bestseller → Features → Zubehör)</option>
-          <option value="seasonal_hook">Seasonal Hook (Saisonaler Aufhänger → Favoriten → Kategorien)</option>
-        </select>
-        <div className="hint">Bestimmt die narrative Struktur und den Ablauf der Store-Seiten.</div>
-
-        {/* 4e. Feature Options */}
-        <label className="label" style={{ marginTop: 10 }}>4e. Zusatzfeatures</label>
+        {/* 4d. Weitere Optionen */}
+        <label className="label" style={{ marginTop: 10 }}>4d. Weitere Optionen</label>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
           <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
-            <input type="checkbox" checked={includeQuiz} onChange={function(e) { setIncludeQuiz(e.target.checked); }} style={{ width: 18, height: 18 }} />
-            <span>Produktberater-Quiz (eigene Subpage mit Entscheidungsbaum)</span>
-          </label>
-          <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
             <input type="checkbox" checked={includeProductVideos} onChange={function(e) { setIncludeProductVideos(e.target.checked); }} style={{ width: 18, height: 18 }} />
-            <span>Produktvideos einbinden (Produktdemos, Anwendung)</span>
-          </label>
-          <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
-            <input type="checkbox" checked={includeBrandVideo} onChange={function(e) { setIncludeBrandVideo(e.target.checked); }} style={{ width: 18, height: 18 }} />
-            <span>Markenvideo einbinden (Brand Story, Imagefilm)</span>
+            <span>Produktvideos auf Kategorie-Seiten einbinden</span>
           </label>
           <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
             <input type="checkbox" checked={generateWireframes} onChange={function(e) { setGenerateWireframes(e.target.checked); }} style={{ width: 18, height: 18 }} />
@@ -454,7 +388,6 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
             </div>
           )}
         </div>
-        <div className="hint">Diese Features werden bei der Store-Generierung berücksichtigt.</div>
 
         {/* 5. Complexity Slider */}
         <label className="label" style={{ marginTop: 10 }}>5. Store Complexity</label>
@@ -669,15 +602,12 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
                 complexity: complexity,
                 template: selectedTemplate,
                 websiteData: websiteData || null,
-                referenceStoreUrls: referenceStoreUrls.filter(function(u) { return u.trim() && !validateStoreUrl(u); }),
+                referenceStoreUrls: [],
                 existingStoreUrl: existingStoreUrl.trim() && !validateStoreUrl(existingStoreUrl) ? existingStoreUrl.trim() : null,
                 existingStoreMode: existingStoreMode,
                 referenceCategory: referenceCategory,
-                enableCIDetection: enableCIDetection,
-                storytellingType: storytellingType,
-                includeQuiz: includeQuiz,
+                extraPages: extraPages,
                 includeProductVideos: includeProductVideos,
-                includeBrandVideo: includeBrandVideo,
                 generateWireframes: generateWireframes,
               });
             }}

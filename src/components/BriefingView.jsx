@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, findLayout } from '../constants';
 import { loadStoreByShareToken } from '../storage';
-// DOCX export removed — designer doesn't need it
+import { generateWireframesForPage } from '../storeBuilder';
 import SectionView, { getGridConfig } from './SectionView';
 
 var noop = function() {};
@@ -1525,13 +1525,41 @@ export default function BriefingView() {
   var [updateBanner, setUpdateBanner] = useState(false);
   var [changeLog, setChangeLog] = useState([]); // [{ time, descriptions[] }]
   var [selectedTile, setSelectedTile] = useState(null); // { sid, ti }
-  var [sidebarTab, setSidebarTab] = useState('design'); // 'design' or 'info'
+  var [sidebarTab, setSidebarTab] = useState('design'); // 'design', 'ci', or 'info'
   var [checks, setChecks] = useState({}); // image completion checkmarks
   var [showPreview, setShowPreview] = useState(false);
+  var [wfGenerating, setWfGenerating] = useState(null); // pageId currently generating wireframes
+  var [wfProgress, setWfProgress] = useState(''); // progress text
   var prevStoreRef = useRef(null);
   var pollRef = useRef(null);
   var bannerTimeoutRef = useRef(null);
   var rightPanelRef = useRef(null);
+
+  // Generate wireframes for a specific page
+  var handleGenerateWireframes = function(pageId) {
+    if (wfGenerating) return; // already generating
+    var page = (store.pages || []).find(function(p) { return p.id === pageId; });
+    if (!page) return;
+    setWfGenerating(pageId);
+    setWfProgress('Starte...');
+    generateWireframesForPage(
+      page, store.brandName || '', store.websiteData || null,
+      { brandTone: store.brandTone, brandStory: store.brandStory, keyFeatures: store.keyFeatures },
+      function(current, total, category) {
+        setWfProgress(current + '/' + total + ' (' + category + ')');
+      }
+    ).then(function(result) {
+      setWfGenerating(null);
+      setWfProgress(result.success + ' generiert, ' + result.failed + ' fehlgeschlagen');
+      // Force re-render by updating store reference
+      setStore(function(prev) { return Object.assign({}, prev); });
+      setTimeout(function() { setWfProgress(''); }, 4000);
+    }).catch(function(err) {
+      setWfGenerating(null);
+      setWfProgress('Fehler: ' + err.message);
+      setTimeout(function() { setWfProgress(''); }, 4000);
+    });
+  };
 
   var token = window.location.pathname.split('/share/')[1];
 
@@ -1806,6 +1834,9 @@ export default function BriefingView() {
             <button onClick={function() { setSidebarTab('design'); }} style={{ flex: 1, padding: '8px 0', fontSize: 11, fontWeight: 700, background: 'none', border: 'none', cursor: 'pointer', borderBottom: sidebarTab === 'design' ? '2px solid #3b82f6' : '2px solid transparent', color: sidebarTab === 'design' ? '#1d4ed8' : '#94a3b8', marginBottom: -2 }}>
               Design
             </button>
+            <button onClick={function() { setSidebarTab('ci'); }} style={{ flex: 1, padding: '8px 0', fontSize: 11, fontWeight: 700, background: 'none', border: 'none', cursor: 'pointer', borderBottom: sidebarTab === 'ci' ? '2px solid #3b82f6' : '2px solid transparent', color: sidebarTab === 'ci' ? '#1d4ed8' : '#94a3b8', marginBottom: -2 }}>
+              Brand CI
+            </button>
             <button onClick={function() { setSidebarTab('info'); }} style={{ flex: 1, padding: '8px 0', fontSize: 11, fontWeight: 700, background: 'none', border: 'none', cursor: 'pointer', borderBottom: sidebarTab === 'info' ? '2px solid #3b82f6' : '2px solid transparent', color: sidebarTab === 'info' ? '#1d4ed8' : '#94a3b8', marginBottom: -2 }}>
               Store Info
             </button>
@@ -1859,6 +1890,83 @@ export default function BriefingView() {
                   </a>
                 </div>
               )}
+            </div>
+          )}
+
+          {/* ═══ BRAND CI TAB ═══ */}
+          {sidebarTab === 'ci' && (
+            <div>
+              <div className="briefing-sidebar-section" style={{ background: '#faf5ff', borderRadius: 8, margin: '0 8px 10px', padding: '12px' }}>
+                <div className="briefing-sidebar-title" style={{ color: '#7c3aed', marginBottom: 8 }}>Corporate Identity</div>
+                <div className="briefing-legend" style={{ fontSize: 11, lineHeight: 1.6 }}>
+                  <p style={{ marginBottom: 8, color: '#6b21a8', fontWeight: 600 }}>Farben, Schriften und Stil für den Designer auf einen Blick.</p>
+
+                  {/* Colors */}
+                  {store.websiteData && store.websiteData.colors && store.websiteData.colors.length > 0 ? (
+                    <div style={{ marginBottom: 10 }}>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Farbpalette</div>
+                      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                        {store.websiteData.colors.map(function(c, i) {
+                          return (
+                            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 4, background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '3px 8px' }}>
+                              <div style={{ width: 16, height: 16, borderRadius: 3, background: c, border: '1px solid rgba(0,0,0,.15)' }} />
+                              <span style={{ fontSize: 10, fontFamily: 'monospace' }}>{c}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ) : (
+                    <div style={{ marginBottom: 10 }}>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Farbpalette</div>
+                      <div style={{ color: '#94a3b8', fontSize: 10, fontStyle: 'italic' }}>Keine Farben aus Website extrahiert. Bitte manuell eintragen oder aus Produktbildern ableiten.</div>
+                    </div>
+                  )}
+
+                  {/* Brand Tone */}
+                  <div style={{ marginBottom: 10 }}>
+                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Markentonalität</div>
+                    <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11 }}>
+                      {store.brandTone || store.analysis && store.analysis.brandTone || 'Nicht erkannt — bitte aus Website/Produkten ableiten'}
+                    </div>
+                  </div>
+
+                  {/* Brand Story */}
+                  {(store.analysis && store.analysis.brandStory) || (store.websiteData && store.websiteData.aboutText) ? (
+                    <div style={{ marginBottom: 10 }}>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Story</div>
+                      <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11, lineHeight: 1.5 }}>
+                        {(store.analysis && store.analysis.brandStory) || (store.websiteData && store.websiteData.aboutText ? store.websiteData.aboutText.substring(0, 300) + '...' : '')}
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {/* Certifications / USPs */}
+                  {store.websiteData && store.websiteData.certifications && store.websiteData.certifications.length > 0 && (
+                    <div style={{ marginBottom: 10 }}>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Zertifizierungen & USPs</div>
+                      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                        {store.websiteData.certifications.map(function(cert, i) {
+                          return <span key={i} style={{ background: '#f3e8ff', color: '#6b21a8', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{cert}</span>;
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Website URL */}
+                  {store.websiteData && store.websiteData.url && (
+                    <div style={{ marginBottom: 10 }}>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Website</div>
+                      <a href={store.websiteData.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: '#7c3aed', wordBreak: 'break-all' }}>{store.websiteData.url}</a>
+                    </div>
+                  )}
+
+                  {/* Manual CI input hint */}
+                  <div style={{ marginTop: 12, padding: '8px 10px', background: '#fef3c7', borderRadius: 4, border: '1px solid #fde68a', fontSize: 10, color: '#92400e', lineHeight: 1.5 }}>
+                    <strong>Hinweis:</strong> Falls die automatisch erkannten Werte nicht stimmen, bitte direkt mit dem Kunden die korrekte CI abstimmen (Styleguide, Brandbook, Logo-Dateien).
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 
@@ -1954,7 +2062,28 @@ export default function BriefingView() {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></svg>
             <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.08em', color: '#dc2626' }}>Designer Instructions</span>
             {activePage && <span style={{ fontSize: 10, color: '#94a3b8', fontWeight: 400 }}>{activePage.name}</span>}
+            <span style={{ flex: 1 }} />
+            {activePage && (
+              <button
+                onClick={function() { handleGenerateWireframes(activePage.id); }}
+                disabled={wfGenerating !== null}
+                style={{
+                  background: wfGenerating === activePage.id ? '#fbbf24' : '#6366f1',
+                  color: wfGenerating === activePage.id ? '#78350f' : '#fff',
+                  border: 'none', borderRadius: 4, padding: '4px 10px', fontSize: 10, fontWeight: 700,
+                  cursor: wfGenerating ? 'not-allowed' : 'pointer', opacity: wfGenerating && wfGenerating !== activePage.id ? 0.4 : 1,
+                }}
+                title="Wireframe-Skizzen für alle Bild-Kacheln dieser Seite generieren"
+              >
+                {wfGenerating === activePage.id ? 'Generiere... ' + wfProgress : 'Wireframes generieren'}
+              </button>
+            )}
           </div>
+          {wfProgress && !wfGenerating && (
+            <div style={{ padding: '4px 16px', background: '#ecfdf5', fontSize: 10, color: '#166534', borderBottom: '1px solid #bbf7d0' }}>
+              {wfProgress}
+            </div>
+          )}
           <div className="briefing-right-panel-body">
             {/* Store Hero / Header Banner instructions */}
             {(function() {
