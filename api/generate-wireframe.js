@@ -4,10 +4,12 @@ var GEMINI_KEY = process.env.GEMINI_API_KEY;
 var IMAGEN_MODEL = 'imagen-3.0-generate-002';
 var IMAGEN_URL = 'https://generativelanguage.googleapis.com/v1beta/models/' + IMAGEN_MODEL + ':predict';
 
-// Fallback: Gemini 2.0 Flash with native image generation
-// Note: gemini-2.0-flash-exp was deprecated — use current stable model
-var GEMINI_FLASH_MODEL = 'gemini-2.0-flash';
-var GEMINI_FLASH_URL = 'https://generativelanguage.googleapis.com/v1beta/models/' + GEMINI_FLASH_MODEL + ':generateContent';
+// Gemini native image generation models (ordered by preference)
+// The stable gemini-2.0-flash does NOT support image output — must use the preview-image-generation variant
+var GEMINI_IMAGE_MODELS = [
+  'gemini-2.0-flash-preview-image-generation',
+  'gemini-2.5-flash-preview-image-generation',
+];
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -25,23 +27,29 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'Missing prompt' });
   }
   if (!GEMINI_KEY) {
-    return res.status(500).json({ error: 'GEMINI_API_KEY not configured' });
+    return res.status(500).json({ error: 'GEMINI_API_KEY not configured. Add it to your Vercel environment variables.' });
   }
 
+  var errors = [];
+
   try {
-    // Try Imagen 3 first (better for image generation)
+    // Try Imagen 3 first (best for image generation)
     var result = await generateWithImagen(prompt, aspectRatio);
     if (result) {
       return res.status(200).json(result);
     }
+    errors.push('Imagen 3: failed');
 
-    // Fallback: Gemini 2.0 Flash with image output
-    result = await generateWithGeminiFlash(prompt);
-    if (result) {
-      return res.status(200).json(result);
+    // Fallback: Try Gemini native image generation models
+    for (var i = 0; i < GEMINI_IMAGE_MODELS.length; i++) {
+      result = await generateWithGeminiFlash(prompt, GEMINI_IMAGE_MODELS[i]);
+      if (result) {
+        return res.status(200).json(result);
+      }
+      errors.push(GEMINI_IMAGE_MODELS[i] + ': failed');
     }
 
-    return res.status(500).json({ error: 'Image generation failed with all available models. Check GEMINI_API_KEY permissions and billing.' });
+    return res.status(500).json({ error: 'Image generation failed. Tried: ' + errors.join(', ') + '. Check GEMINI_API_KEY permissions and billing at https://aistudio.google.com/apikey' });
 
   } catch (err) {
     console.error('Wireframe generation error:', err.message);
@@ -89,8 +97,10 @@ async function generateWithImagen(prompt, aspectRatio) {
   }
 }
 
-async function generateWithGeminiFlash(prompt) {
+async function generateWithGeminiFlash(prompt, modelName) {
   try {
+    var url = 'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent';
+
     var requestBody = {
       contents: [{
         parts: [{ text: prompt }],
@@ -101,7 +111,7 @@ async function generateWithGeminiFlash(prompt) {
       },
     };
 
-    var resp = await fetch(GEMINI_FLASH_URL + '?key=' + GEMINI_KEY, {
+    var resp = await fetch(url + '?key=' + GEMINI_KEY, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(requestBody),
@@ -109,7 +119,7 @@ async function generateWithGeminiFlash(prompt) {
 
     if (!resp.ok) {
       var errText = await resp.text().catch(function() { return ''; });
-      console.error('Gemini Flash API error (' + resp.status + '):', errText.slice(0, 300));
+      console.error(modelName + ' API error (' + resp.status + '):', errText.slice(0, 300));
       return null;
     }
 
@@ -121,7 +131,7 @@ async function generateWithGeminiFlash(prompt) {
           return {
             imageBase64: parts[i].inlineData.data,
             mimeType: parts[i].inlineData.mimeType || 'image/png',
-            model: 'gemini-flash',
+            model: modelName,
           };
         }
       }
@@ -129,7 +139,7 @@ async function generateWithGeminiFlash(prompt) {
 
     return null;
   } catch (err) {
-    console.error('Gemini Flash exception:', err.message);
+    console.error(modelName + ' exception:', err.message);
     return null;
   }
 }
