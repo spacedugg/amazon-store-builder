@@ -368,7 +368,9 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
     '- Every ASIN must be assigned to exactly ONE category or subcategory',
     hasMenuStructure
       ? '- Copy category/subcategory names VERBATIM from the structure above. Character-for-character identical.'
-      : '- Create 2-8 meaningful categories based on what products ARE (e.g. "Schuhe", "Taschen")',
+      : products.length <= 4
+        ? '- With only ' + products.length + ' products: Create 1-2 categories with SPECIFIC, descriptive names based on what the products actually ARE. Use the product type (e.g. "Schwefelseife", "Naturseife") — NEVER use generic names like "Weitere Produkte", "Alle Produkte", "Sonstige", or just the brand name.'
+        : '- Create 2-8 meaningful categories based on what products ARE (e.g. "Schuhe", "Taschen"). NEVER use generic names like "Weitere Produkte", "Alle Produkte", "Sonstige".',
     '- Classify product complexity: simple, medium, complex, or variantRich',
     '- Detect brand tone from product descriptions and images',
     '- Extract 3-5 key product features that could be highlighted visually',
@@ -471,7 +473,9 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
         lastCat.productCount = (lastCat.asins || []).length;
       }
     } else {
-      result.categories.push({ name: 'Weitere Produkte', asins: missing, productCount: missing.length, subcategories: [] });
+      var missingProds = missing.map(function(a) { return products.find(function(p) { return p.asin === a; }); }).filter(Boolean);
+      var missingCatName = deriveCategoryName(missingProds, products, brand, lang, result.categories.map(function(c) { return c.name; }));
+      result.categories.push({ name: missingCatName, asins: missing, productCount: missing.length, subcategories: [] });
     }
   }
 
@@ -482,6 +486,8 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
 
 // ─── STEP 2: LAYOUT PER PAGE ───
 export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, isHomepage, allCategories, analysis, userInstructions, complexityLevel, category, template, websiteData, referenceAnalysis, isSubpage) {
+  // Derive skipCategoryPages: small catalog with 1 category = all products on homepage
+  var skipCategoryPages = isHomepage && pageProducts.length <= 4 && allCategories.length <= 1;
   var productList = pageProducts.map(function(p) {
     var item = { asin: p.asin, name: p.name, price: p.price, rating: p.rating, reviews: p.reviews, description: (p.description || '').slice(0, 100) };
     if (p.bulletPoints && p.bulletPoints.length > 0) item.bulletPoints = p.bulletPoints.slice(0, 3);
@@ -751,9 +757,12 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     'BRIEF RULES:',
     '- Keep briefs SHORT: max 15-20 words after the tag.',
     '- Name the specific ' + brand + ' product or category from the product list.',
-    '- textOverlay MUST be in store language (' + lang + ') — use real product/category names.',
+    '- textOverlay MUST be in store language (' + lang + ') — use real product/category names. For category/navigation tiles: textOverlay = JUST the category name (e.g. "Vitamine"), NOT a sentence. The CTA carries the action.',
     '- Do NOT use generic placeholders like "[product]" or "lifestyle image".',
     '- NEVER place two identical image categories directly adjacent (e.g. two LIFESTYLE sections in a row).',
+    '- FACTUAL ACCURACY: NEVER reference more categories, products, or features than actually exist. There are exactly ' + allCategories.length + ' categories (' + allCategories.map(function(c) { return c.name; }).join(', ') + '). Do NOT write "three category previews" if there are only ' + allCategories.length + '. Briefs must match the real data.',
+    '- CROSS-SELL TO A SPECIFIC CATEGORY: Use imageCategory="creative" or "lifestyle" with a visual preview. textOverlay = JUST the category name (e.g. "Vitamine"), NOT a sentence. The CTA carries the action. Brief = SHORT, e.g. "[CREATIVE] ' + brand + ' [category] preview with representative product".',
+    '- GENERIC "BACK TO ALL" NAVIGATION: For tiles that link back to ALL products or the homepage without featuring a specific category, use imageCategory="text_image" with a short headline and a CTA. No elaborate design description needed.',
     '',
     'USP CONSISTENCY RULES:',
     '- Use the EXACT same wording for each USP across the entire store. If one tile says "BPA-frei", every tile must say "BPA-frei" (not "Ohne BPA" or "BPA Free").',
@@ -824,7 +833,54 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '}',
     '',
     isHomepage
-      ? (pageProducts.length <= 5 && complexityLevel === 1
+      ? (skipCategoryPages
+        ? [
+          'HOMEPAGE SECTIONS — SMALL CATALOG, ALL PRODUCTS ON HOMEPAGE (' + pageProducts.length + ' products, NO separate category pages):',
+          'This homepage is the ONLY page. There are no category subpages. Show ALL products here with RICH detail.',
+          'With only ' + pageProducts.length + ' products, you have room to really showcase each product individually.',
+          'Generate ' + (complexityLevel >= 3 ? '8-12' : complexityLevel >= 2 ? '6-9' : '5-7') + ' sections. Every product appears AT MOST ONCE as shoppable_image, but can appear in lifestyle/creative context.',
+          'Each tile MUST include "imageCategory" field.',
+          '',
+          'STRUCTURE — tell a story about the brand and its products:',
+          '',
+          '1. STORE HERO (layout "1"): imageCategory="store_hero". Brand hero image with logo + claim. Show the brand world.',
+          '',
+          '2. PRODUCT OVERVIEW (layout based on ' + pageProducts.length + ' products):',
+          '   Show ALL products side by side as shoppable_image tiles with real ASINs.',
+          '   With 2 products: "std-2equal" — one shoppable_image per tile, each with product name as textOverlay.',
+          '   With 3 products: "1-1-1" — three equal tiles.',
+          '   With 4 products: "std-4equal" or "2x2wide".',
+          '',
+          '3. BENEFIT / USP SECTION (layout "1" or "vh-w2s"):',
+          '   imageCategory="benefit". Brand-level USPs that apply to ALL products. No product photos.',
+          '',
+          'Then for EACH product, create a mini-showcase (1-2 sections per product):',
+          '',
+          '4. TEXT HEADING for Product 1 (layout "1"): imageCategory="text_image". Product name as headline. Brief intro text.',
+          '5. PRODUCT 1 DETAIL (layout "lg-2stack" or "std-2equal"):',
+          '   Large tile: imageCategory="lifestyle" — Product 1 in real-world use, or imageCategory="creative" — product features/ingredients/benefits.',
+          '   Smaller tile(s): imageCategory="creative" — key features, USPs, or detail shots specific to THIS product.',
+          '',
+          '6. TEXT HEADING for Product 2 (layout "1"): imageCategory="text_image". Product name as headline.',
+          '7. PRODUCT 2 DETAIL (layout "lg-2stack" or "std-2equal"):',
+          '   Same approach: lifestyle/creative + feature details specific to THIS product.',
+          '',
+          pageProducts.length > 2 ? '(Repeat pattern for Products 3-' + pageProducts.length + '.)' : '',
+          '',
+          'FINAL SECTION:',
+          pageProducts.length === 2
+            ? '8. COMPARISON or COMBINED LIFESTYLE (layout "std-2equal"): imageCategory="creative" or "lifestyle" — both products together, showing how they complement each other or differ.'
+            : '8. COMBINED LIFESTYLE (layout "1"): imageCategory="lifestyle" — all products in one scene.',
+          '',
+          'KEY PRINCIPLES:',
+          '- Each product gets its OWN dedicated section(s) with specific features, ingredients, or benefits.',
+          '- Use text_image tiles as section dividers/headings between product showcases — product name as bold headline.',
+          '- Alternate between lifestyle, creative, and benefit content to keep it varied.',
+          '- Name SPECIFIC product features from the product data (e.g. actual ingredients, actual use cases).',
+          '- DO NOT add category navigation tiles. There are no category pages to navigate to.',
+          '- EVERY brief must name specific ' + brand + ' products — generic briefs are FORBIDDEN.',
+        ].filter(Boolean).join('\n')
+        : pageProducts.length <= 5 && complexityLevel === 1
         ? [
           'HOMEPAGE SECTIONS — SMALL CATALOG, MINIMAL TIER (' + pageProducts.length + ' products):',
           'Generate EXACTLY 2-3 sections. Do NOT generate more. Every product appears AT MOST ONCE.',
@@ -832,7 +888,7 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
           '',
           '1. STORE HERO (layout "1"): imageCategory="store_hero". Brand hero image. Logo + claim. NO CTA.',
           '2. CATEGORY NAVIGATION (layout based on count: 2="std-2equal", 3="vh-w2s"):',
-          '   Each tile imageCategory="creative". Category name on brand-color bg + product silhouette + CTA. textOverlay = EXACT category name. Each tile links to its category page via linkUrl.',
+          '   Each tile imageCategory="creative". Product silhouette + CTA. textOverlay = JUST the category name (e.g. "Vitamine"), NOT a sentence. The CTA provides the action. Each tile links to its category page via linkUrl.',
           '3. (OPTIONAL, only if it adds value) BENEFIT SECTION (layout "1" or "vh-2equal"):',
           '   imageCategory="benefit". USPs/quality markers. NO product photos, NO linkAsin.',
           '',
@@ -847,13 +903,13 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
           '',
           '1. STORE HERO (layout "1"): imageCategory="store_hero". Brand hero image. Logo + claim + optional lifestyle/product. NO CTA.',
           '2. CATEGORY NAVIGATION (layout based on count: 2="std-2equal", 4="std-4equal" or "2x2wide", 5+="lg-4grid"):',
-          '   Each tile imageCategory="creative". Category name on brand-color bg + product silhouette + CTA. textOverlay = EXACT category name. linkUrl = "/pageid" to link to category page.',
+          '   Each tile imageCategory="creative". Product silhouette + CTA. textOverlay = JUST the category name (e.g. "Vitamine"), NOT a sentence. The CTA provides the action. linkUrl = "/pageid" to link to category page.',
           pageProducts.length > 5 ? '3. BESTSELLER SHOWCASE (layout "std-2equal" or "lg-2stack"): Tile 1 imageCategory="product" as shoppable_image with real ASIN. Tile 2 imageCategory="creative" with feature text.' : '',
           pageProducts.length > 8 ? '4. PRODUCT GRID (layout "1"): type "product_grid" with top 5-8 products by rating.' : '',
           '5. BENEFIT SECTION (layout "1" or "vh-w2s"): imageCategory="benefit". USP icons/awards on brand-colored bg. No product photos.',
           complexityLevel >= 2 ? '6. LIFESTYLE SPLIT (layout "std-2equal"): Tile 1 imageCategory="lifestyle" — product in use. Tile 2 imageCategory="product" as shoppable_image with linkAsin.' : '',
           complexityLevel >= 3 ? '7. BRAND STORY (layout "lg-2stack" or "2stack-lg"): Large tile imageCategory="lifestyle". Wide tiles imageCategory="creative".' : '',
-          complexityLevel >= 2 ? '8. FOOTER NAV (layout "std-4equal" or "2x2wide"): imageCategory="creative" category tiles.' : '',
+          complexityLevel >= 2 && allCategories.length > 2 ? '8. FOOTER CATEGORY NAV (layout based on count): imageCategory="creative" or "lifestyle" — visual preview tiles for categories not yet featured. textOverlay = JUST the category name, add a fitting CTA. Brief = SHORT, max 10 words.' : complexityLevel >= 2 ? '8. FOOTER NAV (layout "1"): imageCategory="text_image". Short headline + CTA. No elaborate description.' : '',
           '',
           'IMPORTANT: Each product/ASIN must appear AT MOST ONCE across all sections. Do NOT repeat the same product in multiple sections.',
           'For 5+ categories, use lg-4grid (5 tiles) or split into two rows.',
@@ -883,7 +939,9 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
           '   imageCategory="lifestyle" — complementary scenes with ' + pageName + ' products.',
           analysis.productComplexity === 'complex' || analysis.productComplexity === 'variantRich'
             ? '7. VARIANT SHOWCASE (layout "lg-4grid"): imageCategory="product" — large hero + 4 variant tiles.'
-            : '7. CROSS-SELL (layout "vh-w2s"): imageCategory="creative" — wide tile + two square tiles linking to related categories.',
+            : allCategories.length > 1
+            ? '7. CROSS-SELL (layout "std-2equal" or "vh-2equal"): Link to 1-2 related categories. imageCategory="creative" or "lifestyle" — visual preview with representative product. textOverlay = JUST the category name, NOT a sentence. Add a fitting CTA. Brief = SHORT, max 10 words.'
+            : '7. NAVIGATION BANNER (layout "1"): imageCategory="text_image". Simple text banner with a short headline and CTA. No elaborate design description.',
           '',
           'MINIMUM 5 sections. EVERY brief must start with [STORE_HERO], [BENEFIT], [PRODUCT], [CREATIVE], [LIFESTYLE], [TEXT_IMAGE], or [SHOPPABLE] tag.',
           'Every image tile MUST have imageCategory set to one of: store_hero, benefit, product, creative, lifestyle, text_image.',
@@ -919,23 +977,29 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
       if (!t.brief) t.brief = '';
       if (!t.textOverlay) t.textOverlay = '';
       if (!t.ctaText) t.ctaText = '';
-      if (!t.dimensions) {
-        var dd = tileDims && tileDims[ti] ? tileDims[ti] : { w: 3000, h: 1200 };
-        t.dimensions = { w: dd.w, h: dd.h };
-      }
       if (!t.asins) t.asins = [];
-      // Set mobileDimensions based on layout type:
-      // Standard (LS, SS, W): same image for desktop and mobile (designer creates once)
-      // Full-width: mobile is 1680px wide, height taller than desktop for text readability
-      // VH: fixed 1500×750
-      if (layout && layout.type === 'vh') {
+      // ─── ENFORCE CORRECT DIMENSIONS PER LAYOUT TYPE ───
+      // Standard layouts have FIXED tile dimensions — the AI cannot override them.
+      // Only VH layouts allow variable height. Full-width has independent mobile height.
+      var isVH = layout && layout.type === 'vh';
+      var isFullWidth = layout && layout.type === 'fullwidth';
+      var correctDims = tileDims && tileDims[ti] ? tileDims[ti] : { w: 3000, h: 1200 };
+      if (!isVH && !isFullWidth) {
+        // Standard layout: ALWAYS use the fixed dimensions from LAYOUT_TILE_DIMS
+        t.dimensions = { w: correctDims.w, h: correctDims.h };
+        t.mobileDimensions = { w: correctDims.w, h: correctDims.h };
+        t.syncDimensions = true; // Standard tiles: same image for desktop + mobile
+      } else if (isVH) {
+        // VH layout: width is fixed, height can be customized by AI
+        var vhH = (t.dimensions && t.dimensions.h) ? Math.max(t.dimensions.h, Math.ceil(correctDims.w / 5)) : correctDims.h;
+        t.dimensions = { w: correctDims.w, h: vhH };
         t.mobileDimensions = { w: 1500, h: 750 };
-      } else if (layout && layout.type === 'fullwidth' && t.dimensions) {
-        // Full-width: mobile = 1680px wide, independent height. Enforce max ratio 5:1.
+      } else if (isFullWidth) {
+        // Full-width: width fixed at 3000, height can vary. Mobile is 1680px wide.
+        if (!t.dimensions) t.dimensions = { w: 3000, h: correctDims.h || 600 };
+        t.dimensions.w = 3000;
         var mobileH = (t.mobileDimensions && t.mobileDimensions.h) || t.dimensions.h;
         t.mobileDimensions = { w: 1680, h: Math.max(mobileH, Math.ceil(1680 / 5)) };
-      } else if (t.dimensions) {
-        t.mobileDimensions = { w: t.dimensions.w, h: t.dimensions.h };
       }
       // Shoppable images not allowed in VH layouts — convert to regular image
       if (layout && layout.type === 'vh' && t.type === 'shoppable_image') {
@@ -1115,13 +1179,20 @@ export function applyOperations(store, operations) {
         newSec.id = uid();
         if (!newSec.tiles) newSec.tiles = [];
         var addDims = LAYOUT_TILE_DIMS[newSec.layoutId];
+        var addLayout = findLayout(newSec.layoutId);
+        var addIsVH = addLayout && addLayout.type === 'vh';
+        var addIsFullWidth = addLayout && addLayout.type === 'fullwidth';
         newSec.tiles.forEach(function(t, ti) {
           if (!t.type) t.type = 'image';
           if (!t.brief) t.brief = '';
           if (!t.textOverlay) t.textOverlay = '';
           if (!t.ctaText) t.ctaText = '';
-          if (!t.dimensions) {
-            var dd = addDims && addDims[ti] ? addDims[ti] : { w: 3000, h: 1200 };
+          var dd = addDims && addDims[ti] ? addDims[ti] : { w: 3000, h: 1200 };
+          if (!addIsVH && !addIsFullWidth) {
+            t.dimensions = { w: dd.w, h: dd.h };
+            t.mobileDimensions = { w: dd.w, h: dd.h };
+            t.syncDimensions = true;
+          } else if (!t.dimensions) {
             t.dimensions = { w: dd.w, h: dd.h };
           }
           if (!t.asins) t.asins = [];
@@ -1187,13 +1258,20 @@ export function applyOperations(store, operations) {
         (newPage.sections || []).forEach(function(s) {
           s.id = uid();
           var pgDims = LAYOUT_TILE_DIMS[s.layoutId];
+          var pgLayout = findLayout(s.layoutId);
+          var pgIsVH = pgLayout && pgLayout.type === 'vh';
+          var pgIsFullWidth = pgLayout && pgLayout.type === 'fullwidth';
           (s.tiles || []).forEach(function(t, ti) {
             if (!t.type) t.type = 'image';
             if (!t.brief) t.brief = '';
             if (!t.textOverlay) t.textOverlay = '';
             if (!t.ctaText) t.ctaText = '';
-            if (!t.dimensions) {
-              var dd = pgDims && pgDims[ti] ? pgDims[ti] : { w: 3000, h: 1200 };
+            var dd = pgDims && pgDims[ti] ? pgDims[ti] : { w: 3000, h: 1200 };
+            if (!pgIsVH && !pgIsFullWidth) {
+              t.dimensions = { w: dd.w, h: dd.h };
+              t.mobileDimensions = { w: dd.w, h: dd.h };
+              t.syncDimensions = true;
+            } else if (!t.dimensions) {
               t.dimensions = { w: dd.w, h: dd.h };
             }
             if (!t.asins) t.asins = [];
@@ -1228,9 +1306,14 @@ function ensureMinimumSections(sections, pageName, brand, lang, analysis, templa
   var totalProducts = 0;
   (analysis.categories || []).forEach(function(c) { totalProducts += (c.asins || []).length; });
 
+  // Detect small-catalog-only-homepage scenario
+  var isSmallCatalogHomepage = isHomepage && totalProducts <= 4 && (analysis.categories || []).length <= 1;
+
   var minSections;
-  if (complexityLevel === 1) {
-    // Small catalog: Hero + category nav is enough
+  if (isSmallCatalogHomepage) {
+    // Small catalog homepage = the ONLY page, needs enough sections to showcase all products
+    minSections = complexityLevel >= 3 ? 8 : complexityLevel >= 2 ? 6 : 5;
+  } else if (complexityLevel === 1) {
     if (totalProducts <= 5) {
       minSections = isHomepage ? 2 : 1;
     } else {
@@ -1336,9 +1419,23 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     if (!analysis.categories || analysis.categories.length === 0) {
       log('AI returned no categories, using fallback grouping...');
       analysis = fallbackAnalysis(products, brand, lang, userInstructions);
-    } else if (analysis.categories.length === 1 && analysis.categories[0].name.match(/sonstige|andere|other|misc|all/i)) {
+    } else if (analysis.categories.length === 1 && analysis.categories[0].name.match(/sonstige|andere|other|misc|all|weitere|more\s*products?|produkte/i)) {
       log('AI grouped everything into one generic category, using smarter fallback...');
       analysis = fallbackAnalysis(products, brand, lang, userInstructions);
+    }
+
+    // POST-FIX: Rename any remaining generic category names to meaningful ones
+    var genericPattern = /^(weitere\s*produkte|more\s*products?|sonstige|andere|all\s*products?|alle\s*produkte|misc|übrige)$/i;
+    if (analysis.categories && analysis.categories.length > 0) {
+      var existingNames = analysis.categories.map(function(c) { return c.name; });
+      analysis.categories.forEach(function(cat) {
+        if (genericPattern.test(cat.name.trim())) {
+          var catProds = (cat.asins || []).map(function(a) { return products.find(function(p) { return p.asin === a; }); }).filter(Boolean);
+          var betterName = deriveCategoryName(catProds, products, brand, lang, existingNames.filter(function(n) { return n !== cat.name; }));
+          log('Renaming generic category "' + cat.name + '" → "' + betterName + '"');
+          cat.name = betterName;
+        }
+      });
     }
   } catch (err) {
     log('AI analysis failed (' + err.message + '), falling back to deterministic grouping...');
@@ -1401,22 +1498,39 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
 
   var pages = [];
 
+  // ─── SMALL CATALOG HANDLING ───
+  // If only 1 category or very few products (≤4), put ALL products on homepage
+  // and skip creating a separate category page that just duplicates homepage content
+  var isSmallCatalog = products.length <= 4;
+  var isSingleCategory = (analysis.categories || []).length <= 1;
+  var skipCategoryPages = isSmallCatalog && isSingleCategory;
+
+  if (skipCategoryPages) {
+    log('Small catalog detected (' + products.length + ' products, ' + (analysis.categories || []).length + ' category) — all products on homepage, no separate category pages.');
+  }
+
   // STEP 2: Generate Homepage Layout
   log('AI designing Homepage layout...');
-  // Homepage = navigation hub: pick top 1 product per category as hero/representative
+  // For small catalogs: show ALL products on homepage
+  // For larger catalogs: pick top 1 product per category as hero/representative
   var homepageProducts = [];
-  (analysis.categories || []).forEach(function(cat) {
-    var catAsins = (cat.asins || []).slice();
-    if (cat.subcategories) cat.subcategories.forEach(function(s) { catAsins = catAsins.concat(s.asins || []); });
-    var catProds = catAsins.map(function(a) { return productMap[a]; }).filter(Boolean);
-    catProds.sort(function(a, b) { return (b.reviews || 0) - (a.reviews || 0); });
-    if (catProds[0]) homepageProducts.push(catProds[0]);
-  });
-  // Add a few more top sellers if we have very few categories
-  if (homepageProducts.length < 3) {
-    var topByReview = products.slice().sort(function(a, b) { return (b.reviews || 0) - (a.reviews || 0); });
-    for (var tbi = 0; tbi < topByReview.length && homepageProducts.length < 5; tbi++) {
-      if (homepageProducts.indexOf(topByReview[tbi]) < 0) homepageProducts.push(topByReview[tbi]);
+  if (skipCategoryPages) {
+    // Small catalog: ALL products go to homepage
+    homepageProducts = products.slice();
+  } else {
+    (analysis.categories || []).forEach(function(cat) {
+      var catAsins = (cat.asins || []).slice();
+      if (cat.subcategories) cat.subcategories.forEach(function(s) { catAsins = catAsins.concat(s.asins || []); });
+      var catProds = catAsins.map(function(a) { return productMap[a]; }).filter(Boolean);
+      catProds.sort(function(a, b) { return (b.reviews || 0) - (a.reviews || 0); });
+      if (catProds[0]) homepageProducts.push(catProds[0]);
+    });
+    // Add a few more top sellers if we have very few categories
+    if (homepageProducts.length < 3) {
+      var topByReview = products.slice().sort(function(a, b) { return (b.reviews || 0) - (a.reviews || 0); });
+      for (var tbi = 0; tbi < topByReview.length && homepageProducts.length < 5; tbi++) {
+        if (homepageProducts.indexOf(topByReview[tbi]) < 0) homepageProducts.push(topByReview[tbi]);
+      }
     }
   }
   try {
@@ -1433,7 +1547,12 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   }
 
   // STEP 3: Generate Category Pages (with subcategory support)
+  // Skip if small catalog with single category — everything is already on homepage
   var categories = analysis.categories || [];
+  if (skipCategoryPages) {
+    log('Skipping category pages (small catalog — all products shown on homepage).');
+    categories = []; // empty array = no category pages generated
+  }
   for (var ci = 0; ci < categories.length; ci++) {
     var cat = categories[ci];
     var hasSubs = cat.subcategories && cat.subcategories.length > 0;
@@ -1558,10 +1677,24 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       { id: uid(), layoutId: '1', tiles: [{ type: 'image', imageCategory: 'store_hero', brief: herobrief, textOverlay: heroOverlay, ctaText: '', dimensions: { w: 3000, h: 700 }, asins: [] }] },
     ];
     sections.forEach(function(sec) {
+      var resolvedLayout = resolveLayoutId(sec.layout);
+      var layoutObj = findLayout(resolvedLayout);
+      var epDims = LAYOUT_TILE_DIMS[resolvedLayout];
       secs.push({
-        id: uid(), layoutId: sec.layout,
-        tiles: sec.tiles.map(function(t) {
-          return { type: t.type || 'image', imageCategory: t.cat || '', brief: t.brief || '', textOverlay: t.overlay || '', ctaText: t.cta || '', dimensions: t.dim || { w: 1500, h: 1000 }, asins: t.asins || [] };
+        id: uid(), layoutId: resolvedLayout,
+        tiles: sec.tiles.map(function(t, ti) {
+          var dim = t.dim || (epDims && epDims[ti]) || { w: 1500, h: 1000 };
+          var isStd = layoutObj && layoutObj.type !== 'vh' && layoutObj.type !== 'fullwidth';
+          // Standard layouts: mobileDimensions = dimensions (same image)
+          var mobileDim = isStd ? { w: dim.w, h: dim.h } : layoutObj && layoutObj.type === 'fullwidth' ? { w: 1680, h: Math.max(dim.h, Math.ceil(1680 / 5)) } : { w: 1500, h: 750 };
+          return {
+            type: t.type || 'image', imageCategory: t.cat || '', brief: t.brief || '',
+            textOverlay: t.overlay || '', ctaText: t.cta || '',
+            dimensions: { w: dim.w, h: dim.h },
+            mobileDimensions: mobileDim,
+            syncDimensions: isStd,
+            asins: t.asins || [],
+          };
         }),
       });
     });
@@ -2025,6 +2158,28 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     log('Wireframes generated: ' + wireframeCount + ' success, ' + wireframeFailed + ' failed');
   }
 
+  // ─── FINAL SANITIZE: Enforce correct dimensions on ALL tiles across ALL pages ───
+  pages.forEach(function(pg) {
+    (pg.sections || []).forEach(function(sec) {
+      var resolvedId = resolveLayoutId(sec.layoutId);
+      var layoutObj = findLayout(resolvedId);
+      var dims = LAYOUT_TILE_DIMS[resolvedId];
+      var isStandard = layoutObj && layoutObj.type !== 'vh' && layoutObj.type !== 'fullwidth';
+      (sec.tiles || []).forEach(function(t, ti) {
+        if (isStandard && dims && dims[ti]) {
+          // Standard layout: desktop = mobile = LAYOUT_TILE_DIMS value
+          t.dimensions = { w: dims[ti].w, h: dims[ti].h };
+          t.mobileDimensions = { w: dims[ti].w, h: dims[ti].h };
+          t.syncDimensions = true;
+        }
+        // Ensure mobileDimensions always exists
+        if (!t.mobileDimensions && t.dimensions) {
+          t.mobileDimensions = { w: t.dimensions.w, h: t.dimensions.h };
+        }
+      });
+    });
+  });
+
   log('Store generation complete!');
 
   return {
@@ -2248,6 +2403,74 @@ export async function generateWireframesForPage(page, brand, websiteData, analys
   return { success: success, failed: failed, total: tiles.length, error: failed > 0 ? lastError : '' };
 }
 
+// ─── HELPER: Derive a meaningful category name from products ───
+// Instead of "Weitere Produkte", extract the most descriptive term from product data
+function deriveCategoryName(productsInGroup, allProducts, brand, lang, existingNames) {
+  existingNames = existingNames || [];
+  var existingLower = existingNames.map(function(n) { return n.toLowerCase(); });
+
+  // Strategy 1: Use Amazon category data from the products
+  var catCounts = {};
+  productsInGroup.forEach(function(p) {
+    if (p.categories && p.categories.length > 0) {
+      // Prefer 2nd level category (more specific than top, less than leaf)
+      var cat = p.categories.length >= 2 ? p.categories[1] : p.categories[0];
+      if (cat && cat.length > 1) {
+        if (!catCounts[cat]) catCounts[cat] = 0;
+        catCounts[cat]++;
+      }
+    }
+  });
+  var bestCat = Object.keys(catCounts).sort(function(a, b) { return catCounts[b] - catCounts[a]; })[0];
+  if (bestCat && existingLower.indexOf(bestCat.toLowerCase()) < 0) return bestCat;
+
+  // Strategy 2: Find the most common meaningful word from product names
+  var brandWords = brand.toLowerCase().split(/\s+/);
+  var filler = ['with', 'für', 'for', 'and', 'und', 'the', 'von', 'aus', 'set', 'pack', 'stück', 'stk',
+    'pcs', 'size', 'color', 'amazon', 'prime', 'premium', 'original', 'neue', 'new', 'best', 'top',
+    'pro', 'plus', 'extra', 'super', 'ultra', 'max', 'mini', 'groß', 'klein', 'large', 'small',
+    'ml', 'mg', 'stk', 'x', 'er'];
+  var wordCounts = {};
+  productsInGroup.forEach(function(p) {
+    var name = (p.name || '').toLowerCase();
+    var words = name.replace(/[^a-zäöüß\s]/g, ' ').split(/\s+/).filter(function(w) {
+      return w.length > 3 && filler.indexOf(w) < 0 && brandWords.indexOf(w) < 0;
+    });
+    // Deduplicate per product (count each word max once per product)
+    var seen = {};
+    words.forEach(function(w) {
+      if (!seen[w]) { seen[w] = true; if (!wordCounts[w]) wordCounts[w] = 0; wordCounts[w]++; }
+    });
+  });
+  var sortedWords = Object.keys(wordCounts).sort(function(a, b) { return wordCounts[b] - wordCounts[a]; });
+  // Pick the most common word that appears in at least 40% of group products
+  for (var i = 0; i < sortedWords.length; i++) {
+    var w = sortedWords[i];
+    if (wordCounts[w] >= productsInGroup.length * 0.4 || wordCounts[w] >= 2) {
+      var label = w.charAt(0).toUpperCase() + w.slice(1);
+      if (existingLower.indexOf(label.toLowerCase()) < 0) return label;
+    }
+  }
+
+  // Strategy 3: Use 1st level Amazon category
+  var topCatCounts = {};
+  productsInGroup.forEach(function(p) {
+    if (p.categories && p.categories.length > 0) {
+      var cat = p.categories[0];
+      if (cat) { if (!topCatCounts[cat]) topCatCounts[cat] = 0; topCatCounts[cat]++; }
+    }
+  });
+  var bestTopCat = Object.keys(topCatCounts).sort(function(a, b) { return topCatCounts[b] - topCatCounts[a]; })[0];
+  if (bestTopCat && existingLower.indexOf(bestTopCat.toLowerCase()) < 0) return bestTopCat;
+
+  // Strategy 4: Use brand name + "Sortiment" / "Collection"
+  var collLabel = lang === 'German' ? (brand + ' Sortiment') : (brand + ' Collection');
+  if (existingLower.indexOf(collLabel.toLowerCase()) < 0) return collLabel;
+
+  // Last resort: number it
+  return lang === 'German' ? ('Kollektion ' + (existingNames.length + 1)) : ('Collection ' + (existingNames.length + 1));
+}
+
 // ─── FALLBACK: Deterministic store building ───
 
 function fallbackAnalysis(products, brand, lang, userInstructions) {
@@ -2376,16 +2599,17 @@ function fallbackAnalysis(products, brand, lang, userInstructions) {
       }
     });
 
-    // Remaining unassigned products
-    var remaining = products.filter(function(p) { return !assigned[p.asin]; }).map(function(p) { return p.asin; });
+    // Remaining unassigned products — derive a meaningful name instead of "Weitere Produkte"
+    var remaining = products.filter(function(p) { return !assigned[p.asin]; });
     if (remaining.length > 0) {
-      var remLabel = lang === 'German' ? 'Weitere Produkte' : 'More Products';
-      groups[remLabel] = remaining;
+      var remLabel = deriveCategoryName(remaining, products, brand, lang, Object.keys(groups));
+      groups[remLabel] = remaining.map(function(p) { return p.asin; });
     }
   } else {
-    // Clean up __uncat__ bucket
+    // Clean up __uncat__ bucket — derive meaningful name
     if (groups['__uncat__'] && groups['__uncat__'].length > 0) {
-      var remLabel2 = lang === 'German' ? 'Weitere Produkte' : 'More Products';
+      var uncatProds = products.filter(function(p) { return groups['__uncat__'].indexOf(p.asin) >= 0; });
+      var remLabel2 = deriveCategoryName(uncatProds, products, brand, lang, Object.keys(groups).filter(function(k) { return k !== '__uncat__'; }));
       groups[remLabel2] = groups['__uncat__'];
     }
     delete groups['__uncat__'];
@@ -2394,14 +2618,18 @@ function fallbackAnalysis(products, brand, lang, userInstructions) {
   // Consolidate: merge tiny groups, limit to 8
   var catNames = Object.keys(groups);
   if (catNames.length > 8) {
-    var overflow = lang === 'German' ? 'Weitere Produkte' : 'More Products';
-    if (!groups[overflow]) groups[overflow] = [];
+    // Collect overflow products to derive a proper name later
+    var overflowAsins = [];
     catNames.sort(function(a, b) { return groups[a].length - groups[b].length; });
     while (Object.keys(groups).length > 8) {
       var smallest = Object.keys(groups).sort(function(a, b) { return groups[a].length - groups[b].length; })[0];
-      if (smallest === overflow) break;
-      groups[overflow] = groups[overflow].concat(groups[smallest]);
+      overflowAsins = overflowAsins.concat(groups[smallest]);
       delete groups[smallest];
+    }
+    if (overflowAsins.length > 0) {
+      var overflowProds = products.filter(function(p) { return overflowAsins.indexOf(p.asin) >= 0; });
+      var overflowLabel = deriveCategoryName(overflowProds, products, brand, lang, Object.keys(groups));
+      groups[overflowLabel] = overflowAsins;
     }
   }
 
@@ -2431,8 +2659,8 @@ function fallbackAnalysis(products, brand, lang, userInstructions) {
 
 function fallbackHomepage(brand, lang, categories, products, analysis) {
   var sections = [];
-  var cta = lang === 'German' ? 'Jetzt entdecken' : 'Shop now';
   var complexity = (analysis && analysis.productComplexity) || 'medium';
+  var isSmallCatalog = products.length <= 4 && categories.length <= 1;
 
   // Hero
   sections.push({
@@ -2446,67 +2674,127 @@ function fallbackHomepage(brand, lang, categories, products, analysis) {
     }],
   });
 
-  // Category grid
-  var catNames = categories.map(function(c) { return c.name; });
-  if (catNames.length > 0 && catNames.length <= 4) {
-    var layoutId = catNames.length === 1 ? '1' : catNames.length === 2 ? '1-1' : catNames.length === 3 ? '1-1-1' : '1-1-1-1';
+  if (isSmallCatalog) {
+    // ── SMALL CATALOG: Show all products with rich detail on homepage ──
+
+    // Product overview: all products side by side as shoppable images
+    var layoutId = products.length === 1 ? '1' : products.length === 2 ? '1-1' : products.length === 3 ? '1-1-1' : '1-1-1-1';
     sections.push({
       id: uid(), layoutId: layoutId,
-      tiles: catNames.map(function(cat) {
-        return { type: 'image', imageCategory: 'creative', brief: '[CREATIVE] "' + cat + '" category name on brand-color background, product silhouette + CTA', textOverlay: cat, ctaText: cta, dimensions: { w: 3000, h: 1200 }, asins: [] };
+      tiles: products.map(function(p) {
+        return { type: 'shoppable_image', imageCategory: 'product', brief: '[SHOPPABLE] ' + brand + ' ' + (p.name || 'product') + ' packshot on white, soft shadow', textOverlay: p.name || '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [], linkAsin: p.asin };
       }),
     });
-  } else if (catNames.length > 4) {
-    var row1 = catNames.slice(0, 4);
-    var row2 = catNames.slice(4, 8);
-    sections.push({
-      id: uid(), layoutId: '1-1-1-1',
-      tiles: row1.map(function(cat) {
-        return { type: 'image', imageCategory: 'creative', brief: '[CREATIVE] "' + cat + '" category name on brand-color background, product silhouette + CTA', textOverlay: cat, ctaText: cta, dimensions: { w: 3000, h: 1200 }, asins: [] };
-      }),
-    });
-    if (row2.length > 0) {
-      var lid = row2.length === 1 ? '1' : row2.length === 2 ? '1-1' : row2.length === 3 ? '1-1-1' : '1-1-1-1';
-      sections.push({
-        id: uid(), layoutId: lid,
-        tiles: row2.map(function(cat) {
-          return { type: 'image', imageCategory: 'creative', brief: '[CREATIVE] "' + cat + '" category name on brand-color background, product silhouette + CTA', textOverlay: cat, ctaText: cta, dimensions: { w: 3000, h: 1200 }, asins: [] };
-        }),
-      });
-    }
-  }
 
-  // Bestseller grid
-  var top5 = products.slice().sort(function(a, b) { return (b.rating || 0) - (a.rating || 0); }).slice(0, 5);
-  if (top5.length > 0) {
+    // Benefit section
     sections.push({
       id: uid(), layoutId: '1',
-      tiles: [{ type: 'product_grid', brief: '', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: top5.map(function(p) { return p.asin; }) }],
+      tiles: [{
+        type: 'image', imageCategory: 'benefit',
+        brief: '[BENEFIT] ' + brand + ' brand USPs, quality markers, trust signals',
+        textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 600 }, asins: [],
+      }],
     });
-  }
 
-  // Lifestyle section (for medium/complex)
-  if (complexity !== 'simple') {
+    // Per-product showcase sections
+    products.forEach(function(p, pi) {
+      // Text heading for this product
+      sections.push({
+        id: uid(), layoutId: '1',
+        tiles: [{
+          type: 'image', imageCategory: 'text_image',
+          brief: '[TEXT_IMAGE] Section heading for ' + (p.name || 'Product ' + (pi + 1)) + ', bold product name',
+          textOverlay: p.name || (brand + ' Produkt ' + (pi + 1)),
+          ctaText: '', dimensions: { w: 3000, h: 400 }, asins: [],
+        }],
+      });
+      // Product detail: lifestyle + creative features
+      sections.push({
+        id: uid(), layoutId: '1-1',
+        tiles: [
+          { type: 'image', imageCategory: 'lifestyle', brief: '[LIFESTYLE] ' + brand + ' ' + (p.name || 'product') + ' in real-world use', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+          { type: 'image', imageCategory: 'creative', brief: '[CREATIVE] ' + brand + ' ' + (p.name || 'product') + ' key features and benefits', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+        ],
+      });
+    });
+
+    // Combined closing section
+    if (products.length >= 2) {
+      sections.push({
+        id: uid(), layoutId: '1',
+        tiles: [{
+          type: 'image', imageCategory: 'lifestyle',
+          brief: '[LIFESTYLE] ' + brand + ' all products together in complementary scene',
+          textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 800 }, asins: [],
+        }],
+      });
+    }
+
+  } else {
+    // ── NORMAL CATALOG: Category navigation + bestsellers ──
+
+    // Category grid
+    var catNames = categories.map(function(c) { return c.name; });
+    if (catNames.length > 0 && catNames.length <= 4) {
+      var catLayoutId = catNames.length === 1 ? '1' : catNames.length === 2 ? '1-1' : catNames.length === 3 ? '1-1-1' : '1-1-1-1';
+      sections.push({
+        id: uid(), layoutId: catLayoutId,
+        tiles: catNames.map(function(cat) {
+          return { type: 'image', imageCategory: 'creative', brief: '[CREATIVE] ' + brand + ' ' + cat + ' category preview, representative product', textOverlay: cat, ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] };
+        }),
+      });
+    } else if (catNames.length > 4) {
+      var row1 = catNames.slice(0, 4);
+      var row2 = catNames.slice(4, 8);
+      sections.push({
+        id: uid(), layoutId: '1-1-1-1',
+        tiles: row1.map(function(cat) {
+          return { type: 'image', imageCategory: 'creative', brief: '[CREATIVE] ' + brand + ' ' + cat + ' category preview, representative product', textOverlay: cat, ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] };
+        }),
+      });
+      if (row2.length > 0) {
+        var lid = row2.length === 1 ? '1' : row2.length === 2 ? '1-1' : row2.length === 3 ? '1-1-1' : '1-1-1-1';
+        sections.push({
+          id: uid(), layoutId: lid,
+          tiles: row2.map(function(cat) {
+            return { type: 'image', imageCategory: 'creative', brief: '[CREATIVE] ' + brand + ' ' + cat + ' category preview, representative product', textOverlay: cat, ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] };
+          }),
+        });
+      }
+    }
+
+    // Bestseller grid
+    var top5 = products.slice().sort(function(a, b) { return (b.rating || 0) - (a.rating || 0); }).slice(0, 5);
+    if (top5.length > 0) {
+      sections.push({
+        id: uid(), layoutId: '1',
+        tiles: [{ type: 'product_grid', brief: '', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: top5.map(function(p) { return p.asin; }) }],
+      });
+    }
+
+    // Lifestyle section (for medium/complex)
+    if (complexity !== 'simple') {
+      sections.push({
+        id: uid(), layoutId: '1-1',
+        tiles: [
+          { type: 'image', imageCategory: 'lifestyle', brief: '[LIFESTYLE] ' + brand + ' products in real-world use, natural setting', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+          { type: 'shoppable_image', imageCategory: 'product', brief: '[SHOPPABLE] ' + brand + ' bestseller packshot on white, soft shadow', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+        ],
+      });
+    }
+
+    // Brand story
     sections.push({
-      id: uid(), layoutId: '1-1',
-      tiles: [
-        { type: 'image', imageCategory: 'lifestyle', brief: '[LIFESTYLE] ' + brand + ' products in real-world use, natural setting', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
-        { type: 'shoppable_image', imageCategory: 'product', brief: '[SHOPPABLE] ' + brand + ' bestseller packshot on white, soft shadow', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
-      ],
+      id: uid(), layoutId: '1',
+      tiles: [{
+        type: 'image',
+        imageCategory: 'creative',
+        brief: '[CREATIVE] ' + brand + ' brand values and identity statement, split layout with brand colors',
+        textOverlay: lang === 'German' ? 'Unsere Geschichte' : 'Our Story',
+        ctaText: '', dimensions: { w: 3000, h: 600 }, mobileDimensions: { w: 1680, h: 900 }, asins: [],
+      }],
     });
   }
-
-  // Brand story
-  sections.push({
-    id: uid(), layoutId: '1',
-    tiles: [{
-      type: 'image',
-      imageCategory: 'creative',
-      brief: '[CREATIVE] ' + brand + ' brand values and identity statement, split layout with brand colors',
-      textOverlay: lang === 'German' ? 'Unsere Geschichte' : 'Our Story',
-      ctaText: '', dimensions: { w: 3000, h: 600 }, mobileDimensions: { w: 1680, h: 900 }, asins: [],
-    }],
-  });
 
   return { id: 'homepage', name: 'Homepage', sections: sections };
 }
@@ -2570,15 +2858,17 @@ function fallbackCategoryPage(id, name, catProducts, lang, analysis) {
     }],
   });
 
-  // 6. Cross-sell / related categories
-  if (topProducts.length >= 3) {
-    sections.push({
-      id: uid(), layoutId: '1-1-1',
-      tiles: topProducts.slice(0, 3).map(function(p) {
-        return { type: 'shoppable_image', imageCategory: 'product', brief: '[SHOPPABLE] ' + p.name.split(' ').slice(0, 4).join(' ') + ' packshot on neutral bg', textOverlay: p.name.split(' ').slice(0, 3).join(' '), ctaText: cta, dimensions: { w: 3000, h: 1000 }, asins: [], linkAsin: p.asin };
-      }),
-    });
-  }
+  // 6. Cross-sell navigation banner
+  sections.push({
+    id: uid(), layoutId: '1',
+    tiles: [{
+      type: 'image', imageCategory: 'text_image',
+      brief: '[TEXT_IMAGE] Navigation banner — simple text on brand-color bg linking back to all products.',
+      textOverlay: lang === 'German' ? 'Alle Produkte entdecken' : 'Explore All Products',
+      ctaText: lang === 'German' ? 'Jetzt stöbern' : 'Browse Now',
+      dimensions: { w: 3000, h: 600 }, asins: [],
+    }],
+  });
 
   return { id: id, name: name, sections: sections };
 }
