@@ -2,7 +2,7 @@ import { useState } from 'react';
 import SectionView from './SectionView';
 import { t } from '../i18n';
 
-export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onChangeLayout, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate }) {
+export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onChangeLayout, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate, onGenerateWireframes, wfGenerating, wfProgress }) {
   var [hoveredNav, setHoveredNav] = useState(null);
   var [showHeroPicker, setShowHeroPicker] = useState(false);
 
@@ -138,6 +138,37 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
             })}
           </div>
         </div>
+
+        {/* Wireframe generation bar */}
+        {page && page.sections && page.sections.length > 0 && onGenerateWireframes && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 12px', background: '#f8fafc', borderBottom: '1px solid #e2e8f0', fontSize: 12 }}>
+            <button
+              className="btn"
+              disabled={!!wfGenerating}
+              onClick={function() { onGenerateWireframes(page.id); }}
+              style={{
+                padding: '5px 14px', fontSize: 11, fontWeight: 600,
+                background: wfGenerating === page.id ? '#fbbf24' : '#6366f1',
+                color: wfGenerating === page.id ? '#78350f' : '#fff',
+                border: 'none', borderRadius: 4, cursor: wfGenerating ? 'wait' : 'pointer',
+              }}
+            >
+              {wfGenerating === page.id ? 'Generiere...' : 'Wireframes generieren'}
+            </button>
+            {wfProgress && (
+              <span style={{
+                fontSize: 11, padding: '3px 10px', borderRadius: 4,
+                background: wfProgress.indexOf('fehlgeschlagen') >= 0 && wfProgress.indexOf('0 generiert') >= 0 ? '#fee2e2' : wfProgress.indexOf('fehlgeschlagen') >= 0 ? '#fef3c7' : '#dcfce7',
+                color: wfProgress.indexOf('fehlgeschlagen') >= 0 && wfProgress.indexOf('0 generiert') >= 0 ? '#991b1b' : wfProgress.indexOf('fehlgeschlagen') >= 0 ? '#92400e' : '#166534',
+              }}>
+                {wfProgress}
+              </span>
+            )}
+            <span style={{ fontSize: 10, color: '#94a3b8' }}>
+              KI-Wireframes für alle Bild-Kacheln dieser Seite
+            </span>
+          </div>
+        )}
 
         {/* Sections */}
         {page.sections.map(function(sec, si) {
