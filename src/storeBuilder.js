@@ -1,4 +1,4 @@
-import { uid, LAYOUTS, LAYOUT_TILE_DIMS, REFERENCE_STORES, STORE_PRINCIPLES, MODULE_BAUKASTEN, PRODUCT_COMPLEXITY, COMPLEXITY_LEVELS, CATEGORY_STYLE_HINTS, IMAGE_CATEGORIES, IMAGE_CATEGORY_DECISION_TREE, findLayout, resolveLayoutId } from './constants';
+import { uid, LAYOUTS, LAYOUT_TILE_DIMS, REFERENCE_STORES, STORE_PRINCIPLES, MODULE_BAUKASTEN, PRODUCT_COMPLEXITY, COMPLEXITY_LEVELS, CATEGORY_STYLE_HINTS, IMAGE_CATEGORIES, IMAGE_CATEGORY_DECISION_TREE, findLayout, resolveLayoutId, createDefaultProductSelector } from './constants';
 
 var ANTHROPIC_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY || '';
 var PRIMARY_MODEL = 'claude-opus-4-6';
@@ -112,18 +112,51 @@ function inferImageCategory(brief, tileType) {
 function formatWebsiteContext(websiteData) {
   if (!websiteData) return '';
   var parts = [];
-  parts.push('=== BRAND WEBSITE INTELLIGENCE (scraped from ' + (websiteData.url || 'brand website') + ') ===');
+  parts.push('=== BRAND WEBSITE INTELLIGENCE (scraped from ' + (websiteData.url || 'brand website') + ', ' + (websiteData.pagesScraped || 1) + ' pages crawled) ===');
   if (websiteData.title) parts.push('Website title: ' + websiteData.title);
   if (websiteData.description) parts.push('Website description: ' + websiteData.description);
   if (websiteData.tagline) parts.push('Brand tagline: ' + websiteData.tagline);
-  if (websiteData.aboutText) {
-    parts.push('Brand story / About: ' + websiteData.aboutText.slice(0, 800));
+
+  // ── AI-ANALYZED FIELDS (higher quality, take priority) ──
+  var ai = websiteData.aiAnalysis;
+  if (ai) {
+    if (ai.brandStory) parts.push('BRAND STORY: ' + ai.brandStory);
+    if (ai.brandTone) parts.push('BRAND TONE/PERSONALITY: ' + ai.brandTone);
+    if (ai.targetAudience) parts.push('TARGET AUDIENCE: ' + ai.targetAudience);
+    if (ai.usps && ai.usps.length > 0) parts.push('USPs: ' + ai.usps.join(' | '));
+    if (ai.certifications && ai.certifications.length > 0) parts.push('CERTIFICATIONS: ' + ai.certifications.join(' | '));
+    if (ai.brandValues && ai.brandValues.length > 0) parts.push('BRAND VALUES: ' + ai.brandValues.join(' | '));
+    if (ai.productCategories && ai.productCategories.length > 0) parts.push('PRODUCT CATEGORIES: ' + ai.productCategories.join(' | '));
+    if (ai.sustainabilityFocus) parts.push('SUSTAINABILITY: ' + ai.sustainabilityFocus);
+    if (ai.keyIngredients && ai.keyIngredients.length > 0) parts.push('KEY INGREDIENTS/MATERIALS: ' + ai.keyIngredients.join(' | '));
+    if (ai.visualStyle) parts.push('VISUAL STYLE: ' + ai.visualStyle);
   }
-  if (websiteData.certifications && websiteData.certifications.length > 0) {
-    parts.push('Certifications & trust signals: ' + websiteData.certifications.slice(0, 8).join(' | '));
+
+  // ── RAW EXTRACTED FIELDS (fallback if no AI, or supplementary) ──
+  if (!ai || !ai.brandStory) {
+    if (websiteData.aboutText) parts.push('Brand story / About: ' + websiteData.aboutText.slice(0, 800));
   }
-  if (websiteData.features && websiteData.features.length > 0) {
-    parts.push('Product features / USPs: ' + websiteData.features.slice(0, 10).join(' | '));
+  if (websiteData.sustainabilityText && (!ai || !ai.sustainabilityFocus)) {
+    parts.push('Sustainability info: ' + websiteData.sustainabilityText.slice(0, 500));
+  }
+  if (websiteData.qualityText) parts.push('Quality / Production: ' + websiteData.qualityText.slice(0, 500));
+  if (websiteData.valuesText && (!ai || !ai.brandValues)) {
+    parts.push('Brand values text: ' + websiteData.valuesText.slice(0, 500));
+  }
+  if (websiteData.ingredientsText && (!ai || !ai.keyIngredients || ai.keyIngredients.length === 0)) {
+    parts.push('Ingredients / Materials: ' + websiteData.ingredientsText.slice(0, 500));
+  }
+
+  // ── SUPPLEMENTARY RAW DATA ──
+  if (!ai || !ai.certifications || ai.certifications.length === 0) {
+    if (websiteData.certifications && websiteData.certifications.length > 0) {
+      parts.push('Certifications & trust signals: ' + websiteData.certifications.slice(0, 8).join(' | '));
+    }
+  }
+  if (!ai || !ai.usps || ai.usps.length === 0) {
+    if (websiteData.features && websiteData.features.length > 0) {
+      parts.push('Product features / USPs: ' + websiteData.features.slice(0, 10).join(' | '));
+    }
   }
   if (websiteData.productInfo && websiteData.productInfo.length > 0) {
     parts.push('Product info from website: ' + websiteData.productInfo.slice(0, 3).join(' | '));
@@ -131,14 +164,14 @@ function formatWebsiteContext(websiteData) {
   if (websiteData.socialProof && websiteData.socialProof.length > 0) {
     parts.push('Customer testimonials / social proof: ' + websiteData.socialProof.slice(0, 3).join(' | '));
   }
-  if (websiteData.rawTextSections && websiteData.rawTextSections.length > 0) {
-    var keyContent = websiteData.rawTextSections
-      .filter(function(s) { return s.source === 'heading' || s.text.length > 50; })
-      .slice(0, 8)
-      .map(function(s) { return s.text; })
-      .join(' | ');
-    if (keyContent) parts.push('Key website content: ' + keyContent);
+  // Colors & Fonts extracted from CSS
+  if (websiteData.colors && websiteData.colors.length > 0) {
+    parts.push('BRAND COLORS (from CSS): ' + websiteData.colors.join(', '));
   }
+  if (websiteData.fonts && websiteData.fonts.length > 0) {
+    parts.push('BRAND FONTS (from CSS): ' + websiteData.fonts.join(', '));
+  }
+
   parts.push('=== END BRAND WEBSITE INTELLIGENCE ===');
   parts.push('');
   parts.push('USE this brand intelligence to:');
@@ -147,6 +180,8 @@ function formatWebsiteContext(websiteData) {
   parts.push('- Use actual taglines, slogans, or key phrases from the brand website');
   parts.push('- Reference real product features and benefits mentioned on the website');
   parts.push('- Integrate trust signals (certifications, awards, quality seals) into appropriate sections');
+  parts.push('- Use the brand colors and visual style for design direction');
+  parts.push('- Tailor messaging to the target audience identified');
   parts.push('');
   return parts.join('\n');
 }
@@ -512,6 +547,15 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     'VISUAL HARMONY (tiles in a section must relate to each other):',
     STORE_PRINCIPLES.visualHarmony.join('\n'),
     '',
+    'PRODUCT HIERARCHY & EQUAL SIZING:',
+    '- Products of the SAME hierarchy level (same category, same importance) MUST get EQUAL tile sizes.',
+    '- Two soaps, two bottles, two chairs, two machines = same tile dimensions. Use std-2equal or 1-1-1.',
+    '- A main product + accessory (e.g. bottle + cap, mower + spare blade) CAN have different sizes (large + small).',
+    '- In a section with shoppable_image tiles: if two products are peers, both MUST be same size.',
+    '- NEVER give one product a 1500x1500 tile and a peer product only a 1500x750 tile.',
+    '- If a section has a lifestyle image + 2 product shoppable images: use a layout where both products get equal space.',
+    '  Example: "lg-2stack" with large=lifestyle, stacked=two equal product tiles. Or "1-1-1" with lifestyle + 2 equal products.',
+    '',
     'PRODUCT COMPLEXITY: ' + analysis.productComplexity + ':' + complexity.description,
     'APPROACH: ' + complexity.approach,
     '',
@@ -531,6 +575,9 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     'TEXT RULES:',
     '- textOverlay: Text designed INTO the image. In store language (' + lang + ').',
     '- ctaText: CTA button designed into image. In store language.',
+    '- EVERY image tile should be clickable: set either linkAsin (links to product) or linkUrl (links to store subpage like "/pageid").',
+    '  Exception: store_hero, benefit, and text_image tiles do not need links.',
+    '  If a tile has ctaText, it MUST have a linkAsin or linkUrl.',
     '- brief: ENGLISH instructions for the designer.',
     '- Native text: ONLY for section headings. NOT for marketing.',
     '- NEVER use em-dashes (\u2014 or \u2013) in any text. Restructure sentences instead. Use periods, commas, or colons.',
@@ -619,6 +666,7 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '- Mix std-2equal, lg-2stack, lg-4grid, 2x2wide, vh-w2s, 2s-4grid etc.',
     '- Sections flow: Hero → Feature/USP → Product showcase → Lifestyle → Product grid → Cross-sell.',
     '- Do NOT just alternate full-width image + product grid. That is the WORST pattern.',
+    '- LINK DEDUPLICATION: No two tiles on the same page should link to the same ASIN or store URL. Each product link and page link must appear only ONCE per page.',
     '',
     '=== AVAILABLE LAYOUTS ===',
     'Full Width: "1" (1 tile)',
@@ -915,6 +963,19 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
       if (t.brief) {
         t.brief = t.brief.replace(/\[(STORE_HERO|BENEFIT|PRODUCT|CREATIVE|LIFESTYLE|TEXT_IMAGE|SHOPPABLE)\]\s*/gi, '').trim();
       }
+      // ─── EVERY IMAGE TILE NEEDS A LINK (linkAsin or linkUrl) ───
+      // Every clickable tile should link somewhere — either to a product (linkAsin) or a store page (linkUrl).
+      // If neither is set and it's an image-type tile, assign a product ASIN.
+      if ((t.type === 'image' || t.type === 'shoppable_image' || t.type === 'image_text') && !t.linkAsin && !t.linkUrl && !(t.hotspots && t.hotspots.length > 0)) {
+        // Skip store_hero and benefit tiles (they don't need links)
+        if (t.imageCategory !== 'store_hero' && t.imageCategory !== 'benefit' && t.imageCategory !== 'text_image') {
+          if (t.asins && t.asins.length > 0) {
+            t.linkAsin = t.asins[0];
+          } else if (pageProducts.length > 0) {
+            t.linkAsin = pageProducts[ti % pageProducts.length].asin;
+          }
+        }
+      }
       // Remove em-dashes from all text fields (replace with colon or period)
       if (t.textOverlay) t.textOverlay = t.textOverlay.replace(/\s*[\u2014\u2013]\s*/g, '. ').replace(/\.\s*\./g, '.');
       if (t.brief) t.brief = t.brief.replace(/\s*[\u2014\u2013]\s*/g, ': ').replace(/:\s*:/g, ':');
@@ -926,10 +987,30 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
   // ─── DEDUPLICATION: Remove sections that repeat ASINs already shown ───
   // For small catalogs especially, this prevents 3 sections showing the same product
   var seenAsins = {};
+  var seenLinkUrls = {};
   var deduped = [];
   (result.sections || []).forEach(function(sec, si) {
     // Always keep the first section (hero) and category-nav sections (all creative with linkUrl)
     if (si === 0) { deduped.push(sec); return; }
+
+    // ─── DEDUPLICATE TILE LINKS WITHIN A PAGE ───
+    // No two tiles on the same page should link to the same ASIN or the same store URL.
+    // If a tile's linkAsin or linkUrl is already used, clear the duplicate link.
+    sec.tiles.forEach(function(t) {
+      if (t.linkAsin && seenLinkUrls['asin:' + t.linkAsin]) {
+        // This ASIN is already linked elsewhere on this page — remove duplicate link
+        t.linkAsin = '';
+      } else if (t.linkAsin) {
+        seenLinkUrls['asin:' + t.linkAsin] = true;
+      }
+      if (t.linkUrl && seenLinkUrls['url:' + t.linkUrl]) {
+        // This URL is already linked elsewhere on this page — remove duplicate link
+        t.linkUrl = '';
+      } else if (t.linkUrl) {
+        seenLinkUrls['url:' + t.linkUrl] = true;
+      }
+    });
+
     // Check if this section only features ASINs we already have
     var sectionAsins = [];
     sec.tiles.forEach(function(t) {
@@ -1487,26 +1568,109 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     pages.push({ id: uid(), name: name, sections: secs });
   }
 
-  // ── Produktselektor ──
+  // ── Produktauswahl (Quiz) ──
   if (extraPageFlags.product_selector && products.length >= 4) {
-    var selCats = (analysis.categories || []).slice(0, 6);
-    var selExtra = [];
-    for (var qi = 0; qi < selCats.length; qi += 2) {
-      var stiles = [{ cat: 'creative', brief: '[CREATIVE] Selector card: "' + selCats[qi].name + '" — representative product image + short description.', overlay: selCats[qi].name, dim: { w: 1500, h: 1500 } }];
-      if (selCats[qi + 1]) {
-        stiles.push({ cat: 'creative', brief: '[CREATIVE] Selector card: "' + selCats[qi + 1].name + '" — representative product image + short description.', overlay: selCats[qi + 1].name, dim: { w: 1500, h: 1500 } });
-      } else {
-        stiles.push({ cat: 'benefit', brief: '[BENEFIT] "Noch unsicher?" — Kontaktiere unseren Kundenservice.', overlay: lang === 'German' ? 'Noch unsicher?' : 'Need help?', dim: { w: 1500, h: 1500 } });
-      }
-      selExtra.push({ layout: 'std-2equal', tiles: stiles });
+    log('Generating Produktauswahl (Quiz) tile...');
+    var selCats = (analysis.categories || []).slice(0, 4);
+    var isDE = lang === 'German';
+
+    // Build quiz questions from product categories
+    var quizQuestions = [];
+    // Q1: What type of product are you looking for?
+    var q1Answers = selCats.map(function(cat, ci) {
+      var catAsins = (cat.asins || []).slice(0, 5);
+      return { id: 'a' + (ci + 1), text: cat.name.slice(0, 40), image: null, asins: catAsins };
+    });
+    // Ensure at least 2 answers
+    while (q1Answers.length < 2) {
+      q1Answers.push({ id: 'a' + (q1Answers.length + 1), text: isDE ? 'Alle Produkte' : 'All Products', image: null, asins: topAsins8.slice(0, 5) });
     }
-    selExtra.push({ layout: '1', tiles: [{ type: 'product_grid', brief: '', asins: topAsins8, dim: { w: 3000, h: 600 } }] });
-    makeExtraPage(
-      lang === 'German' ? 'Produktselektor' : 'Product Selector',
-      '[STORE_HERO] Product selector hero for ' + brand + '. "Finde dein Produkt" — inviting, helpful design.',
-      lang === 'German' ? 'Finde dein Produkt' : 'Find Your Product',
-      selExtra
-    );
+    quizQuestions.push({
+      id: 'q1',
+      questionText: (isDE ? 'Welche Kategorie interessiert dich?' : 'Which category interests you?').slice(0, 55),
+      descriptionText: (isDE ? 'Wähle die Kategorie, die am besten passt.' : 'Choose the category that fits best.').slice(0, 80),
+      answers: q1Answers.slice(0, 6),
+      allowImages: true,
+    });
+
+    // Q2: What's important to you? (from key features)
+    var keyFeats = (analysis.keyFeatures || []).slice(0, 4);
+    if (keyFeats.length >= 2) {
+      var q2Answers = keyFeats.map(function(feat, fi) {
+        return { id: 'a' + (fi + 1), text: feat.slice(0, 40), image: null, asins: [] };
+      });
+      quizQuestions.push({
+        id: 'q2',
+        questionText: (isDE ? 'Was ist dir besonders wichtig?' : 'What matters most to you?').slice(0, 55),
+        descriptionText: (isDE ? 'Wähle das Kriterium, das dich am meisten anspricht.' : 'Pick what resonates with you.').slice(0, 80),
+        answers: q2Answers.slice(0, 6),
+        allowImages: false,
+      });
+    }
+
+    // Collect all recommended ASINs from quiz answers
+    var quizAsins = [];
+    quizQuestions.forEach(function(q) {
+      (q.answers || []).forEach(function(a) {
+        (a.asins || []).forEach(function(asin) {
+          if (quizAsins.indexOf(asin) < 0) quizAsins.push(asin);
+        });
+      });
+    });
+    // Fallback: use top ASINs if we have no quiz-specific ones
+    if (quizAsins.length === 0) quizAsins = topAsins12.slice(0, 10);
+
+    var productSelectorData = createDefaultProductSelector();
+    productSelectorData.intro = {
+      enabled: true,
+      headline: (isDE ? 'Finde dein Produkt' : 'Find Your Product').slice(0, 45),
+      description: (isDE ? 'Beantworte wenige Fragen und wir zeigen dir das passende Produkt.' : 'Answer a few questions and we show your perfect match.').slice(0, 70),
+      buttonLabel: (isDE ? 'Quiz starten' : 'Start Quiz').slice(0, 20),
+      image: null,
+    };
+    productSelectorData.questions = quizQuestions;
+    productSelectorData.results = {
+      headline: (isDE ? 'Deine Empfehlungen' : 'Your Recommendations').slice(0, 30),
+      description: (isDE ? 'Basierend auf deinen Antworten empfehlen wir dir diese Produkte.' : 'Based on your answers, we recommend these products.').slice(0, 80),
+      storePageLink: '',
+      restartLabel: (isDE ? 'Quiz wiederholen' : 'Retake Quiz').slice(0, 20),
+      disclaimer: '',
+    };
+    productSelectorData.recommendedAsins = quizAsins.slice(0, 50);
+
+    // Create a page with hero + quiz tile + product grid
+    var quizSections = [
+      {
+        id: uid(), layoutId: '1',
+        tiles: [{
+          type: 'image', imageCategory: 'store_hero',
+          brief: '[STORE_HERO] Produktauswahl hero for ' + brand + '. "' + productSelectorData.intro.headline + '" — inviting, helpful quiz design.',
+          textOverlay: productSelectorData.intro.headline,
+          dimensions: { w: 3000, h: 600 },
+        }],
+      },
+      {
+        id: uid(), layoutId: '1',
+        tiles: [{
+          type: 'product_selector',
+          productSelector: productSelectorData,
+          dimensions: { w: 3000, h: 1200 },
+        }],
+      },
+      {
+        id: uid(), layoutId: '1',
+        tiles: [{
+          type: 'product_grid', brief: '', asins: quizAsins.slice(0, 8),
+          dimensions: { w: 3000, h: 600 },
+        }],
+      },
+    ];
+    pages.push({
+      id: uid(),
+      name: isDE ? 'Produktauswahl' : 'Product Finder',
+      sections: quizSections,
+    });
+    log('   Produktauswahl page: ' + quizQuestions.length + ' questions, ' + quizAsins.length + ' products');
   }
 
   // ── Geschenk-Sets ──
@@ -1516,12 +1680,10 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       '[STORE_HERO] Gift sets hero for ' + brand + '. Festive, warm, inviting gift presentation.',
       lang === 'German' ? 'Geschenk-Sets' : 'Gift Sets',
       [
-        { layout: '1-1-1', tiles: [
-          { type: 'shoppable_image', cat: 'product', brief: '[PRODUCT] Gift set 1: Popular ' + brand + ' products as gift. Attractive presentation.' },
-          { type: 'shoppable_image', cat: 'product', brief: '[PRODUCT] Gift set 2: Mid-range ' + brand + ' gift combination.' },
-          { type: 'shoppable_image', cat: 'product', brief: '[PRODUCT] Gift set 3: Premium ' + brand + ' gift set or bundle.' },
+        { layout: '1', tiles: [
+          { cat: 'creative', brief: '[CREATIVE] ' + brand + ' gift inspiration: festive presentation showing products as gift ideas. Warm, inviting styling with gift wrapping elements.', dim: { w: 3000, h: 1000 } },
         ]},
-        { layout: '1', tiles: [{ type: 'product_grid', brief: '', asins: topAsins12, dim: { w: 3000, h: 1200 } }] },
+        { layout: '1', tiles: [{ type: 'product_grid', brief: 'Add ONLY bundle/set ASINs here — not individual products.', asins: topAsins12, dim: { w: 3000, h: 1200 } }] },
       ]
     );
   }
@@ -1533,9 +1695,8 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       '[STORE_HERO] Recommendations hero for ' + brand + '. Curated selection, editorial feel.',
       lang === 'German' ? 'Unsere Empfehlungen' : 'Our Picks',
       [
-        { layout: 'std-2equal', tiles: [
-          { type: 'shoppable_image', cat: 'product', brief: '[PRODUCT] Staff pick / editor\'s choice 1 from ' + brand + '. Why we recommend it.', dim: { w: 1500, h: 1500 } },
-          { type: 'shoppable_image', cat: 'product', brief: '[PRODUCT] Staff pick / editor\'s choice 2 from ' + brand + '. Why we recommend it.', dim: { w: 1500, h: 1500 } },
+        { layout: '1', tiles: [
+          { cat: 'creative', brief: '[CREATIVE] ' + brand + ' curated picks: editorial-style layout showing why these products stand out. Staff favorites badge or highlight.', dim: { w: 3000, h: 1000 } },
         ]},
         { layout: '1', tiles: [{ type: 'product_grid', brief: '', asins: topAsins12, dim: { w: 3000, h: 1200 } }] },
       ]
@@ -1543,17 +1704,18 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   }
 
   // ── Neuheiten ──
+  // NOTE: We cannot know which products are actually new. Use product_grid only.
+  // The user must manually assign the correct new-arrival ASINs.
   if (extraPageFlags.new_arrivals) {
     makeExtraPage(
       lang === 'German' ? 'Neuheiten' : 'New Arrivals',
-      '[STORE_HERO] New arrivals hero for ' + brand + '. Fresh, modern, exciting.',
+      '[STORE_HERO] New arrivals hero for ' + brand + '. Fresh, modern, exciting. "NEW" badge or label.',
       lang === 'German' ? 'Neuheiten' : 'New Arrivals',
       [
-        { layout: 'std-2equal', tiles: [
-          { type: 'shoppable_image', cat: 'product', brief: '[PRODUCT] New product 1 from ' + brand + '. Highlight what\'s new.', dim: { w: 1500, h: 1500 } },
-          { type: 'shoppable_image', cat: 'product', brief: '[PRODUCT] New product 2 from ' + brand + '. Show innovation.', dim: { w: 1500, h: 1500 } },
+        { layout: '1', tiles: [
+          { cat: 'creative', brief: '[CREATIVE] ' + brand + ' new arrivals teaser: exciting "NEW" badges, fresh packaging, modern styling. No specific products — the grid below shows them.', dim: { w: 3000, h: 1000 } },
         ]},
-        { layout: '1', tiles: [{ type: 'product_grid', brief: '', asins: topAsins8, dim: { w: 3000, h: 1200 } }] },
+        { layout: '1', tiles: [{ type: 'product_grid', brief: 'Replace with ACTUAL new-arrival ASINs. These are placeholder top products.', asins: topAsins8, dim: { w: 3000, h: 1200 } }] },
       ]
     );
   }
@@ -1566,14 +1728,14 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       lang === 'German' ? 'Spar-Abo' : 'Subscribe & Save',
       [
         { layout: '1', tiles: [
-          { cat: 'creative', brief: '[CREATIVE] How Subscribe & Save works for ' + brand + ': 3 steps — choose product, set interval, save money. Visual step-by-step.', dim: { w: 3000, h: 1000 } },
+          { cat: 'creative', brief: '[CREATIVE] How Subscribe & Save works: 3-step visual guide. Step 1: Choose your ' + brand + ' product. Step 2: Set delivery interval. Step 3: Save money automatically. Clean infographic style.', dim: { w: 3000, h: 1000 } },
         ]},
-        { layout: '1-1-1', tiles: [
-          { cat: 'benefit', brief: '[BENEFIT] Spar-Abo benefit 1: Save up to X%. Price advantage visualization.' },
-          { cat: 'benefit', brief: '[BENEFIT] Spar-Abo benefit 2: Never run out. Automatic delivery.' },
-          { cat: 'benefit', brief: '[BENEFIT] Spar-Abo benefit 3: Flexible — pause or cancel anytime.' },
+        { layout: 'vh-w2s', tiles: [
+          { cat: 'benefit', brief: '[BENEFIT] ' + (lang === 'German' ? 'Bis zu 15% sparen bei jedem Spar-Abo. Automatische Lieferung, jederzeit kündbar.' : 'Save up to 15% with Subscribe & Save. Automatic delivery, cancel anytime.'), dim: { w: 1500, h: 750 } },
+          { cat: 'benefit', brief: '[BENEFIT] ' + (lang === 'German' ? 'Nie wieder ausgehen. Regelmäßige Lieferung direkt vor die Tür.' : 'Never run out. Regular delivery to your door.'), dim: { w: 750, h: 750 } },
+          { cat: 'benefit', brief: '[BENEFIT] ' + (lang === 'German' ? 'Flexibel: Intervall ändern, pausieren oder kündigen — jederzeit.' : 'Flexible: change interval, pause or cancel — anytime.'), dim: { w: 750, h: 750 } },
         ]},
-        { layout: '1', tiles: [{ type: 'product_grid', brief: '', asins: topAsins8, dim: { w: 3000, h: 1200 } }] },
+        { layout: '1', tiles: [{ type: 'product_grid', brief: 'Replace with ASINs that are available for Subscribe & Save.', asins: topAsins8, dim: { w: 3000, h: 1200 } }] },
       ]
     );
   }
@@ -1585,30 +1747,43 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       '[STORE_HERO] Sample sets hero for ' + brand + '. Try before you commit. Discovery, variety.',
       lang === 'German' ? 'Probiersets' : 'Try Our Samples',
       [
-        { layout: 'std-2equal', tiles: [
-          { type: 'shoppable_image', cat: 'product', brief: '[PRODUCT] Sample/trial set 1 from ' + brand + '. Small sizes, variety pack, or starter kit.', dim: { w: 1500, h: 1500 } },
-          { type: 'shoppable_image', cat: 'product', brief: '[PRODUCT] Sample/trial set 2 from ' + brand + '. Different flavor/variant mix.', dim: { w: 1500, h: 1500 } },
+        { layout: '1', tiles: [
+          { cat: 'creative', brief: '[CREATIVE] ' + brand + ' sample/trial sets: show variety packs, starter kits, mini sizes. Emphasize trying different variants before committing.', dim: { w: 3000, h: 1000 } },
         ]},
-        { layout: '1', tiles: [{ type: 'product_grid', brief: '', asins: topAsins8, dim: { w: 3000, h: 1200 } }] },
+        { layout: '1', tiles: [{ type: 'product_grid', brief: 'Replace with ACTUAL sample/trial set ASINs — not individual products.', asins: topAsins8, dim: { w: 3000, h: 1200 } }] },
       ]
     );
   }
 
   // ── Über uns ──
   if (extraPageFlags.about_us) {
+    // Build about-us content from crawled data
+    var aboutBrief = '[LIFESTYLE] Authentic photo of the people behind ' + brand + '.';
+    var valuesBrief = '[CREATIVE] ' + brand + ' brand values and mission.';
+    if (websiteData && websiteData.aboutText) {
+      aboutBrief = '[LIFESTYLE] ' + brand + ' team/founder: ' + websiteData.aboutText.substring(0, 120).replace(/["\n]/g, ' ').trim() + '.';
+      valuesBrief = '[CREATIVE] ' + brand + ' values: ' + websiteData.aboutText.substring(120, 250).replace(/["\n]/g, ' ').trim() + '.';
+    } else if (analysis.brandStory) {
+      aboutBrief = '[LIFESTYLE] ' + brand + ': ' + analysis.brandStory.substring(0, 120).replace(/["\n]/g, ' ').trim() + '.';
+    }
+    // Build benefit pillars from features/certifications
+    var feats = (websiteData && websiteData.features ? websiteData.features : []).slice(0, 3);
+    var pillar1 = feats[0] ? feats[0].slice(0, 60) : (lang === 'German' ? 'Qualität & Expertise' : 'Quality & Expertise');
+    var pillar2 = feats[1] ? feats[1].slice(0, 60) : (lang === 'German' ? 'Innovation' : 'Innovation');
+    var pillar3 = feats[2] ? feats[2].slice(0, 60) : (lang === 'German' ? 'Für dich gemacht' : 'Made for You');
     makeExtraPage(
       lang === 'German' ? 'Über uns' : 'About Us',
       '[STORE_HERO] Brand story hero for ' + brand + '. Mission, values, origin story. Logo prominent.' + aboutCtx,
       lang === 'German' ? 'Wir sind ' + brand : 'We are ' + brand,
       [
         { layout: 'std-2equal', tiles: [
-          { cat: 'lifestyle', brief: '[LIFESTYLE] Founder/team story: authentic photo of the people behind ' + brand + '.' },
-          { cat: 'creative', brief: '[CREATIVE] Brand values and mission statement for ' + brand + '.' },
+          { cat: 'lifestyle', brief: aboutBrief },
+          { cat: 'creative', brief: valuesBrief },
         ]},
-        { layout: '1-1-1', tiles: [
-          { cat: 'benefit', brief: '[BENEFIT] Value pillar 1: Quality/expertise. Icon + text.', overlay: lang === 'German' ? 'Qualität' : 'Quality' },
-          { cat: 'benefit', brief: '[BENEFIT] Value pillar 2: Innovation/sustainability. Icon + text.', overlay: lang === 'German' ? 'Innovation' : 'Innovation' },
-          { cat: 'benefit', brief: '[BENEFIT] Value pillar 3: Customer focus. Icon + text.', overlay: lang === 'German' ? 'Für dich' : 'For You' },
+        { layout: 'vh-w2s', tiles: [
+          { cat: 'benefit', brief: '[BENEFIT] ' + pillar1 + '.', overlay: pillar1.split(/[.,:]/)[0], dim: { w: 1500, h: 750 } },
+          { cat: 'benefit', brief: '[BENEFIT] ' + pillar2 + '.', overlay: pillar2.split(/[.,:]/)[0], dim: { w: 750, h: 750 } },
+          { cat: 'benefit', brief: '[BENEFIT] ' + pillar3 + '.', overlay: pillar3.split(/[.,:]/)[0], dim: { w: 750, h: 750 } },
         ]},
       ]
     );
@@ -1616,19 +1791,32 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
 
   // ── So funktioniert's ──
   if (extraPageFlags.how_it_works) {
+    // Build how-it-works content from crawled product features
+    var featureList = (websiteData && websiteData.features ? websiteData.features : []);
+    var prodFeatures = (analysis.keyFeatures || []);
+    var allFeatures = featureList.concat(prodFeatures).slice(0, 6);
+    var problemBrief = '[CREATIVE] Problem that ' + brand + ' solves for the customer.';
+    var solutionBrief = '[CREATIVE] How ' + brand + ' products solve this problem.';
+    if (allFeatures.length >= 2) {
+      problemBrief = '[CREATIVE] Customer problem: why ' + brand + ' products matter. Focus on: ' + allFeatures[0].slice(0, 80) + '.';
+      solutionBrief = '[CREATIVE] ' + brand + ' solution: ' + allFeatures[1].slice(0, 80) + '. Show mechanism or technology.';
+    }
+    var proof1 = certCtx.split(',')[0] ? certCtx.split(',')[0].trim() : (lang === 'German' ? 'Geprüfte Qualität' : 'Proven quality');
+    var proof2 = certCtx.split(',')[1] ? certCtx.split(',')[1].trim() : (lang === 'German' ? 'Kundenzufriedenheit' : 'Customer satisfaction');
+    var proof3 = certCtx.split(',')[2] ? certCtx.split(',')[2].trim() : (lang === 'German' ? 'Ausgezeichnet' : 'Award-winning');
     makeExtraPage(
       lang === 'German' ? 'So funktioniert\'s' : 'How It Works',
       '[STORE_HERO] Educational hero for ' + brand + '. Problem/pain point with solution teaser.',
       lang === 'German' ? 'So funktioniert\'s' : 'How It Works',
       [
         { layout: 'std-2equal', tiles: [
-          { cat: 'creative', brief: '[CREATIVE] Problem visualization: customer pain point for ' + brand + ' audience.' },
-          { cat: 'creative', brief: '[CREATIVE] Solution: How ' + brand + ' solves the problem. Key mechanism or technology.' },
+          { cat: 'creative', brief: problemBrief },
+          { cat: 'creative', brief: solutionBrief },
         ]},
-        { layout: '1-1-1', tiles: [
-          { cat: 'benefit', brief: '[BENEFIT] Proof point 1: Study, test data, or certification validating ' + brand + '.' },
-          { cat: 'benefit', brief: '[BENEFIT] Proof point 2: Customer testimonial or before/after.' },
-          { cat: 'benefit', brief: '[BENEFIT] Proof point 3: Award, expert endorsement, or media mention.' },
+        { layout: 'vh-w2s', tiles: [
+          { cat: 'benefit', brief: '[BENEFIT] ' + proof1 + '. Badge + explanation.', overlay: proof1, dim: { w: 1500, h: 750 } },
+          { cat: 'benefit', brief: '[BENEFIT] ' + proof2 + '. Badge + explanation.', overlay: proof2, dim: { w: 750, h: 750 } },
+          { cat: 'benefit', brief: '[BENEFIT] ' + proof3 + '. Badge + explanation.', overlay: proof3, dim: { w: 750, h: 750 } },
         ]},
         { layout: '1', tiles: [{ type: 'product_grid', brief: '', asins: topAsins8, dim: { w: 3000, h: 1200 } }] },
       ]
@@ -1636,48 +1824,62 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   }
 
   // ── Bestseller ──
+  // NOTE: Products are sorted by review count as a proxy for bestseller status.
   if (extraPageFlags.bestsellers && bestProducts.length >= 3) {
     makeExtraPage(
       lang === 'German' ? 'Bestseller' : 'Bestsellers',
-      '[STORE_HERO] Bestseller hero for ' + brand + '. Top-rated products, aspirational mood.',
+      '[STORE_HERO] Bestseller hero for ' + brand + '. Top-rated products, aspirational mood, "Bestseller" badge.',
       lang === 'German' ? 'Unsere Bestseller' : 'Our Bestsellers',
       [
-        { layout: '1', tiles: [{ type: 'product_grid', brief: '', asins: topAsins12, dim: { w: 3000, h: 1200 } }] },
+        { layout: '1', tiles: [
+          { cat: 'creative', brief: '[CREATIVE] ' + brand + ' bestseller showcase: editorial "Top Rated" or "Bestseller" styling. Show why customers love these products.', dim: { w: 3000, h: 800 } },
+        ]},
+        { layout: '1', tiles: [{ type: 'product_grid', brief: 'Top-rated products by review count. Verify these are actual bestsellers.', asins: topAsins12, dim: { w: 3000, h: 1200 } }] },
       ]
     );
   }
 
   // ── Angebote ──
+  // NOTE: We CANNOT know which products are currently on sale. Only use product_grid.
+  // The user MUST manually replace the ASINs with actually discounted products.
   if (extraPageFlags.deals) {
     makeExtraPage(
       lang === 'German' ? 'Angebote' : 'Deals',
-      '[STORE_HERO] Deals/offers hero for ' + brand + '. Eye-catching, urgency, savings.',
+      '[STORE_HERO] Deals/offers hero for ' + brand + '. Eye-catching, urgency, savings visualization.',
       lang === 'German' ? 'Aktuelle Angebote' : 'Current Deals',
       [
-        { layout: 'std-2equal', tiles: [
-          { type: 'shoppable_image', cat: 'product', brief: '[PRODUCT] Deal highlight 1 from ' + brand + '. Show original vs. sale price.', dim: { w: 1500, h: 1500 } },
-          { type: 'shoppable_image', cat: 'product', brief: '[PRODUCT] Deal highlight 2 from ' + brand + '. Savings visualization.', dim: { w: 1500, h: 1500 } },
+        { layout: '1', tiles: [
+          { cat: 'creative', brief: '[CREATIVE] ' + brand + ' deals page: eye-catching savings graphic. Percentage badges, "SALE" labels, urgency elements. No specific products — the grid below shows them.', dim: { w: 3000, h: 800 } },
         ]},
-        { layout: '1', tiles: [{ type: 'product_grid', brief: '', asins: topAsins12, dim: { w: 3000, h: 1200 } }] },
+        { layout: '1', tiles: [{ type: 'product_grid', brief: 'IMPORTANT: Replace with ASINs that are CURRENTLY discounted on Amazon. These are placeholder products.', asins: topAsins12, dim: { w: 3000, h: 1200 } }] },
       ]
     );
   }
 
   // ── Nachhaltigkeit ──
   if (extraPageFlags.sustainability) {
+    // Build sustainability content from actual certifications
+    var cert1 = certCtx.split(',')[0] ? certCtx.split(',')[0].trim() : '';
+    var cert2 = certCtx.split(',')[1] ? certCtx.split(',')[1].trim() : '';
+    var cert3 = certCtx.split(',')[2] ? certCtx.split(',')[2].trim() : '';
+    var sustainBrief = '[CREATIVE] ' + brand + ' sustainability commitment:';
+    if (cert1 || cert2) {
+      sustainBrief += ' Highlighting ' + [cert1, cert2].filter(Boolean).join(' and ') + '.';
+    }
+    sustainBrief += ' Show materials, sourcing practices, and eco-friendly packaging.';
     makeExtraPage(
       lang === 'German' ? 'Nachhaltigkeit' : 'Sustainability',
-      '[STORE_HERO] Sustainability hero for ' + brand + '. Green, eco-conscious design.' + (certCtx ? ' Certifications: ' + certCtx : ''),
+      '[STORE_HERO] Sustainability hero for ' + brand + '. Green, eco-conscious design.' + (cert1 ? ' Feature: ' + cert1 + '.' : ''),
       lang === 'German' ? 'Unsere Verantwortung' : 'Our Responsibility',
       [
         { layout: 'std-2equal', tiles: [
-          { cat: 'creative', brief: '[CREATIVE] Sustainability commitment of ' + brand + '. Materials, sourcing, packaging.' },
-          { cat: 'lifestyle', brief: '[LIFESTYLE] Eco-friendly production or packaging in action.' },
+          { cat: 'creative', brief: sustainBrief },
+          { cat: 'lifestyle', brief: '[LIFESTYLE] ' + brand + ' eco-friendly production or sustainable packaging in use. Natural setting, green tones.' },
         ]},
-        { layout: '1-1-1', tiles: [
-          { cat: 'benefit', brief: '[BENEFIT] Certification 1: ' + (certCtx.split(',')[0] || 'Quality seal') + '. Badge + explanation.' },
-          { cat: 'benefit', brief: '[BENEFIT] Certification 2: ' + (certCtx.split(',')[1] || 'Eco label') + '. Badge + explanation.' },
-          { cat: 'benefit', brief: '[BENEFIT] Certification 3: ' + (certCtx.split(',')[2] || 'Safety standard') + '. Badge + explanation.' },
+        { layout: 'vh-w2s', tiles: [
+          { cat: 'benefit', brief: '[BENEFIT] ' + (cert1 || (lang === 'German' ? 'Nachhaltig produziert' : 'Sustainably produced')) + '. Badge icon + 1-sentence explanation of what this means for the customer.', overlay: cert1 || (lang === 'German' ? 'Nachhaltig' : 'Sustainable'), dim: { w: 1500, h: 750 } },
+          { cat: 'benefit', brief: '[BENEFIT] ' + (cert2 || (lang === 'German' ? 'Umweltfreundliche Verpackung' : 'Eco-friendly packaging')) + '. Badge icon + 1-sentence explanation.', overlay: cert2 || (lang === 'German' ? 'Eco-Verpackung' : 'Eco Packaging'), dim: { w: 750, h: 750 } },
+          { cat: 'benefit', brief: '[BENEFIT] ' + (cert3 || (lang === 'German' ? 'Verantwortungsvoll beschafft' : 'Responsibly sourced')) + '. Badge icon + 1-sentence explanation.', overlay: cert3 || (lang === 'German' ? 'Verantwortung' : 'Responsible'), dim: { w: 750, h: 750 } },
         ]},
       ]
     );
@@ -2013,6 +2215,7 @@ export async function generateWireframesForPage(page, brand, websiteData, analys
 
   var success = 0;
   var failed = 0;
+  var lastError = '';
   for (var i = 0; i < tiles.length; i++) {
     var entry = tiles[i];
     var tile = entry.tile;
@@ -2028,12 +2231,21 @@ export async function generateWireframesForPage(page, brand, websiteData, analys
         success++;
       } else {
         failed++;
+        console.warn('Wireframe failed: Image generation failed with all available models');
+        lastError = 'Image generation failed with all available models';
       }
     } catch (err) {
       failed++;
+      lastError = err.message || 'Unknown error';
+      console.warn('Wireframe failed:', lastError);
+      // If the first request fails with a config error, abort early — no point trying 58 more
+      if (i === 0 && (lastError.indexOf('not configured') >= 0 || lastError.indexOf('API_KEY') >= 0)) {
+        log(1, tiles.length, 'API KEY MISSING — aborting');
+        return { success: 0, failed: tiles.length, total: tiles.length, error: lastError };
+      }
     }
   }
-  return { success: success, failed: failed, total: tiles.length };
+  return { success: success, failed: failed, total: tiles.length, error: failed > 0 ? lastError : '' };
 }
 
 // ─── FALLBACK: Deterministic store building ───

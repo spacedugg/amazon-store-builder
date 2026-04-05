@@ -72,15 +72,59 @@ export function findLayout(id) {
   return LAYOUTS[0];
 }
 
-export var TILE_TYPES = ['image', 'product_grid', 'best_sellers', 'recommended', 'deals', 'video', 'text', 'shoppable_image', 'image_text'];
+export var TILE_TYPES = ['image', 'product_grid', 'best_sellers', 'recommended', 'deals', 'video', 'text', 'shoppable_image', 'image_text', 'product_selector'];
 
 export var TILE_TYPE_LABELS = {
   image: 'Image', product_grid: 'Product Grid (ASIN)', best_sellers: 'Best Sellers',
   recommended: 'Recommended Products', deals: 'Deals / Offers', video: 'Video',
   text: 'Text (native)', shoppable_image: 'Shoppable Image (Hotspots)', image_text: 'Image with Text',
+  product_selector: 'Produktauswahl (Quiz)',
 };
 
 export var PRODUCT_TILE_TYPES = ['product_grid', 'best_sellers', 'recommended', 'deals'];
+
+// Default structure for a new Product Selector quiz
+export function createDefaultProductSelector() {
+  return {
+    intro: {
+      enabled: false,
+      headline: '',
+      description: '',
+      buttonLabel: 'Quiz starten',
+      image: null,
+    },
+    questions: [
+      {
+        id: 'q1',
+        questionText: '',
+        descriptionText: '',
+        answers: [
+          { id: 'a1', text: '', image: null, asins: [] },
+          { id: 'a2', text: '', image: null, asins: [] },
+        ],
+        allowImages: true,
+      },
+    ],
+    results: {
+      headline: 'Ihre Produktempfehlungen',
+      description: '',
+      storePageLink: '',
+      restartLabel: 'Quiz wiederholen',
+      disclaimer: '',
+    },
+    styling: {
+      typography: 'sans-serif',
+      size: 'medium',
+      weight: 'regular',
+      align: 'center',
+      bgColor: 'white',
+      bgRounded: true,
+      btnColor: 'white',
+      btnRounded: true,
+    },
+    recommendedAsins: [],
+  };
+}
 
 export var LANGS = { de: 'German', com: 'English', 'co.uk': 'English', fr: 'French' };
 
