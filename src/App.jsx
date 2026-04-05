@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { uid, emptyTile, emptyTileForLayout, LAYOUTS, LANGS, DOMAINS, validateStore, PRICING, countStoreAssets, STORE_TEMPLATES, findLayout } from './constants';
+import { uid, emptyTile, emptyTileForLayout, LAYOUTS, LANGS, DOMAINS, validateStore, PRICING, countStoreAssets, STORE_TEMPLATES, findLayout, LAYOUT_TILE_DIMS } from './constants';
 import { scrapeAsins } from './api';
-import { generateStore, aiRefineStore, applyOperations } from './storeBuilder';
+import { generateStore, aiRefineStore, applyOperations, generateWireframesForPage } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, loadStoreByShareToken, importStoreByShareLink } from './storage';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
 import Topbar from './components/Topbar';
@@ -47,6 +47,8 @@ export default function App() {
 
   var [storeId, setStoreId] = useState(null);
   var [shareToken, setShareToken] = useState(null);
+  var [wfGenerating, setWfGenerating] = useState(null);
+  var [wfProgress, setWfProgress] = useState('');
   var headerBannerInputRef = useRef(null);
 
   // ─── UNDO HISTORY ───
@@ -139,6 +141,33 @@ export default function App() {
   var log = useCallback(function(m) { setGenLog(function(p) { return p.concat([m]); }); }, []);
 
   var page = store.pages.find(function(p) { return p.id === curPage; }) || store.pages[0] || null;
+
+  // ─── WIREFRAME GENERATION ───
+  var handleGenerateWireframes = function(pageId) {
+    if (wfGenerating) return;
+    var wfPage = (store.pages || []).find(function(p) { return p.id === pageId; });
+    if (!wfPage) return;
+    setWfGenerating(pageId);
+    setWfProgress('Starte...');
+    generateWireframesForPage(
+      wfPage, store.brandName || '', store.websiteData || null,
+      { brandTone: store.brandTone, brandStory: store.brandStory, keyFeatures: store.keyFeatures },
+      function(current, total, category) {
+        setWfProgress(current + '/' + total + ' (' + category + ')');
+      }
+    ).then(function(result) {
+      setWfGenerating(null);
+      var msg = result.success + ' generiert, ' + result.failed + ' fehlgeschlagen';
+      if (result.error) msg += ' (' + result.error + ')';
+      setWfProgress(msg);
+      setStore(function(prev) { return Object.assign({}, prev); });
+      setTimeout(function() { setWfProgress(''); }, result.error ? 8000 : 4000);
+    }).catch(function(err) {
+      setWfGenerating(null);
+      setWfProgress('Fehler: ' + err.message);
+      setTimeout(function() { setWfProgress(''); }, 4000);
+    });
+  };
 
   // ─── GENERATION ───
 
@@ -451,6 +480,23 @@ export default function App() {
               var tiles = sec.tiles.slice();
               while (tiles.length < layout.cells) tiles.push(emptyTileForLayout(layoutId, tiles.length));
               if (tiles.length > layout.cells) tiles = tiles.slice(0, layout.cells);
+              // Re-enforce correct dimensions for existing tiles in the new layout
+              var tileDims = LAYOUT_TILE_DIMS[layoutId];
+              tiles = tiles.map(function(t, ti) {
+                var dd = tileDims && tileDims[ti] ? tileDims[ti] : null;
+                if (!dd) return t;
+                var isVH = layout.type === 'vh';
+                var isFullWidth = layout.type === 'fullwidth';
+                if (!isVH && !isFullWidth) {
+                  // Standard layout: force correct dimensions
+                  return Object.assign({}, t, {
+                    dimensions: { w: dd.w, h: dd.h },
+                    mobileDimensions: { w: dd.w, h: dd.h },
+                    syncDimensions: true,
+                  });
+                }
+                return t;
+              });
               return Object.assign({}, sec, { layoutId: layoutId, tiles: tiles });
             }),
           });
@@ -773,6 +819,9 @@ export default function App() {
           hasAutoSave={hasAutoSave}
           onLoadAutoSave={handleLoadAutoSave}
           onGenerate={function() { setShowGen(true); }}
+          onGenerateWireframes={handleGenerateWireframes}
+          wfGenerating={wfGenerating}
+          wfProgress={wfProgress}
         />
 
         <PropertiesPanel
