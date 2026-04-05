@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, MAX_HOTSPOTS } from '../constants';
+import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, MAX_HOTSPOTS, createDefaultProductSelector } from '../constants';
 import { t } from '../i18n';
 
 // Toggle **bold** around selected text or at cursor
@@ -328,6 +328,82 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
             </div>
           )}
 
+          {/* ─── AMAZON PRODUCT IMAGES (for internal orientation) ─── */}
+          {products && products.length > 0 && (function() {
+            var relevantAsins = [];
+            if (tile.linkAsin) relevantAsins.push(tile.linkAsin);
+            (tile.hotspots || []).forEach(function(hs) {
+              if (hs.asin && relevantAsins.indexOf(hs.asin) < 0) relevantAsins.push(hs.asin);
+            });
+            (tile.asins || []).forEach(function(a) {
+              if (a && relevantAsins.indexOf(a) < 0) relevantAsins.push(a);
+            });
+            if (relevantAsins.length === 0) return null;
+            var matchedProducts = relevantAsins.map(function(a) { return productMap[a]; }).filter(function(p) { return p && p.image; });
+            if (matchedProducts.length === 0) return null;
+            return (
+              <div className="props-section" style={{ padding: '6px 8px', background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 6 }}>
+                <div style={{ fontSize: 10, fontWeight: 700, color: '#0369a1', marginBottom: 4 }}>
+                  Amazon Product ({matchedProducts.length}):
+                </div>
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                  {matchedProducts.slice(0, 6).map(function(p, pi) {
+                    return (
+                      <div key={pi} style={{ display: 'flex', alignItems: 'center', gap: 5, background: '#fff', borderRadius: 4, padding: '3px 6px', border: '1px solid #e0f2fe', maxWidth: 200 }}>
+                        <img src={p.image} alt="" style={{ width: 36, height: 36, objectFit: 'contain', borderRadius: 2, flexShrink: 0 }} />
+                        <div style={{ fontSize: 9, lineHeight: 1.3, overflow: 'hidden' }}>
+                          <div style={{ fontWeight: 600, color: '#1e293b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name ? p.name.slice(0, 35) : p.asin}</div>
+                          <div style={{ color: '#64748b', fontFamily: 'monospace', fontSize: 8 }}>{p.asin}</div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* ─── PRODUCTS MENTIONED IN BRIEF (inline product images) ─── */}
+          {products && products.length > 0 && tile.brief && (function() {
+            var alreadyShown = {};
+            if (tile.linkAsin) alreadyShown[tile.linkAsin] = true;
+            (tile.hotspots || []).forEach(function(hs) { if (hs.asin) alreadyShown[hs.asin] = true; });
+            (tile.asins || []).forEach(function(a) { if (a) alreadyShown[a] = true; });
+            var briefLower = tile.brief.toLowerCase();
+            var mentioned = products.filter(function(p) {
+              if (alreadyShown[p.asin]) return false;
+              if (!p.image) return false;
+              if (briefLower.indexOf(p.asin.toLowerCase()) >= 0) return true;
+              if (p.name && p.name.length > 5) {
+                var nameWords = p.name.toLowerCase().split(/\s+/).filter(function(w) { return w.length > 3; });
+                var matchCount = nameWords.filter(function(w) { return briefLower.indexOf(w) >= 0; }).length;
+                return nameWords.length > 0 && matchCount >= Math.ceil(nameWords.length * 0.5);
+              }
+              return false;
+            }).slice(0, 4);
+            if (mentioned.length === 0) return null;
+            return (
+              <div className="props-section" style={{ padding: '6px 8px', background: '#fdf4ff', border: '1px solid #e9d5ff', borderRadius: 6 }}>
+                <div style={{ fontSize: 10, fontWeight: 700, color: '#7c3aed', marginBottom: 4 }}>
+                  Mentioned in Brief ({mentioned.length}):
+                </div>
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                  {mentioned.map(function(p, pi) {
+                    return (
+                      <div key={pi} style={{ display: 'flex', alignItems: 'center', gap: 5, background: '#fff', borderRadius: 4, padding: '3px 6px', border: '1px solid #e9d5ff', maxWidth: 200 }}>
+                        <img src={p.image} alt="" style={{ width: 36, height: 36, objectFit: 'contain', borderRadius: 2, flexShrink: 0 }} />
+                        <div style={{ fontSize: 9, lineHeight: 1.3, overflow: 'hidden' }}>
+                          <div style={{ fontWeight: 600, color: '#1e293b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name ? p.name.slice(0, 35) : p.asin}</div>
+                          <div style={{ color: '#64748b', fontFamily: 'monospace', fontSize: 8 }}>{p.asin}</div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })()}
+
           {/* Image uploads */}
           {fileUpload(t('props.desktopImage', uiLang), tile.uploadedImage,
             function(v) { u('uploadedImage', v); }, function() { u('uploadedImage', null); }, uiLang)}
@@ -380,6 +456,180 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
           <div className="hint">{t('props.nativeTextHint', uiLang)}</div>
         </div>
       )}
+
+      {/* PRODUCT SELECTOR (QUIZ) */}
+      {tile.type === 'product_selector' && (function() {
+        var ps = tile.productSelector || createDefaultProductSelector();
+        var updatePS = function(path, val) {
+          var copy = JSON.parse(JSON.stringify(ps));
+          var parts = path.split('.');
+          var target = copy;
+          for (var pi = 0; pi < parts.length - 1; pi++) { target = target[parts[pi]]; }
+          target[parts[parts.length - 1]] = val;
+          onChange(Object.assign({}, tile, { productSelector: copy }));
+        };
+        var updateQuestion = function(qIdx, field, val) {
+          var copy = JSON.parse(JSON.stringify(ps));
+          copy.questions[qIdx][field] = val;
+          onChange(Object.assign({}, tile, { productSelector: copy }));
+        };
+        var updateAnswer = function(qIdx, aIdx, field, val) {
+          var copy = JSON.parse(JSON.stringify(ps));
+          copy.questions[qIdx].answers[aIdx][field] = val;
+          onChange(Object.assign({}, tile, { productSelector: copy }));
+        };
+        var addQuestion = function() {
+          if ((ps.questions || []).length >= 4) return;
+          var copy = JSON.parse(JSON.stringify(ps));
+          var qId = 'q' + (copy.questions.length + 1) + '_' + Date.now().toString(36);
+          copy.questions.push({ id: qId, questionText: '', descriptionText: '', answers: [
+            { id: 'a1_' + qId, text: '', image: null, asins: [] },
+            { id: 'a2_' + qId, text: '', image: null, asins: [] },
+          ], allowImages: true });
+          onChange(Object.assign({}, tile, { productSelector: copy }));
+        };
+        var removeQuestion = function(qIdx) {
+          if ((ps.questions || []).length <= 1) return;
+          var copy = JSON.parse(JSON.stringify(ps));
+          copy.questions.splice(qIdx, 1);
+          onChange(Object.assign({}, tile, { productSelector: copy }));
+        };
+        var addAnswer = function(qIdx) {
+          if ((ps.questions[qIdx].answers || []).length >= 6) return;
+          var copy = JSON.parse(JSON.stringify(ps));
+          var aId = 'a' + (copy.questions[qIdx].answers.length + 1) + '_' + Date.now().toString(36);
+          copy.questions[qIdx].answers.push({ id: aId, text: '', image: null, asins: [] });
+          onChange(Object.assign({}, tile, { productSelector: copy }));
+        };
+        var removeAnswer = function(qIdx, aIdx) {
+          if ((ps.questions[qIdx].answers || []).length <= 2) return;
+          var copy = JSON.parse(JSON.stringify(ps));
+          copy.questions[qIdx].answers.splice(aIdx, 1);
+          onChange(Object.assign({}, tile, { productSelector: copy }));
+        };
+
+        return (
+          <>
+            {/* Intro */}
+            <div className="props-section">
+              <div style={{ fontWeight: 700, fontSize: 11, color: '#7c3aed', marginBottom: 6 }}>Intro (vor dem Quiz)</div>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, cursor: 'pointer', marginBottom: 6 }}>
+                <input type="checkbox" checked={!!(ps.intro && ps.intro.enabled)}
+                  onChange={function(e) { updatePS('intro.enabled', e.target.checked); }} />
+                Intro aktivieren
+              </label>
+              {ps.intro && ps.intro.enabled && (
+                <>
+                  <input className="input" value={ps.intro.headline || ''} placeholder="Überschrift (max. 45 Zeichen)"
+                    maxLength={45} onChange={function(e) { updatePS('intro.headline', e.target.value); }} style={{ marginBottom: 4 }} />
+                  <input className="input" value={ps.intro.description || ''} placeholder="Beschreibung (max. 70 Zeichen)"
+                    maxLength={70} onChange={function(e) { updatePS('intro.description', e.target.value); }} style={{ marginBottom: 4 }} />
+                  <input className="input" value={ps.intro.buttonLabel || ''} placeholder="Button-Text (max. 20 Zeichen)"
+                    maxLength={20} onChange={function(e) { updatePS('intro.buttonLabel', e.target.value); }} />
+                </>
+              )}
+            </div>
+
+            {/* Recommended ASINs */}
+            <div className="props-section">
+              <div style={{ fontWeight: 700, fontSize: 11, color: '#7c3aed', marginBottom: 4 }}>Empfohlene Produkte (max. 50)</div>
+              <textarea className="input" rows={2} value={(ps.recommendedAsins || []).join('\n')}
+                placeholder="ASINs (eine pro Zeile)"
+                onChange={function(e) {
+                  var asins = e.target.value.split(/[\n,;]+/).map(function(s) { return s.trim(); }).filter(Boolean).slice(0, 50);
+                  updatePS('recommendedAsins', asins);
+                }} />
+              <div className="hint">{(ps.recommendedAsins || []).length} / 50 ASINs</div>
+            </div>
+
+            {/* Questions */}
+            <div className="props-section">
+              <div style={{ fontWeight: 700, fontSize: 11, color: '#7c3aed', marginBottom: 6 }}>Fragen & Antworten ({(ps.questions || []).length}/4)</div>
+              {(ps.questions || []).map(function(q, qIdx) {
+                return (
+                  <div key={q.id || qIdx} style={{ background: '#faf5ff', borderRadius: 6, padding: 8, marginBottom: 8, border: '1px solid #e9d5ff' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#6b21a8' }}>Frage {qIdx + 1}</div>
+                      {(ps.questions || []).length > 1 && (
+                        <button onClick={function() { removeQuestion(qIdx); }}
+                          style={{ fontSize: 9, color: '#dc2626', background: 'none', border: 'none', cursor: 'pointer' }}>Entfernen</button>
+                      )}
+                    </div>
+                    <input className="input" value={q.questionText || ''} placeholder="Fragetext (max. 55 Zeichen)"
+                      maxLength={55} onChange={function(e) { updateQuestion(qIdx, 'questionText', e.target.value); }}
+                      style={{ marginBottom: 4, fontSize: 11 }} />
+                    <input className="input" value={q.descriptionText || ''} placeholder="Beschreibung (optional, max. 80)"
+                      maxLength={80} onChange={function(e) { updateQuestion(qIdx, 'descriptionText', e.target.value); }}
+                      style={{ marginBottom: 6, fontSize: 10 }} />
+
+                    {/* Answers */}
+                    <div style={{ fontSize: 10, fontWeight: 600, color: '#7c3aed', marginBottom: 3 }}>Antworten ({(q.answers || []).length}/6)</div>
+                    {(q.answers || []).map(function(a, aIdx) {
+                      return (
+                        <div key={a.id || aIdx} style={{ display: 'flex', gap: 4, alignItems: 'center', marginBottom: 3 }}>
+                          <input className="input" value={a.text || ''} placeholder={'Antwort ' + (aIdx + 1) + ' (max. 40)'}
+                            maxLength={40} style={{ flex: 1, fontSize: 10, padding: '3px 6px' }}
+                            onChange={function(e) { updateAnswer(qIdx, aIdx, 'text', e.target.value); }} />
+                          <input className="input" value={(a.asins || []).join(', ')} placeholder="ASINs"
+                            style={{ width: 80, fontSize: 9, padding: '3px 4px' }}
+                            onChange={function(e) {
+                              var asins = e.target.value.split(/[,;\s]+/).map(function(s) { return s.trim(); }).filter(Boolean);
+                              updateAnswer(qIdx, aIdx, 'asins', asins);
+                            }} />
+                          {(q.answers || []).length > 2 && (
+                            <button onClick={function() { removeAnswer(qIdx, aIdx); }}
+                              style={{ fontSize: 10, color: '#dc2626', background: 'none', border: 'none', cursor: 'pointer', padding: 2 }}>✕</button>
+                          )}
+                        </div>
+                      );
+                    })}
+                    {(q.answers || []).length < 6 && (
+                      <button onClick={function() { addAnswer(qIdx); }}
+                        style={{ fontSize: 9, color: '#7c3aed', background: 'none', border: '1px dashed #c4b5fd', borderRadius: 3, cursor: 'pointer', padding: '2px 8px', marginTop: 2 }}>+ Antwort</button>
+                    )}
+                  </div>
+                );
+              })}
+              {(ps.questions || []).length < 4 && (
+                <button onClick={addQuestion} className="btn" style={{ fontSize: 10, padding: '4px 12px' }}>+ Frage hinzufügen</button>
+              )}
+            </div>
+
+            {/* Results */}
+            <div className="props-section">
+              <div style={{ fontWeight: 700, fontSize: 11, color: '#7c3aed', marginBottom: 6 }}>Ergebnisse</div>
+              <input className="input" value={(ps.results || {}).headline || ''} placeholder="Überschrift (max. 30)"
+                maxLength={30} onChange={function(e) { updatePS('results.headline', e.target.value); }} style={{ marginBottom: 4 }} />
+              <input className="input" value={(ps.results || {}).description || ''} placeholder="Beschreibung (max. 80)"
+                maxLength={80} onChange={function(e) { updatePS('results.description', e.target.value); }} style={{ marginBottom: 4 }} />
+              <input className="input" value={(ps.results || {}).restartLabel || ''} placeholder="Neustart-Button (max. 20)"
+                maxLength={20} onChange={function(e) { updatePS('results.restartLabel', e.target.value); }} style={{ marginBottom: 4 }} />
+              <textarea className="input" value={(ps.results || {}).disclaimer || ''} placeholder="Haftungsausschluss (optional, max. 200)"
+                maxLength={200} rows={2} onChange={function(e) { updatePS('results.disclaimer', e.target.value); }} />
+            </div>
+
+            {/* Styling */}
+            <div className="props-section">
+              <div style={{ fontWeight: 700, fontSize: 11, color: '#7c3aed', marginBottom: 6 }}>Gestaltung</div>
+              <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 6 }}>
+                {['white', '#fce7f3', '#ffedd5', '#fef9c3', '#dcfce7', '#cffafe', '#e0e7ff', '#f3e8ff'].map(function(c) {
+                  var sel = (ps.styling || {}).bgColor === c;
+                  return <div key={c} onClick={function() { updatePS('styling.bgColor', c); }}
+                    style={{ width: 20, height: 20, borderRadius: 4, background: c, border: sel ? '2px solid #7c3aed' : '1px solid #d1d5db', cursor: 'pointer' }} />;
+                })}
+              </div>
+              <div style={{ display: 'flex', gap: 4, fontSize: 10 }}>
+                <button className={'btn' + ((ps.styling || {}).typography === 'sans-serif' ? ' active' : '')}
+                  onClick={function() { updatePS('styling.typography', 'sans-serif'); }}
+                  style={{ flex: 1, fontSize: 9, padding: '3px 0' }}>Sans Serif</button>
+                <button className={'btn' + ((ps.styling || {}).typography === 'serif' ? ' active' : '')}
+                  onClick={function() { updatePS('styling.typography', 'serif'); }}
+                  style={{ flex: 1, fontSize: 9, padding: '3px 0' }}>Serif</button>
+              </div>
+            </div>
+          </>
+        );
+      })()}
 
       {/* VIDEO */}
       {tile.type === 'video' && (

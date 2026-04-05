@@ -222,7 +222,7 @@ function buildFilenameMap(store) {
   (store.pages || []).forEach(function(pg) {
     (pg.sections || []).forEach(function(sec, si) {
       (sec.tiles || []).forEach(function(tile, ti) {
-        if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text') return;
+        if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text' || tile.type === 'product_selector') return;
         if (tile.syncDimensions) {
           var fn = tileFilename(pg.name, si, ti, 'sync');
           map[fn.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'sync' };
@@ -244,7 +244,7 @@ function buildDuplicateMap(store) {
   (store.pages || []).forEach(function(pg) {
     (pg.sections || []).forEach(function(sec, si) {
       (sec.tiles || []).forEach(function(tile, ti) {
-        if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text') return;
+        if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text' || tile.type === 'product_selector') return;
         var fp = tileFingerprint(tile);
         if (!fp || fp === 'image||||||x|') return;
         if (!map[fp]) {
@@ -558,17 +558,65 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
         </div>
       )}
 
-      {tile.brief && (
-        <div className="briefing-field">
-          <span className="briefing-field-label">Design Brief:</span>
-          <span className="briefing-field-value"><BriefTextHighlighted text={tile.brief} /></span>
-        </div>
-      )}
+      {tile.brief && (function() {
+        // Remove textOverlay content from the brief to avoid redundancy
+        var briefText = tile.brief;
+        if (tile.textOverlay) {
+          // Remove exact textOverlay text (or lines thereof) from brief
+          var overlayLines = tile.textOverlay.split(/\\n|\n/).map(function(l) { return l.trim(); }).filter(Boolean);
+          overlayLines.forEach(function(line) {
+            // Escape regex special chars
+            var escaped = line.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            briefText = briefText.replace(new RegExp('["\u201E\u201C\u201D]*' + escaped + '["\u201E\u201C\u201D]*[.,;:]*\\s*', 'gi'), '').trim();
+          });
+          // Also remove quoted versions of the full textOverlay
+          var fullEscaped = tile.textOverlay.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\n/g, '.*?');
+          briefText = briefText.replace(new RegExp('["\u201E\u201C\u201D]' + fullEscaped + '["\u201E\u201C\u201D][.,;:]*\\s*', 'gi'), '').trim();
+          // Clean up dangling punctuation
+          briefText = briefText.replace(/^[.,;:\s]+/, '').replace(/[.,;:\s]+$/, '').trim();
+        }
+        if (!briefText) return null;
+        return (
+          <div className="briefing-field">
+            <span className="briefing-field-label">Design Brief:</span>
+            <span className="briefing-field-value"><BriefTextHighlighted text={briefText} /></span>
+          </div>
+        );
+      })()}
 
       {tile.textOverlay && (
-        <div className="briefing-field">
-          <span className="briefing-field-label">Text on Image:</span>
-          <span className="briefing-field-value briefing-field-text">"{tile.textOverlay}"{tile.textAlign && tile.textAlign !== 'left' ? ' (' + (tile.textAlign === 'center' ? 'centered' : 'right-aligned') + ')' : ''}</span>
+        <div className="briefing-field" style={{ flexDirection: 'column', gap: 2 }}>
+          <span className="briefing-field-label">Text on Image:{tile.textAlign && tile.textAlign !== 'left' ? ' (' + (tile.textAlign === 'center' ? 'centered' : 'right-aligned') + ')' : ''}</span>
+          <div style={{ padding: '6px 8px', background: '#fefce8', border: '1px solid #fde68a', borderRadius: 4, lineHeight: 1.5 }}>
+            {tile.textOverlay.split(/\\n|\n/).map(function(line, li) {
+              var trimmed = line.trim();
+              if (!trimmed) return <div key={li} style={{ height: 4 }} />;
+              // Detect bullet points
+              var isBullet = /^[•\-\u2022\u2013\u2014*]\s/.test(trimmed);
+              if (isBullet) {
+                return <div key={li} style={{ fontSize: 10, color: '#78716c', paddingLeft: 12, lineHeight: 1.6 }}>
+                  <span style={{ background: '#e2e8f0', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#64748b', marginRight: 4 }}>BULLET</span>
+                  {trimmed}
+                </div>;
+              }
+              // Short lines (< 40 chars) without punctuation ending = likely heading/label
+              var isShort = trimmed.length < 40 && !/[.!,;:]$/.test(trimmed);
+              // Lines wrapped in **bold** markers
+              var isBold = /^\*\*.*\*\*$/.test(trimmed);
+              var displayText = isBold ? trimmed.replace(/^\*\*|\*\*$/g, '') : trimmed;
+              if (isBold || isShort) {
+                return <div key={li} style={{ fontSize: 12, fontWeight: 700, color: '#1e293b', marginTop: li > 0 ? 2 : 0 }}>
+                  <span style={{ background: '#dbeafe', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#1d4ed8', marginRight: 4 }}>HEADING</span>
+                  {displayText}
+                </div>;
+              }
+              // Default: body text
+              return <div key={li} style={{ fontSize: 11, color: '#475569' }}>
+                <span style={{ background: '#f1f5f9', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#94a3b8', marginRight: 4 }}>BODY</span>
+                {trimmed}
+              </div>;
+            })}
+          </div>
         </div>
       )}
 
@@ -651,7 +699,7 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
         return (
           <div style={{ marginTop: 6, padding: '6px 8px', background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 4 }}>
             <div style={{ fontSize: 10, fontWeight: 700, color: '#0369a1', marginBottom: 4 }}>
-              Product Reference ({matchedProducts.length}):
+              Amazon Product ({matchedProducts.length}):
             </div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {displayProducts.map(function(p, pi) {
@@ -670,6 +718,51 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
                   +{moreCount} more
                 </div>
               )}
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* ─── PRODUCTS MENTIONED IN BRIEF (inline product images) ─── */}
+      {products && products.length > 0 && tile.brief && (function() {
+        // Collect ASINs already shown via linkAsin/hotspots/asins
+        var alreadyShown = {};
+        if (tile.linkAsin) alreadyShown[tile.linkAsin] = true;
+        (tile.hotspots || []).forEach(function(hs) { if (hs.asin) alreadyShown[hs.asin] = true; });
+        (tile.asins || []).forEach(function(a) { if (a) alreadyShown[a] = true; });
+        // Search brief for product names or ASINs not already shown
+        var briefLower = tile.brief.toLowerCase();
+        var mentioned = products.filter(function(p) {
+          if (alreadyShown[p.asin]) return false;
+          if (!p.image) return false;
+          // Check if ASIN is mentioned
+          if (briefLower.indexOf(p.asin.toLowerCase()) >= 0) return true;
+          // Check if product name (or significant part) is mentioned
+          if (p.name && p.name.length > 5) {
+            var nameWords = p.name.toLowerCase().split(/\s+/).filter(function(w) { return w.length > 3; });
+            var matchCount = nameWords.filter(function(w) { return briefLower.indexOf(w) >= 0; }).length;
+            return nameWords.length > 0 && matchCount >= Math.ceil(nameWords.length * 0.5);
+          }
+          return false;
+        }).slice(0, 4);
+        if (mentioned.length === 0) return null;
+        return (
+          <div style={{ marginTop: 4, padding: '6px 8px', background: '#fdf4ff', border: '1px solid #e9d5ff', borderRadius: 4 }}>
+            <div style={{ fontSize: 10, fontWeight: 700, color: '#7c3aed', marginBottom: 4 }}>
+              Mentioned in Brief ({mentioned.length}):
+            </div>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              {mentioned.map(function(p, pi) {
+                return (
+                  <div key={pi} style={{ display: 'flex', alignItems: 'center', gap: 5, background: '#fff', borderRadius: 4, padding: '3px 6px', border: '1px solid #e9d5ff', maxWidth: 200 }}>
+                    <img src={p.image} alt="" style={{ width: 36, height: 36, objectFit: 'contain', borderRadius: 2, flexShrink: 0 }} />
+                    <div style={{ fontSize: 9, lineHeight: 1.3, overflow: 'hidden' }}>
+                      <div style={{ fontWeight: 600, color: '#1e293b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name ? p.name.slice(0, 35) : p.asin}</div>
+                      <div style={{ color: '#64748b', fontFamily: 'monospace', fontSize: 8 }}>{p.asin}</div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         );
@@ -1009,7 +1102,7 @@ function computeProgress(store, checks) {
   (store.pages || []).forEach(function(pg) {
     (pg.sections || []).forEach(function(sec, si) {
       (sec.tiles || []).forEach(function(tile, ti) {
-        if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text') return;
+        if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text' || tile.type === 'product_selector') return;
         var key = pg.id + '/' + sec.id + '/' + ti;
         // If syncDimensions (same format desktop=mobile), only 1 image needed
         if (tile.syncDimensions) {
@@ -1139,7 +1232,7 @@ function PreviewMode({ store, onClose }) {
     (store.pages || []).forEach(function(pg) {
       (pg.sections || []).forEach(function(sec, si) {
         (sec.tiles || []).forEach(function(tile, ti) {
-          if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text') return;
+          if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text' || tile.type === 'product_selector') return;
           if (tile.syncDimensions) {
             matchReport.total += 1;
             var fn = tileFilename(pg.name, si, ti, 'sync').toLowerCase();
@@ -1414,7 +1507,7 @@ function PreviewMode({ store, onClose }) {
 
                       // Only show name-matched images from loaded folders — never show editor-uploaded images
                       var matchedImgSrc = null;
-                      if (!isProduct && tile.type !== 'text') {
+                      if (!isProduct && tile.type !== 'text' && tile.type !== 'product_selector') {
                         if (tile.syncDimensions) {
                           matchedImgSrc = findTileImage(activePg.name, si, ti, 'sync');
                         } else {
@@ -1425,7 +1518,7 @@ function PreviewMode({ store, onClose }) {
                       }
 
                       // Check if this tile is missing an image (red highlight)
-                      var isMissing = folderLoaded && !isProduct && tile.type !== 'text' && missingTileSet[activePg.name + '|' + (si + 1) + '|' + (ti + 1)];
+                      var isMissing = folderLoaded && !isProduct && tile.type !== 'text' && tile.type !== 'product_selector' && missingTileSet[activePg.name + '|' + (si + 1) + '|' + (ti + 1)];
 
                       return (
                         <div key={ti} style={tileStyle}>
@@ -1437,6 +1530,14 @@ function PreviewMode({ store, onClose }) {
                               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', color: '#94a3b8', fontSize: isMobile ? 10 : 12 }}>
                                 <span style={{ color: '#888' }}>Product Grid</span>
                               </div>
+                            ) : tile.type === 'product_selector' ? (
+                              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', background: (tile.productSelector && tile.productSelector.styling && tile.productSelector.styling.bgColor) || '#f8f4ff', padding: isMobile ? 6 : 12 }}>
+                                <span style={{ background: '#7c3aed', color: '#fff', fontSize: isMobile ? 7 : 9, fontWeight: 700, padding: '2px 6px', borderRadius: 3, marginBottom: 4 }}>QUIZ</span>
+                                <span style={{ fontWeight: 700, fontSize: isMobile ? 9 : 12, color: '#4c1d95', marginBottom: 2 }}>Produktauswahl</span>
+                                {tile.productSelector && tile.productSelector.questions && (
+                                  <span style={{ fontSize: isMobile ? 7 : 9, color: '#7c3aed' }}>{tile.productSelector.questions.length} Frage{tile.productSelector.questions.length !== 1 ? 'n' : ''}</span>
+                                )}
+                              </div>
                             ) : (
                               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', color: '#bbb' }}>
                                 <span style={{ fontFamily: 'monospace', fontSize: isMobile ? 8 : 10 }}>{dims.w}&times;{dims.h}</span>
@@ -1447,7 +1548,7 @@ function PreviewMode({ store, onClose }) {
                               <div style={{ position: 'absolute', inset: 0, background: 'rgba(239,68,68,0.12)', border: '2px solid #ef4444', pointerEvents: 'none' }} />
                             )}
                             {/* Filename overlay */}
-                            {showFilenames && !isProduct && tile.type !== 'text' && (
+                            {showFilenames && !isProduct && tile.type !== 'text' && tile.type !== 'product_selector' && (
                               <div style={{ position: 'absolute', bottom: 4, left: 4, background: 'rgba(0,0,0,.75)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 8, padding: '1px 5px', borderRadius: 2, maxWidth: '90%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                 {tileFilename(activePg.name, si, ti, tile.syncDimensions ? 'sync' : pvMode)}
                               </div>
@@ -1550,10 +1651,12 @@ export default function BriefingView() {
       }
     ).then(function(result) {
       setWfGenerating(null);
-      setWfProgress(result.success + ' generiert, ' + result.failed + ' fehlgeschlagen');
+      var msg = result.success + ' generiert, ' + result.failed + ' fehlgeschlagen';
+      if (result.error) msg += ' (' + result.error + ')';
+      setWfProgress(msg);
       // Force re-render by updating store reference
       setStore(function(prev) { return Object.assign({}, prev); });
-      setTimeout(function() { setWfProgress(''); }, 4000);
+      setTimeout(function() { setWfProgress(''); }, result.error ? 8000 : 4000);
     }).catch(function(err) {
       setWfGenerating(null);
       setWfProgress('Fehler: ' + err.message);
@@ -1899,14 +2002,14 @@ export default function BriefingView() {
               <div className="briefing-sidebar-section" style={{ background: '#faf5ff', borderRadius: 8, margin: '0 8px 10px', padding: '12px' }}>
                 <div className="briefing-sidebar-title" style={{ color: '#7c3aed', marginBottom: 8 }}>Corporate Identity</div>
                 <div className="briefing-legend" style={{ fontSize: 11, lineHeight: 1.6 }}>
-                  <p style={{ marginBottom: 8, color: '#6b21a8', fontWeight: 600 }}>Farben, Schriften und Stil für den Designer auf einen Blick.</p>
+                  <p style={{ marginBottom: 8, color: '#6b21a8', fontWeight: 600 }}>Farben, Schriften und Stil — editierbar.</p>
 
-                  {/* Colors */}
-                  {store.websiteData && store.websiteData.colors && store.websiteData.colors.length > 0 ? (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Farbpalette</div>
-                      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                        {store.websiteData.colors.map(function(c, i) {
+                  {/* Colors — editable */}
+                  <div style={{ marginBottom: 10 }}>
+                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Farbpalette</div>
+                    {(store.manualCI && store.manualCI.colors && store.manualCI.colors.length > 0) || (store.websiteData && store.websiteData.colors && store.websiteData.colors.length > 0) ? (
+                      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 4 }}>
+                        {((store.manualCI && store.manualCI.colors) || (store.websiteData && store.websiteData.colors) || []).map(function(c, i) {
                           return (
                             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 4, background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '3px 8px' }}>
                               <div style={{ width: 16, height: 16, borderRadius: 3, background: c, border: '1px solid rgba(0,0,0,.15)' }} />
@@ -1915,36 +2018,151 @@ export default function BriefingView() {
                           );
                         })}
                       </div>
-                    </div>
-                  ) : (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Farbpalette</div>
-                      <div style={{ color: '#94a3b8', fontSize: 10, fontStyle: 'italic' }}>Keine Farben aus Website extrahiert. Bitte manuell eintragen oder aus Produktbildern ableiten.</div>
-                    </div>
-                  )}
+                    ) : null}
+                    <input
+                      placeholder="Farben eingeben: #FF5733, #2E86C1, ..."
+                      value={(store.manualCI && store.manualCI.colorsInput) || ''}
+                      onChange={function(e) {
+                        var val = e.target.value;
+                        var colors = val.match(/#[0-9A-Fa-f]{3,6}/g) || [];
+                        setStore(function(prev) {
+                          var mc = Object.assign({}, prev.manualCI || {});
+                          mc.colorsInput = val;
+                          if (colors.length > 0) mc.colors = colors.slice(0, 8);
+                          return Object.assign({}, prev, { manualCI: mc });
+                        });
+                      }}
+                      style={{ width: '100%', fontSize: 10, padding: '4px 6px', border: '1px solid #e5e7eb', borderRadius: 4, fontFamily: 'monospace' }}
+                    />
+                  </div>
 
-                  {/* Brand Tone */}
+                  {/* Fonts — editable */}
+                  <div style={{ marginBottom: 10 }}>
+                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Schriftarten</div>
+                    {store.websiteData && store.websiteData.fonts && store.websiteData.fonts.length > 0 && (
+                      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 4 }}>
+                        {store.websiteData.fonts.map(function(f, i) {
+                          return <span key={i} style={{ background: '#f3e8ff', color: '#6b21a8', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{f}</span>;
+                        })}
+                      </div>
+                    )}
+                    <input
+                      placeholder="z.B. Montserrat, Open Sans, Playfair Display"
+                      value={(store.manualCI && store.manualCI.fonts) || ''}
+                      onChange={function(e) {
+                        setStore(function(prev) {
+                          var mc = Object.assign({}, prev.manualCI || {});
+                          mc.fonts = e.target.value;
+                          return Object.assign({}, prev, { manualCI: mc });
+                        });
+                      }}
+                      style={{ width: '100%', fontSize: 10, padding: '4px 6px', border: '1px solid #e5e7eb', borderRadius: 4 }}
+                    />
+                  </div>
+
+                  {/* Brand Tone — editable */}
                   <div style={{ marginBottom: 10 }}>
                     <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Markentonalität</div>
-                    <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11 }}>
-                      {store.brandTone || store.analysis && store.analysis.brandTone || 'Nicht erkannt — bitte aus Website/Produkten ableiten'}
-                    </div>
+                    <input
+                      value={(store.manualCI && store.manualCI.brandTone) || store.brandTone || (store.analysis && store.analysis.brandTone) || ''}
+                      onChange={function(e) {
+                        setStore(function(prev) {
+                          var mc = Object.assign({}, prev.manualCI || {});
+                          mc.brandTone = e.target.value;
+                          return Object.assign({}, prev, { manualCI: mc });
+                        });
+                      }}
+                      placeholder="z.B. natürlich, minimalistisch, premium"
+                      style={{ width: '100%', fontSize: 10, padding: '4px 6px', border: '1px solid #e5e7eb', borderRadius: 4 }}
+                    />
+                  </div>
+
+                  {/* CI Notes — free text */}
+                  <div style={{ marginBottom: 10 }}>
+                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>CI Notizen (für Designer)</div>
+                    <textarea
+                      value={(store.manualCI && store.manualCI.notes) || ''}
+                      onChange={function(e) {
+                        setStore(function(prev) {
+                          var mc = Object.assign({}, prev.manualCI || {});
+                          mc.notes = e.target.value;
+                          return Object.assign({}, prev, { manualCI: mc });
+                        });
+                      }}
+                      rows={3}
+                      placeholder="Weitere Hinweise: Logo-Varianten, Bildsprache, Stilrichtung..."
+                      style={{ width: '100%', fontSize: 10, padding: '4px 6px', border: '1px solid #e5e7eb', borderRadius: 4, resize: 'vertical' }}
+                    />
                   </div>
 
                   {/* Brand Story */}
-                  {(store.analysis && store.analysis.brandStory) || (store.websiteData && store.websiteData.aboutText) ? (
+                  {(store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.brandStory) || (store.analysis && store.analysis.brandStory) || (store.websiteData && store.websiteData.aboutText) ? (
                     <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Story</div>
-                      <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11, lineHeight: 1.5 }}>
-                        {(store.analysis && store.analysis.brandStory) || (store.websiteData && store.websiteData.aboutText ? store.websiteData.aboutText.substring(0, 300) + '...' : '')}
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Story (erkannt)</div>
+                      <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11, lineHeight: 1.5, maxHeight: 80, overflow: 'auto' }}>
+                        {(store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.brandStory) || (store.analysis && store.analysis.brandStory) || (store.websiteData && store.websiteData.aboutText ? store.websiteData.aboutText.substring(0, 300) + '...' : '')}
                       </div>
                     </div>
                   ) : null}
 
+                  {/* Target Audience (AI) */}
+                  {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.targetAudience && (
+                    <div style={{ marginBottom: 10 }}>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Zielgruppe (KI-Analyse)</div>
+                      <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11, lineHeight: 1.5 }}>
+                        {store.websiteData.aiAnalysis.targetAudience}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Brand Values (AI) */}
+                  {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.brandValues && store.websiteData.aiAnalysis.brandValues.length > 0 && (
+                    <div style={{ marginBottom: 10 }}>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Markenwerte (KI-Analyse)</div>
+                      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                        {store.websiteData.aiAnalysis.brandValues.map(function(v, i) {
+                          return <span key={i} style={{ background: '#ede9fe', color: '#5b21b6', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{v}</span>;
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Visual Style (AI) */}
+                  {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.visualStyle && (
+                    <div style={{ marginBottom: 10 }}>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Visueller Stil (KI-Analyse)</div>
+                      <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11 }}>
+                        {store.websiteData.aiAnalysis.visualStyle}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Sustainability (AI) */}
+                  {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.sustainabilityFocus && (
+                    <div style={{ marginBottom: 10 }}>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Nachhaltigkeit (KI-Analyse)</div>
+                      <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11, lineHeight: 1.5 }}>
+                        {store.websiteData.aiAnalysis.sustainabilityFocus}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Key Ingredients / Materials (AI) */}
+                  {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.keyIngredients && store.websiteData.aiAnalysis.keyIngredients.length > 0 && (
+                    <div style={{ marginBottom: 10 }}>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Schlüssel-Inhaltsstoffe (KI-Analyse)</div>
+                      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                        {store.websiteData.aiAnalysis.keyIngredients.map(function(ing, i) {
+                          return <span key={i} style={{ background: '#ecfdf5', color: '#065f46', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{ing}</span>;
+                        })}
+                      </div>
+                    </div>
+                  )}
+
                   {/* Certifications / USPs */}
                   {store.websiteData && store.websiteData.certifications && store.websiteData.certifications.length > 0 && (
                     <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Zertifizierungen & USPs</div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Zertifizierungen & USPs (erkannt)</div>
                       <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                         {store.websiteData.certifications.map(function(cert, i) {
                           return <span key={i} style={{ background: '#f3e8ff', color: '#6b21a8', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{cert}</span>;
@@ -1953,18 +2171,28 @@ export default function BriefingView() {
                     </div>
                   )}
 
-                  {/* Website URL */}
+                  {/* Product Categories (AI) */}
+                  {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.productCategories && store.websiteData.aiAnalysis.productCategories.length > 0 && (
+                    <div style={{ marginBottom: 10 }}>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Produktkategorien (erkannt)</div>
+                      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                        {store.websiteData.aiAnalysis.productCategories.map(function(cat, i) {
+                          return <span key={i} style={{ background: '#eff6ff', color: '#1e40af', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{cat}</span>;
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Website URL + Pages Scraped */}
                   {store.websiteData && store.websiteData.url && (
                     <div style={{ marginBottom: 10 }}>
                       <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Website</div>
                       <a href={store.websiteData.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: '#7c3aed', wordBreak: 'break-all' }}>{store.websiteData.url}</a>
+                      {store.websiteData.pagesScraped && store.websiteData.pagesScraped > 1 && (
+                        <div style={{ fontSize: 10, color: '#a78bfa', marginTop: 2 }}>{store.websiteData.pagesScraped} Seiten gecrawlt (Deep Crawl)</div>
+                      )}
                     </div>
                   )}
-
-                  {/* Manual CI input hint */}
-                  <div style={{ marginTop: 12, padding: '8px 10px', background: '#fef3c7', borderRadius: 4, border: '1px solid #fde68a', fontSize: 10, color: '#92400e', lineHeight: 1.5 }}>
-                    <strong>Hinweis:</strong> Falls die automatisch erkannten Werte nicht stimmen, bitte direkt mit dem Kunden die korrekte CI abstimmen (Styleguide, Brandbook, Logo-Dateien).
-                  </div>
                 </div>
               </div>
             </div>
@@ -2143,9 +2371,27 @@ export default function BriefingView() {
                       </div>
                     )}
                     {heroTile.textOverlay && (
-                      <div className="briefing-field">
+                      <div className="briefing-field" style={{ flexDirection: 'column', gap: 2 }}>
                         <span className="briefing-field-label">Text on Image:</span>
-                        <span className="briefing-field-value briefing-field-text">"{heroTile.textOverlay}"</span>
+                        <div style={{ padding: '6px 8px', background: '#fefce8', border: '1px solid #fde68a', borderRadius: 4, lineHeight: 1.5 }}>
+                          {heroTile.textOverlay.split(/\\n|\n/).map(function(line, li) {
+                            var trimmed = line.trim();
+                            if (!trimmed) return <div key={li} style={{ height: 4 }} />;
+                            var isShort = trimmed.length < 40 && !/[.!,;:]$/.test(trimmed);
+                            var isBold = /^\*\*.*\*\*$/.test(trimmed);
+                            var displayText = isBold ? trimmed.replace(/^\*\*|\*\*$/g, '') : trimmed;
+                            if (isBold || isShort) {
+                              return <div key={li} style={{ fontSize: 12, fontWeight: 700, color: '#1e293b' }}>
+                                <span style={{ background: '#dbeafe', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#1d4ed8', marginRight: 4 }}>HEADING</span>
+                                {displayText}
+                              </div>;
+                            }
+                            return <div key={li} style={{ fontSize: 11, color: '#475569' }}>
+                              <span style={{ background: '#f1f5f9', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#94a3b8', marginRight: 4 }}>BODY</span>
+                              {trimmed}
+                            </div>;
+                          })}
+                        </div>
                       </div>
                     )}
                     {heroTile.ctaText && (

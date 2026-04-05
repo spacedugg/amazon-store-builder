@@ -48,6 +48,37 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
     );
   }
 
+  // Product Selector (Quiz) tile
+  if (tile.type === 'product_selector') {
+    var ps = tile.productSelector || {};
+    var qCount = (ps.questions || []).length;
+    var firstQ = (ps.questions || [])[0];
+    var aCount = firstQ ? (firstQ.answers || []).length : 0;
+    return (
+      <div className={cls} onClick={onClick} style={{ background: bgColor || '#f8f4ff', minHeight: 100 }}>
+        <div style={{ padding: '10px 12px', fontSize: 11 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
+            <span style={{ background: '#7c3aed', color: '#fff', fontSize: 9, fontWeight: 700, padding: '2px 6px', borderRadius: 3 }}>QUIZ</span>
+            <span style={{ fontWeight: 700, fontSize: 12 }}>Produktauswahl</span>
+          </div>
+          {ps.intro && ps.intro.enabled && ps.intro.headline && (
+            <div style={{ fontSize: 10, color: '#6b21a8', marginBottom: 4 }}>Intro: {ps.intro.headline}</div>
+          )}
+          {firstQ && firstQ.questionText && (
+            <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '4px 8px', marginBottom: 4, fontSize: 10 }}>
+              <strong>Q1:</strong> {firstQ.questionText}
+              {aCount > 0 && <span style={{ color: '#9ca3af', marginLeft: 4 }}>({aCount} Antworten)</span>}
+            </div>
+          )}
+          <div style={{ display: 'flex', gap: 8, fontSize: 10, color: '#7c3aed', flexWrap: 'wrap' }}>
+            <span>{qCount} Frage{qCount !== 1 ? 'n' : ''}</span>
+            {(ps.recommendedAsins || []).length > 0 && <span>{(ps.recommendedAsins || []).length} Produkte</span>}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (tile.type === 'video') {
     var aspect = dims.w / dims.h;
     var displayH = Math.round(200 / aspect);

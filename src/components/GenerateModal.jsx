@@ -275,13 +275,59 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
         <div className="hint">Enter the brand's own online store / website. AI will extract brand info, USPs, and style to enrich the store design.</div>
         {websiteError && <div className="price-error" style={{ marginTop: 4 }}>{websiteError}</div>}
         {websiteData && (
-          <div style={{ marginTop: 4, padding: '6px 8px', background: '#f0fdf4', borderRadius: 4, fontSize: 11, color: '#166534', border: '1px solid #bbf7d0' }}>
-            {websiteData.title && <div><strong>{websiteData.title}</strong></div>}
-            {websiteData.description && <div style={{ marginTop: 2, opacity: 0.8 }}>{websiteData.description.slice(0, 150)}{websiteData.description.length > 150 ? '...' : ''}</div>}
-            {websiteData.certifications && websiteData.certifications.length > 0 && (
-              <div style={{ marginTop: 2, opacity: 0.8 }}>Certifications/USPs found: {websiteData.certifications.length}</div>
+          <div style={{ marginTop: 4, padding: '8px 10px', background: '#f0fdf4', borderRadius: 6, fontSize: 11, color: '#166534', border: '1px solid #bbf7d0' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+              {websiteData.title && <strong>{websiteData.title}</strong>}
+              {websiteData.pagesScraped && (
+                <span style={{ fontSize: 10, background: '#dcfce7', padding: '1px 6px', borderRadius: 3 }}>
+                  {websiteData.pagesScraped} {websiteData.pagesScraped === 1 ? 'Seite' : 'Seiten'} gecrawlt
+                </span>
+              )}
+            </div>
+            {websiteData.description && <div style={{ opacity: 0.8 }}>{websiteData.description.slice(0, 150)}{websiteData.description.length > 150 ? '...' : ''}</div>}
+
+            {/* AI Analysis Summary */}
+            {websiteData.aiAnalysis && (
+              <div style={{ marginTop: 6, paddingTop: 6, borderTop: '1px solid #bbf7d0' }}>
+                <div style={{ fontSize: 10, fontWeight: 700, marginBottom: 3, color: '#15803d' }}>KI-Analyse</div>
+                {websiteData.aiAnalysis.brandTone && (
+                  <div style={{ marginBottom: 2 }}><span style={{ opacity: 0.6 }}>Tonalität:</span> {websiteData.aiAnalysis.brandTone}</div>
+                )}
+                {websiteData.aiAnalysis.usps && websiteData.aiAnalysis.usps.length > 0 && (
+                  <div style={{ marginBottom: 2 }}><span style={{ opacity: 0.6 }}>USPs:</span> {websiteData.aiAnalysis.usps.slice(0, 4).join(' · ')}{websiteData.aiAnalysis.usps.length > 4 ? ' +' + (websiteData.aiAnalysis.usps.length - 4) : ''}</div>
+                )}
+                {websiteData.aiAnalysis.certifications && websiteData.aiAnalysis.certifications.length > 0 && (
+                  <div style={{ marginBottom: 2 }}><span style={{ opacity: 0.6 }}>Zertifikate:</span> {websiteData.aiAnalysis.certifications.join(', ')}</div>
+                )}
+                {websiteData.aiAnalysis.targetAudience && (
+                  <div style={{ marginBottom: 2 }}><span style={{ opacity: 0.6 }}>Zielgruppe:</span> {websiteData.aiAnalysis.targetAudience}</div>
+                )}
+                {websiteData.aiAnalysis.brandValues && websiteData.aiAnalysis.brandValues.length > 0 && (
+                  <div style={{ marginBottom: 2 }}><span style={{ opacity: 0.6 }}>Markenwerte:</span> {websiteData.aiAnalysis.brandValues.join(', ')}</div>
+                )}
+                {websiteData.aiAnalysis.visualStyle && (
+                  <div><span style={{ opacity: 0.6 }}>Visueller Stil:</span> {websiteData.aiAnalysis.visualStyle}</div>
+                )}
+              </div>
             )}
-            {websiteData.aboutText && <div style={{ marginTop: 2, opacity: 0.8 }}>Brand story content found</div>}
+
+            {/* Fallback for non-AI results */}
+            {!websiteData.aiAnalysis && (
+              <div style={{ marginTop: 4 }}>
+                {websiteData.certifications && websiteData.certifications.length > 0 && (
+                  <div style={{ opacity: 0.8 }}>Zertifikate/USPs: {websiteData.certifications.length}</div>
+                )}
+                {websiteData.aboutText && <div style={{ opacity: 0.8 }}>Brand-Story-Inhalte gefunden</div>}
+                {websiteData.colors && websiteData.colors.length > 0 && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 3 }}>
+                    <span style={{ opacity: 0.6 }}>Farben:</span>
+                    {websiteData.colors.slice(0, 6).map(function(c, i) {
+                      return <span key={i} style={{ width: 14, height: 14, borderRadius: 3, background: c, border: '1px solid rgba(0,0,0,.15)', display: 'inline-block' }} />;
+                    })}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         )}
 
@@ -350,7 +396,7 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
         <div className="hint" style={{ marginBottom: 6 }}>Jede angehakte Seite wird als eigene Subpage im Store generiert. Homepage + Kategorie-Seiten entstehen immer automatisch.</div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px 16px' }}>
           {[
-            { key: 'product_selector', label: 'Produktselektor' },
+            { key: 'product_selector', label: 'Produktauswahl (Quiz)' },
             { key: 'gift_sets', label: 'Geschenk-Sets' },
             { key: 'recommendations', label: 'Unsere Empfehlungen' },
             { key: 'new_arrivals', label: 'Neuheiten' },
