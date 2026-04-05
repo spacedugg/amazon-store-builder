@@ -5,7 +5,8 @@ var IMAGEN_MODEL = 'imagen-3.0-generate-002';
 var IMAGEN_URL = 'https://generativelanguage.googleapis.com/v1beta/models/' + IMAGEN_MODEL + ':predict';
 
 // Fallback: Gemini 2.0 Flash with native image generation
-var GEMINI_FLASH_MODEL = 'gemini-2.0-flash-exp';
+// Note: gemini-2.0-flash-exp was deprecated — use current stable model
+var GEMINI_FLASH_MODEL = 'gemini-2.0-flash';
 var GEMINI_FLASH_URL = 'https://generativelanguage.googleapis.com/v1beta/models/' + GEMINI_FLASH_MODEL + ':generateContent';
 
 module.exports = async function handler(req, res) {
@@ -28,7 +29,7 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    // Try Imagen 3 first (cheaper, faster for image generation)
+    // Try Imagen 3 first (better for image generation)
     var result = await generateWithImagen(prompt, aspectRatio);
     if (result) {
       return res.status(200).json(result);
@@ -40,9 +41,10 @@ module.exports = async function handler(req, res) {
       return res.status(200).json(result);
     }
 
-    return res.status(500).json({ error: 'Image generation failed with all available models' });
+    return res.status(500).json({ error: 'Image generation failed with all available models. Check GEMINI_API_KEY permissions and billing.' });
 
   } catch (err) {
+    console.error('Wireframe generation error:', err.message);
     return res.status(500).json({ error: err.message });
   }
 };
@@ -65,7 +67,9 @@ async function generateWithImagen(prompt, aspectRatio) {
     });
 
     if (!resp.ok) {
-      // Imagen might not be available, fall through to Gemini Flash
+      var errText = await resp.text().catch(function() { return ''; });
+      console.error('Imagen API error (' + resp.status + '):', errText.slice(0, 300));
+      // Imagen might not be available — fall through to Gemini Flash
       return null;
     }
 
@@ -80,6 +84,7 @@ async function generateWithImagen(prompt, aspectRatio) {
 
     return null;
   } catch (err) {
+    console.error('Imagen exception:', err.message);
     return null;
   }
 }
@@ -91,7 +96,7 @@ async function generateWithGeminiFlash(prompt) {
         parts: [{ text: prompt }],
       }],
       generationConfig: {
-        responseModalities: ['IMAGE'],
+        responseModalities: ['TEXT', 'IMAGE'],
         maxOutputTokens: 4096,
       },
     };
@@ -102,7 +107,11 @@ async function generateWithGeminiFlash(prompt) {
       body: JSON.stringify(requestBody),
     });
 
-    if (!resp.ok) return null;
+    if (!resp.ok) {
+      var errText = await resp.text().catch(function() { return ''; });
+      console.error('Gemini Flash API error (' + resp.status + '):', errText.slice(0, 300));
+      return null;
+    }
 
     var data = await resp.json();
     if (data.candidates && data.candidates[0] && data.candidates[0].content) {
@@ -120,6 +129,7 @@ async function generateWithGeminiFlash(prompt) {
 
     return null;
   } catch (err) {
+    console.error('Gemini Flash exception:', err.message);
     return null;
   }
 }

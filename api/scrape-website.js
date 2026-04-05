@@ -1,3 +1,5 @@
+var ANTHROPIC_KEY = process.env.VITE_ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY || '';
+
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
@@ -9,7 +11,6 @@ module.exports = async function handler(req, res) {
 
   if (!url || typeof url !== 'string') return res.status(400).json({ error: 'Missing url' });
 
-  // Validate URL
   try {
     var parsed = new URL(url);
     if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
@@ -20,38 +21,49 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    // Fetch the main page
-    var controller = new AbortController();
-    var timeout = setTimeout(function() { controller.abort(); }, 15000);
+    var baseOrigin = parsed.origin;
 
-    var resp;
-    try {
-      resp = await fetch(url, {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-          'Accept-Language': 'en-US,en;q=0.5,de;q=0.3',
-        },
-        signal: controller.signal,
-        redirect: 'follow',
-      });
-    } catch (fetchErr) {
-      clearTimeout(timeout);
-      if (fetchErr.name === 'AbortError') {
-        return res.status(504).json({ error: 'Website timed out after 15 seconds' });
-      }
-      return res.status(502).json({ error: 'Could not reach website: ' + fetchErr.message });
-    }
-    clearTimeout(timeout);
-
-    if (!resp.ok) {
-      return res.status(502).json({ error: 'Website returned status ' + resp.status });
+    // ═══════════════════════════════════════════════════
+    // STEP 1: Fetch the homepage
+    // ═══════════════════════════════════════════════════
+    var homepageHtml = await fetchPage(url);
+    if (!homepageHtml) {
+      return res.status(502).json({ error: 'Could not reach website' });
     }
 
-    var html = await resp.text();
+    // ═══════════════════════════════════════════════════
+    // STEP 2: Discover internal links (important subpages)
+    // ═══════════════════════════════════════════════════
+    var internalLinks = discoverInternalLinks(homepageHtml, baseOrigin, parsed.pathname);
 
-    // Extract useful content from HTML
-    var result = extractBrandInfo(html, url);
+    // ═══════════════════════════════════════════════════
+    // STEP 3: Crawl the most important subpages (max 5)
+    // ═══════════════════════════════════════════════════
+    var subpageContents = {};
+    var crawlPromises = internalLinks.slice(0, 5).map(function(link) {
+      return fetchPage(link.url).then(function(html) {
+        if (html) subpageContents[link.category] = { url: link.url, html: html, label: link.label };
+      }).catch(function() {});
+    });
+    await Promise.all(crawlPromises);
+
+    // ═══════════════════════════════════════════════════
+    // STEP 4: Extract raw content from ALL pages
+    // ═══════════════════════════════════════════════════
+    var allContent = extractAllContent(homepageHtml, subpageContents, url);
+
+    // ═══════════════════════════════════════════════════
+    // STEP 5: AI analysis of the collected content
+    // ═══════════════════════════════════════════════════
+    var aiAnalysis = null;
+    if (ANTHROPIC_KEY && allContent.rawText.length > 100) {
+      aiAnalysis = await analyzeWithAI(allContent, url);
+    }
+
+    // ═══════════════════════════════════════════════════
+    // STEP 6: Merge extracted data + AI analysis
+    // ═══════════════════════════════════════════════════
+    var result = buildResult(allContent, aiAnalysis, url);
 
     return res.status(200).json(result);
 
@@ -60,160 +72,438 @@ module.exports = async function handler(req, res) {
   }
 };
 
-function extractBrandInfo(html, url) {
-  var info = {
+// ─── FETCH A SINGLE PAGE ───
+async function fetchPage(url) {
+  try {
+    var controller = new AbortController();
+    var timeout = setTimeout(function() { controller.abort(); }, 12000);
+    var resp = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.5,de;q=0.3',
+      },
+      signal: controller.signal,
+      redirect: 'follow',
+    });
+    clearTimeout(timeout);
+    if (!resp.ok) return null;
+    return await resp.text();
+  } catch (e) {
+    return null;
+  }
+}
+
+// ─── DISCOVER INTERNAL LINKS TO IMPORTANT SUBPAGES ───
+function discoverInternalLinks(html, baseOrigin, basePath) {
+  var links = [];
+  var seen = {};
+  var linkRegex = /<a[^>]*href=["']([^"'#]+)["'][^>]*>([\s\S]*?)<\/a>/gi;
+  var match;
+
+  // Priority patterns — which pages are most valuable for brand intelligence
+  var priorities = [
+    { pattern: /(?:about|ueber-uns|über-uns|about-us|our-story|unsere-geschichte|unternehmen|who-we-are)/i, category: 'about', priority: 10 },
+    { pattern: /(?:nachhaltig|sustainab|umwelt|environment|responsibility|verantwortung|green)/i, category: 'sustainability', priority: 9 },
+    { pattern: /(?:qualit|quality|herstellung|production|manufacturing|how.?(?:we|it).?(?:work|made|produce))/i, category: 'quality', priority: 8 },
+    { pattern: /(?:philosophy|philosophie|mission|vision|values|werte)/i, category: 'values', priority: 8 },
+    { pattern: /(?:product|produkt|collection|kollektion|shop|sortiment|all-products|alle-produkte)/i, category: 'products', priority: 7 },
+    { pattern: /(?:ingredient|zutaten|inhaltsstoffe|material|rohstoff)/i, category: 'ingredients', priority: 7 },
+    { pattern: /(?:faq|haeufig|häufig|frequently|help|hilfe)/i, category: 'faq', priority: 5 },
+    { pattern: /(?:blog|magazine|magazin|journal|news|aktuell|ratgeber)/i, category: 'blog', priority: 4 },
+    { pattern: /(?:contact|kontakt|customer.?service|kundenservice)/i, category: 'contact', priority: 3 },
+  ];
+
+  while ((match = linkRegex.exec(html)) !== null) {
+    var href = match[1].trim();
+    var label = cleanText(stripTags(match[2])).slice(0, 100);
+
+    // Resolve relative URLs
+    var fullUrl;
+    try {
+      if (href.startsWith('http')) {
+        fullUrl = href;
+      } else if (href.startsWith('/')) {
+        fullUrl = baseOrigin + href;
+      } else {
+        fullUrl = baseOrigin + '/' + href;
+      }
+      // Must be same origin
+      var linkParsed = new URL(fullUrl);
+      if (linkParsed.origin !== baseOrigin) continue;
+    } catch (e) { continue; }
+
+    // Skip the homepage itself, anchors, assets
+    if (fullUrl === baseOrigin + basePath || fullUrl === baseOrigin + '/') continue;
+    if (/\.(jpg|jpeg|png|gif|svg|css|js|pdf|zip|mp4|webp)(\?|$)/i.test(fullUrl)) continue;
+    if (seen[fullUrl]) continue;
+    seen[fullUrl] = true;
+
+    // Check priority
+    var bestPriority = 0;
+    var bestCategory = 'other';
+    priorities.forEach(function(p) {
+      if ((p.pattern.test(href) || p.pattern.test(label)) && p.priority > bestPriority) {
+        bestPriority = p.priority;
+        bestCategory = p.category;
+      }
+    });
+
+    if (bestPriority > 0) {
+      links.push({ url: fullUrl, category: bestCategory, label: label, priority: bestPriority });
+    }
+  }
+
+  // Sort by priority, highest first
+  links.sort(function(a, b) { return b.priority - a.priority; });
+
+  // Deduplicate by category (only one page per category)
+  var usedCategories = {};
+  return links.filter(function(l) {
+    if (usedCategories[l.category]) return false;
+    usedCategories[l.category] = true;
+    return true;
+  });
+}
+
+// ─── EXTRACT CONTENT FROM ALL CRAWLED PAGES ───
+function extractAllContent(homepageHtml, subpageContents, url) {
+  var result = {
     url: url,
     title: '',
     description: '',
     brandName: '',
     tagline: '',
+    // Collected text from ALL pages, categorized
     aboutText: '',
-    productInfo: [],
-    features: [],
+    sustainabilityText: '',
+    qualityText: '',
+    valuesText: '',
+    productDescriptions: [],
+    ingredientsText: '',
+    faqItems: [],
+    // Structured extractions
     certifications: [],
+    features: [],
     socialProof: [],
-    rawTextSections: [],
+    colors: [],
+    fonts: [],
+    // Raw text for AI
+    rawText: '',
+    pagesScraped: 1,
+    subpagesFound: Object.keys(subpageContents).length,
   };
 
-  // Extract <title>
+  // ── HOMEPAGE EXTRACTION ──
+  var homeInfo = extractFromPage(homepageHtml, 'homepage');
+  result.title = homeInfo.title;
+  result.description = homeInfo.description;
+  result.brandName = homeInfo.brandName;
+  result.tagline = homeInfo.tagline;
+  result.colors = homeInfo.colors;
+  result.fonts = homeInfo.fonts;
+  result.certifications = homeInfo.certifications.slice();
+  result.features = homeInfo.features.slice();
+  result.socialProof = homeInfo.socialProof.slice();
+  result.rawText += '=== HOMEPAGE ===\n' + homeInfo.mainText.slice(0, 3000) + '\n\n';
+
+  // ── SUBPAGE EXTRACTION ──
+  Object.keys(subpageContents).forEach(function(category) {
+    var page = subpageContents[category];
+    var pageInfo = extractFromPage(page.html, category);
+    result.pagesScraped++;
+
+    result.rawText += '=== ' + category.toUpperCase() + ' PAGE (' + page.label + ') ===\n' + pageInfo.mainText.slice(0, 3000) + '\n\n';
+
+    // Merge certifications (deduplicated)
+    var certSet = {};
+    result.certifications.forEach(function(c) { certSet[c.toLowerCase().slice(0, 30)] = true; });
+    pageInfo.certifications.forEach(function(c) {
+      var key = c.toLowerCase().slice(0, 30);
+      if (!certSet[key]) { result.certifications.push(c); certSet[key] = true; }
+    });
+
+    // Merge features
+    pageInfo.features.forEach(function(f) { result.features.push(f); });
+
+    // Merge colors
+    var colorSet = {};
+    result.colors.forEach(function(c) { colorSet[c] = true; });
+    pageInfo.colors.forEach(function(c) { if (!colorSet[c]) { result.colors.push(c); colorSet[c] = true; } });
+
+    // Merge fonts
+    var fontSet = {};
+    result.fonts.forEach(function(f) { fontSet[f.toLowerCase()] = true; });
+    pageInfo.fonts.forEach(function(f) { if (!fontSet[f.toLowerCase()]) { result.fonts.push(f); fontSet[f.toLowerCase()] = true; } });
+
+    // Category-specific text
+    if (category === 'about') result.aboutText = pageInfo.mainText.slice(0, 3000);
+    if (category === 'sustainability') result.sustainabilityText = pageInfo.mainText.slice(0, 2000);
+    if (category === 'quality') result.qualityText = pageInfo.mainText.slice(0, 2000);
+    if (category === 'values') result.valuesText = pageInfo.mainText.slice(0, 2000);
+    if (category === 'ingredients') result.ingredientsText = pageInfo.mainText.slice(0, 2000);
+    if (category === 'products') {
+      pageInfo.productDescriptions.forEach(function(pd) { result.productDescriptions.push(pd); });
+    }
+  });
+
+  // Trim collections
+  result.certifications = result.certifications.slice(0, 15);
+  result.features = result.features.slice(0, 20);
+  result.colors = result.colors.slice(0, 10);
+  result.fonts = result.fonts.slice(0, 6);
+  // Trim rawText to fit AI context
+  result.rawText = result.rawText.slice(0, 12000);
+
+  return result;
+}
+
+// ─── EXTRACT DATA FROM A SINGLE PAGE ───
+function extractFromPage(html, category) {
+  var info = {
+    title: '', description: '', brandName: '', tagline: '',
+    mainText: '', certifications: [], features: [], socialProof: [],
+    productDescriptions: [], colors: [], fonts: [],
+  };
+
+  // ── META TAGS ──
   var titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
   if (titleMatch) info.title = cleanText(titleMatch[1]);
-
-  // Extract meta description
   var metaDesc = html.match(/<meta[^>]*name=["']description["'][^>]*content=["']([^"']+)["']/i);
   if (!metaDesc) metaDesc = html.match(/<meta[^>]*content=["']([^"']+)["'][^>]*name=["']description["']/i);
   if (metaDesc) info.description = cleanText(metaDesc[1]);
-
-  // Extract Open Graph meta tags
-  var ogTitle = html.match(/<meta[^>]*property=["']og:title["'][^>]*content=["']([^"']+)["']/i);
-  if (ogTitle && !info.title) info.title = cleanText(ogTitle[1]);
-
-  var ogDesc = html.match(/<meta[^>]*property=["']og:description["'][^>]*content=["']([^"']+)["']/i);
-  if (ogDesc && !info.description) info.description = cleanText(ogDesc[1]);
-
   var ogSiteName = html.match(/<meta[^>]*property=["']og:site_name["'][^>]*content=["']([^"']+)["']/i);
   if (ogSiteName) info.brandName = cleanText(ogSiteName[1]);
 
-  // Extract all headings
+  // ── STRIP NAVIGATION/HEADER/FOOTER for main content extraction ──
+  var contentHtml = html
+    .replace(/<nav[^>]*>[\s\S]*?<\/nav>/gi, '')
+    .replace(/<header[^>]*>[\s\S]*?<\/header>/gi, '')
+    .replace(/<footer[^>]*>[\s\S]*?<\/footer>/gi, '')
+    .replace(/<(?:ul|ol|div)[^>]*(?:class|id)=["'][^"']*(?:menu|nav|navigation|breadcrumb|sidebar|cookie|popup|modal|banner|announcement)[^"']*["'][^>]*>[\s\S]*?<\/(?:ul|ol|div)>/gi, '');
+
+  // ── HEADINGS ──
   var headings = [];
-  var headingRegex = /<h[1-3][^>]*>([\s\S]*?)<\/h[1-3]>/gi;
+  var headingRegex = /<h[1-4][^>]*>([\s\S]*?)<\/h[1-4]>/gi;
   var hMatch;
-  while ((hMatch = headingRegex.exec(html)) !== null) {
+  while ((hMatch = headingRegex.exec(contentHtml)) !== null) {
     var text = cleanText(stripTags(hMatch[1]));
     if (text && text.length > 2 && text.length < 200) headings.push(text);
   }
 
-  // Extract paragraphs (skip very short ones and navigation text)
-  var paragraphs = [];
-  var pRegex = /<p[^>]*>([\s\S]*?)<\/p>/gi;
-  var pMatch;
-  while ((pMatch = pRegex.exec(html)) !== null) {
-    var pText = cleanText(stripTags(pMatch[1]));
-    if (pText && pText.length > 30 && pText.length < 2000) {
-      paragraphs.push(pText);
-    }
-  }
-
-  // Extract list items (often contain features/USPs)
-  var listItems = [];
-  var liRegex = /<li[^>]*>([\s\S]*?)<\/li>/gi;
-  var liMatch;
-  while ((liMatch = liRegex.exec(html)) !== null) {
-    var liText = cleanText(stripTags(liMatch[1]));
-    if (liText && liText.length > 5 && liText.length < 300) {
-      listItems.push(liText);
-    }
-  }
-
-  // Look for "about" sections
-  var aboutPatterns = [
-    /<(?:section|div|article)[^>]*(?:class|id)=["'][^"']*(?:about|story|mission|philosophy|vision|ueber-uns|über-uns|brand|history|heritage|unternehmen)[^"']*["'][^>]*>([\s\S]*?)<\/(?:section|div|article)>/gi,
-  ];
-  aboutPatterns.forEach(function(pattern) {
-    var m;
-    while ((m = pattern.exec(html)) !== null) {
-      var sectionText = cleanText(stripTags(m[1]));
-      if (sectionText && sectionText.length > 50) {
-        info.aboutText += sectionText.slice(0, 1000) + ' ';
-      }
-    }
-  });
-  info.aboutText = info.aboutText.trim().slice(0, 2000);
-
-  // Look for certifications / trust signals
-  var certPatterns = /(?:zertifizier|certif|bio|organic|vegan|nachhaltig|sustainab|fair.?trade|iso\s?\d|tuv|tüv|dermatologisch|tested|geprüft|made.in|hergestellt|award|ausgezeichn)/gi;
-  var allText = stripTags(html);
-  var certMatches = allText.match(new RegExp('[^.!?]*(?:' + certPatterns.source + ')[^.!?]*[.!?]', 'gi'));
-  if (certMatches) {
-    info.certifications = certMatches.slice(0, 10).map(function(s) { return cleanText(s).slice(0, 200); });
-  }
-
-  // Look for product-related sections
-  var productPatterns = [
-    /<(?:section|div|article)[^>]*(?:class|id)=["'][^"']*(?:product|produkt|collection|kollektion|bestseller|shop|sortiment|assortment)[^"']*["'][^>]*>([\s\S]*?)<\/(?:section|div|article)>/gi,
-  ];
-  productPatterns.forEach(function(pattern) {
-    var m;
-    while ((m = pattern.exec(html)) !== null) {
-      var sectionText = cleanText(stripTags(m[1]));
-      if (sectionText && sectionText.length > 30) {
-        info.productInfo.push(sectionText.slice(0, 500));
-      }
-    }
-  });
-  info.productInfo = info.productInfo.slice(0, 5);
-
-  // Look for social proof / reviews / testimonials
-  var socialPatterns = [
-    /<(?:section|div|article)[^>]*(?:class|id)=["'][^"']*(?:review|testimonial|bewertung|feedback|kunden|customer|social.?proof)[^"']*["'][^>]*>([\s\S]*?)<\/(?:section|div|article)>/gi,
-  ];
-  socialPatterns.forEach(function(pattern) {
-    var m;
-    while ((m = pattern.exec(html)) !== null) {
-      var sectionText = cleanText(stripTags(m[1]));
-      if (sectionText && sectionText.length > 20) {
-        info.socialProof.push(sectionText.slice(0, 300));
-      }
-    }
-  });
-  info.socialProof = info.socialProof.slice(0, 5);
-
-  // Compile features from headings and list items
-  var featureKeywords = /(?:vorteil|benefit|feature|merkmal|eigenschaft|quality|qualität|vorteile|advantages|why|warum|highlights|usp)/i;
-  info.features = listItems.filter(function(li) {
-    return li.length > 10 && li.length < 150;
-  }).slice(0, 15);
-
-  // Determine tagline (first meaningful heading that isn't the brand name)
+  // Tagline from first meaningful heading
   for (var hi = 0; hi < headings.length; hi++) {
-    var h = headings[hi];
-    if (h.length > 5 && h.length < 100 && h.toLowerCase() !== info.brandName.toLowerCase()) {
-      info.tagline = h;
+    if (headings[hi].length > 5 && headings[hi].length < 100 &&
+        headings[hi].toLowerCase() !== (info.brandName || '').toLowerCase()) {
+      info.tagline = headings[hi];
       break;
     }
   }
 
-  // Build rawTextSections for AI consumption (curated, deduplicated)
-  var seenTexts = {};
-  var addRawText = function(text, source) {
-    if (!text || text.length < 20) return;
-    var key = text.slice(0, 50).toLowerCase();
-    if (seenTexts[key]) return;
-    seenTexts[key] = true;
-    info.rawTextSections.push({ text: text.slice(0, 500), source: source });
-  };
+  // ── PARAGRAPHS ──
+  var paragraphs = [];
+  var pRegex = /<p[^>]*>([\s\S]*?)<\/p>/gi;
+  var pMatch;
+  while ((pMatch = pRegex.exec(contentHtml)) !== null) {
+    var pText = cleanText(stripTags(pMatch[1]));
+    if (pText && pText.length > 20 && pText.length < 3000) paragraphs.push(pText);
+  }
 
-  // Add key headings
-  headings.slice(0, 10).forEach(function(h) { addRawText(h, 'heading'); });
+  // ── LIST ITEMS ──
+  var listItems = [];
+  var liRegex = /<li[^>]*>([\s\S]*?)<\/li>/gi;
+  var liMatch;
+  while ((liMatch = liRegex.exec(contentHtml)) !== null) {
+    var liText = cleanText(stripTags(liMatch[1]));
+    if (liText && liText.length > 5 && liText.length < 300) listItems.push(liText);
+  }
 
-  // Add most relevant paragraphs (longer ones tend to be more informative)
-  paragraphs.sort(function(a, b) { return b.length - a.length; });
-  paragraphs.slice(0, 8).forEach(function(p) { addRawText(p, 'paragraph'); });
+  // ── MAIN TEXT (headings + paragraphs combined) ──
+  var mainParts = [];
+  headings.slice(0, 20).forEach(function(h) { mainParts.push('## ' + h); });
+  paragraphs.forEach(function(p) { mainParts.push(p); });
+  listItems.filter(function(l) { return l.length > 15; }).slice(0, 30).forEach(function(l) { mainParts.push('- ' + l); });
+  info.mainText = mainParts.join('\n').slice(0, 5000);
 
-  // Trim rawTextSections to reasonable size
-  info.rawTextSections = info.rawTextSections.slice(0, 15);
+  // ── CERTIFICATIONS ──
+  var certPatterns = /(?:zertifizier|certif|bio\b|organic|vegan|nachhaltig|sustainab|fair.?trade|iso\s?\d|tuv|tüv|dermatologisch|tested|geprüft|made.in|hergestellt|award|ausgezeichn|cruelty.?free|recycl|klimaneutral|co2|plastic.?free|gots|oeko.?tex|blauer.?engel|fsc|pefc)/gi;
+  var allText = stripTags(contentHtml);
+  var certMatches = allText.match(new RegExp('[^.!?]*(?:' + certPatterns.source + ')[^.!?]*[.!?]', 'gi'));
+  if (certMatches) {
+    var seenCerts = {};
+    info.certifications = certMatches
+      .map(function(s) { return cleanText(s).slice(0, 200); })
+      .filter(function(s) {
+        if (/(?:open\s|menu|navigation|home\s|kontakt|warenkorb|cart|search|suche|anmelden|login|registr|cookie|datenschutz|impressum|agb)/i.test(s)) return false;
+        if (s.length < 15 || s.length > 180) return false;
+        var key = s.toLowerCase().slice(0, 40);
+        if (seenCerts[key]) return false;
+        seenCerts[key] = true;
+        return true;
+      })
+      .slice(0, 10);
+  }
+
+  // ── FEATURES ──
+  info.features = listItems.filter(function(li) {
+    return li.length > 10 && li.length < 150;
+  }).slice(0, 15);
+
+  // ── COLORS & FONTS ──
+  var styleBlocks = html.match(/<style[^>]*>([\s\S]*?)<\/style>/gi) || [];
+  var allCss = styleBlocks.map(function(s) { return s.replace(/<\/?style[^>]*>/gi, ''); }).join(' ');
+  // CSS custom properties (often brand colors)
+  var cssVarMatch = allCss.match(/--[a-zA-Z-]*(?:color|brand|primary|secondary|accent)[^:]*:\s*([^;}{]+)/gi) || [];
+  cssVarMatch.forEach(function(m) {
+    var valMatch = m.match(/#[0-9A-Fa-f]{3,6}\b/);
+    if (valMatch) {
+      var c = valMatch[0].toLowerCase();
+      if (!isGenericColor(c)) info.colors.push(c);
+    }
+  });
+  // Regular hex colors
+  var hexColors = allCss.match(/#[0-9A-Fa-f]{3,6}\b/g) || [];
+  var colorSet = {};
+  info.colors.forEach(function(c) { colorSet[c] = true; });
+  hexColors.forEach(function(c) {
+    var n = c.toLowerCase();
+    if (!isGenericColor(n) && !colorSet[n]) { info.colors.push(n); colorSet[n] = true; }
+  });
+  info.colors = info.colors.slice(0, 8);
+
+  // Fonts
+  var fontMatches = allCss.match(/font-family\s*:\s*([^;}{]+)/gi) || [];
+  var fontSet = {};
+  fontMatches.forEach(function(f) {
+    var family = f.replace(/font-family\s*:\s*/i, '').replace(/['"]/g, '').split(',')[0].trim();
+    if (family && family.length > 1 && family.length < 60 && !fontSet[family.toLowerCase()] &&
+        !/^(serif|sans-serif|monospace|cursive|fantasy|system-ui|inherit|initial|unset|-apple-system|BlinkMacSystemFont)$/i.test(family)) {
+      fontSet[family.toLowerCase()] = true;
+      info.fonts.push(family);
+    }
+  });
+  info.fonts = info.fonts.slice(0, 4);
 
   return info;
+}
+
+// ─── AI ANALYSIS OF COLLECTED WEBSITE CONTENT ───
+async function analyzeWithAI(content, url) {
+  if (!ANTHROPIC_KEY) return null;
+
+  var system = [
+    'You are a brand analyst. Analyze the crawled website content and extract structured brand intelligence.',
+    'Return ONLY valid JSON with these fields:',
+    '{',
+    '  "brandStory": "2-3 sentence brand story/origin based on the about page content",',
+    '  "brandTone": "2-4 adjectives describing the brand personality (e.g. natural, premium, playful)",',
+    '  "usps": ["list of 3-6 unique selling propositions"],',
+    '  "certifications": ["list of actual certifications/seals found (e.g. Vegan, Bio, FSC, Made in Germany)"],',
+    '  "targetAudience": "1 sentence describing the target customer",',
+    '  "productCategories": ["main product categories found"],',
+    '  "sustainabilityFocus": "1-2 sentences about sustainability if mentioned, or empty string",',
+    '  "keyIngredients": ["key ingredients or materials if relevant, or empty array"],',
+    '  "brandValues": ["3-5 core brand values"],',
+    '  "visualStyle": "2-3 words describing the visual/design style (e.g. minimalist, earthy, bold)"',
+    '}',
+  ].join('\n');
+
+  var user = [
+    'Website: ' + url,
+    'Pages scraped: ' + content.pagesScraped + ' (Homepage + ' + content.subpagesFound + ' subpages)',
+    '',
+    content.rawText,
+  ].join('\n');
+
+  try {
+    var resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': ANTHROPIC_KEY,
+        'anthropic-version': '2023-06-01',
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1500,
+        system: system,
+        messages: [{ role: 'user', content: user }],
+      }),
+    });
+
+    if (!resp.ok) return null;
+    var data = await resp.json();
+    var text = (data.content || []).map(function(b) { return b.text || ''; }).join('');
+    // Extract JSON
+    var jsonStart = text.indexOf('{');
+    var jsonEnd = text.lastIndexOf('}');
+    if (jsonStart < 0 || jsonEnd < 0) return null;
+    return JSON.parse(text.slice(jsonStart, jsonEnd + 1));
+  } catch (e) {
+    return null;
+  }
+}
+
+// ─── BUILD FINAL RESULT ───
+function buildResult(content, aiAnalysis, url) {
+  var result = {
+    url: url,
+    title: content.title,
+    description: content.description,
+    brandName: content.brandName,
+    tagline: content.tagline,
+    aboutText: content.aboutText || '',
+    sustainabilityText: content.sustainabilityText || '',
+    qualityText: content.qualityText || '',
+    valuesText: content.valuesText || '',
+    ingredientsText: content.ingredientsText || '',
+    productInfo: content.productDescriptions.slice(0, 5),
+    features: content.features.slice(0, 20),
+    certifications: content.certifications.slice(0, 15),
+    socialProof: content.socialProof.slice(0, 5),
+    colors: content.colors.slice(0, 10),
+    fonts: content.fonts.slice(0, 6),
+    rawTextSections: [],
+    pagesScraped: content.pagesScraped,
+    // AI-enriched fields
+    aiAnalysis: aiAnalysis || null,
+  };
+
+  // If AI analysis found better data, merge it
+  if (aiAnalysis) {
+    if (aiAnalysis.brandStory && (!result.aboutText || result.aboutText.length < 50)) {
+      result.aboutText = aiAnalysis.brandStory;
+    }
+    if (aiAnalysis.brandTone) result.brandTone = aiAnalysis.brandTone;
+    if (aiAnalysis.usps && aiAnalysis.usps.length > 0) {
+      // AI USPs are cleaner — prepend them
+      result.features = aiAnalysis.usps.concat(result.features).slice(0, 20);
+    }
+    if (aiAnalysis.certifications && aiAnalysis.certifications.length > 0) {
+      // AI certifications are cleaner — use them as primary
+      result.certifications = aiAnalysis.certifications;
+    }
+    if (aiAnalysis.targetAudience) result.targetAudience = aiAnalysis.targetAudience;
+    if (aiAnalysis.productCategories) result.productCategories = aiAnalysis.productCategories;
+    if (aiAnalysis.sustainabilityFocus) result.sustainabilityFocus = aiAnalysis.sustainabilityFocus;
+    if (aiAnalysis.keyIngredients) result.keyIngredients = aiAnalysis.keyIngredients;
+    if (aiAnalysis.brandValues) result.brandValues = aiAnalysis.brandValues;
+    if (aiAnalysis.visualStyle) result.visualStyle = aiAnalysis.visualStyle;
+  }
+
+  // Build rawTextSections for backward compatibility
+  var rawText = content.rawText || '';
+  var sections = rawText.split(/===\s*[A-Z]+\s*(?:PAGE[^=]*)?\s*===/g).filter(function(s) { return s.trim().length > 20; });
+  sections.slice(0, 15).forEach(function(s, i) {
+    result.rawTextSections.push({ text: s.trim().slice(0, 500), source: i === 0 ? 'homepage' : 'subpage' });
+  });
+
+  return result;
+}
+
+// ─── HELPERS ───
+function isGenericColor(c) {
+  return /^#(?:fff|000|f{6}|0{6}|[def]{3}|[def]{6}|[0-3]{3}|[0-3]{6}|ccc|ddd|eee|aaa|bbb|999|888|777|666|555|444|333|222|111)$/i.test(c);
 }
 
 function stripTags(html) {
