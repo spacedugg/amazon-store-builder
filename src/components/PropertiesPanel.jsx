@@ -199,6 +199,14 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
             <TextFieldWithBold value={tile.brief || ''} onChange={function(v) { u('brief', v); }}
               rows={3} placeholder={t('props.designerBriefPlaceholder', uiLang)} className="input" />
           </div>
+          {tile.wireframeDescription && (
+            <div className="props-section">
+              <label className="label" style={{ color: '#7c3aed' }}>Bildbeschreibung (intern, nicht für Designer)</label>
+              <div style={{ fontSize: 10, lineHeight: 1.5, padding: '6px 8px', background: '#faf5ff', border: '1px solid #e9d5ff', borderRadius: 4, color: '#6b21a8' }}>
+                {tile.wireframeDescription}
+              </div>
+            </div>
+          )}
           <div className="props-section">
             <label className="label">{t('props.textOverlay', uiLang)}</label>
 

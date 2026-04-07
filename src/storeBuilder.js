@@ -2679,116 +2679,108 @@ function getClosestAspectRatio(w, h) {
   return closest.label;
 }
 
-// Build wireframe prompt based on tile properties and image category
+// Build image description for wireframe generation.
+// This produces a VISUAL description of the final image — not a wireframe/mockup/layout.
+// The description is stored as tile.wireframeDescription (internal, not shown to designer).
 function buildWireframePrompt(tile, brand, ciColors, ciBrandStyle, analysis) {
   var cat = tile.imageCategory || 'creative';
   var brief = tile.brief || '';
   var textOverlay = tile.textOverlay || '';
-  var isShoppable = tile.type === 'shoppable_image';
-  var hotspotCount = (tile.hotspots || []).length;
 
-  // Base style instruction: graphic design concept, NOT wireframe/mockup
-  var styleBase = [
-    'Create a graphic design concept for a marketing banner image.',
-    'This is a SINGLE standalone graphic — like a poster or ad banner.',
-    'DO NOT draw any webpage, mockup, browser, navigation, sidebar, device frame, or multi-panel layout.',
-    'DO NOT show multiple sections, grids of thumbnails, or a page layout. Just ONE image.',
-    'Style: clean, modern illustration with brand colors. Minimalistic but polished.',
-    'Use flat design, subtle gradients, and the brand\'s color palette.',
-  ].join(' ');
-
-  // Add brand context with full CI data
-  var brandContext = 'Brand: ' + brand + '.';
-  if (ciColors) brandContext += ' Brand colors: ' + ciColors + ' (use these EXACT colors as the primary palette in the sketch — not generic colors).';
-  if (analysis.brandTone) brandContext += ' Brand tone: ' + analysis.brandTone + '.';
-
-  // Product CI visual identity (from Gemini analysis of listing images)
+  // ─── DESIGN LANGUAGE (consistent across all images in this store) ───
   var ciData = analysis.productCI || null;
+  var designLanguage = [];
+  designLanguage.push('A single image, edge-to-edge, no frame or border.');
+  designLanguage.push('NOT a webpage, NOT a mockup, NOT a multi-panel layout. Just one standalone image.');
+
+  // CI-based design direction
   if (ciData) {
-    brandContext += ' VISUAL IDENTITY (extracted from brand\'s product images):';
-    if (ciData.visualMood) brandContext += ' Mood: ' + ciData.visualMood + '.';
-    if (ciData.backgroundPattern) brandContext += ' Backgrounds: ' + ciData.backgroundPattern + '.';
-    if (ciData.typographyStyle) brandContext += ' Typography: ' + ciData.typographyStyle + '.';
-    if (ciData.photographyStyle) brandContext += ' Photography: ' + ciData.photographyStyle + '.';
-    if (ciData.recurringElements && ciData.recurringElements.length > 0) brandContext += ' Recurring elements: ' + ciData.recurringElements.join(', ') + '.';
-    brandContext += ' IMPORTANT: The sketch MUST reflect this brand\'s visual identity — use the brand colors, patterns, and mood described above. Do NOT use generic/default wireframe styling.';
+    if (ciData.visualMood) designLanguage.push('Visual style: ' + ciData.visualMood + '.');
+    if (ciData.backgroundPattern) designLanguage.push('Background style: ' + ciData.backgroundPattern + '.');
+    if (ciData.typographyStyle) designLanguage.push('Typography: ' + ciData.typographyStyle + '.');
+    if (ciData.recurringElements && ciData.recurringElements.length > 0) {
+      designLanguage.push('Design elements: ' + ciData.recurringElements.slice(0, 4).join(', ') + '.');
+    }
+  } else if (analysis.brandTone) {
+    designLanguage.push('Style: ' + analysis.brandTone + '.');
   }
 
-  // Category-specific sketch instructions
-  var categoryPrompt = '';
+  // Colors — product-specific if available, otherwise brand palette
+  if (ciColors) {
+    designLanguage.push('Color palette: ' + ciColors + '.');
+  }
+
+  // ─── IMAGE CONTENT (what the image shows) ───
+  var content = [];
   switch (cat) {
     case 'store_hero':
-      categoryPrompt = [
-        'Wide panoramic marketing banner.',
-        'Background: brand-colored gradient or lifestyle photography.',
-        textOverlay ? 'Headline text: "' + textOverlay.substring(0, 60) + '" in bold display typography.' : 'Large bold headline text area.',
-        'Brand logo in top-left corner (small).',
-        'Composition: bold, cinematic, impactful.',
-      ].join(' ');
+      content.push('Wide panoramic image.');
+      if (textOverlay) content.push('Text: "' + textOverlay.substring(0, 60) + '".');
+      content.push('Brand atmosphere, bold composition.');
       break;
-
     case 'benefit':
-      categoryPrompt = [
-        'Clean benefit/USP graphic.',
-        textOverlay ? 'Text: "' + textOverlay.substring(0, 40) + '".' : 'USP statement text.',
-        'Simple icon or symbol next to the text.',
-        'Flat design, brand colors as background. No photos.',
-      ].join(' ');
+      if (textOverlay) content.push('Text: "' + textOverlay.substring(0, 50) + '".');
+      content.push('Clean graphical element. No product photo.');
       break;
-
     case 'product':
-      categoryPrompt = [
-        'Product showcase image.',
-        'A single supplement/product package centered on clean background.',
-        'Subtle shadow beneath the product.',
-        isShoppable && hotspotCount > 0 ? hotspotCount + ' small dot indicators near the product.' : '',
-        'Professional product photography feel.',
-      ].join(' ');
+      content.push('Product centered on clean background.');
       break;
-
     case 'creative':
-      categoryPrompt = [
-        'Marketing graphic with mixed elements.',
-        brief.indexOf('Badge') >= 0 || brief.indexOf('badge') >= 0 ? 'A badge/seal element.' : '',
-        textOverlay ? 'Text: "' + textOverlay.substring(0, 50) + '".' : '',
-        'Brand colors as primary palette. Graphic design elements, icons, shapes.',
-        'Engaging composition combining text and visual elements.',
-      ].join(' ');
+      if (textOverlay) content.push('Text: "' + textOverlay.substring(0, 50) + '".');
+      content.push('Graphic composition with text and visual elements.');
       break;
-
     case 'lifestyle':
-      categoryPrompt = [
-        'Lifestyle photograph scene.',
-        'A person using or interacting with the product in a natural setting.',
-        'Warm, natural lighting. Inviting atmosphere.',
-        textOverlay ? 'Small text overlay: "' + textOverlay.substring(0, 50) + '".' : '',
-        'The product is visible but the scene/mood dominates.',
-      ].join(' ');
+      content.push('Lifestyle scene with product in natural context.');
+      if (textOverlay) content.push('Subtle text: "' + textOverlay.substring(0, 40) + '".');
       break;
-
     case 'text_image':
-      categoryPrompt = [
-        'Typography-focused graphic.',
-        textOverlay ? 'Large prominent text: "' + textOverlay.substring(0, 60) + '".' : 'Bold headline text.',
-        'Brand colors as background. Minimal imagery.',
-        'Clean, modern typography. The text IS the design.',
-      ].join(' ');
+      if (textOverlay) content.push('Prominent text: "' + textOverlay.substring(0, 60) + '".');
+      content.push('Typography-driven. Minimal imagery.');
       break;
-
     default:
-      categoryPrompt = 'Marketing graphic based on the brief description below.';
+      content.push('Image based on the description below.');
   }
 
-  // Add brief context (shortened)
-  var briefContext = '';
+  // Add brief as content context (shortened, stripped of tags)
   if (brief) {
-    // Strip the [CATEGORY] prefix
     var cleanBrief = brief.replace(/^\[[\w_]+\]\s*/, '');
-    if (cleanBrief.length > 150) cleanBrief = cleanBrief.substring(0, 150) + '...';
-    briefContext = 'Content description: ' + cleanBrief;
+    if (cleanBrief.length > 120) cleanBrief = cleanBrief.substring(0, 120) + '...';
+    content.push(cleanBrief);
   }
 
-  return [styleBase, brandContext, categoryPrompt, briefContext].filter(Boolean).join('\n');
+  return designLanguage.concat(content).filter(Boolean).join(' ');
+}
+
+// Generate the internal wireframe description for a tile (CI-aware, not shown to designer).
+// Called during wireframe generation to create the prompt AND store the description.
+function buildWireframeDescription(tile, brand, analysis) {
+  var cat = tile.imageCategory || 'creative';
+  var brief = tile.brief || '';
+  var textOverlay = tile.textOverlay || '';
+  var ciData = analysis.productCI || null;
+
+  var parts = [];
+  parts.push('[' + cat.toUpperCase() + ']');
+
+  // Content description
+  var cleanBrief = brief.replace(/^\[[\w_]+\]\s*/, '').trim();
+  if (cleanBrief) parts.push(cleanBrief);
+
+  // Text content
+  if (textOverlay) {
+    var lines = textOverlay.split(/\\n|\n/).filter(function(l) { return l.trim(); });
+    parts.push('Text: ' + lines.join(' | '));
+  }
+
+  // CI notes for this image
+  if (ciData) {
+    var ciNotes = [];
+    if (ciData.visualMood) ciNotes.push(ciData.visualMood);
+    if (ciData.backgroundPattern) ciNotes.push('BG: ' + ciData.backgroundPattern);
+    if (ciNotes.length > 0) parts.push('CI: ' + ciNotes.join(', '));
+  }
+
+  return parts.join(' — ');
 }
 
 // Call the wireframe generation API endpoint
@@ -2860,6 +2852,8 @@ export async function generateWireframesForPage(page, brand, websiteData, analys
     var tile = entry.tile;
     try {
       log(i + 1, tiles.length, tile.imageCategory || 'image');
+      // Build and store the internal wireframe description (CI-aware, for internal dashboard)
+      tile.wireframeDescription = buildWireframeDescription(tile, brand, analysis || {});
       var wfPrompt = buildWireframePrompt(tile, brand, ciColors, ciBrandStyle, analysis || {});
       var aspectW = (tile.dimensions || {}).w || 3000;
       var aspectH = (tile.dimensions || {}).h || 1200;
