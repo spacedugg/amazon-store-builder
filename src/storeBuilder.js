@@ -629,7 +629,7 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
 }
 
 // ─── STEP 2: LAYOUT PER PAGE ───
-export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, isHomepage, allCategories, analysis, userInstructions, complexityLevel, category, template, websiteData, referenceAnalysis, isSubpage) {
+export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, isHomepage, allCategories, analysis, userInstructions, complexityLevel, category, template, websiteData, referenceAnalysis, isSubpage, structuralBlueprint) {
   // Derive skipCategoryPages: small catalog with 1 category = all products on homepage
   var skipCategoryPages = isHomepage && pageProducts.length <= 4 && allCategories.length <= 1;
   var productList = pageProducts.map(function(p) {
@@ -1182,6 +1182,33 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
             : '7. NAVIGATION BANNER (layout "1"): imageCategory="text_image". Simple text banner with a short headline and CTA. No elaborate design description.',
           '',
           '',
+          // ─── STRUCTURAL BLUEPRINT FROM FIRST CATEGORY PAGE ───
+          structuralBlueprint && !isSubpage ? [
+            '',
+            '╔══════════════════════════════════════════════════════════════════╗',
+            '║  STRUCTURAL CONSISTENCY: Follow the blueprint below EXACTLY.    ║',
+            '║  All category pages in this store MUST have the SAME structure. ║',
+            '╚══════════════════════════════════════════════════════════════════╝',
+            '',
+            'Another category page in this store already uses this section structure:',
+            structuralBlueprint.map(function(bp) {
+              return '  Section ' + bp.position + ': layout "' + bp.layoutId + '" — tiles: ' + bp.tileTypes.join(', ') + ' — imageCategories: ' + bp.imageCategories.join(', ');
+            }).join('\n'),
+            '',
+            'YOU MUST FOLLOW THIS EXACT PATTERN:',
+            '- Same number of sections (' + structuralBlueprint.length + ')',
+            '- Same layout IDs in the same order',
+            '- Same tile types in each section (image, shoppable_image, product_grid, etc.)',
+            '- Same imageCategory per tile position (store_hero, benefit, product, creative, lifestyle, text_image)',
+            '- ONLY the content differs: product names, ASINs, brief descriptions, textOverlay text',
+            '- Think of it like a template — same structure, different content per category.',
+            '',
+            'EXCEPTIONS (when you MAY deviate):',
+            '- If this category has significantly MORE products → you may add an extra product_grid section at the end.',
+            '- If this category has subcategories but the blueprint doesn\'t have subcategory navigation → add it after the hero.',
+            '- If this is a "Category Overview" page → replace product highlights with subcategory navigation tiles.',
+            '',
+          ].join('\n') : '',
           'CROSS-PAGE CTA CONSISTENCY (CRITICAL):',
           '- ALL category pages MUST follow the SAME section structure, layout order, and CTA wording patterns.',
           '- Only the product-specific name or category name differs between pages.',
@@ -1824,6 +1851,9 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     log('Skipping category pages (small catalog — all products shown on homepage).');
     categories = []; // empty array = no category pages generated
   }
+  // ─── STRUCTURAL BLUEPRINT: First category page defines the layout pattern for all others ───
+  var categoryBlueprint = null; // Will be set after first successful category page generation
+
   for (var ci = 0; ci < categories.length; ci++) {
     var cat = categories[ci];
     var hasSubs = cat.subcategories && cat.subcategories.length > 0;
@@ -1860,11 +1890,24 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     try {
       var catResult = await aiGeneratePageLayout(
         catPageName, allCatProducts, brand, lang, false,
-        categories, analysis, userInstructions, cLevel, category, template, websiteData, referenceAnalysis, false
+        categories, analysis, userInstructions, cLevel, category, template, websiteData, referenceAnalysis, false, categoryBlueprint
       );
       var catSections = ensureMinimumSections(catResult.sections || [], cat.name, brand, lang, analysis, template, false, cLevel);
       pages.push({ id: parentPageId, name: cat.name, sections: catSections });
       log(cat.name + ': ' + catSections.length + ' sections');
+
+      // Capture structural blueprint from first category page
+      if (!categoryBlueprint && catSections.length >= 3) {
+        categoryBlueprint = catSections.map(function(sec, si) {
+          return {
+            position: si + 1,
+            layoutId: sec.layoutId,
+            tileTypes: sec.tiles.map(function(t) { return t.type; }),
+            imageCategories: sec.tiles.map(function(t) { return t.imageCategory || ''; }),
+          };
+        });
+        log('   → Structural blueprint captured (' + categoryBlueprint.length + ' sections) — will be applied to all other category pages.');
+      }
     } catch (err) {
       log('"' + cat.name + '" failed (' + err.message + '), using fallback...');
       pages.push(fallbackCategoryPage(parentPageId, cat.name, allCatProducts, lang, analysis));
@@ -2503,6 +2546,78 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       });
     }
     log('Cross-page CTA wording consistency enforced across ' + catPages.length + ' category pages.');
+  })();
+
+  // ─── CROSS-PAGE STRUCTURAL CONSISTENCY ───
+  // Ensure all category pages have the same number of sections and similar layout patterns.
+  // Uses the first category page as reference and harmonizes the rest.
+  (function enforceStructuralConsistency() {
+    var catPages = pages.filter(function(p) { return p.id && p.id.indexOf('cat-') === 0 && !p.parentId; });
+    if (catPages.length < 2) return;
+
+    var refPage = catPages[0];
+    var refSections = refPage.sections || [];
+    if (refSections.length < 2) return;
+
+    var refStructure = refSections.map(function(sec) { return sec.layoutId; });
+    var deviations = 0;
+
+    for (var cp = 1; cp < catPages.length; cp++) {
+      var targetPage = catPages[cp];
+      var targetSections = targetPage.sections || [];
+
+      // Check if section count matches
+      if (targetSections.length !== refSections.length) {
+        deviations++;
+        // If target has too few sections, pad with the missing layout patterns
+        while (targetSections.length < refSections.length) {
+          var missingIdx = targetSections.length;
+          var refSec = refSections[missingIdx];
+          var clonedSec = JSON.parse(JSON.stringify(refSec));
+          clonedSec.id = uid();
+          // Clear content but keep structure
+          clonedSec.tiles.forEach(function(t) {
+            t.brief = t.brief ? t.brief.replace(refPage.name, targetPage.name) : '';
+            t.textOverlay = t.textOverlay ? t.textOverlay.replace(refPage.name, targetPage.name) : '';
+            if (t.asins) t.asins = [];
+            if (t.linkAsin) t.linkAsin = '';
+          });
+          targetSections.push(clonedSec);
+        }
+        // If target has too many sections, truncate excess (keep the first N matching the blueprint)
+        if (targetSections.length > refSections.length) {
+          targetPage.sections = targetSections.slice(0, refSections.length);
+        }
+      }
+
+      // Check if layout order matches
+      for (var si = 0; si < Math.min(refSections.length, targetSections.length); si++) {
+        if (targetSections[si].layoutId !== refSections[si].layoutId) {
+          // Layout mismatch — fix it by using the reference layout
+          targetSections[si].layoutId = refSections[si].layoutId;
+          deviations++;
+          // Adjust tile count to match layout
+          var layout = findLayout(resolveLayoutId(refSections[si].layoutId));
+          if (layout) {
+            while (targetSections[si].tiles.length < layout.cells) {
+              targetSections[si].tiles.push({
+                type: 'image', brief: '', textOverlay: '', ctaText: '',
+                dimensions: { w: 3000, h: 1200 }, asins: [],
+              });
+            }
+            if (targetSections[si].tiles.length > layout.cells) {
+              targetSections[si].tiles = targetSections[si].tiles.slice(0, layout.cells);
+            }
+          }
+        }
+      }
+    }
+
+    if (deviations > 0) {
+      log('Structural consistency enforced: ' + deviations + ' deviations fixed across ' + catPages.length + ' category pages.');
+    } else {
+      log('Structural consistency: all ' + catPages.length + ' category pages match.');
+    }
   })();
 
   log('Store generation complete!');
