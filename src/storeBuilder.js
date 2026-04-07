@@ -587,7 +587,11 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '- brief: ENGLISH instructions for the designer.',
     '- Native text: ONLY for section headings. NOT for marketing.',
     '- NEVER use em-dashes (\u2014 or \u2013) in any text. Restructure sentences instead. Use periods, commas, or colons.',
-    '- textOverlay supports multiple lines (use \\n). Use this for headline + subline combinations.',
+    '- textOverlay supports multiple lines (use \\n). When a tile has MULTIPLE text elements, use \\n to separate them.',
+    '  The LINE POSITION determines the visual hierarchy (NOT text length):',
+    '  Line 1 = HIERARCHY 1 — largest, most prominent text (heading). Line 2 = HIERARCHY 2 — medium-sized text (subheading/supporting). Line 3+ = HIERARCHY 3 — smallest text, lightest weight (body/detail).',
+    '  The designer sets font size + weight based on the hierarchy level. Example: "Effektive Porenreinigung\\nFür ein klares Hautbild" → H1 heading + H2 subheading.',
+    '  If a tile has only ONE text element, no hierarchy is needed — just write the text.',
     '',
     complexityLevel && COMPLEXITY_LEVELS[complexityLevel]
       ? (function() {
@@ -942,6 +946,14 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
             : allCategories.length > 1
             ? '7. CROSS-SELL (layout "std-2equal" or "vh-2equal"): Link to 1-2 related categories. imageCategory="creative" or "lifestyle" — visual preview with representative product. textOverlay = JUST the category name, NOT a sentence. Add a fitting CTA. Brief = SHORT, max 10 words.'
             : '7. NAVIGATION BANNER (layout "1"): imageCategory="text_image". Simple text banner with a short headline and CTA. No elaborate design description.',
+          '',
+          '',
+          'CROSS-PAGE CTA CONSISTENCY (CRITICAL):',
+          '- ALL category pages MUST follow the SAME section structure, layout order, and CTA wording patterns.',
+          '- Only the product-specific name or category name differs between pages.',
+          '- Example: If one page has CTA "Zur Aktivkohleseife", the same section on another page MUST be "Zur Schwefelseife" (NOT "Zur Kollektion" or "Zum Sortiment").',
+          '- Generic CTAs like "Jetzt stöbern" must be IDENTICAL across pages — do NOT vary them ("Zum Sortiment", "Entdecken" etc.).',
+          '- CTA patterns to use consistently: "Zu/Zur [Product/Category]", "Jetzt [action]", "[Product] entdecken".',
           '',
           'MINIMUM 5 sections. EVERY brief must start with [STORE_HERO], [BENEFIT], [PRODUCT], [CREATIVE], [LIFESTYLE], [TEXT_IMAGE], or [SHOPPABLE] tag.',
           'Every image tile MUST have imageCategory set to one of: store_hero, benefit, product, creative, lifestyle, text_image.',
@@ -2179,6 +2191,60 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       });
     });
   });
+
+  // ─── CROSS-PAGE CTA WORDING CONSISTENCY ───
+  // Category pages keep their own structure/layouts (categories are naturally different).
+  // Only CTA wording patterns are harmonised: same-purpose CTAs use the same pattern,
+  // with only the category/product name swapped.
+  // E.g. "Zur Aktivkohleseife" on page 1 → "Zur Schwefelseife" on page 2.
+  // Generic CTAs like "Jetzt stöbern" stay identical across pages.
+  (function enforceCrossPageConsistency() {
+    var catPages = pages.filter(function(p) { return p.id && p.id.indexOf('cat-') === 0 && !p.parentId; });
+    if (catPages.length < 2) return;
+
+    var refPage = catPages[0];
+    var refName = refPage.name || '';
+
+    // Helper: swap reference page/category name words in a string with the target's name
+    function swapNames(text, srcName, tgtName) {
+      if (!text || !srcName || !tgtName) return text;
+      var srcWords = srcName.split(/\s+/);
+      var result = text;
+      srcWords.forEach(function(w) {
+        if (w.length >= 3 && result.toLowerCase().indexOf(w.toLowerCase()) >= 0) {
+          var regex = new RegExp(w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+          result = result.replace(regex, tgtName);
+        }
+      });
+      return result;
+    }
+
+    // Collect all CTA texts from the reference page (with section+tile index as key)
+    var refCTAs = {};
+    (refPage.sections || []).forEach(function(sec, si) {
+      (sec.tiles || []).forEach(function(tile, ti) {
+        if (tile.ctaText) {
+          refCTAs[si + ':' + ti] = tile.ctaText;
+        }
+      });
+    });
+
+    for (var cp = 1; cp < catPages.length; cp++) {
+      var targetPage = catPages[cp];
+      var tgtName = targetPage.name || '';
+
+      (targetPage.sections || []).forEach(function(sec, si) {
+        (sec.tiles || []).forEach(function(tile, ti) {
+          var key = si + ':' + ti;
+          // If reference page has a CTA at the same position, harmonise the wording pattern
+          if (refCTAs[key]) {
+            tile.ctaText = swapNames(refCTAs[key], refName, tgtName);
+          }
+        });
+      });
+    }
+    log('Cross-page CTA wording consistency enforced across ' + catPages.length + ' category pages.');
+  })();
 
   log('Store generation complete!');
 

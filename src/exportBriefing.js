@@ -371,14 +371,40 @@ function tileDescription(tile, tileIndex, productMap, lang, duplicateNote) {
     if (tile.bgColor) parts.push(boldPara(t('brief.colorPreview', lang) + ': ', tile.bgColor));
     if (tile.textOverlay) {
       var alignHint = tile.textAlign && tile.textAlign !== 'left' ? ' (' + (tile.textAlign === 'center' ? 'zentriert' : 'rechtsbündig') + ')' : '';
-      var overlayLines = tile.textOverlay.split('\\n');
+      var overlayLines = tile.textOverlay.split('\\n').filter(function(l) { return l.trim(); });
       if (overlayLines.length > 1) {
+        // MULTIPLE TEXTS — hierarchy by POSITION (line order), not text length
+        // Line 1 = H1 (largest, heading), Line 2 = H2 (medium), Line 3+ = H3 (smallest)
         parts.push(boldPara(t('brief.textOverlay', lang) + alignHint + ': ', ''));
+        var nonBulletCount = 0;
         overlayLines.forEach(function(line) {
-          if (line.trim()) parts.push(new Paragraph({ children: [new TextRun({ text: '  • ' + line.trim(), size: 20 })] }));
+          var trimmed = line.trim();
+          if (!trimmed) return;
+          var isBullet = /^•\s/.test(trimmed);
+          var isBold = /^\*\*.*\*\*$/.test(trimmed);
+
+          var hierLabel, hierColor;
+          if (isBullet) {
+            // Bullets are always detail text (H3)
+            hierLabel = '[HIERARCHY 3] '; hierColor = '94a3b8';
+          } else if (isBold || nonBulletCount === 0) {
+            hierLabel = '[HIERARCHY 1] '; hierColor = '1d4ed8';
+          } else if (nonBulletCount === 1) {
+            hierLabel = '[HIERARCHY 2] '; hierColor = '4338ca';
+          } else {
+            hierLabel = '[HIERARCHY 3] '; hierColor = '94a3b8';
+          }
+          if (!isBullet) nonBulletCount++;
+
+          parts.push(new Paragraph({ children: [
+            new TextRun({ text: '  ' + hierLabel, size: 18, bold: true, color: hierColor }),
+            new TextRun({ text: trimmed, size: 20, bold: isBold || (!isBullet && nonBulletCount <= 1) })
+          ] }));
         });
       } else {
-        parts.push(boldPara(t('brief.textOverlay', lang) + ': ', '"' + tile.textOverlay + '"' + alignHint));
+        // SINGLE TEXT — no hierarchy needed, just show the text
+        var singleText = overlayLines[0] || tile.textOverlay;
+        parts.push(boldPara(t('brief.textOverlay', lang) + ': ', '[text] "' + singleText + '"' + alignHint));
       }
     }
     if (tile.ctaText) parts.push(boldPara(t('brief.ctaButton', lang) + ': ', '"' + tile.ctaText + '"'));

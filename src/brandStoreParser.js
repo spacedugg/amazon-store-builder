@@ -334,44 +334,12 @@ function extractHeroFromConfig(configs) {
 }
 
 // Extract navigation from config
+// ─── NAVIGATION: Find all subpage links in the HTML ───
+// Simple approach: scan the ENTIRE HTML for /stores/.../page/UUID patterns.
+// No fallback chains, no 10 CSS selectors — just find the links that are there.
 function extractNavigationFromConfig(configs, sourceUrl) {
-  var amazonOrigin = 'https://www.amazon.de';
-  try { amazonOrigin = new URL(sourceUrl).origin; } catch (e) { /* default */ }
-
-  var sourcePageId = '';
-  var sourceMatch = (sourceUrl || '').match(/page\/([A-F0-9-]{36})/i);
-  if (sourceMatch) sourcePageId = sourceMatch[1].toUpperCase();
-
-  for (var i = 0; i < configs.length; i++) {
-    var nav = (configs[i].content || {}).nav;
-    if (!nav || typeof nav !== 'object') continue;
-
-    var links = [];
-    var keys = Object.keys(nav);
-    for (var j = 0; j < keys.length; j++) {
-      var pageId = keys[j].toUpperCase();
-      if (pageId === sourcePageId) continue;
-
-      var entry = nav[keys[j]];
-      if (!entry || !entry.href) continue;
-
-      // Only include direct children (level 2 = main nav items)
-      // Level 3 = sub-navigation items (also include them)
-      var absUrl = entry.href.indexOf('http') === 0 ? entry.href : amazonOrigin + entry.href;
-      absUrl = cleanTrackingParams(absUrl);
-
-      links.push({
-        pageId: pageId,
-        name: entry.title || '',
-        url: absUrl,
-        level: entry.level || 0,
-        parent: entry.parent || '',
-      });
-    }
-
-    if (links.length > 0) return links;
-  }
-
+  // We handle everything in extractNavigationFromDOM now.
+  // Config nav data (if present) is also captured there via the full HTML scan.
   return null;
 }
 
@@ -492,43 +460,39 @@ function extractNavigationFromDOM(doc, html, sourceUrl) {
   var sourceMatch = (sourceUrl || '').match(/page\/([A-F0-9-]{36})/i);
   if (sourceMatch) sourcePageId = sourceMatch[1].toUpperCase();
 
-  // Try DOM nav items
-  var navItems = doc.querySelectorAll('[data-testid="nav-item"] > a[href*="/stores/page/"]');
-  for (var i = 0; i < navItems.length; i++) {
-    var a = navItems[i];
-    var href = a.getAttribute('href') || '';
-    var pageIdMatch = href.match(/page\/([A-F0-9-]{36})/i);
-    if (!pageIdMatch) continue;
+  // ─── STEP 1: Find all /stores/.../page/UUID links in the entire HTML ───
+  // This catches nav links, in-page links, JSON config refs — everything.
+  var regex = /(?:href|"href"|"url"|"link")\s*[=:]\s*["']([^"']*\/stores\/[^"']*\/page\/([A-F0-9-]{36})[^"']*)["']/gi;
+  var match;
+  while ((match = regex.exec(html)) !== null) {
+    var rawPath = match[1];
+    var pid = match[2].toUpperCase();
+    if (pid === sourcePageId || seen[pid]) continue;
+    // Skip Amazon search/browse links (not store pages)
+    if (rawPath.indexOf('field-lbr_brands') >= 0 || rawPath.indexOf('ref_=nav_cs') >= 0) continue;
+    seen[pid] = true;
 
-    var pageId = pageIdMatch[1].toUpperCase();
-    if (pageId === sourcePageId || seen[pageId]) continue;
-    seen[pageId] = true;
-
-    var nameEl = a.querySelector('span span') || a.querySelector('span');
-    var name = nameEl ? nameEl.textContent.trim() : (a.textContent || '').trim();
-    var absUrl = href.indexOf('http') === 0 ? href : amazonOrigin + href;
+    var absUrl = rawPath.indexOf('http') === 0 ? rawPath : amazonOrigin + (rawPath.indexOf('/') === 0 ? rawPath : '/' + rawPath);
     absUrl = cleanTrackingParams(absUrl);
 
-    links.push({ pageId: pageId, name: name, url: absUrl });
+    // Try to find the page name: look for a <span> near this href, or a "title"/"name" JSON key
+    var nearby = html.slice(match.index, Math.min(html.length, match.index + 500));
+    var nameMatch = nearby.match(/<span[^>]*>([^<]{2,60})<\/span>/) ||
+                    nearby.match(/"(?:title|name|label|text)"\s*:\s*"([^"]{2,60})"/i);
+    links.push({ pageId: pid, name: nameMatch ? (nameMatch[1] || '').trim() : '', url: absUrl });
   }
 
-  // Fallback: raw HTML regex for /stores/page/ links
-  if (links.length === 0) {
-    var regex = /href=["']([^"']*\/stores\/(?:[^"'\/]+\/)?page\/([A-F0-9-]{36})[^"']*)["']/gi;
-    var match;
-    while ((match = regex.exec(html)) !== null) {
-      var rawPath = match[1];
-      var pid = match[2].toUpperCase();
-      if (pid === sourcePageId || seen[pid]) continue;
-      if (rawPath.indexOf('field-lbr_brands') >= 0 || rawPath.indexOf('ref_=nav_cs') >= 0) continue;
-      seen[pid] = true;
+  // ─── STEP 2: Also check for "pageId" refs in JSON configs (no href, just UUID) ───
+  var pageIdRegex = /"(?:pageId|page_id|storePageId)"\s*:\s*"([A-F0-9-]{36})"/gi;
+  var pidMatch;
+  while ((pidMatch = pageIdRegex.exec(html)) !== null) {
+    var foundPid = pidMatch[1].toUpperCase();
+    if (foundPid === sourcePageId || seen[foundPid]) continue;
+    seen[foundPid] = true;
 
-      var absUrl2 = rawPath.indexOf('http') === 0 ? rawPath : amazonOrigin + (rawPath.indexOf('/') === 0 ? rawPath : '/' + rawPath);
-      absUrl2 = cleanTrackingParams(absUrl2);
-
-      var nameMatch = html.slice(match.index, match.index + 500).match(/<span[^>]*>([^<]{2,60})<\/span>/);
-      links.push({ pageId: pid, name: nameMatch ? nameMatch[1].trim() : '', url: absUrl2 });
-    }
+    var context = html.slice(Math.max(0, pidMatch.index - 200), pidMatch.index + 200);
+    var titleMatch = context.match(/"(?:title|name|label|text)"\s*:\s*"([^"]{2,60})"/i);
+    links.push({ pageId: foundPid, name: titleMatch ? titleMatch[1] : '', url: amazonOrigin + '/stores/page/' + foundPid });
   }
 
   return links;
