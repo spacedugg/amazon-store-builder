@@ -1,9 +1,10 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { uid, emptyTile, emptyTileForLayout, LAYOUTS, LANGS, DOMAINS, validateStore, PRICING, countStoreAssets, STORE_TEMPLATES, findLayout, LAYOUT_TILE_DIMS } from './constants';
-import { scrapeAsins } from './api';
+import { scrapeAsins, analyzeBrandCI } from './api';
 import { generateStore, aiRefineStore, applyOperations, generateWireframesForPage, deleteWireframesForPage } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, loadStoreByShareToken, importStoreByShareLink } from './storage';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
+import { crawlMultipleStores, crawlAndParseStore, analyzeStoreImagesWithGemini, formatReferenceStoreContext, loadKnowledgeBaseForCategory, formatKnowledgeBaseContext, formatStaticReferenceContext, loadGeminiAnalysesForCategory, formatGeminiAnalysesContext } from './referenceStoreService';
 import Topbar from './components/Topbar';
 import PageList from './components/PageList';
 import Canvas from './components/Canvas';
@@ -49,6 +50,8 @@ export default function App() {
   var [shareToken, setShareToken] = useState(null);
   var [wfGenerating, setWfGenerating] = useState(null);
   var [wfProgress, setWfProgress] = useState('');
+  var wfCancelRef = useRef(false);
+  var genCancelRef = useRef(false);
   var headerBannerInputRef = useRef(null);
 
   // ─── UNDO HISTORY ───
@@ -147,19 +150,23 @@ export default function App() {
     if (wfGenerating) return;
     var wfPage = (store.pages || []).find(function(p) { return p.id === pageId; });
     if (!wfPage) return;
+    wfCancelRef.current = false;
     setWfGenerating(pageId);
     setWfProgress('Starte...');
     generateWireframesForPage(
       wfPage, store.brandName || '', store.websiteData || null,
-      { brandTone: store.brandTone, brandStory: store.brandStory, keyFeatures: store.keyFeatures },
+      { brandTone: store.brandTone, brandStory: store.brandStory, keyFeatures: store.keyFeatures, productCI: store.productCI || null },
       function(current, total, category) {
         setWfProgress(current + '/' + total + ' (' + category + ')');
       },
-      store.manualCI || null
+      store.manualCI || null,
+      wfCancelRef
     ).then(function(result) {
       setWfGenerating(null);
-      var msg = result.success + ' generiert, ' + result.failed + ' fehlgeschlagen';
-      if (result.error) msg += ' (' + result.error + ')';
+      var msg = result.cancelled
+        ? result.success + ' generiert, abgebrochen'
+        : result.success + ' generiert, ' + result.failed + ' fehlgeschlagen';
+      if (result.error && !result.cancelled) msg += ' (' + result.error + ')';
       setWfProgress(msg);
       setStore(function(prev) { return Object.assign({}, prev); });
       setTimeout(function() { setWfProgress(''); }, result.error ? 8000 : 4000);
@@ -168,6 +175,11 @@ export default function App() {
       setWfProgress('Fehler: ' + err.message);
       setTimeout(function() { setWfProgress(''); }, 4000);
     });
+  };
+
+  var handleStopWireframes = function() {
+    wfCancelRef.current = true;
+    setWfProgress('Wird angehalten...');
   };
 
   // ─── WIREFRAME DELETION ───
@@ -191,6 +203,8 @@ export default function App() {
     setGenLog([]);
     setSel(null);
     setRequestedAsins(params.asins.slice());
+    lastGenParams.current = params;
+    genCancelRef.current = false;
 
     var lang = LANGS[params.marketplace] || 'German';
     var domain = DOMAINS[params.marketplace] || DOMAINS.de;
@@ -203,11 +217,42 @@ export default function App() {
       if (!products.length) throw new Error('No products returned from Bright Data. Check your ASINs and try again.');
       log('Scraped ' + products.length + '/' + params.asins.length + ' products');
 
+      // Step 1.2: Analyze brand CI from product listing images via Gemini Vision
+      var productCI = null;
+      var userCiSource = params.ciSource || 'auto';
+      if (userCiSource !== 'manual' && userCiSource !== 'website') {
+        // Analyze Amazon listing images for CI (unless user chose "website only" or "manual")
+        try {
+          var ciImages = [];
+          products.forEach(function(p) {
+            if (ciImages.length >= 8) return;
+            var imgs = (p.images || []);
+            if (imgs.length > 1) {
+              for (var ii = 1; ii < Math.min(imgs.length, 4) && ciImages.length < 8; ii++) {
+                if (imgs[ii].url) ciImages.push({ url: imgs[ii].url, context: p.name });
+              }
+            } else if (imgs.length === 1 && imgs[0].url) {
+              ciImages.push({ url: imgs[0].url, context: p.name });
+            }
+          });
+          if (ciImages.length > 0) {
+            log('Analyzing brand CI from ' + ciImages.length + ' Amazon listing images...');
+            productCI = await analyzeBrandCI(ciImages, params.brand);
+            log('   Amazon CI: ' + (productCI.primaryColors || []).join(', ') + ' | ' + (productCI.visualMood || 'N/A'));
+            if (productCI.designerNotes) log('   Designer notes: ' + productCI.designerNotes);
+          }
+        } catch (ciErr) {
+          log('Amazon CI analysis skipped: ' + ciErr.message);
+        }
+      } else if (userCiSource === 'website') {
+        log('CI source: Website only (Amazon listing images skipped per user choice)');
+      } else {
+        log('CI source: Manual (no automatic CI extraction)');
+      }
+
       // Step 1.5: Crawl & analyze reference stores (if provided)
       var referenceAnalysis = null;
       if (params.referenceStoreUrls && params.referenceStoreUrls.length > 0) {
-        var { crawlMultipleStores, analyzeStoreImagesWithGemini, formatReferenceStoreContext } = await import('./referenceStoreService');
-
         log('Analyzing ' + params.referenceStoreUrls.length + ' reference stores...');
         var parsedStores = await crawlMultipleStores(params.referenceStoreUrls, log);
 
@@ -224,53 +269,66 @@ export default function App() {
         log('Reference analysis complete');
       }
 
+      // ─── Track critical failures for retry prompt ───
+      var criticalFailures = [];
+
       // Step 1.5b: Analyze existing store with Gemini Vision (if provided)
       if (params.existingStoreUrl) {
-        try {
-          var refService = await import('./referenceStoreService');
-          var modeLabel = (params.existingStoreMode === 'reconceptualize') ? 'NEU KONZIPIEREN' : 'OPTIMIEREN';
-          log('Analyzing existing brand store (' + modeLabel + '): ' + params.existingStoreUrl);
-          var existingStore = await refService.crawlAndParseStore(params.existingStoreUrl, log);
-
-          // Analyze existing store images with Gemini for CI extraction
-          var existingImageAnalyses = [];
+        var existingStoreRetries = 0;
+        var existingStoreSuccess = false;
+        while (!existingStoreSuccess && existingStoreRetries < 3) {
           try {
-            existingImageAnalyses = await refService.analyzeStoreImagesWithGemini(existingStore, log);
-          } catch (e) { log('Existing store image analysis skipped: ' + e.message); }
+            var modeLabel = (params.existingStoreMode === 'reconceptualize') ? 'NEU KONZIPIEREN' : 'OPTIMIEREN';
+            log(existingStoreRetries > 0 ? ('Retrying existing store analysis (attempt ' + (existingStoreRetries + 1) + ')...') : ('Analyzing existing brand store (' + modeLabel + '): ' + params.existingStoreUrl));
+            var existingStore = await crawlAndParseStore(params.existingStoreUrl, log);
 
-          var existingContext = refService.formatReferenceStoreContext([existingStore], existingImageAnalyses);
-          var storeMode = params.existingStoreMode || 'optimize';
-          var existingPrefix;
-          if (storeMode === 'reconceptualize') {
-            existingPrefix = '\n=== EXISTING BRAND STORE (current store — NEEDS COMPLETE RECONCEPTUALIZATION) ===\n'
-              + 'This store is fundamentally underoptimized. DO NOT preserve its structure or layout.\n'
-              + 'CREATE a completely new concept from scratch:\n'
-              + '- ONLY extract and keep: brand colors, logo, typography, and brand voice/tonality\n'
-              + '- IGNORE the existing page structure, navigation hierarchy, and module arrangement\n'
-              + '- Design an entirely new storytelling arc, new page structure, new module flow\n'
-              + '- Use the reference store best practices to build something significantly better\n'
-              + '- The existing store serves ONLY as CI reference, NOT as structural template\n\n';
-          } else {
-            existingPrefix = '\n=== EXISTING BRAND STORE (current store — OPTIMIZE & EXPAND) ===\n'
-              + 'This store has a good foundation. PRESERVE its core structure:\n'
-              + '- KEEP the existing page hierarchy, navigation, and category structure\n'
-              + '- KEEP module arrangements that work well (good flow, clear storytelling)\n'
-              + '- IMPROVE content quality: better headlines, stronger CTAs, richer descriptions\n'
-              + '- EXPAND with new products (from scraped ASINs) into existing categories\n'
-              + '- ADD missing elements: social proof, lifestyle images, benefit sections\n'
-              + '- FIX specific weaknesses while maintaining the overall concept\n'
-              + '- Match CI exactly: same colors, same image style, same tonality\n\n';
+            // Analyze existing store images with Gemini for CI extraction
+            var existingImageAnalyses = [];
+            try {
+              existingImageAnalyses = await analyzeStoreImagesWithGemini(existingStore, log);
+            } catch (e) { log('Existing store image analysis skipped: ' + e.message); }
+
+            var existingContext = formatReferenceStoreContext([existingStore], existingImageAnalyses);
+            var storeMode = params.existingStoreMode || 'optimize';
+            var existingPrefix;
+            if (storeMode === 'reconceptualize') {
+              existingPrefix = '\n=== EXISTING BRAND STORE (current store — NEEDS COMPLETE RECONCEPTUALIZATION) ===\n'
+                + 'This store is fundamentally underoptimized. DO NOT preserve its structure or layout.\n'
+                + 'CREATE a completely new concept from scratch:\n'
+                + '- ONLY extract and keep: brand colors, logo, typography, and brand voice/tonality\n'
+                + '- IGNORE the existing page structure, navigation hierarchy, and module arrangement\n'
+                + '- Design an entirely new storytelling arc, new page structure, new module flow\n'
+                + '- Use the reference store best practices to build something significantly better\n'
+                + '- The existing store serves ONLY as CI reference, NOT as structural template\n\n';
+            } else {
+              existingPrefix = '\n=== EXISTING BRAND STORE (current store — OPTIMIZE & EXPAND) ===\n'
+                + 'This store has a good foundation. PRESERVE its core structure:\n'
+                + '- KEEP the existing page hierarchy, navigation, and category structure\n'
+                + '- KEEP module arrangements that work well (good flow, clear storytelling)\n'
+                + '- IMPROVE content quality: better headlines, stronger CTAs, richer descriptions\n'
+                + '- EXPAND with new products (from scraped ASINs) into existing categories\n'
+                + '- ADD missing elements: social proof, lifestyle images, benefit sections\n'
+                + '- FIX specific weaknesses while maintaining the overall concept\n'
+                + '- Match CI exactly: same colors, same image style, same tonality\n\n';
+            }
+            referenceAnalysis = (referenceAnalysis || '') + existingPrefix + existingContext;
+            log('Existing store analyzed: ' + existingStore.pageCount + ' pages, ' + existingStore.summary.totalImages + ' images');
+            existingStoreSuccess = true;
+          } catch (existErr) {
+            existingStoreRetries++;
+            if (existingStoreRetries < 3) {
+              log('Existing store analysis failed (' + existErr.message + '), retrying in 3s...');
+              await new Promise(function(r) { setTimeout(r, 3000); });
+            } else {
+              log('CRITICAL: Existing store analysis FAILED after 3 attempts: ' + existErr.message);
+              criticalFailures.push('Existing store analysis');
+            }
           }
-          referenceAnalysis = (referenceAnalysis || '') + existingPrefix + existingContext;
-          log('Existing store analyzed: ' + existingStore.pageCount + ' pages, ' + existingStore.summary.totalImages + ' images');
-        } catch (existErr) {
-          log('Existing store analysis skipped: ' + existErr.message);
         }
       }
 
       // Step 1.6: Load knowledge base data for the selected category
       try {
-        var { loadKnowledgeBaseForCategory, formatKnowledgeBaseContext } = await import('./referenceStoreService');
         var kbCategory = params.referenceCategory || params.category || 'generic';
         log('Loading knowledge base for category: ' + kbCategory + '...');
         var kbData = await loadKnowledgeBaseForCategory(kbCategory);
@@ -283,11 +341,11 @@ export default function App() {
         }
       } catch (kbErr) {
         log('Knowledge base skipped: ' + kbErr.message);
+        criticalFailures.push('Knowledge base');
       }
 
       // Step 1.7: Load static reference data from _summary.json (always available)
       try {
-        var { formatStaticReferenceContext } = await import('./referenceStoreService');
         var refCategory = params.referenceCategory || 'generic';
         log('Loading static reference patterns for: ' + refCategory + '...');
         var staticContext = await formatStaticReferenceContext(refCategory);
@@ -297,11 +355,11 @@ export default function App() {
         }
       } catch (staticErr) {
         log('Static reference data skipped: ' + staticErr.message);
+        criticalFailures.push('Static reference data');
       }
 
       // Step 1.7b: Load Gemini Vision analyses from reference store JSONs
       try {
-        var { loadGeminiAnalysesForCategory, formatGeminiAnalysesContext } = await import('./referenceStoreService');
         var geminiCategory = params.referenceCategory || 'generic';
         log('Loading Gemini visual intelligence for: ' + geminiCategory + '...');
         var geminiData = await loadGeminiAnalysesForCategory(geminiCategory);
@@ -314,6 +372,16 @@ export default function App() {
         }
       } catch (geminiErr) {
         log('Gemini visual intelligence skipped: ' + geminiErr.message);
+        criticalFailures.push('Gemini visual intelligence');
+      }
+
+      // ─── CRITICAL FAILURE CHECK: Warn user and offer to abort ───
+      if (criticalFailures.length > 0) {
+        log('');
+        log('WARNING: ' + criticalFailures.length + ' data sources failed: ' + criticalFailures.join(', '));
+        log('The store will be generated with INCOMPLETE data. Quality may be reduced.');
+        log('To retry: close this dialog, fix the issue, and re-generate.');
+        log('');
       }
 
       // Step 1.8: Log selected extra pages
@@ -332,15 +400,42 @@ export default function App() {
       // Website data is always used for CI extraction when available
       var enhancedWebsiteData = params.websiteData || null;
 
+      // Merge CI data based on user's ciSource selection
+      if (productCI) {
+        if (!enhancedWebsiteData) enhancedWebsiteData = {};
+        enhancedWebsiteData.productCI = productCI;
+      }
+      if (userCiSource === 'amazon' && productCI) {
+        // Amazon-only: use Amazon CI colors, ignore website colors
+        if (!enhancedWebsiteData) enhancedWebsiteData = {};
+        enhancedWebsiteData.colors = (productCI.primaryColors || []).concat(productCI.secondaryColors || []);
+        log('CI priority: Amazon listing images (website colors ignored)');
+      } else if (userCiSource === 'website') {
+        // Website-only: keep website colors, don't override with Amazon
+        log('CI priority: Website (Amazon CI available for reference only)');
+      } else if (userCiSource === 'auto' && productCI) {
+        // Auto: Amazon CI takes priority for colors if website has none
+        if (!enhancedWebsiteData) enhancedWebsiteData = {};
+        if ((!enhancedWebsiteData.colors || enhancedWebsiteData.colors.length === 0) && productCI.primaryColors) {
+          enhancedWebsiteData.colors = productCI.primaryColors.concat(productCI.secondaryColors || []);
+        }
+        log('CI priority: Auto (Amazon + Website combined)');
+      } else if (userCiSource === 'manual') {
+        log('CI priority: Manual (user will set CI in CI tab)');
+      }
+
       // Step 2-4: AI generation (with complexity, category, template, websiteData, referenceAnalysis)
       var storeData = await generateStore(
         params.asins, products, params.brand, params.marketplace, lang,
         params.instructions, log, params.complexity, templateData, enhancedWebsiteData, referenceAnalysis,
-        { extraPages: selectedExtraPages, includeProductVideos: params.includeProductVideos, generateWireframes: params.generateWireframes, referenceCategory: params.referenceCategory }
+        { extraPages: selectedExtraPages, includeProductVideos: params.includeProductVideos, generateWireframes: params.generateWireframes, referenceCategory: params.referenceCategory },
+        genCancelRef
       );
 
       // Store meta
       storeData.complexity = params.complexity;
+      if (productCI) storeData.productCI = productCI;
+      storeData.ciSource = userCiSource;
       if (templateData) storeData.templateId = templateData.id;
       if (enhancedWebsiteData) storeData.websiteData = enhancedWebsiteData;
 
@@ -348,21 +443,33 @@ export default function App() {
       setCurPage(storeData.pages[0] ? storeData.pages[0].id : '');
       log('Store complete! ' + storeData.pages.length + ' pages, ' + products.length + ' products.');
     } catch (e) {
-      log('');
-      log('ERROR: ' + e.message);
-      if (e.message.indexOf('timed out') >= 0) {
-        log('The request timed out. Try again with fewer ASINs or choose a lower complexity level.');
-      } else if (e.message.indexOf('fetch') >= 0 || e.message.indexOf('network') >= 0 || e.message.indexOf('Failed to fetch') >= 0) {
-        log('Network error — check your internet connection and try again.');
-      } else if (e.message.indexOf('API error') >= 0 || e.message.indexOf('529') >= 0 || e.message.indexOf('overload') >= 0) {
-        log('The AI service is temporarily overloaded. Please wait a minute and try again.');
+      if (e.message === 'CANCELLED') {
+        log('');
+        log('Generierung abgebrochen.');
+        log('Bereits generierte Seiten bleiben erhalten.');
+      } else {
+        log('');
+        log('ERROR: ' + e.message);
+        if (e.message.indexOf('timed out') >= 0) {
+          log('The request timed out. Try again with fewer ASINs or choose a lower complexity level.');
+        } else if (e.message.indexOf('fetch') >= 0 || e.message.indexOf('network') >= 0 || e.message.indexOf('Failed to fetch') >= 0) {
+          log('Network error — check your internet connection and try again.');
+        } else if (e.message.indexOf('API error') >= 0 || e.message.indexOf('529') >= 0 || e.message.indexOf('overload') >= 0) {
+          log('The AI service is temporarily overloaded. Please wait a minute and try again.');
+        }
       }
     } finally {
       setGenDone(true);
-      // Keep the modal visible longer so the user can read the error
-      setTimeout(function() { setGenerating(false); }, 8000);
+      var wasCancelled = genCancelRef.current;
+      // Don't auto-close — let user close via button (or auto-close after 12s if successful)
+      var hasErr = genLog.some(function(m) { return m.indexOf('ERROR:') >= 0 || m.indexOf('CRITICAL:') >= 0; });
+      if (!hasErr && !wasCancelled) {
+        setTimeout(function() { setGenerating(false); }, 12000);
+      }
     }
   };
+
+  var lastGenParams = useRef(null);
 
   // ─── TILE UPDATE ───
   var updateTile = function(updated) {
@@ -834,6 +941,7 @@ export default function App() {
           onGenerate={function() { setShowGen(true); }}
           onGenerateWireframes={handleGenerateWireframes}
           onDeleteWireframes={handleDeleteWireframes}
+          onStopWireframes={handleStopWireframes}
           wfGenerating={wfGenerating}
           wfProgress={wfProgress}
         />
@@ -877,7 +985,14 @@ export default function App() {
       )}
 
       {generating && (
-        <ProgressModal logs={genLog} done={genDone} uiLang={uiLang} />
+        <ProgressModal
+          logs={genLog}
+          done={genDone}
+          uiLang={uiLang}
+          onClose={function() { setGenerating(false); }}
+          onRetry={lastGenParams.current ? function() { handleGenerate(lastGenParams.current); } : null}
+          onStop={function() { genCancelRef.current = true; log('Abbrechen angefordert — warte auf laufenden Schritt...'); }}
+        />
       )}
 
       {showAsins && (

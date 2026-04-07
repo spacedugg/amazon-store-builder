@@ -1661,6 +1661,7 @@ export default function BriefingView() {
   var [showPreview, setShowPreview] = useState(false);
   var [wfGenerating, setWfGenerating] = useState(null); // pageId currently generating wireframes
   var [wfProgress, setWfProgress] = useState(''); // progress text
+  var wfCancelRef = useRef(false);
   var prevStoreRef = useRef(null);
   var pollRef = useRef(null);
   var bannerTimeoutRef = useRef(null);
@@ -1671,21 +1672,24 @@ export default function BriefingView() {
     if (wfGenerating) return; // already generating
     var page = (store.pages || []).find(function(p) { return p.id === pageId; });
     if (!page) return;
+    wfCancelRef.current = false;
     setWfGenerating(pageId);
     setWfProgress('Starte...');
     generateWireframesForPage(
       page, store.brandName || '', store.websiteData || null,
-      { brandTone: store.brandTone, brandStory: store.brandStory, keyFeatures: store.keyFeatures },
+      { brandTone: store.brandTone, brandStory: store.brandStory, keyFeatures: store.keyFeatures, productCI: store.productCI || null },
       function(current, total, category) {
         setWfProgress(current + '/' + total + ' (' + category + ')');
       },
-      store.manualCI || null
+      store.manualCI || null,
+      wfCancelRef
     ).then(function(result) {
       setWfGenerating(null);
-      var msg = result.success + ' generiert, ' + result.failed + ' fehlgeschlagen';
-      if (result.error) msg += ' (' + result.error + ')';
+      var msg = result.cancelled
+        ? result.success + ' generiert, abgebrochen'
+        : result.success + ' generiert, ' + result.failed + ' fehlgeschlagen';
+      if (result.error && !result.cancelled) msg += ' (' + result.error + ')';
       setWfProgress(msg);
-      // Force re-render by updating store reference
       setStore(function(prev) { return Object.assign({}, prev); });
       setTimeout(function() { setWfProgress(''); }, result.error ? 8000 : 4000);
     }).catch(function(err) {
@@ -1693,6 +1697,11 @@ export default function BriefingView() {
       setWfProgress('Fehler: ' + err.message);
       setTimeout(function() { setWfProgress(''); }, 4000);
     });
+  };
+
+  var handleStopWireframes = function() {
+    wfCancelRef.current = true;
+    setWfProgress('Wird angehalten...');
   };
 
   // Delete wireframes for a specific page
@@ -1707,19 +1716,20 @@ export default function BriefingView() {
     }
   };
 
-  var token = window.location.pathname.split('/share/')[1];
+  var rawToken = window.location.pathname.split('/share/')[1] || '';
+  var token = rawToken.split('/')[0].split('?')[0].trim(); // Strip trailing slashes, query params
 
   // ─── INITIAL LOAD ───
   useEffect(function() {
-    if (!token) { setError('No share token provided'); setLoading(false); return; }
+    if (!token) { setError('Kein Share-Token in der URL gefunden. Bitte prüfe den Link.'); setLoading(false); return; }
     loadStoreByShareToken(token).then(function(result) {
-      if (!result || !result.data) { setError('Store not found or link has expired.'); setLoading(false); return; }
+      if (!result || !result.data) { setError('Store nicht gefunden oder Link abgelaufen. Bitte fordere einen neuen Link an.'); setLoading(false); return; }
       setStore(result.data);
       setLastUpdated(result.updatedAt || new Date().toISOString());
       setCurPage(result.data.pages && result.data.pages[0] ? result.data.pages[0].id : '');
       prevStoreRef.current = JSON.stringify(result.data);
       setLoading(false);
-    }).catch(function(e) { setError('Failed to load: ' + e.message); setLoading(false); });
+    }).catch(function(e) { setError('Laden fehlgeschlagen: ' + e.message); setLoading(false); });
   }, [token]);
 
   // ─── LOAD CHECKMARKS (localStorage cache + server) ───
@@ -1872,7 +1882,12 @@ export default function BriefingView() {
       <div className="briefing-error-msg">{error}</div>
     </div>
   );
-  if (!store) return null;
+  if (!store) return (
+    <div className="briefing-error">
+      <div className="briefing-error-icon">!</div>
+      <div className="briefing-error-msg">Keine Store-Daten vorhanden. Der Store wurde möglicherweise nicht korrekt gespeichert.</div>
+    </div>
+  );
 
   var pages = store.pages || [];
   var topPages = pages.filter(function(p) { return !p.parentId; });
@@ -2078,6 +2093,76 @@ export default function BriefingView() {
                       style={{ width: '100%', fontSize: 10, padding: '4px 6px', border: '1px solid #e5e7eb', borderRadius: 4, fontFamily: 'monospace' }}
                     />
                   </div>
+
+                  {/* Product CI from Gemini Vision analysis */}
+                  {store.productCI && (
+                    <div style={{ marginBottom: 10, background: '#fefce8', border: '1px solid #fde68a', borderRadius: 6, padding: 8 }}>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#92400e', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '.05em' }}>CI aus Listing-Bildern (KI-Analyse)</div>
+                      {store.productCI.visualMood && (
+                        <div style={{ marginBottom: 4 }}>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Visueller Stil: </span>
+                          <span style={{ fontSize: 10, color: '#78350f', fontWeight: 700 }}>{store.productCI.visualMood}</span>
+                        </div>
+                      )}
+                      {store.productCI.primaryColors && store.productCI.primaryColors.length > 0 && (
+                        <div style={{ marginBottom: 4 }}>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Primärfarben: </span>
+                          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 2 }}>
+                            {store.productCI.primaryColors.map(function(c, i) {
+                              return <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+                                <div style={{ width: 14, height: 14, borderRadius: 3, background: c, border: '1px solid rgba(0,0,0,.15)' }} />
+                                <span style={{ fontSize: 9, fontFamily: 'monospace' }}>{c}</span>
+                              </div>;
+                            })}
+                          </div>
+                        </div>
+                      )}
+                      {store.productCI.backgroundPattern && (
+                        <div style={{ marginBottom: 4 }}>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Hintergründe: </span>
+                          <span style={{ fontSize: 10, color: '#475569' }}>{store.productCI.backgroundPattern}</span>
+                        </div>
+                      )}
+                      {store.productCI.typographyStyle && (
+                        <div style={{ marginBottom: 4 }}>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Typografie: </span>
+                          <span style={{ fontSize: 10, color: '#475569' }}>{store.productCI.typographyStyle}</span>
+                        </div>
+                      )}
+                      {store.productCI.photographyStyle && (
+                        <div style={{ marginBottom: 4 }}>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Fotostil: </span>
+                          <span style={{ fontSize: 10, color: '#475569' }}>{store.productCI.photographyStyle}</span>
+                        </div>
+                      )}
+                      {store.productCI.recurringElements && store.productCI.recurringElements.length > 0 && (
+                        <div style={{ marginBottom: 4 }}>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Wiederkehrende Elemente: </span>
+                          <div style={{ display: 'flex', gap: 3, flexWrap: 'wrap', marginTop: 2 }}>
+                            {store.productCI.recurringElements.map(function(el, i) {
+                              return <span key={i} style={{ background: '#fef3c7', color: '#78350f', borderRadius: 3, padding: '1px 6px', fontSize: 9, fontWeight: 600 }}>{el}</span>;
+                            })}
+                          </div>
+                        </div>
+                      )}
+                      {store.productCI.designerNotes && (
+                        <div style={{ marginTop: 6, padding: '6px 8px', background: '#fff', border: '1px solid #fde68a', borderRadius: 4, fontSize: 10, lineHeight: 1.5, color: '#475569' }}>
+                          <span style={{ fontWeight: 700, color: '#92400e' }}>Designer-Hinweise: </span>
+                          {store.productCI.designerNotes}
+                        </div>
+                      )}
+                      {store.productCI.sourceImages && store.productCI.sourceImages.length > 0 && (
+                        <div style={{ marginTop: 6 }}>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Analysierte Bilder ({store.productCI.imagesAnalyzed}):</span>
+                          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 4 }}>
+                            {store.productCI.sourceImages.slice(0, 6).map(function(url, i) {
+                              return <img key={i} src={url} style={{ width: 48, height: 48, objectFit: 'cover', borderRadius: 4, border: '1px solid #e5e7eb' }} alt="" />;
+                            })}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
 
                   {/* Fonts — editable */}
                   <div style={{ marginBottom: 10 }}>

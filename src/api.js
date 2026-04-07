@@ -99,8 +99,16 @@ export async function crawlBrandStorePage(url) {
     body: JSON.stringify({ url: url }),
   }, CRAWL_TIMEOUT_MS);
   if (!resp.ok) {
+    var ct = resp.headers.get('content-type') || '';
+    if (ct.indexOf('text/html') >= 0) {
+      throw new Error('API returned HTML instead of JSON (HTTP ' + resp.status + '). The crawl-brand-store endpoint may not be deployed or configured.');
+    }
     var e = await resp.json().catch(function() { return {}; });
-    throw new Error(e.error || 'Failed to crawl brand store page');
+    throw new Error(e.error || 'Failed to crawl brand store page (HTTP ' + resp.status + ')');
+  }
+  var ct = resp.headers.get('content-type') || '';
+  if (ct.indexOf('text/html') >= 0) {
+    throw new Error('API returned HTML instead of JSON. Check server deployment.');
   }
   return resp.json();
 }
@@ -112,10 +120,13 @@ export async function analyzeStoreImages(images) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ images: images }),
   }, 60000);
+  var ct = resp.headers.get('content-type') || '';
   if (!resp.ok) {
+    if (ct.indexOf('text/html') >= 0) throw new Error('API returned HTML instead of JSON (HTTP ' + resp.status + '). The analyze-images endpoint may not be deployed.');
     var e = await resp.json().catch(function() { return {}; });
     throw new Error(e.error || 'Failed to analyze images');
   }
+  if (ct.indexOf('text/html') >= 0) throw new Error('API returned HTML instead of JSON. Check server deployment.');
   return resp.json();
 }
 
@@ -129,6 +140,34 @@ export async function generateWireframeImage(prompt, aspectRatio) {
   if (!resp.ok) {
     var e = await resp.json().catch(function() { return {}; });
     throw new Error(e.error || 'Failed to generate wireframe image');
+  }
+  return resp.json();
+}
+
+// ─── GENERATE IMAGE DESCRIPTIONS: Gemini creates CI-aware prompts for image generation ───
+export async function generateImageDescriptions(tiles, ciData, brandName, brandTone) {
+  var resp = await fetchWithTimeout('/api/generate-image-descriptions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ tiles: tiles, ciData: ciData, brandName: brandName, brandTone: brandTone }),
+  }, 60000);
+  if (!resp.ok) {
+    var e = await resp.json().catch(function() { return {}; });
+    throw new Error(e.error || 'Image description generation failed');
+  }
+  return resp.json();
+}
+
+// ─── ANALYZE CI: Extract brand CI from product listing images via Gemini Vision ───
+export async function analyzeBrandCI(imageUrls, brandName) {
+  var resp = await fetchWithTimeout('/api/analyze-ci', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ images: imageUrls, brandName: brandName }),
+  }, 60000);
+  if (!resp.ok) {
+    var e = await resp.json().catch(function() { return {}; });
+    throw new Error(e.error || 'CI analysis failed');
   }
   return resp.json();
 }

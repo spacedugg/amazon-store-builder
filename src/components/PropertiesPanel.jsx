@@ -199,10 +199,92 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
             <TextFieldWithBold value={tile.brief || ''} onChange={function(v) { u('brief', v); }}
               rows={3} placeholder={t('props.designerBriefPlaceholder', uiLang)} className="input" />
           </div>
+          {tile.wireframeDescription && (
+            <div className="props-section">
+              <label className="label" style={{ color: '#7c3aed' }}>Bildbeschreibung (intern, nicht für Designer)</label>
+              <div style={{ fontSize: 10, lineHeight: 1.5, padding: '6px 8px', background: '#faf5ff', border: '1px solid #e9d5ff', borderRadius: 4, color: '#6b21a8' }}>
+                {tile.wireframeDescription}
+              </div>
+            </div>
+          )}
           <div className="props-section">
             <label className="label">{t('props.textOverlay', uiLang)}</label>
-            <TextFieldWithBold value={tile.textOverlay || ''} onChange={function(v) { u('textOverlay', v); }}
-              placeholder={t('props.textOverlayPlaceholder', uiLang)} className="input" />
+
+            {/* ── STRUCTURED TEXT EDITOR: separate fields per hierarchy level ── */}
+            {(function() {
+              var lines = (tile.textOverlay || '').split(/\\n|\n/);
+              // Classify lines into hierarchy levels
+              var structured = lines.map(function(line, i) {
+                var trimmed = line.trim();
+                var isBullet = /^•\s/.test(trimmed);
+                if (isBullet) return { type: 'bullet', text: trimmed.replace(/^•\s*/, ''), idx: i };
+                if (i === 0) return { type: 'h1', text: trimmed, idx: i };
+                // Check if it's a non-bullet after h1
+                var prevNonBullets = lines.slice(0, i).filter(function(l) { return l.trim() && !/^•\s/.test(l.trim()); }).length;
+                if (prevNonBullets === 1) return { type: 'h2', text: trimmed, idx: i };
+                return { type: 'h3', text: trimmed, idx: i };
+              });
+
+              function updateLine(lineIdx, newText) {
+                var newLines = (tile.textOverlay || '').split(/\\n|\n/);
+                var prefix = structured[lineIdx] && structured[lineIdx].type === 'bullet' ? '• ' : '';
+                newLines[lineIdx] = prefix + newText;
+                u('textOverlay', newLines.join('\\n'));
+              }
+
+              function addLine(type) {
+                var current = tile.textOverlay || '';
+                var prefix = type === 'bullet' ? '• ' : '';
+                u('textOverlay', current + (current ? '\\n' : '') + prefix);
+              }
+
+              function removeLine(lineIdx) {
+                var newLines = (tile.textOverlay || '').split(/\\n|\n/);
+                newLines.splice(lineIdx, 1);
+                u('textOverlay', newLines.join('\\n'));
+              }
+
+              var labels = { h1: 'Überschrift (H1)', h2: 'Unterzeile (H2)', h3: 'Ergänzungstext (H3)', bullet: 'Aufzählung' };
+              var colors = { h1: '#1d4ed8', h2: '#4338ca', h3: '#64748b', bullet: '#92400e' };
+              var bgColors = { h1: '#dbeafe', h2: '#e0e7ff', h3: '#f1f5f9', bullet: '#fef3c7' };
+              var fontSizes = { h1: 12, h2: 11, h3: 11, bullet: 11 };
+              var fontWeights = { h1: 700, h2: 600, h3: 400, bullet: 400 };
+
+              return (
+                <div>
+                  {structured.map(function(item, i) {
+                    if (!item.text && structured.length > 1) return null; // skip empty lines in multi-line
+                    return (
+                      <div key={i} style={{ marginBottom: 4, display: 'flex', alignItems: 'center', gap: 4 }}>
+                        <span style={{ background: bgColors[item.type], color: colors[item.type], borderRadius: 3, padding: '1px 6px', fontSize: 8, fontWeight: 700, minWidth: 20, textAlign: 'center', flexShrink: 0 }}>
+                          {item.type === 'bullet' ? '•' : item.type.toUpperCase()}
+                        </span>
+                        <input
+                          value={item.text}
+                          onChange={function(e) { updateLine(i, e.target.value); }}
+                          placeholder={labels[item.type]}
+                          style={{ flex: 1, fontSize: fontSizes[item.type], fontWeight: fontWeights[item.type], padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontFamily: 'inherit' }}
+                        />
+                        {structured.length > 1 && (
+                          <button onClick={function() { removeLine(i); }} style={{ fontSize: 10, color: '#94a3b8', background: 'none', border: 'none', cursor: 'pointer', padding: '2px 4px' }} title="Zeile entfernen">&times;</button>
+                        )}
+                      </div>
+                    );
+                  })}
+                  <div style={{ display: 'flex', gap: 4, marginTop: 4 }}>
+                    <button className="btn" onClick={function() { addLine('text'); }} style={{ fontSize: 9, padding: '2px 8px' }}>+ Textzeile</button>
+                    <button className="btn" onClick={function() { addLine('bullet'); }} style={{ fontSize: 9, padding: '2px 8px' }}>+ Aufzählung</button>
+                  </div>
+                  {/* Raw edit fallback */}
+                  <details style={{ marginTop: 6 }}>
+                    <summary style={{ fontSize: 9, color: '#94a3b8', cursor: 'pointer' }}>Raw bearbeiten</summary>
+                    <TextFieldWithBold value={tile.textOverlay || ''} onChange={function(v) { u('textOverlay', v); }}
+                      placeholder={t('props.textOverlayPlaceholder', uiLang)} className="input" />
+                  </details>
+                </div>
+              );
+            })()}
+
             {tile.textOverlay && (
               <div className="text-align-picker" style={{ display: 'flex', gap: 2, marginTop: 4 }}>
                 <button className={'btn text-align-btn' + ((!tile.textAlign || tile.textAlign === 'left') ? ' active' : '')} onClick={function() { u('textAlign', 'left'); }} title="Linksbündig" style={{ fontSize: 10, padding: '3px 8px' }}>&#8676; Links</button>

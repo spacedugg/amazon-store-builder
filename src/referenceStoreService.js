@@ -13,6 +13,20 @@ function delay(ms) {
   return new Promise(function(r) { setTimeout(r, ms); });
 }
 
+// ─── SAFE JSON FETCH: Validates Content-Type before parsing ───
+async function fetchJSON(url) {
+  var resp = await fetch(url);
+  if (!resp.ok) throw new Error('HTTP ' + resp.status + ' for ' + url);
+  var ct = resp.headers.get('content-type') || '';
+  if (ct.indexOf('application/json') < 0 && ct.indexOf('text/json') < 0) {
+    // Some servers serve .json files as text/plain — allow that but reject text/html
+    if (ct.indexOf('text/html') >= 0) {
+      throw new Error('Server returned HTML instead of JSON for ' + url + '. Check that the file exists and is deployed correctly.');
+    }
+  }
+  return resp.json();
+}
+
 // ─── CRAWL & PARSE A SINGLE BRAND STORE (ALL PAGES) ───
 export async function crawlAndParseStore(storeUrl, onProgress, cancelRef) {
   var log = onProgress || function() {};
@@ -131,10 +145,7 @@ export async function analyzeStoreImagesWithGemini(store, onProgress, cancelRef)
 // ─── LOAD STATIC REFERENCE DATA FROM _summary.json ───
 export async function loadStaticReferenceData(category) {
   try {
-    var response = await fetch('/data/reference-stores/_summary.json');
-    if (!response.ok) return null;
-
-    var fullData = await response.json();
+    var fullData = await fetchJSON('/data/reference-stores/_summary.json');
     if (!fullData) return null;
 
     var parts = [];
@@ -332,10 +343,7 @@ export async function loadStaticReferenceData(category) {
 // Uses ALL available data sources: ci, navigation, analysis, pages, geminiVisionV3, browserCrawl
 export async function loadGeminiAnalysesForCategory(category) {
   try {
-    var summaryResp = await fetch('/data/reference-stores/_summary.json');
-    if (!summaryResp.ok) return [];
-
-    var summary = await summaryResp.json();
+    var summary = await fetchJSON('/data/reference-stores/_summary.json');
     if (!summary || !summary.meta || !summary.meta.stores) return [];
 
     // Filter by category, always include top-tier stores
@@ -351,9 +359,7 @@ export async function loadGeminiAnalysesForCategory(category) {
     var allStoreData = [];
     for (var i = 0; i < storeFiles.length; i++) {
       try {
-        var storeResp = await fetch('/data/reference-stores/' + storeFiles[i].file);
-        if (!storeResp.ok) continue;
-        var storeData = await storeResp.json();
+        var storeData = await fetchJSON('/data/reference-stores/' + storeFiles[i].file);
 
         // Only include stores that have meaningful data
         var hasCI = storeData.ci && storeData.ci.primaryColors;
@@ -663,10 +669,13 @@ export async function saveToKnowledgeBase(store, imageAnalyses, claudeAnalysis, 
 
 // ─── KNOWLEDGE BASE: Load reference data for a category ───
 export async function loadKnowledgeBaseForCategory(category) {
-  var resp = await fetch('/api/reference-stores?forCategory=' + encodeURIComponent(category || 'generic'));
-  if (!resp.ok) return [];
-  var data = await resp.json();
-  return data.analyses || [];
+  try {
+    var data = await fetchJSON('/api/reference-stores?forCategory=' + encodeURIComponent(category || 'generic'));
+    return data.analyses || [];
+  } catch (e) {
+    console.warn('Knowledge base load failed:', e.message);
+    return [];
+  }
 }
 
 // ─── KNOWLEDGE BASE: List all reference stores ───
