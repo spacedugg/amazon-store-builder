@@ -588,36 +588,57 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
         <div className="briefing-field" style={{ flexDirection: 'column', gap: 2 }}>
           <span className="briefing-field-label">Text on Image:{tile.textAlign && tile.textAlign !== 'left' ? ' (' + (tile.textAlign === 'center' ? 'centered' : 'right-aligned') + ')' : ''}</span>
           <div style={{ padding: '6px 8px', background: '#fefce8', border: '1px solid #fde68a', borderRadius: 4, lineHeight: 1.5 }}>
-            {tile.textOverlay.split(/\\n|\n/).map(function(line, li) {
-              var trimmed = line.trim();
-              if (!trimmed) return <div key={li} style={{ height: 4 }} />;
-              // Detect bullet points (can appear in any hierarchy)
-              var isBullet = /^•\s/.test(trimmed);
-              var bulletTag = isBullet ? <span style={{ background: '#fef3c7', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#92400e', marginRight: 3 }}>BULLET</span> : null;
-              // Lines wrapped in **bold** markers → Hierarchy 1 (Heading)
-              var isBold = /^\*\*.*\*\*$/.test(trimmed);
-              var displayText = isBold ? trimmed.replace(/^\*\*|\*\*$/g, '') : trimmed;
-              if (isBullet) displayText = displayText.replace(/^•\s*/, '');
-              if (isBold) {
-                return <div key={li} style={{ fontSize: 12, fontWeight: 700, color: '#1e293b', marginTop: li > 0 ? 2 : 0 }}>
-                  <span style={{ background: '#dbeafe', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#1d4ed8', marginRight: 3 }}>HIERARCHY 1</span>
+            {(function() {
+              var allLines = tile.textOverlay.split(/\\n|\n/).filter(function(l) { return l.trim(); });
+              var isMultiText = allLines.length > 1;
+              // Hierarchy labels only when multiple texts in one tile — otherwise just show text type
+              return tile.textOverlay.split(/\\n|\n/).map(function(line, li) {
+                var trimmed = line.trim();
+                if (!trimmed) return <div key={li} style={{ height: 4 }} />;
+                var isBullet = /^•\s/.test(trimmed);
+                var bulletTag = isBullet ? <span style={{ background: '#fef3c7', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#92400e', marginRight: 3 }}>BULLET</span> : null;
+                var isBold = /^\*\*.*\*\*$/.test(trimmed);
+                var displayText = isBold ? trimmed.replace(/^\*\*|\*\*$/g, '') : trimmed;
+                if (isBullet) displayText = displayText.replace(/^•\s*/, '');
+
+                if (!isMultiText) {
+                  // SINGLE TEXT — just show "text" label, no hierarchy needed
+                  return <div key={li} style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>
+                    <span style={{ background: '#dbeafe', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#1d4ed8', marginRight: 3 }}>text</span>
+                    {bulletTag}{displayText}
+                  </div>;
+                }
+
+                // MULTIPLE TEXTS — hierarchy by POSITION (not text length)
+                // Count which non-bullet line this is (0-based)
+                var nonBulletIdx = 0;
+                if (!isBullet) {
+                  for (var ci = 0; ci < li; ci++) {
+                    var cl = (tile.textOverlay.split(/\\n|\n/)[ci] || '').trim();
+                    if (cl && !/^•\s/.test(cl)) nonBulletIdx++;
+                  }
+                }
+
+                // Bold or first non-bullet = H1, second non-bullet = H2, rest = H3
+                // Bullets are always H3 (detail text)
+                if (!isBullet && (isBold || nonBulletIdx === 0)) {
+                  return <div key={li} style={{ fontSize: 12, fontWeight: 700, color: '#1e293b', marginTop: li > 0 ? 2 : 0 }}>
+                    <span style={{ background: '#dbeafe', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#1d4ed8', marginRight: 3 }}>HIERARCHY 1</span>
+                    {bulletTag}{displayText}
+                  </div>;
+                }
+                if (!isBullet && nonBulletIdx === 1) {
+                  return <div key={li} style={{ fontSize: 11, fontWeight: 600, color: '#334155', marginTop: li > 0 ? 2 : 0, paddingLeft: 0 }}>
+                    <span style={{ background: '#e0e7ff', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#4338ca', marginRight: 3 }}>HIERARCHY 2</span>
+                    {bulletTag}{displayText}
+                  </div>;
+                }
+                return <div key={li} style={{ fontSize: 11, color: '#475569', paddingLeft: isBullet ? 12 : 0 }}>
+                  <span style={{ background: '#f1f5f9', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#94a3b8', marginRight: 3 }}>HIERARCHY 3</span>
                   {bulletTag}{displayText}
                 </div>;
-              }
-              // Short lines (< 40 chars) without sentence-ending punctuation → Hierarchy 2 (Subheading)
-              var isShort = trimmed.length < 40 && !/[.!,;:]$/.test(trimmed);
-              if (isShort) {
-                return <div key={li} style={{ fontSize: 11, fontWeight: 600, color: '#334155', marginTop: li > 0 ? 2 : 0, paddingLeft: isBullet ? 12 : 0 }}>
-                  <span style={{ background: '#e0e7ff', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#4338ca', marginRight: 3 }}>HIERARCHY 2</span>
-                  {bulletTag}{displayText}
-                </div>;
-              }
-              // Default: Hierarchy 3 (Body text)
-              return <div key={li} style={{ fontSize: 11, color: '#475569', paddingLeft: isBullet ? 12 : 0 }}>
-                <span style={{ background: '#f1f5f9', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#94a3b8', marginRight: 3 }}>HIERARCHY 3</span>
-                {bulletTag}{displayText}
-              </div>;
-            })}
+              });
+            })()}
           </div>
         </div>
       )}
@@ -646,10 +667,24 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
         </div>
       )}
 
-      {tile.linkAsin && (
+      {/* ─── CLICKABLE LINK: Show where this tile links to (ASIN or internal page) ─── */}
+      {(tile.linkAsin || tile.linkUrl) && (
         <div className="briefing-field">
-          <span className="briefing-field-label">Link ASIN:</span>
-          <span className="briefing-field-value briefing-field-mono">{tile.linkAsin}</span>
+          <span className="briefing-field-label" style={{ color: '#7c3aed' }}>clickable:</span>
+          <span className="briefing-field-value briefing-field-mono" style={{ color: '#7c3aed' }}>
+            {tile.linkUrl
+              ? (function() {
+                  // Resolve internal linkUrl to page name if possible
+                  var pageName = tile.linkUrl;
+                  if (store && store.pages) {
+                    var linkedPage = store.pages.find(function(p) { return '/' + p.id === tile.linkUrl || p.id === tile.linkUrl.replace(/^\//, ''); });
+                    if (linkedPage) pageName = linkedPage.name + ' (' + tile.linkUrl + ')';
+                  }
+                  return '→ ' + pageName;
+                })()
+              : tile.linkAsin
+            }
+          </span>
         </div>
       )}
 
@@ -668,13 +703,6 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
               </div>
             );
           })}
-        </div>
-      )}
-
-      {tile.linkUrl && (
-        <div className="briefing-field">
-          <span className="briefing-field-label">Link URL:</span>
-          <span className="briefing-field-value briefing-field-mono">{tile.linkUrl}</span>
         </div>
       )}
 
@@ -2293,27 +2321,8 @@ export default function BriefingView() {
             <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.08em', color: '#dc2626' }}>Designer Instructions</span>
             {activePage && <span style={{ fontSize: 10, color: '#94a3b8', fontWeight: 400 }}>{activePage.name}</span>}
             <span style={{ flex: 1 }} />
-            {activePage && (
-              <button
-                onClick={function() { handleGenerateWireframes(activePage.id); }}
-                disabled={wfGenerating !== null}
-                style={{
-                  background: wfGenerating === activePage.id ? '#fbbf24' : '#6366f1',
-                  color: wfGenerating === activePage.id ? '#78350f' : '#fff',
-                  border: 'none', borderRadius: 4, padding: '4px 10px', fontSize: 10, fontWeight: 700,
-                  cursor: wfGenerating ? 'not-allowed' : 'pointer', opacity: wfGenerating && wfGenerating !== activePage.id ? 0.4 : 1,
-                }}
-                title="Wireframe-Skizzen für alle Bild-Kacheln dieser Seite generieren"
-              >
-                {wfGenerating === activePage.id ? 'Generiere... ' + wfProgress : 'Wireframes generieren'}
-              </button>
-            )}
+            {/* Wireframe generation button removed from designer dashboard — only available in internal dashboard */}
           </div>
-          {wfProgress && !wfGenerating && (
-            <div style={{ padding: '4px 16px', background: '#ecfdf5', fontSize: 10, color: '#166534', borderBottom: '1px solid #bbf7d0' }}>
-              {wfProgress}
-            </div>
-          )}
           <div className="briefing-right-panel-body">
             {/* Store Hero / Header Banner instructions */}
             {(function() {
@@ -2376,32 +2385,51 @@ export default function BriefingView() {
                       <div className="briefing-field" style={{ flexDirection: 'column', gap: 2 }}>
                         <span className="briefing-field-label">Text on Image:</span>
                         <div style={{ padding: '6px 8px', background: '#fefce8', border: '1px solid #fde68a', borderRadius: 4, lineHeight: 1.5 }}>
-                          {heroTile.textOverlay.split(/\\n|\n/).map(function(line, li) {
-                            var trimmed = line.trim();
-                            if (!trimmed) return <div key={li} style={{ height: 4 }} />;
-                            var isBullet = /^•\s/.test(trimmed);
-                            var bulletTag = isBullet ? <span style={{ background: '#fef3c7', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#92400e', marginRight: 3 }}>BULLET</span> : null;
-                            var isBold = /^\*\*.*\*\*$/.test(trimmed);
-                            var displayText = isBold ? trimmed.replace(/^\*\*|\*\*$/g, '') : trimmed;
-                            if (isBullet) displayText = displayText.replace(/^•\s*/, '');
-                            if (isBold) {
-                              return <div key={li} style={{ fontSize: 12, fontWeight: 700, color: '#1e293b' }}>
-                                <span style={{ background: '#dbeafe', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#1d4ed8', marginRight: 3 }}>HIERARCHY 1</span>
+                          {(function() {
+                            var allLines = heroTile.textOverlay.split(/\\n|\n/).filter(function(l) { return l.trim(); });
+                            var isMultiText = allLines.length > 1;
+                            return heroTile.textOverlay.split(/\\n|\n/).map(function(line, li) {
+                              var trimmed = line.trim();
+                              if (!trimmed) return <div key={li} style={{ height: 4 }} />;
+                              var isBullet = /^•\s/.test(trimmed);
+                              var bulletTag = isBullet ? <span style={{ background: '#fef3c7', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#92400e', marginRight: 3 }}>BULLET</span> : null;
+                              var isBold = /^\*\*.*\*\*$/.test(trimmed);
+                              var displayText = isBold ? trimmed.replace(/^\*\*|\*\*$/g, '') : trimmed;
+                              if (isBullet) displayText = displayText.replace(/^•\s*/, '');
+
+                              if (!isMultiText) {
+                                return <div key={li} style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>
+                                  <span style={{ background: '#dbeafe', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#1d4ed8', marginRight: 3 }}>text</span>
+                                  {bulletTag}{displayText}
+                                </div>;
+                              }
+
+                              // MULTIPLE TEXTS — hierarchy by POSITION (not text length)
+                              var nonBulletIdx = 0;
+                              if (!isBullet) {
+                                for (var ci = 0; ci < li; ci++) {
+                                  var cl = (heroTile.textOverlay.split(/\\n|\n/)[ci] || '').trim();
+                                  if (cl && !/^•\s/.test(cl)) nonBulletIdx++;
+                                }
+                              }
+                              if (!isBullet && (isBold || nonBulletIdx === 0)) {
+                                return <div key={li} style={{ fontSize: 12, fontWeight: 700, color: '#1e293b' }}>
+                                  <span style={{ background: '#dbeafe', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#1d4ed8', marginRight: 3 }}>HIERARCHY 1</span>
+                                  {bulletTag}{displayText}
+                                </div>;
+                              }
+                              if (!isBullet && nonBulletIdx === 1) {
+                                return <div key={li} style={{ fontSize: 11, fontWeight: 600, color: '#334155', paddingLeft: 0 }}>
+                                  <span style={{ background: '#e0e7ff', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#4338ca', marginRight: 3 }}>HIERARCHY 2</span>
+                                  {bulletTag}{displayText}
+                                </div>;
+                              }
+                              return <div key={li} style={{ fontSize: 11, color: '#475569', paddingLeft: isBullet ? 12 : 0 }}>
+                                <span style={{ background: '#f1f5f9', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#94a3b8', marginRight: 3 }}>HIERARCHY 3</span>
                                 {bulletTag}{displayText}
                               </div>;
-                            }
-                            var isShort = trimmed.length < 40 && !/[.!,;:]$/.test(trimmed);
-                            if (isShort) {
-                              return <div key={li} style={{ fontSize: 11, fontWeight: 600, color: '#334155', paddingLeft: isBullet ? 12 : 0 }}>
-                                <span style={{ background: '#e0e7ff', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#4338ca', marginRight: 3 }}>HIERARCHY 2</span>
-                                {bulletTag}{displayText}
-                              </div>;
-                            }
-                            return <div key={li} style={{ fontSize: 11, color: '#475569', paddingLeft: isBullet ? 12 : 0 }}>
-                              <span style={{ background: '#f1f5f9', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#94a3b8', marginRight: 3 }}>HIERARCHY 3</span>
-                              {bulletTag}{displayText}
-                            </div>;
-                          })}
+                            });
+                          })()}
                         </div>
                       </div>
                     )}

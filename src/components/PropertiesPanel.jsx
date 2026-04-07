@@ -525,7 +525,28 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
                   <input className="input" value={ps.intro.description || ''} placeholder="Beschreibung (max. 70 Zeichen)"
                     maxLength={70} onChange={function(e) { updatePS('intro.description', e.target.value); }} style={{ marginBottom: 4 }} />
                   <input className="input" value={ps.intro.buttonLabel || ''} placeholder="Button-Text (max. 20 Zeichen)"
-                    maxLength={20} onChange={function(e) { updatePS('intro.buttonLabel', e.target.value); }} />
+                    maxLength={20} onChange={function(e) { updatePS('intro.buttonLabel', e.target.value); }} style={{ marginBottom: 6 }} />
+                  {/* Intro image upload */}
+                  <div style={{ fontSize: 10, fontWeight: 600, color: '#6b21a8', marginBottom: 3 }}>Intro-Bild (optional)</div>
+                  {ps.intro.image ? (
+                    <div style={{ position: 'relative', marginBottom: 4 }}>
+                      <img src={ps.intro.image} alt="Intro" style={{ width: '100%', maxHeight: 80, objectFit: 'cover', borderRadius: 4, border: '1px solid #e5e7eb' }} />
+                      <button onClick={function() { updatePS('intro.image', null); }}
+                        style={{ position: 'absolute', top: 2, right: 2, background: '#dc2626', color: '#fff', border: 'none', borderRadius: '50%', width: 16, height: 16, fontSize: 9, cursor: 'pointer', lineHeight: '14px' }}>✕</button>
+                    </div>
+                  ) : (
+                    <label style={{ display: 'inline-block', fontSize: 9, color: '#7c3aed', border: '1px dashed #c4b5fd', borderRadius: 3, padding: '3px 10px', cursor: 'pointer', marginBottom: 4 }}>
+                      + Bild hochladen
+                      <input type="file" accept="image/*" style={{ display: 'none' }}
+                        onChange={function(e) {
+                          var file = e.target.files && e.target.files[0];
+                          if (!file) return;
+                          var reader = new FileReader();
+                          reader.onload = function(ev) { updatePS('intro.image', ev.target.result); };
+                          reader.readAsDataURL(file);
+                        }} />
+                    </label>
+                  )}
                 </>
               )}
             </div>
@@ -566,19 +587,45 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
                     <div style={{ fontSize: 10, fontWeight: 600, color: '#7c3aed', marginBottom: 3 }}>Antworten ({(q.answers || []).length}/6)</div>
                     {(q.answers || []).map(function(a, aIdx) {
                       return (
-                        <div key={a.id || aIdx} style={{ display: 'flex', gap: 4, alignItems: 'center', marginBottom: 3 }}>
-                          <input className="input" value={a.text || ''} placeholder={'Antwort ' + (aIdx + 1) + ' (max. 40)'}
-                            maxLength={40} style={{ flex: 1, fontSize: 10, padding: '3px 6px' }}
-                            onChange={function(e) { updateAnswer(qIdx, aIdx, 'text', e.target.value); }} />
-                          <input className="input" value={(a.asins || []).join(', ')} placeholder="ASINs"
-                            style={{ width: 80, fontSize: 9, padding: '3px 4px' }}
-                            onChange={function(e) {
-                              var asins = e.target.value.split(/[,;\s]+/).map(function(s) { return s.trim(); }).filter(Boolean);
-                              updateAnswer(qIdx, aIdx, 'asins', asins);
-                            }} />
-                          {(q.answers || []).length > 2 && (
-                            <button onClick={function() { removeAnswer(qIdx, aIdx); }}
-                              style={{ fontSize: 10, color: '#dc2626', background: 'none', border: 'none', cursor: 'pointer', padding: 2 }}>✕</button>
+                        <div key={a.id || aIdx} style={{ background: '#fff', borderRadius: 4, border: '1px solid #ede9fe', padding: 4, marginBottom: 4 }}>
+                          <div style={{ display: 'flex', gap: 4, alignItems: 'center', marginBottom: a.image ? 4 : 0 }}>
+                            <input className="input" value={a.text || ''} placeholder={'Antwort ' + (aIdx + 1) + ' (max. 40)'}
+                              maxLength={40} style={{ flex: 1, fontSize: 10, padding: '3px 6px' }}
+                              onChange={function(e) { updateAnswer(qIdx, aIdx, 'text', e.target.value); }} />
+                            <input className="input" value={(a.asins || []).join(', ')} placeholder="ASINs"
+                              style={{ width: 80, fontSize: 9, padding: '3px 4px' }}
+                              onChange={function(e) {
+                                var asins = e.target.value.split(/[,;\s]+/).map(function(s) { return s.trim(); }).filter(Boolean);
+                                updateAnswer(qIdx, aIdx, 'asins', asins);
+                              }} />
+                            {(q.answers || []).length > 2 && (
+                              <button onClick={function() { removeAnswer(qIdx, aIdx); }}
+                                style={{ fontSize: 10, color: '#dc2626', background: 'none', border: 'none', cursor: 'pointer', padding: 2 }}>✕</button>
+                            )}
+                          </div>
+                          {/* Answer image upload */}
+                          {q.allowImages && (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 3 }}>
+                              {a.image ? (
+                                <div style={{ position: 'relative', display: 'inline-block' }}>
+                                  <img src={a.image} alt="" style={{ height: 36, width: 36, objectFit: 'cover', borderRadius: 3, border: '1px solid #e5e7eb' }} />
+                                  <button onClick={function() { updateAnswer(qIdx, aIdx, 'image', null); }}
+                                    style={{ position: 'absolute', top: -4, right: -4, background: '#dc2626', color: '#fff', border: 'none', borderRadius: '50%', width: 14, height: 14, fontSize: 8, cursor: 'pointer', lineHeight: '12px' }}>✕</button>
+                                </div>
+                              ) : (
+                                <label style={{ fontSize: 8, color: '#7c3aed', border: '1px dashed #c4b5fd', borderRadius: 3, padding: '2px 6px', cursor: 'pointer' }}>
+                                  + Bild
+                                  <input type="file" accept="image/*" style={{ display: 'none' }}
+                                    onChange={function(e) {
+                                      var file = e.target.files && e.target.files[0];
+                                      if (!file) return;
+                                      var reader = new FileReader();
+                                      reader.onload = function(ev) { updateAnswer(qIdx, aIdx, 'image', ev.target.result); };
+                                      reader.readAsDataURL(file);
+                                    }} />
+                                </label>
+                              )}
+                            </div>
                           )}
                         </div>
                       );

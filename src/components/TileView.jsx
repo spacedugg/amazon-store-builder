@@ -48,32 +48,68 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
     );
   }
 
-  // Product Selector (Quiz) tile
+  // Product Selector (Quiz) tile — displayed as Amazon customer-facing preview
   if (tile.type === 'product_selector') {
     var ps = tile.productSelector || {};
-    var qCount = (ps.questions || []).length;
     var firstQ = (ps.questions || [])[0];
-    var aCount = firstQ ? (firstQ.answers || []).length : 0;
+    var psBg = (ps.styling || {}).bgColor || bgColor || '#fff';
+    var psFont = (ps.styling || {}).typography === 'serif' ? 'Georgia, serif' : 'system-ui, -apple-system, sans-serif';
     return (
-      <div className={cls} onClick={onClick} style={{ background: bgColor || '#f8f4ff', minHeight: 100 }}>
-        <div style={{ padding: '10px 12px', fontSize: 11 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
-            <span style={{ background: '#7c3aed', color: '#fff', fontSize: 9, fontWeight: 700, padding: '2px 6px', borderRadius: 3 }}>QUIZ</span>
-            <span style={{ fontWeight: 700, fontSize: 12 }}>Produktauswahl</span>
-          </div>
-          {ps.intro && ps.intro.enabled && ps.intro.headline && (
-            <div style={{ fontSize: 10, color: '#6b21a8', marginBottom: 4 }}>Intro: {ps.intro.headline}</div>
-          )}
-          {firstQ && firstQ.questionText && (
-            <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '4px 8px', marginBottom: 4, fontSize: 10 }}>
-              <strong>Q1:</strong> {firstQ.questionText}
-              {aCount > 0 && <span style={{ color: '#9ca3af', marginLeft: 4 }}>({aCount} Antworten)</span>}
+      <div className={cls} onClick={onClick} style={{ background: psBg, minHeight: 120 }}>
+        <div style={{ padding: '14px 16px', fontFamily: psFont }}>
+          {/* Intro section (like Amazon shows it) */}
+          {ps.intro && ps.intro.enabled && (
+            <div style={{ textAlign: 'center', marginBottom: 10 }}>
+              {ps.intro.image && (
+                <img src={ps.intro.image} alt="" style={{ width: '100%', maxHeight: 60, objectFit: 'cover', borderRadius: 4, marginBottom: 6 }} />
+              )}
+              {ps.intro.headline && (
+                <div style={{ fontWeight: 700, fontSize: 14, color: '#111', marginBottom: 2 }}>{ps.intro.headline}</div>
+              )}
+              {ps.intro.description && (
+                <div style={{ fontSize: 10, color: '#565959', marginBottom: 6 }}>{ps.intro.description}</div>
+              )}
+              {ps.intro.buttonLabel && (
+                <div style={{ display: 'inline-block', background: '#FF9900', color: '#111', fontSize: 10, fontWeight: 700, padding: '4px 16px', borderRadius: 20, cursor: 'default' }}>{ps.intro.buttonLabel}</div>
+              )}
             </div>
           )}
-          <div style={{ display: 'flex', gap: 8, fontSize: 10, color: '#7c3aed', flexWrap: 'wrap' }}>
-            <span>{qCount} Frage{qCount !== 1 ? 'n' : ''}</span>
-            {(ps.recommendedAsins || []).length > 0 && <span>{(ps.recommendedAsins || []).length} Produkte</span>}
-          </div>
+          {/* Question display (Amazon-style) */}
+          {firstQ && (
+            <div style={{ textAlign: 'center' }}>
+              {firstQ.questionText && (
+                <div style={{ fontWeight: 700, fontSize: 13, color: '#111', marginBottom: 2 }}>{firstQ.questionText}</div>
+              )}
+              {firstQ.descriptionText && (
+                <div style={{ fontSize: 9, color: '#565959', marginBottom: 8 }}>{firstQ.descriptionText}</div>
+              )}
+              {/* Answer choices as clickable cards (Amazon style) */}
+              <div style={{ display: 'flex', gap: 6, justifyContent: 'center', flexWrap: 'wrap' }}>
+                {(firstQ.answers || []).map(function(a, ai) {
+                  return (
+                    <div key={ai} style={{
+                      border: '1px solid #d5d9d9', borderRadius: 8, padding: a.image ? 0 : '8px 10px',
+                      minWidth: 60, maxWidth: 90, textAlign: 'center', background: '#fff',
+                      overflow: 'hidden', cursor: 'default',
+                    }}>
+                      {a.image && (
+                        <img src={a.image} alt="" style={{ width: '100%', height: 50, objectFit: 'cover' }} />
+                      )}
+                      <div style={{ fontSize: 9, fontWeight: 600, color: '#0F1111', padding: a.image ? '3px 4px' : 0 }}>
+                        {a.text || 'Antwort ' + (ai + 1)}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+          {/* Quiz indicator */}
+          {(ps.questions || []).length > 1 && (
+            <div style={{ textAlign: 'center', marginTop: 8, fontSize: 8, color: '#888' }}>
+              1 / {(ps.questions || []).length}
+            </div>
+          )}
         </div>
       </div>
     );
@@ -135,8 +171,10 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
           ? <img src={tile.wireframeImage} className="tile-uploaded-img tile-wireframe-img" alt="Wireframe" />
           : <Wireframe tile={tile} viewMode={viewMode} bgColor={bgColor} />
       }
-      {tile.type === 'shoppable_image' && <div className="tile-shoppable-badge">{t('tile.shoppable', uiLang)}</div>}
-      {tile.linkAsin && <div className="tile-link-badge">ASIN: {tile.linkAsin}</div>}
+      {/* Shoppable badge only shown when wireframe/image is NOT visible (wireframe SVG already has its own badges) */}
+      {tile.type === 'shoppable_image' && imgSrc && <div className="tile-shoppable-badge">{t('tile.shoppable', uiLang)}</div>}
+      {/* ASIN link shown subtly only when an uploaded image is present (otherwise wireframe shows it) */}
+      {tile.linkAsin && imgSrc && <div className="tile-link-badge">ASIN: {tile.linkAsin}</div>}
       {hasHotspots && (tile.hotspots || []).map(function(hs, i) {
         return (
           <div key={i} className="tile-hotspot-dot" style={{

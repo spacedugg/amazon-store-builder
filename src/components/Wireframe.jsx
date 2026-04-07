@@ -68,15 +68,22 @@ export default function Wireframe({ tile, width, viewMode, bgColor }) {
         </>
       )}
 
-      {/* Type badge */}
-      {(isShoppable || isImageText) && (
+      {/* Type badge — only for image_text (shoppable is shown via imageCategory badge + hotspot dots) */}
+      {isImageText && (
         <g>
-          <rect x="3" y={ht - 13} width={isShoppable ? 42 : 34} height="10" rx="2"
-            fill={isShoppable ? '#FF9900' : '#667EEA'} opacity=".7" />
+          <rect x="3" y={ht - 13} width={34} height="10" rx="2"
+            fill="#667EEA" opacity=".7" />
           <text x="5" y={ht - 5} fontSize="5.5" fill="#fff" fontWeight="700"
             fontFamily="system-ui, sans-serif">
-            {isShoppable ? 'SHOPPABLE' : 'IMG+TXT'}
+            IMG+TXT
           </text>
+        </g>
+      )}
+      {/* Shoppable indicator: small tag top-right so the tile type is still clear */}
+      {isShoppable && (
+        <g>
+          <rect x={w - 38} y="2" width="36" height="9" rx="2" fill="#FF9900" opacity=".85" />
+          <text x={w - 36} y="9" fontSize="5" fill="#fff" fontWeight="700" fontFamily="system-ui, sans-serif">Shoppable</text>
         </g>
       )}
 
@@ -92,6 +99,16 @@ export default function Wireframe({ tile, width, viewMode, bgColor }) {
           </g>
         );
       })}
+
+      {/* Linked ASIN badge bottom-left (non-overlapping with imageCategory badge at bottom-right) */}
+      {tile.linkAsin && (
+        <g>
+          <rect x="3" y={ht - 13} width={Math.min(tile.linkAsin.length * 3.5 + 20, w * 0.45)} height="10" rx="2" fill="#F59E0B" opacity=".7" />
+          <text x="5" y={ht - 5} fontSize="4.5" fill="#fff" fontWeight="600" fontFamily="monospace">
+            {'ASIN: ' + tile.linkAsin}
+          </text>
+        </g>
+      )}
 
       {/* Image category badge */}
       {tile.imageCategory && CATEGORY_BADGE_COLORS[tile.imageCategory] && (
