@@ -154,7 +154,8 @@ export default function App() {
       { brandTone: store.brandTone, brandStory: store.brandStory, keyFeatures: store.keyFeatures },
       function(current, total, category) {
         setWfProgress(current + '/' + total + ' (' + category + ')');
-      }
+      },
+      store.manualCI || null
     ).then(function(result) {
       setWfGenerating(null);
       var msg = result.success + ' generiert, ' + result.failed + ' fehlgeschlagen';

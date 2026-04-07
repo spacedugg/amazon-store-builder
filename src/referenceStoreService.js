@@ -6,7 +6,7 @@ import { crawlBrandStorePage, analyzeStoreImages } from './api';
 import { parseBrandStoreHTML, combineStorePages } from './brandStoreParser';
 
 var DELAY_BETWEEN_PAGES = 2000; // 2s between subpage crawls to avoid rate limiting
-var MAX_SUBPAGES = 15; // Safety limit per store
+var MAX_SUBPAGES = 40; // Safety limit per store
 var MAX_IMAGES_FOR_ANALYSIS = 20; // Max images to send to Gemini per store
 
 function delay(ms) {

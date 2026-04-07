@@ -37,15 +37,21 @@ module.exports = async function handler(req, res) {
     var internalLinks = discoverInternalLinks(homepageHtml, baseOrigin, parsed.pathname);
 
     // ═══════════════════════════════════════════════════
-    // STEP 3: Crawl the most important subpages (max 5)
+    // STEP 3: Crawl subpages (up to 30)
     // ═══════════════════════════════════════════════════
     var subpageContents = {};
-    var crawlPromises = internalLinks.slice(0, 5).map(function(link) {
-      return fetchPage(link.url).then(function(html) {
-        if (html) subpageContents[link.category] = { url: link.url, html: html, label: link.label };
-      }).catch(function() {});
-    });
-    await Promise.all(crawlPromises);
+    var maxSubpages = 30;
+    var linksToFetch = internalLinks.slice(0, maxSubpages);
+    // Crawl in batches of 5 to avoid overwhelming the server
+    for (var batch = 0; batch < linksToFetch.length; batch += 5) {
+      var batchLinks = linksToFetch.slice(batch, batch + 5);
+      var crawlPromises = batchLinks.map(function(link) {
+        return fetchPage(link.url).then(function(html) {
+          if (html) subpageContents[link.category + '_' + link.url] = { url: link.url, html: html, label: link.label, category: link.category };
+        }).catch(function() {});
+      });
+      await Promise.all(crawlPromises);
+    }
 
     // ═══════════════════════════════════════════════════
     // STEP 4: Extract raw content from ALL pages
@@ -157,12 +163,12 @@ function discoverInternalLinks(html, baseOrigin, basePath) {
   // Sort by priority, highest first
   links.sort(function(a, b) { return b.priority - a.priority; });
 
-  // Deduplicate by category (only one page per category)
-  var usedCategories = {};
+  // Allow multiple pages per category (up to 5 per category for product pages, 2 for others)
+  var categoryCount = {};
   return links.filter(function(l) {
-    if (usedCategories[l.category]) return false;
-    usedCategories[l.category] = true;
-    return true;
+    var maxPerCategory = l.category === 'products' ? 20 : 2;
+    categoryCount[l.category] = (categoryCount[l.category] || 0) + 1;
+    return categoryCount[l.category] <= maxPerCategory;
   });
 }
 
@@ -188,6 +194,7 @@ function extractAllContent(homepageHtml, subpageContents, url) {
     socialProof: [],
     colors: [],
     fonts: [],
+    typographyStyle: null,
     // Raw text for AI
     rawText: '',
     pagesScraped: 1,
@@ -202,25 +209,29 @@ function extractAllContent(homepageHtml, subpageContents, url) {
   result.tagline = homeInfo.tagline;
   result.colors = homeInfo.colors;
   result.fonts = homeInfo.fonts;
+  result.typographyStyle = homeInfo.typographyStyle || null;
   result.certifications = homeInfo.certifications.slice();
   result.features = homeInfo.features.slice();
   result.socialProof = homeInfo.socialProof.slice();
   result.rawText += '=== HOMEPAGE ===\n' + homeInfo.mainText.slice(0, 3000) + '\n\n';
 
   // ── SUBPAGE EXTRACTION ──
-  Object.keys(subpageContents).forEach(function(category) {
-    var page = subpageContents[category];
+  Object.keys(subpageContents).forEach(function(key) {
+    var page = subpageContents[key];
+    var category = page.category || key;
     var pageInfo = extractFromPage(page.html, category);
     result.pagesScraped++;
 
-    result.rawText += '=== ' + category.toUpperCase() + ' PAGE (' + page.label + ') ===\n' + pageInfo.mainText.slice(0, 3000) + '\n\n';
+    // Limit rawText per page based on total pages (keep within AI context)
+    var rawTextBudget = Math.max(500, Math.floor(10000 / Math.max(Object.keys(subpageContents).length, 1)));
+    result.rawText += '=== ' + category.toUpperCase() + ' PAGE (' + page.label + ') ===\n' + pageInfo.mainText.slice(0, rawTextBudget) + '\n\n';
 
     // Merge certifications (deduplicated)
     var certSet = {};
     result.certifications.forEach(function(c) { certSet[c.toLowerCase().slice(0, 30)] = true; });
     pageInfo.certifications.forEach(function(c) {
-      var key = c.toLowerCase().slice(0, 30);
-      if (!certSet[key]) { result.certifications.push(c); certSet[key] = true; }
+      var key2 = c.toLowerCase().slice(0, 30);
+      if (!certSet[key2]) { result.certifications.push(c); certSet[key2] = true; }
     });
 
     // Merge features
@@ -236,13 +247,24 @@ function extractAllContent(homepageHtml, subpageContents, url) {
     result.fonts.forEach(function(f) { fontSet[f.toLowerCase()] = true; });
     pageInfo.fonts.forEach(function(f) { if (!fontSet[f.toLowerCase()]) { result.fonts.push(f); fontSet[f.toLowerCase()] = true; } });
 
+    // Merge typography style (use homepage as primary)
+    if (pageInfo.typographyStyle && !result.typographyStyle) {
+      result.typographyStyle = pageInfo.typographyStyle;
+    }
+
     // Category-specific text
-    if (category === 'about') result.aboutText = pageInfo.mainText.slice(0, 3000);
-    if (category === 'sustainability') result.sustainabilityText = pageInfo.mainText.slice(0, 2000);
-    if (category === 'quality') result.qualityText = pageInfo.mainText.slice(0, 2000);
-    if (category === 'values') result.valuesText = pageInfo.mainText.slice(0, 2000);
-    if (category === 'ingredients') result.ingredientsText = pageInfo.mainText.slice(0, 2000);
+    if (category === 'about' && !result.aboutText) result.aboutText = pageInfo.mainText.slice(0, 3000);
+    if (category === 'sustainability' && !result.sustainabilityText) result.sustainabilityText = pageInfo.mainText.slice(0, 2000);
+    if (category === 'quality' && !result.qualityText) result.qualityText = pageInfo.mainText.slice(0, 2000);
+    if (category === 'values' && !result.valuesText) result.valuesText = pageInfo.mainText.slice(0, 2000);
+    if (category === 'ingredients' && !result.ingredientsText) result.ingredientsText = pageInfo.mainText.slice(0, 2000);
     if (category === 'products') {
+      // Extract product names and descriptions from product pages
+      var prodHeadings = pageInfo.mainText.match(/^## .+/gm) || [];
+      prodHeadings.forEach(function(h) {
+        var name = h.replace(/^## /, '').trim();
+        if (name.length > 3 && name.length < 200) result.productDescriptions.push(name);
+      });
       pageInfo.productDescriptions.forEach(function(pd) { result.productDescriptions.push(pd); });
     }
   });
@@ -252,8 +274,8 @@ function extractAllContent(homepageHtml, subpageContents, url) {
   result.features = result.features.slice(0, 20);
   result.colors = result.colors.slice(0, 10);
   result.fonts = result.fonts.slice(0, 6);
-  // Trim rawText to fit AI context
-  result.rawText = result.rawText.slice(0, 12000);
+  // Trim rawText to fit AI context (expanded for deeper crawls)
+  result.rawText = result.rawText.slice(0, 20000);
 
   return result;
 }
@@ -384,6 +406,43 @@ function extractFromPage(html, category) {
   });
   info.fonts = info.fonts.slice(0, 4);
 
+  // ── TYPOGRAPHY STYLE ANALYSIS ──
+  // Extract font sizes used across the site
+  var fontSizes = [];
+  var sizeMatches = allCss.match(/font-size\s*:\s*([^;}{]+)/gi) || [];
+  sizeMatches.forEach(function(m) {
+    var val = m.replace(/font-size\s*:\s*/i, '').trim();
+    if (val && fontSizes.indexOf(val) < 0 && fontSizes.length < 12) fontSizes.push(val);
+  });
+  info.fontSizes = fontSizes;
+
+  // Extract font weights
+  var fontWeights = [];
+  var weightMatches = allCss.match(/font-weight\s*:\s*([^;}{]+)/gi) || [];
+  var weightSet = {};
+  weightMatches.forEach(function(m) {
+    var val = m.replace(/font-weight\s*:\s*/i, '').trim();
+    if (val && !weightSet[val]) { fontWeights.push(val); weightSet[val] = true; }
+  });
+  info.fontWeights = fontWeights.slice(0, 8);
+
+  // Text density analysis: count paragraphs, headings, and avg paragraph length
+  var paraCount = paragraphs.length;
+  var headingCount = headings.length;
+  var avgParaLen = paraCount > 0 ? Math.round(paragraphs.reduce(function(s, p) { return s + p.length; }, 0) / paraCount) : 0;
+  // Classify: minimalist (<80 avg chars, few paragraphs) vs. text-heavy (>150 avg, many paragraphs)
+  var textDensity = 'balanced';
+  if (avgParaLen < 80 && paraCount < 15) textDensity = 'minimalist';
+  else if (avgParaLen > 150 || paraCount > 40) textDensity = 'text-heavy';
+  info.typographyStyle = {
+    fontSizes: fontSizes.slice(0, 8),
+    fontWeights: fontWeights.slice(0, 6),
+    textDensity: textDensity,
+    avgParagraphLength: avgParaLen,
+    paragraphCount: paraCount,
+    headingCount: headingCount,
+  };
+
   return info;
 }
 
@@ -463,6 +522,7 @@ function buildResult(content, aiAnalysis, url) {
     socialProof: content.socialProof.slice(0, 5),
     colors: content.colors.slice(0, 10),
     fonts: content.fonts.slice(0, 6),
+    typographyStyle: content.typographyStyle || null,
     rawTextSections: [],
     pagesScraped: content.pagesScraped,
     // AI-enriched fields

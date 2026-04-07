@@ -91,6 +91,112 @@ function extractJSON(text) {
   return JSON.parse(text.slice(s, e + 1));
 }
 
+// ─── SMART PRODUCT MATCHING: Online Shop ↔ Amazon ───
+// Matches products between brand website and Amazon catalog using primary keywords.
+// Does NOT match on full titles — extracts the core product keyword and matches precisely.
+// E.g. "Mariendistel" matches "Mariendistel Kapseln 500mg", but
+// "Mariendistel Extrakt Pulver" does NOT match "Mariendistel Kapseln mit Vitamin C".
+function extractProductKeywords(name) {
+  if (!name || typeof name !== 'string') return [];
+  // Remove common filler words, dosages, brand names, packaging info
+  var cleaned = name
+    .replace(/\b\d+\s*(mg|ml|g|kg|stück|stk|kapseln|tabletten|caps|tablets|pack|er|x)\b/gi, '')
+    .replace(/\b(mit|und|für|von|the|with|and|for|from|in|aus|ohne|plus|extra|premium|bio|organic|vegan|natural|natürlich)\b/gi, '')
+    .replace(/[®™©()[\]{}"'´`,.;:!?|\/\\–—-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  // Split into meaningful words (min 3 chars)
+  var words = cleaned.split(/\s+/).filter(function(w) { return w.length >= 3; });
+  return words.map(function(w) { return w.toLowerCase(); });
+}
+
+// Match a shop product name to an Amazon product. Returns the best match or null.
+// Uses the FIRST 1-2 significant keywords to find the primary product type.
+// Then validates that the product forms/types don't conflict (e.g. "Pulver" vs "Kapseln").
+function matchShopProductToAmazon(shopProductName, amazonProducts) {
+  var shopKW = extractProductKeywords(shopProductName);
+  if (shopKW.length === 0) return null;
+
+  // Product form words that must match exactly if present in both
+  var formWords = ['kapseln', 'tabletten', 'pulver', 'extrakt', 'tropfen', 'spray', 'creme', 'gel', 'öl', 'oil', 'seife', 'shampoo', 'tee', 'tea', 'saft', 'juice', 'riegel', 'bar', 'drops', 'capsules', 'tablets', 'powder', 'cream', 'liquid', 'granulat', 'paste', 'salbe', 'sirup', 'tinktur'];
+
+  var shopForm = shopKW.filter(function(w) { return formWords.indexOf(w) >= 0; });
+  // Primary keyword = first non-form keyword (the actual product name)
+  var shopPrimary = shopKW.filter(function(w) { return formWords.indexOf(w) < 0; });
+  if (shopPrimary.length === 0) return null;
+
+  var bestMatch = null;
+  var bestScore = 0;
+
+  for (var i = 0; i < amazonProducts.length; i++) {
+    var amzName = (amazonProducts[i].name || amazonProducts[i].title || '').toLowerCase();
+    var amzKW = extractProductKeywords(amzName);
+    var amzForm = amzKW.filter(function(w) { return formWords.indexOf(w) >= 0; });
+
+    // Check if primary keyword(s) match
+    var primaryMatches = 0;
+    for (var k = 0; k < Math.min(shopPrimary.length, 2); k++) {
+      if (amzName.indexOf(shopPrimary[k]) >= 0) primaryMatches++;
+    }
+    if (primaryMatches === 0) continue;
+
+    // If both have form words, they must match (Pulver != Kapseln)
+    if (shopForm.length > 0 && amzForm.length > 0) {
+      var formMatch = shopForm.some(function(f) { return amzForm.indexOf(f) >= 0; });
+      if (!formMatch) continue; // Form conflict — skip
+    }
+
+    // Score: primary keyword matches + bonus for form match
+    var score = primaryMatches;
+    if (shopForm.length > 0 && amzForm.length > 0) score += 0.5;
+    // Bonus for similar word count (avoids matching single-ingredient to combo products)
+    var kwLenDiff = Math.abs(shopPrimary.length - amzKW.filter(function(w) { return formWords.indexOf(w) < 0; }).length);
+    if (kwLenDiff <= 1) score += 0.3;
+
+    if (score > bestScore) {
+      bestScore = score;
+      bestMatch = amazonProducts[i];
+    }
+  }
+
+  return bestScore >= 1 ? bestMatch : null;
+}
+
+// Enrich Amazon products with matched website product data
+export function matchWebsiteProductsToAmazon(websiteData, amazonProducts) {
+  if (!websiteData || !websiteData.productDescriptions || websiteData.productDescriptions.length === 0) {
+    return { matched: [], unmatched: [], enriched: amazonProducts };
+  }
+
+  var matched = [];
+  var unmatched = [];
+  var enrichments = {}; // asin -> website info
+
+  websiteData.productDescriptions.forEach(function(shopProduct) {
+    var shopName = typeof shopProduct === 'string' ? shopProduct : (shopProduct.name || shopProduct.title || '');
+    if (!shopName || shopName.length < 3) return;
+
+    var match = matchShopProductToAmazon(shopName, amazonProducts);
+    if (match) {
+      matched.push({ shopName: shopName, amazonAsin: match.asin, amazonName: match.name || match.title });
+      if (!enrichments[match.asin]) enrichments[match.asin] = [];
+      enrichments[match.asin].push(shopName);
+    } else {
+      unmatched.push(shopName);
+    }
+  });
+
+  // Enrich products with website data (add shopNames for richer copywriting)
+  var enriched = amazonProducts.map(function(p) {
+    if (enrichments[p.asin]) {
+      return Object.assign({}, p, { websiteNames: enrichments[p.asin] });
+    }
+    return p;
+  });
+
+  return { matched: matched, unmatched: unmatched, enriched: enriched };
+}
+
 // ─── INFER IMAGE CATEGORY FROM BRIEF TAG ───
 function inferImageCategory(brief, tileType) {
   if (!brief) return 'creative';
@@ -110,7 +216,25 @@ function inferImageCategory(brief, tileType) {
 
 // ─── FORMAT WEBSITE DATA FOR AI CONTEXT ───
 function formatWebsiteContext(websiteData) {
-  if (!websiteData) return '';
+  if (!websiteData) return [
+    '',
+    '=== NO BRAND WEBSITE DATA AVAILABLE ===',
+    'No brand website or existing store was provided. You MUST generate original, high-quality copywriting.',
+    '',
+    'COPYWRITING GUIDELINES (when no brand content exists):',
+    '- Derive the brand voice from the PRODUCT DATA: product names, descriptions, bullet points, price tier, and categories.',
+    '- Premium-priced products → premium, aspirational tone. Budget products → practical, value-focused tone.',
+    '- Analyze product descriptions for recurring keywords, benefits, and claims — use these as USPs.',
+    '- Extract product features from bullet points and craft compelling headlines from them.',
+    '- Write headlines that are specific and benefit-driven (NOT generic "Discover Our Products").',
+    '- Create a brand story based on what the products suggest about the brand identity.',
+    '- Identify the target audience from price points, categories, and product language.',
+    '- If products have certifications in descriptions (Bio, Vegan, Made in Germany), highlight them as USPs.',
+    '- Keep copy authentic to the product niche. Supplements → health/wellness language. Fashion → style/confidence. Tech → precision/innovation.',
+    '- textOverlay text MUST sound like the brand wrote it, not like a template.',
+    '=== END COPYWRITING GUIDELINES ===',
+    '',
+  ].join('\n');
   var parts = [];
   parts.push('=== BRAND WEBSITE INTELLIGENCE (scraped from ' + (websiteData.url || 'brand website') + ', ' + (websiteData.pagesScraped || 1) + ' pages crawled) ===');
   if (websiteData.title) parts.push('Website title: ' + websiteData.title);
@@ -170,6 +294,18 @@ function formatWebsiteContext(websiteData) {
   }
   if (websiteData.fonts && websiteData.fonts.length > 0) {
     parts.push('BRAND FONTS (from CSS): ' + websiteData.fonts.join(', '));
+  }
+  if (websiteData.typographyStyle) {
+    var ts = websiteData.typographyStyle;
+    parts.push('TEXT DENSITY: ' + ts.textDensity + ' (avg ' + ts.avgParagraphLength + ' chars/paragraph, ' + ts.paragraphCount + ' paragraphs, ' + ts.headingCount + ' headings)');
+    if (ts.textDensity === 'minimalist') {
+      parts.push('COPYWRITING STYLE: Keep text minimal and impactful. Short headlines, few words. Let images speak.');
+    } else if (ts.textDensity === 'text-heavy') {
+      parts.push('COPYWRITING STYLE: Brand uses detailed descriptions. Include more explanatory text, benefit descriptions, and product details.');
+    } else {
+      parts.push('COPYWRITING STYLE: Balanced approach. Mix of concise headlines and supporting detail text where needed.');
+    }
+    if (ts.fontWeights && ts.fontWeights.length > 0) parts.push('FONT WEIGHTS USED: ' + ts.fontWeights.join(', '));
   }
 
   parts.push('=== END BRAND WEBSITE INTELLIGENCE ===');
@@ -339,6 +475,10 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
       var alts = p.images.filter(function(img) { return img.alt; }).map(function(img) { return img.alt; });
       if (alts.length > 0) item.imageAlts = alts.slice(0, 5);
     }
+    // Include matched website product names for richer copywriting context
+    if (p.websiteNames && p.websiteNames.length > 0) {
+      item.websiteProductNames = p.websiteNames;
+    }
     return item;
   });
 
@@ -374,6 +514,10 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
     '- Classify product complexity: simple, medium, complex, or variantRich',
     '- Detect brand tone from product descriptions and images',
     '- Extract 3-5 key product features that could be highlighted visually',
+    '- Generate a compelling heroMessage (brand slogan) that captures the brand essence',
+    '- Write a brandStory that sounds authentic to the brand, even if no website data is available',
+    '- Derive the brand voice from: product names, price tier, category, descriptions, and bullet points',
+    '- keyFeatures should be specific to these products (e.g. "Kaltgepresstes Schwarzkümmelöl" not "Hohe Qualität")',
     '',
     'Return ONLY valid JSON.',
   ].filter(Boolean).join('\n');
@@ -1400,6 +1544,19 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   var extraPageFlags = opts.extraPages || {};
   var includeProductVideos = opts.includeProductVideos || false;
 
+  // STEP 0: Smart Product Matching (Online Shop ↔ Amazon)
+  if (websiteData && websiteData.productDescriptions && websiteData.productDescriptions.length > 0) {
+    log('Matching website products to Amazon catalog...');
+    var matchResult = matchWebsiteProductsToAmazon(websiteData, products);
+    if (matchResult.matched.length > 0) {
+      log('   ' + matchResult.matched.length + ' products matched between website and Amazon');
+      products = matchResult.enriched; // Use enriched products with website data
+    }
+    if (matchResult.unmatched.length > 0) {
+      log('   ' + matchResult.unmatched.length + ' website products not found on Amazon (excluded from store)');
+    }
+  }
+
   // STEP 1: AI Analysis
   log('AI analyzing product catalog and planning store structure...');
   log('   Complexity: Level ' + cLevel + ' (' + cConfig.name + ')');
@@ -2294,9 +2451,11 @@ function buildWireframePrompt(tile, brand, ciColors, ciBrandStyle, analysis) {
 
   // Base style instruction: sketch/wireframe aesthetic
   var styleBase = [
-    'Create a minimalistic wireframe sketch for a single image tile.',
-    'IMPORTANT: Generate ONLY the image content itself — do NOT include any website UI, browser chrome, navigation bars, logos, headers, page layouts, or mockup frames around the image.',
-    'The output must look like a standalone image, not a screenshot of a webpage.',
+    'Create a minimalistic wireframe sketch.',
+    'THIS IS A STANDALONE IMAGE — NOT a webpage screenshot.',
+    'ABSOLUTELY NO website elements: no browser frames, no navigation bars, no page headers, no Amazon store dashboards, no sidebar menus, no UI chrome, no mockup device frames, no page layout containers.',
+    'The image fills the ENTIRE canvas edge-to-edge. There is NO border, NO frame, NO surrounding UI.',
+    'Think of this as a single photograph or graphic design — just the visual content described below, nothing else.',
     'Style: pencil sketch with light color accents, NOT photorealistic.',
     'Use simple geometric shapes, placeholder areas, and minimal line art.',
     'Elements should be suggested/indicated, not fully rendered.',
@@ -2407,7 +2566,7 @@ async function generateWireframeAPI(prompt, aspectRatio) {
 }
 
 // ─── EXPORTED: Generate wireframes for a single page (called from BriefingView) ───
-export async function generateWireframesForPage(page, brand, websiteData, analysis, onProgress) {
+export async function generateWireframesForPage(page, brand, websiteData, analysis, onProgress, manualCI) {
   var log = onProgress || function() {};
   var tiles = [];
   // Collect all image tiles from this page
@@ -2420,20 +2579,30 @@ export async function generateWireframesForPage(page, brand, websiteData, analys
   });
   if (tiles.length === 0) return { success: 0, failed: 0, total: 0 };
 
-  // Extract CI info
+  // Extract CI info — manualCI takes priority over scraped data
   var ciColors = '';
   var ciBrandStyle = '';
+  if (manualCI && manualCI.colors && manualCI.colors.length > 0) {
+    ciColors = manualCI.colors.slice(0, 6).join(', ');
+  }
+  if (manualCI && manualCI.brandTone) {
+    ciBrandStyle = manualCI.brandTone;
+  }
   if (websiteData) {
-    var colorHints = [];
-    if (websiteData.rawTextSections) {
-      websiteData.rawTextSections.forEach(function(sec) {
-        var colorMatch = (sec.text || '').match(/#[0-9A-Fa-f]{3,6}/g);
-        if (colorMatch) colorHints = colorHints.concat(colorMatch);
-      });
+    if (!ciColors) {
+      var colorHints = [];
+      if (websiteData.rawTextSections) {
+        websiteData.rawTextSections.forEach(function(sec) {
+          var colorMatch = (sec.text || '').match(/#[0-9A-Fa-f]{3,6}/g);
+          if (colorMatch) colorHints = colorHints.concat(colorMatch);
+        });
+      }
+      if (colorHints.length > 0) ciColors = colorHints.slice(0, 4).join(', ');
+      if (websiteData.colors && websiteData.colors.length > 0) ciColors = websiteData.colors.slice(0, 4).join(', ');
     }
-    if (colorHints.length > 0) ciColors = colorHints.slice(0, 4).join(', ');
-    if (websiteData.colors && websiteData.colors.length > 0) ciColors = websiteData.colors.slice(0, 4).join(', ');
-    ciBrandStyle = (websiteData.description || '') + ' ' + (websiteData.tagline || '');
+    if (!ciBrandStyle) {
+      ciBrandStyle = (websiteData.description || '') + ' ' + (websiteData.tagline || '');
+    }
   }
 
   var success = 0;
