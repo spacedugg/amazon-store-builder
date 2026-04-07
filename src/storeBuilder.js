@@ -1151,11 +1151,6 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
           'EVERY brief must name specific ' + brand + ' products — generic briefs are FORBIDDEN.',
           'NEVER place two identical imageCategories adjacent (e.g. two lifestyle sections in a row).',
         ].filter(Boolean).join('\n')
-          'IMPORTANT: Each product/ASIN must appear AT MOST ONCE across all sections. Do NOT repeat the same product in multiple sections.',
-          'For 5+ categories, use lg-4grid (5 tiles) or split into two rows.',
-          'EVERY brief must name specific ' + brand + ' products — generic briefs are FORBIDDEN.',
-          'NEVER place two identical imageCategories adjacent (e.g. two lifestyle sections in a row).',
-        ].filter(Boolean).join('\n')
       )
       : [
           isSubpage
