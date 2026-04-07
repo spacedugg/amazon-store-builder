@@ -213,13 +213,24 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
             {/* ── STRUCTURED TEXT EDITOR: separate fields per hierarchy level ── */}
             {(function() {
               var lines = (tile.textOverlay || '').split(/\\n|\n/);
+              // Detect if lines are equal-rank (all similar length, no bullets = same level)
+              var nonBulletLines = lines.filter(function(l) { return l.trim() && !/^•\s/.test(l.trim()); });
+              var isEqualRank = nonBulletLines.length >= 2 && (function() {
+                // Check if all non-bullet lines are similar in length (±50%)
+                var avgLen = nonBulletLines.reduce(function(s, l) { return s + l.trim().length; }, 0) / nonBulletLines.length;
+                return nonBulletLines.every(function(l) {
+                  var len = l.trim().length;
+                  return len >= avgLen * 0.4 && len <= avgLen * 2.5;
+                });
+              })();
+
               // Classify lines into hierarchy levels
               var structured = lines.map(function(line, i) {
                 var trimmed = line.trim();
                 var isBullet = /^•\s/.test(trimmed);
                 if (isBullet) return { type: 'bullet', text: trimmed.replace(/^•\s*/, ''), idx: i };
+                if (isEqualRank) return { type: 'text', text: trimmed, idx: i }; // all same level
                 if (i === 0) return { type: 'h1', text: trimmed, idx: i };
-                // Check if it's a non-bullet after h1
                 var prevNonBullets = lines.slice(0, i).filter(function(l) { return l.trim() && !/^•\s/.test(l.trim()); }).length;
                 if (prevNonBullets === 1) return { type: 'h2', text: trimmed, idx: i };
                 return { type: 'h3', text: trimmed, idx: i };
@@ -244,11 +255,11 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
                 u('textOverlay', newLines.join('\\n'));
               }
 
-              var labels = { h1: 'Überschrift (H1)', h2: 'Unterzeile (H2)', h3: 'Ergänzungstext (H3)', bullet: 'Aufzählung' };
-              var colors = { h1: '#1d4ed8', h2: '#4338ca', h3: '#64748b', bullet: '#92400e' };
-              var bgColors = { h1: '#dbeafe', h2: '#e0e7ff', h3: '#f1f5f9', bullet: '#fef3c7' };
-              var fontSizes = { h1: 12, h2: 11, h3: 11, bullet: 11 };
-              var fontWeights = { h1: 700, h2: 600, h3: 400, bullet: 400 };
+              var labels = { h1: 'Überschrift (H1)', h2: 'Unterzeile (H2)', h3: 'Ergänzungstext (H3)', bullet: 'Aufzählung', text: 'Text (gleiche Ebene)' };
+              var colors = { h1: '#1d4ed8', h2: '#4338ca', h3: '#64748b', bullet: '#92400e', text: '#0f766e' };
+              var bgColors = { h1: '#dbeafe', h2: '#e0e7ff', h3: '#f1f5f9', bullet: '#fef3c7', text: '#ccfbf1' };
+              var fontSizes = { h1: 12, h2: 11, h3: 11, bullet: 11, text: 11 };
+              var fontWeights = { h1: 700, h2: 600, h3: 400, bullet: 400, text: 600 };
 
               return (
                 <div>

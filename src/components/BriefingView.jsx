@@ -590,7 +590,13 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
             {(function() {
               var allLines = tile.textOverlay.split(/\\n|\n/).filter(function(l) { return l.trim(); });
               var isMultiText = allLines.length > 1;
-              // Hierarchy labels only when multiple texts in one tile — otherwise just show text type
+              // Detect equal-rank lines (all similar length, no bullets = same level)
+              var nonBulletLines = allLines.filter(function(l) { return !/^•\s/.test(l.trim()); });
+              var isEqualRank = nonBulletLines.length >= 2 && nonBulletLines.every(function(l) {
+                var avgLen = nonBulletLines.reduce(function(s, x) { return s + x.trim().length; }, 0) / nonBulletLines.length;
+                return l.trim().length >= avgLen * 0.4 && l.trim().length <= avgLen * 2.5;
+              });
+
               return tile.textOverlay.split(/\\n|\n/).map(function(line, li) {
                 var trimmed = line.trim();
                 if (!trimmed) return <div key={li} style={{ height: 4 }} />;
@@ -601,15 +607,21 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
                 if (isBullet) displayText = displayText.replace(/^•\s*/, '');
 
                 if (!isMultiText) {
-                  // SINGLE TEXT — just show "text" label, no hierarchy needed
                   return <div key={li} style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>
                     <span style={{ background: '#dbeafe', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#1d4ed8', marginRight: 3 }}>text</span>
                     {bulletTag}{displayText}
                   </div>;
                 }
 
-                // MULTIPLE TEXTS — hierarchy by POSITION (not text length)
-                // Count which non-bullet line this is (0-based)
+                // Equal-rank: all non-bullet lines get the same tag
+                if (isEqualRank && !isBullet) {
+                  return <div key={li} style={{ fontSize: 11, fontWeight: 600, color: '#1e293b', marginTop: li > 0 ? 2 : 0 }}>
+                    <span style={{ background: '#ccfbf1', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#0f766e', marginRight: 3 }}>text</span>
+                    {displayText}
+                  </div>;
+                }
+
+                // Hierarchical: H1 → H2 → H3
                 var nonBulletIdx = 0;
                 if (!isBullet) {
                   for (var ci = 0; ci < li; ci++) {
@@ -617,23 +629,20 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
                     if (cl && !/^•\s/.test(cl)) nonBulletIdx++;
                   }
                 }
-
-                // Bold or first non-bullet = H1, second non-bullet = H2, rest = H3
-                // Bullets are always H3 (detail text)
                 if (!isBullet && (isBold || nonBulletIdx === 0)) {
                   return <div key={li} style={{ fontSize: 12, fontWeight: 700, color: '#1e293b', marginTop: li > 0 ? 2 : 0 }}>
-                    <span style={{ background: '#dbeafe', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#1d4ed8', marginRight: 3 }}>HIERARCHY 1</span>
+                    <span style={{ background: '#dbeafe', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#1d4ed8', marginRight: 3 }}>H1</span>
                     {bulletTag}{displayText}
                   </div>;
                 }
                 if (!isBullet && nonBulletIdx === 1) {
-                  return <div key={li} style={{ fontSize: 11, fontWeight: 600, color: '#334155', marginTop: li > 0 ? 2 : 0, paddingLeft: 0 }}>
-                    <span style={{ background: '#e0e7ff', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#4338ca', marginRight: 3 }}>HIERARCHY 2</span>
+                  return <div key={li} style={{ fontSize: 11, fontWeight: 600, color: '#334155', marginTop: li > 0 ? 2 : 0 }}>
+                    <span style={{ background: '#e0e7ff', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#4338ca', marginRight: 3 }}>H2</span>
                     {bulletTag}{displayText}
                   </div>;
                 }
                 return <div key={li} style={{ fontSize: 11, color: '#475569', paddingLeft: isBullet ? 12 : 0 }}>
-                  <span style={{ background: '#f1f5f9', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#94a3b8', marginRight: 3 }}>HIERARCHY 3</span>
+                  <span style={{ background: '#f1f5f9', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#94a3b8', marginRight: 3 }}>{isBullet ? 'BULLET' : 'H3'}</span>
                   {bulletTag}{displayText}
                 </div>;
               });
