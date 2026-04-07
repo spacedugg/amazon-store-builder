@@ -1182,31 +1182,27 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
             : '7. NAVIGATION BANNER (layout "1"): imageCategory="text_image". Simple text banner with a short headline and CTA. No elaborate design description.',
           '',
           '',
-          // ─── STRUCTURAL BLUEPRINT FROM FIRST CATEGORY PAGE ───
+          // ─── THEMATIC BLUEPRINT FROM FIRST CATEGORY PAGE ───
           structuralBlueprint && !isSubpage ? [
             '',
             '╔══════════════════════════════════════════════════════════════════╗',
-            '║  STRUCTURAL CONSISTENCY: Follow the blueprint below EXACTLY.    ║',
-            '║  All category pages in this store MUST have the SAME structure. ║',
+            '║  THEMATIC CONSISTENCY: Follow the same thematic section flow.   ║',
+            '║  All category pages should feel like part of ONE brand store.   ║',
             '╚══════════════════════════════════════════════════════════════════╝',
             '',
-            'Another category page in this store already uses this section structure:',
+            'Another category page in this store uses this thematic flow:',
             structuralBlueprint.map(function(bp) {
-              return '  Section ' + bp.position + ': layout "' + bp.layoutId + '" — tiles: ' + bp.tileTypes.join(', ') + ' — imageCategories: ' + bp.imageCategories.join(', ');
+              var themeLabels = { hero: 'Hero/Header', product_highlight: 'Product Highlight', product_grid: 'Product Grid', benefit: 'USP/Benefit Section', lifestyle: 'Lifestyle Scene', creative: 'Creative/Feature', section_heading: 'Text Heading', cross_sell: 'Cross-Sell Navigation', content: 'Content Section' };
+              return '  ' + bp.position + '. ' + (themeLabels[bp.theme] || bp.theme) + ' (used layout: "' + bp.layoutId + '")';
             }).join('\n'),
             '',
-            'YOU MUST FOLLOW THIS EXACT PATTERN:',
-            '- Same number of sections (' + structuralBlueprint.length + ')',
-            '- Same layout IDs in the same order',
-            '- Same tile types in each section (image, shoppable_image, product_grid, etc.)',
-            '- Same imageCategory per tile position (store_hero, benefit, product, creative, lifestyle, text_image)',
-            '- ONLY the content differs: product names, ASINs, brief descriptions, textOverlay text',
-            '- Think of it like a template — same structure, different content per category.',
-            '',
-            'EXCEPTIONS (when you MAY deviate):',
-            '- If this category has significantly MORE products → you may add an extra product_grid section at the end.',
-            '- If this category has subcategories but the blueprint doesn\'t have subcategory navigation → add it after the hero.',
-            '- If this is a "Category Overview" page → replace product highlights with subcategory navigation tiles.',
+            'FOLLOW THE SAME THEMATIC ORDER:',
+            '- Use the same sequence of section THEMES (hero → heading → product → benefit → lifestyle → cross-sell etc.)',
+            '- The LAYOUT within each section can vary based on this category\'s product count and content needs.',
+            '- You MAY use a different layout for the same theme (e.g. "lg-2stack" instead of "std-2equal" for a product highlight).',
+            '- You MAY add 1-2 extra sections if this category has special content (e.g. more products, unique features).',
+            '- You MAY skip a section only if it truly doesn\'t apply (e.g. no benefit section if category has no specific USPs).',
+            '- The goal: a visitor navigating between category pages should feel a consistent, professional structure.',
             '',
           ].join('\n') : '',
           'CROSS-PAGE CTA CONSISTENCY (CRITICAL):',
@@ -1896,17 +1892,29 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       pages.push({ id: parentPageId, name: cat.name, sections: catSections });
       log(cat.name + ': ' + catSections.length + ' sections');
 
-      // Capture structural blueprint from first category page
+      // Capture thematic blueprint from first category page
       if (!categoryBlueprint && catSections.length >= 3) {
         categoryBlueprint = catSections.map(function(sec, si) {
+          // Determine the thematic purpose of each section
+          var tileCategories = sec.tiles.map(function(t) { return t.imageCategory || t.type || ''; });
+          var theme = 'content';
+          if (tileCategories.indexOf('store_hero') >= 0) theme = 'hero';
+          else if (sec.tiles.some(function(t) { return t.type === 'product_grid'; })) theme = 'product_grid';
+          else if (tileCategories.every(function(c) { return c === 'benefit'; })) theme = 'benefit';
+          else if (tileCategories.indexOf('text_image') >= 0 && sec.tiles.length === 1) theme = 'section_heading';
+          else if (tileCategories.indexOf('lifestyle') >= 0) theme = 'lifestyle';
+          else if (sec.tiles.some(function(t) { return t.type === 'shoppable_image'; })) theme = 'product_highlight';
+          else if (tileCategories.indexOf('creative') >= 0) theme = 'creative';
+          // Check if this is a cross-sell section (links to other categories)
+          if (sec.tiles.some(function(t) { return t.linkUrl && t.linkUrl.indexOf('/cat-') >= 0; })) theme = 'cross_sell';
           return {
             position: si + 1,
+            theme: theme,
             layoutId: sec.layoutId,
-            tileTypes: sec.tiles.map(function(t) { return t.type; }),
-            imageCategories: sec.tiles.map(function(t) { return t.imageCategory || ''; }),
+            tileCount: sec.tiles.length,
           };
         });
-        log('   → Structural blueprint captured (' + categoryBlueprint.length + ' sections) — will be applied to all other category pages.');
+        log('   → Thematic blueprint captured: ' + categoryBlueprint.map(function(bp) { return bp.theme; }).join(' → '));
       }
     } catch (err) {
       log('"' + cat.name + '" failed (' + err.message + '), using fallback...');
@@ -2548,75 +2556,51 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     log('Cross-page CTA wording consistency enforced across ' + catPages.length + ' category pages.');
   })();
 
-  // ─── CROSS-PAGE STRUCTURAL CONSISTENCY ───
-  // Ensure all category pages have the same number of sections and similar layout patterns.
-  // Uses the first category page as reference and harmonizes the rest.
-  (function enforceStructuralConsistency() {
+  // ─── CROSS-PAGE THEMATIC CONSISTENCY CHECK ───
+  // Log how well category pages match thematically. Does NOT force layouts —
+  // only reports deviations so the user is aware. The AI prompt blueprint
+  // handles consistency at generation time; this is a verification step.
+  (function checkThematicConsistency() {
     var catPages = pages.filter(function(p) { return p.id && p.id.indexOf('cat-') === 0 && !p.parentId; });
     if (catPages.length < 2) return;
 
     var refPage = catPages[0];
     var refSections = refPage.sections || [];
-    if (refSections.length < 2) return;
 
-    var refStructure = refSections.map(function(sec) { return sec.layoutId; });
-    var deviations = 0;
-
-    for (var cp = 1; cp < catPages.length; cp++) {
-      var targetPage = catPages[cp];
-      var targetSections = targetPage.sections || [];
-
-      // Check if section count matches
-      if (targetSections.length !== refSections.length) {
-        deviations++;
-        // If target has too few sections, pad with the missing layout patterns
-        while (targetSections.length < refSections.length) {
-          var missingIdx = targetSections.length;
-          var refSec = refSections[missingIdx];
-          var clonedSec = JSON.parse(JSON.stringify(refSec));
-          clonedSec.id = uid();
-          // Clear content but keep structure
-          clonedSec.tiles.forEach(function(t) {
-            t.brief = t.brief ? t.brief.replace(refPage.name, targetPage.name) : '';
-            t.textOverlay = t.textOverlay ? t.textOverlay.replace(refPage.name, targetPage.name) : '';
-            if (t.asins) t.asins = [];
-            if (t.linkAsin) t.linkAsin = '';
-          });
-          targetSections.push(clonedSec);
-        }
-        // If target has too many sections, truncate excess (keep the first N matching the blueprint)
-        if (targetSections.length > refSections.length) {
-          targetPage.sections = targetSections.slice(0, refSections.length);
-        }
-      }
-
-      // Check if layout order matches
-      for (var si = 0; si < Math.min(refSections.length, targetSections.length); si++) {
-        if (targetSections[si].layoutId !== refSections[si].layoutId) {
-          // Layout mismatch — fix it by using the reference layout
-          targetSections[si].layoutId = refSections[si].layoutId;
-          deviations++;
-          // Adjust tile count to match layout
-          var layout = findLayout(resolveLayoutId(refSections[si].layoutId));
-          if (layout) {
-            while (targetSections[si].tiles.length < layout.cells) {
-              targetSections[si].tiles.push({
-                type: 'image', brief: '', textOverlay: '', ctaText: '',
-                dimensions: { w: 3000, h: 1200 }, asins: [],
-              });
-            }
-            if (targetSections[si].tiles.length > layout.cells) {
-              targetSections[si].tiles = targetSections[si].tiles.slice(0, layout.cells);
-            }
-          }
-        }
-      }
+    // Extract thematic fingerprint (section themes, not layouts)
+    function getSectionTheme(sec) {
+      var cats = (sec.tiles || []).map(function(t) { return t.imageCategory || t.type || ''; });
+      if (cats.indexOf('store_hero') >= 0) return 'hero';
+      if (sec.tiles.some(function(t) { return t.type === 'product_grid'; })) return 'product_grid';
+      if (cats.every(function(c) { return c === 'benefit'; })) return 'benefit';
+      if (cats.indexOf('text_image') >= 0 && sec.tiles.length === 1) return 'heading';
+      if (sec.tiles.some(function(t) { return t.type === 'shoppable_image'; })) return 'product_highlight';
+      if (cats.indexOf('lifestyle') >= 0) return 'lifestyle';
+      if (cats.indexOf('creative') >= 0) return 'creative';
+      if (sec.tiles.some(function(t) { return t.linkUrl && t.linkUrl.indexOf('/cat-') >= 0; })) return 'cross_sell';
+      return 'content';
     }
 
-    if (deviations > 0) {
-      log('Structural consistency enforced: ' + deviations + ' deviations fixed across ' + catPages.length + ' category pages.');
+    var refThemes = refSections.map(getSectionTheme);
+
+    var consistent = 0;
+    var deviated = 0;
+    for (var cp = 1; cp < catPages.length; cp++) {
+      var targetThemes = (catPages[cp].sections || []).map(getSectionTheme);
+      // Compare theme sequences (allow ±1 section difference)
+      var themeMatch = 0;
+      var maxLen = Math.max(refThemes.length, targetThemes.length);
+      for (var ti = 0; ti < Math.min(refThemes.length, targetThemes.length); ti++) {
+        if (refThemes[ti] === targetThemes[ti]) themeMatch++;
+      }
+      var matchRate = maxLen > 0 ? Math.round(themeMatch / maxLen * 100) : 100;
+      if (matchRate >= 70) { consistent++; } else { deviated++; }
+    }
+
+    if (deviated > 0) {
+      log('Thematic consistency: ' + consistent + '/' + (catPages.length - 1) + ' pages match reference, ' + deviated + ' deviate (>30% theme difference).');
     } else {
-      log('Structural consistency: all ' + catPages.length + ' category pages match.');
+      log('Thematic consistency: all ' + catPages.length + ' category pages follow the same thematic flow.');
     }
   })();
 
