@@ -6,9 +6,12 @@
     "api/amazon-search.js": { "maxDuration": 300 },
     "api/amazon-brand-discover.js": { "maxDuration": 60 },
     "api/stores.js": { "maxDuration": 30 },
-    "api/scrape-website.js": { "maxDuration": 30 },
+    "api/scrape-website.js": { "maxDuration": 60 },
     "api/crawl-brand-store.js": { "maxDuration": 60 },
     "api/analyze-images.js": { "maxDuration": 60 },
+    "api/analyze-ci.js": { "maxDuration": 60 },
+    "api/generate-image-descriptions.js": { "maxDuration": 60 },
+    "api/generate-wireframe.js": { "maxDuration": 60 },
     "api/enrich-reference-store.js": { "maxDuration": 300 }
   },
   "rewrites": [

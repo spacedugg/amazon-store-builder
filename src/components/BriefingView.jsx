@@ -1103,7 +1103,7 @@ function loadChecks(shareToken) {
 }
 function loadChecksFromServer(shareToken) {
   // Async: fetch from server and merge
-  return fetch('/api/checks?shareToken=' + encodeURIComponent(shareToken))
+  return fetch('/api/stores?checks=true&shareToken=' + encodeURIComponent(shareToken))
     .then(function(resp) { return resp.ok ? resp.json() : null; })
     .then(function(data) {
       if (data && data.checks) {
@@ -1118,10 +1118,10 @@ function saveChecks(shareToken, checks) {
   // Save to localStorage immediately (fast)
   try { localStorage.setItem('briefing-checks-' + shareToken, JSON.stringify(checks)); } catch (e) { /* ignore */ }
   // Save to server in background (persistent)
-  fetch('/api/checks', {
+  fetch('/api/stores', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ shareToken: shareToken, checks: checks }),
+    body: JSON.stringify({ shareToken: shareToken, checks: checks, checksUpdate: true }),
   }).catch(function() { /* ignore network errors, localStorage is fallback */ });
 }
 
