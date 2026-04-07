@@ -144,6 +144,20 @@ export async function generateWireframeImage(prompt, aspectRatio) {
   return resp.json();
 }
 
+// ─── ANALYZE CI: Extract brand CI from product listing images via Gemini Vision ───
+export async function analyzeBrandCI(imageUrls, brandName) {
+  var resp = await fetchWithTimeout('/api/analyze-ci', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ images: imageUrls, brandName: brandName }),
+  }, 60000);
+  if (!resp.ok) {
+    var e = await resp.json().catch(function() { return {}; });
+    throw new Error(e.error || 'CI analysis failed');
+  }
+  return resp.json();
+}
+
 // ─── SCRAPE BRAND WEBSITE: Extract brand info from online store ───
 export async function scrapeWebsite(url) {
   var resp = await fetchWithTimeout('/api/scrape-website', {

@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { uid, emptyTile, emptyTileForLayout, LAYOUTS, LANGS, DOMAINS, validateStore, PRICING, countStoreAssets, STORE_TEMPLATES, findLayout, LAYOUT_TILE_DIMS } from './constants';
-import { scrapeAsins } from './api';
+import { scrapeAsins, analyzeBrandCI } from './api';
 import { generateStore, aiRefineStore, applyOperations, generateWireframesForPage, deleteWireframesForPage } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, loadStoreByShareToken, importStoreByShareLink } from './storage';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
@@ -155,7 +155,7 @@ export default function App() {
     setWfProgress('Starte...');
     generateWireframesForPage(
       wfPage, store.brandName || '', store.websiteData || null,
-      { brandTone: store.brandTone, brandStory: store.brandStory, keyFeatures: store.keyFeatures },
+      { brandTone: store.brandTone, brandStory: store.brandStory, keyFeatures: store.keyFeatures, productCI: store.productCI || null },
       function(current, total, category) {
         setWfProgress(current + '/' + total + ' (' + category + ')');
       },
@@ -216,6 +216,34 @@ export default function App() {
       var products = scrapeResult.products || [];
       if (!products.length) throw new Error('No products returned from Bright Data. Check your ASINs and try again.');
       log('Scraped ' + products.length + '/' + params.asins.length + ' products');
+
+      // Step 1.2: Analyze brand CI from product listing images via Gemini Vision
+      var productCI = null;
+      try {
+        // Collect top listing images from scraped products (first image per product, max 8)
+        var ciImages = [];
+        products.forEach(function(p) {
+          if (ciImages.length >= 8) return;
+          // Prefer secondary images (often infographics/A+ with CI) over main product shot
+          var imgs = (p.images || []);
+          if (imgs.length > 1) {
+            // Take image index 1-3 (infographic/lifestyle images, skip main packshot at index 0)
+            for (var ii = 1; ii < Math.min(imgs.length, 4) && ciImages.length < 8; ii++) {
+              if (imgs[ii].url) ciImages.push({ url: imgs[ii].url, context: p.name });
+            }
+          } else if (imgs.length === 1 && imgs[0].url) {
+            ciImages.push({ url: imgs[0].url, context: p.name });
+          }
+        });
+        if (ciImages.length > 0) {
+          log('Analyzing brand CI from ' + ciImages.length + ' product listing images...');
+          productCI = await analyzeBrandCI(ciImages, params.brand);
+          log('   CI extracted: ' + (productCI.primaryColors || []).join(', ') + ' | ' + (productCI.visualMood || 'N/A') + ' | ' + (productCI.typographyStyle || 'N/A'));
+          if (productCI.designerNotes) log('   Designer notes: ' + productCI.designerNotes);
+        }
+      } catch (ciErr) {
+        log('CI analysis skipped: ' + ciErr.message);
+      }
 
       // Step 1.5: Crawl & analyze reference stores (if provided)
       var referenceAnalysis = null;
@@ -367,6 +395,16 @@ export default function App() {
       // Website data is always used for CI extraction when available
       var enhancedWebsiteData = params.websiteData || null;
 
+      // Merge product CI into website data (or create new websiteData if none exists)
+      if (productCI) {
+        if (!enhancedWebsiteData) enhancedWebsiteData = {};
+        enhancedWebsiteData.productCI = productCI;
+        // Use product CI colors as primary if no website colors exist
+        if ((!enhancedWebsiteData.colors || enhancedWebsiteData.colors.length === 0) && productCI.primaryColors) {
+          enhancedWebsiteData.colors = productCI.primaryColors.concat(productCI.secondaryColors || []);
+        }
+      }
+
       // Step 2-4: AI generation (with complexity, category, template, websiteData, referenceAnalysis)
       var storeData = await generateStore(
         params.asins, products, params.brand, params.marketplace, lang,
@@ -377,6 +415,7 @@ export default function App() {
 
       // Store meta
       storeData.complexity = params.complexity;
+      if (productCI) storeData.productCI = productCI;
       if (templateData) storeData.templateId = templateData.id;
       if (enhancedWebsiteData) storeData.websiteData = enhancedWebsiteData;
 
