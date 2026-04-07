@@ -922,14 +922,23 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '- On detail pages, a catchy benefit headline + short explanation (max 5-6 words) can work well. On overview pages, simple USP labels are fine.',
     '',
     'SMART PRODUCT DISPLAY LOGIC (' + pageProducts.length + ' products on this page):',
-    '- ALWAYS prioritize individual image modules (shoppable_image, lifestyle, creative) over product_grids.',
-    '- Feature the BEST SELLERS from each category as individual tiles with rich design (lifestyle shots, product close-ups, benefit overlays).',
-    '- product_grids are a SUPPLEMENT, not a replacement. They go BELOW the curated modules to show remaining products.',
-    pageProducts.length <= 8
-      ? '- With ' + pageProducts.length + ' products: Each product can get individual attention. Use modules, no product_grid needed unless explicitly helpful.'
-      : pageProducts.length <= 30
-        ? '- With ' + pageProducts.length + ' products: Feature top products individually in modules. Use product_grid at the end for the full catalog.'
-        : '- With ' + pageProducts.length + ' products: Describe categories with rich modules, pick the best seller from each category for individual tiles. Product_grids below each category section show the remaining products (up to 20-30 per grid).',
+    isHomepage
+      ? [
+        '- HOMEPAGE: Do NOT display individual products. The homepage is for NAVIGATION and BRAND IDENTITY.',
+        '- Show categories as navigation tiles, NOT individual product tiles.',
+        '- The ONLY exception: ONE clearly labeled bestseller highlight (if tier 2+).',
+        '- All product showcasing happens on CATEGORY PAGES, not on the homepage.',
+      ].join('\n')
+      : [
+        '- ALWAYS prioritize individual image modules (shoppable_image, lifestyle, creative) over product_grids.',
+        '- Feature the BEST SELLERS from this category as individual tiles with rich design.',
+        '- product_grids are a SUPPLEMENT, not a replacement. They go BELOW the curated modules.',
+        pageProducts.length <= 8
+          ? '- With ' + pageProducts.length + ' products: Each product can get individual attention. Use modules, no product_grid needed unless explicitly helpful.'
+          : pageProducts.length <= 30
+            ? '- With ' + pageProducts.length + ' products: Feature top products individually in modules. Use product_grid at the end for the full catalog.'
+            : '- With ' + pageProducts.length + ' products: Pick the best seller from each subcategory for individual tiles. Product_grids below each section show remaining products.',
+      ].join('\n'),
     '',
     'MINIMUM SECTIONS:',
     complexityLevel === 1
@@ -975,8 +984,8 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '    {',
     '      "layoutId": "std-2equal",',
     '      "tiles": [',
-    '        {"type": "image", "imageCategory": "creative", "brief": "[CREATIVE] ' + brand + ' category name on brand-color background, bold typography + product silhouette", "textOverlay": "[Category Name]", "ctaText": "", "dimensions": {"w": 1500, "h": 1500}},',
-    '        {"type": "shoppable_image", "imageCategory": "product", "brief": "[SHOPPABLE] ' + brand + ' bestseller packshot on white, soft shadow", "textOverlay": "", "ctaText": "", "dimensions": {"w": 1500, "h": 1500}, "linkAsin": "' + (pageProducts[0] ? pageProducts[0].asin : 'B0XXXXXXXXXX') + '"}',
+    '        {"type": "image", "imageCategory": "creative", "brief": "[CREATIVE] ' + brand + ' ' + (allCategories[0] ? allCategories[0].name : 'Category 1') + ' — representative product + brand-color bg", "textOverlay": "' + (allCategories[0] ? allCategories[0].name : 'Category 1') + '", "ctaText": "Entdecken", "dimensions": {"w": 1500, "h": 1500}, "linkUrl": "/cat-0"},',
+    '        {"type": "image", "imageCategory": "creative", "brief": "[CREATIVE] ' + brand + ' ' + (allCategories[1] ? allCategories[1].name : 'Category 2') + ' — representative product + brand-color bg", "textOverlay": "' + (allCategories[1] ? allCategories[1].name : 'Category 2') + '", "ctaText": "Entdecken", "dimensions": {"w": 1500, "h": 1500}, "linkUrl": "/cat-1"}',
     '      ]',
     '    },',
     '    ... more sections',
@@ -1048,20 +1057,76 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
           'EVERY brief must name specific ' + brand + ' products — generic briefs are FORBIDDEN.',
         ].join('\n')
         : [
-          'HOMEPAGE SECTIONS — The homepage is a NAVIGATION HUB. Its purpose is to showcase brand identity and guide shoppers to category pages. Do NOT display random products here.',
-          'Generate sections in this order, adapt count to tier/catalog size:',
-          'Each tile MUST include "imageCategory" field. Follow the recommended flow: STORE_HERO → CREATIVE/LIFESTYLE → PRODUCT → TEXT_IMAGE → BENEFIT → CREATIVE → PRODUCT → LIFESTYLE → BENEFIT.',
+          '╔══════════════════════════════════════════════════════════════════╗',
+          '║  HOMEPAGE = NAVIGATION HUB + BRAND IDENTITY                    ║',
+          '║  Purpose: guide shoppers to category pages, NOT display random  ║',
+          '║  products. Individual products belong on CATEGORY pages only.   ║',
+          '╚══════════════════════════════════════════════════════════════════╝',
           '',
-          '1. STORE HERO (layout "1"): imageCategory="store_hero". Brand hero image. Logo + claim + optional lifestyle/product. NO CTA.',
-          '2. CATEGORY NAVIGATION (layout based on count: 2="std-2equal", 4="std-4equal" or "2x2wide", 5+="lg-4grid"):',
-          '   Each tile imageCategory="creative". Product silhouette + CTA. textOverlay = JUST the category name (e.g. "Vitamine"), NOT a sentence. The CTA provides the action. linkUrl = "/pageid" to link to category page.',
-          pageProducts.length > 5 ? '3. BESTSELLER SHOWCASE (layout "std-2equal" or "lg-2stack"): Tile 1 imageCategory="product" as shoppable_image with real ASIN. Tile 2 imageCategory="creative" with feature text.' : '',
-          pageProducts.length > 8 ? '4. PRODUCT GRID (layout "1"): type "product_grid" with top 5-8 products by rating.' : '',
-          '5. BENEFIT SECTION (layout "1" or "vh-w2s"): imageCategory="benefit". USP icons/awards on brand-colored bg. No product photos.',
-          complexityLevel >= 2 ? '6. LIFESTYLE SPLIT (layout "std-2equal"): Tile 1 imageCategory="lifestyle" — product in use. Tile 2 imageCategory="product" as shoppable_image with linkAsin.' : '',
-          complexityLevel >= 3 ? '7. BRAND STORY (layout "lg-2stack" or "2stack-lg"): Large tile imageCategory="lifestyle". Wide tiles imageCategory="creative".' : '',
-          complexityLevel >= 2 && allCategories.length > 2 ? '8. FOOTER CATEGORY NAV (layout based on count): imageCategory="creative" or "lifestyle" — visual preview tiles for categories not yet featured. textOverlay = JUST the category name, add a fitting CTA. Brief = SHORT, max 10 words.' : complexityLevel >= 2 ? '8. FOOTER NAV (layout "1"): imageCategory="text_image". Short headline + CTA. No elaborate description.' : '',
+          'CRITICAL STRUCTURAL RULE:',
+          '- ALL ' + allCategories.length + ' categories MUST appear as ONE contiguous navigation block.',
+          '- NEVER split categories across multiple sections with other content in between.',
+          '- NEVER show random individual products on the homepage unless they are clearly labeled as "Bestseller" or "Neuheit" (new arrival).',
+          '- The homepage tells the BRAND STORY and provides NAVIGATION — the category pages sell products.',
           '',
+          'Each tile MUST include "imageCategory" field.',
+          '',
+          '=== MANDATORY SECTION ORDER (follow this EXACTLY) ===',
+          '',
+          '1. STORE HERO (layout "1"):',
+          '   imageCategory="store_hero". Brand hero — slogan + lifestyle/product visual. NO CTA button.',
+          '',
+          '2. COMPLETE CATEGORY NAVIGATION — ALL ' + allCategories.length + ' CATEGORIES IN ONE BLOCK:',
+          allCategories.length <= 2
+            ? '   Layout "std-2equal" (2 tiles). Each tile = one category.'
+            : allCategories.length <= 3
+            ? '   Layout "1-1-1" (3 tiles). Each tile = one category.'
+            : allCategories.length === 4
+            ? '   Layout "2x2wide" or "std-4equal" (4 tiles). Each tile = one category.'
+            : allCategories.length <= 5
+            ? '   Layout "lg-4grid" (5 tiles). Each tile = one category.'
+            : allCategories.length <= 6
+            ? '   USE TWO ROWS: First row "1-1-1" (3 categories) + Second row "1-1-1" (3 categories).'
+            : allCategories.length <= 8
+            ? '   USE TWO ROWS: First row "2x2wide" (4 categories) + Second row "2x2wide" (4 categories). Or first "lg-4grid" (5) + second "1-1-1" (3).'
+            : '   USE MULTIPLE ROWS to show ALL ' + allCategories.length + ' categories. Split evenly across 2-3 sections placed DIRECTLY after each other with NO other content between them.',
+          '   imageCategory="creative" for each tile. textOverlay = JUST the category name. CTA links to category page.',
+          '   IMPORTANT: Category navigation sections must be ADJACENT — no other sections between them!',
+          '   Categories: ' + allCategories.map(function(c) { return c.name + ' (' + c.productCount + ' products)'; }).join(', '),
+          '',
+          '3. BENEFIT / USP SECTION (layout "1" or "vh-w2s"):',
+          '   imageCategory="benefit". Brand-level USPs/certifications/awards. NO product photos, NO people.',
+          '',
+          complexityLevel >= 2 ? [
+            '4. BESTSELLER HIGHLIGHT (layout "std-2equal" or "lg-2stack"):',
+            '   ONLY if the brand has a clear bestseller product (highest reviews/rating).',
+            '   Tile 1: imageCategory="lifestyle" — bestseller in real-world context.',
+            '   Tile 2: imageCategory="creative" — key benefit/feature of this bestseller.',
+            '   textOverlay MUST include "Bestseller" or "Beliebtestes Produkt" to justify its presence.',
+            '   If no clear bestseller stands out, SKIP this section entirely.',
+            '',
+          ].join('\n') : '',
+          complexityLevel >= 3 ? [
+            '5. BRAND STORY (layout "lg-2stack" or "std-2equal"):',
+            '   Large tile: imageCategory="lifestyle" — brand founders, manufacturing, or brand world.',
+            '   Small tile(s): imageCategory="creative" — brand values, history, mission.',
+            '',
+          ].join('\n') : '',
+          'FINAL SECTION:',
+          complexityLevel >= 2
+            ? '6. LIFESTYLE / BRAND WORLD (layout "1"): imageCategory="lifestyle". One compelling brand-world image. Product in use, brand atmosphere. NO random product showcase.'
+            : '(No additional sections for minimal tier.)',
+          '',
+          '=== FORBIDDEN ON HOMEPAGE ===',
+          '- NO random individual product tiles (shoppable_image with a single product) unless explicitly labeled as Bestseller/Neuheit.',
+          '- NO product_grid sections — these belong on category pages.',
+          '- NO splitting categories across the page with other content between them.',
+          '- NO duplicate category appearances (each category exactly ONCE).',
+          '- NO "lifestyle split" sections that feature random products with no context.',
+          '',
+          'EVERY brief must name specific ' + brand + ' products — generic briefs are FORBIDDEN.',
+          'NEVER place two identical imageCategories adjacent (e.g. two lifestyle sections in a row).',
+        ].filter(Boolean).join('\n')
           'IMPORTANT: Each product/ASIN must appear AT MOST ONCE across all sections. Do NOT repeat the same product in multiple sections.',
           'For 5+ categories, use lg-4grid (5 tiles) or split into two rows.',
           'EVERY brief must name specific ' + brand + ' products — generic briefs are FORBIDDEN.',
@@ -1515,8 +1580,19 @@ function ensureMinimumSections(sections, pageName, brand, lang, analysis, templa
       if (tiles.length > layout.cells) tiles = tiles.slice(0, layout.cells);
       sections.push({ id: uid(), layoutId: bp.layout, tiles: tiles });
     } else {
-      // Generic fallback patterns
-      var patterns = [
+      // Generic fallback patterns — HOMEPAGE uses brand/benefit sections only, CATEGORY pages use product sections
+      var homePatterns = [
+        { layoutId: '1', tiles: [
+          { type: 'image', imageCategory: 'benefit', brief: '[BENEFIT] ' + brand + ' key USPs and quality markers — certifications, awards, trust signals', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 600 }, asins: [] },
+        ] },
+        { layoutId: '1', tiles: [
+          { type: 'image', imageCategory: 'lifestyle', brief: '[LIFESTYLE] ' + brand + ' brand world — products in real-world setting, brand atmosphere', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1000 }, asins: [] },
+        ] },
+        { layoutId: '1', tiles: [
+          { type: 'image', imageCategory: 'text_image', brief: '[TEXT_IMAGE] ' + brand + ' brand values statement, bold headline, brand colors', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 800 }, asins: [] },
+        ] },
+      ];
+      var catPatterns = [
         { layoutId: '1-1', tiles: [
           { type: 'image', imageCategory: 'lifestyle', brief: '[LIFESTYLE] ' + brand + ' ' + pageName + ' products in use, natural setting', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
           { type: 'shoppable_image', imageCategory: 'product', brief: '[SHOPPABLE] ' + brand + ' ' + pageName + ' bestseller packshot on white', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
@@ -1530,6 +1606,7 @@ function ensureMinimumSections(sections, pageName, brand, lang, analysis, templa
           { type: 'image', imageCategory: 'text_image', brief: '[TEXT_IMAGE] ' + brand + ' brand values statement for ' + pageName + ', bold headline, brand colors', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 800 }, asins: [] },
         ] },
       ];
+      var patterns = isHomepage ? homePatterns : catPatterns;
       var pattern = patterns[(idx - (blueprint ? blueprint.length : 0)) % patterns.length];
       sections.push(Object.assign({ id: uid() }, JSON.parse(JSON.stringify(pattern))));
     }
