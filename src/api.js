@@ -144,6 +144,20 @@ export async function generateWireframeImage(prompt, aspectRatio) {
   return resp.json();
 }
 
+// ─── GENERATE IMAGE DESCRIPTIONS: Gemini creates CI-aware prompts for image generation ───
+export async function generateImageDescriptions(tiles, ciData, brandName, brandTone) {
+  var resp = await fetchWithTimeout('/api/generate-image-descriptions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ tiles: tiles, ciData: ciData, brandName: brandName, brandTone: brandTone }),
+  }, 60000);
+  if (!resp.ok) {
+    var e = await resp.json().catch(function() { return {}; });
+    throw new Error(e.error || 'Image description generation failed');
+  }
+  return resp.json();
+}
+
 // ─── ANALYZE CI: Extract brand CI from product listing images via Gemini Vision ───
 export async function analyzeBrandCI(imageUrls, brandName) {
   var resp = await fetchWithTimeout('/api/analyze-ci', {

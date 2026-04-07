@@ -925,8 +925,12 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '- Dark backgrounds ONLY when the brand explicitly uses them (e.g. premium tech brands).',
     '- For product shots: light/neutral or brand-color gradient backgrounds work best.',
     '',
-    'BRIEF RULES:',
+    'BRIEF RULES (briefs are instructions for a DESIGNER who already knows the brand CI):',
     '- Keep briefs SHORT: max 15-20 words after the tag.',
+    '- Describe WHAT the image shows (subject, scene, composition) — NOT HOW it should look (no color, font, shadow instructions).',
+    '- The designer knows the brand CI (colors, fonts, style). Do NOT specify colors, backgrounds, gradients, or font styles in briefs.',
+    '- WRONG: "Dark green background with white sans-serif text and leaf pattern"',
+    '- RIGHT: "Category preview with representative product, headline: Vitamine"',
     '- Name the specific ' + brand + ' product or category from the product list.',
     '- textOverlay MUST be in store language (' + lang + ') — use real product/category names. For category/navigation tiles: textOverlay = JUST the category name (e.g. "Vitamine"), NOT a sentence. The CTA carries the action.',
     '- Do NOT use generic placeholders like "[product]" or "lifestyle image".',
@@ -2811,32 +2815,43 @@ export async function generateWireframesForPage(page, brand, websiteData, analys
   });
   if (tiles.length === 0) return { success: 0, failed: 0, total: 0 };
 
-  // Extract CI info — manualCI takes priority over scraped data
-  var ciColors = '';
-  var ciBrandStyle = '';
+  // ─── STEP 1: Get CI-aware image descriptions from Gemini (batch) ───
+  var ciData = (analysis || {}).productCI || (websiteData && websiteData.productCI) || null;
+  // Merge manualCI colors into ciData if present
   if (manualCI && manualCI.colors && manualCI.colors.length > 0) {
-    ciColors = manualCI.colors.slice(0, 6).join(', ');
+    if (!ciData) ciData = {};
+    ciData.primaryColors = manualCI.colors;
   }
-  if (manualCI && manualCI.brandTone) {
-    ciBrandStyle = manualCI.brandTone;
-  }
-  if (websiteData) {
-    if (!ciColors) {
-      var colorHints = [];
-      if (websiteData.rawTextSections) {
-        websiteData.rawTextSections.forEach(function(sec) {
-          var colorMatch = (sec.text || '').match(/#[0-9A-Fa-f]{3,6}/g);
-          if (colorMatch) colorHints = colorHints.concat(colorMatch);
-        });
+  var brandTone = (manualCI && manualCI.brandTone) || (analysis || {}).brandTone || '';
+
+  var imageDescriptions = null;
+  try {
+    log(0, tiles.length, 'Gemini erstellt Bildbeschreibungen...');
+    var tileInputs = tiles.map(function(entry) {
+      return {
+        imageCategory: entry.tile.imageCategory || 'creative',
+        brief: entry.tile.brief || '',
+        textOverlay: entry.tile.textOverlay || '',
+        dimensions: entry.tile.dimensions || { w: 3000, h: 1200 },
+      };
+    });
+    var descResp = await fetch('/api/generate-image-descriptions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tiles: tileInputs, ciData: ciData, brandName: brand, brandTone: brandTone }),
+    });
+    if (descResp.ok) {
+      var descData = await descResp.json();
+      if (descData.descriptions && descData.descriptions.length > 0) {
+        imageDescriptions = descData.descriptions;
+        log(0, tiles.length, imageDescriptions.length + ' Bildbeschreibungen von Gemini erhalten');
       }
-      if (colorHints.length > 0) ciColors = colorHints.slice(0, 4).join(', ');
-      if (websiteData.colors && websiteData.colors.length > 0) ciColors = websiteData.colors.slice(0, 4).join(', ');
     }
-    if (!ciBrandStyle) {
-      ciBrandStyle = (websiteData.description || '') + ' ' + (websiteData.tagline || '');
-    }
+  } catch (descErr) {
+    log(0, tiles.length, 'Gemini-Beschreibungen nicht verfügbar, verwende Fallback (' + descErr.message + ')');
   }
 
+  // ─── STEP 2: Generate images using descriptions ───
   var success = 0;
   var failed = 0;
   var cancelled = false;
@@ -2852,9 +2867,19 @@ export async function generateWireframesForPage(page, brand, websiteData, analys
     var tile = entry.tile;
     try {
       log(i + 1, tiles.length, tile.imageCategory || 'image');
-      // Build and store the internal wireframe description (CI-aware, for internal dashboard)
-      tile.wireframeDescription = buildWireframeDescription(tile, brand, analysis || {});
-      var wfPrompt = buildWireframePrompt(tile, brand, ciColors, ciBrandStyle, analysis || {});
+
+      // Use Gemini-generated description if available, otherwise fallback to hardcoded
+      var wfPrompt;
+      if (imageDescriptions && imageDescriptions[i] && imageDescriptions[i].imagePrompt) {
+        wfPrompt = imageDescriptions[i].imagePrompt;
+        tile.wireframeDescription = imageDescriptions[i].internalDescription || '';
+      } else {
+        // Fallback: use the old hardcoded prompt builder
+        var ciColors = ciData && ciData.primaryColors ? ciData.primaryColors.join(', ') : '';
+        wfPrompt = buildWireframePrompt(tile, brand, ciColors, '', analysis || {});
+        tile.wireframeDescription = buildWireframeDescription(tile, brand, analysis || {});
+      }
+
       var aspectW = (tile.dimensions || {}).w || 3000;
       var aspectH = (tile.dimensions || {}).h || 1200;
       var aspectRatio = getClosestAspectRatio(aspectW, aspectH);
