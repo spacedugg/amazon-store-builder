@@ -37,15 +37,21 @@ module.exports = async function handler(req, res) {
     var internalLinks = discoverInternalLinks(homepageHtml, baseOrigin, parsed.pathname);
 
     // ═══════════════════════════════════════════════════
-    // STEP 3: Crawl the most important subpages (max 5)
+    // STEP 3: Crawl subpages (up to 30)
     // ═══════════════════════════════════════════════════
     var subpageContents = {};
-    var crawlPromises = internalLinks.slice(0, 5).map(function(link) {
-      return fetchPage(link.url).then(function(html) {
-        if (html) subpageContents[link.category] = { url: link.url, html: html, label: link.label };
-      }).catch(function() {});
-    });
-    await Promise.all(crawlPromises);
+    var maxSubpages = 30;
+    var linksToFetch = internalLinks.slice(0, maxSubpages);
+    // Crawl in batches of 5 to avoid overwhelming the server
+    for (var batch = 0; batch < linksToFetch.length; batch += 5) {
+      var batchLinks = linksToFetch.slice(batch, batch + 5);
+      var crawlPromises = batchLinks.map(function(link) {
+        return fetchPage(link.url).then(function(html) {
+          if (html) subpageContents[link.category + '_' + link.url] = { url: link.url, html: html, label: link.label, category: link.category };
+        }).catch(function() {});
+      });
+      await Promise.all(crawlPromises);
+    }
 
     // ═══════════════════════════════════════════════════
     // STEP 4: Extract raw content from ALL pages
@@ -157,12 +163,12 @@ function discoverInternalLinks(html, baseOrigin, basePath) {
   // Sort by priority, highest first
   links.sort(function(a, b) { return b.priority - a.priority; });
 
-  // Deduplicate by category (only one page per category)
-  var usedCategories = {};
+  // Allow multiple pages per category (up to 5 per category for product pages, 2 for others)
+  var categoryCount = {};
   return links.filter(function(l) {
-    if (usedCategories[l.category]) return false;
-    usedCategories[l.category] = true;
-    return true;
+    var maxPerCategory = l.category === 'products' ? 20 : 2;
+    categoryCount[l.category] = (categoryCount[l.category] || 0) + 1;
+    return categoryCount[l.category] <= maxPerCategory;
   });
 }
 
@@ -210,19 +216,22 @@ function extractAllContent(homepageHtml, subpageContents, url) {
   result.rawText += '=== HOMEPAGE ===\n' + homeInfo.mainText.slice(0, 3000) + '\n\n';
 
   // ── SUBPAGE EXTRACTION ──
-  Object.keys(subpageContents).forEach(function(category) {
-    var page = subpageContents[category];
+  Object.keys(subpageContents).forEach(function(key) {
+    var page = subpageContents[key];
+    var category = page.category || key;
     var pageInfo = extractFromPage(page.html, category);
     result.pagesScraped++;
 
-    result.rawText += '=== ' + category.toUpperCase() + ' PAGE (' + page.label + ') ===\n' + pageInfo.mainText.slice(0, 3000) + '\n\n';
+    // Limit rawText per page based on total pages (keep within AI context)
+    var rawTextBudget = Math.max(500, Math.floor(10000 / Math.max(Object.keys(subpageContents).length, 1)));
+    result.rawText += '=== ' + category.toUpperCase() + ' PAGE (' + page.label + ') ===\n' + pageInfo.mainText.slice(0, rawTextBudget) + '\n\n';
 
     // Merge certifications (deduplicated)
     var certSet = {};
     result.certifications.forEach(function(c) { certSet[c.toLowerCase().slice(0, 30)] = true; });
     pageInfo.certifications.forEach(function(c) {
-      var key = c.toLowerCase().slice(0, 30);
-      if (!certSet[key]) { result.certifications.push(c); certSet[key] = true; }
+      var key2 = c.toLowerCase().slice(0, 30);
+      if (!certSet[key2]) { result.certifications.push(c); certSet[key2] = true; }
     });
 
     // Merge features
@@ -244,12 +253,18 @@ function extractAllContent(homepageHtml, subpageContents, url) {
     }
 
     // Category-specific text
-    if (category === 'about') result.aboutText = pageInfo.mainText.slice(0, 3000);
-    if (category === 'sustainability') result.sustainabilityText = pageInfo.mainText.slice(0, 2000);
-    if (category === 'quality') result.qualityText = pageInfo.mainText.slice(0, 2000);
-    if (category === 'values') result.valuesText = pageInfo.mainText.slice(0, 2000);
-    if (category === 'ingredients') result.ingredientsText = pageInfo.mainText.slice(0, 2000);
+    if (category === 'about' && !result.aboutText) result.aboutText = pageInfo.mainText.slice(0, 3000);
+    if (category === 'sustainability' && !result.sustainabilityText) result.sustainabilityText = pageInfo.mainText.slice(0, 2000);
+    if (category === 'quality' && !result.qualityText) result.qualityText = pageInfo.mainText.slice(0, 2000);
+    if (category === 'values' && !result.valuesText) result.valuesText = pageInfo.mainText.slice(0, 2000);
+    if (category === 'ingredients' && !result.ingredientsText) result.ingredientsText = pageInfo.mainText.slice(0, 2000);
     if (category === 'products') {
+      // Extract product names and descriptions from product pages
+      var prodHeadings = pageInfo.mainText.match(/^## .+/gm) || [];
+      prodHeadings.forEach(function(h) {
+        var name = h.replace(/^## /, '').trim();
+        if (name.length > 3 && name.length < 200) result.productDescriptions.push(name);
+      });
       pageInfo.productDescriptions.forEach(function(pd) { result.productDescriptions.push(pd); });
     }
   });
@@ -259,8 +274,8 @@ function extractAllContent(homepageHtml, subpageContents, url) {
   result.features = result.features.slice(0, 20);
   result.colors = result.colors.slice(0, 10);
   result.fonts = result.fonts.slice(0, 6);
-  // Trim rawText to fit AI context
-  result.rawText = result.rawText.slice(0, 12000);
+  // Trim rawText to fit AI context (expanded for deeper crawls)
+  result.rawText = result.rawText.slice(0, 20000);
 
   return result;
 }

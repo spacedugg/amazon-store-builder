@@ -39,8 +39,8 @@ module.exports = async function handler(req, res) {
     var subpageUrls = extractNavFromConfig(mainHtml, storeUrl);
     var allHtmlPages = [{ url: storeUrl, html: mainHtml, pageName: 'Startseite' }];
 
-    // Step 3: Crawl ALL subpages (up to 25)
-    var maxSubpages = 25;
+    // Step 3: Crawl ALL subpages (up to 40)
+    var maxSubpages = 40;
     for (var sp = 0; sp < Math.min(subpageUrls.length, maxSubpages); sp++) {
       try {
         await new Promise(function(r) { setTimeout(r, 1200); });
