@@ -521,13 +521,12 @@ function CopyableFilename({ filename, label }) {
 }
 
 // ─── TILE DETAIL CARD (for right panel) ───
-function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile, duplicateInfo, pageId, pageName, sectionIndex, checks, toggleCheck, products }) {
+function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile, duplicateInfo, pageId, pageName, sectionIndex, products }) {
   var dims = LAYOUT_TILE_DIMS[layoutId];
   var desktopType = dims && dims[tileIndex] ? dims[tileIndex] : null;
   var tileLabel = TILE_TYPE_LABELS[tile.type] || tile.type;
   var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
   var isImageTile = !isProduct && tile.type !== 'text';
-  var checkBase = pageId + '/' + sectionId + '/' + tileIndex;
 
   // Get category color for the badge
   var catColor = tile.imageCategory && CATEGORY_COLOR_MAP[tile.imageCategory] ? CATEGORY_COLOR_MAP[tile.imageCategory] : null;
@@ -830,41 +829,6 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
         );
       })()}
 
-      {/* ─── IMAGE COMPLETION CHECKMARKS ─── */}
-      {isImageTile && checks && toggleCheck && (function() {
-        var sameRatio = tile.syncDimensions || isSameAspectRatio(tile.dimensions, tile.mobileDimensions);
-        var syncDone = !!checks[checkBase + '/sync'];
-        var deskDone = !!checks[checkBase + '/desktop'];
-        var mobDone = !!checks[checkBase + '/mobile'];
-        var allDone = sameRatio ? syncDone : (deskDone && mobDone);
-        var checkBg = allDone ? '#dcfce7' : '#fef2f2';
-        var checkBorder = allDone ? '#86efac' : '#fecaca';
-
-        if (sameRatio) {
-          return (
-            <div style={{ marginTop: 6, padding: '8px 10px', borderRadius: 6, background: checkBg, border: '1px solid ' + checkBorder, transition: 'all .2s' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: syncDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
-                <input type="checkbox" checked={syncDone} onChange={function() { toggleCheck(checkBase + '/sync'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
-                {syncDone ? 'Image done' : 'Image missing'}
-              </label>
-            </div>
-          );
-        }
-        return (
-          <div style={{ marginTop: 6, padding: '8px 10px', borderRadius: 6, background: checkBg, border: '1px solid ' + checkBorder, transition: 'all .2s' }}>
-            <div style={{ display: 'flex', gap: 12 }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: deskDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
-                <input type="checkbox" checked={deskDone} onChange={function() { toggleCheck(checkBase + '/desktop'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
-                Desktop {deskDone ? '\u2713' : '\u2717'}
-              </label>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: mobDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
-                <input type="checkbox" checked={mobDone} onChange={function() { toggleCheck(checkBase + '/mobile'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
-                Mobile {mobDone ? '\u2713' : '\u2717'}
-              </label>
-            </div>
-          </div>
-        );
-      })()}
     </div>
   );
 }
@@ -1093,61 +1057,6 @@ function DesignerTimer({ shareToken }) {
   );
 }
 
-// ─── CHECKMARK HELPERS (server + localStorage cache) ───
-function loadChecks(shareToken) {
-  // Synchronous: return cached localStorage value immediately
-  try {
-    var raw = localStorage.getItem('briefing-checks-' + shareToken);
-    return raw ? JSON.parse(raw) : {};
-  } catch (e) { return {}; }
-}
-function loadChecksFromServer(shareToken) {
-  // Async: fetch from server and merge
-  return fetch('/api/checks?shareToken=' + encodeURIComponent(shareToken))
-    .then(function(resp) { return resp.ok ? resp.json() : null; })
-    .then(function(data) {
-      if (data && data.checks) {
-        try { localStorage.setItem('briefing-checks-' + shareToken, JSON.stringify(data.checks)); } catch (e) {}
-        return data.checks;
-      }
-      return null;
-    })
-    .catch(function() { return null; });
-}
-function saveChecks(shareToken, checks) {
-  // Save to localStorage immediately (fast)
-  try { localStorage.setItem('briefing-checks-' + shareToken, JSON.stringify(checks)); } catch (e) { /* ignore */ }
-  // Save to server in background (persistent)
-  fetch('/api/checks', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ shareToken: shareToken, checks: checks }),
-  }).catch(function() { /* ignore network errors, localStorage is fallback */ });
-}
-
-// Count total images required and how many are checked
-function computeProgress(store, checks) {
-  var total = 0;
-  var done = 0;
-  (store.pages || []).forEach(function(pg) {
-    (pg.sections || []).forEach(function(sec, si) {
-      (sec.tiles || []).forEach(function(tile, ti) {
-        if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text' || tile.type === 'product_selector') return;
-        var key = pg.id + '/' + sec.id + '/' + ti;
-        // If syncDimensions (same format desktop=mobile), only 1 image needed
-        if (tile.syncDimensions) {
-          total += 1;
-          if (checks[key + '/sync']) done += 1;
-        } else {
-          total += 2; // desktop + mobile
-          if (checks[key + '/desktop']) done += 1;
-          if (checks[key + '/mobile']) done += 1;
-        }
-      });
-    });
-  });
-  return { total: total, done: done, pct: total > 0 ? Math.round((done / total) * 100) : 0 };
-}
 
 // ─── PREVIEW MODE COMPONENT ───
 // Designer selects a local folder with images. Files are matched by canonical filenames.
@@ -1657,7 +1566,6 @@ export default function BriefingView() {
   var [changeLog, setChangeLog] = useState([]); // [{ time, descriptions[] }]
   var [selectedTile, setSelectedTile] = useState(null); // { sid, ti }
   var [sidebarTab, setSidebarTab] = useState('design'); // 'design', 'ci', or 'info'
-  var [checks, setChecks] = useState({}); // image completion checkmarks
   var [showPreview, setShowPreview] = useState(false);
   var [wfGenerating, setWfGenerating] = useState(null); // pageId currently generating wireframes
   var [wfProgress, setWfProgress] = useState(''); // progress text
@@ -1732,26 +1640,7 @@ export default function BriefingView() {
     }).catch(function(e) { setError('Laden fehlgeschlagen: ' + e.message); setLoading(false); });
   }, [token]);
 
-  // ─── LOAD CHECKMARKS (localStorage cache + server) ───
-  useEffect(function() {
-    if (!token) return;
-    // Instant load from localStorage cache
-    setChecks(loadChecks(token));
-    // Then fetch from server (authoritative) and update if available
-    loadChecksFromServer(token).then(function(serverChecks) {
-      if (serverChecks) setChecks(serverChecks);
-    });
-  }, [token]);
 
-  // Toggle a checkmark and persist
-  function toggleCheck(checkKey) {
-    setChecks(function(prev) {
-      var next = Object.assign({}, prev);
-      if (next[checkKey]) { delete next[checkKey]; } else { next[checkKey] = true; }
-      saveChecks(token, next);
-      return next;
-    });
-  }
 
   // ─── POLLING FOR CHANGES (every 15s) ───
   useEffect(function() {
@@ -1912,7 +1801,6 @@ export default function BriefingView() {
   var duplicateMap = buildDuplicateMap(store);
 
   // Compute image progress
-  var progress = store ? computeProgress(store, checks) : { total: 0, done: 0, pct: 0 };
 
   return (
     <div className="briefing-root">
@@ -2359,18 +2247,6 @@ export default function BriefingView() {
           {/* ═══ STORE INFO TAB ═══ */}
           {sidebarTab === 'info' && (
             <div>
-              {/* ── Progress Analysis ── */}
-              <div className="briefing-sidebar-section" style={{ background: '#f0fdf4', borderRadius: 8, margin: '0 8px 10px', padding: '12px' }}>
-                <div className="briefing-sidebar-title" style={{ color: '#15803d', marginBottom: 8 }}>Image Progress</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
-                  <div style={{ flex: 1, height: 8, background: '#e2e8f0', borderRadius: 4, overflow: 'hidden' }}>
-                    <div style={{ width: progress.pct + '%', height: '100%', background: progress.pct === 100 ? '#22c55e' : '#3b82f6', borderRadius: 4, transition: 'width .3s' }} />
-                  </div>
-                  <span style={{ fontSize: 13, fontWeight: 700, color: progress.pct === 100 ? '#16a34a' : '#1e293b', minWidth: 40, textAlign: 'right' }}>{progress.pct}%</span>
-                </div>
-                <div style={{ fontSize: 11, color: '#64748b' }}>{progress.done} / {progress.total} images completed</div>
-              </div>
-
               {/* ── Upload Instructions ── */}
               <div className="briefing-sidebar-section" style={{ background: '#fef9c3', borderRadius: 8, margin: '0 8px 10px', padding: '10px 12px' }}>
                 <div className="briefing-sidebar-title" style={{ color: '#a16207' }}>Upload Instructions</div>
@@ -2478,15 +2354,7 @@ export default function BriefingView() {
               });
               if (!heroTile) return null;
               var heroColor = { bg: '#fef2f2', border: '#ef4444', label: '#b91c1c' };
-              var heroCheckBase = heroPageId + '/' + heroSecId + '/' + heroTileIdx;
-              // Hero has different aspect ratios (3000x600=5:1 vs 1680x900=1.87:1) so always needs 2 images
               var heroSameRatio = heroTile.syncDimensions || isSameAspectRatio(heroTile.dimensions, heroTile.mobileDimensions);
-              var heroSyncDone = !!checks[heroCheckBase + '/sync'];
-              var heroDeskDone = !!checks[heroCheckBase + '/desktop'];
-              var heroMobDone = !!checks[heroCheckBase + '/mobile'];
-              var heroAllDone = heroSameRatio ? heroSyncDone : (heroDeskDone && heroMobDone);
-              var heroCheckBg = heroAllDone ? '#dcfce7' : '#fef2f2';
-              var heroCheckBorder = heroAllDone ? '#86efac' : '#fecaca';
               var heroIsSelected = selectedTile && selectedTile.sid === '__hero__';
               var heroDeskDims = heroTile.dimensions || { w: 3000, h: 600 };
               var heroMobDims = heroTile.mobileDimensions || { w: 1680, h: 900 };
@@ -2595,28 +2463,6 @@ export default function BriefingView() {
                         )}
                       </div>
                     )}
-                    {/* Hero completion checkmarks */}
-                    {heroSameRatio ? (
-                      <div style={{ marginTop: 6, padding: '8px 10px', borderRadius: 6, background: heroCheckBg, border: '1px solid ' + heroCheckBorder, transition: 'all .2s' }}>
-                        <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: heroSyncDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
-                          <input type="checkbox" checked={heroSyncDone} onChange={function() { toggleCheck(heroCheckBase + '/sync'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
-                          {heroSyncDone ? 'Image done' : 'Image missing'}
-                        </label>
-                      </div>
-                    ) : (
-                      <div style={{ marginTop: 6, padding: '8px 10px', borderRadius: 6, background: heroCheckBg, border: '1px solid ' + heroCheckBorder, transition: 'all .2s' }}>
-                        <div style={{ display: 'flex', gap: 12 }}>
-                          <label style={{ display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: heroDeskDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
-                            <input type="checkbox" checked={heroDeskDone} onChange={function() { toggleCheck(heroCheckBase + '/desktop'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
-                            Desktop {heroDeskDone ? '\u2713' : '\u2717'}
-                          </label>
-                          <label style={{ display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', fontSize: 11, fontWeight: 600, color: heroMobDone ? '#16a34a' : '#dc2626' }} onClick={function(e) { e.stopPropagation(); }}>
-                            <input type="checkbox" checked={heroMobDone} onChange={function() { toggleCheck(heroCheckBase + '/mobile'); }} style={{ accentColor: '#22c55e', width: 16, height: 16 }} />
-                            Mobile {heroMobDone ? '\u2713' : '\u2717'}
-                          </label>
-                        </div>
-                      </div>
-                    )}
                   </div>
                 </div>
               );
@@ -2650,8 +2496,6 @@ export default function BriefingView() {
                         pageId={item.pageId}
                         pageName={item.pageName}
                         sectionIndex={item.sectionIndex}
-                        checks={checks}
-                        toggleCheck={toggleCheck}
                         products={store ? store.products : []}
                       />
                     );
