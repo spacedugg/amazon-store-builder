@@ -1661,13 +1661,19 @@ function ensureMinimumSections(sections, pageName, brand, lang, analysis, templa
 }
 
 // ─── FULL GENERATION WORKFLOW ───
-export async function generateStore(asins, products, brand, marketplace, lang, userInstructions, onLog, complexityLevel, template, websiteData, referenceAnalysis, featureOptions) {
+export async function generateStore(asins, products, brand, marketplace, lang, userInstructions, onLog, complexityLevel, template, websiteData, referenceAnalysis, featureOptions, cancelRef) {
   var log = onLog || function() {};
   var cLevel = complexityLevel || 2;
   var cConfig = COMPLEXITY_LEVELS[cLevel] || COMPLEXITY_LEVELS[2];
   var opts = featureOptions || {};
   var extraPageFlags = opts.extraPages || {};
   var includeProductVideos = opts.includeProductVideos || false;
+
+  function checkCancel() {
+    if (cancelRef && cancelRef.current) {
+      throw new Error('CANCELLED');
+    }
+  }
 
   // STEP 0: Smart Product Matching (Online Shop ↔ Amazon)
   if (websiteData && websiteData.productDescriptions && websiteData.productDescriptions.length > 0) {
@@ -1681,6 +1687,8 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       log('   ' + matchResult.unmatched.length + ' website products not found on Amazon (excluded from store)');
     }
   }
+
+  checkCancel();
 
   // STEP 1: AI Analysis
   log('AI analyzing product catalog and planning store structure...');
@@ -1803,6 +1811,8 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     log('Small catalog detected (' + products.length + ' products, ' + (analysis.categories || []).length + ' category) — all products on homepage, no separate category pages.');
   }
 
+  checkCancel();
+
   // STEP 2: Generate Homepage Layout
   log('AI designing Homepage layout...');
   // For small catalogs: show ALL products on homepage
@@ -1839,6 +1849,8 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     log('AI homepage failed (' + err.message + '), using fallback...');
     pages.push(fallbackHomepage(brand, lang, analysis.categories || [], products, analysis));
   }
+
+  checkCancel();
 
   // STEP 3: Generate Category Pages (with subcategory support)
   // Skip if small catalog with single category — everything is already on homepage
@@ -1881,6 +1893,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     }
 
     // Generate the parent category page
+    checkCancel();
     log('AI designing "' + cat.name + '" page (' + allCatProducts.length + ' products)...');
     var catPageName = hasSubs ? cat.name + ' (Category Overview)' : cat.name;
     try {
@@ -1948,6 +1961,8 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     }
   }
 
+  checkCancel();
+
   // STEP 4: Bundle page if needed
   if (analysis.hasBundles && analysis.bundleAsins && analysis.bundleAsins.length > 0) {
     var bundleProducts = (analysis.bundleAsins || []).map(function(a) { return productMap[a]; }).filter(Boolean);
@@ -1980,6 +1995,8 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       log('Bundles page: ' + bundleProducts.length + ' products');
     }
   }
+
+  checkCancel();
 
   // ═══════════════════════════════════════════════════
   // STEP 5: USER-SELECTED EXTRA SUBPAGES

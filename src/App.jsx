@@ -51,6 +51,7 @@ export default function App() {
   var [wfGenerating, setWfGenerating] = useState(null);
   var [wfProgress, setWfProgress] = useState('');
   var wfCancelRef = useRef(false);
+  var genCancelRef = useRef(false);
   var headerBannerInputRef = useRef(null);
 
   // ─── UNDO HISTORY ───
@@ -203,6 +204,7 @@ export default function App() {
     setSel(null);
     setRequestedAsins(params.asins.slice());
     lastGenParams.current = params;
+    genCancelRef.current = false;
 
     var lang = LANGS[params.marketplace] || 'German';
     var domain = DOMAINS[params.marketplace] || DOMAINS.de;
@@ -369,7 +371,8 @@ export default function App() {
       var storeData = await generateStore(
         params.asins, products, params.brand, params.marketplace, lang,
         params.instructions, log, params.complexity, templateData, enhancedWebsiteData, referenceAnalysis,
-        { extraPages: selectedExtraPages, includeProductVideos: params.includeProductVideos, generateWireframes: params.generateWireframes, referenceCategory: params.referenceCategory }
+        { extraPages: selectedExtraPages, includeProductVideos: params.includeProductVideos, generateWireframes: params.generateWireframes, referenceCategory: params.referenceCategory },
+        genCancelRef
       );
 
       // Store meta
@@ -381,23 +384,29 @@ export default function App() {
       setCurPage(storeData.pages[0] ? storeData.pages[0].id : '');
       log('Store complete! ' + storeData.pages.length + ' pages, ' + products.length + ' products.');
     } catch (e) {
-      log('');
-      log('ERROR: ' + e.message);
-      if (e.message.indexOf('timed out') >= 0) {
-        log('The request timed out. Try again with fewer ASINs or choose a lower complexity level.');
-      } else if (e.message.indexOf('fetch') >= 0 || e.message.indexOf('network') >= 0 || e.message.indexOf('Failed to fetch') >= 0) {
-        log('Network error — check your internet connection and try again.');
-      } else if (e.message.indexOf('API error') >= 0 || e.message.indexOf('529') >= 0 || e.message.indexOf('overload') >= 0) {
-        log('The AI service is temporarily overloaded. Please wait a minute and try again.');
+      if (e.message === 'CANCELLED') {
+        log('');
+        log('Generierung abgebrochen.');
+        log('Bereits generierte Seiten bleiben erhalten.');
+      } else {
+        log('');
+        log('ERROR: ' + e.message);
+        if (e.message.indexOf('timed out') >= 0) {
+          log('The request timed out. Try again with fewer ASINs or choose a lower complexity level.');
+        } else if (e.message.indexOf('fetch') >= 0 || e.message.indexOf('network') >= 0 || e.message.indexOf('Failed to fetch') >= 0) {
+          log('Network error — check your internet connection and try again.');
+        } else if (e.message.indexOf('API error') >= 0 || e.message.indexOf('529') >= 0 || e.message.indexOf('overload') >= 0) {
+          log('The AI service is temporarily overloaded. Please wait a minute and try again.');
+        }
       }
     } finally {
       setGenDone(true);
+      var wasCancelled = genCancelRef.current;
       // Don't auto-close — let user close via button (or auto-close after 12s if successful)
       var hasErr = genLog.some(function(m) { return m.indexOf('ERROR:') >= 0 || m.indexOf('CRITICAL:') >= 0; });
-      if (!hasErr) {
+      if (!hasErr && !wasCancelled) {
         setTimeout(function() { setGenerating(false); }, 12000);
       }
-      // If errors/warnings: modal stays until user clicks Close
     }
   };
 
@@ -923,6 +932,7 @@ export default function App() {
           uiLang={uiLang}
           onClose={function() { setGenerating(false); }}
           onRetry={lastGenParams.current ? function() { handleGenerate(lastGenParams.current); } : null}
+          onStop={function() { genCancelRef.current = true; log('Abbrechen angefordert — warte auf laufenden Schritt...'); }}
         />
       )}
 

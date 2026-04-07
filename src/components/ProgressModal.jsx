@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { t } from '../i18n';
 
-export default function ProgressModal({ logs, done, uiLang, onClose, onRetry }) {
+export default function ProgressModal({ logs, done, uiLang, onClose, onRetry, onStop }) {
   var logEndRef = useRef(null);
   var [elapsed, setElapsed] = useState(0);
   var [dots, setDots] = useState('');
@@ -99,6 +99,19 @@ export default function ProgressModal({ logs, done, uiLang, onClose, onRetry }) 
           )}
           <div ref={logEndRef} />
         </div>
+
+        {/* Stop button during generation */}
+        {!done && onStop && (
+          <div style={{ display: 'flex', gap: 8, marginTop: 10, justifyContent: 'flex-end' }}>
+            <button
+              className="btn"
+              onClick={onStop}
+              style={{ background: '#ef4444', color: '#fff', borderColor: '#ef4444', fontWeight: 700, padding: '6px 18px' }}
+            >
+              Abbrechen
+            </button>
+          </div>
+        )}
 
         {/* Action buttons when done */}
         {done && (
