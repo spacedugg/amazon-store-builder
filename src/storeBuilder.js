@@ -171,6 +171,18 @@ function formatWebsiteContext(websiteData) {
   if (websiteData.fonts && websiteData.fonts.length > 0) {
     parts.push('BRAND FONTS (from CSS): ' + websiteData.fonts.join(', '));
   }
+  if (websiteData.typographyStyle) {
+    var ts = websiteData.typographyStyle;
+    parts.push('TEXT DENSITY: ' + ts.textDensity + ' (avg ' + ts.avgParagraphLength + ' chars/paragraph, ' + ts.paragraphCount + ' paragraphs, ' + ts.headingCount + ' headings)');
+    if (ts.textDensity === 'minimalist') {
+      parts.push('COPYWRITING STYLE: Keep text minimal and impactful. Short headlines, few words. Let images speak.');
+    } else if (ts.textDensity === 'text-heavy') {
+      parts.push('COPYWRITING STYLE: Brand uses detailed descriptions. Include more explanatory text, benefit descriptions, and product details.');
+    } else {
+      parts.push('COPYWRITING STYLE: Balanced approach. Mix of concise headlines and supporting detail text where needed.');
+    }
+    if (ts.fontWeights && ts.fontWeights.length > 0) parts.push('FONT WEIGHTS USED: ' + ts.fontWeights.join(', '));
+  }
 
   parts.push('=== END BRAND WEBSITE INTELLIGENCE ===');
   parts.push('');
@@ -2294,9 +2306,11 @@ function buildWireframePrompt(tile, brand, ciColors, ciBrandStyle, analysis) {
 
   // Base style instruction: sketch/wireframe aesthetic
   var styleBase = [
-    'Create a minimalistic wireframe sketch for a single image tile.',
-    'IMPORTANT: Generate ONLY the image content itself — do NOT include any website UI, browser chrome, navigation bars, logos, headers, page layouts, or mockup frames around the image.',
-    'The output must look like a standalone image, not a screenshot of a webpage.',
+    'Create a minimalistic wireframe sketch.',
+    'THIS IS A STANDALONE IMAGE — NOT a webpage screenshot.',
+    'ABSOLUTELY NO website elements: no browser frames, no navigation bars, no page headers, no Amazon store dashboards, no sidebar menus, no UI chrome, no mockup device frames, no page layout containers.',
+    'The image fills the ENTIRE canvas edge-to-edge. There is NO border, NO frame, NO surrounding UI.',
+    'Think of this as a single photograph or graphic design — just the visual content described below, nothing else.',
     'Style: pencil sketch with light color accents, NOT photorealistic.',
     'Use simple geometric shapes, placeholder areas, and minimal line art.',
     'Elements should be suggested/indicated, not fully rendered.',
@@ -2407,7 +2421,7 @@ async function generateWireframeAPI(prompt, aspectRatio) {
 }
 
 // ─── EXPORTED: Generate wireframes for a single page (called from BriefingView) ───
-export async function generateWireframesForPage(page, brand, websiteData, analysis, onProgress) {
+export async function generateWireframesForPage(page, brand, websiteData, analysis, onProgress, manualCI) {
   var log = onProgress || function() {};
   var tiles = [];
   // Collect all image tiles from this page
@@ -2420,20 +2434,30 @@ export async function generateWireframesForPage(page, brand, websiteData, analys
   });
   if (tiles.length === 0) return { success: 0, failed: 0, total: 0 };
 
-  // Extract CI info
+  // Extract CI info — manualCI takes priority over scraped data
   var ciColors = '';
   var ciBrandStyle = '';
+  if (manualCI && manualCI.colors && manualCI.colors.length > 0) {
+    ciColors = manualCI.colors.slice(0, 6).join(', ');
+  }
+  if (manualCI && manualCI.brandTone) {
+    ciBrandStyle = manualCI.brandTone;
+  }
   if (websiteData) {
-    var colorHints = [];
-    if (websiteData.rawTextSections) {
-      websiteData.rawTextSections.forEach(function(sec) {
-        var colorMatch = (sec.text || '').match(/#[0-9A-Fa-f]{3,6}/g);
-        if (colorMatch) colorHints = colorHints.concat(colorMatch);
-      });
+    if (!ciColors) {
+      var colorHints = [];
+      if (websiteData.rawTextSections) {
+        websiteData.rawTextSections.forEach(function(sec) {
+          var colorMatch = (sec.text || '').match(/#[0-9A-Fa-f]{3,6}/g);
+          if (colorMatch) colorHints = colorHints.concat(colorMatch);
+        });
+      }
+      if (colorHints.length > 0) ciColors = colorHints.slice(0, 4).join(', ');
+      if (websiteData.colors && websiteData.colors.length > 0) ciColors = websiteData.colors.slice(0, 4).join(', ');
     }
-    if (colorHints.length > 0) ciColors = colorHints.slice(0, 4).join(', ');
-    if (websiteData.colors && websiteData.colors.length > 0) ciColors = websiteData.colors.slice(0, 4).join(', ');
-    ciBrandStyle = (websiteData.description || '') + ' ' + (websiteData.tagline || '');
+    if (!ciBrandStyle) {
+      ciBrandStyle = (websiteData.description || '') + ' ' + (websiteData.tagline || '');
+    }
   }
 
   var success = 0;

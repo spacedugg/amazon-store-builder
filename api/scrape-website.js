@@ -188,6 +188,7 @@ function extractAllContent(homepageHtml, subpageContents, url) {
     socialProof: [],
     colors: [],
     fonts: [],
+    typographyStyle: null,
     // Raw text for AI
     rawText: '',
     pagesScraped: 1,
@@ -202,6 +203,7 @@ function extractAllContent(homepageHtml, subpageContents, url) {
   result.tagline = homeInfo.tagline;
   result.colors = homeInfo.colors;
   result.fonts = homeInfo.fonts;
+  result.typographyStyle = homeInfo.typographyStyle || null;
   result.certifications = homeInfo.certifications.slice();
   result.features = homeInfo.features.slice();
   result.socialProof = homeInfo.socialProof.slice();
@@ -235,6 +237,11 @@ function extractAllContent(homepageHtml, subpageContents, url) {
     var fontSet = {};
     result.fonts.forEach(function(f) { fontSet[f.toLowerCase()] = true; });
     pageInfo.fonts.forEach(function(f) { if (!fontSet[f.toLowerCase()]) { result.fonts.push(f); fontSet[f.toLowerCase()] = true; } });
+
+    // Merge typography style (use homepage as primary)
+    if (pageInfo.typographyStyle && !result.typographyStyle) {
+      result.typographyStyle = pageInfo.typographyStyle;
+    }
 
     // Category-specific text
     if (category === 'about') result.aboutText = pageInfo.mainText.slice(0, 3000);
@@ -384,6 +391,43 @@ function extractFromPage(html, category) {
   });
   info.fonts = info.fonts.slice(0, 4);
 
+  // ── TYPOGRAPHY STYLE ANALYSIS ──
+  // Extract font sizes used across the site
+  var fontSizes = [];
+  var sizeMatches = allCss.match(/font-size\s*:\s*([^;}{]+)/gi) || [];
+  sizeMatches.forEach(function(m) {
+    var val = m.replace(/font-size\s*:\s*/i, '').trim();
+    if (val && fontSizes.indexOf(val) < 0 && fontSizes.length < 12) fontSizes.push(val);
+  });
+  info.fontSizes = fontSizes;
+
+  // Extract font weights
+  var fontWeights = [];
+  var weightMatches = allCss.match(/font-weight\s*:\s*([^;}{]+)/gi) || [];
+  var weightSet = {};
+  weightMatches.forEach(function(m) {
+    var val = m.replace(/font-weight\s*:\s*/i, '').trim();
+    if (val && !weightSet[val]) { fontWeights.push(val); weightSet[val] = true; }
+  });
+  info.fontWeights = fontWeights.slice(0, 8);
+
+  // Text density analysis: count paragraphs, headings, and avg paragraph length
+  var paraCount = paragraphs.length;
+  var headingCount = headings.length;
+  var avgParaLen = paraCount > 0 ? Math.round(paragraphs.reduce(function(s, p) { return s + p.length; }, 0) / paraCount) : 0;
+  // Classify: minimalist (<80 avg chars, few paragraphs) vs. text-heavy (>150 avg, many paragraphs)
+  var textDensity = 'balanced';
+  if (avgParaLen < 80 && paraCount < 15) textDensity = 'minimalist';
+  else if (avgParaLen > 150 || paraCount > 40) textDensity = 'text-heavy';
+  info.typographyStyle = {
+    fontSizes: fontSizes.slice(0, 8),
+    fontWeights: fontWeights.slice(0, 6),
+    textDensity: textDensity,
+    avgParagraphLength: avgParaLen,
+    paragraphCount: paraCount,
+    headingCount: headingCount,
+  };
+
   return info;
 }
 
@@ -463,6 +507,7 @@ function buildResult(content, aiAnalysis, url) {
     socialProof: content.socialProof.slice(0, 5),
     colors: content.colors.slice(0, 10),
     fonts: content.fonts.slice(0, 6),
+    typographyStyle: content.typographyStyle || null,
     rawTextSections: [],
     pagesScraped: content.pagesScraped,
     // AI-enriched fields

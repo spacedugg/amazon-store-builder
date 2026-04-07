@@ -1678,7 +1678,8 @@ export default function BriefingView() {
       { brandTone: store.brandTone, brandStory: store.brandStory, keyFeatures: store.keyFeatures },
       function(current, total, category) {
         setWfProgress(current + '/' + total + ' (' + category + ')');
-      }
+      },
+      store.manualCI || null
     ).then(function(result) {
       setWfGenerating(null);
       var msg = result.success + ' generiert, ' + result.failed + ' fehlgeschlagen';
@@ -2136,6 +2137,36 @@ export default function BriefingView() {
                       style={{ width: '100%', fontSize: 10, padding: '4px 6px', border: '1px solid #e5e7eb', borderRadius: 4, resize: 'vertical' }}
                     />
                   </div>
+
+                  {/* Typography Style */}
+                  {store.websiteData && store.websiteData.typographyStyle && (
+                    <div style={{ marginBottom: 10 }}>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Typografie-Stil (erkannt)</div>
+                      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 6 }}>
+                        <span style={{ background: store.websiteData.typographyStyle.textDensity === 'minimalist' ? '#dcfce7' : store.websiteData.typographyStyle.textDensity === 'text-heavy' ? '#fef3c7' : '#eff6ff', color: store.websiteData.typographyStyle.textDensity === 'minimalist' ? '#166534' : store.websiteData.typographyStyle.textDensity === 'text-heavy' ? '#92400e' : '#1e40af', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 700 }}>
+                          {store.websiteData.typographyStyle.textDensity === 'minimalist' ? 'Minimalistisch' : store.websiteData.typographyStyle.textDensity === 'text-heavy' ? 'Textlastig' : 'Ausgewogen'}
+                        </span>
+                        <span style={{ background: '#f1f5f9', color: '#475569', borderRadius: 3, padding: '2px 8px', fontSize: 10 }}>
+                          {store.websiteData.typographyStyle.headingCount} Headings
+                        </span>
+                        <span style={{ background: '#f1f5f9', color: '#475569', borderRadius: 3, padding: '2px 8px', fontSize: 10 }}>
+                          ~{store.websiteData.typographyStyle.avgParagraphLength} Zeichen/Absatz
+                        </span>
+                      </div>
+                      {store.websiteData.typographyStyle.fontWeights && store.websiteData.typographyStyle.fontWeights.length > 0 && (
+                        <div style={{ marginBottom: 4 }}>
+                          <span style={{ fontSize: 9, color: '#7c3aed', fontWeight: 600 }}>Schriftgewichte: </span>
+                          <span style={{ fontSize: 10, fontFamily: 'monospace', color: '#475569' }}>{store.websiteData.typographyStyle.fontWeights.join(', ')}</span>
+                        </div>
+                      )}
+                      {store.websiteData.typographyStyle.fontSizes && store.websiteData.typographyStyle.fontSizes.length > 0 && (
+                        <div>
+                          <span style={{ fontSize: 9, color: '#7c3aed', fontWeight: 600 }}>Schriftgrößen: </span>
+                          <span style={{ fontSize: 10, fontFamily: 'monospace', color: '#475569' }}>{store.websiteData.typographyStyle.fontSizes.slice(0, 6).join(', ')}</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
 
                   {/* Brand Story */}
                   {(store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.brandStory) || (store.analysis && store.analysis.brandStory) || (store.websiteData && store.websiteData.aboutText) ? (
