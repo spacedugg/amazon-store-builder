@@ -4,6 +4,7 @@ import { scrapeAsins } from './api';
 import { generateStore, aiRefineStore, applyOperations, generateWireframesForPage, deleteWireframesForPage } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, loadStoreByShareToken, importStoreByShareLink } from './storage';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
+import { crawlMultipleStores, crawlAndParseStore, analyzeStoreImagesWithGemini, formatReferenceStoreContext, loadKnowledgeBaseForCategory, formatKnowledgeBaseContext, formatStaticReferenceContext, loadGeminiAnalysesForCategory, formatGeminiAnalysesContext } from './referenceStoreService';
 import Topbar from './components/Topbar';
 import PageList from './components/PageList';
 import Canvas from './components/Canvas';
@@ -207,8 +208,6 @@ export default function App() {
       // Step 1.5: Crawl & analyze reference stores (if provided)
       var referenceAnalysis = null;
       if (params.referenceStoreUrls && params.referenceStoreUrls.length > 0) {
-        var { crawlMultipleStores, analyzeStoreImagesWithGemini, formatReferenceStoreContext } = await import('./referenceStoreService');
-
         log('Analyzing ' + params.referenceStoreUrls.length + ' reference stores...');
         var parsedStores = await crawlMultipleStores(params.referenceStoreUrls, log);
 
@@ -234,18 +233,17 @@ export default function App() {
         var existingStoreSuccess = false;
         while (!existingStoreSuccess && existingStoreRetries < 3) {
           try {
-            var refService = await import('./referenceStoreService');
             var modeLabel = (params.existingStoreMode === 'reconceptualize') ? 'NEU KONZIPIEREN' : 'OPTIMIEREN';
             log(existingStoreRetries > 0 ? ('Retrying existing store analysis (attempt ' + (existingStoreRetries + 1) + ')...') : ('Analyzing existing brand store (' + modeLabel + '): ' + params.existingStoreUrl));
-            var existingStore = await refService.crawlAndParseStore(params.existingStoreUrl, log);
+            var existingStore = await crawlAndParseStore(params.existingStoreUrl, log);
 
             // Analyze existing store images with Gemini for CI extraction
             var existingImageAnalyses = [];
             try {
-              existingImageAnalyses = await refService.analyzeStoreImagesWithGemini(existingStore, log);
+              existingImageAnalyses = await analyzeStoreImagesWithGemini(existingStore, log);
             } catch (e) { log('Existing store image analysis skipped: ' + e.message); }
 
-            var existingContext = refService.formatReferenceStoreContext([existingStore], existingImageAnalyses);
+            var existingContext = formatReferenceStoreContext([existingStore], existingImageAnalyses);
             var storeMode = params.existingStoreMode || 'optimize';
             var existingPrefix;
             if (storeMode === 'reconceptualize') {
@@ -286,7 +284,6 @@ export default function App() {
 
       // Step 1.6: Load knowledge base data for the selected category
       try {
-        var { loadKnowledgeBaseForCategory, formatKnowledgeBaseContext } = await import('./referenceStoreService');
         var kbCategory = params.referenceCategory || params.category || 'generic';
         log('Loading knowledge base for category: ' + kbCategory + '...');
         var kbData = await loadKnowledgeBaseForCategory(kbCategory);
@@ -304,7 +301,6 @@ export default function App() {
 
       // Step 1.7: Load static reference data from _summary.json (always available)
       try {
-        var { formatStaticReferenceContext } = await import('./referenceStoreService');
         var refCategory = params.referenceCategory || 'generic';
         log('Loading static reference patterns for: ' + refCategory + '...');
         var staticContext = await formatStaticReferenceContext(refCategory);
@@ -319,7 +315,6 @@ export default function App() {
 
       // Step 1.7b: Load Gemini Vision analyses from reference store JSONs
       try {
-        var { loadGeminiAnalysesForCategory, formatGeminiAnalysesContext } = await import('./referenceStoreService');
         var geminiCategory = params.referenceCategory || 'generic';
         log('Loading Gemini visual intelligence for: ' + geminiCategory + '...');
         var geminiData = await loadGeminiAnalysesForCategory(geminiCategory);
