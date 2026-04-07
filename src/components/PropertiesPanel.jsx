@@ -210,43 +210,44 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
           <div className="props-section">
             <label className="label">{t('props.textOverlay', uiLang)}</label>
 
-            {/* ── STRUCTURED TEXT EDITOR: separate fields per hierarchy level ── */}
+            {/* ── STRUCTURED TEXT EDITOR: separate fields per role tag ── */}
             {(function() {
               var lines = (tile.textOverlay || '').split(/\\n|\n/);
-              // Detect if lines are equal-rank (all similar length, no bullets = same level)
-              var nonBulletLines = lines.filter(function(l) { return l.trim() && !/^•\s/.test(l.trim()); });
-              var isEqualRank = nonBulletLines.length >= 2 && (function() {
-                // Check if all non-bullet lines are similar in length (±50%)
-                var avgLen = nonBulletLines.reduce(function(s, l) { return s + l.trim().length; }, 0) / nonBulletLines.length;
-                return nonBulletLines.every(function(l) {
-                  var len = l.trim().length;
-                  return len >= avgLen * 0.4 && len <= avgLen * 2.5;
-                });
-              })();
-
-              // Classify lines into hierarchy levels
+              // Parse role tags: [h1], [h2], [body], [bullet] or legacy • prefix
               var structured = lines.map(function(line, i) {
                 var trimmed = line.trim();
-                var isBullet = /^•\s/.test(trimmed);
-                if (isBullet) return { type: 'bullet', text: trimmed.replace(/^•\s*/, ''), idx: i };
-                if (isEqualRank) return { type: 'text', text: trimmed, idx: i }; // all same level
-                if (i === 0) return { type: 'h1', text: trimmed, idx: i };
-                var prevNonBullets = lines.slice(0, i).filter(function(l) { return l.trim() && !/^•\s/.test(l.trim()); }).length;
-                if (prevNonBullets === 1) return { type: 'h2', text: trimmed, idx: i };
-                return { type: 'h3', text: trimmed, idx: i };
+                var tagMatch = trimmed.match(/^\[(h1|h2|h3|body|bullet)\]/i);
+                if (tagMatch) {
+                  var tag = tagMatch[1].toLowerCase();
+                  var text = trimmed.replace(/^\[(h1|h2|h3|body|bullet)\]\s*/i, '');
+                  return { type: tag, text: text, idx: i };
+                }
+                // Legacy: • prefix = bullet
+                if (/^•\s/.test(trimmed)) return { type: 'bullet', text: trimmed.replace(/^•\s*/, ''), idx: i };
+                // Single line or no tag = just text
+                return { type: lines.length <= 1 ? 'text' : 'text', text: trimmed, idx: i };
               });
 
               function updateLine(lineIdx, newText) {
                 var newLines = (tile.textOverlay || '').split(/\\n|\n/);
-                var prefix = structured[lineIdx] && structured[lineIdx].type === 'bullet' ? '• ' : '';
+                var item = structured[lineIdx];
+                var prefix = item ? '[' + item.type + ']' : '';
+                if (item && item.type === 'text' && lines.length <= 1) prefix = ''; // single text, no tag
                 newLines[lineIdx] = prefix + newText;
                 u('textOverlay', newLines.join('\\n'));
               }
 
               function addLine(type) {
                 var current = tile.textOverlay || '';
-                var prefix = type === 'bullet' ? '• ' : '';
+                var prefix = '[' + type + ']';
                 u('textOverlay', current + (current ? '\\n' : '') + prefix);
+              }
+
+              function changeLineType(lineIdx, newType) {
+                var newLines = (tile.textOverlay || '').split(/\\n|\n/);
+                var text = structured[lineIdx] ? structured[lineIdx].text : '';
+                newLines[lineIdx] = '[' + newType + ']' + text;
+                u('textOverlay', newLines.join('\\n'));
               }
 
               function removeLine(lineIdx) {
@@ -255,11 +256,11 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
                 u('textOverlay', newLines.join('\\n'));
               }
 
-              var labels = { h1: 'Überschrift (H1)', h2: 'Unterzeile (H2)', h3: 'Ergänzungstext (H3)', bullet: 'Aufzählung', text: 'Text (gleiche Ebene)' };
-              var colors = { h1: '#1d4ed8', h2: '#4338ca', h3: '#64748b', bullet: '#92400e', text: '#0f766e' };
-              var bgColors = { h1: '#dbeafe', h2: '#e0e7ff', h3: '#f1f5f9', bullet: '#fef3c7', text: '#ccfbf1' };
-              var fontSizes = { h1: 12, h2: 11, h3: 11, bullet: 11, text: 11 };
-              var fontWeights = { h1: 700, h2: 600, h3: 400, bullet: 400, text: 600 };
+              var labels = { h1: 'Heading', h2: 'Subheading', h3: 'Detail', body: 'Body', bullet: 'Bullet', text: 'Text' };
+              var colors = { h1: '#1d4ed8', h2: '#4338ca', h3: '#64748b', body: '#475569', bullet: '#92400e', text: '#0f766e' };
+              var bgColors = { h1: '#dbeafe', h2: '#e0e7ff', h3: '#f1f5f9', body: '#f8fafc', bullet: '#fef3c7', text: '#ccfbf1' };
+              var fontSizes = { h1: 12, h2: 11, h3: 11, body: 11, bullet: 11, text: 11 };
+              var fontWeights = { h1: 700, h2: 600, h3: 400, body: 400, bullet: 400, text: 500 };
 
               return (
                 <div>
@@ -267,9 +268,16 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
                     if (!item.text && structured.length > 1) return null; // skip empty lines in multi-line
                     return (
                       <div key={i} style={{ marginBottom: 4, display: 'flex', alignItems: 'center', gap: 4 }}>
-                        <span style={{ background: bgColors[item.type], color: colors[item.type], borderRadius: 3, padding: '1px 6px', fontSize: 8, fontWeight: 700, minWidth: 20, textAlign: 'center', flexShrink: 0 }}>
-                          {item.type === 'bullet' ? '•' : item.type.toUpperCase()}
-                        </span>
+                        <select
+                          value={item.type}
+                          onChange={function(e) { changeLineType(i, e.target.value); }}
+                          style={{ background: bgColors[item.type], color: colors[item.type], borderRadius: 3, padding: '1px 4px', fontSize: 8, fontWeight: 700, minWidth: 28, textAlign: 'center', flexShrink: 0, border: '1px solid ' + (bgColors[item.type] || '#e2e8f0'), cursor: 'pointer', fontFamily: 'inherit' }}
+                        >
+                          <option value="h1">H1</option>
+                          <option value="h2">H2</option>
+                          <option value="body">Body</option>
+                          <option value="bullet">Bullet</option>
+                        </select>
                         <input
                           value={item.text}
                           onChange={function(e) { updateLine(i, e.target.value); }}
@@ -282,9 +290,11 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
                       </div>
                     );
                   })}
-                  <div style={{ display: 'flex', gap: 4, marginTop: 4 }}>
-                    <button className="btn" onClick={function() { addLine('text'); }} style={{ fontSize: 9, padding: '2px 8px' }}>+ Textzeile</button>
-                    <button className="btn" onClick={function() { addLine('bullet'); }} style={{ fontSize: 9, padding: '2px 8px' }}>+ Aufzählung</button>
+                  <div style={{ display: 'flex', gap: 3, marginTop: 4, flexWrap: 'wrap' }}>
+                    <button className="btn" onClick={function() { addLine('h1'); }} style={{ fontSize: 9, padding: '2px 6px' }}>+ Heading</button>
+                    <button className="btn" onClick={function() { addLine('h2'); }} style={{ fontSize: 9, padding: '2px 6px' }}>+ Subheading</button>
+                    <button className="btn" onClick={function() { addLine('body'); }} style={{ fontSize: 9, padding: '2px 6px' }}>+ Bodytext</button>
+                    <button className="btn" onClick={function() { addLine('bullet'); }} style={{ fontSize: 9, padding: '2px 6px' }}>+ Bullet</button>
                   </div>
                   {/* Raw edit fallback */}
                   <details style={{ marginTop: 6 }}>

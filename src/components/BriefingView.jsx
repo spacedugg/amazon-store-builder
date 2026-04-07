@@ -588,62 +588,32 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
           <span className="briefing-field-label">Text on Image:{tile.textAlign && tile.textAlign !== 'left' ? ' (' + (tile.textAlign === 'center' ? 'centered' : 'right-aligned') + ')' : ''}</span>
           <div style={{ padding: '6px 8px', background: '#fefce8', border: '1px solid #fde68a', borderRadius: 4, lineHeight: 1.5 }}>
             {(function() {
-              var allLines = tile.textOverlay.split(/\\n|\n/).filter(function(l) { return l.trim(); });
-              var isMultiText = allLines.length > 1;
-              // Detect equal-rank lines (all similar length, no bullets = same level)
-              var nonBulletLines = allLines.filter(function(l) { return !/^•\s/.test(l.trim()); });
-              var isEqualRank = nonBulletLines.length >= 2 && nonBulletLines.every(function(l) {
-                var avgLen = nonBulletLines.reduce(function(s, x) { return s + x.trim().length; }, 0) / nonBulletLines.length;
-                return l.trim().length >= avgLen * 0.4 && l.trim().length <= avgLen * 2.5;
-              });
-
+              var tagStyles = {
+                h1: { bg: '#dbeafe', color: '#1d4ed8', fontSize: 12, fontWeight: 700, label: 'H1' },
+                h2: { bg: '#e0e7ff', color: '#4338ca', fontSize: 11, fontWeight: 600, label: 'H2' },
+                body: { bg: '#f8fafc', color: '#475569', fontSize: 11, fontWeight: 400, label: 'BODY' },
+                bullet: { bg: '#fef3c7', color: '#92400e', fontSize: 11, fontWeight: 400, label: 'BULLET' },
+                text: { bg: '#ccfbf1', color: '#0f766e', fontSize: 11, fontWeight: 500, label: 'TEXT' },
+              };
               return tile.textOverlay.split(/\\n|\n/).map(function(line, li) {
                 var trimmed = line.trim();
                 if (!trimmed) return <div key={li} style={{ height: 4 }} />;
-                var isBullet = /^•\s/.test(trimmed);
-                var bulletTag = isBullet ? <span style={{ background: '#fef3c7', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#92400e', marginRight: 3 }}>BULLET</span> : null;
-                var isBold = /^\*\*.*\*\*$/.test(trimmed);
-                var displayText = isBold ? trimmed.replace(/^\*\*|\*\*$/g, '') : trimmed;
-                if (isBullet) displayText = displayText.replace(/^•\s*/, '');
-
-                if (!isMultiText) {
-                  return <div key={li} style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>
-                    <span style={{ background: '#dbeafe', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#1d4ed8', marginRight: 3 }}>text</span>
-                    {bulletTag}{displayText}
-                  </div>;
+                // Parse role tag [h1], [h2], [body], [bullet]
+                var tagMatch = trimmed.match(/^\[(h1|h2|h3|body|bullet)\]/i);
+                var role = 'text';
+                var displayText = trimmed;
+                if (tagMatch) {
+                  role = tagMatch[1].toLowerCase();
+                  if (role === 'h3') role = 'body';
+                  displayText = trimmed.replace(/^\[(h1|h2|h3|body|bullet)\]\s*/i, '');
+                } else if (/^•\s/.test(trimmed)) {
+                  role = 'bullet';
+                  displayText = trimmed.replace(/^•\s*/, '');
                 }
-
-                // Equal-rank: all non-bullet lines get the same tag
-                if (isEqualRank && !isBullet) {
-                  return <div key={li} style={{ fontSize: 11, fontWeight: 600, color: '#1e293b', marginTop: li > 0 ? 2 : 0 }}>
-                    <span style={{ background: '#ccfbf1', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#0f766e', marginRight: 3 }}>text</span>
-                    {displayText}
-                  </div>;
-                }
-
-                // Hierarchical: H1 → H2 → H3
-                var nonBulletIdx = 0;
-                if (!isBullet) {
-                  for (var ci = 0; ci < li; ci++) {
-                    var cl = (tile.textOverlay.split(/\\n|\n/)[ci] || '').trim();
-                    if (cl && !/^•\s/.test(cl)) nonBulletIdx++;
-                  }
-                }
-                if (!isBullet && (isBold || nonBulletIdx === 0)) {
-                  return <div key={li} style={{ fontSize: 12, fontWeight: 700, color: '#1e293b', marginTop: li > 0 ? 2 : 0 }}>
-                    <span style={{ background: '#dbeafe', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#1d4ed8', marginRight: 3 }}>H1</span>
-                    {bulletTag}{displayText}
-                  </div>;
-                }
-                if (!isBullet && nonBulletIdx === 1) {
-                  return <div key={li} style={{ fontSize: 11, fontWeight: 600, color: '#334155', marginTop: li > 0 ? 2 : 0 }}>
-                    <span style={{ background: '#e0e7ff', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#4338ca', marginRight: 3 }}>H2</span>
-                    {bulletTag}{displayText}
-                  </div>;
-                }
-                return <div key={li} style={{ fontSize: 11, color: '#475569', paddingLeft: isBullet ? 12 : 0 }}>
-                  <span style={{ background: '#f1f5f9', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#94a3b8', marginRight: 3 }}>{isBullet ? 'BULLET' : 'H3'}</span>
-                  {bulletTag}{displayText}
+                var style = tagStyles[role] || tagStyles.text;
+                return <div key={li} style={{ fontSize: style.fontSize, fontWeight: style.fontWeight, color: '#1e293b', marginTop: li > 0 ? 2 : 0, paddingLeft: role === 'bullet' ? 8 : 0 }}>
+                  <span style={{ background: style.bg, borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: style.color, marginRight: 3 }}>{style.label}</span>
+                  {displayText}
                 </div>;
               });
             })()}
