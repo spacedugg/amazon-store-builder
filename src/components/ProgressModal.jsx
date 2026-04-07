@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { t } from '../i18n';
 
-export default function ProgressModal({ logs, done, uiLang }) {
+export default function ProgressModal({ logs, done, uiLang, onClose, onRetry }) {
   var logEndRef = useRef(null);
   var [elapsed, setElapsed] = useState(0);
   var [dots, setDots] = useState('');
@@ -33,6 +33,7 @@ export default function ProgressModal({ logs, done, uiLang }) {
   }, [logs.length]);
 
   var hasError = logs.some(function(m) { return m.indexOf('ERROR:') >= 0 || m.indexOf('Error:') >= 0; });
+  var hasCriticalWarning = logs.some(function(m) { return m.indexOf('CRITICAL:') >= 0 || m.indexOf('data sources failed') >= 0; });
   var formatTime = function(s) {
     var m = Math.floor(s / 60);
     var sec = s % 60;
@@ -98,6 +99,30 @@ export default function ProgressModal({ logs, done, uiLang }) {
           )}
           <div ref={logEndRef} />
         </div>
+
+        {/* Action buttons when done */}
+        {done && (
+          <div style={{ display: 'flex', gap: 8, marginTop: 10, justifyContent: 'flex-end' }}>
+            {(hasError || hasCriticalWarning) && onRetry && (
+              <button
+                className="btn"
+                onClick={onRetry}
+                style={{ background: '#f59e0b', color: '#fff', borderColor: '#f59e0b', fontWeight: 700 }}
+              >
+                Erneut versuchen
+              </button>
+            )}
+            {onClose && (
+              <button
+                className="btn"
+                onClick={onClose}
+                style={{ background: hasError ? '#ef4444' : '#3b82f6', color: '#fff', borderColor: hasError ? '#ef4444' : '#3b82f6' }}
+              >
+                {hasError ? 'Schliessen' : 'OK'}
+              </button>
+            )}
+          </div>
+        )}
 
         {/* CSS for shimmer animation */}
         <style>{'\

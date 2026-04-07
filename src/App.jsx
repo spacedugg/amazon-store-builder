@@ -191,6 +191,7 @@ export default function App() {
     setGenLog([]);
     setSel(null);
     setRequestedAsins(params.asins.slice());
+    lastGenParams.current = params;
 
     var lang = LANGS[params.marketplace] || 'German';
     var domain = DOMAINS[params.marketplace] || DOMAINS.de;
@@ -224,47 +225,62 @@ export default function App() {
         log('Reference analysis complete');
       }
 
+      // ─── Track critical failures for retry prompt ───
+      var criticalFailures = [];
+
       // Step 1.5b: Analyze existing store with Gemini Vision (if provided)
       if (params.existingStoreUrl) {
-        try {
-          var refService = await import('./referenceStoreService');
-          var modeLabel = (params.existingStoreMode === 'reconceptualize') ? 'NEU KONZIPIEREN' : 'OPTIMIEREN';
-          log('Analyzing existing brand store (' + modeLabel + '): ' + params.existingStoreUrl);
-          var existingStore = await refService.crawlAndParseStore(params.existingStoreUrl, log);
-
-          // Analyze existing store images with Gemini for CI extraction
-          var existingImageAnalyses = [];
+        var existingStoreRetries = 0;
+        var existingStoreSuccess = false;
+        while (!existingStoreSuccess && existingStoreRetries < 3) {
           try {
-            existingImageAnalyses = await refService.analyzeStoreImagesWithGemini(existingStore, log);
-          } catch (e) { log('Existing store image analysis skipped: ' + e.message); }
+            var refService = await import('./referenceStoreService');
+            var modeLabel = (params.existingStoreMode === 'reconceptualize') ? 'NEU KONZIPIEREN' : 'OPTIMIEREN';
+            log(existingStoreRetries > 0 ? ('Retrying existing store analysis (attempt ' + (existingStoreRetries + 1) + ')...') : ('Analyzing existing brand store (' + modeLabel + '): ' + params.existingStoreUrl));
+            var existingStore = await refService.crawlAndParseStore(params.existingStoreUrl, log);
 
-          var existingContext = refService.formatReferenceStoreContext([existingStore], existingImageAnalyses);
-          var storeMode = params.existingStoreMode || 'optimize';
-          var existingPrefix;
-          if (storeMode === 'reconceptualize') {
-            existingPrefix = '\n=== EXISTING BRAND STORE (current store — NEEDS COMPLETE RECONCEPTUALIZATION) ===\n'
-              + 'This store is fundamentally underoptimized. DO NOT preserve its structure or layout.\n'
-              + 'CREATE a completely new concept from scratch:\n'
-              + '- ONLY extract and keep: brand colors, logo, typography, and brand voice/tonality\n'
-              + '- IGNORE the existing page structure, navigation hierarchy, and module arrangement\n'
-              + '- Design an entirely new storytelling arc, new page structure, new module flow\n'
-              + '- Use the reference store best practices to build something significantly better\n'
-              + '- The existing store serves ONLY as CI reference, NOT as structural template\n\n';
-          } else {
-            existingPrefix = '\n=== EXISTING BRAND STORE (current store — OPTIMIZE & EXPAND) ===\n'
-              + 'This store has a good foundation. PRESERVE its core structure:\n'
-              + '- KEEP the existing page hierarchy, navigation, and category structure\n'
-              + '- KEEP module arrangements that work well (good flow, clear storytelling)\n'
-              + '- IMPROVE content quality: better headlines, stronger CTAs, richer descriptions\n'
-              + '- EXPAND with new products (from scraped ASINs) into existing categories\n'
-              + '- ADD missing elements: social proof, lifestyle images, benefit sections\n'
-              + '- FIX specific weaknesses while maintaining the overall concept\n'
-              + '- Match CI exactly: same colors, same image style, same tonality\n\n';
+            // Analyze existing store images with Gemini for CI extraction
+            var existingImageAnalyses = [];
+            try {
+              existingImageAnalyses = await refService.analyzeStoreImagesWithGemini(existingStore, log);
+            } catch (e) { log('Existing store image analysis skipped: ' + e.message); }
+
+            var existingContext = refService.formatReferenceStoreContext([existingStore], existingImageAnalyses);
+            var storeMode = params.existingStoreMode || 'optimize';
+            var existingPrefix;
+            if (storeMode === 'reconceptualize') {
+              existingPrefix = '\n=== EXISTING BRAND STORE (current store — NEEDS COMPLETE RECONCEPTUALIZATION) ===\n'
+                + 'This store is fundamentally underoptimized. DO NOT preserve its structure or layout.\n'
+                + 'CREATE a completely new concept from scratch:\n'
+                + '- ONLY extract and keep: brand colors, logo, typography, and brand voice/tonality\n'
+                + '- IGNORE the existing page structure, navigation hierarchy, and module arrangement\n'
+                + '- Design an entirely new storytelling arc, new page structure, new module flow\n'
+                + '- Use the reference store best practices to build something significantly better\n'
+                + '- The existing store serves ONLY as CI reference, NOT as structural template\n\n';
+            } else {
+              existingPrefix = '\n=== EXISTING BRAND STORE (current store — OPTIMIZE & EXPAND) ===\n'
+                + 'This store has a good foundation. PRESERVE its core structure:\n'
+                + '- KEEP the existing page hierarchy, navigation, and category structure\n'
+                + '- KEEP module arrangements that work well (good flow, clear storytelling)\n'
+                + '- IMPROVE content quality: better headlines, stronger CTAs, richer descriptions\n'
+                + '- EXPAND with new products (from scraped ASINs) into existing categories\n'
+                + '- ADD missing elements: social proof, lifestyle images, benefit sections\n'
+                + '- FIX specific weaknesses while maintaining the overall concept\n'
+                + '- Match CI exactly: same colors, same image style, same tonality\n\n';
+            }
+            referenceAnalysis = (referenceAnalysis || '') + existingPrefix + existingContext;
+            log('Existing store analyzed: ' + existingStore.pageCount + ' pages, ' + existingStore.summary.totalImages + ' images');
+            existingStoreSuccess = true;
+          } catch (existErr) {
+            existingStoreRetries++;
+            if (existingStoreRetries < 3) {
+              log('Existing store analysis failed (' + existErr.message + '), retrying in 3s...');
+              await new Promise(function(r) { setTimeout(r, 3000); });
+            } else {
+              log('CRITICAL: Existing store analysis FAILED after 3 attempts: ' + existErr.message);
+              criticalFailures.push('Existing store analysis');
+            }
           }
-          referenceAnalysis = (referenceAnalysis || '') + existingPrefix + existingContext;
-          log('Existing store analyzed: ' + existingStore.pageCount + ' pages, ' + existingStore.summary.totalImages + ' images');
-        } catch (existErr) {
-          log('Existing store analysis skipped: ' + existErr.message);
         }
       }
 
@@ -283,6 +299,7 @@ export default function App() {
         }
       } catch (kbErr) {
         log('Knowledge base skipped: ' + kbErr.message);
+        criticalFailures.push('Knowledge base');
       }
 
       // Step 1.7: Load static reference data from _summary.json (always available)
@@ -297,6 +314,7 @@ export default function App() {
         }
       } catch (staticErr) {
         log('Static reference data skipped: ' + staticErr.message);
+        criticalFailures.push('Static reference data');
       }
 
       // Step 1.7b: Load Gemini Vision analyses from reference store JSONs
@@ -314,6 +332,16 @@ export default function App() {
         }
       } catch (geminiErr) {
         log('Gemini visual intelligence skipped: ' + geminiErr.message);
+        criticalFailures.push('Gemini visual intelligence');
+      }
+
+      // ─── CRITICAL FAILURE CHECK: Warn user and offer to abort ───
+      if (criticalFailures.length > 0) {
+        log('');
+        log('WARNING: ' + criticalFailures.length + ' data sources failed: ' + criticalFailures.join(', '));
+        log('The store will be generated with INCOMPLETE data. Quality may be reduced.');
+        log('To retry: close this dialog, fix the issue, and re-generate.');
+        log('');
       }
 
       // Step 1.8: Log selected extra pages
@@ -359,10 +387,16 @@ export default function App() {
       }
     } finally {
       setGenDone(true);
-      // Keep the modal visible longer so the user can read the error
-      setTimeout(function() { setGenerating(false); }, 8000);
+      // Don't auto-close — let user close via button (or auto-close after 12s if successful)
+      var hasErr = genLog.some(function(m) { return m.indexOf('ERROR:') >= 0 || m.indexOf('CRITICAL:') >= 0; });
+      if (!hasErr) {
+        setTimeout(function() { setGenerating(false); }, 12000);
+      }
+      // If errors/warnings: modal stays until user clicks Close
     }
   };
+
+  var lastGenParams = useRef(null);
 
   // ─── TILE UPDATE ───
   var updateTile = function(updated) {
@@ -877,7 +911,13 @@ export default function App() {
       )}
 
       {generating && (
-        <ProgressModal logs={genLog} done={genDone} uiLang={uiLang} />
+        <ProgressModal
+          logs={genLog}
+          done={genDone}
+          uiLang={uiLang}
+          onClose={function() { setGenerating(false); }}
+          onRetry={lastGenParams.current ? function() { handleGenerate(lastGenParams.current); } : null}
+        />
       )}
 
       {showAsins && (
