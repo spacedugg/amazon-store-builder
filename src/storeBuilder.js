@@ -1156,7 +1156,29 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
           analysis.productComplexity === 'complex' || analysis.productComplexity === 'variantRich'
             ? '7. VARIANT SHOWCASE (layout "lg-4grid"): imageCategory="product" — large hero + 4 variant tiles.'
             : allCategories.length > 1
-            ? '7. CROSS-SELL (layout "std-2equal" or "vh-2equal"): Link to 1-2 related categories. imageCategory="creative" or "lifestyle" — visual preview with representative product. textOverlay = JUST the category name, NOT a sentence. Add a fitting CTA. Brief = SHORT, max 10 words.'
+            ? (function() {
+              // Build cross-sell section that includes ALL other categories (excluding current page)
+              var otherCategories = allCategories.filter(function(c) { return c.name !== pageName && pageName.indexOf(c.name) < 0; });
+              var otherCount = otherCategories.length;
+              if (otherCount === 0) return '7. NAVIGATION BANNER (layout "1"): imageCategory="text_image". Simple text banner with a short headline and CTA linking back to homepage.';
+              var crossSellLayout;
+              if (otherCount <= 2) crossSellLayout = 'Layout "std-2equal" or "vh-2equal"';
+              else if (otherCount <= 3) crossSellLayout = 'Layout "1-1-1"';
+              else if (otherCount <= 4) crossSellLayout = 'Layout "2x2wide"';
+              else if (otherCount <= 5) crossSellLayout = 'Layout "lg-4grid"';
+              else if (otherCount <= 6) crossSellLayout = 'TWO ROWS: "1-1-1" + "1-1-1" placed DIRECTLY adjacent';
+              else if (otherCount <= 8) crossSellLayout = 'TWO ROWS: "2x2wide" + "2x2wide" placed DIRECTLY adjacent';
+              else crossSellLayout = 'MULTIPLE ROWS to fit all ' + otherCount + ' categories — placed DIRECTLY adjacent';
+              return [
+                '7. CROSS-SELL — ALL ' + otherCount + ' OTHER CATEGORIES (COMPLETE, not a random subset):',
+                '   ' + crossSellLayout + '.',
+                '   imageCategory="creative" or "lifestyle" — visual preview with representative product.',
+                '   textOverlay = JUST the category name, NOT a sentence. Add a fitting CTA.',
+                '   MANDATORY: Include ALL of these categories: ' + otherCategories.map(function(c) { return c.name; }).join(', '),
+                '   NEVER pick only 1-2 random categories. EVERY other category must be represented.',
+                '   If multiple rows are needed, place them DIRECTLY adjacent — no other content between cross-sell rows.',
+              ].join('\n');
+            })()
             : '7. NAVIGATION BANNER (layout "1"): imageCategory="text_image". Simple text banner with a short headline and CTA. No elaborate design description.',
           '',
           '',
