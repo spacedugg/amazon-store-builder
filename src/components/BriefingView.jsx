@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, findLayout } from '../constants';
 import { loadStoreByShareToken } from '../storage';
-import { generateWireframesForPage } from '../storeBuilder';
+import { generateWireframesForPage, deleteWireframesForPage } from '../storeBuilder';
 import SectionView, { getGridConfig } from './SectionView';
 
 var noop = function() {};
@@ -1692,6 +1692,18 @@ export default function BriefingView() {
       setWfProgress('Fehler: ' + err.message);
       setTimeout(function() { setWfProgress(''); }, 4000);
     });
+  };
+
+  // Delete wireframes for a specific page
+  var handleDeleteWireframes = function(pageId) {
+    var page = (store.pages || []).find(function(p) { return p.id === pageId; });
+    if (!page) return;
+    var deleted = deleteWireframesForPage(page);
+    if (deleted > 0) {
+      setStore(function(prev) { return Object.assign({}, prev); });
+      setWfProgress(deleted + ' Wireframes gelöscht');
+      setTimeout(function() { setWfProgress(''); }, 3000);
+    }
   };
 
   var token = window.location.pathname.split('/share/')[1];
