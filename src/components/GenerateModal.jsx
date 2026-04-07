@@ -42,6 +42,7 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
   var [existingStoreUrl, setExistingStoreUrl] = useState('');
   var [existingStoreUrlError, setExistingStoreUrlError] = useState('');
   var [existingStoreMode, setExistingStoreMode] = useState('optimize');
+  var [ciSource, setCiSource] = useState('auto'); // 'auto', 'amazon', 'website', 'manual'
   var [driveUrl, setDriveUrl] = useState(googleDriveUrl || '');
   var [referenceCategory, setReferenceCategory] = useState('generic');
   // Extra subpages — each is independently selectable
@@ -364,6 +365,28 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
           </div>
         )}
 
+        {/* 3c. CI Source Selection — shown when both website AND Amazon data will be available */}
+        {(websiteData || websiteUrl.trim()) && (
+          <div style={{ marginTop: 10 }}>
+            <label className="label">Corporate Identity (CI) Quelle</label>
+            <select value={ciSource} onChange={function(e) { setCiSource(e.target.value); }} className="input">
+              <option value="auto">Automatisch — beide Quellen zusammenführen</option>
+              <option value="amazon">Amazon-Präsenz — CI aus Listing-Bildern & A+ Content</option>
+              <option value="website">Website — CI aus dem Online-Shop / der Marken-Website</option>
+              <option value="manual">Manuell — CI wird später im CI-Tab selbst eingetragen</option>
+            </select>
+            <div className="hint" style={{ marginTop: 2 }}>
+              {ciSource === 'auto'
+                ? 'Farben, Schriften und Stil werden aus Amazon-Listings UND Website kombiniert. Amazon-Daten haben Priorität für produktbezogene CI.'
+                : ciSource === 'amazon'
+                ? 'Nur die CI aus Amazon-Listing-Bildern (Infografiken, A+ Content, Produktbilder) wird verwendet. Website-CI wird ignoriert.'
+                : ciSource === 'website'
+                ? 'Nur die CI der Marken-Website wird verwendet. Amazon-Listing-Bilder werden nicht für CI-Erkennung analysiert.'
+                : 'Keine automatische CI-Erkennung. Du gibst Farben, Schriften und Stil manuell im CI-Tab nach der Generierung ein.'}
+            </div>
+          </div>
+        )}
+
         {/* 4. Marketplace */}
         <label className="label" style={{ marginTop: 10 }}>4. Marketplace</label>
         <select value={marketplace} onChange={function(e) { setMarketplace(e.target.value); }} className="input">
@@ -651,6 +674,7 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
                 referenceStoreUrls: [],
                 existingStoreUrl: existingStoreUrl.trim() && !validateStoreUrl(existingStoreUrl) ? existingStoreUrl.trim() : null,
                 existingStoreMode: existingStoreMode,
+                ciSource: ciSource,
                 referenceCategory: referenceCategory,
                 extraPages: extraPages,
                 includeProductVideos: includeProductVideos,

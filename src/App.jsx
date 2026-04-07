@@ -219,30 +219,35 @@ export default function App() {
 
       // Step 1.2: Analyze brand CI from product listing images via Gemini Vision
       var productCI = null;
-      try {
-        // Collect top listing images from scraped products (first image per product, max 8)
-        var ciImages = [];
-        products.forEach(function(p) {
-          if (ciImages.length >= 8) return;
-          // Prefer secondary images (often infographics/A+ with CI) over main product shot
-          var imgs = (p.images || []);
-          if (imgs.length > 1) {
-            // Take image index 1-3 (infographic/lifestyle images, skip main packshot at index 0)
-            for (var ii = 1; ii < Math.min(imgs.length, 4) && ciImages.length < 8; ii++) {
-              if (imgs[ii].url) ciImages.push({ url: imgs[ii].url, context: p.name });
+      var userCiSource = params.ciSource || 'auto';
+      if (userCiSource !== 'manual' && userCiSource !== 'website') {
+        // Analyze Amazon listing images for CI (unless user chose "website only" or "manual")
+        try {
+          var ciImages = [];
+          products.forEach(function(p) {
+            if (ciImages.length >= 8) return;
+            var imgs = (p.images || []);
+            if (imgs.length > 1) {
+              for (var ii = 1; ii < Math.min(imgs.length, 4) && ciImages.length < 8; ii++) {
+                if (imgs[ii].url) ciImages.push({ url: imgs[ii].url, context: p.name });
+              }
+            } else if (imgs.length === 1 && imgs[0].url) {
+              ciImages.push({ url: imgs[0].url, context: p.name });
             }
-          } else if (imgs.length === 1 && imgs[0].url) {
-            ciImages.push({ url: imgs[0].url, context: p.name });
+          });
+          if (ciImages.length > 0) {
+            log('Analyzing brand CI from ' + ciImages.length + ' Amazon listing images...');
+            productCI = await analyzeBrandCI(ciImages, params.brand);
+            log('   Amazon CI: ' + (productCI.primaryColors || []).join(', ') + ' | ' + (productCI.visualMood || 'N/A'));
+            if (productCI.designerNotes) log('   Designer notes: ' + productCI.designerNotes);
           }
-        });
-        if (ciImages.length > 0) {
-          log('Analyzing brand CI from ' + ciImages.length + ' product listing images...');
-          productCI = await analyzeBrandCI(ciImages, params.brand);
-          log('   CI extracted: ' + (productCI.primaryColors || []).join(', ') + ' | ' + (productCI.visualMood || 'N/A') + ' | ' + (productCI.typographyStyle || 'N/A'));
-          if (productCI.designerNotes) log('   Designer notes: ' + productCI.designerNotes);
+        } catch (ciErr) {
+          log('Amazon CI analysis skipped: ' + ciErr.message);
         }
-      } catch (ciErr) {
-        log('CI analysis skipped: ' + ciErr.message);
+      } else if (userCiSource === 'website') {
+        log('CI source: Website only (Amazon listing images skipped per user choice)');
+      } else {
+        log('CI source: Manual (no automatic CI extraction)');
       }
 
       // Step 1.5: Crawl & analyze reference stores (if provided)
@@ -395,14 +400,28 @@ export default function App() {
       // Website data is always used for CI extraction when available
       var enhancedWebsiteData = params.websiteData || null;
 
-      // Merge product CI into website data (or create new websiteData if none exists)
+      // Merge CI data based on user's ciSource selection
       if (productCI) {
         if (!enhancedWebsiteData) enhancedWebsiteData = {};
         enhancedWebsiteData.productCI = productCI;
-        // Use product CI colors as primary if no website colors exist
+      }
+      if (userCiSource === 'amazon' && productCI) {
+        // Amazon-only: use Amazon CI colors, ignore website colors
+        if (!enhancedWebsiteData) enhancedWebsiteData = {};
+        enhancedWebsiteData.colors = (productCI.primaryColors || []).concat(productCI.secondaryColors || []);
+        log('CI priority: Amazon listing images (website colors ignored)');
+      } else if (userCiSource === 'website') {
+        // Website-only: keep website colors, don't override with Amazon
+        log('CI priority: Website (Amazon CI available for reference only)');
+      } else if (userCiSource === 'auto' && productCI) {
+        // Auto: Amazon CI takes priority for colors if website has none
+        if (!enhancedWebsiteData) enhancedWebsiteData = {};
         if ((!enhancedWebsiteData.colors || enhancedWebsiteData.colors.length === 0) && productCI.primaryColors) {
           enhancedWebsiteData.colors = productCI.primaryColors.concat(productCI.secondaryColors || []);
         }
+        log('CI priority: Auto (Amazon + Website combined)');
+      } else if (userCiSource === 'manual') {
+        log('CI priority: Manual (user will set CI in CI tab)');
       }
 
       // Step 2-4: AI generation (with complexity, category, template, websiteData, referenceAnalysis)
@@ -416,6 +435,7 @@ export default function App() {
       // Store meta
       storeData.complexity = params.complexity;
       if (productCI) storeData.productCI = productCI;
+      storeData.ciSource = userCiSource;
       if (templateData) storeData.templateId = templateData.id;
       if (enhancedWebsiteData) storeData.websiteData = enhancedWebsiteData;
 
