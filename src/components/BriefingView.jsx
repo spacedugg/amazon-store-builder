@@ -1661,6 +1661,7 @@ export default function BriefingView() {
   var [showPreview, setShowPreview] = useState(false);
   var [wfGenerating, setWfGenerating] = useState(null); // pageId currently generating wireframes
   var [wfProgress, setWfProgress] = useState(''); // progress text
+  var wfCancelRef = useRef(false);
   var prevStoreRef = useRef(null);
   var pollRef = useRef(null);
   var bannerTimeoutRef = useRef(null);
@@ -1671,6 +1672,7 @@ export default function BriefingView() {
     if (wfGenerating) return; // already generating
     var page = (store.pages || []).find(function(p) { return p.id === pageId; });
     if (!page) return;
+    wfCancelRef.current = false;
     setWfGenerating(pageId);
     setWfProgress('Starte...');
     generateWireframesForPage(
@@ -1679,13 +1681,15 @@ export default function BriefingView() {
       function(current, total, category) {
         setWfProgress(current + '/' + total + ' (' + category + ')');
       },
-      store.manualCI || null
+      store.manualCI || null,
+      wfCancelRef
     ).then(function(result) {
       setWfGenerating(null);
-      var msg = result.success + ' generiert, ' + result.failed + ' fehlgeschlagen';
-      if (result.error) msg += ' (' + result.error + ')';
+      var msg = result.cancelled
+        ? result.success + ' generiert, abgebrochen'
+        : result.success + ' generiert, ' + result.failed + ' fehlgeschlagen';
+      if (result.error && !result.cancelled) msg += ' (' + result.error + ')';
       setWfProgress(msg);
-      // Force re-render by updating store reference
       setStore(function(prev) { return Object.assign({}, prev); });
       setTimeout(function() { setWfProgress(''); }, result.error ? 8000 : 4000);
     }).catch(function(err) {
@@ -1693,6 +1697,11 @@ export default function BriefingView() {
       setWfProgress('Fehler: ' + err.message);
       setTimeout(function() { setWfProgress(''); }, 4000);
     });
+  };
+
+  var handleStopWireframes = function() {
+    wfCancelRef.current = true;
+    setWfProgress('Wird angehalten...');
   };
 
   // Delete wireframes for a specific page

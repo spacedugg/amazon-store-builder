@@ -50,6 +50,7 @@ export default function App() {
   var [shareToken, setShareToken] = useState(null);
   var [wfGenerating, setWfGenerating] = useState(null);
   var [wfProgress, setWfProgress] = useState('');
+  var wfCancelRef = useRef(false);
   var headerBannerInputRef = useRef(null);
 
   // ─── UNDO HISTORY ───
@@ -148,6 +149,7 @@ export default function App() {
     if (wfGenerating) return;
     var wfPage = (store.pages || []).find(function(p) { return p.id === pageId; });
     if (!wfPage) return;
+    wfCancelRef.current = false;
     setWfGenerating(pageId);
     setWfProgress('Starte...');
     generateWireframesForPage(
@@ -156,11 +158,14 @@ export default function App() {
       function(current, total, category) {
         setWfProgress(current + '/' + total + ' (' + category + ')');
       },
-      store.manualCI || null
+      store.manualCI || null,
+      wfCancelRef
     ).then(function(result) {
       setWfGenerating(null);
-      var msg = result.success + ' generiert, ' + result.failed + ' fehlgeschlagen';
-      if (result.error) msg += ' (' + result.error + ')';
+      var msg = result.cancelled
+        ? result.success + ' generiert, abgebrochen'
+        : result.success + ' generiert, ' + result.failed + ' fehlgeschlagen';
+      if (result.error && !result.cancelled) msg += ' (' + result.error + ')';
       setWfProgress(msg);
       setStore(function(prev) { return Object.assign({}, prev); });
       setTimeout(function() { setWfProgress(''); }, result.error ? 8000 : 4000);
@@ -169,6 +174,11 @@ export default function App() {
       setWfProgress('Fehler: ' + err.message);
       setTimeout(function() { setWfProgress(''); }, 4000);
     });
+  };
+
+  var handleStopWireframes = function() {
+    wfCancelRef.current = true;
+    setWfProgress('Wird angehalten...');
   };
 
   // ─── WIREFRAME DELETION ───
@@ -863,6 +873,7 @@ export default function App() {
           onGenerate={function() { setShowGen(true); }}
           onGenerateWireframes={handleGenerateWireframes}
           onDeleteWireframes={handleDeleteWireframes}
+          onStopWireframes={handleStopWireframes}
           wfGenerating={wfGenerating}
           wfProgress={wfProgress}
         />

@@ -2767,7 +2767,7 @@ async function generateWireframeAPI(prompt, aspectRatio) {
 }
 
 // ─── EXPORTED: Generate wireframes for a single page (called from BriefingView) ───
-export async function generateWireframesForPage(page, brand, websiteData, analysis, onProgress, manualCI) {
+export async function generateWireframesForPage(page, brand, websiteData, analysis, onProgress, manualCI, cancelRef) {
   var log = onProgress || function() {};
   var tiles = [];
   // Collect all image tiles from this page
@@ -2808,8 +2808,15 @@ export async function generateWireframesForPage(page, brand, websiteData, analys
 
   var success = 0;
   var failed = 0;
+  var cancelled = false;
   var lastError = '';
   for (var i = 0; i < tiles.length; i++) {
+    // Check for cancellation
+    if (cancelRef && cancelRef.current) {
+      cancelled = true;
+      log(i + 1, tiles.length, 'ABGEBROCHEN');
+      break;
+    }
     var entry = tiles[i];
     var tile = entry.tile;
     try {
@@ -2838,7 +2845,7 @@ export async function generateWireframesForPage(page, brand, websiteData, analys
       }
     }
   }
-  return { success: success, failed: failed, total: tiles.length, error: failed > 0 ? lastError : '' };
+  return { success: success, failed: failed, total: tiles.length, cancelled: cancelled, error: cancelled ? 'Abgebrochen' : (failed > 0 ? lastError : '') };
 }
 
 // ─── EXPORTED: Delete all wireframes for a single page ───
