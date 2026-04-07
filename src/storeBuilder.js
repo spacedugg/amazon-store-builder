@@ -2294,7 +2294,9 @@ function buildWireframePrompt(tile, brand, ciColors, ciBrandStyle, analysis) {
 
   // Base style instruction: sketch/wireframe aesthetic
   var styleBase = [
-    'Create a minimalistic wireframe sketch for an Amazon Brand Store tile.',
+    'Create a minimalistic wireframe sketch for a single image tile.',
+    'IMPORTANT: Generate ONLY the image content itself — do NOT include any website UI, browser chrome, navigation bars, logos, headers, page layouts, or mockup frames around the image.',
+    'The output must look like a standalone image, not a screenshot of a webpage.',
     'Style: pencil sketch with light color accents, NOT photorealistic.',
     'Use simple geometric shapes, placeholder areas, and minimal line art.',
     'Elements should be suggested/indicated, not fully rendered.',
@@ -2311,9 +2313,9 @@ function buildWireframePrompt(tile, brand, ciColors, ciBrandStyle, analysis) {
   switch (cat) {
     case 'store_hero':
       categoryPrompt = [
-        'HERO BANNER wireframe: Wide format.',
+        'HERO BANNER wireframe: Wide panoramic format.',
         'Show a large placeholder area for the main visual/background.',
-        'Indicate logo placement with a simple rectangle labeled "LOGO".',
+        'Indicate a small brand logo area with a simple rectangle.',
         textOverlay ? 'Show text area with wavy lines indicating headline: "' + textOverlay.substring(0, 60) + '".' : 'Show headline text area with placeholder wavy lines.',
         'If there is a CTA button, draw a rounded rectangle labeled "CTA".',
         'Keep the composition bold and impactful, with clear visual hierarchy.',
@@ -2467,6 +2469,20 @@ export async function generateWireframesForPage(page, brand, websiteData, analys
     }
   }
   return { success: success, failed: failed, total: tiles.length, error: failed > 0 ? lastError : '' };
+}
+
+// ─── EXPORTED: Delete all wireframes for a single page ───
+export function deleteWireframesForPage(page) {
+  var deleted = 0;
+  (page.sections || []).forEach(function(sec) {
+    (sec.tiles || []).forEach(function(tile) {
+      if (tile.wireframeImage) {
+        delete tile.wireframeImage;
+        deleted++;
+      }
+    });
+  });
+  return deleted;
 }
 
 // ─── HELPER: Derive a meaningful category name from products ───

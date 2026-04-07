@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { uid, emptyTile, emptyTileForLayout, LAYOUTS, LANGS, DOMAINS, validateStore, PRICING, countStoreAssets, STORE_TEMPLATES, findLayout, LAYOUT_TILE_DIMS } from './constants';
 import { scrapeAsins } from './api';
-import { generateStore, aiRefineStore, applyOperations, generateWireframesForPage } from './storeBuilder';
+import { generateStore, aiRefineStore, applyOperations, generateWireframesForPage, deleteWireframesForPage } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, loadStoreByShareToken, importStoreByShareLink } from './storage';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
 import Topbar from './components/Topbar';
@@ -167,6 +167,18 @@ export default function App() {
       setWfProgress('Fehler: ' + err.message);
       setTimeout(function() { setWfProgress(''); }, 4000);
     });
+  };
+
+  // ─── WIREFRAME DELETION ───
+  var handleDeleteWireframes = function(pageId) {
+    var wfPage = (store.pages || []).find(function(p) { return p.id === pageId; });
+    if (!wfPage) return;
+    var deleted = deleteWireframesForPage(wfPage);
+    if (deleted > 0) {
+      setStore(function(prev) { return Object.assign({}, prev); });
+      setWfProgress(deleted + ' Wireframes gelöscht');
+      setTimeout(function() { setWfProgress(''); }, 3000);
+    }
   };
 
   // ─── GENERATION ───
@@ -820,6 +832,7 @@ export default function App() {
           onLoadAutoSave={handleLoadAutoSave}
           onGenerate={function() { setShowGen(true); }}
           onGenerateWireframes={handleGenerateWireframes}
+          onDeleteWireframes={handleDeleteWireframes}
           wfGenerating={wfGenerating}
           wfProgress={wfProgress}
         />
