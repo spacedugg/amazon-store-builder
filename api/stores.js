@@ -74,19 +74,30 @@ module.exports = async function handler(req, res) {
   // GET /api/stores?shareToken=xxx — get store by share token (read-only, for designers)
   if (req.method === 'GET' && req.query.shareToken) {
     try {
-      var result = await db.execute({ sql: 'SELECT * FROM stores WHERE share_token = ?', args: [req.query.shareToken] });
-      if (result.rows.length === 0) return res.status(404).json({ error: 'Store not found' });
+      var token = req.query.shareToken.trim();
+      if (!token) return res.status(400).json({ error: 'Empty share token' });
+      var result = await db.execute({ sql: 'SELECT * FROM stores WHERE share_token = ?', args: [token] });
+      if (result.rows.length === 0) return res.status(404).json({ error: 'Store not found for token: ' + token.slice(0, 4) + '...' });
       var row = result.rows[0];
+      var parsedData;
+      try {
+        parsedData = JSON.parse(row.data);
+      } catch (parseErr) {
+        return res.status(500).json({ error: 'Store data is corrupted and could not be parsed.' });
+      }
+      if (!parsedData || !parsedData.pages) {
+        return res.status(500).json({ error: 'Store data is empty or incomplete.' });
+      }
       return res.status(200).json({
         id: row.id,
         brandName: row.brand_name,
         createdAt: row.created_at,
         updatedAt: row.updated_at,
-        data: JSON.parse(row.data),
+        data: parsedData,
         readOnly: true,
       });
     } catch (err) {
-      return res.status(500).json({ error: err.message });
+      return res.status(500).json({ error: 'Database error: ' + err.message });
     }
   }
 

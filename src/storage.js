@@ -108,7 +108,17 @@ export async function deleteSavedStore(id) {
 
 export async function loadStoreByShareToken(shareToken) {
   var resp = await fetch('/api/stores?shareToken=' + encodeURIComponent(shareToken));
-  if (!resp.ok) return null;
+  if (!resp.ok) {
+    var ct = resp.headers.get('content-type') || '';
+    if (ct.indexOf('text/html') >= 0) {
+      throw new Error('API-Endpoint nicht erreichbar (HTML statt JSON). Bitte Deployment prüfen.');
+    }
+    throw new Error('HTTP ' + resp.status);
+  }
+  var ct = resp.headers.get('content-type') || '';
+  if (ct.indexOf('text/html') >= 0) {
+    throw new Error('API liefert HTML statt JSON. Der /api/stores Endpoint ist nicht korrekt deployed.');
+  }
   var json = await resp.json();
   return json;
 }

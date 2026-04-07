@@ -1707,19 +1707,20 @@ export default function BriefingView() {
     }
   };
 
-  var token = window.location.pathname.split('/share/')[1];
+  var rawToken = window.location.pathname.split('/share/')[1] || '';
+  var token = rawToken.split('/')[0].split('?')[0].trim(); // Strip trailing slashes, query params
 
   // ─── INITIAL LOAD ───
   useEffect(function() {
-    if (!token) { setError('No share token provided'); setLoading(false); return; }
+    if (!token) { setError('Kein Share-Token in der URL gefunden. Bitte prüfe den Link.'); setLoading(false); return; }
     loadStoreByShareToken(token).then(function(result) {
-      if (!result || !result.data) { setError('Store not found or link has expired.'); setLoading(false); return; }
+      if (!result || !result.data) { setError('Store nicht gefunden oder Link abgelaufen. Bitte fordere einen neuen Link an.'); setLoading(false); return; }
       setStore(result.data);
       setLastUpdated(result.updatedAt || new Date().toISOString());
       setCurPage(result.data.pages && result.data.pages[0] ? result.data.pages[0].id : '');
       prevStoreRef.current = JSON.stringify(result.data);
       setLoading(false);
-    }).catch(function(e) { setError('Failed to load: ' + e.message); setLoading(false); });
+    }).catch(function(e) { setError('Laden fehlgeschlagen: ' + e.message); setLoading(false); });
   }, [token]);
 
   // ─── LOAD CHECKMARKS (localStorage cache + server) ───
@@ -1872,7 +1873,12 @@ export default function BriefingView() {
       <div className="briefing-error-msg">{error}</div>
     </div>
   );
-  if (!store) return null;
+  if (!store) return (
+    <div className="briefing-error">
+      <div className="briefing-error-icon">!</div>
+      <div className="briefing-error-msg">Keine Store-Daten vorhanden. Der Store wurde möglicherweise nicht korrekt gespeichert.</div>
+    </div>
+  );
 
   var pages = store.pages || [];
   var topPages = pages.filter(function(p) { return !p.parentId; });
