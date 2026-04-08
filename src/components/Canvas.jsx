@@ -1,11 +1,10 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import SectionView from './SectionView';
 import { t } from '../i18n';
 
-export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onChangeLayout, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate, onGenerateWireframes, onDeleteWireframes, onStopWireframes, wfGenerating, wfProgress, onFolderImageUpload, onRemoveAllImages }) {
+export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onChangeLayout, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate, onGenerateWireframes, onDeleteWireframes, onStopWireframes, wfGenerating, wfProgress }) {
   var [hoveredNav, setHoveredNav] = useState(null);
   var [showHeroPicker, setShowHeroPicker] = useState(false);
-  var folderInputRef = useRef(null);
 
   // Hero banner is a separate element above the menu, NOT a section tile
   var isHeroBannerSelected = sel && sel.sid === '__heroBanner__';
@@ -132,29 +131,25 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
           </div>
         </div>
 
-        {/* Wireframe + Image Upload toolbar */}
-        {page && page.sections && page.sections.length > 0 && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 12px', background: '#f8fafc', borderBottom: '1px solid #e2e8f0', fontSize: 12, flexWrap: 'wrap' }}>
-            {onGenerateWireframes && (
-              <>
-                {wfGenerating === page.id ? (
-                  <button className="btn" onClick={onStopWireframes}
-                    style={{ padding: '5px 14px', fontSize: 11, fontWeight: 600, background: '#ef4444', color: '#fff', border: 'none', borderRadius: 4, cursor: 'pointer' }}>
-                    Anhalten
-                  </button>
-                ) : (
-                  <button className="btn" disabled={!!wfGenerating} onClick={function() { onGenerateWireframes(page.id); }}
-                    style={{ padding: '5px 14px', fontSize: 11, fontWeight: 600, background: '#6366f1', color: '#fff', border: 'none', borderRadius: 4, cursor: wfGenerating ? 'wait' : 'pointer' }}>
-                    Wireframes
-                  </button>
-                )}
-                {onDeleteWireframes && (
-                  <button className="btn" disabled={!!wfGenerating} onClick={function() { onDeleteWireframes(page.id); }}
-                    style={{ padding: '5px 10px', fontSize: 11, fontWeight: 600, background: '#fee2e2', color: '#991b1b', border: '1px solid #fecaca', borderRadius: 4, cursor: wfGenerating ? 'wait' : 'pointer' }}>
-                    WF löschen
-                  </button>
-                )}
-              </>
+        {/* Wireframe toolbar */}
+        {page && page.sections && page.sections.length > 0 && onGenerateWireframes && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 12px', background: '#f8fafc', borderBottom: '1px solid #e2e8f0', fontSize: 12 }}>
+            {wfGenerating === page.id ? (
+              <button className="btn" onClick={onStopWireframes}
+                style={{ padding: '5px 14px', fontSize: 11, fontWeight: 600, background: '#ef4444', color: '#fff', border: 'none', borderRadius: 4, cursor: 'pointer' }}>
+                Anhalten
+              </button>
+            ) : (
+              <button className="btn" disabled={!!wfGenerating} onClick={function() { onGenerateWireframes(page.id); }}
+                style={{ padding: '5px 14px', fontSize: 11, fontWeight: 600, background: '#6366f1', color: '#fff', border: 'none', borderRadius: 4, cursor: wfGenerating ? 'wait' : 'pointer' }}>
+                Wireframes generieren
+              </button>
+            )}
+            {onDeleteWireframes && (
+              <button className="btn" disabled={!!wfGenerating} onClick={function() { onDeleteWireframes(page.id); }}
+                style={{ padding: '5px 14px', fontSize: 11, fontWeight: 600, background: '#fee2e2', color: '#991b1b', border: '1px solid #fecaca', borderRadius: 4, cursor: wfGenerating ? 'wait' : 'pointer' }}>
+                Wireframes löschen
+              </button>
             )}
             {wfProgress && (
               <span style={{ fontSize: 11, padding: '3px 10px', borderRadius: 4,
@@ -163,23 +158,7 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
                 {wfProgress}
               </span>
             )}
-            <span style={{ width: 1, height: 20, background: '#e2e8f0' }} />
-            {onFolderImageUpload && (
-              <>
-                <input type="file" ref={folderInputRef} style={{ display: 'none' }} webkitdirectory="" directory="" multiple
-                  onChange={function(e) { onFolderImageUpload(e.target.files); e.target.value = ''; }} />
-                <button className="btn" onClick={function() { folderInputRef.current && folderInputRef.current.click(); }}
-                  style={{ padding: '5px 14px', fontSize: 11, fontWeight: 600, background: '#f59e0b', color: '#fff', border: 'none', borderRadius: 4, cursor: 'pointer' }}>
-                  Ordner laden
-                </button>
-              </>
-            )}
-            {onRemoveAllImages && (
-              <button className="btn" onClick={onRemoveAllImages}
-                style={{ padding: '5px 10px', fontSize: 11, fontWeight: 600, background: '#fee2e2', color: '#991b1b', border: '1px solid #fecaca', borderRadius: 4, cursor: 'pointer' }}>
-                Bilder entfernen
-              </button>
-            )}
+            <span style={{ fontSize: 10, color: '#94a3b8' }}>KI-Wireframes</span>
           </div>
         )}
 

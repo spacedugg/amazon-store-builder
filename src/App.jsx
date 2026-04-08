@@ -53,6 +53,7 @@ export default function App() {
   var wfCancelRef = useRef(false);
   var genCancelRef = useRef(false);
   var headerBannerInputRef = useRef(null);
+  var folderInputRef = useRef(null);
 
   // ─── UNDO HISTORY ───
   var undoStackRef = useRef([]);
@@ -1023,6 +1024,9 @@ export default function App() {
         onRedo={handleRedo}
         canRedo={redoStackRef.current.length > 0}
         onShowPrice={function() { setShowPrice(true); }}
+        onFolderImageUpload={handleFolderImageUpload}
+        onRemoveAllImages={handleRemoveAllImages}
+        folderInputRef={folderInputRef}
       />
 
       <div className="app-body">
@@ -1072,8 +1076,6 @@ export default function App() {
           onStopWireframes={handleStopWireframes}
           wfGenerating={wfGenerating}
           wfProgress={wfProgress}
-          onFolderImageUpload={handleFolderImageUpload}
-          onRemoveAllImages={handleRemoveAllImages}
         />
 
         <PropertiesPanel
