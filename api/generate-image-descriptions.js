@@ -10,10 +10,11 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   var body = req.body || {};
-  var tiles = body.tiles;           // Array of { imageCategory, brief, textOverlay, dimensions }
+  var tiles = body.tiles;           // Array of { imageCategory, brief, textOverlay, dimensions, sectionIndex, tileIndex, totalTilesInSection, layoutId }
   var ciData = body.ciData;         // Product CI from analyze-ci (colors, mood, patterns, etc.)
   var brandName = body.brandName || '';
   var brandTone = body.brandTone || '';
+  var pageContext = body.pageContext || {}; // { pageName, isHomepage, totalSections, brandStory, keyFeatures }
 
   if (!tiles || !Array.isArray(tiles) || tiles.length === 0) {
     return res.status(400).json({ error: 'Missing tiles array' });
@@ -47,12 +48,19 @@ module.exports = async function handler(req, res) {
       ciContext.push('No CI data available — describe images in a clean, professional style matching the brand tone.');
     }
 
+    // Build page context
+    var pageContextLines = [];
+    if (pageContext.pageName) pageContextLines.push('Page: ' + pageContext.pageName + (pageContext.isHomepage ? ' (HOMEPAGE)' : ' (Category page)'));
+    if (pageContext.totalSections) pageContextLines.push('Total sections on page: ' + pageContext.totalSections);
+    if (pageContext.brandStory) pageContextLines.push('Brand story: ' + pageContext.brandStory.substring(0, 200));
+    if (pageContext.keyFeatures && pageContext.keyFeatures.length > 0) pageContextLines.push('Key features: ' + pageContext.keyFeatures.join(', '));
+
     // Build tile list for Gemini
     var tileDescriptions = tiles.map(function(tile, i) {
       var parts = [];
-      parts.push('IMAGE ' + (i + 1) + ':');
+      parts.push('IMAGE ' + (i + 1) + ' (Section ' + ((tile.sectionIndex || 0) + 1) + ', Tile ' + ((tile.tileIndex || 0) + 1) + ' of ' + (tile.totalTilesInSection || 1) + ', layout: ' + (tile.layoutId || '1') + '):');
       parts.push('  Category: ' + (tile.imageCategory || 'creative'));
-      if (tile.brief) parts.push('  Content: ' + tile.brief.replace(/^\[[\w_]+\]\s*/, '').substring(0, 200));
+      if (tile.brief) parts.push('  Content: ' + tile.brief.replace(/^\[[\w_]+\]\s*/, '').substring(0, 300));
       if (tile.textOverlay) parts.push('  Text on image: ' + tile.textOverlay.replace(/\\n/g, ' | '));
       if (tile.dimensions) parts.push('  Format: ' + tile.dimensions.w + 'x' + tile.dimensions.h + 'px');
       return parts.join('\n');
@@ -64,7 +72,11 @@ module.exports = async function handler(req, res) {
       '',
       ciContext.join('\n'),
       '',
+      pageContextLines.length > 0 ? pageContextLines.join('\n') : '',
+      '',
       'YOUR TASK: Write ONE unified visual style, then apply it to all ' + tiles.length + ' images.',
+      'These images form a COHESIVE PAGE — they must flow together as one visual narrative.',
+      'Adjacent tiles in the same section must feel like a pair/group. Tiles in consecutive sections should have visual continuity.',
       '',
       '═══ STEP 1: Define the STORE DESIGN SYSTEM (applies to ALL images) ═══',
       'Before writing individual prompts, define these (based on the CI above):',
