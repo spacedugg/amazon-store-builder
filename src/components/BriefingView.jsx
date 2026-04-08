@@ -808,6 +808,48 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
         );
       })()}
 
+      {/* ─── REFERENCE / EXAMPLE IMAGES ─── */}
+      {tile.referenceImages && tile.referenceImages.length > 0 && (
+        <div style={{ marginTop: 6, padding: '6px 8px', background: '#fefce8', border: '1px solid #fde68a', borderRadius: 4 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, color: '#92400e', marginBottom: 4 }}>
+            Reference Images ({tile.referenceImages.length}):
+          </div>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+            {tile.referenceImages.map(function(img, ri) {
+              return (
+                <div key={ri} style={{ position: 'relative' }}>
+                  <img
+                    src={img.dataUrl} alt={img.name || 'Reference'}
+                    style={{ width: 64, height: 64, objectFit: 'cover', borderRadius: 4, border: '1px solid #fde68a', cursor: 'pointer' }}
+                    title={'Click to enlarge: ' + (img.name || 'Image ' + (ri + 1))}
+                    onClick={function() {
+                      var overlay = document.createElement('div');
+                      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;cursor:pointer;';
+                      var imgEl = document.createElement('img');
+                      imgEl.src = img.dataUrl;
+                      imgEl.style.cssText = 'max-width:90vw;max-height:80vh;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,0.5);';
+                      var dlBtn = document.createElement('a');
+                      dlBtn.href = img.dataUrl;
+                      dlBtn.download = img.name || 'reference-image.png';
+                      dlBtn.textContent = 'Download';
+                      dlBtn.style.cssText = 'padding:8px 20px;background:#fff;color:#1e293b;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;';
+                      dlBtn.onclick = function(e) { e.stopPropagation(); };
+                      overlay.appendChild(imgEl);
+                      overlay.appendChild(dlBtn);
+                      overlay.onclick = function() { document.body.removeChild(overlay); };
+                      document.body.appendChild(overlay);
+                    }}
+                  />
+                  <div style={{ fontSize: 8, color: '#92400e', textAlign: 'center', marginTop: 2, maxWidth: 64, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {img.name || 'Image ' + (ri + 1)}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }

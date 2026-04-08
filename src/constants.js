@@ -145,6 +145,7 @@ export function emptyTile() {
     hotspots: [], // Array of { x: 0-100, y: 0-100, asin: 'B0...' } — max 5, for shoppable_image tiles
     uploadedImage: null, uploadedImageMobile: null, videoThumbnail: null,
     bgColor: '',
+    referenceImages: [], // Array of { dataUrl, name } — example/reference images for the designer
   };
 }
 
@@ -719,7 +720,7 @@ export var STORE_TEMPLATES = [
     style: 'lifestyle/premium',
     visualDNA: {
       colors: {
-        primary: '#2E2E2C',       // Near-black charcoal
+        primary: '#2E2E2C',       // Near-black
         secondary: '#BD6416',     // Rich amber/gold
         accent: '#FDAF3E',        // Warm honey gold
         backgrounds: ['dark', 'very-dark-brown', 'white'],

@@ -70,7 +70,7 @@ module.exports = async function handler(req, res) {
       'Before writing individual prompts, define these (based on the CI above):',
       '- ONE background treatment (same for all images, e.g. "solid #F5F0EB" or "light warm beige")',
       '- ONE illustration style (e.g. "flat vector icons" or "soft watercolor" or "clean line art")',
-      '- ONE text rendering approach (e.g. "bold sans-serif in dark green" or "thin uppercase in charcoal")',
+      '- ONE text rendering approach (e.g. "bold sans-serif in dark green" or "thin uppercase in brand color")',
       '- ONE accent color usage (e.g. "product-specific label color as thin border" or "brand green for icons")',
       '',
       '═══ STEP 2: Write prompts per image ═══',
