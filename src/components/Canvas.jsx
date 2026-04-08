@@ -7,24 +7,11 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
   var [showHeroPicker, setShowHeroPicker] = useState(false);
   var folderInputRef = useRef(null);
 
-  // Find hero tile in the current page's sections so we can select it
-  var heroSel = null;
-  if (page) {
-    page.sections.forEach(function(sec) {
-      if (heroSel) return;
-      sec.tiles.forEach(function(tile, ti) {
-        if (!heroSel && tile.imageCategory === 'store_hero') {
-          heroSel = { sid: sec.id, ti: ti };
-        }
-      });
-    });
-  }
-  var isHeroSelected = heroSel && sel && sel.sid === heroSel.sid && sel.ti === heroSel.ti;
+  // Hero banner is a separate element above the menu, NOT a section tile
+  var isHeroBannerSelected = sel && sel.sid === '__heroBanner__';
 
-  function handleHeroClick() {
-    if (heroSel) {
-      onSelect(heroSel);
-    }
+  function handleHeroBannerClick() {
+    onSelect({ sid: '__heroBanner__' });
   }
   if (!page) {
     return (
@@ -56,10 +43,15 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
   return (
     <div className="canvas">
       <div className={'canvas-inner' + (isMobile ? ' canvas-mobile' : '')}>
-        {/* Header banner (above nav) */}
-        <div className="canvas-header-banner" onClick={handleHeroClick} style={{ cursor: heroSel ? 'pointer' : undefined, outline: isHeroSelected ? '2px solid #6366f1' : undefined, outlineOffset: -2, borderRadius: 2, position: 'relative' }}>
-          {isHeroSelected && (
-            <div style={{ position: 'absolute', top: 4, left: 4, zIndex: 2, background: '#6366f1', color: '#fff', fontSize: 9, padding: '2px 6px', borderRadius: 3, fontWeight: 600 }}>Store Hero Image</div>
+        {/* Header banner (above nav) — independent from sections */}
+        <div className="canvas-header-banner" onClick={handleHeroBannerClick} style={{ cursor: 'pointer', outline: isHeroBannerSelected ? '2px solid #f59e0b' : undefined, outlineOffset: -2, borderRadius: 2, position: 'relative' }}>
+          {isHeroBannerSelected && (
+            <div style={{ position: 'absolute', top: 4, left: 4, zIndex: 2, background: '#f59e0b', color: '#fff', fontSize: 9, padding: '2px 6px', borderRadius: 3, fontWeight: 600 }}>Store Hero Banner</div>
+          )}
+          {page && page.heroBannerBrief && !bannerSrc && (
+            <div style={{ position: 'absolute', bottom: 4, left: 4, right: 4, zIndex: 2, fontSize: 9, color: '#64748b', padding: '2px 6px', background: 'rgba(255,255,255,0.8)', borderRadius: 3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              {page.heroBannerBrief}
+            </div>
           )}
           {bannerSrc ? (
             <div style={{ cursor: 'pointer' }}>

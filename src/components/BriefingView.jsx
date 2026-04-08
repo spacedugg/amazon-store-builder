@@ -915,35 +915,36 @@ function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTil
 }
 
 // ─── STORE HERO BANNER (above nav) ───
-function StoreHeroBanner({ store, viewMode, onHeroClick, isSelected }) {
-  // Find the first store_hero tile across all pages
-  var heroTile = null;
-  (store.pages || []).forEach(function(page) {
-    if (heroTile) return;
-    (page.sections || []).forEach(function(sec) {
-      if (heroTile) return;
-      (sec.tiles || []).forEach(function(tile) {
-        if (!heroTile && tile.imageCategory === 'store_hero') {
-          heroTile = tile;
-        }
-      });
-    });
-  });
-
+function StoreHeroBanner({ store, activePage, viewMode, onHeroClick, isSelected }) {
   var isDesktop = viewMode === 'desktop';
   var width = isDesktop ? 3000 : 1680;
   var height = isDesktop ? 600 : 900;
+  var brief = (activePage && activePage.heroBannerBrief) || '';
+  var textOverlay = (activePage && activePage.heroBannerTextOverlay) || '';
+  var bannerImg = activePage
+    ? (isDesktop ? (activePage.headerBanner || store.headerBanner) : (activePage.headerBannerMobile || store.headerBannerMobile || activePage.headerBanner || store.headerBanner))
+    : (isDesktop ? store.headerBanner : (store.headerBannerMobile || store.headerBanner));
 
   return (
     <div className="briefing-hero-banner" onClick={onHeroClick}
-      style={{ cursor: onHeroClick ? 'pointer' : 'default', outline: isSelected ? '3px solid #3b82f6' : 'none', outlineOffset: -3, borderRadius: 4, transition: 'outline .15s' }}>
-      <div className="briefing-hero-placeholder">
-        <div className="briefing-hero-label">Store Hero Image</div>
-        <div className="briefing-hero-dims">{width} &times; {height}px</div>
-        {heroTile && heroTile.brief && (
-          <div className="briefing-hero-brief"><BriefTextHighlighted text={heroTile.brief} /></div>
-        )}
-      </div>
+      style={{ cursor: onHeroClick ? 'pointer' : 'default', outline: isSelected ? '3px solid #f59e0b' : 'none', outlineOffset: -3, borderRadius: 4, transition: 'outline .15s' }}>
+      {bannerImg ? (
+        <img src={bannerImg} alt="" style={{ width: '100%', display: 'block', borderRadius: 4 }} />
+      ) : (
+        <div className="briefing-hero-placeholder">
+          <div className="briefing-hero-label">Store Hero Banner</div>
+          <div className="briefing-hero-dims">{width} &times; {height}px</div>
+          {brief && (
+            <div className="briefing-hero-brief"><BriefTextHighlighted text={brief} /></div>
+          )}
+          {textOverlay && (
+            <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginTop: 4 }}>{textOverlay}</div>
+          )}
+          {!brief && (
+            <div style={{ fontSize: 11, color: '#94a3b8', fontStyle: 'italic', marginTop: 4 }}>No design brief set for this banner</div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -2400,12 +2401,12 @@ export default function BriefingView() {
         <div className={'briefing-content' + (viewMode === 'mobile' ? ' briefing-mobile' : '')}>
           <div style={viewMode === 'mobile' ? { maxWidth: 420, margin: '0 auto', padding: '0 12px' } : { padding: '0 100px' }}>
           {/* Store Hero Banner above nav */}
-          <StoreHeroBanner store={store} viewMode={viewMode}
-            isSelected={selectedTile && selectedTile.sid === '__hero__'}
+          <StoreHeroBanner store={store} activePage={activePage} viewMode={viewMode}
+            isSelected={selectedTile && selectedTile.sid === '__heroBanner__'}
             onHeroClick={function() {
-              setSelectedTile({ sid: '__hero__', ti: 0 });
+              setSelectedTile({ sid: '__heroBanner__', ti: 0 });
               setTimeout(function() {
-                var el = document.getElementById('tile-detail-hero');
+                var el = document.getElementById('tile-detail-heroBanner');
                 if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
               }, 50);
             }} />
@@ -2434,141 +2435,52 @@ export default function BriefingView() {
             {/* Wireframe generation button removed from designer dashboard — only available in internal dashboard */}
           </div>
           <div className="briefing-right-panel-body">
-            {/* Store Hero / Header Banner instructions */}
+            {/* Store Hero Banner instructions (independent from sections) */}
             {(function() {
-              var heroTile = null;
-              var heroPageId = null;
-              var heroPageName = null;
-              var heroSecId = null;
-              var heroSecIdx = -1;
-              var heroTileIdx = -1;
-              (store.pages || []).forEach(function(pg) {
-                if (heroTile) return;
-                (pg.sections || []).forEach(function(sec, si) {
-                  if (heroTile) return;
-                  (sec.tiles || []).forEach(function(tile, ti) {
-                    if (!heroTile && tile.imageCategory === 'store_hero') {
-                      heroTile = tile;
-                      heroPageId = pg.id;
-                      heroPageName = pg.name;
-                      heroSecId = sec.id;
-                      heroSecIdx = si;
-                      heroTileIdx = ti;
-                    }
-                  });
-                });
-              });
-              if (!heroTile) return null;
-              var heroColor = { bg: '#fef2f2', border: '#ef4444', label: '#b91c1c' };
-              var heroSameRatio = heroTile.syncDimensions || isSameAspectRatio(heroTile.dimensions, heroTile.mobileDimensions);
-              var heroIsSelected = selectedTile && selectedTile.sid === '__hero__';
-              var heroDeskDims = heroTile.dimensions || { w: 3000, h: 600 };
-              var heroMobDims = heroTile.mobileDimensions || { w: 1680, h: 900 };
+              if (!activePage) return null;
+              var bannerColor = { bg: '#fffbeb', border: '#f59e0b', label: '#92400e' };
+              var bannerIsSelected = selectedTile && selectedTile.sid === '__heroBanner__';
+              var brief = activePage.heroBannerBrief || '';
+              var textOverlay = activePage.heroBannerTextOverlay || '';
               return (
-                <div id="tile-detail-hero" className="briefing-right-section-group">
-                  <div className="briefing-right-section-header" style={{ background: heroColor.bg, borderLeft: '3px solid ' + heroColor.border }}>
-                    <span style={{ fontWeight: 700, color: heroColor.label, fontSize: 11 }}>Store Hero Image</span>
-                    <span style={{ fontSize: 10, color: '#64748b' }}> &middot; Header Banner</span>
+                <div id="tile-detail-heroBanner" className="briefing-right-section-group">
+                  <div className="briefing-right-section-header" style={{ background: bannerColor.bg, borderLeft: '3px solid ' + bannerColor.border }}>
+                    <span style={{ fontWeight: 700, color: bannerColor.label, fontSize: 11 }}>Store Hero Banner</span>
+                    <span style={{ fontSize: 10, color: '#64748b' }}> &middot; Above Menu Bar</span>
                   </div>
-                  <div className={'briefing-tile-detail' + (heroIsSelected ? ' briefing-tile-detail-selected' : '')} style={{ borderLeft: '3px solid ' + heroColor.border }}>
+                  <div className={'briefing-tile-detail' + (bannerIsSelected ? ' briefing-tile-detail-selected' : '')} style={{ borderLeft: '3px solid ' + bannerColor.border }}>
                     <div className="briefing-tile-header">
-                      <span className="briefing-tile-type">Image</span>
-                      <span className="briefing-tile-imgcat" style={{ background: '#ef4444', color: '#fff', borderRadius: 3, padding: '1px 8px', fontSize: 10, fontWeight: 700 }}>
-                        Store Hero
+                      <span className="briefing-tile-type">Banner</span>
+                      <span className="briefing-tile-imgcat" style={{ background: '#f59e0b', color: '#fff', borderRadius: 3, padding: '1px 8px', fontSize: 10, fontWeight: 700 }}>
+                        Hero Banner
                       </span>
                     </div>
-                    {heroTile.brief && (
+                    {brief ? (
                       <div className="briefing-field">
                         <span className="briefing-field-label">Design Brief:</span>
-                        <span className="briefing-field-value"><BriefTextHighlighted text={heroTile.brief} /></span>
+                        <span className="briefing-field-value"><BriefTextHighlighted text={brief} /></span>
                       </div>
-                    )}
-                    {heroTile.textOverlay && (
-                      <div className="briefing-field" style={{ flexDirection: 'column', gap: 2 }}>
-                        <span className="briefing-field-label">Text on Image:</span>
-                        <div style={{ padding: '6px 8px', background: '#fefce8', border: '1px solid #fde68a', borderRadius: 4, lineHeight: 1.5 }}>
-                          {(function() {
-                            var allLines = heroTile.textOverlay.split(/\\n|\n/).filter(function(l) { return l.trim(); });
-                            var isMultiText = allLines.length > 1;
-                            return heroTile.textOverlay.split(/\\n|\n/).map(function(line, li) {
-                              var trimmed = line.trim();
-                              if (!trimmed) return <div key={li} style={{ height: 4 }} />;
-                              var isBullet = /^•\s/.test(trimmed);
-                              var bulletTag = isBullet ? <span style={{ background: '#fef3c7', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#92400e', marginRight: 3 }}>BULLET</span> : null;
-                              var isBold = /^\*\*.*\*\*$/.test(trimmed);
-                              var displayText = isBold ? trimmed.replace(/^\*\*|\*\*$/g, '') : trimmed;
-                              if (isBullet) displayText = displayText.replace(/^•\s*/, '');
-
-                              if (!isMultiText) {
-                                return <div key={li} style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>
-                                  <span style={{ background: '#dbeafe', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#1d4ed8', marginRight: 3 }}>text</span>
-                                  {bulletTag}{displayText}
-                                </div>;
-                              }
-
-                              // MULTIPLE TEXTS — hierarchy by POSITION (not text length)
-                              var nonBulletIdx = 0;
-                              if (!isBullet) {
-                                for (var ci = 0; ci < li; ci++) {
-                                  var cl = (heroTile.textOverlay.split(/\\n|\n/)[ci] || '').trim();
-                                  if (cl && !/^•\s/.test(cl)) nonBulletIdx++;
-                                }
-                              }
-                              if (!isBullet && (isBold || nonBulletIdx === 0)) {
-                                return <div key={li} style={{ fontSize: 12, fontWeight: 700, color: '#1e293b' }}>
-                                  <span style={{ background: '#dbeafe', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#1d4ed8', marginRight: 3 }}>HIERARCHY 1</span>
-                                  {bulletTag}{displayText}
-                                </div>;
-                              }
-                              if (!isBullet && nonBulletIdx === 1) {
-                                return <div key={li} style={{ fontSize: 11, fontWeight: 600, color: '#334155', paddingLeft: 0 }}>
-                                  <span style={{ background: '#e0e7ff', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#4338ca', marginRight: 3 }}>HIERARCHY 2</span>
-                                  {bulletTag}{displayText}
-                                </div>;
-                              }
-                              return <div key={li} style={{ fontSize: 11, color: '#475569', paddingLeft: isBullet ? 12 : 0 }}>
-                                <span style={{ background: '#f1f5f9', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#94a3b8', marginRight: 3 }}>HIERARCHY 3</span>
-                                {bulletTag}{displayText}
-                              </div>;
-                            });
-                          })()}
-                        </div>
-                      </div>
-                    )}
-                    {heroTile.ctaText && (
+                    ) : (
                       <div className="briefing-field">
-                        <span className="briefing-field-label">CTA Button:</span>
-                        <span className="briefing-field-value briefing-field-cta">"{heroTile.ctaText}"</span>
+                        <span style={{ fontSize: 11, color: '#94a3b8', fontStyle: 'italic' }}>No design brief set</span>
                       </div>
                     )}
-                    {heroTile.bgColor && (
+                    {textOverlay && (
                       <div className="briefing-field">
-                        <span className="briefing-field-label">Background Color:</span>
-                        <span className="briefing-field-value">
-                          <span className="briefing-color-swatch" style={{ background: heroTile.bgColor }} />
-                          {heroTile.bgColor}
-                        </span>
+                        <span className="briefing-field-label">Text on Banner:</span>
+                        <span className="briefing-field-value" style={{ fontWeight: 600 }}>{textOverlay}</span>
                       </div>
                     )}
-                    {/* Dimensions row */}
                     <div className="briefing-tile-dims-row">
-                      <span className="briefing-dim">Desktop: {heroDeskDims.w}&times;{heroDeskDims.h}</span>
-                      {!heroSameRatio && <span className="briefing-dim">Mobile: {heroMobDims.w}&times;{heroMobDims.h}</span>}
-                      {heroSameRatio && <span className="briefing-dim" style={{ color: '#10B981', fontWeight: 600 }}>{heroTile.syncDimensions ? '= 1 image (sync)' : '= 1 image (same ratio)'}</span>}
+                      <span className="briefing-dim">Desktop: 3000&times;600</span>
+                      <span className="briefing-dim">Mobile: 1680&times;900</span>
                     </div>
-                    {/* Hero file names */}
-                    {heroPageName != null && (
-                      <div style={{ marginTop: 4, padding: '4px 0', fontSize: 10, lineHeight: 1.8 }}>
-                        {heroSameRatio ? (
-                          <CopyableFilename filename={tileFilename(heroPageName, heroSecIdx, heroTileIdx, 'sync')} />
-                        ) : (
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                            <CopyableFilename filename={tileFilename(heroPageName, heroSecIdx, heroTileIdx, 'desktop')} label="D" />
-                            <CopyableFilename filename={tileFilename(heroPageName, heroSecIdx, heroTileIdx, 'mobile')} label="M" />
-                          </div>
-                        )}
+                    <div style={{ marginTop: 4, padding: '4px 0', fontSize: 10, lineHeight: 1.8 }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                        <CopyableFilename filename={sanitizeName(activePage.name) + '_HeroBanner_desktop.jpg'} label="D" />
+                        <CopyableFilename filename={sanitizeName(activePage.name) + '_HeroBanner_mobile.jpg'} label="M" />
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               );

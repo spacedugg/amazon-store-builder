@@ -976,7 +976,10 @@ export default function App() {
   // ─── SELECTED TILE ───
   var selTile = null;
   var selLayoutType = null;
-  if (sel && page) {
+  var selHeroBanner = false;
+  if (sel && sel.sid === '__heroBanner__' && page) {
+    selHeroBanner = true;
+  } else if (sel && page) {
     var sec = page.sections.find(function(s) { return s.id === sel.sid; });
     selTile = sec ? (sec.tiles[sel.ti] || null) : null;
     if (sec) {
@@ -984,6 +987,19 @@ export default function App() {
       selLayoutType = selLayout ? selLayout.type : null;
     }
   }
+
+  // ─── HERO BANNER UPDATE ───
+  var updateHeroBanner = function(key, value) {
+    if (!page) return;
+    setStoreWithUndo(function(s) {
+      return Object.assign({}, s, {
+        pages: s.pages.map(function(pg) {
+          if (pg.id !== page.id) return pg;
+          return Object.assign({}, pg, { [key]: value });
+        }),
+      });
+    });
+  };
 
   // Check if an auto-save exists for the "Continue last session" button
   var hasAutoSave = false;
@@ -1067,6 +1083,8 @@ export default function App() {
           viewMode={viewMode}
           uiLang={uiLang}
           layoutType={selLayoutType}
+          heroBanner={selHeroBanner ? page : null}
+          onHeroBannerChange={selHeroBanner ? updateHeroBanner : null}
         />
       </div>
 

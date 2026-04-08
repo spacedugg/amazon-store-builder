@@ -80,7 +80,47 @@ function fileUpload(label, value, onSet, onRemove, uiLang) {
   );
 }
 
-export default function PropertiesPanel({ tile, onChange, products, viewMode, uiLang, layoutType }) {
+export default function PropertiesPanel({ tile, onChange, products, viewMode, uiLang, layoutType, heroBanner, onHeroBannerChange }) {
+  // ─── HERO BANNER MODE ───
+  if (heroBanner) {
+    var hPage = heroBanner;
+    return (
+      <div className="props-panel">
+        <div className="props-header" style={{ background: '#fffbeb', borderBottom: '2px solid #f59e0b' }}>
+          Store Hero Banner
+        </div>
+        <div className="props-body">
+          <div className="props-section">
+            <div style={{ fontSize: 10, color: '#92400e', background: '#fffbeb', padding: '6px 8px', borderRadius: 4, marginBottom: 8, lineHeight: 1.5 }}>
+              This is the banner image ABOVE the store menu bar. It is independent from the sections below. Dimensions: {viewMode === 'mobile' ? '1680 x 900' : '3000 x 600'}
+            </div>
+          </div>
+          <div className="props-section">
+            <label className="label">Design Brief</label>
+            <textarea value={hPage.heroBannerBrief || ''} onChange={function(e) { onHeroBannerChange('heroBannerBrief', e.target.value); }}
+              rows={3} placeholder="Design instructions for the hero banner above the menu..." className="input" />
+          </div>
+          <div className="props-section">
+            <label className="label">Text Overlay</label>
+            <input value={hPage.heroBannerTextOverlay || ''} onChange={function(e) { onHeroBannerChange('heroBannerTextOverlay', e.target.value); }}
+              placeholder="Slogan or claim for the hero banner" className="input" />
+          </div>
+          <div className="props-section">
+            <label className="label">Banner Image</label>
+            <div style={{ display: 'flex', gap: 6, flexDirection: 'column' }}>
+              {(viewMode === 'mobile' ? hPage.headerBannerMobile : hPage.headerBanner) && (
+                <img src={viewMode === 'mobile' ? (hPage.headerBannerMobile || hPage.headerBanner) : hPage.headerBanner} alt="" style={{ width: '100%', borderRadius: 4, border: '1px solid #e2e8f0' }} />
+              )}
+              <div style={{ fontSize: 10, color: '#64748b' }}>
+                Use the image upload button on the banner area or the folder upload to set the banner image.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (!tile) {
     return (
       <div className="props-panel">

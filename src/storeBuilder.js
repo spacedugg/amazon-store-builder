@@ -1000,6 +1000,17 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '- If there are only ' + pageProducts.length + ' products, each product should appear AT MOST ONCE as a shoppable_image/linkAsin.',
     '- With ' + pageProducts.length + ' products, you need AT MOST ' + pageProducts.length + ' product-featuring sections (including the category nav).',
     pageProducts.length <= 5 ? '- SMALL CATALOG (' + pageProducts.length + ' products): Keep it lean. Hero + category nav + 1 optional highlight = DONE. Do NOT pad with repetitive sections.' : '',
+    '',
+    '=== STORE HERO BANNER (above the menu bar) ===',
+    'Each page has a HERO BANNER displayed ABOVE the store navigation menu. This is NOT a section.',
+    'It is a separate full-width image (Desktop: 3000x600, Mobile: 1680x900).',
+    'Include "heroBannerBrief" in your JSON output: a short design brief for this banner.',
+    'The hero banner should represent the brand and the specific page content:',
+    '- Homepage: brand world, logo, lifestyle mood, brand slogan/claim',
+    '- Category page: category-specific visual, category name, relevant product mood',
+    '- About page: brand story visual, founder/team, brand values',
+    'Keep the brief concise (max 15 words). Optionally include "heroBannerTextOverlay" for text on the banner.',
+    '',
     '- Return ONLY valid JSON.',
   ].filter(Boolean).join('\n');
 
@@ -1015,6 +1026,8 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '',
     'Return JSON:',
     '{',
+    '  "heroBannerBrief": "Brand world banner, lifestyle backdrop with products, slogan: ...",',
+    '  "heroBannerTextOverlay": "Brand Slogan Here",',
     '  "sections": [',
     '    {',
     '      "layoutId": "1",',
@@ -1895,7 +1908,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       analysis.categories || [], analysis, userInstructions, cLevel, category, template, websiteData, referenceAnalysis, false
     );
     var homeSections = ensureMinimumSections(homeResult.sections || [], 'Homepage', brand, lang, analysis, template, true, cLevel);
-    pages.push({ id: 'homepage', name: 'Homepage', sections: homeSections });
+    pages.push({ id: 'homepage', name: 'Homepage', sections: homeSections, heroBannerBrief: homeResult.heroBannerBrief || '', heroBannerTextOverlay: homeResult.heroBannerTextOverlay || '' });
     log('Homepage: ' + homeSections.length + ' sections');
   } catch (err) {
     log('AI homepage failed (' + err.message + '), using fallback...');
@@ -1954,7 +1967,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
         categories, analysis, userInstructions, cLevel, category, template, websiteData, referenceAnalysis, false, categoryBlueprint
       );
       var catSections = ensureMinimumSections(catResult.sections || [], cat.name, brand, lang, analysis, template, false, cLevel);
-      pages.push({ id: parentPageId, name: cat.name, sections: catSections });
+      pages.push({ id: parentPageId, name: cat.name, sections: catSections, heroBannerBrief: catResult.heroBannerBrief || '', heroBannerTextOverlay: catResult.heroBannerTextOverlay || '' });
       log(cat.name + ': ' + catSections.length + ' sections');
 
       // Capture thematic blueprint from first category page
@@ -2001,7 +2014,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
             categories, analysis, userInstructions, cLevel, category, template, websiteData, referenceAnalysis, true
           );
           var subSections = ensureMinimumSections(subResult.sections || [], sub.name, brand, lang, analysis, template, false, cLevel);
-          pages.push({ id: subPageId, name: sub.name, parentId: parentPageId, sections: subSections });
+          pages.push({ id: subPageId, name: sub.name, parentId: parentPageId, sections: subSections, heroBannerBrief: subResult.heroBannerBrief || '', heroBannerTextOverlay: subResult.heroBannerTextOverlay || '' });
           log('  ' + sub.name + ': ' + subSections.length + ' sections');
         } catch (err) {
           log('  "' + sub.name + '" failed (' + err.message + '), using fallback...');
