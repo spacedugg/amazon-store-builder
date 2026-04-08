@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import SectionView from './SectionView';
 import { t } from '../i18n';
 
-export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onChangeLayout, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate, onGenerateWireframes, onDeleteWireframes, onStopWireframes, wfGenerating, wfProgress }) {
+export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onChangeLayout, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate, onGenerateWireframes, onDeleteWireframes, onStopWireframes, wfGenerating, wfProgress, onFolderImageUpload, onRemoveAllImages }) {
   var [hoveredNav, setHoveredNav] = useState(null);
   var [showHeroPicker, setShowHeroPicker] = useState(false);
+  var folderInputRef = useRef(null);
 
   // Find hero tile in the current page's sections so we can select it
   var heroSel = null;
@@ -193,6 +194,27 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
             )}
             <span style={{ fontSize: 10, color: '#94a3b8' }}>
               KI-Wireframes für alle Bild-Kacheln dieser Seite
+            </span>
+          </div>
+        )}
+
+        {/* Image Upload Bar */}
+        {page && page.sections && page.sections.length > 0 && onFolderImageUpload && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 12px', background: '#fefce8', borderBottom: '1px solid #fde68a', fontSize: 12 }}>
+            <input type="file" ref={folderInputRef} style={{ display: 'none' }} webkitdirectory="" directory="" multiple
+              onChange={function(e) { onFolderImageUpload(e.target.files); e.target.value = ''; }} />
+            <button className="btn" onClick={function() { folderInputRef.current && folderInputRef.current.click(); }}
+              style={{ padding: '5px 14px', fontSize: 11, fontWeight: 600, background: '#f59e0b', color: '#fff', border: 'none', borderRadius: 4, cursor: 'pointer' }}>
+              Ordner laden
+            </button>
+            {onRemoveAllImages && (
+              <button className="btn" onClick={onRemoveAllImages}
+                style={{ padding: '5px 14px', fontSize: 11, fontWeight: 600, background: '#fee2e2', color: '#991b1b', border: '1px solid #fecaca', borderRadius: 4, cursor: 'pointer' }}>
+                Alle Bilder entfernen
+              </button>
+            )}
+            <span style={{ fontSize: 10, color: '#92400e' }}>
+              Bilder per Ordner hochladen (automatisches Matching)
             </span>
           </div>
         )}

@@ -912,7 +912,7 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '',
     '- [LIFESTYLE] = Lifestyle photo dominates (70-80%+). Text is subordinate/optional.',
     '  Elements: professional photo, product in use, optional short text line.',
-    '  Do NOT specify logo placement. Do NOT add dark overlays or gradients unless brand requires it.',
+    '  Do NOT specify logo placement. Do NOT specify overlays, gradients, or color treatments — the designer decides based on CI.',
     '  Example: "[LIFESTYLE] Person applying product in garden, sunny day, product prominent"',
     '',
     '- [TEXT_IMAGE] = Text and/or graphics dominant. NO product/lifestyle photos.',
@@ -923,7 +923,7 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '- [SHOPPABLE] = Shorthand for PRODUCT category with shoppable_image tile type. Clean packshot, clickable.',
     '  For single product: use linkAsin. For multiple products/variants: use hotspots array (max 5).',
     '  IMPORTANT: Hotspots + CTA = Amazon overlays, NOT designed into the image!',
-    '  Example single: "[SHOPPABLE] Bestseller product, white bg, product centered, soft shadow"',
+    '  Example single: "[SHOPPABLE] Bestseller product, clean packshot, product centered"',
     '  Example multi: "[SHOPPABLE] 3 color variants on neutral bg, each variant clearly separated"',
     '',
     'CATEGORY DECISION LOGIC:',
@@ -951,7 +951,7 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '- Keep briefs SHORT: max 15-20 words after the tag.',
     '- Describe WHAT the image shows (subject, scene, composition) — NOT HOW it should look (no color, font, shadow instructions).',
     '- The designer knows the brand CI (colors, fonts, style). Do NOT specify colors, backgrounds, gradients, or font styles in briefs.',
-    '- WRONG: "Dark green background with white sans-serif text and leaf pattern"',
+    '- WRONG: "Specific background color with specific font style and decorative pattern"',
     '- RIGHT: "Category preview with representative product, headline: Vitamine"',
     '- Name the specific product or category from the product list. Do NOT repeat the brand name "' + brand + '" in every brief — the designer already knows which brand this is. Mention it only in the store_hero brief.',
     '- textOverlay MUST be in store language (' + lang + ') — use real product/category names. For category/navigation tiles: textOverlay = JUST the category name (e.g. "Vitamine"), NOT a sentence. The CTA carries the action.',
@@ -3227,7 +3227,7 @@ function fallbackHomepage(brand, lang, categories, products, analysis) {
     sections.push({
       id: uid(), layoutId: layoutId,
       tiles: products.map(function(p) {
-        return { type: 'shoppable_image', imageCategory: 'product', brief: '[SHOPPABLE] ' + brand + ' ' + (p.name || 'product') + ' packshot on white, soft shadow', textOverlay: p.name || '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [], linkAsin: p.asin };
+        return { type: 'shoppable_image', imageCategory: 'product', brief: '[SHOPPABLE] ' + brand + ' ' + (p.name || 'product') + ' clean packshot, product centered', textOverlay: p.name || '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [], linkAsin: p.asin };
       }),
     });
 
@@ -3323,7 +3323,7 @@ function fallbackHomepage(brand, lang, categories, products, analysis) {
         id: uid(), layoutId: '1-1',
         tiles: [
           { type: 'image', imageCategory: 'lifestyle', brief: '[LIFESTYLE] ' + brand + ' products in real-world use, natural setting', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
-          { type: 'shoppable_image', imageCategory: 'product', brief: '[SHOPPABLE] ' + brand + ' bestseller packshot on white, soft shadow', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
+          { type: 'shoppable_image', imageCategory: 'product', brief: '[SHOPPABLE] ' + brand + ' bestseller clean packshot, product centered', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
         ],
       });
     }
@@ -3368,7 +3368,7 @@ function fallbackCategoryPage(id, name, catProducts, lang, analysis) {
       id: uid(), layoutId: '1-1',
       tiles: [
         { type: 'image', imageCategory: 'creative', brief: '[CREATIVE] "' + heroProduct.name.split(' ').slice(0, 4).join(' ') + '" bold name on clean background + product silhouette', textOverlay: heroProduct.name.split(' ').slice(0, 4).join(' '), ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [] },
-        { type: 'shoppable_image', imageCategory: 'product', brief: '[SHOPPABLE] ' + heroProduct.name + ' packshot on white, soft shadow', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [], linkAsin: heroProduct.asin },
+        { type: 'shoppable_image', imageCategory: 'product', brief: '[SHOPPABLE] ' + heroProduct.name + ' clean packshot, product centered', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, asins: [], linkAsin: heroProduct.asin },
       ],
     });
   }

@@ -1594,6 +1594,9 @@ export default function BriefingView() {
   var prevStoreRef = useRef(null);
   var pollRef = useRef(null);
   var bannerTimeoutRef = useRef(null);
+  var folderInputRef = useRef(null);
+  var [localImageMap, setLocalImageMap] = useState({}); // { canonical_filename -> blob URL }
+  var [folderMatchCount, setFolderMatchCount] = useState(0);
   var rightPanelRef = useRef(null);
 
   // Generate wireframes for a specific page
@@ -1644,6 +1647,53 @@ export default function BriefingView() {
       setTimeout(function() { setWfProgress(''); }, 3000);
     }
   };
+
+  // ─── FOLDER IMAGE UPLOAD (local preview in designer dashboard) ───
+  function handleBriefingFolderSelect(e) {
+    var files = e.target.files;
+    if (!files || files.length === 0 || !store) return;
+    var fnMap = buildFilenameMap(store);
+    var imageExts = /\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i;
+    var merged = Object.assign({}, localImageMap);
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      if (!imageExts.test(file.name)) continue;
+      var rawName = file.name;
+      if (rawName.normalize) rawName = rawName.normalize('NFC');
+      var name = rawName.toLowerCase();
+      var nameNoExt = name.replace(/\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i, '');
+      if (fnMap[name] && !merged[name]) {
+        merged[name] = URL.createObjectURL(file);
+      } else if (fnMap[nameNoExt + '.jpg'] && !merged[nameNoExt + '.jpg']) {
+        merged[nameNoExt + '.jpg'] = URL.createObjectURL(file);
+      } else {
+        var keys = Object.keys(fnMap);
+        for (var k = 0; k < keys.length; k++) {
+          if (merged[keys[k]]) continue;
+          var keyBase = keys[k].replace('.jpg', '');
+          if (nameNoExt === keyBase || nameNoExt.indexOf(keyBase) >= 0 || keyBase.indexOf(nameNoExt) >= 0) {
+            merged[keys[k]] = URL.createObjectURL(file);
+            break;
+          }
+        }
+      }
+    }
+    setLocalImageMap(merged);
+    setFolderMatchCount(Object.keys(merged).length);
+    e.target.value = '';
+  }
+
+  function handleBriefingClearImages() {
+    Object.values(localImageMap).forEach(function(url) { try { URL.revokeObjectURL(url); } catch(e) {} });
+    setLocalImageMap({});
+    setFolderMatchCount(0);
+  }
+
+  // Lookup a local folder image for a tile
+  function findLocalImage(pageName, sectionIndex, tileIndex, variant) {
+    var fn = tileFilename(pageName, sectionIndex, tileIndex, variant).toLowerCase();
+    return localImageMap[fn] || null;
+  }
 
   var rawToken = window.location.pathname.split('/share/')[1] || '';
   var token = rawToken.split('/')[0].split('?')[0].trim(); // Strip trailing slashes, query params
@@ -1872,6 +1922,24 @@ export default function BriefingView() {
               Mobile
             </button>
           </div>
+          {/* Folder Upload — load images into tiles */}
+          <input type="file" ref={folderInputRef} style={{ display: 'none' }} webkitdirectory="" directory="" multiple
+            onChange={handleBriefingFolderSelect} />
+          <button onClick={function() { folderInputRef.current && folderInputRef.current.click(); }}
+            style={{ display: 'flex', alignItems: 'center', gap: 5, background: folderMatchCount > 0 ? 'rgba(245,158,11,.2)' : 'rgba(255,255,255,.06)', border: '1px solid ' + (folderMatchCount > 0 ? 'rgba(245,158,11,.4)' : 'rgba(255,255,255,.12)'), color: folderMatchCount > 0 ? '#f59e0b' : '#94a3b8', fontSize: 11, padding: '5px 12px', borderRadius: 6, cursor: 'pointer', marginLeft: 8, transition: 'all .2s' }}
+            title="Load folder with images"
+            onMouseEnter={function(e) { e.currentTarget.style.background = 'rgba(245,158,11,.15)'; e.currentTarget.style.color = '#f59e0b'; }}
+            onMouseLeave={function(e) { e.currentTarget.style.background = folderMatchCount > 0 ? 'rgba(245,158,11,.2)' : 'rgba(255,255,255,.06)'; e.currentTarget.style.color = folderMatchCount > 0 ? '#f59e0b' : '#94a3b8'; }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" /></svg>
+            {folderMatchCount > 0 ? folderMatchCount + ' Images' : 'Ordner laden'}
+          </button>
+          {folderMatchCount > 0 && (
+            <button onClick={handleBriefingClearImages}
+              style={{ display: 'flex', alignItems: 'center', gap: 4, background: 'rgba(239,68,68,.1)', border: '1px solid rgba(239,68,68,.2)', color: '#ef4444', fontSize: 11, padding: '5px 10px', borderRadius: 6, cursor: 'pointer', transition: 'all .2s' }}
+              title="Remove all loaded images">
+              &times;
+            </button>
+          )}
           {/* Preview button — secondary, further out */}
           <button onClick={function() { setShowPreview(true); }}
             style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(255,255,255,.06)', border: '1px solid rgba(255,255,255,.12)', color: '#94a3b8', fontSize: 11, padding: '5px 12px', borderRadius: 6, cursor: 'pointer', marginLeft: 8, transition: 'all .2s' }}

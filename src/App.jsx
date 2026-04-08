@@ -770,6 +770,118 @@ export default function App() {
     setViewMode(mode);
   };
 
+  // ─── FOLDER IMAGE UPLOAD (match files to tiles by canonical filename) ───
+  var handleFolderImageUpload = function(files) {
+    if (!files || files.length === 0 || !store.pages || store.pages.length === 0) return;
+    // Build filename map
+    var fnMap = {};
+    var PRODUCT_TYPES = ['product_grid', 'product_selector'];
+    store.pages.forEach(function(pg) {
+      (pg.sections || []).forEach(function(sec, si) {
+        (sec.tiles || []).forEach(function(tile, ti) {
+          if (PRODUCT_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text') return;
+          var safeName = (pg.name || 'page');
+          if (safeName.normalize) safeName = safeName.normalize('NFC');
+          safeName = safeName.replace(/[^a-zA-Z0-9äöüÄÖÜß]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
+          var base = safeName + '_S' + (si + 1) + '_T' + (ti + 1);
+          if (tile.syncDimensions) {
+            fnMap[(base + '.jpg').toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'sync' };
+          } else {
+            fnMap[(base + '_desktop.jpg').toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'desktop' };
+            fnMap[(base + '_mobile.jpg').toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'mobile' };
+          }
+        });
+      });
+    });
+    // Match files and read as data URLs
+    var imageExts = /\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i;
+    var matched = {}; // key: "pageId|secId|ti|variant" → file
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      if (!imageExts.test(file.name)) continue;
+      var rawName = file.name;
+      if (rawName.normalize) rawName = rawName.normalize('NFC');
+      var name = rawName.toLowerCase();
+      var nameNoExt = name.replace(/\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i, '');
+      var entry = null;
+      if (fnMap[name]) entry = fnMap[name];
+      else if (fnMap[nameNoExt + '.jpg']) entry = fnMap[nameNoExt + '.jpg'];
+      else {
+        var keys = Object.keys(fnMap);
+        for (var k = 0; k < keys.length; k++) {
+          var keyBase = keys[k].replace('.jpg', '');
+          if (nameNoExt === keyBase || nameNoExt.indexOf(keyBase) >= 0 || keyBase.indexOf(nameNoExt) >= 0) {
+            entry = fnMap[keys[k]];
+            break;
+          }
+        }
+      }
+      if (entry) {
+        var mkey = entry.pageId + '|' + entry.secId + '|' + entry.ti + '|' + entry.variant;
+        if (!matched[mkey]) matched[mkey] = { entry: entry, file: file };
+      }
+    }
+    // Read matched files as data URLs and update tiles
+    var matchKeys = Object.keys(matched);
+    if (matchKeys.length === 0) { alert('No matching images found. Expected filenames like: PageName_S1_T1_desktop.jpg'); return; }
+    var processed = 0;
+    matchKeys.forEach(function(mkey) {
+      var item = matched[mkey];
+      var reader = new FileReader();
+      reader.onload = function(ev) {
+        var dataUrl = ev.target.result;
+        setStore(function(s) {
+          return Object.assign({}, s, {
+            pages: s.pages.map(function(pg) {
+              if (pg.id !== item.entry.pageId) return pg;
+              return Object.assign({}, pg, {
+                sections: pg.sections.map(function(sec) {
+                  if (sec.id !== item.entry.secId) return sec;
+                  return Object.assign({}, sec, {
+                    tiles: sec.tiles.map(function(t, ti) {
+                      if (ti !== item.entry.ti) return t;
+                      var updates = {};
+                      if (item.entry.variant === 'sync' || item.entry.variant === 'desktop') updates.uploadedImage = dataUrl;
+                      if (item.entry.variant === 'sync' || item.entry.variant === 'mobile') updates.uploadedImageMobile = dataUrl;
+                      return Object.assign({}, t, updates);
+                    }),
+                  });
+                }),
+              });
+            }),
+          });
+        });
+        processed++;
+        if (processed === matchKeys.length) {
+          alert(matchKeys.length + ' images matched and loaded.');
+        }
+      };
+      reader.readAsDataURL(item.file);
+    });
+  };
+
+  // ─── REMOVE ALL UPLOADED IMAGES ───
+  var handleRemoveAllImages = function() {
+    if (!confirm('Remove all uploaded images from all tiles?')) return;
+    setStoreWithUndo(function(s) {
+      return Object.assign({}, s, {
+        pages: s.pages.map(function(pg) {
+          return Object.assign({}, pg, {
+            sections: pg.sections.map(function(sec) {
+              return Object.assign({}, sec, {
+                tiles: sec.tiles.map(function(t) {
+                  return Object.assign({}, t, { uploadedImage: null, uploadedImageMobile: null });
+                }),
+              });
+            }),
+          });
+        }),
+        headerBanner: null,
+        headerBannerMobile: null,
+      });
+    });
+  };
+
   // ─── HEADER BANNER ───
   var handleHeaderBannerUpload = function() {
     if (!headerBannerInputRef.current) return;
@@ -944,6 +1056,8 @@ export default function App() {
           onStopWireframes={handleStopWireframes}
           wfGenerating={wfGenerating}
           wfProgress={wfProgress}
+          onFolderImageUpload={handleFolderImageUpload}
+          onRemoveAllImages={handleRemoveAllImages}
         />
 
         <PropertiesPanel
