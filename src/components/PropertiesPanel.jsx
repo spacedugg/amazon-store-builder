@@ -80,7 +80,47 @@ function fileUpload(label, value, onSet, onRemove, uiLang) {
   );
 }
 
-export default function PropertiesPanel({ tile, onChange, products, viewMode, uiLang, layoutType }) {
+export default function PropertiesPanel({ tile, onChange, products, viewMode, uiLang, layoutType, heroBanner, onHeroBannerChange }) {
+  // ─── HERO BANNER MODE ───
+  if (heroBanner) {
+    var hPage = heroBanner;
+    return (
+      <div className="props-panel">
+        <div className="props-header" style={{ background: '#fffbeb', borderBottom: '2px solid #f59e0b' }}>
+          Store Hero Banner
+        </div>
+        <div className="props-body">
+          <div className="props-section">
+            <div style={{ fontSize: 10, color: '#92400e', background: '#fffbeb', padding: '6px 8px', borderRadius: 4, marginBottom: 8, lineHeight: 1.5 }}>
+              This is the banner image ABOVE the store menu bar. It is independent from the sections below. Dimensions: {viewMode === 'mobile' ? '1680 x 900' : '3000 x 600'}
+            </div>
+          </div>
+          <div className="props-section">
+            <label className="label">Design Brief</label>
+            <textarea value={hPage.heroBannerBrief || ''} onChange={function(e) { onHeroBannerChange('heroBannerBrief', e.target.value); }}
+              rows={3} placeholder="Design instructions for the hero banner above the menu..." className="input" />
+          </div>
+          <div className="props-section">
+            <label className="label">Text Overlay</label>
+            <input value={hPage.heroBannerTextOverlay || ''} onChange={function(e) { onHeroBannerChange('heroBannerTextOverlay', e.target.value); }}
+              placeholder="Slogan or claim for the hero banner" className="input" />
+          </div>
+          <div className="props-section">
+            <label className="label">Banner Image</label>
+            <div style={{ display: 'flex', gap: 6, flexDirection: 'column' }}>
+              {(viewMode === 'mobile' ? hPage.headerBannerMobile : hPage.headerBanner) && (
+                <img src={viewMode === 'mobile' ? (hPage.headerBannerMobile || hPage.headerBanner) : hPage.headerBanner} alt="" style={{ width: '100%', borderRadius: 4, border: '1px solid #e2e8f0' }} />
+              )}
+              <div style={{ fontSize: 10, color: '#64748b' }}>
+                Use the image upload button on the banner area or the folder upload to set the banner image.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (!tile) {
     return (
       <div className="props-panel">
@@ -262,27 +302,49 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
               var fontSizes = { h1: 12, h2: 11, h3: 11, body: 11, bullet: 11, text: 11 };
               var fontWeights = { h1: 700, h2: 600, h3: 400, body: 400, bullet: 400, text: 500 };
 
+              var filledLines = structured.filter(function(item) { return item.text.trim(); });
+              var showHierarchy = filledLines.length >= 2;
+              var dragIdx = { current: null };
+
+              function moveLine(fromIdx, toIdx) {
+                if (fromIdx === toIdx) return;
+                var newLines = (tile.textOverlay || '').split(/\\n|\n/);
+                var item = newLines.splice(fromIdx, 1)[0];
+                newLines.splice(toIdx, 0, item);
+                u('textOverlay', newLines.join('\\n'));
+              }
+
               return (
                 <div>
                   {structured.map(function(item, i) {
-                    if (!item.text && structured.length > 1) return null; // skip empty lines in multi-line
+                    if (!item.text && structured.length > 1) return null;
                     return (
-                      <div key={i} style={{ marginBottom: 4, display: 'flex', alignItems: 'center', gap: 4 }}>
-                        <select
-                          value={item.type}
-                          onChange={function(e) { changeLineType(i, e.target.value); }}
-                          style={{ background: bgColors[item.type], color: colors[item.type], borderRadius: 3, padding: '1px 4px', fontSize: 8, fontWeight: 700, minWidth: 28, textAlign: 'center', flexShrink: 0, border: '1px solid ' + (bgColors[item.type] || '#e2e8f0'), cursor: 'pointer', fontFamily: 'inherit' }}
-                        >
-                          <option value="h1">H1</option>
-                          <option value="h2">H2</option>
-                          <option value="body">Body</option>
-                          <option value="bullet">Bullet</option>
-                        </select>
+                      <div key={i} style={{ marginBottom: 4, display: 'flex', alignItems: 'center', gap: 4 }}
+                        draggable={structured.length > 1}
+                        onDragStart={function(e) { dragIdx.current = i; e.dataTransfer.effectAllowed = 'move'; }}
+                        onDragOver={function(e) { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; }}
+                        onDrop={function(e) { e.preventDefault(); if (dragIdx.current !== null && dragIdx.current !== i) { moveLine(dragIdx.current, i); dragIdx.current = null; } }}
+                      >
+                        {structured.length > 1 && (
+                          <span style={{ cursor: 'grab', fontSize: 10, color: '#94a3b8', flexShrink: 0, userSelect: 'none' }} title="Drag to reorder">&#9776;</span>
+                        )}
+                        {showHierarchy && (
+                          <select
+                            value={item.type}
+                            onChange={function(e) { changeLineType(i, e.target.value); }}
+                            style={{ background: bgColors[item.type], color: colors[item.type], borderRadius: 3, padding: '1px 4px', fontSize: 8, fontWeight: 700, minWidth: 28, textAlign: 'center', flexShrink: 0, border: '1px solid ' + (bgColors[item.type] || '#e2e8f0'), cursor: 'pointer', fontFamily: 'inherit' }}
+                          >
+                            <option value="h1">H1</option>
+                            <option value="h2">H2</option>
+                            <option value="body">Body</option>
+                            <option value="bullet">Bullet</option>
+                          </select>
+                        )}
                         <input
                           value={item.text}
                           onChange={function(e) { updateLine(i, e.target.value); }}
-                          placeholder={labels[item.type]}
-                          style={{ flex: 1, fontSize: fontSizes[item.type], fontWeight: fontWeights[item.type], padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontFamily: 'inherit' }}
+                          placeholder={showHierarchy ? labels[item.type] : t('props.textOverlayPlaceholder', uiLang)}
+                          style={{ flex: 1, fontSize: fontSizes[item.type], fontWeight: showHierarchy ? fontWeights[item.type] : 400, padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontFamily: 'inherit' }}
                         />
                         {structured.length > 1 && (
                           <button onClick={function() { removeLine(i); }} style={{ fontSize: 10, color: '#94a3b8', background: 'none', border: 'none', cursor: 'pointer', padding: '2px 4px' }} title="Zeile entfernen">&times;</button>
@@ -296,23 +358,9 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
                     <button className="btn" onClick={function() { addLine('body'); }} style={{ fontSize: 9, padding: '2px 6px' }}>+ Bodytext</button>
                     <button className="btn" onClick={function() { addLine('bullet'); }} style={{ fontSize: 9, padding: '2px 6px' }}>+ Bullet</button>
                   </div>
-                  {/* Raw edit fallback */}
-                  <details style={{ marginTop: 6 }}>
-                    <summary style={{ fontSize: 9, color: '#94a3b8', cursor: 'pointer' }}>Raw bearbeiten</summary>
-                    <TextFieldWithBold value={tile.textOverlay || ''} onChange={function(v) { u('textOverlay', v); }}
-                      placeholder={t('props.textOverlayPlaceholder', uiLang)} className="input" />
-                  </details>
                 </div>
               );
             })()}
-
-            {tile.textOverlay && (
-              <div className="text-align-picker" style={{ display: 'flex', gap: 2, marginTop: 4 }}>
-                <button className={'btn text-align-btn' + ((!tile.textAlign || tile.textAlign === 'left') ? ' active' : '')} onClick={function() { u('textAlign', 'left'); }} title="Linksbündig" style={{ fontSize: 10, padding: '3px 8px' }}>&#8676; Links</button>
-                <button className={'btn text-align-btn' + (tile.textAlign === 'center' ? ' active' : '')} onClick={function() { u('textAlign', 'center'); }} title="Zentriert" style={{ fontSize: 10, padding: '3px 8px' }}>Mitte</button>
-                <button className={'btn text-align-btn' + (tile.textAlign === 'right' ? ' active' : '')} onClick={function() { u('textAlign', 'right'); }} title="Rechtsbündig" style={{ fontSize: 10, padding: '3px 8px' }}>Rechts &#8677;</button>
-              </div>
-            )}
           </div>
           <div className="props-section">
             <label className="label">{t('props.ctaText', uiLang)}</label>
@@ -365,6 +413,65 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
             <label className="label">{t('props.linkAsin', uiLang)}</label>
             <input value={tile.linkAsin || ''} onChange={function(e) { u('linkAsin', e.target.value.trim()); }}
               className="input input-mono" placeholder="B0XXXXXXXXXX" />
+          </div>
+
+          {/* Link to store subpage (internal page link) */}
+          <div className="props-section">
+            <label className="label">Link to Subpage</label>
+            <input value={tile.linkUrl || ''} onChange={function(e) { u('linkUrl', e.target.value.trim()); }}
+              className="input input-mono" placeholder="/page-id (e.g. /cat-0)" />
+            {tile.linkUrl && (
+              <div style={{ fontSize: 10, color: '#7c3aed', marginTop: 2 }}>
+                This tile links to subpage: {tile.linkUrl}
+              </div>
+            )}
+          </div>
+
+          {/* Reference / Example Images for designer */}
+          <div className="props-section">
+            <label className="label">Reference Images</label>
+            <div style={{ fontSize: 10, color: '#64748b', marginBottom: 4 }}>Example images for the designer (shown in briefing)</div>
+            {(tile.referenceImages || []).length > 0 && (
+              <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 6 }}>
+                {(tile.referenceImages || []).map(function(img, idx) {
+                  return (
+                    <div key={idx} style={{ position: 'relative', width: 56, height: 56, borderRadius: 4, overflow: 'hidden', border: '1px solid #e2e8f0' }}>
+                      <img src={img.dataUrl} alt={img.name || ''} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <button
+                        onClick={function() {
+                          var updated = (tile.referenceImages || []).slice();
+                          updated.splice(idx, 1);
+                          u('referenceImages', updated);
+                        }}
+                        style={{ position: 'absolute', top: 1, right: 1, background: 'rgba(0,0,0,0.5)', color: '#fff', border: 'none', borderRadius: '50%', width: 16, height: 16, fontSize: 10, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', lineHeight: 1 }}
+                        title="Remove"
+                      >&times;</button>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+            {(tile.referenceImages || []).length < 5 && (
+              <label className="btn" style={{ fontSize: 10, padding: '4px 10px', cursor: 'pointer', display: 'inline-block' }}>
+                + Add Image
+                <input type="file" accept="image/*" multiple style={{ display: 'none' }}
+                  onChange={function(e) {
+                    var files = Array.from(e.target.files || []);
+                    var current = (tile.referenceImages || []).slice();
+                    var remaining = 5 - current.length;
+                    files.slice(0, remaining).forEach(function(file) {
+                      var reader = new FileReader();
+                      reader.onload = function(ev) {
+                        current.push({ dataUrl: ev.target.result, name: file.name });
+                        u('referenceImages', current.slice());
+                      };
+                      reader.readAsDataURL(file);
+                    });
+                    e.target.value = '';
+                  }}
+                />
+              </label>
+            )}
           </div>
 
           {/* HOTSPOTS — only for shoppable_image */}

@@ -808,6 +808,48 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
         );
       })()}
 
+      {/* ─── REFERENCE / EXAMPLE IMAGES ─── */}
+      {tile.referenceImages && tile.referenceImages.length > 0 && (
+        <div style={{ marginTop: 6, padding: '6px 8px', background: '#fefce8', border: '1px solid #fde68a', borderRadius: 4 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, color: '#92400e', marginBottom: 4 }}>
+            Reference Images ({tile.referenceImages.length}):
+          </div>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+            {tile.referenceImages.map(function(img, ri) {
+              return (
+                <div key={ri} style={{ position: 'relative' }}>
+                  <img
+                    src={img.dataUrl} alt={img.name || 'Reference'}
+                    style={{ width: 64, height: 64, objectFit: 'cover', borderRadius: 4, border: '1px solid #fde68a', cursor: 'pointer' }}
+                    title={'Click to enlarge: ' + (img.name || 'Image ' + (ri + 1))}
+                    onClick={function() {
+                      var overlay = document.createElement('div');
+                      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;cursor:pointer;';
+                      var imgEl = document.createElement('img');
+                      imgEl.src = img.dataUrl;
+                      imgEl.style.cssText = 'max-width:90vw;max-height:80vh;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,0.5);';
+                      var dlBtn = document.createElement('a');
+                      dlBtn.href = img.dataUrl;
+                      dlBtn.download = img.name || 'reference-image.png';
+                      dlBtn.textContent = 'Download';
+                      dlBtn.style.cssText = 'padding:8px 20px;background:#fff;color:#1e293b;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;';
+                      dlBtn.onclick = function(e) { e.stopPropagation(); };
+                      overlay.appendChild(imgEl);
+                      overlay.appendChild(dlBtn);
+                      overlay.onclick = function() { document.body.removeChild(overlay); };
+                      document.body.appendChild(overlay);
+                    }}
+                  />
+                  <div style={{ fontSize: 8, color: '#92400e', textAlign: 'center', marginTop: 2, maxWidth: 64, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {img.name || 'Image ' + (ri + 1)}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
@@ -873,35 +915,36 @@ function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTil
 }
 
 // ─── STORE HERO BANNER (above nav) ───
-function StoreHeroBanner({ store, viewMode, onHeroClick, isSelected }) {
-  // Find the first store_hero tile across all pages
-  var heroTile = null;
-  (store.pages || []).forEach(function(page) {
-    if (heroTile) return;
-    (page.sections || []).forEach(function(sec) {
-      if (heroTile) return;
-      (sec.tiles || []).forEach(function(tile) {
-        if (!heroTile && tile.imageCategory === 'store_hero') {
-          heroTile = tile;
-        }
-      });
-    });
-  });
-
+function StoreHeroBanner({ store, activePage, viewMode, onHeroClick, isSelected }) {
   var isDesktop = viewMode === 'desktop';
   var width = isDesktop ? 3000 : 1680;
   var height = isDesktop ? 600 : 900;
+  var brief = (activePage && activePage.heroBannerBrief) || '';
+  var textOverlay = (activePage && activePage.heroBannerTextOverlay) || '';
+  var bannerImg = activePage
+    ? (isDesktop ? (activePage.headerBanner || store.headerBanner) : (activePage.headerBannerMobile || store.headerBannerMobile || activePage.headerBanner || store.headerBanner))
+    : (isDesktop ? store.headerBanner : (store.headerBannerMobile || store.headerBanner));
 
   return (
     <div className="briefing-hero-banner" onClick={onHeroClick}
-      style={{ cursor: onHeroClick ? 'pointer' : 'default', outline: isSelected ? '3px solid #3b82f6' : 'none', outlineOffset: -3, borderRadius: 4, transition: 'outline .15s' }}>
-      <div className="briefing-hero-placeholder">
-        <div className="briefing-hero-label">Store Hero Image</div>
-        <div className="briefing-hero-dims">{width} &times; {height}px</div>
-        {heroTile && heroTile.brief && (
-          <div className="briefing-hero-brief"><BriefTextHighlighted text={heroTile.brief} /></div>
-        )}
-      </div>
+      style={{ cursor: onHeroClick ? 'pointer' : 'default', outline: isSelected ? '3px solid #f59e0b' : 'none', outlineOffset: -3, borderRadius: 4, transition: 'outline .15s' }}>
+      {bannerImg ? (
+        <img src={bannerImg} alt="" style={{ width: '100%', display: 'block', borderRadius: 4 }} />
+      ) : (
+        <div className="briefing-hero-placeholder">
+          <div className="briefing-hero-label">Store Hero Banner</div>
+          <div className="briefing-hero-dims">{width} &times; {height}px</div>
+          {brief && (
+            <div className="briefing-hero-brief"><BriefTextHighlighted text={brief} /></div>
+          )}
+          {textOverlay && (
+            <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginTop: 4 }}>{textOverlay}</div>
+          )}
+          {!brief && (
+            <div style={{ fontSize: 11, color: '#94a3b8', fontStyle: 'italic', marginTop: 4 }}>No design brief set for this banner</div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -1552,6 +1595,9 @@ export default function BriefingView() {
   var prevStoreRef = useRef(null);
   var pollRef = useRef(null);
   var bannerTimeoutRef = useRef(null);
+  var folderInputRef = useRef(null);
+  var [localImageMap, setLocalImageMap] = useState({}); // { canonical_filename -> blob URL }
+  var [folderMatchCount, setFolderMatchCount] = useState(0);
   var rightPanelRef = useRef(null);
 
   // Generate wireframes for a specific page
@@ -1602,6 +1648,53 @@ export default function BriefingView() {
       setTimeout(function() { setWfProgress(''); }, 3000);
     }
   };
+
+  // ─── FOLDER IMAGE UPLOAD (local preview in designer dashboard) ───
+  function handleBriefingFolderSelect(e) {
+    var files = e.target.files;
+    if (!files || files.length === 0 || !store) return;
+    var fnMap = buildFilenameMap(store);
+    var imageExts = /\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i;
+    var merged = Object.assign({}, localImageMap);
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      if (!imageExts.test(file.name)) continue;
+      var rawName = file.name;
+      if (rawName.normalize) rawName = rawName.normalize('NFC');
+      var name = rawName.toLowerCase();
+      var nameNoExt = name.replace(/\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i, '');
+      if (fnMap[name] && !merged[name]) {
+        merged[name] = URL.createObjectURL(file);
+      } else if (fnMap[nameNoExt + '.jpg'] && !merged[nameNoExt + '.jpg']) {
+        merged[nameNoExt + '.jpg'] = URL.createObjectURL(file);
+      } else {
+        var keys = Object.keys(fnMap);
+        for (var k = 0; k < keys.length; k++) {
+          if (merged[keys[k]]) continue;
+          var keyBase = keys[k].replace('.jpg', '');
+          if (nameNoExt === keyBase || nameNoExt.indexOf(keyBase) >= 0 || keyBase.indexOf(nameNoExt) >= 0) {
+            merged[keys[k]] = URL.createObjectURL(file);
+            break;
+          }
+        }
+      }
+    }
+    setLocalImageMap(merged);
+    setFolderMatchCount(Object.keys(merged).length);
+    e.target.value = '';
+  }
+
+  function handleBriefingClearImages() {
+    Object.values(localImageMap).forEach(function(url) { try { URL.revokeObjectURL(url); } catch(e) {} });
+    setLocalImageMap({});
+    setFolderMatchCount(0);
+  }
+
+  // Lookup a local folder image for a tile
+  function findLocalImage(pageName, sectionIndex, tileIndex, variant) {
+    var fn = tileFilename(pageName, sectionIndex, tileIndex, variant).toLowerCase();
+    return localImageMap[fn] || null;
+  }
 
   var rawToken = window.location.pathname.split('/share/')[1] || '';
   var token = rawToken.split('/')[0].split('?')[0].trim(); // Strip trailing slashes, query params
@@ -1830,6 +1923,24 @@ export default function BriefingView() {
               Mobile
             </button>
           </div>
+          {/* Folder Upload — load images into tiles */}
+          <input type="file" ref={folderInputRef} style={{ display: 'none' }} webkitdirectory="" directory="" multiple
+            onChange={handleBriefingFolderSelect} />
+          <button onClick={function() { folderInputRef.current && folderInputRef.current.click(); }}
+            style={{ display: 'flex', alignItems: 'center', gap: 5, background: folderMatchCount > 0 ? 'rgba(245,158,11,.2)' : 'rgba(255,255,255,.06)', border: '1px solid ' + (folderMatchCount > 0 ? 'rgba(245,158,11,.4)' : 'rgba(255,255,255,.12)'), color: folderMatchCount > 0 ? '#f59e0b' : '#94a3b8', fontSize: 11, padding: '5px 12px', borderRadius: 6, cursor: 'pointer', marginLeft: 8, transition: 'all .2s' }}
+            title="Load folder with images"
+            onMouseEnter={function(e) { e.currentTarget.style.background = 'rgba(245,158,11,.15)'; e.currentTarget.style.color = '#f59e0b'; }}
+            onMouseLeave={function(e) { e.currentTarget.style.background = folderMatchCount > 0 ? 'rgba(245,158,11,.2)' : 'rgba(255,255,255,.06)'; e.currentTarget.style.color = folderMatchCount > 0 ? '#f59e0b' : '#94a3b8'; }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" /></svg>
+            {folderMatchCount > 0 ? folderMatchCount + ' Images' : 'Ordner laden'}
+          </button>
+          {folderMatchCount > 0 && (
+            <button onClick={handleBriefingClearImages}
+              style={{ display: 'flex', alignItems: 'center', gap: 4, background: 'rgba(239,68,68,.1)', border: '1px solid rgba(239,68,68,.2)', color: '#ef4444', fontSize: 11, padding: '5px 10px', borderRadius: 6, cursor: 'pointer', transition: 'all .2s' }}
+              title="Remove all loaded images">
+              &times;
+            </button>
+          )}
           {/* Preview button — secondary, further out */}
           <button onClick={function() { setShowPreview(true); }}
             style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(255,255,255,.06)', border: '1px solid rgba(255,255,255,.12)', color: '#94a3b8', fontSize: 11, padding: '5px 12px', borderRadius: 6, cursor: 'pointer', marginLeft: 8, transition: 'all .2s' }}
@@ -2290,12 +2401,12 @@ export default function BriefingView() {
         <div className={'briefing-content' + (viewMode === 'mobile' ? ' briefing-mobile' : '')}>
           <div style={viewMode === 'mobile' ? { maxWidth: 420, margin: '0 auto', padding: '0 12px' } : { padding: '0 100px' }}>
           {/* Store Hero Banner above nav */}
-          <StoreHeroBanner store={store} viewMode={viewMode}
-            isSelected={selectedTile && selectedTile.sid === '__hero__'}
+          <StoreHeroBanner store={store} activePage={activePage} viewMode={viewMode}
+            isSelected={selectedTile && selectedTile.sid === '__heroBanner__'}
             onHeroClick={function() {
-              setSelectedTile({ sid: '__hero__', ti: 0 });
+              setSelectedTile({ sid: '__heroBanner__', ti: 0 });
               setTimeout(function() {
-                var el = document.getElementById('tile-detail-hero');
+                var el = document.getElementById('tile-detail-heroBanner');
                 if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
               }, 50);
             }} />
@@ -2324,141 +2435,52 @@ export default function BriefingView() {
             {/* Wireframe generation button removed from designer dashboard — only available in internal dashboard */}
           </div>
           <div className="briefing-right-panel-body">
-            {/* Store Hero / Header Banner instructions */}
+            {/* Store Hero Banner instructions (independent from sections) */}
             {(function() {
-              var heroTile = null;
-              var heroPageId = null;
-              var heroPageName = null;
-              var heroSecId = null;
-              var heroSecIdx = -1;
-              var heroTileIdx = -1;
-              (store.pages || []).forEach(function(pg) {
-                if (heroTile) return;
-                (pg.sections || []).forEach(function(sec, si) {
-                  if (heroTile) return;
-                  (sec.tiles || []).forEach(function(tile, ti) {
-                    if (!heroTile && tile.imageCategory === 'store_hero') {
-                      heroTile = tile;
-                      heroPageId = pg.id;
-                      heroPageName = pg.name;
-                      heroSecId = sec.id;
-                      heroSecIdx = si;
-                      heroTileIdx = ti;
-                    }
-                  });
-                });
-              });
-              if (!heroTile) return null;
-              var heroColor = { bg: '#fef2f2', border: '#ef4444', label: '#b91c1c' };
-              var heroSameRatio = heroTile.syncDimensions || isSameAspectRatio(heroTile.dimensions, heroTile.mobileDimensions);
-              var heroIsSelected = selectedTile && selectedTile.sid === '__hero__';
-              var heroDeskDims = heroTile.dimensions || { w: 3000, h: 600 };
-              var heroMobDims = heroTile.mobileDimensions || { w: 1680, h: 900 };
+              if (!activePage) return null;
+              var bannerColor = { bg: '#fffbeb', border: '#f59e0b', label: '#92400e' };
+              var bannerIsSelected = selectedTile && selectedTile.sid === '__heroBanner__';
+              var brief = activePage.heroBannerBrief || '';
+              var textOverlay = activePage.heroBannerTextOverlay || '';
               return (
-                <div id="tile-detail-hero" className="briefing-right-section-group">
-                  <div className="briefing-right-section-header" style={{ background: heroColor.bg, borderLeft: '3px solid ' + heroColor.border }}>
-                    <span style={{ fontWeight: 700, color: heroColor.label, fontSize: 11 }}>Store Hero Image</span>
-                    <span style={{ fontSize: 10, color: '#64748b' }}> &middot; Header Banner</span>
+                <div id="tile-detail-heroBanner" className="briefing-right-section-group">
+                  <div className="briefing-right-section-header" style={{ background: bannerColor.bg, borderLeft: '3px solid ' + bannerColor.border }}>
+                    <span style={{ fontWeight: 700, color: bannerColor.label, fontSize: 11 }}>Store Hero Banner</span>
+                    <span style={{ fontSize: 10, color: '#64748b' }}> &middot; Above Menu Bar</span>
                   </div>
-                  <div className={'briefing-tile-detail' + (heroIsSelected ? ' briefing-tile-detail-selected' : '')} style={{ borderLeft: '3px solid ' + heroColor.border }}>
+                  <div className={'briefing-tile-detail' + (bannerIsSelected ? ' briefing-tile-detail-selected' : '')} style={{ borderLeft: '3px solid ' + bannerColor.border }}>
                     <div className="briefing-tile-header">
-                      <span className="briefing-tile-type">Image</span>
-                      <span className="briefing-tile-imgcat" style={{ background: '#ef4444', color: '#fff', borderRadius: 3, padding: '1px 8px', fontSize: 10, fontWeight: 700 }}>
-                        Store Hero
+                      <span className="briefing-tile-type">Banner</span>
+                      <span className="briefing-tile-imgcat" style={{ background: '#f59e0b', color: '#fff', borderRadius: 3, padding: '1px 8px', fontSize: 10, fontWeight: 700 }}>
+                        Hero Banner
                       </span>
                     </div>
-                    {heroTile.brief && (
+                    {brief ? (
                       <div className="briefing-field">
                         <span className="briefing-field-label">Design Brief:</span>
-                        <span className="briefing-field-value"><BriefTextHighlighted text={heroTile.brief} /></span>
+                        <span className="briefing-field-value"><BriefTextHighlighted text={brief} /></span>
                       </div>
-                    )}
-                    {heroTile.textOverlay && (
-                      <div className="briefing-field" style={{ flexDirection: 'column', gap: 2 }}>
-                        <span className="briefing-field-label">Text on Image:</span>
-                        <div style={{ padding: '6px 8px', background: '#fefce8', border: '1px solid #fde68a', borderRadius: 4, lineHeight: 1.5 }}>
-                          {(function() {
-                            var allLines = heroTile.textOverlay.split(/\\n|\n/).filter(function(l) { return l.trim(); });
-                            var isMultiText = allLines.length > 1;
-                            return heroTile.textOverlay.split(/\\n|\n/).map(function(line, li) {
-                              var trimmed = line.trim();
-                              if (!trimmed) return <div key={li} style={{ height: 4 }} />;
-                              var isBullet = /^•\s/.test(trimmed);
-                              var bulletTag = isBullet ? <span style={{ background: '#fef3c7', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#92400e', marginRight: 3 }}>BULLET</span> : null;
-                              var isBold = /^\*\*.*\*\*$/.test(trimmed);
-                              var displayText = isBold ? trimmed.replace(/^\*\*|\*\*$/g, '') : trimmed;
-                              if (isBullet) displayText = displayText.replace(/^•\s*/, '');
-
-                              if (!isMultiText) {
-                                return <div key={li} style={{ fontSize: 12, fontWeight: 600, color: '#1e293b' }}>
-                                  <span style={{ background: '#dbeafe', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#1d4ed8', marginRight: 3 }}>text</span>
-                                  {bulletTag}{displayText}
-                                </div>;
-                              }
-
-                              // MULTIPLE TEXTS — hierarchy by POSITION (not text length)
-                              var nonBulletIdx = 0;
-                              if (!isBullet) {
-                                for (var ci = 0; ci < li; ci++) {
-                                  var cl = (heroTile.textOverlay.split(/\\n|\n/)[ci] || '').trim();
-                                  if (cl && !/^•\s/.test(cl)) nonBulletIdx++;
-                                }
-                              }
-                              if (!isBullet && (isBold || nonBulletIdx === 0)) {
-                                return <div key={li} style={{ fontSize: 12, fontWeight: 700, color: '#1e293b' }}>
-                                  <span style={{ background: '#dbeafe', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#1d4ed8', marginRight: 3 }}>HIERARCHY 1</span>
-                                  {bulletTag}{displayText}
-                                </div>;
-                              }
-                              if (!isBullet && nonBulletIdx === 1) {
-                                return <div key={li} style={{ fontSize: 11, fontWeight: 600, color: '#334155', paddingLeft: 0 }}>
-                                  <span style={{ background: '#e0e7ff', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#4338ca', marginRight: 3 }}>HIERARCHY 2</span>
-                                  {bulletTag}{displayText}
-                                </div>;
-                              }
-                              return <div key={li} style={{ fontSize: 11, color: '#475569', paddingLeft: isBullet ? 12 : 0 }}>
-                                <span style={{ background: '#f1f5f9', borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: '#94a3b8', marginRight: 3 }}>HIERARCHY 3</span>
-                                {bulletTag}{displayText}
-                              </div>;
-                            });
-                          })()}
-                        </div>
-                      </div>
-                    )}
-                    {heroTile.ctaText && (
+                    ) : (
                       <div className="briefing-field">
-                        <span className="briefing-field-label">CTA Button:</span>
-                        <span className="briefing-field-value briefing-field-cta">"{heroTile.ctaText}"</span>
+                        <span style={{ fontSize: 11, color: '#94a3b8', fontStyle: 'italic' }}>No design brief set</span>
                       </div>
                     )}
-                    {heroTile.bgColor && (
+                    {textOverlay && (
                       <div className="briefing-field">
-                        <span className="briefing-field-label">Background Color:</span>
-                        <span className="briefing-field-value">
-                          <span className="briefing-color-swatch" style={{ background: heroTile.bgColor }} />
-                          {heroTile.bgColor}
-                        </span>
+                        <span className="briefing-field-label">Text on Banner:</span>
+                        <span className="briefing-field-value" style={{ fontWeight: 600 }}>{textOverlay}</span>
                       </div>
                     )}
-                    {/* Dimensions row */}
                     <div className="briefing-tile-dims-row">
-                      <span className="briefing-dim">Desktop: {heroDeskDims.w}&times;{heroDeskDims.h}</span>
-                      {!heroSameRatio && <span className="briefing-dim">Mobile: {heroMobDims.w}&times;{heroMobDims.h}</span>}
-                      {heroSameRatio && <span className="briefing-dim" style={{ color: '#10B981', fontWeight: 600 }}>{heroTile.syncDimensions ? '= 1 image (sync)' : '= 1 image (same ratio)'}</span>}
+                      <span className="briefing-dim">Desktop: 3000&times;600</span>
+                      <span className="briefing-dim">Mobile: 1680&times;900</span>
                     </div>
-                    {/* Hero file names */}
-                    {heroPageName != null && (
-                      <div style={{ marginTop: 4, padding: '4px 0', fontSize: 10, lineHeight: 1.8 }}>
-                        {heroSameRatio ? (
-                          <CopyableFilename filename={tileFilename(heroPageName, heroSecIdx, heroTileIdx, 'sync')} />
-                        ) : (
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                            <CopyableFilename filename={tileFilename(heroPageName, heroSecIdx, heroTileIdx, 'desktop')} label="D" />
-                            <CopyableFilename filename={tileFilename(heroPageName, heroSecIdx, heroTileIdx, 'mobile')} label="M" />
-                          </div>
-                        )}
+                    <div style={{ marginTop: 4, padding: '4px 0', fontSize: 10, lineHeight: 1.8 }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                        <CopyableFilename filename={sanitizeName(activePage.name) + '_HeroBanner_desktop.jpg'} label="D" />
+                        <CopyableFilename filename={sanitizeName(activePage.name) + '_HeroBanner_mobile.jpg'} label="M" />
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               );

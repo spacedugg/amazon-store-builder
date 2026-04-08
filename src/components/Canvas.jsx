@@ -1,29 +1,17 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import SectionView from './SectionView';
 import { t } from '../i18n';
 
-export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onChangeLayout, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate, onGenerateWireframes, onDeleteWireframes, onStopWireframes, wfGenerating, wfProgress }) {
+export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onChangeLayout, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate, onGenerateWireframes, onDeleteWireframes, onStopWireframes, wfGenerating, wfProgress, onFolderImageUpload, onRemoveAllImages }) {
   var [hoveredNav, setHoveredNav] = useState(null);
   var [showHeroPicker, setShowHeroPicker] = useState(false);
+  var folderInputRef = useRef(null);
 
-  // Find hero tile in the current page's sections so we can select it
-  var heroSel = null;
-  if (page) {
-    page.sections.forEach(function(sec) {
-      if (heroSel) return;
-      sec.tiles.forEach(function(tile, ti) {
-        if (!heroSel && tile.imageCategory === 'store_hero') {
-          heroSel = { sid: sec.id, ti: ti };
-        }
-      });
-    });
-  }
-  var isHeroSelected = heroSel && sel && sel.sid === heroSel.sid && sel.ti === heroSel.ti;
+  // Hero banner is a separate element above the menu, NOT a section tile
+  var isHeroBannerSelected = sel && sel.sid === '__heroBanner__';
 
-  function handleHeroClick() {
-    if (heroSel) {
-      onSelect(heroSel);
-    }
+  function handleHeroBannerClick() {
+    onSelect({ sid: '__heroBanner__' });
   }
   if (!page) {
     return (
@@ -55,10 +43,15 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
   return (
     <div className="canvas">
       <div className={'canvas-inner' + (isMobile ? ' canvas-mobile' : '')}>
-        {/* Header banner (above nav) */}
-        <div className="canvas-header-banner" onClick={handleHeroClick} style={{ cursor: heroSel ? 'pointer' : undefined, outline: isHeroSelected ? '2px solid #6366f1' : undefined, outlineOffset: -2, borderRadius: 2, position: 'relative' }}>
-          {isHeroSelected && (
-            <div style={{ position: 'absolute', top: 4, left: 4, zIndex: 2, background: '#6366f1', color: '#fff', fontSize: 9, padding: '2px 6px', borderRadius: 3, fontWeight: 600 }}>Store Hero Image</div>
+        {/* Header banner (above nav) — independent from sections */}
+        <div className="canvas-header-banner" onClick={handleHeroBannerClick} style={{ cursor: 'pointer', outline: isHeroBannerSelected ? '2px solid #f59e0b' : undefined, outlineOffset: -2, borderRadius: 2, position: 'relative' }}>
+          {isHeroBannerSelected && (
+            <div style={{ position: 'absolute', top: 4, left: 4, zIndex: 2, background: '#f59e0b', color: '#fff', fontSize: 9, padding: '2px 6px', borderRadius: 3, fontWeight: 600 }}>Store Hero Banner</div>
+          )}
+          {page && page.heroBannerBrief && !bannerSrc && (
+            <div style={{ position: 'absolute', bottom: 4, left: 4, right: 4, zIndex: 2, fontSize: 9, color: '#64748b', padding: '2px 6px', background: 'rgba(255,255,255,0.8)', borderRadius: 3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              {page.heroBannerBrief}
+            </div>
           )}
           {bannerSrc ? (
             <div style={{ cursor: 'pointer' }}>
@@ -193,6 +186,27 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
             )}
             <span style={{ fontSize: 10, color: '#94a3b8' }}>
               KI-Wireframes für alle Bild-Kacheln dieser Seite
+            </span>
+          </div>
+        )}
+
+        {/* Image Upload Bar */}
+        {page && page.sections && page.sections.length > 0 && onFolderImageUpload && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 12px', background: '#fefce8', borderBottom: '1px solid #fde68a', fontSize: 12 }}>
+            <input type="file" ref={folderInputRef} style={{ display: 'none' }} webkitdirectory="" directory="" multiple
+              onChange={function(e) { onFolderImageUpload(e.target.files); e.target.value = ''; }} />
+            <button className="btn" onClick={function() { folderInputRef.current && folderInputRef.current.click(); }}
+              style={{ padding: '5px 14px', fontSize: 11, fontWeight: 600, background: '#f59e0b', color: '#fff', border: 'none', borderRadius: 4, cursor: 'pointer' }}>
+              Ordner laden
+            </button>
+            {onRemoveAllImages && (
+              <button className="btn" onClick={onRemoveAllImages}
+                style={{ padding: '5px 14px', fontSize: 11, fontWeight: 600, background: '#fee2e2', color: '#991b1b', border: '1px solid #fecaca', borderRadius: 4, cursor: 'pointer' }}>
+                Alle Bilder entfernen
+              </button>
+            )}
+            <span style={{ fontSize: 10, color: '#92400e' }}>
+              Bilder per Ordner hochladen (automatisches Matching)
             </span>
           </div>
         )}
