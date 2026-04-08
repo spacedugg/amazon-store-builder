@@ -1,11 +1,11 @@
 var GEMINI_KEY = process.env.GEMINI_API_KEY;
 
 // Imagen 4 Fast via Gemini API (primary) — set in Google AI Suite
-var IMAGEN_PRIMARY_MODEL = 'imagen-4.0-fast-generate-001';
+var IMAGEN_PRIMARY_MODEL = process.env.IMAGEN_MODEL || 'imagen-4.0-fast-generate-001';
 var IMAGEN_PRIMARY_URL = 'https://generativelanguage.googleapis.com/v1beta/models/' + IMAGEN_PRIMARY_MODEL + ':predict';
 
 // Imagen 3 as fallback
-var IMAGEN_FALLBACK_MODEL = 'imagen-3.0-generate-002';
+var IMAGEN_FALLBACK_MODEL = process.env.IMAGEN_FALLBACK_MODEL || 'imagen-3.0-generate-002';
 var IMAGEN_FALLBACK_URL = 'https://generativelanguage.googleapis.com/v1beta/models/' + IMAGEN_FALLBACK_MODEL + ':predict';
 
 module.exports = async function handler(req, res) {
