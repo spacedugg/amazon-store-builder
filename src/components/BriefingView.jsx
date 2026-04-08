@@ -521,7 +521,7 @@ function CopyableFilename({ filename, label }) {
 }
 
 // ─── TILE DETAIL CARD (for right panel) ───
-function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile, duplicateInfo, pageId, pageName, sectionIndex, products }) {
+function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile, duplicateInfo, pageId, pageName, sectionIndex, products, store }) {
   var dims = LAYOUT_TILE_DIMS[layoutId];
   var desktopType = dims && dims[tileIndex] ? dims[tileIndex] : null;
   var tileLabel = TILE_TYPE_LABELS[tile.type] || tile.type;
@@ -2493,6 +2493,7 @@ export default function BriefingView() {
                         pageName={item.pageName}
                         sectionIndex={item.sectionIndex}
                         products={store ? store.products : []}
+                        store={store}
                       />
                     );
                   })}
