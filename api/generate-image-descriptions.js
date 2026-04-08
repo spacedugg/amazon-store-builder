@@ -1,5 +1,5 @@
 var GEMINI_KEY = process.env.GEMINI_API_KEY;
-var GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash-001';
+var GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash-preview-05-20';
 var GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/' + GEMINI_MODEL + ':generateContent';
 
 module.exports = async function handler(req, res) {
