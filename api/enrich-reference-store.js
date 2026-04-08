@@ -7,7 +7,7 @@
 // Body/Query: { storeUrl, brandName, maxImagesPerPage?: 20 }
 
 var GEMINI_KEY = process.env.GEMINI_API_KEY;
-var GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+var GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash-001';
 var GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/' + GEMINI_MODEL + ':generateContent';
 var UNLOCKER_TOKEN = process.env.BRIGHTDATA_UNLOCKER_TOKEN;
 var UNLOCKER_ZONE = process.env.BRIGHTDATA_UNLOCKER_ZONE || 'amz_brand_store_studio';

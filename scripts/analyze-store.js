@@ -6,7 +6,7 @@ require('dotenv').config && require('dotenv').config();
 var UNLOCKER_TOKEN = process.env.BRIGHTDATA_UNLOCKER_TOKEN || '';
 var UNLOCKER_ZONE = process.env.BRIGHTDATA_UNLOCKER_ZONE || 'amz_brand_store_studio';
 var GEMINI_KEY = process.env.GEMINI_API_KEY || '';
-var GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+var GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-001:generateContent';
 
 if (!UNLOCKER_TOKEN) { console.error('Missing BRIGHTDATA_UNLOCKER_TOKEN in .env'); process.exit(1); }
 if (!GEMINI_KEY) { console.error('Missing GEMINI_API_KEY in .env'); process.exit(1); }
