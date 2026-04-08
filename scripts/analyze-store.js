@@ -1,10 +1,16 @@
 // Crawl a complete Amazon Brand Store and analyze all images with Gemini Vision
 // Usage: node scripts/analyze-store.js <store-url>
+// Requires .env file with BRIGHTDATA_UNLOCKER_TOKEN and GEMINI_API_KEY
 
-var UNLOCKER_TOKEN = '9589c001-7f88-4b6a-95fc-c613b2811c52';
-var UNLOCKER_ZONE = 'amz_brand_store_studio';
-var GEMINI_KEY = 'AIzaSyDQHpBQ8uPmgOk04Hxtd7O7yXhEbzBQ3dg';
-var GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+require('dotenv').config && require('dotenv').config();
+var UNLOCKER_TOKEN = process.env.BRIGHTDATA_UNLOCKER_TOKEN || '';
+var UNLOCKER_ZONE = process.env.BRIGHTDATA_UNLOCKER_ZONE || 'amz_brand_store_studio';
+var GEMINI_KEY = process.env.GEMINI_API_KEY || '';
+var GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash-001';
+var GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/' + GEMINI_MODEL + ':generateContent';
+
+if (!UNLOCKER_TOKEN) { console.error('Missing BRIGHTDATA_UNLOCKER_TOKEN in .env'); process.exit(1); }
+if (!GEMINI_KEY) { console.error('Missing GEMINI_API_KEY in .env'); process.exit(1); }
 
 var storeUrl = process.argv[2] || 'https://www.amazon.de/stores/page/3955CCD4-902C-4679-9265-DEC4FCBAA8C8';
 
