@@ -1607,8 +1607,13 @@ export default function BriefingView() {
   var token = rawToken.split('/')[0].split('?')[0].trim(); // Strip trailing slashes, query params
 
   // ─── INITIAL LOAD ───
-  useEffect(function() {
+  var loadAttemptRef = useRef(0);
+
+  function loadShareData() {
     if (!token) { setError('Kein Share-Token in der URL gefunden. Bitte prüfe den Link.'); setLoading(false); return; }
+    setLoading(true);
+    setError(null);
+    loadAttemptRef.current += 1;
     loadStoreByShareToken(token).then(function(result) {
       if (!result || !result.data) { setError('Store nicht gefunden oder Link abgelaufen. Bitte fordere einen neuen Link an.'); setLoading(false); return; }
       setStore(result.data);
@@ -1616,7 +1621,11 @@ export default function BriefingView() {
       setCurPage(result.data.pages && result.data.pages[0] ? result.data.pages[0].id : '');
       prevStoreRef.current = JSON.stringify(result.data);
       setLoading(false);
-    }).catch(function(e) { setError('Laden fehlgeschlagen: ' + e.message); setLoading(false); });
+    }).catch(function(e) { setError(e.message); setLoading(false); });
+  }
+
+  useEffect(function() {
+    loadShareData();
   }, [token]);
 
 
@@ -1748,6 +1757,14 @@ export default function BriefingView() {
     <div className="briefing-error">
       <div className="briefing-error-icon">!</div>
       <div className="briefing-error-msg">{error}</div>
+      <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
+        <button onClick={loadShareData} style={{ padding: '8px 24px', borderRadius: 6, border: '1px solid #d1d5db', background: '#fff', cursor: 'pointer', fontSize: 14, fontWeight: 500 }}>
+          Erneut versuchen
+        </button>
+        <div style={{ fontSize: 12, color: '#9ca3af', marginTop: 4 }}>
+          Token: {token || '(leer)'} | Versuch: {loadAttemptRef.current}
+        </div>
+      </div>
     </div>
   );
   if (!store) return (

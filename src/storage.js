@@ -107,13 +107,30 @@ export async function deleteSavedStore(id) {
 }
 
 export async function loadStoreByShareToken(shareToken) {
-  var resp = await fetch('/api/stores?shareToken=' + encodeURIComponent(shareToken));
+  var resp;
+  try {
+    resp = await fetch('/api/stores?shareToken=' + encodeURIComponent(shareToken));
+  } catch (networkErr) {
+    throw new Error('Netzwerkfehler: API nicht erreichbar. Bitte prüfe deine Internetverbindung.');
+  }
   if (!resp.ok) {
     var ct = resp.headers.get('content-type') || '';
     if (ct.indexOf('text/html') >= 0) {
       throw new Error('API-Endpoint nicht erreichbar (HTML statt JSON). Bitte Deployment prüfen.');
     }
-    throw new Error('HTTP ' + resp.status);
+    // Try to extract server error message
+    var serverMsg = '';
+    try {
+      var errJson = await resp.json();
+      serverMsg = errJson.error || '';
+    } catch (e) { /* ignore */ }
+    if (resp.status === 404) {
+      throw new Error('Store nicht gefunden (404). ' + (serverMsg || 'Der Share-Token existiert nicht in der Datenbank.'));
+    }
+    if (resp.status === 500) {
+      throw new Error('Serverfehler (500): ' + (serverMsg || 'Datenbank möglicherweise nicht konfiguriert.'));
+    }
+    throw new Error('HTTP ' + resp.status + (serverMsg ? ': ' + serverMsg : ''));
   }
   var ct = resp.headers.get('content-type') || '';
   if (ct.indexOf('text/html') >= 0) {
