@@ -1,38 +1,31 @@
 #!/usr/bin/env node
 // ─── PHASE 0: Complete Reference Store Analysis ───
 //
-// This script performs the full Phase 0 analysis of all 23 reference stores:
-//   Step 0.1: Crawl ALL pages (not just homepage) via the enrich API
-//   Step 0.2: Aggregate module/layout/tile statistics
-//   Step 0.3: Analyze module relationships and sequences
-//
-// PREREQUISITES:
-//   1. Dev server running: npm run dev  (or: npx vercel dev)
-//   2. Environment variables set:
-//      - GEMINI_API_KEY (for Gemini Vision image analysis)
-//      - BRIGHTDATA_UNLOCKER_TOKEN (for crawling Amazon store pages)
-//   3. Stable internet connection (crawls ~200+ pages)
+// STANDALONE script — needs NO running server.
+// Calls the deployed Vercel app APIs directly OR a local dev server.
 //
 // USAGE:
 //   node scripts/analyze-reference-stores.js
 //
+// This runs in 2 modes:
+//   MODE 1 (default): Only aggregates existing data (no API calls needed)
+//   MODE 2 (with CRAWL=1): Crawls all stores via deployed API + Gemini
+//
 // OPTIONS (env vars):
-//   BASE_URL=http://localhost:3000   (default)
-//   SKIP_CRAWL=1                     (skip crawling, only re-analyze existing data)
-//   ONLY_STORE=snocks                (process only one store, by filename without .json)
-//   MAX_STORES=5                     (process first N stores only)
+//   CRAWL=1                          Enable crawling (needs deployed API)
+//   API_URL=https://your-app.vercel.app   (default: your Vercel deployment)
+//   ONLY_STORE=snocks                Process only one store
+//   MAX_STORES=5                     Process first N stores only
 //
 // OUTPUT:
-//   - Updates each data/reference-stores/{store}.json with full page data
-//   - Creates data/reference-stores/_analysis.json with aggregated patterns
-//   - Logs progress to console
+//   data/reference-stores/_analysis.json — aggregated patterns
 
 var fs = require('fs');
 var path = require('path');
 
-var BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
+var API_URL = process.env.API_URL || 'https://amazon-store-builder.vercel.app';
 var DATA_DIR = path.join(__dirname, '..', 'data', 'reference-stores');
-var SKIP_CRAWL = process.env.SKIP_CRAWL === '1';
+var DO_CRAWL = process.env.CRAWL === '1';
 var ONLY_STORE = process.env.ONLY_STORE || '';
 var MAX_STORES = parseInt(process.env.MAX_STORES, 10) || 999;
 
@@ -71,7 +64,7 @@ async function enrichStore(store) {
   console.log('  Crawling ' + store.brand + ' (' + store.url.slice(0, 60) + '...)');
 
   try {
-    var resp = await fetch(BASE_URL + '/api/enrich-reference-store', {
+    var resp = await fetch(API_URL + '/api/enrich-reference-store', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -320,10 +313,10 @@ async function main() {
   storesToProcess = storesToProcess.slice(0, MAX_STORES);
 
   // ─── STEP 0.1: Crawl + Enrich ───
-  if (!SKIP_CRAWL) {
-    console.log('═══ STEP 0.1: Crawling all store pages via Gemini Vision ═══\n');
-    console.log('Make sure your dev server is running at: ' + BASE_URL);
-    console.log('Required env vars: GEMINI_API_KEY, BRIGHTDATA_UNLOCKER_TOKEN\n');
+  if (DO_CRAWL) {
+    console.log('═══ STEP 0.1: Crawling all store pages via API ═══\n');
+    console.log('API endpoint: ' + API_URL + '/api/enrich-reference-store');
+    console.log('(API keys GEMINI_API_KEY + BRIGHTDATA_UNLOCKER_TOKEN must be set on the server)\n');
 
     var results = [];
     for (var i = 0; i < storesToProcess.length; i++) {
@@ -342,7 +335,7 @@ async function main() {
     var logPath = path.join(DATA_DIR, '_crawl-log.json');
     fs.writeFileSync(logPath, JSON.stringify({
       runAt: new Date().toISOString(),
-      baseUrl: BASE_URL,
+      apiUrl: API_URL,
       results: results,
     }, null, 2));
     console.log('\nCrawl log saved to: ' + logPath);
@@ -351,7 +344,8 @@ async function main() {
     var errCount = results.filter(function(r) { return r.status === 'error'; }).length;
     console.log('\nCrawl complete: ' + okCount + ' OK, ' + errCount + ' errors');
   } else {
-    console.log('═══ SKIPPING CRAWL (SKIP_CRAWL=1) ═══\n');
+    console.log('═══ CRAWLING DISABLED (set CRAWL=1 to enable) ═══');
+    console.log('Running aggregation on existing data only.\n');
   }
 
   // ─── STEP 0.2 + 0.3: Aggregate Analysis ───
