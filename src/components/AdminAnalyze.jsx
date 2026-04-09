@@ -27,41 +27,84 @@ var STORES = [
 ];
 
 export default function AdminAnalyze() {
-  var [results, setResults] = useState({});
-  var [running, setRunning] = useState(null);
+  var [storeResults, setStoreResults] = useState({});  // file -> { status, pages, pageResults, message }
+  var [activeStore, setActiveStore] = useState(null);   // currently processing store file
+  var [activePage, setActivePage] = useState('');        // currently processing page name
   var [runAllActive, setRunAllActive] = useState(false);
   var cancelRef = useRef(false);
 
   async function analyzeStore(store) {
-    setRunning(store.file);
-    setResults(function(prev) {
+    setActiveStore(store.file);
+    setActivePage('Navigation laden...');
+    setStoreResults(function(prev) {
       var next = Object.assign({}, prev);
-      next[store.file] = { status: 'running', message: 'Crawling + analyzing...' };
+      next[store.file] = { status: 'running', message: 'Navigation laden...', pages: [], pageResults: [] };
       return next;
     });
 
     try {
-      var resp = await fetch('/api/enrich-reference-store', {
+      // STEP 1: Crawl navigation (fast, ~10s)
+      var navResp = await fetch('/api/crawl-store-nav', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          storeUrl: store.url,
-          brandName: store.brand,
-          maxImagesPerPage: 25,
-        }),
+        body: JSON.stringify({ storeUrl: store.url, brandName: store.brand }),
+      });
+      if (!navResp.ok) {
+        var navErr = await navResp.text();
+        throw new Error('Nav crawl failed: ' + navErr.slice(0, 150));
+      }
+      var navData = await navResp.json();
+      var pages = navData.pages || [];
+
+      setStoreResults(function(prev) {
+        var next = Object.assign({}, prev);
+        next[store.file] = { status: 'running', message: pages.length + ' Seiten gefunden. Analysiere...', pages: pages, pageResults: [] };
+        return next;
       });
 
-      if (!resp.ok) {
-        var errText = await resp.text();
-        throw new Error('HTTP ' + resp.status + ': ' + errText.slice(0, 200));
+      // STEP 2: Analyze each page individually (~20-40s each)
+      var pageResults = [];
+      for (var i = 0; i < pages.length; i++) {
+        if (cancelRef.current) break;
+
+        var pg = pages[i];
+        setActivePage(pg.name + ' (' + (i + 1) + '/' + pages.length + ')');
+        setStoreResults(function(prev) {
+          var next = Object.assign({}, prev);
+          next[store.file] = Object.assign({}, next[store.file], {
+            message: 'Seite ' + (i + 1) + '/' + pages.length + ': ' + pg.name,
+          });
+          return next;
+        });
+
+        try {
+          var pageResp = await fetch('/api/analyze-store-page', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ pageUrl: pg.url, brandName: store.brand, pageName: pg.name, maxImages: 20 }),
+          });
+          if (!pageResp.ok) {
+            var pgErr = await pageResp.text();
+            pageResults.push({ pageName: pg.name, error: pgErr.slice(0, 100) });
+          } else {
+            var pageData = await pageResp.json();
+            pageResults.push(pageData);
+          }
+        } catch (pgErr) {
+          pageResults.push({ pageName: pg.name, error: pgErr.message });
+        }
+
+        // Brief pause between pages
+        if (i < pages.length - 1) {
+          await new Promise(function(r) { setTimeout(r, 2000); });
+        }
       }
 
-      var data = await resp.json();
-      var pages = data.pagesAnalyzed || 0;
-      var images = (data.storeTotals || {}).totalImages || 0;
-      var sections = (data.storeTotals || {}).totalSections || 0;
+      // Save to DB
+      var totalImages = pageResults.reduce(function(sum, p) { return sum + ((p.structure || {}).imageCount || 0); }, 0);
+      var totalSections = pageResults.reduce(function(sum, p) { return sum + ((p.structure || {}).sectionCount || 0); }, 0);
+      var successPages = pageResults.filter(function(p) { return !p.error; }).length;
 
-      // Save to reference-stores API
       try {
         await fetch('/api/reference-stores', {
           method: 'POST',
@@ -72,38 +115,35 @@ export default function AdminAnalyze() {
             storeUrl: store.url,
             marketplace: 'de',
             category: store.category,
-            pageCount: pages,
-            imageCount: images,
+            pageCount: pages.length,
+            imageCount: totalImages,
             qualityScore: store.quality,
-            parsedData: JSON.stringify(data),
-            imageAnalyses: JSON.stringify((data.pages || []).map(function(p) { return p.pageAnalysis; }).filter(Boolean)),
+            parsedData: JSON.stringify({ pages: pages, pageResults: pageResults }),
+            imageAnalyses: JSON.stringify(pageResults.map(function(p) { return p.pageAnalysis; }).filter(Boolean)),
           }),
         });
-      } catch (saveErr) {
-        // DB save is optional, continue
-      }
+      } catch (e) { /* optional */ }
 
-      setResults(function(prev) {
+      setStoreResults(function(prev) {
         var next = Object.assign({}, prev);
         next[store.file] = {
           status: 'done',
+          message: successPages + '/' + pages.length + ' Seiten, ' + totalImages + ' Bilder, ' + totalSections + ' Sektionen',
           pages: pages,
-          images: images,
-          sections: sections,
-          subpages: data.subpagesFound || 0,
-          message: pages + ' pages, ' + images + ' images, ' + sections + ' sections',
+          pageResults: pageResults,
         };
         return next;
       });
     } catch (err) {
-      setResults(function(prev) {
+      setStoreResults(function(prev) {
         var next = Object.assign({}, prev);
-        next[store.file] = { status: 'error', message: err.message };
+        next[store.file] = { status: 'error', message: err.message, pages: [], pageResults: [] };
         return next;
       });
     }
 
-    setRunning(null);
+    setActiveStore(null);
+    setActivePage('');
   }
 
   async function runAll() {
@@ -111,48 +151,48 @@ export default function AdminAnalyze() {
     setRunAllActive(true);
     for (var i = 0; i < STORES.length; i++) {
       if (cancelRef.current) break;
-      if (results[STORES[i].file] && results[STORES[i].file].status === 'done') continue;
+      var r = storeResults[STORES[i].file];
+      if (r && r.status === 'done') continue; // skip already done
       await analyzeStore(STORES[i]);
-      // Wait between stores
       if (i < STORES.length - 1 && !cancelRef.current) {
-        await new Promise(function(r) { setTimeout(r, 3000); });
+        await new Promise(function(resolve) { setTimeout(resolve, 3000); });
       }
     }
     setRunAllActive(false);
   }
 
-  function stopAll() {
-    cancelRef.current = true;
-    setRunAllActive(false);
-  }
-
-  var doneCount = STORES.filter(function(s) { return results[s.file] && results[s.file].status === 'done'; }).length;
-  var errorCount = STORES.filter(function(s) { return results[s.file] && results[s.file].status === 'error'; }).length;
+  var doneCount = STORES.filter(function(s) { return storeResults[s.file] && storeResults[s.file].status === 'done'; }).length;
+  var errorCount = STORES.filter(function(s) { return storeResults[s.file] && storeResults[s.file].status === 'error'; }).length;
 
   return (
     <div style={{ fontFamily: 'Inter, system-ui, sans-serif', maxWidth: 900, margin: '0 auto', padding: '24px 16px' }}>
       <div style={{ marginBottom: 24 }}>
         <h1 style={{ fontSize: 22, fontWeight: 800, margin: 0 }}>Reference Store Analyzer</h1>
         <p style={{ color: '#64748b', fontSize: 13, margin: '8px 0 0' }}>
-          Phase 0: Crawl all 23 reference Brand Stores, analyze every page with Gemini Vision.
-          Each store takes 1-5 minutes depending on page count.
+          Phase 0: Crawlt alle Unterseiten jedes Stores einzeln und analysiert jede Seite separat mit Gemini Vision.
+          Pro Seite ca. 20-40 Sekunden.
         </p>
       </div>
 
       {/* Controls */}
       <div style={{ display: 'flex', gap: 8, marginBottom: 16, alignItems: 'center' }}>
         {runAllActive ? (
-          <button onClick={stopAll} style={{ padding: '8px 20px', background: '#ef4444', color: '#fff', border: 'none', borderRadius: 6, fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>
+          <button onClick={function() { cancelRef.current = true; setRunAllActive(false); }}
+            style={{ padding: '8px 20px', background: '#ef4444', color: '#fff', border: 'none', borderRadius: 6, fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>
             Stop
           </button>
         ) : (
-          <button onClick={runAll} disabled={!!running} style={{ padding: '8px 20px', background: '#6366f1', color: '#fff', border: 'none', borderRadius: 6, fontWeight: 700, fontSize: 13, cursor: running ? 'wait' : 'pointer', opacity: running ? 0.5 : 1 }}>
+          <button onClick={runAll} disabled={!!activeStore}
+            style={{ padding: '8px 20px', background: '#6366f1', color: '#fff', border: 'none', borderRadius: 6, fontWeight: 700, fontSize: 13, cursor: activeStore ? 'wait' : 'pointer', opacity: activeStore ? 0.5 : 1 }}>
             Alle analysieren
           </button>
         )}
         <span style={{ fontSize: 12, color: '#64748b' }}>
           {doneCount}/{STORES.length} fertig{errorCount > 0 ? ', ' + errorCount + ' Fehler' : ''}
         </span>
+        {activePage && (
+          <span style={{ fontSize: 11, color: '#3b82f6', fontWeight: 600 }}>{activePage}</span>
+        )}
         {doneCount > 0 && (
           <div style={{ marginLeft: 'auto', width: 200, height: 6, background: '#e2e8f0', borderRadius: 3, overflow: 'hidden' }}>
             <div style={{ width: Math.round(100 * doneCount / STORES.length) + '%', height: '100%', background: '#22c55e', borderRadius: 3, transition: 'width .3s' }} />
@@ -163,59 +203,56 @@ export default function AdminAnalyze() {
       {/* Store list */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
         {STORES.map(function(store) {
-          var r = results[store.file];
-          var isRunning = running === store.file;
+          var r = storeResults[store.file];
+          var isRunning = activeStore === store.file;
           var isDone = r && r.status === 'done';
           var isError = r && r.status === 'error';
 
           return (
             <div key={store.file} style={{
-              display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px',
+              padding: '10px 14px',
               background: isDone ? '#f0fdf4' : isError ? '#fef2f2' : isRunning ? '#eff6ff' : '#fff',
               border: '1px solid ' + (isDone ? '#bbf7d0' : isError ? '#fecaca' : isRunning ? '#bfdbfe' : '#e2e8f0'),
               borderRadius: 8,
             }}>
-              {/* Status indicator */}
-              <div style={{
-                width: 8, height: 8, borderRadius: '50%', flexShrink: 0,
-                background: isDone ? '#22c55e' : isError ? '#ef4444' : isRunning ? '#3b82f6' : '#d1d5db',
-                animation: isRunning ? 'pulse 1.5s ease-in-out infinite' : 'none',
-              }} />
-
-              {/* Store info */}
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <span style={{ fontWeight: 700, fontSize: 13 }}>{store.brand}</span>
-                  <span style={{ fontSize: 10, color: '#64748b', background: '#f1f5f9', padding: '1px 6px', borderRadius: 3 }}>{store.category}</span>
-                  <span style={{ fontSize: 10, color: '#f59e0b' }}>{'★'.repeat(store.quality)}</span>
-                </div>
-                {r && r.message && (
-                  <div style={{ fontSize: 11, color: isDone ? '#166534' : isError ? '#991b1b' : '#1e40af', marginTop: 2 }}>
-                    {r.message.slice(0, 150)}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <div style={{
+                  width: 8, height: 8, borderRadius: '50%', flexShrink: 0,
+                  background: isDone ? '#22c55e' : isError ? '#ef4444' : isRunning ? '#3b82f6' : '#d1d5db',
+                  animation: isRunning ? 'pulse 1.5s ease-in-out infinite' : 'none',
+                }} />
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span style={{ fontWeight: 700, fontSize: 13 }}>{store.brand}</span>
+                    <span style={{ fontSize: 10, color: '#64748b', background: '#f1f5f9', padding: '1px 6px', borderRadius: 3 }}>{store.category}</span>
+                    <span style={{ fontSize: 10, color: '#f59e0b' }}>{'★'.repeat(store.quality)}</span>
+                    {r && r.pages && r.pages.length > 0 && (
+                      <span style={{ fontSize: 10, color: '#64748b' }}>{r.pages.length} Seiten</span>
+                    )}
                   </div>
-                )}
+                  {r && r.message && (
+                    <div style={{ fontSize: 11, color: isDone ? '#166534' : isError ? '#991b1b' : '#1e40af', marginTop: 2 }}>
+                      {r.message.slice(0, 200)}
+                    </div>
+                  )}
+                </div>
+                <button onClick={function() { analyzeStore(store); }} disabled={!!activeStore || runAllActive}
+                  style={{
+                    padding: '5px 14px', fontSize: 11, fontWeight: 600, borderRadius: 5, border: 'none',
+                    cursor: (activeStore || runAllActive) ? 'not-allowed' : 'pointer',
+                    background: isDone ? '#dcfce7' : isError ? '#fee2e2' : '#f1f5f9',
+                    color: isDone ? '#166534' : isError ? '#991b1b' : '#475569',
+                    opacity: (activeStore || runAllActive) ? 0.5 : 1,
+                  }}>
+                  {isDone ? 'Nochmal' : isError ? 'Retry' : isRunning ? '...' : 'Analysieren'}
+                </button>
               </div>
-
-              {/* Action button */}
-              <button
-                onClick={function() { analyzeStore(store); }}
-                disabled={!!running || runAllActive}
-                style={{
-                  padding: '5px 14px', fontSize: 11, fontWeight: 600, borderRadius: 5, border: 'none', cursor: (running || runAllActive) ? 'not-allowed' : 'pointer',
-                  background: isDone ? '#dcfce7' : isError ? '#fee2e2' : '#f1f5f9',
-                  color: isDone ? '#166534' : isError ? '#991b1b' : '#475569',
-                  opacity: (running || runAllActive) ? 0.5 : 1,
-                }}>
-                {isDone ? 'Nochmal' : isError ? 'Retry' : isRunning ? '...' : 'Analysieren'}
-              </button>
             </div>
           );
         })}
       </div>
 
-      <style>{'\
-        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }\
-      '}</style>
+      <style>{'@keyframes pulse { 0%,100% { opacity:1 } 50% { opacity:0.3 } }'}</style>
     </div>
   );
 }
