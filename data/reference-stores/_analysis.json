@@ -1,0 +1,1021 @@
+{
+  "analyzedAt": "2026-04-09T10:53:11.394Z",
+  "summary": {
+    "totalStores": 23,
+    "totalPages": 25,
+    "totalModules": 130,
+    "pageTypes": {
+      "homepage": 23,
+      "category": 2,
+      "subpage": 0,
+      "other": 0
+    }
+  },
+  "layoutDistribution": [
+    {
+      "layout": "1",
+      "count": 63,
+      "percent": 48
+    },
+    {
+      "layout": "std-2equal",
+      "count": 25,
+      "percent": 19
+    },
+    {
+      "layout": "product_grid",
+      "count": 16,
+      "percent": 12
+    },
+    {
+      "layout": "lg-4grid",
+      "count": 7,
+      "percent": 5
+    },
+    {
+      "layout": "4grid-lg",
+      "count": 5,
+      "percent": 4
+    },
+    {
+      "layout": "2x2wide",
+      "count": 5,
+      "percent": 4
+    },
+    {
+      "layout": "lg-w2s",
+      "count": 3,
+      "percent": 2
+    },
+    {
+      "layout": "2stack-lg",
+      "count": 3,
+      "percent": 2
+    },
+    {
+      "layout": "4x2grid",
+      "count": 2,
+      "percent": 2
+    },
+    {
+      "layout": "best_sellers",
+      "count": 1,
+      "percent": 1
+    }
+  ],
+  "imageCategoryDistribution": [
+    {
+      "category": "product",
+      "count": 79
+    },
+    {
+      "category": "lifestyle",
+      "count": 78
+    },
+    {
+      "category": "creative",
+      "count": 41
+    },
+    {
+      "category": "text_image",
+      "count": 20
+    },
+    {
+      "category": "benefit",
+      "count": 2
+    },
+    {
+      "category": "unknown",
+      "count": 1
+    }
+  ],
+  "tileSizeDistribution": [
+    {
+      "size": "Full Width",
+      "count": 63
+    },
+    {
+      "size": "Small Square",
+      "count": 63
+    },
+    {
+      "size": "Large Square",
+      "count": 63
+    },
+    {
+      "size": "Wide",
+      "count": 29
+    },
+    {
+      "size": "unknown",
+      "count": 3
+    }
+  ],
+  "sectionTypeDistribution": [
+    {
+      "type": "editorial_row",
+      "count": 108
+    },
+    {
+      "type": "product_grid",
+      "count": 16
+    },
+    {
+      "type": "video",
+      "count": 5
+    },
+    {
+      "type": "best_sellers",
+      "count": 1
+    }
+  ],
+  "modulePairs": [
+    {
+      "pair": "1 → 1",
+      "count": 22
+    },
+    {
+      "pair": "std-2equal → 1",
+      "count": 10
+    },
+    {
+      "pair": "1 → std-2equal",
+      "count": 10
+    },
+    {
+      "pair": "std-2equal → std-2equal",
+      "count": 8
+    },
+    {
+      "pair": "1 → product_grid",
+      "count": 6
+    },
+    {
+      "pair": "1 → lg-4grid",
+      "count": 5
+    },
+    {
+      "pair": "1 → 2x2wide",
+      "count": 5
+    },
+    {
+      "pair": "product_grid → 1",
+      "count": 5
+    },
+    {
+      "pair": "1 → 4grid-lg",
+      "count": 4
+    },
+    {
+      "pair": "2x2wide → 1",
+      "count": 4
+    },
+    {
+      "pair": "product_grid → product_grid",
+      "count": 3
+    },
+    {
+      "pair": "lg-4grid → 1",
+      "count": 3
+    },
+    {
+      "pair": "std-2equal → product_grid",
+      "count": 3
+    },
+    {
+      "pair": "lg-w2s → 2stack-lg",
+      "count": 3
+    },
+    {
+      "pair": "4grid-lg → 1",
+      "count": 1
+    },
+    {
+      "pair": "lg-4grid → lg-4grid",
+      "count": 1
+    },
+    {
+      "pair": "best_sellers → std-2equal",
+      "count": 1
+    },
+    {
+      "pair": "4grid-lg → std-2equal",
+      "count": 1
+    },
+    {
+      "pair": "product_grid → std-2equal",
+      "count": 1
+    },
+    {
+      "pair": "2x2wide → std-2equal",
+      "count": 1
+    },
+    {
+      "pair": "4grid-lg → product_grid",
+      "count": 1
+    },
+    {
+      "pair": "1 → 4x2grid",
+      "count": 1
+    },
+    {
+      "pair": "product_grid → 4x2grid",
+      "count": 1
+    },
+    {
+      "pair": "4x2grid → 1",
+      "count": 1
+    },
+    {
+      "pair": "1 → lg-w2s",
+      "count": 1
+    },
+    {
+      "pair": "lg-4grid → 4grid-lg",
+      "count": 1
+    },
+    {
+      "pair": "4grid-lg → lg-4grid",
+      "count": 1
+    },
+    {
+      "pair": "lg-4grid → std-2equal",
+      "count": 1
+    }
+  ],
+  "moduleTriples": [
+    {
+      "sequence": "1 → 1 → std-2equal",
+      "count": 6
+    },
+    {
+      "sequence": "1 → std-2equal → std-2equal",
+      "count": 5
+    },
+    {
+      "sequence": "1 → 1 → 1",
+      "count": 5
+    },
+    {
+      "sequence": "1 → 1 → product_grid",
+      "count": 5
+    },
+    {
+      "sequence": "1 → 2x2wide → 1",
+      "count": 4
+    },
+    {
+      "sequence": "1 → std-2equal → 1",
+      "count": 4
+    },
+    {
+      "sequence": "std-2equal → 1 → 1",
+      "count": 4
+    },
+    {
+      "sequence": "product_grid → 1 → 1",
+      "count": 4
+    },
+    {
+      "sequence": "std-2equal → std-2equal → 1",
+      "count": 3
+    },
+    {
+      "sequence": "1 → product_grid → 1",
+      "count": 3
+    },
+    {
+      "sequence": "1 → 1 → 4grid-lg",
+      "count": 2
+    },
+    {
+      "sequence": "1 → lg-4grid → 1",
+      "count": 2
+    },
+    {
+      "sequence": "std-2equal → 1 → 2x2wide",
+      "count": 2
+    },
+    {
+      "sequence": "1 → 1 → lg-4grid",
+      "count": 2
+    },
+    {
+      "sequence": "std-2equal → std-2equal → product_grid",
+      "count": 2
+    },
+    {
+      "sequence": "1 → 4grid-lg → 1",
+      "count": 1
+    },
+    {
+      "sequence": "1 → lg-4grid → lg-4grid",
+      "count": 1
+    },
+    {
+      "sequence": "lg-4grid → lg-4grid → 1",
+      "count": 1
+    },
+    {
+      "sequence": "lg-4grid → 1 → 2x2wide",
+      "count": 1
+    },
+    {
+      "sequence": "2x2wide → 1 → lg-4grid",
+      "count": 1
+    }
+  ],
+  "homepagePatterns": [
+    {
+      "brand": "AG1",
+      "quality": 5,
+      "sequence": [
+        "1",
+        "1",
+        "4grid-lg",
+        "1"
+      ]
+    },
+    {
+      "brand": "Bears with Benefits",
+      "quality": 5,
+      "sequence": [
+        "product_grid",
+        "product_grid"
+      ]
+    },
+    {
+      "brand": "Bedsure",
+      "quality": 4,
+      "sequence": [
+        "1",
+        "lg-4grid",
+        "lg-4grid",
+        "1",
+        "2x2wide",
+        "1",
+        "lg-4grid",
+        "1"
+      ]
+    },
+    {
+      "brand": "BLACKROLL",
+      "quality": 5,
+      "sequence": [
+        "best_sellers",
+        "std-2equal",
+        "std-2equal",
+        "1",
+        "2x2wide",
+        "1",
+        "std-2equal",
+        "1"
+      ]
+    },
+    {
+      "brand": "Cloudpillo",
+      "quality": 4,
+      "sequence": [
+        "1",
+        "4grid-lg",
+        "std-2equal",
+        "product_grid",
+        "std-2equal",
+        "std-2equal"
+      ]
+    },
+    {
+      "brand": "Desktronic",
+      "quality": 4,
+      "sequence": [
+        "std-2equal",
+        "1",
+        "std-2equal",
+        "1",
+        "2x2wide",
+        "1"
+      ]
+    },
+    {
+      "brand": "ESN",
+      "quality": 5,
+      "sequence": [
+        "1",
+        "1",
+        "std-2equal",
+        "std-2equal"
+      ]
+    },
+    {
+      "brand": "Feandrea",
+      "quality": 4,
+      "sequence": [
+        "1",
+        "1",
+        "1",
+        "product_grid",
+        "1",
+        "2x2wide",
+        "std-2equal",
+        "1"
+      ]
+    },
+    {
+      "brand": "Gritin",
+      "quality": 3,
+      "sequence": [
+        "1",
+        "1",
+        "1",
+        "lg-4grid"
+      ]
+    },
+    {
+      "brand": "Hansegrün",
+      "quality": 4,
+      "sequence": [
+        "1",
+        "1",
+        "1",
+        "std-2equal",
+        "1",
+        "1",
+        "1",
+        "4grid-lg"
+      ]
+    },
+    {
+      "brand": "HOLY Energy",
+      "quality": 5,
+      "sequence": [
+        "1",
+        "4grid-lg",
+        "product_grid"
+      ]
+    },
+    {
+      "brand": "Kärcher",
+      "quality": 5,
+      "sequence": [
+        "1",
+        "1",
+        "4x2grid"
+      ]
+    },
+    {
+      "brand": "Kloster Kitchen",
+      "quality": 4,
+      "sequence": [
+        "1",
+        "1",
+        "product_grid",
+        "4x2grid",
+        "1"
+      ]
+    },
+    {
+      "brand": "MANSCAPED",
+      "quality": 5,
+      "sequence": [
+        "1",
+        "2x2wide",
+        "1",
+        "1",
+        "product_grid",
+        "1",
+        "1",
+        "std-2equal",
+        "std-2equal",
+        "product_grid"
+      ]
+    },
+    {
+      "brand": "MasterChef",
+      "quality": 3,
+      "sequence": [
+        "product_grid",
+        "product_grid",
+        "product_grid"
+      ]
+    },
+    {
+      "brand": "MORE Nutrition",
+      "quality": 4,
+      "sequence": [
+        "1",
+        "1",
+        "1",
+        "std-2equal",
+        "std-2equal",
+        "product_grid",
+        "1",
+        "1"
+      ]
+    },
+    {
+      "brand": "Nespresso",
+      "quality": 5,
+      "sequence": [
+        "product_grid",
+        "1",
+        "1",
+        "lg-4grid",
+        "1"
+      ]
+    },
+    {
+      "brand": "Night Cat",
+      "quality": 2,
+      "sequence": [
+        "1",
+        "product_grid",
+        "1",
+        "1",
+        "product_grid"
+      ]
+    },
+    {
+      "brand": "the nu company",
+      "quality": 4,
+      "sequence": [
+        "1",
+        "std-2equal",
+        "std-2equal",
+        "1",
+        "1",
+        "std-2equal"
+      ]
+    },
+    {
+      "brand": "SNOCKS",
+      "quality": 5,
+      "sequence": [
+        "1",
+        "lg-w2s",
+        "2stack-lg"
+      ]
+    },
+    {
+      "brand": "The North Face",
+      "quality": 5,
+      "sequence": [
+        "std-2equal",
+        "1",
+        "1",
+        "std-2equal",
+        "std-2equal",
+        "1",
+        "1",
+        "product_grid"
+      ]
+    },
+    {
+      "brand": "TRIXIE",
+      "quality": 4,
+      "sequence": [
+        "1",
+        "lg-4grid",
+        "4grid-lg",
+        "lg-4grid",
+        "std-2equal",
+        "std-2equal"
+      ]
+    },
+    {
+      "brand": "twenty:three",
+      "quality": 3,
+      "sequence": [
+        "1",
+        "std-2equal",
+        "1"
+      ]
+    }
+  ],
+  "categoryPagePatterns": [
+    {
+      "brand": "SNOCKS",
+      "quality": 5,
+      "page": "Socken",
+      "sequence": [
+        "lg-w2s",
+        "2stack-lg"
+      ]
+    },
+    {
+      "brand": "SNOCKS",
+      "quality": 5,
+      "page": "Männer Unterwäsche",
+      "sequence": [
+        "lg-w2s",
+        "2stack-lg"
+      ]
+    }
+  ],
+  "modulesWithDesignRationale": 8,
+  "modulesWithVisualConnection": 109,
+  "storeStats": [
+    {
+      "brand": "AG1",
+      "category": "supplements",
+      "quality": 5,
+      "pagesTotal": 1,
+      "modulesTotal": 4,
+      "tilesTotal": 7,
+      "layoutDistribution": {
+        "1": 3,
+        "4grid-lg": 1
+      },
+      "imageCatDistribution": {
+        "product": 1,
+        "creative": 2,
+        "lifestyle": 4
+      }
+    },
+    {
+      "brand": "Bears with Benefits",
+      "category": "supplements",
+      "quality": 5,
+      "pagesTotal": 1,
+      "modulesTotal": 2,
+      "tilesTotal": 0,
+      "layoutDistribution": {
+        "product_grid": 2
+      },
+      "imageCatDistribution": {}
+    },
+    {
+      "brand": "Bedsure",
+      "category": "home_kitchen",
+      "quality": 4,
+      "pagesTotal": 1,
+      "modulesTotal": 8,
+      "tilesTotal": 21,
+      "layoutDistribution": {
+        "1": 4,
+        "lg-4grid": 3,
+        "2x2wide": 1
+      },
+      "imageCatDistribution": {
+        "lifestyle": 11,
+        "product": 7,
+        "text_image": 3
+      }
+    },
+    {
+      "brand": "BLACKROLL",
+      "category": "fitness",
+      "quality": 5,
+      "pagesTotal": 1,
+      "modulesTotal": 8,
+      "tilesTotal": 14,
+      "layoutDistribution": {
+        "1": 3,
+        "best_sellers": 1,
+        "std-2equal": 3,
+        "2x2wide": 1
+      },
+      "imageCatDistribution": {
+        "creative": 4,
+        "lifestyle": 5,
+        "text_image": 1,
+        "product": 3,
+        "benefit": 1
+      }
+    },
+    {
+      "brand": "Cloudpillo",
+      "category": "home_kitchen",
+      "quality": 4,
+      "pagesTotal": 1,
+      "modulesTotal": 6,
+      "tilesTotal": 11,
+      "layoutDistribution": {
+        "1": 1,
+        "4grid-lg": 1,
+        "std-2equal": 3,
+        "product_grid": 1
+      },
+      "imageCatDistribution": {
+        "lifestyle": 6,
+        "product": 4,
+        "creative": 1
+      }
+    },
+    {
+      "brand": "Desktronic",
+      "category": "office",
+      "quality": 4,
+      "pagesTotal": 1,
+      "modulesTotal": 6,
+      "tilesTotal": 11,
+      "layoutDistribution": {
+        "1": 3,
+        "std-2equal": 2,
+        "2x2wide": 1
+      },
+      "imageCatDistribution": {
+        "lifestyle": 3,
+        "product": 7,
+        "text_image": 1
+      }
+    },
+    {
+      "brand": "ESN",
+      "category": "supplements",
+      "quality": 5,
+      "pagesTotal": 1,
+      "modulesTotal": 4,
+      "tilesTotal": 6,
+      "layoutDistribution": {
+        "1": 2,
+        "std-2equal": 2
+      },
+      "imageCatDistribution": {
+        "creative": 1,
+        "lifestyle": 1,
+        "product": 4
+      }
+    },
+    {
+      "brand": "Feandrea",
+      "category": "pets",
+      "quality": 4,
+      "pagesTotal": 1,
+      "modulesTotal": 8,
+      "tilesTotal": 11,
+      "layoutDistribution": {
+        "1": 5,
+        "product_grid": 1,
+        "2x2wide": 1,
+        "std-2equal": 1
+      },
+      "imageCatDistribution": {
+        "creative": 7,
+        "lifestyle": 3,
+        "text_image": 1
+      }
+    },
+    {
+      "brand": "Gritin",
+      "category": "home_kitchen",
+      "quality": 3,
+      "pagesTotal": 1,
+      "modulesTotal": 4,
+      "tilesTotal": 6,
+      "layoutDistribution": {
+        "1": 3,
+        "lg-4grid": 1
+      },
+      "imageCatDistribution": {
+        "creative": 1,
+        "lifestyle": 2,
+        "text_image": 1,
+        "product": 2
+      }
+    },
+    {
+      "brand": "Hansegrün",
+      "category": "supplements",
+      "quality": 4,
+      "pagesTotal": 1,
+      "modulesTotal": 8,
+      "tilesTotal": 10,
+      "layoutDistribution": {
+        "1": 6,
+        "std-2equal": 1,
+        "4grid-lg": 1
+      },
+      "imageCatDistribution": {
+        "product": 3,
+        "benefit": 1,
+        "text_image": 1,
+        "creative": 3,
+        "lifestyle": 2
+      }
+    },
+    {
+      "brand": "HOLY Energy",
+      "category": "food",
+      "quality": 5,
+      "pagesTotal": 1,
+      "modulesTotal": 3,
+      "tilesTotal": 5,
+      "layoutDistribution": {
+        "1": 1,
+        "4grid-lg": 1,
+        "product_grid": 1
+      },
+      "imageCatDistribution": {
+        "product": 5
+      }
+    },
+    {
+      "brand": "Kärcher",
+      "category": "household",
+      "quality": 5,
+      "pagesTotal": 1,
+      "modulesTotal": 3,
+      "tilesTotal": 10,
+      "layoutDistribution": {
+        "1": 2,
+        "4x2grid": 1
+      },
+      "imageCatDistribution": {
+        "text_image": 1,
+        "creative": 1,
+        "lifestyle": 6,
+        "product": 2
+      }
+    },
+    {
+      "brand": "Kloster Kitchen",
+      "category": "food",
+      "quality": 4,
+      "pagesTotal": 1,
+      "modulesTotal": 5,
+      "tilesTotal": 11,
+      "layoutDistribution": {
+        "1": 3,
+        "product_grid": 1,
+        "4x2grid": 1
+      },
+      "imageCatDistribution": {
+        "text_image": 1,
+        "creative": 2,
+        "lifestyle": 7,
+        "product": 1
+      }
+    },
+    {
+      "brand": "MANSCAPED",
+      "category": "beauty",
+      "quality": 5,
+      "pagesTotal": 1,
+      "modulesTotal": 10,
+      "tilesTotal": 13,
+      "layoutDistribution": {
+        "1": 5,
+        "2x2wide": 1,
+        "product_grid": 2,
+        "std-2equal": 2
+      },
+      "imageCatDistribution": {
+        "product": 10,
+        "text_image": 2,
+        "creative": 1
+      }
+    },
+    {
+      "brand": "MasterChef",
+      "category": "home_kitchen",
+      "quality": 3,
+      "pagesTotal": 1,
+      "modulesTotal": 3,
+      "tilesTotal": 0,
+      "layoutDistribution": {
+        "product_grid": 3
+      },
+      "imageCatDistribution": {}
+    },
+    {
+      "brand": "MORE Nutrition",
+      "category": "supplements",
+      "quality": 4,
+      "pagesTotal": 1,
+      "modulesTotal": 8,
+      "tilesTotal": 9,
+      "layoutDistribution": {
+        "1": 5,
+        "std-2equal": 2,
+        "product_grid": 1
+      },
+      "imageCatDistribution": {
+        "creative": 4,
+        "lifestyle": 1,
+        "product": 4
+      }
+    },
+    {
+      "brand": "Nespresso",
+      "category": "food",
+      "quality": 5,
+      "pagesTotal": 1,
+      "modulesTotal": 5,
+      "tilesTotal": 9,
+      "layoutDistribution": {
+        "1": 3,
+        "product_grid": 1,
+        "lg-4grid": 1
+      },
+      "imageCatDistribution": {
+        "product": 5,
+        "text_image": 3,
+        "creative": 1
+      }
+    },
+    {
+      "brand": "Night Cat",
+      "category": "sports",
+      "quality": 2,
+      "pagesTotal": 1,
+      "modulesTotal": 5,
+      "tilesTotal": 3,
+      "layoutDistribution": {
+        "1": 3,
+        "product_grid": 2
+      },
+      "imageCatDistribution": {
+        "lifestyle": 3
+      }
+    },
+    {
+      "brand": "the nu company",
+      "category": "food",
+      "quality": 4,
+      "pagesTotal": 1,
+      "modulesTotal": 6,
+      "tilesTotal": 9,
+      "layoutDistribution": {
+        "1": 3,
+        "std-2equal": 3
+      },
+      "imageCatDistribution": {
+        "lifestyle": 3,
+        "text_image": 2,
+        "creative": 1,
+        "product": 3
+      }
+    },
+    {
+      "brand": "SNOCKS",
+      "category": "fashion",
+      "quality": 5,
+      "pagesTotal": 3,
+      "modulesTotal": 7,
+      "tilesTotal": 22,
+      "layoutDistribution": {
+        "1": 1,
+        "lg-w2s": 3,
+        "2stack-lg": 3
+      },
+      "imageCatDistribution": {
+        "unknown": 1,
+        "lifestyle": 8,
+        "product": 13
+      }
+    },
+    {
+      "brand": "The North Face",
+      "category": "fashion",
+      "quality": 5,
+      "pagesTotal": 1,
+      "modulesTotal": 8,
+      "tilesTotal": 10,
+      "layoutDistribution": {
+        "1": 4,
+        "std-2equal": 3,
+        "product_grid": 1
+      },
+      "imageCatDistribution": {
+        "lifestyle": 7,
+        "product": 3
+      }
+    },
+    {
+      "brand": "TRIXIE",
+      "category": "pets",
+      "quality": 4,
+      "pagesTotal": 1,
+      "modulesTotal": 6,
+      "tilesTotal": 19,
+      "layoutDistribution": {
+        "1": 1,
+        "lg-4grid": 2,
+        "4grid-lg": 1,
+        "std-2equal": 2
+      },
+      "imageCatDistribution": {
+        "lifestyle": 5,
+        "creative": 12,
+        "text_image": 2
+      }
+    },
+    {
+      "brand": "twenty:three",
+      "category": "home_kitchen",
+      "quality": 3,
+      "pagesTotal": 1,
+      "modulesTotal": 3,
+      "tilesTotal": 4,
+      "layoutDistribution": {
+        "1": 2,
+        "std-2equal": 1
+      },
+      "imageCatDistribution": {
+        "text_image": 1,
+        "lifestyle": 1,
+        "product": 2
+      }
+    }
+  ]
+}
