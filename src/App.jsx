@@ -16,6 +16,7 @@ import AIChat from './components/AIChat';
 import PriceCalculator from './components/PriceCalculator';
 import ExportModal from './components/ExportModal';
 import BriefingView from './components/BriefingView';
+import AdminAnalyze from './components/AdminAnalyze';
 // KnowledgeBaseAdmin removed — reference data loads automatically in background
 
 var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, headerBannerColor: '', complexity: 2, category: 'generic', googleDriveUrl: '' };
@@ -24,6 +25,11 @@ export default function App() {
   // Check if this is a share link — render full BriefingView
   if (window.location.pathname.indexOf('/share/') === 0) {
     return <BriefingView />;
+  }
+
+  // Admin: Reference store analyzer
+  if (window.location.pathname.indexOf('/admin/analyze') === 0) {
+    return <AdminAnalyze />;
   }
 
   var uiLang = 'en';
