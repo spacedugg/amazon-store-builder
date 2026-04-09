@@ -46,16 +46,24 @@ async function crawlPage(url) {
   var controller = new AbortController();
   var timeout = setTimeout(function() { controller.abort(); }, 45000);
   try {
+    var reqBody = { zone: UNLOCKER_ZONE, url: url, format: 'raw' };
+    console.log('[crawl-store-nav] Crawling:', url, 'Zone:', UNLOCKER_ZONE, 'Token present:', !!UNLOCKER_TOKEN);
     var resp = await fetch('https://api.brightdata.com/request', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + UNLOCKER_TOKEN },
-      body: JSON.stringify({ zone: UNLOCKER_ZONE, url: url, format: 'raw' }),
+      body: JSON.stringify(reqBody),
       signal: controller.signal,
     });
     clearTimeout(timeout);
-    if (!resp.ok) throw new Error('Crawler error ' + resp.status);
-    return await resp.text();
-  } catch (err) { clearTimeout(timeout); throw err; }
+    if (!resp.ok) {
+      var errBody = await resp.text().catch(function() { return ''; });
+      console.log('[crawl-store-nav] BrightData error:', resp.status, errBody.slice(0, 300));
+      throw new Error('BrightData ' + resp.status + ': ' + errBody.slice(0, 200));
+    }
+    var html = await resp.text();
+    console.log('[crawl-store-nav] Got HTML:', html.length, 'chars');
+    return html;
+  } catch (err) { clearTimeout(timeout); console.log('[crawl-store-nav] Fetch error:', err.message); throw err; }
 }
 
 function extractNavFromConfig(html, mainUrl) {
