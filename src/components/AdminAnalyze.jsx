@@ -30,6 +30,8 @@ export default function AdminAnalyze() {
   var [storeResults, setStoreResults] = useState({});  // file -> { status, pages, pageResults, message }
   var [activeStore, setActiveStore] = useState(null);   // currently processing store file
   var [activePage, setActivePage] = useState('');        // currently processing page name
+  var [expandedStore, setExpandedStore] = useState(null); // which store detail is open
+  var [dbData, setDbData] = useState({});               // file -> loaded DB data
   var [runAllActive, setRunAllActive] = useState(false);
   var cancelRef = useRef(false);
 
@@ -236,6 +238,20 @@ export default function AdminAnalyze() {
                     </div>
                   )}
                 </div>
+                <button onClick={function() {
+                    var f = store.file;
+                    if (expandedStore === f) { setExpandedStore(null); return; }
+                    setExpandedStore(f);
+                    // Load from DB if not in memory
+                    if (!dbData[f] && !storeResults[f]) {
+                      fetch('/api/reference-stores?id=' + encodeURIComponent(f))
+                        .then(function(resp) { return resp.ok ? resp.json() : null; })
+                        .then(function(data) { if (data) setDbData(function(prev) { var n = Object.assign({}, prev); n[f] = data; return n; }); });
+                    }
+                  }}
+                  style={{ padding: '5px 10px', fontSize: 11, fontWeight: 600, borderRadius: 5, border: '1px solid #e2e8f0', cursor: 'pointer', background: expandedStore === store.file ? '#e0e7ff' : '#fff', color: '#475569' }}>
+                  {expandedStore === store.file ? 'Zuklappen' : 'Details'}
+                </button>
                 <button onClick={function() { analyzeStore(store); }} disabled={!!activeStore || runAllActive}
                   style={{
                     padding: '5px 14px', fontSize: 11, fontWeight: 600, borderRadius: 5, border: 'none',
@@ -247,6 +263,85 @@ export default function AdminAnalyze() {
                   {isDone ? 'Nochmal' : isError ? 'Retry' : isRunning ? '...' : 'Analysieren'}
                 </button>
               </div>
+
+              {/* Expanded detail view */}
+              {expandedStore === store.file && (function() {
+                var data = storeResults[store.file] || {};
+                var db = dbData[store.file];
+                var pageResults = data.pageResults || (db && db.parsedData ? (function() { try { var p = JSON.parse(db.parsedData); return p.pageResults || []; } catch(e) { return []; } })() : []);
+                var pageList = data.pages || (db && db.parsedData ? (function() { try { var p = JSON.parse(db.parsedData); return p.pages || []; } catch(e) { return []; } })() : []);
+
+                if (pageResults.length === 0 && !db) {
+                  return <div style={{ padding: '12px 14px', fontSize: 12, color: '#64748b', background: '#f8fafc', borderTop: '1px solid #e2e8f0' }}>Noch keine Daten. Klicke "Analysieren" oder lade aus DB...</div>;
+                }
+
+                return (
+                  <div style={{ padding: '12px 14px', background: '#f8fafc', borderTop: '1px solid #e2e8f0', fontSize: 12 }}>
+                    <div style={{ fontWeight: 700, marginBottom: 8 }}>{pageList.length} Seiten, {pageResults.length} analysiert</div>
+
+                    {pageResults.map(function(pr, pi) {
+                      var analysis = pr.pageAnalysis || {};
+                      var structure = pr.structure || {};
+                      var images = pr.images || [];
+                      var hasError = pr.error || analysis.error;
+
+                      return (
+                        <div key={pi} style={{ marginBottom: 10, padding: '8px 10px', background: '#fff', border: '1px solid #e2e8f0', borderRadius: 6 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                            <span style={{ fontWeight: 700, fontSize: 12 }}>{pr.pageName || 'Seite ' + (pi + 1)}</span>
+                            {structure.sectionCount > 0 && <span style={{ fontSize: 10, color: '#64748b' }}>{structure.sectionCount} Sektionen</span>}
+                            {structure.imageCount > 0 && <span style={{ fontSize: 10, color: '#64748b' }}>{structure.imageCount} Bilder</span>}
+                            {hasError && <span style={{ fontSize: 10, color: '#ef4444' }}>Fehler: {pr.error || analysis.error}</span>}
+                          </div>
+
+                          {/* Gemini Analysis Summary */}
+                          {analysis.pageSummary && (
+                            <div style={{ fontSize: 11, color: '#475569', marginBottom: 4 }}>{analysis.pageSummary}</div>
+                          )}
+
+                          {/* Section Flow */}
+                          {analysis.sectionFlow && analysis.sectionFlow.length > 0 && (
+                            <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 4 }}>
+                              {analysis.sectionFlow.map(function(sec, si) {
+                                return <span key={si} style={{ fontSize: 9, padding: '2px 6px', background: '#e0e7ff', color: '#4338ca', borderRadius: 3, fontWeight: 600 }}>{sec}</span>;
+                              })}
+                            </div>
+                          )}
+
+                          {/* Content Mix */}
+                          {analysis.contentMix && (
+                            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 4 }}>
+                              {Object.entries(analysis.contentMix).filter(function(e) { return e[1] > 0; }).map(function(e) {
+                                return <span key={e[0]} style={{ fontSize: 9, padding: '1px 5px', background: '#f1f5f9', borderRadius: 3 }}>{e[0]}: {e[1]}</span>;
+                              })}
+                            </div>
+                          )}
+
+                          {/* Module Relationships */}
+                          {analysis.moduleRelationships && analysis.moduleRelationships.length > 0 && (
+                            <div style={{ marginTop: 4 }}>
+                              <span style={{ fontSize: 10, fontWeight: 700, color: '#92400e' }}>Modul-Beziehungen:</span>
+                              {analysis.moduleRelationships.map(function(rel, ri) {
+                                return <div key={ri} style={{ fontSize: 10, color: '#78716c', paddingLeft: 8 }}>• {rel}</div>;
+                              })}
+                            </div>
+                          )}
+
+                          {/* Images (thumbnails) */}
+                          {images.length > 0 && (
+                            <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 6 }}>
+                              {images.slice(0, 12).map(function(img, ii) {
+                                return <img key={ii} src={img.url} alt={img.alt || ''} style={{ width: 48, height: 48, objectFit: 'cover', borderRadius: 3, border: '1px solid #e2e8f0' }} />;
+                              })}
+                              {images.length > 12 && <span style={{ fontSize: 10, color: '#94a3b8', alignSelf: 'center' }}>+{images.length - 12}</span>}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })()}
             </div>
           );
         })}
