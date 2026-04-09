@@ -6,7 +6,7 @@
 // Body: { storeUrl, brandName }
 // Returns: { brandName, storeUrl, pages: [{ url, name, pageId }] }
 
-var UNLOCKER_TOKEN = process.env.BRIGHTDATA_UNLOCKER_TOKEN;
+var UNLOCKER_TOKEN = process.env.BRIGHTDATA_UNLOCKER_TOKEN || process.env.BRIGHT_DATA_API_KEY;
 var UNLOCKER_ZONE = process.env.BRIGHTDATA_UNLOCKER_ZONE || 'amz_brand_store_studio';
 
 module.exports = async function handler(req, res) {
