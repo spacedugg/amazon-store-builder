@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { COMPLEXITY_LEVELS, STORE_TEMPLATES, LAYOUTS, findLayout, CATEGORY_STYLE_HINTS } from '../constants';
+import { COMPLEXITY_LEVELS, LAYOUTS, findLayout } from '../constants';
 import { discoverBrandProducts, scrapeWebsite } from '../api';
 
 function parseAsinFile(text) {
@@ -27,8 +27,6 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
   var [asins, setAsins] = useState([]);
   var [pasteText, setPasteText] = useState('');
   var [complexity, setComplexity] = useState(2);
-  var [selectedTemplate, setSelectedTemplate] = useState(null);
-  var [showTemplateDetail, setShowTemplateDetail] = useState(null);
   var [inputMode, setInputMode] = useState('file'); // 'file', 'paste', 'brandUrl'
   var [brandUrl, setBrandUrl] = useState('');
   var [brandDiscovering, setBrandDiscovering] = useState(false);
@@ -515,124 +513,7 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
           </div>
         </div>
 
-        {/* 6. Store Template */}
-        <label className="label" style={{ marginTop: 10 }}>6. Layout Template (optional)</label>
-        <div className="template-selector">
-          <div className="template-grid">
-            <button
-              className={'template-card' + (selectedTemplate === null ? ' active' : '')}
-              onClick={function() { setSelectedTemplate(null); setShowTemplateDetail(null); }}
-            >
-              <div className="template-card-name">No Template</div>
-              <div className="template-card-desc">AI generates layout freely</div>
-            </button>
-            {STORE_TEMPLATES.map(function(tmpl) {
-              var isSelected = selectedTemplate === tmpl.id;
-              return (
-                <button
-                  key={tmpl.id}
-                  className={'template-card' + (isSelected ? ' active' : '')}
-                  onClick={function() { setSelectedTemplate(tmpl.id); }}
-                >
-                  <div className="template-card-name">{tmpl.name}</div>
-                  <div className="template-card-desc">{tmpl.description}</div>
-                  <div className="template-card-inspo">e.g. {tmpl.inspiration}</div>
-                  <button
-                    className="template-detail-btn"
-                    onClick={function(e) {
-                      e.stopPropagation();
-                      setShowTemplateDetail(showTemplateDetail === tmpl.id ? null : tmpl.id);
-                    }}
-                  >
-                    {showTemplateDetail === tmpl.id ? 'Hide Preview' : 'Preview Layout'}
-                  </button>
-                </button>
-              );
-            })}
-          </div>
-          {showTemplateDetail && (function() {
-            var tmpl = STORE_TEMPLATES.find(function(t) { return t.id === showTemplateDetail; });
-            if (!tmpl) return null;
-            var tileColors = {
-              image: '#94a3b8', shoppable_image: '#f59e0b', product_grid: '#3b82f6',
-              video: '#ef4444', text: '#8b5cf6', image_text: '#10b981',
-            };
-            var tileLabels = {
-              image: 'IMG', shoppable_image: 'SHOP', product_grid: 'GRID',
-              video: 'VID', text: 'TXT', image_text: 'I+T',
-            };
-            function renderSectionPreview(sec, i) {
-              var layout = findLayout(sec.layout);
-              var tileTypes = sec.tileTypes || [];
-              var cols = layout ? layout.cols : '1fr';
-              var isComplexGrid = layout && layout.grid;
-              return (
-                <div key={i} className="template-preview-section" style={{ flexDirection: 'column', alignItems: 'stretch', gap: 4 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <span className="template-preview-layout">{sec.layout}</span>
-                    <span className="template-preview-purpose">{sec.purpose}</span>
-                    <span className="template-preview-tiles">{tileTypes.length} tile{tileTypes.length > 1 ? 's' : ''}</span>
-                  </div>
-                  <div style={{
-                    display: isComplexGrid ? 'grid' : 'flex',
-                    gridTemplateColumns: !isComplexGrid ? undefined : cols,
-                    gridTemplateRows: !isComplexGrid ? undefined : '1fr 1fr',
-                    gap: 2, height: isComplexGrid ? 32 : 16, marginLeft: 4
-                  }}>
-                    {tileTypes.map(function(type, ti) {
-                      var color = tileColors[type] || '#94a3b8';
-                      var label = tileLabels[type] || '';
-                      var tileStyle = { background: color, borderRadius: 2, opacity: 0.7, minWidth: 0,
-                        display: 'flex', alignItems: 'center', justifyContent: 'center' };
-                      if (!isComplexGrid) {
-                        var flexVal = 1;
-                        if ((sec.layout === '2-1' || sec.layout === '2-1-1') && ti === 0) flexVal = 2;
-                        if ((sec.layout === '1-2' || sec.layout === '1-1-2') && ti === tileTypes.length - 1) flexVal = 2;
-                        tileStyle.flex = flexVal;
-                      } else {
-                        // Complex grid positioning
-                        if (layout.grid === 'lg-2stack') {
-                          if (ti === 0) { tileStyle.gridRow = '1 / 3'; tileStyle.gridColumn = '1'; }
-                        } else if (layout.grid === '2stack-lg') {
-                          if (ti === 2) { tileStyle.gridRow = '1 / 3'; tileStyle.gridColumn = '2'; }
-                        } else if (layout.grid === 'lg-4grid') {
-                          if (ti === 0) { tileStyle.gridRow = '1 / 3'; tileStyle.gridColumn = '1'; }
-                        } else if (layout.grid === '4grid-lg') {
-                          if (ti === 4) { tileStyle.gridRow = '1 / 3'; tileStyle.gridColumn = '3'; }
-                        }
-                      }
-                      return (
-                        <div key={ti} style={tileStyle} title={type}>
-                          <span style={{ fontSize: 6, color: '#fff', fontWeight: 700, textTransform: 'uppercase' }}>{label}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              );
-            }
-            return (
-              <div className="template-preview">
-                <div className="template-preview-title">{tmpl.name} — Homepage Layout</div>
-                {tmpl.homepage.map(renderSectionPreview)}
-                <div className="template-preview-title" style={{ marginTop: 8 }}>Category Page Layout</div>
-                {tmpl.categoryPage.map(renderSectionPreview)}
-                <div style={{ display: 'flex', gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
-                  {Object.keys(tileColors).map(function(type) {
-                    return (
-                      <span key={type} style={{ display: 'flex', alignItems: 'center', gap: 3, fontSize: 8, color: '#64748b' }}>
-                        <span style={{ width: 8, height: 8, borderRadius: 2, background: tileColors[type], opacity: 0.7, display: 'inline-block' }} />
-                        {type.replace('_', ' ')}
-                      </span>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })()}
-        </div>
-
-        {/* 7. Instructions */}
+        {/* 6. Instructions */}
         <label className="label" style={{ marginTop: 10 }}>7. Instructions (optional)</label>
         <div className="instructions-area">
           <textarea
@@ -702,7 +583,6 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
                 instructions: instructions,
                 asins: asins,
                 complexity: complexity,
-                template: selectedTemplate,
                 websiteData: websiteData || null,
                 referenceStoreUrls: [],
                 existingStoreUrl: existingStoreUrl.trim() && !validateStoreUrl(existingStoreUrl) ? existingStoreUrl.trim() : null,
