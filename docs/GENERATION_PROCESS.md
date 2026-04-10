@@ -1,326 +1,252 @@
-# Brand Store Generation Process — Final Design
+# Brand Store Generation Process v2
 
-## Übersicht
+## Grundprinzipien
 
-Dieses Dokument beschreibt den optimalen Prozess zur Generierung eines Amazon Brand Stores.
-Jeder Schritt baut auf dem vorherigen auf. Nichts wird parallel generiert, wenn
-Abhängigkeiten bestehen. Qualität vor Geschwindigkeit.
+1. **Keine Hard Rules.** Die Wissensdatenbank (data/store-knowledge.json) liefert Prinzipien und Muster aus 21 analysierten Top-Stores. Bei jeder Generierung wird individuell entschieden, was zur jeweiligen Marke passt.
+
+2. **Inhalt zuerst, Module danach.** Zuerst werden Inhalte, Themen und Texte erarbeitet. Dann wird entschieden, welches Layout am besten dazu passt. Nicht umgekehrt.
+
+3. **Übergreifende Wissensdatenbank.** Die Erkenntnisse aus allen 21 Stores werden übergreifend genutzt — nicht nach Kategorie gefiltert. Ein Fitness-Store kann von Nespresso-Prinzipien profitieren.
+
+4. **Qualität vor Quantität.** 9-16 hochwertige Brand-Images schlagen 40 mittelmäßige. (Quelle: Nespresso mit 12 Bildern ist eindrucksvoller als Stores mit 40+)
+
+5. **Sequentiell, nicht parallel.** Jeder Schritt baut auf dem vorherigen auf. Keine gleichzeitige Generierung von Dingen, die voneinander abhängen.
+
+6. **API-Kosten kein Limit.** So viele Calls wie nötig für Qualität.
 
 ---
 
-## PHASE 0: REFERENZ-DATENBANK (einmalig, nicht pro Store)
+## PHASE 0: WISSENSDATENBANK (bereits erledigt)
 
-### Status Quo
-- 23 Stores analysiert, aber **nur Homepages** (1 von ~5-24 Seiten pro Store)
-- CI-Daten vorhanden (Farben, Stil, Tonality)
-- 130 Module, 221 Tiles erfasst mit Beschreibungen
-- `visualConnection` bei 84% der Module vorhanden
-- `designRationale` bei nur 6% der Module vorhanden
-- Gemini V3 Enrichment fehlgeschlagen (alle "fetch failed")
-- **Modul-Beziehungen und Sequenzen nicht analysiert**
+21 Brand Stores analysiert über Cowork. Gespeichert in `data/store-knowledge/`.
 
-### Was fehlt und gemacht werden muss
+**Übergreifende Erkenntnisse** (`data/store-knowledge.json`):
+- 6 Design-Archetypen identifiziert (Premium Minimalist, Gen-Z Burst, Natur/Bio, Warm Home, Industriell, Enterprise)
+- Layout-Patterns: Full-Width in 95% der Stores, std-2equal in 70%
+- Modul-Flow-Patterns: Standard-Flow (12/20), Repetitive-Flow (5/20), etc.
+- Hero-Strategien: Logo+Claim+Social Proof, Emotionaler Claim, Produkt-Showcase
+- Copywriting-Patterns: Emotionale Claims (30%), Benefit-Claims (25%), Brand-Name als Claim (20%)
+- Navigation: Micro (1-5 Seiten), Compact (6-12), Medium (13-20), Enterprise (20+)
 
-**0.1 — Alle Seiten aller 23 Stores crawlen**
-- Aktuell: nur Homepage pro Store
-- Nötig: ALLE Unterseiten (Kategorie-Seiten, Über-uns, Bestseller, etc.)
-- Pro Seite: Module → Layouts → Tile-Typen → Bild-URLs → Texte
-- Ergebnis: Vollständige Modul-Bibliothek über ~200+ Seiten
-
-**0.2 — Bild-Inhaltsanalyse via Gemini Vision**
-- Jedes Bild aus den Stores durch Gemini beschreiben lassen:
-  - Was ist auf dem Bild zu sehen? (Szene, Personen, Produkte, Grafiken)
-  - Wie ist die Stimmung, der Stil?
-  - Wie ist das Verhältnis von Bild zu Text?
-  - Welche Texte sind auf dem Bild?
-- Alle Beschreibungen zusammenfassen als Referenz-Bibliothek:
-  - "In Lifestyle-Bildern für Supplements zeigen Stores typisch..."
-  - "Creative-Bilder für Küchengeräte enthalten typisch..."
-
-**0.3 — Modul-Beziehungs-Analyse**
-- Welche Module stehen typisch nebeneinander? (Paare)
-- Welche 3-5 Modul-Sequenzen bilden zusammen thematische Blöcke?
-- Was steht NIE nebeneinander? (Anti-Patterns)
-- Wie unterscheiden sich Homepage-Aufbauten von Kategorie-Seiten?
-- Pro Modul: WARUM dieses Layout, WARUM diese Reihenfolge (designRationale)
-- Wie stehen zwei übereinanderliegende Full-Width-Bilder in Beziehung?
-  (Gesamtgrafik, thematische Fortsetzung, Kontrast)
+**Diese Daten werden bei JEDER Generierung als Kontext mitgegeben — nicht als Regeln, sondern als Orientierung.**
 
 ---
 
 ## PHASE 1: EINGABE + DATENSAMMLUNG
 
-### 1.1 — Erweiterte Eingabemaske
+### 1.1 — Eingabemaske
 
-**Pflichtfelder:**
+**Pflicht:**
 - Brand Name
 - Marketplace (de/com/fr/etc.)
 - ASINs (manuell oder Amazon-Suche)
-- Zweck: Neukonzeptionierung oder Optimierung
-  - Bei Optimierung: Granulare Optionen:
-    - Menüstruktur beibehalten oder ändern?
-    - Welche Seiten beibehalten / welche neu?
-    - Nur bestimmte Seiten optimieren?
 
-**Optionale Felder (verbessern Qualität drastisch):**
-- Logo-Upload (spart fehleranfälliges Scraping)
-- Schriftarten (Name oder Datei — Scraping erkennt Fonts unzuverlässig)
-- Markenfarben (Hex-Codes, falls bekannt)
+**Empfohlen:**
+- Logo-Upload
+- Schriftarten (Name oder Datei)
+- Markenfarben (Hex-Codes)
 - Website-URL
-- Bestehender Brand Store URL
-- Ziel-Komplexität (Minimal / Standard / Premium)
+- Brand-Ton-Beispiele (2-3 Sätze von der Marke als Stil-Referenz)
 - Spezielle Anweisungen (Freitext)
-- Brand-Ton-Beispiele (2-3 Beispielsätze von der Marke, z.B. aus
-  Amazon Listings oder Website, damit das System den Stil übertragen kann
-  ohne ihn 1:1 zu kopieren)
+- Ziel-Komplexität (Minimal / Standard / Premium)
 
-### 1.2 — Amazon Product Scraping (einzeln pro ASIN)
+**Bei bestehendem Brand Store:**
+- Store-URL
+- Granulare Optionen:
+  - Menüstruktur beibehalten oder ändern?
+  - Welche Seiten behalten / welche neu?
+  - Was funktioniert gut? Was verbessern?
+- Grundsatz: Immer den bestmöglichen Store bauen.
 
-Pro ASIN wird gescraped:
+### 1.2 — Amazon Product Scraping
+
+Pro ASIN (einzeln, nicht Batch):
 - Titel
 - Rating, Bewertungsanzahl
-- **ALLE 7 Produktbilder** (MAIN, PT01-PT06)
+- **Alle 7 Produktbilder** (MAIN, PT01-PT06)
 - Alle 5 Bullet Points
-- Produktbeschreibung (HTML + Text)
+- Produktbeschreibung
 - A+ Content (Bilder + Texte, falls vorhanden)
 - Kategorie-Breadcrumb
-- Verfügbar seit (für Neuheiten-Erkennung)
-- Bestseller-Rang (für Bestseller-Erkennung)
-
-Einzeln pro ASIN, nicht als Batch, weil:
-- Batch verliert Details (A+ Content, alle Bilder)
-- Fehler bei einem Produkt blockiert nicht die anderen
-- Preis ist irrelevant und wird nicht gescraped
+- Verfügbar seit (Neuheiten-Erkennung)
+- Bestseller-Rang
 
 ### 1.3 — Website Scraping (falls URL vorhanden)
 
-**ALLE Seiten** der Website scrapen, nicht nur Startseite und Über-uns:
-- Startseite, Über-uns, Kontakt
-- ALLE Produktseiten
-- ALLE Kategorie-Seiten
-- Blog/News (falls vorhanden)
-- FAQ, Qualität, Zertifikate, etc.
-
-Pro Seite:
-- Texte (Headlines, Body, About-Texte)
-- Bilder (Hero, Produkt, Lifestyle)
-- Farben, Fonts
+**Alle Seiten** der Website:
+- Texte, Bilder, Farben, Fonts
 - Navigation/Kategorien
-- Produktzuordnungen zu Kategorien
-
-Nur so entsteht ein vollständiges Bild der Marke.
-
-### 1.4 — Bestehender Brand Store (falls URL vorhanden)
-
-Wichtig: Der Grundsatz ist immer, den bestmöglichen Brand Store zu bauen.
-
-Bei **Neukonzeptionierung**:
-- Bestehender Store ist Referenz, aber kein Template
-- Seitenstruktur wird NEU gedacht
-- Inhalte können als Inspiration dienen
-
-Bei **Optimierung** — granulare Abfrage:
-- Menüstruktur beibehalten oder ändern?
-- Welche Seiten bleiben, welche werden neu konzipiert?
-- Welche Module/Bilder sollen übernommen werden?
-- Was funktioniert gut? (als Basis behalten)
-- Was fehlt oder ist schwach? (verbessern)
+- Produktzuordnungen
+- About/Story/Qualität/Zertifikate
+- Alles was zur Marke gehört
 
 ---
 
-## PHASE 2: ANALYSE (sequentiell, jeder Schritt baut auf dem vorherigen auf)
+## PHASE 2: ANALYSE
+
+Jeder Schritt liefert ein konkretes Ergebnis, das im nächsten Schritt verwendet wird.
 
 ### 2.1 — Produkt-Analyse (Claude)
 
 Input: Alle Produktdaten aus 1.2
 
-Die reine Mustererkennung (zählen welche USPs am häufigsten vorkommen) reicht
-NICHT aus. Beispiel: Eine Nahrungsergänzungsmittel-Marke hat bei 20 Produkten
-wahrscheinlich 20 verschiedene USPs, wovon keine doppelt vorkommt. Eine
-Gartenmarke mit 300 Produkten hat USPs von "BPA-frei" bis "App-Steuerung".
+Ergebnis:
+- **Produkt-Clustering**: Produkte in Kategorien gruppiert
+- **Pro Kategorie**: Bestseller, Neuheiten, gemeinsame Features
+- **USP-Kategorisierung** (das Wichtigste):
+  - Marken-USPs (gelten für ALLE Produkte)
+  - Kategorie-USPs (gelten für eine Produktgruppe)
+  - Produkt-USPs (gelten nur für ein einzelnes Produkt)
+- **Themen/Pain Points** die die Marke abdeckt
+- **Was die Marke besonders macht** gegenüber generischen Produkten
+- **Wiederkehrende Muster** über verschiedene Produkte hinweg (z.B. alle Produkte
+  betonen Nachhaltigkeit, oder alle sind "Made in Germany" — das sind Marken-USPs,
+  nicht durch Zählen erkannt sondern durch KI-Verständnis des Gesamtbildes)
 
-Stattdessen muss echte KI-Analyse stattfinden:
+### 2.2 — CI-Analyse (Gemini + Claude)
 
-- Produkte in Kategorien clustern (Titel, Beschreibung, Breadcrumb)
-- Pro Kategorie:
-  - Name, Produktanzahl
-  - Bestseller identifizieren (höchste Bewertungen)
-  - Neuheiten identifizieren (neuestes Verfügbar-seit)
-  - Gemeinsame Features über alle Produkte der Kategorie
-- USPs analysieren und KATEGORISIEREN:
-  - **Marken-USPs**: Gelten für ALLE Produkte (z.B. "Made in Germany", "Familienunternehmen")
-  - **Kategorie-USPs**: Gelten für eine Produktkategorie (z.B. "Bio-Zutaten" nur bei Supplements)
-  - **Produkt-USPs**: Gelten nur für ein Produkt (z.B. "30g Protein" nur beim Proteinpulver)
-- Welche Themen/Pain Points deckt die Marke ab?
-- Was zeichnet diese Marke gegenüber generischen Produkten aus?
+Input: Alle Produktbilder, Logo, Website-Bilder
 
-### 2.2 — CI-Analyse (Gemini Vision + Claude)
-
-Input: Alle Produktbilder, Logo, Website-Bilder, Website-Farben/Fonts
-
-**Gemini** beschreibt erst mal JEDES Bild einzeln:
-- Was ist auf dem Bild zu sehen?
-- Stimmung, Stil, Farbgebung
+**Gemini** beschreibt jedes Bild:
+- Was ist zu sehen?
+- Stil, Farbgebung
 - Verhältnis Bild zu Text
 - Texte auf dem Bild
 
-**Dann** Zusammenfassung aller Bildbeschreibungen:
-- Farbpalette: Primär, Sekundär, Akzent, Hintergrund
-- Farbverwendung: Einheitlich oder produktspezifisch?
+**Claude** fasst zusammen:
+- Farbpalette (Primär, Sekundär, Akzent)
+- Farbverwendung: einheitlich oder produktspezifisch?
 - Typografie-Stil
 - Fotografie-Stil
-- Wiederkehrende Elemente (Icons, Muster, Badges)
-- Visual Mood (Premium, natürlich, technisch, verspielt, minimalistisch)
-- Hintergrund-Muster
+- Wiederkehrende Elemente
+- Visual Mood
 
-Kooperation Gemini + Claude nötig:
-- Gemini analysiert die Bilder (Vision)
-- Claude bekommt die Listing-Daten (Texte, Bullets)
-- Zusammen entsteht ein vollständiges CI-Profil
+### 2.3 — Brand Voice (Claude)
 
-### 2.3 — Brand Voice Analyse
+Input: Website-Texte, Bullet Points, A+ Content, Produktbeschreibungen,
+optional: Brand-Ton-Beispiele aus der Eingabemaske
 
-Input: Website-Texte, Bullet Points, A+ Content, Produktbeschreibungen
+Ergebnis:
+- Kommunikationsstil (formell/informell, Du/Sie)
+- Ton (professionell, locker, wissenschaftlich, bold)
+- Typische Wörter und Phrasen der Marke
+- CTA-Stil
 
-Frage: Wie zuverlässig ist automatische Ton-Analyse?
-→ Nicht 100% zuverlässig, daher:
+Die Brand-Ton-Beispiele aus der Eingabemaske werden als Stil-Referenz genutzt —
+nicht 1:1 kopiert, sondern der Stil wird auf neue Kontexte übertragen.
 
-- Automatische Analyse als VORSCHLAG generieren
-- Ergänzt durch die Beispiel-Sätze aus der Eingabemaske (1.1)
-- Beispiele werden nicht 1:1 kopiert, sondern als Stil-Referenz genutzt
-  ("Die Marke schreibt so: [Beispiel]. Übertrage diesen Stil auf neue Texte.")
-- Ergebnis: Kommunikationsstil, Ton, typische Wörter, CTA-Stil
-
-Nicht nötig:
-- Zielgruppen-Analyse (die existiert bereits durch die Marke selbst)
-- Wettbewerbspositionierung (beeinflusst den Store-Aufbau nicht)
-
-### 2.4 — Content-Strategie
+### 2.4 — Content-Strategie (Claude)
 
 Input: Produkt-Profil, CI-Profil, Brand Voice, Website-Struktur,
-**Referenz-Datenbank** (Best Practices aus den 23 analysierten Stores)
+**Wissensdatenbank** (übergreifend, nicht kategorie-spezifisch)
 
-Die Referenz-Datenbank fließt hier ein durch:
-- Typische Seitenstrukturen für diese Kategorie (z.B. Supplements-Stores
-  haben typisch X Seiten mit Y Aufbau)
-- Modul-Sequenzen die in Top-Stores (Quality 5) vorkommen
-- Layout-Verteilungen die bei erfolgreichen Stores funktionieren
-- Anti-Patterns die vermieden werden sollen
+Die Wissensdatenbank fließt als Orientierung ein:
+- Welche Strukturprinzipien nutzen erfolgreiche Stores?
+- Welche Modul-Kombinationen funktionieren?
+- Wie viele Seiten machen Sinn für diese Sortimentsbreite?
+- Welcher Design-Archetyp passt zu dieser Marke?
 
-Aufgabe:
-- Seitenstruktur festlegen (welche Seiten, welche Hierarchie)
-- Pro Seite: Thematischer Fokus und Aufbauplan
-  - Welche Themen in welcher Reihenfolge?
-  - Welche Produkte wo zeigen?
-  - Cross-Links zwischen Seiten
-  - Was macht jede Seite einzigartig?
-- Beispiel Kategorie-Seite:
-  - Cool starten mit einem Lifestyle-Bild
-  - Bestseller der Kategorie vorstellen (ggf. als Shoppable Full-Width)
-  - Informationen: Was zeichnet diese Kategorie aus? Welche Mehrwerte?
-  - Unterkategorien aufzeigen (falls vorhanden)
-  - Creative-Bilder: Wo kann Produkt/Kategorie eingeordnet werden?
-    USPs, Pain Points, Anwendungsszenarien
-  - Zwischenüberschriften als Strukturgeber
-  - Produktgrid am Ende
-
-NICHT in diesem Schritt: Konkrete Layouts, finale Texte, Bildbeschreibungen.
-KEINE starre Narrative oder Storyline erzwingen. Thematische Abgrenzung und
-sinnvolle Reihenfolge ja, aber keine erzwungene "Story" pro Seite.
+Ergebnis:
+- **Seitenstruktur**: Welche Seiten, welche Hierarchie
+- **Pro Seite — thematischer Aufbauplan**:
+  - Welche Themen in welcher Reihenfolge
+  - Beispiel Kategorie-Seite:
+    - Lifestyle-Einstieg
+    - Bestseller vorstellen
+    - Was zeichnet diese Kategorie aus? Mehrwerte?
+    - Pain Points ansprechen
+    - Inhaltsstoffe / Features
+    - Anwendungsszenarien
+    - Einzelne Produkte
+    - USPs / Icons
+    - Unterkategorien (falls vorhanden)
+    - Produktgrid
+  - Das ist KEINE Pflicht-Reihenfolge. Der Inhalt bestimmt die Struktur.
+- **Cross-Links** zwischen Seiten
+- **Keine erzwungene Storyline.** Thematische Gliederung ja, aber keine
+  künstliche Narrative. Die Seiten decken verschiedene Aspekte ab:
+  Pain Points, Features, Anwendung, Produkte, Lifestyle, USPs, Icons —
+  das lässt sich nicht auf eine Key-Message runterbrechen.
 
 ---
 
-## PHASE 3: TEXT-ERSTELLUNG (vor der Layout-Generierung!)
+## PHASE 3: TEXT-ERSTELLUNG
 
-### 3.1 — Textbausteine generieren (Claude)
+### 3.1 — Textbausteine (Claude)
 
-Input: Content-Strategie, Brand Voice, Produkt-Profil, Original-Texte
+Input: Content-Strategie, Brand Voice, Produkt-Profil, Original-Texte der Marke
 
-Pro Seite alle Text-Elemente erstellen:
-- Hero Banner Text (Slogan/Claim)
+Pro Seite:
+- Hero Banner Text
 - Kategorie-Überschriften
 - USP-Formulierungen
 - Produkt-Highlights
 - CTA-Texte
 - Benefit-Texte
 - Zwischenüberschriften
-- About/Brand-Story (falls relevant)
 
 Regeln:
 - Alle Texte in Store-Sprache
-- Wording muss Brand Voice entsprechen
+- Wording orientiert sich an der Marke (Website, Listings)
 - Keine generischen Platzhalter
-- Sich am Besten bedienen: Wording aus Website, Listings, Brand Store
-
-NICHT: Starre USP-Formulierungen die überall identisch wiederholt werden.
-USPs können auf verschiedenen Seiten unterschiedlich formuliert sein, solange
-sie inhaltlich konsistent sind.
-
-### 3.2 — Text-Review (nach der vollständigen Store-Generierung)
-
-Statt eines separaten Review-Schritts VOR der Generierung:
-→ NACH der Generierung des gesamten Stores werden alle Texte überflogen.
-→ Wenn sich Texte inhaltlich zu >90% ähneln, aber verschiedene Wortwahl
-  nutzen, werden sie angeglichen (an die bessere der beiden Optionen).
-→ Konsistenz-Check über den ganzen Store.
-
-Kein Zielgruppen-Check nötig — die Texte basieren bereits auf CI und
-Original-Texten der Marke.
+- USPs müssen NICHT überall identisch formuliert sein — inhaltliche
+  Konsistenz reicht, die Wortwahl darf variieren
 
 ---
 
-## PHASE 4: STORE-GENERIERUNG (Inhalt bestimmt das Modul, nicht umgekehrt)
+## PHASE 4: STORE-GENERIERUNG
 
 ### Grundprinzip
 
-Der Inhalt wird ZUERST erstellt (Texte, Bildideen, Themen). DANN wird
-entschieden, welches Modul/Layout am besten dazu passt.
+Die Inhalte aus Phase 2+3 (Themen, Texte, Bildideen) werden in Module
+und Layouts übersetzt. Der Inhalt bestimmt das Modul — nicht umgekehrt.
 
-NICHT: Module vorgeben und dann mit Inhalt füllen.
-NICHT: Starre Alternierung von Full-Width und Grid erzwingen.
-NICHT: Jede Sektion muss ihre Nachbarsektion referenzieren.
+### 4.1 — Seiten generieren (Claude, sequentiell)
 
-Auf Basis der Inhalte wird pro Sektion das passende Layout gewählt.
+Pro Seite (nacheinander, nicht gleichzeitig):
 
-### 4.1 — Seiten generieren (Claude, sequentiell pro Seite)
-
-Input pro Seite:
-- Content-Strategie für diese Seite
-- Finalisierte Texte für diese Seite
-- CI-Profil, Brand Voice
+**Input:**
+- Content-Strategie für diese Seite (aus 2.4)
+- Textbausteine für diese Seite (aus 3.1)
+- CI-Profil + Brand Voice
 - Produkt-Profil (relevante Produkte)
-- Referenz-Datenbank (typische Strukturen für diese Art Seite)
-- Bei Kategorie-Seiten: Wissen darüber, welche Seiten VORHER generiert
-  wurden (verhindert Dopplungen, stellt sicher dass sich Seiten ergänzen)
+- Wissensdatenbank (Prinzipien, nicht Regeln)
+- Bei Kategorie-Seiten: Wissen über bereits generierte Seiten
+  (verhindert Dopplungen, stellt sicher dass sich Seiten ergänzen)
 
-WICHTIG: Homepage und Zusatzseiten (Über-uns, etc.) sind INDIVIDUELL
-aufgebaut und haben nichts mit dem Aufbau der Kategorie-Seiten zu tun.
-Das Homepage-Layout ist KEIN Template für andere Seiten.
+**Output pro Seite:**
+- Hero Banner (Brief + Text)
+- Module/Sektionen mit Layouts
+- Pro Kachel: Bildkategorie, Brief, textOverlay, CTA, Verlinkung
 
-Briefs (Design-Anweisungen):
-- IMMER auf Englisch
+**Sequentielle Generierung** sorgt dafür, dass:
+- Seiten sich nicht doppeln
+- Seiten sich ergänzen
+- Eine gemeinsame Sprache gesprochen wird (Design-Konsistenz, Stil, Sprache, Bilder)
+- Aber: Jede Seite ist individuell aufgebaut. Die Homepage ist KEIN Template.
+
+**Briefs (Design-Anweisungen):**
+- Immer auf Englisch
 - textOverlay-Inhalte NICHT im Brief wiederholen
 - Beschreiben die IDEE des Bildes und die wichtigsten Elemente
-- Keine Mood-Beschreibungen, keine Farb/Stil-Anweisungen
-- Der Designer arbeitet autark auf Basis der CI
+- Keine Farb/Stil/Mood-Anweisungen — der Designer arbeitet autark auf Basis der CI
 
-Lifestyle-Briefs:
-- Spezifische Szene beschreiben (wer, wo, was, wie das Produkt genutzt wird)
-- Keine Stimmungs-Adjektive ("warm", "moody") — der Designer entscheidet
+**Lifestyle-Briefs:**
+- Spezifische Szene (wer, wo, was, wie das Produkt genutzt wird)
 - GOOD: "Woman mid-30s drinking from bottle after outdoor jog, park setting"
 - BAD: "Person using product, warm lighting, satisfied mood"
 
-Creative-Briefs:
-- Bildidee und wichtigste Elemente/Fakten die zu sehen sein sollen
-- Was soll am Ende rüberkommen?
+**Creative-Briefs:**
+- Bildidee + wichtigste Elemente die zu sehen sein sollen
 - GOOD: "Split composition: product hero left, three ingredient icons right"
-- BAD: "Creative image with product and benefits on brand-colored background"
+- BAD: "Creative image with product on brand-colored background"
 
-### 4.2 — Post-Processing (lokal)
+### 4.2 — Post-Processing
 
-- Deduplikation (ASINs, Links, Texte)
+- Deduplikation (ASINs, Links)
 - Link-Validierung
-- Text-Konsistenz-Check (Schritt 3.2)
+- Text-Konsistenz-Check: Wenn sich Texte inhaltlich zu >90% ähneln aber
+  verschiedene Wortwahl nutzen → angleichen an die bessere Option
 
 ---
 
@@ -328,38 +254,64 @@ Creative-Briefs:
 
 ### 5.1 — Referenzbilder automatisch zuordnen
 
-Pro Tile: Passende Bilder von der Marke selbst zuordnen:
+Pro Kachel passende Bilder von der Marke selbst zuordnen:
 - Produktbilder von Amazon (MAIN, PT01-PT06)
 - Website-Bilder, A+ Content Bilder
-- Screenshots von Website-Sections als Inspiration
 
-→ In tile.referenceImages speichern
-→ Designer bekommt visuelle Inspiration die DIREKT von der Marke stammt
-→ CI ist in diesen Bildern bereits sichtbar
+Der Designer bekommt visuelle Inspiration direkt von der Marke.
+CI ist in diesen Bildern bereits sichtbar.
 
 ### 5.2 — Store-weites Design-System (Gemini)
 
-Ein einziger Call der den GESAMTEN Store sieht:
+Ein Call der den GESAMTEN Store sieht:
 - Definiert EIN konsistentes Design-System
 - Hintergrund, Illustration-Stil, Typografie, Akzentfarben
-- Wird an JEDEN Wireframe-Call als Kontext übergeben
+- Wird an jeden weiteren Wireframe-Call als Kontext übergeben
 
-### 5.3 — Bildbeschreibungen pro Seite (Gemini, sequentiell)
+### 5.3 — Bildbeschreibungen (Gemini, sequentiell pro Seite)
 
 - Design-System als Basis
-- Vollständiger Seiten- und Sektions-Kontext
-- Referenzbilder der Tiles als visueller Kontext
-- Sequentiell pro Seite, damit Stil konsistent bleibt
+- Vollständiger Seiten-Kontext
+- Referenzbilder als visueller Kontext
+- Sequentiell damit Stil konsistent bleibt
 
-### 5.4 — Wireframes generieren (Imagen, sequentiell)
+### 5.4 — Wireframes (Imagen, sequentiell)
 
-- Pro Tile ein Imagen-Call
-- Seitenweise, damit Stil konsistent bleibt
-- Design-System als Klammer über alles
+- Pro Kachel ein Call
+- Seitenweise
+- Design-System als Klammer
 
 ---
 
-## API-Calls Übersicht (für Store mit 5 Seiten, ~40 Tiles)
+## ZUSAMMENFASSUNG: WAS PASSIERT WANN
+
+```
+EINGABE
+  ↓
+DATENSAMMLUNG (1.2 + 1.3 parallel)
+  Amazon Scraping + Website Scraping
+  ↓
+ANALYSE (2.1 → 2.2 → 2.3 → 2.4 nacheinander)
+  Produkte → CI → Brand Voice → Content-Strategie
+  ↓
+TEXTE (3.1)
+  Textbausteine auf Basis von Analyse + Brand Voice
+  ↓
+STORE-GENERIERUNG (4.1 Seite für Seite)
+  Inhalte → Module → Layouts → Briefs
+  ↓
+POST-PROCESSING (4.2)
+  Deduplikation + Text-Review
+  ↓
+REFERENZBILDER + WIREFRAMES (5.1 → 5.2 → 5.3 → 5.4)
+  Bilder zuordnen → Design-System → Beschreibungen → Wireframes
+```
+
+Alles sequentiell. Jeder Schritt hat den vollständigen Kontext der vorherigen Schritte.
+
+---
+
+## API-CALLS (für Store mit 5 Seiten, ~40 Kacheln)
 
 | Phase | Schritt | API | Calls |
 |-------|---------|-----|-------|
@@ -371,11 +323,9 @@ Ein einziger Call der den GESAMTEN Store sieht:
 | 2.4 | Content-Strategie | Claude | 1 |
 | 3.1 | Textbausteine | Claude | 1 |
 | 4.1 | Seiten-Generierung | Claude | 1 pro Seite |
-| 4.2 | Text-Review | Claude | 1 |
+| 4.2 | Post-Processing | Claude | 1 |
 | 5.2 | Design-System | Gemini | 1 |
 | 5.3 | Bildbeschreibungen | Gemini | 1 pro Seite |
-| 5.4 | Wireframes | Imagen | 1 pro Tile |
+| 5.4 | Wireframes | Imagen | 1 pro Kachel |
 
-Total: ~12 Claude + ~7 Gemini + ~40 Imagen + Scraping
-
-API-Kosten sind kein Limit mehr. Qualität des Outputs hat Priorität.
+~12 Claude + ~7 Gemini + ~40 Imagen + Scraping
