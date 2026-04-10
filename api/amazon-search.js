@@ -143,7 +143,6 @@ module.exports = async function handler(req, res) {
           storeUrl: p.store_url || null,
         };
       });
-      });
 
     return res.status(200).json({ products: products, count: products.length });
 
