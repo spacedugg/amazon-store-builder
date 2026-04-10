@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { checkAsinCompleteness } from '../generationPipeline';
 
-export default function AsinOverview({ store, products, onClose }) {
+export default function AsinOverview({ store, products, onClose, onMoveAsin }) {
   var [filter, setFilter] = useState('all'); // 'all', 'missing', 'found'
+  var [moveAsin, setMoveAsin] = useState(null); // asin being moved
 
   if (!store || !store.pages || store.pages.length === 0) {
     return (
@@ -106,7 +107,36 @@ export default function AsinOverview({ store, products, onClose }) {
                       Not found in any page
                     </div>
                   )}
+
+                  {/* Move ASIN dropdown */}
+                  {moveAsin === asin && onMoveAsin && (
+                    <div style={{ marginTop: 6, padding: '6px 8px', background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 4 }}>
+                      <div style={{ fontSize: 10, fontWeight: 600, color: '#1e40af', marginBottom: 4 }}>Move to page:</div>
+                      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                        {store.pages.map(function(pg) {
+                          return (
+                            <button key={pg.id} onClick={function() { onMoveAsin(asin, pg.id); setMoveAsin(null); }}
+                              style={{ fontSize: 10, padding: '3px 8px', borderRadius: 4, border: '1px solid #bfdbfe', background: '#fff', cursor: 'pointer', color: '#1e40af' }}>
+                              {pg.name}
+                            </button>
+                          );
+                        })}
+                        <button onClick={function() { setMoveAsin(null); }}
+                          style={{ fontSize: 10, padding: '3px 8px', borderRadius: 4, border: '1px solid #e2e8f0', background: '#f1f5f9', cursor: 'pointer', color: '#64748b' }}>
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
+
+                {/* Move button */}
+                {onMoveAsin && (
+                  <button onClick={function() { setMoveAsin(moveAsin === asin ? null : asin); }}
+                    style={{ padding: '4px 8px', fontSize: 10, borderRadius: 4, border: '1px solid #e2e8f0', background: moveAsin === asin ? '#e0e7ff' : '#f8fafc', cursor: 'pointer', color: '#475569', flexShrink: 0 }}>
+                    Move
+                  </button>
+                )}
               </div>
             );
           })}

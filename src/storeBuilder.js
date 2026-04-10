@@ -1957,10 +1957,15 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
 
   // STEP 2: Generate Homepage Layout
   log('AI designing Homepage layout...');
-  // For small catalogs: show ALL products on homepage
-  // For larger catalogs: pick top 1 product per category as hero/representative
   var homepageProducts = [];
-  if (skipCategoryPages) {
+  // If pipeline content strategy defined homepage ASINs, use those
+  var pipelineHomepage = pipeline.contentStrategy && pipeline.contentStrategy.pages
+    ? pipeline.contentStrategy.pages.find(function(p) { return p.id === 'homepage' || p.name === 'Homepage'; })
+    : null;
+  if (pipelineHomepage && pipelineHomepage.asins && pipelineHomepage.asins.length > 0) {
+    homepageProducts = pipelineHomepage.asins.map(function(a) { return productMap[a]; }).filter(Boolean);
+    log('   Using ' + homepageProducts.length + ' products from pipeline content strategy');
+  } else if (skipCategoryPages) {
     // Small catalog: ALL products go to homepage
     homepageProducts = products.slice();
   } else {
@@ -1985,7 +1990,13 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       analysis.categories || [], analysis, userInstructions, cLevel, category, template, websiteData, referenceAnalysis, false
     );
     var homeSections = ensureMinimumSections(homeResult.sections || [], 'Homepage', brand, lang, analysis, template, true, cLevel);
-    pages.push({ id: 'homepage', name: 'Homepage', sections: homeSections, heroBannerBrief: homeResult.heroBannerBrief || '', heroBannerTextOverlay: homeResult.heroBannerTextOverlay || '' });
+    // Use pipeline text blocks for hero banner if available
+    var homeTextBlocks = pipeline.textBlocks && pipeline.textBlocks.pages
+      ? pipeline.textBlocks.pages.find(function(p) { return p.pageId === 'homepage'; })
+      : null;
+    var heroBrief = homeResult.heroBannerBrief || '';
+    var heroText = homeResult.heroBannerTextOverlay || (homeTextBlocks ? homeTextBlocks.heroBannerText : '') || '';
+    pages.push({ id: 'homepage', name: 'Homepage', sections: homeSections, heroBannerBrief: heroBrief, heroBannerTextOverlay: heroText });
     log('Homepage: ' + homeSections.length + ' sections');
   } catch (err) {
     log('AI homepage failed (' + err.message + '), using fallback...');
@@ -2044,7 +2055,12 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
         categories, analysis, userInstructions, cLevel, category, template, websiteData, referenceAnalysis, false, categoryBlueprint
       );
       var catSections = ensureMinimumSections(catResult.sections || [], cat.name, brand, lang, analysis, template, false, cLevel);
-      pages.push({ id: parentPageId, name: cat.name, sections: catSections, heroBannerBrief: catResult.heroBannerBrief || '', heroBannerTextOverlay: catResult.heroBannerTextOverlay || '' });
+      var catTextBlocks = pipeline.textBlocks && pipeline.textBlocks.pages
+        ? pipeline.textBlocks.pages.find(function(p) { return p.pageId === parentPageId || p.pageId === cat.name; })
+        : null;
+      var catHeroBrief = catResult.heroBannerBrief || '';
+      var catHeroText = catResult.heroBannerTextOverlay || (catTextBlocks ? catTextBlocks.heroBannerText : '') || '';
+      pages.push({ id: parentPageId, name: cat.name, sections: catSections, heroBannerBrief: catHeroBrief, heroBannerTextOverlay: catHeroText });
       log(cat.name + ': ' + catSections.length + ' sections');
 
       // Capture thematic blueprint from first category page
@@ -2789,6 +2805,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     uspGroups[key].push(u);
   });
   var inconsistencies = 0;
+  var corrections = 0;
   Object.keys(uspGroups).forEach(function(key) {
     var group = uspGroups[key];
     if (group.length > 1) {
@@ -2796,14 +2813,24 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       group.forEach(function(g) { if (unique.indexOf(g.text) < 0) unique.push(g.text); });
       if (unique.length > 1) {
         inconsistencies++;
+        // Auto-correct: use the first occurrence as the standard
+        var standard = unique[0];
+        group.forEach(function(g) {
+          if (g.text !== standard) {
+            // Replace in the tile's textOverlay
+            var oldOverlay = g.tile.textOverlay || '';
+            g.tile.textOverlay = oldOverlay.replace(g.text, standard);
+            corrections++;
+          }
+        });
         if (inconsistencies <= 3) {
-          log('   Text variants found: "' + unique[0].slice(0, 40) + '" vs "' + unique[1].slice(0, 40) + '"');
+          log('   Auto-corrected: "' + unique[1].slice(0, 40) + '" → "' + standard.slice(0, 40) + '"');
         }
       }
     }
   });
-  if (inconsistencies > 0) {
-    log('   ' + inconsistencies + ' potential text inconsistencies found. Review in the store editor.');
+  if (corrections > 0) {
+    log('   ' + corrections + ' text inconsistencies auto-corrected across ' + inconsistencies + ' groups.');
   } else {
     log('   Text consistency OK.');
   }

@@ -455,6 +455,20 @@ export default function App() {
         }
       }
 
+      // Enrich website data with user-provided brand assets
+      if (params.logoFile || params.fontNames || params.brandColors) {
+        if (!enhancedWebsiteData) enhancedWebsiteData = {};
+        if (params.logoFile) enhancedWebsiteData.logoDataUrl = params.logoFile;
+        if (params.fontNames) enhancedWebsiteData.userFonts = params.fontNames;
+        if (params.brandColors) {
+          var userColors = params.brandColors.split(/[,;\s]+/).filter(function(c) { return c.match(/^#[0-9a-fA-F]{3,8}$/); });
+          if (userColors.length > 0) {
+            enhancedWebsiteData.colors = userColors;
+            log('User-provided brand colors: ' + userColors.join(', '));
+          }
+        }
+      }
+
       log('');
       log('═══ PHASE 2: ANALYSE ═══');
 
@@ -1276,6 +1290,39 @@ export default function App() {
           store={store}
           products={store.products}
           onClose={function() { setShowAsinOverview(false); }}
+          onMoveAsin={function(asin, targetPageId) {
+            // Add the ASIN to the target page's last product_grid section
+            // or create a new product_grid section if none exists
+            setStoreWithUndo(function(s) {
+              return Object.assign({}, s, {
+                pages: s.pages.map(function(pg) {
+                  if (pg.id !== targetPageId) return pg;
+                  var sections = (pg.sections || []).slice();
+                  // Find existing product_grid section
+                  var gridIdx = -1;
+                  for (var i = sections.length - 1; i >= 0; i--) {
+                    var hasPG = sections[i].tiles.some(function(t) { return t.type === 'product_grid'; });
+                    if (hasPG) { gridIdx = i; break; }
+                  }
+                  if (gridIdx >= 0) {
+                    // Add ASIN to existing product_grid tile
+                    sections[gridIdx] = Object.assign({}, sections[gridIdx], {
+                      tiles: sections[gridIdx].tiles.map(function(t) {
+                        if (t.type !== 'product_grid') return t;
+                        var newAsins = (t.asins || []).slice();
+                        if (newAsins.indexOf(asin) < 0) newAsins.push(asin);
+                        return Object.assign({}, t, { asins: newAsins });
+                      }),
+                    });
+                  } else {
+                    // Create new product_grid section with the ASIN
+                    sections.push({ id: uid(), layoutId: '1', tiles: [{ type: 'product_grid', asins: [asin], brief: '', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, mobileDimensions: { w: 1680, h: 1200 } }] });
+                  }
+                  return Object.assign({}, pg, { sections: sections });
+                }),
+              });
+            });
+          }}
         />
       )}
 
