@@ -1,93 +1,74 @@
-# Brand Store Audit: True Nature — Analyse des generierten Outputs
+# Brand Store Audit: True Nature
 
-## Dein Auftrag
+## Auftrag
 
-Du bekommst einen generierten Amazon Brand Store für die Marke "True Nature". Analysiere den gesamten Store kritisch und dokumentiere ALLE Probleme. Der Store wurde mit dem Brand Store Builder Tool generiert und enthält massive Qualitätsprobleme.
+Du analysierst einen generierten Amazon Brand Store für "True Nature" (Nahrungsergänzungsmittel). Vergleiche den generierten Store mit dem echten Online-Shop (truenature.de) und dem echten Amazon Brand Store. Dokumentiere JEDEN Fehler.
+
+## Vergleichsquellen
+
+1. **Generierter Store**: Wird dir vom User gezeigt/geteilt
+2. **Echter Online-Shop**: https://truenature.de
+3. **Echter Amazon Brand Store**: https://www.amazon.de/stores/page/B4CF1B6D-F601-4927-B82F-8FD07CF887DC
+
+Öffne alle drei und vergleiche.
 
 ## Was du analysieren sollst
 
-### 1. ASIN-Kategorisierung
-- Öffne den generierten Store und prüfe JEDE Unterseite
-- Liste JEDE ASIN auf und in welcher Kategorie sie gelandet ist
-- Markiere FALSCH zugeordnete ASINs (z.B. "Flohsamenschalen" in "Schlaf")
-- Vergleiche mit dem echten True Nature Online-Shop: https://truenature.de
-- Vergleiche mit dem echten Amazon Brand Store: https://www.amazon.de/stores/page/B4CF1B6D-F601-4927-B82F-8FD07CF887DC
+### A. ASIN-Kategorisierung
+- Prüfe JEDE ASIN auf JEDER Unterseite
+- Vergleiche mit den Kategorien im echten Online-Shop
+- Markiere JEDE falsche Zuordnung (z.B. Flohsamenschalen in "Schlaf")
+- Liste die korrekte Kategorie daneben
 
-### 2. Designer Briefings vs. interne Bildbeschreibungen
-- Prüfe ob Designer Briefings zu detailliert sind (Filmregie-artig mit "cinematic wide shot", Lichtverhältnisse, Stimmungsbeschreibungen)
-- Designer Briefings sollen KURZ und KNAPP sein: Bildidee + wichtigste Elemente
-- Interne Bildbeschreibungen (für Wireframe-Generierung) sollen DETAILLIERT sein
-- Dokumentiere Beispiele wo die beiden vertauscht scheinen
+### B. ASIN-Brief-Konsistenz
+- Prüfe ob die im Designer-Brief erwähnten Produkte auch als ASIN verlinkt sind
+- Wenn Brief sagt "Bio Flohsamenschalen und Bio Hagebutten arrangiert" aber die verlinkte ASIN ist "Taurin" — das ist ein kritischer Fehler
+- Dokumentiere JEDEN Mismatch: welcher Brief, welche ASIN erwartet, welche ASIN tatsächlich verlinkt
 
-### 3. USPs und Brand-Informationen
-- Vergleiche die generierten USPs mit den echten USPs von truenature.de:
+### C. USPs
+- Echte USPs von truenature.de:
   - 98% Produktzufriedenheit
-  - Von Ernährungswissenschaftlern entwickelt  
+  - Von Ernährungswissenschaftlern entwickelt
   - Made in Germany
   - 365 Tage Zufriedenheitsgarantie
   - Natürlichkeit: ohne Laktose, Farbstoffe, Gentechnik, Gluten, Konservierungsstoffe
-- Welche USPs fehlen im generierten Store?
-- Welche USPs wurden erfunden oder falsch dargestellt?
+- Welche davon fehlen im generierten Store?
+- Welche USPs wurden erfunden?
+- Wo stehen USPs die so auf der Website gar nicht existieren?
 
-### 4. Unterseiten-Qualität
-- Prüfe die Extra-Seiten: Neuheiten, Über uns, Bestseller, Produktauswahl
-- Sind dort überhaupt Inhalte generiert worden?
-- Wenn leer oder fast leer: dokumentiere das
+### D. Designer Briefings
+- Sind sie kurz und knapp (Bildidee + Elemente)?
+- Oder sind sie zu detailliert (Filmregie: "cinematic wide shot", Lichtverhältnisse, Stimmung)?
+- Dokumentiere Beispiele für zu detaillierte Briefs
+- Dokumentiere Beispiele für gute Briefs (falls vorhanden)
 
-### 5. Wireframe-Qualität (falls generiert)
-- Stimmen die Wireframes inhaltlich mit den Briefings überein?
-- Zeigen die Wireframes Produkte die zur Marke gehören oder random-generierte?
-- Ist die CI (Farben, Stil) erkennbar?
+### E. Unterseiten-Qualität
+- Hat jede Unterseite individuelle, spezifische Inhalte?
+- Oder sind die Texte generisch und austauschbar?
+- Sind Extra-Seiten (Neuheiten, Über uns, Bestseller, Produktauswahl) leer oder mit Inhalt?
+- Wie viele Module hat jede Seite? Zu wenig? Zu viel?
 
-### 6. Seitenstruktur
-- Ist die Kategorisierung sinnvoll für 48 Supplement-Produkte?
-- Fehlen offensichtliche Kategorien?
-- Sind die Kategorienamen passend?
+### F. Inhaltliche Logik
+- Ergibt das Bestseller-Produkt auf der Homepage Sinn?
+- Passen die Lifestyle-Beschreibungen zu den Produkten? (z.B. Ashwagandha = Schlafbeere, aber Lifestyle zeigt "Energie tanken am Morgen")
+- Werden Produkte in Kontexten gezeigt die inhaltlich falsch sind?
 
-### 7. Modul-Aufbau pro Seite
-- Wie viele Module hat jede Seite?
-- Sind es zu viele, zu wenige?
-- Gibt es leere oder fast leere Seiten?
-- Ergibt die Reihenfolge der Module Sinn?
+### G. CI-Konsistenz
+- Stimmen die generierten Farben mit der echten True Nature CI überein?
+- Sind die generierten USPs konsistent formuliert über alle Seiten?
 
-## Output-Format
+### H. Wireframes (falls vorhanden)
+- Zeigen sie Produkte die zur Marke gehören?
+- Ist die CI erkennbar?
+- Oder sind es random-generierte Bilder?
 
-Erstelle einen Report als JSON:
-```json
-{
-  "overallScore": "1-10",
-  "criticalIssues": [
-    "Issue 1: description",
-    "Issue 2: description"
-  ],
-  "asinMiscategorizations": [
-    { "asin": "B0...", "product": "Flohsamenschalen", "wrongCategory": "Schlaf", "correctCategory": "Verdauung" }
-  ],
-  "missingUSPs": ["USP that should be there but isn't"],
-  "inventedUSPs": ["USP that was made up"],
-  "emptyPages": ["page names with no/minimal content"],
-  "briefingIssues": [
-    { "page": "Homepage", "section": 7, "issue": "Designer brief too detailed, reads like film direction" }
-  ],
-  "wireframeIssues": [
-    { "page": "Homepage", "section": 6, "issue": "Shows 4 random products that don't belong to True Nature" }
-  ],
-  "recommendations": [
-    "What needs to change in the generation process"
-  ]
-}
-```
+## Output
 
-## Kontext
-
-Der Brand Store Builder hat folgende Pipeline:
-1. ASIN Scraping (BrightData) → nur 8 Bilder für CI-Analyse genommen statt alle
-2. Website Scraping → unvollständig
-3. Bestehender Store Crawling → nur 10 Pages, falsche Modul-Erkennung
-4. Produkt-Analyse → falsche Kategorisierung
-5. Brand Voice → scheint OK
-6. Content Strategy → 6 Seiten geplant, aber USPs falsch
-7. Textbausteine → basieren auf falscher Analyse
-8. Store-Generierung → Designer Briefs zu detailliert, ASINs falsch zugeordnet
-
-Sei schonungslos ehrlich in deiner Bewertung.
+Erstelle einen detaillierten Report mit:
+1. Gesamtbewertung (1-10)
+2. Kritische Fehler (priorisiert)
+3. ASIN-Fehlzuordnungen (Tabelle)
+4. Brief-ASIN-Mismatches (Tabelle)
+5. Fehlende/falsche USPs
+6. Unterseiten-Qualität pro Seite
+7. Konkrete Verbesserungsvorschläge für den Generierungsprozess
