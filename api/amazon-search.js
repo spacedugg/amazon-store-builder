@@ -148,6 +148,7 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ products: products, count: products.length });
 
   } catch (err) {
-    return res.status(500).json({ error: err.message });
+    console.error('[amazon-search] Error:', err.message, err.stack);
+    return res.status(500).json({ error: err.message, stack: (err.stack || '').slice(0, 300) });
   }
 };
