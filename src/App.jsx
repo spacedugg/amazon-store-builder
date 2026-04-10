@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, STORE_TEMPLATES, findLayout, LAYOUT_TILE_DIMS } from './constants';
+import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, findLayout, LAYOUT_TILE_DIMS } from './constants';
 import { scrapeAsins, analyzeBrandCI } from './api';
 import { generateStore, aiRefineStore, applyOperations, generateWireframesForPage, deleteWireframesForPage } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink } from './storage';
@@ -374,12 +374,6 @@ export default function App() {
         log('Extra subpages: ' + activeExtras.join(', '));
       }
 
-      // Resolve template data if selected
-      var templateData = null;
-      if (params.template) {
-        templateData = STORE_TEMPLATES.find(function(t) { return t.id === params.template; }) || null;
-      }
-
       // Website data is always used for CI extraction when available
       var enhancedWebsiteData = params.websiteData || null;
 
@@ -546,7 +540,7 @@ export default function App() {
       // Step 4: AI generation (with all pipeline data as enriched context)
       var storeData = await generateStore(
         params.asins, products, params.brand, params.marketplace, lang,
-        params.instructions, log, params.complexity, templateData, enhancedWebsiteData, referenceAnalysis,
+        params.instructions, log, params.complexity, null, enhancedWebsiteData, referenceAnalysis,
         { extraPages: selectedExtraPages, includeProductVideos: params.includeProductVideos, generateWireframes: params.generateWireframes, referenceCategory: params.referenceCategory },
         genCancelRef,
         { productAnalysis: pipelineProductAnalysis, brandVoice: pipelineBrandVoice, contentStrategy: pipelineContentStrategy, textBlocks: pipelineTextBlocks }
@@ -556,7 +550,6 @@ export default function App() {
       storeData.complexity = params.complexity;
       if (productCI) storeData.productCI = productCI;
       storeData.ciSource = userCiSource;
-      if (templateData) storeData.templateId = templateData.id;
       if (enhancedWebsiteData) storeData.websiteData = enhancedWebsiteData;
       if (pipelineProductAnalysis) storeData.pipelineProductAnalysis = pipelineProductAnalysis;
       if (pipelineBrandVoice) storeData.pipelineBrandVoice = pipelineBrandVoice;
