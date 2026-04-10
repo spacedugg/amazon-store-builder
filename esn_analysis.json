@@ -1,0 +1,566 @@
+{
+  "brandName": "ESN (Elite Sports Nutrition)",
+  "storeUrl": "https://www.amazon.de/stores/ESN/page/F5F8CAD5-7990-44CF-9F5B-61DFFF5E8581",
+  "analyzedAt": "2026-04-09",
+  "methodology": "V3",
+  "navigation": {
+    "pageCount": 21,
+    "pages": [
+      {
+        "name": "Startseite",
+        "level": 0,
+        "pageId": "F5F8CAD5-7990-44CF-9F5B-61DFFF5E8581"
+      },
+      {
+        "name": "Bestseller",
+        "level": 1,
+        "pageId": "137F3F89-CAFA-407C-A947-6985172B0E8F"
+      },
+      {
+        "name": "Neuheiten",
+        "level": 1,
+        "pageId": "F2F0F62B-C596-4268-893C-6D98CC7D8AAB"
+      },
+      {
+        "name": "PROTEINE",
+        "level": 1,
+        "pageId": "05C54A75-8964-41E5-9C10-19EB32583205"
+      },
+      {
+        "name": "DESIGNER WHEY",
+        "level": 2,
+        "parentCategory": "PROTEINE",
+        "pageId": "8F9839F1-7792-40E9-BC87-D8253DB32928"
+      },
+      {
+        "name": "ISOCLEAR",
+        "level": 2,
+        "parentCategory": "PROTEINE",
+        "pageId": "F7E30D0D-D2C4-4493-BE92-B7F0C8ACFC5C"
+      },
+      {
+        "name": "FLEXPRESSO",
+        "level": 2,
+        "parentCategory": "PROTEINE",
+        "pageId": "2B83B00A-4B34-4164-AE99-370F051B7A19"
+      },
+      {
+        "name": "ISOWHEY HARDCORE",
+        "level": 2,
+        "parentCategory": "PROTEINE",
+        "pageId": "7A0AC72C-C59B-4C49-84EE-3E43C4D89AF1"
+      },
+      {
+        "name": "CREATINE",
+        "level": 2,
+        "parentCategory": "PROTEINE",
+        "pageId": "7E18C3B4-AB9A-40B8-8555-84E9967150DF"
+      },
+      {
+        "name": "VITALSTOFFE",
+        "level": 1,
+        "pageId": "4903A282-E37D-4D91-BB9F-281622934C0B"
+      },
+      {
+        "name": "PERFORMANCE",
+        "level": 1,
+        "pageId": "58488065-5C6A-4494-A3DB-AB7D86AB0081"
+      },
+      {
+        "name": "AUSDAUER",
+        "level": 1,
+        "pageId": "61DF7835-CF8D-4EE0-A1FC-990F40F50828"
+      },
+      {
+        "name": "FOOD & SNACKS",
+        "level": 1,
+        "pageId": "8781E3CA-F1B1-411C-9D4A-FDCEF80DE443"
+      },
+      {
+        "name": "RIEGEL",
+        "level": 2,
+        "parentCategory": "FOOD & SNACKS",
+        "pageId": "4C57C5A9-3D08-4FC4-8FFA-1A84A0E71385"
+      },
+      {
+        "name": "FLAVOR POWDER",
+        "level": 2,
+        "parentCategory": "FOOD & SNACKS",
+        "pageId": "4DEFD04A-0432-4AB6-A9E3-B88BEBD37D72"
+      },
+      {
+        "name": "SYRUPS",
+        "level": 2,
+        "parentCategory": "FOOD & SNACKS",
+        "pageId": "232C8E9D-A079-4E48-9657-88134BF45B97"
+      },
+      {
+        "name": "ZUBEHÖR",
+        "level": 1,
+        "pageId": "A009E059-5CA2-40E3-9324-76C75CA694D7"
+      },
+      {
+        "name": "BUNDLES",
+        "level": 1,
+        "pageId": "70838D1C-F961-4660-A2B1-84A5A5A69D67"
+      },
+      {
+        "name": "ALLE PRODUKTE",
+        "level": 1,
+        "pageId": "9FED5CCC-6284-44BD-AD83-AAEEBF48E23F"
+      },
+      {
+        "name": "PRODUKTSELEKTOR",
+        "level": 1,
+        "pageId": "2AFC0A42-A702-462D-B255-B5203C7449F8"
+      },
+      {
+        "name": "ÜBER ESN",
+        "level": 1,
+        "pageId": "44C5F932-97AA-4A1B-A7F1-207D5450AF8F"
+      }
+    ]
+  },
+  "contentSummary": {
+    "totalEditorialImages": 75,
+    "uniqueVideos": 6,
+    "editorialToVideoRatio": 12.5
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "pageId": "F5F8CAD5-7990-44CF-9F5B-61DFFF5E8581",
+      "heroBanner": {
+        "description": "Schwarzer Hintergrund mit großem weißen ESN-Logo (bold, sportlich, kantig). Darunter 'ELITE SPORTS NUTRITION' in Versalien. Maskulin, sportlich, High-Performance-Ästhetik.",
+        "textOnImage": "ESN, ELITE SPORTS NUTRITION",
+        "estimatedDimensions": "3000x600",
+        "brandIdentityNote": "Large white logo on black conveys strength and elite positioning. All-caps typography reinforces athletic intensity."
+      },
+      "editorialImages": 12,
+      "videos": 0,
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Full-Width Hero",
+          "layoutId": "hero-full",
+          "tileCount": 1,
+          "designRationale": "Large hero banner establishing brand identity - bold visual gateway",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "3000x1500",
+              "imageCategory": "hero",
+              "description": "Black background with large white ESN logo and 'ELITE SPORTS NUTRITION' positioning"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "layoutType": "Full-Width Narrow",
+          "layoutId": "divider-narrow",
+          "tileCount": 1,
+          "designRationale": "Visual divider/separator banner",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "872x218",
+              "imageCategory": "divider",
+              "description": "Narrow band providing visual separation between hero and category tiles"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "layoutType": "lg-2grid Wide",
+          "layoutId": "lg-2grid-wide",
+          "tileCount": 2,
+          "designRationale": "Two large category showcase tiles for primary product lines",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "872x436",
+              "imageCategory": "category-banner",
+              "description": "Primary category tile (e.g., PROTEINE showcase with sub-brand highlights)"
+            },
+            {
+              "position": "2",
+              "size": "872x436",
+              "imageCategory": "category-banner",
+              "description": "Secondary category tile (e.g., VITALSTOFFE or FOOD & SNACKS)"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "layoutType": "lg-4grid Narrow",
+          "layoutId": "lg-4grid-narrow",
+          "tileCount": 8,
+          "designRationale": "Eight narrow category tiles providing quick navigation hierarchy",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 1 (e.g., PERFORMANCE)"
+            },
+            {
+              "position": "2",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 2 (e.g., AUSDAUER)"
+            },
+            {
+              "position": "3",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 3 (e.g., FOOD & SNACKS)"
+            },
+            {
+              "position": "4",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 4 (e.g., ZUBEHÖR)"
+            },
+            {
+              "position": "5",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 5 (e.g., BUNDLES)"
+            },
+            {
+              "position": "6",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 6 (e.g., BESTSELLER)"
+            },
+            {
+              "position": "7",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 7 (e.g., NEUHEITEN)"
+            },
+            {
+              "position": "8",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 8 (e.g., ALLE PRODUKTE)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "Bestseller",
+      "pageId": "137F3F89-CAFA-407C-A947-6985172B0E8F",
+      "editorialImages": 2,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Bestseller category banner, consistent with brand black/white aesthetic",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Category page with minimal editorial content focused on best-performing products. Hero banner + supporting banner + product grid."
+    },
+    {
+      "pageName": "Neuheiten",
+      "pageId": "F2F0F62B-C596-4268-893C-6D98CC7D8AAB",
+      "editorialImages": 1,
+      "videos": 0,
+      "heroBanner": {
+        "description": "New arrivals showcase banner with latest product releases",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Minimal editorial - single hero banner leading into new product grid."
+    },
+    {
+      "pageName": "PROTEINE",
+      "pageId": "05C54A75-8964-41E5-9C10-19EB32583205",
+      "editorialImages": 6,
+      "videos": 1,
+      "heroBanner": {
+        "description": "PROTEINE main category hero with core product positioning on dark background",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Main category with moderate editorial content. Includes hero, brand positioning banners, sub-brand showcases (DESIGNER WHEY, ISOCLEAR, FLEXPRESSO, ISOWHEY HARDCORE, CREATINE), and product grid."
+    },
+    {
+      "pageName": "DESIGNER WHEY",
+      "pageId": "8F9839F1-7792-40E9-BC87-D8253DB32928",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Sub-brand DESIGNER WHEY hero with product focus and athletic imagery",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Template-consistent sub-brand page: hero banner + 2 supporting product highlight banners + product grid. Dark sports photography with intense athletes."
+    },
+    {
+      "pageName": "ISOCLEAR",
+      "pageId": "F7E30D0D-D2C4-4493-BE92-B7F0C8ACFC5C",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Sub-brand ISOCLEAR hero with premium protein isolate positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Consistent sub-brand template: hero + 2 product highlight banners + grid."
+    },
+    {
+      "pageName": "FLEXPRESSO",
+      "pageId": "2B83B00A-4B34-4164-AE99-370F051B7A19",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Sub-brand FLEXPRESSO hero with coffee-focused nutrition positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Consistent sub-brand template: hero + 2 product highlight banners + grid."
+    },
+    {
+      "pageName": "ISOWHEY HARDCORE",
+      "pageId": "7A0AC72C-C59B-4C49-84EE-3E43C4D89AF1",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Sub-brand ISOWHEY HARDCORE hero with intense athletic and high-performance imagery",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Consistent sub-brand template: hero + 2 product highlight banners + grid. Dark, intense lighting emphasizes hardcore positioning."
+    },
+    {
+      "pageName": "VITALSTOFFE",
+      "pageId": "4903A282-E37D-4D91-BB9F-281622934C0B",
+      "editorialImages": 3,
+      "videos": 1,
+      "heroBanner": {
+        "description": "VITALSTOFFE (vitamins/supplements) category hero with benefit-focused messaging",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Category page with moderate editorial (3 images + 1 video). Includes hero, benefit-focused banners, and product grid."
+    },
+    {
+      "pageName": "PERFORMANCE",
+      "pageId": "58488065-5C6A-4494-A3DB-AB7D86AB0081",
+      "editorialImages": 2,
+      "videos": 1,
+      "heroBanner": {
+        "description": "PERFORMANCE category hero emphasizing athletic achievement and competitive edge",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Category page with minimal editorial (2 images + 1 video). Hero + supporting content + product grid."
+    },
+    {
+      "pageName": "CREATINE",
+      "pageId": "7E18C3B4-AB9A-40B8-8555-84E9967150DF",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Sub-brand CREATINE hero with performance science and strength focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Consistent sub-brand template: hero + 2 product highlight banners + grid."
+    },
+    {
+      "pageName": "AUSDAUER",
+      "pageId": "61DF7835-CF8D-4EE0-A1FC-990F40F50828",
+      "editorialImages": 7,
+      "videos": 1,
+      "heroBanner": {
+        "description": "AUSDAUER (endurance) category hero with athletic training and stamina focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Major category with substantial editorial content (7 images + 1 video). Includes hero, multiple product benefit banners, possibly sub-category showcases for endurance supplements, hydration products, etc., then product grid."
+    },
+    {
+      "pageName": "FOOD & SNACKS",
+      "pageId": "8781E3CA-F1B1-411C-9D4A-FDCEF80DE443",
+      "editorialImages": 2,
+      "videos": 0,
+      "heroBanner": {
+        "description": "FOOD & SNACKS category hero with nutrition and convenience positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Category page with minimal editorial (2 images). Features hero banner and sub-category navigation to RIEGEL, FLAVOR POWDER, SYRUPS, then product grid."
+    },
+    {
+      "pageName": "RIEGEL",
+      "pageId": "4C57C5A9-3D08-4FC4-8FFA-1A84A0E71385",
+      "editorialImages": 3,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Sub-brand RIEGEL (protein bars) hero with portable nutrition focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Sub-category page: hero banner + 2 supporting banners + 1 video + product grid."
+    },
+    {
+      "pageName": "FLAVOR POWDER",
+      "pageId": "4DEFD04A-0432-4AB6-A9E3-B88BEBD37D72",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Sub-brand FLAVOR POWDER hero with variety and taste customization focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Sub-category template: hero + 2 supporting product highlight banners + grid."
+    },
+    {
+      "pageName": "SYRUPS",
+      "pageId": "232C8E9D-A079-4E48-9657-88134BF45B97",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Sub-brand SYRUPS hero with flavor and convenience customization positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Sub-category template: hero + 2 supporting product highlight banners + grid."
+    },
+    {
+      "pageName": "ZUBEHÖR",
+      "pageId": "A009E059-5CA2-40E3-9324-76C75CA694D7",
+      "editorialImages": 2,
+      "videos": 0,
+      "heroBanner": {
+        "description": "ZUBEHÖR (accessories) category hero with equipment and tools focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Category page with minimal editorial (2 images). Hero banner + product grid for shakers, supplement accessories, training tools."
+    },
+    {
+      "pageName": "BUNDLES",
+      "pageId": "70838D1C-F961-4660-A2B1-84A5A5A69D67",
+      "editorialImages": 2,
+      "videos": 0,
+      "heroBanner": {
+        "description": "BUNDLES category hero emphasizing value and savings",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Category page with minimal editorial (2 images). Hero + bundled product offerings + grid."
+    },
+    {
+      "pageName": "ALLE PRODUKTE",
+      "pageId": "9FED5CCC-6284-44BD-AD83-AAEEBF48E23F",
+      "editorialImages": 0,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Minimal or no hero for comprehensive product catalog view",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Product listing page with no editorial content - pure product grid serving as complete catalog."
+    },
+    {
+      "pageName": "PRODUKTSELEKTOR",
+      "pageId": "2AFC0A42-A702-462D-B255-B5203C7449F8",
+      "editorialImages": 1,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Product selector/finder tool with minimal branding",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Interactive tool page (quiz or filter system) helping customers find right products. Minimal editorial, focus on functional UI and user guidance."
+    },
+    {
+      "pageName": "ÜBER ESN",
+      "pageId": "44C5F932-97AA-4A1B-A7F1-207D5450AF8F",
+      "editorialImages": 11,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Brand story hero with rich imagery - athletes, products, facilities, company mission on black background",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Most content-rich page (11 images + 1 video) serving as brand storytelling hub. Content includes hero, multiple sections on brand values, manufacturing process, athlete testimonials, certifications/quality, company history and mission with supporting imagery."
+    }
+  ],
+  "designPatterns": {
+    "colorScheme": {
+      "background": "Black/Dark",
+      "textColor": "White",
+      "accentColor": "Minimal to none",
+      "rationale": "High contrast conveys strength, professionalism, and elite positioning"
+    },
+    "typography": {
+      "primary": "Bold sans-serif, all-caps for category and sub-brand names",
+      "characteristics": "Strong, athletic, commanding presence. No decorative elements."
+    },
+    "photography": {
+      "style": "Professional sports/fitness photography",
+      "lighting": "Dark, dramatic lighting emphasizing athleticism and intensity",
+      "subjects": "Elite athletes in action, equipment, supplements, high-performance imagery"
+    },
+    "layoutPatterns": {
+      "homepage": "Large hero (3000x1500) + narrow divider (872x218) + wide category tiles (2x872x436) + narrow category grid (8x436x218)",
+      "categoryPages": "Consistent hero (1872x400) + supporting banners (1-2) + product grid",
+      "subBrandPages": "Hero banner (1872x400) + 2 supporting product highlight banners + product grid",
+      "contentRichPages": "Multiple editorial sections (6-7+) interleaved with product grids for category/collection pages"
+    },
+    "hierarchyStructure": {
+      "navigationDepth": "2 levels - main categories + sub-brands/sub-categories",
+      "pageCount": "21 pages total",
+      "distribution": "Sparse per-page editorial (avg 3.6 images) distributed across many pages rather than concentrated on few",
+      "strategy": "Deep specialization allows ESN to showcase multiple sub-brands as distinct product ecosystems"
+    }
+  },
+  "editorialStrategy": {
+    "totalEditorialImages": 75,
+    "totalVideos": 6,
+    "distribution": [
+      {
+        "page": "Startseite",
+        "editorialImages": 12,
+        "videos": 0,
+        "rationale": "Homepage hero + navigation structure - high impact visual gateway"
+      },
+      {
+        "page": "ÜBER ESN",
+        "editorialImages": 11,
+        "videos": 1,
+        "rationale": "Brand storytelling hub - maximum editorial content showcasing company, athletes, values"
+      },
+      {
+        "page": "AUSDAUER",
+        "editorialImages": 7,
+        "videos": 1,
+        "rationale": "Major category - substantive content depth for endurance product ecosystem"
+      },
+      {
+        "page": "PROTEINE",
+        "editorialImages": 6,
+        "videos": 1,
+        "rationale": "Core product category - dedicated editorial content with video"
+      },
+      {
+        "page": "Sub-brand pages (5 total: DESIGNER WHEY, ISOCLEAR, FLEXPRESSO, ISOWHEY HARDCORE, CREATINE)",
+        "editorialImages": "3 each (15 total)",
+        "videos": 0,
+        "rationale": "Template consistency - each sub-brand receives proportional presentation"
+      },
+      {
+        "page": "Other category pages (VITALSTOFFE, PERFORMANCE, FOOD & SNACKS)",
+        "editorialImages": "2-3 each",
+        "videos": "0-1 each",
+        "rationale": "Moderate content depth for secondary categories"
+      },
+      {
+        "page": "Sub-categories (RIEGEL, FLAVOR POWDER, SYRUPS)",
+        "editorialImages": "3 each",
+        "videos": "0-1 each",
+        "rationale": "Supporting category content"
+      },
+      {
+        "page": "ALLE PRODUKTE",
+        "editorialImages": 0,
+        "videos": 0,
+        "rationale": "Pure product grid - functional catalog view"
+      }
+    ]
+  },
+  "brandIdentity": {
+    "corePillars": [
+      "Elite/Hardcore Performance",
+      "Premium Sports Nutrition",
+      "Scientific Formulation and Quality"
+    ],
+    "visualLanguage": "Black background + white text/logo creates stark, professional aesthetic. Large, bold ESN logo dominates. All-caps category naming (PROTEINE, VITALSTOFFE, AUSDAUER, etc.) emphasizes commanding authority. Dark sports photography with dramatic lighting creates aspirational, elite atmosphere suited to serious athletes.",
+    "targetAudience": "Serious athletes, bodybuilders, fitness enthusiasts, performance-driven individuals",
+    "navigationPhilosophy": "Deep specialization across 21 pages. Rather than a generic supplement store, ESN presents multiple sub-brands and product ecosystems as distinct offerings: PROTEINE has 5 sub-brands (DESIGNER WHEY, ISOCLEAR, FLEXPRESSO, ISOWHEY HARDCORE, CREATINE); FOOD & SNACKS has 3 sub-categories (RIEGEL, FLAVOR POWDER, SYRUPS). Each page gets tailored positioning and dedicated editorial content."
+  }
+}

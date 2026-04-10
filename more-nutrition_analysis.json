@@ -1,0 +1,526 @@
+{
+  "brandName": "MORE Nutrition",
+  "storeUrl": "https://www.amazon.de/stores/page/7AD425C6-C3C5-402D-A69D-D6201F98F888",
+  "analyzedAt": "2026-04-09",
+  "methodology": "V3",
+  "navigation": {
+    "pageCount": 15,
+    "pages": [
+      {
+        "name": "Startseite",
+        "level": 0,
+        "pageId": "7AD425C6-C3C5-402D-A69D-D6201F98F888"
+      },
+      {
+        "name": "BESTSELLER",
+        "level": 1,
+        "pageId": "B0B4CEEB-909A-4DC6-A571-6AA4D718DB21"
+      },
+      {
+        "name": "ZERUP",
+        "level": 1,
+        "pageId": "DA439A68-D45D-4BB9-97CC-5D706DC1CF89"
+      },
+      {
+        "name": "CHUNKY FLAVOUR",
+        "level": 1,
+        "pageId": "D5FF78A5-8306-4D4B-80F7-F20BFBA08472"
+      },
+      {
+        "name": "PROTEINE",
+        "level": 1,
+        "pageId": "9A82B50C-BA5A-4A3B-ADBB-7B729770F289"
+      },
+      {
+        "name": "PROTEIN MILKSHAKE",
+        "level": 2,
+        "parentCategory": "PROTEINE",
+        "pageId": "5C4AE7B3-FEE1-4887-B719-D0188FF74E51"
+      },
+      {
+        "name": "PROTEIN ICED COFFEE",
+        "level": 2,
+        "parentCategory": "PROTEINE",
+        "pageId": "3D5F63E7-0917-4ABF-9F07-7D10B2AC1639"
+      },
+      {
+        "name": "CLEAR PROTEIN",
+        "level": 2,
+        "parentCategory": "PROTEINE",
+        "pageId": "55FD402B-A0DC-4A7C-BD00-2D0ECE353C4D"
+      },
+      {
+        "name": "CLEAR GLOW PEPTIDES",
+        "level": 2,
+        "parentCategory": "PROTEINE",
+        "pageId": "483E27E9-01B3-441C-B1B9-DD468E87F786"
+      },
+      {
+        "name": "VEGAN PROTEIN",
+        "level": 2,
+        "parentCategory": "PROTEINE",
+        "pageId": "A217601D-395D-4DF1-B940-4BABA3DAD6E5"
+      },
+      {
+        "name": "RIEGEL & LIGHT FOOD",
+        "level": 1,
+        "pageId": "48018341-612A-4387-8B80-C2B4BE8FD4E1"
+      },
+      {
+        "name": "VITALSTOFFE",
+        "level": 1,
+        "pageId": "DCB9D63B-78C7-46D4-8DEA-53DB08EDEF28"
+      },
+      {
+        "name": "BUNDLE",
+        "level": 1,
+        "pageId": "B0C9AE88-4FDC-423E-9101-40DA4F857EA1"
+      },
+      {
+        "name": "ALLE PRODUKTE",
+        "level": 1,
+        "pageId": "F081FD4B-1559-4A38-A4F3-FC8E6732BCEB"
+      },
+      {
+        "name": "PRODUKTSELEKTOR",
+        "level": 1,
+        "pageId": "8790A8BC-31A4-4810-8B75-BF1AFCE858B5"
+      }
+    ]
+  },
+  "contentSummary": {
+    "totalEditorialImages": 53,
+    "uniqueVideos": 13,
+    "editorialToVideoRatio": 4.08,
+    "videoStrategy": "High-volume video content across product pages, with flagship product categories (ZERUP, CHUNKY FLAVOUR) featuring maximum video richness"
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "pageId": "7AD425C6-C3C5-402D-A69D-D6201F98F888",
+      "editorialImages": 11,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Clean, modern D2C fitness brand aesthetic with product-focused imagery. Bright, fresh design reflecting contemporary health/nutrition positioning.",
+        "estimatedDimensions": "3000x1500",
+        "brandIdentityNote": "Modern, youthful design approach contrasts with ESN's dark/elite aesthetic. Emphasizes accessibility and trendy nutrition culture."
+      },
+      "imageSizes": ["872x65", "3000x1500", "872x218", "436x218", "436x218", "436x218", "436x218", "436x218", "436x218", "750x375", "872x174"],
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Full-Width Divider",
+          "layoutId": "divider-top",
+          "tileCount": 1,
+          "designRationale": "Narrow separator banner establishing visual hierarchy",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "872x65",
+              "imageCategory": "divider",
+              "description": "Top divider banner"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "layoutType": "Full-Width Hero",
+          "layoutId": "hero-full",
+          "tileCount": 1,
+          "designRationale": "Large hero banner establishing brand identity and featured product",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "3000x1500",
+              "imageCategory": "hero",
+              "description": "Main hero banner with brand/product focus"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "layoutType": "Full-Width Narrow",
+          "layoutId": "divider-narrow",
+          "tileCount": 1,
+          "designRationale": "Visual separator/section divider",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "872x218",
+              "imageCategory": "divider",
+              "description": "Mid-page divider banner"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "layoutType": "lg-4grid Narrow",
+          "layoutId": "lg-4grid-narrow",
+          "tileCount": 8,
+          "designRationale": "Eight product/category showcase tiles for navigation and featured products",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 1"
+            },
+            {
+              "position": "2",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 2"
+            },
+            {
+              "position": "3",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 3"
+            },
+            {
+              "position": "4",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 4"
+            },
+            {
+              "position": "5",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 5"
+            },
+            {
+              "position": "6",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 6"
+            },
+            {
+              "position": "7",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 7"
+            },
+            {
+              "position": "8",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 8"
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "layoutType": "Mid-Width Banner",
+          "layoutId": "mid-banner",
+          "tileCount": 1,
+          "designRationale": "Promotional or featured product section",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "750x375",
+              "imageCategory": "promotional",
+              "description": "Mid-width promotional banner"
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "layoutType": "Full-Width Narrow",
+          "layoutId": "divider-bottom",
+          "tileCount": 1,
+          "designRationale": "Bottom section divider",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "872x174",
+              "imageCategory": "divider",
+              "description": "Bottom divider banner"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "BESTSELLER",
+      "pageId": "B0B4CEEB-909A-4DC6-A571-6AA4D718DB21",
+      "editorialImages": 7,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Bestseller category banner with product/brand-focused imagery",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Category page with moderate editorial content. Hero banner + supporting banners + 1 video + product grid. Customer-favorite positioning."
+    },
+    {
+      "pageName": "ZERUP",
+      "pageId": "DA439A68-D45D-4BB9-97CC-5D706DC1CF89",
+      "editorialImages": 4,
+      "videos": 3,
+      "heroBanner": {
+        "description": "Flagship product category ZERUP with modern product focus and lifestyle imagery",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Video-rich flagship product page (3 videos + 4 images). Heavy multimedia strategy showcasing product benefits through video content. Hero + supporting banners + 3 videos + product grid."
+    },
+    {
+      "pageName": "CHUNKY FLAVOUR",
+      "pageId": "D5FF78A5-8306-4D4B-80F7-F20BFBA08472",
+      "editorialImages": 3,
+      "videos": 3,
+      "heroBanner": {
+        "description": "Flagship product category CHUNKY FLAVOUR with premium positioning and taste-focused messaging",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Video-rich flagship product page (3 videos + 3 images). Maximum multimedia emphasis for core product line. Hero + banners + 3 videos + grid."
+    },
+    {
+      "pageName": "PROTEINE",
+      "pageId": "9A82B50C-BA5A-4A3B-ADBB-7B729770F289",
+      "editorialImages": 7,
+      "videos": 1,
+      "heroBanner": {
+        "description": "PROTEINE main category hero with protein product ecosystem positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Main category with substantial editorial content (7 images + 1 video). Parent page to 5 specialized protein sub-categories (PROTEIN MILKSHAKE, PROTEIN ICED COFFEE, CLEAR PROTEIN, CLEAR GLOW PEPTIDES, VEGAN PROTEIN). Features hero, category messaging, sub-category navigation, and product grid."
+    },
+    {
+      "pageName": "PROTEIN MILKSHAKE",
+      "pageId": "5C4AE7B3-FEE1-4887-B719-D0188FF74E51",
+      "editorialImages": 2,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Sub-category PROTEIN MILKSHAKE with drinkable protein focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Specialized protein sub-category: hero banner + supporting content + product grid. Minimal but focused editorial for targeted product type."
+    },
+    {
+      "pageName": "PROTEIN ICED COFFEE",
+      "pageId": "3D5F63E7-0917-4ABF-9F07-7D10B2AC1639",
+      "editorialImages": 2,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Sub-category PROTEIN ICED COFFEE with functional beverage positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Specialized protein sub-category: hero + supporting content + 1 video + grid. Unique product format differentiator."
+    },
+    {
+      "pageName": "CLEAR PROTEIN",
+      "pageId": "55FD402B-A0DC-4A7C-BD00-2D0ECE353C4D",
+      "editorialImages": 4,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Sub-category CLEAR PROTEIN with transparent/clean label positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Specialized protein sub-category with moderate editorial (4 images + 1 video). Clear/transparent formulation messaging prominent."
+    },
+    {
+      "pageName": "CLEAR GLOW PEPTIDES",
+      "pageId": "483E27E9-01B3-441C-B1B9-DD468E87F786",
+      "editorialImages": 4,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Sub-category CLEAR GLOW PEPTIDES with beauty/wellness angle - peptides for skin/collagen focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Specialized protein sub-category with wellness/beauty positioning (4 images + 1 video). Targets broader female demographic and wellness-conscious consumers beyond traditional fitness."
+    },
+    {
+      "pageName": "VEGAN PROTEIN",
+      "pageId": "A217601D-395D-4DF1-B940-4BABA3DAD6E5",
+      "editorialImages": 2,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Sub-category VEGAN PROTEIN with plant-based protein positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Specialized protein sub-category: hero + content + 1 video + grid. Plant-based/sustainable positioning for vegan/vegetarian segment."
+    },
+    {
+      "pageName": "RIEGEL & LIGHT FOOD",
+      "pageId": "48018341-612A-4387-8B80-C2B4BE8FD4E1",
+      "editorialImages": 2,
+      "videos": 0,
+      "heroBanner": {
+        "description": "RIEGEL & LIGHT FOOD category with snack bar and lightweight nutrition focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Category page with minimal editorial (2 images). Hero + supporting banners + product grid. Portable nutrition/snacking positioning."
+    },
+    {
+      "pageName": "VITALSTOFFE",
+      "pageId": "DCB9D63B-78C7-46D4-8DEA-53DB08EDEF28",
+      "editorialImages": 2,
+      "videos": 0,
+      "heroBanner": {
+        "description": "VITALSTOFFE (vitamins/supplements) category with micronutrient focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Category page with minimal editorial (2 images). Hero + supporting content + product grid. Nutritional supplementation positioning."
+    },
+    {
+      "pageName": "BUNDLE",
+      "pageId": "B0C9AE88-4FDC-423E-9101-40DA4F857EA1",
+      "editorialImages": 2,
+      "videos": 0,
+      "heroBanner": {
+        "description": "BUNDLE category emphasizing value and coordinated product sets",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Category page with minimal editorial (2 images). Hero + bundled product offerings + grid. Value and convenience positioning."
+    },
+    {
+      "pageName": "ALLE PRODUKTE",
+      "pageId": "F081FD4B-1559-4A38-A4F3-FC8E6732BCEB",
+      "editorialImages": 0,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Minimal or no hero for comprehensive product catalog view",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Pure product grid page with no editorial content - functional catalog view of all products."
+    },
+    {
+      "pageName": "PRODUKTSELEKTOR",
+      "pageId": "8790A8BC-31A4-4810-8B75-BF1AFCE858B5",
+      "editorialImages": 1,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Product selector/finder tool with guided shopping UI",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Interactive tool page with minimal branding (1 image). Guided product discovery/quiz format helping customers identify right product. Unique D2C engagement strategy."
+    }
+  ],
+  "designPatterns": {
+    "colorScheme": {
+      "background": "White/Light",
+      "textColor": "Dark/Black",
+      "accentColor": "Brand colors - modern, vibrant",
+      "rationale": "Clean, bright aesthetic conveys modernity, accessibility, and health-conscious positioning. Contrasts with ESN's dark/elite approach."
+    },
+    "typography": {
+      "primary": "Modern sans-serif, mixed case for categories and sub-brands",
+      "characteristics": "Contemporary, friendly, approachable. Balances professionalism with youthful energy."
+    },
+    "photography": {
+      "style": "Modern lifestyle and product photography",
+      "lighting": "Bright, clean, contemporary styling emphasizing product quality and lifestyle aspirations",
+      "subjects": "Products, lifestyle imagery, fitness/wellness content, modern aesthetic"
+    },
+    "layoutPatterns": {
+      "homepage": "Narrow divider (872x65) + large hero (3000x1500) + divider (872x218) + narrow category grid (8x436x218) + mid-width promotional (750x375) + bottom divider (872x174)",
+      "categoryPages": "Consistent hero (1872x400) + supporting banners (1-2) + product grid",
+      "subBrandPages": "Hero banner (1872x400) + supporting content + 0-1 videos + product grid",
+      "flagshipPages": "Hero + multiple supporting banners + 3 videos (maximum multimedia strategy) for ZERUP and CHUNKY FLAVOUR"
+    },
+    "hierarchyStructure": {
+      "navigationDepth": "2 levels - main categories + specialized sub-categories under PROTEINE",
+      "pageCount": "15 pages total",
+      "distribution": "Concentrated video strategy (13 total videos, 0.87 videos/page average)",
+      "strategy": "ZERUP and CHUNKY FLAVOUR receive disproportionate multimedia investment. PROTEINE has 5 specialized sub-categories enabling product differentiation within protein category."
+    }
+  },
+  "editorialStrategy": {
+    "totalEditorialImages": 53,
+    "totalVideos": 13,
+    "averageVideosPerPage": 0.87,
+    "distribution": [
+      {
+        "page": "Startseite",
+        "editorialImages": 11,
+        "videos": 1,
+        "rationale": "Homepage with diverse layout elements - hero + navigation structure + promotional content"
+      },
+      {
+        "page": "ZERUP",
+        "editorialImages": 4,
+        "videos": 3,
+        "rationale": "Flagship product - maximum video investment showcasing product benefits, usage, and lifestyle positioning"
+      },
+      {
+        "page": "CHUNKY FLAVOUR",
+        "editorialImages": 3,
+        "videos": 3,
+        "rationale": "Flagship product - maximum video investment for core product category"
+      },
+      {
+        "page": "BESTSELLER",
+        "editorialImages": 7,
+        "videos": 1,
+        "rationale": "Popular products category - substantial editorial content with 1 video feature"
+      },
+      {
+        "page": "PROTEINE",
+        "editorialImages": 7,
+        "videos": 1,
+        "rationale": "Core product category - comprehensive content depth with category positioning"
+      },
+      {
+        "page": "Protein sub-categories (5 total: PROTEIN MILKSHAKE, PROTEIN ICED COFFEE, CLEAR PROTEIN, CLEAR GLOW PEPTIDES, VEGAN PROTEIN)",
+        "editorialImages": "2-4 each (12 total)",
+        "videos": "0-1 each (3 total)",
+        "rationale": "Specialized product type pages - template consistency with targeted positioning for each segment"
+      },
+      {
+        "page": "Other category pages (RIEGEL & LIGHT FOOD, VITALSTOFFE, BUNDLE)",
+        "editorialImages": "2 each",
+        "videos": "0 each",
+        "rationale": "Secondary categories - minimal but focused editorial"
+      },
+      {
+        "page": "ALLE PRODUKTE",
+        "editorialImages": 0,
+        "videos": 0,
+        "rationale": "Pure product grid - functional catalog view"
+      },
+      {
+        "page": "PRODUKTSELEKTOR",
+        "editorialImages": 1,
+        "videos": 0,
+        "rationale": "Interactive guided shopping tool - minimal editorial, focus on functionality"
+      }
+    ]
+  },
+  "brandIdentity": {
+    "corePillars": [
+      "Modern/Contemporary D2C Fitness Nutrition",
+      "Trend-Forward Product Innovation",
+      "Accessible Premium Quality"
+    ],
+    "visualLanguage": "Clean, bright, modern aesthetic with product-forward photography. Contemporary design language appeals to younger, trend-conscious fitness and wellness consumers. Emphasis on innovation, taste/experience, and lifestyle integration rather than elite athletic positioning.",
+    "targetAudience": "Fitness-conscious millennials and Gen Z, wellness-focused consumers, trend-conscious nutrition shoppers, broader demographic including women interested in wellness/beauty (CLEAR GLOW PEPTIDES positioning)",
+    "navigationPhilosophy": "Specialized depth in protein category (5 sub-categories: PROTEIN MILKSHAKE, PROTEIN ICED COFFEE, CLEAR PROTEIN, CLEAR GLOW PEPTIDES, VEGAN PROTEIN) enabling targeted positioning for different consumption contexts and consumer segments. Flagship products (ZERUP, CHUNKY FLAVOUR) receive maximum multimedia/video investment (3 videos each). Strong D2C DNA with PRODUKTSELEKTOR guided shopping tool."
+  },
+  "competitiveAnalysis": {
+    "versus_esn": {
+      "similarities": [
+        "2-level navigation structure with specialized sub-categories",
+        "15-21 page count (comparable scale)",
+        "Deep category differentiation strategy",
+        "Interactive tools (PRODUKTSELEKTOR equivalents)"
+      ],
+      "differences": [
+        "ESN: Dark/elite aesthetic vs MORE: Clean/modern aesthetic",
+        "ESN: Minimal video (6 total) vs MORE: Heavy video strategy (13 total)",
+        "ESN: 75 editorial images vs MORE: 53 editorial images (more efficient distribution)",
+        "ESN: 21 pages with sparse specialization vs MORE: 15 pages with dense video/media investment",
+        "ESN: Sports photography focus vs MORE: Product/lifestyle photography focus",
+        "MORE: Unique beauty/wellness angle (CLEAR GLOW PEPTIDES) vs ESN: Purely performance-focused",
+        "MORE: Flagship product hero status (ZERUP, CHUNKY FLAVOUR) vs ESN: Distributed editorial strategy"
+      ]
+    }
+  },
+  "notableFeatures": {
+    "videoStrategy": "Aggressive multimedia approach with 13 unique videos across 15 pages. ZERUP and CHUNKY FLAVOUR pages serve as video-rich content hubs (3 videos each), suggesting these are flagship products receiving maximum marketing investment.",
+    "proteinSubcategories": "Five specialized protein categories (PROTEIN MILKSHAKE, PROTEIN ICED COFFEE, CLEAR PROTEIN, CLEAR GLOW PEPTIDES, VEGAN PROTEIN) enable segmentation by consumption context (drinkable, iced/functional beverage, clear/clean, beauty/wellness, plant-based) - more granular than ESN's approach.",
+    "beautyWellnessAngle": "CLEAR GLOW PEPTIDES positioning targets beauty/wellness/collagen market segment, expanding addressable market beyond traditional fitness athletes.",
+    "productSelectorTool": "PRODUKTSELEKTOR appears to be guided shopping tool (quiz or product finder) - same concept as ESN but different implementation.",
+    "d2cBranding": "Founded by Christian Wolf, strong D2C fitness brand with contemporary design philosophy and trend-responsive product innovation (ZERUP, CHUNKY FLAVOUR names reflect consumer taste preferences).",
+    "mediaEfficiency": "Fewer total editorial images (53 vs 75) but higher video count (13 vs 6) suggests deliberate shift from image-heavy to video-heavy content strategy, aligned with modern consumer preferences and social media marketing trends."
+  }
+}

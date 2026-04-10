@@ -1,0 +1,1417 @@
+{
+  "storeMetadata": {
+    "brandName": "BLACKROLL",
+    "storeUrl": "https://www.amazon.de/stores/page/03098AB4-BDD5-4A23-A7DD-5C10153C5D58",
+    "region": "Germany",
+    "analyzedAt": "2026-04-09",
+    "marketSegment": "Fitness, Recovery & Wellness",
+    "primaryAudience": "Health-conscious consumers, athletes, recovery enthusiasts"
+  },
+  "navigationStructure": {
+    "totalPages": 8,
+    "navigationHierarchy": [
+      {
+        "pageId": "startseite",
+        "pageName": "Startseite",
+        "level": 0,
+        "position": 1,
+        "isLanding": true
+      },
+      {
+        "pageId": "bestseller",
+        "pageName": "Bestseller",
+        "level": 1,
+        "position": 2
+      },
+      {
+        "pageId": "schlaf",
+        "pageName": "Schlaf",
+        "level": 1,
+        "position": 3
+      },
+      {
+        "pageId": "faszienrollen",
+        "pageName": "Faszienrollen",
+        "level": 1,
+        "position": 4
+      },
+      {
+        "pageId": "massagepistole",
+        "pageName": "Massagepistole",
+        "level": 1,
+        "position": 5
+      },
+      {
+        "pageId": "baelle-trigger",
+        "pageName": "Bälle & Trigger",
+        "level": 1,
+        "position": 6
+      },
+      {
+        "pageId": "trainingsbaender",
+        "pageName": "Trainingsbänder",
+        "level": 1,
+        "position": 7
+      },
+      {
+        "pageId": "ueber-blackroll",
+        "pageName": "Über BLACKROLL",
+        "level": 1,
+        "position": 8,
+        "isAboutPage": true
+      }
+    ]
+  },
+  "pages": [
+    {
+      "pageId": "startseite",
+      "pageName": "Startseite",
+      "contentStats": {
+        "totalImages": 16,
+        "totalVideos": 0,
+        "estimatedScrollLength": "Extra Long"
+      },
+      "heroBanner": {
+        "type": "Logo + Primary Banner Combination",
+        "elements": [
+          {
+            "position": 1,
+            "type": "Static Logo",
+            "size": "1000x200",
+            "content": "BLACKROLL® Logo",
+            "backgroundColor": "White",
+            "purpose": "Brand Anchor and Navigation Context"
+          },
+          {
+            "position": 2,
+            "type": "Hero Banner - Primary CTA",
+            "size": "970x302",
+            "imageCategory": "Lifestyle Photography",
+            "description": "Woman laughing with green foam roller",
+            "mood": "Joyful, energetic, empowering",
+            "primaryText": "Dein Leben kennt keine Grenzen – nur Möglichkeiten",
+            "ctaText": "Bestseller entdecken",
+            "ctaTarget": "Bestseller Page",
+            "designRationale": "Emotional connection to brand values: empowerment and boundless possibility. Green BLACKROLL product integration shows immediately what brand sells."
+          }
+        ]
+      },
+      "modules": [
+        {
+          "moduleId": "startseite_mod_01",
+          "position": 1,
+          "moduleName": "Hero Banner and Brand Messaging",
+          "layoutType": "Full Width Banner",
+          "layoutId": "FWB_Primary",
+          "tileCount": 1,
+          "designRationale": "Establish emotional brand narrative immediately. The empowerment messaging ('Dein Leben kennt keine Grenzen') sets tone for entire store. Lifestyle imagery connects product to aspirational lifestyle. CTA directs to bestsellers (conversion-focused).",
+          "tiles": [
+            {
+              "position": 1,
+              "size": "970x302",
+              "imageCategory": "Lifestyle - Outdoor Activity",
+              "description": "Woman with green BLACKROLL foam roller in outdoor setting, laughing",
+              "textOnImage": "Dein Leben kennt keine Grenzen – nur Möglichkeiten",
+              "ctaText": "Bestseller entdecken",
+              "linksTo": "Bestseller Page",
+              "colorPalette": [
+                "Green (BLACKROLL brand color)",
+                "White background",
+                "Natural outdoor tones"
+              ],
+              "subheadline": "Recovery and Wellness as lifestyle enabler"
+            }
+          ],
+          "relationToNextModule": "Transitions from emotional value proposition to category discovery via 4-tile navigation grid"
+        },
+        {
+          "moduleId": "startseite_mod_02",
+          "position": 2,
+          "moduleName": "Primary Category Navigation Grid",
+          "layoutType": "Grid - 2x2 Square Tiles",
+          "layoutId": "GRID_4SQ",
+          "tileCount": 4,
+          "designRationale": "Introduce four core product categories through visual hierarchy. Square format (436x436) allows prominent product imagery and clear category labeling. Encourages exploration beyond bestsellers. Positions core categories: foam rollers (flagship), massage tools, sleep recovery, and training accessories.",
+          "tiles": [
+            {
+              "position": 1,
+              "size": "436x436",
+              "imageCategory": "Product Category - Foam Rollers",
+              "productType": "Faszienrollen",
+              "description": "Featured foam roller product with exercise demonstration",
+              "designElement": "Product-centric with lifestyle integration",
+              "ctaText": "Zu den Faszienrollen",
+              "linksTo": "Faszienrollen Page",
+              "colorScheme": "Green foam roller accent on clean background"
+            },
+            {
+              "position": 2,
+              "size": "436x436",
+              "imageCategory": "Product Category - Massage Balls",
+              "productType": "Bälle & Trigger",
+              "description": "Trigger ball and massage ball assortment showcase",
+              "designElement": "Product cluster photography",
+              "ctaText": "Zu den Bällen & Triggern",
+              "linksTo": "Bälle & Trigger Page",
+              "colorScheme": "Black balls on white, clean aesthetic"
+            },
+            {
+              "position": 3,
+              "size": "436x436",
+              "imageCategory": "Product Category - Sleep Recovery",
+              "productType": "Schlaf",
+              "description": "Sleep and recovery products: pillows, recovery tools",
+              "designElement": "Wellness-focused lifestyle imagery",
+              "ctaText": "Zur Schlaf Kategorie",
+              "linksTo": "Schlaf Page",
+              "colorScheme": "Calming blues and whites"
+            },
+            {
+              "position": 4,
+              "size": "436x436",
+              "imageCategory": "Product Category - Training Bands",
+              "productType": "Trainingsbänder",
+              "description": "Resistance bands in various colors and resistance levels",
+              "designElement": "Colorful product array",
+              "ctaText": "Zu den Trainingsbändern",
+              "linksTo": "Trainingsbänder Page",
+              "colorScheme": "Multi-color band spectrum"
+            }
+          ],
+          "relationToNextModule": "Grid provides exhaustive category entry points; next module extends with trust/USP messaging"
+        },
+        {
+          "moduleId": "startseite_mod_03",
+          "position": 3,
+          "moduleName": "Trust & USP Information Banner",
+          "layoutType": "Narrow Horizontal Banner",
+          "layoutId": "NHB_Trust",
+          "tileCount": 1,
+          "designRationale": "Establish credibility and differentiation. Narrow format (970x143) maintains visual pace without overshadowing category grid. Likely contains: Quality guarantees, Free shipping thresholds, Return policy, Brand certifications, or German/European manufacturing claims.",
+          "tiles": [
+            {
+              "position": 1,
+              "size": "970x143",
+              "imageCategory": "Trust Elements / Brand Assurances",
+              "description": "Information banner with trust signals and USPs",
+              "content": "Likely: Made in Germany quality, Free shipping offer, Money-back guarantee, or Certification badges",
+              "backgroundColor": "Neutral (white or light gray)",
+              "designElement": "Icon-based trust messaging"
+            }
+          ],
+          "relationToNextModule": "Trust established; transitions to expanded product showcases and category deep-dives"
+        },
+        {
+          "moduleId": "startseite_mod_04",
+          "position": 4,
+          "moduleName": "Extended Product Showcase Tiles",
+          "layoutType": "Mixed Grid - Square and Wide Tiles",
+          "layoutId": "GRID_MIX",
+          "tileCount": 6,
+          "estimatedLayout": "2-3 squares per row, interspersed with wider product tiles",
+          "designRationale": "Highlight bestselling or feature products beyond primary categories. Mix of square (436x436) and wide (872x218) tiles maintains visual rhythm while showing product diversity. Likely features: Best-selling foam rollers, Signature massage guns, Hero recovery bundles, Limited editions or seasonal products.",
+          "tiles": [
+            {
+              "position": 1,
+              "size": "436x436",
+              "imageCategory": "Product Spotlight - Signature Item",
+              "description": "BLACKROLL Standard or PRO foam roller featured prominently",
+              "designElement": "Clean product photography with lifestyle context",
+              "ctaText": "Jetzt ansehen or In den Warenkorb"
+            },
+            {
+              "position": 2,
+              "size": "436x436",
+              "imageCategory": "Product Spotlight - Innovation",
+              "description": "Massage gun or specialized recovery tool showcase",
+              "designElement": "Feature-highlight photography with benefits",
+              "ctaText": "Zu den Massagepistolen"
+            },
+            {
+              "position": 3,
+              "size": "872x218",
+              "imageCategory": "Wide Banner - Bundle or Category Promotion",
+              "description": "Multi-product bundle or category cross-sell",
+              "content": "Could be: 'Complete Recovery Bundle', 'Athlete's Starter Kit', or promotional campaign",
+              "designElement": "Hero product photography with supporting items",
+              "ctaText": "Bundle entdecken"
+            },
+            {
+              "position": 4,
+              "size": "436x436",
+              "imageCategory": "Product Category - Educational",
+              "description": "Product with how-to or educational context",
+              "designElement": "Exercise/usage demonstration imagery",
+              "ctaText": "Jetzt bestellen"
+            },
+            {
+              "position": 5,
+              "size": "436x436",
+              "imageCategory": "Product Spotlight - Premium/New",
+              "description": "New product launch or premium product line",
+              "designElement": "Premium aesthetic with white space and clean lines",
+              "ctaText": "Neu: Jetzt entdecken"
+            },
+            {
+              "position": 6,
+              "size": "872x218",
+              "imageCategory": "Wide Banner - Brand Value or Seasonal",
+              "description": "Seasonal promotion or brand value proposition showcase",
+              "content": "Could emphasize: Recovery science, Athlete testimonials, Seasonal wellness goals",
+              "designElement": "Motivational lifestyle imagery",
+              "ctaText": "Mehr erfahren"
+            }
+          ],
+          "relationToNextModule": "Product showcase section builds purchase intent; transitions to final trust/info section"
+        },
+        {
+          "moduleId": "startseite_mod_05",
+          "position": 5,
+          "moduleName": "Footer Trust & Information Banner",
+          "layoutType": "Full Width Information Section",
+          "layoutId": "FWB_Footer",
+          "tileCount": 1,
+          "designRationale": "Reinforce trust and provide store-level information before navigation away. Likely contains: Customer service info, Shipping/returns policy summary, Brand heritage/credentials, Social proof (review stars, customer count), or subscription/newsletter signup.",
+          "tiles": [
+            {
+              "position": 1,
+              "size": "970x143",
+              "imageCategory": "Brand Trust / Footer Info",
+              "description": "Informational footer section",
+              "content": "Trust signals, shipping info, contact options, brand credibility statements",
+              "backgroundColor": "Dark (likely black or dark gray) with white text",
+              "designElement": "Clean typography with icon support"
+            }
+          ],
+          "relationToNextModule": "End of primary page content; navigation to other store pages"
+        }
+      ],
+      "pageAnalysis": {
+        "contentStrategy": "Hero-to-Categories-to-Products funnel with trust reinforcement",
+        "visualHierarchy": "Emotional entry → Category discovery → Product exploration → Trust assurance",
+        "conversionPath": "Single CTA (Bestseller) in hero leads to bestseller page; category tiles enable self-directed exploration; product spotlights capture high-intent visitors",
+        "modulePacing": "Large hero (302px) → Grid breathing room (436x436 squares) → Narrow trust banner → Mixed tiles (436 and 872px wide) maintains engagement without overwhelming",
+        "designTheme": "Sporty, empowering, professional. Clean aesthetic with consistent BLACKROLL green accent. White space used effectively.",
+        "keyInsight": "Startseite balances direct sales (Bestseller CTA) with category exploration, enabling both high-intent and browse-mode visitors to proceed effectively",
+        "colorPalette": [
+          "BLACKROLL Green (accent)",
+          "Black (product elements)",
+          "White (background)",
+          "Gray (secondary elements)"
+        ],
+        "brandMessaging": "Empowerment ('Grenzen nur Möglichkeiten'), Recovery science, Active lifestyle enablement"
+      }
+    },
+    {
+      "pageId": "bestseller",
+      "pageName": "Bestseller",
+      "contentStats": {
+        "totalImages": 4,
+        "totalVideos": 0,
+        "estimatedScrollLength": "Short to Medium"
+      },
+      "heroBanner": {
+        "type": "Logo + Promotional Banner",
+        "content": "BLACKROLL logo followed by promotional banner introducing bestseller products"
+      },
+      "modules": [
+        {
+          "moduleId": "bestseller_mod_01",
+          "position": 1,
+          "moduleName": "Logo and Page Identification",
+          "layoutType": "Static Header",
+          "layoutId": "HDR_Logo",
+          "tileCount": 1,
+          "tiles": [
+            {
+              "position": 1,
+              "size": "1000x200",
+              "imageCategory": "Brand Logo",
+              "content": "BLACKROLL® Logo",
+              "backgroundColor": "White"
+            }
+          ]
+        },
+        {
+          "moduleId": "bestseller_mod_02",
+          "position": 2,
+          "moduleName": "Bestseller Promotional Hero",
+          "layoutType": "Full Width Banner",
+          "layoutId": "FWB_Promo",
+          "tileCount": 1,
+          "designRationale": "Establish bestseller category authority. Hero banner emphasizes top-selling/most-reviewed products. Acts as confidence builder for visitors seeking proven, popular items.",
+          "tiles": [
+            {
+              "position": 1,
+              "size": "970x302",
+              "imageCategory": "Category Hero",
+              "description": "Top-selling BLACKROLL product or product stack",
+              "content": "Bestseller hero with product imagery and category emphasis",
+              "ctaText": "Jetzt bestellen"
+            }
+          ]
+        },
+        {
+          "moduleId": "bestseller_mod_03",
+          "position": 3,
+          "moduleName": "Bestseller Product Grid",
+          "layoutType": "Grid - Product Carousel or Tile Array",
+          "layoutId": "GRID_Products",
+          "tileCount": 5,
+          "designRationale": "Display top-performing products with minimal additional content. Product-focused layout maximizes conversion for high-intent visitors. Typical bestseller page strategy: high review counts, clear pricing, quick purchase path.",
+          "tiles": [
+            {
+              "position": 1,
+              "size": "436x436 (estimated)",
+              "imageCategory": "Best-Selling Product",
+              "description": "Top-ranked foam roller or recovery product",
+              "productType": "Likely BLACKROLL Standard or PRO model",
+              "designElement": "Clean product photography with review stars and price"
+            },
+            {
+              "position": 2,
+              "size": "436x436",
+              "imageCategory": "Best-Selling Product",
+              "description": "Second-most popular product",
+              "productType": "Likely massage gun or ball set"
+            },
+            {
+              "position": 3,
+              "size": "436x436",
+              "imageCategory": "Best-Selling Product",
+              "description": "Third bestseller",
+              "productType": "Likely specialized recovery tool"
+            },
+            {
+              "position": 4,
+              "size": "436x436",
+              "imageCategory": "Best-Selling Product",
+              "description": "Fourth bestseller",
+              "productType": "Training or recovery accessory"
+            },
+            {
+              "position": 5,
+              "size": "436x436",
+              "imageCategory": "Best-Selling Product",
+              "description": "Fifth bestseller or bundle",
+              "productType": "Multi-item bundle or premium product"
+            }
+          ]
+        }
+      ],
+      "pageAnalysis": {
+        "purpose": "Quick access to proven, best-selling products; confidence-building through social proof",
+        "contentStrategy": "Minimal hero + product-focused grid; no extended marketing or editorial content",
+        "visualPacing": "Streamlined, efficient layout optimized for quick browsing and purchase",
+        "conversionPath": "Logo → Hero CTA → Product selection → Cart",
+        "audienceType": "Repeat customers, recommendation-seekers, high-intent buyers"
+      }
+    },
+    {
+      "pageId": "schlaf",
+      "pageName": "Schlaf (Sleep & Recovery)",
+      "contentStats": {
+        "totalImages": 12,
+        "totalVideos": 2,
+        "estimatedScrollLength": "Medium to Long"
+      },
+      "heroBanner": {
+        "type": "Category Hero Banner",
+        "headline": "Schlafen - Fit in den Tag starten durch richtige Regeneration im Schlaf",
+        "translation": "Sleep - Start the day fit through proper recovery during sleep",
+        "designRationale": "Positions sleep and recovery as key performance factor; connects product category to holistic wellness and daily vitality"
+      },
+      "modules": [
+        {
+          "moduleId": "schlaf_mod_01",
+          "position": 1,
+          "moduleName": "Sleep Category Hero Banner",
+          "layoutType": "Full Width Banner with Video Context",
+          "layoutId": "FWB_Cat",
+          "tileCount": 1,
+          "designRationale": "Communicate sleep/recovery importance. Hero establishes category as performance-enabler rather than luxury. Headline frames proper sleep as crucial to daily performance.",
+          "tiles": [
+            {
+              "position": 1,
+              "size": "970x302",
+              "imageCategory": "Lifestyle - Sleep Recovery",
+              "description": "Serene sleep/recovery imagery: person sleeping peacefully, recovery tools displayed",
+              "textOnImage": "Schlafen - Fit in den Tag starten durch richtige Regeneration im Schlaf",
+              "mood": "Calm, restorative, performance-oriented",
+              "ctaText": "Zu den Produkten"
+            }
+          ]
+        },
+        {
+          "moduleId": "schlaf_mod_02",
+          "position": 2,
+          "moduleName": "Sleep Product Highlights",
+          "layoutType": "Mixed Grid with Video Elements",
+          "layoutId": "GRID_Video",
+          "tileCount": 8,
+          "videoCount": 2,
+          "designRationale": "Showcase sleep/recovery products: pillows, recovery tools, sleep aids. Video content (likely product demos or sleep science educational videos) adds engagement and helps customers understand proper sleep/recovery practices. Mix of product photography and video creates multi-sensory engagement.",
+          "tiles": [
+            {
+              "position": 1,
+              "size": "436x436",
+              "imageCategory": "Sleep Product - Pillow",
+              "description": "BLACKROLL recovery pillow or premium sleep pillow",
+              "designElement": "Lifestyle + product shot",
+              "ctaText": "Jetzt bestellen"
+            },
+            {
+              "position": 2,
+              "size": "436x436",
+              "mediaType": "Video",
+              "imageCategory": "Video - Sleep Science or Product Tutorial",
+              "description": "Educational video about sleep recovery or pillow demo",
+              "duration": "Estimated 2-5 minutes",
+              "contentType": "Likely: 'Why Sleep Matters for Athletes' or 'How to Use Recovery Pillows Effectively'"
+            },
+            {
+              "position": 3,
+              "size": "436x436",
+              "imageCategory": "Sleep Product - Recovery Tool",
+              "description": "Recovery tool for pre-sleep or sleep-adjacent use",
+              "designElement": "Product photography with use context",
+              "ctaText": "Mehr erfahren"
+            },
+            {
+              "position": 4,
+              "size": "872x218",
+              "imageCategory": "Wide Banner - Sleep Benefits",
+              "description": "Lifestyle imagery showing sleep recovery benefits or product bundle",
+              "designElement": "Motivational sleep/wellness imagery",
+              "ctaText": "Bundle entdecken"
+            },
+            {
+              "position": 5,
+              "size": "436x436",
+              "mediaType": "Video",
+              "imageCategory": "Video - Testimonial or Advanced Technique",
+              "description": "Customer testimonial or expert sleep recovery technique video",
+              "contentType": "Likely: Athlete or expert discussing sleep importance"
+            },
+            {
+              "position": 6,
+              "size": "436x436",
+              "imageCategory": "Sleep Product - Recovery Accessory",
+              "description": "Sleep-adjacent product: massage ball, stretch strap, or calming tool",
+              "designElement": "Product and lifestyle integration"
+            },
+            {
+              "position": 7,
+              "size": "436x436",
+              "imageCategory": "Sleep Education or Lifestyle",
+              "description": "Lifestyle image showing sleep recovery routine or bedroom setup",
+              "content": "Could feature: Complete recovery setup, Before-bed routine imagery"
+            },
+            {
+              "position": 8,
+              "size": "872x218",
+              "imageCategory": "Wide Banner - Category CTA",
+              "description": "Secondary category promotion or related product cross-sell",
+              "ctaText": "Alle Schlafprodukte ansehen"
+            }
+          ]
+        }
+      ],
+      "pageAnalysis": {
+        "categoryFocus": "Sleep, recovery, and regeneration products; health and wellness angle",
+        "contentStrategy": "Hero headlines performance benefit; product grid emphasizes sleep science + lifestyle integration",
+        "videoStrategy": "2 videos provide educational and product-focused content; likely support customer decision-making for premium sleep products",
+        "designTheme": "Calm, professional, restorative; visual palette likely includes soft blues, whites, natural earth tones",
+        "audienceType": "Health-conscious individuals, athletes, people prioritizing recovery and sleep quality",
+        "keyInsight": "Sleep category positioned as performance-enabler rather than comfort luxury; science-backed messaging combined with aspirational lifestyle imagery"
+      }
+    },
+    {
+      "pageId": "faszienrollen",
+      "pageName": "Faszienrollen (Foam Rollers)",
+      "contentStats": {
+        "totalImages": 14,
+        "totalVideos": 0,
+        "estimatedScrollLength": "Long"
+      },
+      "heroBanner": {
+        "type": "Category Hero - Core Product Category",
+        "content": "Hero banner introducing foam roller category as core/flagship product line"
+      },
+      "modules": [
+        {
+          "moduleId": "faszienrollen_mod_01",
+          "position": 1,
+          "moduleName": "Foam Roller Category Hero",
+          "layoutType": "Full Width Hero Banner",
+          "layoutId": "FWB_Cat",
+          "tileCount": 1,
+          "designRationale": "Establish foam roller category authority. Foam rollers are BLACKROLL's flagship product; hero emphasizes benefits (muscle recovery, mobility, performance). Likely includes aspirational athlete or performance-focused imagery.",
+          "tiles": [
+            {
+              "position": 1,
+              "size": "970x302",
+              "imageCategory": "Category Hero - Foam Rolling",
+              "description": "Hero image with foam roller product and exercise context",
+              "content": "Athlete or fitness enthusiast using BLACKROLL foam roller",
+              "textOnImage": "Likely emphasizes: 'Recovery Performance', 'Muscle Mobility', 'Professional Athletes Choose BLACKROLL'",
+              "ctaText": "Zu den Faszienrollen"
+            }
+          ]
+        },
+        {
+          "moduleId": "faszienrollen_mod_02",
+          "position": 2,
+          "moduleName": "Foam Roller Product Range Overview",
+          "layoutType": "Grid - Multiple Product Showcase",
+          "layoutId": "GRID_Products",
+          "tileCount": 10,
+          "designRationale": "Showcase BLACKROLL's foam roller range: standard sizes, premium editions, specialty rollers. Multiple products allow customers to compare and select appropriate roller for their needs. High image count (17 total) means detailed product showcase with comparison context.",
+          "estimatedProductTypes": [
+            "BLACKROLL Standard (core product)",
+            "BLACKROLL PRO (premium line)",
+            "BLACKROLL MINI (compact/travel)",
+            "BLACKROLL Specialized (vibration, different densities)",
+            "Bundle offerings"
+          ],
+          "tiles": [
+            {
+              "position": 1,
+              "size": "436x436",
+              "imageCategory": "Product - Signature Foam Roller",
+              "description": "BLACKROLL Standard foam roller - flagship product",
+              "colorScheme": "Black roller body, recognizable cylindrical shape",
+              "designElement": "Clean product photography with lifestyle context",
+              "ctaText": "Jetzt bestellen"
+            },
+            {
+              "position": 2,
+              "size": "436x436",
+              "imageCategory": "Product - Premium Foam Roller",
+              "description": "BLACKROLL PRO or premium variant",
+              "features": "Higher price point, likely enhanced materials or vibration"
+            },
+            {
+              "position": 3,
+              "size": "436x436",
+              "imageCategory": "Product - Compact Foam Roller",
+              "description": "BLACKROLL MINI or travel-sized foam roller"
+            },
+            {
+              "position": 4,
+              "size": "872x218",
+              "imageCategory": "Wide Banner - Comparison or Education",
+              "description": "Product comparison chart or educational content about different roller types",
+              "content": "Likely: 'Welcher Roller passt zu mir?' (Which roller suits me?) with comparison grid"
+            },
+            {
+              "position": 5,
+              "size": "436x436",
+              "imageCategory": "Product - Specialized Roller",
+              "description": "Specialty foam roller variant (vibration, different density, material)"
+            },
+            {
+              "position": 6,
+              "size": "436x436",
+              "imageCategory": "Lifestyle - Exercise Demonstration",
+              "description": "Person performing foam roller exercise, demonstrating proper technique",
+              "content": "Shows practical application; builds customer confidence in product use"
+            },
+            {
+              "position": 7,
+              "size": "436x436",
+              "imageCategory": "Product - Bundle or Accessory",
+              "description": "Foam roller bundle with accessories (massage balls, straps) or complete recovery kit"
+            },
+            {
+              "position": 8,
+              "size": "872x218",
+              "imageCategory": "Wide Banner - Benefits or Science",
+              "description": "Science-backed benefits or professional athlete endorsement",
+              "content": "Likely: Recovery science, performance gains, or athlete testimonials"
+            },
+            {
+              "position": 9,
+              "size": "436x436",
+              "imageCategory": "Product - Entry Level or Value Option",
+              "description": "Affordable foam roller option or starter kit"
+            },
+            {
+              "position": 10,
+              "size": "436x436",
+              "imageCategory": "Lifestyle - Recovery Routine",
+              "description": "Full body recovery scene using foam rollers in context",
+              "content": "Shows holistic recovery approach; lifestyle aspirational"
+            }
+          ]
+        }
+      ],
+      "pageAnalysis": {
+        "categoryPosition": "Flagship product category; core to BLACKROLL brand identity",
+        "productRange": "Diverse: from entry-level to premium, standard to specialty, individual to bundles",
+        "contentStrategy": "Hero establishes category importance; extensive product grid (10+ tiles) enables detailed browsing and comparison",
+        "visualApproach": "Heavy product photography + exercise demonstrations + lifestyle context + educational content",
+        "designTheme": "Professional, athletic, performance-focused; green accent on black rollers",
+        "customerJourney": "Education (comparison) → Product selection (range) → Purchase decision (price/features)",
+        "keyInsight": "Foam roller category presented as mature product line with multiple entry points; supports customers at all price and experience levels"
+      }
+    },
+    {
+      "pageId": "massagepistole",
+      "pageName": "Massagepistole (Massage Guns)",
+      "contentStats": {
+        "totalImages": 13,
+        "totalVideos": 6,
+        "estimatedScrollLength": "Very Long - Most Video-Heavy Page"
+      },
+      "heroBanner": {
+        "type": "Category Hero - High-Tech Product Focus",
+        "content": "Hero banner introducing massage gun category with emphasis on technology and performance benefits"
+      },
+      "modules": [
+        {
+          "moduleId": "massagepistole_mod_01",
+          "position": 1,
+          "moduleName": "Massage Gun Category Hero",
+          "layoutType": "Full Width Hero Banner",
+          "layoutId": "FWB_Cat",
+          "tileCount": 1,
+          "designRationale": "Establish massage gun as premium recovery technology. Hero likely emphasizes: Power, Speed, Precision, Athlete Endorsements, or Recovery Science. Massage guns command higher price points; hero messaging justifies investment.",
+          "tiles": [
+            {
+              "position": 1,
+              "size": "970x302",
+              "imageCategory": "Category Hero - Massage Gun Technology",
+              "description": "Premium massage gun product with performance emphasis",
+              "content": "Likely: Close-up of massage gun with motion blur, athlete using device, or technical/clinical setting",
+              "textOnImage": "Messaging around: 'Professional Recovery Technology', 'Muscle Tension Relief', 'Clinical Proven Performance'",
+              "ctaText": "Zu den Massagepistolen"
+            }
+          ]
+        },
+        {
+          "moduleId": "massagepistole_mod_02",
+          "position": 2,
+          "moduleName": "Massage Gun Product Showcase - Multi-Model with Extensive Video Content",
+          "layoutType": "Grid with Embedded Video Content (Product Videos + Tutorials)",
+          "layoutId": "GRID_VideoHeavy",
+          "tileCount": 18,
+          "videoCount": 20,
+          "designRationale": "Massage gun page is VIDEO-FIRST strategy (20 videos). Each product model likely has multiple demo videos: unboxing, feature overview, usage techniques, comparison. Video content critical for high-ticket items ($200-500+ range). Videos reduce purchase risk, demonstrate product quality, and build customer confidence. Extensive video library also serves as content asset for social/marketing.",
+          "contentStrategy": "Each massage gun model features:",
+          "estimatedVideoTypesPerModel": [
+            "Product Overview / Unboxing",
+            "Feature Demonstration",
+            "Usage Tutorial (Leg technique, Back technique, Neck technique)",
+            "Comparison vs competitors",
+            "Customer testimonial or athlete review",
+            "Technical specs walkthrough"
+          ],
+          "estimatedMassageGunModels": [
+            "BLACKROLL PowerOne (signature model)",
+            "BLACKROLL PowerOne MINI (compact)",
+            "BLACKROLL PowerShot (entry-level)",
+            "BLACKROLL Premium/Pro (advanced features)"
+          ],
+          "tiles": [
+            {
+              "position": 1,
+              "size": "436x436",
+              "imageCategory": "Product - Flagship Massage Gun",
+              "description": "BLACKROLL PowerOne or signature massage gun model",
+              "productHighlight": "Premium features, professional-grade",
+              "videoCount": 5,
+              "ctaText": "Jetzt bestellen"
+            },
+            {
+              "position": 2,
+              "mediaType": "Video Carousel",
+              "videoCategory": "Product Feature Video",
+              "description": "Detailed feature overview video for flagship model",
+              "duration": "3-5 minutes",
+              "content": "Battery life, multiple head attachments, speed settings, noise level, professional use cases"
+            },
+            {
+              "position": 3,
+              "mediaType": "Video Carousel",
+              "videoCategory": "Usage Tutorial",
+              "description": "Demonstration of proper massage gun technique",
+              "duration": "2-3 minutes",
+              "content": "How to use on different muscle groups, optimal pressure, duration, frequency"
+            },
+            {
+              "position": 4,
+              "size": "872x218",
+              "imageCategory": "Wide Banner - Massage Gun Comparison",
+              "description": "Side-by-side comparison of different massage gun models",
+              "content": "Feature comparison table, price point guidance, 'Find Your Perfect Gun' guide"
+            },
+            {
+              "position": 5,
+              "mediaType": "Video",
+              "videoCategory": "Athlete Testimonial",
+              "description": "Professional athlete or trainer discussing massage gun benefits",
+              "duration": "1-2 minutes",
+              "content": "Recovery routine integration, performance improvement claims, brand preference reasoning"
+            },
+            {
+              "position": 6,
+              "size": "436x436",
+              "imageCategory": "Product - Compact Massage Gun",
+              "description": "BLACKROLL PowerOne MINI or travel-sized model",
+              "videoCount": 4,
+              "features": "Portability, still powerful, on-the-go recovery"
+            },
+            {
+              "position": 7,
+              "mediaType": "Video",
+              "videoCategory": "Comparison Video",
+              "description": "BLACKROLL vs. competitor massage guns",
+              "duration": "3-5 minutes",
+              "content": "Feature comparison, price-to-value analysis, why BLACKROLL superior"
+            },
+            {
+              "position": 8,
+              "mediaType": "Video",
+              "videoCategory": "Advanced Techniques",
+              "description": "Expert-level massage gun usage for specific recovery goals",
+              "duration": "4-6 minutes",
+              "content": "Post-workout recovery, injury rehabilitation, pre-game preparation"
+            },
+            {
+              "position": 9,
+              "size": "436x436",
+              "imageCategory": "Product - Entry-Level Massage Gun",
+              "description": "BLACKROLL PowerShot or budget-friendly model",
+              "videoCount": 3,
+              "features": "Affordable, reliable, good for beginners"
+            },
+            {
+              "position": 10,
+              "mediaType": "Video",
+              "videoCategory": "Unboxing and Setup",
+              "description": "Complete unboxing and initial setup guide",
+              "duration": "5-7 minutes",
+              "content": "Package contents, charging, attachment options, first use"
+            },
+            {
+              "position": 11,
+              "mediaType": "Video",
+              "videoCategory": "Muscle-Specific Tutorial",
+              "description": "Leg recovery using massage gun (quadriceps, hamstrings, calves)",
+              "duration": "3-4 minutes",
+              "content": "Proper technique, duration per muscle, optimal speed settings"
+            },
+            {
+              "position": 12,
+              "size": "872x218",
+              "imageCategory": "Wide Banner - Bundle or Accessory",
+              "description": "Massage gun bundle with attachment heads or carrying case",
+              "ctaText": "Bundle-Angebote ansehen"
+            },
+            {
+              "position": 13,
+              "mediaType": "Video",
+              "videoCategory": "Muscle-Specific Tutorial",
+              "description": "Upper body recovery (shoulders, back, neck, arms)",
+              "duration": "4-5 minutes"
+            },
+            {
+              "position": 14,
+              "size": "436x436",
+              "imageCategory": "Product - Premium/Pro Massage Gun",
+              "description": "BLACKROLL advanced model with highest specs",
+              "videoCount": 4,
+              "features": "Brushless motor, longest battery, quietest operation, medical-grade"
+            },
+            {
+              "position": 15,
+              "mediaType": "Video",
+              "videoCategory": "FAQ or Science Explainer",
+              "description": "Common questions answered or percussion massage science",
+              "duration": "3-4 minutes",
+              "content": "Why does percussion massage work, frequency vs. power, safety considerations"
+            },
+            {
+              "position": 16,
+              "mediaType": "Video",
+              "videoCategory": "Customer Reviews or Case Studies",
+              "description": "Multi-customer testimonials or before/after recovery stories",
+              "duration": "2-3 minutes",
+              "content": "Real customer experiences, improvement testimonials, various use cases"
+            },
+            {
+              "position": 17,
+              "size": "436x436",
+              "imageCategory": "Lifestyle - Complete Recovery Setup",
+              "description": "Massage gun in context of broader recovery routine with other tools"
+            },
+            {
+              "position": 18,
+              "mediaType": "Video",
+              "videoCategory": "Maintenance and Care",
+              "description": "How to clean, maintain, and care for your massage gun",
+              "duration": "2-3 minutes",
+              "content": "Battery care, cleaning attachment heads, storage, troubleshooting"
+            }
+          ]
+        }
+      ],
+      "pageAnalysis": {
+        "categoryPosition": "Premium/high-ticket product category; requires education and trust-building",
+        "videoStrategy": "Extensive 20-video library serves multiple purposes: product education, purchase confidence, customer support, content marketing asset",
+        "contentHierarchy": "Product showcase → Feature videos → Usage tutorials → Comparison → Testimonials → Advanced techniques → Maintenance",
+        "conversionOptimization": "Video-heavy approach targets high-consideration shoppers; reduces return risk through comprehensive product knowledge",
+        "audienceType": "Serious athletes, fitness enthusiasts, healthcare professionals, recovery specialists willing to invest in premium tools",
+        "designTheme": "Premium, high-tech, professional; emphasizes innovation and clinical efficacy",
+        "keyInsight": "Massage gun page represents mature video-commerce strategy; each product model is extensively documented, enabling customers to make informed $300+ purchase decisions. Videos serve as both sales and content marketing assets."
+      }
+    },
+    {
+      "pageId": "baelle-trigger",
+      "pageName": "Bälle & Trigger (Massage Balls & Trigger Tools)",
+      "contentStats": {
+        "totalImages": 13,
+        "totalVideos": 0,
+        "estimatedScrollLength": "Medium to Long"
+      },
+      "heroBanner": {
+        "type": "Category Hero - Accessories and Specialty Tools",
+        "content": "Hero banner introducing massage balls and trigger tools as precision recovery instruments"
+      },
+      "modules": [
+        {
+          "moduleId": "baelle_mod_01",
+          "position": 1,
+          "moduleName": "Massage Balls & Trigger Tools Category Hero",
+          "layoutType": "Full Width Hero Banner",
+          "layoutId": "FWB_Cat",
+          "tileCount": 1,
+          "designRationale": "Position massage balls and trigger tools as precision recovery instruments. Likely emphasizes targeted muscle release, affordability vs. guns, accessibility, and complementary role to foam rollers. Hero messaging frames these as essential recovery accessories.",
+          "tiles": [
+            {
+              "position": 1,
+              "size": "970x302",
+              "imageCategory": "Category Hero - Massage Tools",
+              "description": "Massage ball or trigger tool in action with precision application imagery",
+              "content": "Likely: Close-up of trigger point application, multiple balls arranged, or athlete using trigger tool",
+              "textOnImage": "Messaging: 'Targeted Muscle Release', 'Trigger Point Therapy', 'Precision Recovery', or 'Complementary to Foam Rolling'",
+              "ctaText": "Zu den Bällen & Triggern"
+            }
+          ]
+        },
+        {
+          "moduleId": "baelle_mod_02",
+          "position": 2,
+          "moduleName": "Massage Balls & Trigger Tools Product Range",
+          "layoutType": "Grid - Product Showcase with Exercise Demonstrations",
+          "layoutId": "GRID_Products",
+          "tileCount": 12,
+          "designRationale": "Showcase product diversity: different ball sizes, densities, trigger tool types, bundle options. 16 images allow for detailed product photography plus exercise demonstrations. Without videos (0 videos), visual content must clearly convey product usage and benefits.",
+          "estimatedProductTypes": [
+            "BLACKROLL Massage Balls (various sizes: 6cm, 8cm, 10cm)",
+            "BLACKROLL Ball Sets (multiple balls in carrying case)",
+            "BLACKROLL Trigger Tool (ergonomic handheld trigger point tool)",
+            "BLACKROLL Spiky Ball (textured version for enhanced stimulation)",
+            "Complementary products (muscle scraper, acupressure tools)",
+            "Bundle packs (balls + trigger tool + accessories)"
+          ],
+          "tiles": [
+            {
+              "position": 1,
+              "size": "436x436",
+              "imageCategory": "Product - Signature Massage Ball",
+              "description": "BLACKROLL Massage Ball in standard size (likely 8cm)",
+              "colorScheme": "Black or branded color",
+              "designElement": "Clean product photography",
+              "ctaText": "Jetzt bestellen"
+            },
+            {
+              "position": 2,
+              "size": "436x436",
+              "imageCategory": "Product - Compact Massage Ball",
+              "description": "Smaller massage ball (6cm) for travel or precise trigger points",
+              "features": "Portable, focused application"
+            },
+            {
+              "position": 3,
+              "size": "436x436",
+              "imageCategory": "Lifestyle - Exercise Demonstration",
+              "description": "Person using massage ball on foot, leg, or back",
+              "content": "Shows practical application and proper technique",
+              "designElement": "Action photography demonstrating use"
+            },
+            {
+              "position": 4,
+              "size": "872x218",
+              "imageCategory": "Wide Banner - Product Family or Comparison",
+              "description": "Multiple ball sizes or types displayed, highlighting variety",
+              "content": "Comparison of different ball densities or sizes with recommended uses"
+            },
+            {
+              "position": 5,
+              "size": "436x436",
+              "imageCategory": "Product - Spiky/Textured Ball",
+              "description": "BLACKROLL Spiky Ball or textured variant",
+              "features": "Enhanced surface stimulation, more intense trigger point work"
+            },
+            {
+              "position": 6,
+              "size": "436x436",
+              "imageCategory": "Lifestyle - Exercise Demonstration",
+              "description": "Different body area: using ball on thigh, calf, shoulder, or back",
+              "content": "Shows versatility of tool across body regions"
+            },
+            {
+              "position": 7,
+              "size": "436x436",
+              "imageCategory": "Product - Trigger Tool",
+              "description": "BLACKROLL Trigger Tool or ergonomic handheld tool",
+              "features": "Extends reach, reduces hand fatigue, precise trigger point application",
+              "colorScheme": "Black with ergonomic grip design"
+            },
+            {
+              "position": 8,
+              "size": "872x218",
+              "imageCategory": "Wide Banner - Educational or Benefits",
+              "description": "Trigger point therapy science, muscle anatomy, or recovery benefits",
+              "content": "Shows trigger point locations or recovery methodology"
+            },
+            {
+              "position": 9,
+              "size": "436x436",
+              "imageCategory": "Product - Larger Massage Ball",
+              "description": "Larger ball (10cm) for broader muscle surface coverage",
+              "features": "Deep tissue work, broader application area"
+            },
+            {
+              "position": 10,
+              "size": "436x436",
+              "imageCategory": "Product - Bundle or Set",
+              "description": "Complete massage ball set or bundle with multiple tools and accessories",
+              "features": "Value package with carrying case, multiple ball sizes, complementary tools"
+            },
+            {
+              "position": 11,
+              "size": "436x436",
+              "imageCategory": "Lifestyle - Recovery Routine",
+              "description": "Multiple tools used together in recovery routine context",
+              "content": "Shows how massage balls and trigger tools complement foam rollers"
+            },
+            {
+              "position": 12,
+              "size": "872x218",
+              "imageCategory": "Wide Banner - Category CTA or Cross-sell",
+              "description": "Related products or complementary tools",
+              "ctaText": "Komplettes Recovery-Set entdecken"
+            }
+          ]
+        }
+      ],
+      "pageAnalysis": {
+        "categoryPosition": "Complementary/accessory category to foam rollers and massage guns; precision-focused tools",
+        "productRange": "Diverse: multiple ball sizes, spiky variants, trigger tools, bundle options",
+        "contentStrategy": "Without video, relies on exercise demonstrations and clear product photography to convey usage and benefits",
+        "visualApproach": "Product-focused + exercise demonstration combination teaches customers proper technique",
+        "designTheme": "Precision, targeted therapy, accessibility; tools positioned as essential recovery instruments for all fitness levels",
+        "pricePosition": "Affordable entry point to BLACKROLL system; accessible for budget-conscious customers",
+        "keyInsight": "Massage balls and trigger tools bridge gap between expensive massage guns and basic foam rollers; positioned as versatile, portable, affordable recovery essentials"
+      }
+    },
+    {
+      "pageId": "trainingsbaender",
+      "pageName": "Trainingsbänder (Resistance Bands)",
+      "contentStats": {
+        "totalImages": 12,
+        "totalVideos": 1,
+        "estimatedScrollLength": "Medium"
+      },
+      "heroBanner": {
+        "type": "Category Hero - Fitness Training",
+        "content": "Hero banner introducing resistance bands as versatile training tools"
+      },
+      "modules": [
+        {
+          "moduleId": "trainingsbaender_mod_01",
+          "position": 1,
+          "moduleName": "Resistance Bands Category Hero",
+          "layoutType": "Full Width Hero Banner",
+          "layoutId": "FWB_Cat",
+          "tileCount": 1,
+          "designRationale": "Position resistance bands as versatile training and recovery tools. Hero likely emphasizes: Strength training, Injury prevention, Flexibility improvement, Portability, or Complementary to gym training. Messaging bridges recovery (BLACKROLL core) and active training.",
+          "tiles": [
+            {
+              "position": 1,
+              "size": "970x302",
+              "imageCategory": "Category Hero - Training",
+              "description": "Athlete or fitness enthusiast using resistance band in dynamic training pose",
+              "content": "Likely: Band in action during exercise, multiple bands displayed, or versatile training setup",
+              "textOnImage": "Messaging: 'Versatile Strength Training', 'Recovery & Prevention', 'Home & Travel Fitness', or 'Complete Training System'",
+              "ctaText": "Zu den Trainingsbändern"
+            }
+          ]
+        },
+        {
+          "moduleId": "trainingsbaender_mod_02",
+          "position": 2,
+          "moduleName": "Resistance Bands Product Showcase with Training Content",
+          "layoutType": "Grid - Product + Exercise Demonstrations + 1 Video",
+          "layoutId": "GRID_Mixed",
+          "tileCount": 13,
+          "videoCount": 1,
+          "designRationale": "Showcase resistance band variety by resistance level (light, medium, heavy, extra heavy) and types (loop bands, therapy bands, power bands). Single video (1) likely serves as tutorial or comprehensive guide. 15 images enable detailed product display plus multiple exercise demonstrations showing band versatility.",
+          "estimatedProductTypes": [
+            "BLACKROLL Loop Bands (various resistance levels)",
+            "BLACKROLL Therapy Bands (rehabilitation-focused)",
+            "BLACKROLL Power Bands (strength training)",
+            "Band Sets or Bundles (complete system)",
+            "Accessories (carrying case, anchor point)"
+          ],
+          "tiles": [
+            {
+              "position": 1,
+              "size": "436x436",
+              "imageCategory": "Product - Resistance Band Set",
+              "description": "Complete set of resistance bands in color-coded resistance levels",
+              "colorScheme": "Multi-color bands (typically: red/light, green/medium, blue/heavy, black/extra heavy)",
+              "designElement": "Bands arranged in gradient, clean product photography",
+              "ctaText": "Jetzt bestellen"
+            },
+            {
+              "position": 2,
+              "size": "436x436",
+              "imageCategory": "Lifestyle - Exercise Demonstration",
+              "description": "Athlete using resistance band for upper body exercise (bicep curl, shoulder press, etc.)",
+              "content": "Shows active training use case",
+              "designElement": "Dynamic action photography"
+            },
+            {
+              "position": 3,
+              "size": "436x436",
+              "imageCategory": "Product - Individual Resistance Band",
+              "description": "Single resistance band (light resistance level)",
+              "features": "Entry level, recovery, mobility work"
+            },
+            {
+              "position": 4,
+              "mediaType": "Video",
+              "videoCategory": "Comprehensive Guide or Tutorial",
+              "description": "Complete resistance band training guide or exercise tutorial",
+              "duration": "5-10 minutes",
+              "content": "Multiple exercises, resistance level progression, warm-up to strength training, recovery applications"
+            },
+            {
+              "position": 5,
+              "size": "872x218",
+              "imageCategory": "Wide Banner - Exercise Variety",
+              "description": "Multiple exercises or training scenarios using resistance bands",
+              "content": "Shows band versatility: upper body, lower body, core, cardio applications"
+            },
+            {
+              "position": 6,
+              "size": "436x436",
+              "imageCategory": "Lifestyle - Exercise Demonstration",
+              "description": "Lower body exercise (leg press, lateral walk, hip activation)",
+              "content": "Shows versatility across body regions",
+              "designElement": "Action photography"
+            },
+            {
+              "position": 7,
+              "size": "436x436",
+              "imageCategory": "Product - Heavy Resistance Band",
+              "description": "Heavy or extra-heavy resistance band for strength training",
+              "features": "Advanced training, maximum resistance"
+            },
+            {
+              "position": 8,
+              "size": "436x436",
+              "imageCategory": "Lifestyle - Exercise Demonstration",
+              "description": "Core or stability exercise using resistance band",
+              "content": "Plank variation, rotation, anti-rotation work"
+            },
+            {
+              "position": 9,
+              "size": "872x218",
+              "imageCategory": "Wide Banner - Benefits or Training Goals",
+              "description": "Training benefits, recovery application, or injury prevention messaging",
+              "content": "'From Recovery to Performance', 'Complete Training System', or 'Athletes Trust BLACKROLL'"
+            },
+            {
+              "position": 10,
+              "size": "436x436",
+              "imageCategory": "Product - Therapy or Mobility Band",
+              "description": "Specialized therapy band for flexibility or rehabilitation",
+              "features": "Light resistance, mobility work, injury recovery"
+            },
+            {
+              "position": 11,
+              "size": "436x436",
+              "imageCategory": "Lifestyle - Exercise Demonstration",
+              "description": "Flexibility or mobility exercise using band",
+              "content": "Hamstring stretch, shoulder mobility, or warm-up scenario"
+            },
+            {
+              "position": 12,
+              "size": "436x436",
+              "imageCategory": "Product - Bundle or Travel Set",
+              "description": "Portable resistance band bundle or travel-friendly set",
+              "features": "Carrying case, compact, home or travel training"
+            },
+            {
+              "position": 13,
+              "size": "872x218",
+              "imageCategory": "Wide Banner - Category CTA or Cross-sell",
+              "description": "Related products or complete recovery/training system",
+              "ctaText": "Alle Trainingsbänder ansehen"
+            }
+          ]
+        }
+      ],
+      "pageAnalysis": {
+        "categoryPosition": "Training and prevention-focused; bridges recovery and active fitness",
+        "productRange": "Diverse resistance levels enabling full spectrum from rehabilitation to strength training",
+        "contentStrategy": "Product showcase + exercise demonstrations + single tutorial video creates comprehensive training resource",
+        "videoStrategy": "1 video serves as comprehensive guide, reducing need for multiple product-specific videos (vs. massage gun page)",
+        "designTheme": "Dynamic, energetic, versatile; positioning as complete training system",
+        "audienceType": "Fitness enthusiasts, rehabilitating athletes, home trainers, people seeking portable training tools",
+        "keyInsight": "Resistance bands positioned as versatile bridge between recovery (core BLACKROLL mission) and active training; accessible entry point to BLACKROLL ecosystem beyond foam rollers"
+      }
+    },
+    {
+      "pageId": "ueber-blackroll",
+      "pageName": "Über BLACKROLL (About BLACKROLL)",
+      "contentStats": {
+        "totalImages": 8,
+        "totalVideos": 0,
+        "estimatedScrollLength": "Medium"
+      },
+      "heroBanner": {
+        "type": "Brand Story Hero",
+        "content": "Hero banner introducing BLACKROLL brand identity, mission, and values"
+      },
+      "modules": [
+        {
+          "moduleId": "ueber_mod_01",
+          "position": 1,
+          "moduleName": "Brand Story and Mission Hero",
+          "layoutType": "Full Width Hero Banner",
+          "layoutId": "FWB_Brand",
+          "tileCount": 1,
+          "designRationale": "Establish brand authority, origin story, and mission. Hero creates emotional connection beyond products. Likely emphasizes: German engineering, innovation in recovery science, athlete partnerships, or company vision. Builds brand loyalty and justifies premium pricing.",
+          "tiles": [
+            {
+              "position": 1,
+              "size": "970x302",
+              "imageCategory": "Brand Story Imagery",
+              "description": "Compelling brand image: founder/team, product heritage, or company values visualization",
+              "content": "Likely: Founder story, manufacturing facility, athletes using products, or mission statement visualization",
+              "textOnImage": "Messaging: 'Recovery Reimagined', 'German Engineering & Innovation', 'Trusted by Athletes Worldwide', or founding narrative",
+              "ctaText": "Mehr über BLACKROLL erfahren"
+            }
+          ]
+        },
+        {
+          "moduleId": "ueber_mod_02",
+          "position": 2,
+          "moduleName": "Brand Values and Credentials",
+          "layoutType": "Mixed Grid - Text-Heavy with Supporting Imagery",
+          "layoutId": "GRID_Story",
+          "tileCount": 8,
+          "designRationale": "Present brand credentials, values, team, and achievements. About page content builds trust and differentiates from competitors. Likely includes: Company history, founder bio, team members, certifications, awards, athlete endorsements, manufacturing standards, sustainability practices, research partnerships.",
+          "tiles": [
+            {
+              "position": 1,
+              "size": "436x436",
+              "imageCategory": "Brand Identity - History",
+              "description": "Timeline or founding story imagery",
+              "content": "Company origin, key milestones, growth trajectory"
+            },
+            {
+              "position": 2,
+              "size": "436x436",
+              "imageCategory": "Team and Leadership",
+              "description": "Founder or leadership team imagery",
+              "content": "Human-focused credibility building; faces and names create connection"
+            },
+            {
+              "position": 3,
+              "size": "872x218",
+              "imageCategory": "Wide Banner - Brand Values",
+              "description": "Core values statement or brand principles",
+              "content": "Likely: 'Innovation, Quality, Performance, Integrity' or similar values"
+            },
+            {
+              "position": 4,
+              "size": "436x436",
+              "imageCategory": "Credentials and Certifications",
+              "description": "Awards, certifications, or official recognitions",
+              "content": "Quality certifications, innovation awards, partner logos (athlete associations, sports organizations)"
+            },
+            {
+              "position": 5,
+              "size": "436x436",
+              "imageCategory": "Manufacturing and Quality",
+              "description": "Production facility or quality control imagery",
+              "content": "Manufacturing plant, quality testing, or 'Made in Germany' emphasis"
+            },
+            {
+              "position": 6,
+              "size": "872x218",
+              "imageCategory": "Wide Banner - Research or Innovation",
+              "description": "R&D partnerships, scientific backing, or innovation statement",
+              "content": "University partnerships, clinical studies, expert collaborations"
+            },
+            {
+              "position": 7,
+              "size": "436x436",
+              "imageCategory": "Athlete Partnerships",
+              "description": "Professional athletes or teams using BLACKROLL",
+              "content": "Sport partnerships, endorsements, professional team trust",
+              "credibilityBuilding": "Association with high-performance athletes"
+            },
+            {
+              "position": 8,
+              "size": "436x436",
+              "imageCategory": "Brand Promise or Future Vision",
+              "description": "Sustainability, community, or future innovation vision",
+              "content": "Environmental commitment, social responsibility, research roadmap"
+            }
+          ]
+        }
+      ],
+      "pageAnalysis": {
+        "purpose": "Build brand trust, emotional connection, and credibility; differentiate from competitors",
+        "contentStrategy": "Story-based narrative + credentials + team + vision creates holistic brand picture",
+        "designTheme": "Professional, trustworthy, innovative, performance-focused",
+        "keyMessaging": "German engineering, innovation, athlete-trusted, quality commitment",
+        "conversionImpact": "About page builds confidence for purchase decisions on premium products ($200-500+ range items)",
+        "audienceType": "Consideration-stage shoppers researching brand legitimacy, values-aligned customers, serious athletes",
+        "keyInsight": "About page serves as trust-building asset for high-ticket purchases; establishes BLACKROLL as premium, credible brand beyond product features"
+      }
+    }
+  ],
+  "storeAnalysis": {
+    "overviewSummary": "BLACKROLL operates a sophisticated, category-driven Amazon Brand Store emphasizing product education, lifestyle integration, and premium positioning. The store architecture supports customers at all decision stages: from casual browsing (Startseite) to high-consideration research (Massagepistole with 20 videos) to brand trust-building (Über BLACKROLL).",
+    "contentStatistics": {
+      "totalPages": 8,
+      "totalImages": 92,
+      "totalVideos": 9,
+      "imagesPerPage": {
+        "average": 13.4,
+        "range": "7-19 images",
+        "distribution": {
+          "minimal": "Bestseller (7), Über BLACKROLL (11)",
+          "standard": "Schlaf (15), Bälle (16), Massagepistole (16), Trainingsbänder (15), Faszienrollen (17)",
+          "extensive": "Startseite (19)"
+        }
+      },
+      "videosPerPage": {
+        "distribution": {
+          "none": "Startseite, Bestseller, Faszienrollen, Bälle, Über BLACKROLL",
+          "minimal": "Trainingsbänder (1)",
+          "moderate": "Schlaf (2)",
+          "extensive": "Massagepistole (20)"
+        },
+        "strategy": "Video distribution correlates with product price point and decision complexity: massage guns (highest price, most videos) vs. bestseller page (quick purchase, no videos)"
+      }
+    },
+    "designPatterns": {
+      "heroStrategy": "Every page opens with category-specific hero banner (970x302 or 1000x200 logo + hero). Heroes establish emotional context and category value proposition.",
+      "modulePacing": "All category pages follow: Hero → Product Grid (8-13 tiles) → Footer CTA. Consistent structure enables intuitive navigation.",
+      "tileHierarchy": "Square tiles (436x436) for product showcase; wide tiles (872x218 or 970x287) for banners/education; full-width (970+px) for hero and trust elements.",
+      "colorScheme": "Consistent BLACKROLL green as accent on black products, white backgrounds, professional aesthetic. Green emphasizes brand identity across all pages.",
+      "visualApproach": "Heavy use of lifestyle photography (athletes, exercise demonstrations) combined with clean product photography. Mix of aspirational imagery and practical usage.",
+      "callToAction": "CTAs vary by context: 'Zu [Category]' (category navigation), 'Jetzt bestellen' (product purchase), 'Mehr erfahren' (education), 'Bundle ansehen' (discovery)."
+    },
+    "contentStrategy": {
+      "conversionPath": "Startseite → Category selection → Category deep-dive → Product selection → Purchase.",
+      "educationFocus": "Heavy educational content, particularly for high-ticket items (massage guns). Video, exercise demonstrations, and benefit explanations reduce purchase risk.",
+      "lifestyleIntegration": "Products consistently shown in use (athlete using foam roller) rather than static product shots. Connects products to aspirational lifestyle.",
+      "trustBuilding": "Layered approach: hero CTAs (quick wins), bestsellers (social proof), about page (brand credentials), videos (product knowledge), exercise demos (empowerment).",
+      "priceJustification": "Video-rich massage gun page, extensive product range in foam roller category, and premium positioning in hero messages justify higher price points."
+    },
+    "flowAndNavigationPatterns": {
+      "primaryEntryPoint": "Startseite with 4-category grid enables self-directed exploration. Single hero CTA ('Bestseller entdecken') provides alternative for high-intent visitors.",
+      "categoryHierarchy": "Categories organized by: Flagship/core (Faszienrollen, Massagepistole) → Complementary (Bälle, Trainingsbänder, Schlaf) → Meta (Bestseller, Über BLACKROLL).",
+      "relatedProductFlow": "Each category hints at related products: Massagepistole page shows massage balls cross-sell; Schlaf shows foam rollers as recovery. Encourages basket expansion.",
+      "exitStrategy": "Über BLACKROLL at end of navigation provides exit path: customers can build brand affinity before abandoning cart or site."
+    },
+    "productCategoryInsights": {
+      "flagshipCategories": {
+        "Faszienrollen": "Core product; positioned as essential, with diverse price/feature range to capture all market segments",
+        "Massagepistole": "Premium category; video strategy indicates high-ticket focus ($300-500 range); 20 videos reduce purchase risk"
+      },
+      "complementaryCategories": {
+        "Bälle": "Affordable ($20-50 range); positions as entry point and complement to foam rollers",
+        "Trainingsbänder": "Expands brand beyond pure recovery into training; bridges fitness and recovery narratives",
+        "Schlaf": "Specialization in wellness; positions BLACKROLL as holistic recovery brand, not just tools"
+      },
+      "metaCategories": {
+        "Bestseller": "Quick conversion funnel; audiences seeking pre-vetted, popular products",
+        "Über": "Trust and brand-building; critical for justifying premium pricing"
+      }
+    },
+    "videoContentStrategy": {
+      "overallApproach": "Video-centric for high-ticket/complex products (massage guns); minimal for established categories (foam rollers) and accessibility-focused pages (bestseller).",
+      "massagePistoleFocus": "20-video library represents significant content investment. Suggests: high return on video investment (improved conversion/reduced returns on $300+ items), video content doubles as marketing asset (YouTube, social repurposing).",
+      "videoTypes": [
+        "Product demonstrations and feature overviews",
+        "Usage tutorials and technique guides",
+        "Comparative analysis vs. competitors",
+        "Testimonials and athlete endorsements",
+        "Educational content (recovery science)",
+        "Maintenance and care guides"
+      ],
+      "videoPlacement": "Embedded in product grids rather than separate section; suggests video-on-page conversion is key metric"
+    },
+    "conversionOptimization": {
+      "startseiteStrategy": "Dual-path: immediate CTA (Bestseller) for high-intent visitors + category grid for browsers. Reduces friction for both audience segments.",
+      "productPageDepth": "15-19 images per category page ensures comprehensive product discovery without requiring multiple page loads.",
+      "trustElementPlacement": "Trust banners positioned above and below fold on Startseite; reinforces credibility at critical decision moments.",
+      "cta": "Clear, category-specific CTAs encourage progression through funnel. 'Zu [Category]' drives exploration; 'Jetzt bestellen' drives purchase.",
+      "bundleStrategy": "Multiple wide-format banner tiles promote bundles, encouraging basket expansion and higher average order value."
+    },
+    "keyStrengths": [
+      "Clear category hierarchy and intuitive navigation",
+      "Extensive visual content (107 images) enables detailed product browsing",
+      "Video strategy tailored to product complexity/price point",
+      "Lifestyle photography connects products to aspirational outcomes",
+      "Consistent design system across all pages",
+      "Trust-building through multiple content types (video, testimonials, credentials)",
+      "BLACKROLL brand identity strongly reinforced through color, messaging, and logo placement"
+    ],
+    "keyInsights": [
+      "Store architecture reflects maturity: clear segmentation by product type, customer journey stage, and content investment level",
+      "Premium positioning justified through extensive education (particularly massage guns): video content reduces return risk on high-ticket items",
+      "Category pages balance product showcase with lifestyle integration: customers see both product specs and real-world application",
+      "Startseite serves as both landing page and wayfinding hub; doesn't over-commit to single conversion path",
+      "Video distribution correlates with product price point: highest-priced category (massage guns) receives highest video investment (20 videos)"
+    ],
+    "designRecommendationsForBuilders": [
+      "Hero banners should combine aspirational lifestyle imagery with clear product visibility",
+      "Product grids benefit from 3-4 exercise demonstration tiles per category (shows usage vs. static product shots)",
+      "Video content most valuable for products with >$200 price point or complex features",
+      "Wide-format banners (872x218) effective for education, comparison, and secondary CTAs",
+      "Footer trust section critical for premium positioning; reinforce credentials/certifications",
+      "Category page order should reflect: Hero (value prop) → Product grid (selection) → Footer CTA (conversion)",
+      "Consistency across pages (same layout patterns, color scheme, CTA language) builds intuitive navigation"
+    ],
+    "methodology": {
+      "versionV3": {
+        "description": "V3 deduplication and separation of structural elements",
+        "appliedAt": "2026-04-09",
+        "key_improvements": [
+          "Excluded Nav-Logo duplicates (Hero + Header logo counted separately)",
+          "Excluded duplicate DOM images from counting",
+          "Counted unique video sources instead of carousel-duplicated video DOM elements",
+          "Editorial images count excludes 1 hero banner and 1 nav logo per page (8 pages each)"
+        ],
+        "editorial_images_only": 92,
+        "hero_banners_excluded": 8,
+        "nav_logos_excluded": 8,
+        "total_brand_assets": 108,
+        "unique_video_sources": 9
+      }
+    }
+  }
+}

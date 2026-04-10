@@ -1,0 +1,402 @@
+{
+  "brandName": "Gritin",
+  "storeUrl": "https://www.amazon.de/stores/page/1758941C-AE87-4628-AB45-62C0A2BDB75C",
+  "analyzedAt": "2026-04-09",
+  "methodology": "V3",
+  "navigation": {
+    "pageCount": 9,
+    "pages": [
+      {
+        "name": "Startseite",
+        "level": 0,
+        "pageId": "1758941C-AE87-4628-AB45-62C0A2BDB75C"
+      },
+      {
+        "name": "ALLE ANGEBOTE",
+        "level": 1,
+        "pageId": "EDF8B249-9C2C-4577-8F0F-3C9FA6BDA0AB"
+      },
+      {
+        "name": "NEW",
+        "level": 1,
+        "pageId": "A4017677-EBF9-4873-A364-ED9A9D416C0D"
+      },
+      {
+        "name": "SUPERHELLE UNTERBAULEUCHTEN",
+        "level": 1,
+        "pageId": "4285DBDF-69D4-49C1-943D-61ED6288D412"
+      },
+      {
+        "name": "CLIP-ON-BUCHLAMPE",
+        "level": 1,
+        "pageId": "5695F3F8-6261-4C3A-9510-4032FEC5A794"
+      },
+      {
+        "name": "FALTBARE MINI-BUCHLAMPE",
+        "level": 1,
+        "pageId": "920A83F8-D01D-4102-AAF2-00F6FC0DBEEB"
+      },
+      {
+        "name": "HALS LESELAMPE",
+        "level": 1,
+        "pageId": "F147BF5F-2041-4612-8C4F-35DC5DEC71F0"
+      },
+      {
+        "name": "AUGENMASKE",
+        "level": 1,
+        "pageId": "12519950-E137-4034-96CF-5BCEE6F6C635"
+      },
+      {
+        "name": "SPORT",
+        "level": 1,
+        "pageId": "74A69D57-0036-4599-BE65-892C69946180"
+      },
+      {
+        "name": "Amazon Basics",
+        "level": 1,
+        "pageId": "879785AB-711B-4ACB-9864-46D17B651117",
+        "note": "Shared Amazon cross-brand page, not counted in Gritin editorial totals"
+      }
+    ]
+  },
+  "contentSummary": {
+    "totalEditorialImages": 27,
+    "uniqueVideos": 26,
+    "editorialToVideoRatio": "1:1 (Near parity)",
+    "keyObservation": "Exceptionally video-heavy store with almost equal video and image count. Product category pages rely heavily on videos to demonstrate lighting and sleep product features."
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "pageId": "1758941C-AE87-4628-AB45-62C0A2BDB75C",
+      "editorialImages": 18,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Brand hero with Gritin positioning on lifestyle/lighting/sleep products. Professional product and lifestyle imagery.",
+        "estimatedDimensions": "3000x1500",
+        "brandIdentityNote": "Establishes Gritin as lifestyle lighting brand - modern, functional, accessible sleep and task lighting solutions."
+      },
+      "imageSizes": [
+        {
+          "size": "872x52",
+          "count": 1,
+          "usage": "Small header bar"
+        },
+        {
+          "size": "3000x1500",
+          "count": 2,
+          "usage": "Full-width hero banners"
+        },
+        {
+          "size": "872x109",
+          "count": 8,
+          "usage": "Narrow divider/separator bands between sections"
+        },
+        {
+          "size": "436x436",
+          "count": 6,
+          "usage": "Square category tiles"
+        },
+        {
+          "size": "872x577",
+          "count": 1,
+          "usage": "Medium-height category showcase"
+        }
+      ],
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Full-Width Hero",
+          "layoutId": "hero-full",
+          "tileCount": 1,
+          "designRationale": "Large hero banner establishing brand and product category positioning",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "3000x1500",
+              "imageCategory": "hero",
+              "description": "Primary brand hero introducing Gritin lighting and sleep accessories"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "layoutType": "Full-Width Narrow",
+          "layoutId": "divider-narrow",
+          "tileCount": 1,
+          "designRationale": "Visual divider separating hero from category sections",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "872x109",
+              "imageCategory": "divider",
+              "description": "Narrow band providing visual separation"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "layoutType": "Category Showcase",
+          "layoutId": "category-showcase",
+          "tileCount": 2,
+          "designRationale": "Primary product category highlights (lighting and lifestyle products)",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "872x577",
+              "imageCategory": "category-banner",
+              "description": "Featured product category (e.g., Reading Lamps or Sleep Accessories)"
+            },
+            {
+              "position": "2",
+              "size": "3000x1500",
+              "imageCategory": "category-banner",
+              "description": "Secondary hero or lifestyle imagery showcasing product use"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "layoutType": "Grid of Dividers and Tiles",
+          "layoutId": "mixed-grid",
+          "tileCount": 8,
+          "designRationale": "Category navigation grid with visual dividers between sections",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "872x109",
+              "imageCategory": "divider",
+              "description": "Section divider"
+            },
+            {
+              "position": "2",
+              "size": "436x436",
+              "imageCategory": "category-tile",
+              "description": "Category tile 1"
+            },
+            {
+              "position": "3",
+              "size": "872x109",
+              "imageCategory": "divider",
+              "description": "Section divider"
+            },
+            {
+              "position": "4",
+              "size": "436x436",
+              "imageCategory": "category-tile",
+              "description": "Category tile 2"
+            },
+            {
+              "position": "5",
+              "size": "872x109",
+              "imageCategory": "divider",
+              "description": "Section divider"
+            },
+            {
+              "position": "6",
+              "size": "436x436",
+              "imageCategory": "category-tile",
+              "description": "Category tile 3"
+            },
+            {
+              "position": "7",
+              "size": "872x109",
+              "imageCategory": "divider",
+              "description": "Section divider"
+            },
+            {
+              "position": "8",
+              "size": "436x436",
+              "imageCategory": "category-tile",
+              "description": "Category tile 4"
+            }
+          ]
+        }
+      ],
+      "designNote": "Homepage concentrates 18 of 27 total editorial images (67%). Uses classic banner + divider + tile layout with sophisticated image hierarchy. No videos on homepage - all video content distributed across product category pages."
+    },
+    {
+      "pageName": "ALLE ANGEBOTE",
+      "pageId": "EDF8B249-9C2C-4577-8F0F-3C9FA6BDA0AB",
+      "editorialImages": 1,
+      "videos": 0,
+      "designNote": "Product grid page focused on showcasing all current offers/deals. Minimal editorial content - primarily product tiles with minimal hero."
+    },
+    {
+      "pageName": "NEW",
+      "pageId": "A4017677-EBF9-4873-A364-ED9A9D416C0D",
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "New product arrivals showcase. Pure product grid with no editorial imagery or video content."
+    },
+    {
+      "pageName": "SUPERHELLE UNTERBAULEUCHTEN",
+      "pageId": "4285DBDF-69D4-49C1-943D-61ED6288D412",
+      "editorialImages": 0,
+      "videos": 4,
+      "designNote": "Product category page for under-cabinet lighting. No editorial images but heavy video content (4 videos) to demonstrate lighting functionality and product features. Videos show product in use, brightness levels, and installation."
+    },
+    {
+      "pageName": "CLIP-ON-BUCHLAMPE",
+      "pageId": "5695F3F8-6261-4C3A-9510-4032FEC5A794",
+      "editorialImages": 1,
+      "videos": 10,
+      "designNote": "Most video-dense page in store (10 videos). Product category for clip-on reading lamps. Single editorial image with extensive video coverage showing product angles, brightness demonstrations, flexibility, and various lighting scenarios. Videos are key content asset for this product type."
+    },
+    {
+      "pageName": "FALTBARE MINI-BUCHLAMPE",
+      "pageId": "920A83F8-D01D-4102-AAF2-00F6FC0DBEEB",
+      "editorialImages": 1,
+      "videos": 5,
+      "designNote": "Product category for foldable mini reading lamps. Minimal editorial image but 5 videos demonstrating portability, brightness, and use cases. Video emphasis supports product demonstrability."
+    },
+    {
+      "pageName": "HALS LESELAMPE",
+      "pageId": "F147BF5F-2041-4612-8C4F-35DC5DEC71F0",
+      "editorialImages": 1,
+      "videos": 5,
+      "designNote": "Neck reading lamp category page. Minimal editorial content with 5 videos showing flexibility, comfort, brightness levels, and various wearing positions."
+    },
+    {
+      "pageName": "AUGENMASKE",
+      "pageId": "12519950-E137-4034-96CF-5BCEE6F6C635",
+      "editorialImages": 3,
+      "videos": 1,
+      "designNote": "Sleep accessory (eye mask) category page. More editorial imagery (3 images) than other sub-pages, plus 1 video. Images support sleep/wellness benefit messaging."
+    },
+    {
+      "pageName": "SPORT",
+      "pageId": "74A69D57-0036-4599-BE65-892C69946180",
+      "editorialImages": 2,
+      "videos": 1,
+      "designNote": "Sports accessories category. Minimal editorial (2 images) with 1 supporting video. Bridges lifestyle positioning - Gritin products used across fitness and wellness contexts."
+    }
+  ],
+  "designPatterns": {
+    "colorScheme": {
+      "background": "White/Light",
+      "textColor": "Dark",
+      "accentColor": "Product-focused, bright lighting accents",
+      "rationale": "Light, clean aesthetic appropriate for lighting products. Bright, optimistic tone matches lifestyle positioning. Stark contrast with task lighting brand (ESN's black background) - Gritin positions products as lifestyle/sleep/wellness rather than performance."
+    },
+    "typography": {
+      "primary": "Modern sans-serif, title case for product categories",
+      "characteristics": "Clean, accessible, contemporary. German language product names emphasize functional clarity (SUPERHELLE UNTERBAULEUCHTEN, CLIP-ON-BUCHLAMPE, AUGENMASKE)."
+    },
+    "photography": {
+      "style": "Lifestyle and product photography",
+      "focus": "Lighting demonstrations, sleep/wellness contexts, product usability",
+      "subjects": "Reading scenes, comfortable sleep environments, portable lighting solutions, product detail shots"
+    },
+    "layoutPatterns": {
+      "homepage": "Large hero (3000x1500) + narrow dividers (872x109) + category tiles (436x436) with strategic divider placement for visual breathing room",
+      "categoryPages": "Minimal hero + product grid. Heavy reliance on video for product demonstration over static imagery.",
+      "videoStrategy": "Videos are primary content asset on product pages - used to show lighting in action, demonstrate product flexibility, and illustrate use cases"
+    },
+    "hierarchyStructure": {
+      "navigationDepth": "1 level - flat navigation structure (all pages at same level, no sub-categories)",
+      "pageCount": "9 own pages + 1 shared Amazon Basics page",
+      "distribution": "Inverted compared to ESN: Homepage concentrates 67% of editorial images (18 of 27), while sub-pages are image-light (0-3 images each). Videos distributed across product pages (0 on homepage, 1-10 on category pages).",
+      "strategy": "Simple, category-focused store emphasizing quick navigation to specific product types. Video-first approach for demonstrating product features."
+    }
+  },
+  "editorialStrategy": {
+    "totalEditorialImages": 27,
+    "totalVideos": 26,
+    "videoCenteredApproach": true,
+    "distribution": [
+      {
+        "page": "Startseite",
+        "editorialImages": 18,
+        "videos": 0,
+        "rationale": "Homepage image concentration - brand gateway and category navigation. Zero videos on homepage keeps initial page lightweight while establishing visual identity."
+      },
+      {
+        "page": "CLIP-ON-BUCHLAMPE",
+        "editorialImages": 1,
+        "videos": 10,
+        "rationale": "Highest video density. Product category requires extensive demonstration of angles, brightness levels, flexibility, and real-world usage. Video format ideal for showing product functionality."
+      },
+      {
+        "page": "SUPERHELLE UNTERBAULEUCHTEN",
+        "editorialImages": 0,
+        "videos": 4,
+        "rationale": "Under-cabinet lighting category relies purely on video demonstration. Brightness and installation videos critical for this product category."
+      },
+      {
+        "page": "FALTBARE MINI-BUCHLAMPE",
+        "editorialImages": 1,
+        "videos": 5,
+        "rationale": "Portability and flexibility best demonstrated through video. 5 videos show foldability and use in various contexts."
+      },
+      {
+        "page": "HALS LESELAMPE",
+        "editorialImages": 1,
+        "videos": 5,
+        "rationale": "Neck lamp flexibility and comfort best shown through video. Multiple angles and wearing positions require dynamic content."
+      },
+      {
+        "page": "AUGENMASKE",
+        "editorialImages": 3,
+        "videos": 1,
+        "rationale": "Sleep accessory category has highest editorial image count among sub-pages (3 images). Images support wellness/sleep benefit messaging; minimal video needed."
+      },
+      {
+        "page": "SPORT",
+        "editorialImages": 2,
+        "videos": 1,
+        "rationale": "Secondary lifestyle category. Moderate editorial image support with minimal video."
+      },
+      {
+        "page": "ALLE ANGEBOTE",
+        "editorialImages": 1,
+        "videos": 0,
+        "rationale": "Deal/offer page - minimal editorial, product-grid focused"
+      },
+      {
+        "page": "NEW",
+        "editorialImages": 0,
+        "videos": 0,
+        "rationale": "Pure product grid - new arrivals page with no editorial content"
+      }
+    ]
+  },
+  "brandIdentity": {
+    "corePillars": [
+      "Functional Lifestyle Lighting",
+      "Sleep and Wellness Accessories",
+      "Accessible, Portable Solutions"
+    ],
+    "visualLanguage": "Clean, light aesthetic with bright lifestyle imagery. Product-centric photography emphasizes functionality and use cases. Minimal decorative elements. Modern sans-serif typography in German emphasizes product clarity and accessibility. Overall tone is contemporary and wellness-focused, contrasting with performance/athletic aesthetics of competitor brands.",
+    "targetAudience": "Wellness-conscious consumers, sleep optimization seekers, students and professionals requiring task lighting, travelers and those valuing portable solutions, fitness enthusiasts using multi-purpose accessories",
+    "navigationPhilosophy": "Flat, category-focused structure (9 pages, single navigation level). Rather than deep specialization like ESN, Gritin emphasizes quick access to specific product types: lighting (5 categories: SUPERHELLE UNTERBAULEUCHTEN, CLIP-ON-BUCHLAMPE, FALTBARE MINI-BUCHLAMPE, HALS LESELAMPE) + sleep (AUGENMASKE) + lifestyle (SPORT). All pages equally accessible from main navigation. Fast product discovery over ecosystem exploration.",
+    "contentStrategy": "Video-first product pages (average 3.7 videos per category page). Homepage image-heavy (18 images) establishes visual brand identity, while product pages delegate demonstration to video. This ratio (1:1 image-to-video) is exceptional - most stores favor static images. Suggests products benefit from dynamic demonstration: lighting brightness, product flexibility, real-world usage contexts."
+  },
+  "differentiation": {
+    "comparison": "vs ESN (Sports Nutrition)",
+    "esn": {
+      "pages": 21,
+      "hierarchy": "2-level (main + sub-brands)",
+      "imagery": 75,
+      "videos": 6,
+      "ratio": "12.5:1 (image-heavy)",
+      "aesthetic": "Black/dark, elite/athletic",
+      "strategy": "Deep specialization, sub-brand ecosystems"
+    },
+    "gritin": {
+      "pages": 9,
+      "hierarchy": "1-level (flat)",
+      "imagery": 27,
+      "videos": 26,
+      "ratio": "1:1 (video-parity)",
+      "aesthetic": "Light/white, lifestyle/wellness",
+      "strategy": "Simple navigation, product demonstration-focused"
+    },
+    "keyDifferences": [
+      "Store complexity: ESN's 21 pages vs Gritin's 9 pages - ESN uses deep categorization for specialization, Gritin prioritizes simplicity",
+      "Content approach: ESN image-centric (12.5:1 ratio), Gritin video-centric (1:1 ratio) - reflects product demonstrability needs",
+      "Brand tone: ESN elite/performance, Gritin lifestyle/wellness - different market positions and buyer psychology",
+      "Homepage concentration: ESN spreads content across many pages, Gritin concentrates 67% of images on homepage for visual impact"
+    ]
+  }
+}

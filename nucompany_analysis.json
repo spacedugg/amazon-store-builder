@@ -1,0 +1,287 @@
+{
+  "brandName": "the nu company",
+  "storeUrl": "https://www.amazon.de/stores/thenucompany/page/A096FF51-79D5-440D-8789-6255E9DFE87D",
+  "analyzedAt": "2026-04-09",
+  "navigation": {
+    "pageCount": 3,
+    "pages": [
+      { "name": "Startseite", "level": 0 },
+      { "name": "Schokoriegel", "level": 1 },
+      { "name": "Schokosnacks", "level": 1 }
+    ]
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "heroBanner": {
+        "description": "Links: nucao Creamy Hazelnut Riegel-Packung (rot) mit Bio-Siegel. Mitte: 4 gestapelte Schokoladenriegel im Querschnitt, Nuss-Stückchen sichtbar. Rechts: großer nucao Schriftzug in roter retro-Typographie mit Claim 'the good choc' (abgeschnitten). Badges unten links: 'Bio.', 'Vegan.', 'Fair.' in roten Pillenformen",
+        "textOnImage": "nucao, Creamy Hazelnut, Bio. Vegan. Fair., the good choc",
+        "estimatedDimensions": "3000x600"
+      },
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Full-Width",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Emotionaler Einstieg nach dem Hero - zeigt die Zielgruppe und den Lifestyle-Aspekt der Marke",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Full Width (3000x1500 original)",
+              "imageCategory": "lifestyle",
+              "description": "Drei junge Frauen bei einem Outdoor-Event/Festival, lachend und tanzend. Links: Blonde Frau in helllila Blazer und weißem Top. Mitte: Frau in gelbem Pullover mit Cap und Sonnenbrille, Arme oben. Rechts: Frau in Jeansjacke mit Sonnenbrille, lächelnd, trägt Stofftasche mit nucao Riegeln. Sonniges Licht, rotes Fahrzeug im Hintergrund.",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Von emotionalem Lifestyle-Einstieg zu informativem Brand-Story-Block"
+        },
+        {
+          "position": 2,
+          "layoutType": "2 gleiche Kacheln nebeneinander",
+          "layoutId": "std-2equal",
+          "tileCount": 2,
+          "designRationale": "Brand Story Einführung: Links Text/Produkt-Komposition, rechts passender Lifestyle-Shot",
+          "tiles": [
+            {
+              "position": "links",
+              "size": "Large Square (1500x1500)",
+              "imageCategory": "creative",
+              "description": "Weißer/sehr hellgrauer Hintergrund (nahezu weiß, Elemente wirken floating auf dem Amazon-Seitenhintergrund). Oben rechts: Schokoladenstück. Headline in pinker retro-Schrift auf rotem Banner-Element. Darunter Fließtext über die Gründungsgeschichte. Unten: zwei nucao Riegel-Packungen (Dark Nougat links in dunkelbraun/rot, Crunchy Raspberries rechts in lila/pink) mit verstreuten Schokoladenpralinen",
+              "textOnImage": "So schmeckt die Zukunft, von der immer alle reden. Wir sind das Schokoladen-Start-up nucao aus Leipzig: 2016 von drei Wirtschaftsingenieuren gegründet, sind wir als purpose-driven Unternehmen Vorreiter für unverschämt leckere und nachhaltige Schokolade. Alle Produkte sind vegan, vollgepackt mit Bio-Zutaten und fairem Kakao aus ökologischem Anbau sowie umweltfreundlich verpackt in heimkompostierbarer Folie oder Papier.",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "rechts",
+              "size": "Large Square (1500x1500)",
+              "imageCategory": "lifestyle",
+              "description": "Junge Frau von hinten in roter/oranger Jacke mit transparentem lila Rucksack, der komplett mit nucao Riegeln verschiedener Sorten gefüllt ist (rot, orange, lila Verpackungen sichtbar). Urbane Kulisse: Industriebrücke, Backsteingebäude, bewölkter Himmel",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Fortsetzung des Brand-Story-Blocks: Von 'Wer wir sind' zu 'Was wir tun'"
+        },
+        {
+          "position": 3,
+          "layoutType": "2 gleiche Kacheln nebeneinander",
+          "layoutId": "std-2equal",
+          "tileCount": 2,
+          "designRationale": "Zweiter Brand-Story-Block: Links Lifestyle-Ergänzung, rechts Nachhaltigkeits-Mission mit Produkten",
+          "tiles": [
+            {
+              "position": "links",
+              "size": "Large Square (1500x1500)",
+              "imageCategory": "lifestyle",
+              "description": "Ein offener Reisekoffer von oben, komplett vollgepackt mit nucao Riegeln in verschiedenen Sorten und Farben (rot, orange, lila, braun, pink). Eine Hand greift hinein. Orientalischer gemusterter Teppich als Untergrund. Humorvoller, übertriebener Ansatz",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "rechts",
+              "size": "Large Square (1500x1500)",
+              "imageCategory": "creative",
+              "description": "Weißer/sehr hellgrauer Hintergrund (nahezu weiß, Elemente wirken floating auf dem Amazon-Seitenhintergrund). Oben: nucao Crisp & Crunch Riegel (lila) und nucao Salted Almonds Snackbeutel (lila) schräg arrangiert mit Schokoladenstücken und Nüssen. Mitte: Fließtext über Nachhaltigkeitsmission, Aufforstungsprojekte mit Eden Reforestation Projects, 14 Mio Bäume gepflanzt, Ziel 1 Milliarde. Unten: Roter Button-Banner 'Chocingly good'",
+              "textOnImage": "Damit setzen wir nicht nur einen neuen Maßstab im Schokoladenregal, sondern zeigen auch, dass positives Wirtschaften keine Utopie mehr ist. Auf unserer Mission unterstützen wir in Zusammenarbeit mit Eden Reforestation Projects Aufforstungsprojekte und konnten so schon knapp 14 Millionen Bäume pflanzen. Das Ziel: 1 Milliarde Bäume. Chocingly good",
+              "ctaText": "Chocingly good",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Thematische Vertiefung: Von Nachhaltigkeits-Story zu konkreten Impact-Zahlen"
+        },
+        {
+          "position": 4,
+          "layoutType": "Full-Width",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Impact-Kennzahlen als visueller Beweis der Nachhaltigkeits-Claims aus Modul 3",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Full Width (3000x1373 original)",
+              "imageCategory": "text_image",
+              "description": "Weißer/sehr hellgrauer Hintergrund (nahezu weiß, Elemente wirken floating auf dem Amazon-Seitenhintergrund) mit großem lila Rounded Rectangle in der Mitte. Darin zentrierter Text mit Zielen und erreichten Zahlen. Zwei Kennzahlen nebeneinander in rosa Schrift hervorgehoben",
+              "textOnImage": "Unser Ziel: Ein Leuchtturmprojekt für positives Wirtschaften und eine Milliarde Bäume. Das haben wir mit euch schon erreicht: 13.589.202 Bäume gepflanzt | 135.892 Lokale Arbeitstage geschaffen",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Thematischer Wechsel: Von Brand-Story/Impact zu Produkt-Kategorien"
+        },
+        {
+          "position": 5,
+          "layoutType": "Full-Width",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Kategorie-Navigation: Schokoriegel-Kategorie mit CTA zur Unterseite",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Full Width (3000x1499 original)",
+              "imageCategory": "creative",
+              "description": "Rosa/Pink Hintergrund. Links: Drei nucao Riegel-Packungen schräg übereinander (Creamy Hazelnut rot, Dark Nougat braun/lila, Crisp & Crunch lila) mit herumliegenden Schokoladenstücken. Rechts: Headline in dunkelroter retro-Schrift und roter CTA-Button",
+              "textOnImage": "Riegel sind da, um sie zu brechen.",
+              "ctaText": "Zu den Schokoriegeln",
+              "linksTo": "Unterseite: Schokoriegel"
+            }
+          ],
+          "relationToNextModule": "Fortsetzung Kategorie-Navigation: Von Riegeln zu Tafelschokolade und Snacks"
+        },
+        {
+          "position": 6,
+          "layoutType": "2 gleiche Kacheln nebeneinander",
+          "layoutId": "std-2equal",
+          "tileCount": 2,
+          "designRationale": "Kategorie-Navigation: Tafelschokolade und Schokosnacks als gleichwertige Produktkategorien",
+          "tiles": [
+            {
+              "position": "links",
+              "size": "Large Square (1920x1920)",
+              "imageCategory": "creative",
+              "description": "Rosa/Pink Hintergrund. Oben: nucao Almond Sea Salt Tafelschokolade (lila Verpackung) schräg liegend, teilweise ausgepackt, Schokoladentafel sichtbar. Verstreute Schokoladenstücke mit Mandeln. Unten: Headline in dunkelroter retro-Schrift und roter CTA-Button",
+              "textOnImage": "nu chocolate on the block.",
+              "ctaText": "Zur Tafelschokolade",
+              "linksTo": "Produktfilter oder ASIN"
+            },
+            {
+              "position": "rechts",
+              "size": "Large Square (1920x1920)",
+              "imageCategory": "creative",
+              "description": "Rosa/Pink Hintergrund. Oben: Vier nucao Schokosnack-Beutel (Crunchy Raspberries dunkelrot, Crunchy Strawberries rosa, Salted Almonds lila, Salted Peanuts orange) fächerartig arrangiert mit verstreuten schokolierten Nüssen und Früchten. Unten: Headline in dunkelroter retro-Schrift und roter CTA-Button",
+              "textOnImage": "Süße Schale, nicer Kern.",
+              "ctaText": "Zu den Schoko-Snacks",
+              "linksTo": "Unterseite: Schokosnacks"
+            }
+          ],
+          "relationToNextModule": "Letztes Modul der Startseite - danach nur noch Amazon Footer"
+        }
+      ],
+      "pageAnalysis": {
+        "totalModules": 6,
+        "totalBrandImages": 10,
+        "layoutSequence": ["1", "std-2equal", "std-2equal", "1", "1", "std-2equal"],
+        "imageCategoryDistribution": {
+          "lifestyle": 3,
+          "creative": 5,
+          "product": 0,
+          "text_image": 1,
+          "benefit": 0,
+          "store_hero": 1
+        },
+        "moduleFlow": "Hero → Lifestyle Full-Width → Brand Story (2x std-2equal) → Impact-Zahlen Full-Width → Kategorie Riegel Full-Width → Kategorie Tafel+Snacks std-2equal",
+        "visualTheme": "Weiß/Hellgrau und Rosa/Pink als Primärfarben (Bildelemente floaten auf weißem Amazon-Hintergrund), rote retro-Typographie (nucao Branding), dunkelrote Headlines, rote CTA-Buttons mit abgerundeten Ecken, junge urbane Bildsprache, nachhaltig/purpose-driven"
+      }
+    },
+    {
+      "pageName": "Schokoriegel",
+      "heroBanner": {
+        "description": "Identisch mit Startseite: nucao Creamy Hazelnut links, gestapelte Riegel Mitte, nucao the good choc rechts. Bio. Vegan. Fair. Badges",
+        "textOnImage": "nucao, Creamy Hazelnut, Bio. Vegan. Fair., the good choc",
+        "estimatedDimensions": "3000x600"
+      },
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Full-Width",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Kombination aus Lifestyle-Foto oben und Benefit-Icons unten als Einleitung vor dem Produkt-Grid",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Full Width (3000x1499 original)",
+              "imageCategory": "lifestyle",
+              "description": "Obere Hälfte: Junge Frau in orange/rotem Top sitzt vor einem Küchenregal, das mit nucao Produkten bestückt ist (Crisp & Crunch, Creamy Hazelnut Boxen). Sie hält lächelnd einen geöffneten nucao Riegel in der Hand. Warme, gemütliche Atmosphäre mit Gewürzgläsern und Küchenutensilien. Untere Hälfte: Drei USP-Icons nebeneinander auf hellem/beigem Hintergrund: (1) Globus-Icon: '100% Bio. Vegan. Fair.' - frei von künstlichen Aromen, Zusatz- und Konservierungsstoffen. (2) Blatt-Icon: 'Nachhaltig verpackt.' - heimkompostierbare Zellulose oder Papier. (3) Baum-Icon: 'Aufforstung.' - investiert in grünere Welt und Aufforstungsprojekte",
+              "textOnImage": "100% Bio. Vegan. Fair. | Nachhaltig verpackt. | Aufforstung.",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Nach dem Lifestyle+Benefit-Modul folgt direkt das Produkt-Grid mit ASIN-Karten"
+        }
+      ],
+      "pageAnalysis": {
+        "totalModules": 1,
+        "totalBrandImages": 1,
+        "layoutSequence": ["1"],
+        "imageCategoryDistribution": {
+          "lifestyle": 1,
+          "creative": 0,
+          "product": 0,
+          "text_image": 0,
+          "benefit": 0,
+          "store_hero": 1
+        },
+        "moduleFlow": "Hero → Lifestyle + Benefits Full-Width → Produkt-Grid",
+        "visualTheme": "Warm, authentisch, Küchen-Setting, gleiche USP-Icons wie Schokosnacks-Seite"
+      }
+    },
+    {
+      "pageName": "Schokosnacks",
+      "heroBanner": {
+        "description": "Identisch mit Startseite: nucao Creamy Hazelnut links, gestapelte Riegel Mitte, nucao the good choc rechts. Bio. Vegan. Fair. Badges",
+        "textOnImage": "nucao, Creamy Hazelnut, Bio. Vegan. Fair., the good choc",
+        "estimatedDimensions": "3000x600"
+      },
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Full-Width",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Kombination aus Lifestyle-Foto oben und Benefit-Icons unten als Einleitung vor dem Produkt-Grid",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Full Width (3000x1499 original)",
+              "imageCategory": "lifestyle",
+              "description": "Obere Hälfte: Nahaufnahme einer Hand, die einen schokolierten Snack (Schokonuss) aus einem geöffneten nucao Snackbeutel (lila Verpackung mit rotem nucao Logo) nimmt. Weicher Bokeh-Hintergrund, warme Farbtöne. Untere Hälfte: Identische drei USP-Icons wie auf der Schokoriegel-Seite: (1) '100% Bio. Vegan. Fair.' (2) 'Nachhaltig verpackt.' (3) 'Aufforstung.'",
+              "textOnImage": "100% Bio. Vegan. Fair. | Nachhaltig verpackt. | Aufforstung.",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Nach dem Lifestyle+Benefit-Modul folgt direkt das Produkt-Grid mit ASIN-Karten"
+        }
+      ],
+      "pageAnalysis": {
+        "totalModules": 1,
+        "totalBrandImages": 1,
+        "layoutSequence": ["1"],
+        "imageCategoryDistribution": {
+          "lifestyle": 1,
+          "creative": 0,
+          "product": 0,
+          "text_image": 0,
+          "benefit": 0,
+          "store_hero": 1
+        },
+        "moduleFlow": "Hero → Lifestyle + Benefits Full-Width → Produkt-Grid",
+        "visualTheme": "Nahaufnahme, sinnlich, Snack-Moment, gleiche USP-Icons wie Schokoriegel-Seite"
+      }
+    }
+  ],
+  "storeAnalysis": {
+    "totalPages": 3,
+    "totalModules": 8,
+    "totalBrandImages": 12,
+    "dominantLayouts": ["1 (Full-Width)", "std-2equal"],
+    "dominantImageCategories": ["creative", "lifestyle"],
+    "ciSummary": "Weiß/Hellgrau und Rosa/Pink als dominante Farbkombination (Bildelemente floaten auf weißem Hintergrund für nahtlose Integration in Amazon-Seite), Lila als Akzentfarbe (Impact-Modul), rote retro-Typographie (nucao Wordmark), dunkelrote Headlines in playful serif Font, rote Pill-förmige CTA-Buttons, junge urbane Lifestyle-Fotografie, purpose-driven Messaging (Bio, Vegan, Fair, Aufforstung), konsistente Verpackungsfarben (rot, lila, orange, braun, pink)",
+    "modulePatterns": [
+      "Full-Width Lifestyle direkt nach Hero als emotionaler Einstieg",
+      "std-2equal Paare: jeweils eine creative/Text-Kachel + eine Lifestyle-Kachel als Gegenstück",
+      "Brand Story über 2 zusammenhängende std-2equal Module erzählt (Module 2+3)",
+      "Impact-Zahlen als eigenständiges Full-Width-Modul zwischen Story und Produkten",
+      "Kategorie-CTAs als Full-Width + std-2equal Kombination am Seitenende",
+      "Unterseiten: Einheitliches Pattern - 1x Full-Width (Lifestyle oben + 3 Benefit-Icons unten) + Produkt-Grid",
+      "Gleicher Hero-Banner über alle Seiten hinweg"
+    ],
+    "crossPageConsistency": "Identischer Hero-Banner auf allen 3 Seiten. Unterseiten (Schokoriegel, Schokosnacks) nutzen exakt gleiches Layout-Pattern: Full-Width-Bild mit Lifestyle oben und 3 identischen USP-Icons unten, gefolgt von Produkt-Grid. Farbpalette (Schwarz, Rosa, Rot, Lila) und Typographie konsistent über alle Seiten. Startseite deutlich umfangreicher als Unterseiten."
+  }
+}

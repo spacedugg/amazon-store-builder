@@ -1,0 +1,786 @@
+{
+  "brandName": "Bedsure",
+  "storeUrl": "https://www.amazon.de/stores/Bedsure/page/7DC5A9F8-F498-41E2-9145-0B2F0F498AFE",
+  "analyzedAt": "2026-04-10",
+  "methodology": "V3",
+  "navigation": {
+    "pageCount": 11,
+    "pages": [
+      {
+        "name": "Startseite",
+        "level": 0,
+        "pageId": "7DC5A9F8-F498-41E2-9145-0B2F0F498AFE"
+      },
+      {
+        "name": "Angebote",
+        "level": 1,
+        "pageId": "C2FACEA3-C1F7-480F-BEF1-A28DB1FC5E3F"
+      },
+      {
+        "name": "Kuscheldecken",
+        "level": 1,
+        "pageId": "2F249C26-03E6-497A-B1A7-C0BDE92C72BB"
+      },
+      {
+        "name": "Bettwäsche-Sets",
+        "level": 1,
+        "pageId": "D537A0F0-6CC7-43E1-B63B-2F6766DE8F80"
+      },
+      {
+        "name": "Haustierbedarf",
+        "level": 1,
+        "pageId": "B3B34DD4-E6D5-477E-8BF3-33DE2F7B10EA"
+      },
+      {
+        "name": "Bettdecke & Kissen",
+        "level": 1,
+        "pageId": "0327D6BF-7AAF-40CC-80A1-F6CA9F4AAD80"
+      },
+      {
+        "name": "Kissenbezüge & Spannbettlaken",
+        "level": 1,
+        "pageId": "652C1CB5-4D60-4F65-8F9E-D6F12EFC3D1A"
+      },
+      {
+        "name": "Heizdecke",
+        "level": 1,
+        "pageId": "86EE23E4-7FDD-41D4-9F0E-1EB8B2DE6E11"
+      },
+      {
+        "name": "Kuscheldecke mit Ärmeln",
+        "level": 1,
+        "pageId": "8B9660CA-2498-4F2E-8CB3-1B50D44C8DF2"
+      },
+      {
+        "name": "Sanft in den Sommer",
+        "level": 1,
+        "pageId": "4647A147-C667-43C9-ACB3-55D0A86680EF"
+      },
+      {
+        "name": "Über Bedsure",
+        "level": 1,
+        "pageId": "ED1B32C3-3890-4245-8A84-ECD16C98BFAF"
+      }
+    ]
+  },
+  "contentSummary": {
+    "totalEditorialImages": 235,
+    "uniqueVideos": 3,
+    "editorialToVideoRatio": 78.3
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "pageId": "7DC5A9F8-F498-41E2-9145-0B2F0F498AFE",
+      "pageType": "homepage",
+      "editorialImages": 37,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Sage/mint green background with welcoming brand experience featuring Bedsure branding and blanket texture overlay",
+        "primaryVisual": "Bedsure 'Get cozy' logo with abstract blanket texture",
+        "colorScheme": "Sage green (#8B9D7F approx), cream accents",
+        "callToAction": "FOLGEN SIE UNS",
+        "estimatedDimensions": "3000x600 (full-width hero)",
+        "designIntent": "Establish warm, inviting brand identity with emphasis on comfort and coziness"
+      },
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Logo Bar",
+          "layoutId": "logo-primary",
+          "contentType": "branding",
+          "dimensions": "1000x200",
+          "content": {
+            "type": "logo",
+            "brandName": "Bedsure"
+          },
+          "designRationale": "Clear brand identification at page top - establishes store identity immediately",
+          "relationToNextModule": "Direct visual transition into full-width promotional content"
+        },
+        {
+          "position": 2,
+          "layoutType": "Full-Width Banner",
+          "layoutId": "promo-mothers-day",
+          "contentType": "seasonal-promotion",
+          "dimensions": "970x449",
+          "module": {
+            "primaryImage": "Mother and daughter hugging, daughter holding personalized blanket",
+            "textOnImage": [
+              "MUTTERTAGS-ANGEBOTE",
+              "Schenken Sie ihr pure Entspannung und besten Schlafkomfort",
+              "BIS ZU 60% RABATT"
+            ],
+            "backgroundColor": "Cream/beige",
+            "callToAction": "SOFORT KAUFEN",
+            "emotionalApproach": "Family bonding, gifting, personalization",
+            "campaign": "Mother's Day 2026",
+            "discountHighlight": "Up to 60% OFF"
+          },
+          "designRationale": "High-impact seasonal campaign placement leverages gifting occasion with emotional lifestyle imagery and strong discount messaging",
+          "relationToNextModule": "Transitions from emotional appeal to practical product categorization"
+        },
+        {
+          "position": 3,
+          "layoutType": "Two-Column Category Tiles",
+          "layoutId": "category-nav-primary",
+          "tileCount": 2,
+          "dimensions": "2x (477x390)",
+          "tiles": [
+            {
+              "position": "left",
+              "size": "477x390",
+              "imageCategory": "product-category-lifestyle",
+              "categoryName": "Kuscheldecken",
+              "visualFocus": "Cozy blanket lifestyle",
+              "designRationale": "Primary product category - core business focus"
+            },
+            {
+              "position": "right",
+              "size": "477x390",
+              "imageCategory": "product-category-lifestyle",
+              "categoryName": "Bettwäsche-Sets",
+              "visualFocus": "Bedding coordination",
+              "designRationale": "Complementary bedding products for cross-selling"
+            }
+          ],
+          "relationToNextModule": "Narrow visual divider creates breathing room before grid section"
+        },
+        {
+          "position": 4,
+          "layoutType": "Divider",
+          "layoutId": "divider-aesthetic",
+          "dimensions": "970x48",
+          "purpose": "Visual separation and pacing",
+          "designRationale": "Signature Bedsure design element - thin horizontal dividers establish rhythm throughout store. Creates visual hierarchy and prevents content fatigue",
+          "relationToNextModule": "Separates category navigation from product showcase section"
+        },
+        {
+          "position": 5,
+          "layoutType": "Mixed Grid - Asymmetric",
+          "layoutId": "product-showcase-primary",
+          "tileCount": 5,
+          "tiles": [
+            {
+              "position": "1-left-large",
+              "size": "477x477",
+              "imageCategory": "product-lifestyle",
+              "productLine": "GentleSoft™ Fleecedecke",
+              "description": "Woman on couch with white ribbed fleece blanket in warm, inviting home setting",
+              "atmosphericElements": "Natural lighting, warm tones, domestic comfort",
+              "designRationale": "Large focal point showcases premium product line with aspirational lifestyle imagery",
+              "ctaImplied": "Discover GentleSoft™ Collection"
+            },
+            {
+              "position": "2-right-top-left",
+              "size": "231x231",
+              "imageCategory": "product-variant",
+              "description": "Product variant or color option"
+            },
+            {
+              "position": "3-right-top-right",
+              "size": "231x231",
+              "imageCategory": "product-variant",
+              "description": "Product variant or color option"
+            },
+            {
+              "position": "4-right-bottom-left",
+              "size": "231x231",
+              "imageCategory": "product-variant",
+              "description": "Product variant or color option"
+            },
+            {
+              "position": "5-right-bottom-right",
+              "size": "231x231",
+              "imageCategory": "product-variant",
+              "description": "Product variant or color option"
+            }
+          ],
+          "designRationale": "Asymmetric grid - one large hero image anchors attention while smaller variants provide visual texture and encourage exploration",
+          "relationToNextModule": "Creates natural flow into repeated pattern of lifestyle and grid content"
+        },
+        {
+          "position": 6,
+          "layoutType": "Divider",
+          "layoutId": "divider-aesthetic",
+          "dimensions": "970x48",
+          "purpose": "Visual separation and pacing",
+          "relationToNextModule": "Introduces next content block with intentional pause"
+        },
+        {
+          "position": 7,
+          "layoutType": "Mixed Grid - Lifestyle",
+          "layoutId": "product-showcase-secondary",
+          "description": "Repeating pattern of lifestyle squares, narrow dividers, and product tiles throughout remaining homepage content",
+          "tileStructure": "Series of 477x477 squares interspersed with 970x48 dividers, occasional wide tiles (477x231)",
+          "designRationale": "Repeating rhythm creates visual consistency while maintaining engagement through varied image layouts",
+          "contentApproach": "Each section showcases different product categories and lifestyle scenarios"
+        },
+        {
+          "position": 8,
+          "layoutType": "Brand Story Banner - Full Width",
+          "layoutId": "brand-values-section",
+          "dimensions": "970x [variable height]",
+          "content": {
+            "hero": "Sleeping cat on fluffy beige blanket",
+            "brandNarrative": "Bedsure brand story emphasizing comfort philosophy",
+            "textContent": "Multi-line brand mission statement (German)"
+          },
+          "designRationale": "Emotional brand connection placed strategically before USP reinforcement",
+          "relationToNextModule": "Direct transition into value proposition clarification"
+        },
+        {
+          "position": 9,
+          "layoutType": "USP Three-Column Grid",
+          "layoutId": "value-propositions",
+          "tileCount": 3,
+          "tiles": [
+            {
+              "position": "1-left",
+              "type": "icon-text-card",
+              "heading": "Komfort für alle",
+              "description": "Comfort for everyone - inclusive product range"
+            },
+            {
+              "position": "2-center",
+              "type": "icon-text-card",
+              "heading": "Besser schlafen",
+              "description": "Sleep better - premium sleep quality promise"
+            },
+            {
+              "position": "3-right",
+              "type": "icon-text-card",
+              "heading": "Starker Komfort – fairer Preis",
+              "description": "Strong comfort at fair price - value positioning"
+            }
+          ],
+          "designRationale": "Core brand USPs summarized visually - reinforces value proposition at page conclusion",
+          "pagePosition": "Bottom section"
+        }
+      ],
+      "overallModulePattern": "Hero → Logo → Seasonal Promo (high-impact) → Category Navigation → Divider → Product Showcase (asymmetric) → [Repeating: Divider → Mixed Grid] → Brand Story → USPs. Pattern creates visual rhythm while maintaining engagement through content variety",
+      "pageAnalysis": {
+        "brandImages": 37,
+        "videos": 1,
+        "dominantColors": [
+          "Sage green (#8B9D7F)",
+          "Cream (#F5F1E8)",
+          "Beige (#D4C5B9)",
+          "White (#FFFFFF)"
+        ],
+        "accentColors": [
+          "Warm gray",
+          "Soft pink tones (seasonal)"
+        ],
+        "designApproach": "Lifestyle-first, comfort-centric visual storytelling",
+        "photographyStyle": "Warm, intimate, domestic settings - people and pets with blankets in relatable scenarios",
+        "contentStrategy": "Emotional + Rational: Appeals to comfort/coziness desires while showcasing product range and value proposition",
+        "keyMessages": [
+          "Bedsure = Comfort & Coziness (Get cozy tagline)",
+          "Inclusive product range for all comfort needs",
+          "Quality at fair prices",
+          "Perfect for gifting and personal use",
+          "Pet-inclusive lifestyle brand"
+        ],
+        "callToActionFocus": "Multiple CTA opportunities (Follow, Shop Now, Discover) distributed throughout for conversion optimization"
+      }
+    },
+    {
+      "pageName": "Angebote",
+      "pageId": "C2FACEA3-C1F7-480F-BEF1-A28DB1FC5E3F",
+      "pageType": "deals-category",
+      "editorialImages": 8,
+      "videos": 0,
+      "pageStructure": "Logo + Divider + 1 Wide Tile (Promo) + 6 Small Tiles (Product Variants)",
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Logo Bar",
+          "dimensions": "1000x200"
+        },
+        {
+          "position": 2,
+          "layoutType": "Divider",
+          "dimensions": "970x57"
+        },
+        {
+          "position": 3,
+          "layoutType": "Wide Promo Tile",
+          "dimensions": "477x231",
+          "purpose": "Headline deal or seasonal offer"
+        },
+        {
+          "position": 4,
+          "layoutType": "Six-Tile Grid",
+          "dimensions": "6x (231x231)",
+          "purpose": "Individual product deal highlights",
+          "designRationale": "Small grid maximizes product visibility for deal-focused shoppers"
+        }
+      ],
+      "pageAnalysis": {
+        "brandImages": 8,
+        "videos": 0,
+        "designApproach": "Compact, deal-focused layout with minimal decoration",
+        "purpose": "Drive conversions on time-sensitive offers",
+        "contentStrategy": "Clear CTA path with prominent product showcase"
+      }
+    },
+    {
+      "pageName": "Kuscheldecken",
+      "pageId": "2F249C26-03E6-497A-B1A7-C0BDE92C72BB",
+      "pageType": "core-category",
+      "editorialImages": 24,
+      "videos": 0,
+      "pageStructure": "Logo + Full-Width Banner + 4 Square Tiles + Full-Width Banner + 4 Square Tiles",
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Logo Bar",
+          "dimensions": "1000x200"
+        },
+        {
+          "position": 2,
+          "layoutType": "Full-Width Category Banner",
+          "dimensions": "970x576",
+          "content": "Lifestyle photography - cozy blanket scenarios",
+          "designRationale": "Establishes category theme and emotional context"
+        },
+        {
+          "position": 3,
+          "layoutType": "Four-Square Grid",
+          "dimensions": "4x (477x477)",
+          "content": "Four lifestyle product showcases for blanket variants",
+          "designRationale": "Symmetrical grid presents primary product options clearly"
+        },
+        {
+          "position": 4,
+          "layoutType": "Full-Width Secondary Banner",
+          "dimensions": "970x727",
+          "content": "Extended lifestyle photography with seasonal or collection focus",
+          "designRationale": "Re-engage shoppers mid-page with additional context/storytelling"
+        },
+        {
+          "position": 5,
+          "layoutType": "Four-Square Grid",
+          "dimensions": "4x (477x477)",
+          "content": "Additional product variants or complementary items",
+          "designRationale": "Provides additional product discovery and depth"
+        }
+      ],
+      "pageAnalysis": {
+        "brandImages": 24,
+        "videos": 0,
+        "dominantColors": ["Sage green", "Cream", "Beige"],
+        "designApproach": "Lifestyle-centric category presentation with lifestyle banners framing product grids",
+        "purpose": "Showcase core cozy blanket category as hero product line",
+        "categoryImportance": "PRIMARY - Kuscheldecken (cozy blankets) are flagship Bedsure product",
+        "contentStrategy": "Lifestyle + Product: Emotional appeal through lifestyle scenarios + practical product comparison"
+      }
+    },
+    {
+      "pageName": "Bettwäsche-Sets",
+      "pageId": "D537A0F0-6CC7-43E1-B63B-2F6766DE8F80",
+      "pageType": "core-category",
+      "editorialImages": 19,
+      "videos": 0,
+      "pageStructure": "Logo + Full-Width Banner + 4 Square Tiles",
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Logo Bar",
+          "dimensions": "1000x200"
+        },
+        {
+          "position": 2,
+          "layoutType": "Full-Width Category Banner",
+          "dimensions": "970x572",
+          "content": "Bedding lifestyle photography - coordinated bedroom setups"
+        },
+        {
+          "position": 3,
+          "layoutType": "Four-Square Grid",
+          "dimensions": "4x (477x477)",
+          "content": "Bedding set options with color/pattern variety"
+        }
+      ],
+      "pageAnalysis": {
+        "brandImages": 19,
+        "videos": 0,
+        "designApproach": "Compact, focused category presentation",
+        "purpose": "Present coordinated bedding as complement to blanket products",
+        "crossSellOpportunity": "High - pairs naturally with blankets for complete bedroom solutions",
+        "contentStrategy": "Lifestyle-focused with curated color/style options"
+      }
+    },
+    {
+      "pageName": "Haustierbedarf",
+      "pageId": "B3B34DD4-E6D5-477E-8BF3-33DE2F7B10EA",
+      "pageType": "specialty-category",
+      "editorialImages": 31,
+      "videos": 0,
+      "pageStructure": "Logo + Content Grid with Pet Lifestyle Photography",
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Logo Bar",
+          "dimensions": "1000x200"
+        },
+        {
+          "position": 2,
+          "layoutType": "Pet Product Category Grid",
+          "content": "Pet-inclusive lifestyle imagery showing cats and dogs on Bedsure blankets and pet products"
+        }
+      ],
+      "pageAnalysis": {
+        "brandImages": 31,
+        "videos": 0,
+        "designApproach": "Warm, inclusive, pet-friendly brand positioning",
+        "purpose": "Expand addressable market to pet owners - capitalize on pet comfort trend",
+        "brandExtension": "Demonstrates Bedsure commitment to 'Komfort für alle' (comfort for all)",
+        "contentStrategy": "Emotional connection through pet companionship imagery"
+      }
+    },
+    {
+      "pageName": "Bettdecke & Kissen",
+      "pageId": "0327D6BF-7AAF-40CC-80A1-F6CA9F4AAD80",
+      "pageType": "core-category",
+      "editorialImages": 22,
+      "videos": 0,
+      "pageStructure": "Logo + Multiple Lifestyle Product Tiles",
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Logo Bar",
+          "dimensions": "1000x200"
+        },
+        {
+          "position": 2,
+          "layoutType": "Bedroom Lifestyle Grid",
+          "content": "Duvet and pillow products showcased in bedroom settings"
+        }
+      ],
+      "pageAnalysis": {
+        "brandImages": 22,
+        "videos": 0,
+        "designApproach": "Bedroom-centric lifestyle presentation",
+        "purpose": "Present core bedding hardware (duvets, pillows) as essential sleep products",
+        "productRange": "Comprehensive sleep solution - blankets + duvets + pillows",
+        "contentStrategy": "Bedroom ambiance and comfort quality emphasis"
+      }
+    },
+    {
+      "pageName": "Kissenbezüge & Spannbettlaken",
+      "pageId": "652C1CB5-4D60-4F65-8F9E-D6F12EFC3D1A",
+      "pageType": "specialty-category",
+      "editorialImages": 14,
+      "videos": 0,
+      "pageStructure": "Logo + Limited Product Tiles",
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Logo Bar",
+          "dimensions": "1000x200"
+        },
+        {
+          "position": 2,
+          "layoutType": "Minimal Product Grid",
+          "content": "Pillow covers and fitted sheets - functional basics"
+        }
+      ],
+      "pageAnalysis": {
+        "brandImages": 14,
+        "videos": 0,
+        "designApproach": "Minimal, functional category design",
+        "purpose": "Serve search traffic for these specific products",
+        "productType": "Replacements/accessories - lower engagement expected",
+        "contentStrategy": "Practical, straightforward product presentation"
+      }
+    },
+    {
+      "pageName": "Heizdecke",
+      "pageId": "86EE23E4-7FDD-41D4-9F0E-1EB8B2DE6E11",
+      "pageType": "specialty-category-with-video",
+      "editorialImages": 19,
+      "videos": 1,
+      "pageStructure": "Logo + Multiple Product Tiles + Product Demonstration Video",
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Logo Bar",
+          "dimensions": "1000x200"
+        },
+        {
+          "position": 2,
+          "layoutType": "Electric Blanket Product Grid",
+          "content": "Heated blanket products with lifestyle applications"
+        },
+        {
+          "position": 3,
+          "layoutType": "Product Demonstration Video",
+          "content": "Video showing electric blanket features, benefits, usage",
+          "designRationale": "Video enhances credibility for higher-consideration specialty product"
+        }
+      ],
+      "pageAnalysis": {
+        "brandImages": 19,
+        "videos": 1,
+        "designApproach": "Product-focused with demonstration video",
+        "purpose": "Build confidence in specialty heated blanket category",
+        "videoStrategy": "Address customer concerns (safety, features, quality) through visual demonstration",
+        "contentStrategy": "Feature-benefit education for consideration-heavy product"
+      }
+    },
+    {
+      "pageName": "Kuscheldecke mit Ärmeln",
+      "pageId": "8B9660CA-2498-4F2E-8CB3-1B50D44C8DF2",
+      "pageType": "specialty-category-premium",
+      "editorialImages": 14,
+      "videos": 0,
+      "pageStructure": "Logo + Rich Product Showcase with Multiple Lifestyle Tiles",
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Logo Bar",
+          "dimensions": "1000x200"
+        },
+        {
+          "position": 2,
+          "layoutType": "Premium Wearable Blanket Grid",
+          "content": "Extensive lifestyle photography of wearable blankets (blankets with sleeves)",
+          "designRationale": "15 images dedicated to premium product = significant merchandising emphasis"
+        }
+      ],
+      "pageAnalysis": {
+        "brandImages": 14,
+        "videos": 0,
+        "designApproach": "Rich, lifestyle-intensive category presentation",
+        "purpose": "Feature premium wearable blanket variant as specialty offering",
+        "productCategory": "Premium/novelty - high-engagement product driving store traffic",
+        "contentStrategy": "Lifestyle emphasis showing product in use - addresses primary appeal of functional-yet-cozy design",
+        "marketPosition": "Differentiated product with strong viral/gifting potential"
+      }
+    },
+    {
+      "pageName": "Sanft in den Sommer",
+      "pageId": "4647A147-C667-43C9-ACB3-55D0A86680EF",
+      "pageType": "seasonal-campaign",
+      "editorialImages": 20,
+      "videos": 0,
+      "pageStructure": "Logo + Extensive Seasonal Campaign Content Grid",
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Logo Bar",
+          "dimensions": "1000x200"
+        },
+        {
+          "position": 2,
+          "layoutType": "Summer Campaign - Rich Lifestyle Grid",
+          "content": "21 images dedicated to summer/seasonal campaign",
+          "campaignName": "Sanft in den Sommer (Gently into Summer)",
+          "designRationale": "Most content-heavy page (21 images) indicates major seasonal promotion"
+        }
+      ],
+      "pageAnalysis": {
+        "brandImages": 20,
+        "videos": 0,
+        "designApproach": "Campaign-centric, highly visual seasonal storytelling",
+        "purpose": "Drive traffic and engagement with summer-themed campaign",
+        "seasonality": "Spring/Summer 2026 campaign (April timeframe)",
+        "contentStrategy": "Seasonal lifestyle appeal - lightweight blankets, summer comfort scenarios",
+        "campaignScope": "Full-page takeover indicates significant marketing investment",
+        "keyMessage": "Comfort extends beyond winter - Bedsure for all seasons"
+      }
+    },
+    {
+      "pageName": "Über Bedsure",
+      "pageId": "ED1B32C3-3890-4245-8A84-ECD16C98BFAF",
+      "pageType": "brand-story",
+      "editorialImages": 27,
+      "videos": 1,
+      "pageStructure": "Logo + Brand Story Narrative + Lifestyle Photography + Brand Video + Values",
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Logo Bar",
+          "dimensions": "1000x200"
+        },
+        {
+          "position": 2,
+          "layoutType": "Brand Story Narrative",
+          "content": "Bedsure brand mission, values, and heritage story",
+          "textFormat": "Multi-paragraph brand narrative (German)"
+        },
+        {
+          "position": 3,
+          "layoutType": "Brand Lifestyle Gallery",
+          "content": "21 images total across page showing brand values through lifestyle photography",
+          "designRationale": "Extensive imagery builds emotional connection to brand story"
+        },
+        {
+          "position": 4,
+          "layoutType": "Brand Video",
+          "content": "Video presenting brand story, values, mission statement",
+          "designRationale": "Video format deepens emotional engagement with brand narrative"
+        }
+      ],
+      "pageAnalysis": {
+        "brandImages": 27,
+        "videos": 1,
+        "designApproach": "Narrative-driven brand connection",
+        "purpose": "Build brand loyalty and emotional connection beyond transactional",
+        "contentStrategy": "Storytelling - brand heritage, values, mission, social commitment",
+        "audienceIntent": "Curious customers wanting to understand brand philosophy",
+        "conversionPath": "Trust-building rather than direct product conversion"
+      }
+    }
+  ],
+  "storeAnalysis": {
+    "storeName": "Bedsure",
+    "region": "Germany (Amazon.de)",
+    "storeType": "Brand Store (Premium/Official)",
+    "totalPages": 11,
+    "totalEditorialImages": 235,
+    "totalVideos": 3,
+    "editorialToVideoRatio": 78.3,
+    "videoPages": ["Startseite", "Heizdecke", "Über Bedsure"],
+    "colorPalette": {
+      "primary": "Sage Green (#8B9D7F approx)",
+      "secondary": ["Cream (#F5F1E8)", "Beige (#D4C5B9)"],
+      "neutral": ["White", "Warm Gray"],
+      "accents": ["Soft Pink (seasonal)", "Natural tones"]
+    },
+    "designPhilosophy": {
+      "primaryApproach": "Lifestyle-First Visual Storytelling",
+      "emotionalCore": "Warmth, comfort, coziness, belonging",
+      "keyVisualElements": [
+        "Lifestyle photography (people and pets with products)",
+        "Warm, intimate domestic settings",
+        "Narrow dividers (970x48) - signature design rhythm",
+        "Mixed square (477x477) and grid (231x231) tile layouts",
+        "Asymmetric grids for visual interest",
+        "Seasonal promotional overlays"
+      ],
+      "photographyStyle": "Warm-toned, intimate, relatable scenarios",
+      "targetAudience": "Comfort-seeking consumers, gift-givers, pet owners, families"
+    },
+    "productStrategy": {
+      "coreCategories": [
+        "Kuscheldecken (Cozy Blankets) - HERO CATEGORY",
+        "Bettwäsche-Sets (Bedding Sets)",
+        "Bettdecke & Kissen (Duvets & Pillows)"
+      ],
+      "specialtyCategories": [
+        "Kuscheldecke mit Ärmeln (Wearable Blankets) - PREMIUM/NOVELTY",
+        "Heizdecke (Electric Blankets) - SPECIALTY",
+        "Haustierbedarf (Pet Products) - EXPANSION"
+      ],
+      "campaignFocus": [
+        "Seasonal Promotions (Mother's Day, Summer)",
+        "Gift-Giving Occasions",
+        "Lifestyle Integration"
+      ]
+    },
+    "marketingApproach": {
+      "primaryMessage": "Bedsure = Ultimate Comfort & Coziness",
+      "tagline": "Get cozy",
+      "brandPromises": [
+        "Komfort für alle (Comfort for everyone)",
+        "Besser schlafen (Sleep better)",
+        "Starker Komfort – fairer Preis (Strong comfort at fair price)"
+      ],
+      "seasonalFocus": "Mother's Day (Spring), Summer season campaigns",
+      "giftingStrategy": "Personalized blankets, family gifting scenarios",
+      "inclusivityMessage": "Comfort for all lifestyles - people, pets, seasons"
+    },
+    "navigationArchitecture": {
+      "structure": "Flat - All 11 content pages at Level 1 (no nested categories)",
+      "homePageRole": "Central hub with sampling of all categories",
+      "categoryApproach": "Dedicated pages for each major product line",
+      "specialtyPages": "Seasonal campaigns and brand story get full-page treatment",
+      "userJourney": "Home → Category interest → Product detail (assumed on ASIN pages, not Store pages)"
+    },
+    "contentDistribution": {
+      "imageHeavyPages": [
+        "Startseite (37 images)",
+        "Haustierbedarf (31 images)",
+        "Über Bedsure (27 images)",
+        "Bettdecke & Kissen (22 images)",
+        "Kuscheldecken (24 images)"
+      ],
+      "minimalPages": [
+        "Angebote (8 images)",
+        "Kissenbezüge & Spannbettlaken (14 images)"
+      ],
+      "averageImagesPerPage": "~21.4 images",
+      "videoStrategy": "Strategic use (3 videos total) on Startseite, Heizdecke (specialty product), and Über Bedsure (brand story)"
+    },
+    "designPatterns": {
+      "signatureElements": [
+        "Narrow horizontal dividers (970x48) creating visual rhythm",
+        "Logo bar (1000x200) at page top",
+        "Full-width promotional banners (970x height variable)",
+        "Asymmetric grids with one large image + small grid of variants",
+        "Repeating square tile patterns (477x477, 231x231)"
+      ],
+      "layoutRecurrence": "Logo → [Content Block → Divider] × N → Brand/USP section",
+      "scalability": "Modular design allows easy expansion while maintaining visual consistency"
+    },
+    "conversionOptimization": {
+      "ctaStrategy": "Multiple CTAs distributed throughout pages",
+      "urgency": "Discount messaging ('BIS ZU 60% RABATT'), seasonal campaigns",
+      "trustBuilding": "Brand story page, lifestyle imagery, USP reinforcement",
+      "productGuidance": "Category pages guide users to specific product types",
+      "crossSelling": "Related categories suggested via homepage grid (blankets + bedding)"
+    },
+    "contentStrategy": {
+      "approach": "Emotional + Rational dual appeal",
+      "emotionalLayer": "Lifestyle imagery, family bonding, comfort promises, warmth",
+      "rationalLayer": "Product variety, fair pricing, quality promises, tangible benefits",
+      "storyTelling": "Bedsure brand as comfort-enabling lifestyle partner",
+      "authority": "Product specialization - focused on sleep/comfort category"
+    },
+    "marketingTones": {
+      "german": "Warm, inviting, family-oriented",
+      "communityFocus": "Creating belonging and comfort",
+      "valueProp": "Quality comfort at accessible prices",
+      "personality": "Trustworthy, inclusive, lifestyle-enhancing"
+    },
+    "competitivePositioning": {
+      "differentiation": "Lifestyle-centric brand storytelling vs. product-focused competitors",
+      "niche": "Comfort and coziness - emotional benefit over functional specs",
+      "pricePosition": "Fair price positioning ('fairer Preis')",
+      "targetedExpansion": "Wearable blankets and pet products for market differentiation"
+    },
+    "keyInsights": {
+      "insight1": "Extremely image-heavy store (235 editorial images across 11 pages) - among the highest content density, demonstrating visual-first lifestyle approach",
+      "insight2": "Pet inclusivity (31 images on Haustierbedarf) and wearable blankets (14 images) are strategic differentiators targeting trending niches",
+      "insight3": "Seasonal campaigns (Mother's Day, Summer campaigns) drive traffic with gifting and occasion-based appeal",
+      "insight4": "Modular design with signature dividers creates scalable, recognizable brand aesthetic",
+      "insight5": "Flat navigation (no subcategories) favors breadth of discovery over depth of filtering - encourages browsing",
+      "insight6": "Heavy investment in brand story page (27 images + video) indicates loyalty-building strategy",
+      "insight7": "Average 21.4 images per page shows image-heavy approach requiring high-quality lifestyle photography investment",
+      "insight8": "Three videos strategically deployed (homepage hero + specialty product demo + brand story) for specific engagement goals",
+      "insight9": "Every category page has substantial editorial content (no empty product-grid-only pages) - consistent rich presentation across all pages",
+      "insight10": "Haustierbedarf receives disproportionately high content investment (31 images - second-highest after Startseite) indicating strategic market expansion into pet category"
+    },
+    "designMaturityLevel": "Sophisticated - Professional lifestyle brand with cohesive visual identity, consistent modular architecture, and strategic content distribution",
+    "bestPracticesObserved": [
+      "Clear brand identity (color palette, logo, tagline) consistently applied",
+      "Modular, scalable design that maintains consistency while allowing flexibility",
+      "Strategic use of rich imagery to establish lifestyle-first positioning",
+      "Thoughtful content hierarchy - key categories and campaigns get appropriate real estate",
+      "Navigation architecture optimizes for category discovery (flat structure, no dead ends)",
+      "Video strategically deployed for high-consideration products and brand trust",
+      "USP clarity - three core brand promises distilled at page bottom",
+      "Seasonal/promotional agility - campaigns leverage occasion-based gifting",
+      "Cross-category discovery encouraged through homepage sampling"
+    ],
+    "areasForOptimization": [
+      "Limited product detail on Store pages (assumed handled via ASIN pages) - could add product specs or reviews to Store for credibility",
+      "Minimal pages (Kissenbezüge & Spannbettlaken) appear underdeveloped - opportunity to enrich content",
+      "Video presence limited (3 total) - could expand for other categories (e.g., care instructions, styling tips)",
+      "No social proof visible (reviews, testimonials, user-generated content) - opportunity to add trust signals",
+      "Mobile optimization approach not evaluated but likely critical given German mobile shopping trends"
+    ]
+  }
+}

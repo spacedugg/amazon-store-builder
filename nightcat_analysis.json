@@ -1,0 +1,73 @@
+{
+  "brandName": "Night Cat",
+  "storeUrl": "https://www.amazon.de/stores/page/CC609240-DCC5-47C5-A171-3B973268CD34",
+  "analyzedAt": "2026-04-09",
+  "navigation": {
+    "pageCount": 10,
+    "pages": [
+      { "name": "Startseite", "level": 0 },
+      { "name": "Alle Angebote", "level": 1 },
+      { "name": "Hängemattenzelt", "level": 1 },
+      { "name": "Kuppelzelt", "level": 1 },
+      { "name": "Feldbett Zelt", "level": 1 },
+      { "name": "WurfZelt", "level": 1 },
+      { "name": "Ultraleichtes Zelt", "level": 1 },
+      { "name": "Wanderrucksäcke", "level": 1 },
+      { "name": "Strandzelt", "level": 1 },
+      { "name": "Wathose", "level": 1 },
+      { "name": "Campingzubehör", "level": 1 }
+    ]
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "heroBanner": {
+        "description": "Panorama-Berglandschaft mit See im Vordergrund, dramatischer Himmel mit Wolken. Felsige Bergkette, grüne Nadelwälder. Kein Text, kein Logo auf dem Bild. Pure Natur-/Outdoor-Ästhetik.",
+        "textOnImage": "",
+        "estimatedDimensions": "3000x600"
+      },
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Full-Width",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Lifestyle-Banner: Familien-Camping-Szene als Hauptprodukt-Showcase",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Full Width (970x387)",
+              "imageCategory": "lifestyle",
+              "description": "Helle, sonnige Parkwiese. Großes grün-blaues Familienzelt mit Vordach und orangefarbenen Abspannleinen. Eltern sitzen in Campingstühlen unter dem Vordach, Campingtisch mit Getränken. Zwei Kinder spielen Fußball auf der Wiese. Große Bäume im Hintergrund. Familiär, einladend, Sommer-Ästhetik. Kein Text-Overlay.",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Video-Bereich (5 Videos)"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "totalBrandImages": 2,
+    "totalVideos": 5,
+    "totalModules": 2,
+    "layoutTypes": {
+      "Full-Width": 1,
+      "Hero Banner": 1
+    },
+    "keyDesignPatterns": [
+      "Minimalster Store aller 20 analysierten Marken: Nur 2 Bilder + 5 Videos",
+      "Video-zentrierter Store: 5 Produktvideos als Hauptcontent statt Bilder",
+      "Reine Naturfotografie ohne Text-Overlays oder CTAs auf den Bildern",
+      "Outdoor/Camping-Marke mit Familien-Positionierung",
+      "Claim 'Catch Outdoors Fun' als Markenname-Zusatz",
+      "Flache Navigation nach Zelt-Typen (Hängematte, Kuppel, Feldbett, Wurf, Ultraleicht, Strand)",
+      "Kein Brand-Logo im Hero-Banner – ungewöhnlich",
+      "Naturlandschaft als Hero statt Produkt – atmosphärischer Einstieg",
+      "Sehr einfache Store-Struktur ohne Grids, Trenner oder Benefit-Bars"
+    ],
+    "moduleFlow": "Hero (Bergpanorama) → Familien-Camping FW → 5x Produktvideos"
+  }
+}

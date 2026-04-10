@@ -1,0 +1,431 @@
+{
+  "brandName": "Desktronic",
+  "storeUrl": "https://www.amazon.de/stores/Desktronic/page/1A862649-6CEA-4E30-855F-0C27A1F99A6C",
+  "analyzedAt": "2026-04-09",
+  "methodology": "V3 (dedup by image ID, hero/nav separated, unique video sources)",
+  "navigation": {
+    "pageCount": 7,
+    "pages": [
+      {
+        "name": "Startseite",
+        "level": 0,
+        "pageId": "1A862649-6CEA-4E30-855F-0C27A1F99A6C"
+      },
+      {
+        "name": "HomeOne Schreibtisch",
+        "level": 1,
+        "pageId": "993B6236-F91F-4736-B15E-C5E5A0562567"
+      },
+      {
+        "name": "HomePro Schreibtisch",
+        "level": 1,
+        "pageId": "5C77F5BF-E87C-439D-B24B-BFAB70D81229"
+      },
+      {
+        "name": "SitOne Bürostuhl",
+        "level": 1,
+        "pageId": "B5810344-5F1D-4970-9C50-544F424C30AA"
+      },
+      {
+        "name": "SitPro Bürostuhl",
+        "level": 1,
+        "pageId": "3193146C-9ED2-4026-86E4-87ED24387F0D"
+      },
+      {
+        "name": "Zubehör",
+        "level": 1,
+        "pageId": "8C7A8AE9-1F24-4831-8F46-7CEB09ED2B5E"
+      },
+      {
+        "name": "Alle Produkte",
+        "level": 1,
+        "pageId": "0E499C6E-8685-43CC-933A-35AB977CF3C6"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "pageId": "1A862649-6CEA-4E30-855F-0C27A1F99A6C",
+      "heroBanner": {
+        "description": "Dunkelgrauer/anthrazitfarbener Hintergrund mit minimalistischer weißer Typografie. 'DESKTRONIC' in geometrischer Serifenloser Schrift mit stilisiertem, abstraktem O-Logo als geometrisches Symbol. Darunter der Claim 'Arbeite bequem' in kleinerer Schrift. Clean, modern, professionell, reduziert. Langweilig-elegantes Design mit Fokus auf Funktionalität statt emotionaler Ansprache.",
+        "textOnImage": "DESKTRONIC, Arbeite bequem",
+        "estimatedDimensions": "3000x600"
+      },
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "lg-4grid (Large Squares)",
+          "layoutId": "lg-4square-lifestyle",
+          "tileCount": 4,
+          "designRationale": "Vier sehr große quadratische Lifestyle-Bilder (1500x1500) zeigen Menschen beim Arbeiten an Schreibtischen - Ergonomie und Komfort in Aktion",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "Very Large Square (1500x1500)",
+              "imageCategory": "lifestyle",
+              "description": "Person arbeitet konzentriert an HomeOne Schreibtisch - Fokus auf Sitzposition und Ergonomie",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "2",
+              "size": "Very Large Square (1500x1500)",
+              "imageCategory": "lifestyle",
+              "description": "Lifestyle-Szene: Arbeitsplatz mit HomePro Schreibtisch - modernes Home-Office Setup",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "3",
+              "size": "Very Large Square (1500x1500)",
+              "imageCategory": "lifestyle",
+              "description": "Person sitzt ergonomisch auf SitOne Bürostuhl - Komfort-Fokus",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "4",
+              "size": "Very Large Square (1500x1500)",
+              "imageCategory": "lifestyle",
+              "description": "Home-Office Lifestyle-Szene mit professionellem Setup und SitPro Stuhl",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Narrow Divider Banner"
+        },
+        {
+          "position": 2,
+          "layoutType": "Full-Width Narrow",
+          "layoutId": "divider-brand",
+          "tileCount": 1,
+          "designRationale": "Schmaler Divider-Banner mit Brand-Claim oder Transition-Element",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Narrow Banner (872x149)",
+              "imageCategory": "divider",
+              "description": "Sektions-Trenner oder Brand-Statement Banner",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Kategorie-Navigation Tiles"
+        },
+        {
+          "position": 3,
+          "layoutType": "std-4tiles (4x Wide)",
+          "layoutId": "std-4tiles-nav",
+          "tileCount": 4,
+          "designRationale": "Vier breite Navigations-Tiles für Haupt-Produktkategorien (HomeOne, HomePro, SitOne, SitPro)",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "Wide (436x218)",
+              "imageCategory": "category",
+              "description": "Navigations-Tile für HomeOne Schreibtisch-Linie",
+              "textOnImage": "HomeOne Schreibtisch",
+              "ctaText": "Jetzt entdecken",
+              "linksTo": "HomeOne Schreibtisch"
+            },
+            {
+              "position": "2",
+              "size": "Wide (436x218)",
+              "imageCategory": "category",
+              "description": "Navigations-Tile für HomePro Schreibtisch-Linie",
+              "textOnImage": "HomePro Schreibtisch",
+              "ctaText": "Jetzt entdecken",
+              "linksTo": "HomePro Schreibtisch"
+            },
+            {
+              "position": "3",
+              "size": "Wide (436x218)",
+              "imageCategory": "category",
+              "description": "Navigations-Tile für SitOne Bürostuhl-Linie",
+              "textOnImage": "SitOne Bürostuhl",
+              "ctaText": "Jetzt entdecken",
+              "linksTo": "SitOne Bürostuhl"
+            },
+            {
+              "position": "4",
+              "size": "Wide (436x218)",
+              "imageCategory": "category",
+              "description": "Navigations-Tile für SitPro Bürostuhl-Linie",
+              "textOnImage": "SitPro Bürostuhl",
+              "ctaText": "Jetzt entdecken",
+              "linksTo": "SitPro Bürostuhl"
+            }
+          ],
+          "relationToNextModule": "Zu weiteren Produkt-Tiles"
+        },
+        {
+          "position": 4,
+          "layoutType": "std-2equal (2x Square)",
+          "layoutId": "std-2equal-product",
+          "tileCount": 2,
+          "designRationale": "Zwei quadratische Produktfeature-Tiles für zusätzliche Kategorien oder Promotions",
+          "tiles": [
+            {
+              "position": "links",
+              "size": "Square (436x436)",
+              "imageCategory": "lifestyle",
+              "description": "Produkt-Feature Tile für Zubehör oder Special-Offer",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "rechts",
+              "size": "Square (436x436)",
+              "imageCategory": "lifestyle",
+              "description": "Produkt-Feature Tile für Zubehör oder Special-Offer",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Ende der Startseite"
+        }
+      ],
+      "brandImages": {
+        "editorial": 11,
+        "videos": 2,
+        "heroAndNavLogo": 2,
+        "methodology": "V3: Separated Hero banner (1 per page) and Nav logo (1 per page) from editorial content. Deduplicated by image ID. Videos counted separately."
+      }
+    },
+    {
+      "pageName": "HomeOne Schreibtisch",
+      "pageId": "993B6236-F91F-4736-B15E-C5E5A0562567",
+      "heroBanner": null,
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Product Detail",
+          "layoutId": "product-detail-video-heavy",
+          "tileCount": 9,
+          "designRationale": "Product Detail Page mit Editorial Images und Video Carousel - 9 Unique Videos für Feature-Demonstrations",
+          "tiles": [
+            {
+              "position": "1-9",
+              "size": "Mixed (Editorial + Video)",
+              "imageCategory": "product",
+              "description": "Produkt-Detailseite für HomeOne Schreibtisch mit Lifestyle-Bildern und Feature-Demo-Videos",
+              "textOnImage": "HomeOne Schreibtisch",
+              "ctaText": "In den Warenkorb",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Weitere Produkte"
+        }
+      ],
+      "brandImages": {
+        "editorial": 9,
+        "videos": 9,
+        "heroAndNavLogo": 2,
+        "methodology": "V3: Separated Hero banner (1 per page) and Nav logo (1 per page) from editorial content. Deduplicated by image ID. Videos counted separately."
+      }
+    },
+    {
+      "pageName": "HomePro Schreibtisch",
+      "pageId": "5C77F5BF-E87C-439D-B24B-BFAB70D81229",
+      "heroBanner": null,
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Product Detail",
+          "layoutId": "product-detail-video-heavy",
+          "tileCount": 9,
+          "designRationale": "Product Detail Page mit Editorial Images und Video Carousel - 9 Unique Videos für Feature-Demonstrations",
+          "tiles": [
+            {
+              "position": "1-9",
+              "size": "Mixed (Editorial + Video)",
+              "imageCategory": "product",
+              "description": "Produkt-Detailseite für HomePro Schreibtisch mit Lifestyle-Bildern und Feature-Demo-Videos",
+              "textOnImage": "HomePro Schreibtisch",
+              "ctaText": "In den Warenkorb",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Weitere Produkte"
+        }
+      ],
+      "brandImages": {
+        "editorial": 9,
+        "videos": 9,
+        "heroAndNavLogo": 2,
+        "methodology": "V3: Separated Hero banner (1 per page) and Nav logo (1 per page) from editorial content. Deduplicated by image ID. Videos counted separately."
+      }
+    },
+    {
+      "pageName": "SitOne Bürostuhl",
+      "pageId": "B5810344-5F1D-4970-9C50-544F424C30AA",
+      "heroBanner": null,
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Product Detail",
+          "layoutId": "product-detail-video-intensive",
+          "tileCount": 8,
+          "designRationale": "Product Detail Page mit Editorial Images und extensivem Video-Carousel - 12 Unique Videos für detaillierte Feature-Demonstrations",
+          "tiles": [
+            {
+              "position": "1-8",
+              "size": "Mixed (Editorial + Video)",
+              "imageCategory": "product",
+              "description": "Produkt-Detailseite für SitOne Bürostuhl mit Lifestyle-Bildern und detaillierten Feature-Demo-Videos",
+              "textOnImage": "SitOne Bürostuhl",
+              "ctaText": "In den Warenkorb",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Weitere Produkte"
+        }
+      ],
+      "brandImages": {
+        "editorial": 8,
+        "videos": 12,
+        "heroAndNavLogo": 2,
+        "methodology": "V3: Separated Hero banner (1 per page) and Nav logo (1 per page) from editorial content. Deduplicated by image ID. Videos counted separately."
+      }
+    },
+    {
+      "pageName": "SitPro Bürostuhl",
+      "pageId": "3193146C-9ED2-4026-86E4-87ED24387F0D",
+      "heroBanner": null,
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Product Detail",
+          "layoutId": "product-detail-video-intensive",
+          "tileCount": 9,
+          "designRationale": "Product Detail Page mit Editorial Images und extensivem Video-Carousel - 13 Unique Videos für detaillierte Feature-Demonstrations",
+          "tiles": [
+            {
+              "position": "1-9",
+              "size": "Mixed (Editorial + Video)",
+              "imageCategory": "product",
+              "description": "Produkt-Detailseite für SitPro Bürostuhl mit Lifestyle-Bildern und detaillierten Feature-Demo-Videos",
+              "textOnImage": "SitPro Bürostuhl",
+              "ctaText": "In den Warenkorb",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Weitere Produkte"
+        }
+      ],
+      "brandImages": {
+        "editorial": 9,
+        "videos": 13,
+        "heroAndNavLogo": 2,
+        "methodology": "V3: Separated Hero banner (1 per page) and Nav logo (1 per page) from editorial content. Deduplicated by image ID. Videos counted separately."
+      }
+    },
+    {
+      "pageName": "Zubehör",
+      "pageId": "8C7A8AE9-1F24-4831-8F46-7CEB09ED2B5E",
+      "heroBanner": null,
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Product Category",
+          "layoutId": "category-mixed",
+          "tileCount": 6,
+          "designRationale": "Zubehör-Kategorieseite mit 6 Editorial Images und 1 Feature-Video",
+          "tiles": [
+            {
+              "position": "1-6",
+              "size": "Mixed (Editorial + Video)",
+              "imageCategory": "category",
+              "description": "Zubehör-Produkte mit Lifestyle-Bildern und Produkt-Videos",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Weitere Produkte"
+        }
+      ],
+      "brandImages": {
+        "editorial": 6,
+        "videos": 1,
+        "heroAndNavLogo": 2,
+        "methodology": "V3: Separated Hero banner (1 per page) and Nav logo (1 per page) from editorial content. Deduplicated by image ID. Videos counted separately."
+      }
+    },
+    {
+      "pageName": "Alle Produkte",
+      "pageId": "0E499C6E-8685-43CC-933A-35AB977CF3C6",
+      "heroBanner": null,
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Minimal Product Grid",
+          "layoutId": "minimal",
+          "tileCount": 1,
+          "designRationale": "Pure Product Grid Page - hauptsächlich Amazon Product Grid, keine Editorial-Inhalte, nur 1 Video",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "Product Grid",
+              "imageCategory": "product-grid",
+              "description": "Amazon Product Grid mit allen verfügbaren Desktronic-Produkten",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Ende der Seite"
+        }
+      ],
+      "brandImages": {
+        "editorial": 0,
+        "videos": 1,
+        "heroAndNavLogo": 2,
+        "methodology": "V3: Separated Hero banner (1 per page) and Nav logo (1 per page) from editorial content. Deduplicated by image ID. Videos counted separately."
+      }
+    }
+  ],
+  "summary": {
+    "totalEditorialImages": 52,
+    "totalUniqueVideos": 47,
+    "totalPages": 7,
+    "uniquePageCount": 7,
+    "layoutTypes": {
+      "lg-4grid (Large Squares)": 1,
+      "Full-Width Narrow": 1,
+      "std-4tiles (4x Wide)": 1,
+      "std-2equal (2x Square)": 1,
+      "Product Detail": 4,
+      "Product Category": 1,
+      "Minimal Product Grid": 1
+    },
+    "keyDesignPatterns": [
+      "Minimalistisches, modernes Design mit Anthrazit/Dunkelgrau-Aesthetik",
+      "Geometrische, reduzierte Sans-Serif Typografie mit stilisiertem DESKTRONIC Wordmark",
+      "'Arbeite bequem' als funktioneller, nicht-emotionaler Markenslogan",
+      "Extreme Video-Lastigkeit: 47 Unique Videos insgesamt (höchste Zahl bisher beobachtet)",
+      "Ungewöhnlich große Lifestyle-Quadrate auf Startseite (1500x1500 statt üblich 436x436)",
+      "Home-Office/Office-Ergonomie-Fokus: Menschen arbeitend und konzentriert positioniert",
+      "Sub-Brand-Nomenklatur: HomeOne/HomePro (Schreibtische), SitOne/SitPro (Stühle) - One=Basic, Pro=Premium",
+      "Konsistentes Template für Produktseiten: Editorial-Bilder + umfangreiche Feature-Demo-Videos",
+      "Maximale Video-Nutzung bei Chair-Produkten (SitOne: 12 Videos, SitPro: 13 Videos)",
+      "Professionelle B2C Positionierung als Ergonomie-Möbel-Hersteller",
+      "Minimale Startseite-Module (4 Module total) - fokussiert auf Navigation zu Produktdetails",
+      "Keine Emotionale Brand-Story, fokussiert auf Produkt-Features und -Funktionalität",
+      "Color-Palette: Dunkelgrau/Anthrazit + Weiß - professionell, neutral, nicht spielerisch",
+      "Alle Produkt-Detail-Seiten verwenden Video-Carousel für Demonstrationen statt reiner Fotografie"
+    ],
+    "moduleFlow": "Hero (Anthrazit+Weiß, DESKTRONIC, 'Arbeite bequem') → 4 Very Large Lifestyle Squares (1500x1500) → Narrow Divider → 4 Category Navigation Wide Tiles → 2 Square Product Tiles → Product Grid",
+    "videoStrategy": "Video-first approach - each product page contains 9-13 unique feature demo videos. Emphasizes product functionality and ergonomic benefits. SitPro highest (13 videos) to showcase chair features. Total of 47 videos across the store indicates heavy investment in video content.",
+    "productLineStructure": "HomeOne/HomePro Desks (One = basic, Pro = premium) | SitOne/SitPro Chairs (One = basic, Pro = premium) | Zubehör (accessories) | Alle Produkte (product grid)",
+    "imageCountingMethodology": "V3 (April 2026): Editorial images deduplicated by unique image ID. Each page includes 1 Hero banner and 1 Nav logo (not counted in editorial total). Videos counted separately as unique video sources. Total editorial: 52 across all 7 pages. Total unique videos: 47 across all 7 pages. Startseite: 4x 1500x1500 (very large squares), 1x 872x149 (narrow divider), 4x 436x218 (wide tiles), 2x 436x436 (square tiles). Product detail pages follow consistent pattern of editorial images + video carousel."
+  }
+}

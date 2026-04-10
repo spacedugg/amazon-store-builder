@@ -1,0 +1,542 @@
+{
+  "brandName": "MasterChef Deutschland",
+  "storeUrl": "https://www.amazon.de/stores/page/4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6",
+  "analyzedAt": "2026-04-09",
+  "methodology": "V3",
+  "navigation": {
+    "pageCount": 20,
+    "pages": [
+      {
+        "name": "Startseite",
+        "level": 0,
+        "pageId": "4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6"
+      },
+      {
+        "name": "Angebote",
+        "level": 1,
+        "pageId": "AD9DA30F-0413-40BB-8668-4E4626C227C7"
+      },
+      {
+        "name": "Kochgeschirr",
+        "level": 1,
+        "pageId": "91EE7C50-94C4-4AEF-85D6-5CEC3D1AF277"
+      },
+      {
+        "name": "Messer",
+        "level": 1,
+        "pageId": "D50D11DB-429B-4600-8F69-33042D3E5AB7"
+      },
+      {
+        "name": "Messersets",
+        "level": 2,
+        "parentCategory": "Messer",
+        "pageId": "4581AA3F-2BF3-4CEC-851C-3EE86651CE94"
+      },
+      {
+        "name": "Messerblocksets",
+        "level": 2,
+        "parentCategory": "Messer",
+        "pageId": "D0BD345C-31E0-47CC-9290-DC7723820D79"
+      },
+      {
+        "name": "Kochmessersets",
+        "level": 2,
+        "parentCategory": "Messer",
+        "pageId": "372D6A52-920B-437D-B8AE-EA612A8D5B11"
+      },
+      {
+        "name": "Schneidebretter",
+        "level": 1,
+        "pageId": "05C28D39-AAD4-4C8A-94AD-AEF60EB0E627"
+      },
+      {
+        "name": "Küchengeräte",
+        "level": 1,
+        "pageId": "94D8A993-F4BD-48DB-98FD-8CD0CE744C5F"
+      },
+      {
+        "name": "Textilien",
+        "level": 1,
+        "pageId": "F4A1543F-B1F0-42BC-9850-A9E4D8A44C68"
+      },
+      {
+        "name": "Werkzeuge und Utensilien",
+        "level": 1,
+        "pageId": "E460228E-BA5D-4F00-8967-EE02AE4D65C1"
+      },
+      {
+        "name": "Kollektionen",
+        "level": 1,
+        "pageId": "607606C8-1527-469B-8ED0-1C7C063E017D"
+      },
+      {
+        "name": "Essentials Kollektion",
+        "level": 2,
+        "parentCategory": "Kollektionen",
+        "pageId": "568E7D4B-7577-4D3D-9CFF-97DB541335AC"
+      },
+      {
+        "name": "Natürliche Kollektion",
+        "level": 2,
+        "parentCategory": "Kollektionen",
+        "pageId": "BBB1ED05-7F98-4F17-A5B6-F166CCD29327"
+      },
+      {
+        "name": "Lebendige Kollektion",
+        "level": 2,
+        "parentCategory": "Kollektionen",
+        "pageId": "D97E6AEB-EBBA-4E72-8EA2-C7AF3034EF56"
+      },
+      {
+        "name": "Erde Kollektion",
+        "level": 2,
+        "parentCategory": "Kollektionen",
+        "pageId": "D553719D-0B3A-4CA1-9E2B-5DEE6BB195FA"
+      },
+      {
+        "name": "Nordische Kolletion",
+        "level": 2,
+        "parentCategory": "Kollektionen",
+        "pageId": "D96246EF-D729-44F1-9A58-4767167EC36F"
+      },
+      {
+        "name": "Caption Kollektion",
+        "level": 2,
+        "parentCategory": "Kollektionen",
+        "pageId": "9887D02E-D77C-4121-9EA5-BDEE63ADC75E"
+      },
+      {
+        "name": "Professionelle Kollektion",
+        "level": 2,
+        "parentCategory": "Kollektionen",
+        "pageId": "987B2255-9774-46FA-A3AE-A5E510D61209"
+      },
+      {
+        "name": "ALLE PRODUKTE",
+        "level": 1,
+        "pageId": "FCCF7F55-7AD5-4EA4-8E2C-303B13F93C18"
+      }
+    ]
+  },
+  "contentSummary": {
+    "totalEditorialImages": 51,
+    "uniqueVideos": 5,
+    "editorialToVideoRatio": 10.2
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "pageId": "4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6",
+      "heroBanner": {
+        "description": "MasterChef Deutschland brand hero showcasing premium kitchenware positioning with clean, professional aesthetic",
+        "textOnImage": "MasterChef Deutschland",
+        "estimatedDimensions": "1872x400",
+        "brandIdentityNote": "Licensed TV brand creating aspirational kitchen lifestyle positioning"
+      },
+      "editorialImages": 8,
+      "videos": 0,
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Full-Width Hero",
+          "layoutId": "hero-full",
+          "tileCount": 1,
+          "designRationale": "Hero banner establishing MasterChef brand authority - premium kitchenware positioning",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "1872x400",
+              "imageCategory": "hero",
+              "description": "MasterChef Deutschland hero with premium brand positioning"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "layoutType": "lg-4grid Square",
+          "layoutId": "lg-4grid-square",
+          "tileCount": 8,
+          "designRationale": "Eight uniform square category tiles (436x436) providing navigation grid for main product categories",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "436x436",
+              "imageCategory": "category-tile",
+              "description": "Category tile 1 (e.g., Kochgeschirr)"
+            },
+            {
+              "position": "2",
+              "size": "436x436",
+              "imageCategory": "category-tile",
+              "description": "Category tile 2 (e.g., Messer)"
+            },
+            {
+              "position": "3",
+              "size": "436x436",
+              "imageCategory": "category-tile",
+              "description": "Category tile 3 (e.g., Schneidebretter)"
+            },
+            {
+              "position": "4",
+              "size": "436x436",
+              "imageCategory": "category-tile",
+              "description": "Category tile 4 (e.g., Küchengeräte)"
+            },
+            {
+              "position": "5",
+              "size": "436x436",
+              "imageCategory": "category-tile",
+              "description": "Category tile 5 (e.g., Textilien)"
+            },
+            {
+              "position": "6",
+              "size": "436x436",
+              "imageCategory": "category-tile",
+              "description": "Category tile 6 (e.g., Werkzeuge und Utensilien)"
+            },
+            {
+              "position": "7",
+              "size": "436x436",
+              "imageCategory": "category-tile",
+              "description": "Category tile 7 (e.g., Kollektionen)"
+            },
+            {
+              "position": "8",
+              "size": "436x436",
+              "imageCategory": "category-tile",
+              "description": "Category tile 8 (e.g., ALLE PRODUKTE)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "Angebote",
+      "pageId": "AD9DA30F-0413-40BB-8668-4E4626C227C7",
+      "editorialImages": 0,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Minimal or no hero for promotional offers view",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Pure product grid - promotional catalog view with no editorial content. Focused on deal presentation."
+    },
+    {
+      "pageName": "Kochgeschirr",
+      "pageId": "91EE7C50-94C4-4AEF-85D6-5CEC3D1AF277",
+      "editorialImages": 7,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Kochgeschirr (cookware) category hero emphasizing premium cooking equipment",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Main category page with substantial editorial content (7 images). Hero banner + product showcase tiles + product grid."
+    },
+    {
+      "pageName": "Messer",
+      "pageId": "D50D11DB-429B-4600-8F69-33042D3E5AB7",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Messer (knives) parent category hero with premium knife positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Parent category page with 3 sub-categories (Messersets, Messerblocksets, Kochmessersets). Moderate editorial content with hero and sub-category navigation."
+    },
+    {
+      "pageName": "Messersets",
+      "pageId": "4581AA3F-2BF3-4CEC-851C-3EE86651CE94",
+      "editorialImages": 2,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Messersets sub-category hero with complete knife set positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Sub-category page with minimal editorial (2 images). Hero banner + product grid."
+    },
+    {
+      "pageName": "Messerblocksets",
+      "pageId": "D0BD345C-31E0-47CC-9290-DC7723820D79",
+      "editorialImages": 8,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Messerblocksets sub-category hero with knife block storage focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Sub-category page with substantial editorial content (8 images - highest among sub-pages). Multiple product showcase tiles + grid."
+    },
+    {
+      "pageName": "Kochmessersets",
+      "pageId": "372D6A52-920B-437D-B8AE-EA612A8D5B11",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Kochmessersets sub-category hero with chef knife set positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Sub-category page with moderate editorial (3 images). Hero + supporting banners + product grid."
+    },
+    {
+      "pageName": "Schneidebretter",
+      "pageId": "05C28D39-AAD4-4C8A-94AD-AEF60EB0E627",
+      "editorialImages": 4,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Schneidebretter (cutting boards) category hero with kitchen essentials focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Category page with moderate editorial (4 images + 1 video). Hero + product showcases with video integration + grid."
+    },
+    {
+      "pageName": "Küchengeräte",
+      "pageId": "94D8A993-F4BD-48DB-98FD-8CD0CE744C5F",
+      "editorialImages": 2,
+      "videos": 2,
+      "heroBanner": {
+        "description": "Küchengeräte (kitchen appliances) category hero with modern equipment positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Category page with minimal editorial images (2) but highest video count (2 videos). Emphasizes video-based product presentation. Hero + video showcases + product grid."
+    },
+    {
+      "pageName": "Textilien",
+      "pageId": "F4A1543F-B1F0-42BC-9850-A9E4D8A44C68",
+      "editorialImages": 6,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Textilien (textiles/linens) category hero with kitchen textiles and accessories",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Category page with substantial editorial content (6 images). Multiple product showcase tiles + grid."
+    },
+    {
+      "pageName": "Werkzeuge und Utensilien",
+      "pageId": "E460228E-BA5D-4F00-8967-EE02AE4D65C1",
+      "editorialImages": 2,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Werkzeuge und Utensilien (tools and utensils) category hero with kitchen tool focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Category page with minimal editorial (2 images). Hero banner + product grid."
+    },
+    {
+      "pageName": "Kollektionen",
+      "pageId": "607606C8-1527-469B-8ED0-1C7C063E017D",
+      "editorialImages": 5,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Kollektionen (collections) parent category hero with curated product line positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Parent category page with 7 sub-categories (collection lines). Moderate editorial content with hero and collection navigation."
+    },
+    {
+      "pageName": "Essentials Kollektion",
+      "pageId": "568E7D4B-7577-4D3D-9CFF-97DB541335AC",
+      "editorialImages": 0,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Essentials collection sub-page with product-only focus",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Sub-collection page with no editorial content. Pure product grid showcasing Essentials collection items."
+    },
+    {
+      "pageName": "Natürliche Kollektion",
+      "pageId": "BBB1ED05-7F98-4F17-A5B6-F166CCD29327",
+      "editorialImages": 0,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Natürliche collection sub-page with natural materials focus",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Sub-collection page with no editorial content. Pure product grid for natural/wood-based products."
+    },
+    {
+      "pageName": "Lebendige Kollektion",
+      "pageId": "D97E6AEB-EBBA-4E72-8EA2-C7AF3034EF56",
+      "editorialImages": 0,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Lebendige collection sub-page with colorful product positioning",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Sub-collection page using video instead of still images (1 video). Product showcase + video content + grid."
+    },
+    {
+      "pageName": "Erde Kollektion",
+      "pageId": "D553719D-0B3A-4CA1-9E2B-5DEE6BB195FA",
+      "editorialImages": 0,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Erde collection sub-page with earth-tone/natural color positioning",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Sub-collection page using video instead of still images (1 video). Video-forward presentation + product grid."
+    },
+    {
+      "pageName": "Nordische Kolletion",
+      "pageId": "D96246EF-D729-44F1-9A58-4767167EC36F",
+      "editorialImages": 0,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Nordische collection sub-page with Scandinavian design positioning",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Sub-collection page with no editorial content. Pure product grid for Nordic-style collections."
+    },
+    {
+      "pageName": "Caption Kollektion",
+      "pageId": "9887D02E-D77C-4121-9EA5-BDEE63ADC75E",
+      "editorialImages": 0,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Caption collection sub-page with minimal branding",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Sub-collection page with no editorial content. Pure product grid."
+    },
+    {
+      "pageName": "Professionelle Kollektion",
+      "pageId": "987B2255-9774-46FA-A3AE-A5E510D61209",
+      "editorialImages": 1,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Professionelle collection sub-page with professional chef/kitchen focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Sub-collection page with balanced editorial (1 image + 1 video). Professional product positioning with video integration + grid."
+    },
+    {
+      "pageName": "ALLE PRODUKTE",
+      "pageId": "FCCF7F55-7AD5-4EA4-8E2C-303B13F93C18",
+      "editorialImages": 0,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Minimal or no hero for comprehensive product catalog",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Product listing page with no editorial content - pure product grid serving as complete catalog view."
+    }
+  ],
+  "designPatterns": {
+    "colorScheme": {
+      "background": "White/Clean",
+      "textColor": "Dark/Professional",
+      "accentColor": "Brand-specific (MasterChef)",
+      "rationale": "Premium kitchenware positioning with clean, accessible aesthetic. Lighter palette conveys quality and culinary professionalism rather than athletic intensity."
+    },
+    "typography": {
+      "primary": "Professional sans-serif, clear hierarchy",
+      "characteristics": "Approachable yet premium, culinary authority, lifestyle-focused messaging"
+    },
+    "photography": {
+      "style": "Premium product/lifestyle photography",
+      "lighting": "Bright, warm professional lighting emphasizing product quality and aesthetic appeal",
+      "subjects": "Kitchen products, cookware, tools, lifestyle imagery, aspirational food preparation scenes"
+    },
+    "layoutPatterns": {
+      "homepage": "Hero banner (1872x400) + 8-tile square grid (8x436x436) - category navigation emphasis",
+      "categoryPages": "Consistent hero (1872x400) + supporting product showcase tiles (variable count) + product grid",
+      "subcategoryPages": "Hero or minimal header + product showcase tiles (0-2) + product grid",
+      "collectionPages": "Minimal editorial (0-1 images/video) + product grid - focus on product browsing"
+    },
+    "hierarchyStructure": {
+      "navigationDepth": "2 levels - main categories + sub-categories/collections",
+      "pageCount": "20 pages total",
+      "distribution": "Low per-page editorial content (avg 2.55 images/page) with focus on product catalogs. Only 3 pages exceed 5 editorial images (Startseite:8, Kochgeschirr:7, Messerblocksets:8).",
+      "strategy": "Balanced between navigation depth (Messer has 3 sub-pages, Kollektionen has 7 sub-pages) and content minimalism"
+    }
+  },
+  "editorialStrategy": {
+    "totalEditorialImages": 51,
+    "totalVideos": 5,
+    "distribution": [
+      {
+        "page": "Startseite",
+        "editorialImages": 8,
+        "videos": 0,
+        "rationale": "Homepage category grid - 8 uniform square tiles (436x436) for navigation structure"
+      },
+      {
+        "page": "Kochgeschirr",
+        "editorialImages": 7,
+        "videos": 0,
+        "rationale": "Primary cookware category - substantial content depth for core product line"
+      },
+      {
+        "page": "Messerblocksets",
+        "editorialImages": 8,
+        "videos": 0,
+        "rationale": "Specialized knife storage sub-category - highest image count among specialized pages, indicating premium positioning"
+      },
+      {
+        "page": "Textilien",
+        "editorialImages": 6,
+        "videos": 0,
+        "rationale": "Textile/linen category - significant product showcase content"
+      },
+      {
+        "page": "Kollektionen",
+        "editorialImages": 5,
+        "videos": 0,
+        "rationale": "Parent collection category - navigation and brand presentation"
+      },
+      {
+        "page": "Schneidebretter",
+        "editorialImages": 4,
+        "videos": 1,
+        "rationale": "Essential cutting board category - moderate content with video integration"
+      },
+      {
+        "page": "Messer & Kochmessersets",
+        "editorialImages": "3 each",
+        "videos": 0,
+        "rationale": "Specialized knife sub-categories - consistent moderate presentation"
+      },
+      {
+        "page": "Küchengeräte",
+        "editorialImages": 2,
+        "videos": 2,
+        "rationale": "Appliance category - video-forward approach emphasizing product features and functionality"
+      },
+      {
+        "page": "Werkzeuge und Utensilien",
+        "editorialImages": 2,
+        "videos": 0,
+        "rationale": "Tools/utensils category - minimal editorial, product-focused"
+      },
+      {
+        "page": "Collection sub-pages (7 total)",
+        "editorialImages": "0-1 each",
+        "videos": "0-2 across all",
+        "rationale": "Collection sub-pages are largely product-focused with minimal editorial. Lebendige and Erde collections use video instead of images. Professionelle has 1 image + 1 video."
+      },
+      {
+        "page": "Angebote & ALLE PRODUKTE",
+        "editorialImages": 0,
+        "videos": 0,
+        "rationale": "Pure product grids - functional catalog views"
+      }
+    ]
+  },
+  "brandIdentity": {
+    "corePillars": [
+      "Licensed TV Brand (MasterChef Deutschland)",
+      "Premium Kitchen Lifestyle",
+      "Quality Cookware and Tools"
+    ],
+    "visualLanguage": "Clean, professional aesthetic reflecting premium kitchenware market. Bright, warm lighting emphasizes product quality and culinary appeal. Lifestyle-oriented imagery supports aspirational cooking positioning. Licensed TV brand lending entertainment credibility and lifestyle authority to product selection.",
+    "targetAudience": "Home cooking enthusiasts, aspiring chefs, lifestyle-conscious kitchen users, fans of MasterChef brand, customers seeking premium German-quality cookware",
+    "navigationPhilosophy": "2-level navigation with balanced specialization. Two parent categories (Messer and Kollektionen) branch into 10 sub-categories total. Main navigation includes 8 primary categories (Startseite, Angebote, Kochgeschirr, Messer, Schneidebretter, Küchengeräte, Textilien, Werkzeuge) plus two parent categories with sub-tiers. This creates clear product discovery paths for different shopping intents (browsing vs. specific search)."
+  },
+  "analysisNotes": {
+    "contentLevelness": "Low content-to-page ratio (2.55 editorial images per page, 5 total videos across 20 pages) reflects product catalog focus rather than editorial storytelling. This is distinct from ESN's content-rich approach.",
+    "videoUsage": "Strategic video use concentrated in 3 pages: Schneidebretter (1), Küchengeräte (2), Lebendige Kollektion (1), Erde Kollektion (1), Professionelle Kollektion (1). Küchengeräte is video-forward (2 videos, only 2 images).",
+    "collectionStrategy": "7 collection sub-pages represent curated product lines (Essentials, Natürliche, Lebendige, Erde, Nordische, Caption, Professionelle). Most are product-only pages (E:0 V:0), suggesting product curation rather than editorial positioning.",
+    "typoNote": "Navigation contains typo: 'Nordische Kolletion' (missing 'k' - should be 'Kollektion')",
+    "startseiteDesign": "Homepage uses 8 uniform 436x436 square tiles instead of mixed-size grid like ESN. This creates visually consistent navigation grid emphasizing equal importance of main categories.",
+    "noNavLogo": "No navigation logo detected (N:0) - unusual for branded store, suggests minimalist header design or logo integrated into hero only"
+  }
+}

@@ -1,0 +1,234 @@
+{
+  "brandName": "Kärcher",
+  "storeUrl": "https://www.amazon.de/stores/page/5765AC3A-DB09-4547-857E-AC23C8E1D964",
+  "analyzedAt": "2026-04-09",
+  "navigation": {
+    "pageCount": 40,
+    "pages": [
+      { "name": "Startseite", "level": 0 },
+      { "name": "Angebote", "level": 1 },
+      { "name": "Neuheiten", "level": 1 },
+      { "name": "Hochdruckreiniger", "level": 1 },
+      { "name": "Mobile Reinigung", "level": 1 },
+      { "name": "Robotics", "level": 1 },
+      { "name": "Dampf", "level": 1 },
+      { "name": "Garten", "level": 1 },
+      { "name": "Fenster", "level": 1 },
+      { "name": "Sauger", "level": 1 },
+      { "name": "Boden", "level": 1 },
+      { "name": "Luftreiniger", "level": 1 },
+      { "name": "Rund ums Auto", "level": 1 },
+      { "name": "Akku-Plattform", "level": 1 },
+      { "name": "Zubehör", "level": 1 },
+      { "name": "Über uns", "level": 1 }
+    ]
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "heroBanner": {
+        "description": "Collage aus 8 Lifestyle-Fotos (Hochdruckreiniger am Auto, Fensterreiniger, Dampfreiniger im Bad, Saugroboter, Gartenarbeit). Rechts: Gelber Kärcher-Markenbereich mit 'BEREIT FÜR DEN FRÜHJAHRSPUTZ?' in schwarzer Bold-Schrift auf gelbem Grund. Kärcher-Logo oben rechts. Professionelle Fotografie, klare Anwendungsszenarien.",
+        "textOnImage": "BEREIT FÜR DEN FRÜHJAHRSPUTZ?",
+        "estimatedDimensions": "3000x600"
+      },
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Full-Width Narrow",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Schmaler Navigations-/Hinweisbanner direkt unter Hero",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Narrow Banner (970x58)",
+              "imageCategory": "text_image",
+              "description": "Schmaler gelber/weißer Streifen unter dem Hero.",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Cashback-Promotion"
+        },
+        {
+          "position": 2,
+          "layoutType": "Full-Width",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Cashback-Promotion: Zeitlich begrenzte Aktion mit Testsieger-Badge",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Full Width (970x477)",
+              "imageCategory": "creative",
+              "description": "Split-Design: Links gelber Bereich mit 'CASH BACK' in riesiger schwarzer Bold-Schrift, 'bis zu 70€' in Schwarz, Aktionszeitraum '13.03.–03.05.2026'. Stiftung Warentest Testsieger Badge. Rechts: Frau reinigt Terrasse mit Kärcher Hochdruckreiniger bei Sonnenlicht. Professionell, vertrauensbildend.",
+              "textOnImage": "CASH BACK, bis zu 70€, 13.03.–03.05.2026",
+              "ctaText": "",
+              "linksTo": "Angebote"
+            }
+          ],
+          "relationToNextModule": "Zu Neuheiten"
+        },
+        {
+          "position": 3,
+          "layoutType": "Full-Width",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Neuheiten-Banner: Neue K4/K5/K7 Comfort Range auf dunklem Premium-Hintergrund",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Full Width (970x477)",
+              "imageCategory": "product",
+              "description": "Dunkler/schwarzer Hintergrund. Links: 'LEISTUNG TRIFFT KOMFORT.' in weißer Bold-Schrift mit gelbem Akzent-Strich. Darunter: 'Die neue K 4 | K 5 | K 7 Comfort Range' in Weiß. Rechts: Drei Hochdruckreiniger aufgereiht (K4, K5, K7) in Schwarz-Gelb-Design. Premium-Produktfotografie.",
+              "textOnImage": "LEISTUNG TRIFFT KOMFORT., Die neue K 4 | K 5 | K 7 Comfort Range",
+              "ctaText": "",
+              "linksTo": "Neuheiten"
+            }
+          ],
+          "relationToNextModule": "Zu Trenner/Kategorie-Grid"
+        },
+        {
+          "position": 4,
+          "layoutType": "2x Half-Width Trenner",
+          "layoutId": "std-2equal",
+          "tileCount": 2,
+          "designRationale": "Zwei nebeneinander liegende Trenner-Banner als Überleitung zum Kategorie-Grid",
+          "tiles": [
+            {
+              "position": "links + rechts",
+              "size": "Half (477x231)",
+              "imageCategory": "text_image",
+              "description": "Zwei halbbreite Trenner-Banner. Vermutlich Kategoriehinweise oder Navigations-Elemente in Kärcher-Gelb/Schwarz.",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Kategorie-Grid"
+        },
+        {
+          "position": 5,
+          "layoutType": "3x4 Kategorie-Grid",
+          "layoutId": "lg-4grid (3 Reihen)",
+          "tileCount": 12,
+          "designRationale": "Umfangreiches Kategorie-Grid: 12 kleine quadratische Tiles für alle Produktkategorien",
+          "tiles": [
+            {
+              "position": "3x4 grid",
+              "size": "Small Square (je 231x231)",
+              "imageCategory": "lifestyle",
+              "description": "12 Kategorie-Tiles in 3 Reihen à 4. Jedes Tile zeigt ein Lifestyle-Foto der Anwendung: Hochdruckreiniger (Mann wäscht Auto), Mobile Reinigung, Robotics, Dampf, Garten, Fenster, Sauger, Boden, Luftreiniger, Rund ums Auto, Akku-Plattform, Zubehör. Kategorie-Name als Overlay-Text auf jedem Tile. Professionelle Fotografie.",
+              "textOnImage": "Kategorie-Namen (Hochdruckreiniger, Mobile Reinigung, etc.)",
+              "ctaText": "",
+              "linksTo": "Jeweilige Kategorieseiten"
+            }
+          ],
+          "relationToNextModule": "Zu Produkt-Promotion"
+        },
+        {
+          "position": 6,
+          "layoutType": "Full-Width",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Produkt-Promotion: Saugwischer-Linie mit Split-Design",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Full Width (970x477)",
+              "imageCategory": "creative",
+              "description": "Split-Design: Links gelber Bereich mit 'BRING BACK THE WOW TO YOUR STAGE.' in schwarzer Bold-Schrift. Rechts: Lifestyle-Bild einer Frau die mit Kärcher Saugwischer den Boden reinigt in hellem Wohnzimmer. Zwei Saugwischer-Produkte prominent platziert. Modernes, cleanes Wohn-Setting.",
+              "textOnImage": "BRING BACK THE WOW TO YOUR STAGE.",
+              "ctaText": "",
+              "linksTo": "Boden"
+            }
+          ],
+          "relationToNextModule": "Zu Garantie-Banner"
+        },
+        {
+          "position": 7,
+          "layoutType": "Full-Width",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Trust/Garantie-Banner: Garantieverlängerung als Kaufargument",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Wide Banner (970x242)",
+              "imageCategory": "benefit",
+              "description": "Gelber Hintergrund. Links: 'HOCHDRUCKREINIGUNG OHNE KOMPROMISSE.' in schwarzer Bold-Schrift. '5 Jahre Garantieverlängerung' prominent. Rechts: Kärcher Hochdruckreiniger auf dunklem Hintergrund. Vertrauensbildendes Element mit Garantie-Messaging.",
+              "textOnImage": "HOCHDRUCKREINIGUNG OHNE KOMPROMISSE., 5 Jahre Garantieverlängerung",
+              "ctaText": "",
+              "linksTo": "Hochdruckreiniger"
+            }
+          ],
+          "relationToNextModule": "Zu Brand-Story"
+        },
+        {
+          "position": 8,
+          "layoutType": "Full-Width",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Brand-Story/Über-uns-Banner als Abschluss",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Full Width (970x477)",
+              "imageCategory": "creative",
+              "description": "Brand-Story-Banner mit Kärcher-Unternehmensdarstellung. Vermutlich Gelb/Schwarz-Farbschema mit Firmengeschichte oder Werte-Kommunikation.",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": "Über uns"
+            }
+          ],
+          "relationToNextModule": "Zu Abschluss-Banner"
+        },
+        {
+          "position": 9,
+          "layoutType": "Full-Width Narrow",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Schmaler Abschluss-Banner",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Narrow Banner (970x58)",
+              "imageCategory": "text_image",
+              "description": "Schmaler Abschluss-Streifen.",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Ende der Startseite"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "totalBrandImages": 23,
+    "totalVideos": 0,
+    "totalModules": 10,
+    "layoutTypes": {
+      "Full-Width": 6,
+      "Full-Width Narrow": 2,
+      "std-2equal": 1,
+      "lg-4grid (3 Reihen)": 1
+    },
+    "keyDesignPatterns": [
+      "Industriemarke mit professionellem Gelb/Schwarz-Farbschema – konsequent durchgezogen",
+      "Tiefste Navigation aller analysierten Stores: ~40 Seiten mit spezifischen Produktkategorien",
+      "Split-Design als Leitmotiv: Gelber Markenbereich links + Lifestyle-Foto rechts",
+      "12er Kategorie-Grid (3x4) – größtes Kategorie-Grid aller Stores",
+      "Cashback-Promotion mit Stiftung Warentest Badge – starker Social Proof",
+      "5 Jahre Garantieverlängerung als prominentes Trust-Element",
+      "Premium-Produktfotografie: Lifestyle-Bilder zeigen klare Anwendungsszenarien",
+      "Englische Claims gemischt mit deutschem Content: 'BRING BACK THE WOW TO YOUR STAGE'",
+      "Neuheiten-Launch auf dunklem/schwarzem Premium-Hintergrund",
+      "Hero als Lifestyle-Collage statt einzelnem Produktfoto",
+      "Keine Videos – rein bildbasierter Store trotz umfangreicher Produktpalette"
+    ],
+    "moduleFlow": "Hero (Collage + Gelb) → Schmaler Banner → Cashback FW → Neuheiten FW (Dunkel) → 2x Half Trenner → 3x4 Kategorie-Grid (12 Tiles) → Saugwischer-Promo FW → Garantie-Banner → Brand-Story FW → Schmaler Abschluss"
+  }
+}

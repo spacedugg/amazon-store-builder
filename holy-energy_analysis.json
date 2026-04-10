@@ -1,0 +1,452 @@
+{
+  "brandName": "HOLY Energy",
+  "storeUrl": "https://www.amazon.de/stores/HOLYEnergy/page/7913E121-CB43-4349-A8D2-9F0843B226E4",
+  "analyzedAt": "2026-04-09",
+  "methodology": "V3",
+  "navigation": {
+    "pageCount": 12,
+    "pages": [
+      {
+        "name": "Startseite",
+        "level": 0,
+        "pageId": "7913E121-CB43-4349-A8D2-9F0843B226E4"
+      },
+      {
+        "name": "Für Neueinsteiger",
+        "level": 1,
+        "pageId": "E0597C1D-5961-4E87-9CA5-2FAF0299330D"
+      },
+      {
+        "name": "Bestseller",
+        "level": 1,
+        "pageId": "E8F850A5-CE46-4877-88C4-F4F5A0365D02"
+      },
+      {
+        "name": "Energy",
+        "level": 1,
+        "pageId": "18BC62B2-B4AF-4995-B743-E80AECFA53AA"
+      },
+      {
+        "name": "Iced Tea",
+        "level": 1,
+        "pageId": "527A4D3B-EC68-4755-BF8D-2BF264AE1694"
+      },
+      {
+        "name": "Hydration",
+        "level": 1,
+        "pageId": "34F0F6AC-314F-4167-9EDA-54E94AC937C7"
+      },
+      {
+        "name": "Milkshakes",
+        "level": 1,
+        "pageId": "6AD7F40F-ED3C-4B02-BDC9-310A071E3EC7"
+      },
+      {
+        "name": "Starter Sets",
+        "level": 1,
+        "pageId": "15F6D24E-FF9D-4FE5-A1FB-5A2AD609CFE1"
+      },
+      {
+        "name": "Shaker",
+        "level": 1,
+        "pageId": "3B80FD95-4F71-4D28-944B-EA001C45FF3C"
+      },
+      {
+        "name": "Probier-Boxen",
+        "level": 1,
+        "pageId": "229C0965-6260-45EF-8A4F-1723BD514037"
+      },
+      {
+        "name": "Adventskalender",
+        "level": 1,
+        "pageId": "0AB41119-9BEE-431D-B7CC-346E3516D209"
+      },
+      {
+        "name": "Über uns",
+        "level": 1,
+        "pageId": "69AF9424-DDC3-4F16-8AE0-F35BB75BD83A"
+      }
+    ]
+  },
+  "contentSummary": {
+    "totalEditorialImages": 30,
+    "uniqueVideos": 12,
+    "editorialToVideoRatio": 2.5
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "pageId": "7913E121-CB43-4349-A8D2-9F0843B226E4",
+      "heroBanner": {
+        "description": "Hellblauer Hintergrund. Links: 'DIE SOFTDRINK REVOLUTION' in riesiger schwarzer Bold-Italic-Schrift. Rechts: Verschiedene HOLY Produkte auf weißen Podesten: Dosen mit bunten Cartoon-Charakteren (Schlange, Monster, Roboter), Shaker mit blauem Deckel, Sachets. Frische Früchte (Kiwi, Erdbeere, Kokosnuss). Extrem buntes, verspieltes Pop-Art-/Comic-Design.",
+        "textOnImage": "DIE SOFTDRINK REVOLUTION",
+        "estimatedDimensions": "872x728",
+        "brandIdentityNote": "Large hero banner conveys modern, energetic, lifestyle-focused brand positioning with extreme visual playfulness. Pop-Art aesthetic with cartoon mascots appeals to Gen-Z demographic and gaming/lifestyle culture."
+      },
+      "editorialImages": 8,
+      "videos": 1,
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Full-Width Hero",
+          "layoutId": "hero-full",
+          "tileCount": 1,
+          "designRationale": "Large hero banner establishing brand identity and visual gateway with revolutionary positioning",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "872x728",
+              "imageCategory": "hero",
+              "description": "Large hero banner with HOLY Energy branding - light blue background, products on white pedestals with fresh fruits, cartoon mascots on packaging, Bold-Italic typography messaging"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "layoutType": "Full-Width Narrow",
+          "layoutId": "divider-narrow",
+          "tileCount": 1,
+          "designRationale": "Visual divider/separator banner",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "872x152",
+              "imageCategory": "divider",
+              "description": "Narrow band providing visual separation - Starter-Set Deluxe promotion banner with blue background and striped HOLY box"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "layoutType": "2x2 Grid Small",
+          "layoutId": "2x2grid-small",
+          "tileCount": 4,
+          "designRationale": "Four small category tiles for product category navigation with cartoon-style product imagery",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 1 - Bestseller (HOLY Box + Shaker with cartoon design)"
+            },
+            {
+              "position": "2",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 2 - Energy (cans with cartoon mascots)"
+            },
+            {
+              "position": "3",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 3 - Iced Tea (product showcase)"
+            },
+            {
+              "position": "4",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 4 - Hydration/Milkshakes (product showcase)"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "layoutType": "Full-Width Claim Banner",
+          "layoutId": "claim-banner",
+          "tileCount": 1,
+          "designRationale": "Emotional brand claim banner with products and fresh fruits",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "872x156",
+              "imageCategory": "creative",
+              "description": "Pink-to-red gradient background. Text: 'GEILER GESCHMACK MIT GUTEM GEWISSEN!' - HOLY products with checkerboard patterns and cartoon characters, fresh berries and passion fruit. Dynamic, youth-oriented."
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "layoutType": "Full-Width Team/Squad",
+          "layoutId": "team-banner",
+          "tileCount": 1,
+          "designRationale": "Founder/Team photo as community and brand story element",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "872x172",
+              "imageCategory": "creative",
+              "description": "Team photo with yellow banner stripe - 'KOMM IN DEN SQUAD' messaging. Authentic, approachable, community-focused positioning. HOLY-branded t-shirts, wooden wall background."
+            }
+          ]
+        },
+        {
+          "position": 6,
+          "layoutType": "Full-Width Benefit Icons",
+          "layoutId": "benefit-bar",
+          "tileCount": 1,
+          "designRationale": "Brand values as playful icons - Geiler Geschmack, Gutes Gewissen, No Crap, Echter Fokus",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "872x172",
+              "imageCategory": "benefit",
+              "description": "Pink background with 4 cartoon icons and labels in Bold-Italic: Yellow lemon with lightning bolt (Geiler Geschmack), smiling smiley with hearts (Gutes Gewissen), crossed-out poop emoji (No Crap), rocket (Echter Fokus). Gen-Z playful aesthetics."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "Für Neueinsteiger",
+      "pageId": "E0597C1D-5961-4E87-9CA5-2FAF0299330D",
+      "editorialImages": 6,
+      "videos": 0,
+      "heroBanner": {
+        "description": "New customer introduction page hero with approachable brand messaging and product overview",
+        "estimatedDimensions": "872x300"
+      },
+      "designNote": "Customer acquisition page with moderate editorial content focused on introducing new customers to HOLY Energy brand values and product range. Hero banner + supporting banners + beginner-friendly product grid with cartoon product imagery."
+    },
+    {
+      "pageName": "Bestseller",
+      "pageId": "E8F850A5-CE46-4877-88C4-F4F5A0365D02",
+      "editorialImages": 6,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Bestseller category banner highlighting top-performing products with pop-art styling",
+        "estimatedDimensions": "872x300"
+      },
+      "designNote": "Customer acquisition focused page with moderate editorial (6 images). Hero banner + supporting content banners with playful design + bestseller product grid. Strong visual consistency with homepage aesthetic."
+    },
+    {
+      "pageName": "Energy",
+      "pageId": "18BC62B2-B4AF-4995-B743-E80AECFA53AA",
+      "editorialImages": 2,
+      "videos": 2,
+      "heroBanner": {
+        "description": "Energy drink category hero with performance and lifestyle positioning emphasizing taste and clean ingredients",
+        "estimatedDimensions": "872x300"
+      },
+      "designNote": "Primary product category page with minimal editorial images (2) but substantial video content (2 videos). Focus on video storytelling and product demonstration for energy drinks. Hero + supporting banners + product grid."
+    },
+    {
+      "pageName": "Iced Tea",
+      "pageId": "527A4D3B-EC68-4755-BF8D-2BF264AE1694",
+      "editorialImages": 1,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Iced tea product category hero with refreshment and taste positioning",
+        "estimatedDimensions": "872x300"
+      },
+      "designNote": "Product category page with minimal editorial content (1 image + 1 video). Lightweight page emphasizing product discovery. Hero + video content + product grid."
+    },
+    {
+      "pageName": "Hydration",
+      "pageId": "34F0F6AC-314F-4167-9EDA-54E94AC937C7",
+      "editorialImages": 2,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Hydration product category hero with wellness and performance benefits",
+        "estimatedDimensions": "872x300"
+      },
+      "designNote": "Product category page with minimal editorial (2 images + 1 video). Hero + supporting content + product grid for hydration products."
+    },
+    {
+      "pageName": "Milkshakes",
+      "pageId": "6AD7F40F-ED3C-4B02-BDC9-310A071E3EC7",
+      "editorialImages": 1,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Milkshakes product category hero with indulgence and convenience focus",
+        "estimatedDimensions": "872x300"
+      },
+      "designNote": "Product category page with minimal editorial (1 image). Lightweight page focused on product grid. Hero + product offerings."
+    },
+    {
+      "pageName": "Starter Sets",
+      "pageId": "15F6D24E-FF9D-4FE5-A1FB-5A2AD609CFE1",
+      "editorialImages": 1,
+      "videos": 2,
+      "heroBanner": {
+        "description": "Starter sets bundle hero emphasizing value and entry-point offerings for new customers trying full range",
+        "estimatedDimensions": "872x300"
+      },
+      "designNote": "Bundle/value package page with minimal images (1) but meaningful video content (2 videos). Focus on video product demos and bundle showcases. Hero + supporting content + product grid."
+    },
+    {
+      "pageName": "Shaker",
+      "pageId": "3B80FD95-4F71-4D28-944B-EA001C45FF3C",
+      "editorialImages": 1,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Shaker/accessory category hero with product tools and lifestyle positioning",
+        "estimatedDimensions": "872x300"
+      },
+      "designNote": "Accessory category page with minimal editorial (1 image). Lightweight page focused on accessory product grid. Hero + accessory offerings branded in HOLY style."
+    },
+    {
+      "pageName": "Probier-Boxen",
+      "pageId": "229C0965-6260-45EF-8A4F-1723BD514037",
+      "editorialImages": 0,
+      "videos": 4,
+      "heroBanner": {
+        "description": "Sample box offering hero with curiosity and trial-focused messaging emphasizing variety",
+        "estimatedDimensions": "872x300"
+      },
+      "designNote": "Distinctive high-engagement video storytelling page with zero images but 4 videos. Pure video-driven narrative for trial/sample box products. Hero + 4 product videos + product grid. Unique content strategy focused on video-first storytelling and product experimentation messaging."
+    },
+    {
+      "pageName": "Adventskalender",
+      "pageId": "0AB41119-9BEE-431D-B7CC-346E3516D209",
+      "editorialImages": 0,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Seasonal advent calendar offering (currently inactive/off-season)",
+        "estimatedDimensions": "872x300"
+      },
+      "designNote": "Seasonal product page with no editorial content. Likely inactive outside of November/December holiday season. Serves as placeholder or off-season content. Minimal or generic product grid when active."
+    },
+    {
+      "pageName": "Über uns",
+      "pageId": "69AF9424-DDC3-4F16-8AE0-F35BB75BD83A",
+      "editorialImages": 2,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Brand story hero with lifestyle and squad/community origin positioning connecting brand values to Gen-Z target audience",
+        "estimatedDimensions": "872x400"
+      },
+      "designNote": "Brand storytelling page with modest editorial content (2 images + 1 video). Content includes hero, brand origin/mission messaging, team/founder positioning, Squad/community values communication, lifestyle integration. Lighter touch than corporate brand stories - emphasizes authenticity and approachability reflecting D2C heritage."
+    }
+  ],
+  "designPatterns": {
+    "colorScheme": {
+      "background": "Light blue primary, with pink/red, yellow, and white accents",
+      "textColor": "Bold black, often in Bold-Italic style",
+      "accentColor": "Neon pink, yellow, checker patterns reflecting cartoon/pop-art aesthetic",
+      "rationale": "Bright, vibrant, accessible design with high contrast appeals to younger demographic and digital-native audiences. Extreme visual playfulness contrasts sharply with ESN's elite dark aesthetic."
+    },
+    "typography": {
+      "primary": "Bold-Italic sans-serif, mixed case for approachability and energy",
+      "characteristics": "Contemporary, lifestyle-focused, energetic, playful. Distinctly youth-oriented with unconventional grammar/slang ('Geiler Geschmack', 'No Crap'). Far less formal than ESN's commanding all-caps approach."
+    },
+    "photography": {
+      "style": "Lifestyle, pop-art, cartoon mascots, user-generated content aesthetic",
+      "lighting": "Bright, accessible, often studio-lit emphasizing product personality and cartoon characters",
+      "subjects": "Young professionals, gamers, everyday lifestyle scenarios, founder/team authenticity, cartoon-mascot product personification, fresh fruits and lifestyle elements"
+    },
+    "layoutPatterns": {
+      "homepage": "Large hero (872x728) + narrow promotional dividers (872x152, 872x156, 872x172) + small category grid (4x218x218)",
+      "categoryPages": "Consistent hero (872x300) + supporting banners + product grid with playful imagery",
+      "specialtyPages": "Probier-Boxen uses 4 videos instead of images - distinctive video-first approach for experimentation messaging",
+      "contentRichPages": "Für Neueinsteiger and Bestseller (6 images each) - customer acquisition focus with visual storytelling"
+    },
+    "hierarchyStructure": {
+      "navigationDepth": "1 level - flat navigation, all pages equal hierarchy",
+      "pageCount": "12 pages total (own pages, excluding shared Amazon Basics page)",
+      "distribution": "Lightweight per-page editorial (avg 2.5 images) with emphasis on video content (12 total videos across store)",
+      "strategy": "Broad, flat structure emphasizes accessibility and easy browsing. Lower editorial investment per page reflects D2C-native brand efficiency and social-media-first content strategy. Video-heavy approach aligns with influencer marketing heritage."
+    }
+  },
+  "editorialStrategy": {
+    "totalEditorialImages": 30,
+    "totalVideos": 12,
+    "editorialToVideoRatio": 2.5,
+    "distribution": [
+      {
+        "page": "Startseite",
+        "editorialImages": 8,
+        "videos": 1,
+        "rationale": "Homepage hero + navigation structure + team/benefits content with strong visual gateway. Balanced image/video approach introducing full brand ecosystem."
+      },
+      {
+        "page": "Für Neueinsteiger",
+        "editorialImages": 6,
+        "videos": 0,
+        "rationale": "Customer acquisition focus - dedicated editorial content to introduce brand identity, values, and product range to new customers"
+      },
+      {
+        "page": "Bestseller",
+        "editorialImages": 6,
+        "videos": 0,
+        "rationale": "Customer acquisition focus - showcase best-selling products with supporting editorial building confidence in product range"
+      },
+      {
+        "page": "Energy",
+        "editorialImages": 2,
+        "videos": 2,
+        "rationale": "Primary product category - balanced image/video approach emphasizing product storytelling and lifestyle integration"
+      },
+      {
+        "page": "Hydration",
+        "editorialImages": 2,
+        "videos": 1,
+        "rationale": "Secondary product category with moderate content depth for wellness positioning"
+      },
+      {
+        "page": "Starter Sets",
+        "editorialImages": 1,
+        "videos": 2,
+        "rationale": "Value bundle page - video-heavy approach for product bundle demonstrations and trial encouragement"
+      },
+      {
+        "page": "Iced Tea",
+        "editorialImages": 1,
+        "videos": 1,
+        "rationale": "Product category with minimal but balanced image/video content supporting category discovery"
+      },
+      {
+        "page": "Milkshakes",
+        "editorialImages": 1,
+        "videos": 0,
+        "rationale": "Lightweight product category page with minimal editorial focused on product grid"
+      },
+      {
+        "page": "Shaker",
+        "editorialImages": 1,
+        "videos": 0,
+        "rationale": "Accessory category with minimal editorial supporting lifestyle community aspect"
+      },
+      {
+        "page": "Über uns",
+        "editorialImages": 2,
+        "videos": 1,
+        "rationale": "Brand storytelling page with modest editorial emphasizing founder authenticity, Squad community values, and D2C heritage"
+      },
+      {
+        "page": "Probier-Boxen",
+        "editorialImages": 0,
+        "videos": 4,
+        "rationale": "Distinctive video-first strategy (4 videos, 0 images) for trial/sample product storytelling. Pure video narrative focusing on variety and experimentation appeal."
+      },
+      {
+        "page": "Adventskalender",
+        "editorialImages": 0,
+        "videos": 0,
+        "rationale": "Seasonal product page currently inactive/off-season. No editorial content. Placeholder structure."
+      }
+    ]
+  },
+  "brandIdentity": {
+    "corePillars": [
+      "Softdrink Revolution - Modern Energy Drink Alternative",
+      "Gen-Z Lifestyle and Gaming Culture",
+      "Authentic Squad Community and Accessibility",
+      "Playful Pop-Art Aesthetic with Cartoon Personification"
+    ],
+    "visualLanguage": "Bright, vibrant, contemporary pop-art aesthetic with cartoon mascots and comic-style product personification. Light blue primary with pink/red/yellow accents creating high-energy, accessible visual language. Bold-Italic typography with unconventional youth-oriented grammar ('Geiler Geschmack', 'No Crap') appeals to Gen-Z sensibilities. Deliberately playful benefit icons (lemon with lightning, poop emoji crossed out, rocket) and Squad community messaging. Mix of professional product photography and authentic team/lifestyle imagery. Strong emphasis on video content (12 videos) suggesting social media-native brand with influencer and D2C heritage.",
+    "targetAudience": "Young professionals aged 18-35, gamers, digital natives, Gen-Z lifestyle-conscious consumers. Health-conscious alternative seekers positioned against traditional energy drinks. Community and authenticity-focused rather than aspirational positioning. Values approachability, playfulness, and social acceptance ('Squad') over elitism.",
+    "d2cHeritage": "HOLY Energy operates as a D2C-native brand with strong social media and influencer marketing presence. Amazon Store serves as e-commerce extension of existing direct customer relationships and community. Lower per-page editorial investment with video-forward strategy reflects efficient brand storytelling optimized for digital/social contexts. Squad/community messaging directly reflects influencer and grassroots marketing heritage.",
+    "navigationPhilosophy": "Flat, single-level navigation emphasizing accessibility, approachability, and ease of browsing. 12 pages serve customer discovery without deep category hierarchies. Focus on product categories (Energy, Iced Tea, Hydration, Milkshakes) and lifestyle bundles (Starter Sets, Shaker) rather than sub-brands like ESN. Entry-point pages (Für Neueinsteiger, Bestseller) prioritize customer acquisition. Distinctive video-first approach (Probier-Boxen with 4 videos, 0 images) reflects social media storytelling fluency. Seasonal content (Adventskalender) managed within flat structure. Overall design reflects D2C brand operating efficiency - focused content investment on conversion and community building rather than sprawling specialization."
+  },
+  "notableObservations": {
+    "contentStrategy": "Moderate editorial investment (30 images, 12 videos) with high video-to-image ratio (2.5:1) is distinctive compared to ESN (75 images, 6 videos, ratio 12.5:1). Video-forward approach suggests social media-savvy D2C brand. Videos used strategically for product storytelling, lifestyle messaging, and engagement rather than uniformly distributed.",
+    "customerAcquisitionFocus": "Für Neueinsteiger and Bestseller pages feature most editorial images (6 each) indicating intentional customer acquisition funnel design. Starter Sets page emphasizes value bundles for trial. Deliberate conversion optimization focus.",
+    "videoFirstApproach": "Probier-Boxen page employs distinctive 4 videos with 0 images - unique content strategy emphasizing experimentation and trial through pure video storytelling. Reflects influencer/social media native approach.",
+    "cartoonMascotStrategy": "Product packaging features cartoon mascots (snake, monster, robot characters) as brand personalities. Repeated across category tiles and promotional banners. Represents sophisticated brand differentiation through character personification - unusual in beverage category.",
+    "accessoryIntegration": "Shaker page suggests brand community and lifestyle accessories ecosystem. Branded shaker in multiple category tile images indicates accessory integration with product identity.",
+    "seasonalContent": "Adventskalender page (empty) indicates seasonal product offerings managed within store structure. Suggests holiday gifting strategy outside core product lineup.",
+    "imageDimensions": "Significantly smaller image sizes (218x218 category tiles, 872x156-872x172 section headers) compared to ESN reflect different visual hierarchy and homepage layout approach. Denser page layout with more modules.",
+    "flatNavigation": "Single-level hierarchy despite 12 pages contrasts with ESN's nested sub-brand structure (21 pages with 2-level hierarchy). Reflects D2C brand's simpler product categorization and operational focus.",
+    "brandTone": "Distinctly youth-oriented with unconventional copywriting ('Geiler Geschmack mit gutem Gewissen!' - 'Awesome taste with clear conscience'). Playful, irreverent positioning contrasts sharply with ESN's professional/elite athletic branding. Represents deliberate market differentiation in beverage category."
+  }
+}

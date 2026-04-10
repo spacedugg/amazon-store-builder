@@ -1,0 +1,594 @@
+{
+  "brandName": "Feandrea (by SONGMICS HOME)",
+  "storeUrl": "https://www.amazon.de/stores/page/FB4FA857-CD07-4E92-A32C-CF0CD556ACF6",
+  "analyzedAt": "2026-04-09",
+  "methodology": "V3",
+  "navigation": {
+    "pageCount": 18,
+    "navigationHierarchy": "2-level",
+    "pages": [
+      {
+        "name": "Startseite",
+        "level": 0,
+        "pageId": "FB4FA857-CD07-4E92-A32C-CF0CD556ACF6"
+      },
+      {
+        "name": "Sonderangebote",
+        "level": 1,
+        "pageId": "22136B4B-B7BE-458B-8950-8DEC2FEB2DFF"
+      },
+      {
+        "name": "NEU",
+        "level": 1,
+        "pageId": "79CD69FF-F2DB-4E27-8F9E-3F695FB9DFB8"
+      },
+      {
+        "name": "FÜR KATZEN",
+        "level": 1,
+        "pageId": "2473A208-0A9B-400F-BEE1-5524BD21C6CE"
+      },
+      {
+        "name": "Kratzbäume",
+        "level": 2,
+        "parentCategory": "FÜR KATZEN",
+        "pageId": "0969F474-6991-44A8-864E-BAC3587E4935"
+      },
+      {
+        "name": "Katzenklo-Schränke",
+        "level": 2,
+        "parentCategory": "FÜR KATZEN",
+        "pageId": "0B547FBB-8DCA-4C30-99F3-693B36741CEB"
+      },
+      {
+        "name": "Reisen (Katzen)",
+        "level": 2,
+        "parentCategory": "FÜR KATZEN",
+        "pageId": "BB994C34-918B-4DCC-B7EB-320CC174EEFE"
+      },
+      {
+        "name": "Schlafen",
+        "level": 2,
+        "parentCategory": "FÜR KATZEN",
+        "pageId": "CAB36812-C0E9-479A-884B-F829B9DE3100"
+      },
+      {
+        "name": "FÜR HUNDE",
+        "level": 1,
+        "pageId": "97D6A597-37C0-4276-9466-0273791DE1EF"
+      },
+      {
+        "name": "Hundebetten",
+        "level": 2,
+        "parentCategory": "FÜR HUNDE",
+        "pageId": "C4BB408C-0A39-419A-AAC6-8842A2C07C6E"
+      },
+      {
+        "name": "Hundekäfige & Welpenauslauf",
+        "level": 2,
+        "parentCategory": "FÜR HUNDE",
+        "pageId": "8E84A731-73B4-4D1F-BACB-BB771254EC72"
+      },
+      {
+        "name": "Reisen (Hunde)",
+        "level": 2,
+        "parentCategory": "FÜR HUNDE",
+        "pageId": "00DBC12A-7F8E-4D37-9AE8-4C36995BAD61"
+      },
+      {
+        "name": "Haustierdecken",
+        "level": 2,
+        "parentCategory": "FÜR HUNDE",
+        "pageId": "02B002CE-AFBB-4AFD-92E6-F72091C8AF8F"
+      },
+      {
+        "name": "Mehr",
+        "level": 1,
+        "pageId": "E8C43F6F-A679-4A2F-A0C5-0F8DB43E162D"
+      },
+      {
+        "name": "Clickat Kollektion",
+        "level": 1,
+        "pageId": "A3C4A58A-6E72-49F5-BE5E-46857436B3EB"
+      },
+      {
+        "name": "Über uns",
+        "level": 1,
+        "pageId": "9FD71EC8-799E-4138-B6F0-1BA84F03F656"
+      },
+      {
+        "name": "Verantwortung und nachhaltige Entwicklung",
+        "level": 1,
+        "pageId": "E638C3C6-6987-4A7C-82A7-B48428BFD042"
+      },
+      {
+        "name": "Amazon Basics",
+        "level": 1,
+        "pageId": "879785AB-711B-4ACB-9864-46D17B651117"
+      }
+    ]
+  },
+  "contentSummary": {
+    "totalEditorialImages": 118,
+    "uniqueVideos": 19,
+    "editorialToVideoRatio": 6.2
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "pageId": "FB4FA857-CD07-4E92-A32C-CF0CD556ACF6",
+      "editorialImages": 15,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Colorful pet lifestyle hero with cats and dogs. Warm, inviting aesthetic conveying comfort and care for beloved pets.",
+        "textOnImage": "Feandrea - Zubehör für Haustiere",
+        "estimatedDimensions": "1920x1920 / 3000x1500",
+        "brandIdentityNote": "Approachable, pet-centric brand positioning. Full-width hero establishes warm emotional connection with pet owners."
+      },
+      "imageSizes": [
+        "872x116",
+        "872x436",
+        "872x109",
+        "436x218",
+        "436x218",
+        "436x218",
+        "436x218",
+        "872x109",
+        "872x116",
+        "1920x1920",
+        "1920x1920",
+        "3000x1500",
+        "3000x1500",
+        "872x436",
+        "872x581"
+      ],
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Full-Width Hero",
+          "layoutId": "hero-full",
+          "tileCount": 1,
+          "designRationale": "Large hero banner with pet lifestyle imagery establishing brand warmth and pet focus",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "3000x1500",
+              "imageCategory": "hero",
+              "description": "Colorful, warm hero with cats and dogs in cozy home settings"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "layoutType": "Full-Width Narrow",
+          "layoutId": "divider-narrow",
+          "tileCount": 1,
+          "designRationale": "Visual separator between hero and category navigation",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "872x116",
+              "imageCategory": "divider",
+              "description": "Narrow decorative banner providing visual separation"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "layoutType": "lg-2grid Wide",
+          "layoutId": "lg-2grid-wide",
+          "tileCount": 2,
+          "designRationale": "Two large category tiles for primary pet segments (FÜR KATZEN, FÜR HUNDE)",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "872x436",
+              "imageCategory": "category-banner",
+              "description": "Cats category showcase with cozy interior pet product styling"
+            },
+            {
+              "position": "2",
+              "size": "872x436",
+              "imageCategory": "category-banner",
+              "description": "Dogs category showcase with comfortable home setting for pet products"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "layoutType": "lg-4grid Narrow",
+          "layoutId": "lg-4grid-narrow",
+          "tileCount": 8,
+          "designRationale": "Eight narrow category tiles providing quick navigation to sub-categories and special collections",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Kratzbäume sub-category"
+            },
+            {
+              "position": "2",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Katzenklo-Schränke sub-category"
+            },
+            {
+              "position": "3",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Hundebetten sub-category"
+            },
+            {
+              "position": "4",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Hundekäfige & Welpenauslauf sub-category"
+            },
+            {
+              "position": "5",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Reisen (travel) category"
+            },
+            {
+              "position": "6",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Schlafen (sleep) products"
+            },
+            {
+              "position": "7",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Haustierdecken (pet blankets)"
+            },
+            {
+              "position": "8",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Clickat Kollektion or special offer"
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "layoutType": "Full-Width Narrow",
+          "layoutId": "divider-narrow",
+          "tileCount": 1,
+          "designRationale": "Bottom separator with large featured product showcase",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "872x581",
+              "imageCategory": "feature-banner",
+              "description": "Large feature showcase - promotional product or collection highlight"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "Sonderangebote",
+      "pageId": "22136B4B-B7BE-458B-8950-8DEC2FEB2DFF",
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-focused promotional page with no editorial content - pure product grid layout for special offers"
+    },
+    {
+      "pageName": "NEU",
+      "pageId": "79CD69FF-F2DB-4E27-8F9E-3F695FB9DFB8",
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "New arrivals section with minimal editorial content - product grid showcasing latest additions"
+    },
+    {
+      "pageName": "FÜR KATZEN",
+      "pageId": "2473A208-0A9B-400F-BEE1-5524BD21C6CE",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Cats category hero with cozy interior imagery. Warm tones emphasizing comfort and luxury for feline companions.",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Main cat category page with minimal editorial. Features hero banner + sub-category navigation tiles (Kratzbäume, Katzenklo-Schränke, Reisen, Schlafen) + product grid"
+    },
+    {
+      "pageName": "Kratzbäume",
+      "pageId": "0969F474-6991-44A8-864E-BAC3587E4935",
+      "editorialImages": 11,
+      "videos": 2,
+      "heroBanner": {
+        "description": "Cat scratching trees showcasing various designs and materials. Product-focused imagery with lifestyle context.",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Product category with moderate editorial (11 images + 2 videos). Hero + product showcase banners with lifestyle imagery + grid. Video content demonstrates cat interaction with scratching trees."
+    },
+    {
+      "pageName": "Katzenklo-Schränke",
+      "pageId": "0B547FBB-8DCA-4C30-99F3-693B36741CEB",
+      "editorialImages": 11,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Decorative litter box furniture showing space-saving solutions. Interior design focused with emphasis on aesthetic home integration.",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Category page with substantial editorial content (11 images). Hero + multiple product showcase banners showing different styles, colors, materials, and room settings + product grid"
+    },
+    {
+      "pageName": "Reisen (Katzen)",
+      "pageId": "BB994C34-918B-4DCC-B7EB-320CC174EEFE",
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Travel/portable cat products category with product-grid only layout. No editorial content - functional navigation to travel accessories."
+    },
+    {
+      "pageName": "Schlafen",
+      "pageId": "CAB36812-C0E9-479A-884B-F829B9DE3100",
+      "editorialImages": 0,
+      "videos": 4,
+      "designNote": "Unique video-focused page with 4 videos but no editorial images. Content is driven entirely by video demonstrations of cat beds and sleep products. No supporting banners - video modules dominate."
+    },
+    {
+      "pageName": "FÜR HUNDE",
+      "pageId": "97D6A597-37C0-4276-9466-0273791DE1EF",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Dogs category hero with playful imagery. Warm, friendly aesthetic emphasizing comfort and durability for canine products.",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Main dog category page with minimal editorial. Features hero banner + sub-category navigation (Hundebetten, Hundekäfige & Welpenauslauf, Reisen, Haustierdecken) + product grid"
+    },
+    {
+      "pageName": "Hundebetten",
+      "pageId": "C4BB408C-0A39-419A-AAC6-8842A2C07C6E",
+      "editorialImages": 12,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Dog beds in various sizes and styles. Lifestyle imagery showing dogs in comfortable resting positions.",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Category page with substantial editorial (12 images + 1 video). Hero + multiple product showcase banners featuring different dog breeds, bed sizes, materials, and home settings + grid"
+    },
+    {
+      "pageName": "Hundekäfige & Welpenauslauf",
+      "pageId": "8E84A731-73B4-4D1F-BACB-BB771254EC72",
+      "editorialImages": 3,
+      "videos": 5,
+      "heroBanner": {
+        "description": "Dog cages and puppy playpens with structural demonstrations. Product-focused with functionality emphasis.",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Category with video-rich content (5 videos + 3 images). Hero + product showcase banners + multiple video modules demonstrating setup, assembly, and usage + grid. Heavy video usage for functional product category."
+    },
+    {
+      "pageName": "Reisen (Hunde)",
+      "pageId": "00DBC12A-7F8E-4D37-9AE8-4C36995BAD61",
+      "editorialImages": 0,
+      "videos": 2,
+      "designNote": "Travel/portable dog products with 2 videos and no editorial images. Video-focused content for portable carriers and travel accessories."
+    },
+    {
+      "pageName": "Haustierdecken",
+      "pageId": "02B002CE-AFBB-4AFD-92E6-F72091C8AF8F",
+      "editorialImages": 8,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Pet blankets and throws showcasing various textures, colors, and uses. Lifestyle imagery in modern home settings.",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Category page with moderate editorial (8 images). Hero + product showcase banners showing blankets on furniture, different materials, patterns, and pet usage scenarios + grid"
+    },
+    {
+      "pageName": "Mehr",
+      "pageId": "E8C43F6F-A679-4A2F-A0C5-0F8DB43E162D",
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Minimal or no editorial content - functional page for additional product discovery or miscellaneous items"
+    },
+    {
+      "pageName": "Clickat Kollektion",
+      "pageId": "A3C4A58A-6E72-49F5-BE5E-46857436B3EB",
+      "editorialImages": 18,
+      "videos": 3,
+      "heroBanner": {
+        "description": "Clickat sub-brand collection hero. Distinct visual styling for this specialized product line.",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Most content-rich category page (18 images + 3 videos). Hero banner + extensive product showcase sections + multiple video demonstrations + grid. Clickat is premium cat furniture sub-brand receiving maximum editorial investment."
+    },
+    {
+      "pageName": "Über uns",
+      "pageId": "9FD71EC8-799E-4138-B6F0-1BA84F03F656",
+      "editorialImages": 12,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Brand story hero showing company values, pet care philosophy, and product development heritage",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Brand storytelling page with substantial editorial (12 images + 1 video). Content includes company history, pet care philosophy, product quality standards, customer testimonials, and sustainability commitment sections with supporting imagery."
+    },
+    {
+      "pageName": "Verantwortung und nachhaltige Entwicklung",
+      "pageId": "E638C3C6-6987-4A7C-82A7-B48428BFD042",
+      "editorialImages": 12,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Sustainability and responsibility hero emphasizing environmental and ethical commitment",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Corporate responsibility page with substantial editorial (12 images, no videos). Content covers sustainability practices, ethical sourcing, packaging, manufacturing processes, and environmental initiatives with supporting photography."
+    },
+    {
+      "pageName": "Amazon Basics",
+      "pageId": "879785AB-711B-4ACB-9864-46D17B651117",
+      "editorialImages": 15,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Amazon Basics pet supplies hero with consistent Amazon brand styling",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Unusual inclusion of Amazon Basics page within Feandrea brand store (15 images + 1 video). Acts as cross-promotional channel for compatible Amazon Basics pet products. May indicate co-branding partnership or expanded ecosystem approach."
+    }
+  ],
+  "designPatterns": {
+    "colorScheme": {
+      "background": "White/Neutral",
+      "textColor": "Dark gray/Black",
+      "accentColor": "Warm earth tones, pet-safe pastels",
+      "rationale": "Approachable, warm aesthetic appeals to pet owners. Neutral background showcases colorful pet products and lifestyle imagery."
+    },
+    "typography": {
+      "primary": "Clean sans-serif, mixed case",
+      "characteristics": "Friendly, accessible tone. No aggressive styling. Emphasizes care and comfort rather than performance."
+    },
+    "photography": {
+      "style": "Lifestyle and product photography",
+      "lighting": "Warm, bright, inviting",
+      "subjects": "Pets in home environments, product close-ups, interior design contexts, pet-owner interactions"
+    },
+    "layoutPatterns": {
+      "homepage": "Large hero (3000x1500) + narrow dividers (872x116) + wide category tiles (2x872x436) + narrow category grid (8x436x218) + feature banner (872x581)",
+      "categoryPages": "Hero (1872x400) + 2-3 supporting product banners + product grid. Video-rich categories add multiple video modules.",
+      "subBrandPages": "Consistent category template with expanded editorial for premium offerings (Clickat)"
+    },
+    "videoStrategy": "Substantial video usage across product categories. Video-only pages (Schlafen: 4 videos, 0 images; Hundekäfige: 5 videos). Functional demonstration videos for assembly-required and complex products (cages, playpens). Lifestyle videos showing pet interaction."
+  },
+  "editorialStrategy": {
+    "totalEditorialImages": 118,
+    "totalVideos": 19,
+    "distribution": [
+      {
+        "page": "Startseite",
+        "editorialImages": 15,
+        "videos": 0,
+        "rationale": "Homepage hero + navigation structure - establishes warm brand identity and category navigation"
+      },
+      {
+        "page": "Clickat Kollektion",
+        "editorialImages": 18,
+        "videos": 3,
+        "rationale": "Premium sub-brand receives maximum editorial investment. Most content-rich product category showcasing luxury cat furniture"
+      },
+      {
+        "page": "Amazon Basics",
+        "editorialImages": 15,
+        "videos": 1,
+        "rationale": "Co-brand integration with substantial editorial supporting product ecosystem expansion"
+      },
+      {
+        "page": "Verantwortung und nachhaltige Entwicklung",
+        "editorialImages": 12,
+        "videos": 0,
+        "rationale": "Corporate responsibility messaging - sustainability and ethical practices documentation"
+      },
+      {
+        "page": "Über uns",
+        "editorialImages": 12,
+        "videos": 1,
+        "rationale": "Brand storytelling hub showcasing company values, heritage, and pet care philosophy"
+      },
+      {
+        "page": "Hundebetten",
+        "editorialImages": 12,
+        "videos": 1,
+        "rationale": "Major product category with substantial lifestyle content showing dogs in comfortable settings"
+      },
+      {
+        "page": "Katzenklo-Schränke",
+        "editorialImages": 11,
+        "videos": 0,
+        "rationale": "Interior design-focused category with multiple room settings and aesthetic variations"
+      },
+      {
+        "page": "Kratzbäume",
+        "editorialImages": 11,
+        "videos": 2,
+        "rationale": "Core cat product category with dual-media content demonstrating design variety and cat interaction"
+      },
+      {
+        "page": "Haustierdecken",
+        "editorialImages": 8,
+        "videos": 0,
+        "rationale": "Accessory category with moderate editorial showcasing product versatility and styling"
+      },
+      {
+        "page": "FÜR KATZEN",
+        "editorialImages": 3,
+        "videos": 0,
+        "rationale": "Main category navigation page with minimal editorial - directs to sub-categories"
+      },
+      {
+        "page": "FÜR HUNDE",
+        "editorialImages": 3,
+        "videos": 0,
+        "rationale": "Main category navigation page with minimal editorial - directs to sub-categories"
+      },
+      {
+        "page": "Hundekäfige & Welpenauslauf",
+        "editorialImages": 3,
+        "videos": 5,
+        "rationale": "Video-heavy category (5 videos + 3 images) - functional demonstrations for complex, assembly-required products"
+      },
+      {
+        "page": "Schlafen",
+        "editorialImages": 0,
+        "videos": 4,
+        "rationale": "Unique video-only editorial strategy. No static images - 4 videos demonstrate bed comfort and pet satisfaction"
+      },
+      {
+        "page": "Reisen (Hunde)",
+        "editorialImages": 0,
+        "videos": 2,
+        "rationale": "Portable/travel products with video focus demonstrating portability and ease of use"
+      },
+      {
+        "page": "Sonderangebote",
+        "editorialImages": 0,
+        "videos": 0,
+        "rationale": "Promotional product grid - no editorial, pure product listing"
+      },
+      {
+        "page": "NEU",
+        "editorialImages": 0,
+        "videos": 0,
+        "rationale": "New arrivals listing - no editorial, focus on product discovery"
+      },
+      {
+        "page": "Reisen (Katzen)",
+        "editorialImages": 0,
+        "videos": 0,
+        "rationale": "Travel products category - minimal editorial, product grid focused"
+      },
+      {
+        "page": "Mehr",
+        "editorialImages": 0,
+        "videos": 0,
+        "rationale": "Miscellaneous/additional category with no dedicated editorial"
+      }
+    ]
+  },
+  "brandIdentity": {
+    "corePillars": [
+      "Pet Comfort and Wellness",
+      "Home Integration and Design",
+      "Sustainability and Responsibility",
+      "Quality Pet Products"
+    ],
+    "parentBrand": "SONGMICS HOME",
+    "visualLanguage": "Warm, inviting aesthetic with soft color palette. Pet lifestyle imagery in modern home settings. Emphasis on comfort, durability, and aesthetic harmony. Photography style favors natural lighting and cozy home environments over product-only isolation. Design conveys that pet products can be beautiful interior elements, not utilitarian afterthoughts.",
+    "targetAudience": "Pet owners who prioritize pet wellness and home aesthetics. Design-conscious individuals seeking functional pet furniture that complements home décor. Quality-focused consumers willing to invest in durable, long-lasting pet supplies.",
+    "navigationPhilosophy": "Clear pet-species segmentation (FÜR KATZEN vs FÜR HUNDE) with 4 sub-categories each emphasizing functional pet needs (sleeping, using bathroom, travel, climbing/scratching). Balanced approach between product categories and lifestyle/values content (Clickat premium sub-brand, sustainability pages, brand story). Unusual inclusion of Amazon Basics suggests ecosystem expansion or partnership approach.",
+    "contentStrategy": "Mix of image-heavy and video-heavy pages. Video concentration on complex/functional products (cages, travel accessories) and lifestyle demonstration (cat scratching behavior, dog comfort). Premium sub-brand (Clickat) receives maximum editorial investment. Strong emphasis on corporate responsibility and sustainability aligned with premium positioning. Homepage drives exploration through visual category navigation rather than text-based menus.",
+    "notableFeatures": [
+      "Very large store (18 pages, 2-level hierarchy)",
+      "Sub-brand SONGMICS HOME with Feandrea as pet-focused child brand",
+      "Unusual Amazon Basics integration within brand store",
+      "Video-as-primary-content strategy for specific categories (Schlafen: 4 videos, 0 images; Hundekäfige: 5 videos)",
+      "Clickat premium sub-brand receives 18 images + 3 videos (15% of total editorial)",
+      "Strong corporate messaging (sustainability page: 12 images; about page: 12 images + 1 video)",
+      "Product-heavy categories (Sonderangebote, NEU, Reisen-Katzen) contain 0 editorial content - pure grids",
+      "Image size variety shows responsive multi-device design (small dividers at 872x109, large square at 1920x1920, wide banners at 3000x1500)"
+    ]
+  }
+}

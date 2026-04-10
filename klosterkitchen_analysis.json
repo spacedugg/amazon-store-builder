@@ -1,0 +1,150 @@
+{
+  "brandName": "Kloster Kitchen",
+  "storeUrl": "https://www.amazon.de/stores/page/34D4A812-9A68-4602-A6A0-30565D399620",
+  "analyzedAt": "2026-04-09",
+  "navigation": {
+    "pageCount": 10,
+    "pages": [
+      { "name": "Startseite", "level": 0 },
+      { "name": "Ingwer Shots", "level": 1 },
+      { "name": "Mikronährstoffe", "level": 1 },
+      { "name": "Saftkuren", "level": 1 },
+      { "name": "SMOOTHIES", "level": 1 },
+      { "name": "Shot Kur", "level": 1 },
+      { "name": "Probiersets / Geschenkidee", "level": 1 },
+      { "name": "Zubehör", "level": 1 },
+      { "name": "Spar-Abo", "level": 1 },
+      { "name": "Über Uns", "level": 1 }
+    ]
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "heroBanner": {
+        "description": "Links: Frau im beigen Pullover trinkt einen Shot mit geschlossenen Augen. Rechts: Dunkelgrüner Blätter-Hintergrund (tropische Pflanzen). Kloster Kitchen Logo (Blumen-/Asterisk-Icon) in Weiß. 'BETTER THAN GOOD' als Claim in weißer Bold-Schrift. Natürlich, premium, botanisch.",
+        "textOnImage": "KLOSTER KITCHEN BETTER THAN GOOD",
+        "estimatedDimensions": "3000x600"
+      },
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Full-Width",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Brand-Mission-Statement: Zentriertes Logo mit Markenclaim und Neuheiten-Teaser",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Full Width (970x606)",
+              "imageCategory": "creative",
+              "description": "Weißer Hintergrund. Oben: Kloster Kitchen Logo-Icon (schwarzes Blumen-/Asterisk-Symbol) zentriert. Darunter: 'FÜR DEINEN BEWUSSTEREN UND NATÜRLICHEREN LEBENSSTIL' in schwarzer Bold-Schrift. Sub-Claim: 'Trink, was dir gut tut. Nicht, was nur gut klingt.' in kursiver Schrift. Unten: 'NEU:' in riesiger gelber Bold-Schrift als Teaser für neue Produkte.",
+              "textOnImage": "FÜR DEINEN BEWUSSTEREN UND NATÜRLICHEREN LEBENSSTIL, Trink was dir gut tut, NEU:",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Produktneuheit VITAL FLOW"
+        },
+        {
+          "position": 2,
+          "layoutType": "Full-Width",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Neuprodukt-Launch: VITAL FLOW Mikronährstoff-Konzentrat mit detaillierter Produktbeschreibung",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Full Width (970x607)",
+              "imageCategory": "creative",
+              "description": "Split-Design: Links weißer Hintergrund mit 'MIKRONÄHRSTOFF-KONZENTRAT' in riesiger schwarzer Bold-Schrift. Darunter Produktinfos: 'DEINE TÄGLICHE NÄHRSTOFFBASIS MIT VITAMINEN & MINERALSTOFFEN', 'ÜBER 70 PFLANZLICHE ZUTATEN', 'WISSEN DAS WIRKT'. Rechts: Frau trinkt dunkles Konzentrat, umgeben von frischem Obst/Gemüse-Collage. VITAL FLOW Flasche prominent. Claim: 'PFLANZLICH GEDACHT. WISSENSCHAFTLICH GEMACHT.'",
+              "textOnImage": "MIKRONÄHRSTOFF-KONZENTRAT, PFLANZLICH GEDACHT. WISSENSCHAFTLICH GEMACHT., VITAL FLOW",
+              "ctaText": "",
+              "linksTo": "Mikronährstoffe"
+            }
+          ],
+          "relationToNextModule": "Zu Produkt-Kategorie-Grid"
+        },
+        {
+          "position": 3,
+          "layoutType": "4er-Grid (Reihe 1)",
+          "layoutId": "lg-4grid",
+          "tileCount": 4,
+          "designRationale": "Produktkategorien Reihe 1: 4 quadratische Tiles mit Produktfotos auf natürlichen Hintergründen",
+          "tiles": [
+            {
+              "position": "4x grid",
+              "size": "Small Square (je 231x231)",
+              "imageCategory": "product",
+              "description": "4 Produkt-Tiles: Erstes Tile zeigt grüne Ingwer Shot Classic Flasche auf Bett aus frischem Ingwer mit Bio-Siegel. Weitere Tiles zeigen andere Kloster Kitchen Produkte (Saftkuren, Shots, Smoothies) in ähnlichem natürlichen Flat-Lay-Style mit frischen Zutaten. Bio-Siegel auf jedem Tile.",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": "Jeweilige Kategorieseiten"
+            }
+          ],
+          "relationToNextModule": "Zu Grid Reihe 2"
+        },
+        {
+          "position": 4,
+          "layoutType": "4er-Grid (Reihe 2)",
+          "layoutId": "lg-4grid",
+          "tileCount": 4,
+          "designRationale": "Produktkategorien Reihe 2: Weitere 4 Tiles, teilweise mit Lifestyle-Fotografie",
+          "tiles": [
+            {
+              "position": "4x grid",
+              "size": "Small Square (je 231x231)",
+              "imageCategory": "mixed",
+              "description": "4 weitere Produkt-/Lifestyle-Tiles. Ein Tile zeigt Frauenhand mit kleiner roter Shot-Flasche über Frühstücks-Bowl (Banane, Beeren, Granola) auf Holzbrett. Bio-Siegel. Lifestyle-Fotografie im warmen, natürlichen Küchen-Setting. Weitere Tiles zeigen Probiersets, Zubehör oder Spar-Abo-Angebote.",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": "Jeweilige Kategorieseiten"
+            }
+          ],
+          "relationToNextModule": "Zu Award-/Trust-Banner"
+        },
+        {
+          "position": 5,
+          "layoutType": "Full-Width",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Award-/Trust-Banner: Zeigt gewonnene Auszeichnungen als Vertrauensbeweis",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Wide Banner (970x208)",
+              "imageCategory": "benefit",
+              "description": "Dunkelgrüner tropischer Blätter-Hintergrund (gleicher Style wie Hero). 'AUSGEZEICHNETE INNOVATIONEN' in weißer Bold-Schrift. Vier Award-Badges: German Brand Award '25 Winner, German Brand Award '25 Product Brand of the Year, Produkt Innovation in Glas, Geprüfte Qualität (DIFT). Starkes Trust-Element.",
+              "textOnImage": "AUSGEZEICHNETE INNOVATIONEN",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Ende der Startseite"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "totalBrandImages": 12,
+    "totalVideos": 0,
+    "totalModules": 5,
+    "layoutTypes": {
+      "Full-Width": 3,
+      "lg-4grid": 2
+    },
+    "keyDesignPatterns": [
+      "Bio-Shots-Marke mit Premium-Naturästhetik: Dunkelgrüne tropische Blätter als visuelles Leitmotiv",
+      "Farbschema: Weiß + Schwarz + Dunkelgrün + Gelb als Akzent – clean und natürlich",
+      "Bio-Siegel prominent auf jedem Produkt-Tile",
+      "Flat-Lay-Produktfotografie: Produkte auf natürlichen Zutaten (Ingwer, Obst, Gemüse)",
+      "Wissenschaftliche Positionierung: 'Pflanzlich gedacht. Wissenschaftlich gemacht.'",
+      "Neuprodukt-Launch (VITAL FLOW) als zentrales Modul mit detaillierter Produktbeschreibung",
+      "4 Award-Badges als Vertrauens-Element im Abschluss-Banner",
+      "Kompakter Store: Nur 5 Module + 12 Bilder",
+      "Keine Videos – rein bildbasierter Store",
+      "Englischer Claim im Hero ('Better Than Good') + deutsche Inhalte",
+      "Lifestyle-Fotografie zeigt Frauen beim Trinken von Shots – gesunder, bewusster Lebensstil"
+    ],
+    "moduleFlow": "Hero (Frau + Blätter + Better Than Good) → Brand-Mission FW (Logo + Claim + NEU:) → VITAL FLOW Produkt FW → 2x 4er-Grid (8 Kategorie-Tiles) → Award-Banner FW (Dunkelgrün + 4 Badges)"
+  }
+}

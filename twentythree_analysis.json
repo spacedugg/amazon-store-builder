@@ -1,0 +1,183 @@
+{
+  "brandName": "twenty:three",
+  "storeUrl": "https://www.amazon.de/stores/twentythree/page/0E8D9A31-200C-4EC5-BC94-CBBC023B28A4",
+  "analyzedAt": "2026-04-09",
+  "navigation": {
+    "pageCount": 5,
+    "pages": [
+      { "name": "Startseite", "level": 0 },
+      { "name": "Alle Produkte", "level": 1 },
+      { "name": "Bettwäsche", "level": 1 },
+      { "name": "Bettlaken", "level": 1 },
+      { "name": "Bettdecke & Kissen", "level": 1 }
+    ]
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "heroBanner": {
+        "description": "Dunkler Teal-/Petrol-Hintergrund. Links: Raster aus Produktfotos (Kissen, Bettlaken, Bettwäsche in Weiß, Grün, Navy, Beige). Rechts: 'twenty:three' in weißer gesperrter Typografie. Darunter: 'Spüre den Unterschied.' als Claim. Premium, ruhig, minimalistisch.",
+        "textOnImage": "twenty:three, Spüre den Unterschied.",
+        "estimatedDimensions": "3000x600"
+      },
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Full-Width Narrow",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Schmaler Info-/Trust-Banner direkt unter Hero",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Narrow Banner (970x124)",
+              "imageCategory": "benefit",
+              "description": "Schmaler Banner mit Trust-/Benefit-Informationen unter dem Hero.",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Kategorie-Tiles"
+        },
+        {
+          "position": 2,
+          "layoutType": "std-2equal (Square + Wide)",
+          "layoutId": "std-2equal",
+          "tileCount": 2,
+          "designRationale": "Erste Produktkategorie: Square-Tile + Wide-Tile nebeneinander",
+          "tiles": [
+            {
+              "position": "links",
+              "size": "Square (477x477)",
+              "imageCategory": "lifestyle",
+              "description": "Lifestyle-Bild einer Bettwäsche-Kategorie. Helle, cleane Schlafzimmer-Ästhetik mit Premium-Bettwäsche in gedeckten Farben. Minimalistisches Design.",
+              "textOnImage": "Kategoriename",
+              "ctaText": "",
+              "linksTo": "Bettwäsche"
+            },
+            {
+              "position": "rechts",
+              "size": "Wide (477x231)",
+              "imageCategory": "lifestyle",
+              "description": "Wide-Tile mit Bettwäsche-/Bettlaken-Kategorie. Helle Farben, cleane Produktpräsentation.",
+              "textOnImage": "Kategoriename",
+              "ctaText": "",
+              "linksTo": "Bettlaken"
+            }
+          ],
+          "relationToNextModule": "Zu weiterer Kategorie"
+        },
+        {
+          "position": 3,
+          "layoutType": "Wide Tile (einzeln)",
+          "layoutId": "std-2equal",
+          "tileCount": 1,
+          "designRationale": "Einzelnes Wide-Tile für dritte Produktkategorie",
+          "tiles": [
+            {
+              "position": "links",
+              "size": "Wide (477x231)",
+              "imageCategory": "lifestyle",
+              "description": "Wide-Tile für Bettdecken & Kissen Kategorie. Helle, minimalistische Produktfotografie.",
+              "textOnImage": "Kategoriename",
+              "ctaText": "",
+              "linksTo": "Bettdecke & Kissen"
+            }
+          ],
+          "relationToNextModule": "Zu Brand-Story-Banner"
+        },
+        {
+          "position": 4,
+          "layoutType": "Full-Width",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Brand-Story oder USP-Banner: Breiter Banner für Markenbotschaft",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Full Width (970x324)",
+              "imageCategory": "creative",
+              "description": "Full-Width-Banner mit Brand-Story oder USP-Kommunikation. Teal/Petrol-Farbschema passend zum Hero. Premium-Bettwäsche-Lifestyle.",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Produkt-Highlight-Tiles"
+        },
+        {
+          "position": 5,
+          "layoutType": "std-2equal (2x Square)",
+          "layoutId": "std-2equal",
+          "tileCount": 2,
+          "designRationale": "Zwei quadratische Tiles für Produkt-Highlights oder weitere Kategorien",
+          "tiles": [
+            {
+              "position": "links",
+              "size": "Square (477x477)",
+              "imageCategory": "lifestyle",
+              "description": "Quadratisches Lifestyle-Tile mit Premium-Bettwäsche in natürlichem Setting.",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "rechts",
+              "size": "Square (477x477)",
+              "imageCategory": "lifestyle",
+              "description": "Quadratisches Lifestyle-Tile mit weiterer Bettwäsche-Szene. Gedeckte, warme Farbtöne.",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Abschluss-Banner"
+        },
+        {
+          "position": 6,
+          "layoutType": "Full-Width",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Abschluss-Banner: Brand-Messaging oder Trust-Elemente",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Full Width (970x324)",
+              "imageCategory": "creative",
+              "description": "Abschluss-Banner mit Brand-Messaging. Teal/Petrol-Farbwelt konsistent mit restlichem Store.",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Ende der Startseite"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "totalBrandImages": 9,
+    "totalVideos": 0,
+    "totalModules": 7,
+    "layoutTypes": {
+      "Full-Width": 2,
+      "Full-Width Narrow": 1,
+      "std-2equal": 3,
+      "Wide Tile (einzeln)": 1
+    },
+    "keyDesignPatterns": [
+      "Premium-Bettwäsche-Marke mit minimalistischer, ruhiger Ästhetik",
+      "Teal/Petrol als dominante Markenfarbe – sophistisch und schlafbezogen",
+      "Produktraster im Hero: Fotos in Grid-Anordnung auf dunklem Hintergrund",
+      "'Spüre den Unterschied.' als sensorischer, erlebnisorientierter Claim",
+      "twenty:three in gesperrter weißer Typografie – modernes Branding",
+      "Sehr kompakter Store: Nur 9 Bilder, 5 Seiten, 0 Videos",
+      "Flache Navigation nach Bettwaren-Typ (Bettwäsche, Bettlaken, Bettdecke & Kissen)",
+      "Helle, cleane Lifestyle-Fotografie für Kategorie-Tiles",
+      "Zwei Full-Width-Banner als Story-/USP-Elemente",
+      "Konsistente Farbwelt: Teal + Weiß + gedeckte Naturfarben"
+    ],
+    "moduleFlow": "Hero (Teal + Produktraster + Claim) → Schmaler Trust-Banner → std-2equal (Square+Wide) → Wide Tile → FW Banner → 2x Square Tiles → FW Abschluss-Banner"
+  }
+}

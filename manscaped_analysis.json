@@ -1,0 +1,341 @@
+{
+  "brandName": "MANSCAPED",
+  "storeUrl": "https://www.amazon.de/stores/page/44908195-3880-47D6-9EC0-D2A1543EB718",
+  "analyzedAt": "2026-04-09",
+  "methodology": "V3",
+  "navigation": {
+    "pageCount": 6,
+    "navigationStructure": "Flat (single level)",
+    "pages": [
+      {
+        "name": "Startseite",
+        "level": 0,
+        "pageId": "44908195-3880-47D6-9EC0-D2A1543EB718"
+      },
+      {
+        "name": "Bestseller",
+        "level": 0,
+        "pageId": "A6D978D0-0FA4-4D40-90A6-070E950B7AF7"
+      },
+      {
+        "name": "Intimpflege",
+        "level": 0,
+        "pageId": "5E8779F0-69E8-4B1B-919E-8D608323F41C"
+      },
+      {
+        "name": "Bart & Gesicht",
+        "level": 0,
+        "pageId": "B9156B89-6D11-4DB0-8531-9C8616A9AAAA"
+      },
+      {
+        "name": "Kopf & Körper",
+        "level": 0,
+        "pageId": "8378B173-54DF-410C-AF93-45DC9BC292ED"
+      },
+      {
+        "name": "Alle Produkte",
+        "level": 0,
+        "pageId": "2A73DBBB-F712-422E-86F2-67468B9CAC49"
+      }
+    ]
+  },
+  "contentSummary": {
+    "totalEditorialImages": 90,
+    "uniqueVideos": 0,
+    "editorialToVideoRatio": "No videos - image-only strategy",
+    "contentDensity": "Very high image concentration; Startseite is exceptionally content-rich"
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "pageId": "44908195-3880-47D6-9EC0-D2A1543EB718",
+      "heroBanner": {
+        "description": "Large hero banner establishing MANSCAPED brand identity with masculine grooming positioning on dark background",
+        "estimatedDimensions": "3000x1500",
+        "brandIdentityNote": "Large hero-scale banner conveys premium positioning and masculine brand aesthetic"
+      },
+      "editorialImages": 45,
+      "videos": 0,
+      "designNote": "Exceptionally content-rich homepage serving as primary visual storytelling hub. Uses repeating modular pattern: full-width banner → category tile grid (8x 218x218) → visual divider (872x109), repeated 3-4 times. Includes two 3000x1500 large hero-scale images embedded in editorial flow.",
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Full-Width Hero",
+          "layoutId": "hero-full",
+          "tileCount": 1,
+          "designRationale": "Large hero banner establishing brand identity - premium masculine gateway",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "3000x1500",
+              "imageCategory": "hero",
+              "description": "Primary hero banner with dark background and MANSCAPED brand positioning"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "layoutType": "lg-2grid Wide",
+          "layoutId": "lg-2grid-wide",
+          "tileCount": 2,
+          "designRationale": "Two large category showcase tiles for primary product zones",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "872x436",
+              "imageCategory": "category-banner",
+              "description": "Category showcase for Intimpflege (primary product line)"
+            },
+            {
+              "position": "2",
+              "size": "872x436",
+              "imageCategory": "category-banner",
+              "description": "Category showcase for Bart & Gesicht (face grooming)"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "layoutType": "lg-4grid Narrow",
+          "layoutId": "lg-4grid-narrow",
+          "tileCount": 8,
+          "designRationale": "Eight narrow category tiles providing quick visual navigation",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 1"
+            },
+            {
+              "position": "2",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 2"
+            },
+            {
+              "position": "3",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 3"
+            },
+            {
+              "position": "4",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 4"
+            },
+            {
+              "position": "5",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 5"
+            },
+            {
+              "position": "6",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 6"
+            },
+            {
+              "position": "7",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 7"
+            },
+            {
+              "position": "8",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 8"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "layoutType": "Full-Width Narrow Divider",
+          "layoutId": "divider-narrow",
+          "tileCount": 1,
+          "designRationale": "Visual separator between content module blocks",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "872x109",
+              "imageCategory": "divider",
+              "description": "Narrow horizontal divider"
+            }
+          ]
+        },
+        {
+          "position": 5,
+          "layoutType": "Full-Width Hero Alt",
+          "layoutId": "hero-full-alt",
+          "tileCount": 1,
+          "designRationale": "Secondary hero-scale image embedded in editorial flow",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "3000x1500",
+              "imageCategory": "hero",
+              "description": "Secondary large hero-scale editorial image"
+            }
+          ]
+        }
+      ],
+      "imageSizes": "872x436, 436x218, 436x218, 436x218, 436x218, 872x109, 872x436, 3000x1500, 218x218, 218x218, 218x218, 218x218, 218x218, 218x218, 218x218, 218x218, 872x109, 872x436, 872x436, 872x436, 436x436, 436x436, 218x218, 218x218, 218x218, 218x218, 218x218, 218x218, 218x218, 218x218, 872x109, 872x436, 872x436, 436x436, 436x436, 218x218, 218x218, 218x218, 218x218, 218x218, 218x218, 218x218, 218x218, 872x109, 3000x1500"
+    },
+    {
+      "pageName": "Bestseller",
+      "pageId": "A6D978D0-0FA4-4D40-90A6-070E950B7AF7",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Bestseller category banner, minimal editorial content",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Minimal editorial content - primarily product grid focused on best-selling items. Hero banner + limited supporting content."
+    },
+    {
+      "pageName": "Intimpflege",
+      "pageId": "5E8779F0-69E8-4B1B-919E-8D608323F41C",
+      "editorialImages": 18,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Intimpflege (intimate grooming) category hero with product-focused positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Core product category with substantial editorial content (18 images). Most content-rich category page reflecting importance of intimate grooming category to MANSCAPED brand positioning. Multiple product showcase banners and category highlighting."
+    },
+    {
+      "pageName": "Bart & Gesicht",
+      "pageId": "B9156B89-6D11-4DB0-8531-9C8616A9AAAA",
+      "editorialImages": 12,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Bart & Gesicht (beard & face) category hero with facial grooming focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Secondary category with moderate editorial content (12 images). Showcases beard care and facial grooming products with supporting product highlight banners."
+    },
+    {
+      "pageName": "Kopf & Körper",
+      "pageId": "8378B173-54DF-410C-AF93-45DC9BC292ED",
+      "editorialImages": 8,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Kopf & Körper (head & body) category hero with full-body grooming positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Tertiary category with moderate editorial content (8 images). Covers head and body grooming products beyond facial focus."
+    },
+    {
+      "pageName": "Alle Produkte",
+      "pageId": "2A73DBBB-F712-422E-86F2-67468B9CAC49",
+      "editorialImages": 4,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Complete product catalog with minimal editorial content",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Functional catalog page with minimal editorial (4 images). Serves as comprehensive product directory with focus on product grid."
+    }
+  ],
+  "designPatterns": {
+    "colorScheme": {
+      "background": "Dark/Black (masculine aesthetic)",
+      "textColor": "White/Light",
+      "accentColor": "Minimal",
+      "rationale": "High contrast masculine aesthetic conveys premium positioning and modern grooming brand identity"
+    },
+    "typography": {
+      "primary": "Bold sans-serif, modern and clean",
+      "characteristics": "Contemporary, confident, direct. No decorative elements. Masculine and professional tone."
+    },
+    "photography": {
+      "style": "Product-focused professional photography",
+      "lighting": "Dark, moody, masculine lighting aesthetic",
+      "subjects": "Grooming products, masculine lifestyle imagery, product detail shots"
+    },
+    "layoutPatterns": {
+      "homepage": "Large hero (3000x1500) + wide category tiles (2x872x436) + narrow category grid (8x218x218) + narrow divider (872x109), repeated module pattern 3-4 times",
+      "categoryPages": "Consistent hero (1872x400) + multiple supporting banners + product grid",
+      "contentStrategy": "Image-heavy visual-first approach with zero video content - purely image-driven ecosystem"
+    },
+    "hierarchyStructure": {
+      "navigationDepth": "Flat - single level navigation with 6 pages (Startseite, Bestseller, Intimpflege, Bart & Gesicht, Kopf & Körper, Alle Produkte)",
+      "pageCount": "6 pages total (excluding shared Amazon Basics page)",
+      "distribution": "Heavily concentrated on Startseite (45 images) with secondary distribution across category pages (Intimpflege: 18, Bart & Gesicht: 12, Kopf & Körper: 8, Bestseller: 3, Alle Produkte: 4)",
+      "strategy": "Homepage dominates visual storytelling; deep single-page content experience vs. distributed multi-page approach"
+    }
+  },
+  "editorialStrategy": {
+    "totalEditorialImages": 90,
+    "totalVideos": 0,
+    "videoStrategy": "No video content - entirely image-driven visual strategy",
+    "distribution": [
+      {
+        "page": "Startseite",
+        "editorialImages": 45,
+        "videos": 0,
+        "percentageOfTotal": "50%",
+        "rationale": "Exceptionally content-rich homepage serving as primary visual narrative. Repeating modular pattern with full-width banners, category grids, and visual dividers creates immersive visual experience. Single page contains half of entire store's editorial content."
+      },
+      {
+        "page": "Intimpflege",
+        "editorialImages": 18,
+        "videos": 0,
+        "percentageOfTotal": "20%",
+        "rationale": "Core product category - most content-rich category page reflecting strategic importance of intimate grooming to MANSCAPED value proposition"
+      },
+      {
+        "page": "Bart & Gesicht",
+        "editorialImages": 12,
+        "videos": 0,
+        "percentageOfTotal": "13.3%",
+        "rationale": "Secondary category with substantial editorial support for facial grooming ecosystem"
+      },
+      {
+        "page": "Kopf & Körper",
+        "editorialImages": 8,
+        "videos": 0,
+        "percentageOfTotal": "8.9%",
+        "rationale": "Tertiary category with moderate content depth for full-body grooming products"
+      },
+      {
+        "page": "Bestseller",
+        "editorialImages": 3,
+        "videos": 0,
+        "percentageOfTotal": "3.3%",
+        "rationale": "Minimal editorial - focus on product performance and customer choice"
+      },
+      {
+        "page": "Alle Produkte",
+        "editorialImages": 4,
+        "videos": 0,
+        "percentageOfTotal": "4.4%",
+        "rationale": "Functional catalog page with minimal editorial - serves discovery and browsing"
+      }
+    ]
+  },
+  "brandIdentity": {
+    "corePillars": [
+      "Premium Men's Grooming",
+      "Masculine Lifestyle Brand",
+      "Product-Centric Positioning",
+      "D2C Heritage"
+    ],
+    "businessModel": "D2C men's grooming brand (US-based) with Amazon storefront expansion",
+    "visualLanguage": "Dark/black backgrounds with white text and product imagery create bold masculine aesthetic. Zero video content reflects pure image-driven visual strategy - relies entirely on product photography and lifestyle imagery to communicate value. Repeating modular patterns on homepage create rhythmic, scannable visual experience. Multiple hero-scale images (3000x1500) emphasize premium product presentation.",
+    "targetAudience": "Masculine-identifying consumers seeking premium grooming products, particularly intimate grooming solutions and facial care",
+    "contentPhilosophy": "Image-only strategy with zero videos - entirely visual communication focused on product presentation. Exceptionally concentrated content on homepage (50% of total editorial images) creates high-impact entry experience. Category pages receive proportional editorial support reflecting category importance to overall brand strategy.",
+    "navigationPhilosophy": "Flat, straightforward navigation with 6 pages organized by body zone/product category. No multi-level hierarchy. Emphasis on direct access to core product categories (Intimpflege, Bart & Gesicht, Kopf & Körper) vs. ESN's deep sub-brand structure. Reflects D2C brand's simplified, direct positioning vs. multi-brand distributor model."
+  },
+  "keyFindings": {
+    "contentConcentration": "MANSCAPED's Startseite is one of the most content-dense homepage designs in the analysis with 45 editorial images on a single page - double the typical category page. This reflects strategic emphasis on immersive visual homepage experience as primary brand narrative.",
+    "imageOnlyStrategy": "Complete absence of video content (0 videos across all 6 pages) indicates deliberately image-focused visual strategy. Every product communication relies on still photography rather than motion content.",
+    "modularity": "Repeating module pattern on homepage (banner → tile grid → divider → repeat) creates predictable, scannable rhythm optimized for visual browsing vs. narrative storytelling.",
+    "categoryHierarchy": "Intimpflege (18 images) as largest category page reflects strategic positioning as core product category, comprising ~20% of store's editorial content investment. This emphasizes intimate grooming as primary value proposition.",
+    "designMinimalism": "Flat navigation structure (6 pages, single level) vs. ESN's deep 21-page hierarchy reflects different brand positioning: D2C direct brand vs. multi-brand distributor. Simpler structure supports simplified customer journey.",
+    "heroScale": "Two 3000x1500 large hero-scale images embedded in homepage editorial flow provide premium visual anchoring and break up grid-based tile patterns with larger format storytelling moments."
+  }
+}

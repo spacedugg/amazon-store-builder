@@ -1,0 +1,873 @@
+{
+  "brandName": "TRIXIE Heimtierbedarf GmbH & Co. KG",
+  "storeUrl": "https://www.amazon.de/stores/page/30552E59-AC22-47B1-BBBB-AEA9225BD614",
+  "analyzedAt": "2026-04-10",
+  "methodology": "V3",
+  "navigation": {
+    "pageCount": 49,
+    "pages": [
+      {
+        "name": "Startseite",
+        "level": 0,
+        "pageId": "30552E59-AC22-47B1-BBBB-AEA9225BD614"
+      },
+      {
+        "name": "Neuheiten",
+        "level": 1,
+        "pageId": "41FA7DEE"
+      },
+      {
+        "name": "TRIXIE SERIEN",
+        "level": 1,
+        "pageId": "9A368574"
+      },
+      {
+        "name": "BE NORDIC",
+        "level": 2,
+        "parentCategory": "TRIXIE SERIEN",
+        "pageId": "162DCC92"
+      },
+      {
+        "name": "BE ECO",
+        "level": 2,
+        "parentCategory": "TRIXIE SERIEN",
+        "pageId": null
+      },
+      {
+        "name": "BOHO",
+        "level": 2,
+        "parentCategory": "TRIXIE SERIEN",
+        "pageId": null
+      },
+      {
+        "name": "DOG ACTIVITY",
+        "level": 2,
+        "parentCategory": "TRIXIE SERIEN",
+        "pageId": null
+      },
+      {
+        "name": "CAT ACTIVITY",
+        "level": 2,
+        "parentCategory": "TRIXIE SERIEN",
+        "pageId": null
+      },
+      {
+        "name": "Hund",
+        "level": 1,
+        "pageId": null
+      },
+      {
+        "name": "Autozubehör",
+        "level": 2,
+        "parentCategory": "Hund",
+        "pageId": "744B60E7"
+      },
+      {
+        "name": "Halsbänder",
+        "level": 2,
+        "parentCategory": "Hund",
+        "pageId": null
+      },
+      {
+        "name": "Leuchthalsbänder/Warnwesten",
+        "level": 2,
+        "parentCategory": "Hund",
+        "pageId": "DE37903F"
+      },
+      {
+        "name": "Geschirre",
+        "level": 2,
+        "parentCategory": "Hund",
+        "pageId": null
+      },
+      {
+        "name": "Hundeleinen",
+        "level": 2,
+        "parentCategory": "Hund",
+        "pageId": null
+      },
+      {
+        "name": "Snacks & Ernährung",
+        "level": 2,
+        "parentCategory": "Hund",
+        "pageId": null
+      },
+      {
+        "name": "Liegeplätze",
+        "level": 2,
+        "parentCategory": "Hund",
+        "pageId": null
+      },
+      {
+        "name": "Spielzeug",
+        "level": 2,
+        "parentCategory": "Hund",
+        "pageId": null
+      },
+      {
+        "name": "Zuhause",
+        "level": 2,
+        "parentCategory": "Hund",
+        "pageId": null
+      },
+      {
+        "name": "Unterwegs",
+        "level": 2,
+        "parentCategory": "Hund",
+        "pageId": null
+      },
+      {
+        "name": "Ausbildung & Sport",
+        "level": 2,
+        "parentCategory": "Hund",
+        "pageId": null
+      },
+      {
+        "name": "Gesundheit/Pflege/Hygiene",
+        "level": 2,
+        "parentCategory": "Hund",
+        "pageId": null
+      },
+      {
+        "name": "Katze",
+        "level": 1,
+        "pageId": null
+      },
+      {
+        "name": "Katzentoiletten",
+        "level": 2,
+        "parentCategory": "Katze",
+        "pageId": "1EF28941"
+      },
+      {
+        "name": "Liegeplätze",
+        "level": 2,
+        "parentCategory": "Katze",
+        "pageId": null
+      },
+      {
+        "name": "Zuhause",
+        "level": 2,
+        "parentCategory": "Katze",
+        "pageId": null
+      },
+      {
+        "name": "Kratzbäume",
+        "level": 2,
+        "parentCategory": "Katze",
+        "pageId": null
+      },
+      {
+        "name": "Kratz- & Kletterartikel",
+        "level": 2,
+        "parentCategory": "Katze",
+        "pageId": null
+      },
+      {
+        "name": "Katzenspielzeug",
+        "level": 2,
+        "parentCategory": "Katze",
+        "pageId": null
+      },
+      {
+        "name": "Snacks & Ernährung",
+        "level": 2,
+        "parentCategory": "Katze",
+        "pageId": null
+      },
+      {
+        "name": "Unterwegs",
+        "level": 2,
+        "parentCategory": "Katze",
+        "pageId": null
+      },
+      {
+        "name": "Gesundheit/Pflege/Hygiene",
+        "level": 2,
+        "parentCategory": "Katze",
+        "pageId": null
+      },
+      {
+        "name": "Kleintier",
+        "level": 1,
+        "pageId": null
+      },
+      {
+        "name": "Ställe & Gehege",
+        "level": 2,
+        "parentCategory": "Kleintier",
+        "pageId": null
+      },
+      {
+        "name": "Kleintierspielzeug",
+        "level": 2,
+        "parentCategory": "Kleintier",
+        "pageId": null
+      },
+      {
+        "name": "Einrichtung",
+        "level": 2,
+        "parentCategory": "Kleintier",
+        "pageId": null
+      },
+      {
+        "name": "Pflege & Hygiene",
+        "level": 2,
+        "parentCategory": "Kleintier",
+        "pageId": null
+      },
+      {
+        "name": "Snacks & Ernährung",
+        "level": 2,
+        "parentCategory": "Kleintier",
+        "pageId": null
+      },
+      {
+        "name": "Unterwegs",
+        "level": 2,
+        "parentCategory": "Kleintier",
+        "pageId": null
+      },
+      {
+        "name": "Vogel",
+        "level": 1,
+        "pageId": null
+      },
+      {
+        "name": "Einrichtung",
+        "level": 2,
+        "parentCategory": "Vogel",
+        "pageId": null
+      },
+      {
+        "name": "Spielzeug",
+        "level": 2,
+        "parentCategory": "Vogel",
+        "pageId": null
+      },
+      {
+        "name": "Ernährung",
+        "level": 2,
+        "parentCategory": "Vogel",
+        "pageId": null
+      },
+      {
+        "name": "Terraristik",
+        "level": 1,
+        "pageId": null
+      },
+      {
+        "name": "Terrarienzubehör",
+        "level": 2,
+        "parentCategory": "Terraristik",
+        "pageId": null
+      },
+      {
+        "name": "Futter & Mineralstoffe",
+        "level": 2,
+        "parentCategory": "Terraristik",
+        "pageId": null
+      },
+      {
+        "name": "Terrarien-Einrichtung",
+        "level": 2,
+        "parentCategory": "Terraristik",
+        "pageId": null
+      },
+      {
+        "name": "Tiere im Garten",
+        "level": 1,
+        "pageId": null
+      },
+      {
+        "name": "Vögel",
+        "level": 2,
+        "parentCategory": "Tiere im Garten",
+        "pageId": null
+      },
+      {
+        "name": "Wildtiere & Insekten",
+        "level": 2,
+        "parentCategory": "Tiere im Garten",
+        "pageId": null
+      }
+    ]
+  },
+  "contentSummary": {
+    "totalEditorialImages": 31,
+    "uniqueVideos": 4,
+    "editorialToVideoRatio": 7.75
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "pageId": "30552E59-AC22-47B1-BBBB-AEA9225BD614",
+      "heroBanner": {
+        "description": "TRIXIE brand hero with heritage and comprehensive pet care positioning. Warm, approachable aesthetic emphasizing long-standing German pet supply expertise.",
+        "textOnImage": "TRIXIE Heimtierbedarf",
+        "estimatedDimensions": "1872x600",
+        "brandIdentityNote": "Traditional pet care brand identity. Primary visual anchor for entire store with hero + extensive navigation grid."
+      },
+      "editorialImages": 24,
+      "videos": 1,
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Full-Width Hero",
+          "layoutId": "hero-full",
+          "tileCount": 1,
+          "designRationale": "Large hero banner establishing brand identity and store entry point",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "1872x600",
+              "imageCategory": "hero",
+              "description": "TRIXIE brand hero with German heritage and comprehensive pet care positioning"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "layoutType": "lg-2grid Wide",
+          "layoutId": "lg-2grid-wide",
+          "tileCount": 2,
+          "designRationale": "Two large category showcase tiles for primary animal categories",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "436x436",
+              "imageCategory": "category-banner",
+              "description": "Primary animal category tile (e.g., Hund - dogs)"
+            },
+            {
+              "position": "2",
+              "size": "436x436",
+              "imageCategory": "category-banner",
+              "description": "Secondary animal category tile (e.g., Katze - cats)"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "layoutType": "lg-4grid Mixed",
+          "layoutId": "lg-4grid-mixed",
+          "tileCount": 10,
+          "designRationale": "Multiple narrow category tiles providing navigation for all animal types",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 1 (e.g., Kleintier)"
+            },
+            {
+              "position": "2",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 2 (e.g., Vogel)"
+            },
+            {
+              "position": "3",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 3 (e.g., Terraristik)"
+            },
+            {
+              "position": "4",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 4 (e.g., Tiere im Garten)"
+            },
+            {
+              "position": "5",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 5 (e.g., TRIXIE SERIEN)"
+            },
+            {
+              "position": "6",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 6 (e.g., Neuheiten)"
+            },
+            {
+              "position": "7",
+              "size": "380x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 7 - wider format"
+            },
+            {
+              "position": "8",
+              "size": "380x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 8 - wider format"
+            },
+            {
+              "position": "9",
+              "size": "436x250",
+              "imageCategory": "category-banner",
+              "description": "Extended category banner"
+            },
+            {
+              "position": "10",
+              "size": "429x246",
+              "imageCategory": "category-banner",
+              "description": "Extended category banner"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "Neuheiten",
+      "pageId": "41FA7DEE",
+      "editorialImages": 1,
+      "videos": 0,
+      "heroBanner": {
+        "description": "New arrivals category banner with latest product releases",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Minimal editorial - single banner introducing new products, followed by product grid."
+    },
+    {
+      "pageName": "TRIXIE SERIEN",
+      "pageId": "9A368574",
+      "editorialImages": 5,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Series/sub-brands category hero showcasing TRIXIE product lines (BE NORDIC, BE ECO, BOHO, DOG ACTIVITY, CAT ACTIVITY)",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Moderate editorial content (5 images) introducing and showcasing TRIXIE's branded product series and sub-brands."
+    },
+    {
+      "pageName": "BE NORDIC",
+      "pageId": "162DCC92",
+      "editorialImages": 0,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Sub-brand BE NORDIC hero with Nordic design aesthetic",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Product-grid-only page with single video - no editorial images. Minimal content strategy for sub-brand showcase."
+    },
+    {
+      "pageName": "Autozubehör",
+      "pageId": "744B60E7",
+      "editorialImages": 0,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Car accessories for dogs category with product focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Product-grid-only page with single video. Functional category without editorial content."
+    },
+    {
+      "pageName": "Leuchthalsbänder/Warnwesten",
+      "pageId": "DE37903F",
+      "editorialImages": 0,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Reflective collars and warning vests for dog safety",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Product-grid-only page with single video. Safety-focused subcategory with minimal editorial."
+    },
+    {
+      "pageName": "Katzentoiletten",
+      "pageId": "1EF28941",
+      "editorialImages": 1,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Cat litter boxes and toilets category banner",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Only category page (besides homepage and TRIXIE SERIEN) with editorial image. Single banner + product grid. Exception to product-grid-only pattern."
+    },
+    {
+      "pageName": "BE ECO",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - sub-brand with no editorial content or video."
+    },
+    {
+      "pageName": "BOHO",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - sub-brand with no editorial content or video."
+    },
+    {
+      "pageName": "DOG ACTIVITY",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - sub-brand with no editorial content or video."
+    },
+    {
+      "pageName": "CAT ACTIVITY",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - sub-brand with no editorial content or video."
+    },
+    {
+      "pageName": "Hund",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - primary animal category with no editorial content."
+    },
+    {
+      "pageName": "Halsbänder",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - dog collars with no editorial content."
+    },
+    {
+      "pageName": "Geschirre",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - dog harnesses with no editorial content."
+    },
+    {
+      "pageName": "Hundeleinen",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - dog leashes with no editorial content."
+    },
+    {
+      "pageName": "Snacks & Ernährung (Hund)",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - dog food and treats with no editorial content."
+    },
+    {
+      "pageName": "Liegeplätze (Hund)",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - dog beds with no editorial content."
+    },
+    {
+      "pageName": "Spielzeug (Hund)",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - dog toys with no editorial content."
+    },
+    {
+      "pageName": "Zuhause (Hund)",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - home accessories for dogs with no editorial content."
+    },
+    {
+      "pageName": "Unterwegs (Hund)",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - portable dog accessories with no editorial content."
+    },
+    {
+      "pageName": "Ausbildung & Sport",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - training and sports equipment with no editorial content."
+    },
+    {
+      "pageName": "Gesundheit/Pflege/Hygiene (Hund)",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - dog health and grooming with no editorial content."
+    },
+    {
+      "pageName": "Katze",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - primary cat category with no editorial content."
+    },
+    {
+      "pageName": "Liegeplätze (Katze)",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - cat beds with no editorial content."
+    },
+    {
+      "pageName": "Zuhause (Katze)",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - home accessories for cats with no editorial content."
+    },
+    {
+      "pageName": "Kratzbäume",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - cat scratching trees with no editorial content."
+    },
+    {
+      "pageName": "Kratz- & Kletterartikel",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - cat scratching and climbing items with no editorial content."
+    },
+    {
+      "pageName": "Katzenspielzeug",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - cat toys with no editorial content."
+    },
+    {
+      "pageName": "Snacks & Ernährung (Katze)",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - cat food and treats with no editorial content."
+    },
+    {
+      "pageName": "Unterwegs (Katze)",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - portable cat accessories with no editorial content."
+    },
+    {
+      "pageName": "Gesundheit/Pflege/Hygiene (Katze)",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - cat health and grooming with no editorial content."
+    },
+    {
+      "pageName": "Kleintier",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - small animal category with no editorial content."
+    },
+    {
+      "pageName": "Ställe & Gehege",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - small animal cages and pens with no editorial content."
+    },
+    {
+      "pageName": "Kleintierspielzeug",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - small animal toys with no editorial content."
+    },
+    {
+      "pageName": "Einrichtung (Kleintier)",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - small animal housing accessories with no editorial content."
+    },
+    {
+      "pageName": "Pflege & Hygiene (Kleintier)",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - small animal care and hygiene products with no editorial content."
+    },
+    {
+      "pageName": "Snacks & Ernährung (Kleintier)",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - small animal food and treats with no editorial content."
+    },
+    {
+      "pageName": "Unterwegs (Kleintier)",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - portable small animal accessories with no editorial content."
+    },
+    {
+      "pageName": "Vogel",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - bird category with no editorial content."
+    },
+    {
+      "pageName": "Einrichtung (Vogel)",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - bird cages and housing with no editorial content."
+    },
+    {
+      "pageName": "Spielzeug (Vogel)",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - bird toys with no editorial content."
+    },
+    {
+      "pageName": "Ernährung (Vogel)",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - bird food and nutrition with no editorial content."
+    },
+    {
+      "pageName": "Terraristik",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - reptile category with no editorial content."
+    },
+    {
+      "pageName": "Terrarienzubehör",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - terrarium accessories with no editorial content."
+    },
+    {
+      "pageName": "Futter & Mineralstoffe",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - reptile food and minerals with no editorial content."
+    },
+    {
+      "pageName": "Terrarien-Einrichtung",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - terrarium furnishings and decoration with no editorial content."
+    },
+    {
+      "pageName": "Tiere im Garten",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - garden wildlife category with no editorial content."
+    },
+    {
+      "pageName": "Vögel (Garten)",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - garden birds and bird supplies with no editorial content."
+    },
+    {
+      "pageName": "Wildtiere & Insekten",
+      "pageId": null,
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Product-grid-only page - wildlife and insect products with no editorial content."
+    }
+  ],
+  "designPatterns": {
+    "colorScheme": {
+      "background": "Light/Neutral",
+      "textColor": "Dark",
+      "accentColor": "Minimal",
+      "rationale": "Approachable, accessible design emphasizing product clarity. Traditional retail aesthetic suited to heritage German brand."
+    },
+    "typography": {
+      "primary": "Standard sans-serif, sentence case for category names",
+      "characteristics": "Friendly, approachable, traditional. Emphasis on clear product categorization and functional navigation."
+    },
+    "photography": {
+      "style": "Product-focused, minimal lifestyle",
+      "lighting": "Clear, neutral lighting emphasizing product visibility",
+      "subjects": "Pets, product categories, animal types - practical, instructional focus"
+    },
+    "layoutPatterns": {
+      "homepage": "Large hero (1872x600) + two wide category tiles (2x436x436) + multiple narrow category grid (218-436px)",
+      "categoryPages": "Minimal to no hero - primarily product grids with rare supporting banners",
+      "seriesPages": "Sparse editorial content (0-5 images) with product grid focus",
+      "contentRichPages": "Only 7 of 49 pages have any editorial content"
+    },
+    "hierarchyStructure": {
+      "navigationDepth": "3 levels - animal type (Hund, Katze, Kleintier, etc.) > sub-category (Halsbänder, Katzentoiletten, etc.) > product grid",
+      "pageCount": "49 pages total (largest store analyzed)",
+      "distribution": "Highly concentrated - 77% of all editorial images (24 of 31) on Startseite alone",
+      "strategy": "Deep catalog prioritized over brand storytelling. 42 of 49 pages (86%) are pure product grids with zero editorial content."
+    }
+  },
+  "editorialStrategy": {
+    "totalEditorialImages": 31,
+    "totalVideos": 4,
+    "distribution": [
+      {
+        "page": "Startseite",
+        "editorialImages": 24,
+        "videos": 1,
+        "rationale": "Homepage dominates content strategy - hero + extensive category tile grid provides store navigation. 77% of all editorial images concentrated on single page."
+      },
+      {
+        "page": "TRIXIE SERIEN",
+        "editorialImages": 5,
+        "videos": 0,
+        "rationale": "Series and sub-brands showcase - dedicated editorial supporting TRIXIE's branded product lines (BE NORDIC, BE ECO, BOHO, DOG ACTIVITY, CAT ACTIVITY)"
+      },
+      {
+        "page": "Neuheiten",
+        "editorialImages": 1,
+        "videos": 0,
+        "rationale": "New arrivals announcement with minimal banner support"
+      },
+      {
+        "page": "Katzentoiletten",
+        "editorialImages": 1,
+        "videos": 0,
+        "rationale": "Only category page with editorial image - exception to product-grid-only pattern"
+      },
+      {
+        "page": "BE NORDIC, Autozubehör, Leuchthalsbänder",
+        "editorialImages": 0,
+        "videos": "1 each (3 total)",
+        "rationale": "Light video investment across three pages - minimal video strategy overall (only 4 videos across 49-page store)"
+      },
+      {
+        "page": "42 remaining pages",
+        "editorialImages": 0,
+        "videos": 0,
+        "rationale": "Pure product grids - zero editorial content. Catalog-focused approach maximizes product visibility over brand storytelling."
+      }
+    ]
+  },
+  "brandIdentity": {
+    "corePillars": [
+      "German Traditional Pet Care Heritage",
+      "Comprehensive Product Range (all animal types)",
+      "Practical, Family-Oriented Pet Supplies"
+    ],
+    "visualLanguage": "Functional, approachable design emphasizing product clarity and accessibility. Traditional retail aesthetic suited to family-oriented, comprehensive pet supply store. Strong categorization by animal type (Hund, Katze, Kleintier, Vogel, Terraristik, Tiere im Garten) provides logical browsing structure. Branded series (BE NORDIC, BE ECO, BOHO, DOG ACTIVITY, CAT ACTIVITY) receive dedicated pages but minimal editorial differentiation beyond navigation.",
+    "targetAudience": "Pet owners seeking comprehensive, practical pet care solutions from trusted German brand. Families with dogs, cats, small animals, birds, reptiles, or garden wildlife interests.",
+    "navigationPhilosophy": "Maximizes catalog depth and product discoverability through broad 3-level hierarchy. Rather than lifestyle or benefit-driven organization, TRIXIE prioritizes animal-type segmentation (49 dedicated pages, largest analyzed). Series sub-brands and specialty categories receive dedicated pages but minimal unique editorial content. Store reflects traditional pet supply retailer model: emphasis on breadth of selection, minimal narrative, product-focused navigation supporting deep catalog exploration."
+  },
+  "keyObservations": {
+    "editorialContentDensity": "Very low - only 7 of 49 pages (14%) contain editorial content. Most editorial concentrated on homepage (24 of 31 images, 77%). Contrast to ESN's more distributed approach.",
+    "videoStrategy": "Minimal investment - only 4 videos across entire 49-page store. Confined to selected category pages (Startseite, BE NORDIC, Autozubehör, Leuchthalsbänder) with no clear strategic pattern.",
+    "pageCount": "Largest store analyzed (49 pages vs ESN's 21). Breadth of catalog prioritized over depth of brand narrative.",
+    "catalogOrganization": "Pure animal-type hierarchy (Hund > Autozubehör/Halsbänder/etc. > product grid). No lifestyle, benefit, or problem-solving organization. Reflects traditional German retailer model.",
+    "brandSerialization": "Series and sub-brands (BE NORDIC, BE ECO, BOHO, DOG ACTIVITY, CAT ACTIVITY) occupy 5 dedicated pages but receive minimal editorial differentiation. Mentioned on Startseite but category pages are product-grid-only.",
+    "homepageConcentration": "Startseite carries exceptional editorial weight - 24 images + 1 video on single page versus only 7 editorial images across remaining 48 pages. Extreme content hierarchy.",
+    "productFocus": "Store emphasizes catalog breadth over brand narrative. 42 of 49 pages (86%) are pure product grids designed for maximum product visibility and browsing by animal type.",
+    "duplicatePage": "Alle Angebote shares page ID with Startseite (30552E59) - navigation redundancy excluded from page count per instruction."
+  }
+}

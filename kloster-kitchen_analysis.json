@@ -1,0 +1,388 @@
+{
+  "brandName": "Kloster Kitchen",
+  "storeUrl": "https://www.amazon.de/stores/page/34D4A812-9A68-4602-A6A0-30565D399620",
+  "analyzedAt": "2026-04-09",
+  "methodology": "V3",
+  "navigation": {
+    "pageCount": 10,
+    "structure": "Flat (single level)",
+    "pages": [
+      {
+        "name": "Startseite",
+        "level": 0,
+        "pageId": "34D4A812-9A68-4602-A6A0-30565D399620"
+      },
+      {
+        "name": "Ingwer Shots",
+        "level": 0,
+        "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2"
+      },
+      {
+        "name": "Mikronährstoffe",
+        "level": 0,
+        "pageId": "E337104E-63D3-41B2-8560-D92F482B2790"
+      },
+      {
+        "name": "Saftkuren",
+        "level": 0,
+        "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606"
+      },
+      {
+        "name": "SMOOTHIES",
+        "level": 0,
+        "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E"
+      },
+      {
+        "name": "Shot Kur",
+        "level": 0,
+        "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043"
+      },
+      {
+        "name": "Probiersets / Geschenkidee",
+        "level": 0,
+        "pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A"
+      },
+      {
+        "name": "Zubehör",
+        "level": 0,
+        "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A"
+      },
+      {
+        "name": "Spar-Abo",
+        "level": 0,
+        "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E"
+      },
+      {
+        "name": "Über Uns",
+        "level": 0,
+        "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF"
+      }
+    ]
+  },
+  "contentSummary": {
+    "totalEditorialImages": 64,
+    "uniqueVideos": 6,
+    "editorialToVideoRatio": 10.67
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "pageId": "34D4A812-9A68-4602-A6A0-30565D399620",
+      "editorialImages": 11,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Kloster Kitchen health/wellness brand hero banner with ginger-focused imagery",
+        "estimatedDimensions": "872x545"
+      },
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Full-Width Hero",
+          "layoutId": "hero-full",
+          "tileCount": 1,
+          "designRationale": "Large hero banner establishing brand identity and wellness positioning",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "872x545",
+              "imageCategory": "hero",
+              "description": "Health/wellness hero banner with ginger-focused product imagery"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "layoutType": "Full-Width Narrow",
+          "layoutId": "divider-narrow",
+          "tileCount": 1,
+          "designRationale": "Visual divider/separator banner",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "872x546",
+              "imageCategory": "divider",
+              "description": "Narrow band providing visual separation between hero and category tiles"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "layoutType": "lg-4grid Narrow",
+          "layoutId": "lg-4grid-narrow",
+          "tileCount": 8,
+          "designRationale": "Eight small category tiles providing quick navigation to product ranges",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 1 (e.g., Ingwer Shots)"
+            },
+            {
+              "position": "2",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 2 (e.g., Mikronährstoffe)"
+            },
+            {
+              "position": "3",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 3 (e.g., Saftkuren)"
+            },
+            {
+              "position": "4",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 4 (e.g., SMOOTHIES)"
+            },
+            {
+              "position": "5",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 5 (e.g., Shot Kur)"
+            },
+            {
+              "position": "6",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 6 (e.g., Probiersets)"
+            },
+            {
+              "position": "7",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 7 (e.g., Zubehör)"
+            },
+            {
+              "position": "8",
+              "size": "218x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 8 (e.g., Spar-Abo)"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "layoutType": "Full-Width Narrow",
+          "layoutId": "divider-promotional",
+          "tileCount": 1,
+          "designRationale": "Promotional strip or divider banner",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "750x160",
+              "imageCategory": "promotional",
+              "description": "Narrow promotional banner or content divider"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "Ingwer Shots",
+      "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2",
+      "editorialImages": 8,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Ginger shots category hero with fresh ginger and immune-boost positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Product category page with moderate editorial content (8 images + 1 video). Hero banner + supporting product banners + product grid. Ginger-focused health benefits emphasis."
+    },
+    {
+      "pageName": "Mikronährstoffe",
+      "pageId": "E337104E-63D3-41B2-8560-D92F482B2790",
+      "editorialImages": 7,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Micronutrients category hero with vitamins and mineral focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Product category page with moderate editorial content (7 images + 1 video). Hero banner + supporting content + product grid. Positioned as supplemental nutrition range."
+    },
+    {
+      "pageName": "Saftkuren",
+      "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606",
+      "editorialImages": 7,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Juice cure/cleanse category hero with detox and wellness messaging",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Product category page with moderate editorial content (7 images + 1 video). Positioned as wellness/detox program with hero + supporting banners + product grid."
+    },
+    {
+      "pageName": "SMOOTHIES",
+      "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E",
+      "editorialImages": 7,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Smoothies category hero with blended beverage and nutrition focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Product category page with substantial editorial content (7 images, no video). Hero banner + multiple supporting product highlight banners + product grid."
+    },
+    {
+      "pageName": "Shot Kur",
+      "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043",
+      "editorialImages": 4,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Shot cure/wellness program hero with concentrated nutrient shots",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Product category page with minimal editorial (4 images + 1 video). Hero + supporting content + product grid. Positioned as structured wellness program."
+    },
+    {
+      "pageName": "Probiersets / Geschenkidee",
+      "pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A",
+      "editorialImages": 5,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Trial sets and gift ideas hero with product variety and gifting emphasis",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Product category page with moderate editorial (5 images + 1 video). Hero + supporting banners highlighting sampler packs and gift options + product grid. Cross-sells entire product range in convenient sizes."
+    },
+    {
+      "pageName": "Zubehör",
+      "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A",
+      "editorialImages": 2,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Accessories category hero with preparation tools and equipment focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Product category page with minimal editorial (2 images + 1 video). Smallest page by content volume - accessories and tools supporting main products (shakers, bottles, preparation aids, etc.). Hero + minimal supporting content + product grid."
+    },
+    {
+      "pageName": "Spar-Abo",
+      "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E",
+      "editorialImages": 7,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Subscription/savings program hero emphasizing recurring delivery and value",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Subscription promotion page with substantial editorial content (7 images, no video). Hero + multiple benefit-focused banners promoting subscription advantages (savings, convenience, consistency) + subscription product grid. Image-heavy strategy without video."
+    },
+    {
+      "pageName": "Über Uns",
+      "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF",
+      "editorialImages": 6,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Brand story hero with company mission, ginger sourcing, and wellness philosophy",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Brand storytelling page (6 images + 1 video) positioning company values and product philosophy. Hero + multiple sections covering brand story, ginger sourcing/quality, wellness mission, company background. Moderate content depth for trust-building."
+    }
+  ],
+  "designPatterns": {
+    "colorScheme": {
+      "background": "Light/natural",
+      "textColor": "Dark",
+      "accentColor": "Green/natural tones",
+      "rationale": "Health and wellness positioning uses light, natural color palette conveying freshness, purity, and natural ingredients"
+    },
+    "typography": {
+      "primary": "Clean sans-serif, mixed case with emphasis on readability",
+      "characteristics": "Approachable, modern, wellness-focused. Category names emphasize product benefits (Saftkuren = juice cure)."
+    },
+    "photography": {
+      "style": "Fresh, natural product and ingredient photography",
+      "lighting": "Bright, natural lighting emphasizing ingredient freshness and health benefits",
+      "subjects": "Ginger roots, fresh juices, smoothies, product bottles, wellness and vitality imagery"
+    },
+    "layoutPatterns": {
+      "homepage": "Large hero (872x545) + narrow divider (872x546) + small category grid (8x218x218) + promotional strip (750x160)",
+      "categoryPages": "Consistent hero (1872x400) + supporting banners + product grid",
+      "contentStrategy": "Template-consistent approach with 4-8 editorial images per category + selective video use"
+    },
+    "hierarchyStructure": {
+      "navigationDepth": "1 level - flat navigation with 10 own pages",
+      "pageCount": "10 pages total (excluding shared Amazon Basics)",
+      "distribution": "Balanced per-page editorial (2-8 images, avg 6.4) across all product categories",
+      "strategy": "Flat navigation maximizes discoverability of all product ranges at equal hierarchy level"
+    }
+  },
+  "editorialStrategy": {
+    "totalEditorialImages": 64,
+    "totalVideos": 6,
+    "distribution": [
+      {
+        "page": "Startseite",
+        "editorialImages": 11,
+        "videos": 0,
+        "rationale": "Homepage hero + navigation structure - visual gateway with 8 category tiles for quick access to all product ranges"
+      },
+      {
+        "page": "Spar-Abo",
+        "editorialImages": 7,
+        "videos": 0,
+        "rationale": "Subscription promotion - image-heavy strategy emphasizing recurring benefits and savings without video"
+      },
+      {
+        "page": "Ingwer Shots",
+        "editorialImages": 8,
+        "videos": 1,
+        "rationale": "Core product category - hero ginger-based product with moderate editorial content + video"
+      },
+      {
+        "page": "Mikronährstoffe",
+        "editorialImages": 7,
+        "videos": 1,
+        "rationale": "Key supplement category - substantial editorial depth with video demonstrating nutritional benefits"
+      },
+      {
+        "page": "Saftkuren",
+        "editorialImages": 7,
+        "videos": 1,
+        "rationale": "Wellness program category - editorial content emphasizing detox/cleanse benefits + video"
+      },
+      {
+        "page": "SMOOTHIES",
+        "editorialImages": 7,
+        "videos": 0,
+        "rationale": "Product category - substantial editorial content focused on smoothie variants and consumption occasions, no video"
+      },
+      {
+        "page": "Über Uns",
+        "editorialImages": 6,
+        "videos": 1,
+        "rationale": "Brand storytelling hub - company mission, ginger sourcing, wellness philosophy with supporting video"
+      },
+      {
+        "page": "Probiersets / Geschenkidee",
+        "editorialImages": 5,
+        "videos": 1,
+        "rationale": "Cross-sell category - moderate editorial showcasing product variety and gift appeal + video"
+      },
+      {
+        "page": "Shot Kur",
+        "editorialImages": 4,
+        "videos": 1,
+        "rationale": "Specialized program category - minimal editorial positioning as structured wellness protocol + video"
+      },
+      {
+        "page": "Zubehör",
+        "editorialImages": 2,
+        "videos": 1,
+        "rationale": "Accessories/tools category - minimal editorial (smallest page) focusing on supplementary products + video"
+      }
+    ]
+  },
+  "brandIdentity": {
+    "corePillars": [
+      "Natural Health & Wellness",
+      "Ginger-Based Functional Beverages",
+      "Premium Micronutrient Supplementation",
+      "Accessible Wellness Programs"
+    ],
+    "visualLanguage": "Light, natural color palette with emphasis on fresh ingredients. Product-forward photography highlighting ginger, juices, and natural wellness benefits. Clean, modern typography conveying accessibility and approachability. Bright, natural lighting creates healthy, vitality-focused aesthetic.",
+    "targetAudience": "Health-conscious consumers, wellness enthusiasts, immune-support seekers, natural supplement users, gift-givers seeking wellness products",
+    "navigationPhilosophy": "Flat single-level navigation presents all 10 product categories as equally accessible options. Rather than hierarchical specialization (like multi-level supplement stores), Kloster Kitchen uses homogeneous layout (8 equal 218x218 tiles on homepage) to distribute attention equally across Ingwer Shots, Mikronährstoffe, Saftkuren, SMOOTHIES, Shot Kur, Probiersets, Spar-Abo, and Zubehör. This egalitarian structure emphasizes product diversity within a coherent ginger/wellness theme.",
+    "productRange": "D2C health/wellness brand specializing in ginger-based shots, juices, smoothies, and micronutrient supplements. Offerings organized around consumption occasions (quick shots), wellness programs (Saftkuren, Shot Kur), ongoing supplementation (Mikronährstoffe), and convenience options (subscription, trial sets)."
+  }
+}

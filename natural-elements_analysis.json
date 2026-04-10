@@ -1,0 +1,792 @@
+{
+  "brandName": "natural elements",
+  "storeUrl": "https://www.amazon.de/stores/page/3955CCD4-902C-4679-9265-DEC4FCBAA8C8",
+  "analyzedAt": "2026-04-10",
+  "methodology": "V3",
+  "category": "Nahrungsergänzungsmittel / Supplements (Vitamine, Mineralien, Sport, Beauty, Wohlbefinden)",
+  "navigation": {
+    "structure": "Multi-level (2 levels)",
+    "pageCount": 48,
+    "heroBanners": 1,
+    "navLogos": 0,
+    "notes": "7 second-level parent pages are pure product grids (E:0 V:0) - alternate entry points for same categories. 1 shared Amazon Basics page excluded from count.",
+    "pages": [
+      {
+        "name": "Startseite",
+        "level": 0,
+        "pageId": "3955CCD4-902C-4679-9265-DEC4FCBAA8C8"
+      },
+      {
+        "name": "unsere Neuheiten",
+        "level": 1,
+        "pageId": "E3653495-9130-48DC-BFA4-F38BD9C7AEF1"
+      },
+      {
+        "name": "SoProtein Vegan",
+        "level": 1,
+        "pageId": "0C5288E7-93DF-4272-890E-78EFF3DD0813"
+      },
+      {
+        "name": "Alle Produkte",
+        "level": 1,
+        "pageId": "56C2E5EE-81A5-4F07-8BB3-38927E13937B"
+      },
+      {
+        "name": "Omega 3",
+        "level": 1,
+        "pageId": "D788E930-2688-4AC4-B88E-49575F840258"
+      },
+      {
+        "name": "Magnesium",
+        "level": 1,
+        "pageId": "A050A8AF-92DA-4365-92BB-29A610671B82"
+      },
+      {
+        "name": "Multivitamin",
+        "level": 1,
+        "pageId": "4CD6E345-D764-4B9D-B004-6D3CEF022BE8"
+      },
+      {
+        "name": "Probiotika",
+        "level": 1,
+        "pageId": "7A98FD63-BC7F-4576-9FE2-58A90E312293"
+      },
+      {
+        "name": "Melatonin",
+        "level": 1,
+        "pageId": "6901DCDE-4293-4134-A4F6-E09B8E48BB84"
+      },
+      {
+        "name": "Immunsystem",
+        "level": 1,
+        "pageId": "1B2D6D85-21E1-4BBE-AD98-EBDE6CFEA02F"
+      },
+      {
+        "name": "Vitamine",
+        "level": 2,
+        "parentCategory": "Immunsystem",
+        "pageId": "5DF9227A-372F-4144-8FE4-73B4797BAABD"
+      },
+      {
+        "name": "Mineralien",
+        "level": 2,
+        "parentCategory": "Immunsystem",
+        "pageId": "C823DA3C-10A3-48F8-9A7E-E23CBA091433"
+      },
+      {
+        "name": "Pflanzenstoffe",
+        "level": 2,
+        "parentCategory": "Immunsystem",
+        "pageId": "F0DE8314-33B1-48B3-87A3-404B46F722B9"
+      },
+      {
+        "name": "Sport & Energie",
+        "level": 1,
+        "pageId": "664DFD7E-CDA1-40F5-BF13-5E18404F3CC6"
+      },
+      {
+        "name": "Sportfilter",
+        "level": 2,
+        "parentCategory": "Sport & Energie",
+        "pageId": "822ED3CE-B1E6-4C58-A511-48D7896907DA"
+      },
+      {
+        "name": "Pre Workout",
+        "level": 2,
+        "parentCategory": "Sport & Energie",
+        "pageId": "808E247F-2081-40D2-9259-56150461CF7E"
+      },
+      {
+        "name": "Workout",
+        "level": 2,
+        "parentCategory": "Sport & Energie",
+        "pageId": "08D24436-0B93-42FB-ABBD-E0246DE45156"
+      },
+      {
+        "name": "Regeneration",
+        "level": 2,
+        "parentCategory": "Sport & Energie",
+        "pageId": "2E3F7FDD-F374-4EA9-A8DA-51BCEC11BF49"
+      },
+      {
+        "name": "Daily Fitness",
+        "level": 2,
+        "parentCategory": "Sport & Energie",
+        "pageId": "26C6215F-F342-4387-B970-CEC2960BE627"
+      },
+      {
+        "name": "Gewichtsmanagement",
+        "level": 2,
+        "parentCategory": "Sport & Energie",
+        "pageId": "FDE3409D-50AF-4D67-81B4-C4D8EB5570F8"
+      },
+      {
+        "name": "Beauty & Anti Aging",
+        "level": 1,
+        "pageId": "428F17F5-8142-4421-8806-F3EE4667D39E"
+      },
+      {
+        "name": "Haut",
+        "level": 2,
+        "parentCategory": "Beauty & Anti Aging",
+        "pageId": "5ECE8C6B-95C4-4830-9D18-2EABCAC7CADD"
+      },
+      {
+        "name": "Haare",
+        "level": 2,
+        "parentCategory": "Beauty & Anti Aging",
+        "pageId": "28BD2C62-EC3D-4E53-A530-0EB360A24902"
+      },
+      {
+        "name": "Nägel",
+        "level": 2,
+        "parentCategory": "Beauty & Anti Aging",
+        "pageId": "4DD7B591-C168-4B3B-BF0F-DA3040A9FFE1"
+      },
+      {
+        "name": "Kosmetik",
+        "level": 2,
+        "parentCategory": "Beauty & Anti Aging",
+        "pageId": "5E58FE79-5F4B-4125-B98F-15078EA52C21"
+      },
+      {
+        "name": "Knochen & Beweglichkeit",
+        "level": 1,
+        "pageId": "63C24E05-D18F-4776-8FA1-69CB3D7B75C4"
+      },
+      {
+        "name": "Beweglichkeit",
+        "level": 2,
+        "parentCategory": "Knochen & Beweglichkeit",
+        "pageId": "0DCC0265-4D32-4C1B-917F-53AEB5A5D14F"
+      },
+      {
+        "name": "Knochen",
+        "level": 2,
+        "parentCategory": "Knochen & Beweglichkeit",
+        "pageId": "53E0C3C9-DBCA-4C91-8E21-494AC466FEC2"
+      },
+      {
+        "name": "Wohlbefinden & Anti Stress",
+        "level": 1,
+        "pageId": "C86B7462-30CF-4C0A-87D2-D4AA4A861A7F"
+      },
+      {
+        "name": "Innere Ruhe",
+        "level": 2,
+        "parentCategory": "Wohlbefinden & Anti Stress",
+        "pageId": "279B33DB-A71A-4978-A455-90D0B7DE211B"
+      },
+      {
+        "name": "Ruhiger Schlaf",
+        "level": 2,
+        "parentCategory": "Wohlbefinden & Anti Stress",
+        "pageId": "9B6D8AB7-862F-41FD-B977-E5BE17A77996"
+      },
+      {
+        "name": "Nerven & Energie",
+        "level": 2,
+        "parentCategory": "Wohlbefinden & Anti Stress",
+        "pageId": "2A4CBB9C-0C16-48EF-B384-E47188AA20AA"
+      },
+      {
+        "name": "Verdauung & Gewicht",
+        "level": 1,
+        "pageId": "0C2927AB-0C3A-4990-9D68-2F25281BEE79"
+      },
+      {
+        "name": "Verdauung",
+        "level": 2,
+        "parentCategory": "Verdauung & Gewicht",
+        "pageId": "AEFF9C75-7DBF-4E44-AEF4-90B0A4FC8170"
+      },
+      {
+        "name": "Körperbewusstsein",
+        "level": 2,
+        "parentCategory": "Verdauung & Gewicht",
+        "pageId": "4F023B05-A058-4625-BB29-416280CC5A1B"
+      },
+      {
+        "name": "Gaming",
+        "level": 1,
+        "pageId": "30298D32-3452-4FD2-9700-E4237CD2C230"
+      },
+      {
+        "name": "Produktfilter",
+        "level": 1,
+        "pageId": "0AB748AD-4B9F-46B0-B2C2-82D33449F77E"
+      },
+      {
+        "name": "Produktselektor",
+        "level": 1,
+        "pageId": "A03B844E-0DA2-4FFC-8205-DC6DFDB0D59E"
+      },
+      {
+        "name": "Geschenk-Sets",
+        "level": 1,
+        "pageId": "1A5ECF37-615B-4FBB-8620-C629481CB321"
+      },
+      {
+        "name": "ÜBER UNS",
+        "level": 1,
+        "pageId": "C199E0D4-B434-4DFA-8DF0-2D5601387A8B"
+      },
+      {
+        "name": "Unsere Empfehlungen",
+        "level": 1,
+        "pageId": "B77CB4EF-4CCF-4FB0-9251-53DF11DCCE12"
+      },
+      {
+        "name": "Alle Produkte (2nd)",
+        "level": 2,
+        "parentCategory": "Alternate Entry Point",
+        "pageId": "1B1E5B14-3E24-4435-90AC-1028937D2104"
+      },
+      {
+        "name": "Sport & Energie (2nd)",
+        "level": 2,
+        "parentCategory": "Alternate Entry Point",
+        "pageId": "FE657234-26BB-457E-889E-57048ABF42F3"
+      },
+      {
+        "name": "Immunsystem (2nd)",
+        "level": 2,
+        "parentCategory": "Alternate Entry Point",
+        "pageId": "50B1B8C1-7F47-4544-9445-AF37B3550E69"
+      },
+      {
+        "name": "Beauty & Anti-Aging (2nd)",
+        "level": 2,
+        "parentCategory": "Alternate Entry Point",
+        "pageId": "7CCF0BFB-88C4-4819-BA9C-21B7D1DE1B3A"
+      },
+      {
+        "name": "Wohlbefinden & Anti Stress (2nd)",
+        "level": 2,
+        "parentCategory": "Alternate Entry Point",
+        "pageId": "4A5AF019-F326-4B06-8049-827104C543EC"
+      },
+      {
+        "name": "Verdauung & Gewicht (2nd)",
+        "level": 2,
+        "parentCategory": "Alternate Entry Point",
+        "pageId": "E4745A5C-D78F-47D4-8471-835F3E0770F9"
+      },
+      {
+        "name": "Knochen & Beweglichkeit (2nd)",
+        "level": 2,
+        "parentCategory": "Alternate Entry Point",
+        "pageId": "6FB59F47-6124-4486-AE5A-8D62C4469E87"
+      }
+    ]
+  },
+  "contentSummary": {
+    "totalEditorialImages": 350,
+    "uniqueVideos": 38,
+    "editorialToVideoRatio": 9.2,
+    "storeScale": "One of the largest stores by page count (48 pages) and by editorial image count (350)"
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "pageId": "3955CCD4-902C-4679-9265-DEC4FCBAA8C8",
+      "heroBanner": {
+        "description": "Natural elements branded hero with clean, minimalist white/green aesthetic. Logo-based header establishing brand trust and natural positioning.",
+        "textOnImage": "natural elements®",
+        "estimatedDimensions": "1872x400",
+        "brandIdentityNote": "Minimalist design conveys natural, clean, wellness-focused brand positioning - contrasts with darker supplement brands"
+      },
+      "editorialImages": 13,
+      "videos": 2,
+      "designNote": "Homepage hub page with substantial editorial content establishing brand presence, product category navigation via tiles, and promotional campaigns. Large editorial image count supports brand storytelling and category discovery."
+    },
+    {
+      "pageName": "unsere Neuheiten",
+      "pageId": "E3653495-9130-48DC-BFA4-F38BD9C7AEF1",
+      "editorialImages": 11,
+      "videos": 1,
+      "designNote": "New arrivals showcase page with significant editorial content highlighting latest product releases and innovations."
+    },
+    {
+      "pageName": "SoProtein Vegan",
+      "pageId": "0C5288E7-93DF-4272-890E-78EFF3DD0813",
+      "editorialImages": 2,
+      "videos": 3,
+      "designNote": "Featured product line page with video-rich content strategy (3 videos) supporting protein product ecosystem education."
+    },
+    {
+      "pageName": "Alle Produkte",
+      "pageId": "56C2E5EE-81A5-4F07-8BB3-38927E13937B",
+      "editorialImages": 3,
+      "videos": 0,
+      "designNote": "Comprehensive product catalog page with minimal editorial - pure product grid focus."
+    },
+    {
+      "pageName": "Omega 3",
+      "pageId": "D788E930-2688-4AC4-B88E-49575F840258",
+      "editorialImages": 5,
+      "videos": 0,
+      "designNote": "Category page for omega-3 supplements with moderate editorial content supporting product benefits and usage information."
+    },
+    {
+      "pageName": "Magnesium",
+      "pageId": "A050A8AF-92DA-4365-92BB-29A610671B82",
+      "editorialImages": 4,
+      "videos": 1,
+      "designNote": "Mineral category page with balanced editorial and video content explaining magnesium benefits and product range."
+    },
+    {
+      "pageName": "Multivitamin",
+      "pageId": "4CD6E345-D764-4B9D-B004-6D3CEF022BE8",
+      "editorialImages": 4,
+      "videos": 0,
+      "designNote": "Core vitamin category page with editorial banners supporting multivitamin product lineup."
+    },
+    {
+      "pageName": "Probiotika",
+      "pageId": "7A98FD63-BC7F-4576-9FE2-58A90E312293",
+      "editorialImages": 5,
+      "videos": 0,
+      "designNote": "Probiotic category page emphasizing digestive health and gut wellness with product-focused editorial."
+    },
+    {
+      "pageName": "Melatonin",
+      "pageId": "6901DCDE-4293-4134-A4F6-E09B8E48BB84",
+      "editorialImages": 4,
+      "videos": 0,
+      "designNote": "Sleep support category page with editorial content positioning melatonin supplements for rest and recovery."
+    },
+    {
+      "pageName": "Immunsystem",
+      "pageId": "1B2D6D85-21E1-4BBE-AD98-EBDE6CFEA02F",
+      "editorialImages": 17,
+      "videos": 0,
+      "designNote": "Hub category page with extensive editorial content (17 images) - one of the most content-rich category pages. Acts as gateway to Vitamine, Mineralien, Pflanzenstoffe sub-categories with editorial tiles linking to specialized immune support products."
+    },
+    {
+      "pageName": "Vitamine",
+      "pageId": "5DF9227A-372F-4144-8FE4-73B4797BAABD",
+      "editorialImages": 7,
+      "videos": 3,
+      "designNote": "Sub-category page under Immunsystem with consistent 7-image template pattern plus video content (3 videos) supporting vitamin education."
+    },
+    {
+      "pageName": "Mineralien",
+      "pageId": "C823DA3C-10A3-48F8-9A7E-E23CBA091433",
+      "editorialImages": 7,
+      "videos": 0,
+      "designNote": "Sub-category page with recurring 7-editorial-image template pattern establishing consistent navigation design."
+    },
+    {
+      "pageName": "Pflanzenstoffe",
+      "pageId": "F0DE8314-33B1-48B3-87A3-404B46F722B9",
+      "editorialImages": 7,
+      "videos": 0,
+      "designNote": "Sub-category page with identical 7-image template supporting plant-based supplement positioning."
+    },
+    {
+      "pageName": "Sport & Energie",
+      "pageId": "664DFD7E-CDA1-40F5-BF13-5E18404F3CC6",
+      "editorialImages": 13,
+      "videos": 2,
+      "designNote": "Major hub category page with substantial editorial content (13 images + 2 videos) supporting sports nutrition ecosystem. Acts as parent hub for Sportfilter, Pre Workout, Workout, Regeneration, Daily Fitness, Gewichtsmanagement sub-pages."
+    },
+    {
+      "pageName": "Sportfilter",
+      "pageId": "822ED3CE-B1E6-4C58-A511-48D7896907DA",
+      "editorialImages": 2,
+      "videos": 0,
+      "designNote": "Specialized filter/navigation page with minimal editorial - helps users refine sports product selection."
+    },
+    {
+      "pageName": "Pre Workout",
+      "pageId": "808E247F-2081-40D2-9259-56150461CF7E",
+      "editorialImages": 7,
+      "videos": 0,
+      "designNote": "Sports sub-category with recurring 7-image template supporting pre-workout supplement products."
+    },
+    {
+      "pageName": "Workout",
+      "pageId": "08D24436-0B93-42FB-ABBD-E0246DE45156",
+      "editorialImages": 7,
+      "videos": 0,
+      "designNote": "Sports sub-category with 7-image template for workout performance products."
+    },
+    {
+      "pageName": "Regeneration",
+      "pageId": "2E3F7FDD-F374-4EA9-A8DA-51BCEC11BF49",
+      "editorialImages": 7,
+      "videos": 0,
+      "designNote": "Sports sub-category with 7-image template for recovery and regeneration products."
+    },
+    {
+      "pageName": "Daily Fitness",
+      "pageId": "26C6215F-F342-4387-B970-CEC2960BE627",
+      "editorialImages": 7,
+      "videos": 0,
+      "designNote": "Sports sub-category with consistent 7-image template for daily fitness supplementation."
+    },
+    {
+      "pageName": "Gewichtsmanagement",
+      "pageId": "FDE3409D-50AF-4D67-81B4-C4D8EB5570F8",
+      "editorialImages": 4,
+      "videos": 0,
+      "designNote": "Weight management sub-category with moderate editorial content."
+    },
+    {
+      "pageName": "Beauty & Anti Aging",
+      "pageId": "428F17F5-8142-4421-8806-F3EE4667D39E",
+      "editorialImages": 19,
+      "videos": 2,
+      "designNote": "Major hub category page with rich editorial content (19 images + 2 videos) emphasizing beauty and wellness segment. Parent page for Haut, Haare, Nägel, Kosmetik sub-categories with dedicated editorial tiles."
+    },
+    {
+      "pageName": "Haut",
+      "pageId": "5ECE8C6B-95C4-4830-9D18-2EABCAC7CADD",
+      "editorialImages": 8,
+      "videos": 4,
+      "designNote": "Beauty sub-category with significant video content (4 videos) supporting skin health and beauty supplement education."
+    },
+    {
+      "pageName": "Haare",
+      "pageId": "28BD2C62-EC3D-4E53-A530-0EB360A24902",
+      "editorialImages": 8,
+      "videos": 1,
+      "designNote": "Beauty sub-category for hair health supplements with balanced editorial and video content."
+    },
+    {
+      "pageName": "Nägel",
+      "pageId": "4DD7B591-C168-4B3B-BF0F-DA3040A9FFE1",
+      "editorialImages": 8,
+      "videos": 3,
+      "designNote": "Beauty sub-category for nail health with 8 images and multiple videos (3) supporting nail supplement benefits."
+    },
+    {
+      "pageName": "Kosmetik",
+      "pageId": "5E58FE79-5F4B-4125-B98F-15078EA52C21",
+      "editorialImages": 15,
+      "videos": 2,
+      "designNote": "Beauty sub-category with substantial content (15 images + 2 videos) for cosmetic and beauty supplement products."
+    },
+    {
+      "pageName": "Knochen & Beweglichkeit",
+      "pageId": "63C24E05-D18F-4776-8FA1-69CB3D7B75C4",
+      "editorialImages": 17,
+      "videos": 2,
+      "designNote": "Hub category page with major editorial presence (17 images + 2 videos) for bone and mobility health. Parent page for Beweglichkeit and Knochen sub-categories."
+    },
+    {
+      "pageName": "Beweglichkeit",
+      "pageId": "0DCC0265-4D32-4C1B-917F-53AEB5A5D14F",
+      "editorialImages": 6,
+      "videos": 1,
+      "designNote": "Mobility sub-category with balanced editorial and video content (1 video) for joint and flexibility supplements."
+    },
+    {
+      "pageName": "Knochen",
+      "pageId": "53E0C3C9-DBCA-4C91-8E21-494AC466FEC2",
+      "editorialImages": 6,
+      "videos": 2,
+      "designNote": "Bone health sub-category with 6 images and 2 videos supporting bone density and calcium supplement positioning."
+    },
+    {
+      "pageName": "Wohlbefinden & Anti Stress",
+      "pageId": "C86B7462-30CF-4C0A-87D2-D4AA4A861A7F",
+      "editorialImages": 18,
+      "videos": 2,
+      "designNote": "Major hub category with substantial editorial content (18 images + 2 videos) for wellness and stress management segment. Parent page for Innere Ruhe, Ruhiger Schlaf, Nerven & Energie sub-categories."
+    },
+    {
+      "pageName": "Innere Ruhe",
+      "pageId": "279B33DB-A71A-4978-A455-90D0B7DE211B",
+      "editorialImages": 7,
+      "videos": 0,
+      "designNote": "Wellness sub-category with 7-image template for inner calm and relaxation supplements."
+    },
+    {
+      "pageName": "Ruhiger Schlaf",
+      "pageId": "9B6D8AB7-862F-41FD-B977-E5BE17A77996",
+      "editorialImages": 7,
+      "videos": 0,
+      "designNote": "Sleep wellness sub-category with consistent 7-image template for sleep quality supplements."
+    },
+    {
+      "pageName": "Nerven & Energie",
+      "pageId": "2A4CBB9C-0C16-48EF-B384-E47188AA20AA",
+      "editorialImages": 7,
+      "videos": 1,
+      "designNote": "Wellness sub-category with 7-image template plus 1 video supporting nerve health and energy balance."
+    },
+    {
+      "pageName": "Verdauung & Gewicht",
+      "pageId": "0C2927AB-0C3A-4990-9D68-2F25281BEE79",
+      "editorialImages": 17,
+      "videos": 2,
+      "designNote": "Hub category page with major editorial content (17 images + 2 videos) for digestive health and weight management segment. Parent page for Verdauung and Körperbewusstsein sub-categories."
+    },
+    {
+      "pageName": "Verdauung",
+      "pageId": "AEFF9C75-7DBF-4E44-AEF4-90B0A4FC8170",
+      "editorialImages": 6,
+      "videos": 0,
+      "designNote": "Digestive health sub-category with 6 images for gut and digestion support supplements."
+    },
+    {
+      "pageName": "Körperbewusstsein",
+      "pageId": "4F023B05-A058-4625-BB29-416280CC5A1B",
+      "editorialImages": 6,
+      "videos": 0,
+      "designNote": "Body wellness sub-category with 6 images supporting mindful wellness and body awareness supplements."
+    },
+    {
+      "pageName": "Gaming",
+      "pageId": "30298D32-3452-4FD2-9700-E4237CD2C230",
+      "editorialImages": 15,
+      "videos": 2,
+      "designNote": "Specialty category with content-rich positioning (15 images + 2 videos) - unusual for supplement brand but shows expanded wellness positioning toward e-sports/gaming community energy and focus products."
+    },
+    {
+      "pageName": "Produktfilter",
+      "pageId": "0AB748AD-4B9F-46B0-B2C2-82D33449F77E",
+      "editorialImages": 2,
+      "videos": 0,
+      "designNote": "Product filtering/refinement tool page with minimal editorial supporting product discovery UI."
+    },
+    {
+      "pageName": "Produktselektor",
+      "pageId": "A03B844E-0DA2-4FFC-8205-DC6DFDB0D59E",
+      "editorialImages": 1,
+      "videos": 0,
+      "designNote": "Interactive product selector/quiz tool page with minimal editorial - focus on functional guidance UI."
+    },
+    {
+      "pageName": "Geschenk-Sets",
+      "pageId": "1A5ECF37-615B-4FBB-8620-C629481CB321",
+      "editorialImages": 12,
+      "videos": 1,
+      "designNote": "Gift set category page with substantial editorial content (12 images + 1 video) supporting bundled product offerings and gift positioning."
+    },
+    {
+      "pageName": "ÜBER UNS",
+      "pageId": "C199E0D4-B434-4DFA-8DF0-2D5601387A8B",
+      "editorialImages": 19,
+      "videos": 1,
+      "designNote": "Brand story and company page with major editorial presence (19 images + 1 video) - brand mission, values, story, team, and positioning. One of the most content-rich pages alongside Beauty & Anti Aging hub."
+    },
+    {
+      "pageName": "Unsere Empfehlungen",
+      "pageId": "B77CB4EF-4CCF-4FB0-9251-53DF11DCCE12",
+      "editorialImages": 10,
+      "videos": 0,
+      "designNote": "Curated recommendations page with substantial editorial content (10 images) for featured product collections and expert recommendations."
+    },
+    {
+      "pageName": "Alle Produkte (2nd)",
+      "pageId": "1B1E5B14-3E24-4435-90AC-1028937D2104",
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Alternate entry point - pure product grid without editorial. Serves as second navigation path to complete catalog."
+    },
+    {
+      "pageName": "Sport & Energie (2nd)",
+      "pageId": "FE657234-26BB-457E-889E-57048ABF42F3",
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Alternate entry point - pure product grid. Second pathway to sports category products without editorial navigation."
+    },
+    {
+      "pageName": "Immunsystem (2nd)",
+      "pageId": "50B1B8C1-7F47-4544-9445-AF37B3550E69",
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Alternate entry point - pure product grid. Direct access to immune support products."
+    },
+    {
+      "pageName": "Beauty & Anti-Aging (2nd)",
+      "pageId": "7CCF0BFB-88C4-4819-BA9C-21B7D1DE1B3A",
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Alternate entry point - pure product grid. Direct navigation to beauty category."
+    },
+    {
+      "pageName": "Wohlbefinden & Anti Stress (2nd)",
+      "pageId": "4A5AF019-F326-4B06-8049-827104C543EC",
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Alternate entry point - pure product grid. Direct access to wellness category."
+    },
+    {
+      "pageName": "Verdauung & Gewicht (2nd)",
+      "pageId": "E4745A5C-D78F-47D4-8471-835F3E0770F9",
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Alternate entry point - pure product grid. Direct navigation to digestive and weight management products."
+    },
+    {
+      "pageName": "Knochen & Beweglichkeit (2nd)",
+      "pageId": "6FB59F47-6124-4486-AE5A-8D62C4469E87",
+      "editorialImages": 0,
+      "videos": 0,
+      "designNote": "Alternate entry point - pure product grid. Direct access to bone and mobility products."
+    }
+  ],
+  "designPatterns": {
+    "colorScheme": {
+      "background": "White/Light Green/Mint",
+      "textColor": "Dark/Black",
+      "accentColor": "Natural green, wellness-focused pastels",
+      "rationale": "Clean, minimalist aesthetic conveys natural, trustworthy, wellness positioning - contrasts with darker performance supplement brands"
+    },
+    "typography": {
+      "primary": "Clean sans-serif, moderate case for product and category names",
+      "characteristics": "Modern, accessible, friendly tone. Supports natural/wellness brand personality."
+    },
+    "photography": {
+      "style": "Wellness, lifestyle, and product-focused photography",
+      "lighting": "Bright, natural lighting emphasizing cleanliness and natural ingredients",
+      "subjects": "Healthy lifestyles, happy people, product bottles, natural ingredients, wellness moments"
+    },
+    "layoutPatterns": {
+      "homepage": "Logo header + promotional banners + category tile navigation + product grid",
+      "hubPages": "Hero with 13-19 editorial images + sub-category tile navigation + product grid",
+      "subCategoryPages": "Hero + consistent 7-image editorial template (or 6-8 images) + product grid",
+      "alternateEntryPoints": "Pure product grid (E:0 V:0) - secondary navigation paths to same categories",
+      "contentRichPages": "Gaming (15 images + 2 videos), Beauty & Anti Aging (19 images + 2 videos), ÜBER UNS (19 images + 1 video)"
+    },
+    "recurringTemplates": {
+      "sevenImageTemplate": "Many sub-pages consistently use 7 editorial images creating template-based consistency",
+      "pages": [
+        "Vitamine (7)",
+        "Mineralien (7)",
+        "Pflanzenstoffe (7)",
+        "Pre Workout (7)",
+        "Workout (7)",
+        "Regeneration (7)",
+        "Daily Fitness (7)",
+        "Innere Ruhe (7)",
+        "Ruhiger Schlaf (7)"
+      ]
+    },
+    "hierarchyStructure": {
+      "navigationDepth": "2 levels - main categories + sub-categories",
+      "pageCount": "48 pages total (including 7 alternate entry point product grids)",
+      "distribution": "Concentrated editorial on hub pages + consistent sub-page templates + alternate pure-grid entry points",
+      "strategy": "Multi-path navigation allows users to approach categories via editorial (hub) or direct product grid (alternate). Specialization across wellness segments supports diverse supplement categories."
+    }
+  },
+  "editorialStrategy": {
+    "totalEditorialImages": 350,
+    "totalVideos": 38,
+    "keyObservations": [
+      "One of the largest stores by page count (48 pages) AND by editorial image count (350)",
+      "Multi-level navigation: top-level category 'hub' pages contain 13-19 editorial images with tiles linking to sub-pages",
+      "7 'second-level parent' pages are pure product grids (E:0 V:0) — alternate entry points for same categories",
+      "Very consistent sub-page design: many pages have exactly 7 editorial images (recurring template pattern)",
+      "Hub category pages have 13-19 editorial images each",
+      "Gaming page notably content-rich (E:15 V:2) — unusual for supplement brand, shows expansion into lifestyle segments",
+      "ÜBER UNS is brand story page with 19 editorial images + 1 video",
+      "Videos distributed across many pages (38 total) — moderate to high video usage",
+      "German supplement brand with emphasis on natural ingredients and wellness holistic approach"
+    ],
+    "distribution": [
+      {
+        "pageType": "Homepage",
+        "pageName": "Startseite",
+        "editorialImages": 13,
+        "videos": 2,
+        "rationale": "Major visual gateway - hero + category navigation tiles + promotional campaigns"
+      },
+      {
+        "pageType": "Hub Category Pages",
+        "pages": [
+          {
+            "name": "Immunsystem",
+            "editorialImages": 17,
+            "videos": 0
+          },
+          {
+            "name": "Sport & Energie",
+            "editorialImages": 13,
+            "videos": 2
+          },
+          {
+            "name": "Beauty & Anti Aging",
+            "editorialImages": 19,
+            "videos": 2
+          },
+          {
+            "name": "Knochen & Beweglichkeit",
+            "editorialImages": 17,
+            "videos": 2
+          },
+          {
+            "name": "Wohlbefinden & Anti Stress",
+            "editorialImages": 18,
+            "videos": 2
+          },
+          {
+            "name": "Verdauung & Gewicht",
+            "editorialImages": 17,
+            "videos": 2
+          }
+        ],
+        "rationale": "Major editorial investment in category hubs (13-19 images each + videos) establishing each wellness segment as distinct ecosystem with sub-category tiles"
+      },
+      {
+        "pageType": "Featured New & Specialty",
+        "pages": [
+          {
+            "name": "unsere Neuheiten",
+            "editorialImages": 11,
+            "videos": 1
+          },
+          {
+            "name": "Gaming",
+            "editorialImages": 15,
+            "videos": 2
+          },
+          {
+            "name": "Geschenk-Sets",
+            "editorialImages": 12,
+            "videos": 1
+          },
+          {
+            "name": "ÜBER UNS",
+            "editorialImages": 19,
+            "videos": 1
+          }
+        ],
+        "rationale": "Supporting editorial content for new arrivals, specialty categories, and brand storytelling"
+      },
+      {
+        "pageType": "Sub-Category Pages",
+        "distribution": "6-8 images per page (many with 7-image template pattern)",
+        "examples": [
+          "Vitamine (7 + 3 videos)",
+          "Haut (8 + 4 videos)",
+          "Haare (8 + 1 video)",
+          "Nägel (8 + 3 videos)"
+        ],
+        "rationale": "Consistent template design ensures brand coherence while supporting diverse supplement categories"
+      },
+      {
+        "pageType": "Alternate Entry Points",
+        "pageCount": 7,
+        "editorialImages": 0,
+        "videos": 0,
+        "rationale": "Pure product grids provide second navigation path - direct category access without editorial"
+      }
+    ]
+  },
+  "brandIdentity": {
+    "corePillars": [
+      "Natural Ingredients & Wellness",
+      "Holistic Health Approach",
+      "Accessible Supplement Expertise"
+    ],
+    "visualLanguage": "White/mint backgrounds with clean typography create fresh, modern, natural aesthetic. Light and bright approach emphasizes wellness, trust, and accessibility - appealing to broad wellness-conscious audience rather than hardcore athletes. Natural product photography with healthy lifestyle imagery supports wellness narrative.",
+    "targetAudience": "Wellness-conscious consumers, health enthusiasts, beauty and anti-aging seekers, active individuals, gamers seeking focus/energy - broader demographic than performance-only brands",
+    "navigationPhilosophy": "Dual-path navigation with editorial hub pages (13-19 images with sub-category tiles) and alternate pure-grid entry points (E:0 V:0). Allows users to explore via curated editorial journey or direct product grid access. Deep specialization across 6+ major wellness segments (Immune, Sport, Beauty, Bone/Mobility, Wellness/Stress, Digestion). Many sub-pages use consistent 7-image template ensuring scalable, coherent design.",
+    "contentStrategy": "Heavy editorial investment (350 images, 38 videos across 48 pages) emphasizes education and brand authority. Hub pages establish category expertise; sub-pages use templates for efficiency. Alternate grid entry points support multiple user navigation preferences."
+  }
+}

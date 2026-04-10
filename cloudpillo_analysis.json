@@ -1,0 +1,1187 @@
+{
+  "brandName": "Cloudpillo",
+  "storeUrl": "https://www.amazon.de/stores/Cloudpillo/page/741141B6-87D5-44F9-BE63-71B55CD51198",
+  "analyzedAt": "2026-04-09",
+  "navigation": {
+    "pageCount": 7,
+    "pages": [
+      {
+        "name": "Startseite",
+        "level": 0
+      },
+      {
+        "name": "Alle Produkte",
+        "level": 1
+      },
+      {
+        "name": "Kissen",
+        "level": 1
+      },
+      {
+        "name": "Toppers",
+        "level": 1
+      },
+      {
+        "name": "Bettdecke",
+        "level": 1
+      },
+      {
+        "name": "Bettwäsche",
+        "level": 1
+      },
+      {
+        "name": "Unsere Mission",
+        "level": 1
+      }
+    ]
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "heroBanner": {
+        "description": "Blauer Himmel mit weißen Wolken als Hintergrund. Links und rechts: Personen in farbiger Kleidung (pink, beige) die in der Luft schweben/springen/auf Schaukeln sitzen, mit Kissen werfend. Mitte: 'cloudpillo' in weißer, lockerer Typografie mit Wolken-Logo-Icon (hellblau). Darunter: 'Lebe deine Träume.' als Claim. Spielerisch, verträumt, lebendig.",
+        "textOnImage": "cloudpillo, Lebe deine Träume.",
+        "estimatedDimensions": "3000x600"
+      },
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Full-Width",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Nackenstützkissen Hero-Banner mit CTA und Trust-Element (IGR-Zertifikat)",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Full Width (872x289)",
+              "imageCategory": "hero",
+              "description": "Frau in pink springt im Himmel, fängt Kissen. Text: 'Cloudpillo das anpassbare Nackenstützkissen – Endlich erholsam durchschlafen' mit IGR-Zertifikat-Badge.",
+              "textOnImage": "Cloudpillo das anpassbare Nackenstützkissen – Endlich erholsam durchschlafen",
+              "ctaText": "Jetzt shoppen",
+              "linksTo": "Kissen"
+            }
+          ],
+          "relationToNextModule": "Zu Trust/Benefit-Banner"
+        },
+        {
+          "position": 2,
+          "layoutType": "Full-Width Narrow",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Schmaler Trust/Benefit-Banner mit Produktvorteilen",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Narrow Banner (872x158)",
+              "imageCategory": "benefit",
+              "description": "Schmaler Banner mit Produktvorteilen und Trust-Informationen.",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Benefit-Icons Grid"
+        },
+        {
+          "position": 3,
+          "layoutType": "lg-4grid",
+          "layoutId": "lg-4grid",
+          "tileCount": 4,
+          "designRationale": "4er-Grid mit Benefit-Icons oder Feature-Highlights",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Benefit-Icon oder Feature-Highlight 1",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "2",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Benefit-Icon oder Feature-Highlight 2",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "3",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Benefit-Icon oder Feature-Highlight 3",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "4",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Benefit-Icon oder Feature-Highlight 4",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Kategorie-Tiles"
+        },
+        {
+          "position": 4,
+          "layoutType": "std-2equal (Square + Wide)",
+          "layoutId": "std-2equal",
+          "tileCount": 2,
+          "designRationale": "Erste Produktkategorie: Square-Tile + Wide-Tile nebeneinander",
+          "tiles": [
+            {
+              "position": "links",
+              "size": "Square (436x436)",
+              "imageCategory": "lifestyle",
+              "description": "Lifestyle/Produkt-Tile Kategorie Kissen – verträumte Ästhetik mit himmelblauem Thema",
+              "textOnImage": "Kategoriename",
+              "ctaText": "",
+              "linksTo": "Kissen"
+            },
+            {
+              "position": "rechts",
+              "size": "Wide (436x218)",
+              "imageCategory": "lifestyle",
+              "description": "Wide-Tile Kategorie Toppers – spielerisches Design passend zur Markenidentität",
+              "textOnImage": "Kategoriename",
+              "ctaText": "",
+              "linksTo": "Toppers"
+            }
+          ],
+          "relationToNextModule": "Zu weiteren Kategorien"
+        },
+        {
+          "position": 5,
+          "layoutType": "std-2equal (Wide + Small)",
+          "layoutId": "std-2equal",
+          "tileCount": 3,
+          "designRationale": "Weitere Kategorien: Wide-Tile + 2x Small-Tiles",
+          "tiles": [
+            {
+              "position": "links",
+              "size": "Wide (436x218)",
+              "imageCategory": "lifestyle",
+              "description": "Wide-Tile Kategorie Bettdecke",
+              "textOnImage": "Kategoriename",
+              "ctaText": "",
+              "linksTo": "Bettdecke"
+            },
+            {
+              "position": "rechts-oben",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Benefit/Feature-Tile",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "rechts-unten",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Benefit/Feature-Tile",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Produkt-Highlights"
+        },
+        {
+          "position": 6,
+          "layoutType": "std-2equal (2x Square)",
+          "layoutId": "std-2equal",
+          "tileCount": 2,
+          "designRationale": "Zwei quadratische Tiles für Produkt-Highlights",
+          "tiles": [
+            {
+              "position": "links",
+              "size": "Square (436x436)",
+              "imageCategory": "lifestyle",
+              "description": "Lifestyle-Tile mit Produktmotiv – spielerisch-verträumte Szene mit himmelblauem Thema",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "rechts",
+              "size": "Square (436x436)",
+              "imageCategory": "lifestyle",
+              "description": "Lifestyle-Tile mit weiterer Produktszene – schwebende/springende Personen-Motiv",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu weiteren Produkt-Tiles"
+        },
+        {
+          "position": 7,
+          "layoutType": "std-2equal (2x Wide)",
+          "layoutId": "std-2equal",
+          "tileCount": 2,
+          "designRationale": "Produkt-/Kategorie-Informations-Tiles",
+          "tiles": [
+            {
+              "position": "links",
+              "size": "Wide (436x218)",
+              "imageCategory": "lifestyle",
+              "description": "Wide-Tile mit Produktinfo oder Kategorie",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "rechts",
+              "size": "Wide (436x218)",
+              "imageCategory": "lifestyle",
+              "description": "Wide-Tile mit Produktinfo oder Kategorie",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Lifestyle-Tiles"
+        },
+        {
+          "position": 8,
+          "layoutType": "std-3tiles (3x Square)",
+          "layoutId": "std-3tiles",
+          "tileCount": 3,
+          "designRationale": "Drei quadratische Lifestyle-Tiles für Produktszenen",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "Square (436x436)",
+              "imageCategory": "lifestyle",
+              "description": "Lifestyle-Tile mit Schlafszene – verträumt mit himmelblauem Himmel-Thema",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "2",
+              "size": "Square (436x436)",
+              "imageCategory": "lifestyle",
+              "description": "Lifestyle-Tile mit Produktszene – spielerische Elemente (schwebende Personen)",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "3",
+              "size": "Square (436x436)",
+              "imageCategory": "lifestyle",
+              "description": "Lifestyle-Tile mit Brand-Welt – Himmel/Wolken-Thema durchgehend",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Abschluss-Banner"
+        },
+        {
+          "position": 9,
+          "layoutType": "Full-Width Banner",
+          "layoutId": "1",
+          "tileCount": 1,
+          "designRationale": "Abschluss-Banner mit Brand-Messaging oder CTA",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Full Width (872x218)",
+              "imageCategory": "creative",
+              "description": "Abschluss-Banner passend zur Himmel/Wolken-Ästhetik und 'Lebe deine Träume.'-Claim",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Ende der Startseite"
+        }
+      ],
+      "brandImages": {
+        "editorial": 19,
+        "videos": 0,
+        "heroAndNavLogo": 2,
+        "methodology": "V3: Separated Hero banner (1 per page) and Nav logo (1 per page) from editorial content. Deduplicated by image ID."
+      }
+    },
+    {
+      "pageName": "Alle Produkte",
+      "heroBanner": null,
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Minimal",
+          "layoutId": "minimal",
+          "tileCount": 3,
+          "designRationale": "Logo + Icons, hauptsächlich Amazon Product Grid",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "Logo (872x174)",
+              "imageCategory": "logo",
+              "description": "Brand Logo cloudpillo mit Wolken-Icon in hellblau",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "2",
+              "size": "Small (200x199)",
+              "imageCategory": "icon",
+              "description": "Cloudpillo-Icon/Logo-Element",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "3",
+              "size": "Small (200x199)",
+              "imageCategory": "icon",
+              "description": "Cloudpillo-Icon/Logo-Element",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Amazon Product Grid"
+        }
+      ],
+      "brandImages": {
+        "editorial": 0,
+        "videos": 0,
+        "heroAndNavLogo": 2,
+        "methodology": "V3: Separated Hero banner (1 per page) and Nav logo (1 per page) from editorial content. Deduplicated by image ID."
+      }
+    },
+    {
+      "pageName": "Kissen",
+      "heroBanner": null,
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Minimal Header",
+          "layoutId": "header",
+          "tileCount": 3,
+          "designRationale": "Logo + Icons oben",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "Logo (872x174)",
+              "imageCategory": "logo",
+              "description": "Brand Logo",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "2",
+              "size": "Small (200x199)",
+              "imageCategory": "icon",
+              "description": "Icon-Element",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "3",
+              "size": "Small (200x199)",
+              "imageCategory": "icon",
+              "description": "Icon-Element",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Kategorie-Content"
+        },
+        {
+          "position": 2,
+          "layoutType": "Narrow Divider",
+          "layoutId": "divider",
+          "tileCount": 1,
+          "designRationale": "Schmale Divider zwischen Sektionen",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Narrow (872x89)",
+              "imageCategory": "divider",
+              "description": "Sektions-Trenner",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Kategorie-Tiles"
+        },
+        {
+          "position": 3,
+          "layoutType": "std-2equal (Square + Wide)",
+          "layoutId": "std-2equal",
+          "tileCount": 2,
+          "designRationale": "Kategorie-Highlight mit Square + Wide",
+          "tiles": [
+            {
+              "position": "links",
+              "size": "Square (436x436)",
+              "imageCategory": "lifestyle",
+              "description": "Lifestyle-Bild Kissen-Kategorie",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "rechts",
+              "size": "Wide (436x218)",
+              "imageCategory": "lifestyle",
+              "description": "Wide-Tile Kissen-Information",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu nächster Sektion"
+        },
+        {
+          "position": 4,
+          "layoutType": "Narrow Divider",
+          "layoutId": "divider",
+          "tileCount": 1,
+          "designRationale": "Schmale Divider",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Narrow (872x89)",
+              "imageCategory": "divider",
+              "description": "Sektions-Trenner",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Benefit-Icons"
+        },
+        {
+          "position": 5,
+          "layoutType": "lg-4grid",
+          "layoutId": "lg-4grid",
+          "tileCount": 4,
+          "designRationale": "4er-Grid mit Benefit-Icons",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Benefit-Icon 1",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "2",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Benefit-Icon 2",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "3",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Benefit-Icon 3",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "4",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Benefit-Icon 4",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Product Grid"
+        }
+      ],
+      "brandImages": {
+        "editorial": 11,
+        "videos": 0,
+        "heroAndNavLogo": 2,
+        "methodology": "V3: Separated Hero banner (1 per page) and Nav logo (1 per page) from editorial content. Deduplicated by image ID."
+      }
+    },
+    {
+      "pageName": "Toppers",
+      "heroBanner": null,
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Minimal Header",
+          "layoutId": "header",
+          "tileCount": 3,
+          "designRationale": "Logo + Icons",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "Logo (872x174)",
+              "imageCategory": "logo",
+              "description": "Brand Logo",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "2",
+              "size": "Small (200x199)",
+              "imageCategory": "icon",
+              "description": "Icon-Element",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "3",
+              "size": "Small (200x199)",
+              "imageCategory": "icon",
+              "description": "Icon-Element",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Kategorie-Content"
+        },
+        {
+          "position": 2,
+          "layoutType": "Narrow Divider",
+          "layoutId": "divider",
+          "tileCount": 1,
+          "designRationale": "Schmale Divider",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Narrow (872x89)",
+              "imageCategory": "divider",
+              "description": "Sektions-Trenner",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Kategorie-Tiles"
+        },
+        {
+          "position": 3,
+          "layoutType": "std-2equal (Wide + Square)",
+          "layoutId": "std-2equal",
+          "tileCount": 2,
+          "designRationale": "Kategorie-Highlight",
+          "tiles": [
+            {
+              "position": "links",
+              "size": "Wide (436x218)",
+              "imageCategory": "lifestyle",
+              "description": "Wide-Tile Toppers",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "rechts",
+              "size": "Square (436x436)",
+              "imageCategory": "lifestyle",
+              "description": "Square-Tile Toppers-Lifestyle",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Benefit-Icons"
+        },
+        {
+          "position": 4,
+          "layoutType": "Narrow Divider",
+          "layoutId": "divider",
+          "tileCount": 1,
+          "designRationale": "Schmale Divider",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Narrow (872x89)",
+              "imageCategory": "divider",
+              "description": "Sektions-Trenner",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Benefit-Icons"
+        },
+        {
+          "position": 5,
+          "layoutType": "lg-4grid",
+          "layoutId": "lg-4grid",
+          "tileCount": 4,
+          "designRationale": "4er-Grid mit Benefit-Icons",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Benefit-Icon 1",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "2",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Benefit-Icon 2",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "3",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Benefit-Icon 3",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "4",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Benefit-Icon 4",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Product Grid"
+        }
+      ],
+      "brandImages": {
+        "editorial": 8,
+        "videos": 0,
+        "heroAndNavLogo": 2,
+        "methodology": "V3: Separated Hero banner (1 per page) and Nav logo (1 per page) from editorial content. Deduplicated by image ID."
+      }
+    },
+    {
+      "pageName": "Bettdecke",
+      "heroBanner": null,
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Minimal Header",
+          "layoutId": "header",
+          "tileCount": 3,
+          "designRationale": "Logo + Icons",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "Logo (872x174)",
+              "imageCategory": "logo",
+              "description": "Brand Logo",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "2",
+              "size": "Small (200x199)",
+              "imageCategory": "icon",
+              "description": "Icon-Element",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "3",
+              "size": "Small (200x199)",
+              "imageCategory": "icon",
+              "description": "Icon-Element",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Kategorie-Content"
+        },
+        {
+          "position": 2,
+          "layoutType": "Narrow Divider",
+          "layoutId": "divider",
+          "tileCount": 1,
+          "designRationale": "Schmale Divider",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Narrow (872x89)",
+              "imageCategory": "divider",
+              "description": "Sektions-Trenner",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Kategorie-Tiles"
+        },
+        {
+          "position": 3,
+          "layoutType": "std-2equal (Square + Wide)",
+          "layoutId": "std-2equal",
+          "tileCount": 2,
+          "designRationale": "Kategorie-Highlight",
+          "tiles": [
+            {
+              "position": "links",
+              "size": "Square (436x436)",
+              "imageCategory": "lifestyle",
+              "description": "Square-Tile Bettdecke",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "rechts",
+              "size": "Wide (436x218)",
+              "imageCategory": "lifestyle",
+              "description": "Wide-Tile Bettdecke-Information",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Divider"
+        },
+        {
+          "position": 4,
+          "layoutType": "Narrow Divider",
+          "layoutId": "divider",
+          "tileCount": 1,
+          "designRationale": "Schmale Divider",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Narrow (872x89)",
+              "imageCategory": "divider",
+              "description": "Sektions-Trenner",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Kategorie-Tiles 2"
+        },
+        {
+          "position": 5,
+          "layoutType": "std-2equal (Wide + Square)",
+          "layoutId": "std-2equal",
+          "tileCount": 2,
+          "designRationale": "Weitere Kategorie-Sektion",
+          "tiles": [
+            {
+              "position": "links",
+              "size": "Wide (436x218)",
+              "imageCategory": "lifestyle",
+              "description": "Wide-Tile zusätzliche Info",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "rechts",
+              "size": "Square (436x436)",
+              "imageCategory": "lifestyle",
+              "description": "Square-Tile weitere Kategorie",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Divider"
+        },
+        {
+          "position": 6,
+          "layoutType": "Narrow Divider",
+          "layoutId": "divider",
+          "tileCount": 1,
+          "designRationale": "Schmale Divider",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Narrow (872x89)",
+              "imageCategory": "divider",
+              "description": "Sektions-Trenner",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Benefit-Icons"
+        },
+        {
+          "position": 7,
+          "layoutType": "lg-4grid",
+          "layoutId": "lg-4grid",
+          "tileCount": 4,
+          "designRationale": "4er-Grid mit Benefit-Icons",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Benefit-Icon 1",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "2",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Benefit-Icon 2",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "3",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Benefit-Icon 3",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "4",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Benefit-Icon 4",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Product Grid"
+        }
+      ],
+      "brandImages": {
+        "editorial": 11,
+        "videos": 0,
+        "heroAndNavLogo": 2,
+        "methodology": "V3: Separated Hero banner (1 per page) and Nav logo (1 per page) from editorial content. Deduplicated by image ID."
+      }
+    },
+    {
+      "pageName": "Bettwäsche",
+      "heroBanner": null,
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Minimal",
+          "layoutId": "minimal",
+          "tileCount": 3,
+          "designRationale": "Minimalistische Seite: Logo + Icons, hauptsächlich Product Grid. Neue/spärliche Kategorie",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "Logo (872x174)",
+              "imageCategory": "logo",
+              "description": "Brand Logo",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "2",
+              "size": "Small (200x199)",
+              "imageCategory": "icon",
+              "description": "Icon-Element",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "3",
+              "size": "Small (200x199)",
+              "imageCategory": "icon",
+              "description": "Icon-Element",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Amazon Product Grid"
+        }
+      ],
+      "brandImages": {
+        "editorial": 0,
+        "videos": 0,
+        "heroAndNavLogo": 2,
+        "methodology": "V3: Separated Hero banner (1 per page) and Nav logo (1 per page) from editorial content. Deduplicated by image ID."
+      }
+    },
+    {
+      "pageName": "Unsere Mission",
+      "heroBanner": null,
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Header",
+          "layoutId": "header",
+          "tileCount": 3,
+          "designRationale": "Logo + Icons für Brand-Story-Seite",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "Logo (872x174)",
+              "imageCategory": "logo",
+              "description": "Brand Logo",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "2",
+              "size": "Small (200x199)",
+              "imageCategory": "icon",
+              "description": "Icon-Element",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "3",
+              "size": "Small (200x199)",
+              "imageCategory": "icon",
+              "description": "Icon-Element",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Brand-Story"
+        },
+        {
+          "position": 2,
+          "layoutType": "std-2equal (2x Square)",
+          "layoutId": "std-2equal",
+          "tileCount": 2,
+          "designRationale": "Brand-Imagery Squares für Mission-Erzählung",
+          "tiles": [
+            {
+              "position": "links",
+              "size": "Square (435x436)",
+              "imageCategory": "lifestyle",
+              "description": "Square-Tile mit Brand-Imagery",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "rechts",
+              "size": "Square (436x436)",
+              "imageCategory": "lifestyle",
+              "description": "Square-Tile mit Brand-Story-Element",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Narrow Divider"
+        },
+        {
+          "position": 3,
+          "layoutType": "Narrow Divider",
+          "layoutId": "divider",
+          "tileCount": 1,
+          "designRationale": "Schmale Divider zwischen Story-Sektionen",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Narrow (872x165)",
+              "imageCategory": "divider",
+              "description": "Sektions-Trenner",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Benefit-Icons"
+        },
+        {
+          "position": 4,
+          "layoutType": "lg-4grid",
+          "layoutId": "lg-4grid",
+          "tileCount": 4,
+          "designRationale": "4er-Grid mit Brand-Values oder Feature-Icons",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Brand-Value Icon 1",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "2",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Brand-Value Icon 2",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "3",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Brand-Value Icon 3",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "4",
+              "size": "Small (218x218)",
+              "imageCategory": "icon",
+              "description": "Brand-Value Icon 4",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Divider"
+        },
+        {
+          "position": 5,
+          "layoutType": "Narrow Divider",
+          "layoutId": "divider",
+          "tileCount": 1,
+          "designRationale": "Schmale Divider",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "Narrow (872x89)",
+              "imageCategory": "divider",
+              "description": "Sektions-Trenner",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Zu Brand-Values Wide Tiles"
+        },
+        {
+          "position": 6,
+          "layoutType": "std-4tiles (4x Wide)",
+          "layoutId": "std-4tiles",
+          "tileCount": 4,
+          "designRationale": "4er-Reihe mit Wide-Tiles für Brand-Values oder Story-Elemente",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "Wide (436x218)",
+              "imageCategory": "lifestyle",
+              "description": "Wide-Tile mit Brand-Story oder -Value 1",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "2",
+              "size": "Wide (436x218)",
+              "imageCategory": "lifestyle",
+              "description": "Wide-Tile mit Brand-Story oder -Value 2",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "3",
+              "size": "Wide (436x218)",
+              "imageCategory": "lifestyle",
+              "description": "Wide-Tile mit Brand-Story oder -Value 3",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            },
+            {
+              "position": "4",
+              "size": "Wide (436x218)",
+              "imageCategory": "lifestyle",
+              "description": "Wide-Tile mit Brand-Story oder -Value 4",
+              "textOnImage": "",
+              "ctaText": "",
+              "linksTo": ""
+            }
+          ],
+          "relationToNextModule": "Ende der Seite"
+        }
+      ],
+      "brandImages": {
+        "editorial": 12,
+        "videos": 0,
+        "heroAndNavLogo": 2,
+        "methodology": "V3: Separated Hero banner (1 per page) and Nav logo (1 per page) from editorial content. Deduplicated by image ID."
+      }
+    }
+  ],
+  "summary": {
+    "totalBrandImages": 61,
+    "totalVideos": 0,
+    "totalModules": 45,
+    "layoutTypes": {
+      "Full-Width": 2,
+      "Full-Width Narrow": 1,
+      "lg-4grid": 5,
+      "std-2equal": 11,
+      "std-3tiles": 1,
+      "std-4tiles": 1,
+      "Narrow Divider": 8,
+      "Minimal": 2,
+      "Header": 5,
+      "Wide Tile (einzeln)": 0
+    },
+    "keyDesignPatterns": [
+      "Durchgängiges Himmel/Wolken-Thema als Brand-Element – blauer Himmel, weiße Wolken",
+      "Spielerisch-verträumte Ästhetik: springende/schwebende Personen in farbiger Kleidung",
+      "Hellblau (Wolken-Logo-Farbe) als primäre Markenfarbe",
+      "'Lebe deine Träume.' als emotionaler, inspirierender Claim",
+      "Orange CTAs als starke Kontrastfarbe zu himmelblauem Thema",
+      "IGR-Zertifikat als Trust- und Qualitäts-Element",
+      "Schmale Narrow-Divider (872x89 bis 872x178) als Sektions-Trenner zwischen Modulen",
+      "Kategorie-Seiten folgen konsistentem Template: Logo → Narrow Divider → Square+Wide Tiles → Narrow Divider → 4-Grid Icons",
+      "Bettwaren-Sortiment: Kissen, Toppers, Bettdecken, Bettwäsche (vollständiges Bettwäsche-Portfolio)",
+      "Keine Videos im gesamten Store – reines Visual-Brand-Experience mit Lifestyle-Fotografie",
+      "Umfangreiche Startseite (9 Module) mit mehreren Kategorie-Tiles und Lifestyle-Szenen",
+      "Brand-Story-Seite ('Unsere Mission') mit Square Tiles, 4-Grid Icons und Wide Tiles für Wert-Kommunikation",
+      "Minimale Category Pages für neue/spärliche Kategorien (z.B. Bettwäsche nur Logo + Product Grid)",
+      "Konsistente Farbwelt durchgehend: Himmelblau + Weiß + gedeckte, warme Bettwaren-Farben"
+    ],
+    "moduleFlow": "Hero (Himmel/Wolken + springende Personen + Claim) → Nackenstützkissen-Banner mit CTA → Schmaler Trust-Banner → 4-Grid Benefits → Kategorie-Tiles Mix (Square+Wide+Small) → Lifestyle-Squares (3x) → Wide Product-Tiles (2x) → Abschluss-Banner",
+    "imageCountingMethodology": "V3 (April 2026): Editorial images deduplicated by unique image ID. Each page includes 1 Hero banner and 1 Nav logo (not counted in editorial total). Total editorial: 61. Each of 7 pages: Hero (1) + Nav logo (1) + Editorial images (varies)."
+  }
+}

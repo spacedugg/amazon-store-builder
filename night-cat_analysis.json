@@ -1,0 +1,253 @@
+{
+  "brandName": "Night Cat",
+  "storeUrl": "https://www.amazon.de/stores/page/CC609240-DCC5-47C5-A171-3B973268CD34",
+  "tagline": "Catch Outdoors Fun",
+  "analyzedAt": "2026-04-10",
+  "methodology": "V3",
+  "navigation": {
+    "pageCount": 10,
+    "pages": [
+      {
+        "name": "Startseite",
+        "level": 0,
+        "pageId": "CC609240-DCC5-47C5-A171-3B973268CD34"
+      },
+      {
+        "name": "Hängemattenzelt",
+        "level": 1,
+        "pageId": "CE68CD68-132D-4570-84C5-31DDBDBD873F"
+      },
+      {
+        "name": "Kuppelzelt",
+        "level": 1,
+        "pageId": "4FED862B-112B-41A6-B1A9-F8ED490BD6E7"
+      },
+      {
+        "name": "Feldbett Zelt",
+        "level": 1,
+        "pageId": "B4C3EA1C-1F72-4A54-9E6C-9D31CECA1F37"
+      },
+      {
+        "name": "WurfZelt",
+        "level": 1,
+        "pageId": "3E90B781-2F1D-4482-B744-B825EDF64968"
+      },
+      {
+        "name": "Ultraleichtes Zelt",
+        "level": 1,
+        "pageId": "402D4646-6CC4-465D-B77B-005C65179575"
+      },
+      {
+        "name": "Wanderrucksäcke",
+        "level": 1,
+        "pageId": "20A5B648-FC7B-4A1B-8E64-4C03A067AC8B"
+      },
+      {
+        "name": "Strandzelt",
+        "level": 1,
+        "pageId": "56EC8D6F-57EB-4BE8-9B59-2763880077B0"
+      },
+      {
+        "name": "Wathose",
+        "level": 1,
+        "pageId": "6F55DEE1-18D3-47DA-AFE4-72F0A074F6F8"
+      },
+      {
+        "name": "Campingzubehör",
+        "level": 1,
+        "pageId": "A706CCF3-A58C-43B1-B748-F2C858475F64"
+      }
+    ]
+  },
+  "contentSummary": {
+    "totalEditorialImages": 1,
+    "uniqueVideos": 45,
+    "editorialToVideoRatio": 0.02
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "pageId": "CC609240-DCC5-47C5-A171-3B973268CD34",
+      "heroBanner": {
+        "description": "Single hero banner establishing Night Cat brand identity and outdoor camping positioning. Clean, outdoor-focused visual gateway.",
+        "textOnImage": "Night Cat, Catch Outdoors Fun",
+        "estimatedDimensions": "1872x400",
+        "brandIdentityNote": "Minimalist approach - single hero banner with minimal editorial investment. Reflects brand's video-first strategy."
+      },
+      "editorialImages": 1,
+      "videos": 5,
+      "designNote": "Homepage with minimal editorial content. Single hero banner (855x341) + product grid driven by video content. No supporting banners or multiple editorial sections."
+    },
+    {
+      "pageName": "Hängemattenzelt",
+      "pageId": "CE68CD68-132D-4570-84C5-31DDBDBD873F",
+      "editorialImages": 0,
+      "videos": 9,
+      "designNote": "Product category page with zero editorial images. Pure video-based product presentation. 9 videos driving visual merchandising. Product grid only, no hero banner imagery."
+    },
+    {
+      "pageName": "Kuppelzelt",
+      "pageId": "4FED862B-112B-41A6-B1A9-F8ED490BD6E7",
+      "editorialImages": 0,
+      "videos": 2,
+      "designNote": "Minimal category page. 2 videos + product grid. No editorial images or hero banner."
+    },
+    {
+      "pageName": "Feldbett Zelt",
+      "pageId": "B4C3EA1C-1F72-4A54-9E6C-9D31CECA1F37",
+      "editorialImages": 0,
+      "videos": 2,
+      "designNote": "Minimal category page. 2 videos + product grid. No editorial images."
+    },
+    {
+      "pageName": "WurfZelt",
+      "pageId": "3E90B781-2F1D-4482-B744-B825EDF64968",
+      "editorialImages": 0,
+      "videos": 3,
+      "designNote": "Minimal category page. 3 videos + product grid. No editorial images."
+    },
+    {
+      "pageName": "Ultraleichtes Zelt",
+      "pageId": "402D4646-6CC4-465D-B77B-005C65179575",
+      "editorialImages": 0,
+      "videos": 7,
+      "designNote": "Moderate video content. 7 videos + product grid. No editorial images. Pure video-driven merchandising."
+    },
+    {
+      "pageName": "Wanderrucksäcke",
+      "pageId": "20A5B648-FC7B-4A1B-8E64-4C03A067AC8B",
+      "editorialImages": 0,
+      "videos": 4,
+      "designNote": "Product category page. 4 videos + product grid. No editorial images."
+    },
+    {
+      "pageName": "Strandzelt",
+      "pageId": "56EC8D6F-57EB-4BE8-9B59-2763880077B0",
+      "editorialImages": 0,
+      "videos": 2,
+      "designNote": "Minimal category page. 2 videos + product grid. No editorial images."
+    },
+    {
+      "pageName": "Wathose",
+      "pageId": "6F55DEE1-18D3-47DA-AFE4-72F0A074F6F8",
+      "editorialImages": 0,
+      "videos": 5,
+      "designNote": "Product category page. 5 videos + product grid. No editorial images."
+    },
+    {
+      "pageName": "Campingzubehör",
+      "pageId": "A706CCF3-A58C-43B1-B748-F2C858475F64",
+      "editorialImages": 0,
+      "videos": 6,
+      "designNote": "Product category page. 6 videos + product grid. No editorial images."
+    }
+  ],
+  "designPatterns": {
+    "colorScheme": {
+      "background": "Standard/Light",
+      "textColor": "Dark",
+      "accentColor": "Minimal",
+      "rationale": "Straightforward, functional design letting product videos dominate visual presentation"
+    },
+    "typography": {
+      "primary": "Standard sans-serif",
+      "characteristics": "Clean, minimal typographic hierarchy. Category names in sentence case. Functional rather than commanding."
+    },
+    "photography": {
+      "style": "Virtually absent - brand relies on video content instead of photography",
+      "lighting": "N/A",
+      "subjects": "Only 1 editorial image across entire store (on Startseite, 855x341). No lifestyle or brand photography investment beyond hero."
+    },
+    "videoContent": {
+      "strategy": "Video-first merchandising approach",
+      "distribution": "45 unique videos across 10 pages (avg 4.5 per page)",
+      "coverage": "Every category page relies on video for product presentation",
+      "rationale": "Outdoor/camping equipment heavily demonstrated via video content showing product setup, use cases, features in action"
+    },
+    "layoutPatterns": {
+      "homepage": "Single hero banner (1872x400 estimated) + video tiles + product grid",
+      "categoryPages": "No hero banners on sub-pages. Direct to video content + product grid.",
+      "contentRichPages": "Absent - zero content-rich pages with editorial sections. All pages video + grid focused."
+    },
+    "hierarchyStructure": {
+      "navigationDepth": "1 level - flat navigation, no sub-categories or nested structure",
+      "pageCount": "10 pages total (excluding duplicate 'Alle Angebote' and shared Amazon Basics page)",
+      "distribution": "Extremely concentrated video usage on product category pages rather than editorial distribution",
+      "strategy": "Minimal editorial investment. Maximum video utilization. Chinese outdoor brand prioritizing product demonstration over brand storytelling."
+    }
+  },
+  "editorialStrategy": {
+    "totalEditorialImages": 1,
+    "totalVideos": 45,
+    "videoPerImageRatio": 45,
+    "distribution": [
+      {
+        "page": "Startseite",
+        "editorialImages": 1,
+        "videos": 5,
+        "rationale": "Only editorial image investment - minimal hero visual gateway. Video content drives immediate product engagement."
+      },
+      {
+        "page": "Hängemattenzelt",
+        "editorialImages": 0,
+        "videos": 9,
+        "rationale": "Highest video concentration - flagship tent category. Pure video-based merchandising showing hanging tent setup and features."
+      },
+      {
+        "page": "Ultraleichtes Zelt",
+        "editorialImages": 0,
+        "videos": 7,
+        "rationale": "Strong video presence for ultralight tent category. Videos demonstrate pack weight, setup, durability."
+      },
+      {
+        "page": "Campingzubehör",
+        "editorialImages": 0,
+        "videos": 6,
+        "rationale": "Accessory category with substantial video content."
+      },
+      {
+        "page": "Wathose",
+        "editorialImages": 0,
+        "videos": 5,
+        "rationale": "Water-sports related product - videos show product in use scenarios."
+      },
+      {
+        "page": "Wanderrucksäcke",
+        "editorialImages": 0,
+        "videos": 4,
+        "rationale": "Backpack category with moderate video coverage."
+      },
+      {
+        "page": "WurfZelt",
+        "editorialImages": 0,
+        "videos": 3,
+        "rationale": "Pop-up tent category with minimal video content."
+      },
+      {
+        "page": "Kuppelzelt, Feldbett Zelt, Strandzelt",
+        "editorialImages": 0,
+        "videos": "2 each",
+        "rationale": "Minimum viable video coverage - 2 videos per category driving product grid."
+      }
+    ]
+  },
+  "brandIdentity": {
+    "corePillars": [
+      "Outdoor Adventure Equipment",
+      "Practical Camping Solutions",
+      "Product Functionality Over Brand Narrative"
+    ],
+    "visualLanguage": "Minimal editorial presence reflects lean brand positioning. Single hero image on homepage. Video-first approach shows product functionality, setup, and real-world application rather than lifestyle aspirational content. Clean, functional design prioritizing product discovery and video demonstration over brand storytelling.",
+    "targetAudience": "Practical outdoor enthusiasts, camping hobbyists, hikers, water-sports participants seeking functional gear at value price points",
+    "navigationPhilosophy": "Flat, 1-level navigation with 10 product categories. No nested sub-categories or brand storytelling pages. Direct-to-product-grid approach. Minimal content investment (1 editorial image total) suggests focus on product quality and video demonstration as primary trust-building mechanism. Videos serve as product storytelling vehicle rather than lifestyle brand content.",
+    "contentStrategy": "Extremely video-heavy (45 videos vs 1 image). This is unconventional for most retail brands but functional for outdoor equipment category where demonstrating setup, durability, and use-cases via video is more persuasive than static photography. Chinese outdoor brand leveraging video-first merchandising over traditional editorial brand investment."
+  },
+  "keyObservations": {
+    "videoHeavy": "Virtually all product presentation relies on video content. 45 unique videos across 10 pages represents video-first merchandising strategy unusual for typical Amazon store designs.",
+    "minimalBrandInvestment": "Only 1 editorial image across entire store. No lifestyle imagery, no brand storytelling sections, no 'About Us' or brand narrative pages. Pure product-focused approach.",
+    "flatNavigation": "Simple 1-level navigation with no nested categories or product browsing hierarchy. Direct access to 10 product categories from homepage.",
+    "noEditorialPageTypes": "Unlike ESN's diverse page types (brand story, testimonials, educational content), Night Cat has zero content-rich pages. All pages follow video + grid formula.",
+    "categoryVariation": "Video counts vary significantly (2-9 videos per category), suggesting data-driven or sales-based video allocation rather than consistent template approach.",
+    "efficientDesignModel": "Minimal page template variation, minimal editorial asset creation, maximum reliance on product video content. Reflects lean brand resource model or deliberate focus on demonstrating product functionality over brand mythology."
+  }
+}

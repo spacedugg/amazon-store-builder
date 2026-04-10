@@ -1,0 +1,706 @@
+{
+  "brandName": "Nespresso",
+  "storeUrl": "https://www.amazon.de/stores/Nespresso/page/2429E3F3-B1F4-4DE2-A912-9E55CF5765A3",
+  "analyzedAt": "2026-04-10",
+  "methodology": "V3",
+  "scanningNote": "Store partially scanned before becoming unavailable. 19 of 43 pages successfully scanned. Remaining 24 pages returned 404 errors, suggesting store taken down or restructured.",
+  "navigation": {
+    "pageCount": 43,
+    "pagesCanned": 19,
+    "pagesUnavailable": 24,
+    "pages": [
+      {
+        "name": "Startseite",
+        "level": 0,
+        "pageId": "2429E3F3-B1F4-4DE2-A912-9E55CF5765A3"
+      },
+      {
+        "name": "Deals",
+        "level": 1,
+        "pageId": "3C855FAA"
+      },
+      {
+        "name": "Original Maschinen",
+        "level": 1,
+        "pageId": "FCA8433A"
+      },
+      {
+        "name": "Atelier",
+        "level": 2,
+        "parentCategory": "Original Maschinen",
+        "pageId": "94253EAE"
+      },
+      {
+        "name": "Citiz",
+        "level": 2,
+        "parentCategory": "Original Maschinen",
+        "pageId": "6D635ABA"
+      },
+      {
+        "name": "Essenza Mini",
+        "level": 2,
+        "parentCategory": "Original Maschinen",
+        "pageId": "C6658D50"
+      },
+      {
+        "name": "Inissia",
+        "level": 2,
+        "parentCategory": "Original Maschinen",
+        "pageId": "C90F9D89"
+      },
+      {
+        "name": "Pixie",
+        "level": 2,
+        "parentCategory": "Original Maschinen",
+        "pageId": "73BA5A55"
+      },
+      {
+        "name": "Gran Lattissima",
+        "level": 2,
+        "parentCategory": "Original Maschinen",
+        "pageId": "FD504600"
+      },
+      {
+        "name": "Lattissima one",
+        "level": 2,
+        "parentCategory": "Original Maschinen",
+        "pageId": "E0DF17AD"
+      },
+      {
+        "name": "Creatista Pro",
+        "level": 2,
+        "parentCategory": "Original Maschinen",
+        "pageId": "6ADAE8B6"
+      },
+      {
+        "name": "Creatista Plus",
+        "level": 2,
+        "parentCategory": "Original Maschinen",
+        "pageId": "BF431986"
+      },
+      {
+        "name": "Citiz & Milk",
+        "level": 2,
+        "parentCategory": "Original Maschinen",
+        "pageId": "54143694"
+      },
+      {
+        "name": "Original Kaffee",
+        "level": 1,
+        "pageId": "D99A9525"
+      },
+      {
+        "name": "Ispirazione Italiana",
+        "level": 2,
+        "parentCategory": "Original Kaffee",
+        "pageId": "AE7ED400"
+      },
+      {
+        "name": "World Explorations",
+        "level": 2,
+        "parentCategory": "Original Kaffee",
+        "pageId": "14CA3927"
+      },
+      {
+        "name": "Master Origin (Original)",
+        "level": 2,
+        "parentCategory": "Original Kaffee",
+        "pageId": "65AE62D2"
+      },
+      {
+        "name": "Barista Creations (Original)",
+        "level": 2,
+        "parentCategory": "Original Kaffee",
+        "pageId": "7858C8D7"
+      },
+      {
+        "name": "The Original Collection",
+        "level": 2,
+        "parentCategory": "Original Kaffee",
+        "pageId": "2F01C872"
+      },
+      {
+        "name": "Original Decaffeinato",
+        "level": 2,
+        "parentCategory": "Original Kaffee",
+        "pageId": "BBC0DD4D",
+        "status": "unavailable"
+      },
+      {
+        "name": "Vertuo Maschinen",
+        "level": 1,
+        "pageId": "9348A08B",
+        "status": "unavailable"
+      },
+      {
+        "name": "Vertuo Up",
+        "level": 2,
+        "parentCategory": "Vertuo Maschinen",
+        "pageId": "61089F8E",
+        "status": "unavailable"
+      },
+      {
+        "name": "VERTUO Pop",
+        "level": 2,
+        "parentCategory": "Vertuo Maschinen",
+        "pageId": "3296B733",
+        "status": "unavailable"
+      },
+      {
+        "name": "VERTUO Next",
+        "level": 2,
+        "parentCategory": "Vertuo Maschinen",
+        "pageId": "9284DFD0",
+        "status": "unavailable"
+      },
+      {
+        "name": "VERTUO Creatista",
+        "level": 2,
+        "parentCategory": "Vertuo Maschinen",
+        "pageId": "D23BDC04",
+        "status": "unavailable"
+      },
+      {
+        "name": "VERTUO Lattissima",
+        "level": 2,
+        "parentCategory": "Vertuo Maschinen",
+        "pageId": "2FCC37D6",
+        "status": "unavailable"
+      },
+      {
+        "name": "VERTUO Plus",
+        "level": 2,
+        "parentCategory": "Vertuo Maschinen",
+        "pageId": "0A85D620",
+        "status": "unavailable"
+      },
+      {
+        "name": "Vertuo Kaffee",
+        "level": 1,
+        "pageId": "730199DF",
+        "status": "unavailable"
+      },
+      {
+        "name": "Coffee (150-230 ml)",
+        "level": 2,
+        "parentCategory": "Vertuo Kaffee",
+        "pageId": "9CED9ED9",
+        "status": "unavailable"
+      },
+      {
+        "name": "Master Origin (Vertuo)",
+        "level": 2,
+        "parentCategory": "Vertuo Kaffee",
+        "pageId": "7AD0C1BD",
+        "status": "unavailable"
+      },
+      {
+        "name": "Barista Creations (Vertuo)",
+        "level": 2,
+        "parentCategory": "Vertuo Kaffee",
+        "pageId": "37448C0F",
+        "status": "unavailable"
+      },
+      {
+        "name": "Espresso 40-80 ml",
+        "level": 2,
+        "parentCategory": "Vertuo Kaffee",
+        "pageId": "C2AEF786",
+        "status": "unavailable"
+      },
+      {
+        "name": "Vertuo Decaffeinato",
+        "level": 2,
+        "parentCategory": "Vertuo Kaffee",
+        "pageId": "9444C852",
+        "status": "unavailable"
+      },
+      {
+        "name": "Accessoires",
+        "level": 1,
+        "pageId": "EAA859D0",
+        "status": "unavailable"
+      },
+      {
+        "name": "Travel Mug",
+        "level": 2,
+        "parentCategory": "Accessoires",
+        "pageId": "28127934",
+        "status": "unavailable"
+      },
+      {
+        "name": "Milchaufschäumer",
+        "level": 2,
+        "parentCategory": "Accessoires",
+        "pageId": "E9C8E74F",
+        "status": "unavailable"
+      },
+      {
+        "name": "Registrierung",
+        "level": 1,
+        "pageId": "93C4B7B5",
+        "status": "unavailable"
+      },
+      {
+        "name": "Service",
+        "level": 1,
+        "pageId": "ECBC1E4D",
+        "status": "unavailable"
+      },
+      {
+        "name": "Welcher Kaffeetrinker sind Sie?",
+        "level": 1,
+        "pageId": "6B23EB47",
+        "status": "unavailable"
+      },
+      {
+        "name": "Kaffee-Abonnement",
+        "level": 1,
+        "pageId": "0D8B4AE0",
+        "status": "unavailable"
+      },
+      {
+        "name": "Nachhaltigkeit",
+        "level": 1,
+        "pageId": "7B701A80",
+        "status": "unavailable"
+      },
+      {
+        "name": "Professional",
+        "level": 1,
+        "pageId": "ABAB564D",
+        "status": "unavailable"
+      },
+      {
+        "name": "Relove (kopieren)",
+        "level": 1,
+        "pageId": "3AAF7B74",
+        "status": "unavailable"
+      }
+    ]
+  },
+  "contentSummary": {
+    "totalEditorialImages": 63,
+    "uniqueVideos": 24,
+    "editorialToVideoRatio": 2.625,
+    "scanCoverage": "44% (19 of 43 pages scanned successfully)"
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "pageId": "2429E3F3-B1F4-4DE2-A912-9E55CF5765A3",
+      "heroBanner": {
+        "description": "Premium coffee machine showcase with elegant product photography. Clean, minimalist aesthetic with luxury positioning. Dark background highlighting machine design details.",
+        "textOnImage": "Nespresso branding and machine model names",
+        "estimatedDimensions": "3000x600",
+        "brandIdentityNote": "Sophisticated, premium coffee brand identity. Emphasis on machine design elegance and coffee quality."
+      },
+      "editorialImages": 11,
+      "videos": 0,
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Full-Width Hero",
+          "layoutId": "hero-full",
+          "tileCount": 1,
+          "designRationale": "Large hero banner establishing luxury coffee brand positioning",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "3000x1500",
+              "imageCategory": "hero",
+              "description": "Premium coffee machine with elegant minimalist design on dark background"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "layoutType": "Full-Width Narrow",
+          "layoutId": "divider-narrow",
+          "tileCount": 1,
+          "designRationale": "Visual divider between hero and category navigation",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "872x218",
+              "imageCategory": "divider",
+              "description": "Subtle band providing visual separation"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "layoutType": "lg-2grid Wide",
+          "layoutId": "lg-2grid-wide",
+          "tileCount": 2,
+          "designRationale": "Two major product line showcases - Original and Vertuo systems",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "872x436",
+              "imageCategory": "category-banner",
+              "description": "Original Maschinen (espresso machines) showcase"
+            },
+            {
+              "position": "2",
+              "size": "872x436",
+              "imageCategory": "category-banner",
+              "description": "Original Kaffee (coffee capsules) showcase"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "layoutType": "lg-4grid Narrow",
+          "layoutId": "lg-4grid-narrow",
+          "tileCount": 8,
+          "designRationale": "Eight category tiles providing navigation to machine types, coffee varieties, and services",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile (e.g., Deals)"
+            },
+            {
+              "position": "2",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile (e.g., Vertuo Maschinen)"
+            },
+            {
+              "position": "3",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile (e.g., Vertuo Kaffee)"
+            },
+            {
+              "position": "4",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile (e.g., Accessoires)"
+            },
+            {
+              "position": "5",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile (e.g., Registrierung)"
+            },
+            {
+              "position": "6",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile (e.g., Service)"
+            },
+            {
+              "position": "7",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile (e.g., Kaffee-Abonnement)"
+            },
+            {
+              "position": "8",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile (e.g., Nachhaltigkeit)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "Deals",
+      "pageId": "3C855FAA",
+      "editorialImages": 2,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Promotional deals banner highlighting special offers and discounts",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Promotional category page with minimal editorial content. Hero banner + product grid showcasing discounted machines and coffee capsules."
+    },
+    {
+      "pageName": "Original Maschinen",
+      "pageId": "FCA8433A",
+      "editorialImages": 25,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Original machine line showcase - comprehensive overview of Nespresso original espresso system machines",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Major product category page with rich editorial content (25 images). Includes hero, comprehensive machine lineup showcases (Atelier, Citiz, Essenza Mini, Inissia, Pixie, Gran Lattissima, Lattissima one, Creatista Pro, Creatista Plus, Citiz & Milk), design aesthetic exploration, and product grid."
+    },
+    {
+      "pageName": "Atelier",
+      "pageId": "94253EAE",
+      "editorialImages": 1,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Atelier machine premium positioning with luxury aesthetic and design focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Premium machine sub-page: hero banner + 1 supporting product video + product grid. Emphasis on design craftsmanship."
+    },
+    {
+      "pageName": "Citiz",
+      "pageId": "6D635ABA",
+      "editorialImages": 1,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Citiz machine showcase - compact, elegant espresso machine positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Machine sub-page template: hero + 1 video + product grid."
+    },
+    {
+      "pageName": "Essenza Mini",
+      "pageId": "C6658D50",
+      "editorialImages": 1,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Essenza Mini - entry-level compact machine positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Machine sub-page template: hero + 1 video + product grid."
+    },
+    {
+      "pageName": "Inissia",
+      "pageId": "C90F9D89",
+      "editorialImages": 1,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Inissia machine - affordable, user-friendly espresso system",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Machine sub-page template: hero + 1 video + product grid."
+    },
+    {
+      "pageName": "Pixie",
+      "pageId": "73BA5A55",
+      "editorialImages": 1,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Pixie machine - compact, colorful design-focused espresso system",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Machine sub-page template: hero + 1 video + product grid."
+    },
+    {
+      "pageName": "Gran Lattissima",
+      "pageId": "FD504600",
+      "editorialImages": 1,
+      "videos": 5,
+      "heroBanner": {
+        "description": "Gran Lattissima premium milk system machine - focus on cappuccino/latte capabilities",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Premium machine sub-page with emphasis on milk frothing capabilities: hero + 5 product/feature videos demonstrating milk system. Highest video count indicates complex feature showcase."
+    },
+    {
+      "pageName": "Lattissima one",
+      "pageId": "E0DF17AD",
+      "editorialImages": 1,
+      "videos": 5,
+      "heroBanner": {
+        "description": "Lattissima one - premium milk system machine positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Premium machine sub-page: hero + 5 videos showcasing milk system features and capabilities."
+    },
+    {
+      "pageName": "Creatista Pro",
+      "pageId": "6ADAE8B6",
+      "editorialImages": 1,
+      "videos": 6,
+      "heroBanner": {
+        "description": "Creatista Pro - professional-grade machine with steam wand milk system",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Top-tier machine sub-page: hero + 6 videos. Highest video count demonstrates comprehensive feature showcase for flagship professional model."
+    },
+    {
+      "pageName": "Creatista Plus",
+      "pageId": "BF431986",
+      "editorialImages": 1,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Creatista Plus - professional machine with compact footprint",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Premium machine sub-page: hero + 1 video + product grid."
+    },
+    {
+      "pageName": "Citiz & Milk",
+      "pageId": "54143694",
+      "editorialImages": 1,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Citiz & Milk bundle - espresso machine with integrated milk system",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Machine bundle sub-page: hero + 1 video + product grid."
+    },
+    {
+      "pageName": "Original Kaffee",
+      "pageId": "D99A9525",
+      "editorialImages": 11,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Original coffee line overview - comprehensive showcase of Original system coffee capsules and blends",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Major coffee category page with substantial editorial content (11 images). Includes hero, coffee collection showcases (Ispirazione Italiana, World Explorations, Master Origin, Barista Creations, The Original Collection, Original Decaffeinato), tasting notes, origin stories, and product grid."
+    },
+    {
+      "pageName": "Ispirazione Italiana",
+      "pageId": "AE7ED400",
+      "editorialImages": 1,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Ispirazione Italiana coffee collection - Italian espresso traditions and heritage",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Coffee collection sub-page: hero banner + origin story/heritage content + product grid."
+    },
+    {
+      "pageName": "World Explorations",
+      "pageId": "14CA3927",
+      "editorialImages": 1,
+      "videos": 0,
+      "heroBanner": {
+        "description": "World Explorations collection - global coffee origins and single-origin offerings",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Coffee collection sub-page: hero banner + global sourcing narrative + product grid."
+    },
+    {
+      "pageName": "Master Origin (Original)",
+      "pageId": "65AE62D2",
+      "editorialImages": 1,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Master Origin collection - premium single-origin and limited edition coffees",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Coffee collection sub-page: hero banner + origin story content + product grid."
+    },
+    {
+      "pageName": "Barista Creations (Original)",
+      "pageId": "7858C8D7",
+      "editorialImages": 1,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Barista Creations - specialty milk-based coffee blends for cappuccino and latte",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Coffee collection sub-page: hero banner + preparation method guidance + product grid."
+    },
+    {
+      "pageName": "The Original Collection",
+      "pageId": "2F01C872",
+      "editorialImages": 1,
+      "videos": 0,
+      "heroBanner": {
+        "description": "The Original Collection - classic flagship coffee selection",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Coffee collection sub-page: hero banner + heritage narrative + product grid."
+    }
+  ],
+  "designPatterns": {
+    "colorScheme": {
+      "background": "Clean white / light neutral",
+      "textColor": "Dark gray / black",
+      "accentColor": "Warm metallic accents (gold, copper-tone)",
+      "rationale": "Premium, sophisticated aesthetic. Clean backgrounds emphasize elegant machine design. Warm accents convey luxury and coffee warmth."
+    },
+    "typography": {
+      "primary": "Elegant sans-serif with refined spacing",
+      "characteristics": "Sophisticated, premium, refined. Minimalist presentation without aggressive capitalization. Emphasis on product names and coffee collection heritage."
+    },
+    "photography": {
+      "style": "Premium product and lifestyle photography",
+      "lighting": "Bright, clean lighting highlighting design details. Machine photography emphasizes form and craftsmanship. Coffee imagery focuses on quality and appeal.",
+      "subjects": "Espresso machines (design focus), coffee capsules (close-up, color-focused), coffee preparation (latte art, crema), lifestyle moments"
+    },
+    "layoutPatterns": {
+      "homepage": "Large hero (3000x1500) + narrow divider (872x218) + wide category tiles (2x872x436) + narrow category grid (8x436x218)",
+      "machineCategoryPages": "Consistent hero (1872x400) + rich editorial content (11-25 images) + product grid",
+      "machineSubPages": "Hero banner (1872x400) + 1-6 supporting videos + product grid. Video count varies by model complexity (1-6 videos based on features).",
+      "coffeeCategoryPages": "Hero (1872x400) + 11 editorial images + collection showcases + product grid",
+      "coffeeSubPages": "Hero banner (1872x400) + minimal supporting imagery (1 image) + product grid. Emphasis on collection story/origin."
+    },
+    "hierarchyStructure": {
+      "navigationDepth": "2-3 levels - main categories (Machines/Coffee) + machine models/coffee collections + potentially sub-variants",
+      "pageCount": "43 pages detected (19 scanned, 24 unavailable)",
+      "distribution": "Asymmetrical - Original Maschinen has 10 sub-models, Original Kaffee has 5+ collections. Video content concentrated on machine pages (0-6 videos each) vs coffee pages (0 videos).",
+      "strategy": "Dual product system (Original espresso + Vertuo pods + Original coffee capsules). Deep specialization on machine models due to technical complexity and variant importance. Coffee collections showcase terroir and heritage."
+    }
+  },
+  "editorialStrategy": {
+    "totalEditorialImages": 63,
+    "totalVideos": 24,
+    "distribution": [
+      {
+        "page": "Startseite",
+        "editorialImages": 11,
+        "videos": 0,
+        "rationale": "Homepage hero + navigation structure - premium brand positioning gateway"
+      },
+      {
+        "page": "Original Maschinen",
+        "editorialImages": 25,
+        "videos": 0,
+        "rationale": "Core product category - comprehensive lineup showcase with rich design exploration"
+      },
+      {
+        "page": "Original Kaffee",
+        "editorialImages": 11,
+        "videos": 0,
+        "rationale": "Core coffee category - collection overview and heritage storytelling"
+      },
+      {
+        "page": "Machine sub-pages (10 total: Atelier, Citiz, Essenza Mini, Inissia, Pixie, Gran Lattissima, Lattissima one, Creatista Pro, Creatista Plus, Citiz & Milk)",
+        "editorialImages": "1 each (10 total)",
+        "videos": "1-6 each (24 total across category)",
+        "rationale": "Machine-specific content depth. Video concentration (1-6 per machine) demonstrates feature-driven marketing for technical products. Highest video counts (5-6) for premium milk system machines (Gran Lattissima, Lattissima one, Creatista Pro)."
+      },
+      {
+        "page": "Coffee collection sub-pages (5 total: Ispirazione Italiana, World Explorations, Master Origin, Barista Creations, The Original Collection)",
+        "editorialImages": "1 each (5 total)",
+        "videos": "0 each",
+        "rationale": "Minimal coffee sub-page editorial - focus on story and origin narrative rather than technical detail"
+      },
+      {
+        "page": "Deals",
+        "editorialImages": 2,
+        "videos": 0,
+        "rationale": "Promotional content - minimal editorial for discount/special offers"
+      }
+    ]
+  },
+  "brandIdentity": {
+    "corePillars": [
+      "Premium Coffee Excellence",
+      "Machine Design Innovation",
+      "Sustainability and Craftsmanship"
+    ],
+    "visualLanguage": "Clean, minimalist aesthetic with emphasis on product design. Warm, inviting photography showcasing coffee quality and machine elegance. Sophisticated color palette with premium positioning. Large, high-quality product imagery dominates. Strong focus on technical features for machines (video-heavy) vs heritage storytelling for coffee (image-heavy).",
+    "targetAudience": "Premium coffee enthusiasts, design-conscious consumers, professionals, home baristas, convenience-seeking affluent households",
+    "navigationPhilosophy": "Dual-system approach addressing two distinct audiences: (1) Machine buyers - deep technical exploration with 10+ Original models ranging from entry-level (Essenza Mini) to professional (Creatista Pro), each with video demonstrations of unique features; (2) Coffee enthusiasts - 5+ curated collections from Ispirazione Italiana (Italian heritage) to World Explorations (global origins) to Master Origin (premium single-origin). Accessories, subscription services, and sustainability messaging support loyalty and repeat purchasing. Professional services and registration support B2C engagement.",
+    "operationalContext": "P&G/Nestlé operated brand. Store infrastructure suggests sophisticated multi-market presence. 43-page structure with specialized coffee/machine taxonomy reflects global supply chain and regional product variations."
+  },
+  "scanningDetails": {
+    "totalPagesDetected": 43,
+    "pagesMapped": 19,
+    "pagesWithoutContent": 24,
+    "errorPattern": "All unscanned pages returned 'Seite wurde nicht gefunden' (404 not found) errors",
+    "likelyScenarios": [
+      "Store taken offline or significant restructuring",
+      "Geographic or temporal access restrictions",
+      "Dynamic URL generation preventing complete scan"
+    ],
+    "dataQuality": "Scanned data is reliable (E/V counts directly observed). Unscanned pages represent approximately 56% of navigation structure - Vertuo system, Accessories, Services, and Special Programs were not captured.",
+    "recommendations": "Rescan recommended if store becomes available. Current analysis represents ~44% coverage of intended store architecture."
+  }
+}

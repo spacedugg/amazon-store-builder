@@ -1,0 +1,554 @@
+{
+  "brandName": "Hansegrün",
+  "storeUrl": "https://www.amazon.de/stores/page/BC9A9642-4612-460E-81B4-985E9AF6A7D2",
+  "analyzedAt": "2026-04-09",
+  "methodology": "V3",
+  "navigation": {
+    "pageCount": 19,
+    "pages": [
+      {
+        "name": "Startseite",
+        "level": 0,
+        "pageId": "BC9A9642-4612-460E-81B4-985E9AF6A7D2"
+      },
+      {
+        "name": "Alle Produkte",
+        "level": 1,
+        "pageId": "0599725A-6655-4CC0-BEF9-A1611BA0DF50"
+      },
+      {
+        "name": "Neuheiten",
+        "level": 1,
+        "pageId": "8593169F-6771-4714-8946-B310EAAA30F7"
+      },
+      {
+        "name": "Spar-Sets",
+        "level": 1,
+        "pageId": "0DB9FDD8-7C90-4CAC-BFF6-BAEBC586C20C"
+      },
+      {
+        "name": "Shots",
+        "level": 1,
+        "pageId": "E3FD5652-9AC5-4AC2-BD9C-F784C33A22D5"
+      },
+      {
+        "name": "Ingwer-Shots",
+        "level": 2,
+        "parentCategory": "Shots",
+        "pageId": "EEB1E137-CE92-47E2-AB61-F7CD0360E56D"
+      },
+      {
+        "name": "Benefits",
+        "level": 1,
+        "pageId": "5DB7F16C-C04D-4386-B9B7-B1593215B7A4"
+      },
+      {
+        "name": "Immunsystem",
+        "level": 2,
+        "parentCategory": "Benefits",
+        "pageId": "4927D23C-78ED-498D-B776-821846C16EF4"
+      },
+      {
+        "name": "Energie & Sport",
+        "level": 2,
+        "parentCategory": "Benefits",
+        "pageId": "46F5F32D-2512-43B8-9014-03B2E7C34E43"
+      },
+      {
+        "name": "Darmfunktion",
+        "level": 2,
+        "parentCategory": "Benefits",
+        "pageId": "8012E3F8-58F8-4E4E-A449-138CB6957417"
+      },
+      {
+        "name": "Anti-Müdigkeit",
+        "level": 2,
+        "parentCategory": "Benefits",
+        "pageId": "D7E40E02-645F-4075-920E-13EF29A5E155"
+      },
+      {
+        "name": "Zahnfunktion",
+        "level": 2,
+        "parentCategory": "Benefits",
+        "pageId": "9FF2F0B5-FEF0-440C-BC89-96F38A3A0AB3"
+      },
+      {
+        "name": "Zellschutz",
+        "level": 2,
+        "parentCategory": "Benefits",
+        "pageId": "D8C5667C-2A77-44D0-9763-5CDAF47FF323"
+      },
+      {
+        "name": "Eisenaufnahme",
+        "level": 2,
+        "parentCategory": "Benefits",
+        "pageId": "1A36A785-C6EF-41F1-BBE7-96999ABEFF86"
+      },
+      {
+        "name": "Hautfunktion",
+        "level": 2,
+        "parentCategory": "Benefits",
+        "pageId": "80F669C1-CF9D-417C-8854-2DA0327F856B"
+      },
+      {
+        "name": "Stoffwechsel",
+        "level": 2,
+        "parentCategory": "Benefits",
+        "pageId": "B1F30782-EE07-438C-A81E-BF3EEFA3D864"
+      },
+      {
+        "name": "Knochenfunktion",
+        "level": 2,
+        "parentCategory": "Benefits",
+        "pageId": "2446F867-676F-4181-9407-E1CFA2DEAF1E"
+      },
+      {
+        "name": "Über Uns",
+        "level": 1,
+        "pageId": "FE5A6FE8-EC0C-49F0-A53E-48C85B7E36EE"
+      },
+      {
+        "name": "Produktfinder",
+        "level": 1,
+        "pageId": "84B4DA7A-F7B4-4899-BDCC-02B15DAC9661"
+      }
+    ]
+  },
+  "contentSummary": {
+    "totalEditorialImages": 77,
+    "uniqueVideos": 6,
+    "editorialToVideoRatio": 12.83
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "pageId": "BC9A9642-4612-460E-81B4-985E9AF6A7D2",
+      "heroBanner": {
+        "description": "Large hero banner introducing Hansegrün wellness and health shot brand with natural, wellness-focused aesthetic. Woman in beige pullover drinking a shot with closed eyes, bright living room background. Green tones and natural imagery positioning brand as health-conscious supplement provider.",
+        "textOnImage": "Superfoodpulver im Shotformat! Deutschlands meistverkauftes Bio Shotpulver",
+        "estimatedDimensions": "3000x1500",
+        "brandIdentityNote": "Large hero establishes wellness positioning with natural, plant-based brand identity. Full-width impact creates gateway to health/supplement ecosystem."
+      },
+      "editorialImages": 15,
+      "videos": 1,
+      "imageSizes": ["3000x1500", "872x91", "436x218", "436x218", "872x218", "872x290", "872x290", "872x91", "218x218", "218x218", "218x218", "218x218", "872x92", "872x218", "872x91"],
+      "modules": [
+        {
+          "position": 1,
+          "layoutType": "Full-Width Hero",
+          "layoutId": "hero-full",
+          "tileCount": 1,
+          "designRationale": "Large hero banner establishing brand and wellness positioning - gateway to product categories",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "3000x1500",
+              "imageCategory": "hero",
+              "description": "Wellness-focused hero with Hansegrün branding and health shot positioning"
+            }
+          ]
+        },
+        {
+          "position": 2,
+          "layoutType": "Full-Width Narrow",
+          "layoutId": "divider-narrow",
+          "tileCount": 1,
+          "designRationale": "Visual divider/separator banner",
+          "tiles": [
+            {
+              "position": "full",
+              "size": "872x91",
+              "imageCategory": "divider",
+              "description": "Narrow band providing visual separation"
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "layoutType": "lg-2grid Wide",
+          "layoutId": "lg-2grid-wide",
+          "tileCount": 2,
+          "designRationale": "Two large category showcase tiles for primary product offerings",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "872x436",
+              "imageCategory": "category-banner",
+              "description": "Primary category tile showcasing shots or bestseller products"
+            },
+            {
+              "position": "2",
+              "size": "872x436",
+              "imageCategory": "category-banner",
+              "description": "Secondary category tile showcasing wellness benefits or Spar-Sets"
+            }
+          ]
+        },
+        {
+          "position": 4,
+          "layoutType": "lg-4grid Mixed",
+          "layoutId": "lg-4grid-mixed",
+          "tileCount": 10,
+          "designRationale": "Mixed-size grid featuring half-width tiles and small squares for benefits/category navigation",
+          "tiles": [
+            {
+              "position": "1",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 1"
+            },
+            {
+              "position": "2",
+              "size": "436x218",
+              "imageCategory": "category-tile",
+              "description": "Category tile 2"
+            },
+            {
+              "position": "3",
+              "size": "872x290",
+              "imageCategory": "category-banner",
+              "description": "Wide banner tile for major category or benefit"
+            },
+            {
+              "position": "4",
+              "size": "872x290",
+              "imageCategory": "category-banner",
+              "description": "Wide banner tile for major category or benefit"
+            },
+            {
+              "position": "5",
+              "size": "872x218",
+              "imageCategory": "category-tile",
+              "description": "Full-width narrow tile"
+            },
+            {
+              "position": "6",
+              "size": "218x218",
+              "imageCategory": "small-square",
+              "description": "Small square tile (benefit icon or quick access)"
+            },
+            {
+              "position": "7",
+              "size": "218x218",
+              "imageCategory": "small-square",
+              "description": "Small square tile"
+            },
+            {
+              "position": "8",
+              "size": "218x218",
+              "imageCategory": "small-square",
+              "description": "Small square tile"
+            },
+            {
+              "position": "9",
+              "size": "218x218",
+              "imageCategory": "small-square",
+              "description": "Small square tile"
+            },
+            {
+              "position": "10",
+              "size": "872x92",
+              "imageCategory": "divider",
+              "description": "Narrow divider banner"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pageName": "Alle Produkte",
+      "pageId": "0599725A-6655-4CC0-BEF9-A1611BA0DF50",
+      "editorialImages": 1,
+      "videos": 0,
+      "heroBanner": {
+        "description": "All products category banner with brand consistency",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Comprehensive product catalog page with minimal editorial content. Hero banner + full product grid."
+    },
+    {
+      "pageName": "Neuheiten",
+      "pageId": "8593169F-6771-4714-8946-B310EAAA30F7",
+      "editorialImages": 3,
+      "videos": 1,
+      "heroBanner": {
+        "description": "New arrivals showcase banner highlighting latest product launches",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "New product announcements with moderate editorial. Hero + supporting content banners + product grid."
+    },
+    {
+      "pageName": "Spar-Sets",
+      "pageId": "0DB9FDD8-7C90-4CAC-BFF6-BAEBC586C20C",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Bundle/savings sets showcase with value proposition emphasis",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Product bundle sales page. Hero + supporting promotional banners + bundled product grid."
+    },
+    {
+      "pageName": "Shots",
+      "pageId": "E3FD5652-9AC5-4AC2-BD9C-F784C33A22D5",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Shots category hero establishing product category - health shots positioning",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Main product category. Hero + sub-category navigation (Ingwer-Shots) + supporting banners + product grid."
+    },
+    {
+      "pageName": "Ingwer-Shots",
+      "pageId": "EEB1E137-CE92-47E2-AB61-F7CD0360E56D",
+      "editorialImages": 2,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Ginger shots sub-category with product focus on specific health shot variety",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Sub-category page. Hero banner + product highlight + product grid. Minimal editorial - focus on specific product type."
+    },
+    {
+      "pageName": "Benefits",
+      "pageId": "5DB7F16C-C04D-4386-B9B7-B1593215B7A4",
+      "editorialImages": 13,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Benefits hub page serving as visual index to all health/wellness benefits",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Content-richest non-homepage page (13 images). Acts as visual benefits navigation hub with tile grid linking to 9 benefit sub-pages. Hero + benefit-focused banners + benefit tiles."
+    },
+    {
+      "pageName": "Immunsystem",
+      "pageId": "4927D23C-78ED-498D-B776-821846C16EF4",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Immune system health benefit page with wellness messaging",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Benefit-focused sub-page following template: hero banner + 2 supporting product highlight banners + product grid. Consistent across all benefit pages."
+    },
+    {
+      "pageName": "Energie & Sport",
+      "pageId": "46F5F32D-2512-43B8-9014-03B2E7C34E43",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Energy and sports performance benefit page",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Benefit-focused sub-page template: hero + 2 supporting banners + product grid."
+    },
+    {
+      "pageName": "Darmfunktion",
+      "pageId": "8012E3F8-58F8-4E4E-A449-138CB6957417",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Digestive/gut health benefit page",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Benefit-focused sub-page template: hero + 2 supporting banners + product grid."
+    },
+    {
+      "pageName": "Anti-Müdigkeit",
+      "pageId": "D7E40E02-645F-4075-920E-13EF29A5E155",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Anti-fatigue/energy boost benefit page",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Benefit-focused sub-page template: hero + 2 supporting banners + product grid."
+    },
+    {
+      "pageName": "Zahnfunktion",
+      "pageId": "9FF2F0B5-FEF0-440C-BC89-96F38A3A0AB3",
+      "editorialImages": 3,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Dental health benefit page with specific oral health focus",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Benefit-focused sub-page template: hero + 2 supporting banners + 1 video + product grid."
+    },
+    {
+      "pageName": "Zellschutz",
+      "pageId": "D8C5667C-2A77-44D0-9763-5CDAF47FF323",
+      "editorialImages": 3,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Cell protection/antioxidant benefit page",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Benefit-focused sub-page template: hero + 2 supporting banners + 1 video + product grid."
+    },
+    {
+      "pageName": "Eisenaufnahme",
+      "pageId": "1A36A785-C6EF-41F1-BBE7-96999ABEFF86",
+      "editorialImages": 3,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Iron absorption/blood health benefit page",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Benefit-focused sub-page template: hero + 2 supporting banners + 1 video + product grid."
+    },
+    {
+      "pageName": "Hautfunktion",
+      "pageId": "80F669C1-CF9D-417C-8854-2DA0327F856B",
+      "editorialImages": 3,
+      "videos": 1,
+      "heroBanner": {
+        "description": "Skin health benefit page with beauty/wellness angle",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Benefit-focused sub-page template: hero + 2 supporting banners + 1 video + product grid."
+    },
+    {
+      "pageName": "Stoffwechsel",
+      "pageId": "B1F30782-EE07-438C-A81E-BF3EEFA3D864",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Metabolism/metabolic health benefit page",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Benefit-focused sub-page template: hero + 2 supporting banners + product grid."
+    },
+    {
+      "pageName": "Knochenfunktion",
+      "pageId": "2446F867-676F-4181-9407-E1CFA2DEAF1E",
+      "editorialImages": 3,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Bone health benefit page",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Benefit-focused sub-page template: hero + 2 supporting banners + product grid."
+    },
+    {
+      "pageName": "Über Uns",
+      "pageId": "FE5A6FE8-EC0C-49F0-A53E-48C85B7E36EE",
+      "editorialImages": 8,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Brand story hero with company mission and wellness values. Natural, plant-based brand positioning with founder story.",
+        "estimatedDimensions": "1872x400"
+      },
+      "designNote": "Brand storytelling page (8 images) with company history, mission, values, product sourcing story, certifications. Hero + multiple narrative/imagery sections reinforcing brand identity as natural health/wellness provider."
+    },
+    {
+      "pageName": "Produktfinder",
+      "pageId": "84B4DA7A-F7B4-4899-BDCC-02B15DAC9661",
+      "editorialImages": 1,
+      "videos": 0,
+      "heroBanner": {
+        "description": "Product finder/quiz tool with minimal branding",
+        "estimatedDimensions": "1872x300"
+      },
+      "designNote": "Interactive product recommendation tool (quiz/filter system). Minimal editorial - focus on functional UI helping customers find right health/wellness products. Single banner + interactive interface."
+    }
+  ],
+  "designPatterns": {
+    "colorScheme": {
+      "background": "Light/Natural (beige/cream)",
+      "textColor": "Dark (black/dark green)",
+      "accentColor": "Dark Green",
+      "rationale": "Natural, wellness-focused aesthetic conveys health, organic positioning, and trustworthiness in health/supplement category"
+    },
+    "typography": {
+      "primary": "Clean sans-serif + italic for brand personality",
+      "characteristics": "Accessible, wellness-oriented, health-conscious. Emphasis on benefits and wellness outcomes. Italic typography for headlines creates brand distinctiveness."
+    },
+    "photography": {
+      "style": "Natural, lifestyle, wellness-focused imagery",
+      "subjects": "Natural ingredients (ginger, citrus, greens), fresh fruit and vegetables, people drinking shots in natural settings, happy healthy people, organic product presentation"
+    },
+    "layoutPatterns": {
+      "homepage": "Large hero (3000x1500) + divider (872x91) + wide category tiles (2x872x436) + mixed grid (wide banners 872x290, narrow tiles 436x218, small squares 218x218, divider 872x92)",
+      "categoryPages": "Consistent hero (1872x400) + supporting banners (1-2) + product grid",
+      "benefitPages": "Template-driven: hero (1872x400) + 2 supporting product highlight banners + product grid. Consistent across all 9 benefit sub-pages.",
+      "contentRichPages": "Multiple editorial sections (8-13) interleaved with product grids for hub pages and brand pages"
+    },
+    "hierarchyStructure": {
+      "navigationDepth": "2 levels - main categories + health benefit sub-categories",
+      "pageCount": "19 pages total",
+      "benefitsStructure": "9 health benefit sub-pages under Benefits hub, creating deep specialization around wellness outcomes",
+      "distribution": "Concentrated editorial on Startseite (15 images) and Benefits hub (13 images), with template-consistent benefit pages (3 images each)",
+      "strategy": "Benefit-driven navigation allows Hansegrün to organize product discovery around health outcomes rather than product types"
+    }
+  },
+  "editorialStrategy": {
+    "totalEditorialImages": 77,
+    "totalVideos": 6,
+    "distribution": [
+      {
+        "page": "Startseite",
+        "editorialImages": 15,
+        "videos": 1,
+        "rationale": "Homepage hero + benefits navigation structure - visual gateway with diverse layout patterns demonstrating brand aesthetic and navigation options"
+      },
+      {
+        "page": "Benefits",
+        "editorialImages": 13,
+        "videos": 0,
+        "rationale": "Benefits hub page - content-richest non-homepage page serving as visual index to all health benefits. Acts as navigation center linking to 9 benefit sub-pages."
+      },
+      {
+        "page": "Über Uns",
+        "editorialImages": 8,
+        "videos": 0,
+        "rationale": "Brand storytelling hub - company mission, wellness values, ingredient sourcing, founder story, and brand credibility in health/supplement space"
+      },
+      {
+        "page": "Benefit sub-pages (9 total: Immunsystem, Energie & Sport, Darmfunktion, Anti-Müdigkeit, Zahnfunktion, Zellschutz, Eisenaufnahme, Hautfunktion, Stoffwechsel, Knochenfunktion)",
+        "editorialImages": "3 each (27 total)",
+        "videos": "0-1 each (4 total: Zahnfunktion, Zellschutz, Eisenaufnahme, Hautfunktion)",
+        "rationale": "Template consistency - each benefit page receives identical structure with 3 editorial images. Videos on 4 pages highlight specific health benefits or product demonstrations."
+      },
+      {
+        "page": "Category pages (Neuheiten, Spar-Sets, Shots)",
+        "editorialImages": "3 each",
+        "videos": "0-1 each",
+        "rationale": "Category/promotional content with moderate depth"
+      },
+      {
+        "page": "Alle Produkte",
+        "editorialImages": 1,
+        "videos": 0,
+        "rationale": "Pure product grid - functional catalog view"
+      },
+      {
+        "page": "Produktfinder",
+        "editorialImages": 1,
+        "videos": 0,
+        "rationale": "Interactive tool - minimal editorial, focus on functional UI for product recommendation/discovery quiz"
+      }
+    ]
+  },
+  "brandIdentity": {
+    "corePillars": [
+      "Natural Health & Wellness",
+      "Benefit-Driven Supplementation",
+      "Holistic Health Outcomes"
+    ],
+    "visualLanguage": "Light, natural aesthetic with dark green and warm cream/beige tones. Clean typography with italic headlines for brand personality. Natural ingredient imagery and lifestyle photography create approachable, trustworthy health brand positioning. Focus on wellness outcomes (immune system, energy, digestive health, etc.) rather than product features. Fresh ingredients and modern wellness lifestyle positioning.",
+    "targetAudience": "Health-conscious consumers, wellness seekers, natural supplement users, individuals focused on preventive health and specific health benefits. Bio/organic-conscious demographic.",
+    "navigationPhilosophy": "Benefit-driven navigation centered on health outcomes. Rather than organizing by product type, Hansegrün structures discovery around specific health benefits: Immunsystem, Energie & Sport, Darmfunktion, Anti-Müdigkeit, Zahnfunktion, Zellschutz, Eisenaufnahme, Hautfunktion, Stoffwechsel, Knochenfunktion. Benefits hub serves as visual index with consistent sub-page templates, allowing consumers to find products aligned with their specific health goals. Complements with traditional product category navigation (Shots, Spar-Sets) and interactive tools (Produktfinder quiz)."
+  },
+  "notableObservations": {
+    "templateDriven": "Extremely consistent template across 9 benefit sub-pages - each has exactly 3 editorial images and 0-1 video. This creates predictable user experience while allowing for benefit-specific messaging.",
+    "videoDistribution": "6 videos total, distributed on only 2 pages: Neuheiten (1 video) and 4 benefit pages (Zahnfunktion, Zellschutz, Eisenaufnahme, Hautfunktion). Videos likely demonstrate specific health benefits or product usage.",
+    "benefitsFocus": "Deep navigation around health benefits (9 sub-pages) indicates core positioning. This is unusual compared to typical supplement stores and demonstrates sophisticated understanding of customer health goals.",
+    "contentConcentration": "67% of editorial images concentrated on just 3 pages: Startseite (15), Benefits hub (13), Über Uns (8). Remaining 16 pages contain only 41 images, showing strategic editorial concentration on key navigation hubs and brand storytelling.",
+    "imageryStrategy": "Homepage features diverse image sizes (3000x1500 hero, 872x290 wide banners, 436x218 half-tiles, 218x218 small squares, 872x91-92 dividers) demonstrating flexible layout system. Benefit pages use consistent sizing for predictable structure.",
+    "minimalistVideo": "Only 6 videos across 19 pages suggests image-forward strategy with selective video use for specific health benefits or product demonstrations.",
+    "bundleFocus": "Dedicated Spar-Sets page indicates important sales channel for product bundles and value packages.",
+    "brandAuthenticity": "Founder story and Über Uns page prominence reinforces startup authenticity and transparent brand positioning. Focus on natural/bio positioning with founder-driven narrative."
+  }
+}
