@@ -17,6 +17,7 @@ import PriceCalculator from './components/PriceCalculator';
 import ExportModal from './components/ExportModal';
 import BriefingView from './components/BriefingView';
 import AdminAnalyze from './components/AdminAnalyze';
+import AdminScrapingTest from './components/AdminScrapingTest';
 import AsinOverview from './components/AsinOverview';
 // KnowledgeBaseAdmin removed — reference data loads automatically in background
 
@@ -28,9 +29,12 @@ export default function App() {
     return <BriefingView />;
   }
 
-  // Admin: Reference store analyzer
+  // Admin pages
   if (window.location.pathname.indexOf('/admin/analyze') === 0) {
     return <AdminAnalyze />;
+  }
+  if (window.location.pathname.indexOf('/admin/scraping-test') === 0) {
+    return <AdminScrapingTest />;
   }
 
   var uiLang = 'en';
