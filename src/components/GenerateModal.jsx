@@ -44,7 +44,6 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
   var [existingStoreMode, setExistingStoreMode] = useState('optimize');
   var [ciSource, setCiSource] = useState('auto'); // 'auto', 'amazon', 'website', 'manual'
   var [driveUrl, setDriveUrl] = useState(googleDriveUrl || '');
-  var [referenceCategory, setReferenceCategory] = useState('generic');
   // Extra subpages — each is independently selectable
   var [extraPages, setExtraPages] = useState({
     product_selector: false,
@@ -74,8 +73,6 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
   var [fontNames, setFontNames] = useState('');
   var [brandColors, setBrandColors] = useState('');
   var [brandToneExamples, setBrandToneExamples] = useState('');
-  // Optimization granular options
-  var [keepMenuStructure, setKeepMenuStructure] = useState(true);
   var fileRef = useRef(null);
   var logoRef = useRef(null);
 
@@ -438,36 +435,7 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
           </div>
         </div>
 
-        {/* Optimization granular options */}
-        {existingStoreUrl && existingStoreMode === 'optimize' && (
-          <div style={{ marginTop: 8, padding: '8px 12px', background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 6 }}>
-            <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, cursor: 'pointer' }}>
-              <input type="checkbox" checked={keepMenuStructure} onChange={function() { setKeepMenuStructure(!keepMenuStructure); }} />
-              <span>Menüstruktur beibehalten</span>
-            </label>
-            <div className="hint">Wenn aktiv, werden die bestehenden Seiten und deren Hierarchie übernommen.</div>
-          </div>
-        )}
-
-        {/* 4b. Reference Category */}
-        <label className="label" style={{ marginTop: 10 }}>4b. Referenz-Kategorie (optional)</label>
-        <select value={referenceCategory} onChange={function(e) { setReferenceCategory(e.target.value); }} className="input">
-          <option value="generic">Allgemein (Standard)</option>
-          <option value="supplements">Nahrungsergänzung</option>
-          <option value="food">Lebensmittel & Getränke</option>
-          <option value="home_kitchen">Haus & Küche</option>
-          <option value="fashion">Mode & Kleidung</option>
-          <option value="beauty">Beauty & Körperpflege</option>
-          <option value="health">Gesundheit & Wellness</option>
-          <option value="sports">Sport & Outdoor</option>
-          <option value="office">Büro & Arbeit</option>
-          <option value="pets">Haustiere</option>
-          <option value="electronics">Elektronik</option>
-          <option value="tools">Werkzeuge</option>
-        </select>
-        <div className="hint">Wählen Sie eine Produktkategorie aus, um kategoriespezifische Stil-Hinweise und Referenzstores zu laden.</div>
-
-        {/* 4c. Zusatzseiten (Checkboxen) */}
+        {/* 4b. Zusatzseiten (Checkboxen) */}
         <label className="label" style={{ marginTop: 10 }}>4c. Zusatzseiten</label>
         <div className="hint" style={{ marginBottom: 6 }}>Jede angehakte Seite wird als eigene Subpage im Store generiert. Homepage + Kategorie-Seiten entstehen immer automatisch.</div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px 16px' }}>
@@ -728,7 +696,6 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
                 existingStoreUrl: existingStoreUrl.trim() && !validateStoreUrl(existingStoreUrl) ? existingStoreUrl.trim() : null,
                 existingStoreMode: existingStoreMode,
                 ciSource: ciSource,
-                referenceCategory: referenceCategory,
                 extraPages: extraPages,
                 includeProductVideos: includeProductVideos,
                 generateWireframes: generateWireframes,
@@ -737,7 +704,6 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
                 fontNames: fontNames.trim() || null,
                 brandColors: brandColors.trim() || null,
                 brandToneExamples: brandToneExamples.trim() || null,
-                keepMenuStructure: existingStoreMode === 'optimize' ? keepMenuStructure : false,
               });
             }}
           >

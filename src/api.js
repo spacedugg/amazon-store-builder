@@ -131,33 +131,6 @@ export async function analyzeStoreImages(images) {
 }
 
 // ─── GENERATE WIREFRAME IMAGE: Use Gemini/Imagen for tile sketch ───
-export async function generateWireframeImage(prompt, aspectRatio) {
-  var resp = await fetchWithTimeout('/api/generate-wireframe', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt: prompt, aspectRatio: aspectRatio || '16:9' }),
-  }, 30000); // 30s timeout per image
-  if (!resp.ok) {
-    var e = await resp.json().catch(function() { return {}; });
-    throw new Error(e.error || 'Failed to generate wireframe image');
-  }
-  return resp.json();
-}
-
-// ─── GENERATE IMAGE DESCRIPTIONS: Gemini creates CI-aware prompts for image generation ───
-export async function generateImageDescriptions(tiles, ciData, brandName, brandTone) {
-  var resp = await fetchWithTimeout('/api/generate-image-descriptions', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ tiles: tiles, ciData: ciData, brandName: brandName, brandTone: brandTone }),
-  }, 60000);
-  if (!resp.ok) {
-    var e = await resp.json().catch(function() { return {}; });
-    throw new Error(e.error || 'Image description generation failed');
-  }
-  return resp.json();
-}
-
 // ─── ANALYZE CI: Extract brand CI from product listing images via Gemini Vision ───
 export async function analyzeBrandCI(imageUrls, brandName) {
   var resp = await fetchWithTimeout('/api/analyze-ci', {

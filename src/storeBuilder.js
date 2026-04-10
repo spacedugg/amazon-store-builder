@@ -241,6 +241,9 @@ function formatWebsiteContext(websiteData) {
   if (websiteData.title) parts.push('Website title: ' + websiteData.title);
   if (websiteData.description) parts.push('Website description: ' + websiteData.description);
   if (websiteData.tagline) parts.push('Brand tagline: ' + websiteData.tagline);
+  // User-provided brand assets
+  if (websiteData.logoDataUrl) parts.push('LOGO: User uploaded a brand logo (available for hero banners and brand elements).');
+  if (websiteData.userFonts) parts.push('BRAND FONTS (user-specified): ' + websiteData.userFonts + '. Use these font names when describing typography.');
 
   // ── AI-ANALYZED FIELDS (higher quality, take priority) ──
   var ai = websiteData.aiAnalysis;

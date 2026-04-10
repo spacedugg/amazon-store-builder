@@ -5,7 +5,7 @@ import { generateStore, aiRefineStore, applyOperations, generateWireframesForPag
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink } from './storage';
 import { analyzeProducts, analyzeBrandVoice, createContentStrategy, createTextBlocks } from './generationPipeline';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
-import { crawlMultipleStores, crawlAndParseStore, analyzeStoreImagesWithGemini, formatReferenceStoreContext, loadGeminiAnalysesForCategory, formatGeminiAnalysesContext, loadStoreKnowledge, formatStoreKnowledge } from './referenceStoreService';
+import { crawlMultipleStores, crawlAndParseStore, analyzeStoreImagesWithGemini, formatReferenceStoreContext, loadStoreKnowledge, formatStoreKnowledge } from './referenceStoreService';
 import Topbar from './components/Topbar';
 import PageList from './components/PageList';
 import Canvas from './components/Canvas';
@@ -354,23 +354,6 @@ export default function App() {
         }
       } catch (kbErr) {
         log('Store knowledge base skipped: ' + kbErr.message);
-      }
-
-      // Step 1.7b: Load Gemini Vision analyses from reference store JSONs
-      try {
-        var geminiCategory = params.referenceCategory || 'generic';
-        log('Loading Gemini visual intelligence for: ' + geminiCategory + '...');
-        var geminiData = await loadGeminiAnalysesForCategory(geminiCategory);
-        if (geminiData && geminiData.length > 0) {
-          var geminiContext = formatGeminiAnalysesContext(geminiData);
-          referenceAnalysis = (referenceAnalysis || '') + '\n' + geminiContext;
-          log('Gemini visual intelligence: ' + geminiData.length + ' stores with image analyses loaded');
-        } else {
-          log('Gemini visual intelligence: no enriched stores available yet');
-        }
-      } catch (geminiErr) {
-        log('Gemini visual intelligence skipped: ' + geminiErr.message);
-        criticalFailures.push('Gemini visual intelligence');
       }
 
       // ─── CRITICAL FAILURE CHECK: Warn user and offer to abort ───
