@@ -1,4 +1,4 @@
-import { uid, LAYOUTS, LAYOUT_TILE_DIMS, REFERENCE_STORES, STORE_PRINCIPLES, MODULE_BAUKASTEN, PRODUCT_COMPLEXITY, COMPLEXITY_LEVELS, CATEGORY_STYLE_HINTS, IMAGE_CATEGORIES, IMAGE_CATEGORY_DECISION_TREE, findLayout, resolveLayoutId, createDefaultProductSelector } from './constants';
+import { uid, LAYOUTS, LAYOUT_TILE_DIMS, STORE_PRINCIPLES, MODULE_BAUKASTEN, PRODUCT_COMPLEXITY, COMPLEXITY_LEVELS, CATEGORY_STYLE_HINTS, IMAGE_CATEGORIES, IMAGE_CATEGORY_DECISION_TREE, findLayout, resolveLayoutId, createDefaultProductSelector } from './constants';
 import { checkAsinCompleteness } from './generationPipeline';
 
 var ANTHROPIC_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY || '';
@@ -241,6 +241,9 @@ function formatWebsiteContext(websiteData) {
   if (websiteData.title) parts.push('Website title: ' + websiteData.title);
   if (websiteData.description) parts.push('Website description: ' + websiteData.description);
   if (websiteData.tagline) parts.push('Brand tagline: ' + websiteData.tagline);
+  // User-provided brand assets
+  if (websiteData.logoDataUrl) parts.push('LOGO: User uploaded a brand logo (available for hero banners and brand elements).');
+  if (websiteData.userFonts) parts.push('BRAND FONTS (user-specified): ' + websiteData.userFonts + '. Use these font names when describing typography.');
 
   // ── AI-ANALYZED FIELDS (higher quality, take priority) ──
   var ai = websiteData.aiAnalysis;
@@ -974,12 +977,14 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '5. Only USPs/icons/awards, no product photos? → BENEFIT',
     '6. Product on plain bg as main focus? → PRODUCT (use sparingly!)',
     '',
-    'IMAGE CATEGORY PRIORITY (CRITICAL):',
-    '- PREFER lifestyle, creative, and text_image categories. These provide visual richness, storytelling, and design investment.',
-    '- AVOID overusing "product" category. Plain product packshots on clean backgrounds look generic and uninspired — as if someone just took the Amazon listing images and placed them on a new background.',
-    '- Creative and lifestyle images offer more room for brand CI elements, text overlays, and emotional storytelling.',
-    '- Use "product" category ONLY when a clean packshot is specifically needed (e.g. a shoppable_image that must show the product clearly for purchase intent).',
-    '- A good store has mostly lifestyle + creative tiles, with product tiles as the exception, not the rule.',
+    'IMAGE CATEGORY USAGE (from analysis of 21 top Amazon Brand Stores):',
+    '- There is no fixed priority between categories. The content determines which category fits.',
+    '- In successful stores, lifestyle (35%), product (36%), creative (19%), and text_image (9%) are used.',
+    '- Choose the category that best serves the CONTENT of each tile, not by a fixed rule.',
+    '- Lifestyle: when showing the product in real use, with people, in real settings.',
+    '- Creative: when combining product + text + graphics for explanation or navigation.',
+    '- Product: when a clean packshot is needed for purchase intent (shoppable_image).',
+    '- Text_image: for section headings, brand claims, structural elements between content blocks.',
     '',
     'BACKGROUND RULES:',
     '- NEVER use dark backgrounds by default. No black, dark gray, dark navy, or dark green.',
@@ -999,6 +1004,11 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '- RIGHT: "Split composition: product hero left, three benefit icons stacked right"',
     '- Name the specific product or category from the product list. Do NOT repeat the brand name "' + brand + '" in every brief — the designer already knows which brand this is. Mention it only in the store_hero brief.',
     '- textOverlay MUST be in store language (' + lang + ') — use real product/category names. For category/navigation tiles: textOverlay = JUST the category name (e.g. "Vitamine"), NOT a sentence. The CTA carries the action.',
+    '',
+    'TEXT BUILDING BLOCKS:',
+    '- If TEXT BUILDING BLOCKS are provided in the context below, USE THEM for textOverlay, headlines, CTAs, and USP texts.',
+    '- Do NOT invent new texts when pre-created text blocks exist. The text blocks were carefully created to match the brand voice.',
+    '- You may slightly adjust texts to fit the tile context, but keep the wording close to the original.',
     '- Do NOT use generic placeholders like "[product]" or "lifestyle image".',
     '- NEVER place two identical image categories directly adjacent (e.g. two LIFESTYLE sections in a row).',
     '- FACTUAL ACCURACY: NEVER reference more categories, products, or features than actually exist. There are exactly ' + allCategories.length + ' categories (' + allCategories.map(function(c) { return c.name; }).join(', ') + '). Do NOT write "three category previews" if there are only ' + allCategories.length + '. Briefs must match the real data.',
@@ -1770,13 +1780,14 @@ function ensureMinimumSections(sections, pageName, brand, lang, analysis, templa
 }
 
 // ─── FULL GENERATION WORKFLOW ───
-export async function generateStore(asins, products, brand, marketplace, lang, userInstructions, onLog, complexityLevel, template, websiteData, referenceAnalysis, featureOptions, cancelRef) {
+export async function generateStore(asins, products, brand, marketplace, lang, userInstructions, onLog, complexityLevel, template, websiteData, referenceAnalysis, featureOptions, cancelRef, pipelineData) {
   var log = onLog || function() {};
   var cLevel = complexityLevel || 2;
   var cConfig = COMPLEXITY_LEVELS[cLevel] || COMPLEXITY_LEVELS[2];
   var opts = featureOptions || {};
   var extraPageFlags = opts.extraPages || {};
   var includeProductVideos = opts.includeProductVideos || false;
+  var pipeline = pipelineData || {};
 
   function checkCancel() {
     if (cancelRef && cancelRef.current) {
@@ -1799,8 +1810,13 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
 
   checkCancel();
 
-  // STEP 1: AI Analysis
-  log('AI analyzing product catalog and planning store structure...');
+  // STEP 1: AI Analysis — use pipeline results if available, otherwise run fresh
+  var usePipeline = pipeline.productAnalysis && pipeline.contentStrategy;
+  if (usePipeline) {
+    log('Using pipeline analysis results (product analysis, brand voice, content strategy, text blocks)...');
+  } else {
+    log('AI analyzing product catalog and planning store structure...');
+  }
   log('   Complexity: Level ' + cLevel + ' (' + cConfig.name + ')');
   if (template) {
     log('   Template: ' + template.name + ' (inspired by ' + template.inspiration + ')');
@@ -1824,6 +1840,25 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   }
 
   var analysis;
+  if (usePipeline) {
+    // Convert pipeline productAnalysis to the format generateStore expects
+    var pa = pipeline.productAnalysis;
+    analysis = {
+      categories: (pa.categories || []).map(function(c) {
+        return { name: c.name, asins: c.asins || [], productCount: (c.asins || []).length, subcategories: c.subcategories || null };
+      }),
+      brandTone: pa.brandTone || (pipeline.brandVoice ? pipeline.brandVoice.tone : 'professional'),
+      productComplexity: pa.productComplexity || 'medium',
+      heroMessage: (pipeline.textBlocks && pipeline.textBlocks.pages && pipeline.textBlocks.pages[0]) ? pipeline.textBlocks.pages[0].heroBannerText : brand,
+      brandStory: pa.whatMakesBrandSpecial || '',
+      keyFeatures: pa.brandUSPs || [],
+      brandUSPs: pa.brandUSPs || [],
+      categoryUSPs: (pa.categories || []).reduce(function(acc, c) { if (c.categoryUSPs) acc[c.name] = c.categoryUSPs; return acc; }, {}),
+      suggestedPages: (pipeline.contentStrategy && pipeline.contentStrategy.pages) ? pipeline.contentStrategy.pages.map(function(p) { return p.name; }) : ['Homepage'],
+      _fromPipeline: true,
+    };
+    log('   Pipeline analysis: ' + analysis.categories.length + ' categories, ' + (analysis.keyFeatures || []).length + ' brand USPs');
+  } else {
   try {
     analysis = await aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions, websiteData, referenceAnalysis);
     // Validate that we got actual categories
@@ -1852,6 +1887,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     log('AI analysis failed (' + err.message + '), falling back to deterministic grouping...');
     analysis = fallbackAnalysis(products, brand, lang, userInstructions);
   }
+  } // end of else (non-pipeline path)
 
   // SAFETY NET: If user provided menu structure but analysis categories don't match, force-apply it
   if (userHasMenu) {
@@ -1924,10 +1960,15 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
 
   // STEP 2: Generate Homepage Layout
   log('AI designing Homepage layout...');
-  // For small catalogs: show ALL products on homepage
-  // For larger catalogs: pick top 1 product per category as hero/representative
   var homepageProducts = [];
-  if (skipCategoryPages) {
+  // If pipeline content strategy defined homepage ASINs, use those
+  var pipelineHomepage = pipeline.contentStrategy && pipeline.contentStrategy.pages
+    ? pipeline.contentStrategy.pages.find(function(p) { return p.id === 'homepage' || p.name === 'Homepage'; })
+    : null;
+  if (pipelineHomepage && pipelineHomepage.asins && pipelineHomepage.asins.length > 0) {
+    homepageProducts = pipelineHomepage.asins.map(function(a) { return productMap[a]; }).filter(Boolean);
+    log('   Using ' + homepageProducts.length + ' products from pipeline content strategy');
+  } else if (skipCategoryPages) {
     // Small catalog: ALL products go to homepage
     homepageProducts = products.slice();
   } else {
@@ -1952,7 +1993,13 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       analysis.categories || [], analysis, userInstructions, cLevel, category, template, websiteData, referenceAnalysis, false
     );
     var homeSections = ensureMinimumSections(homeResult.sections || [], 'Homepage', brand, lang, analysis, template, true, cLevel);
-    pages.push({ id: 'homepage', name: 'Homepage', sections: homeSections, heroBannerBrief: homeResult.heroBannerBrief || '', heroBannerTextOverlay: homeResult.heroBannerTextOverlay || '' });
+    // Use pipeline text blocks for hero banner if available
+    var homeTextBlocks = pipeline.textBlocks && pipeline.textBlocks.pages
+      ? pipeline.textBlocks.pages.find(function(p) { return p.pageId === 'homepage'; })
+      : null;
+    var heroBrief = homeResult.heroBannerBrief || '';
+    var heroText = homeResult.heroBannerTextOverlay || (homeTextBlocks ? homeTextBlocks.heroBannerText : '') || '';
+    pages.push({ id: 'homepage', name: 'Homepage', sections: homeSections, heroBannerBrief: heroBrief, heroBannerTextOverlay: heroText });
     log('Homepage: ' + homeSections.length + ' sections');
   } catch (err) {
     log('AI homepage failed (' + err.message + '), using fallback...');
@@ -2011,7 +2058,12 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
         categories, analysis, userInstructions, cLevel, category, template, websiteData, referenceAnalysis, false, categoryBlueprint
       );
       var catSections = ensureMinimumSections(catResult.sections || [], cat.name, brand, lang, analysis, template, false, cLevel);
-      pages.push({ id: parentPageId, name: cat.name, sections: catSections, heroBannerBrief: catResult.heroBannerBrief || '', heroBannerTextOverlay: catResult.heroBannerTextOverlay || '' });
+      var catTextBlocks = pipeline.textBlocks && pipeline.textBlocks.pages
+        ? pipeline.textBlocks.pages.find(function(p) { return p.pageId === parentPageId || p.pageId === cat.name; })
+        : null;
+      var catHeroBrief = catResult.heroBannerBrief || '';
+      var catHeroText = catResult.heroBannerTextOverlay || (catTextBlocks ? catTextBlocks.heroBannerText : '') || '';
+      pages.push({ id: parentPageId, name: cat.name, sections: catSections, heroBannerBrief: catHeroBrief, heroBannerTextOverlay: catHeroText });
       log(cat.name + ': ' + catSections.length + ' sections');
 
       // Capture thematic blueprint from first category page
@@ -2730,6 +2782,98 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     }
   })();
 
+  // ─── TEXT CONSISTENCY CHECK ───
+  // Find USP texts that appear multiple times with slightly different wording
+  log('Checking text consistency across store...');
+  var allUsps = [];
+  pages.forEach(function(page) {
+    (page.sections || []).forEach(function(sec) {
+      (sec.tiles || []).forEach(function(tile) {
+        if (tile.textOverlay) {
+          tile.textOverlay.split(/\\n|\n/).forEach(function(line) {
+            var trimmed = line.replace(/^\[(h1|h2|body|bullet)\]/i, '').trim();
+            if (trimmed && trimmed.length > 5 && trimmed.length < 80) {
+              allUsps.push({ text: trimmed, page: page.name, tile: tile });
+            }
+          });
+        }
+      });
+    });
+  });
+  // Check for near-duplicates (simple Levenshtein-like check: same first 10 chars but different full text)
+  var uspGroups = {};
+  allUsps.forEach(function(u) {
+    var key = u.text.toLowerCase().slice(0, 15);
+    if (!uspGroups[key]) uspGroups[key] = [];
+    uspGroups[key].push(u);
+  });
+  var inconsistencies = 0;
+  var corrections = 0;
+  Object.keys(uspGroups).forEach(function(key) {
+    var group = uspGroups[key];
+    if (group.length > 1) {
+      var unique = [];
+      group.forEach(function(g) { if (unique.indexOf(g.text) < 0) unique.push(g.text); });
+      if (unique.length > 1) {
+        inconsistencies++;
+        // Auto-correct: use the first occurrence as the standard
+        var standard = unique[0];
+        group.forEach(function(g) {
+          if (g.text !== standard) {
+            // Replace in the tile's textOverlay
+            var oldOverlay = g.tile.textOverlay || '';
+            g.tile.textOverlay = oldOverlay.replace(g.text, standard);
+            corrections++;
+          }
+        });
+        if (inconsistencies <= 3) {
+          log('   Auto-corrected: "' + unique[1].slice(0, 40) + '" → "' + standard.slice(0, 40) + '"');
+        }
+      }
+    }
+  });
+  if (corrections > 0) {
+    log('   ' + corrections + ' text inconsistencies auto-corrected across ' + inconsistencies + ' groups.');
+  } else {
+    log('   Text consistency OK.');
+  }
+
+  // ─── AUTO-ASSIGN REFERENCE IMAGES FROM PRODUCT + A+ DATA ───
+  log('Assigning reference images from product listings and A+ content...');
+  var refImageCount = 0;
+  pages.forEach(function(page) {
+    (page.sections || []).forEach(function(sec) {
+      (sec.tiles || []).forEach(function(tile) {
+        if (tile.referenceImages && tile.referenceImages.length > 0) return; // already has ref images
+        if (!tile.referenceImages) tile.referenceImages = [];
+        // For tiles with a linkAsin: use that product's images
+        if (tile.linkAsin && productMap[tile.linkAsin]) {
+          var prod = productMap[tile.linkAsin];
+          // Add main product image
+          if (prod.image) {
+            tile.referenceImages.push({ url: prod.image, name: prod.name ? prod.name.slice(0, 30) + ' (Main)' : 'Product Main' });
+          }
+          // Add A+ images if available
+          if (prod.aPlusImages && prod.aPlusImages.length > 0) {
+            prod.aPlusImages.slice(0, 3).forEach(function(ai) {
+              tile.referenceImages.push({ url: ai.url, name: ai.section || 'A+ Content' });
+            });
+          }
+          refImageCount += tile.referenceImages.length;
+        }
+        // For tiles with asins array: use first product's image
+        if (tile.asins && tile.asins.length > 0 && tile.referenceImages.length === 0) {
+          var firstAsin = tile.asins[0];
+          if (productMap[firstAsin] && productMap[firstAsin].image) {
+            tile.referenceImages.push({ url: productMap[firstAsin].image, name: 'Product Reference' });
+            refImageCount++;
+          }
+        }
+      });
+    });
+  });
+  if (refImageCount > 0) log('   ' + refImageCount + ' reference images assigned from product data');
+
   // ─── ASIN COMPLETENESS CHECK ───
   var inputAsins = products.map(function(p) { return p.asin; });
   var asinCheck = checkAsinCompleteness(inputAsins, pages);
@@ -2942,12 +3086,22 @@ export async function generateWireframesForPage(page, brand, websiteData, analys
       };
     });
     var pageName = page.name || 'Page';
+    // Build rich context for Gemini so wireframes match the brand
+    var brandVoice = (analysis || {}).pipelineBrandVoice || {};
+    var brandUSPs = (analysis || {}).brandUSPs || (analysis || {}).keyFeatures || [];
     var pageContext = {
       pageName: pageName,
       isHomepage: pageName.toLowerCase() === 'homepage' || pageName.toLowerCase() === 'home' || pageName.toLowerCase() === 'startseite',
       totalSections: (page.sections || []).length,
       brandStory: (analysis || {}).brandStory || '',
-      keyFeatures: (analysis || {}).keyFeatures || [],
+      keyFeatures: brandUSPs,
+      // Full brand context for CI-consistent wireframes
+      brandVoiceTone: brandVoice.tone || brandTone || '',
+      brandVoiceStyle: brandVoice.communicationStyle || '',
+      brandTypicalPhrases: (brandVoice.typicalPhrases || []).slice(0, 5),
+      // Brand assets for wireframe consistency
+      hasLogo: !!(websiteData && websiteData.logoDataUrl),
+      brandFonts: (websiteData && websiteData.userFonts) || null,
     };
     var descResp = await fetch('/api/generate-image-descriptions', {
       method: 'POST',

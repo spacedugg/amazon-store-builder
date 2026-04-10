@@ -44,7 +44,6 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
   var [existingStoreMode, setExistingStoreMode] = useState('optimize');
   var [ciSource, setCiSource] = useState('auto'); // 'auto', 'amazon', 'website', 'manual'
   var [driveUrl, setDriveUrl] = useState(googleDriveUrl || '');
-  var [referenceCategory, setReferenceCategory] = useState('generic');
   // Extra subpages — each is independently selectable
   var [extraPages, setExtraPages] = useState({
     product_selector: false,
@@ -69,7 +68,14 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
   // Other feature options
   var [includeProductVideos, setIncludeProductVideos] = useState(false);
   var [generateWireframes, setGenerateWireframes] = useState(false);
+  // New pipeline fields
+  var [logoFile, setLogoFile] = useState(null);
+  var [fontNames, setFontNames] = useState('');
+  var [brandColors, setBrandColors] = useState('');
+  var [brandToneExamples, setBrandToneExamples] = useState('');
+  var [keepMenuStructure, setKeepMenuStructure] = useState(true);
   var fileRef = useRef(null);
+  var logoRef = useRef(null);
 
   var onFileChange = function(e) {
     var f = e.target.files && e.target.files[0];
@@ -396,25 +402,52 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
           <option value="fr">Amazon.fr (France)</option>
         </select>
 
-        {/* 4b. Reference Category */}
-        <label className="label" style={{ marginTop: 10 }}>4b. Referenz-Kategorie (optional)</label>
-        <select value={referenceCategory} onChange={function(e) { setReferenceCategory(e.target.value); }} className="input">
-          <option value="generic">Allgemein (Standard)</option>
-          <option value="supplements">Nahrungsergänzung</option>
-          <option value="food">Lebensmittel & Getränke</option>
-          <option value="home_kitchen">Haus & Küche</option>
-          <option value="fashion">Mode & Kleidung</option>
-          <option value="beauty">Beauty & Körperpflege</option>
-          <option value="health">Gesundheit & Wellness</option>
-          <option value="sports">Sport & Outdoor</option>
-          <option value="office">Büro & Arbeit</option>
-          <option value="pets">Haustiere</option>
-          <option value="electronics">Elektronik</option>
-          <option value="tools">Werkzeuge</option>
-        </select>
-        <div className="hint">Wählen Sie eine Produktkategorie aus, um kategoriespezifische Stil-Hinweise und Referenzstores zu laden.</div>
+        {/* 4a. Brand Assets (optional) */}
+        <div style={{ marginTop: 12, padding: '10px 12px', background: '#fefce8', border: '1px solid #fde68a', borderRadius: 8 }}>
+          <label className="label" style={{ margin: 0, color: '#92400e' }}>Brand Assets (optional — improves quality)</label>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 8 }}>
+            <div>
+              <label style={{ fontSize: 11, color: '#78716c', fontWeight: 600 }}>Logo</label>
+              <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+                <input type="file" ref={logoRef} accept="image/*" style={{ display: 'none' }}
+                  onChange={function(e) { var f = e.target.files && e.target.files[0]; if (f) { var r = new FileReader(); r.onload = function(ev) { setLogoFile(ev.target.result); }; r.readAsDataURL(f); } }} />
+                <button className="btn" onClick={function() { logoRef.current && logoRef.current.click(); }} style={{ fontSize: 11, padding: '4px 10px' }}>
+                  {logoFile ? 'Logo ändern' : 'Logo hochladen'}
+                </button>
+                {logoFile && <img src={logoFile} alt="" style={{ height: 24, borderRadius: 3 }} />}
+              </div>
+            </div>
+            <div>
+              <label style={{ fontSize: 11, color: '#78716c', fontWeight: 600 }}>Schriftarten</label>
+              <input value={fontNames} onChange={function(e) { setFontNames(e.target.value); }}
+                placeholder="z.B. Montserrat, Open Sans" className="input" style={{ fontSize: 12 }} />
+            </div>
+            <div>
+              <label style={{ fontSize: 11, color: '#78716c', fontWeight: 600 }}>Markenfarben (Hex)</label>
+              <input value={brandColors} onChange={function(e) { setBrandColors(e.target.value); }}
+                placeholder="z.B. #2D5016, #F5F0E8, #8B6914" className="input" style={{ fontSize: 12, fontFamily: 'monospace' }} />
+            </div>
+            <div>
+              <label style={{ fontSize: 11, color: '#78716c', fontWeight: 600 }}>Brand-Ton Beispiele</label>
+              <textarea value={brandToneExamples} onChange={function(e) { setBrandToneExamples(e.target.value); }}
+                placeholder="2-3 Beispielsätze die den Ton der Marke zeigen (z.B. aus Listings oder Website)" className="input" rows={2} style={{ fontSize: 12 }} />
+              <div className="hint">Werden als Stil-Referenz genutzt, nicht 1:1 kopiert.</div>
+            </div>
+          </div>
+        </div>
 
-        {/* 4c. Zusatzseiten (Checkboxen) */}
+        {/* Optimization: keep menu structure */}
+        {existingStoreUrl && existingStoreMode === 'optimize' && (
+          <div style={{ marginTop: 8, padding: '8px 12px', background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 6 }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, cursor: 'pointer' }}>
+              <input type="checkbox" checked={keepMenuStructure} onChange={function() { setKeepMenuStructure(!keepMenuStructure); }} />
+              <span>Menüstruktur beibehalten</span>
+            </label>
+            <div className="hint">Die bestehenden Seiten und deren Hierarchie werden übernommen.</div>
+          </div>
+        )}
+
+        {/* 4b. Zusatzseiten (Checkboxen) */}
         <label className="label" style={{ marginTop: 10 }}>4c. Zusatzseiten</label>
         <div className="hint" style={{ marginBottom: 6 }}>Jede angehakte Seite wird als eigene Subpage im Store generiert. Homepage + Kategorie-Seiten entstehen immer automatisch.</div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px 16px' }}>
@@ -675,10 +708,15 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
                 existingStoreUrl: existingStoreUrl.trim() && !validateStoreUrl(existingStoreUrl) ? existingStoreUrl.trim() : null,
                 existingStoreMode: existingStoreMode,
                 ciSource: ciSource,
-                referenceCategory: referenceCategory,
                 extraPages: extraPages,
                 includeProductVideos: includeProductVideos,
                 generateWireframes: generateWireframes,
+                // New pipeline fields
+                logoFile: logoFile,
+                fontNames: fontNames.trim() || null,
+                brandColors: brandColors.trim() || null,
+                brandToneExamples: brandToneExamples.trim() || null,
+                keepMenuStructure: existingStoreMode === 'optimize' ? keepMenuStructure : false,
               });
             }}
           >

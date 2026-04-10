@@ -48,12 +48,24 @@ module.exports = async function handler(req, res) {
       ciContext.push('No CI data available — describe images in a clean, professional style matching the brand tone.');
     }
 
-    // Build page context
+    // Build page context + brand voice for CI-consistent wireframes
     var pageContextLines = [];
     if (pageContext.pageName) pageContextLines.push('Page: ' + pageContext.pageName + (pageContext.isHomepage ? ' (HOMEPAGE)' : ' (Category page)'));
     if (pageContext.totalSections) pageContextLines.push('Total sections on page: ' + pageContext.totalSections);
     if (pageContext.brandStory) pageContextLines.push('Brand story: ' + pageContext.brandStory.substring(0, 200));
-    if (pageContext.keyFeatures && pageContext.keyFeatures.length > 0) pageContextLines.push('Key features: ' + pageContext.keyFeatures.join(', '));
+    if (pageContext.keyFeatures && pageContext.keyFeatures.length > 0) pageContextLines.push('Brand USPs: ' + pageContext.keyFeatures.join(', '));
+    if (pageContext.brandVoiceTone) pageContextLines.push('Brand voice tone: ' + pageContext.brandVoiceTone);
+    if (pageContext.brandVoiceStyle) pageContextLines.push('Communication style: ' + pageContext.brandVoiceStyle);
+    if (pageContext.brandTypicalPhrases && pageContext.brandTypicalPhrases.length > 0) {
+      pageContextLines.push('Typical brand phrases: ' + pageContext.brandTypicalPhrases.join(' | '));
+    }
+    if (pageContext.hasLogo) pageContextLines.push('Brand logo is available — include it in hero/brand sections where appropriate.');
+    if (pageContext.brandFonts) pageContextLines.push('BRAND FONTS: Use "' + pageContext.brandFonts + '" for all text in wireframes. This is critical for CI consistency.');
+    pageContextLines.push('');
+    pageContextLines.push('IMPORTANT: All wireframe images must feel like they belong to ONE brand.');
+    pageContextLines.push('The visual style, color usage, typography feel, and composition must be CONSISTENT');
+    pageContextLines.push('across all images — derived from the CI data above, not invented per image.');
+    if (pageContext.brandFonts) pageContextLines.push('Typography: All text must use or reference the brand fonts (' + pageContext.brandFonts + ').');
 
     // Build tile list for Gemini
     var tileDescriptions = tiles.map(function(tile, i) {

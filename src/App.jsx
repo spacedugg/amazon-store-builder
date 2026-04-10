@@ -1,10 +1,11 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { uid, emptyTile, emptyTileForLayout, LAYOUTS, LANGS, DOMAINS, validateStore, PRICING, countStoreAssets, STORE_TEMPLATES, findLayout, LAYOUT_TILE_DIMS } from './constants';
+import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, STORE_TEMPLATES, findLayout, LAYOUT_TILE_DIMS } from './constants';
 import { scrapeAsins, analyzeBrandCI } from './api';
 import { generateStore, aiRefineStore, applyOperations, generateWireframesForPage, deleteWireframesForPage } from './storeBuilder';
-import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, loadStoreByShareToken, importStoreByShareLink } from './storage';
+import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink } from './storage';
+import { analyzeProducts, analyzeBrandVoice, createContentStrategy, createTextBlocks, reviewCopywriting } from './generationPipeline';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
-import { crawlMultipleStores, crawlAndParseStore, analyzeStoreImagesWithGemini, formatReferenceStoreContext, loadKnowledgeBaseForCategory, formatKnowledgeBaseContext, formatStaticReferenceContext, loadGeminiAnalysesForCategory, formatGeminiAnalysesContext, loadStoreKnowledge, formatStoreKnowledge } from './referenceStoreService';
+import { crawlMultipleStores, crawlAndParseStore, analyzeStoreImagesWithGemini, formatReferenceStoreContext, loadStoreKnowledge, formatStoreKnowledge } from './referenceStoreService';
 import Topbar from './components/Topbar';
 import PageList from './components/PageList';
 import Canvas from './components/Canvas';
@@ -316,7 +317,9 @@ export default function App() {
             } else {
               existingPrefix = '\n=== EXISTING BRAND STORE (current store — OPTIMIZE & EXPAND) ===\n'
                 + 'This store has a good foundation. PRESERVE its core structure:\n'
-                + '- KEEP the existing page hierarchy, navigation, and category structure\n'
+                + (params.keepMenuStructure
+                  ? '- CRITICAL: KEEP the EXACT menu/navigation structure (same pages, same hierarchy, same names). Do NOT rename, add, remove, or reorganize pages.\n'
+                  : '- You MAY reorganize the navigation/page structure if it improves the store.\n')
                 + '- KEEP module arrangements that work well (good flow, clear storytelling)\n'
                 + '- IMPROVE content quality: better headlines, stronger CTAs, richer descriptions\n'
                 + '- EXPAND with new products (from scraped ASINs) into existing categories\n'
@@ -353,23 +356,6 @@ export default function App() {
         }
       } catch (kbErr) {
         log('Store knowledge base skipped: ' + kbErr.message);
-      }
-
-      // Step 1.7b: Load Gemini Vision analyses from reference store JSONs
-      try {
-        var geminiCategory = params.referenceCategory || 'generic';
-        log('Loading Gemini visual intelligence for: ' + geminiCategory + '...');
-        var geminiData = await loadGeminiAnalysesForCategory(geminiCategory);
-        if (geminiData && geminiData.length > 0) {
-          var geminiContext = formatGeminiAnalysesContext(geminiData);
-          referenceAnalysis = (referenceAnalysis || '') + '\n' + geminiContext;
-          log('Gemini visual intelligence: ' + geminiData.length + ' stores with image analyses loaded');
-        } else {
-          log('Gemini visual intelligence: no enriched stores available yet');
-        }
-      } catch (geminiErr) {
-        log('Gemini visual intelligence skipped: ' + geminiErr.message);
-        criticalFailures.push('Gemini visual intelligence');
       }
 
       // ─── CRITICAL FAILURE CHECK: Warn user and offer to abort ───
@@ -421,20 +407,167 @@ export default function App() {
         log('CI priority: Manual (user will set CI in CI tab)');
       }
 
-      // Step 2-4: AI generation (with complexity, category, template, websiteData, referenceAnalysis)
+      function checkCancel() {
+        if (genCancelRef.current) throw new Error('CANCELLED');
+      }
+
+      // ═══════════════════════════════════════════════════
+      // NEW PIPELINE: Sequential analysis steps
+      // Each step MUST succeed before the next one starts.
+      // Up to 3 retries per step. If a step fails after 3
+      // attempts, generation STOPS — no fallback, no skip.
+      // ═══════════════════════════════════════════════════
+
+      async function runPipelineStep(stepName, fn) {
+        var maxRetries = 3;
+        for (var attempt = 1; attempt <= maxRetries; attempt++) {
+          try {
+            if (attempt > 1) log('   Retry ' + attempt + '/' + maxRetries + '...');
+            var result = await fn();
+            if (!result) throw new Error('Empty result');
+            return result;
+          } catch (err) {
+            if (attempt < maxRetries) {
+              log('   ' + stepName + ' failed: ' + err.message + ' — retrying in 3s...');
+              await new Promise(function(r) { setTimeout(r, 3000); });
+            } else {
+              log('');
+              log('ERROR: ' + stepName + ' failed after ' + maxRetries + ' attempts: ' + err.message);
+              log('Generation stopped. Fix the issue and try again.');
+              throw new Error(stepName + ' failed: ' + err.message);
+            }
+          }
+        }
+      }
+
+      // Enrich website data with user-provided brand assets
+      if (params.logoFile || params.fontNames || params.brandColors) {
+        if (!enhancedWebsiteData) enhancedWebsiteData = {};
+        if (params.logoFile) enhancedWebsiteData.logoDataUrl = params.logoFile;
+        if (params.fontNames) enhancedWebsiteData.userFonts = params.fontNames;
+        if (params.brandColors) {
+          var userColors = params.brandColors.split(/[,;\s]+/).filter(function(c) { return c.match(/^#[0-9a-fA-F]{3,8}$/); });
+          if (userColors.length > 0) {
+            enhancedWebsiteData.colors = userColors;
+            log('User-provided brand colors: ' + userColors.join(', '));
+          }
+        }
+      }
+
+      log('');
+      log('═══ PHASE 2: ANALYSE ═══');
+
+      // Step 2.1: Product Analysis (Claude) — REQUIRED
+      log('Step 2.1: Analyzing products (categories, USPs, patterns)...');
+      var pipelineProductAnalysis = await runPipelineStep('Product Analysis', function() {
+        return analyzeProducts(products, params.brand, lang);
+      });
+      log('   ' + (pipelineProductAnalysis.categories || []).length + ' categories identified');
+      if (pipelineProductAnalysis.brandUSPs) log('   Brand USPs: ' + pipelineProductAnalysis.brandUSPs.slice(0, 3).join(', '));
+
+      checkCancel();
+
+      // Step 2.3: Brand Voice Analysis (Claude) — REQUIRED
+      log('Step 2.3: Analyzing brand voice...');
+      var websiteTexts = enhancedWebsiteData ? (enhancedWebsiteData.aboutText || enhancedWebsiteData.rawTextContent || '') : '';
+      var pipelineBrandVoice = await runPipelineStep('Brand Voice', function() {
+        return analyzeBrandVoice(products, params.brand, websiteTexts, params.brandToneExamples || '');
+      });
+      log('   Tone: ' + (pipelineBrandVoice.tone || '?') + ' | Style: ' + (pipelineBrandVoice.communicationStyle || '?'));
+
+      checkCancel();
+
+      // Step 2.4: Content Strategy (Claude) — REQUIRED
+      log('Step 2.4: Creating content strategy (pages, themes, ASIN assignments)...');
+      var kbForStrategy = null;
+      try { var kb = await loadStoreKnowledge(); if (kb) kbForStrategy = formatStoreKnowledge(kb); } catch(e) {}
+      var pipelineContentStrategy = await runPipelineStep('Content Strategy', function() {
+        return createContentStrategy(
+          pipelineProductAnalysis, productCI, pipelineBrandVoice,
+          enhancedWebsiteData, kbForStrategy, params.brand, lang, params.instructions
+        );
+      });
+      if (pipelineContentStrategy.pages) {
+        log('   ' + pipelineContentStrategy.pages.length + ' pages planned');
+        pipelineContentStrategy.pages.forEach(function(pg) {
+          log('   - ' + pg.name + ': ' + (pg.themes || []).slice(0, 3).join(', '));
+        });
+      }
+
+      checkCancel();
+
+      // Step 3.1: Text Building Blocks (Claude) — REQUIRED
+      log('');
+      log('═══ PHASE 3: TEXTE ═══');
+      log('Step 3.1: Creating text building blocks...');
+      var originalTexts = '';
+      if (enhancedWebsiteData && enhancedWebsiteData.rawTextContent) originalTexts = enhancedWebsiteData.rawTextContent;
+      products.slice(0, 5).forEach(function(p) {
+        if (p.bulletPoints) originalTexts += '\n' + p.bulletPoints.join('\n');
+      });
+      var pipelineTextBlocks = await runPipelineStep('Text Blocks', function() {
+        return createTextBlocks(
+          pipelineContentStrategy, pipelineBrandVoice, pipelineProductAnalysis,
+          params.brand, lang, originalTexts
+        );
+      });
+      if (pipelineTextBlocks.pages) {
+        log('   Text blocks for ' + pipelineTextBlocks.pages.length + ' pages created');
+      }
+
+      checkCancel();
+
+      // Step 3.2: Copywriting Review (Claude) — REQUIRED
+      log('Step 3.2: Reviewing and refining copywriting...');
+      pipelineTextBlocks = await runPipelineStep('Copywriting Review', function() {
+        return reviewCopywriting(pipelineTextBlocks, pipelineBrandVoice, params.brand, lang, originalTexts);
+      });
+      log('   Copywriting review complete');
+
+      checkCancel();
+
+      log('');
+      log('═══ PHASE 4: STORE GENERIERUNG ═══');
+
+      // Enrich the reference analysis with pipeline results
+      if (pipelineProductAnalysis) {
+        referenceAnalysis = (referenceAnalysis || '') + '\n\n=== PRODUCT ANALYSIS (from pipeline) ===\n' + JSON.stringify(pipelineProductAnalysis, null, 1);
+      }
+      if (pipelineBrandVoice) {
+        referenceAnalysis = (referenceAnalysis || '') + '\n\n=== BRAND VOICE (from pipeline) ===\n' + JSON.stringify(pipelineBrandVoice, null, 1);
+      }
+      if (pipelineContentStrategy) {
+        referenceAnalysis = (referenceAnalysis || '') + '\n\n=== CONTENT STRATEGY (from pipeline) ===\n' + JSON.stringify(pipelineContentStrategy, null, 1);
+      }
+      if (pipelineTextBlocks) {
+        referenceAnalysis = (referenceAnalysis || '') + '\n\n=== TEXT BUILDING BLOCKS (from pipeline) ===\n' + JSON.stringify(pipelineTextBlocks, null, 1);
+      }
+
+      // Step 4: AI generation (with all pipeline data as enriched context)
       var storeData = await generateStore(
         params.asins, products, params.brand, params.marketplace, lang,
         params.instructions, log, params.complexity, templateData, enhancedWebsiteData, referenceAnalysis,
         { extraPages: selectedExtraPages, includeProductVideos: params.includeProductVideos, generateWireframes: params.generateWireframes, referenceCategory: params.referenceCategory },
-        genCancelRef
+        genCancelRef,
+        { productAnalysis: pipelineProductAnalysis, brandVoice: pipelineBrandVoice, contentStrategy: pipelineContentStrategy, textBlocks: pipelineTextBlocks }
       );
 
-      // Store meta
+      // Store meta + pipeline results
       storeData.complexity = params.complexity;
       if (productCI) storeData.productCI = productCI;
       storeData.ciSource = userCiSource;
       if (templateData) storeData.templateId = templateData.id;
       if (enhancedWebsiteData) storeData.websiteData = enhancedWebsiteData;
+      if (pipelineProductAnalysis) storeData.pipelineProductAnalysis = pipelineProductAnalysis;
+      if (pipelineBrandVoice) storeData.pipelineBrandVoice = pipelineBrandVoice;
+      if (pipelineContentStrategy) storeData.pipelineContentStrategy = pipelineContentStrategy;
+      if (pipelineTextBlocks) storeData.pipelineTextBlocks = pipelineTextBlocks;
+
+      // ASIN completeness check
+      if (storeData.asinCheck && storeData.asinCheck.missing && storeData.asinCheck.missing.length > 0) {
+        log('');
+        log('ASIN CHECK: ' + storeData.asinCheck.missing.length + ' ASINs fehlen! Klicke "ASINs" in der Topbar für Details.');
+      }
 
       setStore(storeData);
       setCurPage(storeData.pages[0] ? storeData.pages[0].id : '');
@@ -1151,6 +1284,39 @@ export default function App() {
           store={store}
           products={store.products}
           onClose={function() { setShowAsinOverview(false); }}
+          onMoveAsin={function(asin, targetPageId) {
+            // Add the ASIN to the target page's last product_grid section
+            // or create a new product_grid section if none exists
+            setStoreWithUndo(function(s) {
+              return Object.assign({}, s, {
+                pages: s.pages.map(function(pg) {
+                  if (pg.id !== targetPageId) return pg;
+                  var sections = (pg.sections || []).slice();
+                  // Find existing product_grid section
+                  var gridIdx = -1;
+                  for (var i = sections.length - 1; i >= 0; i--) {
+                    var hasPG = sections[i].tiles.some(function(t) { return t.type === 'product_grid'; });
+                    if (hasPG) { gridIdx = i; break; }
+                  }
+                  if (gridIdx >= 0) {
+                    // Add ASIN to existing product_grid tile
+                    sections[gridIdx] = Object.assign({}, sections[gridIdx], {
+                      tiles: sections[gridIdx].tiles.map(function(t) {
+                        if (t.type !== 'product_grid') return t;
+                        var newAsins = (t.asins || []).slice();
+                        if (newAsins.indexOf(asin) < 0) newAsins.push(asin);
+                        return Object.assign({}, t, { asins: newAsins });
+                      }),
+                    });
+                  } else {
+                    // Create new product_grid section with the ASIN
+                    sections.push({ id: uid(), layoutId: '1', tiles: [{ type: 'product_grid', asins: [asin], brief: '', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, mobileDimensions: { w: 1680, h: 1200 } }] });
+                  }
+                  return Object.assign({}, pg, { sections: sections });
+                }),
+              });
+            });
+          }}
         />
       )}
 
