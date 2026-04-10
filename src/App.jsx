@@ -3,6 +3,7 @@ import { uid, emptyTile, emptyTileForLayout, LAYOUTS, LANGS, DOMAINS, validateSt
 import { scrapeAsins, analyzeBrandCI } from './api';
 import { generateStore, aiRefineStore, applyOperations, generateWireframesForPage, deleteWireframesForPage } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, loadStoreByShareToken, importStoreByShareLink } from './storage';
+import { analyzeProducts, analyzeBrandVoice, createContentStrategy, createTextBlocks, checkAsinCompleteness } from './generationPipeline';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
 import { crawlMultipleStores, crawlAndParseStore, analyzeStoreImagesWithGemini, formatReferenceStoreContext, loadKnowledgeBaseForCategory, formatKnowledgeBaseContext, formatStaticReferenceContext, loadGeminiAnalysesForCategory, formatGeminiAnalysesContext, loadStoreKnowledge, formatStoreKnowledge } from './referenceStoreService';
 import Topbar from './components/Topbar';
@@ -421,7 +422,101 @@ export default function App() {
         log('CI priority: Manual (user will set CI in CI tab)');
       }
 
-      // Step 2-4: AI generation (with complexity, category, template, websiteData, referenceAnalysis)
+      // ═══════════════════════════════════════════════════
+      // NEW PIPELINE: Sequential analysis steps
+      // Each step builds on the previous one's results
+      // ═══════════════════════════════════════════════════
+
+      // Step 2.1: Product Analysis (Claude)
+      var pipelineProductAnalysis = null;
+      try {
+        log('');
+        log('═══ PHASE 2: ANALYSE ═══');
+        log('Step 2.1: Analyzing products (categories, USPs, patterns)...');
+        pipelineProductAnalysis = await analyzeProducts(products, params.brand, lang);
+        if (pipelineProductAnalysis && pipelineProductAnalysis.categories) {
+          log('   ' + pipelineProductAnalysis.categories.length + ' categories identified');
+          if (pipelineProductAnalysis.brandUSPs) log('   Brand USPs: ' + pipelineProductAnalysis.brandUSPs.slice(0, 3).join(', '));
+          if (pipelineProductAnalysis.whatMakesBrandSpecial) log('   Special: ' + pipelineProductAnalysis.whatMakesBrandSpecial.slice(0, 100));
+        }
+      } catch (paErr) {
+        log('   Product analysis failed: ' + paErr.message + ' (will use fallback in generation)');
+      }
+
+      // Step 2.3: Brand Voice Analysis (Claude)
+      var pipelineBrandVoice = null;
+      try {
+        log('Step 2.3: Analyzing brand voice...');
+        var websiteTexts = enhancedWebsiteData ? (enhancedWebsiteData.aboutText || enhancedWebsiteData.rawTextContent || '') : '';
+        pipelineBrandVoice = await analyzeBrandVoice(products, params.brand, websiteTexts, params.brandToneExamples || '');
+        if (pipelineBrandVoice && pipelineBrandVoice.tone) {
+          log('   Tone: ' + pipelineBrandVoice.tone);
+          log('   Style: ' + (pipelineBrandVoice.communicationStyle || '?') + ', ' + (pipelineBrandVoice.addressing || '?'));
+        }
+      } catch (bvErr) {
+        log('   Brand voice analysis failed: ' + bvErr.message);
+      }
+
+      // Step 2.4: Content Strategy (Claude)
+      var pipelineContentStrategy = null;
+      try {
+        log('Step 2.4: Creating content strategy (pages, themes, ASIN assignments)...');
+        var kbForStrategy = null;
+        try { var kb = await loadStoreKnowledge(); if (kb) kbForStrategy = formatStoreKnowledge(kb); } catch(e) {}
+        pipelineContentStrategy = await createContentStrategy(
+          pipelineProductAnalysis, productCI, pipelineBrandVoice,
+          enhancedWebsiteData, kbForStrategy, params.brand, lang, params.instructions
+        );
+        if (pipelineContentStrategy && pipelineContentStrategy.pages) {
+          log('   ' + pipelineContentStrategy.pages.length + ' pages planned');
+          pipelineContentStrategy.pages.forEach(function(pg) {
+            log('   - ' + pg.name + ': ' + (pg.themes || []).slice(0, 3).join(', '));
+          });
+        }
+      } catch (csErr) {
+        log('   Content strategy failed: ' + csErr.message + ' (AI will create structure during generation)');
+      }
+
+      // Step 3.1: Text Building Blocks (Claude)
+      var pipelineTextBlocks = null;
+      try {
+        log('');
+        log('═══ PHASE 3: TEXTE ═══');
+        log('Step 3.1: Creating text building blocks...');
+        var originalTexts = '';
+        if (enhancedWebsiteData && enhancedWebsiteData.rawTextContent) originalTexts = enhancedWebsiteData.rawTextContent;
+        products.slice(0, 5).forEach(function(p) {
+          if (p.bulletPoints) originalTexts += '\n' + p.bulletPoints.join('\n');
+        });
+        pipelineTextBlocks = await createTextBlocks(
+          pipelineContentStrategy, pipelineBrandVoice, pipelineProductAnalysis,
+          params.brand, lang, originalTexts
+        );
+        if (pipelineTextBlocks && pipelineTextBlocks.pages) {
+          log('   Text blocks for ' + pipelineTextBlocks.pages.length + ' pages created');
+        }
+      } catch (tbErr) {
+        log('   Text blocks failed: ' + tbErr.message + ' (AI will create texts during generation)');
+      }
+
+      log('');
+      log('═══ PHASE 4: STORE GENERIERUNG ═══');
+
+      // Enrich the reference analysis with pipeline results
+      if (pipelineProductAnalysis) {
+        referenceAnalysis = (referenceAnalysis || '') + '\n\n=== PRODUCT ANALYSIS (from pipeline) ===\n' + JSON.stringify(pipelineProductAnalysis, null, 1);
+      }
+      if (pipelineBrandVoice) {
+        referenceAnalysis = (referenceAnalysis || '') + '\n\n=== BRAND VOICE (from pipeline) ===\n' + JSON.stringify(pipelineBrandVoice, null, 1);
+      }
+      if (pipelineContentStrategy) {
+        referenceAnalysis = (referenceAnalysis || '') + '\n\n=== CONTENT STRATEGY (from pipeline) ===\n' + JSON.stringify(pipelineContentStrategy, null, 1);
+      }
+      if (pipelineTextBlocks) {
+        referenceAnalysis = (referenceAnalysis || '') + '\n\n=== TEXT BUILDING BLOCKS (from pipeline) ===\n' + JSON.stringify(pipelineTextBlocks, null, 1);
+      }
+
+      // Step 4: AI generation (with all pipeline data as enriched context)
       var storeData = await generateStore(
         params.asins, products, params.brand, params.marketplace, lang,
         params.instructions, log, params.complexity, templateData, enhancedWebsiteData, referenceAnalysis,
@@ -429,12 +524,22 @@ export default function App() {
         genCancelRef
       );
 
-      // Store meta
+      // Store meta + pipeline results
       storeData.complexity = params.complexity;
       if (productCI) storeData.productCI = productCI;
       storeData.ciSource = userCiSource;
       if (templateData) storeData.templateId = templateData.id;
       if (enhancedWebsiteData) storeData.websiteData = enhancedWebsiteData;
+      if (pipelineProductAnalysis) storeData.pipelineProductAnalysis = pipelineProductAnalysis;
+      if (pipelineBrandVoice) storeData.pipelineBrandVoice = pipelineBrandVoice;
+      if (pipelineContentStrategy) storeData.pipelineContentStrategy = pipelineContentStrategy;
+      if (pipelineTextBlocks) storeData.pipelineTextBlocks = pipelineTextBlocks;
+
+      // ASIN completeness check
+      if (storeData.asinCheck && storeData.asinCheck.missing && storeData.asinCheck.missing.length > 0) {
+        log('');
+        log('ASIN CHECK: ' + storeData.asinCheck.missing.length + ' ASINs fehlen! Klicke "ASINs" in der Topbar für Details.');
+      }
 
       setStore(storeData);
       setCurPage(storeData.pages[0] ? storeData.pages[0].id : '');
