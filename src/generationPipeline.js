@@ -54,15 +54,21 @@ export async function analyzeProducts(products, brand, lang) {
       rating: p.rating,
       reviews: p.reviews,
       bulletPoints: (p.bulletPoints || []).slice(0, 5),
-      description: (p.description || '').slice(0, 300),
+      description: (p.description || '').slice(0, 500),
       categories: p.categories,
-      availableSince: p.availableSince || null,
       bestsellerRank: p.bestsellerRank || null,
+      boughtPastMonth: p.boughtPastMonth || null,
+      // Customer review summary — very useful for understanding what the product ACTUALLY does
+      customerSays: p.customerSays || null,
     };
   });
 
   var system = [
     'You analyze Amazon product catalogs for Brand Store creation.',
+    'Your categorization must be ACCURATE. Read the product title, bullet points, description,',
+    'and Amazon categories carefully. A product about "Flohsamenschalen" (psyllium husks) belongs',
+    'to Digestion, NOT to Sleep. A "Schlafbeere" (Ashwagandha) can belong to Sleep.',
+    'When in doubt, the Amazon category breadcrumb is the most reliable signal.',
     'Return ONLY valid JSON.',
   ].join('\n');
 
@@ -161,7 +167,17 @@ export async function createContentStrategy(productAnalysis, ciProfile, brandVoi
     '',
     brandVoice ? 'BRAND VOICE:\n' + JSON.stringify(brandVoice, null, 1) : '',
     '',
-    websiteData ? 'WEBSITE DATA: ' + (websiteData.title || '') + ' — Categories: ' + ((websiteData.categories || []).join(', ') || 'unknown') : '',
+    websiteData ? [
+      'WEBSITE DATA:',
+      'Title: ' + (websiteData.title || ''),
+      'Categories: ' + ((websiteData.categories || []).join(', ') || 'unknown'),
+      websiteData.tagline ? 'Tagline: ' + websiteData.tagline : '',
+      websiteData.aboutText ? 'About: ' + websiteData.aboutText.slice(0, 500) : '',
+      websiteData.aiAnalysis ? 'USPs from website: ' + JSON.stringify(websiteData.aiAnalysis.keyUSPs || websiteData.aiAnalysis.brandValues || [], null, 1) : '',
+      websiteData.certifications ? 'Certifications: ' + websiteData.certifications.join(', ') : '',
+      'IMPORTANT: The USPs on the brand website are the PRIMARY source of truth.',
+      'Use THESE USPs in the store, not invented ones.',
+    ].filter(Boolean).join('\n') : '',
     '',
     storeKnowledge || '',
     '',
@@ -206,6 +222,9 @@ export async function createContentStrategy(productAnalysis, ciProfile, brandVoi
     '- Themes per page emerge from the actual products and brand, not from templates.',
     '- Pages are individually structured. The homepage is NOT a template for category pages.',
     '- Do NOT force a narrative or storyline. Thematic grouping is enough.',
+    '- Extra pages (about_us, bestsellers, etc.) need REAL content too, not empty shells.',
+    '  If you suggest an about_us page, define themes like "founder story, brand values, quality promise".',
+    '  If you suggest a bestsellers page, assign the actual bestseller ASINs to it.',
   ].filter(Boolean).join('\n');
 
   return await callClaude(system, user, 4096);

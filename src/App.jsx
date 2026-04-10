@@ -238,19 +238,19 @@ export default function App() {
         // Analyze Amazon listing images for CI (unless user chose "website only" or "manual")
         try {
           var ciImages = [];
+          // Collect images from ALL products (not just first few)
+          // Take up to 3 images per product to get good CI coverage
           products.forEach(function(p) {
-            if (ciImages.length >= 8) return;
             var imgs = (p.images || []);
-            if (imgs.length > 1) {
-              for (var ii = 1; ii < Math.min(imgs.length, 4) && ciImages.length < 8; ii++) {
-                if (imgs[ii].url) ciImages.push({ url: imgs[ii].url, context: p.name });
-              }
-            } else if (imgs.length === 1 && imgs[0].url) {
-              ciImages.push({ url: imgs[0].url, context: p.name });
+            for (var ii = 0; ii < Math.min(imgs.length, 3); ii++) {
+              var imgUrl = typeof imgs[ii] === 'string' ? imgs[ii] : (imgs[ii].url || '');
+              if (imgUrl) ciImages.push({ url: imgUrl, context: p.name });
             }
           });
+          // Gemini Vision can handle many images, but cap at 50 for API limits
+          if (ciImages.length > 50) ciImages = ciImages.slice(0, 50);
           if (ciImages.length > 0) {
-            log('Analyzing brand CI from ' + ciImages.length + ' Amazon listing images...');
+            log('Analyzing brand CI from ' + ciImages.length + ' Amazon listing images (from ' + products.length + ' products)...');
             productCI = await analyzeBrandCI(ciImages, params.brand);
             log('   Amazon CI: ' + (productCI.primaryColors || []).join(', ') + ' | ' + (productCI.visualMood || 'N/A'));
             if (productCI.designerNotes) log('   Designer notes: ' + productCI.designerNotes);
