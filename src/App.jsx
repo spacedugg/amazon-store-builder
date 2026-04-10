@@ -238,22 +238,46 @@ export default function App() {
         // Analyze Amazon listing images for CI (unless user chose "website only" or "manual")
         try {
           var ciImages = [];
-          // Collect images from ALL products (not just first few)
-          // Take up to 3 images per product to get good CI coverage
+          // Collect ALL images from ALL products
           products.forEach(function(p) {
             var imgs = (p.images || []);
-            for (var ii = 0; ii < Math.min(imgs.length, 3); ii++) {
+            for (var ii = 0; ii < imgs.length; ii++) {
               var imgUrl = typeof imgs[ii] === 'string' ? imgs[ii] : (imgs[ii].url || '');
               if (imgUrl) ciImages.push({ url: imgUrl, context: p.name });
             }
           });
-          // Gemini Vision can handle many images, but cap at 50 for API limits
-          if (ciImages.length > 50) ciImages = ciImages.slice(0, 50);
           if (ciImages.length > 0) {
-            log('Analyzing brand CI from ' + ciImages.length + ' Amazon listing images (from ' + products.length + ' products)...');
-            productCI = await analyzeBrandCI(ciImages, params.brand);
-            log('   Amazon CI: ' + (productCI.primaryColors || []).join(', ') + ' | ' + (productCI.visualMood || 'N/A'));
-            if (productCI.designerNotes) log('   Designer notes: ' + productCI.designerNotes);
+            log('Analyzing brand CI from ' + ciImages.length + ' images across ' + products.length + ' products...');
+            // Send in batches of 8 (Gemini limit per call), collect all results
+            var allCiResults = [];
+            for (var batch = 0; batch < ciImages.length; batch += 8) {
+              var batchImages = ciImages.slice(batch, batch + 8);
+              var batchNum = Math.floor(batch / 8) + 1;
+              var totalBatches = Math.ceil(ciImages.length / 8);
+              log('   CI batch ' + batchNum + '/' + totalBatches + ' (' + batchImages.length + ' images)...');
+              try {
+                var batchCI = await analyzeBrandCI(batchImages, params.brand);
+                allCiResults.push(batchCI);
+              } catch (batchErr) {
+                log('   Batch ' + batchNum + ' failed: ' + batchErr.message);
+              }
+            }
+            // Merge all batch results into one CI profile
+            if (allCiResults.length > 0) {
+              productCI = allCiResults[0]; // Start with first batch
+              // Merge colors from all batches
+              var allColors = {};
+              allCiResults.forEach(function(r) {
+                (r.primaryColors || []).forEach(function(c) { allColors[c] = (allColors[c] || 0) + 1; });
+                (r.secondaryColors || []).forEach(function(c) { allColors[c] = (allColors[c] || 0) + 1; });
+              });
+              // Most frequent colors become primary
+              var sortedColors = Object.entries(allColors).sort(function(a, b) { return b[1] - a[1]; });
+              productCI.primaryColors = sortedColors.slice(0, 5).map(function(e) { return e[0]; });
+              log('   Amazon CI: ' + (productCI.primaryColors || []).join(', ') + ' | ' + (productCI.visualMood || 'N/A'));
+              log('   Analyzed ' + allCiResults.length + ' batches, ' + ciImages.length + ' total images');
+              if (productCI.designerNotes) log('   Designer notes: ' + productCI.designerNotes);
+            }
           }
         } catch (ciErr) {
           log('Amazon CI analysis skipped: ' + ciErr.message);
