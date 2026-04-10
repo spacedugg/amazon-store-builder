@@ -16,8 +16,10 @@ export default function AdminScrapingTest() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ asins: [asin.trim()], domain: 'https://www.amazon.de', debug: true }),
       });
-      if (!resp.ok) throw new Error('HTTP ' + resp.status);
-      var data = await resp.json();
+      var text = await resp.text();
+      if (!resp.ok) throw new Error('HTTP ' + resp.status + ': ' + text.slice(0, 500));
+      var data;
+      try { data = JSON.parse(text); } catch (e2) { throw new Error('Invalid JSON: ' + text.slice(0, 500)); }
       setResult(data);
     } catch (e) {
       setError(e.message);
