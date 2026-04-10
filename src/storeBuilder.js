@@ -1,4 +1,5 @@
 import { uid, LAYOUTS, LAYOUT_TILE_DIMS, REFERENCE_STORES, STORE_PRINCIPLES, MODULE_BAUKASTEN, PRODUCT_COMPLEXITY, COMPLEXITY_LEVELS, CATEGORY_STYLE_HINTS, IMAGE_CATEGORIES, IMAGE_CATEGORY_DECISION_TREE, findLayout, resolveLayoutId, createDefaultProductSelector } from './constants';
+import { checkAsinCompleteness } from './generationPipeline';
 
 var ANTHROPIC_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY || '';
 var PRIMARY_MODEL = 'claude-opus-4-6';
@@ -2729,6 +2730,20 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     }
   })();
 
+  // ─── ASIN COMPLETENESS CHECK ───
+  var inputAsins = products.map(function(p) { return p.asin; });
+  var asinCheck = checkAsinCompleteness(inputAsins, pages);
+  if (asinCheck.missing.length > 0) {
+    log('WARNING: ' + asinCheck.missing.length + ' ASINs not found in any store page:');
+    asinCheck.missing.forEach(function(a) {
+      var prod = productMap[a];
+      log('  ' + a + ' (' + (prod ? prod.name.slice(0, 40) : 'unknown') + ')');
+    });
+    log('These ASINs should be added to a Product Grid or module.');
+  } else {
+    log('ASIN check passed: all ' + inputAsins.length + ' ASINs appear in the store.');
+  }
+
   log('Store generation complete!');
 
   return {
@@ -2742,6 +2757,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     products: products,
     pages: pages,
     asins: asinList,
+    asinCheck: asinCheck,
   };
 }
 
