@@ -73,6 +73,7 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
   var [fontNames, setFontNames] = useState('');
   var [brandColors, setBrandColors] = useState('');
   var [brandToneExamples, setBrandToneExamples] = useState('');
+  var [keepMenuStructure, setKeepMenuStructure] = useState(true);
   var fileRef = useRef(null);
   var logoRef = useRef(null);
 
@@ -435,6 +436,17 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
           </div>
         </div>
 
+        {/* Optimization: keep menu structure */}
+        {existingStoreUrl && existingStoreMode === 'optimize' && (
+          <div style={{ marginTop: 8, padding: '8px 12px', background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 6 }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, cursor: 'pointer' }}>
+              <input type="checkbox" checked={keepMenuStructure} onChange={function() { setKeepMenuStructure(!keepMenuStructure); }} />
+              <span>Menüstruktur beibehalten</span>
+            </label>
+            <div className="hint">Die bestehenden Seiten und deren Hierarchie werden übernommen.</div>
+          </div>
+        )}
+
         {/* 4b. Zusatzseiten (Checkboxen) */}
         <label className="label" style={{ marginTop: 10 }}>4c. Zusatzseiten</label>
         <div className="hint" style={{ marginBottom: 6 }}>Jede angehakte Seite wird als eigene Subpage im Store generiert. Homepage + Kategorie-Seiten entstehen immer automatisch.</div>
@@ -704,6 +716,7 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
                 fontNames: fontNames.trim() || null,
                 brandColors: brandColors.trim() || null,
                 brandToneExamples: brandToneExamples.trim() || null,
+                keepMenuStructure: existingStoreMode === 'optimize' ? keepMenuStructure : false,
               });
             }}
           >

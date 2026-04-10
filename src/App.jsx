@@ -3,7 +3,7 @@ import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, STOR
 import { scrapeAsins, analyzeBrandCI } from './api';
 import { generateStore, aiRefineStore, applyOperations, generateWireframesForPage, deleteWireframesForPage } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink } from './storage';
-import { analyzeProducts, analyzeBrandVoice, createContentStrategy, createTextBlocks } from './generationPipeline';
+import { analyzeProducts, analyzeBrandVoice, createContentStrategy, createTextBlocks, reviewCopywriting } from './generationPipeline';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
 import { crawlMultipleStores, crawlAndParseStore, analyzeStoreImagesWithGemini, formatReferenceStoreContext, loadStoreKnowledge, formatStoreKnowledge } from './referenceStoreService';
 import Topbar from './components/Topbar';
@@ -317,7 +317,9 @@ export default function App() {
             } else {
               existingPrefix = '\n=== EXISTING BRAND STORE (current store — OPTIMIZE & EXPAND) ===\n'
                 + 'This store has a good foundation. PRESERVE its core structure:\n'
-                + '- KEEP the existing page hierarchy, navigation, and category structure\n'
+                + (params.keepMenuStructure
+                  ? '- CRITICAL: KEEP the EXACT menu/navigation structure (same pages, same hierarchy, same names). Do NOT rename, add, remove, or reorganize pages.\n'
+                  : '- You MAY reorganize the navigation/page structure if it improves the store.\n')
                 + '- KEEP module arrangements that work well (good flow, clear storytelling)\n'
                 + '- IMPROVE content quality: better headlines, stronger CTAs, richer descriptions\n'
                 + '- EXPAND with new products (from scraped ASINs) into existing categories\n'
@@ -512,6 +514,15 @@ export default function App() {
       if (pipelineTextBlocks.pages) {
         log('   Text blocks for ' + pipelineTextBlocks.pages.length + ' pages created');
       }
+
+      checkCancel();
+
+      // Step 3.2: Copywriting Review (Claude) — REQUIRED
+      log('Step 3.2: Reviewing and refining copywriting...');
+      pipelineTextBlocks = await runPipelineStep('Copywriting Review', function() {
+        return reviewCopywriting(pipelineTextBlocks, pipelineBrandVoice, params.brand, lang, originalTexts);
+      });
+      log('   Copywriting review complete');
 
       checkCancel();
 

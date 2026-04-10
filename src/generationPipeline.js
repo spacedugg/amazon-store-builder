@@ -188,8 +188,17 @@ export async function createContentStrategy(productAnalysis, ciProfile, brandVoi
     '    }',
     '  ],',
     '  "crossPageLinks": ["description of how pages link to each other"],',
-    '  "designDirection": "1-2 sentences: overall visual direction for the store"',
+    '  "designDirection": "1-2 sentences: overall visual direction for the store",',
+    '  "suggestedExtraPages": ["about_us", "bestsellers", ...] (ONLY suggest pages that make sense for THIS brand)',
     '}',
+    '',
+    'EXTRA PAGE OPTIONS (only suggest if they genuinely add value):',
+    '- "about_us": brand story, founder, values — useful if brand has a strong story',
+    '- "bestsellers": dedicated bestseller page — useful for brands with clear top products',
+    '- "new_arrivals": new products page — useful if brand regularly launches new items',
+    '- "how_it_works": product finder/quiz — useful for complex product ranges',
+    '- "sustainability": eco/sustainability page — useful if brand emphasizes this',
+    '- "deals": deals/offers page — useful for brands with frequent promotions',
     '',
     'RULES:',
     '- Every ASIN from the product list MUST appear on at least one page.',
@@ -253,6 +262,40 @@ export async function createTextBlocks(contentStrategy, brandVoice, productAnaly
     '  the homepage shows brand-level USPs. Not every page has the same USPs.',
     '- Wording must match the brand voice (formal/informal, Du/Sie, vocabulary level).',
     '- Draw from original brand texts where possible.',
+  ].filter(Boolean).join('\n');
+
+  return await callClaude(system, user, 6000);
+}
+
+// ─── PHASE 3.2: COPYWRITING REVIEW ───
+// Reviews all text blocks for quality, consistency, and brand voice match
+export async function reviewCopywriting(textBlocks, brandVoice, brand, lang, originalTexts) {
+  var system = [
+    'You review and refine text content for Amazon Brand Stores.',
+    'Your job: check quality, consistency, and brand voice compliance.',
+    'Return the IMPROVED version of the text blocks. Return ONLY valid JSON.',
+  ].join('\n');
+
+  var user = [
+    'Brand: "' + brand + '" | Language: ' + lang,
+    '',
+    'BRAND VOICE:',
+    JSON.stringify(brandVoice, null, 1),
+    '',
+    'TEXT BLOCKS TO REVIEW:',
+    JSON.stringify(textBlocks, null, 1),
+    '',
+    originalTexts ? 'ORIGINAL BRAND TEXTS (for wording reference):\n' + originalTexts.slice(0, 800) : '',
+    '',
+    'REVIEW AND FIX:',
+    '1. If the SAME USP appears with different wording on different pages, standardize to ONE version.',
+    '2. Check that the tone matches the brand voice throughout.',
+    '3. Remove generic/template-sounding text. Everything must sound like the brand wrote it.',
+    '4. Ensure CTAs are varied (not every page says "Jetzt entdecken").',
+    '5. Check headline quality — they should be specific and benefit-driven.',
+    '6. Compare with original brand texts — wording should align, not diverge.',
+    '',
+    'Return the corrected text blocks in the SAME JSON structure.',
   ].filter(Boolean).join('\n');
 
   return await callClaude(system, user, 6000);

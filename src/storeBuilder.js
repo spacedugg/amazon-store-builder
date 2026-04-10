@@ -3099,6 +3099,9 @@ export async function generateWireframesForPage(page, brand, websiteData, analys
       brandVoiceTone: brandVoice.tone || brandTone || '',
       brandVoiceStyle: brandVoice.communicationStyle || '',
       brandTypicalPhrases: (brandVoice.typicalPhrases || []).slice(0, 5),
+      // Brand assets for wireframe consistency
+      hasLogo: !!(websiteData && websiteData.logoDataUrl),
+      brandFonts: (websiteData && websiteData.userFonts) || null,
     };
     var descResp = await fetch('/api/generate-image-descriptions', {
       method: 'POST',

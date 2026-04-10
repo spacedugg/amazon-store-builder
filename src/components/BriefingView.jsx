@@ -2162,6 +2162,16 @@ export default function BriefingView() {
                   {/* Fonts — editable */}
                   <div style={{ marginBottom: 10 }}>
                     <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Schriftarten</div>
+                    {store.websiteData && store.websiteData.userFonts && (
+                      <div style={{ marginBottom: 4 }}>
+                        <span style={{ fontSize: 9, color: '#92400e', fontWeight: 700 }}>Brand Fonts (user-specified):</span>
+                        <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 2 }}>
+                          {store.websiteData.userFonts.split(/[,;]+/).map(function(f, i) {
+                            return <span key={i} style={{ background: '#fef3c7', color: '#92400e', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 700 }}>{f.trim()}</span>;
+                          })}
+                        </div>
+                      </div>
+                    )}
                     {store.websiteData && store.websiteData.fonts && store.websiteData.fonts.length > 0 && (
                       <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 4 }}>
                         {store.websiteData.fonts.map(function(f, i) {

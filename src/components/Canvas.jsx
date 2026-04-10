@@ -95,6 +95,9 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
 
         {/* Store nav bar (2-level) */}
         <div className="canvas-store-header">
+          {store.websiteData && store.websiteData.logoDataUrl && (
+            <img src={store.websiteData.logoDataUrl} alt="" style={{ height: 28, borderRadius: 4, marginRight: 8, flexShrink: 0 }} />
+          )}
           <div className="store-brand-name">{store.brandName || 'Brand Store'}</div>
           <div className="store-nav-tabs">
             {store.pages.filter(function(pg) { return !pg.parentId; }).map(function(pg) {
