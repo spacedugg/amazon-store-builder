@@ -68,6 +68,16 @@ module.exports = async function handler(req, res) {
 
     if (!Array.isArray(rawData)) rawData = [rawData];
 
+    // DEBUG MODE: Return raw BrightData response to see all available fields
+    if (body.debug) {
+      return res.status(200).json({
+        debug: true,
+        rawFieldNames: rawData[0] ? Object.keys(rawData[0]) : [],
+        rawSample: rawData[0] || null,
+        totalItems: rawData.length,
+      });
+    }
+
     var products = rawData
       .filter(function(p) { return p && !p.error; })
       .map(function(p) {
@@ -97,8 +107,6 @@ module.exports = async function handler(req, res) {
           name: p.title || p.name || '',
           brand: p.brand || '',
           description: p.description || p.product_overview || '',
-          price: p.final_price || p.initial_price || 0,
-          currency: p.currency || 'EUR',
           rating: p.rating || 0,
           reviews: p.reviews_count || 0,
           image: p.image || p.main_image || '',
@@ -106,6 +114,9 @@ module.exports = async function handler(req, res) {
           bulletPoints: bulletPoints,
           categories: p.categories || [],
           url: p.url || '',
+          // Additional fields — mapped from actual BrightData response
+          // (run with debug:true to see all available fields)
+          _allRawKeys: Object.keys(p),
         };
       });
 

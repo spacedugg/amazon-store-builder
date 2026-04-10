@@ -149,24 +149,19 @@ Die Wissensdatenbank fließt als Orientierung ein:
 Ergebnis:
 - **Seitenstruktur**: Welche Seiten, welche Hierarchie
 - **Pro Seite — thematischer Aufbauplan**:
-  - Welche Themen in welcher Reihenfolge
-  - Beispiel Kategorie-Seite:
-    - Lifestyle-Einstieg
-    - Bestseller vorstellen
-    - Was zeichnet diese Kategorie aus? Mehrwerte?
-    - Pain Points ansprechen
-    - Inhaltsstoffe / Features
-    - Anwendungsszenarien
-    - Einzelne Produkte
-    - USPs / Icons
-    - Unterkategorien (falls vorhanden)
-    - Produktgrid
-  - Das ist KEINE Pflicht-Reihenfolge. Der Inhalt bestimmt die Struktur.
-- **Cross-Links** zwischen Seiten
-- **Keine erzwungene Storyline.** Thematische Gliederung ja, aber keine
-  künstliche Narrative. Die Seiten decken verschiedene Aspekte ab:
-  Pain Points, Features, Anwendung, Produkte, Lifestyle, USPs, Icons —
-  das lässt sich nicht auf eine Key-Message runterbrechen.
+  - Welche Themen sollen auf dieser Seite behandelt werden?
+  - Welche Produkte wo zeigen?
+  - Cross-Links zwischen Seiten
+  - Was macht jede Seite einzigartig?
+  - Die Themen ergeben sich aus der Produkt-Analyse, der CI und den
+    Besonderheiten der jeweiligen Kategorie/Seite. Hier gibt es KEIN
+    festes Schema. Die Wissensdatenbank liefert Orientierung, welche
+    Themen in erfolgreichen Stores vorkommen, aber jede Seite wird
+    individuell aufgebaut basierend auf den tatsächlichen Inhalten.
+- **ASIN-Zuordnung**: Jede ASIN wird einer oder mehreren Seiten zugeordnet.
+  Am Ende muss JEDE eingegebene ASIN irgendwo im Store vorkommen (sei es
+  in einem Modul, einer Kachel, oder einem Product Grid). Keine ASIN
+  darf fehlen. ASINs dürfen auf mehreren Seiten auftauchen.
 
 ---
 
@@ -189,8 +184,13 @@ Regeln:
 - Alle Texte in Store-Sprache
 - Wording orientiert sich an der Marke (Website, Listings)
 - Keine generischen Platzhalter
-- USPs müssen NICHT überall identisch formuliert sein — inhaltliche
-  Konsistenz reicht, die Wortwahl darf variieren
+- USP-Konsistenz:
+  - Wenn derselbe USP auf mehreren Seiten vorkommt, muss er IDENTISCH
+    formuliert sein (z.B. "Made in Germany" ist überall "Made in Germany",
+    nicht mal "Hergestellt in Deutschland" und mal "Made in Germany")
+  - ABER: Nicht jede Seite soll die gleichen USPs zeigen. Die USPs
+    werden pro Seite passend ausgewählt. Eine Kategorie-Seite zeigt
+    Kategorie-spezifische USPs, die Homepage zeigt Marken-USPs.
 
 ---
 
@@ -243,10 +243,25 @@ Pro Seite (nacheinander, nicht gleichzeitig):
 
 ### 4.2 — Post-Processing
 
-- Deduplikation (ASINs, Links)
-- Link-Validierung
+- Link-Validierung (alle linkUrls zeigen auf existierende Seiten)
 - Text-Konsistenz-Check: Wenn sich Texte inhaltlich zu >90% ähneln aber
   verschiedene Wortwahl nutzen → angleichen an die bessere Option
+- **ASIN-Vollständigkeits-Check**:
+  - Liste aller eingegebenen ASINs vs. wo sie im Store vorkommen
+  - Pro ASIN: auf welcher Seite, in welchem Modul (Kachel, Product Grid, etc.)
+  - Fehlende ASINs werden markiert und automatisch zugeordnet
+  - KEINE ASIN darf fehlen
+
+### 4.3 — ASIN-Verwaltung (im UI)
+
+Nach der Generierung kann der Nutzer:
+- **ASIN-Übersicht** sehen: welche ASIN auf welcher Seite, in welchem Modul
+- **ASINs zwischen Kategorien verschieben**: Eine ASIN einer anderen Seite zuordnen
+  - Option 1: ASIN wird nur ins Product Grid der neuen Seite eingefügt (einfach)
+  - Option 2: Die neue Seite wird von der KI analysiert und die ASIN wird
+    intelligent in den bestehenden Aufbau integriert (z.B. in ein passendes
+    Modul, eine passende Kachel, oder als neuer Inhaltsbaustein)
+- **Fehlende ASINs** werden angezeigt und können manuell zugeordnet werden
 
 ---
 
