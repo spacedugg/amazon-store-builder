@@ -262,7 +262,7 @@ function formatWebsiteContext(websiteData) {
 
   // ── RAW EXTRACTED FIELDS (fallback if no AI, or supplementary) ──
   if (!ai || !ai.brandStory) {
-    if (websiteData.aboutText) parts.push('Brand story / About: ' + websiteData.aboutText.slice(0, 800));
+    if (websiteData.aboutText) parts.push('Brand story / About: ' + websiteData.aboutText.slice(0, 2000));
   }
   if (websiteData.sustainabilityText && (!ai || !ai.sustainabilityFocus)) {
     parts.push('Sustainability info: ' + websiteData.sustainabilityText.slice(0, 500));
@@ -483,7 +483,7 @@ export async function aiAnalyzeProducts(products, brand, lang, marketplace, user
       asin: p.asin,
       name: p.name,
       brand: p.brand,
-      description: (p.description || '').slice(0, 200),
+      description: (p.description || '').slice(0, 500),
       price: p.price,
       rating: p.rating,
       reviews: p.reviews,
@@ -657,8 +657,8 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
   // Derive skipCategoryPages: small catalog with 1 category = all products on homepage
   var skipCategoryPages = isHomepage && pageProducts.length <= 4 && allCategories.length <= 1;
   var productList = pageProducts.map(function(p) {
-    var item = { asin: p.asin, name: p.name, price: p.price, rating: p.rating, reviews: p.reviews, description: (p.description || '').slice(0, 100) };
-    if (p.bulletPoints && p.bulletPoints.length > 0) item.bulletPoints = p.bulletPoints.slice(0, 3);
+    var item = { asin: p.asin, name: p.name, price: p.price, rating: p.rating, reviews: p.reviews, description: (p.description || '').slice(0, 500) };
+    if (p.bulletPoints && p.bulletPoints.length > 0) item.bulletPoints = p.bulletPoints;
     if (p.images && p.images.length > 0) {
       item.imageCount = p.images.length;
       var alts = p.images.filter(function(img) { return img.alt; }).map(function(img) { return img.alt; });
