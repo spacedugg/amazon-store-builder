@@ -4,7 +4,7 @@ import { scrapeAsins, analyzeBrandCI } from './api';
 import { generateStore, aiRefineStore, applyOperations, generateWireframesForPage, deleteWireframesForPage } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, loadStoreByShareToken, importStoreByShareLink } from './storage';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
-import { crawlMultipleStores, crawlAndParseStore, analyzeStoreImagesWithGemini, formatReferenceStoreContext, loadKnowledgeBaseForCategory, formatKnowledgeBaseContext, formatStaticReferenceContext, loadGeminiAnalysesForCategory, formatGeminiAnalysesContext } from './referenceStoreService';
+import { crawlMultipleStores, crawlAndParseStore, analyzeStoreImagesWithGemini, formatReferenceStoreContext, loadKnowledgeBaseForCategory, formatKnowledgeBaseContext, formatStaticReferenceContext, loadGeminiAnalysesForCategory, formatGeminiAnalysesContext, loadStoreKnowledge, formatStoreKnowledge } from './referenceStoreService';
 import Topbar from './components/Topbar';
 import PageList from './components/PageList';
 import Canvas from './components/Canvas';
@@ -334,35 +334,19 @@ export default function App() {
         }
       }
 
-      // Step 1.6: Load knowledge base data for the selected category
+      // Step 1.6: Load store knowledge base (from 21 Cowork-analyzed stores)
       try {
-        var kbCategory = params.referenceCategory || params.category || 'generic';
-        log('Loading knowledge base for category: ' + kbCategory + '...');
-        var kbData = await loadKnowledgeBaseForCategory(kbCategory);
-        if (kbData && kbData.length > 0) {
-          var kbContext = formatKnowledgeBaseContext(kbData);
+        log('Loading store knowledge base (21 analyzed top stores)...');
+        var storeKB = await loadStoreKnowledge();
+        if (storeKB) {
+          var kbContext = formatStoreKnowledge(storeKB);
           referenceAnalysis = (referenceAnalysis || '') + '\n' + kbContext;
-          log('Knowledge base: ' + kbData.length + ' reference stores loaded');
+          log('Store knowledge base loaded: layout patterns, module flows, design archetypes, insights');
         } else {
-          log('Knowledge base: no reference stores for this category yet');
+          log('Store knowledge base not available');
         }
       } catch (kbErr) {
-        log('Knowledge base skipped: ' + kbErr.message);
-        criticalFailures.push('Knowledge base');
-      }
-
-      // Step 1.7: Load static reference data from _summary.json (always available)
-      try {
-        var refCategory = params.referenceCategory || 'generic';
-        log('Loading static reference patterns for: ' + refCategory + '...');
-        var staticContext = await formatStaticReferenceContext(refCategory);
-        if (staticContext) {
-          referenceAnalysis = (referenceAnalysis || '') + '\n' + staticContext;
-          log('Static reference patterns loaded (from 23 analyzed stores)');
-        }
-      } catch (staticErr) {
-        log('Static reference data skipped: ' + staticErr.message);
-        criticalFailures.push('Static reference data');
+        log('Store knowledge base skipped: ' + kbErr.message);
       }
 
       // Step 1.7b: Load Gemini Vision analyses from reference store JSONs
