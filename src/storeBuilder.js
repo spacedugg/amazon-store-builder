@@ -1001,6 +1001,11 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '- RIGHT: "Split composition: product hero left, three benefit icons stacked right"',
     '- Name the specific product or category from the product list. Do NOT repeat the brand name "' + brand + '" in every brief — the designer already knows which brand this is. Mention it only in the store_hero brief.',
     '- textOverlay MUST be in store language (' + lang + ') — use real product/category names. For category/navigation tiles: textOverlay = JUST the category name (e.g. "Vitamine"), NOT a sentence. The CTA carries the action.',
+    '',
+    'TEXT BUILDING BLOCKS:',
+    '- If TEXT BUILDING BLOCKS are provided in the context below, USE THEM for textOverlay, headlines, CTAs, and USP texts.',
+    '- Do NOT invent new texts when pre-created text blocks exist. The text blocks were carefully created to match the brand voice.',
+    '- You may slightly adjust texts to fit the tile context, but keep the wording close to the original.',
     '- Do NOT use generic placeholders like "[product]" or "lifestyle image".',
     '- NEVER place two identical image categories directly adjacent (e.g. two LIFESTYLE sections in a row).',
     '- FACTUAL ACCURACY: NEVER reference more categories, products, or features than actually exist. There are exactly ' + allCategories.length + ' categories (' + allCategories.map(function(c) { return c.name; }).join(', ') + '). Do NOT write "three category previews" if there are only ' + allCategories.length + '. Briefs must match the real data.',
@@ -2757,6 +2762,87 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       log('Thematic consistency: all ' + catPages.length + ' category pages follow the same thematic flow.');
     }
   })();
+
+  // ─── TEXT CONSISTENCY CHECK ───
+  // Find USP texts that appear multiple times with slightly different wording
+  log('Checking text consistency across store...');
+  var allUsps = [];
+  pages.forEach(function(page) {
+    (page.sections || []).forEach(function(sec) {
+      (sec.tiles || []).forEach(function(tile) {
+        if (tile.textOverlay) {
+          tile.textOverlay.split(/\\n|\n/).forEach(function(line) {
+            var trimmed = line.replace(/^\[(h1|h2|body|bullet)\]/i, '').trim();
+            if (trimmed && trimmed.length > 5 && trimmed.length < 80) {
+              allUsps.push({ text: trimmed, page: page.name, tile: tile });
+            }
+          });
+        }
+      });
+    });
+  });
+  // Check for near-duplicates (simple Levenshtein-like check: same first 10 chars but different full text)
+  var uspGroups = {};
+  allUsps.forEach(function(u) {
+    var key = u.text.toLowerCase().slice(0, 15);
+    if (!uspGroups[key]) uspGroups[key] = [];
+    uspGroups[key].push(u);
+  });
+  var inconsistencies = 0;
+  Object.keys(uspGroups).forEach(function(key) {
+    var group = uspGroups[key];
+    if (group.length > 1) {
+      var unique = [];
+      group.forEach(function(g) { if (unique.indexOf(g.text) < 0) unique.push(g.text); });
+      if (unique.length > 1) {
+        inconsistencies++;
+        if (inconsistencies <= 3) {
+          log('   Text variants found: "' + unique[0].slice(0, 40) + '" vs "' + unique[1].slice(0, 40) + '"');
+        }
+      }
+    }
+  });
+  if (inconsistencies > 0) {
+    log('   ' + inconsistencies + ' potential text inconsistencies found. Review in the store editor.');
+  } else {
+    log('   Text consistency OK.');
+  }
+
+  // ─── AUTO-ASSIGN REFERENCE IMAGES FROM PRODUCT + A+ DATA ───
+  log('Assigning reference images from product listings and A+ content...');
+  var refImageCount = 0;
+  pages.forEach(function(page) {
+    (page.sections || []).forEach(function(sec) {
+      (sec.tiles || []).forEach(function(tile) {
+        if (tile.referenceImages && tile.referenceImages.length > 0) return; // already has ref images
+        if (!tile.referenceImages) tile.referenceImages = [];
+        // For tiles with a linkAsin: use that product's images
+        if (tile.linkAsin && productMap[tile.linkAsin]) {
+          var prod = productMap[tile.linkAsin];
+          // Add main product image
+          if (prod.image) {
+            tile.referenceImages.push({ url: prod.image, name: prod.name ? prod.name.slice(0, 30) + ' (Main)' : 'Product Main' });
+          }
+          // Add A+ images if available
+          if (prod.aPlusImages && prod.aPlusImages.length > 0) {
+            prod.aPlusImages.slice(0, 3).forEach(function(ai) {
+              tile.referenceImages.push({ url: ai.url, name: ai.section || 'A+ Content' });
+            });
+          }
+          refImageCount += tile.referenceImages.length;
+        }
+        // For tiles with asins array: use first product's image
+        if (tile.asins && tile.asins.length > 0 && tile.referenceImages.length === 0) {
+          var firstAsin = tile.asins[0];
+          if (productMap[firstAsin] && productMap[firstAsin].image) {
+            tile.referenceImages.push({ url: productMap[firstAsin].image, name: 'Product Reference' });
+            refImageCount++;
+          }
+        }
+      });
+    });
+  });
+  if (refImageCount > 0) log('   ' + refImageCount + ' reference images assigned from product data');
 
   // ─── ASIN COMPLETENESS CHECK ───
   var inputAsins = products.map(function(p) { return p.asin; });
