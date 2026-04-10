@@ -60,7 +60,7 @@ export default function AdminScrapingTest() {
           {/* Raw data */}
           <div>
             <h3 style={{ fontSize: 14, fontWeight: 700, margin: '0 0 8px' }}>Raw response:</h3>
-            <pre style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 6, padding: 12, fontSize: 11, overflow: 'auto', maxHeight: 600, whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
+            <pre style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 6, padding: 12, fontSize: 11, overflow: 'auto', maxHeight: 'none', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
               {JSON.stringify(result.rawSample, null, 2)}
             </pre>
           </div>

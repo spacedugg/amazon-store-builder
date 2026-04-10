@@ -81,43 +81,68 @@ module.exports = async function handler(req, res) {
     var products = rawData
       .filter(function(p) { return p && !p.error; })
       .map(function(p) {
-        // Extract all product images
+        // All 7 product images (MAIN + PT01-PT06)
         var images = [];
         if (p.images && Array.isArray(p.images)) {
           images = p.images.map(function(img) {
             if (typeof img === 'string') return { url: img, alt: '' };
-            return { url: img.url || img.link || img.src || '', alt: img.alt || img.alt_text || '' };
+            return { url: img.url || img.link || img.src || '', alt: img.alt || '' };
           }).filter(function(img) { return img.url; });
-        } else if (p.image || p.main_image) {
-          images = [{ url: p.image || p.main_image, alt: '' }];
+        } else if (p.image || p.image_url) {
+          images = [{ url: p.image || p.image_url, alt: '' }];
         }
 
-        // Extract feature bullets / product highlights
+        // Bullet points / features
         var bulletPoints = [];
-        if (p.feature_bullets && Array.isArray(p.feature_bullets)) {
+        if (p.features && Array.isArray(p.features)) {
+          bulletPoints = p.features;
+        } else if (p.feature_bullets && Array.isArray(p.feature_bullets)) {
           bulletPoints = p.feature_bullets;
-        } else if (p.about_product && Array.isArray(p.about_product)) {
-          bulletPoints = p.about_product;
-        } else if (p.product_information && typeof p.product_information === 'string') {
-          bulletPoints = [p.product_information];
+        }
+
+        // A+ Content images (from_the_brand + product_description)
+        var aPlusImages = [];
+        if (p.from_the_brand && Array.isArray(p.from_the_brand)) {
+          p.from_the_brand.forEach(function(url) {
+            if (typeof url === 'string') aPlusImages.push({ url: url, section: 'from_the_brand' });
+          });
+        }
+        if (p.product_description && Array.isArray(p.product_description)) {
+          p.product_description.forEach(function(item) {
+            if (item && item.url && item.type === 'image') aPlusImages.push({ url: item.url, section: 'product_description' });
+          });
         }
 
         return {
           asin: p.asin || '',
-          name: p.title || p.name || '',
+          name: p.title || '',
           brand: p.brand || '',
-          description: p.description || p.product_overview || '',
+          description: p.description || '',
           rating: p.rating || 0,
           reviews: p.reviews_count || 0,
-          image: p.image || p.main_image || '',
+          image: p.image || p.image_url || '',
           images: images,
           bulletPoints: bulletPoints,
           categories: p.categories || [],
           url: p.url || '',
-          // Additional fields — mapped from actual BrightData response
-          // (run with debug:true to see all available fields)
-          _allRawKeys: Object.keys(p),
+          // Bestseller data
+          bestsellerRank: p.root_bs_rank || null,
+          bestsellerCategory: p.root_bs_category || null,
+          subcategoryRank: p.bs_rank || null,
+          subcategoryName: p.bs_category || null,
+          boughtPastMonth: p.bought_past_month || null,
+          // A+ Content
+          hasAPlus: p.plus_content || false,
+          aPlusImages: aPlusImages,
+          // Additional useful data
+          hasVideo: p.video || false,
+          videoUrls: p.videos || [],
+          topReview: p.top_review || null,
+          customerSays: p.customer_says || null,
+          productDetails: p.product_details || [],
+          storeUrl: p.store_url || null,
         };
+      });
       });
 
     return res.status(200).json({ products: products, count: products.length });
