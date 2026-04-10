@@ -974,12 +974,14 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '5. Only USPs/icons/awards, no product photos? → BENEFIT',
     '6. Product on plain bg as main focus? → PRODUCT (use sparingly!)',
     '',
-    'IMAGE CATEGORY PRIORITY (CRITICAL):',
-    '- PREFER lifestyle, creative, and text_image categories. These provide visual richness, storytelling, and design investment.',
-    '- AVOID overusing "product" category. Plain product packshots on clean backgrounds look generic and uninspired — as if someone just took the Amazon listing images and placed them on a new background.',
-    '- Creative and lifestyle images offer more room for brand CI elements, text overlays, and emotional storytelling.',
-    '- Use "product" category ONLY when a clean packshot is specifically needed (e.g. a shoppable_image that must show the product clearly for purchase intent).',
-    '- A good store has mostly lifestyle + creative tiles, with product tiles as the exception, not the rule.',
+    'IMAGE CATEGORY USAGE (from analysis of 21 top Amazon Brand Stores):',
+    '- There is no fixed priority between categories. The content determines which category fits.',
+    '- In successful stores, lifestyle (35%), product (36%), creative (19%), and text_image (9%) are used.',
+    '- Choose the category that best serves the CONTENT of each tile, not by a fixed rule.',
+    '- Lifestyle: when showing the product in real use, with people, in real settings.',
+    '- Creative: when combining product + text + graphics for explanation or navigation.',
+    '- Product: when a clean packshot is needed for purchase intent (shoppable_image).',
+    '- Text_image: for section headings, brand claims, structural elements between content blocks.',
     '',
     'BACKGROUND RULES:',
     '- NEVER use dark backgrounds by default. No black, dark gray, dark navy, or dark green.',
@@ -1770,13 +1772,14 @@ function ensureMinimumSections(sections, pageName, brand, lang, analysis, templa
 }
 
 // ─── FULL GENERATION WORKFLOW ───
-export async function generateStore(asins, products, brand, marketplace, lang, userInstructions, onLog, complexityLevel, template, websiteData, referenceAnalysis, featureOptions, cancelRef) {
+export async function generateStore(asins, products, brand, marketplace, lang, userInstructions, onLog, complexityLevel, template, websiteData, referenceAnalysis, featureOptions, cancelRef, pipelineData) {
   var log = onLog || function() {};
   var cLevel = complexityLevel || 2;
   var cConfig = COMPLEXITY_LEVELS[cLevel] || COMPLEXITY_LEVELS[2];
   var opts = featureOptions || {};
   var extraPageFlags = opts.extraPages || {};
   var includeProductVideos = opts.includeProductVideos || false;
+  var pipeline = pipelineData || {};
 
   function checkCancel() {
     if (cancelRef && cancelRef.current) {
@@ -1799,8 +1802,13 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
 
   checkCancel();
 
-  // STEP 1: AI Analysis
-  log('AI analyzing product catalog and planning store structure...');
+  // STEP 1: AI Analysis — use pipeline results if available, otherwise run fresh
+  var usePipeline = pipeline.productAnalysis && pipeline.contentStrategy;
+  if (usePipeline) {
+    log('Using pipeline analysis results (product analysis, brand voice, content strategy, text blocks)...');
+  } else {
+    log('AI analyzing product catalog and planning store structure...');
+  }
   log('   Complexity: Level ' + cLevel + ' (' + cConfig.name + ')');
   if (template) {
     log('   Template: ' + template.name + ' (inspired by ' + template.inspiration + ')');
@@ -1824,6 +1832,25 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   }
 
   var analysis;
+  if (usePipeline) {
+    // Convert pipeline productAnalysis to the format generateStore expects
+    var pa = pipeline.productAnalysis;
+    analysis = {
+      categories: (pa.categories || []).map(function(c) {
+        return { name: c.name, asins: c.asins || [], productCount: (c.asins || []).length, subcategories: c.subcategories || null };
+      }),
+      brandTone: pa.brandTone || (pipeline.brandVoice ? pipeline.brandVoice.tone : 'professional'),
+      productComplexity: pa.productComplexity || 'medium',
+      heroMessage: (pipeline.textBlocks && pipeline.textBlocks.pages && pipeline.textBlocks.pages[0]) ? pipeline.textBlocks.pages[0].heroBannerText : brand,
+      brandStory: pa.whatMakesBrandSpecial || '',
+      keyFeatures: pa.brandUSPs || [],
+      brandUSPs: pa.brandUSPs || [],
+      categoryUSPs: (pa.categories || []).reduce(function(acc, c) { if (c.categoryUSPs) acc[c.name] = c.categoryUSPs; return acc; }, {}),
+      suggestedPages: (pipeline.contentStrategy && pipeline.contentStrategy.pages) ? pipeline.contentStrategy.pages.map(function(p) { return p.name; }) : ['Homepage'],
+      _fromPipeline: true,
+    };
+    log('   Pipeline analysis: ' + analysis.categories.length + ' categories, ' + (analysis.keyFeatures || []).length + ' brand USPs');
+  } else {
   try {
     analysis = await aiAnalyzeProducts(products, brand, lang, marketplace, userInstructions, websiteData, referenceAnalysis);
     // Validate that we got actual categories
@@ -1852,6 +1879,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     log('AI analysis failed (' + err.message + '), falling back to deterministic grouping...');
     analysis = fallbackAnalysis(products, brand, lang, userInstructions);
   }
+  } // end of else (non-pipeline path)
 
   // SAFETY NET: If user provided menu structure but analysis categories don't match, force-apply it
   if (userHasMenu) {
@@ -2942,12 +2970,19 @@ export async function generateWireframesForPage(page, brand, websiteData, analys
       };
     });
     var pageName = page.name || 'Page';
+    // Build rich context for Gemini so wireframes match the brand
+    var brandVoice = (analysis || {}).pipelineBrandVoice || {};
+    var brandUSPs = (analysis || {}).brandUSPs || (analysis || {}).keyFeatures || [];
     var pageContext = {
       pageName: pageName,
       isHomepage: pageName.toLowerCase() === 'homepage' || pageName.toLowerCase() === 'home' || pageName.toLowerCase() === 'startseite',
       totalSections: (page.sections || []).length,
       brandStory: (analysis || {}).brandStory || '',
-      keyFeatures: (analysis || {}).keyFeatures || [],
+      keyFeatures: brandUSPs,
+      // Full brand context for CI-consistent wireframes
+      brandVoiceTone: brandVoice.tone || brandTone || '',
+      brandVoiceStyle: brandVoice.communicationStyle || '',
+      brandTypicalPhrases: (brandVoice.typicalPhrases || []).slice(0, 5),
     };
     var descResp = await fetch('/api/generate-image-descriptions', {
       method: 'POST',

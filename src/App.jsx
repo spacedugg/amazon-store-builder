@@ -540,7 +540,8 @@ export default function App() {
         params.asins, products, params.brand, params.marketplace, lang,
         params.instructions, log, params.complexity, templateData, enhancedWebsiteData, referenceAnalysis,
         { extraPages: selectedExtraPages, includeProductVideos: params.includeProductVideos, generateWireframes: params.generateWireframes, referenceCategory: params.referenceCategory },
-        genCancelRef
+        genCancelRef,
+        { productAnalysis: pipelineProductAnalysis, brandVoice: pipelineBrandVoice, contentStrategy: pipelineContentStrategy, textBlocks: pipelineTextBlocks }
       );
 
       // Store meta + pipeline results
