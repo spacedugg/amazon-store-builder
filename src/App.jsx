@@ -17,6 +17,7 @@ import PriceCalculator from './components/PriceCalculator';
 import ExportModal from './components/ExportModal';
 import BriefingView from './components/BriefingView';
 import AdminAnalyze from './components/AdminAnalyze';
+import AsinOverview from './components/AsinOverview';
 // KnowledgeBaseAdmin removed — reference data loads automatically in background
 
 var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, headerBannerColor: '', complexity: 2, category: 'generic', googleDriveUrl: '' };
@@ -51,6 +52,7 @@ export default function App() {
   var [requestedAsins, setRequestedAsins] = useState([]);
   var [showSaved, setShowSaved] = useState(false);
   var [showExport, setShowExport] = useState(false);
+  var [showAsinOverview, setShowAsinOverview] = useState(false);
 
   var [storeId, setStoreId] = useState(null);
   var [shareToken, setShareToken] = useState(null);
@@ -1014,6 +1016,7 @@ export default function App() {
         onRedo={handleRedo}
         canRedo={redoStackRef.current.length > 0}
         onShowPrice={function() { setShowPrice(true); }}
+        onShowAsinOverview={store.pages.length > 0 ? function() { setShowAsinOverview(true); } : null}
         onFolderImageUpload={handleFolderImageUpload}
         onRemoveAllImages={handleRemoveAllImages}
         folderInputRef={folderInputRef}
@@ -1136,6 +1139,14 @@ export default function App() {
           shareToken={shareToken}
           onClose={function() { setShowPrice(false); }}
           uiLang={uiLang}
+        />
+      )}
+
+      {showAsinOverview && (
+        <AsinOverview
+          store={store}
+          products={store.products}
+          onClose={function() { setShowAsinOverview(false); }}
         />
       )}
 
