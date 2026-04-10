@@ -7,40 +7,171 @@
     "analyst": "TEMOA AI-Driven Amazon Growth Partner"
   },
   "storeIndex": [
-    { "id": 1, "brand": "the nu company", "file": "nucompany_analysis.json", "category": "Bio-Snacks / FMCG" },
-    { "id": 2, "brand": "natural elements", "file": "natural-elements_analysis.json", "category": "Nahrungsergänzung" },
-    { "id": 3, "brand": "Bedsure", "file": "bedsure_analysis.json", "category": "Home & Textilien" },
-    { "id": 4, "brand": "BLACKROLL", "file": "blackroll_analysis.json", "category": "Fitness / Recovery" },
-    { "id": 5, "brand": "Cloudpillo", "file": "cloudpillo_analysis.json", "category": "Sleep / D2C" },
-    { "id": 6, "brand": "Desktronic", "file": "desktronic_analysis.json", "category": "Büromöbel" },
-    { "id": 7, "brand": "ESN", "file": "esn_analysis.json", "category": "Sporternährung" },
-    { "id": 8, "brand": "Feandrea", "file": "feandrea_analysis.json", "category": "Haustierbedarf" },
-    { "id": 9, "brand": "Gritin", "file": "gritin_analysis.json", "category": "Beleuchtung / Elektronik" },
-    { "id": 10, "brand": "Hansegrün", "file": "hansegruen_analysis.json", "category": "Bio-Superfood / Nahrungsergänzung" },
-    { "id": 11, "brand": "HOLY Energy", "file": "holy-energy_analysis.json", "category": "Energy Drinks / Lifestyle" },
-    { "id": 12, "brand": "Kärcher", "file": "kaercher_analysis.json", "category": "Reinigungsgeräte" },
-    { "id": 13, "brand": "Kloster Kitchen", "file": "klosterkitchen_analysis.json", "category": "Bio-Shots / Wellness" },
-    { "id": 14, "brand": "MANSCAPED", "file": "manscaped_analysis.json", "category": "Grooming / Personal Care" },
-    { "id": 15, "brand": "MasterChef Deutschland", "file": "masterchef_analysis.json", "category": "Küchenartikel / Lizenzmarke" },
-    { "id": 16, "brand": "MORE (More Nutrition)", "file": "more-nutrition_analysis.json", "category": "Fitness-Food" },
-    { "id": 17, "brand": "Nespresso", "file": "nespresso_analysis.json", "category": "Kaffee / Premium-Lifestyle" },
-    { "id": 18, "brand": "Night Cat", "file": "nightcat_analysis.json", "category": "Outdoor / Camping" },
-    { "id": 19, "brand": "TRIXIE", "file": "trixie_analysis.json", "category": "Heimtierbedarf" },
-    { "id": 20, "brand": "twenty:three", "file": "twentythree_analysis.json", "category": "Premium-Bettwäsche" }
+    {
+      "id": 1,
+      "brand": "the nu company",
+      "file": "nucompany_analysis.json",
+      "category": "Bio-Snacks / FMCG"
+    },
+    {
+      "id": 2,
+      "brand": "natural elements",
+      "file": "natural-elements_analysis.json",
+      "category": "Nahrungsergänzung"
+    },
+    {
+      "id": 3,
+      "brand": "Bedsure",
+      "file": "bedsure_analysis.json",
+      "category": "Home & Textilien"
+    },
+    {
+      "id": 4,
+      "brand": "BLACKROLL",
+      "file": "blackroll_analysis.json",
+      "category": "Fitness / Recovery"
+    },
+    {
+      "id": 5,
+      "brand": "Cloudpillo",
+      "file": "cloudpillo_analysis.json",
+      "category": "Sleep / D2C"
+    },
+    {
+      "id": 6,
+      "brand": "Desktronic",
+      "file": "desktronic_analysis.json",
+      "category": "Büromöbel"
+    },
+    {
+      "id": 7,
+      "brand": "ESN",
+      "file": "esn_analysis.json",
+      "category": "Sporternährung"
+    },
+    {
+      "id": 8,
+      "brand": "Feandrea",
+      "file": "feandrea_analysis.json",
+      "category": "Haustierbedarf"
+    },
+    {
+      "id": 9,
+      "brand": "Gritin",
+      "file": "gritin_analysis.json",
+      "category": "Beleuchtung / Elektronik"
+    },
+    {
+      "id": 10,
+      "brand": "Hansegrün",
+      "file": "hansegruen_analysis.json",
+      "category": "Bio-Superfood / Nahrungsergänzung"
+    },
+    {
+      "id": 11,
+      "brand": "HOLY Energy",
+      "file": "holy-energy_analysis.json",
+      "category": "Energy Drinks / Lifestyle"
+    },
+    {
+      "id": 12,
+      "brand": "Kärcher",
+      "file": "kaercher_analysis.json",
+      "category": "Reinigungsgeräte"
+    },
+    {
+      "id": 13,
+      "brand": "Kloster Kitchen",
+      "file": "kloster-kitchen_analysis.json",
+      "category": "Bio-Shots / Wellness"
+    },
+    {
+      "id": 14,
+      "brand": "MANSCAPED",
+      "file": "manscaped_analysis.json",
+      "category": "Grooming / Personal Care"
+    },
+    {
+      "id": 15,
+      "brand": "MasterChef Deutschland",
+      "file": "masterchef_analysis.json",
+      "category": "Küchenartikel / Lizenzmarke"
+    },
+    {
+      "id": 16,
+      "brand": "MORE (More Nutrition)",
+      "file": "more-nutrition_analysis.json",
+      "category": "Fitness-Food"
+    },
+    {
+      "id": 17,
+      "brand": "Nespresso",
+      "file": "nespresso_analysis.json",
+      "category": "Kaffee / Premium-Lifestyle"
+    },
+    {
+      "id": 18,
+      "brand": "Night Cat",
+      "file": "night-cat_analysis.json",
+      "category": "Outdoor / Camping"
+    },
+    {
+      "id": 19,
+      "brand": "TRIXIE",
+      "file": "trixie_analysis.json",
+      "category": "Heimtierbedarf"
+    },
+    {
+      "id": 20,
+      "brand": "twenty:three",
+      "file": "twentythree_analysis.json",
+      "category": "Premium-Bettwäsche"
+    }
   ],
   "quantitativeOverview": {
     "brandImages": {
       "total": 312,
       "average": 15.6,
       "median": 12.5,
-      "min": { "value": 2, "brand": "Night Cat" },
-      "max": { "value": 46, "brand": "MANSCAPED" },
+      "min": {
+        "value": 2,
+        "brand": "Night Cat"
+      },
+      "max": {
+        "value": 46,
+        "brand": "MANSCAPED"
+      },
       "distribution": {
-        "minimal_1to5": ["Night Cat"],
-        "compact_6to12": ["the nu company", "Desktronic", "HOLY Energy", "Kloster Kitchen", "MasterChef", "MORE Nutrition", "Nespresso", "twenty:three"],
-        "standard_13to20": ["natural elements", "BLACKROLL", "ESN", "Feandrea", "Hansegrün", "Cloudpillo", "Gritin"],
-        "large_21to30": ["Bedsure", "Kärcher", "TRIXIE"],
-        "extensive_31plus": ["MANSCAPED"]
+        "minimal_1to5": [
+          "Night Cat"
+        ],
+        "compact_6to12": [
+          "the nu company",
+          "Desktronic",
+          "HOLY Energy",
+          "Kloster Kitchen",
+          "MasterChef",
+          "MORE Nutrition",
+          "Nespresso",
+          "twenty:three"
+        ],
+        "standard_13to20": [
+          "natural elements",
+          "BLACKROLL",
+          "ESN",
+          "Feandrea",
+          "Hansegrün",
+          "Cloudpillo",
+          "Gritin"
+        ],
+        "large_21to30": [
+          "Bedsure",
+          "Kärcher",
+          "TRIXIE"
+        ],
+        "extensive_31plus": [
+          "MANSCAPED"
+        ]
       }
     },
     "videos": {
@@ -48,31 +179,93 @@
       "storesWithVideos": 6,
       "storesWithoutVideos": 14,
       "distribution": {
-        "0_videos": ["the nu company", "BLACKROLL", "Cloudpillo", "ESN", "Gritin", "Kärcher", "Kloster Kitchen", "MANSCAPED", "MasterChef", "Nespresso", "TRIXIE", "twenty:three", "Feandrea", "MasterChef"],
-        "1_video": ["Bedsure", "Hansegrün", "HOLY Energy", "MORE Nutrition"],
-        "2_videos": ["natural elements", "Desktronic"],
-        "5_videos": ["Night Cat"]
+        "0_videos": [
+          "the nu company",
+          "BLACKROLL",
+          "Cloudpillo",
+          "ESN",
+          "Gritin",
+          "Kärcher",
+          "Kloster Kitchen",
+          "MANSCAPED",
+          "MasterChef",
+          "Nespresso",
+          "TRIXIE",
+          "twenty:three",
+          "Feandrea",
+          "MasterChef"
+        ],
+        "1_video": [
+          "Bedsure",
+          "Hansegrün",
+          "HOLY Energy",
+          "MORE Nutrition"
+        ],
+        "2_videos": [
+          "natural elements",
+          "Desktronic"
+        ],
+        "5_videos": [
+          "Night Cat"
+        ]
       },
       "insight": "70% der Stores nutzen KEINE Videos. Die wenigen Video-Stores setzen auf 1-2 Brand-Videos. Night Cat ist der einzige rein video-zentrierte Store."
     },
     "navigation": {
       "totalPages": 325,
       "averagePages": 16.25,
-      "min": { "value": 3, "brand": "the nu company" },
-      "max": { "value": 50, "brand": "TRIXIE" },
+      "min": {
+        "value": 3,
+        "brand": "the nu company"
+      },
+      "max": {
+        "value": 50,
+        "brand": "TRIXIE"
+      },
       "tiers": {
-        "minimal_1to5": ["the nu company", "twenty:three"],
-        "compact_6to12": ["Cloudpillo", "BLACKROLL", "Desktronic", "Night Cat", "Kloster Kitchen", "Gritin", "MANSCAPED"],
-        "medium_13to20": ["HOLY Energy", "Feandrea", "Bedsure", "MORE Nutrition"],
-        "deep_21to30": ["ESN", "MasterChef", "Hansegrün"],
-        "extensive_31plus": ["natural elements", "Kärcher", "Nespresso", "TRIXIE"]
+        "minimal_1to5": [
+          "the nu company",
+          "twenty:three"
+        ],
+        "compact_6to12": [
+          "Cloudpillo",
+          "BLACKROLL",
+          "Desktronic",
+          "Night Cat",
+          "Kloster Kitchen",
+          "Gritin",
+          "MANSCAPED"
+        ],
+        "medium_13to20": [
+          "HOLY Energy",
+          "Feandrea",
+          "Bedsure",
+          "MORE Nutrition"
+        ],
+        "deep_21to30": [
+          "ESN",
+          "MasterChef",
+          "Hansegrün"
+        ],
+        "extensive_31plus": [
+          "natural elements",
+          "Kärcher",
+          "Nespresso",
+          "TRIXIE"
+        ]
       }
     },
     "modules": {
       "totalModules": 194,
       "averageModules": 9.7,
-      "min": { "value": 2, "brand": "Night Cat" },
-      "max": { "value": 25, "brand": "Bedsure" }
+      "min": {
+        "value": 2,
+        "brand": "Night Cat"
+      },
+      "max": {
+        "value": 25,
+        "brand": "Bedsure"
+      }
     }
   },
   "layoutPatterns": {
@@ -121,10 +314,26 @@
       }
     ],
     "uniqueLayouts": [
-      { "layout": "Mixed Grid (1 Wide + 2 Small)", "brand": "Nespresso", "note": "Einzigartig bei Nespresso – asymmetrisches Grid" },
-      { "layout": "Full-Width Square (970x970)", "brand": "Nespresso", "note": "Sehr großes quadratisches Bild – maximaler Produktfokus" },
-      { "layout": "3x4 Kategorie-Grid (12 Tiles)", "brand": "Kärcher", "note": "Größtes Grid aller Stores – 12 Kategorien auf einen Blick" },
-      { "layout": "Small Grid (231x231)", "brand": "TRIXIE", "note": "Kleine Tiles für Unterkategorien innerhalb einer Tierart" }
+      {
+        "layout": "Mixed Grid (1 Wide + 2 Small)",
+        "brand": "Nespresso",
+        "note": "Einzigartig bei Nespresso – asymmetrisches Grid"
+      },
+      {
+        "layout": "Full-Width Square (970x970)",
+        "brand": "Nespresso",
+        "note": "Sehr großes quadratisches Bild – maximaler Produktfokus"
+      },
+      {
+        "layout": "3x4 Kategorie-Grid (12 Tiles)",
+        "brand": "Kärcher",
+        "note": "Größtes Grid aller Stores – 12 Kategorien auf einen Blick"
+      },
+      {
+        "layout": "Small Grid (231x231)",
+        "brand": "TRIXIE",
+        "note": "Kleine Tiles für Unterkategorien innerhalb einer Tierart"
+      }
     ]
   },
   "designArchetypes": {
@@ -132,7 +341,11 @@
     "archetypes": [
       {
         "name": "Premium Minimalist",
-        "stores": ["Nespresso", "twenty:three", "BLACKROLL"],
+        "stores": [
+          "Nespresso",
+          "twenty:three",
+          "BLACKROLL"
+        ],
         "characteristics": {
           "colorScheme": "Dunkel/Teal/Navy + Gold/Beige/Weiß – wenige Farben, hoher Kontrast",
           "typography": "Clean, gesperrt, oft englische Claims",
@@ -145,7 +358,11 @@
       },
       {
         "name": "Gen-Z / Pop-Culture Burst",
-        "stores": ["HOLY Energy", "MORE Nutrition", "MANSCAPED"],
+        "stores": [
+          "HOLY Energy",
+          "MORE Nutrition",
+          "MANSCAPED"
+        ],
         "characteristics": {
           "colorScheme": "Knallfarben (Neon-Pink, Electric Blue, Gelb, Orange) – wechselnde Akzentfarben",
           "typography": "Bold, Italic, Versalien, manchmal Cartoon/Comic-Stil",
@@ -158,7 +375,12 @@
       },
       {
         "name": "Natur / Bio-Authentisch",
-        "stores": ["the nu company", "Kloster Kitchen", "Hansegrün", "natural elements"],
+        "stores": [
+          "the nu company",
+          "Kloster Kitchen",
+          "Hansegrün",
+          "natural elements"
+        ],
         "characteristics": {
           "colorScheme": "Grüntöne + Weiß + erdige Akzente, Bio-Siegel als Farbelement",
           "typography": "Clean, teilweise Kursiv für organisches Gefühl",
@@ -171,7 +393,12 @@
       },
       {
         "name": "Warm Home & Lifestyle",
-        "stores": ["Bedsure", "Feandrea", "TRIXIE", "Cloudpillo"],
+        "stores": [
+          "Bedsure",
+          "Feandrea",
+          "TRIXIE",
+          "Cloudpillo"
+        ],
         "characteristics": {
           "colorScheme": "Warme Erdtöne, Pastellfarben, Weiß – heimelig und einladend",
           "typography": "Freundlich, manchmal verspielt (Cloudpillo) oder emotional (TRIXIE 'Friends for Life')",
@@ -184,7 +411,12 @@
       },
       {
         "name": "Industriell / Funktional",
-        "stores": ["Kärcher", "Desktronic", "Gritin", "MasterChef"],
+        "stores": [
+          "Kärcher",
+          "Desktronic",
+          "Gritin",
+          "MasterChef"
+        ],
         "characteristics": {
           "colorScheme": "Markenfarbe dominant (Gelb, Beige, Orange) + Schwarz/Grau/Weiß",
           "typography": "Sachlich, Bold für Produktnamen, funktionale Headlines",
@@ -197,7 +429,9 @@
       },
       {
         "name": "Outdoor / Minimal-Video",
-        "stores": ["Night Cat"],
+        "stores": [
+          "Night Cat"
+        ],
         "characteristics": {
           "colorScheme": "Natürliche Landschaftsfarben, kein künstliches Farbschema",
           "typography": "Kaum Text-Overlays, reine Bildsprache",
@@ -216,37 +450,58 @@
     "contentStrategies": [
       {
         "strategy": "Logo + Claim + Social Proof",
-        "stores": ["TRIXIE", "BLACKROLL", "Feandrea"],
+        "stores": [
+          "TRIXIE",
+          "BLACKROLL",
+          "Feandrea"
+        ],
         "effectiveness": "Hoch – kombiniert Brand-Recognition mit Trust-Elementen",
         "example": "TRIXIE: Logo + 'Friends for Life' + '91% positive Bewertungen' + '100.000+ Bestellungen'"
       },
       {
         "strategy": "Emotionaler Claim + Lifestyle",
-        "stores": ["Nespresso", "twenty:three", "the nu company"],
+        "stores": [
+          "Nespresso",
+          "twenty:three",
+          "the nu company"
+        ],
         "effectiveness": "Hoch – erzeugt sofortiges emotionales Band",
         "example": "Nespresso: 'WITH LOVE. SINCE 1986' mit intimer Tassen-Szene"
       },
       {
         "strategy": "Produkt-Showcase (Flat-Lay / Collage)",
-        "stores": ["MANSCAPED", "Kärcher", "MasterChef", "ESN"],
+        "stores": [
+          "MANSCAPED",
+          "Kärcher",
+          "MasterChef",
+          "ESN"
+        ],
         "effectiveness": "Mittel-Hoch – zeigt Sortimentsbreite auf einen Blick",
         "example": "Kärcher: Collage aller Gerätetypen vor gelbem Hintergrund"
       },
       {
         "strategy": "Brand-Logo zentriert + Produktumrandung",
-        "stores": ["MORE Nutrition", "HOLY Energy"],
+        "stores": [
+          "MORE Nutrition",
+          "HOLY Energy"
+        ],
         "effectiveness": "Hoch für Brand-Recognition – Logo als Held, Produkte als Rahmen",
         "example": "MORE: 'More' Logo zentral auf Orange, umgeben von Food-Bowls und Früchten"
       },
       {
         "strategy": "Reine Atmosphäre (kein Text/Logo)",
-        "stores": ["Night Cat"],
+        "stores": [
+          "Night Cat"
+        ],
         "effectiveness": "Riskant – starke Atmosphäre aber schwache Brand-Recognition",
         "example": "Night Cat: Bergpanorama ohne Logo oder Text"
       },
       {
         "strategy": "Produkt-Hero + Promotion",
-        "stores": ["Cloudpillo", "natural elements"],
+        "stores": [
+          "Cloudpillo",
+          "natural elements"
+        ],
         "effectiveness": "Mittel – Direct-Response-Ansatz, weniger emotional",
         "example": "Cloudpillo: Kissen auf Wolken + 'Teste 100 Nächte risikofrei'"
       }
@@ -259,39 +514,112 @@
         "name": "Standard-Flow (häufigster)",
         "frequency": "12 von 20 Stores",
         "structure": "Hero → [Optional: Trust-Bar / Schmaler Banner] → Produkt-/Lifestyle-FW → Kategorie-Tiles (std-2equal oder Grid) → Brand-Story/Trust-Abschluss",
-        "stores": ["the nu company", "natural elements", "BLACKROLL", "Cloudpillo", "Desktronic", "ESN", "Hansegrün", "Kloster Kitchen", "MORE Nutrition", "Nespresso", "twenty:three", "HOLY Energy"]
+        "stores": [
+          "the nu company",
+          "natural elements",
+          "BLACKROLL",
+          "Cloudpillo",
+          "Desktronic",
+          "ESN",
+          "Hansegrün",
+          "Kloster Kitchen",
+          "MORE Nutrition",
+          "Nespresso",
+          "twenty:three",
+          "HOLY Energy"
+        ]
       },
       {
         "name": "Repetitive-Section-Flow",
         "frequency": "5 von 20 Stores",
         "structure": "Hero → [Promotion] → [Wiederholende Blöcke: Trenner/Header → Lifestyle-FW → Kategorie-Tiles] × N → Abschluss",
-        "stores": ["Bedsure", "Feandrea", "TRIXIE", "MANSCAPED", "Gritin"],
+        "stores": [
+          "Bedsure",
+          "Feandrea",
+          "TRIXIE",
+          "MANSCAPED",
+          "Gritin"
+        ],
         "insight": "Ideal für Stores mit vielen gleichwertigen Kategorien. Jeder Block folgt identischem Template."
       },
       {
         "name": "Vertikaler Tile-Stack",
         "frequency": "1 von 20 Stores",
         "structure": "Hero → Tile → Tile → Tile → ... (N einzelne Tiles vertikal)",
-        "stores": ["MasterChef"],
+        "stores": [
+          "MasterChef"
+        ],
         "insight": "Einfachste Struktur. Funktioniert für Lizenzmarken mit klarem Template pro Tile."
       },
       {
         "name": "Video-zentriert",
         "frequency": "1 von 20 Stores",
         "structure": "Hero → 1x Lifestyle-Bild → N Videos",
-        "stores": ["Night Cat"],
+        "stores": [
+          "Night Cat"
+        ],
         "insight": "Minimaler visueller Aufwand, maximale Produktdemonstration über Video."
       }
     ]
   },
   "colorSchemeAnalysis": {
     "dominantSchemes": [
-      { "scheme": "Dunkel (Schwarz/Navy/Teal) + Akzentfarbe", "stores": ["Nespresso", "BLACKROLL", "MANSCAPED", "ESN", "twenty:three"], "count": 5 },
-      { "scheme": "Weiß/Hell + bunte Akzente", "stores": ["TRIXIE", "Cloudpillo", "Bedsure", "natural elements", "Desktronic", "MasterChef"], "count": 6 },
-      { "scheme": "Grün/Naturfarben", "stores": ["Hansegrün", "Kloster Kitchen", "the nu company"], "count": 3 },
-      { "scheme": "Knallbunt / Multi-Color", "stores": ["HOLY Energy", "MORE Nutrition"], "count": 2 },
-      { "scheme": "Starke Markenfarbe dominant (Gelb, Orange, Rot)", "stores": ["Kärcher", "Feandrea", "Gritin"], "count": 3 },
-      { "scheme": "Naturfotografie (kein künstliches Schema)", "stores": ["Night Cat"], "count": 1 }
+      {
+        "scheme": "Dunkel (Schwarz/Navy/Teal) + Akzentfarbe",
+        "stores": [
+          "Nespresso",
+          "BLACKROLL",
+          "MANSCAPED",
+          "ESN",
+          "twenty:three"
+        ],
+        "count": 5
+      },
+      {
+        "scheme": "Weiß/Hell + bunte Akzente",
+        "stores": [
+          "TRIXIE",
+          "Cloudpillo",
+          "Bedsure",
+          "natural elements",
+          "Desktronic",
+          "MasterChef"
+        ],
+        "count": 6
+      },
+      {
+        "scheme": "Grün/Naturfarben",
+        "stores": [
+          "Hansegrün",
+          "Kloster Kitchen",
+          "the nu company"
+        ],
+        "count": 3
+      },
+      {
+        "scheme": "Knallbunt / Multi-Color",
+        "stores": [
+          "HOLY Energy",
+          "MORE Nutrition"
+        ],
+        "count": 2
+      },
+      {
+        "scheme": "Starke Markenfarbe dominant (Gelb, Orange, Rot)",
+        "stores": [
+          "Kärcher",
+          "Feandrea",
+          "Gritin"
+        ],
+        "count": 3
+      },
+      {
+        "scheme": "Naturfotografie (kein künstliches Schema)",
+        "stores": [
+          "Night Cat"
+        ],
+        "count": 1
+      }
     ]
   },
   "trustAndSocialProof": {
@@ -299,38 +627,60 @@
     "patterns": [
       {
         "element": "Trust-Bar / Benefit-Bar (schmaler Banner mit Icons)",
-        "stores": ["Cloudpillo", "Feandrea", "BLACKROLL", "HOLY Energy", "Gritin", "MORE Nutrition"],
+        "stores": [
+          "Cloudpillo",
+          "Feandrea",
+          "BLACKROLL",
+          "HOLY Energy",
+          "Gritin",
+          "MORE Nutrition"
+        ],
         "placement": "Direkt unter Hero oder zwischen Sektionen",
         "frequency": "30%"
       },
       {
         "element": "Social-Proof-Zahlen im Hero",
-        "stores": ["TRIXIE", "Feandrea"],
+        "stores": [
+          "TRIXIE",
+          "Feandrea"
+        ],
         "placement": "Im Hero-Banner selbst",
         "frequency": "10%",
         "example": "TRIXIE: '91% positive Bewertungen', '100.000+ Bestellungen'"
       },
       {
         "element": "Award-/Testsieger-Badges",
-        "stores": ["Kärcher", "Kloster Kitchen", "BLACKROLL"],
+        "stores": [
+          "Kärcher",
+          "Kloster Kitchen",
+          "BLACKROLL"
+        ],
         "placement": "In Promotions-Banner oder eigenem Modul",
         "frequency": "15%"
       },
       {
         "element": "Amazon Top Brand Badge",
-        "stores": ["TRIXIE"],
+        "stores": [
+          "TRIXIE"
+        ],
         "placement": "Im Hero-Banner",
         "frequency": "5%"
       },
       {
         "element": "Made-in-Germany / Qualitätsversprechen",
-        "stores": ["Desktronic", "Kärcher"],
+        "stores": [
+          "Desktronic",
+          "Kärcher"
+        ],
         "placement": "In Brand-Story oder Trust-Banner",
         "frequency": "10%"
       },
       {
         "element": "Geld-zurück-Garantie / Testphasen",
-        "stores": ["Cloudpillo", "Kärcher"],
+        "stores": [
+          "Cloudpillo",
+          "Kärcher"
+        ],
         "placement": "In Promotions-Banner oder Hero",
         "frequency": "10%"
       }
@@ -340,31 +690,56 @@
     "tiers": [
       {
         "tier": "Micro (1-5 Seiten)",
-        "stores": ["the nu company (3)", "twenty:three (5)"],
+        "stores": [
+          "the nu company (3)",
+          "twenty:three (5)"
+        ],
         "insight": "Ideal für Marken mit sehr fokussiertem Sortiment. Navigation dient nur als Filterung.",
         "count": 2
       },
       {
         "tier": "Compact (6-12 Seiten)",
-        "stores": ["BLACKROLL (8)", "Cloudpillo (8)", "Desktronic (10)", "Night Cat (10)", "Kloster Kitchen (10)", "Gritin (10)", "MANSCAPED (7)", "Bedsure (12)"],
+        "stores": [
+          "BLACKROLL (8)",
+          "Cloudpillo (8)",
+          "Desktronic (10)",
+          "Night Cat (10)",
+          "Kloster Kitchen (10)",
+          "Gritin (10)",
+          "MANSCAPED (7)",
+          "Bedsure (12)"
+        ],
         "insight": "Häufigste Größe. 1 Ebene tief, Hauptkategorien als Tabs.",
         "count": 8
       },
       {
         "tier": "Medium (13-20 Seiten)",
-        "stores": ["HOLY Energy (13)", "Feandrea (17)", "MORE Nutrition (18)", "Hansegrün (20)"],
+        "stores": [
+          "HOLY Energy (13)",
+          "Feandrea (17)",
+          "MORE Nutrition (18)",
+          "Hansegrün (20)"
+        ],
         "insight": "Zweite Ebene beginnt bei einzelnen Kategorien. Subpages für Top-Seller.",
         "count": 4
       },
       {
         "tier": "Deep (21-30 Seiten)",
-        "stores": ["ESN (24)", "MasterChef (23)"],
+        "stores": [
+          "ESN (24)",
+          "MasterChef (23)"
+        ],
         "insight": "Tiefe Produktspezialisierung. Jede Produktlinie oder Kollektion hat eigene Seite.",
         "count": 2
       },
       {
         "tier": "Extensive (31+ Seiten)",
-        "stores": ["natural elements (40)", "Kärcher (40)", "Nespresso (47)", "TRIXIE (50)"],
+        "stores": [
+          "natural elements (40)",
+          "Kärcher (40)",
+          "Nespresso (47)",
+          "TRIXIE (50)"
+        ],
         "insight": "Enterprise-Level-Stores. Mehrstufige Hierarchie, jede Unterkategorie oder sogar Einzelprodukt hat Seite.",
         "count": 4
       }
@@ -374,53 +749,133 @@
     "styles": [
       {
         "style": "Premium Lifestyle (Studio/Set)",
-        "stores": ["Nespresso", "BLACKROLL", "twenty:three", "Desktronic"],
+        "stores": [
+          "Nespresso",
+          "BLACKROLL",
+          "twenty:three",
+          "Desktronic"
+        ],
         "description": "Hochwertige Studio-Fotografie in inszenierten Settings (Küche, Schlafzimmer, Büro). Warme Beleuchtung, natürliche Materialien."
       },
       {
         "style": "Flat-Lay / Produktcollage",
-        "stores": ["MANSCAPED", "Kärcher", "MasterChef", "MORE Nutrition", "ESN"],
+        "stores": [
+          "MANSCAPED",
+          "Kärcher",
+          "MasterChef",
+          "MORE Nutrition",
+          "ESN"
+        ],
         "description": "Produkte von oben oder diagonal auf einfarbigem Hintergrund arrangiert. Zeigt Sortimentsbreite."
       },
       {
         "style": "People + Product (emotional)",
-        "stores": ["TRIXIE", "Bedsure", "Feandrea", "Cloudpillo", "the nu company"],
+        "stores": [
+          "TRIXIE",
+          "Bedsure",
+          "Feandrea",
+          "Cloudpillo",
+          "the nu company"
+        ],
         "description": "Menschen mit Produkten in natürlichen, emotionalen Situationen. Familien, Haustiere, Kinder."
       },
       {
         "style": "Food-Styling (Zutaten + Produkt)",
-        "stores": ["MORE Nutrition", "Kloster Kitchen", "Hansegrün", "HOLY Energy"],
+        "stores": [
+          "MORE Nutrition",
+          "Kloster Kitchen",
+          "Hansegrün",
+          "HOLY Energy"
+        ],
         "description": "Echte Zutaten (Früchte, Nüsse, Kräuter) neben/um Produktverpackungen. Frische und Natürlichkeit."
       },
       {
         "style": "Grafik-dominiert (Illustrationen/Cartoons)",
-        "stores": ["HOLY Energy"],
+        "stores": [
+          "HOLY Energy"
+        ],
         "description": "Cartoon-Charaktere und illustrierte Elemente statt Fotografie. Einzigartig im Sample."
       },
       {
         "style": "Naturfotografie (kein Produkt)",
-        "stores": ["Night Cat"],
+        "stores": [
+          "Night Cat"
+        ],
         "description": "Reine Landschaftsfotografie als Hauptelement. Produkt nur über Video oder Hero-Bild."
       }
     ]
   },
   "ctaAndTextPatterns": {
     "claimStyles": [
-      { "type": "Emotionaler Claim", "examples": ["Friends for Life (TRIXIE)", "WITH LOVE. SINCE 1986 (Nespresso)", "Spüre den Unterschied (twenty:three)"], "frequency": "30%" },
-      { "type": "Benefit-Claim", "examples": ["Teste 100 Nächte risikofrei (Cloudpillo)", "BETTER THAN GOOD (Kloster Kitchen)", "Catch Outdoors Fun (Night Cat)"], "frequency": "25%" },
-      { "type": "Brand-Name als Claim", "examples": ["More (More Nutrition)", "HOLY (Holy Energy)", "MasterChef THE TV SERIES"], "frequency": "20%" },
-      { "type": "Kein Claim / Pure Visual", "examples": ["Night Cat (kein Text im Hero)", "ESN", "MANSCAPED"], "frequency": "25%" }
+      {
+        "type": "Emotionaler Claim",
+        "examples": [
+          "Friends for Life (TRIXIE)",
+          "WITH LOVE. SINCE 1986 (Nespresso)",
+          "Spüre den Unterschied (twenty:three)"
+        ],
+        "frequency": "30%"
+      },
+      {
+        "type": "Benefit-Claim",
+        "examples": [
+          "Teste 100 Nächte risikofrei (Cloudpillo)",
+          "BETTER THAN GOOD (Kloster Kitchen)",
+          "Catch Outdoors Fun (Night Cat)"
+        ],
+        "frequency": "25%"
+      },
+      {
+        "type": "Brand-Name als Claim",
+        "examples": [
+          "More (More Nutrition)",
+          "HOLY (Holy Energy)",
+          "MasterChef THE TV SERIES"
+        ],
+        "frequency": "20%"
+      },
+      {
+        "type": "Kein Claim / Pure Visual",
+        "examples": [
+          "Night Cat (kein Text im Hero)",
+          "ESN",
+          "MANSCAPED"
+        ],
+        "frequency": "25%"
+      }
     ],
     "ctaButtons": {
       "mostCommon": "JETZT ENTDECKEN / JETZT PROBIEREN / JETZT SHOPPEN",
-      "englishCTAs": ["Nespresso (ACCESSORIES)", "MANSCAPED"],
-      "noCTAs": ["Night Cat", "twenty:three", "MasterChef"],
+      "englishCTAs": [
+        "Nespresso (ACCESSORIES)",
+        "MANSCAPED"
+      ],
+      "noCTAs": [
+        "Night Cat",
+        "twenty:three",
+        "MasterChef"
+      ],
       "insight": "Nur ~40% der Stores nutzen explizite CTA-Buttons auf Tiles. Die meisten verlassen sich auf klickbare Bilder ohne Text-CTA."
     },
     "textOnImageFrequency": {
-      "heavy": ["MasterChef", "TRIXIE", "MORE Nutrition", "Cloudpillo"],
-      "moderate": ["Kärcher", "BLACKROLL", "Nespresso", "ESN"],
-      "minimal": ["Night Cat", "twenty:three", "natural elements", "Kloster Kitchen"],
+      "heavy": [
+        "MasterChef",
+        "TRIXIE",
+        "MORE Nutrition",
+        "Cloudpillo"
+      ],
+      "moderate": [
+        "Kärcher",
+        "BLACKROLL",
+        "Nespresso",
+        "ESN"
+      ],
+      "minimal": [
+        "Night Cat",
+        "twenty:three",
+        "natural elements",
+        "Kloster Kitchen"
+      ],
       "insight": "Trend geht zu weniger Text auf Bildern. Die erfolgreichsten Premium-Stores nutzen minimalen Text."
     }
   },
@@ -488,26 +943,126 @@
   "storeRankingByComplexity": {
     "description": "Ranking nach Store-Komplexität (Bilder × Module × Seiten)",
     "ranking": [
-      { "rank": 1, "brand": "TRIXIE", "score": "25 Bilder × 12 Module × 50 Seiten", "tier": "Enterprise" },
-      { "rank": 2, "brand": "Bedsure", "score": "30 Bilder × 25 Module × 12 Seiten", "tier": "Enterprise" },
-      { "rank": 3, "brand": "MANSCAPED", "score": "46 Bilder × 16 Module × 7 Seiten", "tier": "Image-Heavy" },
-      { "rank": 4, "brand": "Kärcher", "score": "23 Bilder × 10 Module × 40 Seiten", "tier": "Enterprise" },
-      { "rank": 5, "brand": "Nespresso", "score": "12 Bilder × 8 Module × 47 Seiten", "tier": "Navigation-Heavy" },
-      { "rank": 6, "brand": "natural elements", "score": "14 Bilder × 11 Module × 40 Seiten", "tier": "Navigation-Heavy" },
-      { "rank": 7, "brand": "Feandrea", "score": "16 Bilder × 13 Module × 17 Seiten", "tier": "Standard+" },
-      { "rank": 8, "brand": "Cloudpillo", "score": "20 Bilder × 11 Module × 8 Seiten", "tier": "Standard+" },
-      { "rank": 9, "brand": "Gritin", "score": "20 Bilder × 11 Module × 10 Seiten", "tier": "Standard+" },
-      { "rank": 10, "brand": "Hansegrün", "score": "16 Bilder × 12 Module × 20 Seiten", "tier": "Standard+" },
-      { "rank": 11, "brand": "ESN", "score": "13 Bilder × 9 Module × 24 Seiten", "tier": "Standard" },
-      { "rank": 12, "brand": "MORE Nutrition", "score": "12 Bilder × 8 Module × 18 Seiten", "tier": "Standard" },
-      { "rank": 13, "brand": "MasterChef", "score": "9 Bilder × 9 Module × 23 Seiten", "tier": "Standard" },
-      { "rank": 14, "brand": "BLACKROLL", "score": "17 Bilder × 12 Module × 8 Seiten", "tier": "Standard" },
-      { "rank": 15, "brand": "the nu company", "score": "12 Bilder × 8 Module × 3 Seiten", "tier": "Compact" },
-      { "rank": 16, "brand": "Kloster Kitchen", "score": "12 Bilder × 5 Module × 10 Seiten", "tier": "Compact" },
-      { "rank": 17, "brand": "Desktronic", "score": "12 Bilder × 7 Module × 10 Seiten", "tier": "Compact" },
-      { "rank": 18, "brand": "HOLY Energy", "score": "9 Bilder × 6 Module × 13 Seiten", "tier": "Compact" },
-      { "rank": 19, "brand": "twenty:three", "score": "9 Bilder × 7 Module × 5 Seiten", "tier": "Compact" },
-      { "rank": 20, "brand": "Night Cat", "score": "2 Bilder × 2 Module × 10 Seiten", "tier": "Minimal" }
+      {
+        "rank": 1,
+        "brand": "TRIXIE",
+        "score": "25 Bilder × 12 Module × 50 Seiten",
+        "tier": "Enterprise"
+      },
+      {
+        "rank": 2,
+        "brand": "Bedsure",
+        "score": "30 Bilder × 25 Module × 12 Seiten",
+        "tier": "Enterprise"
+      },
+      {
+        "rank": 3,
+        "brand": "MANSCAPED",
+        "score": "46 Bilder × 16 Module × 7 Seiten",
+        "tier": "Image-Heavy"
+      },
+      {
+        "rank": 4,
+        "brand": "Kärcher",
+        "score": "23 Bilder × 10 Module × 40 Seiten",
+        "tier": "Enterprise"
+      },
+      {
+        "rank": 5,
+        "brand": "Nespresso",
+        "score": "12 Bilder × 8 Module × 47 Seiten",
+        "tier": "Navigation-Heavy"
+      },
+      {
+        "rank": 6,
+        "brand": "natural elements",
+        "score": "14 Bilder × 11 Module × 40 Seiten",
+        "tier": "Navigation-Heavy"
+      },
+      {
+        "rank": 7,
+        "brand": "Feandrea",
+        "score": "16 Bilder × 13 Module × 17 Seiten",
+        "tier": "Standard+"
+      },
+      {
+        "rank": 8,
+        "brand": "Cloudpillo",
+        "score": "20 Bilder × 11 Module × 8 Seiten",
+        "tier": "Standard+"
+      },
+      {
+        "rank": 9,
+        "brand": "Gritin",
+        "score": "20 Bilder × 11 Module × 10 Seiten",
+        "tier": "Standard+"
+      },
+      {
+        "rank": 10,
+        "brand": "Hansegrün",
+        "score": "16 Bilder × 12 Module × 20 Seiten",
+        "tier": "Standard+"
+      },
+      {
+        "rank": 11,
+        "brand": "ESN",
+        "score": "13 Bilder × 9 Module × 24 Seiten",
+        "tier": "Standard"
+      },
+      {
+        "rank": 12,
+        "brand": "MORE Nutrition",
+        "score": "12 Bilder × 8 Module × 18 Seiten",
+        "tier": "Standard"
+      },
+      {
+        "rank": 13,
+        "brand": "MasterChef",
+        "score": "9 Bilder × 9 Module × 23 Seiten",
+        "tier": "Standard"
+      },
+      {
+        "rank": 14,
+        "brand": "BLACKROLL",
+        "score": "17 Bilder × 12 Module × 8 Seiten",
+        "tier": "Standard"
+      },
+      {
+        "rank": 15,
+        "brand": "the nu company",
+        "score": "12 Bilder × 8 Module × 3 Seiten",
+        "tier": "Compact"
+      },
+      {
+        "rank": 16,
+        "brand": "Kloster Kitchen",
+        "score": "12 Bilder × 5 Module × 10 Seiten",
+        "tier": "Compact"
+      },
+      {
+        "rank": 17,
+        "brand": "Desktronic",
+        "score": "12 Bilder × 7 Module × 10 Seiten",
+        "tier": "Compact"
+      },
+      {
+        "rank": 18,
+        "brand": "HOLY Energy",
+        "score": "9 Bilder × 6 Module × 13 Seiten",
+        "tier": "Compact"
+      },
+      {
+        "rank": 19,
+        "brand": "twenty:three",
+        "score": "9 Bilder × 7 Module × 5 Seiten",
+        "tier": "Compact"
+      },
+      {
+        "rank": 20,
+        "brand": "Night Cat",
+        "score": "2 Bilder × 2 Module × 10 Seiten",
+        "tier": "Minimal"
+      }
     ]
   }
 }
