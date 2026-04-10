@@ -54,7 +54,7 @@ export async function analyzeProducts(products, brand, lang) {
       rating: p.rating,
       reviews: p.reviews,
       bulletPoints: (p.bulletPoints || []).slice(0, 5),
-      description: (p.description || '').slice(0, 500),
+      description: p.description || '',
       categories: p.categories,
       bestsellerRank: p.bestsellerRank || null,
       boughtPastMonth: p.boughtPastMonth || null,
@@ -114,11 +114,11 @@ export async function analyzeBrandVoice(products, brand, websiteTexts, brandTone
       sampleTexts.push('Product "' + (p.name || '').slice(0, 50) + '" bullets: ' + p.bulletPoints.join(' | '));
     }
     if (p.description) {
-      sampleTexts.push('Description: ' + p.description.slice(0, 200));
+      sampleTexts.push('Description: ' + p.description);
     }
   });
   if (websiteTexts) {
-    sampleTexts.push('Website text: ' + websiteTexts.slice(0, 2000));
+    sampleTexts.push('Website text: ' + websiteTexts);
   }
 
   var system = 'You analyze brand communication style. Return ONLY valid JSON.';
@@ -172,7 +172,7 @@ export async function createContentStrategy(productAnalysis, ciProfile, brandVoi
       'Title: ' + (websiteData.title || ''),
       'Categories: ' + ((websiteData.categories || []).join(', ') || 'unknown'),
       websiteData.tagline ? 'Tagline: ' + websiteData.tagline : '',
-      websiteData.aboutText ? 'About: ' + websiteData.aboutText.slice(0, 2000) : '',
+      websiteData.aboutText ? 'About: ' + websiteData.aboutText : '',
       websiteData.aiAnalysis ? 'USPs from website: ' + JSON.stringify(websiteData.aiAnalysis.keyUSPs || websiteData.aiAnalysis.brandValues || [], null, 1) : '',
       websiteData.certifications ? 'Certifications: ' + websiteData.certifications.join(', ') : '',
       'IMPORTANT: The USPs on the brand website are the PRIMARY source of truth.',
@@ -257,7 +257,7 @@ export async function createTextBlocks(contentStrategy, brandVoice, productAnaly
       }),
     }, null, 1),
     '',
-    originalTexts ? 'ORIGINAL BRAND TEXTS (use as wording reference, do not copy 1:1):\n' + originalTexts.slice(0, 3000) : '',
+    originalTexts ? 'ORIGINAL BRAND TEXTS (use as wording reference, do not copy 1:1):\n' + originalTexts : '',
     '',
     'Create text blocks per page. Return JSON:',
     '{',
@@ -304,7 +304,7 @@ export async function reviewCopywriting(textBlocks, brandVoice, brand, lang, ori
     'TEXT BLOCKS TO REVIEW:',
     JSON.stringify(textBlocks, null, 1),
     '',
-    originalTexts ? 'ORIGINAL BRAND TEXTS (for wording reference):\n' + originalTexts.slice(0, 3000) : '',
+    originalTexts ? 'ORIGINAL BRAND TEXTS (for wording reference):\n' + originalTexts : '',
     '',
     'REVIEW AND FIX:',
     '1. If the SAME USP appears with different wording on different pages, standardize to ONE version.',
