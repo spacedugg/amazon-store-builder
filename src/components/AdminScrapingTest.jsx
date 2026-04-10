@@ -29,7 +29,7 @@ export default function AdminScrapingTest() {
   }
 
   return (
-    <div style={{ fontFamily: 'Inter, system-ui, sans-serif', maxWidth: 900, margin: '0 auto', padding: '24px 16px' }}>
+    <div style={{ fontFamily: 'Inter, system-ui, sans-serif', maxWidth: 900, margin: '0 auto', padding: '24px 16px', height: '100vh', overflow: 'auto' }}>
       <h1 style={{ fontSize: 22, fontWeight: 800, margin: '0 0 8px' }}>Scraping Field Test</h1>
       <p style={{ color: '#64748b', fontSize: 13, margin: '0 0 16px' }}>
         Enter an ASIN to see ALL fields that BrightData returns. This helps us map the correct fields.
