@@ -68,6 +68,16 @@ module.exports = async function handler(req, res) {
 
     if (!Array.isArray(rawData)) rawData = [rawData];
 
+    // DEBUG MODE: Return raw BrightData response to see all available fields
+    if (body.debug) {
+      return res.status(200).json({
+        debug: true,
+        rawFieldNames: rawData[0] ? Object.keys(rawData[0]) : [],
+        rawSample: rawData[0] || null,
+        totalItems: rawData.length,
+      });
+    }
+
     var products = rawData
       .filter(function(p) { return p && !p.error; })
       .map(function(p) {
@@ -92,12 +102,6 @@ module.exports = async function handler(req, res) {
           bulletPoints = [p.product_information];
         }
 
-        // Extract A+ content if available
-        var aPlusContent = null;
-        if (p.a_plus_content || p.aplus_content || p.enhanced_content) {
-          aPlusContent = p.a_plus_content || p.aplus_content || p.enhanced_content;
-        }
-
         return {
           asin: p.asin || '',
           name: p.title || p.name || '',
@@ -110,9 +114,9 @@ module.exports = async function handler(req, res) {
           bulletPoints: bulletPoints,
           categories: p.categories || [],
           url: p.url || '',
-          availableSince: p.date_first_available || p.first_available || null,
-          bestsellerRank: p.bestsellers_rank || p.bestseller_rank || null,
-          aPlusContent: aPlusContent,
+          // Additional fields — mapped from actual BrightData response
+          // (run with debug:true to see all available fields)
+          _allRawKeys: Object.keys(p),
         };
       });
 
