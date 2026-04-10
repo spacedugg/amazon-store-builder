@@ -92,13 +92,17 @@ module.exports = async function handler(req, res) {
           bulletPoints = [p.product_information];
         }
 
+        // Extract A+ content if available
+        var aPlusContent = null;
+        if (p.a_plus_content || p.aplus_content || p.enhanced_content) {
+          aPlusContent = p.a_plus_content || p.aplus_content || p.enhanced_content;
+        }
+
         return {
           asin: p.asin || '',
           name: p.title || p.name || '',
           brand: p.brand || '',
           description: p.description || p.product_overview || '',
-          price: p.final_price || p.initial_price || 0,
-          currency: p.currency || 'EUR',
           rating: p.rating || 0,
           reviews: p.reviews_count || 0,
           image: p.image || p.main_image || '',
@@ -106,6 +110,9 @@ module.exports = async function handler(req, res) {
           bulletPoints: bulletPoints,
           categories: p.categories || [],
           url: p.url || '',
+          availableSince: p.date_first_available || p.first_available || null,
+          bestsellerRank: p.bestsellers_rank || p.bestseller_rank || null,
+          aPlusContent: aPlusContent,
         };
       });
 
