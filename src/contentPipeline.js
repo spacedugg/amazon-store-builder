@@ -1,10 +1,7 @@
-// ─── CONTENT-FIRST PIPELINE ───
-// Implements the 5-phase Content-First paradigm:
-//   Phase 1: Brand Deep Dive (data collection — handled by App.jsx)
-//   Phase 2: Content Creation (THIS FILE — creates the Content Pool)
-//   Phase 3: Structure Planning (THIS FILE — derives layout from content)
-//   Phase 4: Store Assembly (handled by storeBuilder.js with Content Pool input)
-//   Phase 5: Validation (THIS FILE — quality checks)
+// ─── CONTENT-FIRST PIPELINE v2 ───
+// Every step is a SMALL, focused API call. No mega-prompts.
+// Results are accumulated step by step.
+// Fully automated — no manual intervention between steps.
 
 var ANTHROPIC_KEY = typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env.VITE_ANTHROPIC_API_KEY : '';
 var ANTHROPIC_MODEL = typeof import.meta !== 'undefined' && import.meta.env ? (import.meta.env.VITE_ANTHROPIC_MODEL || 'claude-sonnet-4-20250514') : 'claude-sonnet-4-20250514';
@@ -20,231 +17,288 @@ async function callClaude(systemPrompt, userPrompt, maxTokens) {
     },
     body: JSON.stringify({
       model: ANTHROPIC_MODEL,
-      max_tokens: maxTokens || 8000,
+      max_tokens: maxTokens || 4096,
       system: systemPrompt,
       messages: [{ role: 'user', content: userPrompt }],
     }),
   });
   if (!resp.ok) {
     var errText = await resp.text();
-    throw new Error('Claude API error ' + resp.status + ': ' + errText.slice(0, 200));
+    throw new Error('Claude ' + resp.status + ': ' + errText.slice(0, 200));
   }
   var data = await resp.json();
   var text = data.content && data.content[0] ? data.content[0].text : '';
   var jsonMatch = text.match(/\{[\s\S]*\}/);
   if (jsonMatch) { try { return JSON.parse(jsonMatch[0]); } catch (e) {} }
-  var arrMatch = text.match(/\[[\s\S]*\]/);
-  if (arrMatch) { try { return JSON.parse(arrMatch[0]); } catch (e) {} }
   return { _raw: text };
 }
 
 // ═══════════════════════════════════════════════════════════════
-// PHASE 2: CONTENT CREATION
-// Creates the Content Pool — all texts, USPs, stories, categories
-// INDEPENDENT of any layout decisions.
+// STEP 1: Analyze ONE product
+// Called once per ASIN. Small focused call.
 // ═══════════════════════════════════════════════════════════════
-
-export async function createContentPool(brandProfile, products, brand, lang) {
-  // brandProfile contains: websiteData, productCI, brandVoice, productAnalysis
-
-  var websiteData = brandProfile.websiteData || {};
-  var productAnalysis = brandProfile.productAnalysis || {};
-  var brandVoice = brandProfile.brandVoice || {};
-
-  // Collect ALL available text content
-  var allBrandTexts = [];
-  if (websiteData.aboutText) allBrandTexts.push('ABOUT: ' + websiteData.aboutText);
-  if (websiteData.sustainabilityText) allBrandTexts.push('SUSTAINABILITY: ' + websiteData.sustainabilityText);
-  if (websiteData.qualityText) allBrandTexts.push('QUALITY: ' + websiteData.qualityText);
-  if (websiteData.valuesText) allBrandTexts.push('VALUES: ' + websiteData.valuesText);
-  if (websiteData.ingredientsText) allBrandTexts.push('INGREDIENTS: ' + websiteData.ingredientsText);
-  (websiteData.rawTextSections || []).forEach(function(s) { allBrandTexts.push('PAGE: ' + s.text); });
-
-  // Collect product data
-  var productData = products.map(function(p) {
-    return {
-      asin: p.asin,
-      name: p.name,
-      bulletPoints: p.bulletPoints || [],
-      description: p.description || '',
-      rating: p.rating,
-      reviews: p.reviews,
-      bestsellerRank: p.bestsellerRank || null,
-      boughtPastMonth: p.boughtPastMonth || null,
-      customerSays: p.customerSays || null,
-      categories: p.categories || [],
-    };
-  });
-
-  var system = [
-    'You create content for Amazon Brand Stores.',
-    'You work in the Content-First paradigm: you create ALL content FIRST,',
-    'completely independent of layout or module decisions.',
-    'Your output is a Content Pool — pure content, no layout.',
-    'All texts must be in ' + lang + '.',
-    'Return ONLY valid JSON.',
-  ].join('\n');
-
+export async function analyzeOneProduct(product) {
+  var system = 'You analyze a single Amazon product for Brand Store creation. Return ONLY valid JSON.';
   var user = [
-    'Brand: "' + brand + '"',
-    'Language: ' + lang,
+    'Product: ' + product.name,
+    'ASIN: ' + product.asin,
+    'Rating: ' + product.rating + ' (' + product.reviews + ' reviews)',
+    'Bought past month: ' + (product.boughtPastMonth || 'unknown'),
+    'Bestseller rank: ' + (product.bestsellerRank || 'unknown'),
     '',
-    'BRAND VOICE:',
-    JSON.stringify(brandVoice, null, 1),
+    'Bullet Points:',
+    (product.bulletPoints || []).join('\n'),
     '',
-    'PRODUCT ANALYSIS:',
-    JSON.stringify(productAnalysis, null, 1),
+    'Description:',
+    product.description || '(none)',
     '',
-    'ALL BRAND TEXTS FROM WEBSITE:',
-    allBrandTexts.join('\n\n'),
+    'Customer says: ' + (product.customerSays || '(none)'),
     '',
-    'WEBSITE FEATURES/USPS:',
-    JSON.stringify(websiteData.features || [], null, 1),
+    'Amazon categories: ' + (product.categories || []).join(' > '),
     '',
-    'WEBSITE CERTIFICATIONS:',
-    JSON.stringify(websiteData.certifications || [], null, 1),
-    '',
-    'PRODUCTS (' + products.length + '):',
-    JSON.stringify(productData, null, 1),
-    '',
-    'Create a COMPLETE Content Pool. Return JSON:',
+    'Return JSON:',
     '{',
-    '  "usps": [',
-    '    { "text": "USP as customer benefit", "source": "where this came from (website/product/derived)" }',
-    '  ],',
-    '  "brandStory": {',
-    '    "available": true/false,',
-    '    "headline": "Brand story headline",',
-    '    "text": "2-4 sentences brand story",',
-    '    "source": "website about page / derived from products"',
-    '  },',
-    '  "categories": [',
-    '    {',
-    '      "name": "Category Name",',
-    '      "description": "2-3 sentences what this category offers",',
-    '      "asins": ["B0..."],',
-    '      "categoryUSPs": ["USP specific to this category"],',
-    '      "highlightProducts": [{ "asin": "B0...", "headline": "short product headline" }]',
-    '    }',
-    '  ],',
-    '  "productTexts": [',
-    '    { "asin": "B0...", "headline": "short headline", "description": "1-2 sentences" }',
-    '  ],',
-    '  "trustElements": [',
-    '    { "text": "trust element", "type": "certification/award/guarantee/statistic" }',
-    '  ],',
-    '  "quiz": {',
-    '    "needed": true/false,',
-    '    "reason": "why or why not",',
-    '    "questions": [',
-    '      { "text": "question", "answers": [{ "text": "answer", "asins": ["B0..."] }] }',
-    '    ]',
-    '  },',
-    '  "imageConcepts": [',
-    '    { "type": "lifestyle/creative/product/text_image", "description": "what the image shows", "forCategory": "category name or homepage" }',
-    '  ],',
-    '  "heroBannerConcepts": [',
-    '    { "page": "Homepage", "concept": "what the hero banner shows", "textOverlay": "headline text" }',
-    '  ]',
+    '  "productCategory": "what category this product belongs to (by function, not Amazon breadcrumb)",',
+    '  "keyBenefits": ["benefit 1", "benefit 2", "benefit 3"],',
+    '  "targetUseCase": "who uses this and when",',
+    '  "uniqueFeatures": ["what makes this product special"],',
+    '  "isBestseller": true/false,',
+    '  "shortHeadline": "short product headline for store",',
+    '  "shortDescription": "1-2 sentences about this product"',
     '}',
-    '',
-    'RULES:',
-    '- USPs MUST come from the website data or product data. Do NOT invent USPs.',
-    '- If no brand story exists on the website, set brandStory.available = false.',
-    '- EVERY ASIN must appear in exactly one category.',
-    '- Categories must be LOGICAL — based on product function, not Amazon breadcrumb.',
-    '  (e.g. "Flohsamenschalen" belongs to Digestion, not Sleep)',
-    '- Product headlines: based on actual product features, not generic.',
-    '- Quiz: only if >10 products in overlapping categories. Questions must lead to PRODUCTS.',
-    '- Image concepts: describe WHAT the image shows, not how it looks (no colors, lighting, mood).',
-    '- All texts in ' + lang + '. No English fragments.',
   ].join('\n');
-
-  return await callClaude(system, user, 8000);
+  return await callClaude(system, user, 1024);
 }
 
+// ═══════════════════════════════════════════════════════════════
+// STEP 2: Group analyzed products into categories
+// Gets ALL product analyses as input (small summaries, not raw data)
+// ═══════════════════════════════════════════════════════════════
+export async function groupIntoCategories(productAnalyses, brand, lang) {
+  var system = 'You group products into logical categories for a Brand Store. Return ONLY valid JSON.';
+  var summaries = productAnalyses.map(function(pa) {
+    return pa.asin + ': ' + pa.shortHeadline + ' → ' + pa.productCategory;
+  });
+  var user = [
+    'Brand: ' + brand + ' | Language: ' + lang,
+    '',
+    'Products and their AI-suggested categories:',
+    summaries.join('\n'),
+    '',
+    'Group these products into 3-8 logical categories.',
+    'Products may be in the wrong suggested category — use your judgment.',
+    'Return JSON:',
+    '{',
+    '  "categories": [',
+    '    { "name": "Category Name", "asins": ["B0..."], "description": "what this category is about" }',
+    '  ]',
+    '}',
+    '',
+    'EVERY ASIN must appear in exactly one category.',
+  ].join('\n');
+  return await callClaude(system, user, 2048);
+}
 
 // ═══════════════════════════════════════════════════════════════
-// PHASE 3: STRUCTURE PLANNING
-// Derives page structure FROM the Content Pool.
-// Uses Reference Store insights for MODULE selection only.
+// STEP 3: Extract brand USPs from website page
+// Called once per scraped website page.
 // ═══════════════════════════════════════════════════════════════
+export async function analyzeWebsitePage(pageText, pageSource, brand) {
+  var system = 'You extract brand information from a website page. Return ONLY valid JSON.';
+  var user = [
+    'Brand: ' + brand,
+    'Page source: ' + pageSource,
+    '',
+    'Page content:',
+    pageText,
+    '',
+    'Extract EVERYTHING relevant for a Brand Store:',
+    '{',
+    '  "usps": ["customer-facing USP/benefit found on this page"],',
+    '  "brandStoryElements": ["any brand story, founder info, history, values"],',
+    '  "certifications": ["certifications, awards, quality seals mentioned"],',
+    '  "trustElements": ["satisfaction guarantees, statistics, social proof"],',
+    '  "keyPhrases": ["important phrases/slogans the brand uses"],',
+    '  "productMentions": ["products or categories mentioned on this page"]',
+    '}',
+  ].join('\n');
+  return await callClaude(system, user, 2048);
+}
 
-export async function planStructure(contentPool, storeKnowledge, brand, lang) {
+// ═══════════════════════════════════════════════════════════════
+// STEP 4: Synthesize brand profile from all collected data
+// Gets accumulated results from Steps 1-3
+// ═══════════════════════════════════════════════════════════════
+export async function synthesizeBrandProfile(allProductAnalyses, allWebsiteAnalyses, categories, brandVoice, brand, lang) {
   var system = [
-    'You plan Amazon Brand Store page structures.',
-    'You follow the Content-First paradigm: the CONTENT determines the structure.',
-    'You only create pages and sections for content that EXISTS in the Content Pool.',
-    'No empty pages. No filler sections. No modules without content.',
-    'Return ONLY valid JSON.',
+    'You create the definitive brand profile for a Brand Store.',
+    'All data has been pre-analyzed. Your job is to SYNTHESIZE, not re-analyze.',
+    'Return ONLY valid JSON. All texts in ' + lang + '.',
   ].join('\n');
 
-  // Inventory what content exists
-  var inventory = {
-    usps: (contentPool.usps || []).length,
-    brandStory: contentPool.brandStory && contentPool.brandStory.available,
-    categories: (contentPool.categories || []).length,
-    products: (contentPool.productTexts || []).length,
-    trustElements: (contentPool.trustElements || []).length,
-    quiz: contentPool.quiz && contentPool.quiz.needed,
-    imageConcepts: (contentPool.imageConcepts || []).length,
-    heroBanners: (contentPool.heroBannerConcepts || []).length,
-  };
+  // Collect all USPs from website pages
+  var allUsps = [];
+  var allStoryElements = [];
+  var allCerts = [];
+  var allTrust = [];
+  var allPhrases = [];
+  (allWebsiteAnalyses || []).forEach(function(wa) {
+    (wa.usps || []).forEach(function(u) { if (allUsps.indexOf(u) < 0) allUsps.push(u); });
+    (wa.brandStoryElements || []).forEach(function(s) { allStoryElements.push(s); });
+    (wa.certifications || []).forEach(function(c) { if (allCerts.indexOf(c) < 0) allCerts.push(c); });
+    (wa.trustElements || []).forEach(function(t) { if (allTrust.indexOf(t) < 0) allTrust.push(t); });
+    (wa.keyPhrases || []).forEach(function(p) { if (allPhrases.indexOf(p) < 0) allPhrases.push(p); });
+  });
+
+  // Collect product benefits
+  var allBenefits = [];
+  (allProductAnalyses || []).forEach(function(pa) {
+    (pa.keyBenefits || []).forEach(function(b) { if (allBenefits.indexOf(b) < 0) allBenefits.push(b); });
+  });
 
   var user = [
-    'Brand: "' + brand + '" | Language: ' + lang,
+    'Brand: ' + brand + ' | Language: ' + lang,
     '',
-    'CONTENT INVENTORY (what exists in the Content Pool):',
-    JSON.stringify(inventory, null, 1),
+    'BRAND VOICE: ' + JSON.stringify(brandVoice, null, 1),
     '',
-    'CONTENT POOL SUMMARY:',
-    '- USPs: ' + (contentPool.usps || []).map(function(u) { return u.text; }).join(' | '),
-    '- Categories: ' + (contentPool.categories || []).map(function(c) { return c.name + ' (' + (c.asins || []).length + ' products)'; }).join(', '),
-    '- Brand Story: ' + (contentPool.brandStory && contentPool.brandStory.available ? 'Available' : 'Not available'),
-    '- Trust Elements: ' + (contentPool.trustElements || []).length,
-    '- Quiz: ' + (contentPool.quiz && contentPool.quiz.needed ? 'Yes (' + (contentPool.quiz.questions || []).length + ' questions)' : 'No'),
-    '- Image Concepts: ' + (contentPool.imageConcepts || []).length,
+    'USPs found on website: ' + allUsps.join(' | '),
+    'Brand story elements: ' + allStoryElements.join(' | '),
+    'Certifications: ' + allCerts.join(' | '),
+    'Trust elements: ' + allTrust.join(' | '),
+    'Key phrases: ' + allPhrases.join(' | '),
+    'Product benefits (across all products): ' + allBenefits.slice(0, 30).join(' | '),
     '',
-    storeKnowledge ? [
-      'REFERENCE STORE INSIGHTS (use as MODULE INSPIRATION only):',
-      storeKnowledge,
-    ].join('\n') : '',
+    'Categories: ' + (categories.categories || []).map(function(c) { return c.name + ' (' + (c.asins || []).length + ')'; }).join(', '),
     '',
-    'Plan the page structure. Return JSON:',
+    'Synthesize into a definitive brand profile:',
+    '{',
+    '  "usps": [{ "text": "USP as customer benefit in ' + lang + '", "source": "website/product/derived" }],',
+    '  "brandStory": { "available": true/false, "headline": "...", "text": "2-4 sentences", "source": "..." },',
+    '  "trustElements": [{ "text": "...", "type": "certification/guarantee/statistic" }],',
+    '  "heroBannerConcept": { "headline": "...", "subline": "..." },',
+    '  "imageConcepts": [{ "type": "lifestyle/creative/product", "description": "what to show", "forPage": "Homepage/Category" }]',
+    '}',
+    '',
+    'RULES:',
+    '- USPs must come from ACTUAL website/product data. Not invented.',
+    '- If no brand story info found, set available=false. Do NOT invent one.',
+    '- All texts in ' + lang + '.',
+  ].join('\n');
+
+  return await callClaude(system, user, 4096);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// STEP 5: Plan page structure from content
+// ═══════════════════════════════════════════════════════════════
+export async function planPages(brandProfile, categories, productAnalyses, storeKnowledge, brand, lang) {
+  var system = [
+    'You plan Amazon Brand Store pages. Content determines structure.',
+    'Only create pages for content that EXISTS. No empty pages.',
+    'Return ONLY valid JSON. All texts in ' + lang + '.',
+  ].join('\n');
+
+  var user = [
+    'Brand: ' + brand,
+    '',
+    'CONTENT AVAILABLE:',
+    '- USPs: ' + (brandProfile.usps || []).map(function(u) { return u.text; }).join(' | '),
+    '- Brand Story: ' + (brandProfile.brandStory && brandProfile.brandStory.available ? 'Yes' : 'No'),
+    '- Trust Elements: ' + (brandProfile.trustElements || []).length,
+    '- Categories: ' + (categories.categories || []).map(function(c) { return c.name + ' (' + (c.asins || []).length + ' products)'; }).join(', '),
+    '- Products: ' + productAnalyses.length + ' total',
+    '- Image Concepts: ' + (brandProfile.imageConcepts || []).length,
+    '',
+    storeKnowledge ? 'REFERENCE STORE INSIGHTS (for module selection only):\n' + storeKnowledge : '',
+    '',
+    'Plan pages. Return JSON:',
     '{',
     '  "pages": [',
+    '    { "id": "homepage", "name": "Homepage", "sections": [',
+    '      { "purpose": "what this shows", "contentSource": "usps/categories/brandStory/products/trust", "moduleType": "Full-Width/std-2equal/etc" }',
+    '    ] }',
+    '  ]',
+    '}',
+    '',
+    'Only create pages for which content exists.',
+    'Homepage + 1 page per category is the minimum.',
+    'Extra pages (About, Bestsellers) only if content supports them.',
+  ].filter(Boolean).join('\n');
+
+  return await callClaude(system, user, 4096);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// STEP 6: Generate ONE page
+// Called once per page. Gets the page plan + relevant content.
+// ═══════════════════════════════════════════════════════════════
+export async function generateOnePage(pagePlan, brandProfile, categories, productAnalyses, brand, lang, previousPages) {
+  var system = [
+    'You generate ONE Amazon Brand Store page.',
+    'You receive the page plan + all relevant content.',
+    'Your job: fill the sections with real content. No filler. No generic text.',
+    'Return ONLY valid JSON. All textOverlay texts in ' + lang + '.',
+    'Briefs in English, 10-20 words max — just the image idea.',
+  ].join('\n');
+
+  // Find relevant products for this page
+  var pageCategory = (categories.categories || []).find(function(c) { return c.name === pagePlan.name; });
+  var relevantAsins = pageCategory ? (pageCategory.asins || []) : [];
+  var relevantProducts = productAnalyses.filter(function(pa) { return relevantAsins.indexOf(pa.asin) >= 0; });
+
+  var user = [
+    'Page: "' + pagePlan.name + '" (id: ' + pagePlan.id + ')',
+    'Brand: ' + brand + ' | Language: ' + lang,
+    '',
+    'PAGE PLAN (sections to fill):',
+    JSON.stringify(pagePlan.sections, null, 1),
+    '',
+    'BRAND USPs: ' + (brandProfile.usps || []).map(function(u) { return u.text; }).join(' | '),
+    '',
+    relevantProducts.length > 0 ? 'PRODUCTS FOR THIS PAGE:\n' + JSON.stringify(relevantProducts, null, 1) : 'This is the homepage — show overview of all categories.',
+    '',
+    pageCategory ? 'CATEGORY: ' + pageCategory.name + ' — ' + (pageCategory.description || '') : '',
+    '',
+    previousPages && previousPages.length > 0 ? 'ALREADY GENERATED PAGES (avoid duplicating content):\n' + previousPages.map(function(p) { return p.name + ': ' + (p.sections || []).length + ' sections'; }).join('\n') : '',
+    '',
+    'Generate sections. Return JSON:',
+    '{',
+    '  "heroBannerBrief": "10 words: what the hero banner above the menu shows",',
+    '  "heroBannerTextOverlay": "headline text on the banner",',
+    '  "sections": [',
     '    {',
-    '      "id": "homepage",',
-    '      "name": "Homepage",',
-    '      "sections": [',
-    '        { "purpose": "what this section communicates", "contentRef": "which content pool entry", "suggestedModule": "Full-Width/std-2equal/etc" }',
-    '      ]',
+    '      "layoutId": "1 or std-2equal or lg-2stack etc",',
+    '      "tiles": [{',
+    '        "type": "image/shoppable_image/product_grid/video/text",',
+    '        "imageCategory": "lifestyle/creative/product/text_image/benefit",',
+    '        "brief": "10-20 words English: what the image shows (just the idea, no style/mood)",',
+    '        "textOverlay": "text ON the image in ' + lang + '",',
+    '        "ctaText": "CTA button text in ' + lang + '",',
+    '        "linkAsin": "B0... (MUST match the product described in the brief)",',
+    '        "linkUrl": "/page-id (for cross-page links)",',
+    '        "dimensions": {"w": 3000, "h": 1200},',
+    '        "mobileDimensions": {"w": 1680, "h": 1200}',
+    '      }]',
     '    }',
     '  ]',
     '}',
     '',
     'RULES:',
-    '- ONLY create pages for which content EXISTS.',
-    '- If no brand story → no "Über uns" page.',
-    '- If only 2 categories → homepage needs only 2 category sections, not 8.',
-    '- Every section must have a contentRef pointing to real Content Pool data.',
-    '- Use Reference Store insights ONLY for module choice (Full-Width vs Grid etc.),',
-    '  NOT for deciding what content to show.',
+    '- Every product mentioned in a brief MUST have its ASIN in linkAsin or asins.',
+    '- textOverlay in ' + lang + '. Briefs in English.',
+    '- Briefs: 10-20 words. Just the idea. No lighting, mood, camera angles.',
+    '- No generic text. Every text must be specific to this brand and these products.',
   ].filter(Boolean).join('\n');
 
   return await callClaude(system, user, 6000);
 }
 
-
 // ═══════════════════════════════════════════════════════════════
-// PHASE 5: VALIDATION
-// Automated quality checks before delivery.
+// VALIDATION
 // ═══════════════════════════════════════════════════════════════
-
-export function validateStore(store, inputAsins, contentPool, lang) {
+export function validateStore(store, inputAsins, lang) {
   var issues = [];
 
-  // 1. ASIN completeness
   var foundAsins = {};
   (store.pages || []).forEach(function(page) {
     (page.sections || []).forEach(function(sec) {
@@ -255,69 +309,29 @@ export function validateStore(store, inputAsins, contentPool, lang) {
       });
     });
   });
-  var missingAsins = inputAsins.filter(function(a) { return !foundAsins[a]; });
-  if (missingAsins.length > 0) {
-    issues.push({ type: 'ASIN_MISSING', severity: 'critical', count: missingAsins.length, asins: missingAsins });
-  }
 
-  // 2. Empty pages
+  var missingAsins = inputAsins.filter(function(a) { return !foundAsins[a]; });
+  if (missingAsins.length > 0) issues.push({ type: 'ASIN_MISSING', severity: 'critical', count: missingAsins.length, asins: missingAsins });
+
   (store.pages || []).forEach(function(page) {
     var contentSections = (page.sections || []).filter(function(sec) {
-      return sec.tiles && sec.tiles.length > 0 && sec.tiles.some(function(t) { return t.brief || t.textOverlay || t.type === 'product_grid'; });
+      return sec.tiles && sec.tiles.length > 0;
     });
-    if (contentSections.length < 2) {
-      issues.push({ type: 'EMPTY_PAGE', severity: 'critical', page: page.name, sections: contentSections.length });
-    }
+    if (contentSections.length < 2) issues.push({ type: 'EMPTY_PAGE', severity: 'critical', page: page.name });
   });
 
-  // 3. Language check (detect English in German store)
   if (lang === 'German' || lang === 'de') {
-    var englishPatterns = /\b(discover|explore|shop now|our collection|premium quality|learn more|view all|best sellers)\b/i;
+    var enPattern = /\b(discover|explore|shop now|our collection|premium quality|learn more)\b/i;
     (store.pages || []).forEach(function(page) {
       (page.sections || []).forEach(function(sec, si) {
         (sec.tiles || []).forEach(function(tile, ti) {
-          if (tile.textOverlay && englishPatterns.test(tile.textOverlay)) {
-            issues.push({ type: 'WRONG_LANGUAGE', severity: 'warning', page: page.name, section: si + 1, tile: ti + 1, text: tile.textOverlay.slice(0, 50) });
-          }
-          if (tile.ctaText && englishPatterns.test(tile.ctaText)) {
-            issues.push({ type: 'WRONG_LANGUAGE', severity: 'warning', page: page.name, section: si + 1, tile: ti + 1, text: tile.ctaText });
+          if (tile.textOverlay && enPattern.test(tile.textOverlay)) {
+            issues.push({ type: 'WRONG_LANGUAGE', severity: 'warning', page: page.name, text: tile.textOverlay.slice(0, 50) });
           }
         });
       });
     });
   }
 
-  // 4. Duplicate texts across pages
-  var seenTexts = {};
-  (store.pages || []).forEach(function(page) {
-    (page.sections || []).forEach(function(sec) {
-      (sec.tiles || []).forEach(function(tile) {
-        var key = (tile.textOverlay || '').trim().toLowerCase();
-        if (key.length > 15) {
-          if (seenTexts[key] && seenTexts[key] !== page.name) {
-            issues.push({ type: 'DUPLICATE_TEXT', severity: 'warning', text: key.slice(0, 50), pages: [seenTexts[key], page.name] });
-          }
-          seenTexts[key] = page.name;
-        }
-      });
-    });
-  });
-
-  // 5. Brief quality (too short = placeholder)
-  (store.pages || []).forEach(function(page) {
-    (page.sections || []).forEach(function(sec, si) {
-      (sec.tiles || []).forEach(function(tile, ti) {
-        if ((tile.type === 'image' || tile.type === 'shoppable_image' || tile.type === 'image_text') && tile.brief && tile.brief.length < 20) {
-          issues.push({ type: 'BRIEF_TOO_SHORT', severity: 'warning', page: page.name, section: si + 1, tile: ti + 1, brief: tile.brief });
-        }
-      });
-    });
-  });
-
-  return {
-    valid: issues.filter(function(i) { return i.severity === 'critical'; }).length === 0,
-    issues: issues,
-    criticalCount: issues.filter(function(i) { return i.severity === 'critical'; }).length,
-    warningCount: issues.filter(function(i) { return i.severity === 'warning'; }).length,
-  };
+  return { valid: issues.filter(function(i) { return i.severity === 'critical'; }).length === 0, issues: issues };
 }
