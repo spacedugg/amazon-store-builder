@@ -516,10 +516,10 @@ function buildResult(content, aiAnalysis, url) {
     qualityText: content.qualityText || '',
     valuesText: content.valuesText || '',
     ingredientsText: content.ingredientsText || '',
-    productInfo: content.productDescriptions.slice(0, 5),
-    features: content.features.slice(0, 20),
-    certifications: content.certifications.slice(0, 15),
-    socialProof: content.socialProof.slice(0, 5),
+    productInfo: content.productDescriptions,
+    features: content.features,
+    certifications: content.certifications,
+    socialProof: content.socialProof,
     colors: content.colors.slice(0, 10),
     fonts: content.fonts.slice(0, 6),
     typographyStyle: content.typographyStyle || null,
@@ -537,7 +537,7 @@ function buildResult(content, aiAnalysis, url) {
     if (aiAnalysis.brandTone) result.brandTone = aiAnalysis.brandTone;
     if (aiAnalysis.usps && aiAnalysis.usps.length > 0) {
       // AI USPs are cleaner — prepend them
-      result.features = aiAnalysis.usps.concat(result.features).slice(0, 20);
+      result.features = aiAnalysis.usps.concat(result.features);
     }
     if (aiAnalysis.certifications && aiAnalysis.certifications.length > 0) {
       // AI certifications are cleaner — use them as primary
@@ -554,8 +554,8 @@ function buildResult(content, aiAnalysis, url) {
   // Build rawTextSections for backward compatibility
   var rawText = content.rawText || '';
   var sections = rawText.split(/===\s*[A-Z]+\s*(?:PAGE[^=]*)?\s*===/g).filter(function(s) { return s.trim().length > 20; });
-  sections.slice(0, 15).forEach(function(s, i) {
-    result.rawTextSections.push({ text: s.trim().slice(0, 500), source: i === 0 ? 'homepage' : 'subpage' });
+  sections.forEach(function(s, i) {
+    result.rawTextSections.push({ text: s.trim(), source: i === 0 ? 'homepage' : 'subpage' });
   });
 
   return result;
