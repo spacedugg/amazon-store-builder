@@ -649,6 +649,14 @@ export default function App() {
         productAnalyses: allProductAnalyses,
         websiteAnalyses: allWebsiteAnalyses,
         pipelineBrandVoice: pipelineBrandVoice,
+        // For wireframe generation access
+        analysis: {
+          brandTone: pipelineBrandVoice.tone || 'professional',
+          brandStory: brandProfile.brandStory ? brandProfile.brandStory.text : '',
+          keyFeatures: (brandProfile.usps || []).map(function(u) { return u.text; }),
+          productCI: productCI,
+          pipelineBrandVoice: pipelineBrandVoice,
+        },
       };
 
       // Store meta
