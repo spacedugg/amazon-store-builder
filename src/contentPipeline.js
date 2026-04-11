@@ -191,7 +191,7 @@ export async function synthesizeBrandProfile(allProductAnalyses, allWebsiteAnaly
 // ═══════════════════════════════════════════════════════════════
 // STEP 5: Plan page structure from content
 // ═══════════════════════════════════════════════════════════════
-export async function planPages(brandProfile, categories, productAnalyses, storeKnowledge, brand, lang) {
+export async function planPages(brandProfile, categories, productAnalyses, storeKnowledge, brand, lang, extraPages) {
   var system = [
     'You plan Amazon Brand Store pages. Content determines structure.',
     'Only create pages for content that EXISTS. No empty pages.',
@@ -223,6 +223,9 @@ export async function planPages(brandProfile, categories, productAnalyses, store
     'Only create pages for which content exists.',
     'Homepage + 1 page per category is the minimum.',
     'Extra pages (About, Bestsellers) only if content supports them.',
+    extraPages && Object.keys(extraPages).some(function(k) { return extraPages[k]; })
+      ? 'USER REQUESTED these extra pages: ' + Object.keys(extraPages).filter(function(k) { return extraPages[k]; }).join(', ') + '. Include them in the plan.'
+      : '',
   ].filter(Boolean).join('\n');
 
   return await callClaude(system, user, 4096);
@@ -232,7 +235,7 @@ export async function planPages(brandProfile, categories, productAnalyses, store
 // STEP 6: Generate ONE page
 // Called once per page. Gets the page plan + relevant content.
 // ═══════════════════════════════════════════════════════════════
-export async function generateOnePage(pagePlan, brandProfile, categories, productAnalyses, brand, lang, previousPages) {
+export async function generateOnePage(pagePlan, brandProfile, categories, productAnalyses, brand, lang, previousPages, storeKnowledge) {
   var system = [
     'You generate ONE Amazon Brand Store page.',
     'You receive the page plan + all relevant content.',
@@ -260,6 +263,8 @@ export async function generateOnePage(pagePlan, brandProfile, categories, produc
     pageCategory ? 'CATEGORY: ' + pageCategory.name + ' — ' + (pageCategory.description || '') : '',
     '',
     previousPages && previousPages.length > 0 ? 'ALREADY GENERATED PAGES (avoid duplicating content):\n' + previousPages.map(function(p) { return p.name + ': ' + (p.sections || []).length + ' sections'; }).join('\n') : '',
+    '',
+    storeKnowledge ? 'REFERENCE STORE INSIGHTS (for module/layout inspiration):\n' + storeKnowledge : '',
     '',
     'Generate sections. Return JSON:',
     '{',

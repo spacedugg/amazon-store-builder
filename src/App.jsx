@@ -592,7 +592,7 @@ export default function App() {
       var storeKnowledgeStr = null;
       try { var kb = await loadStoreKnowledge(); if (kb) storeKnowledgeStr = formatStoreKnowledge(kb); } catch(e) {}
       var pagePlan = await runPipelineStep('Seitenplanung', function() {
-        return planPages(brandProfile, categories, allProductAnalyses, storeKnowledgeStr, params.brand, lang);
+        return planPages(brandProfile, categories, allProductAnalyses, storeKnowledgeStr, params.brand, lang, selectedExtraPages);
       });
       (pagePlan.pages || []).forEach(function(pg) {
         log('   ' + pg.name + ': ' + (pg.sections || []).length + ' sections');
@@ -610,7 +610,7 @@ export default function App() {
         var pp = plannedPages[gi];
         log('   Page ' + (gi + 1) + '/' + plannedPages.length + ': ' + pp.name);
         try {
-          var pageResult = await generateOnePage(pp, brandProfile, categories, allProductAnalyses, params.brand, lang, generatedPages);
+          var pageResult = await generateOnePage(pp, brandProfile, categories, allProductAnalyses, params.brand, lang, generatedPages, storeKnowledgeStr);
           var pageObj = {
             id: pp.id || ('page-' + gi),
             name: pp.name,
