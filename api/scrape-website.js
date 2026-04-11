@@ -40,7 +40,7 @@ module.exports = async function handler(req, res) {
     // STEP 3: Crawl subpages (up to 30)
     // ═══════════════════════════════════════════════════
     var subpageContents = {};
-    var maxSubpages = 30;
+    var maxSubpages = 100;
     var linksToFetch = internalLinks.slice(0, maxSubpages);
     // Crawl in batches of 5 to avoid overwhelming the server
     for (var batch = 0; batch < linksToFetch.length; batch += 5) {

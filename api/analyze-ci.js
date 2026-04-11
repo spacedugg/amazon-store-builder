@@ -21,8 +21,8 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'GEMINI_API_KEY not configured' });
   }
 
-  // Limit to 8 images for CI analysis (enough to detect patterns)
-  var imagesToAnalyze = imageUrls.slice(0, 8);
+  // Accept all images sent by the client (client handles batching)
+  var imagesToAnalyze = imageUrls;
 
   try {
     // Download all images and convert to base64 for Gemini
