@@ -3,7 +3,8 @@ import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, find
 import { scrapeAsins, analyzeBrandCI } from './api';
 import { generateStore, aiRefineStore, applyOperations, generateWireframesForPage, deleteWireframesForPage } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink } from './storage';
-import { analyzeProducts, analyzeBrandVoice, createContentStrategy, createTextBlocks, reviewCopywriting } from './generationPipeline';
+import { createContentPool, planStructure, validateStore as validateStoreQuality } from './contentPipeline';
+import { analyzeBrandVoice } from './generationPipeline';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
 import { crawlMultipleStores, crawlAndParseStore, analyzeStoreImagesWithGemini, formatReferenceStoreContext, loadStoreKnowledge, formatStoreKnowledge } from './referenceStoreService';
 import Topbar from './components/Topbar';
@@ -493,21 +494,26 @@ export default function App() {
         }
       }
 
-      log('');
-      log('═══ PHASE 2: ANALYSE ═══');
+      // ═══════════════════════════════════════════════════
+      // CONTENT-FIRST PIPELINE
+      // Phase 1: Brand Deep Dive (already done above — scraping, CI, website)
+      // Phase 2: Content Creation → Content Pool
+      // Phase 3: Structure Planning → Page Structure
+      // Phase 4: Store Assembly (generateStore)
+      // Phase 5: Validation
+      // ═══════════════════════════════════════════════════
 
-      // Step 2.1: Product Analysis (Claude) — REQUIRED
-      log('Step 2.1: Analyzing products (categories, USPs, patterns)...');
-      var pipelineProductAnalysis = await runPipelineStep('Product Analysis', function() {
-        return analyzeProducts(products, params.brand, lang);
-      });
-      log('   ' + (pipelineProductAnalysis.categories || []).length + ' categories identified');
-      if (pipelineProductAnalysis.brandUSPs) log('   Brand USPs: ' + pipelineProductAnalysis.brandUSPs.slice(0, 3).join(', '));
+      log('');
+      log('═══ PHASE 1: BRAND DEEP DIVE (completed) ═══');
+      log('   Products: ' + products.length + ' ASINs scraped');
+      log('   CI: ' + (productCI ? 'analyzed' : 'not available'));
+      log('   Website: ' + (enhancedWebsiteData ? (enhancedWebsiteData.pagesScraped || '?') + ' pages' : 'not provided'));
 
       checkCancel();
 
-      // Step 2.3: Brand Voice Analysis (Claude) — REQUIRED
-      log('Step 2.3: Analyzing brand voice...');
+      // Phase 1.5: Brand Voice — needed for Content Pool
+      log('');
+      log('═══ PHASE 1.5: BRAND VOICE ═══');
       var websiteTexts = enhancedWebsiteData ? (enhancedWebsiteData.aboutText || enhancedWebsiteData.rawTextContent || '') : '';
       var pipelineBrandVoice = await runPipelineStep('Brand Voice', function() {
         return analyzeBrandVoice(products, params.brand, websiteTexts, params.brandToneExamples || '');
@@ -516,71 +522,66 @@ export default function App() {
 
       checkCancel();
 
-      // Step 2.4: Content Strategy (Claude) — REQUIRED
-      log('Step 2.4: Creating content strategy (pages, themes, ASIN assignments)...');
-      var kbForStrategy = null;
-      try { var kb = await loadStoreKnowledge(); if (kb) kbForStrategy = formatStoreKnowledge(kb); } catch(e) {}
-      var pipelineContentStrategy = await runPipelineStep('Content Strategy', function() {
-        return createContentStrategy(
-          pipelineProductAnalysis, productCI, pipelineBrandVoice,
-          enhancedWebsiteData, kbForStrategy, params.brand, lang, params.instructions
-        );
+      // Phase 2: Content Creation — ALL content, independent of layout
+      log('');
+      log('═══ PHASE 2: CONTENT CREATION ═══');
+      log('Creating Content Pool (USPs, categories, texts, image concepts)...');
+      var brandProfile = {
+        websiteData: enhancedWebsiteData,
+        productCI: productCI,
+        brandVoice: pipelineBrandVoice,
+        productAnalysis: null, // will be done inside createContentPool
+      };
+      var contentPool = await runPipelineStep('Content Pool', function() {
+        return createContentPool(brandProfile, products, params.brand, lang);
       });
-      if (pipelineContentStrategy.pages) {
-        log('   ' + pipelineContentStrategy.pages.length + ' pages planned');
-        pipelineContentStrategy.pages.forEach(function(pg) {
-          log('   - ' + pg.name + ': ' + (pg.themes || []).slice(0, 3).join(', '));
+      log('   USPs: ' + (contentPool.usps || []).length);
+      log('   Categories: ' + (contentPool.categories || []).length);
+      (contentPool.categories || []).forEach(function(c) {
+        log('     - ' + c.name + ' (' + (c.asins || []).length + ' products)');
+      });
+      log('   Brand Story: ' + (contentPool.brandStory && contentPool.brandStory.available ? 'yes' : 'no'));
+      log('   Trust Elements: ' + (contentPool.trustElements || []).length);
+      log('   Quiz: ' + (contentPool.quiz && contentPool.quiz.needed ? 'yes' : 'no'));
+      log('   Image Concepts: ' + (contentPool.imageConcepts || []).length);
+
+      checkCancel();
+
+      // Phase 3: Structure Planning — derive layout from content
+      log('');
+      log('═══ PHASE 3: STRUCTURE PLANNING ═══');
+      log('Deriving page structure from Content Pool...');
+      var storeKnowledgeStr = null;
+      try { var kb = await loadStoreKnowledge(); if (kb) storeKnowledgeStr = formatStoreKnowledge(kb); } catch(e) {}
+      var pageStructure = await runPipelineStep('Structure Planning', function() {
+        return planStructure(contentPool, storeKnowledgeStr, params.brand, lang);
+      });
+      if (pageStructure.pages) {
+        log('   ' + pageStructure.pages.length + ' pages planned:');
+        pageStructure.pages.forEach(function(pg) {
+          log('   - ' + pg.name + ': ' + (pg.sections || []).length + ' sections');
         });
       }
 
       checkCancel();
 
-      // Step 3.1: Text Building Blocks (Claude) — REQUIRED
       log('');
-      log('═══ PHASE 3: TEXTE ═══');
-      log('Step 3.1: Creating text building blocks...');
-      var originalTexts = '';
-      if (enhancedWebsiteData && enhancedWebsiteData.rawTextContent) originalTexts = enhancedWebsiteData.rawTextContent;
-      products.slice(0, 5).forEach(function(p) {
-        if (p.bulletPoints) originalTexts += '\n' + p.bulletPoints.join('\n');
-      });
-      var pipelineTextBlocks = await runPipelineStep('Text Blocks', function() {
-        return createTextBlocks(
-          pipelineContentStrategy, pipelineBrandVoice, pipelineProductAnalysis,
-          params.brand, lang, originalTexts
-        );
-      });
-      if (pipelineTextBlocks.pages) {
-        log('   Text blocks for ' + pipelineTextBlocks.pages.length + ' pages created');
-      }
+      log('═══ PHASE 4: STORE ASSEMBLY ═══');
 
-      checkCancel();
+      // Pass Content Pool and Structure to generateStore
+      referenceAnalysis = (referenceAnalysis || '') + '\n\n=== CONTENT POOL ===\n' + JSON.stringify(contentPool, null, 1);
+      referenceAnalysis = referenceAnalysis + '\n\n=== PAGE STRUCTURE ===\n' + JSON.stringify(pageStructure, null, 1);
+      referenceAnalysis = referenceAnalysis + '\n\n=== BRAND VOICE ===\n' + JSON.stringify(pipelineBrandVoice, null, 1);
 
-      // Step 3.2: Copywriting Review (Claude) — REQUIRED
-      log('Step 3.2: Reviewing and refining copywriting...');
-      pipelineTextBlocks = await runPipelineStep('Copywriting Review', function() {
-        return reviewCopywriting(pipelineTextBlocks, pipelineBrandVoice, params.brand, lang, originalTexts);
-      });
-      log('   Copywriting review complete');
-
-      checkCancel();
-
-      log('');
-      log('═══ PHASE 4: STORE GENERIERUNG ═══');
-
-      // Enrich the reference analysis with pipeline results
-      if (pipelineProductAnalysis) {
-        referenceAnalysis = (referenceAnalysis || '') + '\n\n=== PRODUCT ANALYSIS (from pipeline) ===\n' + JSON.stringify(pipelineProductAnalysis, null, 1);
-      }
-      if (pipelineBrandVoice) {
-        referenceAnalysis = (referenceAnalysis || '') + '\n\n=== BRAND VOICE (from pipeline) ===\n' + JSON.stringify(pipelineBrandVoice, null, 1);
-      }
-      if (pipelineContentStrategy) {
-        referenceAnalysis = (referenceAnalysis || '') + '\n\n=== CONTENT STRATEGY (from pipeline) ===\n' + JSON.stringify(pipelineContentStrategy, null, 1);
-      }
-      if (pipelineTextBlocks) {
-        referenceAnalysis = (referenceAnalysis || '') + '\n\n=== TEXT BUILDING BLOCKS (from pipeline) ===\n' + JSON.stringify(pipelineTextBlocks, null, 1);
-      }
+      // Legacy pipeline data for backward compat with generateStore
+      var pipelineProductAnalysis = {
+        categories: (contentPool.categories || []).map(function(c) { return { name: c.name, asins: c.asins || [] }; }),
+        brandUSPs: (contentPool.usps || []).map(function(u) { return u.text; }),
+        brandTone: pipelineBrandVoice.tone || 'professional',
+        whatMakesBrandSpecial: contentPool.brandStory && contentPool.brandStory.text ? contentPool.brandStory.text : '',
+      };
+      var pipelineContentStrategy = pageStructure;
+      var pipelineTextBlocks = { pages: (contentPool.categories || []).map(function(c) { return { pageId: c.name, heroBannerText: c.name }; }) };
 
       // Step 4: AI generation (with all pipeline data as enriched context)
       var storeData = await generateStore(
@@ -601,11 +602,27 @@ export default function App() {
       if (pipelineContentStrategy) storeData.pipelineContentStrategy = pipelineContentStrategy;
       if (pipelineTextBlocks) storeData.pipelineTextBlocks = pipelineTextBlocks;
 
-      // ASIN completeness check
-      if (storeData.asinCheck && storeData.asinCheck.missing && storeData.asinCheck.missing.length > 0) {
-        log('');
-        log('ASIN CHECK: ' + storeData.asinCheck.missing.length + ' ASINs fehlen! Klicke "ASINs" in der Topbar für Details.');
+      // ═══ PHASE 5: VALIDATION ═══
+      log('');
+      log('═══ PHASE 5: VALIDIERUNG ═══');
+      var validation = validateStoreQuality(storeData, params.asins, contentPool, lang);
+      if (validation.criticalCount > 0) {
+        log('CRITICAL: ' + validation.criticalCount + ' critical issues found:');
+        validation.issues.filter(function(i) { return i.severity === 'critical'; }).forEach(function(i) {
+          if (i.type === 'ASIN_MISSING') log('   ' + i.count + ' ASINs missing from store');
+          if (i.type === 'EMPTY_PAGE') log('   Page "' + i.page + '" has only ' + i.sections + ' content sections');
+        });
       }
+      if (validation.warningCount > 0) {
+        log('Warnings: ' + validation.warningCount);
+        validation.issues.filter(function(i) { return i.severity === 'warning'; }).slice(0, 5).forEach(function(i) {
+          if (i.type === 'WRONG_LANGUAGE') log('   Wrong language on ' + i.page + ' S' + i.section + ': "' + i.text + '"');
+          if (i.type === 'DUPLICATE_TEXT') log('   Duplicate text: "' + i.text + '" on ' + i.pages.join(' + '));
+        });
+      }
+      if (validation.valid) log('   Validation passed.');
+      storeData.validation = validation;
+      storeData.contentPool = contentPool;
 
       setStore(storeData);
       setCurPage(storeData.pages[0] ? storeData.pages[0].id : '');

@@ -23,117 +23,52 @@ export function formatStoreKnowledge(kb) {
   if (!kb) return '';
   var parts = [];
 
-  parts.push('=== STORE KNOWLEDGE BASE (from 21 analyzed top Brand Stores) ===');
-  parts.push('Use these insights as ORIENTATION, not as hard rules. Every store is unique.');
+  parts.push('=== REFERENCE STORE INSIGHTS (for MODULE selection only) ===');
+  parts.push('These insights come from 21 analyzed top Amazon Brand Stores.');
+  parts.push('Use them to decide HOW to present content (which module type),');
+  parts.push('NOT to decide WHAT content to show. Content comes from the Content Pool.');
   parts.push('');
 
-  // Key Insights
-  var ki = kb.keyInsightsForStoreBuilding || {};
-  if (ki.topRules) {
-    parts.push('KEY PRINCIPLES FROM SUCCESSFUL STORES:');
-    ki.topRules.forEach(function(r) {
-      if (typeof r === 'object') {
-        parts.push('- ' + r.rule + (r.evidence ? ' (Evidence: ' + r.evidence + ')' : ''));
-      } else {
-        parts.push('- ' + r);
-      }
-    });
-    parts.push('');
-  }
-  if (ki.commonMistakes) {
-    parts.push('COMMON MISTAKES TO AVOID:');
-    ki.commonMistakes.forEach(function(m) {
-      parts.push('- ' + (typeof m === 'object' ? m.mistake || m.description || JSON.stringify(m) : m));
-    });
-    parts.push('');
-  }
-
-  // Layout Patterns
+  // Section 1: USP Presentation
   var lp = kb.layoutPatterns || {};
+  parts.push('USP PRESENTATION in successful stores:');
+  parts.push('- 95% use Full-Width hero banner as first element');
+  parts.push('- 70% follow with a USP/trust bar (narrow full-width banner with 3-4 icons)');
   if (lp.mostUsedLayouts) {
-    parts.push('LAYOUT USAGE IN TOP STORES:');
-    lp.mostUsedLayouts.forEach(function(l) {
-      if (typeof l === 'object') {
-        parts.push('- ' + (l.layout || l.name || '?') + ': ' + (l.frequency || '') + ' — ' + (l.usage || l.purpose || ''));
-      }
+    lp.mostUsedLayouts.slice(0, 3).forEach(function(l) {
+      if (typeof l === 'object') parts.push('- ' + (l.layout || l.name || '') + ': ' + (l.usage || l.purpose || ''));
     });
-    parts.push('');
   }
+  parts.push('');
 
-  // Module Flow Patterns
-  var mf = kb.moduleFlowPatterns || {};
-  if (mf.patterns) {
-    parts.push('MODULE FLOW PATTERNS (how stores structure their pages):');
-    mf.patterns.forEach(function(p) {
-      if (typeof p === 'object') {
-        parts.push('- ' + (p.name || '?') + ' (' + (p.frequency || '?') + '): ' + (p.structure || p.description || ''));
-      }
-    });
-    parts.push('');
-  }
+  // Section 2: Category Navigation
+  parts.push('CATEGORY NAVIGATION in successful stores:');
+  parts.push('- std-2equal (2 equal tiles) used by 70% for category pairs');
+  parts.push('- For 3+ categories: 1-1-1 or grid layouts');
+  parts.push('- Category tiles typically: image with text overlay + CTA');
+  parts.push('');
 
-  // Hero Patterns
+  // Section 3: Hero Strategies
   var hp = kb.heroPatterns || {};
   if (hp.contentStrategies) {
-    parts.push('HERO BANNER STRATEGIES:');
+    parts.push('HERO STRATEGIES:');
     hp.contentStrategies.forEach(function(s) {
-      if (typeof s === 'object') {
-        parts.push('- ' + (s.strategy || '?') + ': ' + (s.effectiveness || '') + (s.example ? ' (e.g. ' + s.example + ')' : ''));
-      }
+      if (typeof s === 'object') parts.push('- ' + (s.strategy || '') + ': ' + (s.effectiveness || ''));
     });
     parts.push('');
   }
 
-  // Design Archetypes
-  var da = kb.designArchetypes || {};
-  if (da.archetypes) {
-    parts.push('DESIGN ARCHETYPES (for inspiration, not for copying):');
-    da.archetypes.forEach(function(a) {
-      if (typeof a === 'object') {
-        var chars = a.characteristics || {};
-        parts.push('- ' + (a.name || '?') + ' (' + (a.stores || []).join(', ') + '):');
-        if (chars.keyPattern) parts.push('  Pattern: ' + chars.keyPattern);
-        if (a.exampleFlow) parts.push('  Flow: ' + a.exampleFlow);
-      }
+  // Section 4: Module Flow
+  var mf = kb.moduleFlowPatterns || {};
+  if (mf.patterns) {
+    parts.push('PAGE FLOW PATTERNS:');
+    mf.patterns.slice(0, 3).forEach(function(p) {
+      if (typeof p === 'object') parts.push('- ' + (p.name || '') + ': ' + (p.structure || ''));
     });
     parts.push('');
   }
 
-  // CTA and Text Patterns
-  var ct = kb.ctaAndTextPatterns || {};
-  if (ct.claimStyles) {
-    parts.push('CLAIM/CTA STYLES IN TOP STORES:');
-    ct.claimStyles.forEach(function(c) {
-      if (typeof c === 'object') {
-        parts.push('- ' + (c.type || '?') + ' (' + (c.frequency || '?') + '): ' + ((c.examples || []).slice(0, 3).join(', ')));
-      }
-    });
-    parts.push('');
-  }
-
-  // Navigation Depth
-  var nd = kb.navigationDepthAnalysis || {};
-  if (nd.tiers) {
-    parts.push('NAVIGATION DEPTH:');
-    nd.tiers.forEach(function(t) {
-      if (typeof t === 'object') {
-        parts.push('- ' + (t.tier || '?') + ': ' + (t.insight || ''));
-      }
-    });
-    parts.push('');
-  }
-
-  // Quantitative overview
-  var qo = kb.quantitativeOverview || {};
-  if (qo.brandImages) {
-    var bi = qo.brandImages;
-    parts.push('QUANTITATIVE INSIGHTS:');
-    parts.push('- Average brand images per store: ' + (bi.average || '?') + ' (median: ' + (bi.median || '?') + ')');
-    parts.push('- Sweet spot: 9-16 high-quality brand images');
-    parts.push('');
-  }
-
-  parts.push('=== END STORE KNOWLEDGE BASE ===');
+  parts.push('=== END REFERENCE STORE INSIGHTS ===');
   return parts.join('\n');
 }
 import { parseBrandStoreHTML, combineStorePages } from './brandStoreParser';
