@@ -216,6 +216,9 @@ export default function App() {
     setGenerating(true);
     setGenDone(false);
     setGenLog([]);
+
+    // Keep tab alive during long generation (prevents browser from freezing inactive tabs)
+    var keepAlive = setInterval(function() { /* no-op tick keeps the tab active */ }, 1000);
     setSel(null);
     setRequestedAsins(params.asins.slice());
     lastGenParams.current = params;
@@ -701,13 +704,9 @@ export default function App() {
         }
       }
     } finally {
+      clearInterval(keepAlive);
       setGenDone(true);
-      var wasCancelled = genCancelRef.current;
-      // Don't auto-close — let user close via button (or auto-close after 12s if successful)
-      var hasErr = genLog.some(function(m) { return m.indexOf('ERROR:') >= 0 || m.indexOf('CRITICAL:') >= 0; });
-      if (!hasErr && !wasCancelled) {
-        setTimeout(function() { setGenerating(false); }, 12000);
-      }
+      // NEVER auto-close the modal. User must click OK or Close.
     }
   };
 
