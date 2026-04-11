@@ -248,35 +248,56 @@ export default function App() {
           });
           if (ciImages.length > 0) {
             log('Analyzing brand CI from ' + ciImages.length + ' images across ' + products.length + ' products...');
-            // Send in batches of 8 (Gemini limit per call), collect all results
+            // Send in batches — one batch per product (all images of one product together)
+            // This gives Gemini context: "these are all images of the SAME product"
             var allCiResults = [];
-            for (var batch = 0; batch < ciImages.length; batch += 8) {
-              var batchImages = ciImages.slice(batch, batch + 8);
-              var batchNum = Math.floor(batch / 8) + 1;
-              var totalBatches = Math.ceil(ciImages.length / 8);
-              log('   CI batch ' + batchNum + '/' + totalBatches + ' (' + batchImages.length + ' images)...');
-              try {
-                var batchCI = await analyzeBrandCI(batchImages, params.brand);
-                allCiResults.push(batchCI);
-              } catch (batchErr) {
-                log('   Batch ' + batchNum + ' failed: ' + batchErr.message);
+            var batchNum = 0;
+            for (var pi = 0; pi < products.length; pi++) {
+              var pImgs = (products[pi].images || []).map(function(img) {
+                var u = typeof img === 'string' ? img : (img.url || '');
+                return u ? { url: u, context: products[pi].name } : null;
+              }).filter(Boolean);
+              if (pImgs.length === 0) continue;
+              batchNum++;
+              log('   CI: product ' + batchNum + '/' + products.length + ' (' + pImgs.length + ' images) — ' + (products[pi].name || '').slice(0, 40));
+              // Retry up to 2 times per product
+              for (var attempt = 0; attempt < 2; attempt++) {
+                try {
+                  var batchCI = await analyzeBrandCI(pImgs, params.brand);
+                  if (batchCI && (batchCI.primaryColors || batchCI.visualMood)) {
+                    allCiResults.push(batchCI);
+                  }
+                  break; // success
+                } catch (batchErr) {
+                  if (attempt === 0) {
+                    log('     Retry...');
+                    await new Promise(function(r) { setTimeout(r, 2000); });
+                  }
+                }
+              }
+              // Brief pause between products to avoid rate limiting
+              if (pi < products.length - 1) {
+                await new Promise(function(r) { setTimeout(r, 500); });
               }
             }
-            // Merge all batch results into one CI profile
+            // Merge all product CI results into one profile
             if (allCiResults.length > 0) {
-              productCI = allCiResults[0]; // Start with first batch
-              // Merge colors from all batches
+              productCI = allCiResults[0];
               var allColors = {};
+              var allMoods = {};
               allCiResults.forEach(function(r) {
                 (r.primaryColors || []).forEach(function(c) { allColors[c] = (allColors[c] || 0) + 1; });
                 (r.secondaryColors || []).forEach(function(c) { allColors[c] = (allColors[c] || 0) + 1; });
+                if (r.visualMood) allMoods[r.visualMood] = (allMoods[r.visualMood] || 0) + 1;
               });
-              // Most frequent colors become primary
               var sortedColors = Object.entries(allColors).sort(function(a, b) { return b[1] - a[1]; });
-              productCI.primaryColors = sortedColors.slice(0, 5).map(function(e) { return e[0]; });
-              log('   Amazon CI: ' + (productCI.primaryColors || []).join(', ') + ' | ' + (productCI.visualMood || 'N/A'));
-              log('   Analyzed ' + allCiResults.length + ' batches, ' + ciImages.length + ' total images');
-              if (productCI.designerNotes) log('   Designer notes: ' + productCI.designerNotes);
+              productCI.primaryColors = sortedColors.slice(0, 8).map(function(e) { return e[0]; });
+              // Most common mood
+              var sortedMoods = Object.entries(allMoods).sort(function(a, b) { return b[1] - a[1]; });
+              if (sortedMoods.length > 0) productCI.visualMood = sortedMoods[0][0];
+              log('   CI complete: ' + allCiResults.length + '/' + products.length + ' products analyzed');
+              log('   Colors: ' + productCI.primaryColors.join(', '));
+              if (productCI.designerNotes) log('   Notes: ' + productCI.designerNotes);
             }
           }
         } catch (ciErr) {

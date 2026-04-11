@@ -151,7 +151,7 @@ export async function scrapeWebsite(url) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ url: url }),
-  }, 30000); // 30s timeout
+  }, 120000); // 2min timeout (scrapes many pages)
   if (!resp.ok) {
     var e = await resp.json().catch(function() { return {}; });
     throw new Error(e.error || 'Failed to scrape website');
