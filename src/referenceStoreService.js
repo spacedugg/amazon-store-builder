@@ -27,8 +27,8 @@ export function formatStoreKnowledge(kb) {
   parts.push('These insights come from 21 analyzed top Amazon Brand Stores.');
   parts.push('Use them to decide HOW to present content (which section type, which layout),');
   parts.push('NOT to decide WHAT content to show. Content comes from the Content Pool.');
-  parts.push('NOTE: In this system, "section" and "module" mean the same thing.');
-  parts.push('A section/module contains tiles. A page contains sections.');
+  parts.push('NOTE: Terminology: sections contain tiles, pages contain sections.');
+  parts.push('A section contains tiles. A page contains sections.');
   parts.push('');
 
   // Section 1: USP Presentation

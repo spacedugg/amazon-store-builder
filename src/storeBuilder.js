@@ -675,7 +675,7 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
 
   var system = [
     'You are an Amazon Brand Store layout designer. You create visually compelling, interconnected store pages.',
-    'You think in IMAGES. 90% of modules are image-based. Tiles within a section RELATE to each other.',
+    'You think in IMAGES. 90% of sections are image-based. Tiles within a section RELATE to each other.',
     '',
     'VALID LAYOUTS (id, name, tile count):',
     validLayouts.join(', '),
@@ -728,7 +728,7 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
     '  "Continuation of the lifestyle scene above, now focusing on the product details"',
     '  "Visual counterpart to the hero: same scene, different angle/focus"',
     '- Section transitions should flow naturally: broad (brand world) → specific (product features) → broad (lifestyle) → specific (purchase).',
-    '- The ENTIRE PAGE should read like a visual narrative from top to bottom, not a random collection of modules.',
+    '- The ENTIRE PAGE should read like a visual narrative from top to bottom, not a random collection of sections.',
     '',
     'PRODUCT HIERARCHY & EQUAL SIZING:',
     '- Products of the SAME hierarchy level (same category, same importance) MUST get EQUAL tile sizes.',
@@ -1031,13 +1031,13 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
         '- All product showcasing happens on CATEGORY PAGES, not on the homepage.',
       ].join('\n')
       : [
-        '- ALWAYS prioritize individual image modules (shoppable_image, lifestyle, creative) over product_grids.',
+        '- ALWAYS prioritize individual image sections (shoppable_image, lifestyle, creative) over product_grids.',
         '- Feature the BEST SELLERS from this category as individual tiles with rich design.',
         '- product_grids are a SUPPLEMENT, not a replacement. They go BELOW the curated modules.',
         pageProducts.length <= 8
-          ? '- With ' + pageProducts.length + ' products: Each product can get individual attention. Use modules, no product_grid needed unless explicitly helpful.'
+          ? '- With ' + pageProducts.length + ' products: Each product can get individual attention. Use sections, no product_grid needed unless explicitly helpful.'
           : pageProducts.length <= 30
-            ? '- With ' + pageProducts.length + ' products: Feature top products individually in modules. Use product_grid at the end for the full catalog.'
+            ? '- With ' + pageProducts.length + ' products: Feature top products individually in sections. Use product_grid at the end for the full catalog.'
             : '- With ' + pageProducts.length + ' products: Pick the best seller from each subcategory for individual tiles. Product_grids below each section show remaining products.',
       ].join('\n'),
     '',
@@ -1232,7 +1232,7 @@ export async function aiGeneratePageLayout(pageName, pageProducts, brand, lang, 
             : '(No additional sections for minimal tier.)',
           '',
           '=== HOMEPAGE NAVIGATION PRINCIPLE ===',
-          'The homepage exists to SHOWCASE and LINK TO all subpages. Every section or module should ideally contain',
+          'The homepage exists to SHOWCASE and LINK TO all subpages. Every section should ideally contain',
           'a clickable element (linkUrl) that navigates to a subpage. Think of it as a visual sitemap:',
           '- Category tiles that link to their category page',
           '- A shoppable bestseller image that links to its category page',
@@ -1526,7 +1526,7 @@ export async function aiRefineStore(store, command, brand, lang) {
     'Valid image categories: store_hero, benefit, product, creative, lifestyle, text_image',
     'Every image tile should have an imageCategory. When adding/updating tiles, always include imageCategory.',
     '',
-    'Available module patterns for inspiration:',
+    'Available section patterns for inspiration:',
     JSON.stringify(MODULE_BAUKASTEN, null, 1),
     '',
     'Return a JSON object describing the changes to make. Possible operations:',
@@ -2884,7 +2884,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       var prod = productMap[a];
       log('  ' + a + ' (' + (prod ? prod.name.slice(0, 40) : 'unknown') + ')');
     });
-    log('These ASINs should be added to a Product Grid or module.');
+    log('These ASINs should be added to a Product Grid or section.');
   } else {
     log('ASIN check passed: all ' + inputAsins.length + ' ASINs appear in the store.');
   }
