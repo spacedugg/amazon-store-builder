@@ -23,10 +23,12 @@ export function formatStoreKnowledge(kb) {
   if (!kb) return '';
   var parts = [];
 
-  parts.push('=== REFERENCE STORE INSIGHTS (for MODULE selection only) ===');
+  parts.push('=== REFERENCE STORE INSIGHTS (for layout/section selection only) ===');
   parts.push('These insights come from 21 analyzed top Amazon Brand Stores.');
-  parts.push('Use them to decide HOW to present content (which module type),');
+  parts.push('Use them to decide HOW to present content (which section type, which layout),');
   parts.push('NOT to decide WHAT content to show. Content comes from the Content Pool.');
+  parts.push('NOTE: In this system, "section" and "module" mean the same thing.');
+  parts.push('A section/module contains tiles. A page contains sections.');
   parts.push('');
 
   // Section 1: USP Presentation
