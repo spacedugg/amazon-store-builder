@@ -77,6 +77,63 @@ async function loadCheckpoint(id) {
   } catch (e) { return null; }
 }
 
+// ─── KNOWLEDGE-BASE TEXT & STYLE PATTERNS ───
+// Extracts style-level insights from the 23-store knowledge base that are
+// NOT brand-specific (claim style, USP count, headline length, text-on-image
+// frequency). Used to guide Step 2, Step 4 and Step 5 of the wizard.
+// These are INSPIRATION, not rules — the user overrides everything.
+function deriveKbTextPatterns(kb) {
+  if (!kb) return null;
+  var cta = kb.ctaAndTextPatterns || {};
+  var hp = kb.heroPatterns || {};
+  var lp = kb.layoutPatterns || {};
+  var mf = kb.moduleFlowPatterns || {};
+
+  // Parse layout usage into a quick lookup: layoutId → typical tile count (from name)
+  var layoutCellHints = {};
+  (lp.mostUsedLayouts || []).forEach(function(l) {
+    var name = (l && (l.layout || l.name)) || '';
+    var id = name.toLowerCase().replace(/\s+/g, '-');
+    layoutCellHints[id] = { usage: l.usage || '', purpose: l.purpose || '' };
+  });
+
+  return {
+    claimStyles: cta.claimStyles || [],
+    ctaInsight: (cta.ctaButtons && cta.ctaButtons.insight) || '',
+    textOnImageInsight: (cta.textOnImageFrequency && cta.textOnImageFrequency.insight) || '',
+    textOnImageFrequency: cta.textOnImageFrequency || null,
+    heroStrategies: hp.contentStrategies || [],
+    layoutHints: layoutCellHints,
+    pageFlows: (mf.patterns || []).slice(0, 5),
+  };
+}
+
+// How many cells a given layout has (for bidirectional content↔layout sync)
+var LAYOUT_CELL_COUNT = {
+  '1': 1,
+  'std-2equal': 2, 'vh-2equal': 2,
+  'lg-2stack': 3, '2stack-lg': 3, 'vh-w2s': 3, 'vh-2sw': 3,
+  'lg-w2s': 4, 'w2s-lg': 4, '2x2wide': 4,
+  'lg-4grid': 5, '4grid-lg': 5,
+  '2s-4grid': 6, '4grid-2s': 6,
+  '4x2grid': 8,
+};
+function layoutCellsFor(layoutId) {
+  return LAYOUT_CELL_COUNT[layoutId] || 2;
+}
+
+// Suggest an alternative layout when USP count changes. Returns the best
+// matching layout id for the given cell count.
+function suggestLayoutForCells(cells) {
+  if (cells <= 1) return '1';
+  if (cells === 2) return 'std-2equal';
+  if (cells === 3) return 'vh-w2s';
+  if (cells === 4) return '2x2wide';
+  if (cells === 5) return 'lg-4grid';
+  if (cells === 6) return '2s-4grid';
+  return '4x2grid';
+}
+
 // Empty initial state for a fresh wizard run
 function emptyData() {
   return {
@@ -108,6 +165,9 @@ function emptyData() {
     pageStructure: null,
     // Step 6: Generated pages
     generatedPages: null,
+    // Knowledge base (loaded once, reused across Steps 2, 4, 5, 6)
+    knowledgeBase: null,
+    kbTextPatterns: null,
   };
 }
 
@@ -538,18 +598,38 @@ function StepScraping({ data, updateData, log, addLog, running, setRunning, erro
         addLog('✓ ' + websiteAnalyses.length + ' Website-Seiten analysiert');
       }
 
+      // 6. Load knowledge base (23 reference stores) so that Steps 2, 4, 5, 6
+      // can use text/style/layout patterns as INSPIRATION throughout.
+      addLog('');
+      addLog('═══ Wissensdatenbank laden (23 Top-Stores) ═══');
+      var kb = null;
+      var kbTextPatterns = null;
+      try {
+        kb = await loadStoreKnowledge();
+        if (kb) {
+          kbTextPatterns = deriveKbTextPatterns(kb);
+          addLog('✓ Wissensdatenbank geladen: ' + ((kbTextPatterns && kbTextPatterns.claimStyles) || []).length + ' Claim-Styles, ' + ((kbTextPatterns && kbTextPatterns.pageFlows) || []).length + ' Page-Flow-Patterns');
+        } else {
+          addLog('⚠ Wissensdatenbank nicht verfügbar (Steps 2-6 arbeiten ohne KB-Patterns)');
+        }
+      } catch (kbErr) {
+        addLog('⚠ Wissensdatenbank-Fehler: ' + kbErr.message);
+      }
+
       addLog('');
       addLog('═══ SCRAPING KOMPLETT ═══');
       setFinished(true);
       setRunning(false);
 
-      // Auto-advance to brand analysis step with gathered data
+      // Auto-advance to brand analysis step with gathered data + KB
       onNext({
         products: products,
         websiteData: websiteData,
         productCI: productCI,
         productAnalyses: productAnalyses,
         websiteAnalyses: websiteAnalyses,
+        knowledgeBase: kb,
+        kbTextPatterns: kbTextPatterns,
       });
     } catch (e) {
       setRunning(false);
@@ -812,6 +892,38 @@ function StepBrandAnalysis({ data, updateData, onNext, onBack }) {
                   );
                 })}
               </div>
+            </div>
+          )}
+
+          {/* Knowledge Base Style Patterns (INSPIRATION from 23 top stores) */}
+          {data.kbTextPatterns && (
+            <div style={{ padding: 14, background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 8, marginBottom: 12 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 4, color: '#1e40af' }}>Style-Patterns aus 23 Top-Stores (Inspiration)</div>
+              <div style={{ fontSize: 11, color: '#1e40af', marginBottom: 8 }}>
+                Diese Patterns sind INSPIRATION, keine Regel. Sie helfen dir, Text-Stil, USP-Anzahl und Hero-Strategien an erfolgreichen Stores zu orientieren.
+              </div>
+              {(data.kbTextPatterns.claimStyles || []).length > 0 && (
+                <div style={{ marginBottom: 8 }}>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: '#334155', marginBottom: 2 }}>Hero-Claim-Stile (aus KB):</div>
+                  {data.kbTextPatterns.claimStyles.map(function(cs, i) {
+                    return (
+                      <div key={i} style={{ fontSize: 10, color: '#475569', marginLeft: 8, marginBottom: 2 }}>
+                        • <strong>{cs.type}</strong> ({cs.frequency || '?'}) — z.B. {(cs.examples || []).slice(0, 2).join(' · ')}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+              {data.kbTextPatterns.textOnImageInsight && (
+                <div style={{ fontSize: 10, color: '#475569', marginBottom: 4 }}>
+                  <strong>Text-auf-Bild:</strong> {data.kbTextPatterns.textOnImageInsight}
+                </div>
+              )}
+              {data.kbTextPatterns.ctaInsight && (
+                <div style={{ fontSize: 10, color: '#475569' }}>
+                  <strong>CTA-Nutzung:</strong> {data.kbTextPatterns.ctaInsight}
+                </div>
+              )}
             </div>
           )}
 
@@ -1112,11 +1224,39 @@ function StepContent({ data, updateData, onNext, onBack }) {
     if (activeIdx >= next.length) setActiveIdx(Math.max(0, next.length - 1));
   };
 
+  // Detect expected tile counts from pageStructure (if step 5 was already visited)
+  // This creates the "Layout informs Content" direction: if the user set up a
+  // 4-tile USP section in Step 5, we nudge them to have exactly 4 USPs here.
+  var structureHints = {};
+  (data.pageStructure || []).forEach(function(ps) {
+    var expectedUspCount = 0;
+    (ps.sections || []).forEach(function(sec) {
+      var purpose = (sec.purpose || '').toLowerCase();
+      if (purpose.indexOf('usp') >= 0 || purpose.indexOf('benefit') >= 0) {
+        expectedUspCount = Math.max(expectedUspCount, layoutCellsFor(sec.layoutId));
+      }
+    });
+    if (expectedUspCount > 0) structureHints[ps.id] = { expectedUspCount: expectedUspCount };
+  });
+
   return (
     <div>
       <div style={{ fontSize: 13, color: '#334155', marginBottom: 12 }}>
-        <strong>Checkpoint:</strong> Pro Seite: Headline, USPs, Bild-Ideen, CTA. <strong>Hier noch KEINE Layouts</strong> — nur der Inhalt. Die Struktur kommt in Schritt 5.
+        <strong>Checkpoint:</strong> Pro Seite: Headline, USPs, Bild-Ideen, CTA.{' '}
+        <strong>Content ↔ Layout beeinflussen sich gegenseitig</strong> — du kannst jederzeit zu Schritt 5 springen und ein Layout wählen, das dich zurück nach hier führt, um Content anzupassen.
       </div>
+
+      {/* KB inspiration bar (shown once at the top for the whole step) */}
+      {data.kbTextPatterns && (
+        <div style={{ padding: 10, background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 6, marginBottom: 12, fontSize: 11, color: '#1e40af' }}>
+          <strong>Inspiration aus 23 Top-Stores:</strong>
+          <span style={{ marginLeft: 8 }}>
+            Hero-Claim-Stile: {(data.kbTextPatterns.claimStyles || []).map(function(c) { return c.type + ' (' + c.frequency + ')'; }).join(' · ')}.{' '}
+          </span>
+          {data.kbTextPatterns.textOnImageInsight && <span>{data.kbTextPatterns.textOnImageInsight} </span>}
+          {data.kbTextPatterns.ctaInsight && <span>{data.kbTextPatterns.ctaInsight}</span>}
+        </div>
+      )}
 
       <div style={{ display: 'flex', gap: 12 }}>
         {/* Page list (sidebar) */}
@@ -1160,13 +1300,41 @@ function StepContent({ data, updateData, onNext, onBack }) {
 
             <div style={{ padding: 12, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 8, marginBottom: 10 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
-                <div style={{ fontSize: 11, color: '#64748b', fontWeight: 600 }}>USPs auf dieser Seite</div>
+                <div style={{ fontSize: 11, color: '#64748b', fontWeight: 600 }}>
+                  USPs auf dieser Seite
+                  {structureHints[active.id] && (
+                    <span style={{ marginLeft: 8, color: (active.usps || []).length === structureHints[active.id].expectedUspCount ? '#16a34a' : '#d97706', fontWeight: 600 }}>
+                      Layout verlangt {structureHints[active.id].expectedUspCount}
+                      {' '}— aktuell {(active.usps || []).length}
+                    </span>
+                  )}
+                </div>
                 <button className="btn" style={{ fontSize: 10 }} onClick={function() { addUspToPage(activeIdx); }}>+ USP</button>
               </div>
+              {/* Layout-Content mismatch warning with auto-fix buttons */}
+              {structureHints[active.id] && (active.usps || []).length !== structureHints[active.id].expectedUspCount && (
+                <div style={{ padding: '6px 8px', background: '#fffbeb', border: '1px solid #fde68a', borderRadius: 4, fontSize: 10, color: '#92400e', marginBottom: 6 }}>
+                  Das Layout in Schritt 5 hat {structureHints[active.id].expectedUspCount} Kacheln,
+                  der Content hier hat {(active.usps || []).length} USP{(active.usps || []).length === 1 ? '' : 's'}.
+                  {(active.usps || []).length < structureHints[active.id].expectedUspCount && (
+                    <button className="btn" style={{ fontSize: 10, marginLeft: 6 }} onClick={function() {
+                      var need = structureHints[active.id].expectedUspCount - (active.usps || []).length;
+                      var next = (active.usps || []).slice();
+                      for (var k = 0; k < need; k++) next.push('');
+                      updatePage(activeIdx, { usps: next });
+                    }}>+ {structureHints[active.id].expectedUspCount - (active.usps || []).length} leere Slots hinzufügen</button>
+                  )}
+                  {(active.usps || []).length > structureHints[active.id].expectedUspCount && (
+                    <button className="btn" style={{ fontSize: 10, marginLeft: 6 }} onClick={function() {
+                      updatePage(activeIdx, { usps: (active.usps || []).slice(0, structureHints[active.id].expectedUspCount) });
+                    }}>Auf {structureHints[active.id].expectedUspCount} kürzen</button>
+                  )}
+                </div>
+              )}
               {(active.usps || []).map(function(usp, ui) {
                 return (
                   <div key={ui} style={{ display: 'flex', gap: 4, marginBottom: 4 }}>
-                    <input className="input" style={{ flex: 1, fontSize: 11 }} value={usp} onChange={function(e) { updateUspOnPage(activeIdx, ui, e.target.value); }} />
+                    <input className="input" style={{ flex: 1, fontSize: 11 }} value={usp} onChange={function(e) { updateUspOnPage(activeIdx, ui, e.target.value); }} placeholder={'USP ' + (ui + 1)} />
                     <button className="btn" style={{ fontSize: 10 }} onClick={function() { removeUspFromPage(activeIdx, ui); }}>×</button>
                   </div>
                 );
@@ -1366,6 +1534,21 @@ function StepStructure({ data, updateData, onNext, onBack }) {
   var [activeIdx, setActiveIdx] = useState(0);
   var active = pages[activeIdx] || null;
 
+  // Sync USP count on the corresponding content page when layout changes
+  // This is the "Layout informs Content" direction of the bidirectional loop.
+  var syncContentUspsToLayout = function(pageId, expectedCount) {
+    var nextContent = (data.pageContent || []).slice();
+    var idx = nextContent.findIndex(function(pc) { return pc.id === pageId; });
+    if (idx < 0) return;
+    var pc = Object.assign({}, nextContent[idx]);
+    var usps = (pc.usps || []).slice();
+    while (usps.length < expectedCount) usps.push('');
+    if (usps.length > expectedCount) usps = usps.slice(0, expectedCount);
+    pc.usps = usps;
+    nextContent[idx] = pc;
+    updateData({ pageContent: nextContent });
+  };
+
   var updatePageSections = function(pageIdx, sections) {
     var next = pages.slice();
     next[pageIdx] = Object.assign({}, next[pageIdx], { sections: sections });
@@ -1455,17 +1638,42 @@ function StepStructure({ data, updateData, onNext, onBack }) {
             <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 8 }}>{active.name}</div>
             {(active.sections || []).map(function(sec, si) {
               var layoutMeta = WIZARD_LAYOUTS.find(function(l) { return l.id === sec.layoutId; }) || WIZARD_LAYOUTS[0];
+              var cells = layoutMeta.cells;
+              var purposeLower = (sec.purpose || '').toLowerCase();
+              var isUspSection = purposeLower.indexOf('usp') >= 0 || purposeLower.indexOf('benefit') >= 0;
+              // Determine current content state for this page (for mismatch warnings)
+              var pc = (data.pageContent || []).find(function(x) { return x.id === active.id; });
+              var contentUspCount = pc ? (pc.usps || []).length : 0;
+              var uspMismatch = isUspSection && pc && contentUspCount !== cells;
+
               return (
                 <div key={sec.id || si} style={{ padding: 10, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 8, marginBottom: 8 }}>
                   <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: 6 }}>
                     <input className="input" style={{ flex: 1, fontSize: 11, fontWeight: 600 }} value={sec.purpose || ''} onChange={function(e) { updateSectionPurpose(activeIdx, si, e.target.value); }} />
                     <select className="input" style={{ width: 180, fontSize: 11 }} value={sec.layoutId} onChange={function(e) { changeLayout(activeIdx, si, e.target.value); }}>
-                      {WIZARD_LAYOUTS.map(function(l) { return <option key={l.id} value={l.id}>{l.name} ({l.cells})</option>; })}
+                      {WIZARD_LAYOUTS.map(function(l) {
+                        var hint = data.kbTextPatterns && data.kbTextPatterns.layoutHints && data.kbTextPatterns.layoutHints[l.id];
+                        return <option key={l.id} value={l.id}>{l.name} ({l.cells}){hint ? ' · ' + hint.usage : ''}</option>;
+                      })}
                     </select>
                     <button className="btn" style={{ fontSize: 10 }} onClick={function() { moveSection(activeIdx, si, -1); }} disabled={si === 0}>↑</button>
                     <button className="btn" style={{ fontSize: 10 }} onClick={function() { moveSection(activeIdx, si, 1); }} disabled={si === active.sections.length - 1}>↓</button>
                     <button className="btn" style={{ fontSize: 10 }} onClick={function() { removeSection(activeIdx, si); }}>×</button>
                   </div>
+
+                  {/* Mismatch warning: layout has N cells, content has M USPs */}
+                  {uspMismatch && (
+                    <div style={{ padding: '6px 8px', background: '#fffbeb', border: '1px solid #fde68a', borderRadius: 4, fontSize: 10, color: '#92400e', marginBottom: 6 }}>
+                      Layout hat {cells} Kacheln, Content hat aber {contentUspCount} USP{contentUspCount === 1 ? '' : 's'}.{' '}
+                      <button className="btn" style={{ fontSize: 10, marginLeft: 4 }} onClick={function() { syncContentUspsToLayout(active.id, cells); }}>
+                        Content auf {cells} anpassen
+                      </button>
+                      <button className="btn" style={{ fontSize: 10, marginLeft: 4 }} onClick={function() { changeLayout(activeIdx, si, suggestLayoutForCells(contentUspCount)); }}>
+                        Layout auf {contentUspCount} Kacheln setzen
+                      </button>
+                      <button className="btn" style={{ fontSize: 10, marginLeft: 4 }} onClick={onBack}>← Content editieren</button>
+                    </div>
+                  )}
 
                   {/* Tiles */}
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 6 }}>
