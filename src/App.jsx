@@ -13,6 +13,7 @@ import Canvas from './components/Canvas';
 import PropertiesPanel from './components/PropertiesPanel';
 import AsinPanel from './components/AsinPanel';
 import GenerateModal from './components/GenerateModal';
+import GenerationWizard from './components/GenerationWizard';
 import ProgressModal from './components/ProgressModal';
 import AIChat from './components/AIChat';
 import PriceCalculator from './components/PriceCalculator';
@@ -45,6 +46,9 @@ export default function App() {
   var [sel, setSel] = useState(null);
   var [clipboardSection, setClipboardSection] = useState(null);
   var [showGen, setShowGen] = useState(false);
+  var [showWizard, setShowWizard] = useState(false);
+  var [resumeWizardId, setResumeWizardId] = useState(null);
+  var [activeCheckpoints, setActiveCheckpoints] = useState([]);
   var [showAsins, setShowAsins] = useState(false);
   var [showPrice, setShowPrice] = useState(false);
   var [generating, setGenerating] = useState(false);
@@ -1249,11 +1253,26 @@ export default function App() {
     hasAutoSave = autoData && autoData.pages && autoData.pages.length > 0;
   } catch(e) { /* ignore */ }
 
+  // Load any unfinished wizard checkpoints so the user can resume
+  useEffect(function() {
+    fetch('/api/wizard-state').then(function(r) { return r.ok ? r.json() : null; }).then(function(json) {
+      if (json && json.items) setActiveCheckpoints(json.items);
+    }).catch(function() { /* ignore */ });
+  }, [showWizard]);
+
+  // Wizard completion: install generated store into the editor
+  var handleWizardComplete = useCallback(function(storeObj) {
+    if (!storeObj || !storeObj.pages) return;
+    setStore(storeObj);
+    setCurPage(storeObj.pages[0] ? storeObj.pages[0].id : '');
+    setSel(null);
+  }, []);
+
   return (
     <div className="app-root">
       <Topbar
         store={store}
-        onGenerate={function() { setShowGen(true); }}
+        onGenerate={function() { setResumeWizardId(null); setShowWizard(true); }}
         onExport={handleExport}
         onSave={handleSave}
         viewMode={viewMode}
@@ -1311,7 +1330,7 @@ export default function App() {
           uiLang={uiLang}
           hasAutoSave={hasAutoSave}
           onLoadAutoSave={handleLoadAutoSave}
-          onGenerate={function() { setShowGen(true); }}
+          onGenerate={function() { setResumeWizardId(null); setShowWizard(true); }}
           onGenerateWireframes={handleGenerateWireframes}
           onDeleteWireframes={handleDeleteWireframes}
           onStopWireframes={handleStopWireframes}
@@ -1357,6 +1376,29 @@ export default function App() {
           googleDriveUrl={store.googleDriveUrl || ''}
           onGoogleDriveChange={function(url) { setStoreWithUndo(function(s) { return Object.assign({}, s, { googleDriveUrl: url }); }); }}
         />
+      )}
+
+      {showWizard && (
+        <GenerationWizard
+          resumeId={resumeWizardId}
+          onComplete={function(storeObj) { handleWizardComplete(storeObj); setShowWizard(false); setResumeWizardId(null); }}
+          onCancel={function() { setShowWizard(false); setResumeWizardId(null); }}
+        />
+      )}
+
+      {/* Resume checkpoint banner — shown on the empty-state canvas only */}
+      {!showWizard && !store.pages.length && activeCheckpoints.length > 0 && (
+        <div style={{ position: 'fixed', bottom: 16, right: 16, background: '#fff', border: '1px solid #FF9900', borderRadius: 10, padding: 14, boxShadow: '0 10px 30px rgba(0,0,0,.15)', maxWidth: 360, zIndex: 40 }}>
+          <div style={{ fontSize: 12, fontWeight: 700, marginBottom: 4, color: '#0f172a' }}>Unfertige Generierungen</div>
+          <div style={{ fontSize: 11, color: '#64748b', marginBottom: 8 }}>Du hast {activeCheckpoints.length} Wizard-Lauf{activeCheckpoints.length === 1 ? '' : 'e'}, der unterbrochen wurde. An welcher Stelle weitermachen?</div>
+          {activeCheckpoints.slice(0, 4).map(function(cp) {
+            return (
+              <button key={cp.id} className="btn" style={{ display: 'block', width: '100%', fontSize: 11, marginBottom: 4, textAlign: 'left' }} onClick={function() { setResumeWizardId(cp.id); setShowWizard(true); }}>
+                {cp.brandName || '(Ohne Namen)'} — Schritt {cp.step + 1}
+              </button>
+            );
+          })}
+        </div>
       )}
 
       {generating && (
