@@ -73,6 +73,13 @@ async function migrate() {
   try {
     await db.execute({ sql: `ALTER TABLE stores ADD COLUMN checks_json TEXT DEFAULT NULL` });
   } catch (e) { /* column already exists */ }
+  // Generation wizard checkpoint state — stores the full wizard data at each step
+  try {
+    await db.execute({ sql: `ALTER TABLE stores ADD COLUMN generation_state TEXT DEFAULT NULL` });
+  } catch (e) { /* column already exists */ }
+  try {
+    await db.execute({ sql: `ALTER TABLE stores ADD COLUMN generation_step INTEGER DEFAULT NULL` });
+  } catch (e) { /* column already exists */ }
 }
 
 module.exports = { getClient: getClient, migrate: migrate };
