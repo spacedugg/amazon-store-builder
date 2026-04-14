@@ -93,6 +93,7 @@ async function analyzeImage(imageUrl, context) {
     generationConfig: {
       temperature: 0.2,
       maxOutputTokens: 500,
+      responseMimeType: 'application/json',
     },
   };
 
@@ -147,7 +148,7 @@ async function analyzeImageViaDownload(imageUrl, context) {
         { inline_data: { mime_type: mimeType, data: base64 } },
       ],
     }],
-    generationConfig: { temperature: 0.2, maxOutputTokens: 500 },
+    generationConfig: { temperature: 0.2, maxOutputTokens: 500, responseMimeType: 'application/json' },
   };
 
   var resp = await fetch(GEMINI_URL + '?key=' + GEMINI_KEY, {

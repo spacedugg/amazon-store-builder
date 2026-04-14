@@ -6,7 +6,7 @@
     "api/amazon-search.js": { "maxDuration": 300 },
     "api/amazon-brand-discover.js": { "maxDuration": 60 },
     "api/stores.js": { "maxDuration": 30 },
-    "api/scrape-website.js": { "maxDuration": 120 },
+    "api/scrape-website.js": { "maxDuration": 300 },
     "api/crawl-brand-store.js": { "maxDuration": 60 },
     "api/analyze-images.js": { "maxDuration": 60 },
     "api/analyze-ci.js": { "maxDuration": 60 },

@@ -288,23 +288,50 @@ export default function App() {
                 await new Promise(function(r) { setTimeout(r, 500); });
               }
             }
-            // Merge all product CI results into one profile
+            // Merge all product CI results into one profile — ALL dimensions, not just colors
             if (allCiResults.length > 0) {
-              productCI = allCiResults[0];
+              // Helper: find most common string value across all results for a field
+              function ciMostCommon(field) {
+                var counts = {};
+                allCiResults.forEach(function(r) {
+                  var v = r[field];
+                  if (v && typeof v === 'string') counts[v] = (counts[v] || 0) + 1;
+                });
+                var best = ''; var bestN = 0;
+                Object.keys(counts).forEach(function(k) { if (counts[k] > bestN) { best = k; bestN = counts[k]; } });
+                return best;
+              }
+              // Helper: merge all unique values from array field
+              function ciMergeArray(field) {
+                var seen = {}; var out = [];
+                allCiResults.forEach(function(r) {
+                  (r[field] || []).forEach(function(v) { if (v && !seen[v]) { seen[v] = true; out.push(v); } });
+                });
+                return out;
+              }
               var allColors = {};
-              var allMoods = {};
               allCiResults.forEach(function(r) {
                 (r.primaryColors || []).forEach(function(c) { allColors[c] = (allColors[c] || 0) + 1; });
                 (r.secondaryColors || []).forEach(function(c) { allColors[c] = (allColors[c] || 0) + 1; });
-                if (r.visualMood) allMoods[r.visualMood] = (allMoods[r.visualMood] || 0) + 1;
               });
               var sortedColors = Object.entries(allColors).sort(function(a, b) { return b[1] - a[1]; });
-              productCI.primaryColors = sortedColors.slice(0, 8).map(function(e) { return e[0]; });
-              // Most common mood
-              var sortedMoods = Object.entries(allMoods).sort(function(a, b) { return b[1] - a[1]; });
-              if (sortedMoods.length > 0) productCI.visualMood = sortedMoods[0][0];
+              productCI = {
+                primaryColors: sortedColors.slice(0, 6).map(function(e) { return e[0]; }),
+                secondaryColors: sortedColors.slice(6, 10).map(function(e) { return e[0]; }),
+                backgroundColor: ciMostCommon('backgroundColor'),
+                colorVariation: ciMostCommon('colorVariation'),
+                typographyStyle: ciMostCommon('typographyStyle'),
+                visualMood: ciMostCommon('visualMood'),
+                backgroundPattern: ciMostCommon('backgroundPattern'),
+                recurringElements: ciMergeArray('recurringElements'),
+                photographyStyle: ciMostCommon('photographyStyle'),
+                textDensity: ciMostCommon('textDensity'),
+                designerNotes: allCiResults.map(function(r) { return r.designerNotes || ''; }).filter(function(n) { return n.length > 10; })[0] || '',
+                productsAnalyzed: allCiResults.length,
+              };
               log('   CI complete: ' + allCiResults.length + '/' + products.length + ' products analyzed');
               log('   Colors: ' + productCI.primaryColors.join(', '));
+              log('   Mood: ' + (productCI.visualMood || '–') + ', Typography: ' + (productCI.typographyStyle || '–'));
               if (productCI.designerNotes) log('   Notes: ' + productCI.designerNotes);
             }
           }
