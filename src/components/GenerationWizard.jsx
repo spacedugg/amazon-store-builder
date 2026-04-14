@@ -1212,6 +1212,10 @@ function StepCategories({ data, updateData, onNext, onBack }) {
     updateData({ categories: { categories: next } });
   };
 
+  // Inline ASIN search component for adding ASINs to a category
+  var [searchCatIdx, setSearchCatIdx] = useState(null);
+  var [searchQuery, setSearchQuery] = useState('');
+
   var removeCategory = function(idx) {
     if (!confirm('Kategorie "' + categories[idx].name + '" wirklich löschen? Die enthaltenen ASINs werden nicht zugeordnet.')) return;
     var next = categories.slice(); next.splice(idx, 1);
@@ -1300,15 +1304,38 @@ function StepCategories({ data, updateData, onNext, onBack }) {
                 );
               })}
               {(cat.asins || []).length === 0 && <span style={{ fontSize: 10, color: '#94a3b8' }}>Keine Produkte zugeordnet</span>}
-              {/* Add existing ASIN to this category (multi-assignment) */}
-              <select style={{ fontSize: 10, border: '1px solid #e2e8f0', borderRadius: 3, padding: '3px 6px', color: '#64748b' }} value="" onChange={function(e) { if (e.target.value) addAsinToCategory(e.target.value, idx); }}>
-                <option value="">+ ASIN hinzufügen...</option>
-                {allAsins.filter(function(a) { return (cat.asins || []).indexOf(a) < 0; }).map(function(a) {
-                  var p = productsByAsin[a];
-                  return <option key={a} value={a}>{a} — {p ? (p.name || '').slice(0, 40) : ''}</option>;
-                })}
-              </select>
             </div>
+            {/* ASIN search + add */}
+            {searchCatIdx === idx ? (
+              <div style={{ marginTop: 6, position: 'relative' }}>
+                <input className="input" style={{ fontSize: 11 }} autoFocus placeholder="ASIN oder Produktname suchen..." value={searchQuery} onChange={function(e) { setSearchQuery(e.target.value); }} onBlur={function() { setTimeout(function() { setSearchCatIdx(null); setSearchQuery(''); }, 200); }} />
+                {searchQuery.trim().length > 0 && (
+                  <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 20, background: '#fff', border: '1px solid #e2e8f0', borderRadius: '0 0 6px 6px', boxShadow: '0 4px 12px rgba(0,0,0,.1)', maxHeight: 180, overflow: 'auto' }}>
+                    {(function() {
+                      var q = searchQuery.trim().toLowerCase();
+                      var matches = allAsins.filter(function(a) {
+                        if ((cat.asins || []).indexOf(a) >= 0) return false; // already in this category
+                        var p = productsByAsin[a];
+                        var name = p ? (p.name || '').toLowerCase() : '';
+                        return a.toLowerCase().indexOf(q) >= 0 || name.indexOf(q) >= 0;
+                      });
+                      if (matches.length === 0) return <div style={{ padding: '8px 10px', fontSize: 10, color: '#94a3b8' }}>Keine Treffer</div>;
+                      return matches.slice(0, 15).map(function(a) {
+                        var p = productsByAsin[a];
+                        return (
+                          <div key={a} onMouseDown={function(e) { e.preventDefault(); addAsinToCategory(a, idx); setSearchQuery(''); }} style={{ padding: '6px 10px', fontSize: 10, cursor: 'pointer', borderBottom: '1px solid #f1f5f9', display: 'flex', gap: 6, alignItems: 'center' }} onMouseOver={function(e) { e.currentTarget.style.background = '#f0f9ff'; }} onMouseOut={function(e) { e.currentTarget.style.background = ''; }}>
+                            <span style={{ fontFamily: 'monospace', fontWeight: 600, flexShrink: 0 }}>{a}</span>
+                            <span style={{ color: '#64748b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p ? p.name : ''}</span>
+                          </div>
+                        );
+                      });
+                    })()}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <button className="btn" style={{ fontSize: 10, marginTop: 6 }} onClick={function() { setSearchCatIdx(idx); setSearchQuery(''); }}>+ ASIN suchen &amp; hinzufügen</button>
+            )}
           </div>
         );
       })}
