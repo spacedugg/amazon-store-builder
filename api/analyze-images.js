@@ -184,12 +184,22 @@ async function analyzeImageTextOnly(imageUrl, context) {
 }
 
 function extractJSON(text) {
+  // Strip markdown code fences that Gemini often wraps around JSON
+  var cleaned = text.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
   try {
-    var s = text.indexOf('{');
-    var e = text.lastIndexOf('}');
+    var s = cleaned.indexOf('{');
+    var e = cleaned.lastIndexOf('}');
     if (s >= 0 && e > s) {
-      return JSON.parse(text.slice(s, e + 1));
+      return JSON.parse(cleaned.slice(s, e + 1));
     }
-  } catch (err) { /* fall through */ }
+  } catch (err) {
+    // Try removing trailing commas and newlines inside JSON
+    try {
+      var fixed = cleaned.slice(cleaned.indexOf('{'), cleaned.lastIndexOf('}') + 1)
+        .replace(/,\s*([\]}])/g, '$1')
+        .replace(/[\r\n]+/g, ' ');
+      return JSON.parse(fixed);
+    } catch (e2) { /* fall through */ }
+  }
   return { summary: text.slice(0, 200), imageCategory: 'creative' };
 }

@@ -107,13 +107,32 @@ module.exports = async function handler(req, res) {
       text = data.candidates[0].content.parts.map(function(p) { return p.text || ''; }).join('');
     }
 
+    // Strip markdown code fences that Gemini often wraps around JSON
+    // e.g. ```json\n{...}\n``` or ```\n{...}\n```
+    text = text.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
+
     // Extract JSON from response
     var jsonStart = text.indexOf('{');
     var jsonEnd = text.lastIndexOf('}');
     if (jsonStart < 0 || jsonEnd < 0) {
       return res.status(500).json({ error: 'Gemini did not return valid JSON', raw: text.slice(0, 500) });
     }
-    var ciData = JSON.parse(text.slice(jsonStart, jsonEnd + 1));
+
+    var ciData;
+    try {
+      ciData = JSON.parse(text.slice(jsonStart, jsonEnd + 1));
+    } catch (parseErr) {
+      // Try more aggressive cleanup: remove trailing commas, fix common JSON issues
+      var cleaned = text.slice(jsonStart, jsonEnd + 1)
+        .replace(/,\s*([\]}])/g, '$1')  // trailing commas
+        .replace(/[\r\n]+/g, ' ')       // newlines inside values
+        .replace(/\t/g, ' ');
+      try {
+        ciData = JSON.parse(cleaned);
+      } catch (e2) {
+        return res.status(500).json({ error: 'Gemini returned malformed JSON', raw: text.slice(0, 500) });
+      }
+    }
 
     // Include source image URLs for designer reference
     ciData.sourceImages = imagesToAnalyze.map(function(img) { return img.url; });
