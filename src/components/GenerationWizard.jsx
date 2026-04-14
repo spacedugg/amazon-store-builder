@@ -593,19 +593,81 @@ function StepScraping({ data, updateData, log, addLog, running, setRunning, erro
         if (pi < ciProducts.length - 1) await new Promise(function(r) { setTimeout(r, 400); });
       }
 
-      // Merge CI results
+      // Merge CI results — aggregate ALL dimensions, not just colors.
+      // For string fields (visualMood, typographyStyle, etc.) pick the most
+      // common value across products. For arrays, merge and count.
       var ciFailed = ciProducts.length - allCiResults.length;
       addLog('   Ergebnis: ' + allCiResults.length + '/' + ciProducts.length + ' Produkte erfolgreich' + (ciFailed > 0 ? ', ' + ciFailed + ' fehlgeschlagen' : ''));
       var productCI = null;
       if (allCiResults.length > 0) {
-        productCI = allCiResults[0];
+        // Color aggregation (already existed)
         var colorCount = {};
         allCiResults.forEach(function(r) {
           (r.primaryColors || []).forEach(function(c) { colorCount[c] = (colorCount[c] || 0) + 1; });
           (r.secondaryColors || []).forEach(function(c) { colorCount[c] = (colorCount[c] || 0) + 1; });
         });
-        productCI.primaryColors = Object.entries(colorCount).sort(function(a, b) { return b[1] - a[1]; }).slice(0, 8).map(function(e) { return e[0]; });
-        addLog('✓ CI aggregiert — Hauptfarben: ' + productCI.primaryColors.join(', '));
+        var sortedColors = Object.entries(colorCount).sort(function(a, b) { return b[1] - a[1]; });
+        var mergedPrimary = sortedColors.slice(0, 6).map(function(e) { return e[0]; });
+        var mergedSecondary = sortedColors.slice(6, 10).map(function(e) { return e[0]; });
+
+        // String field aggregation: pick most frequent value
+        function mostCommonValue(field) {
+          var counts = {};
+          allCiResults.forEach(function(r) {
+            var val = r[field];
+            if (val && typeof val === 'string') counts[val] = (counts[val] || 0) + 1;
+          });
+          var best = ''; var bestN = 0;
+          Object.keys(counts).forEach(function(k) { if (counts[k] > bestN) { best = k; bestN = counts[k]; } });
+          return best;
+        }
+
+        // Array field aggregation: collect all unique values
+        function mergeArrayField(field) {
+          var seen = {};
+          var result = [];
+          allCiResults.forEach(function(r) {
+            (r[field] || []).forEach(function(val) {
+              if (val && !seen[val]) { seen[val] = true; result.push(val); }
+            });
+          });
+          return result;
+        }
+
+        // Collect ALL designer notes for a combined summary
+        var allDesignerNotes = allCiResults
+          .map(function(r) { return r.designerNotes || ''; })
+          .filter(function(n) { return n.length > 10; })
+          .slice(0, 5);
+
+        productCI = {
+          // Colors
+          primaryColors: mergedPrimary,
+          secondaryColors: mergedSecondary,
+          backgroundColor: mostCommonValue('backgroundColor'),
+          colorVariation: mostCommonValue('colorVariation'),
+          // Typography
+          typographyStyle: mostCommonValue('typographyStyle'),
+          // Visual identity
+          visualMood: mostCommonValue('visualMood'),
+          backgroundPattern: mostCommonValue('backgroundPattern'),
+          recurringElements: mergeArrayField('recurringElements'),
+          photographyStyle: mostCommonValue('photographyStyle'),
+          textDensity: mostCommonValue('textDensity'),
+          // Summary
+          designerNotes: allDesignerNotes[0] || '',
+          // Meta
+          productsAnalyzed: allCiResults.length,
+          productsFailed: ciFailed,
+        };
+
+        addLog('✓ CI aggregiert aus ' + allCiResults.length + ' Produkten:');
+        addLog('   Farben: ' + mergedPrimary.join(', '));
+        addLog('   Typografie: ' + (productCI.typographyStyle || '–'));
+        addLog('   Visual Mood: ' + (productCI.visualMood || '–'));
+        addLog('   Fotografie: ' + (productCI.photographyStyle || '–'));
+        addLog('   Textdichte: ' + (productCI.textDensity || '–'));
+        if (productCI.recurringElements.length > 0) addLog('   Wiederkehrend: ' + productCI.recurringElements.slice(0, 5).join(', '));
       } else {
         addLog('⚠ Keine CI-Ergebnisse — Gemini konnte keine Bilder analysieren');
       }
@@ -936,20 +998,87 @@ function StepBrandAnalysis({ data, updateData, onNext, onBack }) {
             )}
           </div>
 
-          {/* CI Colors */}
-          {data.productCI && (data.productCI.primaryColors || []).length > 0 && (
+          {/* Full CI Profile (from product images via Gemini) */}
+          {data.productCI && (
             <div style={{ padding: 14, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 8, marginBottom: 12 }}>
-              <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 8 }}>CI-Farben (aus Produktbildern)</div>
-              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                {data.productCI.primaryColors.map(function(c, i) {
-                  return (
-                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '4px 8px', background: '#fff', border: '1px solid #e2e8f0', borderRadius: 4 }}>
-                      <div style={{ width: 16, height: 16, borderRadius: 2, background: c, border: '1px solid rgba(0,0,0,.1)' }} />
-                      <span style={{ fontSize: 10, fontFamily: 'monospace' }}>{c}</span>
-                    </div>
-                  );
-                })}
+              <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 8 }}>
+                Corporate Identity (aus {data.productCI.productsAnalyzed || '?'} Produktbildern)
               </div>
+
+              {/* Colors */}
+              {(data.productCI.primaryColors || []).length > 0 && (
+                <div style={{ marginBottom: 10 }}>
+                  <div style={{ fontSize: 10, color: '#64748b', fontWeight: 600, marginBottom: 4 }}>Farben</div>
+                  <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                    {data.productCI.primaryColors.map(function(c, i) {
+                      return (
+                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '4px 8px', background: '#fff', border: '1px solid #e2e8f0', borderRadius: 4 }}>
+                          <div style={{ width: 16, height: 16, borderRadius: 2, background: c, border: '1px solid rgba(0,0,0,.1)' }} />
+                          <span style={{ fontSize: 10, fontFamily: 'monospace' }}>{c}</span>
+                        </div>
+                      );
+                    })}
+                    {data.productCI.backgroundColor && (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '4px 8px', background: '#fff', border: '1px dashed #94a3b8', borderRadius: 4 }}>
+                        <div style={{ width: 16, height: 16, borderRadius: 2, background: data.productCI.backgroundColor, border: '1px solid rgba(0,0,0,.1)' }} />
+                        <span style={{ fontSize: 10, fontFamily: 'monospace', color: '#94a3b8' }}>BG: {data.productCI.backgroundColor}</span>
+                      </div>
+                    )}
+                  </div>
+                  {data.productCI.colorVariation && (
+                    <div style={{ fontSize: 10, color: '#64748b', marginTop: 4 }}>Farbvariation: {data.productCI.colorVariation}</div>
+                  )}
+                </div>
+              )}
+
+              {/* Typography + Visual Mood + Photography in grid */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 8 }}>
+                {data.productCI.typographyStyle && (
+                  <div>
+                    <div style={{ fontSize: 10, color: '#64748b', fontWeight: 600 }}>Typografie</div>
+                    <div style={{ fontSize: 11, color: '#0f172a' }}>{data.productCI.typographyStyle}</div>
+                  </div>
+                )}
+                {data.productCI.visualMood && (
+                  <div>
+                    <div style={{ fontSize: 10, color: '#64748b', fontWeight: 600 }}>Visual Mood</div>
+                    <div style={{ fontSize: 11, color: '#0f172a' }}>{data.productCI.visualMood}</div>
+                  </div>
+                )}
+                {data.productCI.photographyStyle && (
+                  <div>
+                    <div style={{ fontSize: 10, color: '#64748b', fontWeight: 600 }}>Fotografie-Stil</div>
+                    <div style={{ fontSize: 11, color: '#0f172a' }}>{data.productCI.photographyStyle}</div>
+                  </div>
+                )}
+                {data.productCI.textDensity && (
+                  <div>
+                    <div style={{ fontSize: 10, color: '#64748b', fontWeight: 600 }}>Textdichte</div>
+                    <div style={{ fontSize: 11, color: '#0f172a' }}>{data.productCI.textDensity}</div>
+                  </div>
+                )}
+                {data.productCI.backgroundPattern && (
+                  <div>
+                    <div style={{ fontSize: 10, color: '#64748b', fontWeight: 600 }}>Hintergrund</div>
+                    <div style={{ fontSize: 11, color: '#0f172a' }}>{data.productCI.backgroundPattern}</div>
+                  </div>
+                )}
+              </div>
+
+              {/* Recurring Elements */}
+              {(data.productCI.recurringElements || []).length > 0 && (
+                <div style={{ marginBottom: 8 }}>
+                  <div style={{ fontSize: 10, color: '#64748b', fontWeight: 600, marginBottom: 2 }}>Wiederkehrende Designelemente</div>
+                  <div style={{ fontSize: 11, color: '#0f172a' }}>{data.productCI.recurringElements.join(' · ')}</div>
+                </div>
+              )}
+
+              {/* Designer Notes */}
+              {data.productCI.designerNotes && (
+                <div style={{ padding: '8px 10px', background: '#fefce8', border: '1px solid #fde68a', borderRadius: 4, fontSize: 11, color: '#92400e' }}>
+                  <strong>Designer-Zusammenfassung:</strong> {data.productCI.designerNotes}
+                </div>
+              )}
             </div>
           )}
 
