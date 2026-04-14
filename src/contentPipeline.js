@@ -166,7 +166,7 @@ export async function synthesizeBrandProfile(allProductAnalyses, allWebsiteAnaly
     'Certifications: ' + allCerts.join(' | '),
     'Trust elements: ' + allTrust.join(' | '),
     'Key phrases: ' + allPhrases.join(' | '),
-    'Product benefits (across all products): ' + allBenefits.slice(0, 30).join(' | '),
+    'Product benefits (across all products): ' + allBenefits.join(' | '),
     '',
     'Categories: ' + (categories.categories || []).map(function(c) { return c.name + ' (' + (c.asins || []).length + ')'; }).join(', '),
     '',

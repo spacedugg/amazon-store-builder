@@ -634,11 +634,17 @@ function StepScraping({ data, updateData, log, addLog, running, setRunning, erro
           return result;
         }
 
-        // Collect ALL designer notes for a combined summary
-        var allDesignerNotes = allCiResults
-          .map(function(r) { return r.designerNotes || ''; })
-          .filter(function(n) { return n.length > 10; })
-          .slice(0, 5);
+        // Combine designer notes from all products into one summary.
+        // Take unique sentences — many products will have similar notes.
+        var allDesignerNotes = [];
+        var seenNotes = {};
+        allCiResults.forEach(function(r) {
+          var note = (r.designerNotes || '').trim();
+          if (note.length > 10) {
+            var key = note.toLowerCase().slice(0, 60);
+            if (!seenNotes[key]) { seenNotes[key] = true; allDesignerNotes.push(note); }
+          }
+        });
 
         productCI = {
           // Colors
@@ -654,8 +660,8 @@ function StepScraping({ data, updateData, log, addLog, running, setRunning, erro
           recurringElements: mergeArrayField('recurringElements'),
           photographyStyle: mostCommonValue('photographyStyle'),
           textDensity: mostCommonValue('textDensity'),
-          // Summary
-          designerNotes: allDesignerNotes[0] || '',
+          // Summary — combine up to 3 unique designer perspectives
+          designerNotes: allDesignerNotes.slice(0, 3).join(' | '),
           // Meta
           productsAnalyzed: allCiResults.length,
           productsFailed: ciFailed,

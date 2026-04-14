@@ -2166,7 +2166,7 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
   // ═══════════════════════════════════════════════════
   var brandTone = analysis.brandTone || 'professional';
   var aboutCtx = (websiteData && websiteData.aboutText ? ' Brand info: ' + websiteData.aboutText.substring(0, 200) : '') + (analysis.brandStory ? ' ' + analysis.brandStory : '');
-  var certCtx = websiteData && websiteData.certifications ? websiteData.certifications.slice(0, 5).join(', ') : '';
+  var certCtx = websiteData && websiteData.certifications ? websiteData.certifications.join(', ') : '';
   var bestProducts = products.slice().sort(function(a, b) { return (b.reviews || 0) - (a.reviews || 0); });
   var topAsins8 = bestProducts.slice(0, 8).map(function(p) { return p.asin; });
   var topAsins12 = bestProducts.slice(0, 12).map(function(p) { return p.asin; });
@@ -2400,8 +2400,11 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
     } else if (analysis.brandStory) {
       aboutBrief = '[LIFESTYLE] ' + brand + ': ' + analysis.brandStory.substring(0, 120).replace(/["\n]/g, ' ').trim() + '.';
     }
-    // Build benefit pillars from features/certifications
-    var feats = (websiteData && websiteData.features ? websiteData.features : []).slice(0, 3);
+    // Build benefit pillars from features/certifications (use ALL features, pick best 3)
+    var feats = (websiteData && websiteData.features ? websiteData.features : []).concat(analysis.keyFeatures || []);
+    // Deduplicate and prefer longer/more descriptive features
+    var featSeen = {};
+    feats = feats.filter(function(f) { var k = f.toLowerCase().slice(0, 30); if (featSeen[k]) return false; featSeen[k] = true; return f.length > 5; });
     var pillar1 = feats[0] ? feats[0].slice(0, 60) : (lang === 'German' ? 'Qualität & Expertise' : 'Quality & Expertise');
     var pillar2 = feats[1] ? feats[1].slice(0, 60) : (lang === 'German' ? 'Innovation' : 'Innovation');
     var pillar3 = feats[2] ? feats[2].slice(0, 60) : (lang === 'German' ? 'Für dich gemacht' : 'Made for You');
@@ -2425,19 +2428,23 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
 
   // ── So funktioniert's ──
   if (extraPageFlags.how_it_works) {
-    // Build how-it-works content from crawled product features
+    // Build how-it-works content from ALL crawled product features
     var featureList = (websiteData && websiteData.features ? websiteData.features : []);
     var prodFeatures = (analysis.keyFeatures || []);
-    var allFeatures = featureList.concat(prodFeatures).slice(0, 6);
+    var allFeatures = featureList.concat(prodFeatures);
+    var featSeenHiw = {};
+    allFeatures = allFeatures.filter(function(f) { var k = f.toLowerCase().slice(0, 30); if (featSeenHiw[k]) return false; featSeenHiw[k] = true; return f.length > 5; });
     var problemBrief = '[CREATIVE] Problem that ' + brand + ' solves for the customer.';
     var solutionBrief = '[CREATIVE] How ' + brand + ' products solve this problem.';
     if (allFeatures.length >= 2) {
       problemBrief = '[CREATIVE] Customer problem: why ' + brand + ' products matter. Focus on: ' + allFeatures[0].slice(0, 80) + '.';
       solutionBrief = '[CREATIVE] ' + brand + ' solution: ' + allFeatures[1].slice(0, 80) + '. Show mechanism or technology.';
     }
-    var proof1 = certCtx.split(',')[0] ? certCtx.split(',')[0].trim() : (lang === 'German' ? 'Geprüfte Qualität' : 'Proven quality');
-    var proof2 = certCtx.split(',')[1] ? certCtx.split(',')[1].trim() : (lang === 'German' ? 'Kundenzufriedenheit' : 'Customer satisfaction');
-    var proof3 = certCtx.split(',')[2] ? certCtx.split(',')[2].trim() : (lang === 'German' ? 'Ausgezeichnet' : 'Award-winning');
+    // Use ALL certifications for proof elements, not just first 3
+    var allCerts = websiteData && websiteData.certifications ? websiteData.certifications : [];
+    var proof1 = allCerts[0] ? allCerts[0].trim() : (lang === 'German' ? 'Geprüfte Qualität' : 'Proven quality');
+    var proof2 = allCerts[1] ? allCerts[1].trim() : (lang === 'German' ? 'Kundenzufriedenheit' : 'Customer satisfaction');
+    var proof3 = allCerts[2] ? allCerts[2].trim() : (lang === 'German' ? 'Ausgezeichnet' : 'Award-winning');
     makeExtraPage(
       lang === 'German' ? 'So funktioniert\'s' : 'How It Works',
       '[STORE_HERO] Educational hero for ' + brand + '. Problem/pain point with solution teaser.',
@@ -2492,10 +2499,10 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
 
   // ── Nachhaltigkeit ──
   if (extraPageFlags.sustainability) {
-    // Build sustainability content from actual certifications
-    var cert1 = certCtx.split(',')[0] ? certCtx.split(',')[0].trim() : '';
-    var cert2 = certCtx.split(',')[1] ? certCtx.split(',')[1].trim() : '';
-    var cert3 = certCtx.split(',')[2] ? certCtx.split(',')[2].trim() : '';
+    // Build sustainability content from ALL certifications (not just first 3)
+    var cert1 = allCerts[0] ? allCerts[0].trim() : '';
+    var cert2 = allCerts[1] ? allCerts[1].trim() : '';
+    var cert3 = allCerts[2] ? allCerts[2].trim() : '';
     var sustainBrief = '[CREATIVE] ' + brand + ' sustainability commitment:';
     if (cert1 || cert2) {
       sustainBrief += ' Highlighting ' + [cert1, cert2].filter(Boolean).join(' and ') + '.';
