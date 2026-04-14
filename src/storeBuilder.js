@@ -278,19 +278,19 @@ function formatWebsiteContext(websiteData) {
   // ── SUPPLEMENTARY RAW DATA ──
   if (!ai || !ai.certifications || ai.certifications.length === 0) {
     if (websiteData.certifications && websiteData.certifications.length > 0) {
-      parts.push('Certifications & trust signals: ' + websiteData.certifications.slice(0, 8).join(' | '));
+      parts.push('Certifications & trust signals: ' + websiteData.certifications.join(' | '));
     }
   }
   if (!ai || !ai.usps || ai.usps.length === 0) {
     if (websiteData.features && websiteData.features.length > 0) {
-      parts.push('Product features / USPs: ' + websiteData.features.slice(0, 10).join(' | '));
+      parts.push('Product features / USPs: ' + websiteData.features.join(' | '));
     }
   }
   if (websiteData.productInfo && websiteData.productInfo.length > 0) {
-    parts.push('Product info from website: ' + websiteData.productInfo.slice(0, 3).join(' | '));
+    parts.push('Product info from website: ' + websiteData.productInfo.join(' | '));
   }
   if (websiteData.socialProof && websiteData.socialProof.length > 0) {
-    parts.push('Customer testimonials / social proof: ' + websiteData.socialProof.slice(0, 3).join(' | '));
+    parts.push('Customer testimonials / social proof: ' + websiteData.socialProof.join(' | '));
   }
   // Product CI from Gemini Vision analysis of listing images
   if (websiteData.productCI) {

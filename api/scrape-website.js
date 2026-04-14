@@ -269,11 +269,10 @@ function extractAllContent(homepageHtml, subpageContents, url) {
     }
   });
 
-  // Trim collections
-  result.certifications = result.certifications.slice(0, 15);
-  result.features = result.features.slice(0, 20);
+  // Trim visual collections (reasonable: UI palette limits)
   result.colors = result.colors.slice(0, 10);
   result.fonts = result.fonts.slice(0, 6);
+  // certifications and features: NO cap — all data forwarded to AI
   // Trim rawText to fit AI context (expanded for deeper crawls)
   result.rawText = result.rawText.slice(0, 20000);
 
@@ -363,13 +362,12 @@ function extractFromPage(html, category) {
         seenCerts[key] = true;
         return true;
       })
-      .slice(0, 10);
   }
 
-  // ── FEATURES ──
+  // ── FEATURES ── (no arbitrary cap — forward everything to AI)
   info.features = listItems.filter(function(li) {
     return li.length > 10 && li.length < 150;
-  }).slice(0, 15);
+  });
 
   // ── COLORS & FONTS ──
   var styleBlocks = html.match(/<style[^>]*>([\s\S]*?)<\/style>/gi) || [];

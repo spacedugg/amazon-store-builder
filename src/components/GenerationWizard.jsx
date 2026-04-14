@@ -660,8 +660,8 @@ function StepScraping({ data, updateData, log, addLog, running, setRunning, erro
           recurringElements: mergeArrayField('recurringElements'),
           photographyStyle: mostCommonValue('photographyStyle'),
           textDensity: mostCommonValue('textDensity'),
-          // Summary — combine up to 3 unique designer perspectives
-          designerNotes: allDesignerNotes.slice(0, 3).join(' | '),
+          // Summary — combine ALL unique designer perspectives (no arbitrary cap)
+          designerNotes: allDesignerNotes.join(' | '),
           // Meta
           productsAnalyzed: allCiResults.length,
           productsFailed: ciFailed,
