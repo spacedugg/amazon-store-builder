@@ -502,15 +502,47 @@ function StepScraping({ data, updateData, log, addLog, running, setRunning, erro
       if (cancelRef.current) throw new Error('CANCELLED');
 
       // 2. Website scraping (optional)
+      // Increased timeout: 5 minutes. If full crawl fails, retry with homepage only.
       var websiteData = null;
       if (data.websiteUrl && data.websiteUrl.trim()) {
         addLog('');
         addLog('═══ Website-Scraping: ' + data.websiteUrl + ' ═══');
+        addLog('   Seiten werden einzeln gecrawlt (Homepage + Unterseiten)...');
         try {
-          websiteData = await scrapeWebsite(data.websiteUrl.trim());
-          addLog('✓ Website gescrapt: ' + (websiteData.pagesScraped || 0) + ' Seiten');
-        } catch (wsErr) {
-          addLog('⚠ Website-Scraping fehlgeschlagen: ' + wsErr.message);
+          var wsResp = await fetch('/api/scrape-website', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ url: data.websiteUrl.trim() }),
+            signal: AbortSignal.timeout ? AbortSignal.timeout(300000) : undefined, // 5 min
+          });
+          if (!wsResp.ok) {
+            var wsErr = await wsResp.json().catch(function() { return {}; });
+            throw new Error(wsErr.error || 'Website-Scraping fehlgeschlagen');
+          }
+          websiteData = await wsResp.json();
+          addLog('✓ Website gescrapt: ' + (websiteData.pagesScraped || 0) + ' Seiten, ' + (websiteData.rawTextSections || []).length + ' Text-Sektionen');
+        } catch (wsErr1) {
+          addLog('   ⚠ Erster Versuch fehlgeschlagen: ' + wsErr1.message);
+          addLog('   Zweiter Versuch: Nur Homepage...');
+          // Retry with just the homepage — parse the base URL
+          try {
+            var baseUrl = new URL(data.websiteUrl.trim());
+            var homepageOnly = baseUrl.origin;
+            var wsResp2 = await fetch('/api/scrape-website', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ url: homepageOnly }),
+              signal: AbortSignal.timeout ? AbortSignal.timeout(60000) : undefined, // 1 min for homepage only
+            });
+            if (wsResp2.ok) {
+              websiteData = await wsResp2.json();
+              addLog('✓ Homepage gescrapt: ' + (websiteData.pagesScraped || 0) + ' Seiten (Unterseiten übersprungen)');
+            } else {
+              addLog('   ⚠ Auch Homepage-only fehlgeschlagen. Weiter ohne Website-Daten.');
+            }
+          } catch (wsErr2) {
+            addLog('   ⚠ Homepage-Retry fehlgeschlagen: ' + wsErr2.message + '. Weiter ohne Website-Daten.');
+          }
         }
       }
 
@@ -532,13 +564,28 @@ function StepScraping({ data, updateData, log, addLog, running, setRunning, erro
         }).filter(Boolean);
         if (pImgs.length === 0) { continue; }
         addLog('   Produkt ' + (pi + 1) + '/' + ciProducts.length + ': ' + pImgs.length + ' Bilder — ' + (ciProducts[pi].name || '').slice(0, 50));
-        try {
-          var batchCI = await analyzeBrandCI(pImgs, data.brand);
-          if (batchCI && (batchCI.primaryColors || batchCI.visualMood)) {
-            allCiResults.push(batchCI);
+        // Retry CI analysis up to 3 times per product — must succeed 100%.
+        var ciSuccess = false;
+        for (var ciAttempt = 0; ciAttempt < 3 && !ciSuccess; ciAttempt++) {
+          try {
+            if (ciAttempt > 0) {
+              addLog('     Retry ' + (ciAttempt + 1) + '/3...');
+              await new Promise(function(r) { setTimeout(r, 2000); });
+            }
+            var batchCI = await analyzeBrandCI(pImgs, data.brand);
+            if (batchCI && (batchCI.primaryColors || batchCI.visualMood)) {
+              allCiResults.push(batchCI);
+              ciSuccess = true;
+            } else {
+              addLog('     ⚠ Leeres Ergebnis, retry...');
+            }
+          } catch (batchErr) {
+            if (ciAttempt < 2) {
+              addLog('     ⚠ ' + batchErr.message + ' — retry in 2s...');
+            } else {
+              addLog('     ⚠ 3/3 fehlgeschlagen: ' + batchErr.message + ' — übersprungen');
+            }
           }
-        } catch (batchErr) {
-          addLog('     ⚠ Fehler: ' + batchErr.message);
         }
         if (pi < ciProducts.length - 1) await new Promise(function(r) { setTimeout(r, 400); });
       }
