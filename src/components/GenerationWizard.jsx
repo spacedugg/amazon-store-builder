@@ -1290,40 +1290,67 @@ function StepCategories({ data, updateData, onNext, onBack }) {
 // ═══════════════════════════════════════════════════════════════════════════
 
 function derivePageContent(data) {
-  // Build an initial page-content list from brand profile + categories + extras
+  // Build initial page-content list. USPs are CONTEXT-DEPENDENT per page:
+  // - Homepage: brand-level USPs only (what applies to the WHOLE brand)
+  // - Category page: category-specific USPs (what applies to THIS product group)
+  // - Extra pages: depends on page type — no forced USP assignment
+  // The user edits everything. This is just a starting suggestion.
   var brandProfile = data.brandProfile || {};
   var categories = (data.categories && data.categories.categories) || [];
   var brandUsps = (brandProfile.usps || []).map(function(u) { return u.text || ''; }).filter(Boolean);
+  var productAnalyses = data.productAnalyses || [];
   var pages = [];
-  // Homepage
+
+  // Homepage — brand-level USPs, overview of the whole brand
   pages.push({
     id: 'homepage',
     name: 'Homepage',
     kind: 'homepage',
     heroHeadline: (brandProfile.heroBannerConcept && brandProfile.heroBannerConcept.headline) || data.brand,
     heroSubline: (brandProfile.heroBannerConcept && brandProfile.heroBannerConcept.subline) || '',
-    usps: brandUsps.slice(0, 4),
-    imageIdeas: ['Hero Lifestyle: ' + data.brand + ' key product in real-life context'].concat((brandProfile.imageConcepts || []).slice(0, 3).map(function(ic) { return ic.description || ''; }).filter(Boolean)),
+    usps: brandUsps.slice(), // ALL brand USPs — user removes what doesn't fit
+    imageIdeas: ['Hero lifestyle: ' + data.brand + ' key product in real-life context'].concat(
+      (brandProfile.imageConcepts || []).map(function(ic) { return ic.description || ''; }).filter(Boolean)
+    ),
     cta: 'Jetzt entdecken',
     asins: [],
     notes: '',
   });
-  // One per category
+
+  // One per category — category-specific USPs from product analyses
   categories.forEach(function(cat, i) {
+    // Find benefits specific to products in THIS category
+    var catAsins = cat.asins || [];
+    var catBenefits = [];
+    var benefitSeen = {};
+    productAnalyses.forEach(function(pa) {
+      if (catAsins.indexOf(pa.asin) < 0) return;
+      (pa.keyBenefits || []).forEach(function(b) {
+        var key = b.toLowerCase().slice(0, 40);
+        if (!benefitSeen[key]) { benefitSeen[key] = true; catBenefits.push(b); }
+      });
+    });
+    // Also include category-level USPs from the categorization step
+    (cat.categoryUSPs || cat.commonFeatures || []).forEach(function(f) {
+      var key = f.toLowerCase().slice(0, 40);
+      if (!benefitSeen[key]) { benefitSeen[key] = true; catBenefits.push(f); }
+    });
+
     pages.push({
       id: 'cat-' + i,
       name: cat.name || ('Kategorie ' + (i + 1)),
       kind: 'category',
       heroHeadline: cat.name,
       heroSubline: cat.description || '',
-      usps: brandUsps.slice(0, 3),
-      imageIdeas: ['Category hero: ' + cat.name + ' — product group in real-life use'],
+      usps: catBenefits, // category-specific, not brand-global
+      imageIdeas: ['Category hero: ' + cat.name + ' product group in real-life use'],
       cta: 'Produkte ansehen',
-      asins: (cat.asins || []).slice(),
+      asins: catAsins.slice(),
       notes: '',
     });
   });
-  // Extra pages
+
+  // Extra pages — USPs start EMPTY, user fills in what fits the page context
   var extras = data.extraPages || {};
   var EXTRA_META = {
     about_us: { name: 'Über uns', headline: 'Unsere Geschichte', cta: 'Mehr erfahren' },
@@ -1344,7 +1371,7 @@ function derivePageContent(data) {
       kind: k,
       heroHeadline: meta.headline,
       heroSubline: '',
-      usps: [],
+      usps: [], // empty — user decides what fits this page
       imageIdeas: [],
       cta: meta.cta,
       asins: [],
@@ -1609,10 +1636,16 @@ var WIZARD_TILE_TYPES = [
   { id: 'best_sellers', label: 'Best Sellers' },
 ];
 
-// Derive initial structure from content. Uses knowledge-base-inspired tendency:
-// - Homepage: hero → USPs (2x2wide) → categories (std-2equal) → products (4x2grid)
-// - Category page: hero → USPs (vh-w2s) → products (4x2grid)
-// - About_us: hero full-width → text + image (std-2equal) → trust elements
+// Derive initial structure from content.
+// KEY RULES:
+// - Layout is NOT coupled to USP count. USPs are content; they can be shown
+//   in many layout forms (1 big tile with 4 USPs as text, 4 small tiles,
+//   a full-width banner, etc.). The user decides in this step.
+// - brief = image idea for the designer (English, 10-20 words).
+//   textOverlay = text displayed ON the image (store language, UI element).
+//   These are SEPARATE fields — never set them to the same value.
+// - USP consistency: if the same USP appears on multiple pages, the wording
+//   must be identical. This is checked at generation time, not enforced here.
 function deriveStructure(data) {
   var pageContent = data.pageContent || [];
   var storeType = data.storeType || 'product-showcase';
@@ -1620,75 +1653,76 @@ function deriveStructure(data) {
 
   pageContent.forEach(function(pc) {
     var sections = [];
-    // Hero section — always full-width, 1 image
+    var usps = pc.usps || [];
+    var lang = LANGS[data.marketplace] || 'German';
+
+    // Hero section — always full-width
     sections.push({
       id: 'hero-' + pc.id,
-      purpose: 'Hero / intro',
+      purpose: 'Hero',
       layoutId: '1',
-      tiles: [{ type: 'image', imageCategory: 'lifestyle', brief: (pc.imageIdeas && pc.imageIdeas[0]) || '', textOverlay: pc.heroHeadline || '', ctaText: pc.cta || '' }],
+      tiles: [{
+        type: 'image',
+        imageCategory: 'lifestyle',
+        brief: (pc.imageIdeas && pc.imageIdeas[0]) || 'hero lifestyle image for ' + pc.name,
+        textOverlay: pc.heroHeadline || '',
+        ctaText: pc.cta || '',
+      }],
     });
 
+    // USPs section — if the page has USPs. Layout is a SUGGESTION, user changes it.
+    // No coupling of USP count to layout. Default: full-width with USPs as text overlay.
+    if (usps.length > 0) {
+      sections.push({
+        id: 'usps-' + pc.id,
+        purpose: pc.kind === 'homepage' ? 'Brand USPs' : (pc.kind === 'category' ? 'Category benefits' : 'Key benefits'),
+        layoutId: '1',
+        tiles: [{
+          type: 'image',
+          imageCategory: 'benefit',
+          brief: 'benefit banner showing ' + usps.length + ' key points as icons or text layout for ' + pc.name,
+          textOverlay: usps.join(' | '),
+          ctaText: '',
+        }],
+      });
+    }
+
     if (pc.kind === 'homepage') {
-      // USPs: depends on how many (2 → std-2equal, 4 → 2x2wide, 3 → vh-w2s)
-      var nUsps = (pc.usps || []).length;
-      if (nUsps >= 4) {
-        sections.push({
-          id: 'usps-' + pc.id,
-          purpose: 'USPs / brand benefits',
-          layoutId: '2x2wide',
-          tiles: pc.usps.slice(0, 4).map(function(u) { return { type: 'image_text', imageCategory: 'benefit', brief: u, textOverlay: u, ctaText: '' }; }),
-        });
-      } else if (nUsps === 3) {
-        sections.push({
-          id: 'usps-' + pc.id,
-          purpose: 'USPs',
-          layoutId: 'vh-w2s',
-          tiles: pc.usps.map(function(u) { return { type: 'image_text', imageCategory: 'benefit', brief: u, textOverlay: u, ctaText: '' }; }),
-        });
-      } else if (nUsps >= 1) {
-        sections.push({
-          id: 'usps-' + pc.id,
-          purpose: 'USPs',
-          layoutId: 'std-2equal',
-          tiles: pc.usps.map(function(u) { return { type: 'image_text', imageCategory: 'benefit', brief: u, textOverlay: u, ctaText: '' }; }),
-        });
-      }
-      // Categories tile
+      // Category navigation
       var cats = (data.categories && data.categories.categories) || [];
       if (cats.length >= 1) {
-        var layoutId = cats.length === 2 ? 'std-2equal' : cats.length === 3 ? 'vh-w2s' : cats.length === 4 ? '2x2wide' : '4x2grid';
         sections.push({
           id: 'categories-' + pc.id,
           purpose: 'Category navigation',
-          layoutId: layoutId,
-          tiles: cats.slice(0, 8).map(function(c) { return { type: 'image', imageCategory: 'creative', brief: 'category teaser: ' + c.name, textOverlay: c.name, ctaText: 'Entdecken' }; }),
+          layoutId: cats.length <= 2 ? 'std-2equal' : cats.length <= 4 ? '2x2wide' : '4x2grid',
+          tiles: cats.map(function(c) {
+            return {
+              type: 'image',
+              imageCategory: 'creative',
+              brief: 'category teaser image for ' + c.name,
+              textOverlay: c.name,
+              ctaText: lang === 'German' ? 'Entdecken' : 'Explore',
+            };
+          }),
         });
       }
-      // Bestsellers / featured products
+      // Featured products
       sections.push({
         id: 'bestsellers-' + pc.id,
         purpose: 'Featured products',
         layoutId: '1',
         tiles: [{ type: 'product_grid', asins: data.asins ? data.asins.slice(0, 8) : [], brief: '', textOverlay: '' }],
       });
+
     } else if (pc.kind === 'category') {
-      // USPs smaller for category page
-      if ((pc.usps || []).length >= 1) {
-        sections.push({
-          id: 'usps-' + pc.id,
-          purpose: 'Category USPs',
-          layoutId: (pc.usps.length >= 3 ? 'vh-w2s' : 'std-2equal'),
-          tiles: pc.usps.slice(0, 3).map(function(u) { return { type: 'image_text', imageCategory: 'benefit', brief: u, textOverlay: u, ctaText: '' }; }),
-        });
-      }
-      // Image teaser between USPs and products
+      // Lifestyle teaser
       sections.push({
         id: 'teaser-' + pc.id,
         purpose: 'Category teaser',
         layoutId: 'std-2equal',
         tiles: [
-          { type: 'image', imageCategory: 'lifestyle', brief: 'lifestyle shot of ' + pc.name, textOverlay: pc.heroSubline || '', ctaText: '' },
-          { type: 'image', imageCategory: 'creative', brief: 'creative shot of ' + pc.name + ' hero product', textOverlay: '', ctaText: pc.cta || '' },
+          { type: 'image', imageCategory: 'lifestyle', brief: 'lifestyle shot showing ' + pc.name + ' products in use', textOverlay: '', ctaText: '' },
+          { type: 'image', imageCategory: 'creative', brief: 'hero product from ' + pc.name + ' category', textOverlay: pc.heroSubline || '', ctaText: pc.cta || '' },
         ],
       });
       // All products in category
@@ -1698,16 +1732,30 @@ function deriveStructure(data) {
         layoutId: '1',
         tiles: [{ type: 'product_grid', asins: (pc.asins || []).slice(), brief: '', textOverlay: '' }],
       });
+
     } else {
-      // Extra pages — simple: hero + text/image section + optional products
+      // Extra pages — simple structure, user customizes
       sections.push({
         id: 'body-' + pc.id,
         purpose: 'Main content',
         layoutId: 'std-2equal',
         tiles: [
-          { type: 'image', imageCategory: 'lifestyle', brief: (pc.imageIdeas && pc.imageIdeas[1]) || '', textOverlay: '', ctaText: '' },
+          { type: 'image', imageCategory: 'lifestyle', brief: (pc.imageIdeas && pc.imageIdeas[1]) || 'supporting image for ' + pc.name, textOverlay: '', ctaText: '' },
           { type: 'text', imageCategory: 'text_image', brief: '', textOverlay: pc.heroSubline || '', ctaText: pc.cta || '' },
         ],
+      });
+    }
+
+    // Additional image ideas from content (if any beyond the hero)
+    var extraIdeas = (pc.imageIdeas || []).slice(1);
+    if (extraIdeas.length > 0) {
+      sections.push({
+        id: 'images-' + pc.id,
+        purpose: 'Additional visuals',
+        layoutId: extraIdeas.length === 1 ? '1' : 'std-2equal',
+        tiles: extraIdeas.map(function(idea) {
+          return { type: 'image', imageCategory: 'lifestyle', brief: idea, textOverlay: '', ctaText: '' };
+        }),
       });
     }
 
