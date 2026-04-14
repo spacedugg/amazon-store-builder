@@ -44,40 +44,24 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'Could not download any of the provided images' });
     }
 
-    // Build the CI analysis prompt
+    // Build the CI analysis prompt — clean JSON schema, no inline comments.
+    // The responseMimeType forces Gemini to return ONLY valid JSON.
     var prompt = [
-      'You are a brand identity analyst. Analyze these ' + imageParts.length + ' product listing images from the brand "' + brandName + '" on Amazon.',
-      'Extract the Corporate Identity (CI) / visual design language that is consistent across these images.',
+      'Analyze these ' + imageParts.length + ' Amazon product listing images from "' + brandName + '".',
+      'Extract the consistent Corporate Identity (CI) across the images.',
       '',
-      'Look for:',
-      '- Color palette: primary, secondary, accent colors (exact hex codes if possible)',
-      '- Typography style: serif/sans-serif, thin/bold, uppercase/lowercase, modern/classic',
-      '- Background patterns: solid colors, gradients, textures, nature elements, geometric patterns',
-      '- Visual mood: minimalist, premium, natural/organic, scientific/clinical, playful, bold',
-      '- Layout patterns in listing images: how text is positioned, product placement, use of icons',
-      '- Recurring design elements: icons, badges, borders, shapes, decorative elements',
-      '- Photography style: studio/white bg, lifestyle, macro/close-up, flat-lay',
-      '- Text density: minimal (few words) vs. detailed (many bullet points, explanations)',
-      '- Color consistency: Are colors the SAME across all products (brand-global) or do they VARY per product (product-specific, e.g. different label colors)?',
-      '',
-      'Return ONLY valid JSON:',
-      '{',
-      '  "primaryColors": ["#hex1", "#hex2", "#hex3"] (most dominant brand colors)',
-      '  "secondaryColors": ["#hex1", "#hex2"] (accent/supporting colors)',
-      '  "backgroundColor": "#hex" (most common background color)',
-      '  "colorVariation": "brand-global" or "product-specific" (do colors change per product or stay the same?)',
-      '  "colorVariationNote": "Short explanation, e.g. Each product has its own accent color matching the label, but backgrounds are always beige"',
-      '  "typographyStyle": "e.g. modern sans-serif, bold headlines with thin body text"',
-      '  "typographyWeight": "thin|regular|medium|bold|extra-bold"',
-      '  "typographyCase": "uppercase|lowercase|mixed|sentence-case"',
-      '  "visualMood": "e.g. natural, earthy, premium-minimalist, scientific-clean"',
-      '  "backgroundPattern": "e.g. solid beige, subtle leaf textures, gradient cream-to-white"',
-      '  "recurringElements": ["e.g. leaf icons", "rounded corners", "circular badges", "nature photography"]',
-      '  "photographyStyle": "e.g. studio white background, lifestyle with nature, macro ingredients"',
-      '  "textDensity": "minimal|moderate|detailed"',
-      '  "layoutStyle": "e.g. centered product with text below, split layout left text right image"',
-      '  "designerNotes": "2-3 sentences summarizing the CI for a designer to recreate this visual style"',
-      '}',
+      'Return a JSON object with these fields:',
+      '- primaryColors: array of 2-4 hex color strings (most dominant brand colors)',
+      '- secondaryColors: array of 1-3 hex color strings (accent colors)',
+      '- backgroundColor: hex string (most common background)',
+      '- colorVariation: "brand-global" or "product-specific"',
+      '- typographyStyle: short description of font style',
+      '- visualMood: 2-4 words describing the visual feeling',
+      '- backgroundPattern: short description',
+      '- recurringElements: array of recurring design elements',
+      '- photographyStyle: short description',
+      '- textDensity: "minimal" or "moderate" or "detailed"',
+      '- designerNotes: 2-3 sentences for a designer to recreate this style',
     ].join('\n');
 
     var parts = [{ text: prompt }].concat(imageParts);
@@ -87,6 +71,7 @@ module.exports = async function handler(req, res) {
       generationConfig: {
         temperature: 0.2,
         maxOutputTokens: 1500,
+        responseMimeType: 'application/json',
       },
     };
 
@@ -107,30 +92,32 @@ module.exports = async function handler(req, res) {
       text = data.candidates[0].content.parts.map(function(p) { return p.text || ''; }).join('');
     }
 
-    // Strip markdown code fences that Gemini often wraps around JSON
-    // e.g. ```json\n{...}\n``` or ```\n{...}\n```
+    // With responseMimeType: "application/json", Gemini MUST return valid JSON.
+    // But still be defensive: strip markdown fences and clean up just in case.
     text = text.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
-
-    // Extract JSON from response
-    var jsonStart = text.indexOf('{');
-    var jsonEnd = text.lastIndexOf('}');
-    if (jsonStart < 0 || jsonEnd < 0) {
-      return res.status(500).json({ error: 'Gemini did not return valid JSON', raw: text.slice(0, 500) });
-    }
 
     var ciData;
     try {
-      ciData = JSON.parse(text.slice(jsonStart, jsonEnd + 1));
+      ciData = JSON.parse(text);
     } catch (parseErr) {
-      // Try more aggressive cleanup: remove trailing commas, fix common JSON issues
-      var cleaned = text.slice(jsonStart, jsonEnd + 1)
-        .replace(/,\s*([\]}])/g, '$1')  // trailing commas
-        .replace(/[\r\n]+/g, ' ')       // newlines inside values
-        .replace(/\t/g, ' ');
-      try {
-        ciData = JSON.parse(cleaned);
-      } catch (e2) {
-        return res.status(500).json({ error: 'Gemini returned malformed JSON', raw: text.slice(0, 500) });
+      // Fallback: try to extract JSON from the text
+      var jsonStart = text.indexOf('{');
+      var jsonEnd = text.lastIndexOf('}');
+      if (jsonStart >= 0 && jsonEnd > jsonStart) {
+        try {
+          ciData = JSON.parse(text.slice(jsonStart, jsonEnd + 1));
+        } catch (e2) {
+          var cleaned = text.slice(jsonStart, jsonEnd + 1)
+            .replace(/,\s*([\]}])/g, '$1')
+            .replace(/[\r\n]+/g, ' ');
+          try {
+            ciData = JSON.parse(cleaned);
+          } catch (e3) {
+            return res.status(500).json({ error: 'Gemini returned malformed JSON', raw: text.slice(0, 500) });
+          }
+        }
+      } else {
+        return res.status(500).json({ error: 'Gemini did not return JSON', raw: text.slice(0, 500) });
       }
     }
 

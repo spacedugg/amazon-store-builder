@@ -563,27 +563,30 @@ function StepScraping({ data, updateData, log, addLog, running, setRunning, erro
           return u ? { url: u, context: ciProducts[pi].name } : null;
         }).filter(Boolean);
         if (pImgs.length === 0) { continue; }
-        addLog('   Produkt ' + (pi + 1) + '/' + ciProducts.length + ': ' + pImgs.length + ' Bilder — ' + (ciProducts[pi].name || '').slice(0, 50));
-        // Retry CI analysis up to 3 times per product — must succeed 100%.
+        var productLabel = 'Produkt ' + (pi + 1) + '/' + ciProducts.length + ' (' + (ciProducts[pi].asin || '?') + ')';
+        addLog('   ' + productLabel + ': ' + pImgs.length + ' Bilder — ' + (ciProducts[pi].name || '').slice(0, 50));
+        // Retry CI analysis up to 3 times per product.
         var ciSuccess = false;
         for (var ciAttempt = 0; ciAttempt < 3 && !ciSuccess; ciAttempt++) {
           try {
             if (ciAttempt > 0) {
-              addLog('     Retry ' + (ciAttempt + 1) + '/3...');
+              addLog('     ↻ Versuch ' + (ciAttempt + 1) + '/3...');
               await new Promise(function(r) { setTimeout(r, 2000); });
             }
             var batchCI = await analyzeBrandCI(pImgs, data.brand);
             if (batchCI && (batchCI.primaryColors || batchCI.visualMood)) {
               allCiResults.push(batchCI);
               ciSuccess = true;
+              var colors = (batchCI.primaryColors || []).slice(0, 3).join(', ');
+              addLog('     ✓ OK' + (colors ? ' — Farben: ' + colors : ''));
             } else {
-              addLog('     ⚠ Leeres Ergebnis, retry...');
+              addLog('     ⚠ Leeres Ergebnis (kein JSON mit Farben) — retry...');
             }
           } catch (batchErr) {
             if (ciAttempt < 2) {
               addLog('     ⚠ ' + batchErr.message + ' — retry in 2s...');
             } else {
-              addLog('     ⚠ 3/3 fehlgeschlagen: ' + batchErr.message + ' — übersprungen');
+              addLog('     ✗ FEHLGESCHLAGEN nach 3 Versuchen: ' + batchErr.message);
             }
           }
         }
@@ -591,6 +594,8 @@ function StepScraping({ data, updateData, log, addLog, running, setRunning, erro
       }
 
       // Merge CI results
+      var ciFailed = ciProducts.length - allCiResults.length;
+      addLog('   Ergebnis: ' + allCiResults.length + '/' + ciProducts.length + ' Produkte erfolgreich' + (ciFailed > 0 ? ', ' + ciFailed + ' fehlgeschlagen' : ''));
       var productCI = null;
       if (allCiResults.length > 0) {
         productCI = allCiResults[0];
@@ -601,6 +606,8 @@ function StepScraping({ data, updateData, log, addLog, running, setRunning, erro
         });
         productCI.primaryColors = Object.entries(colorCount).sort(function(a, b) { return b[1] - a[1]; }).slice(0, 8).map(function(e) { return e[0]; });
         addLog('✓ CI aggregiert — Hauptfarben: ' + productCI.primaryColors.join(', '));
+      } else {
+        addLog('⚠ Keine CI-Ergebnisse — Gemini konnte keine Bilder analysieren');
       }
 
       if (cancelRef.current) throw new Error('CANCELLED');
