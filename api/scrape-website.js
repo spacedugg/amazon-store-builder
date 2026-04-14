@@ -346,22 +346,38 @@ function extractFromPage(html, category) {
   listItems.filter(function(l) { return l.length > 15; }).slice(0, 30).forEach(function(l) { mainParts.push('- ' + l); });
   info.mainText = mainParts.join('\n').slice(0, 5000);
 
-  // ── CERTIFICATIONS ──
-  var certPatterns = /(?:zertifizier|certif|bio\b|organic|vegan|nachhaltig|sustainab|fair.?trade|iso\s?\d|tuv|tüv|dermatologisch|tested|geprüft|made.in|hergestellt|award|ausgezeichn|cruelty.?free|recycl|klimaneutral|co2|plastic.?free|gots|oeko.?tex|blauer.?engel|fsc|pefc)/gi;
+  // ── CERTIFICATIONS & TRUST SIGNALS ──
+  // Two sources: (1) text on the page, (2) alt/title attributes of images
+  // (many certifications are shown as badge IMAGES with descriptive alt text).
+  var certPatterns = /(?:zertifizier|certif|bio[\s-]?(?:siegel|zerti|label|qualit)|organic|vegan|vegetarisch|nachhaltig|sustainab|fair.?trade|fairtrade|iso[\s-]?\d|tuv|tüv|dekra|sgs\b|intertek|eurofins|dermatologisch|klinisch.?getestet|tested|geprüft|laborgeprüft|schadstoff|made.?in|hergestellt.?in|produziert.?in|award|ausgezeichn|prämier|preis.?träger|gewinner|stiftung.?warentest|öko.?test|vergleich.?org|trusted.?shop|proven.?expert|cruelty.?free|tierschutz|tierversuchsfrei|recycl|klimaneutral|co2.?neutral|co2.?kompensier|carbon.?neutral|plastic.?free|plastikfrei|gots\b|oeko.?tex|öko.?tex|blauer.?engel|fsc\b|pefc\b|eu.?bio|de.?öko|naturland|demeter|bioland|ecocert|cosmos|natrue|bdih|leaping.?bunny|peta\b|rainforest.?alliance|utz\b|msc\b|asc\b|v.?label|ohne.?gentechnik|gmo.?free|gluten.?free|glutenfrei|laktosefrei|lactose.?free|hypoallergen|ce.?kennzeichnung|ce.?marking|din[\s-]?\d|en[\s-]?\d|haccp|gmp\b|brc\b|ifs\b|halal|kosher|rohs\b|reach\b|weee\b|energy.?star|blue.?angel|green.?seal|nordic.?swan|eu.?ecolabel|cradle.?to.?cradle|b[\s-]?corp)/gi;
+
+  // Source 1: Page text (existing approach)
   var allText = stripTags(contentHtml);
-  var certMatches = allText.match(new RegExp('[^.!?]*(?:' + certPatterns.source + ')[^.!?]*[.!?]', 'gi'));
-  if (certMatches) {
+  var certMatches = allText.match(new RegExp('[^.!?]*(?:' + certPatterns.source + ')[^.!?]*[.!?]', 'gi')) || [];
+
+  // Source 2: Image alt texts and title attributes (catches badge/seal IMAGES)
+  var imgAltRegex = /<img[^>]*(?:alt|title)=["']([^"']+)["'][^>]*>/gi;
+  var imgMatch;
+  while ((imgMatch = imgAltRegex.exec(contentHtml)) !== null) {
+    var altText = cleanText(imgMatch[1]);
+    if (altText.length > 3 && altText.length < 200 && certPatterns.test(altText)) {
+      certMatches.push(altText);
+    }
+    certPatterns.lastIndex = 0; // reset regex state
+  }
+
+  if (certMatches.length > 0) {
     var seenCerts = {};
     info.certifications = certMatches
       .map(function(s) { return cleanText(s).slice(0, 200); })
       .filter(function(s) {
         if (/(?:open\s|menu|navigation|home\s|kontakt|warenkorb|cart|search|suche|anmelden|login|registr|cookie|datenschutz|impressum|agb)/i.test(s)) return false;
-        if (s.length < 15 || s.length > 180) return false;
+        if (s.length < 10 || s.length > 200) return false;
         var key = s.toLowerCase().slice(0, 40);
         if (seenCerts[key]) return false;
         seenCerts[key] = true;
         return true;
-      })
+      });
   }
 
   // ── FEATURES ── (no arbitrary cap — forward everything to AI)
