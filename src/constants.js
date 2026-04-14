@@ -41,6 +41,7 @@ export var LAYOUTS = [
   { id: 'vh-2equal', name: '2 Equal (VH)', type: 'vh', cells: 2, grid: 'vh-2equal', mobileCols: '1fr' },
   { id: 'vh-w2s', name: 'Wide + 2 Squares (VH)', type: 'vh', cells: 3, grid: 'vh-w2s', mobileCols: '1fr 1fr', mobileGrid: 'std-auto' },
   { id: 'vh-2sw', name: '2 Squares + Wide (VH)', type: 'vh', cells: 3, grid: 'vh-2sw', mobileCols: '1fr 1fr', mobileGrid: 'std-auto' },
+  { id: 'vh-4square', name: '4 Squares (VH)', type: 'vh', cells: 4, grid: 'vh-4square', mobileCols: '1fr 1fr' },
 ];
 
 // ─── LEGACY LAYOUT ID MAPPING ───
@@ -192,6 +193,7 @@ export var LAYOUT_TILE_DIMS = {
   'vh-2equal':  [I.VH_WIDE, I.VH_WIDE],
   'vh-w2s':     [I.VH_WIDE, I.VH_SQUARE, I.VH_SQUARE],
   'vh-2sw':     [I.VH_SQUARE, I.VH_SQUARE, I.VH_WIDE],
+  'vh-4square': [I.VH_SQUARE, I.VH_SQUARE, I.VH_SQUARE, I.VH_SQUARE],
 };
 
 // Helper: create empty tile with correct dimensions for a specific layout position

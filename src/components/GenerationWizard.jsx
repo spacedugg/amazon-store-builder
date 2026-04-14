@@ -113,7 +113,7 @@ var LAYOUT_CELL_COUNT = {
   '1': 1,
   'std-2equal': 2, 'vh-2equal': 2,
   'lg-2stack': 3, '2stack-lg': 3, 'vh-w2s': 3, 'vh-2sw': 3,
-  'lg-w2s': 4, 'w2s-lg': 4, '2x2wide': 4,
+  'lg-w2s': 4, 'w2s-lg': 4, '2x2wide': 4, 'vh-4square': 4,
   'lg-4grid': 5, '4grid-lg': 5,
   '2s-4grid': 6, '4grid-2s': 6,
   '4x2grid': 8,
@@ -980,7 +980,7 @@ function StepBrandAnalysis({ data, updateData, onNext, onBack }) {
             {usps.map(function(usp, idx) {
               return (
                 <div key={idx} style={{ display: 'flex', gap: 6, marginBottom: 4 }}>
-                  <input className="input" style={{ flex: 1 }} value={usp.text || ''} onChange={function(e) { updateUsp(idx, e.target.value); }} placeholder="USP-Text" />
+                  <textarea className="input" style={{ flex: 1, minHeight: 36, resize: 'vertical' }} rows={1} value={usp.text || ''} onChange={function(e) { updateUsp(idx, e.target.value); }} placeholder="USP-Text (Zeilenumbruch für mehrzeilig)" />
                   <span style={{ fontSize: 10, color: '#94a3b8', alignSelf: 'center' }}>{usp.source || 'manual'}</span>
                   <button className="btn" style={{ fontSize: 10 }} onClick={function() { removeUsp(idx); }}>×</button>
                 </div>
@@ -1350,31 +1350,74 @@ function derivePageContent(data) {
     });
   });
 
-  // Extra pages — USPs start EMPTY, user fills in what fits the page context
+  // Extra pages — auto-generate content from available brand data.
+  // NOT empty. The system generates relevant USPs, image ideas, and notes
+  // for every page type based on what data is available. User can still edit.
   var extras = data.extraPages || {};
-  var EXTRA_META = {
-    about_us: { name: 'Über uns', headline: 'Unsere Geschichte', cta: 'Mehr erfahren' },
-    bestsellers: { name: 'Bestseller', headline: 'Die beliebtesten Produkte', cta: 'Alle Bestseller' },
-    sustainability: { name: 'Nachhaltigkeit', headline: 'Verantwortung für Mensch und Umwelt', cta: 'Mehr über unsere Werte' },
-    how_it_works: { name: 'So funktioniert\'s', headline: 'Dein Produktfinder', cta: 'Los geht\'s' },
-    new_arrivals: { name: 'Neuheiten', headline: 'Was ist neu', cta: 'Jetzt entdecken' },
-    gift_sets: { name: 'Geschenk-Sets', headline: 'Die perfekte Geschenkidee', cta: 'Zur Auswahl' },
-    subscribe_save: { name: 'Spar-Abo', headline: 'Regelmäßig liefern, Geld sparen', cta: 'Abo starten' },
-    deals: { name: 'Angebote', headline: 'Aktuelle Deals', cta: 'Alle Angebote' },
+  var trustElements = (brandProfile.trustElements || []).map(function(t) { return t.text || t; }).filter(Boolean);
+  var certifications = [];
+  if (data.websiteData && data.websiteData.certifications) certifications = data.websiteData.certifications;
+  var websiteFeatures = [];
+  if (data.websiteData && data.websiteData.features) websiteFeatures = data.websiteData.features;
+  var bestProducts = (data.products || []).slice().sort(function(a, b) { return (b.reviews || 0) - (a.reviews || 0); });
+
+  var EXTRA_PAGES = {
+    about_us: {
+      name: 'Über uns', headline: 'Unsere Geschichte', cta: 'Mehr erfahren',
+      usps: brandUsps.slice(), // brand USPs fit well on about page
+      imageIdeas: ['founder or team portrait in the workspace', 'brand origin story visual: raw materials, production, heritage'],
+    },
+    bestsellers: {
+      name: 'Bestseller', headline: 'Die beliebtesten Produkte', cta: 'Alle Bestseller',
+      usps: trustElements.slice(0, 4), // "200.000 zufriedene Kunden" type trust signals
+      imageIdeas: ['top-selling product hero shot with lifestyle context'],
+      asins: bestProducts.slice(0, 12).map(function(p) { return p.asin; }),
+    },
+    sustainability: {
+      name: 'Nachhaltigkeit', headline: 'Verantwortung für Mensch und Umwelt', cta: 'Mehr über unsere Werte',
+      usps: certifications.filter(function(c) { return /nachhaltig|sustainab|bio|organic|recycl|klima|co2|öko|eco|fsc|pefc/i.test(c); }),
+      imageIdeas: ['eco-friendly packaging or sustainable production process', 'natural ingredients or raw materials in nature setting'],
+    },
+    how_it_works: {
+      name: 'So funktioniert\'s', headline: 'Dein Produktfinder', cta: 'Los geht\'s',
+      usps: websiteFeatures.slice(0, 4),
+      imageIdeas: ['step-by-step visual: problem → solution → result'],
+    },
+    new_arrivals: {
+      name: 'Neuheiten', headline: 'Was ist neu', cta: 'Jetzt entdecken',
+      usps: [],
+      imageIdeas: ['new product lineup arranged as collection'],
+    },
+    gift_sets: {
+      name: 'Geschenk-Sets', headline: 'Die perfekte Geschenkidee', cta: 'Zur Auswahl',
+      usps: [],
+      imageIdeas: ['gift box arrangement with ribbon, lifestyle gifting moment'],
+    },
+    subscribe_save: {
+      name: 'Spar-Abo', headline: 'Regelmäßig liefern, Geld sparen', cta: 'Abo starten',
+      usps: ['Bis zu 10% sparen', 'Jederzeit kündbar', 'Regelmäßige Lieferung'],
+      imageIdeas: ['subscription delivery at the doorstep, happy customer'],
+    },
+    deals: {
+      name: 'Angebote', headline: 'Aktuelle Deals', cta: 'Alle Angebote',
+      usps: [],
+      imageIdeas: ['eye-catching savings graphic with percentage badges'],
+      asins: bestProducts.slice(0, 12).map(function(p) { return p.asin; }),
+    },
   };
   Object.keys(extras).forEach(function(k) {
     if (!extras[k]) return;
-    var meta = EXTRA_META[k] || { name: k, headline: '', cta: 'Mehr erfahren' };
+    var meta = EXTRA_PAGES[k] || { name: k, headline: '', cta: 'Mehr erfahren', usps: [], imageIdeas: [] };
     pages.push({
       id: k,
       name: meta.name,
       kind: k,
       heroHeadline: meta.headline,
       heroSubline: '',
-      usps: [], // empty — user decides what fits this page
-      imageIdeas: [],
+      usps: meta.usps || [],
+      imageIdeas: meta.imageIdeas || [],
       cta: meta.cta,
-      asins: [],
+      asins: meta.asins || [],
       notes: '',
     });
   });
@@ -1554,7 +1597,7 @@ function StepContent({ data, updateData, onNext, onBack }) {
               {(active.usps || []).map(function(usp, ui) {
                 return (
                   <div key={ui} style={{ display: 'flex', gap: 4, marginBottom: 4 }}>
-                    <input className="input" style={{ flex: 1, fontSize: 11 }} value={usp} onChange={function(e) { updateUspOnPage(activeIdx, ui, e.target.value); }} placeholder={'USP ' + (ui + 1)} />
+                    <textarea className="input" style={{ flex: 1, fontSize: 11, minHeight: 32, resize: 'vertical' }} rows={1} value={usp} onChange={function(e) { updateUspOnPage(activeIdx, ui, e.target.value); }} placeholder={'USP ' + (ui + 1) + ' (Enter für neue Zeile)'} />
                     <button className="btn" style={{ fontSize: 10 }} onClick={function() { removeUspFromPage(activeIdx, ui); }}>×</button>
                   </div>
                 );
@@ -1624,6 +1667,7 @@ var WIZARD_LAYOUTS = [
   { id: 'vh-2equal', name: '2 Equal (VH)', cells: 2 },
   { id: 'vh-w2s', name: 'Wide + 2 Squares (VH)', cells: 3 },
   { id: 'vh-2sw', name: '2 Squares + Wide (VH)', cells: 3 },
+  { id: 'vh-4square', name: '4 Squares (VH)', cells: 4 },
 ];
 
 var WIZARD_TILE_TYPES = [
