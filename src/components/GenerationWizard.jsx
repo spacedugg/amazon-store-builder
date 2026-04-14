@@ -1212,6 +1212,10 @@ function StepCategories({ data, updateData, onNext, onBack }) {
     updateData({ categories: { categories: next } });
   };
 
+  // Inline ASIN search component for adding ASINs to a category
+  var [searchCatIdx, setSearchCatIdx] = useState(null);
+  var [searchQuery, setSearchQuery] = useState('');
+
   var removeCategory = function(idx) {
     if (!confirm('Kategorie "' + categories[idx].name + '" wirklich löschen? Die enthaltenen ASINs werden nicht zugeordnet.')) return;
     var next = categories.slice(); next.splice(idx, 1);
@@ -1230,21 +1234,17 @@ function StepCategories({ data, updateData, onNext, onBack }) {
     updateData({ categories: { categories: next } });
   };
 
-  var moveAsinToCategory = function(asin, targetCatIdx) {
+  // Add ASIN to category (does NOT remove from other categories — allows multi-assignment)
+  var addAsinToCategory = function(asin, targetCatIdx) {
     var next = categories.slice();
-    // Remove from all categories first
-    for (var i = 0; i < next.length; i++) {
-      var cat = Object.assign({}, next[i]);
-      cat.asins = (cat.asins || []).filter(function(a) { return a !== asin; });
-      next[i] = cat;
-    }
-    // Add to target
     if (targetCatIdx >= 0 && next[targetCatIdx]) {
       var tgt = Object.assign({}, next[targetCatIdx]);
-      tgt.asins = (tgt.asins || []).concat([asin]);
+      var asins = (tgt.asins || []).slice();
+      if (asins.indexOf(asin) < 0) asins.push(asin);
+      tgt.asins = asins;
       next[targetCatIdx] = tgt;
+      updateData({ categories: { categories: next } });
     }
-    updateData({ categories: { categories: next } });
   };
 
   // Validation: find ASINs not in any category
@@ -1260,7 +1260,7 @@ function StepCategories({ data, updateData, onNext, onBack }) {
   return (
     <div>
       <div style={{ fontSize: 13, color: '#334155', marginBottom: 12 }}>
-        <strong>Checkpoint:</strong> Prüfe die Kategorien. Du kannst Namen ändern, ASINs verschieben, Kategorien hinzufügen/entfernen. <strong>Jede ASIN muss in mindestens einer Kategorie sein.</strong>
+        <strong>Checkpoint:</strong> Prüfe die Kategorien. ASINs können in <strong>mehreren Kategorien</strong> gleichzeitig sein. Jede ASIN muss in mindestens einer Kategorie vorkommen.
       </div>
 
       {missingAsins.length > 0 && (
@@ -1272,8 +1272,8 @@ function StepCategories({ data, updateData, onNext, onBack }) {
               return (
                 <div key={a} style={{ padding: '3px 6px', background: '#fff', border: '1px solid #fecaca', borderRadius: 3, fontSize: 10 }}>
                   <strong>{a}</strong> {p ? ('— ' + (p.name || '').slice(0, 40)) : ''}
-                  <select style={{ fontSize: 10, marginLeft: 4, border: '1px solid #e2e8f0', borderRadius: 3 }} value="" onChange={function(e) { if (e.target.value !== '') moveAsinToCategory(a, parseInt(e.target.value, 10)); }}>
-                    <option value="">→ Kategorie...</option>
+                  <select style={{ fontSize: 10, marginLeft: 4, border: '1px solid #e2e8f0', borderRadius: 3 }} value="" onChange={function(e) { if (e.target.value !== '') addAsinToCategory(a, parseInt(e.target.value, 10)); }}>
+                    <option value="">+ Kategorie...</option>
                     {categories.map(function(c, ci) { return <option key={ci} value={ci}>{c.name}</option>; })}
                   </select>
                 </div>
@@ -1305,6 +1305,37 @@ function StepCategories({ data, updateData, onNext, onBack }) {
               })}
               {(cat.asins || []).length === 0 && <span style={{ fontSize: 10, color: '#94a3b8' }}>Keine Produkte zugeordnet</span>}
             </div>
+            {/* ASIN search + add */}
+            {searchCatIdx === idx ? (
+              <div style={{ marginTop: 6, position: 'relative' }}>
+                <input className="input" style={{ fontSize: 11 }} autoFocus placeholder="ASIN oder Produktname suchen..." value={searchQuery} onChange={function(e) { setSearchQuery(e.target.value); }} onBlur={function() { setTimeout(function() { setSearchCatIdx(null); setSearchQuery(''); }, 200); }} />
+                {searchQuery.trim().length > 0 && (
+                  <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 20, background: '#fff', border: '1px solid #e2e8f0', borderRadius: '0 0 6px 6px', boxShadow: '0 4px 12px rgba(0,0,0,.1)', maxHeight: 180, overflow: 'auto' }}>
+                    {(function() {
+                      var q = searchQuery.trim().toLowerCase();
+                      var matches = allAsins.filter(function(a) {
+                        if ((cat.asins || []).indexOf(a) >= 0) return false; // already in this category
+                        var p = productsByAsin[a];
+                        var name = p ? (p.name || '').toLowerCase() : '';
+                        return a.toLowerCase().indexOf(q) >= 0 || name.indexOf(q) >= 0;
+                      });
+                      if (matches.length === 0) return <div style={{ padding: '8px 10px', fontSize: 10, color: '#94a3b8' }}>Keine Treffer</div>;
+                      return matches.slice(0, 15).map(function(a) {
+                        var p = productsByAsin[a];
+                        return (
+                          <div key={a} onMouseDown={function(e) { e.preventDefault(); addAsinToCategory(a, idx); setSearchQuery(''); }} style={{ padding: '6px 10px', fontSize: 10, cursor: 'pointer', borderBottom: '1px solid #f1f5f9', display: 'flex', gap: 6, alignItems: 'center' }} onMouseOver={function(e) { e.currentTarget.style.background = '#f0f9ff'; }} onMouseOut={function(e) { e.currentTarget.style.background = ''; }}>
+                            <span style={{ fontFamily: 'monospace', fontWeight: 600, flexShrink: 0 }}>{a}</span>
+                            <span style={{ color: '#64748b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p ? p.name : ''}</span>
+                          </div>
+                        );
+                      });
+                    })()}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <button className="btn" style={{ fontSize: 10, marginTop: 6 }} onClick={function() { setSearchCatIdx(idx); setSearchQuery(''); }}>+ ASIN suchen &amp; hinzufügen</button>
+            )}
           </div>
         );
       })}
