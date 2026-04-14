@@ -1230,21 +1230,17 @@ function StepCategories({ data, updateData, onNext, onBack }) {
     updateData({ categories: { categories: next } });
   };
 
-  var moveAsinToCategory = function(asin, targetCatIdx) {
+  // Add ASIN to category (does NOT remove from other categories — allows multi-assignment)
+  var addAsinToCategory = function(asin, targetCatIdx) {
     var next = categories.slice();
-    // Remove from all categories first
-    for (var i = 0; i < next.length; i++) {
-      var cat = Object.assign({}, next[i]);
-      cat.asins = (cat.asins || []).filter(function(a) { return a !== asin; });
-      next[i] = cat;
-    }
-    // Add to target
     if (targetCatIdx >= 0 && next[targetCatIdx]) {
       var tgt = Object.assign({}, next[targetCatIdx]);
-      tgt.asins = (tgt.asins || []).concat([asin]);
+      var asins = (tgt.asins || []).slice();
+      if (asins.indexOf(asin) < 0) asins.push(asin);
+      tgt.asins = asins;
       next[targetCatIdx] = tgt;
+      updateData({ categories: { categories: next } });
     }
-    updateData({ categories: { categories: next } });
   };
 
   // Validation: find ASINs not in any category
@@ -1260,7 +1256,7 @@ function StepCategories({ data, updateData, onNext, onBack }) {
   return (
     <div>
       <div style={{ fontSize: 13, color: '#334155', marginBottom: 12 }}>
-        <strong>Checkpoint:</strong> Prüfe die Kategorien. Du kannst Namen ändern, ASINs verschieben, Kategorien hinzufügen/entfernen. <strong>Jede ASIN muss in mindestens einer Kategorie sein.</strong>
+        <strong>Checkpoint:</strong> Prüfe die Kategorien. ASINs können in <strong>mehreren Kategorien</strong> gleichzeitig sein. Jede ASIN muss in mindestens einer Kategorie vorkommen.
       </div>
 
       {missingAsins.length > 0 && (
@@ -1272,8 +1268,8 @@ function StepCategories({ data, updateData, onNext, onBack }) {
               return (
                 <div key={a} style={{ padding: '3px 6px', background: '#fff', border: '1px solid #fecaca', borderRadius: 3, fontSize: 10 }}>
                   <strong>{a}</strong> {p ? ('— ' + (p.name || '').slice(0, 40)) : ''}
-                  <select style={{ fontSize: 10, marginLeft: 4, border: '1px solid #e2e8f0', borderRadius: 3 }} value="" onChange={function(e) { if (e.target.value !== '') moveAsinToCategory(a, parseInt(e.target.value, 10)); }}>
-                    <option value="">→ Kategorie...</option>
+                  <select style={{ fontSize: 10, marginLeft: 4, border: '1px solid #e2e8f0', borderRadius: 3 }} value="" onChange={function(e) { if (e.target.value !== '') addAsinToCategory(a, parseInt(e.target.value, 10)); }}>
+                    <option value="">+ Kategorie...</option>
                     {categories.map(function(c, ci) { return <option key={ci} value={ci}>{c.name}</option>; })}
                   </select>
                 </div>
@@ -1304,6 +1300,14 @@ function StepCategories({ data, updateData, onNext, onBack }) {
                 );
               })}
               {(cat.asins || []).length === 0 && <span style={{ fontSize: 10, color: '#94a3b8' }}>Keine Produkte zugeordnet</span>}
+              {/* Add existing ASIN to this category (multi-assignment) */}
+              <select style={{ fontSize: 10, border: '1px solid #e2e8f0', borderRadius: 3, padding: '3px 6px', color: '#64748b' }} value="" onChange={function(e) { if (e.target.value) addAsinToCategory(e.target.value, idx); }}>
+                <option value="">+ ASIN hinzufügen...</option>
+                {allAsins.filter(function(a) { return (cat.asins || []).indexOf(a) < 0; }).map(function(a) {
+                  var p = productsByAsin[a];
+                  return <option key={a} value={a}>{a} — {p ? (p.name || '').slice(0, 40) : ''}</option>;
+                })}
+              </select>
             </div>
           </div>
         );
