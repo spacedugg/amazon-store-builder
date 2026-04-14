@@ -517,17 +517,21 @@ function StepScraping({ data, updateData, log, addLog, running, setRunning, erro
       if (cancelRef.current) throw new Error('CANCELLED');
 
       // 3. Per-product CI analysis via Gemini Vision
+      // Cap at 20 products — enough to establish the brand's visual identity.
+      // For 300+ product brands, analyzing all is overkill (colors repeat).
+      var CI_MAX_PRODUCTS = 20;
+      var ciProducts = products.slice(0, CI_MAX_PRODUCTS);
       addLog('');
-      addLog('═══ CI-Analyse pro Produkt (Gemini Vision) ═══');
+      addLog('═══ CI-Analyse (' + ciProducts.length + (products.length > CI_MAX_PRODUCTS ? '/' + products.length + ' — Rest übersprungen' : '') + ' Produkte, Gemini Vision) ═══');
       var allCiResults = [];
-      for (var pi = 0; pi < products.length; pi++) {
+      for (var pi = 0; pi < ciProducts.length; pi++) {
         if (cancelRef.current) throw new Error('CANCELLED');
-        var pImgs = (products[pi].images || []).map(function(img) {
+        var pImgs = (ciProducts[pi].images || []).map(function(img) {
           var u = typeof img === 'string' ? img : (img.url || '');
-          return u ? { url: u, context: products[pi].name } : null;
+          return u ? { url: u, context: ciProducts[pi].name } : null;
         }).filter(Boolean);
         if (pImgs.length === 0) { continue; }
-        addLog('   Produkt ' + (pi + 1) + '/' + products.length + ': ' + pImgs.length + ' Bilder — ' + (products[pi].name || '').slice(0, 50));
+        addLog('   Produkt ' + (pi + 1) + '/' + ciProducts.length + ': ' + pImgs.length + ' Bilder — ' + (ciProducts[pi].name || '').slice(0, 50));
         try {
           var batchCI = await analyzeBrandCI(pImgs, data.brand);
           if (batchCI && (batchCI.primaryColors || batchCI.visualMood)) {
@@ -536,7 +540,7 @@ function StepScraping({ data, updateData, log, addLog, running, setRunning, erro
         } catch (batchErr) {
           addLog('     ⚠ Fehler: ' + batchErr.message);
         }
-        if (pi < products.length - 1) await new Promise(function(r) { setTimeout(r, 400); });
+        if (pi < ciProducts.length - 1) await new Promise(function(r) { setTimeout(r, 400); });
       }
 
       // Merge CI results
