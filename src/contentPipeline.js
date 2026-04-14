@@ -38,7 +38,7 @@ async function callClaude(systemPrompt, userPrompt, maxTokens) {
 // Called once per ASIN. Small focused call.
 // ═══════════════════════════════════════════════════════════════
 export async function analyzeOneProduct(product) {
-  var system = 'You analyze a single Amazon product for Brand Store creation. Return ONLY valid JSON.';
+  var system = 'You analyze a single Amazon product for Brand Store creation. Return ONLY valid JSON. NEVER use hyphens, dashes or m-dashes to combine text elements. Use line breaks or hierarchy (bold/regular) instead.';
   var user = [
     'Product: ' + product.name,
     'ASIN: ' + product.asin,
@@ -134,6 +134,8 @@ export async function synthesizeBrandProfile(allProductAnalyses, allWebsiteAnaly
     'You create the definitive brand profile for a Brand Store.',
     'All data has been pre-analyzed. Your job is to SYNTHESIZE, not re-analyze.',
     'Return ONLY valid JSON. All texts in ' + lang + '.',
+    'TEXT RULE: NEVER use hyphens (-), m-dashes (—), or en-dashes (–) to combine two text elements.',
+    'Use line breaks or text hierarchy (headline + subline) instead. Example: NOT "Hochdosiert - Made in Germany" but "Hochdosiert\\nMade in Germany".',
   ].join('\n');
 
   // Collect all USPs from website pages
@@ -242,6 +244,8 @@ export async function generateOnePage(pagePlan, brandProfile, categories, produc
     'Your job: fill the sections with real content. No filler. No generic text.',
     'Return ONLY valid JSON. All textOverlay texts in ' + lang + '.',
     'Briefs in English, 10-20 words max — just the image idea.',
+    'TEXT RULE: NEVER use hyphens (-), m-dashes (—), or en-dashes (–) to combine text blocks in headings, USPs, features, or overlays.',
+    'Use line breaks (\\n) for multi-line text. Use hierarchy (larger text + smaller text) instead of dashes.',
   ].join('\n');
 
   // Find relevant products for this page

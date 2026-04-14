@@ -39,6 +39,14 @@ export function getGridConfig(layout, isMobile) {
       };
     }
 
+    // VH 4 squares mobile: 2×2 grid
+    if (g === 'vh-4square') {
+      return {
+        gridStyle: { gridTemplateColumns: '1fr 1fr' },
+        getTileStyle: function() { return {}; },
+      };
+    }
+
     // VH w2s / 2sw mobile: W spans, SS pair
     if (g === 'vh-w2s' || g === 'vh-2sw') {
       return {
@@ -105,6 +113,16 @@ export function getGridConfig(layout, isMobile) {
         if (i === 1) return { gridColumn: '2' };
         if (i === 2) return { gridColumn: '3 / 5' };
         return {};
+      },
+    };
+  }
+
+  // VH: 4 Squares (SS×4, desktop: 4 across, mobile: 2×2 grid)
+  if (g === 'vh-4square') {
+    return {
+      gridStyle: { gridTemplateColumns: '1fr 1fr 1fr 1fr', aspectRatio: '4' },
+      getTileStyle: function(i) {
+        return { gridColumn: '' + (i + 1) };
       },
     };
   }
