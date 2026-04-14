@@ -1350,9 +1350,10 @@ function derivePageContent(data) {
     });
   });
 
-  // Extra pages — auto-generate content from available brand data.
-  // NOT empty. The system generates relevant USPs, image ideas, and notes
-  // for every page type based on what data is available. User can still edit.
+  // Extra pages — content is derived from REAL data, not hardcoded templates.
+  // Each page type pulls from different data sources based on what's available.
+  // If no relevant data exists for a page type, USPs/imageIdeas stay empty
+  // and the user either fills them or the AI generates from context in Step 6.
   var extras = data.extraPages || {};
   var trustElements = (brandProfile.trustElements || []).map(function(t) { return t.text || t; }).filter(Boolean);
   var certifications = [];
@@ -1361,62 +1362,85 @@ function derivePageContent(data) {
   if (data.websiteData && data.websiteData.features) websiteFeatures = data.websiteData.features;
   var bestProducts = (data.products || []).slice().sort(function(a, b) { return (b.reviews || 0) - (a.reviews || 0); });
 
+  // Collect sustainability-related certs from real website data
+  var sustainCerts = certifications.filter(function(c) {
+    return /nachhaltig|sustainab|bio|organic|recycl|klima|co2|öko|eco|fsc|pefc|fair|cruelty|vegan/i.test(c);
+  });
+
   var EXTRA_PAGES = {
     about_us: {
-      name: 'Über uns', headline: 'Unsere Geschichte', cta: 'Mehr erfahren',
-      usps: brandUsps.slice(), // brand USPs fit well on about page
-      imageIdeas: ['founder or team portrait in the workspace', 'brand origin story visual: raw materials, production, heritage'],
+      name: 'Über uns',
+      headline: brandProfile.brandStory && brandProfile.brandStory.headline ? brandProfile.brandStory.headline : data.brand,
+      cta: '',
+      // About page: brand USPs are relevant here (what the whole brand stands for)
+      usps: brandUsps.slice(),
+      imageIdeas: [],
     },
     bestsellers: {
-      name: 'Bestseller', headline: 'Die beliebtesten Produkte', cta: 'Alle Bestseller',
-      usps: trustElements.slice(0, 4), // "200.000 zufriedene Kunden" type trust signals
-      imageIdeas: ['top-selling product hero shot with lifestyle context'],
+      name: 'Bestseller',
+      headline: '',
+      cta: '',
+      usps: trustElements, // real trust signals from brand profile
+      imageIdeas: [],
       asins: bestProducts.slice(0, 12).map(function(p) { return p.asin; }),
     },
     sustainability: {
-      name: 'Nachhaltigkeit', headline: 'Verantwortung für Mensch und Umwelt', cta: 'Mehr über unsere Werte',
-      usps: certifications.filter(function(c) { return /nachhaltig|sustainab|bio|organic|recycl|klima|co2|öko|eco|fsc|pefc/i.test(c); }),
-      imageIdeas: ['eco-friendly packaging or sustainable production process', 'natural ingredients or raw materials in nature setting'],
+      name: 'Nachhaltigkeit',
+      headline: '',
+      cta: '',
+      // Only REAL certifications that relate to sustainability
+      usps: sustainCerts,
+      imageIdeas: [],
     },
     how_it_works: {
-      name: 'So funktioniert\'s', headline: 'Dein Produktfinder', cta: 'Los geht\'s',
-      usps: websiteFeatures.slice(0, 4),
-      imageIdeas: ['step-by-step visual: problem → solution → result'],
+      name: 'So funktioniert\'s',
+      headline: '',
+      cta: '',
+      usps: websiteFeatures, // real features from website scraping
+      imageIdeas: [],
     },
     new_arrivals: {
-      name: 'Neuheiten', headline: 'Was ist neu', cta: 'Jetzt entdecken',
+      name: 'Neuheiten',
+      headline: '',
+      cta: '',
       usps: [],
-      imageIdeas: ['new product lineup arranged as collection'],
+      imageIdeas: [],
     },
     gift_sets: {
-      name: 'Geschenk-Sets', headline: 'Die perfekte Geschenkidee', cta: 'Zur Auswahl',
+      name: 'Geschenk-Sets',
+      headline: '',
+      cta: '',
       usps: [],
-      imageIdeas: ['gift box arrangement with ribbon, lifestyle gifting moment'],
+      imageIdeas: [],
     },
     subscribe_save: {
-      name: 'Spar-Abo', headline: 'Regelmäßig liefern, Geld sparen', cta: 'Abo starten',
-      usps: ['Bis zu 10% sparen', 'Jederzeit kündbar', 'Regelmäßige Lieferung'],
-      imageIdeas: ['subscription delivery at the doorstep, happy customer'],
+      name: 'Spar-Abo',
+      headline: '',
+      cta: '',
+      usps: [], // no defaults — must come from real brand data
+      imageIdeas: [],
     },
     deals: {
-      name: 'Angebote', headline: 'Aktuelle Deals', cta: 'Alle Angebote',
+      name: 'Angebote',
+      headline: '',
+      cta: '',
       usps: [],
-      imageIdeas: ['eye-catching savings graphic with percentage badges'],
+      imageIdeas: [],
       asins: bestProducts.slice(0, 12).map(function(p) { return p.asin; }),
     },
   };
   Object.keys(extras).forEach(function(k) {
     if (!extras[k]) return;
-    var meta = EXTRA_PAGES[k] || { name: k, headline: '', cta: 'Mehr erfahren', usps: [], imageIdeas: [] };
+    var meta = EXTRA_PAGES[k] || { name: k, headline: '', cta: '', usps: [], imageIdeas: [] };
     pages.push({
       id: k,
       name: meta.name,
       kind: k,
-      heroHeadline: meta.headline,
+      heroHeadline: meta.headline || '',
       heroSubline: '',
       usps: meta.usps || [],
       imageIdeas: meta.imageIdeas || [],
-      cta: meta.cta,
+      cta: meta.cta || '',
       asins: meta.asins || [],
       notes: '',
     });
