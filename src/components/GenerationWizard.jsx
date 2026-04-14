@@ -600,23 +600,46 @@ function StepScraping({ data, updateData, log, addLog, running, setRunning, erro
       addLog('   Ergebnis: ' + allCiResults.length + '/' + ciProducts.length + ' Produkte erfolgreich' + (ciFailed > 0 ? ', ' + ciFailed + ' fehlgeschlagen' : ''));
       var productCI = null;
       if (allCiResults.length > 0) {
-        // Color aggregation (already existed)
+        // Color aggregation — filter out generic white/black/gray that come from
+        // product photo backgrounds, not from brand identity.
+        function isGenericColor(hex) {
+          var c = (hex || '').toLowerCase().replace('#', '');
+          if (c.length === 3) c = c[0] + c[0] + c[1] + c[1] + c[2] + c[2];
+          if (c.length !== 6) return true;
+          var r = parseInt(c.slice(0, 2), 16);
+          var g = parseInt(c.slice(2, 4), 16);
+          var b = parseInt(c.slice(4, 6), 16);
+          // Pure white, near-white, pure black, near-black, and neutral grays
+          var brightness = (r + g + b) / 3;
+          var saturation = Math.max(r, g, b) - Math.min(r, g, b);
+          if (brightness > 240 && saturation < 15) return true; // near-white
+          if (brightness < 15 && saturation < 15) return true;  // near-black
+          if (saturation < 10 && brightness > 50 && brightness < 200) return true; // neutral gray
+          return false;
+        }
         var colorCount = {};
         allCiResults.forEach(function(r) {
-          (r.primaryColors || []).forEach(function(c) { colorCount[c] = (colorCount[c] || 0) + 1; });
-          (r.secondaryColors || []).forEach(function(c) { colorCount[c] = (colorCount[c] || 0) + 1; });
+          (r.primaryColors || []).forEach(function(c) { if (!isGenericColor(c)) colorCount[c] = (colorCount[c] || 0) + 1; });
+          (r.secondaryColors || []).forEach(function(c) { if (!isGenericColor(c)) colorCount[c] = (colorCount[c] || 0) + 1; });
         });
         var sortedColors = Object.entries(colorCount).sort(function(a, b) { return b[1] - a[1]; });
         var mergedPrimary = sortedColors.slice(0, 6).map(function(e) { return e[0]; });
         var mergedSecondary = sortedColors.slice(6, 10).map(function(e) { return e[0]; });
 
-        // String field aggregation: pick most frequent value
+        // String field aggregation: pick most frequent value, but also collect
+        // ALL unique values so the user can see what was found per product.
+        var ciFieldVariants = {}; // field → [all unique values]
         function mostCommonValue(field) {
           var counts = {};
+          var allValues = [];
           allCiResults.forEach(function(r) {
             var val = r[field];
-            if (val && typeof val === 'string') counts[val] = (counts[val] || 0) + 1;
+            if (val && typeof val === 'string') {
+              counts[val] = (counts[val] || 0) + 1;
+              if (allValues.indexOf(val) < 0) allValues.push(val);
+            }
           });
+          ciFieldVariants[field] = allValues;
           var best = ''; var bestN = 0;
           Object.keys(counts).forEach(function(k) { if (counts[k] > bestN) { best = k; bestN = counts[k]; } });
           return best;
@@ -665,6 +688,9 @@ function StepScraping({ data, updateData, log, addLog, running, setRunning, erro
           // Meta
           productsAnalyzed: allCiResults.length,
           productsFailed: ciFailed,
+          // All unique per-field values (so user can see what Gemini found per product
+          // and correct if the "most common" pick is wrong)
+          fieldVariants: ciFieldVariants,
         };
 
         addLog('✓ CI aggregiert aus ' + allCiResults.length + ' Produkten:');
@@ -911,6 +937,13 @@ function StepBrandAnalysis({ data, updateData, onNext, onBack }) {
     var next = usps.slice(); next.splice(idx, 1);
     updateData({ brandProfile: Object.assign({}, data.brandProfile, { usps: next }) });
   };
+  var moveUsp = function(idx, delta) {
+    var next = usps.slice();
+    var newIdx = idx + delta;
+    if (newIdx < 0 || newIdx >= next.length) return;
+    var tmp = next[idx]; next[idx] = next[newIdx]; next[newIdx] = tmp;
+    updateData({ brandProfile: Object.assign({}, data.brandProfile, { usps: next }) });
+  };
 
   var updateVoice = function(key, val) {
     updateData({ brandVoice: Object.assign({}, data.brandVoice || {}, { [key]: val }) });
@@ -979,10 +1012,14 @@ function StepBrandAnalysis({ data, updateData, onNext, onBack }) {
             <div style={{ fontSize: 11, color: '#64748b', marginBottom: 6 }}>USPs kommen aus den echten Website-/Produktdaten — nicht erfunden.</div>
             {usps.map(function(usp, idx) {
               return (
-                <div key={idx} style={{ display: 'flex', gap: 6, marginBottom: 4 }}>
-                  <textarea className="input" style={{ flex: 1, minHeight: 36, resize: 'vertical' }} rows={1} value={usp.text || ''} onChange={function(e) { updateUsp(idx, e.target.value); }} placeholder="USP-Text (Zeilenumbruch für mehrzeilig)" />
-                  <span style={{ fontSize: 10, color: '#94a3b8', alignSelf: 'center' }}>{usp.source || 'manual'}</span>
-                  <button className="btn" style={{ fontSize: 10 }} onClick={function() { removeUsp(idx); }}>×</button>
+                <div key={idx} style={{ display: 'flex', gap: 4, marginBottom: 4, alignItems: 'flex-start' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 1, paddingTop: 6 }}>
+                    <button className="btn" style={{ fontSize: 9, padding: '1px 4px', lineHeight: 1 }} onClick={function() { moveUsp(idx, -1); }} disabled={idx === 0}>↑</button>
+                    <button className="btn" style={{ fontSize: 9, padding: '1px 4px', lineHeight: 1 }} onClick={function() { moveUsp(idx, 1); }} disabled={idx === usps.length - 1}>↓</button>
+                  </div>
+                  <textarea className="input" style={{ flex: 1, minHeight: 36, resize: 'vertical' }} rows={1} value={usp.text || ''} onChange={function(e) { updateUsp(idx, e.target.value); }} placeholder="USP-Text (Enter für mehrzeilig)" />
+                  <span style={{ fontSize: 10, color: '#94a3b8', alignSelf: 'center', whiteSpace: 'nowrap' }}>{usp.source || 'manual'}</span>
+                  <button className="btn" style={{ fontSize: 10, alignSelf: 'center' }} onClick={function() { removeUsp(idx); }}>×</button>
                 </div>
               );
             })}
@@ -991,17 +1028,11 @@ function StepBrandAnalysis({ data, updateData, onNext, onBack }) {
 
           {/* Brand Story */}
           <div style={{ padding: 14, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 8, marginBottom: 12 }}>
-            <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 8 }}>Brand Story</div>
-            <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, marginBottom: 6 }}>
-              <input type="checkbox" checked={!!(data.brandProfile.brandStory && data.brandProfile.brandStory.available)} onChange={function(e) { updateStory('available', e.target.checked); }} />
-              Brand Story verfügbar
-            </label>
-            {data.brandProfile.brandStory && data.brandProfile.brandStory.available && (
-              <>
-                <input className="input" placeholder="Headline" value={data.brandProfile.brandStory.headline || ''} onChange={function(e) { updateStory('headline', e.target.value); }} />
-                <textarea className="input" rows={3} style={{ marginTop: 4 }} placeholder="2-4 Sätze Markengeschichte" value={data.brandProfile.brandStory.text || ''} onChange={function(e) { updateStory('text', e.target.value); }} />
-              </>
-            )}
+            <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 4 }}>Brand Story / Markengeschichte</div>
+            <div style={{ fontSize: 11, color: '#64748b', marginBottom: 8 }}>
+              Alles was die Marke ausmacht: Gründung, Herkunft, Mission, Werte. Wird verwendet für "Über uns"-Seite, Homepage-Module und überall wo die KI Markenhintergrund braucht. Leer lassen wenn keine Story verfügbar ist.
+            </div>
+            <textarea className="input" rows={4} placeholder="Markengeschichte, Gründerstory, Mission, Werte — alles was für Brand-Story-Module relevant ist" value={(data.brandProfile.brandStory && data.brandProfile.brandStory.text) || ''} onChange={function(e) { updateStory('text', e.target.value); updateStory('available', e.target.value.trim().length > 0); }} />
           </div>
 
           {/* Full CI Profile (from product images via Gemini) */}
@@ -1037,39 +1068,47 @@ function StepBrandAnalysis({ data, updateData, onNext, onBack }) {
                 </div>
               )}
 
-              {/* Typography + Visual Mood + Photography in grid */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 8 }}>
-                {data.productCI.typographyStyle && (
-                  <div>
-                    <div style={{ fontSize: 10, color: '#64748b', fontWeight: 600 }}>Typografie</div>
-                    <div style={{ fontSize: 11, color: '#0f172a' }}>{data.productCI.typographyStyle}</div>
+              {/* Typography + Visual Mood + Photography in grid — all EDITABLE */}
+              {(function() {
+                var variants = data.productCI.fieldVariants || {};
+                var updateCI = function(key, val) {
+                  var next = Object.assign({}, data.productCI, { [key]: val });
+                  updateData({ productCI: next });
+                };
+                var ciFields = [
+                  { key: 'typographyStyle', label: 'Typografie' },
+                  { key: 'visualMood', label: 'Visual Mood' },
+                  { key: 'photographyStyle', label: 'Fotografie-Stil' },
+                  { key: 'textDensity', label: 'Textdichte' },
+                  { key: 'backgroundPattern', label: 'Hintergrund' },
+                ];
+                return (
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 8 }}>
+                    {ciFields.map(function(f) {
+                      var value = data.productCI[f.key];
+                      if (!value && !(variants[f.key] && variants[f.key].length > 0)) return null;
+                      var fieldVariants = variants[f.key] || [];
+                      return (
+                        <div key={f.key}>
+                          <div style={{ fontSize: 10, color: '#64748b', fontWeight: 600, marginBottom: 2 }}>
+                            {f.label}
+                            {fieldVariants.length > 1 && (
+                              <span style={{ fontWeight: 400, color: '#94a3b8' }}> ({fieldVariants.length} Varianten gefunden)</span>
+                            )}
+                          </div>
+                          <input className="input" style={{ fontSize: 11 }} value={value || ''} onChange={function(e) { updateCI(f.key, e.target.value); }} />
+                          {fieldVariants.length > 1 && (
+                            <select className="input" style={{ fontSize: 10, marginTop: 2, color: '#64748b' }} value="" onChange={function(e) { if (e.target.value) updateCI(f.key, e.target.value); }}>
+                              <option value="">Andere Variante wählen...</option>
+                              {fieldVariants.map(function(v, vi) { return <option key={vi} value={v}>{v}</option>; })}
+                            </select>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
-                )}
-                {data.productCI.visualMood && (
-                  <div>
-                    <div style={{ fontSize: 10, color: '#64748b', fontWeight: 600 }}>Visual Mood</div>
-                    <div style={{ fontSize: 11, color: '#0f172a' }}>{data.productCI.visualMood}</div>
-                  </div>
-                )}
-                {data.productCI.photographyStyle && (
-                  <div>
-                    <div style={{ fontSize: 10, color: '#64748b', fontWeight: 600 }}>Fotografie-Stil</div>
-                    <div style={{ fontSize: 11, color: '#0f172a' }}>{data.productCI.photographyStyle}</div>
-                  </div>
-                )}
-                {data.productCI.textDensity && (
-                  <div>
-                    <div style={{ fontSize: 10, color: '#64748b', fontWeight: 600 }}>Textdichte</div>
-                    <div style={{ fontSize: 11, color: '#0f172a' }}>{data.productCI.textDensity}</div>
-                  </div>
-                )}
-                {data.productCI.backgroundPattern && (
-                  <div>
-                    <div style={{ fontSize: 10, color: '#64748b', fontWeight: 600 }}>Hintergrund</div>
-                    <div style={{ fontSize: 11, color: '#0f172a' }}>{data.productCI.backgroundPattern}</div>
-                  </div>
-                )}
-              </div>
+                );
+              })()}
 
               {/* Recurring Elements */}
               {(data.productCI.recurringElements || []).length > 0 && (

@@ -309,10 +309,22 @@ export default function App() {
                 });
                 return out;
               }
+              // Filter generic white/black/gray that come from product photo BGs
+              function ciIsGenericColor(hex) {
+                var c = (hex || '').toLowerCase().replace('#', '');
+                if (c.length === 3) c = c[0] + c[0] + c[1] + c[1] + c[2] + c[2];
+                if (c.length !== 6) return true;
+                var r = parseInt(c.slice(0, 2), 16), g = parseInt(c.slice(2, 4), 16), b = parseInt(c.slice(4, 6), 16);
+                var brightness = (r + g + b) / 3, saturation = Math.max(r, g, b) - Math.min(r, g, b);
+                if (brightness > 240 && saturation < 15) return true;
+                if (brightness < 15 && saturation < 15) return true;
+                if (saturation < 10 && brightness > 50 && brightness < 200) return true;
+                return false;
+              }
               var allColors = {};
               allCiResults.forEach(function(r) {
-                (r.primaryColors || []).forEach(function(c) { allColors[c] = (allColors[c] || 0) + 1; });
-                (r.secondaryColors || []).forEach(function(c) { allColors[c] = (allColors[c] || 0) + 1; });
+                (r.primaryColors || []).forEach(function(c) { if (!ciIsGenericColor(c)) allColors[c] = (allColors[c] || 0) + 1; });
+                (r.secondaryColors || []).forEach(function(c) { if (!ciIsGenericColor(c)) allColors[c] = (allColors[c] || 0) + 1; });
               });
               var sortedColors = Object.entries(allColors).sort(function(a, b) { return b[1] - a[1]; });
               productCI = {
