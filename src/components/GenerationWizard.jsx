@@ -1215,6 +1215,31 @@ function StepCategories({ data, updateData, onNext, onBack }) {
   // Inline ASIN search component for adding ASINs to a category
   var [searchCatIdx, setSearchCatIdx] = useState(null);
   var [searchQuery, setSearchQuery] = useState('');
+  var [newAsinText, setNewAsinText] = useState('');
+
+  // Delete an ASIN globally (remove from allAsins, products, and all categories)
+  var deleteAsinGlobally = function(asin) {
+    var nextAsins = allAsins.filter(function(a) { return a !== asin; });
+    var nextProducts = (data.products || []).filter(function(p) { return p.asin !== asin; });
+    var nextCats = categories.map(function(c) {
+      return Object.assign({}, c, { asins: (c.asins || []).filter(function(a) { return a !== asin; }) });
+    });
+    updateData({ asins: nextAsins, products: nextProducts, categories: { categories: nextCats } });
+  };
+
+  // Add new ASINs (max 5, parsed from text input)
+  var addNewAsins = function() {
+    var parsed = parseAsinFile(newAsinText);
+    if (parsed.length === 0) return;
+    if (parsed.length > 5) { alert('Maximal 5 neue ASINs. Für mehr bitte den Store neu generieren.'); return; }
+    var existing = allAsins.slice();
+    var added = [];
+    parsed.forEach(function(a) { if (existing.indexOf(a) < 0) { existing.push(a); added.push(a); } });
+    if (added.length === 0) { alert('Alle ASINs sind bereits vorhanden.'); return; }
+    updateData({ asins: existing });
+    setNewAsinText('');
+    alert(added.length + ' neue ASIN(s) hinzugefügt: ' + added.join(', ') + '\nDiese müssen noch einer Kategorie zugeordnet werden.');
+  };
 
   var removeCategory = function(idx) {
     if (!confirm('Kategorie "' + categories[idx].name + '" wirklich löschen? Die enthaltenen ASINs werden nicht zugeordnet.')) return;
@@ -1261,6 +1286,31 @@ function StepCategories({ data, updateData, onNext, onBack }) {
     <div>
       <div style={{ fontSize: 13, color: '#334155', marginBottom: 12 }}>
         <strong>Checkpoint:</strong> Prüfe die Kategorien. ASINs können in <strong>mehreren Kategorien</strong> gleichzeitig sein. Jede ASIN muss in mindestens einer Kategorie vorkommen.
+      </div>
+
+      {/* ASIN management: delete globally + add new (max 5) */}
+      <div style={{ padding: 10, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 8, marginBottom: 12 }}>
+        <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>ASIN komplett entfernen</div>
+            <select className="input" style={{ fontSize: 11 }} value="" onChange={function(e) { if (e.target.value && confirm('ASIN ' + e.target.value + ' wirklich komplett entfernen? Sie wird aus allen Kategorien gelöscht.')) deleteAsinGlobally(e.target.value); }}>
+              <option value="">ASIN zum Entfernen wählen...</option>
+              {allAsins.map(function(a) {
+                var p = productsByAsin[a];
+                return <option key={a} value={a}>{a} — {p ? (p.name || '').slice(0, 50) : '(kein Produkt)'}</option>;
+              })}
+            </select>
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Neue ASINs hinzufügen (max. 5)</div>
+            <div style={{ display: 'flex', gap: 4 }}>
+              <input className="input" style={{ fontSize: 11, flex: 1 }} placeholder="B0XXXXXXXXXX, B0YYYYYY..." value={newAsinText} onChange={function(e) { setNewAsinText(e.target.value); }} />
+              <button className="btn" style={{ fontSize: 10, whiteSpace: 'nowrap' }} disabled={!newAsinText.trim()} onClick={addNewAsins}>Hinzufügen</button>
+            </div>
+            <div style={{ fontSize: 9, color: '#94a3b8', marginTop: 2 }}>Neue ASINs werden NICHT gescrapt — nur als ASIN-Nummer zugeordnet. Produktdaten fehlen.</div>
+          </div>
+        </div>
+        <div style={{ fontSize: 10, color: '#64748b', marginTop: 6 }}>{allAsins.length} ASINs insgesamt</div>
       </div>
 
       {missingAsins.length > 0 && (
@@ -1519,10 +1569,111 @@ function derivePageContent(data) {
 }
 
 function StepContent({ data, updateData, onNext, onBack }) {
-  // Initialize page content if not set yet
-  useEffect(function() {
-    if (!data.pageContent || data.pageContent.length === 0) {
+  var [generating, setGenerating] = useState(false);
+  var [genError, setGenError] = useState('');
+  var generatedRef = useRef(false);
+
+  // Generate page content via AI instead of templates.
+  // Uses planPages() from contentPipeline.js which considers the knowledge base,
+  // brand profile, categories, product analyses, and extra page selections.
+  var generateContent = async function() {
+    if (generating) return;
+    setGenerating(true);
+    setGenError('');
+    try {
+      var lang = LANGS[data.marketplace] || 'German';
+      var storeKnowledgeStr = null;
+      if (data.knowledgeBase) {
+        storeKnowledgeStr = formatStoreKnowledge(data.knowledgeBase);
+      }
+      // planPages returns: { pages: [{ id, name, sections: [{ purpose, contentSource, layout }] }] }
+      var pagePlan = await planPages(
+        data.brandProfile || {},
+        data.categories || { categories: [] },
+        data.productAnalyses || [],
+        storeKnowledgeStr,
+        data.brand,
+        lang,
+        data.extraPages || {}
+      );
+      // Convert AI page plan into editable page content
+      var categories = (data.categories && data.categories.categories) || [];
+      var productAnalyses = data.productAnalyses || [];
+      var brandUsps = ((data.brandProfile || {}).usps || []).map(function(u) { return u.text || ''; }).filter(Boolean);
+      var pages = [];
+      (pagePlan.pages || []).forEach(function(pp) {
+        // Determine kind from page name/id
+        var kind = 'custom';
+        if (pp.id === 'homepage' || (pp.name || '').toLowerCase() === 'homepage') kind = 'homepage';
+        else if ((pp.id || '').indexOf('cat') === 0) kind = 'category';
+        else if (['about_us', 'bestsellers', 'sustainability', 'how_it_works', 'new_arrivals', 'gift_sets', 'subscribe_save', 'deals'].indexOf(pp.id) >= 0) kind = pp.id;
+
+        // Extract USPs from sections that mention USPs/benefits
+        var pageUsps = [];
+        var pageImageIdeas = [];
+        (pp.sections || []).forEach(function(sec) {
+          var purpose = (sec.purpose || sec.contentSource || '').toLowerCase();
+          if (purpose.indexOf('usp') >= 0 || purpose.indexOf('benefit') >= 0 || purpose.indexOf('trust') >= 0) {
+            pageUsps.push(sec.purpose);
+          }
+          if (purpose.indexOf('hero') >= 0 || purpose.indexOf('image') >= 0 || purpose.indexOf('lifestyle') >= 0) {
+            pageImageIdeas.push(sec.purpose);
+          }
+        });
+
+        // For categories: pull product-specific benefits
+        if (kind === 'category') {
+          var cat = categories.find(function(c) { return c.name === pp.name; });
+          if (cat) {
+            var catAsins = cat.asins || [];
+            var benefitSeen = {};
+            productAnalyses.forEach(function(pa) {
+              if (catAsins.indexOf(pa.asin) < 0) return;
+              (pa.keyBenefits || []).forEach(function(b) {
+                var key = b.toLowerCase().slice(0, 40);
+                if (!benefitSeen[key]) { benefitSeen[key] = true; pageUsps.push(b); }
+              });
+            });
+          }
+        }
+
+        // For homepage: brand USPs
+        if (kind === 'homepage' && pageUsps.length === 0) {
+          pageUsps = brandUsps.slice();
+        }
+
+        pages.push({
+          id: pp.id || ('page-' + pages.length),
+          name: pp.name,
+          kind: kind,
+          heroHeadline: pp.heroBannerConcept || pp.name,
+          heroSubline: pp.purpose || '',
+          usps: pageUsps,
+          imageIdeas: pageImageIdeas.length > 0 ? pageImageIdeas : ['hero image for ' + pp.name],
+          cta: '',
+          asins: pp.asins || [],
+          notes: (pp.themes || []).join(', '),
+        });
+      });
+      if (pages.length > 0) {
+        updateData({ pageContent: pages });
+      } else {
+        // Fallback to template derivation
+        updateData({ pageContent: derivePageContent(data) });
+      }
+    } catch (err) {
+      setGenError('KI-Generierung fehlgeschlagen: ' + err.message + ' — Template-Fallback wird verwendet.');
       updateData({ pageContent: derivePageContent(data) });
+    } finally {
+      setGenerating(false);
+    }
+  };
+
+  // Auto-generate on first mount
+  useEffect(function() {
+    if (!generatedRef.current && (!data.pageContent || data.pageContent.length === 0)) {
+      generatedRef.current = true;
+      generateContent();
     }
   }, []);
 
@@ -1602,6 +1753,17 @@ function StepContent({ data, updateData, onNext, onBack }) {
         <strong>Checkpoint:</strong> Pro Seite: Headline, USPs, Bild-Ideen, CTA.{' '}
         <strong>Content ↔ Layout beeinflussen sich gegenseitig</strong> — du kannst jederzeit zu Schritt 5 springen und ein Layout wählen, das dich zurück nach hier führt, um Content anzupassen.
       </div>
+
+      {generating && (
+        <div style={{ padding: '10px 12px', background: '#fffbeb', border: '1px solid #fde68a', borderRadius: 6, fontSize: 12, color: '#92400e', marginBottom: 12 }}>
+          KI generiert Content für jede Seite (Brand Voice + Produkte + KB-Patterns)... Bitte warten.
+        </div>
+      )}
+      {genError && (
+        <div style={{ padding: '10px 12px', background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 6, fontSize: 12, color: '#991b1b', marginBottom: 12 }}>
+          {genError} <button className="btn" style={{ fontSize: 10, marginLeft: 6 }} onClick={generateContent}>Erneut versuchen</button>
+        </div>
+      )}
 
       {/* KB inspiration bar (shown once at the top for the whole step) */}
       {data.kbTextPatterns && (
@@ -1885,13 +2047,23 @@ function deriveStructure(data) {
     }
 
     // Additional image ideas from content (if any beyond the hero)
+    // Split into sections that match their layout cell count
     var extraIdeas = (pc.imageIdeas || []).slice(1);
-    if (extraIdeas.length > 0) {
+    while (extraIdeas.length > 0) {
+      var batch;
+      var layoutForBatch;
+      if (extraIdeas.length === 1) {
+        batch = extraIdeas.splice(0, 1);
+        layoutForBatch = '1';
+      } else {
+        batch = extraIdeas.splice(0, 2);
+        layoutForBatch = 'std-2equal';
+      }
       sections.push({
-        id: 'images-' + pc.id,
+        id: 'images-' + pc.id + '-' + sections.length,
         purpose: 'Additional visuals',
-        layoutId: extraIdeas.length === 1 ? '1' : 'std-2equal',
-        tiles: extraIdeas.map(function(idea) {
+        layoutId: layoutForBatch,
+        tiles: batch.map(function(idea) {
           return { type: 'image', imageCategory: 'lifestyle', brief: idea, textOverlay: '', ctaText: '' };
         }),
       });
@@ -1903,9 +2075,94 @@ function deriveStructure(data) {
 }
 
 function StepStructure({ data, updateData, onNext, onBack }) {
-  useEffect(function() {
-    if (!data.pageStructure || data.pageStructure.length === 0) {
+  var [generating, setGenerating] = useState(false);
+  var [genError, setGenError] = useState('');
+  var [genProgress, setGenProgress] = useState('');
+  var generatedRef = useRef(false);
+
+  // Generate structure via AI — one call per page
+  var generateStructure = async function() {
+    if (generating) return;
+    setGenerating(true);
+    setGenError('');
+    try {
+      var lang = LANGS[data.marketplace] || 'German';
+      var storeKnowledgeStr = null;
+      if (data.knowledgeBase) storeKnowledgeStr = formatStoreKnowledge(data.knowledgeBase);
+      var pageContent = data.pageContent || [];
+      var brandProfile = data.brandProfile || {};
+      var categories = data.categories || { categories: [] };
+      var storeType = data.storeType || 'product-showcase';
+      var result = [];
+
+      for (var gi = 0; gi < pageContent.length; gi++) {
+        var pc = pageContent[gi];
+        setGenProgress('Seite ' + (gi + 1) + '/' + pageContent.length + ': ' + pc.name);
+        var pagePlan = {
+          id: pc.id,
+          name: pc.name,
+          sections: [{ purpose: 'Full page', contentSource: 'all available', layout: 'auto' }],
+          userContent: {
+            heroHeadline: pc.heroHeadline,
+            heroSubline: pc.heroSubline,
+            usps: pc.usps,
+            imageIdeas: pc.imageIdeas,
+            cta: pc.cta,
+            notes: pc.notes,
+            asins: pc.asins,
+          },
+        };
+        try {
+          var pageResult = await generateOnePage(pagePlan, brandProfile, categories, data.productAnalyses || [], data.brand, lang, result, storeKnowledgeStr);
+          result.push({
+            id: pc.id,
+            name: pc.name,
+            kind: pc.kind,
+            storeTypeHint: storeType,
+            sections: (pageResult.sections || []).map(function(sec, si) {
+              return {
+                id: 'sec-' + pc.id + '-' + si,
+                purpose: sec.purpose || '',
+                layoutId: sec.layoutId || '1',
+                tiles: (sec.tiles || []).map(function(t) {
+                  return {
+                    type: t.type || 'image',
+                    imageCategory: t.imageCategory || 'lifestyle',
+                    brief: t.brief || '',
+                    textOverlay: t.textOverlay || '',
+                    ctaText: t.ctaText || '',
+                    asins: t.asins || [],
+                    linkAsin: t.linkAsin || '',
+                  };
+                }),
+              };
+            }),
+          });
+        } catch (pgErr) {
+          // Fallback: use template structure for this page
+          var fallback = deriveStructure(Object.assign({}, data, { pageContent: [pc] }));
+          if (fallback[0]) result.push(fallback[0]);
+        }
+        if (gi < pageContent.length - 1) await new Promise(function(r) { setTimeout(r, 500); });
+      }
+      if (result.length > 0) {
+        updateData({ pageStructure: result });
+      } else {
+        updateData({ pageStructure: deriveStructure(data) });
+      }
+    } catch (err) {
+      setGenError('KI-Generierung fehlgeschlagen: ' + err.message + ' — Template-Fallback.');
       updateData({ pageStructure: deriveStructure(data) });
+    } finally {
+      setGenerating(false);
+      setGenProgress('');
+    }
+  };
+
+  useEffect(function() {
+    if (!generatedRef.current && (!data.pageStructure || data.pageStructure.length === 0)) {
+      generatedRef.current = true;
+      generateStructure();
     }
   }, []);
 
@@ -1990,6 +2247,17 @@ function StepStructure({ data, updateData, onNext, onBack }) {
       <div style={{ fontSize: 13, color: '#334155', marginBottom: 12 }}>
         <strong>Checkpoint:</strong> Struktur pro Seite mit Layouts und Kacheln. Referenz-Stores liefern Inspiration, nicht Vorschrift.
       </div>
+
+      {generating && (
+        <div style={{ padding: '10px 12px', background: '#fffbeb', border: '1px solid #fde68a', borderRadius: 6, fontSize: 12, color: '#92400e', marginBottom: 12 }}>
+          KI generiert Seitenstruktur (Layout + Kacheln pro Seite)... {genProgress}
+        </div>
+      )}
+      {genError && (
+        <div style={{ padding: '10px 12px', background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 6, fontSize: 12, color: '#991b1b', marginBottom: 12 }}>
+          {genError} <button className="btn" style={{ fontSize: 10, marginLeft: 6 }} onClick={generateStructure}>Erneut versuchen</button>
+        </div>
+      )}
 
       <div style={{ display: 'flex', gap: 12 }}>
         {/* Page list */}
