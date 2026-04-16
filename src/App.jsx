@@ -3,7 +3,7 @@ import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, find
 import { scrapeAsins, analyzeBrandCI } from './api';
 import { generateStore, aiRefineStore, applyOperations, generateWireframesForPage, deleteWireframesForPage } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink } from './storage';
-import { analyzeOneProduct, groupIntoCategories, analyzeWebsitePage, synthesizeBrandProfile, planPages, generateOnePage, validateStore as validateStoreQuality, analyzeBrandVoice, buildBrandIntelligence } from './contentPipeline';
+import { analyzeOneProduct, groupIntoCategories, analyzeWebsitePage, synthesizeBrandProfile, planPages, generateOnePage, validateStore as validateStoreQuality, analyzeBrandVoice, buildBrandIntelligence, voiceConsistencyCheck, applyVoiceCorrections } from './contentPipeline';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
 import { crawlMultipleStores, crawlAndParseStore, analyzeStoreImagesWithGemini, formatReferenceStoreContext, loadStoreKnowledge, formatStoreKnowledge, loadBlueprints, matchBlueprints, formatBlueprintsForPrompt } from './referenceStoreService';
 import Topbar from './components/Topbar';
@@ -721,6 +721,30 @@ export default function App() {
           generatedPages.push({ id: pp.id || ('page-' + gi), name: pp.name, sections: [] });
         }
         if (gi < plannedPages.length - 1) await new Promise(function(r) { setTimeout(r, 1000); });
+      }
+
+      checkCancel();
+
+      // ─── PHASE 5.5: VOICE CONSISTENCY CHECK ───
+      // Post-processing pass: review all generated copy against the voice
+      // playbook. Claude flags off-brand lines and proposes corrections.
+      // Kept non-blocking — if the API call fails, the store still ships.
+      log('');
+      log('═══ PHASE 5.5: VOICE CONSISTENCY ═══');
+      try {
+        var vcResult = await voiceConsistencyCheck(generatedPages, brandIntelligence, params.brand, lang);
+        log('   Checked: ' + vcResult.checked + ' text items');
+        if (vcResult.corrections && vcResult.corrections.length) {
+          var applied = applyVoiceCorrections(generatedPages, vcResult.corrections);
+          log('   Voice corrections applied: ' + applied + '/' + vcResult.corrections.length);
+          vcResult.corrections.slice(0, 5).forEach(function(c) {
+            log('     ' + (c.pageName || '?') + ': "' + (c.original || '').slice(0, 40) + '" → "' + (c.corrected || '').slice(0, 40) + '"');
+          });
+        } else {
+          log('   All copy on-brand.');
+        }
+      } catch (vcErr) {
+        log('   Voice check skipped: ' + vcErr.message);
       }
 
       checkCancel();

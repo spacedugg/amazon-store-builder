@@ -249,16 +249,22 @@ export async function planPages(brandProfile, categories, productAnalyses, store
 export async function generateOnePage(pagePlan, brandProfile, categories, productAnalyses, brand, lang, previousPages, storeKnowledge, brandIntelligence, blueprintsBlock) {
   var system = [
     'You generate ONE Amazon Brand Store page.',
-    'You receive the page plan + all relevant content + BRAND INTELLIGENCE.',
-    'BRAND INTELLIGENCE is the single source of truth for voice, visuals, and reusable content.',
-    'Every textOverlay and every image brief MUST follow: voice.voiceFingerprint, voice.sentencePatterns, voice.ctaStyle, visual.visualMood, visual.visualToneCues.',
-    'Lean on contentInventory.reusablePhrases where they fit — do not invent new brand phrases.',
-    'If reuseFlags.adoptExistingContent=true, prefer verbatim headlines/USPs from existingStoreRawContext over new ones.',
-    'Your job: fill the sections with real content. No filler. No generic text.',
-    'Return ONLY valid JSON. All textOverlay texts in ' + lang + '.',
-    'Briefs in English, 10-20 words max — just the image idea.',
-    'TEXT RULE: NEVER use hyphens (-), m-dashes (—), or en-dashes (–) to combine text blocks in headings, USPs, features, or overlays.',
-    'Use line breaks (\\n) for multi-line text. Use hierarchy (larger text + smaller text) instead of dashes.',
+    '',
+    'You work from THREE inputs that together define everything:',
+    '  1. BRAND INTELLIGENCE — voice (how the brand speaks), visual (how it looks), contentInventory (what it says), reuseFlags.',
+    '  2. STRUCTURAL BLUEPRINTS — page-by-page module cadence from the 3 best-matching reference stores. Use them as rhythm/structure inspiration.',
+    '  3. PAGE PLAN + PRODUCTS — the concrete slots and products to populate for THIS page.',
+    '',
+    'Decision logic:',
+    '  - Section sequence → take cue from blueprints: how many modules, which layout types, what order (hero → lifestyle → benefits → grid, etc.)',
+    '  - Copy (textOverlay, headlines, CTAs) → voice.voiceFingerprint + sentencePatterns + ctaStyle drive register and rhythm. Lean on contentInventory.reusablePhrases and websiteUsps.',
+    '  - Image briefs → visual.visualMood + photographyStyle + visualToneCues drive atmosphere; blueprint imageCategory guides type (lifestyle/creative/product/benefit).',
+    '  - Reuse logic → if reuseFlags.adoptExistingContent=true, prefer verbatim headlines/USPs from existingStoreRawContext; otherwise paraphrase.',
+    '',
+    'You think like a brand designer, not a rule engine. No invented facts. No generic filler. Every text must be specific to THIS brand and THESE products.',
+    '',
+    'Return ONLY valid JSON. All textOverlay texts in ' + lang + '. Briefs in English, 10-20 words — just the image idea.',
+    'TEXT RULE: NEVER use hyphens (-), m-dashes (—), or en-dashes (–) to combine text blocks. Use line breaks (\\n) or headline/subline hierarchy.',
   ].join('\n');
 
   // Find relevant products for this page
@@ -285,19 +291,15 @@ export async function generateOnePage(pagePlan, brandProfile, categories, produc
     '',
     blueprintsBlock ? blueprintsBlock : (storeKnowledge ? 'REFERENCE STORE INSIGHTS (for section/layout inspiration):\n' + storeKnowledge : ''),
     '',
-    'Generate sections. Each section has a layoutId and tiles.',
-    'IMPORTANT: Each section has a layoutId that determines tile arrangement.',
-    '',
-    'AVAILABLE LAYOUTS:',
-    '"1" = Full Width (1 tile, full width of the store)',
-    '"std-2equal" = 2 equal tiles side by side',
-    '"lg-2stack" = 1 large tile + 2 stacked smaller tiles',
-    '"2stack-lg" = mirror of lg-2stack',
-    '"lg-4grid" = 1 large tile + 4 small tiles in grid',
-    '"2x2wide" = 4 wide tiles in 2x2 grid',
-    '"vh-w2s" = 1 wide + 2 small squares (variable height)',
-    '"vh-2equal" = 2 equal wide tiles (variable height)',
-    '"1-1-1" = 3 equal tiles',
+    'LAYOUT VOCABULARY (pick per section based on blueprint rhythm):',
+    '"1" = Full Width (1 tile) — hero moments, statements, lifestyle atmosphere',
+    '"std-2equal" = 2 equal tiles — category pairs, before/after, two USPs',
+    '"lg-2stack" / "2stack-lg" = 1 large + 2 stacked — one anchor + 2 supports',
+    '"lg-4grid" = 1 large + 4 small — flagship + variants',
+    '"2x2wide" = 4 wide tiles — four-benefit grid, four-category overview',
+    '"vh-w2s" = 1 wide + 2 squares — lead image with 2 detail beats',
+    '"vh-2equal" = 2 equal wide — paired storytelling',
+    '"1-1-1" = 3 equal tiles — 3-step, 3-category, 3-benefit triad',
     '',
     'Return JSON:',
     '{',
@@ -321,11 +323,11 @@ export async function generateOnePage(pagePlan, brandProfile, categories, produc
     '  ]',
     '}',
     '',
-    'RULES:',
-    '- Every product mentioned in a brief MUST have its ASIN in linkAsin or asins.',
+    'HARD CONSTRAINTS (non-negotiable):',
+    '- Every product mentioned in a brief MUST have its ASIN in linkAsin (or hotspots[].asin for shoppable images).',
     '- textOverlay in ' + lang + '. Briefs in English.',
-    '- Briefs: 10-20 words. Just the idea. No lighting, mood, camera angles.',
-    '- No generic text. Every text must be specific to this brand and these products.',
+    '- Briefs: 10-20 words, only the subject/idea. Mood and style come from BRAND INTELLIGENCE visual.visualMood — do not restate them per brief.',
+    '- All copy sounds like THIS brand: voice.voiceFingerprint is the test. If a line could belong to any competitor, rewrite it.',
   ].filter(Boolean).join('\n');
 
   return await callClaude(system, user, 6000);
@@ -396,6 +398,113 @@ export async function analyzeBrandVoice(products, brand, websiteTexts, brandTone
   ].filter(Boolean).join('\n');
 
   return await callClaude(system, user, 3072);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// VOICE CONSISTENCY CHECK (post-processing)
+// Reviews all generated textOverlays / CTAs / hero copy against the voice
+// playbook and returns an array of corrections. Only one API call — fast.
+// Applied after all pages are generated, before the store is finalized.
+// ═══════════════════════════════════════════════════════════════
+export async function voiceConsistencyCheck(pages, brandIntelligence, brand, lang) {
+  if (!pages || pages.length === 0 || !brandIntelligence) return { corrections: [], checked: 0 };
+
+  // Collect all text touchpoints with addressable paths
+  var items = [];
+  pages.forEach(function(page, pi) {
+    if (page.heroBannerTextOverlay) {
+      items.push({ path: 'pages[' + pi + '].heroBannerTextOverlay', pageName: page.name, text: page.heroBannerTextOverlay });
+    }
+    (page.sections || []).forEach(function(sec, si) {
+      (sec.tiles || []).forEach(function(tile, ti) {
+        if (tile.textOverlay) {
+          items.push({ path: 'pages[' + pi + '].sections[' + si + '].tiles[' + ti + '].textOverlay', pageName: page.name, text: tile.textOverlay });
+        }
+        if (tile.ctaText) {
+          items.push({ path: 'pages[' + pi + '].sections[' + si + '].tiles[' + ti + '].ctaText', pageName: page.name, text: tile.ctaText });
+        }
+      });
+    });
+  });
+
+  if (items.length === 0) return { corrections: [], checked: 0 };
+
+  var system = [
+    'You are a brand voice editor. You check copy against a voice playbook.',
+    'For each item, decide if it matches the voice fingerprint, sentence patterns, CTA style, and vocabulary.',
+    'If it is off (generic, wrong register, wrong length, off-vocabulary, invented), rewrite it.',
+    'If it is already on-brand, leave it unchanged.',
+    'Be conservative — only correct when there is a clear mismatch. Do NOT rewrite good copy to make it different.',
+    'Return ONLY valid JSON.',
+  ].join('\n');
+
+  var user = [
+    'Brand: ' + brand + ' | Language: ' + lang,
+    '',
+    formatBrandIntelligenceForPrompt(brandIntelligence),
+    '',
+    'Items to review (' + items.length + '):',
+    JSON.stringify(items.map(function(it, idx) { return { idx: idx, page: it.pageName, text: it.text }; }), null, 1),
+    '',
+    'Return JSON:',
+    '{',
+    '  "corrections": [',
+    '    { "idx": 0, "original": "...", "corrected": "...", "reason": "why it was off-brand" }',
+    '  ]',
+    '}',
+    '',
+    'Only include entries where you ACTUALLY changed the text. Omit items that are on-brand.',
+    'Keep "corrected" in ' + lang + '. Follow the TEXT RULE: no hyphens to combine text blocks.',
+  ].join('\n');
+
+  var result = await callClaude(system, user, 4096);
+  var corrections = (result && result.corrections) ? result.corrections : [];
+
+  // Map corrections back to paths for application
+  var enriched = corrections.map(function(c) {
+    var item = items[c.idx];
+    return item ? {
+      path: item.path,
+      pageName: item.pageName,
+      original: c.original || item.text,
+      corrected: c.corrected,
+      reason: c.reason || '',
+    } : null;
+  }).filter(Boolean);
+
+  return { corrections: enriched, checked: items.length };
+}
+
+// Apply voice corrections IN PLACE to pages array. Returns count applied.
+export function applyVoiceCorrections(pages, corrections) {
+  if (!corrections || corrections.length === 0) return 0;
+  var applied = 0;
+  corrections.forEach(function(c) {
+    // path format: pages[pi].sections[si].tiles[ti].textOverlay
+    //           or pages[pi].heroBannerTextOverlay
+    var m = c.path.match(/^pages\[(\d+)\](?:\.sections\[(\d+)\]\.tiles\[(\d+)\])?\.(\w+)$/);
+    if (!m) return;
+    var pi = parseInt(m[1], 10);
+    var si = m[2] !== undefined ? parseInt(m[2], 10) : null;
+    var ti = m[3] !== undefined ? parseInt(m[3], 10) : null;
+    var field = m[4];
+    if (!pages[pi]) return;
+    if (si === null) {
+      // Page-level field (heroBannerTextOverlay)
+      if (pages[pi][field] === c.original || pages[pi][field]) {
+        pages[pi][field] = c.corrected;
+        applied++;
+      }
+    } else {
+      var sec = (pages[pi].sections || [])[si];
+      if (!sec) return;
+      var tile = (sec.tiles || [])[ti];
+      if (!tile) return;
+      tile[field] = c.corrected;
+      applied++;
+    }
+  });
+  return applied;
 }
 
 // ═══════════════════════════════════════════════════════════════
