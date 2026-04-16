@@ -304,6 +304,10 @@ export async function generateOnePage(pagePlan, brandProfile, categories, produc
     'PAGE PLAN (sections to fill):',
     JSON.stringify(pagePlan.sections, null, 1),
     '',
+    pagePlan.userContent && (pagePlan.userContent.heroHeadline || (pagePlan.userContent.usps && pagePlan.userContent.usps.length) || (pagePlan.userContent.imageIdeas && pagePlan.userContent.imageIdeas.length))
+      ? 'USER-APPROVED CONTENT FOR THIS PAGE (Wizard Step 4 — treat as STRONG HINTS, not suggestions):\n' + JSON.stringify(pagePlan.userContent, null, 1) + '\n  Rules for user-approved content:\n  - heroHeadline + heroSubline: use them verbatim (or near-verbatim, only change if they break brand voice).\n  - usps: every USP listed here MUST appear in a tile textOverlay somewhere on this page.\n  - imageIdeas: map each idea to a tile brief. Do not invent additional image concepts beyond what fits the section count.\n  - cta: use this wording for the primary button.\n  - notes: honor them as constraints.\n'
+      : '',
+    '',
     'BRAND USPs: ' + (brandProfile.usps || []).map(function(u) { return u.text; }).join(' | '),
     '',
     relevantProducts.length > 0 ? 'PRODUCTS FOR THIS PAGE:\n' + JSON.stringify(relevantProducts, null, 1) : 'This is the homepage — show overview of all categories.',

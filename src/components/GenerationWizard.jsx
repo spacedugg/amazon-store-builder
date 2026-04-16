@@ -2441,6 +2441,7 @@ function StepGenerate({ data, onGenerate, onCancel, onBack }) {
       adoptExistingContent: data.adoptExistingContent,
       websiteData: data.websiteData,
       // Prepared bundle: lets App.jsx's handleGenerate skip redundant phases
+      // AND respect wizard edits from Steps 4 (pageContent) and 5 (pageStructure).
       prepared: {
         products: data.products,
         productCI: data.productCI,
@@ -2449,6 +2450,8 @@ function StepGenerate({ data, onGenerate, onCancel, onBack }) {
         websiteAnalyses: data.websiteAnalyses,
         brandVoice: data.brandVoice,
         brandProfile: data.brandProfile,
+        pageContent: data.pageContent,
+        pageStructure: data.pageStructure,
       },
     };
     onGenerate(params);

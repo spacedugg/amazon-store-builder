@@ -739,12 +739,49 @@ export default function App() {
         log('   Blueprint matching skipped: ' + bpErr.message);
       }
 
-      var pagePlan = await runPipelineStep('Seitenplanung', function() {
-        return planPages(brandProfile, categories, allProductAnalyses, storeKnowledgeStr, params.brand, lang, selectedExtraPages, brandIntelligence, blueprintsBlock);
-      });
-      (pagePlan.pages || []).forEach(function(pg) {
-        log('   ' + pg.name + ': ' + (pg.sections || []).length + ' sections');
-      });
+      // If the wizard already produced a page structure (Step 5) and page content
+      // (Step 4), respect those user edits as the page plan. Otherwise run the
+      // AI page planner fresh.
+      var pagePlan;
+      if (prep.pageStructure && prep.pageStructure.length) {
+        pagePlan = {
+          pages: prep.pageStructure.map(function(ps) {
+            var pc = (prep.pageContent || []).find(function(x) { return x.id === ps.id; }) || {};
+            return {
+              id: ps.id,
+              name: ps.name,
+              sections: (ps.sections || []).map(function(sec) {
+                return {
+                  purpose: sec.purpose || '',
+                  contentSource: sec.purpose || '',
+                  layout: sec.layoutId || 'auto',
+                  tiles: sec.tiles || [],
+                };
+              }),
+              userContent: {
+                heroHeadline: pc.heroHeadline || '',
+                heroSubline: pc.heroSubline || '',
+                usps: pc.usps || [],
+                imageIdeas: pc.imageIdeas || [],
+                cta: pc.cta || '',
+                notes: pc.notes || '',
+                asins: pc.asins || [],
+              },
+            };
+          }),
+        };
+        log('   Using page plan from wizard (structure + content edits respected)');
+        (pagePlan.pages || []).forEach(function(pg) {
+          log('   ' + pg.name + ': ' + (pg.sections || []).length + ' sections (user-edited)');
+        });
+      } else {
+        pagePlan = await runPipelineStep('Seitenplanung', function() {
+          return planPages(brandProfile, categories, allProductAnalyses, storeKnowledgeStr, params.brand, lang, selectedExtraPages, brandIntelligence, blueprintsBlock);
+        });
+        (pagePlan.pages || []).forEach(function(pg) {
+          log('   ' + pg.name + ': ' + (pg.sections || []).length + ' sections');
+        });
+      }
 
       checkCancel();
 
