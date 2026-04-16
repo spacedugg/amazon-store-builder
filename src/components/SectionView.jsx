@@ -413,7 +413,7 @@ export default function SectionView({ section, idx, totalSections, sel, onSelect
       <div className="section-tiles" style={config.gridStyle}>
         {section.tiles.map(function(t, i) {
           return (
-            <div key={i} style={config.getTileStyle(i)}>
+            <div key={section.id + '-' + i} style={config.getTileStyle(i)}>
               <TileView tile={t}
                 selected={sel && sel.sid === section.id && sel.ti === i}
                 onClick={function() { onSelect({ sid: section.id, ti: i }); }}

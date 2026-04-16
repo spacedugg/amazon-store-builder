@@ -1266,6 +1266,10 @@ export default function App() {
   } else if (sel && page) {
     var sec = page.sections.find(function(s) { return s.id === sel.sid; });
     selTile = sec ? (sec.tiles[sel.ti] || null) : null;
+    // Bug 2 fix: invalidate stale selection when target tile no longer exists
+    if (sel.ti !== undefined && sec && !selTile) {
+      setTimeout(function() { setSel({ sid: sel.sid }); }, 0);
+    }
     if (sec) {
       var selLayout = findLayout(sec.layoutId);
       selLayoutType = selLayout ? selLayout.type : null;

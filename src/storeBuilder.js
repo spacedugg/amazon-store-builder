@@ -5,6 +5,50 @@ var ANTHROPIC_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY || '';
 var PRIMARY_MODEL = 'claude-opus-4-6';
 var FALLBACK_MODEL = 'claude-sonnet-4-6';
 
+// ─── BUG 4 FIX: Auto-link ASINs to tiles (lifestyle AND product images) ───
+// Scans each tile's brief + textOverlay for product name references.
+// If a product from the category/store catalogue is mentioned, attaches the ASIN.
+// Skips product_grid (already carries all ASINs) and tiles that already have linkAsin.
+function attachProductLinks(sections, products) {
+  if (!products || !products.length) return sections;
+  (sections || []).forEach(function(sec){
+    (sec.tiles || []).forEach(function(t){
+      if (!t || t.linkAsin) return;
+      if (t.type === 'product_grid' || t.type === 'product_selector') return;
+      var blob = ((t.brief || '') + ' ' + (t.textOverlay || '') + ' ' + (t.ctaText || '')).toLowerCase();
+      if (!blob.trim()) return;
+      var hit = products.find(function(p){
+        if (!p || !p.name) return false;
+        // Extract the most distinctive tokens from the product name (length >= 4)
+        var tokens = p.name.split(/[\s\-–—/|,.()]+/).filter(function(w){ return w.length >= 4; });
+        if (!tokens.length) return false;
+        return tokens.some(function(w){
+          var safe = w.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          return new RegExp('\\b' + safe + '\\b').test(blob);
+        });
+      });
+      if (hit) t.linkAsin = hit.asin;
+    });
+  });
+  return sections;
+}
+
+// ─── BUG 1 FIX: Enforce product_grid placement on homepage ───
+// Homepage rule: product_grid never in the middle. Either at the very end (tier 3) or removed.
+function enforceHomepageProductGridPlacement(homeSections, cLevel) {
+  if (!homeSections || !homeSections.length) return homeSections;
+  var pgIdx = homeSections.findIndex(function(s){
+    return (s.tiles || []).some(function(t){ return t && t.type === 'product_grid'; });
+  });
+  if (pgIdx < 0) return homeSections;
+  // already last? leave it
+  if (pgIdx === homeSections.length - 1) return homeSections;
+  var pgSec = homeSections.splice(pgIdx, 1)[0];
+  // Only re-attach at the end for higher complexity tiers; otherwise drop it entirely
+  if (typeof cLevel !== 'undefined' && cLevel >= 3) homeSections.push(pgSec);
+  return homeSections;
+}
+
 // ─── TIMEOUT-AWARE FETCH ───
 function fetchWithTimeout(url, options, timeoutMs) {
   return new Promise(function(resolve, reject) {
@@ -1994,6 +2038,10 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
       analysis.categories || [], analysis, userInstructions, cLevel, category, template, websiteData, referenceAnalysis, false
     );
     var homeSections = ensureMinimumSections(homeResult.sections || [], 'Homepage', brand, lang, analysis, template, true, cLevel);
+    // Bug 1 fix: ensure product_grid never lives mid-homepage
+    homeSections = enforceHomepageProductGridPlacement(homeSections, cLevel);
+    // Bug 4 fix: auto-link product ASINs in lifestyle/product image briefs
+    homeSections = attachProductLinks(homeSections, products || []);
     // Use pipeline text blocks for hero banner if available
     var homeTextBlocks = pipeline.textBlocks && pipeline.textBlocks.pages
       ? pipeline.textBlocks.pages.find(function(p) { return p.pageId === 'homepage'; })
@@ -2059,6 +2107,8 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
         categories, analysis, userInstructions, cLevel, category, template, websiteData, referenceAnalysis, false, categoryBlueprint
       );
       var catSections = ensureMinimumSections(catResult.sections || [], cat.name, brand, lang, analysis, template, false, cLevel);
+      // Bug 4 fix: auto-link ASINs for this category's products in lifestyle/product tiles
+      catSections = attachProductLinks(catSections, allCatProducts);
       var catTextBlocks = pipeline.textBlocks && pipeline.textBlocks.pages
         ? pipeline.textBlocks.pages.find(function(p) { return p.pageId === parentPageId || p.pageId === cat.name; })
         : null;
@@ -2111,6 +2161,8 @@ export async function generateStore(asins, products, brand, marketplace, lang, u
             categories, analysis, userInstructions, cLevel, category, template, websiteData, referenceAnalysis, true
           );
           var subSections = ensureMinimumSections(subResult.sections || [], sub.name, brand, lang, analysis, template, false, cLevel);
+          // Bug 4 fix: auto-link ASINs for this subcategory's products in lifestyle/product tiles
+          subSections = attachProductLinks(subSections, subProducts);
           pages.push({ id: subPageId, name: sub.name, parentId: parentPageId, sections: subSections, heroBannerBrief: subResult.heroBannerBrief || '', heroBannerTextOverlay: subResult.heroBannerTextOverlay || '' });
           log('  ' + sub.name + ': ' + subSections.length + ' sections');
         } catch (err) {
