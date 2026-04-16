@@ -104,7 +104,11 @@ export async function groupIntoCategories(productAnalyses, brand, lang) {
 // Called once per scraped website page.
 // ═══════════════════════════════════════════════════════════════
 export async function analyzeWebsitePage(pageText, pageSource, brand) {
-  var system = 'You extract brand information from a website page. Return ONLY valid JSON.';
+  var system = [
+    'You extract brand information AND structural patterns from a website page.',
+    'You return a rich profile that downstream Brand Store generation can mirror.',
+    'Return ONLY valid JSON.',
+  ].join('\n');
   var user = [
     'Brand: ' + brand,
     'Page source: ' + pageSource,
@@ -112,17 +116,36 @@ export async function analyzeWebsitePage(pageText, pageSource, brand) {
     'Page content:',
     pageText,
     '',
-    'Extract EVERYTHING relevant for a Brand Store:',
+    'Extract EVERYTHING that a Brand Store designer could reuse — copy, structure, voice, and visual signals:',
     '{',
     '  "usps": ["customer-facing USP/benefit found on this page"],',
     '  "brandStoryElements": ["any brand story, founder info, history, values"],',
     '  "certifications": ["certifications, awards, quality seals mentioned"],',
     '  "trustElements": ["satisfaction guarantees, statistics, social proof"],',
-    '  "keyPhrases": ["important phrases/slogans the brand uses"],',
-    '  "productMentions": ["products or categories mentioned on this page"]',
+    '  "keyPhrases": ["important phrases/slogans the brand uses verbatim — copy as-is"],',
+    '  "productMentions": ["products or categories mentioned on this page"],',
+    '  "navigationLabels": ["top-level nav items visible on this page (e.g. Produkte, Über uns, Magazin)"],',
+    '  "pageSections": [',
+    '    {',
+    '      "sectionType": "hero|usp-grid|product-showcase|testimonials|about|process|cta-banner|story|faq|press|gallery|other",',
+    '      "headline": "the exact headline used, verbatim if short enough",',
+    '      "subheadline": "supporting copy directly below the headline, if any",',
+    '      "contentSummary": "1-sentence summary of what this section communicates",',
+    '      "ctaWording": "exact CTA text used in this section, if any"',
+    '    }',
+    '  ],',
+    '  "modulePatterns": ["recurring structural patterns — e.g. \'3-column USP grid with icon + headline + 1-sentence proof\'"],',
+    '  "voiceSignals": ["tone markers — e.g. \'du-ansprache\', \'technische präzision\', \'warme metaphern\'"],',
+    '  "visualToneCues": ["what the page visually communicates — e.g. \'lots of white space\', \'full-bleed lifestyle photography\', \'editorial serif headlines\'"]',
     '}',
+    '',
+    'RULES:',
+    '- pageSections should be an ordered list that mirrors the actual page flow, top to bottom.',
+    '- Keep headlines and ctaWording VERBATIM — they feed direct content reuse.',
+    '- If a field has no content on this page, return an empty array — never invent.',
+    '- Aim for 3-8 pageSections per page.',
   ].join('\n');
-  return await callClaude(system, user, 2048);
+  return await callClaude(system, user, 4096);
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -557,6 +580,13 @@ export function buildBrandIntelligence(args) {
   var trustElements = [];
   var keyPhrases = [];
   var productMentions = [];
+  // Structural signals from the website (new in Fix B):
+  var websitePageSections = [];     // flat list of page sections across all pages
+  var websiteNavigationLabels = []; // top-level nav items
+  var websiteModulePatterns = [];   // recurring structural patterns
+  var websiteVoiceSignals = [];     // tone markers from website
+  var websiteVisualToneCues = [];   // visual tone signals from website
+
   websiteAnalyses.forEach(function(wa) {
     (wa.usps || []).forEach(function(u) { if (u && websiteUsps.indexOf(u) < 0) websiteUsps.push(u); });
     (wa.brandStoryElements || []).forEach(function(s) { if (s && websiteStoryElements.indexOf(s) < 0) websiteStoryElements.push(s); });
@@ -564,6 +594,14 @@ export function buildBrandIntelligence(args) {
     (wa.trustElements || []).forEach(function(t) { if (t && trustElements.indexOf(t) < 0) trustElements.push(t); });
     (wa.keyPhrases || []).forEach(function(p) { if (p && keyPhrases.indexOf(p) < 0) keyPhrases.push(p); });
     (wa.productMentions || []).forEach(function(m) { if (m && productMentions.indexOf(m) < 0) productMentions.push(m); });
+    // New structural fields (Fix B)
+    (wa.pageSections || []).forEach(function(ps) {
+      if (ps && ps.sectionType) websitePageSections.push(ps);
+    });
+    (wa.navigationLabels || []).forEach(function(n) { if (n && websiteNavigationLabels.indexOf(n) < 0) websiteNavigationLabels.push(n); });
+    (wa.modulePatterns || []).forEach(function(m) { if (m && websiteModulePatterns.indexOf(m) < 0) websiteModulePatterns.push(m); });
+    (wa.voiceSignals || []).forEach(function(v) { if (v && websiteVoiceSignals.indexOf(v) < 0) websiteVoiceSignals.push(v); });
+    (wa.visualToneCues || []).forEach(function(v) { if (v && websiteVisualToneCues.indexOf(v) < 0) websiteVisualToneCues.push(v); });
   });
 
   // Voice playbook already contains typicalPhrases + signatureWords — these are
@@ -582,6 +620,12 @@ export function buildBrandIntelligence(args) {
     keyPhrases: keyPhrases,
     productMentions: productMentions,
     reusablePhrases: reusablePhrases,
+    // Structural signals from the website (Fix B):
+    websitePageSections: websitePageSections,
+    websiteNavigationLabels: websiteNavigationLabels,
+    websiteModulePatterns: websiteModulePatterns,
+    websiteVoiceSignals: websiteVoiceSignals,
+    websiteVisualToneCues: websiteVisualToneCues,
     // Raw existing-store analysis (free-form text from crawl+vision).
     // Kept as text for downstream prompts; copywriter can mine it.
     existingStoreRawContext: existingStoreAnalysis || '',
@@ -599,6 +643,17 @@ export function buildBrandIntelligence(args) {
     hasWebsite: websiteAnalyses.length > 0,
     hasVisualCI: !!(productCI && (productCI.primaryColors || []).length > 0),
   };
+
+  // Merge website-derived visual tone cues into the visual playbook.
+  // Cues from productCI/voice were already seeded above; website signals arrive
+  // later in the extract, so we append uniquely.
+  if (websiteVisualToneCues.length > 0) {
+    var mergedCues = (visual.visualToneCues || []).slice();
+    websiteVisualToneCues.forEach(function(c) {
+      if (c && mergedCues.indexOf(c) < 0) mergedCues.push(c);
+    });
+    visual.visualToneCues = mergedCues;
+  }
 
   return {
     brand: brand,
@@ -654,6 +709,31 @@ export function formatBrandIntelligenceForPrompt(bi) {
   if (inv.trustElements && inv.trustElements.length) parts.push('  Trust elements: ' + inv.trustElements.join(' | '));
   if (inv.keyPhrases && inv.keyPhrases.length) parts.push('  Key phrases: ' + inv.keyPhrases.join(' | '));
   if (inv.reusablePhrases && inv.reusablePhrases.length) parts.push('  Reusable phrases (lean on these): ' + inv.reusablePhrases.join(' | '));
+
+  // Website structure (Fix B) — captured from the brand's marketing site so
+  // the store can mirror the brand's own narrative rhythm and module language.
+  if (inv.websiteNavigationLabels && inv.websiteNavigationLabels.length) {
+    parts.push('  Website navigation: ' + inv.websiteNavigationLabels.join(' | '));
+  }
+  if (inv.websiteModulePatterns && inv.websiteModulePatterns.length) {
+    parts.push('  Website module patterns: ' + inv.websiteModulePatterns.slice(0, 6).join(' | '));
+  }
+  if (inv.websiteVoiceSignals && inv.websiteVoiceSignals.length) {
+    parts.push('  Website voice signals: ' + inv.websiteVoiceSignals.slice(0, 8).join(' | '));
+  }
+  if (inv.websitePageSections && inv.websitePageSections.length) {
+    parts.push('WEBSITE PAGE FLOW (section-by-section — mirror the narrative rhythm):');
+    // Cap at 12 sections so the prompt stays lean; the first sections are
+    // typically the most narratively important anyway.
+    inv.websitePageSections.slice(0, 12).forEach(function(ps, idx) {
+      var line = '  ' + (idx + 1) + '. [' + (ps.sectionType || 'section') + '] ';
+      if (ps.headline) line += '"' + ps.headline.slice(0, 80) + '"';
+      if (ps.subheadline) line += ' / "' + ps.subheadline.slice(0, 80) + '"';
+      if (ps.ctaWording) line += ' → CTA: "' + ps.ctaWording.slice(0, 40) + '"';
+      if (ps.contentSummary) line += ' — ' + ps.contentSummary.slice(0, 100);
+      parts.push(line);
+    });
+  }
 
   // Reuse flags
   parts.push('REUSE FLAGS:');

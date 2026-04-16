@@ -141,6 +141,11 @@ function emptyData() {
     marketplace: 'de',
     asins: [],
     websiteUrl: '',
+    // Existing Amazon Brand Store (optional)
+    existingStoreUrl: '',
+    existingStoreMode: 'optimize',     // 'optimize' | 'reconceptualize'
+    keepMenuStructure: true,
+    adoptExistingContent: false,
     logoFile: null,
     fontNames: '',
     brandColors: '',
@@ -409,7 +414,60 @@ function StepInput({ data, updateData, onNext }) {
       {/* Website URL */}
       <label className="label" style={{ marginTop: 10 }}>Marken-Website (optional, stark empfohlen)</label>
       <input className="input" value={data.websiteUrl || ''} onChange={function(e) { updateData({ websiteUrl: e.target.value }); }} placeholder="https://www.brand-shop.de" />
-      <div className="hint">Die KI extrahiert USPs, Markengeschichte und Zertifikate. Ohne Website muss nur auf Amazon-Daten zugegriffen werden.</div>
+      <div className="hint">Die KI extrahiert USPs, Markengeschichte, Zertifikate sowie Modul-Strukturen, Überschriften, Navigation, CTA-Formulierungen und visuelle Ton-Signale der Website. Ohne Website wird nur auf Amazon-Daten zurückgegriffen.</div>
+
+      {/* Existing Amazon Brand Store (optional) */}
+      <label className="label" style={{ marginTop: 10 }}>Bestehender Amazon Brand Store (optional)</label>
+      <input className="input" value={data.existingStoreUrl || ''} onChange={function(e) { updateData({ existingStoreUrl: e.target.value }); }} placeholder="https://www.amazon.de/stores/BRAND/page/..." />
+      <div className="hint">Wenn die Marke schon einen Brand Store hat: Link hier einfügen. Die KI analysiert Struktur, Module, Texte und visuelle CI und verwendet diese im Prozess je nach gewähltem Modus.</div>
+
+      {data.existingStoreUrl && data.existingStoreUrl.trim() && (
+        <div style={{ marginTop: 8, padding: '10px 12px', background: '#fefce8', border: '1px solid #fde68a', borderRadius: 6 }}>
+          <label className="label" style={{ marginTop: 0 }}>Wie soll der bestehende Store behandelt werden?</label>
+          <div style={{ display: 'flex', gap: 6, marginBottom: 8 }}>
+            <button
+              className={'btn' + (data.existingStoreMode !== 'reconceptualize' ? ' btn-primary' : '')}
+              style={{ fontSize: 11, flex: 1 }}
+              onClick={function() { updateData({ existingStoreMode: 'optimize' }); }}
+            >
+              Optimieren & erweitern
+            </button>
+            <button
+              className={'btn' + (data.existingStoreMode === 'reconceptualize' ? ' btn-primary' : '')}
+              style={{ fontSize: 11, flex: 1 }}
+              onClick={function() { updateData({ existingStoreMode: 'reconceptualize' }); }}
+            >
+              Komplett neu konzipieren
+            </button>
+          </div>
+          <div className="hint" style={{ marginBottom: 8 }}>
+            {data.existingStoreMode === 'reconceptualize'
+              ? 'NEU KONZIPIEREN: nur CI (Farben, Logo, Typo, Ton) wird behalten. Struktur, Navigation und Modul-Flow werden komplett neu designed.'
+              : 'OPTIMIEREN: die bestehende Struktur wird als Fundament behalten, Inhalte werden aufgewertet und erweitert.'}
+          </div>
+
+          {data.existingStoreMode !== 'reconceptualize' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, cursor: 'pointer' }}>
+                <input
+                  type="checkbox"
+                  checked={!!data.keepMenuStructure}
+                  onChange={function() { updateData({ keepMenuStructure: !data.keepMenuStructure }); }}
+                />
+                Menüstruktur exakt behalten (gleiche Seiten, gleiche Hierarchie, gleiche Namen)
+              </label>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, cursor: 'pointer' }}>
+                <input
+                  type="checkbox"
+                  checked={!!data.adoptExistingContent}
+                  onChange={function() { updateData({ adoptExistingContent: !data.adoptExistingContent }); }}
+                />
+                Vorhandene Texte/Headlines wo möglich übernehmen (statt neu zu schreiben)
+              </label>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Logo */}
       <label className="label" style={{ marginTop: 10 }}>Logo (optional)</label>
