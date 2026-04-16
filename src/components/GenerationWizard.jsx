@@ -175,7 +175,7 @@ function emptyData() {
   };
 }
 
-export default function GenerationWizard({ resumeId, onComplete, onCancel }) {
+export default function GenerationWizard({ resumeId, onComplete, onCancel, onGenerate }) {
   var [step, setStep] = useState(0);
   var [log, setLog] = useState([]);
   var [running, setRunning] = useState(false);
@@ -229,7 +229,7 @@ export default function GenerationWizard({ resumeId, onComplete, onCancel }) {
   else if (step === 3) stepContent = <StepCategories data={data} updateData={updateData} onNext={function(s) { advance(4, s); }} onBack={function() { setStep(2); }} />;
   else if (step === 4) stepContent = <StepContent data={data} updateData={updateData} onNext={function(s) { advance(5, s); }} onBack={function() { setStep(3); }} />;
   else if (step === 5) stepContent = <StepStructure data={data} updateData={updateData} onNext={function(s) { advance(6, s); }} onBack={function() { setStep(4); }} />;
-  else if (step === 6) stepContent = <StepGenerate data={data} updateData={updateData} log={log} addLog={addLog} running={running} setRunning={setRunning} error={error} setError={setError} cancelRef={cancelRef} onDone={function(storeObj) { setStep(7); if (onComplete) onComplete(storeObj); }} onBack={function() { setStep(5); }} />;
+  else if (step === 6) stepContent = <StepGenerate data={data} onGenerate={onGenerate} onCancel={onCancel} onBack={function() { setStep(5); }} />;
   else stepContent = <StepDone data={data} onClose={onCancel} />;
 
   return (
@@ -2414,183 +2414,81 @@ function StepStructure({ data, updateData, onNext, onBack }) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// STEP 6: GENERATION — automatic. Generates each page in its own API call
-// using the user-approved structure from Step 5. Produces the final store.
+// STEP 6: GENERATION — delegates to the main App.jsx pipeline (handleGenerate).
+// The wizard bundles all user-prepared data as `params.prepared`, so the main
+// pipeline can skip re-scraping, re-analysing, re-drafting brand voice, etc.
+// This guarantees ONE single pipeline (no parallel wizard-pipeline drift).
 // ═══════════════════════════════════════════════════════════════════════════
-function StepGenerate({ data, updateData, log, addLog, running, setRunning, error, setError, cancelRef, onDone, onBack }) {
-  var [finished, setFinished] = useState(!!(data.generatedPages && data.generatedPages.length > 0));
-  var startedRef = useRef(false);
+function StepGenerate({ data, onGenerate, onCancel, onBack }) {
+  var pageCount = (data.pageStructure || []).length;
+  var productCount = (data.products || []).length;
+  var existing = !!data.existingStoreUrl;
 
-  var runGeneration = async function() {
-    if (running) return;
-    cancelRef.current = false;
-    setRunning(true);
-    setError('');
-    setFinished(false);
-
-    try {
-      var lang = LANGS[data.marketplace] || 'German';
-      var structure = data.pageStructure || [];
-      var pageContent = data.pageContent || [];
-      var brandProfile = data.brandProfile || {};
-      var categories = data.categories || { categories: [] };
-
-      // Load store knowledge base once (for inspiration context)
-      var storeKnowledgeStr = null;
-      try {
-        addLog('Lade Wissensdatenbank (23 Top-Stores)...');
-        var kb = await loadStoreKnowledge();
-        if (kb) storeKnowledgeStr = formatStoreKnowledge(kb);
-        addLog('✓ Wissensdatenbank geladen');
-      } catch (kbErr) {
-        addLog('⚠ Wissensdatenbank nicht verfügbar: ' + kbErr.message);
-      }
-
-      if (cancelRef.current) throw new Error('CANCELLED');
-
-      var generatedPages = [];
-      for (var gi = 0; gi < structure.length; gi++) {
-        if (cancelRef.current) throw new Error('CANCELLED');
-        var pStruct = structure[gi];
-        var pContent = pageContent.find(function(pc) { return pc.id === pStruct.id; }) || {};
-        addLog('');
-        addLog('═══ Seite ' + (gi + 1) + '/' + structure.length + ': ' + pStruct.name + ' ═══');
-        addLog('   Inhaltsbasiert: ' + (pStruct.sections || []).length + ' Sections');
-
-        // Build pagePlan expected by generateOnePage()
-        var pagePlan = {
-          id: pStruct.id,
-          name: pStruct.name,
-          sections: (pStruct.sections || []).map(function(sec) {
-            return {
-              purpose: sec.purpose,
-              contentSource: sec.purpose,
-              layout: sec.layoutId,
-              tiles: sec.tiles,
-            };
-          }),
-          // User-approved content passed as hints
-          userContent: {
-            heroHeadline: pContent.heroHeadline,
-            heroSubline: pContent.heroSubline,
-            usps: pContent.usps,
-            imageIdeas: pContent.imageIdeas,
-            cta: pContent.cta,
-            notes: pContent.notes,
-            asins: pContent.asins,
-          },
-        };
-
-        try {
-          var pageResult = await generateOnePage(
-            pagePlan,
-            brandProfile,
-            categories,
-            data.productAnalyses || [],
-            data.brand,
-            lang,
-            generatedPages,
-            storeKnowledgeStr
-          );
-          var pageObj = {
-            id: pStruct.id,
-            name: pStruct.name,
-            sections: pageResult.sections || pagePlan.sections || [],
-            heroBannerBrief: pageResult.heroBannerBrief || (pContent.imageIdeas && pContent.imageIdeas[0]) || '',
-            heroBannerTextOverlay: pageResult.heroBannerTextOverlay || pContent.heroHeadline || '',
-          };
-          generatedPages.push(pageObj);
-          addLog('   ✓ ' + (pageObj.sections || []).length + ' Sections generiert');
-        } catch (pgErr) {
-          addLog('   ⚠ FEHLER: ' + pgErr.message + ' — nutze Struktur als Fallback');
-          // Fallback: use the user-approved structure directly
-          generatedPages.push({
-            id: pStruct.id,
-            name: pStruct.name,
-            sections: pStruct.sections || [],
-            heroBannerBrief: (pContent.imageIdeas && pContent.imageIdeas[0]) || '',
-            heroBannerTextOverlay: pContent.heroHeadline || '',
-          });
-        }
-        // Brief pause between pages
-        if (gi < structure.length - 1) await new Promise(function(r) { setTimeout(r, 800); });
-      }
-
-      addLog('');
-      addLog('═══ STORE FERTIG ═══');
-      addLog('✓ ' + generatedPages.length + ' Seiten generiert');
-
-      updateData({ generatedPages: generatedPages });
-      setFinished(true);
-      setRunning(false);
-
-      // Build the final store object and hand off to parent
-      var storeObj = {
-        brandName: data.brand,
-        marketplace: data.marketplace,
-        brandTone: (data.brandVoice && data.brandVoice.tone) || 'professional',
-        heroMessage: (brandProfile.heroBannerConcept && brandProfile.heroBannerConcept.headline) || data.brand,
-        brandStory: (brandProfile.brandStory && brandProfile.brandStory.text) || '',
-        keyFeatures: (brandProfile.usps || []).map(function(u) { return u.text; }).filter(Boolean),
-        products: data.products || [],
-        asins: data.asins || [],
-        pages: generatedPages,
-        productCI: data.productCI || null,
-        websiteData: data.websiteData || null,
-        categories: data.categories || null,
-        productAnalyses: data.productAnalyses || null,
-        websiteAnalyses: data.websiteAnalyses || null,
-        pipelineBrandVoice: data.brandVoice || null,
-        contentPool: brandProfile,
-        storeType: data.storeType || null,
-        // Re-use logo / brand assets
-        logoDataUrl: data.logoFile || null,
-        brandColors: data.brandColors || '',
-        fontNames: data.fontNames || '',
-      };
-      onDone(storeObj);
-    } catch (e) {
-      setRunning(false);
-      if (e.message === 'CANCELLED') {
-        addLog('⚠ Abgebrochen.');
-        setError('Generierung abgebrochen.');
-      } else {
-        addLog('ERROR: ' + e.message);
-        setError(e.message);
-      }
-    }
+  var handleStart = function() {
+    if (!onGenerate) return;
+    var params = {
+      asins: data.asins,
+      marketplace: data.marketplace,
+      brand: data.brand,
+      logoFile: data.logoFile,
+      fontNames: data.fontNames,
+      brandColors: data.brandColors,
+      brandToneExamples: data.brandToneExamples,
+      extraPages: data.extraPages,
+      existingStoreUrl: data.existingStoreUrl,
+      existingStoreMode: data.existingStoreMode,
+      keepMenuStructure: data.keepMenuStructure,
+      adoptExistingContent: data.adoptExistingContent,
+      websiteData: data.websiteData,
+      // Prepared bundle: lets App.jsx's handleGenerate skip redundant phases
+      prepared: {
+        products: data.products,
+        productCI: data.productCI,
+        productAnalyses: data.productAnalyses,
+        categories: data.categories,
+        websiteAnalyses: data.websiteAnalyses,
+        brandVoice: data.brandVoice,
+        brandProfile: data.brandProfile,
+      },
+    };
+    onGenerate(params);
+    // App.jsx sets showWizard=false at the start of handleGenerate, so the
+    // wizard will unmount automatically and the main generation log overlay
+    // takes over. We don't need to call onCancel() here.
   };
-
-  useEffect(function() {
-    if (!startedRef.current && !finished && !running) {
-      startedRef.current = true;
-      runGeneration();
-    }
-  }, []);
 
   return (
     <div>
       <div style={{ fontSize: 13, color: '#334155', marginBottom: 12 }}>
-        <strong>Automatisch:</strong> Jede Seite wird einzeln generiert. Eine API-Anfrage pro Seite mit deinem bestätigten Content und Layout.
+        <strong>Übergabe an Haupt-Pipeline:</strong> Deine Vorbereitung wird gebündelt und an die zentrale Store-Generierung übergeben. Die Pipeline überspringt bereits erledigte Schritte (Scraping, Brand Voice, Kategorien), generiert alle Seiten nach deiner Struktur und glättet die Texte auf die Brand Voice.
       </div>
-      {running && (
-        <div style={{ padding: '10px 12px', background: '#fffbeb', border: '1px solid #fde68a', borderRadius: 6, fontSize: 12, color: '#92400e', marginBottom: 12 }}>
-          Generierung läuft... Tab geöffnet lassen.
+
+      <div style={{ padding: 14, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 6, marginBottom: 12 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: '#0f172a', marginBottom: 8 }}>Zusammenfassung</div>
+        <div style={{ fontSize: 12, color: '#475569', lineHeight: 1.7 }}>
+          <div><strong>Marke:</strong> {data.brand || '—'}</div>
+          <div><strong>Marketplace:</strong> {data.marketplace || '—'}</div>
+          <div><strong>Produkte:</strong> {productCount}</div>
+          <div><strong>Seiten:</strong> {pageCount}</div>
+          {existing && (
+            <div>
+              <strong>Bestehender Store:</strong>{' '}
+              {data.existingStoreMode === 'optimize' ? 'Optimieren (Struktur behalten)' : 'Komplett neu konzipieren'}
+            </div>
+          )}
+          {data.brandVoice && data.brandVoice.tone && (
+            <div><strong>Brand Voice:</strong> {data.brandVoice.tone}</div>
+          )}
         </div>
-      )}
-      {finished && !running && (
-        <div style={{ padding: '10px 12px', background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 6, fontSize: 12, color: '#166534', marginBottom: 12 }}>
-          ✓ Store fertig generiert! {(data.generatedPages || []).length} Seiten.
-        </div>
-      )}
+      </div>
+
+      <div style={{ padding: '10px 12px', background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 6, fontSize: 12, color: '#1e40af', marginBottom: 16 }}>
+        Hinweis: Nach Klick auf „Store generieren" schließt sich der Wizard und die Generierung läuft im Hauptfenster weiter. Du siehst dort einen detaillierten Fortschrittslog.
+      </div>
+
       <div style={{ display: 'flex', gap: 6 }}>
-        <button className="btn" onClick={onBack} disabled={running}>Zurück zur Struktur</button>
-        {!running && !finished && (
-          <button className="btn btn-primary" onClick={runGeneration}>Erneut versuchen</button>
-        )}
-        {running && (
-          <button className="btn" onClick={function() { cancelRef.current = true; }}>Abbrechen</button>
-        )}
+        <button className="btn" onClick={onBack}>Zurück zur Struktur</button>
+        <button className="btn btn-primary" onClick={handleStart}>Store generieren →</button>
       </div>
     </div>
   );

@@ -216,6 +216,7 @@ export default function App() {
 
   var handleGenerate = async function(params) {
     setShowGen(false);
+    setShowWizard(false); // Close wizard when delegating from it
     setGenerating(true);
     setGenDone(false);
     setGenLog([]);
@@ -230,18 +231,34 @@ export default function App() {
     var lang = LANGS[params.marketplace] || 'German';
     var domain = DOMAINS[params.marketplace] || DOMAINS.de;
 
+    // When invoked from the wizard, params.prepared carries data already
+    // gathered and potentially edited by the user. Each phase checks this
+    // object first and skips its own work when a fresh result is provided.
+    // When invoked from the modal (or with empty prepared), everything runs.
+    var prep = params.prepared || {};
+
     try {
-      // Step 1: Scrape
-      log('Scraping ' + params.asins.length + ' ASINs from Amazon.' + params.marketplace + '...');
-      var scrapeResult = await scrapeAsins(params.asins, domain);
-      var products = scrapeResult.products || [];
-      if (!products.length) throw new Error('No products returned from Bright Data. Check your ASINs and try again.');
-      log('Scraped ' + products.length + '/' + params.asins.length + ' products');
+      // Step 1: Scrape (skip if wizard already scraped)
+      var products;
+      if (prep.products && prep.products.length) {
+        log('Using scraped products from wizard: ' + prep.products.length);
+        products = prep.products;
+      } else {
+        log('Scraping ' + params.asins.length + ' ASINs from Amazon.' + params.marketplace + '...');
+        var scrapeResult = await scrapeAsins(params.asins, domain);
+        products = scrapeResult.products || [];
+        if (!products.length) throw new Error('No products returned from Bright Data. Check your ASINs and try again.');
+        log('Scraped ' + products.length + '/' + params.asins.length + ' products');
+      }
 
       // Step 1.2: Analyze brand CI from product listing images via Gemini Vision
+      // (skip if wizard already analyzed)
       var productCI = null;
       var userCiSource = params.ciSource || 'auto';
-      if (userCiSource !== 'manual' && userCiSource !== 'website') {
+      if (prep.productCI) {
+        productCI = prep.productCI;
+        log('Using CI analysis from wizard: ' + (productCI.primaryColors || []).length + ' colors, mood: ' + (productCI.visualMood || '–'));
+      } else if (userCiSource !== 'manual' && userCiSource !== 'website') {
         // Analyze Amazon listing images for CI (unless user chose "website only" or "manual")
         try {
           var ciImages = [];
@@ -553,35 +570,49 @@ export default function App() {
       // ═══════════════════════════════════════════════════
 
       // ─── PHASE 1: ANALYZE EACH PRODUCT INDIVIDUALLY ───
+      // (skip if wizard already produced product analyses)
       log('');
       log('═══ PHASE 1: PRODUKT-ANALYSE (einzeln) ═══');
-      var allProductAnalyses = [];
-      for (var pi = 0; pi < products.length; pi++) {
-        checkCancel();
-        var p = products[pi];
-        log('   Product ' + (pi + 1) + '/' + products.length + ': ' + (p.name || '').slice(0, 50));
-        try {
-          var pa = await analyzeOneProduct(p);
-          pa.asin = p.asin;
-          pa.name = p.name;
-          allProductAnalyses.push(pa);
-        } catch (paErr) {
-          log('     Failed: ' + paErr.message + ' — skipping');
-          allProductAnalyses.push({ asin: p.asin, name: p.name, productCategory: 'Uncategorized', keyBenefits: [], shortHeadline: p.name, shortDescription: '' });
+      var allProductAnalyses;
+      if (prep.productAnalyses && prep.productAnalyses.length) {
+        allProductAnalyses = prep.productAnalyses;
+        log('   Using ' + allProductAnalyses.length + ' product analyses from wizard');
+      } else {
+        allProductAnalyses = [];
+        for (var pi = 0; pi < products.length; pi++) {
+          checkCancel();
+          var p = products[pi];
+          log('   Product ' + (pi + 1) + '/' + products.length + ': ' + (p.name || '').slice(0, 50));
+          try {
+            var pa = await analyzeOneProduct(p);
+            pa.asin = p.asin;
+            pa.name = p.name;
+            allProductAnalyses.push(pa);
+          } catch (paErr) {
+            log('     Failed: ' + paErr.message + ' — skipping');
+            allProductAnalyses.push({ asin: p.asin, name: p.name, productCategory: 'Uncategorized', keyBenefits: [], shortHeadline: p.name, shortDescription: '' });
+          }
+          // Brief pause to avoid rate limiting
+          if (pi < products.length - 1) await new Promise(function(r) { setTimeout(r, 300); });
         }
-        // Brief pause to avoid rate limiting
-        if (pi < products.length - 1) await new Promise(function(r) { setTimeout(r, 300); });
+        log('   ' + allProductAnalyses.length + ' products analyzed');
       }
-      log('   ' + allProductAnalyses.length + ' products analyzed');
 
       checkCancel();
 
       // ─── PHASE 1.5: GROUP INTO CATEGORIES ───
+      // (skip if wizard already categorized — these may have been edited by user)
       log('');
       log('═══ PHASE 1.5: KATEGORISIERUNG ═══');
-      var categories = await runPipelineStep('Kategorisierung', function() {
-        return groupIntoCategories(allProductAnalyses, params.brand, lang);
-      });
+      var categories;
+      if (prep.categories && prep.categories.categories && prep.categories.categories.length) {
+        categories = prep.categories;
+        log('   Using ' + categories.categories.length + ' categories from wizard');
+      } else {
+        categories = await runPipelineStep('Kategorisierung', function() {
+          return groupIntoCategories(allProductAnalyses, params.brand, lang);
+        });
+      }
       (categories.categories || []).forEach(function(c) {
         log('   ' + c.name + ': ' + (c.asins || []).length + ' products');
       });
@@ -589,38 +620,52 @@ export default function App() {
       checkCancel();
 
       // ─── PHASE 2: ANALYZE WEBSITE PAGES INDIVIDUALLY ───
+      // (skip if wizard already analyzed website pages)
       log('');
       log('═══ PHASE 2: WEBSITE-ANALYSE (pro Seite) ═══');
-      var allWebsiteAnalyses = [];
-      if (enhancedWebsiteData && enhancedWebsiteData.rawTextSections && enhancedWebsiteData.rawTextSections.length > 0) {
-        for (var wi = 0; wi < enhancedWebsiteData.rawTextSections.length; wi++) {
-          checkCancel();
-          var section = enhancedWebsiteData.rawTextSections[wi];
-          var pageText = section.text || '';
-          if (pageText.length < 50) continue;
-          log('   Page ' + (wi + 1) + '/' + enhancedWebsiteData.rawTextSections.length + ' (' + section.source + ')');
-          try {
-            var wa = await analyzeWebsitePage(pageText, section.source, params.brand);
-            allWebsiteAnalyses.push(wa);
-          } catch (waErr) {
-            log('     Failed: ' + waErr.message);
-          }
-          if (wi < enhancedWebsiteData.rawTextSections.length - 1) await new Promise(function(r) { setTimeout(r, 300); });
-        }
+      var allWebsiteAnalyses;
+      if (prep.websiteAnalyses) {
+        allWebsiteAnalyses = prep.websiteAnalyses;
+        log('   Using ' + allWebsiteAnalyses.length + ' website analyses from wizard');
       } else {
-        log('   No website data available — using product data only');
+        allWebsiteAnalyses = [];
+        if (enhancedWebsiteData && enhancedWebsiteData.rawTextSections && enhancedWebsiteData.rawTextSections.length > 0) {
+          for (var wi = 0; wi < enhancedWebsiteData.rawTextSections.length; wi++) {
+            checkCancel();
+            var section = enhancedWebsiteData.rawTextSections[wi];
+            var pageText = section.text || '';
+            if (pageText.length < 50) continue;
+            log('   Page ' + (wi + 1) + '/' + enhancedWebsiteData.rawTextSections.length + ' (' + section.source + ')');
+            try {
+              var wa = await analyzeWebsitePage(pageText, section.source, params.brand);
+              allWebsiteAnalyses.push(wa);
+            } catch (waErr) {
+              log('     Failed: ' + waErr.message);
+            }
+            if (wi < enhancedWebsiteData.rawTextSections.length - 1) await new Promise(function(r) { setTimeout(r, 300); });
+          }
+        } else {
+          log('   No website data available — using product data only');
+        }
+        log('   ' + allWebsiteAnalyses.length + ' website pages analyzed');
       }
-      log('   ' + allWebsiteAnalyses.length + ' website pages analyzed');
 
       checkCancel();
 
       // ─── PHASE 2.5: BRAND VOICE ───
+      // (skip if wizard produced voice — user may have edited in Step 2)
       log('');
       log('═══ PHASE 2.5: BRAND VOICE ═══');
       var websiteTexts = enhancedWebsiteData ? (enhancedWebsiteData.aboutText || enhancedWebsiteData.rawTextContent || '') : '';
-      var pipelineBrandVoice = await runPipelineStep('Brand Voice', function() {
-        return analyzeBrandVoice(products, params.brand, websiteTexts, params.brandToneExamples || '');
-      });
+      var pipelineBrandVoice;
+      if (prep.brandVoice) {
+        pipelineBrandVoice = prep.brandVoice;
+        log('   Using brand voice from wizard (possibly user-edited)');
+      } else {
+        pipelineBrandVoice = await runPipelineStep('Brand Voice', function() {
+          return analyzeBrandVoice(products, params.brand, websiteTexts, params.brandToneExamples || '');
+        });
+      }
       log('   Tone: ' + ((pipelineBrandVoice.toneDescriptors || []).join(', ') || pipelineBrandVoice.tone || '?'));
       if (pipelineBrandVoice.voiceFingerprint) log('   Fingerprint: ' + pipelineBrandVoice.voiceFingerprint.slice(0, 120));
 
@@ -652,11 +697,18 @@ export default function App() {
       checkCancel();
 
       // ─── PHASE 3: SYNTHESIZE BRAND PROFILE ───
+      // (skip if wizard produced profile — user may have edited in Step 2)
       log('');
       log('═══ PHASE 3: BRAND PROFILE ═══');
-      var brandProfile = await runPipelineStep('Brand Profile', function() {
-        return synthesizeBrandProfile(allProductAnalyses, allWebsiteAnalyses, categories, pipelineBrandVoice, params.brand, lang, brandIntelligence);
-      });
+      var brandProfile;
+      if (prep.brandProfile) {
+        brandProfile = prep.brandProfile;
+        log('   Using brand profile from wizard (possibly user-edited)');
+      } else {
+        brandProfile = await runPipelineStep('Brand Profile', function() {
+          return synthesizeBrandProfile(allProductAnalyses, allWebsiteAnalyses, categories, pipelineBrandVoice, params.brand, lang, brandIntelligence);
+        });
+      }
       log('   USPs: ' + (brandProfile.usps || []).length);
       log('   Brand Story: ' + (brandProfile.brandStory && brandProfile.brandStory.available ? 'yes' : 'no'));
       log('   Trust: ' + (brandProfile.trustElements || []).length);
@@ -1502,6 +1554,7 @@ export default function App() {
           resumeId={resumeWizardId}
           onComplete={function(storeObj) { handleWizardComplete(storeObj); setShowWizard(false); setResumeWizardId(null); }}
           onCancel={function() { setShowWizard(false); setResumeWizardId(null); }}
+          onGenerate={handleGenerate}
         />
       )}
 
