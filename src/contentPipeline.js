@@ -129,10 +129,12 @@ export async function analyzeWebsitePage(pageText, pageSource, brand) {
 // STEP 4: Synthesize brand profile from all collected data
 // Gets accumulated results from Steps 1-3
 // ═══════════════════════════════════════════════════════════════
-export async function synthesizeBrandProfile(allProductAnalyses, allWebsiteAnalyses, categories, brandVoice, brand, lang) {
+export async function synthesizeBrandProfile(allProductAnalyses, allWebsiteAnalyses, categories, brandVoice, brand, lang, brandIntelligence) {
   var system = [
     'You create the definitive brand profile for a Brand Store.',
     'All data has been pre-analyzed. Your job is to SYNTHESIZE, not re-analyze.',
+    'You receive a BRAND INTELLIGENCE block — the single source of truth.',
+    'Every USP, story element, trust claim, and image concept you produce MUST align with it.',
     'Return ONLY valid JSON. All texts in ' + lang + '.',
     'TEXT RULE: NEVER use hyphens (-), m-dashes (—), or en-dashes (–) to combine two text elements.',
     'Use line breaks or text hierarchy (headline + subline) instead. Example: NOT "Hochdosiert - Made in Germany" but "Hochdosiert\\nMade in Germany".',
@@ -161,8 +163,9 @@ export async function synthesizeBrandProfile(allProductAnalyses, allWebsiteAnaly
   var user = [
     'Brand: ' + brand + ' | Language: ' + lang,
     '',
-    'BRAND VOICE: ' + JSON.stringify(brandVoice, null, 1),
+    brandIntelligence ? formatBrandIntelligenceForPrompt(brandIntelligence) : 'BRAND VOICE: ' + JSON.stringify(brandVoice, null, 1),
     '',
+    'PRE-AGGREGATED DATA:',
     'USPs found on website: ' + allUsps.join(' | '),
     'Brand story elements: ' + allStoryElements.join(' | '),
     'Certifications: ' + allCerts.join(' | '),
@@ -182,8 +185,11 @@ export async function synthesizeBrandProfile(allProductAnalyses, allWebsiteAnaly
     '}',
     '',
     'RULES:',
-    '- USPs must come from ACTUAL website/product data. Not invented.',
+    '- USPs must come from ACTUAL website/product/existing-store data. Not invented.',
     '- If no brand story info found, set available=false. Do NOT invent one.',
+    '- Headlines, sublines, and image descriptions MUST follow the voice fingerprint, sentence patterns, and CTA style from BRAND INTELLIGENCE.',
+    '- Image concepts MUST match visualMood, photographyStyle, and visualToneCues.',
+    '- If BRAND INTELLIGENCE shows adoptExistingContent=true, reuse verbatim headlines/USPs from existing store context where they fit.',
     '- All texts in ' + lang + '.',
   ].join('\n');
 
@@ -193,15 +199,18 @@ export async function synthesizeBrandProfile(allProductAnalyses, allWebsiteAnaly
 // ═══════════════════════════════════════════════════════════════
 // STEP 5: Plan page structure from content
 // ═══════════════════════════════════════════════════════════════
-export async function planPages(brandProfile, categories, productAnalyses, storeKnowledge, brand, lang, extraPages) {
+export async function planPages(brandProfile, categories, productAnalyses, storeKnowledge, brand, lang, extraPages, brandIntelligence) {
   var system = [
     'You plan Amazon Brand Store pages. Content determines structure.',
     'Only create pages for content that EXISTS. No empty pages.',
+    'The BRAND INTELLIGENCE block is the single source of truth — respect voice, visual mood, and reuse flags.',
     'Return ONLY valid JSON. All texts in ' + lang + '.',
   ].join('\n');
 
   var user = [
     'Brand: ' + brand,
+    '',
+    brandIntelligence ? formatBrandIntelligenceForPrompt(brandIntelligence) : '',
     '',
     'CONTENT AVAILABLE:',
     '- USPs: ' + (brandProfile.usps || []).map(function(u) { return u.text; }).join(' | '),
@@ -237,10 +246,14 @@ export async function planPages(brandProfile, categories, productAnalyses, store
 // STEP 6: Generate ONE page
 // Called once per page. Gets the page plan + relevant content.
 // ═══════════════════════════════════════════════════════════════
-export async function generateOnePage(pagePlan, brandProfile, categories, productAnalyses, brand, lang, previousPages, storeKnowledge) {
+export async function generateOnePage(pagePlan, brandProfile, categories, productAnalyses, brand, lang, previousPages, storeKnowledge, brandIntelligence) {
   var system = [
     'You generate ONE Amazon Brand Store page.',
-    'You receive the page plan + all relevant content.',
+    'You receive the page plan + all relevant content + BRAND INTELLIGENCE.',
+    'BRAND INTELLIGENCE is the single source of truth for voice, visuals, and reusable content.',
+    'Every textOverlay and every image brief MUST follow: voice.voiceFingerprint, voice.sentencePatterns, voice.ctaStyle, visual.visualMood, visual.visualToneCues.',
+    'Lean on contentInventory.reusablePhrases where they fit — do not invent new brand phrases.',
+    'If reuseFlags.adoptExistingContent=true, prefer verbatim headlines/USPs from existingStoreRawContext over new ones.',
     'Your job: fill the sections with real content. No filler. No generic text.',
     'Return ONLY valid JSON. All textOverlay texts in ' + lang + '.',
     'Briefs in English, 10-20 words max — just the image idea.',
@@ -256,6 +269,8 @@ export async function generateOnePage(pagePlan, brandProfile, categories, produc
   var user = [
     'Page: "' + pagePlan.name + '" (id: ' + pagePlan.id + ')',
     'Brand: ' + brand + ' | Language: ' + lang,
+    '',
+    brandIntelligence ? formatBrandIntelligenceForPrompt(brandIntelligence) : '',
     '',
     'PAGE PLAN (sections to fill):',
     JSON.stringify(pagePlan.sections, null, 1),
@@ -381,6 +396,168 @@ export async function analyzeBrandVoice(products, brand, websiteTexts, brandTone
   ].filter(Boolean).join('\n');
 
   return await callClaude(system, user, 3072);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// BRAND INTELLIGENCE MODULE
+// Pure function (no API call). Packages ALL collected brand signals
+// (voice, visual, content inventory, reuse flags) into ONE structured
+// object that every downstream call can inject.
+// This is the single source of truth that the Content-First pipeline
+// now carries through synthesizeBrandProfile → planPages → generateOnePage.
+// ═══════════════════════════════════════════════════════════════
+export function buildBrandIntelligence(args) {
+  var voice = args.voicePlaybook || {};
+  var productCI = args.productCI || null;
+  var websiteData = args.websiteData || null;
+  var websiteAnalyses = args.allWebsiteAnalyses || [];
+  var existingStoreAnalysis = args.existingStoreAnalysis || null;
+  var existingStoreMode = args.existingStoreMode || null;
+  var adoptExistingContent = !!args.adoptExistingContent;
+  var brand = args.brand || '';
+  var lang = args.lang || '';
+
+  // ─── VISUAL PLAYBOOK ───
+  // Consolidates productCI (Amazon listing images), website colors,
+  // user-provided brand assets, and voice-derived visual cues.
+  var websiteColors = (websiteData && websiteData.colors) ? websiteData.colors : [];
+  var primaryColors = productCI && productCI.primaryColors ? productCI.primaryColors.slice() : [];
+  websiteColors.forEach(function(c) { if (c && primaryColors.indexOf(c) < 0) primaryColors.push(c); });
+
+  var visual = {
+    primaryColors: primaryColors.slice(0, 6),
+    secondaryColors: productCI && productCI.secondaryColors ? productCI.secondaryColors : [],
+    backgroundColor: productCI ? (productCI.backgroundColor || '') : '',
+    colorVariation: productCI ? (productCI.colorVariation || '') : '',
+    typographyStyle: productCI ? (productCI.typographyStyle || '') : (websiteData && websiteData.userFonts ? websiteData.userFonts : ''),
+    photographyStyle: productCI ? (productCI.photographyStyle || '') : '',
+    visualMood: productCI ? (productCI.visualMood || '') : '',
+    backgroundPattern: productCI ? (productCI.backgroundPattern || '') : '',
+    recurringElements: productCI ? (productCI.recurringElements || []) : [],
+    textDensity: productCI ? (productCI.textDensity || '') : '',
+    designerNotes: productCI ? (productCI.designerNotes || '') : '',
+    visualToneCues: voice.visualToneCues || [],
+    productsAnalyzed: productCI ? (productCI.productsAnalyzed || 0) : 0,
+  };
+
+  // ─── CONTENT INVENTORY ───
+  // Every reusable signal from website + existing store + product bullets.
+  var websiteUsps = [];
+  var websiteStoryElements = [];
+  var certifications = [];
+  var trustElements = [];
+  var keyPhrases = [];
+  var productMentions = [];
+  websiteAnalyses.forEach(function(wa) {
+    (wa.usps || []).forEach(function(u) { if (u && websiteUsps.indexOf(u) < 0) websiteUsps.push(u); });
+    (wa.brandStoryElements || []).forEach(function(s) { if (s && websiteStoryElements.indexOf(s) < 0) websiteStoryElements.push(s); });
+    (wa.certifications || []).forEach(function(c) { if (c && certifications.indexOf(c) < 0) certifications.push(c); });
+    (wa.trustElements || []).forEach(function(t) { if (t && trustElements.indexOf(t) < 0) trustElements.push(t); });
+    (wa.keyPhrases || []).forEach(function(p) { if (p && keyPhrases.indexOf(p) < 0) keyPhrases.push(p); });
+    (wa.productMentions || []).forEach(function(m) { if (m && productMentions.indexOf(m) < 0) productMentions.push(m); });
+  });
+
+  // Voice playbook already contains typicalPhrases + signatureWords — these are
+  // the verbatim phrases the copywriter/briefer must lean on.
+  var reusablePhrases = [];
+  (voice.typicalPhrases || []).forEach(function(p) { if (p && reusablePhrases.indexOf(p) < 0) reusablePhrases.push(p); });
+  (voice.vocabulary && voice.vocabulary.signatureWords ? voice.vocabulary.signatureWords : []).forEach(function(p) {
+    if (p && reusablePhrases.indexOf(p) < 0) reusablePhrases.push(p);
+  });
+
+  var contentInventory = {
+    websiteUsps: websiteUsps,
+    websiteStoryElements: websiteStoryElements,
+    certifications: certifications,
+    trustElements: trustElements,
+    keyPhrases: keyPhrases,
+    productMentions: productMentions,
+    reusablePhrases: reusablePhrases,
+    // Raw existing-store analysis (free-form text from crawl+vision).
+    // Kept as text for downstream prompts; copywriter can mine it.
+    existingStoreRawContext: existingStoreAnalysis || '',
+  };
+
+  // ─── REUSE FLAGS ───
+  // Tells downstream calls HOW to treat the raw material.
+  var reuseFlags = {
+    hasExistingStore: !!existingStoreAnalysis,
+    existingStoreMode: existingStoreMode,
+    // Adopt existing content verbatim only when user explicitly opts in
+    // AND mode is optimize (reconceptualize always rewrites from scratch).
+    adoptExistingContent: !!(adoptExistingContent && existingStoreMode === 'optimize'),
+    adoptExistingStructure: !!(existingStoreMode === 'optimize'),
+    hasWebsite: websiteAnalyses.length > 0,
+    hasVisualCI: !!(productCI && (productCI.primaryColors || []).length > 0),
+  };
+
+  return {
+    brand: brand,
+    lang: lang,
+    voice: voice,
+    visual: visual,
+    contentInventory: contentInventory,
+    reuseFlags: reuseFlags,
+  };
+}
+
+// Compact rendering of brand intelligence for prompt injection.
+// Keeps the payload small but every downstream prompt gets the same view.
+export function formatBrandIntelligenceForPrompt(bi) {
+  if (!bi) return '';
+  var v = bi.voice || {};
+  var vis = bi.visual || {};
+  var inv = bi.contentInventory || {};
+  var rf = bi.reuseFlags || {};
+  var parts = [];
+  parts.push('=== BRAND INTELLIGENCE (single source of truth) ===');
+  // Voice
+  parts.push('VOICE:');
+  if (v.voiceFingerprint) parts.push('  Fingerprint: ' + v.voiceFingerprint);
+  if (v.communicationStyle) parts.push('  Style: ' + v.communicationStyle + ' / addressing: ' + (v.addressing || 'neutral'));
+  if (v.toneDescriptors) parts.push('  Tone: ' + v.toneDescriptors.join(', '));
+  if (v.sentencePatterns) parts.push('  Sentences: ' + (v.sentencePatterns.typicalLength || '') + ', ' + (v.sentencePatterns.rhythm || ''));
+  if (v.vocabulary) {
+    if (v.vocabulary.signatureWords) parts.push('  Signature words: ' + v.vocabulary.signatureWords.join(', '));
+    if (v.vocabulary.avoidedWords) parts.push('  Avoid: ' + v.vocabulary.avoidedWords.join(', '));
+  }
+  if (v.typicalPhrases) parts.push('  Typical phrases: ' + v.typicalPhrases.join(' | '));
+  if (v.ctaStyle) parts.push('  CTA style: ' + (v.ctaStyle.register || '') + ' — examples: ' + (v.ctaStyle.examples || []).join(' | '));
+  if (v.do) parts.push('  DO: ' + v.do.join(' | '));
+  if (v.dont) parts.push('  DONT: ' + v.dont.join(' | '));
+
+  // Visual
+  parts.push('VISUAL:');
+  if (vis.primaryColors && vis.primaryColors.length) parts.push('  Primary colors: ' + vis.primaryColors.join(', '));
+  if (vis.secondaryColors && vis.secondaryColors.length) parts.push('  Secondary colors: ' + vis.secondaryColors.join(', '));
+  if (vis.visualMood) parts.push('  Mood: ' + vis.visualMood);
+  if (vis.typographyStyle) parts.push('  Typography: ' + vis.typographyStyle);
+  if (vis.photographyStyle) parts.push('  Photography: ' + vis.photographyStyle);
+  if (vis.backgroundColor) parts.push('  Background: ' + vis.backgroundColor + (vis.backgroundPattern ? ' (' + vis.backgroundPattern + ')' : ''));
+  if (vis.recurringElements && vis.recurringElements.length) parts.push('  Recurring visual elements: ' + vis.recurringElements.join(', '));
+  if (vis.visualToneCues && vis.visualToneCues.length) parts.push('  Visual tone cues: ' + vis.visualToneCues.join(' | '));
+  if (vis.designerNotes) parts.push('  Designer notes: ' + vis.designerNotes);
+
+  // Content inventory
+  parts.push('CONTENT INVENTORY (use these as raw material — NOT invented):');
+  if (inv.websiteUsps && inv.websiteUsps.length) parts.push('  Website USPs: ' + inv.websiteUsps.join(' | '));
+  if (inv.certifications && inv.certifications.length) parts.push('  Certifications: ' + inv.certifications.join(' | '));
+  if (inv.trustElements && inv.trustElements.length) parts.push('  Trust elements: ' + inv.trustElements.join(' | '));
+  if (inv.keyPhrases && inv.keyPhrases.length) parts.push('  Key phrases: ' + inv.keyPhrases.join(' | '));
+  if (inv.reusablePhrases && inv.reusablePhrases.length) parts.push('  Reusable phrases (lean on these): ' + inv.reusablePhrases.join(' | '));
+
+  // Reuse flags
+  parts.push('REUSE FLAGS:');
+  parts.push('  Has existing store: ' + rf.hasExistingStore + ' (mode: ' + (rf.existingStoreMode || 'none') + ')');
+  parts.push('  Adopt existing content: ' + rf.adoptExistingContent);
+  parts.push('  Adopt existing structure: ' + rf.adoptExistingStructure);
+  if (rf.hasExistingStore && inv.existingStoreRawContext) {
+    parts.push('EXISTING STORE RAW CONTEXT (mine for content/structure per reuse flags):');
+    // Truncate to keep prompt size reasonable
+    var raw = inv.existingStoreRawContext;
+    parts.push(raw.length > 4000 ? raw.slice(0, 4000) + '\n...[truncated]' : raw);
+  }
+  return parts.join('\n');
 }
 
 // ═══════════════════════════════════════════════════════════════

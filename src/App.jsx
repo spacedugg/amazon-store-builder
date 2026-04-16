@@ -3,7 +3,7 @@ import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, find
 import { scrapeAsins, analyzeBrandCI } from './api';
 import { generateStore, aiRefineStore, applyOperations, generateWireframesForPage, deleteWireframesForPage } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink } from './storage';
-import { analyzeOneProduct, groupIntoCategories, analyzeWebsitePage, synthesizeBrandProfile, planPages, generateOnePage, validateStore as validateStoreQuality, analyzeBrandVoice } from './contentPipeline';
+import { analyzeOneProduct, groupIntoCategories, analyzeWebsitePage, synthesizeBrandProfile, planPages, generateOnePage, validateStore as validateStoreQuality, analyzeBrandVoice, buildBrandIntelligence } from './contentPipeline';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
 import { crawlMultipleStores, crawlAndParseStore, analyzeStoreImagesWithGemini, formatReferenceStoreContext, loadStoreKnowledge, formatStoreKnowledge } from './referenceStoreService';
 import Topbar from './components/Topbar';
@@ -377,6 +377,10 @@ export default function App() {
       // ─── Track critical failures for retry prompt ───
       var criticalFailures = [];
 
+      // Existing-store analysis kept as separate variable so Step 2
+      // (brandIntelligence) can consume it structurally, not just as a text prefix.
+      var existingStoreContext = null;
+
       // Step 1.5b: Analyze existing store with Gemini Vision (if provided)
       if (params.existingStoreUrl) {
         var existingStoreRetries = 0;
@@ -419,6 +423,8 @@ export default function App() {
                 + '- Match CI exactly: same colors, same image style, same tonality\n\n';
             }
             referenceAnalysis = (referenceAnalysis || '') + existingPrefix + existingContext;
+            // Keep the raw existing-store analysis for brandIntelligence consumption
+            existingStoreContext = existingPrefix + existingContext;
             log('Existing store analyzed: ' + existingStore.pageCount + ' pages, ' + existingStore.summary.totalImages + ' images');
             existingStoreSuccess = true;
           } catch (existErr) {
@@ -615,7 +621,33 @@ export default function App() {
       var pipelineBrandVoice = await runPipelineStep('Brand Voice', function() {
         return analyzeBrandVoice(products, params.brand, websiteTexts, params.brandToneExamples || '');
       });
-      log('   Tone: ' + (pipelineBrandVoice.tone || '?'));
+      log('   Tone: ' + ((pipelineBrandVoice.toneDescriptors || []).join(', ') || pipelineBrandVoice.tone || '?'));
+      if (pipelineBrandVoice.voiceFingerprint) log('   Fingerprint: ' + pipelineBrandVoice.voiceFingerprint.slice(0, 120));
+
+      checkCancel();
+
+      // ─── PHASE 2.7: BRAND INTELLIGENCE (single source of truth) ───
+      // Packages voice + visual + content inventory + reuse flags into ONE
+      // structured object that every downstream call receives. This is the
+      // unification that Step 2 of the redesign introduced: data that used to
+      // live in separate places (productCI, existingStore text, websiteAnalyses)
+      // now flows through every prompt via a single block.
+      log('');
+      log('═══ PHASE 2.7: BRAND INTELLIGENCE ═══');
+      var brandIntelligence = buildBrandIntelligence({
+        brand: params.brand,
+        lang: lang,
+        voicePlaybook: pipelineBrandVoice,
+        productCI: productCI,
+        websiteData: enhancedWebsiteData,
+        allWebsiteAnalyses: allWebsiteAnalyses,
+        existingStoreAnalysis: existingStoreContext,
+        existingStoreMode: params.existingStoreMode || null,
+        adoptExistingContent: !!params.adoptExistingContent,
+      });
+      log('   Visual: ' + (brandIntelligence.visual.primaryColors.length) + ' primary colors, mood: ' + (brandIntelligence.visual.visualMood || '–'));
+      log('   Inventory: ' + brandIntelligence.contentInventory.websiteUsps.length + ' USPs, ' + brandIntelligence.contentInventory.trustElements.length + ' trust, ' + brandIntelligence.contentInventory.reusablePhrases.length + ' reusable phrases');
+      log('   Reuse: existingStore=' + brandIntelligence.reuseFlags.hasExistingStore + ', adoptContent=' + brandIntelligence.reuseFlags.adoptExistingContent);
 
       checkCancel();
 
@@ -623,7 +655,7 @@ export default function App() {
       log('');
       log('═══ PHASE 3: BRAND PROFILE ═══');
       var brandProfile = await runPipelineStep('Brand Profile', function() {
-        return synthesizeBrandProfile(allProductAnalyses, allWebsiteAnalyses, categories, pipelineBrandVoice, params.brand, lang);
+        return synthesizeBrandProfile(allProductAnalyses, allWebsiteAnalyses, categories, pipelineBrandVoice, params.brand, lang, brandIntelligence);
       });
       log('   USPs: ' + (brandProfile.usps || []).length);
       log('   Brand Story: ' + (brandProfile.brandStory && brandProfile.brandStory.available ? 'yes' : 'no'));
@@ -637,7 +669,7 @@ export default function App() {
       var storeKnowledgeStr = null;
       try { var kb = await loadStoreKnowledge(); if (kb) storeKnowledgeStr = formatStoreKnowledge(kb); } catch(e) {}
       var pagePlan = await runPipelineStep('Seitenplanung', function() {
-        return planPages(brandProfile, categories, allProductAnalyses, storeKnowledgeStr, params.brand, lang, selectedExtraPages);
+        return planPages(brandProfile, categories, allProductAnalyses, storeKnowledgeStr, params.brand, lang, selectedExtraPages, brandIntelligence);
       });
       (pagePlan.pages || []).forEach(function(pg) {
         log('   ' + pg.name + ': ' + (pg.sections || []).length + ' sections');
@@ -655,7 +687,7 @@ export default function App() {
         var pp = plannedPages[gi];
         log('   Page ' + (gi + 1) + '/' + plannedPages.length + ': ' + pp.name);
         try {
-          var pageResult = await generateOnePage(pp, brandProfile, categories, allProductAnalyses, params.brand, lang, generatedPages, storeKnowledgeStr);
+          var pageResult = await generateOnePage(pp, brandProfile, categories, allProductAnalyses, params.brand, lang, generatedPages, storeKnowledgeStr, brandIntelligence);
           var pageObj = {
             id: pp.id || ('page-' + gi),
             name: pp.name,
@@ -681,7 +713,7 @@ export default function App() {
       var storeData = {
         brandName: params.brand,
         marketplace: params.marketplace,
-        brandTone: pipelineBrandVoice.tone || 'professional',
+        brandTone: pipelineBrandVoice.tone || (pipelineBrandVoice.toneDescriptors || []).join(', ') || 'professional',
         heroMessage: brandProfile.heroBannerConcept ? brandProfile.heroBannerConcept.headline : params.brand,
         brandStory: brandProfile.brandStory ? brandProfile.brandStory.text : '',
         keyFeatures: (brandProfile.usps || []).map(function(u) { return u.text; }),
@@ -694,13 +726,15 @@ export default function App() {
         productAnalyses: allProductAnalyses,
         websiteAnalyses: allWebsiteAnalyses,
         pipelineBrandVoice: pipelineBrandVoice,
+        brandIntelligence: brandIntelligence,
         // For wireframe generation access
         analysis: {
-          brandTone: pipelineBrandVoice.tone || 'professional',
+          brandTone: pipelineBrandVoice.tone || (pipelineBrandVoice.toneDescriptors || []).join(', ') || 'professional',
           brandStory: brandProfile.brandStory ? brandProfile.brandStory.text : '',
           keyFeatures: (brandProfile.usps || []).map(function(u) { return u.text; }),
           productCI: productCI,
           pipelineBrandVoice: pipelineBrandVoice,
+          brandIntelligence: brandIntelligence,
         },
       };
 
