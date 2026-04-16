@@ -1,8 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { LANGS, DOMAINS } from '../constants';
 import { scrapeAsins, analyzeBrandCI, scrapeWebsite, discoverBrandProducts } from '../api';
-import { analyzeOneProduct, groupIntoCategories, analyzeWebsitePage, synthesizeBrandProfile, planPages, generateOnePage } from '../contentPipeline';
-import { analyzeBrandVoice } from '../generationPipeline';
+import { analyzeOneProduct, groupIntoCategories, analyzeWebsitePage, synthesizeBrandProfile, planPages, generateOnePage, analyzeBrandVoice } from '../contentPipeline';
 import { loadStoreKnowledge, formatStoreKnowledge } from '../referenceStoreService';
 
 // ─── GENERATION WIZARD ───

@@ -260,17 +260,6 @@ textarea.input { resize: vertical; min-height: 44px; }
 .input-mode-tab.active { background: #0f172a; color: #fff; }
 .input-mode-tab:hover:not(.active) { background: #f1f5f9; }
 
-/* ─── COMPLEXITY SLIDER ─── */
-.complexity-slider { margin-top: 6px; }
-.complexity-track { display: flex; gap: 4px; }
-.complexity-option { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 10px 8px; border-radius: 10px; border: 2px solid #e2e8f0; background: #f8fafc; cursor: pointer; transition: all .2s; }
-.complexity-option:hover { border-color: #cbd5e1; background: #fff; }
-.complexity-option.active { border-color: #6366f1; background: #eef2ff; box-shadow: 0 0 0 3px rgba(99,102,241,.12); }
-.complexity-level { font-size: 18px; font-weight: 800; color: #94a3b8; transition: color .2s; }
-.complexity-option.active .complexity-level { color: #6366f1; }
-.complexity-name { font-size: 11px; font-weight: 600; color: #475569; }
-.complexity-desc { margin-top: 8px; font-size: 11px; color: #64748b; line-height: 1.5; padding: 8px 10px; background: #f8fafc; border-radius: 8px; border: 1px solid #f1f5f9; }
-
 /* ─── PRICE CALCULATOR ─── */
 .price-breakdown { margin-top: 12px; }
 .price-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; font-size: 13px; color: #334155; }

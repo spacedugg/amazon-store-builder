@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { COMPLEXITY_LEVELS, LAYOUTS, findLayout } from '../constants';
+import { LAYOUTS, findLayout } from '../constants';
 import { discoverBrandProducts, scrapeWebsite } from '../api';
 
 function parseAsinFile(text) {
@@ -26,7 +26,6 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
   var [instructions, setInstructions] = useState('');
   var [asins, setAsins] = useState([]);
   var [pasteText, setPasteText] = useState('');
-  var [complexity, setComplexity] = useState(2);
   var [inputMode, setInputMode] = useState('file'); // 'file', 'paste', 'brandUrl'
   var [brandUrl, setBrandUrl] = useState('');
   var [brandDiscovering, setBrandDiscovering] = useState(false);
@@ -166,7 +165,6 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
   // Reference Store URL handlers removed
 
   var canGenerate = brand.trim() && asins.length > 0;
-  var levelInfo = COMPLEXITY_LEVELS[complexity];
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -489,31 +487,7 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
           )}
         </div>
 
-        {/* 5. Complexity Slider */}
-        <label className="label" style={{ marginTop: 10 }}>5. Store Complexity</label>
-        <div className="complexity-slider">
-          <div className="complexity-track">
-            {[1, 2, 3].map(function(level) {
-              var info = COMPLEXITY_LEVELS[level];
-              var isActive = complexity === level;
-              return (
-                <button
-                  key={level}
-                  className={'complexity-option' + (isActive ? ' active' : '')}
-                  onClick={function() { setComplexity(level); }}
-                >
-                  <span className="complexity-level">{level}</span>
-                  <span className="complexity-name">{info.name}</span>
-                </button>
-              );
-            })}
-          </div>
-          <div className="complexity-desc">
-            {levelInfo.description}
-          </div>
-        </div>
-
-        {/* 6. Instructions */}
+        {/* Instructions */}
         <label className="label" style={{ marginTop: 10 }}>7. Instructions (optional)</label>
         <div className="instructions-area">
           <textarea
@@ -582,7 +556,6 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
                 marketplace: marketplace,
                 instructions: instructions,
                 asins: asins,
-                complexity: complexity,
                 websiteData: websiteData || null,
                 referenceStoreUrls: [],
                 existingStoreUrl: existingStoreUrl.trim() && !validateStoreUrl(existingStoreUrl) ? existingStoreUrl.trim() : null,

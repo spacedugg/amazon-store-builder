@@ -3,8 +3,7 @@ import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, find
 import { scrapeAsins, analyzeBrandCI } from './api';
 import { generateStore, aiRefineStore, applyOperations, generateWireframesForPage, deleteWireframesForPage } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink } from './storage';
-import { analyzeOneProduct, groupIntoCategories, analyzeWebsitePage, synthesizeBrandProfile, planPages, generateOnePage, validateStore as validateStoreQuality } from './contentPipeline';
-import { analyzeBrandVoice } from './generationPipeline';
+import { analyzeOneProduct, groupIntoCategories, analyzeWebsitePage, synthesizeBrandProfile, planPages, generateOnePage, validateStore as validateStoreQuality, analyzeBrandVoice } from './contentPipeline';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
 import { crawlMultipleStores, crawlAndParseStore, analyzeStoreImagesWithGemini, formatReferenceStoreContext, loadStoreKnowledge, formatStoreKnowledge } from './referenceStoreService';
 import Topbar from './components/Topbar';
@@ -24,7 +23,7 @@ import AdminScrapingTest from './components/AdminScrapingTest';
 import AsinOverview from './components/AsinOverview';
 // KnowledgeBaseAdmin removed — reference data loads automatically in background
 
-var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, headerBannerColor: '', complexity: 2, category: 'generic', googleDriveUrl: '' };
+var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, headerBannerColor: '', category: 'generic', googleDriveUrl: '' };
 
 export default function App() {
   // Check if this is a share link — render full BriefingView
@@ -706,7 +705,6 @@ export default function App() {
       };
 
       // Store meta
-      storeData.complexity = params.complexity;
       if (productCI) storeData.productCI = productCI;
       storeData.ciSource = userCiSource;
       if (enhancedWebsiteData) storeData.websiteData = enhancedWebsiteData;
@@ -739,7 +737,7 @@ export default function App() {
         log('');
         log('ERROR: ' + e.message);
         if (e.message.indexOf('timed out') >= 0) {
-          log('The request timed out. Try again with fewer ASINs or choose a lower complexity level.');
+          log('The request timed out. Try again with fewer ASINs.');
         } else if (e.message.indexOf('fetch') >= 0 || e.message.indexOf('network') >= 0 || e.message.indexOf('Failed to fetch') >= 0) {
           log('Network error — check your internet connection and try again.');
         } else if (e.message.indexOf('API error') >= 0 || e.message.indexOf('529') >= 0 || e.message.indexOf('overload') >= 0) {

@@ -317,6 +317,115 @@ export async function generateOnePage(pagePlan, brandProfile, categories, produc
 }
 
 // ═══════════════════════════════════════════════════════════════
+// BRAND VOICE ANALYSIS
+// Deep tone/language pattern analysis. Steers ALL downstream copy & briefs.
+// Migrated from legacy generationPipeline.js and expanded.
+// ═══════════════════════════════════════════════════════════════
+export async function analyzeBrandVoice(products, brand, websiteTexts, brandToneExamples) {
+  var sampleTexts = [];
+  products.forEach(function(p) {
+    if (p.bulletPoints) {
+      sampleTexts.push('Product "' + (p.name || '').slice(0, 50) + '" bullets: ' + p.bulletPoints.join(' | '));
+    }
+    if (p.description) {
+      sampleTexts.push('Description: ' + p.description);
+    }
+  });
+  if (websiteTexts) {
+    sampleTexts.push('Website text: ' + websiteTexts);
+  }
+
+  var system = [
+    'You analyze how a brand speaks. Your output is a voice playbook that every',
+    'downstream copy task (headlines, USPs, CTAs, image briefs) will follow.',
+    'Go deep. Do not stop at formal/informal. Capture the fingerprint.',
+    'Return ONLY valid JSON.',
+  ].join('\n');
+
+  var user = [
+    'Brand: "' + brand + '"',
+    '',
+    'Text samples from this brand:',
+    sampleTexts.join('\n'),
+    '',
+    brandToneExamples ? 'User-provided tone examples: ' + brandToneExamples : '',
+    '',
+    'Produce a voice playbook. Return JSON:',
+    '{',
+    '  "communicationStyle": "formal | informal | mixed",',
+    '  "addressing": "du | Sie | neutral",',
+    '  "toneDescriptors": ["3-6 adjectives that capture the brand voice"],',
+    '  "voiceFingerprint": "2-3 sentences describing the unique texture of this brand voice — what would make a reader recognise it blind",',
+    '  "sentencePatterns": {',
+    '    "typicalLength": "short (3-6 words) | medium (7-14) | long (15+) | mixed",',
+    '    "structure": "e.g. claim + beleg, frage + antwort, aufzählung, staccato-sätze",',
+    '    "rhythm": "description of cadence (punchy, flowing, declarative, conversational)"',
+    '  },',
+    '  "vocabulary": {',
+    '    "signatureWords": ["6-12 words/phrases the brand really uses"],',
+    '    "avoidedWords": ["4-8 words/phrases the brand would never use"],',
+    '    "languageLevel": "simple | moderate | expert",',
+    '    "anglicisms": "none | moderate | heavy",',
+    '    "emotionalRegister": "sachlich | warm | emotional | inspirierend | hyperbolisch"',
+    '  },',
+    '  "typicalPhrases": ["verbatim phrases the brand uses (max 8)"],',
+    '  "ctaStyle": {',
+    '    "register": "direkt | sanft | fragend | imperativ | poetisch",',
+    '    "examples": ["3-5 CTA phrasings the brand would actually use"]',
+    '  },',
+    '  "textLength": "short | medium | long",',
+    '  "do": ["5-8 concrete guidelines a copywriter must follow"],',
+    '  "dont": ["5-8 traps a copywriter must avoid"],',
+    '  "visualToneCues": ["3-5 cues that tell an image briefer what mood fits this voice, e.g. ruhig & klar, laut & bunt, technisch & kühl"]',
+    '}',
+  ].filter(Boolean).join('\n');
+
+  return await callClaude(system, user, 3072);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ASIN COMPLETENESS CHECK
+// Synchronous utility — no API call. Verifies every input ASIN is placed somewhere.
+// Migrated from legacy generationPipeline.js.
+// ═══════════════════════════════════════════════════════════════
+export function checkAsinCompleteness(inputAsins, pages) {
+  var asinLocations = {};
+  inputAsins.forEach(function(a) { asinLocations[a] = []; });
+
+  (pages || []).forEach(function(page) {
+    (page.sections || []).forEach(function(sec, si) {
+      (sec.tiles || []).forEach(function(tile, ti) {
+        if (tile.linkAsin && asinLocations[tile.linkAsin] !== undefined) {
+          asinLocations[tile.linkAsin].push({ page: page.name, section: si + 1, tile: ti + 1, type: 'linkAsin' });
+        }
+        (tile.asins || []).forEach(function(a) {
+          if (asinLocations[a] !== undefined) {
+            asinLocations[a].push({ page: page.name, section: si + 1, tile: ti + 1, type: 'tile' });
+          }
+        });
+        (tile.hotspots || []).forEach(function(hs) {
+          if (hs.asin && asinLocations[hs.asin] !== undefined) {
+            asinLocations[hs.asin].push({ page: page.name, section: si + 1, tile: ti + 1, type: 'hotspot' });
+          }
+        });
+      });
+    });
+  });
+
+  var missing = [];
+  var found = [];
+  Object.keys(asinLocations).forEach(function(asin) {
+    if (asinLocations[asin].length === 0) {
+      missing.push(asin);
+    } else {
+      found.push({ asin: asin, locations: asinLocations[asin] });
+    }
+  });
+
+  return { asinLocations: asinLocations, missing: missing, found: found, complete: missing.length === 0 };
+}
+
+// ═══════════════════════════════════════════════════════════════
 // VALIDATION
 // ═══════════════════════════════════════════════════════════════
 export function validateStore(store, inputAsins, lang) {

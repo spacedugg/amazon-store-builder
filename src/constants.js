@@ -438,79 +438,11 @@ export var CATEGORY_STYLE_HINTS = {
   cleaning: { tone: 'clean, effective, eco-conscious', visualStyle: 'before/after, determined by brand CI', trustFocus: false },
 };
 
-// ─── STORE COMPLEXITY LEVELS ───
-// Controls section count, extra pages, and overall depth
-export var COMPLEXITY_LEVELS = {
-  1: {
-    name: 'Minimal',
-    sectionsPerCategoryPage: { min: 2, max: 3 },
-    sectionsPerHomepage: { min: 3, max: 5 },
-    extraPages: false,
-    includeVideos: false,
-    includeFollowCTA: false,
-    includeTrustElements: false,
-    includeBrandStory: false,
-    description: 'Lean and functional. Focus on conversion with minimal image category variety.',
-    // ─── Tier-specific image category rules ───
-    imageCategoryRules: {
-      store_hero: 'required_single', // 1 hero for ALL pages, can be simple
-      benefit: 'simple_banner_homepage_only', // Single USP banner, homepage only
-      product: 'basic_tiles', // Simple product tiles
-      creative: 'sparse_or_none', // Sparingly or not at all
-      lifestyle: 'optional', // Not on every page
-      text_image: 'headings_only', // Simple headings and dividers
-    },
-    noStorytelling: true,
-    noInfographics: true,
-    noServicePromotions: true,
-  },
-  2: {
-    name: 'Standard',
-    sectionsPerCategoryPage: { min: 3, max: 5 },
-    sectionsPerHomepage: { min: 5, max: 8 },
-    extraPages: true,
-    extraPageTypes: ['bestsellers', 'about_us'],
-    includeVideos: true,
-    videoMax: 1,
-    includeFollowCTA: false,
-    includeTrustElements: true,
-    includeBrandStory: true,
-    description: 'Balanced — informative and emotional. Professional brand presence with sensible structure.',
-    imageCategoryRules: {
-      store_hero: 'required_single_polished', // 1 hero for all pages, high quality
-      benefit: 'varied_types', // Awards, value grids, occasionally on subpages
-      product: 'differentiated', // Lineups, details, category tiles with CTA
-      creative: 'targeted', // Bestseller banners, new product teasers, feature explanations
-      lifestyle: 'regular', // Regular emotional anchors
-      text_image: 'headings_and_features', // Headings + feature explanations + claims
-    },
-    firstStorytellingApproaches: true,
-  },
-  3: {
-    name: 'Premium',
-    sectionsPerCategoryPage: { min: 4, max: 7 },
-    sectionsPerHomepage: { min: 7, max: 12 },
-    extraPages: true,
-    extraPageTypes: ['bestsellers', 'about_us', 'features', 'certifications', 'sustainability'],
-    includeVideos: true,
-    videoMax: 3,
-    includeFollowCTA: true,
-    includeTrustElements: true,
-    includeBrandStory: true,
-    includeDetailedShowcases: true,
-    description: 'Comprehensive brand presence with maximum depth, storytelling, and detailed product explanations.',
-    imageCategoryRules: {
-      store_hero: 'individual_per_page', // Individual hero per subpage/category
-      benefit: 'category_specific_every_page', // Category-specific benefits on EVERY subpage
-      product: 'full_range', // Single, lineups, details, sets, macro shots
-      creative: 'central_element', // Infographics, exploded views, split layouts, storytelling, service promotions
-      lifestyle: 'pervasive', // On nearly every page, varied scenes and perspectives
-      text_image: 'full_range', // Specs, impact numbers, technical details
-    },
-    specialPages: ['about_us', 'technology', 'sustainability'],
-    maxCategoryVariety: true,
-  },
-};
+// ─── STORE COMPLEXITY LEVELS ───  (removed)
+// Previously 3-tier model (Minimal/Standard/Premium) was a hard rule that
+// produced paint-by-numbers stores. Replaced by content-driven decisions:
+// the brand voice playbook + structural blueprints determine section count,
+// image variety, and extra pages based on what the brand actually needs.
 
 // ─── PRICING CONFIGURATION ───
 // Market-rate estimates for brand store design

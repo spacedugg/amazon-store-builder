@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { checkAsinCompleteness } from '../generationPipeline';
+import { checkAsinCompleteness } from '../contentPipeline';
 
 export default function AsinOverview({ store, products, onClose, onMoveAsin }) {
   var [filter, setFilter] = useState('all'); // 'all', 'missing', 'found'
