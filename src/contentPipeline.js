@@ -212,7 +212,7 @@ export async function synthesizeBrandProfile(allProductAnalyses, allWebsiteAnaly
     '- If no brand story info found, set available=false. Do NOT invent one.',
     '- Headlines, sublines, and image descriptions MUST follow the voice fingerprint, sentence patterns, and CTA style from BRAND INTELLIGENCE.',
     '- Image concepts MUST match visualMood, photographyStyle, and visualToneCues.',
-    '- If BRAND INTELLIGENCE shows adoptExistingContent=true, reuse verbatim headlines/USPs from existing store context where they fit.',
+    '- Per-element reuse decision: for each headline, USP, claim, or CTA in existingStoreRawContext, evaluate quality. Keep strong, brand-specific, on-voice texts verbatim. Rewrite weak, generic, or off-voice texts. Fill gaps with newly generated content that matches the voice fingerprint. Never blanket-copy or blanket-rewrite; judge element by element.',
     '- All texts in ' + lang + '.',
   ].join('\n');
 
@@ -282,7 +282,7 @@ export async function generateOnePage(pagePlan, brandProfile, categories, produc
     '  - Section sequence → take cue from blueprints: how many modules, which layout types, what order (hero → lifestyle → benefits → grid, etc.)',
     '  - Copy (textOverlay, headlines, CTAs) → voice.voiceFingerprint + sentencePatterns + ctaStyle drive register and rhythm. Lean on contentInventory.reusablePhrases and websiteUsps.',
     '  - Image briefs → visual.visualMood + photographyStyle + visualToneCues drive atmosphere; blueprint imageCategory guides type (lifestyle/creative/product/benefit).',
-    '  - Reuse logic → if reuseFlags.adoptExistingContent=true, prefer verbatim headlines/USPs from existingStoreRawContext; otherwise paraphrase.',
+    '  - Reuse logic → for each copy element (headline, subline, USP, CTA), evaluate existingStoreRawContext element by element: keep strong on-voice texts verbatim, rewrite weak or generic texts, fill missing slots with new content that matches the voice fingerprint. Never blanket-copy or blanket-rewrite.',
     '',
     'You think like a brand designer, not a rule engine. No invented facts. No generic filler. Every text must be specific to THIS brand and THESE products.',
     '',

@@ -71,7 +71,7 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
   var [brandColors, setBrandColors] = useState('');
   var [brandToneExamples, setBrandToneExamples] = useState('');
   var [keepMenuStructure, setKeepMenuStructure] = useState(true);
-  var [adoptExistingContent, setAdoptExistingContent] = useState(false);
+  var [adoptExistingContent] = useState(true);  // Variante A: always on; KI decides per-element
   var fileRef = useRef(null);
   var logoRef = useRef(null);
 
@@ -441,11 +441,7 @@ export default function GenerateModal({ onClose, onGenerate, googleDriveUrl, onG
               <span>Menüstruktur beibehalten</span>
             </label>
             <div className="hint">Die bestehenden Seiten und deren Hierarchie werden übernommen.</div>
-            <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, cursor: 'pointer', marginTop: 6 }}>
-              <input type="checkbox" checked={adoptExistingContent} onChange={function() { setAdoptExistingContent(!adoptExistingContent); }} />
-              <span>Inhalte übernehmen</span>
-            </label>
-            <div className="hint">Headlines, USPs und Textbausteine des bestehenden Stores werden bevorzugt wortwörtlich wiederverwendet.</div>
+            <div className="hint" style={{ marginTop: 6 }}>Texte und Headlines werden von der KI pro Element bewertet: starke Texte bleiben, schwache werden neu geschrieben.</div>
           </div>
         )}
 

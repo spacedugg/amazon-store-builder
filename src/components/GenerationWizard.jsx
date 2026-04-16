@@ -145,7 +145,7 @@ function emptyData() {
     existingStoreUrl: '',
     existingStoreMode: 'optimize',     // 'optimize' | 'reconceptualize'
     keepMenuStructure: true,
-    adoptExistingContent: false,
+    adoptExistingContent: true,  // Always on in optimize mode: KI decides per-element (Variante A)
     logoFile: null,
     fontNames: '',
     brandColors: '',
@@ -456,14 +456,9 @@ function StepInput({ data, updateData, onNext }) {
                 />
                 Menüstruktur exakt behalten (gleiche Seiten, gleiche Hierarchie, gleiche Namen)
               </label>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, cursor: 'pointer' }}>
-                <input
-                  type="checkbox"
-                  checked={!!data.adoptExistingContent}
-                  onChange={function() { updateData({ adoptExistingContent: !data.adoptExistingContent }); }}
-                />
-                Vorhandene Texte/Headlines wo möglich übernehmen (statt neu zu schreiben)
-              </label>
+              <div className="hint" style={{ fontSize: 11, marginTop: 4 }}>
+                Texte und Headlines des bestehenden Stores werden von der KI pro Element bewertet: starke Texte werden beibehalten, schwache werden umgeschrieben, fehlende werden ergänzt.
+              </div>
             </div>
           )}
         </div>
