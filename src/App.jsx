@@ -584,12 +584,12 @@ export default function App() {
           var p = products[pi];
           log('   Product ' + (pi + 1) + '/' + products.length + ': ' + (p.name || '').slice(0, 50));
           try {
-            var pa = await analyzeOneProduct(p);
+            var pa = await analyzeOneProduct(p, lang);
             pa.asin = p.asin;
             pa.name = p.name;
             allProductAnalyses.push(pa);
           } catch (paErr) {
-            log('     Failed: ' + paErr.message + ' — skipping');
+            log('     Failed: ' + paErr.message + ', skipping');
             allProductAnalyses.push({ asin: p.asin, name: p.name, productCategory: 'Uncategorized', keyBenefits: [], shortHeadline: p.name, shortDescription: '' });
           }
           // Brief pause to avoid rate limiting
@@ -637,7 +637,7 @@ export default function App() {
             if (pageText.length < 50) continue;
             log('   Page ' + (wi + 1) + '/' + enhancedWebsiteData.rawTextSections.length + ' (' + section.source + ')');
             try {
-              var wa = await analyzeWebsitePage(pageText, section.source, params.brand);
+              var wa = await analyzeWebsitePage(pageText, section.source, params.brand, lang);
               allWebsiteAnalyses.push(wa);
             } catch (waErr) {
               log('     Failed: ' + waErr.message);
@@ -663,7 +663,7 @@ export default function App() {
         log('   Using brand voice from wizard (possibly user-edited)');
       } else {
         pipelineBrandVoice = await runPipelineStep('Brand Voice', function() {
-          return analyzeBrandVoice(products, params.brand, websiteTexts, params.brandToneExamples || '');
+          return analyzeBrandVoice(products, params.brand, websiteTexts, params.brandToneExamples || '', lang);
         });
       }
       log('   Tone: ' + ((pipelineBrandVoice.toneDescriptors || []).join(', ') || pipelineBrandVoice.tone || '?'));

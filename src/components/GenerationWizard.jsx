@@ -543,6 +543,7 @@ function StepScraping({ data, updateData, log, addLog, running, setRunning, erro
 
     try {
       var domain = DOMAINS[data.marketplace] || DOMAINS.de;
+      var lang = LANGS[data.marketplace] || 'German';
 
       // 1. Scrape ASINs via Bright Data
       addLog('═══ Scraping ' + data.asins.length + ' ASINs von Amazon.' + data.marketplace + ' ═══');
@@ -767,7 +768,7 @@ function StepScraping({ data, updateData, log, addLog, running, setRunning, erro
         var p = products[qi];
         addLog('   Analyse ' + (qi + 1) + '/' + products.length + ': ' + (p.name || '').slice(0, 50));
         try {
-          var pa = await analyzeOneProduct(p);
+          var pa = await analyzeOneProduct(p, lang);
           pa.asin = p.asin;
           pa.name = p.name;
           productAnalyses.push(pa);
@@ -792,7 +793,7 @@ function StepScraping({ data, updateData, log, addLog, running, setRunning, erro
           if (!section.text || section.text.length < 50) continue;
           addLog('   Seite ' + (wi + 1) + '/' + websiteData.rawTextSections.length + ': ' + section.source);
           try {
-            var wa = await analyzeWebsitePage(section.text, section.source, data.brand);
+            var wa = await analyzeWebsitePage(section.text, section.source, data.brand, lang);
             websiteAnalyses.push(wa);
           } catch (waErr) {
             addLog('     ⚠ ' + waErr.message);
@@ -934,7 +935,7 @@ function StepBrandAnalysis({ data, updateData, onNext, onBack }) {
       // 1. Brand voice
       var brandVoice = data.brandVoice;
       if (!brandVoice) {
-        brandVoice = await analyzeBrandVoice(data.products || [], data.brand, websiteTexts, data.brandToneExamples || '');
+        brandVoice = await analyzeBrandVoice(data.products || [], data.brand, websiteTexts, data.brandToneExamples || '', lang);
       }
 
       // 2. Initial categorization (needed for brand profile synthesis)
@@ -1638,7 +1639,9 @@ function StepContent({ data, updateData, onNext, onBack }) {
       if (data.knowledgeBase) {
         storeKnowledgeStr = formatStoreKnowledge(data.knowledgeBase);
       }
-      // planPages returns: { pages: [{ id, name, sections: [{ purpose, contentSource, layout }] }] }
+      // planPages returns per-page content fields (heroHeadline, heroSubline, cta, usps,
+      // imageIdeas, notes, asins) PLUS the structural sections array. We use the content
+      // fields directly as initial Phase 4 page content. No more mapping from sec.purpose.
       var pagePlan = await planPages(
         data.brandProfile || {},
         data.categories || { categories: [] },
@@ -1646,65 +1649,84 @@ function StepContent({ data, updateData, onNext, onBack }) {
         storeKnowledgeStr,
         data.brand,
         lang,
-        data.extraPages || {}
+        data.extraPages || {},
+        data.brandIntelligence || null,
+        null
       );
-      // Convert AI page plan into editable page content
+
       var categories = (data.categories && data.categories.categories) || [];
       var productAnalyses = data.productAnalyses || [];
       var brandUsps = ((data.brandProfile || {}).usps || []).map(function(u) { return u.text || ''; }).filter(Boolean);
       var pages = [];
       (pagePlan.pages || []).forEach(function(pp) {
-        // Determine kind from page name/id
-        var kind = 'custom';
-        if (pp.id === 'homepage' || (pp.name || '').toLowerCase() === 'homepage') kind = 'homepage';
-        else if ((pp.id || '').indexOf('cat') === 0) kind = 'category';
-        else if (['about_us', 'bestsellers', 'sustainability', 'how_it_works', 'new_arrivals', 'gift_sets', 'subscribe_save', 'deals'].indexOf(pp.id) >= 0) kind = pp.id;
+        // Determine kind: prefer pp.kind from AI, fall back to heuristic
+        var kind = pp.kind || 'custom';
+        if (!pp.kind) {
+          if (pp.id === 'homepage' || (pp.name || '').toLowerCase() === 'homepage') kind = 'homepage';
+          else if ((pp.id || '').indexOf('cat') === 0) kind = 'category';
+          else if (['about_us', 'bestsellers', 'sustainability', 'how_it_works', 'new_arrivals', 'gift_sets', 'subscribe_save', 'deals'].indexOf(pp.id) >= 0) kind = pp.id;
+        }
 
-        // Extract USPs from sections that mention USPs/benefits
-        var pageUsps = [];
-        var pageImageIdeas = [];
-        (pp.sections || []).forEach(function(sec) {
-          var purpose = (sec.purpose || sec.contentSource || '').toLowerCase();
-          if (purpose.indexOf('usp') >= 0 || purpose.indexOf('benefit') >= 0 || purpose.indexOf('trust') >= 0) {
-            pageUsps.push(sec.purpose);
-          }
-          if (purpose.indexOf('hero') >= 0 || purpose.indexOf('image') >= 0 || purpose.indexOf('lifestyle') >= 0) {
-            pageImageIdeas.push(sec.purpose);
-          }
-        });
-
-        // For categories: pull product-specific benefits
-        if (kind === 'category') {
-          var cat = categories.find(function(c) { return c.name === pp.name; });
-          if (cat) {
-            var catAsins = cat.asins || [];
-            var benefitSeen = {};
-            productAnalyses.forEach(function(pa) {
-              if (catAsins.indexOf(pa.asin) < 0) return;
-              (pa.keyBenefits || []).forEach(function(b) {
-                var key = b.toLowerCase().slice(0, 40);
-                if (!benefitSeen[key]) { benefitSeen[key] = true; pageUsps.push(b); }
-              });
-            });
+        // USPs: use planPages output directly. Enrich only if empty.
+        var pageUsps = Array.isArray(pp.usps) ? pp.usps.filter(Boolean) : [];
+        if (pageUsps.length === 0) {
+          if (kind === 'homepage') {
+            pageUsps = brandUsps.slice(0, 5);
+          } else if (kind === 'category') {
+            var cat = categories.find(function(c) { return c.name === pp.name; });
+            if (cat) {
+              // Prefer categoryUSPs (produced by groupIntoCategories)
+              if (Array.isArray(cat.categoryUSPs) && cat.categoryUSPs.length) {
+                pageUsps = cat.categoryUSPs.slice(0, 5);
+              } else {
+                var catAsins = cat.asins || [];
+                var benefitSeen = {};
+                productAnalyses.forEach(function(pa) {
+                  if (catAsins.indexOf(pa.asin) < 0) return;
+                  (pa.keyBenefits || []).forEach(function(b) {
+                    var key = (b || '').toLowerCase().slice(0, 40);
+                    if (key && !benefitSeen[key]) { benefitSeen[key] = true; pageUsps.push(b); }
+                  });
+                });
+                pageUsps = pageUsps.slice(0, 5);
+              }
+            }
           }
         }
 
-        // For homepage: brand USPs
-        if (kind === 'homepage' && pageUsps.length === 0) {
-          pageUsps = brandUsps.slice();
+        // Image ideas: use planPages output directly, fall back to generic brief
+        var pageImageIdeas = Array.isArray(pp.imageIdeas) ? pp.imageIdeas.filter(Boolean) : [];
+        if (pageImageIdeas.length === 0) {
+          pageImageIdeas = [kind === 'homepage'
+            ? 'Hero-Motiv zur Markengeschichte, Stimmung passt zur visuellen CI'
+            : 'Hero-Motiv für Seite ' + (pp.name || '')];
         }
+
+        // Hero headline: real marketing headline from AI, never just the page name
+        var heroHeadline = (pp.heroHeadline && pp.heroHeadline.trim()) ? pp.heroHeadline.trim() : '';
+        if (!heroHeadline) {
+          // Safe fallback: prefer brandProfile hero hint, then page name
+          var heroHint = data.brandProfile && data.brandProfile.heroBannerConcept && data.brandProfile.heroBannerConcept.headline;
+          heroHeadline = heroHint || (pp.name || 'Willkommen');
+        }
+
+        var heroSubline = (pp.heroSubline && pp.heroSubline.trim()) ? pp.heroSubline.trim() : '';
+        var cta = (typeof pp.cta === 'string') ? pp.cta.trim() : '';
+        var notes = (typeof pp.notes === 'string') ? pp.notes.trim() : '';
 
         pages.push({
           id: pp.id || ('page-' + pages.length),
           name: pp.name,
           kind: kind,
-          heroHeadline: pp.heroBannerConcept || pp.name,
-          heroSubline: pp.purpose || '',
+          heroHeadline: heroHeadline,
+          heroSubline: heroSubline,
+          cta: cta,
           usps: pageUsps,
-          imageIdeas: pageImageIdeas.length > 0 ? pageImageIdeas : ['hero image for ' + pp.name],
-          cta: '',
-          asins: pp.asins || [],
-          notes: (pp.themes || []).join(', '),
+          imageIdeas: pageImageIdeas,
+          notes: notes,
+          asins: Array.isArray(pp.asins) ? pp.asins : [],
+          // Keep the structural sections so Phase 6 (generateOnePage) has the layout plan
+          sections: Array.isArray(pp.sections) ? pp.sections : [],
         });
       });
       if (pages.length > 0) {
@@ -1714,7 +1736,7 @@ function StepContent({ data, updateData, onNext, onBack }) {
         updateData({ pageContent: derivePageContent(data) });
       }
     } catch (err) {
-      setGenError('KI-Generierung fehlgeschlagen: ' + err.message + ' — Template-Fallback wird verwendet.');
+      setGenError('KI-Generierung fehlgeschlagen: ' + err.message + '. Template-Fallback wird verwendet.');
       updateData({ pageContent: derivePageContent(data) });
     } finally {
       setGenerating(false);
@@ -2203,7 +2225,7 @@ function StepStructure({ data, updateData, onNext, onBack }) {
         updateData({ pageStructure: deriveStructure(data) });
       }
     } catch (err) {
-      setGenError('KI-Generierung fehlgeschlagen: ' + err.message + ' — Template-Fallback.');
+      setGenError('KI-Generierung fehlgeschlagen: ' + err.message + '. Template-Fallback.');
       updateData({ pageStructure: deriveStructure(data) });
     } finally {
       setGenerating(false);

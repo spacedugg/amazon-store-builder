@@ -37,8 +37,16 @@ async function callClaude(systemPrompt, userPrompt, maxTokens) {
 // STEP 1: Analyze ONE product
 // Called once per ASIN. Small focused call.
 // ═══════════════════════════════════════════════════════════════
-export async function analyzeOneProduct(product) {
-  var system = 'You analyze a single Amazon product for Brand Store creation. Return ONLY valid JSON. NEVER use hyphens, dashes or m-dashes to combine text elements. Use line breaks or hierarchy (bold/regular) instead.';
+export async function analyzeOneProduct(product, lang) {
+  var outLang = lang || 'German';
+  var system = [
+    'You analyze a single Amazon product for Brand Store creation. Return ONLY valid JSON.',
+    'ALL customer-facing text fields (productCategory, keyBenefits, targetUseCase, uniqueFeatures, shortHeadline, shortDescription) MUST be written in ' + outLang + '.',
+    'TEXT RULE for all customer-facing fields:',
+    '  - Never use em dash (U+2014) or en dash (U+2013).',
+    '  - Hyphen "-" is allowed ONLY when it directly joins word parts into a compound (no spaces around it), e.g. "Selfpress-Technologie", "3-in-1". It is FORBIDDEN when used as a sentence-style separator with spaces around it (like " - ").',
+    '  - Replace sentence-style dashes with commas, colons, or a rewrite.',
+  ].join('\n');
   var user = [
     'Product: ' + product.name,
     'ASIN: ' + product.asin,
@@ -56,16 +64,20 @@ export async function analyzeOneProduct(product) {
     '',
     'Amazon categories: ' + (product.categories || []).join(' > '),
     '',
+    'Output language: ' + outLang + '. ALL text fields must be in ' + outLang + ', not in the source language of the input.',
+    '',
     'Return JSON:',
     '{',
-    '  "productCategory": "what category this product belongs to (by function, not Amazon breadcrumb)",',
-    '  "keyBenefits": ["benefit 1", "benefit 2", "benefit 3"],',
-    '  "targetUseCase": "who uses this and when",',
-    '  "uniqueFeatures": ["what makes this product special"],',
+    '  "productCategory": "what category this product belongs to (by function, not Amazon breadcrumb) in ' + outLang + '",',
+    '  "keyBenefits": ["short customer-facing benefit 1 in ' + outLang + '", "benefit 2", "benefit 3"],',
+    '  "targetUseCase": "who uses this and when, in ' + outLang + '",',
+    '  "uniqueFeatures": ["what makes this product special, in ' + outLang + '"],',
     '  "isBestseller": true/false,',
-    '  "shortHeadline": "short product headline for store",',
-    '  "shortDescription": "1-2 sentences about this product"',
+    '  "shortHeadline": "short marketing headline for store, in ' + outLang + ', maximum 8 words, no layout description",',
+    '  "shortDescription": "1-2 marketing sentences about this product, in ' + outLang + '"',
     '}',
+    '',
+    'Each keyBenefit MUST be a short customer-facing claim (maximum 6 to 8 words), not a layout description. Example good: "99,99 Prozent Filtration". Example bad: "Trust bar with key benefits".',
   ].join('\n');
   return await callClaude(system, user, 1024);
 }
@@ -75,26 +87,44 @@ export async function analyzeOneProduct(product) {
 // Gets ALL product analyses as input (small summaries, not raw data)
 // ═══════════════════════════════════════════════════════════════
 export async function groupIntoCategories(productAnalyses, brand, lang) {
-  var system = 'You group products into logical categories for a Brand Store. Return ONLY valid JSON.';
+  var outLang = lang || 'German';
+  var productCount = productAnalyses.length;
+  var categoryTarget = productCount <= 4 ? '1 to 2 categories' : (productCount <= 8 ? '2 to 3 categories' : '2 to 4 categories');
+  var system = [
+    'You group products into logical categories for a Brand Store. Return ONLY valid JSON.',
+    'ALL customer-facing text fields (category name, description, categoryUSPs) MUST be in ' + outLang + '.',
+    'TEXT RULE for all customer-facing fields:',
+    '  - Never use em dash (U+2014) or en dash (U+2013).',
+    '  - Hyphen "-" is allowed ONLY when it directly joins word parts into a compound (no spaces around it), e.g. "Selfpress-Technologie", "3-in-1". Forbidden as a sentence separator with spaces around it.',
+  ].join('\n');
   var summaries = productAnalyses.map(function(pa) {
-    return pa.asin + ': ' + pa.shortHeadline + ' → ' + pa.productCategory;
+    return pa.asin + ': ' + pa.shortHeadline + ' => ' + pa.productCategory;
   });
   var user = [
-    'Brand: ' + brand + ' | Language: ' + lang,
+    'Brand: ' + brand,
+    'Output language: ' + outLang,
     '',
     'Products and their AI-suggested categories:',
     summaries.join('\n'),
     '',
-    'Group these products into 3-8 logical categories.',
-    'Products may be in the wrong suggested category — use your judgment.',
+    'Group these ' + productCount + ' products into ' + categoryTarget + '. Prefer fewer, broader categories over many small ones. A category with only a single product is a red flag and should usually be merged with a neighbour.',
+    'Products may be in the wrong suggested category, use your judgment.',
+    '',
     'Return JSON:',
     '{',
     '  "categories": [',
-    '    { "name": "Category Name", "asins": ["B0..."], "description": "what this category is about" }',
+    '    {',
+    '      "name": "Category Name in ' + outLang + ', short, specific, no generic placeholders",',
+    '      "asins": ["B0..."],',
+    '      "description": "1 sentence in ' + outLang + ' describing what unites the products in this category",',
+    '      "categoryUSPs": ["3 to 5 short customer-facing claims in ' + outLang + ', maximum 8 words each, describing the shared value of products in this category. No layout descriptions. No invented facts. Derive from the provided product benefits only."]',
+    '    }',
     '  ]',
     '}',
     '',
     'EVERY ASIN must appear in exactly one category.',
+    'Every category MUST have between 3 and 5 categoryUSPs.',
+    'Example good USP: "Filtert 99,99 Prozent der Schadstoffe". Example bad USP: "Trust bar with key benefits".',
   ].join('\n');
   return await callClaude(system, user, 2048);
 }
@@ -103,26 +133,31 @@ export async function groupIntoCategories(productAnalyses, brand, lang) {
 // STEP 3: Extract brand USPs from website page
 // Called once per scraped website page.
 // ═══════════════════════════════════════════════════════════════
-export async function analyzeWebsitePage(pageText, pageSource, brand) {
+export async function analyzeWebsitePage(pageText, pageSource, brand, lang) {
+  var outLang = lang || 'German';
   var system = [
     'You extract brand information AND structural patterns from a website page.',
     'You return a rich profile that downstream Brand Store generation can mirror.',
     'Return ONLY valid JSON.',
+    'Customer-facing fields (usps, brandStoryElements, certifications, trustElements, keyPhrases, productMentions, navigationLabels, pageSections.headline, pageSections.subheadline, pageSections.contentSummary, pageSections.ctaWording) MUST be returned in ' + outLang + '. Keep the exact verbatim wording where the source page is already in ' + outLang + '. Translate to ' + outLang + ' otherwise.',
+    'Meta fields (sectionType, modulePatterns, voiceSignals, visualToneCues) stay in English because they are analytical tags.',
+    'TEXT RULE: Never use em dash or en dash. Hyphen only allowed inside a compound word without surrounding spaces.',
   ].join('\n');
   var user = [
     'Brand: ' + brand,
     'Page source: ' + pageSource,
+    'Output language: ' + outLang,
     '',
     'Page content:',
     pageText,
     '',
-    'Extract EVERYTHING that a Brand Store designer could reuse — copy, structure, voice, and visual signals:',
+    'Extract EVERYTHING that a Brand Store designer could reuse: copy, structure, voice, and visual signals.',
     '{',
     '  "usps": ["customer-facing USP/benefit found on this page"],',
     '  "brandStoryElements": ["any brand story, founder info, history, values"],',
     '  "certifications": ["certifications, awards, quality seals mentioned"],',
     '  "trustElements": ["satisfaction guarantees, statistics, social proof"],',
-    '  "keyPhrases": ["important phrases/slogans the brand uses verbatim — copy as-is"],',
+    '  "keyPhrases": ["important phrases/slogans the brand uses verbatim, copy as-is"],',
     '  "productMentions": ["products or categories mentioned on this page"],',
     '  "navigationLabels": ["top-level nav items visible on this page (e.g. Produkte, Über uns, Magazin)"],',
     '  "pageSections": [',
@@ -134,16 +169,16 @@ export async function analyzeWebsitePage(pageText, pageSource, brand) {
     '      "ctaWording": "exact CTA text used in this section, if any"',
     '    }',
     '  ],',
-    '  "modulePatterns": ["recurring structural patterns — e.g. \'3-column USP grid with icon + headline + 1-sentence proof\'"],',
-    '  "voiceSignals": ["tone markers — e.g. \'du-ansprache\', \'technische präzision\', \'warme metaphern\'"],',
-    '  "visualToneCues": ["what the page visually communicates — e.g. \'lots of white space\', \'full-bleed lifestyle photography\', \'editorial serif headlines\'"]',
+    '  "modulePatterns": ["recurring structural patterns, e.g. \'3-column USP grid with icon + headline + 1-sentence proof\'"],',
+    '  "voiceSignals": ["tone markers, e.g. \'du-ansprache\', \'technische präzision\', \'warme metaphern\'"],',
+    '  "visualToneCues": ["what the page visually communicates, e.g. \'lots of white space\', \'full-bleed lifestyle photography\', \'editorial serif headlines\'"]',
     '}',
     '',
     'RULES:',
     '- pageSections should be an ordered list that mirrors the actual page flow, top to bottom.',
-    '- Keep headlines and ctaWording VERBATIM — they feed direct content reuse.',
-    '- If a field has no content on this page, return an empty array — never invent.',
-    '- Aim for 3-8 pageSections per page.',
+    '- Keep headlines and ctaWording VERBATIM, they feed direct content reuse.',
+    '- If a field has no content on this page, return an empty array, never invent.',
+    '- Aim for 3 to 8 pageSections per page.',
   ].join('\n');
   return await callClaude(system, user, 4096);
 }
@@ -158,9 +193,11 @@ export async function synthesizeBrandProfile(allProductAnalyses, allWebsiteAnaly
     'All data has been pre-analyzed. Your job is to SYNTHESIZE, not re-analyze.',
     'You receive a BRAND INTELLIGENCE block — the single source of truth.',
     'Every USP, story element, trust claim, and image concept you produce MUST align with it.',
-    'Return ONLY valid JSON. All texts in ' + lang + '.',
-    'TEXT RULE: NEVER use hyphens (-), m-dashes (—), or en-dashes (–) to combine two text elements.',
-    'Use line breaks or text hierarchy (headline + subline) instead. Example: NOT "Hochdosiert - Made in Germany" but "Hochdosiert\\nMade in Germany".',
+    'Return ONLY valid JSON. All customer-facing texts in ' + lang + '.',
+    'TEXT RULE for all customer-facing output:',
+    '  - Never use em dash (—, U+2014) or en dash (–, U+2013).',
+    '  - Hyphen "-" is allowed ONLY inside a compound word without spaces around it (e.g. "Selfpress-Technologie", "3-in-1"). It is FORBIDDEN as a sentence separator with spaces around it (" - ").',
+    '  - For breaks between two ideas, use line break \\n, comma, colon, or a rewrite. Example allowed: "Hochdosiert, Made in Germany" or "Hochdosiert\\nMade in Germany". Example forbidden: "Hochdosiert - Made in Germany".',
   ].join('\n');
 
   // Collect all USPs from website pages
@@ -223,46 +260,109 @@ export async function synthesizeBrandProfile(allProductAnalyses, allWebsiteAnaly
 // STEP 5: Plan page structure from content
 // ═══════════════════════════════════════════════════════════════
 export async function planPages(brandProfile, categories, productAnalyses, storeKnowledge, brand, lang, extraPages, brandIntelligence, blueprintsBlock) {
+  var outLang = lang || 'German';
   var system = [
-    'You plan Amazon Brand Store pages. Content determines structure.',
-    'Only create pages for content that EXISTS. No empty pages.',
-    'The BRAND INTELLIGENCE block is the single source of truth — respect voice, visual mood, and reuse flags.',
-    'Return ONLY valid JSON. All texts in ' + lang + '.',
+    'You plan Amazon Brand Store pages AND produce the initial page-level copy for every page.',
+    'Content determines structure. Only create pages for content that EXISTS. No empty pages.',
+    'The BRAND INTELLIGENCE block is the single source of truth. Respect voice, visual mood, and reuse flags.',
+    '',
+    'Return ONLY valid JSON.',
+    'LANGUAGE RULES:',
+    '  - All customer-facing text fields (heroHeadline, heroSubline, cta, usps, imageIdeas, notes) MUST be in ' + outLang + '.',
+    '  - Structural meta fields (purpose, contentSource, layout) stay in English because they are analysis tags.',
+    '',
+    'TEXT RULES for customer-facing fields:',
+    '  - Never use em dash (U+2014) or en dash (U+2013).',
+    '  - Hyphen "-" is allowed ONLY inside a compound word without surrounding spaces (e.g. "Selfpress-Technologie", "3-in-1").',
+    '  - A hyphen with a space before or after it (like " - ") is FORBIDDEN. Use comma, colon, line break, or rewrite.',
+    '  - heroHeadline: 3 to 8 words. A real marketing headline, never just the page name, never a layout description.',
+    '  - heroSubline: 1 sentence, maximum 18 words. Concrete, specific.',
+    '  - cta: 1 to 4 words call-to-action (e.g. "Jetzt entdecken"). May be empty string if no CTA fits.',
+    '  - usps: 3 to 5 short customer-facing claims. Each maximum 8 words. No layout descriptions, no English fragments.',
+    '  - imageIdeas: 1 to 3 short briefs describing what the image shows. Each 10 to 20 words. In ' + outLang + '.',
+    '  - notes: 0 to 1 sentence of guidance for Phase 6 generation. Optional, may be empty string.',
+    '',
+    'USP scope per page:',
+    '  - Homepage: brand-level USPs only, things that apply to the WHOLE brand. No product-specific numbers.',
+    '  - Category page: category-specific USPs, derived from categoryUSPs of that category and from product keyBenefits of products in that category.',
+    '  - Extra page (about, bestsellers, sustainability, etc.): page-type-specific. About = brand story claims. Bestsellers = trust elements. Sustainability = certifications.',
   ].join('\n');
+
+  var categoryDetails = (categories.categories || []).map(function(c) {
+    var usps = (c.categoryUSPs || c.commonFeatures || []).slice(0, 5).join(' | ');
+    return '  - ' + c.name + ' (' + (c.asins || []).length + ' products)'
+      + (c.description ? '\n    description: ' + c.description : '')
+      + (usps ? '\n    categoryUSPs: ' + usps : '');
+  }).join('\n');
+
+  var brandUspStr = (brandProfile.usps || []).map(function(u) { return u.text || ''; }).filter(Boolean).join(' | ');
+  var trustStr = (brandProfile.trustElements || []).map(function(t) { return t.text || t; }).filter(Boolean).slice(0, 8).join(' | ');
+  var storyHeadline = brandProfile.brandStory && brandProfile.brandStory.headline ? brandProfile.brandStory.headline : '';
+  var storyText = brandProfile.brandStory && brandProfile.brandStory.text ? brandProfile.brandStory.text : '';
+  var heroHintHeadline = brandProfile.heroBannerConcept && brandProfile.heroBannerConcept.headline ? brandProfile.heroBannerConcept.headline : '';
+  var heroHintSubline = brandProfile.heroBannerConcept && brandProfile.heroBannerConcept.subline ? brandProfile.heroBannerConcept.subline : '';
 
   var user = [
     'Brand: ' + brand,
+    'Output language: ' + outLang,
     '',
     brandIntelligence ? formatBrandIntelligenceForPrompt(brandIntelligence) : '',
     '',
     'CONTENT AVAILABLE:',
-    '- USPs: ' + (brandProfile.usps || []).map(function(u) { return u.text; }).join(' | '),
-    '- Brand Story: ' + (brandProfile.brandStory && brandProfile.brandStory.available ? 'Yes' : 'No'),
-    '- Trust Elements: ' + (brandProfile.trustElements || []).length,
-    '- Categories: ' + (categories.categories || []).map(function(c) { return c.name + ' (' + (c.asins || []).length + ' products)'; }).join(', '),
+    '- Brand USPs: ' + brandUspStr,
+    '- Trust Elements: ' + trustStr,
+    '- Brand Story available: ' + (brandProfile.brandStory && brandProfile.brandStory.available ? 'Yes' : 'No'),
+    storyHeadline ? '  story headline: ' + storyHeadline : '',
+    storyText ? '  story text: ' + storyText : '',
+    heroHintHeadline ? '- Hero concept hint headline: ' + heroHintHeadline : '',
+    heroHintSubline ? '- Hero concept hint subline: ' + heroHintSubline : '',
+    '- Categories (' + (categories.categories || []).length + '):',
+    categoryDetails,
     '- Products: ' + productAnalyses.length + ' total',
     '- Image Concepts: ' + (brandProfile.imageConcepts || []).length,
     '',
     blueprintsBlock ? blueprintsBlock : (storeKnowledge ? 'REFERENCE STORE INSIGHTS (for section selection only):\n' + storeKnowledge : ''),
     '',
-    'Plan pages. Return JSON:',
+    'Plan pages. For EACH page, also produce the initial Phase 4 content.',
+    'Return JSON in this exact shape:',
     '{',
     '  "pages": [',
-    '    { "id": "homepage", "name": "Homepage", "sections": [',
-    '      { "purpose": "what this shows", "contentSource": "usps/categories/brandStory/products/trust", "layout": "Full-Width/std-2equal/lg-2stack/2x2wide/vh-w2s/etc" }',
-    '    ] }',
+    '    {',
+    '      "id": "homepage",',
+    '      "name": "Homepage",',
+    '      "kind": "homepage",',
+    '      "heroHeadline": "marketing headline in ' + outLang + ', 3 to 8 words",',
+    '      "heroSubline": "1 sentence in ' + outLang + ', max 18 words",',
+    '      "cta": "short CTA in ' + outLang + ' or empty string",',
+    '      "usps": ["short claim 1 in ' + outLang + '", "short claim 2", "short claim 3"],',
+    '      "imageIdeas": ["image brief in ' + outLang + ', 10 to 20 words"],',
+    '      "notes": "optional guidance for Phase 6 in ' + outLang + '",',
+    '      "asins": ["B0..."],',
+    '      "sections": [',
+    '        { "purpose": "what this section shows (English tag)", "contentSource": "usps/categories/brandStory/products/trust", "layout": "Full-Width/std-2equal/lg-2stack/2x2wide/vh-w2s/etc" }',
+    '      ]',
+    '    }',
     '  ]',
     '}',
     '',
-    'Only create pages for which content exists.',
-    'Homepage + 1 page per category is the minimum.',
-    'Extra pages (About, Bestsellers) only if content supports them.',
+    'Rules for page construction:',
+    '- Create a Homepage. kind = "homepage". asins = [] on homepage.',
+    '- Create exactly one category page per category provided. kind = "category". id = "cat-" + index. asins = the asins of that category.',
+    '- Extra pages only if requested by user and if content supports them. kind = the extra page key (about_us, bestsellers, sustainability, how_it_works, new_arrivals, gift_sets, subscribe_save, deals).',
     extraPages && Object.keys(extraPages).some(function(k) { return extraPages[k]; })
-      ? 'USER REQUESTED these extra pages: ' + Object.keys(extraPages).filter(function(k) { return extraPages[k]; }).join(', ') + '. Include them in the plan.'
-      : '',
+      ? 'USER REQUESTED these extra pages: ' + Object.keys(extraPages).filter(function(k) { return extraPages[k]; }).join(', ') + '. Include them in the plan if content justifies them.'
+      : 'No extra pages requested by user.',
+    '',
+    'Rules for content fields:',
+    '- heroHeadline for a category page is NOT just the category name. It is a marketing headline that sells the category (example for "Wasserfilter-Flaschen": "Sauberes Wasser, wohin du auch gehst").',
+    '- heroHeadline for the homepage reflects the brand promise (example: "Quellwasser aus jedem Bach").',
+    '- usps on the homepage MUST NOT contain product-specific numbers (like grams, liters) if those numbers only apply to some products.',
+    '- usps on a category page MAY contain numbers if they apply to every product in that category.',
+    '- imageIdeas describe what the image shows, in ' + outLang + '. Example: "Wanderer füllt die Flasche an einem Gebirgsbach, Abendlicht".',
+    '- Every field must actually be filled. Empty strings only allowed for "cta" and "notes" when nothing fits. Never return the page name as the heroHeadline.',
   ].filter(Boolean).join('\n');
 
-  return await callClaude(system, user, 4096);
+  return await callClaude(system, user, 6000);
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -286,8 +386,12 @@ export async function generateOnePage(pagePlan, brandProfile, categories, produc
     '',
     'You think like a brand designer, not a rule engine. No invented facts. No generic filler. Every text must be specific to THIS brand and THESE products.',
     '',
-    'Return ONLY valid JSON. All textOverlay texts in ' + lang + '. Briefs in English, 10-20 words — just the image idea.',
-    'TEXT RULE: NEVER use hyphens (-), m-dashes (—), or en-dashes (–) to combine text blocks. Use line breaks (\\n) or headline/subline hierarchy.',
+    'Return ONLY valid JSON. All customer-facing text (textOverlay, ctaText, headlines) in ' + lang + '. Briefs in English, 10 to 20 words, just the image idea.',
+    'TEXT RULES for customer-facing fields:',
+    '  - Never use em dash (U+2014) or en dash (U+2013).',
+    '  - Hyphen "-" is allowed ONLY inside a compound word without surrounding spaces (e.g. "Wasserfilter-Flaschen", "Selfpress-Technologie", "3-in-1").',
+    '  - A hyphen with a space before or after it (like " - ") is FORBIDDEN. Replace sentence-style dashes with commas, colons, line breaks, or a rewrite.',
+    '  - Do not chain concepts with " - " or " — ". Use proper headline/subline hierarchy or line breaks (\\n).',
   ].join('\n');
 
   // Find relevant products for this page
@@ -310,9 +414,9 @@ export async function generateOnePage(pagePlan, brandProfile, categories, produc
     '',
     'BRAND USPs: ' + (brandProfile.usps || []).map(function(u) { return u.text; }).join(' | '),
     '',
-    relevantProducts.length > 0 ? 'PRODUCTS FOR THIS PAGE:\n' + JSON.stringify(relevantProducts, null, 1) : 'This is the homepage — show overview of all categories.',
+    relevantProducts.length > 0 ? 'PRODUCTS FOR THIS PAGE:\n' + JSON.stringify(relevantProducts, null, 1) : 'This is the homepage. Show overview of all categories.',
     '',
-    pageCategory ? 'CATEGORY: ' + pageCategory.name + ' — ' + (pageCategory.description || '') : '',
+    pageCategory ? 'CATEGORY: ' + pageCategory.name + ' | ' + (pageCategory.description || '') : '',
     '',
     previousPages && previousPages.length > 0 ? 'ALREADY GENERATED PAGES (avoid duplicating content):\n' + previousPages.map(function(p) { return p.name + ': ' + (p.sections || []).length + ' sections'; }).join('\n') : '',
     '',
@@ -353,7 +457,7 @@ export async function generateOnePage(pagePlan, brandProfile, categories, produc
     'HARD CONSTRAINTS (non-negotiable):',
     '- Every product mentioned in a brief MUST have its ASIN in linkAsin (or hotspots[].asin for shoppable images).',
     '- textOverlay in ' + lang + '. Briefs in English.',
-    '- Briefs: 10-20 words, only the subject/idea. Mood and style come from BRAND INTELLIGENCE visual.visualMood — do not restate them per brief.',
+    '- Briefs: 10 to 20 words, only the subject/idea. Mood and style come from BRAND INTELLIGENCE visual.visualMood, do not restate them per brief.',
     '- All copy sounds like THIS brand: voice.voiceFingerprint is the test. If a line could belong to any competitor, rewrite it.',
   ].filter(Boolean).join('\n');
 
@@ -365,7 +469,8 @@ export async function generateOnePage(pagePlan, brandProfile, categories, produc
 // Deep tone/language pattern analysis. Steers ALL downstream copy & briefs.
 // Migrated from legacy generationPipeline.js and expanded.
 // ═══════════════════════════════════════════════════════════════
-export async function analyzeBrandVoice(products, brand, websiteTexts, brandToneExamples) {
+export async function analyzeBrandVoice(products, brand, websiteTexts, brandToneExamples, lang) {
+  var outLang = lang || 'German';
   var sampleTexts = [];
   products.forEach(function(p) {
     if (p.bulletPoints) {
@@ -383,6 +488,11 @@ export async function analyzeBrandVoice(products, brand, websiteTexts, brandTone
     'You analyze how a brand speaks. Your output is a voice playbook that every',
     'downstream copy task (headlines, USPs, CTAs, image briefs) will follow.',
     'Go deep. Do not stop at formal/informal. Capture the fingerprint.',
+    'OUTPUT LANGUAGE: all customer-facing example fields (typicalPhrases, ctaStyle.examples, signatureWords, avoidedWords) MUST be in ' + outLang + '. Analysis meta fields (toneDescriptors, voiceFingerprint description, do/dont guidelines) may stay in ' + outLang + ' too for consistency.',
+    'TEXT RULES for any customer-facing example you generate:',
+    '  - Never use em dash (U+2014) or en dash (U+2013).',
+    '  - Hyphen "-" is allowed ONLY inside a compound word without surrounding spaces (e.g. "Wasserfilter-Flaschen").',
+    '  - A hyphen with a space before or after it (like " - ") is FORBIDDEN. Use comma, colon, or a rewrite.',
     'Return ONLY valid JSON.',
   ].join('\n');
 
@@ -399,7 +509,7 @@ export async function analyzeBrandVoice(products, brand, websiteTexts, brandTone
     '  "communicationStyle": "formal | informal | mixed",',
     '  "addressing": "du | Sie | neutral",',
     '  "toneDescriptors": ["3-6 adjectives that capture the brand voice"],',
-    '  "voiceFingerprint": "2-3 sentences describing the unique texture of this brand voice — what would make a reader recognise it blind",',
+    '  "voiceFingerprint": "2 to 3 sentences describing the unique texture of this brand voice, what would make a reader recognise it blind",',
     '  "sentencePatterns": {',
     '    "typicalLength": "short (3-6 words) | medium (7-14) | long (15+) | mixed",',
     '    "structure": "e.g. claim + beleg, frage + antwort, aufzählung, staccato-sätze",',
@@ -461,7 +571,7 @@ export async function voiceConsistencyCheck(pages, brandIntelligence, brand, lan
     'For each item, decide if it matches the voice fingerprint, sentence patterns, CTA style, and vocabulary.',
     'If it is off (generic, wrong register, wrong length, off-vocabulary, invented), rewrite it.',
     'If it is already on-brand, leave it unchanged.',
-    'Be conservative — only correct when there is a clear mismatch. Do NOT rewrite good copy to make it different.',
+    'Be conservative. Only correct when there is a clear mismatch. Do NOT rewrite good copy to make it different.',
     'Return ONLY valid JSON.',
   ].join('\n');
 
@@ -481,7 +591,11 @@ export async function voiceConsistencyCheck(pages, brandIntelligence, brand, lan
     '}',
     '',
     'Only include entries where you ACTUALLY changed the text. Omit items that are on-brand.',
-    'Keep "corrected" in ' + lang + '. Follow the TEXT RULE: no hyphens to combine text blocks.',
+    'Keep "corrected" in ' + lang + '.',
+    'TEXT RULES for "corrected":',
+    '  - Never use em dash (U+2014) or en dash (U+2013).',
+    '  - Hyphen "-" is allowed ONLY inside a compound word without surrounding spaces (e.g. "Wasserfilter-Flaschen", "3-in-1").',
+    '  - A hyphen with a space before or after it (like " - ") is FORBIDDEN. Use comma, colon, line break, or a rewrite.',
   ].join('\n');
 
   var result = await callClaude(system, user, 4096);
