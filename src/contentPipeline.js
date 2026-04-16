@@ -199,7 +199,7 @@ export async function synthesizeBrandProfile(allProductAnalyses, allWebsiteAnaly
 // ═══════════════════════════════════════════════════════════════
 // STEP 5: Plan page structure from content
 // ═══════════════════════════════════════════════════════════════
-export async function planPages(brandProfile, categories, productAnalyses, storeKnowledge, brand, lang, extraPages, brandIntelligence) {
+export async function planPages(brandProfile, categories, productAnalyses, storeKnowledge, brand, lang, extraPages, brandIntelligence, blueprintsBlock) {
   var system = [
     'You plan Amazon Brand Store pages. Content determines structure.',
     'Only create pages for content that EXISTS. No empty pages.',
@@ -220,7 +220,7 @@ export async function planPages(brandProfile, categories, productAnalyses, store
     '- Products: ' + productAnalyses.length + ' total',
     '- Image Concepts: ' + (brandProfile.imageConcepts || []).length,
     '',
-    storeKnowledge ? 'REFERENCE STORE INSIGHTS (for section selection only):\n' + storeKnowledge : '',
+    blueprintsBlock ? blueprintsBlock : (storeKnowledge ? 'REFERENCE STORE INSIGHTS (for section selection only):\n' + storeKnowledge : ''),
     '',
     'Plan pages. Return JSON:',
     '{',
@@ -246,7 +246,7 @@ export async function planPages(brandProfile, categories, productAnalyses, store
 // STEP 6: Generate ONE page
 // Called once per page. Gets the page plan + relevant content.
 // ═══════════════════════════════════════════════════════════════
-export async function generateOnePage(pagePlan, brandProfile, categories, productAnalyses, brand, lang, previousPages, storeKnowledge, brandIntelligence) {
+export async function generateOnePage(pagePlan, brandProfile, categories, productAnalyses, brand, lang, previousPages, storeKnowledge, brandIntelligence, blueprintsBlock) {
   var system = [
     'You generate ONE Amazon Brand Store page.',
     'You receive the page plan + all relevant content + BRAND INTELLIGENCE.',
@@ -283,7 +283,7 @@ export async function generateOnePage(pagePlan, brandProfile, categories, produc
     '',
     previousPages && previousPages.length > 0 ? 'ALREADY GENERATED PAGES (avoid duplicating content):\n' + previousPages.map(function(p) { return p.name + ': ' + (p.sections || []).length + ' sections'; }).join('\n') : '',
     '',
-    storeKnowledge ? 'REFERENCE STORE INSIGHTS (for section/layout inspiration):\n' + storeKnowledge : '',
+    blueprintsBlock ? blueprintsBlock : (storeKnowledge ? 'REFERENCE STORE INSIGHTS (for section/layout inspiration):\n' + storeKnowledge : ''),
     '',
     'Generate sections. Each section has a layoutId and tiles.',
     'IMPORTANT: Each section has a layoutId that determines tile arrangement.',

@@ -19,6 +19,118 @@ export async function loadStoreKnowledge() {
   } catch (e) { return null; }
 }
 
+// ─── LOAD DEEP BLUEPRINTS (the 20 individual deep-analyzed stores) ───
+// Each blueprint is a rich structural skeleton: pages × modules × tiles
+// with layoutIds, designRationale, imageCategory, and storeAnalysis patterns.
+// This replaces the old "text dump" store-knowledge approach — blueprints
+// are now used STRUCTURALLY to inform page planning and module cadence.
+var _blueprintCache = null;
+export async function loadBlueprints() {
+  if (_blueprintCache) return _blueprintCache;
+  try {
+    var kb = await loadStoreKnowledge();
+    if (!kb || !kb.storeIndex) return null;
+    var blueprints = [];
+    for (var i = 0; i < kb.storeIndex.length; i++) {
+      var entry = kb.storeIndex[i];
+      try {
+        var resp = await fetch('/data/store-knowledge/' + entry.file);
+        if (!resp.ok) continue;
+        var bp = await resp.json();
+        blueprints.push(bp);
+      } catch (e) { /* skip failing blueprint */ }
+    }
+    _blueprintCache = blueprints;
+    return blueprints;
+  } catch (e) { return null; }
+}
+
+// ─── MATCH BLUEPRINTS to a brand intelligence profile ───
+// Pure scoring function. Ranks the 20 deep analyses by fit to this brand's
+// tone, visual mood, and product count. Returns top N compact blueprints
+// that planPages and generateOnePage use as structural inspiration.
+export function matchBlueprints(blueprints, brandIntelligence, productCount, topN) {
+  if (!blueprints || blueprints.length === 0) return [];
+  var n = topN || 3;
+  var v = (brandIntelligence && brandIntelligence.visual) || {};
+  var voice = (brandIntelligence && brandIntelligence.voice) || {};
+
+  // Build a match signature from the brand
+  var brandMoodText = [v.visualMood, v.photographyStyle, v.designerNotes, (voice.toneDescriptors || []).join(' ')].join(' ').toLowerCase();
+
+  // Product-count band: 1-3 / 4-8 / 9-20 / 21+
+  function pageBandForProducts(n) {
+    if (n <= 3) return [2, 3];
+    if (n <= 8) return [3, 4];
+    if (n <= 20) return [4, 6];
+    return [5, 10];
+  }
+  var targetPageBand = pageBandForProducts(productCount || 0);
+
+  function score(bp) {
+    var sa = bp.storeAnalysis || {};
+    var ciText = (sa.ciSummary || '').toLowerCase();
+    var s = 0;
+    // Mood overlap: score tokens that appear in both
+    var brandTokens = brandMoodText.split(/[^\wäöüß]+/).filter(function(w) { return w.length > 4; });
+    brandTokens.forEach(function(t) {
+      if (ciText.indexOf(t) >= 0) s += 2;
+    });
+    // Page count proximity
+    var pc = sa.totalPages || (bp.pages || []).length;
+    if (pc >= targetPageBand[0] && pc <= targetPageBand[1]) s += 4;
+    else if (Math.abs(pc - ((targetPageBand[0] + targetPageBand[1]) / 2)) <= 2) s += 2;
+    // Image category alignment (lifestyle-heavy brands should match lifestyle-heavy stores)
+    var dominantCats = sa.dominantImageCategories || [];
+    if (brandMoodText.indexOf('lifestyle') >= 0 && dominantCats.indexOf('lifestyle') >= 0) s += 2;
+    if (brandMoodText.indexOf('creative') >= 0 && dominantCats.indexOf('creative') >= 0) s += 2;
+    if (brandMoodText.indexOf('produkt') >= 0 && dominantCats.indexOf('product') >= 0) s += 2;
+    return s;
+  }
+
+  var scored = blueprints.map(function(bp) { return { bp: bp, score: score(bp) }; });
+  scored.sort(function(a, b) { return b.score - a.score; });
+  return scored.slice(0, n).map(function(x) { return x.bp; });
+}
+
+// ─── FORMAT BLUEPRINTS for prompt injection ───
+// Compact structural view — page by page, module cadence, design rationale.
+// This is what planPages and generateOnePage actually inject into their prompts.
+export function formatBlueprintsForPrompt(blueprints) {
+  if (!blueprints || blueprints.length === 0) return '';
+  var parts = [];
+  parts.push('=== STRUCTURAL BLUEPRINTS (best-matching reference stores) ===');
+  parts.push('Use these as STRUCTURAL inspiration — page count, module cadence, layout rhythm.');
+  parts.push('Do NOT copy content. Do NOT copy brand voice. Only structure and module flow.');
+  parts.push('');
+  blueprints.forEach(function(bp, bi) {
+    var sa = bp.storeAnalysis || {};
+    parts.push('─── BLUEPRINT ' + (bi + 1) + ': ' + bp.brandName + ' ───');
+    parts.push('  Pages: ' + ((bp.pages || []).length) + ' | Modules total: ' + (sa.totalModules || '?'));
+    if (sa.dominantLayouts) parts.push('  Dominant layouts: ' + (Array.isArray(sa.dominantLayouts) ? sa.dominantLayouts.slice(0, 4).join(' | ') : ''));
+    if (sa.dominantImageCategories) parts.push('  Dominant image categories: ' + sa.dominantImageCategories.join(', '));
+    if (sa.modulePatterns && sa.modulePatterns.length) {
+      parts.push('  Module patterns:');
+      sa.modulePatterns.slice(0, 5).forEach(function(p) { parts.push('    - ' + p); });
+    }
+    if (sa.crossPageConsistency) parts.push('  Cross-page consistency: ' + sa.crossPageConsistency.slice(0, 220));
+    // Per-page module cadence
+    (bp.pages || []).forEach(function(p) {
+      var modules = p.modules || [];
+      if (modules.length === 0) return;
+      var cadence = modules.map(function(m) {
+        var imgCat = '';
+        if (m.tiles && m.tiles[0] && m.tiles[0].imageCategory) imgCat = '/' + m.tiles[0].imageCategory;
+        return (m.layoutId || m.layoutType || '?') + imgCat;
+      }).join(' → ');
+      parts.push('  "' + (p.pageName || 'page') + '": ' + cadence);
+    });
+    parts.push('');
+  });
+  parts.push('=== END BLUEPRINTS ===');
+  return parts.join('\n');
+}
+
 export function formatStoreKnowledge(kb) {
   if (!kb) return '';
   var parts = [];

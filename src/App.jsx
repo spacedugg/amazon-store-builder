@@ -5,7 +5,7 @@ import { generateStore, aiRefineStore, applyOperations, generateWireframesForPag
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink } from './storage';
 import { analyzeOneProduct, groupIntoCategories, analyzeWebsitePage, synthesizeBrandProfile, planPages, generateOnePage, validateStore as validateStoreQuality, analyzeBrandVoice, buildBrandIntelligence } from './contentPipeline';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
-import { crawlMultipleStores, crawlAndParseStore, analyzeStoreImagesWithGemini, formatReferenceStoreContext, loadStoreKnowledge, formatStoreKnowledge } from './referenceStoreService';
+import { crawlMultipleStores, crawlAndParseStore, analyzeStoreImagesWithGemini, formatReferenceStoreContext, loadStoreKnowledge, formatStoreKnowledge, loadBlueprints, matchBlueprints, formatBlueprintsForPrompt } from './referenceStoreService';
 import Topbar from './components/Topbar';
 import PageList from './components/PageList';
 import Canvas from './components/Canvas';
@@ -668,8 +668,27 @@ export default function App() {
       log('═══ PHASE 4: SEITENPLANUNG ═══');
       var storeKnowledgeStr = null;
       try { var kb = await loadStoreKnowledge(); if (kb) storeKnowledgeStr = formatStoreKnowledge(kb); } catch(e) {}
+
+      // Blueprint matching: rank the 20 deep analyses by fit to this brand,
+      // then feed the top matches into planning and generation as STRUCTURAL
+      // skeletons (page count, module cadence, layout rhythm).
+      var matchedBlueprints = [];
+      var blueprintsBlock = '';
+      try {
+        var blueprints = await loadBlueprints();
+        if (blueprints && blueprints.length) {
+          matchedBlueprints = matchBlueprints(blueprints, brandIntelligence, products.length, 3);
+          blueprintsBlock = formatBlueprintsForPrompt(matchedBlueprints);
+          log('   Blueprints matched: ' + matchedBlueprints.map(function(b) { return b.brandName; }).join(', '));
+        } else {
+          log('   Blueprints unavailable — falling back to knowledge aggregate');
+        }
+      } catch (bpErr) {
+        log('   Blueprint matching skipped: ' + bpErr.message);
+      }
+
       var pagePlan = await runPipelineStep('Seitenplanung', function() {
-        return planPages(brandProfile, categories, allProductAnalyses, storeKnowledgeStr, params.brand, lang, selectedExtraPages, brandIntelligence);
+        return planPages(brandProfile, categories, allProductAnalyses, storeKnowledgeStr, params.brand, lang, selectedExtraPages, brandIntelligence, blueprintsBlock);
       });
       (pagePlan.pages || []).forEach(function(pg) {
         log('   ' + pg.name + ': ' + (pg.sections || []).length + ' sections');
@@ -687,7 +706,7 @@ export default function App() {
         var pp = plannedPages[gi];
         log('   Page ' + (gi + 1) + '/' + plannedPages.length + ': ' + pp.name);
         try {
-          var pageResult = await generateOnePage(pp, brandProfile, categories, allProductAnalyses, params.brand, lang, generatedPages, storeKnowledgeStr, brandIntelligence);
+          var pageResult = await generateOnePage(pp, brandProfile, categories, allProductAnalyses, params.brand, lang, generatedPages, storeKnowledgeStr, brandIntelligence, blueprintsBlock);
           var pageObj = {
             id: pp.id || ('page-' + gi),
             name: pp.name,
@@ -727,6 +746,7 @@ export default function App() {
         websiteAnalyses: allWebsiteAnalyses,
         pipelineBrandVoice: pipelineBrandVoice,
         brandIntelligence: brandIntelligence,
+        matchedBlueprints: matchedBlueprints.map(function(b) { return { brandName: b.brandName, storeUrl: b.storeUrl }; }),
         // For wireframe generation access
         analysis: {
           brandTone: pipelineBrandVoice.tone || (pipelineBrandVoice.toneDescriptors || []).join(', ') || 'professional',
