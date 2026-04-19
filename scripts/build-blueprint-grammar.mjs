@@ -10,35 +10,13 @@
 import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { classifyPageType, PAGE_TYPE_RULES } from '../src/pageTypeClassifier.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const INPUT_DIR = join(ROOT, 'data/store-knowledge');
 const OUTPUT_DIR = join(ROOT, 'public/data');
 const OUTPUT_FILE = join(OUTPUT_DIR, 'blueprint-grammar.json');
-
-// Page type classifier: maps raw German pageName strings to canonical types.
-// Order matters, first match wins.
-const PAGE_TYPE_RULES = [
-  { type: 'home', test: /^(startseite|home|homepage)$/ },
-  { type: 'about', test: /^(über|ueber|about|unsere mission|mission)\b/ },
-  { type: 'bestsellers', test: /(bestseller|bestselling)/ },
-  { type: 'new_arrivals', test: /(neu(heiten|igkeiten)?|new|arrivals?)/ },
-  { type: 'sustainability', test: /(nachhaltigkeit|sustainab|umwelt)/ },
-  { type: 'product_lines', test: /(produktlinien?|productlines?|kollektion)/ },
-  { type: 'product_selector', test: /(produktselektor|selektor|selector|finder)/ },
-  { type: 'all_products', test: /^(alle produkte|all products|angebote|sale|offers?)$/ },
-  { type: 'brand_story', test: /(geschichte|story|unsere geschichte|brandstory)/ },
-];
-
-function classifyPageType(pageName) {
-  const n = (pageName || '').toLowerCase().trim();
-  if (!n) return 'unknown';
-  for (const rule of PAGE_TYPE_RULES) {
-    if (rule.test.test(n)) return rule.type;
-  }
-  return 'category';
-}
 
 function normImageCategory(raw) {
   if (!raw) return 'none';
