@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, findLayout, LAYOUT_TILE_DIMS } from './constants';
 import { scrapeAsins, analyzeBrandCI } from './api';
-import { generateStore, aiRefineStore, applyOperations, generateWireframesForPage, deleteWireframesForPage } from './storeBuilder';
+import { aiRefineStore, applyOperations, generateWireframesForPage, deleteWireframesForPage } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink } from './storage';
 import { analyzeOneProduct, groupIntoCategories, analyzeWebsitePage, synthesizeBrandProfile, planPages, generateOnePage, validateStore as validateStoreQuality, analyzeBrandVoice, buildBrandIntelligence, voiceConsistencyCheck, applyVoiceCorrections } from './contentPipeline';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
@@ -893,8 +893,6 @@ export default function App() {
       setCurPage(storeData.pages[0] ? storeData.pages[0].id : '');
       log('');
       log('Store complete! ' + storeData.pages.length + ' pages, ' + products.length + ' products.');
-
-      // (Old generateStore() pipeline removed — replaced by Content-First v2 above)
     } catch (e) {
       if (e.message === 'CANCELLED') {
         log('');

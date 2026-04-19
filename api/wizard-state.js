@@ -6,7 +6,7 @@ function generateId() {
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
@@ -79,6 +79,26 @@ module.exports = async function handler(req, res) {
       });
 
       return res.status(200).json({ id: id, step: step });
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
+  }
+
+  // DELETE /api/wizard-state?id=xxx — clear wizard checkpoint state
+  // Soft delete: wipes generation_state and generation_step, keeps the store row.
+  // Use DELETE /api/stores?id=xxx for hard deletion.
+  if (req.method === 'DELETE') {
+    var id = req.query.id;
+    if (!id) return res.status(400).json({ error: 'id required' });
+    try {
+      var result = await db.execute({
+        sql: `UPDATE stores
+              SET generation_state = NULL, generation_step = NULL, updated_at = datetime('now')
+              WHERE id = ?`,
+        args: [id],
+      });
+      if (result.rowsAffected === 0) return res.status(404).json({ error: 'Not found' });
+      return res.status(200).json({ id: id, cleared: true });
     } catch (err) {
       return res.status(500).json({ error: err.message });
     }

@@ -1,0 +1,920 @@
+{
+  "meta": {
+    "generatedAt": "2026-04-19T22:22:48.192Z",
+    "blueprintCount": 20,
+    "blueprintFiles": [
+      "bedsure_analysis.json",
+      "blackroll_analysis.json",
+      "cloudpillo_analysis.json",
+      "desktronic_analysis.json",
+      "esn_analysis.json",
+      "feandrea_analysis.json",
+      "gritin_analysis.json",
+      "hansegruen_analysis.json",
+      "holy-energy_analysis.json",
+      "kaercher_analysis.json",
+      "kloster-kitchen_analysis.json",
+      "manscaped_analysis.json",
+      "masterchef_analysis.json",
+      "more-nutrition_analysis.json",
+      "natural-elements_analysis.json",
+      "nespresso_analysis.json",
+      "night-cat_analysis.json",
+      "nucompany_analysis.json",
+      "trixie_analysis.json",
+      "twentythree_analysis.json"
+    ],
+    "totalPages": 294,
+    "totalModules": 172,
+    "totalTiles": 357,
+    "pageTypeRules": [
+      {
+        "type": "home",
+        "pattern": "/^(startseite|home|homepage)$/"
+      },
+      {
+        "type": "about",
+        "pattern": "/^(über|ueber|about|unsere mission|mission)\\b/"
+      },
+      {
+        "type": "bestsellers",
+        "pattern": "/(bestseller|bestselling)/"
+      },
+      {
+        "type": "new_arrivals",
+        "pattern": "/(neu(heiten|igkeiten)?|new|arrivals?)/"
+      },
+      {
+        "type": "sustainability",
+        "pattern": "/(nachhaltigkeit|sustainab|umwelt)/"
+      },
+      {
+        "type": "product_lines",
+        "pattern": "/(produktlinien?|productlines?|kollektion)/"
+      },
+      {
+        "type": "product_selector",
+        "pattern": "/(produktselektor|selektor|selector|finder)/"
+      },
+      {
+        "type": "all_products",
+        "pattern": "/^(alle produkte|all products|angebote|sale|offers?)$/"
+      },
+      {
+        "type": "brand_story",
+        "pattern": "/(geschichte|story|unsere geschichte|brandstory)/"
+      }
+    ]
+  },
+  "pageTypes": {
+    "about": {
+      "sampleSize": 3,
+      "pageInstances": 3,
+      "confidence": "low",
+      "stores": [
+        "BLACKROLL",
+        "bedsure",
+        "cloudpillo"
+      ],
+      "moduleCount": {
+        "n": 3,
+        "min": 2,
+        "p25": 4,
+        "median": 4,
+        "p75": 6,
+        "max": 6
+      },
+      "layoutAtPosition": {
+        "1": {
+          "Logo Bar": 1,
+          "FWB_Brand": 1,
+          "header": 1
+        },
+        "2": {
+          "Brand Story Narrative": 1,
+          "GRID_Story": 1,
+          "std-2equal": 1
+        },
+        "3": {
+          "Brand Lifestyle Gallery": 1,
+          "divider": 1
+        },
+        "4": {
+          "Brand Video": 1,
+          "lg-4grid": 1
+        },
+        "5": {
+          "divider": 1
+        },
+        "6": {
+          "std-4tiles": 1
+        }
+      },
+      "layoutSequences": [
+        [
+          "Logo Bar",
+          "Brand Story Narrative",
+          "Brand Lifestyle Gallery",
+          "Brand Video"
+        ],
+        [
+          "FWB_Brand",
+          "GRID_Story"
+        ],
+        [
+          "header",
+          "std-2equal",
+          "divider",
+          "lg-4grid",
+          "divider",
+          "std-4tiles"
+        ]
+      ],
+      "tileCountPerModule": {
+        "distribution": {
+          "n": 12,
+          "min": 0,
+          "p25": 0,
+          "median": 1,
+          "p75": 3,
+          "max": 8
+        },
+        "histogram": {
+          "0": 4,
+          "1": 3,
+          "2": 1,
+          "3": 1,
+          "4": 2,
+          "8": 1
+        }
+      },
+      "imageCategoryMix": {
+        "brand": 0.125,
+        "team": 0.0417,
+        "wide": 0.0833,
+        "credentials": 0.0417,
+        "manufacturing": 0.0417,
+        "athlete": 0.0417,
+        "logo": 0.0417,
+        "icon": 0.25,
+        "lifestyle": 0.25,
+        "divider": 0.0833
+      },
+      "imageCategoryCounts": {
+        "brand": 3,
+        "team": 1,
+        "wide": 2,
+        "credentials": 1,
+        "manufacturing": 1,
+        "athlete": 1,
+        "logo": 1,
+        "icon": 6,
+        "lifestyle": 6,
+        "divider": 2
+      },
+      "moduleNameTop": [
+        {
+          "name": "Brand Story and Mission Hero",
+          "count": 1
+        },
+        {
+          "name": "Brand Values and Credentials",
+          "count": 1
+        }
+      ]
+    },
+    "all_products": {
+      "sampleSize": 3,
+      "pageInstances": 3,
+      "confidence": "low",
+      "stores": [
+        "bedsure",
+        "cloudpillo",
+        "desktronic"
+      ],
+      "moduleCount": {
+        "n": 3,
+        "min": 1,
+        "p25": 1,
+        "median": 1,
+        "p75": 4,
+        "max": 4
+      },
+      "layoutAtPosition": {
+        "1": {
+          "Logo Bar": 1,
+          "minimal": 2
+        },
+        "2": {
+          "Divider": 1
+        },
+        "3": {
+          "Wide Promo Tile": 1
+        },
+        "4": {
+          "Six-Tile Grid": 1
+        }
+      },
+      "layoutSequences": [
+        [
+          "Logo Bar",
+          "Divider",
+          "Wide Promo Tile",
+          "Six-Tile Grid"
+        ],
+        [
+          "minimal"
+        ],
+        [
+          "minimal"
+        ]
+      ],
+      "tileCountPerModule": {
+        "distribution": {
+          "n": 6,
+          "min": 0,
+          "p25": 0,
+          "median": 0,
+          "p75": 1,
+          "max": 3
+        },
+        "histogram": {
+          "0": 4,
+          "1": 1,
+          "3": 1
+        }
+      },
+      "imageCategoryMix": {
+        "logo": 0.25,
+        "icon": 0.5,
+        "product": 0.25
+      },
+      "imageCategoryCounts": {
+        "logo": 1,
+        "icon": 2,
+        "product": 1
+      },
+      "moduleNameTop": []
+    },
+    "bestsellers": {
+      "sampleSize": 1,
+      "pageInstances": 1,
+      "confidence": "insufficient",
+      "stores": [
+        "BLACKROLL"
+      ],
+      "moduleCount": {
+        "n": 1,
+        "min": 3,
+        "p25": 3,
+        "median": 3,
+        "p75": 3,
+        "max": 3
+      },
+      "layoutAtPosition": {
+        "1": {
+          "HDR_Logo": 1
+        },
+        "2": {
+          "FWB_Promo": 1
+        },
+        "3": {
+          "GRID_Products": 1
+        }
+      },
+      "layoutSequences": [
+        [
+          "HDR_Logo",
+          "FWB_Promo",
+          "GRID_Products"
+        ]
+      ],
+      "tileCountPerModule": {
+        "distribution": {
+          "n": 3,
+          "min": 1,
+          "p25": 1,
+          "median": 1,
+          "p75": 5,
+          "max": 5
+        },
+        "histogram": {
+          "1": 2,
+          "5": 1
+        }
+      },
+      "imageCategoryMix": {
+        "brand": 0.1429,
+        "category": 0.1429,
+        "best": 0.7143
+      },
+      "imageCategoryCounts": {
+        "brand": 1,
+        "category": 1,
+        "best": 5
+      },
+      "moduleNameTop": [
+        {
+          "name": "Logo and Page Identification",
+          "count": 1
+        },
+        {
+          "name": "Bestseller Promotional Hero",
+          "count": 1
+        },
+        {
+          "name": "Bestseller Product Grid",
+          "count": 1
+        }
+      ]
+    },
+    "category": {
+      "sampleSize": 5,
+      "pageInstances": 24,
+      "confidence": "medium",
+      "stores": [
+        "BLACKROLL",
+        "bedsure",
+        "cloudpillo",
+        "desktronic",
+        "nucompany"
+      ],
+      "moduleCount": {
+        "n": 24,
+        "min": 1,
+        "p25": 1,
+        "median": 2,
+        "p75": 2,
+        "max": 7
+      },
+      "layoutAtPosition": {
+        "1": {
+          "1": 2,
+          "Logo Bar": 8,
+          "FWB_Cat": 5,
+          "header": 3,
+          "minimal": 1,
+          "product-detail-video-heavy": 2,
+          "product-detail-video-intensive": 2,
+          "category-mixed": 1
+        },
+        "2": {
+          "Full-Width Category Banner": 2,
+          "Pet Product Category Grid": 1,
+          "Bedroom Lifestyle Grid": 1,
+          "Minimal Product Grid": 1,
+          "Electric Blanket Product Grid": 1,
+          "Premium Wearable Blanket Grid": 1,
+          "Summer Campaign - Rich Lifestyle Grid": 1,
+          "GRID_Video": 1,
+          "GRID_Products": 2,
+          "GRID_VideoHeavy": 1,
+          "GRID_Mixed": 1,
+          "divider": 3
+        },
+        "3": {
+          "Four-Square Grid": 2,
+          "Product Demonstration Video": 1,
+          "std-2equal": 3
+        },
+        "4": {
+          "Full-Width Secondary Banner": 1,
+          "divider": 3
+        },
+        "5": {
+          "Four-Square Grid": 1,
+          "lg-4grid": 2,
+          "std-2equal": 1
+        },
+        "6": {
+          "divider": 1
+        },
+        "7": {
+          "lg-4grid": 1
+        }
+      },
+      "layoutSequences": [
+        [
+          "Logo Bar",
+          "Full-Width Category Banner",
+          "Four-Square Grid",
+          "Full-Width Secondary Banner",
+          "Four-Square Grid"
+        ],
+        [
+          "Logo Bar",
+          "Full-Width Category Banner",
+          "Four-Square Grid"
+        ],
+        [
+          "Logo Bar",
+          "Pet Product Category Grid"
+        ],
+        [
+          "Logo Bar",
+          "Bedroom Lifestyle Grid"
+        ],
+        [
+          "Logo Bar",
+          "Minimal Product Grid"
+        ],
+        [
+          "Logo Bar",
+          "Electric Blanket Product Grid",
+          "Product Demonstration Video"
+        ],
+        [
+          "Logo Bar",
+          "Premium Wearable Blanket Grid"
+        ],
+        [
+          "Logo Bar",
+          "Summer Campaign - Rich Lifestyle Grid"
+        ],
+        [
+          "FWB_Cat",
+          "GRID_Video"
+        ],
+        [
+          "FWB_Cat",
+          "GRID_Products"
+        ],
+        [
+          "FWB_Cat",
+          "GRID_VideoHeavy"
+        ],
+        [
+          "FWB_Cat",
+          "GRID_Products"
+        ],
+        [
+          "FWB_Cat",
+          "GRID_Mixed"
+        ],
+        [
+          "header",
+          "divider",
+          "std-2equal",
+          "divider",
+          "lg-4grid"
+        ],
+        [
+          "header",
+          "divider",
+          "std-2equal",
+          "divider",
+          "lg-4grid"
+        ],
+        [
+          "header",
+          "divider",
+          "std-2equal",
+          "divider",
+          "std-2equal",
+          "divider",
+          "lg-4grid"
+        ],
+        [
+          "minimal"
+        ],
+        [
+          "product-detail-video-heavy"
+        ],
+        [
+          "product-detail-video-heavy"
+        ],
+        [
+          "product-detail-video-intensive"
+        ],
+        [
+          "product-detail-video-intensive"
+        ],
+        [
+          "category-mixed"
+        ],
+        [
+          "1"
+        ],
+        [
+          "1"
+        ]
+      ],
+      "tileCountPerModule": {
+        "distribution": {
+          "n": 56,
+          "min": 0,
+          "p25": 0,
+          "median": 1,
+          "p75": 3,
+          "max": 18
+        },
+        "histogram": {
+          "0": 21,
+          "1": 14,
+          "2": 4,
+          "3": 4,
+          "4": 3,
+          "6": 1,
+          "8": 2,
+          "9": 3,
+          "10": 1,
+          "12": 1,
+          "13": 1,
+          "18": 1
+        }
+      },
+      "imageCategoryMix": {
+        "lifestyle": 0.1875,
+        "sleep": 0.0357,
+        "video": 0.0179,
+        "wide": 0.1071,
+        "category": 0.0446,
+        "product": 0.2232,
+        "none": 0.1071,
+        "logo": 0.0357,
+        "icon": 0.1786,
+        "divider": 0.0625
+      },
+      "imageCategoryCounts": {
+        "lifestyle": 21,
+        "sleep": 4,
+        "video": 2,
+        "wide": 12,
+        "category": 5,
+        "product": 25,
+        "none": 12,
+        "logo": 4,
+        "icon": 20,
+        "divider": 7
+      },
+      "moduleNameTop": [
+        {
+          "name": "Sleep Category Hero Banner",
+          "count": 1
+        },
+        {
+          "name": "Sleep Product Highlights",
+          "count": 1
+        },
+        {
+          "name": "Foam Roller Category Hero",
+          "count": 1
+        },
+        {
+          "name": "Foam Roller Product Range Overview",
+          "count": 1
+        },
+        {
+          "name": "Massage Gun Category Hero",
+          "count": 1
+        },
+        {
+          "name": "Massage Gun Product Showcase - Multi-Model with Extensive Video Content",
+          "count": 1
+        },
+        {
+          "name": "Massage Balls & Trigger Tools Category Hero",
+          "count": 1
+        },
+        {
+          "name": "Massage Balls & Trigger Tools Product Range",
+          "count": 1
+        },
+        {
+          "name": "Resistance Bands Category Hero",
+          "count": 1
+        },
+        {
+          "name": "Resistance Bands Product Showcase with Training Content",
+          "count": 1
+        }
+      ]
+    },
+    "home": {
+      "sampleSize": 18,
+      "pageInstances": 18,
+      "confidence": "high",
+      "stores": [
+        "BLACKROLL",
+        "bedsure",
+        "cloudpillo",
+        "desktronic",
+        "esn",
+        "feandrea",
+        "gritin",
+        "hansegruen",
+        "holy-energy",
+        "kaercher",
+        "kloster-kitchen",
+        "manscaped",
+        "masterchef",
+        "more-nutrition",
+        "nespresso",
+        "nucompany",
+        "trixie",
+        "twentythree"
+      ],
+      "moduleCount": {
+        "n": 18,
+        "min": 2,
+        "p25": 4,
+        "median": 5,
+        "p75": 6,
+        "max": 9
+      },
+      "layoutAtPosition": {
+        "1": {
+          "1": 4,
+          "logo-primary": 1,
+          "FWB_Primary": 1,
+          "lg-4square-lifestyle": 1,
+          "hero-full": 10,
+          "divider-top": 1
+        },
+        "2": {
+          "1": 2,
+          "promo-mothers-day": 1,
+          "GRID_4SQ": 1,
+          "divider-brand": 1,
+          "divider-narrow": 7,
+          "lg-2grid-wide": 2,
+          "lg-4grid-square": 1,
+          "hero-full": 1,
+          "std-2equal": 2
+        },
+        "3": {
+          "1": 1,
+          "category-nav-primary": 1,
+          "NHB_Trust": 1,
+          "lg-4grid": 1,
+          "std-4tiles-nav": 1,
+          "lg-2grid-wide": 4,
+          "category-showcase": 1,
+          "2x2grid-small": 1,
+          "lg-4grid-narrow": 2,
+          "divider-narrow": 1,
+          "std-2equal": 2,
+          "lg-4grid-mixed": 1
+        },
+        "4": {
+          "1": 2,
+          "divider-aesthetic": 1,
+          "GRID_MIX": 1,
+          "std-2equal": 2,
+          "std-2equal-product": 1,
+          "lg-4grid-narrow": 4,
+          "mixed-grid": 1,
+          "lg-4grid-mixed": 1,
+          "claim-banner": 1,
+          "divider-promotional": 1,
+          "divider-narrow": 1
+        },
+        "5": {
+          "1": 1,
+          "product-showcase-primary": 1,
+          "FWB_Footer": 1,
+          "std-2equal": 2,
+          "divider-narrow": 1,
+          "team-banner": 1,
+          "lg-4grid (3 Reihen)": 1,
+          "hero-full-alt": 1,
+          "mid-banner": 1
+        },
+        "6": {
+          "1": 2,
+          "divider-aesthetic": 1,
+          "std-2equal": 2,
+          "benefit-bar": 1,
+          "divider-bottom": 1
+        },
+        "7": {
+          "1": 1,
+          "product-showcase-secondary": 1,
+          "std-2equal": 1
+        },
+        "8": {
+          "1": 1,
+          "brand-values-section": 1,
+          "std-3tiles": 1
+        },
+        "9": {
+          "1": 2,
+          "value-propositions": 1
+        }
+      },
+      "layoutSequences": [
+        [
+          "logo-primary",
+          "promo-mothers-day",
+          "category-nav-primary",
+          "divider-aesthetic",
+          "product-showcase-primary",
+          "divider-aesthetic",
+          "product-showcase-secondary",
+          "brand-values-section",
+          "value-propositions"
+        ],
+        [
+          "FWB_Primary",
+          "GRID_4SQ",
+          "NHB_Trust",
+          "GRID_MIX",
+          "FWB_Footer"
+        ],
+        [
+          "1",
+          "1",
+          "lg-4grid",
+          "std-2equal",
+          "std-2equal",
+          "std-2equal",
+          "std-2equal",
+          "std-3tiles",
+          "1"
+        ],
+        [
+          "lg-4square-lifestyle",
+          "divider-brand",
+          "std-4tiles-nav",
+          "std-2equal-product"
+        ],
+        [
+          "hero-full",
+          "divider-narrow",
+          "lg-2grid-wide",
+          "lg-4grid-narrow"
+        ],
+        [
+          "hero-full",
+          "divider-narrow",
+          "lg-2grid-wide",
+          "lg-4grid-narrow",
+          "divider-narrow"
+        ],
+        [
+          "hero-full",
+          "divider-narrow",
+          "category-showcase",
+          "mixed-grid"
+        ],
+        [
+          "hero-full",
+          "divider-narrow",
+          "lg-2grid-wide",
+          "lg-4grid-mixed"
+        ],
+        [
+          "hero-full",
+          "divider-narrow",
+          "2x2grid-small",
+          "claim-banner",
+          "team-banner",
+          "benefit-bar"
+        ],
+        [
+          "1",
+          "1",
+          "1",
+          "std-2equal",
+          "lg-4grid (3 Reihen)",
+          "1",
+          "1",
+          "1",
+          "1"
+        ],
+        [
+          "hero-full",
+          "divider-narrow",
+          "lg-4grid-narrow",
+          "divider-promotional"
+        ],
+        [
+          "hero-full",
+          "lg-2grid-wide",
+          "lg-4grid-narrow",
+          "divider-narrow",
+          "hero-full-alt"
+        ],
+        [
+          "hero-full",
+          "lg-4grid-square"
+        ],
+        [
+          "divider-top",
+          "hero-full",
+          "divider-narrow",
+          "lg-4grid-narrow",
+          "mid-banner",
+          "divider-bottom"
+        ],
+        [
+          "hero-full",
+          "divider-narrow",
+          "lg-2grid-wide",
+          "lg-4grid-narrow"
+        ],
+        [
+          "1",
+          "std-2equal",
+          "std-2equal",
+          "1",
+          "1",
+          "std-2equal"
+        ],
+        [
+          "hero-full",
+          "lg-2grid-wide",
+          "lg-4grid-mixed"
+        ],
+        [
+          "1",
+          "std-2equal",
+          "std-2equal",
+          "1",
+          "std-2equal",
+          "1"
+        ]
+      ],
+      "tileCountPerModule": {
+        "distribution": {
+          "n": 95,
+          "min": 0,
+          "p25": 1,
+          "median": 1,
+          "p75": 2,
+          "max": 12
+        },
+        "histogram": {
+          "0": 6,
+          "1": 50,
+          "2": 18,
+          "3": 3,
+          "4": 5,
+          "5": 1,
+          "6": 1,
+          "8": 8,
+          "10": 2,
+          "12": 1
+        }
+      },
+      "imageCategoryMix": {
+        "product": 0.0762,
+        "none": 0.0143,
+        "lifestyle": 0.1238,
+        "trust": 0.0048,
+        "wide": 0.0095,
+        "brand": 0.0048,
+        "hero": 0.0619,
+        "benefit": 0.019,
+        "icon": 0.0286,
+        "creative": 0.0619,
+        "divider": 0.081,
+        "category": 0.4619,
+        "feature": 0.0048,
+        "small": 0.019,
+        "text_image": 0.019,
+        "promotional": 0.0095
+      },
+      "imageCategoryCounts": {
+        "product": 16,
+        "none": 3,
+        "lifestyle": 26,
+        "trust": 1,
+        "wide": 2,
+        "brand": 1,
+        "hero": 13,
+        "benefit": 4,
+        "icon": 6,
+        "creative": 13,
+        "divider": 17,
+        "category": 97,
+        "feature": 1,
+        "small": 4,
+        "text_image": 4,
+        "promotional": 2
+      },
+      "moduleNameTop": [
+        {
+          "name": "Hero Banner and Brand Messaging",
+          "count": 1
+        },
+        {
+          "name": "Primary Category Navigation Grid",
+          "count": 1
+        },
+        {
+          "name": "Trust & USP Information Banner",
+          "count": 1
+        },
+        {
+          "name": "Extended Product Showcase Tiles",
+          "count": 1
+        },
+        {
+          "name": "Footer Trust & Information Banner",
+          "count": 1
+        }
+      ]
+    }
+  }
+}
