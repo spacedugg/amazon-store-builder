@@ -1,0 +1,21 @@
+{
+  "page": "produktselektor",
+  "url": "https://www.amazon.de/stores/page/A03B844E-0DA2-4FFC-8205-DC6DFDB0D59E",
+  "scrollHeight": 1628,
+  "rowsCount": 10,
+  "title": "Amazon.de: natural elements: Produktselektor",
+  "note": "Product Selector page - interactive filter UI. Most modules are zero-height accordion containers. Very atypical page that is essentially a product search/filter interface on top of a limited grid.",
+  "modules": [
+    { "idx": 0, "top": 99, "height": 93, "widgetClass": null, "role": "amazon_nav_header" },
+    { "idx": 1, "top": 192, "height": 0, "widgetClass": "EditorialRow", "role": "filter_accordion_collapsed" },
+    { "idx": 2, "top": 192, "height": 0, "widgetClass": "EditorialRow", "role": "filter_accordion_collapsed" },
+    { "idx": 3, "top": 192, "height": 0, "widgetClass": "EditorialRow", "role": "filter_accordion_collapsed" },
+    { "idx": 4, "top": 192, "height": 255, "widgetClass": "EditorialRow", "role": "filter_banner", "imgCount": 1 },
+    { "idx": 5, "top": 447, "height": 0, "widgetClass": "EditorialRow", "role": "filter_accordion_collapsed" },
+    { "idx": 6, "top": 447, "height": 0, "widgetClass": "EditorialRow", "role": "filter_accordion_collapsed" },
+    { "idx": 7, "top": 447, "height": 0, "widgetClass": "EditorialRow", "role": "filter_accordion_collapsed" },
+    { "idx": 8, "top": 0, "height": 0, "widgetClass": "ProductGrid", "role": "product_grid_filter_results",
+      "productCount": 20, "headlines": ["Omega 3","Mariendistel Artischocke Löwenzahn","Curcuma Extrakt"] },
+    { "idx": 9, "top": 0, "height": 0, "widgetClass": "EditorialRow", "role": "amazon_share_footer" }
+  ]
+}

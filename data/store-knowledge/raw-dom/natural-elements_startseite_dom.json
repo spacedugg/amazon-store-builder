@@ -1,0 +1,60 @@
+{
+  "page": "startseite",
+  "url": "https://www.amazon.de/stores/page/3955CCD4-902C-4679-9265-DEC4FCBAA8C8",
+  "scrollHeight": 9966,
+  "viewport": { "w": 1309, "h": 602 },
+  "modules": [
+    { "idx": 0, "top": 99, "height": 363, "widgetClass": null, "role": "amazon_nav_header",
+      "headlines": [], "allTextPreview": "natural elements Folgen STARTSEITE UNSERE NEUHEITEN ALLE PRODUKTE IMMUNSYSTEM SPORT & ENERGIE BEAUTY & ANTI AGING KNOCHEN & BEWEGLICHKEIT WOHLBEFINDEN & ANTI STRESS VERDAUUNG & GEWICHT GAMING PRODUKTFILTER PRODUKTSELEKTOR GESCHENK-SETS ÜBER UNS UNSERE EMPFEHLUNGEN MEHR",
+      "ctas": ["natural elements","Folgen","Startseite","unsere Neuheiten","Alle Produkte","Omega 3","Magnesium","Multivitamin","Probiotika","Melatonin","Immunsystem","Vitamine","Mineralien"],
+      "imgCount": 1, "tileCount": 0, "productCount": 0, "videoCount": 0, "shoppableMarkers": 0
+    },
+    { "idx": 1, "top": 462, "height": 656, "widgetClass": "EditorialRow__row__W3W3h", "role": "hero_video",
+      "headlines": [], "allTextPreview": "", "ctas": [],
+      "imgCount": 0, "tileCount": 7, "productCount": 0, "videoCount": 4, "shoppableMarkers": 0,
+      "visualNote": "Split: sage-green left half with 'Nahrungsergänzung neu gedacht:' (white serif) + natural elements logo watermark; right half shows person with bike photo"
+    },
+    { "idx": 2, "top": 1118, "height": 335, "widgetClass": "EditorialRow__row__W3W3h", "role": "editorial_banner",
+      "headlines": [], "ctas": [], "imgCount": 1, "tileCount": 8, "productCount": 0, "videoCount": 0, "shoppableMarkers": 0,
+      "imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/03897e1f-bcf8-4847-bc5d-088e361cf281._CR0%2C"
+    },
+    { "idx": 3, "top": 1453, "height": 335, "widgetClass": "EditorialRow__row__W3W3h", "role": "editorial_banner",
+      "headlines": [], "ctas": [], "imgCount": 1, "tileCount": 8, "productCount": 0, "videoCount": 0, "shoppableMarkers": 0,
+      "imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/7de67c4a-1f33-4617-8475-e4e72e412a26._CR0%2C"
+    },
+    { "idx": 4, "top": 1788, "height": 647, "widgetClass": "EditorialRow__row__W3W3h", "role": "shoppable_interactive_image",
+      "headlines": [], "allTextPreview": "Produkte ansehen", "ctas": ["Produkte ansehen"],
+      "imgCount": 1, "tileCount": 34, "productCount": 0, "videoCount": 0, "shoppableMarkers": 30,
+      "imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/6930ae49-4290-4789-a22e-548cc2a4da19._CR0%2C",
+      "visualNote": "Split: white left half with 'Bestseller direkt hier shoppen' (black sans-serif bold); right half sage-green product lineup (Vitamin D3/K2, Omega 3, Curcuma Extrakt), 30 product pins"
+    },
+    { "idx": 5, "top": 2435, "height": 656, "widgetClass": "EditorialRow__row__W3W3h", "role": "hero_video",
+      "headlines": [], "ctas": [], "imgCount": 0, "tileCount": 7, "productCount": 0, "videoCount": 4, "shoppableMarkers": 0
+    },
+    { "idx": 6, "top": 3091, "height": 186, "widgetClass": "EditorialRow__row__W3W3h", "role": "editorial_section_intro",
+      "headlines": [], "ctas": [], "imgCount": 1, "tileCount": 8, "productCount": 0, "videoCount": 0, "shoppableMarkers": 0,
+      "imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/4578b672-c600-4401-accc-007c3c873342._CR0%2C"
+    },
+    { "idx": 7, "top": 3277, "height": 164, "widgetClass": "EditorialRow__row__W3W3h", "role": "editorial_section_intro",
+      "headlines": [], "ctas": [], "imgCount": 1, "tileCount": 8, "productCount": 0, "videoCount": 0, "shoppableMarkers": 0,
+      "imgSrc": "https://m.media-amazon.com/images/S/stores-image-uploads-eu-prod/b/AmazonStores/A1PA6795UKMFR9/ca501"
+    },
+    { "idx": 8, "top": 3441, "height": 647, "widgetClass": "EditorialRow__row__W3W3h", "role": "shoppable_interactive_image_set",
+      "headlines": [], "ctas": [], "imgCount": 4, "tileCount": 32, "productCount": 0, "videoCount": 0, "shoppableMarkers": 0
+    },
+    { "idx": 9, "top": 4088, "height": 324, "widgetClass": "EditorialRow__row__W3W3h", "role": "editorial_tile_pair",
+      "headlines": [], "ctas": [], "imgCount": 2, "tileCount": 16, "productCount": 0, "videoCount": 0, "shoppableMarkers": 0
+    },
+    { "idx": 10, "top": 4412, "height": 324, "widgetClass": "EditorialRow__row__W3W3h", "role": "editorial_tile_pair",
+      "headlines": [], "ctas": [], "imgCount": 2, "tileCount": 16, "productCount": 0, "videoCount": 0, "shoppableMarkers": 0
+    },
+    { "idx": 11, "top": 4735, "height": 3810, "widgetClass": "ProductGrid__gridContainer__bRK6J", "role": "product_grid_featured",
+      "headlines": ["natural elements Omega 3"], "ctas": ["Schnellansicht","In den Einkaufswagen"],
+      "imgCount": 25, "tileCount": 2, "productCount": 50, "videoCount": 0, "shoppableMarkers": 0
+    },
+    { "idx": 12, "top": 8545, "height": 200, "widgetClass": "EditorialRow__row__W3W3h", "role": "amazon_share_footer",
+      "headlines": [], "allTextPreview": "Teilen Teilen Sie diese Seite mit Ihren Freunden.", "ctas": ["Teilen"],
+      "imgCount": 0, "tileCount": 4, "productCount": 0, "videoCount": 0, "shoppableMarkers": 0
+    }
+  ]
+}

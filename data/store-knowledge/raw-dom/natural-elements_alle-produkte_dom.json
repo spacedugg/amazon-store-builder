@@ -1,0 +1,20 @@
+{
+  "page": "alle-produkte",
+  "url": "https://www.amazon.de/stores/page/56C2E5EE-81A5-4F07-8BB3-38927E13937B",
+  "scrollHeight": 6652,
+  "rowsCount": 6,
+  "title": "Amazon.de: natural elements: Alle Produkte",
+  "note": "All-Products listing page. Has 1 shoppable interactive image before main product grid (50 products).",
+  "modules": [
+    { "idx": 0, "top": 99, "height": 355, "widgetClass": null, "role": "amazon_nav_header" },
+    { "idx": 1, "top": 454, "height": 629, "widgetClass": "EditorialRow", "role": "shoppable_interactive_image",
+      "shoppableMarkers": 30, "tileCount": 34, "imgCount": 1, "allTextPreview": "Produkte ansehen" },
+    { "idx": 2, "top": 1083, "height": 326, "widgetClass": "EditorialRow", "role": "editorial_banner", "imgCount": 1 },
+    { "idx": 3, "top": 1409, "height": 3641, "widgetClass": "ProductGrid", "role": "product_grid_full_catalog",
+      "productCount": 50, "imgCount": 25,
+      "headlineHint": "Top-Neuheiten",
+      "headlines": ["Apfelessig Gummies","Magnesium L-Threonate (Magtein)","Hydration Recharge Pineapple Coconut"] },
+    { "idx": 4, "top": 5050, "height": 181, "widgetClass": "EditorialRow", "role": "editorial_section_intro", "imgCount": 1 },
+    { "idx": 5, "top": 5231, "height": 199, "widgetClass": "EditorialRow", "role": "amazon_share_footer" }
+  ]
+}

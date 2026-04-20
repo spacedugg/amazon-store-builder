@@ -1,0 +1,22 @@
+{
+  "page": "unsere-neuheiten",
+  "url": "https://www.amazon.de/stores/page/E3653495-9130-48DC-BFA4-F38BD9C7AEF1",
+  "scrollHeight": 8007,
+  "rowsCount": 10,
+  "title": "Amazon.de: natural elements: unsere Neuheiten",
+  "note": "New Arrivals page. Hero banner + section intro + 1 product showcase with video + product grid (50 top new products) + editorial tile sets.",
+  "modules": [
+    { "idx": 0, "top": 99, "height": 355, "widgetClass": null, "role": "amazon_nav_header" },
+    { "idx": 1, "top": 454, "height": 429, "widgetClass": "EditorialRow", "role": "hero_banner", "imgCount": 1 },
+    { "idx": 2, "top": 883, "height": 222, "widgetClass": "EditorialRow", "role": "editorial_section_intro", "imgCount": 1 },
+    { "idx": 3, "top": 1106, "height": 554, "widgetClass": "EditorialRow", "role": "product_showcase_video",
+      "headline": "Magnesium L-Threonate (Magtein)", "videoCount": 88, "imgCount": 29 },
+    { "idx": 4, "top": 1660, "height": 3497, "widgetClass": "ProductGrid", "role": "product_grid_new_arrivals",
+      "productCount": 50, "imgCount": 25, "headlineHint": "Top-Neuheiten" },
+    { "idx": 5, "top": 5157, "height": 171, "widgetClass": "EditorialRow", "role": "editorial_section_intro", "imgCount": 1 },
+    { "idx": 6, "top": 5328, "height": 629, "widgetClass": "EditorialRow", "role": "editorial_tile_quad", "imgCount": 4, "tileCount": 32 },
+    { "idx": 7, "top": 5957, "height": 314, "widgetClass": "EditorialRow", "role": "editorial_tile_pair", "imgCount": 2, "tileCount": 16 },
+    { "idx": 8, "top": 6271, "height": 314, "widgetClass": "EditorialRow", "role": "editorial_tile_pair", "imgCount": 2, "tileCount": 16 },
+    { "idx": 9, "top": 6585, "height": 199, "widgetClass": "EditorialRow", "role": "amazon_share_footer" }
+  ]
+}

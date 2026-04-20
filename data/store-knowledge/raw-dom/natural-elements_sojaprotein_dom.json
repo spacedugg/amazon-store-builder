@@ -1,0 +1,18 @@
+{
+  "page": "sojaprotein",
+  "url": "https://www.amazon.de/stores/page/0C5288E7-93DF-4272-890E-78EFF3DD0813",
+  "scrollHeight": 4169,
+  "rowsCount": 4,
+  "title": "Amazon.de: natural elements: Make it full size",
+  "note": "Page is actually the SoProtein product line page (title 'Make it full size'). Very compact.",
+  "modules": [
+    { "idx": 0, "top": 99, "height": 355, "widgetClass": null, "role": "amazon_nav_header" },
+    { "idx": 1, "top": 454, "height": 346, "widgetClass": "EditorialRow", "role": "hero_banner_compact",
+      "imgCount": 1, "tileCount": 8 },
+    { "idx": 2, "top": 801, "height": 1947, "widgetClass": "ProductGrid", "role": "product_grid_line",
+      "productCount": 30, "imgCount": 15,
+      "headlines": ["SoProtein Clear Whey Isolate Mango Maracuja","SoProtein Whey Complex Schokoladen","SoProtein Vegan Chocolate","SoProtein Whey Complex Vanilla Milk"] },
+    { "idx": 3, "top": 2748, "height": 199, "widgetClass": "EditorialRow", "role": "amazon_share_footer",
+      "ctas": ["Teilen"] }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "page": "unsere-empfehlungen",
+  "url": "https://www.amazon.de/stores/page/B77CB4EF-4CCF-4FB0-9251-53DF11DCCE12",
+  "scrollHeight": 5156,
+  "rowsCount": 7,
+  "title": "Amazon.de: natural elements: Unsere Empfehlungen",
+  "note": "Bestseller/Recommendations page. Small section intro then product grid (24 products) then editorial tile rows.",
+  "modules": [
+    { "idx": 0, "top": 99, "height": 355, "widgetClass": null, "role": "amazon_nav_header" },
+    { "idx": 1, "top": 454, "height": 181, "widgetClass": "EditorialRow", "role": "editorial_section_intro", "imgCount": 1 },
+    { "idx": 2, "top": 635, "height": 2207, "widgetClass": "ProductGrid", "role": "product_grid_bestsellers",
+      "productCount": 24, "imgCount": 13,
+      "headlines": ["Schwarzkümmelöl","Omega 3","Magnesium Komplex"] },
+    { "idx": 3, "top": 2842, "height": 264, "widgetClass": "EditorialRow", "role": "editorial_section_intro", "imgCount": 1 },
+    { "idx": 4, "top": 3106, "height": 314, "widgetClass": "EditorialRow", "role": "editorial_tile_quad", "imgCount": 4, "tileCount": 32 },
+    { "idx": 5, "top": 3420, "height": 314, "widgetClass": "EditorialRow", "role": "editorial_tile_quad", "imgCount": 4, "tileCount": 32 },
+    { "idx": 6, "top": 3735, "height": 199, "widgetClass": "EditorialRow", "role": "amazon_share_footer" }
+  ]
+}

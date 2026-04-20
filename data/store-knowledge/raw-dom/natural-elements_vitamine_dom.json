@@ -1,0 +1,33 @@
+{
+  "page": "vitamine",
+  "url": "https://www.amazon.de/stores/page/5DF9227A-372F-4144-8FE4-73B4797BAABD",
+  "scrollHeight": 8791,
+  "rowsCount": 13,
+  "modules": [
+    { "idx": 0, "top": 99, "height": 355, "widgetClass": null, "role": "amazon_nav_header" },
+    { "idx": 1, "top": 454, "height": 636, "widgetClass": "EditorialRow", "role": "hero_banner",
+      "imgCount": 1, "tileCount": 8 },
+    { "idx": 2, "top": 1091, "height": 326, "widgetClass": "EditorialRow", "role": "editorial_banner",
+      "imgCount": 1, "tileCount": 8 },
+    { "idx": 3, "top": 1416, "height": 581, "widgetClass": "EditorialRow", "role": "product_showcase_video",
+      "headline": "natural elements Premium Multivitamin", "imgCount": 29, "videoCount": 88, "tileCount": 4 },
+    { "idx": 4, "top": 1997, "height": 627, "widgetClass": "EditorialRow", "role": "product_showcase_video",
+      "headline": "natural elements Vitamin C gepuffert 500mg", "imgCount": 26, "videoCount": 80, "tileCount": 4 },
+    { "idx": 5, "top": 2624, "height": 627, "widgetClass": "EditorialRow", "role": "product_showcase_video",
+      "headline": "natural elements Vitamin D3 Tropfen", "imgCount": 30, "videoCount": 88, "tileCount": 4 },
+    { "idx": 6, "top": 3250, "height": 2977, "widgetClass": "ProductGrid", "role": "product_grid_category",
+      "productCount": 40, "imgCount": 20 },
+    { "idx": 7, "top": 6228, "height": 171, "widgetClass": "EditorialRow", "role": "editorial_section_intro",
+      "imgCount": 1, "tileCount": 8 },
+    { "idx": 8, "top": 6399, "height": 222, "widgetClass": "EditorialRow", "role": "subcategory_tile",
+      "imgCount": 1, "tileCount": 8 },
+    { "idx": 9, "top": 6621, "height": 222, "widgetClass": "EditorialRow", "role": "subcategory_tile",
+      "imgCount": 1, "tileCount": 8 },
+    { "idx": 10, "top": 6843, "height": 201, "widgetClass": "EditorialRow", "role": "subcategory_tile",
+      "imgCount": 1, "tileCount": 8 },
+    { "idx": 11, "top": 7044, "height": 326, "widgetClass": "EditorialRow", "role": "editorial_banner",
+      "imgCount": 1, "tileCount": 8 },
+    { "idx": 12, "top": 7370, "height": 199, "widgetClass": "EditorialRow", "role": "amazon_share_footer",
+      "ctas": ["Teilen"] }
+  ]
+}
