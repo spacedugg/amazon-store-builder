@@ -1,0 +1,466 @@
+{
+  "pageUrl": "https://www.amazon.de/stores/page/C199E0D4-B434-4DFA-8DF0-2D5601387A8B",
+  "pageId": "C199E0D4-B434-4DFA-8DF0-2D5601387A8B",
+  "pageName": "UEBER UNS",
+  "pageLevel": 1,
+  "parentCategory": null,
+  "breadcrumb": "natural elements > UEBER UNS",
+  "pageType": "brand_story_content",
+  "crawledAt": "2026-04-19",
+  "archetype": {
+    "name": "brand_story_editorial",
+    "description": "Reine Content-Seite ohne Produkt-Grid. Besteht ausschliesslich aus editorialen Bild- und Videomodulen, die Brand Story, Werte und Team kommunizieren. Dramaturgie: grosser Brand-Hero, Einleitungs-Banner, Team-oder Labor-Video, mehrere Story-Banner im Standard-Format 4 zu 1, ein emotionaler tiefer Banner (1.89 zu 1), ein dünnes Claim-Strip, ein 4-Kachel-Werte-Grid, zwei 2-Kachel-Reihen mit Kategorie- oder Wert-Verlinkung. Kein Sortiment, keine ASINs. Die Seite ist der SEO- und Vertrauens-Anker der Marke.",
+    "applicableTo": "Immer nur einmal im Store verwendet als UEBER UNS Seite. Dient gleichzeitig als Fundament fuer die Brand-Story-Module, die in anderen Seiten ebenfalls auftauchen koennen (zum Beispiel Unternehmensportraet oder Werte-Statement)."
+  },
+  "modules": [
+    {
+      "moduleId": "ueberuns_01_header_nav",
+      "position": 1,
+      "domRow": 0,
+      "moduleName": "Header, Navigation, Breadcrumb",
+      "moduleType": "global_template",
+      "layoutShape": "full_width_bar",
+      "tileCount": 1,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "navigation",
+          "visualContent": "Globaler Kopf mit Logo 'natural elements', Folgen-Button, 12-Punkte-Nav mit Aktiv-Highlight auf UEBER UNS. Breadcrumb: natural elements > UEBER UNS.",
+          "textOnImage": "keine, DOM-generiert",
+          "ctaText": null,
+          "linksTo": "Hauptnavigation",
+          "backgroundStyle": "weiss"
+        }
+      ],
+      "designRationale": "Global-Template, Aktiv-Markierung signalisiert Position UEBER UNS.",
+      "relationToNextModule": "Uebergang ohne Trenner in den Brand-Hero."
+    },
+    {
+      "moduleId": "ueberuns_02_brand_hero",
+      "position": 2,
+      "domRow": 1,
+      "moduleName": "Brand-Hero",
+      "moduleType": "editorial_tile_image_full_width",
+      "layoutShape": "single_full_width_hero",
+      "widgetClass": "EditorialRow > EditorialTile (large) > EditorialTileImage",
+      "tileCount": 1,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "brand_hero",
+          "imageDimensions": "1309x465 Pixel, Seitenverhaeltnis 2.82 zu 1",
+          "visualContent": "Markanter Brand-Hero als Einstieg in die UEBER UNS Geschichte. Hero-Format gaenzlich andere Proportion als die Standard-Kampagnen-Banner (3.75 zu 1 auf Hub-Seiten), hier tiefer, emotionaler. Typischer Inhalt fuer natural elements: Natur- oder Labor-Setting mit Brand-Logo oder einem einfuehrenden Claim wie 'Echte Naturprodukte' oder 'Made in Germany'.",
+          "textOnImage": "zu verifizieren per Vision-Check",
+          "textOnImageContext": "Claim eingebettet in die Grafik, keine DOM-Overlays",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "vermutlich natuerliche Palette, zu verifizieren",
+          "dominantColors": ["zu verifizieren"],
+          "elementProportions": "100 Prozent Breite, rund 35 Prozent Hoehe des Viewports"
+        }
+      ],
+      "designRationale": "Emotionaler Einstieg in die Markengeschichte. Anders als Kampagnen-Hero nicht auf CTA-Wirkung getrimmt, sondern auf Identifikation.",
+      "relationToNextModule": "Folgt das erste Story-Banner im 4 zu 1 Format."
+    },
+    {
+      "moduleId": "ueberuns_03_story_banner_einleitung",
+      "position": 3,
+      "domRow": 2,
+      "moduleName": "Story-Banner 1 (Einleitung, 4:1)",
+      "moduleType": "editorial_tile_image_full_width",
+      "layoutShape": "wide_banner_4to1",
+      "tileCount": 1,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "brand_story",
+          "imageDimensions": "1309x327 Pixel, Seitenverhaeltnis 4 zu 1",
+          "visualContent": "Weites Story-Banner, Standard-Format fuer Text-Bild-Hybride. Typische Inhalte hier: Unternehmensvorstellung, Gruender-Statement, Standortinformation (Made in Germany, Labor- oder Natur-Symbolik).",
+          "textOnImage": "zu verifizieren per Vision-Check, typisch: Headline plus 2-3 Zeilen Copy",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "vermutlich natural-elements-typisch weiss oder olivgruen"
+        }
+      ],
+      "designRationale": "Erster Text-Bild-Block nach dem Hero, legt die Markenhaltung fest.",
+      "relationToNextModule": "Folgt ein tiefes emotionales Banner (1.89:1)."
+    },
+    {
+      "moduleId": "ueberuns_04_story_banner_tief",
+      "position": 4,
+      "domRow": 3,
+      "moduleName": "Story-Banner tief (1.89:1)",
+      "moduleType": "editorial_tile_image_full_width",
+      "layoutShape": "tall_emotional_banner",
+      "tileCount": 1,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "brand_story",
+          "imageDimensions": "1309x691 Pixel, Seitenverhaeltnis 1.89 zu 1 (fast 2:1, relativ hoch)",
+          "visualContent": "Emotional inszeniertes Story-Bild, hoeheres Format als die 4-zu-1-Banner. Typischer Einsatz: Gruender-Bild, Produktionsstaette, Zutaten-Close-up, Nachhaltigkeits-Szene. Die Hoehe schafft Platz fuer mehr Text oder ein doppel-raeumiges Bild mit zwei inhaltlichen Zonen.",
+          "textOnImage": "zu verifizieren, haeufig mehrzeilige Copy zur Brand Story",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "zu verifizieren"
+        }
+      ],
+      "designRationale": "Rhythmus-Bruch nach dem schmalen Einleitungs-Banner. Die Hoehe signalisiert Wichtigkeit und erlaubt tiefere emotionale Szene.",
+      "relationToNextModule": "Folgt ein weiteres 4:1 Banner."
+    },
+    {
+      "moduleId": "ueberuns_05_story_banner_3",
+      "position": 5,
+      "domRow": 4,
+      "moduleName": "Story-Banner 2 (4:1)",
+      "moduleType": "editorial_tile_image_full_width",
+      "layoutShape": "wide_banner_4to1",
+      "tileCount": 1,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "brand_story",
+          "imageDimensions": "1309x327 Pixel, Seitenverhaeltnis 4 zu 1",
+          "visualContent": "Weiteres Story-Banner. Typische Inhalte: Qualitaets-Statement, Labor-Zitat, Zertifikate-Claim.",
+          "textOnImage": "zu verifizieren",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "zu verifizieren"
+        }
+      ],
+      "designRationale": "Erzaehl-Modul, fuehrt in Richtung Team-Video.",
+      "relationToNextModule": "Folgt ein Video-Block."
+    },
+    {
+      "moduleId": "ueberuns_06_team_video",
+      "position": 6,
+      "domRow": 5,
+      "moduleName": "Team- oder Marken-Video",
+      "moduleType": "editorial_tile_video",
+      "layoutShape": "single_full_width_video",
+      "widgetClass": "EditorialRow > EditorialTile > EditorialTileVideo",
+      "tileCount": 1,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "video",
+          "visualContent": "Eingebettetes Video. Typischer Inhalt fuer UEBER UNS: Gruender- oder Team-Interview, Labor- oder Produktionsfuehrung, Nachhaltigkeits-Reportage. Der Video-Block ist das emotionalste Element der Seite.",
+          "textOnImage": null,
+          "ctaText": "Play",
+          "ctaTrigger": "Klick auf Play-Button startet Video inline.",
+          "linksTo": null,
+          "backgroundStyle": "abhaengig vom Video-Poster"
+        }
+      ],
+      "designRationale": "Video ist Trust-Builder Nummer eins. Platzierung nach zwei Text-Bild-Bloecken nutzt die aufgebaute Aufmerksamkeit.",
+      "relationToNextModule": "Folgt eine Serie von Story-Bannern."
+    },
+    {
+      "moduleId": "ueberuns_07_story_banner_4",
+      "position": 7,
+      "domRow": 6,
+      "moduleName": "Story-Banner 3 (4:1)",
+      "moduleType": "editorial_tile_image_full_width",
+      "layoutShape": "wide_banner_4to1",
+      "tileCount": 1,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "brand_story",
+          "imageDimensions": "1309x327 Pixel, 4 zu 1",
+          "visualContent": "Story-Banner im Standard-Format. Typisch: Werte-Statement, Philosophie, Produktions-Zitat.",
+          "textOnImage": "zu verifizieren",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "zu verifizieren"
+        }
+      ],
+      "designRationale": "Fortsetzung der Brand-Story nach Video.",
+      "relationToNextModule": "Weitere Story-Banner folgen im gleichen Format."
+    },
+    {
+      "moduleId": "ueberuns_08_story_banner_5",
+      "position": 8,
+      "domRow": 7,
+      "moduleName": "Story-Banner 4 (4:1)",
+      "moduleType": "editorial_tile_image_full_width",
+      "layoutShape": "wide_banner_4to1",
+      "tileCount": 1,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "brand_story",
+          "imageDimensions": "1309x327 Pixel, 4 zu 1",
+          "visualContent": "Story-Banner. Typisch: Zertifikate, Testlabore, Kontroll-Claims.",
+          "textOnImage": "zu verifizieren",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "zu verifizieren"
+        }
+      ],
+      "designRationale": "Vertrauensaufbau durch Zertifikate-Kommunikation.",
+      "relationToNextModule": "Weitere Story-Banner."
+    },
+    {
+      "moduleId": "ueberuns_09_story_banner_6",
+      "position": 9,
+      "domRow": 8,
+      "moduleName": "Story-Banner 5 (4:1)",
+      "moduleType": "editorial_tile_image_full_width",
+      "layoutShape": "wide_banner_4to1",
+      "tileCount": 1,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "brand_story",
+          "imageDimensions": "1309x327 Pixel, 4 zu 1",
+          "visualContent": "Story-Banner. Typisch: Nachhaltigkeit, Verpackung, Umweltverantwortung.",
+          "textOnImage": "zu verifizieren",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "zu verifizieren"
+        }
+      ],
+      "designRationale": "Nachhaltigkeits-Block, typisch fuer Naturkosmetik- und Supplement-Marken.",
+      "relationToNextModule": "Weitere Story-Banner."
+    },
+    {
+      "moduleId": "ueberuns_10_story_banner_7",
+      "position": 10,
+      "domRow": 9,
+      "moduleName": "Story-Banner 6 (4:1)",
+      "moduleType": "editorial_tile_image_full_width",
+      "layoutShape": "wide_banner_4to1",
+      "tileCount": 1,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "brand_story",
+          "imageDimensions": "1309x327 Pixel, 4 zu 1",
+          "visualContent": "Story-Banner. Typisch: Produktionsqualitaet, Standards, Rohstoffbeschaffung.",
+          "textOnImage": "zu verifizieren",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "zu verifizieren"
+        }
+      ],
+      "designRationale": "Qualitaets-Beweis-Block.",
+      "relationToNextModule": "Folgt ein emotional tiefes Banner (1.89:1)."
+    },
+    {
+      "moduleId": "ueberuns_11_story_banner_tief_2",
+      "position": 11,
+      "domRow": 10,
+      "moduleName": "Story-Banner tief 2 (1.89:1)",
+      "moduleType": "editorial_tile_image_full_width",
+      "layoutShape": "tall_emotional_banner",
+      "tileCount": 1,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "brand_story",
+          "imageDimensions": "1309x691 Pixel, 1.89 zu 1",
+          "visualContent": "Zweiter tiefer Banner, zweiter emotionaler Hoehepunkt. Typisch: Gruender- oder Team-Gruppenbild, Produktions-Einblicke, Familien-Werte-Szene.",
+          "textOnImage": "zu verifizieren",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "zu verifizieren"
+        }
+      ],
+      "designRationale": "Rhythmus-Bruch, emotionaler Hoehepunkt vor dem Abschluss der Erzaehlung.",
+      "relationToNextModule": "Folgt ein mittelbreites Banner (3.37:1)."
+    },
+    {
+      "moduleId": "ueberuns_12_story_banner_mittel",
+      "position": 12,
+      "domRow": 11,
+      "moduleName": "Story-Banner mittel (3.37:1)",
+      "moduleType": "editorial_tile_image_full_width",
+      "layoutShape": "medium_banner",
+      "tileCount": 1,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "brand_story",
+          "imageDimensions": "1309x388 Pixel, 3.37 zu 1",
+          "visualContent": "Uebergangs-Banner mit mittlerer Hoehe. Typisch: Motto, Claim, Abschluss-Statement oder Ueberleitung zu den Werten unten.",
+          "textOnImage": "zu verifizieren",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "zu verifizieren"
+        }
+      ],
+      "designRationale": "Uebergang von der emotionalen Erzaehlung zu den strukturierten Werte-Blocks darunter.",
+      "relationToNextModule": "Folgt ein sehr schmales Claim-Strip (8:1)."
+    },
+    {
+      "moduleId": "ueberuns_13_claim_strip",
+      "position": 13,
+      "domRow": 12,
+      "moduleName": "Claim-Strip (8:1)",
+      "moduleType": "editorial_tile_image_full_width",
+      "layoutShape": "thin_strip",
+      "tileCount": 1,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "claim_strip",
+          "imageDimensions": "1309x163 Pixel, Seitenverhaeltnis 8.03 zu 1 (sehr schmal)",
+          "visualContent": "Schmaler horizontaler Streifen, typisch fuer einen einzeiligen Claim oder eine Zertifikats-Leiste. Inhaltlich: kann 'NahrungsYEAH!gaenzung', 'Echte Naturprodukte' oder ein durchgaengiger Zertifikats-Streifen sein.",
+          "textOnImage": "zu verifizieren, vermutlich einzeiliger Claim",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "vermutlich einfarbig mit Typo-Claim"
+        }
+      ],
+      "designRationale": "Format-Variation bricht die Monotonie der 4:1-Banner-Serie auf. Typisches Amazon-Muster: schmaler Trenner vor strukturierten Grid-Modulen.",
+      "relationToNextModule": "Folgt ein 4-Kachel-Werte- oder Navigations-Grid."
+    },
+    {
+      "moduleId": "ueberuns_14_werte_grid_4",
+      "position": 14,
+      "domRow": 13,
+      "moduleName": "4-Kachel-Werte-Grid",
+      "moduleType": "editorial_tile_image_grid",
+      "layoutShape": "grid_4_tiles_horizontal",
+      "widgetClass": "EditorialRow mit 4 kleinen EditorialTiles",
+      "tileCount": 4,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "benefit_icon",
+          "imageDimensions": "654x327 Pixel, 2 zu 1",
+          "visualContent": "Kachel 1 in 4er-Reihe. Typischer Inhalt: Werte-Icon plus Titel plus kurzer Claim. Moegliche Werte: 'Made in Germany', 'Labor geprueft', 'Nachhaltige Verpackung', 'Ohne unnoetige Zusaetze'.",
+          "textOnImage": "zu verifizieren",
+          "linksTo": "moeglicherweise Kategorie oder Zertifikats-Seite"
+        },
+        {
+          "tileIndex": 1,
+          "imageCategory": "benefit_icon",
+          "imageDimensions": "654x327 Pixel, 2 zu 1",
+          "visualContent": "Kachel 2 mit Werte-Icon.",
+          "textOnImage": "zu verifizieren"
+        },
+        {
+          "tileIndex": 2,
+          "imageCategory": "benefit_icon",
+          "imageDimensions": "654x327 Pixel, 2 zu 1",
+          "visualContent": "Kachel 3 mit Werte-Icon.",
+          "textOnImage": "zu verifizieren"
+        },
+        {
+          "tileIndex": 3,
+          "imageCategory": "benefit_icon",
+          "imageDimensions": "654x327 Pixel, 2 zu 1",
+          "visualContent": "Kachel 4 mit Werte-Icon.",
+          "textOnImage": "zu verifizieren"
+        }
+      ],
+      "designRationale": "Strukturierter Werte-Block nach der Erzaehlung. Die 4-Kachel-Zusammenfassung destilliert die Story in greifbare Markenwerte.",
+      "relationToNextModule": "Folgt ein 2-Kachel-Grid."
+    },
+    {
+      "moduleId": "ueberuns_15_grid_2_1",
+      "position": 15,
+      "domRow": 14,
+      "moduleName": "2-Kachel-Grid 1",
+      "moduleType": "editorial_tile_image_grid",
+      "layoutShape": "grid_2_tiles_horizontal",
+      "tileCount": 2,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "category_link",
+          "imageDimensions": "654x327 Pixel, 2 zu 1",
+          "visualContent": "Kachel 1 in 2er-Reihe. Typisch: Verlinkung zu einer Haupt-Kategorie oder einer thematischen Unterseite (zum Beispiel 'Zu den Produkten', 'Mehr erfahren').",
+          "textOnImage": "zu verifizieren",
+          "ctaText": "vermutlich 'Entdecken' oder 'Zu den Produkten'",
+          "linksTo": "Kategorie- oder Content-Seite"
+        },
+        {
+          "tileIndex": 1,
+          "imageCategory": "category_link",
+          "imageDimensions": "654x327 Pixel, 2 zu 1",
+          "visualContent": "Kachel 2 in 2er-Reihe.",
+          "textOnImage": "zu verifizieren",
+          "linksTo": "Kategorie- oder Content-Seite"
+        }
+      ],
+      "designRationale": "Cross-Linking Richtung Sortiment. Schliesst die Brand-Story und leitet zurueck in den Store.",
+      "relationToNextModule": "Folgt ein weiteres 2-Kachel-Grid."
+    },
+    {
+      "moduleId": "ueberuns_16_grid_2_2",
+      "position": 16,
+      "domRow": 15,
+      "moduleName": "2-Kachel-Grid 2",
+      "moduleType": "editorial_tile_image_grid",
+      "layoutShape": "grid_2_tiles_horizontal",
+      "tileCount": 2,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "category_link",
+          "imageDimensions": "654x327 Pixel, 2 zu 1",
+          "visualContent": "Kachel 1 in zweiter 2er-Reihe.",
+          "textOnImage": "zu verifizieren",
+          "linksTo": "Kategorie- oder Content-Seite"
+        },
+        {
+          "tileIndex": 1,
+          "imageCategory": "category_link",
+          "imageDimensions": "654x327 Pixel, 2 zu 1",
+          "visualContent": "Kachel 2.",
+          "textOnImage": "zu verifizieren",
+          "linksTo": "Kategorie- oder Content-Seite"
+        }
+      ],
+      "designRationale": "Zweite 2er-Reihe fuer weitere Cross-Links. Ermoeglicht insgesamt 8 Einstiegspunkte in das Sortiment (4 Werte-Kacheln plus 4 Cross-Link-Kacheln).",
+      "relationToNextModule": "Folgt der Teilen-Footer."
+    },
+    {
+      "moduleId": "ueberuns_17_teilen_footer",
+      "position": 17,
+      "domRow": 16,
+      "moduleName": "Teilen-Footer",
+      "moduleType": "global_template",
+      "layoutShape": "single_row_call_to_share",
+      "tileCount": 1,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "social_share",
+          "visualContent": "Zeile 'Teilen. Teilen Sie diese Seite mit Ihren Freunden.' plus Social-Share-Buttons.",
+          "textOnImage": "keine, DOM-Text",
+          "ctaText": "Teilen",
+          "linksTo": "Social-Share-Dialoge",
+          "backgroundStyle": "weiss"
+        }
+      ],
+      "designRationale": "Global-Template am Seitenende.",
+      "relationToNextModule": "Seitenende."
+    }
+  ],
+  "pageAnalysis": {
+    "totalDomRows": 17,
+    "totalLogicalModules": 17,
+    "editorialImagesActive": 19,
+    "videosActive": 1,
+    "totalProductGridAsins": 0,
+    "contentDensity": "sehr hoch: 16 editorialen Modulen, 19 Bilder, 1 Video, 0 Produkte. Reinste Content-Seite im Store.",
+    "dramaturgie": "Hero (1 Bild 2.82:1) > Einleitungs-Story (1 Bild 4:1) > Emotionaler Tief-Banner (1 Bild 1.89:1) > Story-Banner (1 Bild 4:1) > Team-Video > 4 x Story-Banner (je 4:1) > Emotionaler Tief-Banner (1.89:1) > Mittel-Banner (3.37:1) > Claim-Strip (8:1) > 4-Kachel-Werte-Grid > 2 x 2-Kachel-Cross-Link-Grid > Teilen-Footer. Aufbau: lesen, ankommen, emotional abholen, Werte vermitteln, zurueck ins Sortiment leiten.",
+    "dominantPalette": "zu verifizieren per Vision-Check. Erwartung fuer natural elements: weiss, olivgruen, natur-beige, dezente Akzente.",
+    "tonalitaetVisual": "editorial, emotional, informativ. Keine Kaufdruck-Signale, kein CTA-Lautstaerke. Die Seite positioniert sich als Ruheraum fuer Markenverstaendnis.",
+    "CTA_strategien": "Keine direkten Kauf-CTAs. Die 2-Kachel-Grids am Ende bieten sanfte Cross-Links ins Sortiment. Der gesamte Seitenaufbau arbeitet mit Trust statt Conversion.",
+    "inhaltlicheTiefe": "Sehr hoch. Marken-Geschichte, Qualitaetsversprechen, Nachhaltigkeit, Team, Zertifikate, Werte. Gilt als SEO-Anker fuer Markennamen-Suchen.",
+    "useForArchetype": "Template fuer jede 'Ueber uns' oder 'Unsere Geschichte' Seite. Rhythmus aus Hero, 4:1-Bannern, Tief-Bannern, Video, Claim-Strip und Werte-Grid ist die vollstaendige dramaturgische Grammatik fuer Brand-Story-Seiten.",
+    "kontrastZuAnderenSeiten": "Extremes Gegenteil der Featured-Line-Seite 'Make it full size' (4 Module, 1 Bild, 0 Videos, 15 ASINs). Zeigt, wie der Store je nach Seitenfunktion die Dichte drastisch variiert."
+  },
+  "openQuestions": [
+    "Alle Bildinhalte (Hero, Story-Banner, Tief-Banner, Claim-Strip, Werte-Kacheln, Cross-Link-Kacheln) sind per DOM nicht lesbar, weil keine aria-labels vergeben sind und der Text ausschliesslich als Grafik vorliegt. Fuer inhaltliche Auswertung ist ein Vision-Check zwingend notwendig.",
+    "Das Video in Modul 06 hat keinen DOM-Titel und keinen Poster-Alt. Video-Inhalt (Interview, Produktions-Tour, Kampagnen-Video) per Vision-Check pruefen.",
+    "Die Cross-Link-Ziele der 2-Kachel-Grids in Modul 15 und 16 konnten per DOM nicht eindeutig ermittelt werden, weil die Links ohne Aria-Label erscheinen. Ziel-URLs bei spaeterem Crawl mit erneutem Laden pruefen.",
+    "Die Reihenfolge von Video und Story-Bannern (Modul 06 zwischen Banner 3 und 4) deutet auf eine bewusste Dramaturgie 'emotional, informativ, emotional' hin. Zu pruefen, ob dieses Muster bewusst gesetzt ist oder CMS-bedingt.",
+    "Die Bildproportion 8.03 zu 1 (Modul 13 Claim-Strip) ist im Store nur hier zu finden. Zu pruefen, ob dieses Format ein Signatur-Element der UEBER UNS Seite ist oder in weiteren Seiten vorkommt."
+  ]
+}

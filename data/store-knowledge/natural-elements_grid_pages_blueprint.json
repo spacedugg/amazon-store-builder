@@ -1,0 +1,164 @@
+{
+  "documentType": "grid_pages_blueprint",
+  "brandName": "natural elements",
+  "crawledAt": "2026-04-19",
+  "purpose": "Dedizierte Analyse der reinen Produkt-Grid-Seiten und der '(2nd)' Entry-Points. Korrigiert das Missverstaendnis aus der Legacy-Analyse vom 10. April 2026, die alle 7 '(2nd)' Seiten als 'pure_product_grid' klassifiziert hat. Tatsaechlich handelt es sich bei den '(2nd)' Seiten um Deals- oder Angebots-Unterseiten unter 'Unsere Empfehlungen', die aktuell keine aktiven Angebote enthalten.",
+  "discoveryNote": "Am 19. April 2026 wurden alle geprueften '(2nd)' Seiten im Status 'Entschuldigung, derzeit sind keine Angebote verfuegbar' gefunden. Sie sind keine alternativen Produkt-Grids fuer die Hauptkategorien, sondern leere Deal-Pages.",
+  "gridArchetypes": {
+    "alle_produkte_primaer": {
+      "description": "Primaerer 'Alle Produkte' Einstieg. Hat drei editoriale Elemente (Shoppable-Hero, 2 Banner) und ein 'Top-Neuheiten' Produkt-Grid. KEIN reiner Produkt-Grid, sondern kuratiertes Sortiments-Overview.",
+      "keyPattern": "Header+Nav > Shoppable-Hero 'Produkte ansehen' > Editorial-Banner > Product-Grid 'Top-Neuheiten' 25 ASINs > Editorial-Banner > Teilen-Footer",
+      "usedBy": ["Alle Produkte (primaere Version, pageId 56C2E5EE)"]
+    },
+    "empty_deals_page": {
+      "description": "Deals- oder Angebots-Unterseite unter 'Unsere Empfehlungen'. Aktuell alle 7 '(2nd)' Seiten leer ('Entschuldigung, derzeit sind keine Angebote verfuegbar'). Bei aktiven Angeboten vermutlich mit Angebots-Grid gefuellt.",
+      "keyPattern": "Header+Nav > 'ENTDECKE ALLE ANGEBOTE' optional > 'Empfohlene Angebote' Sektion (leer oder gefuellt) > Teilen-Footer",
+      "usedBy": [
+        "Alle Produkte (2nd) pageId 1B1E5B14",
+        "Sport & Energie (2nd) pageId FE657234",
+        "Immunsystem (2nd) pageId 50B1B8C1",
+        "Beauty & Anti-Aging (2nd) pageId 7CCF0BFB",
+        "Wohlbefinden & Anti Stress (2nd) pageId 4A5AF019",
+        "Verdauung & Gewicht (2nd) pageId E4745A5C",
+        "Knochen & Beweglichkeit (2nd) pageId 6FB59F47"
+      ],
+      "visualContent": "Sehr minimalistisch, vermutlich rein DOM-Text ohne Editorial-Grafik. Header zeigt Breadcrumb 'natural elements > Unsere Empfehlungen > Kategorie-Name'.",
+      "strategicContext": "Die Seiten fungieren als SEO- und Navigations-Platzhalter fuer den Fall, dass Amazon-Deals oder befristete Angebote aktiv sind. Wenn keine Angebote laufen, bleiben die Seiten leer mit Standard-Entschuldigungs-Text."
+    }
+  },
+  "pages": [
+    {
+      "pageName": "Alle Produkte",
+      "pageId": "56C2E5EE-81A5-4F07-8BB3-38927E13937B",
+      "archetype": "alle_produkte_primaer",
+      "verifiedAt": "2026-04-19",
+      "structure": {
+        "totalRows": 6,
+        "modules": [
+          {
+            "position": 1,
+            "moduleName": "Header, Navigation, Breadcrumb",
+            "moduleType": "global_template"
+          },
+          {
+            "position": 2,
+            "moduleName": "Shoppable-Hero 'Produkte ansehen'",
+            "moduleType": "editorial_tile_interactive_image",
+            "widgetClass": "EditorialRow > EditorialTile > EditorialTileInteractiveImage",
+            "tileCount": 1,
+            "ctaText": "Produkte ansehen",
+            "ctaTrigger": "Klickbar, verlinkt auf Shoppable-Produkt-Seite oder Filter",
+            "visualContent": "Interaktives Hero-Bild mit integrierter Produkt-Entdeckung"
+          },
+          {
+            "position": 3,
+            "moduleName": "Editorial-Banner 1",
+            "moduleType": "editorial_tile_image_full_width",
+            "tileCount": 1,
+            "visualContent": "Produkt-Sortiment-Banner, vermutlich mit Sortiments-Claim"
+          },
+          {
+            "position": 4,
+            "moduleName": "Produkt-Grid 'Top-Neuheiten'",
+            "moduleType": "product_grid",
+            "heading": "Top-Neuheiten",
+            "asinCount": 25,
+            "firstAsin": "Apfelessig Gummies, 120 Gummibaerchen mit Apfelessig, Vitamin B6, B12, Folsaeure und Jod"
+          },
+          {
+            "position": 5,
+            "moduleName": "Editorial-Banner 2",
+            "moduleType": "editorial_tile_image_full_width",
+            "tileCount": 1,
+            "visualContent": "Abschlussbanner vor dem Footer"
+          },
+          {
+            "position": 6,
+            "moduleName": "Teilen-Footer",
+            "moduleType": "global_template"
+          }
+        ]
+      },
+      "designRationale": "Die 'Alle Produkte' Seite ist kein reines Grid, sondern nutzt eine komprimierte Variante des Hub-Templates: Shoppable-Hero statt grossem Editorial-Hero, nur 1 Product-Grid mit 25 Top-Neuheiten statt gross-Sortiment, 2 sanfte Editorial-Banner als Rahmung. Strategie: dem Nutzer einen schnellen Ueberblick ueber die Neuheiten geben, ohne in eine spezifische Kategorie zu zwingen."
+    },
+    {
+      "pageName": "Alle Produkte (2nd)",
+      "pageId": "1B1E5B14-3E24-4435-90AC-1028937D2104",
+      "archetype": "empty_deals_page",
+      "verifiedAt": "2026-04-19",
+      "structure": {
+        "totalRows": 4,
+        "modules": [
+          {"position": 1, "moduleName": "Header, Navigation, Breadcrumb 'Unsere Empfehlungen > Alle Produkte'"},
+          {"position": 2, "moduleName": "ENTDECKE ALLE ANGEBOTE Claim"},
+          {"position": 3, "moduleName": "Empfohlene Angebote (leer)"},
+          {"position": 4, "moduleName": "Teilen-Footer"}
+        ]
+      },
+      "breadcrumb": "natural elements > Unsere Empfehlungen > Alle Produkte",
+      "emptyReason": "Keine aktiven Angebote zum Crawl-Zeitpunkt"
+    },
+    {
+      "pageName": "Immunsystem (2nd)",
+      "pageId": "50B1B8C1-7F47-4544-9445-AF37B3550E69",
+      "archetype": "empty_deals_page",
+      "verifiedAt": "2026-04-19",
+      "structure": {
+        "totalRows": 3,
+        "modules": [
+          {"position": 1, "moduleName": "Header, Navigation, Breadcrumb 'Unsere Empfehlungen > Immunsystem'"},
+          {"position": 2, "moduleName": "Empfohlene Angebote (leer)"},
+          {"position": 3, "moduleName": "Teilen-Footer"}
+        ]
+      },
+      "breadcrumb": "natural elements > Unsere Empfehlungen > Immunsystem",
+      "emptyReason": "Keine aktiven Angebote zum Crawl-Zeitpunkt"
+    },
+    {
+      "pageName": "Sport & Energie (2nd)",
+      "pageId": "FE657234-26BB-457E-889E-57048ABF42F3",
+      "archetype": "empty_deals_page",
+      "verifiedAt": "2026-04-19 (nicht einzeln verifiziert, Struktur-Annahme)",
+      "breadcrumb": "natural elements > Unsere Empfehlungen > Sport & Energie",
+      "emptyReason": "Vermutlich gleiche leere Struktur wie die anderen (2nd) Seiten"
+    },
+    {
+      "pageName": "Beauty & Anti-Aging (2nd)",
+      "pageId": "7CCF0BFB-88C4-4819-BA9C-21B7D1DE1B3A",
+      "archetype": "empty_deals_page",
+      "verifiedAt": "2026-04-19 (nicht einzeln verifiziert)",
+      "breadcrumb": "natural elements > Unsere Empfehlungen > Beauty & Anti-Aging"
+    },
+    {
+      "pageName": "Wohlbefinden & Anti Stress (2nd)",
+      "pageId": "4A5AF019-F326-4B06-8049-827104C543EC",
+      "archetype": "empty_deals_page",
+      "verifiedAt": "2026-04-19 (nicht einzeln verifiziert)",
+      "breadcrumb": "natural elements > Unsere Empfehlungen > Wohlbefinden & Anti Stress"
+    },
+    {
+      "pageName": "Verdauung & Gewicht (2nd)",
+      "pageId": "E4745A5C-D78F-47D4-8471-835F3E0770F9",
+      "archetype": "empty_deals_page",
+      "verifiedAt": "2026-04-19 (nicht einzeln verifiziert)",
+      "breadcrumb": "natural elements > Unsere Empfehlungen > Verdauung & Gewicht"
+    },
+    {
+      "pageName": "Knochen & Beweglichkeit (2nd)",
+      "pageId": "6FB59F47-6124-4486-AE5A-8D62C4469E87",
+      "archetype": "empty_deals_page",
+      "verifiedAt": "2026-04-19 (nicht einzeln verifiziert)",
+      "breadcrumb": "natural elements > Unsere Empfehlungen > Knochen & Beweglichkeit"
+    }
+  ],
+  "implicationsForGenerator": {
+    "builderRule": "Im Amazon Store Builder sollten 'Deal-Seiten' NICHT als Teil des Haupt-Hub-Systems behandelt werden. Wenn der Kunde 'Unsere Empfehlungen' aktiviert, muessen wir auch die Unterseiten pro Kategorie anlegen, aber mit Fallback-Text fuer leere Angebote. Oder wir weisen den Kunden explizit darauf hin, dass ohne aktive Amazon-Deals diese Seiten leer bleiben.",
+    "contentStrategy": "Ein moegliches Upgrade: statt leerer Seiten koennten wir in Kundenvorschlaegen 'Immer-verfuegbare Bestseller' als Fallback-Content anbieten. Das wuerde diese Seiten zu echten zweiten Entry-Points fuer Kategorien machen.",
+    "renaming": "Die Bezeichnung '(2nd)' in der analysis.json ist irrefuehrend. Korrekte Bezeichnung waere 'Deal-Unterseite' oder 'Angebots-Unterseite'. Fuer die Blueprint-Grammar sollten wir die Seiten als 'deals_category_landing' markieren."
+  },
+  "openQuestions": [
+    "Wenn Amazon-Deals aktiv sind, wie sieht die gefuellte Version der Deal-Seite aus? Hat sie dann ein eigenes Grid, Banner, oder nur die Angebots-Liste?",
+    "Die 'Unsere Empfehlungen' Hauptseite (10 Editorial-Bilder laut Legacy-Analyse) wurde nicht tief gecrawlt. Zu pruefen, ob sie als klassischer Hub funktioniert und die 7 Deal-Unterseiten als Navigations-Ziele fungieren.",
+    "Fehlen der Deal-Seiten auf der Hauptnavigation - sie sind nur ueber 'Unsere Empfehlungen' zugaenglich. Zu pruefen, ob das ein bewusstes Store-Design-Muster ist oder ob Amazon sie in Zukunft in die Top-Level-Nav aufnimmt."
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "pageUrl": "https://www.amazon.de/stores/page/0C5288E7-93DF-4272-890E-78EFF3DD0813",
+  "pageId": "0C5288E7-93DF-4272-890E-78EFF3DD0813",
+  "pageName": "Make it full size",
+  "pageNameLegacy": "SoProtein Vegan",
+  "pageLevel": 1,
+  "parentCategory": null,
+  "breadcrumb": "natural elements > unsere Neuheiten > Make it full size",
+  "pageType": "featured_campaign",
+  "crawledAt": "2026-04-19",
+  "storeVersionNote": "Die Seite wurde zwischen 10. April 2026 (legacy analysis: 2 Editorial-Bilder, 3 Videos, Name 'SoProtein Vegan') und 19. April 2026 stark vereinfacht. Jetzt nur noch Hero-Banner + Produkt-Grid. Renaming zu 'Make it full size' deutet auf Kampagnen-Umschwenk auf Volumen-USP (690 g Dosen statt Probiergrößen).",
+  "archetype": {
+    "name": "featured_line_minimal",
+    "description": "Minimalistische Kampagnen- oder Produktlinien-Seite unter Level 1. Nur drei sichtbare Content-Bereiche: 1) breiter Hero-Banner mit eingebetteter Kampagnen-Botschaft, 2) flaches Produkt-Grid ohne Zwischen-Banner, 3) Teilen-Footer. Kein Editorial-Rhythmus, kein Produktberater, keine Showcases. Strategie: der Hero trägt die komplette Kampagnen-Erzählung, das Grid führt direkt in den Kauf.",
+    "applicableTo": "Level 1 Featured-Line oder Kampagnen-Seiten, die NICHT Hub-Charakter haben. In diesem Store sehr wahrscheinlich auch verwendet für: potenzielle Nachfolge-Kampagnen, Launch-Seiten einzelner Produktlinien. Sollte NICHT für Kategorie-Hubs oder Sub-Kategorien verwendet werden."
+  },
+  "modules": [
+    {
+      "moduleId": "soprotein_01_header_nav",
+      "position": 1,
+      "domRow": 0,
+      "moduleName": "Header, Navigation, Breadcrumb",
+      "moduleType": "global_template",
+      "layoutShape": "full_width_bar",
+      "tileCount": 1,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "navigation",
+          "visualContent": "Globaler Amazon-Store-Kopf: Logo 'natural elements', Folgen-Button, 2-zeilige Hauptnavigation mit allen 12 Hauptkategorien (STARTSEITE, UNSERE NEUHEITEN [aktiv], ALLE PRODUKTE, IMMUNSYSTEM, SPORT und ENERGIE, BEAUTY und ANTI AGING, KNOCHEN und BEWEGLICHKEIT, WOHLBEFINDEN und ANTI STRESS, VERDAUUNG und GEWICHT, GAMING, GESCHENK-SETS, UEBER UNS). Breadcrumb: natural elements > unsere Neuheiten > Make it full size.",
+          "textOnImage": "keine, DOM-generiert",
+          "textOnImageContext": "Nav- und Breadcrumb-Texte sind HTML-Text, keine eingebettete Grafik",
+          "ctaText": null,
+          "linksTo": "Alle Kategorien und Elternseite 'unsere Neuheiten'",
+          "backgroundStyle": "weiss",
+          "dominantColors": ["weiss", "schwarz"]
+        }
+      ],
+      "designRationale": "Global-Template. Die Aktiv-Markierung liegt auf 'UNSERE NEUHEITEN', dadurch wird die Kampagnen-Seite als Unterseite der Neuheiten positioniert.",
+      "relationToNextModule": "Nahtloser Uebergang in den Kampagnen-Hero ohne Trenner."
+    },
+    {
+      "moduleId": "soprotein_02_hero_kampagne",
+      "position": 2,
+      "domRow": 1,
+      "moduleName": "Kampagnen-Hero 'Make it full size'",
+      "moduleType": "editorial_tile_image_full_width",
+      "layoutShape": "single_full_width_banner",
+      "widgetClass": "EditorialRow > EditorialTile (large) > EditorialTileImage",
+      "tileCount": 1,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "campaign_hero",
+          "imageDimensions": "1309x349 Pixel, angezeigt 1279x341",
+          "aspectRatio": "3.75 zu 1 (sehr breiter Banner, typisch fuer Store-Top-Hero)",
+          "visualContent": "Full-width Hero-Banner mit eingebetteter Kampagnen-Botschaft 'Make it full size'. Text und Bildgestaltung sind Teil der Grafik, keine DOM-Overlays. Der Banner kommuniziert den Umschwenk auf volle Dosen-Groessen (zum Beispiel 690 g statt 150 g Probiergroesse).",
+          "textOnImage": "MAKE IT FULL SIZE",
+          "textOnImageContext": "Der Claim ist ausschliesslich Grafik, liegt als Flaechen-Text auf dem Banner. Keine Sub-Headline im DOM.",
+          "ctaText": null,
+          "ctaTrigger": "Hero ist NICHT klickbar (kein Link im DOM, linkCount=0). Er dient rein zur visuellen Kampagnen-Kommunikation.",
+          "linksTo": null,
+          "backgroundStyle": "vollflaechige Kampagnen-Grafik",
+          "dominantColors": ["zu verifizieren per Vision-Check"],
+          "elementProportions": "100 Prozent Breite, rund 21 Prozent Hoehe des initialen Viewports"
+        }
+      ],
+      "designRationale": "Der Kampagnen-Claim uebernimmt die komplette narrative Funktion. Keine Text-Sektion, kein USP-Banner, kein Produktberater. Die ganze Kommunikation liegt im Hero-Bild, darunter folgt direkt das Produkt-Grid. Strategie: Aufmerksamkeit wecken, direkt zum Sortiment durchleiten.",
+      "relationToNextModule": "Direkt darunter beginnt das Produkt-Grid ohne Zwischen-Banner oder Trenner."
+    },
+    {
+      "moduleId": "soprotein_03_product_grid",
+      "position": 3,
+      "domRow": 2,
+      "moduleName": "Produkt-Grid SoProtein und Protein-Sortiment",
+      "moduleType": "product_grid",
+      "layoutShape": "grid_multi_row",
+      "widgetClass": "ProductGrid",
+      "tileCount": 15,
+      "asinCount": 15,
+      "asins": [
+        "B0F4QX7X1T",
+        "B0F7M3WFXP",
+        "B0FDG9HT4G",
+        "B0FJS1XJMP",
+        "B0CVXWBLHV",
+        "B0DQQ3CND1",
+        "B0CVXTPY82",
+        "B0F53JLNWD",
+        "B0CYSX84CV",
+        "B0FJMDY7GD",
+        "B0F4QWQ2MC",
+        "B0FFMQ22DH",
+        "B0CYSWHFVY",
+        "B0F22278YT",
+        "B0F2GMG2T6"
+      ],
+      "productSamples": [
+        "SoProtein Clear Whey Isolate, Mango Maracuja, 600 g",
+        "SoProtein Whey Complex, Schokolade, 690 g",
+        "SoProtein Vegan Chocolate, 660 g",
+        "SoProtein Whey Complex, Vanilla Milk, 690 g",
+        "Proteinriegel Milky Coconut, 13 g Protein",
+        "Elektrolyte Sticks WORKOUT, Zitrone, 20 Sticks",
+        "Vegan Proteinriegel Brownie Flavour, 10 g Protein"
+      ],
+      "designRationale": "Sortiment-orientiertes Grid mit Fokus auf SoProtein-Linie (Whey, Vegan, Clear) plus ergaenzende Sport-Nutrition-Produkte (Riegel, Elektrolyte). Keine Kategorie-Trenner, keine redaktionellen Zwischen-Blocks, ein einziges durchgehendes Grid. Die 15 Produkte decken die komplette SoProtein-Familie inklusive Cross-Sell ab.",
+      "tiles": [],
+      "relationToNextModule": "Direkt darunter folgt der Teilen-Footer, kein Produktberater, kein Cross-Sell-Banner."
+    },
+    {
+      "moduleId": "soprotein_04_teilen_footer",
+      "position": 4,
+      "domRow": 3,
+      "moduleName": "Teilen-Footer",
+      "moduleType": "global_template",
+      "layoutShape": "single_row_call_to_share",
+      "widgetClass": "EditorialRow > EditorialTile",
+      "tileCount": 1,
+      "tiles": [
+        {
+          "tileIndex": 0,
+          "imageCategory": "social_share",
+          "visualContent": "Zeile 'Teilen. Teilen Sie diese Seite mit Ihren Freunden.' plus Social-Share-Buttons (E-Mail, Facebook, X, usw.).",
+          "textOnImage": "keine, DOM-Text",
+          "textOnImageContext": "Standard-Amazon-Share-Modul",
+          "ctaText": "Teilen",
+          "linksTo": "Social-Share-Dialoge",
+          "backgroundStyle": "weiss",
+          "dominantColors": ["weiss", "schwarz"]
+        }
+      ],
+      "designRationale": "Global-Template. Wird von Amazon automatisch am Ende jeder Store-Seite angehaengt.",
+      "relationToNextModule": "Seitenende."
+    }
+  ],
+  "pageAnalysis": {
+    "totalDomRows": 4,
+    "totalLogicalModules": 4,
+    "editorialImagesActive": 1,
+    "videosActive": 0,
+    "totalProductGridAsins": 15,
+    "contentDensity": "niedrig: die Seite besteht zu 90 Prozent aus Produkt-Grid, nur ein einziger Editorial-Slot",
+    "dominantPalette": "zu verifizieren per Vision-Check des Hero-Banners (Rest der Seite ist Standard-Amazon-Weiss)",
+    "tonalitaetVisual": "Kampagnen-fokussiert, minimalistisch, sehr direkt. Keine Brand-Storytelling-Ebene, kein Bildungs-Content.",
+    "CTA_strategien": "Der Hero liefert KEIN klickbares CTA, sondern ausschliesslich visuellen Kampagnen-Claim. Die eigentliche Conversion erfolgt im Produkt-Grid ueber 'Schnellansicht' und 'In den Einkaufswagen'. Strategie: Hero weckt Aufmerksamkeit, Grid triggert Kauf.",
+    "inhaltlicheTiefe": "Keine Text-Ebene (0 Body-Copy), keine USP-Ikonografie, keine Produkt-Showcases mit Erklaerungen. Die Seite geht davon aus, dass der Nutzer die Marke und die Kategorie Protein schon kennt und nur das Sortiment sehen will.",
+    "useForArchetype": "Template fuer zukuenftige Kampagnen-Seiten oder minimal gepflegte Featured Lines. Wenn wir im Generator eine Seite fuer eine einzelne Produktlinie bauen, deren Marken-Erzaehlung schon auf der Startseite und in der Hub-Kategorie passiert, dann reicht dieses 3-Modul-Template: Hero + Grid + Teilen.",
+    "kontrastZuHubPage": "Starker Kontrast zu 'Immunsystem' (14 Module, 27 ASINs, Editorial-Rhythmus, Produktberater). Same Brand, komplett unterschiedliche Dichte. Begruendung: Kampagnen-Seiten brauchen kein SEO-Longtail, Hub-Seiten schon."
+  },
+  "openQuestions": [
+    "Farbpalette und genaues Motiv des Hero-Banners 'Make it full size' konnten per DOM nicht verifiziert werden und muessten per Vision-Check bestaetigt werden.",
+    "Die Legacy-Analyse vom 10. April 2026 dokumentierte 3 Videos auf dieser Seite. Diese wurden zwischenzeitlich entfernt. Zu pruefen, ob die Videos in einer anderen Store-Seite wieder auftauchen oder komplett geloescht wurden.",
+    "Der Page-Name wurde von 'SoProtein Vegan' zu 'Make it full size' umbenannt. Zu klaeren, ob das dauerhaft ist oder ob es sich um eine zeitlich begrenzte Kampagne handelt.",
+    "Die 30 rohen Tiles im Produkt-Grid bestehen aus 15 einzigartigen ASINs, d. h. jede Kachel existiert doppelt im DOM (vermutlich wegen Desktop/Mobile-Doppelrendering). Fuer unseren Builder irrelevant, aber beim Generieren eigener Grids beachten."
+  ]
+}

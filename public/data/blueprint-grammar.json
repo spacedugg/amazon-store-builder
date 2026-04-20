@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-04-19T22:22:48.192Z",
+    "generatedAt": "2026-04-20T01:59:07.219Z",
     "blueprintCount": 20,
     "blueprintFiles": [
       "bedsure_analysis.json",
@@ -25,8 +25,8 @@
       "twentythree_analysis.json"
     ],
     "totalPages": 294,
-    "totalModules": 172,
-    "totalTiles": 357,
+    "totalModules": 637,
+    "totalTiles": 1354,
     "pageTypeRules": [
       {
         "type": "home",
@@ -68,46 +68,86 @@
   },
   "pageTypes": {
     "about": {
-      "sampleSize": 3,
-      "pageInstances": 3,
+      "sampleSize": 4,
+      "pageInstances": 4,
       "confidence": "low",
       "stores": [
         "BLACKROLL",
         "bedsure",
-        "cloudpillo"
+        "cloudpillo",
+        "natural-elements"
       ],
       "moduleCount": {
-        "n": 3,
+        "n": 4,
         "min": 2,
         "p25": 4,
-        "median": 4,
+        "median": 6,
         "p75": 6,
-        "max": 6
+        "max": 17
       },
       "layoutAtPosition": {
         "1": {
           "Logo Bar": 1,
           "FWB_Brand": 1,
-          "header": 1
+          "header": 1,
+          "full_width_bar": 1
         },
         "2": {
           "Brand Story Narrative": 1,
           "GRID_Story": 1,
-          "std-2equal": 1
+          "std-2equal": 1,
+          "single_full_width_hero": 1
         },
         "3": {
           "Brand Lifestyle Gallery": 1,
-          "divider": 1
+          "divider": 1,
+          "wide_banner_4to1": 1
         },
         "4": {
           "Brand Video": 1,
-          "lg-4grid": 1
+          "lg-4grid": 1,
+          "tall_emotional_banner": 1
         },
         "5": {
-          "divider": 1
+          "divider": 1,
+          "wide_banner_4to1": 1
         },
         "6": {
-          "std-4tiles": 1
+          "std-4tiles": 1,
+          "single_full_width_video": 1
+        },
+        "7": {
+          "wide_banner_4to1": 1
+        },
+        "8": {
+          "wide_banner_4to1": 1
+        },
+        "9": {
+          "wide_banner_4to1": 1
+        },
+        "10": {
+          "wide_banner_4to1": 1
+        },
+        "11": {
+          "tall_emotional_banner": 1
+        },
+        "12": {
+          "medium_banner": 1
+        },
+        "13": {
+          "thin_strip": 1
+        },
+        "14": {
+          "grid_4_tiles_horizontal": 1
+        },
+        "15": {
+          "grid_2_tiles_horizontal": 1
+        },
+        "16": {
+          "grid_2_tiles_horizontal": 1
+        },
+        "17": {
+          "single_row_call_to_share": 1
         }
       },
       "layoutSequences": [
@@ -128,37 +168,64 @@
           "lg-4grid",
           "divider",
           "std-4tiles"
+        ],
+        [
+          "full_width_bar",
+          "single_full_width_hero",
+          "wide_banner_4to1",
+          "tall_emotional_banner",
+          "wide_banner_4to1",
+          "single_full_width_video",
+          "wide_banner_4to1",
+          "wide_banner_4to1",
+          "wide_banner_4to1",
+          "wide_banner_4to1",
+          "tall_emotional_banner",
+          "medium_banner",
+          "thin_strip",
+          "grid_4_tiles_horizontal",
+          "grid_2_tiles_horizontal",
+          "grid_2_tiles_horizontal",
+          "single_row_call_to_share"
         ]
       ],
       "tileCountPerModule": {
         "distribution": {
-          "n": 12,
+          "n": 29,
           "min": 0,
-          "p25": 0,
+          "p25": 1,
           "median": 1,
-          "p75": 3,
+          "p75": 2,
           "max": 8
         },
         "histogram": {
           "0": 4,
-          "1": 3,
-          "2": 1,
+          "1": 17,
+          "2": 3,
           "3": 1,
-          "4": 2,
+          "4": 3,
           "8": 1
         }
       },
       "imageCategoryMix": {
-        "brand": 0.125,
-        "team": 0.0417,
-        "wide": 0.0833,
-        "credentials": 0.0417,
-        "manufacturing": 0.0417,
-        "athlete": 0.0417,
-        "logo": 0.0417,
-        "icon": 0.25,
-        "lifestyle": 0.25,
-        "divider": 0.0833
+        "brand": 0.0652,
+        "team": 0.0217,
+        "wide": 0.0435,
+        "credentials": 0.0217,
+        "manufacturing": 0.0217,
+        "athlete": 0.0217,
+        "logo": 0.0217,
+        "icon": 0.1304,
+        "lifestyle": 0.1304,
+        "divider": 0.0435,
+        "navigation": 0.0217,
+        "brand_hero": 0.0217,
+        "brand_story": 0.1957,
+        "video": 0.0217,
+        "claim_strip": 0.0217,
+        "benefit_icon": 0.087,
+        "category_link": 0.087,
+        "social_share": 0.0217
       },
       "imageCategoryCounts": {
         "brand": 3,
@@ -170,7 +237,15 @@
         "logo": 1,
         "icon": 6,
         "lifestyle": 6,
-        "divider": 2
+        "divider": 2,
+        "navigation": 1,
+        "brand_hero": 1,
+        "brand_story": 9,
+        "video": 1,
+        "claim_strip": 1,
+        "benefit_icon": 4,
+        "category_link": 4,
+        "social_share": 1
       },
       "moduleNameTop": [
         {
@@ -180,39 +255,118 @@
         {
           "name": "Brand Values and Credentials",
           "count": 1
+        },
+        {
+          "name": "Header, Navigation, Breadcrumb",
+          "count": 1
+        },
+        {
+          "name": "Brand-Hero",
+          "count": 1
+        },
+        {
+          "name": "Story-Banner 1 (Einleitung, 4:1)",
+          "count": 1
+        },
+        {
+          "name": "Story-Banner tief (1.89:1)",
+          "count": 1
+        },
+        {
+          "name": "Story-Banner 2 (4:1)",
+          "count": 1
+        },
+        {
+          "name": "Team- oder Marken-Video",
+          "count": 1
+        },
+        {
+          "name": "Story-Banner 3 (4:1)",
+          "count": 1
+        },
+        {
+          "name": "Story-Banner 4 (4:1)",
+          "count": 1
+        },
+        {
+          "name": "Story-Banner 5 (4:1)",
+          "count": 1
+        },
+        {
+          "name": "Story-Banner 6 (4:1)",
+          "count": 1
+        },
+        {
+          "name": "Story-Banner tief 2 (1.89:1)",
+          "count": 1
+        },
+        {
+          "name": "Story-Banner mittel (3.37:1)",
+          "count": 1
+        },
+        {
+          "name": "Claim-Strip (8:1)",
+          "count": 1
+        },
+        {
+          "name": "4-Kachel-Werte-Grid",
+          "count": 1
+        },
+        {
+          "name": "2-Kachel-Grid 1",
+          "count": 1
+        },
+        {
+          "name": "2-Kachel-Grid 2",
+          "count": 1
+        },
+        {
+          "name": "Teilen-Footer",
+          "count": 1
         }
       ]
     },
     "all_products": {
-      "sampleSize": 3,
-      "pageInstances": 3,
+      "sampleSize": 4,
+      "pageInstances": 4,
       "confidence": "low",
       "stores": [
         "bedsure",
         "cloudpillo",
-        "desktronic"
+        "desktronic",
+        "natural-elements"
       ],
       "moduleCount": {
-        "n": 3,
+        "n": 4,
         "min": 1,
         "p25": 1,
-        "median": 1,
+        "median": 4,
         "p75": 4,
-        "max": 4
+        "max": 6
       },
       "layoutAtPosition": {
         "1": {
           "Logo Bar": 1,
-          "minimal": 2
+          "minimal": 2,
+          "full_width_bar": 1
         },
         "2": {
-          "Divider": 1
+          "Divider": 1,
+          "full_width_banner": 1
         },
         "3": {
-          "Wide Promo Tile": 1
+          "Wide Promo Tile": 1,
+          "full_width_banner": 1
         },
         "4": {
-          "Six-Tile Grid": 1
+          "Six-Tile Grid": 1,
+          "product_grid_asin": 1
+        },
+        "5": {
+          "full_width_banner": 1
+        },
+        "6": {
+          "full_width_bar": 1
         }
       },
       "layoutSequences": [
@@ -227,34 +381,69 @@
         ],
         [
           "minimal"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_bar"
         ]
       ],
       "tileCountPerModule": {
         "distribution": {
-          "n": 6,
+          "n": 12,
           "min": 0,
           "p25": 0,
-          "median": 0,
+          "median": 1,
           "p75": 1,
           "max": 3
         },
         "histogram": {
           "0": 4,
-          "1": 1,
+          "1": 7,
           "3": 1
         }
       },
       "imageCategoryMix": {
-        "logo": 0.25,
-        "icon": 0.5,
-        "product": 0.25
+        "logo": 0.1,
+        "icon": 0.2,
+        "product": 0.1,
+        "text_image": 0.6
       },
       "imageCategoryCounts": {
         "logo": 1,
         "icon": 2,
-        "product": 1
+        "product": 1,
+        "text_image": 6
       },
-      "moduleNameTop": []
+      "moduleNameTop": [
+        {
+          "name": "Header, Navigation, Breadcrumb",
+          "count": 1
+        },
+        {
+          "name": "Shoppable-Hero 'Produkte ansehen'",
+          "count": 1
+        },
+        {
+          "name": "Editorial-Banner 1",
+          "count": 1
+        },
+        {
+          "name": "Produkt-Grid 'Top-Neuheiten'",
+          "count": 1
+        },
+        {
+          "name": "Editorial-Banner 2",
+          "count": 1
+        },
+        {
+          "name": "Teilen-Footer",
+          "count": 1
+        }
+      ]
     },
     "bestsellers": {
       "sampleSize": 1,
@@ -329,23 +518,24 @@
       ]
     },
     "category": {
-      "sampleSize": 5,
-      "pageInstances": 24,
+      "sampleSize": 6,
+      "pageInstances": 67,
       "confidence": "medium",
       "stores": [
         "BLACKROLL",
         "bedsure",
         "cloudpillo",
         "desktronic",
+        "natural-elements",
         "nucompany"
       ],
       "moduleCount": {
-        "n": 24,
+        "n": 67,
         "min": 1,
-        "p25": 1,
-        "median": 2,
-        "p75": 2,
-        "max": 7
+        "p25": 2,
+        "median": 7,
+        "p75": 10,
+        "max": 19
       },
       "layoutAtPosition": {
         "1": {
@@ -356,7 +546,9 @@
           "minimal": 1,
           "product-detail-video-heavy": 2,
           "product-detail-video-intensive": 2,
-          "category-mixed": 1
+          "category-mixed": 1,
+          "full_width_bar": 41,
+          "full_width_banner": 2
         },
         "2": {
           "Full-Width Category Banner": 2,
@@ -370,27 +562,103 @@
           "GRID_Products": 2,
           "GRID_VideoHeavy": 1,
           "GRID_Mixed": 1,
-          "divider": 3
+          "divider": 3,
+          "single_full_width_banner": 1,
+          "full_width_banner": 42
         },
         "3": {
           "Four-Square Grid": 2,
           "Product Demonstration Video": 1,
-          "std-2equal": 3
+          "std-2equal": 3,
+          "grid_multi_row": 1,
+          "full_width_banner": 26,
+          "shoppable_interactive_image": 10,
+          "full_width_bar": 6
         },
         "4": {
           "Full-Width Secondary Banner": 1,
-          "divider": 3
+          "divider": 3,
+          "single_row_call_to_share": 1,
+          "product_showcase": 22,
+          "full_width_banner": 12,
+          "product_showcase_carousel": 1,
+          "full_width_bar": 1
         },
         "5": {
           "Four-Square Grid": 1,
           "lg-4grid": 2,
-          "std-2equal": 1
+          "std-2equal": 1,
+          "product_showcase": 18,
+          "product_grid_asin": 6,
+          "full_width_banner": 10,
+          "product_showcase_carousel": 1
         },
         "6": {
-          "divider": 1
+          "divider": 1,
+          "product_grid_asin": 12,
+          "full_width_banner": 4,
+          "product_showcase_carousel": 1,
+          "product_showcase": 16,
+          "full_width_bar": 2
         },
         "7": {
-          "lg-4grid": 1
+          "lg-4grid": 1,
+          "full_width_banner": 12,
+          "full_width_bar": 3,
+          "3_stacked_banners": 1,
+          "product_grid_asin": 17
+        },
+        "8": {
+          "full_width_bar": 3,
+          "full_width_banner": 26,
+          "4_stacked_banners": 1
+        },
+        "9": {
+          "full_width_banner": 25,
+          "full_width_bar": 2
+        },
+        "10": {
+          "4_tile_grid": 1,
+          "footer_share": 1,
+          "full_width_bar": 10,
+          "large_plus_2_stacked": 9,
+          "full_width_banner": 4
+        },
+        "11": {
+          "2_tile_grid": 1,
+          "4_tile_grid": 9,
+          "full_width_banner": 2,
+          "full_width_bar": 2
+        },
+        "12": {
+          "full_width_banner": 10,
+          "full_width_bar": 2
+        },
+        "13": {
+          "full_width_banner": 7,
+          "full_width_bar": 3
+        },
+        "14": {
+          "footer_share": 1,
+          "full_width_banner": 6
+        },
+        "15": {
+          "full_width_banner": 4,
+          "full_width_bar": 2
+        },
+        "16": {
+          "full_width_banner": 4
+        },
+        "17": {
+          "full_width_banner": 2,
+          "full_width_bar": 2
+        },
+        "18": {
+          "full_width_banner": 1,
+          "full_width_bar": 1
+        },
+        "19": {
+          "full_width_bar": 1
         }
       },
       "layoutSequences": [
@@ -493,6 +761,503 @@
           "category-mixed"
         ],
         [
+          "full_width_bar",
+          "single_full_width_banner",
+          "grid_multi_row",
+          "single_row_call_to_share"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_banner",
+          "full_width_banner",
+          "shoppable_interactive_image",
+          "full_width_banner",
+          "full_width_banner",
+          "product_grid_asin",
+          "3_stacked_banners",
+          "full_width_banner",
+          "full_width_banner",
+          "4_tile_grid",
+          "2_tile_grid",
+          "full_width_banner",
+          "full_width_banner",
+          "footer_share"
+        ],
+        [
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase_carousel",
+          "product_showcase_carousel",
+          "product_showcase_carousel",
+          "product_grid_asin",
+          "4_stacked_banners",
+          "full_width_banner",
+          "footer_share"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_showcase",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_showcase",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "shoppable_interactive_image",
+          "full_width_banner",
+          "full_width_banner",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "large_plus_2_stacked",
+          "4_tile_grid",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "product_grid_asin",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_showcase",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_showcase",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_showcase",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_showcase",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "shoppable_interactive_image",
+          "full_width_banner",
+          "full_width_banner",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "large_plus_2_stacked",
+          "4_tile_grid",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_showcase",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_showcase",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_showcase",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "shoppable_interactive_image",
+          "full_width_banner",
+          "full_width_banner",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "large_plus_2_stacked",
+          "4_tile_grid",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "shoppable_interactive_image",
+          "full_width_banner",
+          "full_width_banner",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "large_plus_2_stacked",
+          "4_tile_grid",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_showcase",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_showcase",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "shoppable_interactive_image",
+          "full_width_banner",
+          "full_width_banner",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "large_plus_2_stacked",
+          "4_tile_grid",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_showcase",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_showcase",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_showcase",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "shoppable_interactive_image",
+          "full_width_banner",
+          "full_width_banner",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "large_plus_2_stacked",
+          "4_tile_grid",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_showcase",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_showcase",
+          "product_showcase",
+          "product_showcase",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "shoppable_interactive_image",
+          "full_width_banner",
+          "full_width_banner",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "large_plus_2_stacked",
+          "4_tile_grid",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "product_grid_asin",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "shoppable_interactive_image",
+          "full_width_banner",
+          "full_width_banner",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "large_plus_2_stacked",
+          "4_tile_grid",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "shoppable_interactive_image",
+          "full_width_banner",
+          "full_width_banner",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "large_plus_2_stacked",
+          "4_tile_grid",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_bar"
+        ],
+        [
           "1"
         ],
         [
@@ -501,53 +1266,206 @@
       ],
       "tileCountPerModule": {
         "distribution": {
-          "n": 56,
+          "n": 467,
           "min": 0,
-          "p25": 0,
+          "p25": 1,
           "median": 1,
-          "p75": 3,
-          "max": 18
+          "p75": 1,
+          "max": 27
         },
         "histogram": {
           "0": 21,
-          "1": 14,
-          "2": 4,
-          "3": 4,
-          "4": 3,
+          "1": 336,
+          "2": 18,
+          "3": 23,
+          "4": 23,
           "6": 1,
           "8": 2,
           "9": 3,
-          "10": 1,
-          "12": 1,
+          "10": 14,
+          "12": 12,
           "13": 1,
-          "18": 1
+          "15": 10,
+          "18": 1,
+          "20": 1,
+          "27": 1
         }
       },
       "imageCategoryMix": {
-        "lifestyle": 0.1875,
-        "sleep": 0.0357,
-        "video": 0.0179,
-        "wide": 0.1071,
-        "category": 0.0446,
-        "product": 0.2232,
-        "none": 0.1071,
-        "logo": 0.0357,
-        "icon": 0.1786,
-        "divider": 0.0625
+        "lifestyle": 0.0912,
+        "sleep": 0.004,
+        "video": 0.002,
+        "wide": 0.012,
+        "category": 0.005,
+        "product": 0.494,
+        "none": 0.012,
+        "logo": 0.004,
+        "icon": 0.02,
+        "divider": 0.007,
+        "navigation": 0.0391,
+        "campaign_hero": 0.001,
+        "social_share": 0.0391,
+        "text_image": 0.1894,
+        "creative": 0.0501,
+        "store_hero": 0.002,
+        "benefit": 0.0281
       },
       "imageCategoryCounts": {
-        "lifestyle": 21,
+        "lifestyle": 91,
         "sleep": 4,
         "video": 2,
         "wide": 12,
         "category": 5,
-        "product": 25,
+        "product": 493,
         "none": 12,
         "logo": 4,
         "icon": 20,
-        "divider": 7
+        "divider": 7,
+        "navigation": 39,
+        "campaign_hero": 1,
+        "social_share": 39,
+        "text_image": 189,
+        "creative": 50,
+        "store_hero": 2,
+        "benefit": 28
       },
       "moduleNameTop": [
+        {
+          "name": "Teilen-Footer",
+          "count": 41
+        },
+        {
+          "name": "Header, Navigation, Breadcrumb",
+          "count": 39
+        },
+        {
+          "name": "Produkt-Grid",
+          "count": 33
+        },
+        {
+          "name": "Einleitungs-Text-Banner",
+          "count": 23
+        },
+        {
+          "name": "Themen-Hero",
+          "count": 22
+        },
+        {
+          "name": "Product-Showcase 1",
+          "count": 22
+        },
+        {
+          "name": "Stacked-Navigations-Banner",
+          "count": 22
+        },
+        {
+          "name": "Product-Showcase 2",
+          "count": 18
+        },
+        {
+          "name": "Product-Showcase 3",
+          "count": 16
+        },
+        {
+          "name": "Produktberater-Teaser",
+          "count": 10
+        },
+        {
+          "name": "Saison-Hero",
+          "count": 9
+        },
+        {
+          "name": "Shoppable-Bestseller",
+          "count": 9
+        },
+        {
+          "name": "USP-Icons-Banner",
+          "count": 9
+        },
+        {
+          "name": "Trenner-Claim",
+          "count": 9
+        },
+        {
+          "name": "Sub-Kategorie-Banner 1",
+          "count": 9
+        },
+        {
+          "name": "Sub-Kategorie-Banner 2",
+          "count": 9
+        },
+        {
+          "name": "Sub-Kategorie-Banner 3",
+          "count": 9
+        },
+        {
+          "name": "Produktberater",
+          "count": 9
+        },
+        {
+          "name": "Kategorien-Grid",
+          "count": 9
+        },
+        {
+          "name": "Video-Einspieler",
+          "count": 9
+        },
+        {
+          "name": "Empfohlene Angebote (leer)",
+          "count": 7
+        },
+        {
+          "name": "Video-Einspieler 1",
+          "count": 6
+        },
+        {
+          "name": "Editorial-Closer 1",
+          "count": 6
+        },
+        {
+          "name": "Editorial-Closer 2",
+          "count": 6
+        },
+        {
+          "name": "Editorial-Closer 3",
+          "count": 4
+        },
+        {
+          "name": "Editorial-Closer 4",
+          "count": 4
+        },
+        {
+          "name": "Video-Einspieler 2",
+          "count": 3
+        },
+        {
+          "name": "Hero mit Markenlogo und Breadcrumb",
+          "count": 2
+        },
+        {
+          "name": "Teilen-Bereich",
+          "count": 2
+        },
+        {
+          "name": "Tool-Hero",
+          "count": 2
+        },
+        {
+          "name": "Einleitungs-Banner",
+          "count": 2
+        },
+        {
+          "name": "Interaktives Filter-Modul",
+          "count": 2
+        },
+        {
+          "name": "Editorial-Closer 5",
+          "count": 2
+        },
+        {
+          "name": "Video-Einspieler 3",
+          "count": 2
+        },
         {
           "name": "Sleep Category Hero Banner",
           "count": 1
@@ -587,12 +1505,36 @@
         {
           "name": "Resistance Bands Product Showcase with Training Content",
           "count": 1
+        },
+        {
+          "name": "Kampagnen-Hero 'Make it full size'",
+          "count": 1
+        },
+        {
+          "name": "Produkt-Grid SoProtein und Protein-Sortiment",
+          "count": 1
+        },
+        {
+          "name": "Saison-Hero WINTER YEAH",
+          "count": 1
+        },
+        {
+          "name": "Shoppable Immun-Bestseller",
+          "count": 1
+        },
+        {
+          "name": "Immun-USP-Banner",
+          "count": 1
+        },
+        {
+          "name": "Visueller Trennbanner",
+          "count": 1
         }
       ]
     },
     "home": {
-      "sampleSize": 18,
-      "pageInstances": 18,
+      "sampleSize": 19,
+      "pageInstances": 19,
       "confidence": "high",
       "stores": [
         "BLACKROLL",
@@ -609,18 +1551,19 @@
         "manscaped",
         "masterchef",
         "more-nutrition",
+        "natural-elements",
         "nespresso",
         "nucompany",
         "trixie",
         "twentythree"
       ],
       "moduleCount": {
-        "n": 18,
+        "n": 19,
         "min": 2,
         "p25": 4,
         "median": 5,
         "p75": 6,
-        "max": 9
+        "max": 13
       },
       "layoutAtPosition": {
         "1": {
@@ -629,7 +1572,8 @@
           "FWB_Primary": 1,
           "lg-4square-lifestyle": 1,
           "hero-full": 10,
-          "divider-top": 1
+          "divider-top": 1,
+          "full_width_banner": 1
         },
         "2": {
           "1": 2,
@@ -640,6 +1584,7 @@
           "lg-2grid-wide": 2,
           "lg-4grid-square": 1,
           "hero-full": 1,
+          "full_width_banner": 1,
           "std-2equal": 2
         },
         "3": {
@@ -653,6 +1598,7 @@
           "2x2grid-small": 1,
           "lg-4grid-narrow": 2,
           "divider-narrow": 1,
+          "full_width_banner": 1,
           "std-2equal": 2,
           "lg-4grid-mixed": 1
         },
@@ -667,7 +1613,8 @@
           "lg-4grid-mixed": 1,
           "claim-banner": 1,
           "divider-promotional": 1,
-          "divider-narrow": 1
+          "divider-narrow": 1,
+          "full_width_banner": 1
         },
         "5": {
           "1": 1,
@@ -678,28 +1625,45 @@
           "team-banner": 1,
           "lg-4grid (3 Reihen)": 1,
           "hero-full-alt": 1,
-          "mid-banner": 1
+          "mid-banner": 1,
+          "full_width_banner": 1
         },
         "6": {
           "1": 2,
           "divider-aesthetic": 1,
           "std-2equal": 2,
           "benefit-bar": 1,
-          "divider-bottom": 1
+          "divider-bottom": 1,
+          "large_plus_2_stacked": 1
         },
         "7": {
           "1": 1,
           "product-showcase-secondary": 1,
-          "std-2equal": 1
+          "std-2equal": 1,
+          "full_width_banner": 1
         },
         "8": {
           "1": 1,
           "brand-values-section": 1,
-          "std-3tiles": 1
+          "std-3tiles": 1,
+          "full_width_banner": 1
         },
         "9": {
           "1": 2,
-          "value-propositions": 1
+          "value-propositions": 1,
+          "large_plus_2_stacked": 1
+        },
+        "10": {
+          "full_width_banner": 1
+        },
+        "11": {
+          "4_tile_grid": 1
+        },
+        "12": {
+          "4_tile_grid": 1
+        },
+        "13": {
+          "product_grid_asin": 1
         }
       },
       "layoutSequences": [
@@ -808,6 +1772,21 @@
           "divider-bottom"
         ],
         [
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "large_plus_2_stacked",
+          "full_width_banner",
+          "full_width_banner",
+          "large_plus_2_stacked",
+          "full_width_banner",
+          "4_tile_grid",
+          "4_tile_grid",
+          "product_grid_asin"
+        ],
+        [
           "hero-full",
           "divider-narrow",
           "lg-2grid-wide",
@@ -837,7 +1816,7 @@
       ],
       "tileCountPerModule": {
         "distribution": {
-          "n": 95,
+          "n": 108,
           "min": 0,
           "p25": 1,
           "median": 1,
@@ -846,52 +1825,54 @@
         },
         "histogram": {
           "0": 6,
-          "1": 50,
+          "1": 58,
           "2": 18,
-          "3": 3,
-          "4": 5,
+          "3": 4,
+          "4": 8,
           "5": 1,
           "6": 1,
           "8": 8,
-          "10": 2,
+          "10": 3,
           "12": 1
         }
       },
       "imageCategoryMix": {
-        "product": 0.0762,
-        "none": 0.0143,
-        "lifestyle": 0.1238,
-        "trust": 0.0048,
-        "wide": 0.0095,
-        "brand": 0.0048,
-        "hero": 0.0619,
-        "benefit": 0.019,
-        "icon": 0.0286,
-        "creative": 0.0619,
-        "divider": 0.081,
-        "category": 0.4619,
-        "feature": 0.0048,
-        "small": 0.019,
-        "text_image": 0.019,
-        "promotional": 0.0095
+        "product": 0.1193,
+        "none": 0.0123,
+        "lifestyle": 0.1276,
+        "trust": 0.0041,
+        "wide": 0.0082,
+        "brand": 0.0041,
+        "hero": 0.0535,
+        "benefit": 0.0288,
+        "icon": 0.0247,
+        "creative": 0.0658,
+        "divider": 0.07,
+        "category": 0.3992,
+        "feature": 0.0041,
+        "small": 0.0165,
+        "text_image": 0.0494,
+        "promotional": 0.0082,
+        "store_hero": 0.0041
       },
       "imageCategoryCounts": {
-        "product": 16,
+        "product": 29,
         "none": 3,
-        "lifestyle": 26,
+        "lifestyle": 31,
         "trust": 1,
         "wide": 2,
         "brand": 1,
         "hero": 13,
-        "benefit": 4,
+        "benefit": 7,
         "icon": 6,
-        "creative": 13,
+        "creative": 16,
         "divider": 17,
         "category": 97,
         "feature": 1,
         "small": 4,
-        "text_image": 4,
-        "promotional": 2
+        "text_image": 12,
+        "promotional": 2,
+        "store_hero": 1
       },
       "moduleNameTop": [
         {
@@ -912,6 +1893,310 @@
         },
         {
           "name": "Footer Trust & Information Banner",
+          "count": 1
+        },
+        {
+          "name": "Hero mit Markenlogo",
+          "count": 1
+        },
+        {
+          "name": "Kategorie-Navigation",
+          "count": 1
+        },
+        {
+          "name": "Video Intro mit Marken-Claim",
+          "count": 1
+        },
+        {
+          "name": "Shoppable Bestseller",
+          "count": 1
+        },
+        {
+          "name": "Editorial Banner Neuheiten",
+          "count": 1
+        },
+        {
+          "name": "Produktberater mit Quiz-Widget",
+          "count": 1
+        },
+        {
+          "name": "Video 2 mit Naturkulisse",
+          "count": 1
+        },
+        {
+          "name": "Shoppable Pflanzen-Tiegel",
+          "count": 1
+        },
+        {
+          "name": "Trust und USP-Modul",
+          "count": 1
+        },
+        {
+          "name": "Kampagnen-Banner Sports Series",
+          "count": 1
+        },
+        {
+          "name": "Kategorien-Grid Teil 1",
+          "count": 1
+        },
+        {
+          "name": "Kategorien-Grid Teil 2",
+          "count": 1
+        },
+        {
+          "name": "Produktgrid natural elements Sortiment",
+          "count": 1
+        }
+      ]
+    },
+    "new_arrivals": {
+      "sampleSize": 1,
+      "pageInstances": 1,
+      "confidence": "insufficient",
+      "stores": [
+        "natural-elements"
+      ],
+      "moduleCount": {
+        "n": 1,
+        "min": 13,
+        "p25": 13,
+        "median": 13,
+        "p75": 13,
+        "max": 13
+      },
+      "layoutAtPosition": {
+        "1": {
+          "full_width_bar": 1
+        },
+        "2": {
+          "full_width_banner": 1
+        },
+        "3": {
+          "shoppable_interactive_image": 1
+        },
+        "4": {
+          "full_width_banner": 1
+        },
+        "5": {
+          "full_width_banner": 1
+        },
+        "6": {
+          "product_grid_asin": 1
+        },
+        "7": {
+          "full_width_banner": 1
+        },
+        "8": {
+          "full_width_banner": 1
+        },
+        "9": {
+          "full_width_banner": 1
+        },
+        "10": {
+          "large_plus_2_stacked": 1
+        },
+        "11": {
+          "4_tile_grid": 1
+        },
+        "12": {
+          "full_width_banner": 1
+        },
+        "13": {
+          "full_width_bar": 1
+        }
+      },
+      "layoutSequences": [
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "shoppable_interactive_image",
+          "full_width_banner",
+          "full_width_banner",
+          "product_grid_asin",
+          "full_width_banner",
+          "full_width_banner",
+          "full_width_banner",
+          "large_plus_2_stacked",
+          "4_tile_grid",
+          "full_width_banner",
+          "full_width_bar"
+        ]
+      ],
+      "tileCountPerModule": {
+        "distribution": {
+          "n": 13,
+          "min": 1,
+          "p25": 1,
+          "median": 1,
+          "p75": 3,
+          "max": 15
+        },
+        "histogram": {
+          "1": 9,
+          "3": 2,
+          "4": 1,
+          "15": 1
+        }
+      },
+      "imageCategoryMix": {
+        "navigation": 0.0294,
+        "lifestyle": 0.1471,
+        "product": 0.4706,
+        "benefit": 0.0882,
+        "text_image": 0.2059,
+        "creative": 0.0294,
+        "social_share": 0.0294
+      },
+      "imageCategoryCounts": {
+        "navigation": 1,
+        "lifestyle": 5,
+        "product": 16,
+        "benefit": 3,
+        "text_image": 7,
+        "creative": 1,
+        "social_share": 1
+      },
+      "moduleNameTop": [
+        {
+          "name": "Header, Navigation, Breadcrumb",
+          "count": 1
+        },
+        {
+          "name": "Saison-Hero",
+          "count": 1
+        },
+        {
+          "name": "Shoppable-Bestseller",
+          "count": 1
+        },
+        {
+          "name": "USP-Icons-Banner",
+          "count": 1
+        },
+        {
+          "name": "Trenner-Claim",
+          "count": 1
+        },
+        {
+          "name": "Produkt-Grid",
+          "count": 1
+        },
+        {
+          "name": "Sub-Kategorie-Banner 1",
+          "count": 1
+        },
+        {
+          "name": "Sub-Kategorie-Banner 2",
+          "count": 1
+        },
+        {
+          "name": "Sub-Kategorie-Banner 3",
+          "count": 1
+        },
+        {
+          "name": "Produktberater",
+          "count": 1
+        },
+        {
+          "name": "Kategorien-Grid",
+          "count": 1
+        },
+        {
+          "name": "Video-Einspieler",
+          "count": 1
+        },
+        {
+          "name": "Teilen-Footer",
+          "count": 1
+        }
+      ]
+    },
+    "product_selector": {
+      "sampleSize": 1,
+      "pageInstances": 1,
+      "confidence": "insufficient",
+      "stores": [
+        "natural-elements"
+      ],
+      "moduleCount": {
+        "n": 1,
+        "min": 5,
+        "p25": 5,
+        "median": 5,
+        "p75": 5,
+        "max": 5
+      },
+      "layoutAtPosition": {
+        "1": {
+          "full_width_bar": 1
+        },
+        "2": {
+          "full_width_banner": 1
+        },
+        "3": {
+          "full_width_banner": 1
+        },
+        "4": {
+          "product_grid_asin": 1
+        },
+        "5": {
+          "full_width_bar": 1
+        }
+      },
+      "layoutSequences": [
+        [
+          "full_width_bar",
+          "full_width_banner",
+          "full_width_banner",
+          "product_grid_asin",
+          "full_width_bar"
+        ]
+      ],
+      "tileCountPerModule": {
+        "distribution": {
+          "n": 5,
+          "min": 1,
+          "p25": 1,
+          "median": 1,
+          "p75": 1,
+          "max": 12
+        },
+        "histogram": {
+          "1": 4,
+          "12": 1
+        }
+      },
+      "imageCategoryMix": {
+        "navigation": 0.0625,
+        "text_image": 0.125,
+        "product": 0.75,
+        "social_share": 0.0625
+      },
+      "imageCategoryCounts": {
+        "navigation": 1,
+        "text_image": 2,
+        "product": 12,
+        "social_share": 1
+      },
+      "moduleNameTop": [
+        {
+          "name": "Header, Navigation, Breadcrumb",
+          "count": 1
+        },
+        {
+          "name": "Tool-Hero",
+          "count": 1
+        },
+        {
+          "name": "Interaktives Filter-Modul",
+          "count": 1
+        },
+        {
+          "name": "Produkt-Grid",
+          "count": 1
+        },
+        {
+          "name": "Teilen-Footer",
           "count": 1
         }
       ]

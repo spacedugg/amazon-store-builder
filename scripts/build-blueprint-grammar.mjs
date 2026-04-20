@@ -57,7 +57,11 @@ function normalize(obj) {
 
 // ─── Main ───
 
-const files = readdirSync(INPUT_DIR).filter(f => f.endsWith('.json'));
+// Nur die kanonischen Analysis-Files einlesen. Einzelne Blueprint-Fragmente
+// (zum Beispiel *_startseite_blueprint.json, *_pattern_blueprint.json) liegen
+// im selben Ordner, haben aber kein pages[] auf Top-Level oder wuerden die
+// gleichen Seiten doppelt zaehlen.
+const files = readdirSync(INPUT_DIR).filter(f => f.endsWith('_analysis.json'));
 const blueprints = files.map(f => ({
   file: f,
   data: JSON.parse(readFileSync(join(INPUT_DIR, f), 'utf8')),

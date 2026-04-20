@@ -1,0 +1,645 @@
+{
+  "pageUrl": "https://www.amazon.de/stores/page/3955CCD4-902C-4679-9265-DEC4FCBAA8C8",
+  "pageName": "Startseite",
+  "contentStats": {
+    "totalImages": 12,
+    "totalVideos": 2,
+    "estimatedScrollLength": "very_long"
+  },
+  "modules": [
+    {
+      "moduleId": "startseite_mod_01",
+      "position": 1,
+      "moduleName": "Hero mit Markenlogo",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Logozentrierter Hero statt Lifestyle-Inszenierung. Etabliert die Marke sofort als reduziert, sachlich, vertrauenswürdig im Gegensatz zu lauten Supplement-Konkurrenten.",
+      "relationToNextModule": "Ruhiger Logo-Auftakt übergibt an die Store-Navigation, die sofortige Produktkategorie-Entdeckung ermöglicht.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "store_hero",
+          "visualContent": "Breiter weißer Banner mit dem Marken-Wortzeichen 'natural elements' in schwarz, lowercase, linksbündig begleitet vom stilisierten Logo-Symbol (Tropfen, beziehungsweise Blatt-Silhouette). Keine Produkte, keine Personen, keine dekorativen Elemente. Strikt minimalistisch.",
+          "elementProportions": {
+            "solid_background": 70,
+            "logo": 25,
+            "text": 5
+          },
+          "textOnImage": "natural elements®",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "white",
+          "dominantColors": ["Weiß", "Schwarz"]
+        }
+      ]
+    },
+    {
+      "moduleId": "startseite_mod_02",
+      "position": 2,
+      "moduleName": "Kategorie-Navigation",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Klassische Amazon-Store-Navigationsleiste mit Folgen-Button, Share-Icon, Hauptkategorien und interner Suche. Gibt dem Nutzer Orientierung und schnelle Wege zu Produktgruppen.",
+      "relationToNextModule": "Von Navigation in die erste emotionale Markenerzählung über ein Video.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "visualContent": "Weiße Navigationsleiste mit 'Folgen' Button links, Share-Icon, dann Tabs STARTSEITE (aktiv, unterstrichen), UNSERE NEUHEITEN, ALLE PRODUKTE, IMMUNSYSTEM, MEHR. Rechts eine interne Suchleiste 'Alle natural elements durchsuchen'.",
+          "elementProportions": {
+            "text": 75,
+            "solid_background": 20,
+            "cta_button": 5
+          },
+          "textOnImage": "Folgen · STARTSEITE · UNSERE NEUHEITEN · ALLE PRODUKTE · IMMUNSYSTEM · MEHR · Alle natural elements durchsuchen",
+          "ctaText": "Folgen",
+          "linksTo": "Unterseiten des Stores",
+          "backgroundStyle": "white",
+          "dominantColors": ["Weiß", "Schwarz"]
+        }
+      ]
+    },
+    {
+      "moduleId": "startseite_mod_03",
+      "position": 3,
+      "moduleName": "Video Intro mit Marken-Claim",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Autoplay-Video auf salbeigrünem Hintergrund als emotionaler Einstieg. Text-Overlay etabliert den inhaltlichen Fokus auf den Körper und die Wirkung der Produkte.",
+      "relationToNextModule": "Von Videobotschaft in den Bestseller-Shoppable, der die Claim direkt mit konkreten Produkten untermauert.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "creative",
+          "visualContent": "Horizontales Autoplay-Video mit salbeigrünem Hintergrund. Zentriert in der oberen Hälfte Text in heller Farbe: 'Und dein Körper so.' Sehr schlanke Banner-Anmutung, Aufmerksamkeit liegt auf der rhetorischen Frage.",
+          "elementProportions": {
+            "solid_background": 65,
+            "text": 30,
+            "graphic_elements": 5
+          },
+          "textOnImage": "Und dein Körper so.",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "brand_color",
+          "dominantColors": ["Salbeigrün", "Weiß"]
+        }
+      ]
+    },
+    {
+      "moduleId": "startseite_mod_04",
+      "position": 4,
+      "moduleName": "Shoppable Bestseller",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Shoppable Image mit Hotspots auf konkreten Bestseller-Produkten. Nutzer sieht ein kuratiertes Produkt-Stillleben und kann per Hover die einzelnen Produkte anklicken.",
+      "relationToNextModule": "Von ruhiger Bestseller-Bühne in ein lautes, typografisch starkes Editorial zu Neuheiten.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product",
+          "visualContent": "Shoppable Image auf salbeigrünem Hintergrund. Vier schwarze Supplement-Dosen und eine Tropfen-Flasche stehen wie ein Stillleben nebeneinander, alle mit weißem natural elements Label. Links im hellgrauen Nebenbereich das Wort 'Bestseller' in sehr großer schwarzer Typografie. Unten links erscheint der Hover-CTA 'Produkte ansehen'. Bei Hover werden Hotspot-Punkte auf jedem Produkt sichtbar, die zur Produktdetailseite führen.",
+          "elementProportions": {
+            "product_photo": 55,
+            "solid_background": 25,
+            "text": 15,
+            "cta_button": 5
+          },
+          "textOnImage": "Bestseller",
+          "ctaText": "Produkte ansehen",
+          "linksTo": "Bestseller Produktdetailseiten (Hotspots je Produkt)",
+          "backgroundStyle": "brand_color",
+          "dominantColors": ["Salbeigrün", "Schwarz", "Hellgrau"]
+        }
+      ]
+    },
+    {
+      "moduleId": "startseite_mod_05",
+      "position": 5,
+      "moduleName": "Editorial Banner Neuheiten",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Laute, typografisch inszenierte Neuheiten-Bühne mit direktem Call-to-Action. Bricht visuell mit dem minimalistischen Grundstil der Seite, um den Überraschungseffekt auf Neuheiten zu setzen.",
+      "relationToNextModule": "Nach dem lauten Banner folgt die beratende Ansprache: Nutzer werden zu einem Produktfinder weitergeleitet.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "creative",
+          "visualContent": "Zweigeteiltes Banner. Links auf cremeweißem Hintergrund die große schwarze Headline 'Neue Produkte?' darunter 'OH YEAH!' in knalligem Salmon-Rosa und italic. Unter dem Claim der CTA '→ NEUHEITEN ENTDECKEN' in schwarz. Rechts ein Produktensemble: drei schwarze Dosen und eine Tropfen-Flasche auf sanft schattiertem Boden, jede mit weißem natural elements Label.",
+          "elementProportions": {
+            "product_photo": 40,
+            "text": 35,
+            "solid_background": 20,
+            "cta_button": 5
+          },
+          "textOnImage": "Neue Produkte? OH YEAH! → NEUHEITEN ENTDECKEN",
+          "ctaText": "NEUHEITEN ENTDECKEN",
+          "linksTo": "Unterseite Unsere Neuheiten",
+          "backgroundStyle": "white",
+          "dominantColors": ["Cremeweiß", "Schwarz", "Salmonrosa"]
+        }
+      ]
+    },
+    {
+      "moduleId": "startseite_mod_06",
+      "position": 6,
+      "moduleName": "Produktberater mit Quiz-Widget",
+      "layoutShape": "large_plus_2_stacked",
+      "tileCount": 3,
+      "designRationale": "Großflächiger Beratungseinstieg kombiniert mit einem interaktiven Quiz-Widget, das Conversion auf die richtige Produktkategorie optimiert. Reduziert Entscheidungsstress beim Erstbesucher.",
+      "relationToNextModule": "Nach der personalisierten Beratung zurück in den Shoppable-Storytelling-Rhythmus mit Bildern und Video.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "visualContent": "Linke große Bildfläche auf cremefarbenem Hintergrund. Große schwarze Headline 'Du suchst das passende Produkt für dich?' darunter ein abgerundeter schwarzer Button mit weißer Schrift 'LASS DICH HIER BERATEN'.",
+          "elementProportions": {
+            "text": 55,
+            "solid_background": 40,
+            "cta_button": 5
+          },
+          "textOnImage": "Du suchst das passende Produkt für dich? LASS DICH HIER BERATEN",
+          "ctaText": "LASS DICH HIER BERATEN",
+          "linksTo": "Produktfinder/Quiz Unterseite",
+          "backgroundStyle": "pastel",
+          "dominantColors": ["Cremerosa", "Schwarz", "Weiß"]
+        },
+        {
+          "position": 2,
+          "imageCategory": "creative",
+          "visualContent": "Rechte obere Kachel, ein ovales Lifestyle-Porträt. Frau mit kurzen hellen Haaren in olivfarbenem Oberteil blickt leicht zur Seite, Urbaner Hintergrund mit Treppen. Unter dem Foto steht die Frage 'Weißt du bereits, was dein Körper braucht?' und drei kleine Antwort-Chips 'Ja', 'Nein', 'Ich bin mir nicht sicher'.",
+          "elementProportions": {
+            "lifestyle_photo": 50,
+            "text": 30,
+            "solid_background": 15,
+            "cta_button": 5
+          },
+          "textOnImage": "Weißt du bereits, was dein Körper braucht? Ja · Nein · Ich bin mir nicht sicher",
+          "ctaText": "Ja",
+          "linksTo": "Quiz-Flow Antwortpfade",
+          "backgroundStyle": "white",
+          "dominantColors": ["Oliv", "Creme", "Weiß"]
+        },
+        {
+          "position": 3,
+          "imageCategory": "text_image",
+          "visualContent": "Rechte untere Kachel, eine rosafarbene Hintergrundfläche mit einem weiteren interaktiven Element, optisch in derselben Rosa-Familie wie das Beratungs-Tile links.",
+          "elementProportions": {
+            "solid_background": 80,
+            "text": 20
+          },
+          "textOnImage": null,
+          "ctaText": null,
+          "linksTo": "Quiz-Flow Fortsetzung",
+          "backgroundStyle": "pastel",
+          "dominantColors": ["Salmonrosa"]
+        }
+      ]
+    },
+    {
+      "moduleId": "startseite_mod_07",
+      "position": 7,
+      "moduleName": "Video 2 mit Naturkulisse",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Zweites Autoplay-Video. Knüpft an die Grünton-Palette von Modul 3 und Modul 4 an, verdichtet die Markenwelt und bereitet die nachfolgenden botanischen Produkt-Szenen vor.",
+      "relationToNextModule": "Vom atmosphärischen Video in die konkretere Produktwelt mit Pflanzen-Tiegeln.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "lifestyle",
+          "visualContent": "Autoplay-Video auf salbeigrünem Hintergrund, auf dem vage schwarze Produkt-Tiegel angedeutet sind. Unten links der schwarze CTA-Button 'Produkte ansehen' im Shoppable-Layout.",
+          "elementProportions": {
+            "solid_background": 60,
+            "product_photo": 30,
+            "cta_button": 10
+          },
+          "textOnImage": null,
+          "ctaText": "Produkte ansehen",
+          "linksTo": "Produktübersicht",
+          "backgroundStyle": "brand_color",
+          "dominantColors": ["Salbeigrün", "Schwarz"]
+        }
+      ]
+    },
+    {
+      "moduleId": "startseite_mod_08",
+      "position": 8,
+      "moduleName": "Shoppable Pflanzen-Tiegel",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Shoppable Image mit botanischem Fokus. Produkte werden nicht als harte Dosen inszeniert, sondern in weiche Blattwerk-Szenerie eingebettet, um das Natur-Versprechen der Marke visuell zu untermauern.",
+      "relationToNextModule": "Nach der botanischen Produktwelt kommt das harte Qualitätsversprechen im Trust-USP-Modul.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product",
+          "visualContent": "Shoppable Image auf hellgrünem Hintergrund. Mehrere niedrige, schwarze Kosmetik- beziehungsweise Kapseltiegel mit weißen Labels, Deckel mit Blattwerk-Illustrationen umrankt. Unten links der CTA 'Produkte ansehen', bei Hover werden Hotspots auf den einzelnen Tiegeln sichtbar.",
+          "elementProportions": {
+            "product_photo": 55,
+            "solid_background": 35,
+            "graphic_elements": 5,
+            "cta_button": 5
+          },
+          "textOnImage": null,
+          "ctaText": "Produkte ansehen",
+          "linksTo": "Produktdetailseiten per Hotspot",
+          "backgroundStyle": "brand_color",
+          "dominantColors": ["Salbeigrün", "Schwarz", "Weiß", "Laubgrün"]
+        }
+      ]
+    },
+    {
+      "moduleId": "startseite_mod_09",
+      "position": 9,
+      "moduleName": "Trust und USP-Modul",
+      "layoutShape": "large_plus_2_stacked",
+      "tileCount": 4,
+      "designRationale": "Vertrauen auf den Punkt bringen. Produktbild links, drei USPs rechts mit klaren Symbolen. Erklärt ohne Umschweife, warum natural elements seriös ist, bevor der Sport- und Kategorien-Block beginnt.",
+      "relationToNextModule": "Nach dem rationalen Vertrauensargument folgt ein emotional aufgeladener Kampagnen-Banner für die SPORTS SERIES.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product",
+          "visualContent": "Große freigestellte weiße Produkt-Standtüte mit schwarzem Etikett. Auf dem Etikett das natural elements Logo und das Wort 'Collagen'. Tüte steht auf weißem Hintergrund, daneben und hinter der Tüte einzelne grüne Blattzweige im Aquarell-Stil.",
+          "elementProportions": {
+            "product_photo": 75,
+            "graphic_elements": 15,
+            "solid_background": 10
+          },
+          "textOnImage": "natural elements · Collagen",
+          "ctaText": null,
+          "linksTo": "Produktdetailseite Collagen",
+          "backgroundStyle": "white",
+          "dominantColors": ["Weiß", "Schwarz", "Laubgrün"]
+        },
+        {
+          "position": 2,
+          "imageCategory": "benefit",
+          "visualContent": "USP-Tile oben rechts. Durchgestrichenes Kreissymbol (Ø) links, daneben große schwarze Headline 'Keine falschen Versprechen'. Impliziert Verzicht auf marketinglastige Scheinwahrheiten.",
+          "elementProportions": {
+            "text": 70,
+            "icons": 20,
+            "solid_background": 10
+          },
+          "textOnImage": "Keine falschen Versprechen",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "white",
+          "dominantColors": ["Weiß", "Schwarz"]
+        },
+        {
+          "position": 3,
+          "imageCategory": "benefit",
+          "visualContent": "USP-Tile mittig rechts. Plus-Symbol links, daneben schwarze Headline 'Hochwertige Rohstoffe'. Betont die Rohstoffqualität als Markenversprechen.",
+          "elementProportions": {
+            "text": 70,
+            "icons": 20,
+            "solid_background": 10
+          },
+          "textOnImage": "Hochwertige Rohstoffe",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "white",
+          "dominantColors": ["Weiß", "Schwarz"]
+        },
+        {
+          "position": 4,
+          "imageCategory": "benefit",
+          "visualContent": "USP-Tile unten rechts. Häkchen-Symbol (✓) links, daneben schwarze Headline 'Jede Charge laborgeprüft'. Zertifizierungs- beziehungsweise Qualitätssicherungs-Claim.",
+          "elementProportions": {
+            "text": 70,
+            "icons": 20,
+            "solid_background": 10
+          },
+          "textOnImage": "Jede Charge laborgeprüft",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "white",
+          "dominantColors": ["Weiß", "Schwarz"]
+        }
+      ]
+    },
+    {
+      "moduleId": "startseite_mod_10",
+      "position": 10,
+      "moduleName": "Kampagnen-Banner Sports Series",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Kontrastiert das cremefarbene Trust-Modul mit einer komplett schwarzen Kampagnenfläche in Neonfarbe. Positioniert die SPORTS SERIES als eigenständige Sub-Brand und rechtfertigt einen Extra-CTA.",
+      "relationToNextModule": "Nach dem Teaser für die Sportserie öffnen die beiden Kategorien-Grids das volle Sortiment für jeden Lifestyle.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "visualContent": "Komplett schwarzer Banner. Links Headline in Weiß und Neon-Gelb: 'Entdecke unsere neue' (weiß) gefolgt von 'SPORTS SERIES.' (neongelb, fett, italic). Darunter 'Für deinen Erfolg auf ganzer Linie.' in Weiß. Rechts ein abgerundeter neongelber CTA-Button mit schwarzer Aufschrift 'MEHR ERFAHREN'.",
+          "elementProportions": {
+            "solid_background": 60,
+            "text": 30,
+            "cta_button": 10
+          },
+          "textOnImage": "Entdecke unsere neue SPORTS SERIES. Für deinen Erfolg auf ganzer Linie.",
+          "ctaText": "MEHR ERFAHREN",
+          "linksTo": "Sports Series Unterseite",
+          "backgroundStyle": "dark",
+          "dominantColors": ["Schwarz", "Neongelb", "Weiß"]
+        }
+      ]
+    },
+    {
+      "moduleId": "startseite_mod_11",
+      "position": 11,
+      "moduleName": "Kategorien-Grid Teil 1",
+      "layoutShape": "4_tile_grid",
+      "tileCount": 4,
+      "designRationale": "Einstieg in die Kategorien-Hub-Logik. Jede Kategorie wird durch ein Lifestyle-Foto plus eine farbige Label-Fläche mit Icon und Kategorietitel dargestellt. Ergibt ein sehr rhythmisches Paar-Layout.",
+      "relationToNextModule": "Direkte Fortsetzung mit weiteren Kategorien im gleichen Paar-Prinzip, zweites Raster nimmt die verbleibenden Lifestyle-Welten auf.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "lifestyle",
+          "visualContent": "Lifestyle-Foto: Junger Mann im orangefarbenen Hoodie vor einem Treppenhaus mit grünen Notausgangs-Piktogrammen, Bewegungs- beziehungsweise Trainingssetting. Kein Text.",
+          "elementProportions": {
+            "lifestyle_photo": 95,
+            "solid_background": 5
+          },
+          "textOnImage": null,
+          "ctaText": null,
+          "linksTo": "Kategorie Sport & Energie",
+          "backgroundStyle": "lifestyle_photo",
+          "dominantColors": ["Orange", "Betongrau", "Signalgrün"]
+        },
+        {
+          "position": 2,
+          "imageCategory": "text_image",
+          "visualContent": "Pastellgrüne Label-Fläche. Zentrales schlichtes schwarzes Icon, das einen Pfeil beziehungsweise ein Diagramm andeutet, darunter schwarze Headline 'Sport & Energie'.",
+          "elementProportions": {
+            "solid_background": 60,
+            "icons": 20,
+            "text": 20
+          },
+          "textOnImage": "Sport & Energie",
+          "ctaText": null,
+          "linksTo": "Kategorie Sport & Energie",
+          "backgroundStyle": "pastel",
+          "dominantColors": ["Salbeigrün", "Schwarz"]
+        },
+        {
+          "position": 3,
+          "imageCategory": "text_image",
+          "visualContent": "Butterbgelbe Label-Fläche. Zentrales schwarzes Schild-Icon mit kreisförmigem Inneren, Verweis auf Schutz und Abwehr. Darunter schwarze Headline 'Immunsystem'.",
+          "elementProportions": {
+            "solid_background": 60,
+            "icons": 20,
+            "text": 20
+          },
+          "textOnImage": "Immunsystem",
+          "ctaText": null,
+          "linksTo": "Kategorie Immunsystem",
+          "backgroundStyle": "pastel",
+          "dominantColors": ["Buttergelb", "Schwarz"]
+        },
+        {
+          "position": 4,
+          "imageCategory": "lifestyle",
+          "visualContent": "Lifestyle-Foto: Nahaufnahme eines Mannes, der sich mit geschlossenen Augen entspannt, Sonnenlicht auf Haut und Gesicht. Warme Hauttöne, Associations zu Ruhe und Regeneration.",
+          "elementProportions": {
+            "lifestyle_photo": 95,
+            "solid_background": 5
+          },
+          "textOnImage": null,
+          "ctaText": null,
+          "linksTo": "Kategorie Immunsystem",
+          "backgroundStyle": "lifestyle_photo",
+          "dominantColors": ["Warmer Hautton", "Honiggelb"]
+        }
+      ]
+    },
+    {
+      "moduleId": "startseite_mod_12",
+      "position": 12,
+      "moduleName": "Kategorien-Grid Teil 2",
+      "layoutShape": "4_tile_grid",
+      "tileCount": 4,
+      "designRationale": "Zweite Reihe nach identischem Prinzip. Deckt Beauty, Knochen, Anti Stress, Gaming und weitere Lifestyle-Kategorien ab. Zusammen mit Teil 1 entsteht ein rhythmisches, visuell reiches Kategorie-Hub.",
+      "relationToNextModule": "Nach dem Kategorien-Überblick folgt direkt die ASIN-Produktliste mit den Bestsellern, für den schnellen Einstieg in die Produktwelt.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "lifestyle",
+          "visualContent": "Lifestyle-Foto: Frau lächelt entspannt, hält vermutlich ein Beauty- beziehungsweise Anti-Aging-Utensil. Weiches Naturlicht.",
+          "elementProportions": {
+            "lifestyle_photo": 95,
+            "solid_background": 5
+          },
+          "textOnImage": null,
+          "ctaText": null,
+          "linksTo": "Kategorie Beauty & Anti Aging",
+          "backgroundStyle": "lifestyle_photo",
+          "dominantColors": ["Hautton", "Sandbeige"]
+        },
+        {
+          "position": 2,
+          "imageCategory": "text_image",
+          "visualContent": "Dustige Rosa-Pastellfläche mit schwarzem Icon in der Mitte, darunter schwarze Headline 'Beauty & Anti Aging'.",
+          "elementProportions": {
+            "solid_background": 60,
+            "icons": 20,
+            "text": 20
+          },
+          "textOnImage": "Beauty & Anti Aging",
+          "ctaText": null,
+          "linksTo": "Kategorie Beauty & Anti Aging",
+          "backgroundStyle": "pastel",
+          "dominantColors": ["Altrosa", "Schwarz"]
+        },
+        {
+          "position": 3,
+          "imageCategory": "text_image",
+          "visualContent": "Hellgraue Label-Fläche mit schwarzem Icon und darunter der zweizeiligen Headline 'Knochen & Beweglichkeit'.",
+          "elementProportions": {
+            "solid_background": 60,
+            "icons": 20,
+            "text": 20
+          },
+          "textOnImage": "Knochen & Beweglichkeit",
+          "ctaText": null,
+          "linksTo": "Kategorie Knochen & Beweglichkeit",
+          "backgroundStyle": "light_gray",
+          "dominantColors": ["Hellgrau", "Schwarz"]
+        },
+        {
+          "position": 4,
+          "imageCategory": "lifestyle",
+          "visualContent": "Lifestyle-Foto: Person in Action, leicht verschwommener Hintergrund mit Leiter beziehungsweise Gerüst, Himmelanteile. Suggeriert Kraft, Beweglichkeit, Alltagseinsatz.",
+          "elementProportions": {
+            "lifestyle_photo": 95,
+            "solid_background": 5
+          },
+          "textOnImage": null,
+          "ctaText": null,
+          "linksTo": "Kategorie Knochen & Beweglichkeit",
+          "backgroundStyle": "lifestyle_photo",
+          "dominantColors": ["Himmelblau", "Ockerbraun"]
+        }
+      ]
+    },
+    {
+      "moduleId": "startseite_mod_13",
+      "position": 13,
+      "moduleName": "Produktgrid natural elements Sortiment",
+      "layoutShape": "product_grid_asin",
+      "tileCount": 10,
+      "designRationale": "Abschließendes ASIN-Grid ohne weitere editorielle Zutaten. Nach der emotionalen und kategorialen Vorarbeit sind die Produkte jetzt selbsterklärend. Amazon rendert Titel und Preis automatisch, weshalb hier keine Overlay-Texte gesetzt sind.",
+      "relationToNextModule": "Letztes Content-Modul der Seite, kein weiterer Modulanschluss.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product",
+          "visualContent": "natural elements Omega 3, 365 Kapseln. Freigestellt auf weißem Produkt-Render-Hintergrund, Amazon rendert Titel und Preis selbst.",
+          "elementProportions": {
+            "product_photo": 90,
+            "solid_background": 10
+          },
+          "textOnImage": null,
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "white",
+          "dominantColors": ["Schwarz", "Weiß"]
+        },
+        {
+          "position": 2,
+          "imageCategory": "product",
+          "visualContent": "natural elements Magnesium Komplex, 400mg, schwarze Dose mit weißem Etikett.",
+          "elementProportions": {
+            "product_photo": 90,
+            "solid_background": 10
+          },
+          "textOnImage": null,
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "white",
+          "dominantColors": ["Schwarz", "Weiß"]
+        },
+        {
+          "position": 3,
+          "imageCategory": "product",
+          "visualContent": "natural elements Mariendistel Artischocke Löwenzahn Komplex, 120 Kapseln.",
+          "elementProportions": {
+            "product_photo": 90,
+            "solid_background": 10
+          },
+          "textOnImage": null,
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "white",
+          "dominantColors": ["Schwarz", "Weiß"]
+        },
+        {
+          "position": 4,
+          "imageCategory": "product",
+          "visualContent": "natural elements Vitamin D3 + K2 Depot, 180 Tabletten.",
+          "elementProportions": {
+            "product_photo": 90,
+            "solid_background": 10
+          },
+          "textOnImage": null,
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "white",
+          "dominantColors": ["Schwarz", "Weiß"]
+        },
+        {
+          "position": 5,
+          "imageCategory": "product",
+          "visualContent": "natural elements Magnesiumbisglycinat, 180 Kapseln, 300mg elementares Magnesium.",
+          "elementProportions": {
+            "product_photo": 90,
+            "solid_background": 10
+          },
+          "textOnImage": null,
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "white",
+          "dominantColors": ["Schwarz", "Weiß"]
+        },
+        {
+          "position": 6,
+          "imageCategory": "product",
+          "visualContent": "natural elements Bio-Ashwagandha KSM-66, 180 Kapseln. Produktbild zusätzlich mit EU Organic Badge.",
+          "elementProportions": {
+            "product_photo": 85,
+            "badge": 10,
+            "solid_background": 5
+          },
+          "textOnImage": "EU Organic",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "white",
+          "dominantColors": ["Schwarz", "Weiß", "Grün"]
+        },
+        {
+          "position": 7,
+          "imageCategory": "product",
+          "visualContent": "natural elements Premium Multivitamin, 180 Kapseln, 22 Vitamine und Mineralstoffe.",
+          "elementProportions": {
+            "product_photo": 90,
+            "solid_background": 10
+          },
+          "textOnImage": null,
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "white",
+          "dominantColors": ["Schwarz", "Weiß"]
+        },
+        {
+          "position": 8,
+          "imageCategory": "product",
+          "visualContent": "natural elements Vitamin D3 + K2 Tropfen, 50ml Flasche.",
+          "elementProportions": {
+            "product_photo": 90,
+            "solid_background": 10
+          },
+          "textOnImage": null,
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "white",
+          "dominantColors": ["Bernstein", "Schwarz", "Weiß"]
+        },
+        {
+          "position": 9,
+          "imageCategory": "product",
+          "visualContent": "natural elements Schwarzkümmelöl, 400 Kapseln, 6-Monats-Vorrat.",
+          "elementProportions": {
+            "product_photo": 90,
+            "solid_background": 10
+          },
+          "textOnImage": null,
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "white",
+          "dominantColors": ["Schwarz", "Weiß"]
+        },
+        {
+          "position": 10,
+          "imageCategory": "product",
+          "visualContent": "Weiteres natural elements Produkt, Platzhalter für das zehnte Sortimentsmitglied im Grid.",
+          "elementProportions": {
+            "product_photo": 90,
+            "solid_background": 10
+          },
+          "textOnImage": null,
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "white",
+          "dominantColors": ["Schwarz", "Weiß"]
+        }
+      ]
+    }
+  ],
+  "pageAnalysis": {
+    "contentStrategy": "Die Startseite führt über eine minimalistische Markenaufladung (Hero, Navigation) in eine dichte Shoppable-Strecke, die abwechselnd Produkte, Claims und Beratung inszeniert. Sie schließt mit einem klassischen ASIN-Grid als reines Conversion-Instrument.",
+    "conversionPath": "Marken-Kontakt über Hero und Video, Einladung zum Beratungs-Quiz, laufende Shoppable-Flächen mit Hotspots, harte USPs im Trust-Modul, Kategorien-Hub als breiter Eingang ins Sortiment, abschließender ASIN-Grid für Sofortkäufer.",
+    "designTheme": "Minimalistisch, überwiegend Weiß und Salbeigrün mit punktuellen Akzenten in Neongelb, Altrosa und Salmonrosa. Typografie sachlich, bis auf die lauten Editorial-Flächen Neuheiten und Sports Series.",
+    "keyInsight": "Die Seite mischt stille Markenbühnen (Hero, Trust) mit lauten Kampagnen-Bannern (Neuheiten, Sports Series) und setzt Shoppable Images mit Hotspots als primäres Conversion-Element ein, bevor das klassische ASIN-Grid als Netz überhaupt greift."
+  }
+}

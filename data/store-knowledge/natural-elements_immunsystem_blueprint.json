@@ -1,0 +1,435 @@
+{
+  "pageUrl": "https://www.amazon.de/stores/page/1B2D6D85-21E1-4BBE-AD98-EBDE6CFEA02F",
+  "pageName": "Immunsystem",
+  "pageLevel": 1,
+  "pageType": "hub_category",
+  "archetype": "Hub-Category-Seite mit vielen Editorial-Modulen und Sub-Kategorie-Navigation. Muster für Sport und Energie, Beauty und Anti Aging, Wohlbefinden und Anti Stress, Verdauung und Gewicht, Knochen und Beweglichkeit.",
+  "contentStats": {
+    "domModules": 16,
+    "logicalModules": 14,
+    "totalImages": 17,
+    "totalVideos": 0,
+    "estimatedScrollLength": "very_long"
+  },
+  "modules": [
+    {
+      "moduleId": "immunsystem_mod_01",
+      "position": 1,
+      "moduleName": "Hero mit Markenlogo und Breadcrumb",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Wiedererkennbarer Logo-Hero, kombiniert mit Breadcrumb 'natural elements > Immunsystem'. Die Navigation liegt direkt darunter, Kategorie 'IMMUNSYSTEM' ist unterstrichen aktiv. Der Nutzer weiß sofort, in welchem Kontext er sich befindet.",
+      "relationToNextModule": "Vom ruhigen Marken-Hero in ein emotionales Saison-Banner das Aufmerksamkeit erzeugt.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "store_hero",
+          "visualContent": "Weißer Hintergrund mit dem Marken-Wortzeichen 'natural elements' in schwarz, Lowercase, kombiniert mit stilisiertem Blatt- beziehungsweise Tropfen-Logo links. Darunter feine Breadcrumb-Leiste 'natural elements > Immunsystem' und die klassische Amazon-Store-Navigation mit aktivem Tab IMMUNSYSTEM.",
+          "elementProportions": {
+            "solid_background": 70,
+            "logo": 20,
+            "text": 10
+          },
+          "textOnImage": "natural elements®",
+          "textOnImageContext": "Marken-Wortzeichen im Hero. Breadcrumb und Nav-Tabs liegen im DOM innerhalb desselben a-row-Moduls.",
+          "ctaText": "Folgen",
+          "linksTo": "Unterseiten des Stores über Tabs",
+          "backgroundStyle": "white",
+          "dominantColors": ["Weiß", "Schwarz"]
+        }
+      ]
+    },
+    {
+      "moduleId": "immunsystem_mod_02",
+      "position": 2,
+      "moduleName": "Saison-Hero WINTER YEAH",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Emotionales Saison-Banner auf Snowboard-Action als thematischer Rahmen für die Immun-Story. Der gelbe Typo-Claim 'YEAH!' setzt einen optimistischen Kontrapunkt zum kalten Motiv und baut die Brücke zur Winter-Immun-Narrative.",
+      "relationToNextModule": "Von der emotionalen Saison-Stimmung in konkrete Shoppable-Produkte die das Winter-Thema bedienen.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "lifestyle",
+          "visualContent": "Verschneite Berglandschaft in gedecktem Blau-Weiß-Grau. Rechts oben ein Snowboarder in der Luft, Silhouette schwarz-weiß. Zentral über der Szene eine gezeichnete gelb-fluoreszierende Klammer mit dem Wort 'YEAH!' in Handletter-Optik. Unten der Claim 'DER WINTER IST DA!' in großer, weißer, kondensierter Groteskschrift.",
+          "elementProportions": {
+            "hero_figure": 25,
+            "text": 25,
+            "landscape_background": 50
+          },
+          "textOnImage": "YEAH! DER WINTER IST DA!",
+          "textOnImageContext": "Haupt-Claim des Banners. 'YEAH!' ist die markentypische Signatur, 'DER WINTER IST DA!' aktiviert Saisonalität.",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photographic",
+          "dominantColors": ["Hellblau", "Weiß", "Neongelb", "Schwarz"]
+        }
+      ]
+    },
+    {
+      "moduleId": "immunsystem_mod_03",
+      "position": 3,
+      "moduleName": "Shoppable Immun-Bestseller",
+      "layoutShape": "shoppable_interactive_image",
+      "tileCount": 1,
+      "designRationale": "Shoppable-Interactive-Image mit vier Produkten auf markentypischem Hellgelb. Nach dem Saison-Hook folgt direkt die Konversion. Der Hover-CTA 'Produkte ansehen' öffnet die Produktauswahl.",
+      "relationToNextModule": "Vom konkreten Produkt-Kontakt zum Trust-USP-Banner, der die Immunkompetenz der Marke begründet.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product",
+          "visualContent": "Vier schwarze Supplement-Tiegel mit weißem Etiketten-Band und 'natural elements' Logo, flankiert von aquarellierten grünen Blättern. Hellgelbes Hintergrund-Gefälle. Jeder Tiegel trägt kleine Badges: '180 Kapseln', '>99,7% all-Trans MK-7, 180 Tabletten', '360 Kapseln, Vegan', '365 Tabletten, Vegan'. Beim Hover erscheinen vier kreisförmige Hotspots mit 'view product'-Verknüpfung.",
+          "elementProportions": {
+            "product": 65,
+            "solid_background": 25,
+            "decorative_botanicals": 10
+          },
+          "textOnImage": "180 Kapseln · >99,7% all-Trans MK-7 · 180 Tabletten · 360 Kapseln · Vegan · 365 Tabletten",
+          "textOnImageContext": "Produkt-Badges an jedem Tiegel. Reine Informations-Labels pro Produktvariante.",
+          "ctaText": "Produkte ansehen",
+          "ctaTrigger": "hover",
+          "linksTo": "4 Produkt-Detailseiten (PDPs)",
+          "backgroundStyle": "light_yellow_gradient",
+          "dominantColors": ["Hellgelb", "Schwarz", "Weiß", "Laubgrün"]
+        }
+      ]
+    },
+    {
+      "moduleId": "immunsystem_mod_04",
+      "position": 4,
+      "moduleName": "Immun-USP-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Drei-Icon-USP-Leiste auf demselben Hellgelb wie das Shoppable. Schafft visuelle Kontinuität und verankert die Immun-Story in drei einfachen Gründen, warum die Kategorie jetzt relevant ist.",
+      "relationToNextModule": "Vom emotional argumentierten USP zum schmalen Trennbanner, der visuell in die Produkt-Grid überleitet.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "benefit",
+          "visualContent": "Hellgelbes Banner mit drei schwarzen Line-Icons nebeneinander: Schild-Symbol (Shield), Ahornblatt, Schneeflocke. Unter jedem Icon ein kurzer Claim in schwarzer Groteskschrift. Kein Produkt, keine Person, rein typografisch-ikonisch.",
+          "elementProportions": {
+            "solid_background": 55,
+            "icons": 20,
+            "text": 25
+          },
+          "textOnImage": "Immun-Support · im nassen Herbst · im kalten Winter",
+          "textOnImageContext": "Drei Trust-Säulen der Immunkategorie. Saisonbezug plus generisches Schutzversprechen.",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "light_yellow_solid",
+          "dominantColors": ["Hellgelb", "Schwarz"]
+        }
+      ]
+    },
+    {
+      "moduleId": "immunsystem_mod_05",
+      "position": 5,
+      "moduleName": "Visueller Trennbanner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Sehr schmaler Bild-Trenner als grafische Pause und Farbübergang vom Gelb zur neutralen Produkt-Grid.",
+      "relationToNextModule": "Führt ohne Text direkt in die große Produkt-Grid.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "creative",
+          "visualContent": "Sehr flacher dekorativer Banner, gelb-beige Struktur, wirkt wie ein Farb-Fade. Kein Text, keine Produkte, reine optische Trennung.",
+          "elementProportions": {
+            "solid_background": 95,
+            "graphic_elements": 5
+          },
+          "textOnImage": null,
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "yellow_beige_gradient",
+          "dominantColors": ["Hellgelb", "Beige"]
+        }
+      ]
+    },
+    {
+      "moduleId": "immunsystem_mod_06",
+      "position": 6,
+      "moduleName": "Produkt-Grid Immunsystem",
+      "layoutShape": "product_grid_asin",
+      "tileCount": 27,
+      "designRationale": "Große, scrollbare Produkt-Grid mit Immun-Sortiment. Jede Kachel zeigt die Amazon-Standard-PDP-Karte mit Produktbild, Titel, Preis und Sterne-Rating. Kerngeschäft der Kategorie-Seite.",
+      "relationToNextModule": "Nach dem Hauptsortiment folgen drei thematische Sub-Kategorie-Kacheln als Navigationsbrücken.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product",
+          "visualContent": "27 einzelne Produkt-Kacheln. Jedes Tile: Amazon-Standard-Kartendesign. Produktkacheln der natural-elements-Linie, zum Beispiel 'Vitamin D3/K2 Depot', 'Vitamin D3/K2 Tropfen 1.000 I.E.', 'Premium Multi', 'Schwarzkümmelöl Kapseln 6-Monats-Vorrat', 'Zink Bisglycinat 25mg'. Jedes Produkt mit typischem schwarzem Tiegel plus Etikett. Gelbe Eck-Badges mit Claims wie 'Depot', '1.000 I.E.', 'Jahres-Vorrat', '6-Monats-Vorrat', 'mit Vitaminen, Mineral- und Pflanzenstoffen'.",
+          "elementProportions": {
+            "product": 80,
+            "text": 15,
+            "badge": 5
+          },
+          "textOnImage": "Produktnamen, Preisangaben, Sterne-Rating",
+          "textOnImageContext": "Amazon-Standard-PDP-Elemente, systemseitig gerendert.",
+          "ctaText": "In den Einkaufswagen · Jetzt einkaufen",
+          "linksTo": "PDPs der Immun-Produkte",
+          "backgroundStyle": "white",
+          "dominantColors": ["Weiß", "Schwarz", "Hellgelb"]
+        }
+      ]
+    },
+    {
+      "moduleId": "immunsystem_mod_07",
+      "position": 7,
+      "moduleName": "Sub-Kategorie-Leiste (3 schmale Banner)",
+      "layoutShape": "3_stacked_banners",
+      "tileCount": 3,
+      "designRationale": "Drei schmale Banner übereinander führen thematisch in die Sub-Kategorien der Immun-Hub ein: Vitamine, Mineralien, Pflanzenstoffe. Jede Zeile ist eine separate a-row, aber funktional ein logisches Navigations-Cluster.",
+      "relationToNextModule": "Nach den Sub-Kategorien erscheint der Produktberater, der Unsicherheitskäufe auffängt.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "visualContent": "Nahaufnahme einer Hand, die eine frische gelbe Zitrone hält. Rechts das Label 'VITAMINE' in großer, weißer Typo. Natürlich-fotografisch, gedeckte Farben.",
+          "elementProportions": { "hero_figure": 40, "text": 30, "photographic_background": 30 },
+          "textOnImage": "VITAMINE",
+          "textOnImageContext": "Label-Navigations-Tile zur Sub-Kategorie Vitamine.",
+          "ctaText": null,
+          "linksTo": "Sub-Kategorie Vitamine",
+          "backgroundStyle": "photographic",
+          "dominantColors": ["Gelb", "Hautfarbe", "Weiß"]
+        },
+        {
+          "position": 2,
+          "imageCategory": "text_image",
+          "visualContent": "Dunkles Produkt-Close-up in warmen Braun-Schwarz-Tönen, darüber das Label 'MINERALIEN' in weißer, kondensierter Groteskschrift.",
+          "elementProportions": { "photographic_background": 60, "text": 30, "product": 10 },
+          "textOnImage": "MINERALIEN",
+          "textOnImageContext": "Label-Navigations-Tile zur Sub-Kategorie Mineralien.",
+          "ctaText": null,
+          "linksTo": "Sub-Kategorie Mineralien",
+          "backgroundStyle": "photographic",
+          "dominantColors": ["Dunkelbraun", "Schwarz", "Weiß"]
+        },
+        {
+          "position": 3,
+          "imageCategory": "text_image",
+          "visualContent": "Weich-unscharfe Garten- oder Pflanzen-Szene in warmem Grün, darüber das Label 'PFLANZENSTOFFE' in weißer Groteskschrift.",
+          "elementProportions": { "photographic_background": 70, "text": 30 },
+          "textOnImage": "PFLANZENSTOFFE",
+          "textOnImageContext": "Label-Navigations-Tile zur Sub-Kategorie Pflanzenstoffe.",
+          "ctaText": null,
+          "linksTo": "Sub-Kategorie Pflanzenstoffe",
+          "backgroundStyle": "photographic",
+          "dominantColors": ["Grün", "Weiß", "Ocker"]
+        }
+      ]
+    },
+    {
+      "moduleId": "immunsystem_mod_08",
+      "position": 8,
+      "moduleName": "Produktberater-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Service-Banner als Konversions-Hilfe. Adressiert Unsicherheit beim Immun-Kauf und lenkt zum Produktberater-Quiz.",
+      "relationToNextModule": "Nach dem Beratungs-Angebot folgt ein schmaler Trenner, der den Kontextwechsel zu den anderen Store-Kategorien markiert.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "visualContent": "Helle Banner-Fläche mit zentraler Headline in schwarzer Groteskschrift und einem sichtbaren Button-Element 'Lass dich hier beraten'. Am Rand leichte botanische Akzente oder Produkt-Schemenhintergrund.",
+          "elementProportions": { "text": 55, "solid_background": 30, "cta_button": 15 },
+          "textOnImage": "Lass dich hier beraten",
+          "textOnImageContext": "Headline und Button sind Bildbestandteil (kein HTML-Button).",
+          "ctaText": "Lass dich hier beraten",
+          "linksTo": "Produktberater / Quiz-Seite",
+          "backgroundStyle": "light_neutral",
+          "dominantColors": ["Hellgrau", "Weiß", "Schwarz"]
+        }
+      ]
+    },
+    {
+      "moduleId": "immunsystem_mod_09",
+      "position": 9,
+      "moduleName": "Visueller Trenner 2",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Zweiter schmaler Bild-Trenner. Gibt der Seite Luft vor dem Schwenk zu anderen Kategorien des Stores.",
+      "relationToNextModule": "Trennt Immun-Kontext vom kategorieübergreifenden Kategorien-Grid.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "creative",
+          "visualContent": "Schmaler dekorativer Banner ohne Text, überwiegend farbige Fläche als Scroll-Pause.",
+          "elementProportions": { "solid_background": 100 },
+          "textOnImage": null,
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "neutral",
+          "dominantColors": ["Beige", "Weiß"]
+        }
+      ]
+    },
+    {
+      "moduleId": "immunsystem_mod_10",
+      "position": 10,
+      "moduleName": "Kategorien-Grid Teil 1 (4 Tiles)",
+      "layoutShape": "4_tile_grid",
+      "tileCount": 4,
+      "designRationale": "Cross-Kategorie-Navigation zu den großen Schwester-Hubs des Stores. Jede Kachel nutzt ein eigenes Farb-Signature und dieselbe Grundstruktur aus Farbfeld mit Icon und Typo neben einem Lifestyle-Foto.",
+      "relationToNextModule": "Direkter Übergang zu Teil 2 der Kategorien-Grid.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "visualContent": "Zweigeteiltes Tile: links salbeigrüne Farbfläche mit geometrischem Dreieck-Icon und Text 'Sport & Energie', rechts Sport-Action-Foto.",
+          "elementProportions": { "solid_background": 45, "photographic_background": 40, "text": 10, "icons": 5 },
+          "textOnImage": "Sport & Energie",
+          "ctaText": null,
+          "linksTo": "Sport & Energie Hub",
+          "backgroundStyle": "split_color_photo",
+          "dominantColors": ["Salbeigrün", "Schwarz", "Fotoleicht"]
+        },
+        {
+          "position": 2,
+          "imageCategory": "text_image",
+          "visualContent": "Zweigeteiltes Tile: links apricot-pfirsichfarbene Farbfläche mit Lotus-Icon in schwarz und Text 'Beauty & Anti Aging', rechts Lifestyle-Foto.",
+          "elementProportions": { "solid_background": 45, "photographic_background": 40, "text": 10, "icons": 5 },
+          "textOnImage": "Beauty & Anti Aging",
+          "ctaText": null,
+          "linksTo": "Beauty & Anti Aging Hub",
+          "backgroundStyle": "split_color_photo",
+          "dominantColors": ["Apricot", "Schwarz", "Hautton"]
+        },
+        {
+          "position": 3,
+          "imageCategory": "text_image",
+          "visualContent": "Zweigeteiltes Tile: Weiß-Fläche mit minimalistischem Auge-Symbol in schwarz und Text 'Wohlbefinden & Anti Stress'.",
+          "elementProportions": { "solid_background": 60, "text": 25, "icons": 15 },
+          "textOnImage": "Wohlbefinden & Anti Stress",
+          "ctaText": null,
+          "linksTo": "Wohlbefinden & Anti Stress Hub",
+          "backgroundStyle": "solid_white",
+          "dominantColors": ["Weiß", "Schwarz"]
+        },
+        {
+          "position": 4,
+          "imageCategory": "lifestyle",
+          "visualContent": "Person springt Outdoor an einen Basketballkorb, strahlend blauer Himmel, darüber Text 'Knochen & Beweglichkeit' und ein Icon.",
+          "elementProportions": { "hero_figure": 40, "photographic_background": 50, "text": 10 },
+          "textOnImage": "Knochen & Beweglichkeit",
+          "ctaText": null,
+          "linksTo": "Knochen & Beweglichkeit Hub",
+          "backgroundStyle": "photographic",
+          "dominantColors": ["Himmelblau", "Beige", "Schwarz"]
+        }
+      ]
+    },
+    {
+      "moduleId": "immunsystem_mod_11",
+      "position": 11,
+      "moduleName": "Kategorien-Grid Teil 2 (2 Tiles)",
+      "layoutShape": "2_tile_grid",
+      "tileCount": 2,
+      "designRationale": "Zweite Reihe der Kategorien-Navigation. Gleiche Grundstruktur wie Teil 1, ergänzt mit Verdauung und Gaming.",
+      "relationToNextModule": "Nach der Kategorien-Navigation ein kleines Editorial-Foto-Element als Brand-Akzent.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "visualContent": "Zweigeteiltes Tile: pinkfarbene Farbfläche mit Schlangen-Icon und Text 'Verdauung & Gewicht', rechts Health-Lifestyle-Foto mit gestreifter Kleidung an Körpermitte.",
+          "elementProportions": { "solid_background": 45, "photographic_background": 40, "text": 10, "icons": 5 },
+          "textOnImage": "Verdauung & Gewicht",
+          "ctaText": null,
+          "linksTo": "Verdauung & Gewicht Hub",
+          "backgroundStyle": "split_color_photo",
+          "dominantColors": ["Rosa", "Schwarz", "Hautton"]
+        },
+        {
+          "position": 2,
+          "imageCategory": "text_image",
+          "visualContent": "Zweigeteiltes Tile: Lila-Farbfläche mit Gamecontroller- oder Keyboard-Icon und Text 'Gaming', rechts Gaming-Szene mit beleuchteter Tastatur in Lila-Licht.",
+          "elementProportions": { "solid_background": 40, "photographic_background": 45, "text": 10, "icons": 5 },
+          "textOnImage": "Gaming",
+          "ctaText": null,
+          "linksTo": "Gaming Hub",
+          "backgroundStyle": "split_color_photo",
+          "dominantColors": ["Lila", "Schwarz", "Weiß"]
+        }
+      ]
+    },
+    {
+      "moduleId": "immunsystem_mod_12",
+      "position": 12,
+      "moduleName": "Editorial-Bild 'best of'",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Vermutlich redaktionelles Markenbild als Style-Akzent nach der Kategorie-Navigation. Genau zu verifizieren anhand Screenshot, das Aria-Label deutet auf ein schwarz-weißes Schild oder Signet hin.",
+      "relationToNextModule": "Leitet zur YEAH-Abschluss-Claim-Banner über.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "creative",
+          "visualContent": "Schmales schwarz-weißes Editorial-Element, vermutlich Schild oder Signet-Grafik, reine Marken-Stimmungs-Brücke. Genaue Motivverifikation offen.",
+          "elementProportions": { "photographic_background": 80, "text": 20 },
+          "textOnImage": "offen, vermutlich kurzer Claim",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "black_white",
+          "dominantColors": ["Schwarz", "Weiß"]
+        }
+      ]
+    },
+    {
+      "moduleId": "immunsystem_mod_13",
+      "position": 13,
+      "moduleName": "NahrungsYEAH-Gänzung Brand-Claim",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Marken-Wortspiel-Claim als verbindendes Element. Setzt die YEAH-Signatur der Marke nochmal sprachlich ein und baut die Brücke zum globalen Store-Kontext.",
+      "relationToNextModule": "Abschluss-Kontext vor der Teilen-Zeile.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "visualContent": "Weißer Hintergrund, schwarzer Text in Groteskschrift. 'YEAH!' in neongelb als Inlay zwischen den Silben. Kein Bild, reiner Typo-Banner.",
+          "elementProportions": { "solid_background": 55, "text": 45 },
+          "textOnImage": "Mehr über unsere NahrungsYEAH!gänzung",
+          "textOnImageContext": "Marken-Wortspiel. 'YEAH!' als gelbes Highlight zwischen 'Nahrungs' und 'gänzung'.",
+          "ctaText": null,
+          "linksTo": "Vermutlich ÜBER UNS oder Startseite",
+          "backgroundStyle": "solid_white",
+          "dominantColors": ["Weiß", "Schwarz", "Neongelb"]
+        }
+      ]
+    },
+    {
+      "moduleId": "immunsystem_mod_14",
+      "position": 14,
+      "moduleName": "Teilen-Bereich",
+      "layoutShape": "footer_share",
+      "tileCount": 1,
+      "designRationale": "Amazon-Store-Standard-Footer für Seiten-Sharing. Kein redaktioneller Inhalt, systemseitig.",
+      "relationToNextModule": null,
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "visualContent": "Einfache Zeile 'Teilen' mit Beschreibungstext 'Teilen Sie diese Seite mit Ihren Freunden.' Systemgeneriert.",
+          "elementProportions": { "solid_background": 75, "text": 20, "icons": 5 },
+          "textOnImage": "Teilen · Teilen Sie diese Seite mit Ihren Freunden.",
+          "ctaText": "Teilen",
+          "linksTo": "Share-Dialog",
+          "backgroundStyle": "white",
+          "dominantColors": ["Weiß", "Grau"]
+        }
+      ]
+    }
+  ],
+  "pageAnalysis": {
+    "dominantPalette": ["Hellgelb", "Weiß", "Schwarz", "Neongelb", "Salbeigrün", "Apricot", "Rosa", "Lila", "Himmelblau"],
+    "tonalitätVisual": "Mix aus Lifestyle-Foto, solid color blocks, typografischen Claim-Bannern und Produkt-Close-ups. Die Seite nutzt viele Farbwelten, weil sie kategorieübergreifend auf andere Hubs linkt. Markenkontinuität kommt über die YEAH-Typo und das natural-elements-Logo.",
+    "CTA_strategien": "Shoppable-Hover-CTA, Banner-Button 'Lass dich hier beraten', Sub-Kategorie-Banner ohne expliziten Button (klickbar über Bild).",
+    "inhaltlicheTiefe": "Hoch: Saison-Narrative (Winter), konkrete Immun-USPs, Sub-Kategorie-Navigation, Cross-Kategorie-Navigation, Markenclaim-Abschluss. Fehlend auf dieser Seite: Brand-Story, weil diese auf die ÜBER-UNS-Seite ausgelagert ist.",
+    "useForArchetype": "Template für Hub-Kategorie-Seiten. Andere Hubs (Sport & Energie, Beauty & Anti Aging, Wohlbefinden & Anti Stress, Knochen & Beweglichkeit, Verdauung & Gewicht, Gaming) folgen demselben Aufbau mit Saison-Hero, Shoppable, USP-Banner, Produkt-Grid, Sub-Kategorie-Leiste, Produktberater, Cross-Kategorie-Grid, YEAH-Claim, Teilen-Footer."
+  },
+  "openQuestions": [
+    "Modul 12 'best of' Editorial-Bild: genauer Text und Motiv unklar, Aria-Label 'the best of bern' ist vermutlich fehlgelesene Texterkennung. Visuelle Verifikation per Screenshot nötig.",
+    "Modul 9 Produktberater: Banner-Innenaufbau (Headline über dem Button) ist aus Aria-Label erschlossen, exaktes Layout (Produktsilhouetten links oder rechts?) noch zu verifizieren."
+  ]
+}

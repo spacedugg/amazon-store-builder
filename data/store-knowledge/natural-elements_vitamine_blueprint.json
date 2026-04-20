@@ -1,0 +1,287 @@
+{
+  "pageUrl": "https://www.amazon.de/stores/page/5DF9227A-372F-4144-8FE4-73B4797BAABD",
+  "pageName": "Vitamine",
+  "pageLevel": 2,
+  "parentCategory": "Immunsystem",
+  "pageType": "sub_category",
+  "archetype": "Sub-Kategorie-Template mit 7-Bilder-Pattern. Aufbau: Hero mit Lifestyle-Foto und Claim, Einleitungs-Text-Banner, drei Produkt-Showcases (ATF), Produkt-Grid, drei schmale Sub-Kategorie-Navigationsbanner (VITAMINE, MINERALIEN, PFLANZENSTOFFE), YEAH-Claim, Produktberater-Teaser, Teilen-Footer.",
+  "contentStats": {
+    "domModules": 13,
+    "logicalModules": 10,
+    "totalImages": 7,
+    "totalVideos": 3,
+    "estimatedScrollLength": "long"
+  },
+  "modules": [
+    {
+      "moduleId": "vitamine_mod_01",
+      "position": 1,
+      "moduleName": "Hero mit Markenlogo und Breadcrumb",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Wiederholung des Marken-Heros auf jeder Seite. Breadcrumb zeigt 'natural elements > Immunsystem > Vitamine', sodass die Einordnung in der Hierarchie sichtbar ist.",
+      "relationToNextModule": "Übergang zum thematischen Saison-Hero der Sub-Kategorie.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "store_hero",
+          "visualContent": "Weißer Hintergrund mit Marken-Wortzeichen 'natural elements' plus Blatt- beziehungsweise Tropfen-Logo. Darunter Breadcrumb und Navigationsleiste.",
+          "elementProportions": { "solid_background": 70, "logo": 20, "text": 10 },
+          "textOnImage": "natural elements®",
+          "ctaText": "Folgen",
+          "linksTo": "Store-Unterseiten via Tabs",
+          "backgroundStyle": "white",
+          "dominantColors": ["Weiß", "Schwarz"]
+        }
+      ]
+    },
+    {
+      "moduleId": "vitamine_mod_02",
+      "position": 2,
+      "moduleName": "Themen-Hero VITAMIN-POWER",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Emotionaler Themen-Hero der Sub-Kategorie. Lifestyle-Foto plus großer Claim etabliert Kontext, die Bildsprache zeigt direkten Produktnutzen im Alltag.",
+      "relationToNextModule": "Vom emotionalen Claim zum einführenden Text-Banner, der den Nutzen inhaltlich begründet.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "lifestyle",
+          "visualContent": "Porträt einer lachenden Frau in gestreiftem Shirt, natürliches Licht, warmer Wohnraum-Hintergrund mit Pflanzen. Sie hält eine gelbe Zitrone in der Hand. Über dem Bild der Claim in großer, weißer, kondensierter Groteskschrift.",
+          "elementProportions": { "hero_figure": 50, "photographic_background": 30, "text": 20 },
+          "textOnImage": "VITAMIN-POWER fürs Immunsystem",
+          "textOnImageContext": "Haupt-Claim als Bild-Overlay, zentriert und groß gesetzt.",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photographic",
+          "dominantColors": ["Warm-beige", "Weiß", "Gelb", "Grün"]
+        }
+      ]
+    },
+    {
+      "moduleId": "vitamine_mod_03",
+      "position": 3,
+      "moduleName": "Einleitungs-Text-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Text-only Banner auf olivbeigem Hintergrund. Erklärt die Rolle von Vitaminen für Zellschutz und Immunarbeit. Fett gehobene Kernaussagen lenken die Leser-Attention ohne zusätzlichen visuellen Lärm.",
+      "relationToNextModule": "Nach der Erklärung folgen drei ausführliche Produkt-Showcases, die die Theorie in konkrete Produkte umsetzen.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "visualContent": "Gedämpftes Olivbeige vollflächig, zentrierter Fließtext in schwarzer Groteskschrift mit Bold-Akzenten. Kein Produkt, keine Person, reine Typografie.",
+          "elementProportions": { "solid_background": 60, "text": 40 },
+          "textOnImage": "Vitamine sind natürliche Antioxidantien, die Zellen vor oxidativem Stress schützen. Das ist unter anderem wichtig für die tägliche Arbeit deines Immunsystems. Mit unseren Vitalstoffen schenkst du deiner inneren Abwehr ein Extra an Support.",
+          "textOnImageContext": "Fliesstext als Bild, Bold-Passagen: 'Zellen vor oxidativem Stress schützen' und 'tägliche Arbeit deines Immunsystems'.",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "olive_beige_solid",
+          "dominantColors": ["Olivbeige", "Schwarz"]
+        }
+      ]
+    },
+    {
+      "moduleId": "vitamine_mod_04",
+      "position": 4,
+      "moduleName": "Produkt-Showcase 1: Premium Multi",
+      "layoutShape": "product_showcase_carousel",
+      "tileCount": 1,
+      "designRationale": "Amazon Brand Store Widget ProductShowcase mit ImageVideoCarousel (8 Slides) plus Key-Feature-Liste plus CTA. Das wichtigste Produkt steht zuerst als Konversions-Anker.",
+      "relationToNextModule": "Sequenz aus drei Showcases, zweiter Showcase baut auf dem Multi auf.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product",
+          "visualContent": "Links 8-stufiger Bild-Video-Karussell mit Produktbildern und Video-Clip der Premium Multi Dose (schwarzer Tiegel mit Blatt-Illustration, Lifestyle-Setting, Kapsel-Makro, Nährwerttabelle). Rechts Produktname als H1, Liste von Key-Features mit Emoji-Akzenten, darunter die Buttons 'Alle Details anzeigen' (outline) und 'In den Einkaufswagen' (gelb).",
+          "elementProportions": { "product": 45, "text": 35, "video": 15, "cta_button": 5 },
+          "textOnImage": "natural elements Premium Multivitamin. 180 hochdosierte Komplex-Kapseln. 22 wertvolle Vitamine & Mineralstoffe. RUNDUM WOHLFÜHLEN Premium Multi ist unser Allroundtalent mit 21 Vitalstoffen wie Vitamin C für das Immunsystem, Vitamin B12 für den Energiestoffwechsel und Magnesium für das Nervensystem. Auch Haare.",
+          "textOnImageContext": "Produktname als Überschrift. Feature-Bullets mit fetten Lead-Phrasen ('RUNDUM WOHLFÜHLEN') und erklärendem Fließtext.",
+          "ctaText": "Alle Details anzeigen · In den Einkaufswagen",
+          "linksTo": "PDP Premium Multivitamin",
+          "backgroundStyle": "white",
+          "dominantColors": ["Weiß", "Schwarz", "Amazon-Gelb"]
+        }
+      ]
+    },
+    {
+      "moduleId": "vitamine_mod_05",
+      "position": 5,
+      "moduleName": "Produkt-Showcase 2: Vitamin C gepuffert 500mg",
+      "layoutShape": "product_showcase_carousel",
+      "tileCount": 1,
+      "designRationale": "Gleiche Struktur wie Showcase 1, jetzt für das Vitamin-C-Produkt. Nutzt die USPs magenschonend, pH-neutral, säurefrei als Differenzierer.",
+      "relationToNextModule": "Dritter Showcase zur Vervollständigung der Vitamin-Eckpfeiler.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product",
+          "visualContent": "Bild-Video-Karussell links, Feature-Beschreibung rechts, Call-to-Action darunter. Produkt: schwarzer Tiegel Vitamin C gepuffert 500mg, botanische Illustration, Supplement-Tabletten.",
+          "elementProportions": { "product": 45, "text": 35, "video": 15, "cta_button": 5 },
+          "textOnImage": "natural elements Vitamin C gepuffert 500mg. 365 vegane Kapseln, magenschonend, pH-neutral, säurefrei, aus Fermentation von...",
+          "textOnImageContext": "Produktname als Überschrift mit USP-Attributen direkt im Titel.",
+          "ctaText": "Alle Details anzeigen · In den Einkaufswagen",
+          "linksTo": "PDP Vitamin C gepuffert 500mg",
+          "backgroundStyle": "white",
+          "dominantColors": ["Weiß", "Schwarz", "Amazon-Gelb"]
+        }
+      ]
+    },
+    {
+      "moduleId": "vitamine_mod_06",
+      "position": 6,
+      "moduleName": "Produkt-Showcase 3: Vitamin D3 Tropfen 1000 I.E.",
+      "layoutShape": "product_showcase_carousel",
+      "tileCount": 1,
+      "designRationale": "Dritter Showcase mit flüssigem Vitamin-D3-Produkt. Differenziert über die Darreichungsform (Tropfen) und den Langzeitvorrat. Rundet die Sortiments-Tour ab.",
+      "relationToNextModule": "Nach dem Sortiments-Teaser folgt die vollständige Produkt-Grid.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product",
+          "visualContent": "Bild-Video-Karussell links, Feature-Beschreibung rechts. Produkt: 50ml-Tropfflasche Vitamin D3 mit Pipette, Produktbild plus Lifestyle-Shots.",
+          "elementProportions": { "product": 45, "text": 35, "video": 15, "cta_button": 5 },
+          "textOnImage": "natural elements Vitamin D3 Tropfen. 1000 I.E. pro Tagesdosis (1 Tropfen). Langzeitvorrat mit 50 ml. Für beste...",
+          "textOnImageContext": "Produktname betont Dosierung und Vorratsgröße.",
+          "ctaText": "Alle Details anzeigen · In den Einkaufswagen",
+          "linksTo": "PDP Vitamin D3 Tropfen",
+          "backgroundStyle": "white",
+          "dominantColors": ["Weiß", "Schwarz", "Amazon-Gelb"]
+        }
+      ]
+    },
+    {
+      "moduleId": "vitamine_mod_07",
+      "position": 7,
+      "moduleName": "Produkt-Grid Vitamine",
+      "layoutShape": "product_grid_asin",
+      "tileCount": 20,
+      "designRationale": "Vollständiges Vitamin-Sortiment als Amazon-Standard-Produkt-Grid nach den Showcases.",
+      "relationToNextModule": "Nach dem Sortiment folgt die Sub-Kategorie-Navigation zu den anderen Immun-Zweigen.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product",
+          "visualContent": "20 Produkt-Kacheln im Amazon-Standard-Raster. Jede Kachel mit Produktbild, Titel, Preis, Sterne-Rating, Spar-Abo-Badge und Bestseller-Badge wenn zutreffend.",
+          "elementProportions": { "product": 80, "text": 15, "badge": 5 },
+          "textOnImage": "Produkttitel, Preise, Bewertungen",
+          "textOnImageContext": "Amazon-Standard-UI, systemgeneriert.",
+          "ctaText": "In den Einkaufswagen",
+          "linksTo": "PDPs der Vitamin-Produkte",
+          "backgroundStyle": "white",
+          "dominantColors": ["Weiß", "Schwarz"]
+        }
+      ]
+    },
+    {
+      "moduleId": "vitamine_mod_08",
+      "position": 8,
+      "moduleName": "Sub-Kategorie-Navigation und Editorial (4 schmale Tiles)",
+      "layoutShape": "4_stacked_banners",
+      "tileCount": 4,
+      "designRationale": "Vier übereinander gestapelte schmale Banner. Die ersten drei sind die Sub-Kategorie-Navigationsbanner (siehe Immunsystem Hub), der vierte ist das natural-elements best of swiss people Markenbild-Banner.",
+      "relationToNextModule": "Sub-Kategorie-Cluster mündet in den Produktberater-Teaser.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "visualContent": "Sehr schmaler Navigations-Banner in Label-Stil, vermutlich Divider oder Kopfzeile zur Sub-Kategorie-Gruppe.",
+          "elementProportions": { "solid_background": 70, "text": 30 },
+          "textOnImage": "offen, vermutlich Abschnitts-Titel",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "neutral",
+          "dominantColors": ["Weiß", "Grau"]
+        },
+        {
+          "position": 2,
+          "imageCategory": "text_image",
+          "visualContent": "Dunkles Produkt-Close-up mit dem Label 'MINERALIEN' in weißer Groteskschrift. Wiederkehrendes Navigations-Tile der Immun-Hierarchie.",
+          "elementProportions": { "photographic_background": 60, "text": 30, "product": 10 },
+          "textOnImage": "MINERALIEN",
+          "ctaText": null,
+          "linksTo": "Sub-Kategorie Mineralien",
+          "backgroundStyle": "photographic",
+          "dominantColors": ["Dunkelbraun", "Schwarz", "Weiß"]
+        },
+        {
+          "position": 3,
+          "imageCategory": "text_image",
+          "visualContent": "Weich-unscharfe Garten-Szene mit dem Label 'PFLANZENSTOFFE' in Weiß.",
+          "elementProportions": { "photographic_background": 70, "text": 30 },
+          "textOnImage": "PFLANZENSTOFFE",
+          "ctaText": null,
+          "linksTo": "Sub-Kategorie Pflanzenstoffe",
+          "backgroundStyle": "photographic",
+          "dominantColors": ["Grün", "Weiß", "Ocker"]
+        },
+        {
+          "position": 4,
+          "imageCategory": "creative",
+          "visualContent": "Schmales schwarz-weißes Editorial-Element, vermutlich Marken-Signet oder Stimmungsbild. Aria-Label liefert 'the best of the swiss people', Text-Erkennung ist unsicher, genaue Motivverifikation offen.",
+          "elementProportions": { "photographic_background": 80, "text": 20 },
+          "textOnImage": "offen",
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "black_white",
+          "dominantColors": ["Schwarz", "Weiß"]
+        }
+      ]
+    },
+    {
+      "moduleId": "vitamine_mod_09",
+      "position": 9,
+      "moduleName": "Produktberater-Teaser",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "Wiederholt den 'Lass dich hier beraten' Teaser aus der Hub-Kategorie. Sorgt für konsistente Cross-Sell-Brücke zum Berater auf jeder Sub-Seite.",
+      "relationToNextModule": "Vor dem Seiten-Footer.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "visualContent": "Helle Bannerfläche mit zentraler Headline und sichtbarem Button 'Lass dich hier beraten'.",
+          "elementProportions": { "text": 55, "solid_background": 30, "cta_button": 15 },
+          "textOnImage": "Lass dich hier beraten",
+          "ctaText": "Lass dich hier beraten",
+          "linksTo": "Produktberater / Quiz-Seite",
+          "backgroundStyle": "light_neutral",
+          "dominantColors": ["Hellgrau", "Weiß", "Schwarz"]
+        }
+      ]
+    },
+    {
+      "moduleId": "vitamine_mod_10",
+      "position": 10,
+      "moduleName": "Teilen-Bereich",
+      "layoutShape": "footer_share",
+      "tileCount": 1,
+      "designRationale": "Amazon-Standard-Footer.",
+      "relationToNextModule": null,
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "visualContent": "'Teilen' mit Beschreibungstext 'Teilen Sie diese Seite mit Ihren Freunden.'",
+          "elementProportions": { "solid_background": 75, "text": 20, "icons": 5 },
+          "textOnImage": "Teilen · Teilen Sie diese Seite mit Ihren Freunden.",
+          "ctaText": "Teilen",
+          "linksTo": "Share-Dialog",
+          "backgroundStyle": "white",
+          "dominantColors": ["Weiß", "Grau"]
+        }
+      ]
+    }
+  ],
+  "pageAnalysis": {
+    "dominantPalette": ["Weiß", "Schwarz", "Olivbeige", "Warm-beige", "Gelb"],
+    "tonalitätVisual": "Ruhiger, inhaltsorientierter Aufbau. Lifestyle-Hero mit warmem Porträt, einleitender Wissens-Banner, dann drei detaillierte Produkt-Showcases. Weniger Farb-Spielerei als die Hub-Kategorie, mehr Tiefe pro Produkt.",
+    "CTA_strategien": "Drei Produkt-Showcase-CTAs ('Alle Details anzeigen' und 'In den Einkaufswagen') plus Sub-Kategorie-Navigationsbanner plus Produktberater-Button.",
+    "inhaltlicheTiefe": "Mittel bis hoch: emotionaler Hero, didaktischer Einleitungstext, detaillierte Produkt-Showcases mit Video, Produkt-Grid, Cross-Sell-Navigation, Beratungs-Teaser.",
+    "useForArchetype": "Template für alle 7-Bilder-Sub-Kategorie-Seiten: Mineralien, Pflanzenstoffe, Haut, Haare, Nägel, Kosmetik, Innere Ruhe, Ruhiger Schlaf, Nerven und Energie, Verdauung, Beweglichkeit, Knochen, Pre Workout, Workout, Regeneration, Daily Fitness, Gewichtsmanagement, Körperbewusstsein. Typisch: 1 Hero, 1 Intro-Text, 3 Produkt-Showcases, 1 Grid, 3-4 Navigations-Banner, 1 Berater-Teaser, 1 Share-Footer."
+  },
+  "openQuestions": [
+    "Modul 8 Tile 1: Kopfzeile oder Divider, genaue Funktion offen. Vermutlich Abschnittstrenner 'Weitere Kategorien'.",
+    "Modul 8 Tile 4 'best of the swiss people': Aria-Label unsicher, tatsächlicher Bildinhalt noch zu verifizieren. Möglich: Tourismus-/Landschafts-Foto oder markentypisches Brand-Sign."
+  ]
+}

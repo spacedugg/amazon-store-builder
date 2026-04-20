@@ -1,0 +1,580 @@
+{
+  "documentType": "pattern_blueprint",
+  "brandName": "natural elements",
+  "storeUrl": "https://www.amazon.de/stores/page/3955CCD4-902C-4679-9265-DEC4FCBAA8C8",
+  "crawledAt": "2026-04-19",
+  "purpose": "Ergaenzung zu den 5 Deep-Blueprints (Startseite, Immunsystem, Vitamine, SoProtein, UEBER UNS). Liefert Archetype-Zuordnung und Struktur-Abriss fuer die restlichen 43 Seiten, ohne jede Seite einzeln tief zu crawlen. Basiert auf der natural-elements_analysis.json vom 10. April 2026 plus den in der tiefen Analyse bestaetigten Template-Mustern.",
+  "archetypes": {
+    "home_hub": {
+      "description": "Top-Level Startseite. 13 editoriale Bilder plus 2 Videos, breiter Hero, Kategorie-Navigations-Tiles, Produkt-Grid, Kampagnen-Banner, Brand-Story-Module.",
+      "templateSource": "natural-elements_startseite_blueprint.json",
+      "keyPattern": "Hero > Trust-Banner > Kategorie-Navigations-Tiles (gross) > Promo-Banner > Produkt-Showcase > Cross-Link-Grids > Teilen-Footer"
+    },
+    "category_hub": {
+      "description": "Hub-Kategorie Level 1 mit 13 bis 19 editorialen Bildern, oft mit Videos. Eigener Saison-Hero, Shoppable-Bestseller, 3-Icon-USP-Banner, grosse Sub-Kategorie-Banner, Produktberater, Kategorien-Grids, editorial Banner.",
+      "templateSource": "natural-elements_immunsystem_blueprint.json",
+      "keyPattern": "Hero+Nav > Saison-Hero > Shoppable-Bestseller > USP-Icons-Banner > Trenner > Product-Grid > 3 Sub-Kategorie-Banner > Produktberater > Kategorien-Grids > Editorial-Closer > Claim-Strip > Teilen-Footer"
+    },
+    "sub_category_7img": {
+      "description": "Sub-Kategorie Level 2 mit dem wiederkehrenden 7-Bilder-Template. Einleitungs-Text-Banner, 3 Product-Showcases, Produkt-Grid, 4 schmale Stacked-Navigations-Banner, Produktberater-Teaser, Teilen-Footer.",
+      "templateSource": "natural-elements_vitamine_blueprint.json",
+      "keyPattern": "Hero+Nav > Themen-Hero > Einleitungs-Text-Banner > 3 x Product-Showcase > Product-Grid > 4 Stacked-Banner (Trenner + Cross-Links + Creative) > Produktberater-Teaser > Teilen-Footer"
+    },
+    "sub_category_modified": {
+      "description": "Sub-Kategorie mit modifizierter Bildanzahl (6 oder 8 Bilder). Grundriss folgt dem 7er-Template, aber ein Modul fehlt oder eins kommt dazu. Haeufig betrifft die Abweichung die Anzahl Product-Showcases oder das Vorhandensein eines zusaetzlichen Editorial-Banners.",
+      "templateSource": "natural-elements_vitamine_blueprint.json plus Anpassung in Modul 4 bis 6",
+      "keyPattern": "Hero+Nav > Themen-Hero > Einleitungs-Text-Banner > 2-4 x Product-Showcase je nach Anzahl > Product-Grid > Stacked-Banner (variable Anzahl) > Produktberater-Teaser > Teilen-Footer"
+    },
+    "featured_campaign_minimal": {
+      "description": "Featured-Line oder Kampagnen-Seite mit minimalem Editorial (1 bis 2 Bilder). Nur Hero plus Produkt-Grid plus Teilen-Footer. Keine Text-Ebene, keine USP-Icons, keine Showcases.",
+      "templateSource": "natural-elements_soprotein_blueprint.json",
+      "keyPattern": "Header+Nav > Kampagnen-Hero > Produkt-Grid > Teilen-Footer"
+    },
+    "filter_tool_minimal": {
+      "description": "Funktionale Tool-Seite (Produktfilter, Produktselektor) mit 1-2 editorialen Bildern. Dient der Navigation, nicht dem Storytelling.",
+      "templateSource": "soprotein-aehnlich aber noch schlanker",
+      "keyPattern": "Header+Nav > Tool-Hero oder Einleitungs-Banner > interaktives Filter- oder Quiz-Modul > Produkt-Grid > Teilen-Footer"
+    },
+    "brand_story_content": {
+      "description": "Reine Content-Seite (UEBER UNS). 19 editoriale Bilder plus 1 Video. Kein Produkt-Grid. Dramaturgie aus Hero, 4:1-Story-Bannern, 1.89:1-Tief-Bannern, Video, Claim-Strip, Werte-Grid, Cross-Link-Grids.",
+      "templateSource": "natural-elements_ueberuns_blueprint.json",
+      "keyPattern": "Header+Nav > Brand-Hero > Story-Banner 4:1 > Tief-Banner 1.89:1 > Story-Banner > Video > 4 x Story-Banner > Tief-Banner > Mittel-Banner 3.37:1 > Claim-Strip 8:1 > 4-Kachel-Werte-Grid > 2 x 2-Kachel-Cross-Link-Grid > Teilen-Footer"
+    },
+    "pure_product_grid": {
+      "description": "Alternativer Einstiegspunkt, 0 Editorial-Bilder, 0 Videos. Besteht nur aus Header plus Produkt-Grid plus Teilen-Footer.",
+      "templateSource": "abgeleitet aus SoProtein ohne Hero",
+      "keyPattern": "Header+Nav > Produkt-Grid > Teilen-Footer"
+    }
+  },
+  "pageAssignments": [
+    {
+      "pageName": "Startseite",
+      "pageId": "3955CCD4-902C-4679-9265-DEC4FCBAA8C8",
+      "archetype": "home_hub",
+      "editorialImages": 13,
+      "videos": 2,
+      "level": 0,
+      "deepBlueprint": "natural-elements_startseite_blueprint.json",
+      "customizations": null
+    },
+    {
+      "pageName": "unsere Neuheiten",
+      "pageId": "E3653495-9130-48DC-BFA4-F38BD9C7AEF1",
+      "archetype": "category_hub",
+      "editorialImages": 11,
+      "videos": 1,
+      "level": 1,
+      "deepBlueprint": null,
+      "customizations": "Leichte Reduktion gegenueber Immunsystem-Hub: vermutlich weniger Sub-Kategorie-Banner (Neuheiten ist keine Oberkategorie mit klassischen Unterseiten) und ein anderer Saison-Hero mit Launch-Motivik. Moegliche Strukturabweichungen bitte beim ersten Pflegezyklus verifizieren."
+    },
+    {
+      "pageName": "SoProtein Vegan (jetzt: Make it full size)",
+      "pageId": "0C5288E7-93DF-4272-890E-78EFF3DD0813",
+      "archetype": "featured_campaign_minimal",
+      "editorialImages": 1,
+      "videos": 0,
+      "level": 1,
+      "deepBlueprint": "natural-elements_soprotein_blueprint.json",
+      "customizations": "Wurde zwischen 10. April und 19. April 2026 von 2 Bildern plus 3 Videos auf 1 Hero-Banner plus Produkt-Grid reduziert. Page-Name-Umbenennung."
+    },
+    {
+      "pageName": "Alle Produkte",
+      "pageId": "56C2E5EE-81A5-4F07-8BB3-38927E13937B",
+      "archetype": "featured_campaign_minimal",
+      "editorialImages": 3,
+      "videos": 0,
+      "level": 1,
+      "deepBlueprint": null,
+      "customizations": "3 Editorial-Bilder statt 1: vermutlich Kategorie-Hero plus 2 Navigations-Trenner innerhalb des grossen Produkt-Grids. Grund-Struktur bleibt Hero plus Grid plus Footer."
+    },
+    {
+      "pageName": "Omega 3",
+      "pageId": "D788E930-2688-4AC4-B88E-49575F840258",
+      "archetype": "sub_category_modified",
+      "editorialImages": 5,
+      "videos": 0,
+      "level": 1,
+      "deepBlueprint": null,
+      "customizations": "5 statt 7 Editorial-Bilder. Vermutlich 1 Hero plus 1 Text-Banner plus 1 Product-Showcase plus 2 Navigations-Banner. Ohne Produktberater-Teaser."
+    },
+    {
+      "pageName": "Magnesium",
+      "pageId": "A050A8AF-92DA-4365-92BB-29A610671B82",
+      "archetype": "sub_category_modified",
+      "editorialImages": 4,
+      "videos": 1,
+      "level": 1,
+      "deepBlueprint": null,
+      "customizations": "4 Bilder plus 1 Video. Reduzierte Sub-Kategorie-Struktur mit 1 Video-Embed als Ersatz fuer ein Showcase."
+    },
+    {
+      "pageName": "Multivitamin",
+      "pageId": "4CD6E345-D764-4B9D-B004-6D3CEF022BE8",
+      "archetype": "sub_category_modified",
+      "editorialImages": 4,
+      "videos": 0,
+      "level": 1,
+      "deepBlueprint": null,
+      "customizations": "4 Bilder, kein Video. Minimale Sub-Kategorie-Struktur. Vermutlich Hero plus 2 Banner plus 1 Showcase."
+    },
+    {
+      "pageName": "Probiotika",
+      "pageId": "7A98FD63-BC7F-4576-9FE2-58A90E312293",
+      "archetype": "sub_category_modified",
+      "editorialImages": 5,
+      "videos": 0,
+      "level": 1,
+      "deepBlueprint": null,
+      "customizations": "5 Bilder. Aehnliche Struktur wie Omega 3."
+    },
+    {
+      "pageName": "Melatonin",
+      "pageId": "6901DCDE-4293-4134-A4F6-E09B8E48BB84",
+      "archetype": "sub_category_modified",
+      "editorialImages": 4,
+      "videos": 0,
+      "level": 1,
+      "deepBlueprint": null,
+      "customizations": "4 Bilder. Aehnlich Multivitamin-Minimal-Variante."
+    },
+    {
+      "pageName": "Immunsystem",
+      "pageId": "1B2D6D85-21E1-4BBE-AD98-EBDE6CFEA02F",
+      "archetype": "category_hub",
+      "editorialImages": 17,
+      "videos": 0,
+      "level": 1,
+      "deepBlueprint": "natural-elements_immunsystem_blueprint.json",
+      "customizations": null
+    },
+    {
+      "pageName": "Vitamine",
+      "pageId": "5DF9227A-372F-4144-8FE4-73B4797BAABD",
+      "archetype": "sub_category_7img",
+      "editorialImages": 7,
+      "videos": 3,
+      "level": 2,
+      "parentCategory": "Immunsystem",
+      "deepBlueprint": "natural-elements_vitamine_blueprint.json",
+      "customizations": "3 Videos zusaetzlich in der Legacy-Analyse dokumentiert, im aktuellen Crawl nicht mehr vorhanden."
+    },
+    {
+      "pageName": "Mineralien",
+      "pageId": "C823DA3C-10A3-48F8-9A7E-E23CBA091433",
+      "archetype": "sub_category_7img",
+      "editorialImages": 7,
+      "videos": 0,
+      "level": 2,
+      "parentCategory": "Immunsystem",
+      "deepBlueprint": null,
+      "customizations": "Reines 7-Bilder-Template. Themen-Hero ist 'MINERAL-POWER' oder aehnlich, 3 Showcases zu Magnesium, Zink, Calcium. Restliche Struktur identisch zu Vitamine."
+    },
+    {
+      "pageName": "Pflanzenstoffe",
+      "pageId": "F0DE8314-33B1-48B3-87A3-404B46F722B9",
+      "archetype": "sub_category_7img",
+      "editorialImages": 7,
+      "videos": 0,
+      "level": 2,
+      "parentCategory": "Immunsystem",
+      "deepBlueprint": null,
+      "customizations": "Reines 7-Bilder-Template. Themen-Hero 'PFLANZEN-POWER', 3 Showcases zu beispielhaften Pflanzenstoffen (Kurkuma, Mariendistel, Ashwagandha)."
+    },
+    {
+      "pageName": "Sport & Energie",
+      "pageId": "664DFD7E-CDA1-40F5-BF13-5E18404F3CC6",
+      "archetype": "category_hub",
+      "editorialImages": 13,
+      "videos": 2,
+      "level": 1,
+      "deepBlueprint": null,
+      "customizations": "Etwas kleiner als Immunsystem-Hub (13 statt 17), ABER mit 2 Videos. Vermutlich 1 Video im Saison-Hero-Bereich, 1 Video im Produktberater-Bereich. Sub-Kategorie-Banner: Sportfilter/Pre Workout/Workout/Regeneration/Daily Fitness/Gewichtsmanagement."
+    },
+    {
+      "pageName": "Sportfilter",
+      "pageId": "822ED3CE-B1E6-4C58-A511-48D7896907DA",
+      "archetype": "filter_tool_minimal",
+      "editorialImages": 2,
+      "videos": 0,
+      "level": 2,
+      "parentCategory": "Sport & Energie",
+      "deepBlueprint": null,
+      "customizations": "Tool-Seite: Filter-Einleitungs-Hero plus Filter-UI plus Produkt-Grid."
+    },
+    {
+      "pageName": "Pre Workout",
+      "pageId": "808E247F-2081-40D2-9259-56150461CF7E",
+      "archetype": "sub_category_7img",
+      "editorialImages": 7,
+      "videos": 0,
+      "level": 2,
+      "parentCategory": "Sport & Energie",
+      "deepBlueprint": null,
+      "customizations": "Reines 7-Bilder-Template. Themen-Hero zum Pre-Workout-Kick, 3 Showcases zu Booster-Produkten (Creatin, Koffein, BCAA)."
+    },
+    {
+      "pageName": "Workout",
+      "pageId": "08D24436-0B93-42FB-ABBD-E0246DE45156",
+      "archetype": "sub_category_7img",
+      "editorialImages": 7,
+      "videos": 0,
+      "level": 2,
+      "parentCategory": "Sport & Energie",
+      "deepBlueprint": null,
+      "customizations": "7-Bilder-Template fuer Intra-Workout-Produkte (Elektrolyte, EAA)."
+    },
+    {
+      "pageName": "Regeneration",
+      "pageId": "2E3F7FDD-F374-4EA9-A8DA-51BCEC11BF49",
+      "archetype": "sub_category_7img",
+      "editorialImages": 7,
+      "videos": 0,
+      "level": 2,
+      "parentCategory": "Sport & Energie",
+      "deepBlueprint": null,
+      "customizations": "7-Bilder-Template fuer Regenerations-Produkte (Magnesium, Protein, Aminosaeuren)."
+    },
+    {
+      "pageName": "Daily Fitness",
+      "pageId": "26C6215F-F342-4387-B970-CEC2960BE627",
+      "archetype": "sub_category_7img",
+      "editorialImages": 7,
+      "videos": 0,
+      "level": 2,
+      "parentCategory": "Sport & Energie",
+      "deepBlueprint": null,
+      "customizations": "7-Bilder-Template fuer Daily-Fitness-Produkte (Multivitamine, Omega 3, Vitamin D fuer Sportler)."
+    },
+    {
+      "pageName": "Gewichtsmanagement",
+      "pageId": "FDE3409D-50AF-4D67-81B4-C4D8EB5570F8",
+      "archetype": "sub_category_modified",
+      "editorialImages": 4,
+      "videos": 0,
+      "level": 2,
+      "parentCategory": "Sport & Energie",
+      "deepBlueprint": null,
+      "customizations": "Reduzierte Variante mit 4 Bildern. Vermutlich Hero plus Text-Banner plus 2 Showcases statt 3."
+    },
+    {
+      "pageName": "Beauty & Anti Aging",
+      "pageId": "428F17F5-8142-4421-8806-F3EE4667D39E",
+      "archetype": "category_hub",
+      "editorialImages": 19,
+      "videos": 2,
+      "level": 1,
+      "deepBlueprint": null,
+      "customizations": "Groesster Hub im Store. Vermutlich mehr Sub-Kategorie-Banner (Haut, Haare, Naegel, Kosmetik), 2 Videos, zusaetzliches Ingredient-Deep-Dive-Modul typisch fuer Beauty-Linien."
+    },
+    {
+      "pageName": "Haut",
+      "pageId": "5ECE8C6B-95C4-4830-9D18-2EABCAC7CADD",
+      "archetype": "sub_category_modified",
+      "editorialImages": 8,
+      "videos": 4,
+      "level": 2,
+      "parentCategory": "Beauty & Anti Aging",
+      "deepBlueprint": null,
+      "customizations": "8 Bilder plus 4 Videos. Das 7-Bilder-Template plus 1 zusaetzliches Editorial-Modul. Die 4 Videos deuten auf eine Vorher-Nachher-Reihe oder Anwendungs-Tutorials hin, typisch fuer Beauty."
+    },
+    {
+      "pageName": "Haare",
+      "pageId": "28BD2C62-EC3D-4E53-A530-0EB360A24902",
+      "archetype": "sub_category_modified",
+      "editorialImages": 8,
+      "videos": 1,
+      "level": 2,
+      "parentCategory": "Beauty & Anti Aging",
+      "deepBlueprint": null,
+      "customizations": "8 Bilder plus 1 Video. 7-Bilder-Template plus 1 zusaetzliches Modul. Video vermutlich Haar-Routine-Tutorial."
+    },
+    {
+      "pageName": "Naegel",
+      "pageId": "4DD7B591-C168-4B3B-BF0F-DA3040A9FFE1",
+      "archetype": "sub_category_modified",
+      "editorialImages": 8,
+      "videos": 3,
+      "level": 2,
+      "parentCategory": "Beauty & Anti Aging",
+      "deepBlueprint": null,
+      "customizations": "8 Bilder plus 3 Videos. Erweitertes 7-Bilder-Template mit Fokus auf Biotin und Keratin-Produkte."
+    },
+    {
+      "pageName": "Kosmetik",
+      "pageId": "5E58FE79-5F4B-4125-B98F-15078EA52C21",
+      "archetype": "category_hub",
+      "editorialImages": 15,
+      "videos": 2,
+      "level": 2,
+      "parentCategory": "Beauty & Anti Aging",
+      "deepBlueprint": null,
+      "customizations": "Obwohl Level 2: Kosmetik hat Hub-Charakter, weil es 15 Bilder plus 2 Videos hat. Wird als category_hub behandelt, nicht als sub_category. Vermutlich die topische Produktlinie (Cremes, Seren) mit eigener Brand-Story."
+    },
+    {
+      "pageName": "Knochen & Beweglichkeit",
+      "pageId": "63C24E05-D18F-4776-8FA1-69CB3D7B75C4",
+      "archetype": "category_hub",
+      "editorialImages": 17,
+      "videos": 2,
+      "level": 1,
+      "deepBlueprint": null,
+      "customizations": "Hub-Kategorie mit 17 Bildern plus 2 Videos. Struktur identisch zu Immunsystem-Hub. 2 Sub-Kategorie-Banner (Beweglichkeit, Knochen). Videos vermutlich zum Thema Gelenkgesundheit und Calcium-Absorption."
+    },
+    {
+      "pageName": "Beweglichkeit",
+      "pageId": "0DCC0265-4D32-4C1B-917F-53AEB5A5D14F",
+      "archetype": "sub_category_modified",
+      "editorialImages": 6,
+      "videos": 1,
+      "level": 2,
+      "parentCategory": "Knochen & Beweglichkeit",
+      "deepBlueprint": null,
+      "customizations": "6 Bilder plus 1 Video. Reduziertes 7-Bilder-Template: vermutlich 1 Showcase weniger, Video ersetzt den Produktberater-Teaser."
+    },
+    {
+      "pageName": "Knochen",
+      "pageId": "53E0C3C9-DBCA-4C91-8E21-494AC466FEC2",
+      "archetype": "sub_category_modified",
+      "editorialImages": 6,
+      "videos": 2,
+      "level": 2,
+      "parentCategory": "Knochen & Beweglichkeit",
+      "deepBlueprint": null,
+      "customizations": "6 Bilder plus 2 Videos. Vergleichbar zu Beweglichkeit, etwas mehr Video-Content."
+    },
+    {
+      "pageName": "Wohlbefinden & Anti Stress",
+      "pageId": "C86B7462-30CF-4C0A-87D2-D4AA4A861A7F",
+      "archetype": "category_hub",
+      "editorialImages": 18,
+      "videos": 2,
+      "level": 1,
+      "deepBlueprint": null,
+      "customizations": "Hub-Kategorie mit 18 Bildern plus 2 Videos. 3 Sub-Kategorie-Banner (Innere Ruhe, Ruhiger Schlaf, Nerven und Energie)."
+    },
+    {
+      "pageName": "Innere Ruhe",
+      "pageId": "279B33DB-A71A-4978-A455-90D0B7DE211B",
+      "archetype": "sub_category_7img",
+      "editorialImages": 7,
+      "videos": 0,
+      "level": 2,
+      "parentCategory": "Wohlbefinden & Anti Stress",
+      "deepBlueprint": null,
+      "customizations": "Reines 7-Bilder-Template. Themen-Hero zu Entspannung, Showcases zu Ashwagandha, Baldrian, Passionsblume."
+    },
+    {
+      "pageName": "Ruhiger Schlaf",
+      "pageId": "9B6D8AB7-862F-41FD-B977-E5BE17A77996",
+      "archetype": "sub_category_7img",
+      "editorialImages": 7,
+      "videos": 0,
+      "level": 2,
+      "parentCategory": "Wohlbefinden & Anti Stress",
+      "deepBlueprint": null,
+      "customizations": "Reines 7-Bilder-Template. Showcases zu Melatonin, Magnesium-Nacht, Kraeuter-Schlaftees."
+    },
+    {
+      "pageName": "Nerven & Energie",
+      "pageId": "2A4CBB9C-0C16-48EF-B384-E47188AA20AA",
+      "archetype": "sub_category_7img",
+      "editorialImages": 7,
+      "videos": 1,
+      "level": 2,
+      "parentCategory": "Wohlbefinden & Anti Stress",
+      "deepBlueprint": null,
+      "customizations": "7-Bilder-Template plus 1 Video. Showcases zu B-Vitaminen, Rhodiola, Ginseng."
+    },
+    {
+      "pageName": "Verdauung & Gewicht",
+      "pageId": "0C2927AB-0C3A-4990-9D68-2F25281BEE79",
+      "archetype": "category_hub",
+      "editorialImages": 17,
+      "videos": 2,
+      "level": 1,
+      "deepBlueprint": null,
+      "customizations": "Hub-Kategorie mit 17 Bildern plus 2 Videos. 2 Sub-Kategorie-Banner (Verdauung, Koerperbewusstsein)."
+    },
+    {
+      "pageName": "Verdauung",
+      "pageId": "AEFF9C75-7DBF-4E44-AEF4-90B0A4FC8170",
+      "archetype": "sub_category_modified",
+      "editorialImages": 6,
+      "videos": 0,
+      "level": 2,
+      "parentCategory": "Verdauung & Gewicht",
+      "deepBlueprint": null,
+      "customizations": "6 Bilder. Reduziertes 7-Bilder-Template. Showcases zu Probiotika, Flohsamen, Inulin."
+    },
+    {
+      "pageName": "Koerperbewusstsein",
+      "pageId": "4F023B05-A058-4625-BB29-416280CC5A1B",
+      "archetype": "sub_category_modified",
+      "editorialImages": 6,
+      "videos": 0,
+      "level": 2,
+      "parentCategory": "Verdauung & Gewicht",
+      "deepBlueprint": null,
+      "customizations": "6 Bilder. Reduziertes 7-Bilder-Template."
+    },
+    {
+      "pageName": "Gaming",
+      "pageId": "30298D32-3452-4FD2-9700-E4237CD2C230",
+      "archetype": "category_hub",
+      "editorialImages": 15,
+      "videos": 2,
+      "level": 1,
+      "deepBlueprint": null,
+      "customizations": "Ungewoehnlicher Hub fuer Supplement-Marke: 15 Bilder plus 2 Videos. Eigene Visual-Language mit Gaming-Aesthetik (dunklere Palette moeglich, Neon-Akzente). Sub-Kategorien fehlen, stattdessen direkter Produkt-Fokus auf Focus, Gamer-Energy, Augen-Unterstuetzung."
+    },
+    {
+      "pageName": "Produktfilter",
+      "pageId": "0AB748AD-4B9F-46B0-B2C2-82D33449F77E",
+      "archetype": "filter_tool_minimal",
+      "editorialImages": 2,
+      "videos": 0,
+      "level": 1,
+      "deepBlueprint": null,
+      "customizations": "Filter-Tool: Einleitungs-Banner plus Filter-UI plus Ergebnis-Grid."
+    },
+    {
+      "pageName": "Produktselektor",
+      "pageId": "A03B844E-0DA2-4FFC-8205-DC6DFDB0D59E",
+      "archetype": "filter_tool_minimal",
+      "editorialImages": 1,
+      "videos": 0,
+      "level": 1,
+      "deepBlueprint": null,
+      "customizations": "Quiz-Tool: Einleitungs-Hero plus interaktives Quiz-Modul plus Empfehlungs-Output."
+    },
+    {
+      "pageName": "Geschenk-Sets",
+      "pageId": "1A5ECF37-615B-4FBB-8620-C629481CB321",
+      "archetype": "category_hub",
+      "editorialImages": 12,
+      "videos": 1,
+      "level": 1,
+      "deepBlueprint": null,
+      "customizations": "Kategorie-Hub fuer Gift-Bundles. 12 Bilder plus 1 Video. Struktur wie Immunsystem-Hub, aber mit Bundle-Visualisierung (Geschenk-Papier, Schleifen, saisonale Verpackung) statt Sub-Kategorie-Banner."
+    },
+    {
+      "pageName": "UEBER UNS",
+      "pageId": "C199E0D4-B434-4DFA-8DF0-2D5601387A8B",
+      "archetype": "brand_story_content",
+      "editorialImages": 19,
+      "videos": 1,
+      "level": 1,
+      "deepBlueprint": "natural-elements_ueberuns_blueprint.json",
+      "customizations": null
+    },
+    {
+      "pageName": "Unsere Empfehlungen",
+      "pageId": "B77CB4EF-4CCF-4FB0-9251-53DF11DCCE12",
+      "archetype": "category_hub",
+      "editorialImages": 10,
+      "videos": 0,
+      "level": 1,
+      "deepBlueprint": null,
+      "customizations": "Kurierte Empfehlungs-Seite. 10 Bilder. Struktur-Variation: mehr Editorial-Banner mit Expert-Quotes oder Zertifikate, weniger Navigations-Tiles, staerkerer Fokus auf Produkt-Showcases."
+    },
+    {
+      "pageName": "Alle Produkte (2nd)",
+      "pageId": "1B1E5B14-3E24-4435-90AC-1028937D2104",
+      "archetype": "pure_product_grid",
+      "editorialImages": 0,
+      "videos": 0,
+      "level": 2,
+      "deepBlueprint": null,
+      "customizations": "Reiner Grid-Entry-Point ohne Editorial."
+    },
+    {
+      "pageName": "Sport & Energie (2nd)",
+      "pageId": "FE657234-26BB-457E-889E-57048ABF42F3",
+      "archetype": "pure_product_grid",
+      "editorialImages": 0,
+      "videos": 0,
+      "level": 2,
+      "deepBlueprint": null,
+      "customizations": null
+    },
+    {
+      "pageName": "Immunsystem (2nd)",
+      "pageId": "50B1B8C1-7F47-4544-9445-AF37B3550E69",
+      "archetype": "pure_product_grid",
+      "editorialImages": 0,
+      "videos": 0,
+      "level": 2,
+      "deepBlueprint": null,
+      "customizations": null
+    },
+    {
+      "pageName": "Beauty & Anti-Aging (2nd)",
+      "pageId": "7CCF0BFB-88C4-4819-BA9C-21B7D1DE1B3A",
+      "archetype": "pure_product_grid",
+      "editorialImages": 0,
+      "videos": 0,
+      "level": 2,
+      "deepBlueprint": null,
+      "customizations": null
+    },
+    {
+      "pageName": "Wohlbefinden & Anti Stress (2nd)",
+      "pageId": "4A5AF019-F326-4B06-8049-827104C543EC",
+      "archetype": "pure_product_grid",
+      "editorialImages": 0,
+      "videos": 0,
+      "level": 2,
+      "deepBlueprint": null,
+      "customizations": null
+    },
+    {
+      "pageName": "Verdauung & Gewicht (2nd)",
+      "pageId": "E4745A5C-D78F-47D4-8471-835F3E0770F9",
+      "archetype": "pure_product_grid",
+      "editorialImages": 0,
+      "videos": 0,
+      "level": 2,
+      "deepBlueprint": null,
+      "customizations": null
+    },
+    {
+      "pageName": "Knochen & Beweglichkeit (2nd)",
+      "pageId": "6FB59F47-6124-4486-AE5A-8D62C4469E87",
+      "archetype": "pure_product_grid",
+      "editorialImages": 0,
+      "videos": 0,
+      "level": 2,
+      "deepBlueprint": null,
+      "customizations": null
+    }
+  ],
+  "archetypeStatistik": {
+    "home_hub": 1,
+    "category_hub": 9,
+    "sub_category_7img": 9,
+    "sub_category_modified": 10,
+    "featured_campaign_minimal": 2,
+    "filter_tool_minimal": 3,
+    "brand_story_content": 1,
+    "pure_product_grid": 7
+  },
+  "gesamtstatistik": {
+    "totalPages": 42,
+    "analyzedAs": "5 Deep-Blueprints plus Pattern-Zuordnung fuer alle restlichen Seiten. Covered: 100 Prozent.",
+    "deepBlueprintCoverage": [
+      "Startseite (home_hub)",
+      "Immunsystem (category_hub)",
+      "Vitamine (sub_category_7img)",
+      "SoProtein / Make it full size (featured_campaign_minimal)",
+      "UEBER UNS (brand_story_content)"
+    ],
+    "patternOnlyCoverage": 37
+  },
+  "openQuestions": [
+    "Die Struktur-Annahmen fuer die nicht-tief-gecrawlten Seiten basieren auf dem Template-Muster. Beim finalen Generator-Run sollten stichprobenartig Mineralien, Pflanzenstoffe, Haut, Kosmetik und Gaming tief verifiziert werden, weil sie archetypische Abweichungen haben koennten.",
+    "Kosmetik wurde als category_hub eingestuft (15 Bilder, 2 Videos), obwohl Level 2. Zu pruefen, ob es wirklich Hub-Verhalten zeigt (eigene Sub-Kategorien, eigene Brand-Story) oder ob es nur sub_category_modified mit zusaetzlichem Content ist.",
+    "Gaming hat mit 15 Bildern einen Category-Hub-Umfang, aber offenbar keine echten Sub-Kategorien. Zu pruefen, ob es strukturell eher einem Featured-Line-Hub oder einem Standard-Hub entspricht.",
+    "Die 2nd-Entry-Points sind reine Produkt-Grids. Zu pruefen, ob sie tatsaechlich 0 Editorial haben (also kein Hero) oder ob sie einen minimalen Kopf-Banner tragen, der nur nicht als Editorial zaehlt.",
+    "Die Legacy-Analyse vom 10. April 2026 dokumentiert in Summe andere Zahlen als der aktuelle Crawl. Fuer die Featured-Line-Seite wurde bereits eine deutliche Reduktion nachgewiesen. Aehnliche Aenderungen koennten auch andere Seiten betroffen haben."
+  ]
+}
