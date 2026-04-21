@@ -1,0 +1,253 @@
+{
+  "_schemaVersion": "v2-dom-probe",
+  "_generatedBy": "rerun/build-blueprints-from-dom.mjs",
+  "_sourceDom": "04_soprotein_vegan.json",
+  "_note": "DOM-derived Blueprint für Workflow-Robustness-Rerun. Vision-Felder sind als screenshot_required markiert und in openQuestions gesammelt.",
+  "pageUrl": "https://www.amazon.de/stores/page/0C5288E7-93DF-4272-890E-78EFF3DD0813",
+  "pageName": "SoProtein Vegan",
+  "pageLevel": 2,
+  "pageType": "sub_category",
+  "archetype": "screenshot_required",
+  "contentStats": {
+    "domModules": 4,
+    "logicalModules": 2,
+    "totalImages": 16,
+    "totalVideos": 0,
+    "estimatedScrollLength": "medium"
+  },
+  "modules": [
+    {
+      "moduleId": "04_soprotein_vegan_mod_01",
+      "position": 1,
+      "moduleName": "Hero-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow auf Position 1 (t=437px, h=322px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "immersive",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/7f7bea6d-3f85-473b-ad59-79e72f5919c1._CR0%2C0%2C3000%2C800_SX1500_.jpg"
+        }
+      ],
+      "_dom": {
+        "domIndex": 1,
+        "topPx": 437,
+        "heightPx": 322,
+        "widgetClass": "EditorialRow",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "04_soprotein_vegan_mod_02",
+      "position": 2,
+      "moduleName": "Produktgrid",
+      "layoutShape": "product_grid_asin",
+      "tileCount": 8,
+      "designRationale": "DOM-abgeleitet aus Widget ProductGrid auf Position 2 (t=759px, h=1901px, ic=15, pc=30, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Heuristik aus widgetClass=ProductGrid, imgCount=15, productCount=30, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "Bild (alt: natural elements SoProtein Clear Whey Isolate – Mango Maracuja Geschmack – 600g )",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/71sJ-CS2j2L._AC_UL320_.jpg"
+        },
+        {
+          "position": 2,
+          "imageCategory": "screenshot_required",
+          "visualContent": "Bild (alt: SoProtein Whey Complex Protein Pulver - Schokoladen-Geschmack - 690g - 22g Prote)",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/71wd83GyidL._AC_UL320_.jpg"
+        },
+        {
+          "position": 3,
+          "imageCategory": "screenshot_required",
+          "visualContent": "Bild (alt: natural elements SoProtein Vegan Chocolate – veganes Proteinpulver – 660g – 21g )",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/71dYE5iWx+L._AC_UL320_.jpg"
+        },
+        {
+          "position": 4,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 5,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 6,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 7,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 8,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 2,
+        "topPx": 759,
+        "heightPx": 1901,
+        "widgetClass": "ProductGrid",
+        "headingText": [
+          "natural elements SoProtein Clear Whey Isolate – Mango Maracuja Geschmack – 600g Proteinpulver – 25g Protein – erfrischender Protein-Shake, optimal löslich – in Deutschland entwickelt & laborgeprüft",
+          "SoProtein Whey Complex Protein Pulver - Schokoladen-Geschmack - 690g - 22g Protein pro Portion - ideal zum Muskelaufbau, perfekte Löslichkeit - in Deutschland produziert & laborgeprüft",
+          "natural elements SoProtein Vegan Chocolate – veganes Proteinpulver – 660g – 21g Protein pro Portion – 22 Portionen – ideal zum Muskelaufbau, perfekte Löslichkeit – laborgeprüfte Qualität"
+        ],
+        "previewChars": 250,
+        "images": 15,
+        "videos": 0,
+        "products": 30,
+        "shoppable": 0
+      }
+    }
+  ],
+  "pageAnalysis": {
+    "dominantPalette": [],
+    "tonalityVisual": "screenshot_required",
+    "ctaStrategies": "screenshot_required",
+    "contentDepth": "DOM zeigt 2 logische Module, 16 Bilder, 0 Videos, 4081px Scroll-Höhe.",
+    "useForArchetype": "screenshot_required",
+    "moduleClusters": "screenshot_required"
+  },
+  "openQuestions": [
+    "Vision-Felder pro Tile (imageCategory, backgroundStyle, elementProportions, dominantColors) sind aus DOM nicht ableitbar, Screenshot-Analyse nötig.",
+    "textOnImage.headline/subline/cta für alle Banner-Module erfordert OCR/Vision.",
+    "structuralPattern und relationToNextModule pro Modul sind Vision-Felder.",
+    "archetype, tonalityVisual, ctaStrategies, useForArchetype und moduleClusters sind Page-Level-Vision-Felder.",
+    "designIntent aus DOM ist Heuristik und kann bei Screenshot-Review revidiert werden."
+  ]
+}

@@ -1,0 +1,1036 @@
+{
+  "_schemaVersion": "v2-dom-probe",
+  "_generatedBy": "rerun/build-blueprints-from-dom.mjs",
+  "_sourceDom": "03_vitamine.json",
+  "_note": "DOM-derived Blueprint für Workflow-Robustness-Rerun. Vision-Felder sind als screenshot_required markiert und in openQuestions gesammelt.",
+  "pageUrl": "https://www.amazon.de/stores/page/5DF9227A-372F-4144-8FE4-73B4797BAABD",
+  "pageName": "Vitamine",
+  "pageLevel": 1,
+  "pageType": "sub_category",
+  "archetype": "screenshot_required",
+  "contentStats": {
+    "domModules": 13,
+    "logicalModules": 11,
+    "totalImages": 112,
+    "totalVideos": 18,
+    "estimatedScrollLength": "very_long"
+  },
+  "modules": [
+    {
+      "moduleId": "03_vitamine_mod_01",
+      "position": 1,
+      "moduleName": "Hero-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow auf Position 1 (t=437px, h=591px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "immersive",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/5fe74b59-6f7c-42ed-bd6e-3294189440b0._CR0%2C0%2C3000%2C1500_SX1500_.png"
+        }
+      ],
+      "_dom": {
+        "domIndex": 1,
+        "topPx": 437,
+        "heightPx": 591,
+        "widgetClass": "EditorialRow",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "03_vitamine_mod_02",
+      "position": 2,
+      "moduleName": "Trenn-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow auf Position 2 (t=1028px, h=303px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bcaa1a15-76b2-41da-a467-0fe7af47a863._CR0%2C0%2C3000%2C750_SX1500_.png"
+        }
+      ],
+      "_dom": {
+        "domIndex": 2,
+        "topPx": 1028,
+        "heightPx": 303,
+        "widgetClass": "EditorialRow",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "03_vitamine_mod_03",
+      "position": 3,
+      "moduleName": "Produkt-Showcase mit Video",
+      "layoutShape": "6_tile_grid",
+      "tileCount": 8,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow auf Position 3 (t=1331px, h=583px, ic=29, pc=0, vc=6).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "editorial",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow, imgCount=29, productCount=0, videoCount=6.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/71Ym813NauL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg"
+        },
+        {
+          "position": 2,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/91pf6Ujqr2L._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg"
+        },
+        {
+          "position": 3,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/71Q0-bda6xL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg"
+        },
+        {
+          "position": 4,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 5,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 6,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 7,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 8,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 3,
+        "topPx": 1331,
+        "heightPx": 583,
+        "widgetClass": "EditorialRow",
+        "headingText": [
+          "natural elements Premium Multivitamin – 180 hochdosierte Komplex-Kapseln – 22 wertvolle Vitamine & Mineralstoffe...",
+          "Informationen zu diesem Artikel"
+        ],
+        "previewChars": 250,
+        "images": 29,
+        "videos": 6,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "03_vitamine_mod_04",
+      "position": 4,
+      "moduleName": "Produkt-Showcase mit Video",
+      "layoutShape": "6_tile_grid",
+      "tileCount": 8,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow auf Position 4 (t=1914px, h=629px, ic=26, pc=0, vc=6).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "editorial",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow, imgCount=26, productCount=0, videoCount=6.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/71O6TM20atL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg"
+        },
+        {
+          "position": 2,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/71HlHqwE9qL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg"
+        },
+        {
+          "position": 3,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/81iwzjTVcKL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg"
+        },
+        {
+          "position": 4,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 5,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 6,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 7,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 8,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 4,
+        "topPx": 1914,
+        "heightPx": 629,
+        "widgetClass": "EditorialRow",
+        "headingText": [
+          "natural elements Vitamin C gepuffert 500mg – 365 vegane Kapseln – magenschonend, pH-neutral, säurefrei...",
+          "Informationen zu diesem Artikel"
+        ],
+        "previewChars": 250,
+        "images": 26,
+        "videos": 6,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "03_vitamine_mod_05",
+      "position": 5,
+      "moduleName": "Produkt-Showcase mit Video",
+      "layoutShape": "6_tile_grid",
+      "tileCount": 8,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow auf Position 5 (t=2543px, h=629px, ic=30, pc=0, vc=6).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "editorial",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow, imgCount=30, productCount=0, videoCount=6.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/611ecOSsjrL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg"
+        },
+        {
+          "position": 2,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/81jSZH9ALnL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg"
+        },
+        {
+          "position": 3,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/71hq7e5ukrL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg"
+        },
+        {
+          "position": 4,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 5,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 6,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 7,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 8,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 5,
+        "topPx": 2543,
+        "heightPx": 629,
+        "widgetClass": "EditorialRow",
+        "headingText": [
+          "natural elements Vitamin D3 Tropfen – 1000 I.E. pro Tagesdosis (1 Tropfen) – Langzeitvorrat mit 50 ml – für beste...",
+          "Informationen zu diesem Artikel"
+        ],
+        "previewChars": 250,
+        "images": 30,
+        "videos": 6,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "03_vitamine_mod_06",
+      "position": 6,
+      "moduleName": "Produktgrid",
+      "layoutShape": "product_grid_asin",
+      "tileCount": 8,
+      "designRationale": "DOM-abgeleitet aus Widget ProductGrid auf Position 6 (t=3172px, h=2862px, ic=20, pc=40, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Heuristik aus widgetClass=ProductGrid, imgCount=20, productCount=40, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "Bild (alt: natural elements Vitamin D3 + K2 Softgel Kapseln – hochdosierte 1.000 I.E. Vitam)",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/71J3jJ3w7RL._AC_UL320_.jpg"
+        },
+        {
+          "position": 2,
+          "imageCategory": "screenshot_required",
+          "visualContent": "Bild (alt: natural elements Flora 21® Superbiotic – 60 Kapseln – 4,5 Mrd. KBE Sporenbildend)",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/7102zcaZ1nL._AC_UL320_.jpg"
+        },
+        {
+          "position": 3,
+          "imageCategory": "screenshot_required",
+          "visualContent": "Bild (alt: natural elements Vitamin B Komplex – 240 Tabletten – mit 8 essenziellen B-Vitami)",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/71Q6WovC2fL._AC_UL320_.jpg"
+        },
+        {
+          "position": 4,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 5,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 6,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 7,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 8,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 6,
+        "topPx": 3172,
+        "heightPx": 2862,
+        "widgetClass": "ProductGrid",
+        "headingText": [
+          "natural elements Vitamin D3 + K2 Softgel Kapseln – hochdosierte 1.000 I.E. Vitamin D3 und 20µg Vitamin K2 – 120 Kapseln – vegan, ohne unnötige Zusätze – in Deutschland produziert & laborgeprüft",
+          "natural elements Flora 21® Superbiotic – 60 Kapseln – 4,5 Mrd. KBE Sporenbildende Bakterienstämme & Postbiotika – mit Vitamin-B Komplex und Zink – vegan, ohne unnötige Zusätze, laborgeprüfte Qualität",
+          "natural elements Vitamin B Komplex – 240 Tabletten – mit 8 essenziellen B-Vitaminen & Kofaktoren – mit Bioaktiv-Formen – vegan, hochdosiert – laborgeprüft"
+        ],
+        "previewChars": 250,
+        "images": 20,
+        "videos": 0,
+        "products": 40,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "03_vitamine_mod_07",
+      "position": 7,
+      "moduleName": "Trenn-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow auf Position 7 (t=6034px, h=159px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/653d5bc3-3de4-4c45-aa74-5809827970fe._CR0%2C0%2C3000%2C375_SX1500_.png"
+        }
+      ],
+      "_dom": {
+        "domIndex": 7,
+        "topPx": 6034,
+        "heightPx": 159,
+        "widgetClass": "EditorialRow",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "03_vitamine_mod_08",
+      "position": 8,
+      "moduleName": "Trenn-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow auf Position 8 (t=6193px, h=207px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/b48c4235-a19c-49bc-8ec4-f31795f9ed11._CR0%2C0%2C3000%2C500_SX1500_.png"
+        }
+      ],
+      "_dom": {
+        "domIndex": 8,
+        "topPx": 6193,
+        "heightPx": 207,
+        "widgetClass": "EditorialRow",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "03_vitamine_mod_09",
+      "position": 9,
+      "moduleName": "Trenn-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow auf Position 9 (t=6400px, h=207px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2a16e120-5cc3-46da-9888-662fbdee2759._CR0%2C0%2C3000%2C500_SX1500_.png"
+        }
+      ],
+      "_dom": {
+        "domIndex": 9,
+        "topPx": 6400,
+        "heightPx": 207,
+        "widgetClass": "EditorialRow",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "03_vitamine_mod_10",
+      "position": 10,
+      "moduleName": "Trenn-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow auf Position 10 (t=6607px, h=188px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/91781d06-ca7e-4352-85c4-ac3bed2f9619._CR0%2C0%2C3000%2C450_SX1500_.jpg"
+        }
+      ],
+      "_dom": {
+        "domIndex": 10,
+        "topPx": 6607,
+        "heightPx": 188,
+        "widgetClass": "EditorialRow",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "03_vitamine_mod_11",
+      "position": 11,
+      "moduleName": "Trenn-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow auf Position 11 (t=6795px, h=303px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/4bf93b64-af05-4168-bea5-21cb179f3caf._CR0%2C0%2C3000%2C750_SX1500_.png"
+        }
+      ],
+      "_dom": {
+        "domIndex": 11,
+        "topPx": 6795,
+        "heightPx": 303,
+        "widgetClass": "EditorialRow",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    }
+  ],
+  "pageAnalysis": {
+    "dominantPalette": [],
+    "tonalityVisual": "screenshot_required",
+    "ctaStrategies": "screenshot_required",
+    "contentDepth": "DOM zeigt 11 logische Module, 112 Bilder, 18 Videos, 8519px Scroll-Höhe.",
+    "useForArchetype": "screenshot_required",
+    "moduleClusters": "screenshot_required"
+  },
+  "openQuestions": [
+    "Vision-Felder pro Tile (imageCategory, backgroundStyle, elementProportions, dominantColors) sind aus DOM nicht ableitbar, Screenshot-Analyse nötig.",
+    "textOnImage.headline/subline/cta für alle Banner-Module erfordert OCR/Vision.",
+    "structuralPattern und relationToNextModule pro Modul sind Vision-Felder.",
+    "archetype, tonalityVisual, ctaStrategies, useForArchetype und moduleClusters sind Page-Level-Vision-Felder.",
+    "designIntent aus DOM ist Heuristik und kann bei Screenshot-Review revidiert werden."
+  ]
+}
