@@ -1,158 +1,257 @@
-# Blueprint Extraktion Prompt v2
+# Blueprint Extraktion Prompt v3 (Phased, Gold-aligned)
 
-System-Prompt für Claude Cowork (beziehungsweise Gemini 2.5 Pro im Voll-Lauf)
-zur Extraktion der strukturellen und inhaltlichen Zusammensetzung einer
-Amazon Brand Store Unterseite aus einem Full-Page-Screenshot.
+Dieses Dokument ersetzt v2 (Commit `bb44ed7`) und die erste v2-Schaerfung
+(Commit `2e8bf72`). Grund fuer den Bruch: die Probe auf natural elements
+(Branch `claude/ne-workflow-probe-20260420`) hat gezeigt, dass das
+bisherige v2-Schema (8 abstrakte `layoutShape`-Werte plus Vision-only-Felder
+ohne klare Phasen-Trennung) mit dem realen Gold-Stand (29 konkrete
+`layoutType`-Werte, 5 `origin`-Werte fuer textOnImage) nicht deckungsgleich
+ist und dass die DOM-Extraktion allein rund 40 Prozent der Zielfelder leer
+laesst. v3 loest das mit einer klaren Drei-Phasen-Architektur plus einem
+aligned Schema.
 
-v2 integriert 13 Schärfungen, die aus der Verifikation des v1-Trial-Laufs an
-natural-elements resultieren. v1 (`git log`, Commit `bb44ed7`) ist überholt und
-wird durch dieses Dokument ersetzt.
+## 0. Phased Workflow, Kurzfassung
 
-## Geltungsbereich
+| Phase | Wer fuehrt aus | Input | Output | Tool |
+|-------|----------------|-------|--------|------|
+| 1 DOM | Cowork (Chrome MCP) | Live amazon.de Seite | `raw-dom/*.json` pro Seite | `scripts/extract-page-dom.js` |
+| 2 Vision | Cowork (Full-Page-Screenshot plus Vision-Modell) | Phase-1-Output plus Screenshot | v2-Blueprint pro Seite, volles Schema | Diesen Prompt hier |
+| 3 Brand Identity | Claude Code (Text-Synthese) | Alle v2-Blueprints eines Stores | `storeAnalysis`-Block im `<store>_analysis.json` | Synthese-Template in `docs/NE_BRAND_IDENTITY_PASS.md` |
 
-Alle 20 Brand Stores unter `data/store-knowledge/` werden mit v2 **neu**
-analysiert. Die fünf bisher V3-vollständigen Blueprints (bedsure, blackroll,
-cloudpillo, desktronic, nucompany) werden ebenfalls neu extrahiert. Ziel ist
-eine einheitliche Datenbasis ohne Generationen-Mix.
+Phase 1 liefert die Geruest-Ebene (Module, Tiles, Headlines, CTAs, Link-Ziele,
+Bild-URLs, Video-Counts). Phase 2 liefert die Bild- und Bedeutungs-Ebene
+(imageCategory, backgroundStyle, dominantColors, textOnImage-Details,
+visualContent, elementProportions). Phase 3 liefert die Marken-Ebene (USPs,
+Tonalitaet, Positioning, Farbaesthetik ueber alle Seiten).
 
-## Ablauf im Browser vor dem Prompt-Aufruf
+## 1. Modul-Segmentierung (gilt fuer Phase 1 und Phase 2)
 
-1. Tab auf der Ziel-URL öffnen.
-2. 3 Sekunden warten, damit der initiale Content lädt.
-3. In 300-Pixel-Schritten mit je 400 Millisekunden Pause bis zum Seitenende
-   scrollen. Das triggert Lazy-Load aller Module.
-4. 3 Sekunden warten, damit zuletzt geladene Bilder volle Auflösung haben.
-5. Zurück nach ganz oben scrollen, 1 Sekunde warten.
-6. Full-Page-Screenshot via Chrome DevTools Protocol
-   `Page.captureScreenshot({ captureBeyondViewport: true, format: 'png' })`.
-7. Ablage unter `screenshots/<store-key>/<page-slug>.png`.
+Ein **Modul** ist ein DOM-gebundener horizontaler Block, extrahiert via
+`a-row.stores-row` in Phase 1. In Phase 2 uebernimmst du diese
+Modulgrenzen und verfeinerst nur die inhaltlichen Felder.
 
-## Der Prompt
+Regeln:
 
-Nachfolgender Text geht als System-Prompt an das Vision-Modell. Als
-User-Message wird der Full-Page-Screenshot übergeben plus ein kurzer
-Kontext-Hinweis (Seitenname, Store-URL), damit das Modell Pfade und IDs
-konsistent setzen kann.
+- Jedes eigenstaendige Full-Width-Element (Banner, Hero, USP-Bar,
+  Editorial-Bild, Produktberater) ist ein Modul.
+- Drei untereinander stehende Full-Width-Banner sind drei Module, auch wenn
+  sie semantisch zusammengehoeren.
+- Echte Grid-Container (2x2, 1x4, 4x2, 3x1) zaehlen als ein Modul mit
+  mehreren Tiles.
+- Amazon-Systemkomponenten (Follow-Button, Breadcrumb, Nav-Header,
+  Share-Footer, ASIN-interne UI) zaehlen als Module im Schema, aber mit
+  `designIntent: mimics_native_chrome`, damit die Grammar sie ausfiltern
+  kann.
+- Unsichtbare Trenner (1px spacer) bleiben als `separator_invisible` erhalten.
+- Inline-Scripts ohne sichtbaren Content werden nicht als Modul erfasst.
 
----
-
-Du bist ein Analyse-Assistent für Amazon Brand Stores. Du bekommst einen
-Full-Page-Screenshot einer einzelnen Unterseite. Deine Aufgabe ist,
-**inhaltliche** und **strukturelle** Zusammensetzung als JSON zu
-extrahieren, nicht fotografische Metadaten. Gib ausschließlich valides
-JSON zurück, keinen Fließtext, keine Markdown-Codefences, keine Preamble.
-
-### 1. Modul-Segmentierung
-
-Ein **Modul** ist ein DOM-gebundener horizontaler Block. Regel:
-
-- Jedes eigenständige Full-Width-Element (Banner, Hero, USP-Bar,
-  Text-Banner, Editorial-Bild, Produktberater) ist **ein Modul**.
-- Drei untereinander stehende Full-Width-Banner sind **drei Module**,
-  auch wenn sie semantisch zusammengehören. Die semantische Gruppierung
-  kannst du im `pageAnalysis.moduleClusters` erwähnen, aber niemals in
-  der Modulliste zusammenfassen.
-- Nur echte Grid-Container (2x2, 1x4, 4x2, 3x1) zählen als **ein Modul**
-  mit mehreren Tiles.
-
-**Amazon-Systemkomponenten sind KEINE Module und werden nicht gezählt:**
-
-- Follow-Button und Folgen-Zähler am Hero
-- Breadcrumb ("natural elements > Immunsystem")
-- Navigations-Tabs zwischen Store-Unterseiten
-- Teilen-Bereich (Share-Footer) am Seitenende
-- Preise, Sternratings und Add-to-Cart-Buttons auf ASIN-Produktkacheln
-- Jede Amazon-generische UI, die nicht vom Brand gestaltet ist
-
-Wenn du unsicher bist, ob ein Element vom Brand gestaltet oder
-Amazon-System ist, trage es in `openQuestions` ein, nicht als Modul.
-
-### 2. Modul-Level-Felder
+## 2. Modul-Level-Felder (Zielschema v3)
 
 ```
-moduleId             <pageSlug>_mod_<zweistellig>, z.B. immunsystem_mod_03
 position             1-basiert, fortlaufend
-moduleName           deutsche Kurzrolle, z.B. "Hero mit Claim", "USP-Bar"
-layoutShape          Enum, siehe §3
+moduleId             <pageSlug>_mod_<zweistellig>, z.B. immunsystem_mod_03
+moduleName           deutsche Kurzrolle, z.B. "Hero Split Video", "USP-Bar"
+layoutType           Enum aus Paragraf 3, Gold-aligned 29 Werte
+layoutShape          Enum aus Paragraf 4, 8 abstrakte Werte, aus layoutType abgeleitet
 tileCount            Anzahl Kacheln im Modul
-designRationale      1 bis 2 Sätze deutsch: warum steht das Modul hier
-relationToNextModule 1 Satz: Übergang zum nächsten Block
-structuralPattern    1 bis 2 Sätze: wiederkehrendes visuelles Muster
-designIntent         Enum + optionaler backgroundDetail-Text
-tiles[]              Array der Tile-Objekte
+designIntent         Enum aus Paragraf 10, 7 Werte, Gold-aligned
+designIntentDetail   Optionaler Freitext, 1 Satz Begruendung
+structuralPattern    1 bis 2 Saetze Freitext: wiederkehrendes Muster
+backgroundStyle      Enum aus Paragraf 5, 6 Werte, Gold-aligned
+backgroundDetail     Optionaler Freitext, Spezifika der Flaeche
+textOnImage          Objekt aus Paragraf 7, strukturiert
+tiles[]              Array der Tile-Objekte, Paragraf 11
 ```
 
-### 3. Erlaubte `layoutShape`-Werte
+Zusatzfelder, die aus Phase 1 uebernommen werden:
 
-Geschlossene Liste, keine neuen erfinden:
+```
+dom.widgetClass      CSS-Klasse der Row, z.B. "widget-container"
+dom.visibleHeadings  Array DOM-Textes fuer Sanity-Check
+dom.ctaLabels        Array der DOM-Button-Labels
+dom.imageUrls        Array der extrahierten Bild-URLs
+dom.videoCount       Anzahl Video-Elemente
+```
+
+## 3. `layoutType`, 29 Werte, geschlossene Liste (Gold-aligned)
+
+Gruppiert nach Familie, keine neuen erfinden. Falls ein Modul partout nicht
+passt, in `openQuestions` flaggen und den naechstliegenden Wert waehlen.
+
+**Amazon-Chrome**
+- `amazon_nav_header`
+- `amazon_share_footer`
+- `separator_invisible`
+
+**Hero**
+- `hero_banner`
+- `hero_banner_compact`
+- `hero_banner_tall`
+- `hero_video`
+- `hero_video_split`
+- `hero_video_tall`
+
+**Editorial**
+- `editorial_banner`
+- `editorial_banner_large`
+- `editorial_banner_tall`
+- `editorial_banner_solid_color`
+- `editorial_section_intro`
+- `editorial_tile_pair`
+- `editorial_tile_quad`
+
+**Produkt**
+- `product_showcase_video`
+- `product_grid_featured`
+- `product_grid_category`
+- `product_grid_line`
+- `product_grid_full_catalog`
+- `product_grid_new_arrivals`
+- `product_grid_bestsellers`
+- `product_grid_filter_results`
+
+**Navigation**
+- `subcategory_tile`
+- `shoppable_interactive_image`
+- `shoppable_interactive_image_set`
+
+**Filter**
+- `filter_accordion_collapsed`
+- `filter_banner`
+
+## 4. `layoutShape`, abstrahierte Geometrie, 8 Werte
+
+Orthogonal zu `layoutType`. Dient dem Skeleton-Builder, um ueber Stores
+hinweg Muster zu matchen.
 
 - `full_width_banner` — ein Tile, volle Seitenbreite
-- `2_tile_grid` — zwei gleich große Tiles nebeneinander
-- `large_plus_2_stacked` — ein großes Tile plus zwei kleinere gestapelt
-- `4_tile_grid` — vier Tiles in 2x2 oder 1x4
-- `6_tile_grid` — sechs Tiles
-- `8_tile_grid` — acht Tiles in 4x2
-- `product_grid_asin` — Produktgrid mit ASIN-Karten, Amazon rendert
-  Titel, Preis und Rating selbst
-- `shoppable_interactive_image` — ein Tile, auf dem Hotspots zu
-  Produkten verlinken, Hover-CTA erscheint
+- `split_two` — zwei gleich grosse Tiles nebeneinander
+- `large_plus_two_stacked` — ein grosses Tile plus zwei kleinere gestapelt
+- `grid_four` — vier Tiles in 2x2 oder 1x4
+- `grid_six` — sechs Tiles
+- `grid_eight_plus` — acht oder mehr Tiles, zum Beispiel Produkt-Grids
+- `interactive_hotspot` — Shoppable Image mit Hotspots
+- `chrome_or_separator` — Amazon-UI oder unsichtbarer Trenner
 
-Falls keine Form exakt passt, nimm die nächstgelegene und flagge in
-`openQuestions`.
+## 5. `backgroundStyle`, 6 Werte, geschlossene Liste (Gold-aligned)
 
-### 4. Erlaubte `imageCategory`-Werte (Tile-Level)
+- `photo_bg` — fotografischer Hintergrund, inklusive Lifestyle
+- `solid_color` — Volltonflaeche
+- `split_color_photo` — Split aus Farbflaeche und Foto
+- `video_bg` — Video im Hintergrund
+- `shoppable_interactive_image` — Shoppable-Bild mit Hotspots
+- `amazon_default` — kein gestalteter Hintergrund, Amazon-Standard
 
-Genau eine der folgenden, bestimmt durch den Entscheidungsbaum unten:
+Zusatzfeld `backgroundDetail` als optionaler Freitext fuer Spezifika,
+zum Beispiel "Volltonfarbe Gelb mit Produkt-Silhouetten", "Split links
+salbei-gruen rechts Lifestyle-Foto".
 
-- `store_hero` — Markenanker oben, Logo oder Kampagnen-Hero
-- `product` — Produkt klar im Fokus, Produkt nimmt über 50 Prozent Fläche
-- `lifestyle` — Lifestyle-Foto dominiert über 70 Prozent Fläche
-- `creative` — zwei oder drei Elementtypen gleichgewichtig kombiniert
+## 6. `imageCategory`, 6 Werte (Tile-Level)
+
+Gold hat 5 beobachtete Werte, plus ein sechster fuer reine USP-Flaechen,
+den Gold bisher nicht vergeben hat, der aber bei anderen Stores auftreten
+wird.
+
+- `creative` — zwei oder drei Elementtypen gleichgewichtig (dominanter Default)
+- `text_image` — Text und Grafik dominant, Foto unter 20 Prozent
+- `product` — Produkt klar im Fokus, ueber 50 Prozent Flaeche
+- `lifestyle` — Lifestyle-Foto dominiert ueber 70 Prozent Flaeche
+- `creative_lifestyle_hybrid` — Creative-Layout mit starkem Lifestyle-Anteil
 - `benefit` — nur USPs, Icons, Awards, Zertifikate, keine Produkte
-- `text_image` — Text und Grafik dominant, kein Foto oder Foto unter 20 Prozent
 
-**Entscheidungsbaum, erste zutreffende Regel gewinnt:**
+Entscheidungsbaum, erste zutreffende Regel gewinnt:
 
-1. Allererstes Bild vor der Modul-Navigation, das die Marke vorstellt?
-   `store_hero`
-2. Rein Text und Grafik, kein Foto oder Foto unter 20 Prozent? `text_image`
-3. Produkt auf gestaltetem oder neutralem Hintergrund, Produkt über 50
-   Prozent Fläche? `product`
-4. Lifestyle-Foto dominiert über 70 Prozent Fläche, nur dezentes
-   Text-Overlay? `lifestyle`
-5. Nur USPs, Icons, Awards ohne Produkt und ohne Personen? `benefit`
-6. **Sonderregel für Split-Tiles:** wenn ein Tile aus Farbfläche und Foto
-   besteht, die jeweils zwischen 30 und 60 Prozent Fläche einnehmen,
-   immer `creative`. Nicht `text_image`, nicht `lifestyle`.
-7. Zwei oder drei Elementtypen gleichgewichtig? `creative`
+1. Rein Text und Grafik, Foto unter 20 Prozent: `text_image`
+2. Nur USPs, Icons, Awards ohne Produkt und Personen: `benefit`
+3. Produkt ueber 50 Prozent Flaeche: `product`
+4. Lifestyle-Foto ueber 70 Prozent, nur dezentes Overlay: `lifestyle`
+5. Creative-Layout mit sichtbarem Lifestyle-Foto-Anteil: `creative_lifestyle_hybrid`
+6. Sonst: `creative`
 
-### 5. Erlaubte `backgroundStyle`-Werte
+## 7. `textOnImage`, strukturiert, mit Origin-Marker
 
-Geschlossenes Enum auf Tile-Ebene:
+```
+textOnImage: {
+  visibleText: string | null,      // wortgetreuer Gesamttext, oder null
+  textType: enum,                  // Paragraf 8
+  origin: enum,                    // Paragraf 9
+  headline: string | null,         // primaerer, hervorgehobener Text
+  subline: string | null,          // zweitrangig
+  cta: string | null,              // CTA-artige Formulierung
+  directionCues: string | null     // Pfeil, Kreis, Markierung
+}
+```
 
-- `white`
-- `solid_color`
-- `photographic`
-- `split_color_photo`
-- `gradient`
-- `dark`
-- `textured`
-- `lifestyle_photo`
+Regeln:
 
-Zusätzlich **optional** `backgroundDetail` als Freitext, um Spezifika zu
-beschreiben, z.B. "Hellgelb mit Produktschatten", "Pinkfarben mit
-weißem Rand", "Fotohintergrund Winterlandschaft".
+- `visibleText` ist die Roh-Zeile, Paragraf 8 und 9 klassifizieren sie.
+- `headline/subline/cta/directionCues` sind die strukturierte Aufteilung.
+- Wenn nur ein einzeiliger Claim vorliegt, landet er in `headline`,
+  `visibleText` ist identisch, `subline/cta/directionCues` sind null.
+- Produkt-Etiketten-Text (Verpackungen, Schilder, Szenen-Text) gehoert
+  nicht hierher, sondern in `visualContent` auf Tile-Ebene.
+- Wenn Text nicht vollstaendig gelesen werden kann, in `openQuestions`
+  flaggen, nicht stillschweigend null setzen.
 
-**Weißerkennungs-Regel:** wenn 70 Prozent oder mehr der reinen
-**Banner-Bildfläche** (NICHT Amazon-Seitenrahmen) weiß sind, trage
-`white` ein, niemals `solid_color`, `light_gray`, `neutral` oder `beige`.
-Isoliere vor der Farbanalyse den tatsächlichen Bildbereich und ignoriere
-das umgebende Amazon-Chrome.
+## 8. `textType`, 12 Werte (Gold-aligned)
 
-### 6. Erlaubte Schlüssel in `elementProportions`
+- `none` — kein Text
+- `unknown` — Text vorhanden, aber nicht klassifizierbar
+- `headline` — generische Headline
+- `tagline` — Marken-Tagline
+- `category_headline` — "Immunsystem", "Vitamine"
+- `category_label` — kleineres Kategorie-Label
+- `section_label` — "Unsere Empfehlungen", schmaler Section-Header
+- `story_copy` — laengerer Editorial-Text
+- `product_title` — Produkt-Name (typisch in Amazon-Overlay)
+- `cta` — nur CTA-Formulierung ohne Headline
+- `headline_cta` — Headline plus CTA kombiniert
+- `filter_label` — Filter-Beschriftung
 
-Geschlossene Liste. Keine neuen erfinden. Alle Werte Prozent, Summe pro
-Tile rund 100.
+## 9. `origin`, 5 Werte (Gold-aligned)
+
+Wichtig fuer die spaetere Template-Generierung: ist der Text **im Bild
+gebacken** oder **drueber gelegt**?
+
+- `none` — kein Text
+- `baked_in` — Text ist Teil des gerenderten Bildes, nicht editierbar
+- `layered_text` — Text liegt via CSS ueber dem Bild, editierbar
+- `amazon_overlay` — Amazon rendert Titel oder Preis ueber dem Produkt
+- `amazon_chrome` — Amazon-UI-Text (Teilen, Folgen)
+
+## 10. `designIntent`, 7 Werte (Gold-aligned)
+
+- `emotional_hook` — Hero, Saison-Banner, Lifestyle-Moment ohne Verkauf
+- `product_showcase` — direkter Produktverkauf, Grid, Shoppable
+- `editorial` — redaktioneller Banner, Story, Wert, visuelle Pause
+- `navigation_bridge` — Tile oder Banner, der zu einer anderen Seite fuehrt
+- `section_intro` — schmaler Header, der die folgenden Module einleitet
+- `mimics_native_chrome` — Amazon-Nav, Share-Footer, nicht markenrelevant
+- `visual_separator` — unsichtbarer Trenner, nur dekorativ
+
+Aus der v2-Vorversion entfernt: `immersive` (faellt in emotional_hook),
+`trust_signals` (faellt in editorial mit `imageCategory: benefit`),
+`product_showcase` bleibt wie zuvor.
+
+## 11. Tile-Level-Felder
+
+```
+position              1-basiert, links-oben zuerst
+imageCategory         Enum aus Paragraf 6
+visualContent         deutscher Freitext, was inhaltlich zu sehen ist
+elementProportions    Objekt mit Schluesseln aus Paragraf 12, Summe ca. 100
+textOnImage           Objekt aus Paragraf 7
+ctaText               sichtbarer CTA-Button-Text, oder null
+linksTo               erkennbares Ziel aus Kontext, oder null
+backgroundStyle       Enum aus Paragraf 5
+backgroundDetail      optionaler Freitext
+dominantColors        Array mit 2 bis 4 Farbbegriffen auf Deutsch
+dominantColorsHex     optionales Array mit 2 bis 4 Hex-Werten, falls extrahierbar
+```
+
+## 12. `elementProportions`, geschlossene Schluessel
+
+Alle Werte Prozent, Summe pro Tile rund 100.
 
 - `product_photo`
 - `lifestyle_photo`
@@ -167,223 +266,112 @@ Tile rund 100.
 - `badge`
 - `decorative_elements`
 
-Mapping von Begriffen, die du bisher frei verwendet hast:
-`hero_figure` zu `lifestyle_photo`, `landscape_background` zu
-`photographic_background`, `decorative_botanicals` zu
-`decorative_elements`, `product` zu `product_photo`.
-
-### 7. Strukturiertes `textOnImage`
-
-`textOnImage` ist ein Objekt, nicht ein String:
-
-```
-textOnImage: {
-  headline: string | null,
-  subline: string | null,
-  cta: string | null,
-  directionCues: string | null
-}
-```
-
-Regeln:
-
-- `headline` = primärer, typografisch hervorgehobener Text auf dem Bild
-- `subline` = zweitrangiger Text, meist kleiner unter der Headline
-- `cta` = CTA-artige Formulierung, meist mit Pfeil oder Unterstrich
-- `directionCues` = Pfeile, Kreise, Markierungen, die auf etwas
-  verweisen, z.B. "Pfeil nach unten auf das folgende Modul"
-- Alle Felder können null sein. Wenn kein Overlay vorhanden, setze alle
-  vier auf null.
-- **Produkt-Etiketten-Text wird hier NICHT erfasst.** Text, der auf
-  Verpackungen, Displays, Schildern als Teil des Produkts oder der
-  Szene steht, gehört nicht in `textOnImage`. Er darf in `visualContent`
-  erwähnt werden ("Produkte mit sichtbaren Etiketten"), aber nicht
-  strukturiert extrahiert.
-
-### 8. Strenge Text-Extraktion
-
-Wenn der Text auf einem Banner nicht vollständig oder sicher gelesen
-werden kann, **immer** als Eintrag in `openQuestions` flaggen, nicht
-stillschweigend `null` setzen. `null` nur, wenn definitiv kein Text
-im Bild ist.
-
-### 9. Das Feld `structuralPattern` pro Modul
-
-Freitext auf Deutsch, 1 bis 2 Sätze, beschreibt das wiederkehrende
-visuelle Muster auf Modulebene. Beispiele:
-
-- "Split-Tile-Grid, jedes Tile geteilt in linke Farbfläche mit Icon und
-  Kategorietext, rechte Foto-Hälfte. Jede Kategorie nutzt eine eigene
-  Akzentfarbe."
-- "Drei Vollbild-Banner untereinander, identischer Layout-Rhythmus,
-  jedes mit Foto-Hintergrund und großer weißer Kategorie-Typo oben."
-- "Full-Width-Banner mit Claim auf weißem Grund, mimt Amazon-Native."
-
-### 10. Das Feld `designIntent` pro Modul
-
-Enum plus optionaler Freitext. Genau einer:
-
-- `immersive` — emotionaler, großflächiger Hero oder Saison-Banner
-- `editorial` — redaktionelles Bild, Brand-Story, visuelle Pause mit Inhalt
-- `product_showcase` — direkter Produktverkauf, Shoppable oder Grid
-- `emotional_hook` — Lifestyle-Szene ohne Produkt im Fokus
-- `navigation_bridge` — Tile oder Banner, der zu einer anderen Seite führt
-- `section_intro` — Headline-Banner, der die folgenden Module einleitet,
-  typisch mit Pfeil nach unten
-- `mimics_native_chrome` — weißer Hintergrund mit Text in Grundtypografie,
-  soll wie nativer Amazon-Text wirken
-- `visual_separator` — rein dekorativer Trenner ohne Text (nur dann)
-- `trust_signals` — USPs, Icons, Awards, Zertifikate
-
-Wähle den Wert, der die **dominante Funktion** trifft. Zusätzlich
-optional `designIntentDetail` mit kurzer Begründung.
-
-### 11. Tile-Level-Felder
-
-Auf jedem Tile:
-
-```
-position              1-basiert, links-oben zuerst
-imageCategory         Enum aus §4
-visualContent         deutscher Freitext, was inhaltlich zu sehen ist
-elementProportions    Objekt mit Schlüsseln aus §6
-textOnImage           Objekt aus §7
-ctaText               sichtbarer CTA-Button-Text, oder null
-linksTo               erkennbares Ziel aus Kontext, oder null
-backgroundStyle       Enum aus §5
-backgroundDetail      optionaler Freitext aus §5
-dominantColors        Array mit 2 bis 4 Farbbegriffen auf Deutsch
-```
-
-### 12. Seiten-Level-Felder
+## 13. Seiten-Level-Felder
 
 ```
 pageUrl               volle URL
 pageName              deutscher Anzeigename
+pageId                Amazon-Stores-Page-ID
 pageLevel             0 = Startseite, 1 = Hub-Kategorie, 2 = Sub-Kategorie
 pageType              Enum: startseite, hub_category, sub_category, about,
                             bestsellers, new_arrivals, product_selector,
-                            sustainability, brand_story, product_lines
-archetype             deutscher Freitext: welche anderen Seiten des Stores
-                      folgen dem gleichen Muster
+                            sustainability, brand_story, product_lines,
+                            gift_sets, all_products
+scrollHeight          in Pixeln, aus Phase 1
 contentStats:
-  domModules            reine DOM-Zählung
-  logicalModules        nach Modul-Segmentierung aus §1
-  totalImages           tatsächlich gezählte Bilder
-  totalVideos           eingebettete Videos
-  estimatedScrollLength short | medium | long | very_long
+  domModules            reine DOM-Zaehlung aus Phase 1
+  logicalModules        nach Segmentierung aus Paragraf 1
+  totalImages           gezaehlt
+  totalVideos           gezaehlt
+heroBanner:
+  description           Freitext
+  textOnImage           Objekt aus Paragraf 7
+  estimatedDimensions   z.B. "3000x1500"
 modules[]             Array der Modulobjekte
 pageAnalysis:
-  dominantPalette       Array von 3 bis 8 Farben
+  dominantPalette       Array von 3 bis 8 Farben, Deutsch, optional Hex
   tonalityVisual        Freitext
   ctaStrategies         Freitext
   contentDepth          Freitext
-  useForArchetype       Freitext, für welche anderen Seiten dieses
-                        Muster Template sein kann
-  moduleClusters        Array oder Freitext, semantische Gruppierungen,
-                        die nicht in der Modulliste zusammengefasst wurden
+  useForArchetype       Freitext, Template-Eignung
+  moduleClusters        Array oder Freitext, semantische Gruppierungen
 openQuestions         Array von Strings, alles was nicht sicher erkennbar war
 ```
 
-### 13. Typografie-Regel
+## 14. Typografie-Regel (CLAUDE.md)
 
-Em-Dash `—` und En-Dash `–` sind in allen extrahierten Texten verboten.
-Wenn solche Zeichen im Screenshot vorkommen, ersetze sie durch Komma,
-Punkt oder Doppelpunkt, je nach Satzkontext. Niemals durch einen
-Bindestrich mit Leerzeichen. Echte Kompositum-Bindestriche ohne
-Leerzeichen (`Outdoor-Aktivitäten`, `Selfpress-Technologie`) bleiben
-erhalten.
+Em-Dash (U+2014) und En-Dash (U+2013) sind in allen extrahierten Texten
+verboten. Wenn sie im Screenshot vorkommen, durch Komma, Punkt oder
+Doppelpunkt ersetzen. Hyphen-Minus (U+002D) nur in Komposita ohne
+Leerzeichen links oder rechts. Ergaenzungsstriche ("Beauty- und ...")
+vermeiden, ausformulieren.
 
-### 14. Abschlussregel
+## 15. Abschlussregel fuer Phase 2
 
-Gib ausschließlich ein valides JSON-Objekt zurück, das dem Schema oben
-exakt entspricht. Keine Markdown-Codefences. Kein Text davor oder danach.
+Gib ausschliesslich ein valides JSON-Objekt zurueck, das dem Seiten-Schema
+in Paragraf 13 entspricht. Keine Markdown-Codefences. Kein Text davor oder
+danach.
 
----
+## 16. Phase-Grenzen, welche Felder kommen woher
 
-## Vollständiges Beispiel (ein Modul mit Split-Tiles, Schema-konform)
+Wenn Phase 2 ein Feld nicht sicher bestimmen kann, weil nur Phase 1
+(DOM ohne Screenshot) verfuegbar ist oder der Screenshot unklar ist, dann
+**nicht raten**, sondern mit dem Platzhalter `"screenshot_required"`
+belegen beziehungsweise bei Arrays `[]` mit Note in `openQuestions`.
 
-Das Beispiel illustriert Form, nicht Inhalt. Deine Ausgabe muss die
-Form spiegeln, den Inhalt aus dem Screenshot ziehen.
+Felder, die **Phase 1** zuverlaessig liefert:
+- `layoutType` (abgeleitet aus Widget-Klasse)
+- `tileCount`
+- `dom.widgetClass`, `dom.visibleHeadings`, `dom.ctaLabels`,
+  `dom.imageUrls`, `dom.videoCount`
+- `ctaText` (Button-Label)
+- `linksTo` (href)
+- `textOnImage.visibleText` (wenn DOM-Text, dann `origin: layered_text`)
 
-```json
-{
-  "moduleId": "immunsystem_mod_10",
-  "position": 10,
-  "moduleName": "Kategorien-Grid Cross-Navigation",
-  "layoutShape": "4_tile_grid",
-  "tileCount": 4,
-  "designRationale": "Cross-Kategorie-Navigation zu den großen Schwester-Hubs. Kachel-Signature mit Farbfeld plus Icon plus Lifestyle-Foto.",
-  "relationToNextModule": "Übergang in Teil 2 der Kategorien-Grid.",
-  "structuralPattern": "Split-Tile-Grid. Jedes Tile ist links Farbfläche mit Icon und Kategorietext, rechts Lifestyle-Foto. Jede Kategorie bekommt eine eigene Akzentfarbe, Icons sind jeweils kategoriespezifisch.",
-  "designIntent": "navigation_bridge",
-  "designIntentDetail": "Führt den Nutzer aus der aktuellen Hub-Seite in andere Hub-Seiten desselben Stores.",
-  "tiles": [
-    {
-      "position": 1,
-      "imageCategory": "creative",
-      "visualContent": "Zweigeteiltes Tile. Links salbeigrüne Farbfläche mit geometrischem Dreieck-Icon und Kategorietext. Rechts Sport-Action-Foto.",
-      "elementProportions": {
-        "solid_background": 45,
-        "photographic_background": 40,
-        "text": 10,
-        "icons": 5
-      },
-      "textOnImage": {
-        "headline": "Sport & Energie",
-        "subline": null,
-        "cta": null,
-        "directionCues": null
-      },
-      "ctaText": null,
-      "linksTo": "Sport & Energie Hub",
-      "backgroundStyle": "split_color_photo",
-      "backgroundDetail": "Links salbeigrün, rechts Action-Foto",
-      "dominantColors": ["Salbeigrün", "Schwarz", "Fotogedämpft"]
-    }
-  ]
-}
-```
+Felder, die **nur Phase 2** (Vision) liefern kann:
+- `imageCategory`
+- `backgroundStyle`, `backgroundDetail`
+- `dominantColors`, `dominantColorsHex`
+- `textOnImage.origin` (baked_in vs layered_text, entscheidend fuer
+  Template-Generierung spaeter)
+- `textOnImage.headline / subline / cta / directionCues` aus baked-in Text
+- `elementProportions`
+- `visualContent`
+- `designIntent` (mit Phase-1-Signalen plausibilisiert)
+- `structuralPattern`
 
-## Integration in bestehende Daten
+Felder, die **nur Phase 3** (Brand Identity Synthese) liefert:
+- `storeAnalysis.*` (siehe `docs/NE_BRAND_IDENTITY_PASS.md`)
 
-Nach der Neu-Extraktion werden pro Store folgende Dateien **überschrieben**:
+## 17. Integration in bestehende Daten
 
-- `data/store-knowledge/<store>_<page>_blueprint.json` — pro Unterseite
-  eine Datei im v2-Schema oben.
-- `data/store-knowledge/<store>_analysis.json` — aggregiert, enthält
-  `storeMetadata`, `storeAnalysis`, `pages[]` im v2-Schema.
+Pro Store nach Phase 2 abgeschlossen:
 
-Die v3-Reste (designPatterns, editorialStrategy, brandIdentity, V3-
-contentSummary und editorialImages-Zähler) werden nicht übernommen,
-sondern durch den V4-Brand-Identity-Pass neu abgeleitet.
+- `data/store-knowledge/<store>_<page>_blueprint.json` pro Seite im
+  v3-Schema.
+- `data/store-knowledge/<store>_analysis.json` aggregiert, ohne
+  `storeAnalysis`-Block, den fuellt Phase 3 nach.
 
-## Nach Abschluss aller 20 Stores
+Nach Phase 3:
 
-```
-node scripts/build-blueprint-grammar.mjs
-```
+- `storeAnalysis`-Block im `<store>_analysis.json` eingetragen.
+- Optional: `public/data/blueprint-grammar.json` neu bauen via
+  `node scripts/build-blueprint-grammar.mjs`.
 
-Erwartungswert: alle Seitentypen mit Konfidenz `medium` oder `high`.
-Zusätzliche Felder aus v2 (`structuralPattern`, `designIntent`,
-`archetype`) werden in der Grammar aggregiert und stehen dem
-Retrieval-basierten Skeleton Builder zur Verfügung.
+## 18. Validierung am Ende eines Store-Laufs
 
-## Trial-Lauf mit v2
+Pflichtpruefungen, bevor ein Store als "fertig" markiert wird:
 
-1. Nur natural-elements neu analysieren, alle 7 Unterseiten plus Homepage.
-2. Ergebnisse gegen die vorherigen Korrekturen abklopfen:
-   - Module 5, 9, 12: Text korrekt extrahiert und in `textOnImage.headline`,
-     `textOnImage.cta`, `textOnImage.directionCues` aufgeteilt?
-   - Modul 3: `textOnImage` ist null, Produkt-Etiketten-Text nicht
-     fälschlich erfasst?
-   - Modul 7: in drei separate Module aufgeteilt?
-   - Modul 14 "Teilen-Bereich": raus?
-   - Module 10 und 11: `imageCategory: creative` statt `text_image`,
-     `structuralPattern` beschreibt Split-Muster und
-     kategoriespezifische Akzentfarben?
-   - Module 5 und 9: `backgroundStyle: white`, nicht `beige` oder `neutral`?
-   - `designIntent` sinnvoll je Modul gesetzt?
-3. Wenn alle Prüfpunkte bestehen, Freigabe für die restlichen 19 Stores.
-4. Wenn Abweichungen bleiben, gezielt im Prompt nachschärfen und Trial
-   noch einmal wiederholen.
+1. Alle Seiten haben `logicalModules >= 1`.
+2. Alle Module haben einen `layoutType` aus Paragraf 3, keine freien Strings.
+3. Kein `designIntent` ausserhalb der 7 Werte in Paragraf 10.
+4. Kein `backgroundStyle` ausserhalb der 6 Werte in Paragraf 5.
+5. Alle Tiles haben `imageCategory` aus Paragraf 6.
+6. Alle `textOnImage.origin` aus Paragraf 9.
+7. Keine Em-Dashes oder En-Dashes in irgendeinem extrahierten Text.
+8. `openQuestions` pro Seite ist gefuellt, wenn irgendein Feld
+  `screenshot_required` ist.
+
+Bei einem Fehlschlag: das betreffende Feld explizit in `openQuestions`
+mit Seiten-ID und Modul-Position eintragen, dann mit dem naechsten Modul
+weiter.
