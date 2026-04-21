@@ -26,20 +26,25 @@ Phase-2-Output-Dateien, das ist nicht dein Job.
 
 - Repo: `spacedugg/amazon-store-builder`
 - Remote: `https://github.com/spacedugg/amazon-store-builder`
-- Aktueller Head auf `claude/recover-chat-context-tjPth` enthaelt das
-  v3-Schema (`docs/BLUEPRINT_EXTRACTION_PROMPT.md`) und den ersten
-  Brand-Identity-Pass (`docs/NE_BRAND_IDENTITY_PASS.md`).
+- `main` enthaelt alles, was du brauchst: v3-Schema
+  (`docs/BLUEPRINT_EXTRACTION_PROMPT.md`), Brand-Identity-Pass
+  (`docs/NE_BRAND_IDENTITY_PASS.md`), Gold-Standard
+  (`data/store-knowledge/natural-elements_analysis.json`),
+  Probe-Artefakte der vorherigen Session unter
+  `data/store-knowledge/rerun/` als Referenz, und das Layout-Mapping
+  `src/blueprintLayoutMap.js`.
 - Du arbeitest auf einem neuen Branch `claude/ne-v3-rerun-<suffix>`,
-  abgezweigt von `claude/recover-chat-context-tjPth`.
+  abgezweigt von `main`.
 
 Vor Start einmal hart verifizieren:
 
 ```bash
 git fetch origin
-git checkout -b claude/ne-v3-rerun-<suffix> origin/claude/recover-chat-context-tjPth
-ls docs/BLUEPRINT_EXTRACTION_PROMPT.md docs/NE_BRAND_IDENTITY_PASS.md
+git checkout -b claude/ne-v3-rerun-<suffix> origin/main
+ls docs/BLUEPRINT_EXTRACTION_PROMPT.md docs/NE_BRAND_IDENTITY_PASS.md docs/NE_COWORK_V3_PROMPT.md
 ls data/store-knowledge/natural-elements_analysis.json
-ls scripts/extract-page-dom.js
+ls data/store-knowledge/rerun/
+ls scripts/extract-page-dom.js src/blueprintLayoutMap.js
 ```
 
 Wenn eine dieser Dateien fehlt, sind wir auf dem falschen Branch. Stop und
