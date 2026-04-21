@@ -1,0 +1,853 @@
+{
+  "_schemaVersion": "v2-dom-probe",
+  "_generatedBy": "rerun/build-blueprints-from-dom.mjs",
+  "_sourceDom": "02_immunsystem.json",
+  "_note": "DOM-derived Blueprint für Workflow-Robustness-Rerun. Vision-Felder sind als screenshot_required markiert und in openQuestions gesammelt.",
+  "pageName": "Immunsystem",
+  "pageLevel": 1,
+  "pageType": "hub_category",
+  "archetype": "screenshot_required",
+  "contentStats": {
+    "domModules": 16,
+    "logicalModules": 14,
+    "totalImages": 42,
+    "totalVideos": 0,
+    "estimatedScrollLength": "very_long"
+  },
+  "modules": [
+    {
+      "moduleId": "02_immunsystem_mod_01",
+      "position": 1,
+      "moduleName": "Hero-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow__row__W3W3h auf Position 1 (t=436px, h=590px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "immersive",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow__row__W3W3h, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 1,
+        "topPx": 436,
+        "heightPx": 590,
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "02_immunsystem_mod_02",
+      "position": 2,
+      "moduleName": "Trenn-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow__row__W3W3h auf Position 2 (t=1026px, h=583px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow__row__W3W3h, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 2,
+        "topPx": 1026,
+        "heightPx": 583,
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "headingText": [],
+        "previewChars": 16,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "02_immunsystem_mod_03",
+      "position": 3,
+      "moduleName": "Trenn-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow__row__W3W3h auf Position 3 (t=1608px, h=552px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow__row__W3W3h, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 3,
+        "topPx": 1608,
+        "heightPx": 552,
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "02_immunsystem_mod_04",
+      "position": 4,
+      "moduleName": "Trenn-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow__row__W3W3h auf Position 4 (t=2160px, h=149px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow__row__W3W3h, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 4,
+        "topPx": 2160,
+        "heightPx": 149,
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "02_immunsystem_mod_05",
+      "position": 5,
+      "moduleName": "Produktgrid",
+      "layoutShape": "product_grid_asin",
+      "tileCount": 8,
+      "designRationale": "DOM-abgeleitet aus Widget ProductGrid__gridContainer__bRK6J auf Position 5 (t=2309px, h=3674px, ic=25, pc=50, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Heuristik aus widgetClass=ProductGrid__gridContainer__bRK6J, imgCount=25, productCount=50, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 2,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 3,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 4,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 5,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 6,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 7,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 8,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 5,
+        "topPx": 2309,
+        "heightPx": 3674,
+        "widgetClass": "ProductGrid__gridContainer__bRK6J",
+        "headingText": [
+          "natural elements Vitamin D3 + K2 Depot – 180 Tabletten",
+          "natural elements Vitamin D3 + K2 Tropfen 50ml",
+          "natural elements Premium Multivitamin – 180 hochdosierte Komplex-Kapseln",
+          "natural elements Schwarzkümmelöl (original Nigella sativa) – 400 Kapseln"
+        ],
+        "previewChars": 296,
+        "images": 25,
+        "videos": 0,
+        "products": 50,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "02_immunsystem_mod_06",
+      "position": 6,
+      "moduleName": "Trenn-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow__row__W3W3h auf Position 6 (t=5983px, h=207px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow__row__W3W3h, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 6,
+        "topPx": 5983,
+        "heightPx": 207,
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "02_immunsystem_mod_07",
+      "position": 7,
+      "moduleName": "Trenn-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow__row__W3W3h auf Position 7 (t=6190px, h=207px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow__row__W3W3h, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 7,
+        "topPx": 6190,
+        "heightPx": 207,
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "02_immunsystem_mod_08",
+      "position": 8,
+      "moduleName": "Trenn-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow__row__W3W3h auf Position 8 (t=6396px, h=207px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow__row__W3W3h, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 8,
+        "topPx": 6396,
+        "heightPx": 207,
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "02_immunsystem_mod_09",
+      "position": 9,
+      "moduleName": "Trenn-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow__row__W3W3h auf Position 9 (t=6603px, h=303px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow__row__W3W3h, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 9,
+        "topPx": 6603,
+        "heightPx": 303,
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "02_immunsystem_mod_10",
+      "position": 10,
+      "moduleName": "Trenn-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow__row__W3W3h auf Position 10 (t=6906px, h=149px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow__row__W3W3h, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 10,
+        "topPx": 6906,
+        "heightPx": 149,
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "02_immunsystem_mod_11",
+      "position": 11,
+      "moduleName": "Kategorien-Grid",
+      "layoutShape": "4_tile_grid",
+      "tileCount": 4,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow__row__W3W3h auf Position 11 (t=7055px, h=583px, ic=4, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow__row__W3W3h, imgCount=4, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 2,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 3,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 4,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 11,
+        "topPx": 7055,
+        "heightPx": 583,
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 4,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "02_immunsystem_mod_12",
+      "position": 12,
+      "moduleName": "2-Tile-Grid",
+      "layoutShape": "2_tile_grid",
+      "tileCount": 2,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow__row__W3W3h auf Position 12 (t=7637px, h=291px, ic=2, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "editorial",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow__row__W3W3h, imgCount=2, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 2,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 12,
+        "topPx": 7637,
+        "heightPx": 291,
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 2,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "02_immunsystem_mod_13",
+      "position": 13,
+      "moduleName": "Trenn-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow__row__W3W3h auf Position 13 (t=7929px, h=188px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow__row__W3W3h, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 13,
+        "topPx": 7929,
+        "heightPx": 188,
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "02_immunsystem_mod_14",
+      "position": 14,
+      "moduleName": "Trenn-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow__row__W3W3h auf Position 14 (t=8116px, h=168px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow__row__W3W3h, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 14,
+        "topPx": 8116,
+        "heightPx": 168,
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    }
+  ],
+  "pageAnalysis": {
+    "dominantPalette": [],
+    "tonalityVisual": "screenshot_required",
+    "ctaStrategies": "screenshot_required",
+    "contentDepth": "DOM zeigt 14 logische Module, 42 Bilder, 0 Videos, 9705px Scroll-Höhe.",
+    "useForArchetype": "screenshot_required",
+    "moduleClusters": "screenshot_required"
+  },
+  "openQuestions": [
+    "Vision-Felder pro Tile (imageCategory, backgroundStyle, elementProportions, dominantColors) sind aus DOM nicht ableitbar, Screenshot-Analyse nötig.",
+    "textOnImage.headline/subline/cta für alle Banner-Module erfordert OCR/Vision.",
+    "structuralPattern und relationToNextModule pro Modul sind Vision-Felder.",
+    "archetype, tonalityVisual, ctaStrategies, useForArchetype und moduleClusters sind Page-Level-Vision-Felder.",
+    "designIntent aus DOM ist Heuristik und kann bei Screenshot-Review revidiert werden."
+  ]
+}

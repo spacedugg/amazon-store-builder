@@ -1,0 +1,254 @@
+{
+  "_schemaVersion": "v2-dom-probe",
+  "_generatedBy": "rerun/build-blueprints-from-dom.mjs",
+  "_sourceDom": "08_produktselektor.json",
+  "_note": "DOM-derived Blueprint für Workflow-Robustness-Rerun. Vision-Felder sind als screenshot_required markiert und in openQuestions gesammelt.",
+  "pageUrl": "https://www.amazon.de/stores/page/A03B844E-0DA2-4FFC-8205-DC6DFDB0D59E",
+  "pageName": "Produktselektor",
+  "pageLevel": 1,
+  "pageType": "product_selector",
+  "archetype": "screenshot_required",
+  "contentStats": {
+    "domModules": 10,
+    "logicalModules": 2,
+    "totalImages": 12,
+    "totalVideos": 0,
+    "estimatedScrollLength": "short"
+  },
+  "modules": [
+    {
+      "moduleId": "08_produktselektor_mod_01",
+      "position": 1,
+      "moduleName": "Trenn-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow auf Position 4 (t=193px, h=236px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/4d08b2e3-414c-4e73-a9cd-dfdd18a3ee40._CR0%2C0%2C3000%2C600_SX1500_.png"
+        }
+      ],
+      "_dom": {
+        "domIndex": 4,
+        "topPx": 193,
+        "heightPx": 236,
+        "widgetClass": "EditorialRow",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "08_produktselektor_mod_02",
+      "position": 2,
+      "moduleName": "Produktgrid",
+      "layoutShape": "product_grid_asin",
+      "tileCount": 8,
+      "designRationale": "DOM-abgeleitet aus Widget ProductGrid auf Position 8 (t=0px, h=0px, ic=11, pc=22, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Heuristik aus widgetClass=ProductGrid, imgCount=11, productCount=22, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "Bild (alt: natural elements Omega 3 – 365 Kapseln)",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/71vDZbjpHJL._AC_UL320_.jpg"
+        },
+        {
+          "position": 2,
+          "imageCategory": "screenshot_required",
+          "visualContent": "Bild (alt: natural elements Mariendistel Artischocke Löwenzahn Komplex)",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/71rKyuD+sTL._AC_UL320_.jpg"
+        },
+        {
+          "position": 3,
+          "imageCategory": "screenshot_required",
+          "visualContent": "Bild (alt: natural elements Curcuma Extrakt)",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/71qnM6j13UL._AC_UL320_.jpg"
+        },
+        {
+          "position": 4,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 5,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 6,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 7,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 8,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 8,
+        "topPx": 0,
+        "heightPx": 0,
+        "widgetClass": "ProductGrid",
+        "headingText": [
+          "natural elements Omega 3 – 365 Kapseln – 2000mg Fischöl pro Tagesdosis",
+          "natural elements Mariendistel Artischocke Löwenzahn Komplex",
+          "natural elements Curcuma Extrakt – Hochdosiert",
+          "natural elements Vitamin D3 + K2 Depot – 180 Tabletten"
+        ],
+        "previewChars": 31,
+        "images": 11,
+        "videos": 0,
+        "products": 22,
+        "shoppable": 0
+      }
+    }
+  ],
+  "pageAnalysis": {
+    "dominantPalette": [],
+    "tonalityVisual": "screenshot_required",
+    "ctaStrategies": "screenshot_required",
+    "contentDepth": "DOM zeigt 2 logische Module, 12 Bilder, 0 Videos, 1610px Scroll-Höhe.",
+    "useForArchetype": "screenshot_required",
+    "moduleClusters": "screenshot_required"
+  },
+  "openQuestions": [
+    "Vision-Felder pro Tile (imageCategory, backgroundStyle, elementProportions, dominantColors) sind aus DOM nicht ableitbar, Screenshot-Analyse nötig.",
+    "textOnImage.headline/subline/cta für alle Banner-Module erfordert OCR/Vision.",
+    "structuralPattern und relationToNextModule pro Modul sind Vision-Felder.",
+    "archetype, tonalityVisual, ctaStrategies, useForArchetype und moduleClusters sind Page-Level-Vision-Felder.",
+    "designIntent aus DOM ist Heuristik und kann bei Screenshot-Review revidiert werden."
+  ]
+}

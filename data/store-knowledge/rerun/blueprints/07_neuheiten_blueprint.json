@@ -1,0 +1,735 @@
+{
+  "_schemaVersion": "v2-dom-probe",
+  "_generatedBy": "rerun/build-blueprints-from-dom.mjs",
+  "_sourceDom": "07_neuheiten.json",
+  "_note": "DOM-derived Blueprint für Workflow-Robustness-Rerun. Vision-Felder sind als screenshot_required markiert und in openQuestions gesammelt.",
+  "pageUrl": "https://www.amazon.de/stores/page/E3653495-9130-48DC-BFA4-F38BD9C7AEF1",
+  "pageName": "Unsere Neuheiten",
+  "pageLevel": 1,
+  "pageType": "new_arrivals",
+  "archetype": "screenshot_required",
+  "contentStats": {
+    "domModules": 10,
+    "logicalModules": 8,
+    "totalImages": 65,
+    "totalVideos": 6,
+    "estimatedScrollLength": "long"
+  },
+  "modules": [
+    {
+      "moduleId": "07_neuheiten_mod_01",
+      "position": 1,
+      "moduleName": "Hero-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow auf Position 1 (t=437px, h=399px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "immersive",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/970516a6-e21f-42d3-800f-7f37e352c8a8._CR0%2C0%2C3000%2"
+        }
+      ],
+      "_dom": {
+        "domIndex": 1,
+        "topPx": 437,
+        "heightPx": 399,
+        "widgetClass": "EditorialRow",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "07_neuheiten_mod_02",
+      "position": 2,
+      "moduleName": "Trenn-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow auf Position 2 (t=836px, h=207px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/16f75c5c-1f60-475b-aa44-703bcd08a0fc._CR0%2C0%2C3000%2"
+        }
+      ],
+      "_dom": {
+        "domIndex": 2,
+        "topPx": 836,
+        "heightPx": 207,
+        "widgetClass": "EditorialRow",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "07_neuheiten_mod_03",
+      "position": 3,
+      "moduleName": "Produkt-Showcase mit Video",
+      "layoutShape": "6_tile_grid",
+      "tileCount": 8,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow auf Position 3 (t=1043px, h=556px, ic=29, pc=0, vc=6).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "editorial",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow, imgCount=29, productCount=0, videoCount=6.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/71JxgNpKTsL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg"
+        },
+        {
+          "position": 2,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/71b24XnN0QL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg"
+        },
+        {
+          "position": 3,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 4,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 5,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 6,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 7,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 8,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 3,
+        "topPx": 1043,
+        "heightPx": 556,
+        "widgetClass": "EditorialRow",
+        "headingText": [
+          "Magnesium L-Threonate (Magtein®) – 2.083mg Magnesium L-Threonat pro Tagesdosis – 90 Kapseln – für deinen..."
+        ],
+        "previewChars": 15,
+        "images": 29,
+        "videos": 6,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "07_neuheiten_mod_04",
+      "position": 4,
+      "moduleName": "Produktgrid",
+      "layoutShape": "product_grid_asin",
+      "tileCount": 8,
+      "designRationale": "DOM-abgeleitet aus Widget ProductGrid auf Position 4 (t=1599px, h=3414px, ic=25, pc=50, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Heuristik aus widgetClass=ProductGrid, imgCount=25, productCount=50, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "Bild (alt: Apfelessig Gummies)",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/713cTaGXg+L._AC_UL320_.jpg"
+        },
+        {
+          "position": 2,
+          "imageCategory": "screenshot_required",
+          "visualContent": "Bild (alt: SoProtein Whey Complex Protein Pulver)",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/I/71wd83GyidL._AC_UL320_.jpg"
+        },
+        {
+          "position": 3,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 4,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 5,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 6,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 7,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 8,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 4,
+        "topPx": 1599,
+        "heightPx": 3414,
+        "widgetClass": "ProductGrid",
+        "headingText": [
+          "Apfelessig Gummies",
+          "SoProtein Whey Complex Protein Pulver - Schokoladen-Geschmack",
+          "Hydration Recharge Pineapple Coconut"
+        ],
+        "previewChars": 28,
+        "images": 25,
+        "videos": 0,
+        "products": 50,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "07_neuheiten_mod_05",
+      "position": 5,
+      "moduleName": "Trenn-Banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow auf Position 5 (t=5013px, h=159px, ic=1, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow, imgCount=1, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/1505494d-2b64-44ec-93d3-2c21b647be2a"
+        }
+      ],
+      "_dom": {
+        "domIndex": 5,
+        "topPx": 5013,
+        "heightPx": 159,
+        "widgetClass": "EditorialRow",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 1,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "07_neuheiten_mod_06",
+      "position": 6,
+      "moduleName": "Kategorien-Grid",
+      "layoutShape": "4_tile_grid",
+      "tileCount": 4,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow auf Position 6 (t=5172px, h=584px, ic=4, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow, imgCount=4, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/9ecba1d6-121f-44a4-9ad1-ff50fba5770d"
+        },
+        {
+          "position": 2,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/0e4bbbc6-7f76-489a-9659-dccd057347be"
+        },
+        {
+          "position": 3,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        },
+        {
+          "position": 4,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": null
+        }
+      ],
+      "_dom": {
+        "domIndex": 6,
+        "topPx": 5172,
+        "heightPx": 584,
+        "widgetClass": "EditorialRow",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 4,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "07_neuheiten_mod_07",
+      "position": 7,
+      "moduleName": "2-Tile-Grid",
+      "layoutShape": "2_tile_grid",
+      "tileCount": 2,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow auf Position 7 (t=5755px, h=292px, ic=2, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "editorial",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow, imgCount=2, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/43095318-8bde-4c1a-b4c6-8d4f6597ef8f"
+        },
+        {
+          "position": 2,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/4ce4bec9-25ce-41a7-8549-14da2f9603ba"
+        }
+      ],
+      "_dom": {
+        "domIndex": 7,
+        "topPx": 5755,
+        "heightPx": 292,
+        "widgetClass": "EditorialRow",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 2,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    },
+    {
+      "moduleId": "07_neuheiten_mod_08",
+      "position": 8,
+      "moduleName": "2-Tile-Grid",
+      "layoutShape": "2_tile_grid",
+      "tileCount": 2,
+      "designRationale": "DOM-abgeleitet aus Widget EditorialRow auf Position 8 (t=6047px, h=292px, ic=2, pc=0, vc=0).",
+      "relationToNextModule": "screenshot_required",
+      "structuralPattern": "screenshot_required",
+      "designIntent": "editorial",
+      "designIntentDetail": "Heuristik aus widgetClass=EditorialRow, imgCount=2, productCount=0, videoCount=0.",
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/8f18f5ba-cd70-426b-9e8c-e0112f327267"
+        },
+        {
+          "position": 2,
+          "imageCategory": "screenshot_required",
+          "visualContent": "DOM-Bild ohne Alt-Text",
+          "elementProportions": {},
+          "textOnImage": {
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "screenshot_required",
+          "backgroundDetail": null,
+          "dominantColors": [],
+          "_imgSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/269e8d52-ed23-4b9e-a399-de6408ef9d1e"
+        }
+      ],
+      "_dom": {
+        "domIndex": 8,
+        "topPx": 6047,
+        "heightPx": 292,
+        "widgetClass": "EditorialRow",
+        "headingText": [],
+        "previewChars": 0,
+        "images": 2,
+        "videos": 0,
+        "products": 0,
+        "shoppable": 0
+      }
+    }
+  ],
+  "pageAnalysis": {
+    "dominantPalette": [],
+    "tonalityVisual": "screenshot_required",
+    "ctaStrategies": "screenshot_required",
+    "contentDepth": "DOM zeigt 8 logische Module, 65 Bilder, 6 Videos, 7760px Scroll-Höhe.",
+    "useForArchetype": "screenshot_required",
+    "moduleClusters": "screenshot_required"
+  },
+  "openQuestions": [
+    "Vision-Felder pro Tile (imageCategory, backgroundStyle, elementProportions, dominantColors) sind aus DOM nicht ableitbar, Screenshot-Analyse nötig.",
+    "textOnImage.headline/subline/cta für alle Banner-Module erfordert OCR/Vision.",
+    "structuralPattern und relationToNextModule pro Modul sind Vision-Felder.",
+    "archetype, tonalityVisual, ctaStrategies, useForArchetype und moduleClusters sind Page-Level-Vision-Felder.",
+    "designIntent aus DOM ist Heuristik und kann bei Screenshot-Review revidiert werden."
+  ]
+}
