@@ -8,8 +8,299 @@
   "brandName": "natural elements",
   "storeUrl": "https://www.amazon.de/stores/page/3955CCD4-902C-4679-9265-DEC4FCBAA8C8",
   "analyzedAt": "2026-04-21T18:01:21.676Z",
-  "methodology": "V4-v3-Blueprint-Phase-1-DOM-plus-Phase-2-Vision-Gold-fused",
-  "v3SchemaNote": "Dreiphasig: Phase 1 DOM via scripts/extract-page-dom.js (aktuelle Captures 2026-04-21), Phase 2 Vision durch Gold-Blueprint-Fusion plus gezielte Vision-Nachpruefung fuer Startseite-Hero. Phase 3 storeAnalysis ist hier explizit weggelassen (separater Pass).",
+  "methodology": "V4-v3-Blueprint-enrichment-20260422",
+  "v3SchemaNote": "v3 plus Einordnungs-Ebene: moduleFunction pro Modul, pageArchitecture pro Seite, product_tile_asin als imageCategory-Wert fuer Amazon-ASIN-Tiles ohne Brand-Design.",
+  "storeAnalysis": {
+    "schemaVersion": "v3-brand-identity-2",
+    "derivedFrom": "v3-blueprints (10 Seiten, 114 Module) im rerun-v3, plus Einordnungs-Ebene (moduleFunction pro Modul, pageArchitecture pro Seite). Basis-Markeninhalte uebernommen aus dem ersten Brand-Identity-Pass (Commit 5847f09) und auf v3-Schema gehoben.",
+    "marketSegment": "Nahrungsergaenzungsmittel und Supplements im Premium-Bereich, breit aufgestellt ueber Vitamine, Mineralien, Sport, Beauty, Wohlbefinden und Geschenk-Sets.",
+    "primaryAudience": {
+      "coreSegments": [
+        "Koerperbewusste junge Erwachsene, 25 bis 40, urban, lifestyleorientiert",
+        "Aktive Sportler und Fitnessinteressierte (Sports Series, SoProtein, Kraftsport Sets)",
+        "Gesundheitsbewusste Alltagsnutzer mit Fokus auf Immunsystem, Energie, Stressresistenz",
+        "Anti-Aging-affine und Beauty-affine Kundinnen und Kunden",
+        "Geschenkeschenkende, die kuratierte Themen-Sets suchen"
+      ],
+      "psychographics": "Informiert, skeptisch gegenueber Werbeversprechen, erwartet Transparenz und Laborzahlen, zugleich offen fuer jugendlich-direkte Ansprache und Lifestyle-Kontext.",
+      "ageRange": "Schwerpunkt 25 bis 45"
+    },
+    "priceTier": "Premium im oberen mittleren Segment. Qualitaets-Narrativ und Reinheits-Narrativ statt Preis-Kampf, positioniert gegen Apotheken-Premium und Lifestyle-Wellnessmarken.",
+    "productComplexity": "Hoch. Breites Portfolio aus Einzelwirkstoffen (Omega 3, Magnesium, Vitamin D3+K2, Zink, Kollagen) und Komplexprodukten (Premium Multi, Immunsystem Sets, Kraftsport Sets), mit erklaerungsbeduerftigen Unterscheidungen. Darum auch dedizierter Produktselektor mit sechs Filter-Accordions und eigener Empfehlungs-Seite.",
+    "brandVoice": {
+      "tonality": "Direkt, jugendlich-frech, wissenschaftsnah-selbstbewusst und persoenlich-beratend. Duzt die Zielgruppe durchgehend, verbindet Laborseriositaet mit Alltags-Sprache.",
+      "adjectives": [
+        "frisch",
+        "ehrlich",
+        "wissenschaftsnah",
+        "selbstbewusst",
+        "lifestyleorientiert"
+      ],
+      "signatureClaims": [
+        "Nahrungsergaenzung neu gedacht:",
+        "Und dein Koerper so.",
+        "Neue Produkte? OH YEAH!",
+        "Weisst du bereits, was dein Koerper braucht?",
+        "Du suchst das passende Produkt fuer dich?",
+        "Keine falschen Versprechen",
+        "Hochwertige Rohstoffe",
+        "Jede Charge laborgeprueft",
+        "Make it full size",
+        "Fuer deinen Erfolg auf ganzer Linie.",
+        "Bestseller direkt hier shoppen"
+      ],
+      "voiceContrasts": "Haerte und Humor zugleich: 'Keine falschen Versprechen' und 'Jede Charge laborgeprueft' stehen neben 'OH YEAH!' und 'Und dein Koerper so.' Signalisiert zwei Ebenen, fundierte Substanz und popkulturelle Ansprache."
+    },
+    "designAesthetic": {
+      "colorPalette": {
+        "primary": "Salbei-Gruen (Hero Split links, Shoppable-Flaechen, Kategorie-Tiles)",
+        "secondary": "Creme bis Weiss als Flaechengrund, Schwarz als Produktfarbe (Tiegel) und Typografie",
+        "accents": [
+          "Gelb (Immunsystem-Banner, Neon-Gelb in der Sports Series)",
+          "Salmon-Rosa (Neuheiten-Banner OH YEAH, Anti-Aging-Tiles und Beauty-Tiles)",
+          "Pastell-Varianten in Kategorie-Tiles (Buttergelb, Dustig-Rosa, Hellgrau, Hellgruen)"
+        ],
+        "hexStatus": "Hex-Werte sind noch nicht aus Pixel-Sampling extrahiert, qualitative Zuordnung."
+      },
+      "typography": "Serifen-Headlines auf dem Haupt-Hero, sans-serif durchgaengig im Rest. Lowercase Logo 'natural elements'. Italic-Akzente fuer Kampagnensprache (OH YEAH, SPORTS SERIES).",
+      "photographyStyle": "Zwei parallele Schulen. Lifestyle-Portraitfotografie mit jungen Erwachsenen in urbanen, sportlichen oder entspannten Settings. Freigestellte Produktfotografie vor Creme-Flaechen oder Salbei-Flaechen mit gelegentlicher Aquarell-Blattillustration.",
+      "layoutSignals": "Ausgepraegte Split-Layouts (Hero, Shoppable), schmale editorial_section_intro als rhythmische Trenner zwischen Blocks, solid_color Banner als Akzent (Gelber Banner auf Immunsystem). Subcategory-Tiles als eigenstaendige Rows, keine 3er-Kachel-Blocks."
+    },
+    "positioningClaim": "natural elements ist die Supplementmarke, die hochwertige Rohstoffe und laborgeprufte Qualitaet in eine jugendlich-direkte Lifestyle-Sprache uebersetzt, so dass Wirkung und Markengefuehl Hand in Hand gehen.",
+    "contentStrategy": {
+      "approach": "Dual aus emotional-jugendlichem Brand-Layer und rational-laborseriosem Trust-Layer.",
+      "emotionalLayer": "Hero-Videos, Lifestyle-Kampagnen (OH YEAH, SPORTS SERIES, Bestseller shoppable), Ueber-uns-Erzaehlung mit 10 Story-Bannern und Brand-Video, humorige Micro-Claims.",
+      "rationalLayer": "Laborgepruefte Qualitaet, Rohstofftransparenz, kuratierter Produktselektor, beratende Chips 'Ja, Nein, Ich bin mir nicht sicher'.",
+      "modulePreferences": "Starker Einsatz von product_showcase_video in Kategorien (3 in Folge auf Vitamine, 6 in Folge bei Geschenk-Sets), shoppable_interactive_image als Hero-Ersatz auf Listing-Seiten, editorial_section_intro als Gliederungs-Werkzeug.",
+      "editorialDepth": "Sehr tief bei Ueber uns (17 Module, davon 10 editorial_banner plus ein hohes Brand-Video), flach bei Produktlinienseiten wie SoProtein Vegan (4 Module)."
+    },
+    "conversionPath": {
+      "primaryPath": "Startseite -> Shoppable Bestseller oder SPORTS SERIES Banner -> Kategorie -> product_showcase_video eines Top-Produkts -> Kategorie-Grid -> ASIN.",
+      "secondaryPath": "Startseite -> Beratungs-Tile 'LASS DICH HIER BERATEN' -> Produktselektor mit 6 Filter-Accordions -> Filterergebnis-Grid -> ASIN.",
+      "giftingPath": "Startseite -> Geschenk-Sets -> 6 product_showcase_video Set-Praesentationen -> shoppable_interactive_image mit 12 Pins -> ASIN.",
+      "trustLoop": "Jeder Conversion-Pfad kreuzt ein Editorial-Quad oder Tile-Pair mit Werten (Keine falschen Versprechen, Hochwertige Rohstoffe, Jede Charge laborgeprueft), ankert Kaufentscheidung auf Qualitaets-Claims."
+    },
+    "keyStrengths": [
+      "Konsistente Farb-Signatur und Typografie-Signatur ueber alle 10 Seiten (Salbei-Gruen plus Creme, Schwarz-Tiegel, lowercase Logo), hoher Wiedererkennungswert.",
+      "Produktselektor als eigenstaendige Beratungs-Seite, rare Differenzierung im Amazon-Store-Kontext und starkes Conversion-Asset bei komplexen Wirkstoff-Entscheidungen.",
+      "Geschenk-Sets Seite mit 6 Videos in Folge schafft ein ungewoehnlich tiefes Storytelling-Format fuer kuratierte Bundles, deutlich anders als generische Grid-Listings der Wettbewerber.",
+      "Ueber uns Seite mit 17 Modulen, davon 10 editorial_banner und ein hohes Brand-Video, investiert stark in Brand-Story und Trust.",
+      "Brand Voice kombiniert popkulturelle Direktheit (OH YEAH, Und dein Koerper so.) mit Laborseriositaet (Jede Charge laborgeprueft), was gleichzeitig jung und glaubwuerdig wirkt.",
+      "Shoppable Interactive Images als Hero-Ersatz auf Listing-Seiten (Alle Produkte, Immunsystem, Geschenk-Sets) reduziert Scroll-Friction und erhoeht die Chance auf direkten PDP-Sprung."
+    ],
+    "brandUSPs": [
+      "Hochwertige Rohstoffe als Markenversprechen ueber das gesamte Portfolio",
+      "Jede Charge laborgeprueft, unabhaengige Qualitaetskontrolle",
+      "Keine falschen Versprechen, selbstbewusst-transparente Kommunikation",
+      "Breites Sortiment mit dedizierter Beratung (Produktselektor) fuer passgenaue Empfehlungen",
+      "Durchgaengige visuelle Signatur, Salbei-Gruen plus schwarze Tiegel, schafft Marken-Kohaerenz ueber alle Kategorien"
+    ],
+    "brandUSPsNote": "Diese USPs sind auf Markenebene formuliert und enthalten keine produktspezifischen Zahlenwerte (Fuellmengen, Dosierungen, Kapselzahlen). Sie treffen auf alle gelisteten Produkte zu.",
+    "moduleFunctionalTaxonomy": {
+      "description": "Wiederkehrende Funktions-Muster ueber alle 10 Seiten des Stores. Grundlage fuer den Retrieval-basierten Skeleton-Builder und fuer den Transfer auf neue Brand-Stores.",
+      "byLayoutType": {
+        "editorial_banner": 14,
+        "editorial_section_intro": 13,
+        "amazon_nav_header": 10,
+        "amazon_share_footer": 10,
+        "product_showcase_video": 10,
+        "editorial_tile_pair": 7,
+        "subcategory_tile": 6,
+        "editorial_tile_quad": 6,
+        "filter_accordion_collapsed": 6,
+        "shoppable_interactive_image": 4,
+        "hero_banner": 4,
+        "separator_invisible": 3,
+        "hero_video": 2,
+        "shoppable_interactive_image_set": 2,
+        "product_grid_category": 2,
+        "editorial_banner_tall": 2,
+        "hero_video_split": 1,
+        "product_grid_featured": 1,
+        "editorial_banner_solid_color": 1,
+        "hero_banner_compact": 1,
+        "product_grid_line": 1,
+        "hero_video_tall": 1,
+        "product_grid_full_catalog": 1,
+        "product_grid_new_arrivals": 1,
+        "filter_banner": 1,
+        "product_grid_filter_results": 1,
+        "hero_banner_tall": 1,
+        "editorial_banner_large": 1,
+        "product_grid_bestsellers": 1
+      },
+      "byDesignIntent": {
+        "editorial": 27,
+        "product_showcase": 25,
+        "mimics_native_chrome": 20,
+        "navigation_bridge": 16,
+        "section_intro": 13,
+        "emotional_hook": 10,
+        "visual_separator": 3
+      },
+      "topCombinations": [
+        {
+          "layoutType": "editorial_section_intro",
+          "designIntent": "section_intro",
+          "count": 13
+        },
+        {
+          "layoutType": "editorial_banner",
+          "designIntent": "editorial",
+          "count": 12
+        },
+        {
+          "layoutType": "amazon_nav_header",
+          "designIntent": "mimics_native_chrome",
+          "count": 10
+        },
+        {
+          "layoutType": "amazon_share_footer",
+          "designIntent": "mimics_native_chrome",
+          "count": 10
+        },
+        {
+          "layoutType": "product_showcase_video",
+          "designIntent": "product_showcase",
+          "count": 10
+        },
+        {
+          "layoutType": "editorial_tile_pair",
+          "designIntent": "editorial",
+          "count": 6
+        },
+        {
+          "layoutType": "subcategory_tile",
+          "designIntent": "navigation_bridge",
+          "count": 6
+        },
+        {
+          "layoutType": "editorial_tile_quad",
+          "designIntent": "editorial",
+          "count": 6
+        },
+        {
+          "layoutType": "filter_accordion_collapsed",
+          "designIntent": "navigation_bridge",
+          "count": 6
+        },
+        {
+          "layoutType": "shoppable_interactive_image",
+          "designIntent": "product_showcase",
+          "count": 4
+        }
+      ],
+      "signaturePatterns": [
+        "hero_video_split plus hero_video als Doppel-Opener: emotionaler Einstieg plus zweiter Marken-Moment, seltener Luxus nur auf der Startseite",
+        "editorial_section_intro als rhythmischer Trenner zwischen Produkt- und Editorial-Blocks, 13 Vorkommen ueber den Store",
+        "shoppable_interactive_image als Alternative zum klassischen Kategoriegrid, 4 Vorkommen auf konvergierenden Seiten (Startseite, Immunsystem, Alle Produkte, Geschenk-Sets)",
+        "product_showcase_video in Ketten bis zu 6 in Folge (Geschenk-Sets), ungewoehnlich hoch gegenueber Wettbewerbern, baut Bundle-Storytelling",
+        "subcategory_tile als eigenstaendige Full-Width-Row statt 3er-Kachel-Block, 6 Vorkommen verteilt ueber Immunsystem und Vitamine"
+      ]
+    },
+    "pageArchetypes": [
+      {
+        "pageName": "Startseite",
+        "pageId": "3955CCD4-902C-4679-9265-DEC4FCBAA8C8",
+        "pageType": "startseite",
+        "modules": 13,
+        "pageArchitecture": "Klassische Einstiegs-Startseite mit Hero-Video-Opener, gefolgt von Navigation-Bridge-Bannern (Neuheiten, Kategorien), Bestseller-Shoppable als Konversions-Flaeche, Produktfinder-Teaser als Beratungs-Einstieg, und Featured-Grid als Warenlager. Der Flow fuehrt von Awareness ueber Orientierung zu Konversion und optional zu Beratung.",
+        "primaryFunction": "Marken-Einstieg mit kuratiertem Navigations- und Conversion-Mix",
+        "conversionMode": "guided_conversion",
+        "transferableTo": "high"
+      },
+      {
+        "pageName": "Immunsystem",
+        "pageId": "1B2D6D85-21E1-4BBE-AD98-EBDE6CFEA02F",
+        "pageType": "hub_category",
+        "modules": 16,
+        "pageArchitecture": "Hub-Kategorie fuer Immunsystem-Produkte. Hero-Banner mit Kategorie-Claim, Shoppable als Direkt-Einstieg in die meistgekauften Immun-Produkte, dann Produkt-Grid und Sub-Kategorie-Tiles. Schluss mit Editorial-Bannern als Marken-Anker.",
+        "primaryFunction": "Kategorie-Deepdive mit Produkt-Fokus, typisch mit Hero plus Grid",
+        "conversionMode": "direct_conversion",
+        "transferableTo": "high"
+      },
+      {
+        "pageName": "Vitamine",
+        "pageId": "5DF9227A-372F-4144-8FE4-73B4797BAABD",
+        "pageType": "hub_category",
+        "modules": 13,
+        "pageArchitecture": "Hub-Kategorie fuer Vitamine, eng strukturiert. Hero plus drei dedizierte Produkt-Showcase-Videos (Premium Multi, Vitamin C, Vitamin D3) vor dem Kategoriegrid. Die Video-Kette baut Expertise und Differenzierung pro Wirkstoff auf.",
+        "primaryFunction": "Kategorie-Deepdive mit Produkt-Fokus, typisch mit Hero plus Grid",
+        "conversionMode": "direct_conversion",
+        "transferableTo": "high"
+      },
+      {
+        "pageName": "SoProtein Vegan",
+        "pageId": "0C5288E7-93DF-4272-890E-78EFF3DD0813",
+        "pageType": "product_lines",
+        "modules": 4,
+        "pageArchitecture": "Produktlinien-Seite, minimal aufgebaut. Kompakter Hero mit Kampagnen-Claim 'Make it full size', direkt danach Produkt-Grid der gesamten Linie. Reine Produkt-Listing-Seite ohne Story-Elemente.",
+        "primaryFunction": "Produkt-Linien-Praesentation, typisch mit Kampagnen-Hero",
+        "conversionMode": "direct_conversion",
+        "transferableTo": "medium"
+      },
+      {
+        "pageName": "Ueber uns",
+        "pageId": "C199E0D4-B434-4DFA-8DF0-2D5601387A8B",
+        "pageType": "about",
+        "modules": 17,
+        "pageArchitecture": "About-Seite mit sehr hoher Editorial-Dichte. Brand-Hero, dann 10 Story-Banner, eingestreut ein grosses Brand-Video, zum Schluss Werte-Quad und Tile-Pairs. Maximale Investition in Brand-Story und Vertrauen, kein Konversions-Fokus.",
+        "primaryFunction": "Marken-Story, Vertrauen aufbauen, keine direkte Conversion",
+        "conversionMode": "trust_building",
+        "transferableTo": "high"
+      },
+      {
+        "pageName": "Alle Produkte",
+        "pageId": "56C2E5EE-81A5-4F07-8BB3-38927E13937B",
+        "pageType": "all_products",
+        "modules": 6,
+        "pageArchitecture": "Katalog-Seite mit Shoppable-Einstieg, Editorial-Intro, vollem Produkt-Grid, Section-Intro als Abschluss. Linearer Scroll fuer Nutzer, die schon im Kauf-Mindset sind.",
+        "primaryFunction": "Katalog-Linear, fuer gereifte Kaufinteressenten",
+        "conversionMode": "direct_conversion",
+        "transferableTo": "high"
+      },
+      {
+        "pageName": "unsere Neuheiten",
+        "pageId": "E3653495-9130-48DC-BFA4-F38BD9C7AEF1",
+        "pageType": "new_arrivals",
+        "modules": 10,
+        "pageArchitecture": "Neuheiten-Hub mit Hero, Section-Intros als Gliederung, ein Produkt-Showcase-Video fuer das Top-Neuheit (Magtein), dann Neuheiten-Grid mit 50 Produkten. Klar auf Repeat-Besucher und Pushing-Top-Neuheit optimiert.",
+        "primaryFunction": "Rueckkehrer-Treiber, Neuheiten mit Feature-Produkt",
+        "conversionMode": "direct_conversion",
+        "transferableTo": "high"
+      },
+      {
+        "pageName": "Produktselektor",
+        "pageId": "A03B844E-0DA2-4FFC-8205-DC6DFDB0D59E",
+        "pageType": "product_selector",
+        "modules": 10,
+        "pageArchitecture": "Reine Filter-UI-Seite. Sechs Filter-Accordions, ein Filter-Banner, am Ende Filterergebnis-Grid mit 20 Produkten. Produkte finden statt browsen. Funktionale Beratungs-Seite.",
+        "primaryFunction": "Beratungs-UI, Filter-basierte Produktfindung",
+        "conversionMode": "guided_conversion",
+        "transferableTo": "medium"
+      },
+      {
+        "pageName": "Geschenk-Sets",
+        "pageId": "1A5ECF37-615B-4FBB-8620-C629481CB321",
+        "pageType": "gift_sets",
+        "modules": 18,
+        "pageArchitecture": "Geschenk-Set-Seite mit hohem Kampagnen-Anteil. Hero-Tall, Editorial-Banner, dann sechs Produkt-Showcase-Videos fuer Basic- und Premium-Sets, Shoppable-Abschluss, zweimal Editorial-Quad als Werte- und Kategorie-Recap.",
+        "primaryFunction": "Kuratiertes Bundle-Showcase mit starker Video-Praesenz",
+        "conversionMode": "guided_conversion",
+        "transferableTo": "medium"
+      },
+      {
+        "pageName": "Unsere Bestseller Empfehlungen",
+        "pageId": "B77CB4EF-4CCF-4FB0-9251-53DF11DCCE12",
+        "pageType": "bestsellers",
+        "modules": 7,
+        "pageArchitecture": "Bestseller- und Empfehlungs-Seite. Section-Intro, dann Bestseller-Grid mit 24 Top-Produkten, gefolgt von zwei Editorial-Quads. Reduzierter Editorial-Anteil, Konversions-fokussiert.",
+        "primaryFunction": "Social-Proof-Listing der Top-Seller, klar Conversion-fokussiert",
+        "conversionMode": "direct_conversion",
+        "transferableTo": "high"
+      }
+    ]
+  },
   "pages": [
     {
       "pageName": "Startseite",
@@ -82,40 +373,100 @@
             "videoCount": 0,
             "domHeight": 300,
             "domTop": 99
-          }
+          },
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
         },
         {
           "position": 2,
           "moduleId": "startseite_mod_02",
-          "moduleName": "Hero Neuheiten OH YEAH",
-          "layoutType": "hero_banner",
+          "moduleName": "Hero Video Split",
+          "layoutType": "hero_video_split",
           "layoutShape": "full_width_banner",
           "tileCount": 1,
           "designIntent": "emotional_hook",
-          "designIntentDetail": "Typografischer, produktzentrierter Hero mit schwungvollem Handschrift-Treatment auf \"OH YEAH!\" und schwarzem NEU-Badge als Neuheiten-Anker. Statische Produktbuehne statt Lifestyle-Video, klare Verkaufsabsicht.",
-          "structuralPattern": "Full-width Hero, links Typografie und Textpfeil-CTA, rechts Produktstillleben mit drei Flaschen, rechts oben Kreis-Badge NEU.",
-          "backgroundStyle": "solid_color",
-          "backgroundDetail": "Off-White mit dezenter zartrosa Atmosphaere, weicher Schatten unter den Produkten.",
+          "designIntentDetail": "Opener der Startseite, setzt Marken-Tonalitaet ueber Bewegung und rotierende Claims.",
+          "structuralPattern": "Full-width Hero-Video mit Split-Komposition aus salbei-gruener Flaeche links und Lifestyle-Videosequenz rechts. Mehrere Claims rotieren ueber die Video-Dauer, darunter 'Nahrungsergaenzung neu gedacht' und 'Und dein Koerper so'.",
+          "moduleFunction": "Emotionaler Opener der Startseite und einzige durchgaengige Bewegungsflaeche. Die rotierenden Claims etablieren Marken-Haltung und -Ton, bevor der Nutzer in Produktwelten wechselt. Keine direkte Conversion-Funktion, rein Awareness und Markenanker.",
+          "backgroundStyle": "split_color_photo",
+          "backgroundDetail": "Salbei-gruene Farbflaeche links, rechts Lifestyle-Video mit wechselnden Szenen",
           "textOnImage": {
-            "visibleText": "Neue Produkte? OH YEAH!",
+            "visibleText": "Nahrungsergaenzung neu gedacht, Und dein Koerper so",
+            "textType": "headline",
+            "origin": "layered_text",
+            "headline": "Nahrungsergaenzung neu gedacht",
+            "subline": "Und dein Koerper so",
+            "cta": null,
+            "directionCues": "Rotierende Claim-Sequenz"
+          },
+          "tiles": [
+            {
+              "position": 1,
+              "imageCategory": "creative_lifestyle_hybrid",
+              "visualContent": "Video-Hero mit Split-Komposition. Linke Haelfte salbei-gruene Flaeche, rechts Lifestyle-Video mit rotierenden Szenen (Personen in Alltag und Sport). Mehrere Claims wechseln durch, prominent 'Nahrungsergaenzung neu gedacht' und 'Und dein Koerper so'. Kein einzelnes Frame repraesentativ, Video als Ganzes ist das Modul.",
+              "elementProportions": {
+                "solid_background": 45,
+                "lifestyle_photo": 45,
+                "text": 10
+              },
+              "textOnImage": {
+                "visibleText": "Nahrungsergaenzung neu gedacht, Und dein Koerper so",
+                "textType": "headline",
+                "origin": "layered_text",
+                "headline": "Nahrungsergaenzung neu gedacht",
+                "subline": "Und dein Koerper so",
+                "cta": null,
+                "directionCues": "Multi-Frame-Video, Texte rotieren"
+              },
+              "ctaText": null,
+              "linksTo": null,
+              "backgroundStyle": "split_color_photo",
+              "backgroundDetail": "Salbei-gruene Farbflaeche plus rotierendes Lifestyle-Video",
+              "dominantColors": [
+                "Salbei-Gruen",
+                "Weiss",
+                "Beigen-Fotoanteil"
+              ],
+              "dominantColorsHex": [
+                "#9CA98C",
+                "#FFFFFF"
+              ],
+              "notes": "Video mit rotierenden Texten, Single-Frame-Snapshot ist irrefuehrend. Bei Vision-Pass mehrere Frames sampeln oder als Video flaggen."
+            }
+          ]
+        },
+        {
+          "position": 3,
+          "moduleId": "startseite_mod_03",
+          "moduleName": "Hero Banner Neuheiten OH YEAH",
+          "layoutType": "editorial_banner",
+          "layoutShape": "full_width_banner",
+          "tileCount": 1,
+          "designIntent": "navigation_bridge",
+          "designIntentDetail": "Direkter Lead zur Neuheiten-Unterseite, bewusst als Banner gestaltet, nicht als Produktfocus.",
+          "structuralPattern": "Full-width Banner auf off-weissem Grund. Links grosse Typografie mit Frage-Antwort-Muster 'Neue Produkte? OH YEAH!' plus Pfeil-CTA 'NEUHEITEN ENTDECKEN'. Rechts drei schwarze natural-elements-Gebinde als Produkt-Silhouetten-Hint, oben rechts NEU-Badge als Kreis-Markierung.",
+          "moduleFunction": "Eigenstaendiger Werbe-Banner fuer die Neuheiten-Subpage. Funktioniert als dedizierter Navigation-Bridge, nicht als Produkt-Showcase, da keine konkreten Produkte adressierbar sind. Seine Rolle ist Traffic-Lenker auf die Produktfinder-Subpage und Signalgeber fuer 'es gibt Neues'.",
+          "backgroundStyle": "solid_color",
+          "backgroundDetail": "Off-Weiss mit Zartrosa-Akzent, drei Produkt-Silhouetten als Dekor rechts",
+          "textOnImage": {
+            "visibleText": "Neue Produkte? OH YEAH! NEUHEITEN ENTDECKEN NEU",
             "textType": "headline_cta",
             "origin": "baked_in",
             "headline": "Neue Produkte?",
             "subline": "OH YEAH!",
             "cta": "NEUHEITEN ENTDECKEN",
-            "directionCues": "Pfeil nach rechts vor der CTA"
+            "directionCues": "Pfeil vor CTA, NEU-Badge oben rechts"
           },
           "tiles": [
             {
               "position": 1,
               "imageCategory": "product",
-              "visualContent": "Drei schwarze natural elements Gebinde stehen nebeneinander auf off-weissem Untergrund: links eine kompaktere Supplement-Dose, in der Mitte eine Tropfer-Braunglasflasche, rechts eine groessere Supplement-Dose. Alle mit weissem natural elements Wortbildmarken-Label. Oben rechts dunkles Kreis-Badge mit weisser Schrift \"NEU\". Links oben in grosser schwarzer Sans-Serif \"Neue Produkte?\", direkt darunter in einer pinken Handschrift-Type \"OH YEAH!\". Unter der Headline schwarzer Textpfeil mit Versalien-CTA \"NEUHEITEN ENTDECKEN\".",
+              "visualContent": "Off-weisser Full-width Banner. Links grosse schwarze Frage-Typografie 'Neue Produkte?', darunter in groesserer Zartrosa-Italic 'OH YEAH!' als Ausruf-Antwort. Darunter schwarzer CTA-Button 'NEUHEITEN ENTDECKEN' mit Pfeil. Rechts drei schwarze natural-elements Gebinde nebeneinander als Produkt-Stillleben, oben rechts ein Kreis-Badge 'NEU'.",
               "elementProportions": {
-                "product_photo": 55,
-                "solid_background": 25,
-                "text": 12,
-                "badge": 5,
-                "cta_button": 3
+                "product_photo": 40,
+                "text": 35,
+                "cta_button": 10,
+                "solid_background": 10,
+                "badge": 5
               },
               "textOnImage": {
                 "visibleText": "Neue Produkte? OH YEAH! NEUHEITEN ENTDECKEN NEU",
@@ -124,109 +475,24 @@
                 "headline": "Neue Produkte?",
                 "subline": "OH YEAH!",
                 "cta": "NEUHEITEN ENTDECKEN",
-                "directionCues": "Pfeil nach rechts vor CTA, Kreis-Badge NEU oben rechts"
+                "directionCues": "Pfeil vor CTA, NEU-Badge oben rechts"
               },
               "ctaText": "NEUHEITEN ENTDECKEN",
-              "linksTo": "Seite unsere Neuheiten",
+              "linksTo": "unsere-neuheiten",
               "backgroundStyle": "solid_color",
-              "backgroundDetail": "Off-White mit Zartrosa-Stich",
+              "backgroundDetail": "Off-Weiss mit Zartrosa-Akzent",
               "dominantColors": [
-                "Off-White",
+                "Off-Weiss",
                 "Schwarz",
                 "Zartrosa"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": [
+                "#F5F1E8",
+                "#1A1A1A",
+                "#F7D4D0"
+              ]
             }
-          ],
-          "dom": {
-            "widgetClass": "EditorialRow__row__W3W3h",
-            "visibleHeadings": [
-              "Kapitel"
-            ],
-            "ctaLabels": [
-              "Play Video",
-              "Play",
-              "Unmute",
-              "Seek to live, currently behind liveLIVE",
-              "Playback Rate",
-              "Chapters",
-              "Descriptions",
-              "Subtitles",
-              "Audio Track",
-              "Picture-in-Picture",
-              "Fullscreen",
-              "Reset restore all settings to the default values",
-              "Done",
-              "Close Modal Dialog"
-            ],
-            "imageUrls": [],
-            "videoCount": 4,
-            "domHeight": 167,
-            "domTop": 399
-          }
-        },
-        {
-          "position": 3,
-          "moduleId": "startseite_mod_03",
-          "moduleName": "Banner Kategorie 1",
-          "layoutType": "editorial_banner",
-          "layoutShape": "full_width_banner",
-          "tileCount": 1,
-          "designIntent": "navigation_bridge",
-          "designIntentDetail": "Autoplay-Video auf salbeigrünem Hintergrund als emotionaler Einstieg. Text-Overlay etabliert den inhaltlichen Fokus auf den Körper und die Wirkung der Produkte.",
-          "structuralPattern": "Full-width Text-auf-Bild-Banner, Kategorie-Einstieg",
-          "backgroundStyle": "photo_bg",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": null,
-            "textType": "unknown",
-            "origin": "baked_in",
-            "headline": null,
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [
-            {
-              "position": "full",
-              "imageCategory": "creative",
-              "visualContent": "Horizontales Autoplay-Video mit salbeigrünem Hintergrund. Zentriert in der oberen Hälfte Text in heller Farbe: 'Und dein Körper so.' Sehr schlanke Banner-Anmutung, Aufmerksamkeit liegt auf der rhetorischen Frage.",
-              "elementProportions": {
-                "solid_background": 65,
-                "text": 30,
-                "graphic_elements": 5
-              },
-              "textOnImage": {
-                "visibleText": null,
-                "textType": "none",
-                "origin": "none",
-                "headline": null,
-                "subline": null,
-                "cta": null,
-                "directionCues": null
-              },
-              "ctaText": null,
-              "linksTo": null,
-              "backgroundStyle": "brand_color",
-              "backgroundDetail": null,
-              "dominantColors": [
-                "Salbeigrün",
-                "Weiß"
-              ],
-              "dominantColorsHex": null
-            }
-          ],
-          "dom": {
-            "widgetClass": "EditorialRow__row__W3W3h",
-            "visibleHeadings": [],
-            "ctaLabels": [],
-            "imageUrls": [
-              "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/03897e1f-bcf8-4847-bc5d-088e361cf281._CR0%2C0%2C3000%2C750_SX150"
-            ],
-            "videoCount": 0,
-            "domHeight": 258,
-            "domTop": 566
-          }
+          ]
         },
         {
           "position": 4,
@@ -291,7 +557,8 @@
             "videoCount": 0,
             "domHeight": 258,
             "domTop": 823
-          }
+          },
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
         },
         {
           "position": 5,
@@ -360,7 +627,8 @@
             "videoCount": 0,
             "domHeight": 493,
             "domTop": 1081
-          }
+          },
+          "moduleFunction": "Shoppable Bild mit Hotspots auf Produkt-Positionen, erlaubt Sprung direkt in PDPs ohne Grid-Scrolling."
         },
         {
           "position": 6,
@@ -439,7 +707,8 @@
             "videoCount": 4,
             "domHeight": 167,
             "domTop": 1573
-          }
+          },
+          "moduleFunction": "Bewegtes Hero-Element, emotionaler Einstieg, Marken-Tonalitaet und Lifestyle-Kontext ueber Zeit entfaltet."
         },
         {
           "position": 7,
@@ -502,7 +771,8 @@
             "videoCount": 0,
             "domHeight": 144,
             "domTop": 1740
-          }
+          },
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
         },
         {
           "position": 8,
@@ -568,7 +838,8 @@
             "videoCount": 0,
             "domHeight": 128,
             "domTop": 1884
-          }
+          },
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
         },
         {
           "position": 9,
@@ -719,7 +990,8 @@
             "videoCount": 0,
             "domHeight": 493,
             "domTop": 2012
-          }
+          },
+          "moduleFunction": "Vier-Kachel-Version des Shoppable-Patterns, praesentiert mehrere Produkt-Szenen mit Hotspots pro Kachel."
         },
         {
           "position": 10,
@@ -811,7 +1083,8 @@
             "videoCount": 0,
             "domHeight": 246,
             "domTop": 2504
-          }
+          },
+          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup."
         },
         {
           "position": 11,
@@ -903,7 +1176,8 @@
             "videoCount": 0,
             "domHeight": 246,
             "domTop": 2751
-          }
+          },
+          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup."
         },
         {
           "position": 12,
@@ -962,7 +1236,8 @@
             "videoCount": 0,
             "domHeight": 3460,
             "domTop": 2997
-          }
+          },
+          "moduleFunction": "Kurationierte Produkt-Auswahl als Grid, zeigt die meistbeworbenen Produkte der Marke, direkter Konversions-Block."
         },
         {
           "position": 13,
@@ -996,7 +1271,8 @@
             "videoCount": 0,
             "domHeight": 200,
             "domTop": 6457
-          }
+          },
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
         }
       ],
       "pageAnalysis": {
@@ -1009,7 +1285,8 @@
         "startseite_mod_10 position=rechts: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
         "startseite_mod_10 position=rechts: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
         "Vision-Nachlauf 2026-04-21 eingearbeitet: Modul position=2 von hero_video_split (Gold) auf hero_banner 'Neue Produkte? OH YEAH!' geaendert. Modul position=5 bleibt shoppable_interactive_image, Vision bestaetigt salbeigruenen Split mit Vitamin D3 K2 Duo, Omega 3 und Curcuma Extrakt."
-      ]
+      ],
+      "pageArchitecture": "Klassische Einstiegs-Startseite mit Hero-Video-Opener, gefolgt von Navigation-Bridge-Bannern (Neuheiten, Kategorien), Bestseller-Shoppable als Konversions-Flaeche, Produktfinder-Teaser als Beratungs-Einstieg, und Featured-Grid als Warenlager. Der Flow fuehrt von Awareness ueber Orientierung zu Konversion und optional zu Beratung."
     },
     {
       "pageName": "Immunsystem",
@@ -1082,7 +1359,8 @@
             "videoCount": 0,
             "domHeight": 337,
             "domTop": 99
-          }
+          },
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
         },
         {
           "position": 2,
@@ -1147,7 +1425,8 @@
             "videoCount": 0,
             "domHeight": 590,
             "domTop": 436
-          }
+          },
+          "moduleFunction": "Statischer Hero am Seitenanfang, setzt visuellen Einstieg und Claim oder Kategoriename, der die Seite thematisch verankert."
         },
         {
           "position": 3,
@@ -1214,7 +1493,8 @@
             "videoCount": 0,
             "domHeight": 583,
             "domTop": 1026
-          }
+          },
+          "moduleFunction": "Shoppable Bild mit Hotspots auf Produkt-Positionen, erlaubt Sprung direkt in PDPs ohne Grid-Scrolling."
         },
         {
           "position": 4,
@@ -1277,7 +1557,8 @@
             "videoCount": 0,
             "domHeight": 552,
             "domTop": 1608
-          }
+          },
+          "moduleFunction": "Editorial-Banner mit Volltonflaeche, bewusst reduzierte Komposition fuer Aufmerksamkeit oder Marken-Farb-Signalisierung."
         },
         {
           "position": 5,
@@ -1339,7 +1620,8 @@
             "videoCount": 0,
             "domHeight": 149,
             "domTop": 2160
-          }
+          },
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
         },
         {
           "position": 6,
@@ -1399,7 +1681,8 @@
             "videoCount": 0,
             "domHeight": 3674,
             "domTop": 2309
-          }
+          },
+          "moduleFunction": "Produkt-Grid einer Kategorie, zentrale Konversions-Flaeche einer Hub-Seite, Amazon rendert Produkt-Cards selbst."
         },
         {
           "position": 7,
@@ -1463,7 +1746,8 @@
             "videoCount": 0,
             "domHeight": 207,
             "domTop": 5983
-          }
+          },
+          "moduleFunction": "Einzelne Sub-Kategorie als eigenstaendige Row, fungiert als Navigation-Bridge zu einer tieferen Hub-Seite innerhalb derselben Kategorie. Verlinkt auf eine Sub-Kategorie innerhalb der uebergeordneten Hub-Seite."
         },
         {
           "position": 8,
@@ -1527,7 +1811,8 @@
             "videoCount": 0,
             "domHeight": 207,
             "domTop": 6190
-          }
+          },
+          "moduleFunction": "Einzelne Sub-Kategorie als eigenstaendige Row, fungiert als Navigation-Bridge zu einer tieferen Hub-Seite innerhalb derselben Kategorie. Verlinkt auf eine Sub-Kategorie innerhalb der uebergeordneten Hub-Seite."
         },
         {
           "position": 9,
@@ -1588,7 +1873,8 @@
             "videoCount": 0,
             "domHeight": 207,
             "domTop": 6396
-          }
+          },
+          "moduleFunction": "Einzelne Sub-Kategorie als eigenstaendige Row, fungiert als Navigation-Bridge zu einer tieferen Hub-Seite innerhalb derselben Kategorie. Verlinkt auf eine Sub-Kategorie innerhalb der uebergeordneten Hub-Seite."
         },
         {
           "position": 10,
@@ -1653,7 +1939,8 @@
             "videoCount": 0,
             "domHeight": 303,
             "domTop": 6603
-          }
+          },
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
         },
         {
           "position": 11,
@@ -1718,7 +2005,8 @@
             "videoCount": 0,
             "domHeight": 149,
             "domTop": 6906
-          }
+          },
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
         },
         {
           "position": 12,
@@ -1864,7 +2152,8 @@
             "videoCount": 0,
             "domHeight": 583,
             "domTop": 7055
-          }
+          },
+          "moduleFunction": "Vier-Kachel-Version des Shoppable-Patterns, praesentiert mehrere Produkt-Szenen mit Hotspots pro Kachel."
         },
         {
           "position": 13,
@@ -1955,7 +2244,8 @@
             "videoCount": 0,
             "domHeight": 291,
             "domTop": 7637
-          }
+          },
+          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup."
         },
         {
           "position": 14,
@@ -2018,7 +2308,8 @@
             "videoCount": 0,
             "domHeight": 188,
             "domTop": 7929
-          }
+          },
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
         },
         {
           "position": 15,
@@ -2080,7 +2371,8 @@
             "videoCount": 0,
             "domHeight": 168,
             "domTop": 8116
-          }
+          },
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
         },
         {
           "position": 16,
@@ -2114,7 +2406,8 @@
             "videoCount": 0,
             "domHeight": 199,
             "domTop": 8284
-          }
+          },
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
         }
       ],
       "pageAnalysis": {
@@ -2147,7 +2440,8 @@
         "immunsystem_mod_13 position=rechts: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
         "immunsystem_mod_15 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
         "immunsystem_mod_15 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig"
-      ]
+      ],
+      "pageArchitecture": "Hub-Kategorie fuer Immunsystem-Produkte. Hero-Banner mit Kategorie-Claim, Shoppable als Direkt-Einstieg in die meistgekauften Immun-Produkte, dann Produkt-Grid und Sub-Kategorie-Tiles. Schluss mit Editorial-Bannern als Marken-Anker."
     },
     {
       "pageName": "Vitamine",
@@ -2202,7 +2496,8 @@
             "videoCount": 0,
             "domHeight": 338,
             "domTop": 99
-          }
+          },
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
         },
         {
           "position": 2,
@@ -2265,7 +2560,8 @@
             "videoCount": 0,
             "domHeight": 591,
             "domTop": 437
-          }
+          },
+          "moduleFunction": "Statischer Hero am Seitenanfang, setzt visuellen Einstieg und Claim oder Kategoriename, der die Seite thematisch verankert."
         },
         {
           "position": 3,
@@ -2325,7 +2621,8 @@
             "videoCount": 0,
             "domHeight": 303,
             "domTop": 1028
-          }
+          },
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
         },
         {
           "position": 4,
@@ -2388,7 +2685,8 @@
             "videoCount": 6,
             "domHeight": 583,
             "domTop": 1331
-          }
+          },
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
         },
         {
           "position": 5,
@@ -2451,7 +2749,8 @@
             "videoCount": 6,
             "domHeight": 629,
             "domTop": 1914
-          }
+          },
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
         },
         {
           "position": 6,
@@ -2514,7 +2813,8 @@
             "videoCount": 6,
             "domHeight": 629,
             "domTop": 2543
-          }
+          },
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
         },
         {
           "position": 7,
@@ -2546,7 +2846,8 @@
             "videoCount": 0,
             "domHeight": 2862,
             "domTop": 3172
-          }
+          },
+          "moduleFunction": "Produkt-Grid einer Kategorie, zentrale Konversions-Flaeche einer Hub-Seite, Amazon rendert Produkt-Cards selbst."
         },
         {
           "position": 8,
@@ -2606,7 +2907,8 @@
             "videoCount": 0,
             "domHeight": 159,
             "domTop": 6034
-          }
+          },
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
         },
         {
           "position": 9,
@@ -2668,7 +2970,8 @@
             "videoCount": 0,
             "domHeight": 207,
             "domTop": 6193
-          }
+          },
+          "moduleFunction": "Einzelne Sub-Kategorie als eigenstaendige Row, fungiert als Navigation-Bridge zu einer tieferen Hub-Seite innerhalb derselben Kategorie. Verlinkt auf eine Sub-Kategorie innerhalb der uebergeordneten Hub-Seite."
         },
         {
           "position": 10,
@@ -2729,7 +3032,8 @@
             "videoCount": 0,
             "domHeight": 207,
             "domTop": 6400
-          }
+          },
+          "moduleFunction": "Einzelne Sub-Kategorie als eigenstaendige Row, fungiert als Navigation-Bridge zu einer tieferen Hub-Seite innerhalb derselben Kategorie. Verlinkt auf eine Sub-Kategorie innerhalb der uebergeordneten Hub-Seite."
         },
         {
           "position": 11,
@@ -2789,7 +3093,8 @@
             "videoCount": 0,
             "domHeight": 188,
             "domTop": 6607
-          }
+          },
+          "moduleFunction": "Einzelne Sub-Kategorie als eigenstaendige Row, fungiert als Navigation-Bridge zu einer tieferen Hub-Seite innerhalb derselben Kategorie. Verlinkt auf eine Sub-Kategorie innerhalb der uebergeordneten Hub-Seite."
         },
         {
           "position": 12,
@@ -2849,7 +3154,8 @@
             "videoCount": 0,
             "domHeight": 303,
             "domTop": 6795
-          }
+          },
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
         },
         {
           "position": 13,
@@ -2881,7 +3187,8 @@
             "videoCount": 0,
             "domHeight": 200,
             "domTop": 7098
-          }
+          },
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
         }
       ],
       "pageAnalysis": {
@@ -2904,7 +3211,8 @@
         "vitamine_mod_11 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
         "vitamine_mod_12 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
         "vitamine_mod_12 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig"
-      ]
+      ],
+      "pageArchitecture": "Hub-Kategorie fuer Vitamine, eng strukturiert. Hero plus drei dedizierte Produkt-Showcase-Videos (Premium Multi, Vitamin C, Vitamin D3) vor dem Kategoriegrid. Die Video-Kette baut Expertise und Differenzierung pro Wirkstoff auf."
     },
     {
       "pageName": "SoProtein Vegan",
@@ -2959,7 +3267,8 @@
             "videoCount": 0,
             "domHeight": 338,
             "domTop": 99
-          }
+          },
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
         },
         {
           "position": 2,
@@ -3015,7 +3324,8 @@
             "videoCount": 0,
             "domHeight": 322,
             "domTop": 437
-          }
+          },
+          "moduleFunction": "Kompakter Hero fuer Produktlinien- oder Kampagnen-Seiten, reduzierte Hoehe signalisiert schnellen Uebergang zum Produktbereich."
         },
         {
           "position": 3,
@@ -3047,7 +3357,8 @@
             "videoCount": 0,
             "domHeight": 1901,
             "domTop": 759
-          }
+          },
+          "moduleFunction": "Produkt-Linien-Grid, praesentiert eine Sub-Brand oder Produktfamilie gebuendelt."
         },
         {
           "position": 4,
@@ -3079,7 +3390,8 @@
             "videoCount": 0,
             "domHeight": 200,
             "domTop": 2659
-          }
+          },
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
         }
       ],
       "pageAnalysis": {
@@ -3101,7 +3413,8 @@
         "Die Legacy-Analyse vom 10. April 2026 dokumentierte 3 Videos auf dieser Seite. Diese wurden zwischenzeitlich entfernt. Zu pruefen, ob die Videos in einer anderen Store-Seite wieder auftauchen oder komplett geloescht wurden.",
         "Der Page-Name wurde von 'SoProtein Vegan' zu 'Make it full size' umbenannt. Zu klaeren, ob das dauerhaft ist oder ob es sich um eine zeitlich begrenzte Kampagne handelt.",
         "Die 30 rohen Tiles im Produkt-Grid bestehen aus 15 einzigartigen ASINs, d. h. jede Kachel existiert doppelt im DOM (vermutlich wegen Desktop/Mobile-Doppelrendering). Fuer unseren Builder irrelevant, aber beim Generieren eigener Grids beachten."
-      ]
+      ],
+      "pageArchitecture": "Produktlinien-Seite, minimal aufgebaut. Kompakter Hero mit Kampagnen-Claim 'Make it full size', direkt danach Produkt-Grid der gesamten Linie. Reine Produkt-Listing-Seite ohne Story-Elemente."
     },
     {
       "pageName": "Ueber uns",
@@ -3156,7 +3469,8 @@
             "videoCount": 0,
             "domHeight": 338,
             "domTop": 99
-          }
+          },
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
         },
         {
           "position": 2,
@@ -3212,7 +3526,8 @@
             "videoCount": 0,
             "domHeight": 425,
             "domTop": 437
-          }
+          },
+          "moduleFunction": "Statischer Hero am Seitenanfang, setzt visuellen Einstieg und Claim oder Kategoriename, der die Seite thematisch verankert."
         },
         {
           "position": 3,
@@ -3272,7 +3587,8 @@
             "videoCount": 0,
             "domHeight": 303,
             "domTop": 861
-          }
+          },
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
         },
         {
           "position": 4,
@@ -3332,7 +3648,8 @@
             "videoCount": 0,
             "domHeight": 624,
             "domTop": 1164
-          }
+          },
+          "moduleFunction": "Hoher Editorial-Banner, fuer Story- und About-Content mit erweiterter Copy-Flaeche."
         },
         {
           "position": 5,
@@ -3392,7 +3709,8 @@
             "videoCount": 0,
             "domHeight": 303,
             "domTop": 1788
-          }
+          },
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
         },
         {
           "position": 6,
@@ -3452,7 +3770,8 @@
             "videoCount": 1,
             "domHeight": 168,
             "domTop": 2091
-          }
+          },
+          "moduleFunction": "Hohes Hero-Video, tief emotional, auf About- und Story-Seiten typisch, fuer Marken-Erzaehlung."
         },
         {
           "position": 7,
@@ -3512,7 +3831,8 @@
             "videoCount": 0,
             "domHeight": 303,
             "domTop": 2259
-          }
+          },
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
         },
         {
           "position": 8,
@@ -3572,7 +3892,8 @@
             "videoCount": 0,
             "domHeight": 303,
             "domTop": 2562
-          }
+          },
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
         },
         {
           "position": 9,
@@ -3632,7 +3953,8 @@
             "videoCount": 0,
             "domHeight": 303,
             "domTop": 2865
-          }
+          },
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
         },
         {
           "position": 10,
@@ -3692,7 +4014,8 @@
             "videoCount": 0,
             "domHeight": 303,
             "domTop": 3168
-          }
+          },
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
         },
         {
           "position": 11,
@@ -3752,7 +4075,8 @@
             "videoCount": 0,
             "domHeight": 624,
             "domTop": 3471
-          }
+          },
+          "moduleFunction": "Hoher Editorial-Banner, fuer Story- und About-Content mit erweiterter Copy-Flaeche."
         },
         {
           "position": 12,
@@ -3812,7 +4136,8 @@
             "videoCount": 0,
             "domHeight": 357,
             "domTop": 4095
-          }
+          },
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
         },
         {
           "position": 13,
@@ -3872,7 +4197,8 @@
             "videoCount": 0,
             "domHeight": 159,
             "domTop": 4452
-          }
+          },
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
         },
         {
           "position": 14,
@@ -4013,7 +4339,8 @@
             "videoCount": 0,
             "domHeight": 584,
             "domTop": 4611
-          }
+          },
+          "moduleFunction": "Vier Editorial-Kacheln als Wert- oder Kategorie-Grid, praesentiert Marken-Facetten oder Navigations-Bruecken im Block."
         },
         {
           "position": 15,
@@ -4100,7 +4427,8 @@
             "videoCount": 0,
             "domHeight": 292,
             "domTop": 5195
-          }
+          },
+          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup."
         },
         {
           "position": 16,
@@ -4187,7 +4515,8 @@
             "videoCount": 0,
             "domHeight": 292,
             "domTop": 5487
-          }
+          },
+          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup."
         },
         {
           "position": 17,
@@ -4219,7 +4548,8 @@
             "videoCount": 0,
             "domHeight": 200,
             "domTop": 5779
-          }
+          },
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
         }
       ],
       "pageAnalysis": {
@@ -4262,7 +4592,8 @@
         "ueber_uns_mod_15 position=rechts: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
         "ueber_uns_mod_16 position=links: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
         "ueber_uns_mod_16 position=rechts: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig"
-      ]
+      ],
+      "pageArchitecture": "About-Seite mit sehr hoher Editorial-Dichte. Brand-Hero, dann 10 Story-Banner, eingestreut ein grosses Brand-Video, zum Schluss Werte-Quad und Tile-Pairs. Maximale Investition in Brand-Story und Vertrauen, kein Konversions-Fokus."
     },
     {
       "pageName": "Alle Produkte",
@@ -4317,7 +4648,8 @@
             "videoCount": 0,
             "domHeight": 338,
             "domTop": 99
-          }
+          },
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
         },
         {
           "position": 2,
@@ -4377,7 +4709,8 @@
             "videoCount": 0,
             "domHeight": 584,
             "domTop": 437
-          }
+          },
+          "moduleFunction": "Shoppable Bild mit Hotspots auf Produkt-Positionen, erlaubt Sprung direkt in PDPs ohne Grid-Scrolling."
         },
         {
           "position": 3,
@@ -4437,7 +4770,8 @@
             "videoCount": 0,
             "domHeight": 303,
             "domTop": 1020
-          }
+          },
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
         },
         {
           "position": 4,
@@ -4469,7 +4803,8 @@
             "videoCount": 0,
             "domHeight": 3574,
             "domTop": 1324
-          }
+          },
+          "moduleFunction": "Voller Katalog-Grid, typisch auf der 'Alle Produkte'-Seite, lineare Auflistung aller SKUs."
         },
         {
           "position": 5,
@@ -4529,7 +4864,8 @@
             "videoCount": 0,
             "domHeight": 169,
             "domTop": 4897
-          }
+          },
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
         },
         {
           "position": 6,
@@ -4561,7 +4897,8 @@
             "videoCount": 0,
             "domHeight": 200,
             "domTop": 5066
-          }
+          },
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
         }
       ],
       "pageAnalysis": {
@@ -4579,7 +4916,8 @@
         "alle_produkte_mod_03 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
         "alle_produkte_mod_05 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
         "alle_produkte_mod_05 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig"
-      ]
+      ],
+      "pageArchitecture": "Katalog-Seite mit Shoppable-Einstieg, Editorial-Intro, vollem Produkt-Grid, Section-Intro als Abschluss. Linearer Scroll fuer Nutzer, die schon im Kauf-Mindset sind."
     },
     {
       "pageName": "unsere Neuheiten",
@@ -4634,7 +4972,8 @@
             "videoCount": 0,
             "domHeight": 338,
             "domTop": 99
-          }
+          },
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
         },
         {
           "position": 2,
@@ -4694,7 +5033,8 @@
             "videoCount": 0,
             "domHeight": 399,
             "domTop": 437
-          }
+          },
+          "moduleFunction": "Statischer Hero am Seitenanfang, setzt visuellen Einstieg und Claim oder Kategoriename, der die Seite thematisch verankert."
         },
         {
           "position": 3,
@@ -4754,7 +5094,8 @@
             "videoCount": 0,
             "domHeight": 207,
             "domTop": 836
-          }
+          },
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
         },
         {
           "position": 4,
@@ -4814,7 +5155,8 @@
             "videoCount": 6,
             "domHeight": 556,
             "domTop": 1043
-          }
+          },
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
         },
         {
           "position": 5,
@@ -4846,7 +5188,8 @@
             "videoCount": 0,
             "domHeight": 3414,
             "domTop": 1599
-          }
+          },
+          "moduleFunction": "Neuheiten-Grid, zeigt die juengsten Produktstarts, Treiber fuer Wiederbesuche."
         },
         {
           "position": 6,
@@ -4906,7 +5249,8 @@
             "videoCount": 0,
             "domHeight": 159,
             "domTop": 5013
-          }
+          },
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
         },
         {
           "position": 7,
@@ -5047,7 +5391,8 @@
             "videoCount": 0,
             "domHeight": 584,
             "domTop": 5172
-          }
+          },
+          "moduleFunction": "Vier Editorial-Kacheln als Wert- oder Kategorie-Grid, praesentiert Marken-Facetten oder Navigations-Bruecken im Block."
         },
         {
           "position": 8,
@@ -5134,7 +5479,8 @@
             "videoCount": 0,
             "domHeight": 292,
             "domTop": 5755
-          }
+          },
+          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup."
         },
         {
           "position": 9,
@@ -5221,7 +5567,8 @@
             "videoCount": 0,
             "domHeight": 292,
             "domTop": 6047
-          }
+          },
+          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup."
         },
         {
           "position": 10,
@@ -5253,7 +5600,8 @@
             "videoCount": 0,
             "domHeight": 200,
             "domTop": 6339
-          }
+          },
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
         }
       ],
       "pageAnalysis": {
@@ -5289,7 +5637,8 @@
         "neuheiten_mod_09 position=links: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
         "neuheiten_mod_09 position=rechts: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
         "neuheiten_mod_09 position=rechts: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig"
-      ]
+      ],
+      "pageArchitecture": "Neuheiten-Hub mit Hero, Section-Intros als Gliederung, ein Produkt-Showcase-Video fuer das Top-Neuheit (Magtein), dann Neuheiten-Grid mit 50 Produkten. Klar auf Repeat-Besucher und Pushing-Top-Neuheit optimiert."
     },
     {
       "pageName": "Produktselektor",
@@ -5336,7 +5685,8 @@
             "videoCount": 0,
             "domHeight": 94,
             "domTop": 99
-          }
+          },
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
         },
         {
           "position": 2,
@@ -5368,7 +5718,8 @@
             "videoCount": 0,
             "domHeight": 0,
             "domTop": 193
-          }
+          },
+          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase."
         },
         {
           "position": 3,
@@ -5400,7 +5751,8 @@
             "videoCount": 0,
             "domHeight": 0,
             "domTop": 193
-          }
+          },
+          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase."
         },
         {
           "position": 4,
@@ -5432,7 +5784,8 @@
             "videoCount": 0,
             "domHeight": 0,
             "domTop": 193
-          }
+          },
+          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase."
         },
         {
           "position": 5,
@@ -5492,7 +5845,8 @@
             "videoCount": 0,
             "domHeight": 236,
             "domTop": 193
-          }
+          },
+          "moduleFunction": "Banner im Produktselektor mit Filter-Hinweis oder Kategorie-Setup, rein funktionale UI-Komponente der Beratungs-Seite."
         },
         {
           "position": 6,
@@ -5524,7 +5878,8 @@
             "videoCount": 0,
             "domHeight": 0,
             "domTop": 429
-          }
+          },
+          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase."
         },
         {
           "position": 7,
@@ -5556,7 +5911,8 @@
             "videoCount": 0,
             "domHeight": 0,
             "domTop": 429
-          }
+          },
+          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase."
         },
         {
           "position": 8,
@@ -5588,7 +5944,8 @@
             "videoCount": 0,
             "domHeight": 0,
             "domTop": 429
-          }
+          },
+          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase."
         },
         {
           "position": 9,
@@ -5620,7 +5977,8 @@
             "videoCount": 0,
             "domHeight": 0,
             "domTop": 0
-          }
+          },
+          "moduleFunction": "Filterergebnis-Grid auf Produktselektor-Seite, dynamisch aus den Filter-Accordions."
         },
         {
           "position": 10,
@@ -5652,7 +6010,8 @@
             "videoCount": 0,
             "domHeight": 0,
             "domTop": 0
-          }
+          },
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
         }
       ],
       "pageAnalysis": {
@@ -5666,7 +6025,8 @@
       "openQuestions": [
         "produktselektor_mod_05 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
         "produktselektor_mod_05 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig"
-      ]
+      ],
+      "pageArchitecture": "Reine Filter-UI-Seite. Sechs Filter-Accordions, ein Filter-Banner, am Ende Filterergebnis-Grid mit 20 Produkten. Produkte finden statt browsen. Funktionale Beratungs-Seite."
     },
     {
       "pageName": "Geschenk-Sets",
@@ -5721,7 +6081,8 @@
             "videoCount": 0,
             "domHeight": 338,
             "domTop": 99
-          }
+          },
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
         },
         {
           "position": 2,
@@ -5781,7 +6142,8 @@
             "videoCount": 0,
             "domHeight": 689,
             "domTop": 437
-          }
+          },
+          "moduleFunction": "Grosser Hero mit starker visueller Dominanz, typisch fuer Geschenk- oder Kampagnen-Seiten mit erhoehtem Emotionsanteil."
         },
         {
           "position": 3,
@@ -5841,7 +6203,8 @@
             "videoCount": 0,
             "domHeight": 553,
             "domTop": 1126
-          }
+          },
+          "moduleFunction": "Grosser Editorial-Banner mit hohem visuellen Gewicht, oft als Seiten-Intro oder Kampagnen-Anker."
         },
         {
           "position": 4,
@@ -5901,7 +6264,8 @@
             "videoCount": 0,
             "domHeight": 463,
             "domTop": 1679
-          }
+          },
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
         },
         {
           "position": 5,
@@ -5961,7 +6325,8 @@
             "videoCount": 0,
             "domHeight": 578,
             "domTop": 2142
-          }
+          },
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
         },
         {
           "position": 6,
@@ -6021,7 +6386,8 @@
             "videoCount": 0,
             "domHeight": 505,
             "domTop": 2720
-          }
+          },
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
         },
         {
           "position": 7,
@@ -6053,7 +6419,8 @@
             "videoCount": 0,
             "domHeight": 1,
             "domTop": 3225
-          }
+          },
+          "moduleFunction": "Unsichtbarer Pixel-Abstand zwischen Modulen, rein visueller Rhythmus-Trenner ohne inhaltliche Funktion."
         },
         {
           "position": 8,
@@ -6113,7 +6480,8 @@
             "videoCount": 0,
             "domHeight": 625,
             "domTop": 3226
-          }
+          },
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
         },
         {
           "position": 9,
@@ -6145,7 +6513,8 @@
             "videoCount": 0,
             "domHeight": 1,
             "domTop": 3852
-          }
+          },
+          "moduleFunction": "Unsichtbarer Pixel-Abstand zwischen Modulen, rein visueller Rhythmus-Trenner ohne inhaltliche Funktion."
         },
         {
           "position": 10,
@@ -6205,7 +6574,8 @@
             "videoCount": 0,
             "domHeight": 528,
             "domTop": 3853
-          }
+          },
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
         },
         {
           "position": 11,
@@ -6237,7 +6607,8 @@
             "videoCount": 0,
             "domHeight": 1,
             "domTop": 4381
-          }
+          },
+          "moduleFunction": "Unsichtbarer Pixel-Abstand zwischen Modulen, rein visueller Rhythmus-Trenner ohne inhaltliche Funktion."
         },
         {
           "position": 12,
@@ -6297,7 +6668,8 @@
             "videoCount": 0,
             "domHeight": 409,
             "domTop": 4382
-          }
+          },
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
         },
         {
           "position": 13,
@@ -6357,7 +6729,8 @@
             "videoCount": 1,
             "domHeight": 168,
             "domTop": 4791
-          }
+          },
+          "moduleFunction": "Bewegtes Hero-Element, emotionaler Einstieg, Marken-Tonalitaet und Lifestyle-Kontext ueber Zeit entfaltet."
         },
         {
           "position": 14,
@@ -6417,7 +6790,8 @@
             "videoCount": 0,
             "domHeight": 584,
             "domTop": 4959
-          }
+          },
+          "moduleFunction": "Shoppable Bild mit Hotspots auf Produkt-Positionen, erlaubt Sprung direkt in PDPs ohne Grid-Scrolling."
         },
         {
           "position": 15,
@@ -6477,7 +6851,8 @@
             "videoCount": 0,
             "domHeight": 159,
             "domTop": 5542
-          }
+          },
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
         },
         {
           "position": 16,
@@ -6618,7 +6993,8 @@
             "videoCount": 0,
             "domHeight": 584,
             "domTop": 5701
-          }
+          },
+          "moduleFunction": "Vier Editorial-Kacheln als Wert- oder Kategorie-Grid, praesentiert Marken-Facetten oder Navigations-Bruecken im Block."
         },
         {
           "position": 17,
@@ -6759,7 +7135,8 @@
             "videoCount": 0,
             "domHeight": 584,
             "domTop": 6285
-          }
+          },
+          "moduleFunction": "Vier Editorial-Kacheln als Wert- oder Kategorie-Grid, praesentiert Marken-Facetten oder Navigations-Bruecken im Block."
         },
         {
           "position": 18,
@@ -6791,7 +7168,8 @@
             "videoCount": 0,
             "domHeight": 200,
             "domTop": 6869
-          }
+          },
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
         }
       ],
       "pageAnalysis": {
@@ -6841,7 +7219,8 @@
         "geschenk_sets_mod_17 position=3: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
         "geschenk_sets_mod_17 position=4: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
         "geschenk_sets_mod_17 position=4: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig"
-      ]
+      ],
+      "pageArchitecture": "Geschenk-Set-Seite mit hohem Kampagnen-Anteil. Hero-Tall, Editorial-Banner, dann sechs Produkt-Showcase-Videos fuer Basic- und Premium-Sets, Shoppable-Abschluss, zweimal Editorial-Quad als Werte- und Kategorie-Recap."
     },
     {
       "pageName": "Unsere Bestseller Empfehlungen",
@@ -6896,7 +7275,8 @@
             "videoCount": 0,
             "domHeight": 338,
             "domTop": 99
-          }
+          },
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
         },
         {
           "position": 2,
@@ -6956,7 +7336,8 @@
             "videoCount": 0,
             "domHeight": 169,
             "domTop": 437
-          }
+          },
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
         },
         {
           "position": 3,
@@ -6988,7 +7369,8 @@
             "videoCount": 0,
             "domHeight": 2121,
             "domTop": 606
-          }
+          },
+          "moduleFunction": "Bestseller-Grid, rein konversionsgetrieben, platziert die Top-Seller prominent."
         },
         {
           "position": 4,
@@ -7048,7 +7430,8 @@
             "videoCount": 0,
             "domHeight": 245,
             "domTop": 2726
-          }
+          },
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
         },
         {
           "position": 5,
@@ -7189,7 +7572,8 @@
             "videoCount": 0,
             "domHeight": 292,
             "domTop": 2972
-          }
+          },
+          "moduleFunction": "Vier Editorial-Kacheln als Wert- oder Kategorie-Grid, praesentiert Marken-Facetten oder Navigations-Bruecken im Block."
         },
         {
           "position": 6,
@@ -7330,7 +7714,8 @@
             "videoCount": 0,
             "domHeight": 292,
             "domTop": 3264
-          }
+          },
+          "moduleFunction": "Vier Editorial-Kacheln als Wert- oder Kategorie-Grid, praesentiert Marken-Facetten oder Navigations-Bruecken im Block."
         },
         {
           "position": 7,
@@ -7362,7 +7747,8 @@
             "videoCount": 0,
             "domHeight": 200,
             "domTop": 3555
-          }
+          },
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
         }
       ],
       "pageAnalysis": {
@@ -7394,7 +7780,8 @@
         "unsere_empfehlungen_mod_06 position=3: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
         "unsere_empfehlungen_mod_06 position=4: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
         "unsere_empfehlungen_mod_06 position=4: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig"
-      ]
+      ],
+      "pageArchitecture": "Bestseller- und Empfehlungs-Seite. Section-Intro, dann Bestseller-Grid mit 24 Top-Produkten, gefolgt von zwei Editorial-Quads. Reduzierter Editorial-Anteil, Konversions-fokussiert."
     }
   ],
   "openQuestions": [

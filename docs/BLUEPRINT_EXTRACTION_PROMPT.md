@@ -57,6 +57,10 @@ tileCount            Anzahl Kacheln im Modul
 designIntent         Enum aus Paragraf 10, 7 Werte, Gold-aligned
 designIntentDetail   Optionaler Freitext, 1 Satz Begruendung
 structuralPattern    1 bis 2 Saetze Freitext: wiederkehrendes Muster
+moduleFunction       2 bis 3 Saetze Freitext, PFLICHT: wofuer ist dieses Modul da,
+                     welche Rolle im User-Journey, zu welcher Subpage lenkt es,
+                     welches Bedurfnis bedient es. Das ist die Einordnungs-Ebene
+                     und das eigentliche Nutzungs-Ziel der Analyse.
 backgroundStyle      Enum aus Paragraf 5, 6 Werte, Gold-aligned
 backgroundDetail     Optionaler Freitext, Spezifika der Flaeche
 textOnImage          Objekt aus Paragraf 7, strukturiert
@@ -146,27 +150,38 @@ Zusatzfeld `backgroundDetail` als optionaler Freitext fuer Spezifika,
 zum Beispiel "Volltonfarbe Gelb mit Produkt-Silhouetten", "Split links
 salbei-gruen rechts Lifestyle-Foto".
 
-## 6. `imageCategory`, 6 Werte (Tile-Level)
+## 6. `imageCategory`, 7 Werte (Tile-Level)
 
-Gold hat 5 beobachtete Werte, plus ein sechster fuer reine USP-Flaechen,
-den Gold bisher nicht vergeben hat, der aber bei anderen Stores auftreten
-wird.
+Gold hat 5 beobachtete Werte. Hinzu kommen `benefit` fuer reine
+USP-Flaechen und der entscheidende neue Wert `product_tile_asin` fuer
+Kacheln, die lediglich einen Amazon-Produktlink einbetten, wo also
+Amazon selbst Produktbild, Titel und Preis rendert und wo es **keine
+Designentscheidung des Stores** gibt. Diese Tiles brauchen keinen
+Vision-Pass.
 
 - `creative` — zwei oder drei Elementtypen gleichgewichtig (dominanter Default)
 - `text_image` — Text und Grafik dominant, Foto unter 20 Prozent
-- `product` — Produkt klar im Fokus, ueber 50 Prozent Flaeche
+- `product` — brand-gestaltete Produkt-Kachel im eigenen Layout
+- `product_tile_asin` — Amazon-ASIN-Tile ohne Brand-Design. Nur die ASIN
+  und der Link zaehlen. Alle weiteren Vision-Felder (visualContent,
+  dominantColors, elementProportions, textOnImage-Details) bleiben leer
+  beziehungsweise auf `not_required` gesetzt. Typisch in jedem
+  `product_grid_*`-Modul, auch im Shoppable-Hotspot-Target.
 - `lifestyle` — Lifestyle-Foto dominiert ueber 70 Prozent Flaeche
 - `creative_lifestyle_hybrid` — Creative-Layout mit starkem Lifestyle-Anteil
 - `benefit` — nur USPs, Icons, Awards, Zertifikate, keine Produkte
 
 Entscheidungsbaum, erste zutreffende Regel gewinnt:
 
-1. Rein Text und Grafik, Foto unter 20 Prozent: `text_image`
-2. Nur USPs, Icons, Awards ohne Produkt und Personen: `benefit`
-3. Produkt ueber 50 Prozent Flaeche: `product`
-4. Lifestyle-Foto ueber 70 Prozent, nur dezentes Overlay: `lifestyle`
-5. Creative-Layout mit sichtbarem Lifestyle-Foto-Anteil: `creative_lifestyle_hybrid`
-6. Sonst: `creative`
+1. Modul-layoutType startet mit `product_grid_` und Tile ist direktes
+   ASIN-Kind? `product_tile_asin`
+2. Rein Text und Grafik, Foto unter 20 Prozent: `text_image`
+3. Nur USPs, Icons, Awards ohne Produkt und Personen: `benefit`
+4. Brand-gestaltetes Produkt-Setup (Szene, Hintergrund, Typografie)
+   ueber 50 Prozent Flaeche: `product`
+5. Lifestyle-Foto ueber 70 Prozent, nur dezentes Overlay: `lifestyle`
+6. Creative-Layout mit sichtbarem Lifestyle-Foto-Anteil: `creative_lifestyle_hybrid`
+7. Sonst: `creative`
 
 ## 7. `textOnImage`, strukturiert, mit Origin-Marker
 
@@ -295,6 +310,11 @@ pageAnalysis:
   contentDepth          Freitext
   useForArchetype       Freitext, Template-Eignung
   moduleClusters        Array oder Freitext, semantische Gruppierungen
+pageArchitecture      Freitext, 2 bis 4 Saetze, PFLICHT: wie ist die Seite
+                      funktional aufgebaut, in welcher Reihenfolge fuehrt
+                      sie den Nutzer, welcher Bedarfsfall wird adressiert.
+                      Das ist die Seiten-Ebene der Einordnung, analog zu
+                      moduleFunction auf Modul-Ebene.
 openQuestions         Array von Strings, alles was nicht sicher erkennbar war
 ```
 
