@@ -9,7 +9,7 @@
   "storeUrl": "https://www.amazon.de/stores/page/3955CCD4-902C-4679-9265-DEC4FCBAA8C8",
   "analyzedAt": "2026-04-21T18:01:21.676Z",
   "methodology": "V4-v3-Blueprint-tool-aligned-20260422",
-  "v3SchemaNote": "v3 plus Einordnungs-Ebene: moduleFunction pro Modul, pageArchitecture pro Seite, product_tile_asin als imageCategory-Wert fuer Amazon-ASIN-Tiles ohne Brand-Design. Tool-Vocabulary und Clickability-Layer hinzugefuegt: toolLayoutId/Name/Type/Role pro Modul, toolTileType plus toolImageType plus link-Objekt pro Tile.",
+  "v3SchemaNote": "v3 plus Einordnungs-Ebene: moduleFunction pro Modul, pageArchitecture pro Seite, product_tile_asin als imageCategory-Wert fuer Amazon-ASIN-Tiles ohne Brand-Design. Tool-Vocabulary und Clickability-Layer hinzugefuegt: toolLayoutId/Name/Type/Role pro Modul, toolTileType plus toolImageType plus link-Objekt pro Tile. Tool-Vocabulary und Clickability-Layer hinzugefuegt: toolLayoutId/Name/Type/Role pro Modul, toolTileType plus toolImageType plus link-Objekt pro Tile.",
   "storeAnalysis": {
     "schemaVersion": "v3-brand-identity-2",
     "derivedFrom": "v3-blueprints (10 Seiten, 114 Module) im rerun-v3, plus Einordnungs-Ebene (moduleFunction pro Modul, pageArchitecture pro Seite). Basis-Markeninhalte uebernommen aus dem ersten Brand-Identity-Pass (Commit 5847f09) und auf v3-Schema gehoben.",
@@ -3139,7 +3139,7 @@
               "toolImageType": "FULL_WIDTH",
               "link": {
                 "clickable": true,
-                "linkType": "internal_subpage",
+                "linkType": "pdp_asin",
                 "linkTarget": "PDP Premium Multivitamin",
                 "ctaLabel": "Alle Details anzeigen · In den Einkaufswagen",
                 "confidence": "high"
@@ -3216,7 +3216,7 @@
               "toolImageType": "FULL_WIDTH",
               "link": {
                 "clickable": true,
-                "linkType": "internal_subpage",
+                "linkType": "pdp_asin",
                 "linkTarget": "PDP Vitamin C gepuffert 500mg",
                 "ctaLabel": "Alle Details anzeigen · In den Einkaufswagen",
                 "confidence": "high"
@@ -3293,7 +3293,7 @@
               "toolImageType": "FULL_WIDTH",
               "link": {
                 "clickable": true,
-                "linkType": "internal_subpage",
+                "linkType": "pdp_asin",
                 "linkTarget": "PDP Vitamin D3 Tropfen",
                 "ctaLabel": "Alle Details anzeigen · In den Einkaufswagen",
                 "confidence": "high"
@@ -6113,11 +6113,11 @@
               "toolTileType": "video",
               "toolImageType": "FULL_WIDTH",
               "link": {
-                "clickable": false,
-                "linkType": "none",
+                "clickable": true,
+                "linkType": "pdp_asin",
                 "linkTarget": null,
                 "ctaLabel": null,
-                "confidence": "low"
+                "confidence": "medium"
               }
             }
           ],
@@ -7445,11 +7445,11 @@
               "toolTileType": "video",
               "toolImageType": "FULL_WIDTH",
               "link": {
-                "clickable": false,
-                "linkType": "none",
+                "clickable": true,
+                "linkType": "pdp_asin",
                 "linkTarget": null,
                 "ctaLabel": null,
-                "confidence": "low"
+                "confidence": "medium"
               }
             }
           ],
@@ -7519,11 +7519,11 @@
               "toolTileType": "video",
               "toolImageType": "FULL_WIDTH",
               "link": {
-                "clickable": false,
-                "linkType": "none",
+                "clickable": true,
+                "linkType": "pdp_asin",
                 "linkTarget": null,
                 "ctaLabel": null,
-                "confidence": "low"
+                "confidence": "medium"
               }
             }
           ],
@@ -7593,11 +7593,11 @@
               "toolTileType": "video",
               "toolImageType": "FULL_WIDTH",
               "link": {
-                "clickable": false,
-                "linkType": "none",
+                "clickable": true,
+                "linkType": "pdp_asin",
                 "linkTarget": null,
                 "ctaLabel": null,
-                "confidence": "low"
+                "confidence": "medium"
               }
             }
           ],
@@ -7704,11 +7704,11 @@
               "toolTileType": "video",
               "toolImageType": "FULL_WIDTH",
               "link": {
-                "clickable": false,
-                "linkType": "none",
+                "clickable": true,
+                "linkType": "pdp_asin",
                 "linkTarget": null,
                 "ctaLabel": null,
-                "confidence": "low"
+                "confidence": "medium"
               }
             }
           ],
@@ -7815,11 +7815,11 @@
               "toolTileType": "video",
               "toolImageType": "FULL_WIDTH",
               "link": {
-                "clickable": false,
-                "linkType": "none",
+                "clickable": true,
+                "linkType": "pdp_asin",
                 "linkTarget": null,
                 "ctaLabel": null,
-                "confidence": "low"
+                "confidence": "medium"
               }
             }
           ],
@@ -7926,11 +7926,11 @@
               "toolTileType": "video",
               "toolImageType": "FULL_WIDTH",
               "link": {
-                "clickable": false,
-                "linkType": "none",
+                "clickable": true,
+                "linkType": "pdp_asin",
                 "linkTarget": null,
                 "ctaLabel": null,
-                "confidence": "low"
+                "confidence": "medium"
               }
             }
           ],

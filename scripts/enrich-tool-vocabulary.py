@@ -125,8 +125,12 @@ def classify_tile(layout_type, image_category, cta_text, links_to, has_video):
     # Shoppable
     if layout_type.startswith('shoppable_interactive_image'):
         return ('shoppable_image', True, 'pdp_asin_hotspots')
-    # Video
-    if has_video or layout_type.startswith('hero_video') or layout_type == 'product_showcase_video':
+    # product_showcase_video: per Layout-Semantik immer Sprungbrett zur PDP,
+    # auch ohne CTA oder linksTo. Gaengige Amazon-Brand-Store-Praxis.
+    if layout_type == 'product_showcase_video':
+        return ('video', True, 'pdp_asin')
+    # Sonstige Videos (Hero-Videos): klickbar nur wenn CTA oder linksTo
+    if has_video or layout_type.startswith('hero_video'):
         return ('video', bool(cta_text or links_to), ('internal_subpage' if (cta_text or links_to) else 'none'))
     # Filter UI
     if layout_type in ('filter_accordion_collapsed', 'filter_banner'):
@@ -177,6 +181,8 @@ def derive_confidence(link_target, links_to, cta_text, layout_type):
     if links_to and cta_text: return 'high'
     if layout_type.startswith('product_grid_'): return 'high'  # Amazon rendert
     if layout_type.startswith('shoppable_'):    return 'high'
+    if layout_type == 'product_showcase_video':
+        return 'high' if links_to else 'medium'
     if layout_type in ('subcategory_tile',):    return 'medium'
     if links_to or cta_text:                    return 'medium'
     if layout_type.startswith('editorial_tile'): return 'medium'
