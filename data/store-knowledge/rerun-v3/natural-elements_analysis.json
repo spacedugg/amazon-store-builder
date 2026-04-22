@@ -8,8 +8,8 @@
   "brandName": "natural elements",
   "storeUrl": "https://www.amazon.de/stores/page/3955CCD4-902C-4679-9265-DEC4FCBAA8C8",
   "analyzedAt": "2026-04-21T18:01:21.676Z",
-  "methodology": "V4-v3-Blueprint-enrichment-20260422",
-  "v3SchemaNote": "v3 plus Einordnungs-Ebene: moduleFunction pro Modul, pageArchitecture pro Seite, product_tile_asin als imageCategory-Wert fuer Amazon-ASIN-Tiles ohne Brand-Design.",
+  "methodology": "V4-v3-Blueprint-tool-aligned-20260422",
+  "v3SchemaNote": "v3 plus Einordnungs-Ebene: moduleFunction pro Modul, pageArchitecture pro Seite, product_tile_asin als imageCategory-Wert fuer Amazon-ASIN-Tiles ohne Brand-Design. Tool-Vocabulary und Clickability-Layer hinzugefuegt: toolLayoutId/Name/Type/Role pro Modul, toolTileType plus toolImageType plus link-Objekt pro Tile.",
   "storeAnalysis": {
     "schemaVersion": "v3-brand-identity-2",
     "derivedFrom": "v3-blueprints (10 Seiten, 114 Module) im rerun-v3, plus Einordnungs-Ebene (moduleFunction pro Modul, pageArchitecture pro Seite). Basis-Markeninhalte uebernommen aus dem ersten Brand-Identity-Pass (Commit 5847f09) und auf v3-Schema gehoben.",
@@ -374,7 +374,11 @@
             "domHeight": 300,
             "domTop": 99
           },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         },
         {
           "position": 2,
@@ -430,9 +434,22 @@
                 "#9CA98C",
                 "#FFFFFF"
               ],
-              "notes": "Video mit rotierenden Texten, Single-Frame-Snapshot ist irrefuehrend. Bei Vision-Pass mehrere Frames sampeln oder als Video flaggen."
+              "notes": "Video mit rotierenden Texten, Single-Frame-Snapshot ist irrefuehrend. Bei Vision-Pass mehrere Frames sampeln oder als Video flaggen.",
+              "toolTileType": "video",
+              "toolImageType": "LARGE_SQUARE",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
-          ]
+          ],
+          "toolLayoutId": "std-2equal",
+          "toolLayoutName": "2 Equal",
+          "toolLayoutType": "standard",
+          "toolLayoutRole": "hero_split"
         },
         {
           "position": 3,
@@ -490,9 +507,22 @@
                 "#F5F1E8",
                 "#1A1A1A",
                 "#F7D4D0"
-              ]
+              ],
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "unsere-neuheiten",
+                "ctaLabel": "NEUHEITEN ENTDECKEN",
+                "confidence": "high"
+              }
             }
-          ]
+          ],
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "editorial"
         },
         {
           "position": 4,
@@ -544,7 +574,16 @@
                 "Schwarz",
                 "Hellgrau"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "Bestseller Produktdetailseiten (Hotspots je Produkt)",
+                "ctaLabel": "Produkte ansehen",
+                "confidence": "high"
+              }
             }
           ],
           "dom": {
@@ -558,7 +597,11 @@
             "domHeight": 258,
             "domTop": 823
           },
-          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "editorial"
         },
         {
           "position": 5,
@@ -612,7 +655,16 @@
                 "Hellgrau",
                 "Weiss"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "shoppable_image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "pdp_asin_hotspots",
+                "linkTarget": "Bestseller Produktdetailseiten ueber Hotspots je Produkt",
+                "ctaLabel": "Produkte ansehen",
+                "confidence": "high"
+              }
             }
           ],
           "dom": {
@@ -628,7 +680,11 @@
             "domHeight": 493,
             "domTop": 1081
           },
-          "moduleFunction": "Shoppable Bild mit Hotspots auf Produkt-Positionen, erlaubt Sprung direkt in PDPs ohne Grid-Scrolling."
+          "moduleFunction": "Shoppable Bild mit Hotspots auf Produkt-Positionen, erlaubt Sprung direkt in PDPs ohne Grid-Scrolling.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "shoppable"
         },
         {
           "position": 6,
@@ -679,7 +735,16 @@
                 "Schwarz",
                 "Weiß"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "video",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "Produktfinder/Quiz Unterseite",
+                "ctaLabel": "LASS DICH HIER BERATEN",
+                "confidence": "high"
+              }
             }
           ],
           "dom": {
@@ -708,7 +773,11 @@
             "domHeight": 167,
             "domTop": 1573
           },
-          "moduleFunction": "Bewegtes Hero-Element, emotionaler Einstieg, Marken-Tonalitaet und Lifestyle-Kontext ueber Zeit entfaltet."
+          "moduleFunction": "Bewegtes Hero-Element, emotionaler Einstieg, Marken-Tonalitaet und Lifestyle-Kontext ueber Zeit entfaltet.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "hero_video"
         },
         {
           "position": 7,
@@ -758,7 +827,16 @@
                 "Salbeigrün",
                 "Schwarz"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "Produktübersicht",
+                "ctaLabel": "Produkte ansehen",
+                "confidence": "high"
+              }
             }
           ],
           "dom": {
@@ -772,7 +850,11 @@
             "domHeight": 144,
             "domTop": 1740
           },
-          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "section_intro"
         },
         {
           "position": 8,
@@ -825,7 +907,16 @@
                 "Weiß",
                 "Laubgrün"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "Produktdetailseiten per Hotspot",
+                "ctaLabel": "Produkte ansehen",
+                "confidence": "high"
+              }
             }
           ],
           "dom": {
@@ -839,7 +930,11 @@
             "domHeight": 128,
             "domTop": 1884
           },
-          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "section_intro"
         },
         {
           "position": 9,
@@ -890,7 +985,16 @@
                 "Schwarz",
                 "Laubgrün"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "shoppable_image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "pdp_asin_hotspots",
+                "linkTarget": "Produktdetailseite Collagen",
+                "ctaLabel": null,
+                "confidence": "high"
+              }
             },
             {
               "position": "2",
@@ -918,7 +1022,16 @@
                 "Weiß",
                 "Schwarz"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "shoppable_image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "pdp_asin_hotspots",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "high"
+              }
             },
             {
               "position": "3",
@@ -946,7 +1059,16 @@
                 "Weiß",
                 "Schwarz"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "shoppable_image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "pdp_asin_hotspots",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "high"
+              }
             },
             {
               "position": "4",
@@ -974,7 +1096,16 @@
                 "Weiß",
                 "Schwarz"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "shoppable_image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "pdp_asin_hotspots",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "high"
+              }
             }
           ],
           "dom": {
@@ -991,7 +1122,11 @@
             "domHeight": 493,
             "domTop": 2012
           },
-          "moduleFunction": "Vier-Kachel-Version des Shoppable-Patterns, praesentiert mehrere Produkt-Szenen mit Hotspots pro Kachel."
+          "moduleFunction": "Vier-Kachel-Version des Shoppable-Patterns, praesentiert mehrere Produkt-Szenen mit Hotspots pro Kachel.",
+          "toolLayoutId": "2x2wide",
+          "toolLayoutName": "4 Equal (2x2 Wide)",
+          "toolLayoutType": "standard",
+          "toolLayoutRole": "shoppable_set"
         },
         {
           "position": 10,
@@ -1042,7 +1177,16 @@
                 "Neongelb",
                 "Weiß"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "LARGE_SQUARE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "Sports Series Unterseite",
+                "ctaLabel": "MEHR ERFAHREN",
+                "confidence": "high"
+              }
             },
             {
               "position": "rechts",
@@ -1069,7 +1213,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "LARGE_SQUARE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             }
           ],
           "dom": {
@@ -1084,7 +1237,11 @@
             "domHeight": 246,
             "domTop": 2504
           },
-          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup."
+          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup.",
+          "toolLayoutId": "std-2equal",
+          "toolLayoutName": "2 Equal",
+          "toolLayoutType": "standard",
+          "toolLayoutRole": "editorial_pair"
         },
         {
           "position": 11,
@@ -1134,7 +1291,16 @@
                 "Betongrau",
                 "Signalgrün"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "LARGE_SQUARE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "Kategorie Sport & Energie",
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "rechts",
@@ -1162,7 +1328,16 @@
                 "Salbeigrün",
                 "Schwarz"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "LARGE_SQUARE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "Kategorie Sport & Energie",
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             }
           ],
           "dom": {
@@ -1177,7 +1352,11 @@
             "domHeight": 246,
             "domTop": 2751
           },
-          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup."
+          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup.",
+          "toolLayoutId": "std-2equal",
+          "toolLayoutName": "2 Equal",
+          "toolLayoutType": "standard",
+          "toolLayoutRole": "editorial_pair"
         },
         {
           "position": 12,
@@ -1237,7 +1416,24 @@
             "domHeight": 3460,
             "domTop": 2997
           },
-          "moduleFunction": "Kurationierte Produkt-Auswahl als Grid, zeigt die meistbeworbenen Produkte der Marke, direkter Konversions-Block."
+          "moduleFunction": "Kurationierte Produkt-Auswahl als Grid, zeigt die meistbeworbenen Produkte der Marke, direkter Konversions-Block.",
+          "toolLayoutId": "product_grid_asin",
+          "toolLayoutName": "Product Grid (ASIN)",
+          "toolLayoutType": "fullwidth_asin",
+          "toolLayoutRole": "product_grid",
+          "productGridAggregate": {
+            "toolTileType": "product_grid",
+            "toolImageType": "PRODUCT_TILE_ASIN",
+            "asinTileCount": 50,
+            "link": {
+              "clickable": true,
+              "linkType": "pdp_asin_multi",
+              "linkTarget": "amazon_rendered_tiles",
+              "ctaLabel": null,
+              "confidence": "high"
+            },
+            "note": "50 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design."
+          }
         },
         {
           "position": 13,
@@ -1272,7 +1468,11 @@
             "domHeight": 200,
             "domTop": 6457
           },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {
@@ -1360,7 +1560,11 @@
             "domHeight": 337,
             "domTop": 99
           },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         },
         {
           "position": 2,
@@ -1412,7 +1616,16 @@
                 "Neongelb",
                 "Schwarz"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -1426,7 +1639,11 @@
             "domHeight": 590,
             "domTop": 436
           },
-          "moduleFunction": "Statischer Hero am Seitenanfang, setzt visuellen Einstieg und Claim oder Kategoriename, der die Seite thematisch verankert."
+          "moduleFunction": "Statischer Hero am Seitenanfang, setzt visuellen Einstieg und Claim oder Kategoriename, der die Seite thematisch verankert.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "hero"
         },
         {
           "position": 3,
@@ -1478,7 +1695,16 @@
                 "Weiß",
                 "Laubgrün"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "shoppable_image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "pdp_asin_hotspots",
+                "linkTarget": "shoppable",
+                "ctaLabel": "Produkte ansehen",
+                "confidence": "high"
+              }
             }
           ],
           "dom": {
@@ -1494,7 +1720,11 @@
             "domHeight": 583,
             "domTop": 1026
           },
-          "moduleFunction": "Shoppable Bild mit Hotspots auf Produkt-Positionen, erlaubt Sprung direkt in PDPs ohne Grid-Scrolling."
+          "moduleFunction": "Shoppable Bild mit Hotspots auf Produkt-Positionen, erlaubt Sprung direkt in PDPs ohne Grid-Scrolling.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "shoppable"
         },
         {
           "position": 4,
@@ -1544,7 +1774,16 @@
                 "Hellgelb",
                 "Schwarz"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -1558,7 +1797,11 @@
             "domHeight": 552,
             "domTop": 1608
           },
-          "moduleFunction": "Editorial-Banner mit Volltonflaeche, bewusst reduzierte Komposition fuer Aufmerksamkeit oder Marken-Farb-Signalisierung."
+          "moduleFunction": "Editorial-Banner mit Volltonflaeche, bewusst reduzierte Komposition fuer Aufmerksamkeit oder Marken-Farb-Signalisierung.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "editorial"
         },
         {
           "position": 5,
@@ -1607,7 +1850,16 @@
                 "Hellgelb",
                 "Beige"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -1621,7 +1873,11 @@
             "domHeight": 149,
             "domTop": 2160
           },
-          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "section_intro"
         },
         {
           "position": 6,
@@ -1682,7 +1938,24 @@
             "domHeight": 3674,
             "domTop": 2309
           },
-          "moduleFunction": "Produkt-Grid einer Kategorie, zentrale Konversions-Flaeche einer Hub-Seite, Amazon rendert Produkt-Cards selbst."
+          "moduleFunction": "Produkt-Grid einer Kategorie, zentrale Konversions-Flaeche einer Hub-Seite, Amazon rendert Produkt-Cards selbst.",
+          "toolLayoutId": "product_grid_asin",
+          "toolLayoutName": "Product Grid (ASIN)",
+          "toolLayoutType": "fullwidth_asin",
+          "toolLayoutRole": "product_grid",
+          "productGridAggregate": {
+            "toolTileType": "product_grid",
+            "toolImageType": "PRODUCT_TILE_ASIN",
+            "asinTileCount": 50,
+            "link": {
+              "clickable": true,
+              "linkType": "pdp_asin_multi",
+              "linkTarget": "amazon_rendered_tiles",
+              "ctaLabel": null,
+              "confidence": "high"
+            },
+            "note": "50 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design."
+          }
         },
         {
           "position": 7,
@@ -1733,7 +2006,16 @@
                 "Hautfarbe",
                 "Weiß"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "sub",
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             }
           ],
           "dom": {
@@ -1747,7 +2029,11 @@
             "domHeight": 207,
             "domTop": 5983
           },
-          "moduleFunction": "Einzelne Sub-Kategorie als eigenstaendige Row, fungiert als Navigation-Bridge zu einer tieferen Hub-Seite innerhalb derselben Kategorie. Verlinkt auf eine Sub-Kategorie innerhalb der uebergeordneten Hub-Seite."
+          "moduleFunction": "Einzelne Sub-Kategorie als eigenstaendige Row, fungiert als Navigation-Bridge zu einer tieferen Hub-Seite innerhalb derselben Kategorie. Verlinkt auf eine Sub-Kategorie innerhalb der uebergeordneten Hub-Seite.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "navigation_bridge"
         },
         {
           "position": 8,
@@ -1798,7 +2084,16 @@
                 "Weiß",
                 "Schwarz"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "sub",
+                "ctaLabel": "Lass dich hier beraten",
+                "confidence": "high"
+              }
             }
           ],
           "dom": {
@@ -1812,7 +2107,11 @@
             "domHeight": 207,
             "domTop": 6190
           },
-          "moduleFunction": "Einzelne Sub-Kategorie als eigenstaendige Row, fungiert als Navigation-Bridge zu einer tieferen Hub-Seite innerhalb derselben Kategorie. Verlinkt auf eine Sub-Kategorie innerhalb der uebergeordneten Hub-Seite."
+          "moduleFunction": "Einzelne Sub-Kategorie als eigenstaendige Row, fungiert als Navigation-Bridge zu einer tieferen Hub-Seite innerhalb derselben Kategorie. Verlinkt auf eine Sub-Kategorie innerhalb der uebergeordneten Hub-Seite.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "navigation_bridge"
         },
         {
           "position": 9,
@@ -1860,7 +2159,16 @@
                 "Beige",
                 "Weiß"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "sub",
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             }
           ],
           "dom": {
@@ -1874,7 +2182,11 @@
             "domHeight": 207,
             "domTop": 6396
           },
-          "moduleFunction": "Einzelne Sub-Kategorie als eigenstaendige Row, fungiert als Navigation-Bridge zu einer tieferen Hub-Seite innerhalb derselben Kategorie. Verlinkt auf eine Sub-Kategorie innerhalb der uebergeordneten Hub-Seite."
+          "moduleFunction": "Einzelne Sub-Kategorie als eigenstaendige Row, fungiert als Navigation-Bridge zu einer tieferen Hub-Seite innerhalb derselben Kategorie. Verlinkt auf eine Sub-Kategorie innerhalb der uebergeordneten Hub-Seite.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "navigation_bridge"
         },
         {
           "position": 10,
@@ -1926,7 +2238,16 @@
                 "Schwarz",
                 "Fotoleicht"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "Sport & Energie Hub",
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             }
           ],
           "dom": {
@@ -1940,7 +2261,11 @@
             "domHeight": 303,
             "domTop": 6603
           },
-          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "section_intro"
         },
         {
           "position": 11,
@@ -1992,7 +2317,16 @@
                 "Schwarz",
                 "Hautton"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "Verdauung & Gewicht Hub",
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             }
           ],
           "dom": {
@@ -2006,7 +2340,11 @@
             "domHeight": 149,
             "domTop": 6906
           },
-          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "section_intro"
         },
         {
           "position": 12,
@@ -2055,7 +2393,16 @@
                 "Schwarz",
                 "Weiß"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "shoppable_image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "pdp_asin_hotspots",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "high"
+              }
             },
             {
               "position": "2",
@@ -2082,7 +2429,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "shoppable_image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "pdp_asin_hotspots",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "high"
+              }
             },
             {
               "position": "3",
@@ -2109,7 +2465,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "shoppable_image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "pdp_asin_hotspots",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "high"
+              }
             },
             {
               "position": "4",
@@ -2136,7 +2501,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "shoppable_image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "pdp_asin_hotspots",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "high"
+              }
             }
           ],
           "dom": {
@@ -2153,7 +2527,11 @@
             "domHeight": 583,
             "domTop": 7055
           },
-          "moduleFunction": "Vier-Kachel-Version des Shoppable-Patterns, praesentiert mehrere Produkt-Szenen mit Hotspots pro Kachel."
+          "moduleFunction": "Vier-Kachel-Version des Shoppable-Patterns, praesentiert mehrere Produkt-Szenen mit Hotspots pro Kachel.",
+          "toolLayoutId": "2x2wide",
+          "toolLayoutName": "4 Equal (2x2 Wide)",
+          "toolLayoutType": "standard",
+          "toolLayoutRole": "shoppable_set"
         },
         {
           "position": 13,
@@ -2203,7 +2581,16 @@
                 "Schwarz",
                 "Neongelb"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "LARGE_SQUARE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "Vermutlich ÜBER UNS oder Startseite",
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "rechts",
@@ -2230,7 +2617,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "LARGE_SQUARE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "alle-produkte",
+                "ctaLabel": "Hier stoebern",
+                "confidence": "high"
+              }
             }
           ],
           "dom": {
@@ -2245,7 +2641,11 @@
             "domHeight": 291,
             "domTop": 7637
           },
-          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup."
+          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup.",
+          "toolLayoutId": "std-2equal",
+          "toolLayoutName": "2 Equal",
+          "toolLayoutType": "standard",
+          "toolLayoutRole": "editorial_pair"
         },
         {
           "position": 14,
@@ -2295,7 +2695,16 @@
                 "Weiß",
                 "Grau"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "Share-Dialog",
+                "ctaLabel": "Teilen",
+                "confidence": "high"
+              }
             }
           ],
           "dom": {
@@ -2309,7 +2718,11 @@
             "domHeight": 188,
             "domTop": 7929
           },
-          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "editorial"
         },
         {
           "position": 15,
@@ -2358,7 +2771,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -2372,7 +2794,11 @@
             "domHeight": 168,
             "domTop": 8116
           },
-          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "editorial"
         },
         {
           "position": 16,
@@ -2407,7 +2833,11 @@
             "domHeight": 199,
             "domTop": 8284
           },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {
@@ -2497,7 +2927,11 @@
             "domHeight": 338,
             "domTop": 99
           },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         },
         {
           "position": 2,
@@ -2549,7 +2983,16 @@
                 "Gelb",
                 "Grün"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -2561,7 +3004,11 @@
             "domHeight": 591,
             "domTop": 437
           },
-          "moduleFunction": "Statischer Hero am Seitenanfang, setzt visuellen Einstieg und Claim oder Kategoriename, der die Seite thematisch verankert."
+          "moduleFunction": "Statischer Hero am Seitenanfang, setzt visuellen Einstieg und Claim oder Kategoriename, der die Seite thematisch verankert.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "hero"
         },
         {
           "position": 3,
@@ -2610,7 +3057,16 @@
                 "Olivbeige",
                 "Schwarz"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -2622,7 +3078,11 @@
             "domHeight": 303,
             "domTop": 1028
           },
-          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "editorial"
         },
         {
           "position": 4,
@@ -2674,7 +3134,16 @@
                 "Schwarz",
                 "Amazon-Gelb"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "video",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "PDP Premium Multivitamin",
+                "ctaLabel": "Alle Details anzeigen · In den Einkaufswagen",
+                "confidence": "high"
+              }
             }
           ],
           "dom": {
@@ -2686,7 +3155,11 @@
             "domHeight": 583,
             "domTop": 1331
           },
-          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "product_showcase"
         },
         {
           "position": 5,
@@ -2738,7 +3211,16 @@
                 "Schwarz",
                 "Amazon-Gelb"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "video",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "PDP Vitamin C gepuffert 500mg",
+                "ctaLabel": "Alle Details anzeigen · In den Einkaufswagen",
+                "confidence": "high"
+              }
             }
           ],
           "dom": {
@@ -2750,7 +3232,11 @@
             "domHeight": 629,
             "domTop": 1914
           },
-          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "product_showcase"
         },
         {
           "position": 6,
@@ -2802,7 +3288,16 @@
                 "Schwarz",
                 "Amazon-Gelb"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "video",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "PDP Vitamin D3 Tropfen",
+                "ctaLabel": "Alle Details anzeigen · In den Einkaufswagen",
+                "confidence": "high"
+              }
             }
           ],
           "dom": {
@@ -2814,7 +3309,11 @@
             "domHeight": 629,
             "domTop": 2543
           },
-          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "product_showcase"
         },
         {
           "position": 7,
@@ -2847,7 +3346,24 @@
             "domHeight": 2862,
             "domTop": 3172
           },
-          "moduleFunction": "Produkt-Grid einer Kategorie, zentrale Konversions-Flaeche einer Hub-Seite, Amazon rendert Produkt-Cards selbst."
+          "moduleFunction": "Produkt-Grid einer Kategorie, zentrale Konversions-Flaeche einer Hub-Seite, Amazon rendert Produkt-Cards selbst.",
+          "toolLayoutId": "product_grid_asin",
+          "toolLayoutName": "Product Grid (ASIN)",
+          "toolLayoutType": "fullwidth_asin",
+          "toolLayoutRole": "product_grid",
+          "productGridAggregate": {
+            "toolTileType": "product_grid",
+            "toolImageType": "PRODUCT_TILE_ASIN",
+            "asinTileCount": 40,
+            "link": {
+              "clickable": true,
+              "linkType": "pdp_asin_multi",
+              "linkTarget": "amazon_rendered_tiles",
+              "ctaLabel": null,
+              "confidence": "high"
+            },
+            "note": "40 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design."
+          }
         },
         {
           "position": 8,
@@ -2896,7 +3412,16 @@
                 "Weiß",
                 "Grau"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -2908,7 +3433,11 @@
             "domHeight": 159,
             "domTop": 6034
           },
-          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "section_intro"
         },
         {
           "position": 9,
@@ -2959,7 +3488,16 @@
                 "Weiß",
                 "Schwarz"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "sub",
+                "ctaLabel": "Lass dich hier beraten",
+                "confidence": "high"
+              }
             }
           ],
           "dom": {
@@ -2971,7 +3509,11 @@
             "domHeight": 207,
             "domTop": 6193
           },
-          "moduleFunction": "Einzelne Sub-Kategorie als eigenstaendige Row, fungiert als Navigation-Bridge zu einer tieferen Hub-Seite innerhalb derselben Kategorie. Verlinkt auf eine Sub-Kategorie innerhalb der uebergeordneten Hub-Seite."
+          "moduleFunction": "Einzelne Sub-Kategorie als eigenstaendige Row, fungiert als Navigation-Bridge zu einer tieferen Hub-Seite innerhalb derselben Kategorie. Verlinkt auf eine Sub-Kategorie innerhalb der uebergeordneten Hub-Seite.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "navigation_bridge"
         },
         {
           "position": 10,
@@ -3021,7 +3563,16 @@
                 "Weiß",
                 "Grau"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "sub",
+                "ctaLabel": "Teilen",
+                "confidence": "high"
+              }
             }
           ],
           "dom": {
@@ -3033,7 +3584,11 @@
             "domHeight": 207,
             "domTop": 6400
           },
-          "moduleFunction": "Einzelne Sub-Kategorie als eigenstaendige Row, fungiert als Navigation-Bridge zu einer tieferen Hub-Seite innerhalb derselben Kategorie. Verlinkt auf eine Sub-Kategorie innerhalb der uebergeordneten Hub-Seite."
+          "moduleFunction": "Einzelne Sub-Kategorie als eigenstaendige Row, fungiert als Navigation-Bridge zu einer tieferen Hub-Seite innerhalb derselben Kategorie. Verlinkt auf eine Sub-Kategorie innerhalb der uebergeordneten Hub-Seite.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "navigation_bridge"
         },
         {
           "position": 11,
@@ -3082,7 +3637,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "sub",
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             }
           ],
           "dom": {
@@ -3094,7 +3658,11 @@
             "domHeight": 188,
             "domTop": 6607
           },
-          "moduleFunction": "Einzelne Sub-Kategorie als eigenstaendige Row, fungiert als Navigation-Bridge zu einer tieferen Hub-Seite innerhalb derselben Kategorie. Verlinkt auf eine Sub-Kategorie innerhalb der uebergeordneten Hub-Seite."
+          "moduleFunction": "Einzelne Sub-Kategorie als eigenstaendige Row, fungiert als Navigation-Bridge zu einer tieferen Hub-Seite innerhalb derselben Kategorie. Verlinkt auf eine Sub-Kategorie innerhalb der uebergeordneten Hub-Seite.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "navigation_bridge"
         },
         {
           "position": 12,
@@ -3143,7 +3711,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -3155,7 +3732,11 @@
             "domHeight": 303,
             "domTop": 6795
           },
-          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "editorial"
         },
         {
           "position": 13,
@@ -3188,7 +3769,11 @@
             "domHeight": 200,
             "domTop": 7098
           },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {
@@ -3268,7 +3853,11 @@
             "domHeight": 338,
             "domTop": 99
           },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         },
         {
           "position": 2,
@@ -3313,7 +3902,16 @@
               "dominantColors": [
                 "zu verifizieren per Vision-Check"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -3325,7 +3923,11 @@
             "domHeight": 322,
             "domTop": 437
           },
-          "moduleFunction": "Kompakter Hero fuer Produktlinien- oder Kampagnen-Seiten, reduzierte Hoehe signalisiert schnellen Uebergang zum Produktbereich."
+          "moduleFunction": "Kompakter Hero fuer Produktlinien- oder Kampagnen-Seiten, reduzierte Hoehe signalisiert schnellen Uebergang zum Produktbereich.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "hero"
         },
         {
           "position": 3,
@@ -3358,7 +3960,24 @@
             "domHeight": 1901,
             "domTop": 759
           },
-          "moduleFunction": "Produkt-Linien-Grid, praesentiert eine Sub-Brand oder Produktfamilie gebuendelt."
+          "moduleFunction": "Produkt-Linien-Grid, praesentiert eine Sub-Brand oder Produktfamilie gebuendelt.",
+          "toolLayoutId": "product_grid_asin",
+          "toolLayoutName": "Product Grid (ASIN)",
+          "toolLayoutType": "fullwidth_asin",
+          "toolLayoutRole": "product_grid",
+          "productGridAggregate": {
+            "toolTileType": "product_grid",
+            "toolImageType": "PRODUCT_TILE_ASIN",
+            "asinTileCount": 30,
+            "link": {
+              "clickable": true,
+              "linkType": "pdp_asin_multi",
+              "linkTarget": "amazon_rendered_tiles",
+              "ctaLabel": null,
+              "confidence": "high"
+            },
+            "note": "30 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design."
+          }
         },
         {
           "position": 4,
@@ -3391,7 +4010,11 @@
             "domHeight": 200,
             "domTop": 2659
           },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {
@@ -3470,7 +4093,11 @@
             "domHeight": 338,
             "domTop": 99
           },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         },
         {
           "position": 2,
@@ -3515,7 +4142,16 @@
               "dominantColors": [
                 "zu verifizieren"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -3527,7 +4163,11 @@
             "domHeight": 425,
             "domTop": 437
           },
-          "moduleFunction": "Statischer Hero am Seitenanfang, setzt visuellen Einstieg und Claim oder Kategoriename, der die Seite thematisch verankert."
+          "moduleFunction": "Statischer Hero am Seitenanfang, setzt visuellen Einstieg und Claim oder Kategoriename, der die Seite thematisch verankert.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "hero"
         },
         {
           "position": 3,
@@ -3576,7 +4216,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -3588,7 +4237,11 @@
             "domHeight": 303,
             "domTop": 861
           },
-          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "editorial"
         },
         {
           "position": 4,
@@ -3637,7 +4290,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -3649,7 +4311,11 @@
             "domHeight": 624,
             "domTop": 1164
           },
-          "moduleFunction": "Hoher Editorial-Banner, fuer Story- und About-Content mit erweiterter Copy-Flaeche."
+          "moduleFunction": "Hoher Editorial-Banner, fuer Story- und About-Content mit erweiterter Copy-Flaeche.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "editorial"
         },
         {
           "position": 5,
@@ -3698,7 +4364,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -3710,7 +4385,11 @@
             "domHeight": 303,
             "domTop": 1788
           },
-          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "editorial"
         },
         {
           "position": 6,
@@ -3759,7 +4438,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "video",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": "Play",
+                "confidence": "medium"
+              }
             }
           ],
           "dom": {
@@ -3771,7 +4459,11 @@
             "domHeight": 168,
             "domTop": 2091
           },
-          "moduleFunction": "Hohes Hero-Video, tief emotional, auf About- und Story-Seiten typisch, fuer Marken-Erzaehlung."
+          "moduleFunction": "Hohes Hero-Video, tief emotional, auf About- und Story-Seiten typisch, fuer Marken-Erzaehlung.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "hero_video"
         },
         {
           "position": 7,
@@ -3820,7 +4512,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -3832,7 +4533,11 @@
             "domHeight": 303,
             "domTop": 2259
           },
-          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "editorial"
         },
         {
           "position": 8,
@@ -3881,7 +4586,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -3893,7 +4607,11 @@
             "domHeight": 303,
             "domTop": 2562
           },
-          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "editorial"
         },
         {
           "position": 9,
@@ -3942,7 +4660,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -3954,7 +4681,11 @@
             "domHeight": 303,
             "domTop": 2865
           },
-          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "editorial"
         },
         {
           "position": 10,
@@ -4003,7 +4734,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -4015,7 +4755,11 @@
             "domHeight": 303,
             "domTop": 3168
           },
-          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "editorial"
         },
         {
           "position": 11,
@@ -4064,7 +4808,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -4076,7 +4829,11 @@
             "domHeight": 624,
             "domTop": 3471
           },
-          "moduleFunction": "Hoher Editorial-Banner, fuer Story- und About-Content mit erweiterter Copy-Flaeche."
+          "moduleFunction": "Hoher Editorial-Banner, fuer Story- und About-Content mit erweiterter Copy-Flaeche.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "editorial"
         },
         {
           "position": 12,
@@ -4125,7 +4882,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -4137,7 +4903,11 @@
             "domHeight": 357,
             "domTop": 4095
           },
-          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "editorial"
         },
         {
           "position": 13,
@@ -4186,7 +4956,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -4198,7 +4977,11 @@
             "domHeight": 159,
             "domTop": 4452
           },
-          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "section_intro"
         },
         {
           "position": 14,
@@ -4247,7 +5030,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "moeglicherweise Kategorie oder Zertifikats-Seite",
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "2",
@@ -4274,7 +5066,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "3",
@@ -4301,7 +5102,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "4",
@@ -4328,7 +5138,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             }
           ],
           "dom": {
@@ -4340,7 +5159,11 @@
             "domHeight": 584,
             "domTop": 4611
           },
-          "moduleFunction": "Vier Editorial-Kacheln als Wert- oder Kategorie-Grid, praesentiert Marken-Facetten oder Navigations-Bruecken im Block."
+          "moduleFunction": "Vier Editorial-Kacheln als Wert- oder Kategorie-Grid, praesentiert Marken-Facetten oder Navigations-Bruecken im Block.",
+          "toolLayoutId": "2x2wide",
+          "toolLayoutName": "4 Equal (2x2 Wide)",
+          "toolLayoutType": "standard",
+          "toolLayoutRole": "editorial_quad"
         },
         {
           "position": 15,
@@ -4389,7 +5212,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "LARGE_SQUARE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "Kategorie- oder Content-Seite",
+                "ctaLabel": "vermutlich 'Entdecken' oder 'Zu den Produkten'",
+                "confidence": "high"
+              }
             },
             {
               "position": "rechts",
@@ -4416,7 +5248,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "LARGE_SQUARE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "Kategorie- oder Content-Seite",
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             }
           ],
           "dom": {
@@ -4428,7 +5269,11 @@
             "domHeight": 292,
             "domTop": 5195
           },
-          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup."
+          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup.",
+          "toolLayoutId": "std-2equal",
+          "toolLayoutName": "2 Equal",
+          "toolLayoutType": "standard",
+          "toolLayoutRole": "editorial_pair"
         },
         {
           "position": 16,
@@ -4477,7 +5322,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "LARGE_SQUARE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "Kategorie- oder Content-Seite",
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "rechts",
@@ -4504,7 +5358,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "LARGE_SQUARE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": "Kategorie- oder Content-Seite",
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             }
           ],
           "dom": {
@@ -4516,7 +5379,11 @@
             "domHeight": 292,
             "domTop": 5487
           },
-          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup."
+          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup.",
+          "toolLayoutId": "std-2equal",
+          "toolLayoutName": "2 Equal",
+          "toolLayoutType": "standard",
+          "toolLayoutRole": "editorial_pair"
         },
         {
           "position": 17,
@@ -4549,7 +5416,11 @@
             "domHeight": 200,
             "domTop": 5779
           },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {
@@ -4649,7 +5520,11 @@
             "domHeight": 338,
             "domTop": 99
           },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         },
         {
           "position": 2,
@@ -4698,7 +5573,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "shoppable_image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "pdp_asin_hotspots",
+                "linkTarget": "shoppable",
+                "ctaLabel": "Produkte ansehen",
+                "confidence": "high"
+              }
             }
           ],
           "dom": {
@@ -4710,7 +5594,11 @@
             "domHeight": 584,
             "domTop": 437
           },
-          "moduleFunction": "Shoppable Bild mit Hotspots auf Produkt-Positionen, erlaubt Sprung direkt in PDPs ohne Grid-Scrolling."
+          "moduleFunction": "Shoppable Bild mit Hotspots auf Produkt-Positionen, erlaubt Sprung direkt in PDPs ohne Grid-Scrolling.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "shoppable"
         },
         {
           "position": 3,
@@ -4759,7 +5647,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -4771,7 +5668,11 @@
             "domHeight": 303,
             "domTop": 1020
           },
-          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page."
+          "moduleFunction": "Redaktioneller Full-width-Banner zwischen Produktblocks, meist mit Kategorie-Thema oder Werte-Statement, verlinkt oft auf eine Sub-Page.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "editorial"
         },
         {
           "position": 4,
@@ -4804,7 +5705,24 @@
             "domHeight": 3574,
             "domTop": 1324
           },
-          "moduleFunction": "Voller Katalog-Grid, typisch auf der 'Alle Produkte'-Seite, lineare Auflistung aller SKUs."
+          "moduleFunction": "Voller Katalog-Grid, typisch auf der 'Alle Produkte'-Seite, lineare Auflistung aller SKUs.",
+          "toolLayoutId": "product_grid_asin",
+          "toolLayoutName": "Product Grid (ASIN)",
+          "toolLayoutType": "fullwidth_asin",
+          "toolLayoutRole": "product_grid",
+          "productGridAggregate": {
+            "toolTileType": "product_grid",
+            "toolImageType": "PRODUCT_TILE_ASIN",
+            "asinTileCount": 50,
+            "link": {
+              "clickable": true,
+              "linkType": "pdp_asin_multi",
+              "linkTarget": "amazon_rendered_tiles",
+              "ctaLabel": null,
+              "confidence": "high"
+            },
+            "note": "50 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design."
+          }
         },
         {
           "position": 5,
@@ -4853,7 +5771,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -4865,7 +5792,11 @@
             "domHeight": 169,
             "domTop": 4897
           },
-          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "section_intro"
         },
         {
           "position": 6,
@@ -4898,7 +5829,11 @@
             "domHeight": 200,
             "domTop": 5066
           },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {
@@ -4973,7 +5908,11 @@
             "domHeight": 338,
             "domTop": 99
           },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         },
         {
           "position": 2,
@@ -5022,7 +5961,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -5034,7 +5982,11 @@
             "domHeight": 399,
             "domTop": 437
           },
-          "moduleFunction": "Statischer Hero am Seitenanfang, setzt visuellen Einstieg und Claim oder Kategoriename, der die Seite thematisch verankert."
+          "moduleFunction": "Statischer Hero am Seitenanfang, setzt visuellen Einstieg und Claim oder Kategoriename, der die Seite thematisch verankert.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "hero"
         },
         {
           "position": 3,
@@ -5083,7 +6035,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -5095,7 +6056,11 @@
             "domHeight": 207,
             "domTop": 836
           },
-          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "section_intro"
         },
         {
           "position": 4,
@@ -5144,7 +6109,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "video",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -5156,7 +6130,11 @@
             "domHeight": 556,
             "domTop": 1043
           },
-          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "product_showcase"
         },
         {
           "position": 5,
@@ -5189,7 +6167,24 @@
             "domHeight": 3414,
             "domTop": 1599
           },
-          "moduleFunction": "Neuheiten-Grid, zeigt die juengsten Produktstarts, Treiber fuer Wiederbesuche."
+          "moduleFunction": "Neuheiten-Grid, zeigt die juengsten Produktstarts, Treiber fuer Wiederbesuche.",
+          "toolLayoutId": "product_grid_asin",
+          "toolLayoutName": "Product Grid (ASIN)",
+          "toolLayoutType": "fullwidth_asin",
+          "toolLayoutRole": "product_grid",
+          "productGridAggregate": {
+            "toolTileType": "recommended",
+            "toolImageType": "PRODUCT_TILE_ASIN",
+            "asinTileCount": 50,
+            "link": {
+              "clickable": true,
+              "linkType": "pdp_asin_multi",
+              "linkTarget": "amazon_rendered_tiles",
+              "ctaLabel": null,
+              "confidence": "high"
+            },
+            "note": "50 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design."
+          }
         },
         {
           "position": 6,
@@ -5238,7 +6233,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -5250,7 +6254,11 @@
             "domHeight": 159,
             "domTop": 5013
           },
-          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "section_intro"
         },
         {
           "position": 7,
@@ -5299,7 +6307,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "2",
@@ -5326,7 +6343,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "3",
@@ -5353,7 +6379,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "4",
@@ -5380,7 +6415,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             }
           ],
           "dom": {
@@ -5392,7 +6436,11 @@
             "domHeight": 584,
             "domTop": 5172
           },
-          "moduleFunction": "Vier Editorial-Kacheln als Wert- oder Kategorie-Grid, praesentiert Marken-Facetten oder Navigations-Bruecken im Block."
+          "moduleFunction": "Vier Editorial-Kacheln als Wert- oder Kategorie-Grid, praesentiert Marken-Facetten oder Navigations-Bruecken im Block.",
+          "toolLayoutId": "2x2wide",
+          "toolLayoutName": "4 Equal (2x2 Wide)",
+          "toolLayoutType": "standard",
+          "toolLayoutRole": "editorial_quad"
         },
         {
           "position": 8,
@@ -5441,7 +6489,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "LARGE_SQUARE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "rechts",
@@ -5468,7 +6525,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "LARGE_SQUARE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             }
           ],
           "dom": {
@@ -5480,7 +6546,11 @@
             "domHeight": 292,
             "domTop": 5755
           },
-          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup."
+          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup.",
+          "toolLayoutId": "std-2equal",
+          "toolLayoutName": "2 Equal",
+          "toolLayoutType": "standard",
+          "toolLayoutRole": "editorial_pair"
         },
         {
           "position": 9,
@@ -5529,7 +6599,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "LARGE_SQUARE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "rechts",
@@ -5556,7 +6635,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "LARGE_SQUARE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             }
           ],
           "dom": {
@@ -5568,7 +6656,11 @@
             "domHeight": 292,
             "domTop": 6047
           },
-          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup."
+          "moduleFunction": "Zwei gleichgewichtige Editorial-Kacheln, oft als Cross-Link zu zwei verwandten Sub-Pages oder als Kontrast-Setup.",
+          "toolLayoutId": "std-2equal",
+          "toolLayoutName": "2 Equal",
+          "toolLayoutType": "standard",
+          "toolLayoutRole": "editorial_pair"
         },
         {
           "position": 10,
@@ -5601,7 +6693,11 @@
             "domHeight": 200,
             "domTop": 6339
           },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {
@@ -5686,7 +6782,11 @@
             "domHeight": 94,
             "domTop": 99
           },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         },
         {
           "position": 2,
@@ -5719,7 +6819,11 @@
             "domHeight": 0,
             "domTop": 193
           },
-          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase."
+          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "skip",
+          "toolLayoutRole": "filter_ui"
         },
         {
           "position": 3,
@@ -5752,7 +6856,11 @@
             "domHeight": 0,
             "domTop": 193
           },
-          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase."
+          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "skip",
+          "toolLayoutRole": "filter_ui"
         },
         {
           "position": 4,
@@ -5785,7 +6893,11 @@
             "domHeight": 0,
             "domTop": 193
           },
-          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase."
+          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "skip",
+          "toolLayoutRole": "filter_ui"
         },
         {
           "position": 5,
@@ -5834,7 +6946,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "product_selector",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_filter",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -5846,7 +6967,11 @@
             "domHeight": 236,
             "domTop": 193
           },
-          "moduleFunction": "Banner im Produktselektor mit Filter-Hinweis oder Kategorie-Setup, rein funktionale UI-Komponente der Beratungs-Seite."
+          "moduleFunction": "Banner im Produktselektor mit Filter-Hinweis oder Kategorie-Setup, rein funktionale UI-Komponente der Beratungs-Seite.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "filter_banner"
         },
         {
           "position": 6,
@@ -5879,7 +7004,11 @@
             "domHeight": 0,
             "domTop": 429
           },
-          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase."
+          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "skip",
+          "toolLayoutRole": "filter_ui"
         },
         {
           "position": 7,
@@ -5912,7 +7041,11 @@
             "domHeight": 0,
             "domTop": 429
           },
-          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase."
+          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "skip",
+          "toolLayoutRole": "filter_ui"
         },
         {
           "position": 8,
@@ -5945,7 +7078,11 @@
             "domHeight": 0,
             "domTop": 429
           },
-          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase."
+          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "skip",
+          "toolLayoutRole": "filter_ui"
         },
         {
           "position": 9,
@@ -5978,7 +7115,24 @@
             "domHeight": 0,
             "domTop": 0
           },
-          "moduleFunction": "Filterergebnis-Grid auf Produktselektor-Seite, dynamisch aus den Filter-Accordions."
+          "moduleFunction": "Filterergebnis-Grid auf Produktselektor-Seite, dynamisch aus den Filter-Accordions.",
+          "toolLayoutId": "product_grid_asin",
+          "toolLayoutName": "Product Grid (ASIN)",
+          "toolLayoutType": "fullwidth_asin",
+          "toolLayoutRole": "product_grid",
+          "productGridAggregate": {
+            "toolTileType": "product_grid",
+            "toolImageType": "PRODUCT_TILE_ASIN",
+            "asinTileCount": 20,
+            "link": {
+              "clickable": true,
+              "linkType": "pdp_asin_multi",
+              "linkTarget": "amazon_rendered_tiles",
+              "ctaLabel": null,
+              "confidence": "high"
+            },
+            "note": "20 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design."
+          }
         },
         {
           "position": 10,
@@ -6011,7 +7165,11 @@
             "domHeight": 0,
             "domTop": 0
           },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {
@@ -6082,7 +7240,11 @@
             "domHeight": 338,
             "domTop": 99
           },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         },
         {
           "position": 2,
@@ -6131,7 +7293,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -6143,7 +7314,11 @@
             "domHeight": 689,
             "domTop": 437
           },
-          "moduleFunction": "Grosser Hero mit starker visueller Dominanz, typisch fuer Geschenk- oder Kampagnen-Seiten mit erhoehtem Emotionsanteil."
+          "moduleFunction": "Grosser Hero mit starker visueller Dominanz, typisch fuer Geschenk- oder Kampagnen-Seiten mit erhoehtem Emotionsanteil.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "hero"
         },
         {
           "position": 3,
@@ -6192,7 +7367,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -6204,7 +7388,11 @@
             "domHeight": 553,
             "domTop": 1126
           },
-          "moduleFunction": "Grosser Editorial-Banner mit hohem visuellen Gewicht, oft als Seiten-Intro oder Kampagnen-Anker."
+          "moduleFunction": "Grosser Editorial-Banner mit hohem visuellen Gewicht, oft als Seiten-Intro oder Kampagnen-Anker.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "editorial"
         },
         {
           "position": 4,
@@ -6253,7 +7441,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "video",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -6265,7 +7462,11 @@
             "domHeight": 463,
             "domTop": 1679
           },
-          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "product_showcase"
         },
         {
           "position": 5,
@@ -6314,7 +7515,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "video",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -6326,7 +7536,11 @@
             "domHeight": 578,
             "domTop": 2142
           },
-          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "product_showcase"
         },
         {
           "position": 6,
@@ -6375,7 +7589,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "video",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -6387,7 +7610,11 @@
             "domHeight": 505,
             "domTop": 2720
           },
-          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "product_showcase"
         },
         {
           "position": 7,
@@ -6420,7 +7647,11 @@
             "domHeight": 1,
             "domTop": 3225
           },
-          "moduleFunction": "Unsichtbarer Pixel-Abstand zwischen Modulen, rein visueller Rhythmus-Trenner ohne inhaltliche Funktion."
+          "moduleFunction": "Unsichtbarer Pixel-Abstand zwischen Modulen, rein visueller Rhythmus-Trenner ohne inhaltliche Funktion.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "skip",
+          "toolLayoutRole": "spacer"
         },
         {
           "position": 8,
@@ -6469,7 +7700,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "video",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -6481,7 +7721,11 @@
             "domHeight": 625,
             "domTop": 3226
           },
-          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "product_showcase"
         },
         {
           "position": 9,
@@ -6514,7 +7758,11 @@
             "domHeight": 1,
             "domTop": 3852
           },
-          "moduleFunction": "Unsichtbarer Pixel-Abstand zwischen Modulen, rein visueller Rhythmus-Trenner ohne inhaltliche Funktion."
+          "moduleFunction": "Unsichtbarer Pixel-Abstand zwischen Modulen, rein visueller Rhythmus-Trenner ohne inhaltliche Funktion.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "skip",
+          "toolLayoutRole": "spacer"
         },
         {
           "position": 10,
@@ -6563,7 +7811,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "video",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -6575,7 +7832,11 @@
             "domHeight": 528,
             "domTop": 3853
           },
-          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "product_showcase"
         },
         {
           "position": 11,
@@ -6608,7 +7869,11 @@
             "domHeight": 1,
             "domTop": 4381
           },
-          "moduleFunction": "Unsichtbarer Pixel-Abstand zwischen Modulen, rein visueller Rhythmus-Trenner ohne inhaltliche Funktion."
+          "moduleFunction": "Unsichtbarer Pixel-Abstand zwischen Modulen, rein visueller Rhythmus-Trenner ohne inhaltliche Funktion.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "skip",
+          "toolLayoutRole": "spacer"
         },
         {
           "position": 12,
@@ -6657,7 +7922,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "video",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -6669,7 +7943,11 @@
             "domHeight": 409,
             "domTop": 4382
           },
-          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set."
+          "moduleFunction": "Einzelnes Produkt im Fokus mit Video-Praesentation und Marken-Layout, fokussiert Aufmerksamkeit auf ein Hero-Produkt oder ein Set.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "product_showcase"
         },
         {
           "position": 13,
@@ -6718,7 +7996,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "video",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -6730,7 +8017,11 @@
             "domHeight": 168,
             "domTop": 4791
           },
-          "moduleFunction": "Bewegtes Hero-Element, emotionaler Einstieg, Marken-Tonalitaet und Lifestyle-Kontext ueber Zeit entfaltet."
+          "moduleFunction": "Bewegtes Hero-Element, emotionaler Einstieg, Marken-Tonalitaet und Lifestyle-Kontext ueber Zeit entfaltet.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "hero_video"
         },
         {
           "position": 14,
@@ -6779,7 +8070,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "shoppable_image",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": true,
+                "linkType": "pdp_asin_hotspots",
+                "linkTarget": "shoppable",
+                "ctaLabel": "Produkte ansehen",
+                "confidence": "high"
+              }
             }
           ],
           "dom": {
@@ -6791,7 +8091,11 @@
             "domHeight": 584,
             "domTop": 4959
           },
-          "moduleFunction": "Shoppable Bild mit Hotspots auf Produkt-Positionen, erlaubt Sprung direkt in PDPs ohne Grid-Scrolling."
+          "moduleFunction": "Shoppable Bild mit Hotspots auf Produkt-Positionen, erlaubt Sprung direkt in PDPs ohne Grid-Scrolling.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "shoppable"
         },
         {
           "position": 15,
@@ -6840,7 +8144,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -6852,7 +8165,11 @@
             "domHeight": 159,
             "domTop": 5542
           },
-          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "section_intro"
         },
         {
           "position": 16,
@@ -6901,7 +8218,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "2",
@@ -6928,7 +8254,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "3",
@@ -6955,7 +8290,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "4",
@@ -6982,7 +8326,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             }
           ],
           "dom": {
@@ -6994,7 +8347,11 @@
             "domHeight": 584,
             "domTop": 5701
           },
-          "moduleFunction": "Vier Editorial-Kacheln als Wert- oder Kategorie-Grid, praesentiert Marken-Facetten oder Navigations-Bruecken im Block."
+          "moduleFunction": "Vier Editorial-Kacheln als Wert- oder Kategorie-Grid, praesentiert Marken-Facetten oder Navigations-Bruecken im Block.",
+          "toolLayoutId": "2x2wide",
+          "toolLayoutName": "4 Equal (2x2 Wide)",
+          "toolLayoutType": "standard",
+          "toolLayoutRole": "editorial_quad"
         },
         {
           "position": 17,
@@ -7043,7 +8400,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "2",
@@ -7070,7 +8436,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "3",
@@ -7097,7 +8472,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "4",
@@ -7124,7 +8508,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             }
           ],
           "dom": {
@@ -7136,7 +8529,11 @@
             "domHeight": 584,
             "domTop": 6285
           },
-          "moduleFunction": "Vier Editorial-Kacheln als Wert- oder Kategorie-Grid, praesentiert Marken-Facetten oder Navigations-Bruecken im Block."
+          "moduleFunction": "Vier Editorial-Kacheln als Wert- oder Kategorie-Grid, praesentiert Marken-Facetten oder Navigations-Bruecken im Block.",
+          "toolLayoutId": "2x2wide",
+          "toolLayoutName": "4 Equal (2x2 Wide)",
+          "toolLayoutType": "standard",
+          "toolLayoutRole": "editorial_quad"
         },
         {
           "position": 18,
@@ -7169,7 +8566,11 @@
             "domHeight": 200,
             "domTop": 6869
           },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {
@@ -7276,7 +8677,11 @@
             "domHeight": 338,
             "domTop": 99
           },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome."
+          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         },
         {
           "position": 2,
@@ -7325,7 +8730,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -7337,7 +8751,11 @@
             "domHeight": 169,
             "domTop": 437
           },
-          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "section_intro"
         },
         {
           "position": 3,
@@ -7370,7 +8788,24 @@
             "domHeight": 2121,
             "domTop": 606
           },
-          "moduleFunction": "Bestseller-Grid, rein konversionsgetrieben, platziert die Top-Seller prominent."
+          "moduleFunction": "Bestseller-Grid, rein konversionsgetrieben, platziert die Top-Seller prominent.",
+          "toolLayoutId": "product_grid_asin",
+          "toolLayoutName": "Product Grid (ASIN)",
+          "toolLayoutType": "fullwidth_asin",
+          "toolLayoutRole": "product_grid",
+          "productGridAggregate": {
+            "toolTileType": "best_sellers",
+            "toolImageType": "PRODUCT_TILE_ASIN",
+            "asinTileCount": 24,
+            "link": {
+              "clickable": true,
+              "linkType": "pdp_asin_multi",
+              "linkTarget": "amazon_rendered_tiles",
+              "ctaLabel": null,
+              "confidence": "high"
+            },
+            "note": "24 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design."
+          }
         },
         {
           "position": 4,
@@ -7419,7 +8854,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image_text",
+              "toolImageType": "FULL_WIDTH",
+              "link": {
+                "clickable": false,
+                "linkType": "none",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "low"
+              }
             }
           ],
           "dom": {
@@ -7431,7 +8875,11 @@
             "domHeight": 245,
             "domTop": 2726
           },
-          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein."
+          "moduleFunction": "Schmaler Section-Header vor dem naechsten Block, gliedert die Seite und kuendigt das kommende Thema an. Schmaler Section-Header zwischen groesseren Modul-Bloecken, gliedert die Seite und leitet das naechste Thema ein.",
+          "toolLayoutId": "1",
+          "toolLayoutName": "Full Width",
+          "toolLayoutType": "fullwidth",
+          "toolLayoutRole": "section_intro"
         },
         {
           "position": 5,
@@ -7480,7 +8928,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "2",
@@ -7507,7 +8964,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "3",
@@ -7534,7 +9000,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "4",
@@ -7561,7 +9036,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             }
           ],
           "dom": {
@@ -7573,7 +9057,11 @@
             "domHeight": 292,
             "domTop": 2972
           },
-          "moduleFunction": "Vier Editorial-Kacheln als Wert- oder Kategorie-Grid, praesentiert Marken-Facetten oder Navigations-Bruecken im Block."
+          "moduleFunction": "Vier Editorial-Kacheln als Wert- oder Kategorie-Grid, praesentiert Marken-Facetten oder Navigations-Bruecken im Block.",
+          "toolLayoutId": "2x2wide",
+          "toolLayoutName": "4 Equal (2x2 Wide)",
+          "toolLayoutType": "standard",
+          "toolLayoutRole": "editorial_quad"
         },
         {
           "position": 6,
@@ -7622,7 +9110,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "2",
@@ -7649,7 +9146,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "3",
@@ -7676,7 +9182,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             },
             {
               "position": "4",
@@ -7703,7 +9218,16 @@
               "dominantColors": [
                 "screenshot_required"
               ],
-              "dominantColorsHex": null
+              "dominantColorsHex": null,
+              "toolTileType": "image",
+              "toolImageType": "WIDE",
+              "link": {
+                "clickable": true,
+                "linkType": "internal_subpage",
+                "linkTarget": null,
+                "ctaLabel": null,
+                "confidence": "medium"
+              }
             }
           ],
           "dom": {
@@ -7715,7 +9239,11 @@
             "domHeight": 292,
             "domTop": 3264
           },
-          "moduleFunction": "Vier Editorial-Kacheln als Wert- oder Kategorie-Grid, praesentiert Marken-Facetten oder Navigations-Bruecken im Block."
+          "moduleFunction": "Vier Editorial-Kacheln als Wert- oder Kategorie-Grid, praesentiert Marken-Facetten oder Navigations-Bruecken im Block.",
+          "toolLayoutId": "2x2wide",
+          "toolLayoutName": "4 Equal (2x2 Wide)",
+          "toolLayoutType": "standard",
+          "toolLayoutRole": "editorial_quad"
         },
         {
           "position": 7,
@@ -7748,7 +9276,11 @@
             "domHeight": 200,
             "domTop": 3555
           },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle."
+          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "amazon_native",
+          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {

@@ -253,16 +253,114 @@ Aus der v2-Vorversion entfernt: `immersive` (faellt in emotional_hook),
 ```
 position              1-basiert, links-oben zuerst
 imageCategory         Enum aus Paragraf 6
+toolTileType          Enum aus Paragraf 11a (PFLICHT, Tool-Sprache)
+toolImageType         Enum aus Paragraf 11b (PFLICHT, aus Layout-Position)
+link                  Objekt aus Paragraf 11c (PFLICHT, Clickability)
 visualContent         deutscher Freitext, was inhaltlich zu sehen ist
 elementProportions    Objekt mit Schluesseln aus Paragraf 12, Summe ca. 100
 textOnImage           Objekt aus Paragraf 7
-ctaText               sichtbarer CTA-Button-Text, oder null
-linksTo               erkennbares Ziel aus Kontext, oder null
+ctaText               sichtbarer CTA-Button-Text, oder null (Spiegel in link.ctaLabel)
+linksTo               Tile-Target, freitextlich (Spiegel in link.linkTarget)
 backgroundStyle       Enum aus Paragraf 5
 backgroundDetail      optionaler Freitext
 dominantColors        Array mit 2 bis 4 Farbbegriffen auf Deutsch
 dominantColorsHex     optionales Array mit 2 bis 4 Hex-Werten, falls extrahierbar
 ```
+
+## 11a. `toolTileType`, Tool-Sprache (geschlossene Liste)
+
+Diese Liste kommt direkt aus `src/constants.js` `TILE_TYPES` und darf
+nicht erweitert werden. Verbindliche Sprache des Generator-Tools.
+
+- `image` — reines Bild
+- `image_text` — Bild plus Text, typisch fuer editorial_banner mit Headline
+- `product_grid` — ASIN-Grid, Amazon rendert Kacheln
+- `best_sellers` — ASIN-Grid, Bestseller-Sortierung
+- `recommended` — ASIN-Grid, Recommendations oder Neuheiten
+- `deals` — ASIN-Grid, Angebote
+- `video` — Videoflaeche (Full-Width oder in Split)
+- `text` — reiner Text im Amazon-Chrome (Nav, Share-Footer)
+- `shoppable_image` — Bild mit Hotspots, jeder Hotspot links to ASIN
+- `product_selector` — Filter-Quiz fuer Beratung
+
+Ableitung, erste zutreffende Regel gewinnt:
+
+1. `layoutType` startet mit `product_grid_`: je nach Subtyp
+   `best_sellers`, `recommended` oder `product_grid`
+2. `imageCategory == product_tile_asin`: `product_grid`
+3. `layoutType` startet mit `shoppable_`: `shoppable_image`
+4. Modul enthaelt Video: `video`
+5. `layoutType` in Filter-UI: `product_selector`
+6. `layoutType` in Amazon-Chrome: `text`
+7. `imageCategory == text_image` oder Modul ist `editorial_section_intro`:
+   `image_text`
+8. `imageCategory == benefit`: `image_text`
+9. Sonst: `image`
+
+## 11b. `toolImageType`, Tool-Image-Dimensionen (aus Layout-Position)
+
+Aus dem gemappten Tool-Layout plus Tile-Position ergibt sich die
+Amazon-Bild-Dimension nach `LAYOUT_TILE_DIMS` in `src/constants.js`:
+
+- `FULL_WIDTH` 3000x600 (bis 15:1 Ratio)
+- `LARGE_SQUARE` 1500x1500
+- `WIDE` 1500x700
+- `SMALL_SQUARE` 750x750
+- `VH_WIDE` 3000x1500
+- `VH_SQUARE` 1500x1500
+- `PRODUCT_TILE_ASIN` (Sonderfall, Amazon rendert)
+
+## 11c. `link`, Clickability-Objekt (PFLICHT pro Tile)
+
+```
+link: {
+  clickable: boolean,
+  linkType: enum,
+  linkTarget: string | null,
+  ctaLabel: string | null,
+  confidence: enum (high, medium, low)
+}
+```
+
+`linkType`-Enum (geschlossen):
+
+- `none` — nicht klickbar (dekorativ, Hintergrund, Section-Intro)
+- `internal_subpage` — zu anderer Unterseite im selben Brand Store
+- `pdp_asin` — zu einer einzelnen Amazon-PDP
+- `pdp_asin_multi` — zu Amazon-ASIN-Grid, mehrere PDPs erreichbar
+- `pdp_asin_hotspots` — Shoppable mit Hotspots je PDP
+- `internal_filter` — internal Filter-Trigger (Produktselektor)
+- `external` — externe URL
+- `amazon_native` — Amazon-UI
+
+`linkTarget`-Konventionen:
+- `internal_subpage`: Slug der Zielseite (z.B. `unsere-neuheiten`,
+  `ueber-uns`, `produktselektor`)
+- `pdp_asin`: ASIN oder Produktname
+- `pdp_asin_multi`: Hinweis wie `amazon_rendered_tiles`
+- `pdp_asin_hotspots`: Hinweis plus Hotspot-Count
+- `internal_filter`: Filter-Slug
+- `amazon_native`: `amazon_ui`
+
+`confidence`:
+- `high` — klar klickbar (CTA sichtbar, linksTo bekannt, ASIN-Grid)
+- `medium` — plausibel (editorial_tile, subcategory_tile, Hero mit CTA)
+- `low` — unklar, Einzelpruefung noetig
+
+## 11d. Tool-Layout pro Modul (PFLICHT)
+
+Jedes Modul bekommt zusaetzlich:
+
+```
+toolLayoutId     String | null (aus src/constants.js LAYOUTS)
+toolLayoutName   String | null (menschenlesbar)
+toolLayoutType   enum: fullwidth, standard, vh, fullwidth_asin,
+                       amazon_native, skip
+toolLayoutRole   String (aus src/blueprintLayoutMap.js)
+```
+
+Mapping liegt in `scripts/enrich-tool-vocabulary.py` (V3_TO_TOOL) und in
+`src/blueprintLayoutMap.js`. Bei neuem `layoutType` beide synchron halten.
 
 ## 12. `elementProportions`, geschlossene Schluessel
 
