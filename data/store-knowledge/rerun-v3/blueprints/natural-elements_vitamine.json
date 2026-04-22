@@ -1,0 +1,757 @@
+{
+  "pageUrl": "https://www.amazon.de/stores/page/5DF9227A-372F-4144-8FE4-73B4797BAABD",
+  "pageName": "Vitamine",
+  "pageId": "5DF9227A-372F-4144-8FE4-73B4797BAABD",
+  "pageLevel": 1,
+  "pageType": "hub_category",
+  "scrollHeight": 8519,
+  "contentStats": {
+    "domModules": 13,
+    "logicalModules": 13,
+    "totalImages": 0,
+    "totalVideos": 18
+  },
+  "heroBanner": {
+    "description": "Vitamine Sub-Kategorie Hero-Banner",
+    "textOnImage": {
+      "visibleText": "Vitamine",
+      "textType": "category_headline",
+      "origin": "baked_in"
+    },
+    "estimatedDimensions": "3000x1500"
+  },
+  "modules": [
+    {
+      "position": 1,
+      "moduleId": "vitamine_mod_01",
+      "moduleName": "Amazon Nav Header",
+      "layoutType": "amazon_nav_header",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": "Wiederholung des Marken-Heros auf jeder Seite. Breadcrumb zeigt 'natural elements > Immunsystem > Vitamine', sodass die Einordnung in der Hierarchie sichtbar ist.",
+      "structuralPattern": "Amazon-eigener Navheader",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": null,
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 338,
+        "domTop": 99
+      }
+    },
+    {
+      "position": 2,
+      "moduleId": "vitamine_mod_02",
+      "moduleName": "Vitamine Hero",
+      "layoutType": "hero_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "emotional_hook",
+      "designIntentDetail": "Emotionaler Themen-Hero der Sub-Kategorie. Lifestyle-Foto plus großer Claim etabliert Kontext, die Bildsprache zeigt direkten Produktnutzen im Alltag.",
+      "structuralPattern": "Full-width Sub-Kategorie-Hero",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Vitamine",
+        "textType": "category_headline",
+        "origin": "baked_in",
+        "headline": "Vitamine",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "Porträt einer lachenden Frau in gestreiftem Shirt, natürliches Licht, warmer Wohnraum-Hintergrund mit Pflanzen. Sie hält eine gelbe Zitrone in der Hand. Über dem Bild der Claim in großer, weißer, kondensierter Groteskschrift.",
+          "elementProportions": {
+            "hero_figure": 50,
+            "photographic_background": 30,
+            "text": 20
+          },
+          "textOnImage": {
+            "visibleText": "Vitamine",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "Vitamine",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photographic",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Warm-beige",
+            "Weiß",
+            "Gelb",
+            "Grün"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 591,
+        "domTop": 437
+      }
+    },
+    {
+      "position": 3,
+      "moduleId": "vitamine_mod_03",
+      "moduleName": "Editorial Banner",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": "Text-only Banner auf olivbeigem Hintergrund. Erklärt die Rolle von Vitaminen für Zellschutz und Immunarbeit. Fett gehobene Kernaussagen lenken die Leser-Attention ohne zusätzlichen visuellen Lärm.",
+      "structuralPattern": "Full-width Editorial-Banner",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "Gedämpftes Olivbeige vollflächig, zentrierter Fließtext in schwarzer Groteskschrift mit Bold-Akzenten. Kein Produkt, keine Person, reine Typografie.",
+          "elementProportions": {
+            "solid_background": 60,
+            "text": 40
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "olive_beige_solid",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Olivbeige",
+            "Schwarz"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 303,
+        "domTop": 1028
+      }
+    },
+    {
+      "position": 4,
+      "moduleId": "vitamine_mod_04",
+      "moduleName": "Premium Multivitamin Showcase",
+      "layoutType": "product_showcase_video",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Amazon Brand Store Widget ProductShowcase mit ImageVideoCarousel (8 Slides) plus Key-Feature-Liste plus CTA. Das wichtigste Produkt steht zuerst als Konversions-Anker.",
+      "structuralPattern": "Produkt-Showcase-Row mit grossem Produkt und Video",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "natural elements Premium Multivitamin",
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": "natural elements Premium Multivitamin",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "product",
+          "visualContent": "Links 8-stufiger Bild-Video-Karussell mit Produktbildern und Video-Clip der Premium Multi Dose (schwarzer Tiegel mit Blatt-Illustration, Lifestyle-Setting, Kapsel-Makro, Nährwerttabelle). Rechts Produktname als H1, Liste von Key-Features mit Emoji-Akzenten, darunter die Buttons 'Alle Details anzeigen' (outline) und 'In den Einkaufswagen' (gelb).",
+          "elementProportions": {
+            "product": 45,
+            "text": 35,
+            "video": 15,
+            "cta_button": 5
+          },
+          "textOnImage": {
+            "visibleText": "Premium Multivitamin",
+            "textType": "headline_cta",
+            "origin": "baked_in",
+            "headline": "Premium Multivitamin",
+            "subline": null,
+            "cta": "Alle Details anzeigen · In den Einkaufswagen",
+            "directionCues": null
+          },
+          "ctaText": "Alle Details anzeigen · In den Einkaufswagen",
+          "linksTo": "PDP Premium Multivitamin",
+          "backgroundStyle": "white",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Weiß",
+            "Schwarz",
+            "Amazon-Gelb"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 6,
+        "domHeight": 583,
+        "domTop": 1331
+      }
+    },
+    {
+      "position": 5,
+      "moduleId": "vitamine_mod_05",
+      "moduleName": "Vitamin C Showcase",
+      "layoutType": "product_showcase_video",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Gleiche Struktur wie Showcase 1, jetzt für das Vitamin-C-Produkt. Nutzt die USPs magenschonend, pH-neutral, säurefrei als Differenzierer.",
+      "structuralPattern": "Produkt-Showcase-Row mit Video",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "natural elements Vitamin C gepuffert 500mg",
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": "natural elements Vitamin C gepuffert 500mg",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "product",
+          "visualContent": "Bild-Video-Karussell links, Feature-Beschreibung rechts, Call-to-Action darunter. Produkt: schwarzer Tiegel Vitamin C gepuffert 500mg, botanische Illustration, Supplement-Tabletten.",
+          "elementProportions": {
+            "product": 45,
+            "text": 35,
+            "video": 15,
+            "cta_button": 5
+          },
+          "textOnImage": {
+            "visibleText": "Vitamin C 500mg",
+            "textType": "headline_cta",
+            "origin": "baked_in",
+            "headline": "Vitamin C 500mg",
+            "subline": null,
+            "cta": "Alle Details anzeigen · In den Einkaufswagen",
+            "directionCues": null
+          },
+          "ctaText": "Alle Details anzeigen · In den Einkaufswagen",
+          "linksTo": "PDP Vitamin C gepuffert 500mg",
+          "backgroundStyle": "white",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Weiß",
+            "Schwarz",
+            "Amazon-Gelb"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 6,
+        "domHeight": 629,
+        "domTop": 1914
+      }
+    },
+    {
+      "position": 6,
+      "moduleId": "vitamine_mod_06",
+      "moduleName": "Vitamin D3 Showcase",
+      "layoutType": "product_showcase_video",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Dritter Showcase mit flüssigem Vitamin-D3-Produkt. Differenziert über die Darreichungsform (Tropfen) und den Langzeitvorrat. Rundet die Sortiments-Tour ab.",
+      "structuralPattern": "Produkt-Showcase-Row mit Video",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "natural elements Vitamin D3 Tropfen",
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": "natural elements Vitamin D3 Tropfen",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "product",
+          "visualContent": "Bild-Video-Karussell links, Feature-Beschreibung rechts. Produkt: 50ml-Tropfflasche Vitamin D3 mit Pipette, Produktbild plus Lifestyle-Shots.",
+          "elementProportions": {
+            "product": 45,
+            "text": 35,
+            "video": 15,
+            "cta_button": 5
+          },
+          "textOnImage": {
+            "visibleText": "Vitamin D3 Tropfen",
+            "textType": "headline_cta",
+            "origin": "baked_in",
+            "headline": "Vitamin D3 Tropfen",
+            "subline": null,
+            "cta": "Alle Details anzeigen · In den Einkaufswagen",
+            "directionCues": null
+          },
+          "ctaText": "Alle Details anzeigen · In den Einkaufswagen",
+          "linksTo": "PDP Vitamin D3 Tropfen",
+          "backgroundStyle": "white",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Weiß",
+            "Schwarz",
+            "Amazon-Gelb"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 6,
+        "domHeight": 629,
+        "domTop": 2543
+      }
+    },
+    {
+      "position": 7,
+      "moduleId": "vitamine_mod_07",
+      "moduleName": "Vitamine Produktgrid",
+      "layoutType": "product_grid_category",
+      "layoutShape": "grid_eight_plus",
+      "tileCount": 40,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Vollständiges Vitamin-Sortiment als Amazon-Standard-Produkt-Grid nach den Showcases.",
+      "structuralPattern": "Kategoriegrid mit 40 Vitamin-Produkten",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "ProductGrid",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 2862,
+        "domTop": 3172
+      }
+    },
+    {
+      "position": 8,
+      "moduleId": "vitamine_mod_08",
+      "moduleName": "Section Intro",
+      "layoutType": "editorial_section_intro",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "section_intro",
+      "designIntentDetail": "Vier übereinander gestapelte schmale Banner. Die ersten drei sind die Sub-Kategorie-Navigationsbanner (siehe Immunsystem Hub), der vierte ist das natural-elements best of swiss people Markenbild-Banner.",
+      "structuralPattern": "Schmaler Section-Header",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "section_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "Sehr schmaler Navigations-Banner in Label-Stil, vermutlich Divider oder Kopfzeile zur Sub-Kategorie-Gruppe.",
+          "elementProportions": {
+            "solid_background": 70,
+            "text": 30
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "neutral",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Weiß",
+            "Grau"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 159,
+        "domTop": 6034
+      }
+    },
+    {
+      "position": 9,
+      "moduleId": "vitamine_mod_09",
+      "moduleName": "Sub-Kategorie Slot 1",
+      "layoutType": "subcategory_tile",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": "Wiederholt den 'Lass dich hier beraten' Teaser aus der Hub-Kategorie. Sorgt für konsistente Cross-Sell-Brücke zum Berater auf jeder Sub-Seite.",
+      "structuralPattern": "Sub-Kategorie-Streifen",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "category_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "Helle Bannerfläche mit zentraler Headline und sichtbarem Button 'Lass dich hier beraten'.",
+          "elementProportions": {
+            "text": 55,
+            "solid_background": 30,
+            "cta_button": 15
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": "Lass dich hier beraten",
+            "directionCues": null
+          },
+          "ctaText": "Lass dich hier beraten",
+          "linksTo": "sub",
+          "backgroundStyle": "light_neutral",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Hellgrau",
+            "Weiß",
+            "Schwarz"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 207,
+        "domTop": 6193
+      }
+    },
+    {
+      "position": 10,
+      "moduleId": "vitamine_mod_10",
+      "moduleName": "Sub-Kategorie Slot 2",
+      "layoutType": "subcategory_tile",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": "Amazon-Standard-Footer.",
+      "structuralPattern": "Sub-Kategorie-Streifen",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "category_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "'Teilen' mit Beschreibungstext 'Teilen Sie diese Seite mit Ihren Freunden.'",
+          "elementProportions": {
+            "solid_background": 75,
+            "text": 20,
+            "icons": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": "Teilen",
+            "directionCues": null
+          },
+          "ctaText": "Teilen",
+          "linksTo": "sub",
+          "backgroundStyle": "white",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Weiß",
+            "Grau"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 207,
+        "domTop": 6400
+      }
+    },
+    {
+      "position": 11,
+      "moduleId": "vitamine_mod_11",
+      "moduleName": "Sub-Kategorie Slot 3",
+      "layoutType": "subcategory_tile",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": null,
+      "structuralPattern": "Sub-Kategorie-Streifen",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "category_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "sub",
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 188,
+        "domTop": 6607
+      }
+    },
+    {
+      "position": 12,
+      "moduleId": "vitamine_mod_12",
+      "moduleName": "Editorial Banner Schluss",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": null,
+      "structuralPattern": "Full-width Editorial-Banner",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 303,
+        "domTop": 6795
+      }
+    },
+    {
+      "position": 13,
+      "moduleId": "vitamine_mod_13",
+      "moduleName": "Amazon Share Footer",
+      "layoutType": "amazon_share_footer",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": null,
+      "structuralPattern": "Amazon-eigener Teilen-Footer",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Teilen",
+        "textType": "none",
+        "origin": "amazon_chrome",
+        "headline": "Teilen",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 200,
+        "domTop": 7098
+      }
+    }
+  ],
+  "pageAnalysis": {
+    "dominantPalette": [
+      "Weiß",
+      "Schwarz",
+      "Olivbeige",
+      "Warm-beige",
+      "Gelb"
+    ],
+    "tonalitätVisual": "Ruhiger, inhaltsorientierter Aufbau. Lifestyle-Hero mit warmem Porträt, einleitender Wissens-Banner, dann drei detaillierte Produkt-Showcases. Weniger Farb-Spielerei als die Hub-Kategorie, mehr Tiefe pro Produkt.",
+    "CTA_strategien": "Drei Produkt-Showcase-CTAs ('Alle Details anzeigen' und 'In den Einkaufswagen') plus Sub-Kategorie-Navigationsbanner plus Produktberater-Button.",
+    "inhaltlicheTiefe": "Mittel bis hoch: emotionaler Hero, didaktischer Einleitungstext, detaillierte Produkt-Showcases mit Video, Produkt-Grid, Cross-Sell-Navigation, Beratungs-Teaser.",
+    "useForArchetype": "Template für alle 7-Bilder-Sub-Kategorie-Seiten: Mineralien, Pflanzenstoffe, Haut, Haare, Nägel, Kosmetik, Innere Ruhe, Ruhiger Schlaf, Nerven und Energie, Verdauung, Beweglichkeit, Knochen, Pre Workout, Workout, Regeneration, Daily Fitness, Gewichtsmanagement, Körperbewusstsein. Typisch: 1 Hero, 1 Intro-Text, 3 Produkt-Showcases, 1 Grid, 3-4 Navigations-Banner, 1 Berater-Teaser, 1 Share-Footer."
+  },
+  "openQuestions": [
+    "Modul 8 Tile 1: Kopfzeile oder Divider, genaue Funktion offen. Vermutlich Abschnittstrenner 'Weitere Kategorien'.",
+    "Modul 8 Tile 4 'best of the swiss people': Aria-Label unsicher, tatsächlicher Bildinhalt noch zu verifizieren. Möglich: Tourismus-/Landschafts-Foto oder markentypisches Brand-Sign.",
+    "vitamine_mod_11 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "vitamine_mod_11 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "vitamine_mod_12 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "vitamine_mod_12 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig"
+  ]
+}

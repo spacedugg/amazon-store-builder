@@ -1,0 +1,1000 @@
+{
+  "pageUrl": "https://www.amazon.de/stores/page/3955CCD4-902C-4679-9265-DEC4FCBAA8C8",
+  "pageName": "Startseite",
+  "pageId": "3955CCD4-902C-4679-9265-DEC4FCBAA8C8",
+  "pageLevel": 0,
+  "pageType": "startseite",
+  "scrollHeight": 7879,
+  "contentStats": {
+    "domModules": 13,
+    "logicalModules": 13,
+    "totalImages": 20,
+    "totalVideos": 8
+  },
+  "heroBanner": {
+    "description": "Split-Layout: linke Haelfte salbei-gruen mit Serifen-Claim in weiss 'Nahrungsergaenzung neu gedacht:', rechts Lifestyle-Foto einer Person mit Fahrrad. Viertaktiges Video im Hintergrund.",
+    "textOnImage": {
+      "visibleText": "Nahrungsergaenzung neu gedacht:",
+      "textType": "headline",
+      "origin": "layered_text"
+    },
+    "estimatedDimensions": "3000x1500"
+  },
+  "modules": [
+    {
+      "position": 1,
+      "moduleId": "startseite_mod_01",
+      "moduleName": "Amazon Nav Header",
+      "layoutType": "amazon_nav_header",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": "Logozentrierter Hero statt Lifestyle-Inszenierung. Etabliert die Marke sofort als reduziert, sachlich, vertrauenswürdig im Gegensatz zu lauten Supplement-Konkurrenten.",
+      "structuralPattern": "Amazon-eigener Navheader, nicht gestaltbar",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": null,
+        "visibleHeadings": [],
+        "ctaLabels": [
+          "natural elements",
+          "Folgen",
+          "Startseite",
+          "unsere Neuheiten",
+          "Zurück",
+          "Make it full size",
+          "Alle Produkte",
+          "Omega 3",
+          "Magnesium",
+          "Multivitamin",
+          "Probiotika",
+          "Melatonin",
+          "Immunsystem",
+          "Vitamine",
+          "Mineralien"
+        ],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/8c333250-61c8-44e6-a81e-d1fc70799cc2._CR0%2C0%2C3000%2C600_SX150"
+        ],
+        "videoCount": 0,
+        "domHeight": 300,
+        "domTop": 99
+      }
+    },
+    {
+      "position": 2,
+      "moduleId": "startseite_mod_02",
+      "moduleName": "Hero Neuheiten OH YEAH",
+      "layoutType": "hero_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "emotional_hook",
+      "designIntentDetail": "Typografischer, produktzentrierter Hero mit schwungvollem Handschrift-Treatment auf \"OH YEAH!\" und schwarzem NEU-Badge als Neuheiten-Anker. Statische Produktbuehne statt Lifestyle-Video, klare Verkaufsabsicht.",
+      "structuralPattern": "Full-width Hero, links Typografie und Textpfeil-CTA, rechts Produktstillleben mit drei Flaschen, rechts oben Kreis-Badge NEU.",
+      "backgroundStyle": "solid_color",
+      "backgroundDetail": "Off-White mit dezenter zartrosa Atmosphaere, weicher Schatten unter den Produkten.",
+      "textOnImage": {
+        "visibleText": "Neue Produkte? OH YEAH!",
+        "textType": "headline_cta",
+        "origin": "baked_in",
+        "headline": "Neue Produkte?",
+        "subline": "OH YEAH!",
+        "cta": "NEUHEITEN ENTDECKEN",
+        "directionCues": "Pfeil nach rechts vor der CTA"
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product",
+          "visualContent": "Drei schwarze natural elements Gebinde stehen nebeneinander auf off-weissem Untergrund: links eine kompaktere Supplement-Dose, in der Mitte eine Tropfer-Braunglasflasche, rechts eine groessere Supplement-Dose. Alle mit weissem natural elements Wortbildmarken-Label. Oben rechts dunkles Kreis-Badge mit weisser Schrift \"NEU\". Links oben in grosser schwarzer Sans-Serif \"Neue Produkte?\", direkt darunter in einer pinken Handschrift-Type \"OH YEAH!\". Unter der Headline schwarzer Textpfeil mit Versalien-CTA \"NEUHEITEN ENTDECKEN\".",
+          "elementProportions": {
+            "product_photo": 55,
+            "solid_background": 25,
+            "text": 12,
+            "badge": 5,
+            "cta_button": 3
+          },
+          "textOnImage": {
+            "visibleText": "Neue Produkte? OH YEAH! NEUHEITEN ENTDECKEN NEU",
+            "textType": "headline_cta",
+            "origin": "baked_in",
+            "headline": "Neue Produkte?",
+            "subline": "OH YEAH!",
+            "cta": "NEUHEITEN ENTDECKEN",
+            "directionCues": "Pfeil nach rechts vor CTA, Kreis-Badge NEU oben rechts"
+          },
+          "ctaText": "NEUHEITEN ENTDECKEN",
+          "linksTo": "Seite unsere Neuheiten",
+          "backgroundStyle": "solid_color",
+          "backgroundDetail": "Off-White mit Zartrosa-Stich",
+          "dominantColors": [
+            "Off-White",
+            "Schwarz",
+            "Zartrosa"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [
+          "Kapitel"
+        ],
+        "ctaLabels": [
+          "Play Video",
+          "Play",
+          "Unmute",
+          "Seek to live, currently behind liveLIVE",
+          "Playback Rate",
+          "Chapters",
+          "Descriptions",
+          "Subtitles",
+          "Audio Track",
+          "Picture-in-Picture",
+          "Fullscreen",
+          "Reset restore all settings to the default values",
+          "Done",
+          "Close Modal Dialog"
+        ],
+        "imageUrls": [],
+        "videoCount": 4,
+        "domHeight": 167,
+        "domTop": 399
+      }
+    },
+    {
+      "position": 3,
+      "moduleId": "startseite_mod_03",
+      "moduleName": "Banner Kategorie 1",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": "Autoplay-Video auf salbeigrünem Hintergrund als emotionaler Einstieg. Text-Overlay etabliert den inhaltlichen Fokus auf den Körper und die Wirkung der Produkte.",
+      "structuralPattern": "Full-width Text-auf-Bild-Banner, Kategorie-Einstieg",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "Horizontales Autoplay-Video mit salbeigrünem Hintergrund. Zentriert in der oberen Hälfte Text in heller Farbe: 'Und dein Körper so.' Sehr schlanke Banner-Anmutung, Aufmerksamkeit liegt auf der rhetorischen Frage.",
+          "elementProportions": {
+            "solid_background": 65,
+            "text": 30,
+            "graphic_elements": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "brand_color",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Salbeigrün",
+            "Weiß"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/03897e1f-bcf8-4847-bc5d-088e361cf281._CR0%2C0%2C3000%2C750_SX150"
+        ],
+        "videoCount": 0,
+        "domHeight": 258,
+        "domTop": 566
+      }
+    },
+    {
+      "position": 4,
+      "moduleId": "startseite_mod_04",
+      "moduleName": "Banner Kategorie 2",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": "Shoppable Image mit Hotspots auf konkreten Bestseller-Produkten. Nutzer sieht ein kuratiertes Produkt-Stillleben und kann per Hover die einzelnen Produkte anklicken.",
+      "structuralPattern": "Full-width Text-auf-Bild-Banner, Kategorie-Einstieg",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "Shoppable Image auf salbeigrünem Hintergrund. Vier schwarze Supplement-Dosen und eine Tropfen-Flasche stehen wie ein Stillleben nebeneinander, alle mit weißem natural elements Label. Links im hellgrauen Nebenbereich das Wort 'Bestseller' in sehr großer schwarzer Typografie. Unten links erscheint der Hover-CTA 'Produkte ansehen'. Bei Hover werden Hotspot-Punkte auf jedem Produkt sichtbar, die zur Produktdetailseite führen.",
+          "elementProportions": {
+            "product_photo": 55,
+            "solid_background": 25,
+            "text": 15,
+            "cta_button": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": "Produkte ansehen",
+            "directionCues": null
+          },
+          "ctaText": "Produkte ansehen",
+          "linksTo": "Bestseller Produktdetailseiten (Hotspots je Produkt)",
+          "backgroundStyle": "brand_color",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Salbeigrün",
+            "Schwarz",
+            "Hellgrau"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/7de67c4a-1f33-4617-8475-e4e72e412a26._CR0%2C0%2C3000%2C750_SX150"
+        ],
+        "videoCount": 0,
+        "domHeight": 258,
+        "domTop": 823
+      }
+    },
+    {
+      "position": 5,
+      "moduleId": "startseite_mod_05",
+      "moduleName": "Bestseller Shoppable",
+      "layoutType": "shoppable_interactive_image",
+      "layoutShape": "interactive_hotspot",
+      "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Salbeigruenes Produktstillleben als kuratierte Bestseller-Buehne mit Hotspot-Shoppability. Links Typografie-Halbspalte in Hellgrau.",
+      "structuralPattern": "Split aus linkem hellgrauen Textpanel (Headline plus CTA Produkte ansehen) und rechter salbei-gruener Produktflaeche mit Botanik-Layern.",
+      "backgroundStyle": "split_color_photo",
+      "backgroundDetail": "Links Hellgrau-Panel mit \"Bestseller direkt hier shoppen.\" und schwarzem CTA, rechts salbeigruene Flaeche mit botanischem Blattwerk hinter den Flaschen.",
+      "textOnImage": {
+        "visibleText": "Bestseller direkt hier shoppen. Produkte ansehen",
+        "textType": "headline_cta",
+        "origin": "layered_text",
+        "headline": "Bestseller direkt hier shoppen.",
+        "subline": null,
+        "cta": "Produkte ansehen",
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product",
+          "visualContent": "Shoppable-Stillleben auf zweigeteiltem Hintergrund. Linke Drittelseite hellgrau, rechts salbeigruene Flaeche mit Botanik-Blaettern im Hintergrund. Vier natural elements Produkte reihen sich auf: Vitamin D3 K2 Tabletten (Dose), Vitamin D3 K2 Tropfen (kleine Tropferflasche), Omega 3 aus Fischoel (grosse Dose in der Mitte), Curcuma Extrakt (Dose rechts). Links die Headline in grosser schwarzer Sans-Serif \"Bestseller direkt hier shoppen.\", darunter schwarzer Pill-Button mit \"Produkte ansehen\". Hotspots erscheinen bei Hover auf den Produkten.",
+          "elementProportions": {
+            "product_photo": 45,
+            "solid_background": 25,
+            "photographic_background": 15,
+            "text": 10,
+            "cta_button": 5
+          },
+          "textOnImage": {
+            "visibleText": "Bestseller direkt hier shoppen. Produkte ansehen",
+            "textType": "headline_cta",
+            "origin": "layered_text",
+            "headline": "Bestseller direkt hier shoppen.",
+            "subline": null,
+            "cta": "Produkte ansehen",
+            "directionCues": null
+          },
+          "ctaText": "Produkte ansehen",
+          "linksTo": "Bestseller Produktdetailseiten ueber Hotspots je Produkt",
+          "backgroundStyle": "split_color_photo",
+          "backgroundDetail": "Links Hellgrau, rechts Salbeigruen mit Botanik",
+          "dominantColors": [
+            "Salbeigruen",
+            "Schwarz",
+            "Hellgrau",
+            "Weiss"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [
+          "Produkte ansehen"
+        ],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/6930ae49-4290-4789-a22e-548cc2a4da19._CR0%2C0%2C3000%2C1500_.jpg"
+        ],
+        "videoCount": 0,
+        "domHeight": 493,
+        "domTop": 1081
+      }
+    },
+    {
+      "position": 6,
+      "moduleId": "startseite_mod_06",
+      "moduleName": "Hero Video 2",
+      "layoutType": "hero_video",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "emotional_hook",
+      "designIntentDetail": "Großflächiger Beratungseinstieg kombiniert mit einem interaktiven Quiz-Widget, das Conversion auf die richtige Produktkategorie optimiert. Reduziert Entscheidungsstress beim Erstbesucher.",
+      "structuralPattern": "Full-width Hero-Video",
+      "backgroundStyle": "video_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "lifestyle",
+          "visualContent": "Linke große Bildfläche auf cremefarbenem Hintergrund. Große schwarze Headline 'Du suchst das passende Produkt für dich?' darunter ein abgerundeter schwarzer Button mit weißer Schrift 'LASS DICH HIER BERATEN'.",
+          "elementProportions": {
+            "text": 55,
+            "solid_background": 40,
+            "cta_button": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": "LASS DICH HIER BERATEN",
+            "directionCues": null
+          },
+          "ctaText": "LASS DICH HIER BERATEN",
+          "linksTo": "Produktfinder/Quiz Unterseite",
+          "backgroundStyle": "pastel",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Cremerosa",
+            "Schwarz",
+            "Weiß"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [
+          "Kapitel"
+        ],
+        "ctaLabels": [
+          "Video abspielen",
+          "Wiedergabe",
+          "Ton ein",
+          "Zur Live-Übertragung wechseln. Aktuell wird es nicht live abgespielt.LIVE",
+          "Wiedergabegeschwindigkeit",
+          "Kapitel",
+          "Beschreibungen",
+          "Untertitel",
+          "Tonspur",
+          "Bild-im-Bild-Modus",
+          "Vollbild",
+          "Zurücksetzen Alle Einstellungen auf die Standardwerte zurücksetzen",
+          "Fertig",
+          "Modales Fenster schließen"
+        ],
+        "imageUrls": [],
+        "videoCount": 4,
+        "domHeight": 167,
+        "domTop": 1573
+      }
+    },
+    {
+      "position": 7,
+      "moduleId": "startseite_mod_07",
+      "moduleName": "Section Intro 1",
+      "layoutType": "editorial_section_intro",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "section_intro",
+      "designIntentDetail": "Zweites Autoplay-Video. Knüpft an die Grünton-Palette von Modul 3 und Modul 4 an, verdichtet die Markenwelt und bereitet die nachfolgenden botanischen Produkt-Szenen vor.",
+      "structuralPattern": "Schmaler Text-auf-Bild-Streifen als Section-Header",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "section_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "Autoplay-Video auf salbeigrünem Hintergrund, auf dem vage schwarze Produkt-Tiegel angedeutet sind. Unten links der schwarze CTA-Button 'Produkte ansehen' im Shoppable-Layout.",
+          "elementProportions": {
+            "solid_background": 60,
+            "product_photo": 30,
+            "cta_button": 10
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": "Produkte ansehen",
+            "directionCues": null
+          },
+          "ctaText": "Produkte ansehen",
+          "linksTo": "Produktübersicht",
+          "backgroundStyle": "brand_color",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Salbeigrün",
+            "Schwarz"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/4578b672-c600-4401-accc-007c3c873342._CR0%2C0%2C3000%2C400_SX150"
+        ],
+        "videoCount": 0,
+        "domHeight": 144,
+        "domTop": 1740
+      }
+    },
+    {
+      "position": 8,
+      "moduleId": "startseite_mod_08",
+      "moduleName": "Section Intro 2",
+      "layoutType": "editorial_section_intro",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "section_intro",
+      "designIntentDetail": "Shoppable Image mit botanischem Fokus. Produkte werden nicht als harte Dosen inszeniert, sondern in weiche Blattwerk-Szenerie eingebettet, um das Natur-Versprechen der Marke visuell zu untermauern.",
+      "structuralPattern": "Schmaler Text-auf-Bild-Streifen als Section-Header",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "section_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "Shoppable Image auf hellgrünem Hintergrund. Mehrere niedrige, schwarze Kosmetik- beziehungsweise Kapseltiegel mit weißen Labels, Deckel mit Blattwerk-Illustrationen umrankt. Unten links der CTA 'Produkte ansehen', bei Hover werden Hotspots auf den einzelnen Tiegeln sichtbar.",
+          "elementProportions": {
+            "product_photo": 55,
+            "solid_background": 35,
+            "graphic_elements": 5,
+            "cta_button": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": "Produkte ansehen",
+            "directionCues": null
+          },
+          "ctaText": "Produkte ansehen",
+          "linksTo": "Produktdetailseiten per Hotspot",
+          "backgroundStyle": "brand_color",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Salbeigrün",
+            "Schwarz",
+            "Weiß",
+            "Laubgrün"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/ca50150c2fee47d4ff8ff2737"
+        ],
+        "videoCount": 0,
+        "domHeight": 128,
+        "domTop": 1884
+      }
+    },
+    {
+      "position": 9,
+      "moduleId": "startseite_mod_09",
+      "moduleName": "Shoppable Image Set Quad",
+      "layoutType": "shoppable_interactive_image_set",
+      "layoutShape": "grid_four",
+      "tileCount": 4,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Vertrauen auf den Punkt bringen. Produktbild links, drei USPs rechts mit klaren Symbolen. Erklärt ohne Umschweife, warum natural elements seriös ist, bevor der Sport- und Kategorien-Block beginnt.",
+      "structuralPattern": "Vier shoppable Kacheln nebeneinander",
+      "backgroundStyle": "shoppable_interactive_image",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "1",
+          "imageCategory": "creative",
+          "visualContent": "Große freigestellte weiße Produkt-Standtüte mit schwarzem Etikett. Auf dem Etikett das natural elements Logo und das Wort 'Collagen'. Tüte steht auf weißem Hintergrund, daneben und hinter der Tüte einzelne grüne Blattzweige im Aquarell-Stil.",
+          "elementProportions": {
+            "product_photo": 75,
+            "graphic_elements": 15,
+            "solid_background": 10
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "Produktdetailseite Collagen",
+          "backgroundStyle": "white",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Weiß",
+            "Schwarz",
+            "Laubgrün"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "2",
+          "imageCategory": "creative",
+          "visualContent": "USP-Tile oben rechts. Durchgestrichenes Kreissymbol (Ø) links, daneben große schwarze Headline 'Keine falschen Versprechen'. Impliziert Verzicht auf marketinglastige Scheinwahrheiten.",
+          "elementProportions": {
+            "text": 70,
+            "icons": 20,
+            "solid_background": 10
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "white",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Weiß",
+            "Schwarz"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "3",
+          "imageCategory": "creative",
+          "visualContent": "USP-Tile mittig rechts. Plus-Symbol links, daneben schwarze Headline 'Hochwertige Rohstoffe'. Betont die Rohstoffqualität als Markenversprechen.",
+          "elementProportions": {
+            "text": 70,
+            "icons": 20,
+            "solid_background": 10
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "white",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Weiß",
+            "Schwarz"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "4",
+          "imageCategory": "creative",
+          "visualContent": "USP-Tile unten rechts. Häkchen-Symbol (✓) links, daneben schwarze Headline 'Jede Charge laborgeprüft'. Zertifizierungs- beziehungsweise Qualitätssicherungs-Claim.",
+          "elementProportions": {
+            "text": 70,
+            "icons": 20,
+            "solid_background": 10
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "white",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Weiß",
+            "Schwarz"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/9ecba1d6-121f-44a4-9ad1-ff50fba5770d._CR0%2C0%2C1500%2C750_SX750",
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/0e4bbbc6-7f76-489a-9659-dccd057347be._CR0%2C0%2C1500%2C750_SX750",
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/b3a3c4bb-e75b-4068-8805-c81042c26729._CR0%2C0%2C1500%2C750_SX750",
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/a3a1d44e-f766-4f03-a7f4-f01de972f856._CR0%2C0%2C1500%2C750_SX750"
+        ],
+        "videoCount": 0,
+        "domHeight": 493,
+        "domTop": 2012
+      }
+    },
+    {
+      "position": 10,
+      "moduleId": "startseite_mod_10",
+      "moduleName": "Tile Pair 1",
+      "layoutType": "editorial_tile_pair",
+      "layoutShape": "split_two",
+      "tileCount": 2,
+      "designIntent": "editorial",
+      "designIntentDetail": "Kontrastiert das cremefarbene Trust-Modul mit einer komplett schwarzen Kampagnenfläche in Neonfarbe. Positioniert die SPORTS SERIES als eigenständige Sub-Brand und rechtfertigt einen Extra-CTA.",
+      "structuralPattern": "Zwei gleiche Kacheln nebeneinander",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "links",
+          "imageCategory": "creative",
+          "visualContent": "Komplett schwarzer Banner. Links Headline in Weiß und Neon-Gelb: 'Entdecke unsere neue' (weiß) gefolgt von 'SPORTS SERIES.' (neongelb, fett, italic). Darunter 'Für deinen Erfolg auf ganzer Linie.' in Weiß. Rechts ein abgerundeter neongelber CTA-Button mit schwarzer Aufschrift 'MEHR ERFAHREN'.",
+          "elementProportions": {
+            "solid_background": 60,
+            "text": 30,
+            "cta_button": 10
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": "MEHR ERFAHREN",
+            "directionCues": null
+          },
+          "ctaText": "MEHR ERFAHREN",
+          "linksTo": "Sports Series Unterseite",
+          "backgroundStyle": "dark",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Schwarz",
+            "Neongelb",
+            "Weiß"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "rechts",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/43095318-8bde-4c1a-b4c6-8d4f6597ef8f._CR0%2C0%2C1500%2C750_SX750",
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/4ce4bec9-25ce-41a7-8549-14da2f9603ba._CR0%2C0%2C1500%2C750_SX750"
+        ],
+        "videoCount": 0,
+        "domHeight": 246,
+        "domTop": 2504
+      }
+    },
+    {
+      "position": 11,
+      "moduleId": "startseite_mod_11",
+      "moduleName": "Tile Pair 2",
+      "layoutType": "editorial_tile_pair",
+      "layoutShape": "split_two",
+      "tileCount": 2,
+      "designIntent": "editorial",
+      "designIntentDetail": "Einstieg in die Kategorien-Hub-Logik. Jede Kategorie wird durch ein Lifestyle-Foto plus eine farbige Label-Fläche mit Icon und Kategorietitel dargestellt. Ergibt ein sehr rhythmisches Paar-Layout.",
+      "structuralPattern": "Zwei gleiche Kacheln nebeneinander",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "links",
+          "imageCategory": "creative",
+          "visualContent": "Lifestyle-Foto: Junger Mann im orangefarbenen Hoodie vor einem Treppenhaus mit grünen Notausgangs-Piktogrammen, Bewegungs- beziehungsweise Trainingssetting. Kein Text.",
+          "elementProportions": {
+            "lifestyle_photo": 95,
+            "solid_background": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "Kategorie Sport & Energie",
+          "backgroundStyle": "lifestyle_photo",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Orange",
+            "Betongrau",
+            "Signalgrün"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "rechts",
+          "imageCategory": "creative",
+          "visualContent": "Pastellgrüne Label-Fläche. Zentrales schlichtes schwarzes Icon, das einen Pfeil beziehungsweise ein Diagramm andeutet, darunter schwarze Headline 'Sport & Energie'.",
+          "elementProportions": {
+            "solid_background": 60,
+            "icons": 20,
+            "text": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "Kategorie Sport & Energie",
+          "backgroundStyle": "pastel",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Salbeigrün",
+            "Schwarz"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/8f18f5ba-cd70-426b-9e8c-e0112f327267._CR0%2C0%2C1500%2C750_SX750",
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/269e8d52-ed23-4b9e-a399-de6408ef9d1e._CR0%2C0%2C1500%2C750_SX750"
+        ],
+        "videoCount": 0,
+        "domHeight": 246,
+        "domTop": 2751
+      }
+    },
+    {
+      "position": 12,
+      "moduleId": "startseite_mod_12",
+      "moduleName": "Featured Product Grid",
+      "layoutType": "product_grid_featured",
+      "layoutShape": "grid_eight_plus",
+      "tileCount": 50,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Zweite Reihe nach identischem Prinzip. Deckt Beauty, Knochen, Anti Stress, Gaming und weitere Lifestyle-Kategorien ab. Zusammen mit Teil 1 entsteht ein rhythmisches, visuell reiches Kategorie-Hub.",
+      "structuralPattern": "Grosses Produktgrid (50) mit Marken-Produkten",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "natural elements Omega 3",
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": "natural elements Omega 3",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "ProductGrid__gridContainer__bRK6J",
+        "visibleHeadings": [
+          "natural elements Omega 3, 365 Kapseln, 2000mg Fischoel pro Tagesdosis: 360 mg EPA und 240 mg DHA, Laborgeprueft, aufwendig aufgereinigt und aus nachhaltigem Fischfang",
+          "natural elements Magnesium Komplex Premium: Aus 5 hochwertigen Verbindungen, 400mg elementares Magnesium pro Tagesdosis, Laborgeprueft, vegan, hochdosiert",
+          "natural elements Mariendistel Artischocke Loewenzahn Komplex, 120 Kapseln, Hochdosiert mit 80 Prozent Silymarin, Ohne Magnesiumstearat, vegan und produziert in Deutschland"
+        ],
+        "ctaLabels": [
+          "Schnellansicht",
+          "4,6 von 5 Sternen",
+          "(16.783)",
+          "29,99 Euro",
+          "In den Einkaufswagen",
+          "4,7 von 5 Sternen",
+          "(10.016)",
+          "22,99 Euro",
+          "4,5 von 5 Sternen",
+          "(22.936)",
+          "(21.690)",
+          "24,99 Euro",
+          "(9325)",
+          "23,99 Euro",
+          "(10.800)"
+        ],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/I/71vDZbjpHJL._AC_UL320_.jpg",
+          "https://m.media-amazon.com/images/I/717DQ9oZ0oL._AC_UL320_.jpg",
+          "https://m.media-amazon.com/images/I/71rKyuD+sTL._AC_UL320_.jpg",
+          "https://m.media-amazon.com/images/I/7171e1JhCWL._AC_UL320_.jpg",
+          "https://m.media-amazon.com/images/I/71e-wJeE4FL._AC_UL320_.jpg",
+          "https://m.media-amazon.com/images/I/710iv5L++CL._AC_UL320_.jpg"
+        ],
+        "videoCount": 0,
+        "domHeight": 3460,
+        "domTop": 2997
+      }
+    },
+    {
+      "position": 13,
+      "moduleId": "startseite_mod_13",
+      "moduleName": "Amazon Share Footer",
+      "layoutType": "amazon_share_footer",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": "Abschließendes ASIN-Grid ohne weitere editorielle Zutaten. Nach der emotionalen und kategorialen Vorarbeit sind die Produkte jetzt selbsterklärend. Amazon rendert Titel und Preis automatisch, weshalb hier keine Overlay-Texte gesetzt sind.",
+      "structuralPattern": "Amazon-eigener Teilen-Footer",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Teilen, Teilen Sie diese Seite mit Ihren Freunden.",
+        "textType": "none",
+        "origin": "amazon_chrome",
+        "headline": "Teilen, Teilen Sie diese Seite mit Ihren Freunden.",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [
+          "Teilen"
+        ],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 200,
+        "domTop": 6457
+      }
+    }
+  ],
+  "pageAnalysis": {
+    "contentStrategy": "Die Startseite führt über eine minimalistische Markenaufladung (Hero, Navigation) in eine dichte Shoppable-Strecke, die abwechselnd Produkte, Claims und Beratung inszeniert. Sie schließt mit einem klassischen ASIN-Grid als reines Conversion-Instrument.",
+    "conversionPath": "Marken-Kontakt über Hero und Video, Einladung zum Beratungs-Quiz, laufende Shoppable-Flächen mit Hotspots, harte USPs im Trust-Modul, Kategorien-Hub als breiter Eingang ins Sortiment, abschließender ASIN-Grid für Sofortkäufer.",
+    "designTheme": "Minimalistisch, überwiegend Weiß und Salbeigrün mit punktuellen Akzenten in Neongelb, Altrosa und Salmonrosa. Typografie sachlich, bis auf die lauten Editorial-Flächen Neuheiten und Sports Series.",
+    "keyInsight": "Die Seite mischt stille Markenbühnen (Hero, Trust) mit lauten Kampagnen-Bannern (Neuheiten, Sports Series) und setzt Shoppable Images mit Hotspots als primäres Conversion-Element ein, bevor das klassische ASIN-Grid als Netz überhaupt greift."
+  },
+  "openQuestions": [
+    "startseite_mod_10 position=rechts: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "startseite_mod_10 position=rechts: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "Vision-Nachlauf 2026-04-21 eingearbeitet: Modul position=2 von hero_video_split (Gold) auf hero_banner 'Neue Produkte? OH YEAH!' geaendert. Modul position=5 bleibt shoppable_interactive_image, Vision bestaetigt salbeigruenen Split mit Vitamin D3 K2 Duo, Omega 3 und Curcuma Extrakt."
+  ]
+}

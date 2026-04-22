@@ -1,0 +1,1138 @@
+{
+  "pageUrl": "https://www.amazon.de/stores/page/1B2D6D85-21E1-4BBE-AD98-EBDE6CFEA02F",
+  "pageName": "Immunsystem",
+  "pageId": "1B2D6D85-21E1-4BBE-AD98-EBDE6CFEA02F",
+  "pageLevel": 1,
+  "pageType": "hub_category",
+  "scrollHeight": 9705,
+  "contentStats": {
+    "domModules": 16,
+    "logicalModules": 16,
+    "totalImages": 24,
+    "totalVideos": 0
+  },
+  "heroBanner": {
+    "description": "Hero-Banner Immunsystem-Kategorie",
+    "textOnImage": {
+      "visibleText": "Immunsystem",
+      "textType": "category_headline",
+      "origin": "baked_in"
+    },
+    "estimatedDimensions": "3000x1500"
+  },
+  "modules": [
+    {
+      "position": 1,
+      "moduleId": "immunsystem_mod_01",
+      "moduleName": "Amazon Nav Header",
+      "layoutType": "amazon_nav_header",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": "Wiedererkennbarer Logo-Hero, kombiniert mit Breadcrumb 'natural elements > Immunsystem'. Die Navigation liegt direkt darunter, Kategorie 'IMMUNSYSTEM' ist unterstrichen aktiv. Der Nutzer weiß sofort, in welchem Kontext er sich befindet.",
+      "structuralPattern": "Amazon-eigener Navheader",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": null,
+        "visibleHeadings": [],
+        "ctaLabels": [
+          "natural elements",
+          "Immunsystem",
+          "Folgen",
+          "Startseite",
+          "unsere Neuheiten",
+          "Zurück",
+          "Make it full size",
+          "Alle Produkte",
+          "Omega 3",
+          "Magnesium",
+          "Multivitamin",
+          "Probiotika",
+          "Melatonin",
+          "Vitamine",
+          "Mineralien"
+        ],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/8c333250-61c8-44e6-a81e-d1fc70799cc2._CR0%2C0%2C3000%2C600_SX150"
+        ],
+        "videoCount": 0,
+        "domHeight": 337,
+        "domTop": 99
+      }
+    },
+    {
+      "position": 2,
+      "moduleId": "immunsystem_mod_02",
+      "moduleName": "Kategorie Hero",
+      "layoutType": "hero_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "emotional_hook",
+      "designIntentDetail": "Emotionales Saison-Banner auf Snowboard-Action als thematischer Rahmen für die Immun-Story. Der gelbe Typo-Claim 'YEAH!' setzt einen optimistischen Kontrapunkt zum kalten Motiv und baut die Brücke zur Winter-Immun-Narrative.",
+      "structuralPattern": "Full-width Kategorie-Hero mit Text und Produkt",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Immunsystem",
+        "textType": "category_headline",
+        "origin": "baked_in",
+        "headline": "Immunsystem",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "Verschneite Berglandschaft in gedecktem Blau-Weiß-Grau. Rechts oben ein Snowboarder in der Luft, Silhouette schwarz-weiß. Zentral über der Szene eine gezeichnete gelb-fluoreszierende Klammer mit dem Wort 'YEAH!' in Handletter-Optik. Unten der Claim 'DER WINTER IST DA!' in großer, weißer, kondensierter Groteskschrift.",
+          "elementProportions": {
+            "hero_figure": 25,
+            "text": 25,
+            "landscape_background": 50
+          },
+          "textOnImage": {
+            "visibleText": "Immunsystem",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "Immunsystem",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photographic",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Hellblau",
+            "Weiß",
+            "Neongelb",
+            "Schwarz"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/0cd63235-bb2a-4754-997d-263aa0ecb2b2._CR0%2C0%2C3000%2C1500_SX15"
+        ],
+        "videoCount": 0,
+        "domHeight": 590,
+        "domTop": 436
+      }
+    },
+    {
+      "position": 3,
+      "moduleId": "immunsystem_mod_03",
+      "moduleName": "Shoppable Kategorie",
+      "layoutType": "shoppable_interactive_image",
+      "layoutShape": "interactive_hotspot",
+      "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Shoppable-Interactive-Image mit vier Produkten auf markentypischem Hellgelb. Nach dem Saison-Hook folgt direkt die Konversion. Der Hover-CTA 'Produkte ansehen' öffnet die Produktauswahl.",
+      "structuralPattern": "Shoppable Bild mit 30 Pins fuer Kategorieprodukte",
+      "backgroundStyle": "shoppable_interactive_image",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Produkte ansehen",
+        "textType": "cta",
+        "origin": "layered_text",
+        "headline": "Produkte ansehen",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "Vier schwarze Supplement-Tiegel mit weißem Etiketten-Band und 'natural elements' Logo, flankiert von aquarellierten grünen Blättern. Hellgelbes Hintergrund-Gefälle. Jeder Tiegel trägt kleine Badges: '180 Kapseln', '>99,7% all-Trans MK-7, 180 Tabletten', '360 Kapseln, Vegan', '365 Tabletten, Vegan'. Beim Hover erscheinen vier kreisförmige Hotspots mit 'view product'-Verknüpfung.",
+          "elementProportions": {
+            "product": 65,
+            "solid_background": 25,
+            "decorative_botanicals": 10
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": "Produkte ansehen",
+            "directionCues": null
+          },
+          "ctaText": "Produkte ansehen",
+          "linksTo": "shoppable",
+          "backgroundStyle": "light_yellow_gradient",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Hellgelb",
+            "Schwarz",
+            "Weiß",
+            "Laubgrün"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [
+          "Produkte ansehen"
+        ],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/778097bd-fcb3-448f-8f35-6ef1ae988a7b._CR0%2C0%2C3000%2C1500_.jpg"
+        ],
+        "videoCount": 0,
+        "domHeight": 583,
+        "domTop": 1026
+      }
+    },
+    {
+      "position": 4,
+      "moduleId": "immunsystem_mod_04",
+      "moduleName": "Gelber Banner mit Produktschatten",
+      "layoutType": "editorial_banner_solid_color",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Drei-Icon-USP-Leiste auf demselben Hellgelb wie das Shoppable. Schafft visuelle Kontinuität und verankert die Immun-Story in drei einfachen Gründen, warum die Kategorie jetzt relevant ist.",
+      "structuralPattern": "Full-width Banner mit Volltonfarbe Gelb und Produkt-Silhouetten",
+      "backgroundStyle": "solid_color",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "Hellgelbes Banner mit drei schwarzen Line-Icons nebeneinander: Schild-Symbol (Shield), Ahornblatt, Schneeflocke. Unter jedem Icon ein kurzer Claim in schwarzer Groteskschrift. Kein Produkt, keine Person, rein typografisch-ikonisch.",
+          "elementProportions": {
+            "solid_background": 55,
+            "icons": 20,
+            "text": 25
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "light_yellow_solid",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Hellgelb",
+            "Schwarz"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c88d0c5c-43bf-4c2a-80b3-f6ed278f67ab._CR0%2C0%2C3000%2C1400_SX15"
+        ],
+        "videoCount": 0,
+        "domHeight": 552,
+        "domTop": 1608
+      }
+    },
+    {
+      "position": 5,
+      "moduleId": "immunsystem_mod_05",
+      "moduleName": "Section Intro vor Produktgrid",
+      "layoutType": "editorial_section_intro",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "section_intro",
+      "designIntentDetail": "Sehr schmaler Bild-Trenner als grafische Pause und Farbübergang vom Gelb zur neutralen Produkt-Grid.",
+      "structuralPattern": "Schmaler Section-Header",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "section_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "Sehr flacher dekorativer Banner, gelb-beige Struktur, wirkt wie ein Farb-Fade. Kein Text, keine Produkte, reine optische Trennung.",
+          "elementProportions": {
+            "solid_background": 95,
+            "graphic_elements": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "yellow_beige_gradient",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Hellgelb",
+            "Beige"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/001dc712-5292-4872-8028-081e67e62ea6._CR0%2C0%2C3000%2C350_SX150"
+        ],
+        "videoCount": 0,
+        "domHeight": 149,
+        "domTop": 2160
+      }
+    },
+    {
+      "position": 6,
+      "moduleId": "immunsystem_mod_06",
+      "moduleName": "Immunsystem Produktgrid",
+      "layoutType": "product_grid_category",
+      "layoutShape": "grid_eight_plus",
+      "tileCount": 50,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Große, scrollbare Produkt-Grid mit Immun-Sortiment. Jede Kachel zeigt die Amazon-Standard-PDP-Karte mit Produktbild, Titel, Preis und Sterne-Rating. Kerngeschäft der Kategorie-Seite.",
+      "structuralPattern": "Grosses Kategoriegrid 50 Produkte",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Vitamin D3 + K2 Depot, Premium Multivitamin, Schwarzkuemmeloel, Zink 25mg, Vitamin C",
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": "Vitamin D3 + K2 Depot, Premium Multivitamin, Schwarzkuemmeloel, Zink 25mg, Vitamin C",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "ProductGrid__gridContainer__bRK6J",
+        "visibleHeadings": [
+          "natural elements Vitamin D3 + K2 Depot , 180 Tabletten",
+          "natural elements Vitamin D3 + K2 Tropfen 50ml",
+          "natural elements Premium Multivitamin , 180 hochdosierte Komplex-Kapseln",
+          "natural elements Schwarzkümmelöl (original Nigella sativa) , 400 Kapseln"
+        ],
+        "ctaLabels": [
+          "Schnellansicht",
+          "4,6 von 5 Sternen",
+          "(21.690)",
+          "24,99 €",
+          "In den Einkaufswagen",
+          "(21.104)",
+          "4,5 von 5 Sternen",
+          "(8944)",
+          "24,99 €",
+          "(6380)",
+          "26,99 €",
+          "4,7 von 5 Sternen",
+          "(14.252)",
+          "18,99 €",
+          "(4653)"
+        ],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/I/7171e1JhCWL._AC_UL320_.jpg",
+          "https://m.media-amazon.com/images/I/61AApKT2MxL._AC_UL320_.jpg",
+          "https://m.media-amazon.com/images/I/71Ym813NauL._AC_UL320_.jpg",
+          "https://m.media-amazon.com/images/I/71zshKsMBuL._AC_UL320_.jpg",
+          "https://m.media-amazon.com/images/I/710F8Cm4UpL._AC_UL320_.jpg",
+          "https://m.media-amazon.com/images/I/71Z4iQhNL3L._AC_UL320_.jpg"
+        ],
+        "videoCount": 0,
+        "domHeight": 3674,
+        "domTop": 2309
+      }
+    },
+    {
+      "position": 7,
+      "moduleId": "immunsystem_mod_07",
+      "moduleName": "Sub-Kategorie Slot 1",
+      "layoutType": "subcategory_tile",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": "Drei schmale Banner übereinander führen thematisch in die Sub-Kategorien der Immun-Hub ein: Vitamine, Mineralien, Pflanzenstoffe. Jede Zeile ist eine separate a-row, aber funktional ein logisches Navigations-Cluster.",
+      "structuralPattern": "Einzelne Sub-Kategorie als eigene Row",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "category_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "Nahaufnahme einer Hand, die eine frische gelbe Zitrone hält. Rechts das Label 'VITAMINE' in großer, weißer Typo. Natürlich-fotografisch, gedeckte Farben.",
+          "elementProportions": {
+            "hero_figure": 40,
+            "text": 30,
+            "photographic_background": 30
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "sub",
+          "backgroundStyle": "photographic",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Gelb",
+            "Hautfarbe",
+            "Weiß"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/7594e638-3655-47f9-8928-b818163731bb._CR0%2C0%2C3000%2C500_SX150"
+        ],
+        "videoCount": 0,
+        "domHeight": 207,
+        "domTop": 5983
+      }
+    },
+    {
+      "position": 8,
+      "moduleId": "immunsystem_mod_08",
+      "moduleName": "Sub-Kategorie Slot 2",
+      "layoutType": "subcategory_tile",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": "Service-Banner als Konversions-Hilfe. Adressiert Unsicherheit beim Immun-Kauf und lenkt zum Produktberater-Quiz.",
+      "structuralPattern": "Einzelne Sub-Kategorie als eigene Row",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "category_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "Helle Banner-Fläche mit zentraler Headline in schwarzer Groteskschrift und einem sichtbaren Button-Element 'Lass dich hier beraten'. Am Rand leichte botanische Akzente oder Produkt-Schemenhintergrund.",
+          "elementProportions": {
+            "text": 55,
+            "solid_background": 30,
+            "cta_button": 15
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": "Lass dich hier beraten",
+            "directionCues": null
+          },
+          "ctaText": "Lass dich hier beraten",
+          "linksTo": "sub",
+          "backgroundStyle": "light_neutral",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Hellgrau",
+            "Weiß",
+            "Schwarz"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/b48c4235-a19c-49bc-8ec4-f31795f9ed11._CR0%2C0%2C3000%2C500_SX150"
+        ],
+        "videoCount": 0,
+        "domHeight": 207,
+        "domTop": 6190
+      }
+    },
+    {
+      "position": 9,
+      "moduleId": "immunsystem_mod_09",
+      "moduleName": "Sub-Kategorie Slot 3",
+      "layoutType": "subcategory_tile",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": "Zweiter schmaler Bild-Trenner. Gibt der Seite Luft vor dem Schwenk zu anderen Kategorien des Stores.",
+      "structuralPattern": "Einzelne Sub-Kategorie als eigene Row",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "category_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "Schmaler dekorativer Banner ohne Text, überwiegend farbige Fläche als Scroll-Pause.",
+          "elementProportions": {
+            "solid_background": 100
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "sub",
+          "backgroundStyle": "neutral",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Beige",
+            "Weiß"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2a16e120-5cc3-46da-9888-662fbdee2759._CR0%2C0%2C3000%2C500_SX150"
+        ],
+        "videoCount": 0,
+        "domHeight": 207,
+        "domTop": 6396
+      }
+    },
+    {
+      "position": 10,
+      "moduleId": "immunsystem_mod_10",
+      "moduleName": "Section Intro Mittelfeld",
+      "layoutType": "editorial_section_intro",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "section_intro",
+      "designIntentDetail": "Cross-Kategorie-Navigation zu den großen Schwester-Hubs des Stores. Jede Kachel nutzt ein eigenes Farb-Signature und dieselbe Grundstruktur aus Farbfeld mit Icon und Typo neben einem Lifestyle-Foto.",
+      "structuralPattern": "Section-Header im Mittelfeld",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "section_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "Zweigeteiltes Tile: links salbeigrüne Farbfläche mit geometrischem Dreieck-Icon und Text 'Sport & Energie', rechts Sport-Action-Foto.",
+          "elementProportions": {
+            "solid_background": 45,
+            "photographic_background": 40,
+            "text": 10,
+            "icons": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "Sport & Energie Hub",
+          "backgroundStyle": "split_color_photo",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Salbeigrün",
+            "Schwarz",
+            "Fotoleicht"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/4bf93b64-af05-4168-bea5-21cb179f3caf._CR0%2C0%2C3000%2C750_SX150"
+        ],
+        "videoCount": 0,
+        "domHeight": 303,
+        "domTop": 6603
+      }
+    },
+    {
+      "position": 11,
+      "moduleId": "immunsystem_mod_11",
+      "moduleName": "Section Intro 2",
+      "layoutType": "editorial_section_intro",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "section_intro",
+      "designIntentDetail": "Zweite Reihe der Kategorien-Navigation. Gleiche Grundstruktur wie Teil 1, ergänzt mit Verdauung und Gaming.",
+      "structuralPattern": "Schmaler Section-Header",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "section_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "Zweigeteiltes Tile: pinkfarbene Farbfläche mit Schlangen-Icon und Text 'Verdauung & Gewicht', rechts Health-Lifestyle-Foto mit gestreifter Kleidung an Körpermitte.",
+          "elementProportions": {
+            "solid_background": 45,
+            "photographic_background": 40,
+            "text": 10,
+            "icons": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "Verdauung & Gewicht Hub",
+          "backgroundStyle": "split_color_photo",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Rosa",
+            "Schwarz",
+            "Hautton"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/1505494d-2b64-44ec-93d3-2c21b647be2a._CR0%2C0%2C3000%2C350_SX150"
+        ],
+        "videoCount": 0,
+        "domHeight": 149,
+        "domTop": 6906
+      }
+    },
+    {
+      "position": 12,
+      "moduleId": "immunsystem_mod_12",
+      "moduleName": "Shoppable Quad",
+      "layoutType": "shoppable_interactive_image_set",
+      "layoutShape": "grid_four",
+      "tileCount": 4,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Vermutlich redaktionelles Markenbild als Style-Akzent nach der Kategorie-Navigation. Genau zu verifizieren anhand Screenshot, das Aria-Label deutet auf ein schwarz-weißes Schild oder Signet hin.",
+      "structuralPattern": "Vier shoppable Kacheln nebeneinander",
+      "backgroundStyle": "shoppable_interactive_image",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "1",
+          "imageCategory": "creative",
+          "visualContent": "Schmales schwarz-weißes Editorial-Element, vermutlich Schild oder Signet-Grafik, reine Marken-Stimmungs-Brücke. Genaue Motivverifikation offen.",
+          "elementProportions": {
+            "photographic_background": 80,
+            "text": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "black_white",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Schwarz",
+            "Weiß"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "2",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "shoppable_interactive_image",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "3",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "shoppable_interactive_image",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "4",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "shoppable_interactive_image",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/9ecba1d6-121f-44a4-9ad1-ff50fba5770d._CR0%2C0%2C1500%2C750_SX750",
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/952381cc-94e9-43fa-a83c-73eedc2254ad._CR0%2C0%2C1500%2C750_SX750",
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/43095318-8bde-4c1a-b4c6-8d4f6597ef8f._CR0%2C0%2C1500%2C750_SX750",
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/a3a1d44e-f766-4f03-a7f4-f01de972f856._CR0%2C0%2C1500%2C750_SX750"
+        ],
+        "videoCount": 0,
+        "domHeight": 583,
+        "domTop": 7055
+      }
+    },
+    {
+      "position": 13,
+      "moduleId": "immunsystem_mod_13",
+      "moduleName": "Alle Produkte auf einen Blick",
+      "layoutType": "editorial_tile_pair",
+      "layoutShape": "split_two",
+      "tileCount": 2,
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": "Marken-Wortspiel-Claim als verbindendes Element. Setzt die YEAH-Signatur der Marke nochmal sprachlich ein und baut die Brücke zum globalen Store-Kontext.",
+      "structuralPattern": "Zwei Kacheln: Text-Teaser links, CTA Hier stoebern rechts",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Alle Produkte auf einen Blick, Hier stoebern",
+        "textType": "headline_cta",
+        "origin": "baked_in",
+        "headline": "Alle Produkte auf einen Blick, Hier stoebern",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "links",
+          "imageCategory": "text_image",
+          "visualContent": "Weißer Hintergrund, schwarzer Text in Groteskschrift. 'YEAH!' in neongelb als Inlay zwischen den Silben. Kein Bild, reiner Typo-Banner.",
+          "elementProportions": {
+            "solid_background": 55,
+            "text": 45
+          },
+          "textOnImage": {
+            "visibleText": "Alle Produkte auf einen Blick",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "Alle Produkte auf einen Blick",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "Vermutlich ÜBER UNS oder Startseite",
+          "backgroundStyle": "solid_white",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Weiß",
+            "Schwarz",
+            "Neongelb"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "rechts",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": "Hier stoebern",
+            "directionCues": null
+          },
+          "ctaText": "Hier stoebern",
+          "linksTo": "alle-produkte",
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/5b64a8be-a487-487e-a9c4-c4e7d0774772._CR0%2C0%2C1500%2C750_SX750",
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/00a4f848-f623-4390-8105-c8c96070dc8f._CR0%2C0%2C1500%2C750_SX750"
+        ],
+        "videoCount": 0,
+        "domHeight": 291,
+        "domTop": 7637
+      }
+    },
+    {
+      "position": 14,
+      "moduleId": "immunsystem_mod_14",
+      "moduleName": "Editorial Banner 1",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": "Amazon-Store-Standard-Footer für Seiten-Sharing. Kein redaktioneller Inhalt, systemseitig.",
+      "structuralPattern": "Full-width Editorial-Banner",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "Einfache Zeile 'Teilen' mit Beschreibungstext 'Teilen Sie diese Seite mit Ihren Freunden.' Systemgeneriert.",
+          "elementProportions": {
+            "solid_background": 75,
+            "text": 20,
+            "icons": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": "Teilen",
+            "directionCues": null
+          },
+          "ctaText": "Teilen",
+          "linksTo": "Share-Dialog",
+          "backgroundStyle": "white",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "Weiß",
+            "Grau"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/0f7c623a-d85e-4268-a486-54117ba0f2f1._CR0%2C0%2C3000%2C450_SX150"
+        ],
+        "videoCount": 0,
+        "domHeight": 188,
+        "domTop": 7929
+      }
+    },
+    {
+      "position": 15,
+      "moduleId": "immunsystem_mod_15",
+      "moduleName": "Editorial Banner 2",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": null,
+      "structuralPattern": "Full-width Editorial-Banner",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/432a0f66-d034-4b67-b9e9-ddc22d2a68f0._CR0%2C0%2C3000%2C400_SX150"
+        ],
+        "videoCount": 0,
+        "domHeight": 168,
+        "domTop": 8116
+      }
+    },
+    {
+      "position": 16,
+      "moduleId": "immunsystem_mod_16",
+      "moduleName": "Amazon Share Footer",
+      "layoutType": "amazon_share_footer",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": null,
+      "structuralPattern": "Amazon-eigener Teilen-Footer",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Teilen",
+        "textType": "none",
+        "origin": "amazon_chrome",
+        "headline": "Teilen",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow__row__W3W3h",
+        "visibleHeadings": [],
+        "ctaLabels": [
+          "Teilen"
+        ],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 199,
+        "domTop": 8284
+      }
+    }
+  ],
+  "pageAnalysis": {
+    "dominantPalette": [
+      "Hellgelb",
+      "Weiß",
+      "Schwarz",
+      "Neongelb",
+      "Salbeigrün",
+      "Apricot",
+      "Rosa",
+      "Lila",
+      "Himmelblau"
+    ],
+    "tonalitätVisual": "Mix aus Lifestyle-Foto, solid color blocks, typografischen Claim-Bannern und Produkt-Close-ups. Die Seite nutzt viele Farbwelten, weil sie kategorieübergreifend auf andere Hubs linkt. Markenkontinuität kommt über die YEAH-Typo und das natural-elements-Logo.",
+    "CTA_strategien": "Shoppable-Hover-CTA, Banner-Button 'Lass dich hier beraten', Sub-Kategorie-Banner ohne expliziten Button (klickbar über Bild).",
+    "inhaltlicheTiefe": "Hoch: Saison-Narrative (Winter), konkrete Immun-USPs, Sub-Kategorie-Navigation, Cross-Kategorie-Navigation, Markenclaim-Abschluss. Fehlend auf dieser Seite: Brand-Story, weil diese auf die ÜBER-UNS-Seite ausgelagert ist.",
+    "useForArchetype": "Template für Hub-Kategorie-Seiten. Andere Hubs (Sport & Energie, Beauty & Anti Aging, Wohlbefinden & Anti Stress, Knochen & Beweglichkeit, Verdauung & Gewicht, Gaming) folgen demselben Aufbau mit Saison-Hero, Shoppable, USP-Banner, Produkt-Grid, Sub-Kategorie-Leiste, Produktberater, Cross-Kategorie-Grid, YEAH-Claim, Teilen-Footer."
+  },
+  "openQuestions": [
+    "Modul 12 'best of' Editorial-Bild: genauer Text und Motiv unklar, Aria-Label 'the best of bern' ist vermutlich fehlgelesene Texterkennung. Visuelle Verifikation per Screenshot nötig.",
+    "Modul 9 Produktberater: Banner-Innenaufbau (Headline über dem Button) ist aus Aria-Label erschlossen, exaktes Layout (Produktsilhouetten links oder rechts?) noch zu verifizieren.",
+    "immunsystem_mod_12 position=2: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "immunsystem_mod_12 position=2: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "immunsystem_mod_12 position=3: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "immunsystem_mod_12 position=3: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "immunsystem_mod_12 position=4: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "immunsystem_mod_12 position=4: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "immunsystem_mod_13 position=rechts: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "immunsystem_mod_13 position=rechts: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "immunsystem_mod_15 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "immunsystem_mod_15 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig"
+  ]
+}

@@ -1,0 +1,710 @@
+{
+  "pageUrl": "https://www.amazon.de/stores/page/E3653495-9130-48DC-BFA4-F38BD9C7AEF1",
+  "pageName": "unsere Neuheiten",
+  "pageId": "E3653495-9130-48DC-BFA4-F38BD9C7AEF1",
+  "pageLevel": 1,
+  "pageType": "new_arrivals",
+  "scrollHeight": 7760,
+  "contentStats": {
+    "domModules": 10,
+    "logicalModules": 10,
+    "totalImages": 0,
+    "totalVideos": 6
+  },
+  "heroBanner": {
+    "description": "unsere Neuheiten Hero-Banner",
+    "textOnImage": {
+      "visibleText": "unsere Neuheiten",
+      "textType": "headline",
+      "origin": "baked_in"
+    },
+    "estimatedDimensions": "3000x1100"
+  },
+  "modules": [
+    {
+      "position": 1,
+      "moduleId": "neuheiten_mod_01",
+      "moduleName": "Amazon Nav Header",
+      "layoutType": "amazon_nav_header",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": null,
+      "structuralPattern": "Amazon-eigener Navheader",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": null,
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 338,
+        "domTop": 99
+      }
+    },
+    {
+      "position": 2,
+      "moduleId": "neuheiten_mod_02",
+      "moduleName": "Neuheiten Hero",
+      "layoutType": "hero_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "emotional_hook",
+      "designIntentDetail": null,
+      "structuralPattern": "Full-width Neuheiten-Hero",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "unsere Neuheiten",
+        "textType": "headline",
+        "origin": "baked_in",
+        "headline": "unsere Neuheiten",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": "unsere Neuheiten",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "unsere Neuheiten",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 399,
+        "domTop": 437
+      }
+    },
+    {
+      "position": 3,
+      "moduleId": "neuheiten_mod_03",
+      "moduleName": "Section Intro vor Showcase",
+      "layoutType": "editorial_section_intro",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "section_intro",
+      "designIntentDetail": null,
+      "structuralPattern": "Schmaler Section-Header",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "section_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "text": 70,
+            "solid_background": 25,
+            "graphic_elements": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 207,
+        "domTop": 836
+      }
+    },
+    {
+      "position": 4,
+      "moduleId": "neuheiten_mod_04",
+      "moduleName": "Magtein Showcase",
+      "layoutType": "product_showcase_video",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": null,
+      "structuralPattern": "Produkt-Showcase-Row mit Video fuer Magnesium L-Threonate (Magtein)",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Magnesium L-Threonate (Magtein)",
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": "Magnesium L-Threonate (Magtein)",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "product",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "product_photo": 70,
+            "solid_background": 20,
+            "text": 10
+          },
+          "textOnImage": {
+            "visibleText": "Magnesium L-Threonate",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "Magnesium L-Threonate",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 6,
+        "domHeight": 556,
+        "domTop": 1043
+      }
+    },
+    {
+      "position": 5,
+      "moduleId": "neuheiten_mod_05",
+      "moduleName": "Neuheiten Grid",
+      "layoutType": "product_grid_new_arrivals",
+      "layoutShape": "grid_eight_plus",
+      "tileCount": 50,
+      "designIntent": "product_showcase",
+      "designIntentDetail": null,
+      "structuralPattern": "Grosses Neuheiten-Grid 50 Produkte",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Top-Neuheiten",
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": "Top-Neuheiten",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "ProductGrid",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 3414,
+        "domTop": 1599
+      }
+    },
+    {
+      "position": 6,
+      "moduleId": "neuheiten_mod_06",
+      "moduleName": "Section Intro Mittel",
+      "layoutType": "editorial_section_intro",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "section_intro",
+      "designIntentDetail": null,
+      "structuralPattern": "Section-Header",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "section_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "text": 70,
+            "solid_background": 25,
+            "graphic_elements": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 159,
+        "domTop": 5013
+      }
+    },
+    {
+      "position": 7,
+      "moduleId": "neuheiten_mod_07",
+      "moduleName": "Editorial Quad",
+      "layoutType": "editorial_tile_quad",
+      "layoutShape": "grid_four",
+      "tileCount": 4,
+      "designIntent": "editorial",
+      "designIntentDetail": null,
+      "structuralPattern": "Vier Editorial-Kacheln",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "1",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "2",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "3",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "4",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 584,
+        "domTop": 5172
+      }
+    },
+    {
+      "position": 8,
+      "moduleId": "neuheiten_mod_08",
+      "moduleName": "Editorial Pair 1",
+      "layoutType": "editorial_tile_pair",
+      "layoutShape": "split_two",
+      "tileCount": 2,
+      "designIntent": "editorial",
+      "designIntentDetail": null,
+      "structuralPattern": "Zwei Kacheln",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "links",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "rechts",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 292,
+        "domTop": 5755
+      }
+    },
+    {
+      "position": 9,
+      "moduleId": "neuheiten_mod_09",
+      "moduleName": "Editorial Pair 2",
+      "layoutType": "editorial_tile_pair",
+      "layoutShape": "split_two",
+      "tileCount": 2,
+      "designIntent": "editorial",
+      "designIntentDetail": null,
+      "structuralPattern": "Zwei Kacheln",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "links",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "rechts",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 292,
+        "domTop": 6047
+      }
+    },
+    {
+      "position": 10,
+      "moduleId": "neuheiten_mod_10",
+      "moduleName": "Amazon Share Footer",
+      "layoutType": "amazon_share_footer",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": null,
+      "structuralPattern": "Amazon-eigener Teilen-Footer",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Teilen",
+        "textType": "none",
+        "origin": "amazon_chrome",
+        "headline": "Teilen",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 200,
+        "domTop": 6339
+      }
+    }
+  ],
+  "pageAnalysis": {
+    "dominantPalette": [],
+    "tonalityVisual": "screenshot_required",
+    "ctaStrategies": "screenshot_required",
+    "contentDepth": "screenshot_required",
+    "useForArchetype": "screenshot_required",
+    "moduleClusters": []
+  },
+  "openQuestions": [
+    "neuheiten_mod_02 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_02 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_03 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_03 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_04 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_04 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_06 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_06 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_07 position=1: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_07 position=1: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_07 position=2: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_07 position=2: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_07 position=3: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_07 position=3: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_07 position=4: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_07 position=4: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_08 position=links: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_08 position=links: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_08 position=rechts: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_08 position=rechts: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_09 position=links: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_09 position=links: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_09 position=rechts: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "neuheiten_mod_09 position=rechts: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig"
+  ]
+}

@@ -1,0 +1,1175 @@
+{
+  "pageUrl": "https://www.amazon.de/stores/page/1A5ECF37-615B-4FBB-8620-C629481CB321",
+  "pageName": "Geschenk-Sets",
+  "pageId": "1A5ECF37-615B-4FBB-8620-C629481CB321",
+  "pageLevel": 1,
+  "pageType": "gift_sets",
+  "scrollHeight": 8290,
+  "contentStats": {
+    "domModules": 18,
+    "logicalModules": 18,
+    "totalImages": 0,
+    "totalVideos": 1
+  },
+  "heroBanner": {
+    "description": "Geschenk-Sets Hero und grosser Editorial-Banner",
+    "textOnImage": {
+      "visibleText": "Geschenk-Sets",
+      "textType": "headline",
+      "origin": "baked_in"
+    },
+    "estimatedDimensions": "3000x1800"
+  },
+  "modules": [
+    {
+      "position": 1,
+      "moduleId": "geschenk_sets_mod_01",
+      "moduleName": "Amazon Nav Header",
+      "layoutType": "amazon_nav_header",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": null,
+      "structuralPattern": "Amazon-eigener Navheader",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": null,
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 338,
+        "domTop": 99
+      }
+    },
+    {
+      "position": 2,
+      "moduleId": "geschenk_sets_mod_02",
+      "moduleName": "Geschenk-Sets Hero Tall",
+      "layoutType": "hero_banner_tall",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "emotional_hook",
+      "designIntentDetail": null,
+      "structuralPattern": "Hoher Hero-Banner",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Geschenk-Sets",
+        "textType": "headline",
+        "origin": "baked_in",
+        "headline": "Geschenk-Sets",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": "Geschenk-Sets",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "Geschenk-Sets",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 689,
+        "domTop": 437
+      }
+    },
+    {
+      "position": 3,
+      "moduleId": "geschenk_sets_mod_03",
+      "moduleName": "Editorial Banner Large",
+      "layoutType": "editorial_banner_large",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": null,
+      "structuralPattern": "Grosser Editorial-Banner",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "story_copy",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 553,
+        "domTop": 1126
+      }
+    },
+    {
+      "position": 4,
+      "moduleId": "geschenk_sets_mod_04",
+      "moduleName": "Immunsystem Basic Set Showcase",
+      "layoutType": "product_showcase_video",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": null,
+      "structuralPattern": "Set-Showcase mit Video",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Immunsystem Basic Set, Kulturen Komplex, Vitamin C + Zink, Curcuma Extrakt",
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": "Immunsystem Basic Set, Kulturen Komplex, Vitamin C + Zink, Curcuma Extrakt",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "product",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "product_photo": 70,
+            "solid_background": 20,
+            "text": 10
+          },
+          "textOnImage": {
+            "visibleText": "Immunsystem Basic Set",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "Immunsystem Basic Set",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 463,
+        "domTop": 1679
+      }
+    },
+    {
+      "position": 5,
+      "moduleId": "geschenk_sets_mod_05",
+      "moduleName": "Beauty Premium Set Showcase",
+      "layoutType": "product_showcase_video",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": null,
+      "structuralPattern": "Set-Showcase mit Video",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Beauty und Anti Aging Premium Set",
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": "Beauty und Anti Aging Premium Set",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "product",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "product_photo": 70,
+            "solid_background": 20,
+            "text": 10
+          },
+          "textOnImage": {
+            "visibleText": "Beauty Premium Set",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "Beauty Premium Set",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 578,
+        "domTop": 2142
+      }
+    },
+    {
+      "position": 6,
+      "moduleId": "geschenk_sets_mod_06",
+      "moduleName": "Essentials Set Showcase",
+      "layoutType": "product_showcase_video",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": null,
+      "structuralPattern": "Set-Showcase mit Video",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Essentials Set, Magnesium, Vitamin B, D3 K2 und Omega 3",
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": "Essentials Set, Magnesium, Vitamin B, D3 K2 und Omega 3",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "product",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "product_photo": 70,
+            "solid_background": 20,
+            "text": 10
+          },
+          "textOnImage": {
+            "visibleText": "Essentials Set",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "Essentials Set",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 505,
+        "domTop": 2720
+      }
+    },
+    {
+      "position": 7,
+      "moduleId": "geschenk_sets_mod_07",
+      "moduleName": "Separator",
+      "layoutType": "separator_invisible",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "visual_separator",
+      "designIntentDetail": null,
+      "structuralPattern": "Unsichtbarer Trenner (1px)",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 1,
+        "domTop": 3225
+      }
+    },
+    {
+      "position": 8,
+      "moduleId": "geschenk_sets_mod_08",
+      "moduleName": "Beauty Basic Set Showcase",
+      "layoutType": "product_showcase_video",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": null,
+      "structuralPattern": "Set-Showcase mit Video",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Beauty und Anti Aging Basic Set, Biotin, Hyaluron und Kollagen, OPC",
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": "Beauty und Anti Aging Basic Set, Biotin, Hyaluron und Kollagen, OPC",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "product",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "product_photo": 70,
+            "solid_background": 20,
+            "text": 10
+          },
+          "textOnImage": {
+            "visibleText": "Beauty Basic Set",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "Beauty Basic Set",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 625,
+        "domTop": 3226
+      }
+    },
+    {
+      "position": 9,
+      "moduleId": "geschenk_sets_mod_09",
+      "moduleName": "Separator",
+      "layoutType": "separator_invisible",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "visual_separator",
+      "designIntentDetail": null,
+      "structuralPattern": "Unsichtbarer Trenner (1px)",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 1,
+        "domTop": 3852
+      }
+    },
+    {
+      "position": 10,
+      "moduleId": "geschenk_sets_mod_10",
+      "moduleName": "Kraftsport Basic Set Showcase",
+      "layoutType": "product_showcase_video",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": null,
+      "structuralPattern": "Set-Showcase mit Video",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Kraftsport Basic Set, Whey Protein, Kreatin Monohydrat",
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": "Kraftsport Basic Set, Whey Protein, Kreatin Monohydrat",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "product",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "product_photo": 70,
+            "solid_background": 20,
+            "text": 10
+          },
+          "textOnImage": {
+            "visibleText": "Kraftsport Basic Set",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "Kraftsport Basic Set",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 528,
+        "domTop": 3853
+      }
+    },
+    {
+      "position": 11,
+      "moduleId": "geschenk_sets_mod_11",
+      "moduleName": "Separator",
+      "layoutType": "separator_invisible",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "visual_separator",
+      "designIntentDetail": null,
+      "structuralPattern": "Unsichtbarer Trenner (1px)",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 1,
+        "domTop": 4381
+      }
+    },
+    {
+      "position": 12,
+      "moduleId": "geschenk_sets_mod_12",
+      "moduleName": "Augencreme Set Showcase",
+      "layoutType": "product_showcase_video",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": null,
+      "structuralPattern": "Set-Showcase mit Video",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Set aus Augencreme 100 Prozent natuerlichen Ursprungs",
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": "Set aus Augencreme 100 Prozent natuerlichen Ursprungs",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "product",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "product_photo": 70,
+            "solid_background": 20,
+            "text": 10
+          },
+          "textOnImage": {
+            "visibleText": "Augencreme Set",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "Augencreme Set",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 409,
+        "domTop": 4382
+      }
+    },
+    {
+      "position": 13,
+      "moduleId": "geschenk_sets_mod_13",
+      "moduleName": "Hero Video Schlussblock",
+      "layoutType": "hero_video",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "emotional_hook",
+      "designIntentDetail": null,
+      "structuralPattern": "Full-width Hero-Video",
+      "backgroundStyle": "video_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "lifestyle",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "lifestyle_photo": 85,
+            "text": 10,
+            "cta_button": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "video_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 1,
+        "domHeight": 168,
+        "domTop": 4791
+      }
+    },
+    {
+      "position": 14,
+      "moduleId": "geschenk_sets_mod_14",
+      "moduleName": "Shoppable Interactive",
+      "layoutType": "shoppable_interactive_image",
+      "layoutShape": "interactive_hotspot",
+      "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": null,
+      "structuralPattern": "Shoppable Bild mit 12 Pins",
+      "backgroundStyle": "shoppable_interactive_image",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Produkte ansehen",
+        "textType": "cta",
+        "origin": "layered_text",
+        "headline": "Produkte ansehen",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": "Produkte ansehen",
+            "directionCues": null
+          },
+          "ctaText": "Produkte ansehen",
+          "linksTo": "shoppable",
+          "backgroundStyle": "shoppable_interactive_image",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 584,
+        "domTop": 4959
+      }
+    },
+    {
+      "position": 15,
+      "moduleId": "geschenk_sets_mod_15",
+      "moduleName": "Section Intro Schluss",
+      "layoutType": "editorial_section_intro",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "section_intro",
+      "designIntentDetail": null,
+      "structuralPattern": "Schmaler Section-Header",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "section_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "text": 70,
+            "solid_background": 25,
+            "graphic_elements": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 159,
+        "domTop": 5542
+      }
+    },
+    {
+      "position": 16,
+      "moduleId": "geschenk_sets_mod_16",
+      "moduleName": "Editorial Quad 1",
+      "layoutType": "editorial_tile_quad",
+      "layoutShape": "grid_four",
+      "tileCount": 4,
+      "designIntent": "editorial",
+      "designIntentDetail": null,
+      "structuralPattern": "Vier Editorial-Kacheln",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "1",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "2",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "3",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "4",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 584,
+        "domTop": 5701
+      }
+    },
+    {
+      "position": 17,
+      "moduleId": "geschenk_sets_mod_17",
+      "moduleName": "Editorial Quad 2",
+      "layoutType": "editorial_tile_quad",
+      "layoutShape": "grid_four",
+      "tileCount": 4,
+      "designIntent": "editorial",
+      "designIntentDetail": null,
+      "structuralPattern": "Vier Editorial-Kacheln",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "1",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "2",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "3",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "4",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 584,
+        "domTop": 6285
+      }
+    },
+    {
+      "position": 18,
+      "moduleId": "geschenk_sets_mod_18",
+      "moduleName": "Amazon Share Footer",
+      "layoutType": "amazon_share_footer",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": null,
+      "structuralPattern": "Amazon-eigener Teilen-Footer",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Teilen",
+        "textType": "none",
+        "origin": "amazon_chrome",
+        "headline": "Teilen",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 200,
+        "domTop": 6869
+      }
+    }
+  ],
+  "pageAnalysis": {
+    "dominantPalette": [],
+    "tonalityVisual": "screenshot_required",
+    "ctaStrategies": "screenshot_required",
+    "contentDepth": "screenshot_required",
+    "useForArchetype": "screenshot_required",
+    "moduleClusters": []
+  },
+  "openQuestions": [
+    "geschenk_sets_mod_02 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_02 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_03 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_03 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_04 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_04 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_05 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_05 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_06 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_06 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_08 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_08 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_10 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_10 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_12 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_12 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_13 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_13 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_14 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_14 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_15 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_15 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_16 position=1: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_16 position=1: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_16 position=2: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_16 position=2: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_16 position=3: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_16 position=3: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_16 position=4: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_16 position=4: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_17 position=1: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_17 position=1: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_17 position=2: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_17 position=2: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_17 position=3: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_17 position=3: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_17 position=4: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "geschenk_sets_mod_17 position=4: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig"
+  ]
+}

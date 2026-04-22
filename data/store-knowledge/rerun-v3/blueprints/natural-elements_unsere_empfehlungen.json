@@ -1,0 +1,553 @@
+{
+  "pageUrl": "https://www.amazon.de/stores/page/B77CB4EF-4CCF-4FB0-9251-53DF11DCCE12",
+  "pageName": "Unsere Bestseller Empfehlungen",
+  "pageId": "B77CB4EF-4CCF-4FB0-9251-53DF11DCCE12",
+  "pageLevel": 1,
+  "pageType": "bestsellers",
+  "scrollHeight": 4977,
+  "contentStats": {
+    "domModules": 7,
+    "logicalModules": 7,
+    "totalImages": 0,
+    "totalVideos": 0
+  },
+  "heroBanner": {
+    "description": "Unsere Empfehlungen Section-Intro und Produktgrid",
+    "textOnImage": {
+      "visibleText": "Unsere Empfehlungen",
+      "textType": "headline",
+      "origin": "baked_in"
+    },
+    "estimatedDimensions": "3000x900"
+  },
+  "modules": [
+    {
+      "position": 1,
+      "moduleId": "unsere_empfehlungen_mod_01",
+      "moduleName": "Amazon Nav Header",
+      "layoutType": "amazon_nav_header",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": null,
+      "structuralPattern": "Amazon-eigener Navheader",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": null,
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 338,
+        "domTop": 99
+      }
+    },
+    {
+      "position": 2,
+      "moduleId": "unsere_empfehlungen_mod_02",
+      "moduleName": "Empfehlungen Section Intro",
+      "layoutType": "editorial_section_intro",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "section_intro",
+      "designIntentDetail": null,
+      "structuralPattern": "Section-Header",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Unsere Empfehlungen",
+        "textType": "headline",
+        "origin": "baked_in",
+        "headline": "Unsere Empfehlungen",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "text": 70,
+            "solid_background": 25,
+            "graphic_elements": 5
+          },
+          "textOnImage": {
+            "visibleText": "Unsere Empfehlungen",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "Unsere Empfehlungen",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 169,
+        "domTop": 437
+      }
+    },
+    {
+      "position": 3,
+      "moduleId": "unsere_empfehlungen_mod_03",
+      "moduleName": "Bestseller Grid 24",
+      "layoutType": "product_grid_bestsellers",
+      "layoutShape": "grid_eight_plus",
+      "tileCount": 24,
+      "designIntent": "product_showcase",
+      "designIntentDetail": null,
+      "structuralPattern": "Bestseller-Grid mit 24 Top-Produkten",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Schwarzkuemmeloel, Omega 3, Magnesium Komplex",
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": "Schwarzkuemmeloel, Omega 3, Magnesium Komplex",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "ProductGrid",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 2121,
+        "domTop": 606
+      }
+    },
+    {
+      "position": 4,
+      "moduleId": "unsere_empfehlungen_mod_04",
+      "moduleName": "Section Intro 2",
+      "layoutType": "editorial_section_intro",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "section_intro",
+      "designIntentDetail": null,
+      "structuralPattern": "Section-Header",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "section_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "text": 70,
+            "solid_background": 25,
+            "graphic_elements": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 245,
+        "domTop": 2726
+      }
+    },
+    {
+      "position": 5,
+      "moduleId": "unsere_empfehlungen_mod_05",
+      "moduleName": "Editorial Quad 1",
+      "layoutType": "editorial_tile_quad",
+      "layoutShape": "grid_four",
+      "tileCount": 4,
+      "designIntent": "editorial",
+      "designIntentDetail": null,
+      "structuralPattern": "Vier Editorial-Kacheln",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "1",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "2",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "3",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "4",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 292,
+        "domTop": 2972
+      }
+    },
+    {
+      "position": 6,
+      "moduleId": "unsere_empfehlungen_mod_06",
+      "moduleName": "Editorial Quad 2",
+      "layoutType": "editorial_tile_quad",
+      "layoutShape": "grid_four",
+      "tileCount": 4,
+      "designIntent": "editorial",
+      "designIntentDetail": null,
+      "structuralPattern": "Vier Editorial-Kacheln",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "1",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "2",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "3",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "4",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 292,
+        "domTop": 3264
+      }
+    },
+    {
+      "position": 7,
+      "moduleId": "unsere_empfehlungen_mod_07",
+      "moduleName": "Amazon Share Footer",
+      "layoutType": "amazon_share_footer",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": null,
+      "structuralPattern": "Amazon-eigener Teilen-Footer",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Teilen",
+        "textType": "none",
+        "origin": "amazon_chrome",
+        "headline": "Teilen",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 200,
+        "domTop": 3555
+      }
+    }
+  ],
+  "pageAnalysis": {
+    "dominantPalette": [],
+    "tonalityVisual": "screenshot_required",
+    "ctaStrategies": "screenshot_required",
+    "contentDepth": "screenshot_required",
+    "useForArchetype": "screenshot_required",
+    "moduleClusters": []
+  },
+  "openQuestions": [
+    "unsere_empfehlungen_mod_02 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "unsere_empfehlungen_mod_02 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "unsere_empfehlungen_mod_04 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "unsere_empfehlungen_mod_04 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "unsere_empfehlungen_mod_05 position=1: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "unsere_empfehlungen_mod_05 position=1: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "unsere_empfehlungen_mod_05 position=2: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "unsere_empfehlungen_mod_05 position=2: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "unsere_empfehlungen_mod_05 position=3: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "unsere_empfehlungen_mod_05 position=3: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "unsere_empfehlungen_mod_05 position=4: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "unsere_empfehlungen_mod_05 position=4: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "unsere_empfehlungen_mod_06 position=1: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "unsere_empfehlungen_mod_06 position=1: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "unsere_empfehlungen_mod_06 position=2: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "unsere_empfehlungen_mod_06 position=2: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "unsere_empfehlungen_mod_06 position=3: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "unsere_empfehlungen_mod_06 position=3: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "unsere_empfehlungen_mod_06 position=4: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "unsere_empfehlungen_mod_06 position=4: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig"
+  ]
+}

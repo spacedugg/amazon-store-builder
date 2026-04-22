@@ -1,0 +1,377 @@
+{
+  "pageUrl": "https://www.amazon.de/stores/page/A03B844E-0DA2-4FFC-8205-DC6DFDB0D59E",
+  "pageName": "Produktselektor",
+  "pageId": "A03B844E-0DA2-4FFC-8205-DC6DFDB0D59E",
+  "pageLevel": 1,
+  "pageType": "product_selector",
+  "scrollHeight": 1610,
+  "contentStats": {
+    "domModules": 10,
+    "logicalModules": 10,
+    "totalImages": 0,
+    "totalVideos": 0
+  },
+  "heroBanner": null,
+  "modules": [
+    {
+      "position": 1,
+      "moduleId": "produktselektor_mod_01",
+      "moduleName": "Amazon Nav Header",
+      "layoutType": "amazon_nav_header",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": null,
+      "structuralPattern": "Amazon-eigener Navheader",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": null,
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 94,
+        "domTop": 99
+      }
+    },
+    {
+      "position": 2,
+      "moduleId": "produktselektor_mod_02",
+      "moduleName": "Filter Accordion 1",
+      "layoutType": "filter_accordion_collapsed",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": null,
+      "structuralPattern": "Einklappbarer Filter-Accordion",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "filter_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 0,
+        "domTop": 193
+      }
+    },
+    {
+      "position": 3,
+      "moduleId": "produktselektor_mod_03",
+      "moduleName": "Filter Accordion 2",
+      "layoutType": "filter_accordion_collapsed",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": null,
+      "structuralPattern": "Einklappbarer Filter-Accordion",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "filter_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 0,
+        "domTop": 193
+      }
+    },
+    {
+      "position": 4,
+      "moduleId": "produktselektor_mod_04",
+      "moduleName": "Filter Accordion 3",
+      "layoutType": "filter_accordion_collapsed",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": null,
+      "structuralPattern": "Einklappbarer Filter-Accordion",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "filter_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 0,
+        "domTop": 193
+      }
+    },
+    {
+      "position": 5,
+      "moduleId": "produktselektor_mod_05",
+      "moduleName": "Filter Banner",
+      "layoutType": "filter_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": null,
+      "structuralPattern": "Banner mit Filter-Hinweis",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "filter_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 236,
+        "domTop": 193
+      }
+    },
+    {
+      "position": 6,
+      "moduleId": "produktselektor_mod_06",
+      "moduleName": "Filter Accordion 4",
+      "layoutType": "filter_accordion_collapsed",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": null,
+      "structuralPattern": "Einklappbarer Filter-Accordion",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "filter_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 0,
+        "domTop": 429
+      }
+    },
+    {
+      "position": 7,
+      "moduleId": "produktselektor_mod_07",
+      "moduleName": "Filter Accordion 5",
+      "layoutType": "filter_accordion_collapsed",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": null,
+      "structuralPattern": "Einklappbarer Filter-Accordion",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "filter_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 0,
+        "domTop": 429
+      }
+    },
+    {
+      "position": 8,
+      "moduleId": "produktselektor_mod_08",
+      "moduleName": "Filter Accordion 6",
+      "layoutType": "filter_accordion_collapsed",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": null,
+      "structuralPattern": "Einklappbarer Filter-Accordion",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "filter_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 0,
+        "domTop": 429
+      }
+    },
+    {
+      "position": 9,
+      "moduleId": "produktselektor_mod_09",
+      "moduleName": "Produktselektor Grid",
+      "layoutType": "product_grid_filter_results",
+      "layoutShape": "grid_eight_plus",
+      "tileCount": 20,
+      "designIntent": "product_showcase",
+      "designIntentDetail": null,
+      "structuralPattern": "Filterergebnis-Grid 20 Produkte",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Omega 3, Mariendistel Artischocke Loewenzahn, Curcuma Extrakt",
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": "Omega 3, Mariendistel Artischocke Loewenzahn, Curcuma Extrakt",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "ProductGrid",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 0,
+        "domTop": 0
+      }
+    },
+    {
+      "position": 10,
+      "moduleId": "produktselektor_mod_10",
+      "moduleName": "Amazon Share Footer",
+      "layoutType": "amazon_share_footer",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": null,
+      "structuralPattern": "Amazon-eigener Teilen-Footer",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Teilen",
+        "textType": "none",
+        "origin": "amazon_chrome",
+        "headline": "Teilen",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 0,
+        "domTop": 0
+      }
+    }
+  ],
+  "pageAnalysis": {
+    "dominantPalette": [],
+    "tonalityVisual": "screenshot_required",
+    "ctaStrategies": "screenshot_required",
+    "contentDepth": "screenshot_required",
+    "useForArchetype": "screenshot_required",
+    "moduleClusters": []
+  },
+  "openQuestions": [
+    "produktselektor_mod_05 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "produktselektor_mod_05 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig"
+  ]
+}

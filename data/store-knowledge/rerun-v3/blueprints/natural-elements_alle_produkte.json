@@ -1,0 +1,317 @@
+{
+  "pageUrl": "https://www.amazon.de/stores/page/56C2E5EE-81A5-4F07-8BB3-38927E13937B",
+  "pageName": "Alle Produkte",
+  "pageId": "56C2E5EE-81A5-4F07-8BB3-38927E13937B",
+  "pageLevel": 1,
+  "pageType": "all_products",
+  "scrollHeight": 6487,
+  "contentStats": {
+    "domModules": 6,
+    "logicalModules": 6,
+    "totalImages": 0,
+    "totalVideos": 0
+  },
+  "heroBanner": {
+    "description": "Alle-Produkte-Listing-Seite mit shoppable Bild vorne",
+    "textOnImage": {
+      "visibleText": "",
+      "textType": "unknown",
+      "origin": "baked_in"
+    },
+    "estimatedDimensions": "3000x1500"
+  },
+  "modules": [
+    {
+      "position": 1,
+      "moduleId": "alle_produkte_mod_01",
+      "moduleName": "Amazon Nav Header",
+      "layoutType": "amazon_nav_header",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": null,
+      "structuralPattern": "Amazon-eigener Navheader",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": null,
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 338,
+        "domTop": 99
+      }
+    },
+    {
+      "position": 2,
+      "moduleId": "alle_produkte_mod_02",
+      "moduleName": "Alle Produkte shoppable",
+      "layoutType": "shoppable_interactive_image",
+      "layoutShape": "interactive_hotspot",
+      "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": null,
+      "structuralPattern": "Shoppable Bild mit 30 Pins fuer alle Produkte",
+      "backgroundStyle": "shoppable_interactive_image",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Produkte ansehen",
+        "textType": "cta",
+        "origin": "layered_text",
+        "headline": "Produkte ansehen",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": "Produkte ansehen",
+            "directionCues": null
+          },
+          "ctaText": "Produkte ansehen",
+          "linksTo": "shoppable",
+          "backgroundStyle": "shoppable_interactive_image",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 584,
+        "domTop": 437
+      }
+    },
+    {
+      "position": 3,
+      "moduleId": "alle_produkte_mod_03",
+      "moduleName": "Editorial Banner Intro",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": null,
+      "structuralPattern": "Full-width Editorial-Banner vor dem Produktgrid",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "creative",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 303,
+        "domTop": 1020
+      }
+    },
+    {
+      "position": 4,
+      "moduleId": "alle_produkte_mod_04",
+      "moduleName": "Alle Produkte Katalog",
+      "layoutType": "product_grid_full_catalog",
+      "layoutShape": "grid_eight_plus",
+      "tileCount": 50,
+      "designIntent": "product_showcase",
+      "designIntentDetail": null,
+      "structuralPattern": "Voller Katalog-Grid 50 Produkte",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Apfelessig Gummies, Magnesium L-Threonate (Magtein), Hydration Recharge",
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": "Apfelessig Gummies, Magnesium L-Threonate (Magtein), Hydration Recharge",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "ProductGrid",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 3574,
+        "domTop": 1324
+      }
+    },
+    {
+      "position": 5,
+      "moduleId": "alle_produkte_mod_05",
+      "moduleName": "Section Intro Schluss",
+      "layoutType": "editorial_section_intro",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "section_intro",
+      "designIntentDetail": null,
+      "structuralPattern": "Schmaler Section-Header im Schlussblock",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "section_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "screenshot_required",
+          "elementProportions": {
+            "text": 70,
+            "solid_background": 25,
+            "graphic_elements": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 169,
+        "domTop": 4897
+      }
+    },
+    {
+      "position": 6,
+      "moduleId": "alle_produkte_mod_06",
+      "moduleName": "Amazon Share Footer",
+      "layoutType": "amazon_share_footer",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": null,
+      "structuralPattern": "Amazon-eigener Teilen-Footer",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Teilen",
+        "textType": "none",
+        "origin": "amazon_chrome",
+        "headline": "Teilen",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 200,
+        "domTop": 5066
+      }
+    }
+  ],
+  "pageAnalysis": {
+    "dominantPalette": [],
+    "tonalityVisual": "screenshot_required",
+    "ctaStrategies": "screenshot_required",
+    "contentDepth": "screenshot_required",
+    "useForArchetype": "screenshot_required",
+    "moduleClusters": []
+  },
+  "openQuestions": [
+    "alle_produkte_mod_02 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "alle_produkte_mod_02 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "alle_produkte_mod_03 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "alle_produkte_mod_03 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "alle_produkte_mod_05 position=full: visualContent unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "alle_produkte_mod_05 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig"
+  ]
+}

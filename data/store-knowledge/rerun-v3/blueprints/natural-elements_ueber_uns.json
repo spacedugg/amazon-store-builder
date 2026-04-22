@@ -1,0 +1,1161 @@
+{
+  "pageUrl": "https://www.amazon.de/stores/page/C199E0D4-B434-4DFA-8DF0-2D5601387A8B",
+  "pageName": "Ueber uns",
+  "pageId": "C199E0D4-B434-4DFA-8DF0-2D5601387A8B",
+  "pageLevel": 1,
+  "pageType": "about",
+  "scrollHeight": 7200,
+  "contentStats": {
+    "domModules": 17,
+    "logicalModules": 17,
+    "totalImages": 0,
+    "totalVideos": 1
+  },
+  "heroBanner": {
+    "description": "Ueber uns Hero-Banner",
+    "textOnImage": {
+      "visibleText": "Ueber uns",
+      "textType": "headline",
+      "origin": "baked_in"
+    },
+    "estimatedDimensions": "3000x1100"
+  },
+  "modules": [
+    {
+      "position": 1,
+      "moduleId": "ueber_uns_mod_01",
+      "moduleName": "Amazon Nav Header",
+      "layoutType": "amazon_nav_header",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": "Global-Template, Aktiv-Markierung signalisiert Position UEBER UNS.",
+      "structuralPattern": "Amazon-eigener Navheader",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": null,
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 338,
+        "domTop": 99
+      }
+    },
+    {
+      "position": 2,
+      "moduleId": "ueber_uns_mod_02",
+      "moduleName": "Ueber uns Hero",
+      "layoutType": "hero_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "emotional_hook",
+      "designIntentDetail": "Emotionaler Einstieg in die Markengeschichte. Anders als Kampagnen-Hero nicht auf CTA-Wirkung getrimmt, sondern auf Identifikation.",
+      "structuralPattern": "Full-width Ueber-uns-Hero",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Ueber uns",
+        "textType": "headline",
+        "origin": "baked_in",
+        "headline": "Ueber uns",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "lifestyle",
+          "visualContent": "Markanter Brand-Hero als Einstieg in die UEBER UNS Geschichte. Hero-Format gaenzlich andere Proportion als die Standard-Kampagnen-Banner (3.75 zu 1 auf Hub-Seiten), hier tiefer, emotionaler. Typischer Inhalt fuer natural elements: Natur- oder Labor-Setting mit Brand-Logo oder einem einfuehrenden Claim wie 'Echte Naturprodukte' oder 'Made in Germany'.",
+          "elementProportions": "100 Prozent Breite, rund 35 Prozent Hoehe des Viewports",
+          "textOnImage": {
+            "visibleText": "Ueber uns",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "Ueber uns",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "vermutlich natuerliche Palette, zu verifizieren",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "zu verifizieren"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 425,
+        "domTop": 437
+      }
+    },
+    {
+      "position": 3,
+      "moduleId": "ueber_uns_mod_03",
+      "moduleName": "Story Banner 1",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": "Erster Text-Bild-Block nach dem Hero, legt die Markenhaltung fest.",
+      "structuralPattern": "Full-width Story-Banner",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "story_copy",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "Weites Story-Banner, Standard-Format fuer Text-Bild-Hybride. Typische Inhalte hier: Unternehmensvorstellung, Gruender-Statement, Standortinformation (Made in Germany, Labor- oder Natur-Symbolik).",
+          "elementProportions": {
+            "text": 70,
+            "solid_background": 25,
+            "graphic_elements": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "vermutlich natural-elements-typisch weiss oder olivgruen",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 303,
+        "domTop": 861
+      }
+    },
+    {
+      "position": 4,
+      "moduleId": "ueber_uns_mod_04",
+      "moduleName": "Story Banner Tall",
+      "layoutType": "editorial_banner_tall",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": "Rhythmus-Bruch nach dem schmalen Einleitungs-Banner. Die Hoehe signalisiert Wichtigkeit und erlaubt tiefere emotionale Szene.",
+      "structuralPattern": "Hoher Story-Banner fuer Text und Lifestyle",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "story_copy",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "lifestyle",
+          "visualContent": "Emotional inszeniertes Story-Bild, hoeheres Format als die 4-zu-1-Banner. Typischer Einsatz: Gruender-Bild, Produktionsstaette, Zutaten-Close-up, Nachhaltigkeits-Szene. Die Hoehe schafft Platz fuer mehr Text oder ein doppel-raeumiges Bild mit zwei inhaltlichen Zonen.",
+          "elementProportions": {
+            "lifestyle_photo": 85,
+            "text": 10,
+            "cta_button": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "zu verifizieren",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 624,
+        "domTop": 1164
+      }
+    },
+    {
+      "position": 5,
+      "moduleId": "ueber_uns_mod_05",
+      "moduleName": "Story Banner 2",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": "Erzaehl-Modul, fuehrt in Richtung Team-Video.",
+      "structuralPattern": "Full-width Story-Banner",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "story_copy",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "Weiteres Story-Banner. Typische Inhalte: Qualitaets-Statement, Labor-Zitat, Zertifikate-Claim.",
+          "elementProportions": {
+            "text": 70,
+            "solid_background": 25,
+            "graphic_elements": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "zu verifizieren",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 303,
+        "domTop": 1788
+      }
+    },
+    {
+      "position": 6,
+      "moduleId": "ueber_uns_mod_06",
+      "moduleName": "Brand Video",
+      "layoutType": "hero_video_tall",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "emotional_hook",
+      "designIntentDetail": "Video ist Trust-Builder Nummer eins. Platzierung nach zwei Text-Bild-Bloecken nutzt die aufgebaute Aufmerksamkeit.",
+      "structuralPattern": "Hohes Marken-Video ueber die Marke",
+      "backgroundStyle": "video_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "lifestyle",
+          "visualContent": "Eingebettetes Video. Typischer Inhalt fuer UEBER UNS: Gruender- oder Team-Interview, Labor- oder Produktionsfuehrung, Nachhaltigkeits-Reportage. Der Video-Block ist das emotionalste Element der Seite.",
+          "elementProportions": {
+            "lifestyle_photo": 85,
+            "text": 10,
+            "cta_button": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": "Play",
+            "directionCues": null
+          },
+          "ctaText": "Play",
+          "linksTo": null,
+          "backgroundStyle": "abhaengig vom Video-Poster",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 1,
+        "domHeight": 168,
+        "domTop": 2091
+      }
+    },
+    {
+      "position": 7,
+      "moduleId": "ueber_uns_mod_07",
+      "moduleName": "Story Banner 3",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": "Fortsetzung der Brand-Story nach Video.",
+      "structuralPattern": "Full-width Story-Banner",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "story_copy",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "Story-Banner im Standard-Format. Typisch: Werte-Statement, Philosophie, Produktions-Zitat.",
+          "elementProportions": {
+            "text": 70,
+            "solid_background": 25,
+            "graphic_elements": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "zu verifizieren",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 303,
+        "domTop": 2259
+      }
+    },
+    {
+      "position": 8,
+      "moduleId": "ueber_uns_mod_08",
+      "moduleName": "Story Banner 4",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": "Vertrauensaufbau durch Zertifikate-Kommunikation.",
+      "structuralPattern": "Full-width Story-Banner",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "story_copy",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "Story-Banner. Typisch: Zertifikate, Testlabore, Kontroll-Claims.",
+          "elementProportions": {
+            "text": 70,
+            "solid_background": 25,
+            "graphic_elements": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "zu verifizieren",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 303,
+        "domTop": 2562
+      }
+    },
+    {
+      "position": 9,
+      "moduleId": "ueber_uns_mod_09",
+      "moduleName": "Story Banner 5",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": "Nachhaltigkeits-Block, typisch fuer Naturkosmetik- und Supplement-Marken.",
+      "structuralPattern": "Full-width Story-Banner",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "story_copy",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "Story-Banner. Typisch: Nachhaltigkeit, Verpackung, Umweltverantwortung.",
+          "elementProportions": {
+            "text": 70,
+            "solid_background": 25,
+            "graphic_elements": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "zu verifizieren",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 303,
+        "domTop": 2865
+      }
+    },
+    {
+      "position": 10,
+      "moduleId": "ueber_uns_mod_10",
+      "moduleName": "Story Banner 6",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": "Qualitaets-Beweis-Block.",
+      "structuralPattern": "Full-width Story-Banner",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "story_copy",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "Story-Banner. Typisch: Produktionsqualitaet, Standards, Rohstoffbeschaffung.",
+          "elementProportions": {
+            "text": 70,
+            "solid_background": 25,
+            "graphic_elements": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "zu verifizieren",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 303,
+        "domTop": 3168
+      }
+    },
+    {
+      "position": 11,
+      "moduleId": "ueber_uns_mod_11",
+      "moduleName": "Story Banner Tall 2",
+      "layoutType": "editorial_banner_tall",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": "Rhythmus-Bruch, emotionaler Hoehepunkt vor dem Abschluss der Erzaehlung.",
+      "structuralPattern": "Hoher Story-Banner",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "story_copy",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "lifestyle",
+          "visualContent": "Zweiter tiefer Banner, zweiter emotionaler Hoehepunkt. Typisch: Gruender- oder Team-Gruppenbild, Produktions-Einblicke, Familien-Werte-Szene.",
+          "elementProportions": {
+            "lifestyle_photo": 85,
+            "text": 10,
+            "cta_button": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "zu verifizieren",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 624,
+        "domTop": 3471
+      }
+    },
+    {
+      "position": 12,
+      "moduleId": "ueber_uns_mod_12",
+      "moduleName": "Story Banner 7",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": "Uebergang von der emotionalen Erzaehlung zu den strukturierten Werte-Blocks darunter.",
+      "structuralPattern": "Full-width Story-Banner",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "story_copy",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "Uebergangs-Banner mit mittlerer Hoehe. Typisch: Motto, Claim, Abschluss-Statement oder Ueberleitung zu den Werten unten.",
+          "elementProportions": {
+            "text": 70,
+            "solid_background": 25,
+            "graphic_elements": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "zu verifizieren",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 357,
+        "domTop": 4095
+      }
+    },
+    {
+      "position": 13,
+      "moduleId": "ueber_uns_mod_13",
+      "moduleName": "Section Intro Endblock",
+      "layoutType": "editorial_section_intro",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "section_intro",
+      "designIntentDetail": "Format-Variation bricht die Monotonie der 4:1-Banner-Serie auf. Typisches Amazon-Muster: schmaler Trenner vor strukturierten Grid-Modulen.",
+      "structuralPattern": "Schmaler Section-Header im Schlussblock",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "section_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "full",
+          "imageCategory": "text_image",
+          "visualContent": "Schmaler horizontaler Streifen, typisch fuer einen einzeiligen Claim oder eine Zertifikats-Leiste. Inhaltlich: kann 'NahrungsYEAH!gaenzung', 'Echte Naturprodukte' oder ein durchgaengiger Zertifikats-Streifen sein.",
+          "elementProportions": {
+            "text": 70,
+            "solid_background": 25,
+            "graphic_elements": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "vermutlich einfarbig mit Typo-Claim",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 159,
+        "domTop": 4452
+      }
+    },
+    {
+      "position": 14,
+      "moduleId": "ueber_uns_mod_14",
+      "moduleName": "Editorial Quad",
+      "layoutType": "editorial_tile_quad",
+      "layoutShape": "grid_four",
+      "tileCount": 4,
+      "designIntent": "editorial",
+      "designIntentDetail": "Strukturierter Werte-Block nach der Erzaehlung. Die 4-Kachel-Zusammenfassung destilliert die Story in greifbare Markenwerte.",
+      "structuralPattern": "Vier gleichrangige Editorial-Kacheln",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "1",
+          "imageCategory": "creative",
+          "visualContent": "Kachel 1 in 4er-Reihe. Typischer Inhalt: Werte-Icon plus Titel plus kurzer Claim. Moegliche Werte: 'Made in Germany', 'Labor geprueft', 'Nachhaltige Verpackung', 'Ohne unnoetige Zusaetze'.",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "moeglicherweise Kategorie oder Zertifikats-Seite",
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "2",
+          "imageCategory": "creative",
+          "visualContent": "Kachel 2 mit Werte-Icon.",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "3",
+          "imageCategory": "creative",
+          "visualContent": "Kachel 3 mit Werte-Icon.",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "4",
+          "imageCategory": "creative",
+          "visualContent": "Kachel 4 mit Werte-Icon.",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null,
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 584,
+        "domTop": 4611
+      }
+    },
+    {
+      "position": 15,
+      "moduleId": "ueber_uns_mod_15",
+      "moduleName": "Editorial Pair 1",
+      "layoutType": "editorial_tile_pair",
+      "layoutShape": "split_two",
+      "tileCount": 2,
+      "designIntent": "editorial",
+      "designIntentDetail": "Cross-Linking Richtung Sortiment. Schliesst die Brand-Story und leitet zurueck in den Store.",
+      "structuralPattern": "Zwei gleiche Kacheln",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "links",
+          "imageCategory": "creative",
+          "visualContent": "Kachel 1 in 2er-Reihe. Typisch: Verlinkung zu einer Haupt-Kategorie oder einer thematischen Unterseite (zum Beispiel 'Zu den Produkten', 'Mehr erfahren').",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": "vermutlich 'Entdecken' oder 'Zu den Produkten'",
+            "directionCues": null
+          },
+          "ctaText": "vermutlich 'Entdecken' oder 'Zu den Produkten'",
+          "linksTo": "Kategorie- oder Content-Seite",
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "rechts",
+          "imageCategory": "creative",
+          "visualContent": "Kachel 2 in 2er-Reihe.",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "Kategorie- oder Content-Seite",
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 292,
+        "domTop": 5195
+      }
+    },
+    {
+      "position": 16,
+      "moduleId": "ueber_uns_mod_16",
+      "moduleName": "Editorial Pair 2",
+      "layoutType": "editorial_tile_pair",
+      "layoutShape": "split_two",
+      "tileCount": 2,
+      "designIntent": "editorial",
+      "designIntentDetail": "Zweite 2er-Reihe fuer weitere Cross-Links. Ermoeglicht insgesamt 8 Einstiegspunkte in das Sortiment (4 Werte-Kacheln plus 4 Cross-Link-Kacheln).",
+      "structuralPattern": "Zwei gleiche Kacheln",
+      "backgroundStyle": "photo_bg",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "unknown",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": "links",
+          "imageCategory": "creative",
+          "visualContent": "Kachel 1 in zweiter 2er-Reihe.",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "Kategorie- oder Content-Seite",
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        },
+        {
+          "position": "rechts",
+          "imageCategory": "creative",
+          "visualContent": "Kachel 2.",
+          "elementProportions": {
+            "photographic_background": 50,
+            "text": 30,
+            "graphic_elements": 20
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "Kategorie- oder Content-Seite",
+          "backgroundStyle": "photo_bg",
+          "backgroundDetail": null,
+          "dominantColors": [
+            "screenshot_required"
+          ],
+          "dominantColorsHex": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 292,
+        "domTop": 5487
+      }
+    },
+    {
+      "position": 17,
+      "moduleId": "ueber_uns_mod_17",
+      "moduleName": "Amazon Share Footer",
+      "layoutType": "amazon_share_footer",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": "Global-Template am Seitenende.",
+      "structuralPattern": "Amazon-eigener Teilen-Footer",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": "Teilen",
+        "textType": "none",
+        "origin": "amazon_chrome",
+        "headline": "Teilen",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 200,
+        "domTop": 5779
+      }
+    }
+  ],
+  "pageAnalysis": {
+    "totalDomRows": 17,
+    "totalLogicalModules": 17,
+    "editorialImagesActive": 19,
+    "videosActive": 1,
+    "totalProductGridAsins": 0,
+    "contentDensity": "sehr hoch: 16 editorialen Modulen, 19 Bilder, 1 Video, 0 Produkte. Reinste Content-Seite im Store.",
+    "dramaturgie": "Hero (1 Bild 2.82:1) > Einleitungs-Story (1 Bild 4:1) > Emotionaler Tief-Banner (1 Bild 1.89:1) > Story-Banner (1 Bild 4:1) > Team-Video > 4 x Story-Banner (je 4:1) > Emotionaler Tief-Banner (1.89:1) > Mittel-Banner (3.37:1) > Claim-Strip (8:1) > 4-Kachel-Werte-Grid > 2 x 2-Kachel-Cross-Link-Grid > Teilen-Footer. Aufbau: lesen, ankommen, emotional abholen, Werte vermitteln, zurueck ins Sortiment leiten.",
+    "dominantPalette": "zu verifizieren per Vision-Check. Erwartung fuer natural elements: weiss, olivgruen, natur-beige, dezente Akzente.",
+    "tonalitaetVisual": "editorial, emotional, informativ. Keine Kaufdruck-Signale, kein CTA-Lautstaerke. Die Seite positioniert sich als Ruheraum fuer Markenverstaendnis.",
+    "CTA_strategien": "Keine direkten Kauf-CTAs. Die 2-Kachel-Grids am Ende bieten sanfte Cross-Links ins Sortiment. Der gesamte Seitenaufbau arbeitet mit Trust statt Conversion.",
+    "inhaltlicheTiefe": "Sehr hoch. Marken-Geschichte, Qualitaetsversprechen, Nachhaltigkeit, Team, Zertifikate, Werte. Gilt als SEO-Anker fuer Markennamen-Suchen.",
+    "useForArchetype": "Template fuer jede 'Ueber uns' oder 'Unsere Geschichte' Seite. Rhythmus aus Hero, 4:1-Bannern, Tief-Bannern, Video, Claim-Strip und Werte-Grid ist die vollstaendige dramaturgische Grammatik fuer Brand-Story-Seiten.",
+    "kontrastZuAnderenSeiten": "Extremes Gegenteil der Featured-Line-Seite 'Make it full size' (4 Module, 1 Bild, 0 Videos, 15 ASINs). Zeigt, wie der Store je nach Seitenfunktion die Dichte drastisch variiert."
+  },
+  "openQuestions": [
+    "Alle Bildinhalte (Hero, Story-Banner, Tief-Banner, Claim-Strip, Werte-Kacheln, Cross-Link-Kacheln) sind per DOM nicht lesbar, weil keine aria-labels vergeben sind und der Text ausschliesslich als Grafik vorliegt. Fuer inhaltliche Auswertung ist ein Vision-Check zwingend notwendig.",
+    "Das Video in Modul 06 hat keinen DOM-Titel und keinen Poster-Alt. Video-Inhalt (Interview, Produktions-Tour, Kampagnen-Video) per Vision-Check pruefen.",
+    "Die Cross-Link-Ziele der 2-Kachel-Grids in Modul 15 und 16 konnten per DOM nicht eindeutig ermittelt werden, weil die Links ohne Aria-Label erscheinen. Ziel-URLs bei spaeterem Crawl mit erneutem Laden pruefen.",
+    "Die Reihenfolge von Video und Story-Bannern (Modul 06 zwischen Banner 3 und 4) deutet auf eine bewusste Dramaturgie 'emotional, informativ, emotional' hin. Zu pruefen, ob dieses Muster bewusst gesetzt ist oder CMS-bedingt.",
+    "Die Bildproportion 8.03 zu 1 (Modul 13 Claim-Strip) ist im Store nur hier zu finden. Zu pruefen, ob dieses Format ein Signatur-Element der UEBER UNS Seite ist oder in weiteren Seiten vorkommt.",
+    "ueber_uns_mod_03 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "ueber_uns_mod_04 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "ueber_uns_mod_05 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "ueber_uns_mod_06 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "ueber_uns_mod_07 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "ueber_uns_mod_08 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "ueber_uns_mod_09 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "ueber_uns_mod_10 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "ueber_uns_mod_11 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "ueber_uns_mod_12 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "ueber_uns_mod_13 position=full: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "ueber_uns_mod_14 position=1: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "ueber_uns_mod_14 position=2: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "ueber_uns_mod_14 position=3: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "ueber_uns_mod_14 position=4: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "ueber_uns_mod_15 position=links: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "ueber_uns_mod_15 position=rechts: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "ueber_uns_mod_16 position=links: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig",
+    "ueber_uns_mod_16 position=rechts: dominantColors unbelegt, Phase-2-Vision-Nachfassen noetig"
+  ]
+}
