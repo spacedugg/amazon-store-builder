@@ -24,38 +24,6 @@
     {
       "position": 1,
       "moduleId": "vitamine_mod_01",
-      "moduleName": "Amazon Nav Header",
-      "layoutType": "amazon_nav_header",
-      "layoutShape": "chrome_or_separator",
-      "tileCount": 0,
-      "designIntent": "mimics_native_chrome",
-      "designIntentDetail": "Wiederholung des Marken-Heros auf jeder Seite. Breadcrumb zeigt 'natural elements > Immunsystem > Vitamine', sodass die Einordnung in der Hierarchie sichtbar ist.",
-      "structuralPattern": "Amazon-eigener Navheader",
-      "backgroundStyle": "amazon_default",
-      "backgroundDetail": null,
-      "textOnImage": {
-        "visibleText": null,
-        "textType": "none",
-        "origin": "none",
-        "headline": null,
-        "subline": null,
-        "cta": null,
-        "directionCues": null
-      },
-      "tiles": [],
-      "dom": {
-        "widgetClass": null,
-        "visibleHeadings": [],
-        "ctaLabels": [],
-        "imageUrls": [],
-        "videoCount": 0,
-        "domHeight": 338,
-        "domTop": 99
-      }
-    },
-    {
-      "position": 2,
-      "moduleId": "vitamine_mod_02",
       "moduleName": "Vitamine Hero",
       "layoutType": "hero_banner",
       "layoutShape": "full_width_banner",
@@ -103,7 +71,12 @@
             "Gelb",
             "Grün"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "category",
+            "topicValue": "Vitamine",
+            "topicDetail": "Kategorie-Hero"
+          }
         }
       ],
       "dom": {
@@ -117,8 +90,8 @@
       }
     },
     {
-      "position": 3,
-      "moduleId": "vitamine_mod_03",
+      "position": 2,
+      "moduleId": "vitamine_mod_02",
       "moduleName": "Editorial Banner",
       "layoutType": "editorial_banner",
       "layoutShape": "full_width_banner",
@@ -163,7 +136,12 @@
             "Olivbeige",
             "Schwarz"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Editorial-Banner ohne klares Inhalts-Thema"
+          }
         }
       ],
       "dom": {
@@ -177,8 +155,8 @@
       }
     },
     {
-      "position": 4,
-      "moduleId": "vitamine_mod_04",
+      "position": 3,
+      "moduleId": "vitamine_mod_03",
       "moduleName": "Premium Multivitamin Showcase",
       "layoutType": "product_showcase_video",
       "layoutShape": "full_width_banner",
@@ -226,7 +204,12 @@
             "Schwarz",
             "Amazon-Gelb"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "product_specific",
+            "topicValue": "Premium Multivitamin",
+            "topicDetail": "Showcase-Row mit Video"
+          }
         }
       ],
       "dom": {
@@ -240,8 +223,8 @@
       }
     },
     {
-      "position": 5,
-      "moduleId": "vitamine_mod_05",
+      "position": 4,
+      "moduleId": "vitamine_mod_04",
       "moduleName": "Vitamin C Showcase",
       "layoutType": "product_showcase_video",
       "layoutShape": "full_width_banner",
@@ -289,7 +272,12 @@
             "Schwarz",
             "Amazon-Gelb"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "product_specific",
+            "topicValue": "Vitamin C",
+            "topicDetail": "Showcase-Row mit Video"
+          }
         }
       ],
       "dom": {
@@ -303,8 +291,8 @@
       }
     },
     {
-      "position": 6,
-      "moduleId": "vitamine_mod_06",
+      "position": 5,
+      "moduleId": "vitamine_mod_05",
       "moduleName": "Vitamin D3 Showcase",
       "layoutType": "product_showcase_video",
       "layoutShape": "full_width_banner",
@@ -352,7 +340,12 @@
             "Schwarz",
             "Amazon-Gelb"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "product_specific",
+            "topicValue": "Vitamin D3",
+            "topicDetail": "Showcase-Row mit Video"
+          }
         }
       ],
       "dom": {
@@ -366,8 +359,8 @@
       }
     },
     {
-      "position": 7,
-      "moduleId": "vitamine_mod_07",
+      "position": 6,
+      "moduleId": "vitamine_mod_06",
       "moduleName": "Vitamine Produktgrid",
       "layoutType": "product_grid_category",
       "layoutShape": "grid_eight_plus",
@@ -398,8 +391,8 @@
       }
     },
     {
-      "position": 8,
-      "moduleId": "vitamine_mod_08",
+      "position": 7,
+      "moduleId": "vitamine_mod_07",
       "moduleName": "Section Intro",
       "layoutType": "editorial_section_intro",
       "layoutShape": "full_width_banner",
@@ -444,7 +437,12 @@
             "Weiß",
             "Grau"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Section-Header, nur Gliederung"
+          }
         }
       ],
       "dom": {
@@ -458,8 +456,8 @@
       }
     },
     {
-      "position": 9,
-      "moduleId": "vitamine_mod_09",
+      "position": 8,
+      "moduleId": "vitamine_mod_08",
       "moduleName": "Sub-Kategorie Slot 1",
       "layoutType": "subcategory_tile",
       "layoutShape": "full_width_banner",
@@ -506,7 +504,12 @@
             "Weiß",
             "Schwarz"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "subcategory",
+            "topicValue": null,
+            "topicDetail": "Eigenstaendige Sub-Kategorie-Row, Vision fuellt topicValue"
+          }
         }
       ],
       "dom": {
@@ -520,8 +523,8 @@
       }
     },
     {
-      "position": 10,
-      "moduleId": "vitamine_mod_10",
+      "position": 9,
+      "moduleId": "vitamine_mod_09",
       "moduleName": "Sub-Kategorie Slot 2",
       "layoutType": "subcategory_tile",
       "layoutShape": "full_width_banner",
@@ -567,7 +570,12 @@
             "Weiß",
             "Grau"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "subcategory",
+            "topicValue": null,
+            "topicDetail": "Eigenstaendige Sub-Kategorie-Row, Vision fuellt topicValue"
+          }
         }
       ],
       "dom": {
@@ -581,8 +589,8 @@
       }
     },
     {
-      "position": 11,
-      "moduleId": "vitamine_mod_11",
+      "position": 10,
+      "moduleId": "vitamine_mod_10",
       "moduleName": "Sub-Kategorie Slot 3",
       "layoutType": "subcategory_tile",
       "layoutShape": "full_width_banner",
@@ -627,7 +635,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "subcategory",
+            "topicValue": null,
+            "topicDetail": "Eigenstaendige Sub-Kategorie-Row, Vision fuellt topicValue"
+          }
         }
       ],
       "dom": {
@@ -641,8 +654,8 @@
       }
     },
     {
-      "position": 12,
-      "moduleId": "vitamine_mod_12",
+      "position": 11,
+      "moduleId": "vitamine_mod_11",
       "moduleName": "Editorial Banner Schluss",
       "layoutType": "editorial_banner",
       "layoutShape": "full_width_banner",
@@ -687,7 +700,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Editorial-Banner ohne klares Inhalts-Thema"
+          }
         }
       ],
       "dom": {
@@ -698,38 +716,6 @@
         "videoCount": 0,
         "domHeight": 303,
         "domTop": 6795
-      }
-    },
-    {
-      "position": 13,
-      "moduleId": "vitamine_mod_13",
-      "moduleName": "Amazon Share Footer",
-      "layoutType": "amazon_share_footer",
-      "layoutShape": "chrome_or_separator",
-      "tileCount": 0,
-      "designIntent": "mimics_native_chrome",
-      "designIntentDetail": null,
-      "structuralPattern": "Amazon-eigener Teilen-Footer",
-      "backgroundStyle": "amazon_default",
-      "backgroundDetail": null,
-      "textOnImage": {
-        "visibleText": "Teilen",
-        "textType": "none",
-        "origin": "amazon_chrome",
-        "headline": "Teilen",
-        "subline": null,
-        "cta": null,
-        "directionCues": null
-      },
-      "tiles": [],
-      "dom": {
-        "widgetClass": "EditorialRow",
-        "visibleHeadings": [],
-        "ctaLabels": [],
-        "imageUrls": [],
-        "videoCount": 0,
-        "domHeight": 200,
-        "domTop": 7098
       }
     }
   ],

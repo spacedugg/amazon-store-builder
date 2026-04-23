@@ -24,38 +24,6 @@
     {
       "position": 1,
       "moduleId": "soprotein_vegan_mod_01",
-      "moduleName": "Amazon Nav Header",
-      "layoutType": "amazon_nav_header",
-      "layoutShape": "chrome_or_separator",
-      "tileCount": 0,
-      "designIntent": "mimics_native_chrome",
-      "designIntentDetail": "Global-Template. Die Aktiv-Markierung liegt auf 'UNSERE NEUHEITEN', dadurch wird die Kampagnen-Seite als Unterseite der Neuheiten positioniert.",
-      "structuralPattern": "Amazon-eigener Navheader",
-      "backgroundStyle": "amazon_default",
-      "backgroundDetail": null,
-      "textOnImage": {
-        "visibleText": null,
-        "textType": "none",
-        "origin": "none",
-        "headline": null,
-        "subline": null,
-        "cta": null,
-        "directionCues": null
-      },
-      "tiles": [],
-      "dom": {
-        "widgetClass": null,
-        "visibleHeadings": [],
-        "ctaLabels": [],
-        "imageUrls": [],
-        "videoCount": 0,
-        "domHeight": 338,
-        "domTop": 99
-      }
-    },
-    {
-      "position": 2,
-      "moduleId": "soprotein_vegan_mod_02",
       "moduleName": "SoProtein Hero kompakt",
       "layoutType": "hero_banner_compact",
       "layoutShape": "full_width_banner",
@@ -96,7 +64,12 @@
           "dominantColors": [
             "zu verifizieren per Vision-Check"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "campaign",
+            "topicValue": "Make it full size",
+            "topicDetail": "Kampagnen-Hero"
+          }
         }
       ],
       "dom": {
@@ -110,8 +83,8 @@
       }
     },
     {
-      "position": 3,
-      "moduleId": "soprotein_vegan_mod_03",
+      "position": 2,
+      "moduleId": "soprotein_vegan_mod_02",
       "moduleName": "SoProtein Produktgrid",
       "layoutType": "product_grid_line",
       "layoutShape": "grid_eight_plus",
@@ -139,38 +112,6 @@
         "videoCount": 0,
         "domHeight": 1901,
         "domTop": 759
-      }
-    },
-    {
-      "position": 4,
-      "moduleId": "soprotein_vegan_mod_04",
-      "moduleName": "Amazon Share Footer",
-      "layoutType": "amazon_share_footer",
-      "layoutShape": "chrome_or_separator",
-      "tileCount": 0,
-      "designIntent": "mimics_native_chrome",
-      "designIntentDetail": "Global-Template. Wird von Amazon automatisch am Ende jeder Store-Seite angehaengt.",
-      "structuralPattern": "Amazon-eigener Teilen-Footer",
-      "backgroundStyle": "amazon_default",
-      "backgroundDetail": null,
-      "textOnImage": {
-        "visibleText": "Teilen",
-        "textType": "none",
-        "origin": "amazon_chrome",
-        "headline": "Teilen",
-        "subline": null,
-        "cta": null,
-        "directionCues": null
-      },
-      "tiles": [],
-      "dom": {
-        "widgetClass": "EditorialRow",
-        "visibleHeadings": [],
-        "ctaLabels": [],
-        "imageUrls": [],
-        "videoCount": 0,
-        "domHeight": 200,
-        "domTop": 2659
       }
     }
   ],

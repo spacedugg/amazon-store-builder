@@ -24,38 +24,6 @@
     {
       "position": 1,
       "moduleId": "geschenk_sets_mod_01",
-      "moduleName": "Amazon Nav Header",
-      "layoutType": "amazon_nav_header",
-      "layoutShape": "chrome_or_separator",
-      "tileCount": 0,
-      "designIntent": "mimics_native_chrome",
-      "designIntentDetail": null,
-      "structuralPattern": "Amazon-eigener Navheader",
-      "backgroundStyle": "amazon_default",
-      "backgroundDetail": null,
-      "textOnImage": {
-        "visibleText": null,
-        "textType": "none",
-        "origin": "none",
-        "headline": null,
-        "subline": null,
-        "cta": null,
-        "directionCues": null
-      },
-      "tiles": [],
-      "dom": {
-        "widgetClass": null,
-        "visibleHeadings": [],
-        "ctaLabels": [],
-        "imageUrls": [],
-        "videoCount": 0,
-        "domHeight": 338,
-        "domTop": 99
-      }
-    },
-    {
-      "position": 2,
-      "moduleId": "geschenk_sets_mod_02",
       "moduleName": "Geschenk-Sets Hero Tall",
       "layoutType": "hero_banner_tall",
       "layoutShape": "full_width_banner",
@@ -100,7 +68,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "brand_story",
+            "topicValue": null,
+            "topicDetail": "Hero ohne klaren Kategorie-Anker"
+          }
         }
       ],
       "dom": {
@@ -114,8 +87,8 @@
       }
     },
     {
-      "position": 3,
-      "moduleId": "geschenk_sets_mod_03",
+      "position": 2,
+      "moduleId": "geschenk_sets_mod_02",
       "moduleName": "Editorial Banner Large",
       "layoutType": "editorial_banner_large",
       "layoutShape": "full_width_banner",
@@ -160,7 +133,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Editorial-Banner ohne klares Inhalts-Thema"
+          }
         }
       ],
       "dom": {
@@ -174,8 +152,8 @@
       }
     },
     {
-      "position": 4,
-      "moduleId": "geschenk_sets_mod_04",
+      "position": 3,
+      "moduleId": "geschenk_sets_mod_03",
       "moduleName": "Immunsystem Basic Set Showcase",
       "layoutType": "product_showcase_video",
       "layoutShape": "full_width_banner",
@@ -220,7 +198,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "gift_set",
+            "topicValue": "Immunsystem Basic Set",
+            "topicDetail": "Set-Showcase mit Video"
+          }
         }
       ],
       "dom": {
@@ -234,8 +217,8 @@
       }
     },
     {
-      "position": 5,
-      "moduleId": "geschenk_sets_mod_05",
+      "position": 4,
+      "moduleId": "geschenk_sets_mod_04",
       "moduleName": "Beauty Premium Set Showcase",
       "layoutType": "product_showcase_video",
       "layoutShape": "full_width_banner",
@@ -280,7 +263,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "gift_set",
+            "topicValue": "Beauty Premium Set",
+            "topicDetail": "Set-Showcase mit Video"
+          }
         }
       ],
       "dom": {
@@ -294,8 +282,8 @@
       }
     },
     {
-      "position": 6,
-      "moduleId": "geschenk_sets_mod_06",
+      "position": 5,
+      "moduleId": "geschenk_sets_mod_05",
       "moduleName": "Essentials Set Showcase",
       "layoutType": "product_showcase_video",
       "layoutShape": "full_width_banner",
@@ -340,7 +328,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "gift_set",
+            "topicValue": "Essentials Set",
+            "topicDetail": "Set-Showcase mit Video"
+          }
         }
       ],
       "dom": {
@@ -354,8 +347,8 @@
       }
     },
     {
-      "position": 7,
-      "moduleId": "geschenk_sets_mod_07",
+      "position": 6,
+      "moduleId": "geschenk_sets_mod_06",
       "moduleName": "Separator",
       "layoutType": "separator_invisible",
       "layoutShape": "chrome_or_separator",
@@ -386,8 +379,8 @@
       }
     },
     {
-      "position": 8,
-      "moduleId": "geschenk_sets_mod_08",
+      "position": 7,
+      "moduleId": "geschenk_sets_mod_07",
       "moduleName": "Beauty Basic Set Showcase",
       "layoutType": "product_showcase_video",
       "layoutShape": "full_width_banner",
@@ -432,7 +425,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "gift_set",
+            "topicValue": "Beauty Basic Set",
+            "topicDetail": "Set-Showcase mit Video"
+          }
         }
       ],
       "dom": {
@@ -446,8 +444,8 @@
       }
     },
     {
-      "position": 9,
-      "moduleId": "geschenk_sets_mod_09",
+      "position": 8,
+      "moduleId": "geschenk_sets_mod_08",
       "moduleName": "Separator",
       "layoutType": "separator_invisible",
       "layoutShape": "chrome_or_separator",
@@ -478,8 +476,8 @@
       }
     },
     {
-      "position": 10,
-      "moduleId": "geschenk_sets_mod_10",
+      "position": 9,
+      "moduleId": "geschenk_sets_mod_09",
       "moduleName": "Kraftsport Basic Set Showcase",
       "layoutType": "product_showcase_video",
       "layoutShape": "full_width_banner",
@@ -524,7 +522,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "gift_set",
+            "topicValue": "Kraftsport Basic Set",
+            "topicDetail": "Set-Showcase mit Video"
+          }
         }
       ],
       "dom": {
@@ -538,8 +541,8 @@
       }
     },
     {
-      "position": 11,
-      "moduleId": "geschenk_sets_mod_11",
+      "position": 10,
+      "moduleId": "geschenk_sets_mod_10",
       "moduleName": "Separator",
       "layoutType": "separator_invisible",
       "layoutShape": "chrome_or_separator",
@@ -570,8 +573,8 @@
       }
     },
     {
-      "position": 12,
-      "moduleId": "geschenk_sets_mod_12",
+      "position": 11,
+      "moduleId": "geschenk_sets_mod_11",
       "moduleName": "Augencreme Set Showcase",
       "layoutType": "product_showcase_video",
       "layoutShape": "full_width_banner",
@@ -616,7 +619,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "gift_set",
+            "topicValue": "Augencreme Set",
+            "topicDetail": "Set-Showcase mit Video"
+          }
         }
       ],
       "dom": {
@@ -630,8 +638,8 @@
       }
     },
     {
-      "position": 13,
-      "moduleId": "geschenk_sets_mod_13",
+      "position": 12,
+      "moduleId": "geschenk_sets_mod_12",
       "moduleName": "Hero Video Schlussblock",
       "layoutType": "hero_video",
       "layoutShape": "full_width_banner",
@@ -676,7 +684,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "brand_story",
+            "topicValue": null,
+            "topicDetail": "Hero ohne klaren Kategorie-Anker"
+          }
         }
       ],
       "dom": {
@@ -690,8 +703,8 @@
       }
     },
     {
-      "position": 14,
-      "moduleId": "geschenk_sets_mod_14",
+      "position": 13,
+      "moduleId": "geschenk_sets_mod_13",
       "moduleName": "Shoppable Interactive",
       "layoutType": "shoppable_interactive_image",
       "layoutShape": "interactive_hotspot",
@@ -736,7 +749,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "shoppable_collection",
+            "topicValue": null,
+            "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
+          }
         }
       ],
       "dom": {
@@ -750,8 +768,8 @@
       }
     },
     {
-      "position": 15,
-      "moduleId": "geschenk_sets_mod_15",
+      "position": 14,
+      "moduleId": "geschenk_sets_mod_14",
       "moduleName": "Section Intro Schluss",
       "layoutType": "editorial_section_intro",
       "layoutShape": "full_width_banner",
@@ -796,7 +814,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Section-Header, nur Gliederung"
+          }
         }
       ],
       "dom": {
@@ -810,8 +833,8 @@
       }
     },
     {
-      "position": 16,
-      "moduleId": "geschenk_sets_mod_16",
+      "position": 15,
+      "moduleId": "geschenk_sets_mod_15",
       "moduleName": "Editorial Quad 1",
       "layoutType": "editorial_tile_quad",
       "layoutShape": "grid_four",
@@ -856,7 +879,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "2",
@@ -883,7 +911,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "3",
@@ -910,7 +943,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "4",
@@ -937,7 +975,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         }
       ],
       "dom": {
@@ -951,8 +994,8 @@
       }
     },
     {
-      "position": 17,
-      "moduleId": "geschenk_sets_mod_17",
+      "position": 16,
+      "moduleId": "geschenk_sets_mod_16",
       "moduleName": "Editorial Quad 2",
       "layoutType": "editorial_tile_quad",
       "layoutShape": "grid_four",
@@ -997,7 +1040,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "2",
@@ -1024,7 +1072,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "3",
@@ -1051,7 +1104,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "4",
@@ -1078,7 +1136,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         }
       ],
       "dom": {
@@ -1089,38 +1152,6 @@
         "videoCount": 0,
         "domHeight": 584,
         "domTop": 6285
-      }
-    },
-    {
-      "position": 18,
-      "moduleId": "geschenk_sets_mod_18",
-      "moduleName": "Amazon Share Footer",
-      "layoutType": "amazon_share_footer",
-      "layoutShape": "chrome_or_separator",
-      "tileCount": 0,
-      "designIntent": "mimics_native_chrome",
-      "designIntentDetail": null,
-      "structuralPattern": "Amazon-eigener Teilen-Footer",
-      "backgroundStyle": "amazon_default",
-      "backgroundDetail": null,
-      "textOnImage": {
-        "visibleText": "Teilen",
-        "textType": "none",
-        "origin": "amazon_chrome",
-        "headline": "Teilen",
-        "subline": null,
-        "cta": null,
-        "directionCues": null
-      },
-      "tiles": [],
-      "dom": {
-        "widgetClass": "EditorialRow",
-        "visibleHeadings": [],
-        "ctaLabels": [],
-        "imageUrls": [],
-        "videoCount": 0,
-        "domHeight": 200,
-        "domTop": 6869
       }
     }
   ],

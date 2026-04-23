@@ -24,38 +24,6 @@
     {
       "position": 1,
       "moduleId": "alle_produkte_mod_01",
-      "moduleName": "Amazon Nav Header",
-      "layoutType": "amazon_nav_header",
-      "layoutShape": "chrome_or_separator",
-      "tileCount": 0,
-      "designIntent": "mimics_native_chrome",
-      "designIntentDetail": null,
-      "structuralPattern": "Amazon-eigener Navheader",
-      "backgroundStyle": "amazon_default",
-      "backgroundDetail": null,
-      "textOnImage": {
-        "visibleText": null,
-        "textType": "none",
-        "origin": "none",
-        "headline": null,
-        "subline": null,
-        "cta": null,
-        "directionCues": null
-      },
-      "tiles": [],
-      "dom": {
-        "widgetClass": null,
-        "visibleHeadings": [],
-        "ctaLabels": [],
-        "imageUrls": [],
-        "videoCount": 0,
-        "domHeight": 338,
-        "domTop": 99
-      }
-    },
-    {
-      "position": 2,
-      "moduleId": "alle_produkte_mod_02",
       "moduleName": "Alle Produkte shoppable",
       "layoutType": "shoppable_interactive_image",
       "layoutShape": "interactive_hotspot",
@@ -100,7 +68,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "shoppable_collection",
+            "topicValue": null,
+            "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
+          }
         }
       ],
       "dom": {
@@ -114,8 +87,8 @@
       }
     },
     {
-      "position": 3,
-      "moduleId": "alle_produkte_mod_03",
+      "position": 2,
+      "moduleId": "alle_produkte_mod_02",
       "moduleName": "Editorial Banner Intro",
       "layoutType": "editorial_banner",
       "layoutShape": "full_width_banner",
@@ -160,7 +133,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Editorial-Banner ohne klares Inhalts-Thema"
+          }
         }
       ],
       "dom": {
@@ -174,8 +152,8 @@
       }
     },
     {
-      "position": 4,
-      "moduleId": "alle_produkte_mod_04",
+      "position": 3,
+      "moduleId": "alle_produkte_mod_03",
       "moduleName": "Alle Produkte Katalog",
       "layoutType": "product_grid_full_catalog",
       "layoutShape": "grid_eight_plus",
@@ -206,8 +184,8 @@
       }
     },
     {
-      "position": 5,
-      "moduleId": "alle_produkte_mod_05",
+      "position": 4,
+      "moduleId": "alle_produkte_mod_04",
       "moduleName": "Section Intro Schluss",
       "layoutType": "editorial_section_intro",
       "layoutShape": "full_width_banner",
@@ -252,7 +230,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Section-Header, nur Gliederung"
+          }
         }
       ],
       "dom": {
@@ -263,38 +246,6 @@
         "videoCount": 0,
         "domHeight": 169,
         "domTop": 4897
-      }
-    },
-    {
-      "position": 6,
-      "moduleId": "alle_produkte_mod_06",
-      "moduleName": "Amazon Share Footer",
-      "layoutType": "amazon_share_footer",
-      "layoutShape": "chrome_or_separator",
-      "tileCount": 0,
-      "designIntent": "mimics_native_chrome",
-      "designIntentDetail": null,
-      "structuralPattern": "Amazon-eigener Teilen-Footer",
-      "backgroundStyle": "amazon_default",
-      "backgroundDetail": null,
-      "textOnImage": {
-        "visibleText": "Teilen",
-        "textType": "none",
-        "origin": "amazon_chrome",
-        "headline": "Teilen",
-        "subline": null,
-        "cta": null,
-        "directionCues": null
-      },
-      "tiles": [],
-      "dom": {
-        "widgetClass": "EditorialRow",
-        "visibleHeadings": [],
-        "ctaLabels": [],
-        "imageUrls": [],
-        "videoCount": 0,
-        "domHeight": 200,
-        "domTop": 5066
       }
     }
   ],

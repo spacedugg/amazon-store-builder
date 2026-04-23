@@ -57,6 +57,10 @@ tileCount            Anzahl Kacheln im Modul
 designIntent         Enum aus Paragraf 10, 7 Werte, Gold-aligned
 designIntentDetail   Optionaler Freitext, 1 Satz Begruendung
 structuralPattern    1 bis 2 Saetze Freitext: wiederkehrendes Muster
+moduleFunction       2 bis 3 Saetze Freitext, PFLICHT: wofuer ist dieses Modul da,
+                     welche Rolle im User-Journey, zu welcher Subpage lenkt es,
+                     welches Bedurfnis bedient es. Das ist die Einordnungs-Ebene
+                     und das eigentliche Nutzungs-Ziel der Analyse.
 backgroundStyle      Enum aus Paragraf 5, 6 Werte, Gold-aligned
 backgroundDetail     Optionaler Freitext, Spezifika der Flaeche
 textOnImage          Objekt aus Paragraf 7, strukturiert
@@ -146,27 +150,38 @@ Zusatzfeld `backgroundDetail` als optionaler Freitext fuer Spezifika,
 zum Beispiel "Volltonfarbe Gelb mit Produkt-Silhouetten", "Split links
 salbei-gruen rechts Lifestyle-Foto".
 
-## 6. `imageCategory`, 6 Werte (Tile-Level)
+## 6. `imageCategory`, 7 Werte (Tile-Level)
 
-Gold hat 5 beobachtete Werte, plus ein sechster fuer reine USP-Flaechen,
-den Gold bisher nicht vergeben hat, der aber bei anderen Stores auftreten
-wird.
+Gold hat 5 beobachtete Werte. Hinzu kommen `benefit` fuer reine
+USP-Flaechen und der entscheidende neue Wert `product_tile_asin` fuer
+Kacheln, die lediglich einen Amazon-Produktlink einbetten, wo also
+Amazon selbst Produktbild, Titel und Preis rendert und wo es **keine
+Designentscheidung des Stores** gibt. Diese Tiles brauchen keinen
+Vision-Pass.
 
 - `creative` — zwei oder drei Elementtypen gleichgewichtig (dominanter Default)
 - `text_image` — Text und Grafik dominant, Foto unter 20 Prozent
-- `product` — Produkt klar im Fokus, ueber 50 Prozent Flaeche
+- `product` — brand-gestaltete Produkt-Kachel im eigenen Layout
+- `product_tile_asin` — Amazon-ASIN-Tile ohne Brand-Design. Nur die ASIN
+  und der Link zaehlen. Alle weiteren Vision-Felder (visualContent,
+  dominantColors, elementProportions, textOnImage-Details) bleiben leer
+  beziehungsweise auf `not_required` gesetzt. Typisch in jedem
+  `product_grid_*`-Modul, auch im Shoppable-Hotspot-Target.
 - `lifestyle` — Lifestyle-Foto dominiert ueber 70 Prozent Flaeche
 - `creative_lifestyle_hybrid` — Creative-Layout mit starkem Lifestyle-Anteil
 - `benefit` — nur USPs, Icons, Awards, Zertifikate, keine Produkte
 
 Entscheidungsbaum, erste zutreffende Regel gewinnt:
 
-1. Rein Text und Grafik, Foto unter 20 Prozent: `text_image`
-2. Nur USPs, Icons, Awards ohne Produkt und Personen: `benefit`
-3. Produkt ueber 50 Prozent Flaeche: `product`
-4. Lifestyle-Foto ueber 70 Prozent, nur dezentes Overlay: `lifestyle`
-5. Creative-Layout mit sichtbarem Lifestyle-Foto-Anteil: `creative_lifestyle_hybrid`
-6. Sonst: `creative`
+1. Modul-layoutType startet mit `product_grid_` und Tile ist direktes
+   ASIN-Kind? `product_tile_asin`
+2. Rein Text und Grafik, Foto unter 20 Prozent: `text_image`
+3. Nur USPs, Icons, Awards ohne Produkt und Personen: `benefit`
+4. Brand-gestaltetes Produkt-Setup (Szene, Hintergrund, Typografie)
+   ueber 50 Prozent Flaeche: `product`
+5. Lifestyle-Foto ueber 70 Prozent, nur dezentes Overlay: `lifestyle`
+6. Creative-Layout mit sichtbarem Lifestyle-Foto-Anteil: `creative_lifestyle_hybrid`
+7. Sonst: `creative`
 
 ## 7. `textOnImage`, strukturiert, mit Origin-Marker
 
@@ -238,16 +253,179 @@ Aus der v2-Vorversion entfernt: `immersive` (faellt in emotional_hook),
 ```
 position              1-basiert, links-oben zuerst
 imageCategory         Enum aus Paragraf 6
+toolTileType          Enum aus Paragraf 11a (PFLICHT, Tool-Sprache)
+toolImageType         Enum aus Paragraf 11b (PFLICHT, aus Layout-Position)
+link                  Objekt aus Paragraf 11c (Clickability, aus tileContentTopic ableitbar)
+tileContentTopic      Objekt aus Paragraf 11e (PFLICHT, semantisches Kernfeld)
 visualContent         deutscher Freitext, was inhaltlich zu sehen ist
 elementProportions    Objekt mit Schluesseln aus Paragraf 12, Summe ca. 100
 textOnImage           Objekt aus Paragraf 7
-ctaText               sichtbarer CTA-Button-Text, oder null
-linksTo               erkennbares Ziel aus Kontext, oder null
+ctaText               sichtbarer CTA-Button-Text, oder null (Spiegel in link.ctaLabel)
+linksTo               Tile-Target, freitextlich (Spiegel in link.linkTarget)
 backgroundStyle       Enum aus Paragraf 5
 backgroundDetail      optionaler Freitext
 dominantColors        Array mit 2 bis 4 Farbbegriffen auf Deutsch
 dominantColorsHex     optionales Array mit 2 bis 4 Hex-Werten, falls extrahierbar
 ```
+
+## 11a. `toolTileType`, Tool-Sprache (geschlossene Liste)
+
+Diese Liste kommt direkt aus `src/constants.js` `TILE_TYPES` und darf
+nicht erweitert werden. Verbindliche Sprache des Generator-Tools.
+
+- `image` — reines Bild
+- `image_text` — Bild plus Text, typisch fuer editorial_banner mit Headline
+- `product_grid` — ASIN-Grid, Amazon rendert Kacheln
+- `best_sellers` — ASIN-Grid, Bestseller-Sortierung
+- `recommended` — ASIN-Grid, Recommendations oder Neuheiten
+- `deals` — ASIN-Grid, Angebote
+- `video` — Videoflaeche (Full-Width oder in Split)
+- `text` — reiner Text im Amazon-Chrome (Nav, Share-Footer)
+- `shoppable_image` — Bild mit Hotspots, jeder Hotspot links to ASIN
+- `product_selector` — Filter-Quiz fuer Beratung
+
+Ableitung, erste zutreffende Regel gewinnt:
+
+1. `layoutType` startet mit `product_grid_`: je nach Subtyp
+   `best_sellers`, `recommended` oder `product_grid`
+2. `imageCategory == product_tile_asin`: `product_grid`
+3. `layoutType` startet mit `shoppable_`: `shoppable_image`
+4. Modul enthaelt Video: `video`
+5. `layoutType` in Filter-UI: `product_selector`
+6. `layoutType` in Amazon-Chrome: `text`
+7. `imageCategory == text_image` oder Modul ist `editorial_section_intro`:
+   `image_text`
+8. `imageCategory == benefit`: `image_text`
+9. Sonst: `image`
+
+## 11b. `toolImageType`, Tool-Image-Dimensionen (aus Layout-Position)
+
+Aus dem gemappten Tool-Layout plus Tile-Position ergibt sich die
+Amazon-Bild-Dimension nach `LAYOUT_TILE_DIMS` in `src/constants.js`:
+
+- `FULL_WIDTH` 3000x600 (bis 15:1 Ratio)
+- `LARGE_SQUARE` 1500x1500
+- `WIDE` 1500x700
+- `SMALL_SQUARE` 750x750
+- `VH_WIDE` 3000x1500
+- `VH_SQUARE` 1500x1500
+- `PRODUCT_TILE_ASIN` (Sonderfall, Amazon rendert)
+
+## 11c. `link`, Clickability-Objekt (PFLICHT pro Tile)
+
+```
+link: {
+  clickable: boolean,
+  linkType: enum,
+  linkTarget: string | null,
+  ctaLabel: string | null,
+  confidence: enum (high, medium, low)
+}
+```
+
+`linkType`-Enum (geschlossen):
+
+- `none` — nicht klickbar (dekorativ, Hintergrund, Section-Intro)
+- `internal_subpage` — zu anderer Unterseite im selben Brand Store
+- `pdp_asin` — zu einer einzelnen Amazon-PDP
+- `pdp_asin_multi` — zu Amazon-ASIN-Grid, mehrere PDPs erreichbar
+- `pdp_asin_hotspots` — Shoppable mit Hotspots je PDP
+- `internal_filter` — internal Filter-Trigger (Produktselektor)
+- `external` — externe URL
+- `amazon_native` — Amazon-UI
+
+`linkTarget`-Konventionen:
+- `internal_subpage`: Slug der Zielseite (z.B. `unsere-neuheiten`,
+  `ueber-uns`, `produktselektor`)
+- `pdp_asin`: ASIN oder Produktname
+- `pdp_asin_multi`: Hinweis wie `amazon_rendered_tiles`
+- `pdp_asin_hotspots`: Hinweis plus Hotspot-Count
+- `internal_filter`: Filter-Slug
+- `amazon_native`: `amazon_ui`
+
+`confidence`:
+- `high` — klar klickbar (CTA sichtbar, linksTo bekannt, ASIN-Grid)
+- `medium` — plausibel (editorial_tile, subcategory_tile, Hero mit CTA)
+- `low` — unklar, Einzelpruefung noetig
+
+## 11d. Tool-Layout pro Modul (PFLICHT)
+
+Jedes Modul bekommt zusaetzlich:
+
+```
+toolLayoutId     String | null (aus src/constants.js LAYOUTS)
+toolLayoutName   String | null (menschenlesbar)
+toolLayoutType   enum: fullwidth, standard, vh, fullwidth_asin,
+                       amazon_native, skip
+toolLayoutRole   String (aus src/blueprintLayoutMap.js)
+```
+
+Mapping liegt in `scripts/enrich-tool-vocabulary.py` (V3_TO_TOOL) und in
+`src/blueprintLayoutMap.js`. Bei neuem `layoutType` beide synchron halten.
+
+## 11e. `tileContentTopic` (PFLICHT pro Tile)
+
+Das semantische Kernfeld. Beantwortet: **worum geht es in dieser Kachel
+inhaltlich?** Enum plus optionalem Detail.
+
+```
+tileContentTopic: {
+  topicType: enum,
+  topicValue: string | null,
+  topicDetail: string | null
+}
+```
+
+`topicType` (geschlossenes Enum):
+
+- `category` — Kachel zeigt eine Kategorie (z.B. Immunsystem, Sport
+  und Energie). `topicValue` ist der Kategoriename
+- `subcategory` — Unter-Kategorie (z.B. Vitamine innerhalb Immunsystem).
+  `topicValue` = Sub-Kategoriename
+- `product_specific` — Kachel zeigt ein konkretes Produkt.
+  `topicValue` = Produktname oder ASIN
+- `product_line` — Kachel zeigt eine Produktlinie, mehrere SKUs
+  (z.B. SoProtein, Sports Series). `topicValue` = Linienname
+- `brand_story` — Kachel zeigt Marken-Story, Gruender, Herkunft, Werte
+- `brand_promise` — Kachel zeigt ein Marken-Versprechen, USP, Zertifikat
+  (laborgeprueft, made in germany, etc.)
+- `campaign` — Saison- oder Kampagnen-Thema (Sommer, Weihnachten,
+  Neuheiten)
+- `advisory` — Beratungs-Angebot (Produktselektor, Quiz)
+- `shoppable_collection` — Shoppable Image mit Hotspots zu mehreren
+  PDPs
+- `gift_set` — Geschenk-Set oder Bundle. `topicValue` = Set-Name
+- `navigation_entry` — generische Navigation ohne klares Sub-Thema
+  (z.B. "Alle Produkte ansehen")
+- `editorial_filler` — reine visuelle Pause, kein Inhaltsthema
+- `unclear` — Inhalt nicht sicher erkennbar, in openQuestions
+
+`topicValue`: der konkrete Begriff, in dem der Store diese Sache nennt
+(z.B. "Immunsystem", "Premium Multivitamin", "Make it full size"). Wenn
+unklar, null.
+
+`topicDetail`: optionaler Freitext fuer Nuancen, z.B. "Lifestyle-Shot
+mit Produkt im Alltag", "Pack-Shot neutral", "Gruender-Portrait im
+Labor".
+
+**Pflicht-Regel fuer Phase 2**: Wenn eine Kachel klar eine
+Kategorie oder ein Produkt zeigt, muss `topicValue` gefuellt sein.
+Nicht "unclear" flaggen aus Bequemlichkeit, das ist das Hauptergebnis
+der Analyse.
+
+**Generator-Konsequenz**: aus `tileContentTopic` laesst sich der
+Link-Target ableiten:
+
+- `topicType: category` plus `topicValue: Immunsystem`
+  → Link zur Immunsystem-Subpage
+- `topicType: product_specific` plus `topicValue: Premium Multivitamin`
+  → Link zur PDP des Produkts
+- `topicType: brand_story`
+  → Link zur About-Seite oder kein Link
+- `topicType: editorial_filler`
+  → kein Link
+
+Das ist Generator-Logik, keine Scraping-Anforderung.
 
 ## 12. `elementProportions`, geschlossene Schluessel
 
@@ -295,6 +473,11 @@ pageAnalysis:
   contentDepth          Freitext
   useForArchetype       Freitext, Template-Eignung
   moduleClusters        Array oder Freitext, semantische Gruppierungen
+pageArchitecture      Freitext, 2 bis 4 Saetze, PFLICHT: wie ist die Seite
+                      funktional aufgebaut, in welcher Reihenfolge fuehrt
+                      sie den Nutzer, welcher Bedarfsfall wird adressiert.
+                      Das ist die Seiten-Ebene der Einordnung, analog zu
+                      moduleFunction auf Modul-Ebene.
 openQuestions         Array von Strings, alles was nicht sicher erkennbar war
 ```
 
