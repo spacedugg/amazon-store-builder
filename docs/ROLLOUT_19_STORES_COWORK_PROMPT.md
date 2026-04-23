@@ -62,23 +62,38 @@ damit das Ergebnis vergleichbar bleibt.
 
 ## Prioritaet und Reihenfolge
 
-Empfohlene Batch-Reihenfolge, damit die Pipeline sich stabilisiert:
+**Vorgehen: ein Store nach dem anderen.** Keine Batches. Jeder Store
+wird einzeln vollstaendig analysiert und vollstaendig mit dem User
+reviewt, bevor der naechste startet. Langsam und sicher schlaegt
+schnell und unvollstaendig.
 
-**Batch 1 (einfach, 3 Stores)**: kloster-kitchen, kaercher, gritin.
-Wenig Seiten, dominante Grid-Struktur.
+**Probe-Store**: `kloster-kitchen`. Kleiner, ueberschaubarer Store,
+gut geeignet um die Pipeline zu validieren und Schema-Luecken
+aufzudecken, bevor die komplexen Stores dran sind.
 
-**Batch 2 (komplex, 3 Stores)**: nespresso, nucompany, blackroll.
-Viele Seiten, diverse Module, Edge-Cases wahrscheinlich.
+Nach erfolgreichem Abschluss von kloster-kitchen:
 
-**Batch 3 (mittel, 13 Stores)**: der Rest.
+1. User reviewt das Aggregat manuell.
+2. Offene Punkte aus dem Review werden im Schema, im
+   BLUEPRINT_EXTRACTION_PROMPT oder im Enrichment-Skript nachgezogen.
+3. Erst dann startet der naechste Store.
 
-Nach jedem Batch kurzes Review mit dem User, bevor der naechste startet.
+**Folge-Reihenfolge** nach kloster-kitchen, je nach Bedarf abgestimmt
+mit dem User:
+
+kaercher, gritin, holy-energy, hansegruen, night-cat, feandrea,
+cloudpillo, desktronic, bedsure, manscaped, masterchef, esn,
+more-nutrition, blackroll, nucompany, nespresso
+
+(19 Stores gesamt. Die grossen und komplexen, wie nespresso und
+nucompany, ans Ende, wenn die Pipeline getestet und gehaertet ist.)
 
 ## Repo-Setup
 
 - Repo: `spacedugg/amazon-store-builder`
 - Base: `origin/main` (enthaelt v3-Schema plus natural-elements-Gold)
-- Arbeits-Branch: `claude/rollout-batch-<nr>-<suffix>` pro Batch
+- Arbeits-Branch: `claude/rollout-<store>-<suffix>` pro Store
+  (Beispiel: `claude/rollout-kloster-kitchen-abc123`)
 
 ## Phase 1: DOM-Extraktion pro Seite
 
@@ -272,8 +287,33 @@ beschreiben". Siehe Paragraf 11e im BLUEPRINT_EXTRACTION_PROMPT.
 ```
 git add data/store-knowledge/rerun-v3/<store>/
 git commit -m "<store> v3 rerun, Phase 1 plus Phase 2 plus Phase 3"
-git push origin claude/rollout-batch-<nr>-<suffix>
+git push origin claude/rollout-<store>-<suffix>
 ```
+
+Ein eigener Branch pro Store, damit Review-Kommentare, Fixes und
+Merges isoliert bleiben.
+
+## Checkpoint-Protokoll pro Store
+
+Nach dem Push pro Store:
+
+1. Cowork meldet dem User: "Store X fertig, Branch gepusht, Kurzreport
+   beigelegt".
+2. Kurzreport enthaelt:
+   - Seiten-Zahl
+   - Module-Zahl (ohne amazon-native)
+   - Tile-Zahl mit und ohne topicValue
+   - tileContentTopic-Verteilung
+   - Anzahl openQuestions und Stichproben davon
+   - Abweichungen gegenueber dem alten V4-Analyse-Stand
+3. User reviewt manuell, gibt Feedback oder Freigabe.
+4. Erst nach Freigabe startet der naechste Store.
+
+Bei groesseren Befunden im Review wird zuerst das Schema oder der
+Prompt oder die Enrichment-Skripte angepasst, dann der betroffene
+Store neu durchlaufen, dann geht es weiter.
+
+Keine Parallel-Laeufe. Ein Store in Arbeit, alle anderen warten.
 
 ## Deliverables am Ende des Rollouts
 
