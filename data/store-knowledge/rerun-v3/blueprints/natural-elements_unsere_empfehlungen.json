@@ -23,39 +23,7 @@
   "modules": [
     {
       "position": 1,
-      "moduleId": "unsere_empfehlungen_mod_01",
-      "moduleName": "Amazon Nav Header",
-      "layoutType": "amazon_nav_header",
-      "layoutShape": "chrome_or_separator",
-      "tileCount": 0,
-      "designIntent": "mimics_native_chrome",
-      "designIntentDetail": null,
-      "structuralPattern": "Amazon-eigener Navheader",
-      "backgroundStyle": "amazon_default",
-      "backgroundDetail": null,
-      "textOnImage": {
-        "visibleText": null,
-        "textType": "none",
-        "origin": "none",
-        "headline": null,
-        "subline": null,
-        "cta": null,
-        "directionCues": null
-      },
-      "tiles": [],
-      "dom": {
-        "widgetClass": null,
-        "visibleHeadings": [],
-        "ctaLabels": [],
-        "imageUrls": [],
-        "videoCount": 0,
-        "domHeight": 338,
-        "domTop": 99
-      }
-    },
-    {
-      "position": 2,
-      "moduleId": "unsere_empfehlungen_mod_02",
+      "moduleId": "unsere_bestseller_empfehlungen_mod_01",
       "moduleName": "Empfehlungen Section Intro",
       "layoutType": "editorial_section_intro",
       "layoutShape": "full_width_banner",
@@ -114,8 +82,8 @@
       }
     },
     {
-      "position": 3,
-      "moduleId": "unsere_empfehlungen_mod_03",
+      "position": 2,
+      "moduleId": "unsere_bestseller_empfehlungen_mod_02",
       "moduleName": "Bestseller Grid 24",
       "layoutType": "product_grid_bestsellers",
       "layoutShape": "grid_eight_plus",
@@ -146,8 +114,8 @@
       }
     },
     {
-      "position": 4,
-      "moduleId": "unsere_empfehlungen_mod_04",
+      "position": 3,
+      "moduleId": "unsere_bestseller_empfehlungen_mod_03",
       "moduleName": "Section Intro 2",
       "layoutType": "editorial_section_intro",
       "layoutShape": "full_width_banner",
@@ -206,8 +174,8 @@
       }
     },
     {
-      "position": 5,
-      "moduleId": "unsere_empfehlungen_mod_05",
+      "position": 4,
+      "moduleId": "unsere_bestseller_empfehlungen_mod_04",
       "moduleName": "Editorial Quad 1",
       "layoutType": "editorial_tile_quad",
       "layoutShape": "grid_four",
@@ -347,8 +315,8 @@
       }
     },
     {
-      "position": 6,
-      "moduleId": "unsere_empfehlungen_mod_06",
+      "position": 5,
+      "moduleId": "unsere_bestseller_empfehlungen_mod_05",
       "moduleName": "Editorial Quad 2",
       "layoutType": "editorial_tile_quad",
       "layoutShape": "grid_four",
@@ -485,38 +453,6 @@
         "videoCount": 0,
         "domHeight": 292,
         "domTop": 3264
-      }
-    },
-    {
-      "position": 7,
-      "moduleId": "unsere_empfehlungen_mod_07",
-      "moduleName": "Amazon Share Footer",
-      "layoutType": "amazon_share_footer",
-      "layoutShape": "chrome_or_separator",
-      "tileCount": 0,
-      "designIntent": "mimics_native_chrome",
-      "designIntentDetail": null,
-      "structuralPattern": "Amazon-eigener Teilen-Footer",
-      "backgroundStyle": "amazon_default",
-      "backgroundDetail": null,
-      "textOnImage": {
-        "visibleText": "Teilen",
-        "textType": "none",
-        "origin": "amazon_chrome",
-        "headline": "Teilen",
-        "subline": null,
-        "cta": null,
-        "directionCues": null
-      },
-      "tiles": [],
-      "dom": {
-        "widgetClass": "EditorialRow",
-        "visibleHeadings": [],
-        "ctaLabels": [],
-        "imageUrls": [],
-        "videoCount": 0,
-        "domHeight": 200,
-        "domTop": 3555
       }
     }
   ],

@@ -24,38 +24,6 @@
     {
       "position": 1,
       "moduleId": "ueber_uns_mod_01",
-      "moduleName": "Amazon Nav Header",
-      "layoutType": "amazon_nav_header",
-      "layoutShape": "chrome_or_separator",
-      "tileCount": 0,
-      "designIntent": "mimics_native_chrome",
-      "designIntentDetail": "Global-Template, Aktiv-Markierung signalisiert Position UEBER UNS.",
-      "structuralPattern": "Amazon-eigener Navheader",
-      "backgroundStyle": "amazon_default",
-      "backgroundDetail": null,
-      "textOnImage": {
-        "visibleText": null,
-        "textType": "none",
-        "origin": "none",
-        "headline": null,
-        "subline": null,
-        "cta": null,
-        "directionCues": null
-      },
-      "tiles": [],
-      "dom": {
-        "widgetClass": null,
-        "visibleHeadings": [],
-        "ctaLabels": [],
-        "imageUrls": [],
-        "videoCount": 0,
-        "domHeight": 338,
-        "domTop": 99
-      }
-    },
-    {
-      "position": 2,
-      "moduleId": "ueber_uns_mod_02",
       "moduleName": "Ueber uns Hero",
       "layoutType": "hero_banner",
       "layoutShape": "full_width_banner",
@@ -110,8 +78,8 @@
       }
     },
     {
-      "position": 3,
-      "moduleId": "ueber_uns_mod_03",
+      "position": 2,
+      "moduleId": "ueber_uns_mod_02",
       "moduleName": "Story Banner 1",
       "layoutType": "editorial_banner",
       "layoutShape": "full_width_banner",
@@ -170,8 +138,8 @@
       }
     },
     {
-      "position": 4,
-      "moduleId": "ueber_uns_mod_04",
+      "position": 3,
+      "moduleId": "ueber_uns_mod_03",
       "moduleName": "Story Banner Tall",
       "layoutType": "editorial_banner_tall",
       "layoutShape": "full_width_banner",
@@ -230,8 +198,8 @@
       }
     },
     {
-      "position": 5,
-      "moduleId": "ueber_uns_mod_05",
+      "position": 4,
+      "moduleId": "ueber_uns_mod_04",
       "moduleName": "Story Banner 2",
       "layoutType": "editorial_banner",
       "layoutShape": "full_width_banner",
@@ -290,8 +258,8 @@
       }
     },
     {
-      "position": 6,
-      "moduleId": "ueber_uns_mod_06",
+      "position": 5,
+      "moduleId": "ueber_uns_mod_05",
       "moduleName": "Brand Video",
       "layoutType": "hero_video_tall",
       "layoutShape": "full_width_banner",
@@ -350,8 +318,8 @@
       }
     },
     {
-      "position": 7,
-      "moduleId": "ueber_uns_mod_07",
+      "position": 6,
+      "moduleId": "ueber_uns_mod_06",
       "moduleName": "Story Banner 3",
       "layoutType": "editorial_banner",
       "layoutShape": "full_width_banner",
@@ -410,8 +378,8 @@
       }
     },
     {
-      "position": 8,
-      "moduleId": "ueber_uns_mod_08",
+      "position": 7,
+      "moduleId": "ueber_uns_mod_07",
       "moduleName": "Story Banner 4",
       "layoutType": "editorial_banner",
       "layoutShape": "full_width_banner",
@@ -470,8 +438,8 @@
       }
     },
     {
-      "position": 9,
-      "moduleId": "ueber_uns_mod_09",
+      "position": 8,
+      "moduleId": "ueber_uns_mod_08",
       "moduleName": "Story Banner 5",
       "layoutType": "editorial_banner",
       "layoutShape": "full_width_banner",
@@ -530,8 +498,8 @@
       }
     },
     {
-      "position": 10,
-      "moduleId": "ueber_uns_mod_10",
+      "position": 9,
+      "moduleId": "ueber_uns_mod_09",
       "moduleName": "Story Banner 6",
       "layoutType": "editorial_banner",
       "layoutShape": "full_width_banner",
@@ -590,8 +558,8 @@
       }
     },
     {
-      "position": 11,
-      "moduleId": "ueber_uns_mod_11",
+      "position": 10,
+      "moduleId": "ueber_uns_mod_10",
       "moduleName": "Story Banner Tall 2",
       "layoutType": "editorial_banner_tall",
       "layoutShape": "full_width_banner",
@@ -650,8 +618,8 @@
       }
     },
     {
-      "position": 12,
-      "moduleId": "ueber_uns_mod_12",
+      "position": 11,
+      "moduleId": "ueber_uns_mod_11",
       "moduleName": "Story Banner 7",
       "layoutType": "editorial_banner",
       "layoutShape": "full_width_banner",
@@ -710,8 +678,8 @@
       }
     },
     {
-      "position": 13,
-      "moduleId": "ueber_uns_mod_13",
+      "position": 12,
+      "moduleId": "ueber_uns_mod_12",
       "moduleName": "Section Intro Endblock",
       "layoutType": "editorial_section_intro",
       "layoutShape": "full_width_banner",
@@ -770,8 +738,8 @@
       }
     },
     {
-      "position": 14,
-      "moduleId": "ueber_uns_mod_14",
+      "position": 13,
+      "moduleId": "ueber_uns_mod_13",
       "moduleName": "Editorial Quad",
       "layoutType": "editorial_tile_quad",
       "layoutShape": "grid_four",
@@ -911,8 +879,8 @@
       }
     },
     {
-      "position": 15,
-      "moduleId": "ueber_uns_mod_15",
+      "position": 14,
+      "moduleId": "ueber_uns_mod_14",
       "moduleName": "Editorial Pair 1",
       "layoutType": "editorial_tile_pair",
       "layoutShape": "split_two",
@@ -998,8 +966,8 @@
       }
     },
     {
-      "position": 16,
-      "moduleId": "ueber_uns_mod_16",
+      "position": 15,
+      "moduleId": "ueber_uns_mod_15",
       "moduleName": "Editorial Pair 2",
       "layoutType": "editorial_tile_pair",
       "layoutShape": "split_two",
@@ -1082,38 +1050,6 @@
         "videoCount": 0,
         "domHeight": 292,
         "domTop": 5487
-      }
-    },
-    {
-      "position": 17,
-      "moduleId": "ueber_uns_mod_17",
-      "moduleName": "Amazon Share Footer",
-      "layoutType": "amazon_share_footer",
-      "layoutShape": "chrome_or_separator",
-      "tileCount": 0,
-      "designIntent": "mimics_native_chrome",
-      "designIntentDetail": "Global-Template am Seitenende.",
-      "structuralPattern": "Amazon-eigener Teilen-Footer",
-      "backgroundStyle": "amazon_default",
-      "backgroundDetail": null,
-      "textOnImage": {
-        "visibleText": "Teilen",
-        "textType": "none",
-        "origin": "amazon_chrome",
-        "headline": "Teilen",
-        "subline": null,
-        "cta": null,
-        "directionCues": null
-      },
-      "tiles": [],
-      "dom": {
-        "widgetClass": "EditorialRow",
-        "visibleHeadings": [],
-        "ctaLabels": [],
-        "imageUrls": [],
-        "videoCount": 0,
-        "domHeight": 200,
-        "domTop": 5779
       }
     }
   ],

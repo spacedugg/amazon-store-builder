@@ -18,33 +18,49 @@ V3_PATH = Path('data/store-knowledge/rerun-v3/natural-elements_analysis.json')
 
 
 def build_module_functional_taxonomy(pages):
-    """Zaehlt Modul-Funktions-Muster ueber alle Seiten."""
-    by_layout = collections.Counter()
-    by_intent = collections.Counter()
-    combinations = collections.Counter()
+    """Zaehlt Modul-Muster ueber alle Seiten. Primaer in Tool-Sprache
+    (toolLayoutId + toolTileType), weil das Generator-Tool so spricht.
+    v3-layoutType bleibt als granulare Zusatzebene.
+    """
+    by_tool = collections.Counter()
+    by_v3 = collections.Counter()
+    tool_combinations = collections.Counter()
+    brand_designed_modules = 0
+    amazon_native_modules = 0
 
     for p in pages:
         for m in p.get('modules', []):
-            lt = m.get('layoutType', 'unknown')
-            di = m.get('designIntent', 'unknown')
-            by_layout[lt] += 1
-            by_intent[di] += 1
-            combinations[(lt, di)] += 1
+            role = m.get('toolLayoutRole', '')
+            if role in ('amazon_native', 'spacer', 'filter_ui'):
+                amazon_native_modules += 1
+            else:
+                brand_designed_modules += 1
+            tool_layout = m.get('toolLayoutId') or 'amazon_native'
+            tool_layout_name = m.get('toolLayoutName') or 'Amazon Native'
+            v3_layout = m.get('layoutType', 'unknown')
+            by_v3[v3_layout] += 1
+
+            # Erstes Tile als Repraesentant fuer toolTileType
+            tiles = m.get('tiles', [])
+            if tiles:
+                tool_tile = tiles[0].get('toolTileType', 'unknown')
+            else:
+                tool_tile = 'none_amazon_rendered' if m.get('productGridAggregate') else 'none'
+            by_tool[(tool_layout_name, tool_tile)] += 1
+            tool_combinations[(tool_layout, tool_tile, role)] += 1
 
     return {
-        'description': "Wiederkehrende Funktions-Muster ueber alle 10 Seiten des Stores. Grundlage fuer den Retrieval-basierten Skeleton-Builder und fuer den Transfer auf neue Brand-Stores.",
-        'byLayoutType': dict(by_layout.most_common()),
-        'byDesignIntent': dict(by_intent.most_common()),
-        'topCombinations': [
-            {'layoutType': lt, 'designIntent': di, 'count': c}
-            for (lt, di), c in combinations.most_common(10)
+        'description': "Wiederkehrende Muster ueber alle Seiten des Stores, in Tool-Sprache (toolLayoutId plus toolTileType). Grundlage fuer den Retrieval-basierten Skeleton-Builder.",
+        'brandDesignedModules': brand_designed_modules,
+        'amazonNativeModules': amazon_native_modules,
+        'byToolLayoutAndTileType': [
+            {'toolLayoutName': tln, 'toolTileType': tt, 'count': c}
+            for (tln, tt), c in by_tool.most_common()
         ],
-        'signaturePatterns': [
-            "hero_video_split plus hero_video als Doppel-Opener: emotionaler Einstieg plus zweiter Marken-Moment, seltener Luxus nur auf der Startseite",
-            "editorial_section_intro als rhythmischer Trenner zwischen Produkt- und Editorial-Blocks, 13 Vorkommen ueber den Store",
-            "shoppable_interactive_image als Alternative zum klassischen Kategoriegrid, 4 Vorkommen auf konvergierenden Seiten (Startseite, Immunsystem, Alle Produkte, Geschenk-Sets)",
-            "product_showcase_video in Ketten bis zu 6 in Folge (Geschenk-Sets), ungewoehnlich hoch gegenueber Wettbewerbern, baut Bundle-Storytelling",
-            "subcategory_tile als eigenstaendige Full-Width-Row statt 3er-Kachel-Block, 6 Vorkommen verteilt ueber Immunsystem und Vitamine"
+        'byV3LayoutType': dict(by_v3.most_common()),
+        'topCombinationsInToolVocab': [
+            {'toolLayoutId': tl, 'toolTileType': tt, 'role': r, 'count': c}
+            for (tl, tt, r), c in tool_combinations.most_common(10)
         ]
     }
 
@@ -153,7 +169,7 @@ def main():
 
     print(f"Phase 3 done.")
     print(f"  storeAnalysis schemaVersion: {sa['schemaVersion']}")
-    print(f"  moduleFunctionalTaxonomy byLayoutType entries: {len(sa['moduleFunctionalTaxonomy']['byLayoutType'])}")
+    print(f"  moduleFunctionalTaxonomy toolLayout entries: {len(sa['moduleFunctionalTaxonomy']['byToolLayoutAndTileType'])}")
     print(f"  pageArchetypes: {len(sa['pageArchetypes'])}")
 
 

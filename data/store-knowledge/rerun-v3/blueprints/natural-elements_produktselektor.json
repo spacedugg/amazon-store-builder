@@ -16,19 +16,19 @@
     {
       "position": 1,
       "moduleId": "produktselektor_mod_01",
-      "moduleName": "Amazon Nav Header",
-      "layoutType": "amazon_nav_header",
+      "moduleName": "Filter Accordion 1",
+      "layoutType": "filter_accordion_collapsed",
       "layoutShape": "chrome_or_separator",
       "tileCount": 0,
-      "designIntent": "mimics_native_chrome",
+      "designIntent": "navigation_bridge",
       "designIntentDetail": null,
-      "structuralPattern": "Amazon-eigener Navheader",
+      "structuralPattern": "Einklappbarer Filter-Accordion",
       "backgroundStyle": "amazon_default",
       "backgroundDetail": null,
       "textOnImage": {
         "visibleText": null,
-        "textType": "none",
-        "origin": "none",
+        "textType": "filter_label",
+        "origin": "baked_in",
         "headline": null,
         "subline": null,
         "cta": null,
@@ -36,19 +36,19 @@
       },
       "tiles": [],
       "dom": {
-        "widgetClass": null,
+        "widgetClass": "EditorialRow",
         "visibleHeadings": [],
         "ctaLabels": [],
         "imageUrls": [],
         "videoCount": 0,
-        "domHeight": 94,
-        "domTop": 99
+        "domHeight": 0,
+        "domTop": 193
       }
     },
     {
       "position": 2,
       "moduleId": "produktselektor_mod_02",
-      "moduleName": "Filter Accordion 1",
+      "moduleName": "Filter Accordion 2",
       "layoutType": "filter_accordion_collapsed",
       "layoutShape": "chrome_or_separator",
       "tileCount": 0,
@@ -80,7 +80,7 @@
     {
       "position": 3,
       "moduleId": "produktselektor_mod_03",
-      "moduleName": "Filter Accordion 2",
+      "moduleName": "Filter Accordion 3",
       "layoutType": "filter_accordion_collapsed",
       "layoutShape": "chrome_or_separator",
       "tileCount": 0,
@@ -112,38 +112,6 @@
     {
       "position": 4,
       "moduleId": "produktselektor_mod_04",
-      "moduleName": "Filter Accordion 3",
-      "layoutType": "filter_accordion_collapsed",
-      "layoutShape": "chrome_or_separator",
-      "tileCount": 0,
-      "designIntent": "navigation_bridge",
-      "designIntentDetail": null,
-      "structuralPattern": "Einklappbarer Filter-Accordion",
-      "backgroundStyle": "amazon_default",
-      "backgroundDetail": null,
-      "textOnImage": {
-        "visibleText": null,
-        "textType": "filter_label",
-        "origin": "baked_in",
-        "headline": null,
-        "subline": null,
-        "cta": null,
-        "directionCues": null
-      },
-      "tiles": [],
-      "dom": {
-        "widgetClass": "EditorialRow",
-        "visibleHeadings": [],
-        "ctaLabels": [],
-        "imageUrls": [],
-        "videoCount": 0,
-        "domHeight": 0,
-        "domTop": 193
-      }
-    },
-    {
-      "position": 5,
-      "moduleId": "produktselektor_mod_05",
       "moduleName": "Filter Banner",
       "layoutType": "filter_banner",
       "layoutShape": "full_width_banner",
@@ -202,9 +170,41 @@
       }
     },
     {
+      "position": 5,
+      "moduleId": "produktselektor_mod_05",
+      "moduleName": "Filter Accordion 4",
+      "layoutType": "filter_accordion_collapsed",
+      "layoutShape": "chrome_or_separator",
+      "tileCount": 0,
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": null,
+      "structuralPattern": "Einklappbarer Filter-Accordion",
+      "backgroundStyle": "amazon_default",
+      "backgroundDetail": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "filter_label",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0,
+        "domHeight": 0,
+        "domTop": 429
+      }
+    },
+    {
       "position": 6,
       "moduleId": "produktselektor_mod_06",
-      "moduleName": "Filter Accordion 4",
+      "moduleName": "Filter Accordion 5",
       "layoutType": "filter_accordion_collapsed",
       "layoutShape": "chrome_or_separator",
       "tileCount": 0,
@@ -236,7 +236,7 @@
     {
       "position": 7,
       "moduleId": "produktselektor_mod_07",
-      "moduleName": "Filter Accordion 5",
+      "moduleName": "Filter Accordion 6",
       "layoutType": "filter_accordion_collapsed",
       "layoutShape": "chrome_or_separator",
       "tileCount": 0,
@@ -268,38 +268,6 @@
     {
       "position": 8,
       "moduleId": "produktselektor_mod_08",
-      "moduleName": "Filter Accordion 6",
-      "layoutType": "filter_accordion_collapsed",
-      "layoutShape": "chrome_or_separator",
-      "tileCount": 0,
-      "designIntent": "navigation_bridge",
-      "designIntentDetail": null,
-      "structuralPattern": "Einklappbarer Filter-Accordion",
-      "backgroundStyle": "amazon_default",
-      "backgroundDetail": null,
-      "textOnImage": {
-        "visibleText": null,
-        "textType": "filter_label",
-        "origin": "baked_in",
-        "headline": null,
-        "subline": null,
-        "cta": null,
-        "directionCues": null
-      },
-      "tiles": [],
-      "dom": {
-        "widgetClass": "EditorialRow",
-        "visibleHeadings": [],
-        "ctaLabels": [],
-        "imageUrls": [],
-        "videoCount": 0,
-        "domHeight": 0,
-        "domTop": 429
-      }
-    },
-    {
-      "position": 9,
-      "moduleId": "produktselektor_mod_09",
       "moduleName": "Produktselektor Grid",
       "layoutType": "product_grid_filter_results",
       "layoutShape": "grid_eight_plus",
@@ -321,38 +289,6 @@
       "tiles": [],
       "dom": {
         "widgetClass": "ProductGrid",
-        "visibleHeadings": [],
-        "ctaLabels": [],
-        "imageUrls": [],
-        "videoCount": 0,
-        "domHeight": 0,
-        "domTop": 0
-      }
-    },
-    {
-      "position": 10,
-      "moduleId": "produktselektor_mod_10",
-      "moduleName": "Amazon Share Footer",
-      "layoutType": "amazon_share_footer",
-      "layoutShape": "chrome_or_separator",
-      "tileCount": 0,
-      "designIntent": "mimics_native_chrome",
-      "designIntentDetail": null,
-      "structuralPattern": "Amazon-eigener Teilen-Footer",
-      "backgroundStyle": "amazon_default",
-      "backgroundDetail": null,
-      "textOnImage": {
-        "visibleText": "Teilen",
-        "textType": "none",
-        "origin": "amazon_chrome",
-        "headline": "Teilen",
-        "subline": null,
-        "cta": null,
-        "directionCues": null
-      },
-      "tiles": [],
-      "dom": {
-        "widgetClass": "EditorialRow",
         "visibleHeadings": [],
         "ctaLabels": [],
         "imageUrls": [],

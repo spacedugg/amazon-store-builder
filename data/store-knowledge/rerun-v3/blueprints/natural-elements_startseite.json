@@ -24,56 +24,6 @@
     {
       "position": 1,
       "moduleId": "startseite_mod_01",
-      "moduleName": "Amazon Nav Header",
-      "layoutType": "amazon_nav_header",
-      "layoutShape": "chrome_or_separator",
-      "tileCount": 0,
-      "designIntent": "mimics_native_chrome",
-      "designIntentDetail": "Logozentrierter Hero statt Lifestyle-Inszenierung. Etabliert die Marke sofort als reduziert, sachlich, vertrauenswürdig im Gegensatz zu lauten Supplement-Konkurrenten.",
-      "structuralPattern": "Amazon-eigener Navheader, nicht gestaltbar",
-      "backgroundStyle": "amazon_default",
-      "backgroundDetail": null,
-      "textOnImage": {
-        "visibleText": null,
-        "textType": "none",
-        "origin": "none",
-        "headline": null,
-        "subline": null,
-        "cta": null,
-        "directionCues": null
-      },
-      "tiles": [],
-      "dom": {
-        "widgetClass": null,
-        "visibleHeadings": [],
-        "ctaLabels": [
-          "natural elements",
-          "Folgen",
-          "Startseite",
-          "unsere Neuheiten",
-          "Zurück",
-          "Make it full size",
-          "Alle Produkte",
-          "Omega 3",
-          "Magnesium",
-          "Multivitamin",
-          "Probiotika",
-          "Melatonin",
-          "Immunsystem",
-          "Vitamine",
-          "Mineralien"
-        ],
-        "imageUrls": [
-          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/8c333250-61c8-44e6-a81e-d1fc70799cc2._CR0%2C0%2C3000%2C600_SX150"
-        ],
-        "videoCount": 0,
-        "domHeight": 300,
-        "domTop": 99
-      }
-    },
-    {
-      "position": 2,
-      "moduleId": "startseite_mod_02",
       "moduleName": "Hero Neuheiten OH YEAH",
       "layoutType": "hero_banner",
       "layoutShape": "full_width_banner",
@@ -153,8 +103,8 @@
       }
     },
     {
-      "position": 3,
-      "moduleId": "startseite_mod_03",
+      "position": 2,
+      "moduleId": "startseite_mod_02",
       "moduleName": "Banner Kategorie 1",
       "layoutType": "editorial_banner",
       "layoutShape": "full_width_banner",
@@ -216,8 +166,8 @@
       }
     },
     {
-      "position": 4,
-      "moduleId": "startseite_mod_04",
+      "position": 3,
+      "moduleId": "startseite_mod_03",
       "moduleName": "Banner Kategorie 2",
       "layoutType": "editorial_banner",
       "layoutShape": "full_width_banner",
@@ -281,8 +231,8 @@
       }
     },
     {
-      "position": 5,
-      "moduleId": "startseite_mod_05",
+      "position": 4,
+      "moduleId": "startseite_mod_04",
       "moduleName": "Bestseller Shoppable",
       "layoutType": "shoppable_interactive_image",
       "layoutShape": "interactive_hotspot",
@@ -350,8 +300,8 @@
       }
     },
     {
-      "position": 6,
-      "moduleId": "startseite_mod_06",
+      "position": 5,
+      "moduleId": "startseite_mod_05",
       "moduleName": "Hero Video 2",
       "layoutType": "hero_video",
       "layoutShape": "full_width_banner",
@@ -429,8 +379,8 @@
       }
     },
     {
-      "position": 7,
-      "moduleId": "startseite_mod_07",
+      "position": 6,
+      "moduleId": "startseite_mod_06",
       "moduleName": "Section Intro 1",
       "layoutType": "editorial_section_intro",
       "layoutShape": "full_width_banner",
@@ -492,8 +442,8 @@
       }
     },
     {
-      "position": 8,
-      "moduleId": "startseite_mod_08",
+      "position": 7,
+      "moduleId": "startseite_mod_07",
       "moduleName": "Section Intro 2",
       "layoutType": "editorial_section_intro",
       "layoutShape": "full_width_banner",
@@ -558,8 +508,8 @@
       }
     },
     {
-      "position": 9,
-      "moduleId": "startseite_mod_09",
+      "position": 8,
+      "moduleId": "startseite_mod_08",
       "moduleName": "Shoppable Image Set Quad",
       "layoutType": "shoppable_interactive_image_set",
       "layoutShape": "grid_four",
@@ -709,8 +659,8 @@
       }
     },
     {
-      "position": 10,
-      "moduleId": "startseite_mod_10",
+      "position": 9,
+      "moduleId": "startseite_mod_09",
       "moduleName": "Tile Pair 1",
       "layoutType": "editorial_tile_pair",
       "layoutShape": "split_two",
@@ -801,8 +751,8 @@
       }
     },
     {
-      "position": 11,
-      "moduleId": "startseite_mod_11",
+      "position": 10,
+      "moduleId": "startseite_mod_10",
       "moduleName": "Tile Pair 2",
       "layoutType": "editorial_tile_pair",
       "layoutShape": "split_two",
@@ -893,8 +843,8 @@
       }
     },
     {
-      "position": 12,
-      "moduleId": "startseite_mod_12",
+      "position": 11,
+      "moduleId": "startseite_mod_11",
       "moduleName": "Featured Product Grid",
       "layoutType": "product_grid_featured",
       "layoutShape": "grid_eight_plus",
@@ -949,40 +899,6 @@
         "videoCount": 0,
         "domHeight": 3460,
         "domTop": 2997
-      }
-    },
-    {
-      "position": 13,
-      "moduleId": "startseite_mod_13",
-      "moduleName": "Amazon Share Footer",
-      "layoutType": "amazon_share_footer",
-      "layoutShape": "chrome_or_separator",
-      "tileCount": 0,
-      "designIntent": "mimics_native_chrome",
-      "designIntentDetail": "Abschließendes ASIN-Grid ohne weitere editorielle Zutaten. Nach der emotionalen und kategorialen Vorarbeit sind die Produkte jetzt selbsterklärend. Amazon rendert Titel und Preis automatisch, weshalb hier keine Overlay-Texte gesetzt sind.",
-      "structuralPattern": "Amazon-eigener Teilen-Footer",
-      "backgroundStyle": "amazon_default",
-      "backgroundDetail": null,
-      "textOnImage": {
-        "visibleText": "Teilen, Teilen Sie diese Seite mit Ihren Freunden.",
-        "textType": "none",
-        "origin": "amazon_chrome",
-        "headline": "Teilen, Teilen Sie diese Seite mit Ihren Freunden.",
-        "subline": null,
-        "cta": null,
-        "directionCues": null
-      },
-      "tiles": [],
-      "dom": {
-        "widgetClass": "EditorialRow__row__W3W3h",
-        "visibleHeadings": [],
-        "ctaLabels": [
-          "Teilen"
-        ],
-        "imageUrls": [],
-        "videoCount": 0,
-        "domHeight": 200,
-        "domTop": 6457
       }
     }
   ],

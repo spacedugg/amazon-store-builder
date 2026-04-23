@@ -125,10 +125,12 @@ def classify_tile(layout_type, image_category, cta_text, links_to, has_video):
     # Shoppable
     if layout_type.startswith('shoppable_interactive_image'):
         return ('shoppable_image', True, 'pdp_asin_hotspots')
-    # product_showcase_video: per Layout-Semantik immer Sprungbrett zur PDP,
-    # auch ohne CTA oder linksTo. Gaengige Amazon-Brand-Store-Praxis.
+    # product_showcase_video: klickbar nur wenn CTA oder linksTo erkennbar.
+    # Nicht blanket klicken. Es gibt Brand-/Kategorie-Stories, die auch
+    # als Showcase getaggt sind und nichts verlinken.
     if layout_type == 'product_showcase_video':
-        return ('video', True, 'pdp_asin')
+        clickable = bool(cta_text or links_to)
+        return ('video', clickable, ('pdp_asin' if clickable else 'none'))
     # Sonstige Videos (Hero-Videos): klickbar nur wenn CTA oder linksTo
     if has_video or layout_type.startswith('hero_video'):
         return ('video', bool(cta_text or links_to), ('internal_subpage' if (cta_text or links_to) else 'none'))

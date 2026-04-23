@@ -9,7 +9,7 @@
   "storeUrl": "https://www.amazon.de/stores/page/3955CCD4-902C-4679-9265-DEC4FCBAA8C8",
   "analyzedAt": "2026-04-21T18:01:21.676Z",
   "methodology": "V4-v3-Blueprint-tool-aligned-20260422",
-  "v3SchemaNote": "v3 plus Einordnungs-Ebene: moduleFunction pro Modul, pageArchitecture pro Seite, product_tile_asin als imageCategory-Wert fuer Amazon-ASIN-Tiles ohne Brand-Design. Tool-Vocabulary und Clickability-Layer hinzugefuegt: toolLayoutId/Name/Type/Role pro Modul, toolTileType plus toolImageType plus link-Objekt pro Tile. Tool-Vocabulary und Clickability-Layer hinzugefuegt: toolLayoutId/Name/Type/Role pro Modul, toolTileType plus toolImageType plus link-Objekt pro Tile.",
+  "v3SchemaNote": "v3 plus Einordnungs-Ebene: moduleFunction pro Modul, pageArchitecture pro Seite, product_tile_asin als imageCategory-Wert fuer Amazon-ASIN-Tiles ohne Brand-Design. Tool-Vocabulary und Clickability-Layer hinzugefuegt: toolLayoutId/Name/Type/Role pro Modul, toolTileType plus toolImageType plus link-Objekt pro Tile. Tool-Vocabulary und Clickability-Layer hinzugefuegt: toolLayoutId/Name/Type/Role pro Modul, toolTileType plus toolImageType plus link-Objekt pro Tile. Tool-Vocabulary und Clickability-Layer hinzugefuegt: toolLayoutId/Name/Type/Role pro Modul, toolTileType plus toolImageType plus link-Objekt pro Tile.",
   "storeAnalysis": {
     "schemaVersion": "v3-brand-identity-2",
     "derivedFrom": "v3-blueprints (10 Seiten, 114 Module) im rerun-v3, plus Einordnungs-Ebene (moduleFunction pro Modul, pageArchitecture pro Seite). Basis-Markeninhalte uebernommen aus dem ersten Brand-Identity-Pass (Commit 5847f09) und auf v3-Schema gehoben.",
@@ -97,12 +97,74 @@
     ],
     "brandUSPsNote": "Diese USPs sind auf Markenebene formuliert und enthalten keine produktspezifischen Zahlenwerte (Fuellmengen, Dosierungen, Kapselzahlen). Sie treffen auf alle gelisteten Produkte zu.",
     "moduleFunctionalTaxonomy": {
-      "description": "Wiederkehrende Funktions-Muster ueber alle 10 Seiten des Stores. Grundlage fuer den Retrieval-basierten Skeleton-Builder und fuer den Transfer auf neue Brand-Stores.",
-      "byLayoutType": {
+      "description": "Wiederkehrende Muster ueber alle Seiten des Stores, in Tool-Sprache (toolLayoutId plus toolTileType). Grundlage fuer den Retrieval-basierten Skeleton-Builder.",
+      "brandDesignedModules": 85,
+      "amazonNativeModules": 9,
+      "byToolLayoutAndTileType": [
+        {
+          "toolLayoutName": "Full Width",
+          "toolTileType": "image",
+          "count": 23
+        },
+        {
+          "toolLayoutName": "Full Width",
+          "toolTileType": "image_text",
+          "count": 20
+        },
+        {
+          "toolLayoutName": "Full Width",
+          "toolTileType": "video",
+          "count": 13
+        },
+        {
+          "toolLayoutName": "Amazon Native",
+          "toolTileType": "none",
+          "count": 9
+        },
+        {
+          "toolLayoutName": "Product Grid (ASIN)",
+          "toolTileType": "none_amazon_rendered",
+          "count": 8
+        },
+        {
+          "toolLayoutName": "2 Equal",
+          "toolTileType": "image",
+          "count": 6
+        },
+        {
+          "toolLayoutName": "4 Equal (2x2 Wide)",
+          "toolTileType": "image",
+          "count": 6
+        },
+        {
+          "toolLayoutName": "Full Width",
+          "toolTileType": "shoppable_image",
+          "count": 4
+        },
+        {
+          "toolLayoutName": "4 Equal (2x2 Wide)",
+          "toolTileType": "shoppable_image",
+          "count": 2
+        },
+        {
+          "toolLayoutName": "2 Equal",
+          "toolTileType": "video",
+          "count": 1
+        },
+        {
+          "toolLayoutName": "2 Equal",
+          "toolTileType": "image_text",
+          "count": 1
+        },
+        {
+          "toolLayoutName": "Full Width",
+          "toolTileType": "product_selector",
+          "count": 1
+        }
+      ],
+      "byV3LayoutType": {
         "editorial_banner": 14,
         "editorial_section_intro": 13,
-        "amazon_nav_header": 10,
-        "amazon_share_footer": 10,
         "product_showcase_video": 10,
         "editorial_tile_pair": 7,
         "subcategory_tile": 6,
@@ -129,73 +191,67 @@
         "editorial_banner_large": 1,
         "product_grid_bestsellers": 1
       },
-      "byDesignIntent": {
-        "editorial": 27,
-        "product_showcase": 25,
-        "mimics_native_chrome": 20,
-        "navigation_bridge": 16,
-        "section_intro": 13,
-        "emotional_hook": 10,
-        "visual_separator": 3
-      },
-      "topCombinations": [
+      "topCombinationsInToolVocab": [
         {
-          "layoutType": "editorial_section_intro",
-          "designIntent": "section_intro",
+          "toolLayoutId": "1",
+          "toolTileType": "image_text",
+          "role": "section_intro",
           "count": 13
         },
         {
-          "layoutType": "editorial_banner",
-          "designIntent": "editorial",
-          "count": 12
+          "toolLayoutId": "1",
+          "toolTileType": "image",
+          "role": "editorial",
+          "count": 11
         },
         {
-          "layoutType": "amazon_nav_header",
-          "designIntent": "mimics_native_chrome",
+          "toolLayoutId": "1",
+          "toolTileType": "video",
+          "role": "product_showcase",
           "count": 10
         },
         {
-          "layoutType": "amazon_share_footer",
-          "designIntent": "mimics_native_chrome",
-          "count": 10
+          "toolLayoutId": "product_grid_asin",
+          "toolTileType": "none_amazon_rendered",
+          "role": "product_grid",
+          "count": 8
         },
         {
-          "layoutType": "product_showcase_video",
-          "designIntent": "product_showcase",
-          "count": 10
+          "toolLayoutId": "1",
+          "toolTileType": "image_text",
+          "role": "editorial",
+          "count": 7
         },
         {
-          "layoutType": "editorial_tile_pair",
-          "designIntent": "editorial",
+          "toolLayoutId": "std-2equal",
+          "toolTileType": "image",
+          "role": "editorial_pair",
           "count": 6
         },
         {
-          "layoutType": "subcategory_tile",
-          "designIntent": "navigation_bridge",
+          "toolLayoutId": "1",
+          "toolTileType": "image",
+          "role": "hero",
           "count": 6
         },
         {
-          "layoutType": "editorial_tile_quad",
-          "designIntent": "editorial",
+          "toolLayoutId": "1",
+          "toolTileType": "image",
+          "role": "navigation_bridge",
           "count": 6
         },
         {
-          "layoutType": "filter_accordion_collapsed",
-          "designIntent": "navigation_bridge",
+          "toolLayoutId": "2x2wide",
+          "toolTileType": "image",
+          "role": "editorial_quad",
           "count": 6
         },
         {
-          "layoutType": "shoppable_interactive_image",
-          "designIntent": "product_showcase",
-          "count": 4
+          "toolLayoutId": "amazon_native",
+          "toolTileType": "none",
+          "role": "filter_ui",
+          "count": 6
         }
-      ],
-      "signaturePatterns": [
-        "hero_video_split plus hero_video als Doppel-Opener: emotionaler Einstieg plus zweiter Marken-Moment, seltener Luxus nur auf der Startseite",
-        "editorial_section_intro als rhythmischer Trenner zwischen Produkt- und Editorial-Blocks, 13 Vorkommen ueber den Store",
-        "shoppable_interactive_image als Alternative zum klassischen Kategoriegrid, 4 Vorkommen auf konvergierenden Seiten (Startseite, Immunsystem, Alle Produkte, Geschenk-Sets)",
-        "product_showcase_video in Ketten bis zu 6 in Folge (Geschenk-Sets), ungewoehnlich hoch gegenueber Wettbewerbern, baut Bundle-Storytelling",
-        "subcategory_tile als eigenstaendige Full-Width-Row statt 3er-Kachel-Block, 6 Vorkommen verteilt ueber Immunsystem und Vitamine"
       ]
     },
     "pageArchetypes": [
@@ -203,7 +259,7 @@
         "pageName": "Startseite",
         "pageId": "3955CCD4-902C-4679-9265-DEC4FCBAA8C8",
         "pageType": "startseite",
-        "modules": 13,
+        "modules": 11,
         "pageArchitecture": "Klassische Einstiegs-Startseite mit Hero-Video-Opener, gefolgt von Navigation-Bridge-Bannern (Neuheiten, Kategorien), Bestseller-Shoppable als Konversions-Flaeche, Produktfinder-Teaser als Beratungs-Einstieg, und Featured-Grid als Warenlager. Der Flow fuehrt von Awareness ueber Orientierung zu Konversion und optional zu Beratung.",
         "primaryFunction": "Marken-Einstieg mit kuratiertem Navigations- und Conversion-Mix",
         "conversionMode": "guided_conversion",
@@ -213,7 +269,7 @@
         "pageName": "Immunsystem",
         "pageId": "1B2D6D85-21E1-4BBE-AD98-EBDE6CFEA02F",
         "pageType": "hub_category",
-        "modules": 16,
+        "modules": 14,
         "pageArchitecture": "Hub-Kategorie fuer Immunsystem-Produkte. Hero-Banner mit Kategorie-Claim, Shoppable als Direkt-Einstieg in die meistgekauften Immun-Produkte, dann Produkt-Grid und Sub-Kategorie-Tiles. Schluss mit Editorial-Bannern als Marken-Anker.",
         "primaryFunction": "Kategorie-Deepdive mit Produkt-Fokus, typisch mit Hero plus Grid",
         "conversionMode": "direct_conversion",
@@ -223,7 +279,7 @@
         "pageName": "Vitamine",
         "pageId": "5DF9227A-372F-4144-8FE4-73B4797BAABD",
         "pageType": "hub_category",
-        "modules": 13,
+        "modules": 11,
         "pageArchitecture": "Hub-Kategorie fuer Vitamine, eng strukturiert. Hero plus drei dedizierte Produkt-Showcase-Videos (Premium Multi, Vitamin C, Vitamin D3) vor dem Kategoriegrid. Die Video-Kette baut Expertise und Differenzierung pro Wirkstoff auf.",
         "primaryFunction": "Kategorie-Deepdive mit Produkt-Fokus, typisch mit Hero plus Grid",
         "conversionMode": "direct_conversion",
@@ -233,7 +289,7 @@
         "pageName": "SoProtein Vegan",
         "pageId": "0C5288E7-93DF-4272-890E-78EFF3DD0813",
         "pageType": "product_lines",
-        "modules": 4,
+        "modules": 2,
         "pageArchitecture": "Produktlinien-Seite, minimal aufgebaut. Kompakter Hero mit Kampagnen-Claim 'Make it full size', direkt danach Produkt-Grid der gesamten Linie. Reine Produkt-Listing-Seite ohne Story-Elemente.",
         "primaryFunction": "Produkt-Linien-Praesentation, typisch mit Kampagnen-Hero",
         "conversionMode": "direct_conversion",
@@ -243,7 +299,7 @@
         "pageName": "Ueber uns",
         "pageId": "C199E0D4-B434-4DFA-8DF0-2D5601387A8B",
         "pageType": "about",
-        "modules": 17,
+        "modules": 15,
         "pageArchitecture": "About-Seite mit sehr hoher Editorial-Dichte. Brand-Hero, dann 10 Story-Banner, eingestreut ein grosses Brand-Video, zum Schluss Werte-Quad und Tile-Pairs. Maximale Investition in Brand-Story und Vertrauen, kein Konversions-Fokus.",
         "primaryFunction": "Marken-Story, Vertrauen aufbauen, keine direkte Conversion",
         "conversionMode": "trust_building",
@@ -253,7 +309,7 @@
         "pageName": "Alle Produkte",
         "pageId": "56C2E5EE-81A5-4F07-8BB3-38927E13937B",
         "pageType": "all_products",
-        "modules": 6,
+        "modules": 4,
         "pageArchitecture": "Katalog-Seite mit Shoppable-Einstieg, Editorial-Intro, vollem Produkt-Grid, Section-Intro als Abschluss. Linearer Scroll fuer Nutzer, die schon im Kauf-Mindset sind.",
         "primaryFunction": "Katalog-Linear, fuer gereifte Kaufinteressenten",
         "conversionMode": "direct_conversion",
@@ -263,7 +319,7 @@
         "pageName": "unsere Neuheiten",
         "pageId": "E3653495-9130-48DC-BFA4-F38BD9C7AEF1",
         "pageType": "new_arrivals",
-        "modules": 10,
+        "modules": 8,
         "pageArchitecture": "Neuheiten-Hub mit Hero, Section-Intros als Gliederung, ein Produkt-Showcase-Video fuer das Top-Neuheit (Magtein), dann Neuheiten-Grid mit 50 Produkten. Klar auf Repeat-Besucher und Pushing-Top-Neuheit optimiert.",
         "primaryFunction": "Rueckkehrer-Treiber, Neuheiten mit Feature-Produkt",
         "conversionMode": "direct_conversion",
@@ -273,7 +329,7 @@
         "pageName": "Produktselektor",
         "pageId": "A03B844E-0DA2-4FFC-8205-DC6DFDB0D59E",
         "pageType": "product_selector",
-        "modules": 10,
+        "modules": 8,
         "pageArchitecture": "Reine Filter-UI-Seite. Sechs Filter-Accordions, ein Filter-Banner, am Ende Filterergebnis-Grid mit 20 Produkten. Produkte finden statt browsen. Funktionale Beratungs-Seite.",
         "primaryFunction": "Beratungs-UI, Filter-basierte Produktfindung",
         "conversionMode": "guided_conversion",
@@ -283,7 +339,7 @@
         "pageName": "Geschenk-Sets",
         "pageId": "1A5ECF37-615B-4FBB-8620-C629481CB321",
         "pageType": "gift_sets",
-        "modules": 18,
+        "modules": 16,
         "pageArchitecture": "Geschenk-Set-Seite mit hohem Kampagnen-Anteil. Hero-Tall, Editorial-Banner, dann sechs Produkt-Showcase-Videos fuer Basic- und Premium-Sets, Shoppable-Abschluss, zweimal Editorial-Quad als Werte- und Kategorie-Recap.",
         "primaryFunction": "Kuratiertes Bundle-Showcase mit starker Video-Praesenz",
         "conversionMode": "guided_conversion",
@@ -293,7 +349,7 @@
         "pageName": "Unsere Bestseller Empfehlungen",
         "pageId": "B77CB4EF-4CCF-4FB0-9251-53DF11DCCE12",
         "pageType": "bestsellers",
-        "modules": 7,
+        "modules": 5,
         "pageArchitecture": "Bestseller- und Empfehlungs-Seite. Section-Intro, dann Bestseller-Grid mit 24 Top-Produkten, gefolgt von zwei Editorial-Quads. Reduzierter Editorial-Anteil, Konversions-fokussiert.",
         "primaryFunction": "Social-Proof-Listing der Top-Seller, klar Conversion-fokussiert",
         "conversionMode": "direct_conversion",
@@ -328,61 +384,6 @@
         {
           "position": 1,
           "moduleId": "startseite_mod_01",
-          "moduleName": "Amazon Nav Header",
-          "layoutType": "amazon_nav_header",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
-          "designIntentDetail": "Logozentrierter Hero statt Lifestyle-Inszenierung. Etabliert die Marke sofort als reduziert, sachlich, vertrauenswürdig im Gegensatz zu lauten Supplement-Konkurrenten.",
-          "structuralPattern": "Amazon-eigener Navheader, nicht gestaltbar",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": null,
-            "textType": "none",
-            "origin": "none",
-            "headline": null,
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": null,
-            "visibleHeadings": [],
-            "ctaLabels": [
-              "natural elements",
-              "Folgen",
-              "Startseite",
-              "unsere Neuheiten",
-              "Zurück",
-              "Make it full size",
-              "Alle Produkte",
-              "Omega 3",
-              "Magnesium",
-              "Multivitamin",
-              "Probiotika",
-              "Melatonin",
-              "Immunsystem",
-              "Vitamine",
-              "Mineralien"
-            ],
-            "imageUrls": [
-              "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/8c333250-61c8-44e6-a81e-d1fc70799cc2._CR0%2C0%2C3000%2C600_SX150"
-            ],
-            "videoCount": 0,
-            "domHeight": 300,
-            "domTop": 99
-          },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
-        },
-        {
-          "position": 2,
-          "moduleId": "startseite_mod_02",
           "moduleName": "Hero Video Split",
           "layoutType": "hero_video_split",
           "layoutShape": "full_width_banner",
@@ -452,8 +453,8 @@
           "toolLayoutRole": "hero_split"
         },
         {
-          "position": 3,
-          "moduleId": "startseite_mod_03",
+          "position": 2,
+          "moduleId": "startseite_mod_02",
           "moduleName": "Hero Banner Neuheiten OH YEAH",
           "layoutType": "editorial_banner",
           "layoutShape": "full_width_banner",
@@ -525,8 +526,8 @@
           "toolLayoutRole": "editorial"
         },
         {
-          "position": 4,
-          "moduleId": "startseite_mod_04",
+          "position": 3,
+          "moduleId": "startseite_mod_03",
           "moduleName": "Banner Kategorie 2",
           "layoutType": "editorial_banner",
           "layoutShape": "full_width_banner",
@@ -604,8 +605,8 @@
           "toolLayoutRole": "editorial"
         },
         {
-          "position": 5,
-          "moduleId": "startseite_mod_05",
+          "position": 4,
+          "moduleId": "startseite_mod_04",
           "moduleName": "Bestseller Shoppable",
           "layoutType": "shoppable_interactive_image",
           "layoutShape": "interactive_hotspot",
@@ -687,8 +688,8 @@
           "toolLayoutRole": "shoppable"
         },
         {
-          "position": 6,
-          "moduleId": "startseite_mod_06",
+          "position": 5,
+          "moduleId": "startseite_mod_05",
           "moduleName": "Hero Video 2",
           "layoutType": "hero_video",
           "layoutShape": "full_width_banner",
@@ -780,8 +781,8 @@
           "toolLayoutRole": "hero_video"
         },
         {
-          "position": 7,
-          "moduleId": "startseite_mod_07",
+          "position": 6,
+          "moduleId": "startseite_mod_06",
           "moduleName": "Section Intro 1",
           "layoutType": "editorial_section_intro",
           "layoutShape": "full_width_banner",
@@ -857,8 +858,8 @@
           "toolLayoutRole": "section_intro"
         },
         {
-          "position": 8,
-          "moduleId": "startseite_mod_08",
+          "position": 7,
+          "moduleId": "startseite_mod_07",
           "moduleName": "Section Intro 2",
           "layoutType": "editorial_section_intro",
           "layoutShape": "full_width_banner",
@@ -937,8 +938,8 @@
           "toolLayoutRole": "section_intro"
         },
         {
-          "position": 9,
-          "moduleId": "startseite_mod_09",
+          "position": 8,
+          "moduleId": "startseite_mod_08",
           "moduleName": "Shoppable Image Set Quad",
           "layoutType": "shoppable_interactive_image_set",
           "layoutShape": "grid_four",
@@ -1129,8 +1130,8 @@
           "toolLayoutRole": "shoppable_set"
         },
         {
-          "position": 10,
-          "moduleId": "startseite_mod_10",
+          "position": 9,
+          "moduleId": "startseite_mod_09",
           "moduleName": "Tile Pair 1",
           "layoutType": "editorial_tile_pair",
           "layoutShape": "split_two",
@@ -1244,8 +1245,8 @@
           "toolLayoutRole": "editorial_pair"
         },
         {
-          "position": 11,
-          "moduleId": "startseite_mod_11",
+          "position": 10,
+          "moduleId": "startseite_mod_10",
           "moduleName": "Tile Pair 2",
           "layoutType": "editorial_tile_pair",
           "layoutShape": "split_two",
@@ -1359,8 +1360,8 @@
           "toolLayoutRole": "editorial_pair"
         },
         {
-          "position": 12,
-          "moduleId": "startseite_mod_12",
+          "position": 11,
+          "moduleId": "startseite_mod_11",
           "moduleName": "Featured Product Grid",
           "layoutType": "product_grid_featured",
           "layoutShape": "grid_eight_plus",
@@ -1434,45 +1435,6 @@
             },
             "note": "50 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design."
           }
-        },
-        {
-          "position": 13,
-          "moduleId": "startseite_mod_13",
-          "moduleName": "Amazon Share Footer",
-          "layoutType": "amazon_share_footer",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
-          "designIntentDetail": "Abschließendes ASIN-Grid ohne weitere editorielle Zutaten. Nach der emotionalen und kategorialen Vorarbeit sind die Produkte jetzt selbsterklärend. Amazon rendert Titel und Preis automatisch, weshalb hier keine Overlay-Texte gesetzt sind.",
-          "structuralPattern": "Amazon-eigener Teilen-Footer",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": "Teilen, Teilen Sie diese Seite mit Ihren Freunden.",
-            "textType": "none",
-            "origin": "amazon_chrome",
-            "headline": "Teilen, Teilen Sie diese Seite mit Ihren Freunden.",
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": "EditorialRow__row__W3W3h",
-            "visibleHeadings": [],
-            "ctaLabels": [
-              "Teilen"
-            ],
-            "imageUrls": [],
-            "videoCount": 0,
-            "domHeight": 200,
-            "domTop": 6457
-          },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {
@@ -1514,61 +1476,6 @@
         {
           "position": 1,
           "moduleId": "immunsystem_mod_01",
-          "moduleName": "Amazon Nav Header",
-          "layoutType": "amazon_nav_header",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
-          "designIntentDetail": "Wiedererkennbarer Logo-Hero, kombiniert mit Breadcrumb 'natural elements > Immunsystem'. Die Navigation liegt direkt darunter, Kategorie 'IMMUNSYSTEM' ist unterstrichen aktiv. Der Nutzer weiß sofort, in welchem Kontext er sich befindet.",
-          "structuralPattern": "Amazon-eigener Navheader",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": null,
-            "textType": "none",
-            "origin": "none",
-            "headline": null,
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": null,
-            "visibleHeadings": [],
-            "ctaLabels": [
-              "natural elements",
-              "Immunsystem",
-              "Folgen",
-              "Startseite",
-              "unsere Neuheiten",
-              "Zurück",
-              "Make it full size",
-              "Alle Produkte",
-              "Omega 3",
-              "Magnesium",
-              "Multivitamin",
-              "Probiotika",
-              "Melatonin",
-              "Vitamine",
-              "Mineralien"
-            ],
-            "imageUrls": [
-              "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/8c333250-61c8-44e6-a81e-d1fc70799cc2._CR0%2C0%2C3000%2C600_SX150"
-            ],
-            "videoCount": 0,
-            "domHeight": 337,
-            "domTop": 99
-          },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
-        },
-        {
-          "position": 2,
-          "moduleId": "immunsystem_mod_02",
           "moduleName": "Kategorie Hero",
           "layoutType": "hero_banner",
           "layoutShape": "full_width_banner",
@@ -1646,8 +1553,8 @@
           "toolLayoutRole": "hero"
         },
         {
-          "position": 3,
-          "moduleId": "immunsystem_mod_03",
+          "position": 2,
+          "moduleId": "immunsystem_mod_02",
           "moduleName": "Shoppable Kategorie",
           "layoutType": "shoppable_interactive_image",
           "layoutShape": "interactive_hotspot",
@@ -1727,8 +1634,8 @@
           "toolLayoutRole": "shoppable"
         },
         {
-          "position": 4,
-          "moduleId": "immunsystem_mod_04",
+          "position": 3,
+          "moduleId": "immunsystem_mod_03",
           "moduleName": "Gelber Banner mit Produktschatten",
           "layoutType": "editorial_banner_solid_color",
           "layoutShape": "full_width_banner",
@@ -1804,8 +1711,8 @@
           "toolLayoutRole": "editorial"
         },
         {
-          "position": 5,
-          "moduleId": "immunsystem_mod_05",
+          "position": 4,
+          "moduleId": "immunsystem_mod_04",
           "moduleName": "Section Intro vor Produktgrid",
           "layoutType": "editorial_section_intro",
           "layoutShape": "full_width_banner",
@@ -1880,8 +1787,8 @@
           "toolLayoutRole": "section_intro"
         },
         {
-          "position": 6,
-          "moduleId": "immunsystem_mod_06",
+          "position": 5,
+          "moduleId": "immunsystem_mod_05",
           "moduleName": "Immunsystem Produktgrid",
           "layoutType": "product_grid_category",
           "layoutShape": "grid_eight_plus",
@@ -1958,8 +1865,8 @@
           }
         },
         {
-          "position": 7,
-          "moduleId": "immunsystem_mod_07",
+          "position": 6,
+          "moduleId": "immunsystem_mod_06",
           "moduleName": "Sub-Kategorie Slot 1",
           "layoutType": "subcategory_tile",
           "layoutShape": "full_width_banner",
@@ -2036,8 +1943,8 @@
           "toolLayoutRole": "navigation_bridge"
         },
         {
-          "position": 8,
-          "moduleId": "immunsystem_mod_08",
+          "position": 7,
+          "moduleId": "immunsystem_mod_07",
           "moduleName": "Sub-Kategorie Slot 2",
           "layoutType": "subcategory_tile",
           "layoutShape": "full_width_banner",
@@ -2114,8 +2021,8 @@
           "toolLayoutRole": "navigation_bridge"
         },
         {
-          "position": 9,
-          "moduleId": "immunsystem_mod_09",
+          "position": 8,
+          "moduleId": "immunsystem_mod_08",
           "moduleName": "Sub-Kategorie Slot 3",
           "layoutType": "subcategory_tile",
           "layoutShape": "full_width_banner",
@@ -2189,8 +2096,8 @@
           "toolLayoutRole": "navigation_bridge"
         },
         {
-          "position": 10,
-          "moduleId": "immunsystem_mod_10",
+          "position": 9,
+          "moduleId": "immunsystem_mod_09",
           "moduleName": "Section Intro Mittelfeld",
           "layoutType": "editorial_section_intro",
           "layoutShape": "full_width_banner",
@@ -2268,8 +2175,8 @@
           "toolLayoutRole": "section_intro"
         },
         {
-          "position": 11,
-          "moduleId": "immunsystem_mod_11",
+          "position": 10,
+          "moduleId": "immunsystem_mod_10",
           "moduleName": "Section Intro 2",
           "layoutType": "editorial_section_intro",
           "layoutShape": "full_width_banner",
@@ -2347,8 +2254,8 @@
           "toolLayoutRole": "section_intro"
         },
         {
-          "position": 12,
-          "moduleId": "immunsystem_mod_12",
+          "position": 11,
+          "moduleId": "immunsystem_mod_11",
           "moduleName": "Shoppable Quad",
           "layoutType": "shoppable_interactive_image_set",
           "layoutShape": "grid_four",
@@ -2534,8 +2441,8 @@
           "toolLayoutRole": "shoppable_set"
         },
         {
-          "position": 13,
-          "moduleId": "immunsystem_mod_13",
+          "position": 12,
+          "moduleId": "immunsystem_mod_12",
           "moduleName": "Alle Produkte auf einen Blick",
           "layoutType": "editorial_tile_pair",
           "layoutShape": "split_two",
@@ -2648,8 +2555,8 @@
           "toolLayoutRole": "editorial_pair"
         },
         {
-          "position": 14,
-          "moduleId": "immunsystem_mod_14",
+          "position": 13,
+          "moduleId": "immunsystem_mod_13",
           "moduleName": "Editorial Banner 1",
           "layoutType": "editorial_banner",
           "layoutShape": "full_width_banner",
@@ -2725,8 +2632,8 @@
           "toolLayoutRole": "editorial"
         },
         {
-          "position": 15,
-          "moduleId": "immunsystem_mod_15",
+          "position": 14,
+          "moduleId": "immunsystem_mod_14",
           "moduleName": "Editorial Banner 2",
           "layoutType": "editorial_banner",
           "layoutShape": "full_width_banner",
@@ -2799,45 +2706,6 @@
           "toolLayoutName": "Full Width",
           "toolLayoutType": "fullwidth",
           "toolLayoutRole": "editorial"
-        },
-        {
-          "position": 16,
-          "moduleId": "immunsystem_mod_16",
-          "moduleName": "Amazon Share Footer",
-          "layoutType": "amazon_share_footer",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
-          "designIntentDetail": null,
-          "structuralPattern": "Amazon-eigener Teilen-Footer",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": "Teilen",
-            "textType": "none",
-            "origin": "amazon_chrome",
-            "headline": "Teilen",
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": "EditorialRow__row__W3W3h",
-            "visibleHeadings": [],
-            "ctaLabels": [
-              "Teilen"
-            ],
-            "imageUrls": [],
-            "videoCount": 0,
-            "domHeight": 199,
-            "domTop": 8284
-          },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {
@@ -2899,43 +2767,6 @@
         {
           "position": 1,
           "moduleId": "vitamine_mod_01",
-          "moduleName": "Amazon Nav Header",
-          "layoutType": "amazon_nav_header",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
-          "designIntentDetail": "Wiederholung des Marken-Heros auf jeder Seite. Breadcrumb zeigt 'natural elements > Immunsystem > Vitamine', sodass die Einordnung in der Hierarchie sichtbar ist.",
-          "structuralPattern": "Amazon-eigener Navheader",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": null,
-            "textType": "none",
-            "origin": "none",
-            "headline": null,
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": null,
-            "visibleHeadings": [],
-            "ctaLabels": [],
-            "imageUrls": [],
-            "videoCount": 0,
-            "domHeight": 338,
-            "domTop": 99
-          },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
-        },
-        {
-          "position": 2,
-          "moduleId": "vitamine_mod_02",
           "moduleName": "Vitamine Hero",
           "layoutType": "hero_banner",
           "layoutShape": "full_width_banner",
@@ -3011,8 +2842,8 @@
           "toolLayoutRole": "hero"
         },
         {
-          "position": 3,
-          "moduleId": "vitamine_mod_03",
+          "position": 2,
+          "moduleId": "vitamine_mod_02",
           "moduleName": "Editorial Banner",
           "layoutType": "editorial_banner",
           "layoutShape": "full_width_banner",
@@ -3085,8 +2916,8 @@
           "toolLayoutRole": "editorial"
         },
         {
-          "position": 4,
-          "moduleId": "vitamine_mod_04",
+          "position": 3,
+          "moduleId": "vitamine_mod_03",
           "moduleName": "Premium Multivitamin Showcase",
           "layoutType": "product_showcase_video",
           "layoutShape": "full_width_banner",
@@ -3162,8 +2993,8 @@
           "toolLayoutRole": "product_showcase"
         },
         {
-          "position": 5,
-          "moduleId": "vitamine_mod_05",
+          "position": 4,
+          "moduleId": "vitamine_mod_04",
           "moduleName": "Vitamin C Showcase",
           "layoutType": "product_showcase_video",
           "layoutShape": "full_width_banner",
@@ -3239,8 +3070,8 @@
           "toolLayoutRole": "product_showcase"
         },
         {
-          "position": 6,
-          "moduleId": "vitamine_mod_06",
+          "position": 5,
+          "moduleId": "vitamine_mod_05",
           "moduleName": "Vitamin D3 Showcase",
           "layoutType": "product_showcase_video",
           "layoutShape": "full_width_banner",
@@ -3316,8 +3147,8 @@
           "toolLayoutRole": "product_showcase"
         },
         {
-          "position": 7,
-          "moduleId": "vitamine_mod_07",
+          "position": 6,
+          "moduleId": "vitamine_mod_06",
           "moduleName": "Vitamine Produktgrid",
           "layoutType": "product_grid_category",
           "layoutShape": "grid_eight_plus",
@@ -3366,8 +3197,8 @@
           }
         },
         {
-          "position": 8,
-          "moduleId": "vitamine_mod_08",
+          "position": 7,
+          "moduleId": "vitamine_mod_07",
           "moduleName": "Section Intro",
           "layoutType": "editorial_section_intro",
           "layoutShape": "full_width_banner",
@@ -3440,8 +3271,8 @@
           "toolLayoutRole": "section_intro"
         },
         {
-          "position": 9,
-          "moduleId": "vitamine_mod_09",
+          "position": 8,
+          "moduleId": "vitamine_mod_08",
           "moduleName": "Sub-Kategorie Slot 1",
           "layoutType": "subcategory_tile",
           "layoutShape": "full_width_banner",
@@ -3516,8 +3347,8 @@
           "toolLayoutRole": "navigation_bridge"
         },
         {
-          "position": 10,
-          "moduleId": "vitamine_mod_10",
+          "position": 9,
+          "moduleId": "vitamine_mod_09",
           "moduleName": "Sub-Kategorie Slot 2",
           "layoutType": "subcategory_tile",
           "layoutShape": "full_width_banner",
@@ -3591,8 +3422,8 @@
           "toolLayoutRole": "navigation_bridge"
         },
         {
-          "position": 11,
-          "moduleId": "vitamine_mod_11",
+          "position": 10,
+          "moduleId": "vitamine_mod_10",
           "moduleName": "Sub-Kategorie Slot 3",
           "layoutType": "subcategory_tile",
           "layoutShape": "full_width_banner",
@@ -3665,8 +3496,8 @@
           "toolLayoutRole": "navigation_bridge"
         },
         {
-          "position": 12,
-          "moduleId": "vitamine_mod_12",
+          "position": 11,
+          "moduleId": "vitamine_mod_11",
           "moduleName": "Editorial Banner Schluss",
           "layoutType": "editorial_banner",
           "layoutShape": "full_width_banner",
@@ -3737,43 +3568,6 @@
           "toolLayoutName": "Full Width",
           "toolLayoutType": "fullwidth",
           "toolLayoutRole": "editorial"
-        },
-        {
-          "position": 13,
-          "moduleId": "vitamine_mod_13",
-          "moduleName": "Amazon Share Footer",
-          "layoutType": "amazon_share_footer",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
-          "designIntentDetail": null,
-          "structuralPattern": "Amazon-eigener Teilen-Footer",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": "Teilen",
-            "textType": "none",
-            "origin": "amazon_chrome",
-            "headline": "Teilen",
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": "EditorialRow",
-            "visibleHeadings": [],
-            "ctaLabels": [],
-            "imageUrls": [],
-            "videoCount": 0,
-            "domHeight": 200,
-            "domTop": 7098
-          },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {
@@ -3825,43 +3619,6 @@
         {
           "position": 1,
           "moduleId": "soprotein_vegan_mod_01",
-          "moduleName": "Amazon Nav Header",
-          "layoutType": "amazon_nav_header",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
-          "designIntentDetail": "Global-Template. Die Aktiv-Markierung liegt auf 'UNSERE NEUHEITEN', dadurch wird die Kampagnen-Seite als Unterseite der Neuheiten positioniert.",
-          "structuralPattern": "Amazon-eigener Navheader",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": null,
-            "textType": "none",
-            "origin": "none",
-            "headline": null,
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": null,
-            "visibleHeadings": [],
-            "ctaLabels": [],
-            "imageUrls": [],
-            "videoCount": 0,
-            "domHeight": 338,
-            "domTop": 99
-          },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
-        },
-        {
-          "position": 2,
-          "moduleId": "soprotein_vegan_mod_02",
           "moduleName": "SoProtein Hero kompakt",
           "layoutType": "hero_banner_compact",
           "layoutShape": "full_width_banner",
@@ -3930,8 +3687,8 @@
           "toolLayoutRole": "hero"
         },
         {
-          "position": 3,
-          "moduleId": "soprotein_vegan_mod_03",
+          "position": 2,
+          "moduleId": "soprotein_vegan_mod_02",
           "moduleName": "SoProtein Produktgrid",
           "layoutType": "product_grid_line",
           "layoutShape": "grid_eight_plus",
@@ -3978,43 +3735,6 @@
             },
             "note": "30 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design."
           }
-        },
-        {
-          "position": 4,
-          "moduleId": "soprotein_vegan_mod_04",
-          "moduleName": "Amazon Share Footer",
-          "layoutType": "amazon_share_footer",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
-          "designIntentDetail": "Global-Template. Wird von Amazon automatisch am Ende jeder Store-Seite angehaengt.",
-          "structuralPattern": "Amazon-eigener Teilen-Footer",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": "Teilen",
-            "textType": "none",
-            "origin": "amazon_chrome",
-            "headline": "Teilen",
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": "EditorialRow",
-            "visibleHeadings": [],
-            "ctaLabels": [],
-            "imageUrls": [],
-            "videoCount": 0,
-            "domHeight": 200,
-            "domTop": 2659
-          },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {
@@ -4065,43 +3785,6 @@
         {
           "position": 1,
           "moduleId": "ueber_uns_mod_01",
-          "moduleName": "Amazon Nav Header",
-          "layoutType": "amazon_nav_header",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
-          "designIntentDetail": "Global-Template, Aktiv-Markierung signalisiert Position UEBER UNS.",
-          "structuralPattern": "Amazon-eigener Navheader",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": null,
-            "textType": "none",
-            "origin": "none",
-            "headline": null,
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": null,
-            "visibleHeadings": [],
-            "ctaLabels": [],
-            "imageUrls": [],
-            "videoCount": 0,
-            "domHeight": 338,
-            "domTop": 99
-          },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
-        },
-        {
-          "position": 2,
-          "moduleId": "ueber_uns_mod_02",
           "moduleName": "Ueber uns Hero",
           "layoutType": "hero_banner",
           "layoutShape": "full_width_banner",
@@ -4170,8 +3853,8 @@
           "toolLayoutRole": "hero"
         },
         {
-          "position": 3,
-          "moduleId": "ueber_uns_mod_03",
+          "position": 2,
+          "moduleId": "ueber_uns_mod_02",
           "moduleName": "Story Banner 1",
           "layoutType": "editorial_banner",
           "layoutShape": "full_width_banner",
@@ -4244,8 +3927,8 @@
           "toolLayoutRole": "editorial"
         },
         {
-          "position": 4,
-          "moduleId": "ueber_uns_mod_04",
+          "position": 3,
+          "moduleId": "ueber_uns_mod_03",
           "moduleName": "Story Banner Tall",
           "layoutType": "editorial_banner_tall",
           "layoutShape": "full_width_banner",
@@ -4318,8 +4001,8 @@
           "toolLayoutRole": "editorial"
         },
         {
-          "position": 5,
-          "moduleId": "ueber_uns_mod_05",
+          "position": 4,
+          "moduleId": "ueber_uns_mod_04",
           "moduleName": "Story Banner 2",
           "layoutType": "editorial_banner",
           "layoutShape": "full_width_banner",
@@ -4392,8 +4075,8 @@
           "toolLayoutRole": "editorial"
         },
         {
-          "position": 6,
-          "moduleId": "ueber_uns_mod_06",
+          "position": 5,
+          "moduleId": "ueber_uns_mod_05",
           "moduleName": "Brand Video",
           "layoutType": "hero_video_tall",
           "layoutShape": "full_width_banner",
@@ -4466,8 +4149,8 @@
           "toolLayoutRole": "hero_video"
         },
         {
-          "position": 7,
-          "moduleId": "ueber_uns_mod_07",
+          "position": 6,
+          "moduleId": "ueber_uns_mod_06",
           "moduleName": "Story Banner 3",
           "layoutType": "editorial_banner",
           "layoutShape": "full_width_banner",
@@ -4540,8 +4223,8 @@
           "toolLayoutRole": "editorial"
         },
         {
-          "position": 8,
-          "moduleId": "ueber_uns_mod_08",
+          "position": 7,
+          "moduleId": "ueber_uns_mod_07",
           "moduleName": "Story Banner 4",
           "layoutType": "editorial_banner",
           "layoutShape": "full_width_banner",
@@ -4614,8 +4297,8 @@
           "toolLayoutRole": "editorial"
         },
         {
-          "position": 9,
-          "moduleId": "ueber_uns_mod_09",
+          "position": 8,
+          "moduleId": "ueber_uns_mod_08",
           "moduleName": "Story Banner 5",
           "layoutType": "editorial_banner",
           "layoutShape": "full_width_banner",
@@ -4688,8 +4371,8 @@
           "toolLayoutRole": "editorial"
         },
         {
-          "position": 10,
-          "moduleId": "ueber_uns_mod_10",
+          "position": 9,
+          "moduleId": "ueber_uns_mod_09",
           "moduleName": "Story Banner 6",
           "layoutType": "editorial_banner",
           "layoutShape": "full_width_banner",
@@ -4762,8 +4445,8 @@
           "toolLayoutRole": "editorial"
         },
         {
-          "position": 11,
-          "moduleId": "ueber_uns_mod_11",
+          "position": 10,
+          "moduleId": "ueber_uns_mod_10",
           "moduleName": "Story Banner Tall 2",
           "layoutType": "editorial_banner_tall",
           "layoutShape": "full_width_banner",
@@ -4836,8 +4519,8 @@
           "toolLayoutRole": "editorial"
         },
         {
-          "position": 12,
-          "moduleId": "ueber_uns_mod_12",
+          "position": 11,
+          "moduleId": "ueber_uns_mod_11",
           "moduleName": "Story Banner 7",
           "layoutType": "editorial_banner",
           "layoutShape": "full_width_banner",
@@ -4910,8 +4593,8 @@
           "toolLayoutRole": "editorial"
         },
         {
-          "position": 13,
-          "moduleId": "ueber_uns_mod_13",
+          "position": 12,
+          "moduleId": "ueber_uns_mod_12",
           "moduleName": "Section Intro Endblock",
           "layoutType": "editorial_section_intro",
           "layoutShape": "full_width_banner",
@@ -4984,8 +4667,8 @@
           "toolLayoutRole": "section_intro"
         },
         {
-          "position": 14,
-          "moduleId": "ueber_uns_mod_14",
+          "position": 13,
+          "moduleId": "ueber_uns_mod_13",
           "moduleName": "Editorial Quad",
           "layoutType": "editorial_tile_quad",
           "layoutShape": "grid_four",
@@ -5166,8 +4849,8 @@
           "toolLayoutRole": "editorial_quad"
         },
         {
-          "position": 15,
-          "moduleId": "ueber_uns_mod_15",
+          "position": 14,
+          "moduleId": "ueber_uns_mod_14",
           "moduleName": "Editorial Pair 1",
           "layoutType": "editorial_tile_pair",
           "layoutShape": "split_two",
@@ -5276,8 +4959,8 @@
           "toolLayoutRole": "editorial_pair"
         },
         {
-          "position": 16,
-          "moduleId": "ueber_uns_mod_16",
+          "position": 15,
+          "moduleId": "ueber_uns_mod_15",
           "moduleName": "Editorial Pair 2",
           "layoutType": "editorial_tile_pair",
           "layoutShape": "split_two",
@@ -5384,43 +5067,6 @@
           "toolLayoutName": "2 Equal",
           "toolLayoutType": "standard",
           "toolLayoutRole": "editorial_pair"
-        },
-        {
-          "position": 17,
-          "moduleId": "ueber_uns_mod_17",
-          "moduleName": "Amazon Share Footer",
-          "layoutType": "amazon_share_footer",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
-          "designIntentDetail": "Global-Template am Seitenende.",
-          "structuralPattern": "Amazon-eigener Teilen-Footer",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": "Teilen",
-            "textType": "none",
-            "origin": "amazon_chrome",
-            "headline": "Teilen",
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": "EditorialRow",
-            "visibleHeadings": [],
-            "ctaLabels": [],
-            "imageUrls": [],
-            "videoCount": 0,
-            "domHeight": 200,
-            "domTop": 5779
-          },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {
@@ -5492,43 +5138,6 @@
         {
           "position": 1,
           "moduleId": "alle_produkte_mod_01",
-          "moduleName": "Amazon Nav Header",
-          "layoutType": "amazon_nav_header",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
-          "designIntentDetail": null,
-          "structuralPattern": "Amazon-eigener Navheader",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": null,
-            "textType": "none",
-            "origin": "none",
-            "headline": null,
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": null,
-            "visibleHeadings": [],
-            "ctaLabels": [],
-            "imageUrls": [],
-            "videoCount": 0,
-            "domHeight": 338,
-            "domTop": 99
-          },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
-        },
-        {
-          "position": 2,
-          "moduleId": "alle_produkte_mod_02",
           "moduleName": "Alle Produkte shoppable",
           "layoutType": "shoppable_interactive_image",
           "layoutShape": "interactive_hotspot",
@@ -5601,8 +5210,8 @@
           "toolLayoutRole": "shoppable"
         },
         {
-          "position": 3,
-          "moduleId": "alle_produkte_mod_03",
+          "position": 2,
+          "moduleId": "alle_produkte_mod_02",
           "moduleName": "Editorial Banner Intro",
           "layoutType": "editorial_banner",
           "layoutShape": "full_width_banner",
@@ -5675,8 +5284,8 @@
           "toolLayoutRole": "editorial"
         },
         {
-          "position": 4,
-          "moduleId": "alle_produkte_mod_04",
+          "position": 3,
+          "moduleId": "alle_produkte_mod_03",
           "moduleName": "Alle Produkte Katalog",
           "layoutType": "product_grid_full_catalog",
           "layoutShape": "grid_eight_plus",
@@ -5725,8 +5334,8 @@
           }
         },
         {
-          "position": 5,
-          "moduleId": "alle_produkte_mod_05",
+          "position": 4,
+          "moduleId": "alle_produkte_mod_04",
           "moduleName": "Section Intro Schluss",
           "layoutType": "editorial_section_intro",
           "layoutShape": "full_width_banner",
@@ -5797,43 +5406,6 @@
           "toolLayoutName": "Full Width",
           "toolLayoutType": "fullwidth",
           "toolLayoutRole": "section_intro"
-        },
-        {
-          "position": 6,
-          "moduleId": "alle_produkte_mod_06",
-          "moduleName": "Amazon Share Footer",
-          "layoutType": "amazon_share_footer",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
-          "designIntentDetail": null,
-          "structuralPattern": "Amazon-eigener Teilen-Footer",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": "Teilen",
-            "textType": "none",
-            "origin": "amazon_chrome",
-            "headline": "Teilen",
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": "EditorialRow",
-            "visibleHeadings": [],
-            "ctaLabels": [],
-            "imageUrls": [],
-            "videoCount": 0,
-            "domHeight": 200,
-            "domTop": 5066
-          },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {
@@ -5879,44 +5451,7 @@
       "modules": [
         {
           "position": 1,
-          "moduleId": "neuheiten_mod_01",
-          "moduleName": "Amazon Nav Header",
-          "layoutType": "amazon_nav_header",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
-          "designIntentDetail": null,
-          "structuralPattern": "Amazon-eigener Navheader",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": null,
-            "textType": "none",
-            "origin": "none",
-            "headline": null,
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": null,
-            "visibleHeadings": [],
-            "ctaLabels": [],
-            "imageUrls": [],
-            "videoCount": 0,
-            "domHeight": 338,
-            "domTop": 99
-          },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
-        },
-        {
-          "position": 2,
-          "moduleId": "neuheiten_mod_02",
+          "moduleId": "unsere_neuheiten_mod_01",
           "moduleName": "Neuheiten Hero",
           "layoutType": "hero_banner",
           "layoutShape": "full_width_banner",
@@ -5989,8 +5524,8 @@
           "toolLayoutRole": "hero"
         },
         {
-          "position": 3,
-          "moduleId": "neuheiten_mod_03",
+          "position": 2,
+          "moduleId": "unsere_neuheiten_mod_02",
           "moduleName": "Section Intro vor Showcase",
           "layoutType": "editorial_section_intro",
           "layoutShape": "full_width_banner",
@@ -6063,8 +5598,8 @@
           "toolLayoutRole": "section_intro"
         },
         {
-          "position": 4,
-          "moduleId": "neuheiten_mod_04",
+          "position": 3,
+          "moduleId": "unsere_neuheiten_mod_03",
           "moduleName": "Magtein Showcase",
           "layoutType": "product_showcase_video",
           "layoutShape": "full_width_banner",
@@ -6113,8 +5648,8 @@
               "toolTileType": "video",
               "toolImageType": "FULL_WIDTH",
               "link": {
-                "clickable": true,
-                "linkType": "pdp_asin",
+                "clickable": false,
+                "linkType": "none",
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
@@ -6137,8 +5672,8 @@
           "toolLayoutRole": "product_showcase"
         },
         {
-          "position": 5,
-          "moduleId": "neuheiten_mod_05",
+          "position": 4,
+          "moduleId": "unsere_neuheiten_mod_04",
           "moduleName": "Neuheiten Grid",
           "layoutType": "product_grid_new_arrivals",
           "layoutShape": "grid_eight_plus",
@@ -6187,8 +5722,8 @@
           }
         },
         {
-          "position": 6,
-          "moduleId": "neuheiten_mod_06",
+          "position": 5,
+          "moduleId": "unsere_neuheiten_mod_05",
           "moduleName": "Section Intro Mittel",
           "layoutType": "editorial_section_intro",
           "layoutShape": "full_width_banner",
@@ -6261,8 +5796,8 @@
           "toolLayoutRole": "section_intro"
         },
         {
-          "position": 7,
-          "moduleId": "neuheiten_mod_07",
+          "position": 6,
+          "moduleId": "unsere_neuheiten_mod_06",
           "moduleName": "Editorial Quad",
           "layoutType": "editorial_tile_quad",
           "layoutShape": "grid_four",
@@ -6443,8 +5978,8 @@
           "toolLayoutRole": "editorial_quad"
         },
         {
-          "position": 8,
-          "moduleId": "neuheiten_mod_08",
+          "position": 7,
+          "moduleId": "unsere_neuheiten_mod_07",
           "moduleName": "Editorial Pair 1",
           "layoutType": "editorial_tile_pair",
           "layoutShape": "split_two",
@@ -6553,8 +6088,8 @@
           "toolLayoutRole": "editorial_pair"
         },
         {
-          "position": 9,
-          "moduleId": "neuheiten_mod_09",
+          "position": 8,
+          "moduleId": "unsere_neuheiten_mod_08",
           "moduleName": "Editorial Pair 2",
           "layoutType": "editorial_tile_pair",
           "layoutShape": "split_two",
@@ -6661,43 +6196,6 @@
           "toolLayoutName": "2 Equal",
           "toolLayoutType": "standard",
           "toolLayoutRole": "editorial_pair"
-        },
-        {
-          "position": 10,
-          "moduleId": "neuheiten_mod_10",
-          "moduleName": "Amazon Share Footer",
-          "layoutType": "amazon_share_footer",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
-          "designIntentDetail": null,
-          "structuralPattern": "Amazon-eigener Teilen-Footer",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": "Teilen",
-            "textType": "none",
-            "origin": "amazon_chrome",
-            "headline": "Teilen",
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": "EditorialRow",
-            "visibleHeadings": [],
-            "ctaLabels": [],
-            "imageUrls": [],
-            "videoCount": 0,
-            "domHeight": 200,
-            "domTop": 6339
-          },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {
@@ -6754,19 +6252,19 @@
         {
           "position": 1,
           "moduleId": "produktselektor_mod_01",
-          "moduleName": "Amazon Nav Header",
-          "layoutType": "amazon_nav_header",
+          "moduleName": "Filter Accordion 1",
+          "layoutType": "filter_accordion_collapsed",
           "layoutShape": "chrome_or_separator",
           "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
+          "designIntent": "navigation_bridge",
           "designIntentDetail": null,
-          "structuralPattern": "Amazon-eigener Navheader",
+          "structuralPattern": "Einklappbarer Filter-Accordion",
           "backgroundStyle": "amazon_default",
           "backgroundDetail": null,
           "textOnImage": {
             "visibleText": null,
-            "textType": "none",
-            "origin": "none",
+            "textType": "filter_label",
+            "origin": "baked_in",
             "headline": null,
             "subline": null,
             "cta": null,
@@ -6774,24 +6272,24 @@
           },
           "tiles": [],
           "dom": {
-            "widgetClass": null,
+            "widgetClass": "EditorialRow",
             "visibleHeadings": [],
             "ctaLabels": [],
             "imageUrls": [],
             "videoCount": 0,
-            "domHeight": 94,
-            "domTop": 99
+            "domHeight": 0,
+            "domTop": 193
           },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
+          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase.",
           "toolLayoutId": null,
           "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
+          "toolLayoutType": "skip",
+          "toolLayoutRole": "filter_ui"
         },
         {
           "position": 2,
           "moduleId": "produktselektor_mod_02",
-          "moduleName": "Filter Accordion 1",
+          "moduleName": "Filter Accordion 2",
           "layoutType": "filter_accordion_collapsed",
           "layoutShape": "chrome_or_separator",
           "tileCount": 0,
@@ -6828,7 +6326,7 @@
         {
           "position": 3,
           "moduleId": "produktselektor_mod_03",
-          "moduleName": "Filter Accordion 2",
+          "moduleName": "Filter Accordion 3",
           "layoutType": "filter_accordion_collapsed",
           "layoutShape": "chrome_or_separator",
           "tileCount": 0,
@@ -6865,43 +6363,6 @@
         {
           "position": 4,
           "moduleId": "produktselektor_mod_04",
-          "moduleName": "Filter Accordion 3",
-          "layoutType": "filter_accordion_collapsed",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "navigation_bridge",
-          "designIntentDetail": null,
-          "structuralPattern": "Einklappbarer Filter-Accordion",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": null,
-            "textType": "filter_label",
-            "origin": "baked_in",
-            "headline": null,
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": "EditorialRow",
-            "visibleHeadings": [],
-            "ctaLabels": [],
-            "imageUrls": [],
-            "videoCount": 0,
-            "domHeight": 0,
-            "domTop": 193
-          },
-          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "skip",
-          "toolLayoutRole": "filter_ui"
-        },
-        {
-          "position": 5,
-          "moduleId": "produktselektor_mod_05",
           "moduleName": "Filter Banner",
           "layoutType": "filter_banner",
           "layoutShape": "full_width_banner",
@@ -6974,9 +6435,46 @@
           "toolLayoutRole": "filter_banner"
         },
         {
+          "position": 5,
+          "moduleId": "produktselektor_mod_05",
+          "moduleName": "Filter Accordion 4",
+          "layoutType": "filter_accordion_collapsed",
+          "layoutShape": "chrome_or_separator",
+          "tileCount": 0,
+          "designIntent": "navigation_bridge",
+          "designIntentDetail": null,
+          "structuralPattern": "Einklappbarer Filter-Accordion",
+          "backgroundStyle": "amazon_default",
+          "backgroundDetail": null,
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "filter_label",
+            "origin": "baked_in",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "tiles": [],
+          "dom": {
+            "widgetClass": "EditorialRow",
+            "visibleHeadings": [],
+            "ctaLabels": [],
+            "imageUrls": [],
+            "videoCount": 0,
+            "domHeight": 0,
+            "domTop": 429
+          },
+          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase.",
+          "toolLayoutId": null,
+          "toolLayoutName": null,
+          "toolLayoutType": "skip",
+          "toolLayoutRole": "filter_ui"
+        },
+        {
           "position": 6,
           "moduleId": "produktselektor_mod_06",
-          "moduleName": "Filter Accordion 4",
+          "moduleName": "Filter Accordion 5",
           "layoutType": "filter_accordion_collapsed",
           "layoutShape": "chrome_or_separator",
           "tileCount": 0,
@@ -7013,7 +6511,7 @@
         {
           "position": 7,
           "moduleId": "produktselektor_mod_07",
-          "moduleName": "Filter Accordion 5",
+          "moduleName": "Filter Accordion 6",
           "layoutType": "filter_accordion_collapsed",
           "layoutShape": "chrome_or_separator",
           "tileCount": 0,
@@ -7050,43 +6548,6 @@
         {
           "position": 8,
           "moduleId": "produktselektor_mod_08",
-          "moduleName": "Filter Accordion 6",
-          "layoutType": "filter_accordion_collapsed",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "navigation_bridge",
-          "designIntentDetail": null,
-          "structuralPattern": "Einklappbarer Filter-Accordion",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": null,
-            "textType": "filter_label",
-            "origin": "baked_in",
-            "headline": null,
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": "EditorialRow",
-            "visibleHeadings": [],
-            "ctaLabels": [],
-            "imageUrls": [],
-            "videoCount": 0,
-            "domHeight": 0,
-            "domTop": 429
-          },
-          "moduleFunction": "Einklappbares Filter-Accordion auf der Produktselektor-Seite, funktionaler UI-Baustein fuer die Beratungs-Flow, nicht Design-Showcase.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "skip",
-          "toolLayoutRole": "filter_ui"
-        },
-        {
-          "position": 9,
-          "moduleId": "produktselektor_mod_09",
           "moduleName": "Produktselektor Grid",
           "layoutType": "product_grid_filter_results",
           "layoutShape": "grid_eight_plus",
@@ -7133,43 +6594,6 @@
             },
             "note": "20 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design."
           }
-        },
-        {
-          "position": 10,
-          "moduleId": "produktselektor_mod_10",
-          "moduleName": "Amazon Share Footer",
-          "layoutType": "amazon_share_footer",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
-          "designIntentDetail": null,
-          "structuralPattern": "Amazon-eigener Teilen-Footer",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": "Teilen",
-            "textType": "none",
-            "origin": "amazon_chrome",
-            "headline": "Teilen",
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": "EditorialRow",
-            "visibleHeadings": [],
-            "ctaLabels": [],
-            "imageUrls": [],
-            "videoCount": 0,
-            "domHeight": 0,
-            "domTop": 0
-          },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {
@@ -7212,43 +6636,6 @@
         {
           "position": 1,
           "moduleId": "geschenk_sets_mod_01",
-          "moduleName": "Amazon Nav Header",
-          "layoutType": "amazon_nav_header",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
-          "designIntentDetail": null,
-          "structuralPattern": "Amazon-eigener Navheader",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": null,
-            "textType": "none",
-            "origin": "none",
-            "headline": null,
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": null,
-            "visibleHeadings": [],
-            "ctaLabels": [],
-            "imageUrls": [],
-            "videoCount": 0,
-            "domHeight": 338,
-            "domTop": 99
-          },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
-        },
-        {
-          "position": 2,
-          "moduleId": "geschenk_sets_mod_02",
           "moduleName": "Geschenk-Sets Hero Tall",
           "layoutType": "hero_banner_tall",
           "layoutShape": "full_width_banner",
@@ -7321,8 +6708,8 @@
           "toolLayoutRole": "hero"
         },
         {
-          "position": 3,
-          "moduleId": "geschenk_sets_mod_03",
+          "position": 2,
+          "moduleId": "geschenk_sets_mod_02",
           "moduleName": "Editorial Banner Large",
           "layoutType": "editorial_banner_large",
           "layoutShape": "full_width_banner",
@@ -7395,8 +6782,8 @@
           "toolLayoutRole": "editorial"
         },
         {
-          "position": 4,
-          "moduleId": "geschenk_sets_mod_04",
+          "position": 3,
+          "moduleId": "geschenk_sets_mod_03",
           "moduleName": "Immunsystem Basic Set Showcase",
           "layoutType": "product_showcase_video",
           "layoutShape": "full_width_banner",
@@ -7445,8 +6832,8 @@
               "toolTileType": "video",
               "toolImageType": "FULL_WIDTH",
               "link": {
-                "clickable": true,
-                "linkType": "pdp_asin",
+                "clickable": false,
+                "linkType": "none",
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
@@ -7469,8 +6856,8 @@
           "toolLayoutRole": "product_showcase"
         },
         {
-          "position": 5,
-          "moduleId": "geschenk_sets_mod_05",
+          "position": 4,
+          "moduleId": "geschenk_sets_mod_04",
           "moduleName": "Beauty Premium Set Showcase",
           "layoutType": "product_showcase_video",
           "layoutShape": "full_width_banner",
@@ -7519,8 +6906,8 @@
               "toolTileType": "video",
               "toolImageType": "FULL_WIDTH",
               "link": {
-                "clickable": true,
-                "linkType": "pdp_asin",
+                "clickable": false,
+                "linkType": "none",
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
@@ -7543,8 +6930,8 @@
           "toolLayoutRole": "product_showcase"
         },
         {
-          "position": 6,
-          "moduleId": "geschenk_sets_mod_06",
+          "position": 5,
+          "moduleId": "geschenk_sets_mod_05",
           "moduleName": "Essentials Set Showcase",
           "layoutType": "product_showcase_video",
           "layoutShape": "full_width_banner",
@@ -7593,8 +6980,8 @@
               "toolTileType": "video",
               "toolImageType": "FULL_WIDTH",
               "link": {
-                "clickable": true,
-                "linkType": "pdp_asin",
+                "clickable": false,
+                "linkType": "none",
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
@@ -7617,8 +7004,8 @@
           "toolLayoutRole": "product_showcase"
         },
         {
-          "position": 7,
-          "moduleId": "geschenk_sets_mod_07",
+          "position": 6,
+          "moduleId": "geschenk_sets_mod_06",
           "moduleName": "Separator",
           "layoutType": "separator_invisible",
           "layoutShape": "chrome_or_separator",
@@ -7654,8 +7041,8 @@
           "toolLayoutRole": "spacer"
         },
         {
-          "position": 8,
-          "moduleId": "geschenk_sets_mod_08",
+          "position": 7,
+          "moduleId": "geschenk_sets_mod_07",
           "moduleName": "Beauty Basic Set Showcase",
           "layoutType": "product_showcase_video",
           "layoutShape": "full_width_banner",
@@ -7704,8 +7091,8 @@
               "toolTileType": "video",
               "toolImageType": "FULL_WIDTH",
               "link": {
-                "clickable": true,
-                "linkType": "pdp_asin",
+                "clickable": false,
+                "linkType": "none",
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
@@ -7728,8 +7115,8 @@
           "toolLayoutRole": "product_showcase"
         },
         {
-          "position": 9,
-          "moduleId": "geschenk_sets_mod_09",
+          "position": 8,
+          "moduleId": "geschenk_sets_mod_08",
           "moduleName": "Separator",
           "layoutType": "separator_invisible",
           "layoutShape": "chrome_or_separator",
@@ -7765,8 +7152,8 @@
           "toolLayoutRole": "spacer"
         },
         {
-          "position": 10,
-          "moduleId": "geschenk_sets_mod_10",
+          "position": 9,
+          "moduleId": "geschenk_sets_mod_09",
           "moduleName": "Kraftsport Basic Set Showcase",
           "layoutType": "product_showcase_video",
           "layoutShape": "full_width_banner",
@@ -7815,8 +7202,8 @@
               "toolTileType": "video",
               "toolImageType": "FULL_WIDTH",
               "link": {
-                "clickable": true,
-                "linkType": "pdp_asin",
+                "clickable": false,
+                "linkType": "none",
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
@@ -7839,8 +7226,8 @@
           "toolLayoutRole": "product_showcase"
         },
         {
-          "position": 11,
-          "moduleId": "geschenk_sets_mod_11",
+          "position": 10,
+          "moduleId": "geschenk_sets_mod_10",
           "moduleName": "Separator",
           "layoutType": "separator_invisible",
           "layoutShape": "chrome_or_separator",
@@ -7876,8 +7263,8 @@
           "toolLayoutRole": "spacer"
         },
         {
-          "position": 12,
-          "moduleId": "geschenk_sets_mod_12",
+          "position": 11,
+          "moduleId": "geschenk_sets_mod_11",
           "moduleName": "Augencreme Set Showcase",
           "layoutType": "product_showcase_video",
           "layoutShape": "full_width_banner",
@@ -7926,8 +7313,8 @@
               "toolTileType": "video",
               "toolImageType": "FULL_WIDTH",
               "link": {
-                "clickable": true,
-                "linkType": "pdp_asin",
+                "clickable": false,
+                "linkType": "none",
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
@@ -7950,8 +7337,8 @@
           "toolLayoutRole": "product_showcase"
         },
         {
-          "position": 13,
-          "moduleId": "geschenk_sets_mod_13",
+          "position": 12,
+          "moduleId": "geschenk_sets_mod_12",
           "moduleName": "Hero Video Schlussblock",
           "layoutType": "hero_video",
           "layoutShape": "full_width_banner",
@@ -8024,8 +7411,8 @@
           "toolLayoutRole": "hero_video"
         },
         {
-          "position": 14,
-          "moduleId": "geschenk_sets_mod_14",
+          "position": 13,
+          "moduleId": "geschenk_sets_mod_13",
           "moduleName": "Shoppable Interactive",
           "layoutType": "shoppable_interactive_image",
           "layoutShape": "interactive_hotspot",
@@ -8098,8 +7485,8 @@
           "toolLayoutRole": "shoppable"
         },
         {
-          "position": 15,
-          "moduleId": "geschenk_sets_mod_15",
+          "position": 14,
+          "moduleId": "geschenk_sets_mod_14",
           "moduleName": "Section Intro Schluss",
           "layoutType": "editorial_section_intro",
           "layoutShape": "full_width_banner",
@@ -8172,8 +7559,8 @@
           "toolLayoutRole": "section_intro"
         },
         {
-          "position": 16,
-          "moduleId": "geschenk_sets_mod_16",
+          "position": 15,
+          "moduleId": "geschenk_sets_mod_15",
           "moduleName": "Editorial Quad 1",
           "layoutType": "editorial_tile_quad",
           "layoutShape": "grid_four",
@@ -8354,8 +7741,8 @@
           "toolLayoutRole": "editorial_quad"
         },
         {
-          "position": 17,
-          "moduleId": "geschenk_sets_mod_17",
+          "position": 16,
+          "moduleId": "geschenk_sets_mod_16",
           "moduleName": "Editorial Quad 2",
           "layoutType": "editorial_tile_quad",
           "layoutShape": "grid_four",
@@ -8534,43 +7921,6 @@
           "toolLayoutName": "4 Equal (2x2 Wide)",
           "toolLayoutType": "standard",
           "toolLayoutRole": "editorial_quad"
-        },
-        {
-          "position": 18,
-          "moduleId": "geschenk_sets_mod_18",
-          "moduleName": "Amazon Share Footer",
-          "layoutType": "amazon_share_footer",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
-          "designIntentDetail": null,
-          "structuralPattern": "Amazon-eigener Teilen-Footer",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": "Teilen",
-            "textType": "none",
-            "origin": "amazon_chrome",
-            "headline": "Teilen",
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": "EditorialRow",
-            "visibleHeadings": [],
-            "ctaLabels": [],
-            "imageUrls": [],
-            "videoCount": 0,
-            "domHeight": 200,
-            "domTop": 6869
-          },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {
@@ -8648,44 +7998,7 @@
       "modules": [
         {
           "position": 1,
-          "moduleId": "unsere_empfehlungen_mod_01",
-          "moduleName": "Amazon Nav Header",
-          "layoutType": "amazon_nav_header",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
-          "designIntentDetail": null,
-          "structuralPattern": "Amazon-eigener Navheader",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": null,
-            "textType": "none",
-            "origin": "none",
-            "headline": null,
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": null,
-            "visibleHeadings": [],
-            "ctaLabels": [],
-            "imageUrls": [],
-            "videoCount": 0,
-            "domHeight": 338,
-            "domTop": 99
-          },
-          "moduleFunction": "Amazon-System-Navigation, keine Designentscheidung des Stores. Der Nutzer wechselt hier zwischen Store-Seiten via Amazon-Standard-Tab-Chrome.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
-        },
-        {
-          "position": 2,
-          "moduleId": "unsere_empfehlungen_mod_02",
+          "moduleId": "unsere_bestseller_empfehlungen_mod_01",
           "moduleName": "Empfehlungen Section Intro",
           "layoutType": "editorial_section_intro",
           "layoutShape": "full_width_banner",
@@ -8758,8 +8071,8 @@
           "toolLayoutRole": "section_intro"
         },
         {
-          "position": 3,
-          "moduleId": "unsere_empfehlungen_mod_03",
+          "position": 2,
+          "moduleId": "unsere_bestseller_empfehlungen_mod_02",
           "moduleName": "Bestseller Grid 24",
           "layoutType": "product_grid_bestsellers",
           "layoutShape": "grid_eight_plus",
@@ -8808,8 +8121,8 @@
           }
         },
         {
-          "position": 4,
-          "moduleId": "unsere_empfehlungen_mod_04",
+          "position": 3,
+          "moduleId": "unsere_bestseller_empfehlungen_mod_03",
           "moduleName": "Section Intro 2",
           "layoutType": "editorial_section_intro",
           "layoutShape": "full_width_banner",
@@ -8882,8 +8195,8 @@
           "toolLayoutRole": "section_intro"
         },
         {
-          "position": 5,
-          "moduleId": "unsere_empfehlungen_mod_05",
+          "position": 4,
+          "moduleId": "unsere_bestseller_empfehlungen_mod_04",
           "moduleName": "Editorial Quad 1",
           "layoutType": "editorial_tile_quad",
           "layoutShape": "grid_four",
@@ -9064,8 +8377,8 @@
           "toolLayoutRole": "editorial_quad"
         },
         {
-          "position": 6,
-          "moduleId": "unsere_empfehlungen_mod_06",
+          "position": 5,
+          "moduleId": "unsere_bestseller_empfehlungen_mod_05",
           "moduleName": "Editorial Quad 2",
           "layoutType": "editorial_tile_quad",
           "layoutShape": "grid_four",
@@ -9244,43 +8557,6 @@
           "toolLayoutName": "4 Equal (2x2 Wide)",
           "toolLayoutType": "standard",
           "toolLayoutRole": "editorial_quad"
-        },
-        {
-          "position": 7,
-          "moduleId": "unsere_empfehlungen_mod_07",
-          "moduleName": "Amazon Share Footer",
-          "layoutType": "amazon_share_footer",
-          "layoutShape": "chrome_or_separator",
-          "tileCount": 0,
-          "designIntent": "mimics_native_chrome",
-          "designIntentDetail": null,
-          "structuralPattern": "Amazon-eigener Teilen-Footer",
-          "backgroundStyle": "amazon_default",
-          "backgroundDetail": null,
-          "textOnImage": {
-            "visibleText": "Teilen",
-            "textType": "none",
-            "origin": "amazon_chrome",
-            "headline": "Teilen",
-            "subline": null,
-            "cta": null,
-            "directionCues": null
-          },
-          "tiles": [],
-          "dom": {
-            "widgetClass": "EditorialRow",
-            "visibleHeadings": [],
-            "ctaLabels": [],
-            "imageUrls": [],
-            "videoCount": 0,
-            "domHeight": 200,
-            "domTop": 3555
-          },
-          "moduleFunction": "Amazon-interner Share-Footer am Seitenende, keine Designentscheidung des Stores. Reine Plattform-UI ohne Conversion-Rolle.",
-          "toolLayoutId": null,
-          "toolLayoutName": null,
-          "toolLayoutType": "amazon_native",
-          "toolLayoutRole": "amazon_native"
         }
       ],
       "pageAnalysis": {
