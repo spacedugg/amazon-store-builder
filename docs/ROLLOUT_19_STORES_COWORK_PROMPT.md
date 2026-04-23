@@ -231,31 +231,32 @@ anpassen. Felder:
 
 ## Tooling-Fixes vor dem Rollout
 
-**Fix 1: DOM-Extraktor um href-Capture erweitern**
-
-In `scripts/extract-page-dom.js` pro Modul hinzufuegen:
-
-```js
-hrefs: Array.from(row.querySelectorAll('a[href]'))
-  .map(a => ({ href: a.getAttribute('href'), text: a.textContent.trim().slice(0, 50) }))
-```
-
-Damit landet in jedem Modul eine Liste echter Link-Targets, die Phase 2
-direkt in `link.linkTarget` mit Confidence `high` uebernehmen kann,
-statt heuristisch zu raten.
-
-**Fix 2: Screenshot-Archivierung im Chrome-MCP**
+**Fix 1: Screenshot-Archivierung im Chrome-MCP**
 
 Der Chrome-MCP gibt aktuell nur IDs zurueck, keine Datei-Pfade. Workaround:
 `javascript_tool` plus `canvas.toDataURL()` im Document-Body stacken, dann
 via `get_page_text` als Base64 abholen und sandbox-seitig zu PNG
 rekonstruieren. Details im natural-elements-Report Abschnitt 7.
 
-**Fix 3: Viewport-Segmentierung**
+**Fix 2: Viewport-Segmentierung**
 
 Chrome-MCP weist Fenster ueber 1280 Pixel zurueck. Full-Page-Shots in
 3 bis 4 Abschnitten via `scrollTo` plus `screenshot` stacken und dem
 Vision-Modell als Bildsequenz geben.
+
+**Anmerkung zum Thema Link-Scraping**
+
+Die Erfassung echter hrefs ist **nicht** Pflicht. Was wirklich zaehlt,
+ist dass jede Kachel inhaltlich verstanden wird: worum geht es, welche
+Kategorie zeigt sie, welches Produkt, welchen Marken-Aspekt. Aus diesem
+Inhalts-Verstaendnis leitet der Generator den Link spaeter selbst ab.
+Ein Kategorie-Tile fuehrt zur Kategorie-Subpage, ein Produkt-Tile zur
+PDP, ein About-Tile gegebenenfalls zur About-Seite. Diese Ableitung ist
+Generator-Logik, nicht Scraping-Aufgabe.
+
+Entsprechend ist die Pflicht pro Tile nicht "linkTarget exakt
+extrahieren", sondern "visualContent und tileContentTopic praezise
+beschreiben". Siehe Paragraf 11e im BLUEPRINT_EXTRACTION_PROMPT.
 
 ## Abbruchkriterien pro Store
 
