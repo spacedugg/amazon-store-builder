@@ -68,7 +68,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "brand_story",
+            "topicValue": null,
+            "topicDetail": "Hero ohne klaren Kategorie-Anker"
+          }
         }
       ],
       "dom": {
@@ -128,7 +133,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Editorial-Banner ohne klares Inhalts-Thema"
+          }
         }
       ],
       "dom": {
@@ -188,7 +198,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "gift_set",
+            "topicValue": "Immunsystem Basic Set",
+            "topicDetail": "Set-Showcase mit Video"
+          }
         }
       ],
       "dom": {
@@ -248,7 +263,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "gift_set",
+            "topicValue": "Beauty Premium Set",
+            "topicDetail": "Set-Showcase mit Video"
+          }
         }
       ],
       "dom": {
@@ -308,7 +328,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "gift_set",
+            "topicValue": "Essentials Set",
+            "topicDetail": "Set-Showcase mit Video"
+          }
         }
       ],
       "dom": {
@@ -400,7 +425,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "gift_set",
+            "topicValue": "Beauty Basic Set",
+            "topicDetail": "Set-Showcase mit Video"
+          }
         }
       ],
       "dom": {
@@ -492,7 +522,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "gift_set",
+            "topicValue": "Kraftsport Basic Set",
+            "topicDetail": "Set-Showcase mit Video"
+          }
         }
       ],
       "dom": {
@@ -584,7 +619,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "gift_set",
+            "topicValue": "Augencreme Set",
+            "topicDetail": "Set-Showcase mit Video"
+          }
         }
       ],
       "dom": {
@@ -644,7 +684,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "brand_story",
+            "topicValue": null,
+            "topicDetail": "Hero ohne klaren Kategorie-Anker"
+          }
         }
       ],
       "dom": {
@@ -704,7 +749,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "shoppable_collection",
+            "topicValue": null,
+            "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
+          }
         }
       ],
       "dom": {
@@ -764,7 +814,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Section-Header, nur Gliederung"
+          }
         }
       ],
       "dom": {
@@ -824,7 +879,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "2",
@@ -851,7 +911,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "3",
@@ -878,7 +943,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "4",
@@ -905,7 +975,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         }
       ],
       "dom": {
@@ -965,7 +1040,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "2",
@@ -992,7 +1072,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "3",
@@ -1019,7 +1104,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "4",
@@ -1046,7 +1136,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         }
       ],
       "dom": {

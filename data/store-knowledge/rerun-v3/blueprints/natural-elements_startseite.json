@@ -72,7 +72,12 @@
             "Schwarz",
             "Zartrosa"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "campaign",
+            "topicValue": "Neue Produkte? OH YEAH! NEUHEITEN ENTDECKEN NEU",
+            "topicDetail": "Kampagnen-Hero"
+          }
         }
       ],
       "dom": {
@@ -150,7 +155,12 @@
             "Salbeigrün",
             "Weiß"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Editorial-Banner ohne klares Inhalts-Thema"
+          }
         }
       ],
       "dom": {
@@ -215,7 +225,12 @@
             "Schwarz",
             "Hellgrau"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Editorial-Banner ohne klares Inhalts-Thema"
+          }
         }
       ],
       "dom": {
@@ -282,7 +297,12 @@
             "Hellgrau",
             "Weiss"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "shoppable_collection",
+            "topicValue": "Bestseller",
+            "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
+          }
         }
       ],
       "dom": {
@@ -348,7 +368,12 @@
             "Schwarz",
             "Weiß"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "brand_story",
+            "topicValue": null,
+            "topicDetail": "Hero ohne klaren Kategorie-Anker"
+          }
         }
       ],
       "dom": {
@@ -426,7 +451,12 @@
             "Salbeigrün",
             "Schwarz"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Section-Header, nur Gliederung"
+          }
         }
       ],
       "dom": {
@@ -492,7 +522,12 @@
             "Weiß",
             "Laubgrün"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Section-Header, nur Gliederung"
+          }
         }
       ],
       "dom": {
@@ -556,7 +591,12 @@
             "Schwarz",
             "Laubgrün"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "shoppable_collection",
+            "topicValue": null,
+            "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
+          }
         },
         {
           "position": "2",
@@ -584,7 +624,12 @@
             "Weiß",
             "Schwarz"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "shoppable_collection",
+            "topicValue": null,
+            "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
+          }
         },
         {
           "position": "3",
@@ -612,7 +657,12 @@
             "Weiß",
             "Schwarz"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "shoppable_collection",
+            "topicValue": null,
+            "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
+          }
         },
         {
           "position": "4",
@@ -640,7 +690,12 @@
             "Weiß",
             "Schwarz"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "shoppable_collection",
+            "topicValue": null,
+            "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
+          }
         }
       ],
       "dom": {
@@ -707,7 +762,12 @@
             "Neongelb",
             "Weiß"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "rechts",
@@ -734,7 +794,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         }
       ],
       "dom": {
@@ -798,7 +863,12 @@
             "Betongrau",
             "Signalgrün"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "rechts",
@@ -826,7 +896,12 @@
             "Salbeigrün",
             "Schwarz"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "category",
+            "topicValue": "Sport & Energie",
+            "topicDetail": "Tile in Cross-Navigation-Block"
+          }
         }
       ],
       "dom": {

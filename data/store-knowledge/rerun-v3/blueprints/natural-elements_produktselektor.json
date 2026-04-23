@@ -156,7 +156,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "advisory",
+            "topicValue": "Produktselektor",
+            "topicDetail": "Filter-UI fuer Beratungs-Flow"
+          }
         }
       ],
       "dom": {

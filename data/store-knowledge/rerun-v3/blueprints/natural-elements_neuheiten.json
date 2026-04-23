@@ -68,7 +68,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "brand_story",
+            "topicValue": null,
+            "topicDetail": "Hero ohne klaren Kategorie-Anker"
+          }
         }
       ],
       "dom": {
@@ -128,7 +133,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Section-Header, nur Gliederung"
+          }
         }
       ],
       "dom": {
@@ -188,7 +198,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "product_specific",
+            "topicValue": "Magnesium",
+            "topicDetail": "Showcase-Row mit Video"
+          }
         }
       ],
       "dom": {
@@ -280,7 +295,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Section-Header, nur Gliederung"
+          }
         }
       ],
       "dom": {
@@ -340,7 +360,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "2",
@@ -367,7 +392,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "3",
@@ -394,7 +424,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "4",
@@ -421,7 +456,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         }
       ],
       "dom": {
@@ -481,7 +521,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "rechts",
@@ -508,7 +553,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         }
       ],
       "dom": {
@@ -568,7 +618,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "rechts",
@@ -595,7 +650,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         }
       ],
       "dom": {

@@ -64,7 +64,12 @@
           "dominantColors": [
             "zu verifizieren"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "brand_story",
+            "topicValue": "Marken-Story",
+            "topicDetail": "Brand-Hero auf About-Seite"
+          }
         }
       ],
       "dom": {
@@ -124,7 +129,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "brand_story",
+            "topicValue": null,
+            "topicDetail": "Story-Banner auf About-Seite"
+          }
         }
       ],
       "dom": {
@@ -184,7 +194,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "brand_story",
+            "topicValue": null,
+            "topicDetail": "Story-Banner auf About-Seite"
+          }
         }
       ],
       "dom": {
@@ -244,7 +259,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "brand_story",
+            "topicValue": null,
+            "topicDetail": "Story-Banner auf About-Seite"
+          }
         }
       ],
       "dom": {
@@ -304,7 +324,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "brand_story",
+            "topicValue": "Marken-Story",
+            "topicDetail": "Brand-Hero auf About-Seite"
+          }
         }
       ],
       "dom": {
@@ -364,7 +389,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "brand_story",
+            "topicValue": null,
+            "topicDetail": "Story-Banner auf About-Seite"
+          }
         }
       ],
       "dom": {
@@ -424,7 +454,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "brand_story",
+            "topicValue": null,
+            "topicDetail": "Story-Banner auf About-Seite"
+          }
         }
       ],
       "dom": {
@@ -484,7 +519,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "brand_story",
+            "topicValue": null,
+            "topicDetail": "Story-Banner auf About-Seite"
+          }
         }
       ],
       "dom": {
@@ -544,7 +584,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "brand_story",
+            "topicValue": null,
+            "topicDetail": "Story-Banner auf About-Seite"
+          }
         }
       ],
       "dom": {
@@ -604,7 +649,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "brand_story",
+            "topicValue": null,
+            "topicDetail": "Story-Banner auf About-Seite"
+          }
         }
       ],
       "dom": {
@@ -664,7 +714,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "brand_story",
+            "topicValue": null,
+            "topicDetail": "Story-Banner auf About-Seite"
+          }
         }
       ],
       "dom": {
@@ -724,7 +779,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Section-Header, nur Gliederung"
+          }
         }
       ],
       "dom": {
@@ -784,7 +844,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "brand_promise",
+            "topicValue": null,
+            "topicDetail": "USP- oder Werte-Tile"
+          }
         },
         {
           "position": "2",
@@ -811,7 +876,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "3",
@@ -838,7 +908,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "4",
@@ -865,7 +940,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         }
       ],
       "dom": {
@@ -925,7 +1005,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "rechts",
@@ -952,7 +1037,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         }
       ],
       "dom": {
@@ -1012,7 +1102,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         },
         {
           "position": "rechts",
@@ -1039,7 +1134,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": null,
+            "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
+          }
         }
       ],
       "dom": {

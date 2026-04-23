@@ -444,6 +444,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "brand_story",
+                "topicValue": "Marken-Tonalitaet",
+                "topicDetail": "Video-Hero mit rotierenden Marken-Claims"
               }
             }
           ],
@@ -517,6 +522,11 @@
                 "linkTarget": "unsere-neuheiten",
                 "ctaLabel": "NEUHEITEN ENTDECKEN",
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "campaign",
+                "topicValue": "Neuheiten-Kampagne",
+                "topicDetail": "OH YEAH Banner"
               }
             }
           ],
@@ -584,6 +594,11 @@
                 "linkTarget": "Bestseller Produktdetailseiten (Hotspots je Produkt)",
                 "ctaLabel": "Produkte ansehen",
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Editorial-Banner ohne klares Inhalts-Thema"
               }
             }
           ],
@@ -665,6 +680,11 @@
                 "linkTarget": "Bestseller Produktdetailseiten ueber Hotspots je Produkt",
                 "ctaLabel": "Produkte ansehen",
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "shoppable_collection",
+                "topicValue": "Bestseller",
+                "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
               }
             }
           ],
@@ -745,6 +765,11 @@
                 "linkTarget": "Produktfinder/Quiz Unterseite",
                 "ctaLabel": "LASS DICH HIER BERATEN",
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "brand_story",
+                "topicValue": null,
+                "topicDetail": "Hero ohne klaren Kategorie-Anker"
               }
             }
           ],
@@ -837,6 +862,11 @@
                 "linkTarget": "Produktübersicht",
                 "ctaLabel": "Produkte ansehen",
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Section-Header, nur Gliederung"
               }
             }
           ],
@@ -917,6 +947,11 @@
                 "linkTarget": "Produktdetailseiten per Hotspot",
                 "ctaLabel": "Produkte ansehen",
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Section-Header, nur Gliederung"
               }
             }
           ],
@@ -995,6 +1030,11 @@
                 "linkTarget": "Produktdetailseite Collagen",
                 "ctaLabel": null,
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "shoppable_collection",
+                "topicValue": null,
+                "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
               }
             },
             {
@@ -1032,6 +1072,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "shoppable_collection",
+                "topicValue": null,
+                "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
               }
             },
             {
@@ -1069,6 +1114,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "shoppable_collection",
+                "topicValue": null,
+                "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
               }
             },
             {
@@ -1106,6 +1156,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "shoppable_collection",
+                "topicValue": null,
+                "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
               }
             }
           ],
@@ -1187,6 +1242,11 @@
                 "linkTarget": "Sports Series Unterseite",
                 "ctaLabel": "MEHR ERFAHREN",
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -1223,6 +1283,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             }
           ],
@@ -1301,6 +1366,11 @@
                 "linkTarget": "Kategorie Sport & Energie",
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -1338,6 +1408,11 @@
                 "linkTarget": "Kategorie Sport & Energie",
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "category",
+                "topicValue": "Sport & Energie",
+                "topicDetail": "Tile in Cross-Navigation-Block"
               }
             }
           ],
@@ -1433,7 +1508,12 @@
               "ctaLabel": null,
               "confidence": "high"
             },
-            "note": "50 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design."
+            "note": "50 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design.",
+            "tileContentTopic": {
+              "topicType": "navigation_entry",
+              "topicValue": null,
+              "topicDetail": "Generisches Produkt-Grid"
+            }
           }
         }
       ],
@@ -1532,6 +1612,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "category",
+                "topicValue": "Immunsystem",
+                "topicDetail": "Kategorie-Hero"
               }
             }
           ],
@@ -1611,6 +1696,11 @@
                 "linkTarget": "shoppable",
                 "ctaLabel": "Produkte ansehen",
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "shoppable_collection",
+                "topicValue": null,
+                "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
               }
             }
           ],
@@ -1690,6 +1780,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "campaign",
+                "topicValue": null,
+                "topicDetail": "Volltonfarbe-Kampagne"
               }
             }
           ],
@@ -1766,6 +1861,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Section-Header, nur Gliederung"
               }
             }
           ],
@@ -1861,7 +1961,12 @@
               "ctaLabel": null,
               "confidence": "high"
             },
-            "note": "50 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design."
+            "note": "50 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design.",
+            "tileContentTopic": {
+              "topicType": "category",
+              "topicValue": "Immunsystem",
+              "topicDetail": "Kategorie-Grid"
+            }
           }
         },
         {
@@ -1922,6 +2027,11 @@
                 "linkTarget": "sub",
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "subcategory",
+                "topicValue": "Vitamine",
+                "topicDetail": "Eigenstaendige Sub-Kategorie-Row, Vision fuellt topicValue"
               }
             }
           ],
@@ -2000,6 +2110,11 @@
                 "linkTarget": "sub",
                 "ctaLabel": "Lass dich hier beraten",
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "subcategory",
+                "topicValue": null,
+                "topicDetail": "Eigenstaendige Sub-Kategorie-Row, Vision fuellt topicValue"
               }
             }
           ],
@@ -2075,6 +2190,11 @@
                 "linkTarget": "sub",
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "subcategory",
+                "topicValue": null,
+                "topicDetail": "Eigenstaendige Sub-Kategorie-Row, Vision fuellt topicValue"
               }
             }
           ],
@@ -2154,6 +2274,11 @@
                 "linkTarget": "Sport & Energie Hub",
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Section-Header, nur Gliederung"
               }
             }
           ],
@@ -2233,6 +2358,11 @@
                 "linkTarget": "Verdauung & Gewicht Hub",
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Section-Header, nur Gliederung"
               }
             }
           ],
@@ -2309,6 +2439,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "shoppable_collection",
+                "topicValue": null,
+                "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
               }
             },
             {
@@ -2345,6 +2480,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "shoppable_collection",
+                "topicValue": null,
+                "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
               }
             },
             {
@@ -2381,6 +2521,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "shoppable_collection",
+                "topicValue": null,
+                "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
               }
             },
             {
@@ -2417,6 +2562,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "shoppable_collection",
+                "topicValue": null,
+                "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
               }
             }
           ],
@@ -2497,6 +2647,11 @@
                 "linkTarget": "Vermutlich ÜBER UNS oder Startseite",
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": "Alle Produkte",
+                "topicDetail": "Verlinkung auf Gesamt-Katalog"
               }
             },
             {
@@ -2533,6 +2688,11 @@
                 "linkTarget": "alle-produkte",
                 "ctaLabel": "Hier stoebern",
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": "Alle Produkte",
+                "topicDetail": "Verlinkung auf Gesamt-Katalog"
               }
             }
           ],
@@ -2611,6 +2771,11 @@
                 "linkTarget": "Share-Dialog",
                 "ctaLabel": "Teilen",
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Editorial-Banner ohne klares Inhalts-Thema"
               }
             }
           ],
@@ -2687,6 +2852,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Editorial-Banner ohne klares Inhalts-Thema"
               }
             }
           ],
@@ -2823,6 +2993,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "category",
+                "topicValue": "Vitamine",
+                "topicDetail": "Kategorie-Hero"
               }
             }
           ],
@@ -2897,6 +3072,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Editorial-Banner ohne klares Inhalts-Thema"
               }
             }
           ],
@@ -2974,6 +3154,11 @@
                 "linkTarget": "PDP Premium Multivitamin",
                 "ctaLabel": "Alle Details anzeigen · In den Einkaufswagen",
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "product_specific",
+                "topicValue": "Premium Multivitamin",
+                "topicDetail": "Showcase-Row mit Video"
               }
             }
           ],
@@ -3051,6 +3236,11 @@
                 "linkTarget": "PDP Vitamin C gepuffert 500mg",
                 "ctaLabel": "Alle Details anzeigen · In den Einkaufswagen",
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "product_specific",
+                "topicValue": "Vitamin C",
+                "topicDetail": "Showcase-Row mit Video"
               }
             }
           ],
@@ -3128,6 +3318,11 @@
                 "linkTarget": "PDP Vitamin D3 Tropfen",
                 "ctaLabel": "Alle Details anzeigen · In den Einkaufswagen",
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "product_specific",
+                "topicValue": "Vitamin D3",
+                "topicDetail": "Showcase-Row mit Video"
               }
             }
           ],
@@ -3193,7 +3388,12 @@
               "ctaLabel": null,
               "confidence": "high"
             },
-            "note": "40 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design."
+            "note": "40 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design.",
+            "tileContentTopic": {
+              "topicType": "category",
+              "topicValue": "Vitamine",
+              "topicDetail": "Kategorie-Grid"
+            }
           }
         },
         {
@@ -3252,6 +3452,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Section-Header, nur Gliederung"
               }
             }
           ],
@@ -3328,6 +3533,11 @@
                 "linkTarget": "sub",
                 "ctaLabel": "Lass dich hier beraten",
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "subcategory",
+                "topicValue": null,
+                "topicDetail": "Eigenstaendige Sub-Kategorie-Row, Vision fuellt topicValue"
               }
             }
           ],
@@ -3403,6 +3613,11 @@
                 "linkTarget": "sub",
                 "ctaLabel": "Teilen",
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "subcategory",
+                "topicValue": null,
+                "topicDetail": "Eigenstaendige Sub-Kategorie-Row, Vision fuellt topicValue"
               }
             }
           ],
@@ -3477,6 +3692,11 @@
                 "linkTarget": "sub",
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "subcategory",
+                "topicValue": null,
+                "topicDetail": "Eigenstaendige Sub-Kategorie-Row, Vision fuellt topicValue"
               }
             }
           ],
@@ -3551,6 +3771,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Editorial-Banner ohne klares Inhalts-Thema"
               }
             }
           ],
@@ -3668,6 +3893,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "campaign",
+                "topicValue": "Make it full size",
+                "topicDetail": "Kampagnen-Hero"
               }
             }
           ],
@@ -3733,7 +3963,12 @@
               "ctaLabel": null,
               "confidence": "high"
             },
-            "note": "30 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design."
+            "note": "30 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design.",
+            "tileContentTopic": {
+              "topicType": "product_line",
+              "topicValue": "SoProtein",
+              "topicDetail": "Produktlinien-Grid"
+            }
           }
         }
       ],
@@ -3834,6 +4069,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "brand_story",
+                "topicValue": "Marken-Story",
+                "topicDetail": "Brand-Hero auf About-Seite"
               }
             }
           ],
@@ -3908,6 +4148,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "brand_story",
+                "topicValue": null,
+                "topicDetail": "Story-Banner auf About-Seite"
               }
             }
           ],
@@ -3982,6 +4227,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "brand_story",
+                "topicValue": null,
+                "topicDetail": "Story-Banner auf About-Seite"
               }
             }
           ],
@@ -4056,6 +4306,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "brand_story",
+                "topicValue": null,
+                "topicDetail": "Story-Banner auf About-Seite"
               }
             }
           ],
@@ -4130,6 +4385,11 @@
                 "linkTarget": null,
                 "ctaLabel": "Play",
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "brand_story",
+                "topicValue": "Marken-Story",
+                "topicDetail": "Brand-Hero auf About-Seite"
               }
             }
           ],
@@ -4204,6 +4464,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "brand_story",
+                "topicValue": null,
+                "topicDetail": "Story-Banner auf About-Seite"
               }
             }
           ],
@@ -4278,6 +4543,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "brand_story",
+                "topicValue": null,
+                "topicDetail": "Story-Banner auf About-Seite"
               }
             }
           ],
@@ -4352,6 +4622,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "brand_story",
+                "topicValue": null,
+                "topicDetail": "Story-Banner auf About-Seite"
               }
             }
           ],
@@ -4426,6 +4701,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "brand_story",
+                "topicValue": null,
+                "topicDetail": "Story-Banner auf About-Seite"
               }
             }
           ],
@@ -4500,6 +4780,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "brand_story",
+                "topicValue": null,
+                "topicDetail": "Story-Banner auf About-Seite"
               }
             }
           ],
@@ -4574,6 +4859,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "brand_story",
+                "topicValue": null,
+                "topicDetail": "Story-Banner auf About-Seite"
               }
             }
           ],
@@ -4648,6 +4938,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Section-Header, nur Gliederung"
               }
             }
           ],
@@ -4722,6 +5017,11 @@
                 "linkTarget": "moeglicherweise Kategorie oder Zertifikats-Seite",
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "brand_promise",
+                "topicValue": null,
+                "topicDetail": "USP- oder Werte-Tile"
               }
             },
             {
@@ -4758,6 +5058,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -4794,6 +5099,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -4830,6 +5140,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             }
           ],
@@ -4904,6 +5219,11 @@
                 "linkTarget": "Kategorie- oder Content-Seite",
                 "ctaLabel": "vermutlich 'Entdecken' oder 'Zu den Produkten'",
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -4940,6 +5260,11 @@
                 "linkTarget": "Kategorie- oder Content-Seite",
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             }
           ],
@@ -5014,6 +5339,11 @@
                 "linkTarget": "Kategorie- oder Content-Seite",
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -5050,6 +5380,11 @@
                 "linkTarget": "Kategorie- oder Content-Seite",
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             }
           ],
@@ -5191,6 +5526,11 @@
                 "linkTarget": "shoppable",
                 "ctaLabel": "Produkte ansehen",
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "shoppable_collection",
+                "topicValue": null,
+                "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
               }
             }
           ],
@@ -5265,6 +5605,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Editorial-Banner ohne klares Inhalts-Thema"
               }
             }
           ],
@@ -5330,7 +5675,12 @@
               "ctaLabel": null,
               "confidence": "high"
             },
-            "note": "50 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design."
+            "note": "50 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design.",
+            "tileContentTopic": {
+              "topicType": "navigation_entry",
+              "topicValue": "Alle Produkte",
+              "topicDetail": "Voller Katalog-Grid"
+            }
           }
         },
         {
@@ -5389,6 +5739,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Section-Header, nur Gliederung"
               }
             }
           ],
@@ -5505,6 +5860,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "brand_story",
+                "topicValue": null,
+                "topicDetail": "Hero ohne klaren Kategorie-Anker"
               }
             }
           ],
@@ -5579,6 +5939,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Section-Header, nur Gliederung"
               }
             }
           ],
@@ -5653,6 +6018,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "product_specific",
+                "topicValue": "Magnesium",
+                "topicDetail": "Showcase-Row mit Video"
               }
             }
           ],
@@ -5718,7 +6088,12 @@
               "ctaLabel": null,
               "confidence": "high"
             },
-            "note": "50 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design."
+            "note": "50 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design.",
+            "tileContentTopic": {
+              "topicType": "shoppable_collection",
+              "topicValue": "Neuheiten-Grid",
+              "topicDetail": "Amazon-rendered Neuheiten-ASINs"
+            }
           }
         },
         {
@@ -5777,6 +6152,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Section-Header, nur Gliederung"
               }
             }
           ],
@@ -5851,6 +6231,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -5887,6 +6272,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -5923,6 +6313,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -5959,6 +6354,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             }
           ],
@@ -6033,6 +6433,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -6069,6 +6474,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             }
           ],
@@ -6143,6 +6553,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -6179,6 +6594,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             }
           ],
@@ -6416,6 +6836,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "advisory",
+                "topicValue": "Produktselektor",
+                "topicDetail": "Filter-UI fuer Beratungs-Flow"
               }
             }
           ],
@@ -6592,7 +7017,12 @@
               "ctaLabel": null,
               "confidence": "high"
             },
-            "note": "20 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design."
+            "note": "20 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design.",
+            "tileContentTopic": {
+              "topicType": "advisory",
+              "topicValue": "Filterergebnis",
+              "topicDetail": "Dynamisches Grid aus Filter-Auswahl"
+            }
           }
         }
       ],
@@ -6689,6 +7119,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "brand_story",
+                "topicValue": null,
+                "topicDetail": "Hero ohne klaren Kategorie-Anker"
               }
             }
           ],
@@ -6763,6 +7198,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Editorial-Banner ohne klares Inhalts-Thema"
               }
             }
           ],
@@ -6837,6 +7277,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "gift_set",
+                "topicValue": "Immunsystem Basic Set",
+                "topicDetail": "Set-Showcase mit Video"
               }
             }
           ],
@@ -6911,6 +7356,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "gift_set",
+                "topicValue": "Beauty Premium Set",
+                "topicDetail": "Set-Showcase mit Video"
               }
             }
           ],
@@ -6985,6 +7435,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "gift_set",
+                "topicValue": "Essentials Set",
+                "topicDetail": "Set-Showcase mit Video"
               }
             }
           ],
@@ -7096,6 +7551,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "gift_set",
+                "topicValue": "Beauty Basic Set",
+                "topicDetail": "Set-Showcase mit Video"
               }
             }
           ],
@@ -7207,6 +7667,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "gift_set",
+                "topicValue": "Kraftsport Basic Set",
+                "topicDetail": "Set-Showcase mit Video"
               }
             }
           ],
@@ -7318,6 +7783,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "gift_set",
+                "topicValue": "Augencreme Set",
+                "topicDetail": "Set-Showcase mit Video"
               }
             }
           ],
@@ -7392,6 +7862,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "brand_story",
+                "topicValue": null,
+                "topicDetail": "Hero ohne klaren Kategorie-Anker"
               }
             }
           ],
@@ -7466,6 +7941,11 @@
                 "linkTarget": "shoppable",
                 "ctaLabel": "Produkte ansehen",
                 "confidence": "high"
+              },
+              "tileContentTopic": {
+                "topicType": "shoppable_collection",
+                "topicValue": null,
+                "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
               }
             }
           ],
@@ -7540,6 +8020,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Section-Header, nur Gliederung"
               }
             }
           ],
@@ -7614,6 +8099,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -7650,6 +8140,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -7686,6 +8181,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -7722,6 +8222,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             }
           ],
@@ -7796,6 +8301,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -7832,6 +8342,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -7868,6 +8383,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -7904,6 +8424,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             }
           ],
@@ -8052,6 +8577,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Section-Header, nur Gliederung"
               }
             }
           ],
@@ -8117,7 +8647,12 @@
               "ctaLabel": null,
               "confidence": "high"
             },
-            "note": "24 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design."
+            "note": "24 ASIN-Kacheln, Amazon rendert Produktbild plus Preis selbst, kein Brand-Design.",
+            "tileContentTopic": {
+              "topicType": "shoppable_collection",
+              "topicValue": "Bestseller-Grid",
+              "topicDetail": "Amazon-rendered Bestseller-ASINs"
+            }
           }
         },
         {
@@ -8176,6 +8711,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "low"
+              },
+              "tileContentTopic": {
+                "topicType": "editorial_filler",
+                "topicValue": null,
+                "topicDetail": "Section-Header, nur Gliederung"
               }
             }
           ],
@@ -8250,6 +8790,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -8286,6 +8831,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -8322,6 +8872,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -8358,6 +8913,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             }
           ],
@@ -8432,6 +8992,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -8468,6 +9033,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -8504,6 +9074,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             },
             {
@@ -8540,6 +9115,11 @@
                 "linkTarget": null,
                 "ctaLabel": null,
                 "confidence": "medium"
+              },
+              "tileContentTopic": {
+                "topicType": "navigation_entry",
+                "topicValue": null,
+                "topicDetail": "Cross-Link-Tile ohne klares Sub-Thema"
               }
             }
           ],

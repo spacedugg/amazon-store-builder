@@ -71,7 +71,12 @@
             "Neongelb",
             "Schwarz"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "category",
+            "topicValue": "Immunsystem",
+            "topicDetail": "Kategorie-Hero"
+          }
         }
       ],
       "dom": {
@@ -136,7 +141,12 @@
             "Weiß",
             "Laubgrün"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "shoppable_collection",
+            "topicValue": null,
+            "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
+          }
         }
       ],
       "dom": {
@@ -201,7 +211,12 @@
             "Hellgelb",
             "Schwarz"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "campaign",
+            "topicValue": null,
+            "topicDetail": "Volltonfarbe-Kampagne"
+          }
         }
       ],
       "dom": {
@@ -263,7 +278,12 @@
             "Hellgelb",
             "Beige"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Section-Header, nur Gliederung"
+          }
         }
       ],
       "dom": {
@@ -387,7 +407,12 @@
             "Hautfarbe",
             "Weiß"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "subcategory",
+            "topicValue": "Vitamine",
+            "topicDetail": "Eigenstaendige Sub-Kategorie-Row, Vision fuellt topicValue"
+          }
         }
       ],
       "dom": {
@@ -451,7 +476,12 @@
             "Weiß",
             "Schwarz"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "subcategory",
+            "topicValue": null,
+            "topicDetail": "Eigenstaendige Sub-Kategorie-Row, Vision fuellt topicValue"
+          }
         }
       ],
       "dom": {
@@ -512,7 +542,12 @@
             "Beige",
             "Weiß"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "subcategory",
+            "topicValue": null,
+            "topicDetail": "Eigenstaendige Sub-Kategorie-Row, Vision fuellt topicValue"
+          }
         }
       ],
       "dom": {
@@ -577,7 +612,12 @@
             "Schwarz",
             "Fotoleicht"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Section-Header, nur Gliederung"
+          }
         }
       ],
       "dom": {
@@ -642,7 +682,12 @@
             "Schwarz",
             "Hautton"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Section-Header, nur Gliederung"
+          }
         }
       ],
       "dom": {
@@ -704,7 +749,12 @@
             "Schwarz",
             "Weiß"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "shoppable_collection",
+            "topicValue": null,
+            "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
+          }
         },
         {
           "position": "2",
@@ -731,7 +781,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "shoppable_collection",
+            "topicValue": null,
+            "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
+          }
         },
         {
           "position": "3",
@@ -758,7 +813,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "shoppable_collection",
+            "topicValue": null,
+            "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
+          }
         },
         {
           "position": "4",
@@ -785,7 +845,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "shoppable_collection",
+            "topicValue": null,
+            "topicDetail": "Mehrere Hotspots, je Hotspot eine PDP"
+          }
         }
       ],
       "dom": {
@@ -851,7 +916,12 @@
             "Schwarz",
             "Neongelb"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": "Alle Produkte",
+            "topicDetail": "Verlinkung auf Gesamt-Katalog"
+          }
         },
         {
           "position": "rechts",
@@ -878,7 +948,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "navigation_entry",
+            "topicValue": "Alle Produkte",
+            "topicDetail": "Verlinkung auf Gesamt-Katalog"
+          }
         }
       ],
       "dom": {
@@ -942,7 +1017,12 @@
             "Weiß",
             "Grau"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Editorial-Banner ohne klares Inhalts-Thema"
+          }
         }
       ],
       "dom": {
@@ -1004,7 +1084,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Editorial-Banner ohne klares Inhalts-Thema"
+          }
         }
       ],
       "dom": {

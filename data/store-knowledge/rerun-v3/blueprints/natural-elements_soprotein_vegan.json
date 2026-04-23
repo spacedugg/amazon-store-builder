@@ -64,7 +64,12 @@
           "dominantColors": [
             "zu verifizieren per Vision-Check"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "campaign",
+            "topicValue": "Make it full size",
+            "topicDetail": "Kampagnen-Hero"
+          }
         }
       ],
       "dom": {

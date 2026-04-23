@@ -71,7 +71,12 @@
             "Gelb",
             "Grün"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "category",
+            "topicValue": "Vitamine",
+            "topicDetail": "Kategorie-Hero"
+          }
         }
       ],
       "dom": {
@@ -131,7 +136,12 @@
             "Olivbeige",
             "Schwarz"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Editorial-Banner ohne klares Inhalts-Thema"
+          }
         }
       ],
       "dom": {
@@ -194,7 +204,12 @@
             "Schwarz",
             "Amazon-Gelb"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "product_specific",
+            "topicValue": "Premium Multivitamin",
+            "topicDetail": "Showcase-Row mit Video"
+          }
         }
       ],
       "dom": {
@@ -257,7 +272,12 @@
             "Schwarz",
             "Amazon-Gelb"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "product_specific",
+            "topicValue": "Vitamin C",
+            "topicDetail": "Showcase-Row mit Video"
+          }
         }
       ],
       "dom": {
@@ -320,7 +340,12 @@
             "Schwarz",
             "Amazon-Gelb"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "product_specific",
+            "topicValue": "Vitamin D3",
+            "topicDetail": "Showcase-Row mit Video"
+          }
         }
       ],
       "dom": {
@@ -412,7 +437,12 @@
             "Weiß",
             "Grau"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Section-Header, nur Gliederung"
+          }
         }
       ],
       "dom": {
@@ -474,7 +504,12 @@
             "Weiß",
             "Schwarz"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "subcategory",
+            "topicValue": null,
+            "topicDetail": "Eigenstaendige Sub-Kategorie-Row, Vision fuellt topicValue"
+          }
         }
       ],
       "dom": {
@@ -535,7 +570,12 @@
             "Weiß",
             "Grau"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "subcategory",
+            "topicValue": null,
+            "topicDetail": "Eigenstaendige Sub-Kategorie-Row, Vision fuellt topicValue"
+          }
         }
       ],
       "dom": {
@@ -595,7 +635,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "subcategory",
+            "topicValue": null,
+            "topicDetail": "Eigenstaendige Sub-Kategorie-Row, Vision fuellt topicValue"
+          }
         }
       ],
       "dom": {
@@ -655,7 +700,12 @@
           "dominantColors": [
             "screenshot_required"
           ],
-          "dominantColorsHex": null
+          "dominantColorsHex": null,
+          "tileContentTopic": {
+            "topicType": "editorial_filler",
+            "topicValue": null,
+            "topicDetail": "Editorial-Banner ohne klares Inhalts-Thema"
+          }
         }
       ],
       "dom": {
