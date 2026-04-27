@@ -126,7 +126,7 @@ Jede Section hat:
 1. Home, siehe 6.1
 2. Bestseller, siehe 6.2
 3. Garten, siehe 6.3
-4. Möbel, siehe 6.4 ⏳
+4. Möbel, siehe 6.4
 5. Freizeit, siehe 6.5 ⏳
 6. Heimwerken, siehe 6.6 ⏳
 7. Haushalt, siehe 6.7 ⏳
@@ -549,6 +549,183 @@ page:
           brief: "Cross Sell Banner. Mini Bild Wohnraum."
           ctaText: "Möbel ansehen"
           linkUrl: "page:Möbel"
+```
+
+### 6.4 Möbel
+
+14 Sections. 12 Sub Kategorien werden über zwei Navigatoren abgedeckt (8 plus 4 Tiles).
+
+```yaml
+page:
+  name: Möbel
+  sections:
+    - section: 1
+      module: hero.fullWidthHero
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "Das Sofa, das zu dir **zurückkommt**"
+          brief: "Designer Komposition Wohnzimmer mit Sofa als Hauptmotiv. Subline: Sofas, Betten, Schlafkomfort, Bad und mehr."
+          ctaText: "Sofas entdecken"
+
+    - section: 2
+      module: categoryNav.grid8tiles
+      layoutId: '4x2grid'
+      tiles:
+        - type: image
+          textOverlay: "**SOFAS**"
+          brief: "Sub Kategorie Tile. Sofa Rendering freigestellt auf Beige."
+        - type: image
+          textOverlay: "**POLSTERBETTEN**"
+          brief: "Sub Kategorie Tile. Polsterbett Rendering."
+        - type: image
+          textOverlay: "**BOXSPRINGBETTEN**"
+          brief: "Sub Kategorie Tile. Boxspringbett Rendering."
+        - type: image
+          textOverlay: "**METALLBETTEN**"
+          brief: "Sub Kategorie Tile. Metallbett Rendering."
+        - type: image
+          textOverlay: "**KINDERBETTEN**"
+          brief: "Sub Kategorie Tile. Kinderbett Rendering."
+        - type: image
+          textOverlay: "**WOHNMÖBEL**"
+          brief: "Sub Kategorie Tile. Subline: Wohn und Esszimmer Möbel. Sideboard oder Esstisch Rendering."
+        - type: image
+          textOverlay: "**MASSAGESESSEL**"
+          brief: "Sub Kategorie Tile. Massagesessel Rendering."
+        - type: image
+          textOverlay: "**BÜROMÖBEL**"
+          brief: "Sub Kategorie Tile. Schreibtisch oder Bürostuhl Rendering."
+
+    - section: 3
+      module: categoryNav.grid4wide
+      layoutId: '2x2wide'
+      tiles:
+        - type: image
+          textOverlay: "**MATRATZEN**"
+          brief: "Sub Kategorie Tile. Subline: Matratzen und Topper. Matratze Rendering."
+        - type: image
+          textOverlay: "**SCHLAFKOMFORT**"
+          brief: "Sub Kategorie Tile. Kissen oder Decke Rendering."
+        - type: image
+          textOverlay: "**SCHMINKTISCHE**"
+          brief: "Sub Kategorie Tile. Schminktisch Rendering."
+        - type: image
+          textOverlay: "**BADAUSSTATTUNG**"
+          brief: "Sub Kategorie Tile. Badmöbel Rendering."
+
+    - section: 4
+      module: products.shoppableFullWidth
+      layoutId: '1'
+      tiles:
+        - type: shoppable_image
+          textOverlay: "Ein Wohnzimmer, **fünf** Klicks"
+          brief: "Designer Komposition Wohnzimmer mit Sofa, Sessel, Beistelltisch, Sideboard, Lampe. 5 Hotspots."
+          hotspotsPlaceholder: "<TOP-5-MOEBEL-WOHNEN>"
+
+    - section: 5
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Die beliebtesten **Sofas**"
+          brief: "Top 8 Bestseller aus Sub Sofas."
+          asinsPlaceholder: "<TOP-8-MOEBEL-SOFAS>"
+
+    - section: 6
+      module: hero.fullWidthHero
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "Guter Schlaf ist **kein** Zufall"
+          brief: "Trenner Textbild. Leinen oder Bettwäsche Makro auf hellem Grund."
+
+    - section: 7
+      module: products.shoppableFullWidth
+      layoutId: '1'
+      tiles:
+        - type: shoppable_image
+          textOverlay: "Schlafzimmer, das **ankommt**"
+          brief: "Designer Komposition Schlafzimmer mit Boxspring, Nachttisch, Tischleuchte, Kommode, Kissen. 5 Hotspots."
+          hotspotsPlaceholder: "<TOP-5-MOEBEL-SCHLAFEN>"
+
+    - section: 8
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Die beliebtesten **Betten**"
+          brief: "Top 8 Bestseller aus Polsterbetten, Boxspringbetten, Metallbetten gemischt."
+          asinsPlaceholder: "<TOP-8-MOEBEL-BETTEN>"
+
+    - section: 9
+      module: products.productWithWideAndSmall
+      layoutId: 'lg-w2s'
+      tiles:
+        - type: image
+          textOverlay: "**Premium** Komfort"
+          brief: "Large Image Top ASIN aus Möbel (Boxspring oder Sofa). Designer Komposition. Headline kalibriert sich am Top ASIN."
+          ctaText: "Jetzt ansehen"
+        - type: image
+          textOverlay: "**Stoff**, der hält"
+          brief: "Wide Tile. USP zum Bezugsmaterial."
+        - type: image
+          textOverlay: "**Komfort** Schaum"
+          brief: "Small Square Tile. USP zum Polster."
+        - type: image
+          textOverlay: "**Stauraum** integriert"
+          brief: "Small Square Tile. USP zum Bettkasten oder Stauraum."
+
+    - section: 10
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "**Komfort** für Wohnen und Arbeit"
+          brief: "Top 6 Bestseller aus Massagesesseln und Büromöbeln gemischt."
+          asinsPlaceholder: "<TOP-6-MOEBEL-MASSAGE-BUERO>"
+
+    - section: 11
+      module: products.shoppableFullWidth
+      layoutId: '1'
+      tiles:
+        - type: shoppable_image
+          textOverlay: "Das Bad, **klar** strukturiert"
+          brief: "Designer Komposition Bad mit Badmöbeln, Spiegel, Hochschrank. 5 Hotspots auf Badausstattung Produkten."
+          hotspotsPlaceholder: "<TOP-5-MOEBEL-BAD>"
+
+    - section: 12
+      module: features.featureWideAnd2
+      layoutId: 'vh-w2s'
+      tiles:
+        - type: image
+          textOverlay: "Was **unsere** Möbel ausmacht"
+          brief: "Wide Image. Plus 2 Squares mit USP Icons."
+        - type: image
+          textOverlay: "**Bezug** abnehmbar"
+          brief: "Square mit grünem Icon Kreis Reißverschluss."
+        - type: image
+          textOverlay: "**Stauraum** integriert"
+          brief: "Square mit grünem Icon Kreis Box."
+
+    - section: 13
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: product_grid
+          textOverlay: "Alle **Möbel** Produkte im Überblick"
+          brief: "Vollabdeckung. Alle ASINs der Hauptkategorie Möbel, sortiert nach Bestseller Rang."
+          asinsPlaceholder: "<ALL-MOEBEL>"
+
+    - section: 14
+      module: footer.crossSellBanner
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "Praktisch fürs Zuhause, weiter zu **Haushalt**"
+          brief: "Cross Sell Banner. Mini Bild Haushaltsszene."
+          ctaText: "Haushalt ansehen"
+          linkUrl: "page:Haushalt"
 ```
 
 ---
