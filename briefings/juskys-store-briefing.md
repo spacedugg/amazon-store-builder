@@ -124,7 +124,7 @@ Jede Section hat:
 10 Pages in dieser Reihenfolge:
 
 1. Home, siehe 6.1
-2. Bestseller, siehe 6.2 ⏳
+2. Bestseller, siehe 6.2
 3. Garten, siehe 6.3 ⏳
 4. Möbel, siehe 6.4 ⏳
 5. Freizeit, siehe 6.5 ⏳
@@ -285,6 +285,100 @@ page:
 ```
 
 Saisonale Variante November bis Januar: Section 8 Bild und textOverlay tauschen gegen `Weihnachten **zuhause**`, hotspotsPlaceholder `<TOP-5-FREIZEIT-WEIHNACHT>`.
+
+### 6.2 Bestseller
+
+9 Sections.
+
+```yaml
+page:
+  name: Bestseller
+  sections:
+    - section: 1
+      module: hero.fullWidthHero
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "Was unsere **Kunden** lieben"
+          brief: "Designer Komposition Mix Lifestyle aus mehreren Kategorien. Subline: Die meistgekauften Juskys Produkte."
+
+    - section: 2
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Top **12** insgesamt"
+          brief: "12 Top Bestseller über alle Kategorien."
+          asinsPlaceholder: "<TOP-12-OVERALL>"
+
+    - section: 3
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Top in **Garten**"
+          brief: "Top 8 Bestseller aus Garten."
+          asinsPlaceholder: "<TOP-8-GARTEN>"
+
+    - section: 4
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Top in **Möbel**"
+          brief: "Top 8 Bestseller aus Möbel."
+          asinsPlaceholder: "<TOP-8-MOEBEL>"
+
+    - section: 5
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Top in **Freizeit**"
+          brief: "Top 6 Bestseller aus Freizeit."
+          asinsPlaceholder: "<TOP-6-FREIZEIT>"
+
+    - section: 6
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Top in **Heimwerken**"
+          brief: "Top 6 Bestseller aus Heimwerken."
+          asinsPlaceholder: "<TOP-6-HEIMWERKEN>"
+
+    - section: 7
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Top in **Haushalt**"
+          brief: "Top 8 Bestseller aus Haushalt."
+          asinsPlaceholder: "<TOP-8-HAUSHALT>"
+
+    - section: 8
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Top in **Tierbedarf**"
+          brief: "Top 6 Bestseller aus Tierbedarf."
+          asinsPlaceholder: "<TOP-6-TIERBEDARF>"
+
+    - section: 9
+      module: features.featureWideAnd2
+      layoutId: 'vh-w2s'
+      tiles:
+        - type: image
+          textOverlay: "Warum **diese** Bestseller"
+          brief: "Wide Image. Plus 2 Squares mit USP Icons."
+        - type: image
+          textOverlay: "**Meistgekauft**"
+          brief: "Square mit grünem Icon Kreis Stern."
+        - type: image
+          textOverlay: "**Top** bewertet"
+          brief: "Square mit grünem Icon Kreis Schild Check."
+```
 
 ---
 
