@@ -130,7 +130,7 @@ Jede Section hat:
 5. Freizeit, siehe 6.5
 6. Heimwerken, siehe 6.6
 7. Haushalt, siehe 6.7
-8. Tierbedarf, siehe 6.8 ⏳
+8. Tierbedarf, siehe 6.8
 9. Sale, siehe 6.9 ⏳
 10. Über Uns, siehe 6.10 ⏳
 
@@ -1112,6 +1112,97 @@ page:
           textOverlay: "Alle **Haushalt** Produkte im Überblick"
           brief: "Vollabdeckung. Alle ASINs der Hauptkategorie Haushalt, sortiert nach Bestseller Rang."
           asinsPlaceholder: "<ALL-HAUSHALT>"
+```
+
+### 6.8 Tierbedarf
+
+8 Sections. 3 Sub Kategorien (Katzenbedarf, Hundebedarf, Freilaufgehege).
+
+```yaml
+page:
+  name: Tierbedarf
+  sections:
+    - section: 1
+      module: hero.fullWidthHero
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "Für **deinen** Liebling"
+          brief: "Designer Komposition mit Hund oder Katze in Wohnsetting oder Garten. Subline: Katze, Hund, Freilauf."
+          ctaText: "Sortiment entdecken"
+
+    - section: 2
+      module: categoryNav.wideAnd2squares
+      layoutId: 'vh-w2s'
+      tiles:
+        - type: image
+          textOverlay: "**FREILAUFGEHEGE**"
+          brief: "Wide Tile. Freilaufgehege Rendering im Garten."
+        - type: image
+          textOverlay: "**HUND**"
+          brief: "Square Tile. Hundebedarf Rendering."
+        - type: image
+          textOverlay: "**KATZE**"
+          brief: "Square Tile. Katzenbedarf Rendering."
+
+    - section: 3
+      module: products.shoppableFullWidth
+      layoutId: '1'
+      tiles:
+        - type: shoppable_image
+          textOverlay: "Freilauf, **sicher** und groß"
+          brief: "Designer Komposition Garten mit Freilaufgehege, Hund oder Kleintier, Zubehör. 5 Hotspots auf Freilaufgehege ASINs und Zubehör."
+          hotspotsPlaceholder: "<TOP-5-TIER-FREILAUF>"
+
+    - section: 4
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Die beliebtesten **Gehege**"
+          brief: "Top 6 Bestseller aus Sub Freilaufgehege."
+          asinsPlaceholder: "<TOP-6-TIER-FREILAUF>"
+
+    - section: 5
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Für den **Hund** zuhause"
+          brief: "Top 6 Bestseller aus Sub Hundebedarf."
+          asinsPlaceholder: "<TOP-6-TIER-HUND>"
+
+    - section: 6
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Für die **Katze** zuhause"
+          brief: "Top 6 Bestseller aus Sub Katzenbedarf."
+          asinsPlaceholder: "<TOP-6-TIER-KATZE>"
+
+    - section: 7
+      module: features.featureWideAnd2
+      layoutId: 'vh-w2s'
+      tiles:
+        - type: image
+          textOverlay: "**Sicher**, robust, einfach"
+          brief: "Wide Image. Plus 2 Squares mit USP Icons."
+        - type: image
+          textOverlay: "**Stabil**"
+          brief: "Square mit grünem Icon Kreis Werkzeug Kombi für Robustheit."
+        - type: image
+          textOverlay: "**Tierfreundlich**"
+          brief: "Square mit grünem Icon Kreis Pfote."
+
+    - section: 8
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: product_grid
+          textOverlay: "Alle **Tierbedarf** Produkte im Überblick"
+          brief: "Vollabdeckung. Alle ASINs der Hauptkategorie Tierbedarf, sortiert nach Bestseller Rang."
+          asinsPlaceholder: "<ALL-TIERBEDARF>"
 ```
 
 ---
