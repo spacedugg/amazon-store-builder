@@ -129,7 +129,7 @@ Jede Section hat:
 4. Möbel, siehe 6.4
 5. Freizeit, siehe 6.5
 6. Heimwerken, siehe 6.6
-7. Haushalt, siehe 6.7 ⏳
+7. Haushalt, siehe 6.7
 8. Tierbedarf, siehe 6.8 ⏳
 9. Sale, siehe 6.9 ⏳
 10. Über Uns, siehe 6.10 ⏳
@@ -969,6 +969,149 @@ page:
           brief: "Cross Sell Banner. Mini Bild Haushaltsszene."
           ctaText: "Haushalt ansehen"
           linkUrl: "page:Haushalt"
+```
+
+### 6.7 Haushalt
+
+12 Sections. 9 Sub Kategorien (Schwerlastregale, Aufbewahrung, Küchengeräte, Mülleimer, Wäschesammler, Eiswürfelmaschinen, Heizgeräte, Alltagshilfen, Kinderbedarf).
+
+```yaml
+page:
+  name: Haushalt
+  sections:
+    - section: 1
+      module: hero.fullWidthHero
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "Alltag, **leichter** gemacht"
+          brief: "Designer Komposition Küche oder Hauswirtschaftsraum mit mehreren Helfern. Subline: Aufbewahrung, Küche, Bad, Kinder, Alltagshilfen."
+          ctaText: "Sortiment entdecken"
+
+    - section: 2
+      module: categoryNav.grid8tiles
+      layoutId: '4x2grid'
+      tiles:
+        - type: image
+          textOverlay: "**SCHWERLASTREGALE**"
+          brief: "Sub Kategorie Tile. Schwerlastregal Rendering."
+        - type: image
+          textOverlay: "**AUFBEWAHRUNG**"
+          brief: "Sub Kategorie Tile. Boxen oder Aufbewahrungssystem Rendering."
+        - type: image
+          textOverlay: "**KÜCHENGERÄTE**"
+          brief: "Sub Kategorie Tile. Küchengerät Rendering."
+        - type: image
+          textOverlay: "**MÜLLEIMER**"
+          brief: "Sub Kategorie Tile. Mülleimer Rendering."
+        - type: image
+          textOverlay: "**WÄSCHESAMMLER**"
+          brief: "Sub Kategorie Tile. Wäschesammler Rendering."
+        - type: image
+          textOverlay: "**EISWÜRFELMASCHINEN**"
+          brief: "Sub Kategorie Tile. Eiswürfelmaschine Rendering."
+        - type: image
+          textOverlay: "**HEIZGERÄTE**"
+          brief: "Sub Kategorie Tile. Heizgerät Rendering."
+        - type: image
+          textOverlay: "**ALLTAGSHILFEN**"
+          brief: "Sub Kategorie Tile. Alltagshelfer Rendering."
+
+    - section: 3
+      module: categoryNav.grid2col
+      layoutId: 'std-2equal'
+      tiles:
+        - type: image
+          textOverlay: "**KINDERBEDARF**"
+          brief: "Sub Kategorie Tile als Large Square. Kinderausstattung Rendering."
+        - type: image
+          textOverlay: "**Praktisch** im Alltag"
+          brief: "Highlight Tile. Marken USP plus Icon Kreis Box."
+
+    - section: 4
+      module: products.shoppableFullWidth
+      layoutId: '1'
+      tiles:
+        - type: shoppable_image
+          textOverlay: "Küche, **alles** zur Hand"
+          brief: "Designer Komposition Küche mit Geräten und Helfern auf der Arbeitsfläche. 5 Hotspots auf Küchengeräte ASINs."
+          hotspotsPlaceholder: "<TOP-5-HAUSHALT-KUECHE>"
+
+    - section: 5
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Die beliebtesten **Küchengeräte**"
+          brief: "Top 8 Bestseller aus Sub Küchengeräte."
+          asinsPlaceholder: "<TOP-8-HAUSHALT-KUECHE>"
+
+    - section: 6
+      module: hero.fullWidthHero
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "Stauraum, **klar** sortiert"
+          brief: "Trenner Textbild. Lager oder Regal Makro auf hellem Grund."
+
+    - section: 7
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "**Mehr** Stauraum"
+          brief: "Top 6 Bestseller aus Schwerlastregalen und Aufbewahrung gemischt."
+          asinsPlaceholder: "<TOP-6-HAUSHALT-STAURAUM>"
+
+    - section: 8
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Ordnung, **gerne**"
+          brief: "Top 6 Bestseller aus Mülleimern und Wäschesammlern gemischt."
+          asinsPlaceholder: "<TOP-6-HAUSHALT-MUELL-WAESCHE>"
+
+    - section: 9
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Eis, Wärme, **fertig**"
+          brief: "Top 4 Bestseller aus Eiswürfelmaschinen und Heizgeräten gemischt."
+          asinsPlaceholder: "<TOP-4-HAUSHALT-EIS-HEIZ>"
+
+    - section: 10
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Hilfe im **Alltag**"
+          brief: "Top 6 Bestseller aus Kinderbedarf und Alltagshilfen gemischt."
+          asinsPlaceholder: "<TOP-6-HAUSHALT-KINDER-ALLTAG>"
+
+    - section: 11
+      module: features.featureWideAnd2
+      layoutId: 'vh-w2s'
+      tiles:
+        - type: image
+          textOverlay: "**Praktisch** im Alltag"
+          brief: "Wide Image. Plus 2 Squares mit USP Icons."
+        - type: image
+          textOverlay: "**Durchdacht**"
+          brief: "Square mit grünem Icon Kreis Schild Check."
+        - type: image
+          textOverlay: "**Langlebig**"
+          brief: "Square mit grünem Icon Kreis Stern."
+
+    - section: 12
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: product_grid
+          textOverlay: "Alle **Haushalt** Produkte im Überblick"
+          brief: "Vollabdeckung. Alle ASINs der Hauptkategorie Haushalt, sortiert nach Bestseller Rang."
+          asinsPlaceholder: "<ALL-HAUSHALT>"
 ```
 
 ---
