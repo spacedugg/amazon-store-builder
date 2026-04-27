@@ -147,8 +147,8 @@ page:
       layoutId: '1'
       tiles:
         - type: image
-          textOverlay: "Räume, die **passen**"
-          brief: "Designer Komposition Wohnzimmer hell. Subline: Möbel und mehr für jeden Tag, aus einem Haus."
+          textOverlay: "Was **dein** Zuhause braucht"
+          brief: "Designer Komposition Wohnzimmer hell. Subline: Möbel, Garten, Heimwerken, Haushalt, Tier und Freizeit, aus einem Haus."
           ctaText: "Sortiment entdecken"
 
     - section: 2
@@ -206,8 +206,8 @@ page:
       layoutId: '1'
       tiles:
         - type: shoppable_image
-          textOverlay: "Ein Wohnzimmer, **fünf** Klicks"
-          brief: "Designer Komposition Wohnzimmer mit Sofa, Sessel, Beistelltisch, Lampe, Teppich. 5 Hotspots auf den jeweiligen Produkten platzieren."
+          textOverlay: "Wohnzimmer, **komplett** gedacht"
+          brief: "Designer Komposition Wohnzimmer mit Sofa, Sessel, Beistelltisch, Lampe, Teppich. Bis zu 5 Hotspots auf den Hauptprodukten."
           hotspotsPlaceholder: "<TOP-5-MOEBEL-WOHNEN>"
 
     - section: 6
@@ -224,7 +224,7 @@ page:
       layoutId: '1'
       tiles:
         - type: image
-          textOverlay: "Draußen ist auch ein **Zimmer**"
+          textOverlay: "Die **Saison** beginnt zuhause"
           brief: "Trenner Textbild. Rattan oder Polyrattan Makro auf hellem Grund."
 
     - section: 8
@@ -232,8 +232,8 @@ page:
       layoutId: '1'
       tiles:
         - type: shoppable_image
-          textOverlay: "Draußen, so **gemütlich** wie drinnen"
-          brief: "Designer Komposition Terrasse Loungegruppe, Sonnenschirm, Beistelltisch, Outdoor Kissen. 5 Hotspots."
+          textOverlay: "Lounge, fertig zum **Loslegen**"
+          brief: "Designer Komposition Terrasse Loungegruppe, Sonnenschirm, Beistelltisch, Outdoor Kissen. Bis zu 5 Hotspots."
           hotspotsPlaceholder: "<TOP-5-GARTEN-LOUNGE>"
 
     - section: 9
