@@ -127,7 +127,7 @@ Jede Section hat:
 2. Bestseller, siehe 6.2
 3. Garten, siehe 6.3
 4. Möbel, siehe 6.4
-5. Freizeit, siehe 6.5 ⏳
+5. Freizeit, siehe 6.5
 6. Heimwerken, siehe 6.6 ⏳
 7. Haushalt, siehe 6.7 ⏳
 8. Tierbedarf, siehe 6.8 ⏳
@@ -726,6 +726,125 @@ page:
           brief: "Cross Sell Banner. Mini Bild Haushaltsszene."
           ctaText: "Haushalt ansehen"
           linkUrl: "page:Haushalt"
+```
+
+### 6.5 Freizeit
+
+10 Sections. 4 Sub Kategorien (Dachzelte, Camping, Koffersets, Weihnachten saisonal).
+
+```yaml
+page:
+  name: Freizeit
+  sections:
+    - section: 1
+      module: hero.fullWidthHero
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "Raus, **erleben**, ankommen"
+          brief: "Designer Komposition Camping bei Sonnenuntergang (Sommer Default) oder Weihnachtsstimmung (Winter Variante November bis Januar). Saisonal austauschbar. Subline: Dachzelte, Camping, Koffer und Weihnachten."
+          ctaText: "Camping entdecken"
+
+    - section: 2
+      module: categoryNav.grid4wide
+      layoutId: '2x2wide'
+      tiles:
+        - type: image
+          textOverlay: "**DACHZELTE**"
+          brief: "Sub Kategorie Tile. Dachzelt Rendering auf Auto."
+        - type: image
+          textOverlay: "**CAMPING**"
+          brief: "Sub Kategorie Tile. Campingstuhl oder Camping Setup Rendering."
+        - type: image
+          textOverlay: "**KOFFER**"
+          brief: "Sub Kategorie Tile. Kofferset Rendering."
+        - type: image
+          textOverlay: "**WEIHNACHTEN**"
+          brief: "Sub Kategorie Tile saisonal. Weihnachtsdeko oder Beleuchtung Rendering. November bis Januar prominent, sonst dezent."
+
+    - section: 3
+      module: products.shoppableFullWidth
+      layoutId: '1'
+      tiles:
+        - type: shoppable_image
+          textOverlay: "Camping, **leicht** gemacht"
+          brief: "Designer Komposition Outdoor Setup mit Zelt, Stuhl, Tisch, Lampe, Schlafsack. 5 Hotspots."
+          hotspotsPlaceholder: "<TOP-5-FREIZEIT-CAMPING>"
+
+    - section: 4
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Die beliebtesten **Camping** Produkte"
+          brief: "Top 6 Bestseller aus Sub Camping."
+          asinsPlaceholder: "<TOP-6-FREIZEIT-CAMPING>"
+
+    - section: 5
+      module: products.productShowcaseLarge
+      layoutId: 'lg-2stack'
+      tiles:
+        - type: image
+          textOverlay: "Dachzelt, **schnell** aufgebaut"
+          brief: "Large Image Top Dachzelt aus Galerie. Designer Komposition mit Auto und Zelt im Outdoor Setting."
+          ctaText: "Jetzt ansehen"
+        - type: image
+          textOverlay: "**Schnell** aufgebaut"
+          brief: "Wide Tile. USP Bullet zum Aufbau in Minuten."
+        - type: image
+          textOverlay: "**Wetterfest**"
+          brief: "Wide Tile. USP Bullet zur Witterungsfestigkeit."
+
+    - section: 6
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Die beliebtesten **Koffer**"
+          brief: "Top 6 Bestseller aus Sub Koffersets."
+          asinsPlaceholder: "<TOP-6-FREIZEIT-KOFFER>"
+
+    - section: 7
+      module: products.shoppableFullWidth
+      layoutId: '1'
+      tiles:
+        - type: shoppable_image
+          textOverlay: "Weihnachten **zuhause**"
+          brief: "Designer Komposition Weihnachtsszene mit Beleuchtung, Deko, Pflanzkübeln. Saisonal aktiv November bis Januar. 5 Hotspots."
+          hotspotsPlaceholder: "<TOP-5-FREIZEIT-WEIHNACHT>"
+
+    - section: 8
+      module: features.featureWideAnd2
+      layoutId: 'vh-w2s'
+      tiles:
+        - type: image
+          textOverlay: "Für **draußen** gebaut"
+          brief: "Wide Image. Plus 2 Squares mit Outdoor Icons."
+        - type: image
+          textOverlay: "**Wetterfest**"
+          brief: "Square mit grünem Icon Kreis Regentropfen."
+        - type: image
+          textOverlay: "**Leicht** verstaut"
+          brief: "Square mit grünem Icon Kreis Box."
+
+    - section: 9
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: product_grid
+          textOverlay: "Alle **Freizeit** Produkte im Überblick"
+          brief: "Vollabdeckung. Alle ASINs der Hauptkategorie Freizeit inklusive Weihnachten, sortiert nach Bestseller Rang."
+          asinsPlaceholder: "<ALL-FREIZEIT>"
+
+    - section: 10
+      module: footer.crossSellBanner
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "Auch fürs Zuhause draußen, weiter zu **Garten**"
+          brief: "Cross Sell Banner. Mini Bild Garten."
+          ctaText: "Garten ansehen"
+          linkUrl: "page:Garten"
 ```
 
 ---
