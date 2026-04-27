@@ -128,7 +128,7 @@ Jede Section hat:
 3. Garten, siehe 6.3
 4. Möbel, siehe 6.4
 5. Freizeit, siehe 6.5
-6. Heimwerken, siehe 6.6 ⏳
+6. Heimwerken, siehe 6.6
 7. Haushalt, siehe 6.7 ⏳
 8. Tierbedarf, siehe 6.8 ⏳
 9. Sale, siehe 6.9 ⏳
@@ -845,6 +845,130 @@ page:
           brief: "Cross Sell Banner. Mini Bild Garten."
           ctaText: "Garten ansehen"
           linkUrl: "page:Garten"
+```
+
+### 6.6 Heimwerken
+
+10 Sections. 5 Sub Kategorien (Werkzeug, Multifunktionsleitern, Sackkarren, Elektrokamine, Heizungen).
+
+```yaml
+page:
+  name: Heimwerken
+  sections:
+    - section: 1
+      module: hero.fullWidthHero
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "Werkzeug, das **arbeitet**"
+          brief: "Designer Komposition Werkstatt oder Werkzeug Setup auf Werkbank. Subline: Werkzeug, Leitern, Sackkarren, Kamine, Heizungen."
+          ctaText: "Werkzeug entdecken"
+
+    - section: 2
+      module: categoryNav.grid6tiles
+      layoutId: '2s-4grid'
+      tiles:
+        - type: image
+          textOverlay: "**WERKZEUG**"
+          brief: "Sub Kategorie Tile als Wide. Werkzeug Set Rendering."
+        - type: image
+          textOverlay: "**LEITERN**"
+          brief: "Sub Kategorie Tile als Wide. Subline: Multifunktionsleitern. Leiter Rendering."
+        - type: image
+          textOverlay: "**SACKKARREN**"
+          brief: "Sub Kategorie Tile. Sackkarre Rendering."
+        - type: image
+          textOverlay: "**ELEKTROKAMINE**"
+          brief: "Sub Kategorie Tile. Elektrokamin Rendering."
+        - type: image
+          textOverlay: "**HEIZUNGEN**"
+          brief: "Sub Kategorie Tile. Heizgerät Rendering."
+        - type: image
+          textOverlay: "**ROBUST** gebaut"
+          brief: "Filler Tile mit Marken USP statt sechster Sub Kategorie. Grünes Icon Kreis Werkzeug Kombi."
+
+    - section: 3
+      module: products.productShowcaseLarge
+      layoutId: 'lg-2stack'
+      tiles:
+        - type: image
+          textOverlay: "Robust **gebaut**"
+          brief: "Large Image Top Werkzeug aus Galerie. Designer Komposition mit Werkzeug in Hand oder auf Werkbank."
+          ctaText: "Jetzt ansehen"
+        - type: image
+          textOverlay: "**Stark** belastbar"
+          brief: "Wide Tile. USP Bullet zur Belastung."
+        - type: image
+          textOverlay: "**Sicher** im Einsatz"
+          brief: "Wide Tile. USP Bullet zur Sicherheit."
+
+    - section: 4
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Die beliebtesten **Werkzeuge**"
+          brief: "Top 8 Bestseller aus Sub Werkzeug."
+          asinsPlaceholder: "<TOP-8-HEIMWERKEN-WERKZEUG>"
+
+    - section: 5
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "**Stark** im Alltag"
+          brief: "Top 6 Bestseller aus Multifunktionsleitern und Sackkarren gemischt."
+          asinsPlaceholder: "<TOP-6-HEIMWERKEN-LEITERN-SACK>"
+
+    - section: 6
+      module: hero.fullWidthHero
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "Wärme, **wenn** es kalt wird"
+          brief: "Trenner Textbild. Holzfeuer oder Heizstrahler Makro auf hellem Grund."
+
+    - section: 7
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Wärme zum **Einschalten**"
+          brief: "Top 6 Bestseller aus Elektrokaminen und Heizungen gemischt."
+          asinsPlaceholder: "<TOP-6-HEIMWERKEN-KAMIN-HEIZ>"
+
+    - section: 8
+      module: features.featureWideAnd2
+      layoutId: 'vh-w2s'
+      tiles:
+        - type: image
+          textOverlay: "**Robust**, sicher, durchdacht"
+          brief: "Wide Image. Plus 2 Squares mit USP Icons."
+        - type: image
+          textOverlay: "**Belastbar**"
+          brief: "Square mit grünem Icon Kreis Werkzeug Kombi."
+        - type: image
+          textOverlay: "**Sicher**"
+          brief: "Square mit grünem Icon Kreis Schild Check."
+
+    - section: 9
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: product_grid
+          textOverlay: "Alle **Heimwerken** Produkte im Überblick"
+          brief: "Vollabdeckung. Alle ASINs der Hauptkategorie Heimwerken, sortiert nach Bestseller Rang."
+          asinsPlaceholder: "<ALL-HEIMWERKEN>"
+
+    - section: 10
+      module: footer.crossSellBanner
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "Praktisch fürs Haus, weiter zu **Haushalt**"
+          brief: "Cross Sell Banner. Mini Bild Haushaltsszene."
+          ctaText: "Haushalt ansehen"
+          linkUrl: "page:Haushalt"
 ```
 
 ---
