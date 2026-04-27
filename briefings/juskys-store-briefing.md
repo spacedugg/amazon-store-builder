@@ -132,7 +132,7 @@ Jede Section hat:
 7. Haushalt, siehe 6.7
 8. Tierbedarf, siehe 6.8
 9. Sale, siehe 6.9
-10. Über Uns, siehe 6.10 ⏳
+10. Über Uns, siehe 6.10
 
 ### 6.1 Home
 
@@ -1321,6 +1321,100 @@ page:
         - type: image
           textOverlay: "**Schnell** weg"
           brief: "Square mit grünem Icon Kreis Truck."
+```
+
+### 6.10 Über Uns
+
+6 Sections.
+
+```yaml
+page:
+  name: Über Uns
+  sections:
+    - section: 1
+      module: hero.fullWidthHero
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "Ein **Haus**, viele Räume"
+          brief: "Portrait oder Halle aus juskys.de. Warmes Tageslicht. Subline: Familiengeführt aus Süddeutschland."
+
+    - section: 2
+      module: trust.trustSplit
+      layoutId: 'std-2equal'
+      tiles:
+        - type: image
+          textOverlay: ""
+          brief: "Hallenbild oder Team aus juskys.de. Bild trägt allein."
+        - type: image_text
+          textOverlay: "Familiengeführt aus **Süddeutschland**"
+          brief: "Fließtext ca. 120 Wörter Brand Story Lang. ⚠️ Inhalt vom Kunden freizugeben. Themen: Gründung, Familie, Entwicklung, aktuelle Ausrichtung."
+
+    - section: 3
+      module: features.featureGrid4wide
+      layoutId: '2x2wide'
+      tiles:
+        - type: image
+          textOverlay: "**Durchdacht**"
+          brief: "Wert Tile. Subline: Wir entwickeln vom Alltag her. Foto aus Website."
+        - type: image
+          textOverlay: "**Zugänglich**"
+          brief: "Wert Tile. Subline: Für jede Lebensphase und jedes Budget. Foto aus Website."
+        - type: image
+          textOverlay: "**Verlässlich**"
+          brief: "Wert Tile. Subline: Qualität, die bleibt. Service, der reagiert. Foto aus Website."
+        - type: image
+          textOverlay: "**Familiengeführt**"
+          brief: "Wert Tile. Subline: Aus Süddeutschland. Foto Familie oder Team."
+
+    - section: 4
+      module: lifestyle.fullWidthLifestyle
+      layoutId: '2s-4grid'
+      tiles:
+        - type: image
+          textOverlay: ""
+          brief: "Wide Galerie Bild Lager."
+        - type: image
+          textOverlay: ""
+          brief: "Wide Galerie Bild Designbereich."
+        - type: image
+          textOverlay: ""
+          brief: "Square Galerie Bild Qualitätscheck."
+        - type: image
+          textOverlay: ""
+          brief: "Square Galerie Bild Showroom."
+        - type: image
+          textOverlay: ""
+          brief: "Square Galerie Bild Mitarbeiter."
+        - type: image
+          textOverlay: ""
+          brief: "Square Galerie Bild Gebäude oder Standort."
+
+    - section: 5
+      module: features.featureGrid4wide
+      layoutId: '2x2wide'
+      tiles:
+        - type: image
+          textOverlay: "**Aus** einem Haus"
+          brief: "Marken USP Tile. Grüner Icon Kreis Haus."
+        - type: image
+          textOverlay: "**Schnell** geliefert"
+          brief: "Marken USP Tile. Grüner Icon Kreis Truck."
+        - type: image
+          textOverlay: "**Montagefreundlich**"
+          brief: "Marken USP Tile. Grüner Icon Kreis Schraubenschlüssel."
+        - type: image
+          textOverlay: "**Familiengeführt**"
+          brief: "Marken USP Tile. Grüner Icon Kreis Herz."
+
+    - section: 6
+      module: engagement.followBanner
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "**Service**, der reagiert"
+          brief: "Service Block auf Hellgrau. Icons für Kontakt, Versand, Rücksendung."
+          ctaText: "Kontakt aufnehmen"
 ```
 
 ---
