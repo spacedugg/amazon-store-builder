@@ -125,7 +125,7 @@ Jede Section hat:
 
 1. Home, siehe 6.1
 2. Bestseller, siehe 6.2
-3. Garten, siehe 6.3 ⏳
+3. Garten, siehe 6.3
 4. Möbel, siehe 6.4 ⏳
 5. Freizeit, siehe 6.5 ⏳
 6. Heimwerken, siehe 6.6 ⏳
@@ -378,6 +378,177 @@ page:
         - type: image
           textOverlay: "**Top** bewertet"
           brief: "Square mit grünem Icon Kreis Schild Check."
+```
+
+### 6.3 Garten
+
+13 Sections. 14 Sub Kategorien werden über zwei Navigator Sections (8 plus 6) erschlossen.
+
+```yaml
+page:
+  name: Garten
+  sections:
+    - section: 1
+      module: hero.fullWidthHero
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "Die **Saison** beginnt hier"
+          brief: "Designer Komposition Terrasse Abendlicht mit Loungegruppe und Sonnenschirm. Subline: Lounge, Tische, Schatten und alles für draußen."
+          ctaText: "Loungegruppen entdecken"
+
+    - section: 2
+      module: categoryNav.grid8tiles
+      layoutId: '4x2grid'
+      tiles:
+        - type: image
+          textOverlay: "**GARTENMÖBEL** SETS"
+          brief: "Sub Kategorie Tile. Freigestelltes Sitzgruppen Rendering auf Beige."
+        - type: image
+          textOverlay: "**GARTENAUFBEWAHRUNG**"
+          brief: "Sub Kategorie Tile. Gerätehaus oder Aufbewahrungsbox Rendering."
+        - type: image
+          textOverlay: "**GARTENBEDARF**"
+          brief: "Sub Kategorie Tile. Pflanzkübel oder Gartenwerkzeug Rendering."
+        - type: image
+          textOverlay: "**SONNENSCHUTZ**"
+          brief: "Sub Kategorie Tile. Sonnenschirm oder Sonnensegel Rendering. Subline: Sonnenschutz und Sichtschutz."
+        - type: image
+          textOverlay: "**GARTENLIEGEN**"
+          brief: "Sub Kategorie Tile. Gartenliege Rendering."
+        - type: image
+          textOverlay: "**GARTENBÄNKE**"
+          brief: "Sub Kategorie Tile. Gartenbank Rendering."
+        - type: image
+          textOverlay: "**GARTENTISCHE**"
+          brief: "Sub Kategorie Tile. Gartentisch Rendering."
+        - type: image
+          textOverlay: "**BIERZELTGARNITUREN**"
+          brief: "Sub Kategorie Tile. Bierzeltgarnitur Rendering."
+
+    - section: 3
+      module: categoryNav.grid6tiles
+      layoutId: '2s-4grid'
+      tiles:
+        - type: image
+          textOverlay: "**KISSENBOXEN**"
+          brief: "Sub Kategorie Tile. Kissenbox Rendering."
+        - type: image
+          textOverlay: "**GRILLS**"
+          brief: "Sub Kategorie Tile. Grill Rendering. Subline: Gas und Holzkohle."
+        - type: image
+          textOverlay: "**HÄNGEMATTEN**"
+          brief: "Sub Kategorie Tile. Hängematte oder Hängesessel Rendering."
+        - type: image
+          textOverlay: "**ÜBERDACHUNGEN**"
+          brief: "Sub Kategorie Tile. Pavillon oder Überdachung Rendering."
+        - type: image
+          textOverlay: "**POOLBEDARF**"
+          brief: "Sub Kategorie Tile. Pool Zubehör Rendering."
+        - type: image
+          textOverlay: "**GEWÄCHSHÄUSER**"
+          brief: "Sub Kategorie Tile. Gewächshaus Rendering."
+
+    - section: 4
+      module: products.shoppableFullWidth
+      layoutId: '1'
+      tiles:
+        - type: shoppable_image
+          textOverlay: "Lounge, **gebaut** für lange Abende"
+          brief: "Designer Komposition Loungegruppe mit Sofa, Sessel, Beistelltisch, Outdoor Kissen, Pflanzkübel. 5 Hotspots."
+          hotspotsPlaceholder: "<TOP-5-GARTEN-LOUNGE>"
+
+    - section: 5
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Die beliebtesten **Loungegruppen**"
+          brief: "Top 8 Bestseller aus Sub Gartenmöbel Sets."
+          asinsPlaceholder: "<TOP-8-GARTEN-LOUNGE>"
+
+    - section: 6
+      module: products.productShowcaseLarge
+      layoutId: 'lg-2stack'
+      tiles:
+        - type: image
+          textOverlay: "Der **Schirm**, der Schatten macht"
+          brief: "Large Image Top Sonnenschirm aus Galerie. Designer Komposition mit Schirm im Garten."
+          ctaText: "Jetzt ansehen"
+        - type: image
+          textOverlay: "**UV** beständig"
+          brief: "Wide Tile. USP Bullet zum Material und UV Schutz."
+        - type: image
+          textOverlay: "**Wasserabweisend**"
+          brief: "Wide Tile. USP Bullet zur Witterungsfestigkeit."
+
+    - section: 7
+      module: hero.fullWidthHero
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "Auch **kleinere** Flächen"
+          brief: "Trenner Textbild. Pflanzen oder Balkonszene Makro."
+
+    - section: 8
+      module: products.shoppableFullWidth
+      layoutId: '1'
+      tiles:
+        - type: shoppable_image
+          textOverlay: "Auch auf dem **Balkon**"
+          brief: "Designer Komposition Balkon mit Bistroset, Sonnensegel, Pflanzkübel. 5 Hotspots."
+          hotspotsPlaceholder: "<TOP-5-GARTEN-BALKON>"
+
+    - section: 9
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Mehr **Lieblinge** für draußen"
+          brief: "Top 8 Bestseller aus Sonnenschutz, Hängematten, Poolbedarf gemischt."
+          asinsPlaceholder: "<TOP-8-GARTEN-DIVERSE>"
+
+    - section: 10
+      module: products.shoppableFullWidth
+      layoutId: '1'
+      tiles:
+        - type: shoppable_image
+          textOverlay: "Grillen, **stilvoll**"
+          brief: "Designer Komposition Grill Setup, Holzkohle oder Gas. 5 Hotspots."
+          hotspotsPlaceholder: "<TOP-5-GARTEN-GRILL>"
+
+    - section: 11
+      module: features.featureWideAnd2
+      layoutId: 'vh-w2s'
+      tiles:
+        - type: image
+          textOverlay: "**Wetterfest** durch die Saison"
+          brief: "Wide Image plus 3 Wetter Icons (existieren bereits in Juskys CI: Sonne, Regen, Schnee)."
+        - type: image
+          textOverlay: "**UV** beständig"
+          brief: "Square mit grünem Icon Kreis Sonne."
+        - type: image
+          textOverlay: "**Wasserabweisend**"
+          brief: "Square mit grünem Icon Kreis Regentropfen."
+
+    - section: 12
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: product_grid
+          textOverlay: "Alle **Garten** Produkte im Überblick"
+          brief: "Vollabdeckung. Alle ASINs der Hauptkategorie Garten, sortiert nach Bestseller Rang."
+          asinsPlaceholder: "<ALL-GARTEN>"
+
+    - section: 13
+      module: footer.crossSellBanner
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "Drinnen passend dazu, weiter zu **Möbel**"
+          brief: "Cross Sell Banner. Mini Bild Wohnraum."
+          ctaText: "Möbel ansehen"
+          linkUrl: "page:Möbel"
 ```
 
 ---
