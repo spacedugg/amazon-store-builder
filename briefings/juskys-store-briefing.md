@@ -131,7 +131,7 @@ Jede Section hat:
 6. Heimwerken, siehe 6.6
 7. Haushalt, siehe 6.7
 8. Tierbedarf, siehe 6.8
-9. Sale, siehe 6.9 ⏳
+9. Sale, siehe 6.9
 10. Über Uns, siehe 6.10 ⏳
 
 ### 6.1 Home
@@ -1203,6 +1203,124 @@ page:
           textOverlay: "Alle **Tierbedarf** Produkte im Überblick"
           brief: "Vollabdeckung. Alle ASINs der Hauptkategorie Tierbedarf, sortiert nach Bestseller Rang."
           asinsPlaceholder: "<ALL-TIERBEDARF>"
+```
+
+### 6.9 Sale
+
+10 Sections. Dynamisch befüllt aus allen aktuell reduzierten ASINs.
+
+```yaml
+page:
+  name: Sale
+  sections:
+    - section: 1
+      module: hero.fullWidthHero
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "**Aktuell** reduziert"
+          brief: "Designer Komposition Mix mit Reduziert Optik. Subline: Aktionen quer durch alle Kategorien."
+          ctaText: "Aktionen ansehen"
+
+    - section: 2
+      module: categoryNav.grid6tiles
+      layoutId: '2s-4grid'
+      tiles:
+        - type: image
+          textOverlay: "Sale **GARTEN**"
+          brief: "Filter Tile zur Sale Kategorie Garten."
+        - type: image
+          textOverlay: "Sale **MÖBEL**"
+          brief: "Filter Tile zur Sale Kategorie Möbel."
+        - type: image
+          textOverlay: "Sale **FREIZEIT**"
+          brief: "Filter Tile zur Sale Kategorie Freizeit."
+        - type: image
+          textOverlay: "Sale **HEIMWERKEN**"
+          brief: "Filter Tile zur Sale Kategorie Heimwerken."
+        - type: image
+          textOverlay: "Sale **HAUSHALT**"
+          brief: "Filter Tile zur Sale Kategorie Haushalt."
+        - type: image
+          textOverlay: "Sale **TIERBEDARF**"
+          brief: "Filter Tile zur Sale Kategorie Tierbedarf."
+
+    - section: 3
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: deals
+          textOverlay: "Top **12** Aktionen"
+          brief: "Top 12 reduzierte ASINs nach Höhe der Reduzierung."
+          asinsPlaceholder: "<DEALS-TOP-12>"
+
+    - section: 4
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: deals
+          textOverlay: "Sale **Garten**"
+          brief: "Reduzierte ASINs aus Hauptkategorie Garten."
+          asinsPlaceholder: "<DEALS-GARTEN>"
+
+    - section: 5
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: deals
+          textOverlay: "Sale **Möbel**"
+          brief: "Reduzierte ASINs aus Hauptkategorie Möbel."
+          asinsPlaceholder: "<DEALS-MOEBEL>"
+
+    - section: 6
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: deals
+          textOverlay: "Sale **Freizeit**"
+          brief: "Reduzierte ASINs aus Hauptkategorie Freizeit."
+          asinsPlaceholder: "<DEALS-FREIZEIT>"
+
+    - section: 7
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: deals
+          textOverlay: "Sale **Heimwerken**"
+          brief: "Reduzierte ASINs aus Hauptkategorie Heimwerken."
+          asinsPlaceholder: "<DEALS-HEIMWERKEN>"
+
+    - section: 8
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: deals
+          textOverlay: "Sale **Haushalt**"
+          brief: "Reduzierte ASINs aus Hauptkategorie Haushalt."
+          asinsPlaceholder: "<DEALS-HAUSHALT>"
+
+    - section: 9
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: deals
+          textOverlay: "Sale **Tierbedarf**"
+          brief: "Reduzierte ASINs aus Hauptkategorie Tierbedarf."
+          asinsPlaceholder: "<DEALS-TIERBEDARF>"
+
+    - section: 10
+      module: features.featureWideAnd2
+      layoutId: 'vh-w2s'
+      tiles:
+        - type: image
+          textOverlay: "**Warum** lohnt sich Sale"
+          brief: "Wide Image. Plus 2 Squares mit USP Icons."
+        - type: image
+          textOverlay: "**Echt** reduziert"
+          brief: "Square mit grünem Icon Kreis Stern."
+        - type: image
+          textOverlay: "**Schnell** weg"
+          brief: "Square mit grünem Icon Kreis Truck."
 ```
 
 ---
