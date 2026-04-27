@@ -123,18 +123,168 @@ Jede Section hat:
 
 10 Pages in dieser Reihenfolge:
 
-1. Home (Page 1) ⏳ folgt in Schritt 2
-2. Bestseller (Page 2)
-3. Garten (Page 3)
-4. Möbel (Page 4)
-5. Freizeit (Page 5)
-6. Heimwerken (Page 6)
-7. Haushalt (Page 7)
-8. Tierbedarf (Page 8)
-9. Sale (Page 9)
-10. Über Uns (Page 10)
+1. Home, siehe 6.1
+2. Bestseller, siehe 6.2 ⏳
+3. Garten, siehe 6.3 ⏳
+4. Möbel, siehe 6.4 ⏳
+5. Freizeit, siehe 6.5 ⏳
+6. Heimwerken, siehe 6.6 ⏳
+7. Haushalt, siehe 6.7 ⏳
+8. Tierbedarf, siehe 6.8 ⏳
+9. Sale, siehe 6.9 ⏳
+10. Über Uns, siehe 6.10 ⏳
 
-⏳ Inhalt der Pages wird in den nachfolgenden Schritten ergänzt.
+### 6.1 Home
+
+11 Sections.
+
+```yaml
+page:
+  name: Home
+  sections:
+    - section: 1
+      module: hero.fullWidthHero
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "Räume, die **passen**"
+          brief: "Designer Komposition Wohnzimmer hell. Subline: Möbel und mehr für jeden Tag, aus einem Haus."
+          ctaText: "Sortiment entdecken"
+
+    - section: 2
+      module: categoryNav.grid6tiles
+      layoutId: '2s-4grid'
+      tiles:
+        - type: image
+          textOverlay: "**GARTEN**"
+          brief: "Kategorie Tile Garten. Subline: Lounge, Tische, Schatten."
+          linkUrl: "page:Garten"
+        - type: image
+          textOverlay: "**MÖBEL**"
+          brief: "Kategorie Tile Möbel. Subline: Sofas, Betten, Bad."
+          linkUrl: "page:Möbel"
+        - type: image
+          textOverlay: "**FREIZEIT**"
+          brief: "Kategorie Tile Freizeit. Subline: Camping, Koffer, Weihnachten."
+          linkUrl: "page:Freizeit"
+        - type: image
+          textOverlay: "**HEIMWERKEN**"
+          brief: "Kategorie Tile Heimwerken. Subline: Werkzeug, Leitern, Heizungen."
+          linkUrl: "page:Heimwerken"
+        - type: image
+          textOverlay: "**HAUSHALT**"
+          brief: "Kategorie Tile Haushalt. Subline: Küche, Stauraum, Alltagshilfen."
+          linkUrl: "page:Haushalt"
+        - type: image
+          textOverlay: "**TIERBEDARF**"
+          brief: "Kategorie Tile Tierbedarf. Subline: Hund, Katze, Freilauf."
+          linkUrl: "page:Tierbedarf"
+
+    - section: 3
+      module: trust.trustSplit
+      layoutId: 'std-2equal'
+      tiles:
+        - type: image
+          textOverlay: ""
+          brief: "Team oder Hallenbild aus juskys.de. Warmes Tageslicht, Mitarbeiter im Hintergrund."
+        - type: image_text
+          textOverlay: "Ein **Haus**, viele Räume"
+          brief: "Subline: Familiengeführt aus Süddeutschland. Plus Fließtext 55 Wörter Brand Story Kurzform."
+          ctaText: "Mehr über Juskys"
+          linkUrl: "page:Über Uns"
+
+    - section: 4
+      module: hero.fullWidthHero
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "Räume, die **zusammen** passen"
+          brief: "Trenner Textbild. Stoff Makro auf hellem Grund. Anthrazit Text, ein Wort grün."
+
+    - section: 5
+      module: products.shoppableFullWidth
+      layoutId: '1'
+      tiles:
+        - type: shoppable_image
+          textOverlay: "Ein Wohnzimmer, **fünf** Klicks"
+          brief: "Designer Komposition Wohnzimmer mit Sofa, Sessel, Beistelltisch, Lampe, Teppich. 5 Hotspots auf den jeweiligen Produkten platzieren."
+          hotspotsPlaceholder: "<TOP-5-MOEBEL-WOHNEN>"
+
+    - section: 6
+      module: products.fullWidthGrid
+      layoutId: '1'
+      tiles:
+        - type: best_sellers
+          textOverlay: "Die meistgekauften **Lieblinge**"
+          brief: "Top 8 Bestseller kategorieübergreifend."
+          asinsPlaceholder: "<TOP-8-OVERALL>"
+
+    - section: 7
+      module: hero.fullWidthHero
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "Draußen ist auch ein **Zimmer**"
+          brief: "Trenner Textbild. Rattan oder Polyrattan Makro auf hellem Grund."
+
+    - section: 8
+      module: products.shoppableFullWidth
+      layoutId: '1'
+      tiles:
+        - type: shoppable_image
+          textOverlay: "Draußen, so **gemütlich** wie drinnen"
+          brief: "Designer Komposition Terrasse Loungegruppe, Sonnenschirm, Beistelltisch, Outdoor Kissen. 5 Hotspots."
+          hotspotsPlaceholder: "<TOP-5-GARTEN-LOUNGE>"
+
+    - section: 9
+      module: features.featureGrid4wide
+      layoutId: '2x2wide'
+      tiles:
+        - type: image
+          textOverlay: "**Aus** einem Haus"
+          brief: "Marken USP Tile. Grüner Icon Kreis Haus, weiße Linie. Label darunter: Sortiment für Zuhause, Garten, Alltag."
+        - type: image
+          textOverlay: "**Schnell** geliefert"
+          brief: "Marken USP Tile. Grüner Icon Kreis Truck, weiße Linie. Label: Mit Amazon Logistik."
+        - type: image
+          textOverlay: "**Montagefreundlich**"
+          brief: "Marken USP Tile. Grüner Icon Kreis Schraubenschlüssel, weiße Linie. Label: Verständliche Anleitung."
+        - type: image
+          textOverlay: "**Familiengeführt**"
+          brief: "Marken USP Tile. Grüner Icon Kreis Herz, weiße Linie. Label: Aus Süddeutschland."
+
+    - section: 10
+      module: engagement.followBanner
+      layoutId: '1'
+      tiles:
+        - type: image
+          textOverlay: "**Folge** Juskys"
+          brief: "Follow Banner auf Hellgrau. Hinweis dass neue Produkte und Aktionen direkt im Feed landen."
+          ctaText: "Folgen"
+
+    - section: 11
+      module: footer.categoryNavFooter
+      layoutId: '2x2wide'
+      tiles:
+        - type: image
+          textOverlay: "**GARTEN**"
+          brief: "Footer Kategorie Tile mit Mini Icon."
+          linkUrl: "page:Garten"
+        - type: image
+          textOverlay: "**MÖBEL**"
+          brief: "Footer Kategorie Tile mit Mini Icon."
+          linkUrl: "page:Möbel"
+        - type: image
+          textOverlay: "**HAUSHALT**"
+          brief: "Footer Kategorie Tile mit Mini Icon."
+          linkUrl: "page:Haushalt"
+        - type: image
+          textOverlay: "**ÜBER** UNS"
+          brief: "Footer Tile zur Brand Story."
+          linkUrl: "page:Über Uns"
+```
+
+Saisonale Variante November bis Januar: Section 8 Bild und textOverlay tauschen gegen `Weihnachten **zuhause**`, hotspotsPlaceholder `<TOP-5-FREIZEIT-WEIHNACHT>`.
 
 ---
 
