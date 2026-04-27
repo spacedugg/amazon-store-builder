@@ -1203,8 +1203,19 @@ export default function App() {
   // ─── NEW STORE (reset) ───
   var handleNewStore = function() {
     if (store.pages.length > 0 && !confirm('Start a new store? Unsaved changes will be lost.')) return;
-    setStore(EMPTY_STORE);
-    setCurPage('');
+    var firstPageId = uid();
+    var initialStore = Object.assign({}, EMPTY_STORE, {
+      pages: [{
+        id: firstPageId,
+        name: 'Home',
+        sections: [{
+          id: uid(), layoutId: '1',
+          tiles: [emptyTile()],
+        }],
+      }],
+    });
+    setStore(initialStore);
+    setCurPage(firstPageId);
     setSel(null);
     setWarnings([]);
     setRequestedAsins([]);
