@@ -1,0 +1,183 @@
+{
+  "_meta": {
+    "store": "kloster-kitchen",
+    "pageSlug": "09_spar-abo",
+    "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E",
+    "url": "https://www.amazon.de/stores/page/137B3A93-BC04-42D0-89A9-8EFD54CF895E",
+    "extractedAt": "2026-04-23T20:40:00Z",
+    "extractor": "manual_verified_v3.1",
+    "note": "Spar-Abo Uebersichtsseite mit 13-ASIN Produkt-Grid (5+5+3). Produktnamen sind im Rendered-Text, nicht in aria-label - in Phase 2 bzw. Bright-Data-Enrichment nachziehen. Kein Video auf dieser Seite.",
+    "scrollHeight": 5820,
+    "viewport": {"w": 1181, "h": 946},
+    "domRowsTotal": 9,
+    "contentModulesCount": 7
+  },
+
+  "hero": {
+    "section": "hero",
+    "domRowIdx": 0,
+    "top": 99,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c62dc5c8-f812-4754-8a90-674b1f1c66a8._CR0%2C10%2C1280%2C256_SX1500_.jpg",
+    "imageSize": {"w": 1015, "h": 203},
+    "imageAltText": "Text reads \"KLOSTER KITCHEN BETTER THAN GOOD\". Green leaf background."
+  },
+
+  "navigation": {
+    "section": "nav",
+    "domRowIdx": 0,
+    "pages": [
+      {"label": "Startseite",                  "pageId": "34D4A812-9A68-4602-A6A0-30565D399620"},
+      {"label": "Ingwer Shots",                "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2"},
+      {"label": "Mikronährstoffe",             "pageId": "E337104E-63D3-41B2-8560-D92F482B2790"},
+      {"label": "Saftkuren",                   "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606"},
+      {"label": "SMOOTHIES",                   "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E"},
+      {"label": "Shot Kur",                    "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043"},
+      {"label": "Probiersets / Geschenkidee",  "pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A"},
+      {"label": "Zubehör",                     "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A"},
+      {"label": "Spar-Abo",                    "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E"},
+      {"label": "Über Uns",                    "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF"}
+    ]
+  },
+
+  "modules": [
+    {
+      "userModuleId": 1,
+      "domRowIdx": 1,
+      "top": 443,
+      "height": 604,
+      "layoutType": "full_width_asin_link_lifestyle_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/df0841d5-ca02-42b4-bab9-d27d19596a19._CR17%2C0%2C1500%2C767_SX1500_.jpg",
+        "size": {"w": 1181, "h": 604},
+        "alt": ""
+      },
+      "asin": "B09R4Y8VDW",
+      "linkAria": "Text reads \"CHIGSTER KITCHEN\". Woman sitting on couch opening brown cardboard box with circular cutout pattern on side. Box appears to be a product delivery or subscription package.",
+      "note": "Hero-Bild Spar-Abo, Frau packt Abo-Paket aus. OCR-Fehler im aria: 'CHIGSTER' statt 'KLOSTER'."
+    },
+    {
+      "userModuleId": 2,
+      "domRowIdx": 2,
+      "top": 1047,
+      "height": 371,
+      "layoutType": "full_width_asin_link_text_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/6d704fc4-755f-4258-9ae6-27eaf6556a14._CR3%2C0%2C1917%2C593_SX1500_.png",
+        "size": {"w": 1181, "h": 365},
+        "alt": ""
+      },
+      "asin": "B09R4Y8VDW",
+      "linkAria": "Text 'SPARABO' above German text.",
+      "note": "Intro-Banner Spar-Abo mit Erklaer-Text. Bildtext per Vision in Phase 2."
+    },
+    {
+      "userModuleId": 3,
+      "domRowIdx": 3,
+      "top": 1418,
+      "height": 344,
+      "layoutType": "full_width_asin_link_product_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/f1ef3ad6-27d0-4aae-b3c7-14467e934803._CR0%2C0%2C1919%2C548_SX1500_.jpg",
+        "size": {"w": 1181, "h": 337},
+        "alt": ""
+      },
+      "asin": "B09R8HBG5N",
+      "linkAria": "Text reads \"la source des trésors\" on multiple glass bottles. Six large bottles and six small bottles of colorful fruit juices. Flavors include green, yellow, red, light orange, dark orange, and purple.",
+      "note": "Sortimentsdarstellung. Legendäre la-source-des-tresors-Kiste mit 6 grossen plus 6 kleinen Flaschen in sechs Geschmacksrichtungen."
+    },
+    {
+      "userModuleId": 4,
+      "domRowIdx": 4,
+      "top": 1762,
+      "height": 292,
+      "layoutType": "creative_grid_2tiles",
+      "tileCount": 2,
+      "tiles": [
+        {
+          "position": "left",
+          "asin": "B09R83KXVW",
+          "size": {"w": 568, "h": 277},
+          "creativeImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/35de13e3-c4af-4672-93a6-70ed66e2d950._CR0%2C42%2C750%2C375_SX750_SY375_.jpg",
+          "creativeImageAria": "Two people holding yellow bottles against a concrete wall. Woman in light gray coat, man in black coat."
+        },
+        {
+          "position": "right",
+          "asin": "B07V1HQQ2V",
+          "size": {"w": 568, "h": 277},
+          "creativeImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/00c0183f-b94e-407a-ab29-0e0b4eeafa55._CR0%2C74%2C750%2C375_SX750_SY375_.jpg",
+          "creativeImageAria": "Text reads \"KLOSTER KITCHEN INGWER SHOT CLASSIC\". Hands holding small glass bottle with yellow cap from cardboard box."
+        }
+      ]
+    },
+    {
+      "userModuleId": 5,
+      "domRowIdx": 5,
+      "top": 2054,
+      "height": 293,
+      "layoutType": "full_width_asin_link_text_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/1554eea4-a849-4039-98ed-8eb56fe5ecfd._CR16%2C54%2C1501%2C362_SX1500_.jpg",
+        "size": {"w": 1181, "h": 285},
+        "alt": ""
+      },
+      "asin": "B07V1HNJNZ",
+      "linkAria": "Text reads \"NIE WIEDER OHNE INGWER SHOTS, AUTOMATISCHE LIEFERUNG, LIEFERINTERVALLE FLEXIBEL WÄHLBAR, JEDERZEIT ÄNDERBAR, JEDERZEIT KÜNDBAR\". Three glass bottles with red, green, and yellow liquid.",
+      "note": "USP-Banner Spar-Abo. Key-Claims: Nie wieder ohne, Automatisch, Flexibel, Aenderbar, Kuendbar."
+    },
+    {
+      "userModuleId": 6,
+      "domRowIdx": 6,
+      "top": 2347,
+      "height": 1755,
+      "layoutType": "asin_grid_13tiles_3rows",
+      "tileCount": 13,
+      "tiles": [
+        {"position": "row1_c1", "asin": "B09R4Y8VDW", "size": {"w": 202, "h": 228}, "productImageSrc": "https://m.media-amazon.com/images/I/71SpozZU2bL._AC_UL320_.jpg"},
+        {"position": "row1_c2", "asin": "B09R83KXVW", "size": {"w": 202, "h": 228}, "productImageSrc": "https://m.media-amazon.com/images/I/71sYO5zR7YL._AC_UL320_.jpg"},
+        {"position": "row1_c3", "asin": "B09R4ZYTND", "size": {"w": 202, "h": 228}, "productImageSrc": "https://m.media-amazon.com/images/I/71izauiZpqL._AC_UL320_.jpg"},
+        {"position": "row1_c4", "asin": "B09R82G5WT", "size": {"w": 202, "h": 228}, "productImageSrc": "https://m.media-amazon.com/images/I/71jN819SxYL._AC_UL320_.jpg"},
+        {"position": "row1_c5", "asin": "B0859KWFM6", "size": {"w": 202, "h": 228}, "productImageSrc": "https://m.media-amazon.com/images/I/71R+3VwZFHL._AC_UL320_.jpg"},
+        {"position": "row2_c1", "asin": "B08NYQQHGF", "size": {"w": 202, "h": 228}, "productImageSrc": "https://m.media-amazon.com/images/I/71hlDsvQSiL._AC_UL320_.jpg"},
+        {"position": "row2_c2", "asin": "B0859L1D55", "size": {"w": 202, "h": 228}, "productImageSrc": "https://m.media-amazon.com/images/I/71zVUWhvJ0L._AC_UL320_.jpg"},
+        {"position": "row2_c3", "asin": "B07V1HNJNZ", "size": {"w": 202, "h": 228}, "productImageSrc": "https://m.media-amazon.com/images/I/71NQW3NTZpL._AC_UL320_.jpg"},
+        {"position": "row2_c4", "asin": "B08NYNT1WC", "size": {"w": 202, "h": 228}, "productImageSrc": "https://m.media-amazon.com/images/I/71WZzloWtDL._AC_UL320_.jpg"},
+        {"position": "row2_c5", "asin": "B09X5R7B6P", "size": {"w": 202, "h": 228}, "productImageSrc": "https://m.media-amazon.com/images/I/51E4MKJUQ0L._AC_UL320_.jpg"},
+        {"position": "row3_c1", "asin": "B09R817S3L", "size": {"w": 202, "h": 228}, "productImageSrc": "https://m.media-amazon.com/images/I/71NkVX+OLHL._AC_UL320_.jpg"},
+        {"position": "row3_c2", "asin": "B0CP49VNYT", "size": {"w": 202, "h": 228}, "productImageSrc": "https://m.media-amazon.com/images/I/61+kd8GX6ML._AC_UL320_.jpg"},
+        {"position": "row3_c3", "asin": "B0CP4C7XYM", "size": {"w": 202, "h": 228}, "productImageSrc": "https://m.media-amazon.com/images/I/51Wc2bO3ELL._AC_UL320_.jpg"}
+      ],
+      "note": "13-ASIN Produktgrid: 5 Kacheln Reihe 1, 5 Kacheln Reihe 2, 3 Kacheln Reihe 3. Produkttitel liegen als Rendered-Text vor (nicht in aria-label), werden in Phase 2 oder ueber Bright Data Enrichment nachgezogen. Mix aus Ingwer Shots Classic und Mix Varianten plus Shot Kur und Probiersets."
+    },
+    {
+      "userModuleId": 7,
+      "domRowIdx": 7,
+      "top": 4102,
+      "height": 258,
+      "layoutType": "full_width_awards_badges",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2eb471fe-f331-4cbc-89cd-8896df9c0d33._CR0%2C0%2C1280%2C269_SX1500_.jpg",
+        "size": {"w": 1015, "h": 214},
+        "alt": ""
+      },
+      "asin": "B09R8HBG5N",
+      "linkAria": "Text reads 'AUSGEZEICHNETE INNOVATIONEN'. Four award logos on green leaf background",
+      "note": "Awards Streifen verlinkt zu ASIN B09R8HBG5N statt zu Ueber Uns."
+    }
+  ],
+
+  "excluded": [
+    {
+      "domRowIdx": 8,
+      "top": 4359,
+      "height": 200,
+      "reason": "Share-Footer."
+    }
+  ],
+
+  "uniqueAsinsOnPage": ["B09R4Y8VDW", "B09R8HBG5N", "B09R83KXVW", "B07V1HQQ2V", "B09R4ZYTND", "B09R82G5WT", "B0859KWFM6", "B08NYQQHGF", "B0859L1D55", "B07V1HNJNZ", "B08NYNT1WC", "B09X5R7B6P", "B09R817S3L", "B0CP49VNYT", "B0CP4C7XYM"]
+}

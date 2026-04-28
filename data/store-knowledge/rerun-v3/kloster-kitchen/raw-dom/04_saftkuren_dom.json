@@ -1,0 +1,290 @@
+{
+  "_meta": {
+    "store": "kloster-kitchen",
+    "pageSlug": "04_saftkuren",
+    "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606",
+    "url": "https://www.amazon.de/stores/page/3745E0C5-D470-4291-A735-27CF83DD1606",
+    "extractedAt": "2026-04-23T20:15:00Z",
+    "extractor": "manual_verified_v3.1",
+    "note": "Manuell verifiziert via Chrome MCP javascript_tool. Row 9 ist ein 6-Kachel-Grid mit zwei Reihen zu je 1 grosser Kachel plus 2 kleinen, alles Bio-Saft Monosorten.",
+    "scrollHeight": 6319,
+    "viewport": {"w": 1181, "h": 946},
+    "domRowsTotal": 12,
+    "contentModulesCount": 10
+  },
+
+  "hero": {
+    "section": "hero",
+    "domRowIdx": 0,
+    "top": 99,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c62dc5c8-f812-4754-8a90-674b1f1c66a8._CR0%2C10%2C1280%2C256_SX1500_.jpg",
+    "imageSize": {"w": 1015, "h": 203},
+    "imageAltText": "Text reads \"KLOSTER KITCHEN BETTER THAN GOOD\". Green leaf background. Person holding glass with yellow liquid, viewed from side profile.",
+    "note": "Gleicher Hero-Banner wie Startseite."
+  },
+
+  "navigation": {
+    "section": "nav",
+    "domRowIdx": 0,
+    "pages": [
+      {"label": "Startseite",                  "pageId": "34D4A812-9A68-4602-A6A0-30565D399620"},
+      {"label": "Ingwer Shots",                "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2"},
+      {"label": "Mikronährstoffe",             "pageId": "E337104E-63D3-41B2-8560-D92F482B2790"},
+      {"label": "Saftkuren",                   "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606"},
+      {"label": "SMOOTHIES",                   "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E"},
+      {"label": "Shot Kur",                    "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043"},
+      {"label": "Probiersets / Geschenkidee",  "pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A"},
+      {"label": "Zubehör",                     "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A"},
+      {"label": "Spar-Abo",                    "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E"},
+      {"label": "Über Uns",                    "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF"}
+    ],
+    "note": "10 Menü-Punkte verifiziert."
+  },
+
+  "modules": [
+    {
+      "userModuleId": 1,
+      "domRowIdx": 1,
+      "top": 443,
+      "height": 593,
+      "layoutType": "full_width_video",
+      "tileCount": 1,
+      "video": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/4188f429-095f-4d50-a5bb-3a25b9683bd0.mp4",
+        "size": {"w": 2160, "h": 1080}
+      },
+      "note": "Video-Banner Saftkuren. Vision-Frame in Phase 2."
+    },
+    {
+      "userModuleId": 2,
+      "domRowIdx": 2,
+      "top": 1036,
+      "height": 231,
+      "layoutType": "full_width_asin_link_text_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/ecc613c9-7499-4e79-b6da-31de4f0431e6._CR46%2C155%2C1873%2C351_SX1500_.jpg",
+        "size": {"w": 1181, "h": 221},
+        "alt": ""
+      },
+      "asin": "B0DFMLSLPH",
+      "linkAria": "Text reads \"SAFTKUREN Unsere Saftkuren mit 6 Flaschen/Tag und insgesamt 18 verschiedenen Obst-, Gemüse- und Getreidesorten.\"",
+      "note": "Intro-Banner mit Claim 6 Flaschen/Tag, 18 Sorten. Verlinkt zu 3-Tage-Kur."
+    },
+    {
+      "userModuleId": 3,
+      "domRowIdx": 3,
+      "top": 1267,
+      "height": 583,
+      "layoutType": "full_width_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/6645424e-cc4d-411a-b495-bee75e5cb704._CR156%2C0%2C1600%2C800_.jpg",
+        "size": {"w": 1600, "h": 800},
+        "alt": ""
+      },
+      "note": "Full-Width Creative ohne ASIN-Link und ohne aria-label. Bildinhalt komplett per Vision."
+    },
+    {
+      "userModuleId": 4,
+      "domRowIdx": 4,
+      "top": 1850,
+      "height": 583,
+      "layoutType": "creative_grid_2tiles_same_asin",
+      "tileCount": 2,
+      "tiles": [
+        {
+          "position": "left",
+          "asin": "B0DFMLSLPH",
+          "size": {"w": 568, "h": 568},
+          "creativeImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/28c2531f-acad-4a5c-bedb-733a1e44ac18._CR0%2C0%2C750%2C500_SX750_SY750_.jpg",
+          "creativeImageAria": "Text reads 'GINGERADE' on green bottle. Woman with long dark hair wearing beige sweater drinks from bottle in kitchen setting."
+        },
+        {
+          "position": "right",
+          "asin": "B0DFMLSLPH",
+          "size": {"w": 568, "h": 568},
+          "creativeImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c13767f7-7c9d-457d-b205-860b8aa473cd._CR55%2C0%2C500%2C500_SX750_SY750_.jpg",
+          "creativeImageAria": "Text reads \"KLOSTER KITCHEN 1 2 3 4 5 6\". Six glass bottles of Kloster Kitchen juices arranged with fresh fruits and vegetables. Bottles labeled with numbers 1-6 in different colors."
+        }
+      ],
+      "note": "2 Creatives, beide ASIN-Link B0DFMLSLPH. Rechtes Bild zeigt die 6-Flaschen-Komposition der Saftkur."
+    },
+    {
+      "userModuleId": 5,
+      "domRowIdx": 5,
+      "top": 2433,
+      "height": 313,
+      "layoutType": "full_width_asin_link_text_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/6e408a64-59bd-4598-98cd-1f00f7227728._CR15%2C111%2C1905%2C493_SX1500_.jpg",
+        "size": {"w": 1181, "h": 305},
+        "alt": ""
+      },
+      "asin": "B0DFMLSLPH",
+      "linkAria": "Text reads \"MIT GESCHMACKSVIELFALT\" as title. Paragraph below describes a detox program offering variety of flavors. Mentions 'Schluss', 'Körper', 'Pause', 'Verdauungsarbeit', 'Kloster Kitchen Saftkisten-Kur', '3, 5 oder 7 Tage Fastkur'.",
+      "note": "Claim-Banner 'MIT GESCHMACKSVIELFALT'. Detox-Positionierung mit 3/5/7 Tage Kurauswahl."
+    },
+    {
+      "userModuleId": 6,
+      "domRowIdx": 6,
+      "top": 2746,
+      "height": 292,
+      "layoutType": "asin_grid_3tiles_big+2small",
+      "tileCount": 3,
+      "tiles": [
+        {
+          "position": "left_big",
+          "asin": "B0DFMMBJWC",
+          "size": {"w": 568, "h": 277},
+          "productTitleAria": "Kloster Kitchen Bio Saftkur 7 Tage I 42x 250ml Säfte + 7x 30ml Ingwer Shot I Fastenkur Vegan 6 Geschmacksrichtungen I 592 kcal pro Tag",
+          "productImageSrc": "https://m.media-amazon.com/images/I/71fyxKnH4-L._AC_CR0%2C0%2C0%2C0_SX750_.jpg"
+        },
+        {
+          "position": "middle_small",
+          "asin": "B0DFMLSLPH",
+          "size": {"w": 277, "h": 277},
+          "productTitleAria": "Kloster Kitchen Bio Saftkur 3 Tage I 18x 250ml Säfte + 3x 30ml Ingwer Shot I Fastenkur Vegan 6 Geschmacksrichtungen I 592 kcal pro Tag",
+          "productImageSrc": "https://m.media-amazon.com/images/I/71qBgilyFzL._AC_CR0%2C0%2C0%2C0_SX375_.jpg"
+        },
+        {
+          "position": "right_small",
+          "asin": "B0DFMM4TTX",
+          "size": {"w": 277, "h": 277},
+          "productTitleAria": "Kloster Kitchen Bio Saftkur 5 Tage I 30x 250ml Säfte + 5x 30ml Ingwer Shot I Fastenkur Vegan 6 Geschmacksrichtungen I 592 kcal pro Tag",
+          "productImageSrc": "https://m.media-amazon.com/images/I/71-dXVHnP0L._AC_CR0%2C0%2C0%2C0_SX375_.jpg"
+        }
+      ],
+      "note": "Saftkur-Linie klassisch: 3/5/7 Tage. Grosses Tile 7 Tage links, 3 Tage mitte, 5 Tage rechts."
+    },
+    {
+      "userModuleId": 7,
+      "domRowIdx": 7,
+      "top": 3037,
+      "height": 385,
+      "layoutType": "asin_grid_3tiles_big+2small",
+      "tileCount": 3,
+      "tiles": [
+        {
+          "position": "left_big",
+          "asin": "B0G81CTV55",
+          "size": {"w": 568, "h": 370},
+          "productTitleAria": "Kloster Kitchen Bio Saftkur 3 Tage + Bio Tee I 18x 250ml Säfte + 3x 30ml Ingwer Shot 1x50g Tee",
+          "productImageSrc": "https://m.media-amazon.com/images/I/71ShHuINk2L._AC_CR0%2C0%2C0%2C0_SX750_.jpg"
+        },
+        {
+          "position": "middle_small",
+          "asin": "B0G82B62F7",
+          "size": {"w": 277, "h": 370},
+          "productTitleAria": "Kloster Kitchen Bio Saftkur 5 Tage + Bio Tee I 30x 250ml Säfte + 5x 30ml Ingwer Shot + 1x 50g Tee",
+          "productImageSrc": "https://m.media-amazon.com/images/I/71BhpqooedL._AC_CR0%2C0%2C0%2C0_SX375_.jpg"
+        },
+        {
+          "position": "right_small",
+          "asin": "B0G8GV17SK",
+          "size": {"w": 277, "h": 370},
+          "productTitleAria": "Kloster Kitchen Bio Saftkur 7 Tage + Bio Tee I 42x 250ml Säfte + 7x 30ml Ingwer Shot + 1x 50g Tee",
+          "productImageSrc": "https://m.media-amazon.com/images/I/71JYS7LflwL._AC_CR0%2C0%2C0%2C0_SX375_.jpg"
+        }
+      ],
+      "note": "Saftkur-Linie Plus Bio Tee: 3/5/7 Tage. Grosses Tile 3 Tage links (Hero-Produkt)."
+    },
+    {
+      "userModuleId": 8,
+      "domRowIdx": 8,
+      "top": 3422,
+      "height": 591,
+      "layoutType": "full_width_lifestyle_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/432b1402-a545-4731-a625-ef4123824ff1._CR0%2C0%2C1577%2C789_SX1500_.jpg",
+        "size": {"w": 1181, "h": 590},
+        "alt": ""
+      },
+      "asin": "B0DFMLSLPH",
+      "linkAria": "Two people sitting on a couch, reading a magazine together. Woman in blue cardigan holds magazine, man in white sweater points at page. Potted plants visible in background.",
+      "note": "Grosses Lifestyle-Creative, kein Bildtext im aria-label, nur Szene. Verlinkt zu 3-Tage-Kur."
+    },
+    {
+      "userModuleId": 9,
+      "domRowIdx": 9,
+      "top": 4013,
+      "height": 583,
+      "layoutType": "asin_grid_6tiles_2rows_big+2small",
+      "tileCount": 6,
+      "tiles": [
+        {
+          "position": "row1_left_big",
+          "asin": "B0GGSYCJHQ",
+          "size": {"w": 568, "h": 277},
+          "productTitleAria": "Kloster Kitchen Bio Hafer Saft | 12x 250 ml | Vegan | 150 kcal pro Saft | Vorratspack",
+          "productImageSrc": "https://m.media-amazon.com/images/I/61AaY6pLIZL._AC_CR0%2C0%2C0%2C0_SX750_.jpg"
+        },
+        {
+          "position": "row1_middle_small",
+          "asin": "B0GGSGQTK8",
+          "size": {"w": 277, "h": 277},
+          "productTitleAria": "Kloster Kitchen Bio Erdbeer Saft | 12x 250 ml | Vegan | Fruchtig & frisch | 82,5 kcal pro Saft",
+          "productImageSrc": "https://m.media-amazon.com/images/I/61cv9TY-sJL._AC_CR0%2C0%2C0%2C0_SX375_.jpg"
+        },
+        {
+          "position": "row1_right_small",
+          "asin": "B0GGRZL2L9",
+          "size": {"w": 277, "h": 277},
+          "productTitleAria": "Kloster Kitchen Bio Gurken Saft | 12x 250 ml | Vegan | Erfrischender Gemüsesaft | 75 kcal pro Saft",
+          "productImageSrc": "https://m.media-amazon.com/images/I/6161XtDs2qL._AC_CR0%2C0%2C0%2C0_SX375_.jpg"
+        },
+        {
+          "position": "row2_left_big",
+          "asin": "B0GGRG2M4Z",
+          "size": {"w": 568, "h": 277},
+          "productTitleAria": "Kloster Kitchen Bio Rote Beete Saft | 12x 250 ml | Vegan | Kräftig & natürlich | 87,5 kcal pro Saft",
+          "productImageSrc": "https://m.media-amazon.com/images/I/61PId1K4beL._AC_CR0%2C0%2C0%2C0_SX750_.jpg"
+        },
+        {
+          "position": "row2_middle_small",
+          "asin": "B0GGJ22LSP",
+          "size": {"w": 277, "h": 277},
+          "productTitleAria": "Kloster Kitchen Bio Ananas Saft | 12x 250 ml Fruchtig-exotisch | Vegan | 87,5 kcal pro Saft",
+          "productImageSrc": "https://m.media-amazon.com/images/I/61msBy8K7EL._AC_CR0%2C0%2C0%2C0_SX375_.jpg"
+        },
+        {
+          "position": "row2_right_small",
+          "asin": "B0GGHW2QKX",
+          "size": {"w": 277, "h": 277},
+          "productTitleAria": "Kloster Kitchen Bio Karotten Saft | 12x 250 ml Gemüsesaft | Vegan | 102,5 kcal pro Saft",
+          "productImageSrc": "https://m.media-amazon.com/images/I/618i8yPVupL._AC_CR0%2C0%2C0%2C0_SX375_.jpg"
+        }
+      ],
+      "note": "Bio-Monosaft Sortiment: Hafer, Erdbeer, Gurken, Rote Beete, Ananas, Karotten. 2 Reihen zu je 1 gross + 2 klein."
+    },
+    {
+      "userModuleId": 10,
+      "domRowIdx": 10,
+      "top": 4596,
+      "height": 262,
+      "layoutType": "full_width_awards_badges",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2eb471fe-f331-4cbc-89cd-8896df9c0d33._CR0%2C0%2C1280%2C275_SX1500_.jpg",
+        "size": {"w": 1015, "h": 217},
+        "alt": ""
+      },
+      "linkedPageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF",
+      "linkAria": "Text reads 'AUSGEZEICHNETE INNOVATIONEN'. Four award logos on green leaf background: 'german design award winner', 'german brand award winner', 'FAUUNJI FOUNDATION FINALIST', and 'GERMAN INNOVATION AW",
+      "note": "Awards Streifen, Link zu Ueber Uns."
+    }
+  ],
+
+  "excluded": [
+    {
+      "domRowIdx": 11,
+      "top": 4858,
+      "height": 200,
+      "reason": "Share-Footer."
+    }
+  ],
+
+  "uniqueAsinsOnPage": ["B0DFMLSLPH", "B0DFMMBJWC", "B0DFMM4TTX", "B0G81CTV55", "B0G82B62F7", "B0G8GV17SK", "B0GGSYCJHQ", "B0GGSGQTK8", "B0GGRZL2L9", "B0GGRG2M4Z", "B0GGJ22LSP", "B0GGHW2QKX"]
+}

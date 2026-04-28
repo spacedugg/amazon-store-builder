@@ -1,0 +1,201 @@
+{
+  "_meta": {
+    "store": "kloster-kitchen",
+    "pageSlug": "03_mikronaehrstoffe",
+    "pageId": "E337104E-63D3-41B2-8560-D92F482B2790",
+    "url": "https://www.amazon.de/stores/page/E337104E-63D3-41B2-8560-D92F482B2790",
+    "extractedAt": "2026-04-23T20:10:00Z",
+    "extractor": "manual_verified_v3.1",
+    "note": "Manuell verifiziert via Chrome MCP javascript_tool. Position-Matching zwischen asinLinks und imgs via getBoundingClientRect. Logo-Duplikate in Row 0 sind Placeholder-Design und werden ignoriert.",
+    "scrollHeight": 4934,
+    "viewport": {"w": 1181, "h": 946},
+    "domRowsTotal": 10,
+    "contentModulesCount": 8
+  },
+
+  "hero": {
+    "section": "hero",
+    "domRowIdx": 0,
+    "top": 99,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c62dc5c8-f812-4754-8a90-674b1f1c66a8._CR0%2C10%2C1280%2C256_SX1500_.jpg",
+    "imageSize": {"w": 1015, "h": 203},
+    "imageAltText": "Text reads \"KLOSTER KITCHEN BETTER THAN GOOD\". Green leaf background. Person holding glass with yellow liquid, viewed from side profile.",
+    "note": "Gleicher Hero-Banner wie Startseite. Alt-Text identisch."
+  },
+
+  "navigation": {
+    "section": "nav",
+    "domRowIdx": 0,
+    "pages": [
+      {"label": "Startseite",                  "pageId": "34D4A812-9A68-4602-A6A0-30565D399620"},
+      {"label": "Ingwer Shots",                "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2"},
+      {"label": "Mikronährstoffe",             "pageId": "E337104E-63D3-41B2-8560-D92F482B2790"},
+      {"label": "Saftkuren",                   "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606"},
+      {"label": "SMOOTHIES",                   "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E"},
+      {"label": "Shot Kur",                    "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043"},
+      {"label": "Probiersets / Geschenkidee",  "pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A"},
+      {"label": "Zubehör",                     "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A"},
+      {"label": "Spar-Abo",                    "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E"},
+      {"label": "Über Uns",                    "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF"}
+    ],
+    "note": "10 Menü-Punkte komplett. Reihenfolge nach DOM."
+  },
+
+  "modules": [
+    {
+      "userModuleId": 1,
+      "domRowIdx": 1,
+      "top": 443,
+      "height": 529,
+      "layoutType": "full_width_video",
+      "tileCount": 1,
+      "video": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/a78b468a-122b-458e-b248-60295a0f998e.mp4",
+        "size": {"w": 1800, "h": 800},
+        "poster": ""
+      },
+      "note": "Video-Banner Mikronährstoffe. Video-Content per Vision-Frame in Phase 2 zu extrahieren."
+    },
+    {
+      "userModuleId": 2,
+      "domRowIdx": 2,
+      "top": 972,
+      "height": 214,
+      "layoutType": "full_width_asin_link_text_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/f445835a-5d36-42b0-959f-e8a2da33b07c._CR24%2C153%2C1896%2C327_SX1500_.jpg",
+        "size": {"w": 1181, "h": 203},
+        "alt": ""
+      },
+      "asin": "B0FG36751H",
+      "linkAria": "Text reads \"VITAL FLOW\" and \"Deine tägliche Nährstoffbombe mit Vitaminen & Mineralstoffen\".",
+      "note": "Text-Banner mit CTA zu ASIN B0FG36751H (500ml Vital Flow). aria-label liefert Bildtext vorab."
+    },
+    {
+      "userModuleId": 3,
+      "domRowIdx": 3,
+      "top": 1186,
+      "height": 292,
+      "layoutType": "asin_grid_2tiles",
+      "tileCount": 2,
+      "tiles": [
+        {
+          "position": "left",
+          "asin": "B0FG36751H",
+          "size": {"w": 568, "h": 277},
+          "productTitleAria": "Kloster Kitchen Mikronährstoffkonzentrat Vital Flow | 500 ml - 31 Tage - 74 Zutaten | Obst, Gemüse & Kräuter - Vitamine, Mineralstoffe & Spurenelemente | Mikronährstoffe Saft Flüssig Vegan",
+          "productImageSrc": "https://m.media-amazon.com/images/I/61yJxQEpDNL._AC_CR0%2C0%2C0%2C0_SX750_.jpg"
+        },
+        {
+          "position": "right",
+          "asin": "B0FG874B5H",
+          "size": {"w": 568, "h": 277},
+          "productTitleAria": "Kloster Kitchen Mikronährstoffkonzentrat Vital Flow | 3x 500 ml - 3 Monate - 74 Zutaten | Obst, Gemüse & Kräuter - Vitamine, Mineralstoffe & Spurenelemente | Mikronährstoffe Saft Flüssig Vegan",
+          "productImageSrc": "https://m.media-amazon.com/images/I/71OVYK+wpxL._AC_CR0%2C0%2C0%2C0_SX750_.jpg"
+        }
+      ],
+      "note": "2er Produkt-Grid, 500ml (31 Tage) links und 3x500ml (3 Monate) rechts. Prime-Badge als 3. Bild im DOM ignoriert."
+    },
+    {
+      "userModuleId": 4,
+      "domRowIdx": 4,
+      "top": 1477,
+      "height": 292,
+      "layoutType": "creative_grid_2tiles_same_asin",
+      "tileCount": 2,
+      "tiles": [
+        {
+          "position": "left",
+          "asin": "B0FG36751H",
+          "size": {"w": 568, "h": 277},
+          "creativeImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/919b1076-49c4-4a31-a64e-6ff88cd1a171._CR0%2C41%2C750%2C375_SX750_SY375_.jpg",
+          "creativeImageAria": "Text reads \"Image 1\". Woman pouring dark liquid from bottle into glass on table with fruit, flowers, and dishes. Bottle label partially visible, dark with yellow text."
+        },
+        {
+          "position": "right",
+          "asin": "B0FG36751H",
+          "size": {"w": 568, "h": 277},
+          "creativeImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/05104476-698d-407a-b2fe-58e29b362e71._CR0%2C10%2C750%2C375_SX750_SY375_.jpg",
+          "creativeImageAria": "Woman with long dark hair drinking from a stemless wine glass containing red liquid. She's wearing a light-colored top. The image is framed by a circular shape, possibly a mirror."
+        }
+      ],
+      "note": "2 Lifestyle-Creatives nebeneinander, beide verlinken zum selben Hauptprodukt B0FG36751H. Nur Bildbeschreibungen, kein Produkttitel."
+    },
+    {
+      "userModuleId": 5,
+      "domRowIdx": 5,
+      "top": 1769,
+      "height": 367,
+      "layoutType": "full_width_asin_link_text_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/41a108ee-6610-4707-b8e1-64a9c95bb902._CR0%2C67%2C1917%2C585_SX1500_.jpg",
+        "size": {"w": 1181, "h": 360},
+        "alt": ""
+      },
+      "asin": "B0FG36751H",
+      "linkAria": "Text reads \"PFLANZLICH GEDACHT. WISSENSCHAFTLICH GEMACHT.\" and \"Bereit für alles, was dein Tag bringt? VITAL FLOW - Dein Mikronährstoffkonzentrat mit über 70 pflanzliche & ätherische Zutaten, kombinie",
+      "note": "Brand-Claim-Banner. aria-label enthält Hauptclaim 'PFLANZLICH GEDACHT. WISSENSCHAFTLICH GEMACHT.' plus Teaser."
+    },
+    {
+      "userModuleId": 6,
+      "domRowIdx": 6,
+      "top": 2135,
+      "height": 591,
+      "layoutType": "full_width_lifestyle_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e5720fd0-5a72-4519-b7f8-d0c0d150b84c._CR0%2C0%2C1920%2C960_SX1500_.jpg",
+        "size": {"w": 1181, "h": 590},
+        "alt": ""
+      },
+      "asin": "B0FG36751H",
+      "linkAria": "Close-up of a glass of red wine on a wooden surface. In the background, a person's legs are visible, along with a partial view of a yellow fruit, possibly a lemon or pineapple.",
+      "note": "Grosses Lifestyle-Bild. Kein Bildtext, nur Szenen-Deskriptor im aria-label. Verlinkt zu B0FG36751H."
+    },
+    {
+      "userModuleId": 7,
+      "domRowIdx": 7,
+      "top": 2726,
+      "height": 494,
+      "layoutType": "full_width_asin_link_image_with_cta",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/0ac55cc4-5c40-44b0-9591-f231bc99de18._CR0%2C0%2C1920%2C800_SX1500_.jpg",
+        "size": {"w": 1181, "h": 491},
+        "alt": ""
+      },
+      "asin": "B0FG36751H",
+      "linkAria": "Dieses Produkt einkaufen",
+      "note": "Produkt-Kauf-Banner mit CTA 'Dieses Produkt einkaufen'. Bildinhalt nur per Vision erfassbar."
+    },
+    {
+      "userModuleId": 8,
+      "domRowIdx": 8,
+      "top": 3220,
+      "height": 252,
+      "layoutType": "full_width_awards_badges",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2eb471fe-f331-4cbc-89cd-8896df9c0d33._CR0%2C11%2C1280%2C264_SX1500_.jpg",
+        "size": {"w": 1015, "h": 209},
+        "alt": ""
+      },
+      "linkedPageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF",
+      "linkAria": "Text reads 'AUSGEZEICHNETE INNOVATIONEN'. Four award logos on green leaf background: 'german design award winner', 'german brand award winner', 'FAUUNJI FOUNDATION FINALIST'",
+      "note": "Auszeichnungs-Streifen, gleiches Bild wie auf Startseite und Ingwer Shots. Hier verlinkt zu Ueber Uns. 4 Awards sichtbar."
+    }
+  ],
+
+  "excluded": [
+    {
+      "domRowIdx": 9,
+      "top": 3473,
+      "height": 200,
+      "reason": "Share-Footer (Teilen Sie diese Seite mit Ihren Freunden). Nicht brand-relevant."
+    }
+  ],
+
+  "uniqueAsinsOnPage": ["B0FG36751H", "B0FG874B5H"]
+}

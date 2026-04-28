@@ -1,0 +1,116 @@
+{
+  "_meta": {
+    "store": "kloster-kitchen",
+    "pageSlug": "08_zubehoer",
+    "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A",
+    "url": "https://www.amazon.de/stores/page/95330F7A-5A8A-44E2-B872-B761E4DEF56A",
+    "extractedAt": "2026-04-23T20:35:00Z",
+    "extractor": "manual_verified_v3.1",
+    "note": "Schlanke Seite mit nur einem Produkt (Shot Gläser Set). 4 Content-Module.",
+    "scrollHeight": 3713,
+    "viewport": {"w": 1181, "h": 946},
+    "domRowsTotal": 6,
+    "contentModulesCount": 4
+  },
+
+  "hero": {
+    "section": "hero",
+    "domRowIdx": 0,
+    "top": 99,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c62dc5c8-f812-4754-8a90-674b1f1c66a8._CR0%2C10%2C1280%2C256_SX1500_.jpg",
+    "imageSize": {"w": 1015, "h": 203},
+    "imageAltText": "Text reads \"KLOSTER KITCHEN BETTER THAN GOOD\". Green leaf background."
+  },
+
+  "navigation": {
+    "section": "nav",
+    "domRowIdx": 0,
+    "pages": [
+      {"label": "Startseite",                  "pageId": "34D4A812-9A68-4602-A6A0-30565D399620"},
+      {"label": "Ingwer Shots",                "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2"},
+      {"label": "Mikronährstoffe",             "pageId": "E337104E-63D3-41B2-8560-D92F482B2790"},
+      {"label": "Saftkuren",                   "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606"},
+      {"label": "SMOOTHIES",                   "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E"},
+      {"label": "Shot Kur",                    "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043"},
+      {"label": "Probiersets / Geschenkidee",  "pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A"},
+      {"label": "Zubehör",                     "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A"},
+      {"label": "Spar-Abo",                    "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E"},
+      {"label": "Über Uns",                    "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF"}
+    ]
+  },
+
+  "modules": [
+    {
+      "userModuleId": 1,
+      "domRowIdx": 1,
+      "top": 443,
+      "height": 593,
+      "layoutType": "full_width_video",
+      "tileCount": 1,
+      "video": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/cd9e4196-43c5-4d7a-b64a-e9c7c6f8f77a.mp4",
+        "size": {"w": 2160, "h": 1080}
+      },
+      "note": "Video-Banner Zubehör. Vision-Frame in Phase 2."
+    },
+    {
+      "userModuleId": 2,
+      "domRowIdx": 2,
+      "top": 1036,
+      "height": 371,
+      "layoutType": "full_width_asin_link_text_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/37774dbe-825e-49f6-93c7-6f48dc6f15d3._CR0%2C0%2C1917%2C593_SX1500_.png",
+        "size": {"w": 1181, "h": 365},
+        "alt": ""
+      },
+      "asin": "B07VTN5R3K",
+      "linkAria": "Accessories display for drink-related products. German text 'ZUBEHÖR' (Accessories) visible. Mentions companion for Powertrinken and original Master-Blaster Shot glasses.",
+      "note": "Intro-Banner Zubehör. Begriffe 'Powertrinken' und 'Master-Blaster Shot glasses' im aria-label."
+    },
+    {
+      "userModuleId": 3,
+      "domRowIdx": 3,
+      "top": 1407,
+      "height": 583,
+      "layoutType": "asin_product_showcase",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/I/61OsP-GVM9L._AC_CR0%2C0%2C0%2C0_SX600_.jpg",
+        "size": {"w": 472, "h": 591},
+        "alt": ""
+      },
+      "asin": "B07VTN5R3K",
+      "linkAria": "Kloster Kitchen 4er Pack Shot Gläser Set 3cl - 6cl",
+      "note": "Produkt-Showcase 4er Pack Shot Gläser Set. Einziges Produkt im Zubehör-Sortiment."
+    },
+    {
+      "userModuleId": 4,
+      "domRowIdx": 4,
+      "top": 1990,
+      "height": 262,
+      "layoutType": "full_width_awards_badges",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2eb471fe-f331-4cbc-89cd-8896df9c0d33._CR0%2C0%2C1280%2C275_SX1500_.jpg",
+        "size": {"w": 1015, "h": 217},
+        "alt": ""
+      },
+      "asin": "B07VTN5R3K",
+      "linkAria": "Text reads 'AUSGEZEICHNETE INNOVATIONEN'. Four award logos on green leaf background: 'german design award winner', 'german brand award winner', 'FAUUNJI FOUNDATION FINALIST', and 'GERMAN INNOVATION AWARD WINNER'.",
+      "note": "Awards Streifen verlinkt zu ASIN B07VTN5R3K."
+    }
+  ],
+
+  "excluded": [
+    {
+      "domRowIdx": 5,
+      "top": 2252,
+      "height": 200,
+      "reason": "Share-Footer."
+    }
+  ],
+
+  "uniqueAsinsOnPage": ["B07VTN5R3K"]
+}

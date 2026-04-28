@@ -57,7 +57,7 @@ export default function App() {
   var undoStackRef = useRef([]);
   var redoStackRef = useRef([]);
   var skipHistoryRef = useRef(false);
-  var MAX_UNDO = 10;
+  var MAX_UNDO = 20;
 
   var pushUndo = useCallback(function(prevStore) {
     if (!prevStore || !prevStore.pages || prevStore.pages.length === 0) return;
@@ -289,6 +289,31 @@ export default function App() {
                 return t;
               });
               return Object.assign({}, sec, { layoutId: layoutId, tiles: tiles });
+            }),
+          });
+        }),
+      });
+    });
+  };
+
+  // Bulk-apply an image category to every image-type tile in a section. This
+  // is a one-shot write: tiles can be edited individually afterwards without
+  // re-syncing — it does NOT establish any binding between section and tile.
+  var applySectionImageCategory = function(sectionId, category) {
+    var IMG_TYPES = { image: 1, shoppable_image: 1, image_text: 1 };
+    setStoreWithUndo(function(s) {
+      return Object.assign({}, s, {
+        pages: s.pages.map(function(pg) {
+          if (pg.id !== page.id) return pg;
+          return Object.assign({}, pg, {
+            sections: pg.sections.map(function(sec) {
+              if (sec.id !== sectionId) return sec;
+              return Object.assign({}, sec, {
+                tiles: sec.tiles.map(function(t) {
+                  if (!IMG_TYPES[t.type]) return t;
+                  return Object.assign({}, t, { imageCategory: category });
+                }),
+              });
             }),
           });
         }),
@@ -746,6 +771,7 @@ export default function App() {
           onPasteSection={clipboardSection ? pasteSection : null}
           onMoveSection={moveSection}
           onChangeLayout={changeLayout}
+          onApplySectionImageCategory={applySectionImageCategory}
           viewMode={viewMode}
           onHeaderBannerUpload={handleHeaderBannerUpload}
           headerBannerColor={store.headerBannerColor || ''}
@@ -758,6 +784,7 @@ export default function App() {
         />
 
         <PropertiesPanel
+          key={sel ? (sel.sid + ':' + (sel.ti != null ? sel.ti : '')) : 'none'}
           tile={selTile}
           onChange={updateTile}
           products={store.products}
