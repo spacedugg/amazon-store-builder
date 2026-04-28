@@ -1,12 +1,14 @@
 import { useState, useCallback, useRef } from 'react';
 import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, findLayout, LAYOUT_TILE_DIMS } from './constants';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink } from './storage';
+import { importBriefingToStore } from './briefingImport';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
 import Topbar from './components/Topbar';
 import PageList from './components/PageList';
 import Canvas from './components/Canvas';
 import PropertiesPanel from './components/PropertiesPanel';
 import AsinPanel from './components/AsinPanel';
+import NewStoreModal from './components/NewStoreModal';
 import PriceCalculator from './components/PriceCalculator';
 import ExportModal from './components/ExportModal';
 import BriefingView from './components/BriefingView';
@@ -37,6 +39,7 @@ export default function App() {
   var [clipboardSection, setClipboardSection] = useState(null);
   var [showAsins, setShowAsins] = useState(false);
   var [showPrice, setShowPrice] = useState(false);
+  var [showNewStoreModal, setShowNewStoreModal] = useState(false);
   var [savedStores, setSavedStores] = useState([]);
   var [warnings, setWarnings] = useState([]);
   var [viewMode, setViewMode] = useState('desktop');
@@ -421,9 +424,15 @@ export default function App() {
     }
   };
 
-  // ─── NEW STORE (reset) ───
+  // ─── NEW STORE ───
+  // Klick auf "New Store" öffnet Modal mit Briefing JSON Import.
+  // Modal bietet außerdem die Option, einen leeren Store zu starten.
   var handleNewStore = function() {
-    if (store.pages.length > 0 && !confirm('Start a new store? Unsaved changes will be lost.')) return;
+    if (store.pages.length > 0 && !confirm('Neuen Store anlegen? Ungespeicherte Änderungen gehen verloren.')) return;
+    setShowNewStoreModal(true);
+  };
+
+  var handleCreateEmpty = function() {
     var firstPageId = uid();
     var initialStore = Object.assign({}, EMPTY_STORE, {
       pages: [{
@@ -442,6 +451,23 @@ export default function App() {
     setRequestedAsins([]);
     setStoreId(null);
     setShareToken(null);
+    setShowNewStoreModal(false);
+  };
+
+  var handleImportBriefing = function(briefingData) {
+    try {
+      var imported = importBriefingToStore(briefingData);
+      setStore(imported);
+      setCurPage(imported.pages[0] ? imported.pages[0].id : '');
+      setSel(null);
+      setWarnings([]);
+      setRequestedAsins(imported.asins.map(function(a) { return a.asin; }));
+      setStoreId(null);
+      setShareToken(null);
+      setShowNewStoreModal(false);
+    } catch (e) {
+      alert('Import fehlgeschlagen, ' + e.message);
+    }
   };
 
   // ─── VIEW MODE ───
@@ -750,6 +776,14 @@ export default function App() {
             return <span key={i} className={'warning-item ' + w.level}>{w.message}</span>;
           })}
         </div>
+      )}
+
+      {showNewStoreModal && (
+        <NewStoreModal
+          onClose={function() { setShowNewStoreModal(false); }}
+          onImport={handleImportBriefing}
+          onCreateEmpty={handleCreateEmpty}
+        />
       )}
 
       {showAsins && (
