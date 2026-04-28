@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { LAYOUTS, LAYOUT_TILE_DIMS, findLayout } from '../constants';
+import { LAYOUTS, LAYOUT_TILE_DIMS, IMAGE_CATEGORIES, findLayout } from '../constants';
 import { t } from '../i18n';
 import TileView from './TileView';
 
@@ -392,16 +392,48 @@ function LayoutPicker({ value, onChange, isMobile }) {
   );
 }
 
-export default function SectionView({ section, idx, totalSections, sel, onSelect, onDelete, onDuplicate, onCopy, onMoveUp, onMoveDown, onChangeLayout, viewMode, products, uiLang }) {
+export default function SectionView({ section, idx, totalSections, sel, onSelect, onDelete, onDuplicate, onCopy, onMoveUp, onMoveDown, onChangeLayout, onApplyImageCategory, viewMode, products, uiLang }) {
   var layout = findLayout(section.layoutId);
   var isMobile = viewMode === 'mobile';
   var config = getGridConfig(layout, isMobile);
+
+  // Bulk image-category dropdown: only meaningful when the section contains
+  // image-type tiles. Shows the common category if all image-type tiles share
+  // one, otherwise an empty value (mixed). Picking a category writes it to
+  // every image-type tile once — individual edits afterwards stay independent.
+  var IMG_TYPES = { image: 1, shoppable_image: 1, image_text: 1 };
+  var imageTiles = (section.tiles || []).filter(function(t) { return IMG_TYPES[t.type]; });
+  var commonCategory = '';
+  if (imageTiles.length > 0) {
+    var first = imageTiles[0].imageCategory || '';
+    var allSame = imageTiles.every(function(t) { return (t.imageCategory || '') === first; });
+    commonCategory = allSame ? first : '__mixed__';
+  }
 
   return (
     <div className="section-container">
       <div className="section-header">
         <span className="section-label">{t('canvas.section', uiLang)} {idx + 1}</span>
         <LayoutPicker value={section.layoutId} onChange={onChangeLayout} isMobile={isMobile} />
+        {onApplyImageCategory && imageTiles.length > 1 && (
+          <label
+            className="section-bulk-cat"
+            title={'Bildkategorie auf alle ' + imageTiles.length + ' Bildkacheln dieser Sektion anwenden. Einzelne Kacheln können danach unabhängig bearbeitet werden.'}
+            onClick={function(e) { e.stopPropagation(); }}
+          >
+            <span style={{ fontSize: 10, color: '#64748b', marginRight: 4 }}>Bilder:</span>
+            <select
+              value={commonCategory === '__mixed__' ? '' : commonCategory}
+              onChange={function(e) { onApplyImageCategory(e.target.value); }}
+              style={{ fontSize: 10, padding: '2px 4px', border: '1px solid #e2e8f0', borderRadius: 3, background: commonCategory === '__mixed__' ? '#fef3c7' : '#fff', maxWidth: 130 }}
+            >
+              <option value="">{commonCategory === '__mixed__' ? '— gemischt —' : '— Kategorie —'}</option>
+              {Object.keys(IMAGE_CATEGORIES).map(function(catId) {
+                return <option key={catId} value={catId}>{IMAGE_CATEGORIES[catId].name}</option>;
+              })}
+            </select>
+          </label>
+        )}
         <div className="section-actions">
           {onMoveUp && <button className="btn-icon-sm" onClick={onMoveUp} title={t('section.moveUp', uiLang)}>&uarr;</button>}
           {onMoveDown && <button className="btn-icon-sm" onClick={onMoveDown} title={t('section.moveDown', uiLang)}>&darr;</button>}

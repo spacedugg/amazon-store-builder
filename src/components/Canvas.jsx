@@ -2,7 +2,7 @@ import { useState } from 'react';
 import SectionView from './SectionView';
 import { t } from '../i18n';
 
-export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onChangeLayout, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate, onGenerateWireframes, onDeleteWireframes, onStopWireframes, wfGenerating, wfProgress }) {
+export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onChangeLayout, onApplySectionImageCategory, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate, onGenerateWireframes, onDeleteWireframes, onStopWireframes, wfGenerating, wfProgress }) {
   var [hoveredNav, setHoveredNav] = useState(null);
   var [showHeroPicker, setShowHeroPicker] = useState(false);
 
@@ -176,6 +176,7 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
               onMoveUp={si > 0 ? function() { onMoveSection(sec.id, si - 1); } : null}
               onMoveDown={si < page.sections.length - 1 ? function() { onMoveSection(sec.id, si + 1); } : null}
               onChangeLayout={function(layoutId) { onChangeLayout(sec.id, layoutId); }}
+              onApplyImageCategory={onApplySectionImageCategory ? function(cat) { onApplySectionImageCategory(sec.id, cat); } : null}
               viewMode={viewMode}
               products={products}
               uiLang={uiLang}
