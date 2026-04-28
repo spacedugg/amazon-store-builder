@@ -138,9 +138,13 @@ export function uid() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
 }
 
+export function emptyTextOverlay() {
+  return { heading: '', subheading: '', body: '', bullets: [], cta: '' };
+}
+
 export function emptyTile() {
   return {
-    type: 'image', brief: '', textOverlay: '', ctaText: '',
+    type: 'image', brief: '', textOverlay: emptyTextOverlay(),
     dimensions: { w: 3000, h: 1200 }, mobileDimensions: { w: 1680, h: 1200 },
     asins: [], linkAsin: '', linkUrl: '',
     hotspots: [], // Array of { x: 0-100, y: 0-100, asin: 'B0...' } — max 5, for shoppable_image tiles
@@ -217,7 +221,7 @@ export function emptyTileForLayout(layoutId, tileIndex) {
     mobileH = d.h;
   }
   return {
-    type: 'image', brief: '', textOverlay: '', ctaText: '',
+    type: 'image', brief: '', textOverlay: emptyTextOverlay(),
     dimensions: { w: d.w, h: d.h },
     mobileDimensions: { w: mobileW, h: mobileH },
     asins: [], linkAsin: '', linkUrl: '',
@@ -752,14 +756,31 @@ export function validateStore(store) {
   store.pages.forEach(function(pg) {
     (pg.sections || []).forEach(function(sec, si) {
       sec.tiles.forEach(function(t, ti) {
+        var loc = 'Page "' + pg.name + '" S' + (si + 1) + ' T' + (ti + 1);
         if (TILE_TYPES.indexOf(t.type) < 0) {
-          warnings.push({ level: 'error', message: 'Page "' + pg.name + '" S' + (si + 1) + ' T' + (ti + 1) + ': invalid type "' + t.type + '"' });
+          warnings.push({ level: 'error', message: loc + ': invalid type "' + t.type + '"' });
         }
         if ((t.type === 'image' || t.type === 'shoppable_image') && !t.brief) {
-          warnings.push({ level: 'info', message: 'Page "' + pg.name + '" S' + (si + 1) + ' T' + (ti + 1) + ': image tile has no designer brief' });
+          warnings.push({ level: 'info', message: loc + ': image tile has no designer brief' });
         }
         if (t.type === 'product_grid' && (!t.asins || t.asins.length === 0)) {
-          warnings.push({ level: 'warning', message: 'Page "' + pg.name + '" S' + (si + 1) + ' T' + (ti + 1) + ': product grid has no ASINs' });
+          warnings.push({ level: 'warning', message: loc + ': product grid has no ASINs' });
+        }
+        if (t.textOverlay && typeof t.textOverlay === 'string') {
+          warnings.push({ level: 'error', message: loc + ': textOverlay must be an object with heading, subheading, body, bullets, cta' });
+        }
+        var ov = t.textOverlay || {};
+        if (ov.body && ov.body.length > 350) {
+          warnings.push({ level: 'warning', message: loc + ': body has ' + ov.body.length + ' chars, max 350' });
+        }
+        if (ov.heading) {
+          var greenMatches = (ov.heading.match(/\*\*[^*]+\*\*/g) || []);
+          if (greenMatches.length > 1) {
+            warnings.push({ level: 'warning', message: loc + ': heading has ' + greenMatches.length + ' green highlight markers, max 1 allowed' });
+          }
+        }
+        if (t.type === 'shoppable_image' && t.hotspots && t.hotspots.length > 5) {
+          warnings.push({ level: 'error', message: loc + ': shoppable_image has ' + t.hotspots.length + ' hotspots, max 5 allowed' });
         }
       });
     });
