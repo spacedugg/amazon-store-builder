@@ -1,0 +1,169 @@
+{
+  "_meta": {
+    "store": "kloster-kitchen",
+    "pageSlug": "06_shot-kur",
+    "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043",
+    "url": "https://www.amazon.de/stores/page/998F3BE4-E37F-47C7-8539-A79DE27AF043",
+    "extractedAt": "2026-04-23T20:25:00Z",
+    "extractor": "manual_verified_v3.1",
+    "note": "Row 5 ist ein Amazon Product-Card-Widget mit Produkt-Carousel. 30 img Nodes sind 7 unique Thumbnails des Carousels, 3x repliziert. 3 ASIN-Links sind Produktbild + Review-Link + Kauf-Button. Awards-Bild in Row 6 ist hier ausnahmsweise als ASIN-Link zum Hauptprodukt B09X5R7B6P statt zu Ueber Uns verlinkt.",
+    "scrollHeight": 4522,
+    "viewport": {"w": 1181, "h": 946},
+    "domRowsTotal": 8,
+    "contentModulesCount": 6
+  },
+
+  "hero": {
+    "section": "hero",
+    "domRowIdx": 0,
+    "top": 99,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c62dc5c8-f812-4754-8a90-674b1f1c66a8._CR0%2C10%2C1280%2C256_SX1500_.jpg",
+    "imageSize": {"w": 1015, "h": 203},
+    "imageAltText": "Text reads \"KLOSTER KITCHEN BETTER THAN GOOD\". Green leaf background."
+  },
+
+  "navigation": {
+    "section": "nav",
+    "domRowIdx": 0,
+    "pages": [
+      {"label": "Startseite",                  "pageId": "34D4A812-9A68-4602-A6A0-30565D399620"},
+      {"label": "Ingwer Shots",                "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2"},
+      {"label": "Mikronährstoffe",             "pageId": "E337104E-63D3-41B2-8560-D92F482B2790"},
+      {"label": "Saftkuren",                   "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606"},
+      {"label": "SMOOTHIES",                   "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E"},
+      {"label": "Shot Kur",                    "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043"},
+      {"label": "Probiersets / Geschenkidee",  "pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A"},
+      {"label": "Zubehör",                     "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A"},
+      {"label": "Spar-Abo",                    "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E"},
+      {"label": "Über Uns",                    "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF"}
+    ]
+  },
+
+  "modules": [
+    {
+      "userModuleId": 1,
+      "domRowIdx": 1,
+      "top": 443,
+      "height": 593,
+      "layoutType": "full_width_video",
+      "tileCount": 1,
+      "video": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/a9ae3ad3-8a3d-4fb7-a7ed-0837d747a3d5.mp4",
+        "size": {"w": 2160, "h": 1080}
+      },
+      "note": "Video-Banner Shot Kur. Vision-Frame in Phase 2."
+    },
+    {
+      "userModuleId": 2,
+      "domRowIdx": 2,
+      "top": 1036,
+      "height": 361,
+      "layoutType": "full_width_asin_link_text_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2fa56024-1df6-4d60-b8ef-e16a6b492107._CR0%2C0%2C1918%2C577_SX1500_.png",
+        "size": {"w": 1181, "h": 355},
+        "alt": ""
+      },
+      "asin": "B09X5R7B6P",
+      "linkAria": "Product label for 'Shot Kur', indicating 42 portions for 6 weeks of power moments, perfect for a reset in between.",
+      "note": "Claim-Banner: 42 Portionen, 6 Wochen Power-Kur. Verlinkt zu B09X5R7B6P."
+    },
+    {
+      "userModuleId": 3,
+      "domRowIdx": 3,
+      "top": 1397,
+      "height": 292,
+      "layoutType": "creative_grid_2tiles_same_asin",
+      "tileCount": 2,
+      "tiles": [
+        {
+          "position": "left",
+          "asin": "B09X5R7B6P",
+          "size": {"w": 568, "h": 277},
+          "creativeImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/6285b51b-6852-4504-b44a-a68ce512e485._CR0%2C108%2C750%2C375_SX750_SY375_.jpg",
+          "creativeImageAria": "Text reads '30ml'. Hands holding small bottle of dark liquid. Table with bowl of oatmeal, fruits, and berries."
+        },
+        {
+          "position": "right",
+          "asin": "B09X5R7B6P",
+          "size": {"w": 568, "h": 277},
+          "creativeImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/6372e6fc-feac-42cd-969e-81e8ceedee9f._CR0%2C15%2C750%2C375_SX750_SY375_.jpg",
+          "creativeImageAria": "Text reads \"Wellness\". Small glass bottle with yellow cap on yoga mat. Person stretching in background."
+        }
+      ],
+      "note": "2 Lifestyle-Creatives 30ml und Wellness, beide verlinken zum selben Produkt."
+    },
+    {
+      "userModuleId": 4,
+      "domRowIdx": 4,
+      "top": 1689,
+      "height": 583,
+      "layoutType": "asin_grid_2tiles",
+      "tileCount": 2,
+      "tiles": [
+        {
+          "position": "left",
+          "asin": "B09X5R7B6P",
+          "size": {"w": 568, "h": 568},
+          "productTitleAria": "Kloster Kitchen Bio Saftkur Alternative | 6 Wochen Ingwer Shot Kur | 6 Sorten | 42x 30 ml",
+          "productImageSrc": "https://m.media-amazon.com/images/I/51E4MKJUQ0L._AC_CR0%2C0%2C0%2C0_SX750_.jpg"
+        },
+        {
+          "position": "right",
+          "asin": "B0GH8XPJX5",
+          "size": {"w": 568, "h": 568},
+          "productTitleAria": "Kloster Kitchen Bio Saftkur Alternative | 6 Wochen Ingwer Shot Kur Classic | 42x 30 ml",
+          "productImageSrc": "https://m.media-amazon.com/images/I/71ObfAg3eOL._AC_CR0%2C0%2C0%2C0_SX750_.jpg"
+        }
+      ],
+      "note": "2-Kachel Produkt-Grid: 6-Sorten-Kur (Standard) vs. Classic-Kur."
+    },
+    {
+      "userModuleId": 5,
+      "domRowIdx": 5,
+      "top": 2272,
+      "height": 528,
+      "layoutType": "product_card_with_carousel",
+      "tileCount": 1,
+      "asin": "B09X5R7B6P",
+      "carouselImages": [
+        "https://m.media-amazon.com/images/I/71roy+j5dDL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/51E4MKJUQ0L._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/71bCJGsFrfL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/81TnQ3L5PdL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/810XieZDQ3L._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/712UrUSR06L._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/818MaxHWsnL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg"
+      ],
+      "note": "Amazon Product-Card mit 7 Produktbild-Carousel, Review-Link und Kauf-Button. Alle Links zum selben ASIN B09X5R7B6P."
+    },
+    {
+      "userModuleId": 6,
+      "domRowIdx": 6,
+      "top": 2800,
+      "height": 262,
+      "layoutType": "full_width_awards_badges",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2eb471fe-f331-4cbc-89cd-8896df9c0d33._CR0%2C0%2C1280%2C275_SX1500_.jpg",
+        "size": {"w": 1015, "h": 217},
+        "alt": ""
+      },
+      "asin": "B09X5R7B6P",
+      "linkAria": "Text reads 'AUSGEZEICHNETE INNOVATIONEN'. Four award logos on green leaf background",
+      "note": "Awards Streifen. Abweichung von anderen Seiten: hier ASIN-Link zu Hauptprodukt statt pageLink zu Ueber Uns."
+    }
+  ],
+
+  "excluded": [
+    {
+      "domRowIdx": 7,
+      "top": 3061,
+      "height": 200,
+      "reason": "Share-Footer."
+    }
+  ],
+
+  "uniqueAsinsOnPage": ["B09X5R7B6P", "B0GH8XPJX5"]
+}

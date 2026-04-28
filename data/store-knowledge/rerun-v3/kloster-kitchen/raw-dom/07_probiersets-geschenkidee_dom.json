@@ -1,0 +1,225 @@
+{
+  "_meta": {
+    "store": "kloster-kitchen",
+    "pageSlug": "07_probiersets-geschenkidee",
+    "pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A",
+    "url": "https://www.amazon.de/stores/page/33D8D5E6-A887-4D06-87F4-212CC0D6E24A",
+    "extractedAt": "2026-04-23T20:30:00Z",
+    "extractor": "manual_verified_v3.1",
+    "note": "Drei Product-Cards (S/M/L Probiersets) mit eigenen Carousels. Video-Banner ist backgroundVideoTile.mp4 (Amazon Widget Variante).",
+    "scrollHeight": 5851,
+    "viewport": {"w": 1181, "h": 946},
+    "domRowsTotal": 11,
+    "contentModulesCount": 9
+  },
+
+  "hero": {
+    "section": "hero",
+    "domRowIdx": 0,
+    "top": 99,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c62dc5c8-f812-4754-8a90-674b1f1c66a8._CR0%2C10%2C1280%2C256_SX1500_.jpg",
+    "imageSize": {"w": 1015, "h": 203},
+    "imageAltText": "Text reads \"KLOSTER KITCHEN BETTER THAN GOOD\". Green leaf background."
+  },
+
+  "navigation": {
+    "section": "nav",
+    "domRowIdx": 0,
+    "pages": [
+      {"label": "Startseite",                  "pageId": "34D4A812-9A68-4602-A6A0-30565D399620"},
+      {"label": "Ingwer Shots",                "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2"},
+      {"label": "Mikronährstoffe",             "pageId": "E337104E-63D3-41B2-8560-D92F482B2790"},
+      {"label": "Saftkuren",                   "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606"},
+      {"label": "SMOOTHIES",                   "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E"},
+      {"label": "Shot Kur",                    "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043"},
+      {"label": "Probiersets / Geschenkidee",  "pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A"},
+      {"label": "Zubehör",                     "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A"},
+      {"label": "Spar-Abo",                    "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E"},
+      {"label": "Über Uns",                    "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF"}
+    ]
+  },
+
+  "modules": [
+    {
+      "userModuleId": 1,
+      "domRowIdx": 1,
+      "top": 443,
+      "height": 665,
+      "layoutType": "full_width_video_background_tile",
+      "tileCount": 1,
+      "video": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/19c56d3a-23c1-4581-a957-f240bacaafbc.mp4/backgroundVideoTile.mp4",
+        "size": {"w": 1920, "h": 1080}
+      },
+      "note": "Video-Banner Probiersets, backgroundVideoTile-Variante. Vision-Frame in Phase 2."
+    },
+    {
+      "userModuleId": 2,
+      "domRowIdx": 2,
+      "top": 1108,
+      "height": 370,
+      "layoutType": "full_width_asin_link_text_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c29eee02-4c21-4c37-9c41-0beffa43666c._CR0%2C0%2C1920%2C593_SX1500_.png",
+        "size": {"w": 1181, "h": 364},
+        "alt": ""
+      },
+      "asin": "B09X5NB3RY",
+      "linkAria": "Text in German: 'PROBIERSETS' with additional text below mentioning different set sizes available.",
+      "note": "Intro-Banner Probiersets mit Hinweis auf verschiedene Set-Groessen."
+    },
+    {
+      "userModuleId": 3,
+      "domRowIdx": 3,
+      "top": 1478,
+      "height": 583,
+      "layoutType": "full_width_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/ac6dc2b5-c1dc-4ec3-b22a-38e7289e67c9._CR160%2C0%2C1600%2C800_.png",
+        "size": {"w": 1600, "h": 800},
+        "alt": ""
+      },
+      "note": "Full-Width Creative ohne ASIN-Link. Bildinhalt per Vision."
+    },
+    {
+      "userModuleId": 4,
+      "domRowIdx": 4,
+      "top": 2061,
+      "height": 292,
+      "layoutType": "creative_grid_2tiles_same_asin",
+      "tileCount": 2,
+      "tiles": [
+        {
+          "position": "left",
+          "asin": "B09X5NB3RY",
+          "size": {"w": 568, "h": 277},
+          "creativeImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/a3846a46-eaba-4d3a-964d-dbc99868475f._CR0%2C37%2C750%2C375_SX750_SY375_.png",
+          "creativeImageAria": "Three small glass bottles of ginger shots in yellow, orange, and red."
+        },
+        {
+          "position": "right",
+          "asin": "B09X5NB3RY",
+          "size": {"w": 568, "h": 277},
+          "creativeImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/4aa4b672-fbf2-4a5f-8a2c-bb75278e443b._CR0%2C29%2C750%2C375_SX750_SY375_.png",
+          "creativeImageAria": "Family in kitchen with colorful bottled drinks on shelf."
+        }
+      ]
+    },
+    {
+      "userModuleId": 5,
+      "domRowIdx": 5,
+      "top": 2353,
+      "height": 292,
+      "layoutType": "asin_grid_2tiles",
+      "tileCount": 2,
+      "tiles": [
+        {
+          "position": "left",
+          "asin": "B0DJM3N37D",
+          "size": {"w": 568, "h": 277},
+          "productTitleAria": "Kloster Kitchen Bio Ingwer Beere Zimt Box I 3 Sorten mit echten Ingwerstückchen I Geschenkset Männer und Frauen Ingwershot vegan I süß-scharf & natürliche Süße",
+          "productImageSrc": "https://m.media-amazon.com/images/I/610Bja5lCKL._AC_CR0%2C0%2C0%2C0_SX750_.jpg"
+        },
+        {
+          "position": "right",
+          "asin": "B0DN6NC4VM",
+          "size": {"w": 568, "h": 277},
+          "productTitleAria": "Kloster Kitchen Bio Ingwer Shot Geschenkkorb Präsentkorb I 6 Sorten mit echten Ingwerstückchen I Geschenkset Männer und Frauen Ingwershot vegan",
+          "productImageSrc": "https://m.media-amazon.com/images/I/7149c3puv+L._AC_CR0%2C0%2C0%2C0_SX750_.jpg"
+        }
+      ],
+      "note": "Geschenkbox und Präsentkorb nebeneinander."
+    },
+    {
+      "userModuleId": 6,
+      "domRowIdx": 6,
+      "top": 2644,
+      "height": 505,
+      "layoutType": "product_card_with_carousel",
+      "tileCount": 1,
+      "asin": "B09X5NB3RY",
+      "productTitle": "Kloster Kitchen Ingwer Shot Probierset S I 1x 360 ml + 6x 30 ml",
+      "carouselImages": [
+        "https://m.media-amazon.com/images/I/812iub5s6ML._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/61Lkdn9D-iL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/71Vmp0NGCmL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/81TnQ3L5PdL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/810XieZDQ3L._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/817-LNHZiKL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/71FBskITtmL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg"
+      ],
+      "note": "Probierset S Product-Card mit 7 Carousel-Bildern."
+    },
+    {
+      "userModuleId": 7,
+      "domRowIdx": 7,
+      "top": 3150,
+      "height": 528,
+      "layoutType": "product_card_with_carousel",
+      "tileCount": 1,
+      "asin": "B0CP4C7XYM",
+      "productTitle": "Kloster Kitchen Bio Ingwer Shot Probierset M I 4 Sorten 4x 360 ml + 4x 30 ml",
+      "carouselImages": [
+        "https://m.media-amazon.com/images/I/818MaxHWsnL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/51Wc2bO3ELL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/61avFM6PtjL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/81fXmLy6OsL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/71Vmp0NGCmL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/816k-NNOn1L._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/71VDYOKtssL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/71aXKxk+hJL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg"
+      ],
+      "note": "Probierset M Product-Card mit 8 Carousel-Bildern."
+    },
+    {
+      "userModuleId": 8,
+      "domRowIdx": 8,
+      "top": 3677,
+      "height": 505,
+      "layoutType": "product_card_with_carousel",
+      "tileCount": 1,
+      "asin": "B0CP49VNYT",
+      "productTitle": "Kloster Kitchen Bio Ingwer Shot Probierset L I 5 Sorten 5x 360 ml + 5x 30 ml",
+      "carouselImages": [
+        "https://m.media-amazon.com/images/I/818MaxHWsnL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/61+kd8GX6ML._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/71MjKG+xbpL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/81fXmLy6OsL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/71Vmp0NGCmL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/810XieZDQ3L._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/816k-NNOn1L._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg",
+        "https://m.media-amazon.com/images/I/71aXKxk+hJL._AC_CR0%2C0%2C0%2C0_SX480_SY360_.jpg"
+      ],
+      "note": "Probierset L Product-Card mit 8 Carousel-Bildern."
+    },
+    {
+      "userModuleId": 9,
+      "domRowIdx": 9,
+      "top": 4183,
+      "height": 207,
+      "layoutType": "full_width_awards_badges",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2eb471fe-f331-4cbc-89cd-8896df9c0d33._CR0%2C41%2C1280%2C213_SX1500_.jpg",
+        "size": {"w": 1015, "h": 169},
+        "alt": ""
+      },
+      "asin": "B0CP4C7XYM",
+      "linkAria": "Text reads 'AUSGEZEICHNETE INNOVATIONEN'. Four award logos on green leaf background",
+      "note": "Awards Streifen. Verlinkt hier zu ASIN B0CP4C7XYM (Probierset M) statt zu Ueber Uns."
+    }
+  ],
+
+  "excluded": [
+    {
+      "domRowIdx": 10,
+      "top": 4390,
+      "height": 200,
+      "reason": "Share-Footer."
+    }
+  ],
+
+  "uniqueAsinsOnPage": ["B09X5NB3RY", "B0DJM3N37D", "B0DN6NC4VM", "B0CP4C7XYM", "B0CP49VNYT"]
+}

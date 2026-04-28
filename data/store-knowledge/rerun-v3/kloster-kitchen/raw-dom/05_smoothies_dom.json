@@ -1,0 +1,191 @@
+{
+  "_meta": {
+    "store": "kloster-kitchen",
+    "pageSlug": "05_smoothies",
+    "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E",
+    "url": "https://www.amazon.de/stores/page/BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E",
+    "extractedAt": "2026-04-23T20:20:00Z",
+    "extractor": "manual_verified_v3.1",
+    "note": "Kein Video auf dieser Seite. Hero-Area statt Video ist ein Lifestyle-Bild Banner mit ASIN-Link.",
+    "scrollHeight": 5501,
+    "viewport": {"w": 1181, "h": 946},
+    "domRowsTotal": 9,
+    "contentModulesCount": 7
+  },
+
+  "hero": {
+    "section": "hero",
+    "domRowIdx": 0,
+    "top": 99,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c62dc5c8-f812-4754-8a90-674b1f1c66a8._CR0%2C10%2C1280%2C256_SX1500_.jpg",
+    "imageSize": {"w": 1015, "h": 203},
+    "imageAltText": "Text reads \"KLOSTER KITCHEN BETTER THAN GOOD\". Green leaf background. Person holding glass with yellow liquid, viewed from side profile.",
+    "note": "Gleicher Hero-Banner wie alle Seiten."
+  },
+
+  "navigation": {
+    "section": "nav",
+    "domRowIdx": 0,
+    "pages": [
+      {"label": "Startseite",                  "pageId": "34D4A812-9A68-4602-A6A0-30565D399620"},
+      {"label": "Ingwer Shots",                "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2"},
+      {"label": "Mikronährstoffe",             "pageId": "E337104E-63D3-41B2-8560-D92F482B2790"},
+      {"label": "Saftkuren",                   "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606"},
+      {"label": "SMOOTHIES",                   "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E"},
+      {"label": "Shot Kur",                    "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043"},
+      {"label": "Probiersets / Geschenkidee",  "pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A"},
+      {"label": "Zubehör",                     "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A"},
+      {"label": "Spar-Abo",                    "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E"},
+      {"label": "Über Uns",                    "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF"}
+    ]
+  },
+
+  "modules": [
+    {
+      "userModuleId": 1,
+      "domRowIdx": 1,
+      "top": 443,
+      "height": 560,
+      "layoutType": "full_width_asin_link_lifestyle_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/8a92d5bc-4917-4b83-9119-908b583c72e8._CR0%2C441%2C2492%2C1180_SX1500_.JPG",
+        "size": {"w": 1181, "h": 559},
+        "alt": ""
+      },
+      "asin": "B0CWH8T7SW",
+      "linkAria": "Assortment of bottled smoothies with fresh fruits and vegetables. Glass bottles contain colorful juice blends, displayed with whole produce on red and green background.",
+      "note": "Hero-Lifestyle-Banner mit Sortiment aller Smoothies, verlinkt zu B0CWH8T7SW."
+    },
+    {
+      "userModuleId": 2,
+      "domRowIdx": 2,
+      "top": 1003,
+      "height": 583,
+      "layoutType": "full_width_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/5de3e5fb-62b3-4a77-ad94-122bd45fd149._CR1%2C0%2C1918%2C959_.png",
+        "size": {"w": 1918, "h": 959},
+        "alt": ""
+      },
+      "note": "Full-Width Creative ohne ASIN-Link und ohne aria-label. Bildinhalt per Vision."
+    },
+    {
+      "userModuleId": 3,
+      "domRowIdx": 3,
+      "top": 1586,
+      "height": 583,
+      "layoutType": "creative_grid_2tiles",
+      "tileCount": 2,
+      "tiles": [
+        {
+          "position": "left",
+          "asin": "B0CWH8T7SW",
+          "size": {"w": 568, "h": 568},
+          "creativeImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/b87248c8-28a7-423a-a345-5675ac496857._CR0%2C0%2C750%2C750_SX750_SY750_.png",
+          "creativeImageAria": "Green smoothie bottle surrounded by fresh ingredients including spinach, cucumber, apple slices, lemon, and herbs on green background."
+        },
+        {
+          "position": "right",
+          "asin": "B0CWH9MV6D",
+          "size": {"w": 568, "h": 568},
+          "creativeImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/f41fac08-6339-4e98-844c-5ae7dace9d1f._CR0%2C0%2C750%2C750_SX750_SY750_.png",
+          "creativeImageAria": "A woman holding a small red bottle near her eye, smiling outdoors against a backdrop of red-colored building structures."
+        }
+      ],
+      "note": "2 ASIN-Creatives: links Grüner Smoothie Produktshot, rechts Lifestyle mit roter Flasche."
+    },
+    {
+      "userModuleId": 4,
+      "domRowIdx": 4,
+      "top": 2169,
+      "height": 435,
+      "layoutType": "full_width_asin_link_text_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/94fd3cb7-c629-44c5-a8ad-ba8490eadddd._CR0%2C0%2C1919%2C700_SX1500_.png",
+        "size": {"w": 1181, "h": 430},
+        "alt": ""
+      },
+      "asin": "B0CWH3F7NR",
+      "linkAria": "Text in German discussing smoothies with local ingredients, mentioning 'Heimvorteil' (home advantage) and carefully selected regional products.",
+      "note": "Claim-Banner 'Heimvorteil': regionale Zutaten. Verlinkt zu B0CWH3F7NR."
+    },
+    {
+      "userModuleId": 5,
+      "domRowIdx": 5,
+      "top": 2604,
+      "height": 583,
+      "layoutType": "asin_grid_3tiles_big+2small",
+      "tileCount": 3,
+      "tiles": [
+        {
+          "position": "left_big",
+          "asin": "B0D4V5BQC5",
+          "size": {"w": 568, "h": 568},
+          "productTitleAria": "Kloster Kitchen Bio Smoothie Rot Apfel Birne Erdbeer 12x 250 ml I Superfood Frühstück vegan I To Go Glasflasche",
+          "productImageSrc": "https://m.media-amazon.com/images/I/71UaeFvg6lL._AC_CR0%2C0%2C0%2C0_SX750_.jpg"
+        },
+        {
+          "position": "right_top",
+          "asin": "B0D4V2GBJX",
+          "size": {"w": 568, "h": 277},
+          "productTitleAria": "Kloster Kitchen Bio Smoothie Orange Apfel Karotte Rhabarber 12x 250 ml I Superfood Frühstück vegan",
+          "productImageSrc": "https://m.media-amazon.com/images/I/713XWtJr4mL._AC_CR0%2C0%2C0%2C0_SX750_.jpg"
+        },
+        {
+          "position": "right_bottom",
+          "asin": "B0D4VM21XT",
+          "size": {"w": 568, "h": 277},
+          "productTitleAria": "Kloster Kitchen Bio Smoothie Grün Gurke Spinat Minze Apfel 12x 250 ml I Superfood Frühstück vegan",
+          "productImageSrc": "https://m.media-amazon.com/images/I/71oEAHapazL._AC_CR0%2C0%2C0%2C0_SX750_.jpg"
+        }
+      ],
+      "note": "3-Kachel Produkt-Showcase: Rot links gross, Orange oben rechts, Grün unten rechts. 12x 250 ml Monovarianten."
+    },
+    {
+      "userModuleId": 6,
+      "domRowIdx": 6,
+      "top": 3187,
+      "height": 591,
+      "layoutType": "full_width_lifestyle_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/6d76cc7d-7c64-42cd-a39a-cf4f38bcf8a7._CR0%2C0%2C1920%2C960_SX1500_.png",
+        "size": {"w": 1181, "h": 590},
+        "alt": ""
+      },
+      "asin": "B0CWH8YV42",
+      "linkAria": "Person wearing green vest and cream sweater, holding beverage cans outdoors near a building.",
+      "note": "Grosses Lifestyle-Creative Outdoor. Szenen-Deskriptor im aria-label."
+    },
+    {
+      "userModuleId": 7,
+      "domRowIdx": 7,
+      "top": 3778,
+      "height": 262,
+      "layoutType": "full_width_awards_badges",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2eb471fe-f331-4cbc-89cd-8896df9c0d33._CR0%2C0%2C1280%2C274_SX1500_.jpg",
+        "size": {"w": 1015, "h": 217},
+        "alt": ""
+      },
+      "linkedPageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF",
+      "linkAria": "Text reads 'AUSGEZEICHNETE INNOVATIONEN'. Four award logos on green leaf background",
+      "note": "Awards Streifen, Link zu Ueber Uns."
+    }
+  ],
+
+  "excluded": [
+    {
+      "domRowIdx": 8,
+      "top": 4039,
+      "height": 200,
+      "reason": "Share-Footer."
+    }
+  ],
+
+  "uniqueAsinsOnPage": ["B0CWH8T7SW", "B0CWH9MV6D", "B0CWH3F7NR", "B0D4V5BQC5", "B0D4V2GBJX", "B0D4VM21XT", "B0CWH8YV42"]
+}
