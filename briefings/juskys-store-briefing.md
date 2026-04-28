@@ -96,11 +96,52 @@ Grüner Vollkreis (`#93bd26`), weißes Linien Icon (2 Pixel Strichstärke), Labe
 
 ## 5. Notation im Briefing
 
-### 5.1 textOverlay Markup
+### 5.1 Tile Schema, strukturiert
 
-Im `textOverlay` Feld markiere ich das grüne Highlight Wort mit `**WORT**` (Sterne werden mit eingegeben, der Designer ersetzt sie durch grüne Schriftauszeichnung).
+`tile.textOverlay` ist ein **Objekt** mit Subfeldern, kein einzelner String. Jedes Subfeld ist optional, wird leer gelassen wenn nicht gebraucht.
 
-### 5.2 ASIN Platzhalter
+```yaml
+textOverlay:
+  heading: ""       # Hauptüberschrift, optional mit ein Wort grün markiert
+  subheading: ""    # Unterüberschrift, kein Markup
+  body: ""          # Fließtext, MAXIMAL 350 Zeichen
+  bullets: []       # Liste Kurzclaims, je 2 bis 4 Wörter
+  cta: ""           # Button Beschriftung
+```
+
+### 5.2 Highlight Wort Markup
+
+In `textOverlay.heading` markiere das grüne Highlight Wort mit `**WORT**`. Beispiel `Was **dein** Zuhause braucht`. Die Sterne werden im Briefing eingegeben, der Designer ersetzt sie durch grüne Schriftauszeichnung. Maximal **ein** grünes Wort pro Heading.
+
+`subheading`, `body`, `bullets`, `cta` tragen **kein** Markup.
+
+### 5.3 brief Feld, klare Regeln
+
+`tile.brief` enthält **nur Bildfunktion und Komposition**. Konkret zulässig:
+
+- Bildfunktion (Hero, Trenner, Shoppable, Bestseller Grid, Detail, etc.)
+- Komposition (was im Bild zu sehen ist, Anordnung der Hauptelemente)
+- Bei `shoppable_image` Tiles: welche Bildelemente Hotspots bekommen
+
+**Nicht** ins brief Feld:
+
+- Lichtsetzung, Stimmung, Schattendetails, Tageszeit
+- Textinhalte (gehören in `textOverlay`)
+- Hotspot Koordinaten x oder y
+
+### 5.4 Hotspots
+
+Das Feld `tile.hotspots` ist ein Array von `{ x, y, asin }` Objekten, maximal 5 Einträge. Im Konzept Briefing bleibt es leer, der Loader füllt es ein wenn ASINs verknüpft sind.
+
+Welche Bildelemente Hotspots bekommen, beschreibst du in `brief`. Beispiel:
+
+```yaml
+brief: "Shoppable Bild Wohnzimmer. 5 Hotspots auf Sofa, Sessel, Beistelltisch, Lampe, Teppich."
+```
+
+### 5.5 ASIN Platzhalter
+
+In `tile.asins` Array stehen Platzhalter Strings, bis die Coverage Matrix befüllt ist:
 
 | Platzhalter | Bedeutung |
 |-------------|-----------|
@@ -108,14 +149,30 @@ Im `textOverlay` Feld markiere ich das grüne Highlight Wort mit `**WORT**` (Ste
 | `<ALL-CAT>` | alle ASINs der Kategorie nach Bestseller Rang |
 | `<DEALS-CAT>` | reduzierte ASINs der Kategorie |
 
-Diese Platzhalter werden durch echte ASINs ersetzt, sobald die Coverage Matrix befüllt ist.
-
-### 5.3 Section Notation
+### 5.6 Section Notation
 
 Jede Section hat:
 - `module`, Referenz auf `MODULE_BAUKASTEN`, z.B. `hero.fullWidthHero`
 - `layoutId`, Layout ID aus Tabelle 4.2
-- `tiles`, Liste von Tiles mit Feldern `type`, `brief`, `textOverlay`, `ctaText`, `linkUrl`, `asins`, `hotspots`
+- `tiles`, Liste von Tiles mit Feldern `type`, `textOverlay` (Objekt), `brief` (String), `linkUrl`, `asins` (Array), `hotspots` (Array, leer)
+
+### 5.7 Beispiel Tile, vollständig
+
+```yaml
+- type: shoppable_image
+  textOverlay:
+    heading: "Outdoor Wohnen, **bereit** für die Saison"
+    subheading: "Loungegruppen, Tische, Schatten"
+    body: ""
+    bullets:
+      - "Wetterfest"
+      - "Modular kombinierbar"
+      - "Schnell aufgebaut"
+    cta: ""
+  brief: "Shoppable Bild Terrasse. Loungegruppe als Hauptmotiv mit Sonnenschirm, Beistelltisch, Outdoor Kissen. 5 Hotspots auf Sofa, Sessel, Beistelltisch, Sonnenschirm, Kissen."
+  asins: ["<TOP-5-GARTEN-LOUNGE>"]
+  hotspots: []
+```
 
 ---
 
@@ -1428,3 +1485,7 @@ Nach Befüllung muss `validateStore()` aus `src/constants.js` ohne Errors durchl
 - jeder Tile hat einen gültigen `type` aus Tabelle 4.1
 - `shoppable_image` Tiles haben maximal 5 Hotspots
 - alle ASINs aus dem Store Top Level sind in mindestens einem Tile referenziert (Coverage Sanity Check)
+- `tile.textOverlay.heading` enthält maximal **ein** grünes Highlight Wort (`**...**`)
+- `tile.textOverlay.body` ist maximal 350 Zeichen lang
+- `tile.brief` enthält keine Lichtsetzung, keine Stimmung, keine Textinhalte
+- keine Em Dashes (`—`), keine En Dashes (`–`), keine Bindestriche mit Leerzeichen in kundensichtbaren Texten
