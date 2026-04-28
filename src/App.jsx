@@ -76,7 +76,7 @@ export default function App() {
   var undoStackRef = useRef([]);
   var redoStackRef = useRef([]);
   var skipHistoryRef = useRef(false);
-  var MAX_UNDO = 10;
+  var MAX_UNDO = 20;
 
   var pushUndo = useCallback(function(prevStore) {
     if (!prevStore || !prevStore.pages || prevStore.pages.length === 0) return;
