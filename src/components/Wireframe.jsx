@@ -19,8 +19,9 @@ export default function Wireframe({ tile, width, viewMode, bgColor }) {
   var dims = (viewMode === 'mobile' ? tile.mobileDimensions : tile.dimensions) || tile.dimensions || { w: 3000, h: 1200 };
   var w = width || 280;
   var ht = Math.max(30, Math.round(w / (dims.w / dims.h)));
-  var text = tile.textOverlay || '';
-  var cta = tile.ctaText || '';
+  var ov = (tile.textOverlay && typeof tile.textOverlay === 'object') ? tile.textOverlay : {};
+  var text = (ov.heading || '').replace(/\*\*([^*]+)\*\*/g, '$1') || ov.subheading || '';
+  var cta = ov.cta || '';
   var isShoppable = tile.type === 'shoppable_image';
   var isImageText = tile.type === 'image_text';
 

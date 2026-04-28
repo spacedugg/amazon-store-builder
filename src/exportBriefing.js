@@ -51,8 +51,9 @@ function generatePageMetaDescription(page, store) {
   var keywords = [];
   (page.sections || []).forEach(function(sec) {
     (sec.tiles || []).forEach(function(tile) {
-      if (tile.textOverlay && tile.textOverlay.length > 3 && tile.textOverlay.length < 60) {
-        keywords.push(tile.textOverlay);
+      var heading = (tile.textOverlay && typeof tile.textOverlay === 'object') ? (tile.textOverlay.heading || '') : '';
+      if (heading.length > 3 && heading.length < 60) {
+        keywords.push(heading.replace(/\*\*([^*]+)\*\*/g, '$1'));
       }
     });
   });
@@ -247,7 +248,8 @@ async function renderLayoutImage(section) {
     var label = 'T' + (idx + 1);
     var typeName = tile ? (TILE_TYPE_LABELS[tile.type] || tile.type) : '';
     var dims = tile && tile.dimensions ? (tile.dimensions.w + 'x' + tile.dimensions.h) : '';
-    var textOv = tile && tile.textOverlay ? ('"' + tile.textOverlay.slice(0, 20) + '"') : '';
+    var ovHeading = (tile && tile.textOverlay && typeof tile.textOverlay === 'object') ? (tile.textOverlay.heading || '') : '';
+    var textOv = ovHeading ? ('"' + ovHeading.replace(/\*\*([^*]+)\*\*/g, '$1').slice(0, 20) + '"') : '';
 
     // Contrast-aware text color
     var textColor = getContrastText(bgColor);
@@ -327,7 +329,9 @@ function getContrastText(hex) {
 // Tile fingerprint for duplicate detection
 function exportTileFingerprint(tile) {
   if (!tile) return '';
-  return [tile.type, tile.brief || '', tile.textOverlay || '', tile.ctaText || '', tile.imageCategory || '', tile.bgColor || '',
+  var ov = (tile.textOverlay && typeof tile.textOverlay === 'object') ? tile.textOverlay : {};
+  var ovStr = [ov.heading || '', ov.subheading || '', ov.body || '', (ov.bullets || []).join(';'), ov.cta || ''].join('§');
+  return [tile.type, tile.brief || '', ovStr, tile.imageCategory || '', tile.bgColor || '',
     (tile.dimensions || {}).w + 'x' + (tile.dimensions || {}).h,
     (tile.asins || []).join(',')].join('|');
 }
@@ -369,45 +373,41 @@ function tileDescription(tile, tileIndex, productMap, lang, duplicateNote) {
     if (dims.w) parts.push(boldPara(t('brief.desktop', lang) + ': ', dims.w + ' x ' + dims.h + ' px'));
     if (mDims.w) parts.push(boldPara(t('brief.mobile', lang) + ': ', mDims.w + ' x ' + mDims.h + ' px'));
     if (tile.bgColor) parts.push(boldPara(t('brief.colorPreview', lang) + ': ', tile.bgColor));
-    if (tile.textOverlay) {
+    var ov = (tile.textOverlay && typeof tile.textOverlay === 'object') ? tile.textOverlay : null;
+    if (ov && (ov.heading || ov.subheading || ov.body || (ov.bullets && ov.bullets.length) || ov.cta)) {
       var alignHint = tile.textAlign && tile.textAlign !== 'left' ? ' (' + (tile.textAlign === 'center' ? 'zentriert' : 'rechtsbündig') + ')' : '';
-      var overlayLines = tile.textOverlay.split('\\n').filter(function(l) { return l.trim(); });
-      if (overlayLines.length > 1) {
-        // MULTIPLE TEXTS — hierarchy by POSITION (line order), not text length
-        // Line 1 = H1 (largest, heading), Line 2 = H2 (medium), Line 3+ = H3 (smallest)
-        parts.push(boldPara(t('brief.textOverlay', lang) + alignHint + ': ', ''));
-        var nonBulletCount = 0;
-        overlayLines.forEach(function(line) {
-          var trimmed = line.trim();
-          if (!trimmed) return;
-          var isBullet = /^•\s/.test(trimmed);
-          var isBold = /^\*\*.*\*\*$/.test(trimmed);
-
-          var hierLabel, hierColor;
-          if (isBullet) {
-            // Bullets are always detail text (H3)
-            hierLabel = '[HIERARCHY 3] '; hierColor = '94a3b8';
-          } else if (isBold || nonBulletCount === 0) {
-            hierLabel = '[HIERARCHY 1] '; hierColor = '1d4ed8';
-          } else if (nonBulletCount === 1) {
-            hierLabel = '[HIERARCHY 2] '; hierColor = '4338ca';
-          } else {
-            hierLabel = '[HIERARCHY 3] '; hierColor = '94a3b8';
-          }
-          if (!isBullet) nonBulletCount++;
-
+      parts.push(boldPara(t('brief.textOverlay', lang) + alignHint + ': ', ''));
+      if (ov.heading) {
+        parts.push(new Paragraph({ children: [
+          new TextRun({ text: '  [HEADING] ', size: 18, bold: true, color: '1d4ed8' }),
+          new TextRun({ text: ov.heading, size: 22, bold: true })
+        ] }));
+      }
+      if (ov.subheading) {
+        parts.push(new Paragraph({ children: [
+          new TextRun({ text: '  [SUBHEADING] ', size: 18, bold: true, color: '4338ca' }),
+          new TextRun({ text: ov.subheading, size: 20 })
+        ] }));
+      }
+      if (ov.body) {
+        parts.push(new Paragraph({ children: [
+          new TextRun({ text: '  [BODY] ', size: 18, bold: true, color: '475569' }),
+          new TextRun({ text: ov.body, size: 18 })
+        ] }));
+      }
+      if (ov.bullets && ov.bullets.length > 0) {
+        ov.bullets.forEach(function(b) {
+          if (!b) return;
           parts.push(new Paragraph({ children: [
-            new TextRun({ text: '  ' + hierLabel, size: 18, bold: true, color: hierColor }),
-            new TextRun({ text: trimmed, size: 20, bold: isBold || (!isBullet && nonBulletCount <= 1) })
+            new TextRun({ text: '  [BULLET] ', size: 18, bold: true, color: '92400e' }),
+            new TextRun({ text: b, size: 18 })
           ] }));
         });
-      } else {
-        // SINGLE TEXT — no hierarchy needed, just show the text
-        var singleText = overlayLines[0] || tile.textOverlay;
-        parts.push(boldPara(t('brief.textOverlay', lang) + ': ', '[text] "' + singleText + '"' + alignHint));
+      }
+      if (ov.cta) {
+        parts.push(boldPara(t('brief.ctaButton', lang) + ': ', '"' + ov.cta + '"'));
       }
     }
-    if (tile.ctaText) parts.push(boldPara(t('brief.ctaButton', lang) + ': ', '"' + tile.ctaText + '"'));
     if (tile.brief) {
       // Format brief with bullet points and bold
       var briefLines = tile.brief.split('\n');
@@ -535,11 +535,15 @@ export async function generateBriefingDocx(store, briefingLang) {
       children.push(boldPara(t('brief.imageCategory', lang) + ': ', IMAGE_CATEGORIES[heroTile.imageCategory].name));
     }
     if (heroTile.bgColor) children.push(boldPara(t('brief.colorPreview', lang) + ': ', heroTile.bgColor));
-    if (heroTile.textOverlay) {
+    var heroOv = (heroTile.textOverlay && typeof heroTile.textOverlay === 'object') ? heroTile.textOverlay : null;
+    if (heroOv && (heroOv.heading || heroOv.subheading || heroOv.body || (heroOv.bullets && heroOv.bullets.length) || heroOv.cta)) {
       var heroAlignHint = heroTile.textAlign && heroTile.textAlign !== 'left' ? ' (' + (heroTile.textAlign === 'center' ? 'zentriert' : 'rechtsbündig') + ')' : '';
-      children.push(boldPara(t('brief.textOverlay', lang) + ': ', '"' + heroTile.textOverlay + '"' + heroAlignHint));
+      if (heroOv.heading) children.push(boldPara(t('brief.textOverlay', lang) + ' Heading: ', '"' + heroOv.heading + '"' + heroAlignHint));
+      if (heroOv.subheading) children.push(boldPara(t('brief.textOverlay', lang) + ' Subheading: ', '"' + heroOv.subheading + '"'));
+      if (heroOv.body) children.push(boldPara(t('brief.textOverlay', lang) + ' Body: ', '"' + heroOv.body + '"'));
+      if (heroOv.bullets && heroOv.bullets.length) children.push(boldPara(t('brief.textOverlay', lang) + ' Bullets: ', heroOv.bullets.filter(Boolean).join(' | ')));
+      if (heroOv.cta) children.push(boldPara(t('brief.ctaButton', lang) + ': ', '"' + heroOv.cta + '"'));
     }
-    if (heroTile.ctaText) children.push(boldPara(t('brief.ctaButton', lang) + ': ', '"' + heroTile.ctaText + '"'));
     if (heroTile.brief) children.push(boldPara(t('brief.designerBrief', lang) + ': ', heroTile.brief));
     children.push(boldPara(t('brief.desktopImage', lang) + ': ', heroTile.uploadedImage ? t('brief.uploaded', lang) : t('brief.needsDesign', lang)));
     children.push(boldPara(t('brief.mobileImage', lang) + ': ', heroTile.uploadedImageMobile ? t('brief.uploaded', lang) : (heroTile.uploadedImage ? t('brief.usesDesktop', lang) : t('brief.needsDesign', lang))));

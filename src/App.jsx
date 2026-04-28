@@ -1681,7 +1681,7 @@ export default function App() {
                     });
                   } else {
                     // Create new product_grid section with the ASIN
-                    sections.push({ id: uid(), layoutId: '1', tiles: [{ type: 'product_grid', asins: [asin], brief: '', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, mobileDimensions: { w: 1680, h: 1200 } }] });
+                    sections.push({ id: uid(), layoutId: '1', tiles: [Object.assign(emptyTile(), { type: 'product_grid', asins: [asin] })] });
                   }
                   return Object.assign({}, pg, { sections: sections });
                 }),
