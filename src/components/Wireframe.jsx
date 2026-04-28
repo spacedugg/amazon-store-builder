@@ -19,30 +19,9 @@ export default function Wireframe({ tile, width, viewMode, bgColor }) {
   var dims = (viewMode === 'mobile' ? tile.mobileDimensions : tile.dimensions) || tile.dimensions || { w: 3000, h: 1200 };
   var w = width || 280;
   var ht = Math.max(30, Math.round(w / (dims.w / dims.h)));
-  var rawText = tile.textOverlay || '';
-  // Parse role tags ([h1], [h2], [body], [bullet]) and render every line so
-  // multi-line text overlays are visible on the wireframe placeholder.
-  var TAG_RE = /^\[(h1|h2|h3|body|bullet)\]\s*/i;
-  var overlayLines = rawText.split(/\\n|\n/).map(function(l) {
-    var trimmed = l.trim();
-    if (!trimmed) return null;
-    var role = 'text';
-    var content = trimmed;
-    var m = trimmed.match(TAG_RE);
-    if (m) {
-      role = m[1].toLowerCase();
-      if (role === 'h3') role = 'body';
-      content = trimmed.replace(TAG_RE, '');
-    } else if (/^•\s/.test(trimmed)) {
-      role = 'bullet';
-      content = trimmed.replace(/^•\s*/, '');
-    }
-    var bold = false;
-    if (/^\*\*.+\*\*$/.test(content)) { bold = true; content = content.replace(/^\*\*|\*\*$/g, ''); }
-    if (role === 'bullet') content = '• ' + content;
-    return { role: role, text: content, bold: bold };
-  }).filter(Boolean);
-  var cta = tile.ctaText || '';
+  var ov = (tile.textOverlay && typeof tile.textOverlay === 'object') ? tile.textOverlay : {};
+  var text = (ov.heading || '').replace(/\*\*([^*]+)\*\*/g, '$1') || ov.subheading || '';
+  var cta = ov.cta || '';
   var isShoppable = tile.type === 'shoppable_image';
   var isImageText = tile.type === 'image_text';
 
@@ -65,50 +44,19 @@ export default function Wireframe({ tile, width, viewMode, bgColor }) {
     }
   }
 
-  // Per-role font sizes (relative to the base text size)
-  var baseSize = Math.min(11, w / 24);
-  var ROLE_SIZE = { h1: 1.0, h2: 0.82, body: 0.7, bullet: 0.7, text: 0.85 };
-  var ROLE_WEIGHT = { h1: 700, h2: 600, body: 400, bullet: 400, text: 700 };
-  // Stack lines vertically. Reserve top ~28% and bottom ~42% for badges/CTA.
-  var blockTop = ht * 0.30;
-  var blockHeight = ht * 0.45;
-  var totalLineHeight = overlayLines.reduce(function(acc, ln) {
-    return acc + baseSize * (ROLE_SIZE[ln.role] || 0.85) * 1.35;
-  }, 0);
-  var startY = blockTop + Math.max(0, (blockHeight - totalLineHeight) / 2) + baseSize * (ROLE_SIZE[(overlayLines[0] || {}).role] || 0.85);
-  var anchorX = tile.textAlign === 'right' ? w * 0.94 : tile.textAlign === 'center' ? w * 0.5 : w * 0.06;
-  var textAnchor = tile.textAlign === 'right' ? 'end' : tile.textAlign === 'center' ? 'middle' : 'start';
-
   return (
     <svg viewBox={'0 0 ' + w + ' ' + ht} style={{ width: '100%', display: 'block' }}>
       <rect width={w} height={ht} fill={bgFill} rx="2" />
 
-      {/* Text overlay — multi-line with role-based hierarchy */}
-      {overlayLines.length > 0 && (() => {
-        var y = startY;
-        return overlayLines.map(function(ln, idx) {
-          var size = baseSize * (ROLE_SIZE[ln.role] || 0.85);
-          var weight = ln.bold ? 700 : (ROLE_WEIGHT[ln.role] || 700);
-          // Truncate per line so it fits the tile width
-          var maxChars = Math.max(10, Math.floor(w / (size * 0.55)));
-          var rendered = ln.text.length > maxChars ? ln.text.slice(0, maxChars - 3) + '...' : ln.text;
-          var node = (
-            <text key={idx}
-              x={anchorX}
-              y={y}
-              fontSize={size}
-              fontWeight={weight}
-              fill={textFill}
-              fontFamily="system-ui, sans-serif"
-              opacity=".85"
-              textAnchor={textAnchor}>
-              {rendered}
-            </text>
-          );
-          y += size * 1.35;
-          return node;
-        });
-      })()}
+      {/* Text overlay */}
+      {text && (
+        <text x={tile.textAlign === 'right' ? w * 0.94 : tile.textAlign === 'center' ? w * 0.5 : w * 0.06}
+          y={ht * 0.42} fontSize={Math.min(11, w / 24)}
+          fontWeight="700" fill={textFill} fontFamily="system-ui, sans-serif" opacity=".8"
+          textAnchor={tile.textAlign === 'right' ? 'end' : tile.textAlign === 'center' ? 'middle' : 'start'}>
+          {text.length > 45 ? text.slice(0, 42) + '...' : text}
+        </text>
+      )}
 
       {/* CTA button */}
       {cta && (

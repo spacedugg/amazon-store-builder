@@ -96,11 +96,52 @@ Grüner Vollkreis (`#93bd26`), weißes Linien Icon (2 Pixel Strichstärke), Labe
 
 ## 5. Notation im Briefing
 
-### 5.1 textOverlay Markup
+### 5.1 Tile Schema, strukturiert
 
-Im `textOverlay` Feld markiere ich das grüne Highlight Wort mit `**WORT**` (Sterne werden mit eingegeben, der Designer ersetzt sie durch grüne Schriftauszeichnung).
+`tile.textOverlay` ist ein **Objekt** mit Subfeldern, kein einzelner String. Jedes Subfeld ist optional, wird leer gelassen wenn nicht gebraucht.
 
-### 5.2 ASIN Platzhalter
+```yaml
+textOverlay:
+  heading: ""       # Hauptüberschrift, optional mit ein Wort grün markiert
+  subheading: ""    # Unterüberschrift, kein Markup
+  body: ""          # Fließtext, MAXIMAL 350 Zeichen
+  bullets: []       # Liste Kurzclaims, je 2 bis 4 Wörter
+  cta: ""           # Button Beschriftung
+```
+
+### 5.2 Highlight Wort Markup
+
+In `textOverlay.heading` markiere das grüne Highlight Wort mit `**WORT**`. Beispiel `Was **dein** Zuhause braucht`. Die Sterne werden im Briefing eingegeben, der Designer ersetzt sie durch grüne Schriftauszeichnung. Maximal **ein** grünes Wort pro Heading.
+
+`subheading`, `body`, `bullets`, `cta` tragen **kein** Markup.
+
+### 5.3 brief Feld, klare Regeln
+
+`tile.brief` enthält **nur Bildfunktion und Komposition**. Konkret zulässig:
+
+- Bildfunktion (Hero, Trenner, Shoppable, Bestseller Grid, Detail, etc.)
+- Komposition (was im Bild zu sehen ist, Anordnung der Hauptelemente)
+- Bei `shoppable_image` Tiles: welche Bildelemente Hotspots bekommen
+
+**Nicht** ins brief Feld:
+
+- Lichtsetzung, Stimmung, Schattendetails, Tageszeit
+- Textinhalte (gehören in `textOverlay`)
+- Hotspot Koordinaten x oder y
+
+### 5.4 Hotspots
+
+Das Feld `tile.hotspots` ist ein Array von `{ x, y, asin }` Objekten, maximal 5 Einträge. Im Konzept Briefing bleibt es leer, der Loader füllt es ein wenn ASINs verknüpft sind.
+
+Welche Bildelemente Hotspots bekommen, beschreibst du in `brief`. Beispiel:
+
+```yaml
+brief: "Shoppable Bild Wohnzimmer. 5 Hotspots auf Sofa, Sessel, Beistelltisch, Lampe, Teppich."
+```
+
+### 5.5 ASIN Platzhalter
+
+In `tile.asins` Array stehen Platzhalter Strings, bis die Coverage Matrix befüllt ist:
 
 | Platzhalter | Bedeutung |
 |-------------|-----------|
@@ -108,14 +149,30 @@ Im `textOverlay` Feld markiere ich das grüne Highlight Wort mit `**WORT**` (Ste
 | `<ALL-CAT>` | alle ASINs der Kategorie nach Bestseller Rang |
 | `<DEALS-CAT>` | reduzierte ASINs der Kategorie |
 
-Diese Platzhalter werden durch echte ASINs ersetzt, sobald die Coverage Matrix befüllt ist.
-
-### 5.3 Section Notation
+### 5.6 Section Notation
 
 Jede Section hat:
 - `module`, Referenz auf `MODULE_BAUKASTEN`, z.B. `hero.fullWidthHero`
 - `layoutId`, Layout ID aus Tabelle 4.2
-- `tiles`, Liste von Tiles mit Feldern `type`, `brief`, `textOverlay`, `ctaText`, `linkUrl`, `asins`, `hotspots`
+- `tiles`, Liste von Tiles mit Feldern `type`, `textOverlay` (Objekt), `brief` (String), `linkUrl`, `asins` (Array), `hotspots` (Array, leer)
+
+### 5.7 Beispiel Tile, vollständig
+
+```yaml
+- type: shoppable_image
+  textOverlay:
+    heading: "Outdoor Wohnen, **bereit** für die Saison"
+    subheading: "Loungegruppen, Tische, Schatten"
+    body: ""
+    bullets:
+      - "Wetterfest"
+      - "Modular kombinierbar"
+      - "Schnell aufgebaut"
+    cta: ""
+  brief: "Shoppable Bild Terrasse. Loungegruppe als Hauptmotiv mit Sonnenschirm, Beistelltisch, Outdoor Kissen. 5 Hotspots auf Sofa, Sessel, Beistelltisch, Sonnenschirm, Kissen."
+  asins: ["<TOP-5-GARTEN-LOUNGE>"]
+  hotspots: []
+```
 
 ---
 
@@ -147,37 +204,73 @@ page:
       layoutId: '1'
       tiles:
         - type: image
-          textOverlay: "Räume, die **passen**"
-          brief: "Designer Komposition Wohnzimmer hell. Subline: Möbel und mehr für jeden Tag, aus einem Haus."
-          ctaText: "Sortiment entdecken"
+          textOverlay:
+            heading: "Was **dein** Zuhause braucht"
+            subheading: "Möbel, Garten, Heimwerken, Haushalt, Tier und Freizeit, aus einem Haus"
+            body: ""
+            bullets: []
+            cta: "Sortiment entdecken"
+          brief: "Hero Bild Startseite. Wohnraum mit Sofa, Sessel, Beistelltisch, Lampe, Teppich, im Hintergrund Übergang in Garten oder Essbereich."
+          asins: []
+          hotspots: []
 
     - section: 2
       module: categoryNav.grid6tiles
       layoutId: '2s-4grid'
       tiles:
         - type: image
-          textOverlay: "**GARTEN**"
-          brief: "Kategorie Tile Garten. Subline: Lounge, Tische, Schatten."
+          textOverlay:
+            heading: "**GARTEN**"
+            subheading: "Lounge, Tische, Schatten"
+            body: ""
+            bullets: []
+            cta: ""
+          brief: "Kategorie Tile Garten. Freigestelltes Leitprodukt aus Garten auf Beige Hintergrund."
           linkUrl: "page:Garten"
         - type: image
-          textOverlay: "**MÖBEL**"
-          brief: "Kategorie Tile Möbel. Subline: Sofas, Betten, Bad."
+          textOverlay:
+            heading: "**MÖBEL**"
+            subheading: "Sofas, Betten, Bad"
+            body: ""
+            bullets: []
+            cta: ""
+          brief: "Kategorie Tile Möbel. Freigestelltes Leitprodukt aus Möbel auf Beige Hintergrund."
           linkUrl: "page:Möbel"
         - type: image
-          textOverlay: "**FREIZEIT**"
-          brief: "Kategorie Tile Freizeit. Subline: Camping, Koffer, Weihnachten."
+          textOverlay:
+            heading: "**FREIZEIT**"
+            subheading: "Camping, Koffer, Weihnachten"
+            body: ""
+            bullets: []
+            cta: ""
+          brief: "Kategorie Tile Freizeit. Freigestelltes Leitprodukt aus Freizeit auf Beige Hintergrund."
           linkUrl: "page:Freizeit"
         - type: image
-          textOverlay: "**HEIMWERKEN**"
-          brief: "Kategorie Tile Heimwerken. Subline: Werkzeug, Leitern, Heizungen."
+          textOverlay:
+            heading: "**HEIMWERKEN**"
+            subheading: "Werkzeug, Leitern, Heizungen"
+            body: ""
+            bullets: []
+            cta: ""
+          brief: "Kategorie Tile Heimwerken. Freigestelltes Leitprodukt aus Heimwerken auf Beige Hintergrund."
           linkUrl: "page:Heimwerken"
         - type: image
-          textOverlay: "**HAUSHALT**"
-          brief: "Kategorie Tile Haushalt. Subline: Küche, Stauraum, Alltagshilfen."
+          textOverlay:
+            heading: "**HAUSHALT**"
+            subheading: "Küche, Stauraum, Alltagshilfen"
+            body: ""
+            bullets: []
+            cta: ""
+          brief: "Kategorie Tile Haushalt. Freigestelltes Leitprodukt aus Haushalt auf Beige Hintergrund."
           linkUrl: "page:Haushalt"
         - type: image
-          textOverlay: "**TIERBEDARF**"
-          brief: "Kategorie Tile Tierbedarf. Subline: Hund, Katze, Freilauf."
+          textOverlay:
+            heading: "**TIERBEDARF**"
+            subheading: "Hund, Katze, Freilauf"
+            body: ""
+            bullets: []
+            cta: ""
+          brief: "Kategorie Tile Tierbedarf. Freigestelltes Leitprodukt aus Tierbedarf auf Beige Hintergrund."
           linkUrl: "page:Tierbedarf"
 
     - section: 3
@@ -185,12 +278,21 @@ page:
       layoutId: 'std-2equal'
       tiles:
         - type: image
-          textOverlay: ""
-          brief: "Team oder Hallenbild aus juskys.de. Warmes Tageslicht, Mitarbeiter im Hintergrund."
+          textOverlay:
+            heading: ""
+            subheading: ""
+            body: ""
+            bullets: []
+            cta: ""
+          brief: "Image Tile zur Brand Story. Team oder Hallenbild aus juskys.de, Mitarbeiter und Standort."
         - type: image_text
-          textOverlay: "Ein **Haus**, viele Räume"
-          brief: "Subline: Familiengeführt aus Süddeutschland. Plus Fließtext 55 Wörter Brand Story Kurzform."
-          ctaText: "Mehr über Juskys"
+          textOverlay:
+            heading: "Ein **Haus**, viele Räume"
+            subheading: "Familiengeführt aus Süddeutschland"
+            body: "Juskys ist Teil eines familiengeführten Hauses in Süddeutschland. Wir gestalten Möbel und Produkte für Zuhause, Garten und Alltag. Klare Formen, ehrliche Materialien, faire Preise."
+            bullets: []
+            cta: "Mehr über Juskys"
+          brief: "Brand Story Tile mit Text neben Bild aus Sektion 3 Tile 1. Verlinkt auf Über Uns."
           linkUrl: "page:Über Uns"
 
     - section: 4
@@ -198,93 +300,165 @@ page:
       layoutId: '1'
       tiles:
         - type: image
-          textOverlay: "Räume, die **zusammen** passen"
-          brief: "Trenner Textbild. Stoff Makro auf hellem Grund. Anthrazit Text, ein Wort grün."
+          textOverlay:
+            heading: "Räume, die **zusammen** passen"
+            subheading: ""
+            body: ""
+            bullets: []
+            cta: ""
+          brief: "Trenner Textbild. Stoff Makro im Hintergrund."
 
     - section: 5
       module: products.shoppableFullWidth
       layoutId: '1'
       tiles:
         - type: shoppable_image
-          textOverlay: "Ein Wohnzimmer, **fünf** Klicks"
-          brief: "Designer Komposition Wohnzimmer mit Sofa, Sessel, Beistelltisch, Lampe, Teppich. 5 Hotspots auf den jeweiligen Produkten platzieren."
-          hotspotsPlaceholder: "<TOP-5-MOEBEL-WOHNEN>"
+          textOverlay:
+            heading: "Wohnzimmer, **komplett** gedacht"
+            subheading: "Sofa, Sessel, Beistelltisch, Lampe, Teppich"
+            body: ""
+            bullets: []
+            cta: ""
+          brief: "Shoppable Bild Wohnzimmer. 5 Hotspots auf Sofa, Sessel, Beistelltisch, Lampe, Teppich."
+          asins: ["<TOP-5-MOEBEL-WOHNEN>"]
+          hotspots: []
 
     - section: 6
       module: products.fullWidthGrid
       layoutId: '1'
       tiles:
         - type: best_sellers
-          textOverlay: "Die meistgekauften **Lieblinge**"
-          brief: "Top 8 Bestseller kategorieübergreifend."
-          asinsPlaceholder: "<TOP-8-OVERALL>"
+          textOverlay:
+            heading: "Die meistgekauften **Lieblinge**"
+            subheading: ""
+            body: ""
+            bullets: []
+            cta: ""
+          brief: "Bestseller Grid mit 8 Top Sellern kategorieübergreifend."
+          asins: ["<TOP-8-OVERALL>"]
+          hotspots: []
 
     - section: 7
       module: hero.fullWidthHero
       layoutId: '1'
       tiles:
         - type: image
-          textOverlay: "Draußen ist auch ein **Zimmer**"
-          brief: "Trenner Textbild. Rattan oder Polyrattan Makro auf hellem Grund."
+          textOverlay:
+            heading: "Die **Saison** beginnt zuhause"
+            subheading: ""
+            body: ""
+            bullets: []
+            cta: ""
+          brief: "Trenner Textbild. Rattan oder Polyrattan Makro im Hintergrund."
 
     - section: 8
       module: products.shoppableFullWidth
       layoutId: '1'
       tiles:
         - type: shoppable_image
-          textOverlay: "Draußen, so **gemütlich** wie drinnen"
-          brief: "Designer Komposition Terrasse Loungegruppe, Sonnenschirm, Beistelltisch, Outdoor Kissen. 5 Hotspots."
-          hotspotsPlaceholder: "<TOP-5-GARTEN-LOUNGE>"
+          textOverlay:
+            heading: "Lounge, fertig zum **Loslegen**"
+            subheading: "Loungegruppen, Tische, Schatten"
+            body: ""
+            bullets: []
+            cta: ""
+          brief: "Shoppable Bild Terrasse. Loungegruppe als Hauptmotiv mit Sonnenschirm, Beistelltisch, Outdoor Kissen. 5 Hotspots auf Sofa, Sessel, Beistelltisch, Sonnenschirm, Kissen."
+          asins: ["<TOP-5-GARTEN-LOUNGE>"]
+          hotspots: []
 
     - section: 9
       module: features.featureGrid4wide
       layoutId: '2x2wide'
       tiles:
         - type: image
-          textOverlay: "**Aus** einem Haus"
-          brief: "Marken USP Tile. Grüner Icon Kreis Haus, weiße Linie. Label darunter: Sortiment für Zuhause, Garten, Alltag."
+          textOverlay:
+            heading: "**Aus** einem Haus"
+            subheading: "Sortiment für Zuhause, Garten, Alltag"
+            body: ""
+            bullets: []
+            cta: ""
+          brief: "Marken USP Tile mit grünem Icon Kreis Haus."
         - type: image
-          textOverlay: "**Schnell** geliefert"
-          brief: "Marken USP Tile. Grüner Icon Kreis Truck, weiße Linie. Label: Mit Amazon Logistik."
+          textOverlay:
+            heading: "**Schnell** geliefert"
+            subheading: "Mit Amazon Logistik"
+            body: ""
+            bullets: []
+            cta: ""
+          brief: "Marken USP Tile mit grünem Icon Kreis Truck."
         - type: image
-          textOverlay: "**Montagefreundlich**"
-          brief: "Marken USP Tile. Grüner Icon Kreis Schraubenschlüssel, weiße Linie. Label: Verständliche Anleitung."
+          textOverlay:
+            heading: "**Montagefreundlich**"
+            subheading: "Verständliche Anleitung"
+            body: ""
+            bullets: []
+            cta: ""
+          brief: "Marken USP Tile mit grünem Icon Kreis Schraubenschlüssel."
         - type: image
-          textOverlay: "**Familiengeführt**"
-          brief: "Marken USP Tile. Grüner Icon Kreis Herz, weiße Linie. Label: Aus Süddeutschland."
+          textOverlay:
+            heading: "**Familiengeführt**"
+            subheading: "Aus Süddeutschland"
+            body: ""
+            bullets: []
+            cta: ""
+          brief: "Marken USP Tile mit grünem Icon Kreis Herz."
 
     - section: 10
       module: engagement.followBanner
       layoutId: '1'
       tiles:
         - type: image
-          textOverlay: "**Folge** Juskys"
-          brief: "Follow Banner auf Hellgrau. Hinweis dass neue Produkte und Aktionen direkt im Feed landen."
-          ctaText: "Folgen"
+          textOverlay:
+            heading: "**Folge** Juskys"
+            subheading: "Neue Produkte und Aktionen direkt im Feed"
+            body: ""
+            bullets: []
+            cta: "Folgen"
+          brief: "Follow Banner Full Width."
 
     - section: 11
       module: footer.categoryNavFooter
       layoutId: '2x2wide'
       tiles:
         - type: image
-          textOverlay: "**GARTEN**"
+          textOverlay:
+            heading: "**GARTEN**"
+            subheading: ""
+            body: ""
+            bullets: []
+            cta: ""
           brief: "Footer Kategorie Tile mit Mini Icon."
           linkUrl: "page:Garten"
         - type: image
-          textOverlay: "**MÖBEL**"
+          textOverlay:
+            heading: "**MÖBEL**"
+            subheading: ""
+            body: ""
+            bullets: []
+            cta: ""
           brief: "Footer Kategorie Tile mit Mini Icon."
           linkUrl: "page:Möbel"
         - type: image
-          textOverlay: "**HAUSHALT**"
+          textOverlay:
+            heading: "**HAUSHALT**"
+            subheading: ""
+            body: ""
+            bullets: []
+            cta: ""
           brief: "Footer Kategorie Tile mit Mini Icon."
           linkUrl: "page:Haushalt"
         - type: image
-          textOverlay: "**ÜBER** UNS"
+          textOverlay:
+            heading: "**ÜBER** UNS"
+            subheading: ""
+            body: ""
+            bullets: []
+            cta: ""
           brief: "Footer Tile zur Brand Story."
           linkUrl: "page:Über Uns"
 ```
 
-Saisonale Variante November bis Januar: Section 8 Bild und textOverlay tauschen gegen `Weihnachten **zuhause**`, hotspotsPlaceholder `<TOP-5-FREIZEIT-WEIHNACHT>`.
+Saisonale Variante November bis Januar: Section 8 Bild austauschen gegen Weihnachtsszene, `heading: "Weihnachten **zuhause**"`, `subheading: "Deko, Beleuchtung, Stimmung"`, `asins: ["<TOP-5-FREIZEIT-WEIHNACHT>"]`.
 
 ### 6.2 Bestseller
 
@@ -1428,3 +1602,7 @@ Nach Befüllung muss `validateStore()` aus `src/constants.js` ohne Errors durchl
 - jeder Tile hat einen gültigen `type` aus Tabelle 4.1
 - `shoppable_image` Tiles haben maximal 5 Hotspots
 - alle ASINs aus dem Store Top Level sind in mindestens einem Tile referenziert (Coverage Sanity Check)
+- `tile.textOverlay.heading` enthält maximal **ein** grünes Highlight Wort (`**...**`)
+- `tile.textOverlay.body` ist maximal 350 Zeichen lang
+- `tile.brief` enthält keine Lichtsetzung, keine Stimmung, keine Textinhalte
+- keine Em Dashes (`—`), keine En Dashes (`–`), keine Bindestriche mit Leerzeichen in kundensichtbaren Texten

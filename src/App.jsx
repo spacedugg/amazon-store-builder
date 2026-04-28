@@ -1,27 +1,20 @@
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, findLayout, LAYOUT_TILE_DIMS } from './constants';
-import { scrapeAsins, analyzeBrandCI } from './api';
-import { aiRefineStore, applyOperations, generateWireframesForPage, deleteWireframesForPage } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink } from './storage';
-import { analyzeOneProduct, groupIntoCategories, analyzeWebsitePage, synthesizeBrandProfile, planPages, generateOnePage, validateStore as validateStoreQuality, analyzeBrandVoice, buildBrandIntelligence, voiceConsistencyCheck, applyVoiceCorrections } from './contentPipeline';
+import { importBriefingToStore } from './briefingImport';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
-import { crawlMultipleStores, crawlAndParseStore, analyzeStoreImagesWithGemini, formatReferenceStoreContext, loadStoreKnowledge, formatStoreKnowledge, loadBlueprints, matchBlueprints, formatBlueprintsForPrompt } from './referenceStoreService';
 import Topbar from './components/Topbar';
 import PageList from './components/PageList';
 import Canvas from './components/Canvas';
 import PropertiesPanel from './components/PropertiesPanel';
 import AsinPanel from './components/AsinPanel';
-import GenerateModal from './components/GenerateModal';
-import GenerationWizard from './components/GenerationWizard';
-import ProgressModal from './components/ProgressModal';
-import AIChat from './components/AIChat';
+import NewStoreModal from './components/NewStoreModal';
 import PriceCalculator from './components/PriceCalculator';
 import ExportModal from './components/ExportModal';
 import BriefingView from './components/BriefingView';
 import AdminAnalyze from './components/AdminAnalyze';
 import AdminScrapingTest from './components/AdminScrapingTest';
 import AsinOverview from './components/AsinOverview';
-// KnowledgeBaseAdmin removed — reference data loads automatically in background
 
 var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, headerBannerColor: '', category: 'generic', googleDriveUrl: '' };
 
@@ -44,17 +37,9 @@ export default function App() {
   var [curPage, setCurPage] = useState('');
   var [sel, setSel] = useState(null);
   var [clipboardSection, setClipboardSection] = useState(null);
-  var [showGen, setShowGen] = useState(false);
-  var [showWizard, setShowWizard] = useState(false);
-  var [resumeWizardId, setResumeWizardId] = useState(null);
-  var [activeCheckpoints, setActiveCheckpoints] = useState([]);
   var [showAsins, setShowAsins] = useState(false);
   var [showPrice, setShowPrice] = useState(false);
-  var [generating, setGenerating] = useState(false);
-  var [genLog, setGenLog] = useState([]);
-  var [genDone, setGenDone] = useState(false);
-  var [chatBusy, setChatBusy] = useState(false);
-  var [chatResponse, setChatResponse] = useState('');
+  var [showNewStoreModal, setShowNewStoreModal] = useState(false);
   var [savedStores, setSavedStores] = useState([]);
   var [warnings, setWarnings] = useState([]);
   var [viewMode, setViewMode] = useState('desktop');
@@ -65,10 +50,6 @@ export default function App() {
 
   var [storeId, setStoreId] = useState(null);
   var [shareToken, setShareToken] = useState(null);
-  var [wfGenerating, setWfGenerating] = useState(null);
-  var [wfProgress, setWfProgress] = useState('');
-  var wfCancelRef = useRef(false);
-  var genCancelRef = useRef(false);
   var headerBannerInputRef = useRef(null);
   var folderInputRef = useRef(null);
 
@@ -159,764 +140,7 @@ export default function App() {
     }
   }, [store]);
 
-  var log = useCallback(function(m) { setGenLog(function(p) { return p.concat([m]); }); }, []);
-
   var page = store.pages.find(function(p) { return p.id === curPage; }) || store.pages[0] || null;
-
-  // ─── WIREFRAME GENERATION ───
-  var handleGenerateWireframes = function(pageId) {
-    if (wfGenerating) return;
-    var wfPage = (store.pages || []).find(function(p) { return p.id === pageId; });
-    if (!wfPage) return;
-    wfCancelRef.current = false;
-    setWfGenerating(pageId);
-    setWfProgress('Starte...');
-    generateWireframesForPage(
-      wfPage, store.brandName || '', store.websiteData || null,
-      { brandTone: store.brandTone, brandStory: store.brandStory, keyFeatures: store.keyFeatures, productCI: store.productCI || null },
-      function(current, total, category) {
-        setWfProgress(current + '/' + total + ' (' + category + ')');
-      },
-      store.manualCI || null,
-      wfCancelRef
-    ).then(function(result) {
-      setWfGenerating(null);
-      var msg = result.cancelled
-        ? result.success + ' generiert, abgebrochen'
-        : result.success + ' generiert, ' + result.failed + ' fehlgeschlagen';
-      if (result.error && !result.cancelled) msg += ' (' + result.error + ')';
-      setWfProgress(msg);
-      setStore(function(prev) { return Object.assign({}, prev); });
-      setTimeout(function() { setWfProgress(''); }, result.error ? 8000 : 4000);
-    }).catch(function(err) {
-      setWfGenerating(null);
-      setWfProgress('Fehler: ' + err.message);
-      setTimeout(function() { setWfProgress(''); }, 4000);
-    });
-  };
-
-  var handleStopWireframes = function() {
-    wfCancelRef.current = true;
-    setWfProgress('Wird angehalten...');
-  };
-
-  // ─── WIREFRAME DELETION ───
-  var handleDeleteWireframes = function(pageId) {
-    var wfPage = (store.pages || []).find(function(p) { return p.id === pageId; });
-    if (!wfPage) return;
-    var deleted = deleteWireframesForPage(wfPage);
-    if (deleted > 0) {
-      setStore(function(prev) { return Object.assign({}, prev); });
-      setWfProgress(deleted + ' Wireframes gelöscht');
-      setTimeout(function() { setWfProgress(''); }, 3000);
-    }
-  };
-
-  // ─── GENERATION ───
-
-  var handleGenerate = async function(params) {
-    setShowGen(false);
-    setShowWizard(false); // Close wizard when delegating from it
-    setGenerating(true);
-    setGenDone(false);
-    setGenLog([]);
-
-    // Keep tab alive during long generation (prevents browser from freezing inactive tabs)
-    var keepAlive = setInterval(function() { /* no-op tick keeps the tab active */ }, 1000);
-    setSel(null);
-    setRequestedAsins(params.asins.slice());
-    lastGenParams.current = params;
-    genCancelRef.current = false;
-
-    var lang = LANGS[params.marketplace] || 'German';
-    var domain = DOMAINS[params.marketplace] || DOMAINS.de;
-
-    // When invoked from the wizard, params.prepared carries data already
-    // gathered and potentially edited by the user. Each phase checks this
-    // object first and skips its own work when a fresh result is provided.
-    // When invoked from the modal (or with empty prepared), everything runs.
-    var prep = params.prepared || {};
-
-    try {
-      // Step 1: Scrape (skip if wizard already scraped)
-      var products;
-      if (prep.products && prep.products.length) {
-        log('Using scraped products from wizard: ' + prep.products.length);
-        products = prep.products;
-      } else {
-        log('Scraping ' + params.asins.length + ' ASINs from Amazon.' + params.marketplace + '...');
-        var scrapeResult = await scrapeAsins(params.asins, domain);
-        products = scrapeResult.products || [];
-        if (!products.length) throw new Error('No products returned from Bright Data. Check your ASINs and try again.');
-        log('Scraped ' + products.length + '/' + params.asins.length + ' products');
-      }
-
-      // Step 1.2: Analyze brand CI from product listing images via Gemini Vision
-      // (skip if wizard already analyzed)
-      var productCI = null;
-      var userCiSource = params.ciSource || 'auto';
-      if (prep.productCI) {
-        productCI = prep.productCI;
-        log('Using CI analysis from wizard: ' + (productCI.primaryColors || []).length + ' colors, mood: ' + (productCI.visualMood || '–'));
-      } else if (userCiSource !== 'manual' && userCiSource !== 'website') {
-        // Analyze Amazon listing images for CI (unless user chose "website only" or "manual")
-        try {
-          var ciImages = [];
-          // Collect ALL images from ALL products
-          products.forEach(function(p) {
-            var imgs = (p.images || []);
-            for (var ii = 0; ii < imgs.length; ii++) {
-              var imgUrl = typeof imgs[ii] === 'string' ? imgs[ii] : (imgs[ii].url || '');
-              if (imgUrl) ciImages.push({ url: imgUrl, context: p.name });
-            }
-          });
-          if (ciImages.length > 0) {
-            log('Analyzing brand CI from ' + ciImages.length + ' images across ' + products.length + ' products...');
-            // Send in batches — one batch per product (all images of one product together)
-            // This gives Gemini context: "these are all images of the SAME product"
-            var allCiResults = [];
-            var batchNum = 0;
-            for (var pi = 0; pi < products.length; pi++) {
-              var pImgs = (products[pi].images || []).map(function(img) {
-                var u = typeof img === 'string' ? img : (img.url || '');
-                return u ? { url: u, context: products[pi].name } : null;
-              }).filter(Boolean);
-              if (pImgs.length === 0) continue;
-              batchNum++;
-              log('   CI: product ' + batchNum + '/' + products.length + ' (' + pImgs.length + ' images) — ' + (products[pi].name || '').slice(0, 40));
-              // Retry up to 2 times per product
-              for (var attempt = 0; attempt < 2; attempt++) {
-                try {
-                  var batchCI = await analyzeBrandCI(pImgs, params.brand);
-                  if (batchCI && (batchCI.primaryColors || batchCI.visualMood)) {
-                    allCiResults.push(batchCI);
-                  }
-                  break; // success
-                } catch (batchErr) {
-                  if (attempt === 0) {
-                    log('     Retry...');
-                    await new Promise(function(r) { setTimeout(r, 2000); });
-                  }
-                }
-              }
-              // Brief pause between products to avoid rate limiting
-              if (pi < products.length - 1) {
-                await new Promise(function(r) { setTimeout(r, 500); });
-              }
-            }
-            // Merge all product CI results into one profile — ALL dimensions, not just colors
-            if (allCiResults.length > 0) {
-              // Helper: find most common string value across all results for a field
-              function ciMostCommon(field) {
-                var counts = {};
-                allCiResults.forEach(function(r) {
-                  var v = r[field];
-                  if (v && typeof v === 'string') counts[v] = (counts[v] || 0) + 1;
-                });
-                var best = ''; var bestN = 0;
-                Object.keys(counts).forEach(function(k) { if (counts[k] > bestN) { best = k; bestN = counts[k]; } });
-                return best;
-              }
-              // Helper: merge all unique values from array field
-              function ciMergeArray(field) {
-                var seen = {}; var out = [];
-                allCiResults.forEach(function(r) {
-                  (r[field] || []).forEach(function(v) { if (v && !seen[v]) { seen[v] = true; out.push(v); } });
-                });
-                return out;
-              }
-              // Filter generic white/black/gray that come from product photo BGs
-              function ciIsGenericColor(hex) {
-                var c = (hex || '').toLowerCase().replace('#', '');
-                if (c.length === 3) c = c[0] + c[0] + c[1] + c[1] + c[2] + c[2];
-                if (c.length !== 6) return true;
-                var r = parseInt(c.slice(0, 2), 16), g = parseInt(c.slice(2, 4), 16), b = parseInt(c.slice(4, 6), 16);
-                var brightness = (r + g + b) / 3, saturation = Math.max(r, g, b) - Math.min(r, g, b);
-                if (brightness > 240 && saturation < 15) return true;
-                if (brightness < 15 && saturation < 15) return true;
-                if (saturation < 10 && brightness > 50 && brightness < 200) return true;
-                return false;
-              }
-              var allColors = {};
-              allCiResults.forEach(function(r) {
-                (r.primaryColors || []).forEach(function(c) { if (!ciIsGenericColor(c)) allColors[c] = (allColors[c] || 0) + 1; });
-                (r.secondaryColors || []).forEach(function(c) { if (!ciIsGenericColor(c)) allColors[c] = (allColors[c] || 0) + 1; });
-              });
-              var sortedColors = Object.entries(allColors).sort(function(a, b) { return b[1] - a[1]; });
-              productCI = {
-                primaryColors: sortedColors.slice(0, 6).map(function(e) { return e[0]; }),
-                secondaryColors: sortedColors.slice(6, 10).map(function(e) { return e[0]; }),
-                backgroundColor: ciMostCommon('backgroundColor'),
-                colorVariation: ciMostCommon('colorVariation'),
-                typographyStyle: ciMostCommon('typographyStyle'),
-                visualMood: ciMostCommon('visualMood'),
-                backgroundPattern: ciMostCommon('backgroundPattern'),
-                recurringElements: ciMergeArray('recurringElements'),
-                photographyStyle: ciMostCommon('photographyStyle'),
-                textDensity: ciMostCommon('textDensity'),
-                designerNotes: allCiResults.map(function(r) { return r.designerNotes || ''; }).filter(function(n) { return n.length > 10; })[0] || '',
-                productsAnalyzed: allCiResults.length,
-              };
-              log('   CI complete: ' + allCiResults.length + '/' + products.length + ' products analyzed');
-              log('   Colors: ' + productCI.primaryColors.join(', '));
-              log('   Mood: ' + (productCI.visualMood || '–') + ', Typography: ' + (productCI.typographyStyle || '–'));
-              if (productCI.designerNotes) log('   Notes: ' + productCI.designerNotes);
-            }
-          }
-        } catch (ciErr) {
-          log('Amazon CI analysis skipped: ' + ciErr.message);
-        }
-      } else if (userCiSource === 'website') {
-        log('CI source: Website only (Amazon listing images skipped per user choice)');
-      } else {
-        log('CI source: Manual (no automatic CI extraction)');
-      }
-
-      // Step 1.5: Crawl & analyze reference stores (if provided)
-      var referenceAnalysis = null;
-      if (params.referenceStoreUrls && params.referenceStoreUrls.length > 0) {
-        log('Analyzing ' + params.referenceStoreUrls.length + ' reference stores...');
-        var parsedStores = await crawlMultipleStores(params.referenceStoreUrls, log);
-
-        // Gemini image analysis (if available)
-        var imageAnalyses = [];
-        for (var si = 0; si < parsedStores.length; si++) {
-          try {
-            var analyses = await analyzeStoreImagesWithGemini(parsedStores[si], log);
-            imageAnalyses = imageAnalyses.concat(analyses);
-          } catch (e) { log('Image analysis skipped: ' + e.message); }
-        }
-
-        referenceAnalysis = formatReferenceStoreContext(parsedStores, imageAnalyses);
-        log('Reference analysis complete');
-      }
-
-      // ─── Track critical failures for retry prompt ───
-      var criticalFailures = [];
-
-      // Existing-store analysis kept as separate variable so Step 2
-      // (brandIntelligence) can consume it structurally, not just as a text prefix.
-      var existingStoreContext = null;
-
-      // Step 1.5b: Analyze existing store with Gemini Vision (if provided)
-      if (params.existingStoreUrl) {
-        var existingStoreRetries = 0;
-        var existingStoreSuccess = false;
-        while (!existingStoreSuccess && existingStoreRetries < 3) {
-          try {
-            var modeLabel = (params.existingStoreMode === 'reconceptualize') ? 'NEU KONZIPIEREN' : 'OPTIMIEREN';
-            log(existingStoreRetries > 0 ? ('Retrying existing store analysis (attempt ' + (existingStoreRetries + 1) + ')...') : ('Analyzing existing brand store (' + modeLabel + '): ' + params.existingStoreUrl));
-            var existingStore = await crawlAndParseStore(params.existingStoreUrl, log);
-
-            // Analyze existing store images with Gemini for CI extraction
-            var existingImageAnalyses = [];
-            try {
-              existingImageAnalyses = await analyzeStoreImagesWithGemini(existingStore, log);
-            } catch (e) { log('Existing store image analysis skipped: ' + e.message); }
-
-            var existingContext = formatReferenceStoreContext([existingStore], existingImageAnalyses);
-            var storeMode = params.existingStoreMode || 'optimize';
-            var existingPrefix;
-            if (storeMode === 'reconceptualize') {
-              existingPrefix = '\n=== EXISTING BRAND STORE (current store — NEEDS COMPLETE RECONCEPTUALIZATION) ===\n'
-                + 'This store is fundamentally underoptimized. DO NOT preserve its structure or layout.\n'
-                + 'CREATE a completely new concept from scratch:\n'
-                + '- ONLY extract and keep: brand colors, logo, typography, and brand voice/tonality\n'
-                + '- IGNORE the existing page structure, navigation hierarchy, and module arrangement\n'
-                + '- Design an entirely new storytelling arc, new page structure, new module flow\n'
-                + '- Use the reference store best practices to build something significantly better\n'
-                + '- The existing store serves ONLY as CI reference, NOT as structural template\n\n';
-            } else {
-              existingPrefix = '\n=== EXISTING BRAND STORE (current store — OPTIMIZE & EXPAND) ===\n'
-                + 'This store has a good foundation. PRESERVE its core structure:\n'
-                + (params.keepMenuStructure
-                  ? '- CRITICAL: KEEP the EXACT menu/navigation structure (same pages, same hierarchy, same names). Do NOT rename, add, remove, or reorganize pages.\n'
-                  : '- You MAY reorganize the navigation/page structure if it improves the store.\n')
-                + '- KEEP module arrangements that work well (good flow, clear storytelling)\n'
-                + '- IMPROVE content quality: better headlines, stronger CTAs, richer descriptions\n'
-                + '- EXPAND with new products (from scraped ASINs) into existing categories\n'
-                + '- ADD missing elements: social proof, lifestyle images, benefit sections\n'
-                + '- FIX specific weaknesses while maintaining the overall concept\n'
-                + '- Match CI exactly: same colors, same image style, same tonality\n\n';
-            }
-            referenceAnalysis = (referenceAnalysis || '') + existingPrefix + existingContext;
-            // Keep the raw existing-store analysis for brandIntelligence consumption
-            existingStoreContext = existingPrefix + existingContext;
-            log('Existing store analyzed: ' + existingStore.pageCount + ' pages, ' + existingStore.summary.totalImages + ' images');
-            existingStoreSuccess = true;
-          } catch (existErr) {
-            existingStoreRetries++;
-            if (existingStoreRetries < 3) {
-              log('Existing store analysis failed (' + existErr.message + '), retrying in 3s...');
-              await new Promise(function(r) { setTimeout(r, 3000); });
-            } else {
-              log('CRITICAL: Existing store analysis FAILED after 3 attempts: ' + existErr.message);
-              criticalFailures.push('Existing store analysis');
-            }
-          }
-        }
-      }
-
-      // Step 1.6: Load store knowledge base (from 21 Cowork-analyzed stores)
-      try {
-        log('Loading store knowledge base (21 analyzed top stores)...');
-        var storeKB = await loadStoreKnowledge();
-        if (storeKB) {
-          var kbContext = formatStoreKnowledge(storeKB);
-          referenceAnalysis = (referenceAnalysis || '') + '\n' + kbContext;
-          log('Store knowledge base loaded: layout patterns, module flows, design archetypes, insights');
-        } else {
-          log('Store knowledge base not available');
-        }
-      } catch (kbErr) {
-        log('Store knowledge base skipped: ' + kbErr.message);
-      }
-
-      // ─── CRITICAL FAILURE CHECK: Warn user and offer to abort ───
-      if (criticalFailures.length > 0) {
-        log('');
-        log('WARNING: ' + criticalFailures.length + ' data sources failed: ' + criticalFailures.join(', '));
-        log('The store will be generated with INCOMPLETE data. Quality may be reduced.');
-        log('To retry: close this dialog, fix the issue, and re-generate.');
-        log('');
-      }
-
-      // Step 1.8: Log selected extra pages
-      var selectedExtraPages = params.extraPages || {};
-      var activeExtras = Object.keys(selectedExtraPages).filter(function(k) { return selectedExtraPages[k]; });
-      if (activeExtras.length > 0) {
-        log('Extra subpages: ' + activeExtras.join(', '));
-      }
-
-      // Website data is always used for CI extraction when available
-      var enhancedWebsiteData = params.websiteData || null;
-
-      // Merge CI data based on user's ciSource selection
-      if (productCI) {
-        if (!enhancedWebsiteData) enhancedWebsiteData = {};
-        enhancedWebsiteData.productCI = productCI;
-      }
-      if (userCiSource === 'amazon' && productCI) {
-        // Amazon-only: use Amazon CI colors, ignore website colors
-        if (!enhancedWebsiteData) enhancedWebsiteData = {};
-        enhancedWebsiteData.colors = (productCI.primaryColors || []).concat(productCI.secondaryColors || []);
-        log('CI priority: Amazon listing images (website colors ignored)');
-      } else if (userCiSource === 'website') {
-        // Website-only: keep website colors, don't override with Amazon
-        log('CI priority: Website (Amazon CI available for reference only)');
-      } else if (userCiSource === 'auto' && productCI) {
-        // Auto: Amazon CI takes priority for colors if website has none
-        if (!enhancedWebsiteData) enhancedWebsiteData = {};
-        if ((!enhancedWebsiteData.colors || enhancedWebsiteData.colors.length === 0) && productCI.primaryColors) {
-          enhancedWebsiteData.colors = productCI.primaryColors.concat(productCI.secondaryColors || []);
-        }
-        log('CI priority: Auto (Amazon + Website combined)');
-      } else if (userCiSource === 'manual') {
-        log('CI priority: Manual (user will set CI in CI tab)');
-      }
-
-      function checkCancel() {
-        if (genCancelRef.current) throw new Error('CANCELLED');
-      }
-
-      // ═══════════════════════════════════════════════════
-      // NEW PIPELINE: Sequential analysis steps
-      // Each step MUST succeed before the next one starts.
-      // Up to 3 retries per step. If a step fails after 3
-      // attempts, generation STOPS — no fallback, no skip.
-      // ═══════════════════════════════════════════════════
-
-      async function runPipelineStep(stepName, fn) {
-        var maxRetries = 3;
-        for (var attempt = 1; attempt <= maxRetries; attempt++) {
-          try {
-            if (attempt > 1) log('   Retry ' + attempt + '/' + maxRetries + '...');
-            var result = await fn();
-            if (!result) throw new Error('Empty result');
-            return result;
-          } catch (err) {
-            if (attempt < maxRetries) {
-              log('   ' + stepName + ' failed: ' + err.message + ' — retrying in 3s...');
-              await new Promise(function(r) { setTimeout(r, 3000); });
-            } else {
-              log('');
-              log('ERROR: ' + stepName + ' failed after ' + maxRetries + ' attempts: ' + err.message);
-              log('Generation stopped. Fix the issue and try again.');
-              throw new Error(stepName + ' failed: ' + err.message);
-            }
-          }
-        }
-      }
-
-      // Enrich website data with user-provided brand assets
-      if (params.logoFile || params.fontNames || params.brandColors) {
-        if (!enhancedWebsiteData) enhancedWebsiteData = {};
-        if (params.logoFile) enhancedWebsiteData.logoDataUrl = params.logoFile;
-        if (params.fontNames) enhancedWebsiteData.userFonts = params.fontNames;
-        if (params.brandColors) {
-          var userColors = params.brandColors.split(/[,;\s]+/).filter(function(c) { return c.match(/^#[0-9a-fA-F]{3,8}$/); });
-          if (userColors.length > 0) {
-            enhancedWebsiteData.colors = userColors;
-            log('User-provided brand colors: ' + userColors.join(', '));
-          }
-        }
-      }
-
-      // ═══════════════════════════════════════════════════
-      // CONTENT-FIRST PIPELINE v2
-      // Small, focused API calls. No mega-prompts.
-      // Every step: one focused question, one focused answer.
-      // All results accumulated and stored.
-      // ═══════════════════════════════════════════════════
-
-      // ─── PHASE 1: ANALYZE EACH PRODUCT INDIVIDUALLY ───
-      // (skip if wizard already produced product analyses)
-      log('');
-      log('═══ PHASE 1: PRODUKT-ANALYSE (einzeln) ═══');
-      var allProductAnalyses;
-      if (prep.productAnalyses && prep.productAnalyses.length) {
-        allProductAnalyses = prep.productAnalyses;
-        log('   Using ' + allProductAnalyses.length + ' product analyses from wizard');
-      } else {
-        allProductAnalyses = [];
-        for (var pi = 0; pi < products.length; pi++) {
-          checkCancel();
-          var p = products[pi];
-          log('   Product ' + (pi + 1) + '/' + products.length + ': ' + (p.name || '').slice(0, 50));
-          try {
-            var pa = await analyzeOneProduct(p, lang);
-            pa.asin = p.asin;
-            pa.name = p.name;
-            allProductAnalyses.push(pa);
-          } catch (paErr) {
-            log('     Failed: ' + paErr.message + ', skipping');
-            allProductAnalyses.push({ asin: p.asin, name: p.name, productCategory: 'Uncategorized', keyBenefits: [], shortHeadline: p.name, shortDescription: '' });
-          }
-          // Brief pause to avoid rate limiting
-          if (pi < products.length - 1) await new Promise(function(r) { setTimeout(r, 300); });
-        }
-        log('   ' + allProductAnalyses.length + ' products analyzed');
-      }
-
-      checkCancel();
-
-      // ─── PHASE 1.5: GROUP INTO CATEGORIES ───
-      // (skip if wizard already categorized — these may have been edited by user)
-      log('');
-      log('═══ PHASE 1.5: KATEGORISIERUNG ═══');
-      var categories;
-      if (prep.categories && prep.categories.categories && prep.categories.categories.length) {
-        categories = prep.categories;
-        log('   Using ' + categories.categories.length + ' categories from wizard');
-      } else {
-        categories = await runPipelineStep('Kategorisierung', function() {
-          return groupIntoCategories(allProductAnalyses, params.brand, lang);
-        });
-      }
-      (categories.categories || []).forEach(function(c) {
-        log('   ' + c.name + ': ' + (c.asins || []).length + ' products');
-      });
-
-      checkCancel();
-
-      // ─── PHASE 2: ANALYZE WEBSITE PAGES INDIVIDUALLY ───
-      // (skip if wizard already analyzed website pages)
-      log('');
-      log('═══ PHASE 2: WEBSITE-ANALYSE (pro Seite) ═══');
-      var allWebsiteAnalyses;
-      if (prep.websiteAnalyses) {
-        allWebsiteAnalyses = prep.websiteAnalyses;
-        log('   Using ' + allWebsiteAnalyses.length + ' website analyses from wizard');
-      } else {
-        allWebsiteAnalyses = [];
-        if (enhancedWebsiteData && enhancedWebsiteData.rawTextSections && enhancedWebsiteData.rawTextSections.length > 0) {
-          for (var wi = 0; wi < enhancedWebsiteData.rawTextSections.length; wi++) {
-            checkCancel();
-            var section = enhancedWebsiteData.rawTextSections[wi];
-            var pageText = section.text || '';
-            if (pageText.length < 50) continue;
-            log('   Page ' + (wi + 1) + '/' + enhancedWebsiteData.rawTextSections.length + ' (' + section.source + ')');
-            try {
-              var wa = await analyzeWebsitePage(pageText, section.source, params.brand, lang);
-              allWebsiteAnalyses.push(wa);
-            } catch (waErr) {
-              log('     Failed: ' + waErr.message);
-            }
-            if (wi < enhancedWebsiteData.rawTextSections.length - 1) await new Promise(function(r) { setTimeout(r, 300); });
-          }
-        } else {
-          log('   No website data available — using product data only');
-        }
-        log('   ' + allWebsiteAnalyses.length + ' website pages analyzed');
-      }
-
-      checkCancel();
-
-      // ─── PHASE 2.5: BRAND VOICE ───
-      // (skip if wizard produced voice — user may have edited in Step 2)
-      log('');
-      log('═══ PHASE 2.5: BRAND VOICE ═══');
-      var websiteTexts = enhancedWebsiteData ? (enhancedWebsiteData.aboutText || enhancedWebsiteData.rawTextContent || '') : '';
-      var pipelineBrandVoice;
-      if (prep.brandVoice) {
-        pipelineBrandVoice = prep.brandVoice;
-        log('   Using brand voice from wizard (possibly user-edited)');
-      } else {
-        pipelineBrandVoice = await runPipelineStep('Brand Voice', function() {
-          return analyzeBrandVoice(products, params.brand, websiteTexts, params.brandToneExamples || '', lang);
-        });
-      }
-      log('   Tone: ' + ((pipelineBrandVoice.toneDescriptors || []).join(', ') || pipelineBrandVoice.tone || '?'));
-      if (pipelineBrandVoice.voiceFingerprint) log('   Fingerprint: ' + pipelineBrandVoice.voiceFingerprint.slice(0, 120));
-
-      checkCancel();
-
-      // ─── PHASE 2.7: BRAND INTELLIGENCE (single source of truth) ───
-      // Packages voice + visual + content inventory + reuse flags into ONE
-      // structured object that every downstream call receives. This is the
-      // unification that Step 2 of the redesign introduced: data that used to
-      // live in separate places (productCI, existingStore text, websiteAnalyses)
-      // now flows through every prompt via a single block.
-      log('');
-      log('═══ PHASE 2.7: BRAND INTELLIGENCE ═══');
-      var brandIntelligence = buildBrandIntelligence({
-        brand: params.brand,
-        lang: lang,
-        voicePlaybook: pipelineBrandVoice,
-        productCI: productCI,
-        websiteData: enhancedWebsiteData,
-        allWebsiteAnalyses: allWebsiteAnalyses,
-        existingStoreAnalysis: existingStoreContext,
-        existingStoreMode: params.existingStoreMode || null,
-        adoptExistingContent: !!params.adoptExistingContent,
-      });
-      log('   Visual: ' + (brandIntelligence.visual.primaryColors.length) + ' primary colors, mood: ' + (brandIntelligence.visual.visualMood || '–'));
-      log('   Inventory: ' + brandIntelligence.contentInventory.websiteUsps.length + ' USPs, ' + brandIntelligence.contentInventory.trustElements.length + ' trust, ' + brandIntelligence.contentInventory.reusablePhrases.length + ' reusable phrases');
-      log('   Reuse: existingStore=' + brandIntelligence.reuseFlags.hasExistingStore + ', adoptContent=' + brandIntelligence.reuseFlags.adoptExistingContent);
-
-      checkCancel();
-
-      // ─── PHASE 3: SYNTHESIZE BRAND PROFILE ───
-      // (skip if wizard produced profile — user may have edited in Step 2)
-      log('');
-      log('═══ PHASE 3: BRAND PROFILE ═══');
-      var brandProfile;
-      if (prep.brandProfile) {
-        brandProfile = prep.brandProfile;
-        log('   Using brand profile from wizard (possibly user-edited)');
-      } else {
-        brandProfile = await runPipelineStep('Brand Profile', function() {
-          return synthesizeBrandProfile(allProductAnalyses, allWebsiteAnalyses, categories, pipelineBrandVoice, params.brand, lang, brandIntelligence);
-        });
-      }
-      log('   USPs: ' + (brandProfile.usps || []).length);
-      log('   Brand Story: ' + (brandProfile.brandStory && brandProfile.brandStory.available ? 'yes' : 'no'));
-      log('   Trust: ' + (brandProfile.trustElements || []).length);
-
-      checkCancel();
-
-      // ─── PHASE 4: PLAN PAGES ───
-      log('');
-      log('═══ PHASE 4: SEITENPLANUNG ═══');
-      var storeKnowledgeStr = null;
-      try { var kb = await loadStoreKnowledge(); if (kb) storeKnowledgeStr = formatStoreKnowledge(kb); } catch(e) {}
-
-      // Blueprint matching: rank the 20 deep analyses by fit to this brand,
-      // then feed the top matches into planning and generation as STRUCTURAL
-      // skeletons (page count, module cadence, layout rhythm).
-      var matchedBlueprints = [];
-      var blueprintsBlock = '';
-      try {
-        var blueprints = await loadBlueprints();
-        if (blueprints && blueprints.length) {
-          matchedBlueprints = matchBlueprints(blueprints, brandIntelligence, products.length, 3);
-          blueprintsBlock = formatBlueprintsForPrompt(matchedBlueprints);
-          log('   Blueprints matched: ' + matchedBlueprints.map(function(b) { return b.brandName; }).join(', '));
-        } else {
-          log('   Blueprints unavailable — falling back to knowledge aggregate');
-        }
-      } catch (bpErr) {
-        log('   Blueprint matching skipped: ' + bpErr.message);
-      }
-
-      // If the wizard already produced a page structure (Step 5) and page content
-      // (Step 4), respect those user edits as the page plan. Otherwise run the
-      // AI page planner fresh.
-      var pagePlan;
-      if (prep.pageStructure && prep.pageStructure.length) {
-        pagePlan = {
-          pages: prep.pageStructure.map(function(ps) {
-            var pc = (prep.pageContent || []).find(function(x) { return x.id === ps.id; }) || {};
-            return {
-              id: ps.id,
-              name: ps.name,
-              sections: (ps.sections || []).map(function(sec) {
-                return {
-                  purpose: sec.purpose || '',
-                  contentSource: sec.purpose || '',
-                  layout: sec.layoutId || 'auto',
-                  tiles: sec.tiles || [],
-                };
-              }),
-              userContent: {
-                heroHeadline: pc.heroHeadline || '',
-                heroSubline: pc.heroSubline || '',
-                usps: pc.usps || [],
-                imageIdeas: pc.imageIdeas || [],
-                cta: pc.cta || '',
-                notes: pc.notes || '',
-                asins: pc.asins || [],
-              },
-            };
-          }),
-        };
-        log('   Using page plan from wizard (structure + content edits respected)');
-        (pagePlan.pages || []).forEach(function(pg) {
-          log('   ' + pg.name + ': ' + (pg.sections || []).length + ' sections (user-edited)');
-        });
-      } else {
-        pagePlan = await runPipelineStep('Seitenplanung', function() {
-          return planPages(brandProfile, categories, allProductAnalyses, storeKnowledgeStr, params.brand, lang, selectedExtraPages, brandIntelligence, blueprintsBlock);
-        });
-        (pagePlan.pages || []).forEach(function(pg) {
-          log('   ' + pg.name + ': ' + (pg.sections || []).length + ' sections');
-        });
-      }
-
-      checkCancel();
-
-      // ─── PHASE 5: GENERATE EACH PAGE ───
-      log('');
-      log('═══ PHASE 5: SEITEN GENERIEREN (einzeln) ═══');
-      var generatedPages = [];
-      var plannedPages = pagePlan.pages || [];
-      for (var gi = 0; gi < plannedPages.length; gi++) {
-        checkCancel();
-        var pp = plannedPages[gi];
-        log('   Page ' + (gi + 1) + '/' + plannedPages.length + ': ' + pp.name);
-        try {
-          var pageResult = await generateOnePage(pp, brandProfile, categories, allProductAnalyses, params.brand, lang, generatedPages, storeKnowledgeStr, brandIntelligence, blueprintsBlock);
-          var pageObj = {
-            id: pp.id || ('page-' + gi),
-            name: pp.name,
-            sections: pageResult.sections || [],
-            heroBannerBrief: pageResult.heroBannerBrief || '',
-            heroBannerTextOverlay: pageResult.heroBannerTextOverlay || '',
-          };
-          generatedPages.push(pageObj);
-          log('     ' + (pageResult.sections || []).length + ' sections generated');
-        } catch (pgErr) {
-          log('     FAILED: ' + pgErr.message);
-          generatedPages.push({ id: pp.id || ('page-' + gi), name: pp.name, sections: [] });
-        }
-        if (gi < plannedPages.length - 1) await new Promise(function(r) { setTimeout(r, 1000); });
-      }
-
-      checkCancel();
-
-      // ─── PHASE 5.5: VOICE CONSISTENCY CHECK ───
-      // Post-processing pass: review all generated copy against the voice
-      // playbook. Claude flags off-brand lines and proposes corrections.
-      // Kept non-blocking — if the API call fails, the store still ships.
-      log('');
-      log('═══ PHASE 5.5: VOICE CONSISTENCY ═══');
-      try {
-        var vcResult = await voiceConsistencyCheck(generatedPages, brandIntelligence, params.brand, lang);
-        log('   Checked: ' + vcResult.checked + ' text items');
-        if (vcResult.corrections && vcResult.corrections.length) {
-          var applied = applyVoiceCorrections(generatedPages, vcResult.corrections);
-          log('   Voice corrections applied: ' + applied + '/' + vcResult.corrections.length);
-          vcResult.corrections.slice(0, 5).forEach(function(c) {
-            log('     ' + (c.pageName || '?') + ': "' + (c.original || '').slice(0, 40) + '" → "' + (c.corrected || '').slice(0, 40) + '"');
-          });
-        } else {
-          log('   All copy on-brand.');
-        }
-      } catch (vcErr) {
-        log('   Voice check skipped: ' + vcErr.message);
-      }
-
-      checkCancel();
-
-      // ─── BUILD FINAL STORE ───
-      log('');
-      log('═══ PHASE 6: ZUSAMMENBAU ═══');
-
-      var storeData = {
-        brandName: params.brand,
-        marketplace: params.marketplace,
-        brandTone: pipelineBrandVoice.tone || (pipelineBrandVoice.toneDescriptors || []).join(', ') || 'professional',
-        heroMessage: brandProfile.heroBannerConcept ? brandProfile.heroBannerConcept.headline : params.brand,
-        brandStory: brandProfile.brandStory ? brandProfile.brandStory.text : '',
-        keyFeatures: (brandProfile.usps || []).map(function(u) { return u.text; }),
-        products: products,
-        pages: generatedPages,
-        asins: params.asins,
-        // Pipeline data
-        contentPool: brandProfile,
-        categories: categories,
-        productAnalyses: allProductAnalyses,
-        websiteAnalyses: allWebsiteAnalyses,
-        pipelineBrandVoice: pipelineBrandVoice,
-        brandIntelligence: brandIntelligence,
-        matchedBlueprints: matchedBlueprints.map(function(b) { return { brandName: b.brandName, storeUrl: b.storeUrl }; }),
-        // For wireframe generation access
-        analysis: {
-          brandTone: pipelineBrandVoice.tone || (pipelineBrandVoice.toneDescriptors || []).join(', ') || 'professional',
-          brandStory: brandProfile.brandStory ? brandProfile.brandStory.text : '',
-          keyFeatures: (brandProfile.usps || []).map(function(u) { return u.text; }),
-          productCI: productCI,
-          pipelineBrandVoice: pipelineBrandVoice,
-          brandIntelligence: brandIntelligence,
-        },
-      };
-
-      // Store meta
-      if (productCI) storeData.productCI = productCI;
-      storeData.ciSource = userCiSource;
-      if (enhancedWebsiteData) storeData.websiteData = enhancedWebsiteData;
-
-      // ═══ PHASE 7: VALIDATION ═══
-      log('');
-      log('═══ PHASE 7: VALIDIERUNG ═══');
-      var validation = validateStoreQuality(storeData, params.asins, lang);
-      if (validation.issues.length > 0) {
-        validation.issues.forEach(function(i) {
-          log('   ' + i.severity.toUpperCase() + ': ' + i.type + (i.page ? ' on ' + i.page : '') + (i.count ? ' (' + i.count + ')' : ''));
-        });
-      } else {
-        log('   All checks passed.');
-      }
-      storeData.validation = validation;
-
-      setStore(storeData);
-      setCurPage(storeData.pages[0] ? storeData.pages[0].id : '');
-      log('');
-      log('Store complete! ' + storeData.pages.length + ' pages, ' + products.length + ' products.');
-    } catch (e) {
-      if (e.message === 'CANCELLED') {
-        log('');
-        log('Generierung abgebrochen.');
-        log('Bereits generierte Seiten bleiben erhalten.');
-      } else {
-        log('');
-        log('ERROR: ' + e.message);
-        if (e.message.indexOf('timed out') >= 0) {
-          log('The request timed out. Try again with fewer ASINs.');
-        } else if (e.message.indexOf('fetch') >= 0 || e.message.indexOf('network') >= 0 || e.message.indexOf('Failed to fetch') >= 0) {
-          log('Network error — check your internet connection and try again.');
-        } else if (e.message.indexOf('API error') >= 0 || e.message.indexOf('529') >= 0 || e.message.indexOf('overload') >= 0) {
-          log('The AI service is temporarily overloaded. Please wait a minute and try again.');
-        }
-      }
-    } finally {
-      clearInterval(keepAlive);
-      setGenDone(true);
-      // NEVER auto-close the modal. User must click OK or Close.
-    }
-  };
-
-  var lastGenParams = useRef(null);
 
   // ─── TILE UPDATE ───
   var updateTile = function(updated) {
@@ -1225,9 +449,15 @@ export default function App() {
     }
   };
 
-  // ─── NEW STORE (reset) ───
+  // ─── NEW STORE ───
+  // Klick auf "New Store" öffnet Modal mit Briefing JSON Import.
+  // Modal bietet außerdem die Option, einen leeren Store zu starten.
   var handleNewStore = function() {
-    if (store.pages.length > 0 && !confirm('Start a new store? Unsaved changes will be lost.')) return;
+    if (store.pages.length > 0 && !confirm('Neuen Store anlegen? Ungespeicherte Änderungen gehen verloren.')) return;
+    setShowNewStoreModal(true);
+  };
+
+  var handleCreateEmpty = function() {
     var firstPageId = uid();
     var initialStore = Object.assign({}, EMPTY_STORE, {
       pages: [{
@@ -1246,6 +476,23 @@ export default function App() {
     setRequestedAsins([]);
     setStoreId(null);
     setShareToken(null);
+    setShowNewStoreModal(false);
+  };
+
+  var handleImportBriefing = function(briefingData) {
+    try {
+      var imported = importBriefingToStore(briefingData);
+      setStore(imported);
+      setCurPage(imported.pages[0] ? imported.pages[0].id : '');
+      setSel(null);
+      setWarnings([]);
+      setRequestedAsins(imported.asins.map(function(a) { return a.asin; }));
+      setStoreId(null);
+      setShareToken(null);
+      setShowNewStoreModal(false);
+    } catch (e) {
+      alert('Import fehlgeschlagen, ' + e.message);
+    }
   };
 
   // ─── VIEW MODE ───
@@ -1432,30 +679,6 @@ export default function App() {
     setShowExport(false);
   };
 
-  // ─── AI CHAT ───
-  var handleChatSend = async function(command) {
-    if (!store.pages.length) return;
-    setChatBusy(true);
-    setChatResponse('Processing...');
-    try {
-      var lang = LANGS[store.marketplace] || 'German';
-      var result = await aiRefineStore(store, command, store.brandName, lang);
-      if (result.operations && result.operations.length > 0) {
-        var newStore = applyOperations(store, result.operations);
-        setStoreWithUndo(function(s) {
-          return Object.assign({}, newStore, { products: s.products, asins: s.asins, brandName: s.brandName, marketplace: s.marketplace });
-        });
-        setChatResponse(result.explanation || 'Changes applied.');
-      } else {
-        setChatResponse(result.explanation || 'No changes needed.');
-      }
-    } catch (e) {
-      setChatResponse('Error: ' + e.message);
-    } finally {
-      setChatBusy(false);
-    }
-  };
-
   // ─── SELECTED TILE ───
   var selTile = null;
   var selLayoutType = null;
@@ -1495,26 +718,10 @@ export default function App() {
     hasAutoSave = autoData && autoData.pages && autoData.pages.length > 0;
   } catch(e) { /* ignore */ }
 
-  // Load any unfinished wizard checkpoints so the user can resume
-  useEffect(function() {
-    fetch('/api/wizard-state').then(function(r) { return r.ok ? r.json() : null; }).then(function(json) {
-      if (json && json.items) setActiveCheckpoints(json.items);
-    }).catch(function() { /* ignore */ });
-  }, [showWizard]);
-
-  // Wizard completion: install generated store into the editor
-  var handleWizardComplete = useCallback(function(storeObj) {
-    if (!storeObj || !storeObj.pages) return;
-    setStore(storeObj);
-    setCurPage(storeObj.pages[0] ? storeObj.pages[0].id : '');
-    setSel(null);
-  }, []);
-
   return (
     <div className="app-root">
       <Topbar
         store={store}
-        onGenerate={function() { setResumeWizardId(null); setShowWizard(true); }}
         onExport={handleExport}
         onSave={handleSave}
         viewMode={viewMode}
@@ -1573,12 +780,7 @@ export default function App() {
           uiLang={uiLang}
           hasAutoSave={hasAutoSave}
           onLoadAutoSave={handleLoadAutoSave}
-          onGenerate={function() { setResumeWizardId(null); setShowWizard(true); }}
-          onGenerateWireframes={handleGenerateWireframes}
-          onDeleteWireframes={handleDeleteWireframes}
-          onStopWireframes={handleStopWireframes}
-          wfGenerating={wfGenerating}
-          wfProgress={wfProgress}
+          onGenerate={handleNewStore}
         />
 
         <PropertiesPanel
@@ -1594,15 +796,6 @@ export default function App() {
         />
       </div>
 
-      {store.pages.length > 0 && (
-        <AIChat
-          onSend={handleChatSend}
-          disabled={chatBusy}
-          lastResponse={chatResponse}
-          uiLang={uiLang}
-        />
-      )}
-
       {/* Validation warnings */}
       {warnings.length > 0 && store.pages.length > 0 && (
         <div className="warnings-bar">
@@ -1612,48 +805,11 @@ export default function App() {
         </div>
       )}
 
-      {showGen && (
-        <GenerateModal
-          onClose={function() { setShowGen(false); }}
-          onGenerate={handleGenerate}
-          uiLang={uiLang}
-          googleDriveUrl={store.googleDriveUrl || ''}
-          onGoogleDriveChange={function(url) { setStoreWithUndo(function(s) { return Object.assign({}, s, { googleDriveUrl: url }); }); }}
-        />
-      )}
-
-      {showWizard && (
-        <GenerationWizard
-          resumeId={resumeWizardId}
-          onComplete={function(storeObj) { handleWizardComplete(storeObj); setShowWizard(false); setResumeWizardId(null); }}
-          onCancel={function() { setShowWizard(false); setResumeWizardId(null); }}
-          onGenerate={handleGenerate}
-        />
-      )}
-
-      {/* Resume checkpoint banner — shown on the empty-state canvas only */}
-      {!showWizard && !store.pages.length && activeCheckpoints.length > 0 && (
-        <div style={{ position: 'fixed', bottom: 16, right: 16, background: '#fff', border: '1px solid #FF9900', borderRadius: 10, padding: 14, boxShadow: '0 10px 30px rgba(0,0,0,.15)', maxWidth: 360, zIndex: 40 }}>
-          <div style={{ fontSize: 12, fontWeight: 700, marginBottom: 4, color: '#0f172a' }}>Unfertige Generierungen</div>
-          <div style={{ fontSize: 11, color: '#64748b', marginBottom: 8 }}>Du hast {activeCheckpoints.length} Wizard-Lauf{activeCheckpoints.length === 1 ? '' : 'e'}, der unterbrochen wurde. An welcher Stelle weitermachen?</div>
-          {activeCheckpoints.slice(0, 4).map(function(cp) {
-            return (
-              <button key={cp.id} className="btn" style={{ display: 'block', width: '100%', fontSize: 11, marginBottom: 4, textAlign: 'left' }} onClick={function() { setResumeWizardId(cp.id); setShowWizard(true); }}>
-                {cp.brandName || '(Ohne Namen)'} — Schritt {cp.step + 1}
-              </button>
-            );
-          })}
-        </div>
-      )}
-
-      {generating && (
-        <ProgressModal
-          logs={genLog}
-          done={genDone}
-          uiLang={uiLang}
-          onClose={function() { setGenerating(false); }}
-          onRetry={lastGenParams.current ? function() { handleGenerate(lastGenParams.current); } : null}
-          onStop={function() { genCancelRef.current = true; log('Abbrechen angefordert — warte auf laufenden Schritt...'); }}
+      {showNewStoreModal && (
+        <NewStoreModal
+          onClose={function() { setShowNewStoreModal(false); }}
+          onImport={handleImportBriefing}
+          onCreateEmpty={handleCreateEmpty}
         />
       )}
 
@@ -1708,7 +864,7 @@ export default function App() {
                     });
                   } else {
                     // Create new product_grid section with the ASIN
-                    sections.push({ id: uid(), layoutId: '1', tiles: [{ type: 'product_grid', asins: [asin], brief: '', textOverlay: '', ctaText: '', dimensions: { w: 3000, h: 1200 }, mobileDimensions: { w: 1680, h: 1200 } }] });
+                    sections.push({ id: uid(), layoutId: '1', tiles: [Object.assign(emptyTile(), { type: 'product_grid', asins: [asin] })] });
                   }
                   return Object.assign({}, pg, { sections: sections });
                 }),

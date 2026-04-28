@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, findLayout } from '../constants';
 import { loadStoreByShareToken } from '../storage';
-import { generateWireframesForPage, deleteWireframesForPage } from '../storeBuilder';
 import SectionView, { getGridConfig } from './SectionView';
 
 var noop = function() {};
@@ -50,8 +49,10 @@ function generateMetaDescription(page, store) {
   var keywords = [];
   (page.sections || []).forEach(function(sec) {
     (sec.tiles || []).forEach(function(tile) {
-      if (tile.textOverlay && tile.textOverlay.length > 3 && tile.textOverlay.length < 60) {
-        keywords.push(tile.textOverlay);
+      var heading = (tile.textOverlay && typeof tile.textOverlay === 'object') ? (tile.textOverlay.heading || '') : '';
+      heading = heading.replace(/\*\*([^*]+)\*\*/g, '$1');
+      if (heading.length > 3 && heading.length < 60) {
+        keywords.push(heading);
       }
     });
   });
@@ -194,7 +195,9 @@ var CATEGORY_TAG_MAP = {
 // Generate a content fingerprint for a tile to detect duplicates
 function tileFingerprint(tile) {
   if (!tile) return '';
-  return [tile.type, tile.brief || '', tile.textOverlay || '', tile.ctaText || '', tile.imageCategory || '', tile.bgColor || '',
+  var ov = (tile.textOverlay && typeof tile.textOverlay === 'object') ? tile.textOverlay : {};
+  var ovStr = [ov.heading || '', ov.subheading || '', ov.body || '', (ov.bullets || []).join(';'), ov.cta || ''].join('§');
+  return [tile.type, tile.brief || '', ovStr, tile.imageCategory || '', tile.bgColor || '',
     (tile.dimensions || {}).w + 'x' + (tile.dimensions || {}).h,
     (tile.asins || []).join(',')].join('|');
 }
@@ -560,8 +563,8 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
       {tile.brief && (function() {
         // Remove textOverlay content from the brief to avoid redundancy
         var briefText = tile.brief;
-        if (tile.textOverlay) {
-          // Remove exact textOverlay text (or lines thereof) from brief
+        if (tile.textOverlay && typeof tile.textOverlay === 'string') {
+          // Legacy textOverlay (string), remove duplicated lines from brief
           var overlayLines = tile.textOverlay.split(/\\n|\n/).map(function(l) { return l.trim(); }).filter(Boolean);
           overlayLines.forEach(function(line) {
             // Escape regex special chars
@@ -583,50 +586,63 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
         );
       })()}
 
-      {tile.textOverlay && (
-        <div className="briefing-field" style={{ flexDirection: 'column', gap: 2 }}>
-          <span className="briefing-field-label">Text on Image:{tile.textAlign && tile.textAlign !== 'left' ? ' (' + (tile.textAlign === 'center' ? 'centered' : 'right-aligned') + ')' : ''}</span>
-          <div style={{ padding: '6px 8px', background: '#fefce8', border: '1px solid #fde68a', borderRadius: 4, lineHeight: 1.5 }}>
-            {(function() {
-              var tagStyles = {
-                h1: { bg: '#dbeafe', color: '#1d4ed8', fontSize: 12, fontWeight: 700, label: 'H1' },
-                h2: { bg: '#e0e7ff', color: '#4338ca', fontSize: 11, fontWeight: 600, label: 'H2' },
-                body: { bg: '#f8fafc', color: '#475569', fontSize: 11, fontWeight: 400, label: 'BODY' },
-                bullet: { bg: '#fef3c7', color: '#92400e', fontSize: 11, fontWeight: 400, label: 'BULLET' },
-                text: { bg: '#ccfbf1', color: '#0f766e', fontSize: 11, fontWeight: 500, label: 'TEXT' },
-              };
-              return tile.textOverlay.split(/\\n|\n/).map(function(line, li) {
-                var trimmed = line.trim();
-                if (!trimmed) return <div key={li} style={{ height: 4 }} />;
-                // Parse role tag [h1], [h2], [body], [bullet]
-                var tagMatch = trimmed.match(/^\[(h1|h2|h3|body|bullet)\]/i);
-                var role = 'text';
-                var displayText = trimmed;
-                if (tagMatch) {
-                  role = tagMatch[1].toLowerCase();
-                  if (role === 'h3') role = 'body';
-                  displayText = trimmed.replace(/^\[(h1|h2|h3|body|bullet)\]\s*/i, '');
-                } else if (/^•\s/.test(trimmed)) {
-                  role = 'bullet';
-                  displayText = trimmed.replace(/^•\s*/, '');
-                }
-                var style = tagStyles[role] || tagStyles.text;
-                return <div key={li} style={{ fontSize: style.fontSize, fontWeight: style.fontWeight, color: '#1e293b', marginTop: li > 0 ? 2 : 0, paddingLeft: role === 'bullet' ? 8 : 0 }}>
-                  <span style={{ background: style.bg, borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, color: style.color, marginRight: 3 }}>{style.label}</span>
-                  {displayText}
-                </div>;
-              });
-            })()}
+      {(function() {
+        var ov = (tile.textOverlay && typeof tile.textOverlay === 'object') ? tile.textOverlay : null;
+        if (!ov) return null;
+        var hasContent = ov.heading || ov.subheading || ov.body || (ov.bullets && ov.bullets.filter(Boolean).length) || ov.cta;
+        if (!hasContent) return null;
+        var renderHL = function(s) {
+          if (!s) return null;
+          var parts = s.split(/(\*\*[^*]+\*\*)/g);
+          return parts.map(function(p, i) {
+            if (p.length > 4 && p.slice(0, 2) === '**' && p.slice(-2) === '**') {
+              return <span key={i} style={{ color: '#93bd26', fontWeight: 700 }}>{p.slice(2, -2)}</span>;
+            }
+            return <span key={i}>{p}</span>;
+          });
+        };
+        var rowStyle = { display: 'flex', gap: 6, alignItems: 'baseline', marginTop: 3 };
+        var tagStyle = function(bg, color) { return { background: bg, color: color, borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, flexShrink: 0 }; };
+        return (
+          <div className="briefing-field" style={{ flexDirection: 'column', gap: 2 }}>
+            <span className="briefing-field-label">Text on Image:{tile.textAlign && tile.textAlign !== 'left' ? ' (' + (tile.textAlign === 'center' ? 'centered' : 'right-aligned') + ')' : ''}</span>
+            <div style={{ padding: '6px 8px', background: '#fefce8', border: '1px solid #fde68a', borderRadius: 4, lineHeight: 1.5 }}>
+              {ov.heading && (
+                <div style={rowStyle}>
+                  <span style={tagStyle('#dbeafe', '#1d4ed8')}>HEADING</span>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: '#1e293b' }}>{renderHL(ov.heading)}</span>
+                </div>
+              )}
+              {ov.subheading && (
+                <div style={rowStyle}>
+                  <span style={tagStyle('#e0e7ff', '#4338ca')}>SUBHEADING</span>
+                  <span style={{ fontSize: 11, fontWeight: 600, color: '#1e293b' }}>{ov.subheading}</span>
+                </div>
+              )}
+              {ov.body && (
+                <div style={rowStyle}>
+                  <span style={tagStyle('#f1f5f9', '#475569')}>BODY</span>
+                  <span style={{ fontSize: 11, color: '#1e293b' }}>{ov.body}</span>
+                </div>
+              )}
+              {ov.bullets && ov.bullets.filter(Boolean).map(function(b, bi) {
+                return (
+                  <div key={bi} style={rowStyle}>
+                    <span style={tagStyle('#fef3c7', '#92400e')}>BULLET</span>
+                    <span style={{ fontSize: 11, color: '#1e293b' }}>{b}</span>
+                  </div>
+                );
+              })}
+              {ov.cta && (
+                <div style={rowStyle}>
+                  <span style={tagStyle('#ccfbf1', '#0f766e')}>CTA</span>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: '#1e293b' }}>"{ov.cta}"</span>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      )}
-
-      {tile.ctaText && (
-        <div className="briefing-field">
-          <span className="briefing-field-label">CTA Button:</span>
-          <span className="briefing-field-value briefing-field-cta">"{tile.ctaText}"</span>
-        </div>
-      )}
+        );
+      })()}
 
       {tile.bgColor && (
         <div className="briefing-field">
@@ -1589,9 +1605,6 @@ export default function BriefingView() {
   var [selectedTile, setSelectedTile] = useState(null); // { sid, ti }
   var [sidebarTab, setSidebarTab] = useState('design'); // 'design', 'ci', or 'info'
   var [showPreview, setShowPreview] = useState(false);
-  var [wfGenerating, setWfGenerating] = useState(null); // pageId currently generating wireframes
-  var [wfProgress, setWfProgress] = useState(''); // progress text
-  var wfCancelRef = useRef(false);
   var prevStoreRef = useRef(null);
   var pollRef = useRef(null);
   var bannerTimeoutRef = useRef(null);
@@ -1599,55 +1612,6 @@ export default function BriefingView() {
   var [localImageMap, setLocalImageMap] = useState({}); // { canonical_filename -> blob URL }
   var [folderMatchCount, setFolderMatchCount] = useState(0);
   var rightPanelRef = useRef(null);
-
-  // Generate wireframes for a specific page
-  var handleGenerateWireframes = function(pageId) {
-    if (wfGenerating) return; // already generating
-    var page = (store.pages || []).find(function(p) { return p.id === pageId; });
-    if (!page) return;
-    wfCancelRef.current = false;
-    setWfGenerating(pageId);
-    setWfProgress('Starte...');
-    generateWireframesForPage(
-      page, store.brandName || '', store.websiteData || null,
-      { brandTone: store.brandTone, brandStory: store.brandStory, keyFeatures: store.keyFeatures, productCI: store.productCI || null },
-      function(current, total, category) {
-        setWfProgress(current + '/' + total + ' (' + category + ')');
-      },
-      store.manualCI || null,
-      wfCancelRef
-    ).then(function(result) {
-      setWfGenerating(null);
-      var msg = result.cancelled
-        ? result.success + ' generiert, abgebrochen'
-        : result.success + ' generiert, ' + result.failed + ' fehlgeschlagen';
-      if (result.error && !result.cancelled) msg += ' (' + result.error + ')';
-      setWfProgress(msg);
-      setStore(function(prev) { return Object.assign({}, prev); });
-      setTimeout(function() { setWfProgress(''); }, result.error ? 8000 : 4000);
-    }).catch(function(err) {
-      setWfGenerating(null);
-      setWfProgress('Fehler: ' + err.message);
-      setTimeout(function() { setWfProgress(''); }, 4000);
-    });
-  };
-
-  var handleStopWireframes = function() {
-    wfCancelRef.current = true;
-    setWfProgress('Wird angehalten...');
-  };
-
-  // Delete wireframes for a specific page
-  var handleDeleteWireframes = function(pageId) {
-    var page = (store.pages || []).find(function(p) { return p.id === pageId; });
-    if (!page) return;
-    var deleted = deleteWireframesForPage(page);
-    if (deleted > 0) {
-      setStore(function(prev) { return Object.assign({}, prev); });
-      setWfProgress(deleted + ' Wireframes gelöscht');
-      setTimeout(function() { setWfProgress(''); }, 3000);
-    }
-  };
 
   // ─── FOLDER IMAGE UPLOAD (local preview in designer dashboard) ───
   function handleBriefingFolderSelect(e) {
@@ -1795,8 +1759,7 @@ export default function BriefingView() {
             highlights['tile-' + sec.id + '-' + ti] = 'modified';
             var fields = [];
             if (tile.brief !== oldTile.brief) fields.push('brief');
-            if (tile.textOverlay !== oldTile.textOverlay) fields.push('text');
-            if (tile.ctaText !== oldTile.ctaText) fields.push('CTA');
+            if (JSON.stringify(tile.textOverlay) !== JSON.stringify(oldTile.textOverlay)) fields.push('text');
             if (tile.bgColor !== oldTile.bgColor) fields.push('color');
             if (tile.imageCategory !== oldTile.imageCategory) fields.push('category');
             if (tile.type !== oldTile.type) fields.push('type');

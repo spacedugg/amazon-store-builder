@@ -1,48 +1,6 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, MAX_HOTSPOTS, createDefaultProductSelector } from '../constants';
 import { t } from '../i18n';
-
-// Newline-tolerant ASIN textarea. Storing the raw textarea value locally keeps
-// trailing newlines while typing — without this, .filter(Boolean) on every
-// keystroke removes the empty line and ENTER appears to do nothing, blocking
-// the user from entering more than one ASIN.
-function AsinTextarea({ value, onCommit, rows, placeholder, className, style }) {
-  var initial = (value || []).join('\n');
-  var [raw, setRaw] = useState(initial);
-  // Sync external changes (different tile, or programmatic update) into the
-  // local raw string, but only when the parent's clean list no longer matches
-  // what the user is typing. This preserves the in-progress trailing newline.
-  useEffect(function() {
-    var rawList = raw.split('\n').map(function(s) { return s.trim(); }).filter(Boolean);
-    var ext = value || [];
-    var same = rawList.length === ext.length && rawList.every(function(a, i) { return a === ext[i]; });
-    if (!same) setRaw(ext.join('\n'));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value]);
-
-  function commit(next) {
-    var list = next.split('\n').map(function(s) { return s.trim(); }).filter(Boolean);
-    var ext = value || [];
-    var same = list.length === ext.length && list.every(function(a, i) { return a === ext[i]; });
-    if (!same) onCommit(list);
-  }
-
-  return (
-    <textarea
-      value={raw}
-      rows={rows}
-      className={className}
-      placeholder={placeholder}
-      style={style}
-      onChange={function(e) { setRaw(e.target.value); commit(e.target.value); }}
-      onBlur={function() {
-        // Normalize on blur so multiple blanks collapse to one canonical line.
-        var clean = (value || []).join('\n');
-        if (clean !== raw) setRaw(clean);
-      }}
-    />
-  );
-}
 
 // Toggle **bold** around selected text or at cursor
 function toggleBold(ref, value, onChange) {
@@ -123,22 +81,6 @@ function fileUpload(label, value, onSet, onRemove, uiLang) {
 }
 
 export default function PropertiesPanel({ tile, onChange, products, viewMode, uiLang, layoutType, heroBanner, onHeroBannerChange }) {
-  // Refs + pending focus index for the structured text editor.
-  // When the user clicks "+ Heading", we want the new (empty) input to receive
-  // focus so they can immediately type — otherwise it just looks like a
-  // mysterious tag was added with no way to edit it.
-  var lineInputRefs = useRef({});
-  var [pendingFocusIdx, setPendingFocusIdx] = useState(null);
-  useEffect(function() {
-    if (pendingFocusIdx === null) return;
-    var el = lineInputRefs.current[pendingFocusIdx];
-    if (el) {
-      el.focus();
-      try { el.setSelectionRange(el.value.length, el.value.length); } catch (e) {}
-    }
-    setPendingFocusIdx(null);
-  });
-
   // ─── HERO BANNER MODE ───
   if (heroBanner) {
     var hPage = heroBanner;
@@ -307,130 +249,67 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
           )}
           <div className="props-section">
             <label className="label">{t('props.textOverlay', uiLang)}</label>
-
-            {/* ── STRUCTURED TEXT EDITOR: separate fields per role tag ── */}
             {(function() {
-              var lines = (tile.textOverlay || '').split(/\\n|\n/);
-              // Parse role tags: [h1], [h2], [body], [bullet] or legacy • prefix
-              var structured = lines.map(function(line, i) {
-                var trimmed = line.trim();
-                var tagMatch = trimmed.match(/^\[(h1|h2|h3|body|bullet)\]/i);
-                if (tagMatch) {
-                  var tag = tagMatch[1].toLowerCase();
-                  var text = trimmed.replace(/^\[(h1|h2|h3|body|bullet)\]\s*/i, '');
-                  return { type: tag, text: text, idx: i };
-                }
-                // Legacy: • prefix = bullet
-                if (/^•\s/.test(trimmed)) return { type: 'bullet', text: trimmed.replace(/^•\s*/, ''), idx: i };
-                // Single line or no tag = just text
-                return { type: lines.length <= 1 ? 'text' : 'text', text: trimmed, idx: i };
-              });
-
-              function updateLine(lineIdx, newText) {
-                var newLines = (tile.textOverlay || '').split(/\\n|\n/);
-                var item = structured[lineIdx];
-                var prefix = item ? '[' + item.type + ']' : '';
-                if (item && item.type === 'text' && lines.length <= 1) prefix = ''; // single text, no tag
-                newLines[lineIdx] = prefix + newText;
-                u('textOverlay', newLines.join('\\n'));
-              }
-
-              function addLine(type) {
-                var current = tile.textOverlay || '';
-                var prefix = '[' + type + ']';
-                u('textOverlay', current + (current ? '\\n' : '') + prefix);
-                // Focus the brand-new (empty) input so the user can immediately type.
-                var newIdx = current ? current.split(/\\n|\n/).length : 0;
-                setPendingFocusIdx(newIdx);
-              }
-
-              function changeLineType(lineIdx, newType) {
-                var newLines = (tile.textOverlay || '').split(/\\n|\n/);
-                var text = structured[lineIdx] ? structured[lineIdx].text : '';
-                newLines[lineIdx] = '[' + newType + ']' + text;
-                u('textOverlay', newLines.join('\\n'));
-              }
-
-              function removeLine(lineIdx) {
-                var newLines = (tile.textOverlay || '').split(/\\n|\n/);
-                newLines.splice(lineIdx, 1);
-                u('textOverlay', newLines.join('\\n'));
-              }
-
-              var labels = { h1: 'Heading', h2: 'Subheading', h3: 'Detail', body: 'Body', bullet: 'Bullet', text: 'Text' };
-              var colors = { h1: '#1d4ed8', h2: '#4338ca', h3: '#64748b', body: '#475569', bullet: '#92400e', text: '#0f766e' };
-              var bgColors = { h1: '#dbeafe', h2: '#e0e7ff', h3: '#f1f5f9', body: '#f8fafc', bullet: '#fef3c7', text: '#ccfbf1' };
-              var fontSizes = { h1: 12, h2: 11, h3: 11, body: 11, bullet: 11, text: 11 };
-              var fontWeights = { h1: 700, h2: 600, h3: 400, body: 400, bullet: 400, text: 500 };
-
-              var filledLines = structured.filter(function(item) { return item.text.trim(); });
-              var showHierarchy = filledLines.length >= 2;
-              var dragIdx = { current: null };
-
-              function moveLine(fromIdx, toIdx) {
-                if (fromIdx === toIdx) return;
-                var newLines = (tile.textOverlay || '').split(/\\n|\n/);
-                var item = newLines.splice(fromIdx, 1)[0];
-                newLines.splice(toIdx, 0, item);
-                u('textOverlay', newLines.join('\\n'));
-              }
-
+              var ov = (tile.textOverlay && typeof tile.textOverlay === 'object') ? tile.textOverlay : { heading: '', subheading: '', body: '', bullets: [], cta: '' };
+              var uOv = function(key, val) { u('textOverlay', Object.assign({}, ov, { [key]: val })); };
+              var bullets = ov.bullets || [];
+              var bodyLen = (ov.body || '').length;
               return (
-                <div>
-                  {structured.map(function(item, i) {
-                    // Always render every line — including empty ones — so the
-                    // user can actually type into a freshly added [h1] / [h2] /
-                    // [bullet] line. Hiding empty lines made the editor look
-                    // broken right after clicking "+ Heading".
-                    return (
-                      <div key={i} style={{ marginBottom: 4, display: 'flex', alignItems: 'center', gap: 4 }}
-                        draggable={structured.length > 1}
-                        onDragStart={function(e) { dragIdx.current = i; e.dataTransfer.effectAllowed = 'move'; }}
-                        onDragOver={function(e) { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; }}
-                        onDrop={function(e) { e.preventDefault(); if (dragIdx.current !== null && dragIdx.current !== i) { moveLine(dragIdx.current, i); dragIdx.current = null; } }}
-                      >
-                        {structured.length > 1 && (
-                          <span style={{ cursor: 'grab', fontSize: 10, color: '#94a3b8', flexShrink: 0, userSelect: 'none' }} title="Drag to reorder">&#9776;</span>
-                        )}
-                        {showHierarchy && (
-                          <select
-                            value={item.type}
-                            onChange={function(e) { changeLineType(i, e.target.value); }}
-                            style={{ background: bgColors[item.type], color: colors[item.type], borderRadius: 3, padding: '1px 4px', fontSize: 8, fontWeight: 700, minWidth: 28, textAlign: 'center', flexShrink: 0, border: '1px solid ' + (bgColors[item.type] || '#e2e8f0'), cursor: 'pointer', fontFamily: 'inherit' }}
-                          >
-                            <option value="h1">H1</option>
-                            <option value="h2">H2</option>
-                            <option value="body">Body</option>
-                            <option value="bullet">Bullet</option>
-                          </select>
-                        )}
-                        <input
-                          ref={function(el) { lineInputRefs.current[i] = el; }}
-                          value={item.text}
-                          onChange={function(e) { updateLine(i, e.target.value); }}
-                          placeholder={showHierarchy ? labels[item.type] : t('props.textOverlayPlaceholder', uiLang)}
-                          style={{ flex: 1, fontSize: fontSizes[item.type], fontWeight: showHierarchy ? fontWeights[item.type] : 400, padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontFamily: 'inherit' }}
-                        />
-                        {structured.length > 1 && (
-                          <button onClick={function() { removeLine(i); }} style={{ fontSize: 10, color: '#94a3b8', background: 'none', border: 'none', cursor: 'pointer', padding: '2px 4px' }} title="Zeile entfernen">&times;</button>
-                        )}
-                      </div>
-                    );
-                  })}
-                  <div style={{ display: 'flex', gap: 3, marginTop: 4, flexWrap: 'wrap' }}>
-                    <button className="btn" onClick={function() { addLine('h1'); }} style={{ fontSize: 9, padding: '2px 6px' }}>+ Heading</button>
-                    <button className="btn" onClick={function() { addLine('h2'); }} style={{ fontSize: 9, padding: '2px 6px' }}>+ Subheading</button>
-                    <button className="btn" onClick={function() { addLine('body'); }} style={{ fontSize: 9, padding: '2px 6px' }}>+ Bodytext</button>
-                    <button className="btn" onClick={function() { addLine('bullet'); }} style={{ fontSize: 9, padding: '2px 6px' }}>+ Bullet</button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <div>
+                    <div style={{ fontSize: 9, fontWeight: 700, color: '#1d4ed8', textTransform: 'uppercase', marginBottom: 2 }}>Heading</div>
+                    <input value={ov.heading || ''}
+                      onChange={function(e) { uOv('heading', e.target.value); }}
+                      placeholder="Hauptüberschrift, ein Wort als **WORT** für grünes Highlight"
+                      style={{ width: '100%', padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 12, fontWeight: 700, fontFamily: 'inherit', boxSizing: 'border-box' }} />
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 9, fontWeight: 700, color: '#4338ca', textTransform: 'uppercase', marginBottom: 2 }}>Subheading</div>
+                    <input value={ov.subheading || ''}
+                      onChange={function(e) { uOv('subheading', e.target.value); }}
+                      placeholder="Unterüberschrift"
+                      style={{ width: '100%', padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 11, fontFamily: 'inherit', boxSizing: 'border-box' }} />
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 9, fontWeight: 700, color: '#475569', textTransform: 'uppercase', marginBottom: 2 }}>
+                      Body <span style={{ color: bodyLen > 350 ? '#ef4444' : '#94a3b8', fontWeight: 400 }}>({bodyLen}/350)</span>
+                    </div>
+                    <textarea value={ov.body || ''}
+                      onChange={function(e) { uOv('body', e.target.value); }}
+                      placeholder="Fließtext, max 350 Zeichen"
+                      rows={3}
+                      style={{ width: '100%', padding: '4px 6px', border: '1px solid ' + (bodyLen > 350 ? '#ef4444' : '#e2e8f0'), borderRadius: 4, fontSize: 11, fontFamily: 'inherit', resize: 'vertical', boxSizing: 'border-box' }} />
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 9, fontWeight: 700, color: '#92400e', textTransform: 'uppercase', marginBottom: 2 }}>Bullets</div>
+                    {bullets.map(function(b, i) {
+                      return (
+                        <div key={i} style={{ display: 'flex', gap: 4, marginBottom: 2 }}>
+                          <input value={b}
+                            onChange={function(e) {
+                              var nb = bullets.slice(); nb[i] = e.target.value; uOv('bullets', nb);
+                            }}
+                            placeholder={'Bullet ' + (i + 1)}
+                            style={{ flex: 1, padding: '3px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 11, fontFamily: 'inherit', boxSizing: 'border-box' }} />
+                          <button onClick={function() {
+                            var nb = bullets.slice(); nb.splice(i, 1); uOv('bullets', nb);
+                          }} style={{ fontSize: 10, color: '#94a3b8', background: 'none', border: 'none', cursor: 'pointer', padding: '2px 4px' }} title="Bullet entfernen">&times;</button>
+                        </div>
+                      );
+                    })}
+                    <button className="btn" onClick={function() { uOv('bullets', bullets.concat([''])); }}
+                      style={{ fontSize: 9, padding: '2px 6px' }}>+ Bullet</button>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 9, fontWeight: 700, color: '#0f766e', textTransform: 'uppercase', marginBottom: 2 }}>CTA Button</div>
+                    <input value={ov.cta || ''}
+                      onChange={function(e) { uOv('cta', e.target.value); }}
+                      placeholder='"Jetzt entdecken"'
+                      style={{ width: '100%', padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 11, fontFamily: 'inherit', boxSizing: 'border-box' }} />
                   </div>
                 </div>
               );
             })()}
-          </div>
-          <div className="props-section">
-            <label className="label">{t('props.ctaText', uiLang)}</label>
-            <TextFieldWithBold value={tile.ctaText || ''} onChange={function(v) { u('ctaText', v); }}
-              placeholder='"Jetzt entdecken"' className="input" />
           </div>
 
           {/* Desktop Dimensions */}
@@ -691,13 +570,9 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
       {isProductType && (
         <div className="props-section">
           <label className="label">{t('props.asins', uiLang)}</label>
-          <AsinTextarea
-            value={tile.asins || []}
-            onCommit={function(list) { u('asins', list); }}
-            rows={8}
-            className="input input-mono"
-            placeholder="B0XXXXXXXXXX"
-          />
+          <textarea value={(tile.asins || []).join('\n')}
+            onChange={function(e) { u('asins', e.target.value.split('\n').map(function(s) { return s.trim(); }).filter(Boolean)); }}
+            rows={8} className="input input-mono" placeholder="B0XXXXXXXXXX" />
           {(tile.asins || []).length > 0 && (
             <div className="props-asin-list">
               {(tile.asins || []).map(function(asin) {
@@ -721,12 +596,29 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
         </div>
       )}
 
-      {/* TEXT */}
+      {/* TEXT, native section heading, schmaler Editor mit nur Heading plus Body */}
       {tile.type === 'text' && (
         <div className="props-section">
           <label className="label">{t('props.textContent', uiLang)}</label>
-          <TextFieldWithBold value={tile.textOverlay || ''} onChange={function(v) { u('textOverlay', v); }}
-            rows={4} placeholder={t('props.nativeTextPlaceholder', uiLang)} className="input" />
+          {(function() {
+            var ov = (tile.textOverlay && typeof tile.textOverlay === 'object') ? tile.textOverlay : { heading: '', subheading: '', body: '', bullets: [], cta: '' };
+            var uOv = function(key, val) { u('textOverlay', Object.assign({}, ov, { [key]: val })); };
+            var bodyLen = (ov.body || '').length;
+            return (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                <input value={ov.heading || ''}
+                  onChange={function(e) { uOv('heading', e.target.value); }}
+                  placeholder="Section Heading"
+                  style={{ width: '100%', padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 12, fontWeight: 700, fontFamily: 'inherit', boxSizing: 'border-box' }} />
+                <textarea value={ov.body || ''}
+                  onChange={function(e) { uOv('body', e.target.value); }}
+                  placeholder="Optionaler Body Text"
+                  rows={3}
+                  style={{ width: '100%', padding: '4px 6px', border: '1px solid ' + (bodyLen > 350 ? '#ef4444' : '#e2e8f0'), borderRadius: 4, fontSize: 11, fontFamily: 'inherit', resize: 'vertical', boxSizing: 'border-box' }} />
+                <div style={{ fontSize: 9, color: bodyLen > 350 ? '#ef4444' : '#94a3b8' }}>{bodyLen}/350</div>
+              </div>
+            );
+          })()}
           <div className="text-align-picker" style={{ display: 'flex', gap: 2, marginTop: 4 }}>
             <button className={'btn text-align-btn' + ((!tile.textAlign || tile.textAlign === 'left') ? ' active' : '')} onClick={function() { u('textAlign', 'left'); }} title="Linksbündig" style={{ fontSize: 10, padding: '3px 8px' }}>&#8676; Links</button>
             <button className={'btn text-align-btn' + (tile.textAlign === 'center' ? ' active' : '')} onClick={function() { u('textAlign', 'center'); }} title="Zentriert" style={{ fontSize: 10, padding: '3px 8px' }}>Mitte</button>
@@ -833,13 +725,12 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
             {/* Recommended ASINs */}
             <div className="props-section">
               <div style={{ fontWeight: 700, fontSize: 11, color: '#7c3aed', marginBottom: 4 }}>Empfohlene Produkte (max. 50)</div>
-              <AsinTextarea
-                value={ps.recommendedAsins || []}
-                onCommit={function(list) { updatePS('recommendedAsins', list.slice(0, 50)); }}
-                rows={2}
-                className="input"
+              <textarea className="input" rows={2} value={(ps.recommendedAsins || []).join('\n')}
                 placeholder="ASINs (eine pro Zeile)"
-              />
+                onChange={function(e) {
+                  var asins = e.target.value.split(/[\n,;]+/).map(function(s) { return s.trim(); }).filter(Boolean).slice(0, 50);
+                  updatePS('recommendedAsins', asins);
+                }} />
               <div className="hint">{(ps.recommendedAsins || []).length} / 50 ASINs</div>
             </div>
 

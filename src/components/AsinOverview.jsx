@@ -1,5 +1,27 @@
 import { useState } from 'react';
-import { checkAsinCompleteness } from '../contentPipeline';
+
+// Inlined ASIN completeness check (formerly contentPipeline.checkAsinCompleteness)
+// Returns which input ASINs are placed in tiles vs missing.
+function checkAsinCompleteness(inputAsins, pages) {
+  var placed = {};
+  (pages || []).forEach(function(pg) {
+    (pg.sections || []).forEach(function(sec) {
+      (sec.tiles || []).forEach(function(tl) {
+        (tl.asins || []).forEach(function(a) {
+          if (!placed[a]) placed[a] = [];
+          placed[a].push({ pageName: pg.name, tileType: tl.type });
+        });
+      });
+    });
+  });
+  var found = [];
+  var missing = [];
+  (inputAsins || []).forEach(function(a) {
+    if (placed[a]) found.push({ asin: a, locations: placed[a] });
+    else missing.push(a);
+  });
+  return { complete: missing.length === 0, found: found, missing: missing, total: (inputAsins || []).length };
+}
 
 export default function AsinOverview({ store, products, onClose, onMoveAsin }) {
   var [filter, setFilter] = useState('all'); // 'all', 'missing', 'found'

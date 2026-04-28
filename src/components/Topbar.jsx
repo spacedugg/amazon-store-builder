@@ -1,4 +1,4 @@
-export default function Topbar({ store, onGenerate, onExport, onSave, viewMode, onToggleView, onNewStore, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef }) {
+export default function Topbar({ store, onExport, onSave, viewMode, onToggleView, onNewStore, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef }) {
   return (
     <div className="topbar">
       <div className="topbar-brand">
@@ -60,7 +60,9 @@ export default function Topbar({ store, onGenerate, onExport, onSave, viewMode, 
         </>
       )}
 
-      <button className="btn btn-primary" onClick={onGenerate} style={store.pages.length > 0 ? { marginLeft: 4 } : {}}>Generate</button>
+      {!store.pages.length && (
+        <button className="btn btn-primary" onClick={onNewStore} style={{ marginLeft: 4 }}>Neuer Store</button>
+      )}
     </div>
   );
 }

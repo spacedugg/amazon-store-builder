@@ -2,7 +2,7 @@ import { useState } from 'react';
 import SectionView from './SectionView';
 import { t } from '../i18n';
 
-export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onChangeLayout, onApplySectionImageCategory, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate, onGenerateWireframes, onDeleteWireframes, onStopWireframes, wfGenerating, wfProgress }) {
+export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onChangeLayout, onApplySectionImageCategory, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate }) {
   var [hoveredNav, setHoveredNav] = useState(null);
   var [showHeroPicker, setShowHeroPicker] = useState(false);
 
@@ -133,37 +133,6 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
             })}
           </div>
         </div>
-
-        {/* Wireframe toolbar */}
-        {page && page.sections && page.sections.length > 0 && onGenerateWireframes && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 12px', background: '#f8fafc', borderBottom: '1px solid #e2e8f0', fontSize: 12 }}>
-            {wfGenerating === page.id ? (
-              <button className="btn" onClick={onStopWireframes}
-                style={{ padding: '5px 14px', fontSize: 11, fontWeight: 600, background: '#ef4444', color: '#fff', border: 'none', borderRadius: 4, cursor: 'pointer' }}>
-                Anhalten
-              </button>
-            ) : (
-              <button className="btn" disabled={!!wfGenerating} onClick={function() { onGenerateWireframes(page.id); }}
-                style={{ padding: '5px 14px', fontSize: 11, fontWeight: 600, background: '#6366f1', color: '#fff', border: 'none', borderRadius: 4, cursor: wfGenerating ? 'wait' : 'pointer' }}>
-                Wireframes generieren
-              </button>
-            )}
-            {onDeleteWireframes && (
-              <button className="btn" disabled={!!wfGenerating} onClick={function() { onDeleteWireframes(page.id); }}
-                style={{ padding: '5px 14px', fontSize: 11, fontWeight: 600, background: '#fee2e2', color: '#991b1b', border: '1px solid #fecaca', borderRadius: 4, cursor: wfGenerating ? 'wait' : 'pointer' }}>
-                Wireframes löschen
-              </button>
-            )}
-            {wfProgress && (
-              <span style={{ fontSize: 11, padding: '3px 10px', borderRadius: 4,
-                background: wfProgress.indexOf('fehlgeschlagen') >= 0 && wfProgress.indexOf('0 generiert') >= 0 ? '#fee2e2' : wfProgress.indexOf('fehlgeschlagen') >= 0 ? '#fef3c7' : '#dcfce7',
-                color: wfProgress.indexOf('fehlgeschlagen') >= 0 && wfProgress.indexOf('0 generiert') >= 0 ? '#991b1b' : wfProgress.indexOf('fehlgeschlagen') >= 0 ? '#92400e' : '#166534' }}>
-                {wfProgress}
-              </span>
-            )}
-            <span style={{ fontSize: 10, color: '#94a3b8' }}>KI-Wireframes</span>
-          </div>
-        )}
 
         {/* Sections */}
         {page.sections.map(function(sec, si) {
