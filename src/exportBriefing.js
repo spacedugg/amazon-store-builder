@@ -371,7 +371,8 @@ function tileDescription(tile, tileIndex, productMap, lang, duplicateNote) {
     if (tile.bgColor) parts.push(boldPara(t('brief.colorPreview', lang) + ': ', tile.bgColor));
     if (tile.textOverlay) {
       var alignHint = tile.textAlign && tile.textAlign !== 'left' ? ' (' + (tile.textAlign === 'center' ? 'zentriert' : 'rechtsbündig') + ')' : '';
-      var overlayLines = tile.textOverlay.split('\\n').filter(function(l) { return l.trim(); });
+      // Accept both literal "\n" (legacy storage format) and real newline.
+      var overlayLines = tile.textOverlay.split(/\\n|\n/).filter(function(l) { return l.trim(); });
       if (overlayLines.length > 1) {
         // MULTIPLE TEXTS — hierarchy by POSITION (line order), not text length
         // Line 1 = H1 (largest, heading), Line 2 = H2 (medium), Line 3+ = H3 (smallest)

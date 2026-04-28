@@ -2,6 +2,56 @@ import { PRODUCT_TILE_TYPES, TILE_TYPE_LABELS } from '../constants';
 import { t } from '../i18n';
 import Wireframe from './Wireframe';
 
+// Renders a tile.textOverlay string (which may contain [h1]/[h2]/[body]/[bullet]
+// role tags and either literal "\n" or real newline separators) as formatted
+// hierarchical text. Without this, tiles display the raw markup literally.
+function OverlayText({ value, align, variant }) {
+  if (!value) return null;
+  var lines = String(value).split(/\\n|\n/);
+  var ROLE_STYLES_NATIVE = {
+    h1:     { fontWeight: 700, fontSize: 14, color: '#0f172a', lineHeight: 1.25 },
+    h2:     { fontWeight: 600, fontSize: 12, color: '#1f2937', lineHeight: 1.3 },
+    body:   { fontWeight: 400, fontSize: 11, color: '#334155', lineHeight: 1.4 },
+    bullet: { fontWeight: 400, fontSize: 11, color: '#334155', lineHeight: 1.4 },
+    text:   { fontWeight: 700, fontSize: 13, color: '#334155', lineHeight: 1.3 },
+  };
+  var ROLE_STYLES_OVERLAY = {
+    h1:     { fontWeight: 700, fontSize: 11, color: '#0f172a', lineHeight: 1.2 },
+    h2:     { fontWeight: 600, fontSize: 10, color: '#1f2937', lineHeight: 1.25 },
+    body:   { fontWeight: 400, fontSize: 9,  color: '#334155', lineHeight: 1.35 },
+    bullet: { fontWeight: 400, fontSize: 9,  color: '#334155', lineHeight: 1.35 },
+    text:   { fontWeight: 600, fontSize: 10, color: '#0f172a', lineHeight: 1.25 },
+  };
+  var styleMap = variant === 'overlay' ? ROLE_STYLES_OVERLAY : ROLE_STYLES_NATIVE;
+  var TAG_RE = /^\[(h1|h2|h3|body|bullet)\]\s*/i;
+  return (
+    <div style={{ textAlign: align || 'left' }}>
+      {lines.map(function(line, i) {
+        var trimmed = line.trim();
+        if (!trimmed) return <div key={i} style={{ height: 3 }} />;
+        var role = 'text';
+        var text = trimmed;
+        var tagMatch = trimmed.match(TAG_RE);
+        if (tagMatch) {
+          role = tagMatch[1].toLowerCase();
+          if (role === 'h3') role = 'body';
+          text = trimmed.replace(TAG_RE, '');
+        } else if (/^•\s/.test(trimmed)) {
+          role = 'bullet';
+          text = trimmed.replace(/^•\s*/, '');
+        }
+        // Strip **bold** wrapping; render bold visually
+        var bold = false;
+        if (/^\*\*.+\*\*$/.test(text)) { bold = true; text = text.replace(/^\*\*|\*\*$/g, ''); }
+        var s = styleMap[role] || styleMap.text;
+        if (bold) s = Object.assign({}, s, { fontWeight: 700 });
+        var prefix = role === 'bullet' ? '• ' : '';
+        return <div key={i} style={s}>{prefix + text}</div>;
+      })}
+    </div>
+  );
+}
+
 function ProductCardWireframe({ asins, products, tileType, bgColor, uiLang }) {
   var productMap = {};
   (products || []).forEach(function(p) { productMap[p.asin] = p; });
@@ -139,7 +189,9 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
     return (
       <div className={cls} onClick={onClick} style={bgColor ? { background: bgColor } : undefined}>
         <div className="tile-text-native">
-          <div className="tile-text-content" style={{ textAlign: tile.textAlign || 'left' }}>{tile.textOverlay || t('tile.textModule', uiLang)}</div>
+          {tile.textOverlay
+            ? <OverlayText value={tile.textOverlay} align={tile.textAlign} variant="native" />
+            : <div className="tile-text-content" style={{ textAlign: tile.textAlign || 'left' }}>{t('tile.textModule', uiLang)}</div>}
         </div>
       </div>
     );
@@ -155,7 +207,11 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
             ? <img src={tile.wireframeImage} className="tile-uploaded-img tile-wireframe-img" alt="Wireframe" />
             : <Wireframe tile={tile} viewMode={viewMode} bgColor={bgColor} />
         }
-        {tile.textOverlay && <div className="tile-it-text" style={{ textAlign: tile.textAlign || 'left' }}>{tile.textOverlay}</div>}
+        {tile.textOverlay && (
+          <div className="tile-it-text">
+            <OverlayText value={tile.textOverlay} align={tile.textAlign} variant="overlay" />
+          </div>
+        )}
       </div>
     );
   }
