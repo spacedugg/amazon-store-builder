@@ -19,7 +19,13 @@ export default function Wireframe({ tile, width, viewMode, bgColor }) {
   var dims = (viewMode === 'mobile' ? tile.mobileDimensions : tile.dimensions) || tile.dimensions || { w: 3000, h: 1200 };
   var w = width || 280;
   var ht = Math.max(30, Math.round(w / (dims.w / dims.h)));
-  var text = tile.textOverlay || '';
+  var rawText = tile.textOverlay || '';
+  // Strip role tags ([h1], [h2], [body], [bullet]) and use the first non-empty line
+  // as the wireframe preview text. Without this, tiles render the literal markup.
+  var text = rawText
+    .split(/\\n|\n/)
+    .map(function(l) { return l.trim().replace(/^\[(h1|h2|h3|body|bullet)\]\s*/i, '').replace(/^•\s*/, '').replace(/^\*\*|\*\*$/g, ''); })
+    .filter(function(l) { return l; })[0] || '';
   var cta = tile.ctaText || '';
   var isShoppable = tile.type === 'shoppable_image';
   var isImageText = tile.type === 'image_text';

@@ -1556,6 +1556,7 @@ export default function App() {
         />
 
         <PropertiesPanel
+          key={sel ? (sel.sid + ':' + (sel.ti != null ? sel.ti : '')) : 'none'}
           tile={selTile}
           onChange={updateTile}
           products={store.products}

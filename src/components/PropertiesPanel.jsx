@@ -1,6 +1,48 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, MAX_HOTSPOTS, createDefaultProductSelector } from '../constants';
 import { t } from '../i18n';
+
+// Newline-tolerant ASIN textarea. Storing the raw textarea value locally keeps
+// trailing newlines while typing — without this, .filter(Boolean) on every
+// keystroke removes the empty line and ENTER appears to do nothing, blocking
+// the user from entering more than one ASIN.
+function AsinTextarea({ value, onCommit, rows, placeholder, className, style }) {
+  var initial = (value || []).join('\n');
+  var [raw, setRaw] = useState(initial);
+  // Sync external changes (different tile, or programmatic update) into the
+  // local raw string, but only when the parent's clean list no longer matches
+  // what the user is typing. This preserves the in-progress trailing newline.
+  useEffect(function() {
+    var rawList = raw.split('\n').map(function(s) { return s.trim(); }).filter(Boolean);
+    var ext = value || [];
+    var same = rawList.length === ext.length && rawList.every(function(a, i) { return a === ext[i]; });
+    if (!same) setRaw(ext.join('\n'));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
+
+  function commit(next) {
+    var list = next.split('\n').map(function(s) { return s.trim(); }).filter(Boolean);
+    var ext = value || [];
+    var same = list.length === ext.length && list.every(function(a, i) { return a === ext[i]; });
+    if (!same) onCommit(list);
+  }
+
+  return (
+    <textarea
+      value={raw}
+      rows={rows}
+      className={className}
+      placeholder={placeholder}
+      style={style}
+      onChange={function(e) { setRaw(e.target.value); commit(e.target.value); }}
+      onBlur={function() {
+        // Normalize on blur so multiple blanks collapse to one canonical line.
+        var clean = (value || []).join('\n');
+        if (clean !== raw) setRaw(clean);
+      }}
+    />
+  );
+}
 
 // Toggle **bold** around selected text or at cursor
 function toggleBold(ref, value, onChange) {
@@ -81,6 +123,22 @@ function fileUpload(label, value, onSet, onRemove, uiLang) {
 }
 
 export default function PropertiesPanel({ tile, onChange, products, viewMode, uiLang, layoutType, heroBanner, onHeroBannerChange }) {
+  // Refs + pending focus index for the structured text editor.
+  // When the user clicks "+ Heading", we want the new (empty) input to receive
+  // focus so they can immediately type — otherwise it just looks like a
+  // mysterious tag was added with no way to edit it.
+  var lineInputRefs = useRef({});
+  var [pendingFocusIdx, setPendingFocusIdx] = useState(null);
+  useEffect(function() {
+    if (pendingFocusIdx === null) return;
+    var el = lineInputRefs.current[pendingFocusIdx];
+    if (el) {
+      el.focus();
+      try { el.setSelectionRange(el.value.length, el.value.length); } catch (e) {}
+    }
+    setPendingFocusIdx(null);
+  });
+
   // ─── HERO BANNER MODE ───
   if (heroBanner) {
     var hPage = heroBanner;
@@ -281,6 +339,9 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
                 var current = tile.textOverlay || '';
                 var prefix = '[' + type + ']';
                 u('textOverlay', current + (current ? '\\n' : '') + prefix);
+                // Focus the brand-new (empty) input so the user can immediately type.
+                var newIdx = current ? current.split(/\\n|\n/).length : 0;
+                setPendingFocusIdx(newIdx);
               }
 
               function changeLineType(lineIdx, newType) {
@@ -317,7 +378,10 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
               return (
                 <div>
                   {structured.map(function(item, i) {
-                    if (!item.text && structured.length > 1) return null;
+                    // Always render every line — including empty ones — so the
+                    // user can actually type into a freshly added [h1] / [h2] /
+                    // [bullet] line. Hiding empty lines made the editor look
+                    // broken right after clicking "+ Heading".
                     return (
                       <div key={i} style={{ marginBottom: 4, display: 'flex', alignItems: 'center', gap: 4 }}
                         draggable={structured.length > 1}
@@ -341,6 +405,7 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
                           </select>
                         )}
                         <input
+                          ref={function(el) { lineInputRefs.current[i] = el; }}
                           value={item.text}
                           onChange={function(e) { updateLine(i, e.target.value); }}
                           placeholder={showHierarchy ? labels[item.type] : t('props.textOverlayPlaceholder', uiLang)}
@@ -626,9 +691,13 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
       {isProductType && (
         <div className="props-section">
           <label className="label">{t('props.asins', uiLang)}</label>
-          <textarea value={(tile.asins || []).join('\n')}
-            onChange={function(e) { u('asins', e.target.value.split('\n').map(function(s) { return s.trim(); }).filter(Boolean)); }}
-            rows={8} className="input input-mono" placeholder="B0XXXXXXXXXX" />
+          <AsinTextarea
+            value={tile.asins || []}
+            onCommit={function(list) { u('asins', list); }}
+            rows={8}
+            className="input input-mono"
+            placeholder="B0XXXXXXXXXX"
+          />
           {(tile.asins || []).length > 0 && (
             <div className="props-asin-list">
               {(tile.asins || []).map(function(asin) {
@@ -764,12 +833,13 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
             {/* Recommended ASINs */}
             <div className="props-section">
               <div style={{ fontWeight: 700, fontSize: 11, color: '#7c3aed', marginBottom: 4 }}>Empfohlene Produkte (max. 50)</div>
-              <textarea className="input" rows={2} value={(ps.recommendedAsins || []).join('\n')}
+              <AsinTextarea
+                value={ps.recommendedAsins || []}
+                onCommit={function(list) { updatePS('recommendedAsins', list.slice(0, 50)); }}
+                rows={2}
+                className="input"
                 placeholder="ASINs (eine pro Zeile)"
-                onChange={function(e) {
-                  var asins = e.target.value.split(/[\n,;]+/).map(function(s) { return s.trim(); }).filter(Boolean).slice(0, 50);
-                  updatePS('recommendedAsins', asins);
-                }} />
+              />
               <div className="hint">{(ps.recommendedAsins || []).length} / 50 ASINs</div>
             </div>
 
