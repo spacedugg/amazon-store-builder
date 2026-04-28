@@ -1,6 +1,5 @@
 import { useState, useCallback, useRef } from 'react';
 import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, findLayout, LAYOUT_TILE_DIMS } from './constants';
-import { aiRefineStore, applyOperations, generateWireframesForPage, deleteWireframesForPage } from './storeBuilder';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink } from './storage';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
 import Topbar from './components/Topbar';
@@ -8,7 +7,6 @@ import PageList from './components/PageList';
 import Canvas from './components/Canvas';
 import PropertiesPanel from './components/PropertiesPanel';
 import AsinPanel from './components/AsinPanel';
-import AIChat from './components/AIChat';
 import PriceCalculator from './components/PriceCalculator';
 import ExportModal from './components/ExportModal';
 import BriefingView from './components/BriefingView';
@@ -39,8 +37,6 @@ export default function App() {
   var [clipboardSection, setClipboardSection] = useState(null);
   var [showAsins, setShowAsins] = useState(false);
   var [showPrice, setShowPrice] = useState(false);
-  var [chatBusy, setChatBusy] = useState(false);
-  var [chatResponse, setChatResponse] = useState('');
   var [savedStores, setSavedStores] = useState([]);
   var [warnings, setWarnings] = useState([]);
   var [viewMode, setViewMode] = useState('desktop');
@@ -51,9 +47,6 @@ export default function App() {
 
   var [storeId, setStoreId] = useState(null);
   var [shareToken, setShareToken] = useState(null);
-  var [wfGenerating, setWfGenerating] = useState(null);
-  var [wfProgress, setWfProgress] = useState('');
-  var wfCancelRef = useRef(false);
   var headerBannerInputRef = useRef(null);
   var folderInputRef = useRef(null);
 
@@ -145,55 +138,6 @@ export default function App() {
   }, [store]);
 
   var page = store.pages.find(function(p) { return p.id === curPage; }) || store.pages[0] || null;
-
-  // ─── WIREFRAME GENERATION ───
-  var handleGenerateWireframes = function(pageId) {
-    if (wfGenerating) return;
-    var wfPage = (store.pages || []).find(function(p) { return p.id === pageId; });
-    if (!wfPage) return;
-    wfCancelRef.current = false;
-    setWfGenerating(pageId);
-    setWfProgress('Starte...');
-    generateWireframesForPage(
-      wfPage, store.brandName || '', store.websiteData || null,
-      { brandTone: store.brandTone, brandStory: store.brandStory, keyFeatures: store.keyFeatures, productCI: store.productCI || null },
-      function(current, total, category) {
-        setWfProgress(current + '/' + total + ' (' + category + ')');
-      },
-      store.manualCI || null,
-      wfCancelRef
-    ).then(function(result) {
-      setWfGenerating(null);
-      var msg = result.cancelled
-        ? result.success + ' generiert, abgebrochen'
-        : result.success + ' generiert, ' + result.failed + ' fehlgeschlagen';
-      if (result.error && !result.cancelled) msg += ' (' + result.error + ')';
-      setWfProgress(msg);
-      setStore(function(prev) { return Object.assign({}, prev); });
-      setTimeout(function() { setWfProgress(''); }, result.error ? 8000 : 4000);
-    }).catch(function(err) {
-      setWfGenerating(null);
-      setWfProgress('Fehler: ' + err.message);
-      setTimeout(function() { setWfProgress(''); }, 4000);
-    });
-  };
-
-  var handleStopWireframes = function() {
-    wfCancelRef.current = true;
-    setWfProgress('Wird angehalten...');
-  };
-
-  // ─── WIREFRAME DELETION ───
-  var handleDeleteWireframes = function(pageId) {
-    var wfPage = (store.pages || []).find(function(p) { return p.id === pageId; });
-    if (!wfPage) return;
-    var deleted = deleteWireframesForPage(wfPage);
-    if (deleted > 0) {
-      setStore(function(prev) { return Object.assign({}, prev); });
-      setWfProgress(deleted + ' Wireframes gelöscht');
-      setTimeout(function() { setWfProgress(''); }, 3000);
-    }
-  };
 
   // ─── TILE UPDATE ───
   var updateTile = function(updated) {
@@ -684,30 +628,6 @@ export default function App() {
     setShowExport(false);
   };
 
-  // ─── AI CHAT ───
-  var handleChatSend = async function(command) {
-    if (!store.pages.length) return;
-    setChatBusy(true);
-    setChatResponse('Processing...');
-    try {
-      var lang = LANGS[store.marketplace] || 'German';
-      var result = await aiRefineStore(store, command, store.brandName, lang);
-      if (result.operations && result.operations.length > 0) {
-        var newStore = applyOperations(store, result.operations);
-        setStoreWithUndo(function(s) {
-          return Object.assign({}, newStore, { products: s.products, asins: s.asins, brandName: s.brandName, marketplace: s.marketplace });
-        });
-        setChatResponse(result.explanation || 'Changes applied.');
-      } else {
-        setChatResponse(result.explanation || 'No changes needed.');
-      }
-    } catch (e) {
-      setChatResponse('Error: ' + e.message);
-    } finally {
-      setChatBusy(false);
-    }
-  };
-
   // ─── SELECTED TILE ───
   var selTile = null;
   var selLayoutType = null;
@@ -809,11 +729,6 @@ export default function App() {
           hasAutoSave={hasAutoSave}
           onLoadAutoSave={handleLoadAutoSave}
           onGenerate={handleNewStore}
-          onGenerateWireframes={handleGenerateWireframes}
-          onDeleteWireframes={handleDeleteWireframes}
-          onStopWireframes={handleStopWireframes}
-          wfGenerating={wfGenerating}
-          wfProgress={wfProgress}
         />
 
         <PropertiesPanel
@@ -827,15 +742,6 @@ export default function App() {
           onHeroBannerChange={selHeroBanner ? updateHeroBanner : null}
         />
       </div>
-
-      {store.pages.length > 0 && (
-        <AIChat
-          onSend={handleChatSend}
-          disabled={chatBusy}
-          lastResponse={chatResponse}
-          uiLang={uiLang}
-        />
-      )}
 
       {/* Validation warnings */}
       {warnings.length > 0 && store.pages.length > 0 && (

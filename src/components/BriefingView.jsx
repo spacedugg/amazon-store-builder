@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, findLayout } from '../constants';
 import { loadStoreByShareToken } from '../storage';
-import { generateWireframesForPage, deleteWireframesForPage } from '../storeBuilder';
 import SectionView, { getGridConfig } from './SectionView';
 
 var noop = function() {};
@@ -1606,9 +1605,6 @@ export default function BriefingView() {
   var [selectedTile, setSelectedTile] = useState(null); // { sid, ti }
   var [sidebarTab, setSidebarTab] = useState('design'); // 'design', 'ci', or 'info'
   var [showPreview, setShowPreview] = useState(false);
-  var [wfGenerating, setWfGenerating] = useState(null); // pageId currently generating wireframes
-  var [wfProgress, setWfProgress] = useState(''); // progress text
-  var wfCancelRef = useRef(false);
   var prevStoreRef = useRef(null);
   var pollRef = useRef(null);
   var bannerTimeoutRef = useRef(null);
@@ -1616,55 +1612,6 @@ export default function BriefingView() {
   var [localImageMap, setLocalImageMap] = useState({}); // { canonical_filename -> blob URL }
   var [folderMatchCount, setFolderMatchCount] = useState(0);
   var rightPanelRef = useRef(null);
-
-  // Generate wireframes for a specific page
-  var handleGenerateWireframes = function(pageId) {
-    if (wfGenerating) return; // already generating
-    var page = (store.pages || []).find(function(p) { return p.id === pageId; });
-    if (!page) return;
-    wfCancelRef.current = false;
-    setWfGenerating(pageId);
-    setWfProgress('Starte...');
-    generateWireframesForPage(
-      page, store.brandName || '', store.websiteData || null,
-      { brandTone: store.brandTone, brandStory: store.brandStory, keyFeatures: store.keyFeatures, productCI: store.productCI || null },
-      function(current, total, category) {
-        setWfProgress(current + '/' + total + ' (' + category + ')');
-      },
-      store.manualCI || null,
-      wfCancelRef
-    ).then(function(result) {
-      setWfGenerating(null);
-      var msg = result.cancelled
-        ? result.success + ' generiert, abgebrochen'
-        : result.success + ' generiert, ' + result.failed + ' fehlgeschlagen';
-      if (result.error && !result.cancelled) msg += ' (' + result.error + ')';
-      setWfProgress(msg);
-      setStore(function(prev) { return Object.assign({}, prev); });
-      setTimeout(function() { setWfProgress(''); }, result.error ? 8000 : 4000);
-    }).catch(function(err) {
-      setWfGenerating(null);
-      setWfProgress('Fehler: ' + err.message);
-      setTimeout(function() { setWfProgress(''); }, 4000);
-    });
-  };
-
-  var handleStopWireframes = function() {
-    wfCancelRef.current = true;
-    setWfProgress('Wird angehalten...');
-  };
-
-  // Delete wireframes for a specific page
-  var handleDeleteWireframes = function(pageId) {
-    var page = (store.pages || []).find(function(p) { return p.id === pageId; });
-    if (!page) return;
-    var deleted = deleteWireframesForPage(page);
-    if (deleted > 0) {
-      setStore(function(prev) { return Object.assign({}, prev); });
-      setWfProgress(deleted + ' Wireframes gelöscht');
-      setTimeout(function() { setWfProgress(''); }, 3000);
-    }
-  };
 
   // ─── FOLDER IMAGE UPLOAD (local preview in designer dashboard) ───
   function handleBriefingFolderSelect(e) {
