@@ -2,6 +2,40 @@ import { PRODUCT_TILE_TYPES, TILE_TYPE_LABELS } from '../constants';
 import { t } from '../i18n';
 import Wireframe from './Wireframe';
 
+function renderHeadingParts(heading) {
+  if (!heading) return null;
+  var parts = heading.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map(function(p, i) {
+    if (p.length > 4 && p.slice(0, 2) === '**' && p.slice(-2) === '**') {
+      return <span key={i} style={{ color: '#93bd26' }}>{p.slice(2, -2)}</span>;
+    }
+    return <span key={i}>{p}</span>;
+  });
+}
+
+function hasOverlayContent(ov) {
+  if (!ov || typeof ov !== 'object') return false;
+  return !!(ov.heading || ov.subheading || ov.body || (ov.bullets && ov.bullets.length > 0) || ov.cta);
+}
+
+function TextOverlayDisplay({ overlay, compact, textAlign }) {
+  var ov = overlay;
+  if (!hasOverlayContent(ov)) return null;
+  return (
+    <div className="tile-overlay" style={{ textAlign: textAlign || 'left' }}>
+      {ov.heading && <div className="tile-overlay-heading">{renderHeadingParts(ov.heading)}</div>}
+      {ov.subheading && <div className="tile-overlay-subheading">{ov.subheading}</div>}
+      {!compact && ov.body && <div className="tile-overlay-body">{ov.body}</div>}
+      {!compact && ov.bullets && ov.bullets.length > 0 && (
+        <ul className="tile-overlay-bullets">
+          {ov.bullets.map(function(b, i) { return <li key={i}>{b}</li>; })}
+        </ul>
+      )}
+      {ov.cta && <div className="tile-overlay-cta">{ov.cta}</div>}
+    </div>
+  );
+}
+
 function ProductCardWireframe({ asins, products, tileType, bgColor, uiLang }) {
   var productMap = {};
   (products || []).forEach(function(p) { productMap[p.asin] = p; });
@@ -139,7 +173,9 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
     return (
       <div className={cls} onClick={onClick} style={bgColor ? { background: bgColor } : undefined}>
         <div className="tile-text-native">
-          <div className="tile-text-content" style={{ textAlign: tile.textAlign || 'left' }}>{tile.textOverlay || t('tile.textModule', uiLang)}</div>
+          {hasOverlayContent(tile.textOverlay)
+            ? <TextOverlayDisplay overlay={tile.textOverlay} textAlign={tile.textAlign} />
+            : <div className="tile-text-content" style={{ textAlign: tile.textAlign || 'left' }}>{t('tile.textModule', uiLang)}</div>}
         </div>
       </div>
     );
@@ -155,7 +191,11 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
             ? <img src={tile.wireframeImage} className="tile-uploaded-img tile-wireframe-img" alt="Wireframe" />
             : <Wireframe tile={tile} viewMode={viewMode} bgColor={bgColor} />
         }
-        {tile.textOverlay && <div className="tile-it-text" style={{ textAlign: tile.textAlign || 'left' }}>{tile.textOverlay}</div>}
+        {hasOverlayContent(tile.textOverlay) && (
+          <div className="tile-it-text" style={{ textAlign: tile.textAlign || 'left' }}>
+            <TextOverlayDisplay overlay={tile.textOverlay} textAlign={tile.textAlign} />
+          </div>
+        )}
       </div>
     );
   }
@@ -171,6 +211,11 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
           ? <img src={tile.wireframeImage} className="tile-uploaded-img tile-wireframe-img" alt="Wireframe" />
           : <Wireframe tile={tile} viewMode={viewMode} bgColor={bgColor} />
       }
+      {hasOverlayContent(tile.textOverlay) && imgSrc && (
+        <div className="tile-image-overlay">
+          <TextOverlayDisplay overlay={tile.textOverlay} compact textAlign={tile.textAlign} />
+        </div>
+      )}
       {/* Shoppable badge only shown when wireframe/image is NOT visible (wireframe SVG already has its own badges) */}
       {tile.type === 'shoppable_image' && imgSrc && <div className="tile-shoppable-badge">{t('tile.shoppable', uiLang)}</div>}
       {/* ASIN link shown subtly only when an uploaded image is present (otherwise wireframe shows it) */}
