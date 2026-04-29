@@ -918,11 +918,11 @@
   "products": [],
   "pages": [
     {
-      "id": "mok9l96jdg9m",
+      "id": "mok9mll233kc",
       "name": "Home",
       "sections": [
         {
-          "id": "mok9l96fjj2u",
+          "id": "mok9mlkzo0kx",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -947,7 +947,7 @@
           ]
         },
         {
-          "id": "mok9l96g6efo",
+          "id": "mok9mll08e9g",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -963,7 +963,7 @@
               "brief": "Kategorie Tile Garten. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9l96m4j8r",
+              "linkUrl": "/page/mok9mll42yh5",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -981,7 +981,7 @@
               "brief": "Kategorie Tile Möbel. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9l96netbc",
+              "linkUrl": "/page/mok9mll5nur5",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -999,7 +999,7 @@
               "brief": "Kategorie Tile Freizeit. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9l96nl28v",
+              "linkUrl": "/page/mok9mll51fqe",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1017,7 +1017,7 @@
               "brief": "Kategorie Tile Heimwerken. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9l96nmgpf",
+              "linkUrl": "/page/mok9mll6520u",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1035,7 +1035,7 @@
               "brief": "Kategorie Tile Haushalt. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9l96p8p19",
+              "linkUrl": "/page/mok9mll7ztz6",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1053,7 +1053,7 @@
               "brief": "Kategorie Tile Tierbedarf. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "page:Tierbedarf",
+              "linkUrl": "/page/mok9mll70bqa",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1062,7 +1062,7 @@
           ]
         },
         {
-          "id": "mok9l96g6wen",
+          "id": "mok9mll02lh4",
           "layoutId": "std-2equal",
           "module": "trust.trustSplit",
           "tiles": [
@@ -1096,7 +1096,7 @@
               "brief": "Brand Story Tile mit Text neben Bild aus Section Tile 1. Verlinkt auf Über Uns.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "page:Über Uns",
+              "linkUrl": "/page/mok9mll8c2mb",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1105,7 +1105,7 @@
           ]
         },
         {
-          "id": "mok9l96g0f60",
+          "id": "mok9mll08856",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1130,7 +1130,7 @@
           ]
         },
         {
-          "id": "mok9l96gez3a",
+          "id": "mok9mll0pok6",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -1161,7 +1161,7 @@
           ]
         },
         {
-          "id": "mok9l96gf5xj",
+          "id": "mok9mll0t5ke",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1193,7 +1193,7 @@
           ]
         },
         {
-          "id": "mok9l96gtlmw",
+          "id": "mok9mll0sc00",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1218,7 +1218,7 @@
           ]
         },
         {
-          "id": "mok9l96j2xqm",
+          "id": "mok9mll2o7od",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -1249,7 +1249,7 @@
           ]
         },
         {
-          "id": "mok9l96jg15x",
+          "id": "mok9mll2ouvm",
           "layoutId": "2x2wide",
           "module": "features.featureGrid4wide",
           "tiles": [
@@ -1328,7 +1328,7 @@
           ]
         },
         {
-          "id": "mok9l96jkvdv",
+          "id": "mok9mll2uzu5",
           "layoutId": "1",
           "module": "engagement.followBanner",
           "tiles": [
@@ -1353,7 +1353,7 @@
           ]
         },
         {
-          "id": "mok9l96je922",
+          "id": "mok9mll27403",
           "layoutId": "2x2wide",
           "module": "footer.categoryNavFooter",
           "tiles": [
@@ -1369,7 +1369,7 @@
               "brief": "Footer Kategorie Tile mit Mini Icon.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9l96m4j8r",
+              "linkUrl": "/page/mok9mll42yh5",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1387,7 +1387,7 @@
               "brief": "Footer Kategorie Tile mit Mini Icon.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9l96netbc",
+              "linkUrl": "/page/mok9mll5nur5",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1405,7 +1405,7 @@
               "brief": "Footer Kategorie Tile mit Mini Icon.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9l96p8p19",
+              "linkUrl": "/page/mok9mll7ztz6",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1423,7 +1423,7 @@
               "brief": "Footer Tile zur Brand Story.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "page:Über Uns",
+              "linkUrl": "/page/mok9mll8c2mb",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1434,11 +1434,11 @@
       ]
     },
     {
-      "id": "mok9l96k5ok7",
+      "id": "mok9mll21u7e",
       "name": "Bestseller",
       "sections": [
         {
-          "id": "mok9l96j7v1b",
+          "id": "mok9mll2m1sg",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1463,7 +1463,7 @@
           ]
         },
         {
-          "id": "mok9l96jin1j",
+          "id": "mok9mll2xj97",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -1479,7 +1479,7 @@
               "brief": "Sub Navigator Tile, Filter zu Garten Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9l96m4j8r",
+              "linkUrl": "/page/mok9mll42yh5",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1497,7 +1497,7 @@
               "brief": "Sub Navigator Tile, Filter zu Möbel Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9l96netbc",
+              "linkUrl": "/page/mok9mll5nur5",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1515,7 +1515,7 @@
               "brief": "Sub Navigator Tile, Filter zu Freizeit Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9l96nl28v",
+              "linkUrl": "/page/mok9mll51fqe",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1533,7 +1533,7 @@
               "brief": "Sub Navigator Tile, Filter zu Heimwerken Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9l96nmgpf",
+              "linkUrl": "/page/mok9mll6520u",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1551,7 +1551,7 @@
               "brief": "Sub Navigator Tile, Filter zu Haushalt Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9l96p8p19",
+              "linkUrl": "/page/mok9mll7ztz6",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1569,7 +1569,7 @@
               "brief": "Sub Navigator Tile, Filter zu Tierbedarf Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "page:Tierbedarf",
+              "linkUrl": "/page/mok9mll70bqa",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1578,7 +1578,7 @@
           ]
         },
         {
-          "id": "mok9l96jwct3",
+          "id": "mok9mll25hdh",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1616,7 +1616,7 @@
           ]
         },
         {
-          "id": "mok9l96jd854",
+          "id": "mok9mll2233o",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1650,7 +1650,7 @@
           ]
         },
         {
-          "id": "mok9l96jy88a",
+          "id": "mok9mll24wto",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1684,7 +1684,7 @@
           ]
         },
         {
-          "id": "mok9l96jxpnd",
+          "id": "mok9mll24brm",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1716,7 +1716,7 @@
           ]
         },
         {
-          "id": "mok9l96jt9tq",
+          "id": "mok9mll2ielp",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1748,7 +1748,7 @@
           ]
         },
         {
-          "id": "mok9l96jndzu",
+          "id": "mok9mll2ta4n",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1782,7 +1782,7 @@
           ]
         },
         {
-          "id": "mok9l96j51sl",
+          "id": "mok9mll2bnic",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1813,7 +1813,7 @@
           ]
         },
         {
-          "id": "mok9l96jl2wj",
+          "id": "mok9mll2n6so",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -1876,11 +1876,11 @@
       ]
     },
     {
-      "id": "mok9l96m4j8r",
+      "id": "mok9mll42yh5",
       "name": "Garten",
       "sections": [
         {
-          "id": "mok9l96kpahp",
+          "id": "mok9mll3k1us",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1905,7 +1905,7 @@
           ]
         },
         {
-          "id": "mok9l96kbops",
+          "id": "mok9mll342z9",
           "layoutId": "4x2grid",
           "module": "categoryNav.grid8tiles",
           "tiles": [
@@ -2056,7 +2056,7 @@
           ]
         },
         {
-          "id": "mok9l96kcbk9",
+          "id": "mok9mll3p2hq",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -2171,7 +2171,7 @@
           ]
         },
         {
-          "id": "mok9l96krf4w",
+          "id": "mok9mll3wrel",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2202,7 +2202,7 @@
           ]
         },
         {
-          "id": "mok9l96kjdu4",
+          "id": "mok9mll3sgz8",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2236,7 +2236,7 @@
           ]
         },
         {
-          "id": "mok9l96khp8j",
+          "id": "mok9mll3ug60",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -2261,7 +2261,7 @@
           ]
         },
         {
-          "id": "mok9l96ks754",
+          "id": "mok9mll3loit",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2292,7 +2292,7 @@
           ]
         },
         {
-          "id": "mok9l96k09q9",
+          "id": "mok9mll4yv4t",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2326,7 +2326,7 @@
           ]
         },
         {
-          "id": "mok9l96krv8l",
+          "id": "mok9mll45oak",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -2387,7 +2387,7 @@
           ]
         },
         {
-          "id": "mok9l96mub28",
+          "id": "mok9mll4s671",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2473,7 +2473,7 @@
           ]
         },
         {
-          "id": "mok9l96mop5i",
+          "id": "mok9mll4qygk",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -2489,7 +2489,7 @@
               "brief": "Cross Sell Banner. Mini Bild Wohnraum.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9l96netbc",
+              "linkUrl": "/page/mok9mll5nur5",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -2500,11 +2500,11 @@
       ]
     },
     {
-      "id": "mok9l96netbc",
+      "id": "mok9mll5nur5",
       "name": "Möbel",
       "sections": [
         {
-          "id": "mok9l96m8x82",
+          "id": "mok9mll4ctt0",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -2529,7 +2529,7 @@
           ]
         },
         {
-          "id": "mok9l96mleyh",
+          "id": "mok9mll56a9t",
           "layoutId": "4x2grid",
           "module": "categoryNav.grid8tiles",
           "tiles": [
@@ -2680,7 +2680,7 @@
           ]
         },
         {
-          "id": "mok9l96mat3o",
+          "id": "mok9mll5yone",
           "layoutId": "2x2wide",
           "module": "categoryNav.grid4wide",
           "tiles": [
@@ -2759,7 +2759,7 @@
           ]
         },
         {
-          "id": "mok9l96mp0en",
+          "id": "mok9mll5kij9",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2790,7 +2790,7 @@
           ]
         },
         {
-          "id": "mok9l96mc1xl",
+          "id": "mok9mll503m2",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2824,7 +2824,7 @@
           ]
         },
         {
-          "id": "mok9l96mruvq",
+          "id": "mok9mll5xvni",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -2849,7 +2849,7 @@
           ]
         },
         {
-          "id": "mok9l96m6mq9",
+          "id": "mok9mll5jc7n",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2880,7 +2880,7 @@
           ]
         },
         {
-          "id": "mok9l96n60or",
+          "id": "mok9mll5j64k",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2913,7 +2913,7 @@
           ]
         },
         {
-          "id": "mok9l96nfrh3",
+          "id": "mok9mll5h264",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2942,7 +2942,7 @@
           ]
         },
         {
-          "id": "mok9l96n6j7p",
+          "id": "mok9mll5hg1v",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -3003,7 +3003,7 @@
           ]
         },
         {
-          "id": "mok9l96nida3",
+          "id": "mok9mll59ozj",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3059,7 +3059,7 @@
           ]
         },
         {
-          "id": "mok9l96nc5ky",
+          "id": "mok9mll5k34o",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -3075,7 +3075,7 @@
               "brief": "Cross Sell Banner.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9l96p8p19",
+              "linkUrl": "/page/mok9mll7ztz6",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -3086,11 +3086,11 @@
       ]
     },
     {
-      "id": "mok9l96nl28v",
+      "id": "mok9mll51fqe",
       "name": "Freizeit",
       "sections": [
         {
-          "id": "mok9l96njc3h",
+          "id": "mok9mll5kv6i",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -3115,7 +3115,7 @@
           ]
         },
         {
-          "id": "mok9l96n4x23",
+          "id": "mok9mll5ti99",
           "layoutId": "2x2wide",
           "module": "categoryNav.grid4wide",
           "tiles": [
@@ -3194,7 +3194,7 @@
           ]
         },
         {
-          "id": "mok9l96nr02h",
+          "id": "mok9mll5kvna",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -3225,7 +3225,7 @@
           ]
         },
         {
-          "id": "mok9l96nuooi",
+          "id": "mok9mll5ls8y",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3256,7 +3256,7 @@
           ]
         },
         {
-          "id": "mok9l96n38o3",
+          "id": "mok9mll5phz0",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3289,7 +3289,7 @@
           ]
         },
         {
-          "id": "mok9l96nimos",
+          "id": "mok9mll5bznm",
           "layoutId": "lg-2stack",
           "module": "products.productShowcaseLarge",
           "tiles": [
@@ -3350,7 +3350,7 @@
           ]
         },
         {
-          "id": "mok9l96n44cz",
+          "id": "mok9mll511g6",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3380,7 +3380,7 @@
           ]
         },
         {
-          "id": "mok9l96npmbi",
+          "id": "mok9mll5ajnj",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -3441,7 +3441,7 @@
           ]
         },
         {
-          "id": "mok9l96nrorg",
+          "id": "mok9mll5z6z2",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3484,7 +3484,7 @@
           ]
         },
         {
-          "id": "mok9l96nfjjh",
+          "id": "mok9mll5rh2w",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -3500,7 +3500,7 @@
               "brief": "Cross Sell Banner.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9l96m4j8r",
+              "linkUrl": "/page/mok9mll42yh5",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -3511,11 +3511,11 @@
       ]
     },
     {
-      "id": "mok9l96nmgpf",
+      "id": "mok9mll6520u",
       "name": "Heimwerken",
       "sections": [
         {
-          "id": "mok9l96ndz5b",
+          "id": "mok9mll5k3ya",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -3540,7 +3540,7 @@
           ]
         },
         {
-          "id": "mok9l96nrzic",
+          "id": "mok9mll5td93",
           "layoutId": "vh-w2s",
           "module": "categoryNav.wideAnd2squares",
           "tiles": [
@@ -3601,7 +3601,7 @@
           ]
         },
         {
-          "id": "mok9l96nl17e",
+          "id": "mok9mll5kpbt",
           "layoutId": "std-2equal",
           "module": "categoryNav.grid2col",
           "tiles": [
@@ -3644,7 +3644,7 @@
           ]
         },
         {
-          "id": "mok9l96n1trb",
+          "id": "mok9mll5yhrk",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3673,7 +3673,7 @@
           ]
         },
         {
-          "id": "mok9l96n0j0f",
+          "id": "mok9mll5a078",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3703,7 +3703,7 @@
           ]
         },
         {
-          "id": "mok9l96nfsgo",
+          "id": "mok9mll58cmk",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -3728,7 +3728,7 @@
           ]
         },
         {
-          "id": "mok9l96ns355",
+          "id": "mok9mll52ong",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3760,7 +3760,7 @@
           ]
         },
         {
-          "id": "mok9l96npl1m",
+          "id": "mok9mll5xbte",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -3821,7 +3821,7 @@
           ]
         },
         {
-          "id": "mok9l96nm6hw",
+          "id": "mok9mll6s3dw",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3860,7 +3860,7 @@
           ]
         },
         {
-          "id": "mok9l96nqvuf",
+          "id": "mok9mll6z6vy",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -3876,7 +3876,7 @@
               "brief": "Cross Sell Banner.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9l96p8p19",
+              "linkUrl": "/page/mok9mll7ztz6",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -3887,11 +3887,11 @@
       ]
     },
     {
-      "id": "mok9l96p8p19",
+      "id": "mok9mll7ztz6",
       "name": "Haushalt",
       "sections": [
         {
-          "id": "mok9l96nd98s",
+          "id": "mok9mll6dqih",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -3916,7 +3916,7 @@
           ]
         },
         {
-          "id": "mok9l96n8p5l",
+          "id": "mok9mll6o4sz",
           "layoutId": "4x2grid",
           "module": "categoryNav.grid8tiles",
           "tiles": [
@@ -4067,7 +4067,7 @@
           ]
         },
         {
-          "id": "mok9l96nfghv",
+          "id": "mok9mll6wxyu",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -4098,7 +4098,7 @@
           ]
         },
         {
-          "id": "mok9l96onpa3",
+          "id": "mok9mll7dtu2",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4127,7 +4127,7 @@
           ]
         },
         {
-          "id": "mok9l96okpr7",
+          "id": "mok9mll7zvmy",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -4152,7 +4152,7 @@
           ]
         },
         {
-          "id": "mok9l96olg9p",
+          "id": "mok9mll7cwtf",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4186,7 +4186,7 @@
           ]
         },
         {
-          "id": "mok9l96piiau",
+          "id": "mok9mll7bt2m",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4220,7 +4220,7 @@
           ]
         },
         {
-          "id": "mok9l96psgvn",
+          "id": "mok9mll7t699",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4248,7 +4248,7 @@
           ]
         },
         {
-          "id": "mok9l96p6zv6",
+          "id": "mok9mll7nlej",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -4309,7 +4309,7 @@
           ]
         },
         {
-          "id": "mok9l96pnbc2",
+          "id": "mok9mll7nun0",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4353,6 +4353,816 @@
                 "B0FG8835LQ",
                 "B0DKFQPHTC"
               ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mok9mll70bqa",
+      "name": "Tierbedarf",
+      "sections": [
+        {
+          "id": "mok9mll75yte",
+          "layoutId": "1",
+          "module": "hero.fullWidthHero",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Für **deinen** Liebling",
+                "subheading": "Hund, Katze, Freilauf",
+                "body": "",
+                "bullets": [],
+                "cta": "Sortiment entdecken"
+              },
+              "brief": "Hero Bild mit Hund oder Katze in Wohnsetting oder Garten.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9mll7fxmm",
+          "layoutId": "vh-w2s",
+          "module": "categoryNav.wideAnd2squares",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**FREILAUFGEHEGE**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Wide Tile Freilaufgehege.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**HUND**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square Tile Hundebedarf.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**KATZE**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square Tile Katzenbedarf.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9mll7bgua",
+          "layoutId": "1",
+          "module": "products.shoppableFullWidth",
+          "tiles": [
+            {
+              "type": "shoppable_image",
+              "textOverlay": {
+                "heading": "Freilauf, **sicher** und groß",
+                "subheading": "Auslauf für Kleintiere und Hunde",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Shoppable Bild Garten mit Freilaufgehege. 1 Hotspot Freilaufgehege plus weitere Hundebedarf wenn vorhanden.",
+              "asins": [
+                "B09M7GCK5Y",
+                "B0716T9673",
+                "B01CSNO9YO",
+                "B079YT88DT",
+                "B0C4FHBSR1"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9mll7w11z",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Die beliebtesten **Gehege**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Bestseller Freilaufgehege.",
+              "asins": [
+                "B09M7GCK5Y"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9mll725px",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Für den **Hund** zuhause",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Bestseller Hundebedarf.",
+              "asins": [
+                "B079YT88DT",
+                "B01CSNO9YO",
+                "B0716T9673",
+                "B0C4FHBSR1"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9mll76a8t",
+          "layoutId": "vh-w2s",
+          "module": "features.featureWideAnd2",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Sicher**, robust, einfach",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Wide Bild.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Stabil**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square mit grünem Icon Kreis Werkzeug.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Tierfreundlich**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square mit grünem Icon Kreis Pfote.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9mll7851w",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "product_grid",
+              "textOverlay": {
+                "heading": "Alle **Tierbedarf** Produkte im Überblick",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Vollkatalog Tierbedarf.",
+              "asins": [
+                "B01CSNO9YO",
+                "B0716T9673",
+                "B079YT88DT",
+                "B0C4FHBSR1",
+                "B09M7GCK5Y"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mok9mll7jc19",
+      "name": "Sale",
+      "sections": [
+        {
+          "id": "mok9mll7fg6k",
+          "layoutId": "1",
+          "module": "hero.fullWidthHero",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Aktuell** reduziert",
+                "subheading": "Aktionen quer durch alle Kategorien",
+                "body": "",
+                "bullets": [],
+                "cta": "Aktionen ansehen"
+              },
+              "brief": "Hero Bild Mix.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9mll7j6wt",
+          "layoutId": "2s-4grid",
+          "module": "categoryNav.grid6tiles",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Sale **GARTEN**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Filter Tile.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "/page/mok9mll42yh5",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Sale **MÖBEL**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Filter Tile.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "/page/mok9mll5nur5",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Sale **FREIZEIT**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Filter Tile.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "/page/mok9mll51fqe",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Sale **HEIMWERKEN**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Filter Tile.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "/page/mok9mll6520u",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Sale **HAUSHALT**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Filter Tile.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "/page/mok9mll7ztz6",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Sale **TIERBEDARF**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Filter Tile.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "/page/mok9mll70bqa",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9mll7m5i7",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "deals",
+              "textOverlay": {
+                "heading": "Top **12** Aktionen",
+                "subheading": "Aktuell reduzierte Bestseller",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Top 12 reduzierte ASINs. Operator pflegt die Liste manuell oder per CSV.",
+              "asins": [
+                "B07P7PRG78",
+                "B07YZ99NDM",
+                "B084JQYGYM",
+                "B087QDPGYJ",
+                "B089XXX8XZ",
+                "B0C45RKBYV",
+                "B0CR1H8BTF",
+                "B0DXFM883Y",
+                "B0F54DJW2F",
+                "B0FHHNTZYQ",
+                "B0FNX4DJ8F",
+                "B014IUTSW8"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9mll7c1d6",
+          "layoutId": "vh-w2s",
+          "module": "features.featureWideAnd2",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Warum** lohnt sich Sale",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Wide Bild.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Echt** reduziert",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square mit grünem Icon Kreis Stern.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Schnell** weg",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square mit grünem Icon Kreis Truck.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mok9mll8c2mb",
+      "name": "Über Uns",
+      "sections": [
+        {
+          "id": "mok9mll84mpj",
+          "layoutId": "1",
+          "module": "hero.fullWidthHero",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Ein **Haus**, viele Räume",
+                "subheading": "Inhabergeführt seit 2005, aus Deutschland",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Hero Bild Portrait oder Halle aus juskys.de.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9mll84iai",
+          "layoutId": "std-2equal",
+          "module": "trust.trustSplit",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Image Tile Brand Story. Hallenbild oder Team aus juskys.de.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image_text",
+              "textOverlay": {
+                "heading": "Inhabergeführt aus **Deutschland**",
+                "subheading": "Seit 2005",
+                "body": "Seit 2005 ist Juskys dein Partner für Wohnen, Garten, Heimwerken, Tier und Freizeit. Geleitet von Philipp Juskys und Daniel Heidrich, inhabergeführt aus Deutschland. Wir besuchen unsere Hersteller persönlich, prüfen regelmäßig die Qualität und liefern versandkostenfrei in Deutschland.",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Brand Story Tile mit Text neben Bild. Brand Story Lang aus Website Content kondensiert.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9mll8tjpb",
+          "layoutId": "2x2wide",
+          "module": "features.featureGrid4wide",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Inhabergeführt**",
+                "subheading": "Seit 2005",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Wert Tile Inhabergeführt mit Foto Geschäftsführer Juskys/Heidrich.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Geprüft**",
+                "subheading": "Hersteller persönlich besucht",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Wert Tile Qualität mit Foto Hersteller Visite.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Versandkostenfrei**",
+                "subheading": "In ganz Deutschland",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Wert Tile Versand mit Foto Logistik.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Engagiert**",
+                "subheading": "Soziales Engagement, Spenden",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Wert Tile Engagement mit Foto Spendenaktion.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9mll8l30f",
+          "layoutId": "2s-4grid",
+          "module": "lifestyle.fullWidthLifestyle",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Wide Galerie Bild Lager.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Wide Galerie Bild Designbereich.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square Galerie Bild Qualitätscheck.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square Galerie Bild Showroom.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square Galerie Bild Mitarbeiter.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square Galerie Bild Gebäude oder Standort.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9mll8nxh2",
+          "layoutId": "1",
+          "module": "engagement.followBanner",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Service**, der reagiert",
+                "subheading": "Kontakt, Versand, Rücksendung",
+                "body": "",
+                "bullets": [],
+                "cta": "Kontakt aufnehmen"
+              },
+              "brief": "Service Block mit Icons Kontakt Versand Rücksendung.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",

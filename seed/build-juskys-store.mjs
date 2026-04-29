@@ -304,6 +304,137 @@ function buildBestsellerPage() {
   ]);
 }
 
+function buildTierbedarfPage() {
+  return page('Tierbedarf', [
+    section('1', [
+      tile('image',
+        ov('Für **deinen** Liebling', 'Hund, Katze, Freilauf', '', [], 'Sortiment entdecken'),
+        'Hero Bild mit Hund oder Katze in Wohnsetting oder Garten.'
+      ),
+    ], 'hero.fullWidthHero'),
+
+    section('vh-w2s', [
+      tile('image', ov('**FREILAUFGEHEGE**'), 'Wide Tile Freilaufgehege.'),
+      tile('image', ov('**HUND**'), 'Square Tile Hundebedarf.'),
+      tile('image', ov('**KATZE**'), 'Square Tile Katzenbedarf.'),
+    ], 'categoryNav.wideAnd2squares'),
+
+    section('1', [
+      tile('shoppable_image',
+        ov('Freilauf, **sicher** und groß', 'Auslauf für Kleintiere und Hunde'),
+        'Shoppable Bild Garten mit Freilaufgehege. 1 Hotspot Freilaufgehege plus weitere Hundebedarf wenn vorhanden.',
+        { asins: ['B09M7GCK5Y', 'B0716T9673', 'B01CSNO9YO', 'B079YT88DT', 'B0C4FHBSR1'] }
+      ),
+    ], 'products.shoppableFullWidth'),
+
+    section('1', [
+      tile('best_sellers',
+        ov('Die beliebtesten **Gehege**'),
+        'Bestseller Freilaufgehege.',
+        { asins: topAsinsBySub('Tierbedarf', 'Freilaufgehege', 4) }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    section('1', [
+      tile('best_sellers',
+        ov('Für den **Hund** zuhause'),
+        'Bestseller Hundebedarf.',
+        { asins: topAsinsBySub('Tierbedarf', 'Hundebedarf', 6) }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    section('vh-w2s', [
+      tile('image', ov('**Sicher**, robust, einfach'), 'Wide Bild.'),
+      tile('image', ov('**Stabil**'), 'Square mit grünem Icon Kreis Werkzeug.'),
+      tile('image', ov('**Tierfreundlich**'), 'Square mit grünem Icon Kreis Pfote.'),
+    ], 'features.featureWideAnd2'),
+
+    section('1', [
+      tile('product_grid',
+        ov('Alle **Tierbedarf** Produkte im Überblick'),
+        'Vollkatalog Tierbedarf.',
+        { asins: allAsinsByCat('Tierbedarf') }
+      ),
+    ], 'products.fullWidthGrid'),
+  ]);
+}
+
+function buildSalePage() {
+  return page('Sale', [
+    section('1', [
+      tile('image',
+        ov('**Aktuell** reduziert', 'Aktionen quer durch alle Kategorien', '', [], 'Aktionen ansehen'),
+        'Hero Bild Mix.'
+      ),
+    ], 'hero.fullWidthHero'),
+
+    section('2s-4grid', [
+      tile('image', ov('Sale **GARTEN**'), 'Filter Tile.', { linkUrl: linkTo('Garten') }),
+      tile('image', ov('Sale **MÖBEL**'), 'Filter Tile.', { linkUrl: linkTo('Möbel') }),
+      tile('image', ov('Sale **FREIZEIT**'), 'Filter Tile.', { linkUrl: linkTo('Freizeit') }),
+      tile('image', ov('Sale **HEIMWERKEN**'), 'Filter Tile.', { linkUrl: linkTo('Heimwerken') }),
+      tile('image', ov('Sale **HAUSHALT**'), 'Filter Tile.', { linkUrl: linkTo('Haushalt') }),
+      tile('image', ov('Sale **TIERBEDARF**'), 'Filter Tile.', { linkUrl: linkTo('Tierbedarf') }),
+    ], 'categoryNav.grid6tiles'),
+
+    section('1', [
+      tile('deals',
+        ov('Top **12** Aktionen', 'Aktuell reduzierte Bestseller'),
+        'Top 12 reduzierte ASINs. Operator pflegt die Liste manuell oder per CSV.',
+        { asins: STRUCTURED_ASINS.filter(function(a) { return a.onHomepage; }).slice(0, 12).map(function(a) { return a.asin; }) }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    section('vh-w2s', [
+      tile('image', ov('**Warum** lohnt sich Sale'), 'Wide Bild.'),
+      tile('image', ov('**Echt** reduziert'), 'Square mit grünem Icon Kreis Stern.'),
+      tile('image', ov('**Schnell** weg'), 'Square mit grünem Icon Kreis Truck.'),
+    ], 'features.featureWideAnd2'),
+  ]);
+}
+
+function buildUeberUnsPage() {
+  return page('Über Uns', [
+    section('1', [
+      tile('image',
+        ov('Ein **Haus**, viele Räume', 'Inhabergeführt seit 2005, aus Deutschland'),
+        'Hero Bild Portrait oder Halle aus juskys.de.'
+      ),
+    ], 'hero.fullWidthHero'),
+
+    section('std-2equal', [
+      tile('image', ov(), 'Image Tile Brand Story. Hallenbild oder Team aus juskys.de.'),
+      tile('image_text',
+        ov('Inhabergeführt aus **Deutschland**', 'Seit 2005', BRAND_STORY_LANG),
+        'Brand Story Tile mit Text neben Bild. Brand Story Lang aus Website Content kondensiert.'
+      ),
+    ], 'trust.trustSplit'),
+
+    section('2x2wide', [
+      tile('image', ov('**Inhabergeführt**', 'Seit 2005'), 'Wert Tile Inhabergeführt mit Foto Geschäftsführer Juskys/Heidrich.'),
+      tile('image', ov('**Geprüft**', 'Hersteller persönlich besucht'), 'Wert Tile Qualität mit Foto Hersteller Visite.'),
+      tile('image', ov('**Versandkostenfrei**', 'In ganz Deutschland'), 'Wert Tile Versand mit Foto Logistik.'),
+      tile('image', ov('**Engagiert**', 'Soziales Engagement, Spenden'), 'Wert Tile Engagement mit Foto Spendenaktion.'),
+    ], 'features.featureGrid4wide'),
+
+    section('2s-4grid', [
+      tile('image', ov(), 'Wide Galerie Bild Lager.'),
+      tile('image', ov(), 'Wide Galerie Bild Designbereich.'),
+      tile('image', ov(), 'Square Galerie Bild Qualitätscheck.'),
+      tile('image', ov(), 'Square Galerie Bild Showroom.'),
+      tile('image', ov(), 'Square Galerie Bild Mitarbeiter.'),
+      tile('image', ov(), 'Square Galerie Bild Gebäude oder Standort.'),
+    ], 'lifestyle.fullWidthLifestyle'),
+
+    section('1', [
+      tile('image',
+        ov('**Service**, der reagiert', 'Kontakt, Versand, Rücksendung', '', [], 'Kontakt aufnehmen'),
+        'Service Block mit Icons Kontakt Versand Rücksendung.'
+      ),
+    ], 'engagement.followBanner'),
+  ]);
+}
+
 function buildHaushaltPage() {
   return page('Haushalt', [
     section('1', [
@@ -757,7 +888,9 @@ function buildStore() {
   pages.push(buildFreizeitPage());
   pages.push(buildHeimwerkenPage());
   pages.push(buildHaushaltPage());
-  // weitere Pages folgen in nächsten Schritten
+  pages.push(buildTierbedarfPage());
+  pages.push(buildSalePage());
+  pages.push(buildUeberUnsPage());
 
   // Resolve parentName references → echte parentId
   var pageIdByName = {};
