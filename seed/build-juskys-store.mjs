@@ -396,20 +396,42 @@ function defaultImageCategory(type, sectionModule) {
   return 'creative';
 }
 
-// Standard Subpage Template, vier Sections.
+// Layout passend zur Tile Anzahl wählen
+function pickLayoutForCount(n) {
+  if (n <= 1) return '1';
+  if (n === 2) return 'std-2equal';
+  if (n === 3) return 'vh-w2s';
+  if (n === 4) return '2x2wide';
+  if (n === 5) return 'lg-4grid';
+  if (n === 6) return '2s-4grid';
+  return '4x2grid'; // 7 oder 8 Cells, max 8
+}
+
+// Standard Subpage Template, fünf Sections.
 // Wird für jede Sub mit ASINs aufgerufen.
 function buildSubpage(parentName, subName, headlineWord) {
   var subAsins = allAsinsBySub(parentName, subName);
   if (subAsins.length === 0) return null;
   var key = parentName + ' > ' + subName;
   var heroText = SUB_HERO_TEXTS[key] || { heading: 'Top **' + subName + '**', subheading: '' };
-  return page(subName, [
+
+  // Cross Nav: alle anderen aktiven Subs der gleichen Eltern
+  var siblingSubs = (SUB_LIST[parentName] || []).filter(function(s) {
+    return s !== subName && allAsinsBySub(parentName, s).length > 0;
+  }).slice(0, 8); // max 8 Tiles im Cross Nav
+  var crossNavTiles = siblingSubs.map(function(s) {
+    return tile('image', ov('**' + s.toUpperCase() + '**'), 'Cross Nav Tile zu Sub Page ' + s + '.', { linkUrl: linkTo(s) });
+  });
+
+  var sections = [
+    // 1, Hero
     section('1', [
       tile('image',
         ov(heroText.heading, heroText.subheading, '', [], 'Sortiment ansehen'),
         'Hero Bild Sub Page ' + subName + '. Freigestelltes Leitprodukt aus dieser Sub.'
       ),
     ], 'hero.fullWidthHero'),
+    // 2, Bestseller
     section('1', [
       tile('best_sellers',
         ov('Die beliebtesten **' + subName + '**'),
@@ -417,6 +439,7 @@ function buildSubpage(parentName, subName, headlineWord) {
         { asins: subAsins.slice(0, 8) }
       ),
     ], 'products.fullWidthGrid'),
+    // 3, Vollkatalog
     section('1', [
       tile('product_grid',
         ov('Alle **' + subName + '** Produkte'),
@@ -424,14 +447,29 @@ function buildSubpage(parentName, subName, headlineWord) {
         { asins: subAsins }
       ),
     ], 'products.fullWidthGrid'),
-    section('1', [
+  ];
+
+  // 4, Cross Nav zu anderen Subs der gleichen Eltern
+  if (crossNavTiles.length > 0) {
+    sections.push(section('1', [
       tile('image',
-        ov('Mehr aus **' + parentName + '**', '', '', [], parentName + ' ansehen'),
-        'Cross Link zur Eltern Kategorie.',
-        { linkUrl: linkTo(parentName) }
+        ov('Mehr aus **' + parentName + '**', 'Weitere Sub Kategorien'),
+        'Trenner Textbild Cross Nav.'
       ),
-    ], 'footer.crossSellBanner'),
-  ], parentName);
+    ], 'hero.fullWidthHero'));
+    sections.push(section(pickLayoutForCount(crossNavTiles.length), crossNavTiles, 'categoryNav.grid' + crossNavTiles.length + 'tiles'));
+  }
+
+  // 5, Cross Link zur Eltern Page
+  sections.push(section('1', [
+    tile('image',
+      ov('Zurück zu **' + parentName + '**', '', '', [], parentName + ' ansehen'),
+      'Cross Link zur Eltern Kategorie.',
+      { linkUrl: linkTo(parentName) }
+    ),
+  ], 'footer.crossSellBanner'));
+
+  return page(subName, sections, parentName);
 }
 
 // Alle Subs pro Eltern Page in der gewünschten Reihenfolge
