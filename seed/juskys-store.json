@@ -918,11 +918,11 @@
   "products": [],
   "pages": [
     {
-      "id": "mok9nup7tiue",
+      "id": "moke70qgyzfb",
       "name": "Home",
       "sections": [
         {
-          "id": "mok9nup4fy9h",
+          "id": "moke70qeu1yj",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -941,13 +941,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nup424j3",
+          "id": "moke70qeeek5",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -963,10 +963,10 @@
               "brief": "Kategorie Tile Garten. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nup9iojo",
+              "linkUrl": "/page/moke70qihpk6",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -981,10 +981,10 @@
               "brief": "Kategorie Tile Möbel. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupay8sa",
+              "linkUrl": "/page/moke70qjt4jo",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -999,10 +999,10 @@
               "brief": "Kategorie Tile Freizeit. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupb157c",
+              "linkUrl": "/page/moke70qkd8zh",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -1017,10 +1017,10 @@
               "brief": "Kategorie Tile Heimwerken. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupca6st",
+              "linkUrl": "/page/moke70qk1w1m",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -1035,10 +1035,10 @@
               "brief": "Kategorie Tile Haushalt. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupcu6ux",
+              "linkUrl": "/page/moke70qlhin4",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -1053,16 +1053,16 @@
               "brief": "Kategorie Tile Tierbedarf. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupchf55",
+              "linkUrl": "/page/moke70qligxu",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nup4n795",
+          "id": "moke70qeywme",
           "layoutId": "std-2equal",
           "module": "trust.trustSplit",
           "tiles": [
@@ -1081,7 +1081,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -1096,16 +1096,16 @@
               "brief": "Brand Story Tile mit Text neben Bild aus Section Tile 1. Verlinkt auf Über Uns.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupdrlb4",
+              "linkUrl": "/page/moke70qlkt3q",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nup4trtz",
+          "id": "moke70qeyj1j",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1124,13 +1124,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nup5bl8f",
+          "id": "moke70qe0r1o",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -1155,13 +1155,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nup55nd5",
+          "id": "moke70qeyeez",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1193,7 +1193,7 @@
           ]
         },
         {
-          "id": "mok9nup5xyz4",
+          "id": "moke70qeo393",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1212,13 +1212,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nup763bh",
+          "id": "moke70qgqbj0",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -1243,13 +1243,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nup730f7",
+          "id": "moke70qgr9ca",
           "layoutId": "2x2wide",
           "module": "features.featureGrid4wide",
           "tiles": [
@@ -1268,7 +1268,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -1286,7 +1286,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -1304,7 +1304,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -1322,13 +1322,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nup71thd",
+          "id": "moke70qg3sgx",
           "layoutId": "1",
           "module": "engagement.followBanner",
           "tiles": [
@@ -1347,13 +1347,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nup7e2pd",
+          "id": "moke70qg2wth",
           "layoutId": "2x2wide",
           "module": "footer.categoryNavFooter",
           "tiles": [
@@ -1369,10 +1369,10 @@
               "brief": "Footer Kategorie Tile mit Mini Icon.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nup9iojo",
+              "linkUrl": "/page/moke70qihpk6",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             },
             {
@@ -1387,10 +1387,10 @@
               "brief": "Footer Kategorie Tile mit Mini Icon.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupay8sa",
+              "linkUrl": "/page/moke70qjt4jo",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             },
             {
@@ -1405,10 +1405,10 @@
               "brief": "Footer Kategorie Tile mit Mini Icon.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupcu6ux",
+              "linkUrl": "/page/moke70qlhin4",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             },
             {
@@ -1423,10 +1423,10 @@
               "brief": "Footer Tile zur Brand Story.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupdrlb4",
+              "linkUrl": "/page/moke70qlkt3q",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
@@ -1434,11 +1434,11 @@
       ]
     },
     {
-      "id": "mok9nup7khfp",
+      "id": "moke70qh2kz6",
       "name": "Bestseller",
       "sections": [
         {
-          "id": "mok9nup7qx7z",
+          "id": "moke70qg8ko8",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1457,13 +1457,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nup73hjc",
+          "id": "moke70qg7bcg",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -1479,10 +1479,10 @@
               "brief": "Sub Navigator Tile, Filter zu Garten Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nup9iojo",
+              "linkUrl": "/page/moke70qihpk6",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -1497,10 +1497,10 @@
               "brief": "Sub Navigator Tile, Filter zu Möbel Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupay8sa",
+              "linkUrl": "/page/moke70qjt4jo",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -1515,10 +1515,10 @@
               "brief": "Sub Navigator Tile, Filter zu Freizeit Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupb157c",
+              "linkUrl": "/page/moke70qkd8zh",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -1533,10 +1533,10 @@
               "brief": "Sub Navigator Tile, Filter zu Heimwerken Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupca6st",
+              "linkUrl": "/page/moke70qk1w1m",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -1551,10 +1551,10 @@
               "brief": "Sub Navigator Tile, Filter zu Haushalt Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupcu6ux",
+              "linkUrl": "/page/moke70qlhin4",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -1569,16 +1569,16 @@
               "brief": "Sub Navigator Tile, Filter zu Tierbedarf Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupchf55",
+              "linkUrl": "/page/moke70qligxu",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nup71ath",
+          "id": "moke70qgph6f",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1616,7 +1616,7 @@
           ]
         },
         {
-          "id": "mok9nup7fgv4",
+          "id": "moke70qg3x2t",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1650,7 +1650,7 @@
           ]
         },
         {
-          "id": "mok9nup7w0br",
+          "id": "moke70qgrmr5",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1684,7 +1684,7 @@
           ]
         },
         {
-          "id": "mok9nup7di69",
+          "id": "moke70qguqwh",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1716,7 +1716,7 @@
           ]
         },
         {
-          "id": "mok9nup75rua",
+          "id": "moke70qg6eou",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1748,7 +1748,7 @@
           ]
         },
         {
-          "id": "mok9nup73zji",
+          "id": "moke70qhr4ot",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1782,7 +1782,7 @@
           ]
         },
         {
-          "id": "mok9nup72rs1",
+          "id": "moke70qh8rt1",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1813,62 +1813,62 @@
           ]
         },
         {
-          "id": "mok9nup7cjbj",
+          "id": "moke70qhbah0",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Warum **diese** Bestseller",
+                "heading": "Warum **Juskys**",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Wide Image. Plus 2 Squares mit USP Icons.",
+              "brief": "Wide Image USP Bild.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
               "type": "image",
               "textOverlay": {
-                "heading": "**Meistgekauft**",
+                "heading": "**Geprüfte** Qualität",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Square mit grünem Icon Kreis Stern.",
+              "brief": "Square mit grünem Icon Kreis Schild Check.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
               "type": "image",
               "textOverlay": {
-                "heading": "**Inhabergeführt**",
+                "heading": "**Versandkostenfrei**",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Square mit grünem Icon Kreis Haus.",
+              "brief": "Square mit grünem Icon Kreis Truck.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             }
           ]
@@ -1876,11 +1876,11 @@
       ]
     },
     {
-      "id": "mok9nup9iojo",
+      "id": "moke70qihpk6",
       "name": "Garten",
       "sections": [
         {
-          "id": "mok9nup866tp",
+          "id": "moke70qhyo22",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1899,13 +1899,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nup82bwb",
+          "id": "moke70qhui6h",
           "layoutId": "4x2grid",
           "module": "categoryNav.grid8tiles",
           "tiles": [
@@ -1924,7 +1924,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -1942,7 +1942,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -1960,7 +1960,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -1978,7 +1978,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -1996,7 +1996,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -2014,7 +2014,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -2032,7 +2032,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -2050,13 +2050,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nup8vgx2",
+          "id": "moke70qh4wh4",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -2075,7 +2075,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -2093,7 +2093,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -2111,7 +2111,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -2129,7 +2129,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -2147,7 +2147,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -2165,13 +2165,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nup8v0sv",
+          "id": "moke70qhr6sx",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2196,13 +2196,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nup8fv4x",
+          "id": "moke70qhypxt",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2236,7 +2236,7 @@
           ]
         },
         {
-          "id": "mok9nup8ekns",
+          "id": "moke70qhan2p",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -2255,13 +2255,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nup8efw3",
+          "id": "moke70qhisv9",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2286,13 +2286,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nup9v9dl",
+          "id": "moke70qi62t4",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2326,7 +2326,7 @@
           ]
         },
         {
-          "id": "mok9nup9b6jk",
+          "id": "moke70qi5w5s",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -2345,7 +2345,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -2363,7 +2363,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -2381,13 +2381,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nup9zuaf",
+          "id": "moke70qiptis",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2473,7 +2473,7 @@
           ]
         },
         {
-          "id": "mok9nup91p3c",
+          "id": "moke70qit33s",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -2489,10 +2489,10 @@
               "brief": "Cross Sell Banner. Mini Bild Wohnraum.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupay8sa",
+              "linkUrl": "/page/moke70qjt4jo",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
@@ -2500,11 +2500,11 @@
       ]
     },
     {
-      "id": "mok9nupay8sa",
+      "id": "moke70qjt4jo",
       "name": "Möbel",
       "sections": [
         {
-          "id": "mok9nupavqqr",
+          "id": "moke70qifyo9",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -2523,13 +2523,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupa0lxz",
+          "id": "moke70qitdbn",
           "layoutId": "4x2grid",
           "module": "categoryNav.grid8tiles",
           "tiles": [
@@ -2548,7 +2548,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -2566,7 +2566,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -2584,7 +2584,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -2602,7 +2602,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -2620,7 +2620,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -2638,7 +2638,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -2656,7 +2656,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -2674,13 +2674,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupa1thn",
+          "id": "moke70qi3pw9",
           "layoutId": "2x2wide",
           "module": "categoryNav.grid4wide",
           "tiles": [
@@ -2699,7 +2699,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -2717,7 +2717,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -2735,7 +2735,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -2753,13 +2753,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupacmr0",
+          "id": "moke70qi026s",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2784,13 +2784,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupaqsid",
+          "id": "moke70qines7",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2824,7 +2824,7 @@
           ]
         },
         {
-          "id": "mok9nupa672h",
+          "id": "moke70qibf74",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -2843,13 +2843,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupamtou",
+          "id": "moke70qi7e2j",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2874,13 +2874,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupabne3",
+          "id": "moke70qidlex",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2913,7 +2913,7 @@
           ]
         },
         {
-          "id": "mok9nupa2ul2",
+          "id": "moke70qi6k0c",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2936,13 +2936,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupal0s8",
+          "id": "moke70qiwut0",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -2961,7 +2961,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -2979,7 +2979,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -2997,13 +2997,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupa2nrj",
+          "id": "moke70qjqn1u",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3059,7 +3059,7 @@
           ]
         },
         {
-          "id": "mok9nupa09ms",
+          "id": "moke70qj67h0",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -3075,10 +3075,10 @@
               "brief": "Cross Sell Banner.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupcu6ux",
+              "linkUrl": "/page/moke70qlhin4",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
@@ -3086,11 +3086,11 @@
       ]
     },
     {
-      "id": "mok9nupb157c",
+      "id": "moke70qkd8zh",
       "name": "Freizeit",
       "sections": [
         {
-          "id": "mok9nupagw86",
+          "id": "moke70qj109g",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -3109,13 +3109,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupawime",
+          "id": "moke70qjrnu8",
           "layoutId": "2x2wide",
           "module": "categoryNav.grid4wide",
           "tiles": [
@@ -3134,7 +3134,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -3152,7 +3152,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -3170,7 +3170,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -3188,13 +3188,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupblzqj",
+          "id": "moke70qj8vqr",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -3219,13 +3219,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupb21tb",
+          "id": "moke70qje5np",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3256,7 +3256,7 @@
           ]
         },
         {
-          "id": "mok9nupbeche",
+          "id": "moke70qj5tz8",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3289,7 +3289,7 @@
           ]
         },
         {
-          "id": "mok9nupbqwmf",
+          "id": "moke70qjtnu6",
           "layoutId": "lg-2stack",
           "module": "products.productShowcaseLarge",
           "tiles": [
@@ -3308,7 +3308,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             },
             {
@@ -3326,7 +3326,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             },
             {
@@ -3344,13 +3344,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupbpm0h",
+          "id": "moke70qjrg65",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3380,7 +3380,7 @@
           ]
         },
         {
-          "id": "mok9nupb6clp",
+          "id": "moke70qjgm0f",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -3399,7 +3399,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -3417,7 +3417,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -3435,13 +3435,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupbpp5k",
+          "id": "moke70qk76sx",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3484,7 +3484,7 @@
           ]
         },
         {
-          "id": "mok9nupb2xlb",
+          "id": "moke70qkc7q7",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -3500,10 +3500,10 @@
               "brief": "Cross Sell Banner.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nup9iojo",
+              "linkUrl": "/page/moke70qihpk6",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
@@ -3511,11 +3511,11 @@
       ]
     },
     {
-      "id": "mok9nupca6st",
+      "id": "moke70qk1w1m",
       "name": "Heimwerken",
       "sections": [
         {
-          "id": "mok9nupbppli",
+          "id": "moke70qkaysi",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -3534,13 +3534,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupbjo9g",
+          "id": "moke70qkdeqd",
           "layoutId": "vh-w2s",
           "module": "categoryNav.wideAnd2squares",
           "tiles": [
@@ -3559,7 +3559,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -3577,7 +3577,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -3595,13 +3595,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupbo2tk",
+          "id": "moke70qkxlvj",
           "layoutId": "std-2equal",
           "module": "categoryNav.grid2col",
           "tiles": [
@@ -3620,7 +3620,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -3638,13 +3638,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupb5l20",
+          "id": "moke70qkypg0",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3673,7 +3673,7 @@
           ]
         },
         {
-          "id": "mok9nupbtt49",
+          "id": "moke70qkn8sw",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3703,7 +3703,7 @@
           ]
         },
         {
-          "id": "mok9nupbkkfp",
+          "id": "moke70qkxl7f",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -3722,13 +3722,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupbvxmo",
+          "id": "moke70qkcm1z",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3760,7 +3760,7 @@
           ]
         },
         {
-          "id": "mok9nupbhubc",
+          "id": "moke70qkk64y",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -3779,7 +3779,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -3797,7 +3797,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -3815,13 +3815,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupcd0ly",
+          "id": "moke70qkhkaz",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3860,7 +3860,7 @@
           ]
         },
         {
-          "id": "mok9nupcj1dw",
+          "id": "moke70qkeorc",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -3876,10 +3876,10 @@
               "brief": "Cross Sell Banner.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupcu6ux",
+              "linkUrl": "/page/moke70qlhin4",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
@@ -3887,11 +3887,11 @@
       ]
     },
     {
-      "id": "mok9nupcu6ux",
+      "id": "moke70qlhin4",
       "name": "Haushalt",
       "sections": [
         {
-          "id": "mok9nupcsw4g",
+          "id": "moke70qk0g3v",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -3910,13 +3910,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupcpawe",
+          "id": "moke70qk0bmj",
           "layoutId": "4x2grid",
           "module": "categoryNav.grid8tiles",
           "tiles": [
@@ -3935,7 +3935,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -3953,7 +3953,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -3971,7 +3971,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -3989,7 +3989,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -4007,7 +4007,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -4025,7 +4025,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -4043,7 +4043,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -4061,13 +4061,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupcb7vr",
+          "id": "moke70qk7wcw",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -4092,13 +4092,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupc79gd",
+          "id": "moke70qla0k8",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4127,7 +4127,7 @@
           ]
         },
         {
-          "id": "mok9nupc7k9e",
+          "id": "moke70ql0e2x",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -4146,13 +4146,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupch4yc",
+          "id": "moke70qlfpmo",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4186,7 +4186,7 @@
           ]
         },
         {
-          "id": "mok9nupciicc",
+          "id": "moke70ql45c7",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4220,7 +4220,7 @@
           ]
         },
         {
-          "id": "mok9nupcjbuu",
+          "id": "moke70qllrxu",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4248,7 +4248,7 @@
           ]
         },
         {
-          "id": "mok9nupcdgyw",
+          "id": "moke70qla3u3",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -4267,7 +4267,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -4285,7 +4285,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -4303,13 +4303,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupcczpk",
+          "id": "moke70qliezk",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4365,11 +4365,11 @@
       ]
     },
     {
-      "id": "mok9nupchf55",
+      "id": "moke70qligxu",
       "name": "Tierbedarf",
       "sections": [
         {
-          "id": "mok9nupcyaec",
+          "id": "moke70ql7ts4",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -4388,13 +4388,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupcgp7p",
+          "id": "moke70ql4dvt",
           "layoutId": "vh-w2s",
           "module": "categoryNav.wideAnd2squares",
           "tiles": [
@@ -4413,7 +4413,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -4431,7 +4431,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -4449,13 +4449,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupcwuqa",
+          "id": "moke70qlaiuq",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -4480,13 +4480,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupcbfo8",
+          "id": "moke70qlf7ac",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4513,7 +4513,7 @@
           ]
         },
         {
-          "id": "mok9nupc7mae",
+          "id": "moke70qlifjw",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4543,7 +4543,7 @@
           ]
         },
         {
-          "id": "mok9nupcv1n8",
+          "id": "moke70qlnno2",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -4562,7 +4562,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -4580,7 +4580,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -4598,13 +4598,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupcn9fg",
+          "id": "moke70qlq672",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4637,11 +4637,11 @@
       ]
     },
     {
-      "id": "mok9nupc1boz",
+      "id": "moke70ql5zlo",
       "name": "Sale",
       "sections": [
         {
-          "id": "mok9nupce087",
+          "id": "moke70qlg52g",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -4660,13 +4660,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupc7e75",
+          "id": "moke70qlx13b",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -4682,10 +4682,10 @@
               "brief": "Filter Tile.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nup9iojo",
+              "linkUrl": "/page/moke70qihpk6",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -4700,10 +4700,10 @@
               "brief": "Filter Tile.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupay8sa",
+              "linkUrl": "/page/moke70qjt4jo",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -4718,10 +4718,10 @@
               "brief": "Filter Tile.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupb157c",
+              "linkUrl": "/page/moke70qkd8zh",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -4736,10 +4736,10 @@
               "brief": "Filter Tile.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupca6st",
+              "linkUrl": "/page/moke70qk1w1m",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -4754,10 +4754,10 @@
               "brief": "Filter Tile.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupcu6ux",
+              "linkUrl": "/page/moke70qlhin4",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             },
             {
@@ -4772,16 +4772,16 @@
               "brief": "Filter Tile.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupchf55",
+              "linkUrl": "/page/moke70qligxu",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupc6j7j",
+          "id": "moke70qlcmgh",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4819,7 +4819,7 @@
           ]
         },
         {
-          "id": "mok9nupcu5ju",
+          "id": "moke70ql4y9w",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -4838,7 +4838,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -4856,7 +4856,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -4874,7 +4874,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             }
           ]
@@ -4882,11 +4882,11 @@
       ]
     },
     {
-      "id": "mok9nupdrlb4",
+      "id": "moke70qlkt3q",
       "name": "Über Uns",
       "sections": [
         {
-          "id": "mok9nupdb7py",
+          "id": "moke70qltd2g",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -4905,13 +4905,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupdldwe",
+          "id": "moke70qlui8q",
           "layoutId": "std-2equal",
           "module": "trust.trustSplit",
           "tiles": [
@@ -4930,7 +4930,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -4948,13 +4948,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupdhcxd",
+          "id": "moke70ql4kid",
           "layoutId": "2x2wide",
           "module": "features.featureGrid4wide",
           "tiles": [
@@ -4973,7 +4973,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -4991,7 +4991,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -5009,7 +5009,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             },
             {
@@ -5027,13 +5027,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "benefit",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupdi0go",
+          "id": "moke70qlv15t",
           "layoutId": "2s-4grid",
           "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
@@ -5052,7 +5052,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5070,7 +5070,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5088,7 +5088,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5106,7 +5106,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5124,7 +5124,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5142,13 +5142,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupdimu6",
+          "id": "moke70qlnobv",
           "layoutId": "1",
           "module": "engagement.followBanner",
           "tiles": [
@@ -5167,7 +5167,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
@@ -5175,19 +5175,19 @@
       ]
     },
     {
-      "id": "mok9nupdbj29",
+      "id": "moke70qlviwq",
       "name": "Gartenmöbel Sets",
       "sections": [
         {
-          "id": "mok9nupd0zde",
+          "id": "moke70ql7xyo",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Gartenmöbel Sets bei **Gartenmöbel Sets**",
-                "subheading": "Top Auswahl Juskys Gartenmöbel Sets",
+                "heading": "Lounge, **bereit** für die Saison",
+                "subheading": "Komplette Sitzgruppen für Garten und Terrasse",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -5198,13 +5198,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupdmygg",
+          "id": "moke70qlxk1x",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5238,7 +5238,7 @@
           ]
         },
         {
-          "id": "mok9nupdal7v",
+          "id": "moke70qlxvlr",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5279,7 +5279,7 @@
           ]
         },
         {
-          "id": "mok9nupd08ws",
+          "id": "moke70ql8nx0",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -5295,31 +5295,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nup9iojo",
+              "linkUrl": "/page/moke70qihpk6",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nup9iojo"
+      "parentId": "moke70qihpk6"
     },
     {
-      "id": "mok9nupd4f06",
+      "id": "moke70qm5e4z",
       "name": "Gartenaufbewahrung",
       "sections": [
         {
-          "id": "mok9nupd702k",
+          "id": "moke70qm1t2k",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Gartenaufbewahrung bei **Gartenaufbewahrung**",
-                "subheading": "Top Auswahl Juskys Gartenaufbewahrung",
+                "heading": "Stauraum, der **draußen** bleibt",
+                "subheading": "Gerätehäuser, Holzunterstände, Boxen",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -5330,13 +5330,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupdqt3n",
+          "id": "moke70qmxyto",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5366,7 +5366,7 @@
           ]
         },
         {
-          "id": "mok9nupd26v8",
+          "id": "moke70qmc6go",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5396,7 +5396,7 @@
           ]
         },
         {
-          "id": "mok9nupdv3iy",
+          "id": "moke70qmzskn",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -5412,31 +5412,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nup9iojo",
+              "linkUrl": "/page/moke70qihpk6",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nup9iojo"
+      "parentId": "moke70qihpk6"
     },
     {
-      "id": "mok9nupdb1mz",
+      "id": "moke70qmkq4i",
       "name": "Gartenbedarf",
       "sections": [
         {
-          "id": "mok9nupdn5qx",
+          "id": "moke70qm8pt4",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Gartenbedarf bei **Gartenbedarf**",
-                "subheading": "Top Auswahl Juskys Gartenbedarf",
+                "heading": "Alles für den **Garten**",
+                "subheading": "Schlauch, Schubkarre, Werkzeug",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -5447,13 +5447,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupdfsze",
+          "id": "moke70qmsdqk",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5487,7 +5487,7 @@
           ]
         },
         {
-          "id": "mok9nupdkeet",
+          "id": "moke70qmz5lr",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5524,7 +5524,7 @@
           ]
         },
         {
-          "id": "mok9nupdl70q",
+          "id": "moke70qmqypm",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -5540,31 +5540,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nup9iojo",
+              "linkUrl": "/page/moke70qihpk6",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nup9iojo"
+      "parentId": "moke70qihpk6"
     },
     {
-      "id": "mok9nupd4rbr",
+      "id": "moke70qm8sls",
       "name": "Sonnenschutz",
       "sections": [
         {
-          "id": "mok9nupds6gy",
+          "id": "moke70qm5eyw",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Sonnenschutz bei **Sonnenschutz**",
-                "subheading": "Top Auswahl Juskys Sonnenschutz",
+                "heading": "**Schatten**, wo du ihn brauchst",
+                "subheading": "Sonnenschirme, Markisen, Sichtschutz",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -5575,13 +5575,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupdsqlp",
+          "id": "moke70qmoic3",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5612,7 +5612,7 @@
           ]
         },
         {
-          "id": "mok9nupdvmkm",
+          "id": "moke70qmptko",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5643,7 +5643,7 @@
           ]
         },
         {
-          "id": "mok9nupdiwaw",
+          "id": "moke70qmv1ln",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -5659,31 +5659,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nup9iojo",
+              "linkUrl": "/page/moke70qihpk6",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nup9iojo"
+      "parentId": "moke70qihpk6"
     },
     {
-      "id": "mok9nupdtylg",
+      "id": "moke70qmetjj",
       "name": "Gartenliegen",
       "sections": [
         {
-          "id": "mok9nupdrbpn",
+          "id": "moke70qmigbf",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Gartenliegen bei **Gartenliegen**",
-                "subheading": "Top Auswahl Juskys Gartenliegen",
+                "heading": "Liegen, **lang** ausstrecken",
+                "subheading": "Sonnenliegen und Doppelliegen",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -5694,13 +5694,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupdnr4p",
+          "id": "moke70qmh1yn",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5729,7 +5729,7 @@
           ]
         },
         {
-          "id": "mok9nupdwksj",
+          "id": "moke70qmsy0c",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5758,7 +5758,7 @@
           ]
         },
         {
-          "id": "mok9nupdn2rs",
+          "id": "moke70qmmrhm",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -5774,31 +5774,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nup9iojo",
+              "linkUrl": "/page/moke70qihpk6",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nup9iojo"
+      "parentId": "moke70qihpk6"
     },
     {
-      "id": "mok9nupdyf8w",
+      "id": "moke70qm7ykr",
       "name": "Gartenbänke",
       "sections": [
         {
-          "id": "mok9nupdcmuh",
+          "id": "moke70qmo623",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Gartenbänke bei **Gartenbänke**",
-                "subheading": "Top Auswahl Juskys Gartenbänke",
+                "heading": "**Bänke** zum Niederlassen",
+                "subheading": "Klassische Gartenbänke aus Holz und Metall",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -5809,13 +5809,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupdp2bc",
+          "id": "moke70qm89vh",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5843,7 +5843,7 @@
           ]
         },
         {
-          "id": "mok9nupduap9",
+          "id": "moke70qmslk4",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5871,7 +5871,7 @@
           ]
         },
         {
-          "id": "mok9nupd64yp",
+          "id": "moke70qmugm7",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -5887,31 +5887,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nup9iojo",
+              "linkUrl": "/page/moke70qihpk6",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nup9iojo"
+      "parentId": "moke70qihpk6"
     },
     {
-      "id": "mok9nupdsd8n",
+      "id": "moke70qmltky",
       "name": "Gartentische",
       "sections": [
         {
-          "id": "mok9nupdoq6f",
+          "id": "moke70qma2o7",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Gartentische bei **Gartentische**",
-                "subheading": "Top Auswahl Juskys Gartentische",
+                "heading": "Der **Tisch** für draußen",
+                "subheading": "Gartentische in verschiedenen Größen",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -5922,13 +5922,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupd8cme",
+          "id": "moke70qm6a98",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5957,7 +5957,7 @@
           ]
         },
         {
-          "id": "mok9nupdqmlt",
+          "id": "moke70qm3wxa",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5986,7 +5986,7 @@
           ]
         },
         {
-          "id": "mok9nupdza0y",
+          "id": "moke70qmoicn",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -6002,31 +6002,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nup9iojo",
+              "linkUrl": "/page/moke70qihpk6",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nup9iojo"
+      "parentId": "moke70qihpk6"
     },
     {
-      "id": "mok9nupe6yah",
+      "id": "moke70qmncrb",
       "name": "Bierzeltgarnituren",
       "sections": [
         {
-          "id": "mok9nupegj6d",
+          "id": "moke70qmmasn",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Bierzeltgarnituren bei **Bierzeltgarnituren**",
-                "subheading": "Top Auswahl Juskys Bierzeltgarnituren",
+                "heading": "**Feiern** ohne Aufwand",
+                "subheading": "Bierzeltgarnituren für jeden Anlass",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -6037,13 +6037,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupemk8g",
+          "id": "moke70qmek5s",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6072,7 +6072,7 @@
           ]
         },
         {
-          "id": "mok9nupeyruw",
+          "id": "moke70qmfsaa",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6101,7 +6101,7 @@
           ]
         },
         {
-          "id": "mok9nupeotfh",
+          "id": "moke70qm2lrx",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -6117,31 +6117,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nup9iojo",
+              "linkUrl": "/page/moke70qihpk6",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nup9iojo"
+      "parentId": "moke70qihpk6"
     },
     {
-      "id": "mok9nupe3sw9",
+      "id": "moke70qmoyc5",
       "name": "Hängematten",
       "sections": [
         {
-          "id": "mok9nupefvrs",
+          "id": "moke70qmfwok",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Hängematten bei **Hängematten**",
-                "subheading": "Top Auswahl Juskys Hängematten",
+                "heading": "Hängen, **schaukeln**, abschalten",
+                "subheading": "Hängematten und Hängesessel mit Gestell",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -6152,13 +6152,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupek33n",
+          "id": "moke70qmpsv2",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6187,7 +6187,7 @@
           ]
         },
         {
-          "id": "mok9nupelbe1",
+          "id": "moke70qmn4cc",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6216,7 +6216,7 @@
           ]
         },
         {
-          "id": "mok9nupey8yz",
+          "id": "moke70qmvz8b",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -6232,31 +6232,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nup9iojo",
+              "linkUrl": "/page/moke70qihpk6",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nup9iojo"
+      "parentId": "moke70qihpk6"
     },
     {
-      "id": "mok9nupehp20",
+      "id": "moke70qmb8q3",
       "name": "Überdachungen",
       "sections": [
         {
-          "id": "mok9nupeu4og",
+          "id": "moke70qmfl43",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Überdachungen bei **Überdachungen**",
-                "subheading": "Top Auswahl Juskys Überdachungen",
+                "heading": "**Schutz** für die Saison",
+                "subheading": "Terrassendach, Carport, Wintergarten",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -6267,13 +6267,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupegymx",
+          "id": "moke70qm21w0",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6305,7 +6305,7 @@
           ]
         },
         {
-          "id": "mok9nupeoc7a",
+          "id": "moke70qmli3j",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6337,7 +6337,7 @@
           ]
         },
         {
-          "id": "mok9nupe0g87",
+          "id": "moke70qmzkjg",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -6353,31 +6353,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nup9iojo",
+              "linkUrl": "/page/moke70qihpk6",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nup9iojo"
+      "parentId": "moke70qihpk6"
     },
     {
-      "id": "mok9nupezls4",
+      "id": "moke70qmrc1u",
       "name": "Poolbedarf",
       "sections": [
         {
-          "id": "mok9nupeorp4",
+          "id": "moke70qm6sfl",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Poolbedarf bei **Poolbedarf**",
-                "subheading": "Top Auswahl Juskys Poolbedarf",
+                "heading": "**Pool** und Wasser",
+                "subheading": "Solardusche, Abdeckung, Filteranlage",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -6388,13 +6388,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupe5i6r",
+          "id": "moke70qmx3wl",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6424,7 +6424,7 @@
           ]
         },
         {
-          "id": "mok9nupeuj6c",
+          "id": "moke70qmji42",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6454,7 +6454,7 @@
           ]
         },
         {
-          "id": "mok9nupe134k",
+          "id": "moke70qmjp8u",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -6470,31 +6470,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nup9iojo",
+              "linkUrl": "/page/moke70qihpk6",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nup9iojo"
+      "parentId": "moke70qihpk6"
     },
     {
-      "id": "mok9nupem8ye",
+      "id": "moke70qnfek9",
       "name": "Gewächshäuser",
       "sections": [
         {
-          "id": "mok9nupeqw7b",
+          "id": "moke70qn01ti",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Gewächshäuser bei **Gewächshäuser**",
-                "subheading": "Top Auswahl Juskys Gewächshäuser",
+                "heading": "Pflanzen unter **Glas**",
+                "subheading": "Aluminium Gewächshäuser für deinen Garten",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -6505,13 +6505,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupewlff",
+          "id": "moke70qnw8or",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6538,7 +6538,7 @@
           ]
         },
         {
-          "id": "mok9nupen5cj",
+          "id": "moke70qn77td",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6565,7 +6565,7 @@
           ]
         },
         {
-          "id": "mok9nupe7kw1",
+          "id": "moke70qnkt9u",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -6581,31 +6581,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nup9iojo",
+              "linkUrl": "/page/moke70qihpk6",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nup9iojo"
+      "parentId": "moke70qihpk6"
     },
     {
-      "id": "mok9nupeznvj",
+      "id": "moke70qn33ze",
       "name": "Sofas",
       "sections": [
         {
-          "id": "mok9nupe2e8c",
+          "id": "moke70qn2yao",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Sofas bei **Sofas**",
-                "subheading": "Top Auswahl Juskys Sofas",
+                "heading": "Das Sofa, das **bleibt**",
+                "subheading": "Komfort fürs Wohnzimmer",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -6616,13 +6616,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupe7b6h",
+          "id": "moke70qnrjkt",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6649,7 +6649,7 @@
           ]
         },
         {
-          "id": "mok9nupehq6p",
+          "id": "moke70qnyah6",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6676,7 +6676,7 @@
           ]
         },
         {
-          "id": "mok9nupekc28",
+          "id": "moke70qnou9o",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -6692,31 +6692,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupay8sa",
+              "linkUrl": "/page/moke70qjt4jo",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupay8sa"
+      "parentId": "moke70qjt4jo"
     },
     {
-      "id": "mok9nupellv2",
+      "id": "moke70qnxvev",
       "name": "Polsterbetten",
       "sections": [
         {
-          "id": "mok9nupedl8m",
+          "id": "moke70qn2fbn",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Polsterbetten bei **Polsterbetten**",
-                "subheading": "Top Auswahl Juskys Polsterbetten",
+                "heading": "Polster, das **trägt**",
+                "subheading": "Polsterbetten in mehreren Größen",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -6727,13 +6727,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupe04ni",
+          "id": "moke70qnb57l",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6762,7 +6762,7 @@
           ]
         },
         {
-          "id": "mok9nupeqkwd",
+          "id": "moke70qno3jh",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6791,7 +6791,7 @@
           ]
         },
         {
-          "id": "mok9nupeaotk",
+          "id": "moke70qnhsw5",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -6807,31 +6807,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupay8sa",
+              "linkUrl": "/page/moke70qjt4jo",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupay8sa"
+      "parentId": "moke70qjt4jo"
     },
     {
-      "id": "mok9nupe5bv9",
+      "id": "moke70qnd7m5",
       "name": "Boxspringbetten",
       "sections": [
         {
-          "id": "mok9nupeebxz",
+          "id": "moke70qnrs3p",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Boxspringbetten bei **Boxspringbetten**",
-                "subheading": "Top Auswahl Juskys Boxspringbetten",
+                "heading": "Boxspring, **fest** verankert",
+                "subheading": "Klassischer Schlafkomfort",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -6842,13 +6842,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupejr4a",
+          "id": "moke70qnalld",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6876,7 +6876,7 @@
           ]
         },
         {
-          "id": "mok9nupep7os",
+          "id": "moke70qnyrpp",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6904,7 +6904,7 @@
           ]
         },
         {
-          "id": "mok9nupev7w7",
+          "id": "moke70qngvdm",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -6920,31 +6920,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupay8sa",
+              "linkUrl": "/page/moke70qjt4jo",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupay8sa"
+      "parentId": "moke70qjt4jo"
     },
     {
-      "id": "mok9nupexwx4",
+      "id": "moke70qnxnfk",
       "name": "Metallbetten",
       "sections": [
         {
-          "id": "mok9nupe1nms",
+          "id": "moke70qnvvyd",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Metallbetten bei **Metallbetten**",
-                "subheading": "Top Auswahl Juskys Metallbetten",
+                "heading": "Metall, **klare** Linie",
+                "subheading": "Schlichte Metallbetten",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -6955,13 +6955,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupe446j",
+          "id": "moke70qnd03u",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6989,7 +6989,7 @@
           ]
         },
         {
-          "id": "mok9nupe0y0j",
+          "id": "moke70qny7yu",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7017,7 +7017,7 @@
           ]
         },
         {
-          "id": "mok9nupeecm4",
+          "id": "moke70qn40g3",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -7033,31 +7033,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupay8sa",
+              "linkUrl": "/page/moke70qjt4jo",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupay8sa"
+      "parentId": "moke70qjt4jo"
     },
     {
-      "id": "mok9nupezprh",
+      "id": "moke70qng2qd",
       "name": "Kinderbetten",
       "sections": [
         {
-          "id": "mok9nupew0ay",
+          "id": "moke70qn4p6z",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Kinderbetten bei **Kinderbetten**",
-                "subheading": "Top Auswahl Juskys Kinderbetten",
+                "heading": "Für **kleine** Träumer",
+                "subheading": "Polsterbetten in Kindergrößen",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -7068,13 +7068,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupe4zjm",
+          "id": "moke70qnam30",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7103,7 +7103,7 @@
           ]
         },
         {
-          "id": "mok9nupezrga",
+          "id": "moke70qnm5zq",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7132,7 +7132,7 @@
           ]
         },
         {
-          "id": "mok9nupe9v6a",
+          "id": "moke70qnizfd",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -7148,31 +7148,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupay8sa",
+              "linkUrl": "/page/moke70qjt4jo",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupay8sa"
+      "parentId": "moke70qjt4jo"
     },
     {
-      "id": "mok9nupe6etc",
+      "id": "moke70qnihap",
       "name": "Wohnmöbel",
       "sections": [
         {
-          "id": "mok9nupe83qh",
+          "id": "moke70qnyudd",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Wohnmöbel bei **Wohnmöbel**",
-                "subheading": "Top Auswahl Juskys Wohnmöbel",
+                "heading": "Möbel fürs **Leben**",
+                "subheading": "Wohn und Esszimmer Möbel",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -7183,13 +7183,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupeynyu",
+          "id": "moke70qn3u8w",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7218,7 +7218,7 @@
           ]
         },
         {
-          "id": "mok9nupekn5r",
+          "id": "moke70qnvsns",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7247,7 +7247,7 @@
           ]
         },
         {
-          "id": "mok9nupelajr",
+          "id": "moke70qnruzc",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -7263,31 +7263,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupay8sa",
+              "linkUrl": "/page/moke70qjt4jo",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupay8sa"
+      "parentId": "moke70qjt4jo"
     },
     {
-      "id": "mok9nupe5blg",
+      "id": "moke70qn9opz",
       "name": "Massagesessel",
       "sections": [
         {
-          "id": "mok9nupe9j2m",
+          "id": "moke70qnhndf",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Massagesessel bei **Massagesessel**",
-                "subheading": "Top Auswahl Juskys Massagesessel",
+                "heading": "Entspannung **per** Knopfdruck",
+                "subheading": "Massagesessel für zuhause",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -7298,13 +7298,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupeqjqv",
+          "id": "moke70qnvqzk",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7331,7 +7331,7 @@
           ]
         },
         {
-          "id": "mok9nupeiv34",
+          "id": "moke70qnpkn5",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7358,7 +7358,7 @@
           ]
         },
         {
-          "id": "mok9nupeffw2",
+          "id": "moke70qnw2uu",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -7374,31 +7374,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupay8sa",
+              "linkUrl": "/page/moke70qjt4jo",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupay8sa"
+      "parentId": "moke70qjt4jo"
     },
     {
-      "id": "mok9nupeofse",
+      "id": "moke70qn8cp6",
       "name": "Büromöbel",
       "sections": [
         {
-          "id": "mok9nupekfdr",
+          "id": "moke70qnpp63",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Büromöbel bei **Büromöbel**",
-                "subheading": "Top Auswahl Juskys Büromöbel",
+                "heading": "Arbeit, **bequem** gemacht",
+                "subheading": "Bürostühle, Schreibtische, Aktenschränke",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -7409,13 +7409,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupemn3y",
+          "id": "moke70qnl100",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7445,7 +7445,7 @@
           ]
         },
         {
-          "id": "mok9nupecjbv",
+          "id": "moke70qnnwpy",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7475,7 +7475,7 @@
           ]
         },
         {
-          "id": "mok9nupeehqp",
+          "id": "moke70qnxmio",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -7491,31 +7491,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupay8sa",
+              "linkUrl": "/page/moke70qjt4jo",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupay8sa"
+      "parentId": "moke70qjt4jo"
     },
     {
-      "id": "mok9nupe25b9",
+      "id": "moke70qnr64h",
       "name": "Matratzen",
       "sections": [
         {
-          "id": "mok9nupet66c",
+          "id": "moke70qny8nw",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Matratzen bei **Matratzen**",
-                "subheading": "Top Auswahl Juskys Matratzen",
+                "heading": "**Guter** Schlaf beginnt hier",
+                "subheading": "Matratzen und Topper",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -7526,13 +7526,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupe9aqu",
+          "id": "moke70qnx12j",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7560,7 +7560,7 @@
           ]
         },
         {
-          "id": "mok9nupeegma",
+          "id": "moke70qnrxsg",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7588,7 +7588,7 @@
           ]
         },
         {
-          "id": "mok9nupeveus",
+          "id": "moke70qn0k2i",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -7604,31 +7604,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupay8sa",
+              "linkUrl": "/page/moke70qjt4jo",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupay8sa"
+      "parentId": "moke70qjt4jo"
     },
     {
-      "id": "mok9nupenld4",
+      "id": "moke70qn0sh8",
       "name": "Schlafkomfort",
       "sections": [
         {
-          "id": "mok9nupemm83",
+          "id": "moke70qntzno",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Schlafkomfort bei **Schlafkomfort**",
-                "subheading": "Top Auswahl Juskys Schlafkomfort",
+                "heading": "**Komfort** über der Matratze",
+                "subheading": "Kissen, Decken, Aufstehhilfen",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -7639,13 +7639,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupey8to",
+          "id": "moke70qnqrfr",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7675,7 +7675,7 @@
           ]
         },
         {
-          "id": "mok9nupewrz9",
+          "id": "moke70qnkkoh",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7705,7 +7705,7 @@
           ]
         },
         {
-          "id": "mok9nupem0qg",
+          "id": "moke70qn66a0",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -7721,31 +7721,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupay8sa",
+              "linkUrl": "/page/moke70qjt4jo",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupay8sa"
+      "parentId": "moke70qjt4jo"
     },
     {
-      "id": "mok9nupezle1",
+      "id": "moke70qnioze",
       "name": "Schminktische",
       "sections": [
         {
-          "id": "mok9nupeq0m1",
+          "id": "moke70qnx8mq",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Schminktische bei **Schminktische**",
-                "subheading": "Top Auswahl Juskys Schminktische",
+                "heading": "Dein **Spiegel** im Alltag",
+                "subheading": "Schminktische mit LED",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -7756,13 +7756,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupeqv7d",
+          "id": "moke70qnh8pb",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7793,7 +7793,7 @@
           ]
         },
         {
-          "id": "mok9nupeexa8",
+          "id": "moke70qnf50g",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7824,7 +7824,7 @@
           ]
         },
         {
-          "id": "mok9nupe3z1c",
+          "id": "moke70qnuwb3",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -7840,31 +7840,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupay8sa",
+              "linkUrl": "/page/moke70qjt4jo",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupay8sa"
+      "parentId": "moke70qjt4jo"
     },
     {
-      "id": "mok9nupe7rhr",
+      "id": "moke70qn2qx7",
       "name": "Badausstattung",
       "sections": [
         {
-          "id": "mok9nupe52i5",
+          "id": "moke70qnn2kd",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Badausstattung bei **Badausstattung**",
-                "subheading": "Top Auswahl Juskys Badausstattung",
+                "heading": "Das **Bad**, klar strukturiert",
+                "subheading": "Wäschekörbe und Stauraum",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -7875,13 +7875,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupery55",
+          "id": "moke70qnmpi9",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7910,7 +7910,7 @@
           ]
         },
         {
-          "id": "mok9nupeyyv2",
+          "id": "moke70qnh6tp",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7939,7 +7939,7 @@
           ]
         },
         {
-          "id": "mok9nupewknj",
+          "id": "moke70qnj67q",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -7955,31 +7955,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupay8sa",
+              "linkUrl": "/page/moke70qjt4jo",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupay8sa"
+      "parentId": "moke70qjt4jo"
     },
     {
-      "id": "mok9nupeb4ik",
+      "id": "moke70qniviz",
       "name": "Camping",
       "sections": [
         {
-          "id": "mok9nupeghor",
+          "id": "moke70qn4eto",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Camping bei **Camping**",
-                "subheading": "Top Auswahl Juskys Camping",
+                "heading": "Camping, **leicht** gemacht",
+                "subheading": "Stuhl, Tisch, Kühlbox, Matratze",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -7990,13 +7990,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupec50h",
+          "id": "moke70qnqcuk",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8027,7 +8027,7 @@
           ]
         },
         {
-          "id": "mok9nupeh3dd",
+          "id": "moke70qnoiom",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8058,7 +8058,7 @@
           ]
         },
         {
-          "id": "mok9nupe2jrn",
+          "id": "moke70qn77oo",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -8074,31 +8074,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupb157c",
+              "linkUrl": "/page/moke70qkd8zh",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupb157c"
+      "parentId": "moke70qkd8zh"
     },
     {
-      "id": "mok9nupe4j4f",
+      "id": "moke70qnkvye",
       "name": "Koffersets",
       "sections": [
         {
-          "id": "mok9nupe311p",
+          "id": "moke70qneq9y",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Koffersets bei **Koffersets**",
-                "subheading": "Top Auswahl Juskys Koffersets",
+                "heading": "**Reisen** ohne Stress",
+                "subheading": "Hartschale und Trolley Sets",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -8109,13 +8109,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupezkr9",
+          "id": "moke70qn7pt4",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8148,7 +8148,7 @@
           ]
         },
         {
-          "id": "mok9nupeaj09",
+          "id": "moke70qnhhfa",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8181,7 +8181,7 @@
           ]
         },
         {
-          "id": "mok9nupeocu2",
+          "id": "moke70qn08sy",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -8197,31 +8197,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupb157c",
+              "linkUrl": "/page/moke70qkd8zh",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupb157c"
+      "parentId": "moke70qkd8zh"
     },
     {
-      "id": "mok9nupebwdf",
+      "id": "moke70qns56w",
       "name": "Dachzelte",
       "sections": [
         {
-          "id": "mok9nupe9dqk",
+          "id": "moke70qnpxs6",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Dachzelte bei **Dachzelte**",
-                "subheading": "Top Auswahl Juskys Dachzelte",
+                "heading": "**Schlafen**, wo du parkst",
+                "subheading": "Autodachzelte für Roadtrips",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -8232,13 +8232,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupepuv3",
+          "id": "moke70qnvf7p",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8265,7 +8265,7 @@
           ]
         },
         {
-          "id": "mok9nupe6lka",
+          "id": "moke70qn8xdo",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8292,7 +8292,7 @@
           ]
         },
         {
-          "id": "mok9nupeybdv",
+          "id": "moke70qnoq5d",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -8308,31 +8308,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupb157c",
+              "linkUrl": "/page/moke70qkd8zh",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupb157c"
+      "parentId": "moke70qkd8zh"
     },
     {
-      "id": "mok9nupe5irh",
+      "id": "moke70qni431",
       "name": "Sport",
       "sections": [
         {
-          "id": "mok9nupewz2v",
+          "id": "moke70qnljz6",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Sport bei **Sport**",
-                "subheading": "Top Auswahl Juskys Sport",
+                "heading": "In Bewegung **bleiben**",
+                "subheading": "Sport und Outdoor Aktivitäten",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -8343,13 +8343,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupemro8",
+          "id": "moke70qnflsi",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8379,7 +8379,7 @@
           ]
         },
         {
-          "id": "mok9nupekiuz",
+          "id": "moke70qnrkih",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8409,7 +8409,7 @@
           ]
         },
         {
-          "id": "mok9nupeub7o",
+          "id": "moke70qnyt9v",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -8425,31 +8425,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupb157c",
+              "linkUrl": "/page/moke70qkd8zh",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupb157c"
+      "parentId": "moke70qkd8zh"
     },
     {
-      "id": "mok9nupe7nok",
+      "id": "moke70qn6l7c",
       "name": "Werkzeug",
       "sections": [
         {
-          "id": "mok9nupe035x",
+          "id": "moke70qnt0ne",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Werkzeug bei **Werkzeug**",
-                "subheading": "Top Auswahl Juskys Werkzeug",
+                "heading": "**Werkzeug**, das hält",
+                "subheading": "Hebeanlage, Wagenheber, Reparaturständer",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -8460,13 +8460,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupe199g",
+          "id": "moke70qn6gs9",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8495,7 +8495,7 @@
           ]
         },
         {
-          "id": "mok9nupe31ak",
+          "id": "moke70qn9jmy",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8524,7 +8524,7 @@
           ]
         },
         {
-          "id": "mok9nupem9gx",
+          "id": "moke70qnitk1",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -8540,31 +8540,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupca6st",
+              "linkUrl": "/page/moke70qk1w1m",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupca6st"
+      "parentId": "moke70qk1w1m"
     },
     {
-      "id": "mok9nupevsf2",
+      "id": "moke70qnmmbo",
       "name": "Sackkarren",
       "sections": [
         {
-          "id": "mok9nupe2ndu",
+          "id": "moke70qn7ri9",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Sackkarren bei **Sackkarren**",
-                "subheading": "Top Auswahl Juskys Sackkarren",
+                "heading": "**Tragen**, ohne Mühe",
+                "subheading": "Klappbare Sackkarren für Treppen und Boden",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -8575,13 +8575,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupek472",
+          "id": "moke70qnelkg",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8610,7 +8610,7 @@
           ]
         },
         {
-          "id": "mok9nupe4eeo",
+          "id": "moke70qnlbpy",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8639,7 +8639,7 @@
           ]
         },
         {
-          "id": "mok9nupef9uk",
+          "id": "moke70qnbeog",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -8655,31 +8655,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupca6st",
+              "linkUrl": "/page/moke70qk1w1m",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupca6st"
+      "parentId": "moke70qk1w1m"
     },
     {
-      "id": "mok9nupejyae",
+      "id": "moke70qnvq05",
       "name": "Multifunktionsleitern",
       "sections": [
         {
-          "id": "mok9nupejkui",
+          "id": "moke70qnl3od",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Multifunktionsleitern bei **Multifunktionsleitern**",
-                "subheading": "Top Auswahl Juskys Multifunktionsleitern",
+                "heading": "**Hoch** hinaus",
+                "subheading": "Aluminium Multifunktionsleitern",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -8690,13 +8690,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupes0ni",
+          "id": "moke70qnug04",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8723,7 +8723,7 @@
           ]
         },
         {
-          "id": "mok9nupebsmw",
+          "id": "moke70qnycsn",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8750,7 +8750,7 @@
           ]
         },
         {
-          "id": "mok9nupes5as",
+          "id": "moke70qnjsmo",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -8766,31 +8766,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupca6st",
+              "linkUrl": "/page/moke70qk1w1m",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupca6st"
+      "parentId": "moke70qk1w1m"
     },
     {
-      "id": "mok9nupekeb3",
+      "id": "moke70qnebiq",
       "name": "Elektrokamine",
       "sections": [
         {
-          "id": "mok9nupeh9l0",
+          "id": "moke70qnw4yk",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Elektrokamine bei **Elektrokamine**",
-                "subheading": "Top Auswahl Juskys Elektrokamine",
+                "heading": "**Wärme**, wenn es kalt wird",
+                "subheading": "Elektrokamine und Heizstrahler",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -8801,13 +8801,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupewshp",
+          "id": "moke70qnk42e",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8839,7 +8839,7 @@
           ]
         },
         {
-          "id": "mok9nupeqig6",
+          "id": "moke70qnjpks",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8871,7 +8871,7 @@
           ]
         },
         {
-          "id": "mok9nupen86b",
+          "id": "moke70qn85lq",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -8887,31 +8887,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupca6st",
+              "linkUrl": "/page/moke70qk1w1m",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupca6st"
+      "parentId": "moke70qk1w1m"
     },
     {
-      "id": "mok9nupe58tm",
+      "id": "moke70qnugz0",
       "name": "Schwerlastregale",
       "sections": [
         {
-          "id": "mok9nupejp2n",
+          "id": "moke70qnt7oz",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Schwerlastregale bei **Schwerlastregale**",
-                "subheading": "Top Auswahl Juskys Schwerlastregale",
+                "heading": "**Stauraum**, der trägt",
+                "subheading": "Verzinkte Lager und Schwerlastregale",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -8922,13 +8922,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupeei9h",
+          "id": "moke70qngilk",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8962,7 +8962,7 @@
           ]
         },
         {
-          "id": "mok9nupeizrl",
+          "id": "moke70qn3ihj",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8997,7 +8997,7 @@
           ]
         },
         {
-          "id": "mok9nupeux16",
+          "id": "moke70qn4dfs",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -9013,31 +9013,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupcu6ux",
+              "linkUrl": "/page/moke70qlhin4",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupcu6ux"
+      "parentId": "moke70qlhin4"
     },
     {
-      "id": "mok9nupe4atb",
+      "id": "moke70qnu5yi",
       "name": "Aufbewahrung",
       "sections": [
         {
-          "id": "mok9nupeon7l",
+          "id": "moke70qnirn2",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Aufbewahrung bei **Aufbewahrung**",
-                "subheading": "Top Auswahl Juskys Aufbewahrung",
+                "heading": "**Ordnung**, leicht gemacht",
+                "subheading": "Boxen und Aufbewahrungssysteme",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -9048,13 +9048,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupemnud",
+          "id": "moke70qn62ve",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9082,7 +9082,7 @@
           ]
         },
         {
-          "id": "mok9nupebsbz",
+          "id": "moke70qnejfw",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9110,7 +9110,7 @@
           ]
         },
         {
-          "id": "mok9nupehbo1",
+          "id": "moke70qnl9qz",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -9126,31 +9126,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupcu6ux",
+              "linkUrl": "/page/moke70qlhin4",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupcu6ux"
+      "parentId": "moke70qlhin4"
     },
     {
-      "id": "mok9nupeh587",
+      "id": "moke70qn91ob",
       "name": "Küchengeräte",
       "sections": [
         {
-          "id": "mok9nupedt9w",
+          "id": "moke70qn2yo4",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Küchengeräte bei **Küchengeräte**",
-                "subheading": "Top Auswahl Juskys Küchengeräte",
+                "heading": "Küche, **schnell** zur Hand",
+                "subheading": "Airfryer und Helfer",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -9161,13 +9161,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupeaykc",
+          "id": "moke70qnnw2l",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9194,7 +9194,7 @@
           ]
         },
         {
-          "id": "mok9nupe5p9w",
+          "id": "moke70qnywe9",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9221,7 +9221,7 @@
           ]
         },
         {
-          "id": "mok9nuperrn4",
+          "id": "moke70qnak0n",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -9237,31 +9237,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupcu6ux",
+              "linkUrl": "/page/moke70qlhin4",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupcu6ux"
+      "parentId": "moke70qlhin4"
     },
     {
-      "id": "mok9nupep5kc",
+      "id": "moke70qowsav",
       "name": "Mülleimer",
       "sections": [
         {
-          "id": "mok9nupe0qmw",
+          "id": "moke70qncism",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Mülleimer bei **Mülleimer**",
-                "subheading": "Top Auswahl Juskys Mülleimer",
+                "heading": "Müll, **sauber** getrennt",
+                "subheading": "Küchenmülleimer in mehreren Größen",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -9272,13 +9272,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupelcc4",
+          "id": "moke70qnox0d",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9305,7 +9305,7 @@
           ]
         },
         {
-          "id": "mok9nupexerv",
+          "id": "moke70qoff7w",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9332,7 +9332,7 @@
           ]
         },
         {
-          "id": "mok9nupe9oac",
+          "id": "moke70qol9s1",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -9348,31 +9348,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupcu6ux",
+              "linkUrl": "/page/moke70qlhin4",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupcu6ux"
+      "parentId": "moke70qlhin4"
     },
     {
-      "id": "mok9nupecuaz",
+      "id": "moke70qo26f4",
       "name": "Eiswürfelmaschinen",
       "sections": [
         {
-          "id": "mok9nupe826i",
+          "id": "moke70qo8fxf",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Eiswürfelmaschinen bei **Eiswürfelmaschinen**",
-                "subheading": "Top Auswahl Juskys Eiswürfelmaschinen",
+                "heading": "Eis, **per** Knopfdruck",
+                "subheading": "Kompakte Eiswürfelmaschinen",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -9383,13 +9383,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupe2wgj",
+          "id": "moke70qo0hpn",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9416,7 +9416,7 @@
           ]
         },
         {
-          "id": "mok9nuper8v4",
+          "id": "moke70qowckz",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9443,7 +9443,7 @@
           ]
         },
         {
-          "id": "mok9nupecmt8",
+          "id": "moke70qo0rgz",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -9459,31 +9459,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupcu6ux",
+              "linkUrl": "/page/moke70qlhin4",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupcu6ux"
+      "parentId": "moke70qlhin4"
     },
     {
-      "id": "mok9nupfg6f3",
+      "id": "moke70qo66c6",
       "name": "Heizgeräte",
       "sections": [
         {
-          "id": "mok9nupf3k6s",
+          "id": "moke70qosq5u",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Heizgeräte bei **Heizgeräte**",
-                "subheading": "Top Auswahl Juskys Heizgeräte",
+                "heading": "Wärme, **wenn** du sie brauchst",
+                "subheading": "Heizgeräte für drinnen und draußen",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -9494,13 +9494,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupfm479",
+          "id": "moke70qolz0r",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9528,7 +9528,7 @@
           ]
         },
         {
-          "id": "mok9nupfqmz4",
+          "id": "moke70qo9oe7",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9556,7 +9556,7 @@
           ]
         },
         {
-          "id": "mok9nupf0le1",
+          "id": "moke70qou63u",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -9572,31 +9572,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupcu6ux",
+              "linkUrl": "/page/moke70qlhin4",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupcu6ux"
+      "parentId": "moke70qlhin4"
     },
     {
-      "id": "mok9nupf904n",
+      "id": "moke70qob84j",
       "name": "Alltagshilfen",
       "sections": [
         {
-          "id": "mok9nupfpoav",
+          "id": "moke70qowbnf",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Alltagshilfen bei **Alltagshilfen**",
-                "subheading": "Top Auswahl Juskys Alltagshilfen",
+                "heading": "Alltag, **leichter** gemacht",
+                "subheading": "Rollator, Bollerwagen und mehr",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -9607,13 +9607,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupfvkc2",
+          "id": "moke70qo22em",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9642,7 +9642,7 @@
           ]
         },
         {
-          "id": "mok9nupff7h0",
+          "id": "moke70qotgmf",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9671,7 +9671,7 @@
           ]
         },
         {
-          "id": "mok9nupfb5ni",
+          "id": "moke70qoyae0",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -9687,31 +9687,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupcu6ux",
+              "linkUrl": "/page/moke70qlhin4",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupcu6ux"
+      "parentId": "moke70qlhin4"
     },
     {
-      "id": "mok9nupgjsn9",
+      "id": "moke70qogr5s",
       "name": "Kinderbedarf",
       "sections": [
         {
-          "id": "mok9nupgnyix",
+          "id": "moke70qobgn6",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Kinderbedarf bei **Kinderbedarf**",
-                "subheading": "Top Auswahl Juskys Kinderbedarf",
+                "heading": "Für **kleine** Helden",
+                "subheading": "Kinderausstattung fürs Zuhause",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -9722,13 +9722,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupg6ixd",
+          "id": "moke70qoft4b",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9762,7 +9762,7 @@
           ]
         },
         {
-          "id": "mok9nupgj9a6",
+          "id": "moke70qoz2ml",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9797,7 +9797,7 @@
           ]
         },
         {
-          "id": "mok9nupgvwzw",
+          "id": "moke70qokalh",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -9813,31 +9813,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupcu6ux",
+              "linkUrl": "/page/moke70qlhin4",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupcu6ux"
+      "parentId": "moke70qlhin4"
     },
     {
-      "id": "mok9nupg0m9k",
+      "id": "moke70qopwop",
       "name": "Hundebedarf",
       "sections": [
         {
-          "id": "mok9nupgzn16",
+          "id": "moke70qoakb0",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Hundebedarf bei **Hundebedarf**",
-                "subheading": "Top Auswahl Juskys Hundebedarf",
+                "heading": "Für deinen **Hund**",
+                "subheading": "Transport, Treppe, Auslauf",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -9848,13 +9848,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupgj1lg",
+          "id": "moke70qom84z",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9884,7 +9884,7 @@
           ]
         },
         {
-          "id": "mok9nupgrigy",
+          "id": "moke70qou8se",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9914,7 +9914,7 @@
           ]
         },
         {
-          "id": "mok9nupgljba",
+          "id": "moke70qo5dau",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -9930,31 +9930,31 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupchf55",
+              "linkUrl": "/page/moke70qligxu",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupchf55"
+      "parentId": "moke70qligxu"
     },
     {
-      "id": "mok9nupg8tyj",
+      "id": "moke70qobjov",
       "name": "Freilaufgehege",
       "sections": [
         {
-          "id": "mok9nupg6tup",
+          "id": "moke70qo0o9n",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Freilaufgehege bei **Freilaufgehege**",
-                "subheading": "Top Auswahl Juskys Freilaufgehege",
+                "heading": "**Freilauf**, sicher und groß",
+                "subheading": "Gehege für Garten und Balkon",
                 "body": "",
                 "bullets": [],
                 "cta": "Sortiment ansehen"
@@ -9965,13 +9965,13 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "store_hero",
               "textAlign": "left"
             }
           ]
         },
         {
-          "id": "mok9nupgar2m",
+          "id": "moke70qoyyqz",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9998,7 +9998,7 @@
           ]
         },
         {
-          "id": "mok9nupgqw9h",
+          "id": "moke70qov0e5",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -10025,7 +10025,7 @@
           ]
         },
         {
-          "id": "mok9nupgxqwc",
+          "id": "moke70qog27c",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -10041,16 +10041,16 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9nupchf55",
+              "linkUrl": "/page/moke70qligxu",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "creative",
               "textAlign": "left"
             }
           ]
         }
       ],
-      "parentId": "mok9nupchf55"
+      "parentId": "moke70qligxu"
     }
   ],
   "googleDriveUrl": ""

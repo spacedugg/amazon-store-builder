@@ -101,8 +101,16 @@ export function ov(heading, subheading, body, bullets, cta) {
 // overlay: ov(...) Objekt oder null
 // brief: nur Bildfunktion und Komposition (keine Texte, kein Licht)
 // opts: { asins, hotspots, linkUrl, bgColor, imageCategory, textAlign }
+// imageCategory wird automatisch gesetzt für image und image_text Tiles wenn
+// nicht explizit angegeben. Default Mapping greift in section() Kontext.
 export function tile(type, overlay, brief, opts) {
   opts = opts || {};
+  var ic = opts.imageCategory || '';
+  if (!ic) {
+    if (type === 'image_text') ic = 'text_image';
+    else if (type === 'shoppable_image') ic = 'lifestyle';
+    else if (type === 'image') ic = 'creative'; // wird in section() ggf. überschrieben
+  }
   return {
     type: type,
     textOverlay: overlay || ov(),
@@ -112,13 +120,32 @@ export function tile(type, overlay, brief, opts) {
     linkUrl: opts.linkUrl || '',
     linkAsin: opts.linkAsin || '',
     bgColor: opts.bgColor || '',
-    imageCategory: opts.imageCategory || '',
+    imageCategory: ic,
     textAlign: opts.textAlign || 'left',
   };
 }
 
-// Section Factory
+// Section Factory.
+// Setzt imageCategory auf image Tiles automatisch basierend auf Modul Typ,
+// falls der Tile noch den Default 'creative' hat.
 export function section(layoutId, tiles, module) {
+  var sectionDefault = '';
+  if (module) {
+    if (module.indexOf('hero') === 0) sectionDefault = 'store_hero';
+    else if (module.indexOf('features') === 0) sectionDefault = 'benefit';
+    else if (module.indexOf('lifestyle') === 0) sectionDefault = 'lifestyle';
+    else if (module.indexOf('trust') === 0) sectionDefault = 'lifestyle';
+    else if (module.indexOf('engagement') === 0) sectionDefault = 'creative';
+    else if (module.indexOf('footer') === 0) sectionDefault = 'creative';
+    else if (module.indexOf('categoryNav') === 0) sectionDefault = 'product';
+  }
+  if (sectionDefault) {
+    tiles.forEach(function(t) {
+      if (t.type === 'image' && t.imageCategory === 'creative') {
+        t.imageCategory = sectionDefault;
+      }
+    });
+  }
   return {
     id: uid(),
     layoutId: layoutId,
@@ -297,11 +324,79 @@ function buildBestsellerPage() {
     ], 'products.fullWidthGrid'),
 
     section('vh-w2s', [
-      tile('image', ov('Warum **diese** Bestseller'), 'Wide Image. Plus 2 Squares mit USP Icons.'),
-      tile('image', ov('**Meistgekauft**'), 'Square mit grünem Icon Kreis Stern.'),
-      tile('image', ov('**Inhabergeführt**'), 'Square mit grünem Icon Kreis Haus.'),
+      tile('image', ov('Warum **Juskys**'), 'Wide Image USP Bild.'),
+      tile('image', ov('**Geprüfte** Qualität'), 'Square mit grünem Icon Kreis Schild Check.'),
+      tile('image', ov('**Versandkostenfrei**'), 'Square mit grünem Icon Kreis Truck.'),
     ], 'features.featureWideAnd2'),
   ]);
+}
+
+// Hero Headlines pro Subpage, Mapping per Eltern Kategorie und Sub.
+// Format: { '[Parent] > [Sub]': { heading, subheading } }
+var SUB_HERO_TEXTS = {
+  // Garten
+  'Garten > Gartenmöbel Sets': { heading: 'Lounge, **bereit** für die Saison', subheading: 'Komplette Sitzgruppen für Garten und Terrasse' },
+  'Garten > Gartenaufbewahrung': { heading: 'Stauraum, der **draußen** bleibt', subheading: 'Gerätehäuser, Holzunterstände, Boxen' },
+  'Garten > Gartenbedarf': { heading: 'Alles für den **Garten**', subheading: 'Schlauch, Schubkarre, Werkzeug' },
+  'Garten > Sonnenschutz': { heading: '**Schatten**, wo du ihn brauchst', subheading: 'Sonnenschirme, Markisen, Sichtschutz' },
+  'Garten > Gartenliegen': { heading: 'Liegen, **lang** ausstrecken', subheading: 'Sonnenliegen und Doppelliegen' },
+  'Garten > Gartenbänke': { heading: '**Bänke** zum Niederlassen', subheading: 'Klassische Gartenbänke aus Holz und Metall' },
+  'Garten > Gartentische': { heading: 'Der **Tisch** für draußen', subheading: 'Gartentische in verschiedenen Größen' },
+  'Garten > Bierzeltgarnituren': { heading: '**Feiern** ohne Aufwand', subheading: 'Bierzeltgarnituren für jeden Anlass' },
+  'Garten > Hängematten': { heading: 'Hängen, **schaukeln**, abschalten', subheading: 'Hängematten und Hängesessel mit Gestell' },
+  'Garten > Überdachungen': { heading: '**Schutz** für die Saison', subheading: 'Terrassendach, Carport, Wintergarten' },
+  'Garten > Poolbedarf': { heading: '**Pool** und Wasser', subheading: 'Solardusche, Abdeckung, Filteranlage' },
+  'Garten > Gewächshäuser': { heading: 'Pflanzen unter **Glas**', subheading: 'Aluminium Gewächshäuser für deinen Garten' },
+  // Möbel
+  'Möbel > Sofas': { heading: 'Das Sofa, das **bleibt**', subheading: 'Komfort fürs Wohnzimmer' },
+  'Möbel > Polsterbetten': { heading: 'Polster, das **trägt**', subheading: 'Polsterbetten in mehreren Größen' },
+  'Möbel > Boxspringbetten': { heading: 'Boxspring, **fest** verankert', subheading: 'Klassischer Schlafkomfort' },
+  'Möbel > Metallbetten': { heading: 'Metall, **klare** Linie', subheading: 'Schlichte Metallbetten' },
+  'Möbel > Kinderbetten': { heading: 'Für **kleine** Träumer', subheading: 'Polsterbetten in Kindergrößen' },
+  'Möbel > Wohnmöbel': { heading: 'Möbel fürs **Leben**', subheading: 'Wohn und Esszimmer Möbel' },
+  'Möbel > Massagesessel': { heading: 'Entspannung **per** Knopfdruck', subheading: 'Massagesessel für zuhause' },
+  'Möbel > Büromöbel': { heading: 'Arbeit, **bequem** gemacht', subheading: 'Bürostühle, Schreibtische, Aktenschränke' },
+  'Möbel > Matratzen': { heading: '**Guter** Schlaf beginnt hier', subheading: 'Matratzen und Topper' },
+  'Möbel > Schlafkomfort': { heading: '**Komfort** über der Matratze', subheading: 'Kissen, Decken, Aufstehhilfen' },
+  'Möbel > Schminktische': { heading: 'Dein **Spiegel** im Alltag', subheading: 'Schminktische mit LED' },
+  'Möbel > Badausstattung': { heading: 'Das **Bad**, klar strukturiert', subheading: 'Wäschekörbe und Stauraum' },
+  // Freizeit
+  'Freizeit > Camping': { heading: 'Camping, **leicht** gemacht', subheading: 'Stuhl, Tisch, Kühlbox, Matratze' },
+  'Freizeit > Koffersets': { heading: '**Reisen** ohne Stress', subheading: 'Hartschale und Trolley Sets' },
+  'Freizeit > Dachzelte': { heading: '**Schlafen**, wo du parkst', subheading: 'Autodachzelte für Roadtrips' },
+  'Freizeit > Sport': { heading: 'In Bewegung **bleiben**', subheading: 'Sport und Outdoor Aktivitäten' },
+  // Heimwerken
+  'Heimwerken > Werkzeug': { heading: '**Werkzeug**, das hält', subheading: 'Hebeanlage, Wagenheber, Reparaturständer' },
+  'Heimwerken > Sackkarren': { heading: '**Tragen**, ohne Mühe', subheading: 'Klappbare Sackkarren für Treppen und Boden' },
+  'Heimwerken > Multifunktionsleitern': { heading: '**Hoch** hinaus', subheading: 'Aluminium Multifunktionsleitern' },
+  'Heimwerken > Elektrokamine': { heading: '**Wärme**, wenn es kalt wird', subheading: 'Elektrokamine und Heizstrahler' },
+  // Haushalt
+  'Haushalt > Schwerlastregale': { heading: '**Stauraum**, der trägt', subheading: 'Verzinkte Lager und Schwerlastregale' },
+  'Haushalt > Aufbewahrung': { heading: '**Ordnung**, leicht gemacht', subheading: 'Boxen und Aufbewahrungssysteme' },
+  'Haushalt > Küchengeräte': { heading: 'Küche, **schnell** zur Hand', subheading: 'Airfryer und Helfer' },
+  'Haushalt > Mülleimer': { heading: 'Müll, **sauber** getrennt', subheading: 'Küchenmülleimer in mehreren Größen' },
+  'Haushalt > Eiswürfelmaschinen': { heading: 'Eis, **per** Knopfdruck', subheading: 'Kompakte Eiswürfelmaschinen' },
+  'Haushalt > Heizgeräte': { heading: 'Wärme, **wenn** du sie brauchst', subheading: 'Heizgeräte für drinnen und draußen' },
+  'Haushalt > Alltagshilfen': { heading: 'Alltag, **leichter** gemacht', subheading: 'Rollator, Bollerwagen und mehr' },
+  'Haushalt > Kinderbedarf': { heading: 'Für **kleine** Helden', subheading: 'Kinderausstattung fürs Zuhause' },
+  // Tierbedarf
+  'Tierbedarf > Hundebedarf': { heading: 'Für deinen **Hund**', subheading: 'Transport, Treppe, Auslauf' },
+  'Tierbedarf > Katzenbedarf': { heading: 'Für deine **Katze**', subheading: 'Komfort und Spiel für Stubentiger' },
+  'Tierbedarf > Freilaufgehege': { heading: '**Freilauf**, sicher und groß', subheading: 'Gehege für Garten und Balkon' },
+};
+
+// Default Image Category pro Tile Typ
+function defaultImageCategory(type, sectionModule) {
+  if (type === 'image_text') return 'text_image';
+  if (type === 'shoppable_image') return 'lifestyle';
+  if (sectionModule && sectionModule.indexOf('hero') === 0) return 'store_hero';
+  if (sectionModule && sectionModule.indexOf('features') === 0) return 'benefit';
+  if (sectionModule && sectionModule.indexOf('lifestyle') === 0) return 'lifestyle';
+  if (sectionModule && sectionModule.indexOf('trust') === 0) return 'lifestyle';
+  if (sectionModule && sectionModule.indexOf('engagement') === 0) return 'creative';
+  if (sectionModule && sectionModule.indexOf('footer') === 0) return 'creative';
+  if (sectionModule && sectionModule.indexOf('categoryNav') === 0) return 'product';
+  return 'creative';
 }
 
 // Standard Subpage Template, vier Sections.
@@ -309,11 +404,12 @@ function buildBestsellerPage() {
 function buildSubpage(parentName, subName, headlineWord) {
   var subAsins = allAsinsBySub(parentName, subName);
   if (subAsins.length === 0) return null;
-  var word = headlineWord || subName;
+  var key = parentName + ' > ' + subName;
+  var heroText = SUB_HERO_TEXTS[key] || { heading: 'Top **' + subName + '**', subheading: '' };
   return page(subName, [
     section('1', [
       tile('image',
-        ov(subName + ' bei **' + word + '**', 'Top Auswahl Juskys ' + subName, '', [], 'Sortiment ansehen'),
+        ov(heroText.heading, heroText.subheading, '', [], 'Sortiment ansehen'),
         'Hero Bild Sub Page ' + subName + '. Freigestelltes Leitprodukt aus dieser Sub.'
       ),
     ], 'hero.fullWidthHero'),
