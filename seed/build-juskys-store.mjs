@@ -151,16 +151,108 @@ var BRAND_STORY_KURZ = 'Seit 2005 bringen Philipp Juskys und Daniel Heidrich ein
 
 var BRAND_STORY_LANG = 'Seit 2005 ist Juskys dein Partner für Wohnen, Garten, Heimwerken, Tier und Freizeit. Geleitet von Philipp Juskys und Daniel Heidrich, inhabergeführt aus Deutschland. Wir besuchen unsere Hersteller persönlich, prüfen regelmäßig die Qualität und liefern versandkostenfrei in Deutschland.';
 
+// ─── PAGE BUILDERS ────────────────────────────────────────
+
+function buildHomePage() {
+  return page('Home', [
+    // 1, Hero
+    section('1', [
+      tile('image',
+        ov('Was **dein** Zuhause braucht', 'Möbel, Garten, Heimwerken, Haushalt, Tier und Freizeit, aus einem Haus seit 2005', '', [], 'Sortiment entdecken'),
+        'Hero Bild Startseite. Wohnraum mit Sofa, Sessel, Beistelltisch, Lampe, im Hintergrund Übergang zur Terrasse.'
+      ),
+    ], 'hero.fullWidthHero'),
+
+    // 2, Navigator 6 Kategorien
+    section('2s-4grid', [
+      tile('image', ov('**GARTEN**', 'Lounge, Tische, Schatten'), 'Kategorie Tile Garten. Freigestelltes Leitprodukt auf Beige.', { linkUrl: linkTo('Garten') }),
+      tile('image', ov('**MÖBEL**', 'Sofas, Betten, Bad'), 'Kategorie Tile Möbel. Freigestelltes Leitprodukt auf Beige.', { linkUrl: linkTo('Möbel') }),
+      tile('image', ov('**FREIZEIT**', 'Camping, Koffer, Sport'), 'Kategorie Tile Freizeit. Freigestelltes Leitprodukt auf Beige.', { linkUrl: linkTo('Freizeit') }),
+      tile('image', ov('**HEIMWERKEN**', 'Werkzeug, Leitern, Kamine'), 'Kategorie Tile Heimwerken. Freigestelltes Leitprodukt auf Beige.', { linkUrl: linkTo('Heimwerken') }),
+      tile('image', ov('**HAUSHALT**', 'Küche, Stauraum, Alltag'), 'Kategorie Tile Haushalt. Freigestelltes Leitprodukt auf Beige.', { linkUrl: linkTo('Haushalt') }),
+      tile('image', ov('**TIERBEDARF**', 'Hund, Katze, Freilauf'), 'Kategorie Tile Tierbedarf. Freigestelltes Leitprodukt auf Beige.', { linkUrl: linkTo('Tierbedarf') }),
+    ], 'categoryNav.grid6tiles'),
+
+    // 3, Brand Story Split
+    section('std-2equal', [
+      tile('image', ov(), 'Image Tile Brand Story. Team oder Hallenbild aus juskys.de, Mitarbeiter und Standort.'),
+      tile('image_text',
+        ov('Ein **Haus**, viele Räume', 'Inhabergeführt seit 2005', BRAND_STORY_KURZ, [], 'Mehr über Juskys'),
+        'Brand Story Tile mit Text neben Bild aus Section Tile 1. Verlinkt auf Über Uns.',
+        { linkUrl: linkTo('Über Uns') }
+      ),
+    ], 'trust.trustSplit'),
+
+    // 4, Trenner
+    section('1', [
+      tile('image', ov('Räume, die **zusammen** passen'), 'Trenner Textbild. Stoff Makro im Hintergrund.'),
+    ], 'hero.fullWidthHero'),
+
+    // 5, Shoppable Wohnzimmer
+    section('1', [
+      tile('shoppable_image',
+        ov('Wohnzimmer, **komplett** gedacht', 'Sofa, Sessel, Beistelltisch, Lampe, Teppich'),
+        'Shoppable Bild Wohnzimmer. 5 Hotspots auf Sofa, Sessel, Beistelltisch, Lampe, Teppich.',
+        { asins: topAsinsBySub('Möbel', 'Sofas', 1).concat(topAsinsBySub('Möbel', 'Wohnmöbel', 2), topAsinsBySub('Möbel', 'Boxspringbetten', 1), topAsinsBySub('Möbel', 'Schlafkomfort', 1)) }
+      ),
+    ], 'products.shoppableFullWidth'),
+
+    // 6, EINZIGE Bestseller Section auf Home (4 Garten saisonal plus 2 Möbel)
+    section('1', [
+      tile('best_sellers',
+        ov('Die meistgekauften **Lieblinge**', 'Saisonal kuratierter Mix aus Garten und Möbel'),
+        'Bestseller Grid 6 ASINs kuratiert.',
+        { asins: homepageBestsellerAsins() }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    // 7, Trenner Garten
+    section('1', [
+      tile('image', ov('Die **Saison** beginnt zuhause'), 'Trenner Textbild. Rattan oder Polyrattan Makro im Hintergrund.'),
+    ], 'hero.fullWidthHero'),
+
+    // 8, Shoppable Garten
+    section('1', [
+      tile('shoppable_image',
+        ov('Lounge, fertig zum **Loslegen**', 'Loungegruppen, Tische, Schatten'),
+        'Shoppable Bild Terrasse. Loungegruppe als Hauptmotiv mit Sonnenschirm, Beistelltisch, Outdoor Kissen. 5 Hotspots auf Sofa, Sessel, Beistelltisch, Sonnenschirm, Kissen.',
+        { asins: topAsinsBySub('Garten', 'Gartenmöbel Sets', 3).concat(topAsinsBySub('Garten', 'Sonnenschutz', 1), topAsinsBySub('Garten', 'Gartentische', 1)) }
+      ),
+    ], 'products.shoppableFullWidth'),
+
+    // 9, USP Leiste 4 Marken USPs
+    section('2x2wide', [
+      tile('image', ov('**Inhabergeführt**', 'Seit 2005 aus Deutschland'), 'Marken USP Tile mit grünem Icon Kreis Haus.'),
+      tile('image', ov('**Versandkostenfrei**', 'In ganz Deutschland'), 'Marken USP Tile mit grünem Icon Kreis Truck.'),
+      tile('image', ov('**Geprüft**', 'Hersteller persönlich besucht'), 'Marken USP Tile mit grünem Icon Kreis Schild Check.'),
+      tile('image', ov('**Sortiment**', 'Für viele Lebensbereiche'), 'Marken USP Tile mit grünem Icon Kreis Stern.'),
+    ], 'features.featureGrid4wide'),
+
+    // 10, Follow Banner
+    section('1', [
+      tile('image',
+        ov('**Folge** Juskys', 'Neue Produkte und Aktionen direkt im Feed', '', [], 'Folgen'),
+        'Follow Banner Full Width.'
+      ),
+    ], 'engagement.followBanner'),
+
+    // 11, Footer Nav
+    section('2x2wide', [
+      tile('image', ov('**GARTEN**'), 'Footer Kategorie Tile mit Mini Icon.', { linkUrl: linkTo('Garten') }),
+      tile('image', ov('**MÖBEL**'), 'Footer Kategorie Tile mit Mini Icon.', { linkUrl: linkTo('Möbel') }),
+      tile('image', ov('**HAUSHALT**'), 'Footer Kategorie Tile mit Mini Icon.', { linkUrl: linkTo('Haushalt') }),
+      tile('image', ov('**ÜBER** UNS'), 'Footer Tile zur Brand Story.', { linkUrl: linkTo('Über Uns') }),
+    ], 'footer.categoryNavFooter'),
+  ]);
+}
+
 // ─── BUILD ────────────────────────────────────────────────
 
 function buildStore() {
   var pages = [];
 
-  // Pages werden in den nächsten Schritten ergänzt
-  // pages.push(buildHomePage());
-  // pages.push(buildBestsellerPage());
-  // pages.push(buildGartenPage());
-  // ...
+  pages.push(buildHomePage());
+  // weitere Pages folgen in nächsten Schritten
 
   // Resolve parentName references → echte parentId
   var pageIdByName = {};

@@ -916,6 +916,523 @@
     }
   ],
   "products": [],
-  "pages": [],
+  "pages": [
+    {
+      "id": "mok9ed49bz7a",
+      "name": "Home",
+      "sections": [
+        {
+          "id": "mok9ed47rrqs",
+          "layoutId": "1",
+          "module": "hero.fullWidthHero",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Was **dein** Zuhause braucht",
+                "subheading": "Möbel, Garten, Heimwerken, Haushalt, Tier und Freizeit, aus einem Haus seit 2005",
+                "body": "",
+                "bullets": [],
+                "cta": "Sortiment entdecken"
+              },
+              "brief": "Hero Bild Startseite. Wohnraum mit Sofa, Sessel, Beistelltisch, Lampe, im Hintergrund Übergang zur Terrasse.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9ed48r7mk",
+          "layoutId": "2s-4grid",
+          "module": "categoryNav.grid6tiles",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**GARTEN**",
+                "subheading": "Lounge, Tische, Schatten",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Kategorie Tile Garten. Freigestelltes Leitprodukt auf Beige.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Garten",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**MÖBEL**",
+                "subheading": "Sofas, Betten, Bad",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Kategorie Tile Möbel. Freigestelltes Leitprodukt auf Beige.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Möbel",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**FREIZEIT**",
+                "subheading": "Camping, Koffer, Sport",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Kategorie Tile Freizeit. Freigestelltes Leitprodukt auf Beige.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Freizeit",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**HEIMWERKEN**",
+                "subheading": "Werkzeug, Leitern, Kamine",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Kategorie Tile Heimwerken. Freigestelltes Leitprodukt auf Beige.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Heimwerken",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**HAUSHALT**",
+                "subheading": "Küche, Stauraum, Alltag",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Kategorie Tile Haushalt. Freigestelltes Leitprodukt auf Beige.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Haushalt",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**TIERBEDARF**",
+                "subheading": "Hund, Katze, Freilauf",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Kategorie Tile Tierbedarf. Freigestelltes Leitprodukt auf Beige.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Tierbedarf",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9ed48frvr",
+          "layoutId": "std-2equal",
+          "module": "trust.trustSplit",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Image Tile Brand Story. Team oder Hallenbild aus juskys.de, Mitarbeiter und Standort.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image_text",
+              "textOverlay": {
+                "heading": "Ein **Haus**, viele Räume",
+                "subheading": "Inhabergeführt seit 2005",
+                "body": "Seit 2005 bringen Philipp Juskys und Daniel Heidrich ein breites Sortiment für Wohnen, Garten und Alltag direkt zu dir. Inhabergeführt, mit Qualitätskontrolle vor Ort beim Hersteller und versandkostenfrei in Deutschland.",
+                "bullets": [],
+                "cta": "Mehr über Juskys"
+              },
+              "brief": "Brand Story Tile mit Text neben Bild aus Section Tile 1. Verlinkt auf Über Uns.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Über Uns",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9ed48eqi1",
+          "layoutId": "1",
+          "module": "hero.fullWidthHero",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Räume, die **zusammen** passen",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Trenner Textbild. Stoff Makro im Hintergrund.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9ed48oxeg",
+          "layoutId": "1",
+          "module": "products.shoppableFullWidth",
+          "tiles": [
+            {
+              "type": "shoppable_image",
+              "textOverlay": {
+                "heading": "Wohnzimmer, **komplett** gedacht",
+                "subheading": "Sofa, Sessel, Beistelltisch, Lampe, Teppich",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Shoppable Bild Wohnzimmer. 5 Hotspots auf Sofa, Sessel, Beistelltisch, Lampe, Teppich.",
+              "asins": [
+                "B0CX1SJ9R1",
+                "B0GX1BYJXM",
+                "B0DXFLWC1L",
+                "B07QWXMYV9",
+                "B0D31GY3G4"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9ed48u0x5",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Die meistgekauften **Lieblinge**",
+                "subheading": "Saisonal kuratierter Mix aus Garten und Möbel",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Bestseller Grid 6 ASINs kuratiert.",
+              "asins": [
+                "B084JQYGYM",
+                "B0F54DJW2F",
+                "B07P7PRG78",
+                "B0FNX4DJ8F",
+                "B07QWXMYV9",
+                "B0CX1SJ9R1"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9ed48krom",
+          "layoutId": "1",
+          "module": "hero.fullWidthHero",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Die **Saison** beginnt zuhause",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Trenner Textbild. Rattan oder Polyrattan Makro im Hintergrund.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9ed48ztlm",
+          "layoutId": "1",
+          "module": "products.shoppableFullWidth",
+          "tiles": [
+            {
+              "type": "shoppable_image",
+              "textOverlay": {
+                "heading": "Lounge, fertig zum **Loslegen**",
+                "subheading": "Loungegruppen, Tische, Schatten",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Shoppable Bild Terrasse. Loungegruppe als Hauptmotiv mit Sonnenschirm, Beistelltisch, Outdoor Kissen. 5 Hotspots auf Sofa, Sessel, Beistelltisch, Sonnenschirm, Kissen.",
+              "asins": [
+                "B084JQYGYM",
+                "B0CR1H8BTF",
+                "B0F54DJW2F",
+                "B07P7PRG78",
+                "B0CSZ14149"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9ed48on02",
+          "layoutId": "2x2wide",
+          "module": "features.featureGrid4wide",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Inhabergeführt**",
+                "subheading": "Seit 2005 aus Deutschland",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Marken USP Tile mit grünem Icon Kreis Haus.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Versandkostenfrei**",
+                "subheading": "In ganz Deutschland",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Marken USP Tile mit grünem Icon Kreis Truck.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Geprüft**",
+                "subheading": "Hersteller persönlich besucht",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Marken USP Tile mit grünem Icon Kreis Schild Check.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Sortiment**",
+                "subheading": "Für viele Lebensbereiche",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Marken USP Tile mit grünem Icon Kreis Stern.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9ed489tap",
+          "layoutId": "1",
+          "module": "engagement.followBanner",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Folge** Juskys",
+                "subheading": "Neue Produkte und Aktionen direkt im Feed",
+                "body": "",
+                "bullets": [],
+                "cta": "Folgen"
+              },
+              "brief": "Follow Banner Full Width.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9ed482s5m",
+          "layoutId": "2x2wide",
+          "module": "footer.categoryNavFooter",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**GARTEN**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Footer Kategorie Tile mit Mini Icon.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Garten",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**MÖBEL**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Footer Kategorie Tile mit Mini Icon.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Möbel",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**HAUSHALT**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Footer Kategorie Tile mit Mini Icon.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Haushalt",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**ÜBER** UNS",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Footer Tile zur Brand Story.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Über Uns",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "googleDriveUrl": ""
 }
