@@ -918,11 +918,11 @@
   "products": [],
   "pages": [
     {
-      "id": "mok9ed49bz7a",
+      "id": "mok9fhepe8n6",
       "name": "Home",
       "sections": [
         {
-          "id": "mok9ed47rrqs",
+          "id": "mok9fheomu6p",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -947,7 +947,7 @@
           ]
         },
         {
-          "id": "mok9ed48r7mk",
+          "id": "mok9fheodrse",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -1062,7 +1062,7 @@
           ]
         },
         {
-          "id": "mok9ed48frvr",
+          "id": "mok9fheox7gn",
           "layoutId": "std-2equal",
           "module": "trust.trustSplit",
           "tiles": [
@@ -1105,7 +1105,7 @@
           ]
         },
         {
-          "id": "mok9ed48eqi1",
+          "id": "mok9fheotavf",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1130,7 +1130,7 @@
           ]
         },
         {
-          "id": "mok9ed48oxeg",
+          "id": "mok9fhepnww8",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -1161,7 +1161,7 @@
           ]
         },
         {
-          "id": "mok9ed48u0x5",
+          "id": "mok9fhep1r9e",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1193,7 +1193,7 @@
           ]
         },
         {
-          "id": "mok9ed48krom",
+          "id": "mok9fhepjq7u",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1218,7 +1218,7 @@
           ]
         },
         {
-          "id": "mok9ed48ztlm",
+          "id": "mok9fhep07ol",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -1249,7 +1249,7 @@
           ]
         },
         {
-          "id": "mok9ed48on02",
+          "id": "mok9fhepy3b5",
           "layoutId": "2x2wide",
           "module": "features.featureGrid4wide",
           "tiles": [
@@ -1328,7 +1328,7 @@
           ]
         },
         {
-          "id": "mok9ed489tap",
+          "id": "mok9fhepveph",
           "layoutId": "1",
           "module": "engagement.followBanner",
           "tiles": [
@@ -1353,7 +1353,7 @@
           ]
         },
         {
-          "id": "mok9ed482s5m",
+          "id": "mok9fhepv1ox",
           "layoutId": "2x2wide",
           "module": "footer.categoryNavFooter",
           "tiles": [
@@ -1424,6 +1424,448 @@
               "asins": [],
               "hotspots": [],
               "linkUrl": "page:Über Uns",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mok9fherysb4",
+      "name": "Bestseller",
+      "sections": [
+        {
+          "id": "mok9fhep3g5x",
+          "layoutId": "1",
+          "module": "hero.fullWidthHero",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Was unsere **Kunden** lieben",
+                "subheading": "Die meistgekauften Juskys Produkte",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Hero Bild Mix aus mehreren Kategorien.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9fhepb2to",
+          "layoutId": "2s-4grid",
+          "module": "categoryNav.grid6tiles",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**GARTEN**",
+                "subheading": "Top in Garten",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Navigator Tile, Filter zu Garten Bestseller.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Garten",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**MÖBEL**",
+                "subheading": "Top in Möbel",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Navigator Tile, Filter zu Möbel Bestseller.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Möbel",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**FREIZEIT**",
+                "subheading": "Top in Freizeit",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Navigator Tile, Filter zu Freizeit Bestseller.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Freizeit",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**HEIMWERKEN**",
+                "subheading": "Top in Heimwerken",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Navigator Tile, Filter zu Heimwerken Bestseller.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Heimwerken",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**HAUSHALT**",
+                "subheading": "Top in Haushalt",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Navigator Tile, Filter zu Haushalt Bestseller.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Haushalt",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**TIERBEDARF**",
+                "subheading": "Top in Tierbedarf",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Navigator Tile, Filter zu Tierbedarf Bestseller.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Tierbedarf",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9fhepvtho",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Top **12** insgesamt",
+                "subheading": "Kategorieübergreifend",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Bestseller Grid 12 Top Seller aus allen Kategorien.",
+              "asins": [
+                "B07P7PRG78",
+                "B07YZ99NDM",
+                "B084JQYGYM",
+                "B087QDPGYJ",
+                "B089XXX8XZ",
+                "B0C45RKBYV",
+                "B0CR1H8BTF",
+                "B0DXFM883Y",
+                "B0F54DJW2F",
+                "B0FHHNTZYQ",
+                "B0FNX4DJ8F",
+                "B014IUTSW8"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9fher9kpf",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Top in **Garten**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Top 8 Bestseller aus Garten.",
+              "asins": [
+                "B07P7PRG78",
+                "B07YZ99NDM",
+                "B084JQYGYM",
+                "B087QDPGYJ",
+                "B089XXX8XZ",
+                "B0C45RKBYV",
+                "B0CR1H8BTF",
+                "B0DXFM883Y"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9fherpmnm",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Top in **Möbel**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Top 8 Bestseller aus Möbel.",
+              "asins": [
+                "B0GX1BYJXM",
+                "B077P4PS6Z",
+                "B07GFPC58W",
+                "B07QWXMYV9",
+                "B082XGXKJ8",
+                "B08Q8GZ554",
+                "B0947617BM",
+                "B09476KMMH"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9fher99ye",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Top in **Freizeit**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Top 6 Bestseller aus Freizeit.",
+              "asins": [
+                "B0C33Z7919",
+                "B0F6NGR2RT",
+                "B0F6NKNZFF",
+                "B01861S8O4",
+                "B0D72ZH6JL",
+                "B0D7322KJH"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9fher4i94",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Top in **Heimwerken**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Top 6 Bestseller aus Heimwerken.",
+              "asins": [
+                "B072KDRTHG",
+                "B07Z7QCTXW",
+                "B07Z7R4CMY",
+                "B0D9QSYSB7",
+                "B0DQ5K13RK",
+                "B0DZ2XH5BS"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9fherdtj2",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Top in **Haushalt**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Top 8 Bestseller aus Haushalt.",
+              "asins": [
+                "B014IUTSW8",
+                "B09DJSHBW8",
+                "B0DHGHCZTF",
+                "B0DKFQPHTC",
+                "B0CJRMN1JH",
+                "B0FQCMFLLY",
+                "B07TYTLYPY",
+                "B083Y4T2TY"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9fhereu04",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Top in **Tierbedarf**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Top 5 Bestseller aus Tierbedarf.",
+              "asins": [
+                "B079YT88DT",
+                "B01CSNO9YO",
+                "B0716T9673",
+                "B0C4FHBSR1",
+                "B09M7GCK5Y"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9fherl4sd",
+          "layoutId": "vh-w2s",
+          "module": "features.featureWideAnd2",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Warum **diese** Bestseller",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Wide Image. Plus 2 Squares mit USP Icons.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Meistgekauft**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square mit grünem Icon Kreis Stern.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Inhabergeführt**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square mit grünem Icon Kreis Haus.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",

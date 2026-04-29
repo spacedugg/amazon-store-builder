@@ -246,12 +246,71 @@ function buildHomePage() {
   ]);
 }
 
+function buildBestsellerPage() {
+  return page('Bestseller', [
+    section('1', [
+      tile('image',
+        ov('Was unsere **Kunden** lieben', 'Die meistgekauften Juskys Produkte'),
+        'Hero Bild Mix aus mehreren Kategorien.'
+      ),
+    ], 'hero.fullWidthHero'),
+
+    section('2s-4grid', [
+      tile('image', ov('**GARTEN**', 'Top in Garten'), 'Sub Navigator Tile, Filter zu Garten Bestseller.', { linkUrl: linkTo('Garten') }),
+      tile('image', ov('**MÖBEL**', 'Top in Möbel'), 'Sub Navigator Tile, Filter zu Möbel Bestseller.', { linkUrl: linkTo('Möbel') }),
+      tile('image', ov('**FREIZEIT**', 'Top in Freizeit'), 'Sub Navigator Tile, Filter zu Freizeit Bestseller.', { linkUrl: linkTo('Freizeit') }),
+      tile('image', ov('**HEIMWERKEN**', 'Top in Heimwerken'), 'Sub Navigator Tile, Filter zu Heimwerken Bestseller.', { linkUrl: linkTo('Heimwerken') }),
+      tile('image', ov('**HAUSHALT**', 'Top in Haushalt'), 'Sub Navigator Tile, Filter zu Haushalt Bestseller.', { linkUrl: linkTo('Haushalt') }),
+      tile('image', ov('**TIERBEDARF**', 'Top in Tierbedarf'), 'Sub Navigator Tile, Filter zu Tierbedarf Bestseller.', { linkUrl: linkTo('Tierbedarf') }),
+    ], 'categoryNav.grid6tiles'),
+
+    section('1', [
+      tile('best_sellers',
+        ov('Top **12** insgesamt', 'Kategorieübergreifend'),
+        'Bestseller Grid 12 Top Seller aus allen Kategorien.',
+        { asins: STRUCTURED_ASINS.filter(function(a) { return a.onHomepage; }).slice(0, 12).map(function(a) { return a.asin; }) }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    section('1', [
+      tile('best_sellers', ov('Top in **Garten**'), 'Top 8 Bestseller aus Garten.', { asins: topAsinsByCat('Garten', 8) }),
+    ], 'products.fullWidthGrid'),
+
+    section('1', [
+      tile('best_sellers', ov('Top in **Möbel**'), 'Top 8 Bestseller aus Möbel.', { asins: topAsinsByCat('Möbel', 8) }),
+    ], 'products.fullWidthGrid'),
+
+    section('1', [
+      tile('best_sellers', ov('Top in **Freizeit**'), 'Top 6 Bestseller aus Freizeit.', { asins: topAsinsByCat('Freizeit', 6) }),
+    ], 'products.fullWidthGrid'),
+
+    section('1', [
+      tile('best_sellers', ov('Top in **Heimwerken**'), 'Top 6 Bestseller aus Heimwerken.', { asins: topAsinsByCat('Heimwerken', 6) }),
+    ], 'products.fullWidthGrid'),
+
+    section('1', [
+      tile('best_sellers', ov('Top in **Haushalt**'), 'Top 8 Bestseller aus Haushalt.', { asins: topAsinsByCat('Haushalt', 8) }),
+    ], 'products.fullWidthGrid'),
+
+    section('1', [
+      tile('best_sellers', ov('Top in **Tierbedarf**'), 'Top 5 Bestseller aus Tierbedarf.', { asins: topAsinsByCat('Tierbedarf', 5) }),
+    ], 'products.fullWidthGrid'),
+
+    section('vh-w2s', [
+      tile('image', ov('Warum **diese** Bestseller'), 'Wide Image. Plus 2 Squares mit USP Icons.'),
+      tile('image', ov('**Meistgekauft**'), 'Square mit grünem Icon Kreis Stern.'),
+      tile('image', ov('**Inhabergeführt**'), 'Square mit grünem Icon Kreis Haus.'),
+    ], 'features.featureWideAnd2'),
+  ]);
+}
+
 // ─── BUILD ────────────────────────────────────────────────
 
 function buildStore() {
   var pages = [];
 
   pages.push(buildHomePage());
+  pages.push(buildBestsellerPage());
   // weitere Pages folgen in nächsten Schritten
 
   // Resolve parentName references → echte parentId
