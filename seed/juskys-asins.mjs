@@ -222,6 +222,21 @@ export var RAW_ASINS = [
   { asin: 'B0FHHG2CKS', title: 'Juskys Gamingstuhl HyperSeat Schwarz/blau', visible: true, paths: ['Wohnen > Büromöbel'] },
   { asin: 'B0FNWSKJP2', title: 'Juskys Massagesessel Naxos Schwarz', visible: true, paths: ['Wohnen > Massagesessel'] },
   { asin: 'B0FX54GMQS', title: 'Juskys Aktenschrank Metall Hellgrau', visible: true, paths: ['Wohnen > Büromöbel'] },
+
+  // ─── HEIMWERKEN ─────────────────────────────────────────
+  { asin: 'B072KDRTHG', title: 'Juskys Leiter Aluminium 3x4 Stufen 3,6 m', visible: true, paths: ['Heimwerken > Multifunktionsleitern'] },
+  { asin: 'B07Z7QCTXW', title: 'Juskys Sackkarre Basic klappbar', visible: true, paths: ['Heimwerken > Sackkarren'] },
+  { asin: 'B07Z7R4CMY', title: 'Juskys Treppensackkarre klappbar Hartgummi', visible: true, paths: ['Heimwerken > Sackkarren'] },
+  { asin: 'B0D9QSYSB7', title: 'Juskys Treppensackkarre klappbar', visible: true, paths: ['Heimwerken > Sackkarren'] },
+  { asin: 'B0DQ5K13RK', title: 'Juskys Hebeanlage 600 W', visible: true, paths: ['Heimwerken > Werkzeug'] },
+  { asin: 'B0DZ2XH5BS', title: 'Juskys Fahrrad Reparaturständer 50 kg', visible: true, paths: ['Heimwerken > Werkzeug'] },
+  { asin: 'B0FT3RZSCP', title: 'Juskys Wagenheber 2,5 t', visible: true, paths: ['Heimwerken > Werkzeug'] },
+  { asin: 'B0BBZX31R4', title: 'Juskys Elektrokamin 1000/2000 W Standkamin weiß', visible: true, paths: ['Wohnen > Elektrokamine & Heizungen'] },
+  { asin: 'B0BBZYJLF2', title: 'Juskys Elektrokamin 1000/2000 W Eckkamin schwarz', visible: true, paths: ['Wohnen > Elektrokamine & Heizungen'] },
+  { asin: 'B0FHHG49H8', title: 'Juskys Elektrokamin 2000 W Schwarz', visible: true, paths: ['Wohnen > Elektrokamine & Heizungen'] },
+  { asin: 'B0FQJWR99K', title: 'Juskys Elektrokamin 1800W Schwarz', visible: true, paths: ['Wohnen > Elektrokamine & Heizungen'] },
+  { asin: 'B0CJRMN1JH', title: 'Juskys Outdoor Heizstrahler Cuna 11 kW', visible: true, paths: ['Heimwerken > Heizgeräte', 'Wohnen > Elektrokamine & Heizungen'] },
+  { asin: 'B0FQCMFLLY', title: 'Juskys Glasheizung 2000W', visible: true, paths: ['Heimwerken > Heizgeräte', 'Wohnen > Elektrokamine & Heizungen'] },
 ];
 
 // Liefert die strukturierte ASIN Liste (alle visible mit Mapping)
