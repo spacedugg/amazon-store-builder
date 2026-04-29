@@ -269,6 +269,13 @@ export var RAW_ASINS = [
   { asin: 'B082HMV596', title: 'Juskys Rollator Vital petrol', visible: true, paths: ['Unterwegs & Freizeit > Alltagshilfen'] },
   { asin: 'B0DPX5QVZM', title: 'Juskys Aluminium Wohnungsrollator Aktiv Rot', visible: true, paths: ['Unterwegs & Freizeit > Alltagshilfen'] },
   { asin: 'B0FG8835LQ', title: 'Juskys Bollerwagen 100 kg Schwarz', visible: true, paths: ['Unterwegs & Freizeit > Alltagshilfen'] },
+
+  // ─── TIERBEDARF ─────────────────────────────────────────
+  { asin: 'B01CSNO9YO', title: 'Juskys Alu Hundetransportbox L', visible: true, paths: ['Tierbedarf > Hundebedarf'] },
+  { asin: 'B0716T9673', title: 'Juskys Welpenauslauf Plus 160x160x80', visible: true, paths: ['Tierbedarf > Hundebedarf'] },
+  { asin: 'B079YT88DT', title: 'Juskys Hundetransportbox Lassie M', visible: true, paths: ['Tierbedarf > Hundebedarf'], onHomepage: true },
+  { asin: 'B0C4FHBSR1', title: 'Juskys Hundetreppe 36 cm grau', visible: true, paths: ['Tierbedarf > Hundebedarf'] },
+  { asin: 'B09M7GCK5Y', title: 'Juskys Freilaufgehege 2x2x2m', visible: true, paths: ['Tierbedarf > Freilaufgehege'] },
 ];
 
 // Liefert die strukturierte ASIN Liste (alle visible mit Mapping)
