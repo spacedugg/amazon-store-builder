@@ -82,6 +82,7 @@ export var SPECIAL_ASINS = {
   'B0CK4QSWF9': { cat: 'Haushalt', sub: 'Mülleimer' }, // Mülleimer Küche 50L
   'B0D5QK6TLM': { cat: 'Haushalt', sub: 'Eiswürfelmaschinen' },
   'B0CD7VC4D8': { cat: 'Haushalt', sub: 'Aufbewahrung' }, // Aufbewahrungsbox 6er Set
+  'B0BWN6NB4Z': { cat: 'Haushalt', sub: 'Aufbewahrung' }, // Multifunktionstisch 3-teilig
 
   // Polsterbett mit Doppel Tagging Polster + Kinder
   'B0BKQ6XDKV': { cat: 'Möbel', sub: 'Polsterbetten', also: [{ cat: 'Möbel', sub: 'Kinderbetten' }] },
@@ -237,6 +238,37 @@ export var RAW_ASINS = [
   { asin: 'B0FQJWR99K', title: 'Juskys Elektrokamin 1800W Schwarz', visible: true, paths: ['Wohnen > Elektrokamine & Heizungen'] },
   { asin: 'B0CJRMN1JH', title: 'Juskys Outdoor Heizstrahler Cuna 11 kW', visible: true, paths: ['Heimwerken > Heizgeräte', 'Wohnen > Elektrokamine & Heizungen'] },
   { asin: 'B0FQCMFLLY', title: 'Juskys Glasheizung 2000W', visible: true, paths: ['Heimwerken > Heizgeräte', 'Wohnen > Elektrokamine & Heizungen'] },
+
+  // ─── HAUSHALT ───────────────────────────────────────────
+  // Schwerlastregale (aus Heimwerken Lagerregale)
+  { asin: 'B014IUTSW8', title: 'Juskys 2er-Set Lagerregal Basic 180x90x40cm verzinkt', visible: true, paths: ['Heimwerken > Lagerregale'], onHomepage: true },
+  { asin: 'B07TYTLYPY', title: 'Juskys 3er Metall Regalsystem Basic Silver', visible: true, paths: ['Heimwerken > Lagerregale'] },
+  { asin: 'B083Y4T2TY', title: 'Juskys Eckregal Corner Easy 160 x 75', visible: true, paths: ['Heimwerken > Lagerregale'] },
+  { asin: 'B09DJSHBW8', title: 'Juskys 2er-Set Lagerregal Basic 180x90x40 Grau', visible: true, paths: ['Heimwerken > Lagerregale'], onHomepage: true },
+  { asin: 'B09DK3LY2V', title: 'Juskys Eckregal Corner Basic 180 x 70 Grau', visible: true, paths: ['Heimwerken > Lagerregale'] },
+  { asin: 'B09DKF8RPX', title: 'Juskys Schwerlastregal Basic 200x100x60 Grau', visible: true, paths: ['Heimwerken > Lagerregale'] },
+  { asin: 'B0BWN67H4J', title: 'Juskys 2er-Set Lagerregal Easy 160x80x40 Grau', visible: true, paths: ['Heimwerken > Lagerregale'] },
+  { asin: 'B0BWN8GRN4', title: 'Juskys 3er Metall Regalsystem Easy Grau', visible: true, paths: ['Heimwerken > Lagerregale'] },
+  { asin: 'B0FBRJCCWV', title: 'Juskys 4er-Set Lagerregal Basic 180x90x40', visible: true, paths: ['Heimwerken > Lagerregale'] },
+  // Wohnen > Haushalt
+  { asin: 'B0BWN6NB4Z', title: 'Juskys Multifunktionstisch 3 teilig', visible: true, paths: ['Wohnen > Haushalt'] },
+  { asin: 'B0CD7VC4D8', title: 'Juskys Aufbewahrungsbox 6er Set 60l', visible: true, paths: ['Wohnen > Haushalt'] },
+  { asin: 'B0CK4QSWF9', title: 'Juskys Mülleimer Küche 50L Schwarz', visible: true, paths: ['Wohnen > Haushalt'] },
+  { asin: 'B0D5QK6TLM', title: 'Juskys Eiswürfelmaschine klein Schwarz', visible: true, paths: ['Wohnen > Haushalt'] },
+  { asin: 'B0DHGHCZTF', title: 'Juskys Airfryer 9 L Doppelkammer', visible: true, paths: ['Wohnen > Haushalt'], onHomepage: true },
+  // Wohnen > Kinderbedarf → Haushalt > Kinderbedarf
+  { asin: 'B0BMB245DT', title: 'Juskys Kinder Bücherregal mit Spielzeugkiste Weiß', visible: true, paths: ['Wohnen > Kinderbedarf'] },
+  { asin: 'B0CLV392MC', title: 'Juskys Kinder Kleiderständer Filla Weiß', visible: true, paths: ['Wohnen > Kinderbedarf'] },
+  { asin: 'B0CLXXZ67P', title: 'Juskys Krabbelmatte 180x120 Grau', visible: true, paths: ['Wohnen > Kinderbedarf'] },
+  { asin: 'B0DHH2NCTS', title: 'Juskys Lernturm Henny Weiß', visible: true, paths: ['Wohnen > Kinderbedarf'] },
+  { asin: 'B0DKFR5HQ6', title: 'Juskys Mini Klettergerüst Natur', visible: true, paths: ['Wohnen > Kinderbedarf'] },
+  { asin: 'B0DL5PKK41', title: 'Juskys Kindersitzgruppe Milou Natur', visible: true, paths: ['Wohnen > Kinderbedarf'] },
+  { asin: 'B0DL5RWYTD', title: 'Juskys Kindersitzgruppe Milou Rosa', visible: true, paths: ['Wohnen > Kinderbedarf'] },
+  { asin: 'B0F32VLNPV', title: 'Juskys Kinderschreibtisch Fietje Plus Weiß', visible: true, paths: ['Wohnen > Kinderbedarf'] },
+  // Alltagshilfen (aus Unterwegs & Freizeit)
+  { asin: 'B082HMV596', title: 'Juskys Rollator Vital petrol', visible: true, paths: ['Unterwegs & Freizeit > Alltagshilfen'] },
+  { asin: 'B0DPX5QVZM', title: 'Juskys Aluminium Wohnungsrollator Aktiv Rot', visible: true, paths: ['Unterwegs & Freizeit > Alltagshilfen'] },
+  { asin: 'B0FG8835LQ', title: 'Juskys Bollerwagen 100 kg Schwarz', visible: true, paths: ['Unterwegs & Freizeit > Alltagshilfen'] },
 ];
 
 // Liefert die strukturierte ASIN Liste (alle visible mit Mapping)
