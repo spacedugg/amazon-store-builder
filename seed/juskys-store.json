@@ -918,11 +918,9 @@
   "products": [],
   "pages": [
     {
-      "id": "moke70qgyzfb",
       "name": "Home",
       "sections": [
         {
-          "id": "moke70qeu1yj",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -947,7 +945,6 @@
           ]
         },
         {
-          "id": "moke70qeeek5",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -963,7 +960,7 @@
               "brief": "Kategorie Tile Garten. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qihpk6",
+              "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "product",
@@ -981,7 +978,7 @@
               "brief": "Kategorie Tile Möbel. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qjt4jo",
+              "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "product",
@@ -999,7 +996,7 @@
               "brief": "Kategorie Tile Freizeit. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qkd8zh",
+              "linkUrl": "page:Freizeit",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "product",
@@ -1017,7 +1014,7 @@
               "brief": "Kategorie Tile Heimwerken. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qk1w1m",
+              "linkUrl": "page:Heimwerken",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "product",
@@ -1035,7 +1032,7 @@
               "brief": "Kategorie Tile Haushalt. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qlhin4",
+              "linkUrl": "page:Haushalt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "product",
@@ -1053,7 +1050,7 @@
               "brief": "Kategorie Tile Tierbedarf. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qligxu",
+              "linkUrl": "page:Tierbedarf",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "product",
@@ -1062,7 +1059,6 @@
           ]
         },
         {
-          "id": "moke70qeywme",
           "layoutId": "std-2equal",
           "module": "trust.trustSplit",
           "tiles": [
@@ -1096,7 +1092,7 @@
               "brief": "Brand Story Tile mit Text neben Bild aus Section Tile 1. Verlinkt auf Über Uns.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qlkt3q",
+              "linkUrl": "page:Über Uns",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
@@ -1105,7 +1101,6 @@
           ]
         },
         {
-          "id": "moke70qeyj1j",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1130,7 +1125,6 @@
           ]
         },
         {
-          "id": "moke70qe0r1o",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -1161,7 +1155,6 @@
           ]
         },
         {
-          "id": "moke70qeyeez",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1193,7 +1186,6 @@
           ]
         },
         {
-          "id": "moke70qeo393",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1218,7 +1210,6 @@
           ]
         },
         {
-          "id": "moke70qgqbj0",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -1249,7 +1240,6 @@
           ]
         },
         {
-          "id": "moke70qgr9ca",
           "layoutId": "2x2wide",
           "module": "features.featureGrid4wide",
           "tiles": [
@@ -1328,7 +1318,6 @@
           ]
         },
         {
-          "id": "moke70qg3sgx",
           "layoutId": "1",
           "module": "engagement.followBanner",
           "tiles": [
@@ -1353,7 +1342,6 @@
           ]
         },
         {
-          "id": "moke70qg2wth",
           "layoutId": "2x2wide",
           "module": "footer.categoryNavFooter",
           "tiles": [
@@ -1369,7 +1357,7 @@
               "brief": "Footer Kategorie Tile mit Mini Icon.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qihpk6",
+              "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -1387,7 +1375,7 @@
               "brief": "Footer Kategorie Tile mit Mini Icon.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qjt4jo",
+              "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -1405,7 +1393,7 @@
               "brief": "Footer Kategorie Tile mit Mini Icon.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qlhin4",
+              "linkUrl": "page:Haushalt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -1423,7 +1411,7 @@
               "brief": "Footer Tile zur Brand Story.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qlkt3q",
+              "linkUrl": "page:Über Uns",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -1434,11 +1422,9 @@
       ]
     },
     {
-      "id": "moke70qh2kz6",
       "name": "Bestseller",
       "sections": [
         {
-          "id": "moke70qg8ko8",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1463,7 +1449,6 @@
           ]
         },
         {
-          "id": "moke70qg7bcg",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -1479,7 +1464,7 @@
               "brief": "Sub Navigator Tile, Filter zu Garten Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qihpk6",
+              "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "product",
@@ -1497,7 +1482,7 @@
               "brief": "Sub Navigator Tile, Filter zu Möbel Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qjt4jo",
+              "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "product",
@@ -1515,7 +1500,7 @@
               "brief": "Sub Navigator Tile, Filter zu Freizeit Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qkd8zh",
+              "linkUrl": "page:Freizeit",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "product",
@@ -1533,7 +1518,7 @@
               "brief": "Sub Navigator Tile, Filter zu Heimwerken Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qk1w1m",
+              "linkUrl": "page:Heimwerken",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "product",
@@ -1551,7 +1536,7 @@
               "brief": "Sub Navigator Tile, Filter zu Haushalt Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qlhin4",
+              "linkUrl": "page:Haushalt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "product",
@@ -1569,7 +1554,7 @@
               "brief": "Sub Navigator Tile, Filter zu Tierbedarf Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qligxu",
+              "linkUrl": "page:Tierbedarf",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "product",
@@ -1578,7 +1563,6 @@
           ]
         },
         {
-          "id": "moke70qgph6f",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1616,7 +1600,6 @@
           ]
         },
         {
-          "id": "moke70qg3x2t",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1650,7 +1633,6 @@
           ]
         },
         {
-          "id": "moke70qgrmr5",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1684,7 +1666,6 @@
           ]
         },
         {
-          "id": "moke70qguqwh",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1716,7 +1697,6 @@
           ]
         },
         {
-          "id": "moke70qg6eou",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1748,7 +1728,6 @@
           ]
         },
         {
-          "id": "moke70qhr4ot",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1782,7 +1761,6 @@
           ]
         },
         {
-          "id": "moke70qh8rt1",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1813,7 +1791,6 @@
           ]
         },
         {
-          "id": "moke70qhbah0",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -1876,11 +1853,9 @@
       ]
     },
     {
-      "id": "moke70qihpk6",
       "name": "Garten",
       "sections": [
         {
-          "id": "moke70qhyo22",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1905,7 +1880,6 @@
           ]
         },
         {
-          "id": "moke70qhui6h",
           "layoutId": "4x2grid",
           "module": "categoryNav.grid8tiles",
           "tiles": [
@@ -2056,7 +2030,6 @@
           ]
         },
         {
-          "id": "moke70qh4wh4",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -2171,7 +2144,6 @@
           ]
         },
         {
-          "id": "moke70qhr6sx",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2202,7 +2174,6 @@
           ]
         },
         {
-          "id": "moke70qhypxt",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2236,7 +2207,6 @@
           ]
         },
         {
-          "id": "moke70qhan2p",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -2261,7 +2231,6 @@
           ]
         },
         {
-          "id": "moke70qhisv9",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2292,7 +2261,6 @@
           ]
         },
         {
-          "id": "moke70qi62t4",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2326,7 +2294,6 @@
           ]
         },
         {
-          "id": "moke70qi5w5s",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -2387,7 +2354,6 @@
           ]
         },
         {
-          "id": "moke70qiptis",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2473,7 +2439,6 @@
           ]
         },
         {
-          "id": "moke70qit33s",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -2489,7 +2454,7 @@
               "brief": "Cross Sell Banner. Mini Bild Wohnraum.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qjt4jo",
+              "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -2500,11 +2465,9 @@
       ]
     },
     {
-      "id": "moke70qjt4jo",
       "name": "Möbel",
       "sections": [
         {
-          "id": "moke70qifyo9",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -2529,7 +2492,6 @@
           ]
         },
         {
-          "id": "moke70qitdbn",
           "layoutId": "4x2grid",
           "module": "categoryNav.grid8tiles",
           "tiles": [
@@ -2680,7 +2642,6 @@
           ]
         },
         {
-          "id": "moke70qi3pw9",
           "layoutId": "2x2wide",
           "module": "categoryNav.grid4wide",
           "tiles": [
@@ -2759,7 +2720,6 @@
           ]
         },
         {
-          "id": "moke70qi026s",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2790,7 +2750,6 @@
           ]
         },
         {
-          "id": "moke70qines7",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2824,7 +2783,6 @@
           ]
         },
         {
-          "id": "moke70qibf74",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -2849,7 +2807,6 @@
           ]
         },
         {
-          "id": "moke70qi7e2j",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2880,7 +2837,6 @@
           ]
         },
         {
-          "id": "moke70qidlex",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2913,7 +2869,6 @@
           ]
         },
         {
-          "id": "moke70qi6k0c",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2942,7 +2897,6 @@
           ]
         },
         {
-          "id": "moke70qiwut0",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -3003,7 +2957,6 @@
           ]
         },
         {
-          "id": "moke70qjqn1u",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3059,7 +3012,6 @@
           ]
         },
         {
-          "id": "moke70qj67h0",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -3075,7 +3027,7 @@
               "brief": "Cross Sell Banner.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qlhin4",
+              "linkUrl": "page:Haushalt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -3086,11 +3038,9 @@
       ]
     },
     {
-      "id": "moke70qkd8zh",
       "name": "Freizeit",
       "sections": [
         {
-          "id": "moke70qj109g",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -3115,7 +3065,6 @@
           ]
         },
         {
-          "id": "moke70qjrnu8",
           "layoutId": "2x2wide",
           "module": "categoryNav.grid4wide",
           "tiles": [
@@ -3194,7 +3143,6 @@
           ]
         },
         {
-          "id": "moke70qj8vqr",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -3225,7 +3173,6 @@
           ]
         },
         {
-          "id": "moke70qje5np",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3256,7 +3203,6 @@
           ]
         },
         {
-          "id": "moke70qj5tz8",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3289,7 +3235,6 @@
           ]
         },
         {
-          "id": "moke70qjtnu6",
           "layoutId": "lg-2stack",
           "module": "products.productShowcaseLarge",
           "tiles": [
@@ -3350,7 +3295,6 @@
           ]
         },
         {
-          "id": "moke70qjrg65",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3380,7 +3324,6 @@
           ]
         },
         {
-          "id": "moke70qjgm0f",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -3441,7 +3384,6 @@
           ]
         },
         {
-          "id": "moke70qk76sx",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3484,7 +3426,6 @@
           ]
         },
         {
-          "id": "moke70qkc7q7",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -3500,7 +3441,7 @@
               "brief": "Cross Sell Banner.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qihpk6",
+              "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -3511,11 +3452,9 @@
       ]
     },
     {
-      "id": "moke70qk1w1m",
       "name": "Heimwerken",
       "sections": [
         {
-          "id": "moke70qkaysi",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -3540,7 +3479,6 @@
           ]
         },
         {
-          "id": "moke70qkdeqd",
           "layoutId": "vh-w2s",
           "module": "categoryNav.wideAnd2squares",
           "tiles": [
@@ -3601,7 +3539,6 @@
           ]
         },
         {
-          "id": "moke70qkxlvj",
           "layoutId": "std-2equal",
           "module": "categoryNav.grid2col",
           "tiles": [
@@ -3644,7 +3581,6 @@
           ]
         },
         {
-          "id": "moke70qkypg0",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3673,7 +3609,6 @@
           ]
         },
         {
-          "id": "moke70qkn8sw",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3703,7 +3638,6 @@
           ]
         },
         {
-          "id": "moke70qkxl7f",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -3728,7 +3662,6 @@
           ]
         },
         {
-          "id": "moke70qkcm1z",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3760,7 +3693,6 @@
           ]
         },
         {
-          "id": "moke70qkk64y",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -3821,7 +3753,6 @@
           ]
         },
         {
-          "id": "moke70qkhkaz",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3860,7 +3791,6 @@
           ]
         },
         {
-          "id": "moke70qkeorc",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -3876,7 +3806,7 @@
               "brief": "Cross Sell Banner.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qlhin4",
+              "linkUrl": "page:Haushalt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -3887,11 +3817,9 @@
       ]
     },
     {
-      "id": "moke70qlhin4",
       "name": "Haushalt",
       "sections": [
         {
-          "id": "moke70qk0g3v",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -3916,7 +3844,6 @@
           ]
         },
         {
-          "id": "moke70qk0bmj",
           "layoutId": "4x2grid",
           "module": "categoryNav.grid8tiles",
           "tiles": [
@@ -4067,7 +3994,6 @@
           ]
         },
         {
-          "id": "moke70qk7wcw",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -4098,7 +4024,6 @@
           ]
         },
         {
-          "id": "moke70qla0k8",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4127,7 +4052,6 @@
           ]
         },
         {
-          "id": "moke70ql0e2x",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -4152,7 +4076,6 @@
           ]
         },
         {
-          "id": "moke70qlfpmo",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4186,7 +4109,6 @@
           ]
         },
         {
-          "id": "moke70ql45c7",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4220,7 +4142,6 @@
           ]
         },
         {
-          "id": "moke70qllrxu",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4248,7 +4169,6 @@
           ]
         },
         {
-          "id": "moke70qla3u3",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -4309,7 +4229,6 @@
           ]
         },
         {
-          "id": "moke70qliezk",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4365,11 +4284,9 @@
       ]
     },
     {
-      "id": "moke70qligxu",
       "name": "Tierbedarf",
       "sections": [
         {
-          "id": "moke70ql7ts4",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -4394,7 +4311,6 @@
           ]
         },
         {
-          "id": "moke70ql4dvt",
           "layoutId": "vh-w2s",
           "module": "categoryNav.wideAnd2squares",
           "tiles": [
@@ -4455,7 +4371,6 @@
           ]
         },
         {
-          "id": "moke70qlaiuq",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -4486,7 +4401,6 @@
           ]
         },
         {
-          "id": "moke70qlf7ac",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4513,7 +4427,6 @@
           ]
         },
         {
-          "id": "moke70qlifjw",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4543,7 +4456,6 @@
           ]
         },
         {
-          "id": "moke70qlnno2",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -4604,7 +4516,6 @@
           ]
         },
         {
-          "id": "moke70qlq672",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4637,11 +4548,9 @@
       ]
     },
     {
-      "id": "moke70ql5zlo",
       "name": "Sale",
       "sections": [
         {
-          "id": "moke70qlg52g",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -4666,7 +4575,6 @@
           ]
         },
         {
-          "id": "moke70qlx13b",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -4682,7 +4590,7 @@
               "brief": "Filter Tile.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qihpk6",
+              "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "product",
@@ -4700,7 +4608,7 @@
               "brief": "Filter Tile.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qjt4jo",
+              "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "product",
@@ -4718,7 +4626,7 @@
               "brief": "Filter Tile.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qkd8zh",
+              "linkUrl": "page:Freizeit",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "product",
@@ -4736,7 +4644,7 @@
               "brief": "Filter Tile.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qk1w1m",
+              "linkUrl": "page:Heimwerken",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "product",
@@ -4754,7 +4662,7 @@
               "brief": "Filter Tile.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qlhin4",
+              "linkUrl": "page:Haushalt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "product",
@@ -4772,7 +4680,7 @@
               "brief": "Filter Tile.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qligxu",
+              "linkUrl": "page:Tierbedarf",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "product",
@@ -4781,7 +4689,6 @@
           ]
         },
         {
-          "id": "moke70qlcmgh",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -4819,7 +4726,6 @@
           ]
         },
         {
-          "id": "moke70ql4y9w",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -4882,11 +4788,9 @@
       ]
     },
     {
-      "id": "moke70qlkt3q",
       "name": "Über Uns",
       "sections": [
         {
-          "id": "moke70qltd2g",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -4911,7 +4815,6 @@
           ]
         },
         {
-          "id": "moke70qlui8q",
           "layoutId": "std-2equal",
           "module": "trust.trustSplit",
           "tiles": [
@@ -4954,7 +4857,6 @@
           ]
         },
         {
-          "id": "moke70ql4kid",
           "layoutId": "2x2wide",
           "module": "features.featureGrid4wide",
           "tiles": [
@@ -5033,7 +4935,6 @@
           ]
         },
         {
-          "id": "moke70qlv15t",
           "layoutId": "2s-4grid",
           "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
@@ -5148,7 +5049,6 @@
           ]
         },
         {
-          "id": "moke70qlnobv",
           "layoutId": "1",
           "module": "engagement.followBanner",
           "tiles": [
@@ -5175,11 +5075,10 @@
       ]
     },
     {
-      "id": "moke70qlviwq",
       "name": "Gartenmöbel Sets",
+      "parentName": "Garten",
       "sections": [
         {
-          "id": "moke70ql7xyo",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -5204,7 +5103,6 @@
           ]
         },
         {
-          "id": "moke70qlxk1x",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5238,7 +5136,6 @@
           ]
         },
         {
-          "id": "moke70qlxvlr",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5279,7 +5176,6 @@
           ]
         },
         {
-          "id": "moke70ql8nx0",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -5295,7 +5191,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qihpk6",
+              "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -5303,15 +5199,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qihpk6"
+      ]
     },
     {
-      "id": "moke70qm5e4z",
       "name": "Gartenaufbewahrung",
+      "parentName": "Garten",
       "sections": [
         {
-          "id": "moke70qm1t2k",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -5336,7 +5230,6 @@
           ]
         },
         {
-          "id": "moke70qmxyto",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5366,7 +5259,6 @@
           ]
         },
         {
-          "id": "moke70qmc6go",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5396,7 +5288,6 @@
           ]
         },
         {
-          "id": "moke70qmzskn",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -5412,7 +5303,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qihpk6",
+              "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -5420,15 +5311,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qihpk6"
+      ]
     },
     {
-      "id": "moke70qmkq4i",
       "name": "Gartenbedarf",
+      "parentName": "Garten",
       "sections": [
         {
-          "id": "moke70qm8pt4",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -5453,7 +5342,6 @@
           ]
         },
         {
-          "id": "moke70qmsdqk",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5487,7 +5375,6 @@
           ]
         },
         {
-          "id": "moke70qmz5lr",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5524,7 +5411,6 @@
           ]
         },
         {
-          "id": "moke70qmqypm",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -5540,7 +5426,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qihpk6",
+              "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -5548,15 +5434,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qihpk6"
+      ]
     },
     {
-      "id": "moke70qm8sls",
       "name": "Sonnenschutz",
+      "parentName": "Garten",
       "sections": [
         {
-          "id": "moke70qm5eyw",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -5581,7 +5465,6 @@
           ]
         },
         {
-          "id": "moke70qmoic3",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5612,7 +5495,6 @@
           ]
         },
         {
-          "id": "moke70qmptko",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5643,7 +5525,6 @@
           ]
         },
         {
-          "id": "moke70qmv1ln",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -5659,7 +5540,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qihpk6",
+              "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -5667,15 +5548,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qihpk6"
+      ]
     },
     {
-      "id": "moke70qmetjj",
       "name": "Gartenliegen",
+      "parentName": "Garten",
       "sections": [
         {
-          "id": "moke70qmigbf",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -5700,7 +5579,6 @@
           ]
         },
         {
-          "id": "moke70qmh1yn",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5729,7 +5607,6 @@
           ]
         },
         {
-          "id": "moke70qmsy0c",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5758,7 +5635,6 @@
           ]
         },
         {
-          "id": "moke70qmmrhm",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -5774,7 +5650,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qihpk6",
+              "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -5782,15 +5658,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qihpk6"
+      ]
     },
     {
-      "id": "moke70qm7ykr",
       "name": "Gartenbänke",
+      "parentName": "Garten",
       "sections": [
         {
-          "id": "moke70qmo623",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -5815,7 +5689,6 @@
           ]
         },
         {
-          "id": "moke70qm89vh",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5843,7 +5716,6 @@
           ]
         },
         {
-          "id": "moke70qmslk4",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5871,7 +5743,6 @@
           ]
         },
         {
-          "id": "moke70qmugm7",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -5887,7 +5758,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qihpk6",
+              "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -5895,15 +5766,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qihpk6"
+      ]
     },
     {
-      "id": "moke70qmltky",
       "name": "Gartentische",
+      "parentName": "Garten",
       "sections": [
         {
-          "id": "moke70qma2o7",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -5928,7 +5797,6 @@
           ]
         },
         {
-          "id": "moke70qm6a98",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5957,7 +5825,6 @@
           ]
         },
         {
-          "id": "moke70qm3wxa",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -5986,7 +5853,6 @@
           ]
         },
         {
-          "id": "moke70qmoicn",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -6002,7 +5868,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qihpk6",
+              "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -6010,15 +5876,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qihpk6"
+      ]
     },
     {
-      "id": "moke70qmncrb",
       "name": "Bierzeltgarnituren",
+      "parentName": "Garten",
       "sections": [
         {
-          "id": "moke70qmmasn",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -6043,7 +5907,6 @@
           ]
         },
         {
-          "id": "moke70qmek5s",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6072,7 +5935,6 @@
           ]
         },
         {
-          "id": "moke70qmfsaa",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6101,7 +5963,6 @@
           ]
         },
         {
-          "id": "moke70qm2lrx",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -6117,7 +5978,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qihpk6",
+              "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -6125,15 +5986,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qihpk6"
+      ]
     },
     {
-      "id": "moke70qmoyc5",
       "name": "Hängematten",
+      "parentName": "Garten",
       "sections": [
         {
-          "id": "moke70qmfwok",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -6158,7 +6017,6 @@
           ]
         },
         {
-          "id": "moke70qmpsv2",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6187,7 +6045,6 @@
           ]
         },
         {
-          "id": "moke70qmn4cc",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6216,7 +6073,6 @@
           ]
         },
         {
-          "id": "moke70qmvz8b",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -6232,7 +6088,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qihpk6",
+              "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -6240,15 +6096,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qihpk6"
+      ]
     },
     {
-      "id": "moke70qmb8q3",
       "name": "Überdachungen",
+      "parentName": "Garten",
       "sections": [
         {
-          "id": "moke70qmfl43",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -6273,7 +6127,6 @@
           ]
         },
         {
-          "id": "moke70qm21w0",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6305,7 +6158,6 @@
           ]
         },
         {
-          "id": "moke70qmli3j",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6337,7 +6189,6 @@
           ]
         },
         {
-          "id": "moke70qmzkjg",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -6353,7 +6204,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qihpk6",
+              "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -6361,15 +6212,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qihpk6"
+      ]
     },
     {
-      "id": "moke70qmrc1u",
       "name": "Poolbedarf",
+      "parentName": "Garten",
       "sections": [
         {
-          "id": "moke70qm6sfl",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -6394,7 +6243,6 @@
           ]
         },
         {
-          "id": "moke70qmx3wl",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6424,7 +6272,6 @@
           ]
         },
         {
-          "id": "moke70qmji42",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6454,7 +6301,6 @@
           ]
         },
         {
-          "id": "moke70qmjp8u",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -6470,7 +6316,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qihpk6",
+              "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -6478,15 +6324,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qihpk6"
+      ]
     },
     {
-      "id": "moke70qnfek9",
       "name": "Gewächshäuser",
+      "parentName": "Garten",
       "sections": [
         {
-          "id": "moke70qn01ti",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -6511,7 +6355,6 @@
           ]
         },
         {
-          "id": "moke70qnw8or",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6538,7 +6381,6 @@
           ]
         },
         {
-          "id": "moke70qn77td",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6565,7 +6407,6 @@
           ]
         },
         {
-          "id": "moke70qnkt9u",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -6581,7 +6422,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qihpk6",
+              "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -6589,15 +6430,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qihpk6"
+      ]
     },
     {
-      "id": "moke70qn33ze",
       "name": "Sofas",
+      "parentName": "Möbel",
       "sections": [
         {
-          "id": "moke70qn2yao",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -6622,7 +6461,6 @@
           ]
         },
         {
-          "id": "moke70qnrjkt",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6649,7 +6487,6 @@
           ]
         },
         {
-          "id": "moke70qnyah6",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6676,7 +6513,6 @@
           ]
         },
         {
-          "id": "moke70qnou9o",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -6692,7 +6528,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qjt4jo",
+              "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -6700,15 +6536,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qjt4jo"
+      ]
     },
     {
-      "id": "moke70qnxvev",
       "name": "Polsterbetten",
+      "parentName": "Möbel",
       "sections": [
         {
-          "id": "moke70qn2fbn",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -6733,7 +6567,6 @@
           ]
         },
         {
-          "id": "moke70qnb57l",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6762,7 +6595,6 @@
           ]
         },
         {
-          "id": "moke70qno3jh",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6791,7 +6623,6 @@
           ]
         },
         {
-          "id": "moke70qnhsw5",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -6807,7 +6638,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qjt4jo",
+              "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -6815,15 +6646,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qjt4jo"
+      ]
     },
     {
-      "id": "moke70qnd7m5",
       "name": "Boxspringbetten",
+      "parentName": "Möbel",
       "sections": [
         {
-          "id": "moke70qnrs3p",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -6848,7 +6677,6 @@
           ]
         },
         {
-          "id": "moke70qnalld",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6876,7 +6704,6 @@
           ]
         },
         {
-          "id": "moke70qnyrpp",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6904,7 +6731,6 @@
           ]
         },
         {
-          "id": "moke70qngvdm",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -6920,7 +6746,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qjt4jo",
+              "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -6928,15 +6754,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qjt4jo"
+      ]
     },
     {
-      "id": "moke70qnxnfk",
       "name": "Metallbetten",
+      "parentName": "Möbel",
       "sections": [
         {
-          "id": "moke70qnvvyd",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -6961,7 +6785,6 @@
           ]
         },
         {
-          "id": "moke70qnd03u",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -6989,7 +6812,6 @@
           ]
         },
         {
-          "id": "moke70qny7yu",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7017,7 +6839,6 @@
           ]
         },
         {
-          "id": "moke70qn40g3",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -7033,7 +6854,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qjt4jo",
+              "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -7041,15 +6862,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qjt4jo"
+      ]
     },
     {
-      "id": "moke70qng2qd",
       "name": "Kinderbetten",
+      "parentName": "Möbel",
       "sections": [
         {
-          "id": "moke70qn4p6z",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -7074,7 +6893,6 @@
           ]
         },
         {
-          "id": "moke70qnam30",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7103,7 +6921,6 @@
           ]
         },
         {
-          "id": "moke70qnm5zq",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7132,7 +6949,6 @@
           ]
         },
         {
-          "id": "moke70qnizfd",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -7148,7 +6964,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qjt4jo",
+              "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -7156,15 +6972,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qjt4jo"
+      ]
     },
     {
-      "id": "moke70qnihap",
       "name": "Wohnmöbel",
+      "parentName": "Möbel",
       "sections": [
         {
-          "id": "moke70qnyudd",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -7189,7 +7003,6 @@
           ]
         },
         {
-          "id": "moke70qn3u8w",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7218,7 +7031,6 @@
           ]
         },
         {
-          "id": "moke70qnvsns",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7247,7 +7059,6 @@
           ]
         },
         {
-          "id": "moke70qnruzc",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -7263,7 +7074,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qjt4jo",
+              "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -7271,15 +7082,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qjt4jo"
+      ]
     },
     {
-      "id": "moke70qn9opz",
       "name": "Massagesessel",
+      "parentName": "Möbel",
       "sections": [
         {
-          "id": "moke70qnhndf",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -7304,7 +7113,6 @@
           ]
         },
         {
-          "id": "moke70qnvqzk",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7331,7 +7139,6 @@
           ]
         },
         {
-          "id": "moke70qnpkn5",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7358,7 +7165,6 @@
           ]
         },
         {
-          "id": "moke70qnw2uu",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -7374,7 +7180,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qjt4jo",
+              "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -7382,15 +7188,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qjt4jo"
+      ]
     },
     {
-      "id": "moke70qn8cp6",
       "name": "Büromöbel",
+      "parentName": "Möbel",
       "sections": [
         {
-          "id": "moke70qnpp63",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -7415,7 +7219,6 @@
           ]
         },
         {
-          "id": "moke70qnl100",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7445,7 +7248,6 @@
           ]
         },
         {
-          "id": "moke70qnnwpy",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7475,7 +7277,6 @@
           ]
         },
         {
-          "id": "moke70qnxmio",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -7491,7 +7292,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qjt4jo",
+              "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -7499,15 +7300,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qjt4jo"
+      ]
     },
     {
-      "id": "moke70qnr64h",
       "name": "Matratzen",
+      "parentName": "Möbel",
       "sections": [
         {
-          "id": "moke70qny8nw",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -7532,7 +7331,6 @@
           ]
         },
         {
-          "id": "moke70qnx12j",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7560,7 +7358,6 @@
           ]
         },
         {
-          "id": "moke70qnrxsg",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7588,7 +7385,6 @@
           ]
         },
         {
-          "id": "moke70qn0k2i",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -7604,7 +7400,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qjt4jo",
+              "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -7612,15 +7408,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qjt4jo"
+      ]
     },
     {
-      "id": "moke70qn0sh8",
       "name": "Schlafkomfort",
+      "parentName": "Möbel",
       "sections": [
         {
-          "id": "moke70qntzno",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -7645,7 +7439,6 @@
           ]
         },
         {
-          "id": "moke70qnqrfr",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7675,7 +7468,6 @@
           ]
         },
         {
-          "id": "moke70qnkkoh",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7705,7 +7497,6 @@
           ]
         },
         {
-          "id": "moke70qn66a0",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -7721,7 +7512,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qjt4jo",
+              "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -7729,15 +7520,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qjt4jo"
+      ]
     },
     {
-      "id": "moke70qnioze",
       "name": "Schminktische",
+      "parentName": "Möbel",
       "sections": [
         {
-          "id": "moke70qnx8mq",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -7762,7 +7551,6 @@
           ]
         },
         {
-          "id": "moke70qnh8pb",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7793,7 +7581,6 @@
           ]
         },
         {
-          "id": "moke70qnf50g",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7824,7 +7611,6 @@
           ]
         },
         {
-          "id": "moke70qnuwb3",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -7840,7 +7626,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qjt4jo",
+              "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -7848,15 +7634,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qjt4jo"
+      ]
     },
     {
-      "id": "moke70qn2qx7",
       "name": "Badausstattung",
+      "parentName": "Möbel",
       "sections": [
         {
-          "id": "moke70qnn2kd",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -7881,7 +7665,6 @@
           ]
         },
         {
-          "id": "moke70qnmpi9",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7910,7 +7693,6 @@
           ]
         },
         {
-          "id": "moke70qnh6tp",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -7939,7 +7721,6 @@
           ]
         },
         {
-          "id": "moke70qnj67q",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -7955,7 +7736,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qjt4jo",
+              "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -7963,15 +7744,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qjt4jo"
+      ]
     },
     {
-      "id": "moke70qniviz",
       "name": "Camping",
+      "parentName": "Freizeit",
       "sections": [
         {
-          "id": "moke70qn4eto",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -7996,7 +7775,6 @@
           ]
         },
         {
-          "id": "moke70qnqcuk",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8027,7 +7805,6 @@
           ]
         },
         {
-          "id": "moke70qnoiom",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8058,7 +7835,6 @@
           ]
         },
         {
-          "id": "moke70qn77oo",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -8074,7 +7850,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qkd8zh",
+              "linkUrl": "page:Freizeit",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -8082,15 +7858,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qkd8zh"
+      ]
     },
     {
-      "id": "moke70qnkvye",
       "name": "Koffersets",
+      "parentName": "Freizeit",
       "sections": [
         {
-          "id": "moke70qneq9y",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -8115,7 +7889,6 @@
           ]
         },
         {
-          "id": "moke70qn7pt4",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8148,7 +7921,6 @@
           ]
         },
         {
-          "id": "moke70qnhhfa",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8181,7 +7953,6 @@
           ]
         },
         {
-          "id": "moke70qn08sy",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -8197,7 +7968,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qkd8zh",
+              "linkUrl": "page:Freizeit",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -8205,15 +7976,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qkd8zh"
+      ]
     },
     {
-      "id": "moke70qns56w",
       "name": "Dachzelte",
+      "parentName": "Freizeit",
       "sections": [
         {
-          "id": "moke70qnpxs6",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -8238,7 +8007,6 @@
           ]
         },
         {
-          "id": "moke70qnvf7p",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8265,7 +8033,6 @@
           ]
         },
         {
-          "id": "moke70qn8xdo",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8292,7 +8059,6 @@
           ]
         },
         {
-          "id": "moke70qnoq5d",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -8308,7 +8074,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qkd8zh",
+              "linkUrl": "page:Freizeit",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -8316,15 +8082,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qkd8zh"
+      ]
     },
     {
-      "id": "moke70qni431",
       "name": "Sport",
+      "parentName": "Freizeit",
       "sections": [
         {
-          "id": "moke70qnljz6",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -8349,7 +8113,6 @@
           ]
         },
         {
-          "id": "moke70qnflsi",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8379,7 +8142,6 @@
           ]
         },
         {
-          "id": "moke70qnrkih",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8409,7 +8171,6 @@
           ]
         },
         {
-          "id": "moke70qnyt9v",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -8425,7 +8186,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qkd8zh",
+              "linkUrl": "page:Freizeit",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -8433,15 +8194,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qkd8zh"
+      ]
     },
     {
-      "id": "moke70qn6l7c",
       "name": "Werkzeug",
+      "parentName": "Heimwerken",
       "sections": [
         {
-          "id": "moke70qnt0ne",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -8466,7 +8225,6 @@
           ]
         },
         {
-          "id": "moke70qn6gs9",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8495,7 +8253,6 @@
           ]
         },
         {
-          "id": "moke70qn9jmy",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8524,7 +8281,6 @@
           ]
         },
         {
-          "id": "moke70qnitk1",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -8540,7 +8296,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qk1w1m",
+              "linkUrl": "page:Heimwerken",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -8548,15 +8304,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qk1w1m"
+      ]
     },
     {
-      "id": "moke70qnmmbo",
       "name": "Sackkarren",
+      "parentName": "Heimwerken",
       "sections": [
         {
-          "id": "moke70qn7ri9",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -8581,7 +8335,6 @@
           ]
         },
         {
-          "id": "moke70qnelkg",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8610,7 +8363,6 @@
           ]
         },
         {
-          "id": "moke70qnlbpy",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8639,7 +8391,6 @@
           ]
         },
         {
-          "id": "moke70qnbeog",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -8655,7 +8406,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qk1w1m",
+              "linkUrl": "page:Heimwerken",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -8663,15 +8414,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qk1w1m"
+      ]
     },
     {
-      "id": "moke70qnvq05",
       "name": "Multifunktionsleitern",
+      "parentName": "Heimwerken",
       "sections": [
         {
-          "id": "moke70qnl3od",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -8696,7 +8445,6 @@
           ]
         },
         {
-          "id": "moke70qnug04",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8723,7 +8471,6 @@
           ]
         },
         {
-          "id": "moke70qnycsn",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8750,7 +8497,6 @@
           ]
         },
         {
-          "id": "moke70qnjsmo",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -8766,7 +8512,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qk1w1m",
+              "linkUrl": "page:Heimwerken",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -8774,15 +8520,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qk1w1m"
+      ]
     },
     {
-      "id": "moke70qnebiq",
       "name": "Elektrokamine",
+      "parentName": "Heimwerken",
       "sections": [
         {
-          "id": "moke70qnw4yk",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -8807,7 +8551,6 @@
           ]
         },
         {
-          "id": "moke70qnk42e",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8839,7 +8582,6 @@
           ]
         },
         {
-          "id": "moke70qnjpks",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8871,7 +8613,6 @@
           ]
         },
         {
-          "id": "moke70qn85lq",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -8887,7 +8628,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qk1w1m",
+              "linkUrl": "page:Heimwerken",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -8895,15 +8636,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qk1w1m"
+      ]
     },
     {
-      "id": "moke70qnugz0",
       "name": "Schwerlastregale",
+      "parentName": "Haushalt",
       "sections": [
         {
-          "id": "moke70qnt7oz",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -8928,7 +8667,6 @@
           ]
         },
         {
-          "id": "moke70qngilk",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8962,7 +8700,6 @@
           ]
         },
         {
-          "id": "moke70qn3ihj",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -8997,7 +8734,6 @@
           ]
         },
         {
-          "id": "moke70qn4dfs",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -9013,7 +8749,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qlhin4",
+              "linkUrl": "page:Haushalt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -9021,15 +8757,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qlhin4"
+      ]
     },
     {
-      "id": "moke70qnu5yi",
       "name": "Aufbewahrung",
+      "parentName": "Haushalt",
       "sections": [
         {
-          "id": "moke70qnirn2",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -9054,7 +8788,6 @@
           ]
         },
         {
-          "id": "moke70qn62ve",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9082,7 +8815,6 @@
           ]
         },
         {
-          "id": "moke70qnejfw",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9110,7 +8842,6 @@
           ]
         },
         {
-          "id": "moke70qnl9qz",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -9126,7 +8857,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qlhin4",
+              "linkUrl": "page:Haushalt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -9134,15 +8865,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qlhin4"
+      ]
     },
     {
-      "id": "moke70qn91ob",
       "name": "Küchengeräte",
+      "parentName": "Haushalt",
       "sections": [
         {
-          "id": "moke70qn2yo4",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -9167,7 +8896,6 @@
           ]
         },
         {
-          "id": "moke70qnnw2l",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9194,7 +8922,6 @@
           ]
         },
         {
-          "id": "moke70qnywe9",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9221,7 +8948,6 @@
           ]
         },
         {
-          "id": "moke70qnak0n",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -9237,7 +8963,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qlhin4",
+              "linkUrl": "page:Haushalt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -9245,15 +8971,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qlhin4"
+      ]
     },
     {
-      "id": "moke70qowsav",
       "name": "Mülleimer",
+      "parentName": "Haushalt",
       "sections": [
         {
-          "id": "moke70qncism",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -9278,7 +9002,6 @@
           ]
         },
         {
-          "id": "moke70qnox0d",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9305,7 +9028,6 @@
           ]
         },
         {
-          "id": "moke70qoff7w",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9332,7 +9054,6 @@
           ]
         },
         {
-          "id": "moke70qol9s1",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -9348,7 +9069,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qlhin4",
+              "linkUrl": "page:Haushalt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -9356,15 +9077,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qlhin4"
+      ]
     },
     {
-      "id": "moke70qo26f4",
       "name": "Eiswürfelmaschinen",
+      "parentName": "Haushalt",
       "sections": [
         {
-          "id": "moke70qo8fxf",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -9389,7 +9108,6 @@
           ]
         },
         {
-          "id": "moke70qo0hpn",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9416,7 +9134,6 @@
           ]
         },
         {
-          "id": "moke70qowckz",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9443,7 +9160,6 @@
           ]
         },
         {
-          "id": "moke70qo0rgz",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -9459,7 +9175,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qlhin4",
+              "linkUrl": "page:Haushalt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -9467,15 +9183,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qlhin4"
+      ]
     },
     {
-      "id": "moke70qo66c6",
       "name": "Heizgeräte",
+      "parentName": "Haushalt",
       "sections": [
         {
-          "id": "moke70qosq5u",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -9500,7 +9214,6 @@
           ]
         },
         {
-          "id": "moke70qolz0r",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9528,7 +9241,6 @@
           ]
         },
         {
-          "id": "moke70qo9oe7",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9556,7 +9268,6 @@
           ]
         },
         {
-          "id": "moke70qou63u",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -9572,7 +9283,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qlhin4",
+              "linkUrl": "page:Haushalt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -9580,15 +9291,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qlhin4"
+      ]
     },
     {
-      "id": "moke70qob84j",
       "name": "Alltagshilfen",
+      "parentName": "Haushalt",
       "sections": [
         {
-          "id": "moke70qowbnf",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -9613,7 +9322,6 @@
           ]
         },
         {
-          "id": "moke70qo22em",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9642,7 +9350,6 @@
           ]
         },
         {
-          "id": "moke70qotgmf",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9671,7 +9378,6 @@
           ]
         },
         {
-          "id": "moke70qoyae0",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -9687,7 +9393,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qlhin4",
+              "linkUrl": "page:Haushalt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -9695,15 +9401,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qlhin4"
+      ]
     },
     {
-      "id": "moke70qogr5s",
       "name": "Kinderbedarf",
+      "parentName": "Haushalt",
       "sections": [
         {
-          "id": "moke70qobgn6",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -9728,7 +9432,6 @@
           ]
         },
         {
-          "id": "moke70qoft4b",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9762,7 +9465,6 @@
           ]
         },
         {
-          "id": "moke70qoz2ml",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9797,7 +9499,6 @@
           ]
         },
         {
-          "id": "moke70qokalh",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -9813,7 +9514,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qlhin4",
+              "linkUrl": "page:Haushalt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -9821,15 +9522,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qlhin4"
+      ]
     },
     {
-      "id": "moke70qopwop",
       "name": "Hundebedarf",
+      "parentName": "Tierbedarf",
       "sections": [
         {
-          "id": "moke70qoakb0",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -9854,7 +9553,6 @@
           ]
         },
         {
-          "id": "moke70qom84z",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9884,7 +9582,6 @@
           ]
         },
         {
-          "id": "moke70qou8se",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9914,7 +9611,6 @@
           ]
         },
         {
-          "id": "moke70qo5dau",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -9930,7 +9626,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qligxu",
+              "linkUrl": "page:Tierbedarf",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -9938,15 +9634,13 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qligxu"
+      ]
     },
     {
-      "id": "moke70qobjov",
       "name": "Freilaufgehege",
+      "parentName": "Tierbedarf",
       "sections": [
         {
-          "id": "moke70qo0o9n",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -9971,7 +9665,6 @@
           ]
         },
         {
-          "id": "moke70qoyyqz",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -9998,7 +9691,6 @@
           ]
         },
         {
-          "id": "moke70qov0e5",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -10025,7 +9717,6 @@
           ]
         },
         {
-          "id": "moke70qog27c",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -10041,7 +9732,7 @@
               "brief": "Cross Link zur Eltern Kategorie.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/moke70qligxu",
+              "linkUrl": "page:Tierbedarf",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
@@ -10049,8 +9740,7 @@
             }
           ]
         }
-      ],
-      "parentId": "moke70qligxu"
+      ]
     }
   ],
   "googleDriveUrl": ""

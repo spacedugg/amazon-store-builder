@@ -43,7 +43,7 @@ export function importBriefingToStore(briefing) {
         if (typeof t.linkUrl === 'string') {
           if (t.linkUrl.indexOf('page:') === 0) {
             var pageName = t.linkUrl.slice(5);
-            if (pageIdByName[pageName]) tile.linkUrl = '/page/' + pageIdByName[pageName];
+            if (pageIdByName[pageName]) tile.linkUrl = '/' + pageIdByName[pageName];
             else tile.linkUrl = t.linkUrl; // Fallback: Briefing referenziert eine Page die es nicht gibt
           } else {
             tile.linkUrl = t.linkUrl;
@@ -54,7 +54,13 @@ export function importBriefingToStore(briefing) {
       return { id: sectionId, layoutId: s.layoutId || '1', tiles: tiles };
     });
     var page = { id: entry._id, name: p.name || 'Unbenannt', sections: sections };
-    if (p.parentId && pageIdByName[p.parentId]) page.parentId = pageIdByName[p.parentId];
+    // Eltern Beziehung kann als parentName (Name der Eltern Page) oder parentId
+    // (Name oder bereits UID) angegeben sein. Wir suchen erst im Name Index, sonst
+    // nehmen wir den Wert 1 zu 1 (z.B. wenn schon eine echte UID übergeben wurde).
+    var parentRef = p.parentName || p.parentId;
+    if (parentRef) {
+      page.parentId = pageIdByName[parentRef] || parentRef;
+    }
     return page;
   });
 

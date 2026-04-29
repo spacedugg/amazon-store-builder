@@ -1031,6 +1031,9 @@ function buildGartenPage() {
 }
 
 // ─── BUILD ────────────────────────────────────────────────
+// Output ist ein "rohes" Briefing JSON mit parentName Strings und
+// linkUrl im Format 'page:Name'. Der Importer (src/briefingImport.js)
+// macht die Resolution auf echte Page UIDs beim Laden ins Tool.
 
 function buildStore() {
   var pages = [];
@@ -1049,21 +1052,13 @@ function buildStore() {
   // 42 Subpages, eine pro Sub mit mindestens 1 ASIN
   buildAllSubpages().forEach(function(p) { pages.push(p); });
 
-  // Resolve parentName references → echte parentId
-  var pageIdByName = {};
-  pages.forEach(function(p) { pageIdByName[p.name] = p.id; });
+  // Tile IDs entfernen, parentId entfernen, IDs entfernen
+  // damit der Importer eigene UIDs erzeugt
   pages.forEach(function(p) {
-    if (p.parentName && pageIdByName[p.parentName]) {
-      p.parentId = pageIdByName[p.parentName];
-    }
-    delete p.parentName;
+    delete p.id;
+    if (!p.parentName) delete p.parentName;
     p.sections.forEach(function(sec) {
-      sec.tiles.forEach(function(t) {
-        if (t.linkUrl && t.linkUrl.indexOf('page:') === 0) {
-          var name = t.linkUrl.slice(5);
-          if (pageIdByName[name]) t.linkUrl = '/page/' + pageIdByName[name];
-        }
-      });
+      delete sec.id;
     });
   });
 
