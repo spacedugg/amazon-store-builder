@@ -304,6 +304,87 @@ function buildBestsellerPage() {
   ]);
 }
 
+function buildFreizeitPage() {
+  return page('Freizeit', [
+    section('1', [
+      tile('image',
+        ov('Raus, **erleben**, ankommen', 'Camping, Koffer, Sport, Dachzelte', '', [], 'Sortiment entdecken'),
+        'Hero Bild Outdoor Setup mit Zelt oder Camping Setup.'
+      ),
+    ], 'hero.fullWidthHero'),
+
+    section('2x2wide', [
+      tile('image', ov('**CAMPING**'), 'Sub Tile Camping, Campingstuhl Rendering.'),
+      tile('image', ov('**KOFFER**'), 'Sub Tile Koffersets, Trolley Rendering.'),
+      tile('image', ov('**DACHZELTE**'), 'Sub Tile Dachzelte, Dachzelt Rendering.'),
+      tile('image', ov('**SPORT**'), 'Sub Tile Sport, Tischtennis oder Walking Stöcke.'),
+    ], 'categoryNav.grid4wide'),
+
+    section('1', [
+      tile('shoppable_image',
+        ov('Camping, **leicht** gemacht', 'Stuhl, Tisch, Kühlbox, Luftmatratze'),
+        'Shoppable Bild Outdoor Camping Setup. 5 Hotspots auf Campingstuhl, Campingtisch, Kühlbox, Luftmatratze, Walking Stöcke.',
+        { asins: topAsinsBySub('Freizeit', 'Camping', 5) }
+      ),
+    ], 'products.shoppableFullWidth'),
+
+    section('1', [
+      tile('best_sellers',
+        ov('Die beliebtesten **Camping** Produkte'),
+        'Bestseller Camping.',
+        { asins: topAsinsBySub('Freizeit', 'Camping', 5) }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    section('1', [
+      tile('best_sellers',
+        ov('Die beliebtesten **Koffer**'),
+        'Bestseller Koffersets.',
+        { asins: topAsinsBySub('Freizeit', 'Koffersets', 7) }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    section('lg-2stack', [
+      tile('image',
+        ov('Dachzelt, **schnell** aufgebaut'),
+        'Large Image Dachzelt Lago auf Auto im Outdoor Setting.'
+      ),
+      tile('image', ov('**Schnell** aufgebaut'), 'Wide USP Bullet zum Aufbau in Minuten.'),
+      tile('image', ov('**Wetterfest**'), 'Wide USP Bullet zur Witterungsfestigkeit.'),
+    ], 'products.productShowcaseLarge'),
+
+    section('1', [
+      tile('best_sellers',
+        ov('**Sport** für draußen'),
+        'Bestseller Sport.',
+        { asins: topAsinsBySub('Freizeit', 'Sport', 4) }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    section('vh-w2s', [
+      tile('image', ov('Für **draußen** gebaut'), 'Wide Bild Outdoor.'),
+      tile('image', ov('**Wetterfest**'), 'Square mit grünem Icon Kreis Regentropfen.'),
+      tile('image', ov('**Leicht** verstaut'), 'Square mit grünem Icon Kreis Box.'),
+    ], 'features.featureWideAnd2'),
+
+    section('1', [
+      tile('product_grid',
+        ov('Alle **Freizeit** Produkte im Überblick'),
+        'Vollkatalog Freizeit.',
+        { asins: allAsinsByCat('Freizeit') }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    section('1', [
+      tile('image',
+        ov('Auch fürs Zuhause draußen, weiter zu **Garten**', '', '', [], 'Garten ansehen'),
+        'Cross Sell Banner.',
+        { linkUrl: linkTo('Garten') }
+      ),
+    ], 'footer.crossSellBanner'),
+  ]);
+}
+
 function buildMoebelPage() {
   return page('Möbel', [
     section('1', [
@@ -521,6 +602,7 @@ function buildStore() {
   pages.push(buildBestsellerPage());
   pages.push(buildGartenPage());
   pages.push(buildMoebelPage());
+  pages.push(buildFreizeitPage());
   // weitere Pages folgen in nächsten Schritten
 
   // Resolve parentName references → echte parentId
