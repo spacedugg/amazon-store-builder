@@ -304,6 +304,112 @@ function buildBestsellerPage() {
   ]);
 }
 
+function buildMoebelPage() {
+  return page('Möbel', [
+    section('1', [
+      tile('image',
+        ov('Das Sofa, das zu dir **zurückkommt**', 'Sofas, Betten, Schlafkomfort, Bad und mehr', '', [], 'Sofas entdecken'),
+        'Hero Bild Wohnzimmer mit Sofa als Hauptmotiv.'
+      ),
+    ], 'hero.fullWidthHero'),
+
+    // Sub Navigator 8
+    section('4x2grid', [
+      tile('image', ov('**SOFAS**'), 'Sub Tile Sofas, freigestelltes Sofa.'),
+      tile('image', ov('**POLSTERBETTEN**'), 'Sub Tile Polsterbetten.'),
+      tile('image', ov('**BOXSPRINGBETTEN**'), 'Sub Tile Boxspringbetten.'),
+      tile('image', ov('**METALLBETTEN**'), 'Sub Tile Metallbetten.'),
+      tile('image', ov('**KINDERBETTEN**'), 'Sub Tile Kinderbetten.'),
+      tile('image', ov('**WOHNMÖBEL**', 'Wohn und Esszimmer'), 'Sub Tile Wohn Esszimmer Möbel.'),
+      tile('image', ov('**MASSAGESESSEL**'), 'Sub Tile Massagesessel.'),
+      tile('image', ov('**BÜROMÖBEL**'), 'Sub Tile Büromöbel.'),
+    ], 'categoryNav.grid8tiles'),
+
+    // Sub Navigator 4
+    section('2x2wide', [
+      tile('image', ov('**MATRATZEN**', 'Matratzen und Topper'), 'Sub Tile Matratzen.'),
+      tile('image', ov('**SCHLAFKOMFORT**'), 'Sub Tile Schlafkomfort, Kissen und Decken.'),
+      tile('image', ov('**SCHMINKTISCHE**'), 'Sub Tile Schminktische.'),
+      tile('image', ov('**BADAUSSTATTUNG**'), 'Sub Tile Badausstattung.'),
+    ], 'categoryNav.grid4wide'),
+
+    // Shoppable Wohnzimmer
+    section('1', [
+      tile('shoppable_image',
+        ov('Wohnzimmer, **komplett** gedacht', 'Sofa, Sessel, Beistelltisch, Lampe, Teppich'),
+        'Shoppable Bild Wohnzimmer. 5 Hotspots auf Sofa, Relaxsessel, Akustikpaneele, Beistelltisch, Schminktisch.',
+        { asins: ['B0CX1SJ9R1', 'B0DXFLWC1L', 'B0F8BR8ZW5', 'B0GX1BYJXM', 'B0FGDH2KMJ'] }
+      ),
+    ], 'products.shoppableFullWidth'),
+
+    // Bestseller Wohnen Wohnmöbel + Sofas
+    section('1', [
+      tile('best_sellers',
+        ov('Die beliebtesten **Wohnstücke**'),
+        'Bestseller Grid Sofa und Wohnmöbel.',
+        { asins: topAsinsBySub('Möbel', 'Sofas', 1).concat(topAsinsBySub('Möbel', 'Wohnmöbel', 2), topAsinsBySub('Möbel', 'Massagesessel', 1), topAsinsBySub('Möbel', 'Büromöbel', 4)) }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    // Trenner Schlafen
+    section('1', [
+      tile('image', ov('Guter Schlaf ist **kein** Zufall'), 'Trenner Textbild. Leinen oder Bettwäsche Makro.'),
+    ], 'hero.fullWidthHero'),
+
+    // Shoppable Schlafzimmer
+    section('1', [
+      tile('shoppable_image',
+        ov('Schlafzimmer, das **ankommt**', 'Boxspring, Matratze, Kissen, Schminktisch'),
+        'Shoppable Bild Schlafzimmer. 5 Hotspots auf Bett, Matratze, Kissen, Topper, Schminktisch.',
+        { asins: ['B07QWXMYV9', 'B0DM9FFLYF', 'B0D31GY3G4', 'B09PLDVF2L', 'B0FGDGNZNT'] }
+      ),
+    ], 'products.shoppableFullWidth'),
+
+    // Bestseller Betten
+    section('1', [
+      tile('best_sellers',
+        ov('Die beliebtesten **Betten**'),
+        'Bestseller Grid Polster, Boxspring, Metallbett.',
+        { asins: topAsinsBySub('Möbel', 'Polsterbetten', 3).concat(topAsinsBySub('Möbel', 'Boxspringbetten', 2), topAsinsBySub('Möbel', 'Metallbetten', 2)) }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    // Shoppable Bad
+    section('1', [
+      tile('shoppable_image',
+        ov('Das Bad, **klar** strukturiert', 'Wäschekörbe und Stauraum'),
+        'Shoppable Bild Bad. 3 Hotspots auf Wäschekorb 100L, Wäschekorb Round, Wäschekorb Grau.',
+        { asins: topAsinsBySub('Möbel', 'Badausstattung', 3) }
+      ),
+    ], 'products.shoppableFullWidth'),
+
+    // USP Möbel
+    section('vh-w2s', [
+      tile('image', ov('Was **unsere** Möbel ausmacht'), 'Wide Bild. Plus 2 Squares mit USP Icons.'),
+      tile('image', ov('**Pflegeleicht**'), 'Square mit grünem Icon Kreis Reißverschluss.'),
+      tile('image', ov('**Solide** verarbeitet'), 'Square mit grünem Icon Kreis Schild Check.'),
+    ], 'features.featureWideAnd2'),
+
+    // Vollkatalog
+    section('1', [
+      tile('product_grid',
+        ov('Alle **Möbel** Produkte im Überblick'),
+        'Vollkatalog Möbel.',
+        { asins: allAsinsByCat('Möbel') }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    // Cross Link
+    section('1', [
+      tile('image',
+        ov('Praktisch fürs Zuhause, weiter zu **Haushalt**', '', '', [], 'Haushalt ansehen'),
+        'Cross Sell Banner.',
+        { linkUrl: linkTo('Haushalt') }
+      ),
+    ], 'footer.crossSellBanner'),
+  ]);
+}
+
 function buildGartenPage() {
   return page('Garten', [
     section('1', [
@@ -414,6 +520,7 @@ function buildStore() {
   pages.push(buildHomePage());
   pages.push(buildBestsellerPage());
   pages.push(buildGartenPage());
+  pages.push(buildMoebelPage());
   // weitere Pages folgen in nächsten Schritten
 
   // Resolve parentName references → echte parentId

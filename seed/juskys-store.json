@@ -918,11 +918,11 @@
   "products": [],
   "pages": [
     {
-      "id": "mok9gv2690i7",
+      "id": "mok9i9ttzjeu",
       "name": "Home",
       "sections": [
         {
-          "id": "mok9gv25ro6h",
+          "id": "mok9i9tq1yvy",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -947,7 +947,7 @@
           ]
         },
         {
-          "id": "mok9gv25poeh",
+          "id": "mok9i9tqjv4k",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -963,7 +963,7 @@
               "brief": "Kategorie Tile Garten. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9gv2amaog",
+              "linkUrl": "/page/mok9i9tw9rlv",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -981,7 +981,7 @@
               "brief": "Kategorie Tile Möbel. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "page:Möbel",
+              "linkUrl": "/page/mok9i9txxxpt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1062,7 +1062,7 @@
           ]
         },
         {
-          "id": "mok9gv25tz1n",
+          "id": "mok9i9tqxnp1",
           "layoutId": "std-2equal",
           "module": "trust.trustSplit",
           "tiles": [
@@ -1105,7 +1105,7 @@
           ]
         },
         {
-          "id": "mok9gv25e1pv",
+          "id": "mok9i9tqghz9",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1130,7 +1130,7 @@
           ]
         },
         {
-          "id": "mok9gv2673ok",
+          "id": "mok9i9trueku",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -1161,7 +1161,7 @@
           ]
         },
         {
-          "id": "mok9gv262bvk",
+          "id": "mok9i9trnk7n",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1193,7 +1193,7 @@
           ]
         },
         {
-          "id": "mok9gv269vvw",
+          "id": "mok9i9trihr7",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1218,7 +1218,7 @@
           ]
         },
         {
-          "id": "mok9gv26c7el",
+          "id": "mok9i9tr8gaj",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -1249,7 +1249,7 @@
           ]
         },
         {
-          "id": "mok9gv26zgop",
+          "id": "mok9i9ts6hc3",
           "layoutId": "2x2wide",
           "module": "features.featureGrid4wide",
           "tiles": [
@@ -1328,7 +1328,7 @@
           ]
         },
         {
-          "id": "mok9gv260xki",
+          "id": "mok9i9tsbpq4",
           "layoutId": "1",
           "module": "engagement.followBanner",
           "tiles": [
@@ -1353,7 +1353,7 @@
           ]
         },
         {
-          "id": "mok9gv266e4t",
+          "id": "mok9i9ttmnmd",
           "layoutId": "2x2wide",
           "module": "footer.categoryNavFooter",
           "tiles": [
@@ -1369,7 +1369,7 @@
               "brief": "Footer Kategorie Tile mit Mini Icon.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9gv2amaog",
+              "linkUrl": "/page/mok9i9tw9rlv",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1387,7 +1387,7 @@
               "brief": "Footer Kategorie Tile mit Mini Icon.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "page:Möbel",
+              "linkUrl": "/page/mok9i9txxxpt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1434,11 +1434,11 @@
       ]
     },
     {
-      "id": "mok9gv28wcfh",
+      "id": "mok9i9tthtn0",
       "name": "Bestseller",
       "sections": [
         {
-          "id": "mok9gv28z0mf",
+          "id": "mok9i9ttr2du",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1463,7 +1463,7 @@
           ]
         },
         {
-          "id": "mok9gv283tic",
+          "id": "mok9i9tt1lix",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -1479,7 +1479,7 @@
               "brief": "Sub Navigator Tile, Filter zu Garten Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9gv2amaog",
+              "linkUrl": "/page/mok9i9tw9rlv",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1497,7 +1497,7 @@
               "brief": "Sub Navigator Tile, Filter zu Möbel Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "page:Möbel",
+              "linkUrl": "/page/mok9i9txxxpt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1578,7 +1578,7 @@
           ]
         },
         {
-          "id": "mok9gv28uddp",
+          "id": "mok9i9tt2dpd",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1616,7 +1616,7 @@
           ]
         },
         {
-          "id": "mok9gv2885xh",
+          "id": "mok9i9tt7dbl",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1650,7 +1650,7 @@
           ]
         },
         {
-          "id": "mok9gv282kb7",
+          "id": "mok9i9tttjyd",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1684,7 +1684,7 @@
           ]
         },
         {
-          "id": "mok9gv2857zt",
+          "id": "mok9i9tt8d5k",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1716,7 +1716,7 @@
           ]
         },
         {
-          "id": "mok9gv284ts2",
+          "id": "mok9i9tt64xt",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1748,7 +1748,7 @@
           ]
         },
         {
-          "id": "mok9gv28znad",
+          "id": "mok9i9ttyhf6",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1782,7 +1782,7 @@
           ]
         },
         {
-          "id": "mok9gv282c32",
+          "id": "mok9i9ttvtkn",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1813,7 +1813,7 @@
           ]
         },
         {
-          "id": "mok9gv28sex7",
+          "id": "mok9i9tta5wy",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -1876,11 +1876,11 @@
       ]
     },
     {
-      "id": "mok9gv2amaog",
+      "id": "mok9i9tw9rlv",
       "name": "Garten",
       "sections": [
         {
-          "id": "mok9gv28qjhh",
+          "id": "mok9i9tt53gb",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1905,7 +1905,7 @@
           ]
         },
         {
-          "id": "mok9gv28faxs",
+          "id": "mok9i9tth4hs",
           "layoutId": "4x2grid",
           "module": "categoryNav.grid8tiles",
           "tiles": [
@@ -2056,7 +2056,7 @@
           ]
         },
         {
-          "id": "mok9gv282ycx",
+          "id": "mok9i9ttcyyc",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -2171,7 +2171,7 @@
           ]
         },
         {
-          "id": "mok9gv29moz9",
+          "id": "mok9i9ttxyr0",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2202,7 +2202,7 @@
           ]
         },
         {
-          "id": "mok9gv29iq7w",
+          "id": "mok9i9tt0zkq",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2236,7 +2236,7 @@
           ]
         },
         {
-          "id": "mok9gv292rhu",
+          "id": "mok9i9ttt5ek",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -2261,7 +2261,7 @@
           ]
         },
         {
-          "id": "mok9gv296yde",
+          "id": "mok9i9tukqyo",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2292,7 +2292,7 @@
           ]
         },
         {
-          "id": "mok9gv29qxri",
+          "id": "mok9i9tuwrwq",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2326,7 +2326,7 @@
           ]
         },
         {
-          "id": "mok9gv29e0z0",
+          "id": "mok9i9tuhmw7",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -2387,7 +2387,7 @@
           ]
         },
         {
-          "id": "mok9gv2a7fue",
+          "id": "mok9i9twzcr7",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2473,7 +2473,7 @@
           ]
         },
         {
-          "id": "mok9gv2aao3c",
+          "id": "mok9i9tw80jr",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -2489,7 +2489,593 @@
               "brief": "Cross Sell Banner. Mini Bild Wohnraum.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "page:Möbel",
+              "linkUrl": "/page/mok9i9txxxpt",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mok9i9txxxpt",
+      "name": "Möbel",
+      "sections": [
+        {
+          "id": "mok9i9twli0t",
+          "layoutId": "1",
+          "module": "hero.fullWidthHero",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Das Sofa, das zu dir **zurückkommt**",
+                "subheading": "Sofas, Betten, Schlafkomfort, Bad und mehr",
+                "body": "",
+                "bullets": [],
+                "cta": "Sofas entdecken"
+              },
+              "brief": "Hero Bild Wohnzimmer mit Sofa als Hauptmotiv.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9i9twv9rs",
+          "layoutId": "4x2grid",
+          "module": "categoryNav.grid8tiles",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**SOFAS**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Sofas, freigestelltes Sofa.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**POLSTERBETTEN**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Polsterbetten.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**BOXSPRINGBETTEN**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Boxspringbetten.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**METALLBETTEN**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Metallbetten.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**KINDERBETTEN**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Kinderbetten.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**WOHNMÖBEL**",
+                "subheading": "Wohn und Esszimmer",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Wohn Esszimmer Möbel.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**MASSAGESESSEL**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Massagesessel.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**BÜROMÖBEL**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Büromöbel.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9i9twh5gc",
+          "layoutId": "2x2wide",
+          "module": "categoryNav.grid4wide",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**MATRATZEN**",
+                "subheading": "Matratzen und Topper",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Matratzen.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**SCHLAFKOMFORT**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Schlafkomfort, Kissen und Decken.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**SCHMINKTISCHE**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Schminktische.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**BADAUSSTATTUNG**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Badausstattung.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9i9twvvms",
+          "layoutId": "1",
+          "module": "products.shoppableFullWidth",
+          "tiles": [
+            {
+              "type": "shoppable_image",
+              "textOverlay": {
+                "heading": "Wohnzimmer, **komplett** gedacht",
+                "subheading": "Sofa, Sessel, Beistelltisch, Lampe, Teppich",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Shoppable Bild Wohnzimmer. 5 Hotspots auf Sofa, Relaxsessel, Akustikpaneele, Beistelltisch, Schminktisch.",
+              "asins": [
+                "B0CX1SJ9R1",
+                "B0DXFLWC1L",
+                "B0F8BR8ZW5",
+                "B0GX1BYJXM",
+                "B0FGDH2KMJ"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9i9twbs7d",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Die beliebtesten **Wohnstücke**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Bestseller Grid Sofa und Wohnmöbel.",
+              "asins": [
+                "B0CX1SJ9R1",
+                "B0GX1BYJXM",
+                "B0DXFLWC1L",
+                "B0FNWSKJP2",
+                "B077P4PS6Z",
+                "B0F32WYZ3G",
+                "B0FHHG2CKS",
+                "B0FX54GMQS"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9i9tws4zi",
+          "layoutId": "1",
+          "module": "hero.fullWidthHero",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Guter Schlaf ist **kein** Zufall",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Trenner Textbild. Leinen oder Bettwäsche Makro.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9i9twp9n2",
+          "layoutId": "1",
+          "module": "products.shoppableFullWidth",
+          "tiles": [
+            {
+              "type": "shoppable_image",
+              "textOverlay": {
+                "heading": "Schlafzimmer, das **ankommt**",
+                "subheading": "Boxspring, Matratze, Kissen, Schminktisch",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Shoppable Bild Schlafzimmer. 5 Hotspots auf Bett, Matratze, Kissen, Topper, Schminktisch.",
+              "asins": [
+                "B07QWXMYV9",
+                "B0DM9FFLYF",
+                "B0D31GY3G4",
+                "B09PLDVF2L",
+                "B0FGDGNZNT"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9i9twh0my",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Die beliebtesten **Betten**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Bestseller Grid Polster, Boxspring, Metallbett.",
+              "asins": [
+                "B0BKQ6XDKV",
+                "B0BSQKWT89",
+                "B0CCRQGD6P",
+                "B07QWXMYV9",
+                "B0DGXG1P6J",
+                "B0F32S7FDB",
+                "B0F32SN1W4"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9i9tw2dnc",
+          "layoutId": "1",
+          "module": "products.shoppableFullWidth",
+          "tiles": [
+            {
+              "type": "shoppable_image",
+              "textOverlay": {
+                "heading": "Das Bad, **klar** strukturiert",
+                "subheading": "Wäschekörbe und Stauraum",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Shoppable Bild Bad. 3 Hotspots auf Wäschekorb 100L, Wäschekorb Round, Wäschekorb Grau.",
+              "asins": [
+                "B07GFPC58W",
+                "B082XGXKJ8",
+                "B08Q8GZ554"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9i9twcphh",
+          "layoutId": "vh-w2s",
+          "module": "features.featureWideAnd2",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Was **unsere** Möbel ausmacht",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Wide Bild. Plus 2 Squares mit USP Icons.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Pflegeleicht**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square mit grünem Icon Kreis Reißverschluss.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Solide** verarbeitet",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square mit grünem Icon Kreis Schild Check.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9i9txce3l",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "product_grid",
+              "textOverlay": {
+                "heading": "Alle **Möbel** Produkte im Überblick",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Vollkatalog Möbel.",
+              "asins": [
+                "B077P4PS6Z",
+                "B07GFPC58W",
+                "B07QWXMYV9",
+                "B082XGXKJ8",
+                "B08Q8GZ554",
+                "B0947617BM",
+                "B09476KMMH",
+                "B09PLDVF2L",
+                "B0BKQ6XDKV",
+                "B0BSQKWT89",
+                "B0CCRQGD6P",
+                "B0CX1SJ9R1",
+                "B0D31GY3G4",
+                "B0DGXG1P6J",
+                "B0DM9FFLYF",
+                "B0DPX47HDJ",
+                "B0DXFLWC1L",
+                "B0F32S7FDB",
+                "B0F32SN1W4",
+                "B0F32WYZ3G",
+                "B0F8BR8ZW5",
+                "B0FDBBPRZ1",
+                "B0FDWRR38Q",
+                "B0FGDGNZNT",
+                "B0FGDH2KMJ",
+                "B0FH2P23B3",
+                "B0FHHG2CKS",
+                "B0FNWSKJP2",
+                "B0FX54GMQS",
+                "B0GX1BYJXM"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9i9txgrty",
+          "layoutId": "1",
+          "module": "footer.crossSellBanner",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Praktisch fürs Zuhause, weiter zu **Haushalt**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Haushalt ansehen"
+              },
+              "brief": "Cross Sell Banner.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Haushalt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
