@@ -304,6 +304,86 @@ function buildBestsellerPage() {
   ]);
 }
 
+function buildHaushaltPage() {
+  return page('Haushalt', [
+    section('1', [
+      tile('image',
+        ov('Alltag, **leichter** gemacht', 'Stauraum, Küche, Kinder, Alltagshilfen', '', [], 'Sortiment entdecken'),
+        'Hero Bild Hauswirtschaftsraum oder Küche.'
+      ),
+    ], 'hero.fullWidthHero'),
+
+    section('4x2grid', [
+      tile('image', ov('**SCHWERLASTREGALE**'), 'Sub Tile Schwerlastregale.'),
+      tile('image', ov('**AUFBEWAHRUNG**'), 'Sub Tile Aufbewahrung.'),
+      tile('image', ov('**KÜCHENGERÄTE**'), 'Sub Tile Küchengeräte.'),
+      tile('image', ov('**MÜLLEIMER**'), 'Sub Tile Mülleimer.'),
+      tile('image', ov('**EISWÜRFELMASCHINEN**'), 'Sub Tile Eiswürfelmaschinen.'),
+      tile('image', ov('**HEIZGERÄTE**'), 'Sub Tile Heizgeräte.'),
+      tile('image', ov('**ALLTAGSHILFEN**'), 'Sub Tile Alltagshilfen, Rollator oder Bollerwagen.'),
+      tile('image', ov('**KINDERBEDARF**'), 'Sub Tile Kinderbedarf.'),
+    ], 'categoryNav.grid8tiles'),
+
+    section('1', [
+      tile('shoppable_image',
+        ov('Küche, **alles** zur Hand', 'Geräte und Helfer'),
+        'Shoppable Bild Küche. 5 Hotspots auf Airfryer, Mülleimer, Eiswürfelmaschine, Aufbewahrungsbox, Multifunktionstisch.',
+        { asins: ['B0DHGHCZTF', 'B0CK4QSWF9', 'B0D5QK6TLM', 'B0CD7VC4D8', 'B0BWN6NB4Z'] }
+      ),
+    ], 'products.shoppableFullWidth'),
+
+    section('1', [
+      tile('best_sellers',
+        ov('Die beliebtesten **Küchengeräte**'),
+        'Bestseller Küchengeräte plus Eiswürfelmaschine.',
+        { asins: topAsinsBySub('Haushalt', 'Küchengeräte', 3).concat(topAsinsBySub('Haushalt', 'Eiswürfelmaschinen', 1), topAsinsBySub('Haushalt', 'Mülleimer', 1)) }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    section('1', [
+      tile('image', ov('Stauraum, **klar** sortiert'), 'Trenner Textbild. Lager Makro.'),
+    ], 'hero.fullWidthHero'),
+
+    section('1', [
+      tile('best_sellers',
+        ov('**Mehr** Stauraum', 'Schwerlastregale und Aufbewahrung'),
+        'Bestseller Schwerlastregale plus Aufbewahrung.',
+        { asins: topAsinsBySub('Haushalt', 'Schwerlastregale', 6).concat(topAsinsBySub('Haushalt', 'Aufbewahrung', 2)) }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    section('1', [
+      tile('best_sellers',
+        ov('Hilfe im **Alltag**', 'Kinderbedarf und Alltagshilfen'),
+        'Bestseller Kinderbedarf plus Alltagshilfen.',
+        { asins: topAsinsBySub('Haushalt', 'Kinderbedarf', 5).concat(topAsinsBySub('Haushalt', 'Alltagshilfen', 3)) }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    section('1', [
+      tile('best_sellers',
+        ov('Wärme zum **Einschalten**'),
+        'Bestseller Heizgeräte.',
+        { asins: topAsinsBySub('Haushalt', 'Heizgeräte', 2) }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    section('vh-w2s', [
+      tile('image', ov('**Praktisch** im Alltag'), 'Wide Bild.'),
+      tile('image', ov('**Durchdacht**'), 'Square mit grünem Icon Kreis Schild Check.'),
+      tile('image', ov('**Langlebig**'), 'Square mit grünem Icon Kreis Stern.'),
+    ], 'features.featureWideAnd2'),
+
+    section('1', [
+      tile('product_grid',
+        ov('Alle **Haushalt** Produkte im Überblick'),
+        'Vollkatalog Haushalt.',
+        { asins: allAsinsByCat('Haushalt') }
+      ),
+    ], 'products.fullWidthGrid'),
+  ]);
+}
+
 function buildHeimwerkenPage() {
   return page('Heimwerken', [
     section('1', [
@@ -676,6 +756,7 @@ function buildStore() {
   pages.push(buildMoebelPage());
   pages.push(buildFreizeitPage());
   pages.push(buildHeimwerkenPage());
+  pages.push(buildHaushaltPage());
   // weitere Pages folgen in nächsten Schritten
 
   // Resolve parentName references → echte parentId

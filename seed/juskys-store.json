@@ -918,11 +918,11 @@
   "products": [],
   "pages": [
     {
-      "id": "mok9k8le5d6f",
+      "id": "mok9l96jdg9m",
       "name": "Home",
       "sections": [
         {
-          "id": "mok9k8lcdg4n",
+          "id": "mok9l96fjj2u",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -947,7 +947,7 @@
           ]
         },
         {
-          "id": "mok9k8lcs3ss",
+          "id": "mok9l96g6efo",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -963,7 +963,7 @@
               "brief": "Kategorie Tile Garten. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9k8lhehqr",
+              "linkUrl": "/page/mok9l96m4j8r",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -981,7 +981,7 @@
               "brief": "Kategorie Tile Möbel. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9k8litp3g",
+              "linkUrl": "/page/mok9l96netbc",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -999,7 +999,7 @@
               "brief": "Kategorie Tile Freizeit. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9k8li500n",
+              "linkUrl": "/page/mok9l96nl28v",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1017,7 +1017,7 @@
               "brief": "Kategorie Tile Heimwerken. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9k8liiz9u",
+              "linkUrl": "/page/mok9l96nmgpf",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1035,7 +1035,7 @@
               "brief": "Kategorie Tile Haushalt. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "page:Haushalt",
+              "linkUrl": "/page/mok9l96p8p19",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1062,7 +1062,7 @@
           ]
         },
         {
-          "id": "mok9k8lc9x1y",
+          "id": "mok9l96g6wen",
           "layoutId": "std-2equal",
           "module": "trust.trustSplit",
           "tiles": [
@@ -1105,7 +1105,7 @@
           ]
         },
         {
-          "id": "mok9k8lc25uq",
+          "id": "mok9l96g0f60",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1130,7 +1130,7 @@
           ]
         },
         {
-          "id": "mok9k8lcgpnl",
+          "id": "mok9l96gez3a",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -1161,7 +1161,7 @@
           ]
         },
         {
-          "id": "mok9k8ld3264",
+          "id": "mok9l96gf5xj",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1193,7 +1193,7 @@
           ]
         },
         {
-          "id": "mok9k8ldgwm9",
+          "id": "mok9l96gtlmw",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1218,7 +1218,7 @@
           ]
         },
         {
-          "id": "mok9k8lebzxt",
+          "id": "mok9l96j2xqm",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -1249,7 +1249,7 @@
           ]
         },
         {
-          "id": "mok9k8le1zt1",
+          "id": "mok9l96jg15x",
           "layoutId": "2x2wide",
           "module": "features.featureGrid4wide",
           "tiles": [
@@ -1328,7 +1328,7 @@
           ]
         },
         {
-          "id": "mok9k8le1ct0",
+          "id": "mok9l96jkvdv",
           "layoutId": "1",
           "module": "engagement.followBanner",
           "tiles": [
@@ -1353,7 +1353,7 @@
           ]
         },
         {
-          "id": "mok9k8levzpm",
+          "id": "mok9l96je922",
           "layoutId": "2x2wide",
           "module": "footer.categoryNavFooter",
           "tiles": [
@@ -1369,7 +1369,7 @@
               "brief": "Footer Kategorie Tile mit Mini Icon.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9k8lhehqr",
+              "linkUrl": "/page/mok9l96m4j8r",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1387,7 +1387,7 @@
               "brief": "Footer Kategorie Tile mit Mini Icon.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9k8litp3g",
+              "linkUrl": "/page/mok9l96netbc",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1405,7 +1405,7 @@
               "brief": "Footer Kategorie Tile mit Mini Icon.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "page:Haushalt",
+              "linkUrl": "/page/mok9l96p8p19",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1434,11 +1434,11 @@
       ]
     },
     {
-      "id": "mok9k8lfk9gi",
+      "id": "mok9l96k5ok7",
       "name": "Bestseller",
       "sections": [
         {
-          "id": "mok9k8leeavr",
+          "id": "mok9l96j7v1b",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1463,7 +1463,7 @@
           ]
         },
         {
-          "id": "mok9k8lebah1",
+          "id": "mok9l96jin1j",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -1479,7 +1479,7 @@
               "brief": "Sub Navigator Tile, Filter zu Garten Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9k8lhehqr",
+              "linkUrl": "/page/mok9l96m4j8r",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1497,7 +1497,7 @@
               "brief": "Sub Navigator Tile, Filter zu Möbel Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9k8litp3g",
+              "linkUrl": "/page/mok9l96netbc",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1515,7 +1515,7 @@
               "brief": "Sub Navigator Tile, Filter zu Freizeit Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9k8li500n",
+              "linkUrl": "/page/mok9l96nl28v",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1533,7 +1533,7 @@
               "brief": "Sub Navigator Tile, Filter zu Heimwerken Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9k8liiz9u",
+              "linkUrl": "/page/mok9l96nmgpf",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1551,7 +1551,7 @@
               "brief": "Sub Navigator Tile, Filter zu Haushalt Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "page:Haushalt",
+              "linkUrl": "/page/mok9l96p8p19",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1578,7 +1578,7 @@
           ]
         },
         {
-          "id": "mok9k8lebjtg",
+          "id": "mok9l96jwct3",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1616,7 +1616,7 @@
           ]
         },
         {
-          "id": "mok9k8le2x7y",
+          "id": "mok9l96jd854",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1650,7 +1650,7 @@
           ]
         },
         {
-          "id": "mok9k8lfh357",
+          "id": "mok9l96jy88a",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1684,7 +1684,7 @@
           ]
         },
         {
-          "id": "mok9k8lfvyo4",
+          "id": "mok9l96jxpnd",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1716,7 +1716,7 @@
           ]
         },
         {
-          "id": "mok9k8lf3uhq",
+          "id": "mok9l96jt9tq",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1748,7 +1748,7 @@
           ]
         },
         {
-          "id": "mok9k8lf0w1j",
+          "id": "mok9l96jndzu",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1782,7 +1782,7 @@
           ]
         },
         {
-          "id": "mok9k8lfdie0",
+          "id": "mok9l96j51sl",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1813,7 +1813,7 @@
           ]
         },
         {
-          "id": "mok9k8lfjg7w",
+          "id": "mok9l96jl2wj",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -1876,11 +1876,11 @@
       ]
     },
     {
-      "id": "mok9k8lhehqr",
+      "id": "mok9l96m4j8r",
       "name": "Garten",
       "sections": [
         {
-          "id": "mok9k8lfkntc",
+          "id": "mok9l96kpahp",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1905,7 +1905,7 @@
           ]
         },
         {
-          "id": "mok9k8lfp751",
+          "id": "mok9l96kbops",
           "layoutId": "4x2grid",
           "module": "categoryNav.grid8tiles",
           "tiles": [
@@ -2056,7 +2056,7 @@
           ]
         },
         {
-          "id": "mok9k8lfofw9",
+          "id": "mok9l96kcbk9",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -2171,7 +2171,7 @@
           ]
         },
         {
-          "id": "mok9k8lffy2r",
+          "id": "mok9l96krf4w",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2202,7 +2202,7 @@
           ]
         },
         {
-          "id": "mok9k8lfdkis",
+          "id": "mok9l96kjdu4",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2236,7 +2236,7 @@
           ]
         },
         {
-          "id": "mok9k8lfac7r",
+          "id": "mok9l96khp8j",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -2261,7 +2261,7 @@
           ]
         },
         {
-          "id": "mok9k8lfohda",
+          "id": "mok9l96ks754",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2292,7 +2292,7 @@
           ]
         },
         {
-          "id": "mok9k8lfo170",
+          "id": "mok9l96k09q9",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2326,7 +2326,7 @@
           ]
         },
         {
-          "id": "mok9k8lf36tk",
+          "id": "mok9l96krv8l",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -2387,7 +2387,7 @@
           ]
         },
         {
-          "id": "mok9k8lh66rp",
+          "id": "mok9l96mub28",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2473,7 +2473,7 @@
           ]
         },
         {
-          "id": "mok9k8lhrsdy",
+          "id": "mok9l96mop5i",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -2489,7 +2489,7 @@
               "brief": "Cross Sell Banner. Mini Bild Wohnraum.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9k8litp3g",
+              "linkUrl": "/page/mok9l96netbc",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -2500,11 +2500,11 @@
       ]
     },
     {
-      "id": "mok9k8litp3g",
+      "id": "mok9l96netbc",
       "name": "Möbel",
       "sections": [
         {
-          "id": "mok9k8lhbjup",
+          "id": "mok9l96m8x82",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -2529,7 +2529,7 @@
           ]
         },
         {
-          "id": "mok9k8lhr45g",
+          "id": "mok9l96mleyh",
           "layoutId": "4x2grid",
           "module": "categoryNav.grid8tiles",
           "tiles": [
@@ -2680,7 +2680,7 @@
           ]
         },
         {
-          "id": "mok9k8lhssfb",
+          "id": "mok9l96mat3o",
           "layoutId": "2x2wide",
           "module": "categoryNav.grid4wide",
           "tiles": [
@@ -2759,7 +2759,7 @@
           ]
         },
         {
-          "id": "mok9k8lhbbgs",
+          "id": "mok9l96mp0en",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2790,7 +2790,7 @@
           ]
         },
         {
-          "id": "mok9k8lh4xzh",
+          "id": "mok9l96mc1xl",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2824,7 +2824,7 @@
           ]
         },
         {
-          "id": "mok9k8lh6h7j",
+          "id": "mok9l96mruvq",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -2849,7 +2849,7 @@
           ]
         },
         {
-          "id": "mok9k8lhyra6",
+          "id": "mok9l96m6mq9",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2880,7 +2880,7 @@
           ]
         },
         {
-          "id": "mok9k8li4x2y",
+          "id": "mok9l96n60or",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2913,7 +2913,7 @@
           ]
         },
         {
-          "id": "mok9k8li926v",
+          "id": "mok9l96nfrh3",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2942,7 +2942,7 @@
           ]
         },
         {
-          "id": "mok9k8li0b4h",
+          "id": "mok9l96n6j7p",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -3003,7 +3003,7 @@
           ]
         },
         {
-          "id": "mok9k8li869r",
+          "id": "mok9l96nida3",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3059,7 +3059,7 @@
           ]
         },
         {
-          "id": "mok9k8likhnf",
+          "id": "mok9l96nc5ky",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -3075,7 +3075,7 @@
               "brief": "Cross Sell Banner.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "page:Haushalt",
+              "linkUrl": "/page/mok9l96p8p19",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -3086,11 +3086,11 @@
       ]
     },
     {
-      "id": "mok9k8li500n",
+      "id": "mok9l96nl28v",
       "name": "Freizeit",
       "sections": [
         {
-          "id": "mok9k8lilh1o",
+          "id": "mok9l96njc3h",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -3115,7 +3115,7 @@
           ]
         },
         {
-          "id": "mok9k8liwcfu",
+          "id": "mok9l96n4x23",
           "layoutId": "2x2wide",
           "module": "categoryNav.grid4wide",
           "tiles": [
@@ -3194,7 +3194,7 @@
           ]
         },
         {
-          "id": "mok9k8lizxtl",
+          "id": "mok9l96nr02h",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -3225,7 +3225,7 @@
           ]
         },
         {
-          "id": "mok9k8liunb9",
+          "id": "mok9l96nuooi",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3256,7 +3256,7 @@
           ]
         },
         {
-          "id": "mok9k8li1xf6",
+          "id": "mok9l96n38o3",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3289,7 +3289,7 @@
           ]
         },
         {
-          "id": "mok9k8liljd1",
+          "id": "mok9l96nimos",
           "layoutId": "lg-2stack",
           "module": "products.productShowcaseLarge",
           "tiles": [
@@ -3350,7 +3350,7 @@
           ]
         },
         {
-          "id": "mok9k8lizmgp",
+          "id": "mok9l96n44cz",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3380,7 +3380,7 @@
           ]
         },
         {
-          "id": "mok9k8li8t40",
+          "id": "mok9l96npmbi",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -3441,7 +3441,7 @@
           ]
         },
         {
-          "id": "mok9k8li6s2m",
+          "id": "mok9l96nrorg",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3484,7 +3484,7 @@
           ]
         },
         {
-          "id": "mok9k8liwf94",
+          "id": "mok9l96nfjjh",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -3500,7 +3500,7 @@
               "brief": "Cross Sell Banner.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9k8lhehqr",
+              "linkUrl": "/page/mok9l96m4j8r",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -3511,11 +3511,11 @@
       ]
     },
     {
-      "id": "mok9k8liiz9u",
+      "id": "mok9l96nmgpf",
       "name": "Heimwerken",
       "sections": [
         {
-          "id": "mok9k8linf2t",
+          "id": "mok9l96ndz5b",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -3540,7 +3540,7 @@
           ]
         },
         {
-          "id": "mok9k8liwz8j",
+          "id": "mok9l96nrzic",
           "layoutId": "vh-w2s",
           "module": "categoryNav.wideAnd2squares",
           "tiles": [
@@ -3601,7 +3601,7 @@
           ]
         },
         {
-          "id": "mok9k8liltqy",
+          "id": "mok9l96nl17e",
           "layoutId": "std-2equal",
           "module": "categoryNav.grid2col",
           "tiles": [
@@ -3644,7 +3644,7 @@
           ]
         },
         {
-          "id": "mok9k8liwxab",
+          "id": "mok9l96n1trb",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3673,7 +3673,7 @@
           ]
         },
         {
-          "id": "mok9k8lilrcs",
+          "id": "mok9l96n0j0f",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3703,7 +3703,7 @@
           ]
         },
         {
-          "id": "mok9k8li7069",
+          "id": "mok9l96nfsgo",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -3728,7 +3728,7 @@
           ]
         },
         {
-          "id": "mok9k8lijpi6",
+          "id": "mok9l96ns355",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3760,7 +3760,7 @@
           ]
         },
         {
-          "id": "mok9k8linnx4",
+          "id": "mok9l96npl1m",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -3821,7 +3821,7 @@
           ]
         },
         {
-          "id": "mok9k8li5pa0",
+          "id": "mok9l96nm6hw",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3860,7 +3860,7 @@
           ]
         },
         {
-          "id": "mok9k8lip2p1",
+          "id": "mok9l96nqvuf",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -3876,7 +3876,485 @@
               "brief": "Cross Sell Banner.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "page:Haushalt",
+              "linkUrl": "/page/mok9l96p8p19",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mok9l96p8p19",
+      "name": "Haushalt",
+      "sections": [
+        {
+          "id": "mok9l96nd98s",
+          "layoutId": "1",
+          "module": "hero.fullWidthHero",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Alltag, **leichter** gemacht",
+                "subheading": "Stauraum, Küche, Kinder, Alltagshilfen",
+                "body": "",
+                "bullets": [],
+                "cta": "Sortiment entdecken"
+              },
+              "brief": "Hero Bild Hauswirtschaftsraum oder Küche.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9l96n8p5l",
+          "layoutId": "4x2grid",
+          "module": "categoryNav.grid8tiles",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**SCHWERLASTREGALE**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Schwerlastregale.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**AUFBEWAHRUNG**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Aufbewahrung.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**KÜCHENGERÄTE**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Küchengeräte.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**MÜLLEIMER**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Mülleimer.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**EISWÜRFELMASCHINEN**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Eiswürfelmaschinen.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**HEIZGERÄTE**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Heizgeräte.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**ALLTAGSHILFEN**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Alltagshilfen, Rollator oder Bollerwagen.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**KINDERBEDARF**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Kinderbedarf.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9l96nfghv",
+          "layoutId": "1",
+          "module": "products.shoppableFullWidth",
+          "tiles": [
+            {
+              "type": "shoppable_image",
+              "textOverlay": {
+                "heading": "Küche, **alles** zur Hand",
+                "subheading": "Geräte und Helfer",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Shoppable Bild Küche. 5 Hotspots auf Airfryer, Mülleimer, Eiswürfelmaschine, Aufbewahrungsbox, Multifunktionstisch.",
+              "asins": [
+                "B0DHGHCZTF",
+                "B0CK4QSWF9",
+                "B0D5QK6TLM",
+                "B0CD7VC4D8",
+                "B0BWN6NB4Z"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9l96onpa3",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Die beliebtesten **Küchengeräte**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Bestseller Küchengeräte plus Eiswürfelmaschine.",
+              "asins": [
+                "B0DHGHCZTF",
+                "B0D5QK6TLM",
+                "B0CK4QSWF9"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9l96okpr7",
+          "layoutId": "1",
+          "module": "hero.fullWidthHero",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Stauraum, **klar** sortiert",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Trenner Textbild. Lager Makro.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9l96olg9p",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "**Mehr** Stauraum",
+                "subheading": "Schwerlastregale und Aufbewahrung",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Bestseller Schwerlastregale plus Aufbewahrung.",
+              "asins": [
+                "B014IUTSW8",
+                "B09DJSHBW8",
+                "B07TYTLYPY",
+                "B083Y4T2TY",
+                "B09DK3LY2V",
+                "B09DKF8RPX",
+                "B0BWN6NB4Z",
+                "B0CD7VC4D8"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9l96piiau",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Hilfe im **Alltag**",
+                "subheading": "Kinderbedarf und Alltagshilfen",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Bestseller Kinderbedarf plus Alltagshilfen.",
+              "asins": [
+                "B0DKFQPHTC",
+                "B0BMB245DT",
+                "B0CLV392MC",
+                "B0CLXXZ67P",
+                "B0DHH2NCTS",
+                "B082HMV596",
+                "B0DPX5QVZM",
+                "B0FG8835LQ"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9l96psgvn",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Wärme zum **Einschalten**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Bestseller Heizgeräte.",
+              "asins": [
+                "B0CJRMN1JH",
+                "B0FQCMFLLY"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9l96p6zv6",
+          "layoutId": "vh-w2s",
+          "module": "features.featureWideAnd2",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Praktisch** im Alltag",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Wide Bild.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Durchdacht**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square mit grünem Icon Kreis Schild Check.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Langlebig**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square mit grünem Icon Kreis Stern.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9l96pnbc2",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "product_grid",
+              "textOverlay": {
+                "heading": "Alle **Haushalt** Produkte im Überblick",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Vollkatalog Haushalt.",
+              "asins": [
+                "B0CJRMN1JH",
+                "B0FQCMFLLY",
+                "B014IUTSW8",
+                "B07TYTLYPY",
+                "B083Y4T2TY",
+                "B09DJSHBW8",
+                "B09DK3LY2V",
+                "B09DKF8RPX",
+                "B0BWN67H4J",
+                "B0BWN8GRN4",
+                "B0FBRJCCWV",
+                "B0BWN6NB4Z",
+                "B0CD7VC4D8",
+                "B0CK4QSWF9",
+                "B0D5QK6TLM",
+                "B0DHGHCZTF",
+                "B0BMB245DT",
+                "B0CLV392MC",
+                "B0CLXXZ67P",
+                "B0DHH2NCTS",
+                "B0DKFR5HQ6",
+                "B0DL5PKK41",
+                "B0DL5RWYTD",
+                "B0F32VLNPV",
+                "B082HMV596",
+                "B0DPX5QVZM",
+                "B0FG8835LQ",
+                "B0DKFQPHTC"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
