@@ -304,6 +304,78 @@ function buildBestsellerPage() {
   ]);
 }
 
+function buildHeimwerkenPage() {
+  return page('Heimwerken', [
+    section('1', [
+      tile('image',
+        ov('Werkzeug, das **arbeitet**', 'Werkzeug, Leitern, Sackkarren, Kamine', '', [], 'Werkzeug entdecken'),
+        'Hero Bild Werkstatt oder Werkzeug Setup.'
+      ),
+    ], 'hero.fullWidthHero'),
+
+    section('vh-w2s', [
+      tile('image', ov('**WERKZEUG**'), 'Sub Tile Werkzeug.'),
+      tile('image', ov('**SACKKARREN**'), 'Sub Tile Sackkarren.'),
+      tile('image', ov('**LEITERN**', 'Multifunktionsleitern'), 'Sub Tile Leitern.'),
+    ], 'categoryNav.wideAnd2squares'),
+
+    section('std-2equal', [
+      tile('image', ov('**ELEKTROKAMINE**'), 'Sub Tile Elektrokamine, Standkamin Rendering.'),
+      tile('image', ov('**Robust** gebaut', 'Werkzeug das hält'), 'USP Highlight Tile mit grünem Icon Kreis Werkzeug.'),
+    ], 'categoryNav.grid2col'),
+
+    section('1', [
+      tile('best_sellers',
+        ov('Die beliebtesten **Werkzeuge**'),
+        'Bestseller Werkzeug.',
+        { asins: topAsinsBySub('Heimwerken', 'Werkzeug', 3) }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    section('1', [
+      tile('best_sellers',
+        ov('**Stark** im Alltag', 'Sackkarren und Leitern'),
+        'Bestseller Sackkarren plus Leitern.',
+        { asins: topAsinsBySub('Heimwerken', 'Sackkarren', 3).concat(topAsinsBySub('Heimwerken', 'Multifunktionsleitern', 1)) }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    section('1', [
+      tile('image', ov('Wärme, **wenn** es kalt wird'), 'Trenner Textbild. Holzfeuer Makro.'),
+    ], 'hero.fullWidthHero'),
+
+    section('1', [
+      tile('best_sellers',
+        ov('Wärme zum **Einschalten**', 'Elektrokamine und Heizstrahler'),
+        'Bestseller Elektrokamine plus Heizstrahler die hier Doppel Mapping haben.',
+        { asins: topAsinsBySub('Heimwerken', 'Elektrokamine', 6) }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    section('vh-w2s', [
+      tile('image', ov('**Robust**, sicher, durchdacht'), 'Wide Bild.'),
+      tile('image', ov('**Belastbar**'), 'Square mit grünem Icon Kreis Werkzeug.'),
+      tile('image', ov('**Sicher**'), 'Square mit grünem Icon Kreis Schild Check.'),
+    ], 'features.featureWideAnd2'),
+
+    section('1', [
+      tile('product_grid',
+        ov('Alle **Heimwerken** Produkte im Überblick'),
+        'Vollkatalog Heimwerken.',
+        { asins: allAsinsByCat('Heimwerken') }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    section('1', [
+      tile('image',
+        ov('Praktisch fürs Haus, weiter zu **Haushalt**', '', '', [], 'Haushalt ansehen'),
+        'Cross Sell Banner.',
+        { linkUrl: linkTo('Haushalt') }
+      ),
+    ], 'footer.crossSellBanner'),
+  ]);
+}
+
 function buildFreizeitPage() {
   return page('Freizeit', [
     section('1', [
@@ -603,6 +675,7 @@ function buildStore() {
   pages.push(buildGartenPage());
   pages.push(buildMoebelPage());
   pages.push(buildFreizeitPage());
+  pages.push(buildHeimwerkenPage());
   // weitere Pages folgen in nächsten Schritten
 
   // Resolve parentName references → echte parentId

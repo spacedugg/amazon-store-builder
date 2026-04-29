@@ -918,11 +918,11 @@
   "products": [],
   "pages": [
     {
-      "id": "mok9j907d9gi",
+      "id": "mok9k8le5d6f",
       "name": "Home",
       "sections": [
         {
-          "id": "mok9j90478b0",
+          "id": "mok9k8lcdg4n",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -947,7 +947,7 @@
           ]
         },
         {
-          "id": "mok9j904p2ql",
+          "id": "mok9k8lcs3ss",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -963,7 +963,7 @@
               "brief": "Kategorie Tile Garten. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9j90bjx0y",
+              "linkUrl": "/page/mok9k8lhehqr",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -981,7 +981,7 @@
               "brief": "Kategorie Tile Möbel. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9j90cxo1n",
+              "linkUrl": "/page/mok9k8litp3g",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -999,7 +999,7 @@
               "brief": "Kategorie Tile Freizeit. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9j90c9qqj",
+              "linkUrl": "/page/mok9k8li500n",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1017,7 +1017,7 @@
               "brief": "Kategorie Tile Heimwerken. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "page:Heimwerken",
+              "linkUrl": "/page/mok9k8liiz9u",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1062,7 +1062,7 @@
           ]
         },
         {
-          "id": "mok9j904nvcm",
+          "id": "mok9k8lc9x1y",
           "layoutId": "std-2equal",
           "module": "trust.trustSplit",
           "tiles": [
@@ -1105,7 +1105,7 @@
           ]
         },
         {
-          "id": "mok9j90430ap",
+          "id": "mok9k8lc25uq",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1130,7 +1130,7 @@
           ]
         },
         {
-          "id": "mok9j905re54",
+          "id": "mok9k8lcgpnl",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -1161,7 +1161,7 @@
           ]
         },
         {
-          "id": "mok9j905n93l",
+          "id": "mok9k8ld3264",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1193,7 +1193,7 @@
           ]
         },
         {
-          "id": "mok9j9056a0a",
+          "id": "mok9k8ldgwm9",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1218,7 +1218,7 @@
           ]
         },
         {
-          "id": "mok9j907hua0",
+          "id": "mok9k8lebzxt",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -1249,7 +1249,7 @@
           ]
         },
         {
-          "id": "mok9j9072yfb",
+          "id": "mok9k8le1zt1",
           "layoutId": "2x2wide",
           "module": "features.featureGrid4wide",
           "tiles": [
@@ -1328,7 +1328,7 @@
           ]
         },
         {
-          "id": "mok9j907bxsr",
+          "id": "mok9k8le1ct0",
           "layoutId": "1",
           "module": "engagement.followBanner",
           "tiles": [
@@ -1353,7 +1353,7 @@
           ]
         },
         {
-          "id": "mok9j9072sy5",
+          "id": "mok9k8levzpm",
           "layoutId": "2x2wide",
           "module": "footer.categoryNavFooter",
           "tiles": [
@@ -1369,7 +1369,7 @@
               "brief": "Footer Kategorie Tile mit Mini Icon.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9j90bjx0y",
+              "linkUrl": "/page/mok9k8lhehqr",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1387,7 +1387,7 @@
               "brief": "Footer Kategorie Tile mit Mini Icon.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9j90cxo1n",
+              "linkUrl": "/page/mok9k8litp3g",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1434,11 +1434,11 @@
       ]
     },
     {
-      "id": "mok9j908bye2",
+      "id": "mok9k8lfk9gi",
       "name": "Bestseller",
       "sections": [
         {
-          "id": "mok9j907w8l0",
+          "id": "mok9k8leeavr",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1463,7 +1463,7 @@
           ]
         },
         {
-          "id": "mok9j9073a3j",
+          "id": "mok9k8lebah1",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -1479,7 +1479,7 @@
               "brief": "Sub Navigator Tile, Filter zu Garten Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9j90bjx0y",
+              "linkUrl": "/page/mok9k8lhehqr",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1497,7 +1497,7 @@
               "brief": "Sub Navigator Tile, Filter zu Möbel Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9j90cxo1n",
+              "linkUrl": "/page/mok9k8litp3g",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1515,7 +1515,7 @@
               "brief": "Sub Navigator Tile, Filter zu Freizeit Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9j90c9qqj",
+              "linkUrl": "/page/mok9k8li500n",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1533,7 +1533,7 @@
               "brief": "Sub Navigator Tile, Filter zu Heimwerken Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "page:Heimwerken",
+              "linkUrl": "/page/mok9k8liiz9u",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1578,7 +1578,7 @@
           ]
         },
         {
-          "id": "mok9j907b1re",
+          "id": "mok9k8lebjtg",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1616,7 +1616,7 @@
           ]
         },
         {
-          "id": "mok9j907z5wx",
+          "id": "mok9k8le2x7y",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1650,7 +1650,7 @@
           ]
         },
         {
-          "id": "mok9j9084mbp",
+          "id": "mok9k8lfh357",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1684,7 +1684,7 @@
           ]
         },
         {
-          "id": "mok9j908ydvr",
+          "id": "mok9k8lfvyo4",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1716,7 +1716,7 @@
           ]
         },
         {
-          "id": "mok9j908578o",
+          "id": "mok9k8lf3uhq",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1748,7 +1748,7 @@
           ]
         },
         {
-          "id": "mok9j908o326",
+          "id": "mok9k8lf0w1j",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1782,7 +1782,7 @@
           ]
         },
         {
-          "id": "mok9j9080md6",
+          "id": "mok9k8lfdie0",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1813,7 +1813,7 @@
           ]
         },
         {
-          "id": "mok9j9088c57",
+          "id": "mok9k8lfjg7w",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -1876,11 +1876,11 @@
       ]
     },
     {
-      "id": "mok9j90bjx0y",
+      "id": "mok9k8lhehqr",
       "name": "Garten",
       "sections": [
         {
-          "id": "mok9j908xqo1",
+          "id": "mok9k8lfkntc",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1905,7 +1905,7 @@
           ]
         },
         {
-          "id": "mok9j9081puv",
+          "id": "mok9k8lfp751",
           "layoutId": "4x2grid",
           "module": "categoryNav.grid8tiles",
           "tiles": [
@@ -2056,7 +2056,7 @@
           ]
         },
         {
-          "id": "mok9j908vt3w",
+          "id": "mok9k8lfofw9",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -2171,7 +2171,7 @@
           ]
         },
         {
-          "id": "mok9j9084ga3",
+          "id": "mok9k8lffy2r",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2202,7 +2202,7 @@
           ]
         },
         {
-          "id": "mok9j908x7z5",
+          "id": "mok9k8lfdkis",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2236,7 +2236,7 @@
           ]
         },
         {
-          "id": "mok9j908raes",
+          "id": "mok9k8lfac7r",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -2261,7 +2261,7 @@
           ]
         },
         {
-          "id": "mok9j90815go",
+          "id": "mok9k8lfohda",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2292,7 +2292,7 @@
           ]
         },
         {
-          "id": "mok9j9084p4y",
+          "id": "mok9k8lfo170",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2326,7 +2326,7 @@
           ]
         },
         {
-          "id": "mok9j908bhje",
+          "id": "mok9k8lf36tk",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -2387,7 +2387,7 @@
           ]
         },
         {
-          "id": "mok9j90byo61",
+          "id": "mok9k8lh66rp",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2473,7 +2473,7 @@
           ]
         },
         {
-          "id": "mok9j90bs28u",
+          "id": "mok9k8lhrsdy",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -2489,7 +2489,7 @@
               "brief": "Cross Sell Banner. Mini Bild Wohnraum.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9j90cxo1n",
+              "linkUrl": "/page/mok9k8litp3g",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -2500,11 +2500,11 @@
       ]
     },
     {
-      "id": "mok9j90cxo1n",
+      "id": "mok9k8litp3g",
       "name": "Möbel",
       "sections": [
         {
-          "id": "mok9j90bjh75",
+          "id": "mok9k8lhbjup",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -2529,7 +2529,7 @@
           ]
         },
         {
-          "id": "mok9j90bvy3d",
+          "id": "mok9k8lhr45g",
           "layoutId": "4x2grid",
           "module": "categoryNav.grid8tiles",
           "tiles": [
@@ -2680,7 +2680,7 @@
           ]
         },
         {
-          "id": "mok9j90baqq9",
+          "id": "mok9k8lhssfb",
           "layoutId": "2x2wide",
           "module": "categoryNav.grid4wide",
           "tiles": [
@@ -2759,7 +2759,7 @@
           ]
         },
         {
-          "id": "mok9j90bffb2",
+          "id": "mok9k8lhbbgs",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2790,7 +2790,7 @@
           ]
         },
         {
-          "id": "mok9j90b4uno",
+          "id": "mok9k8lh4xzh",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2824,7 +2824,7 @@
           ]
         },
         {
-          "id": "mok9j90b7h6y",
+          "id": "mok9k8lh6h7j",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -2849,7 +2849,7 @@
           ]
         },
         {
-          "id": "mok9j90bkg47",
+          "id": "mok9k8lhyra6",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2880,7 +2880,7 @@
           ]
         },
         {
-          "id": "mok9j90ce3eb",
+          "id": "mok9k8li4x2y",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -2913,7 +2913,7 @@
           ]
         },
         {
-          "id": "mok9j90ca5fj",
+          "id": "mok9k8li926v",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -2942,7 +2942,7 @@
           ]
         },
         {
-          "id": "mok9j90ca1k7",
+          "id": "mok9k8li0b4h",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -3003,7 +3003,7 @@
           ]
         },
         {
-          "id": "mok9j90c15wc",
+          "id": "mok9k8li869r",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3059,7 +3059,7 @@
           ]
         },
         {
-          "id": "mok9j90cz3xj",
+          "id": "mok9k8likhnf",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -3086,11 +3086,11 @@
       ]
     },
     {
-      "id": "mok9j90c9qqj",
+      "id": "mok9k8li500n",
       "name": "Freizeit",
       "sections": [
         {
-          "id": "mok9j90chj83",
+          "id": "mok9k8lilh1o",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -3115,7 +3115,7 @@
           ]
         },
         {
-          "id": "mok9j90clmzb",
+          "id": "mok9k8liwcfu",
           "layoutId": "2x2wide",
           "module": "categoryNav.grid4wide",
           "tiles": [
@@ -3194,7 +3194,7 @@
           ]
         },
         {
-          "id": "mok9j90c8lyu",
+          "id": "mok9k8lizxtl",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -3225,7 +3225,7 @@
           ]
         },
         {
-          "id": "mok9j90cob8p",
+          "id": "mok9k8liunb9",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3256,7 +3256,7 @@
           ]
         },
         {
-          "id": "mok9j90cyfpq",
+          "id": "mok9k8li1xf6",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3289,7 +3289,7 @@
           ]
         },
         {
-          "id": "mok9j90ckhns",
+          "id": "mok9k8liljd1",
           "layoutId": "lg-2stack",
           "module": "products.productShowcaseLarge",
           "tiles": [
@@ -3350,7 +3350,7 @@
           ]
         },
         {
-          "id": "mok9j90cl0ot",
+          "id": "mok9k8lizmgp",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3380,7 +3380,7 @@
           ]
         },
         {
-          "id": "mok9j90ckkd1",
+          "id": "mok9k8li8t40",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -3441,7 +3441,7 @@
           ]
         },
         {
-          "id": "mok9j90cnorc",
+          "id": "mok9k8li6s2m",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -3484,7 +3484,7 @@
           ]
         },
         {
-          "id": "mok9j90cjobi",
+          "id": "mok9k8liwf94",
           "layoutId": "1",
           "module": "footer.crossSellBanner",
           "tiles": [
@@ -3500,7 +3500,383 @@
               "brief": "Cross Sell Banner.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "/page/mok9j90bjx0y",
+              "linkUrl": "/page/mok9k8lhehqr",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mok9k8liiz9u",
+      "name": "Heimwerken",
+      "sections": [
+        {
+          "id": "mok9k8linf2t",
+          "layoutId": "1",
+          "module": "hero.fullWidthHero",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Werkzeug, das **arbeitet**",
+                "subheading": "Werkzeug, Leitern, Sackkarren, Kamine",
+                "body": "",
+                "bullets": [],
+                "cta": "Werkzeug entdecken"
+              },
+              "brief": "Hero Bild Werkstatt oder Werkzeug Setup.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9k8liwz8j",
+          "layoutId": "vh-w2s",
+          "module": "categoryNav.wideAnd2squares",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**WERKZEUG**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Werkzeug.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**SACKKARREN**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Sackkarren.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**LEITERN**",
+                "subheading": "Multifunktionsleitern",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Leitern.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9k8liltqy",
+          "layoutId": "std-2equal",
+          "module": "categoryNav.grid2col",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**ELEKTROKAMINE**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Elektrokamine, Standkamin Rendering.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Robust** gebaut",
+                "subheading": "Werkzeug das hält",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "USP Highlight Tile mit grünem Icon Kreis Werkzeug.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9k8liwxab",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Die beliebtesten **Werkzeuge**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Bestseller Werkzeug.",
+              "asins": [
+                "B0DQ5K13RK",
+                "B0DZ2XH5BS",
+                "B0FT3RZSCP"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9k8lilrcs",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "**Stark** im Alltag",
+                "subheading": "Sackkarren und Leitern",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Bestseller Sackkarren plus Leitern.",
+              "asins": [
+                "B07Z7QCTXW",
+                "B07Z7R4CMY",
+                "B0D9QSYSB7",
+                "B072KDRTHG"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9k8li7069",
+          "layoutId": "1",
+          "module": "hero.fullWidthHero",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Wärme, **wenn** es kalt wird",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Trenner Textbild. Holzfeuer Makro.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9k8lijpi6",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Wärme zum **Einschalten**",
+                "subheading": "Elektrokamine und Heizstrahler",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Bestseller Elektrokamine plus Heizstrahler die hier Doppel Mapping haben.",
+              "asins": [
+                "B0BBZX31R4",
+                "B0BBZYJLF2",
+                "B0FHHG49H8",
+                "B0FQJWR99K",
+                "B0CJRMN1JH",
+                "B0FQCMFLLY"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9k8linnx4",
+          "layoutId": "vh-w2s",
+          "module": "features.featureWideAnd2",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Robust**, sicher, durchdacht",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Wide Bild.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Belastbar**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square mit grünem Icon Kreis Werkzeug.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Sicher**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square mit grünem Icon Kreis Schild Check.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9k8li5pa0",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "product_grid",
+              "textOverlay": {
+                "heading": "Alle **Heimwerken** Produkte im Überblick",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Vollkatalog Heimwerken.",
+              "asins": [
+                "B072KDRTHG",
+                "B07Z7QCTXW",
+                "B07Z7R4CMY",
+                "B0D9QSYSB7",
+                "B0DQ5K13RK",
+                "B0DZ2XH5BS",
+                "B0FT3RZSCP",
+                "B0BBZX31R4",
+                "B0BBZYJLF2",
+                "B0FHHG49H8",
+                "B0FQJWR99K",
+                "B0CJRMN1JH",
+                "B0FQCMFLLY"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9k8lip2p1",
+          "layoutId": "1",
+          "module": "footer.crossSellBanner",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Praktisch fürs Haus, weiter zu **Haushalt**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Haushalt ansehen"
+              },
+              "brief": "Cross Sell Banner.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Haushalt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
