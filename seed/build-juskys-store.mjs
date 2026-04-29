@@ -304,6 +304,64 @@ function buildBestsellerPage() {
   ]);
 }
 
+// Standard Subpage Template, vier Sections.
+// Wird für jede Sub mit ASINs aufgerufen.
+function buildSubpage(parentName, subName, headlineWord) {
+  var subAsins = allAsinsBySub(parentName, subName);
+  if (subAsins.length === 0) return null;
+  var word = headlineWord || subName;
+  return page(subName, [
+    section('1', [
+      tile('image',
+        ov(subName + ' bei **' + word + '**', 'Top Auswahl Juskys ' + subName, '', [], 'Sortiment ansehen'),
+        'Hero Bild Sub Page ' + subName + '. Freigestelltes Leitprodukt aus dieser Sub.'
+      ),
+    ], 'hero.fullWidthHero'),
+    section('1', [
+      tile('best_sellers',
+        ov('Die beliebtesten **' + subName + '**'),
+        'Bestseller Grid in dieser Sub.',
+        { asins: subAsins.slice(0, 8) }
+      ),
+    ], 'products.fullWidthGrid'),
+    section('1', [
+      tile('product_grid',
+        ov('Alle **' + subName + '** Produkte'),
+        'Vollkatalog dieser Sub.',
+        { asins: subAsins }
+      ),
+    ], 'products.fullWidthGrid'),
+    section('1', [
+      tile('image',
+        ov('Mehr aus **' + parentName + '**', '', '', [], parentName + ' ansehen'),
+        'Cross Link zur Eltern Kategorie.',
+        { linkUrl: linkTo(parentName) }
+      ),
+    ], 'footer.crossSellBanner'),
+  ], parentName);
+}
+
+// Alle Subs pro Eltern Page in der gewünschten Reihenfolge
+var SUB_LIST = {
+  Garten: ['Gartenmöbel Sets', 'Gartenaufbewahrung', 'Gartenbedarf', 'Sonnenschutz', 'Gartenliegen', 'Gartenbänke', 'Gartentische', 'Bierzeltgarnituren', 'Kissenboxen', 'Grills', 'Hängematten', 'Überdachungen', 'Poolbedarf', 'Gewächshäuser'],
+  Möbel: ['Sofas', 'Polsterbetten', 'Boxspringbetten', 'Metallbetten', 'Kinderbetten', 'Wohnmöbel', 'Massagesessel', 'Büromöbel', 'Matratzen', 'Schlafkomfort', 'Schminktische', 'Badausstattung'],
+  Freizeit: ['Camping', 'Koffersets', 'Dachzelte', 'Sport'],
+  Heimwerken: ['Werkzeug', 'Sackkarren', 'Multifunktionsleitern', 'Elektrokamine'],
+  Haushalt: ['Schwerlastregale', 'Aufbewahrung', 'Küchengeräte', 'Mülleimer', 'Eiswürfelmaschinen', 'Heizgeräte', 'Alltagshilfen', 'Kinderbedarf'],
+  Tierbedarf: ['Hundebedarf', 'Katzenbedarf', 'Freilaufgehege'],
+};
+
+function buildAllSubpages() {
+  var subpages = [];
+  Object.keys(SUB_LIST).forEach(function(parent) {
+    SUB_LIST[parent].forEach(function(sub) {
+      var p = buildSubpage(parent, sub);
+      if (p) subpages.push(p);
+    });
+  });
+  return subpages;
+}
+
 function buildTierbedarfPage() {
   return page('Tierbedarf', [
     section('1', [
@@ -891,6 +949,9 @@ function buildStore() {
   pages.push(buildTierbedarfPage());
   pages.push(buildSalePage());
   pages.push(buildUeberUnsPage());
+
+  // 42 Subpages, eine pro Sub mit mindestens 1 ASIN
+  buildAllSubpages().forEach(function(p) { pages.push(p); });
 
   // Resolve parentName references → echte parentId
   var pageIdByName = {};
