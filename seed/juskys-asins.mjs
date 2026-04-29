@@ -84,6 +84,14 @@ export var SPECIAL_ASINS = {
   'B0CD7VC4D8': { cat: 'Haushalt', sub: 'Aufbewahrung' }, // Aufbewahrungsbox 6er Set
   'B0BWN6NB4Z': { cat: 'Haushalt', sub: 'Aufbewahrung' }, // Multifunktionstisch 3-teilig
 
+  // Edge Cases mit nur Startseite Tag (kein Sub Path)
+  'B0DKFQPHTC': { cat: 'Haushalt', sub: 'Kinderbedarf' }, // Sprossenwand für Kinder
+  'B0GJD4M2JB': { cat: 'Garten', sub: 'Poolbedarf' }, // Solardusche 20/35/40/60L
+  'B0GLH196B3': { cat: 'Garten', sub: 'Gartenmöbel Sets' }, // Polyrattan Lounge Manacor Abdeckung
+  'B0GQTJ1MN1': { cat: 'Garten', sub: 'Gartenliegen' }, // Sonnenliege SunScape
+  'B0GSZTR899': { cat: 'Garten', sub: 'Poolbedarf' }, // Sandfilteranlage 250W Timer
+  'B0GX1BYJXM': { cat: 'Möbel', sub: 'Wohnmöbel' }, // Beistelltisch Zadar XL
+
   // Polsterbett mit Doppel Tagging Polster + Kinder
   'B0BKQ6XDKV': { cat: 'Möbel', sub: 'Polsterbetten', also: [{ cat: 'Möbel', sub: 'Kinderbetten' }] },
   'B0BSQKWT89': { cat: 'Möbel', sub: 'Polsterbetten', also: [{ cat: 'Möbel', sub: 'Kinderbetten' }] },
@@ -276,6 +284,38 @@ export var RAW_ASINS = [
   { asin: 'B079YT88DT', title: 'Juskys Hundetransportbox Lassie M', visible: true, paths: ['Tierbedarf > Hundebedarf'], onHomepage: true },
   { asin: 'B0C4FHBSR1', title: 'Juskys Hundetreppe 36 cm grau', visible: true, paths: ['Tierbedarf > Hundebedarf'] },
   { asin: 'B09M7GCK5Y', title: 'Juskys Freilaufgehege 2x2x2m', visible: true, paths: ['Tierbedarf > Freilaufgehege'] },
+
+  // ─── FREIZEIT ───────────────────────────────────────────
+  // Sport (aus Unterwegs & Freizeit ohne Sub)
+  { asin: 'B01861S8O4', title: 'Juskys Fahrradanhänger 90 Liter', visible: true, paths: ['Unterwegs & Freizeit'] },
+  { asin: 'B0D72ZH6JL', title: 'Juskys Tischtennisplatte Mini Flexi Schwarz', visible: true, paths: ['Unterwegs & Freizeit'] },
+  { asin: 'B0D7322KJH', title: 'Juskys 5in1 Spieltisch Ballzauber', visible: true, paths: ['Unterwegs & Freizeit'] },
+  { asin: 'B0DG5HDYLH', title: 'Juskys Nordic Walking Stöcke Schwarz', visible: true, paths: ['Unterwegs & Freizeit'] },
+  // Camping
+  { asin: 'B0C37FB3B3', title: 'Juskys Kompressor Kühlbox 12/24/230 V Grau', visible: true, paths: ['Unterwegs & Freizeit > Camping'] },
+  { asin: 'B0C53LQFX8', title: 'Juskys Kühlbox elektrisch 12 V 230 V', visible: true, paths: ['Unterwegs & Freizeit > Camping'] },
+  { asin: 'B0C9DFG1YJ', title: 'Juskys Campingtisch Picco 90x52 Silber', visible: true, paths: ['Unterwegs & Freizeit > Camping'] },
+  { asin: 'B0C9JLFJ56', title: 'Juskys Campingstuhl Lido faltbar', visible: true, paths: ['Unterwegs & Freizeit > Camping'] },
+  { asin: 'B0D8BKJK3K', title: 'Juskys Luftmatratze Sapri M Schwarz', visible: true, paths: ['Unterwegs & Freizeit > Camping'] },
+  // Koffersets
+  { asin: 'B0C33XGG3Y', title: 'Juskys Trolley Reisekoffer Set 5 teilig Blau', visible: true, paths: ['Unterwegs & Freizeit > Koffersets'] },
+  { asin: 'B0C33Z7919', title: 'Juskys Trolley Reisekoffer Set 5 teilig Schwarz', visible: true, paths: ['Unterwegs & Freizeit > Koffersets'], onHomepage: true },
+  { asin: 'B0C42XSVZC', title: 'Juskys Hartschale Kofferset 4 teilig Blau', visible: true, paths: ['Unterwegs & Freizeit > Koffersets'] },
+  { asin: 'B0F6NGM2VL', title: 'Juskys Hartschale Kofferset 3 teilig Rot', visible: true, paths: ['Unterwegs & Freizeit > Koffersets'] },
+  { asin: 'B0F6NGR2RT', title: 'Juskys Hartschale Kofferset Reisekoffer 3 teilig Anthrazit', visible: true, paths: ['Unterwegs & Freizeit > Koffersets'], onHomepage: true },
+  { asin: 'B0F6NJ533F', title: 'Juskys Hartschale Kofferset 3 teilig Rosa', visible: true, paths: ['Unterwegs & Freizeit > Koffersets'] },
+  { asin: 'B0F6NKNZFF', title: 'Juskys Hartschale Kofferset 4 teilig Dunkelgrün', visible: true, paths: ['Unterwegs & Freizeit > Koffersets'], onHomepage: true },
+  // Dachzelte
+  { asin: 'B0F94FM1WR', title: 'Juskys Autodachzelt Lago', visible: true, paths: ['Unterwegs & Freizeit > Dachzelte'] },
+
+  // ─── EDGE CASES (nur Startseite Tag im Source) ──────────
+  // Diese werden über SPECIAL_ASINS gemappt
+  { asin: 'B0DKFQPHTC', title: 'Juskys Sprossenwand für Kinder', visible: true, paths: [], onHomepage: true },
+  { asin: 'B0GJD4M2JB', title: 'Juskys Solardusche Victoria 20/35/40/60 Liter', visible: true, paths: [], onHomepage: true },
+  { asin: 'B0GLH196B3', title: 'Juskys Polyrattan Lounge Manacor Abdeckung', visible: true, paths: [], onHomepage: true },
+  { asin: 'B0GQTJ1MN1', title: 'Juskys Sonnenliege SunScape Natur Akazie', visible: true, paths: [], onHomepage: true },
+  { asin: 'B0GSZTR899', title: 'Juskys Sandfilteranlage 250 W Timer', visible: true, paths: [], onHomepage: true },
+  { asin: 'B0GX1BYJXM', title: 'Juskys Beistelltisch Zadar XL', visible: true, paths: [], onHomepage: true },
 ];
 
 // Liefert die strukturierte ASIN Liste (alle visible mit Mapping)
