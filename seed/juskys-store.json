@@ -1449,120 +1449,6 @@
           ]
         },
         {
-          "layoutId": "2s-4grid",
-          "module": "categoryNav.grid6tiles",
-          "tiles": [
-            {
-              "type": "image",
-              "textOverlay": {
-                "heading": "**GARTEN**",
-                "subheading": "Top in Garten",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Sub Navigator Tile, Filter zu Garten Bestseller.",
-              "asins": [],
-              "hotspots": [],
-              "linkUrl": "page:Garten",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "product",
-              "textAlign": "left"
-            },
-            {
-              "type": "image",
-              "textOverlay": {
-                "heading": "**MÖBEL**",
-                "subheading": "Top in Möbel",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Sub Navigator Tile, Filter zu Möbel Bestseller.",
-              "asins": [],
-              "hotspots": [],
-              "linkUrl": "page:Möbel",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "product",
-              "textAlign": "left"
-            },
-            {
-              "type": "image",
-              "textOverlay": {
-                "heading": "**FREIZEIT**",
-                "subheading": "Top in Freizeit",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Sub Navigator Tile, Filter zu Freizeit Bestseller.",
-              "asins": [],
-              "hotspots": [],
-              "linkUrl": "page:Freizeit",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "product",
-              "textAlign": "left"
-            },
-            {
-              "type": "image",
-              "textOverlay": {
-                "heading": "**HEIMWERKEN**",
-                "subheading": "Top in Heimwerken",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Sub Navigator Tile, Filter zu Heimwerken Bestseller.",
-              "asins": [],
-              "hotspots": [],
-              "linkUrl": "page:Heimwerken",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "product",
-              "textAlign": "left"
-            },
-            {
-              "type": "image",
-              "textOverlay": {
-                "heading": "**HAUSHALT**",
-                "subheading": "Top in Haushalt",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Sub Navigator Tile, Filter zu Haushalt Bestseller.",
-              "asins": [],
-              "hotspots": [],
-              "linkUrl": "page:Haushalt",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "product",
-              "textAlign": "left"
-            },
-            {
-              "type": "image",
-              "textOverlay": {
-                "heading": "**TIERBEDARF**",
-                "subheading": "Top in Tierbedarf",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Sub Navigator Tile, Filter zu Tierbedarf Bestseller.",
-              "asins": [],
-              "hotspots": [],
-              "linkUrl": "page:Tierbedarf",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "product",
-              "textAlign": "left"
-            }
-          ]
-        },
-        {
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1601,6 +1487,30 @@
         },
         {
           "layoutId": "1",
+          "module": "lifestyle.fullWidthLifestyle",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Bereit für die **Saison**",
+                "subheading": "Top in Garten",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Trenner Garten. Terrasse oder Lounge im Tageslicht.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
             {
@@ -1612,7 +1522,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Top 8 Bestseller aus Garten.",
+              "brief": "Bestseller Grid Top 8 aus Garten.",
               "asins": [
                 "B07P7PRG78",
                 "B07YZ99NDM",
@@ -1634,6 +1544,30 @@
         },
         {
           "layoutId": "1",
+          "module": "lifestyle.fullWidthLifestyle",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Wohnen, das **bleibt**",
+                "subheading": "Top in Möbel",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Trenner Möbel. Wohnzimmer mit Sofa und Sessel.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
             {
@@ -1645,7 +1579,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Top 8 Bestseller aus Möbel.",
+              "brief": "Bestseller Grid Top 8 aus Möbel.",
               "asins": [
                 "B0GX1BYJXM",
                 "B077P4PS6Z",
@@ -1667,6 +1601,30 @@
         },
         {
           "layoutId": "1",
+          "module": "lifestyle.fullWidthLifestyle",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Raus, **erleben**, ankommen",
+                "subheading": "Top in Freizeit",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Trenner Freizeit. Camping oder Outdoor Setting.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
             {
@@ -1678,7 +1636,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Top 6 Bestseller aus Freizeit.",
+              "brief": "Bestseller Grid Top 6 aus Freizeit.",
               "asins": [
                 "B0C33Z7919",
                 "B0F6NGR2RT",
@@ -1698,6 +1656,30 @@
         },
         {
           "layoutId": "1",
+          "module": "lifestyle.fullWidthLifestyle",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Werkzeug, das **arbeitet**",
+                "subheading": "Top in Heimwerken",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Trenner Heimwerken. Werkstatt oder Werkzeug Setup.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
             {
@@ -1709,7 +1691,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Top 6 Bestseller aus Heimwerken.",
+              "brief": "Bestseller Grid Top 6 aus Heimwerken.",
               "asins": [
                 "B072KDRTHG",
                 "B07Z7QCTXW",
@@ -1729,6 +1711,30 @@
         },
         {
           "layoutId": "1",
+          "module": "lifestyle.fullWidthLifestyle",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Alltag, **leichter** gemacht",
+                "subheading": "Top in Haushalt",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Trenner Haushalt. Küche oder Hauswirtschaftsraum.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
             {
@@ -1740,7 +1746,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Top 8 Bestseller aus Haushalt.",
+              "brief": "Bestseller Grid Top 8 aus Haushalt.",
               "asins": [
                 "B014IUTSW8",
                 "B09DJSHBW8",
@@ -1762,6 +1768,30 @@
         },
         {
           "layoutId": "1",
+          "module": "lifestyle.fullWidthLifestyle",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Für **deinen** Liebling",
+                "subheading": "Top in Tierbedarf",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Trenner Tierbedarf. Hund oder Katze in Wohnsetting.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
             {
@@ -1773,7 +1803,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Top 5 Bestseller aus Tierbedarf.",
+              "brief": "Bestseller Grid Top 5 aus Tierbedarf.",
               "asins": [
                 "B079YT88DT",
                 "B01CSNO9YO",

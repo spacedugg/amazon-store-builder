@@ -274,22 +274,33 @@ function buildHomePage() {
 }
 
 function buildBestsellerPage() {
-  return page('Bestseller', [
+  // Pro Kategorie ein Trenner Lifestyle Image plus Bestseller Grid darunter.
+  // So sind die Kategorien visuell klar getrennt.
+  function catBlock(catName, n, trennerHeading, trennerSubheading, trennerBrief) {
+    return [
+      section('1', [
+        tile('image',
+          ov(trennerHeading, trennerSubheading),
+          trennerBrief
+        ),
+      ], 'lifestyle.fullWidthLifestyle'),
+      section('1', [
+        tile('best_sellers',
+          ov('Top in **' + catName + '**'),
+          'Bestseller Grid Top ' + n + ' aus ' + catName + '.',
+          { asins: topAsinsByCat(catName, n) }
+        ),
+      ], 'products.fullWidthGrid'),
+    ];
+  }
+
+  var sections = [
     section('1', [
       tile('image',
         ov('Was unsere **Kunden** lieben', 'Die meistgekauften Juskys Produkte'),
         'Hero Bild Mix aus mehreren Kategorien.'
       ),
     ], 'hero.fullWidthHero'),
-
-    section('2s-4grid', [
-      tile('image', ov('**GARTEN**', 'Top in Garten'), 'Sub Navigator Tile, Filter zu Garten Bestseller.', { linkUrl: linkTo('Garten') }),
-      tile('image', ov('**MÖBEL**', 'Top in Möbel'), 'Sub Navigator Tile, Filter zu Möbel Bestseller.', { linkUrl: linkTo('Möbel') }),
-      tile('image', ov('**FREIZEIT**', 'Top in Freizeit'), 'Sub Navigator Tile, Filter zu Freizeit Bestseller.', { linkUrl: linkTo('Freizeit') }),
-      tile('image', ov('**HEIMWERKEN**', 'Top in Heimwerken'), 'Sub Navigator Tile, Filter zu Heimwerken Bestseller.', { linkUrl: linkTo('Heimwerken') }),
-      tile('image', ov('**HAUSHALT**', 'Top in Haushalt'), 'Sub Navigator Tile, Filter zu Haushalt Bestseller.', { linkUrl: linkTo('Haushalt') }),
-      tile('image', ov('**TIERBEDARF**', 'Top in Tierbedarf'), 'Sub Navigator Tile, Filter zu Tierbedarf Bestseller.', { linkUrl: linkTo('Tierbedarf') }),
-    ], 'categoryNav.grid6tiles'),
 
     section('1', [
       tile('best_sellers',
@@ -298,37 +309,23 @@ function buildBestsellerPage() {
         { asins: STRUCTURED_ASINS.filter(function(a) { return a.onHomepage; }).slice(0, 12).map(function(a) { return a.asin; }) }
       ),
     ], 'products.fullWidthGrid'),
+  ];
 
-    section('1', [
-      tile('best_sellers', ov('Top in **Garten**'), 'Top 8 Bestseller aus Garten.', { asins: topAsinsByCat('Garten', 8) }),
-    ], 'products.fullWidthGrid'),
+  // Pro Kategorie ein Lifestyle Trenner plus Grid
+  catBlock('Garten', 8, 'Bereit für die **Saison**', 'Top in Garten', 'Lifestyle Trenner Garten. Terrasse oder Lounge im Tageslicht.').forEach(function(s) { sections.push(s); });
+  catBlock('Möbel', 8, 'Wohnen, das **bleibt**', 'Top in Möbel', 'Lifestyle Trenner Möbel. Wohnzimmer mit Sofa und Sessel.').forEach(function(s) { sections.push(s); });
+  catBlock('Freizeit', 6, 'Raus, **erleben**, ankommen', 'Top in Freizeit', 'Lifestyle Trenner Freizeit. Camping oder Outdoor Setting.').forEach(function(s) { sections.push(s); });
+  catBlock('Heimwerken', 6, 'Werkzeug, das **arbeitet**', 'Top in Heimwerken', 'Lifestyle Trenner Heimwerken. Werkstatt oder Werkzeug Setup.').forEach(function(s) { sections.push(s); });
+  catBlock('Haushalt', 8, 'Alltag, **leichter** gemacht', 'Top in Haushalt', 'Lifestyle Trenner Haushalt. Küche oder Hauswirtschaftsraum.').forEach(function(s) { sections.push(s); });
+  catBlock('Tierbedarf', 5, 'Für **deinen** Liebling', 'Top in Tierbedarf', 'Lifestyle Trenner Tierbedarf. Hund oder Katze in Wohnsetting.').forEach(function(s) { sections.push(s); });
 
-    section('1', [
-      tile('best_sellers', ov('Top in **Möbel**'), 'Top 8 Bestseller aus Möbel.', { asins: topAsinsByCat('Möbel', 8) }),
-    ], 'products.fullWidthGrid'),
+  sections.push(section('vh-w2s', [
+    tile('image', ov('Warum **Juskys**'), 'Wide Image USP Bild.'),
+    tile('image', ov('**Geprüfte** Qualität'), 'Square mit grünem Icon Kreis Schild Check.'),
+    tile('image', ov('**Versandkostenfrei**'), 'Square mit grünem Icon Kreis Truck.'),
+  ], 'features.featureWideAnd2'));
 
-    section('1', [
-      tile('best_sellers', ov('Top in **Freizeit**'), 'Top 6 Bestseller aus Freizeit.', { asins: topAsinsByCat('Freizeit', 6) }),
-    ], 'products.fullWidthGrid'),
-
-    section('1', [
-      tile('best_sellers', ov('Top in **Heimwerken**'), 'Top 6 Bestseller aus Heimwerken.', { asins: topAsinsByCat('Heimwerken', 6) }),
-    ], 'products.fullWidthGrid'),
-
-    section('1', [
-      tile('best_sellers', ov('Top in **Haushalt**'), 'Top 8 Bestseller aus Haushalt.', { asins: topAsinsByCat('Haushalt', 8) }),
-    ], 'products.fullWidthGrid'),
-
-    section('1', [
-      tile('best_sellers', ov('Top in **Tierbedarf**'), 'Top 5 Bestseller aus Tierbedarf.', { asins: topAsinsByCat('Tierbedarf', 5) }),
-    ], 'products.fullWidthGrid'),
-
-    section('vh-w2s', [
-      tile('image', ov('Warum **Juskys**'), 'Wide Image USP Bild.'),
-      tile('image', ov('**Geprüfte** Qualität'), 'Square mit grünem Icon Kreis Schild Check.'),
-      tile('image', ov('**Versandkostenfrei**'), 'Square mit grünem Icon Kreis Truck.'),
-    ], 'features.featureWideAnd2'),
-  ]);
+  return page('Bestseller', sections);
 }
 
 // Hero Headlines pro Subpage, Mapping per Eltern Kategorie und Sub.
