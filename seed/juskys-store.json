@@ -7,7 +7,914 @@
   "headerBannerColor": "#93bd26",
   "headerBanner": null,
   "headerBannerMobile": null,
-  "asins": [],
+  "asins": [
+    {
+      "asin": "B01D1NTA4E",
+      "title": "Juskys Rasenwalze Fritz 60 cm",
+      "category": "Garten",
+      "subcategory": "Gartenbedarf"
+    },
+    {
+      "asin": "B071HGY7FT",
+      "title": "Juskys PVC Sichtschutzstreifen 35m anthrazit",
+      "category": "Garten",
+      "subcategory": "Sonnenschutz"
+    },
+    {
+      "asin": "B07C42GGDW",
+      "title": "Juskys Ampelschirm Brazil 350 cm grau/creme",
+      "category": "Garten",
+      "subcategory": "Sonnenschutz"
+    },
+    {
+      "asin": "B07FGXFBQ4",
+      "title": "Juskys 2-Sitzer Gartenbank Modena",
+      "category": "Garten",
+      "subcategory": "Gartenbänke"
+    },
+    {
+      "asin": "B07FGXKCGK",
+      "title": "Juskys Gartenbank Sanremo 122 cm",
+      "category": "Garten",
+      "subcategory": "Gartenbänke"
+    },
+    {
+      "asin": "B07MV853GG",
+      "title": "Juskys Polyrattan Sitzgruppe Fort Myers schwarz/grau",
+      "category": "Garten",
+      "subcategory": "Gartenmöbel Sets"
+    },
+    {
+      "asin": "B07NDV9XNS",
+      "title": "Juskys Polyrattan Gartenbank Monaco grau-meliert",
+      "category": "Garten",
+      "subcategory": "Gartenmöbel Sets"
+    },
+    {
+      "asin": "B07P7PRG78",
+      "title": "Juskys PVC Sichtschutzstreifen 4er Set anthrazit",
+      "category": "Garten",
+      "subcategory": "Sonnenschutz"
+    },
+    {
+      "asin": "B07YZ99NDM",
+      "title": "Juskys Schubkarre 100L 250 kg",
+      "category": "Garten",
+      "subcategory": "Gartenbedarf"
+    },
+    {
+      "asin": "B083Y4PYY1",
+      "title": "JUSKYS Aluminium Gewächshaus 4,75 qm",
+      "category": "Garten",
+      "subcategory": "Gewächshäuser"
+    },
+    {
+      "asin": "B084JQYGYM",
+      "title": "Juskys Polyrattan Lounge Manacor Schwarz/Grau",
+      "category": "Garten",
+      "subcategory": "Gartenmöbel Sets"
+    },
+    {
+      "asin": "B08591S6T4",
+      "title": "Juskys Aluminium Gartengarnitur Milano 8+1 Grau",
+      "category": "Garten",
+      "subcategory": "Gartenmöbel Sets"
+    },
+    {
+      "asin": "B087FQZV2Y",
+      "title": "Juskys Bierzeltgarnitur Bichl 3-teilig",
+      "category": "Garten",
+      "subcategory": "Bierzeltgarnituren"
+    },
+    {
+      "asin": "B087QDPGYJ",
+      "title": "Juskys Solardusche Victoria",
+      "category": "Garten",
+      "subcategory": "Poolbedarf"
+    },
+    {
+      "asin": "B089XXX8XZ",
+      "title": "Juskys Bierzeltgarnitur Amberg Rattan-Optik",
+      "category": "Garten",
+      "subcategory": "Bierzeltgarnituren"
+    },
+    {
+      "asin": "B08L3V12L2",
+      "title": "Juskys Polyrattan Balkonset Bayamo Schwarz/Creme",
+      "category": "Garten",
+      "subcategory": "Gartenmöbel Sets"
+    },
+    {
+      "asin": "B08THWGMN4",
+      "title": "Juskys Seitenmarkise Dubai 500 x 190 cm beige",
+      "category": "Garten",
+      "subcategory": "Sonnenschutz"
+    },
+    {
+      "asin": "B0BG3617K6",
+      "title": "Juskys Terrassenüberdachung Borneo 5,5 x 3 m Dunkelgrau",
+      "category": "Garten",
+      "subcategory": "Überdachungen"
+    },
+    {
+      "asin": "B0BGHGSSHX",
+      "title": "Juskys Carport Flachdach 5x3 m Dunkelgrau",
+      "category": "Garten",
+      "subcategory": "Überdachungen"
+    },
+    {
+      "asin": "B0BTJ5ZTDV",
+      "title": "Juskys Terrassenüberdachung 4x3 m Grau",
+      "category": "Garten",
+      "subcategory": "Überdachungen"
+    },
+    {
+      "asin": "B0BTYY5FYG",
+      "title": "Juskys Doppel Loungebett Kreta Grau",
+      "category": "Garten",
+      "subcategory": "Gartenmöbel Sets"
+    },
+    {
+      "asin": "B0BW93BWPQ",
+      "title": "Juskys Wintergarten 12 m² Grau",
+      "category": "Garten",
+      "subcategory": "Überdachungen"
+    },
+    {
+      "asin": "B0BX3XGM2F",
+      "title": "Juskys Hängesessel Aria Grau",
+      "category": "Garten",
+      "subcategory": "Hängematten"
+    },
+    {
+      "asin": "B0BZ1397VS",
+      "title": "Juskys Bierzeltgarnitur 220 cm Natur",
+      "category": "Garten",
+      "subcategory": "Bierzeltgarnituren"
+    },
+    {
+      "asin": "B0C45Q45QQ",
+      "title": "Juskys Schlauchtrommel 30 m Rot Grau",
+      "category": "Garten",
+      "subcategory": "Gartenbedarf"
+    },
+    {
+      "asin": "B0C45RKBYV",
+      "title": "Juskys Schlauchtrommel 30 m Blau Dunkelgrau",
+      "category": "Garten",
+      "subcategory": "Gartenbedarf"
+    },
+    {
+      "asin": "B0C6N1D6S1",
+      "title": "Juskys Balkonmöbel Set Ostana 3-teilig Hellgrau",
+      "category": "Garten",
+      "subcategory": "Gartenmöbel Sets"
+    },
+    {
+      "asin": "B0CD7VVBPB",
+      "title": "Juskys Holzunterstand Anbau Links",
+      "category": "Garten",
+      "subcategory": "Gartenaufbewahrung"
+    },
+    {
+      "asin": "B0CD7XR3LH",
+      "title": "Juskys Metall Gerätehaus M Holzunterstand rechts",
+      "category": "Garten",
+      "subcategory": "Gartenaufbewahrung"
+    },
+    {
+      "asin": "B0CD7ZZ4LG",
+      "title": "Juskys Holzunterstand Enno Anthrazit",
+      "category": "Garten",
+      "subcategory": "Gartenaufbewahrung"
+    },
+    {
+      "asin": "B0CHS9ML2L",
+      "title": "Juskys Wintergarten 15 m² Grau",
+      "category": "Garten",
+      "subcategory": "Überdachungen"
+    },
+    {
+      "asin": "B0CR1H8BTF",
+      "title": "Juskys Balkonmöbel Set Bala",
+      "category": "Garten",
+      "subcategory": "Gartenmöbel Sets"
+    },
+    {
+      "asin": "B0CR48JPMH",
+      "title": "Juskys Rattan Korbsessel Cody 2er Set Natur",
+      "category": "Garten",
+      "subcategory": "Gartenmöbel Sets"
+    },
+    {
+      "asin": "B0CRVS21Q6",
+      "title": "Juskys Sonnenliege Lamia klappbar Grau",
+      "category": "Garten",
+      "subcategory": "Gartenliegen"
+    },
+    {
+      "asin": "B0CSYWSLZ6",
+      "title": "Juskys Gartenmöbel Lounge St. Tropez Holz Grau",
+      "category": "Garten",
+      "subcategory": "Gartenmöbel Sets"
+    },
+    {
+      "asin": "B0CSZ14149",
+      "title": "Juskys Polyrattan Gartentisch Yoro 60x60 Schwarz",
+      "category": "Garten",
+      "subcategory": "Gartentische"
+    },
+    {
+      "asin": "B0CSZ3SGL1",
+      "title": "Juskys Polyrattan Lounge Santorini Schwarz",
+      "category": "Garten",
+      "subcategory": "Gartenmöbel Sets"
+    },
+    {
+      "asin": "B0CSZ4VTS9",
+      "title": "Juskys Polyrattan Gartentisch Yoro Ø 80 Schwarz",
+      "category": "Garten",
+      "subcategory": "Gartentische"
+    },
+    {
+      "asin": "B0CXJBMHMD",
+      "title": "Juskys Polyrattan Doppelliege Syros Schwarz",
+      "category": "Garten",
+      "subcategory": "Gartenliegen"
+    },
+    {
+      "asin": "B0CXJCHQMG",
+      "title": "Juskys Gartenmöbel Bari 5-teilig Lounge Grau",
+      "category": "Garten",
+      "subcategory": "Gartenmöbel Sets"
+    },
+    {
+      "asin": "B0D4DVLW4B",
+      "title": "Juskys Hängematte Cata mit Gestell Anthrazit",
+      "category": "Garten",
+      "subcategory": "Hängematten"
+    },
+    {
+      "asin": "B0D4DX12NF",
+      "title": "Juskys Hängematte Paya mit Gestell",
+      "category": "Garten",
+      "subcategory": "Hängematten"
+    },
+    {
+      "asin": "B0D5QLN7GF",
+      "title": "Juskys Gartentisch ausziehbar Laki Anthrazit",
+      "category": "Garten",
+      "subcategory": "Gartentische"
+    },
+    {
+      "asin": "B0D734W3QV",
+      "title": "Juskys Rasentraktorheber 400 kg Schwarz",
+      "category": "Garten",
+      "subcategory": "Gartenbedarf"
+    },
+    {
+      "asin": "B0DHGMBC6X",
+      "title": "Juskys Poolabdeckung rund 4 m",
+      "category": "Garten",
+      "subcategory": "Poolbedarf"
+    },
+    {
+      "asin": "B0DQTZBMSW",
+      "title": "Juskys Aufblasbare Badewanne M",
+      "category": "Garten",
+      "subcategory": "Gartenbedarf"
+    },
+    {
+      "asin": "B0DV5K5J2S",
+      "title": "Juskys Lamellendach Tahiti 3x5,9 m Anthrazit",
+      "category": "Garten",
+      "subcategory": "Überdachungen"
+    },
+    {
+      "asin": "B0DXFM883Y",
+      "title": "Juskys Senkrechtmarkise Barbados 200x310 cm Grau",
+      "category": "Garten",
+      "subcategory": "Sonnenschutz"
+    },
+    {
+      "asin": "B0F1FYNCBL",
+      "title": "Juskys Mähroboter Garage mit Pflanzkasten Anthrazit",
+      "category": "Garten",
+      "subcategory": "Gartenbedarf"
+    },
+    {
+      "asin": "B0F54DJW2F",
+      "title": "Juskys Rope Gartenstühle 2er Set Dunkelgrau",
+      "category": "Garten",
+      "subcategory": "Gartenmöbel Sets"
+    },
+    {
+      "asin": "B0F672LPGR",
+      "title": "Juskys Gartenstühle Calena 4er Set Anthrazit",
+      "category": "Garten",
+      "subcategory": "Gartenmöbel Sets"
+    },
+    {
+      "asin": "B0F6NSNLR9",
+      "title": "Juskys Gartenmöbel Abdeckplane CoverSafe Pro",
+      "category": "Garten",
+      "subcategory": "Gartenbedarf"
+    },
+    {
+      "asin": "B0FHHNTZYQ",
+      "title": "Juskys Metall Komposter 800 L Schwarz",
+      "category": "Garten",
+      "subcategory": "Gartenbedarf"
+    },
+    {
+      "asin": "B0FHHQ2ZLS",
+      "title": "Juskys Metall Komposter 800 L Dunkelgrün",
+      "category": "Garten",
+      "subcategory": "Gartenbedarf"
+    },
+    {
+      "asin": "B0FNX4DJ8F",
+      "title": "Juskys Geräteschuppen Metall M Dunkelgrau",
+      "category": "Garten",
+      "subcategory": "Gartenaufbewahrung"
+    },
+    {
+      "asin": "B0FX4RZMFJ",
+      "title": "Juskys Kaminholzregal L 260 cm Schwarz",
+      "category": "Garten",
+      "subcategory": "Gartenbedarf"
+    },
+    {
+      "asin": "B077P4PS6Z",
+      "title": "Juskys Racing Schreibtischstuhl Montreal grau",
+      "category": "Möbel",
+      "subcategory": "Büromöbel"
+    },
+    {
+      "asin": "B07GFPC58W",
+      "title": "Juskys Bambus Wäschekorb Curly Natur 100L",
+      "category": "Möbel",
+      "subcategory": "Badausstattung"
+    },
+    {
+      "asin": "B07QWXMYV9",
+      "title": "Juskys Boxspringbett Norfolk 140x200 weiß",
+      "category": "Möbel",
+      "subcategory": "Boxspringbetten"
+    },
+    {
+      "asin": "B082XGXKJ8",
+      "title": "Juskys Bambus Wäschekorb Curly-Round Natur 55L",
+      "category": "Möbel",
+      "subcategory": "Badausstattung"
+    },
+    {
+      "asin": "B08Q8GZ554",
+      "title": "Juskys Bambus Wäschekorb Curly Grau 72L",
+      "category": "Möbel",
+      "subcategory": "Badausstattung"
+    },
+    {
+      "asin": "B0947617BM",
+      "title": "Juskys Schminktisch Hocker Tonia Weiß",
+      "category": "Möbel",
+      "subcategory": "Schminktische"
+    },
+    {
+      "asin": "B09476KMMH",
+      "title": "Juskys Schminktisch Hocker Melly Weiß",
+      "category": "Möbel",
+      "subcategory": "Schminktische"
+    },
+    {
+      "asin": "B09PLDVF2L",
+      "title": "Juskys Topper 90x200 cm Memoryschaum",
+      "category": "Möbel",
+      "subcategory": "Matratzen"
+    },
+    {
+      "asin": "B0BKQ6XDKV",
+      "title": "Juskys Polsterbett Paris 120x200 weiß",
+      "category": "Möbel",
+      "subcategory": "Polsterbetten"
+    },
+    {
+      "asin": "B0BSQKWT89",
+      "title": "Juskys Polsterbett Nizza 140x200 Beige",
+      "category": "Möbel",
+      "subcategory": "Polsterbetten"
+    },
+    {
+      "asin": "B0CCRQGD6P",
+      "title": "Juskys Polsterbett Savona 120x200 Beige",
+      "category": "Möbel",
+      "subcategory": "Polsterbetten"
+    },
+    {
+      "asin": "B0CX1SJ9R1",
+      "title": "Juskys Sofa Iseo Links Schlaffunktion Dunkelgrau",
+      "category": "Möbel",
+      "subcategory": "Sofas"
+    },
+    {
+      "asin": "B0D31GY3G4",
+      "title": "Juskys Kopfkissen 2er Set 40x80 Memory Foam",
+      "category": "Möbel",
+      "subcategory": "Schlafkomfort"
+    },
+    {
+      "asin": "B0DGXG1P6J",
+      "title": "Juskys Boxspringbett Leona 180x200 Beige",
+      "category": "Möbel",
+      "subcategory": "Boxspringbetten"
+    },
+    {
+      "asin": "B0DM9FFLYF",
+      "title": "Juskys Kaltschaummatratze 80x160 H2",
+      "category": "Möbel",
+      "subcategory": "Matratzen"
+    },
+    {
+      "asin": "B0DPX47HDJ",
+      "title": "Juskys Aufstehhilfe Bett Weiß",
+      "category": "Möbel",
+      "subcategory": "Schlafkomfort"
+    },
+    {
+      "asin": "B0DXFLWC1L",
+      "title": "Juskys Relaxsessel Korsika Cord Grau",
+      "category": "Möbel",
+      "subcategory": "Wohnmöbel"
+    },
+    {
+      "asin": "B0F32S7FDB",
+      "title": "Juskys Metallbett Palamos 140x200 mit Matratze Schwarz",
+      "category": "Möbel",
+      "subcategory": "Metallbetten"
+    },
+    {
+      "asin": "B0F32SN1W4",
+      "title": "Juskys Metallbett Palamos 140x200 Schwarz",
+      "category": "Möbel",
+      "subcategory": "Metallbetten"
+    },
+    {
+      "asin": "B0F32WYZ3G",
+      "title": "Juskys Bürostuhl Baltimore Grau",
+      "category": "Möbel",
+      "subcategory": "Büromöbel"
+    },
+    {
+      "asin": "B0F8BR8ZW5",
+      "title": "Juskys Akustikpaneele 4er Set Eiche Natur Dunkel",
+      "category": "Möbel",
+      "subcategory": "Wohnmöbel"
+    },
+    {
+      "asin": "B0FDBBPRZ1",
+      "title": "Juskys Nackenkissen 1er Set",
+      "category": "Möbel",
+      "subcategory": "Schlafkomfort"
+    },
+    {
+      "asin": "B0FDWRR38Q",
+      "title": "Juskys Gewichtsdecke 135x200",
+      "category": "Möbel",
+      "subcategory": "Schlafkomfort"
+    },
+    {
+      "asin": "B0FGDGNZNT",
+      "title": "Juskys Schminktisch Lilia mit LED-Spiegel Weiß",
+      "category": "Möbel",
+      "subcategory": "Schminktische"
+    },
+    {
+      "asin": "B0FGDH2KMJ",
+      "title": "Juskys Schminktisch Talea LED-Spiegel Weiß",
+      "category": "Möbel",
+      "subcategory": "Schminktische"
+    },
+    {
+      "asin": "B0FH2P23B3",
+      "title": "Juskys Schminktisch Malia mit LED-Spiegel",
+      "category": "Möbel",
+      "subcategory": "Schminktische"
+    },
+    {
+      "asin": "B0FHHG2CKS",
+      "title": "Juskys Gamingstuhl HyperSeat Schwarz/blau",
+      "category": "Möbel",
+      "subcategory": "Büromöbel"
+    },
+    {
+      "asin": "B0FNWSKJP2",
+      "title": "Juskys Massagesessel Naxos Schwarz",
+      "category": "Möbel",
+      "subcategory": "Massagesessel"
+    },
+    {
+      "asin": "B0FX54GMQS",
+      "title": "Juskys Aktenschrank Metall Hellgrau",
+      "category": "Möbel",
+      "subcategory": "Büromöbel"
+    },
+    {
+      "asin": "B072KDRTHG",
+      "title": "Juskys Leiter Aluminium 3x4 Stufen 3,6 m",
+      "category": "Heimwerken",
+      "subcategory": "Multifunktionsleitern"
+    },
+    {
+      "asin": "B07Z7QCTXW",
+      "title": "Juskys Sackkarre Basic klappbar",
+      "category": "Heimwerken",
+      "subcategory": "Sackkarren"
+    },
+    {
+      "asin": "B07Z7R4CMY",
+      "title": "Juskys Treppensackkarre klappbar Hartgummi",
+      "category": "Heimwerken",
+      "subcategory": "Sackkarren"
+    },
+    {
+      "asin": "B0D9QSYSB7",
+      "title": "Juskys Treppensackkarre klappbar",
+      "category": "Heimwerken",
+      "subcategory": "Sackkarren"
+    },
+    {
+      "asin": "B0DQ5K13RK",
+      "title": "Juskys Hebeanlage 600 W",
+      "category": "Heimwerken",
+      "subcategory": "Werkzeug"
+    },
+    {
+      "asin": "B0DZ2XH5BS",
+      "title": "Juskys Fahrrad Reparaturständer 50 kg",
+      "category": "Heimwerken",
+      "subcategory": "Werkzeug"
+    },
+    {
+      "asin": "B0FT3RZSCP",
+      "title": "Juskys Wagenheber 2,5 t",
+      "category": "Heimwerken",
+      "subcategory": "Werkzeug"
+    },
+    {
+      "asin": "B0BBZX31R4",
+      "title": "Juskys Elektrokamin 1000/2000 W Standkamin weiß",
+      "category": "Heimwerken",
+      "subcategory": "Elektrokamine"
+    },
+    {
+      "asin": "B0BBZYJLF2",
+      "title": "Juskys Elektrokamin 1000/2000 W Eckkamin schwarz",
+      "category": "Heimwerken",
+      "subcategory": "Elektrokamine"
+    },
+    {
+      "asin": "B0FHHG49H8",
+      "title": "Juskys Elektrokamin 2000 W Schwarz",
+      "category": "Heimwerken",
+      "subcategory": "Elektrokamine"
+    },
+    {
+      "asin": "B0FQJWR99K",
+      "title": "Juskys Elektrokamin 1800W Schwarz",
+      "category": "Heimwerken",
+      "subcategory": "Elektrokamine"
+    },
+    {
+      "asin": "B0CJRMN1JH",
+      "title": "Juskys Outdoor Heizstrahler Cuna 11 kW",
+      "category": "Haushalt",
+      "subcategory": "Heizgeräte"
+    },
+    {
+      "asin": "B0FQCMFLLY",
+      "title": "Juskys Glasheizung 2000W",
+      "category": "Haushalt",
+      "subcategory": "Heizgeräte"
+    },
+    {
+      "asin": "B014IUTSW8",
+      "title": "Juskys 2er-Set Lagerregal Basic 180x90x40cm verzinkt",
+      "category": "Haushalt",
+      "subcategory": "Schwerlastregale"
+    },
+    {
+      "asin": "B07TYTLYPY",
+      "title": "Juskys 3er Metall Regalsystem Basic Silver",
+      "category": "Haushalt",
+      "subcategory": "Schwerlastregale"
+    },
+    {
+      "asin": "B083Y4T2TY",
+      "title": "Juskys Eckregal Corner Easy 160 x 75",
+      "category": "Haushalt",
+      "subcategory": "Schwerlastregale"
+    },
+    {
+      "asin": "B09DJSHBW8",
+      "title": "Juskys 2er-Set Lagerregal Basic 180x90x40 Grau",
+      "category": "Haushalt",
+      "subcategory": "Schwerlastregale"
+    },
+    {
+      "asin": "B09DK3LY2V",
+      "title": "Juskys Eckregal Corner Basic 180 x 70 Grau",
+      "category": "Haushalt",
+      "subcategory": "Schwerlastregale"
+    },
+    {
+      "asin": "B09DKF8RPX",
+      "title": "Juskys Schwerlastregal Basic 200x100x60 Grau",
+      "category": "Haushalt",
+      "subcategory": "Schwerlastregale"
+    },
+    {
+      "asin": "B0BWN67H4J",
+      "title": "Juskys 2er-Set Lagerregal Easy 160x80x40 Grau",
+      "category": "Haushalt",
+      "subcategory": "Schwerlastregale"
+    },
+    {
+      "asin": "B0BWN8GRN4",
+      "title": "Juskys 3er Metall Regalsystem Easy Grau",
+      "category": "Haushalt",
+      "subcategory": "Schwerlastregale"
+    },
+    {
+      "asin": "B0FBRJCCWV",
+      "title": "Juskys 4er-Set Lagerregal Basic 180x90x40",
+      "category": "Haushalt",
+      "subcategory": "Schwerlastregale"
+    },
+    {
+      "asin": "B0BWN6NB4Z",
+      "title": "Juskys Multifunktionstisch 3 teilig",
+      "category": "Haushalt",
+      "subcategory": "Aufbewahrung"
+    },
+    {
+      "asin": "B0CD7VC4D8",
+      "title": "Juskys Aufbewahrungsbox 6er Set 60l",
+      "category": "Haushalt",
+      "subcategory": "Aufbewahrung"
+    },
+    {
+      "asin": "B0CK4QSWF9",
+      "title": "Juskys Mülleimer Küche 50L Schwarz",
+      "category": "Haushalt",
+      "subcategory": "Mülleimer"
+    },
+    {
+      "asin": "B0D5QK6TLM",
+      "title": "Juskys Eiswürfelmaschine klein Schwarz",
+      "category": "Haushalt",
+      "subcategory": "Eiswürfelmaschinen"
+    },
+    {
+      "asin": "B0DHGHCZTF",
+      "title": "Juskys Airfryer 9 L Doppelkammer",
+      "category": "Haushalt",
+      "subcategory": "Küchengeräte"
+    },
+    {
+      "asin": "B0BMB245DT",
+      "title": "Juskys Kinder Bücherregal mit Spielzeugkiste Weiß",
+      "category": "Haushalt",
+      "subcategory": "Kinderbedarf"
+    },
+    {
+      "asin": "B0CLV392MC",
+      "title": "Juskys Kinder Kleiderständer Filla Weiß",
+      "category": "Haushalt",
+      "subcategory": "Kinderbedarf"
+    },
+    {
+      "asin": "B0CLXXZ67P",
+      "title": "Juskys Krabbelmatte 180x120 Grau",
+      "category": "Haushalt",
+      "subcategory": "Kinderbedarf"
+    },
+    {
+      "asin": "B0DHH2NCTS",
+      "title": "Juskys Lernturm Henny Weiß",
+      "category": "Haushalt",
+      "subcategory": "Kinderbedarf"
+    },
+    {
+      "asin": "B0DKFR5HQ6",
+      "title": "Juskys Mini Klettergerüst Natur",
+      "category": "Haushalt",
+      "subcategory": "Kinderbedarf"
+    },
+    {
+      "asin": "B0DL5PKK41",
+      "title": "Juskys Kindersitzgruppe Milou Natur",
+      "category": "Haushalt",
+      "subcategory": "Kinderbedarf"
+    },
+    {
+      "asin": "B0DL5RWYTD",
+      "title": "Juskys Kindersitzgruppe Milou Rosa",
+      "category": "Haushalt",
+      "subcategory": "Kinderbedarf"
+    },
+    {
+      "asin": "B0F32VLNPV",
+      "title": "Juskys Kinderschreibtisch Fietje Plus Weiß",
+      "category": "Haushalt",
+      "subcategory": "Kinderbedarf"
+    },
+    {
+      "asin": "B082HMV596",
+      "title": "Juskys Rollator Vital petrol",
+      "category": "Haushalt",
+      "subcategory": "Alltagshilfen"
+    },
+    {
+      "asin": "B0DPX5QVZM",
+      "title": "Juskys Aluminium Wohnungsrollator Aktiv Rot",
+      "category": "Haushalt",
+      "subcategory": "Alltagshilfen"
+    },
+    {
+      "asin": "B0FG8835LQ",
+      "title": "Juskys Bollerwagen 100 kg Schwarz",
+      "category": "Haushalt",
+      "subcategory": "Alltagshilfen"
+    },
+    {
+      "asin": "B01CSNO9YO",
+      "title": "Juskys Alu Hundetransportbox L",
+      "category": "Tierbedarf",
+      "subcategory": "Hundebedarf"
+    },
+    {
+      "asin": "B0716T9673",
+      "title": "Juskys Welpenauslauf Plus 160x160x80",
+      "category": "Tierbedarf",
+      "subcategory": "Hundebedarf"
+    },
+    {
+      "asin": "B079YT88DT",
+      "title": "Juskys Hundetransportbox Lassie M",
+      "category": "Tierbedarf",
+      "subcategory": "Hundebedarf"
+    },
+    {
+      "asin": "B0C4FHBSR1",
+      "title": "Juskys Hundetreppe 36 cm grau",
+      "category": "Tierbedarf",
+      "subcategory": "Hundebedarf"
+    },
+    {
+      "asin": "B09M7GCK5Y",
+      "title": "Juskys Freilaufgehege 2x2x2m",
+      "category": "Tierbedarf",
+      "subcategory": "Freilaufgehege"
+    },
+    {
+      "asin": "B01861S8O4",
+      "title": "Juskys Fahrradanhänger 90 Liter",
+      "category": "Freizeit",
+      "subcategory": "Sport"
+    },
+    {
+      "asin": "B0D72ZH6JL",
+      "title": "Juskys Tischtennisplatte Mini Flexi Schwarz",
+      "category": "Freizeit",
+      "subcategory": "Sport"
+    },
+    {
+      "asin": "B0D7322KJH",
+      "title": "Juskys 5in1 Spieltisch Ballzauber",
+      "category": "Freizeit",
+      "subcategory": "Sport"
+    },
+    {
+      "asin": "B0DG5HDYLH",
+      "title": "Juskys Nordic Walking Stöcke Schwarz",
+      "category": "Freizeit",
+      "subcategory": "Sport"
+    },
+    {
+      "asin": "B0C37FB3B3",
+      "title": "Juskys Kompressor Kühlbox 12/24/230 V Grau",
+      "category": "Freizeit",
+      "subcategory": "Camping"
+    },
+    {
+      "asin": "B0C53LQFX8",
+      "title": "Juskys Kühlbox elektrisch 12 V 230 V",
+      "category": "Freizeit",
+      "subcategory": "Camping"
+    },
+    {
+      "asin": "B0C9DFG1YJ",
+      "title": "Juskys Campingtisch Picco 90x52 Silber",
+      "category": "Freizeit",
+      "subcategory": "Camping"
+    },
+    {
+      "asin": "B0C9JLFJ56",
+      "title": "Juskys Campingstuhl Lido faltbar",
+      "category": "Freizeit",
+      "subcategory": "Camping"
+    },
+    {
+      "asin": "B0D8BKJK3K",
+      "title": "Juskys Luftmatratze Sapri M Schwarz",
+      "category": "Freizeit",
+      "subcategory": "Camping"
+    },
+    {
+      "asin": "B0C33XGG3Y",
+      "title": "Juskys Trolley Reisekoffer Set 5 teilig Blau",
+      "category": "Freizeit",
+      "subcategory": "Koffersets"
+    },
+    {
+      "asin": "B0C33Z7919",
+      "title": "Juskys Trolley Reisekoffer Set 5 teilig Schwarz",
+      "category": "Freizeit",
+      "subcategory": "Koffersets"
+    },
+    {
+      "asin": "B0C42XSVZC",
+      "title": "Juskys Hartschale Kofferset 4 teilig Blau",
+      "category": "Freizeit",
+      "subcategory": "Koffersets"
+    },
+    {
+      "asin": "B0F6NGM2VL",
+      "title": "Juskys Hartschale Kofferset 3 teilig Rot",
+      "category": "Freizeit",
+      "subcategory": "Koffersets"
+    },
+    {
+      "asin": "B0F6NGR2RT",
+      "title": "Juskys Hartschale Kofferset Reisekoffer 3 teilig Anthrazit",
+      "category": "Freizeit",
+      "subcategory": "Koffersets"
+    },
+    {
+      "asin": "B0F6NJ533F",
+      "title": "Juskys Hartschale Kofferset 3 teilig Rosa",
+      "category": "Freizeit",
+      "subcategory": "Koffersets"
+    },
+    {
+      "asin": "B0F6NKNZFF",
+      "title": "Juskys Hartschale Kofferset 4 teilig Dunkelgrün",
+      "category": "Freizeit",
+      "subcategory": "Koffersets"
+    },
+    {
+      "asin": "B0F94FM1WR",
+      "title": "Juskys Autodachzelt Lago",
+      "category": "Freizeit",
+      "subcategory": "Dachzelte"
+    },
+    {
+      "asin": "B0DKFQPHTC",
+      "title": "Juskys Sprossenwand für Kinder",
+      "category": "Haushalt",
+      "subcategory": "Kinderbedarf"
+    },
+    {
+      "asin": "B0GJD4M2JB",
+      "title": "Juskys Solardusche Victoria 20/35/40/60 Liter",
+      "category": "Garten",
+      "subcategory": "Poolbedarf"
+    },
+    {
+      "asin": "B0GLH196B3",
+      "title": "Juskys Polyrattan Lounge Manacor Abdeckung",
+      "category": "Garten",
+      "subcategory": "Gartenmöbel Sets"
+    },
+    {
+      "asin": "B0GQTJ1MN1",
+      "title": "Juskys Sonnenliege SunScape Natur Akazie",
+      "category": "Garten",
+      "subcategory": "Gartenliegen"
+    },
+    {
+      "asin": "B0GSZTR899",
+      "title": "Juskys Sandfilteranlage 250 W Timer",
+      "category": "Garten",
+      "subcategory": "Poolbedarf"
+    },
+    {
+      "asin": "B0GX1BYJXM",
+      "title": "Juskys Beistelltisch Zadar XL",
+      "category": "Möbel",
+      "subcategory": "Wohnmöbel"
+    }
+  ],
   "products": [],
   "pages": [],
   "googleDriveUrl": ""

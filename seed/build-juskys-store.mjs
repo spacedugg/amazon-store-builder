@@ -7,8 +7,76 @@
 import { writeFileSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
+import { getStructuredAsins } from './juskys-asins.mjs';
 
 var __dirname = dirname(fileURLToPath(import.meta.url));
+
+// ─── ASIN HELPERS ─────────────────────────────────────────
+
+var STRUCTURED_ASINS = getStructuredAsins();
+
+// Index: alle Slots der ASIN (primär plus also)
+function asinSlots(a) {
+  var slots = [{ cat: a.category, sub: a.subcategory }];
+  (a.also || []).forEach(function(x) { slots.push({ cat: x.cat, sub: x.sub }); });
+  return slots;
+}
+
+// Alle ASINs einer Hauptkategorie (über primär oder also Slot)
+export function allAsinsByCat(cat) {
+  return STRUCTURED_ASINS.filter(function(a) {
+    return asinSlots(a).some(function(s) { return s.cat === cat; });
+  }).map(function(a) { return a.asin; });
+}
+
+// Alle ASINs einer Sub
+export function allAsinsBySub(cat, sub) {
+  return STRUCTURED_ASINS.filter(function(a) {
+    return asinSlots(a).some(function(s) { return s.cat === cat && s.sub === sub; });
+  }).map(function(a) { return a.asin; });
+}
+
+// Top N ASINs einer Hauptkategorie. Reihenfolge: onHomepage zuerst, dann Rest.
+export function topAsinsByCat(cat, n) {
+  var list = STRUCTURED_ASINS.filter(function(a) {
+    return asinSlots(a).some(function(s) { return s.cat === cat; });
+  });
+  list.sort(function(x, y) { return (y.onHomepage ? 1 : 0) - (x.onHomepage ? 1 : 0); });
+  return list.slice(0, n).map(function(a) { return a.asin; });
+}
+
+// Top N ASINs einer Sub
+export function topAsinsBySub(cat, sub, n) {
+  var list = STRUCTURED_ASINS.filter(function(a) {
+    return asinSlots(a).some(function(s) { return s.cat === cat && s.sub === sub; });
+  });
+  list.sort(function(x, y) { return (y.onHomepage ? 1 : 0) - (x.onHomepage ? 1 : 0); });
+  return list.slice(0, n).map(function(a) { return a.asin; });
+}
+
+// ASINs für Homepage Bestseller (kuratiert, aus User Auswahl)
+export function homepageBestsellerAsins() {
+  return [
+    'B084JQYGYM', // Polyrattan Lounge Manacor (Garten saisonal)
+    'B0F54DJW2F', // Rope Gartenstühle 2er Set (Garten saisonal)
+    'B07P7PRG78', // PVC Sichtschutzstreifen 4er (Garten saisonal)
+    'B0FNX4DJ8F', // Geräteschuppen Metall M (Garten saisonal)
+    'B07QWXMYV9', // Boxspringbett Norfolk (Möbel)
+    'B0CX1SJ9R1', // Sofa Iseo Schlaffunktion (Möbel)
+  ];
+}
+
+// Alle ASINs in Top Level Format { asin, category, subcategory, title, also }
+export function topLevelAsinList() {
+  return STRUCTURED_ASINS.map(function(a) {
+    return {
+      asin: a.asin,
+      title: a.title,
+      category: a.category,
+      subcategory: a.subcategory,
+    };
+  });
+}
 
 // ─── HELPERS ───────────────────────────────────────────────
 
@@ -121,7 +189,7 @@ function buildStore() {
     headerBannerColor: '#93bd26',
     headerBanner: null,
     headerBannerMobile: null,
-    asins: [],
+    asins: topLevelAsinList(),
     products: [],
     pages: pages,
     googleDriveUrl: '',
