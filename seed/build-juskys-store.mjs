@@ -304,6 +304,108 @@ function buildBestsellerPage() {
   ]);
 }
 
+function buildGartenPage() {
+  return page('Garten', [
+    section('1', [
+      tile('image',
+        ov('Die **Saison** beginnt hier', 'Lounge, Tische, Schatten und alles für draußen', '', [], 'Loungegruppen entdecken'),
+        'Hero Bild Terrasse Abendlicht mit Loungegruppe und Sonnenschirm.'
+      ),
+    ], 'hero.fullWidthHero'),
+
+    // Sub Navigator 8 Tiles
+    section('4x2grid', [
+      tile('image', ov('**GARTENMÖBEL** SETS'), 'Sub Tile Gartenmöbel Sets, freigestelltes Sitzgruppen Rendering.'),
+      tile('image', ov('**GARTENAUFBEWAHRUNG**'), 'Sub Tile Gartenaufbewahrung, Gerätehaus Rendering.'),
+      tile('image', ov('**GARTENBEDARF**'), 'Sub Tile Gartenbedarf, Schlauchtrommel oder Werkzeug Rendering.'),
+      tile('image', ov('**SONNENSCHUTZ**', 'Sonnen und Sichtschutz'), 'Sub Tile Sonnenschutz, Sonnenschirm Rendering.'),
+      tile('image', ov('**GARTENLIEGEN**'), 'Sub Tile Gartenliegen, Gartenliege Rendering.'),
+      tile('image', ov('**GARTENBÄNKE**'), 'Sub Tile Gartenbänke, Gartenbank Rendering.'),
+      tile('image', ov('**GARTENTISCHE**'), 'Sub Tile Gartentische, Gartentisch Rendering.'),
+      tile('image', ov('**BIERZELT**'), 'Sub Tile Bierzeltgarnituren, Bierzeltgarnitur Rendering.'),
+    ], 'categoryNav.grid8tiles'),
+
+    // Sub Navigator 6 Tiles
+    section('2s-4grid', [
+      tile('image', ov('**HÄNGEMATTEN**'), 'Sub Tile Hängematten und Hängesessel.'),
+      tile('image', ov('**ÜBERDACHUNGEN**'), 'Sub Tile Überdachungen, Pavillon Rendering.'),
+      tile('image', ov('**POOLBEDARF**'), 'Sub Tile Poolbedarf.'),
+      tile('image', ov('**GEWÄCHSHÄUSER**'), 'Sub Tile Gewächshäuser.'),
+      tile('image', ov('**KISSENBOXEN**'), 'Sub Tile Kissenboxen, leer im Sortiment, optional ausblenden.'),
+      tile('image', ov('**GRILLS**', 'Gas und Holzkohle'), 'Sub Tile Grills, leer im Sortiment, optional ausblenden.'),
+    ], 'categoryNav.grid6tiles'),
+
+    // Shoppable Loungegruppe
+    section('1', [
+      tile('shoppable_image',
+        ov('Lounge, **gebaut** für lange Abende', 'Sofa, Sessel, Beistelltisch, Sonnenschirm, Kissen'),
+        'Shoppable Bild Loungegruppe. 5 Hotspots auf Lounge Set, Beistelltisch, Sonnenschirm, Liegestuhl, Kissen.',
+        { asins: topAsinsBySub('Garten', 'Gartenmöbel Sets', 5) }
+      ),
+    ], 'products.shoppableFullWidth'),
+
+    // Bestseller Loungegruppen
+    section('1', [
+      tile('best_sellers',
+        ov('Die beliebtesten **Loungegruppen**'),
+        'Bestseller Grid Loungegruppen.',
+        { asins: topAsinsBySub('Garten', 'Gartenmöbel Sets', 8) }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    // Trenner kleinere Flächen
+    section('1', [
+      tile('image', ov('Auch **kleinere** Flächen'), 'Trenner Textbild. Pflanzen oder Balkonszene Makro.'),
+    ], 'hero.fullWidthHero'),
+
+    // Shoppable Balkon
+    section('1', [
+      tile('shoppable_image',
+        ov('Auch auf dem **Balkon**', 'Bistroset, Sonnensegel, Pflanzkübel'),
+        'Shoppable Bild Balkon. 5 Hotspots auf Bistroset, Sichtschutz, Sonnenschirm, Hängematte, Pflanzen.',
+        { asins: ['B0C6N1D6S1', 'B08L3V12L2', 'B07P7PRG78', 'B0BX3XGM2F', 'B0CRVS21Q6'] }
+      ),
+    ], 'products.shoppableFullWidth'),
+
+    // Bestseller Mehr für draußen
+    section('1', [
+      tile('best_sellers',
+        ov('Mehr **Lieblinge** für draußen', 'Sonnenschutz, Hängematten, Pool, Liegen'),
+        'Bestseller Grid quer aus Sub Sonnenschutz, Hängematten, Pool, Gartenliegen.',
+        { asins: topAsinsBySub('Garten', 'Sonnenschutz', 2)
+            .concat(topAsinsBySub('Garten', 'Hängematten', 2),
+                    topAsinsBySub('Garten', 'Poolbedarf', 2),
+                    topAsinsBySub('Garten', 'Gartenliegen', 2)) }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    // USP Leiste Wetter (3 Icons existieren in Juskys CI)
+    section('vh-w2s', [
+      tile('image', ov('**Wetterfest** durch die Saison'), 'Wide Bild Saison. Plus 3 Wetter Icons.'),
+      tile('image', ov('**UV** beständig'), 'Square mit grünem Icon Kreis Sonne.'),
+      tile('image', ov('**Wasserabweisend**'), 'Square mit grünem Icon Kreis Regentropfen.'),
+    ], 'features.featureWideAnd2'),
+
+    // Vollkatalog Garten
+    section('1', [
+      tile('product_grid',
+        ov('Alle **Garten** Produkte im Überblick', 'Sortiert nach Bestseller Rang'),
+        'Vollkatalog. Alle Garten ASINs.',
+        { asins: allAsinsByCat('Garten') }
+      ),
+    ], 'products.fullWidthGrid'),
+
+    // Cross Link Möbel
+    section('1', [
+      tile('image',
+        ov('Drinnen passend dazu, weiter zu **Möbel**', '', '', [], 'Möbel ansehen'),
+        'Cross Sell Banner. Mini Bild Wohnraum.',
+        { linkUrl: linkTo('Möbel') }
+      ),
+    ], 'footer.crossSellBanner'),
+  ]);
+}
+
 // ─── BUILD ────────────────────────────────────────────────
 
 function buildStore() {
@@ -311,6 +413,7 @@ function buildStore() {
 
   pages.push(buildHomePage());
   pages.push(buildBestsellerPage());
+  pages.push(buildGartenPage());
   // weitere Pages folgen in nächsten Schritten
 
   // Resolve parentName references → echte parentId

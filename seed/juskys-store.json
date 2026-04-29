@@ -918,11 +918,11 @@
   "products": [],
   "pages": [
     {
-      "id": "mok9fhepe8n6",
+      "id": "mok9gv2690i7",
       "name": "Home",
       "sections": [
         {
-          "id": "mok9fheomu6p",
+          "id": "mok9gv25ro6h",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -947,7 +947,7 @@
           ]
         },
         {
-          "id": "mok9fheodrse",
+          "id": "mok9gv25poeh",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -963,7 +963,7 @@
               "brief": "Kategorie Tile Garten. Freigestelltes Leitprodukt auf Beige.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "page:Garten",
+              "linkUrl": "/page/mok9gv2amaog",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1062,7 +1062,7 @@
           ]
         },
         {
-          "id": "mok9fheox7gn",
+          "id": "mok9gv25tz1n",
           "layoutId": "std-2equal",
           "module": "trust.trustSplit",
           "tiles": [
@@ -1105,7 +1105,7 @@
           ]
         },
         {
-          "id": "mok9fheotavf",
+          "id": "mok9gv25e1pv",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1130,7 +1130,7 @@
           ]
         },
         {
-          "id": "mok9fhepnww8",
+          "id": "mok9gv2673ok",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -1161,7 +1161,7 @@
           ]
         },
         {
-          "id": "mok9fhep1r9e",
+          "id": "mok9gv262bvk",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1193,7 +1193,7 @@
           ]
         },
         {
-          "id": "mok9fhepjq7u",
+          "id": "mok9gv269vvw",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1218,7 +1218,7 @@
           ]
         },
         {
-          "id": "mok9fhep07ol",
+          "id": "mok9gv26c7el",
           "layoutId": "1",
           "module": "products.shoppableFullWidth",
           "tiles": [
@@ -1249,7 +1249,7 @@
           ]
         },
         {
-          "id": "mok9fhepy3b5",
+          "id": "mok9gv26zgop",
           "layoutId": "2x2wide",
           "module": "features.featureGrid4wide",
           "tiles": [
@@ -1328,7 +1328,7 @@
           ]
         },
         {
-          "id": "mok9fhepveph",
+          "id": "mok9gv260xki",
           "layoutId": "1",
           "module": "engagement.followBanner",
           "tiles": [
@@ -1353,7 +1353,7 @@
           ]
         },
         {
-          "id": "mok9fhepv1ox",
+          "id": "mok9gv266e4t",
           "layoutId": "2x2wide",
           "module": "footer.categoryNavFooter",
           "tiles": [
@@ -1369,7 +1369,7 @@
               "brief": "Footer Kategorie Tile mit Mini Icon.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "page:Garten",
+              "linkUrl": "/page/mok9gv2amaog",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1434,11 +1434,11 @@
       ]
     },
     {
-      "id": "mok9fherysb4",
+      "id": "mok9gv28wcfh",
       "name": "Bestseller",
       "sections": [
         {
-          "id": "mok9fhep3g5x",
+          "id": "mok9gv28z0mf",
           "layoutId": "1",
           "module": "hero.fullWidthHero",
           "tiles": [
@@ -1463,7 +1463,7 @@
           ]
         },
         {
-          "id": "mok9fhepb2to",
+          "id": "mok9gv283tic",
           "layoutId": "2s-4grid",
           "module": "categoryNav.grid6tiles",
           "tiles": [
@@ -1479,7 +1479,7 @@
               "brief": "Sub Navigator Tile, Filter zu Garten Bestseller.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "page:Garten",
+              "linkUrl": "/page/mok9gv2amaog",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
@@ -1578,7 +1578,7 @@
           ]
         },
         {
-          "id": "mok9fhepvtho",
+          "id": "mok9gv28uddp",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1616,7 +1616,7 @@
           ]
         },
         {
-          "id": "mok9fher9kpf",
+          "id": "mok9gv2885xh",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1650,7 +1650,7 @@
           ]
         },
         {
-          "id": "mok9fherpmnm",
+          "id": "mok9gv282kb7",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1684,7 +1684,7 @@
           ]
         },
         {
-          "id": "mok9fher99ye",
+          "id": "mok9gv2857zt",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1716,7 +1716,7 @@
           ]
         },
         {
-          "id": "mok9fher4i94",
+          "id": "mok9gv284ts2",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1748,7 +1748,7 @@
           ]
         },
         {
-          "id": "mok9fherdtj2",
+          "id": "mok9gv28znad",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1782,7 +1782,7 @@
           ]
         },
         {
-          "id": "mok9fhereu04",
+          "id": "mok9gv282c32",
           "layoutId": "1",
           "module": "products.fullWidthGrid",
           "tiles": [
@@ -1813,7 +1813,7 @@
           ]
         },
         {
-          "id": "mok9fherl4sd",
+          "id": "mok9gv28sex7",
           "layoutId": "vh-w2s",
           "module": "features.featureWideAnd2",
           "tiles": [
@@ -1866,6 +1866,630 @@
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mok9gv2amaog",
+      "name": "Garten",
+      "sections": [
+        {
+          "id": "mok9gv28qjhh",
+          "layoutId": "1",
+          "module": "hero.fullWidthHero",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Die **Saison** beginnt hier",
+                "subheading": "Lounge, Tische, Schatten und alles für draußen",
+                "body": "",
+                "bullets": [],
+                "cta": "Loungegruppen entdecken"
+              },
+              "brief": "Hero Bild Terrasse Abendlicht mit Loungegruppe und Sonnenschirm.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9gv28faxs",
+          "layoutId": "4x2grid",
+          "module": "categoryNav.grid8tiles",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**GARTENMÖBEL** SETS",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Gartenmöbel Sets, freigestelltes Sitzgruppen Rendering.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**GARTENAUFBEWAHRUNG**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Gartenaufbewahrung, Gerätehaus Rendering.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**GARTENBEDARF**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Gartenbedarf, Schlauchtrommel oder Werkzeug Rendering.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**SONNENSCHUTZ**",
+                "subheading": "Sonnen und Sichtschutz",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Sonnenschutz, Sonnenschirm Rendering.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**GARTENLIEGEN**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Gartenliegen, Gartenliege Rendering.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**GARTENBÄNKE**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Gartenbänke, Gartenbank Rendering.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**GARTENTISCHE**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Gartentische, Gartentisch Rendering.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**BIERZELT**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Bierzeltgarnituren, Bierzeltgarnitur Rendering.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9gv282ycx",
+          "layoutId": "2s-4grid",
+          "module": "categoryNav.grid6tiles",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**HÄNGEMATTEN**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Hängematten und Hängesessel.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**ÜBERDACHUNGEN**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Überdachungen, Pavillon Rendering.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**POOLBEDARF**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Poolbedarf.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**GEWÄCHSHÄUSER**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Gewächshäuser.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**KISSENBOXEN**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Kissenboxen, leer im Sortiment, optional ausblenden.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**GRILLS**",
+                "subheading": "Gas und Holzkohle",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sub Tile Grills, leer im Sortiment, optional ausblenden.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9gv29moz9",
+          "layoutId": "1",
+          "module": "products.shoppableFullWidth",
+          "tiles": [
+            {
+              "type": "shoppable_image",
+              "textOverlay": {
+                "heading": "Lounge, **gebaut** für lange Abende",
+                "subheading": "Sofa, Sessel, Beistelltisch, Sonnenschirm, Kissen",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Shoppable Bild Loungegruppe. 5 Hotspots auf Lounge Set, Beistelltisch, Sonnenschirm, Liegestuhl, Kissen.",
+              "asins": [
+                "B084JQYGYM",
+                "B0CR1H8BTF",
+                "B0F54DJW2F",
+                "B0GLH196B3",
+                "B07MV853GG"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9gv29iq7w",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Die beliebtesten **Loungegruppen**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Bestseller Grid Loungegruppen.",
+              "asins": [
+                "B084JQYGYM",
+                "B0CR1H8BTF",
+                "B0F54DJW2F",
+                "B0GLH196B3",
+                "B07MV853GG",
+                "B07NDV9XNS",
+                "B08591S6T4",
+                "B08L3V12L2"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9gv292rhu",
+          "layoutId": "1",
+          "module": "hero.fullWidthHero",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Auch **kleinere** Flächen",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Trenner Textbild. Pflanzen oder Balkonszene Makro.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9gv296yde",
+          "layoutId": "1",
+          "module": "products.shoppableFullWidth",
+          "tiles": [
+            {
+              "type": "shoppable_image",
+              "textOverlay": {
+                "heading": "Auch auf dem **Balkon**",
+                "subheading": "Bistroset, Sonnensegel, Pflanzkübel",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Shoppable Bild Balkon. 5 Hotspots auf Bistroset, Sichtschutz, Sonnenschirm, Hängematte, Pflanzen.",
+              "asins": [
+                "B0C6N1D6S1",
+                "B08L3V12L2",
+                "B07P7PRG78",
+                "B0BX3XGM2F",
+                "B0CRVS21Q6"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9gv29qxri",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Mehr **Lieblinge** für draußen",
+                "subheading": "Sonnenschutz, Hängematten, Pool, Liegen",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Bestseller Grid quer aus Sub Sonnenschutz, Hängematten, Pool, Gartenliegen.",
+              "asins": [
+                "B07P7PRG78",
+                "B0DXFM883Y",
+                "B0BX3XGM2F",
+                "B0D4DVLW4B",
+                "B087QDPGYJ",
+                "B0GJD4M2JB",
+                "B0GQTJ1MN1",
+                "B0CRVS21Q6"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9gv29e0z0",
+          "layoutId": "vh-w2s",
+          "module": "features.featureWideAnd2",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Wetterfest** durch die Saison",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Wide Bild Saison. Plus 3 Wetter Icons.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**UV** beständig",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square mit grünem Icon Kreis Sonne.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Wasserabweisend**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Square mit grünem Icon Kreis Regentropfen.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9gv2a7fue",
+          "layoutId": "1",
+          "module": "products.fullWidthGrid",
+          "tiles": [
+            {
+              "type": "product_grid",
+              "textOverlay": {
+                "heading": "Alle **Garten** Produkte im Überblick",
+                "subheading": "Sortiert nach Bestseller Rang",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Vollkatalog. Alle Garten ASINs.",
+              "asins": [
+                "B01D1NTA4E",
+                "B071HGY7FT",
+                "B07C42GGDW",
+                "B07FGXFBQ4",
+                "B07FGXKCGK",
+                "B07MV853GG",
+                "B07NDV9XNS",
+                "B07P7PRG78",
+                "B07YZ99NDM",
+                "B083Y4PYY1",
+                "B084JQYGYM",
+                "B08591S6T4",
+                "B087FQZV2Y",
+                "B087QDPGYJ",
+                "B089XXX8XZ",
+                "B08L3V12L2",
+                "B08THWGMN4",
+                "B0BG3617K6",
+                "B0BGHGSSHX",
+                "B0BTJ5ZTDV",
+                "B0BTYY5FYG",
+                "B0BW93BWPQ",
+                "B0BX3XGM2F",
+                "B0BZ1397VS",
+                "B0C45Q45QQ",
+                "B0C45RKBYV",
+                "B0C6N1D6S1",
+                "B0CD7VVBPB",
+                "B0CD7XR3LH",
+                "B0CD7ZZ4LG",
+                "B0CHS9ML2L",
+                "B0CR1H8BTF",
+                "B0CR48JPMH",
+                "B0CRVS21Q6",
+                "B0CSYWSLZ6",
+                "B0CSZ14149",
+                "B0CSZ3SGL1",
+                "B0CSZ4VTS9",
+                "B0CXJBMHMD",
+                "B0CXJCHQMG",
+                "B0D4DVLW4B",
+                "B0D4DX12NF",
+                "B0D5QLN7GF",
+                "B0D734W3QV",
+                "B0DHGMBC6X",
+                "B0DQTZBMSW",
+                "B0DV5K5J2S",
+                "B0DXFM883Y",
+                "B0F1FYNCBL",
+                "B0F54DJW2F",
+                "B0F672LPGR",
+                "B0F6NSNLR9",
+                "B0FHHNTZYQ",
+                "B0FHHQ2ZLS",
+                "B0FNX4DJ8F",
+                "B0FX4RZMFJ",
+                "B0GJD4M2JB",
+                "B0GLH196B3",
+                "B0GQTJ1MN1",
+                "B0GSZTR899"
+              ],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left"
+            }
+          ]
+        },
+        {
+          "id": "mok9gv2aao3c",
+          "layoutId": "1",
+          "module": "footer.crossSellBanner",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Drinnen passend dazu, weiter zu **Möbel**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Möbel ansehen"
+              },
+              "brief": "Cross Sell Banner. Mini Bild Wohnraum.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
