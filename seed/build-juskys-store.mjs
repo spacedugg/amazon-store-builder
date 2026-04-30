@@ -137,7 +137,7 @@ export function section(layoutId, tiles, module) {
     else if (module.indexOf('trust') === 0) sectionDefault = 'lifestyle';
     else if (module.indexOf('engagement') === 0) sectionDefault = 'creative';
     else if (module.indexOf('footer') === 0) sectionDefault = 'creative';
-    else if (module.indexOf('categoryNav') === 0) sectionDefault = 'product';
+    else if (module.indexOf('categoryNav') === 0) sectionDefault = 'lifestyle'; // Lifestyle für Kategorie Tiles, Produkt im Kontext, Stimmung
   }
   if (sectionDefault) {
     tiles.forEach(function(t) {
@@ -206,12 +206,12 @@ function buildHomePage() {
 
     // 2, Navigator 6 Kategorien
     section('2s-4grid', [
-      tile('image', ov('**GARTEN**', 'Lounge, Tische, Schatten'), 'Kategorie Tile Garten. Freigestelltes Leitprodukt auf Beige.', { linkUrl: linkTo('Garten') }),
-      tile('image', ov('**MÖBEL**', 'Sofas, Betten, Bad'), 'Kategorie Tile Möbel. Freigestelltes Leitprodukt auf Beige.', { linkUrl: linkTo('Möbel') }),
-      tile('image', ov('**FREIZEIT**', 'Camping, Koffer, Sport'), 'Kategorie Tile Freizeit. Freigestelltes Leitprodukt auf Beige.', { linkUrl: linkTo('Freizeit') }),
-      tile('image', ov('**HEIMWERKEN**', 'Werkzeug, Leitern, Kamine'), 'Kategorie Tile Heimwerken. Freigestelltes Leitprodukt auf Beige.', { linkUrl: linkTo('Heimwerken') }),
-      tile('image', ov('**HAUSHALT**', 'Küche, Stauraum, Alltag'), 'Kategorie Tile Haushalt. Freigestelltes Leitprodukt auf Beige.', { linkUrl: linkTo('Haushalt') }),
-      tile('image', ov('**TIERBEDARF**', 'Hund, Katze, Freilauf'), 'Kategorie Tile Tierbedarf. Freigestelltes Leitprodukt auf Beige.', { linkUrl: linkTo('Tierbedarf') }),
+      tile('image', ov('**GARTEN**', 'Lounge, Tische, Schatten'), 'Kategorie Tile Garten. Lifestyle Bild Terrasse mit Loungegruppe, Stimmung am späten Nachmittag.', { linkUrl: linkTo('Garten') }),
+      tile('image', ov('**MÖBEL**', 'Sofas, Betten, Bad'), 'Kategorie Tile Möbel. Lifestyle Bild Wohnzimmer mit Sofa und Sessel im Kontext.', { linkUrl: linkTo('Möbel') }),
+      tile('image', ov('**FREIZEIT**', 'Camping, Koffer, Sport'), 'Kategorie Tile Freizeit. Lifestyle Bild Outdoor Setup oder Reisesituation.', { linkUrl: linkTo('Freizeit') }),
+      tile('image', ov('**HEIMWERKEN**', 'Werkzeug, Leitern, Kamine'), 'Kategorie Tile Heimwerken. Lifestyle Bild Werkstatt oder Werkzeug auf Werkbank.', { linkUrl: linkTo('Heimwerken') }),
+      tile('image', ov('**HAUSHALT**', 'Küche, Stauraum, Alltag'), 'Kategorie Tile Haushalt. Lifestyle Bild Küche oder Hauswirtschaftsraum mit Geräten in Nutzung.', { linkUrl: linkTo('Haushalt') }),
+      tile('image', ov('**TIERBEDARF**', 'Hund, Katze, Freilauf'), 'Kategorie Tile Tierbedarf. Lifestyle Bild mit Hund oder Katze in Wohnsetting.', { linkUrl: linkTo('Tierbedarf') }),
     ], 'categoryNav.grid6tiles'),
 
     // 3, Brand Story Split

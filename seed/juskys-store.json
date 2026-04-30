@@ -959,13 +959,13 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Kategorie Tile Garten. Freigestelltes Leitprodukt auf Beige.",
+              "brief": "Kategorie Tile Garten. Lifestyle Bild Terrasse mit Loungegruppe, Stimmung am späten Nachmittag.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -977,13 +977,13 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Kategorie Tile Möbel. Freigestelltes Leitprodukt auf Beige.",
+              "brief": "Kategorie Tile Möbel. Lifestyle Bild Wohnzimmer mit Sofa und Sessel im Kontext.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -995,13 +995,13 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Kategorie Tile Freizeit. Freigestelltes Leitprodukt auf Beige.",
+              "brief": "Kategorie Tile Freizeit. Lifestyle Bild Outdoor Setup oder Reisesituation.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "page:Freizeit",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -1013,13 +1013,13 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Kategorie Tile Heimwerken. Freigestelltes Leitprodukt auf Beige.",
+              "brief": "Kategorie Tile Heimwerken. Lifestyle Bild Werkstatt oder Werkzeug auf Werkbank.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "page:Heimwerken",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -1031,13 +1031,13 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Kategorie Tile Haushalt. Freigestelltes Leitprodukt auf Beige.",
+              "brief": "Kategorie Tile Haushalt. Lifestyle Bild Küche oder Hauswirtschaftsraum mit Geräten in Nutzung.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "page:Haushalt",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -1049,13 +1049,13 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Kategorie Tile Tierbedarf. Freigestelltes Leitprodukt auf Beige.",
+              "brief": "Kategorie Tile Tierbedarf. Lifestyle Bild mit Hund oder Katze in Wohnsetting.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "page:Tierbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -1930,7 +1930,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -1948,7 +1948,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -1966,7 +1966,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -1984,7 +1984,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -2002,7 +2002,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -2020,7 +2020,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -2038,7 +2038,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -2056,7 +2056,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -2080,7 +2080,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -2098,7 +2098,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -2116,7 +2116,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -2134,7 +2134,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -2152,7 +2152,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -2170,7 +2170,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -2544,7 +2544,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -2562,7 +2562,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -2580,7 +2580,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -2598,7 +2598,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -2616,7 +2616,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -2634,7 +2634,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -2652,7 +2652,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -2670,7 +2670,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -2694,7 +2694,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -2712,7 +2712,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -2730,7 +2730,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -2748,7 +2748,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -3119,7 +3119,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -3137,7 +3137,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -3155,7 +3155,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -3173,7 +3173,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -3535,7 +3535,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -3553,7 +3553,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -3571,7 +3571,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -3595,7 +3595,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -3613,7 +3613,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -3902,7 +3902,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -3920,7 +3920,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -3938,7 +3938,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -3956,7 +3956,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -3974,7 +3974,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -3992,7 +3992,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -4010,7 +4010,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -4028,7 +4028,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -4371,7 +4371,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -4389,7 +4389,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -4407,7 +4407,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -4637,7 +4637,7 @@
               "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -4655,7 +4655,7 @@
               "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -4673,7 +4673,7 @@
               "linkUrl": "page:Freizeit",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -4691,7 +4691,7 @@
               "linkUrl": "page:Heimwerken",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -4709,7 +4709,7 @@
               "linkUrl": "page:Haushalt",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -4727,7 +4727,7 @@
               "linkUrl": "page:Tierbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -5266,7 +5266,7 @@
               "linkUrl": "page:Gartenaufbewahrung",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5284,7 +5284,7 @@
               "linkUrl": "page:Gartenbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5302,7 +5302,7 @@
               "linkUrl": "page:Sonnenschutz",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5320,7 +5320,7 @@
               "linkUrl": "page:Gartenliegen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5338,7 +5338,7 @@
               "linkUrl": "page:Gartenbänke",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5356,7 +5356,7 @@
               "linkUrl": "page:Gartentische",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5374,7 +5374,7 @@
               "linkUrl": "page:Bierzeltgarnituren",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5392,7 +5392,7 @@
               "linkUrl": "page:Hängematten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -5554,7 +5554,7 @@
               "linkUrl": "page:Gartenmöbel Sets",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5572,7 +5572,7 @@
               "linkUrl": "page:Gartenbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5590,7 +5590,7 @@
               "linkUrl": "page:Sonnenschutz",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5608,7 +5608,7 @@
               "linkUrl": "page:Gartenliegen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5626,7 +5626,7 @@
               "linkUrl": "page:Gartenbänke",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5644,7 +5644,7 @@
               "linkUrl": "page:Gartentische",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5662,7 +5662,7 @@
               "linkUrl": "page:Bierzeltgarnituren",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5680,7 +5680,7 @@
               "linkUrl": "page:Hängematten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -5853,7 +5853,7 @@
               "linkUrl": "page:Gartenmöbel Sets",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5871,7 +5871,7 @@
               "linkUrl": "page:Gartenaufbewahrung",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5889,7 +5889,7 @@
               "linkUrl": "page:Sonnenschutz",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5907,7 +5907,7 @@
               "linkUrl": "page:Gartenliegen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5925,7 +5925,7 @@
               "linkUrl": "page:Gartenbänke",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5943,7 +5943,7 @@
               "linkUrl": "page:Gartentische",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5961,7 +5961,7 @@
               "linkUrl": "page:Bierzeltgarnituren",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -5979,7 +5979,7 @@
               "linkUrl": "page:Hängematten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -6143,7 +6143,7 @@
               "linkUrl": "page:Gartenmöbel Sets",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6161,7 +6161,7 @@
               "linkUrl": "page:Gartenaufbewahrung",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6179,7 +6179,7 @@
               "linkUrl": "page:Gartenbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6197,7 +6197,7 @@
               "linkUrl": "page:Gartenliegen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6215,7 +6215,7 @@
               "linkUrl": "page:Gartenbänke",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6233,7 +6233,7 @@
               "linkUrl": "page:Gartentische",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6251,7 +6251,7 @@
               "linkUrl": "page:Bierzeltgarnituren",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6269,7 +6269,7 @@
               "linkUrl": "page:Hängematten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -6429,7 +6429,7 @@
               "linkUrl": "page:Gartenmöbel Sets",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6447,7 +6447,7 @@
               "linkUrl": "page:Gartenaufbewahrung",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6465,7 +6465,7 @@
               "linkUrl": "page:Gartenbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6483,7 +6483,7 @@
               "linkUrl": "page:Sonnenschutz",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6501,7 +6501,7 @@
               "linkUrl": "page:Gartenbänke",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6519,7 +6519,7 @@
               "linkUrl": "page:Gartentische",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6537,7 +6537,7 @@
               "linkUrl": "page:Bierzeltgarnituren",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6555,7 +6555,7 @@
               "linkUrl": "page:Hängematten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -6713,7 +6713,7 @@
               "linkUrl": "page:Gartenmöbel Sets",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6731,7 +6731,7 @@
               "linkUrl": "page:Gartenaufbewahrung",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6749,7 +6749,7 @@
               "linkUrl": "page:Gartenbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6767,7 +6767,7 @@
               "linkUrl": "page:Sonnenschutz",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6785,7 +6785,7 @@
               "linkUrl": "page:Gartenliegen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6803,7 +6803,7 @@
               "linkUrl": "page:Gartentische",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6821,7 +6821,7 @@
               "linkUrl": "page:Bierzeltgarnituren",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -6839,7 +6839,7 @@
               "linkUrl": "page:Hängematten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -6999,7 +6999,7 @@
               "linkUrl": "page:Gartenmöbel Sets",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7017,7 +7017,7 @@
               "linkUrl": "page:Gartenaufbewahrung",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7035,7 +7035,7 @@
               "linkUrl": "page:Gartenbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7053,7 +7053,7 @@
               "linkUrl": "page:Sonnenschutz",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7071,7 +7071,7 @@
               "linkUrl": "page:Gartenliegen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7089,7 +7089,7 @@
               "linkUrl": "page:Gartenbänke",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7107,7 +7107,7 @@
               "linkUrl": "page:Bierzeltgarnituren",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7125,7 +7125,7 @@
               "linkUrl": "page:Hängematten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -7285,7 +7285,7 @@
               "linkUrl": "page:Gartenmöbel Sets",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7303,7 +7303,7 @@
               "linkUrl": "page:Gartenaufbewahrung",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7321,7 +7321,7 @@
               "linkUrl": "page:Gartenbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7339,7 +7339,7 @@
               "linkUrl": "page:Sonnenschutz",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7357,7 +7357,7 @@
               "linkUrl": "page:Gartenliegen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7375,7 +7375,7 @@
               "linkUrl": "page:Gartenbänke",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7393,7 +7393,7 @@
               "linkUrl": "page:Gartentische",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7411,7 +7411,7 @@
               "linkUrl": "page:Hängematten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -7571,7 +7571,7 @@
               "linkUrl": "page:Gartenmöbel Sets",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7589,7 +7589,7 @@
               "linkUrl": "page:Gartenaufbewahrung",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7607,7 +7607,7 @@
               "linkUrl": "page:Gartenbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7625,7 +7625,7 @@
               "linkUrl": "page:Sonnenschutz",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7643,7 +7643,7 @@
               "linkUrl": "page:Gartenliegen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7661,7 +7661,7 @@
               "linkUrl": "page:Gartenbänke",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7679,7 +7679,7 @@
               "linkUrl": "page:Gartentische",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7697,7 +7697,7 @@
               "linkUrl": "page:Bierzeltgarnituren",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -7863,7 +7863,7 @@
               "linkUrl": "page:Gartenmöbel Sets",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7881,7 +7881,7 @@
               "linkUrl": "page:Gartenaufbewahrung",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7899,7 +7899,7 @@
               "linkUrl": "page:Gartenbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7917,7 +7917,7 @@
               "linkUrl": "page:Sonnenschutz",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7935,7 +7935,7 @@
               "linkUrl": "page:Gartenliegen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7953,7 +7953,7 @@
               "linkUrl": "page:Gartenbänke",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7971,7 +7971,7 @@
               "linkUrl": "page:Gartentische",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -7989,7 +7989,7 @@
               "linkUrl": "page:Bierzeltgarnituren",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -8151,7 +8151,7 @@
               "linkUrl": "page:Gartenmöbel Sets",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8169,7 +8169,7 @@
               "linkUrl": "page:Gartenaufbewahrung",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8187,7 +8187,7 @@
               "linkUrl": "page:Gartenbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8205,7 +8205,7 @@
               "linkUrl": "page:Sonnenschutz",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8223,7 +8223,7 @@
               "linkUrl": "page:Gartenliegen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8241,7 +8241,7 @@
               "linkUrl": "page:Gartenbänke",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8259,7 +8259,7 @@
               "linkUrl": "page:Gartentische",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8277,7 +8277,7 @@
               "linkUrl": "page:Bierzeltgarnituren",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -8433,7 +8433,7 @@
               "linkUrl": "page:Gartenmöbel Sets",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8451,7 +8451,7 @@
               "linkUrl": "page:Gartenaufbewahrung",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8469,7 +8469,7 @@
               "linkUrl": "page:Gartenbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8487,7 +8487,7 @@
               "linkUrl": "page:Sonnenschutz",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8505,7 +8505,7 @@
               "linkUrl": "page:Gartenliegen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8523,7 +8523,7 @@
               "linkUrl": "page:Gartenbänke",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8541,7 +8541,7 @@
               "linkUrl": "page:Gartentische",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8559,7 +8559,7 @@
               "linkUrl": "page:Bierzeltgarnituren",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -8715,7 +8715,7 @@
               "linkUrl": "page:Polsterbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8733,7 +8733,7 @@
               "linkUrl": "page:Boxspringbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8751,7 +8751,7 @@
               "linkUrl": "page:Metallbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8769,7 +8769,7 @@
               "linkUrl": "page:Kinderbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8787,7 +8787,7 @@
               "linkUrl": "page:Wohnmöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8805,7 +8805,7 @@
               "linkUrl": "page:Massagesessel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8823,7 +8823,7 @@
               "linkUrl": "page:Büromöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -8841,7 +8841,7 @@
               "linkUrl": "page:Matratzen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -9001,7 +9001,7 @@
               "linkUrl": "page:Sofas",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9019,7 +9019,7 @@
               "linkUrl": "page:Boxspringbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9037,7 +9037,7 @@
               "linkUrl": "page:Metallbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9055,7 +9055,7 @@
               "linkUrl": "page:Kinderbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9073,7 +9073,7 @@
               "linkUrl": "page:Wohnmöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9091,7 +9091,7 @@
               "linkUrl": "page:Massagesessel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9109,7 +9109,7 @@
               "linkUrl": "page:Büromöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9127,7 +9127,7 @@
               "linkUrl": "page:Matratzen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -9285,7 +9285,7 @@
               "linkUrl": "page:Sofas",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9303,7 +9303,7 @@
               "linkUrl": "page:Polsterbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9321,7 +9321,7 @@
               "linkUrl": "page:Metallbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9339,7 +9339,7 @@
               "linkUrl": "page:Kinderbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9357,7 +9357,7 @@
               "linkUrl": "page:Wohnmöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9375,7 +9375,7 @@
               "linkUrl": "page:Massagesessel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9393,7 +9393,7 @@
               "linkUrl": "page:Büromöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9411,7 +9411,7 @@
               "linkUrl": "page:Matratzen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -9569,7 +9569,7 @@
               "linkUrl": "page:Sofas",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9587,7 +9587,7 @@
               "linkUrl": "page:Polsterbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9605,7 +9605,7 @@
               "linkUrl": "page:Boxspringbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9623,7 +9623,7 @@
               "linkUrl": "page:Kinderbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9641,7 +9641,7 @@
               "linkUrl": "page:Wohnmöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9659,7 +9659,7 @@
               "linkUrl": "page:Massagesessel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9677,7 +9677,7 @@
               "linkUrl": "page:Büromöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9695,7 +9695,7 @@
               "linkUrl": "page:Matratzen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -9855,7 +9855,7 @@
               "linkUrl": "page:Sofas",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9873,7 +9873,7 @@
               "linkUrl": "page:Polsterbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9891,7 +9891,7 @@
               "linkUrl": "page:Boxspringbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9909,7 +9909,7 @@
               "linkUrl": "page:Metallbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9927,7 +9927,7 @@
               "linkUrl": "page:Wohnmöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9945,7 +9945,7 @@
               "linkUrl": "page:Massagesessel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9963,7 +9963,7 @@
               "linkUrl": "page:Büromöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -9981,7 +9981,7 @@
               "linkUrl": "page:Matratzen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -10141,7 +10141,7 @@
               "linkUrl": "page:Sofas",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10159,7 +10159,7 @@
               "linkUrl": "page:Polsterbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10177,7 +10177,7 @@
               "linkUrl": "page:Boxspringbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10195,7 +10195,7 @@
               "linkUrl": "page:Metallbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10213,7 +10213,7 @@
               "linkUrl": "page:Kinderbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10231,7 +10231,7 @@
               "linkUrl": "page:Massagesessel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10249,7 +10249,7 @@
               "linkUrl": "page:Büromöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10267,7 +10267,7 @@
               "linkUrl": "page:Matratzen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -10423,7 +10423,7 @@
               "linkUrl": "page:Sofas",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10441,7 +10441,7 @@
               "linkUrl": "page:Polsterbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10459,7 +10459,7 @@
               "linkUrl": "page:Boxspringbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10477,7 +10477,7 @@
               "linkUrl": "page:Metallbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10495,7 +10495,7 @@
               "linkUrl": "page:Kinderbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10513,7 +10513,7 @@
               "linkUrl": "page:Wohnmöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10531,7 +10531,7 @@
               "linkUrl": "page:Büromöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10549,7 +10549,7 @@
               "linkUrl": "page:Matratzen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -10711,7 +10711,7 @@
               "linkUrl": "page:Sofas",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10729,7 +10729,7 @@
               "linkUrl": "page:Polsterbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10747,7 +10747,7 @@
               "linkUrl": "page:Boxspringbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10765,7 +10765,7 @@
               "linkUrl": "page:Metallbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10783,7 +10783,7 @@
               "linkUrl": "page:Kinderbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10801,7 +10801,7 @@
               "linkUrl": "page:Wohnmöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10819,7 +10819,7 @@
               "linkUrl": "page:Massagesessel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -10837,7 +10837,7 @@
               "linkUrl": "page:Matratzen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -10995,7 +10995,7 @@
               "linkUrl": "page:Sofas",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11013,7 +11013,7 @@
               "linkUrl": "page:Polsterbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11031,7 +11031,7 @@
               "linkUrl": "page:Boxspringbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11049,7 +11049,7 @@
               "linkUrl": "page:Metallbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11067,7 +11067,7 @@
               "linkUrl": "page:Kinderbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11085,7 +11085,7 @@
               "linkUrl": "page:Wohnmöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11103,7 +11103,7 @@
               "linkUrl": "page:Massagesessel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11121,7 +11121,7 @@
               "linkUrl": "page:Büromöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -11283,7 +11283,7 @@
               "linkUrl": "page:Sofas",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11301,7 +11301,7 @@
               "linkUrl": "page:Polsterbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11319,7 +11319,7 @@
               "linkUrl": "page:Boxspringbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11337,7 +11337,7 @@
               "linkUrl": "page:Metallbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11355,7 +11355,7 @@
               "linkUrl": "page:Kinderbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11373,7 +11373,7 @@
               "linkUrl": "page:Wohnmöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11391,7 +11391,7 @@
               "linkUrl": "page:Massagesessel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11409,7 +11409,7 @@
               "linkUrl": "page:Büromöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -11573,7 +11573,7 @@
               "linkUrl": "page:Sofas",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11591,7 +11591,7 @@
               "linkUrl": "page:Polsterbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11609,7 +11609,7 @@
               "linkUrl": "page:Boxspringbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11627,7 +11627,7 @@
               "linkUrl": "page:Metallbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11645,7 +11645,7 @@
               "linkUrl": "page:Kinderbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11663,7 +11663,7 @@
               "linkUrl": "page:Wohnmöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11681,7 +11681,7 @@
               "linkUrl": "page:Massagesessel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11699,7 +11699,7 @@
               "linkUrl": "page:Büromöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -11859,7 +11859,7 @@
               "linkUrl": "page:Sofas",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11877,7 +11877,7 @@
               "linkUrl": "page:Polsterbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11895,7 +11895,7 @@
               "linkUrl": "page:Boxspringbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11913,7 +11913,7 @@
               "linkUrl": "page:Metallbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11931,7 +11931,7 @@
               "linkUrl": "page:Kinderbetten",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11949,7 +11949,7 @@
               "linkUrl": "page:Wohnmöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11967,7 +11967,7 @@
               "linkUrl": "page:Massagesessel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -11985,7 +11985,7 @@
               "linkUrl": "page:Büromöbel",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -12149,7 +12149,7 @@
               "linkUrl": "page:Koffersets",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -12167,7 +12167,7 @@
               "linkUrl": "page:Dachzelte",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -12185,7 +12185,7 @@
               "linkUrl": "page:Sport",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -12353,7 +12353,7 @@
               "linkUrl": "page:Camping",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -12371,7 +12371,7 @@
               "linkUrl": "page:Dachzelte",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -12389,7 +12389,7 @@
               "linkUrl": "page:Sport",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -12545,7 +12545,7 @@
               "linkUrl": "page:Camping",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -12563,7 +12563,7 @@
               "linkUrl": "page:Koffersets",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -12581,7 +12581,7 @@
               "linkUrl": "page:Sport",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -12743,7 +12743,7 @@
               "linkUrl": "page:Camping",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -12761,7 +12761,7 @@
               "linkUrl": "page:Koffersets",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -12779,7 +12779,7 @@
               "linkUrl": "page:Dachzelte",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -12939,7 +12939,7 @@
               "linkUrl": "page:Sackkarren",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -12957,7 +12957,7 @@
               "linkUrl": "page:Multifunktionsleitern",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -12975,7 +12975,7 @@
               "linkUrl": "page:Elektrokamine",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -13135,7 +13135,7 @@
               "linkUrl": "page:Werkzeug",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -13153,7 +13153,7 @@
               "linkUrl": "page:Multifunktionsleitern",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -13171,7 +13171,7 @@
               "linkUrl": "page:Elektrokamine",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -13327,7 +13327,7 @@
               "linkUrl": "page:Werkzeug",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -13345,7 +13345,7 @@
               "linkUrl": "page:Sackkarren",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -13363,7 +13363,7 @@
               "linkUrl": "page:Elektrokamine",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -13529,7 +13529,7 @@
               "linkUrl": "page:Werkzeug",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -13547,7 +13547,7 @@
               "linkUrl": "page:Sackkarren",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -13565,7 +13565,7 @@
               "linkUrl": "page:Multifunktionsleitern",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -13736,7 +13736,7 @@
               "linkUrl": "page:Aufbewahrung",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -13754,7 +13754,7 @@
               "linkUrl": "page:Küchengeräte",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -13772,7 +13772,7 @@
               "linkUrl": "page:Mülleimer",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -13790,7 +13790,7 @@
               "linkUrl": "page:Eiswürfelmaschinen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -13808,7 +13808,7 @@
               "linkUrl": "page:Heizgeräte",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -13826,7 +13826,7 @@
               "linkUrl": "page:Alltagshilfen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -13844,7 +13844,7 @@
               "linkUrl": "page:Kinderbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -14002,7 +14002,7 @@
               "linkUrl": "page:Schwerlastregale",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14020,7 +14020,7 @@
               "linkUrl": "page:Küchengeräte",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14038,7 +14038,7 @@
               "linkUrl": "page:Mülleimer",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14056,7 +14056,7 @@
               "linkUrl": "page:Eiswürfelmaschinen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14074,7 +14074,7 @@
               "linkUrl": "page:Heizgeräte",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14092,7 +14092,7 @@
               "linkUrl": "page:Alltagshilfen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14110,7 +14110,7 @@
               "linkUrl": "page:Kinderbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -14266,7 +14266,7 @@
               "linkUrl": "page:Schwerlastregale",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14284,7 +14284,7 @@
               "linkUrl": "page:Aufbewahrung",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14302,7 +14302,7 @@
               "linkUrl": "page:Mülleimer",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14320,7 +14320,7 @@
               "linkUrl": "page:Eiswürfelmaschinen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14338,7 +14338,7 @@
               "linkUrl": "page:Heizgeräte",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14356,7 +14356,7 @@
               "linkUrl": "page:Alltagshilfen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14374,7 +14374,7 @@
               "linkUrl": "page:Kinderbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -14530,7 +14530,7 @@
               "linkUrl": "page:Schwerlastregale",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14548,7 +14548,7 @@
               "linkUrl": "page:Aufbewahrung",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14566,7 +14566,7 @@
               "linkUrl": "page:Küchengeräte",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14584,7 +14584,7 @@
               "linkUrl": "page:Eiswürfelmaschinen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14602,7 +14602,7 @@
               "linkUrl": "page:Heizgeräte",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14620,7 +14620,7 @@
               "linkUrl": "page:Alltagshilfen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14638,7 +14638,7 @@
               "linkUrl": "page:Kinderbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -14794,7 +14794,7 @@
               "linkUrl": "page:Schwerlastregale",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14812,7 +14812,7 @@
               "linkUrl": "page:Aufbewahrung",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14830,7 +14830,7 @@
               "linkUrl": "page:Küchengeräte",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14848,7 +14848,7 @@
               "linkUrl": "page:Mülleimer",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14866,7 +14866,7 @@
               "linkUrl": "page:Heizgeräte",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14884,7 +14884,7 @@
               "linkUrl": "page:Alltagshilfen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -14902,7 +14902,7 @@
               "linkUrl": "page:Kinderbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -15060,7 +15060,7 @@
               "linkUrl": "page:Schwerlastregale",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -15078,7 +15078,7 @@
               "linkUrl": "page:Aufbewahrung",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -15096,7 +15096,7 @@
               "linkUrl": "page:Küchengeräte",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -15114,7 +15114,7 @@
               "linkUrl": "page:Mülleimer",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -15132,7 +15132,7 @@
               "linkUrl": "page:Eiswürfelmaschinen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -15150,7 +15150,7 @@
               "linkUrl": "page:Alltagshilfen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -15168,7 +15168,7 @@
               "linkUrl": "page:Kinderbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -15328,7 +15328,7 @@
               "linkUrl": "page:Schwerlastregale",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -15346,7 +15346,7 @@
               "linkUrl": "page:Aufbewahrung",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -15364,7 +15364,7 @@
               "linkUrl": "page:Küchengeräte",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -15382,7 +15382,7 @@
               "linkUrl": "page:Mülleimer",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -15400,7 +15400,7 @@
               "linkUrl": "page:Eiswürfelmaschinen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -15418,7 +15418,7 @@
               "linkUrl": "page:Heizgeräte",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -15436,7 +15436,7 @@
               "linkUrl": "page:Kinderbedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -15607,7 +15607,7 @@
               "linkUrl": "page:Schwerlastregale",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -15625,7 +15625,7 @@
               "linkUrl": "page:Aufbewahrung",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -15643,7 +15643,7 @@
               "linkUrl": "page:Küchengeräte",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -15661,7 +15661,7 @@
               "linkUrl": "page:Mülleimer",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -15679,7 +15679,7 @@
               "linkUrl": "page:Eiswürfelmaschinen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -15697,7 +15697,7 @@
               "linkUrl": "page:Heizgeräte",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             },
             {
@@ -15715,7 +15715,7 @@
               "linkUrl": "page:Alltagshilfen",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -15877,7 +15877,7 @@
               "linkUrl": "page:Freilaufgehege",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -16033,7 +16033,7 @@
               "linkUrl": "page:Hundebedarf",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "product",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]

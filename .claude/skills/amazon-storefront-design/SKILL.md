@@ -320,7 +320,8 @@ Jeder image, image_text und shoppable_image Tile muss eine `imageCategory` haben
 |----------------|------|
 | `store_hero` | **NUR** für das Banner über der Menüleiste (Page Header Banner, Felder `page.heroBanner` / `page.heroBannerMobile`). Niemals für Hero Tiles innerhalb einer Page Section. |
 | `benefit` | USP / Feature Tiles mit Icon plus Label |
-| `product` | Kategorie Navigator Tiles, freigestelltes Produkt auf hellem Grund |
+| `product` | Reine Produkt Detail Tiles, freigestelltes Produkt auf hellem Grund (selten, nur wenn explizit gewünscht) |
+| `lifestyle` (für Kategorie Tiles) | **Default für Kategorie Navigator Tiles**: Produkt im Kontext, mit Stimmung, nicht freigestellt. Bei Möbel und Outdoor verkauft das mehr als Freisteller. |
 | `lifestyle` | Hero Tiles auf Pages, Shoppable Tiles, Lifestyle Trenner, Brand Story Bilder, Raum oder Anwendungsszenen |
 | `text_image` | Text plus Bild Kombination, Trenner mit Claim |
 | `creative` | Footer Tiles, Cross Links, sonstige kreative Kompositionen |
