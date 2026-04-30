@@ -6,53 +6,53 @@
   "brandStory": "True Nature ist ein Familienunternehmen aus Köln, gegründet 2019 von Lukas und Samuel Peto. Wir bauen hochwirksame Rezepturen aus natürlichen Inhaltsstoffen, kombiniert mit moderner Wissenschaft und strengen Qualitätsstandards. Made in Germany, unabhängig geprüft, große Dosen zum fairen Preis.",
   "headerBannerColor": "#003e2a",
   "asins": [
-    { "asin": "B0FY73CZMB", "category": "Schlaf" },
-    { "asin": "B09D4VM1I8", "category": "Herz-Kreislauf" },
-    { "asin": "B0DJTSMKYG", "category": "Herz-Kreislauf" },
-    { "asin": "B0CYTJK2ML", "category": "Immunsystem & Vitalität" },
-    { "asin": "B0F3J4MP7Z", "category": "Immunsystem & Vitalität" },
-    { "asin": "B0DHY9K7XN", "category": "Körper & Balance" },
+    { "asin": "B0FY73CZM8", "category": "Schlaf" },
+    { "asin": "B09DQ4MW18", "category": "Herz-Kreislauf" },
+    { "asin": "B0DJT5NKYG", "category": "Herz-Kreislauf" },
+    { "asin": "B0CYTJKZML", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0F3XW4P7Z", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0DHY9K7XM", "category": "Körper & Balance" },
     { "asin": "B09BD49H7K", "category": "Immunsystem & Vitalität" },
-    { "asin": "B0DYF4GQ3B", "category": "Körper & Balance" },
-    { "asin": "B0FCYVKVF7", "category": "Verdauung" },
+    { "asin": "B0DYF4GQ38", "category": "Körper & Balance" },
+    { "asin": "B0FCYQKVF7", "category": "Verdauung" },
     { "asin": "B0CYM13PB4", "category": "Immunsystem & Vitalität" },
     { "asin": "B0DJT57NST", "category": "Verdauung" },
-    { "asin": "B0DRD7N99D", "category": "Immunsystem & Vitalität" },
-    { "asin": "B0DT13TNVN", "category": "Verdauung" },
-    { "asin": "B0DL1NLLBB", "category": "Gelenke & Sport" },
-    { "asin": "B0DG7LPKZ", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0DRD7NQ9D", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0DT1BTWYM", "category": "Verdauung" },
+    { "asin": "B0DLL1NLB8", "category": "Gelenke & Sport" },
+    { "asin": "B0D6G7LPKZ", "category": "Immunsystem & Vitalität" },
     { "asin": "B089K48RVT", "category": "Körper & Balance" },
     { "asin": "B0DN1NTRZC", "category": "Energie" },
-    { "asin": "B08TT7JJ1G", "category": "Energie" },
-    { "asin": "B0DK30CF64", "category": "Verdauung" },
+    { "asin": "B088TT7J1G", "category": "Energie" },
+    { "asin": "B0DK3BCF64", "category": "Verdauung" },
     { "asin": "B0FH6V5V3H", "category": "Gelenke & Sport" },
     { "asin": "B089YWB481", "category": "Schlaf" },
-    { "asin": "B0DT18M4ON", "category": "Körper & Balance" },
+    { "asin": "B0DT18M4CN", "category": "Körper & Balance" },
     { "asin": "B09CQ674JG", "category": "Verdauung" },
-    { "asin": "B0FR9GDRR1", "category": "Gelenke & Sport" },
-    { "asin": "B0DXJ13FDW", "category": "Körper & Balance" },
-    { "asin": "B0CYLMVGGZ", "category": "Immunsystem & Vitalität" },
-    { "asin": "B0DPMLFL94", "category": "Energie" },
-    { "asin": "B089ZPK5DX", "category": "Gelenke & Sport" },
-    { "asin": "B0D3H08TYJ", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0FR9GMDR1", "category": "Gelenke & Sport" },
+    { "asin": "B0DX7J3FDW", "category": "Körper & Balance" },
+    { "asin": "B0CYLVMGGZ", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0DPN4LF94", "category": "Energie" },
+    { "asin": "B0892PK5DX", "category": "Gelenke & Sport" },
+    { "asin": "B0D3HQ8TYJ", "category": "Immunsystem & Vitalität" },
     { "asin": "B0CYLX4YWT", "category": "Immunsystem & Vitalität" },
-    { "asin": "B0DJT88VP5", "category": "Immunsystem & Vitalität" },
-    { "asin": "B0CY14PWMF", "category": "Körper & Balance" },
-    { "asin": "B0F3NT8VY7", "category": "Gelenke & Sport" },
-    { "asin": "B0DQ46CHL", "category": "Verdauung" },
+    { "asin": "B0DJT8BVPS", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0CYT4MXMF", "category": "Körper & Balance" },
+    { "asin": "B0F3NTB8Y7", "category": "Gelenke & Sport" },
+    { "asin": "B0DQ64G6HL", "category": "Verdauung" },
     { "asin": "B0DK26YYS9", "category": "Verdauung" },
-    { "asin": "B0DRH2SPLG", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0DBM2SPLG", "category": "Immunsystem & Vitalität" },
     { "asin": "B0CLD91XC9", "category": "Schlaf" },
-    { "asin": "B081T3TJRK", "category": "Immunsystem & Vitalität" },
-    { "asin": "B0CMDFD46", "category": "Herz-Kreislauf" },
-    { "asin": "B0D2P0RKQ5", "category": "Herz-Kreislauf" },
+    { "asin": "B081TBTJRK", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0CMDHFD46", "category": "Herz-Kreislauf" },
+    { "asin": "B0D2PDRKQ5", "category": "Herz-Kreislauf" },
     { "asin": "B0DBLPCNHC", "category": "Energie" },
-    { "asin": "B0D496QM3H", "category": "Schlaf" },
-    { "asin": "B0DY2148G", "category": "Schlaf" },
-    { "asin": "B07W9VD2L", "category": "Körper & Balance" },
-    { "asin": "B0G1NF25ZX", "category": "Körper & Balance" },
+    { "asin": "B0D496GM3H", "category": "Schlaf" },
+    { "asin": "B0DYK2148G", "category": "Schlaf" },
+    { "asin": "B07TWGVD2L", "category": "Körper & Balance" },
+    { "asin": "B0G1NF2S2X", "category": "Körper & Balance" },
     { "asin": "B086X6HD6R", "category": "Verdauung" },
-    { "asin": "B0D45SDLXF", "category": "Verdauung" }
+    { "asin": "B0D45SBLXF", "category": "Verdauung" }
   ],
   "pages": [
     {
@@ -241,7 +241,7 @@
                 "cta": ""
               },
               "brief": "Lifestyle Aufnahme einer Frühstücksszene auf hellem Holztisch. Verteilt: Daily Sleep Dose, Propionsäure, Bockshornklee, PQQ, Grünlippmuschel. Dazwischen Glas Wasser, frische Blaubeeren, Walnüsse, aufgeschlagenes Notizbuch. Hotspots auf den 5 Dosen.",
-              "asins": ["B0FY73CZMB", "B0FCYVKVF7", "B0DJT57NST", "B0DN1NTRZC", "B089ZPK5DX"],
+              "asins": ["B0FY73CZM8", "B0FCYQKVF7", "B0DJT57NST", "B0DN1NTRZC", "B0892PK5DX"],
               "hotspots": []
             }
           ]
@@ -260,14 +260,14 @@
                 "cta": ""
               },
               "asins": [
-                "B0FY73CZMB",
+                "B0FY73CZM8",
                 "B089YWB481",
-                "B08TT7JJ1G",
-                "B081T3TJRK",
+                "B088TT7J1G",
+                "B081TBTJRK",
                 "B0CLD91XC9",
-                "B0DY2148G",
+                "B0DYK2148G",
                 "B0FH6V5V3H",
-                "B0DJTSMKYG"
+                "B0DJT5NKYG"
               ]
             }
           ]
@@ -373,14 +373,14 @@
                 "cta": ""
               },
               "asins": [
-                "B0FY73CZMB",
+                "B0FY73CZM8",
                 "B089YWB481",
-                "B08TT7JJ1G",
-                "B081T3TJRK",
+                "B088TT7J1G",
+                "B081TBTJRK",
                 "B0CLD91XC9",
-                "B0DY2148G",
+                "B0DYK2148G",
                 "B0FH6V5V3H",
-                "B0DJTSMKYG"
+                "B0DJT5NKYG"
               ]
             }
           ]
@@ -417,11 +417,11 @@
                 "cta": ""
               },
               "asins": [
-                "B0FY73CZMB",
+                "B0FY73CZM8",
                 "B089YWB481",
                 "B0CLD91XC9",
-                "B0D496QM3H",
-                "B0DY2148G"
+                "B0D496GM3H",
+                "B0DYK2148G"
               ]
             }
           ]
@@ -459,13 +459,13 @@
               },
               "asins": [
                 "B09BD49H7K",
-                "B0DRD7N99D",
+                "B0DRD7NQ9D",
                 "B0CLD91XC9",
-                "B081T3TJRK",
-                "B0DY2148G",
+                "B081TBTJRK",
+                "B0DYK2148G",
                 "B0CYLX4YWT",
-                "B0DJT88VP5",
-                "B0DRH2SPLG"
+                "B0DJT8BVPS",
+                "B0DBM2SPLG"
               ]
             }
           ]
@@ -502,14 +502,14 @@
                 "cta": ""
               },
               "asins": [
-                "B08TT7JJ1G",
+                "B088TT7J1G",
                 "B0DN1NTRZC",
-                "B0DPMLFL94",
+                "B0DPN4LF94",
                 "B0DBLPCNHC",
-                "B081T3TJRK",
-                "B0DRH2SPLG",
-                "B0DY2148G",
-                "B0CYTJK2ML"
+                "B081TBTJRK",
+                "B0DBM2SPLG",
+                "B0DYK2148G",
+                "B0CYTJKZML"
               ]
             }
           ]
@@ -547,13 +547,13 @@
               },
               "asins": [
                 "B0FH6V5V3H",
-                "B0F3NT8VY7",
-                "B089ZPK5DX",
-                "B0DL1NLLBB",
-                "B0FR9GDRR1",
-                "B0F3J4MP7Z",
-                "B081T3TJRK",
-                "B0CYTJK2ML"
+                "B0F3NTB8Y7",
+                "B0892PK5DX",
+                "B0DLL1NLB8",
+                "B0FR9GMDR1",
+                "B0F3XW4P7Z",
+                "B081TBTJRK",
+                "B0CYTJKZML"
               ]
             }
           ]
@@ -641,11 +641,11 @@
               },
               "brief": "Nachttisch Szene mit fünf True Nature Dosen versetzt arrangiert: Daily Sleep, Ashwagandha, Lions Mane, Baldrian, Reishi. Daneben Tasse Tee, Notizbuch, kleines Pflänzchen. Hotspots auf den 5 Dosen.",
               "asins": [
-                "B0FY73CZMB",
+                "B0FY73CZM8",
                 "B089YWB481",
                 "B0CLD91XC9",
-                "B0D496QM3H",
-                "B0DY2148G"
+                "B0D496GM3H",
+                "B0DYK2148G"
               ],
               "hotspots": []
             }
@@ -665,11 +665,11 @@
                 "cta": ""
               },
               "asins": [
-                "B0FY73CZMB",
+                "B0FY73CZM8",
                 "B089YWB481",
                 "B0CLD91XC9",
-                "B0D496QM3H",
-                "B0DY2148G"
+                "B0D496GM3H",
+                "B0DYK2148G"
               ]
             }
           ]
@@ -732,11 +732,11 @@
                 "cta": ""
               },
               "asins": [
-                "B0FY73CZMB",
+                "B0FY73CZM8",
                 "B089YWB481",
                 "B0CLD91XC9",
-                "B0D496QM3H",
-                "B0DY2148G"
+                "B0D496GM3H",
+                "B0DYK2148G"
               ]
             }
           ]
@@ -890,10 +890,10 @@
               "brief": "Holztisch Szene mit fünf True Nature Dosen versetzt arrangiert: Cordyceps, Cranberry plus C, Lions Mane, Spirulina, Reishi. Dazwischen frische Cranberries, getrocknete Pilze, Zitrone. Hotspots auf den 5 Dosen.",
               "asins": [
                 "B09BD49H7K",
-                "B0DRD7N99D",
+                "B0DRD7NQ9D",
                 "B0CLD91XC9",
-                "B081T3TJRK",
-                "B0DY2148G"
+                "B081TBTJRK",
+                "B0DYK2148G"
               ],
               "hotspots": []
             }
@@ -914,13 +914,13 @@
               },
               "asins": [
                 "B09BD49H7K",
-                "B0DRD7N99D",
+                "B0DRD7NQ9D",
                 "B0CLD91XC9",
-                "B081T3TJRK",
-                "B0DY2148G",
+                "B081TBTJRK",
+                "B0DYK2148G",
                 "B0CYLX4YWT",
-                "B0DJT88VP5",
-                "B0DRH2SPLG"
+                "B0DJT8BVPS",
+                "B0DBM2SPLG"
               ]
             }
           ]
@@ -983,20 +983,20 @@
                 "cta": ""
               },
               "asins": [
-                "B0CYTJK2ML",
-                "B0F3J4MP7Z",
+                "B0CYTJKZML",
+                "B0F3XW4P7Z",
                 "B09BD49H7K",
                 "B0CYM13PB4",
-                "B0DRD7N99D",
-                "B0DG7LPKZ",
-                "B0CYLMVGGZ",
-                "B0D3H08TYJ",
+                "B0DRD7NQ9D",
+                "B0D6G7LPKZ",
+                "B0CYLVMGGZ",
+                "B0D3HQ8TYJ",
                 "B0CYLX4YWT",
-                "B0DJT88VP5",
-                "B0DRH2SPLG",
+                "B0DJT8BVPS",
+                "B0DBM2SPLG",
                 "B0CLD91XC9",
-                "B081T3TJRK",
-                "B0DY2148G"
+                "B081TBTJRK",
+                "B0DYK2148G"
               ]
             }
           ]
@@ -1113,10 +1113,10 @@
               },
               "brief": "Frühstückstheke mit fünf True Nature Dosen versetzt: Maca, PQQ, Gerstengras, Spirulina, B2. Daneben Smoothie Bowl, frische Zutaten, Sportschuhe im Hintergrund unscharf. Hotspots auf den 5 Dosen.",
               "asins": [
-                "B08TT7JJ1G",
+                "B088TT7J1G",
                 "B0DN1NTRZC",
-                "B0DPMLFL94",
-                "B081T3TJRK",
+                "B0DPN4LF94",
+                "B081TBTJRK",
                 "B0DBLPCNHC"
               ],
               "hotspots": []
@@ -1137,14 +1137,14 @@
                 "cta": ""
               },
               "asins": [
-                "B08TT7JJ1G",
+                "B088TT7J1G",
                 "B0DN1NTRZC",
-                "B0DPMLFL94",
+                "B0DPN4LF94",
                 "B0DBLPCNHC",
-                "B081T3TJRK",
-                "B0DRH2SPLG",
-                "B0DY2148G",
-                "B0CYTJK2ML"
+                "B081TBTJRK",
+                "B0DBM2SPLG",
+                "B0DYK2148G",
+                "B0CYTJKZML"
               ]
             }
           ]
@@ -1195,16 +1195,16 @@
                 "cta": ""
               },
               "asins": [
-                "B0FY73CZMB",
-                "B0CYTJK2ML",
+                "B0FY73CZM8",
+                "B0CYTJKZML",
                 "B0DN1NTRZC",
-                "B08TT7JJ1G",
-                "B0DPMLFL94",
-                "B0DRH2SPLG",
-                "B081T3TJRK",
+                "B088TT7J1G",
+                "B0DPN4LF94",
+                "B0DBM2SPLG",
+                "B081TBTJRK",
                 "B0DBLPCNHC",
-                "B0D496QM3H",
-                "B0DY2148G"
+                "B0D496GM3H",
+                "B0DYK2148G"
               ]
             }
           ]
@@ -1322,10 +1322,10 @@
               "brief": "Sportszene auf Holzboden mit fünf True Nature Dosen versetzt: Glucosamin, Weihrauch, Grünlippmuschel, L-Prolin, Kalium. Daneben Yogamatte, Wasserflasche, Sportschuhe. Hotspots auf den 5 Dosen.",
               "asins": [
                 "B0FH6V5V3H",
-                "B0F3NT8VY7",
-                "B089ZPK5DX",
-                "B0FR9GDRR1",
-                "B0DL1NLLBB"
+                "B0F3NTB8Y7",
+                "B0892PK5DX",
+                "B0FR9GMDR1",
+                "B0DLL1NLB8"
               ],
               "hotspots": []
             }
@@ -1346,13 +1346,13 @@
               },
               "asins": [
                 "B0FH6V5V3H",
-                "B0F3NT8VY7",
-                "B089ZPK5DX",
-                "B0DL1NLLBB",
-                "B0FR9GDRR1",
-                "B0F3J4MP7Z",
-                "B081T3TJRK",
-                "B0CYTJK2ML"
+                "B0F3NTB8Y7",
+                "B0892PK5DX",
+                "B0DLL1NLB8",
+                "B0FR9GMDR1",
+                "B0F3XW4P7Z",
+                "B081TBTJRK",
+                "B0CYTJKZML"
               ]
             }
           ]
@@ -1403,14 +1403,14 @@
                 "cta": ""
               },
               "asins": [
-                "B0CYTJK2ML",
-                "B0F3J4MP7Z",
-                "B0DL1NLLBB",
+                "B0CYTJKZML",
+                "B0F3XW4P7Z",
+                "B0DLL1NLB8",
                 "B0FH6V5V3H",
-                "B0FR9GDRR1",
-                "B089ZPK5DX",
-                "B081T3TJRK",
-                "B0F3NT8VY7"
+                "B0FR9GMDR1",
+                "B0892PK5DX",
+                "B081TBTJRK",
+                "B0F3NTB8Y7"
               ]
             }
           ]
@@ -1529,8 +1529,8 @@
               "asins": [
                 "B0DJT57NST",
                 "B09CQ674JG",
-                "B0DK30CF64",
-                "B0DT13TNVN",
+                "B0DK3BCF64",
+                "B0DT1BTWYM",
                 "B0DK26YYS9"
               ],
               "hotspots": []
@@ -1553,12 +1553,12 @@
               "asins": [
                 "B0DJT57NST",
                 "B09CQ674JG",
-                "B0DK30CF64",
+                "B0DK3BCF64",
                 "B0DK26YYS9",
-                "B0FCYVKVF7",
+                "B0FCYQKVF7",
                 "B086X6HD6R",
-                "B0D45SDLXF",
-                "B0DJT88VP5"
+                "B0D45SBLXF",
+                "B0DJT8BVPS"
               ]
             }
           ]
@@ -1609,16 +1609,16 @@
                 "cta": ""
               },
               "asins": [
-                "B0FCYVKVF7",
+                "B0FCYQKVF7",
                 "B0DJT57NST",
-                "B0DT13TNVN",
-                "B0DK30CF64",
+                "B0DT1BTWYM",
+                "B0DK3BCF64",
                 "B09CQ674JG",
-                "B0DJT88VP5",
-                "B0DQ46CHL",
+                "B0DJT8BVPS",
+                "B0DQ64G6HL",
                 "B0DK26YYS9",
                 "B086X6HD6R",
-                "B0D45SDLXF"
+                "B0D45SBLXF"
               ]
             }
           ]
@@ -1735,11 +1735,11 @@
               },
               "brief": "Holztisch Szene mit fünf True Nature Dosen versetzt: Daily Sleep, Pinienrindenextrakt, Safran, Maca, Schwarzer Knoblauch. Dazwischen Safranfäden, Knoblauchzehen, frische Beeren. Hotspots auf den 5 Dosen.",
               "asins": [
-                "B0FY73CZMB",
-                "B09D4VM1I8",
-                "B0DJTSMKYG",
-                "B08TT7JJ1G",
-                "B0D2P0RKQ5"
+                "B0FY73CZM8",
+                "B09DQ4MW18",
+                "B0DJT5NKYG",
+                "B088TT7J1G",
+                "B0D2PDRKQ5"
               ],
               "hotspots": []
             }
@@ -1759,13 +1759,13 @@
                 "cta": ""
               },
               "asins": [
-                "B0DJTSMKYG",
-                "B0D2P0RKQ5",
-                "B09D4VM1I8",
-                "B08TT7JJ1G",
-                "B0DL1NLLBB",
-                "B0CMDFD46",
-                "B0FY73CZMB"
+                "B0DJT5NKYG",
+                "B0D2PDRKQ5",
+                "B09DQ4MW18",
+                "B088TT7J1G",
+                "B0DLL1NLB8",
+                "B0CMDHFD46",
+                "B0FY73CZM8"
               ]
             }
           ]
@@ -1816,13 +1816,13 @@
                 "cta": ""
               },
               "asins": [
-                "B0FY73CZMB",
-                "B09D4VM1I8",
-                "B0DJTSMKYG",
-                "B08TT7JJ1G",
-                "B0DL1NLLBB",
-                "B0CMDFD46",
-                "B0D2P0RKQ5"
+                "B0FY73CZM8",
+                "B09DQ4MW18",
+                "B0DJT5NKYG",
+                "B088TT7J1G",
+                "B0DLL1NLB8",
+                "B0CMDHFD46",
+                "B0D2PDRKQ5"
               ]
             }
           ]
@@ -1940,9 +1940,9 @@
               "brief": "Holztisch Szene mit fünf True Nature Dosen versetzt: Ashwagandha, Bacopa, Shatavari, Johanniskraut, TRU NIAGEN. Dazwischen Adaptogenwurzeln, getrocknete Blüten, kleines Notizbuch. Hotspots auf den 5 Dosen.",
               "asins": [
                 "B089YWB481",
-                "B0CY14PWMF",
-                "B0DT18M4ON",
-                "B0G1NF25ZX",
+                "B0CYT4MXMF",
+                "B0DT18M4CN",
+                "B0G1NF2S2X",
                 "B089K48RVT"
               ],
               "hotspots": []
@@ -1964,13 +1964,13 @@
               },
               "asins": [
                 "B089YWB481",
-                "B0DY2148G",
-                "B0CY14PWMF",
-                "B0G1NF25ZX",
+                "B0DYK2148G",
+                "B0CYT4MXMF",
+                "B0G1NF2S2X",
                 "B089K48RVT",
-                "B0DT18M4ON",
+                "B0DT18M4CN",
                 "B0DK26YYS9",
-                "B0DJTSMKYG"
+                "B0DJT5NKYG"
               ]
             }
           ]
@@ -2021,26 +2021,26 @@
                 "cta": ""
               },
               "asins": [
-                "B0FY73CZMB",
-                "B0DJTSMKYG",
-                "B0F3J4MP7Z",
-                "B0DHY9K7XN",
-                "B0DYF4GQ3B",
+                "B0FY73CZM8",
+                "B0DJT5NKYG",
+                "B0F3XW4P7Z",
+                "B0DHY9K7XM",
+                "B0DYF4GQ38",
                 "B0CYM13PB4",
                 "B0DJT57NST",
-                "B0DL1NLLBB",
+                "B0DLL1NLB8",
                 "B089K48RVT",
-                "B0DK30CF64",
+                "B0DK3BCF64",
                 "B089YWB481",
-                "B0DT18M4ON",
-                "B0DXJ13FDW",
-                "B0CYLMVGGZ",
-                "B0CY14PWMF",
+                "B0DT18M4CN",
+                "B0DX7J3FDW",
+                "B0CYLVMGGZ",
+                "B0CYT4MXMF",
                 "B0DK26YYS9",
-                "B0D496QM3H",
-                "B0DY2148G",
-                "B07W9VD2L",
-                "B0G1NF25ZX"
+                "B0D496GM3H",
+                "B0DYK2148G",
+                "B07TWGVD2L",
+                "B0G1NF2S2X"
               ]
             }
           ]
