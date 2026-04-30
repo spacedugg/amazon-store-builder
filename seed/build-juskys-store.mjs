@@ -544,7 +544,7 @@ function buildTierbedarfPage() {
     ], 'products.fullWidthGrid'),
 
     section('vh-w2s', [
-      tile('image', ov('**Sicher**, robust, einfach'), 'Wide Bild.'),
+      tile('image', ov('Tier**bedarf** mit Verantwortung'), 'Wide Bild.'),
       tile('image', ov('**Stabil**'), 'Square mit grünem Icon Kreis Werkzeug.'),
       tile('image', ov('**Tierfreundlich**'), 'Square mit grünem Icon Kreis Pfote.'),
     ], 'features.featureWideAnd2'),
@@ -764,7 +764,7 @@ function buildHeimwerkenPage() {
     ], 'products.fullWidthGrid'),
 
     section('vh-w2s', [
-      tile('image', ov('**Robust**, sicher, durchdacht'), 'Wide Bild.'),
+      tile('image', ov('Werkzeug, das **hält**'), 'Wide Bild.'),
       tile('image', ov('**Belastbar**'), 'Square mit grünem Icon Kreis Werkzeug.'),
       tile('image', ov('**Sicher**'), 'Square mit grünem Icon Kreis Schild Check.'),
     ], 'features.featureWideAnd2'),
@@ -779,7 +779,7 @@ function buildHeimwerkenPage() {
 
     section('1', [
       tile('image',
-        ov('Praktisch fürs Haus, weiter zu **Haushalt**', '', '', [], 'Haushalt ansehen'),
+        ov('Weiter zu **Haushalt**', 'Stauraum, Küchengeräte, Alltagshilfen', '', [], 'Haushalt ansehen'),
         'Cross Sell Banner.',
         { linkUrl: linkTo('Haushalt') }
       ),
@@ -860,7 +860,7 @@ function buildFreizeitPage() {
 
     section('1', [
       tile('image',
-        ov('Auch fürs Zuhause draußen, weiter zu **Garten**', '', '', [], 'Garten ansehen'),
+        ov('Weiter zu **Garten**', 'Lounge, Tische, Schatten', '', [], 'Garten ansehen'),
         'Cross Sell Banner.',
         { linkUrl: linkTo('Garten') }
       ),
@@ -872,7 +872,7 @@ function buildMoebelPage() {
   return page('Möbel', [
     section('1', [
       tile('image',
-        ov('Das Sofa, das zu dir **zurückkommt**', 'Sofas, Betten, Schlafkomfort, Bad und mehr', '', [], 'Sofas entdecken'),
+        ov('Möbel für **dein** Zuhause', 'Sofas, Betten, Schlafkomfort, Bad und mehr', '', [], 'Sofas entdecken'),
         'Hero Bild Wohnzimmer mit Sofa als Hauptmotiv.'
       ),
     ], 'hero.fullWidthHero'),
@@ -923,7 +923,7 @@ function buildMoebelPage() {
     // Shoppable Schlafzimmer
     section('1', [
       tile('shoppable_image',
-        ov('Schlafzimmer, das **ankommt**', 'Boxspring, Matratze, Kissen, Schminktisch'),
+        ov('Schlafkomfort in **jeder** Größe', 'Boxspring, Matratze, Kissen, Schminktisch'),
         'Shoppable Bild Schlafzimmer. 5 Hotspots auf Bett, Matratze, Kissen, Topper, Schminktisch.',
         { asins: ['B07QWXMYV9', 'B0DM9FFLYF', 'B0D31GY3G4', 'B09PLDVF2L', 'B0FGDGNZNT'] }
       ),
@@ -941,7 +941,7 @@ function buildMoebelPage() {
     // Shoppable Bad
     section('1', [
       tile('shoppable_image',
-        ov('Das Bad, **klar** strukturiert', 'Wäschekörbe und Stauraum'),
+        ov('Bad und **Stauraum**', 'Wäschekörbe und Badmöbel'),
         'Shoppable Bild Bad. 3 Hotspots auf Wäschekorb 100L, Wäschekorb Round, Wäschekorb Grau.',
         { asins: topAsinsBySub('Möbel', 'Badausstattung', 3) }
       ),
@@ -966,7 +966,7 @@ function buildMoebelPage() {
     // Cross Link
     section('1', [
       tile('image',
-        ov('Praktisch fürs Zuhause, weiter zu **Haushalt**', '', '', [], 'Haushalt ansehen'),
+        ov('Weiter zu **Haushalt**', 'Praktische Helfer fürs Zuhause', '', [], 'Haushalt ansehen'),
         'Cross Sell Banner.',
         { linkUrl: linkTo('Haushalt') }
       ),
@@ -1068,7 +1068,7 @@ function buildGartenPage() {
     // Cross Link Möbel
     section('1', [
       tile('image',
-        ov('Drinnen passend dazu, weiter zu **Möbel**', '', '', [], 'Möbel ansehen'),
+        ov('Weiter zu **Möbel**', 'Sofas, Betten, Wohnmöbel', '', [], 'Möbel ansehen'),
         'Cross Sell Banner. Mini Bild Wohnraum.',
         { linkUrl: linkTo('Möbel') }
       ),

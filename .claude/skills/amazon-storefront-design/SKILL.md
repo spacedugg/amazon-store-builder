@@ -25,6 +25,73 @@ Geltungsbereich: alle kundensichtbaren Texte (heading, subheading, body, bullets
 
 USPs auf Markenebene dürfen **nie** produktspezifische Zahlenwerte enthalten (z.B. Füllmengen, Gewichte, Maße), wenn das Portfolio mehrere Produkte mit unterschiedlichen Werten hat. Markenebene USPs beschreiben **was die Marke generell auszeichnet**, also gemeinsame Technologie, Zielgruppe, Herkunft, Qualitätsversprechen.
 
+### Headline Copywriting Regeln
+
+**Konkret schreiben, nicht poetisch.** Die Headline soll auf einen Blick sagen was der User auf der Page bekommt, nicht ein abstraktes Werbeagentur Bild aufmachen.
+
+**Verbotene Patterns:**
+
+- **Abstrakte Verben** wie `kommt zurück`, `kommt an`, `findet zu sich`, `wartet auf dich`, `denkt mit`. Klingt nach 2010 Marketing Agentur, sagt nichts aus.
+  - Falsch: `Das Sofa, das zu dir zurückkommt`
+  - Falsch: `Schlafzimmer, das ankommt`
+  - Richtig: `Sofas in jeder Größe` oder `Das passende Sofa`
+- **"Wort, Erklärung" Komma Pattern überstrapaziert.** Maximal 1 Komma pro Headline. Wenn mehrere Sections in Folge dieses Pattern haben, abwechseln mit anderen Strukturen.
+  - Zu oft: `Wohnen, das passt`, `Sofa, das bleibt`, `Bad, klar strukturiert` (alle gleich gebaut)
+  - Besser: Mix aus Frage, Aussage, Komma Pattern, Imperativ
+- **Substantivierung von Adjektiven** wie `Klar strukturiert`, `Komplett gedacht`, `Fertig zum Loslegen`. Manchmal OK, aber nicht in jeder Headline.
+- **Premium Floskeln** wie `Stilvoll`, `Exklusiv`, `Hochwertig`, `Premium`. Sagen nichts.
+
+**Gute Headlines:**
+
+- Direkt: `Sofas in jeder Größe`, `Werkzeug für jeden Tag`
+- Konkret mit Mehrwert: `Sofas mit Bettkasten`, `Boxspring ab 200 Euro`
+- Saisonale Aktivierung: `Bereit für die Saison`, `Jetzt für den Sommer`
+- Imperativ: `Hol dir den Sommer`, `Gib deinem Garten Schatten`
+- Rhetorische Frage: `Welches Sofa passt zu dir`
+
+Pro Page maximal **eine** poetische Headline (z.B. die Hero Headline). Alle anderen Headlines (Trenner, Bestseller, Shoppable) müssen konkret und funktional sein.
+
+### Redundanz Check innerhalb Section
+
+In einer Section dürfen sich Wörter zwischen Heading und Tile Headings **nicht wiederholen**.
+
+Falsch:
+
+```
+Heading Section: "Robust, sicher, durchdacht"
+Tile 1: "Belastbar"
+Tile 2: "Sicher"   ← doppelt mit Heading
+```
+
+Richtig:
+
+```
+Heading Section: "Werkzeug, das hält"
+Tile 1: "Belastbar"
+Tile 2: "Sicher"
+```
+
+Oder:
+
+```
+Heading Section: "Robust, sicher, durchdacht"
+Tile 1: "Schwere Last"
+Tile 2: "TÜV geprüft"
+```
+
+Vor jeder Section Output: Prüfe ob ein Tile Heading Wort im Section Heading vorkommt. Wenn ja, eines der beiden umformulieren.
+
+### Konkrete Sprache pro Modul Typ
+
+| Section Modul | Headline Stil |
+|---------------|---------------|
+| Hero (Page Section 1) | 1 poetische Headline mit grünem Highlight, OK auch mit Komma Pattern |
+| Trenner (Section Header) | konkret, kurz, max 4 Wörter, beschreibt was im nächsten Block kommt |
+| Bestseller Grid | direkt, z.B. `Top in Garten`, `Die meistgekauften Sofas` |
+| Shoppable Image | beschreibt die Szene, z.B. `Lounge plus Sonnenschirm` |
+| USP Leiste | Markenwert klar, z.B. `Warum Juskys`, `Aus einer Hand` |
+| Cross Link Banner | Imperativ, z.B. `Jetzt zu Garten`, `Weiter zu Möbeln` |
+
 ### Default Sprache
 
 Standard ist **Deutsch** (Marktplatz `amazon.de`). Andere Sprachen nur wenn User explizit angibt.

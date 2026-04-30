@@ -2477,8 +2477,8 @@
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Drinnen passend dazu, weiter zu **Möbel**",
-                "subheading": "",
+                "heading": "Weiter zu **Möbel**",
+                "subheading": "Sofas, Betten, Wohnmöbel",
                 "body": "",
                 "bullets": [],
                 "cta": "Möbel ansehen"
@@ -2508,7 +2508,7 @@
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Das Sofa, das zu dir **zurückkommt**",
+                "heading": "Möbel für **dein** Zuhause",
                 "subheading": "Sofas, Betten, Schlafkomfort, Bad und mehr",
                 "body": "",
                 "bullets": [],
@@ -2847,7 +2847,7 @@
             {
               "type": "shoppable_image",
               "textOverlay": {
-                "heading": "Schlafzimmer, das **ankommt**",
+                "heading": "Schlafkomfort in **jeder** Größe",
                 "subheading": "Boxspring, Matratze, Kissen, Schminktisch",
                 "body": "",
                 "bullets": [],
@@ -2909,8 +2909,8 @@
             {
               "type": "shoppable_image",
               "textOverlay": {
-                "heading": "Das Bad, **klar** strukturiert",
-                "subheading": "Wäschekörbe und Stauraum",
+                "heading": "Bad und **Stauraum**",
+                "subheading": "Wäschekörbe und Badmöbel",
                 "body": "",
                 "bullets": [],
                 "cta": ""
@@ -3052,8 +3052,8 @@
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Praktisch fürs Zuhause, weiter zu **Haushalt**",
-                "subheading": "",
+                "heading": "Weiter zu **Haushalt**",
+                "subheading": "Praktische Helfer fürs Zuhause",
                 "body": "",
                 "bullets": [],
                 "cta": "Haushalt ansehen"
@@ -3468,8 +3468,8 @@
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Auch fürs Zuhause draußen, weiter zu **Garten**",
-                "subheading": "",
+                "heading": "Weiter zu **Garten**",
+                "subheading": "Lounge, Tische, Schatten",
                 "body": "",
                 "bullets": [],
                 "cta": "Garten ansehen"
@@ -3737,7 +3737,7 @@
             {
               "type": "image",
               "textOverlay": {
-                "heading": "**Robust**, sicher, durchdacht",
+                "heading": "Werkzeug, das **hält**",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
@@ -3835,8 +3835,8 @@
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Praktisch fürs Haus, weiter zu **Haushalt**",
-                "subheading": "",
+                "heading": "Weiter zu **Haushalt**",
+                "subheading": "Stauraum, Küchengeräte, Alltagshilfen",
                 "body": "",
                 "bullets": [],
                 "cta": "Haushalt ansehen"
@@ -4504,7 +4504,7 @@
             {
               "type": "image",
               "textOverlay": {
-                "heading": "**Sicher**, robust, einfach",
+                "heading": "Tier**bedarf** mit Verantwortung",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
