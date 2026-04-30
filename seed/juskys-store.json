@@ -3,7 +3,7 @@
   "marketplace": "de",
   "category": "generic",
   "brandTone": "Nahbar, konkret, praktisch. Inhabergeführt seit 2005, klare Sprache, kein Premium Pose, duzen.",
-  "brandStory": "Seit 2005 bringen Philipp Juskys und Daniel Heidrich ein breites Sortiment für Wohnen, Garten und Alltag direkt zu dir. Inhabergeführt, mit Qualitätskontrolle vor Ort beim Hersteller und versandkostenfrei in Deutschland.",
+  "brandStory": "Seit 2005 bringen Philipp Juskys und Daniel Heidrich ein breites Sortiment für Wohnen, Garten und Alltag direkt zu dir. Inhabergeführt aus Deutschland, mit Qualitätskontrolle vor Ort beim Hersteller.",
   "headerBannerColor": "#93bd26",
   "headerBanner": null,
   "headerBannerMobile": null,
@@ -1095,7 +1095,7 @@
               "textOverlay": {
                 "heading": "Ein **Haus**, viele Räume",
                 "subheading": "Inhabergeführt seit 2005",
-                "body": "Seit 2005 bringen Philipp Juskys und Daniel Heidrich ein breites Sortiment für Wohnen, Garten und Alltag direkt zu dir. Inhabergeführt, mit Qualitätskontrolle vor Ort beim Hersteller und versandkostenfrei in Deutschland.",
+                "body": "Seit 2005 bringen Philipp Juskys und Daniel Heidrich ein breites Sortiment für Wohnen, Garten und Alltag direkt zu dir. Inhabergeführt aus Deutschland, mit Qualitätskontrolle vor Ort beim Hersteller.",
                 "bullets": [],
                 "cta": "Mehr über Juskys"
               },
@@ -1252,8 +1252,8 @@
           ]
         },
         {
-          "layoutId": "2x2wide",
-          "module": "features.featureGrid4wide",
+          "layoutId": "vh-4square",
+          "module": "features.featureGrid4square",
           "tiles": [
             {
               "type": "image",
@@ -1272,51 +1272,13 @@
               "bgColor": "",
               "imageCategory": "benefit",
               "textAlign": "left",
-              "imageRef": "usp-inhabergefuehrt-1500x750"
+              "imageRef": "usp-inhabergefuehrt-1500x1500"
             },
             {
               "type": "image",
               "textOverlay": {
-                "heading": "**Versandkostenfrei**",
-                "subheading": "In ganz Deutschland",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Marken USP Tile mit grünem Icon Kreis Truck.",
-              "asins": [],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "benefit",
-              "textAlign": "left",
-              "imageRef": "usp-versandkostenfrei-1500x750"
-            },
-            {
-              "type": "image",
-              "textOverlay": {
-                "heading": "**Geprüft**",
-                "subheading": "Hersteller persönlich besucht",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Marken USP Tile mit grünem Icon Kreis Schild Check.",
-              "asins": [],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "benefit",
-              "textAlign": "left",
-              "imageRef": "usp-geprueft-1500x750"
-            },
-            {
-              "type": "image",
-              "textOverlay": {
-                "heading": "**Sortiment**",
-                "subheading": "Für viele Lebensbereiche",
+                "heading": "**Eigene Marke**",
+                "subheading": "Designs unter Juskys",
                 "body": "",
                 "bullets": [],
                 "cta": ""
@@ -1329,7 +1291,45 @@
               "bgColor": "",
               "imageCategory": "benefit",
               "textAlign": "left",
-              "imageRef": "usp-sortiment-1500x750"
+              "imageRef": "usp-eigene-marke-1500x1500"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Hersteller besucht**",
+                "subheading": "Eigene Qualitätskontrolle",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Marken USP Tile mit grünem Icon Kreis Schild Check.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "benefit",
+              "textAlign": "left",
+              "imageRef": "usp-hersteller-besucht-1500x1500"
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "**Aus einem Haus**",
+                "subheading": "Möbel, Garten, Tier, Haushalt",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Marken USP Tile mit grünem Icon Kreis Sortiment.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "benefit",
+              "textAlign": "left",
+              "imageRef": "usp-aus-einem-haus-1500x1500"
             }
           ]
         },
@@ -1902,13 +1902,13 @@
             {
               "type": "image",
               "textOverlay": {
-                "heading": "**Versandkostenfrei**",
+                "heading": "**Inhabergeführt**",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Square mit grünem Icon Kreis Truck.",
+              "brief": "Square mit grünem Icon Kreis Haus.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -4973,13 +4973,13 @@
             {
               "type": "image",
               "textOverlay": {
-                "heading": "**Schnell** weg",
+                "heading": "**Solange Vorrat**",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Square mit grünem Icon Kreis Truck.",
+              "brief": "Square mit grünem Icon Kreis Sanduhr.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -5051,7 +5051,7 @@
               "textOverlay": {
                 "heading": "Inhabergeführt aus **Deutschland**",
                 "subheading": "Seit 2005",
-                "body": "Seit 2005 ist Juskys dein Partner für Wohnen, Garten, Heimwerken, Tier und Freizeit. Geleitet von Philipp Juskys und Daniel Heidrich, inhabergeführt aus Deutschland. Wir besuchen unsere Hersteller persönlich, prüfen regelmäßig die Qualität und liefern versandkostenfrei in Deutschland.",
+                "body": "Seit 2005 ist Juskys dein Partner für Wohnen, Garten, Heimwerken, Tier und Freizeit. Geleitet von Philipp Juskys und Daniel Heidrich, inhabergeführt aus Deutschland. Wir besuchen unsere Hersteller persönlich und prüfen regelmäßig die Qualität.",
                 "bullets": [],
                 "cta": ""
               },
@@ -5093,8 +5093,8 @@
             {
               "type": "image",
               "textOverlay": {
-                "heading": "**Geprüft**",
-                "subheading": "Hersteller persönlich besucht",
+                "heading": "**Hersteller besucht**",
+                "subheading": "Eigene Qualitätskontrolle",
                 "body": "",
                 "bullets": [],
                 "cta": ""
@@ -5112,13 +5112,13 @@
             {
               "type": "image",
               "textOverlay": {
-                "heading": "**Versandkostenfrei**",
-                "subheading": "In ganz Deutschland",
+                "heading": "**Aus Deutschland**",
+                "subheading": "Sitz und eigenes Lager",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Wert Tile Versand mit Foto Logistik.",
+              "brief": "Wert Tile Standort mit Foto Halle oder Logistikzentrum.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -5277,12 +5277,12 @@
               "type": "image",
               "textOverlay": {
                 "heading": "**Service**, der reagiert",
-                "subheading": "Kontakt, Versand, Rücksendung",
+                "subheading": "Fragen zur Marke, Garantie, Rückfrage",
                 "body": "",
                 "bullets": [],
                 "cta": "Kontakt aufnehmen"
               },
-              "brief": "Service Block mit Icons Kontakt Versand Rücksendung.",
+              "brief": "Service Block mit Icons für Markenkontakt und Garantie.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",

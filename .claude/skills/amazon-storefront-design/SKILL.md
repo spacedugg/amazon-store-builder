@@ -25,6 +25,19 @@ Geltungsbereich: alle kundensichtbaren Texte (heading, subheading, body, bullets
 
 USPs auf Markenebene dürfen **nie** produktspezifische Zahlenwerte enthalten (z.B. Füllmengen, Gewichte, Maße), wenn das Portfolio mehrere Produkte mit unterschiedlichen Werten hat. Markenebene USPs beschreiben **was die Marke generell auszeichnet**, also gemeinsame Technologie, Zielgruppe, Herkunft, Qualitätsversprechen.
 
+### Versand und Lieferung: niemals Marken USP
+
+Wir verkaufen ausschließlich auf Amazon. Versandkosten, Lieferzeit, Versandkostenfreiheit sind **Amazon Sache**, nicht Marken Sache. Diese Themen tauchen **niemals** im Store Output auf.
+
+Verboten in Headlines, Sublines, USPs, CTAs, Bildtexten:
+
+- "Versandkostenfrei", "Free Shipping", "Versandkostenfrei in Deutschland"
+- "Schnelle Lieferung", "Express", "In 24 Stunden bei dir"
+- Lieferzeit Aussagen jeder Art
+- Truck Icons als USP Symbol für Versand
+
+Wenn die Brand Story Logistik Fakten enthält (eigenes Lager, Logistikzentrum), dann höchstens als neutraler Wert wie "Eigenes Lager", **nie** mit Bezug auf Versandkonditionen.
+
 ### Headline Copywriting Regeln
 
 **Konkret schreiben, nicht poetisch.** Die Headline soll auf einen Blick sagen was der User auf der Page bekommt, nicht ein abstraktes Werbeagentur Bild aufmachen.
@@ -468,7 +481,7 @@ Die Dimensionen sind **Pflicht und Teil des Tags**, weil zwei Tiles mit identisc
 | Sale Page Filter Tile 1 (1500x750) | Sale Garten | `cat-garten-lifestyle-1500x750` | gleiche Datei, automatisch verteilt |
 | Subpage Cross Nav Tile (Small Square 750x750) | Sub Sofas | `sub-sofas-lifestyle-750x750` | `sub-sofas-lifestyle-750x750.jpg` |
 | Möbel Page Sub Navigator Tile (Small Square 750x750) | Sub Sofas | `sub-sofas-lifestyle-750x750` | gleiche Datei, automatisch verteilt |
-| Marken USP Tile 4x mit "Versandkostenfrei" | USP Versand | `usp-versandkostenfrei-1500x750` | gleiche Datei auf Home, Bestseller, Über Uns |
+| Marken USP Tile mit "Inhabergeführt" auf 3 Pages | USP Inhabergeführt | `usp-inhabergefuehrt-1500x1500` | gleiche Datei auf Home, Bestseller, Über Uns |
 
 **Was du im Briefing JSON setzt**:
 
@@ -507,7 +520,20 @@ Liest sich als wären "Meistgekauft" und "Inhabergeführt" die Gründe für die 
 
 > Heading: "Warum **Juskys**"
 > Square 1: "Geprüfte Qualität"
-> Square 2: "Versandkostenfrei"
+> Square 2: "Aus einem Haus"
+
+### Layout Wahl für textlastige USPs
+
+Bei 4 USPs die nur aus **Heading plus kurzer Subheading** bestehen (typisch Marken USPs wie "Inhabergeführt seit 2005", "Eigene Designs"), **nicht** das `2x2wide` Layout verwenden. Das nimmt zu viel Bildfläche und das Bild ist eh nur Icon plus Hintergrund Farbe.
+
+| Inhalt | Empfohlenes Layout |
+|--------|--------------------|
+| 4 USPs nur Text plus Icon, klein | `vh-4square` (4 Squares nebeneinander Desktop, 2x2 Mobile) |
+| 4 USPs mit echtem Lifestyle Bild als Hauptelement | `2x2wide` (4 Wide Tiles) |
+| 3 USPs Mix aus Bild und Text | `vh-w2s` (1 Wide plus 2 Squares) |
+| 2 USPs gleichgewichtet | `std-2equal` |
+
+`vh-4square` ist der Default für **klassische Marken USP Leisten am Page Ende** (Inhabergeführt, Aus Deutschland, etc.). Nur wenn das Tile selbst als großes Lifestyle Bild geplant ist, dann `2x2wide`.
 
 ## JSON Endpoint Pattern
 
