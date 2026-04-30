@@ -858,6 +858,7 @@ export default function App() {
           viewMode={viewMode}
           uiLang={uiLang}
           layoutType={selLayoutType}
+          pages={store.pages}
           heroBanner={selHeroBanner ? page : null}
           onHeroBannerChange={selHeroBanner ? updateHeroBanner : null}
         />
