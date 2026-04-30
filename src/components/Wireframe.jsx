@@ -20,12 +20,10 @@ export default function Wireframe({ tile, width, viewMode, bgColor }) {
   var w = width || 280;
   var ht = Math.max(30, Math.round(w / (dims.w / dims.h)));
   var ov = (tile.textOverlay && typeof tile.textOverlay === 'object') ? tile.textOverlay : {};
+  var text = (ov.heading || '').replace(/\*\*([^*]+)\*\*/g, '$1') || ov.subheading || '';
+  var cta = ov.cta || '';
   var isShoppable = tile.type === 'shoppable_image';
   var isImageText = tile.type === 'image_text';
-  // Bei image_text werden Heading und CTA unten als echtes Textfeld
-  // gerendert (tile-it-text), darum hier im Wireframe nicht doppelt anzeigen.
-  var text = isImageText ? '' : ((ov.heading || '').replace(/\*\*([^*]+)\*\*/g, '$1') || ov.subheading || '');
-  var cta = isImageText ? '' : (ov.cta || '');
 
   // Use custom bgColor if provided, otherwise use a neutral placeholder
   var bgFill = bgColor || '#f5f5f5';
