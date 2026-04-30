@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import { t } from '../i18n';
 
-export default function AsinPanel({ asins, pages, products, requestedAsins, onClose, uiLang }) {
+export default function AsinPanel({ asins, pages, products, requestedAsins, onClose, onScrape, uiLang }) {
+  var [scraping, setScraping] = useState(false);
+  var [scrapeMsg, setScrapeMsg] = useState('');
   // Build usage map
   var used = {};
   var pageMap = {};
@@ -49,8 +52,45 @@ export default function AsinPanel({ asins, pages, products, requestedAsins, onCl
               {failedCount > 0 && <span className="asin-stat stat-err">{t('asins.failed', uiLang)}: <b>{failedCount}</b></span>}
             </div>
           </div>
-          <button className="btn" onClick={onClose}>{t('asins.close', uiLang)}</button>
+          <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+            {onScrape && (
+              <button
+                className="btn btn-primary"
+                disabled={scraping}
+                onClick={async function() {
+                  // alle uniken ASINs aus dem Store sammeln
+                  var all = {};
+                  pages.forEach(function(pg) { pg.sections.forEach(function(sec) { sec.tiles.forEach(function(tl) {
+                    (tl.asins || []).forEach(function(a) { if (a && a.indexOf('B0') === 0) all[a] = true; });
+                    (tl.hotspots || []).forEach(function(h) { if (h.asin) all[h.asin] = true; });
+                    if (tl.linkAsin) all[tl.linkAsin] = true;
+                  }); }); });
+                  asins.forEach(function(a) { if (a && a.asin) all[a.asin] = true; });
+                  var list = Object.keys(all);
+                  if (list.length === 0) { setScrapeMsg('Keine ASINs zum Scrapen gefunden'); return; }
+                  setScraping(true);
+                  setScrapeMsg('Lade ' + list.length + ' ASINs von Amazon, kann mehrere Minuten dauern...');
+                  try {
+                    var result = await onScrape(list);
+                    setScrapeMsg('Fertig: ' + (result && result.success || 0) + ' geladen, ' + (result && result.failed || 0) + ' fehlgeschlagen');
+                  } catch (e) {
+                    setScrapeMsg('Fehler: ' + e.message);
+                  } finally {
+                    setScraping(false);
+                  }
+                }}
+                style={{ fontSize: 11, padding: '5px 12px' }}>
+                {scraping ? 'Lade...' : 'Produktdaten laden'}
+              </button>
+            )}
+            <button className="btn" onClick={onClose}>{t('asins.close', uiLang)}</button>
+          </div>
         </div>
+        {scrapeMsg && (
+          <div style={{ padding: '6px 16px', background: scrapeMsg.indexOf('Fehler') === 0 ? '#fee2e2' : '#dcfce7', borderBottom: '1px solid #e2e8f0', fontSize: 11, color: scrapeMsg.indexOf('Fehler') === 0 ? '#991b1b' : '#166534' }}>
+            {scrapeMsg}
+          </div>
+        )}
 
         <div className="modal-scroll-body">
           {/* Failed ASINs */}

@@ -1,4 +1,4 @@
-import { uid, emptyTile, emptyTextOverlay } from './constants';
+import { uid, emptyTile, emptyTileForLayout, emptyTextOverlay } from './constants';
 
 // Briefing JSON → Store Objekt.
 // Erwartet das Briefing Format aus briefings/juskys-store-briefing.md:
@@ -26,8 +26,12 @@ export function importBriefingToStore(briefing) {
     var p = entry.raw;
     var sections = (p.sections || []).map(function(s) {
       var sectionId = uid();
-      var tiles = (s.tiles || []).map(function(t) {
-        var tile = Object.assign({}, emptyTile());
+      var layoutId = s.layoutId || '1';
+      var tiles = (s.tiles || []).map(function(t, ti) {
+        // Default Tile mit korrekten Dimensionen basierend auf Layout und Position.
+        // Layout '1' Full Width hat 3000x600 Desktop, 1680x900 Mobile (anderes Aspect).
+        // Standard Layouts (std-*, lg-*, etc.) haben gleiche Dimensionen für beide.
+        var tile = Object.assign({}, emptyTileForLayout(layoutId, ti));
         if (t.type) tile.type = t.type;
         if (typeof t.brief === 'string') tile.brief = t.brief;
         if (t.textOverlay && typeof t.textOverlay === 'object') {
@@ -43,7 +47,7 @@ export function importBriefingToStore(briefing) {
         if (typeof t.linkUrl === 'string') {
           if (t.linkUrl.indexOf('page:') === 0) {
             var pageName = t.linkUrl.slice(5);
-            if (pageIdByName[pageName]) tile.linkUrl = '/page/' + pageIdByName[pageName];
+            if (pageIdByName[pageName]) tile.linkUrl = '/' + pageIdByName[pageName];
             else tile.linkUrl = t.linkUrl; // Fallback: Briefing referenziert eine Page die es nicht gibt
           } else {
             tile.linkUrl = t.linkUrl;
@@ -51,10 +55,16 @@ export function importBriefingToStore(briefing) {
         }
         return tile;
       });
-      return { id: sectionId, layoutId: s.layoutId || '1', tiles: tiles };
+      return { id: sectionId, layoutId: layoutId, tiles: tiles };
     });
     var page = { id: entry._id, name: p.name || 'Unbenannt', sections: sections };
-    if (p.parentId && pageIdByName[p.parentId]) page.parentId = pageIdByName[p.parentId];
+    // Eltern Beziehung kann als parentName (Name der Eltern Page) oder parentId
+    // (Name oder bereits UID) angegeben sein. Wir suchen erst im Name Index, sonst
+    // nehmen wir den Wert 1 zu 1 (z.B. wenn schon eine echte UID übergeben wurde).
+    var parentRef = p.parentName || p.parentId;
+    if (parentRef) {
+      page.parentId = pageIdByName[parentRef] || parentRef;
+    }
     return page;
   });
 
