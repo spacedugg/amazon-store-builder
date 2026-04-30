@@ -13,7 +13,8 @@
     "api/generate-image-descriptions.js": { "maxDuration": 60 },
     "api/generate-wireframe.js": { "maxDuration": 60 },
     "api/crawl-store-nav.js": { "maxDuration": 60 },
-    "api/analyze-store-page.js": { "maxDuration": 60 }
+    "api/analyze-store-page.js": { "maxDuration": 60 },
+    "api/juskys-store.js": { "includeFiles": "seed/juskys-store.json" }
   },
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
