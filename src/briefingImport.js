@@ -45,6 +45,9 @@ export function importBriefingToStore(briefing) {
         if (typeof t.textAlign === 'string') tile.textAlign = t.textAlign;
         if (typeof t.linkAsin === 'string') tile.linkAsin = t.linkAsin;
         if (typeof t.imageRef === 'string') tile.imageRef = t.imageRef;
+        // Produktberater Quiz Schema, wird per Tool Properties Panel weiter
+        // bearbeitet. Briefing JSON kann das initiale Schema vorgeben.
+        if (t.productSelector && typeof t.productSelector === 'object') tile.productSelector = t.productSelector;
         if (typeof t.linkUrl === 'string') {
           if (t.linkUrl.indexOf('page:') === 0) {
             var pageName = t.linkUrl.slice(5);

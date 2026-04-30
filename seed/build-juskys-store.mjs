@@ -118,7 +118,7 @@ export function tile(type, overlay, brief, opts) {
     else if (type === 'shoppable_image') ic = 'lifestyle';
     else if (type === 'image') ic = 'creative'; // wird in section() ggf. überschrieben
   }
-  return {
+  var t = {
     type: type,
     textOverlay: overlay || ov(),
     brief: brief || '',
@@ -131,6 +131,8 @@ export function tile(type, overlay, brief, opts) {
     textAlign: opts.textAlign || 'left',
     imageRef: opts.imageRef || '', // wird in section() um -WxH ergänzt
   };
+  if (opts.productSelector) t.productSelector = opts.productSelector;
+  return t;
 }
 
 // Dimensions Suffix für imageRef. Liest die Layout Dims der Tile Position
@@ -269,13 +271,13 @@ function buildHomePage() {
       tile('image', ov('**TIERBEDARF**', 'Hund, Katze, Freilauf'), 'Kategorie Tile Tierbedarf. Lifestyle Bild mit Hund oder Katze in Wohnsetting.', { linkUrl: linkTo('Tierbedarf'), imageRef: 'cat-tierbedarf-lifestyle' }),
     ], 'categoryNav.grid6tiles'),
 
-    // 3, Brand Story Split
+    // 3, Brand Story Split (zwei image Tiles, links Foto, rechts Brand Story als Bild mit Text grafisch eingearbeitet)
     section('std-2equal', [
       tile('image', ov(), 'Image Tile Brand Story. Team oder Hallenbild aus juskys.de, Mitarbeiter und Standort.'),
-      tile('image_text',
+      tile('image',
         ov('Ein **Haus**, viele Räume', 'Inhabergeführt seit 2005', BRAND_STORY_KURZ, [], 'Mehr über Juskys'),
-        'Brand Story Tile mit Text neben Bild aus Section Tile 1. Verlinkt auf Über Uns.',
-        { linkUrl: linkTo('Über Uns') }
+        'Brand Story Bild. Heading, Subheading, Body und CTA grafisch ins Bild gerendert. Hintergrund passend zur Brand Story (z.B. Hallen Detail, Stoffmakro oder Werkstatt Atmosphäre). Verlinkt auf Über Uns.',
+        { linkUrl: linkTo('Über Uns'), imageCategory: 'text_image' }
       ),
     ], 'trust.trustSplit'),
 
@@ -331,14 +333,6 @@ function buildHomePage() {
         'Follow Banner Full Width.'
       ),
     ], 'engagement.followBanner'),
-
-    // 11, Footer Nav
-    section('2x2wide', [
-      tile('image', ov('**GARTEN**'), 'Footer Kategorie Tile mit Mini Icon.', { linkUrl: linkTo('Garten'), imageRef: 'cat-garten-lifestyle' }),
-      tile('image', ov('**MÖBEL**'), 'Footer Kategorie Tile mit Mini Icon.', { linkUrl: linkTo('Möbel'), imageRef: 'cat-moebel-lifestyle' }),
-      tile('image', ov('**HAUSHALT**'), 'Footer Kategorie Tile mit Mini Icon.', { linkUrl: linkTo('Haushalt'), imageRef: 'cat-haushalt-lifestyle' }),
-      tile('image', ov('**ÜBER** UNS'), 'Footer Tile zur Brand Story.', { linkUrl: linkTo('Über Uns'), imageRef: 'cat-ueberuns-lifestyle' }),
-    ], 'footer.categoryNavFooter'),
   ]);
 }
 
@@ -653,9 +647,10 @@ function buildUeberUnsPage() {
 
     section('std-2equal', [
       tile('image', ov(), 'Image Tile Brand Story. Hallenbild oder Team aus juskys.de.'),
-      tile('image_text',
+      tile('image',
         ov('Inhabergeführt aus **Deutschland**', 'Seit 2005', BRAND_STORY_LANG),
-        'Brand Story Tile mit Text neben Bild. Brand Story Lang aus Website Content kondensiert.'
+        'Brand Story Bild. Heading, Subheading, Body grafisch ins Bild integriert. Hintergrund passend zur Marken Atmosphäre. Brand Story Lang aus Website Content kondensiert.',
+        { imageCategory: 'text_image' }
       ),
     ], 'trust.trustSplit'),
 
@@ -1126,6 +1121,106 @@ function buildGartenPage() {
   ]);
 }
 
+// ─── PRODUKTBERATER (QUIZ) PAGE ───────────────────────────
+// Pflicht Subpage mit product_selector Tile. 3 Fragen führen den User
+// zur passenden ASIN Auswahl aus dem Juskys Sortiment.
+
+function buildProduktberaterPage() {
+  var quiz = {
+    intro: {
+      enabled: true,
+      headline: 'Was passt **zu dir**',
+      description: '3 Fragen, dein Vorschlag. Wir zeigen dir Modelle aus dem Juskys Sortiment die zu dir passen.',
+      buttonLabel: 'Quiz starten',
+      image: null, // Designer Briefing: Lifestyle Bild Juskys Wohnsituation mit mehreren Produkten gleichzeitig im Bild.
+    },
+    questions: [
+      {
+        id: 'q1',
+        questionText: 'Wofür suchst du etwas',
+        descriptionText: 'Wähle den Bereich der heute dran ist',
+        answers: [
+          { id: 'a1', text: 'Wohnen', image: null,
+            asins: topAsinsBySub('Möbel', 'Sofas', 1).concat(topAsinsBySub('Möbel', 'Wohnmöbel', 1), topAsinsBySub('Möbel', 'Massagesessel', 1)) },
+          { id: 'a2', text: 'Schlafen', image: null,
+            asins: topAsinsBySub('Möbel', 'Polsterbetten', 1).concat(topAsinsBySub('Möbel', 'Boxspringbetten', 1), topAsinsBySub('Möbel', 'Matratzen', 1)) },
+          { id: 'a3', text: 'Garten', image: null,
+            asins: topAsinsBySub('Garten', 'Gartenmöbel Sets', 1).concat(topAsinsBySub('Garten', 'Sonnenschutz', 1), topAsinsBySub('Garten', 'Gartenliegen', 1)) },
+          { id: 'a4', text: 'Haushalt', image: null,
+            asins: topAsinsBySub('Haushalt', 'Schwerlastregale', 1).concat(topAsinsBySub('Haushalt', 'Küchengeräte', 1), topAsinsBySub('Haushalt', 'Aufbewahrung', 1)) },
+          { id: 'a5', text: 'Werkstatt', image: null,
+            asins: topAsinsBySub('Heimwerken', 'Werkzeug', 1).concat(topAsinsBySub('Heimwerken', 'Multifunktionsleitern', 1), topAsinsBySub('Heimwerken', 'Sackkarren', 1)) },
+          { id: 'a6', text: 'Tier', image: null,
+            asins: topAsinsBySub('Tierbedarf', 'Hundebedarf', 1).concat(topAsinsBySub('Tierbedarf', 'Katzenbedarf', 1), topAsinsBySub('Tierbedarf', 'Freilaufgehege', 1)) },
+        ],
+        allowImages: true,
+      },
+      {
+        id: 'q2',
+        questionText: 'Was ist dir wichtig',
+        descriptionText: 'Wähle dein wichtigstes Kriterium',
+        answers: [
+          { id: 'a1', text: 'Komfort', image: null,
+            asins: topAsinsBySub('Möbel', 'Massagesessel', 1).concat(topAsinsBySub('Möbel', 'Sofas', 1), topAsinsBySub('Möbel', 'Schlafkomfort', 1)) },
+          { id: 'a2', text: 'Praktisch', image: null,
+            asins: topAsinsBySub('Haushalt', 'Schwerlastregale', 1).concat(topAsinsBySub('Heimwerken', 'Werkzeug', 1), topAsinsBySub('Haushalt', 'Alltagshilfen', 1)) },
+          { id: 'a3', text: 'Saisonal', image: null,
+            asins: topAsinsBySub('Garten', 'Gartenmöbel Sets', 1).concat(topAsinsBySub('Garten', 'Sonnenschutz', 1), topAsinsBySub('Freizeit', 'Camping', 1)) },
+        ],
+        allowImages: false,
+      },
+      {
+        id: 'q3',
+        questionText: 'Für wen',
+        descriptionText: 'Solo, Paar oder Familie',
+        answers: [
+          { id: 'a1', text: '1 bis 2 Personen', image: null,
+            asins: topAsinsBySub('Möbel', 'Metallbetten', 1).concat(topAsinsBySub('Möbel', 'Sofas', 1)) },
+          { id: 'a2', text: '3 bis 4 Personen', image: null,
+            asins: topAsinsBySub('Möbel', 'Boxspringbetten', 1).concat(topAsinsBySub('Garten', 'Gartenmöbel Sets', 1)) },
+          { id: 'a3', text: 'Familie plus Tier', image: null,
+            asins: topAsinsBySub('Tierbedarf', 'Hundebedarf', 1).concat(topAsinsBySub('Möbel', 'Sofas', 1)) },
+        ],
+        allowImages: false,
+      },
+    ],
+    results: {
+      headline: 'Dein **passendes** Modell',
+      description: 'Diese Modelle passen zu deiner Auswahl. Klick rein für mehr Details.',
+      storePageLink: '',
+      restartLabel: 'Quiz wiederholen',
+      disclaimer: '',
+    },
+    styling: {
+      typography: 'sans-serif',
+      size: 'medium',
+      weight: 'regular',
+      align: 'center',
+      bgColor: '#ffffff',
+      bgRounded: true,
+      btnColor: '#93bd26',
+      btnRounded: true,
+    },
+    recommendedAsins: [],
+  };
+
+  return page('Produktberater', [
+    section('1', [
+      tile('image',
+        ov('Welches Modell **passt zu dir**', 'In 3 Fragen zum Vorschlag', '', [], 'Quiz starten'),
+        'Hero Bild Lifestyle Komposition mit mehreren Juskys Produkten in einem Wohnsetting.'
+      ),
+    ], 'hero.fullWidthHero'),
+
+    section('1', [
+      tile('product_selector', ov(),
+        'Quiz Tile, 3 Fragen, Antworten gemappt auf passende Juskys ASINs. Intro Bild im productSelector.intro.image hochladen, Antwort Bilder optional.',
+        { productSelector: quiz }
+      ),
+    ], 'engagement.productSelector'),
+  ]);
+}
+
 // ─── BUILD ────────────────────────────────────────────────
 // Output ist ein "rohes" Briefing JSON mit parentName Strings und
 // linkUrl im Format 'page:Name'. Der Importer (src/briefingImport.js)
@@ -1144,6 +1239,7 @@ function buildStore() {
   pages.push(buildTierbedarfPage());
   pages.push(buildSalePage());
   pages.push(buildUeberUnsPage());
+  pages.push(buildProduktberaterPage());
 
   // 42 Subpages, eine pro Sub mit mindestens 1 ASIN
   buildAllSubpages().forEach(function(p) { pages.push(p); });
