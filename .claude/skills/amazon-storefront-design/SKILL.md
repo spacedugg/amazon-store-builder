@@ -25,6 +25,19 @@ Geltungsbereich: alle kundensichtbaren Texte (heading, subheading, body, bullets
 
 USPs auf Markenebene dürfen **nie** produktspezifische Zahlenwerte enthalten (z.B. Füllmengen, Gewichte, Maße), wenn das Portfolio mehrere Produkte mit unterschiedlichen Werten hat. Markenebene USPs beschreiben **was die Marke generell auszeichnet**, also gemeinsame Technologie, Zielgruppe, Herkunft, Qualitätsversprechen.
 
+### Versand und Lieferung: niemals Marken USP
+
+Wir verkaufen ausschließlich auf Amazon. Versandkosten, Lieferzeit, Versandkostenfreiheit sind **Amazon Sache**, nicht Marken Sache. Diese Themen tauchen **niemals** im Store Output auf.
+
+Verboten in Headlines, Sublines, USPs, CTAs, Bildtexten:
+
+- "Versandkostenfrei", "Free Shipping", "Versandkostenfrei in Deutschland"
+- "Schnelle Lieferung", "Express", "In 24 Stunden bei dir"
+- Lieferzeit Aussagen jeder Art
+- Truck Icons als USP Symbol für Versand
+
+Wenn die Brand Story Logistik Fakten enthält (eigenes Lager, Logistikzentrum), dann höchstens als neutraler Wert wie "Eigenes Lager", **nie** mit Bezug auf Versandkonditionen.
+
 ### Headline Copywriting Regeln
 
 **Konkret schreiben, nicht poetisch.** Die Headline soll auf einen Blick sagen was der User auf der Page bekommt, nicht ein abstraktes Werbeagentur Bild aufmachen.
@@ -468,7 +481,7 @@ Die Dimensionen sind **Pflicht und Teil des Tags**, weil zwei Tiles mit identisc
 | Sale Page Filter Tile 1 (1500x750) | Sale Garten | `cat-garten-lifestyle-1500x750` | gleiche Datei, automatisch verteilt |
 | Subpage Cross Nav Tile (Small Square 750x750) | Sub Sofas | `sub-sofas-lifestyle-750x750` | `sub-sofas-lifestyle-750x750.jpg` |
 | Möbel Page Sub Navigator Tile (Small Square 750x750) | Sub Sofas | `sub-sofas-lifestyle-750x750` | gleiche Datei, automatisch verteilt |
-| Marken USP Tile 4x mit "Versandkostenfrei" | USP Versand | `usp-versandkostenfrei-1500x750` | gleiche Datei auf Home, Bestseller, Über Uns |
+| Marken USP Tile mit "Inhabergeführt" auf 3 Pages | USP Inhabergeführt | `usp-inhabergefuehrt-1500x1500` | gleiche Datei auf Home, Bestseller, Über Uns |
 
 **Was du im Briefing JSON setzt**:
 
@@ -507,7 +520,46 @@ Liest sich als wären "Meistgekauft" und "Inhabergeführt" die Gründe für die 
 
 > Heading: "Warum **Juskys**"
 > Square 1: "Geprüfte Qualität"
-> Square 2: "Versandkostenfrei"
+> Square 2: "Aus einem Haus"
+
+### Layout Wahl für USP Leisten
+
+**Default für 4 USPs ist `vh-4square`** (4 Squares nebeneinander auf Desktop, 2x2 auf Mobile). Klassische Marken USPs sind kurz: Heading plus 2 bis 4 Wörter Subheading, dazu ein kleines Icon. Dafür reicht ein Square Tile, das größere `2x2wide` würde nur Leerfläche erzeugen.
+
+**`2x2wide` nur dann**, wenn das Tile selbst ein **großes visuelles Element** trägt:
+
+- Icons werden groß als Hero Symbol dargestellt
+- Infografik mit Diagramm oder Zahlen
+- Echte Lifestyle Fotos als Hauptelement (z.B. Foto Geschäftsführer, Foto Hersteller Visite, Foto Logistikhalle)
+- Produktdetailaufnahmen oder Studio Shots als Hintergrund
+
+Faustregel: lohnt sich der größere Bildplatz für das Bild was dort steht? Wenn nein, nimm `vh-4square`.
+
+| Inhalt | Empfohlenes Layout |
+|--------|--------------------|
+| 4 USPs kurz, nur Heading plus Subheading mit Icon | `vh-4square` |
+| 4 USPs mit großem Visual (Foto, Infografik, Hero Icon) | `2x2wide` |
+| 3 USPs Mix aus Bild und Text | `vh-w2s` (1 Wide plus 2 Squares) |
+| 2 USPs gleichgewichtet | `std-2equal` |
+
+### Tile Anzahl ist Designentscheidung, nicht Inhaltszählung
+
+Wenn du n Aussagen treffen willst, heißt das **nicht zwangsläufig n Tiles**. Es gibt drei strukturelle Optionen, alle gleichberechtigt:
+
+1. **n Tiles in einer Grid Section** (vh-4square, 2x2wide, 4x2grid). Sinnvoll wenn jede Aussage einen eigenen Eye Catcher braucht und einzeln klickbar sein soll (z.B. Sub Kategorie Tiles).
+2. **1 Tile als Composite** mit Layout `1` (Full Width). Das eine Bild trägt alle Aussagen visuell:
+   - Full Width Image als Infografik mit allen USPs als visuelle Bausteine (Zertifikate, Icons, Zahlen) plus Heading Text Overlay
+   - Full Width image_text mit Foto links und USPs als Bullet List rechts (max 5 Bullets)
+   - Full Width Hero mit Foto Hintergrund (Halle plus Team plus Logistik in einer Komposition) und USPs als Text Overlay
+3. **2 Tiles als Split** mit Layout `std-2equal`. Bild links, Text mit Bullet List rechts. Klassischer Brand Story Block.
+
+Wähle nach **visueller Hierarchie**, nicht nach Zähl Logik. Frage dich:
+
+- Sind die Aussagen einzeln stark und brauchen jeweils einen eigenen Visual Anker? → mehrere Tiles
+- Hängen die Aussagen zusammen oder lassen sich als Komposition zeigen (z.B. eine Werkstatt Szene mit allen Werten gleichzeitig)? → ein Composite Tile
+- Ist eine Aussage dominant und die anderen sind Bullets dazu? → Split mit Bild plus Bullet List
+
+Composite Tiles sind oft eleganter wenn die Marke konsistent kommunizieren will, weil sie ein einziges Bild prägen statt vier separate Eindrücke zu erzeugen.
 
 ## JSON Endpoint Pattern
 

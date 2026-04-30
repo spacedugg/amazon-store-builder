@@ -147,6 +147,24 @@ Amazon Marken versenken sehr viel Information in Bildern. "From the Brand" Secti
 3. Die extrahierten Texte und Deskriptoren landen in einem strukturierten Feld der Brand Analysis, zum Beispiel `imageInsights` oder `visualBrandSignals`.
 4. Die Brand Analysis Prompts in `src/contentPipeline.js` nutzen diese Felder als zusätzliche Quelle für USP, Brand Story und Tonalität.
 
-## 6. Sprache
+## 6. Versandkosten und Lieferung: niemals als Marken USP
+
+Wir verkaufen ausschließlich auf Amazon. Versandkonditionen, Lieferzeit, Versandkostenfreiheit sind komplett **Amazon Sache**, nicht Sache der Marke. Diese Themen tauchen darum **niemals** im kundensichtbaren Brand Store Output auf.
+
+Verboten in Headlines, Sublines, USPs, CTAs, Bildtexten, Bildbeschriftungen:
+
+- "Versandkostenfrei", "Free Shipping", "Versandkostenfrei in Deutschland"
+- "Schnelle Lieferung", "Express Versand"
+- "In 24 Stunden bei dir", Lieferzeit Aussagen jeder Art
+- Truck Icons als USP Symbol
+- "Sofort verschickt"
+
+Wenn die Brand Story Inhalte zur Versandlogistik enthält (Eigenversand, Logistikzentrum, etc.), erwähne im Store Konzept neutrale Werte wie "Inhabergeführt", "Aus Deutschland", "Eigenes Lager", aber **nie** mit Bezug auf Versandkonditionen oder Lieferzeit.
+
+### Umsetzung im Code
+
+Skill Prompt und Brand Analysis Prompt müssen Claude explizit verbieten, Versand und Lieferzeit Themen als USP zu generieren. Bei Re Generation eines bestehenden Stores: vorhandene Versand USPs werden ersatzlos gestrichen oder durch echte Marken USPs ersetzt.
+
+## 7. Sprache
 
 Alle User facing Texte sind Deutsch, sofern der User nicht explizit eine andere Sprache wünscht. Das gilt für Logs, Toasts, Fehlermeldungen und alle vom Generator erzeugten Brand Store Inhalte auf der Marktplatzdomain `amazon.de`.

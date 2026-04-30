@@ -243,9 +243,9 @@ function slugifyRef(s) {
 
 var BRAND_TONE = 'Nahbar, konkret, praktisch. Inhabergeführt seit 2005, klare Sprache, kein Premium Pose, duzen.';
 
-var BRAND_STORY_KURZ = 'Seit 2005 bringen Philipp Juskys und Daniel Heidrich ein breites Sortiment für Wohnen, Garten und Alltag direkt zu dir. Inhabergeführt, mit Qualitätskontrolle vor Ort beim Hersteller und versandkostenfrei in Deutschland.';
+var BRAND_STORY_KURZ = 'Seit 2005 bringen Philipp Juskys und Daniel Heidrich ein breites Sortiment für Wohnen, Garten und Alltag direkt zu dir. Inhabergeführt aus Deutschland, mit Qualitätskontrolle vor Ort beim Hersteller.';
 
-var BRAND_STORY_LANG = 'Seit 2005 ist Juskys dein Partner für Wohnen, Garten, Heimwerken, Tier und Freizeit. Geleitet von Philipp Juskys und Daniel Heidrich, inhabergeführt aus Deutschland. Wir besuchen unsere Hersteller persönlich, prüfen regelmäßig die Qualität und liefern versandkostenfrei in Deutschland.';
+var BRAND_STORY_LANG = 'Seit 2005 ist Juskys dein Partner für Wohnen, Garten, Heimwerken, Tier und Freizeit. Geleitet von Philipp Juskys und Daniel Heidrich, inhabergeführt aus Deutschland. Wir besuchen unsere Hersteller persönlich und prüfen regelmäßig die Qualität.';
 
 // ─── PAGE BUILDERS ────────────────────────────────────────
 
@@ -316,13 +316,13 @@ function buildHomePage() {
       ),
     ], 'products.shoppableFullWidth'),
 
-    // 9, USP Leiste 4 Marken USPs
-    section('2x2wide', [
+    // 9, USP Leiste 4 Marken USPs (vh-4square, kompakt, Icon plus Kurztext)
+    section('vh-4square', [
       tile('image', ov('**Inhabergeführt**', 'Seit 2005 aus Deutschland'), 'Marken USP Tile mit grünem Icon Kreis Haus.', { imageRef: 'usp-inhabergefuehrt' }),
-      tile('image', ov('**Versandkostenfrei**', 'In ganz Deutschland'), 'Marken USP Tile mit grünem Icon Kreis Truck.', { imageRef: 'usp-versandkostenfrei' }),
-      tile('image', ov('**Geprüft**', 'Hersteller persönlich besucht'), 'Marken USP Tile mit grünem Icon Kreis Schild Check.', { imageRef: 'usp-geprueft' }),
-      tile('image', ov('**Sortiment**', 'Für viele Lebensbereiche'), 'Marken USP Tile mit grünem Icon Kreis Stern.', { imageRef: 'usp-sortiment' }),
-    ], 'features.featureGrid4wide'),
+      tile('image', ov('**Eigene Marke**', 'Designs unter Juskys'), 'Marken USP Tile mit grünem Icon Kreis Stern.', { imageRef: 'usp-eigene-marke' }),
+      tile('image', ov('**Hersteller besucht**', 'Eigene Qualitätskontrolle'), 'Marken USP Tile mit grünem Icon Kreis Schild Check.', { imageRef: 'usp-hersteller-besucht' }),
+      tile('image', ov('**Aus einem Haus**', 'Möbel, Garten, Tier, Haushalt'), 'Marken USP Tile mit grünem Icon Kreis Sortiment.', { imageRef: 'usp-aus-einem-haus' }),
+    ], 'features.featureGrid4square'),
 
     // 10, Follow Banner
     section('1', [
@@ -391,7 +391,7 @@ function buildBestsellerPage() {
   sections.push(section('vh-w2s', [
     tile('image', ov('Warum **Juskys**'), 'Wide Image USP Bild.'),
     tile('image', ov('**Geprüfte** Qualität'), 'Square mit grünem Icon Kreis Schild Check.'),
-    tile('image', ov('**Versandkostenfrei**'), 'Square mit grünem Icon Kreis Truck.'),
+    tile('image', ov('**Inhabergeführt**'), 'Square mit grünem Icon Kreis Haus.'),
   ], 'features.featureWideAnd2'));
 
   return page('Bestseller', sections);
@@ -639,12 +639,6 @@ function buildSalePage() {
         { asins: STRUCTURED_ASINS.filter(function(a) { return a.onHomepage; }).slice(0, 12).map(function(a) { return a.asin; }) }
       ),
     ], 'products.fullWidthGrid'),
-
-    section('vh-w2s', [
-      tile('image', ov('**Warum** lohnt sich Sale'), 'Wide Bild.'),
-      tile('image', ov('**Echt** reduziert'), 'Square mit grünem Icon Kreis Stern.'),
-      tile('image', ov('**Schnell** weg'), 'Square mit grünem Icon Kreis Truck.'),
-    ], 'features.featureWideAnd2'),
   ]);
 }
 
@@ -665,10 +659,11 @@ function buildUeberUnsPage() {
       ),
     ], 'trust.trustSplit'),
 
+    // 4 Werte mit echten Fotos als Hauptelement, darum 2x2wide (kein vh-4square)
     section('2x2wide', [
       tile('image', ov('**Inhabergeführt**', 'Seit 2005'), 'Wert Tile Inhabergeführt mit Foto Geschäftsführer Juskys/Heidrich.'),
-      tile('image', ov('**Geprüft**', 'Hersteller persönlich besucht'), 'Wert Tile Qualität mit Foto Hersteller Visite.'),
-      tile('image', ov('**Versandkostenfrei**', 'In ganz Deutschland'), 'Wert Tile Versand mit Foto Logistik.'),
+      tile('image', ov('**Hersteller besucht**', 'Eigene Qualitätskontrolle'), 'Wert Tile Qualität mit Foto Hersteller Visite.'),
+      tile('image', ov('**Aus Deutschland**', 'Sitz und eigenes Lager'), 'Wert Tile Standort mit Foto Halle oder Logistikzentrum.'),
       tile('image', ov('**Engagiert**', 'Soziales Engagement, Spenden'), 'Wert Tile Engagement mit Foto Spendenaktion.'),
     ], 'features.featureGrid4wide'),
 
@@ -683,8 +678,8 @@ function buildUeberUnsPage() {
 
     section('1', [
       tile('image',
-        ov('**Service**, der reagiert', 'Kontakt, Versand, Rücksendung', '', [], 'Kontakt aufnehmen'),
-        'Service Block mit Icons Kontakt Versand Rücksendung.'
+        ov('**Service**, der reagiert', 'Fragen zur Marke, Garantie, Rückfrage', '', [], 'Kontakt aufnehmen'),
+        'Service Block mit Icons für Markenkontakt und Garantie.'
       ),
     ], 'engagement.followBanner'),
   ]);
