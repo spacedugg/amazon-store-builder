@@ -1,31 +1,44 @@
 import { useState } from 'react';
 
-// Inlined ASIN completeness check (formerly contentPipeline.checkAsinCompleteness)
-// Returns which input ASINs are placed in tiles vs missing.
-function checkAsinCompleteness(inputAsins, pages) {
-  var placed = {};
-  (pages || []).forEach(function(pg) {
-    (pg.sections || []).forEach(function(sec) {
-      (sec.tiles || []).forEach(function(tl) {
+// Sammelt alle ASINs aus dem Store: tile.asins (nur echte B0...), tile.linkAsin,
+// tile.hotspots[].asin und store.asins[].asin. Gibt Liste plus Locations zurück.
+function gatherStoreAsins(store) {
+  var asins = {};
+  (store.pages || []).forEach(function(pg, pi) {
+    (pg.sections || []).forEach(function(sec, si) {
+      (sec.tiles || []).forEach(function(tl, ti) {
         (tl.asins || []).forEach(function(a) {
-          if (!placed[a]) placed[a] = [];
-          placed[a].push({ pageName: pg.name, tileType: tl.type });
+          if (a && typeof a === 'string' && a.indexOf('B0') === 0) {
+            if (!asins[a]) asins[a] = [];
+            asins[a].push({ page: pg.name, section: si + 1, tile: ti + 1, type: tl.type });
+          }
+        });
+        if (tl.linkAsin) {
+          if (!asins[tl.linkAsin]) asins[tl.linkAsin] = [];
+          asins[tl.linkAsin].push({ page: pg.name, section: si + 1, tile: ti + 1, type: tl.type + ' link' });
+        }
+        (tl.hotspots || []).forEach(function(hs) {
+          if (hs.asin) {
+            if (!asins[hs.asin]) asins[hs.asin] = [];
+            asins[hs.asin].push({ page: pg.name, section: si + 1, tile: ti + 1, type: 'hotspot' });
+          }
         });
       });
     });
   });
-  var found = [];
-  var missing = [];
-  (inputAsins || []).forEach(function(a) {
-    if (placed[a]) found.push({ asin: a, locations: placed[a] });
-    else missing.push(a);
+  // Top Level store.asins als zusätzliche Quelle
+  (store.asins || []).forEach(function(a) {
+    var asin = typeof a === 'string' ? a : (a && a.asin);
+    if (asin && !asins[asin]) asins[asin] = [];
   });
-  return { complete: missing.length === 0, found: found, missing: missing, total: (inputAsins || []).length };
+  return asins;
 }
 
-export default function AsinOverview({ store, products, onClose, onMoveAsin }) {
-  var [filter, setFilter] = useState('all'); // 'all', 'missing', 'found'
-  var [moveAsin, setMoveAsin] = useState(null); // asin being moved
+export default function AsinOverview({ store, products, onClose, onMoveAsin, onScrape }) {
+  var [filter, setFilter] = useState('all');
+  var [moveAsin, setMoveAsin] = useState(null);
+  var [scraping, setScraping] = useState(false);
+  var [scrapeMsg, setScrapeMsg] = useState('');
 
   if (!store || !store.pages || store.pages.length === 0) {
     return (
@@ -41,38 +54,70 @@ export default function AsinOverview({ store, products, onClose, onMoveAsin }) {
     );
   }
 
-  var inputAsins = (products || []).map(function(p) { return p.asin; });
-  var check = checkAsinCompleteness(inputAsins, store.pages);
+  // Alle ASINs im Store sammeln, plus Locations
+  var asinLocations = gatherStoreAsins(store);
+  var allAsins = Object.keys(asinLocations);
+
+  // Wer hat Produktdaten, wer fehlt
   var productMap = {};
   (products || []).forEach(function(p) { productMap[p.asin] = p; });
+  var withData = allAsins.filter(function(a) { return productMap[a]; });
+  var withoutData = allAsins.filter(function(a) { return !productMap[a]; });
 
-  var displayAsins = inputAsins;
-  if (filter === 'missing') displayAsins = check.missing;
-  if (filter === 'found') displayAsins = check.found.map(function(f) { return f.asin; });
+  var displayAsins = allAsins;
+  if (filter === 'with') displayAsins = withData;
+  if (filter === 'without') displayAsins = withoutData;
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" onClick={function(e) { e.stopPropagation(); }} style={{ maxWidth: 700, maxHeight: '85vh', display: 'flex', flexDirection: 'column' }}>
+      <div className="modal" onClick={function(e) { e.stopPropagation(); }} style={{ maxWidth: 760, maxHeight: '85vh', display: 'flex', flexDirection: 'column' }}>
         <div className="modal-header">
-          <span>ASIN Overview ({inputAsins.length} products)</span>
+          <span>ASIN Overview ({allAsins.length} ASINs im Store)</span>
           <button className="modal-close" onClick={onClose}>&times;</button>
         </div>
 
-        {/* Summary bar */}
-        <div style={{ display: 'flex', gap: 8, padding: '10px 16px', background: check.complete ? '#f0fdf4' : '#fef2f2', borderBottom: '1px solid #e2e8f0' }}>
-          <span style={{ fontSize: 12, fontWeight: 700, color: check.complete ? '#166534' : '#991b1b' }}>
-            {check.complete
-              ? 'All ' + inputAsins.length + ' ASINs found in the store'
-              : check.missing.length + ' ASINs missing from the store!'}
-          </span>
+        {/* Scrape Button plus Status */}
+        <div style={{ padding: '10px 16px', borderBottom: '1px solid #e2e8f0', background: '#f8fafc' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+            {onScrape && (
+              <button
+                className="btn btn-primary"
+                disabled={scraping || allAsins.length === 0}
+                onClick={async function() {
+                  // Bevorzugt fehlende ASINs scrapen, sonst alle
+                  var list = withoutData.length > 0 ? withoutData : allAsins;
+                  setScraping(true);
+                  setScrapeMsg('Lade ' + list.length + ' ASINs von Amazon, kann mehrere Minuten dauern...');
+                  try {
+                    var result = await onScrape(list);
+                    setScrapeMsg('Fertig: ' + (result && result.success || 0) + ' geladen, ' + (result && result.failed || 0) + ' fehlgeschlagen');
+                  } catch (e) {
+                    setScrapeMsg('Fehler: ' + e.message);
+                  } finally {
+                    setScraping(false);
+                  }
+                }}
+                style={{ fontSize: 12, padding: '6px 14px' }}>
+                {scraping ? 'Lade...' : (withoutData.length > 0 ? 'Fehlende ASINs laden (' + withoutData.length + ')' : 'Alle ASINs neu laden')}
+              </button>
+            )}
+            <span style={{ fontSize: 11, color: '#64748b' }}>
+              Mit Produktdaten: <b>{withData.length}</b>, ohne: <b>{withoutData.length}</b>
+            </span>
+          </div>
+          {scrapeMsg && (
+            <div style={{ marginTop: 6, padding: '6px 8px', background: scrapeMsg.indexOf('Fehler') === 0 ? '#fee2e2' : '#dcfce7', borderRadius: 4, fontSize: 11, color: scrapeMsg.indexOf('Fehler') === 0 ? '#991b1b' : '#166534' }}>
+              {scrapeMsg}
+            </div>
+          )}
         </div>
 
-        {/* Filter tabs */}
+        {/* Filter Tabs */}
         <div style={{ display: 'flex', gap: 2, padding: '8px 16px', borderBottom: '1px solid #e2e8f0' }}>
           {[
-            { key: 'all', label: 'All (' + inputAsins.length + ')' },
-            { key: 'found', label: 'Found (' + check.found.length + ')' },
-            { key: 'missing', label: 'Missing (' + check.missing.length + ')' },
+            { key: 'all', label: 'Alle (' + allAsins.length + ')' },
+            { key: 'with', label: 'Mit Daten (' + withData.length + ')' },
+            { key: 'without', label: 'Ohne Daten (' + withoutData.length + ')' },
           ].map(function(tab) {
             return (
               <button key={tab.key} onClick={function() { setFilter(tab.key); }}
@@ -87,50 +132,58 @@ export default function AsinOverview({ store, products, onClose, onMoveAsin }) {
           })}
         </div>
 
-        {/* ASIN list */}
+        {/* ASIN Liste */}
         <div style={{ flex: 1, overflow: 'auto', padding: '8px 16px' }}>
+          {displayAsins.length === 0 && (
+            <div style={{ padding: 16, textAlign: 'center', color: '#94a3b8', fontSize: 12 }}>
+              {filter === 'without' ? 'Alle ASINs haben Produktdaten' : 'Keine ASINs gefunden'}
+            </div>
+          )}
           {displayAsins.map(function(asin) {
             var prod = productMap[asin];
-            var locations = check.asinLocations[asin] || [];
-            var isMissing = locations.length === 0;
+            var locations = asinLocations[asin] || [];
+            var amazonUrl = (prod && prod.url) || ('https://www.amazon.de/dp/' + asin);
+            var isMissingData = !prod;
 
             return (
               <div key={asin} style={{
                 display: 'flex', alignItems: 'flex-start', gap: 10, padding: '8px 10px', marginBottom: 4,
-                background: isMissing ? '#fef2f2' : '#fff',
-                border: '1px solid ' + (isMissing ? '#fecaca' : '#e2e8f0'),
+                background: isMissingData ? '#fffbeb' : '#fff',
+                border: '1px solid ' + (isMissingData ? '#fde68a' : '#e2e8f0'),
                 borderRadius: 6,
               }}>
-                {/* Product image */}
-                {prod && prod.image && (
-                  <img src={prod.image} alt="" style={{ width: 40, height: 40, objectFit: 'contain', borderRadius: 4, flexShrink: 0 }} />
+                {prod && prod.image ? (
+                  <a href={amazonUrl} target="_blank" rel="noopener noreferrer" style={{ flexShrink: 0 }}>
+                    <img src={prod.image} alt="" style={{ width: 44, height: 44, objectFit: 'contain', borderRadius: 4 }} />
+                  </a>
+                ) : (
+                  <div style={{ width: 44, height: 44, background: '#f1f5f9', borderRadius: 4, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, color: '#94a3b8' }}>?</div>
                 )}
 
-                {/* Product info */}
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: 11, fontWeight: 700, color: '#1e293b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                    {prod ? prod.name.slice(0, 60) : asin}
+                    {prod ? (prod.name || asin).slice(0, 60) : asin}
                   </div>
-                  <div style={{ fontSize: 10, color: '#64748b', fontFamily: 'monospace' }}>{asin}</div>
-
-                  {/* Locations */}
+                  <a href={amazonUrl} target="_blank" rel="noopener noreferrer" style={{ fontSize: 10, color: '#0369a1', fontFamily: 'monospace', textDecoration: 'none' }}>
+                    {asin} &#8599;
+                  </a>
                   {locations.length > 0 ? (
                     <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 4 }}>
-                      {locations.map(function(loc, li) {
+                      {locations.slice(0, 6).map(function(loc, li) {
                         return (
                           <span key={li} style={{ fontSize: 9, padding: '1px 6px', borderRadius: 3, background: '#e0e7ff', color: '#4338ca' }}>
                             {loc.page} S{loc.section} T{loc.tile} ({loc.type})
                           </span>
                         );
                       })}
+                      {locations.length > 6 && <span style={{ fontSize: 9, color: '#64748b' }}>+{locations.length - 6}</span>}
                     </div>
                   ) : (
                     <div style={{ fontSize: 10, color: '#ef4444', fontWeight: 600, marginTop: 2 }}>
-                      Not found in any page
+                      Nicht in einer Page verwendet
                     </div>
                   )}
 
-                  {/* Move ASIN dropdown */}
                   {moveAsin === asin && onMoveAsin && (
                     <div style={{ marginTop: 6, padding: '6px 8px', background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 4 }}>
                       <div style={{ fontSize: 10, fontWeight: 600, color: '#1e40af', marginBottom: 4 }}>Move to page:</div>
@@ -152,7 +205,6 @@ export default function AsinOverview({ store, products, onClose, onMoveAsin }) {
                   )}
                 </div>
 
-                {/* Move button */}
                 {onMoveAsin && (
                   <button onClick={function() { setMoveAsin(moveAsin === asin ? null : asin); }}
                     style={{ padding: '4px 8px', fontSize: 10, borderRadius: 4, border: '1px solid #e2e8f0', background: moveAsin === asin ? '#e0e7ff' : '#f8fafc', cursor: 'pointer', color: '#475569', flexShrink: 0 }}>

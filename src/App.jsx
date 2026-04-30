@@ -861,6 +861,28 @@ export default function App() {
           store={store}
           products={store.products}
           onClose={function() { setShowAsinOverview(false); }}
+          onScrape={async function(asinList) {
+            setRequestedAsins(asinList);
+            var domain = DOMAINS[store.marketplace] || DOMAINS.de;
+            var resp = await fetch('/api/amazon-search', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ asins: asinList, domain: domain }),
+            });
+            if (!resp.ok) {
+              var e = await resp.json().catch(function() { return {}; });
+              throw new Error(e.error || e.detail || 'Scrape failed');
+            }
+            var json = await resp.json();
+            var newProducts = json.products || [];
+            setStoreWithUndo(function(s) {
+              var existing = {};
+              (s.products || []).forEach(function(p) { existing[p.asin] = p; });
+              newProducts.forEach(function(p) { existing[p.asin] = p; });
+              return Object.assign({}, s, { products: Object.keys(existing).map(function(k) { return existing[k]; }) });
+            });
+            return { success: newProducts.length, failed: asinList.length - newProducts.length };
+          }}
           onMoveAsin={function(asin, targetPageId) {
             // Add the ASIN to the target page's last product_grid section
             // or create a new product_grid section if none exists
