@@ -150,6 +150,7 @@ export function emptyTile() {
     hotspots: [], // Array of { x: 0-100, y: 0-100, asin: 'B0...' } — max 5, for shoppable_image tiles
     uploadedImage: null, uploadedImageMobile: null, videoThumbnail: null,
     bgColor: '',
+    imageRef: '', // optionaler Tag für Bild Reuse, Format <topic>-<W>x<H>. Tiles mit gleichem imageRef teilen sich ein Bild beim Folder Upload.
     referenceImages: [], // Array of { dataUrl, name } — example/reference images for the designer
   };
 }
@@ -227,6 +228,7 @@ export function emptyTileForLayout(layoutId, tileIndex) {
     asins: [], linkAsin: '', linkUrl: '',
     uploadedImage: null, uploadedImageMobile: null, videoThumbnail: null,
     bgColor: '',
+    imageRef: '',
   };
 }
 

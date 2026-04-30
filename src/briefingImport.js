@@ -44,6 +44,7 @@ export function importBriefingToStore(briefing) {
         if (typeof t.imageCategory === 'string') tile.imageCategory = t.imageCategory;
         if (typeof t.textAlign === 'string') tile.textAlign = t.textAlign;
         if (typeof t.linkAsin === 'string') tile.linkAsin = t.linkAsin;
+        if (typeof t.imageRef === 'string') tile.imageRef = t.imageRef;
         if (typeof t.linkUrl === 'string') {
           if (t.linkUrl.indexOf('page:') === 0) {
             var pageName = t.linkUrl.slice(5);

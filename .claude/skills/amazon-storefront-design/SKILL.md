@@ -25,6 +25,73 @@ Geltungsbereich: alle kundensichtbaren Texte (heading, subheading, body, bullets
 
 USPs auf Markenebene dürfen **nie** produktspezifische Zahlenwerte enthalten (z.B. Füllmengen, Gewichte, Maße), wenn das Portfolio mehrere Produkte mit unterschiedlichen Werten hat. Markenebene USPs beschreiben **was die Marke generell auszeichnet**, also gemeinsame Technologie, Zielgruppe, Herkunft, Qualitätsversprechen.
 
+### Headline Copywriting Regeln
+
+**Konkret schreiben, nicht poetisch.** Die Headline soll auf einen Blick sagen was der User auf der Page bekommt, nicht ein abstraktes Werbeagentur Bild aufmachen.
+
+**Verbotene Patterns:**
+
+- **Abstrakte Verben** wie `kommt zurück`, `kommt an`, `findet zu sich`, `wartet auf dich`, `denkt mit`. Klingt nach 2010 Marketing Agentur, sagt nichts aus.
+  - Falsch: `Das Sofa, das zu dir zurückkommt`
+  - Falsch: `Schlafzimmer, das ankommt`
+  - Richtig: `Sofas in jeder Größe` oder `Das passende Sofa`
+- **"Wort, Erklärung" Komma Pattern überstrapaziert.** Maximal 1 Komma pro Headline. Wenn mehrere Sections in Folge dieses Pattern haben, abwechseln mit anderen Strukturen.
+  - Zu oft: `Wohnen, das passt`, `Sofa, das bleibt`, `Bad, klar strukturiert` (alle gleich gebaut)
+  - Besser: Mix aus Frage, Aussage, Komma Pattern, Imperativ
+- **Substantivierung von Adjektiven** wie `Klar strukturiert`, `Komplett gedacht`, `Fertig zum Loslegen`. Manchmal OK, aber nicht in jeder Headline.
+- **Premium Floskeln** wie `Stilvoll`, `Exklusiv`, `Hochwertig`, `Premium`. Sagen nichts.
+
+**Gute Headlines:**
+
+- Direkt: `Sofas in jeder Größe`, `Werkzeug für jeden Tag`
+- Konkret mit Mehrwert: `Sofas mit Bettkasten`, `Boxspring ab 200 Euro`
+- Saisonale Aktivierung: `Bereit für die Saison`, `Jetzt für den Sommer`
+- Imperativ: `Hol dir den Sommer`, `Gib deinem Garten Schatten`
+- Rhetorische Frage: `Welches Sofa passt zu dir`
+
+Pro Page maximal **eine** poetische Headline (z.B. die Hero Headline). Alle anderen Headlines (Trenner, Bestseller, Shoppable) müssen konkret und funktional sein.
+
+### Redundanz Check innerhalb Section
+
+In einer Section dürfen sich Wörter zwischen Heading und Tile Headings **nicht wiederholen**.
+
+Falsch:
+
+```
+Heading Section: "Robust, sicher, durchdacht"
+Tile 1: "Belastbar"
+Tile 2: "Sicher"   ← doppelt mit Heading
+```
+
+Richtig:
+
+```
+Heading Section: "Werkzeug, das hält"
+Tile 1: "Belastbar"
+Tile 2: "Sicher"
+```
+
+Oder:
+
+```
+Heading Section: "Robust, sicher, durchdacht"
+Tile 1: "Schwere Last"
+Tile 2: "TÜV geprüft"
+```
+
+Vor jeder Section Output: Prüfe ob ein Tile Heading Wort im Section Heading vorkommt. Wenn ja, eines der beiden umformulieren.
+
+### Konkrete Sprache pro Modul Typ
+
+| Section Modul | Headline Stil |
+|---------------|---------------|
+| Hero (Page Section 1) | 1 poetische Headline mit grünem Highlight, OK auch mit Komma Pattern |
+| Trenner (Section Header) | konkret, kurz, max 4 Wörter, beschreibt was im nächsten Block kommt |
+| Bestseller Grid | direkt, z.B. `Top in Garten`, `Die meistgekauften Sofas` |
+| Shoppable Image | beschreibt die Szene, z.B. `Lounge plus Sonnenschirm` |
+| USP Leiste | Markenwert klar, z.B. `Warum Juskys`, `Aus einer Hand` |
+| Cross Link Banner | Imperativ, z.B. `Jetzt zu Garten`, `Weiter zu Möbeln` |
+
 ### Default Sprache
 
 Standard ist **Deutsch** (Marktplatz `amazon.de`). Andere Sprachen nur wenn User explizit angibt.
@@ -194,6 +261,7 @@ Das Briefing JSON hat diese Struktur. Das Tool ergänzt fehlende IDs und Default
 | `linkUrl` | string | nein | für interne Links Format `page:Name` (z.B. `page:Garten`) |
 | `bgColor` | string | nein | HEX Farbe |
 | `imageCategory` | string | nein | `store_hero`, `benefit`, `product`, `creative`, `lifestyle`, `text_image` |
+| `imageRef` | string | nein | Topic Tag für Bild Reuse (siehe Abschnitt Image Reuse) |
 
 ### Tile Types
 
@@ -251,14 +319,87 @@ Jeder image, image_text und shoppable_image Tile muss eine `imageCategory` haben
 
 | Image Category | Wann |
 |----------------|------|
-| `store_hero` | Hero Tiles auf Page Top |
+| `store_hero` | **NUR** für das Banner über der Menüleiste (Page Header Banner, Felder `page.heroBanner` / `page.heroBannerMobile`). Niemals für Hero Tiles innerhalb einer Page Section. |
 | `benefit` | USP / Feature Tiles mit Icon plus Label |
-| `product` | Kategorie Navigator Tiles, freigestelltes Produkt auf hellem Grund |
-| `lifestyle` | Shoppable Tiles, Lifestyle Trenner, Brand Story Bilder |
+| `product` | Reine Produkt Detail Tiles, freigestelltes Produkt auf hellem Grund (selten, nur wenn explizit gewünscht) |
+| `lifestyle` (für Kategorie Tiles) | **Default für Kategorie Navigator Tiles**: Produkt im Kontext, mit Stimmung, nicht freigestellt. Bei Möbel und Outdoor verkauft das mehr als Freisteller. |
+| `lifestyle` | Hero Tiles auf Pages, Shoppable Tiles, Lifestyle Trenner, Brand Story Bilder, Raum oder Anwendungsszenen |
 | `text_image` | Text plus Bild Kombination, Trenner mit Claim |
 | `creative` | Footer Tiles, Cross Links, sonstige kreative Kompositionen |
 
-Nie Image Tile ohne Category liefern.
+Nie Image Tile ohne Category liefern. Nie `store_hero` als Tile imageCategory.
+
+### Trenner Tiles (Section Header, Kategorie Überschrift)
+
+Wenn ein Tile als visueller Trenner zwischen Sections dient (z.B.
+"Mehr aus Garten" als Kategorie Überschrift vor dem Cross Nav Grid,
+oder "Guter Schlaf ist kein Zufall" als Section Trenner):
+
+- Tile Type: `image`
+- imageCategory: **`text_image`** (NICHT `store_hero`, NICHT `lifestyle`)
+- module Reference: `lifestyle.fullWidthLifestyle` (kein `hero.*`)
+- textOverlay: nur `heading` mit grünem Highlight Wort, **keine** Subheading
+- brief: kurze Beschreibung der Bildidee (Material Makro, Lifestyle Szene als Hintergrund)
+
+Beispiel:
+```yaml
+tiles:
+  - type: image
+    imageCategory: text_image
+    textOverlay:
+      heading: "Mehr aus **Garten**"
+      subheading: ""
+    brief: "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid."
+```
+
+Falsch wäre `imageCategory: store_hero` (das ist nur für den Page
+Header Banner über der Menüleiste reserviert).
+
+### Header Banner Briefing pro Page
+
+Über der Page Menüleiste sitzt das Store Hero Banner (`page.heroBanner` Desktop, `page.heroBannerMobile` Mobile). Das ist **kein** Tile sondern ein eigenes Page Feld.
+
+Pro Page muss befüllt werden:
+
+```yaml
+heroBannerBrief: "Beschreibung was das Banner zeigt, z.B. Lifestyle Komposition Wohnzimmer"
+heroBannerTextOverlay: "Optionaler Slogan auf dem Banner"
+```
+
+Dimensions sind fest:
+- Desktop: 3000 x 600 px
+- Mobile: 1680 x 900 px
+
+Diese sind unterschiedlich (Aspect Ratio 5:1 vs 1.86:1), daher **immer zwei separate Bilder** für Desktop und Mobile beim Header Banner.
+
+### Shoppable Image, komplementäre Produkte
+
+Auf einem Shoppable Image (max 5 Hotspots) sollten die ASINs **komplementär** sein, nicht **substitutiv**.
+
+- **Komplementär**: zusammen nutzbar in einer Szene (Sofa plus Tisch plus Lampe)
+- **Substitutiv**: alternative Optionen (5 verschiedene Sofas)
+
+Heuristik:
+- Maximal **1 ASIN pro Sub Kategorie** auf einem Shoppable
+- Stattdessen mehrere komplementäre Subs kombinieren
+- Default Anzahl pro Shoppable: **3 ASINs**, max 5
+
+Beispiel **Garten Lounge Shoppable**:
+- 1 ASIN aus Gartenmöbel Sets (die Loungegruppe selbst, Hauptmotiv)
+- 1 ASIN aus Sonnenschutz (Sonnenschirm)
+- 1 ASIN aus Gartentische (Beistelltisch)
+
+Beispiel **Wohnzimmer Shoppable**:
+- 1 ASIN aus Sofas
+- 1 ASIN aus Wohnmöbel (Beistelltisch)
+- 1 ASIN aus Schlafkomfort (Kissen)
+- optional 1 ASIN aus Massagesessel
+
+**Falsch wäre**:
+- 5 ASINs aus Gartenmöbel Sets (alles verschiedene Loungegruppen)
+- 4 ASINs aus Sofas plus 1 ASIN aus Wohnmöbel (zu Sofa-lastig)
+
+Wenn nur eine Sub Kategorie thematisch passt (z.B. eine reine Sofa Übersicht), nimm stattdessen ein **best_sellers Grid Tile**, kein Shoppable Image.
 
 ### Subpage Hero Headlines
 
@@ -305,6 +446,54 @@ Das brauchst du im Briefing JSON nicht zu schreiben, der Briefing View des Tools
 ### Bestseller Section auf Home
 
 Maximal **eine** Bestseller Section auf Home, mit kuratierten 6 bis 8 ASINs gemischt aus mehreren Kategorien (z.B. saisonaler Schwerpunkt plus 2 stabile Anker). Niemals 3 oder mehr Bestseller Sections untereinander auf Home.
+
+### Image Reuse über `imageRef` Tag
+
+Damit der Designer **nicht für jede Sektion ein neues Bild** erzeugen muss, wenn das gleiche Motiv auf mehreren Tiles erscheinen soll (typischer Fall: Kategorie Tile Garten erscheint auf Home, Footer und Sale), bekommen wiederverwendbare Tiles ein `imageRef` Tag im Briefing JSON. Das Tool matched beim Folder Upload den Dateinamen gegen den Tag und verteilt **ein** Bild auf alle Tiles mit gleichem Ref.
+
+**Format des Tags**: `<purpose>-<topic>-<W>x<H>`
+
+- `purpose`: `cat` (Hauptkategorie), `sub` (Subkategorie), `usp` (Marken USP), `hero` (Page Hero), `trenner` (Lifestyle Trenner)
+- `topic`: Slug aus Topic Name (Umlaute zu ae oe ue ss, Leerzeichen zu Bindestrich, lowercase)
+- `WxH`: Desktop Dimensionen aus dem Layout (z.B. `1500x750` für Wide, `750x750` für Small Square, `3000x600` für Full Width)
+
+Die Dimensionen sind **Pflicht und Teil des Tags**, weil zwei Tiles mit identischem Topic aber unterschiedlichen Dimensionen niemals das gleiche Bild teilen dürfen, sonst würde es gestreckt oder beschnitten. Ein Garten Lifestyle Bild als Wide 1500x750 (Tag `cat-garten-lifestyle-1500x750`) und ein Garten Lifestyle Bild als Small Square 750x750 (Tag `cat-garten-lifestyle-750x750`) sind getrennte Assets, weil die Komposition jeweils anders gerahmt sein muss.
+
+**Reuse Beispiele für eine typische Brand**:
+
+| Wo | Tile | imageRef | Designer Datei |
+|----|------|----------|----------------|
+| Home Page Kategorie Grid Tile 1 (1500x750) | Garten | `cat-garten-lifestyle-1500x750` | `cat-garten-lifestyle-1500x750.jpg` |
+| Footer Kategorie Nav Tile 1 (1500x750) | Garten | `cat-garten-lifestyle-1500x750` | gleiche Datei, automatisch verteilt |
+| Sale Page Filter Tile 1 (1500x750) | Sale Garten | `cat-garten-lifestyle-1500x750` | gleiche Datei, automatisch verteilt |
+| Subpage Cross Nav Tile (Small Square 750x750) | Sub Sofas | `sub-sofas-lifestyle-750x750` | `sub-sofas-lifestyle-750x750.jpg` |
+| Möbel Page Sub Navigator Tile (Small Square 750x750) | Sub Sofas | `sub-sofas-lifestyle-750x750` | gleiche Datei, automatisch verteilt |
+| Marken USP Tile 4x mit "Versandkostenfrei" | USP Versand | `usp-versandkostenfrei-1500x750` | gleiche Datei auf Home, Bestseller, Über Uns |
+
+**Was du im Briefing JSON setzt**:
+
+```json
+{
+  "type": "image",
+  "textOverlay": { "heading": "**GARTEN**" },
+  "linkUrl": "page:Garten",
+  "imageRef": "cat-garten-lifestyle"
+}
+```
+
+Der `WxH` Suffix wird vom Build automatisch angehängt basierend auf dem Layout. Du gibst **nur den Topic Stem** (`cat-garten-lifestyle`).
+
+**Wann setzen**:
+- Hauptkategorie Tiles auf Home, Footer, Sale, Bestseller Trenner: `cat-<parent>-lifestyle`
+- Sub Kategorie Tiles in Main Page Navigator und Subpage Cross Nav: `sub-<sub>-lifestyle`
+- Marken USP Tiles wenn der gleiche USP mehrfach erscheint: `usp-<topic>`
+- Hero Banner einer Page wenn nicht reused: kein `imageRef` setzen, nur per Tile filename hochladen
+- Lifestyle Trenner und individuelle Section Bilder: kein `imageRef` setzen, das ist immer einzigartig
+
+**Wann NICHT setzen**:
+- Wenn das Bild wirklich nur an einer Stelle vorkommt, lass das Feld leer. Sonst entsteht ein "Reuse Tag mit nur einem Tile", was unnötig ist.
+- Bei `shoppable_image`: nie reusen, immer einzigartig.
+- Bei `image_text` Brand Story Tiles: nie reusen.
 
 ### Sinnvolle USP Leisten
 
