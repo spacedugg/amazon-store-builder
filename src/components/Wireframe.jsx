@@ -20,8 +20,12 @@ export default function Wireframe({ tile, width, viewMode, bgColor }) {
   var w = width || 280;
   var ht = Math.max(30, Math.round(w / (dims.w / dims.h)));
   var ov = (tile.textOverlay && typeof tile.textOverlay === 'object') ? tile.textOverlay : {};
-  var text = (ov.heading || '').replace(/\*\*([^*]+)\*\*/g, '$1') || ov.subheading || '';
+  var heading = (ov.heading || '').replace(/\*\*([^*]+)\*\*/g, '$1');
+  var subheading = ov.subheading || '';
+  var body = ov.body || '';
+  var bullets = Array.isArray(ov.bullets) ? ov.bullets.filter(Boolean) : [];
   var cta = ov.cta || '';
+  var hasAnyText = heading || subheading || body || bullets.length > 0 || cta;
   var isShoppable = tile.type === 'shoppable_image';
   var isImageText = tile.type === 'image_text';
 
@@ -31,6 +35,7 @@ export default function Wireframe({ tile, width, viewMode, bgColor }) {
   // Determine text color contrast based on bg brightness
   var textFill = '#888';
   var dimsFill = '#bbb';
+  var darkBg = false;
   if (bgColor) {
     var hex = bgColor.replace('#', '');
     if (hex.length === 3) hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
@@ -41,32 +46,73 @@ export default function Wireframe({ tile, width, viewMode, bgColor }) {
     if (luminance < 0.5) {
       textFill = '#e0e0e0';
       dimsFill = 'rgba(255,255,255,.4)';
+      darkBg = true;
     }
   }
+
+  // Text Wireframe innerhalb des Bildbereichs. Heading, Subheading, Body, Bullets,
+  // CTA werden alle als gedämpfte Skizze gezeigt damit der Designer sieht welche
+  // Texte ins Bild müssen. Bewusst grau und ohne grünen Button damit das nicht
+  // wie ein fertiges UI Mockup aussieht.
+  var textAlign = tile.textAlign || 'left';
+  var hSize = Math.min(13, w / 18);
+  var subSize = Math.min(9.5, w / 26);
+  var bodySize = Math.min(7.5, w / 32);
+  var ctaSize = Math.min(7, w / 36);
+  var pad = Math.max(6, w * 0.04);
+  var ctaOpacity = 0.55;
+  var ctaBg = darkBg ? 'rgba(255,255,255,.18)' : 'rgba(0,0,0,.35)';
+  var ctaText = darkBg ? '#1f2937' : '#fff';
 
   return (
     <svg viewBox={'0 0 ' + w + ' ' + ht} style={{ width: '100%', display: 'block' }}>
       <rect width={w} height={ht} fill={bgFill} rx="2" />
 
-      {/* Text overlay */}
-      {text && (
-        <text x={tile.textAlign === 'right' ? w * 0.94 : tile.textAlign === 'center' ? w * 0.5 : w * 0.06}
-          y={ht * 0.42} fontSize={Math.min(11, w / 24)}
-          fontWeight="700" fill={textFill} fontFamily="system-ui, sans-serif" opacity=".8"
-          textAnchor={tile.textAlign === 'right' ? 'end' : tile.textAlign === 'center' ? 'middle' : 'start'}>
-          {text.length > 45 ? text.slice(0, 42) + '...' : text}
-        </text>
-      )}
-
-      {/* CTA button */}
-      {cta && (
-        <>
-          <rect x={w * 0.06} y={ht * 0.58}
-            width={Math.min(cta.length * 5.5 + 16, w * 0.5)} height={14}
-            rx={7} fill="#666" opacity=".5" />
-          <text x={w * 0.06 + 8} y={ht * 0.58 + 10} fontSize="6.5"
-            fill="#fff" fontFamily="system-ui, sans-serif" fontWeight="600">{cta}</text>
-        </>
+      {/* Text Wireframe Skizze (Heading, Subheading, Body, Bullets, CTA) */}
+      {hasAnyText && (
+        <foreignObject x={pad} y={pad} width={Math.max(10, w - pad * 2)} height={Math.max(10, ht - pad * 2 - 10)}>
+          <div xmlns="http://www.w3.org/1999/xhtml" style={{
+            width: '100%', height: '100%',
+            display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+            color: textFill, opacity: 0.9,
+            fontFamily: 'system-ui, sans-serif',
+            textAlign: textAlign,
+            overflow: 'hidden',
+          }}>
+            <div style={{ overflow: 'hidden' }}>
+              {heading && (
+                <div style={{ fontSize: hSize, fontWeight: 700, lineHeight: 1.15, marginBottom: 2, opacity: 0.9 }}>
+                  {heading}
+                </div>
+              )}
+              {subheading && (
+                <div style={{ fontSize: subSize, fontWeight: 500, lineHeight: 1.2, marginBottom: 3, opacity: 0.7 }}>
+                  {subheading}
+                </div>
+              )}
+              {body && (
+                <div style={{ fontSize: bodySize, fontWeight: 400, lineHeight: 1.3, opacity: 0.6, marginBottom: 3 }}>
+                  {body}
+                </div>
+              )}
+              {bullets.length > 0 && (
+                <ul style={{ margin: 0, paddingLeft: bodySize * 1.6, fontSize: bodySize, opacity: 0.65, lineHeight: 1.3 }}>
+                  {bullets.map(function(bl, i) { return <li key={i}>{bl}</li>; })}
+                </ul>
+              )}
+            </div>
+            {cta && (
+              <div style={{ display: 'flex', justifyContent: textAlign === 'right' ? 'flex-end' : textAlign === 'center' ? 'center' : 'flex-start' }}>
+                <span style={{
+                  display: 'inline-block',
+                  padding: (ctaSize * 0.4) + 'px ' + (ctaSize * 1.2) + 'px',
+                  background: ctaBg, color: ctaText, fontSize: ctaSize, fontWeight: 600,
+                  borderRadius: ctaSize * 0.5, opacity: ctaOpacity, lineHeight: 1.2,
+                }}>{cta}</span>
+              </div>
+            )}
+          </div>
+        </foreignObject>
       )}
 
       {/* Type badge — only for image_text (shoppable is shown via imageCategory badge + hotspot dots) */}
