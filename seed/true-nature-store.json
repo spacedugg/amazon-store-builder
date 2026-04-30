@@ -1,0 +1,2197 @@
+{
+  "brandName": "True Nature",
+  "marketplace": "de",
+  "category": "supplements",
+  "brandTone": "Modern, direkt, nahbar, locker, duzen. Familienunternehmen aus Köln, ehrlich und bodenständig, ohne Marketing Floskeln. Klar, freundlich, selbstbewusst, glaubwürdig, nicht steril medizinisch.",
+  "brandStory": "True Nature ist ein Familienunternehmen aus Köln, gegründet 2019 von Lukas und Samuel Peto. Wir bauen hochwirksame Rezepturen aus natürlichen Inhaltsstoffen, kombiniert mit moderner Wissenschaft und strengen Qualitätsstandards. Made in Germany, unabhängig geprüft, große Dosen zum fairen Preis.",
+  "headerBannerColor": "#003e2a",
+  "asins": [
+    { "asin": "B0FY73CZMB", "category": "Schlaf" },
+    { "asin": "B09D4VM1I8", "category": "Herz-Kreislauf" },
+    { "asin": "B0DJTSMKYG", "category": "Herz-Kreislauf" },
+    { "asin": "B0CYTJK2ML", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0F3J4MP7Z", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0DHY9K7XN", "category": "Körper & Balance" },
+    { "asin": "B09BD49H7K", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0DYF4GQ3B", "category": "Körper & Balance" },
+    { "asin": "B0FCYVKVF7", "category": "Verdauung" },
+    { "asin": "B0CYM13PB4", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0DJT57NST", "category": "Verdauung" },
+    { "asin": "B0DRD7N99D", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0DT13TNVN", "category": "Verdauung" },
+    { "asin": "B0DL1NLLBB", "category": "Gelenke & Sport" },
+    { "asin": "B0DG7LPKZ", "category": "Immunsystem & Vitalität" },
+    { "asin": "B089K48RVT", "category": "Körper & Balance" },
+    { "asin": "B0DN1NTRZC", "category": "Energie" },
+    { "asin": "B08TT7JJ1G", "category": "Energie" },
+    { "asin": "B0DK30CF64", "category": "Verdauung" },
+    { "asin": "B0FH6V5V3H", "category": "Gelenke & Sport" },
+    { "asin": "B089YWB481", "category": "Schlaf" },
+    { "asin": "B0DT18M4ON", "category": "Körper & Balance" },
+    { "asin": "B09CQ674JG", "category": "Verdauung" },
+    { "asin": "B0FR9GDRR1", "category": "Gelenke & Sport" },
+    { "asin": "B0DXJ13FDW", "category": "Körper & Balance" },
+    { "asin": "B0CYLMVGGZ", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0DPMLFL94", "category": "Energie" },
+    { "asin": "B089ZPK5DX", "category": "Gelenke & Sport" },
+    { "asin": "B0D3H08TYJ", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0CYLX4YWT", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0DJT88VP5", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0CY14PWMF", "category": "Körper & Balance" },
+    { "asin": "B0F3NT8VY7", "category": "Gelenke & Sport" },
+    { "asin": "B0DQ46CHL", "category": "Verdauung" },
+    { "asin": "B0DK26YYS9", "category": "Verdauung" },
+    { "asin": "B0DRH2SPLG", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0CLD91XC9", "category": "Schlaf" },
+    { "asin": "B081T3TJRK", "category": "Immunsystem & Vitalität" },
+    { "asin": "B0CMDFD46", "category": "Herz-Kreislauf" },
+    { "asin": "B0D2P0RKQ5", "category": "Herz-Kreislauf" },
+    { "asin": "B0DBLPCNHC", "category": "Energie" },
+    { "asin": "B0D496QM3H", "category": "Schlaf" },
+    { "asin": "B0DY2148G", "category": "Schlaf" },
+    { "asin": "B07W9VD2L", "category": "Körper & Balance" },
+    { "asin": "B0G1NF25ZX", "category": "Körper & Balance" },
+    { "asin": "B086X6HD6R", "category": "Verdauung" },
+    { "asin": "B0D45SDLXF", "category": "Verdauung" }
+  ],
+  "pages": [
+    {
+      "name": "Home",
+      "sections": [
+        {
+          "module": "hero.fullWidthHero",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "store_hero",
+              "textOverlay": {
+                "heading": "Echte Natur, echte **Wirkung**",
+                "subheading": "Hochwirksame Rezepturen aus Köln, unabhängig geprüft, fair dosiert",
+                "body": "",
+                "bullets": [],
+                "cta": "Sortiment entdecken"
+              },
+              "brief": "Hero Bild Startseite. Holztisch mit Auswahl an True Nature Kapseldosen verschiedener Sorten, links daneben frische natürliche Zutaten wie Beeren, Wurzeln, Blätter, Pilze, im Hintergrund weicher Übergang in Wald oder grüne Fläche. Produktdosen klar lesbar im rechten Drittel."
+            }
+          ]
+        },
+        {
+          "module": "brandStory.split",
+          "layoutId": "std-2equal",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Porträt der beiden Gründer Lukas und Samuel Peto im Wald, locker, in Hoodies, gemeinsam, halbnah. Vordergrund leicht unscharfes Blattwerk, Hintergrund Bäume."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "text_image",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "Das ist **True Nature**",
+                "subheading": "Familienunternehmen aus Köln, gegründet 2019",
+                "body": "Lukas und Samuel haben True Nature gestartet, weil sie selbst keine Marke gefunden haben, die hochwirksame Rezepturen mit ehrlicher Kommunikation verbindet. Heute entstehen alle Produkte in Deutschland, werden unabhängig geprüft, und du bekommst dank großer Dosen mehr Leistung zum fairen Preis.",
+                "bullets": [],
+                "cta": "Mehr über uns"
+              },
+              "brief": "Reine Textfläche auf cremeweißem Hintergrund, links oben kleines True Nature Logo, rechts unten kleines grünes Akzentelement.",
+              "linkUrl": "page:Über uns"
+            }
+          ]
+        },
+        {
+          "module": "category.navigator",
+          "layoutId": "4x2grid",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "**Schlaf**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
+              "brief": "Freigestellte True Nature Daily Sleep Dose mittig auf cremeweißem Grund, kleine getrocknete Lavendelblüten und Baldrianwurzel als Deko unten.",
+              "linkUrl": "page:Schlaf"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "**Immunsystem** und Vitalität",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
+              "brief": "Freigestellte Cordyceps oder Reishi Dose mittig, daneben getrocknete Pilze und Hagebutten.",
+              "linkUrl": "page:Immunsystem & Vitalität"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "**Energie**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
+              "brief": "Freigestellte Maca Gold Dose mittig, daneben Macawurzel und Gerstengras.",
+              "linkUrl": "page:Energie"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "**Gelenke** und Sport",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
+              "brief": "Freigestellte Glucosamin Chondroitin Dose mittig, daneben Weihrauchharz und grüne Blätter.",
+              "linkUrl": "page:Gelenke & Sport"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "**Verdauung**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
+              "brief": "Freigestellte Flohsamen oder Bockshornklee Dose mittig, daneben Flohsamenschalen und Apfelstücke.",
+              "linkUrl": "page:Verdauung"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "**Herz** und Kreislauf",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
+              "brief": "Freigestellte Safran oder Schwarzer Knoblauch Dose mittig, daneben Safranfäden und Knoblauchzehen.",
+              "linkUrl": "page:Herz-Kreislauf"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "**Körper** und Balance",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
+              "brief": "Freigestellte Ashwagandha oder Bacopa Dose mittig, daneben Ashwagandhawurzel und Adaptogene Zutaten.",
+              "linkUrl": "page:Körper & Balance"
+            },
+            {
+              "type": "image",
+              "imageCategory": "creative",
+              "bgColor": "#d9fab3",
+              "textOverlay": {
+                "heading": "**Sale**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Zu den Angeboten"
+              },
+              "brief": "Hellgrüne Fläche mit großem Sale Schriftzug zentral, kleine Preisschild Grafik dezent in der Ecke.",
+              "linkUrl": "page:Sale"
+            }
+          ]
+        },
+        {
+          "module": "shoppable.fullWidth",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "shoppable_image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Lieblinge unserer **Community**",
+                "subheading": "Tippe auf die Punkte und entdecke ausgewählte Bestseller",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Aufnahme einer Frühstücksszene auf hellem Holztisch. Verteilt: Daily Sleep Dose, Propionsäure, Bockshornklee, PQQ, Grünlippmuschel. Dazwischen Glas Wasser, frische Blaubeeren, Walnüsse, aufgeschlagenes Notizbuch. Hotspots auf den 5 Dosen.",
+              "asins": ["B0FY73CZMB", "B0FCYVKVF7", "B0DJT57NST", "B0DN1NTRZC", "B089ZPK5DX"],
+              "hotspots": []
+            }
+          ]
+        },
+        {
+          "module": "bestseller.curated",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Bestseller, **gewählt** von dir",
+                "subheading": "Die meistgekauften Rezepturen aus dem True Nature Sortiment",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B0FY73CZMB",
+                "B089YWB481",
+                "B08TT7JJ1G",
+                "B081T3TJRK",
+                "B0CLD91XC9",
+                "B0DY2148G",
+                "B0FH6V5V3H",
+                "B0DJTSMKYG"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "usp.bar",
+          "layoutId": "vh-w2s",
+          "tiles": [
+            {
+              "type": "image_text",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Warum **True Nature**",
+                "subheading": "Ehrlich, hochdosiert, geprüft",
+                "body": "Wir bauen Rezepturen, die wir selbst nehmen würden. Hochwirksam, in großen Dosen, ohne unnötige Zusätze, unabhängig im Labor geprüft.",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild im Labor: Hand greift Reagenzglas mit grünem Pflanzenextrakt, daneben True Nature Dose und Pflanzen. Linke Hälfte für Text frei."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "Made in **Germany**",
+                "subheading": "Hergestellt und abgefüllt in Deutschland",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Quadratisches Tile, mittig oben Icon Deutschlandkonturen in Markenprimärgrün, darunter Headline, cremeweißer Hintergrund."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "365 Tage **Geld-zurück**",
+                "subheading": "Risikofrei testen, weniger als 2 Prozent Retourenquote",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Quadratisches Tile, mittig oben Icon Geldmünze mit Pfeil zurück in Markenprimärgrün, darunter Headline, cremeweißer Hintergrund."
+            }
+          ]
+        },
+        {
+          "module": "sale.teaser",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "creative",
+              "bgColor": "#d9fab3",
+              "textOverlay": {
+                "heading": "Gute Preise, **echte** Qualität",
+                "subheading": "Aktuelle Angebote im True Nature Sortiment",
+                "body": "",
+                "bullets": [],
+                "cta": "Zum Sale"
+              },
+              "brief": "Hellgrüne Fläche mit Auswahl von 4 bis 6 True Nature Dosen versetzt angeordnet rechts, links Textraum frei. Kleines Prozent Symbol als Akzent.",
+              "linkUrl": "page:Sale"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bestseller",
+      "sections": [
+        {
+          "module": "hero.fullWidthHero",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "store_hero",
+              "textOverlay": {
+                "heading": "Die **Lieblinge** der Community",
+                "subheading": "Die meistgekauften True Nature Rezepturen, sortiert nach Themen",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Aufnahme mit großer Auswahl True Nature Dosen versetzt im Halbkreis arrangiert auf hellem Holztisch. Im Hintergrund unscharf grüne Blätter."
+            }
+          ]
+        },
+        {
+          "module": "bestseller.top",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Top **8** insgesamt",
+                "subheading": "Die meistgekauften Produkte über alle Kategorien",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B0FY73CZMB",
+                "B089YWB481",
+                "B08TT7JJ1G",
+                "B081T3TJRK",
+                "B0CLD91XC9",
+                "B0DY2148G",
+                "B0FH6V5V3H",
+                "B0DJTSMKYG"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "category.divider",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Zur **Ruhe** finden",
+                "subheading": "Die Bestseller im Bereich Schlaf",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Aufnahme: Nachttisch mit dimmer Lampe, Buch, Glas Wasser, Daily Sleep Dose im Vordergrund. Bett im Hintergrund unscharf."
+            }
+          ]
+        },
+        {
+          "module": "bestseller.schlaf",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B0FY73CZMB",
+                "B089YWB481",
+                "B0CLD91XC9",
+                "B0D496QM3H",
+                "B0DY2148G"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "category.divider",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Stark durch **jeden** Tag",
+                "subheading": "Die Bestseller im Bereich Immunsystem und Vitalität",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Aufnahme: Outdoor Szene, Person beim Wandern in Naturkulisse, im Vordergrund True Nature Dose und frische Hagebutten."
+            }
+          ]
+        },
+        {
+          "module": "bestseller.immun",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B09BD49H7K",
+                "B0DRD7N99D",
+                "B0CLD91XC9",
+                "B081T3TJRK",
+                "B0DY2148G",
+                "B0CYLX4YWT",
+                "B0DJT88VP5",
+                "B0DRH2SPLG"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "category.divider",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "**Energie**, die ankommt",
+                "subheading": "Die Bestseller im Bereich Energie",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Aufnahme: Person beim Joggen am Morgen in Stadtpark, Sonnenaufgang im Hintergrund. Im Vordergrund True Nature Maca Dose und Smoothie Glas."
+            }
+          ]
+        },
+        {
+          "module": "bestseller.energie",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B08TT7JJ1G",
+                "B0DN1NTRZC",
+                "B0DPMLFL94",
+                "B0DBLPCNHC",
+                "B081T3TJRK",
+                "B0DRH2SPLG",
+                "B0DY2148G",
+                "B0CYTJK2ML"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "category.divider",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "**Beweglich** bleiben",
+                "subheading": "Die Bestseller im Bereich Gelenke und Sport",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Aufnahme: Person beim Yoga oder Stretching auf Holzboden, im Vordergrund True Nature Glucosamin Dose, Yogamatte unscharf."
+            }
+          ]
+        },
+        {
+          "module": "bestseller.gelenke",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B0FH6V5V3H",
+                "B0F3NT8VY7",
+                "B089ZPK5DX",
+                "B0DL1NLLBB",
+                "B0FR9GDRR1",
+                "B0F3J4MP7Z",
+                "B081T3TJRK",
+                "B0CYTJK2ML"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "usp.bar",
+          "layoutId": "vh-w2s",
+          "tiles": [
+            {
+              "type": "image_text",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Warum **True Nature**",
+                "subheading": "Ehrlich, hochdosiert, geprüft",
+                "body": "Wir bauen Rezepturen ohne unnötige Zusätze, in großen Dosen, hergestellt in Deutschland und unabhängig im Labor geprüft.",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Aufnahme im Labor mit Reagenzglas und True Nature Dose."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "Maximale **Reinheit**",
+                "subheading": "Frei von potenziell schädlichen Substanzen",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Quadrat, Icon Tropfen mit Häkchen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "98 Prozent **Zufriedenheit**",
+                "subheading": "Weniger als 2 Prozent Retourenquote",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Quadrat, Icon Stern mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Schlaf",
+      "sections": [
+        {
+          "module": "hero.fullWidthHero",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "store_hero",
+              "textOverlay": {
+                "heading": "Zur **Ruhe** finden",
+                "subheading": "Hochdosierte Rezepturen für entspannte Abende und erholsame Nächte",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Aufnahme Schlafzimmer: Bett mit Leinenbezug halbnah, Nachttisch mit Daily Sleep Dose, dimmer Lampe, Buch, Glas Wasser. Linker Bildbereich für Text frei."
+            }
+          ]
+        },
+        {
+          "module": "shoppable.fullWidth",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "shoppable_image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Deine **Abendroutine**",
+                "subheading": "Entdecke unsere fünf Schlaf Rezepturen direkt im Bild",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Nachttisch Szene mit fünf True Nature Dosen versetzt arrangiert: Daily Sleep, Ashwagandha, Lions Mane, Baldrian, Reishi. Daneben Tasse Tee, Notizbuch, kleines Pflänzchen. Hotspots auf den 5 Dosen.",
+              "asins": [
+                "B0FY73CZMB",
+                "B089YWB481",
+                "B0CLD91XC9",
+                "B0D496QM3H",
+                "B0DY2148G"
+              ],
+              "hotspots": []
+            }
+          ]
+        },
+        {
+          "module": "bestseller.kategorie",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Bestseller **Schlaf**",
+                "subheading": "Die meistgekauften Rezepturen für deinen Schlaf",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B0FY73CZMB",
+                "B089YWB481",
+                "B0CLD91XC9",
+                "B0D496QM3H",
+                "B0DY2148G"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "usp.bar",
+          "layoutId": "vh-w2s",
+          "tiles": [
+            {
+              "type": "image_text",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Sinnvoll **kombiniert**",
+                "subheading": "Adaptogene und beruhigende Pflanzenstoffe in fairen Dosen",
+                "body": "Unsere Schlaf Rezepturen kombinieren bewährte Pflanzenstoffe wie Ashwagandha, Baldrian und Reishi mit hohen Dosierungen, geprüft und in Deutschland hergestellt.",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild mit getrocknetem Lavendel, Baldrianwurzel und Reishi Pilz auf Holzbrett, daneben True Nature Dose."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "Hochdosiert",
+                "subheading": "Große Dosen statt halbe Sachen",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Quadrat, Icon Kapsel mit Pluszeichen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "Made in **Germany**",
+                "subheading": "Hergestellt in Deutschland, unabhängig geprüft",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Quadrat, Icon Deutschlandkonturen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+            }
+          ]
+        },
+        {
+          "module": "katalog.product_grid",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "product_grid",
+              "textOverlay": {
+                "heading": "Alle **Schlaf** Produkte",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B0FY73CZMB",
+                "B089YWB481",
+                "B0CLD91XC9",
+                "B0D496QM3H",
+                "B0DY2148G"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "cross.divider",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "text_image",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "Mehr aus **True Nature**",
+                "subheading": "Stöbere durch unsere weiteren Themenwelten",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Cremeweißer Trenner mit zentrierter Headline, kleines grünes Akzentelement unten rechts."
+            }
+          ]
+        },
+        {
+          "module": "cross.navigator",
+          "layoutId": "2s-4grid",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "**Immunsystem** und Vitalität",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
+              "brief": "Freigestellte Cordyceps Dose mit getrockneten Pilzen.",
+              "linkUrl": "page:Immunsystem & Vitalität"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "**Energie**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
+              "brief": "Freigestellte Maca Gold Dose mit Macawurzel.",
+              "linkUrl": "page:Energie"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "**Gelenke** und Sport",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
+              "brief": "Freigestellte Glucosamin Dose mit Weihrauchharz.",
+              "linkUrl": "page:Gelenke & Sport"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "**Verdauung**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
+              "brief": "Freigestellte Bockshornklee Dose mit Flohsamenschalen.",
+              "linkUrl": "page:Verdauung"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "**Herz** und Kreislauf",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
+              "brief": "Freigestellte Safran Dose mit Safranfäden.",
+              "linkUrl": "page:Herz-Kreislauf"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "**Körper** und Balance",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
+              "brief": "Freigestellte Ashwagandha Dose mit Adaptogen Wurzeln.",
+              "linkUrl": "page:Körper & Balance"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Immunsystem & Vitalität",
+      "sections": [
+        {
+          "module": "hero.fullWidthHero",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "store_hero",
+              "textOverlay": {
+                "heading": "Stark durch **jeden** Tag",
+                "subheading": "Pflanzenkraft, Pilze und Vitalstoffe für dein Immunsystem",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Outdoor Aufnahme: Person läuft fröhlich durch herbstlichen Wald, im Vordergrund Korb mit Hagebutten und Pilzen, daneben True Nature Dosen."
+            }
+          ]
+        },
+        {
+          "module": "shoppable.fullWidth",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "shoppable_image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Stark **eingedeckt**",
+                "subheading": "Unsere Top Rezepturen für dein Immunsystem",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Holztisch Szene mit fünf True Nature Dosen versetzt arrangiert: Cordyceps, Cranberry plus C, Lions Mane, Spirulina, Reishi. Dazwischen frische Cranberries, getrocknete Pilze, Zitrone. Hotspots auf den 5 Dosen.",
+              "asins": [
+                "B09BD49H7K",
+                "B0DRD7N99D",
+                "B0CLD91XC9",
+                "B081T3TJRK",
+                "B0DY2148G"
+              ],
+              "hotspots": []
+            }
+          ]
+        },
+        {
+          "module": "bestseller.kategorie",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Bestseller **Immunsystem**",
+                "subheading": "Die meistgekauften Rezepturen rund um Vitalität",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B09BD49H7K",
+                "B0DRD7N99D",
+                "B0CLD91XC9",
+                "B081T3TJRK",
+                "B0DY2148G",
+                "B0CYLX4YWT",
+                "B0DJT88VP5",
+                "B0DRH2SPLG"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "usp.bar",
+          "layoutId": "vh-w2s",
+          "tiles": [
+            {
+              "type": "image_text",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Pflanzen, Pilze, **Vitalstoffe**",
+                "subheading": "Bewährte Naturstoffe in moderner Rezeptur",
+                "body": "Wir kombinieren traditionelle Heilpflanzen wie Hagebutte, Salbei, Cistus mit Vitalpilzen wie Reishi, Chaga und Lions Mane, alles hochdosiert und in Deutschland hergestellt.",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild mit Auswahl an getrockneten Pilzen, Beeren und Blättern auf Holzbrett, daneben Cordyceps Dose."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "Unabhängig **geprüft**",
+                "subheading": "Jede Charge im Labor",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Quadrat, Icon Lupe mit Häkchen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "Hohe **Reinheit**",
+                "subheading": "Frei von unnötigen Zusätzen",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Quadrat, Icon Tropfen mit Häkchen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+            }
+          ]
+        },
+        {
+          "module": "katalog.product_grid",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "product_grid",
+              "textOverlay": {
+                "heading": "Alle Produkte für **Immunsystem** und Vitalität",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B0CYTJK2ML",
+                "B0F3J4MP7Z",
+                "B09BD49H7K",
+                "B0CYM13PB4",
+                "B0DRD7N99D",
+                "B0DG7LPKZ",
+                "B0CYLMVGGZ",
+                "B0D3H08TYJ",
+                "B0CYLX4YWT",
+                "B0DJT88VP5",
+                "B0DRH2SPLG",
+                "B0CLD91XC9",
+                "B081T3TJRK",
+                "B0DY2148G"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "cross.divider",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "text_image",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "Mehr aus **True Nature**",
+                "subheading": "Stöbere durch unsere weiteren Themenwelten",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Cremeweißer Trenner mit zentrierter Headline."
+            }
+          ]
+        },
+        {
+          "module": "cross.navigator",
+          "layoutId": "2s-4grid",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Schlaf**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Daily Sleep Dose mit Lavendel.",
+              "linkUrl": "page:Schlaf"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Energie**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Maca Dose mit Macawurzel.",
+              "linkUrl": "page:Energie"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Gelenke** und Sport", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Glucosamin Dose mit Weihrauchharz.",
+              "linkUrl": "page:Gelenke & Sport"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Verdauung**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Bockshornklee Dose mit Flohsamen.",
+              "linkUrl": "page:Verdauung"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Herz** und Kreislauf", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Safran Dose mit Safranfäden.",
+              "linkUrl": "page:Herz-Kreislauf"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Körper** und Balance", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Ashwagandha Dose mit Wurzel.",
+              "linkUrl": "page:Körper & Balance"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Energie",
+      "sections": [
+        {
+          "module": "hero.fullWidthHero",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "store_hero",
+              "textOverlay": {
+                "heading": "**Energie**, die ankommt",
+                "subheading": "Hochdosierte Rezepturen für aktive Tage und volle Akkus",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Outdoor Aufnahme: Person beim Joggen am Morgen in Stadtpark, Sonnenaufgang im Hintergrund. Im Vordergrund True Nature Maca Dose und Smoothie Glas."
+            }
+          ]
+        },
+        {
+          "module": "shoppable.fullWidth",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "shoppable_image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Frische **Energie**",
+                "subheading": "Tippe die Punkte und entdecke unsere Energie Rezepturen",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Frühstückstheke mit fünf True Nature Dosen versetzt: Maca, PQQ, Gerstengras, Spirulina, B2. Daneben Smoothie Bowl, frische Zutaten, Sportschuhe im Hintergrund unscharf. Hotspots auf den 5 Dosen.",
+              "asins": [
+                "B08TT7JJ1G",
+                "B0DN1NTRZC",
+                "B0DPMLFL94",
+                "B081T3TJRK",
+                "B0DBLPCNHC"
+              ],
+              "hotspots": []
+            }
+          ]
+        },
+        {
+          "module": "bestseller.kategorie",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Bestseller **Energie**",
+                "subheading": "Die meistgekauften Rezepturen für mehr Schwung",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B08TT7JJ1G",
+                "B0DN1NTRZC",
+                "B0DPMLFL94",
+                "B0DBLPCNHC",
+                "B081T3TJRK",
+                "B0DRH2SPLG",
+                "B0DY2148G",
+                "B0CYTJK2ML"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "usp.bar",
+          "layoutId": "vh-w2s",
+          "tiles": [
+            {
+              "type": "image_text",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Wirkstoffe mit **Substanz**",
+                "subheading": "Adaptogene, Pflanzenextrakte und Vitalstoffe",
+                "body": "Maca, PQQ, Gerstengras und Spirulina, kombiniert mit den richtigen Vitaminen, alles in fairen Dosen und unabhängig im Labor geprüft.",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Macawurzel und Spirulina Pulver auf Holzbrett, daneben True Nature Dose."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "Hochdosiert", "subheading": "Große Dosen, faire Preise", "body": "", "bullets": [], "cta": "" },
+              "brief": "Quadrat, Icon Kapsel mit Plus mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "Made in **Germany**", "subheading": "Hergestellt in Deutschland", "body": "", "bullets": [], "cta": "" },
+              "brief": "Quadrat, Icon Deutschlandkonturen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+            }
+          ]
+        },
+        {
+          "module": "katalog.product_grid",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "product_grid",
+              "textOverlay": {
+                "heading": "Alle **Energie** Produkte",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B0FY73CZMB",
+                "B0CYTJK2ML",
+                "B0DN1NTRZC",
+                "B08TT7JJ1G",
+                "B0DPMLFL94",
+                "B0DRH2SPLG",
+                "B081T3TJRK",
+                "B0DBLPCNHC",
+                "B0D496QM3H",
+                "B0DY2148G"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "cross.divider",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "text_image",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "Mehr aus **True Nature**",
+                "subheading": "Stöbere durch unsere weiteren Themenwelten",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Cremeweißer Trenner mit zentrierter Headline."
+            }
+          ]
+        },
+        {
+          "module": "cross.navigator",
+          "layoutId": "2s-4grid",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Schlaf**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Daily Sleep Dose mit Lavendel.",
+              "linkUrl": "page:Schlaf"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Immunsystem** und Vitalität", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Cordyceps Dose mit Pilzen.",
+              "linkUrl": "page:Immunsystem & Vitalität"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Gelenke** und Sport", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Glucosamin Dose mit Weihrauchharz.",
+              "linkUrl": "page:Gelenke & Sport"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Verdauung**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Bockshornklee Dose mit Flohsamen.",
+              "linkUrl": "page:Verdauung"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Herz** und Kreislauf", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Safran Dose mit Safranfäden.",
+              "linkUrl": "page:Herz-Kreislauf"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Körper** und Balance", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Ashwagandha Dose mit Wurzel.",
+              "linkUrl": "page:Körper & Balance"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Gelenke & Sport",
+      "sections": [
+        {
+          "module": "hero.fullWidthHero",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "store_hero",
+              "textOverlay": {
+                "heading": "**Beweglich** bleiben",
+                "subheading": "Hochdosierte Rezepturen für Gelenke, Muskeln und aktive Tage",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Outdoor Aufnahme: Person beim Wandern in den Bergen, mittleres Alter, sportlich, im Vordergrund True Nature Glucosamin Dose und Wanderstöcke."
+            }
+          ]
+        },
+        {
+          "module": "shoppable.fullWidth",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "shoppable_image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Für **aktive** Tage",
+                "subheading": "Tippe die Punkte und entdecke unsere Gelenk Rezepturen",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Sportszene auf Holzboden mit fünf True Nature Dosen versetzt: Glucosamin, Weihrauch, Grünlippmuschel, L-Prolin, Kalium. Daneben Yogamatte, Wasserflasche, Sportschuhe. Hotspots auf den 5 Dosen.",
+              "asins": [
+                "B0FH6V5V3H",
+                "B0F3NT8VY7",
+                "B089ZPK5DX",
+                "B0FR9GDRR1",
+                "B0DL1NLLBB"
+              ],
+              "hotspots": []
+            }
+          ]
+        },
+        {
+          "module": "bestseller.kategorie",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Bestseller **Gelenke** und Sport",
+                "subheading": "Die meistgekauften Rezepturen rund um Beweglichkeit",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B0FH6V5V3H",
+                "B0F3NT8VY7",
+                "B089ZPK5DX",
+                "B0DL1NLLBB",
+                "B0FR9GDRR1",
+                "B0F3J4MP7Z",
+                "B081T3TJRK",
+                "B0CYTJK2ML"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "usp.bar",
+          "layoutId": "vh-w2s",
+          "tiles": [
+            {
+              "type": "image_text",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Sinnvoll **dosiert**",
+                "subheading": "Glucosamin, Chondroitin, Weihrauch und mehr",
+                "body": "Wir kombinieren bewährte Wirkstoffe in Mengen, die Sinn ergeben, ohne Sparschummel und ohne unnötige Zusätze.",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Weihrauchharz und grüne Blätter auf Holzbrett, daneben True Nature Glucosamin Dose."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "Hochdosiert", "subheading": "Große Dosen, faire Preise", "body": "", "bullets": [], "cta": "" },
+              "brief": "Quadrat, Icon Kapsel mit Plus mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "Unabhängig **geprüft**", "subheading": "Jede Charge im Labor", "body": "", "bullets": [], "cta": "" },
+              "brief": "Quadrat, Icon Lupe mit Häkchen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+            }
+          ]
+        },
+        {
+          "module": "katalog.product_grid",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "product_grid",
+              "textOverlay": {
+                "heading": "Alle Produkte für **Gelenke** und Sport",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B0CYTJK2ML",
+                "B0F3J4MP7Z",
+                "B0DL1NLLBB",
+                "B0FH6V5V3H",
+                "B0FR9GDRR1",
+                "B089ZPK5DX",
+                "B081T3TJRK",
+                "B0F3NT8VY7"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "cross.divider",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "text_image",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "Mehr aus **True Nature**",
+                "subheading": "Stöbere durch unsere weiteren Themenwelten",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Cremeweißer Trenner mit zentrierter Headline."
+            }
+          ]
+        },
+        {
+          "module": "cross.navigator",
+          "layoutId": "2s-4grid",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Schlaf**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Daily Sleep Dose mit Lavendel.",
+              "linkUrl": "page:Schlaf"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Immunsystem** und Vitalität", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Cordyceps Dose mit Pilzen.",
+              "linkUrl": "page:Immunsystem & Vitalität"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Energie**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Maca Dose mit Macawurzel.",
+              "linkUrl": "page:Energie"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Verdauung**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Bockshornklee Dose mit Flohsamen.",
+              "linkUrl": "page:Verdauung"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Herz** und Kreislauf", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Safran Dose mit Safranfäden.",
+              "linkUrl": "page:Herz-Kreislauf"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Körper** und Balance", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Ashwagandha Dose mit Wurzel.",
+              "linkUrl": "page:Körper & Balance"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Verdauung",
+      "sections": [
+        {
+          "module": "hero.fullWidthHero",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "store_hero",
+              "textOverlay": {
+                "heading": "Im **Gleichgewicht**",
+                "subheading": "Pflanzenkraft und Ballaststoffe für eine entspannte Verdauung",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Frühstückstheke mit Bowl aus Haferflocken, Apfelstücken, Flohsamenschalen und frischen Beeren. Daneben True Nature Bockshornklee Dose, Glas Wasser. Helle natürliche Atmosphäre."
+            }
+          ]
+        },
+        {
+          "module": "shoppable.fullWidth",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "shoppable_image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Für deinen **Bauch**",
+                "subheading": "Tippe die Punkte und entdecke unsere Verdauungs Rezepturen",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Holztisch Szene mit fünf True Nature Dosen versetzt: Bockshornklee, Flohsamen, Apfelpektin, Cholin, Leber Komplex. Dazwischen Apfel halbiert, Flohsamenschalen in Schüssel, frischer Ingwer. Hotspots auf den 5 Dosen.",
+              "asins": [
+                "B0DJT57NST",
+                "B09CQ674JG",
+                "B0DK30CF64",
+                "B0DT13TNVN",
+                "B0DK26YYS9"
+              ],
+              "hotspots": []
+            }
+          ]
+        },
+        {
+          "module": "bestseller.kategorie",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Bestseller **Verdauung**",
+                "subheading": "Die meistgekauften Rezepturen rund um deinen Bauch",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B0DJT57NST",
+                "B09CQ674JG",
+                "B0DK30CF64",
+                "B0DK26YYS9",
+                "B0FCYVKVF7",
+                "B086X6HD6R",
+                "B0D45SDLXF",
+                "B0DJT88VP5"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "usp.bar",
+          "layoutId": "vh-w2s",
+          "tiles": [
+            {
+              "type": "image_text",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Bewährte **Pflanzenkraft**",
+                "subheading": "Bockshornklee, Flohsamen, Triphala und mehr",
+                "body": "Wir setzen auf bewährte Pflanzenstoffe für deine Verdauung, kombiniert mit modernen Wirkstoffen wie Propionsäure, alles in fairen Dosen und unabhängig im Labor geprüft.",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Flohsamenschalen und Apfelstücke auf Holzbrett, daneben True Nature Dose."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "Hohe **Reinheit**", "subheading": "Frei von unnötigen Zusätzen", "body": "", "bullets": [], "cta": "" },
+              "brief": "Quadrat, Icon Tropfen mit Häkchen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "Made in **Germany**", "subheading": "Hergestellt in Deutschland", "body": "", "bullets": [], "cta": "" },
+              "brief": "Quadrat, Icon Deutschlandkonturen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+            }
+          ]
+        },
+        {
+          "module": "katalog.product_grid",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "product_grid",
+              "textOverlay": {
+                "heading": "Alle **Verdauung** Produkte",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B0FCYVKVF7",
+                "B0DJT57NST",
+                "B0DT13TNVN",
+                "B0DK30CF64",
+                "B09CQ674JG",
+                "B0DJT88VP5",
+                "B0DQ46CHL",
+                "B0DK26YYS9",
+                "B086X6HD6R",
+                "B0D45SDLXF"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "cross.divider",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "text_image",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "Mehr aus **True Nature**",
+                "subheading": "Stöbere durch unsere weiteren Themenwelten",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Cremeweißer Trenner mit zentrierter Headline."
+            }
+          ]
+        },
+        {
+          "module": "cross.navigator",
+          "layoutId": "2s-4grid",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Schlaf**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Daily Sleep Dose mit Lavendel.",
+              "linkUrl": "page:Schlaf"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Immunsystem** und Vitalität", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Cordyceps Dose mit Pilzen.",
+              "linkUrl": "page:Immunsystem & Vitalität"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Energie**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Maca Dose mit Macawurzel.",
+              "linkUrl": "page:Energie"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Gelenke** und Sport", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Glucosamin Dose mit Weihrauchharz.",
+              "linkUrl": "page:Gelenke & Sport"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Herz** und Kreislauf", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Safran Dose mit Safranfäden.",
+              "linkUrl": "page:Herz-Kreislauf"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Körper** und Balance", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Ashwagandha Dose mit Wurzel.",
+              "linkUrl": "page:Körper & Balance"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Herz-Kreislauf",
+      "sections": [
+        {
+          "module": "hero.fullWidthHero",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "store_hero",
+              "textOverlay": {
+                "heading": "Für dein **Herz**",
+                "subheading": "Hochdosierte Pflanzenstoffe für ein gesundes Herz und Kreislauf",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Outdoor Aufnahme: Person mittleren Alters auf einer Radtour durch Felder, im Vordergrund True Nature Safran Dose und Trinkflasche."
+            }
+          ]
+        },
+        {
+          "module": "shoppable.fullWidth",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "shoppable_image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Stark und **gelassen**",
+                "subheading": "Tippe die Punkte und entdecke unsere Herz Kreislauf Rezepturen",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Holztisch Szene mit fünf True Nature Dosen versetzt: Daily Sleep, Pinienrindenextrakt, Safran, Maca, Schwarzer Knoblauch. Dazwischen Safranfäden, Knoblauchzehen, frische Beeren. Hotspots auf den 5 Dosen.",
+              "asins": [
+                "B0FY73CZMB",
+                "B09D4VM1I8",
+                "B0DJTSMKYG",
+                "B08TT7JJ1G",
+                "B0D2P0RKQ5"
+              ],
+              "hotspots": []
+            }
+          ]
+        },
+        {
+          "module": "bestseller.kategorie",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Bestseller **Herz** und Kreislauf",
+                "subheading": "Die meistgekauften Rezepturen rund um Herz und Kreislauf",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B0DJTSMKYG",
+                "B0D2P0RKQ5",
+                "B09D4VM1I8",
+                "B08TT7JJ1G",
+                "B0DL1NLLBB",
+                "B0CMDFD46",
+                "B0FY73CZMB"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "usp.bar",
+          "layoutId": "vh-w2s",
+          "tiles": [
+            {
+              "type": "image_text",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Pflanzenstoffe mit **Tradition**",
+                "subheading": "Safran, Pinienrinde, Knoblauch, Steinklee",
+                "body": "Wir setzen auf Pflanzenstoffe mit langer Tradition und solider Studienlage, in fairen Dosen und unabhängig im Labor geprüft.",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Safranfäden und Knoblauchzehen auf Holzbrett, daneben True Nature Dose."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "Hochdosiert", "subheading": "Große Dosen, faire Preise", "body": "", "bullets": [], "cta": "" },
+              "brief": "Quadrat, Icon Kapsel mit Plus mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "365 Tage **Geld-zurück**", "subheading": "Risikofrei testen", "body": "", "bullets": [], "cta": "" },
+              "brief": "Quadrat, Icon Geldmünze mit Pfeil zurück mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+            }
+          ]
+        },
+        {
+          "module": "katalog.product_grid",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "product_grid",
+              "textOverlay": {
+                "heading": "Alle Produkte für **Herz** und Kreislauf",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B0FY73CZMB",
+                "B09D4VM1I8",
+                "B0DJTSMKYG",
+                "B08TT7JJ1G",
+                "B0DL1NLLBB",
+                "B0CMDFD46",
+                "B0D2P0RKQ5"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "cross.divider",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "text_image",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "Mehr aus **True Nature**",
+                "subheading": "Stöbere durch unsere weiteren Themenwelten",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Cremeweißer Trenner mit zentrierter Headline."
+            }
+          ]
+        },
+        {
+          "module": "cross.navigator",
+          "layoutId": "2s-4grid",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Schlaf**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Daily Sleep Dose mit Lavendel.",
+              "linkUrl": "page:Schlaf"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Immunsystem** und Vitalität", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Cordyceps Dose mit Pilzen.",
+              "linkUrl": "page:Immunsystem & Vitalität"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Energie**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Maca Dose mit Macawurzel.",
+              "linkUrl": "page:Energie"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Gelenke** und Sport", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Glucosamin Dose mit Weihrauchharz.",
+              "linkUrl": "page:Gelenke & Sport"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Verdauung**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Bockshornklee Dose mit Flohsamen.",
+              "linkUrl": "page:Verdauung"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Körper** und Balance", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Ashwagandha Dose mit Wurzel.",
+              "linkUrl": "page:Körper & Balance"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Körper & Balance",
+      "sections": [
+        {
+          "module": "hero.fullWidthHero",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "store_hero",
+              "textOverlay": {
+                "heading": "**Balance** für jeden Tag",
+                "subheading": "Adaptogene und Mikronährstoffe für Körper und Geist im Gleichgewicht",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Aufnahme: Person beim Lesen auf gemütlichem Sofa, Tasse Tee in der Hand, im Vordergrund True Nature Ashwagandha Dose und kleine Pflanze."
+            }
+          ]
+        },
+        {
+          "module": "shoppable.fullWidth",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "shoppable_image",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Im **Gleichgewicht**",
+                "subheading": "Tippe die Punkte und entdecke unsere Adaptogene und Mikronährstoffe",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Holztisch Szene mit fünf True Nature Dosen versetzt: Ashwagandha, Bacopa, Shatavari, Johanniskraut, TRU NIAGEN. Dazwischen Adaptogenwurzeln, getrocknete Blüten, kleines Notizbuch. Hotspots auf den 5 Dosen.",
+              "asins": [
+                "B089YWB481",
+                "B0CY14PWMF",
+                "B0DT18M4ON",
+                "B0G1NF25ZX",
+                "B089K48RVT"
+              ],
+              "hotspots": []
+            }
+          ]
+        },
+        {
+          "module": "bestseller.kategorie",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "best_sellers",
+              "textOverlay": {
+                "heading": "Bestseller **Körper** und Balance",
+                "subheading": "Die meistgekauften Rezepturen rund um Balance und Wohlbefinden",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B089YWB481",
+                "B0DY2148G",
+                "B0CY14PWMF",
+                "B0G1NF25ZX",
+                "B089K48RVT",
+                "B0DT18M4ON",
+                "B0DK26YYS9",
+                "B0DJTSMKYG"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "usp.bar",
+          "layoutId": "vh-w2s",
+          "tiles": [
+            {
+              "type": "image_text",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Adaptogene und **Mikronährstoffe**",
+                "subheading": "Ashwagandha, Bacopa, Shatavari, Johanniskraut",
+                "body": "Wir kombinieren bewährte Adaptogene mit modernen Mikronährstoffen wie L-Carnosin und TRU NIAGEN, in fairen Dosen und unabhängig im Labor geprüft.",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild mit Ashwagandhawurzel, getrockneten Bacopa Blättern und Reishi auf Holzbrett, daneben True Nature Dose."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "Hochdosiert", "subheading": "Große Dosen, faire Preise", "body": "", "bullets": [], "cta": "" },
+              "brief": "Quadrat, Icon Kapsel mit Plus mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "365 Tage **Geld-zurück**", "subheading": "Risikofrei testen", "body": "", "bullets": [], "cta": "" },
+              "brief": "Quadrat, Icon Geldmünze mit Pfeil zurück mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+            }
+          ]
+        },
+        {
+          "module": "katalog.product_grid",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "product_grid",
+              "textOverlay": {
+                "heading": "Alle Produkte für **Körper** und Balance",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": [
+                "B0FY73CZMB",
+                "B0DJTSMKYG",
+                "B0F3J4MP7Z",
+                "B0DHY9K7XN",
+                "B0DYF4GQ3B",
+                "B0CYM13PB4",
+                "B0DJT57NST",
+                "B0DL1NLLBB",
+                "B089K48RVT",
+                "B0DK30CF64",
+                "B089YWB481",
+                "B0DT18M4ON",
+                "B0DXJ13FDW",
+                "B0CYLMVGGZ",
+                "B0CY14PWMF",
+                "B0DK26YYS9",
+                "B0D496QM3H",
+                "B0DY2148G",
+                "B07W9VD2L",
+                "B0G1NF25ZX"
+              ]
+            }
+          ]
+        },
+        {
+          "module": "cross.divider",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "text_image",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "Mehr aus **True Nature**",
+                "subheading": "Stöbere durch unsere weiteren Themenwelten",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Cremeweißer Trenner mit zentrierter Headline."
+            }
+          ]
+        },
+        {
+          "module": "cross.navigator",
+          "layoutId": "2s-4grid",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Schlaf**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Daily Sleep Dose mit Lavendel.",
+              "linkUrl": "page:Schlaf"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Immunsystem** und Vitalität", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Cordyceps Dose mit Pilzen.",
+              "linkUrl": "page:Immunsystem & Vitalität"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Energie**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Maca Dose mit Macawurzel.",
+              "linkUrl": "page:Energie"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Gelenke** und Sport", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Glucosamin Dose mit Weihrauchharz.",
+              "linkUrl": "page:Gelenke & Sport"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Verdauung**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Bockshornklee Dose mit Flohsamen.",
+              "linkUrl": "page:Verdauung"
+            },
+            {
+              "type": "image",
+              "imageCategory": "product",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "**Herz** und Kreislauf", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "brief": "Freigestellte Safran Dose mit Safranfäden.",
+              "linkUrl": "page:Herz-Kreislauf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sale",
+      "sections": [
+        {
+          "module": "hero.fullWidthHero",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "image",
+              "imageCategory": "store_hero",
+              "bgColor": "#d9fab3",
+              "textOverlay": {
+                "heading": "Gute Preise, **echte** Qualität",
+                "subheading": "Aktuelle Angebote im True Nature Sortiment",
+                "body": "",
+                "bullets": [],
+                "cta": "Zu den Angeboten"
+              },
+              "brief": "Hellgrüne Fläche mit Auswahl von 6 bis 8 True Nature Dosen versetzt im Halbkreis arrangiert rechts, links Textraum frei. Großes Prozent Symbol als dezenter Akzent."
+            }
+          ]
+        },
+        {
+          "module": "deals.grid",
+          "layoutId": "1",
+          "tiles": [
+            {
+              "type": "deals",
+              "textOverlay": {
+                "heading": "Aktuelle **Angebote**",
+                "subheading": "Reduzierte True Nature Produkte",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "asins": []
+            }
+          ]
+        },
+        {
+          "module": "usp.bar",
+          "layoutId": "vh-w2s",
+          "tiles": [
+            {
+              "type": "image_text",
+              "imageCategory": "lifestyle",
+              "textOverlay": {
+                "heading": "Warum **True Nature**",
+                "subheading": "Auch im Sale ohne Kompromisse",
+                "body": "Reduzierte Preise heißt bei uns nicht reduzierte Qualität. Jede Charge wird unabhängig im Labor geprüft, hergestellt in Deutschland, hochdosiert und ohne unnötige Zusätze.",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Labor mit True Nature Dose und Reagenzglas."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "Maximale **Reinheit**", "subheading": "Frei von potenziell schädlichen Substanzen", "body": "", "bullets": [], "cta": "" },
+              "brief": "Quadrat, Icon Tropfen mit Häkchen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": { "heading": "365 Tage **Geld-zurück**", "subheading": "Risikofrei testen", "body": "", "bullets": [], "cta": "" },
+              "brief": "Quadrat, Icon Geldmünze mit Pfeil zurück mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

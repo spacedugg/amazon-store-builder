@@ -14,7 +14,8 @@
     "api/generate-wireframe.js": { "maxDuration": 60 },
     "api/crawl-store-nav.js": { "maxDuration": 60 },
     "api/analyze-store-page.js": { "maxDuration": 60 },
-    "api/juskys-store.js": { "includeFiles": "seed/juskys-store.json" }
+    "api/juskys-store.js": { "includeFiles": "seed/juskys-store.json" },
+    "api/true-nature-store.js": { "includeFiles": "seed/true-nature-store.json" }
   },
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
