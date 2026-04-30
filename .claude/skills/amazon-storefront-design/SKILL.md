@@ -522,18 +522,25 @@ Liest sich als wären "Meistgekauft" und "Inhabergeführt" die Gründe für die 
 > Square 1: "Geprüfte Qualität"
 > Square 2: "Aus einem Haus"
 
-### Layout Wahl für textlastige USPs
+### Layout Wahl für USP Leisten
 
-Bei 4 USPs die nur aus **Heading plus kurzer Subheading** bestehen (typisch Marken USPs wie "Inhabergeführt seit 2005", "Eigene Designs"), **nicht** das `2x2wide` Layout verwenden. Das nimmt zu viel Bildfläche und das Bild ist eh nur Icon plus Hintergrund Farbe.
+**Default für 4 USPs ist `vh-4square`** (4 Squares nebeneinander auf Desktop, 2x2 auf Mobile). Klassische Marken USPs sind kurz: Heading plus 2 bis 4 Wörter Subheading, dazu ein kleines Icon. Dafür reicht ein Square Tile, das größere `2x2wide` würde nur Leerfläche erzeugen.
+
+**`2x2wide` nur dann**, wenn das Tile selbst ein **großes visuelles Element** trägt:
+
+- Icons werden groß als Hero Symbol dargestellt
+- Infografik mit Diagramm oder Zahlen
+- Echte Lifestyle Fotos als Hauptelement (z.B. Foto Geschäftsführer, Foto Hersteller Visite, Foto Logistikhalle)
+- Produktdetailaufnahmen oder Studio Shots als Hintergrund
+
+Faustregel: lohnt sich der größere Bildplatz für das Bild was dort steht? Wenn nein, nimm `vh-4square`.
 
 | Inhalt | Empfohlenes Layout |
 |--------|--------------------|
-| 4 USPs nur Text plus Icon, klein | `vh-4square` (4 Squares nebeneinander Desktop, 2x2 Mobile) |
-| 4 USPs mit echtem Lifestyle Bild als Hauptelement | `2x2wide` (4 Wide Tiles) |
+| 4 USPs kurz, nur Heading plus Subheading mit Icon | `vh-4square` |
+| 4 USPs mit großem Visual (Foto, Infografik, Hero Icon) | `2x2wide` |
 | 3 USPs Mix aus Bild und Text | `vh-w2s` (1 Wide plus 2 Squares) |
 | 2 USPs gleichgewichtet | `std-2equal` |
-
-`vh-4square` ist der Default für **klassische Marken USP Leisten am Page Ende** (Inhabergeführt, Aus Deutschland, etc.). Nur wenn das Tile selbst als großes Lifestyle Bild geplant ist, dann `2x2wide`.
 
 ## JSON Endpoint Pattern
 
