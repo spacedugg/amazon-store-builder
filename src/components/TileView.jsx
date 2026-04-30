@@ -191,10 +191,15 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
             ? <img src={tile.wireframeImage} className="tile-uploaded-img tile-wireframe-img" alt="Wireframe" />
             : <Wireframe tile={tile} viewMode={viewMode} bgColor={bgColor} />
         }
-        {/* Kein separater Text Block. Text ist immer Teil des Bildes,
-            Designer rendert Heading, Subheading, Body, CTA ins Bild rein.
-            Im Wireframe Modus zeigt das SVG alle hinterlegten Texte als
-            Skizze. Volle Texte sieht der Operator im Properties Panel. */}
+        {/* Text Block nur als finale Vorschau wenn ein echtes Bild hochgeladen ist.
+            Im Wireframe Modus ist Heading und CTA schon im SVG als Skizze, dann
+            kein doppelter Block mit grünem Button der wie Designvorlage wirkt.
+            Volle Texte (Subheading, Body) sieht der Operator im Properties Panel. */}
+        {img && hasOverlayContent(tile.textOverlay) && (
+          <div className="tile-it-text" style={{ textAlign: tile.textAlign || 'left' }}>
+            <TextOverlayDisplay overlay={tile.textOverlay} textAlign={tile.textAlign} />
+          </div>
+        )}
       </div>
     );
   }
@@ -210,10 +215,11 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
           ? <img src={tile.wireframeImage} className="tile-uploaded-img tile-wireframe-img" alt="Wireframe" />
           : <Wireframe tile={tile} viewMode={viewMode} bgColor={bgColor} />
       }
-      {/* Kein Text Overlay über hochgeladenem Bild. Text ist Teil des
-          Bildes, Designer hat Heading, Subheading, Body, CTA bereits ins
-          Bild gerendert. Im Wireframe Modus zeigt das SVG alle Texte als
-          Skizze. */}
+      {hasOverlayContent(tile.textOverlay) && imgSrc && (
+        <div className="tile-image-overlay">
+          <TextOverlayDisplay overlay={tile.textOverlay} compact textAlign={tile.textAlign} />
+        </div>
+      )}
       {/* Shoppable badge only shown when wireframe/image is NOT visible (wireframe SVG already has its own badges) */}
       {tile.type === 'shoppable_image' && imgSrc && <div className="tile-shoppable-badge">{t('tile.shoppable', uiLang)}</div>}
       {/* ASIN link shown subtly only when an uploaded image is present (otherwise wireframe shows it) */}
