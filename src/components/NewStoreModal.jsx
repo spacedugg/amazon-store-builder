@@ -1,33 +1,12 @@
 import { useState, useRef } from 'react';
 
-var SKILL_PROMPT = 'Erstelle ein Amazon Brand Store Konzept als Briefing JSON, das in das Brand Store Builder Tool importiert werden kann.\n\nFolge dieser Spezifikation des Skills amazon-storefront-design:\n\nRegeln:\n- Sprache Deutsch, kundensichtbar\n- Kein Em Dash, kein En Dash, Hyphen nur in Komposita ohne Leerzeichen\n- Marken USPs produktunabhängig\n- Eine Bestseller Section auf Home, max 6 bis 8 ASINs\n- Pro Subpage eigene Hero Headline, kein "Sub-Name bei Sub-Name"\n- Subpages: Cross Navigation am Ende mit anderen Subs\n- Bestseller Page: pro Kategorie ein Lifestyle Trenner plus Grid\n- Image Tile braucht imageCategory (store_hero, benefit, product, lifestyle, text_image, creative)\n- linkUrl interner Link Format "page:Name"\n- ASIN Platzhalter "<TOP-N-CAT>" und "<ALL-CAT>" wenn keine echten ASINs\n\nOutput Format pro Tile textOverlay als Objekt mit heading, subheading, body (max 350 Zeichen), bullets, cta. brief enthält nur Bildfunktion und Komposition.\n\nStelle erst Multiple Choice Rückfragen zu:\n- Marke und Stand (neuer Store, Relaunch)\n- Scope (Vollkonzept, nur Menüstruktur, nur Wording, etc.)\n- Menüstruktur vorgegeben oder vorschlagen\n- ASIN Liste (eingefügt, CSV, später)\n\nDann generiere das Briefing JSON.\n\nMeine Marke ist [BITTE NAMEN EINTRAGEN].';
-
-function getClaudeChatUrl() {
-  // claude.ai/new akzeptiert keinen prompt query param zuverlässig.
-  // Wir öffnen die Startseite, User pasted den Prompt aus der Zwischenablage.
-  return 'https://claude.ai/new';
-}
+var SKILL_PROMPT = 'Aktiviere den Skill amazon-storefront-design aus diesem Repo (.claude/skills/amazon-storefront-design/SKILL.md) und erstelle ein Amazon Brand Store Konzept als Briefing JSON.\n\nFolge dem Skill, stelle die Multiple Choice Rückfragen zu Marke, Scope, Menüstruktur und ASIN Liste. Generiere am Ende das Briefing JSON nach dem im Skill definierten Schema (textOverlay als Objekt mit heading, subheading, body, bullets, cta. brief nur Bildfunktion und Komposition. linkUrl Format page:Name. imageCategory Pflicht auf Image Tiles).\n\nSpeichere das fertige JSON unter seed/[markenname]-store.json plus erstelle den passenden api/[markenname]-store.js Endpoint und vercel.json includeFiles Eintrag, sodass das JSON nach Push unter https://amazon-store-builder.vercel.app/api/[markenname]-store erreichbar ist.';
 
 export default function NewStoreModal({ onClose, onImport, onCreateEmpty }) {
   var [text, setText] = useState('');
   var [error, setError] = useState('');
   var [copied, setCopied] = useState(false);
   var fileRef = useRef(null);
-
-  function handleStartChat() {
-    // Skill Prompt in Zwischenablage kopieren, dann Claude.ai im neuen Tab öffnen
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(SKILL_PROMPT).then(function() {
-        setCopied(true);
-        window.open(getClaudeChatUrl(), '_blank', 'noopener');
-        setTimeout(function() { setCopied(false); }, 4000);
-      }).catch(function() {
-        window.open(getClaudeChatUrl(), '_blank', 'noopener');
-      });
-    } else {
-      window.open(getClaudeChatUrl(), '_blank', 'noopener');
-    }
-  }
 
   function handleCopyPrompt() {
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -74,16 +53,17 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty }) {
         </div>
 
         <div style={{ background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 6, padding: 12, marginBottom: 14 }}>
-          <div style={{ fontWeight: 700, marginBottom: 6, color: '#0369a1', fontSize: 13 }}>Schritt 1: Konzept im Chat erstellen</div>
+          <div style={{ fontWeight: 700, marginBottom: 6, color: '#0369a1', fontSize: 13 }}>Schritt 1: Konzept in Claude Code erstellen</div>
           <div style={{ fontSize: 12, lineHeight: 1.5, color: '#334155', marginBottom: 8 }}>
-            Klick öffnet einen neuen Claude Chat plus kopiert die Skill Anweisung in deine Zwischenablage. Du fügst sie im Chat ein, beantwortest die Rückfragen zur Marke, bekommst am Ende das Briefing JSON.
+            Öffne Claude Code im Repo <code style={{ background: '#e2e8f0', padding: '1px 6px', borderRadius: 3, fontSize: 11 }}>amazon-store-builder</code>.
+            Kopiere den Prompt unten und füge ihn in den Chat ein. Der Skill <code style={{ background: '#e2e8f0', padding: '1px 6px', borderRadius: 3, fontSize: 11 }}>amazon-storefront-design</code> wird automatisch aktiviert weil er im Repo unter <code style={{ background: '#e2e8f0', padding: '1px 6px', borderRadius: 3, fontSize: 11 }}>.claude/skills/</code> liegt.
+          </div>
+          <div style={{ background: '#fff', border: '1px solid #cbd5e1', borderRadius: 4, padding: 10, fontSize: 11, fontFamily: 'monospace', lineHeight: 1.4, color: '#334155', whiteSpace: 'pre-wrap', maxHeight: 180, overflow: 'auto', marginBottom: 8 }}>
+            {SKILL_PROMPT}
           </div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
-            <button className="btn btn-primary" onClick={handleStartChat} style={{ fontSize: 12, padding: '6px 14px' }}>
-              Konzept im Chat erstellen
-            </button>
-            <button className="btn" onClick={handleCopyPrompt} style={{ fontSize: 11, padding: '5px 10px' }}>
-              Nur Prompt kopieren
+            <button className="btn btn-primary" onClick={handleCopyPrompt} style={{ fontSize: 12, padding: '6px 14px' }}>
+              Prompt kopieren
             </button>
             {copied && <span style={{ fontSize: 11, color: '#15803d', fontWeight: 600 }}>Prompt in Zwischenablage</span>}
           </div>
