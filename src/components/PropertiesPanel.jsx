@@ -147,9 +147,63 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
   var isImageType = tile.type === 'image' || tile.type === 'shoppable_image' || tile.type === 'image_text';
   var isProductType = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
 
+  // Sammle alle ASINs die mit diesem Tile verknüpft sind: linkAsin, hotspots, asins Array
+  var linkedAsins = [];
+  if (tile.linkAsin) linkedAsins.push(tile.linkAsin);
+  (tile.hotspots || []).forEach(function(hs) { if (hs.asin && linkedAsins.indexOf(hs.asin) < 0) linkedAsins.push(hs.asin); });
+  (tile.asins || []).forEach(function(a) { if (a && a.indexOf('B0') === 0 && linkedAsins.indexOf(a) < 0) linkedAsins.push(a); });
+
   return (
     <div className="props-panel">
       <div className="props-header">{t('props.title', uiLang)}</div>
+
+      {/* ─── VERKNÜPFTE PRODUKTE (mit Bild und Klick zu Amazon) ─── */}
+      {linkedAsins.length > 0 && (
+        <div className="props-section" style={{ background: '#f0f9ff', borderBottom: '1px solid #bae6fd' }}>
+          <label className="label" style={{ color: '#0369a1' }}>Amazon Produkte ({linkedAsins.length})</label>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+            {linkedAsins.slice(0, 8).map(function(asin) {
+              var p = productMap[asin];
+              var imgSrc = p && p.image;
+              var name = p && p.name;
+              var amazonUrl = (p && p.url) || ('https://www.amazon.de/dp/' + asin);
+              return (
+                <a key={asin}
+                  href={amazonUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={'Auf Amazon öffnen: ' + asin}
+                  style={{ display: 'flex', alignItems: 'center', gap: 6, background: '#fff', borderRadius: 4, padding: '4px 6px', border: '1px solid #e0f2fe', textDecoration: 'none', cursor: 'pointer' }}
+                  onMouseEnter={function(e) { e.currentTarget.style.borderColor = '#0369a1'; }}
+                  onMouseLeave={function(e) { e.currentTarget.style.borderColor = '#e0f2fe'; }}
+                >
+                  {imgSrc ? (
+                    <img src={imgSrc} alt="" style={{ width: 32, height: 32, objectFit: 'contain', borderRadius: 2, flexShrink: 0, background: '#f8fafc' }} />
+                  ) : (
+                    <div style={{ width: 32, height: 32, background: '#f1f5f9', borderRadius: 2, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, color: '#94a3b8' }}>?</div>
+                  )}
+                  <div style={{ fontSize: 9, lineHeight: 1.3, overflow: 'hidden', flex: 1 }}>
+                    <div style={{ fontWeight: 600, color: '#1e293b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {name ? name.slice(0, 40) : '(Produktdaten nicht geladen)'}
+                    </div>
+                    <div style={{ color: '#0369a1', fontFamily: 'monospace', fontSize: 8 }}>{asin} &#8599;</div>
+                  </div>
+                </a>
+              );
+            })}
+            {linkedAsins.length > 8 && (
+              <div style={{ fontSize: 9, color: '#64748b', textAlign: 'center', padding: '2px 0' }}>
+                +{linkedAsins.length - 8} weitere
+              </div>
+            )}
+          </div>
+          {linkedAsins.some(function(a) { return !productMap[a]; }) && (
+            <div style={{ fontSize: 9, color: '#92400e', background: '#fffbeb', padding: '4px 6px', borderRadius: 3, marginTop: 4 }}>
+              Produktdaten fehlen, Topbar &gt; ASINs &gt; Produktdaten laden
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Tile type */}
       <div className="props-section">

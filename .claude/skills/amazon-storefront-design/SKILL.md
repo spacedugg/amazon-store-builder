@@ -212,12 +212,117 @@ Der Operator ersetzt sie später im Tool oder per CSV Import.
 
 | Page Type | Typischer Module Flow |
 |-----------|----------------------|
-| Homepage | hero, kategorie navigator, brand story, trenner, shoppable, bestseller grid, USP leiste, footer nav |
-| Bestseller | hero, sub navigator, mehrere best_sellers grids je Kategorie, USP leiste |
+| Homepage | hero, kategorie navigator, brand story, trenner, shoppable, **EINE** bestseller grid (kuratiert max 6 bis 8 ASINs gemischt), trenner, shoppable saisonal, USP leiste, footer nav. **Nie** mehr als eine Bestseller Section auf der Home. |
+| Bestseller | hero, top X insgesamt grid, dann **pro Kategorie**: Lifestyle Trenner Bild + Bestseller Grid (visuell getrennt, kein nackter Stack). Sub Navigator weglassen, redundant zur Top Nav. |
 | Kategorie | hero, sub navigator, shoppable, bestseller thematic, trenner, feature highlight, USP leiste, vollkatalog product_grid, cross link |
-| Subpage | schmaler hero, bestseller in der sub, vollkatalog der sub, cross link zurück |
+| Subpage | schmaler hero (eigener Claim, nicht "Sub-Name bei Sub-Name"), bestseller in der sub, vollkatalog der sub, **cross navigation** zu allen anderen Subs der Eltern Kategorie, cross link zurück zur Eltern Page |
 | Sale | hero, navigator filter, deals grids je Kategorie, USP leiste warum sale |
 | Über Uns | hero, brand story split, werte block, gallery, USP leiste, service block |
+
+## Tile und Section Best Practices
+
+### Image Category Pflicht
+
+Jeder image, image_text und shoppable_image Tile muss eine `imageCategory` haben:
+
+| Image Category | Wann |
+|----------------|------|
+| `store_hero` | Hero Tiles auf Page Top |
+| `benefit` | USP / Feature Tiles mit Icon plus Label |
+| `product` | Kategorie Navigator Tiles, freigestelltes Produkt auf hellem Grund |
+| `lifestyle` | Shoppable Tiles, Lifestyle Trenner, Brand Story Bilder |
+| `text_image` | Text plus Bild Kombination, Trenner mit Claim |
+| `creative` | Footer Tiles, Cross Links, sonstige kreative Kompositionen |
+
+Nie Image Tile ohne Category liefern.
+
+### Subpage Hero Headlines
+
+Jede Subpage bekommt eine **eigene** Hero Headline mit grünem Highlight Wort. Keine generischen `[Sub-Name] bei [Sub-Name]` Pattern. Beispiele:
+
+- Garten > Gartenmöbel Sets: `Lounge, **bereit** für die Saison`
+- Möbel > Sofas: `Das Sofa, das **bleibt**`
+- Tierbedarf > Hundebedarf: `Für deinen **Hund**`
+
+### Subpage Cross Navigation
+
+Am Ende jeder Subpage zwei Sections:
+1. Trenner Textbild "Mehr aus **[Eltern]**"
+2. Tile Grid mit allen anderen aktiven Subs der Eltern Kategorie (max 8 Tiles, Layout je nach Anzahl)
+
+Damit kann der User innerhalb der Kategorie stöbern, ohne erst zur Eltern Page springen zu müssen.
+
+### Bestseller Page Layout
+
+**Nicht** mehrere Bestseller Grids stupide untereinander. Stattdessen pro Kategorie:
+1. Full Width Lifestyle Trenner mit Headline (z.B. "Bereit für die **Saison**" für Garten)
+2. Bestseller Grid mit den ASINs der Kategorie
+
+Das gibt visuell klare Blöcke pro Kategorie.
+
+### Mobile Image Dimensions
+
+Bei Standard Layouts (std-2equal, lg-2stack, 2x2wide etc.) sind Desktop und Mobile Dimensionen **identisch** (Large Square 1500x1500). Designer braucht nur **ein** Bild.
+
+Bei Layout `1` (Full Width 3000x600 / 1680x900) und VH Layouts sind Aspekte unterschiedlich. Designer braucht zwei Bilder.
+
+Mindestverhältnisse: Desktop max 15:1 Breite zu Höhe, Mobile max 5:1.
+
+### ASIN im Designer Briefing
+
+Wenn ein Tile ASINs verknüpft hat (`tile.asins`, `tile.linkAsin`, `tile.hotspots[].asin`), zeigt der Designer Brief automatisch eine klickbare Karte pro ASIN mit:
+- Hauptbild (gescrappt von Amazon)
+- Produktname
+- ASIN ID
+- Klick öffnet Amazon Produktseite
+
+Das brauchst du im Briefing JSON nicht zu schreiben, der Briefing View des Tools macht das automatisch sobald `store.products` vom Scrape Lauf befüllt ist.
+
+### Bestseller Section auf Home
+
+Maximal **eine** Bestseller Section auf Home, mit kuratierten 6 bis 8 ASINs gemischt aus mehreren Kategorien (z.B. saisonaler Schwerpunkt plus 2 stabile Anker). Niemals 3 oder mehr Bestseller Sections untereinander auf Home.
+
+### Sinnvolle USP Leisten
+
+Bei einer USP Leiste (Wide Image plus 2 Squares mit Icon Tiles) sollte die Headline **inhaltlich passen** zu den Squares darunter. Beispiel falsch:
+
+> Heading: "Warum diese Bestseller"
+> Square 1: "Meistgekauft"
+> Square 2: "Inhabergeführt"
+
+Liest sich als wären "Meistgekauft" und "Inhabergeführt" die Gründe für die Bestseller, was unsinnig ist. Stattdessen:
+
+> Heading: "Warum **Juskys**"
+> Square 1: "Geprüfte Qualität"
+> Square 2: "Versandkostenfrei"
+
+## JSON Endpoint Pattern
+
+Pro Marke wird ein API Endpoint im Tool deployed der das aktuelle Briefing JSON liefert. Format:
+
+```js
+// api/[brand]-store.js
+var { readFileSync } = require('fs');
+var { join } = require('path');
+
+module.exports = async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  try {
+    var data = readFileSync(join(process.cwd(), 'seed', '[brand]-store.json'), 'utf8');
+    return res.status(200).send(data);
+  } catch (e) {
+    return res.status(500).json({ error: e.message });
+  }
+};
+```
+
+Plus in `vercel.json` `functions`:
+```json
+"api/[brand]-store.js": { "includeFiles": "seed/[brand]-store.json" }
+```
+
+Damit ist nach jedem `node seed/build-[brand]-store.mjs` plus push das aktuelle JSON unter `https://[deployment].vercel.app/api/[brand]-store` erreichbar.
 
 ## Output Beispiel
 

@@ -1,9 +1,21 @@
 import { useState, useRef } from 'react';
 
+var SKILL_PROMPT = 'Aktiviere den Skill amazon-storefront-design aus diesem Repo (.claude/skills/amazon-storefront-design/SKILL.md) und erstelle ein Amazon Brand Store Konzept als Briefing JSON.\n\nFolge dem Skill, stelle die Multiple Choice Rückfragen zu Marke, Scope, Menüstruktur und ASIN Liste. Generiere am Ende das Briefing JSON nach dem im Skill definierten Schema (textOverlay als Objekt mit heading, subheading, body, bullets, cta. brief nur Bildfunktion und Komposition. linkUrl Format page:Name. imageCategory Pflicht auf Image Tiles).\n\nSpeichere das fertige JSON unter seed/[markenname]-store.json plus erstelle den passenden api/[markenname]-store.js Endpoint und vercel.json includeFiles Eintrag, sodass das JSON nach Push unter https://amazon-store-builder.vercel.app/api/[markenname]-store erreichbar ist.';
+
 export default function NewStoreModal({ onClose, onImport, onCreateEmpty }) {
   var [text, setText] = useState('');
   var [error, setError] = useState('');
+  var [copied, setCopied] = useState(false);
   var fileRef = useRef(null);
+
+  function handleCopyPrompt() {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(SKILL_PROMPT).then(function() {
+        setCopied(true);
+        setTimeout(function() { setCopied(false); }, 3000);
+      });
+    }
+  }
 
   var handleImport = function() {
     if (!text.trim()) {
@@ -40,12 +52,27 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty }) {
           <button onClick={onClose} style={{ background: 'none', border: 'none', fontSize: 20, color: '#64748b', cursor: 'pointer', lineHeight: 1, padding: 0 }}>&times;</button>
         </div>
 
-        <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 6, padding: 12, fontSize: 13, lineHeight: 1.55, color: '#334155', marginBottom: 14 }}>
-          <div style={{ fontWeight: 700, marginBottom: 4, color: '#0f172a' }}>So bekommst du dein Konzept</div>
-          <div>
-            Öffne einen Chat in Claude oder Claude Code und starte mit dem Skill <code style={{ background: '#e2e8f0', padding: '1px 6px', borderRadius: 3, fontSize: 11 }}>amazon-storefront-design</code>.
-            Beantworte die Rückfragen zu Marke, ASINs und CI. Am Ende bekommst du ein Briefing JSON.
-            Dieses fügst du unten ein oder lädst es als <code style={{ background: '#e2e8f0', padding: '1px 6px', borderRadius: 3, fontSize: 11 }}>.json</code> Datei hoch.
+        <div style={{ background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 6, padding: 12, marginBottom: 14 }}>
+          <div style={{ fontWeight: 700, marginBottom: 6, color: '#0369a1', fontSize: 13 }}>Schritt 1: Konzept in Claude Code erstellen</div>
+          <div style={{ fontSize: 12, lineHeight: 1.5, color: '#334155', marginBottom: 8 }}>
+            Öffne Claude Code im Repo <code style={{ background: '#e2e8f0', padding: '1px 6px', borderRadius: 3, fontSize: 11 }}>amazon-store-builder</code>.
+            Kopiere den Prompt unten und füge ihn in den Chat ein. Der Skill <code style={{ background: '#e2e8f0', padding: '1px 6px', borderRadius: 3, fontSize: 11 }}>amazon-storefront-design</code> wird automatisch aktiviert weil er im Repo unter <code style={{ background: '#e2e8f0', padding: '1px 6px', borderRadius: 3, fontSize: 11 }}>.claude/skills/</code> liegt.
+          </div>
+          <div style={{ background: '#fff', border: '1px solid #cbd5e1', borderRadius: 4, padding: 10, fontSize: 11, fontFamily: 'monospace', lineHeight: 1.4, color: '#334155', whiteSpace: 'pre-wrap', maxHeight: 180, overflow: 'auto', marginBottom: 8 }}>
+            {SKILL_PROMPT}
+          </div>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
+            <button className="btn btn-primary" onClick={handleCopyPrompt} style={{ fontSize: 12, padding: '6px 14px' }}>
+              Prompt kopieren
+            </button>
+            {copied && <span style={{ fontSize: 11, color: '#15803d', fontWeight: 600 }}>Prompt in Zwischenablage</span>}
+          </div>
+        </div>
+
+        <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 6, padding: 12, marginBottom: 14 }}>
+          <div style={{ fontWeight: 700, marginBottom: 4, color: '#0f172a', fontSize: 13 }}>Schritt 2: Briefing JSON importieren</div>
+          <div style={{ fontSize: 12, lineHeight: 1.5, color: '#334155' }}>
+            Sobald dein Briefing JSON aus dem Chat fertig ist, füge es unten ein oder lade es als <code style={{ background: '#e2e8f0', padding: '1px 6px', borderRadius: 3, fontSize: 11 }}>.json</code> Datei hoch.
           </div>
         </div>
 
