@@ -501,10 +501,18 @@ export default function App() {
   };
 
   // ─── FOLDER IMAGE UPLOAD (match files to tiles by canonical filename) ───
+  // Zwei Match Modi:
+  //  1. Per Tile: Filename PageName_S1_T1[_desktop|_mobile].jpg → genau ein Tile
+  //  2. Per imageRef: Filename gleicht imageRef Tag (z.B. cat-garten-lifestyle-1500x750.jpg)
+  //     → Bild geht an ALLE Tiles mit identischem imageRef. Da imageRef die
+  //     Dimensionen WxH bereits enthält, wird nie auf einer anderen Bildgröße
+  //     überschrieben. Bilder werden nicht gestreckt oder anders gefüllt.
   var handleFolderImageUpload = function(files) {
     if (!files || files.length === 0 || !store.pages || store.pages.length === 0) return;
     // Build filename map
     var fnMap = {};
+    // imageRef Map: refKey:variant → Liste aller Tiles mit dem Ref
+    var refMap = {};
     var PRODUCT_TYPES = ['product_grid', 'product_selector'];
     store.pages.forEach(function(pg) {
       (pg.sections || []).forEach(function(sec, si) {
@@ -520,12 +528,19 @@ export default function App() {
             fnMap[(base + '_desktop.jpg').toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'desktop' };
             fnMap[(base + '_mobile.jpg').toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'mobile' };
           }
+          // imageRef → mehrere Tiles teilen sich ein Bild
+          if (tile.imageRef) {
+            var refKey = String(tile.imageRef).toLowerCase();
+            if (!refMap[refKey]) refMap[refKey] = [];
+            refMap[refKey].push({ pageId: pg.id, secId: sec.id, ti: ti });
+          }
         });
       });
     });
     // Match files and read as data URLs
     var imageExts = /\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i;
-    var matched = {}; // key: "pageId|secId|ti|variant" → file
+    var matched = {}; // key: "pageId|secId|ti|variant" → { entries: [...], file }
+    var matchedRefs = {}; // ref → { variant, file }
     for (var i = 0; i < files.length; i++) {
       var file = files[i];
       if (!imageExts.test(file.name)) continue;
@@ -533,6 +548,18 @@ export default function App() {
       if (rawName.normalize) rawName = rawName.normalize('NFC');
       var name = rawName.toLowerCase();
       var nameNoExt = name.replace(/\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i, '');
+      // Variante aus Suffix ableiten
+      var refVariant = 'sync';
+      var refStem = nameNoExt;
+      if (/_desktop$/.test(nameNoExt)) { refVariant = 'desktop'; refStem = nameNoExt.replace(/_desktop$/, ''); }
+      else if (/_mobile$/.test(nameNoExt)) { refVariant = 'mobile'; refStem = nameNoExt.replace(/_mobile$/, ''); }
+      // 1. imageRef Match (Bild Reuse über mehrere Tiles)
+      if (refMap[refStem]) {
+        var rkey = refStem + '|' + refVariant;
+        if (!matchedRefs[rkey]) matchedRefs[rkey] = { ref: refStem, variant: refVariant, file: file, entries: refMap[refStem] };
+        continue;
+      }
+      // 2. Per Tile Filename Match (existierend)
       var entry = null;
       if (fnMap[name]) entry = fnMap[name];
       else if (fnMap[nameNoExt + '.jpg']) entry = fnMap[nameNoExt + '.jpg'];
@@ -553,7 +580,45 @@ export default function App() {
     }
     // Read matched files as data URLs and update tiles
     var matchKeys = Object.keys(matched);
-    if (matchKeys.length === 0) { alert('No matching images found. Expected filenames like: PageName_S1_T1_desktop.jpg'); return; }
+    var refKeys = Object.keys(matchedRefs);
+    if (matchKeys.length === 0 && refKeys.length === 0) { alert('Kein Bild zugeordnet.\nErwartete Filenames:\n• Per Tile: PageName_S1_T1_desktop.jpg\n• Per imageRef: cat-garten-lifestyle-1500x750.jpg (oder _desktop / _mobile Variante)'); return; }
+    // imageRef Files lesen und auf alle zugehörigen Tiles anwenden
+    var refProcessed = 0;
+    var totalReuses = 0;
+    refKeys.forEach(function(rkey) {
+      var item = matchedRefs[rkey];
+      var reader = new FileReader();
+      reader.onload = function(ev) {
+        var dataUrl = ev.target.result;
+        setStore(function(s) {
+          return Object.assign({}, s, {
+            pages: s.pages.map(function(pg) {
+              return Object.assign({}, pg, {
+                sections: pg.sections.map(function(sec) {
+                  return Object.assign({}, sec, {
+                    tiles: sec.tiles.map(function(t, ti) {
+                      var hit = item.entries.some(function(e) { return e.pageId === pg.id && e.secId === sec.id && e.ti === ti; });
+                      if (!hit) return t;
+                      var updates = {};
+                      if (item.variant === 'sync' || item.variant === 'desktop') updates.uploadedImage = dataUrl;
+                      if (item.variant === 'sync' || item.variant === 'mobile') updates.uploadedImageMobile = dataUrl;
+                      return Object.assign({}, t, updates);
+                    }),
+                  });
+                }),
+              });
+            }),
+          });
+        });
+        totalReuses += item.entries.length;
+        refProcessed++;
+        if (refProcessed === refKeys.length && matchKeys.length === 0) {
+          alert(refKeys.length + ' imageRef Bild(er) verteilt auf ' + totalReuses + ' Tile(s).');
+        }
+      };
+      reader.readAsDataURL(item.file);
+    });
+    if (matchKeys.length === 0) return;
     var processed = 0;
     matchKeys.forEach(function(mkey) {
       var item = matched[mkey];
@@ -583,7 +648,9 @@ export default function App() {
         });
         processed++;
         if (processed === matchKeys.length) {
-          alert(matchKeys.length + ' images matched and loaded.');
+          var msg = matchKeys.length + ' Tile Bild(er) zugeordnet.';
+          if (refKeys.length > 0) msg += ' Plus ' + refKeys.length + ' imageRef Bild(er) auf ' + totalReuses + ' Tile(s).';
+          alert(msg);
         }
       };
       reader.readAsDataURL(item.file);

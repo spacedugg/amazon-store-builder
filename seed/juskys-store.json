@@ -942,7 +942,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -966,7 +967,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "cat-garten-lifestyle-1500x750"
             },
             {
               "type": "image",
@@ -984,7 +986,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "cat-moebel-lifestyle-1500x750"
             },
             {
               "type": "image",
@@ -1002,7 +1005,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "cat-freizeit-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -1020,7 +1024,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "cat-heimwerken-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -1038,7 +1043,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "cat-haushalt-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -1056,7 +1062,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "cat-tierbedarf-lifestyle-750x750"
             }
           ]
         },
@@ -1080,7 +1087,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image_text",
@@ -1098,7 +1106,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1122,7 +1131,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1150,7 +1160,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1181,7 +1192,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1205,7 +1217,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1233,7 +1246,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1257,7 +1271,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "usp-inhabergefuehrt-1500x750"
             },
             {
               "type": "image",
@@ -1275,7 +1290,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "usp-versandkostenfrei-1500x750"
             },
             {
               "type": "image",
@@ -1293,7 +1309,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "usp-geprueft-1500x750"
             },
             {
               "type": "image",
@@ -1311,7 +1328,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "usp-sortiment-1500x750"
             }
           ]
         },
@@ -1335,7 +1353,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1359,7 +1378,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "cat-garten-lifestyle-1500x750"
             },
             {
               "type": "image",
@@ -1377,7 +1397,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "cat-moebel-lifestyle-1500x750"
             },
             {
               "type": "image",
@@ -1395,7 +1416,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "cat-haushalt-lifestyle-1500x750"
             },
             {
               "type": "image",
@@ -1413,7 +1435,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "cat-ueberuns-lifestyle-1500x750"
             }
           ]
         }
@@ -1444,7 +1467,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1481,7 +1505,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1505,7 +1530,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1538,7 +1564,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1562,7 +1589,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1595,7 +1623,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1619,7 +1648,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1650,7 +1680,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1674,7 +1705,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1705,7 +1737,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1729,7 +1762,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1762,7 +1796,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1786,7 +1821,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1816,7 +1852,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1840,7 +1877,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -1858,7 +1896,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -1876,7 +1915,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -1907,7 +1947,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -1931,7 +1972,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -1949,7 +1991,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenaufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -1967,7 +2010,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbedarf-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -1985,7 +2029,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sonnenschutz-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -2003,7 +2048,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenliegen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -2021,7 +2067,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbaenke-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -2039,7 +2086,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartentische-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -2057,7 +2105,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bierzelt-lifestyle-750x750"
             }
           ]
         },
@@ -2081,7 +2130,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-haengematten-lifestyle-1500x750"
             },
             {
               "type": "image",
@@ -2099,7 +2149,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-ueberdachungen-lifestyle-1500x750"
             },
             {
               "type": "image",
@@ -2117,7 +2168,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-poolbedarf-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -2135,7 +2187,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gewaechshaeuser-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -2153,7 +2206,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kissenboxen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -2171,7 +2225,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-grills-lifestyle-750x750"
             }
           ]
         },
@@ -2201,7 +2256,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -2234,7 +2290,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -2258,7 +2315,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -2288,7 +2346,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -2321,7 +2380,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -2345,7 +2405,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -2363,7 +2424,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -2381,7 +2443,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -2466,7 +2529,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -2490,7 +2554,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -2521,7 +2586,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -2545,7 +2611,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sofas-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -2563,7 +2630,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-polsterbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -2581,7 +2649,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-boxspringbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -2599,7 +2668,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-metallbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -2617,7 +2687,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -2635,7 +2706,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-wohnmoebel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -2653,7 +2725,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-massagesessel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -2671,7 +2744,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bueromoebel-lifestyle-750x750"
             }
           ]
         },
@@ -2695,7 +2769,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-matratzen-lifestyle-1500x750"
             },
             {
               "type": "image",
@@ -2713,7 +2788,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-schlafkomfort-lifestyle-1500x750"
             },
             {
               "type": "image",
@@ -2731,7 +2807,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-schminktische-lifestyle-1500x750"
             },
             {
               "type": "image",
@@ -2749,7 +2826,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-badausstattung-lifestyle-1500x750"
             }
           ]
         },
@@ -2779,7 +2857,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -2812,7 +2891,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -2836,7 +2916,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -2866,7 +2947,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -2898,7 +2980,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -2926,7 +3009,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -2950,7 +3034,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -2968,7 +3053,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -2986,7 +3072,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -3041,7 +3128,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -3065,7 +3153,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -3096,7 +3185,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -3120,7 +3210,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-camping-lifestyle-1500x750"
             },
             {
               "type": "image",
@@ -3138,7 +3229,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-koffer-lifestyle-1500x750"
             },
             {
               "type": "image",
@@ -3156,7 +3248,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-dachzelte-lifestyle-1500x750"
             },
             {
               "type": "image",
@@ -3174,7 +3267,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sport-lifestyle-1500x750"
             }
           ]
         },
@@ -3204,7 +3298,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -3234,7 +3329,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -3266,7 +3362,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -3290,7 +3387,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -3308,7 +3406,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -3326,7 +3425,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -3355,7 +3455,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -3379,7 +3480,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -3397,7 +3499,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -3415,7 +3518,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -3457,7 +3561,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -3481,7 +3586,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -3512,7 +3618,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -3536,7 +3643,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-werkzeug-lifestyle-3000x1500"
             },
             {
               "type": "image",
@@ -3554,7 +3662,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sackkarren-lifestyle-1500x1500"
             },
             {
               "type": "image",
@@ -3572,7 +3681,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-leitern-lifestyle-1500x1500"
             }
           ]
         },
@@ -3596,7 +3706,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-elektrokamine-lifestyle-1500x1500"
             },
             {
               "type": "image",
@@ -3614,7 +3725,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -3642,7 +3754,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -3671,7 +3784,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -3695,7 +3809,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -3726,7 +3841,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -3750,7 +3866,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -3768,7 +3885,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -3786,7 +3904,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -3824,7 +3943,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -3848,7 +3968,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -3879,7 +4000,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -3903,7 +4025,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-schwerlastregale-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -3921,7 +4044,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-aufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -3939,7 +4063,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kuechengeraete-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -3957,7 +4082,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-muelleimer-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -3975,7 +4101,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-eiswuerfelmaschinen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -3993,7 +4120,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-heizgeraete-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -4011,7 +4139,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-alltagshilfen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -4029,7 +4158,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbedarf-lifestyle-750x750"
             }
           ]
         },
@@ -4059,7 +4189,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -4087,7 +4218,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -4111,7 +4243,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -4144,7 +4277,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -4177,7 +4311,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -4204,7 +4339,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -4228,7 +4364,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -4246,7 +4383,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -4264,7 +4402,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -4317,7 +4456,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -4348,7 +4488,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -4372,7 +4513,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-freilaufgehege-lifestyle-3000x1500"
             },
             {
               "type": "image",
@@ -4390,7 +4532,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-hund-lifestyle-1500x1500"
             },
             {
               "type": "image",
@@ -4408,7 +4551,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-katze-lifestyle-1500x1500"
             }
           ]
         },
@@ -4438,7 +4582,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -4464,7 +4609,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -4493,7 +4639,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -4517,7 +4664,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -4535,7 +4683,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -4553,7 +4702,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -4583,7 +4733,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -4614,7 +4765,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -4631,14 +4783,15 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Filter Tile.",
+              "brief": "Filter Tile, gleiches Lifestyle wie Home Kategorie Tile.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "page:Garten",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "cat-garten-lifestyle-1500x750"
             },
             {
               "type": "image",
@@ -4649,14 +4802,15 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Filter Tile.",
+              "brief": "Filter Tile, gleiches Lifestyle wie Home Kategorie Tile.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "page:Möbel",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "cat-moebel-lifestyle-1500x750"
             },
             {
               "type": "image",
@@ -4667,14 +4821,15 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Filter Tile.",
+              "brief": "Filter Tile, gleiches Lifestyle wie Home Kategorie Tile.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "page:Freizeit",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "cat-freizeit-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -4685,14 +4840,15 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Filter Tile.",
+              "brief": "Filter Tile, gleiches Lifestyle wie Home Kategorie Tile.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "page:Heimwerken",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "cat-heimwerken-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -4703,14 +4859,15 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Filter Tile.",
+              "brief": "Filter Tile, gleiches Lifestyle wie Home Kategorie Tile.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "page:Haushalt",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "cat-haushalt-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -4721,14 +4878,15 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Filter Tile.",
+              "brief": "Filter Tile, gleiches Lifestyle wie Home Kategorie Tile.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "page:Tierbedarf",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "cat-tierbedarf-lifestyle-750x750"
             }
           ]
         },
@@ -4765,7 +4923,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -4789,7 +4948,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -4807,7 +4967,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -4825,7 +4986,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -4856,7 +5018,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -4880,7 +5043,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image_text",
@@ -4898,7 +5062,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -4922,7 +5087,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -4940,7 +5106,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -4958,7 +5125,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -4976,7 +5144,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "benefit",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -5000,7 +5169,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -5018,7 +5188,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -5036,7 +5207,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -5054,7 +5226,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -5072,7 +5245,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             },
             {
               "type": "image",
@@ -5090,7 +5264,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -5114,7 +5289,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -5146,7 +5322,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -5179,7 +5356,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -5219,7 +5397,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -5243,7 +5422,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -5267,7 +5447,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenaufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5285,7 +5466,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbedarf-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5303,7 +5485,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sonnenschutz-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5321,7 +5504,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenliegen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5339,7 +5523,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbaenke-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5357,7 +5542,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartentische-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5375,7 +5561,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bierzeltgarnituren-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5393,7 +5580,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-haengematten-lifestyle-750x750"
             }
           ]
         },
@@ -5417,7 +5605,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -5449,7 +5638,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -5478,7 +5668,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -5507,7 +5698,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -5531,7 +5723,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -5555,7 +5748,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenmoebel-sets-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5573,7 +5767,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbedarf-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5591,7 +5786,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sonnenschutz-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5609,7 +5805,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenliegen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5627,7 +5824,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbaenke-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5645,7 +5843,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartentische-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5663,7 +5862,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bierzeltgarnituren-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5681,7 +5881,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-haengematten-lifestyle-750x750"
             }
           ]
         },
@@ -5705,7 +5906,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -5737,7 +5939,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -5770,7 +5973,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -5806,7 +6010,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -5830,7 +6035,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -5854,7 +6060,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenmoebel-sets-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5872,7 +6079,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenaufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5890,7 +6098,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sonnenschutz-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5908,7 +6117,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenliegen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5926,7 +6136,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbaenke-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5944,7 +6155,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartentische-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5962,7 +6174,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bierzeltgarnituren-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -5980,7 +6193,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-haengematten-lifestyle-750x750"
             }
           ]
         },
@@ -6004,7 +6218,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -6036,7 +6251,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -6066,7 +6282,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -6096,7 +6313,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -6120,7 +6338,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -6144,7 +6363,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenmoebel-sets-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6162,7 +6382,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenaufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6180,7 +6401,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbedarf-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6198,7 +6420,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenliegen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6216,7 +6439,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbaenke-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6234,7 +6458,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartentische-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6252,7 +6477,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bierzeltgarnituren-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6270,7 +6496,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-haengematten-lifestyle-750x750"
             }
           ]
         },
@@ -6294,7 +6521,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -6326,7 +6554,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -6354,7 +6583,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -6382,7 +6612,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -6406,7 +6637,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -6430,7 +6662,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenmoebel-sets-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6448,7 +6681,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenaufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6466,7 +6700,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbedarf-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6484,7 +6719,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sonnenschutz-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6502,7 +6738,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbaenke-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6520,7 +6757,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartentische-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6538,7 +6776,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bierzeltgarnituren-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6556,7 +6795,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-haengematten-lifestyle-750x750"
             }
           ]
         },
@@ -6580,7 +6820,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -6612,7 +6853,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -6639,7 +6881,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -6666,7 +6909,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -6690,7 +6934,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -6714,7 +6959,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenmoebel-sets-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6732,7 +6978,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenaufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6750,7 +6997,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbedarf-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6768,7 +7016,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sonnenschutz-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6786,7 +7035,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenliegen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6804,7 +7054,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartentische-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6822,7 +7073,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bierzeltgarnituren-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -6840,7 +7092,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-haengematten-lifestyle-750x750"
             }
           ]
         },
@@ -6864,7 +7117,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -6896,7 +7150,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -6924,7 +7179,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -6952,7 +7208,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -6976,7 +7233,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -7000,7 +7258,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenmoebel-sets-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7018,7 +7277,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenaufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7036,7 +7296,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbedarf-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7054,7 +7315,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sonnenschutz-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7072,7 +7334,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenliegen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7090,7 +7353,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbaenke-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7108,7 +7372,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bierzeltgarnituren-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7126,7 +7391,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-haengematten-lifestyle-750x750"
             }
           ]
         },
@@ -7150,7 +7416,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -7182,7 +7449,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -7210,7 +7478,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -7238,7 +7507,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -7262,7 +7532,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -7286,7 +7557,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenmoebel-sets-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7304,7 +7576,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenaufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7322,7 +7595,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbedarf-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7340,7 +7614,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sonnenschutz-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7358,7 +7633,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenliegen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7376,7 +7652,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbaenke-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7394,7 +7671,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartentische-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7412,7 +7690,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-haengematten-lifestyle-750x750"
             }
           ]
         },
@@ -7436,7 +7715,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -7468,7 +7748,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -7496,7 +7777,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -7524,7 +7806,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -7548,7 +7831,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -7572,7 +7856,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenmoebel-sets-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7590,7 +7875,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenaufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7608,7 +7894,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbedarf-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7626,7 +7913,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sonnenschutz-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7644,7 +7932,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenliegen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7662,7 +7951,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbaenke-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7680,7 +7970,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartentische-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7698,7 +7989,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bierzeltgarnituren-lifestyle-750x750"
             }
           ]
         },
@@ -7722,7 +8014,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -7754,7 +8047,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -7785,7 +8079,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -7816,7 +8111,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -7840,7 +8136,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -7864,7 +8161,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenmoebel-sets-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7882,7 +8180,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenaufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7900,7 +8199,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbedarf-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7918,7 +8218,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sonnenschutz-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7936,7 +8237,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenliegen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7954,7 +8256,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbaenke-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7972,7 +8275,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartentische-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -7990,7 +8294,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bierzeltgarnituren-lifestyle-750x750"
             }
           ]
         },
@@ -8014,7 +8319,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -8046,7 +8352,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -8075,7 +8382,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -8104,7 +8412,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -8128,7 +8437,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -8152,7 +8462,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenmoebel-sets-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8170,7 +8481,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenaufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8188,7 +8500,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbedarf-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8206,7 +8519,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sonnenschutz-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8224,7 +8538,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenliegen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8242,7 +8557,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbaenke-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8260,7 +8576,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartentische-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8278,7 +8595,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bierzeltgarnituren-lifestyle-750x750"
             }
           ]
         },
@@ -8302,7 +8620,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -8334,7 +8653,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -8360,7 +8680,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -8386,7 +8707,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -8410,7 +8732,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -8434,7 +8757,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenmoebel-sets-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8452,7 +8776,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenaufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8470,7 +8795,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbedarf-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8488,7 +8814,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sonnenschutz-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8506,7 +8833,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenliegen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8524,7 +8852,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartenbaenke-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8542,7 +8871,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-gartentische-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8560,7 +8890,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bierzeltgarnituren-lifestyle-750x750"
             }
           ]
         },
@@ -8584,7 +8915,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -8616,7 +8948,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -8642,7 +8975,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -8668,7 +9002,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -8692,7 +9027,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -8716,7 +9052,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-polsterbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8734,7 +9071,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-boxspringbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8752,7 +9090,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-metallbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8770,7 +9109,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8788,7 +9128,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-wohnmoebel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8806,7 +9147,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-massagesessel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8824,7 +9166,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bueromoebel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -8842,7 +9185,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-matratzen-lifestyle-750x750"
             }
           ]
         },
@@ -8866,7 +9210,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -8898,7 +9243,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -8926,7 +9272,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -8954,7 +9301,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -8978,7 +9326,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -9002,7 +9351,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sofas-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9020,7 +9370,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-boxspringbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9038,7 +9389,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-metallbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9056,7 +9408,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9074,7 +9427,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-wohnmoebel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9092,7 +9446,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-massagesessel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9110,7 +9465,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bueromoebel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9128,7 +9484,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-matratzen-lifestyle-750x750"
             }
           ]
         },
@@ -9152,7 +9509,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -9184,7 +9542,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -9211,7 +9570,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -9238,7 +9598,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -9262,7 +9623,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -9286,7 +9648,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sofas-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9304,7 +9667,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-polsterbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9322,7 +9686,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-metallbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9340,7 +9705,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9358,7 +9724,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-wohnmoebel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9376,7 +9743,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-massagesessel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9394,7 +9762,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bueromoebel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9412,7 +9781,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-matratzen-lifestyle-750x750"
             }
           ]
         },
@@ -9436,7 +9806,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -9468,7 +9839,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -9495,7 +9867,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -9522,7 +9895,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -9546,7 +9920,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -9570,7 +9945,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sofas-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9588,7 +9964,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-polsterbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9606,7 +9983,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-boxspringbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9624,7 +10002,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9642,7 +10021,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-wohnmoebel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9660,7 +10040,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-massagesessel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9678,7 +10059,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bueromoebel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9696,7 +10078,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-matratzen-lifestyle-750x750"
             }
           ]
         },
@@ -9720,7 +10103,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -9752,7 +10136,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -9780,7 +10165,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -9808,7 +10194,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -9832,7 +10219,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -9856,7 +10244,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sofas-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9874,7 +10263,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-polsterbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9892,7 +10282,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-boxspringbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9910,7 +10301,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-metallbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9928,7 +10320,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-wohnmoebel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9946,7 +10339,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-massagesessel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9964,7 +10358,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bueromoebel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -9982,7 +10377,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-matratzen-lifestyle-750x750"
             }
           ]
         },
@@ -10006,7 +10402,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -10038,7 +10435,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -10066,7 +10464,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -10094,7 +10493,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -10118,7 +10518,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -10142,7 +10543,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sofas-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10160,7 +10562,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-polsterbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10178,7 +10581,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-boxspringbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10196,7 +10600,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-metallbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10214,7 +10619,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10232,7 +10638,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-massagesessel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10250,7 +10657,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bueromoebel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10268,7 +10676,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-matratzen-lifestyle-750x750"
             }
           ]
         },
@@ -10292,7 +10701,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -10324,7 +10734,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -10350,7 +10761,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -10376,7 +10788,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -10400,7 +10813,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -10424,7 +10838,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sofas-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10442,7 +10857,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-polsterbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10460,7 +10876,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-boxspringbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10478,7 +10895,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-metallbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10496,7 +10914,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10514,7 +10933,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-wohnmoebel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10532,7 +10952,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bueromoebel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10550,7 +10971,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-matratzen-lifestyle-750x750"
             }
           ]
         },
@@ -10574,7 +10996,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -10606,7 +11029,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -10635,7 +11059,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -10664,7 +11089,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -10688,7 +11114,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -10712,7 +11139,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sofas-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10730,7 +11158,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-polsterbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10748,7 +11177,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-boxspringbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10766,7 +11196,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-metallbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10784,7 +11215,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10802,7 +11234,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-wohnmoebel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10820,7 +11253,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-massagesessel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -10838,7 +11272,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-matratzen-lifestyle-750x750"
             }
           ]
         },
@@ -10862,7 +11297,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -10894,7 +11330,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -10921,7 +11358,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -10948,7 +11386,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -10972,7 +11411,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -10996,7 +11436,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sofas-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11014,7 +11455,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-polsterbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11032,7 +11474,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-boxspringbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11050,7 +11493,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-metallbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11068,7 +11512,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11086,7 +11531,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-wohnmoebel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11104,7 +11550,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-massagesessel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11122,7 +11569,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bueromoebel-lifestyle-750x750"
             }
           ]
         },
@@ -11146,7 +11594,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -11178,7 +11627,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -11207,7 +11657,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -11236,7 +11687,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -11260,7 +11712,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -11284,7 +11737,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sofas-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11302,7 +11756,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-polsterbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11320,7 +11775,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-boxspringbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11338,7 +11794,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-metallbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11356,7 +11813,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11374,7 +11832,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-wohnmoebel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11392,7 +11851,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-massagesessel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11410,7 +11870,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bueromoebel-lifestyle-750x750"
             }
           ]
         },
@@ -11434,7 +11895,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -11466,7 +11928,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -11496,7 +11959,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -11526,7 +11990,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -11550,7 +12015,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -11574,7 +12040,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sofas-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11592,7 +12059,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-polsterbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11610,7 +12078,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-boxspringbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11628,7 +12097,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-metallbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11646,7 +12116,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11664,7 +12135,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-wohnmoebel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11682,7 +12154,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-massagesessel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11700,7 +12173,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bueromoebel-lifestyle-750x750"
             }
           ]
         },
@@ -11724,7 +12198,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -11756,7 +12231,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -11784,7 +12260,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -11812,7 +12289,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -11836,7 +12314,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -11860,7 +12339,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sofas-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11878,7 +12358,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-polsterbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11896,7 +12377,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-boxspringbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11914,7 +12396,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-metallbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11932,7 +12415,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbetten-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11950,7 +12434,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-wohnmoebel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11968,7 +12453,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-massagesessel-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -11986,7 +12472,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-bueromoebel-lifestyle-750x750"
             }
           ]
         },
@@ -12010,7 +12497,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -12042,7 +12530,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12072,7 +12561,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12102,7 +12592,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12126,7 +12617,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12150,7 +12642,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-koffersets-lifestyle-3000x1500"
             },
             {
               "type": "image",
@@ -12168,7 +12661,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-dachzelte-lifestyle-1500x1500"
             },
             {
               "type": "image",
@@ -12186,7 +12680,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sport-lifestyle-1500x1500"
             }
           ]
         },
@@ -12210,7 +12705,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -12242,7 +12738,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12274,7 +12771,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12306,7 +12804,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12330,7 +12829,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12354,7 +12854,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-camping-lifestyle-3000x1500"
             },
             {
               "type": "image",
@@ -12372,7 +12873,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-dachzelte-lifestyle-1500x1500"
             },
             {
               "type": "image",
@@ -12390,7 +12892,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sport-lifestyle-1500x1500"
             }
           ]
         },
@@ -12414,7 +12917,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -12446,7 +12950,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12472,7 +12977,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12498,7 +13004,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12522,7 +13029,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12546,7 +13054,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-camping-lifestyle-3000x1500"
             },
             {
               "type": "image",
@@ -12564,7 +13073,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-koffersets-lifestyle-1500x1500"
             },
             {
               "type": "image",
@@ -12582,7 +13092,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sport-lifestyle-1500x1500"
             }
           ]
         },
@@ -12606,7 +13117,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -12638,7 +13150,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12667,7 +13180,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12696,7 +13210,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12720,7 +13235,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12744,7 +13260,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-camping-lifestyle-3000x1500"
             },
             {
               "type": "image",
@@ -12762,7 +13279,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-koffersets-lifestyle-1500x1500"
             },
             {
               "type": "image",
@@ -12780,7 +13298,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-dachzelte-lifestyle-1500x1500"
             }
           ]
         },
@@ -12804,7 +13323,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -12836,7 +13356,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12864,7 +13385,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12892,7 +13414,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12916,7 +13439,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -12940,7 +13464,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sackkarren-lifestyle-3000x1500"
             },
             {
               "type": "image",
@@ -12958,7 +13483,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-multifunktionsleitern-lifestyle-1500x1500"
             },
             {
               "type": "image",
@@ -12976,7 +13502,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-elektrokamine-lifestyle-1500x1500"
             }
           ]
         },
@@ -13000,7 +13527,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -13032,7 +13560,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -13060,7 +13589,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -13088,7 +13618,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -13112,7 +13643,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -13136,7 +13668,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-werkzeug-lifestyle-3000x1500"
             },
             {
               "type": "image",
@@ -13154,7 +13687,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-multifunktionsleitern-lifestyle-1500x1500"
             },
             {
               "type": "image",
@@ -13172,7 +13706,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-elektrokamine-lifestyle-1500x1500"
             }
           ]
         },
@@ -13196,7 +13731,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -13228,7 +13764,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -13254,7 +13791,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -13280,7 +13818,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -13304,7 +13843,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -13328,7 +13868,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-werkzeug-lifestyle-3000x1500"
             },
             {
               "type": "image",
@@ -13346,7 +13887,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sackkarren-lifestyle-1500x1500"
             },
             {
               "type": "image",
@@ -13364,7 +13906,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-elektrokamine-lifestyle-1500x1500"
             }
           ]
         },
@@ -13388,7 +13931,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -13420,7 +13964,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -13451,7 +13996,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -13482,7 +14028,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -13506,7 +14053,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -13530,7 +14078,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-werkzeug-lifestyle-3000x1500"
             },
             {
               "type": "image",
@@ -13548,7 +14097,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-sackkarren-lifestyle-1500x1500"
             },
             {
               "type": "image",
@@ -13566,7 +14116,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-multifunktionsleitern-lifestyle-1500x1500"
             }
           ]
         },
@@ -13590,7 +14141,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -13622,7 +14174,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -13655,7 +14208,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -13689,7 +14243,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -13713,7 +14268,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -13737,7 +14293,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-aufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -13755,7 +14312,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kuechengeraete-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -13773,7 +14331,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-muelleimer-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -13791,7 +14350,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-eiswuerfelmaschinen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -13809,7 +14369,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-heizgeraete-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -13827,7 +14388,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-alltagshilfen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -13845,7 +14407,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbedarf-lifestyle-750x750"
             }
           ]
         },
@@ -13869,7 +14432,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -13901,7 +14465,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -13928,7 +14493,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -13955,7 +14521,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -13979,7 +14546,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -14003,7 +14571,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-schwerlastregale-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14021,7 +14590,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kuechengeraete-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14039,7 +14609,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-muelleimer-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14057,7 +14628,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-eiswuerfelmaschinen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14075,7 +14647,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-heizgeraete-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14093,7 +14666,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-alltagshilfen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14111,7 +14685,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbedarf-lifestyle-750x750"
             }
           ]
         },
@@ -14135,7 +14710,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -14167,7 +14743,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -14193,7 +14770,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -14219,7 +14797,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -14243,7 +14822,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -14267,7 +14847,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-schwerlastregale-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14285,7 +14866,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-aufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14303,7 +14885,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-muelleimer-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14321,7 +14904,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-eiswuerfelmaschinen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14339,7 +14923,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-heizgeraete-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14357,7 +14942,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-alltagshilfen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14375,7 +14961,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbedarf-lifestyle-750x750"
             }
           ]
         },
@@ -14399,7 +14986,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -14431,7 +15019,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -14457,7 +15046,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -14483,7 +15073,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -14507,7 +15098,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -14531,7 +15123,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-schwerlastregale-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14549,7 +15142,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-aufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14567,7 +15161,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kuechengeraete-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14585,7 +15180,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-eiswuerfelmaschinen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14603,7 +15199,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-heizgeraete-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14621,7 +15218,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-alltagshilfen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14639,7 +15237,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbedarf-lifestyle-750x750"
             }
           ]
         },
@@ -14663,7 +15262,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -14695,7 +15295,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -14721,7 +15322,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -14747,7 +15349,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -14771,7 +15374,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -14795,7 +15399,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-schwerlastregale-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14813,7 +15418,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-aufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14831,7 +15437,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kuechengeraete-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14849,7 +15456,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-muelleimer-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14867,7 +15475,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-heizgeraete-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14885,7 +15494,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-alltagshilfen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -14903,7 +15513,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbedarf-lifestyle-750x750"
             }
           ]
         },
@@ -14927,7 +15538,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -14959,7 +15571,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -14986,7 +15599,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -15013,7 +15627,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -15037,7 +15652,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -15061,7 +15677,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-schwerlastregale-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -15079,7 +15696,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-aufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -15097,7 +15715,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kuechengeraete-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -15115,7 +15734,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-muelleimer-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -15133,7 +15753,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-eiswuerfelmaschinen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -15151,7 +15772,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-alltagshilfen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -15169,7 +15791,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbedarf-lifestyle-750x750"
             }
           ]
         },
@@ -15193,7 +15816,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -15225,7 +15849,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -15253,7 +15878,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -15281,7 +15907,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -15305,7 +15932,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -15329,7 +15957,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-schwerlastregale-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -15347,7 +15976,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-aufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -15365,7 +15995,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kuechengeraete-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -15383,7 +16014,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-muelleimer-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -15401,7 +16033,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-eiswuerfelmaschinen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -15419,7 +16052,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-heizgeraete-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -15437,7 +16071,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kinderbedarf-lifestyle-750x750"
             }
           ]
         },
@@ -15461,7 +16096,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -15493,7 +16129,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -15526,7 +16163,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -15560,7 +16198,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -15584,7 +16223,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -15608,7 +16248,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-schwerlastregale-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -15626,7 +16267,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-aufbewahrung-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -15644,7 +16286,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-kuechengeraete-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -15662,7 +16305,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-muelleimer-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -15680,7 +16324,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-eiswuerfelmaschinen-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -15698,7 +16343,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-heizgeraete-lifestyle-750x750"
             },
             {
               "type": "image",
@@ -15716,7 +16362,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-alltagshilfen-lifestyle-750x750"
             }
           ]
         },
@@ -15740,7 +16387,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -15772,7 +16420,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -15801,7 +16450,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -15830,7 +16480,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -15854,7 +16505,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -15878,7 +16530,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-freilaufgehege-lifestyle-3000x600"
             }
           ]
         },
@@ -15902,7 +16555,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }
@@ -15934,7 +16588,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -15960,7 +16615,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -15986,7 +16642,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -16010,7 +16667,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "text_image",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         },
@@ -16034,7 +16692,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": "sub-hundebedarf-lifestyle-3000x600"
             }
           ]
         },
@@ -16058,7 +16717,8 @@
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "creative",
-              "textAlign": "left"
+              "textAlign": "left",
+              "imageRef": ""
             }
           ]
         }

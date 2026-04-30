@@ -261,6 +261,7 @@ Das Briefing JSON hat diese Struktur. Das Tool ergänzt fehlende IDs und Default
 | `linkUrl` | string | nein | für interne Links Format `page:Name` (z.B. `page:Garten`) |
 | `bgColor` | string | nein | HEX Farbe |
 | `imageCategory` | string | nein | `store_hero`, `benefit`, `product`, `creative`, `lifestyle`, `text_image` |
+| `imageRef` | string | nein | Topic Tag für Bild Reuse (siehe Abschnitt Image Reuse) |
 
 ### Tile Types
 
@@ -445,6 +446,54 @@ Das brauchst du im Briefing JSON nicht zu schreiben, der Briefing View des Tools
 ### Bestseller Section auf Home
 
 Maximal **eine** Bestseller Section auf Home, mit kuratierten 6 bis 8 ASINs gemischt aus mehreren Kategorien (z.B. saisonaler Schwerpunkt plus 2 stabile Anker). Niemals 3 oder mehr Bestseller Sections untereinander auf Home.
+
+### Image Reuse über `imageRef` Tag
+
+Damit der Designer **nicht für jede Sektion ein neues Bild** erzeugen muss, wenn das gleiche Motiv auf mehreren Tiles erscheinen soll (typischer Fall: Kategorie Tile Garten erscheint auf Home, Footer und Sale), bekommen wiederverwendbare Tiles ein `imageRef` Tag im Briefing JSON. Das Tool matched beim Folder Upload den Dateinamen gegen den Tag und verteilt **ein** Bild auf alle Tiles mit gleichem Ref.
+
+**Format des Tags**: `<purpose>-<topic>-<W>x<H>`
+
+- `purpose`: `cat` (Hauptkategorie), `sub` (Subkategorie), `usp` (Marken USP), `hero` (Page Hero), `trenner` (Lifestyle Trenner)
+- `topic`: Slug aus Topic Name (Umlaute zu ae oe ue ss, Leerzeichen zu Bindestrich, lowercase)
+- `WxH`: Desktop Dimensionen aus dem Layout (z.B. `1500x750` für Wide, `750x750` für Small Square, `3000x600` für Full Width)
+
+Die Dimensionen sind **Pflicht und Teil des Tags**, weil zwei Tiles mit identischem Topic aber unterschiedlichen Dimensionen niemals das gleiche Bild teilen dürfen, sonst würde es gestreckt oder beschnitten. Ein Garten Lifestyle Bild als Wide 1500x750 (Tag `cat-garten-lifestyle-1500x750`) und ein Garten Lifestyle Bild als Small Square 750x750 (Tag `cat-garten-lifestyle-750x750`) sind getrennte Assets, weil die Komposition jeweils anders gerahmt sein muss.
+
+**Reuse Beispiele für eine typische Brand**:
+
+| Wo | Tile | imageRef | Designer Datei |
+|----|------|----------|----------------|
+| Home Page Kategorie Grid Tile 1 (1500x750) | Garten | `cat-garten-lifestyle-1500x750` | `cat-garten-lifestyle-1500x750.jpg` |
+| Footer Kategorie Nav Tile 1 (1500x750) | Garten | `cat-garten-lifestyle-1500x750` | gleiche Datei, automatisch verteilt |
+| Sale Page Filter Tile 1 (1500x750) | Sale Garten | `cat-garten-lifestyle-1500x750` | gleiche Datei, automatisch verteilt |
+| Subpage Cross Nav Tile (Small Square 750x750) | Sub Sofas | `sub-sofas-lifestyle-750x750` | `sub-sofas-lifestyle-750x750.jpg` |
+| Möbel Page Sub Navigator Tile (Small Square 750x750) | Sub Sofas | `sub-sofas-lifestyle-750x750` | gleiche Datei, automatisch verteilt |
+| Marken USP Tile 4x mit "Versandkostenfrei" | USP Versand | `usp-versandkostenfrei-1500x750` | gleiche Datei auf Home, Bestseller, Über Uns |
+
+**Was du im Briefing JSON setzt**:
+
+```json
+{
+  "type": "image",
+  "textOverlay": { "heading": "**GARTEN**" },
+  "linkUrl": "page:Garten",
+  "imageRef": "cat-garten-lifestyle"
+}
+```
+
+Der `WxH` Suffix wird vom Build automatisch angehängt basierend auf dem Layout. Du gibst **nur den Topic Stem** (`cat-garten-lifestyle`).
+
+**Wann setzen**:
+- Hauptkategorie Tiles auf Home, Footer, Sale, Bestseller Trenner: `cat-<parent>-lifestyle`
+- Sub Kategorie Tiles in Main Page Navigator und Subpage Cross Nav: `sub-<sub>-lifestyle`
+- Marken USP Tiles wenn der gleiche USP mehrfach erscheint: `usp-<topic>`
+- Hero Banner einer Page wenn nicht reused: kein `imageRef` setzen, nur per Tile filename hochladen
+- Lifestyle Trenner und individuelle Section Bilder: kein `imageRef` setzen, das ist immer einzigartig
+
+**Wann NICHT setzen**:
+- Wenn das Bild wirklich nur an einer Stelle vorkommt, lass das Feld leer. Sonst entsteht ein "Reuse Tag mit nur einem Tile", was unnötig ist.
+- Bei `shoppable_image`: nie reusen, immer einzigartig.
+- Bei `image_text` Brand Story Tiles: nie reusen.
 
 ### Sinnvolle USP Leisten
 

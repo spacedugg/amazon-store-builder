@@ -8,6 +8,7 @@ import { writeFileSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import { getStructuredAsins } from './juskys-asins.mjs';
+import { LAYOUT_TILE_DIMS, resolveLayoutId } from '../src/constants.js';
 
 var __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -100,9 +101,15 @@ export function ov(heading, subheading, body, bullets, cta) {
 //       'best_sellers' | 'recommended' | 'deals' | 'video' | 'text' | 'product_selector'
 // overlay: ov(...) Objekt oder null
 // brief: nur Bildfunktion und Komposition (keine Texte, kein Licht)
-// opts: { asins, hotspots, linkUrl, bgColor, imageCategory, textAlign }
+// opts: { asins, hotspots, linkUrl, bgColor, imageCategory, textAlign, imageRef }
 // imageCategory wird automatisch gesetzt für image und image_text Tiles wenn
 // nicht explizit angegeben. Default Mapping greift in section() Kontext.
+//
+// imageRef: Topic Stem für Bild Reuse (z.B. 'cat-garten', 'usp-versandkostenfrei',
+// 'trenner-saison'). section() hängt -WxH basierend auf Tile Dimension an,
+// damit zwei Tiles nur dann das gleiche Bild teilen wenn sie identische
+// Dimensionen haben. Bilder werden niemals gestreckt oder verschoben über
+// Aspect Ratios hinweg.
 export function tile(type, overlay, brief, opts) {
   opts = opts || {};
   var ic = opts.imageCategory || '';
@@ -122,7 +129,20 @@ export function tile(type, overlay, brief, opts) {
     bgColor: opts.bgColor || '',
     imageCategory: ic,
     textAlign: opts.textAlign || 'left',
+    imageRef: opts.imageRef || '', // wird in section() um -WxH ergänzt
   };
+}
+
+// Dimensions Suffix für imageRef. Liest die Layout Dims der Tile Position
+// und hängt -WxH an. Tiles mit unterschiedlichen Dimensionen bekommen so
+// nie den gleichen Ref, auch wenn das Topic identisch ist.
+function appendDimsToRef(stem, layoutId, tileIndex) {
+  if (!stem) return '';
+  var resolved = resolveLayoutId(layoutId);
+  var dims = LAYOUT_TILE_DIMS[resolved];
+  var d = dims && dims[tileIndex] ? dims[tileIndex] : null;
+  if (!d) return stem;
+  return stem + '-' + d.w + 'x' + d.h;
 }
 
 // Section Factory.
@@ -146,6 +166,31 @@ export function section(layoutId, tiles, module) {
       }
     });
   }
+  // Auto imageRef für Sub Kategorie Tiles in categoryNav Sections.
+  // Wenn ein Tile noch keinen Ref hat, der Heading **WORD** Format ist und
+  // das Modul ein categoryNav ist, leiten wir 'sub-<slug>-lifestyle' ab.
+  // Hauptkategorie Tiles (Garten, Möbel, etc.) werden manuell mit cat-* getaggt
+  // und nicht überschrieben.
+  if (module && module.indexOf('categoryNav') === 0) {
+    tiles.forEach(function(t) {
+      if (t.imageRef) return;
+      if (t.type !== 'image') return;
+      var h = (t.textOverlay && t.textOverlay.heading) || '';
+      var m = h.match(/^\*\*([A-ZÄÖÜa-zäöü\s]+)\*\*$/);
+      if (!m) return;
+      var word = m[1].trim();
+      // Hauptkategorien als cat-, sonst sub-
+      var PARENTS = ['Garten', 'Möbel', 'Freizeit', 'Heimwerken', 'Haushalt', 'Tierbedarf', 'Über Uns', 'Über uns', 'Bestseller', 'Sale'];
+      var isParent = PARENTS.some(function(p) { return p.toUpperCase() === word.toUpperCase(); });
+      if (isParent) t.imageRef = 'cat-' + slugifyRef(word) + '-lifestyle';
+      else t.imageRef = 'sub-' + slugifyRef(word) + '-lifestyle';
+    });
+  }
+  // imageRef Dimensions Suffix anhängen (Topic Stem → Topic-WxH).
+  // Nur wenn das Tile einen Stem trägt, sonst leer lassen.
+  tiles.forEach(function(t, ti) {
+    if (t.imageRef) t.imageRef = appendDimsToRef(t.imageRef, layoutId, ti);
+  });
   return {
     id: uid(),
     layoutId: layoutId,
@@ -180,8 +225,18 @@ export function linkTo(pageName) {
 // Kategorie Überschrift. ImageCategory 'text_image' damit der Designer
 // klar weiß: das ist ein Trenner Bild, nicht ein Hero. Heading meist
 // genug, keine Subheading.
-export function dividerTile(heading, brief) {
-  return tile('image', ov(heading), brief, { imageCategory: 'text_image' });
+export function dividerTile(heading, brief, refStem) {
+  var opts = { imageCategory: 'text_image' };
+  if (refStem) opts.imageRef = refStem;
+  return tile('image', ov(heading), brief, opts);
+}
+
+// Helfer für imageRef Stems aus deutschen Sub Namen (Umlaute → ASCII).
+function slugifyRef(s) {
+  return String(s)
+    .toLowerCase()
+    .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
 // ─── TOP LEVEL FELDER ──────────────────────────────────────
@@ -206,12 +261,12 @@ function buildHomePage() {
 
     // 2, Navigator 6 Kategorien
     section('2s-4grid', [
-      tile('image', ov('**GARTEN**', 'Lounge, Tische, Schatten'), 'Kategorie Tile Garten. Lifestyle Bild Terrasse mit Loungegruppe, Stimmung am späten Nachmittag.', { linkUrl: linkTo('Garten') }),
-      tile('image', ov('**MÖBEL**', 'Sofas, Betten, Bad'), 'Kategorie Tile Möbel. Lifestyle Bild Wohnzimmer mit Sofa und Sessel im Kontext.', { linkUrl: linkTo('Möbel') }),
-      tile('image', ov('**FREIZEIT**', 'Camping, Koffer, Sport'), 'Kategorie Tile Freizeit. Lifestyle Bild Outdoor Setup oder Reisesituation.', { linkUrl: linkTo('Freizeit') }),
-      tile('image', ov('**HEIMWERKEN**', 'Werkzeug, Leitern, Kamine'), 'Kategorie Tile Heimwerken. Lifestyle Bild Werkstatt oder Werkzeug auf Werkbank.', { linkUrl: linkTo('Heimwerken') }),
-      tile('image', ov('**HAUSHALT**', 'Küche, Stauraum, Alltag'), 'Kategorie Tile Haushalt. Lifestyle Bild Küche oder Hauswirtschaftsraum mit Geräten in Nutzung.', { linkUrl: linkTo('Haushalt') }),
-      tile('image', ov('**TIERBEDARF**', 'Hund, Katze, Freilauf'), 'Kategorie Tile Tierbedarf. Lifestyle Bild mit Hund oder Katze in Wohnsetting.', { linkUrl: linkTo('Tierbedarf') }),
+      tile('image', ov('**GARTEN**', 'Lounge, Tische, Schatten'), 'Kategorie Tile Garten. Lifestyle Bild Terrasse mit Loungegruppe, Stimmung am späten Nachmittag.', { linkUrl: linkTo('Garten'), imageRef: 'cat-garten-lifestyle' }),
+      tile('image', ov('**MÖBEL**', 'Sofas, Betten, Bad'), 'Kategorie Tile Möbel. Lifestyle Bild Wohnzimmer mit Sofa und Sessel im Kontext.', { linkUrl: linkTo('Möbel'), imageRef: 'cat-moebel-lifestyle' }),
+      tile('image', ov('**FREIZEIT**', 'Camping, Koffer, Sport'), 'Kategorie Tile Freizeit. Lifestyle Bild Outdoor Setup oder Reisesituation.', { linkUrl: linkTo('Freizeit'), imageRef: 'cat-freizeit-lifestyle' }),
+      tile('image', ov('**HEIMWERKEN**', 'Werkzeug, Leitern, Kamine'), 'Kategorie Tile Heimwerken. Lifestyle Bild Werkstatt oder Werkzeug auf Werkbank.', { linkUrl: linkTo('Heimwerken'), imageRef: 'cat-heimwerken-lifestyle' }),
+      tile('image', ov('**HAUSHALT**', 'Küche, Stauraum, Alltag'), 'Kategorie Tile Haushalt. Lifestyle Bild Küche oder Hauswirtschaftsraum mit Geräten in Nutzung.', { linkUrl: linkTo('Haushalt'), imageRef: 'cat-haushalt-lifestyle' }),
+      tile('image', ov('**TIERBEDARF**', 'Hund, Katze, Freilauf'), 'Kategorie Tile Tierbedarf. Lifestyle Bild mit Hund oder Katze in Wohnsetting.', { linkUrl: linkTo('Tierbedarf'), imageRef: 'cat-tierbedarf-lifestyle' }),
     ], 'categoryNav.grid6tiles'),
 
     // 3, Brand Story Split
@@ -263,10 +318,10 @@ function buildHomePage() {
 
     // 9, USP Leiste 4 Marken USPs
     section('2x2wide', [
-      tile('image', ov('**Inhabergeführt**', 'Seit 2005 aus Deutschland'), 'Marken USP Tile mit grünem Icon Kreis Haus.'),
-      tile('image', ov('**Versandkostenfrei**', 'In ganz Deutschland'), 'Marken USP Tile mit grünem Icon Kreis Truck.'),
-      tile('image', ov('**Geprüft**', 'Hersteller persönlich besucht'), 'Marken USP Tile mit grünem Icon Kreis Schild Check.'),
-      tile('image', ov('**Sortiment**', 'Für viele Lebensbereiche'), 'Marken USP Tile mit grünem Icon Kreis Stern.'),
+      tile('image', ov('**Inhabergeführt**', 'Seit 2005 aus Deutschland'), 'Marken USP Tile mit grünem Icon Kreis Haus.', { imageRef: 'usp-inhabergefuehrt' }),
+      tile('image', ov('**Versandkostenfrei**', 'In ganz Deutschland'), 'Marken USP Tile mit grünem Icon Kreis Truck.', { imageRef: 'usp-versandkostenfrei' }),
+      tile('image', ov('**Geprüft**', 'Hersteller persönlich besucht'), 'Marken USP Tile mit grünem Icon Kreis Schild Check.', { imageRef: 'usp-geprueft' }),
+      tile('image', ov('**Sortiment**', 'Für viele Lebensbereiche'), 'Marken USP Tile mit grünem Icon Kreis Stern.', { imageRef: 'usp-sortiment' }),
     ], 'features.featureGrid4wide'),
 
     // 10, Follow Banner
@@ -279,10 +334,10 @@ function buildHomePage() {
 
     // 11, Footer Nav
     section('2x2wide', [
-      tile('image', ov('**GARTEN**'), 'Footer Kategorie Tile mit Mini Icon.', { linkUrl: linkTo('Garten') }),
-      tile('image', ov('**MÖBEL**'), 'Footer Kategorie Tile mit Mini Icon.', { linkUrl: linkTo('Möbel') }),
-      tile('image', ov('**HAUSHALT**'), 'Footer Kategorie Tile mit Mini Icon.', { linkUrl: linkTo('Haushalt') }),
-      tile('image', ov('**ÜBER** UNS'), 'Footer Tile zur Brand Story.', { linkUrl: linkTo('Über Uns') }),
+      tile('image', ov('**GARTEN**'), 'Footer Kategorie Tile mit Mini Icon.', { linkUrl: linkTo('Garten'), imageRef: 'cat-garten-lifestyle' }),
+      tile('image', ov('**MÖBEL**'), 'Footer Kategorie Tile mit Mini Icon.', { linkUrl: linkTo('Möbel'), imageRef: 'cat-moebel-lifestyle' }),
+      tile('image', ov('**HAUSHALT**'), 'Footer Kategorie Tile mit Mini Icon.', { linkUrl: linkTo('Haushalt'), imageRef: 'cat-haushalt-lifestyle' }),
+      tile('image', ov('**ÜBER** UNS'), 'Footer Tile zur Brand Story.', { linkUrl: linkTo('Über Uns'), imageRef: 'cat-ueberuns-lifestyle' }),
     ], 'footer.categoryNavFooter'),
   ]);
 }
@@ -434,7 +489,7 @@ function buildSubpage(parentName, subName, headlineWord) {
     return s !== subName && allAsinsBySub(parentName, s).length > 0;
   }).slice(0, 8); // max 8 Tiles im Cross Nav
   var crossNavTiles = siblingSubs.map(function(s) {
-    return tile('image', ov('**' + s.toUpperCase() + '**'), 'Cross Nav Tile zu Sub Page ' + s + '.', { linkUrl: linkTo(s) });
+    return tile('image', ov('**' + s.toUpperCase() + '**'), 'Cross Nav Tile zu Sub Page ' + s + '.', { linkUrl: linkTo(s), imageRef: 'sub-' + slugifyRef(s) + '-lifestyle' });
   });
 
   var sections = [
@@ -569,12 +624,12 @@ function buildSalePage() {
     ], 'hero.fullWidthHero'),
 
     section('2s-4grid', [
-      tile('image', ov('Sale **GARTEN**'), 'Filter Tile.', { linkUrl: linkTo('Garten') }),
-      tile('image', ov('Sale **MÖBEL**'), 'Filter Tile.', { linkUrl: linkTo('Möbel') }),
-      tile('image', ov('Sale **FREIZEIT**'), 'Filter Tile.', { linkUrl: linkTo('Freizeit') }),
-      tile('image', ov('Sale **HEIMWERKEN**'), 'Filter Tile.', { linkUrl: linkTo('Heimwerken') }),
-      tile('image', ov('Sale **HAUSHALT**'), 'Filter Tile.', { linkUrl: linkTo('Haushalt') }),
-      tile('image', ov('Sale **TIERBEDARF**'), 'Filter Tile.', { linkUrl: linkTo('Tierbedarf') }),
+      tile('image', ov('Sale **GARTEN**'), 'Filter Tile, gleiches Lifestyle wie Home Kategorie Tile.', { linkUrl: linkTo('Garten'), imageRef: 'cat-garten-lifestyle' }),
+      tile('image', ov('Sale **MÖBEL**'), 'Filter Tile, gleiches Lifestyle wie Home Kategorie Tile.', { linkUrl: linkTo('Möbel'), imageRef: 'cat-moebel-lifestyle' }),
+      tile('image', ov('Sale **FREIZEIT**'), 'Filter Tile, gleiches Lifestyle wie Home Kategorie Tile.', { linkUrl: linkTo('Freizeit'), imageRef: 'cat-freizeit-lifestyle' }),
+      tile('image', ov('Sale **HEIMWERKEN**'), 'Filter Tile, gleiches Lifestyle wie Home Kategorie Tile.', { linkUrl: linkTo('Heimwerken'), imageRef: 'cat-heimwerken-lifestyle' }),
+      tile('image', ov('Sale **HAUSHALT**'), 'Filter Tile, gleiches Lifestyle wie Home Kategorie Tile.', { linkUrl: linkTo('Haushalt'), imageRef: 'cat-haushalt-lifestyle' }),
+      tile('image', ov('Sale **TIERBEDARF**'), 'Filter Tile, gleiches Lifestyle wie Home Kategorie Tile.', { linkUrl: linkTo('Tierbedarf'), imageRef: 'cat-tierbedarf-lifestyle' }),
     ], 'categoryNav.grid6tiles'),
 
     section('1', [
