@@ -542,6 +542,25 @@ Faustregel: lohnt sich der größere Bildplatz für das Bild was dort steht? Wen
 | 3 USPs Mix aus Bild und Text | `vh-w2s` (1 Wide plus 2 Squares) |
 | 2 USPs gleichgewichtet | `std-2equal` |
 
+### Tile Anzahl ist Designentscheidung, nicht Inhaltszählung
+
+Wenn du n Aussagen treffen willst, heißt das **nicht zwangsläufig n Tiles**. Es gibt drei strukturelle Optionen, alle gleichberechtigt:
+
+1. **n Tiles in einer Grid Section** (vh-4square, 2x2wide, 4x2grid). Sinnvoll wenn jede Aussage einen eigenen Eye Catcher braucht und einzeln klickbar sein soll (z.B. Sub Kategorie Tiles).
+2. **1 Tile als Composite** mit Layout `1` (Full Width). Das eine Bild trägt alle Aussagen visuell:
+   - Full Width Image als Infografik mit allen USPs als visuelle Bausteine (Zertifikate, Icons, Zahlen) plus Heading Text Overlay
+   - Full Width image_text mit Foto links und USPs als Bullet List rechts (max 5 Bullets)
+   - Full Width Hero mit Foto Hintergrund (Halle plus Team plus Logistik in einer Komposition) und USPs als Text Overlay
+3. **2 Tiles als Split** mit Layout `std-2equal`. Bild links, Text mit Bullet List rechts. Klassischer Brand Story Block.
+
+Wähle nach **visueller Hierarchie**, nicht nach Zähl Logik. Frage dich:
+
+- Sind die Aussagen einzeln stark und brauchen jeweils einen eigenen Visual Anker? → mehrere Tiles
+- Hängen die Aussagen zusammen oder lassen sich als Komposition zeigen (z.B. eine Werkstatt Szene mit allen Werten gleichzeitig)? → ein Composite Tile
+- Ist eine Aussage dominant und die anderen sind Bullets dazu? → Split mit Bild plus Bullet List
+
+Composite Tiles sind oft eleganter wenn die Marke konsistent kommunizieren will, weil sie ein einziges Bild prägen statt vier separate Eindrücke zu erzeugen.
+
 ## JSON Endpoint Pattern
 
 Pro Marke wird ein API Endpoint im Tool deployed der das aktuelle Briefing JSON liefert. Format:

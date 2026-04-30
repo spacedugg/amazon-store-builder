@@ -639,12 +639,6 @@ function buildSalePage() {
         { asins: STRUCTURED_ASINS.filter(function(a) { return a.onHomepage; }).slice(0, 12).map(function(a) { return a.asin; }) }
       ),
     ], 'products.fullWidthGrid'),
-
-    section('vh-w2s', [
-      tile('image', ov('**Warum** lohnt sich Sale'), 'Wide Bild.'),
-      tile('image', ov('**Echt** reduziert'), 'Square mit grünem Icon Kreis Stern.'),
-      tile('image', ov('**Solange Vorrat**'), 'Square mit grünem Icon Kreis Sanduhr.'),
-    ], 'features.featureWideAnd2'),
   ]);
 }
 

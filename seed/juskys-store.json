@@ -4927,69 +4927,6 @@
               "imageRef": ""
             }
           ]
-        },
-        {
-          "layoutId": "vh-w2s",
-          "module": "features.featureWideAnd2",
-          "tiles": [
-            {
-              "type": "image",
-              "textOverlay": {
-                "heading": "**Warum** lohnt sich Sale",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Wide Bild.",
-              "asins": [],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "benefit",
-              "textAlign": "left",
-              "imageRef": ""
-            },
-            {
-              "type": "image",
-              "textOverlay": {
-                "heading": "**Echt** reduziert",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Square mit grünem Icon Kreis Stern.",
-              "asins": [],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "benefit",
-              "textAlign": "left",
-              "imageRef": ""
-            },
-            {
-              "type": "image",
-              "textOverlay": {
-                "heading": "**Solange Vorrat**",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Square mit grünem Icon Kreis Sanduhr.",
-              "asins": [],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "benefit",
-              "textAlign": "left",
-              "imageRef": ""
-            }
-          ]
         }
       ]
     },
