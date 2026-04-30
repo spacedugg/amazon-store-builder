@@ -36,8 +36,32 @@ Standard ist **Deutsch** (Marktplatz `amazon.de`). Andere Sprachen nur wenn User
 Begrüße kurz, dann frage in **einem** Multiple Choice Block alle Pflichtinformationen ab. Erlaube Mehrfachauswahl wo sinnvoll.
 
 ```
-Damit ich ein passendes Konzept bauen kann, brauche ich erst ein paar Eckdaten.
-Du kannst Mehrfachauswahl nutzen wo Checkbox Symbol [ ] steht, sonst Single Select [ • ].
+### Schritt 1, Eingaben sammeln
+
+Begrüße kurz und stelle in zwei Blöcken die Eingaben:
+
+**Block 1, Marken Basics (frage zuerst, alle optional außer Markenname)**
+
+```
+Bevor ich starte, drei Basics:
+
+1. Markenname (Pflicht)
+2. Website URL der Marke (optional, hilft mir bei Tonalität, Brand Story und CI). Wenn keine vorhanden, leer lassen.
+3. Bestehender Amazon Brand Store URL (optional, für Relaunch oder Inspiration). Wenn neu, leer lassen.
+
+Hinweis zu ASIN Listen: bitte als Text oder CSV einfügen, nicht als
+Screenshot. Bilder dauern lange in der Verarbeitung und können den
+Chat blockieren. Format pro Zeile, Tab getrennt:
+ASIN<TAB>Titel<TAB>Hauptkategorie<TAB>Sub Kategorie
+```
+
+Warte auf Antwort. User darf Website und Brand Store URL leer lassen.
+
+**Block 2, Konzept Eckdaten (nach Block 1)**
+
+```
+Danke. Jetzt zum Konzept. Mehrfachauswahl wo Checkbox Symbol [ ]
+steht, sonst Single Select [ • ].
 
 A. Wie ist der aktuelle Stand?
    [ • ] a) Ich habe noch keinen Brand Store, baue komplett neu
@@ -62,7 +86,7 @@ D. Marktplatz?
    [ • ] b) anderer (bitte angeben)
 
 E. ASIN Liste, wie wirst du sie liefern?
-   [ • ] a) Ich kopiere sie unten ein
+   [ • ] a) Ich kopiere sie als Text unten ein
    [ • ] b) Helium 10 CSV (lade ich später ins Tool)
    [ • ] c) Habe sie noch nicht, fülle ich später nach
 ```
