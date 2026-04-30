@@ -727,14 +727,23 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
             </div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {displayProducts.map(function(p, pi) {
+                var amazonUrl = p.url || ('https://www.amazon.de/dp/' + p.asin);
                 return (
-                  <div key={pi} style={{ display: 'flex', alignItems: 'center', gap: 5, background: '#fff', borderRadius: 4, padding: '3px 6px', border: '1px solid #e0f2fe', maxWidth: 200 }}>
+                  <a key={pi}
+                    href={amazonUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={'Auf Amazon öffnen: ' + p.asin}
+                    style={{ display: 'flex', alignItems: 'center', gap: 5, background: '#fff', borderRadius: 4, padding: '3px 6px', border: '1px solid #e0f2fe', maxWidth: 200, textDecoration: 'none', cursor: 'pointer' }}
+                    onMouseEnter={function(e) { e.currentTarget.style.borderColor = '#0369a1'; e.currentTarget.style.boxShadow = '0 1px 4px rgba(3,105,161,.18)'; }}
+                    onMouseLeave={function(e) { e.currentTarget.style.borderColor = '#e0f2fe'; e.currentTarget.style.boxShadow = 'none'; }}
+                  >
                     <img src={p.image} alt="" style={{ width: 36, height: 36, objectFit: 'contain', borderRadius: 2, flexShrink: 0 }} />
                     <div style={{ fontSize: 9, lineHeight: 1.3, overflow: 'hidden' }}>
                       <div style={{ fontWeight: 600, color: '#1e293b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name ? p.name.slice(0, 35) : p.asin}</div>
-                      <div style={{ color: '#64748b', fontFamily: 'monospace', fontSize: 8 }}>{p.asin}</div>
+                      <div style={{ color: '#0369a1', fontFamily: 'monospace', fontSize: 8 }}>{p.asin} &#8599;</div>
                     </div>
-                  </div>
+                  </a>
                 );
               })}
               {moreCount > 0 && (
