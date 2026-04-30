@@ -80,7 +80,7 @@ function fileUpload(label, value, onSet, onRemove, uiLang) {
   );
 }
 
-export default function PropertiesPanel({ tile, onChange, products, viewMode, uiLang, layoutType, heroBanner, onHeroBannerChange }) {
+export default function PropertiesPanel({ tile, onChange, products, viewMode, uiLang, layoutType, pages, heroBanner, onHeroBannerChange }) {
   // ─── HERO BANNER MODE ───
   if (heroBanner) {
     var hPage = heroBanner;
@@ -418,11 +418,17 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
             <label className="label">Link to Subpage</label>
             <input value={tile.linkUrl || ''} onChange={function(e) { u('linkUrl', e.target.value.trim()); }}
               className="input input-mono" placeholder="/page-id (e.g. /cat-0)" />
-            {tile.linkUrl && (
-              <div style={{ fontSize: 10, color: '#7c3aed', marginTop: 2 }}>
-                This tile links to subpage: {tile.linkUrl}
-              </div>
-            )}
+            {tile.linkUrl && (function() {
+              var pageId = tile.linkUrl.replace(/^\//, '');
+              var match = (pages || []).find(function(p) { return p.id === pageId; });
+              var label = match ? match.name : tile.linkUrl;
+              return (
+                <div style={{ fontSize: 10, color: '#7c3aed', marginTop: 2 }}>
+                  Verlinkt auf Subpage: <b>{label}</b>
+                  {match && <span style={{ color: '#94a3b8', fontFamily: 'monospace', marginLeft: 6 }}>({tile.linkUrl})</span>}
+                </div>
+              );
+            })()}
           </div>
 
           {/* Reference / Example Images for designer */}
