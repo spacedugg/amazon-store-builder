@@ -131,7 +131,7 @@ export function tile(type, overlay, brief, opts) {
 export function section(layoutId, tiles, module) {
   var sectionDefault = '';
   if (module) {
-    if (module.indexOf('hero') === 0) sectionDefault = 'store_hero';
+    if (module.indexOf('hero') === 0) sectionDefault = 'lifestyle'; // hero in Page Section, NICHT der Store Header Banner
     else if (module.indexOf('features') === 0) sectionDefault = 'benefit';
     else if (module.indexOf('lifestyle') === 0) sectionDefault = 'lifestyle';
     else if (module.indexOf('trust') === 0) sectionDefault = 'lifestyle';
@@ -156,11 +156,17 @@ export function section(layoutId, tiles, module) {
 
 // Page Factory. parentName ist der Name der Eltern Page für Subpages.
 // Wird im Post Processing auf die echte Page ID gemappt.
-export function page(name, sections, parentName) {
+//
+// heroBanner: { brief, textOverlay } für das Banner über der Menüleiste.
+// Wenn nicht angegeben, wird ein generisches Banner Briefing erzeugt.
+export function page(name, sections, parentName, heroBanner) {
+  var hb = heroBanner || {};
   return {
     id: uid(),
     name: name,
     parentName: parentName || null,
+    heroBannerBrief: hb.brief || ('Store Hero Banner für Page ' + name + '. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.'),
+    heroBannerTextOverlay: hb.textOverlay || '',
     sections: sections,
   };
 }
@@ -168,6 +174,14 @@ export function page(name, sections, parentName) {
 // linkUrl Helper für interne Page Links
 export function linkTo(pageName) {
   return 'page:' + pageName;
+}
+
+// Trenner Tile, Bild mit Text drauf, fungiert als Section Header oder
+// Kategorie Überschrift. ImageCategory 'text_image' damit der Designer
+// klar weiß: das ist ein Trenner Bild, nicht ein Hero. Heading meist
+// genug, keine Subheading.
+export function dividerTile(heading, brief) {
+  return tile('image', ov(heading), brief, { imageCategory: 'text_image' });
 }
 
 // ─── TOP LEVEL FELDER ──────────────────────────────────────
@@ -212,15 +226,15 @@ function buildHomePage() {
 
     // 4, Trenner
     section('1', [
-      tile('image', ov('Räume, die **zusammen** passen'), 'Trenner Textbild. Stoff Makro im Hintergrund.'),
-    ], 'hero.fullWidthHero'),
+      dividerTile('Räume, die **zusammen** passen', 'Trenner Textbild. Stoff Makro im Hintergrund.'),
+    ], 'lifestyle.fullWidthLifestyle'),
 
-    // 5, Shoppable Wohnzimmer
+    // 5, Shoppable Wohnzimmer (komplementäre Produkte aus 3 verschiedenen Subs)
     section('1', [
       tile('shoppable_image',
-        ov('Wohnzimmer, **komplett** gedacht', 'Sofa, Sessel, Beistelltisch, Lampe, Teppich'),
-        'Shoppable Bild Wohnzimmer. 5 Hotspots auf Sofa, Sessel, Beistelltisch, Lampe, Teppich.',
-        { asins: topAsinsBySub('Möbel', 'Sofas', 1).concat(topAsinsBySub('Möbel', 'Wohnmöbel', 2), topAsinsBySub('Möbel', 'Boxspringbetten', 1), topAsinsBySub('Möbel', 'Schlafkomfort', 1)) }
+        ov('Wohnzimmer, **komplett** gedacht', 'Sofa, Beistelltisch, Akzente'),
+        'Shoppable Bild Wohnzimmer. 3 Hotspots auf Sofa als Hauptmotiv, Beistelltisch und Schlafkomfort Akzent. Komplementäre Produkte, keine konkurrierenden Sofas.',
+        { asins: topAsinsBySub('Möbel', 'Sofas', 1).concat(topAsinsBySub('Möbel', 'Wohnmöbel', 1), topAsinsBySub('Möbel', 'Schlafkomfort', 1)) }
       ),
     ], 'products.shoppableFullWidth'),
 
@@ -235,15 +249,15 @@ function buildHomePage() {
 
     // 7, Trenner Garten
     section('1', [
-      tile('image', ov('Die **Saison** beginnt zuhause'), 'Trenner Textbild. Rattan oder Polyrattan Makro im Hintergrund.'),
-    ], 'hero.fullWidthHero'),
+      dividerTile('Die **Saison** beginnt zuhause', 'Trenner Textbild. Rattan oder Polyrattan Makro im Hintergrund.'),
+    ], 'lifestyle.fullWidthLifestyle'),
 
-    // 8, Shoppable Garten
+    // 8, Shoppable Garten (komplementäre Subs, keine 5 verschiedenen Loungegruppen)
     section('1', [
       tile('shoppable_image',
-        ov('Lounge, fertig zum **Loslegen**', 'Loungegruppen, Tische, Schatten'),
-        'Shoppable Bild Terrasse. Loungegruppe als Hauptmotiv mit Sonnenschirm, Beistelltisch, Outdoor Kissen. 5 Hotspots auf Sofa, Sessel, Beistelltisch, Sonnenschirm, Kissen.',
-        { asins: topAsinsBySub('Garten', 'Gartenmöbel Sets', 3).concat(topAsinsBySub('Garten', 'Sonnenschutz', 1), topAsinsBySub('Garten', 'Gartentische', 1)) }
+        ov('Lounge, fertig zum **Loslegen**', 'Loungegruppe plus Schatten plus Beistelltisch'),
+        'Shoppable Bild Terrasse. 1 Loungegruppe als Hauptmotiv, dazu 1 Sonnenschirm und 1 Beistelltisch als komplementäre Produkte. Niemals mehrere Sitzecken im selben Bild.',
+        { asins: topAsinsBySub('Garten', 'Gartenmöbel Sets', 1).concat(topAsinsBySub('Garten', 'Sonnenschutz', 1), topAsinsBySub('Garten', 'Gartentische', 1)) }
       ),
     ], 'products.shoppableFullWidth'),
 
@@ -452,11 +466,8 @@ function buildSubpage(parentName, subName, headlineWord) {
   // 4, Cross Nav zu anderen Subs der gleichen Eltern
   if (crossNavTiles.length > 0) {
     sections.push(section('1', [
-      tile('image',
-        ov('Mehr aus **' + parentName + '**', 'Weitere Sub Kategorien'),
-        'Trenner Textbild Cross Nav.'
-      ),
-    ], 'hero.fullWidthHero'));
+      dividerTile('Mehr aus **' + parentName + '**', 'Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.'),
+    ], 'lifestyle.fullWidthLifestyle'));
     sections.push(section(pickLayoutForCount(crossNavTiles.length), crossNavTiles, 'categoryNav.grid' + crossNavTiles.length + 'tiles'));
   }
 
@@ -661,7 +672,7 @@ function buildHaushaltPage() {
     ], 'products.fullWidthGrid'),
 
     section('1', [
-      tile('image', ov('Stauraum, **klar** sortiert'), 'Trenner Textbild. Lager Makro.'),
+      dividerTile('Stauraum, **klar** sortiert', 'Trenner Textbild. Lager Makro.'),
     ], 'hero.fullWidthHero'),
 
     section('1', [
@@ -741,7 +752,7 @@ function buildHeimwerkenPage() {
     ], 'products.fullWidthGrid'),
 
     section('1', [
-      tile('image', ov('Wärme, **wenn** es kalt wird'), 'Trenner Textbild. Holzfeuer Makro.'),
+      dividerTile('Wärme, **wenn** es kalt wird', 'Trenner Textbild. Holzfeuer Makro.'),
     ], 'hero.fullWidthHero'),
 
     section('1', [
@@ -906,7 +917,7 @@ function buildMoebelPage() {
 
     // Trenner Schlafen
     section('1', [
-      tile('image', ov('Guter Schlaf ist **kein** Zufall'), 'Trenner Textbild. Leinen oder Bettwäsche Makro.'),
+      dividerTile('Guter Schlaf ist **kein** Zufall', 'Trenner Textbild. Leinen oder Bettwäsche Makro.'),
     ], 'hero.fullWidthHero'),
 
     // Shoppable Schlafzimmer
@@ -1014,7 +1025,7 @@ function buildGartenPage() {
 
     // Trenner kleinere Flächen
     section('1', [
-      tile('image', ov('Auch **kleinere** Flächen'), 'Trenner Textbild. Pflanzen oder Balkonszene Makro.'),
+      dividerTile('Auch **kleinere** Flächen', 'Trenner Textbild. Pflanzen oder Balkonszene Makro.'),
     ], 'hero.fullWidthHero'),
 
     // Shoppable Balkon

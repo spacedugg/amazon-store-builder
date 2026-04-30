@@ -251,14 +251,86 @@ Jeder image, image_text und shoppable_image Tile muss eine `imageCategory` haben
 
 | Image Category | Wann |
 |----------------|------|
-| `store_hero` | Hero Tiles auf Page Top |
+| `store_hero` | **NUR** für das Banner über der Menüleiste (Page Header Banner, Felder `page.heroBanner` / `page.heroBannerMobile`). Niemals für Hero Tiles innerhalb einer Page Section. |
 | `benefit` | USP / Feature Tiles mit Icon plus Label |
 | `product` | Kategorie Navigator Tiles, freigestelltes Produkt auf hellem Grund |
-| `lifestyle` | Shoppable Tiles, Lifestyle Trenner, Brand Story Bilder |
+| `lifestyle` | Hero Tiles auf Pages, Shoppable Tiles, Lifestyle Trenner, Brand Story Bilder, Raum oder Anwendungsszenen |
 | `text_image` | Text plus Bild Kombination, Trenner mit Claim |
 | `creative` | Footer Tiles, Cross Links, sonstige kreative Kompositionen |
 
-Nie Image Tile ohne Category liefern.
+Nie Image Tile ohne Category liefern. Nie `store_hero` als Tile imageCategory.
+
+### Trenner Tiles (Section Header, Kategorie Überschrift)
+
+Wenn ein Tile als visueller Trenner zwischen Sections dient (z.B.
+"Mehr aus Garten" als Kategorie Überschrift vor dem Cross Nav Grid,
+oder "Guter Schlaf ist kein Zufall" als Section Trenner):
+
+- Tile Type: `image`
+- imageCategory: **`text_image`** (NICHT `store_hero`, NICHT `lifestyle`)
+- module Reference: `lifestyle.fullWidthLifestyle` (kein `hero.*`)
+- textOverlay: nur `heading` mit grünem Highlight Wort, **keine** Subheading
+- brief: kurze Beschreibung der Bildidee (Material Makro, Lifestyle Szene als Hintergrund)
+
+Beispiel:
+```yaml
+tiles:
+  - type: image
+    imageCategory: text_image
+    textOverlay:
+      heading: "Mehr aus **Garten**"
+      subheading: ""
+    brief: "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid."
+```
+
+Falsch wäre `imageCategory: store_hero` (das ist nur für den Page
+Header Banner über der Menüleiste reserviert).
+
+### Header Banner Briefing pro Page
+
+Über der Page Menüleiste sitzt das Store Hero Banner (`page.heroBanner` Desktop, `page.heroBannerMobile` Mobile). Das ist **kein** Tile sondern ein eigenes Page Feld.
+
+Pro Page muss befüllt werden:
+
+```yaml
+heroBannerBrief: "Beschreibung was das Banner zeigt, z.B. Lifestyle Komposition Wohnzimmer"
+heroBannerTextOverlay: "Optionaler Slogan auf dem Banner"
+```
+
+Dimensions sind fest:
+- Desktop: 3000 x 600 px
+- Mobile: 1680 x 900 px
+
+Diese sind unterschiedlich (Aspect Ratio 5:1 vs 1.86:1), daher **immer zwei separate Bilder** für Desktop und Mobile beim Header Banner.
+
+### Shoppable Image, komplementäre Produkte
+
+Auf einem Shoppable Image (max 5 Hotspots) sollten die ASINs **komplementär** sein, nicht **substitutiv**.
+
+- **Komplementär**: zusammen nutzbar in einer Szene (Sofa plus Tisch plus Lampe)
+- **Substitutiv**: alternative Optionen (5 verschiedene Sofas)
+
+Heuristik:
+- Maximal **1 ASIN pro Sub Kategorie** auf einem Shoppable
+- Stattdessen mehrere komplementäre Subs kombinieren
+- Default Anzahl pro Shoppable: **3 ASINs**, max 5
+
+Beispiel **Garten Lounge Shoppable**:
+- 1 ASIN aus Gartenmöbel Sets (die Loungegruppe selbst, Hauptmotiv)
+- 1 ASIN aus Sonnenschutz (Sonnenschirm)
+- 1 ASIN aus Gartentische (Beistelltisch)
+
+Beispiel **Wohnzimmer Shoppable**:
+- 1 ASIN aus Sofas
+- 1 ASIN aus Wohnmöbel (Beistelltisch)
+- 1 ASIN aus Schlafkomfort (Kissen)
+- optional 1 ASIN aus Massagesessel
+
+**Falsch wäre**:
+- 5 ASINs aus Gartenmöbel Sets (alles verschiedene Loungegruppen)
+- 4 ASINs aus Sofas plus 1 ASIN aus Wohnmöbel (zu Sofa-lastig)
+
+Wenn nur eine Sub Kategorie thematisch passt (z.B. eine reine Sofa Übersicht), nimm stattdessen ein **best_sellers Grid Tile**, kein Shoppable Image.
 
 ### Subpage Hero Headlines
 

@@ -919,6 +919,8 @@
   "pages": [
     {
       "name": "Home",
+      "heroBannerBrief": "Store Hero Banner für Page Home. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -939,7 +941,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -1102,7 +1104,7 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
@@ -1119,7 +1121,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -1132,17 +1134,15 @@
               "type": "shoppable_image",
               "textOverlay": {
                 "heading": "Wohnzimmer, **komplett** gedacht",
-                "subheading": "Sofa, Sessel, Beistelltisch, Lampe, Teppich",
+                "subheading": "Sofa, Beistelltisch, Akzente",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Shoppable Bild Wohnzimmer. 5 Hotspots auf Sofa, Sessel, Beistelltisch, Lampe, Teppich.",
+              "brief": "Shoppable Bild Wohnzimmer. 3 Hotspots auf Sofa als Hauptmotiv, Beistelltisch und Schlafkomfort Akzent. Komplementäre Produkte, keine konkurrierenden Sofas.",
               "asins": [
                 "B0CX1SJ9R1",
                 "B0GX1BYJXM",
-                "B0DXFLWC1L",
-                "B07QWXMYV9",
                 "B0D31GY3G4"
               ],
               "hotspots": [],
@@ -1187,7 +1187,7 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
@@ -1204,7 +1204,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -1217,16 +1217,14 @@
               "type": "shoppable_image",
               "textOverlay": {
                 "heading": "Lounge, fertig zum **Loslegen**",
-                "subheading": "Loungegruppen, Tische, Schatten",
+                "subheading": "Loungegruppe plus Schatten plus Beistelltisch",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Shoppable Bild Terrasse. Loungegruppe als Hauptmotiv mit Sonnenschirm, Beistelltisch, Outdoor Kissen. 5 Hotspots auf Sofa, Sessel, Beistelltisch, Sonnenschirm, Kissen.",
+              "brief": "Shoppable Bild Terrasse. 1 Loungegruppe als Hauptmotiv, dazu 1 Sonnenschirm und 1 Beistelltisch als komplementäre Produkte. Niemals mehrere Sitzecken im selben Bild.",
               "asins": [
                 "B084JQYGYM",
-                "B0CR1H8BTF",
-                "B0F54DJW2F",
                 "B07P7PRG78",
                 "B0CSZ14149"
               ],
@@ -1423,6 +1421,8 @@
     },
     {
       "name": "Bestseller",
+      "heroBannerBrief": "Store Hero Banner für Page Bestseller. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -1443,7 +1443,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -1884,6 +1884,8 @@
     },
     {
       "name": "Garten",
+      "heroBannerBrief": "Store Hero Banner für Page Garten. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -1904,7 +1906,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -2255,7 +2257,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -2496,6 +2498,8 @@
     },
     {
       "name": "Möbel",
+      "heroBannerBrief": "Store Hero Banner für Page Möbel. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -2516,7 +2520,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -2831,7 +2835,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -3069,6 +3073,8 @@
     },
     {
       "name": "Freizeit",
+      "heroBannerBrief": "Store Hero Banner für Page Freizeit. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -3089,7 +3095,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -3483,6 +3489,8 @@
     },
     {
       "name": "Heimwerken",
+      "heroBannerBrief": "Store Hero Banner für Page Heimwerken. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -3503,7 +3511,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -3686,7 +3694,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -3848,6 +3856,8 @@
     },
     {
       "name": "Haushalt",
+      "heroBannerBrief": "Store Hero Banner für Page Haushalt. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -3868,7 +3878,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -4100,7 +4110,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -4315,6 +4325,8 @@
     },
     {
       "name": "Tierbedarf",
+      "heroBannerBrief": "Store Hero Banner für Page Tierbedarf. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -4335,7 +4347,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -4579,6 +4591,8 @@
     },
     {
       "name": "Sale",
+      "heroBannerBrief": "Store Hero Banner für Page Sale. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -4599,7 +4613,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -4819,6 +4833,8 @@
     },
     {
       "name": "Über Uns",
+      "heroBannerBrief": "Store Hero Banner für Page Über Uns. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -4839,7 +4855,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -5107,6 +5123,8 @@
     {
       "name": "Gartenmöbel Sets",
       "parentName": "Garten",
+      "heroBannerBrief": "Store Hero Banner für Page Gartenmöbel Sets. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -5127,7 +5145,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -5207,24 +5225,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Garten**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -5408,6 +5426,8 @@
     {
       "name": "Gartenaufbewahrung",
       "parentName": "Garten",
+      "heroBannerBrief": "Store Hero Banner für Page Gartenaufbewahrung. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -5428,7 +5448,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -5493,24 +5513,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Garten**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -5694,6 +5714,8 @@
     {
       "name": "Gartenbedarf",
       "parentName": "Garten",
+      "heroBannerBrief": "Store Hero Banner für Page Gartenbedarf. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -5714,7 +5736,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -5790,24 +5812,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Garten**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -5991,6 +6013,8 @@
     {
       "name": "Sonnenschutz",
       "parentName": "Garten",
+      "heroBannerBrief": "Store Hero Banner für Page Sonnenschutz. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -6011,7 +6035,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -6078,24 +6102,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Garten**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -6279,6 +6303,8 @@
     {
       "name": "Gartenliegen",
       "parentName": "Garten",
+      "heroBannerBrief": "Store Hero Banner für Page Gartenliegen. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -6299,7 +6325,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -6362,24 +6388,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Garten**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -6563,6 +6589,8 @@
     {
       "name": "Gartenbänke",
       "parentName": "Garten",
+      "heroBannerBrief": "Store Hero Banner für Page Gartenbänke. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -6583,7 +6611,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -6644,24 +6672,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Garten**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -6845,6 +6873,8 @@
     {
       "name": "Gartentische",
       "parentName": "Garten",
+      "heroBannerBrief": "Store Hero Banner für Page Gartentische. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -6865,7 +6895,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -6928,24 +6958,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Garten**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -7129,6 +7159,8 @@
     {
       "name": "Bierzeltgarnituren",
       "parentName": "Garten",
+      "heroBannerBrief": "Store Hero Banner für Page Bierzeltgarnituren. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -7149,7 +7181,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -7212,24 +7244,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Garten**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -7413,6 +7445,8 @@
     {
       "name": "Hängematten",
       "parentName": "Garten",
+      "heroBannerBrief": "Store Hero Banner für Page Hängematten. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -7433,7 +7467,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -7496,24 +7530,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Garten**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -7697,6 +7731,8 @@
     {
       "name": "Überdachungen",
       "parentName": "Garten",
+      "heroBannerBrief": "Store Hero Banner für Page Überdachungen. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -7717,7 +7753,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -7786,24 +7822,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Garten**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -7987,6 +8023,8 @@
     {
       "name": "Poolbedarf",
       "parentName": "Garten",
+      "heroBannerBrief": "Store Hero Banner für Page Poolbedarf. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -8007,7 +8045,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -8072,24 +8110,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Garten**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -8273,6 +8311,8 @@
     {
       "name": "Gewächshäuser",
       "parentName": "Garten",
+      "heroBannerBrief": "Store Hero Banner für Page Gewächshäuser. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -8293,7 +8333,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -8352,24 +8392,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Garten**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -8553,6 +8593,8 @@
     {
       "name": "Sofas",
       "parentName": "Möbel",
+      "heroBannerBrief": "Store Hero Banner für Page Sofas. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -8573,7 +8615,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -8632,24 +8674,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Möbel**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -8833,6 +8875,8 @@
     {
       "name": "Polsterbetten",
       "parentName": "Möbel",
+      "heroBannerBrief": "Store Hero Banner für Page Polsterbetten. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -8853,7 +8897,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -8916,24 +8960,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Möbel**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -9117,6 +9161,8 @@
     {
       "name": "Boxspringbetten",
       "parentName": "Möbel",
+      "heroBannerBrief": "Store Hero Banner für Page Boxspringbetten. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -9137,7 +9183,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -9198,24 +9244,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Möbel**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -9399,6 +9445,8 @@
     {
       "name": "Metallbetten",
       "parentName": "Möbel",
+      "heroBannerBrief": "Store Hero Banner für Page Metallbetten. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -9419,7 +9467,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -9480,24 +9528,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Möbel**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -9681,6 +9729,8 @@
     {
       "name": "Kinderbetten",
       "parentName": "Möbel",
+      "heroBannerBrief": "Store Hero Banner für Page Kinderbetten. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -9701,7 +9751,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -9764,24 +9814,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Möbel**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -9965,6 +10015,8 @@
     {
       "name": "Wohnmöbel",
       "parentName": "Möbel",
+      "heroBannerBrief": "Store Hero Banner für Page Wohnmöbel. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -9985,7 +10037,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -10048,24 +10100,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Möbel**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -10249,6 +10301,8 @@
     {
       "name": "Massagesessel",
       "parentName": "Möbel",
+      "heroBannerBrief": "Store Hero Banner für Page Massagesessel. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -10269,7 +10323,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -10328,24 +10382,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Möbel**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -10529,6 +10583,8 @@
     {
       "name": "Büromöbel",
       "parentName": "Möbel",
+      "heroBannerBrief": "Store Hero Banner für Page Büromöbel. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -10549,7 +10605,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -10614,24 +10670,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Möbel**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -10815,6 +10871,8 @@
     {
       "name": "Matratzen",
       "parentName": "Möbel",
+      "heroBannerBrief": "Store Hero Banner für Page Matratzen. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -10835,7 +10893,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -10896,24 +10954,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Möbel**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -11097,6 +11155,8 @@
     {
       "name": "Schlafkomfort",
       "parentName": "Möbel",
+      "heroBannerBrief": "Store Hero Banner für Page Schlafkomfort. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -11117,7 +11177,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -11182,24 +11242,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Möbel**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -11383,6 +11443,8 @@
     {
       "name": "Schminktische",
       "parentName": "Möbel",
+      "heroBannerBrief": "Store Hero Banner für Page Schminktische. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -11403,7 +11465,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -11470,24 +11532,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Möbel**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -11671,6 +11733,8 @@
     {
       "name": "Badausstattung",
       "parentName": "Möbel",
+      "heroBannerBrief": "Store Hero Banner für Page Badausstattung. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -11691,7 +11755,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -11754,24 +11818,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Möbel**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -11955,6 +12019,8 @@
     {
       "name": "Camping",
       "parentName": "Freizeit",
+      "heroBannerBrief": "Store Hero Banner für Page Camping. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -11975,7 +12041,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -12042,24 +12108,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Freizeit**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -12153,6 +12219,8 @@
     {
       "name": "Koffersets",
       "parentName": "Freizeit",
+      "heroBannerBrief": "Store Hero Banner für Page Koffersets. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -12173,7 +12241,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -12244,24 +12312,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Freizeit**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -12355,6 +12423,8 @@
     {
       "name": "Dachzelte",
       "parentName": "Freizeit",
+      "heroBannerBrief": "Store Hero Banner für Page Dachzelte. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -12375,7 +12445,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -12434,24 +12504,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Freizeit**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -12545,6 +12615,8 @@
     {
       "name": "Sport",
       "parentName": "Freizeit",
+      "heroBannerBrief": "Store Hero Banner für Page Sport. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -12565,7 +12637,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -12630,24 +12702,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Freizeit**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -12741,6 +12813,8 @@
     {
       "name": "Werkzeug",
       "parentName": "Heimwerken",
+      "heroBannerBrief": "Store Hero Banner für Page Werkzeug. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -12761,7 +12835,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -12824,24 +12898,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Heimwerken**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -12935,6 +13009,8 @@
     {
       "name": "Sackkarren",
       "parentName": "Heimwerken",
+      "heroBannerBrief": "Store Hero Banner für Page Sackkarren. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -12955,7 +13031,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -13018,24 +13094,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Heimwerken**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -13129,6 +13205,8 @@
     {
       "name": "Multifunktionsleitern",
       "parentName": "Heimwerken",
+      "heroBannerBrief": "Store Hero Banner für Page Multifunktionsleitern. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -13149,7 +13227,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -13208,24 +13286,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Heimwerken**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -13319,6 +13397,8 @@
     {
       "name": "Elektrokamine",
       "parentName": "Heimwerken",
+      "heroBannerBrief": "Store Hero Banner für Page Elektrokamine. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -13339,7 +13419,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -13408,24 +13488,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Heimwerken**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -13519,6 +13599,8 @@
     {
       "name": "Schwerlastregale",
       "parentName": "Haushalt",
+      "heroBannerBrief": "Store Hero Banner für Page Schwerlastregale. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -13539,7 +13621,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -13613,24 +13695,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Haushalt**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -13796,6 +13878,8 @@
     {
       "name": "Aufbewahrung",
       "parentName": "Haushalt",
+      "heroBannerBrief": "Store Hero Banner für Page Aufbewahrung. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -13816,7 +13900,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -13877,24 +13961,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Haushalt**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -14060,6 +14144,8 @@
     {
       "name": "Küchengeräte",
       "parentName": "Haushalt",
+      "heroBannerBrief": "Store Hero Banner für Page Küchengeräte. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -14080,7 +14166,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -14139,24 +14225,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Haushalt**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -14322,6 +14408,8 @@
     {
       "name": "Mülleimer",
       "parentName": "Haushalt",
+      "heroBannerBrief": "Store Hero Banner für Page Mülleimer. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -14342,7 +14430,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -14401,24 +14489,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Haushalt**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -14584,6 +14672,8 @@
     {
       "name": "Eiswürfelmaschinen",
       "parentName": "Haushalt",
+      "heroBannerBrief": "Store Hero Banner für Page Eiswürfelmaschinen. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -14604,7 +14694,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -14663,24 +14753,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Haushalt**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -14846,6 +14936,8 @@
     {
       "name": "Heizgeräte",
       "parentName": "Haushalt",
+      "heroBannerBrief": "Store Hero Banner für Page Heizgeräte. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -14866,7 +14958,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -14927,24 +15019,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Haushalt**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -15110,6 +15202,8 @@
     {
       "name": "Alltagshilfen",
       "parentName": "Haushalt",
+      "heroBannerBrief": "Store Hero Banner für Page Alltagshilfen. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -15130,7 +15224,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -15193,24 +15287,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Haushalt**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -15376,6 +15470,8 @@
     {
       "name": "Kinderbedarf",
       "parentName": "Haushalt",
+      "heroBannerBrief": "Store Hero Banner für Page Kinderbedarf. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -15396,7 +15492,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -15470,24 +15566,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Haushalt**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -15653,6 +15749,8 @@
     {
       "name": "Hundebedarf",
       "parentName": "Tierbedarf",
+      "heroBannerBrief": "Store Hero Banner für Page Hundebedarf. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -15673,7 +15771,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -15738,24 +15836,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Tierbedarf**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
@@ -15813,6 +15911,8 @@
     {
       "name": "Freilaufgehege",
       "parentName": "Tierbedarf",
+      "heroBannerBrief": "Store Hero Banner für Page Freilaufgehege. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
       "sections": [
         {
           "layoutId": "1",
@@ -15833,7 +15933,7 @@
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "lifestyle",
               "textAlign": "left"
             }
           ]
@@ -15892,24 +15992,24 @@
         },
         {
           "layoutId": "1",
-          "module": "hero.fullWidthHero",
+          "module": "lifestyle.fullWidthLifestyle",
           "tiles": [
             {
               "type": "image",
               "textOverlay": {
                 "heading": "Mehr aus **Tierbedarf**",
-                "subheading": "Weitere Sub Kategorien",
+                "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Trenner Textbild Cross Nav.",
+              "brief": "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
-              "imageCategory": "store_hero",
+              "imageCategory": "text_image",
               "textAlign": "left"
             }
           ]
