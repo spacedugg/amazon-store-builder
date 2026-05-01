@@ -479,6 +479,33 @@ export default function App() {
     });
   };
 
+  // Tiles innerhalb einer Section per Drag and Drop tauschen.
+  // fromIdx und toIdx sind die Tile Positionen innerhalb der Section.
+  var swapTiles = function(sectionId, fromIdx, toIdx) {
+    if (!page || fromIdx === toIdx) return;
+    setStoreWithUndo(function(s) {
+      return Object.assign({}, s, {
+        pages: s.pages.map(function(pg) {
+          if (pg.id !== page.id) return pg;
+          return Object.assign({}, pg, {
+            sections: pg.sections.map(function(sec) {
+              if (sec.id !== sectionId) return sec;
+              var tiles = sec.tiles.slice();
+              if (fromIdx < 0 || toIdx < 0 || fromIdx >= tiles.length || toIdx >= tiles.length) return sec;
+              var item = tiles.splice(fromIdx, 1)[0];
+              tiles.splice(toIdx, 0, item);
+              return Object.assign({}, sec, { tiles: tiles });
+            }),
+          });
+        }),
+      });
+    });
+    // Selection nach Drag mitnehmen
+    if (sel && sel.sid === sectionId && sel.ti === fromIdx) {
+      setSel({ sid: sectionId, ti: toIdx });
+    }
+  };
+
   var changeLayout = function(sectionId, layoutId) {
     var layout = findLayout(layoutId);
     if (!layout) return;
@@ -1154,6 +1181,7 @@ export default function App() {
           onCopySection={copySection}
           onPasteSection={clipboardSection ? pasteSection : null}
           onMoveSection={moveSection}
+          onSwapTiles={swapTiles}
           onChangeLayout={changeLayout}
           onApplySectionImageCategory={applySectionImageCategory}
           viewMode={viewMode}
