@@ -287,9 +287,32 @@ Möbel > Sofas → "Komfort fürs Wohnzimmer"
 Welche willst du ändern? (Liste pro Sub angeben oder "alle ok")
 ```
 
-Erst nach Bestätigung der Headlines geht es zum Schritt 5.
+Erst nach Bestätigung der Headlines geht es zu Schritt 5 (Self Check) und dann Schritt 6 (Output).
 
-### Schritt 5, Briefing JSON ausgeben
+### Schritt 5, Pre-Output Self Check (Pflicht, niemals überspringen)
+
+Bevor du das Briefing JSON ausgibst, gehe das Konzept als Self Check durch und korrigiere stillschweigend was gegen die harten Regeln verstößt. Output darf keine bekannten Fehler enthalten.
+
+**Self Check Algorithmus**:
+
+1. **ASIN Grid Stack Check**. Für jede Page durchlaufe alle Section Paare in Reihenfolge. Module mit ASIN Grid sind: `product_grid`, `best_sellers`, `recommended`, `deals`. Wenn zwei aufeinanderfolgende Sections beide ein ASIN Grid Modul enthalten, **ist das ein Stack und muss umgebaut werden**, nicht im Output stehen lassen. Drei Fix Optionen, in dieser Priorität:
+   - **Option A, konsolidieren**. Wenn beide Grids überlappende ASINs zeigen (z.B. Bestseller Top 8 plus Vollkatalog der dieselben ASINs enthält), streiche das Bestseller Grid komplett. Vollkatalog reicht, sortiert nach Bestseller Rang.
+   - **Option B, zweites Grid zu Showcase Layout konvertieren**. Wandle das zweite ASIN Grid in eine `lg-2stack` Section um mit drei `image` Tiles, jeweils mit `linkAsin` auf einen der Top 3 ASINs. Erstes Tile als Lifestyle Bild, zweites und drittes als freigestellte Produkt Bilder. So bleibt der Bestseller Effekt sichtbar ohne ASIN Grid Modul.
+   - **Option C, Trenner Section dazwischen einfügen**. Wenn beide Grids inhaltlich verschieden sind und beide bleiben sollen, füge eine `dividerTile` Section (Layout `1`, Trenner Textbild) zwischen die beiden ein, die das nächste Thema benennt.
+
+2. **Page Level Repetition Check**. Pro Page jede Marken Fakt Phrase (z.B. "Inhabergeführt seit 2005", "Aus Deutschland", "Hersteller besucht") in Hero Subheadings, Brand Story Bodies, USP Tile Headings und Cross Link Bannern aufzählen. Wenn ein Fakt mehr als einmal auftaucht, an allen Stellen außer einer (die kompakteste, meist USP Tile) umformulieren oder streichen.
+
+3. **Headline Bezugsstärke Check**. Pro Hero Headline prüfen: Wenn ich den Markennamen oder Kategorie Namen aus der Headline streiche, ergibt sie noch Sinn? Wenn ja, Headline neu schreiben mit klarem Page Bezug.
+
+4. **Tile Type Whitelist Check**. Kein Tile darf `text` oder `image_text` als Type haben. Brand Story Tiles sind `image` mit `imageCategory: text_image`.
+
+5. **Versand und Lieferung Check**. Keine Headline, Subheading, Body oder Bullet darf "Versandkostenfrei", "Schnelle Lieferung", "Express", "Truck Icon" enthalten.
+
+6. **Lifestyle Tile Verlinkung Check**. Jedes `image` Tile das im Brief konkrete Produkte erwähnt muss `linkAsin`, `linkUrl` oder als `shoppable_image` mit Hotspots ausgegeben werden. Sonst Verlinkung ergänzen.
+
+**Wichtig**: Der Self Check ist still. Du erwähnst die Korrekturen nicht im Output, du gibst direkt das saubere JSON aus. Der User soll nichts von dem Check sehen, das Konzept landet **fertig korrekt** im Tool.
+
+### Schritt 6, Briefing JSON ausgeben
 
 Output ist ein einzelner Code Block mit `json` Sprache, der direkt in das Brand Store Builder Tool importiert werden kann. Format siehe unten. Die im Schritt 4 abgestimmten Headlines sind als Hero Headlines pro Page eingebaut. Andere Headlines (Trenner, Bestseller Section, USP Tile, Cross Link) werden vom Skill nach Brand Voice generiert und folgen den Regeln aus dem Sprache Kapitel.
 
