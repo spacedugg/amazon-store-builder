@@ -486,31 +486,48 @@ function buildSubpage(parentName, subName, headlineWord) {
     return tile('image', ov('**' + s.toUpperCase() + '**'), 'Cross Nav Tile zu Sub Page ' + s + '.', { linkUrl: linkTo(s), imageRef: 'sub-' + slugifyRef(s) + '-lifestyle' });
   });
 
+  // Subpage Pattern, vermeidet 2 ASIN Grids untereinander.
+  // Hero plus Bestseller Showcase als lg-2stack Layout (3 image Tiles mit
+  // linkAsin auf Top 1 bis 3, KEIN best_sellers Modul) plus Vollkatalog
+  // Product Grid. So gibt es nur 1 ASIN Grid Modul (Vollkatalog), die
+  // Top Seller sind als verlinkte Lifestyle Tiles realisiert.
   var sections = [
     // 1, Hero
     section('1', [
       tile('image',
-        ov(heroText.heading, heroText.subheading, '', [], 'Sortiment ansehen'),
-        'Hero Bild Sub Page ' + subName + '. Freigestelltes Leitprodukt aus dieser Sub.'
+        ov(heroText.heading, heroText.subheading),
+        'Hero Bild Sub Page ' + subName + '. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.'
       ),
     ], 'hero.fullWidthHero'),
-    // 2, Bestseller
-    section('1', [
-      tile('best_sellers',
-        ov('Die beliebtesten **' + subName + '**'),
-        'Bestseller Grid in dieser Sub.',
-        { asins: subAsins.slice(0, 8) }
-      ),
-    ], 'products.fullWidthGrid'),
-    // 3, Vollkatalog
-    section('1', [
-      tile('product_grid',
-        ov('Alle **' + subName + '** Produkte'),
-        'Vollkatalog dieser Sub.',
-        { asins: subAsins }
-      ),
-    ], 'products.fullWidthGrid'),
   ];
+
+  // 2, Bestseller Showcase als Layout (nicht als best_sellers Modul).
+  // Tile 1 ist Lifestyle Bild Top Seller, Tile 2 und 3 freigestellte Produkt
+  // Bilder Top Seller 2 und 3. Alle drei via linkAsin direkt zur PDP klickbar.
+  // Nur sinnvoll bei mindestens 3 ASINs in der Sub.
+  if (subAsins.length >= 3) {
+    sections.push(section('lg-2stack', [
+      tile('image',
+        ov('Top **' + subName + '**', 'Bestseller in dieser Sub'),
+        'Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.',
+        { linkAsin: subAsins[0], imageCategory: 'lifestyle' }),
+      tile('image', ov(),
+        'Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.',
+        { linkAsin: subAsins[1], imageCategory: 'product' }),
+      tile('image', ov(),
+        'Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.',
+        { linkAsin: subAsins[2], imageCategory: 'product' }),
+    ], 'products.bestsellerShowcase'));
+  }
+
+  // 3, Vollkatalog Product Grid (das einzige ASIN Grid Modul auf der Sub Page)
+  sections.push(section('1', [
+    tile('product_grid',
+      ov('Alle **' + subName + '** Produkte'),
+      'Vollkatalog dieser Sub, sortiert nach Bestseller.',
+      { asins: subAsins }
+    ),
+  ], 'products.fullWidthGrid'));
 
   // 4, Cross Nav zu anderen Subs der gleichen Eltern
   if (crossNavTiles.length > 0) {
