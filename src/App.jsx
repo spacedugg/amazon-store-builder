@@ -18,6 +18,42 @@ import AsinOverview from './components/AsinOverview';
 
 var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, headerBannerColor: '', category: 'generic', googleDriveUrl: '' };
 
+// Synchronisiert imageRef WxH Suffixe mit den aktuellen Tile Dimensionen.
+// Wenn ein Tile nach einem Layout Wechsel andere Dimensionen hat, wird
+// der WxH Teil im imageRef neu berechnet. Solo Suffix (eigene Variante
+// nach Entkopplung) bleibt erhalten. Damit gehört das Tile danach zum
+// passenden Reuse Pool seiner aktuellen Größe oder bleibt isoliert wenn
+// keine andere Tile dieselbe Größe und Topic hat.
+function refreshImageRefs(store) {
+  if (!store || !store.pages) return store;
+  var changed = false;
+  var newPages = store.pages.map(function(pg) {
+    return Object.assign({}, pg, {
+      sections: (pg.sections || []).map(function(sec) {
+        return Object.assign({}, sec, {
+          tiles: (sec.tiles || []).map(function(t) {
+            if (!t || !t.imageRef || !t.dimensions) return t;
+            var soloMatch = String(t.imageRef).match(/^(.+?)-(\d+)x(\d+)(-solo-[a-z0-9]+)?$/);
+            if (!soloMatch) return t;
+            var stem = soloMatch[1];
+            var oldW = soloMatch[2];
+            var oldH = soloMatch[3];
+            var soloSuffix = soloMatch[4] || '';
+            var newW = String(t.dimensions.w);
+            var newH = String(t.dimensions.h);
+            if (oldW === newW && oldH === newH) return t;
+            changed = true;
+            return Object.assign({}, t, {
+              imageRef: stem + '-' + newW + 'x' + newH + soloSuffix,
+            });
+          }),
+        });
+      }),
+    });
+  });
+  return changed ? Object.assign({}, store, { pages: newPages }) : store;
+}
+
 export default function App() {
   // Check if this is a share link — render full BriefingView
   if (window.location.pathname.indexOf('/share/') === 0) {
@@ -76,7 +112,7 @@ export default function App() {
     });
     skipHistoryRef.current = true;
     var parsed = JSON.parse(prev);
-    setStore(parsed);
+    setStore(refreshImageRefs(parsed));
     setCurPage(parsed.pages && parsed.pages[0] ? parsed.pages[0].id : '');
     setSel(null);
   }, []);
@@ -91,12 +127,14 @@ export default function App() {
     });
     skipHistoryRef.current = true;
     var parsed = JSON.parse(next);
-    setStore(parsed);
+    setStore(refreshImageRefs(parsed));
     setCurPage(parsed.pages && parsed.pages[0] ? parsed.pages[0].id : '');
     setSel(null);
   }, []);
 
-  // Wrap setStore to track undo history
+  // Wrap setStore to track undo history. refreshImageRefs synchronisiert
+  // die imageRef WxH Suffixe mit den aktuellen Tile Dimensionen, damit
+  // Reuse Pools auch nach Layout Wechseln konsistent bleiben.
   var setStoreWithUndo = useCallback(function(updater) {
     setStore(function(prev) {
       var next = typeof updater === 'function' ? updater(prev) : updater;
@@ -104,7 +142,7 @@ export default function App() {
         pushUndo(prev);
       }
       skipHistoryRef.current = false;
-      return next;
+      return refreshImageRefs(next);
     });
   }, [pushUndo]);
 
@@ -558,7 +596,7 @@ export default function App() {
   var handleLoadSaved = async function(id) {
     var result = await loadStore(id);
     if (result && result.data) {
-      setStore(result.data);
+      setStore(refreshImageRefs(result.data));
       setStoreId(id);
       if (result.shareToken) setShareToken(result.shareToken);
       setCurPage(result.data.pages[0] ? result.data.pages[0].id : '');
@@ -569,7 +607,7 @@ export default function App() {
   var handleLoadAutoSave = function() {
     var data = loadAutoSave();
     if (data && data.pages && data.pages.length > 0) {
-      setStore(data);
+      setStore(refreshImageRefs(data));
       setCurPage(data.pages[0] ? data.pages[0].id : '');
       setSel(null);
     }
@@ -587,7 +625,7 @@ export default function App() {
       var result = await importStoreByShareLink(url);
       if (result.error) return result.error;
       // Load the imported store into the editor
-      setStore(result.data);
+      setStore(refreshImageRefs(result.data));
       setStoreId(result.id);
       setShareToken(result.shareToken || null);
       setCurPage(result.data.pages && result.data.pages[0] ? result.data.pages[0].id : '');
