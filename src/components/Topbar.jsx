@@ -1,4 +1,4 @@
-export default function Topbar({ store, onExport, onSave, viewMode, onToggleView, onNewStore, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef }) {
+export default function Topbar({ store, onExport, onSave, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef }) {
   return (
     <div className="topbar">
       <div className="topbar-brand">
@@ -56,6 +56,9 @@ export default function Topbar({ store, onExport, onSave, viewMode, onToggleView
             <button className="btn" onClick={onShowAsinOverview} title="ASIN Overview" style={{ fontSize: 11 }}>ASINs</button>
           )}
           <button className="btn" onClick={onShowPrice} title="Price calculator" style={{ fontSize: 11 }}>&#128176;</button>
+          {onPatchImport && (
+            <button className="btn" onClick={onPatchImport} title="Snippet einfügen, Patch JSON aus dem Chat anwenden ohne den Store neu zu importieren" style={{ fontSize: 11 }}>+ Snippet</button>
+          )}
           <button className="btn" onClick={onNewStore} title="Start a new store">New Store</button>
         </>
       )}

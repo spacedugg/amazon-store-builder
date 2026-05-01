@@ -1043,6 +1043,122 @@ Plus in `vercel.json` `functions`:
 
 Damit ist nach jedem `node seed/build-[brand]-store.mjs` plus push das aktuelle JSON unter `https://[deployment].vercel.app/api/[brand]-store` erreichbar.
 
+## Patch Mode (kleine Änderungen am bestehenden Store)
+
+Wenn der User schon einen Brand Store im Tool hat und nur **kleine Änderungen** machen will (eine Section ergänzen, eine Kachel hinzufügen, einen Text ändern, eine neue Subpage anhängen), darfst du **kein Full Store JSON** ausgeben. Sonst müsste der User neu importieren und alle bisherigen Edits gehen verloren.
+
+Stattdessen gibst du einen **Patch JSON** mit `ops` Array aus, der im Tool über den `+ Snippet` Button additiv angewendet wird.
+
+**Erkennen wann Patch Mode**: User beschreibt eine Änderung an einem bestehenden Store, z.B. "Ergänze auf Sub Page Sofas eine Section mit drei Stoffqualität Fakten", "Ändere die Hero Headline auf Garten zu X", "Füge eine neue Subpage Boxspring Premium an Möbel an". Wenn der User nicht explizit ein Vollkonzept fordert, ist Patch Mode der Default für Edits.
+
+**Pflicht: Aktuellen Store als Kontext lesen**
+
+Im Patch Mode brauchst du den aktuellen Store als Kontext, sonst kennst du Brand Voice, vorhandene Pages, vorhandene Sub Strukturen, vorhandenes Wording, Tonalität nicht und der Patch passt nicht zum Rest.
+
+User pasted den Store JSON typischerweise direkt nach dem Prompt im Chat (das Tool hat einen "Aktuellen Store kopieren" Button im Snippet Modal, das macht der User vor dem Chat). Wenn der User vergisst den Store zu liefern, **frag nach**: "Bitte schick mir den aktuellen Store JSON als Kontext rein, dann mache ich den Patch konsistent zur Brand Voice deines Stores."
+
+Aus dem Store JSON liest du:
+- `brandName`, `brandTone`, `brandStory` für Tonalität
+- Vorhandene `pages` mit Hero Headlines pro Page als Stilvorlage
+- Falls vorhanden, gewählte Brand Voice Adjektive
+- Existierende imageRef Tags um Reuse Pools im Patch konsistent fortzuführen
+
+**Dialogischer Ablauf im Patch Mode (Pflicht, identisch zum Full Store)**:
+
+1. Klärende Rückfragen: was genau soll geändert werden, an welcher Page, vor oder nach welcher Section, welcher Bereich
+2. Headline Vorschläge im Chat anbieten (3 Optionen pro neuem Hero oder neuer Section Headline), User wählt aus
+3. Layout Vorschlag plus Begründung (z.B. "vh-w2s mit 3 Tiles wäre passend für 3 Fakten USPs, oder lieber ein 2x2wide wenn die USPs Fotos kriegen sollen")
+4. Position bestätigen (vor oder nach welcher bestehenden Section, wenn unklar fragen)
+5. Self Check Schritte aus Schritt 5 auf das Resultat virtuell anwenden (ASIN Stack Check, Repetition, Headline Bezug, Tile Type Whitelist, Versand Verbot, Lifestyle Tile Verlinkung, Small Catalog Regel)
+6. Erst dann den Patch JSON ausgeben
+
+**Kein Full Store JSON, niemals**. Wenn du im Patch Mode bist gibt es nur den `ops` Block.
+
+**Patch JSON Schema**:
+
+```json
+{
+  "ops": [
+    { "op": "addPage", "page": {...}, "afterPageName": "Möbel" },
+    { "op": "addSection", "pageName": "Sofas", "after": 2, "section": {...} },
+    { "op": "addTile", "pageName": "Sofas", "sectionIdx": 1, "after": 0, "tile": {...} },
+    { "op": "modifyTile", "pageName": "Sofas", "sectionIdx": 1, "tileIdx": 0, "patch": {...} },
+    { "op": "modifySection", "pageName": "Sofas", "sectionIdx": 1, "patch": {...} },
+    { "op": "deleteSection", "pageName": "Sofas", "sectionIdx": 3 },
+    { "op": "deleteTile", "pageName": "Sofas", "sectionIdx": 1, "tileIdx": 2 }
+  ]
+}
+```
+
+**Operationen im Detail**:
+
+| Op | Pflichtfelder | Optional |
+|----|----------------|----------|
+| `addPage` | `page` (mit name, sections, optional parentName) | `afterPageName` (sonst am Ende) |
+| `addSection` | `pageName`, `section` (mit layoutId, tiles) | `after` (Index, sonst Ende), `before`, `atStart` |
+| `addTile` | `pageName`, `sectionIdx`, `tile` | `after` (Index), `atStart` |
+| `modifyTile` | `pageName`, `sectionIdx`, `tileIdx`, `patch` | |
+| `modifySection` | `pageName`, `sectionIdx`, `patch` | |
+| `deleteSection` | `pageName`, `sectionIdx` | |
+| `deleteTile` | `pageName`, `sectionIdx`, `tileIdx` | |
+
+`patch` Objekt enthält nur die Felder die geändert werden sollen, nicht das ganze Tile oder Section. Beispiel `modifyTile` patch: `{ "textOverlay": { "heading": "Neue Headline" } }` ändert nur die heading, alles andere bleibt unangetastet.
+
+**Index Konvention**: Section und Tile Indizes sind **0 basiert**, also `sectionIdx: 0` ist die erste Section, `sectionIdx: 2` die dritte. `after: 2` bedeutet "nach der dritten Section einfügen".
+
+**Beispiel Konversation**:
+
+User: "Auf Sub Page Sofas möchte ich eine Section am Ende mit drei Fakten zu Stoffqualität, Massivholz und Bezug."
+
+Du: zuerst die drei Texte mit dem User abstimmen (Schritt 4 im Workflow, Headlines im Chat).
+
+Nach Bestätigung:
+
+```json
+{
+  "ops": [
+    {
+      "op": "addSection",
+      "pageName": "Sofas",
+      "section": {
+        "module": "features.featureGrid3wide",
+        "layoutId": "vh-w2s",
+        "tiles": [
+          {
+            "type": "image",
+            "textOverlay": { "heading": "**Stoffqualität** geprüft" },
+            "brief": "Wide Bild Stoff Detail in Wohnsetting.",
+            "imageCategory": "benefit",
+            "dimensions": { "w": 3000, "h": 1500 }
+          },
+          {
+            "type": "image",
+            "textOverlay": { "heading": "**Massivholz** Rahmen" },
+            "brief": "Square Bild Holz Detail.",
+            "imageCategory": "benefit"
+          },
+          {
+            "type": "image",
+            "textOverlay": { "heading": "**Bezug** wechselbar" },
+            "brief": "Square Bild Reißverschluss Detail.",
+            "imageCategory": "benefit"
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+User kopiert den Patch JSON, klickt im Tool `+ Snippet`, fügt ein, klickt `Anwenden`. Die Section landet am Ende der Sub Page Sofas, alles andere bleibt erhalten.
+
+**Wichtig im Patch Mode**:
+
+- Niemals den ganzen Store ausgeben, nur die `ops` Liste
+- Self Check Schritte aus Schritt 5 trotzdem auf den **Resultat** anwenden, also virtuell prüfen ob die Änderung gegen Regeln verstößt (z.B. ASIN Grid Stack, Headline ohne Bezug)
+- Wenn der User mehrere Page Anpassungen mischt, alle Operationen in **einem** ops Array kombinieren
+- linkUrl Refs auf neue Pages in `page:Name` Form, das Tool resolved beim Apply auf interne UID
+
 ## Output Beispiel
 
 Nach den Rückfragen lieferst du:
