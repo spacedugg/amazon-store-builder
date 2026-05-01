@@ -933,6 +933,35 @@ Der `WxH` Suffix wird vom Build automatisch angehängt basierend auf dem Layout.
 - Bei `shoppable_image`: nie reusen, immer einzigartig.
 - Bei `image_text` Brand Story Tiles: nie reusen.
 
+**Designer Filename Konvention bei Reuse Tiles**:
+
+Designer hat zwei Filename Optionen pro Tile, beide funktionieren beim Folder Upload ins Tool:
+
+1. **Reuse Filename**: `<imageRef>.jpg` (für synchronisierte Dimensionen) oder `<imageRef>_desktop.jpg` plus `<imageRef>_mobile.jpg` (wenn Desktop und Mobile unterschiedlich). Dieser File wird beim Upload **auf alle Tiles mit dem gleichen imageRef angewendet**, egal in welchem Page Ordner er liegt. Reicht also einmal in einem Ordner.
+
+   Beispiele:
+   - `cat-garten-lifestyle-1500x750.jpg`
+   - `usp-inhabergefuehrt-1500x1500.jpg`
+   - `sub-sofas-lifestyle-750x750.jpg`
+
+2. **Per Tile Filename**: `<PageName>_S<n>_T<n>.jpg` (oder `_desktop.jpg` / `_mobile.jpg`). Klassisch genau ein File pro Tile, Alternative wenn der Designer pro Stelle individuell handhaben will.
+
+**Per Page Ordner Übergabe an Kunden**:
+
+Wenn die Bilder in **Page Ordner Struktur** an den Kunden übergeben werden (Kunde lädt manuell in Amazon Brand Store hoch, Page für Page), muss das gleiche Reuse Bild in jeden Page Ordner **kopiert** werden, damit pro Page Ordner alle nötigen Bilder dieser Page liegen.
+
+Beispiel: ein Lifestyle Bild für die Garten Kategorie kommt 5 mal im Store vor (Home Navigator, Footer Nav, Sale Page Filter, Garten Page Header, Bestseller Page Trenner). Designer fertigt **eine** Datei `cat-garten-lifestyle-1500x750.jpg`. Diese wird in 5 Page Ordner kopiert:
+
+```
+Home/cat-garten-lifestyle-1500x750.jpg
+Sale/cat-garten-lifestyle-1500x750.jpg
+Garten/cat-garten-lifestyle-1500x750.jpg
+Bestseller/cat-garten-lifestyle-1500x750.jpg
+... etc
+```
+
+So findet der Kunde beim Aufbau jeder Page alle Bilder dieser Page in einem Ordner. Im Designer Briefing zeigt das Tool pro Reuse Tile die Liste aller Page Ordner in die das File kopiert werden muss.
+
 ### Sinnvolle USP Leisten
 
 Bei einer USP Leiste (Wide Image plus 2 Squares mit Icon Tiles) sollte die Headline **inhaltlich passen** zu den Squares darunter. Beispiel falsch:

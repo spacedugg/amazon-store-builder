@@ -559,7 +559,7 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
             Diese Kachel kommt {duplicateInfo.count} mal im Store vor
           </div>
           <div style={{ fontSize: 10, color: '#065f46', lineHeight: 1.4 }}>
-            Bild einmal designen und an einer Stelle hochladen, das Tool wendet das Bild automatisch auf alle Stellen an. Wenn du es schon designt hast, hier nur den vorhandenen File hochladen.
+            Bild nur einmal designen. Beim Upload ins Tool reicht der Reuse Filename in einem Ordner, das Tool verteilt das Bild automatisch auf alle {duplicateInfo.count} Stellen. Bei Per Page Ordner Übergabe an den Kunden: dasselbe File in alle {duplicateInfo.count} Page Ordner kopieren, damit pro Page Ordner alle Bilder dieser Page liegen.
           </div>
           {duplicateInfo.others && duplicateInfo.others.length > 0 && (
             <div style={{ marginTop: 4, fontSize: 10, color: '#065f46' }}>
@@ -832,19 +832,31 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
       {/* ─── FILE NAMES (click to copy) ─── */}
       {isImageTile && pageName != null && sectionIndex != null && (function() {
         var sameRatio = tile.syncDimensions || isSameAspectRatio(tile.dimensions, tile.mobileDimensions);
-        if (sameRatio) {
-          return (
-            <div style={{ marginTop: 4, padding: '4px 0', fontSize: 10, lineHeight: 1.8 }}>
-              <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'sync')} />
-            </div>
-          );
-        }
+        var hasReuse = tile.imageRef && duplicateInfo && duplicateInfo.count > 1;
         return (
           <div style={{ marginTop: 4, padding: '4px 0', fontSize: 10, lineHeight: 1.8 }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'desktop')} label="D" />
-              <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'mobile')} label="M" />
-            </div>
+            {hasReuse && (
+              <div style={{ marginBottom: 4 }}>
+                <div style={{ fontSize: 9, fontWeight: 700, color: '#047857', marginBottom: 2 }}>Reuse Filename (ein File für alle {duplicateInfo.count} Stellen)</div>
+                {sameRatio
+                  ? <CopyableFilename filename={tile.imageRef + '.jpg'} />
+                  : (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                      <CopyableFilename filename={tile.imageRef + '_desktop.jpg'} label="D" />
+                      <CopyableFilename filename={tile.imageRef + '_mobile.jpg'} label="M" />
+                    </div>
+                  )}
+              </div>
+            )}
+            {hasReuse && <div style={{ fontSize: 9, fontWeight: 700, color: '#475569', marginBottom: 2 }}>Per Tile Filename (Alternative, einzeln)</div>}
+            {sameRatio
+              ? <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'sync')} />
+              : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'desktop')} label="D" />
+                  <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'mobile')} label="M" />
+                </div>
+              )}
           </div>
         );
       })()}
