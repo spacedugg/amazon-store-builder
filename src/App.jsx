@@ -26,6 +26,8 @@ var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], p
 // keine andere Tile dieselbe Größe und Topic hat.
 function refreshImageRefs(store) {
   if (!store || !store.pages) return store;
+
+  // Schritt 1, Dimensions Suffix updaten
   var changed = false;
   var newPages = store.pages.map(function(pg) {
     return Object.assign({}, pg, {
@@ -51,6 +53,64 @@ function refreshImageRefs(store) {
       }),
     });
   });
+
+  // Schritt 2, Briefing Konsistenz pro Reuse Familie prüfen.
+  // Tiles mit gleichem imageRef (ohne Solo Suffix) gehören in eine Familie.
+  // Wenn ein Tile in einer Familie abweichendes Briefing hat (anderes
+  // textOverlay, brief, imageCategory, bgColor, dimensions, type oder
+  // textAlign), wird es automatisch entkoppelt. Damit ist die Familie
+  // ein echter Reuse Pool, alle Mitglieder teilen das identische Bild.
+  // Master Fingerprint pro Familie ist der häufigste Fingerprint.
+  function tileBriefingFingerprint(t) {
+    if (!t) return '';
+    var ov = (t.textOverlay && typeof t.textOverlay === 'object') ? t.textOverlay : {};
+    var ovStr = [ov.heading || '', ov.subheading || '', ov.body || '', (ov.bullets || []).join(';'), ov.cta || ''].join('§');
+    var d = t.dimensions || {};
+    return [
+      t.type || '', t.brief || '', ovStr, t.imageCategory || '', t.bgColor || '',
+      d.w + 'x' + d.h, t.textAlign || 'left',
+    ].join('|');
+  }
+
+  var groups = {};
+  newPages.forEach(function(pg, pi) {
+    (pg.sections || []).forEach(function(sec, si) {
+      (sec.tiles || []).forEach(function(t, ti) {
+        if (!t || !t.imageRef) return;
+        if (/-solo-[a-z0-9]+$/.test(t.imageRef)) return; // schon entkoppelt
+        if (!groups[t.imageRef]) groups[t.imageRef] = [];
+        groups[t.imageRef].push({ pi: pi, si: si, ti: ti, fp: tileBriefingFingerprint(t) });
+      });
+    });
+  });
+
+  Object.keys(groups).forEach(function(key) {
+    var members = groups[key];
+    if (members.length < 2) return;
+    // Häufigsten Fingerprint als Master bestimmen
+    var counts = {};
+    members.forEach(function(m) { counts[m.fp] = (counts[m.fp] || 0) + 1; });
+    var masterFp = Object.keys(counts).reduce(function(a, b) {
+      return counts[a] >= counts[b] ? a : b;
+    });
+    // Outlier bekommen automatischen Solo Suffix
+    members.forEach(function(m) {
+      if (m.fp === masterFp) return;
+      var pg = newPages[m.pi];
+      var sec = pg.sections[m.si];
+      var t = sec.tiles[m.ti];
+      var soloId = Math.random().toString(36).slice(2, 8);
+      var newSecTiles = sec.tiles.slice();
+      newSecTiles[m.ti] = Object.assign({}, t, {
+        imageRef: t.imageRef + '-solo-' + soloId,
+      });
+      var newSections = pg.sections.slice();
+      newSections[m.si] = Object.assign({}, sec, { tiles: newSecTiles });
+      newPages[m.pi] = Object.assign({}, pg, { sections: newSections });
+      changed = true;
+    });
+  });
+
   return changed ? Object.assign({}, store, { pages: newPages }) : store;
 }
 
