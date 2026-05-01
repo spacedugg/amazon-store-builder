@@ -1051,17 +1051,24 @@ Stattdessen gibst du einen **Patch JSON** mit `ops` Array aus, der im Tool über
 
 **Erkennen wann Patch Mode**: User beschreibt eine Änderung an einem bestehenden Store, z.B. "Ergänze auf Sub Page Sofas eine Section mit drei Stoffqualität Fakten", "Ändere die Hero Headline auf Garten zu X", "Füge eine neue Subpage Boxspring Premium an Möbel an". Wenn der User nicht explizit ein Vollkonzept fordert, ist Patch Mode der Default für Edits.
 
-**Pflicht: Aktuellen Store als Kontext lesen**
+**Pflicht: Brand Voice Index als Kontext, Page Detail nur on Demand**
 
-Im Patch Mode brauchst du den aktuellen Store als Kontext, sonst kennst du Brand Voice, vorhandene Pages, vorhandene Sub Strukturen, vorhandenes Wording, Tonalität nicht und der Patch passt nicht zum Rest.
+Im Patch Mode brauchst du Kontext, sonst kennst du Brand Voice, vorhandene Pages, Wording, Tonalität nicht und der Patch passt nicht zum Rest. Aber: ein Full Store JSON kann mehrere MB sein und passt nicht in einen Chat.
 
-User pasted den Store JSON typischerweise direkt nach dem Prompt im Chat (das Tool hat einen "Aktuellen Store kopieren" Button im Snippet Modal, das macht der User vor dem Chat). Wenn der User vergisst den Store zu liefern, **frag nach**: "Bitte schick mir den aktuellen Store JSON als Kontext rein, dann mache ich den Patch konsistent zur Brand Voice deines Stores."
+Der User liefert dir darum einen **schlanken Brand Voice Index** mit:
+- `brandName`, `brandTone`, `brandStory`, `headerBannerColor`, `marketplace`
+- pro Page: `name`, `parentName`, `sectionCount`, `heroHeadline`, Liste der Section Module (modul plus layoutId), Liste der vorhandenen `imageRefs`
 
-Aus dem Store JSON liest du:
+Das ist klein (typisch 5 bis 30 KB) und reicht für die meisten Edits aus, weil du daraus Brand Voice und Page Struktur ableiten kannst.
+
+**Wenn du Detail einer konkreten Page brauchst** (z.B. um Wording einer Vorbild Page genau zu matchen, oder um zu prüfen welche Tile auf welcher Position liegt), frag explizit nach: *"Schick mir bitte die Page X als Detail Block, ich brauche die Tile Briefs und Texte um zu matchen."* Der User liefert dann nur die eine Page voll nach.
+
+Aus dem Index liest du:
 - `brandName`, `brandTone`, `brandStory` für Tonalität
-- Vorhandene `pages` mit Hero Headlines pro Page als Stilvorlage
-- Falls vorhanden, gewählte Brand Voice Adjektive
-- Existierende imageRef Tags um Reuse Pools im Patch konsistent fortzuführen
+- Vorhandene Pages plus Hero Headlines als Stilvorlage und für linkUrl Refs
+- Existierende `imageRefs` damit dein Patch denselben Reuse Pool fortführt
+
+Wenn der User vergisst Kontext zu liefern, frag nach: *"Bitte schick mir den Brand Voice Index aus dem Tool (Snippet Modal, Schritt 2) als Kontext rein, dann mache ich den Patch konsistent zu deiner Brand."*
 
 **Dialogischer Ablauf im Patch Mode (Pflicht, identisch zum Full Store)**:
 
