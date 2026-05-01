@@ -275,8 +275,8 @@ function buildHomePage() {
     section('std-2equal', [
       tile('image', ov(), 'Image Tile Brand Story. Team oder Hallenbild aus juskys.de, Mitarbeiter und Standort.'),
       tile('image',
-        ov('Ein **Haus**, viele Räume', 'Inhabergeführt seit 2005', BRAND_STORY_KURZ, [], 'Mehr über Juskys'),
-        'Brand Story Bild. Heading, Subheading, Body und CTA grafisch ins Bild gerendert. Hintergrund passend zur Brand Story (z.B. Hallen Detail, Stoffmakro oder Werkstatt Atmosphäre). Verlinkt auf Über Uns.',
+        ov('Wer steckt **hinter Juskys**', 'Personen, Halle, Sortiment', BRAND_STORY_KURZ, [], 'Mehr über Juskys'),
+        'Brand Story Bild. Heading, Subheading, Body und CTA grafisch ins Bild gerendert. Hintergrund Foto Geschäftsführer oder Halle. Verlinkt auf Über Uns.',
         { linkUrl: linkTo('Über Uns'), imageCategory: 'text_image' }
       ),
     ], 'trust.trustSplit'),
@@ -637,19 +637,25 @@ function buildSalePage() {
 }
 
 function buildUeberUnsPage() {
+  // Auf Über Uns wird "Inhabergeführt seit 2005 aus Deutschland" nur EINMAL
+  // als USP Tile ausführlich genannt (USP Tile 1). Hero und Brand Story
+  // Headline behandeln andere Aspekte (Personen, Hersteller, Halle).
+  // Brand Story Body fokussiert auf das WIE (persönliche Hersteller Visite,
+  // eigene Designs), nicht das WANN.
+  var brandStoryUeberUns = 'Wir besuchen unsere Hersteller persönlich, prüfen die Qualität vor Ort und entwickeln Sortiment und Designs in eigener Hand. Geleitet von Philipp Juskys und Daniel Heidrich, gewachsen aus Deutschland.';
   return page('Über Uns', [
     section('1', [
       tile('image',
-        ov('Ein **Haus**, viele Räume', 'Inhabergeführt seit 2005, aus Deutschland'),
-        'Hero Bild Portrait oder Halle aus juskys.de.'
+        ov('Hinter **Juskys**', 'Personen, Halle, Sortiment'),
+        'Hero Bild Portrait Geschäftsführer oder Halle aus juskys.de.'
       ),
     ], 'hero.fullWidthHero'),
 
     section('std-2equal', [
       tile('image', ov(), 'Image Tile Brand Story. Hallenbild oder Team aus juskys.de.'),
       tile('image',
-        ov('Inhabergeführt aus **Deutschland**', 'Seit 2005', BRAND_STORY_LANG),
-        'Brand Story Bild. Heading, Subheading, Body grafisch ins Bild integriert. Hintergrund passend zur Marken Atmosphäre. Brand Story Lang aus Website Content kondensiert.',
+        ov('Hersteller besucht, **persönlich** geprüft', 'So arbeiten wir', brandStoryUeberUns),
+        'Brand Story Bild. Heading, Subheading, Body grafisch ins Bild integriert. Hintergrund Werkstatt oder Hersteller Visite Foto.',
         { imageCategory: 'text_image' }
       ),
     ], 'trust.trustSplit'),

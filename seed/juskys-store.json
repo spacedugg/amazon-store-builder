@@ -1093,13 +1093,13 @@
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Ein **Haus**, viele Räume",
-                "subheading": "Inhabergeführt seit 2005",
+                "heading": "Wer steckt **hinter Juskys**",
+                "subheading": "Personen, Halle, Sortiment",
                 "body": "Seit 2005 bringen Philipp Juskys und Daniel Heidrich ein breites Sortiment für Wohnen, Garten und Alltag direkt zu dir. Inhabergeführt aus Deutschland, mit Qualitätskontrolle vor Ort beim Hersteller.",
                 "bullets": [],
                 "cta": "Mehr über Juskys"
               },
-              "brief": "Brand Story Bild. Heading, Subheading, Body und CTA grafisch ins Bild gerendert. Hintergrund passend zur Brand Story (z.B. Hallen Detail, Stoffmakro oder Werkstatt Atmosphäre). Verlinkt auf Über Uns.",
+              "brief": "Brand Story Bild. Heading, Subheading, Body und CTA grafisch ins Bild gerendert. Hintergrund Foto Geschäftsführer oder Halle. Verlinkt auf Über Uns.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "page:Über Uns",
@@ -4860,13 +4860,13 @@
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Ein **Haus**, viele Räume",
-                "subheading": "Inhabergeführt seit 2005, aus Deutschland",
+                "heading": "Hinter **Juskys**",
+                "subheading": "Personen, Halle, Sortiment",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Hero Bild Portrait oder Halle aus juskys.de.",
+              "brief": "Hero Bild Portrait Geschäftsführer oder Halle aus juskys.de.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -4904,13 +4904,13 @@
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Inhabergeführt aus **Deutschland**",
-                "subheading": "Seit 2005",
-                "body": "Seit 2005 ist Juskys dein Partner für Wohnen, Garten, Heimwerken, Tier und Freizeit. Geleitet von Philipp Juskys und Daniel Heidrich, inhabergeführt aus Deutschland. Wir besuchen unsere Hersteller persönlich und prüfen regelmäßig die Qualität.",
+                "heading": "Hersteller besucht, **persönlich** geprüft",
+                "subheading": "So arbeiten wir",
+                "body": "Wir besuchen unsere Hersteller persönlich, prüfen die Qualität vor Ort und entwickeln Sortiment und Designs in eigener Hand. Geleitet von Philipp Juskys und Daniel Heidrich, gewachsen aus Deutschland.",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Brand Story Bild. Heading, Subheading, Body grafisch ins Bild integriert. Hintergrund passend zur Marken Atmosphäre. Brand Story Lang aus Website Content kondensiert.",
+              "brief": "Brand Story Bild. Heading, Subheading, Body grafisch ins Bild integriert. Hintergrund Werkstatt oder Hersteller Visite Foto.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
