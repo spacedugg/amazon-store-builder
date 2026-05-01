@@ -308,7 +308,43 @@ Bevor du das Briefing JSON ausgibst, gehe das Konzept als Self Check durch und k
 
 5. **Versand und Lieferung Check**. Keine Headline, Subheading, Body oder Bullet darf "Versandkostenfrei", "Schnelle Lieferung", "Express", "Truck Icon" enthalten.
 
-6. **Lifestyle Tile Verlinkung plus Redundanz Check**. Zwei Schritte:
+6. **Small Catalog Check**. Wenn eine Page **weniger als 5 ASINs insgesamt** hat (typisch eine Sub Page mit kleinem Sortiment), darf kein ASIN Grid Modul (`product_grid`, `best_sellers`, `recommended`, `deals`) verwendet werden. Ein Grid mit 1 bis 4 Kacheln wirkt visuell schwach und ist redundant zu Bild Modulen die das gleiche zeigen.
+
+   Stattdessen die ASINs komplett durch Bild Module erklären:
+
+   - **Shoppable Image** mit bis zu 5 Hotspots, ein Bild trägt alle Produkte als verlinkte Punkte
+   - **Klickbare Image Tiles** mit `linkAsin`, z.B. `lg-2stack` Layout (1 Lifestyle Tile plus 2 Wide Tiles, alle linkAsin), oder `vh-w2s` (1 Wide plus 2 Squares mit linkAsin), oder `2x2wide` (4 Wide Tiles mit linkAsin)
+   - Eine Mischung aus beidem (Shoppable Hero plus linkAsin Tile Section)
+
+   Das gilt insbesondere für:
+   - Sub Pages mit kleinem Sortiment (z.B. Sub mit 1 bis 4 ASINs)
+   - Hauptkategorien mit sehr schmalem Portfolio
+   - Themen Pages mit kuratierter ASIN Auswahl
+
+   Beispiel falsch (Sub Page mit 3 ASINs):
+
+   ```
+   Section: Hero Bild
+   Section: best_sellers Grid (3 ASINs als Kachel Liste)
+   Section: product_grid Vollkatalog (dieselben 3 ASINs)
+   ```
+
+   3 Kacheln in einem Grid ist zu wenig, plus zwei Grids stapeln und beide zeigen dasselbe.
+
+   Beispiel richtig:
+
+   ```
+   Section: Hero Bild
+   Section: lg-2stack Layout
+     Tile 1 (Large Square): Lifestyle Bild Top ASIN, linkAsin auf ASIN 1
+     Tile 2 (Wide): Produkt Bild ASIN 2, linkAsin
+     Tile 3 (Wide): Produkt Bild ASIN 3, linkAsin
+   Section: Cross Nav zu Sibling Subs
+   ```
+
+   Alle 3 ASINs sind verlinkt sichtbar, kein Grid Modul.
+
+7. **Lifestyle Tile Verlinkung plus Redundanz Check**. Zwei Schritte:
 
    a) **Verlinkung**. Jedes `image` Tile das im Brief konkrete Produkte erwähnt (z.B. "Hund mit Hundetreppe", "Loungegruppe auf Terrasse", "Freilaufgehege im Garten") muss eines davon haben:
    - `linkAsin`, wenn ein einziges konkretes Produkt im Bild ist (Tile klickbar zur PDP)
