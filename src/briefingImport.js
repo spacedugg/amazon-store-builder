@@ -1,5 +1,68 @@
 import { uid, emptyTile, emptyTileForLayout, emptyTextOverlay, deriveMobileDims } from './constants';
 
+// Hilfsfunktion: Tile aus Briefing Dict normalisieren (Default Felder ergänzen,
+// Dimensions ableiten, linkUrl Page Refs auflösen). Kann sowohl beim Full
+// Briefing Import als auch beim Patch Apply genutzt werden.
+export function importTileFromBriefing(t, layoutId, ti, pageIdByName) {
+  pageIdByName = pageIdByName || {};
+  var tile = Object.assign({}, emptyTileForLayout(layoutId || '1', ti || 0));
+  if (t.type) tile.type = t.type;
+  if (typeof t.brief === 'string') tile.brief = t.brief;
+  if (t.textOverlay && typeof t.textOverlay === 'object') {
+    tile.textOverlay = Object.assign(emptyTextOverlay(), t.textOverlay);
+    if (!Array.isArray(tile.textOverlay.bullets)) tile.textOverlay.bullets = [];
+  }
+  if (Array.isArray(t.asins)) tile.asins = t.asins.slice();
+  if (Array.isArray(t.hotspots)) tile.hotspots = t.hotspots.slice();
+  if (typeof t.bgColor === 'string') tile.bgColor = t.bgColor;
+  if (typeof t.imageCategory === 'string') tile.imageCategory = t.imageCategory;
+  if (typeof t.textAlign === 'string') tile.textAlign = t.textAlign;
+  if (typeof t.linkAsin === 'string') tile.linkAsin = t.linkAsin;
+  if (typeof t.imageRef === 'string') tile.imageRef = t.imageRef;
+  if (t.dimensions && typeof t.dimensions === 'object'
+      && Number(t.dimensions.w) > 0 && Number(t.dimensions.h) > 0) {
+    tile.dimensions = { w: Number(t.dimensions.w), h: Number(t.dimensions.h) };
+    tile.mobileDimensions = deriveMobileDims(layoutId || '1', tile.dimensions.w, tile.dimensions.h);
+  }
+  if (t.mobileDimensions && typeof t.mobileDimensions === 'object'
+      && Number(t.mobileDimensions.w) > 0 && Number(t.mobileDimensions.h) > 0) {
+    tile.mobileDimensions = { w: Number(t.mobileDimensions.w), h: Number(t.mobileDimensions.h) };
+  }
+  if (t.productSelector && typeof t.productSelector === 'object') tile.productSelector = t.productSelector;
+  if (typeof t.linkUrl === 'string') {
+    if (t.linkUrl.indexOf('page:') === 0) {
+      var pageName = t.linkUrl.slice(5);
+      if (pageIdByName[pageName]) tile.linkUrl = '/' + pageIdByName[pageName];
+      else tile.linkUrl = t.linkUrl;
+    } else {
+      tile.linkUrl = t.linkUrl;
+    }
+  }
+  return tile;
+}
+
+// Hilfsfunktion: Section aus Briefing Dict normalisieren.
+export function importSectionFromBriefing(s, pageIdByName) {
+  var layoutId = s.layoutId || '1';
+  var tiles = (s.tiles || []).map(function(t, ti) {
+    return importTileFromBriefing(t, layoutId, ti, pageIdByName);
+  });
+  return { id: uid(), layoutId: layoutId, tiles: tiles };
+}
+
+// Hilfsfunktion: Page aus Briefing Dict normalisieren.
+export function importPageFromBriefing(p, pageIdByName) {
+  var sections = (p.sections || []).map(function(s) {
+    return importSectionFromBriefing(s, pageIdByName);
+  });
+  var page = { id: uid(), name: p.name || 'Unbenannt', sections: sections };
+  var parentRef = p.parentName || p.parentId;
+  if (parentRef) {
+    page.parentId = pageIdByName[parentRef] || parentRef;
+  }
+  return page;
+}
+
 // Briefing JSON → Store Objekt.
 // Erwartet das Briefing Format aus briefings/juskys-store-briefing.md:
 // { brandName, marketplace, category, brandTone, brandStory, headerBannerColor,
@@ -24,64 +87,9 @@ export function importBriefingToStore(briefing) {
 
   var pages = rawPages.map(function(entry) {
     var p = entry.raw;
-    var sections = (p.sections || []).map(function(s) {
-      var sectionId = uid();
-      var layoutId = s.layoutId || '1';
-      var tiles = (s.tiles || []).map(function(t, ti) {
-        // Default Tile mit korrekten Dimensionen basierend auf Layout und Position.
-        // Layout '1' Full Width hat 3000x600 Desktop, 1680x900 Mobile (anderes Aspect).
-        // Standard Layouts (std-*, lg-*, etc.) haben gleiche Dimensionen für beide.
-        var tile = Object.assign({}, emptyTileForLayout(layoutId, ti));
-        if (t.type) tile.type = t.type;
-        if (typeof t.brief === 'string') tile.brief = t.brief;
-        if (t.textOverlay && typeof t.textOverlay === 'object') {
-          tile.textOverlay = Object.assign(emptyTextOverlay(), t.textOverlay);
-          if (!Array.isArray(tile.textOverlay.bullets)) tile.textOverlay.bullets = [];
-        }
-        if (Array.isArray(t.asins)) tile.asins = t.asins.slice();
-        if (Array.isArray(t.hotspots)) tile.hotspots = t.hotspots.slice();
-        if (typeof t.bgColor === 'string') tile.bgColor = t.bgColor;
-        if (typeof t.imageCategory === 'string') tile.imageCategory = t.imageCategory;
-        if (typeof t.textAlign === 'string') tile.textAlign = t.textAlign;
-        if (typeof t.linkAsin === 'string') tile.linkAsin = t.linkAsin;
-        if (typeof t.imageRef === 'string') tile.imageRef = t.imageRef;
-        // Variable Tile Dimensionen aus dem Briefing übernehmen. Wenn nur
-        // dimensions gesetzt ist (kein mobileDimensions), wird Mobile passend
-        // zum Layout Typ abgeleitet (Standard plus Standard, VH 1500x750 fix,
-        // Full Width 1680 breit). Wenn beide gesetzt sind, beide übernommen.
-        if (t.dimensions && typeof t.dimensions === 'object'
-            && Number(t.dimensions.w) > 0 && Number(t.dimensions.h) > 0) {
-          tile.dimensions = { w: Number(t.dimensions.w), h: Number(t.dimensions.h) };
-          tile.mobileDimensions = deriveMobileDims(layoutId, tile.dimensions.w, tile.dimensions.h);
-        }
-        if (t.mobileDimensions && typeof t.mobileDimensions === 'object'
-            && Number(t.mobileDimensions.w) > 0 && Number(t.mobileDimensions.h) > 0) {
-          tile.mobileDimensions = { w: Number(t.mobileDimensions.w), h: Number(t.mobileDimensions.h) };
-        }
-        // Produktberater Quiz Schema, wird per Tool Properties Panel weiter
-        // bearbeitet. Briefing JSON kann das initiale Schema vorgeben.
-        if (t.productSelector && typeof t.productSelector === 'object') tile.productSelector = t.productSelector;
-        if (typeof t.linkUrl === 'string') {
-          if (t.linkUrl.indexOf('page:') === 0) {
-            var pageName = t.linkUrl.slice(5);
-            if (pageIdByName[pageName]) tile.linkUrl = '/' + pageIdByName[pageName];
-            else tile.linkUrl = t.linkUrl; // Fallback: Briefing referenziert eine Page die es nicht gibt
-          } else {
-            tile.linkUrl = t.linkUrl;
-          }
-        }
-        return tile;
-      });
-      return { id: sectionId, layoutId: layoutId, tiles: tiles };
-    });
-    var page = { id: entry._id, name: p.name || 'Unbenannt', sections: sections };
-    // Eltern Beziehung kann als parentName (Name der Eltern Page) oder parentId
-    // (Name oder bereits UID) angegeben sein. Wir suchen erst im Name Index, sonst
-    // nehmen wir den Wert 1 zu 1 (z.B. wenn schon eine echte UID übergeben wurde).
-    var parentRef = p.parentName || p.parentId;
-    if (parentRef) {
-      page.parentId = pageIdByName[parentRef] || parentRef;
-    }
+    // Verwende den vorab erzeugten ID damit Subpage parentId Refs intakt bleiben.
+    var page = importPageFromBriefing(p, pageIdByName);
+    page.id = entry._id;
     return page;
   });
 

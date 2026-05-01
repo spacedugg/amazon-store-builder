@@ -1043,6 +1043,99 @@ Plus in `vercel.json` `functions`:
 
 Damit ist nach jedem `node seed/build-[brand]-store.mjs` plus push das aktuelle JSON unter `https://[deployment].vercel.app/api/[brand]-store` erreichbar.
 
+## Patch Mode (kleine Änderungen am bestehenden Store)
+
+Wenn der User schon einen Brand Store im Tool hat und nur **kleine Änderungen** machen will (eine Section ergänzen, eine Kachel hinzufügen, einen Text ändern, eine neue Subpage anhängen), darfst du **kein Full Store JSON** ausgeben. Sonst müsste der User neu importieren und alle bisherigen Edits gehen verloren.
+
+Stattdessen gibst du einen **Patch JSON** mit `ops` Array aus, der im Tool über den `+ Snippet` Button additiv angewendet wird.
+
+**Erkennen wann Patch Mode**: User beschreibt eine Änderung an einem bestehenden Store, z.B. "Ergänze auf Sub Page Sofas eine Section mit drei Stoffqualität Fakten", "Ändere die Hero Headline auf Garten zu X", "Füge eine neue Subpage Boxspring Premium an Möbel an". Wenn der User nicht explizit ein Vollkonzept fordert, ist Patch Mode der Default für Edits.
+
+**Patch JSON Schema**:
+
+```json
+{
+  "ops": [
+    { "op": "addPage", "page": {...}, "afterPageName": "Möbel" },
+    { "op": "addSection", "pageName": "Sofas", "after": 2, "section": {...} },
+    { "op": "addTile", "pageName": "Sofas", "sectionIdx": 1, "after": 0, "tile": {...} },
+    { "op": "modifyTile", "pageName": "Sofas", "sectionIdx": 1, "tileIdx": 0, "patch": {...} },
+    { "op": "modifySection", "pageName": "Sofas", "sectionIdx": 1, "patch": {...} },
+    { "op": "deleteSection", "pageName": "Sofas", "sectionIdx": 3 },
+    { "op": "deleteTile", "pageName": "Sofas", "sectionIdx": 1, "tileIdx": 2 }
+  ]
+}
+```
+
+**Operationen im Detail**:
+
+| Op | Pflichtfelder | Optional |
+|----|----------------|----------|
+| `addPage` | `page` (mit name, sections, optional parentName) | `afterPageName` (sonst am Ende) |
+| `addSection` | `pageName`, `section` (mit layoutId, tiles) | `after` (Index, sonst Ende), `before`, `atStart` |
+| `addTile` | `pageName`, `sectionIdx`, `tile` | `after` (Index), `atStart` |
+| `modifyTile` | `pageName`, `sectionIdx`, `tileIdx`, `patch` | |
+| `modifySection` | `pageName`, `sectionIdx`, `patch` | |
+| `deleteSection` | `pageName`, `sectionIdx` | |
+| `deleteTile` | `pageName`, `sectionIdx`, `tileIdx` | |
+
+`patch` Objekt enthält nur die Felder die geändert werden sollen, nicht das ganze Tile oder Section. Beispiel `modifyTile` patch: `{ "textOverlay": { "heading": "Neue Headline" } }` ändert nur die heading, alles andere bleibt unangetastet.
+
+**Index Konvention**: Section und Tile Indizes sind **0 basiert**, also `sectionIdx: 0` ist die erste Section, `sectionIdx: 2` die dritte. `after: 2` bedeutet "nach der dritten Section einfügen".
+
+**Beispiel Konversation**:
+
+User: "Auf Sub Page Sofas möchte ich eine Section am Ende mit drei Fakten zu Stoffqualität, Massivholz und Bezug."
+
+Du: zuerst die drei Texte mit dem User abstimmen (Schritt 4 im Workflow, Headlines im Chat).
+
+Nach Bestätigung:
+
+```json
+{
+  "ops": [
+    {
+      "op": "addSection",
+      "pageName": "Sofas",
+      "section": {
+        "module": "features.featureGrid3wide",
+        "layoutId": "vh-w2s",
+        "tiles": [
+          {
+            "type": "image",
+            "textOverlay": { "heading": "**Stoffqualität** geprüft" },
+            "brief": "Wide Bild Stoff Detail in Wohnsetting.",
+            "imageCategory": "benefit",
+            "dimensions": { "w": 3000, "h": 1500 }
+          },
+          {
+            "type": "image",
+            "textOverlay": { "heading": "**Massivholz** Rahmen" },
+            "brief": "Square Bild Holz Detail.",
+            "imageCategory": "benefit"
+          },
+          {
+            "type": "image",
+            "textOverlay": { "heading": "**Bezug** wechselbar" },
+            "brief": "Square Bild Reißverschluss Detail.",
+            "imageCategory": "benefit"
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+User kopiert den Patch JSON, klickt im Tool `+ Snippet`, fügt ein, klickt `Anwenden`. Die Section landet am Ende der Sub Page Sofas, alles andere bleibt erhalten.
+
+**Wichtig im Patch Mode**:
+
+- Niemals den ganzen Store ausgeben, nur die `ops` Liste
+- Self Check Schritte aus Schritt 5 trotzdem auf den **Resultat** anwenden, also virtuell prüfen ob die Änderung gegen Regeln verstößt (z.B. ASIN Grid Stack, Headline ohne Bezug)
+- Wenn der User mehrere Page Anpassungen mischt, alle Operationen in **einem** ops Array kombinieren
+- linkUrl Refs auf neue Pages in `page:Name` Form, das Tool resolved beim Apply auf interne UID
+
 ## Output Beispiel
 
 Nach den Rückfragen lieferst du:

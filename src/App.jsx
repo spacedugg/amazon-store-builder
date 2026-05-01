@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, findLayout, LAYOUT_TILE_DIMS } from './constants';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink } from './storage';
-import { importBriefingToStore } from './briefingImport';
+import { importBriefingToStore, importPageFromBriefing, importSectionFromBriefing, importTileFromBriefing } from './briefingImport';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
 import Topbar from './components/Topbar';
 import PageList from './components/PageList';
@@ -9,6 +9,7 @@ import Canvas from './components/Canvas';
 import PropertiesPanel from './components/PropertiesPanel';
 import AsinPanel from './components/AsinPanel';
 import NewStoreModal from './components/NewStoreModal';
+import PatchImportModal from './components/PatchImportModal';
 import PriceCalculator from './components/PriceCalculator';
 import ExportModal from './components/ExportModal';
 import BriefingView from './components/BriefingView';
@@ -207,6 +208,7 @@ export default function App() {
   var [requestedAsins, setRequestedAsins] = useState([]);
   var [showSaved, setShowSaved] = useState(false);
   var [showExport, setShowExport] = useState(false);
+  var [showPatchImport, setShowPatchImport] = useState(false);
   var [showAsinOverview, setShowAsinOverview] = useState(false);
 
   var [storeId, setStoreId] = useState(null);
@@ -477,6 +479,150 @@ export default function App() {
         }),
       });
     });
+  };
+
+  // Patch Apply: nimmt ein { ops: [...] } Objekt und wendet die Operationen
+  // additiv auf den bestehenden Store an. Operationen:
+  //   addPage          {page}                        → neue Page anhängen
+  //   addSection       {pageName, after?, atEnd?, atStart?, section}
+  //   addTile          {pageName, sectionIdx, after?, tile}
+  //   modifyTile       {pageName, sectionIdx, tileIdx, patch}
+  //   modifySection    {pageName, sectionIdx, patch}
+  //   deleteSection    {pageName, sectionIdx}
+  //   deleteTile       {pageName, sectionIdx, tileIdx}
+  // Bestehende Pages, Sections, Tiles bleiben unangetastet außer den
+  // explizit referenzierten. Selektion und alle nicht betroffenen Edits
+  // bleiben erhalten.
+  var applyPatch = function(patchData) {
+    var data = typeof patchData === 'string' ? JSON.parse(patchData) : patchData;
+    if (!data || !Array.isArray(data.ops)) {
+      throw new Error('Patch JSON ungültig, erwartet { "ops": [...] }');
+    }
+    var summary = [];
+    setStoreWithUndo(function(s) {
+      var pages = s.pages.slice();
+      // Name zu ID Mapping inklusive neuer Pages aus dem Patch
+      var pageIdByName = {};
+      pages.forEach(function(p) { if (p.name) pageIdByName[p.name] = p.id; });
+      // Erst alle addPage Ops, damit linkUrl page:Refs auf neue Pages auflösen
+      data.ops.forEach(function(op) {
+        if (op && op.op === 'addPage' && op.page && op.page.name) {
+          pageIdByName[op.page.name] = pageIdByName[op.page.name] || 'pending-' + op.page.name;
+        }
+      });
+      var findPageIdx = function(name) {
+        return pages.findIndex(function(p) { return p.name === name; });
+      };
+      data.ops.forEach(function(op, idx) {
+        if (!op || typeof op !== 'object') return;
+        if (op.op === 'addPage') {
+          if (!op.page || !op.page.name) return;
+          var newPage = importPageFromBriefing(op.page, pageIdByName);
+          pageIdByName[newPage.name] = newPage.id;
+          if (typeof op.afterPageName === 'string') {
+            var afterIdx = findPageIdx(op.afterPageName);
+            if (afterIdx >= 0) {
+              pages.splice(afterIdx + 1, 0, newPage);
+            } else {
+              pages.push(newPage);
+            }
+          } else {
+            pages.push(newPage);
+          }
+          summary.push('Page hinzugefügt: ' + newPage.name);
+          return;
+        }
+        if (op.op === 'addSection') {
+          var pi = findPageIdx(op.pageName);
+          if (pi < 0) { summary.push('Op ' + idx + ' übersprungen, Page nicht gefunden: ' + op.pageName); return; }
+          var pg = pages[pi];
+          var newSec = importSectionFromBriefing(op.section || {}, pageIdByName);
+          var sections = pg.sections.slice();
+          var insertIdx;
+          if (op.atStart) insertIdx = 0;
+          else if (typeof op.after === 'number') insertIdx = Math.min(op.after + 1, sections.length);
+          else if (typeof op.before === 'number') insertIdx = Math.max(0, op.before);
+          else insertIdx = sections.length;
+          sections.splice(insertIdx, 0, newSec);
+          pages[pi] = Object.assign({}, pg, { sections: sections });
+          summary.push('Section eingefügt in ' + op.pageName + ' an Position ' + (insertIdx + 1));
+          return;
+        }
+        if (op.op === 'addTile') {
+          var pi2 = findPageIdx(op.pageName);
+          if (pi2 < 0) { summary.push('Op ' + idx + ' übersprungen, Page nicht gefunden'); return; }
+          var pg2 = pages[pi2];
+          var sec = pg2.sections[op.sectionIdx];
+          if (!sec) { summary.push('Op ' + idx + ' übersprungen, Section ' + op.sectionIdx + ' nicht gefunden'); return; }
+          var tiles = sec.tiles.slice();
+          var insertTileIdx;
+          if (op.atStart) insertTileIdx = 0;
+          else if (typeof op.after === 'number') insertTileIdx = Math.min(op.after + 1, tiles.length);
+          else insertTileIdx = tiles.length;
+          var newTile = importTileFromBriefing(op.tile || {}, sec.layoutId, insertTileIdx, pageIdByName);
+          tiles.splice(insertTileIdx, 0, newTile);
+          var sections2 = pg2.sections.slice();
+          sections2[op.sectionIdx] = Object.assign({}, sec, { tiles: tiles });
+          pages[pi2] = Object.assign({}, pg2, { sections: sections2 });
+          summary.push('Tile eingefügt in ' + op.pageName + ' S' + (op.sectionIdx + 1));
+          return;
+        }
+        if (op.op === 'modifyTile') {
+          var pi3 = findPageIdx(op.pageName);
+          if (pi3 < 0) { summary.push('Op ' + idx + ' übersprungen, Page nicht gefunden'); return; }
+          var pg3 = pages[pi3];
+          var sec3 = pg3.sections[op.sectionIdx];
+          if (!sec3 || !sec3.tiles[op.tileIdx]) { summary.push('Op ' + idx + ' übersprungen, Tile nicht gefunden'); return; }
+          var tiles3 = sec3.tiles.slice();
+          tiles3[op.tileIdx] = Object.assign({}, sec3.tiles[op.tileIdx], op.patch || {});
+          var sections3 = pg3.sections.slice();
+          sections3[op.sectionIdx] = Object.assign({}, sec3, { tiles: tiles3 });
+          pages[pi3] = Object.assign({}, pg3, { sections: sections3 });
+          summary.push('Tile geändert: ' + op.pageName + ' S' + (op.sectionIdx + 1) + ' T' + (op.tileIdx + 1));
+          return;
+        }
+        if (op.op === 'modifySection') {
+          var pi4 = findPageIdx(op.pageName);
+          if (pi4 < 0) { summary.push('Op ' + idx + ' übersprungen, Page nicht gefunden'); return; }
+          var pg4 = pages[pi4];
+          var sec4 = pg4.sections[op.sectionIdx];
+          if (!sec4) { summary.push('Op ' + idx + ' übersprungen, Section nicht gefunden'); return; }
+          var sections4 = pg4.sections.slice();
+          sections4[op.sectionIdx] = Object.assign({}, sec4, op.patch || {});
+          pages[pi4] = Object.assign({}, pg4, { sections: sections4 });
+          summary.push('Section geändert: ' + op.pageName + ' S' + (op.sectionIdx + 1));
+          return;
+        }
+        if (op.op === 'deleteSection') {
+          var pi5 = findPageIdx(op.pageName);
+          if (pi5 < 0) return;
+          var pg5 = pages[pi5];
+          if (op.sectionIdx < 0 || op.sectionIdx >= pg5.sections.length) return;
+          var sections5 = pg5.sections.slice();
+          sections5.splice(op.sectionIdx, 1);
+          pages[pi5] = Object.assign({}, pg5, { sections: sections5 });
+          summary.push('Section gelöscht: ' + op.pageName + ' S' + (op.sectionIdx + 1));
+          return;
+        }
+        if (op.op === 'deleteTile') {
+          var pi6 = findPageIdx(op.pageName);
+          if (pi6 < 0) return;
+          var pg6 = pages[pi6];
+          var sec6 = pg6.sections[op.sectionIdx];
+          if (!sec6) return;
+          var tiles6 = sec6.tiles.slice();
+          tiles6.splice(op.tileIdx, 1);
+          var sections6 = pg6.sections.slice();
+          sections6[op.sectionIdx] = Object.assign({}, sec6, { tiles: tiles6 });
+          pages[pi6] = Object.assign({}, pg6, { sections: sections6 });
+          summary.push('Tile gelöscht: ' + op.pageName + ' S' + (op.sectionIdx + 1) + ' T' + (op.tileIdx + 1));
+          return;
+        }
+        summary.push('Op ' + idx + ' unbekannt: ' + op.op);
+      });
+      return Object.assign({}, s, { pages: pages });
+    });
+    return summary;
   };
 
   // Tiles innerhalb einer Section per Drag and Drop tauschen.
@@ -1136,6 +1282,7 @@ export default function App() {
         viewMode={viewMode}
         onToggleView={handleToggleView}
         onNewStore={handleNewStore}
+        onPatchImport={store.pages.length > 0 ? function() { setShowPatchImport(true); } : null}
         onUndo={handleUndo}
         canUndo={undoStackRef.current.length > 0}
         onRedo={handleRedo}
@@ -1225,6 +1372,13 @@ export default function App() {
           onClose={function() { setShowNewStoreModal(false); }}
           onImport={handleImportBriefing}
           onCreateEmpty={handleCreateEmpty}
+        />
+      )}
+
+      {showPatchImport && (
+        <PatchImportModal
+          onClose={function() { setShowPatchImport(false); }}
+          onApply={applyPatch}
         />
       )}
 
