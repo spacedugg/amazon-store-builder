@@ -394,9 +394,12 @@ function LayoutPicker({ value, onChange, isMobile }) {
 
 export default function SectionView({ section, idx, totalSections, sel, onSelect, onDelete, onDuplicate, onCopy, onMoveUp, onMoveDown, onChangeLayout, onApplyImageCategory, onSwapTiles, viewMode, products, uiLang }) {
   // Drag and Drop State pro Section. dragIdx ist der Tile Index der gerade
-  // gezogen wird, dropIdx ist der Hover Tile Index.
+  // gezogen wird, dropIdx ist der Hover Tile Index. swappedIdx ist der
+  // Index der Zielposition direkt nach dem Drop, für eine 600ms Pulse
+  // Animation damit der User visuell sieht wo das Tile gelandet ist.
   var [dragIdx, setDragIdx] = useState(null);
   var [dropIdx, setDropIdx] = useState(null);
+  var [swappedIdx, setSwappedIdx] = useState(null);
 
   var handleTileDragStart = function(e, tileIdx) {
     if (!onSwapTiles) return;
@@ -416,6 +419,8 @@ export default function SectionView({ section, idx, totalSections, sel, onSelect
     e.stopPropagation();
     if (dragIdx !== null && tileIdx !== dragIdx && onSwapTiles) {
       onSwapTiles(dragIdx, tileIdx);
+      setSwappedIdx(tileIdx);
+      setTimeout(function() { setSwappedIdx(null); }, 700);
     }
     setDragIdx(null);
     setDropIdx(null);
@@ -477,9 +482,41 @@ export default function SectionView({ section, idx, totalSections, sel, onSelect
         {section.tiles.map(function(t, i) {
           var isDragging = dragIdx === i;
           var isDropTarget = dropIdx === i && dragIdx !== null;
-          var tileStyle = Object.assign({}, config.getTileStyle(i),
-            isDragging ? { opacity: 0.4 } : {},
-            isDropTarget ? { outline: '2px dashed #6366f1', outlineOffset: -2 } : {}
+          var isSwapped = swappedIdx === i;
+          // Wrapper Style mit Transition damit Drop Highlight und Swap Pulse
+          // weich animieren, statt instant zu wechseln.
+          var dragVisual = {};
+          if (isDragging) {
+            dragVisual = {
+              opacity: 0.55,
+              transform: 'scale(0.94)',
+              filter: 'grayscale(0.3)',
+            };
+          } else if (isDropTarget) {
+            dragVisual = {
+              outline: '3px solid #6366f1',
+              outlineOffset: '-3px',
+              boxShadow: '0 0 0 4px rgba(99,102,241,0.18), 0 6px 18px rgba(99,102,241,0.28)',
+              background: 'rgba(99,102,241,0.08)',
+              transform: 'scale(1.015)',
+            };
+          } else if (isSwapped) {
+            dragVisual = {
+              outline: '3px solid #10b981',
+              outlineOffset: '-3px',
+              boxShadow: '0 0 0 6px rgba(16,185,129,0.22), 0 8px 22px rgba(16,185,129,0.35)',
+              transform: 'scale(1.015)',
+            };
+          }
+          var tileStyle = Object.assign(
+            {
+              transition: 'transform 220ms ease, opacity 180ms ease, box-shadow 240ms ease, outline-color 240ms ease, background 240ms ease, filter 220ms ease',
+              cursor: onSwapTiles ? (isDragging ? 'grabbing' : 'grab') : undefined,
+              borderRadius: 4,
+              position: 'relative',
+            },
+            config.getTileStyle(i),
+            dragVisual
           );
           return (
             <div
@@ -491,6 +528,15 @@ export default function SectionView({ section, idx, totalSections, sel, onSelect
               onDrop={function(e) { handleTileDrop(e, i); }}
               onDragEnd={handleTileDragEnd}
             >
+              {isDropTarget && (
+                <div style={{
+                  position: 'absolute', top: 6, right: 6, zIndex: 5,
+                  background: '#6366f1', color: '#fff',
+                  fontSize: 10, fontWeight: 700, padding: '2px 8px',
+                  borderRadius: 10, pointerEvents: 'none',
+                  boxShadow: '0 2px 6px rgba(0,0,0,0.18)',
+                }}>Hier ablegen</div>
+              )}
               <TileView tile={t}
                 selected={sel && sel.sid === section.id && sel.ti === i}
                 onClick={function() { onSelect({ sid: section.id, ti: i }); }}
