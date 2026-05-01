@@ -392,7 +392,38 @@ function LayoutPicker({ value, onChange, isMobile }) {
   );
 }
 
-export default function SectionView({ section, idx, totalSections, sel, onSelect, onDelete, onDuplicate, onCopy, onMoveUp, onMoveDown, onChangeLayout, onApplyImageCategory, viewMode, products, uiLang }) {
+export default function SectionView({ section, idx, totalSections, sel, onSelect, onDelete, onDuplicate, onCopy, onMoveUp, onMoveDown, onChangeLayout, onApplyImageCategory, onSwapTiles, viewMode, products, uiLang }) {
+  // Drag and Drop State pro Section. dragIdx ist der Tile Index der gerade
+  // gezogen wird, dropIdx ist der Hover Tile Index.
+  var [dragIdx, setDragIdx] = useState(null);
+  var [dropIdx, setDropIdx] = useState(null);
+
+  var handleTileDragStart = function(e, tileIdx) {
+    if (!onSwapTiles) return;
+    setDragIdx(tileIdx);
+    e.dataTransfer.effectAllowed = 'move';
+    try { e.dataTransfer.setData('text/plain', String(tileIdx)); } catch (err) {}
+  };
+  var handleTileDragOver = function(e, tileIdx) {
+    if (dragIdx === null || tileIdx === dragIdx) return;
+    e.preventDefault();
+    e.stopPropagation();
+    if (dropIdx !== tileIdx) setDropIdx(tileIdx);
+    e.dataTransfer.dropEffect = 'move';
+  };
+  var handleTileDrop = function(e, tileIdx) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (dragIdx !== null && tileIdx !== dragIdx && onSwapTiles) {
+      onSwapTiles(dragIdx, tileIdx);
+    }
+    setDragIdx(null);
+    setDropIdx(null);
+  };
+  var handleTileDragEnd = function() {
+    setDragIdx(null);
+    setDropIdx(null);
+  };
   var layout = findLayout(section.layoutId);
   var isMobile = viewMode === 'mobile';
   var config = getGridConfig(layout, isMobile);
@@ -444,8 +475,22 @@ export default function SectionView({ section, idx, totalSections, sel, onSelect
       </div>
       <div className="section-tiles" style={config.gridStyle}>
         {section.tiles.map(function(t, i) {
+          var isDragging = dragIdx === i;
+          var isDropTarget = dropIdx === i && dragIdx !== null;
+          var tileStyle = Object.assign({}, config.getTileStyle(i),
+            isDragging ? { opacity: 0.4 } : {},
+            isDropTarget ? { outline: '2px dashed #6366f1', outlineOffset: -2 } : {}
+          );
           return (
-            <div key={section.id + '-' + i} style={config.getTileStyle(i)}>
+            <div
+              key={section.id + '-' + i}
+              style={tileStyle}
+              draggable={!!onSwapTiles}
+              onDragStart={function(e) { handleTileDragStart(e, i); }}
+              onDragOver={function(e) { handleTileDragOver(e, i); }}
+              onDrop={function(e) { handleTileDrop(e, i); }}
+              onDragEnd={handleTileDragEnd}
+            >
               <TileView tile={t}
                 selected={sel && sel.sid === section.id && sel.ti === i}
                 onClick={function() { onSelect({ sid: section.id, ti: i }); }}
