@@ -212,9 +212,27 @@ E. ASIN Liste, wie wirst du sie liefern?
    [ • ] a) Ich kopiere sie als Text unten ein
    [ • ] b) Helium 10 CSV (lade ich später ins Tool)
    [ • ] c) Habe sie noch nicht, fülle ich später nach
+
+F. Brand Voice (Mehrfachauswahl, mindestens 2 wählen). Jede Wahl
+   verändert direkt den Headline Stil. Wähle bewusst.
+
+   [ ] a) **nahbar** → Headlines duzen, Frage Pattern erlaubt
+          ("Welches Sofa passt zu dir"), Alltagssprache
+   [ ] b) **direkt** → kurze Aussagen ohne Floskel, max 4 Wörter,
+          Imperativ erlaubt ("Hol dir den Sommer")
+   [ ] c) **technisch** → konkrete Zahlen und Specs in Headlines
+          erlaubt ("Boxspring ab 200 Euro"), kein Storytelling
+   [ ] d) **emotional** → Sinneseindrücke, Stimmungsworte
+          ("warm", "ruhig", "lebendig"), längere Headlines OK
+   [ ] e) **professionell** → siezen, kein Imperativ,
+          neutralere Substantive
+   [ ] f) **saisonal** → saisonale Trigger Wörter erlaubt
+          ("Bereit für die Saison", "Jetzt für den Winter")
 ```
 
-Akzeptiere Kurzantworten wie "A1, B b c d, C2, D1, E1". Akzeptiere auch Frei Eingabe.
+Akzeptiere Kurzantworten wie "A1, B b c d, C2, D1, E1, F a b f". Akzeptiere auch Frei Eingabe.
+
+Block F Brand Voice ist Pflicht und wirkt sich auf jede Headline aus die der Skill generiert. Mische die gewählten Adjektive im Headline Stil. Beispiel: bei `a + b + f` (nahbar + direkt + saisonal) liest sich das wie "Hol dir den Sommer" plus duzen plus saisonale Trigger. Bei `c + e` (technisch + professionell) liest sich das wie "Boxspring ab 200 Euro inklusive Topper" mit siezen.
 
 ### Schritt 2, klärende Rückfragen je nach Antwort
 
@@ -227,18 +245,53 @@ Stelle weitere Rückfragen **nur** wo die ersten Antworten Lücken offen lassen 
 
 Halte Rückfragen kurz und gezielt. Nicht alles auf einmal, lieber dialogisch in 2 oder 3 Runden.
 
-### Schritt 3, Konzept bauen
+### Schritt 3, Konzept Skelett bauen
 
-Sobald alle nötigen Inputs da sind, baue das Konzept entsprechend dem Scope. Verwende:
+Sobald alle nötigen Inputs da sind, baue zuerst das **Konzept Skelett**, NICHT das fertige JSON. Das Skelett ist:
 
-- **Tool Vokabular** aus Kapitel "Tool Schema" weiter unten
-- **CI Konventionen** aus dem User Input (Farben, Schrift, Logo)
-- **Wording Regeln** (siehe oben, kein Em Dash, ein Wort grün als Highlight)
-- **Modul Auswahl** passend zum Page Type (Homepage, Kategorie, Bestseller, Sale, Über Uns, Subpage)
+- Liste aller Pages (Home, Hauptkategorien, Sale, Über Uns, Bestseller, Produktberater, plus Subpages)
+- Pro Page der grobe Modul Flow (Hero, Sub Navigator, Shoppable, Bestseller Showcase, Vollkatalog, Cross Link)
 
-### Schritt 4, Briefing JSON ausgeben
+Outputten als knappe Liste, **ohne Headlines**. Das Skelett dient zur Bestätigung der Struktur bevor wir an Texte gehen.
 
-Output ist ein einzelner Code Block mit `json` Sprache, der direkt in das Brand Store Builder Tool importiert werden kann. Format siehe unten.
+### Schritt 4, Headlines im Chat abstimmen (Pflicht, niemals überspringen)
+
+**Bevor das Briefing JSON erzeugt wird**, schlage pro Page **drei Hero Headline Optionen** im Chat vor und warte auf User Auswahl. Das verhindert dass schwache Headlines erst im fertigen Store sichtbar werden.
+
+Format pro Page:
+
+```
+Page: Über Uns
+
+Hero Headline Vorschläge:
+1. Hinter Juskys / Personen, Halle, Sortiment
+2. Wer steckt dahinter / Mittelständler aus Deutschland
+3. Eine Marke, ein Team / Geschichte und Werte seit 2005
+
+Welche möchtest du? (1, 2, 3 oder eigene Variante)
+```
+
+User antwortet mit Zahl oder gibt eigene Variante. Akzeptiere auch Sammelantworten wie "Über Uns 2, Bestseller 1, Garten 3".
+
+**Wenn der Store viele Subpages hat (über 10)**, nicht jede einzeln im Dialog. Stattdessen: für Hauptseiten (Home, Hauptkategorien, Sale, Über Uns, Bestseller, Produktberater) einzeln 3 Vorschläge im Chat, für Subpages eine Tabelle mit jeweils einem Default Vorschlag den der User punktuell ändern kann:
+
+```
+Sub Page Hero Headlines (Default Vorschläge, sag wo du was anderes willst):
+
+Garten > Sofas → "Sofas in jeder Größe"
+Garten > Loungegruppen → "Lounge bereit für die Saison"
+...
+Möbel > Sofas → "Komfort fürs Wohnzimmer"
+...
+
+Welche willst du ändern? (Liste pro Sub angeben oder "alle ok")
+```
+
+Erst nach Bestätigung der Headlines geht es zum Schritt 5.
+
+### Schritt 5, Briefing JSON ausgeben
+
+Output ist ein einzelner Code Block mit `json` Sprache, der direkt in das Brand Store Builder Tool importiert werden kann. Format siehe unten. Die im Schritt 4 abgestimmten Headlines sind als Hero Headlines pro Page eingebaut. Andere Headlines (Trenner, Bestseller Section, USP Tile, Cross Link) werden vom Skill nach Brand Voice generiert und folgen den Regeln aus dem Sprache Kapitel.
 
 Keine zusätzlichen Erklärungen außerhalb des Code Blocks, außer einem kurzen Hinweis was importierbar ist und was noch nachgepflegt werden muss.
 
