@@ -201,30 +201,32 @@ export var LAYOUT_TILE_DIMS = {
   'vh-4square': [I.VH_SQUARE, I.VH_SQUARE, I.VH_SQUARE, I.VH_SQUARE],
 };
 
+// Helper: passende Mobile Dimensionen für eine Layout / Desktop Größe ableiten.
+// Standard Layouts: Mobile = Desktop. VH: fix 1500x750. Full Width: 1680
+// Pixel breit, Höhe folgt Desktop Höhe (mit 5:1 Mindestverhältnis Schutz).
+export function deriveMobileDims(layoutId, desktopW, desktopH) {
+  var resolved = resolveLayoutId(layoutId);
+  var layout = findLayout(resolved);
+  if (layout && layout.type === 'vh') {
+    return { w: 1500, h: 750 };
+  } else if (layout && layout.type === 'fullwidth') {
+    return { w: 1680, h: Math.max(Number(desktopH) || 600, Math.ceil(1680 / 5)) };
+  } else {
+    return { w: Number(desktopW) || 1500, h: Number(desktopH) || 1500 };
+  }
+}
+
 // Helper: create empty tile with correct dimensions for a specific layout position
 export function emptyTileForLayout(layoutId, tileIndex) {
   var resolved = resolveLayoutId(layoutId);
   var dims = LAYOUT_TILE_DIMS[resolved];
   var d = dims && dims[tileIndex] ? dims[tileIndex] : { w: 3000, h: 1200 };
-  var layout = findLayout(resolved);
-  // VH mobile: fixed min 1500×750. Full-width mobile: 1680px wide (separate image!). Standard mobile: = desktop dims.
-  // Aspect ratio limits: Desktop max 15:1 (min h = w/15), Mobile max 5:1 (min h = w/5)
-  var mobileW, mobileH;
-  if (layout && layout.type === 'vh') {
-    mobileW = 1500;
-    mobileH = 750;
-  } else if (layout && layout.type === 'fullwidth') {
-    // Full-width: mobile is 1680px wide, height set independently (default = desktop height)
-    mobileW = 1680;
-    mobileH = Math.max(d.h, Math.ceil(1680 / 5)); // Enforce mobile max ratio 5:1
-  } else {
-    mobileW = d.w;
-    mobileH = d.h;
-  }
+  // Mobile Dimensionen über den Helper damit es nur eine Stelle gibt.
+  var mob = deriveMobileDims(resolved, d.w, d.h);
   return {
     type: 'image', brief: '', textOverlay: emptyTextOverlay(),
     dimensions: { w: d.w, h: d.h },
-    mobileDimensions: { w: mobileW, h: mobileH },
+    mobileDimensions: { w: mob.w, h: mob.h },
     asins: [], linkAsin: '', linkUrl: '',
     uploadedImage: null, uploadedImageMobile: null, videoThumbnail: null,
     bgColor: '',

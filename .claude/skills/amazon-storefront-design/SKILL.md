@@ -318,6 +318,8 @@ Das Briefing JSON hat diese Struktur. Das Tool ergänzt fehlende IDs und Default
 | `bgColor` | string | nein | HEX Farbe |
 | `imageCategory` | string | nein | `store_hero`, `benefit`, `product`, `creative`, `lifestyle`, `text_image` |
 | `imageRef` | string | nein | Topic Tag für Bild Reuse (siehe Abschnitt Image Reuse) |
+| `dimensions` | object {w, h} | nein | Override für Tile Pixel Dimensionen Desktop. Wenn nicht gesetzt, nutzt das Tool den Layout Default. Pflicht wenn das Tile von der Default Höhe abweichen soll (z.B. Trenner flach, Shoppable hoch) |
+| `mobileDimensions` | object {w, h} | nein | Override für Mobile Dimensionen. Wenn nicht gesetzt, wird Mobile aus dem Layout Typ und der Desktop Höhe abgeleitet (Standard Layout: Mobile gleich Desktop, VH: 1500x750 fix, Full Width: 1680 breit) |
 
 ### Tile Types
 
@@ -572,7 +574,7 @@ Lifestyle Tiles sind klickbar (linkAsin), Product Grid darunter zeigt die volle 
 
 ### Variable Tile Höhen je nach Funktion
 
-Tile Dimensionen sind **nicht** auf 3000x600 fixiert. Layout `1` (Full Width) erlaubt Höhen zwischen 200 (Desktop max 15:1) und ca 2400. Wähle die Höhe **nach Funktion des Tiles**:
+Tile Dimensionen sind **nicht** auf 3000x600 fixiert. Layout `1` (Full Width) erlaubt Höhen zwischen 200 (Desktop max 15:1 Verhältnis) und etwa 2400. Wähle die Höhe **nach Funktion des Tiles**:
 
 | Tile Funktion | Empfohlene Desktop Höhe (bei 3000 Breite) | Mobile Höhe (bei 1680 Breite) |
 |---------------|-------------------------------------------:|-------------------------------:|
@@ -586,6 +588,45 @@ Tile Dimensionen sind **nicht** auf 3000x600 fixiert. Layout `1` (Full Width) er
 Faustregel: ein schmaler Trenner braucht keine 600 Pixel Höhe, da reicht 350. Ein Shoppable Bild mit 5 Produkten braucht mehr als 600 Pixel sonst werden die Hotspots zu eng. Pro Tile bewusst die Höhe wählen, nicht stur 3000x600 als Default.
 
 Mindestverhältnis: Desktop max 15:1 (Breite zu Höhe), Mobile max 5:1.
+
+**Wie du das im Briefing JSON setzt**: Pro Tile das Feld `dimensions` (Desktop) und optional `mobileDimensions` (Mobile) angeben. Beispiele:
+
+Trenner Tile, flach (Layout 1):
+
+```json
+{
+  "type": "image",
+  "textOverlay": { "heading": "Bereit für die **Saison**" },
+  "brief": "Trenner Textbild mit Stoff Makro im Hintergrund.",
+  "imageCategory": "text_image",
+  "dimensions": { "w": 3000, "h": 350 }
+}
+```
+
+Shoppable Image, hoch (Layout 1):
+
+```json
+{
+  "type": "shoppable_image",
+  "textOverlay": { "heading": "Lounge, **fertig** zum Loslegen" },
+  "brief": "Shoppable Terrasse mit 3 Produkten.",
+  "asins": ["B0...", "B0...", "B0..."],
+  "dimensions": { "w": 3000, "h": 1500 }
+}
+```
+
+Hero Page Header (Layout 1):
+
+```json
+{
+  "type": "image",
+  "textOverlay": { "heading": "Was **dein** Zuhause braucht" },
+  "brief": "Hero Bild Wohnraum mit Übergang Terrasse.",
+  "dimensions": { "w": 3000, "h": 800 }
+}
+```
+
+Wenn `dimensions` nicht angegeben ist, fällt das Tool zurück auf den Layout Default (Layout 1: 3000x600). `mobileDimensions` ist optional, wenn nicht angegeben wird Mobile automatisch abgeleitet (Standard Layout: Mobile gleich Desktop, VH: fix 1500x750, Full Width: 1680 breit, Höhe folgt Desktop).
 
 ### Layout Variation pro Page
 
