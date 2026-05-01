@@ -241,10 +241,10 @@ function buildFilenameMap(store) {
   return map;
 }
 
-// Build a map of tile fingerprints → first occurrence location.
-// Primärer Dedup Schlüssel ist tile.imageRef wenn gesetzt, sonst Fingerprint
-// aus tile Inhalten. So erkennt der Designer explizit getaggte Reuse Stellen
-// und auch implizit identische Tiles ohne imageRef.
+// Build a map of tile fingerprints → all occurrences. Primärer Dedup
+// Schlüssel ist tile.imageRef wenn gesetzt, sonst Fingerprint aus tile
+// Inhalten. Sammelt ALLE Stellen pro Familie damit der Designer Hinweis
+// alle Vorkommen anzeigen kann (kein Master Konzept).
 function buildDuplicateMap(store) {
   var map = {};
   (store.pages || []).forEach(function(pg) {
@@ -253,14 +253,12 @@ function buildDuplicateMap(store) {
         if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text' || tile.type === 'product_selector') return;
         var key = tile.imageRef ? ('ref:' + String(tile.imageRef).toLowerCase()) : ('fp:' + tileFingerprint(tile));
         if (!key || key === 'fp:image||||||x|' || key === 'fp:') return;
-        if (!map[key]) {
-          map[key] = { page: pg.name, section: si + 1, tile: ti + 1, count: 1, imageRef: tile.imageRef || '' };
-        } else {
-          map[key].count++;
-        }
+        if (!map[key]) map[key] = { locations: [], imageRef: tile.imageRef || '' };
+        map[key].locations.push({ page: pg.name, section: si + 1, tile: ti + 1 });
       });
     });
   });
+  Object.keys(map).forEach(function(k) { map[k].count = map[k].locations.length; });
   return map;
 }
 
@@ -558,12 +556,23 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
       {duplicateInfo && duplicateInfo.count > 1 && (
         <div className="briefing-field" style={{ background: '#ecfdf5', border: '2px solid #10b981', borderRadius: 4, padding: '6px 10px', marginBottom: 6 }}>
           <div style={{ fontSize: 11, fontWeight: 700, color: '#047857', marginBottom: 2 }}>
-            Bild bereits vorhanden, nicht neu designen
+            Diese Kachel kommt {duplicateInfo.count} mal im Store vor
           </div>
           <div style={{ fontSize: 10, color: '#065f46', lineHeight: 1.4 }}>
-            Identisch mit <b>{duplicateInfo.page}</b>, Section {duplicateInfo.section}, Tile {duplicateInfo.tile}. Lade dort dein Bild hoch, das gleiche Bild wird automatisch auf {duplicateInfo.count - 1} weitere Stellen angewendet.
-            {duplicateInfo.imageRef && <span style={{ display: 'block', marginTop: 2, fontFamily: 'monospace', color: '#047857', fontSize: 9 }}>imageRef: {duplicateInfo.imageRef}</span>}
+            Bild nur einmal designen. Beim Upload ins Tool reicht der Reuse Filename in einem Ordner, das Tool verteilt das Bild automatisch auf alle {duplicateInfo.count} Stellen. Bei Per Page Ordner Übergabe an den Kunden: dasselbe File in alle {duplicateInfo.count} Page Ordner kopieren, damit pro Page Ordner alle Bilder dieser Page liegen.
           </div>
+          {duplicateInfo.others && duplicateInfo.others.length > 0 && (
+            <div style={{ marginTop: 4, fontSize: 10, color: '#065f46' }}>
+              Auch in:
+              <ul style={{ margin: '2px 0 0 14px', padding: 0 }}>
+                {duplicateInfo.others.slice(0, 8).map(function(loc, i) {
+                  return <li key={i}><b>{loc.page}</b>, S{loc.section} T{loc.tile}</li>;
+                })}
+                {duplicateInfo.others.length > 8 && <li>plus {duplicateInfo.others.length - 8} weitere</li>}
+              </ul>
+            </div>
+          )}
+          {duplicateInfo.imageRef && <span style={{ display: 'block', marginTop: 4, fontFamily: 'monospace', color: '#047857', fontSize: 9 }}>imageRef: {duplicateInfo.imageRef}</span>}
         </div>
       )}
 
@@ -823,19 +832,31 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
       {/* ─── FILE NAMES (click to copy) ─── */}
       {isImageTile && pageName != null && sectionIndex != null && (function() {
         var sameRatio = tile.syncDimensions || isSameAspectRatio(tile.dimensions, tile.mobileDimensions);
-        if (sameRatio) {
-          return (
-            <div style={{ marginTop: 4, padding: '4px 0', fontSize: 10, lineHeight: 1.8 }}>
-              <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'sync')} />
-            </div>
-          );
-        }
+        var hasReuse = tile.imageRef && duplicateInfo && duplicateInfo.count > 1;
         return (
           <div style={{ marginTop: 4, padding: '4px 0', fontSize: 10, lineHeight: 1.8 }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'desktop')} label="D" />
-              <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'mobile')} label="M" />
-            </div>
+            {hasReuse && (
+              <div style={{ marginBottom: 4 }}>
+                <div style={{ fontSize: 9, fontWeight: 700, color: '#047857', marginBottom: 2 }}>Reuse Filename (ein File für alle {duplicateInfo.count} Stellen)</div>
+                {sameRatio
+                  ? <CopyableFilename filename={tile.imageRef + '.jpg'} />
+                  : (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                      <CopyableFilename filename={tile.imageRef + '_desktop.jpg'} label="D" />
+                      <CopyableFilename filename={tile.imageRef + '_mobile.jpg'} label="M" />
+                    </div>
+                  )}
+              </div>
+            )}
+            {hasReuse && <div style={{ fontSize: 9, fontWeight: 700, color: '#475569', marginBottom: 2 }}>Per Tile Filename (Alternative, einzeln)</div>}
+            {sameRatio
+              ? <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'sync')} />
+              : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'desktop')} label="D" />
+                  <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'mobile')} label="M" />
+                </div>
+              )}
           </div>
         );
       })()}
@@ -2484,11 +2505,21 @@ export default function BriefingView() {
                   </div>
                   {item.section.tiles.map(function(tile, ti) {
                     var isSelected = selectedTile && selectedTile.sid === item.section.id && selectedTile.ti === ti;
-                    // imageRef hat Vorrang, Fingerprint ist Fallback
+                    // imageRef hat Vorrang, Fingerprint ist Fallback. Hinweis
+                    // wird auf JEDER Stelle angezeigt (kein Master Konzept).
                     var dupKey = tile.imageRef ? ('ref:' + String(tile.imageRef).toLowerCase()) : ('fp:' + tileFingerprint(tile));
-                    var dupInfo = dupKey && duplicateMap[dupKey] && duplicateMap[dupKey].count > 1
-                      && !(duplicateMap[dupKey].page === item.pageName && duplicateMap[dupKey].section === item.sectionIndex + 1 && duplicateMap[dupKey].tile === ti + 1)
-                      ? duplicateMap[dupKey] : null;
+                    var dupInfo = null;
+                    if (dupKey && duplicateMap[dupKey] && duplicateMap[dupKey].count > 1) {
+                      var entry = duplicateMap[dupKey];
+                      var others = (entry.locations || []).filter(function(loc) {
+                        return !(loc.page === item.pageName && loc.section === item.sectionIndex + 1 && loc.tile === ti + 1);
+                      });
+                      dupInfo = {
+                        count: entry.count,
+                        others: others,
+                        imageRef: entry.imageRef,
+                      };
+                    }
                     return (
                       <TileDetail
                         key={ti}

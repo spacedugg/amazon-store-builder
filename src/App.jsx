@@ -18,6 +18,167 @@ import AsinOverview from './components/AsinOverview';
 
 var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, headerBannerColor: '', category: 'generic', googleDriveUrl: '' };
 
+// Synchronisiert imageRef WxH Suffixe mit den aktuellen Tile Dimensionen.
+// Wenn ein Tile nach einem Layout Wechsel andere Dimensionen hat, wird
+// der WxH Teil im imageRef neu berechnet. Solo Suffix (eigene Variante
+// nach Entkopplung) bleibt erhalten. Damit gehört das Tile danach zum
+// passenden Reuse Pool seiner aktuellen Größe oder bleibt isoliert wenn
+// keine andere Tile dieselbe Größe und Topic hat.
+function refreshImageRefs(store) {
+  if (!store || !store.pages) return store;
+
+  // Schritt 1, Dimensions Suffix updaten
+  var changed = false;
+  var newPages = store.pages.map(function(pg) {
+    return Object.assign({}, pg, {
+      sections: (pg.sections || []).map(function(sec) {
+        return Object.assign({}, sec, {
+          tiles: (sec.tiles || []).map(function(t) {
+            if (!t || !t.imageRef || !t.dimensions) return t;
+            var soloMatch = String(t.imageRef).match(/^(.+?)-(\d+)x(\d+)(-solo-[a-z0-9]+)?$/);
+            if (!soloMatch) return t;
+            var stem = soloMatch[1];
+            var oldW = soloMatch[2];
+            var oldH = soloMatch[3];
+            var soloSuffix = soloMatch[4] || '';
+            var newW = String(t.dimensions.w);
+            var newH = String(t.dimensions.h);
+            if (oldW === newW && oldH === newH) return t;
+            changed = true;
+            return Object.assign({}, t, {
+              imageRef: stem + '-' + newW + 'x' + newH + soloSuffix,
+            });
+          }),
+        });
+      }),
+    });
+  });
+
+  // Schritt 2, Briefing Konsistenz pro Reuse Familie prüfen.
+  // Tiles mit gleichem imageRef (ohne Solo Suffix) gehören in eine Familie.
+  // Wenn ein Tile in einer Familie abweichendes Briefing hat (anderes
+  // textOverlay, brief, imageCategory, bgColor, dimensions, type oder
+  // textAlign), wird es automatisch entkoppelt. Damit ist die Familie
+  // ein echter Reuse Pool, alle Mitglieder teilen das identische Bild.
+  // Master Fingerprint pro Familie ist der häufigste Fingerprint.
+  function tileBriefingFingerprint(t) {
+    if (!t) return '';
+    var ov = (t.textOverlay && typeof t.textOverlay === 'object') ? t.textOverlay : {};
+    var ovStr = [ov.heading || '', ov.subheading || '', ov.body || '', (ov.bullets || []).join(';'), ov.cta || ''].join('§');
+    var d = t.dimensions || {};
+    return [
+      t.type || '', t.brief || '', ovStr, t.imageCategory || '', t.bgColor || '',
+      d.w + 'x' + d.h, t.textAlign || 'left',
+    ].join('|');
+  }
+
+  var groups = {};
+  newPages.forEach(function(pg, pi) {
+    (pg.sections || []).forEach(function(sec, si) {
+      (sec.tiles || []).forEach(function(t, ti) {
+        if (!t || !t.imageRef) return;
+        if (/-solo-[a-z0-9]+$/.test(t.imageRef)) return; // schon entkoppelt
+        if (!groups[t.imageRef]) groups[t.imageRef] = [];
+        groups[t.imageRef].push({ pi: pi, si: si, ti: ti, fp: tileBriefingFingerprint(t) });
+      });
+    });
+  });
+
+  Object.keys(groups).forEach(function(key) {
+    var members = groups[key];
+    if (members.length < 2) return;
+    // Häufigsten Fingerprint als Master bestimmen
+    var counts = {};
+    members.forEach(function(m) { counts[m.fp] = (counts[m.fp] || 0) + 1; });
+    var masterFp = Object.keys(counts).reduce(function(a, b) {
+      return counts[a] >= counts[b] ? a : b;
+    });
+    // Outlier bekommen automatischen Solo Suffix
+    members.forEach(function(m) {
+      if (m.fp === masterFp) return;
+      var pg = newPages[m.pi];
+      var sec = pg.sections[m.si];
+      var t = sec.tiles[m.ti];
+      var soloId = Math.random().toString(36).slice(2, 8);
+      var newSecTiles = sec.tiles.slice();
+      newSecTiles[m.ti] = Object.assign({}, t, {
+        imageRef: t.imageRef + '-solo-' + soloId,
+      });
+      var newSections = pg.sections.slice();
+      newSections[m.si] = Object.assign({}, sec, { tiles: newSecTiles });
+      newPages[m.pi] = Object.assign({}, pg, { sections: newSections });
+      changed = true;
+    });
+  });
+
+  // Schritt 3, Auto-Merge: Tiles mit identischem Briefing aber unterschiedlichen
+  // (oder fehlenden) imageRefs werden automatisch zur Familie zusammengeführt.
+  // Tritt ein wenn der User Sections kopiert, gleichen Inhalt manuell an mehrere
+  // Stellen kopiert oder ein Briefing JSON importiert in dem Tiles identische
+  // Texte aber keinen einheitlichen Tag haben. Solo Tiles (explizit entkoppelt)
+  // werden ausgenommen und bleiben isoliert.
+  var IMG_TYPES = ['image', 'shoppable_image', 'image_text'];
+  var fpGroups = {};
+  newPages.forEach(function(pg, pi) {
+    (pg.sections || []).forEach(function(sec, si) {
+      (sec.tiles || []).forEach(function(t, ti) {
+        if (!t || !t.dimensions) return;
+        if (IMG_TYPES.indexOf(t.type) < 0) return;
+        if (t.imageRef && /-solo-[a-z0-9]+$/.test(t.imageRef)) return;
+        var ov = t.textOverlay || {};
+        var hasContent = (t.brief && t.brief.length > 0)
+          || ov.heading || ov.subheading || ov.body || (ov.bullets && ov.bullets.length)
+          || ov.cta;
+        if (!hasContent) return;
+        var fp = tileBriefingFingerprint(t);
+        if (!fpGroups[fp]) fpGroups[fp] = [];
+        fpGroups[fp].push({ pi: pi, si: si, ti: ti, ref: t.imageRef || '' });
+      });
+    });
+  });
+
+  Object.keys(fpGroups).forEach(function(fp) {
+    var members = fpGroups[fp];
+    if (members.length < 2) return;
+    // Häufigsten imageRef als kanonisch nehmen, sonst Hash basierten Auto Tag
+    var refCounts = {};
+    members.forEach(function(m) { refCounts[m.ref] = (refCounts[m.ref] || 0) + 1; });
+    var canonical = Object.keys(refCounts).reduce(function(a, b) {
+      // Bevorzuge nicht leere Refs vor leeren
+      if (a === '' && b !== '') return b;
+      if (b === '' && a !== '') return a;
+      return refCounts[a] >= refCounts[b] ? a : b;
+    });
+    if (!canonical) {
+      // Stable Hash aus Fingerprint
+      var hash = 0;
+      for (var i = 0; i < fp.length; i++) {
+        hash = ((hash << 5) - hash + fp.charCodeAt(i)) | 0;
+      }
+      var hashHex = Math.abs(hash).toString(36).slice(0, 6);
+      var pgFirst = newPages[members[0].pi];
+      var tFirst = pgFirst.sections[members[0].si].tiles[members[0].ti];
+      var d = tFirst.dimensions || {};
+      canonical = 'auto-' + hashHex + '-' + d.w + 'x' + d.h;
+    }
+    // Allen Mitgliedern den kanonischen Ref setzen wenn abweichend
+    members.forEach(function(m) {
+      var pg = newPages[m.pi];
+      var sec = pg.sections[m.si];
+      var t = sec.tiles[m.ti];
+      if (t.imageRef === canonical) return;
+      var newSecTiles = sec.tiles.slice();
+      newSecTiles[m.ti] = Object.assign({}, t, { imageRef: canonical });
+      var newSections = pg.sections.slice();
+      newSections[m.si] = Object.assign({}, sec, { tiles: newSecTiles });
+      newPages[m.pi] = Object.assign({}, pg, { sections: newSections });
+      changed = true;
+    });
+  });
+
+  return changed ? Object.assign({}, store, { pages: newPages }) : store;
+}
+
 export default function App() {
   // Check if this is a share link — render full BriefingView
   if (window.location.pathname.indexOf('/share/') === 0) {
@@ -76,7 +237,7 @@ export default function App() {
     });
     skipHistoryRef.current = true;
     var parsed = JSON.parse(prev);
-    setStore(parsed);
+    setStore(refreshImageRefs(parsed));
     setCurPage(parsed.pages && parsed.pages[0] ? parsed.pages[0].id : '');
     setSel(null);
   }, []);
@@ -91,12 +252,14 @@ export default function App() {
     });
     skipHistoryRef.current = true;
     var parsed = JSON.parse(next);
-    setStore(parsed);
+    setStore(refreshImageRefs(parsed));
     setCurPage(parsed.pages && parsed.pages[0] ? parsed.pages[0].id : '');
     setSel(null);
   }, []);
 
-  // Wrap setStore to track undo history
+  // Wrap setStore to track undo history. refreshImageRefs synchronisiert
+  // die imageRef WxH Suffixe mit den aktuellen Tile Dimensionen, damit
+  // Reuse Pools auch nach Layout Wechseln konsistent bleiben.
   var setStoreWithUndo = useCallback(function(updater) {
     setStore(function(prev) {
       var next = typeof updater === 'function' ? updater(prev) : updater;
@@ -104,7 +267,7 @@ export default function App() {
         pushUndo(prev);
       }
       skipHistoryRef.current = false;
-      return next;
+      return refreshImageRefs(next);
     });
   }, [pushUndo]);
 
@@ -558,7 +721,7 @@ export default function App() {
   var handleLoadSaved = async function(id) {
     var result = await loadStore(id);
     if (result && result.data) {
-      setStore(result.data);
+      setStore(refreshImageRefs(result.data));
       setStoreId(id);
       if (result.shareToken) setShareToken(result.shareToken);
       setCurPage(result.data.pages[0] ? result.data.pages[0].id : '');
@@ -569,7 +732,7 @@ export default function App() {
   var handleLoadAutoSave = function() {
     var data = loadAutoSave();
     if (data && data.pages && data.pages.length > 0) {
-      setStore(data);
+      setStore(refreshImageRefs(data));
       setCurPage(data.pages[0] ? data.pages[0].id : '');
       setSel(null);
     }
@@ -587,7 +750,7 @@ export default function App() {
       var result = await importStoreByShareLink(url);
       if (result.error) return result.error;
       // Load the imported store into the editor
-      setStore(result.data);
+      setStore(refreshImageRefs(result.data));
       setStoreId(result.id);
       setShareToken(result.shareToken || null);
       setCurPage(result.data.pages && result.data.pages[0] ? result.data.pages[0].id : '');
