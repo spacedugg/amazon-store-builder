@@ -1091,7 +1091,7 @@
               "imageRef": ""
             },
             {
-              "type": "image_text",
+              "type": "image",
               "textOverlay": {
                 "heading": "Ein **Haus**, viele Räume",
                 "subheading": "Inhabergeführt seit 2005",
@@ -1099,7 +1099,7 @@
                 "bullets": [],
                 "cta": "Mehr über Juskys"
               },
-              "brief": "Brand Story Tile mit Text neben Bild aus Section Tile 1. Verlinkt auf Über Uns.",
+              "brief": "Brand Story Bild. Heading, Subheading, Body und CTA grafisch ins Bild gerendert. Hintergrund passend zur Brand Story (z.B. Hallen Detail, Stoffmakro oder Werkstatt Atmosphäre). Verlinkt auf Über Uns.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "page:Über Uns",
@@ -1355,88 +1355,6 @@
               "imageCategory": "creative",
               "textAlign": "left",
               "imageRef": ""
-            }
-          ]
-        },
-        {
-          "layoutId": "2x2wide",
-          "module": "footer.categoryNavFooter",
-          "tiles": [
-            {
-              "type": "image",
-              "textOverlay": {
-                "heading": "**GARTEN**",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Footer Kategorie Tile mit Mini Icon.",
-              "asins": [],
-              "hotspots": [],
-              "linkUrl": "page:Garten",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "creative",
-              "textAlign": "left",
-              "imageRef": "cat-garten-lifestyle-1500x750"
-            },
-            {
-              "type": "image",
-              "textOverlay": {
-                "heading": "**MÖBEL**",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Footer Kategorie Tile mit Mini Icon.",
-              "asins": [],
-              "hotspots": [],
-              "linkUrl": "page:Möbel",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "creative",
-              "textAlign": "left",
-              "imageRef": "cat-moebel-lifestyle-1500x750"
-            },
-            {
-              "type": "image",
-              "textOverlay": {
-                "heading": "**HAUSHALT**",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Footer Kategorie Tile mit Mini Icon.",
-              "asins": [],
-              "hotspots": [],
-              "linkUrl": "page:Haushalt",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "creative",
-              "textAlign": "left",
-              "imageRef": "cat-haushalt-lifestyle-1500x750"
-            },
-            {
-              "type": "image",
-              "textOverlay": {
-                "heading": "**ÜBER** UNS",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Footer Tile zur Brand Story.",
-              "asins": [],
-              "hotspots": [],
-              "linkUrl": "page:Über Uns",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "creative",
-              "textAlign": "left",
-              "imageRef": "cat-ueberuns-lifestyle-1500x750"
             }
           ]
         }
@@ -4984,7 +4902,7 @@
               "imageRef": ""
             },
             {
-              "type": "image_text",
+              "type": "image",
               "textOverlay": {
                 "heading": "Inhabergeführt aus **Deutschland**",
                 "subheading": "Seit 2005",
@@ -4992,7 +4910,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Brand Story Tile mit Text neben Bild. Brand Story Lang aus Website Content kondensiert.",
+              "brief": "Brand Story Bild. Heading, Subheading, Body grafisch ins Bild integriert. Hintergrund passend zur Marken Atmosphäre. Brand Story Lang aus Website Content kondensiert.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -5228,6 +5146,232 @@
               "imageCategory": "creative",
               "textAlign": "left",
               "imageRef": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Produktberater",
+      "heroBannerBrief": "Store Hero Banner für Page Produktberater. Lifestyle Komposition passend zur Page Thematik. Desktop 3000x600, Mobile 1680x900, beide Bilder unterschiedlich.",
+      "heroBannerTextOverlay": "",
+      "sections": [
+        {
+          "layoutId": "1",
+          "module": "hero.fullWidthHero",
+          "tiles": [
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "Welches Modell **passt zu dir**",
+                "subheading": "In 3 Fragen zum Vorschlag",
+                "body": "",
+                "bullets": [],
+                "cta": "Quiz starten"
+              },
+              "brief": "Hero Bild Lifestyle Komposition mit mehreren Juskys Produkten in einem Wohnsetting.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            }
+          ]
+        },
+        {
+          "layoutId": "1",
+          "module": "engagement.productSelector",
+          "tiles": [
+            {
+              "type": "product_selector",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Quiz Tile, 3 Fragen, Antworten gemappt auf passende Juskys ASINs. Intro Bild im productSelector.intro.image hochladen, Antwort Bilder optional.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "",
+              "bgColor": "",
+              "imageCategory": "",
+              "textAlign": "left",
+              "imageRef": "",
+              "productSelector": {
+                "intro": {
+                  "enabled": true,
+                  "headline": "Was passt **zu dir**",
+                  "description": "3 Fragen, dein Vorschlag. Wir zeigen dir Modelle aus dem Juskys Sortiment die zu dir passen.",
+                  "buttonLabel": "Quiz starten",
+                  "image": null
+                },
+                "questions": [
+                  {
+                    "id": "q1",
+                    "questionText": "Wofür suchst du etwas",
+                    "descriptionText": "Wähle den Bereich der heute dran ist",
+                    "answers": [
+                      {
+                        "id": "a1",
+                        "text": "Wohnen",
+                        "image": null,
+                        "asins": [
+                          "B0CX1SJ9R1",
+                          "B0GX1BYJXM",
+                          "B0FNWSKJP2"
+                        ]
+                      },
+                      {
+                        "id": "a2",
+                        "text": "Schlafen",
+                        "image": null,
+                        "asins": [
+                          "B0BKQ6XDKV",
+                          "B07QWXMYV9",
+                          "B09PLDVF2L"
+                        ]
+                      },
+                      {
+                        "id": "a3",
+                        "text": "Garten",
+                        "image": null,
+                        "asins": [
+                          "B084JQYGYM",
+                          "B07P7PRG78",
+                          "B0GQTJ1MN1"
+                        ]
+                      },
+                      {
+                        "id": "a4",
+                        "text": "Haushalt",
+                        "image": null,
+                        "asins": [
+                          "B014IUTSW8",
+                          "B0DHGHCZTF",
+                          "B0BWN6NB4Z"
+                        ]
+                      },
+                      {
+                        "id": "a5",
+                        "text": "Werkstatt",
+                        "image": null,
+                        "asins": [
+                          "B0DQ5K13RK",
+                          "B072KDRTHG",
+                          "B07Z7QCTXW"
+                        ]
+                      },
+                      {
+                        "id": "a6",
+                        "text": "Tier",
+                        "image": null,
+                        "asins": [
+                          "B079YT88DT",
+                          "B09M7GCK5Y"
+                        ]
+                      }
+                    ],
+                    "allowImages": true
+                  },
+                  {
+                    "id": "q2",
+                    "questionText": "Was ist dir wichtig",
+                    "descriptionText": "Wähle dein wichtigstes Kriterium",
+                    "answers": [
+                      {
+                        "id": "a1",
+                        "text": "Komfort",
+                        "image": null,
+                        "asins": [
+                          "B0FNWSKJP2",
+                          "B0CX1SJ9R1",
+                          "B0D31GY3G4"
+                        ]
+                      },
+                      {
+                        "id": "a2",
+                        "text": "Praktisch",
+                        "image": null,
+                        "asins": [
+                          "B014IUTSW8",
+                          "B0DQ5K13RK",
+                          "B082HMV596"
+                        ]
+                      },
+                      {
+                        "id": "a3",
+                        "text": "Saisonal",
+                        "image": null,
+                        "asins": [
+                          "B084JQYGYM",
+                          "B07P7PRG78",
+                          "B0C37FB3B3"
+                        ]
+                      }
+                    ],
+                    "allowImages": false
+                  },
+                  {
+                    "id": "q3",
+                    "questionText": "Für wen",
+                    "descriptionText": "Solo, Paar oder Familie",
+                    "answers": [
+                      {
+                        "id": "a1",
+                        "text": "1 bis 2 Personen",
+                        "image": null,
+                        "asins": [
+                          "B0F32S7FDB",
+                          "B0CX1SJ9R1"
+                        ]
+                      },
+                      {
+                        "id": "a2",
+                        "text": "3 bis 4 Personen",
+                        "image": null,
+                        "asins": [
+                          "B07QWXMYV9",
+                          "B084JQYGYM"
+                        ]
+                      },
+                      {
+                        "id": "a3",
+                        "text": "Familie plus Tier",
+                        "image": null,
+                        "asins": [
+                          "B079YT88DT",
+                          "B0CX1SJ9R1"
+                        ]
+                      }
+                    ],
+                    "allowImages": false
+                  }
+                ],
+                "results": {
+                  "headline": "Dein **passendes** Modell",
+                  "description": "Diese Modelle passen zu deiner Auswahl. Klick rein für mehr Details.",
+                  "storePageLink": "",
+                  "restartLabel": "Quiz wiederholen",
+                  "disclaimer": ""
+                },
+                "styling": {
+                  "typography": "sans-serif",
+                  "size": "medium",
+                  "weight": "regular",
+                  "align": "center",
+                  "bgColor": "#ffffff",
+                  "bgRounded": true,
+                  "btnColor": "#93bd26",
+                  "btnRounded": true
+                },
+                "recommendedAsins": []
+              }
             }
           ]
         }

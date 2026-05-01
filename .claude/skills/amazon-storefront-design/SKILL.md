@@ -278,7 +278,16 @@ Das Briefing JSON hat diese Struktur. Das Tool ergänzt fehlende IDs und Default
 
 ### Tile Types
 
-`image`, `image_text`, `shoppable_image` (max 5 Hotspots), `product_grid`, `best_sellers`, `recommended`, `deals`, `video`, `text`, `product_selector`.
+**Erlaubt** (Whitelist, nutze nur diese):
+
+`image`, `shoppable_image` (max 5 Hotspots), `product_grid`, `best_sellers`, `recommended`, `deals`, `video`, `product_selector`.
+
+**Niemals nutzen**:
+
+- `text` (Native Text Modul). Wir designen alles als Bild, Texte werden vom Designer ins Bild gerendert. Native Text Module bietet Amazon zwar an, sieht aber unintegriert aus und passt nicht zu unserem Workflow.
+- `image_text` (Image with Text). Auf Amazon liegt der Text bei diesem Modul in einer separaten Textspalte neben dem Bild, was visuell ein Bruch ist. Wir machen stattdessen ein normales `image` Tile mit `imageCategory: text_image` und der Designer integriert Heading, Subheading, Body und CTA grafisch ins Bild. Die overlay Text Felder im JSON werden weiter befüllt, sind aber Briefing für den Designer, nicht separat gerenderte Amazon Felder.
+
+Wenn du im Briefing JSON ein klassisches "Bild plus Textbereich" Layout brauchst (z.B. Brand Story Split mit Foto links und Story rechts), nutze zwei `image` Tiles im `std-2equal` Layout, die zweite mit `imageCategory: text_image` und vollem Text Briefing.
 
 ### Layouts
 
@@ -317,12 +326,23 @@ Der Operator ersetzt sie später im Tool oder per CSV Import.
 
 | Page Type | Typischer Module Flow |
 |-----------|----------------------|
-| Homepage | hero, kategorie navigator, brand story, trenner, shoppable, **EINE** bestseller grid (kuratiert max 6 bis 8 ASINs gemischt), trenner, shoppable saisonal, USP leiste, footer nav. **Nie** mehr als eine Bestseller Section auf der Home. |
+| Homepage | hero, kategorie navigator, brand story, trenner, shoppable, **EINE** bestseller grid (kuratiert max 6 bis 8 ASINs gemischt), trenner, shoppable saisonal, USP leiste. **Nie** mehr als eine Bestseller Section auf der Home. **Keine** Footer Kategorie Nav, die Top Navigation oben zeigt schon alle Kategorien, eine zweite Liste am Page Ende ist redundant. |
 | Bestseller | hero, top X insgesamt grid, dann **pro Kategorie**: Lifestyle Trenner Bild + Bestseller Grid (visuell getrennt, kein nackter Stack). Sub Navigator weglassen, redundant zur Top Nav. |
 | Kategorie | hero, sub navigator, shoppable, bestseller thematic, trenner, feature highlight, USP leiste, vollkatalog product_grid, cross link |
 | Subpage | schmaler hero (eigener Claim, nicht "Sub-Name bei Sub-Name"), bestseller in der sub, vollkatalog der sub, **cross navigation** zu allen anderen Subs der Eltern Kategorie, cross link zurück zur Eltern Page |
-| Sale | hero, navigator filter, deals grids je Kategorie, USP leiste warum sale |
-| Über Uns | hero, brand story split, werte block, gallery, USP leiste, service block |
+| Sale | hero, navigator filter, deals grids je Kategorie |
+| Über Uns | hero, brand story split, werte block, gallery, service block |
+| Produktberater | hero plus product_selector Quiz Tile mit Intro Bild plus 2 bis 4 Fragen plus Antworten mit ASIN Mapping. **Pflicht Subpage** (siehe Abschnitt Produktberater Subpage). |
+
+### Footer und Page Ende
+
+Eine eigene Footer Kategorie Navigation am Page Ende ist **nicht** Standard. Die Top Navigation (Amazon Brand Store Menübar) zeigt bei jeder Page automatisch alle Hauptkategorien. Eine zweite Liste am Page Ende doppelt sich. Footer Banner sind nur sinnvoll wenn sie eine echte zusätzliche Funktion haben:
+
+- Cross Sell Banner zu **einer** verwandten Kategorie (nicht Liste, sondern eine konkrete Empfehlung)
+- Follow Banner für die Marke
+- Service oder Kontakt Banner
+
+Niemals eine 4er oder 6er Kachel Liste mit Kategorie Tiles als Footer.
 
 ## Tile und Section Best Practices
 
@@ -437,6 +457,79 @@ Damit kann der User innerhalb der Kategorie stöbern, ohne erst zur Eltern Page 
 2. Bestseller Grid mit den ASINs der Kategorie
 
 Das gibt visuell klare Blöcke pro Kategorie.
+
+### Produktberater Subpage (Pflicht)
+
+**Jeder Brand Store bekommt eine eigene Subpage `Produktberater`** mit einem `product_selector` Tile. Das ist ein interaktives Quiz auf Amazon, das den Kunden über 2 bis 4 Fragen zum passenden Produkt führt. Reduziert Bounce Rate und navigiert weniger entschlossene Käufer aktiv zur richtigen ASIN.
+
+**Schema des `productSelector` Felds**:
+
+```json
+{
+  "intro": {
+    "enabled": true,
+    "headline": "Welches Sofa passt zu dir",
+    "description": "3 Fragen, dein Ergebnis. Wir zeigen dir das passende Modell.",
+    "buttonLabel": "Quiz starten",
+    "image": null
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "questionText": "Wie viele Personen sitzen normal darauf",
+      "descriptionText": "Familie, Paar, Solo",
+      "answers": [
+        { "id": "a1", "text": "1 bis 2", "image": null, "asins": ["B0..."] },
+        { "id": "a2", "text": "3", "image": null, "asins": ["B0..."] },
+        { "id": "a3", "text": "4 oder mehr", "image": null, "asins": ["B0..."] }
+      ],
+      "allowImages": true
+    }
+  ],
+  "results": {
+    "headline": "Dein Ergebnis",
+    "description": "Diese Modelle passen am besten",
+    "storePageLink": "",
+    "restartLabel": "Quiz wiederholen",
+    "disclaimer": ""
+  },
+  "recommendedAsins": []
+}
+```
+
+**Regeln**:
+
+- **2 bis 4 Fragen** maximal (Tool erlaubt 4). Mehr nervt, weniger führt nicht klar zum Produkt.
+- **2 bis 6 Antworten pro Frage** (Tool erlaubt 6). Idealwert 3 bis 4.
+- **Intro Bild Pflicht** (`intro.image`). Das ist der Startscreen Eyecatcher, ohne den wirkt der Quiz wie ein Formular. Briefing Note: "Lifestyle Bild der Marke, das den Kontext der Empfehlung zeigt."
+- **Antwort Bilder optional aber empfohlen**. Wenn die Antworten visuelle Optionen sind (Stoff Sofa vs. Leder Sofa, Indoor vs. Outdoor), dann je Antwort ein Bild. Wenn nur abstrakte Auswahl (Personen Anzahl), reicht Text.
+- **Jede Antwort mappt auf ASINs**, idealerweise 1 bis 3 ASINs pro Antwort. Wer "Familie" antwortet bekommt das passende große Sofa.
+- **Hero Section** auf der Subpage davor ist OK (kurzer Claim "Finde dein Modell"). Das product_selector Tile selbst ist die Hauptsection.
+- **Layout**: `1` (Full Width) für das product_selector Tile. Das Tile ist interaktiv und braucht Platz.
+
+**Standard Subpage Aufbau**:
+
+```js
+page('Produktberater', [
+  // Hero
+  section('1', [
+    tile('image', ov('Welches Modell **passt zu dir**', 'In 3 Fragen zum richtigen Produkt'),
+      'Hero Bild Lifestyle Komposition.')
+  ], 'hero.fullWidthHero'),
+  // Quiz
+  section('1', [
+    tile('product_selector', ov(), 'Quiz Tile, 3 Fragen.', { productSelector: { ... } })
+  ], 'engagement.productSelector'),
+])
+```
+
+**Was du im Konzept Schritt fragst**:
+
+Bei der Konzept Phase fragt der Skill den User **ob ein Produktberater Quiz gewünscht ist** (default ja). Wenn ja, erfragt er:
+
+1. Welche **Hauptkategorie** soll das Quiz abdecken (z.B. Sofas, Wasserflaschen, alle Produkte gemischt)
+2. **Welche Frage Typen** sind sinnvoll (z.B. Personen Anzahl, Einsatzort, Größe, Stil, Budget). Skill schlägt 2 bis 4 sinnvolle Fragen vor basierend auf Kategorie und Produktportfolio.
+3. **Antwort zu ASIN Mapping**, falls der User explizit eine Empfehlung pro Antwort vorgibt. Sonst übernimmt der Skill ein sinnvolles Mapping aus den Top ASINs der Sub.
 
 ### Mobile Image Dimensions
 
