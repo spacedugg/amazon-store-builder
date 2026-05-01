@@ -390,6 +390,100 @@ export default function App() {
     });
   };
 
+  // Page komplett duplizieren mit allen Sections, Tiles und Sub Pages.
+  // Neue UIDs werden erzeugt, parentId Bezüge angepasst.
+  var duplicatePage = function(pageId) {
+    setStoreWithUndo(function(s) {
+      var orig = s.pages.find(function(p) { return p.id === pageId; });
+      if (!orig) return s;
+      var copyPage = function(p, newId, newParentId) {
+        var copy = Object.assign({}, p, {
+          id: newId,
+          sections: (p.sections || []).map(function(sec) {
+            return Object.assign({}, sec, {
+              id: uid(),
+              tiles: (sec.tiles || []).map(function(t) { return Object.assign({}, t); }),
+            });
+          }),
+        });
+        if (newParentId !== undefined) {
+          if (newParentId === null) delete copy.parentId;
+          else copy.parentId = newParentId;
+        }
+        return copy;
+      };
+      var newOrigId = uid();
+      var origCopy = copyPage(orig, newOrigId);
+      origCopy.name = orig.name + ' Kopie';
+      var children = s.pages.filter(function(p) { return p.parentId === pageId; });
+      var childCopies = children.map(function(c) { return copyPage(c, uid(), newOrigId); });
+      var pages = s.pages.slice();
+      var origIdx = pages.findIndex(function(p) { return p.id === pageId; });
+      var insertIdx = origIdx + 1;
+      while (insertIdx < pages.length && pages[insertIdx].parentId === pageId) insertIdx++;
+      var toInsert = [origCopy].concat(childCopies);
+      pages.splice.apply(pages, [insertIdx, 0].concat(toInsert));
+      return Object.assign({}, s, { pages: pages });
+    });
+  };
+
+  // Drag and Drop Move. Ziehe Page (mit allen Sub Pages) an eine andere
+  // Stelle. position 'above' und 'below' lassen die Hierarchie Ebene gleich
+  // (Sibling von target). position 'into' macht die Page zur Sub von target.
+  // Top Level kann zur Sub werden, Sub kann zur Top Level werden.
+  var movePageStructural = function(srcId, targetId, position) {
+    if (srcId === targetId) return;
+    setStoreWithUndo(function(s) {
+      var pages = s.pages.slice();
+      var src = pages.find(function(p) { return p.id === srcId; });
+      var target = pages.find(function(p) { return p.id === targetId; });
+      if (!src || !target) return s;
+      // Verbiete Drop in eigenen Subtree
+      if (position === 'into' && target.parentId === srcId) return s;
+      // Sammle src und seine direkten Kinder als bewegender Block
+      var srcChildren = pages.filter(function(p) { return p.parentId === srcId; });
+      var movingIds = [srcId].concat(srcChildren.map(function(p) { return p.id; }));
+      var moving = pages.filter(function(p) { return movingIds.indexOf(p.id) >= 0; });
+      pages = pages.filter(function(p) { return movingIds.indexOf(p.id) < 0; });
+      // Update src parentId nach position
+      var newParentId;
+      if (position === 'into') newParentId = targetId;
+      else newParentId = target.parentId || null;
+      if (newParentId === null) delete src.parentId;
+      else src.parentId = newParentId;
+      // Wenn src zu Sub wird, dürfen seine Sub Kinder nicht mit, weil das
+      // Schema nur 1 Ebene tief erlaubt. Kinder werden Top Level.
+      if (newParentId !== null) {
+        srcChildren.forEach(function(c) { delete c.parentId; });
+      }
+      // Neue Position bestimmen
+      var newTargetIdx = pages.findIndex(function(p) { return p.id === targetId; });
+      var insertIdx;
+      if (position === 'above') {
+        insertIdx = newTargetIdx;
+      } else if (position === 'below') {
+        insertIdx = newTargetIdx + 1;
+        // Skip target's existing children
+        while (insertIdx < pages.length && pages[insertIdx].parentId === targetId) insertIdx++;
+      } else { // into
+        insertIdx = newTargetIdx + 1;
+        while (insertIdx < pages.length && pages[insertIdx].parentId === targetId) insertIdx++;
+      }
+      // Insert. Wenn src zu Sub wird, kommen die ehemaligen Kinder als Top Level am Ende.
+      var toInsert = [src];
+      if (newParentId === null) {
+        // src bleibt oder wird Top Level mit eigenen Subs direkt dahinter
+        toInsert = toInsert.concat(srcChildren);
+      }
+      pages.splice.apply(pages, [insertIdx, 0].concat(toInsert));
+      // Wenn src zu Sub wurde, ehemalige Kinder als Top Level am Ende anhängen
+      if (newParentId !== null && srcChildren.length > 0) {
+        pages = pages.concat(srcChildren);
+      }
+      return Object.assign({}, s, { pages: pages });
+    });
+  };
+
   // ─── SAVED STORES ───
   var handleSave = async function() {
     if (!store.pages.length) return;
@@ -815,6 +909,8 @@ export default function App() {
           onRenamePage={renamePage}
           onDeletePage={deletePage}
           onReorderPage={reorderPage}
+          onDuplicatePage={duplicatePage}
+          onMovePage={movePageStructural}
           savedStores={savedStores}
           onLoadSaved={handleLoadSaved}
           onDeleteSaved={handleDeleteSaved}

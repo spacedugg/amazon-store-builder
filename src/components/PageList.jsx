@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { t } from '../i18n';
 
-export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSubPage, onRenamePage, onDeletePage, onReorderPage, savedStores, onLoadSaved, onDeleteSaved, onImportStore, uiLang, showSaved, onToggleSaved }) {
+export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSubPage, onRenamePage, onDeletePage, onReorderPage, onDuplicatePage, onMovePage, savedStores, onLoadSaved, onDeleteSaved, onImportStore, uiLang, showSaved, onToggleSaved }) {
   var [editingId, setEditingId] = useState(null);
   var [editName, setEditName] = useState('');
   var [showImport, setShowImport] = useState(false);
   var [importUrl, setImportUrl] = useState('');
   var [importBusy, setImportBusy] = useState(false);
   var [importError, setImportError] = useState('');
+  // Drag and Drop State
+  var [dragId, setDragId] = useState(null);
+  var [dropOver, setDropOver] = useState(null); // { id, pos: 'above'|'below'|'into' }
 
   var handleImport = function() {
     if (!importUrl.trim() || importBusy) return;
@@ -45,6 +48,42 @@ export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSub
     onReorderPage(idx, newIdx);
   };
 
+  // Drag and Drop Handler
+  var handleDragStart = function(e, pgId) {
+    setDragId(pgId);
+    e.dataTransfer.effectAllowed = 'move';
+    try { e.dataTransfer.setData('text/plain', pgId); } catch (err) {}
+  };
+  var handleDragOver = function(e, pgId, isChild) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!dragId || pgId === dragId) return;
+    var rect = e.currentTarget.getBoundingClientRect();
+    var y = e.clientY - rect.top;
+    var h = rect.height;
+    var pos;
+    if (y < h * 0.3) pos = 'above';
+    else if (y > h * 0.7) pos = 'below';
+    else pos = isChild ? 'below' : 'into'; // Sub Pages können kein Sub-Sub bekommen, drum 'below' fallback
+    if (!dropOver || dropOver.id !== pgId || dropOver.pos !== pos) {
+      setDropOver({ id: pgId, pos: pos });
+    }
+    e.dataTransfer.dropEffect = 'move';
+  };
+  var handleDrop = function(e, pgId) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (dragId && dropOver && dragId !== pgId && onMovePage) {
+      onMovePage(dragId, dropOver.id, dropOver.pos);
+    }
+    setDragId(null);
+    setDropOver(null);
+  };
+  var handleDragEnd = function() {
+    setDragId(null);
+    setDropOver(null);
+  };
+
   // Build tree: top-level pages and their children
   var topLevel = pages.filter(function(p) { return !p.parentId; });
 
@@ -56,12 +95,26 @@ export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSub
     var active = pg.id === curPage;
     var children = isChild ? [] : getChildren(pg.id);
     var hasChildren = children.length > 0;
+    var isDragging = dragId === pg.id;
+    var dropMark = dropOver && dropOver.id === pg.id ? dropOver.pos : null;
 
     return (
       <div key={pg.id}>
         <div
-          className={'page-item' + (active ? ' active' : '') + (isChild ? ' page-item-child' : '')}
-          onClick={function() { onSelect(pg.id); }}>
+          draggable={editingId !== pg.id}
+          onDragStart={function(e) { handleDragStart(e, pg.id); }}
+          onDragOver={function(e) { handleDragOver(e, pg.id, isChild); }}
+          onDrop={function(e) { handleDrop(e, pg.id); }}
+          onDragEnd={handleDragEnd}
+          onDragLeave={function(e) { /* keep dropOver, gets overridden by next dragOver */ }}
+          className={'page-item' + (active ? ' active' : '') + (isChild ? ' page-item-child' : '') + (isDragging ? ' page-item-dragging' : '') + (dropMark ? ' page-item-drop-' + dropMark : '')}
+          onClick={function() { onSelect(pg.id); }}
+          style={Object.assign(
+            isDragging ? { opacity: 0.4 } : {},
+            dropMark === 'above' ? { boxShadow: 'inset 0 2px 0 #6366f1' } : {},
+            dropMark === 'below' ? { boxShadow: 'inset 0 -2px 0 #6366f1' } : {},
+            dropMark === 'into' ? { background: '#eef2ff', outline: '1px solid #6366f1' } : {}
+          )}>
           {editingId === pg.id ? (
             <input
               className="page-rename-input"
@@ -74,7 +127,7 @@ export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSub
             />
           ) : (
             <span className="page-name">
-              {isChild ? '\u2514 ' : ''}{pg.name}
+              {isChild ? '└ ' : ''}{pg.name}
             </span>
           )}
           {active && editingId !== pg.id && (
@@ -83,6 +136,7 @@ export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSub
               {idx < pages.length - 1 && <button className="btn-icon-sm" onClick={function() { movePage(pg.id, 1); }} title={t('pages.moveDown', uiLang)}>&darr;</button>}
               <button className="btn-icon-sm" onClick={function() { startRename(pg); }} title={t('pages.rename', uiLang)}>R</button>
               {!isChild && <button className="btn-icon-sm" onClick={function() { onAddSubPage(pg.id); }} title={t('pages.addSubPage', uiLang)}>+</button>}
+              {onDuplicatePage && <button className="btn-icon-sm" onClick={function() { onDuplicatePage(pg.id); }} title="Page duplizieren">⎘</button>}
               {pages.length > 1 && <button className="btn-icon-sm btn-icon-danger" onClick={function() { onDeletePage(pg.id); }} title={t('pages.delete', uiLang)}>&times;</button>}
             </div>
           )}
@@ -114,7 +168,7 @@ export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSub
         <>
           <div className="page-list-header saved-header" style={{ marginTop: 4, cursor: 'pointer' }} onClick={onToggleSaved}>
             <span>{t('pages.savedStores', uiLang)}</span>
-            <span className="btn-icon-sm" style={{ fontSize: 10, fontWeight: 700 }}>{showSaved ? '\u25B2' : '\u25BC'}</span>
+            <span className="btn-icon-sm" style={{ fontSize: 10, fontWeight: 700 }}>{showSaved ? '▲' : '▼'}</span>
           </div>
           {showSaved && (
             <div className="page-list-body">
@@ -142,7 +196,7 @@ export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSub
           style={{ cursor: 'pointer', fontSize: 11, opacity: 0.8 }}
           onClick={function() { setShowImport(!showImport); setImportError(''); }}
         >
-          {showImport ? '\u25B2' : '+'} {t('pages.importStore', uiLang)}
+          {showImport ? '▲' : '+'} {t('pages.importStore', uiLang)}
         </span>
       </div>
       {showImport && (
