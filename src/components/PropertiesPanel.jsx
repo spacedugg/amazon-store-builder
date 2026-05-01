@@ -80,7 +80,7 @@ function fileUpload(label, value, onSet, onRemove, uiLang) {
   );
 }
 
-export default function PropertiesPanel({ tile, onChange, products, viewMode, uiLang, layoutType, pages, heroBanner, onHeroBannerChange }) {
+export default function PropertiesPanel({ tile, onChange, onDetachReuse, products, viewMode, uiLang, layoutType, pages, allPages, heroBanner, onHeroBannerChange }) {
   // ─── HERO BANNER MODE ───
   if (heroBanner) {
     var hPage = heroBanner;
@@ -153,9 +153,56 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
   (tile.hotspots || []).forEach(function(hs) { if (hs.asin && linkedAsins.indexOf(hs.asin) < 0) linkedAsins.push(hs.asin); });
   (tile.asins || []).forEach(function(a) { if (a && a.indexOf('B0') === 0 && linkedAsins.indexOf(a) < 0) linkedAsins.push(a); });
 
+  // ─── IMAGE REUSE STATUS ─── alle Tiles im Store mit identischem imageRef
+  // sammeln. Wenn der aktuelle Tile einen imageRef hat und mindestens
+  // eine andere Stelle den gleichen, ist es ein Reuse Verbund.
+  var reuseInfo = (function() {
+    if (!tile || !tile.imageRef || !allPages) return { count: 0, locations: [] };
+    var refLower = String(tile.imageRef).toLowerCase();
+    var locations = [];
+    allPages.forEach(function(pg) {
+      (pg.sections || []).forEach(function(sec, si) {
+        (sec.tiles || []).forEach(function(tt, ti) {
+          if (tt && tt.imageRef && String(tt.imageRef).toLowerCase() === refLower) {
+            locations.push({ pageName: pg.name, secIdx: si + 1, tileIdx: ti + 1 });
+          }
+        });
+      });
+    });
+    return { count: locations.length, locations: locations };
+  })();
+
   return (
     <div className="props-panel">
       <div className="props-header">{t('props.title', uiLang)}</div>
+
+      {/* ─── IMAGE REUSE INFO BANNER ─── */}
+      {reuseInfo.count > 1 && (
+        <div className="props-section" style={{ background: '#ecfdf5', borderBottom: '1px solid #a7f3d0' }}>
+          <div style={{ fontSize: 11, fontWeight: 700, color: '#047857', marginBottom: 3 }}>
+            Geteiltes Bild, {reuseInfo.count} Stellen
+          </div>
+          <div style={{ fontSize: 10, color: '#065f46', lineHeight: 1.4, marginBottom: 6 }}>
+            Briefing Änderungen (Heading, Subheading, Body, CTA, Brief, Dimensionen, Image Category, Background) werden automatisch auf alle {reuseInfo.count} Stellen angewendet.
+          </div>
+          <details style={{ fontSize: 10, color: '#065f46', marginBottom: 6 }}>
+            <summary style={{ cursor: 'pointer' }}>Stellen anzeigen</summary>
+            <ul style={{ margin: '4px 0 0 16px', padding: 0 }}>
+              {reuseInfo.locations.slice(0, 12).map(function(loc, i) {
+                return <li key={i}>{loc.pageName} S{loc.secIdx} T{loc.tileIdx}</li>;
+              })}
+              {reuseInfo.locations.length > 12 && <li>plus {reuseInfo.locations.length - 12} weitere</li>}
+            </ul>
+          </details>
+          {onDetachReuse && (
+            <button
+              onClick={onDetachReuse}
+              style={{ fontSize: 10, padding: '4px 8px', background: '#fff', border: '1px solid #a7f3d0', borderRadius: 4, color: '#065f46', cursor: 'pointer' }}>
+              Diese Stelle entkoppeln (eigene Variante machen)
+            </button>
+          )}
+        </div>
+      )}
 
       {/* ─── VERKNÜPFTE PRODUKTE (mit Bild und Klick zu Amazon) ─── */}
       {linkedAsins.length > 0 && (

@@ -143,7 +143,61 @@ export default function App() {
   var page = store.pages.find(function(p) { return p.id === curPage; }) || store.pages[0] || null;
 
   // ─── TILE UPDATE ───
+  // Felder die beim Image Reuse über imageRef synchronisiert werden, wenn
+  // mehrere Tiles denselben imageRef teilen. Tile spezifische Felder
+  // (linkAsin, linkUrl, asins, hotspots, imageRef selbst, uploadedImage)
+  // bleiben pro Tile individuell.
+  var SYNCED_REUSE_FIELDS = ['brief', 'textOverlay', 'dimensions', 'mobileDimensions', 'imageCategory', 'bgColor', 'type', 'textAlign'];
+
   var updateTile = function(updated) {
+    if (!sel) return;
+    setStoreWithUndo(function(s) {
+      // Original Tile finden um zu prüfen ob es einen imageRef hat den
+      // andere Tiles teilen. Wenn ja, synchronisierte Felder auf alle
+      // Geschwister anwenden.
+      var origTile = null;
+      s.pages.forEach(function(pg) {
+        (pg.sections || []).forEach(function(sec) {
+          if (sec.id === sel.sid) {
+            origTile = (sec.tiles || [])[sel.ti] || null;
+          }
+        });
+      });
+      var syncRef = (origTile && origTile.imageRef && updated && updated.imageRef === origTile.imageRef) ? origTile.imageRef : '';
+      // Wenn der User gerade imageRef ändert, sync nicht über alten Ref
+      if (updated && origTile && updated.imageRef !== origTile.imageRef) syncRef = '';
+      // Sync Patch aus den Feldern die als shared gelten
+      var syncPatch = {};
+      if (syncRef && origTile) {
+        SYNCED_REUSE_FIELDS.forEach(function(k) {
+          if (Object.prototype.hasOwnProperty.call(updated, k)) syncPatch[k] = updated[k];
+        });
+      }
+      var hasSync = syncRef && Object.keys(syncPatch).length > 0;
+      return Object.assign({}, s, {
+        pages: s.pages.map(function(pg) {
+          return Object.assign({}, pg, {
+            sections: pg.sections.map(function(sec) {
+              return Object.assign({}, sec, {
+                tiles: sec.tiles.map(function(t, i) {
+                  if (sec.id === sel.sid && i === sel.ti) return updated;
+                  if (hasSync && t && t.imageRef === syncRef) {
+                    return Object.assign({}, t, syncPatch);
+                  }
+                  return t;
+                }),
+              });
+            }),
+          });
+        }),
+      });
+    });
+  };
+
+  // Tile vom Image Reuse entkoppeln: imageRef wird einzigartig gemacht.
+  // Damit landet das Tile beim Folder Upload nicht mehr im Reuse Pool und
+  // Briefing Edits auf anderen Stellen wirken nicht mehr darauf.
+  var detachTileFromReuse = function() {
     if (!sel) return;
     setStoreWithUndo(function(s) {
       return Object.assign({}, s, {
@@ -152,7 +206,11 @@ export default function App() {
             sections: pg.sections.map(function(sec) {
               if (sec.id !== sel.sid) return sec;
               return Object.assign({}, sec, {
-                tiles: sec.tiles.map(function(t, i) { return i === sel.ti ? updated : t; }),
+                tiles: sec.tiles.map(function(t, i) {
+                  if (i !== sel.ti) return t;
+                  if (!t.imageRef) return t;
+                  return Object.assign({}, t, { imageRef: t.imageRef + '-solo-' + uid() });
+                }),
               });
             }),
           });
@@ -950,11 +1008,13 @@ export default function App() {
           key={sel ? (sel.sid + ':' + (sel.ti != null ? sel.ti : '')) : 'none'}
           tile={selTile}
           onChange={updateTile}
+          onDetachReuse={detachTileFromReuse}
           products={store.products}
           viewMode={viewMode}
           uiLang={uiLang}
           layoutType={selLayoutType}
           pages={store.pages}
+          allPages={store.pages}
           heroBanner={selHeroBanner ? page : null}
           onHeroBannerChange={selHeroBanner ? updateHeroBanner : null}
         />
