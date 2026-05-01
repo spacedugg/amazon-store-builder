@@ -308,7 +308,41 @@ Bevor du das Briefing JSON ausgibst, gehe das Konzept als Self Check durch und k
 
 5. **Versand und Lieferung Check**. Keine Headline, Subheading, Body oder Bullet darf "Versandkostenfrei", "Schnelle Lieferung", "Express", "Truck Icon" enthalten.
 
-6. **Lifestyle Tile Verlinkung Check**. Jedes `image` Tile das im Brief konkrete Produkte erwähnt muss `linkAsin`, `linkUrl` oder als `shoppable_image` mit Hotspots ausgegeben werden. Sonst Verlinkung ergänzen.
+6. **Lifestyle Tile Verlinkung plus Redundanz Check**. Zwei Schritte:
+
+   a) **Verlinkung**. Jedes `image` Tile das im Brief konkrete Produkte erwähnt (z.B. "Hund mit Hundetreppe", "Loungegruppe auf Terrasse", "Freilaufgehege im Garten") muss eines davon haben:
+   - `linkAsin`, wenn ein einziges konkretes Produkt im Bild ist (Tile klickbar zur PDP)
+   - `shoppable_image` Type mit Hotspots, wenn mehrere Produkte im Bild sind (max 5)
+   - `linkUrl`, wenn das Tile als Kategorie Navigator zur Subpage führt
+
+   Wenn Verlinkung fehlt, ergänze die passende vor Output. Niemals ein Lifestyle Tile mit Produkt im Brief OHNE Verlinkung ausgeben.
+
+   b) **Redundanz mit ASIN Grid darunter**. Wenn auf derselben Page ein verlinktes Lifestyle Tile (egal ob via linkAsin, shoppable Hotspot oder linkUrl auf eine Subpage) direkt oder weiter unten von einem ASIN Grid Modul (`best_sellers`, `product_grid`, `recommended`, `deals`) gefolgt wird das **dieselben ASINs** zeigt wie die verlinkten Lifestyle Tiles, dann ist das ASIN Grid redundant. Der User scrollt nach unten und sieht die gleichen Produkte nochmal als Kachel Liste. Drei Fix Optionen:
+
+   - **Streichen**. ASIN Grid entfernen wenn alle ASINs schon über die Lifestyle Tiles verlinkt sind. Cross Nav Tiles plus Vollkatalog der **ganzen Hauptkategorie** am Ende reichen.
+   - **ASIN Liste verbreitern**. ASIN Grid behalten, aber auf eine andere Auswahl umstellen (z.B. Vollkatalog der ganzen Hauptkategorie statt nur der drei Lifestyle Subs).
+   - **ASIN Grid zu Showcase konvertieren**. `lg-2stack` Layout mit drei Lifestyle Tiles, alle mit linkAsin, statt einem Grid Modul. Aber nur wenn die Hauptkategorie Lifestyle Tiles oben anders sind (verschiedene Subs).
+
+   Beispiel falsch (Tierbedarf Hauptseite):
+
+   ```
+   Section: Sub Navigator (Freilaufgehege linkUrl, Hund linkUrl, Katze linkUrl)
+   Section: best_sellers Freilaufgehege (8 Freilaufgehege ASINs)
+   Section: best_sellers Hundebedarf (8 Hundebedarf ASINs)
+   ```
+
+   Die Sub Navigator Tiles linken schon auf die Subpages wo die ASINs einzeln stehen. Die zwei Bestseller Grids zeigen die gleichen ASINs nochmal als Kachel Liste, redundant.
+
+   Beispiel richtig:
+
+   ```
+   Section: Sub Navigator (Freilaufgehege linkUrl, Hund linkUrl, Katze linkUrl)
+   Section: shoppable_image Tierbedarf Lifestyle (5 Hotspots auf Top Produkte aus mehreren Subs)
+   Section: lg-2stack Bestseller Showcase (1 Lifestyle Tile linkAsin Top, 2 Wide Tiles linkAsin Top 2 und 3)
+   Section: product_grid Vollkatalog ALLER Tierbedarf ASINs
+   ```
+
+   Sub Navigator linkt zu Subpages, Shoppable hat Hotspots auf konkrete ASINs, Showcase verweist auf Top 3 mit linkAsin, Vollkatalog am Ende ist die einzige Listing Section und zeigt alle Tierbedarf ASINs (nicht nur die drei aus der Sub Navigator).
 
 **Wichtig**: Der Self Check ist still. Du erwähnst die Korrekturen nicht im Output, du gibst direkt das saubere JSON aus. Der User soll nichts von dem Check sehen, das Konzept landet **fertig korrekt** im Tool.
 
