@@ -626,33 +626,48 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
         </>
       )}
 
-      {/* PRODUCT TYPES */}
-      {isProductType && (
+      {/* PRODUCT TYPES und IMAGE / SHOPPABLE_IMAGE Tiles, ASIN Editor.
+          Intern editierbar: hinzufügen, entfernen, Reihenfolge per Zeilen.
+          Im Designer Briefing nicht angezeigt. */}
+      {(isProductType || isImageType) && (
         <div className="props-section">
-          <label className="label">{t('props.asins', uiLang)}</label>
+          <label className="label">
+            {isProductType ? t('props.asins', uiLang) : 'ASINs verknüpft (intern, optional)'}
+          </label>
           <textarea value={(tile.asins || []).join('\n')}
             onChange={function(e) { u('asins', e.target.value.split('\n').map(function(s) { return s.trim(); }).filter(Boolean)); }}
-            rows={8} className="input input-mono" placeholder="B0XXXXXXXXXX" />
+            rows={isProductType ? 8 : 4} className="input input-mono" placeholder="B0XXXXXXXXXX, eine ASIN pro Zeile" />
           {(tile.asins || []).length > 0 && (
             <div className="props-asin-list">
-              {(tile.asins || []).map(function(asin) {
+              {(tile.asins || []).map(function(asin, idx) {
                 var p = productMap[asin];
                 return (
-                  <div key={asin} className="props-asin-item">
-                    <code>{asin}</code>
-                    {p && <span className="props-asin-name">{(p.name || '').slice(0, 35)}</span>}
+                  <div key={asin + ':' + idx} className="props-asin-item" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <code style={{ flex: '0 0 auto' }}>{asin}</code>
+                    {p && <span className="props-asin-name" style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{(p.name || '').slice(0, 35)}</span>}
+                    <button
+                      onClick={function() {
+                        var next = (tile.asins || []).slice();
+                        next.splice(idx, 1);
+                        u('asins', next);
+                      }}
+                      title="ASIN entfernen"
+                      style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: 14, padding: '0 4px', flex: '0 0 auto' }}>
+                      ×
+                    </button>
                   </div>
                 );
               })}
             </div>
           )}
-          {tile.type !== 'product_grid' && (
-            <div className="hint">
-              {tile.type === 'best_sellers' && t('props.bestSellersHint', uiLang)}
-              {tile.type === 'recommended' && t('props.recommendedHint', uiLang)}
-              {tile.type === 'deals' && t('props.dealsHint', uiLang)}
-            </div>
-          )}
+          <div className="hint">
+            {tile.type === 'best_sellers' && t('props.bestSellersHint', uiLang)}
+            {tile.type === 'recommended' && t('props.recommendedHint', uiLang)}
+            {tile.type === 'deals' && t('props.dealsHint', uiLang)}
+            {tile.type === 'shoppable_image' && 'ASIN Quelle für die Hotspots. Pro Hotspot wird eine ASIN aus dieser Liste gemappt.'}
+            {tile.type === 'image' && 'Optional. ASINs die mit dem Bild verknüpft sind, z.B. wenn das Lifestyle Bild konkrete Produkte zeigt. Verlinkung selbst über linkAsin oder linkUrl.'}
+            {tile.type === 'image_text' && 'Optional. ASINs die zum Brand Story Tile gehören.'}
+          </div>
         </div>
       )}
 
