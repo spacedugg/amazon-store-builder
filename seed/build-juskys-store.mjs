@@ -275,8 +275,8 @@ function buildHomePage() {
     section('std-2equal', [
       tile('image', ov(), 'Image Tile Brand Story. Team oder Hallenbild aus juskys.de, Mitarbeiter und Standort.'),
       tile('image',
-        ov('Ein **Haus**, viele Räume', 'Inhabergeführt seit 2005', BRAND_STORY_KURZ, [], 'Mehr über Juskys'),
-        'Brand Story Bild. Heading, Subheading, Body und CTA grafisch ins Bild gerendert. Hintergrund passend zur Brand Story (z.B. Hallen Detail, Stoffmakro oder Werkstatt Atmosphäre). Verlinkt auf Über Uns.',
+        ov('Wer steckt **hinter Juskys**', 'Personen, Halle, Sortiment', BRAND_STORY_KURZ, [], 'Mehr über Juskys'),
+        'Brand Story Bild. Heading, Subheading, Body und CTA grafisch ins Bild gerendert. Hintergrund Foto Geschäftsführer oder Halle. Verlinkt auf Über Uns.',
         { linkUrl: linkTo('Über Uns'), imageCategory: 'text_image' }
       ),
     ], 'trust.trustSplit'),
@@ -486,31 +486,48 @@ function buildSubpage(parentName, subName, headlineWord) {
     return tile('image', ov('**' + s.toUpperCase() + '**'), 'Cross Nav Tile zu Sub Page ' + s + '.', { linkUrl: linkTo(s), imageRef: 'sub-' + slugifyRef(s) + '-lifestyle' });
   });
 
+  // Subpage Pattern, vermeidet 2 ASIN Grids untereinander.
+  // Hero plus Bestseller Showcase als lg-2stack Layout (3 image Tiles mit
+  // linkAsin auf Top 1 bis 3, KEIN best_sellers Modul) plus Vollkatalog
+  // Product Grid. So gibt es nur 1 ASIN Grid Modul (Vollkatalog), die
+  // Top Seller sind als verlinkte Lifestyle Tiles realisiert.
   var sections = [
     // 1, Hero
     section('1', [
       tile('image',
-        ov(heroText.heading, heroText.subheading, '', [], 'Sortiment ansehen'),
-        'Hero Bild Sub Page ' + subName + '. Freigestelltes Leitprodukt aus dieser Sub.'
+        ov(heroText.heading, heroText.subheading),
+        'Hero Bild Sub Page ' + subName + '. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.'
       ),
     ], 'hero.fullWidthHero'),
-    // 2, Bestseller
-    section('1', [
-      tile('best_sellers',
-        ov('Die beliebtesten **' + subName + '**'),
-        'Bestseller Grid in dieser Sub.',
-        { asins: subAsins.slice(0, 8) }
-      ),
-    ], 'products.fullWidthGrid'),
-    // 3, Vollkatalog
-    section('1', [
-      tile('product_grid',
-        ov('Alle **' + subName + '** Produkte'),
-        'Vollkatalog dieser Sub.',
-        { asins: subAsins }
-      ),
-    ], 'products.fullWidthGrid'),
   ];
+
+  // 2, Bestseller Showcase als Layout (nicht als best_sellers Modul).
+  // Tile 1 ist Lifestyle Bild Top Seller, Tile 2 und 3 freigestellte Produkt
+  // Bilder Top Seller 2 und 3. Alle drei via linkAsin direkt zur PDP klickbar.
+  // Nur sinnvoll bei mindestens 3 ASINs in der Sub.
+  if (subAsins.length >= 3) {
+    sections.push(section('lg-2stack', [
+      tile('image',
+        ov('Top **' + subName + '**', 'Bestseller in dieser Sub'),
+        'Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.',
+        { linkAsin: subAsins[0], imageCategory: 'lifestyle' }),
+      tile('image', ov(),
+        'Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.',
+        { linkAsin: subAsins[1], imageCategory: 'product' }),
+      tile('image', ov(),
+        'Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.',
+        { linkAsin: subAsins[2], imageCategory: 'product' }),
+    ], 'products.bestsellerShowcase'));
+  }
+
+  // 3, Vollkatalog Product Grid (das einzige ASIN Grid Modul auf der Sub Page)
+  sections.push(section('1', [
+    tile('product_grid',
+      ov('Alle **' + subName + '** Produkte'),
+      'Vollkatalog dieser Sub, sortiert nach Bestseller.',
+      { asins: subAsins }
+    ),
+  ], 'products.fullWidthGrid'));
 
   // 4, Cross Nav zu anderen Subs der gleichen Eltern
   if (crossNavTiles.length > 0) {
@@ -554,46 +571,49 @@ function buildAllSubpages() {
 }
 
 function buildTierbedarfPage() {
+  // Top Tierbedarf ASINs für die Bestseller Showcase (lg-2stack ohne ASIN Grid Modul).
+  // Lifestyle Tile plus 2 freigestellte Produkt Tiles, alle via linkAsin verlinkt.
+  var topTier = topAsinsByCat('Tierbedarf', 3);
   return page('Tierbedarf', [
     section('1', [
       tile('image',
-        ov('Für **deinen** Liebling', 'Hund, Katze, Freilauf', '', [], 'Sortiment entdecken'),
+        ov('Für **deinen** Liebling', 'Hund, Katze, Freilauf'),
         'Hero Bild mit Hund oder Katze in Wohnsetting oder Garten.'
       ),
     ], 'hero.fullWidthHero'),
 
+    // Sub Navigator: Lifestyle Tiles mit linkUrl auf die jeweilige Subpage.
+    // Nicht mehr nur dekorative Headline Tiles, sondern echte Klick Targets.
     section('vh-w2s', [
-      tile('image', ov('**FREILAUFGEHEGE**'), 'Wide Tile Freilaufgehege.'),
-      tile('image', ov('**HUND**'), 'Square Tile Hundebedarf.'),
-      tile('image', ov('**KATZE**'), 'Square Tile Katzenbedarf.'),
+      tile('image', ov('**FREILAUFGEHEGE**'), 'Wide Lifestyle Tile mit Freilaufgehege im Garten oder Innenraum, Tier sichtbar im Gehege.', { linkUrl: linkTo('Freilaufgehege') }),
+      tile('image', ov('**HUND**'), 'Square Lifestyle Tile mit Hund in häuslichem Setting (Hundetreppe oder Transportbox sichtbar).', { linkUrl: linkTo('Hundebedarf') }),
+      tile('image', ov('**KATZE**'), 'Square Lifestyle Tile mit Katze in Wohnzimmer Setting (Kratzbaum oder Spielzeug sichtbar).', { linkUrl: linkTo('Katzenbedarf') }),
     ], 'categoryNav.wideAnd2squares'),
 
     section('1', [
       tile('shoppable_image',
         ov('Freilauf, **sicher** und groß', 'Auslauf für Kleintiere und Hunde'),
-        'Shoppable Bild Garten mit Freilaufgehege. 1 Hotspot Freilaufgehege plus weitere Hundebedarf wenn vorhanden.',
-        { asins: ['B09M7GCK5Y', 'B0716T9673', 'B01CSNO9YO', 'B079YT88DT', 'B0C4FHBSR1'] }
+        'Shoppable Bild Garten mit Freilaufgehege als Hauptmotiv. Hotspots auf Gehege plus komplementäre Tierbedarf Produkte (Transportbox, Hundetreppe).',
+        { asins: ['B09M7GCK5Y', 'B0716T9673', 'B01CSNO9YO'] }
       ),
     ], 'products.shoppableFullWidth'),
 
-    section('1', [
-      tile('best_sellers',
-        ov('Die beliebtesten **Gehege**'),
-        'Bestseller Freilaufgehege.',
-        { asins: topAsinsBySub('Tierbedarf', 'Freilaufgehege', 4) }
-      ),
-    ], 'products.fullWidthGrid'),
-
-    section('1', [
-      tile('best_sellers',
-        ov('Für den **Hund** zuhause'),
-        'Bestseller Hundebedarf.',
-        { asins: topAsinsBySub('Tierbedarf', 'Hundebedarf', 6) }
-      ),
-    ], 'products.fullWidthGrid'),
+    // Bestseller Showcase als lg-2stack Layout mit linkAsin Tiles (kein ASIN Grid Modul).
+    section('lg-2stack', [
+      tile('image',
+        ov('Top **Tierbedarf**', 'Bestseller dieser Saison'),
+        'Lifestyle Bild Top Seller Tierbedarf in Anwendung. Klickbar zur PDP.',
+        { linkAsin: topTier[0], imageCategory: 'lifestyle' }),
+      tile('image', ov(),
+        'Produkt Bild Bestseller 2 freigestellt. Klickbar zur PDP.',
+        { linkAsin: topTier[1], imageCategory: 'product' }),
+      tile('image', ov(),
+        'Produkt Bild Bestseller 3 freigestellt. Klickbar zur PDP.',
+        { linkAsin: topTier[2], imageCategory: 'product' }),
+    ], 'products.bestsellerShowcase'),
 
     section('vh-w2s', [
-      tile('image', ov('Tier**bedarf** mit Verantwortung'), 'Wide Bild.'),
+      tile('image', ov('Tier**bedarf** mit Verantwortung'), 'Wide Bild Tier in der Anwendung.'),
       tile('image', ov('**Stabil**'), 'Square mit grünem Icon Kreis Werkzeug.'),
       tile('image', ov('**Tierfreundlich**'), 'Square mit grünem Icon Kreis Pfote.'),
     ], 'features.featureWideAnd2'),
@@ -637,19 +657,25 @@ function buildSalePage() {
 }
 
 function buildUeberUnsPage() {
+  // Auf Über Uns wird "Inhabergeführt seit 2005 aus Deutschland" nur EINMAL
+  // als USP Tile ausführlich genannt (USP Tile 1). Hero und Brand Story
+  // Headline behandeln andere Aspekte (Personen, Hersteller, Halle).
+  // Brand Story Body fokussiert auf das WIE (persönliche Hersteller Visite,
+  // eigene Designs), nicht das WANN.
+  var brandStoryUeberUns = 'Wir besuchen unsere Hersteller persönlich, prüfen die Qualität vor Ort und entwickeln Sortiment und Designs in eigener Hand. Geleitet von Philipp Juskys und Daniel Heidrich, gewachsen aus Deutschland.';
   return page('Über Uns', [
     section('1', [
       tile('image',
-        ov('Ein **Haus**, viele Räume', 'Inhabergeführt seit 2005, aus Deutschland'),
-        'Hero Bild Portrait oder Halle aus juskys.de.'
+        ov('Hinter **Juskys**', 'Personen, Halle, Sortiment'),
+        'Hero Bild Portrait Geschäftsführer oder Halle aus juskys.de.'
       ),
     ], 'hero.fullWidthHero'),
 
     section('std-2equal', [
       tile('image', ov(), 'Image Tile Brand Story. Hallenbild oder Team aus juskys.de.'),
       tile('image',
-        ov('Inhabergeführt aus **Deutschland**', 'Seit 2005', BRAND_STORY_LANG),
-        'Brand Story Bild. Heading, Subheading, Body grafisch ins Bild integriert. Hintergrund passend zur Marken Atmosphäre. Brand Story Lang aus Website Content kondensiert.',
+        ov('Hersteller besucht, **persönlich** geprüft', 'So arbeiten wir', brandStoryUeberUns),
+        'Brand Story Bild. Heading, Subheading, Body grafisch ins Bild integriert. Hintergrund Werkstatt oder Hersteller Visite Foto.',
         { imageCategory: 'text_image' }
       ),
     ], 'trust.trustSplit'),
@@ -769,24 +795,34 @@ function buildHeimwerkenPage() {
       ),
     ], 'hero.fullWidthHero'),
 
+    // Sub Navigator mit linkUrl auf Subpages
     section('vh-w2s', [
-      tile('image', ov('**WERKZEUG**'), 'Sub Tile Werkzeug.'),
-      tile('image', ov('**SACKKARREN**'), 'Sub Tile Sackkarren.'),
-      tile('image', ov('**LEITERN**', 'Multifunktionsleitern'), 'Sub Tile Leitern.'),
+      tile('image', ov('**WERKZEUG**'), 'Wide Lifestyle Tile Werkstatt mit Werkzeug in Anwendung.', { linkUrl: linkTo('Werkzeug') }),
+      tile('image', ov('**SACKKARREN**'), 'Square Lifestyle Tile Sackkarre in Treppenhaus oder Gartensituation.', { linkUrl: linkTo('Sackkarren') }),
+      tile('image', ov('**LEITERN**', 'Multifunktionsleitern'), 'Square Lifestyle Tile Leiter in Garten oder Werkstatt.', { linkUrl: linkTo('Multifunktionsleitern') }),
     ], 'categoryNav.wideAnd2squares'),
 
     section('std-2equal', [
-      tile('image', ov('**ELEKTROKAMINE**'), 'Sub Tile Elektrokamine, Standkamin Rendering.'),
+      tile('image', ov('**ELEKTROKAMINE**'), 'Lifestyle Tile Elektrokamin im Wohnzimmer Setting.', { linkUrl: linkTo('Elektrokamine') }),
       tile('image', ov('**Robust** gebaut', 'Werkzeug das hält'), 'USP Highlight Tile mit grünem Icon Kreis Werkzeug.'),
     ], 'categoryNav.grid2col'),
 
-    section('1', [
-      tile('best_sellers',
-        ov('Die beliebtesten **Werkzeuge**'),
-        'Bestseller Werkzeug.',
-        { asins: topAsinsBySub('Heimwerken', 'Werkzeug', 3) }
-      ),
-    ], 'products.fullWidthGrid'),
+    // Bestseller Werkzeug als lg-2stack Showcase, kein best_sellers Modul mehr (vermeidet ASIN Grid Stack mit der Sackkarren Section).
+    (function() {
+      var topW = topAsinsBySub('Heimwerken', 'Werkzeug', 3);
+      return section('lg-2stack', [
+        tile('image',
+          ov('Top **Werkzeug**', 'Bestseller in der Werkstatt'),
+          'Lifestyle Bild Top Seller Werkzeug in Anwendung. Klickbar zur PDP.',
+          { linkAsin: topW[0], imageCategory: 'lifestyle' }),
+        tile('image', ov(),
+          'Produkt Bild Bestseller 2 freigestellt. Klickbar zur PDP.',
+          { linkAsin: topW[1] || topW[0], imageCategory: 'product' }),
+        tile('image', ov(),
+          'Produkt Bild Bestseller 3 freigestellt. Klickbar zur PDP.',
+          { linkAsin: topW[2] || topW[0], imageCategory: 'product' }),
+      ], 'products.bestsellerShowcase');
+    })(),
 
     section('1', [
       tile('best_sellers',

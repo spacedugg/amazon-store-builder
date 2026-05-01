@@ -1093,13 +1093,13 @@
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Ein **Haus**, viele Räume",
-                "subheading": "Inhabergeführt seit 2005",
+                "heading": "Wer steckt **hinter Juskys**",
+                "subheading": "Personen, Halle, Sortiment",
                 "body": "Seit 2005 bringen Philipp Juskys und Daniel Heidrich ein breites Sortiment für Wohnen, Garten und Alltag direkt zu dir. Inhabergeführt aus Deutschland, mit Qualitätskontrolle vor Ort beim Hersteller.",
                 "bullets": [],
                 "cta": "Mehr über Juskys"
               },
-              "brief": "Brand Story Bild. Heading, Subheading, Body und CTA grafisch ins Bild gerendert. Hintergrund passend zur Brand Story (z.B. Hallen Detail, Stoffmakro oder Werkstatt Atmosphäre). Verlinkt auf Über Uns.",
+              "brief": "Brand Story Bild. Heading, Subheading, Body und CTA grafisch ins Bild gerendert. Hintergrund Foto Geschäftsführer oder Halle. Verlinkt auf Über Uns.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "page:Über Uns",
@@ -3554,10 +3554,10 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Sub Tile Werkzeug.",
+              "brief": "Wide Lifestyle Tile Werkstatt mit Werkzeug in Anwendung.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "",
+              "linkUrl": "page:Werkzeug",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
@@ -3573,10 +3573,10 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Sub Tile Sackkarren.",
+              "brief": "Square Lifestyle Tile Sackkarre in Treppenhaus oder Gartensituation.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "",
+              "linkUrl": "page:Sackkarren",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
@@ -3592,10 +3592,10 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Sub Tile Leitern.",
+              "brief": "Square Lifestyle Tile Leiter in Garten oder Werkstatt.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "",
+              "linkUrl": "page:Multifunktionsleitern",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
@@ -3617,10 +3617,10 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Sub Tile Elektrokamine, Standkamin Rendering.",
+              "brief": "Lifestyle Tile Elektrokamin im Wohnzimmer Setting.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "",
+              "linkUrl": "page:Elektrokamine",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
@@ -3649,29 +3649,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Werkzeuge**",
+                "heading": "Top **Werkzeug**",
+                "subheading": "Bestseller in der Werkstatt",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller Werkzeug in Anwendung. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0DQ5K13RK",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Werkzeug.",
-              "asins": [
-                "B0DQ5K13RK",
-                "B0DZ2XH5BS",
-                "B0FT3RZSCP"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0DZ2XH5BS",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0FT3RZSCP",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -4397,7 +4431,7 @@
                 "subheading": "Hund, Katze, Freilauf",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment entdecken"
+                "cta": ""
               },
               "brief": "Hero Bild mit Hund oder Katze in Wohnsetting oder Garten.",
               "asins": [],
@@ -4424,10 +4458,10 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Wide Tile Freilaufgehege.",
+              "brief": "Wide Lifestyle Tile mit Freilaufgehege im Garten oder Innenraum, Tier sichtbar im Gehege.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "",
+              "linkUrl": "page:Freilaufgehege",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
@@ -4443,10 +4477,10 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Square Tile Hundebedarf.",
+              "brief": "Square Lifestyle Tile mit Hund in häuslichem Setting (Hundetreppe oder Transportbox sichtbar).",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "",
+              "linkUrl": "page:Hundebedarf",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
@@ -4462,10 +4496,10 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Square Tile Katzenbedarf.",
+              "brief": "Square Lifestyle Tile mit Katze in Wohnzimmer Setting (Kratzbaum oder Spielzeug sichtbar).",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "",
+              "linkUrl": "page:Katzenbedarf",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
@@ -4487,13 +4521,11 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Shoppable Bild Garten mit Freilaufgehege. 1 Hotspot Freilaufgehege plus weitere Hundebedarf wenn vorhanden.",
+              "brief": "Shoppable Bild Garten mit Freilaufgehege als Hauptmotiv. Hotspots auf Gehege plus komplementäre Tierbedarf Produkte (Transportbox, Hundetreppe).",
               "asins": [
                 "B09M7GCK5Y",
                 "B0716T9673",
-                "B01CSNO9YO",
-                "B079YT88DT",
-                "B0C4FHBSR1"
+                "B01CSNO9YO"
               ],
               "hotspots": [],
               "linkUrl": "",
@@ -4506,57 +4538,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Gehege**",
-                "subheading": "",
+                "heading": "Top **Tierbedarf**",
+                "subheading": "Bestseller dieser Saison",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Freilaufgehege.",
-              "asins": [
-                "B09M7GCK5Y"
-              ],
+              "brief": "Lifestyle Bild Top Seller Tierbedarf in Anwendung. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B079YT88DT",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left",
               "imageRef": ""
-            }
-          ]
-        },
-        {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
-          "tiles": [
+            },
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Für den **Hund** zuhause",
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Hundebedarf.",
-              "asins": [
-                "B079YT88DT",
-                "B01CSNO9YO",
-                "B0716T9673",
-                "B0C4FHBSR1"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B01CSNO9YO",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0716T9673",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -4575,7 +4613,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Wide Bild.",
+              "brief": "Wide Bild Tier in der Anwendung.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -4860,13 +4898,13 @@
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Ein **Haus**, viele Räume",
-                "subheading": "Inhabergeführt seit 2005, aus Deutschland",
+                "heading": "Hinter **Juskys**",
+                "subheading": "Personen, Halle, Sortiment",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Hero Bild Portrait oder Halle aus juskys.de.",
+              "brief": "Hero Bild Portrait Geschäftsführer oder Halle aus juskys.de.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -4904,13 +4942,13 @@
             {
               "type": "image",
               "textOverlay": {
-                "heading": "Inhabergeführt aus **Deutschland**",
-                "subheading": "Seit 2005",
-                "body": "Seit 2005 ist Juskys dein Partner für Wohnen, Garten, Heimwerken, Tier und Freizeit. Geleitet von Philipp Juskys und Daniel Heidrich, inhabergeführt aus Deutschland. Wir besuchen unsere Hersteller persönlich und prüfen regelmäßig die Qualität.",
+                "heading": "Hersteller besucht, **persönlich** geprüft",
+                "subheading": "So arbeiten wir",
+                "body": "Wir besuchen unsere Hersteller persönlich, prüfen die Qualität vor Ort und entwickeln Sortiment und Designs in eigener Hand. Geleitet von Philipp Juskys und Daniel Heidrich, gewachsen aus Deutschland.",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Brand Story Bild. Heading, Subheading, Body grafisch ins Bild integriert. Hintergrund passend zur Marken Atmosphäre. Brand Story Lang aus Website Content kondensiert.",
+              "brief": "Brand Story Bild. Heading, Subheading, Body grafisch ins Bild integriert. Hintergrund Werkstatt oder Hersteller Visite Foto.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -5394,9 +5432,9 @@
                 "subheading": "Komplette Sitzgruppen für Garten und Terrasse",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Gartenmöbel Sets. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Gartenmöbel Sets. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -5409,34 +5447,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Gartenmöbel Sets**",
+                "heading": "Top **Gartenmöbel Sets**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B07MV853GG",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B07MV853GG",
-                "B07NDV9XNS",
-                "B084JQYGYM",
-                "B08591S6T4",
-                "B08L3V12L2",
-                "B0BTYY5FYG",
-                "B0C6N1D6S1",
-                "B0CR1H8BTF"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B07NDV9XNS",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B084JQYGYM",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -5455,7 +5522,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B07MV853GG",
                 "B07NDV9XNS",
@@ -5710,9 +5777,9 @@
                 "subheading": "Gerätehäuser, Holzunterstände, Boxen",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Gartenaufbewahrung. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Gartenaufbewahrung. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -5725,30 +5792,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Gartenaufbewahrung**",
+                "heading": "Top **Gartenaufbewahrung**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0CD7VVBPB",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0CD7VVBPB",
-                "B0CD7XR3LH",
-                "B0CD7ZZ4LG",
-                "B0FNX4DJ8F"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0CD7XR3LH",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0CD7ZZ4LG",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -5767,7 +5867,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0CD7VVBPB",
                 "B0CD7XR3LH",
@@ -6011,9 +6111,9 @@
                 "subheading": "Schlauch, Schubkarre, Werkzeug",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Gartenbedarf. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Gartenbedarf. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -6026,34 +6126,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Gartenbedarf**",
+                "heading": "Top **Gartenbedarf**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B01D1NTA4E",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B01D1NTA4E",
-                "B07YZ99NDM",
-                "B0C45Q45QQ",
-                "B0C45RKBYV",
-                "B0D734W3QV",
-                "B0DQTZBMSW",
-                "B0F1FYNCBL",
-                "B0F6NSNLR9"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B07YZ99NDM",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0C45Q45QQ",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -6072,7 +6201,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B01D1NTA4E",
                 "B07YZ99NDM",
@@ -6323,9 +6452,9 @@
                 "subheading": "Sonnenschirme, Markisen, Sichtschutz",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Sonnenschutz. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Sonnenschutz. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -6338,31 +6467,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Sonnenschutz**",
+                "heading": "Top **Sonnenschutz**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B071HGY7FT",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B071HGY7FT",
-                "B07C42GGDW",
-                "B07P7PRG78",
-                "B08THWGMN4",
-                "B0DXFM883Y"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B07C42GGDW",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B07P7PRG78",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -6381,7 +6542,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B071HGY7FT",
                 "B07C42GGDW",
@@ -6626,9 +6787,9 @@
                 "subheading": "Sonnenliegen und Doppelliegen",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Gartenliegen. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Gartenliegen. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -6641,29 +6802,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Gartenliegen**",
+                "heading": "Top **Gartenliegen**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0CRVS21Q6",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0CRVS21Q6",
-                "B0CXJBMHMD",
-                "B0GQTJ1MN1"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0CXJBMHMD",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0GQTJ1MN1",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -6682,7 +6877,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0CRVS21Q6",
                 "B0CXJBMHMD",
@@ -6925,43 +7120,15 @@
                 "subheading": "Klassische Gartenbänke aus Holz und Metall",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Gartenbänke. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Gartenbänke. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left",
-              "imageRef": ""
-            }
-          ]
-        },
-        {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
-          "tiles": [
-            {
-              "type": "best_sellers",
-              "textOverlay": {
-                "heading": "Die beliebtesten **Gartenbänke**",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B07FGXFBQ4",
-                "B07FGXKCGK"
-              ],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -6980,7 +7147,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B07FGXFBQ4",
                 "B07FGXKCGK"
@@ -7222,9 +7389,9 @@
                 "subheading": "Gartentische in verschiedenen Größen",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Gartentische. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Gartentische. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -7237,29 +7404,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Gartentische**",
+                "heading": "Top **Gartentische**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0CSZ14149",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0CSZ14149",
-                "B0CSZ4VTS9",
-                "B0D5QLN7GF"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0CSZ4VTS9",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0D5QLN7GF",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -7278,7 +7479,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0CSZ14149",
                 "B0CSZ4VTS9",
@@ -7521,9 +7722,9 @@
                 "subheading": "Bierzeltgarnituren für jeden Anlass",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Bierzeltgarnituren. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Bierzeltgarnituren. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -7536,29 +7737,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Bierzeltgarnituren**",
+                "heading": "Top **Bierzeltgarnituren**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B087FQZV2Y",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B087FQZV2Y",
-                "B089XXX8XZ",
-                "B0BZ1397VS"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B089XXX8XZ",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0BZ1397VS",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -7577,7 +7812,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B087FQZV2Y",
                 "B089XXX8XZ",
@@ -7820,9 +8055,9 @@
                 "subheading": "Hängematten und Hängesessel mit Gestell",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Hängematten. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Hängematten. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -7835,29 +8070,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Hängematten**",
+                "heading": "Top **Hängematten**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0BX3XGM2F",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0BX3XGM2F",
-                "B0D4DVLW4B",
-                "B0D4DX12NF"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0D4DVLW4B",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0D4DX12NF",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -7876,7 +8145,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0BX3XGM2F",
                 "B0D4DVLW4B",
@@ -8119,9 +8388,9 @@
                 "subheading": "Terrassendach, Carport, Wintergarten",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Überdachungen. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Überdachungen. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -8134,32 +8403,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Überdachungen**",
+                "heading": "Top **Überdachungen**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0BG3617K6",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0BG3617K6",
-                "B0BGHGSSHX",
-                "B0BTJ5ZTDV",
-                "B0BW93BWPQ",
-                "B0CHS9ML2L",
-                "B0DV5K5J2S"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0BGHGSSHX",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0BTJ5ZTDV",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -8178,7 +8478,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0BG3617K6",
                 "B0BGHGSSHX",
@@ -8424,9 +8724,9 @@
                 "subheading": "Solardusche, Abdeckung, Filteranlage",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Poolbedarf. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Poolbedarf. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -8439,30 +8739,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Poolbedarf**",
+                "heading": "Top **Poolbedarf**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B087QDPGYJ",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B087QDPGYJ",
-                "B0DHGMBC6X",
-                "B0GJD4M2JB",
-                "B0GSZTR899"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0DHGMBC6X",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0GJD4M2JB",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -8481,7 +8814,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B087QDPGYJ",
                 "B0DHGMBC6X",
@@ -8725,42 +9058,15 @@
                 "subheading": "Aluminium Gewächshäuser für deinen Garten",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Gewächshäuser. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Gewächshäuser. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left",
-              "imageRef": ""
-            }
-          ]
-        },
-        {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
-          "tiles": [
-            {
-              "type": "best_sellers",
-              "textOverlay": {
-                "heading": "Die beliebtesten **Gewächshäuser**",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B083Y4PYY1"
-              ],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -8779,7 +9085,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B083Y4PYY1"
               ],
@@ -9020,42 +9326,15 @@
                 "subheading": "Komfort fürs Wohnzimmer",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Sofas. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Sofas. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left",
-              "imageRef": ""
-            }
-          ]
-        },
-        {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
-          "tiles": [
-            {
-              "type": "best_sellers",
-              "textOverlay": {
-                "heading": "Die beliebtesten **Sofas**",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0CX1SJ9R1"
-              ],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -9074,7 +9353,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0CX1SJ9R1"
               ],
@@ -9315,9 +9594,9 @@
                 "subheading": "Polsterbetten in mehreren Größen",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Polsterbetten. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Polsterbetten. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -9330,29 +9609,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Polsterbetten**",
+                "heading": "Top **Polsterbetten**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0BKQ6XDKV",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0BKQ6XDKV",
-                "B0BSQKWT89",
-                "B0CCRQGD6P"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0BSQKWT89",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0CCRQGD6P",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -9371,7 +9684,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0BKQ6XDKV",
                 "B0BSQKWT89",
@@ -9614,43 +9927,15 @@
                 "subheading": "Klassischer Schlafkomfort",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Boxspringbetten. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Boxspringbetten. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left",
-              "imageRef": ""
-            }
-          ]
-        },
-        {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
-          "tiles": [
-            {
-              "type": "best_sellers",
-              "textOverlay": {
-                "heading": "Die beliebtesten **Boxspringbetten**",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B07QWXMYV9",
-                "B0DGXG1P6J"
-              ],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -9669,7 +9954,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B07QWXMYV9",
                 "B0DGXG1P6J"
@@ -9911,43 +10196,15 @@
                 "subheading": "Schlichte Metallbetten",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Metallbetten. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Metallbetten. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left",
-              "imageRef": ""
-            }
-          ]
-        },
-        {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
-          "tiles": [
-            {
-              "type": "best_sellers",
-              "textOverlay": {
-                "heading": "Die beliebtesten **Metallbetten**",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0F32S7FDB",
-                "B0F32SN1W4"
-              ],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -9966,7 +10223,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0F32S7FDB",
                 "B0F32SN1W4"
@@ -10208,9 +10465,9 @@
                 "subheading": "Polsterbetten in Kindergrößen",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Kinderbetten. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Kinderbetten. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -10223,29 +10480,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Kinderbetten**",
+                "heading": "Top **Kinderbetten**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0BKQ6XDKV",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0BKQ6XDKV",
-                "B0BSQKWT89",
-                "B0CCRQGD6P"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0BSQKWT89",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0CCRQGD6P",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -10264,7 +10555,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0BKQ6XDKV",
                 "B0BSQKWT89",
@@ -10507,9 +10798,9 @@
                 "subheading": "Wohn und Esszimmer Möbel",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Wohnmöbel. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Wohnmöbel. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -10522,29 +10813,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Wohnmöbel**",
+                "heading": "Top **Wohnmöbel**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0DXFLWC1L",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0DXFLWC1L",
-                "B0F8BR8ZW5",
-                "B0GX1BYJXM"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0F8BR8ZW5",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0GX1BYJXM",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -10563,7 +10888,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0DXFLWC1L",
                 "B0F8BR8ZW5",
@@ -10806,42 +11131,15 @@
                 "subheading": "Massagesessel für zuhause",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Massagesessel. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Massagesessel. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left",
-              "imageRef": ""
-            }
-          ]
-        },
-        {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
-          "tiles": [
-            {
-              "type": "best_sellers",
-              "textOverlay": {
-                "heading": "Die beliebtesten **Massagesessel**",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0FNWSKJP2"
-              ],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -10860,7 +11158,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0FNWSKJP2"
               ],
@@ -11101,9 +11399,9 @@
                 "subheading": "Bürostühle, Schreibtische, Aktenschränke",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Büromöbel. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Büromöbel. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -11116,30 +11414,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Büromöbel**",
+                "heading": "Top **Büromöbel**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B077P4PS6Z",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B077P4PS6Z",
-                "B0F32WYZ3G",
-                "B0FHHG2CKS",
-                "B0FX54GMQS"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0F32WYZ3G",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0FHHG2CKS",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -11158,7 +11489,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B077P4PS6Z",
                 "B0F32WYZ3G",
@@ -11402,43 +11733,15 @@
                 "subheading": "Matratzen und Topper",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Matratzen. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Matratzen. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left",
-              "imageRef": ""
-            }
-          ]
-        },
-        {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
-          "tiles": [
-            {
-              "type": "best_sellers",
-              "textOverlay": {
-                "heading": "Die beliebtesten **Matratzen**",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B09PLDVF2L",
-                "B0DM9FFLYF"
-              ],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -11457,7 +11760,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B09PLDVF2L",
                 "B0DM9FFLYF"
@@ -11699,9 +12002,9 @@
                 "subheading": "Kissen, Decken, Aufstehhilfen",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Schlafkomfort. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Schlafkomfort. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -11714,30 +12017,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Schlafkomfort**",
+                "heading": "Top **Schlafkomfort**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0D31GY3G4",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0D31GY3G4",
-                "B0DPX47HDJ",
-                "B0FDBBPRZ1",
-                "B0FDWRR38Q"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0DPX47HDJ",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0FDBBPRZ1",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -11756,7 +12092,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0D31GY3G4",
                 "B0DPX47HDJ",
@@ -12000,9 +12336,9 @@
                 "subheading": "Schminktische mit LED",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Schminktische. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Schminktische. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -12015,31 +12351,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Schminktische**",
+                "heading": "Top **Schminktische**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0947617BM",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0947617BM",
-                "B09476KMMH",
-                "B0FGDGNZNT",
-                "B0FGDH2KMJ",
-                "B0FH2P23B3"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B09476KMMH",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0FGDGNZNT",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -12058,7 +12426,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0947617BM",
                 "B09476KMMH",
@@ -12303,9 +12671,9 @@
                 "subheading": "Wäschekörbe und Stauraum",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Badausstattung. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Badausstattung. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -12318,29 +12686,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Badausstattung**",
+                "heading": "Top **Badausstattung**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B07GFPC58W",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B07GFPC58W",
-                "B082XGXKJ8",
-                "B08Q8GZ554"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B082XGXKJ8",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B08Q8GZ554",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -12359,7 +12761,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B07GFPC58W",
                 "B082XGXKJ8",
@@ -12602,9 +13004,9 @@
                 "subheading": "Stuhl, Tisch, Kühlbox, Matratze",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Camping. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Camping. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -12617,31 +13019,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Camping**",
+                "heading": "Top **Camping**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0C37FB3B3",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0C37FB3B3",
-                "B0C53LQFX8",
-                "B0C9DFG1YJ",
-                "B0C9JLFJ56",
-                "B0D8BKJK3K"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0C53LQFX8",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0C9DFG1YJ",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -12660,7 +13094,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0C37FB3B3",
                 "B0C53LQFX8",
@@ -12810,9 +13244,9 @@
                 "subheading": "Hartschale und Trolley Sets",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Koffersets. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Koffersets. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -12825,33 +13259,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Koffersets**",
+                "heading": "Top **Koffersets**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0C33XGG3Y",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0C33XGG3Y",
-                "B0C33Z7919",
-                "B0C42XSVZC",
-                "B0F6NGM2VL",
-                "B0F6NGR2RT",
-                "B0F6NJ533F",
-                "B0F6NKNZFF"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0C33Z7919",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0C42XSVZC",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -12870,7 +13334,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0C33XGG3Y",
                 "B0C33Z7919",
@@ -13022,42 +13486,15 @@
                 "subheading": "Autodachzelte für Roadtrips",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Dachzelte. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Dachzelte. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left",
-              "imageRef": ""
-            }
-          ]
-        },
-        {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
-          "tiles": [
-            {
-              "type": "best_sellers",
-              "textOverlay": {
-                "heading": "Die beliebtesten **Dachzelte**",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0F94FM1WR"
-              ],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -13076,7 +13513,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0F94FM1WR"
               ],
@@ -13222,9 +13659,9 @@
                 "subheading": "Sport und Outdoor Aktivitäten",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Sport. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Sport. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -13237,30 +13674,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Sport**",
+                "heading": "Top **Sport**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B01861S8O4",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B01861S8O4",
-                "B0D72ZH6JL",
-                "B0D7322KJH",
-                "B0DG5HDYLH"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0D72ZH6JL",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0D7322KJH",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -13279,7 +13749,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B01861S8O4",
                 "B0D72ZH6JL",
@@ -13428,9 +13898,9 @@
                 "subheading": "Hebeanlage, Wagenheber, Reparaturständer",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Werkzeug. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Werkzeug. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -13443,29 +13913,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Werkzeug**",
+                "heading": "Top **Werkzeug**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0DQ5K13RK",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0DQ5K13RK",
-                "B0DZ2XH5BS",
-                "B0FT3RZSCP"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0DZ2XH5BS",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0FT3RZSCP",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -13484,7 +13988,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0DQ5K13RK",
                 "B0DZ2XH5BS",
@@ -13632,9 +14136,9 @@
                 "subheading": "Klappbare Sackkarren für Treppen und Boden",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Sackkarren. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Sackkarren. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -13647,29 +14151,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Sackkarren**",
+                "heading": "Top **Sackkarren**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B07Z7QCTXW",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B07Z7QCTXW",
-                "B07Z7R4CMY",
-                "B0D9QSYSB7"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B07Z7R4CMY",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0D9QSYSB7",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -13688,7 +14226,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B07Z7QCTXW",
                 "B07Z7R4CMY",
@@ -13836,42 +14374,15 @@
                 "subheading": "Aluminium Multifunktionsleitern",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Multifunktionsleitern. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Multifunktionsleitern. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left",
-              "imageRef": ""
-            }
-          ]
-        },
-        {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
-          "tiles": [
-            {
-              "type": "best_sellers",
-              "textOverlay": {
-                "heading": "Die beliebtesten **Multifunktionsleitern**",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B072KDRTHG"
-              ],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -13890,7 +14401,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B072KDRTHG"
               ],
@@ -14036,9 +14547,9 @@
                 "subheading": "Elektrokamine und Heizstrahler",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Elektrokamine. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Elektrokamine. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -14051,32 +14562,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Elektrokamine**",
+                "heading": "Top **Elektrokamine**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0BBZX31R4",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0BBZX31R4",
-                "B0BBZYJLF2",
-                "B0FHHG49H8",
-                "B0FQJWR99K",
-                "B0CJRMN1JH",
-                "B0FQCMFLLY"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0BBZYJLF2",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0FHHG49H8",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -14095,7 +14637,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0BBZX31R4",
                 "B0BBZYJLF2",
@@ -14246,9 +14788,9 @@
                 "subheading": "Verzinkte Lager und Schwerlastregale",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Schwerlastregale. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Schwerlastregale. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -14261,34 +14803,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Schwerlastregale**",
+                "heading": "Top **Schwerlastregale**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B014IUTSW8",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B014IUTSW8",
-                "B07TYTLYPY",
-                "B083Y4T2TY",
-                "B09DJSHBW8",
-                "B09DK3LY2V",
-                "B09DKF8RPX",
-                "B0BWN67H4J",
-                "B0BWN8GRN4"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B07TYTLYPY",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B083Y4T2TY",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -14307,7 +14878,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B014IUTSW8",
                 "B07TYTLYPY",
@@ -14537,43 +15108,15 @@
                 "subheading": "Boxen und Aufbewahrungssysteme",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Aufbewahrung. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Aufbewahrung. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left",
-              "imageRef": ""
-            }
-          ]
-        },
-        {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
-          "tiles": [
-            {
-              "type": "best_sellers",
-              "textOverlay": {
-                "heading": "Die beliebtesten **Aufbewahrung**",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0BWN6NB4Z",
-                "B0CD7VC4D8"
-              ],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -14592,7 +15135,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0BWN6NB4Z",
                 "B0CD7VC4D8"
@@ -14815,42 +15358,15 @@
                 "subheading": "Airfryer und Helfer",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Küchengeräte. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Küchengeräte. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left",
-              "imageRef": ""
-            }
-          ]
-        },
-        {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
-          "tiles": [
-            {
-              "type": "best_sellers",
-              "textOverlay": {
-                "heading": "Die beliebtesten **Küchengeräte**",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0DHGHCZTF"
-              ],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -14869,7 +15385,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0DHGHCZTF"
               ],
@@ -15091,42 +15607,15 @@
                 "subheading": "Küchenmülleimer in mehreren Größen",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Mülleimer. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Mülleimer. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left",
-              "imageRef": ""
-            }
-          ]
-        },
-        {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
-          "tiles": [
-            {
-              "type": "best_sellers",
-              "textOverlay": {
-                "heading": "Die beliebtesten **Mülleimer**",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0CK4QSWF9"
-              ],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -15145,7 +15634,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0CK4QSWF9"
               ],
@@ -15367,42 +15856,15 @@
                 "subheading": "Kompakte Eiswürfelmaschinen",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Eiswürfelmaschinen. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Eiswürfelmaschinen. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left",
-              "imageRef": ""
-            }
-          ]
-        },
-        {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
-          "tiles": [
-            {
-              "type": "best_sellers",
-              "textOverlay": {
-                "heading": "Die beliebtesten **Eiswürfelmaschinen**",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0D5QK6TLM"
-              ],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -15421,7 +15883,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0D5QK6TLM"
               ],
@@ -15643,43 +16105,15 @@
                 "subheading": "Heizgeräte für drinnen und draußen",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Heizgeräte. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Heizgeräte. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left",
-              "imageRef": ""
-            }
-          ]
-        },
-        {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
-          "tiles": [
-            {
-              "type": "best_sellers",
-              "textOverlay": {
-                "heading": "Die beliebtesten **Heizgeräte**",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0CJRMN1JH",
-                "B0FQCMFLLY"
-              ],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -15698,7 +16132,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0CJRMN1JH",
                 "B0FQCMFLLY"
@@ -15921,9 +16355,9 @@
                 "subheading": "Rollator, Bollerwagen und mehr",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Alltagshilfen. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Alltagshilfen. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -15936,29 +16370,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Alltagshilfen**",
+                "heading": "Top **Alltagshilfen**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B082HMV596",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B082HMV596",
-                "B0DPX5QVZM",
-                "B0FG8835LQ"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0DPX5QVZM",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0FG8835LQ",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -15977,7 +16445,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B082HMV596",
                 "B0DPX5QVZM",
@@ -16201,9 +16669,9 @@
                 "subheading": "Kinderausstattung fürs Zuhause",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Kinderbedarf. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Kinderbedarf. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -16216,34 +16684,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Kinderbedarf**",
+                "heading": "Top **Kinderbedarf**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0BMB245DT",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B0BMB245DT",
-                "B0CLV392MC",
-                "B0CLXXZ67P",
-                "B0DHH2NCTS",
-                "B0DKFR5HQ6",
-                "B0DL5PKK41",
-                "B0DL5RWYTD",
-                "B0F32VLNPV"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0CLV392MC",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0CLXXZ67P",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -16262,7 +16759,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B0BMB245DT",
                 "B0CLV392MC",
@@ -16492,9 +16989,9 @@
                 "subheading": "Transport, Treppe, Auslauf",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Hundebedarf. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Hundebedarf. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
@@ -16507,30 +17004,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Hundebedarf**",
+                "heading": "Top **Hundebedarf**",
+                "subheading": "Bestseller in dieser Sub",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller in Anwendung. Tile klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B01CSNO9YO",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B01CSNO9YO",
-                "B0716T9673",
-                "B079YT88DT",
-                "B0C4FHBSR1"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0716T9673",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt auf hellem Grund. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B079YT88DT",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -16549,7 +17079,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B01CSNO9YO",
                 "B0716T9673",
@@ -16660,42 +17190,15 @@
                 "subheading": "Gehege für Garten und Balkon",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment ansehen"
+                "cta": ""
               },
-              "brief": "Hero Bild Sub Page Freilaufgehege. Freigestelltes Leitprodukt aus dieser Sub.",
+              "brief": "Hero Bild Sub Page Freilaufgehege. Lifestyle Komposition oder Leitprodukt im Kontext, ohne CTA.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
-              "textAlign": "left",
-              "imageRef": ""
-            }
-          ]
-        },
-        {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
-          "tiles": [
-            {
-              "type": "best_sellers",
-              "textOverlay": {
-                "heading": "Die beliebtesten **Freilaufgehege**",
-                "subheading": "",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Bestseller Grid in dieser Sub.",
-              "asins": [
-                "B09M7GCK5Y"
-              ],
-              "hotspots": [],
-              "linkUrl": "",
-              "linkAsin": "",
-              "bgColor": "",
-              "imageCategory": "",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -16714,7 +17217,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Vollkatalog dieser Sub.",
+              "brief": "Vollkatalog dieser Sub, sortiert nach Bestseller.",
               "asins": [
                 "B09M7GCK5Y"
               ],

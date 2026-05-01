@@ -1,4 +1,4 @@
-import { uid, emptyTile, emptyTileForLayout, emptyTextOverlay } from './constants';
+import { uid, emptyTile, emptyTileForLayout, emptyTextOverlay, deriveMobileDims } from './constants';
 
 // Briefing JSON → Store Objekt.
 // Erwartet das Briefing Format aus briefings/juskys-store-briefing.md:
@@ -45,6 +45,19 @@ export function importBriefingToStore(briefing) {
         if (typeof t.textAlign === 'string') tile.textAlign = t.textAlign;
         if (typeof t.linkAsin === 'string') tile.linkAsin = t.linkAsin;
         if (typeof t.imageRef === 'string') tile.imageRef = t.imageRef;
+        // Variable Tile Dimensionen aus dem Briefing übernehmen. Wenn nur
+        // dimensions gesetzt ist (kein mobileDimensions), wird Mobile passend
+        // zum Layout Typ abgeleitet (Standard plus Standard, VH 1500x750 fix,
+        // Full Width 1680 breit). Wenn beide gesetzt sind, beide übernommen.
+        if (t.dimensions && typeof t.dimensions === 'object'
+            && Number(t.dimensions.w) > 0 && Number(t.dimensions.h) > 0) {
+          tile.dimensions = { w: Number(t.dimensions.w), h: Number(t.dimensions.h) };
+          tile.mobileDimensions = deriveMobileDims(layoutId, tile.dimensions.w, tile.dimensions.h);
+        }
+        if (t.mobileDimensions && typeof t.mobileDimensions === 'object'
+            && Number(t.mobileDimensions.w) > 0 && Number(t.mobileDimensions.h) > 0) {
+          tile.mobileDimensions = { w: Number(t.mobileDimensions.w), h: Number(t.mobileDimensions.h) };
+        }
         // Produktberater Quiz Schema, wird per Tool Properties Panel weiter
         // bearbeitet. Briefing JSON kann das initiale Schema vorgeben.
         if (t.productSelector && typeof t.productSelector === 'object') tile.productSelector = t.productSelector;

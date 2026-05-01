@@ -241,19 +241,22 @@ function buildFilenameMap(store) {
   return map;
 }
 
-// Build a map of tile fingerprints → first occurrence location
+// Build a map of tile fingerprints → first occurrence location.
+// Primärer Dedup Schlüssel ist tile.imageRef wenn gesetzt, sonst Fingerprint
+// aus tile Inhalten. So erkennt der Designer explizit getaggte Reuse Stellen
+// und auch implizit identische Tiles ohne imageRef.
 function buildDuplicateMap(store) {
   var map = {};
   (store.pages || []).forEach(function(pg) {
     (pg.sections || []).forEach(function(sec, si) {
       (sec.tiles || []).forEach(function(tile, ti) {
         if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text' || tile.type === 'product_selector') return;
-        var fp = tileFingerprint(tile);
-        if (!fp || fp === 'image||||||x|') return;
-        if (!map[fp]) {
-          map[fp] = { page: pg.name, section: si + 1, tile: ti + 1, count: 1 };
+        var key = tile.imageRef ? ('ref:' + String(tile.imageRef).toLowerCase()) : ('fp:' + tileFingerprint(tile));
+        if (!key || key === 'fp:image||||||x|' || key === 'fp:') return;
+        if (!map[key]) {
+          map[key] = { page: pg.name, section: si + 1, tile: ti + 1, count: 1, imageRef: tile.imageRef || '' };
         } else {
-          map[fp].count++;
+          map[key].count++;
         }
       });
     });
@@ -553,10 +556,14 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
       </div>
 
       {duplicateInfo && duplicateInfo.count > 1 && (
-        <div className="briefing-field" style={{ background: '#ecfdf5', border: '1px solid #6ee7b7', borderRadius: 4, padding: '4px 8px', marginBottom: 4 }}>
-          <span style={{ fontSize: 10, fontWeight: 700, color: '#065f46' }}>
-            Duplicate of {duplicateInfo.page} &middot; S{duplicateInfo.section} &middot; T{duplicateInfo.tile} — no new image needed
-          </span>
+        <div className="briefing-field" style={{ background: '#ecfdf5', border: '2px solid #10b981', borderRadius: 4, padding: '6px 10px', marginBottom: 6 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, color: '#047857', marginBottom: 2 }}>
+            Bild bereits vorhanden, nicht neu designen
+          </div>
+          <div style={{ fontSize: 10, color: '#065f46', lineHeight: 1.4 }}>
+            Identisch mit <b>{duplicateInfo.page}</b>, Section {duplicateInfo.section}, Tile {duplicateInfo.tile}. Lade dort dein Bild hoch, das gleiche Bild wird automatisch auf {duplicateInfo.count - 1} weitere Stellen angewendet.
+            {duplicateInfo.imageRef && <span style={{ display: 'block', marginTop: 2, fontFamily: 'monospace', color: '#047857', fontSize: 9 }}>imageRef: {duplicateInfo.imageRef}</span>}
+          </div>
         </div>
       )}
 
@@ -2477,10 +2484,11 @@ export default function BriefingView() {
                   </div>
                   {item.section.tiles.map(function(tile, ti) {
                     var isSelected = selectedTile && selectedTile.sid === item.section.id && selectedTile.ti === ti;
-                    var fp = tileFingerprint(tile);
-                    var dupInfo = fp && duplicateMap[fp] && duplicateMap[fp].count > 1
-                      && !(duplicateMap[fp].page === item.pageName && duplicateMap[fp].section === item.sectionIndex + 1 && duplicateMap[fp].tile === ti + 1)
-                      ? duplicateMap[fp] : null;
+                    // imageRef hat Vorrang, Fingerprint ist Fallback
+                    var dupKey = tile.imageRef ? ('ref:' + String(tile.imageRef).toLowerCase()) : ('fp:' + tileFingerprint(tile));
+                    var dupInfo = dupKey && duplicateMap[dupKey] && duplicateMap[dupKey].count > 1
+                      && !(duplicateMap[dupKey].page === item.pageName && duplicateMap[dupKey].section === item.sectionIndex + 1 && duplicateMap[dupKey].tile === ti + 1)
+                      ? duplicateMap[dupKey] : null;
                     return (
                       <TileDetail
                         key={ti}

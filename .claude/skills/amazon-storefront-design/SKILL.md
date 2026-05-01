@@ -77,7 +77,6 @@ Tile 2: "Sicher"   ← doppelt mit Heading
 ```
 
 Richtig:
-
 ```
 Heading Section: "Werkzeug, das hält"
 Tile 1: "Belastbar"
@@ -93,6 +92,50 @@ Tile 2: "TÜV geprüft"
 ```
 
 Vor jeder Section Output: Prüfe ob ein Tile Heading Wort im Section Heading vorkommt. Wenn ja, eines der beiden umformulieren.
+
+### Page Level Repetition Check
+
+Über die ganze Page hinweg dürfen sich **dieselben Fakten und Phrasen nicht wiederholen**. Inhabergeführt seit 2005, Aus Deutschland, Hersteller besucht und ähnliche Marken Fakten dürfen pro Page **maximal an einer Stelle ausführlich** stehen, an anderen Stellen nur in Variation oder gar nicht.
+
+Falsch (Über Uns Page):
+
+```
+Hero: "Ein Haus, viele Räume" / "Inhabergeführt seit 2005, aus Deutschland"
+Brand Story Tile: "Inhabergeführt aus Deutschland" / "Seit 2005" / [Body mit "inhabergeführt aus Deutschland"]
+USP Tile 1: "Inhabergeführt" / "Seit 2005"
+```
+
+Drei Mal denselben Fakt. Nur Tile 1 sagt es klar, die anderen zwei sind Wiederholung.
+
+Richtig:
+
+```
+Hero: "Wer ist Juskys" / "Mittelständler aus Deutschland"
+Brand Story Tile: "Hersteller besucht, Halle besichtigt" / [Body mit Geschichte und Werten]
+USP Tile 1: "Inhabergeführt" / "Seit 2005"
+```
+
+Drei verschiedene Aussagen, jede an einer Stelle.
+
+Vor Output: jede Marken Fakt Phrase einmal in der Page suchen, an den anderen Stellen Variation oder Streichung.
+
+### Headline Bezugsstärke
+
+Headlines müssen **direkten Bezug zum Page Inhalt** haben. Metaphern und Marketing Floskeln ohne konkreten Bezug zur Marke oder Page Funktion sind verboten.
+
+Falsch:
+
+- `Ein Haus, viele Räume` als Über Uns Headline für Juskys (Juskys ist ein Sortiment Trader, kein Haus mit Räumen, die Metapher passt nicht)
+- `Wo Stories beginnen` als Möbel Page Headline (passt nicht, irrelevant)
+- `Mehr als nur Möbel` als Hero (sagt nichts)
+
+Richtig:
+
+- `Wer ist Juskys` plus konkrete Subline (Über Uns)
+- `Sofas in jeder Größe` (Möbel Page, konkret)
+- `Lounge bereit für die Saison` (Garten Page, saisonal konkret)
+
+Test pro Headline: Wenn ich den Markennamen oder Kategorie Namen aus der Headline streiche, ergibt sie noch Sinn? Wenn ja, ist sie zu generisch.
 
 ### Konkrete Sprache pro Modul Typ
 
@@ -169,9 +212,27 @@ E. ASIN Liste, wie wirst du sie liefern?
    [ • ] a) Ich kopiere sie als Text unten ein
    [ • ] b) Helium 10 CSV (lade ich später ins Tool)
    [ • ] c) Habe sie noch nicht, fülle ich später nach
+
+F. Brand Voice (Mehrfachauswahl, mindestens 2 wählen). Jede Wahl
+   verändert direkt den Headline Stil. Wähle bewusst.
+
+   [ ] a) **nahbar** → Headlines duzen, Frage Pattern erlaubt
+          ("Welches Sofa passt zu dir"), Alltagssprache
+   [ ] b) **direkt** → kurze Aussagen ohne Floskel, max 4 Wörter,
+          Imperativ erlaubt ("Hol dir den Sommer")
+   [ ] c) **technisch** → konkrete Zahlen und Specs in Headlines
+          erlaubt ("Boxspring ab 200 Euro"), kein Storytelling
+   [ ] d) **emotional** → Sinneseindrücke, Stimmungsworte
+          ("warm", "ruhig", "lebendig"), längere Headlines OK
+   [ ] e) **professionell** → siezen, kein Imperativ,
+          neutralere Substantive
+   [ ] f) **saisonal** → saisonale Trigger Wörter erlaubt
+          ("Bereit für die Saison", "Jetzt für den Winter")
 ```
 
-Akzeptiere Kurzantworten wie "A1, B b c d, C2, D1, E1". Akzeptiere auch Frei Eingabe.
+Akzeptiere Kurzantworten wie "A1, B b c d, C2, D1, E1, F a b f". Akzeptiere auch Frei Eingabe.
+
+Block F Brand Voice ist Pflicht und wirkt sich auf jede Headline aus die der Skill generiert. Mische die gewählten Adjektive im Headline Stil. Beispiel: bei `a + b + f` (nahbar + direkt + saisonal) liest sich das wie "Hol dir den Sommer" plus duzen plus saisonale Trigger. Bei `c + e` (technisch + professionell) liest sich das wie "Boxspring ab 200 Euro inklusive Topper" mit siezen.
 
 ### Schritt 2, klärende Rückfragen je nach Antwort
 
@@ -184,18 +245,146 @@ Stelle weitere Rückfragen **nur** wo die ersten Antworten Lücken offen lassen 
 
 Halte Rückfragen kurz und gezielt. Nicht alles auf einmal, lieber dialogisch in 2 oder 3 Runden.
 
-### Schritt 3, Konzept bauen
+### Schritt 3, Konzept Skelett bauen
 
-Sobald alle nötigen Inputs da sind, baue das Konzept entsprechend dem Scope. Verwende:
+Sobald alle nötigen Inputs da sind, baue zuerst das **Konzept Skelett**, NICHT das fertige JSON. Das Skelett ist:
 
-- **Tool Vokabular** aus Kapitel "Tool Schema" weiter unten
-- **CI Konventionen** aus dem User Input (Farben, Schrift, Logo)
-- **Wording Regeln** (siehe oben, kein Em Dash, ein Wort grün als Highlight)
-- **Modul Auswahl** passend zum Page Type (Homepage, Kategorie, Bestseller, Sale, Über Uns, Subpage)
+- Liste aller Pages (Home, Hauptkategorien, Sale, Über Uns, Bestseller, Produktberater, plus Subpages)
+- Pro Page der grobe Modul Flow (Hero, Sub Navigator, Shoppable, Bestseller Showcase, Vollkatalog, Cross Link)
 
-### Schritt 4, Briefing JSON ausgeben
+Outputten als knappe Liste, **ohne Headlines**. Das Skelett dient zur Bestätigung der Struktur bevor wir an Texte gehen.
 
-Output ist ein einzelner Code Block mit `json` Sprache, der direkt in das Brand Store Builder Tool importiert werden kann. Format siehe unten.
+### Schritt 4, Headlines im Chat abstimmen (Pflicht, niemals überspringen)
+
+**Bevor das Briefing JSON erzeugt wird**, schlage pro Page **drei Hero Headline Optionen** im Chat vor und warte auf User Auswahl. Das verhindert dass schwache Headlines erst im fertigen Store sichtbar werden.
+
+Format pro Page:
+
+```
+Page: Über Uns
+
+Hero Headline Vorschläge:
+1. Hinter Juskys / Personen, Halle, Sortiment
+2. Wer steckt dahinter / Mittelständler aus Deutschland
+3. Eine Marke, ein Team / Geschichte und Werte seit 2005
+
+Welche möchtest du? (1, 2, 3 oder eigene Variante)
+```
+
+User antwortet mit Zahl oder gibt eigene Variante. Akzeptiere auch Sammelantworten wie "Über Uns 2, Bestseller 1, Garten 3".
+
+**Wenn der Store viele Subpages hat (über 10)**, nicht jede einzeln im Dialog. Stattdessen: für Hauptseiten (Home, Hauptkategorien, Sale, Über Uns, Bestseller, Produktberater) einzeln 3 Vorschläge im Chat, für Subpages eine Tabelle mit jeweils einem Default Vorschlag den der User punktuell ändern kann:
+
+```
+Sub Page Hero Headlines (Default Vorschläge, sag wo du was anderes willst):
+
+Garten > Sofas → "Sofas in jeder Größe"
+Garten > Loungegruppen → "Lounge bereit für die Saison"
+...
+Möbel > Sofas → "Komfort fürs Wohnzimmer"
+...
+
+Welche willst du ändern? (Liste pro Sub angeben oder "alle ok")
+```
+
+Erst nach Bestätigung der Headlines geht es zu Schritt 5 (Self Check) und dann Schritt 6 (Output).
+
+### Schritt 5, Pre-Output Self Check (Pflicht, niemals überspringen)
+
+Bevor du das Briefing JSON ausgibst, gehe das Konzept als Self Check durch und korrigiere stillschweigend was gegen die harten Regeln verstößt. Output darf keine bekannten Fehler enthalten.
+
+**Self Check Algorithmus**:
+
+1. **ASIN Grid Stack Check**. Für jede Page durchlaufe alle Section Paare in Reihenfolge. Module mit ASIN Grid sind: `product_grid`, `best_sellers`, `recommended`, `deals`. Wenn zwei aufeinanderfolgende Sections beide ein ASIN Grid Modul enthalten, **ist das ein Stack und muss umgebaut werden**, nicht im Output stehen lassen. Drei Fix Optionen, in dieser Priorität:
+   - **Option A, konsolidieren**. Wenn beide Grids überlappende ASINs zeigen (z.B. Bestseller Top 8 plus Vollkatalog der dieselben ASINs enthält), streiche das Bestseller Grid komplett. Vollkatalog reicht, sortiert nach Bestseller Rang.
+   - **Option B, zweites Grid zu Showcase Layout konvertieren**. Wandle das zweite ASIN Grid in eine `lg-2stack` Section um mit drei `image` Tiles, jeweils mit `linkAsin` auf einen der Top 3 ASINs. Erstes Tile als Lifestyle Bild, zweites und drittes als freigestellte Produkt Bilder. So bleibt der Bestseller Effekt sichtbar ohne ASIN Grid Modul.
+   - **Option C, Trenner Section dazwischen einfügen**. Wenn beide Grids inhaltlich verschieden sind und beide bleiben sollen, füge eine `dividerTile` Section (Layout `1`, Trenner Textbild) zwischen die beiden ein, die das nächste Thema benennt.
+
+2. **Page Level Repetition Check**. Pro Page jede Marken Fakt Phrase (z.B. "Inhabergeführt seit 2005", "Aus Deutschland", "Hersteller besucht") in Hero Subheadings, Brand Story Bodies, USP Tile Headings und Cross Link Bannern aufzählen. Wenn ein Fakt mehr als einmal auftaucht, an allen Stellen außer einer (die kompakteste, meist USP Tile) umformulieren oder streichen.
+
+3. **Headline Bezugsstärke Check**. Pro Hero Headline prüfen: Wenn ich den Markennamen oder Kategorie Namen aus der Headline streiche, ergibt sie noch Sinn? Wenn ja, Headline neu schreiben mit klarem Page Bezug.
+
+4. **Tile Type Whitelist Check**. Kein Tile darf `text` oder `image_text` als Type haben. Brand Story Tiles sind `image` mit `imageCategory: text_image`.
+
+5. **Versand und Lieferung Check**. Keine Headline, Subheading, Body oder Bullet darf "Versandkostenfrei", "Schnelle Lieferung", "Express", "Truck Icon" enthalten.
+
+6. **Small Catalog Check**. Wenn eine Page **weniger als 5 ASINs insgesamt** hat (typisch eine Sub Page mit kleinem Sortiment), darf kein ASIN Grid Modul (`product_grid`, `best_sellers`, `recommended`, `deals`) verwendet werden. Ein Grid mit 1 bis 4 Kacheln wirkt visuell schwach und ist redundant zu Bild Modulen die das gleiche zeigen.
+
+   Stattdessen die ASINs komplett durch Bild Module erklären:
+
+   - **Shoppable Image** mit bis zu 5 Hotspots, ein Bild trägt alle Produkte als verlinkte Punkte
+   - **Klickbare Image Tiles** mit `linkAsin`, z.B. `lg-2stack` Layout (1 Lifestyle Tile plus 2 Wide Tiles, alle linkAsin), oder `vh-w2s` (1 Wide plus 2 Squares mit linkAsin), oder `2x2wide` (4 Wide Tiles mit linkAsin)
+   - Eine Mischung aus beidem (Shoppable Hero plus linkAsin Tile Section)
+
+   Das gilt insbesondere für:
+   - Sub Pages mit kleinem Sortiment (z.B. Sub mit 1 bis 4 ASINs)
+   - Hauptkategorien mit sehr schmalem Portfolio
+   - Themen Pages mit kuratierter ASIN Auswahl
+
+   Beispiel falsch (Sub Page mit 3 ASINs):
+
+   ```
+   Section: Hero Bild
+   Section: best_sellers Grid (3 ASINs als Kachel Liste)
+   Section: product_grid Vollkatalog (dieselben 3 ASINs)
+   ```
+
+   3 Kacheln in einem Grid ist zu wenig, plus zwei Grids stapeln und beide zeigen dasselbe.
+
+   Beispiel richtig:
+
+   ```
+   Section: Hero Bild
+   Section: lg-2stack Layout
+     Tile 1 (Large Square): Lifestyle Bild Top ASIN, linkAsin auf ASIN 1
+     Tile 2 (Wide): Produkt Bild ASIN 2, linkAsin
+     Tile 3 (Wide): Produkt Bild ASIN 3, linkAsin
+   Section: Cross Nav zu Sibling Subs
+   ```
+
+   Alle 3 ASINs sind verlinkt sichtbar, kein Grid Modul.
+
+7. **Lifestyle Tile Verlinkung plus Redundanz Check**. Zwei Schritte:
+
+   a) **Verlinkung**. Jedes `image` Tile das im Brief konkrete Produkte erwähnt (z.B. "Hund mit Hundetreppe", "Loungegruppe auf Terrasse", "Freilaufgehege im Garten") muss eines davon haben:
+   - `linkAsin`, wenn ein einziges konkretes Produkt im Bild ist (Tile klickbar zur PDP)
+   - `shoppable_image` Type mit Hotspots, wenn mehrere Produkte im Bild sind (max 5)
+   - `linkUrl`, wenn das Tile als Kategorie Navigator zur Subpage führt
+
+   Wenn Verlinkung fehlt, ergänze die passende vor Output. Niemals ein Lifestyle Tile mit Produkt im Brief OHNE Verlinkung ausgeben.
+
+   b) **Redundanz mit ASIN Grid darunter**. Wenn auf derselben Page ein verlinktes Lifestyle Tile (egal ob via linkAsin, shoppable Hotspot oder linkUrl auf eine Subpage) direkt oder weiter unten von einem ASIN Grid Modul (`best_sellers`, `product_grid`, `recommended`, `deals`) gefolgt wird das **dieselben ASINs** zeigt wie die verlinkten Lifestyle Tiles, dann ist das ASIN Grid redundant. Der User scrollt nach unten und sieht die gleichen Produkte nochmal als Kachel Liste. Drei Fix Optionen:
+
+   - **Streichen**. ASIN Grid entfernen wenn alle ASINs schon über die Lifestyle Tiles verlinkt sind. Cross Nav Tiles plus Vollkatalog der **ganzen Hauptkategorie** am Ende reichen.
+   - **ASIN Liste verbreitern**. ASIN Grid behalten, aber auf eine andere Auswahl umstellen (z.B. Vollkatalog der ganzen Hauptkategorie statt nur der drei Lifestyle Subs).
+   - **ASIN Grid zu Showcase konvertieren**. `lg-2stack` Layout mit drei Lifestyle Tiles, alle mit linkAsin, statt einem Grid Modul. Aber nur wenn die Hauptkategorie Lifestyle Tiles oben anders sind (verschiedene Subs).
+
+   Beispiel falsch (Tierbedarf Hauptseite):
+
+   ```
+   Section: Sub Navigator (Freilaufgehege linkUrl, Hund linkUrl, Katze linkUrl)
+   Section: best_sellers Freilaufgehege (8 Freilaufgehege ASINs)
+   Section: best_sellers Hundebedarf (8 Hundebedarf ASINs)
+   ```
+
+   Die Sub Navigator Tiles linken schon auf die Subpages wo die ASINs einzeln stehen. Die zwei Bestseller Grids zeigen die gleichen ASINs nochmal als Kachel Liste, redundant.
+
+   Beispiel richtig:
+
+   ```
+   Section: Sub Navigator (Freilaufgehege linkUrl, Hund linkUrl, Katze linkUrl)
+   Section: shoppable_image Tierbedarf Lifestyle (5 Hotspots auf Top Produkte aus mehreren Subs)
+   Section: lg-2stack Bestseller Showcase (1 Lifestyle Tile linkAsin Top, 2 Wide Tiles linkAsin Top 2 und 3)
+   Section: product_grid Vollkatalog ALLER Tierbedarf ASINs
+   ```
+
+   Sub Navigator linkt zu Subpages, Shoppable hat Hotspots auf konkrete ASINs, Showcase verweist auf Top 3 mit linkAsin, Vollkatalog am Ende ist die einzige Listing Section und zeigt alle Tierbedarf ASINs (nicht nur die drei aus der Sub Navigator).
+
+**Wichtig**: Der Self Check ist still. Du erwähnst die Korrekturen nicht im Output, du gibst direkt das saubere JSON aus. Der User soll nichts von dem Check sehen, das Konzept landet **fertig korrekt** im Tool.
+
+### Schritt 6, Briefing JSON ausgeben
+
+Output ist ein einzelner Code Block mit `json` Sprache, der direkt in das Brand Store Builder Tool importiert werden kann. Format siehe unten. Die im Schritt 4 abgestimmten Headlines sind als Hero Headlines pro Page eingebaut. Andere Headlines (Trenner, Bestseller Section, USP Tile, Cross Link) werden vom Skill nach Brand Voice generiert und folgen den Regeln aus dem Sprache Kapitel.
 
 Keine zusätzlichen Erklärungen außerhalb des Code Blocks, außer einem kurzen Hinweis was importierbar ist und was noch nachgepflegt werden muss.
 
@@ -275,6 +464,8 @@ Das Briefing JSON hat diese Struktur. Das Tool ergänzt fehlende IDs und Default
 | `bgColor` | string | nein | HEX Farbe |
 | `imageCategory` | string | nein | `store_hero`, `benefit`, `product`, `creative`, `lifestyle`, `text_image` |
 | `imageRef` | string | nein | Topic Tag für Bild Reuse (siehe Abschnitt Image Reuse) |
+| `dimensions` | object {w, h} | nein | Override für Tile Pixel Dimensionen Desktop. Wenn nicht gesetzt, nutzt das Tool den Layout Default. Pflicht wenn das Tile von der Default Höhe abweichen soll (z.B. Trenner flach, Shoppable hoch) |
+| `mobileDimensions` | object {w, h} | nein | Override für Mobile Dimensionen. Wenn nicht gesetzt, wird Mobile aus dem Layout Typ und der Desktop Höhe abgeleitet (Standard Layout: Mobile gleich Desktop, VH: 1500x750 fix, Full Width: 1680 breit) |
 
 ### Tile Types
 
@@ -457,6 +648,147 @@ Damit kann der User innerhalb der Kategorie stöbern, ohne erst zur Eltern Page 
 2. Bestseller Grid mit den ASINs der Kategorie
 
 Das gibt visuell klare Blöcke pro Kategorie.
+
+### Niemals zwei ASIN Grids stapeln
+
+Module die eine ASIN Grid zur Folge haben (`product_grid`, `best_sellers`, `recommended`, `deals`) dürfen **niemals direkt aufeinander folgen**. Zwischen zwei solchen Sections muss mindestens **eine andere Section** liegen, sonst stapeln sich Produktkacheln untereinander und sehen wie eine einzige lange Liste aus.
+
+Falsch:
+
+```
+Section: Bestseller Grid (Top 8 Sofas)
+Section: Product Grid (alle Sofas)   ← ASIN Stack, oft mit denselben ASINs
+```
+
+Richtig (Variante A: Trenner dazwischen):
+
+```
+Section: Bestseller Grid (Top 8 Sofas)
+Section: Lifestyle Trenner (Full Width Image, Headline "Sofa für jedes Wohnzimmer")
+Section: Product Grid (alle Sofas)
+```
+
+Richtig (Variante B: konsolidieren statt doppeln):
+
+```
+Section: Lifestyle Hero Image mit linkAsin auf Top Sofa
+Section: Product Grid (alle Sofas, sortiert nach Bestseller)
+```
+
+Wenn der Bestseller Block sowieso die ersten 8 ASINs des Vollkatalogs zeigt, ist er redundant. Streiche den Bestseller Block und nimm direkt den Vollkatalog. Der Lifestyle Hero darüber zeigt bereits den Top Seller mit linkAsin.
+
+Richtig (Variante C: Bestseller als Layout statt Grid):
+
+```
+Section: lg-2stack
+  Tile 1 (Large Square): Lifestyle Bild Top Sofa mit linkAsin
+  Tile 2 (Wide): Image mit linkAsin auf Top 2
+  Tile 3 (Wide): Image mit linkAsin auf Top 3
+Section: Product Grid (alle Sofas)
+```
+
+Bestseller wird hier als Bildkomposition gezeigt, nicht als ASIN Grid Modul. Dadurch entsteht visuell etwas anderes als der Product Grid darunter.
+
+### Lifestyle und Kategorie Tiles mit Produkten brauchen Verlinkung
+
+Wenn ein `image` Tile **konkrete Produkte zeigt** (z.B. ein Lifestyle Bild mit einem Hundebett, einem Kratzbaum oder einer Loungegruppe), muss das Tile entweder:
+
+- `linkAsin` haben (wenn ein einziges konkretes Produkt im Bild ist), das Tile ist klickbar zur PDP des Produkts
+- `shoppable_image` Tile Type sein mit Hotspots auf den Produkten (wenn mehrere Produkte im Bild sind, max 5)
+- `linkUrl` haben auf eine Subpage (wenn das Tile als Kategorie Navigator dient und kein konkretes Produkt verlinkt)
+
+**Wenn das gemacht ist, kann der direkt darunter folgende Bestseller oder Product Grid Block oft komplett gestrichen werden**, weil die Produkte schon im Lifestyle Bild verlinkt sind. Der User muss nicht zusätzlich nach unten scrollen um die gleichen ASINs nochmal als Kachel Grid zu sehen.
+
+Falsch:
+
+```
+Section: 3 Lifestyle Tiles "Freilaufgehege" / "Hund" / "Katze" (ohne Verlinkung)
+Section: Bestseller Grid (Freilaufgehege ASINs)
+Section: Bestseller Grid (Hund ASINs)
+```
+
+Lifestyle Bilder zeigen Produkte aber sind nicht verlinkt, dann werden dieselben ASINs nochmal als Grid abgebildet. Doppelt.
+
+Richtig:
+
+```
+Section: 3 Lifestyle Tiles mit linkAsin (Freilaufgehege Top ASIN, Hund Top ASIN, Katze Top ASIN)
+Section: Product Grid (alle Tierbedarf ASINs sortiert)
+```
+
+Lifestyle Tiles sind klickbar (linkAsin), Product Grid darunter zeigt die volle Liste, kein Duplikat.
+
+### Variable Tile Höhen je nach Funktion
+
+Tile Dimensionen sind **nicht** auf 3000x600 fixiert. Layout `1` (Full Width) erlaubt Höhen zwischen 200 (Desktop max 15:1 Verhältnis) und etwa 2400. Wähle die Höhe **nach Funktion des Tiles**:
+
+| Tile Funktion | Empfohlene Desktop Höhe (bei 3000 Breite) | Mobile Höhe (bei 1680 Breite) |
+|---------------|-------------------------------------------:|-------------------------------:|
+| Trenner / Section Header / Kategorie Überschrift | 300 bis 500 | 336 (5:1 Min) bis 500 |
+| Hero Banner Page Header | 600 bis 900 | 600 bis 900 |
+| Lifestyle Bild mit Komposition | 1200 bis 1500 | 1200 bis 1500 |
+| Shoppable Image mit 3 bis 5 Produkten | 1500 bis 1800 | 1500 bis 1800 |
+| Bestseller als Composite Image (Bestseller Bild im Tile) | 1200 bis 1500 | 1200 bis 1500 |
+| Video 16:9 | 1688 | 945 |
+
+Faustregel: ein schmaler Trenner braucht keine 600 Pixel Höhe, da reicht 350. Ein Shoppable Bild mit 5 Produkten braucht mehr als 600 Pixel sonst werden die Hotspots zu eng. Pro Tile bewusst die Höhe wählen, nicht stur 3000x600 als Default.
+
+Mindestverhältnis: Desktop max 15:1 (Breite zu Höhe), Mobile max 5:1.
+
+**Wie du das im Briefing JSON setzt**: Pro Tile das Feld `dimensions` (Desktop) und optional `mobileDimensions` (Mobile) angeben. Beispiele:
+
+Trenner Tile, flach (Layout 1):
+
+```json
+{
+  "type": "image",
+  "textOverlay": { "heading": "Bereit für die **Saison**" },
+  "brief": "Trenner Textbild mit Stoff Makro im Hintergrund.",
+  "imageCategory": "text_image",
+  "dimensions": { "w": 3000, "h": 350 }
+}
+```
+
+Shoppable Image, hoch (Layout 1):
+
+```json
+{
+  "type": "shoppable_image",
+  "textOverlay": { "heading": "Lounge, **fertig** zum Loslegen" },
+  "brief": "Shoppable Terrasse mit 3 Produkten.",
+  "asins": ["B0...", "B0...", "B0..."],
+  "dimensions": { "w": 3000, "h": 1500 }
+}
+```
+
+Hero Page Header (Layout 1):
+
+```json
+{
+  "type": "image",
+  "textOverlay": { "heading": "Was **dein** Zuhause braucht" },
+  "brief": "Hero Bild Wohnraum mit Übergang Terrasse.",
+  "dimensions": { "w": 3000, "h": 800 }
+}
+```
+
+Wenn `dimensions` nicht angegeben ist, fällt das Tool zurück auf den Layout Default (Layout 1: 3000x600). `mobileDimensions` ist optional, wenn nicht angegeben wird Mobile automatisch abgeleitet (Standard Layout: Mobile gleich Desktop, VH: fix 1500x750, Full Width: 1680 breit, Höhe folgt Desktop).
+
+### Layout Variation pro Page
+
+Eine Page mit 8 bis 12 Sections soll **mindestens 3 verschiedene Layout Typen** verwenden. Wenn alle Sections nur Layout `1` (Full Width) sind, wirkt die Page wie eine endlose Liste.
+
+Empfohlene Mischung pro Hauptkategorie Page:
+
+- 1x Hero (Layout `1`)
+- 1x Sub Navigator (`vh-w2s`, `2x2wide`, `4x2grid` oder `2s-4grid`)
+- 1x Shoppable Image (Layout `1`, Höhe 1500)
+- **Bestseller als Layout, nicht als Grid Modul**: `lg-2stack` mit 1 Lifestyle Tile (linkAsin Top Seller) plus 2 Wide Tiles (linkAsin auf Top 2 und 3). Oder `lg-w2s` mit 1 Lifestyle plus 1 Wide plus 2 Square Produkt Tiles.
+- 1x Product Grid Vollkatalog (Layout `1`, `product_grid`)
+- 1x USP Leiste (`vh-4square` oder `2x2wide`)
+- 1x Cross Link Banner (Layout `1`)
+
+So entsteht visueller Rhythmus statt monotoner Stack. Die Bestseller können direkt im Lifestyle Layout via linkAsin verlinkt sein, dadurch fällt der separate Bestseller Grid weg.
 
 ### Produktberater Subpage (Pflicht)
 

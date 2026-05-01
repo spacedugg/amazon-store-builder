@@ -143,7 +143,61 @@ export default function App() {
   var page = store.pages.find(function(p) { return p.id === curPage; }) || store.pages[0] || null;
 
   // ─── TILE UPDATE ───
+  // Felder die beim Image Reuse über imageRef synchronisiert werden, wenn
+  // mehrere Tiles denselben imageRef teilen. Tile spezifische Felder
+  // (linkAsin, linkUrl, asins, hotspots, imageRef selbst, uploadedImage)
+  // bleiben pro Tile individuell.
+  var SYNCED_REUSE_FIELDS = ['brief', 'textOverlay', 'dimensions', 'mobileDimensions', 'imageCategory', 'bgColor', 'type', 'textAlign'];
+
   var updateTile = function(updated) {
+    if (!sel) return;
+    setStoreWithUndo(function(s) {
+      // Original Tile finden um zu prüfen ob es einen imageRef hat den
+      // andere Tiles teilen. Wenn ja, synchronisierte Felder auf alle
+      // Geschwister anwenden.
+      var origTile = null;
+      s.pages.forEach(function(pg) {
+        (pg.sections || []).forEach(function(sec) {
+          if (sec.id === sel.sid) {
+            origTile = (sec.tiles || [])[sel.ti] || null;
+          }
+        });
+      });
+      var syncRef = (origTile && origTile.imageRef && updated && updated.imageRef === origTile.imageRef) ? origTile.imageRef : '';
+      // Wenn der User gerade imageRef ändert, sync nicht über alten Ref
+      if (updated && origTile && updated.imageRef !== origTile.imageRef) syncRef = '';
+      // Sync Patch aus den Feldern die als shared gelten
+      var syncPatch = {};
+      if (syncRef && origTile) {
+        SYNCED_REUSE_FIELDS.forEach(function(k) {
+          if (Object.prototype.hasOwnProperty.call(updated, k)) syncPatch[k] = updated[k];
+        });
+      }
+      var hasSync = syncRef && Object.keys(syncPatch).length > 0;
+      return Object.assign({}, s, {
+        pages: s.pages.map(function(pg) {
+          return Object.assign({}, pg, {
+            sections: pg.sections.map(function(sec) {
+              return Object.assign({}, sec, {
+                tiles: sec.tiles.map(function(t, i) {
+                  if (sec.id === sel.sid && i === sel.ti) return updated;
+                  if (hasSync && t && t.imageRef === syncRef) {
+                    return Object.assign({}, t, syncPatch);
+                  }
+                  return t;
+                }),
+              });
+            }),
+          });
+        }),
+      });
+    });
+  };
+
+  // Tile vom Image Reuse entkoppeln: imageRef wird einzigartig gemacht.
+  // Damit landet das Tile beim Folder Upload nicht mehr im Reuse Pool und
+  // Briefing Edits auf anderen Stellen wirken nicht mehr darauf.
+  var detachTileFromReuse = function() {
     if (!sel) return;
     setStoreWithUndo(function(s) {
       return Object.assign({}, s, {
@@ -152,7 +206,11 @@ export default function App() {
             sections: pg.sections.map(function(sec) {
               if (sec.id !== sel.sid) return sec;
               return Object.assign({}, sec, {
-                tiles: sec.tiles.map(function(t, i) { return i === sel.ti ? updated : t; }),
+                tiles: sec.tiles.map(function(t, i) {
+                  if (i !== sel.ti) return t;
+                  if (!t.imageRef) return t;
+                  return Object.assign({}, t, { imageRef: t.imageRef + '-solo-' + uid() });
+                }),
               });
             }),
           });
@@ -386,6 +444,100 @@ export default function App() {
       var pages = s.pages.slice();
       var item = pages.splice(fromIdx, 1)[0];
       pages.splice(toIdx, 0, item);
+      return Object.assign({}, s, { pages: pages });
+    });
+  };
+
+  // Page komplett duplizieren mit allen Sections, Tiles und Sub Pages.
+  // Neue UIDs werden erzeugt, parentId Bezüge angepasst.
+  var duplicatePage = function(pageId) {
+    setStoreWithUndo(function(s) {
+      var orig = s.pages.find(function(p) { return p.id === pageId; });
+      if (!orig) return s;
+      var copyPage = function(p, newId, newParentId) {
+        var copy = Object.assign({}, p, {
+          id: newId,
+          sections: (p.sections || []).map(function(sec) {
+            return Object.assign({}, sec, {
+              id: uid(),
+              tiles: (sec.tiles || []).map(function(t) { return Object.assign({}, t); }),
+            });
+          }),
+        });
+        if (newParentId !== undefined) {
+          if (newParentId === null) delete copy.parentId;
+          else copy.parentId = newParentId;
+        }
+        return copy;
+      };
+      var newOrigId = uid();
+      var origCopy = copyPage(orig, newOrigId);
+      origCopy.name = orig.name + ' Kopie';
+      var children = s.pages.filter(function(p) { return p.parentId === pageId; });
+      var childCopies = children.map(function(c) { return copyPage(c, uid(), newOrigId); });
+      var pages = s.pages.slice();
+      var origIdx = pages.findIndex(function(p) { return p.id === pageId; });
+      var insertIdx = origIdx + 1;
+      while (insertIdx < pages.length && pages[insertIdx].parentId === pageId) insertIdx++;
+      var toInsert = [origCopy].concat(childCopies);
+      pages.splice.apply(pages, [insertIdx, 0].concat(toInsert));
+      return Object.assign({}, s, { pages: pages });
+    });
+  };
+
+  // Drag and Drop Move. Ziehe Page (mit allen Sub Pages) an eine andere
+  // Stelle. position 'above' und 'below' lassen die Hierarchie Ebene gleich
+  // (Sibling von target). position 'into' macht die Page zur Sub von target.
+  // Top Level kann zur Sub werden, Sub kann zur Top Level werden.
+  var movePageStructural = function(srcId, targetId, position) {
+    if (srcId === targetId) return;
+    setStoreWithUndo(function(s) {
+      var pages = s.pages.slice();
+      var src = pages.find(function(p) { return p.id === srcId; });
+      var target = pages.find(function(p) { return p.id === targetId; });
+      if (!src || !target) return s;
+      // Verbiete Drop in eigenen Subtree
+      if (position === 'into' && target.parentId === srcId) return s;
+      // Sammle src und seine direkten Kinder als bewegender Block
+      var srcChildren = pages.filter(function(p) { return p.parentId === srcId; });
+      var movingIds = [srcId].concat(srcChildren.map(function(p) { return p.id; }));
+      var moving = pages.filter(function(p) { return movingIds.indexOf(p.id) >= 0; });
+      pages = pages.filter(function(p) { return movingIds.indexOf(p.id) < 0; });
+      // Update src parentId nach position
+      var newParentId;
+      if (position === 'into') newParentId = targetId;
+      else newParentId = target.parentId || null;
+      if (newParentId === null) delete src.parentId;
+      else src.parentId = newParentId;
+      // Wenn src zu Sub wird, dürfen seine Sub Kinder nicht mit, weil das
+      // Schema nur 1 Ebene tief erlaubt. Kinder werden Top Level.
+      if (newParentId !== null) {
+        srcChildren.forEach(function(c) { delete c.parentId; });
+      }
+      // Neue Position bestimmen
+      var newTargetIdx = pages.findIndex(function(p) { return p.id === targetId; });
+      var insertIdx;
+      if (position === 'above') {
+        insertIdx = newTargetIdx;
+      } else if (position === 'below') {
+        insertIdx = newTargetIdx + 1;
+        // Skip target's existing children
+        while (insertIdx < pages.length && pages[insertIdx].parentId === targetId) insertIdx++;
+      } else { // into
+        insertIdx = newTargetIdx + 1;
+        while (insertIdx < pages.length && pages[insertIdx].parentId === targetId) insertIdx++;
+      }
+      // Insert. Wenn src zu Sub wird, kommen die ehemaligen Kinder als Top Level am Ende.
+      var toInsert = [src];
+      if (newParentId === null) {
+        // src bleibt oder wird Top Level mit eigenen Subs direkt dahinter
+        toInsert = toInsert.concat(srcChildren);
+      }
+      pages.splice.apply(pages, [insertIdx, 0].concat(toInsert));
+      // Wenn src zu Sub wurde, ehemalige Kinder als Top Level am Ende anhängen
+      if (newParentId !== null && srcChildren.length > 0) {
+        pages = pages.concat(srcChildren);
+      }
       return Object.assign({}, s, { pages: pages });
     });
   };
@@ -815,6 +967,8 @@ export default function App() {
           onRenamePage={renamePage}
           onDeletePage={deletePage}
           onReorderPage={reorderPage}
+          onDuplicatePage={duplicatePage}
+          onMovePage={movePageStructural}
           savedStores={savedStores}
           onLoadSaved={handleLoadSaved}
           onDeleteSaved={handleDeleteSaved}
@@ -854,11 +1008,13 @@ export default function App() {
           key={sel ? (sel.sid + ':' + (sel.ti != null ? sel.ti : '')) : 'none'}
           tile={selTile}
           onChange={updateTile}
+          onDetachReuse={detachTileFromReuse}
           products={store.products}
           viewMode={viewMode}
           uiLang={uiLang}
           layoutType={selLayoutType}
           pages={store.pages}
+          allPages={store.pages}
           heroBanner={selHeroBanner ? page : null}
           onHeroBannerChange={selHeroBanner ? updateHeroBanner : null}
         />

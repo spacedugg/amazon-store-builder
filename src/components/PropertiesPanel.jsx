@@ -80,7 +80,7 @@ function fileUpload(label, value, onSet, onRemove, uiLang) {
   );
 }
 
-export default function PropertiesPanel({ tile, onChange, products, viewMode, uiLang, layoutType, pages, heroBanner, onHeroBannerChange }) {
+export default function PropertiesPanel({ tile, onChange, onDetachReuse, products, viewMode, uiLang, layoutType, pages, allPages, heroBanner, onHeroBannerChange }) {
   // ─── HERO BANNER MODE ───
   if (heroBanner) {
     var hPage = heroBanner;
@@ -153,9 +153,56 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
   (tile.hotspots || []).forEach(function(hs) { if (hs.asin && linkedAsins.indexOf(hs.asin) < 0) linkedAsins.push(hs.asin); });
   (tile.asins || []).forEach(function(a) { if (a && a.indexOf('B0') === 0 && linkedAsins.indexOf(a) < 0) linkedAsins.push(a); });
 
+  // ─── IMAGE REUSE STATUS ─── alle Tiles im Store mit identischem imageRef
+  // sammeln. Wenn der aktuelle Tile einen imageRef hat und mindestens
+  // eine andere Stelle den gleichen, ist es ein Reuse Verbund.
+  var reuseInfo = (function() {
+    if (!tile || !tile.imageRef || !allPages) return { count: 0, locations: [] };
+    var refLower = String(tile.imageRef).toLowerCase();
+    var locations = [];
+    allPages.forEach(function(pg) {
+      (pg.sections || []).forEach(function(sec, si) {
+        (sec.tiles || []).forEach(function(tt, ti) {
+          if (tt && tt.imageRef && String(tt.imageRef).toLowerCase() === refLower) {
+            locations.push({ pageName: pg.name, secIdx: si + 1, tileIdx: ti + 1 });
+          }
+        });
+      });
+    });
+    return { count: locations.length, locations: locations };
+  })();
+
   return (
     <div className="props-panel">
       <div className="props-header">{t('props.title', uiLang)}</div>
+
+      {/* ─── IMAGE REUSE INFO BANNER ─── */}
+      {reuseInfo.count > 1 && (
+        <div className="props-section" style={{ background: '#ecfdf5', borderBottom: '1px solid #a7f3d0' }}>
+          <div style={{ fontSize: 11, fontWeight: 700, color: '#047857', marginBottom: 3 }}>
+            Geteiltes Bild, {reuseInfo.count} Stellen
+          </div>
+          <div style={{ fontSize: 10, color: '#065f46', lineHeight: 1.4, marginBottom: 6 }}>
+            Briefing Änderungen (Heading, Subheading, Body, CTA, Brief, Dimensionen, Image Category, Background) werden automatisch auf alle {reuseInfo.count} Stellen angewendet.
+          </div>
+          <details style={{ fontSize: 10, color: '#065f46', marginBottom: 6 }}>
+            <summary style={{ cursor: 'pointer' }}>Stellen anzeigen</summary>
+            <ul style={{ margin: '4px 0 0 16px', padding: 0 }}>
+              {reuseInfo.locations.slice(0, 12).map(function(loc, i) {
+                return <li key={i}>{loc.pageName} S{loc.secIdx} T{loc.tileIdx}</li>;
+              })}
+              {reuseInfo.locations.length > 12 && <li>plus {reuseInfo.locations.length - 12} weitere</li>}
+            </ul>
+          </details>
+          {onDetachReuse && (
+            <button
+              onClick={onDetachReuse}
+              style={{ fontSize: 10, padding: '4px 8px', background: '#fff', border: '1px solid #a7f3d0', borderRadius: 4, color: '#065f46', cursor: 'pointer' }}>
+              Diese Stelle entkoppeln (eigene Variante machen)
+            </button>
+          )}
+        </div>
+      )}
 
       {/* ─── VERKNÜPFTE PRODUKTE (mit Bild und Klick zu Amazon) ─── */}
       {linkedAsins.length > 0 && (
@@ -626,33 +673,48 @@ export default function PropertiesPanel({ tile, onChange, products, viewMode, ui
         </>
       )}
 
-      {/* PRODUCT TYPES */}
-      {isProductType && (
+      {/* PRODUCT TYPES und IMAGE / SHOPPABLE_IMAGE Tiles, ASIN Editor.
+          Intern editierbar: hinzufügen, entfernen, Reihenfolge per Zeilen.
+          Im Designer Briefing nicht angezeigt. */}
+      {(isProductType || isImageType) && (
         <div className="props-section">
-          <label className="label">{t('props.asins', uiLang)}</label>
+          <label className="label">
+            {isProductType ? t('props.asins', uiLang) : 'ASINs verknüpft (intern, optional)'}
+          </label>
           <textarea value={(tile.asins || []).join('\n')}
             onChange={function(e) { u('asins', e.target.value.split('\n').map(function(s) { return s.trim(); }).filter(Boolean)); }}
-            rows={8} className="input input-mono" placeholder="B0XXXXXXXXXX" />
+            rows={isProductType ? 8 : 4} className="input input-mono" placeholder="B0XXXXXXXXXX, eine ASIN pro Zeile" />
           {(tile.asins || []).length > 0 && (
             <div className="props-asin-list">
-              {(tile.asins || []).map(function(asin) {
+              {(tile.asins || []).map(function(asin, idx) {
                 var p = productMap[asin];
                 return (
-                  <div key={asin} className="props-asin-item">
-                    <code>{asin}</code>
-                    {p && <span className="props-asin-name">{(p.name || '').slice(0, 35)}</span>}
+                  <div key={asin + ':' + idx} className="props-asin-item" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <code style={{ flex: '0 0 auto' }}>{asin}</code>
+                    {p && <span className="props-asin-name" style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{(p.name || '').slice(0, 35)}</span>}
+                    <button
+                      onClick={function() {
+                        var next = (tile.asins || []).slice();
+                        next.splice(idx, 1);
+                        u('asins', next);
+                      }}
+                      title="ASIN entfernen"
+                      style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: 14, padding: '0 4px', flex: '0 0 auto' }}>
+                      ×
+                    </button>
                   </div>
                 );
               })}
             </div>
           )}
-          {tile.type !== 'product_grid' && (
-            <div className="hint">
-              {tile.type === 'best_sellers' && t('props.bestSellersHint', uiLang)}
-              {tile.type === 'recommended' && t('props.recommendedHint', uiLang)}
-              {tile.type === 'deals' && t('props.dealsHint', uiLang)}
-            </div>
-          )}
+          <div className="hint">
+            {tile.type === 'best_sellers' && t('props.bestSellersHint', uiLang)}
+            {tile.type === 'recommended' && t('props.recommendedHint', uiLang)}
+            {tile.type === 'deals' && t('props.dealsHint', uiLang)}
+            {tile.type === 'shoppable_image' && 'ASIN Quelle für die Hotspots. Pro Hotspot wird eine ASIN aus dieser Liste gemappt.'}
+            {tile.type === 'image' && 'Optional. ASINs die mit dem Bild verknüpft sind, z.B. wenn das Lifestyle Bild konkrete Produkte zeigt. Verlinkung selbst über linkAsin oder linkUrl.'}
+            {tile.type === 'image_text' && 'Optional. ASINs die zum Brand Story Tile gehören.'}
+          </div>
         </div>
       )}
 
