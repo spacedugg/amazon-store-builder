@@ -77,7 +77,6 @@ Tile 2: "Sicher"   ← doppelt mit Heading
 ```
 
 Richtig:
-
 ```
 Heading Section: "Werkzeug, das hält"
 Tile 1: "Belastbar"
@@ -93,6 +92,50 @@ Tile 2: "TÜV geprüft"
 ```
 
 Vor jeder Section Output: Prüfe ob ein Tile Heading Wort im Section Heading vorkommt. Wenn ja, eines der beiden umformulieren.
+
+### Page Level Repetition Check
+
+Über die ganze Page hinweg dürfen sich **dieselben Fakten und Phrasen nicht wiederholen**. Inhabergeführt seit 2005, Aus Deutschland, Hersteller besucht und ähnliche Marken Fakten dürfen pro Page **maximal an einer Stelle ausführlich** stehen, an anderen Stellen nur in Variation oder gar nicht.
+
+Falsch (Über Uns Page):
+
+```
+Hero: "Ein Haus, viele Räume" / "Inhabergeführt seit 2005, aus Deutschland"
+Brand Story Tile: "Inhabergeführt aus Deutschland" / "Seit 2005" / [Body mit "inhabergeführt aus Deutschland"]
+USP Tile 1: "Inhabergeführt" / "Seit 2005"
+```
+
+Drei Mal denselben Fakt. Nur Tile 1 sagt es klar, die anderen zwei sind Wiederholung.
+
+Richtig:
+
+```
+Hero: "Wer ist Juskys" / "Mittelständler aus Deutschland"
+Brand Story Tile: "Hersteller besucht, Halle besichtigt" / [Body mit Geschichte und Werten]
+USP Tile 1: "Inhabergeführt" / "Seit 2005"
+```
+
+Drei verschiedene Aussagen, jede an einer Stelle.
+
+Vor Output: jede Marken Fakt Phrase einmal in der Page suchen, an den anderen Stellen Variation oder Streichung.
+
+### Headline Bezugsstärke
+
+Headlines müssen **direkten Bezug zum Page Inhalt** haben. Metaphern und Marketing Floskeln ohne konkreten Bezug zur Marke oder Page Funktion sind verboten.
+
+Falsch:
+
+- `Ein Haus, viele Räume` als Über Uns Headline für Juskys (Juskys ist ein Sortiment Trader, kein Haus mit Räumen, die Metapher passt nicht)
+- `Wo Stories beginnen` als Möbel Page Headline (passt nicht, irrelevant)
+- `Mehr als nur Möbel` als Hero (sagt nichts)
+
+Richtig:
+
+- `Wer ist Juskys` plus konkrete Subline (Über Uns)
+- `Sofas in jeder Größe` (Möbel Page, konkret)
+- `Lounge bereit für die Saison` (Garten Page, saisonal konkret)
+
+Test pro Headline: Wenn ich den Markennamen oder Kategorie Namen aus der Headline streiche, ergibt sie noch Sinn? Wenn ja, ist sie zu generisch.
 
 ### Konkrete Sprache pro Modul Typ
 
@@ -457,6 +500,108 @@ Damit kann der User innerhalb der Kategorie stöbern, ohne erst zur Eltern Page 
 2. Bestseller Grid mit den ASINs der Kategorie
 
 Das gibt visuell klare Blöcke pro Kategorie.
+
+### Niemals zwei ASIN Grids stapeln
+
+Module die eine ASIN Grid zur Folge haben (`product_grid`, `best_sellers`, `recommended`, `deals`) dürfen **niemals direkt aufeinander folgen**. Zwischen zwei solchen Sections muss mindestens **eine andere Section** liegen, sonst stapeln sich Produktkacheln untereinander und sehen wie eine einzige lange Liste aus.
+
+Falsch:
+
+```
+Section: Bestseller Grid (Top 8 Sofas)
+Section: Product Grid (alle Sofas)   ← ASIN Stack, oft mit denselben ASINs
+```
+
+Richtig (Variante A: Trenner dazwischen):
+
+```
+Section: Bestseller Grid (Top 8 Sofas)
+Section: Lifestyle Trenner (Full Width Image, Headline "Sofa für jedes Wohnzimmer")
+Section: Product Grid (alle Sofas)
+```
+
+Richtig (Variante B: konsolidieren statt doppeln):
+
+```
+Section: Lifestyle Hero Image mit linkAsin auf Top Sofa
+Section: Product Grid (alle Sofas, sortiert nach Bestseller)
+```
+
+Wenn der Bestseller Block sowieso die ersten 8 ASINs des Vollkatalogs zeigt, ist er redundant. Streiche den Bestseller Block und nimm direkt den Vollkatalog. Der Lifestyle Hero darüber zeigt bereits den Top Seller mit linkAsin.
+
+Richtig (Variante C: Bestseller als Layout statt Grid):
+
+```
+Section: lg-2stack
+  Tile 1 (Large Square): Lifestyle Bild Top Sofa mit linkAsin
+  Tile 2 (Wide): Image mit linkAsin auf Top 2
+  Tile 3 (Wide): Image mit linkAsin auf Top 3
+Section: Product Grid (alle Sofas)
+```
+
+Bestseller wird hier als Bildkomposition gezeigt, nicht als ASIN Grid Modul. Dadurch entsteht visuell etwas anderes als der Product Grid darunter.
+
+### Lifestyle und Kategorie Tiles mit Produkten brauchen Verlinkung
+
+Wenn ein `image` Tile **konkrete Produkte zeigt** (z.B. ein Lifestyle Bild mit einem Hundebett, einem Kratzbaum oder einer Loungegruppe), muss das Tile entweder:
+
+- `linkAsin` haben (wenn ein einziges konkretes Produkt im Bild ist), das Tile ist klickbar zur PDP des Produkts
+- `shoppable_image` Tile Type sein mit Hotspots auf den Produkten (wenn mehrere Produkte im Bild sind, max 5)
+- `linkUrl` haben auf eine Subpage (wenn das Tile als Kategorie Navigator dient und kein konkretes Produkt verlinkt)
+
+**Wenn das gemacht ist, kann der direkt darunter folgende Bestseller oder Product Grid Block oft komplett gestrichen werden**, weil die Produkte schon im Lifestyle Bild verlinkt sind. Der User muss nicht zusätzlich nach unten scrollen um die gleichen ASINs nochmal als Kachel Grid zu sehen.
+
+Falsch:
+
+```
+Section: 3 Lifestyle Tiles "Freilaufgehege" / "Hund" / "Katze" (ohne Verlinkung)
+Section: Bestseller Grid (Freilaufgehege ASINs)
+Section: Bestseller Grid (Hund ASINs)
+```
+
+Lifestyle Bilder zeigen Produkte aber sind nicht verlinkt, dann werden dieselben ASINs nochmal als Grid abgebildet. Doppelt.
+
+Richtig:
+
+```
+Section: 3 Lifestyle Tiles mit linkAsin (Freilaufgehege Top ASIN, Hund Top ASIN, Katze Top ASIN)
+Section: Product Grid (alle Tierbedarf ASINs sortiert)
+```
+
+Lifestyle Tiles sind klickbar (linkAsin), Product Grid darunter zeigt die volle Liste, kein Duplikat.
+
+### Variable Tile Höhen je nach Funktion
+
+Tile Dimensionen sind **nicht** auf 3000x600 fixiert. Layout `1` (Full Width) erlaubt Höhen zwischen 200 (Desktop max 15:1) und ca 2400. Wähle die Höhe **nach Funktion des Tiles**:
+
+| Tile Funktion | Empfohlene Desktop Höhe (bei 3000 Breite) | Mobile Höhe (bei 1680 Breite) |
+|---------------|-------------------------------------------:|-------------------------------:|
+| Trenner / Section Header / Kategorie Überschrift | 300 bis 500 | 336 (5:1 Min) bis 500 |
+| Hero Banner Page Header | 600 bis 900 | 600 bis 900 |
+| Lifestyle Bild mit Komposition | 1200 bis 1500 | 1200 bis 1500 |
+| Shoppable Image mit 3 bis 5 Produkten | 1500 bis 1800 | 1500 bis 1800 |
+| Bestseller als Composite Image (Bestseller Bild im Tile) | 1200 bis 1500 | 1200 bis 1500 |
+| Video 16:9 | 1688 | 945 |
+
+Faustregel: ein schmaler Trenner braucht keine 600 Pixel Höhe, da reicht 350. Ein Shoppable Bild mit 5 Produkten braucht mehr als 600 Pixel sonst werden die Hotspots zu eng. Pro Tile bewusst die Höhe wählen, nicht stur 3000x600 als Default.
+
+Mindestverhältnis: Desktop max 15:1 (Breite zu Höhe), Mobile max 5:1.
+
+### Layout Variation pro Page
+
+Eine Page mit 8 bis 12 Sections soll **mindestens 3 verschiedene Layout Typen** verwenden. Wenn alle Sections nur Layout `1` (Full Width) sind, wirkt die Page wie eine endlose Liste.
+
+Empfohlene Mischung pro Hauptkategorie Page:
+
+- 1x Hero (Layout `1`)
+- 1x Sub Navigator (`vh-w2s`, `2x2wide`, `4x2grid` oder `2s-4grid`)
+- 1x Shoppable Image (Layout `1`, Höhe 1500)
+- **Bestseller als Layout, nicht als Grid Modul**: `lg-2stack` mit 1 Lifestyle Tile (linkAsin Top Seller) plus 2 Wide Tiles (linkAsin auf Top 2 und 3). Oder `lg-w2s` mit 1 Lifestyle plus 1 Wide plus 2 Square Produkt Tiles.
+- 1x Product Grid Vollkatalog (Layout `1`, `product_grid`)
+- 1x USP Leiste (`vh-4square` oder `2x2wide`)
+- 1x Cross Link Banner (Layout `1`)
+
+So entsteht visueller Rhythmus statt monotoner Stack. Die Bestseller können direkt im Lifestyle Layout via linkAsin verlinkt sein, dadurch fällt der separate Bestseller Grid weg.
 
 ### Produktberater Subpage (Pflicht)
 
