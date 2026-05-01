@@ -571,46 +571,49 @@ function buildAllSubpages() {
 }
 
 function buildTierbedarfPage() {
+  // Top Tierbedarf ASINs für die Bestseller Showcase (lg-2stack ohne ASIN Grid Modul).
+  // Lifestyle Tile plus 2 freigestellte Produkt Tiles, alle via linkAsin verlinkt.
+  var topTier = topAsinsByCat('Tierbedarf', 3);
   return page('Tierbedarf', [
     section('1', [
       tile('image',
-        ov('Für **deinen** Liebling', 'Hund, Katze, Freilauf', '', [], 'Sortiment entdecken'),
+        ov('Für **deinen** Liebling', 'Hund, Katze, Freilauf'),
         'Hero Bild mit Hund oder Katze in Wohnsetting oder Garten.'
       ),
     ], 'hero.fullWidthHero'),
 
+    // Sub Navigator: Lifestyle Tiles mit linkUrl auf die jeweilige Subpage.
+    // Nicht mehr nur dekorative Headline Tiles, sondern echte Klick Targets.
     section('vh-w2s', [
-      tile('image', ov('**FREILAUFGEHEGE**'), 'Wide Tile Freilaufgehege.'),
-      tile('image', ov('**HUND**'), 'Square Tile Hundebedarf.'),
-      tile('image', ov('**KATZE**'), 'Square Tile Katzenbedarf.'),
+      tile('image', ov('**FREILAUFGEHEGE**'), 'Wide Lifestyle Tile mit Freilaufgehege im Garten oder Innenraum, Tier sichtbar im Gehege.', { linkUrl: linkTo('Freilaufgehege') }),
+      tile('image', ov('**HUND**'), 'Square Lifestyle Tile mit Hund in häuslichem Setting (Hundetreppe oder Transportbox sichtbar).', { linkUrl: linkTo('Hundebedarf') }),
+      tile('image', ov('**KATZE**'), 'Square Lifestyle Tile mit Katze in Wohnzimmer Setting (Kratzbaum oder Spielzeug sichtbar).', { linkUrl: linkTo('Katzenbedarf') }),
     ], 'categoryNav.wideAnd2squares'),
 
     section('1', [
       tile('shoppable_image',
         ov('Freilauf, **sicher** und groß', 'Auslauf für Kleintiere und Hunde'),
-        'Shoppable Bild Garten mit Freilaufgehege. 1 Hotspot Freilaufgehege plus weitere Hundebedarf wenn vorhanden.',
-        { asins: ['B09M7GCK5Y', 'B0716T9673', 'B01CSNO9YO', 'B079YT88DT', 'B0C4FHBSR1'] }
+        'Shoppable Bild Garten mit Freilaufgehege als Hauptmotiv. Hotspots auf Gehege plus komplementäre Tierbedarf Produkte (Transportbox, Hundetreppe).',
+        { asins: ['B09M7GCK5Y', 'B0716T9673', 'B01CSNO9YO'] }
       ),
     ], 'products.shoppableFullWidth'),
 
-    section('1', [
-      tile('best_sellers',
-        ov('Die beliebtesten **Gehege**'),
-        'Bestseller Freilaufgehege.',
-        { asins: topAsinsBySub('Tierbedarf', 'Freilaufgehege', 4) }
-      ),
-    ], 'products.fullWidthGrid'),
-
-    section('1', [
-      tile('best_sellers',
-        ov('Für den **Hund** zuhause'),
-        'Bestseller Hundebedarf.',
-        { asins: topAsinsBySub('Tierbedarf', 'Hundebedarf', 6) }
-      ),
-    ], 'products.fullWidthGrid'),
+    // Bestseller Showcase als lg-2stack Layout mit linkAsin Tiles (kein ASIN Grid Modul).
+    section('lg-2stack', [
+      tile('image',
+        ov('Top **Tierbedarf**', 'Bestseller dieser Saison'),
+        'Lifestyle Bild Top Seller Tierbedarf in Anwendung. Klickbar zur PDP.',
+        { linkAsin: topTier[0], imageCategory: 'lifestyle' }),
+      tile('image', ov(),
+        'Produkt Bild Bestseller 2 freigestellt. Klickbar zur PDP.',
+        { linkAsin: topTier[1], imageCategory: 'product' }),
+      tile('image', ov(),
+        'Produkt Bild Bestseller 3 freigestellt. Klickbar zur PDP.',
+        { linkAsin: topTier[2], imageCategory: 'product' }),
+    ], 'products.bestsellerShowcase'),
 
     section('vh-w2s', [
-      tile('image', ov('Tier**bedarf** mit Verantwortung'), 'Wide Bild.'),
+      tile('image', ov('Tier**bedarf** mit Verantwortung'), 'Wide Bild Tier in der Anwendung.'),
       tile('image', ov('**Stabil**'), 'Square mit grünem Icon Kreis Werkzeug.'),
       tile('image', ov('**Tierfreundlich**'), 'Square mit grünem Icon Kreis Pfote.'),
     ], 'features.featureWideAnd2'),
@@ -792,24 +795,34 @@ function buildHeimwerkenPage() {
       ),
     ], 'hero.fullWidthHero'),
 
+    // Sub Navigator mit linkUrl auf Subpages
     section('vh-w2s', [
-      tile('image', ov('**WERKZEUG**'), 'Sub Tile Werkzeug.'),
-      tile('image', ov('**SACKKARREN**'), 'Sub Tile Sackkarren.'),
-      tile('image', ov('**LEITERN**', 'Multifunktionsleitern'), 'Sub Tile Leitern.'),
+      tile('image', ov('**WERKZEUG**'), 'Wide Lifestyle Tile Werkstatt mit Werkzeug in Anwendung.', { linkUrl: linkTo('Werkzeug') }),
+      tile('image', ov('**SACKKARREN**'), 'Square Lifestyle Tile Sackkarre in Treppenhaus oder Gartensituation.', { linkUrl: linkTo('Sackkarren') }),
+      tile('image', ov('**LEITERN**', 'Multifunktionsleitern'), 'Square Lifestyle Tile Leiter in Garten oder Werkstatt.', { linkUrl: linkTo('Multifunktionsleitern') }),
     ], 'categoryNav.wideAnd2squares'),
 
     section('std-2equal', [
-      tile('image', ov('**ELEKTROKAMINE**'), 'Sub Tile Elektrokamine, Standkamin Rendering.'),
+      tile('image', ov('**ELEKTROKAMINE**'), 'Lifestyle Tile Elektrokamin im Wohnzimmer Setting.', { linkUrl: linkTo('Elektrokamine') }),
       tile('image', ov('**Robust** gebaut', 'Werkzeug das hält'), 'USP Highlight Tile mit grünem Icon Kreis Werkzeug.'),
     ], 'categoryNav.grid2col'),
 
-    section('1', [
-      tile('best_sellers',
-        ov('Die beliebtesten **Werkzeuge**'),
-        'Bestseller Werkzeug.',
-        { asins: topAsinsBySub('Heimwerken', 'Werkzeug', 3) }
-      ),
-    ], 'products.fullWidthGrid'),
+    // Bestseller Werkzeug als lg-2stack Showcase, kein best_sellers Modul mehr (vermeidet ASIN Grid Stack mit der Sackkarren Section).
+    (function() {
+      var topW = topAsinsBySub('Heimwerken', 'Werkzeug', 3);
+      return section('lg-2stack', [
+        tile('image',
+          ov('Top **Werkzeug**', 'Bestseller in der Werkstatt'),
+          'Lifestyle Bild Top Seller Werkzeug in Anwendung. Klickbar zur PDP.',
+          { linkAsin: topW[0], imageCategory: 'lifestyle' }),
+        tile('image', ov(),
+          'Produkt Bild Bestseller 2 freigestellt. Klickbar zur PDP.',
+          { linkAsin: topW[1] || topW[0], imageCategory: 'product' }),
+        tile('image', ov(),
+          'Produkt Bild Bestseller 3 freigestellt. Klickbar zur PDP.',
+          { linkAsin: topW[2] || topW[0], imageCategory: 'product' }),
+      ], 'products.bestsellerShowcase');
+    })(),
 
     section('1', [
       tile('best_sellers',

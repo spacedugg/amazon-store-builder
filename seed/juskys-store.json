@@ -3554,10 +3554,10 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Sub Tile Werkzeug.",
+              "brief": "Wide Lifestyle Tile Werkstatt mit Werkzeug in Anwendung.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "",
+              "linkUrl": "page:Werkzeug",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
@@ -3573,10 +3573,10 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Sub Tile Sackkarren.",
+              "brief": "Square Lifestyle Tile Sackkarre in Treppenhaus oder Gartensituation.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "",
+              "linkUrl": "page:Sackkarren",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
@@ -3592,10 +3592,10 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Sub Tile Leitern.",
+              "brief": "Square Lifestyle Tile Leiter in Garten oder Werkstatt.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "",
+              "linkUrl": "page:Multifunktionsleitern",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
@@ -3617,10 +3617,10 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Sub Tile Elektrokamine, Standkamin Rendering.",
+              "brief": "Lifestyle Tile Elektrokamin im Wohnzimmer Setting.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "",
+              "linkUrl": "page:Elektrokamine",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
@@ -3649,29 +3649,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Werkzeuge**",
+                "heading": "Top **Werkzeug**",
+                "subheading": "Bestseller in der Werkstatt",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Lifestyle Bild Top Seller Werkzeug in Anwendung. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0DQ5K13RK",
+              "bgColor": "",
+              "imageCategory": "lifestyle",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Werkzeug.",
-              "asins": [
-                "B0DQ5K13RK",
-                "B0DZ2XH5BS",
-                "B0FT3RZSCP"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B0DZ2XH5BS",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0FT3RZSCP",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -4397,7 +4431,7 @@
                 "subheading": "Hund, Katze, Freilauf",
                 "body": "",
                 "bullets": [],
-                "cta": "Sortiment entdecken"
+                "cta": ""
               },
               "brief": "Hero Bild mit Hund oder Katze in Wohnsetting oder Garten.",
               "asins": [],
@@ -4424,10 +4458,10 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Wide Tile Freilaufgehege.",
+              "brief": "Wide Lifestyle Tile mit Freilaufgehege im Garten oder Innenraum, Tier sichtbar im Gehege.",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "",
+              "linkUrl": "page:Freilaufgehege",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
@@ -4443,10 +4477,10 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Square Tile Hundebedarf.",
+              "brief": "Square Lifestyle Tile mit Hund in häuslichem Setting (Hundetreppe oder Transportbox sichtbar).",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "",
+              "linkUrl": "page:Hundebedarf",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
@@ -4462,10 +4496,10 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Square Tile Katzenbedarf.",
+              "brief": "Square Lifestyle Tile mit Katze in Wohnzimmer Setting (Kratzbaum oder Spielzeug sichtbar).",
               "asins": [],
               "hotspots": [],
-              "linkUrl": "",
+              "linkUrl": "page:Katzenbedarf",
               "linkAsin": "",
               "bgColor": "",
               "imageCategory": "lifestyle",
@@ -4487,13 +4521,11 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Shoppable Bild Garten mit Freilaufgehege. 1 Hotspot Freilaufgehege plus weitere Hundebedarf wenn vorhanden.",
+              "brief": "Shoppable Bild Garten mit Freilaufgehege als Hauptmotiv. Hotspots auf Gehege plus komplementäre Tierbedarf Produkte (Transportbox, Hundetreppe).",
               "asins": [
                 "B09M7GCK5Y",
                 "B0716T9673",
-                "B01CSNO9YO",
-                "B079YT88DT",
-                "B0C4FHBSR1"
+                "B01CSNO9YO"
               ],
               "hotspots": [],
               "linkUrl": "",
@@ -4506,57 +4538,63 @@
           ]
         },
         {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
+          "layoutId": "lg-2stack",
+          "module": "products.bestsellerShowcase",
           "tiles": [
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Die beliebtesten **Gehege**",
-                "subheading": "",
+                "heading": "Top **Tierbedarf**",
+                "subheading": "Bestseller dieser Saison",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Freilaufgehege.",
-              "asins": [
-                "B09M7GCK5Y"
-              ],
+              "brief": "Lifestyle Bild Top Seller Tierbedarf in Anwendung. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B079YT88DT",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "lifestyle",
               "textAlign": "left",
               "imageRef": ""
-            }
-          ]
-        },
-        {
-          "layoutId": "1",
-          "module": "products.fullWidthGrid",
-          "tiles": [
+            },
             {
-              "type": "best_sellers",
+              "type": "image",
               "textOverlay": {
-                "heading": "Für den **Hund** zuhause",
+                "heading": "",
                 "subheading": "",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Bestseller Hundebedarf.",
-              "asins": [
-                "B079YT88DT",
-                "B01CSNO9YO",
-                "B0716T9673",
-                "B0C4FHBSR1"
-              ],
+              "brief": "Produkt Bild Bestseller 2 freigestellt. Klickbar zur PDP.",
+              "asins": [],
               "hotspots": [],
               "linkUrl": "",
-              "linkAsin": "",
+              "linkAsin": "B01CSNO9YO",
               "bgColor": "",
-              "imageCategory": "",
+              "imageCategory": "product",
+              "textAlign": "left",
+              "imageRef": ""
+            },
+            {
+              "type": "image",
+              "textOverlay": {
+                "heading": "",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Produkt Bild Bestseller 3 freigestellt. Klickbar zur PDP.",
+              "asins": [],
+              "hotspots": [],
+              "linkUrl": "",
+              "linkAsin": "B0716T9673",
+              "bgColor": "",
+              "imageCategory": "product",
               "textAlign": "left",
               "imageRef": ""
             }
@@ -4575,7 +4613,7 @@
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Wide Bild.",
+              "brief": "Wide Bild Tier in der Anwendung.",
               "asins": [],
               "hotspots": [],
               "linkUrl": "",
