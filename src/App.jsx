@@ -111,6 +111,71 @@ function refreshImageRefs(store) {
     });
   });
 
+  // Schritt 3, Auto-Merge: Tiles mit identischem Briefing aber unterschiedlichen
+  // (oder fehlenden) imageRefs werden automatisch zur Familie zusammengeführt.
+  // Tritt ein wenn der User Sections kopiert, gleichen Inhalt manuell an mehrere
+  // Stellen kopiert oder ein Briefing JSON importiert in dem Tiles identische
+  // Texte aber keinen einheitlichen Tag haben. Solo Tiles (explizit entkoppelt)
+  // werden ausgenommen und bleiben isoliert.
+  var IMG_TYPES = ['image', 'shoppable_image', 'image_text'];
+  var fpGroups = {};
+  newPages.forEach(function(pg, pi) {
+    (pg.sections || []).forEach(function(sec, si) {
+      (sec.tiles || []).forEach(function(t, ti) {
+        if (!t || !t.dimensions) return;
+        if (IMG_TYPES.indexOf(t.type) < 0) return;
+        if (t.imageRef && /-solo-[a-z0-9]+$/.test(t.imageRef)) return;
+        var ov = t.textOverlay || {};
+        var hasContent = (t.brief && t.brief.length > 0)
+          || ov.heading || ov.subheading || ov.body || (ov.bullets && ov.bullets.length)
+          || ov.cta;
+        if (!hasContent) return;
+        var fp = tileBriefingFingerprint(t);
+        if (!fpGroups[fp]) fpGroups[fp] = [];
+        fpGroups[fp].push({ pi: pi, si: si, ti: ti, ref: t.imageRef || '' });
+      });
+    });
+  });
+
+  Object.keys(fpGroups).forEach(function(fp) {
+    var members = fpGroups[fp];
+    if (members.length < 2) return;
+    // Häufigsten imageRef als kanonisch nehmen, sonst Hash basierten Auto Tag
+    var refCounts = {};
+    members.forEach(function(m) { refCounts[m.ref] = (refCounts[m.ref] || 0) + 1; });
+    var canonical = Object.keys(refCounts).reduce(function(a, b) {
+      // Bevorzuge nicht leere Refs vor leeren
+      if (a === '' && b !== '') return b;
+      if (b === '' && a !== '') return a;
+      return refCounts[a] >= refCounts[b] ? a : b;
+    });
+    if (!canonical) {
+      // Stable Hash aus Fingerprint
+      var hash = 0;
+      for (var i = 0; i < fp.length; i++) {
+        hash = ((hash << 5) - hash + fp.charCodeAt(i)) | 0;
+      }
+      var hashHex = Math.abs(hash).toString(36).slice(0, 6);
+      var pgFirst = newPages[members[0].pi];
+      var tFirst = pgFirst.sections[members[0].si].tiles[members[0].ti];
+      var d = tFirst.dimensions || {};
+      canonical = 'auto-' + hashHex + '-' + d.w + 'x' + d.h;
+    }
+    // Allen Mitgliedern den kanonischen Ref setzen wenn abweichend
+    members.forEach(function(m) {
+      var pg = newPages[m.pi];
+      var sec = pg.sections[m.si];
+      var t = sec.tiles[m.ti];
+      if (t.imageRef === canonical) return;
+      var newSecTiles = sec.tiles.slice();
+      newSecTiles[m.ti] = Object.assign({}, t, { imageRef: canonical });
+      var newSections = pg.sections.slice();
+      newSections[m.si] = Object.assign({}, sec, { tiles: newSecTiles });
+      newPages[m.pi] = Object.assign({}, pg, { sections: newSections });
+      changed = true;
+    });
+  });
+
   return changed ? Object.assign({}, store, { pages: newPages }) : store;
 }
 
