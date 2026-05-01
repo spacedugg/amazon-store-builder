@@ -1379,6 +1379,7 @@ export default function App() {
         <PatchImportModal
           onClose={function() { setShowPatchImport(false); }}
           onApply={applyPatch}
+          store={store}
         />
       )}
 

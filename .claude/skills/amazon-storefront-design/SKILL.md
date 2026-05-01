@@ -1051,6 +1051,29 @@ Stattdessen gibst du einen **Patch JSON** mit `ops` Array aus, der im Tool über
 
 **Erkennen wann Patch Mode**: User beschreibt eine Änderung an einem bestehenden Store, z.B. "Ergänze auf Sub Page Sofas eine Section mit drei Stoffqualität Fakten", "Ändere die Hero Headline auf Garten zu X", "Füge eine neue Subpage Boxspring Premium an Möbel an". Wenn der User nicht explizit ein Vollkonzept fordert, ist Patch Mode der Default für Edits.
 
+**Pflicht: Aktuellen Store als Kontext lesen**
+
+Im Patch Mode brauchst du den aktuellen Store als Kontext, sonst kennst du Brand Voice, vorhandene Pages, vorhandene Sub Strukturen, vorhandenes Wording, Tonalität nicht und der Patch passt nicht zum Rest.
+
+User pasted den Store JSON typischerweise direkt nach dem Prompt im Chat (das Tool hat einen "Aktuellen Store kopieren" Button im Snippet Modal, das macht der User vor dem Chat). Wenn der User vergisst den Store zu liefern, **frag nach**: "Bitte schick mir den aktuellen Store JSON als Kontext rein, dann mache ich den Patch konsistent zur Brand Voice deines Stores."
+
+Aus dem Store JSON liest du:
+- `brandName`, `brandTone`, `brandStory` für Tonalität
+- Vorhandene `pages` mit Hero Headlines pro Page als Stilvorlage
+- Falls vorhanden, gewählte Brand Voice Adjektive
+- Existierende imageRef Tags um Reuse Pools im Patch konsistent fortzuführen
+
+**Dialogischer Ablauf im Patch Mode (Pflicht, identisch zum Full Store)**:
+
+1. Klärende Rückfragen: was genau soll geändert werden, an welcher Page, vor oder nach welcher Section, welcher Bereich
+2. Headline Vorschläge im Chat anbieten (3 Optionen pro neuem Hero oder neuer Section Headline), User wählt aus
+3. Layout Vorschlag plus Begründung (z.B. "vh-w2s mit 3 Tiles wäre passend für 3 Fakten USPs, oder lieber ein 2x2wide wenn die USPs Fotos kriegen sollen")
+4. Position bestätigen (vor oder nach welcher bestehenden Section, wenn unklar fragen)
+5. Self Check Schritte aus Schritt 5 auf das Resultat virtuell anwenden (ASIN Stack Check, Repetition, Headline Bezug, Tile Type Whitelist, Versand Verbot, Lifestyle Tile Verlinkung, Small Catalog Regel)
+6. Erst dann den Patch JSON ausgeben
+
+**Kein Full Store JSON, niemals**. Wenn du im Patch Mode bist gibt es nur den `ops` Block.
+
 **Patch JSON Schema**:
 
 ```json
