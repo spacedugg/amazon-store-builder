@@ -1380,6 +1380,7 @@ export default function App() {
           onClose={function() { setShowPatchImport(false); }}
           onApply={applyPatch}
           store={store}
+          currentPageId={curPage}
         />
       )}
 
