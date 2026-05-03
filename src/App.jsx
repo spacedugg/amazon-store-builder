@@ -216,30 +216,6 @@ export default function App() {
   var headerBannerInputRef = useRef(null);
   var folderInputRef = useRef(null);
 
-  // Token Recovery: wenn ein alter Designer Share Link nicht mehr in der DB
-  // existiert (z.B. weil die Row gelöscht wurde oder ein früherer Save
-  // fehlgeschlagen ist), kann der Owner den alten Token manuell setzen
-  // und mit dem nächsten Save wieder unter dem gleichen Token in die DB
-  // schreiben. Damit funktioniert der Designer Link sofort wieder.
-  function recoverShareToken(token) {
-    var t = String(token || '').trim();
-    if (!t) return;
-    setShareToken(t);
-    setStoreId(null); // erzwingt neue Row, da der alte Eintrag fehlt
-    return t;
-  }
-  useEffect(function() {
-    window.__recoverShareToken = function(token) {
-      var t = recoverShareToken(token);
-      if (t) {
-        console.log('[Token Recovery] shareToken auf', t, 'gesetzt. storeId zurückgesetzt. Bitte jetzt manuell auf Save klicken.');
-      } else {
-        console.warn('[Token Recovery] Leerer Token, abgebrochen.');
-      }
-    };
-    return function() { try { delete window.__recoverShareToken; } catch (e) { /* ignore */ } };
-  }, []);
-
   // ─── UNDO HISTORY ───
   var undoStackRef = useRef([]);
   var redoStackRef = useRef([]);
@@ -1365,17 +1341,6 @@ export default function App() {
         onSave={handleSave}
         autoSaveStatus={autoSaveStatus}
         hasShareToken={!!shareToken}
-        onRecoverShareToken={function() {
-          var input = window.prompt('Alten Designer Share Token oder kompletten Share Link einfügen, um ihn unter deinem aktuellen Stand neu in die Datenbank zu schreiben:');
-          if (!input) return;
-          var token = input.trim();
-          var match = token.match(/\/share\/([a-z0-9]+)/i);
-          if (match) token = match[1];
-          var t = recoverShareToken(token);
-          if (t) {
-            alert('Token "' + t + '" gesetzt. Klicke jetzt auf Save, dann ist der Designer Link wieder gültig.');
-          }
-        }}
         viewMode={viewMode}
         onToggleView={handleToggleView}
         onNewStore={handleNewStore}

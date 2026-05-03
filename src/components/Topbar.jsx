@@ -8,7 +8,7 @@ function AutoSaveBadge({ status, hasShareToken }) {
   return <span style={{ fontSize: 10, color: '#9ca3af', marginRight: 6 }}>Auto</span>;
 }
 
-export default function Topbar({ store, onExport, onSave, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onRecoverShareToken }) {
+export default function Topbar({ store, onExport, onSave, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken }) {
   return (
     <div className="topbar">
       <div className="topbar-brand">
@@ -61,9 +61,6 @@ export default function Topbar({ store, onExport, onSave, viewMode, onToggleView
             </button>
           )}
           <AutoSaveBadge status={autoSaveStatus} hasShareToken={hasShareToken} />
-          {onRecoverShareToken && !hasShareToken && (
-            <button className="btn" onClick={onRecoverShareToken} title="Alten Designer Token wiederherstellen, falls der Designer Link 404 zeigt" style={{ fontSize: 11 }}>Token...</button>
-          )}
           <button className="btn btn-green" onClick={onSave} title="Save store">Save</button>
           <button className="btn btn-primary" onClick={onExport} title="Generate share link for designer">Export</button>
           {onShowAsinOverview && (
