@@ -1,4 +1,14 @@
-export default function Topbar({ store, onExport, onSave, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef }) {
+function AutoSaveBadge({ status, hasShareToken }) {
+  if (hasShareToken) {
+    return <span style={{ fontSize: 10, color: '#9ca3af', marginRight: 6 }} title="Designer Link aktiv, Autosave deaktiviert. Bitte manuell speichern, sobald du fertig bist.">Manuell</span>;
+  }
+  if (status === 'saving') return <span style={{ fontSize: 10, color: '#6b7280', marginRight: 6 }}>Speichert...</span>;
+  if (status === 'saved') return <span style={{ fontSize: 10, color: '#16a34a', marginRight: 6 }}>Gespeichert</span>;
+  if (status === 'error') return <span style={{ fontSize: 10, color: '#dc2626', marginRight: 6 }} title="Autosave fehlgeschlagen, bitte manuell speichern und Console prüfen">Autosave Fehler</span>;
+  return <span style={{ fontSize: 10, color: '#9ca3af', marginRight: 6 }}>Auto</span>;
+}
+
+export default function Topbar({ store, onExport, onSave, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken }) {
   return (
     <div className="topbar">
       <div className="topbar-brand">
@@ -50,6 +60,7 @@ export default function Topbar({ store, onExport, onSave, viewMode, onToggleView
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
             </button>
           )}
+          <AutoSaveBadge status={autoSaveStatus} hasShareToken={hasShareToken} />
           <button className="btn btn-green" onClick={onSave} title="Save store">Save</button>
           <button className="btn btn-primary" onClick={onExport} title="Generate share link for designer">Export</button>
           {onShowAsinOverview && (

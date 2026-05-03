@@ -2,7 +2,7 @@ import { useState } from 'react';
 import SectionView from './SectionView';
 import { t } from '../i18n';
 
-export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onSwapTiles, onChangeLayout, onApplySectionImageCategory, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onGenerate }) {
+export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onSwapTiles, onChangeLayout, onApplySectionImageCategory, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onImportRescueJson, onGenerate }) {
   var [hoveredNav, setHoveredNav] = useState(null);
   var [showHeroPicker, setShowHeroPicker] = useState(false);
 
@@ -27,6 +27,27 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
               <button className="btn" style={{ padding: '10px 20px', fontSize: 12, marginLeft: 10 }} onClick={onLoadAutoSave}>
                 {t('canvas.continueSession', uiLang)}
               </button>
+            )}
+            {onImportRescueJson && (
+              <label className="btn" style={{ padding: '10px 20px', fontSize: 12, marginLeft: 10, cursor: 'pointer' }} title="Rescue JSON Datei aus DevTools Snippet zurück in den Editor laden">
+                Rescue JSON laden
+                <input type="file" accept="application/json,.json" style={{ display: 'none' }}
+                  onChange={function(e) {
+                    var file = e.target.files && e.target.files[0];
+                    if (!file) return;
+                    var reader = new FileReader();
+                    reader.onload = function(ev) {
+                      try {
+                        var parsed = JSON.parse(ev.target.result);
+                        onImportRescueJson(parsed);
+                      } catch (err) {
+                        alert('Konnte JSON nicht parsen: ' + err.message);
+                      }
+                    };
+                    reader.readAsText(file);
+                    e.target.value = '';
+                  }} />
+              </label>
             )}
           </div>
         </div>
