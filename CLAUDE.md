@@ -167,4 +167,34 @@ Skill Prompt und Brand Analysis Prompt müssen Claude explizit verbieten, Versan
 
 ## 7. Sprache
 
-Alle User facing Texte sind Deutsch, sofern der User nicht explizit eine andere Sprache wünscht. Das gilt für Logs, Toasts, Fehlermeldungen und alle vom Generator erzeugten Brand Store Inhalte auf der Marktplatzdomain `amazon.de`.
+### Kundensichtbare Brand Store Inhalte
+
+Standard ist **Deutsch** auf der Marktplatzdomain `amazon.de`, sofern der User nicht explizit eine andere Sprache wünscht. Kundensichtbar sind insbesondere:
+
+- `textOverlay.heading`, `textOverlay.subheading`, `textOverlay.body`, `textOverlay.bullets`, `textOverlay.cta`
+- `heroBannerTextOverlay`
+- Page Namen (`name`)
+- USP Headlines, Produktkurzbeschreibungen, Bildtexte, Bildbeschriftungen, Alt Texte
+- Meta Descriptions
+- Brand Story als Page Inhalt
+
+### Designer facing Briefing Inhalte (Designer Export Dashboard und DOCX)
+
+Das Designer Briefing ist **immer Englisch**, unabhängig vom Marktplatz. Der Designer arbeitet international. Englisch sind:
+
+- `tile.brief` (Beschreibung der Bildidee, Komposition, Hotspots, Setting, Mood)
+- `heroBannerBrief` auf jeder Page
+- `manualCI.notes`, `productCI.designerNotes` und alle anderen Designer Hinweise
+- Alle UI Labels im Briefing Dashboard (Sidebar Tabs Design, Brand CI, Store Info, Upload Instructions, Designer Instructions Panel)
+- Alle KI Analyse Felder die im Briefing Dashboard angezeigt werden (Brand Story detected, Target Audience, Brand Values, Visual Style, Sustainability, Key Ingredients, Typography Style etc.)
+
+### Anwendung in Pipelines und Skills
+
+Wenn ein neues Briefing JSON oder ein Patch generiert wird, müssen Prompts für Claude und andere Modelle explizit:
+
+1. Customer facing Felder (`textOverlay.*`, `name`, `heroBannerTextOverlay`, Meta Descriptions) in der Marktplatz Sprache erzeugen.
+2. Designer facing Felder (`brief`, `heroBannerBrief`, `manualCI.notes`, `productCI.designerNotes`) in **Englisch** erzeugen.
+
+### Tool UI
+
+Logs, Toasts, Fehlermeldungen und Editor UI bleiben Deutsch. Das Briefing Dashboard auf der Designer Share URL ist Englisch.
