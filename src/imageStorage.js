@@ -57,6 +57,18 @@ export async function extractImagesFromStore(store) {
     obj[key] = makeSentinel(hash);
   }
 
+  // referenceImages: Array von { dataUrl, name } pro Tile.
+  async function replaceReferenceImages(tile) {
+    if (!tile || !Array.isArray(tile.referenceImages)) return;
+    for (var i = 0; i < tile.referenceImages.length; i++) {
+      var entry = tile.referenceImages[i];
+      if (!entry || !isDataUrl(entry.dataUrl)) continue;
+      var hash = await sha256Hex(entry.dataUrl);
+      images.set(hash, entry.dataUrl);
+      entry.dataUrl = makeSentinel(hash);
+    }
+  }
+
   // Deep clone to avoid mutating UI state
   var clone = JSON.parse(JSON.stringify(store));
 
@@ -83,12 +95,49 @@ export async function extractImagesFromStore(store) {
           for (var tf = 0; tf < IMAGE_FIELDS_TILE.length; tf++) {
             await replaceField(tile, IMAGE_FIELDS_TILE[tf]);
           }
+          await replaceReferenceImages(tile);
         }
       }
     }
   }
 
+  // Safety Net: rekursiv durch den ganzen Store laufen und jede noch
+  // verbliebene Data URL ausgliedern. Fängt Felder ab, die ich oben nicht
+  // explizit aufgelistet habe (z.B. neu hinzukommende oder von Brand
+  // Analysis injiziert). Inflate funktioniert dann automatisch über die
+  // gleiche rekursive Logik in inflateImagesIntoStore.
+  await sweepRemainingDataUrls(clone, images);
+
   return { storeForWire: clone, images: images };
+}
+
+async function sweepRemainingDataUrls(node, images) {
+  if (!node || typeof node !== 'object') return;
+  if (Array.isArray(node)) {
+    for (var i = 0; i < node.length; i++) {
+      var v = node[i];
+      if (isDataUrl(v)) {
+        var hash = await sha256Hex(v);
+        images.set(hash, v);
+        node[i] = makeSentinel(hash);
+      } else if (v && typeof v === 'object') {
+        await sweepRemainingDataUrls(v, images);
+      }
+    }
+    return;
+  }
+  var keys = Object.keys(node);
+  for (var k = 0; k < keys.length; k++) {
+    var key = keys[k];
+    var val = node[key];
+    if (isDataUrl(val)) {
+      var h = await sha256Hex(val);
+      images.set(h, val);
+      node[key] = makeSentinel(h);
+    } else if (val && typeof val === 'object') {
+      await sweepRemainingDataUrls(val, images);
+    }
+  }
 }
 
 // Walks the store, finds every sentinel, fetches the matching data URL
@@ -106,6 +155,13 @@ export async function inflateImagesIntoStore(store) {
     if (isSentinel(v)) neededHashes.add(hashFromSentinel(v));
   }
 
+  function collectReferenceImages(tile) {
+    if (!tile || !Array.isArray(tile.referenceImages)) return;
+    tile.referenceImages.forEach(function(entry) {
+      if (entry && isSentinel(entry.dataUrl)) neededHashes.add(hashFromSentinel(entry.dataUrl));
+    });
+  }
+
   for (var i = 0; i < IMAGE_FIELDS_STORE.length; i++) collect(clone, IMAGE_FIELDS_STORE[i]);
 
   if (Array.isArray(clone.pages)) {
@@ -118,10 +174,15 @@ export async function inflateImagesIntoStore(store) {
         sec.tiles.forEach(function(tile) {
           if (!tile) return;
           IMAGE_FIELDS_TILE.forEach(function(k) { collect(tile, k); });
+          collectReferenceImages(tile);
         });
       });
     });
   }
+
+  // Safety Net: rekursiv jeden Sentinel finden, auch in Feldern die wir
+  // hier nicht explizit kennen. Pendant zur sweep Logik beim Extract.
+  sweepCollectSentinels(clone, neededHashes);
 
   if (neededHashes.size === 0) return clone;
 
@@ -158,6 +219,19 @@ export async function inflateImagesIntoStore(store) {
     else obj[key] = null; // nicht auflösbar, UI behandelt null als kein Bild
   }
 
+  function replaceReferenceImages(tile) {
+    if (!tile || !Array.isArray(tile.referenceImages)) return;
+    tile.referenceImages = tile.referenceImages.map(function(entry) {
+      if (!entry || !isSentinel(entry.dataUrl)) return entry;
+      var h = hashFromSentinel(entry.dataUrl);
+      var data = resolved.get(h) || null;
+      return Object.assign({}, entry, { dataUrl: data });
+    }).filter(function(entry) {
+      // Nicht auflösbare Reference Images rauswerfen statt mit null Datenstand zu rendern
+      return entry && entry.dataUrl;
+    });
+  }
+
   for (var k = 0; k < IMAGE_FIELDS_STORE.length; k++) replace(clone, IMAGE_FIELDS_STORE[k]);
 
   if (Array.isArray(clone.pages)) {
@@ -170,12 +244,57 @@ export async function inflateImagesIntoStore(store) {
         sec.tiles.forEach(function(tile) {
           if (!tile) return;
           IMAGE_FIELDS_TILE.forEach(function(kk) { replace(tile, kk); });
+          replaceReferenceImages(tile);
         });
       });
     });
   }
 
+  // Safety Net: rekursiv alle restlichen Sentinels ersetzen.
+  sweepReplaceSentinels(clone, resolved);
+
   return clone;
+}
+
+function sweepCollectSentinels(node, neededHashes) {
+  if (!node || typeof node !== 'object') return;
+  if (Array.isArray(node)) {
+    node.forEach(function(v) {
+      if (isSentinel(v)) neededHashes.add(hashFromSentinel(v));
+      else if (v && typeof v === 'object') sweepCollectSentinels(v, neededHashes);
+    });
+    return;
+  }
+  Object.keys(node).forEach(function(key) {
+    var v = node[key];
+    if (isSentinel(v)) neededHashes.add(hashFromSentinel(v));
+    else if (v && typeof v === 'object') sweepCollectSentinels(v, neededHashes);
+  });
+}
+
+function sweepReplaceSentinels(node, resolved) {
+  if (!node || typeof node !== 'object') return;
+  if (Array.isArray(node)) {
+    for (var i = 0; i < node.length; i++) {
+      var v = node[i];
+      if (isSentinel(v)) {
+        var h = hashFromSentinel(v);
+        node[i] = resolved.has(h) ? resolved.get(h) : null;
+      } else if (v && typeof v === 'object') {
+        sweepReplaceSentinels(v, resolved);
+      }
+    }
+    return;
+  }
+  Object.keys(node).forEach(function(key) {
+    var v = node[key];
+    if (isSentinel(v)) {
+      var h = hashFromSentinel(v);
+      node[key] = resolved.has(h) ? resolved.get(h) : null;
+    } else if (v && typeof v === 'object') {
+      sweepReplaceSentinels(v, resolved);
+    }
+  });
 }
 
 // Lädt eine Map von hash → dataUrl in den Server hoch. Jeder Upload ist
