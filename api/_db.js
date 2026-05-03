@@ -80,6 +80,21 @@ async function migrate() {
   try {
     await db.execute({ sql: `ALTER TABLE stores ADD COLUMN generation_step INTEGER DEFAULT NULL` });
   } catch (e) { /* column already exists */ }
+
+  // Image Auslagerung: hash basierte Bildablage, damit der Store JSON Body
+  // unter dem 4,5 MB Vercel Limit bleibt. data Spalte enthält die Base64
+  // Data URL inklusive mime Prefix. Eine Row pro Hash, content addressed,
+  // wird zwischen Stores geteilt wenn das Bild bitidentisch ist.
+  await db.batch([
+    {
+      sql: `CREATE TABLE IF NOT EXISTS store_images (
+        hash TEXT PRIMARY KEY,
+        data TEXT NOT NULL,
+        byte_size INTEGER DEFAULT 0,
+        created_at TEXT DEFAULT (datetime('now'))
+      )`,
+    },
+  ]);
 }
 
 module.exports = { getClient: getClient, migrate: migrate };

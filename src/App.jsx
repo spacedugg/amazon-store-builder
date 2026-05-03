@@ -297,13 +297,44 @@ export default function App() {
     });
   }, []);
 
-  // Auto-save and validate whenever store changes
+  // Auto-save and validate whenever store changes.
+  // localStorage Autosave läuft immer (Tab Crash Schutz).
+  // DB Autosave nur wenn KEIN Designer Share Token existiert. Sobald der
+  // Share Link erzeugt wurde, wird nur noch manuell gespeichert, damit der
+  // Designer keine Notification Flut bei jeder kleinen Änderung bekommt.
   useEffect(function() {
     if (store.pages.length > 0) {
       autoSave(store);
       setWarnings(validateStore(store));
     }
   }, [store]);
+
+  var [autoSaveStatus, setAutoSaveStatus] = useState('idle'); // idle | saving | saved | error
+  var dbAutoSaveTimerRef = useRef(null);
+  var dbAutoSaveLastSerializedRef = useRef('');
+
+  useEffect(function() {
+    if (shareToken) return; // Designer Link existiert, kein DB Autosave
+    if (!store.pages.length) return;
+    if (dbAutoSaveTimerRef.current) clearTimeout(dbAutoSaveTimerRef.current);
+    dbAutoSaveTimerRef.current = setTimeout(function() {
+      var serialized = JSON.stringify(store);
+      if (serialized === dbAutoSaveLastSerializedRef.current) return;
+      dbAutoSaveLastSerializedRef.current = serialized;
+      setAutoSaveStatus('saving');
+      saveStore(store, storeId, null).then(function(result) {
+        if (result && result.id && !storeId) setStoreId(result.id);
+        setAutoSaveStatus('saved');
+        setTimeout(function() { setAutoSaveStatus(function(s) { return s === 'saved' ? 'idle' : s; }); }, 2000);
+      }).catch(function(err) {
+        console.warn('DB Autosave fehlgeschlagen:', err.message);
+        setAutoSaveStatus('error');
+      });
+    }, 3000);
+    return function() {
+      if (dbAutoSaveTimerRef.current) clearTimeout(dbAutoSaveTimerRef.current);
+    };
+  }, [store, shareToken, storeId]);
 
   var page = store.pages.find(function(p) { return p.id === curPage; }) || store.pages[0] || null;
 
@@ -881,13 +912,20 @@ export default function App() {
   // ─── SAVED STORES ───
   var handleSave = async function() {
     if (!store.pages.length) return;
-    var result = await saveStore(store, storeId, shareToken);
-    if (result) {
+    try {
+      var result = await saveStore(store, storeId, shareToken);
       if (result.id) setStoreId(result.id);
       if (result.shareToken) setShareToken(result.shareToken);
       var stores = await loadSavedStores();
       setSavedStores(stores);
-      alert('Store saved! (' + (store.brandName || 'Untitled') + ')');
+      if (result.offline) {
+        alert('Server nicht erreichbar, Store nur lokal im Browser gesichert (' + (store.brandName || 'Untitled') + '). Bitte später erneut speichern, sobald die Verbindung wieder steht.');
+      } else {
+        alert('Store gespeichert. (' + (store.brandName || 'Untitled') + ')');
+      }
+    } catch (err) {
+      console.error('Save fehlgeschlagen:', err);
+      alert('Speichern fehlgeschlagen.\n\n' + err.message + '\n\nDein aktueller Stand bleibt im Tab erhalten. Schließe den Tab nicht, bevor das Problem behoben ist.');
     }
   };
 
@@ -909,6 +947,21 @@ export default function App() {
       setCurPage(data.pages[0] ? data.pages[0].id : '');
       setSel(null);
     }
+  };
+
+  // Rescue JSON Datei aus dem DevTools Snippet zurück laden.
+  // Nimmt rohe Store JSON Shape (gleiche Form wie Autosave).
+  var handleImportRescueJson = function(parsed) {
+    if (!parsed || !Array.isArray(parsed.pages) || parsed.pages.length === 0) {
+      alert('Diese JSON Datei sieht nicht wie ein Store aus. Erwartet wird ein Objekt mit pages Array.');
+      return;
+    }
+    setStore(refreshImageRefs(parsed));
+    setCurPage(parsed.pages[0] ? parsed.pages[0].id : '');
+    setSel(null);
+    setStoreId(null);     // Rescue erzwingt neuen Save, alte ID gehört evtl. zu einem stale Stand
+    setShareToken(null);  // Designer Token wird beim nächsten Save neu erzeugt, falls Export gedrückt wird
+    alert('Rescue JSON geladen. Bitte einmal manuell speichern, sobald der Image Auslagerungs Fix live ist.');
   };
 
   var handleDeleteSaved = async function(id) {
@@ -1195,7 +1248,14 @@ export default function App() {
     try {
       var hadToken = !!shareToken;
       // Save first (or re-save) to ensure we have a share token
-      var result = await saveStore(store, storeId, shareToken);
+      var result;
+      try {
+        result = await saveStore(store, storeId, shareToken);
+      } catch (saveErr) {
+        console.error('Export Save fehlgeschlagen:', saveErr);
+        alert('Export fehlgeschlagen.\n\n' + saveErr.message);
+        return;
+      }
       if (result && result.shareToken) {
         if (result.id) setStoreId(result.id);
         setShareToken(result.shareToken);
@@ -1279,6 +1339,8 @@ export default function App() {
         store={store}
         onExport={handleExport}
         onSave={handleSave}
+        autoSaveStatus={autoSaveStatus}
+        hasShareToken={!!shareToken}
         viewMode={viewMode}
         onToggleView={handleToggleView}
         onNewStore={handleNewStore}
@@ -1339,6 +1401,7 @@ export default function App() {
           uiLang={uiLang}
           hasAutoSave={hasAutoSave}
           onLoadAutoSave={handleLoadAutoSave}
+          onImportRescueJson={handleImportRescueJson}
           onGenerate={handleNewStore}
         />
 
