@@ -150,7 +150,19 @@ Test pro Headline: Wenn ich den Markennamen oder Kategorie Namen aus der Headlin
 
 ### Default Sprache
 
-Standard ist **Deutsch** (Marktplatz `amazon.de`). Andere Sprachen nur wenn User explizit angibt.
+Standard für **kundensichtbare Brand Store Inhalte** ist **Deutsch** (Marktplatz `amazon.de`). Andere Sprachen nur wenn User explizit angibt. Kundensichtbar sind: `textOverlay.heading`, `textOverlay.subheading`, `textOverlay.body`, `textOverlay.bullets`, `textOverlay.cta`, Page Namen (`name`), Header Banner Text Overlay (`heroBannerTextOverlay`), Meta Descriptions, Brand Story als Page Inhalt, USP Headlines.
+
+**Designer facing Felder sind immer Englisch**, unabhängig vom Marktplatz. Der Designer arbeitet international und das Briefing Dashboard ist auf Englisch. Englisch sind:
+
+- `brief` auf jeder Tile (Beschreibung der Bildidee, Komposition, Hotspots)
+- `heroBannerBrief` auf jeder Page
+- `manualCI.notes`, alle Designer Hinweise, Stilbeschreibungen, KI Analyse Ergebnisse zur Marke (productCI Felder, aiAnalysis Felder etc.) sind Englisch wenn neu erzeugt
+
+Beispiel:
+- `brief: "Lifestyle scene of a family in a cozy living room with the Juskys sofa, warm afternoon light, plants in the foreground."` (Englisch, Designer Anweisung)
+- `textOverlay.heading: "Wohlfühlmomente zuhause"` (Deutsch, kommt so auf das Bild)
+- `textOverlay.body: "Möbel die deine Familie über Jahre begleiten"` (Deutsch, kommt so auf das Bild)
+- `name: "Wohnzimmer"` (Deutsch, Kategorie Name den der Kunde sieht)
 
 ## Wie der Skill arbeitet
 
@@ -418,7 +430,7 @@ Das Briefing JSON hat diese Struktur. Das Tool ergänzt fehlende IDs und Default
                 "bullets": [],
                 "cta": "Sortiment entdecken"
               },
-              "brief": "Hero Bild Startseite. Wohnraum mit Sofa, Sessel, Beistelltisch, Lampe, Teppich, im Hintergrund Übergang in Garten."
+              "brief": "Homepage hero image. Living room scene with sofa, armchair, side table, lamp, rug, with a transition to a garden in the background."
             }
           ]
         }
@@ -573,7 +585,7 @@ tiles:
     textOverlay:
       heading: "Mehr aus **Garten**"
       subheading: ""
-    brief: "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid."
+    brief: "Divider text image, category headline above the cross nav grid."
 ```
 
 Falsch wäre `imageCategory: store_hero` (das ist nur für den Page
@@ -586,7 +598,7 @@ Header Banner über der Menüleiste reserviert).
 Pro Page muss befüllt werden:
 
 ```yaml
-heroBannerBrief: "Beschreibung was das Banner zeigt, z.B. Lifestyle Komposition Wohnzimmer"
+heroBannerBrief: "English description of what the banner shows, e.g. lifestyle composition living room"
 heroBannerTextOverlay: "Optionaler Slogan auf dem Banner"
 ```
 
@@ -743,7 +755,7 @@ Trenner Tile, flach (Layout 1):
 {
   "type": "image",
   "textOverlay": { "heading": "Bereit für die **Saison**" },
-  "brief": "Trenner Textbild mit Stoff Makro im Hintergrund.",
+  "brief": "Divider text image with a fabric macro in the background.",
   "imageCategory": "text_image",
   "dimensions": { "w": 3000, "h": 350 }
 }
@@ -755,7 +767,7 @@ Shoppable Image, hoch (Layout 1):
 {
   "type": "shoppable_image",
   "textOverlay": { "heading": "Lounge, **fertig** zum Loslegen" },
-  "brief": "Shoppable Terrasse mit 3 Produkten.",
+  "brief": "Shoppable terrace scene with 3 products.",
   "asins": ["B0...", "B0...", "B0..."],
   "dimensions": { "w": 3000, "h": 1500 }
 }
@@ -767,7 +779,7 @@ Hero Page Header (Layout 1):
 {
   "type": "image",
   "textOverlay": { "heading": "Was **dein** Zuhause braucht" },
-  "brief": "Hero Bild Wohnraum mit Übergang Terrasse.",
+  "brief": "Hero image, living room with a transition to a terrace.",
   "dimensions": { "w": 3000, "h": 800 }
 }
 ```
@@ -1134,20 +1146,20 @@ Nach Bestätigung:
           {
             "type": "image",
             "textOverlay": { "heading": "**Stoffqualität** geprüft" },
-            "brief": "Wide Bild Stoff Detail in Wohnsetting.",
+            "brief": "Wide image, fabric detail in a living room setting.",
             "imageCategory": "benefit",
             "dimensions": { "w": 3000, "h": 1500 }
           },
           {
             "type": "image",
             "textOverlay": { "heading": "**Massivholz** Rahmen" },
-            "brief": "Square Bild Holz Detail.",
+            "brief": "Square image, wood detail.",
             "imageCategory": "benefit"
           },
           {
             "type": "image",
             "textOverlay": { "heading": "**Bezug** wechselbar" },
-            "brief": "Square Bild Reißverschluss Detail.",
+            "brief": "Square image, zipper detail.",
             "imageCategory": "benefit"
           }
         ]

@@ -554,16 +554,13 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
       </div>
 
       {duplicateInfo && duplicateInfo.count > 1 && (
-        <div className="briefing-field" style={{ background: '#ecfdf5', border: '2px solid #10b981', borderRadius: 4, padding: '6px 10px', marginBottom: 6 }}>
-          <div style={{ fontSize: 11, fontWeight: 700, color: '#047857', marginBottom: 2 }}>
-            Diese Kachel kommt {duplicateInfo.count} mal im Store vor
-          </div>
-          <div style={{ fontSize: 10, color: '#065f46', lineHeight: 1.4 }}>
-            Bild nur einmal designen. Beim Upload ins Tool reicht der Reuse Filename in einem Ordner, das Tool verteilt das Bild automatisch auf alle {duplicateInfo.count} Stellen. Bei Per Page Ordner Übergabe an den Kunden: dasselbe File in alle {duplicateInfo.count} Page Ordner kopieren, damit pro Page Ordner alle Bilder dieser Page liegen.
+        <div className="briefing-field" style={{ background: '#ecfdf5', border: '1px solid #10b981', borderRadius: 4, padding: '4px 8px', marginBottom: 6 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, color: '#047857' }}>
+            Reused {duplicateInfo.count}× — design once, see Upload Instructions
           </div>
           {duplicateInfo.others && duplicateInfo.others.length > 0 && (
             <div style={{ marginTop: 4, fontSize: 10, color: '#065f46' }}>
-              Auch in:
+              Also in:
               <ul style={{ margin: '2px 0 0 14px', padding: 0 }}>
                 {duplicateInfo.others.slice(0, 8).map(function(loc, i) {
                   return <li key={i}><b>{loc.page}</b>, S{loc.section} T{loc.tile}</li>;
@@ -749,7 +746,7 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
                     href={amazonUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    title={'Auf Amazon öffnen: ' + p.asin}
+                    title={'Open on Amazon: ' + p.asin}
                     style={{ display: 'flex', alignItems: 'center', gap: 5, background: '#fff', borderRadius: 4, padding: '3px 6px', border: '1px solid #e0f2fe', maxWidth: 200, textDecoration: 'none', cursor: 'pointer' }}
                     onMouseEnter={function(e) { e.currentTarget.style.borderColor = '#0369a1'; e.currentTarget.style.boxShadow = '0 1px 4px rgba(3,105,161,.18)'; }}
                     onMouseLeave={function(e) { e.currentTarget.style.borderColor = '#e0f2fe'; e.currentTarget.style.boxShadow = 'none'; }}
@@ -837,7 +834,7 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
           <div style={{ marginTop: 4, padding: '4px 0', fontSize: 10, lineHeight: 1.8 }}>
             {hasReuse && (
               <div style={{ marginBottom: 4 }}>
-                <div style={{ fontSize: 9, fontWeight: 700, color: '#047857', marginBottom: 2 }}>Reuse Filename (ein File für alle {duplicateInfo.count} Stellen)</div>
+                <div style={{ fontSize: 9, fontWeight: 700, color: '#047857', marginBottom: 2 }}>Reuse Filename (one file for all {duplicateInfo.count} places)</div>
                 {sameRatio
                   ? <CopyableFilename filename={tile.imageRef + '.jpg'} />
                   : (
@@ -848,7 +845,7 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
                   )}
               </div>
             )}
-            {hasReuse && <div style={{ fontSize: 9, fontWeight: 700, color: '#475569', marginBottom: 2 }}>Per Tile Filename (Alternative, einzeln)</div>}
+            {hasReuse && <div style={{ fontSize: 9, fontWeight: 700, color: '#475569', marginBottom: 2 }}>Per Tile Filename (alternative, separate)</div>}
             {sameRatio
               ? <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'sync')} />
               : (
@@ -1704,12 +1701,12 @@ export default function BriefingView() {
   var loadAttemptRef = useRef(0);
 
   function loadShareData() {
-    if (!token) { setError('Kein Share-Token in der URL gefunden. Bitte prüfe den Link.'); setLoading(false); return; }
+    if (!token) { setError('No share token found in the URL. Please check the link.'); setLoading(false); return; }
     setLoading(true);
     setError(null);
     loadAttemptRef.current += 1;
     loadStoreByShareToken(token).then(function(result) {
-      if (!result || !result.data) { setError('Store nicht gefunden oder Link abgelaufen. Bitte fordere einen neuen Link an.'); setLoading(false); return; }
+      if (!result || !result.data) { setError('Store not found or link expired. Please request a new link.'); setLoading(false); return; }
       setStore(result.data);
       setLastUpdated(result.updatedAt || new Date().toISOString());
       setCurPage(result.data.pages && result.data.pages[0] ? result.data.pages[0].id : '');
@@ -1863,7 +1860,7 @@ export default function BriefingView() {
   if (!store) return (
     <div className="briefing-error">
       <div className="briefing-error-icon">!</div>
-      <div className="briefing-error-msg">Keine Store-Daten vorhanden. Der Store wurde möglicherweise nicht korrekt gespeichert.</div>
+      <div className="briefing-error-msg">No store data available. The store may not have been saved correctly.</div>
     </div>
   );
 
@@ -1932,7 +1929,7 @@ export default function BriefingView() {
             onMouseEnter={function(e) { e.currentTarget.style.background = 'rgba(245,158,11,.15)'; e.currentTarget.style.color = '#f59e0b'; }}
             onMouseLeave={function(e) { e.currentTarget.style.background = folderMatchCount > 0 ? 'rgba(245,158,11,.2)' : 'rgba(255,255,255,.06)'; e.currentTarget.style.color = folderMatchCount > 0 ? '#f59e0b' : '#94a3b8'; }}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" /></svg>
-            {folderMatchCount > 0 ? folderMatchCount + ' Images' : 'Ordner laden'}
+            {folderMatchCount > 0 ? folderMatchCount + ' Images' : 'Load Folder'}
           </button>
           {folderMatchCount > 0 && (
             <button onClick={handleBriefingClearImages}
@@ -2055,11 +2052,11 @@ export default function BriefingView() {
               <div className="briefing-sidebar-section" style={{ background: '#faf5ff', borderRadius: 8, margin: '0 8px 10px', padding: '12px' }}>
                 <div className="briefing-sidebar-title" style={{ color: '#7c3aed', marginBottom: 8 }}>Corporate Identity</div>
                 <div className="briefing-legend" style={{ fontSize: 11, lineHeight: 1.6 }}>
-                  <p style={{ marginBottom: 8, color: '#6b21a8', fontWeight: 600 }}>Farben, Schriften und Stil — editierbar.</p>
+                  <p style={{ marginBottom: 8, color: '#6b21a8', fontWeight: 600 }}>Colors, fonts and style, editable.</p>
 
                   {/* Colors — editable */}
                   <div style={{ marginBottom: 10 }}>
-                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Farbpalette</div>
+                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Color Palette</div>
                     {(store.manualCI && store.manualCI.colors && store.manualCI.colors.length > 0) || (store.websiteData && store.websiteData.colors && store.websiteData.colors.length > 0) ? (
                       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 4 }}>
                         {((store.manualCI && store.manualCI.colors) || (store.websiteData && store.websiteData.colors) || []).map(function(c, i) {
@@ -2073,7 +2070,7 @@ export default function BriefingView() {
                       </div>
                     ) : null}
                     <input
-                      placeholder="Farben eingeben: #FF5733, #2E86C1, ..."
+                      placeholder="Enter colors: #FF5733, #2E86C1, ..."
                       value={(store.manualCI && store.manualCI.colorsInput) || ''}
                       onChange={function(e) {
                         var val = e.target.value;
@@ -2092,16 +2089,16 @@ export default function BriefingView() {
                   {/* Product CI from Gemini Vision analysis */}
                   {store.productCI && (
                     <div style={{ marginBottom: 10, background: '#fefce8', border: '1px solid #fde68a', borderRadius: 6, padding: 8 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#92400e', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '.05em' }}>CI aus Listing-Bildern (KI-Analyse)</div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#92400e', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '.05em' }}>CI from Listing Images (AI Analysis)</div>
                       {store.productCI.visualMood && (
                         <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Visueller Stil: </span>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Visual Style: </span>
                           <span style={{ fontSize: 10, color: '#78350f', fontWeight: 700 }}>{store.productCI.visualMood}</span>
                         </div>
                       )}
                       {store.productCI.primaryColors && store.productCI.primaryColors.length > 0 && (
                         <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Primärfarben: </span>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Primary Colors: </span>
                           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 2 }}>
                             {store.productCI.primaryColors.map(function(c, i) {
                               return <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
@@ -2114,25 +2111,25 @@ export default function BriefingView() {
                       )}
                       {store.productCI.backgroundPattern && (
                         <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Hintergründe: </span>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Backgrounds: </span>
                           <span style={{ fontSize: 10, color: '#475569' }}>{store.productCI.backgroundPattern}</span>
                         </div>
                       )}
                       {store.productCI.typographyStyle && (
                         <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Typografie: </span>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Typography: </span>
                           <span style={{ fontSize: 10, color: '#475569' }}>{store.productCI.typographyStyle}</span>
                         </div>
                       )}
                       {store.productCI.photographyStyle && (
                         <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Fotostil: </span>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Photography Style: </span>
                           <span style={{ fontSize: 10, color: '#475569' }}>{store.productCI.photographyStyle}</span>
                         </div>
                       )}
                       {store.productCI.recurringElements && store.productCI.recurringElements.length > 0 && (
                         <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Wiederkehrende Elemente: </span>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Recurring Elements: </span>
                           <div style={{ display: 'flex', gap: 3, flexWrap: 'wrap', marginTop: 2 }}>
                             {store.productCI.recurringElements.map(function(el, i) {
                               return <span key={i} style={{ background: '#fef3c7', color: '#78350f', borderRadius: 3, padding: '1px 6px', fontSize: 9, fontWeight: 600 }}>{el}</span>;
@@ -2142,13 +2139,13 @@ export default function BriefingView() {
                       )}
                       {store.productCI.designerNotes && (
                         <div style={{ marginTop: 6, padding: '6px 8px', background: '#fff', border: '1px solid #fde68a', borderRadius: 4, fontSize: 10, lineHeight: 1.5, color: '#475569' }}>
-                          <span style={{ fontWeight: 700, color: '#92400e' }}>Designer-Hinweise: </span>
+                          <span style={{ fontWeight: 700, color: '#92400e' }}>Designer Notes: </span>
                           {store.productCI.designerNotes}
                         </div>
                       )}
                       {store.productCI.sourceImages && store.productCI.sourceImages.length > 0 && (
                         <div style={{ marginTop: 6 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Analysierte Bilder ({store.productCI.imagesAnalyzed}):</span>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Analyzed Images ({store.productCI.imagesAnalyzed}):</span>
                           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 4 }}>
                             {store.productCI.sourceImages.slice(0, 6).map(function(url, i) {
                               return <img key={i} src={url} style={{ width: 48, height: 48, objectFit: 'cover', borderRadius: 4, border: '1px solid #e5e7eb' }} alt="" />;
@@ -2161,7 +2158,7 @@ export default function BriefingView() {
 
                   {/* Fonts — editable */}
                   <div style={{ marginBottom: 10 }}>
-                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Schriftarten</div>
+                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Fonts</div>
                     {store.websiteData && store.websiteData.userFonts && (
                       <div style={{ marginBottom: 4 }}>
                         <span style={{ fontSize: 9, color: '#92400e', fontWeight: 700 }}>Brand Fonts (user-specified):</span>
@@ -2180,7 +2177,7 @@ export default function BriefingView() {
                       </div>
                     )}
                     <input
-                      placeholder="z.B. Montserrat, Open Sans, Playfair Display"
+                      placeholder="e.g. Montserrat, Open Sans, Playfair Display"
                       value={(store.manualCI && store.manualCI.fonts) || ''}
                       onChange={function(e) {
                         setStore(function(prev) {
@@ -2195,7 +2192,7 @@ export default function BriefingView() {
 
                   {/* Brand Tone — editable */}
                   <div style={{ marginBottom: 10 }}>
-                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Markentonalität</div>
+                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Tone</div>
                     <input
                       value={(store.manualCI && store.manualCI.brandTone) || store.brandTone || (store.analysis && store.analysis.brandTone) || ''}
                       onChange={function(e) {
@@ -2205,14 +2202,14 @@ export default function BriefingView() {
                           return Object.assign({}, prev, { manualCI: mc });
                         });
                       }}
-                      placeholder="z.B. natürlich, minimalistisch, premium"
+                      placeholder="e.g. natural, minimalist, premium"
                       style={{ width: '100%', fontSize: 10, padding: '4px 6px', border: '1px solid #e5e7eb', borderRadius: 4 }}
                     />
                   </div>
 
                   {/* CI Notes — free text */}
                   <div style={{ marginBottom: 10 }}>
-                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>CI Notizen (für Designer)</div>
+                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>CI Notes (for Designer)</div>
                     <textarea
                       value={(store.manualCI && store.manualCI.notes) || ''}
                       onChange={function(e) {
@@ -2223,7 +2220,7 @@ export default function BriefingView() {
                         });
                       }}
                       rows={3}
-                      placeholder="Weitere Hinweise: Logo-Varianten, Bildsprache, Stilrichtung..."
+                      placeholder="Additional notes: logo variants, imagery, style direction..."
                       style={{ width: '100%', fontSize: 10, padding: '4px 6px', border: '1px solid #e5e7eb', borderRadius: 4, resize: 'vertical' }}
                     />
                   </div>
@@ -2231,27 +2228,27 @@ export default function BriefingView() {
                   {/* Typography Style */}
                   {store.websiteData && store.websiteData.typographyStyle && (
                     <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Typografie-Stil (erkannt)</div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Typography Style (detected)</div>
                       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 6 }}>
                         <span style={{ background: store.websiteData.typographyStyle.textDensity === 'minimalist' ? '#dcfce7' : store.websiteData.typographyStyle.textDensity === 'text-heavy' ? '#fef3c7' : '#eff6ff', color: store.websiteData.typographyStyle.textDensity === 'minimalist' ? '#166534' : store.websiteData.typographyStyle.textDensity === 'text-heavy' ? '#92400e' : '#1e40af', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 700 }}>
-                          {store.websiteData.typographyStyle.textDensity === 'minimalist' ? 'Minimalistisch' : store.websiteData.typographyStyle.textDensity === 'text-heavy' ? 'Textlastig' : 'Ausgewogen'}
+                          {store.websiteData.typographyStyle.textDensity === 'minimalist' ? 'Minimalist' : store.websiteData.typographyStyle.textDensity === 'text-heavy' ? 'Text Heavy' : 'Balanced'}
                         </span>
                         <span style={{ background: '#f1f5f9', color: '#475569', borderRadius: 3, padding: '2px 8px', fontSize: 10 }}>
                           {store.websiteData.typographyStyle.headingCount} Headings
                         </span>
                         <span style={{ background: '#f1f5f9', color: '#475569', borderRadius: 3, padding: '2px 8px', fontSize: 10 }}>
-                          ~{store.websiteData.typographyStyle.avgParagraphLength} Zeichen/Absatz
+                          ~{store.websiteData.typographyStyle.avgParagraphLength} chars/paragraph
                         </span>
                       </div>
                       {store.websiteData.typographyStyle.fontWeights && store.websiteData.typographyStyle.fontWeights.length > 0 && (
                         <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#7c3aed', fontWeight: 600 }}>Schriftgewichte: </span>
+                          <span style={{ fontSize: 9, color: '#7c3aed', fontWeight: 600 }}>Font Weights: </span>
                           <span style={{ fontSize: 10, fontFamily: 'monospace', color: '#475569' }}>{store.websiteData.typographyStyle.fontWeights.join(', ')}</span>
                         </div>
                       )}
                       {store.websiteData.typographyStyle.fontSizes && store.websiteData.typographyStyle.fontSizes.length > 0 && (
                         <div>
-                          <span style={{ fontSize: 9, color: '#7c3aed', fontWeight: 600 }}>Schriftgrößen: </span>
+                          <span style={{ fontSize: 9, color: '#7c3aed', fontWeight: 600 }}>Font Sizes: </span>
                           <span style={{ fontSize: 10, fontFamily: 'monospace', color: '#475569' }}>{store.websiteData.typographyStyle.fontSizes.slice(0, 6).join(', ')}</span>
                         </div>
                       )}
@@ -2261,7 +2258,7 @@ export default function BriefingView() {
                   {/* Brand Story */}
                   {(store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.brandStory) || (store.analysis && store.analysis.brandStory) || (store.websiteData && store.websiteData.aboutText) ? (
                     <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Story (erkannt)</div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Story (detected)</div>
                       <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11, lineHeight: 1.5, maxHeight: 80, overflow: 'auto' }}>
                         {(store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.brandStory) || (store.analysis && store.analysis.brandStory) || (store.websiteData && store.websiteData.aboutText ? store.websiteData.aboutText.substring(0, 300) + '...' : '')}
                       </div>
@@ -2271,7 +2268,7 @@ export default function BriefingView() {
                   {/* Target Audience (AI) */}
                   {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.targetAudience && (
                     <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Zielgruppe (KI-Analyse)</div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Target Audience (AI Analysis)</div>
                       <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11, lineHeight: 1.5 }}>
                         {store.websiteData.aiAnalysis.targetAudience}
                       </div>
@@ -2281,7 +2278,7 @@ export default function BriefingView() {
                   {/* Brand Values (AI) */}
                   {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.brandValues && store.websiteData.aiAnalysis.brandValues.length > 0 && (
                     <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Markenwerte (KI-Analyse)</div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Values (AI Analysis)</div>
                       <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                         {store.websiteData.aiAnalysis.brandValues.map(function(v, i) {
                           return <span key={i} style={{ background: '#ede9fe', color: '#5b21b6', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{v}</span>;
@@ -2293,7 +2290,7 @@ export default function BriefingView() {
                   {/* Visual Style (AI) */}
                   {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.visualStyle && (
                     <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Visueller Stil (KI-Analyse)</div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Visual Style (AI Analysis)</div>
                       <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11 }}>
                         {store.websiteData.aiAnalysis.visualStyle}
                       </div>
@@ -2303,7 +2300,7 @@ export default function BriefingView() {
                   {/* Sustainability (AI) */}
                   {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.sustainabilityFocus && (
                     <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Nachhaltigkeit (KI-Analyse)</div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Sustainability (AI Analysis)</div>
                       <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11, lineHeight: 1.5 }}>
                         {store.websiteData.aiAnalysis.sustainabilityFocus}
                       </div>
@@ -2313,7 +2310,7 @@ export default function BriefingView() {
                   {/* Key Ingredients / Materials (AI) */}
                   {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.keyIngredients && store.websiteData.aiAnalysis.keyIngredients.length > 0 && (
                     <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Schlüssel-Inhaltsstoffe (KI-Analyse)</div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Key Ingredients (AI Analysis)</div>
                       <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                         {store.websiteData.aiAnalysis.keyIngredients.map(function(ing, i) {
                           return <span key={i} style={{ background: '#ecfdf5', color: '#065f46', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{ing}</span>;
@@ -2382,10 +2379,19 @@ export default function BriefingView() {
                     Homepage_S1_T1_desktop.jpg<br />
                     Homepage_S1_T1_mobile.jpg<br />
                     Homepage_S2_T1.jpg<br />
-                    Kategorie_1_S1_T1_desktop.jpg<br />
+                    Category_1_S1_T1_desktop.jpg<br />
                     ...
                   </div>
-                  <p style={{ marginTop: 6, fontSize: 10, color: '#92400e' }}>Tip: Use the Preview button to verify your images. Select the folder and images are matched automatically.</p>
+                  <p style={{ marginTop: 10, marginBottom: 4 }}><strong style={{ color: '#047857' }}>Image Reuse (green hint on tiles):</strong></p>
+                  <p style={{ fontSize: 11, lineHeight: 1.5 }}>
+                    Some tiles repeat the same image across pages or sections. They show a green <em>"Reused N×"</em> badge and a <strong>Reuse Filename</strong> on top of the per tile filename.
+                  </p>
+                  <ul style={{ margin: '4px 0 0 18px', padding: 0, fontSize: 11, lineHeight: 1.5 }}>
+                    <li>Design the image <strong>only once</strong>.</li>
+                    <li>Save it under the Reuse Filename. The tool distributes it automatically to every place that shares the same reference.</li>
+                    <li>If you deliver per page folders to the client, copy the same file into every page folder that uses it, so each page folder is self contained.</li>
+                  </ul>
+                  <p style={{ marginTop: 8, fontSize: 10, color: '#92400e' }}>Tip: Use the Preview button to verify your images. Select the folder and images are matched automatically.</p>
                 </div>
               </div>
 
