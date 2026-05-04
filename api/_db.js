@@ -95,6 +95,24 @@ async function migrate() {
       )`,
     },
   ]);
+
+  // Translation Cache: Designer Briefing Felder werden beim Anzeigen im
+  // Share View on the fly ins Englische übersetzt. Cache ist content
+  // addressed über (sourceHash, targetLang) damit derselbe Source Text in
+  // einer Sprache nur einmal übersetzt wird, egal ob er in mehreren Stores
+  // oder Tiles vorkommt.
+  await db.batch([
+    {
+      sql: `CREATE TABLE IF NOT EXISTS translations (
+        source_hash TEXT NOT NULL,
+        target_lang TEXT NOT NULL,
+        source_text TEXT NOT NULL,
+        translated_text TEXT NOT NULL,
+        created_at TEXT DEFAULT (datetime('now')),
+        PRIMARY KEY (source_hash, target_lang)
+      )`,
+    },
+  ]);
 }
 
 module.exports = { getClient: getClient, migrate: migrate };

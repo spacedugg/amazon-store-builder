@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, findLayout } from '../constants';
 import { loadStoreByShareToken } from '../storage';
+import { translateStoreForDesigner } from '../translateBriefing';
 import SectionView, { getGridConfig } from './SectionView';
 
 var noop = function() {};
@@ -1707,11 +1708,22 @@ export default function BriefingView() {
     loadAttemptRef.current += 1;
     loadStoreByShareToken(token).then(function(result) {
       if (!result || !result.data) { setError('Store not found or link expired. Please request a new link.'); setLoading(false); return; }
-      setStore(result.data);
-      setLastUpdated(result.updatedAt || new Date().toISOString());
       setCurPage(result.data.pages && result.data.pages[0] ? result.data.pages[0].id : '');
-      prevStoreRef.current = JSON.stringify(result.data);
-      setLoading(false);
+      // Designer facing Felder direkt beim Initial Load ins Englische übersetzen.
+      // Erst danach setStore, damit kein Flackern Deutsch zu Englisch entsteht.
+      // textOverlay, Page Namen, Brand Namen bleiben in Originalsprache.
+      translateStoreForDesigner(result.data, 'en').then(function(translated) {
+        setStore(translated);
+        setLastUpdated(result.updatedAt || new Date().toISOString());
+        prevStoreRef.current = JSON.stringify(translated);
+        setLoading(false);
+      }).catch(function() {
+        // Fallback: Original anzeigen wenn die Übersetzung fehlschlägt.
+        setStore(result.data);
+        setLastUpdated(result.updatedAt || new Date().toISOString());
+        prevStoreRef.current = JSON.stringify(result.data);
+        setLoading(false);
+      });
     }).catch(function(e) { setError(e.message); setLoading(false); });
   }
 
@@ -1729,12 +1741,15 @@ export default function BriefingView() {
       if (!prevStoreRef.current) return;
       loadStoreByShareToken(token).then(function(result) {
         if (!result || !result.data) return;
-        var newJson = JSON.stringify(result.data);
-        var oldJson = prevStoreRef.current;
-        if (newJson !== oldJson) {
+        // Vor dem Vergleich übersetzen, sonst flackert die View bei jedem
+        // Polling Zyklus zwischen Deutsch und Englisch hin und her.
+        translateStoreForDesigner(result.data, 'en').then(function(translated) {
+          var newJson = JSON.stringify(translated);
+          var oldJson = prevStoreRef.current;
+          if (newJson === oldJson) return;
           var changeResult = detectChanges(
             oldJson ? JSON.parse(oldJson) : null,
-            result.data
+            translated
           );
           setChangeHighlights(changeResult.highlights);
           var now = new Date();
@@ -1742,12 +1757,12 @@ export default function BriefingView() {
             return [{ time: now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }), descriptions: changeResult.descriptions }].concat(prev).slice(0, 10);
           });
           setUpdateBanner(true);
-          setStore(result.data);
+          setStore(translated);
           setLastUpdated(result.updatedAt || new Date().toISOString());
           prevStoreRef.current = newJson;
           if (bannerTimeoutRef.current) clearTimeout(bannerTimeoutRef.current);
           bannerTimeoutRef.current = setTimeout(function() { setUpdateBanner(false); }, 60000);
-        }
+        }).catch(function() { /* silent, keep previous store */ });
       }).catch(function() { /* silent retry */ });
     }, 15000);
 
