@@ -81,6 +81,8 @@ function fileUpload(label, value, onSet, onRemove, uiLang) {
 }
 
 export default function PropertiesPanel({ tile, onChange, onDetachReuse, products, viewMode, uiLang, layoutType, pages, allPages, heroBanner, onHeroBannerChange }) {
+  // Top N Eingabe für markenübergreifende BSR Vorschläge auf Product Tiles
+  var [topNInput, setTopNInput] = useState('');
   // ─── HERO BANNER MODE ───
   if (heroBanner) {
     var hPage = heroBanner;
@@ -688,32 +690,71 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
               Data Scrape). Sortiert die existierenden ASINs aufsteigend nach
               subcategoryRank (oder bestsellerRank als Fallback). ASINs ohne
               BSR Daten landen am Ende. */}
-          {(tile.asins || []).length > 1 && products && products.length > 0 && (function() {
-            var withRank = (tile.asins || []).filter(function(a) {
+          {isProductType && products && products.length > 0 && (function() {
+            var withSubRank = (tile.asins || []).filter(function(a) {
               var p = productMap[a];
               return p && (p.subcategoryRank || p.bestsellerRank);
             }).length;
-            if (withRank === 0) return null;
+            var brandWithRank = products.filter(function(p) { return p.bestsellerRank; });
+            // Mindestens eine der beiden Funktionen anbieten
+            if (withSubRank === 0 && brandWithRank.length === 0) return null;
+            var defaultN = Math.max((tile.asins || []).length, 8);
+            var effN = Number(topNInput) > 0 ? Number(topNInput) : defaultN;
             return (
-              <div style={{ marginTop: 6, padding: '6px 8px', background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 4, display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                <span style={{ fontSize: 10, color: '#0369a1' }}>
-                  BSR Daten für {withRank} von {(tile.asins || []).length} ASINs
-                </span>
-                <button
-                  onClick={function() {
-                    var sorted = (tile.asins || []).slice().sort(function(a, b) {
-                      var pa = productMap[a];
-                      var pb = productMap[b];
-                      var ra = (pa && (pa.subcategoryRank || pa.bestsellerRank)) || 1e9;
-                      var rb = (pb && (pb.subcategoryRank || pb.bestsellerRank)) || 1e9;
-                      return ra - rb;
-                    });
-                    u('asins', sorted);
-                  }}
-                  style={{ fontSize: 10, padding: '3px 10px', background: '#0369a1', color: '#fff', border: 'none', borderRadius: 3, cursor: 'pointer', fontWeight: 600 }}
-                  title="Sortiert die ASINs aufsteigend nach Bestseller Rang aus dem Bright Data Scrape. Niedrigster Rang ist Bestseller. ASINs ohne BSR Daten landen am Ende.">
-                  Nach BSR sortieren
-                </button>
+              <div style={{ marginTop: 6, padding: '6px 8px', background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 4 }}>
+                {(tile.asins || []).length > 1 && withSubRank > 0 && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: brandWithRank.length > 0 ? 6 : 0 }}>
+                    <span style={{ fontSize: 10, color: '#0369a1' }}>
+                      BSR Daten für {withSubRank} von {(tile.asins || []).length} ASINs
+                    </span>
+                    <button
+                      onClick={function() {
+                        var sorted = (tile.asins || []).slice().sort(function(a, b) {
+                          var pa = productMap[a];
+                          var pb = productMap[b];
+                          var ra = (pa && (pa.subcategoryRank || pa.bestsellerRank)) || 1e9;
+                          var rb = (pb && (pb.subcategoryRank || pb.bestsellerRank)) || 1e9;
+                          return ra - rb;
+                        });
+                        u('asins', sorted);
+                      }}
+                      style={{ fontSize: 10, padding: '3px 10px', background: '#0369a1', color: '#fff', border: 'none', borderRadius: 3, cursor: 'pointer', fontWeight: 600 }}
+                      title="Sortiert die existierenden ASINs aufsteigend nach Bestseller Rang. ASINs ohne BSR Daten landen am Ende.">
+                      Nach BSR sortieren
+                    </button>
+                  </div>
+                )}
+                {brandWithRank.length > 0 && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+                    <span style={{ fontSize: 10, color: '#0369a1' }}>
+                      Markenübergreifend, Top
+                    </span>
+                    <input
+                      type="number"
+                      min={3}
+                      max={50}
+                      value={topNInput}
+                      placeholder={String(defaultN)}
+                      onChange={function(e) { setTopNInput(e.target.value); }}
+                      style={{ width: 50, fontSize: 11, padding: '2px 6px', border: '1px solid #bae6fd', borderRadius: 3 }}
+                    />
+                    <button
+                      onClick={function() {
+                        if (!confirm('ASIN Liste dieses Tiles ersetzen mit den Top ' + effN + ' Produkten der Marke nach Hauptkategorie BSR? Die aktuelle Liste wird überschrieben.')) return;
+                        var sorted = brandWithRank.slice().sort(function(a, b) {
+                          return a.bestsellerRank - b.bestsellerRank;
+                        }).slice(0, effN);
+                        u('asins', sorted.map(function(p) { return p.asin; }));
+                      }}
+                      style={{ fontSize: 10, padding: '3px 10px', background: '#fff', color: '#0369a1', border: '1px solid #0369a1', borderRadius: 3, cursor: 'pointer', fontWeight: 600 }}
+                      title="Ersetzt die ASIN Liste mit den Top N Produkten der gesamten Marke nach Hauptkategorie BSR. Markenübergreifend, ignoriert Subkategorie. Sinnvoll für Home Bestseller Slots.">
+                      Top {effN} der Marke einsetzen
+                    </button>
+                    <span style={{ fontSize: 10, color: '#64748b' }}>
+                      ({brandWithRank.length} Produkte mit BSR Daten verfügbar)
+                    </span>
+                  </div>
+                )}
               </div>
             );
           })()}
