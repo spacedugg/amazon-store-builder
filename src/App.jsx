@@ -656,6 +656,64 @@ export default function App() {
     return summary;
   };
 
+  // Globale BSR Sortierung. Geht durch alle Tiles mit asins Liste (Product
+  // Grid, Bestseller, Recommended, Deals plus optional Image und Shoppable),
+  // sortiert pro Tile die ASINs aufsteigend nach subcategoryRank (oder
+  // bestsellerRank Fallback). ASINs ohne BSR Daten landen am Ende. Gibt
+  // Statistik zurück: wieviele Tiles sortiert, wieviele ASINs konnten nach
+  // BSR sortiert werden.
+  var sortAllBestsellersByBSR = function() {
+    var products = store.products || [];
+    if (!products.length) {
+      return { tilesUpdated: 0, asinsRanked: 0, totalAsins: 0, error: 'Keine Produktdaten im Store. Erst ASINs scrapen.' };
+    }
+    var productMap = {};
+    products.forEach(function(p) { productMap[p.asin] = p; });
+    var stats = { tilesUpdated: 0, asinsRanked: 0, totalAsins: 0 };
+    setStoreWithUndo(function(s) {
+      return Object.assign({}, s, {
+        pages: s.pages.map(function(pg) {
+          return Object.assign({}, pg, {
+            sections: (pg.sections || []).map(function(sec) {
+              return Object.assign({}, sec, {
+                tiles: (sec.tiles || []).map(function(t) {
+                  // Nur Tiles mit ASIN Listen sortieren. Hotspot ASINs nicht
+                  // anfassen, da Position auf dem Bild bewusst gesetzt ist.
+                  if (!t.asins || t.asins.length < 2) return t;
+                  var typesToSort = ['best_sellers', 'product_grid', 'recommended', 'deals'];
+                  if (typesToSort.indexOf(t.type) < 0) return t;
+                  var withRankCount = 0;
+                  t.asins.forEach(function(a) {
+                    var p = productMap[a];
+                    if (p && (p.subcategoryRank || p.bestsellerRank)) withRankCount++;
+                  });
+                  if (withRankCount === 0) return t;
+                  var sorted = t.asins.slice().sort(function(a, b) {
+                    var pa = productMap[a];
+                    var pb = productMap[b];
+                    var ra = (pa && (pa.subcategoryRank || pa.bestsellerRank)) || 1e9;
+                    var rb = (pb && (pb.subcategoryRank || pb.bestsellerRank)) || 1e9;
+                    return ra - rb;
+                  });
+                  // Nur als geändert zählen wenn die Reihenfolge tatsächlich anders ist
+                  var changed = false;
+                  for (var i = 0; i < sorted.length; i++) {
+                    if (sorted[i] !== t.asins[i]) { changed = true; break; }
+                  }
+                  if (!changed) return t;
+                  stats.tilesUpdated++;
+                  stats.asinsRanked += withRankCount;
+                  stats.totalAsins += t.asins.length;
+                  return Object.assign({}, t, { asins: sorted });
+                }),
+              });
+            }),
+          });
+        }),
+      });
+    });
+    return stats;
+  };
   // Tiles innerhalb einer Section per Drag and Drop tauschen.
   // fromIdx und toIdx sind die Tile Positionen innerhalb der Section.
   var swapTiles = function(sectionId, fromIdx, toIdx) {
@@ -1494,6 +1552,7 @@ export default function App() {
         <AsinOverview
           store={store}
           products={store.products}
+          onSortAllByBsr={sortAllBestsellersByBSR}
           onClose={function() { setShowAsinOverview(false); }}
           onScrape={async function(asinList) {
             setRequestedAsins(asinList);
