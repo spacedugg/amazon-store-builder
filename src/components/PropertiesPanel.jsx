@@ -684,14 +684,49 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
           <textarea value={(tile.asins || []).join('\n')}
             onChange={function(e) { u('asins', e.target.value.split('\n').map(function(s) { return s.trim(); }).filter(Boolean)); }}
             rows={isProductType ? 8 : 4} className="input input-mono" placeholder="B0XXXXXXXXXX, eine ASIN pro Zeile" />
+          {/* Bestseller Rang Sortierung (nutzt die BSR Daten aus dem Bright
+              Data Scrape). Sortiert die existierenden ASINs aufsteigend nach
+              subcategoryRank (oder bestsellerRank als Fallback). ASINs ohne
+              BSR Daten landen am Ende. */}
+          {(tile.asins || []).length > 1 && products && products.length > 0 && (function() {
+            var withRank = (tile.asins || []).filter(function(a) {
+              var p = productMap[a];
+              return p && (p.subcategoryRank || p.bestsellerRank);
+            }).length;
+            if (withRank === 0) return null;
+            return (
+              <div style={{ marginTop: 6, padding: '6px 8px', background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 4, display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                <span style={{ fontSize: 10, color: '#0369a1' }}>
+                  BSR Daten für {withRank} von {(tile.asins || []).length} ASINs
+                </span>
+                <button
+                  onClick={function() {
+                    var sorted = (tile.asins || []).slice().sort(function(a, b) {
+                      var pa = productMap[a];
+                      var pb = productMap[b];
+                      var ra = (pa && (pa.subcategoryRank || pa.bestsellerRank)) || 1e9;
+                      var rb = (pb && (pb.subcategoryRank || pb.bestsellerRank)) || 1e9;
+                      return ra - rb;
+                    });
+                    u('asins', sorted);
+                  }}
+                  style={{ fontSize: 10, padding: '3px 10px', background: '#0369a1', color: '#fff', border: 'none', borderRadius: 3, cursor: 'pointer', fontWeight: 600 }}
+                  title="Sortiert die ASINs aufsteigend nach Bestseller Rang aus dem Bright Data Scrape. Niedrigster Rang ist Bestseller. ASINs ohne BSR Daten landen am Ende.">
+                  Nach BSR sortieren
+                </button>
+              </div>
+            );
+          })()}
           {(tile.asins || []).length > 0 && (
             <div className="props-asin-list">
               {(tile.asins || []).map(function(asin, idx) {
                 var p = productMap[asin];
+                var rank = p && (p.subcategoryRank || p.bestsellerRank);
                 return (
                   <div key={asin + ':' + idx} className="props-asin-item" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                     <code style={{ flex: '0 0 auto' }}>{asin}</code>
                     {p && <span className="props-asin-name" style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{(p.name || '').slice(0, 35)}</span>}
+                    {rank && <span style={{ fontSize: 9, color: '#0369a1', fontWeight: 700, padding: '1px 5px', background: '#e0f2fe', borderRadius: 3, flex: '0 0 auto' }} title="Bestseller Rang aus Bright Data Scrape">#{rank}</span>}
                     <button
                       onClick={function() {
                         var next = (tile.asins || []).slice();
