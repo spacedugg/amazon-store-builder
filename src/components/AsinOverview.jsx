@@ -34,11 +34,12 @@ function gatherStoreAsins(store) {
   return asins;
 }
 
-export default function AsinOverview({ store, products, onClose, onMoveAsin, onScrape }) {
+export default function AsinOverview({ store, products, onClose, onMoveAsin, onScrape, onSortAllByBsr }) {
   var [filter, setFilter] = useState('all');
   var [moveAsin, setMoveAsin] = useState(null);
   var [scraping, setScraping] = useState(false);
   var [scrapeMsg, setScrapeMsg] = useState('');
+  var [sortMsg, setSortMsg] = useState('');
 
   if (!store || !store.pages || store.pages.length === 0) {
     return (
@@ -108,6 +109,36 @@ export default function AsinOverview({ store, products, onClose, onMoveAsin, onS
           {scrapeMsg && (
             <div style={{ marginTop: 6, padding: '6px 8px', background: scrapeMsg.indexOf('Fehler') === 0 ? '#fee2e2' : '#dcfce7', borderRadius: 4, fontSize: 11, color: scrapeMsg.indexOf('Fehler') === 0 ? '#991b1b' : '#166534' }}>
               {scrapeMsg}
+            </div>
+          )}
+          {/* Globale BSR Sortierung über alle Tiles mit ASIN Listen */}
+          {onSortAllByBsr && (
+            <div style={{ marginTop: 8, paddingTop: 8, borderTop: '1px dashed #cbd5e1', display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+              <button
+                className="btn"
+                disabled={withData.length === 0}
+                onClick={function() {
+                  if (!confirm('Alle Bestseller, Product Grid, Recommended und Deals Tiles auf einmal nach Amazon BSR sortieren? ASINs ohne BSR Daten landen am Ende. Reihenfolge ist danach manuell weiter editierbar, läuft über Undo.')) return;
+                  var stats = onSortAllByBsr();
+                  if (stats.error) {
+                    setSortMsg('Fehler: ' + stats.error);
+                  } else if (stats.tilesUpdated === 0) {
+                    setSortMsg('Schon korrekt sortiert oder keine Tiles mit ausreichenden BSR Daten gefunden');
+                  } else {
+                    setSortMsg('Fertig: ' + stats.tilesUpdated + ' Tile(s) sortiert, ' + stats.asinsRanked + ' von ' + stats.totalAsins + ' ASINs hatten BSR Daten');
+                  }
+                }}
+                style={{ fontSize: 12, padding: '6px 14px', background: '#0369a1', color: '#fff', borderColor: '#0369a1' }}>
+                Alle Tiles nach BSR sortieren
+              </button>
+              <span style={{ fontSize: 11, color: '#64748b' }}>
+                Wendet Sortierung auf alle Bestseller, Product Grid, Recommended, Deals Tiles im Store an
+              </span>
+            </div>
+          )}
+          {sortMsg && (
+            <div style={{ marginTop: 6, padding: '6px 8px', background: sortMsg.indexOf('Fehler') === 0 ? '#fee2e2' : '#dbeafe', borderRadius: 4, fontSize: 11, color: sortMsg.indexOf('Fehler') === 0 ? '#991b1b' : '#1e40af' }}>
+              {sortMsg}
             </div>
           )}
         </div>
