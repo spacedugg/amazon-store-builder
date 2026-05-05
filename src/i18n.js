@@ -69,6 +69,10 @@ var translations = {
     en: 'Saved Stores', de: 'Gespeicherte Stores', uk: 'Збережені Stores', ru: 'Сохранённые Stores',
     id: 'Store Tersimpan', ky: 'Сакталган Stores', bg: 'Запазени Stores', es: 'Stores guardados',
   },
+  'pages.currentStore': {
+    en: 'Currently editing this store', de: 'Du bearbeitest gerade diesen Store', uk: 'Зараз редагується цей store', ru: 'Сейчас редактируется этот store',
+    id: 'Sedang mengedit store ini', ky: 'Учурда бул store оңдолууда', bg: 'В момента редактирате този store', es: 'Editando este store ahora',
+  },
   'pages.importStore': {
     en: 'Import Store', de: 'Store importieren', uk: 'Імпортувати Store', ru: 'Импортировать Store',
     id: 'Impor Store', ky: 'Store импорттоо', bg: 'Импортирай Store', es: 'Importar Store',

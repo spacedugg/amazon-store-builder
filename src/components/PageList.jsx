@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { t } from '../i18n';
 
-export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSubPage, onRenamePage, onDeletePage, onReorderPage, onDuplicatePage, onMovePage, savedStores, onLoadSaved, onDeleteSaved, onImportStore, uiLang, showSaved, onToggleSaved }) {
+export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSubPage, onRenamePage, onDeletePage, onReorderPage, onDuplicatePage, onMovePage, savedStores, currentStoreId, onLoadSaved, onDeleteSaved, onImportStore, uiLang, showSaved, onToggleSaved }) {
   var [editingId, setEditingId] = useState(null);
   var [editName, setEditName] = useState('');
   var [showImport, setShowImport] = useState(false);
@@ -173,10 +173,11 @@ export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSub
           {showSaved && (
             <div className="page-list-body">
               {savedStores.map(function(s) {
+                var isCurrent = currentStoreId && s.id === currentStoreId;
                 return (
-                  <div key={s.id} className="saved-store-item">
+                  <div key={s.id} className={'saved-store-item' + (isCurrent ? ' active' : '')} title={isCurrent ? t('pages.currentStore', uiLang) : undefined}>
                     <div className="saved-store-name" onClick={function() { onLoadSaved(s.id); }}>
-                      {s.brandName}
+                      {isCurrent ? '● ' : ''}{s.brandName}
                     </div>
                     <div className="saved-store-meta">
                       {s.pageCount}p &middot; {s.productCount} ASINs
