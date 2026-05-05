@@ -252,25 +252,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
         <div className="props-section">
           <label className="label">{t('props.imageCategory', uiLang)}</label>
           <select className="input" value={tile.imageCategory || ''}
-            onChange={function(e) {
-              var cat = e.target.value;
-              var up = Object.assign({}, tile, { imageCategory: cat });
-              // Bei Wechsel auf benefit oder text_image: Default Höhe 200px
-              // setzen, falls die aktuelle Höhe größer als 200 ist (z.B. weil
-              // das Tile vom Layout mit 600 oder 1200 px Höhe initialisiert
-              // wurde). Damit fängt der Designer mit dem Standard für Text
-              // und Benefit Bilder an. Größere Höhen werden auf 200 gekappt,
-              // bestehende kleinere Höhen werden NICHT vergrößert (User Wille).
-              if (tile.type === 'image' && (cat === 'benefit' || cat === 'text_image')) {
-                var dW = (tile.dimensions && tile.dimensions.w) || 3000;
-                var mW = (tile.mobileDimensions && tile.mobileDimensions.w) || 1680;
-                var dH = (tile.dimensions && tile.dimensions.h) || 0;
-                var mH = (tile.mobileDimensions && tile.mobileDimensions.h) || 0;
-                if (dH > MIN_TEXT_IMAGE_HEIGHT) up.dimensions = { w: dW, h: MIN_TEXT_IMAGE_HEIGHT };
-                if (mH > MIN_TEXT_IMAGE_HEIGHT) up.mobileDimensions = { w: mW, h: MIN_TEXT_IMAGE_HEIGHT };
-              }
-              onChange(up);
-            }}>
+            onChange={function(e) { u('imageCategory', e.target.value); }}>
             <option value="">{t('props.imageCategoryNone', uiLang)}</option>
             {Object.keys(IMAGE_CATEGORIES).map(function(catId) {
               var cat = IMAGE_CATEGORIES[catId];

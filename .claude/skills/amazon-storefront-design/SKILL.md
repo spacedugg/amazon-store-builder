@@ -736,7 +736,8 @@ Tile Dimensionen sind **nicht** auf 3000x600 fixiert. Wähle die Höhe **nach Fu
 
 | Tile Funktion | Empfohlene Desktop Höhe (bei 3000 Breite) | Mobile Höhe (bei 1680 Breite) |
 |---------------|-------------------------------------------:|-------------------------------:|
-| Benefit / Text Image (image + imageCategory benefit oder text_image) einzeilige Headline plus Subheadline | 200 (Default) bis 350 | 200 (Default) bis 350 |
+| Benefit / Text Image (image + imageCategory benefit oder text_image), einzeilige Headline plus Subheadline | 200 (Min) bis offen | 200 (Min) bis offen |
+| Benefit / Text Image mit mehrzeiligem Body oder mehreren Bullets | 300 bis 600 oder mehr je nach Inhalt | 300 bis 600 oder mehr je nach Inhalt |
 | Trenner / Section Header / Kategorie Überschrift | 300 bis 500 | 300 bis 500 |
 | Hero Banner Page Header | 600 bis 900 | 600 bis 900 |
 | Lifestyle Bild mit Komposition | 1200 bis 1500 | 1200 bis 1500 |
@@ -748,10 +749,22 @@ Faustregel: ein schmaler Trenner braucht keine 600 Pixel Höhe, da reicht 350. E
 
 **Mindesthöhen Regeln (vom Tool validiert)**:
 Die folgenden Regeln gelten ausschließlich für `image` Tiles mit `imageCategory` `benefit` oder `text_image`. Andere Image Kategorien (`store_hero`, `product`, `creative`, `lifestyle`) sind in der Praxis immer hoch genug und stoßen nie an diese Limits.
+
+Es handelt sich ausschließlich um **Mindesthöhen**, nie um Maximalhöhen. Nach oben sind die Höhen offen, das Tile kann auf Mobile vertikal sein, auf Desktop quadratisch, je nach Inhalt. Höhen werden vom Tool **niemals nach unten gekappt**.
+
 - Desktop: Höhe muss **mindestens 1/15 der Breite** sein (max Verhältnis 15:1). Bei 3000 Breite also mindestens 200 Pixel Höhe.
 - Mobile: Höhe muss **mindestens 1/10 der Breite** sein (max Verhältnis 10:1). Bei 1680 Breite also mindestens 168 Pixel, durch den 200 Pixel Floor effektiv 200.
 - Zusätzlich harter Floor von **200 Pixel** Höhe auf Desktop und Mobile.
-- Default für Benefit und Text Image Tiles: 200 Pixel Höhe, wenn der User keinen größeren Wert angibt.
+- Wenn die Höhe unterschritten wird, erscheint im Properties Panel ein gelber Warnhinweis und im Validate Store Output eine Warnung.
+
+**Default Höhe 200 Pixel: nur bei einzeiligem Text Inhalt**
+
+Das 200 Pixel Default greift nur, wenn der `textOverlay` Inhalt einzeilig ist:
+- einzeilige `heading` allein, oder
+- einzeilige `heading` plus einzeilige `subheading`, oder
+- nur ein einziger Text Baustein (nur `heading`, nur `subheading`, nur kurzer `body`).
+
+Sobald der Inhalt komplexer wird (mehrzeilige Headline, mehrzeilige Subheading, längerer `body`, mehrere `bullets`), wähle eine entsprechend größere Höhe je nach Lesbarkeit des Briefings, mindestens 250 bis 400 Pixel oder mehr. Der Tool Validator setzt die Höhe **nicht** automatisch zurück, also entscheidet hier der Inhalt.
 
 **Wie du das im Briefing JSON setzt**: Pro Tile das Feld `dimensions` (Desktop) und optional `mobileDimensions` (Mobile) angeben. Beispiele:
 
