@@ -15,12 +15,77 @@ var CATEGORY_BADGE_LABELS = {
   text_image: 'TEXT IMG',
 };
 
+// Wraps a single line to roughly fit into maxChars by breaking at the last
+// whitespace before the limit. Long unbroken tokens are hard wrapped.
+function wrapLine(line, maxChars) {
+  if (!line) return [''];
+  if (line.length <= maxChars) return [line];
+  var words = line.split(' ');
+  var out = [];
+  var cur = '';
+  for (var i = 0; i < words.length; i++) {
+    var word = words[i];
+    if (word.length > maxChars) {
+      if (cur) { out.push(cur); cur = ''; }
+      while (word.length > maxChars) {
+        out.push(word.slice(0, maxChars));
+        word = word.slice(maxChars);
+      }
+      cur = word;
+      continue;
+    }
+    var candidate = cur ? cur + ' ' + word : word;
+    if (candidate.length > maxChars) {
+      out.push(cur);
+      cur = word;
+    } else {
+      cur = candidate;
+    }
+  }
+  if (cur) out.push(cur);
+  return out;
+}
+
+// Splits text on hard line breaks first, then soft wraps each line. Truncates
+// the result to maxLines and appends an ellipsis on the last line if more
+// content was clipped.
+function layoutLines(text, maxChars, maxLines) {
+  if (!text) return [];
+  var hard = String(text).split(/\r?\n/);
+  var lines = [];
+  for (var i = 0; i < hard.length && lines.length < maxLines; i++) {
+    var wrapped = wrapLine(hard[i], maxChars);
+    for (var j = 0; j < wrapped.length && lines.length < maxLines; j++) {
+      lines.push(wrapped[j]);
+    }
+  }
+  // Indicate truncation only if there is still content we did not render
+  var totalWrapped = 0;
+  for (var k = 0; k < hard.length; k++) {
+    totalWrapped += wrapLine(hard[k], maxChars).length;
+  }
+  if (totalWrapped > maxLines && lines.length > 0) {
+    var last = lines[lines.length - 1];
+    if (last.length > maxChars - 1) last = last.slice(0, maxChars - 1);
+    lines[lines.length - 1] = last + '…';
+  }
+  return lines;
+}
+
+// Strippt Legacy **WORT** Marker, damit alte Stores ohne literale Sternchen
+// angezeigt werden. Headlines haben keine Inline Hervorhebung mehr.
+function stripBoldMarkers(text) {
+  return String(text == null ? '' : text).replace(/\*\*([^*]+)\*\*/g, '$1');
+}
+
 export default function Wireframe({ tile, width, viewMode, bgColor }) {
   var dims = (viewMode === 'mobile' ? tile.mobileDimensions : tile.dimensions) || tile.dimensions || { w: 3000, h: 1200 };
   var w = width || 280;
   var ht = Math.max(30, Math.round(w / (dims.w / dims.h)));
   var ov = (tile.textOverlay && typeof tile.textOverlay === 'object') ? tile.textOverlay : {};
-  var text = (ov.heading || '').replace(/\*\*([^*]+)\*\*/g, '$1') || ov.subheading || '';
+  var rawHeading = stripBoldMarkers(ov.heading || '');
+  var rawSubheading = stripBoldMarkers(ov.subheading || '');
+  var rawBody = stripBoldMarkers(ov.body || '');
   var cta = ov.cta || '';
   var isShoppable = tile.type === 'shoppable_image';
   var isImageText = tile.type === 'image_text';
@@ -44,17 +109,114 @@ export default function Wireframe({ tile, width, viewMode, bgColor }) {
     }
   }
 
+  // Text Layout: alle Texte stapeln (Heading mehrzeilig, Subheading,
+  // Body, Bullets, CTA). Höhen pro Block werden dynamisch reserviert.
+  var headingFontSize = Math.min(11, w / 24);
+  var subFontSize = Math.max(6.5, headingFontSize * 0.72);
+  var bodyFontSize = Math.max(5.5, headingFontSize * 0.6);
+  var bulletFontSize = bodyFontSize;
+  var maxCharsHeading = Math.max(14, Math.floor(w / (headingFontSize * 0.55)));
+  var maxCharsSub = Math.max(18, Math.floor(w / (subFontSize * 0.5)));
+  var maxCharsBody = Math.max(22, Math.floor(w / (bodyFontSize * 0.48)));
+
+  // Vertikales Budget: oberhalb des CTA Bereichs (ht * 0.55) bzw bis zur
+  // Badge Zone (ht - 14). Wenn kein CTA vorhanden, das ganze Tile bis
+  // Badge Zone nutzen.
+  var bottomReserve = (cta ? ht * 0.42 : 14);
+  var available = Math.max(20, ht - 4 - bottomReserve);
+  var headingLineH = headingFontSize * 1.15;
+  var subLineH = subFontSize * 1.2;
+  var bodyLineH = bodyFontSize * 1.25;
+  var bulletLineH = bulletFontSize * 1.25;
+
+  // Reserviere maximal so viele Zeilen wie reinpassen, Heading hat Vorrang
+  var maxHeadingLines = Math.max(1, Math.min(4, Math.floor(available / headingLineH)));
+  var headingLines = layoutLines(rawHeading, maxCharsHeading, maxHeadingLines);
+  var usedH = headingLines.length * headingLineH;
+
+  var subLines = [];
+  if (rawSubheading) {
+    var roomSub = Math.max(0, available - usedH);
+    var maxSubLines = Math.max(0, Math.min(3, Math.floor(roomSub / subLineH)));
+    if (maxSubLines > 0) subLines = layoutLines(rawSubheading, maxCharsSub, maxSubLines);
+    usedH += subLines.length * subLineH;
+  }
+
+  var bodyLines = [];
+  if (rawBody) {
+    var roomBody = Math.max(0, available - usedH);
+    var maxBodyLines = Math.max(0, Math.min(3, Math.floor(roomBody / bodyLineH)));
+    if (maxBodyLines > 0) bodyLines = layoutLines(rawBody, maxCharsBody, maxBodyLines);
+    usedH += bodyLines.length * bodyLineH;
+  }
+
+  var bulletLines = [];
+  var bullets = (ov.bullets || []).map(function(b) { return stripBoldMarkers(b); }).filter(function(b) { return b && String(b).trim(); });
+  if (bullets.length > 0) {
+    var roomBullets = Math.max(0, available - usedH);
+    var maxBulletLines = Math.max(0, Math.min(bullets.length, Math.floor(roomBullets / bulletLineH)));
+    for (var bi = 0; bi < maxBulletLines; bi++) {
+      var bLine = layoutLines(bullets[bi], maxCharsBody - 2, 1)[0] || '';
+      bulletLines.push(bLine);
+    }
+    usedH += bulletLines.length * bulletLineH;
+  }
+
+  var totalTextH = usedH;
+  var startY = Math.max(headingFontSize + 2, (ht - bottomReserve - totalTextH) / 2 + headingFontSize);
+  var leftX = w * 0.06;
+  var centerX = w * 0.5;
+  var rightX = w * 0.94;
+  var anchor = tile.textAlign === 'right' ? 'end' : tile.textAlign === 'center' ? 'middle' : 'start';
+  var anchorX = tile.textAlign === 'right' ? rightX : tile.textAlign === 'center' ? centerX : leftX;
+
   return (
     <svg viewBox={'0 0 ' + w + ' ' + ht} style={{ width: '100%', display: 'block' }}>
       <rect width={w} height={ht} fill={bgFill} rx="2" />
 
-      {/* Text overlay */}
-      {text && (
-        <text x={tile.textAlign === 'right' ? w * 0.94 : tile.textAlign === 'center' ? w * 0.5 : w * 0.06}
-          y={ht * 0.42} fontSize={Math.min(11, w / 24)}
-          fontWeight="700" fill={textFill} fontFamily="system-ui, sans-serif" opacity=".8"
-          textAnchor={tile.textAlign === 'right' ? 'end' : tile.textAlign === 'center' ? 'middle' : 'start'}>
-          {text.length > 45 ? text.slice(0, 42) + '...' : text}
+      {/* Heading, mehrzeilig */}
+      {headingLines.length > 0 && (
+        <text x={anchorX} y={startY} fontSize={headingFontSize}
+          fontWeight="700" fill={textFill} fontFamily="system-ui, sans-serif" opacity=".85"
+          textAnchor={anchor}>
+          {headingLines.map(function(line, li) {
+            return (
+              <tspan key={'h' + li} x={anchorX} dy={li === 0 ? 0 : headingLineH}>{line}</tspan>
+            );
+          })}
+        </text>
+      )}
+
+      {/* Subheading */}
+      {subLines.length > 0 && (
+        <text x={anchorX} y={startY + headingLines.length * headingLineH + (subFontSize * 0.2)}
+          fontSize={subFontSize} fontWeight="500" fill={textFill}
+          fontFamily="system-ui, sans-serif" opacity=".75" textAnchor={anchor}>
+          {subLines.map(function(line, li) {
+            return <tspan key={'s' + li} x={anchorX} dy={li === 0 ? 0 : subLineH}>{line}</tspan>;
+          })}
+        </text>
+      )}
+
+      {/* Body */}
+      {bodyLines.length > 0 && (
+        <text x={anchorX} y={startY + headingLines.length * headingLineH + subLines.length * subLineH + (subLines.length > 0 ? subFontSize * 0.3 : bodyFontSize * 0.4)}
+          fontSize={bodyFontSize} fill={textFill}
+          fontFamily="system-ui, sans-serif" opacity=".7" textAnchor={anchor}>
+          {bodyLines.map(function(line, li) {
+            return <tspan key={'b' + li} x={anchorX} dy={li === 0 ? 0 : bodyLineH}>{line}</tspan>;
+          })}
+        </text>
+      )}
+
+      {/* Bullets */}
+      {bulletLines.length > 0 && (
+        <text x={anchorX} y={startY + headingLines.length * headingLineH + subLines.length * subLineH + bodyLines.length * bodyLineH + bulletFontSize * 0.6}
+          fontSize={bulletFontSize} fill={textFill}
+          fontFamily="system-ui, sans-serif" opacity=".75" textAnchor={anchor}>
+          {bulletLines.map(function(line, li) {
+            return <tspan key={'bu' + li} x={anchorX} dy={li === 0 ? 0 : bulletLineH}>{'• ' + line}</tspan>;
+          })}
         </text>
       )}
 

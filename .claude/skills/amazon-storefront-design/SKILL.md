@@ -464,7 +464,7 @@ Das Briefing JSON hat diese Struktur. Das Tool ergänzt fehlende IDs und Default
 | Feld | Typ | Pflicht | Bemerkung |
 |------|-----|---------|-----------|
 | `type` | string | ja | siehe Tile Types |
-| `textOverlay.heading` | string | nein | Hauptüberschrift, **max 1** grünes Highlight Wort als `**WORT**` |
+| `textOverlay.heading` | string | nein | Hauptüberschrift, kein Markup, Zeilenumbrüche per `\n` erlaubt |
 | `textOverlay.subheading` | string | nein | Unterüberschrift, kein Markup |
 | `textOverlay.body` | string | nein | Fließtext, **max 350 Zeichen** |
 | `textOverlay.bullets` | array | nein | Liste Kurzclaims, je 2 bis 4 Wörter |
@@ -732,11 +732,13 @@ Lifestyle Tiles sind klickbar (linkAsin), Product Grid darunter zeigt die volle 
 
 ### Variable Tile Höhen je nach Funktion
 
-Tile Dimensionen sind **nicht** auf 3000x600 fixiert. Layout `1` (Full Width) erlaubt Höhen zwischen 200 (Desktop max 15:1 Verhältnis) und etwa 2400. Wähle die Höhe **nach Funktion des Tiles**:
+Tile Dimensionen sind **nicht** auf 3000x600 fixiert. Wähle die Höhe **nach Funktion des Tiles**:
 
 | Tile Funktion | Empfohlene Desktop Höhe (bei 3000 Breite) | Mobile Höhe (bei 1680 Breite) |
 |---------------|-------------------------------------------:|-------------------------------:|
-| Trenner / Section Header / Kategorie Überschrift | 300 bis 500 | 336 (5:1 Min) bis 500 |
+| Benefit / Text Image (image + imageCategory benefit oder text_image), einzeilige Headline plus Subheadline | 200 (Min) bis offen | 200 (Min) bis offen |
+| Benefit / Text Image mit mehrzeiligem Body oder mehreren Bullets | 300 bis 600 oder mehr je nach Inhalt | 300 bis 600 oder mehr je nach Inhalt |
+| Trenner / Section Header / Kategorie Überschrift | 300 bis 500 | 300 bis 500 |
 | Hero Banner Page Header | 600 bis 900 | 600 bis 900 |
 | Lifestyle Bild mit Komposition | 1200 bis 1500 | 1200 bis 1500 |
 | Shoppable Image mit 3 bis 5 Produkten | 1500 bis 1800 | 1500 bis 1800 |
@@ -745,7 +747,24 @@ Tile Dimensionen sind **nicht** auf 3000x600 fixiert. Layout `1` (Full Width) er
 
 Faustregel: ein schmaler Trenner braucht keine 600 Pixel Höhe, da reicht 350. Ein Shoppable Bild mit 5 Produkten braucht mehr als 600 Pixel sonst werden die Hotspots zu eng. Pro Tile bewusst die Höhe wählen, nicht stur 3000x600 als Default.
 
-Mindestverhältnis: Desktop max 15:1 (Breite zu Höhe), Mobile max 5:1.
+**Mindesthöhen Regeln (vom Tool validiert)**:
+Die folgenden Regeln gelten ausschließlich für `image` Tiles mit `imageCategory` `benefit` oder `text_image`. Andere Image Kategorien (`store_hero`, `product`, `creative`, `lifestyle`) sind in der Praxis immer hoch genug und stoßen nie an diese Limits.
+
+Es handelt sich ausschließlich um **Mindesthöhen**, nie um Maximalhöhen. Nach oben sind die Höhen offen, das Tile kann auf Mobile vertikal sein, auf Desktop quadratisch, je nach Inhalt. Höhen werden vom Tool **niemals nach unten gekappt**.
+
+- Desktop: Höhe muss **mindestens 1/15 der Breite** sein (max Verhältnis 15:1). Bei 3000 Breite also mindestens 200 Pixel Höhe.
+- Mobile: Höhe muss **mindestens 1/10 der Breite** sein (max Verhältnis 10:1). Bei 1680 Breite also mindestens 168 Pixel, durch den 200 Pixel Floor effektiv 200.
+- Zusätzlich harter Floor von **200 Pixel** Höhe auf Desktop und Mobile.
+- Wenn die Höhe unterschritten wird, erscheint im Properties Panel ein gelber Warnhinweis und im Validate Store Output eine Warnung.
+
+**Default Höhe 200 Pixel: nur bei einzeiligem Text Inhalt**
+
+Das 200 Pixel Default greift nur, wenn der `textOverlay` Inhalt einzeilig ist:
+- einzeilige `heading` allein, oder
+- einzeilige `heading` plus einzeilige `subheading`, oder
+- nur ein einziger Text Baustein (nur `heading`, nur `subheading`, nur kurzer `body`).
+
+Sobald der Inhalt komplexer wird (mehrzeilige Headline, mehrzeilige Subheading, längerer `body`, mehrere `bullets`), wähle eine entsprechend größere Höhe je nach Lesbarkeit des Briefings, mindestens 250 bis 400 Pixel oder mehr. Der Tool Validator setzt die Höhe **nicht** automatisch zurück, also entscheidet hier der Inhalt.
 
 **Wie du das im Briefing JSON setzt**: Pro Tile das Feld `dimensions` (Desktop) und optional `mobileDimensions` (Mobile) angeben. Beispiele:
 

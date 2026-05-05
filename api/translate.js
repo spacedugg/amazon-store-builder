@@ -53,7 +53,6 @@ async function translateBatch(apiKey, texts, targetLang) {
   var langName = targetLang === 'en' ? 'English' : targetLang;
   var system = 'You translate short marketing and design briefing texts into ' + langName + '. Rules:\n' +
     '- Only translate. Do not add commentary, do not summarize, do not change meaning.\n' +
-    '- Preserve markdown bold markers like **word** exactly.\n' +
     '- Preserve product names, brand names, ASINs (B0...), URLs, hex color codes, and inline numbers as is.\n' +
     '- If the source is already in ' + langName + ', return it unchanged.\n' +
     '- Keep the natural register of the source (casual stays casual, professional stays professional).\n' +

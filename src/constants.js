@@ -155,6 +155,60 @@ export function emptyTile() {
   };
 }
 
+// ─── DIMENSION RULES FÜR BILD TILES ───
+// Die Mindesthöhen Regeln gelten für Tiles vom Typ `image` mit den
+// imageCategory Werten `benefit` und `text_image`. Andere Image Kategorien
+// (store_hero, product, creative, lifestyle) sind in der Praxis immer
+// hoch genug und stoßen nie an diese Limits.
+//   Desktop: Höhe muss mindestens 1/15 der Breite betragen (max Verhältnis 15:1)
+//   Mobile:  Höhe muss mindestens 1/10 der Breite betragen (max Verhältnis 10:1)
+// Zusätzlich gilt eine harte Mindesthöhe von 200 Pixeln, damit Headlines
+// plus Subheadlines lesbar gerendert werden.
+export var MIN_IMAGE_RATIO_DESKTOP = 15;
+export var MIN_IMAGE_RATIO_MOBILE = 10;
+export var MIN_TEXT_IMAGE_HEIGHT = 200;
+// Image Kategorien für die die Mindesthöhen gelten.
+export var DIM_RULE_CATEGORIES = ['benefit', 'text_image'];
+
+// True wenn das Tile unter die Mindesthöhen Regeln fällt.
+export function tileHasDimensionRule(tile) {
+  if (!tile || tile.type !== 'image') return false;
+  return DIM_RULE_CATEGORIES.indexOf(tile.imageCategory) >= 0;
+}
+
+// Liefert die kleinste erlaubte Höhe für eine gegebene Breite und View Mode
+// für ein Tile mit Mindesthöhen Regel.
+export function getMinImageHeight(width, viewMode) {
+  var w = Number(width) || 0;
+  if (w <= 0) return 0;
+  var ratio = viewMode === 'mobile' ? MIN_IMAGE_RATIO_MOBILE : MIN_IMAGE_RATIO_DESKTOP;
+  var ratioMin = Math.ceil(w / ratio);
+  return Math.max(ratioMin, MIN_TEXT_IMAGE_HEIGHT);
+}
+
+// Prüft die Maße eines einzelnen Tiles und gibt Warnungen zurück. Gibt ein
+// leeres Array zurück wenn das Tile nicht unter die Regel fällt oder die
+// Maße in Ordnung sind.
+export function validateTileDimensions(tile) {
+  var msgs = [];
+  if (!tileHasDimensionRule(tile)) return msgs;
+  var d = tile.dimensions || {};
+  var m = tile.mobileDimensions || {};
+  if (d.w && d.h) {
+    var minD = getMinImageHeight(d.w, 'desktop');
+    if (d.h < minD) {
+      msgs.push('Desktop Höhe ' + d.h + 'px ist zu flach für Breite ' + d.w + 'px. Mindesthöhe ' + minD + 'px (1/' + MIN_IMAGE_RATIO_DESKTOP + ' der Breite, mindestens ' + MIN_TEXT_IMAGE_HEIGHT + 'px für Benefit und Text Image Tiles).');
+    }
+  }
+  if (m.w && m.h) {
+    var minM = getMinImageHeight(m.w, 'mobile');
+    if (m.h < minM) {
+      msgs.push('Mobile Höhe ' + m.h + 'px ist zu flach für Breite ' + m.w + 'px. Mindesthöhe ' + minM + 'px (1/' + MIN_IMAGE_RATIO_MOBILE + ' der Breite, mindestens ' + MIN_TEXT_IMAGE_HEIGHT + 'px für Benefit und Text Image Tiles).');
+    }
+  }
+  return msgs;
+}
+
 export var DIMENSION_PRESETS = {
   desktop: { hero: { w: 3000, h: 600 }, category: { w: 3000, h: 1200 }, lifestyle: { w: 3000, h: 1500 }, video: { w: 3000, h: 1688 } },
   mobile: { hero: { w: 1680, h: 900 }, category: { w: 1680, h: 1200 }, lifestyle: { w: 1680, h: 1500 }, video: { w: 1680, h: 945 } },
@@ -169,7 +223,7 @@ export var AMAZON_IMG_TYPES = {
   LARGE_SQUARE: { w: 1500, h: 1500, label: 'Large Square' },
   SMALL_SQUARE: { w: 750, h: 750, label: 'Small Square' },
   WIDE: { w: 1500, h: 750, label: 'Wide' },
-  FULL_WIDTH: { w: 3000, h: 600, label: 'Full Width', maxRatio: 15, mobileW: 1680, mobileMaxRatio: 5 },
+  FULL_WIDTH: { w: 3000, h: 600, label: 'Full Width', maxRatio: 15, mobileW: 1680, mobileMaxRatio: 10 },
   // VH-specific (Variable Height layouts)
   VH_WIDE: { w: 3000, h: 1500, label: 'VH Wide' },
   VH_SQUARE: { w: 1500, h: 1500, label: 'VH Square' },
@@ -203,14 +257,14 @@ export var LAYOUT_TILE_DIMS = {
 
 // Helper: passende Mobile Dimensionen für eine Layout / Desktop Größe ableiten.
 // Standard Layouts: Mobile = Desktop. VH: fix 1500x750. Full Width: 1680
-// Pixel breit, Höhe folgt Desktop Höhe (mit 5:1 Mindestverhältnis Schutz).
+// Pixel breit, Höhe folgt Desktop Höhe (mit 1/MIN_IMAGE_RATIO_MOBILE Floor).
 export function deriveMobileDims(layoutId, desktopW, desktopH) {
   var resolved = resolveLayoutId(layoutId);
   var layout = findLayout(resolved);
   if (layout && layout.type === 'vh') {
     return { w: 1500, h: 750 };
   } else if (layout && layout.type === 'fullwidth') {
-    return { w: 1680, h: Math.max(Number(desktopH) || 600, Math.ceil(1680 / 5)) };
+    return { w: 1680, h: Math.max(Number(desktopH) || 600, Math.ceil(1680 / MIN_IMAGE_RATIO_MOBILE)) };
   } else {
     return { w: Number(desktopW) || 1500, h: Number(desktopH) || 1500 };
   }
@@ -777,15 +831,12 @@ export function validateStore(store) {
         if (ov.body && ov.body.length > 350) {
           warnings.push({ level: 'warning', message: loc + ': body has ' + ov.body.length + ' chars, max 350' });
         }
-        if (ov.heading) {
-          var greenMatches = (ov.heading.match(/\*\*[^*]+\*\*/g) || []);
-          if (greenMatches.length > 1) {
-            warnings.push({ level: 'warning', message: loc + ': heading has ' + greenMatches.length + ' green highlight markers, max 1 allowed' });
-          }
-        }
         if (t.type === 'shoppable_image' && t.hotspots && t.hotspots.length > 5) {
           warnings.push({ level: 'error', message: loc + ': shoppable_image has ' + t.hotspots.length + ' hotspots, max 5 allowed' });
         }
+        validateTileDimensions(t).forEach(function(msg) {
+          warnings.push({ level: 'warning', message: loc + ': ' + msg });
+        });
       });
     });
   });

@@ -2,14 +2,22 @@ import { PRODUCT_TILE_TYPES, TILE_TYPE_LABELS } from '../constants';
 import { t } from '../i18n';
 import Wireframe from './Wireframe';
 
-function renderHeadingParts(heading) {
-  if (!heading) return null;
-  var parts = heading.split(/(\*\*[^*]+\*\*)/g);
-  return parts.map(function(p, i) {
-    if (p.length > 4 && p.slice(0, 2) === '**' && p.slice(-2) === '**') {
-      return <span key={i} style={{ color: '#93bd26' }}>{p.slice(2, -2)}</span>;
-    }
-    return <span key={i}>{p}</span>;
+// Entfernt eventuell noch in alten Stores vorhandene **WORT** Marker, ohne
+// sie zu rendern. Headlines werden ohne jede Inline Formatierung angezeigt.
+function stripBoldMarkers(text) {
+  return String(text == null ? '' : text).replace(/\*\*([^*]+)\*\*/g, '$1');
+}
+
+function renderMultilineText(text) {
+  if (!text) return null;
+  var lines = stripBoldMarkers(text).split(/\r?\n/);
+  return lines.map(function(line, li) {
+    return (
+      <span key={li}>
+        {line}
+        {li < lines.length - 1 && <br />}
+      </span>
+    );
   });
 }
 
@@ -23,9 +31,9 @@ function TextOverlayDisplay({ overlay, compact, textAlign }) {
   if (!hasOverlayContent(ov)) return null;
   return (
     <div className="tile-overlay" style={{ textAlign: textAlign || 'left' }}>
-      {ov.heading && <div className="tile-overlay-heading">{renderHeadingParts(ov.heading)}</div>}
-      {ov.subheading && <div className="tile-overlay-subheading">{ov.subheading}</div>}
-      {!compact && ov.body && <div className="tile-overlay-body">{ov.body}</div>}
+      {ov.heading && <div className="tile-overlay-heading">{renderMultilineText(ov.heading)}</div>}
+      {ov.subheading && <div className="tile-overlay-subheading">{renderMultilineText(ov.subheading)}</div>}
+      {!compact && ov.body && <div className="tile-overlay-body">{renderMultilineText(ov.body)}</div>}
       {!compact && ov.bullets && ov.bullets.length > 0 && (
         <ul className="tile-overlay-bullets">
           {ov.bullets.map(function(b, i) { return <li key={i}>{b}</li>; })}

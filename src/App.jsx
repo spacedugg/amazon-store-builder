@@ -216,6 +216,39 @@ export default function App() {
   var headerBannerInputRef = useRef(null);
   var folderInputRef = useRef(null);
 
+  // Synchroner Spiegel von storeId und shareToken. Wird sofort nach jedem
+  // erfolgreichen Save aktualisiert, damit parallele oder kurz aufeinander
+  // folgende Saves nie mit einem stale null storeId rausgehen und
+  // ungewollt einen zweiten Datenbankeintrag anlegen.
+  var storeIdRef = useRef(null);
+  var shareTokenRef = useRef(null);
+  useEffect(function() { storeIdRef.current = storeId; }, [storeId]);
+  useEffect(function() { shareTokenRef.current = shareToken; }, [shareToken]);
+
+  // Serialisiert alle Save Aufrufe (Autosave + manuell + Export). Jeder neue
+  // Save wartet auf den vorherigen, damit die zurückgegebene id für den
+  // nächsten Save verfügbar ist und nicht mehrere Inserts parallel laufen.
+  var saveQueueRef = useRef(Promise.resolve());
+  var persistStore = useCallback(function(targetStore, opts) {
+    var useShareToken = opts && opts.includeShareToken;
+    var p = saveQueueRef.current.catch(function() {}).then(function() {
+      var tokenArg = useShareToken ? shareTokenRef.current : null;
+      return saveStore(targetStore, storeIdRef.current, tokenArg);
+    }).then(function(result) {
+      if (result && result.id) {
+        storeIdRef.current = result.id;
+        setStoreId(function(prev) { return prev || result.id; });
+      }
+      if (result && result.shareToken) {
+        shareTokenRef.current = result.shareToken;
+        setShareToken(function(prev) { return prev || result.shareToken; });
+      }
+      return result;
+    });
+    saveQueueRef.current = p.catch(function() {});
+    return p;
+  }, []);
+
   // ─── UNDO HISTORY ───
   var undoStackRef = useRef([]);
   var redoStackRef = useRef([]);
@@ -322,8 +355,7 @@ export default function App() {
       if (serialized === dbAutoSaveLastSerializedRef.current) return;
       dbAutoSaveLastSerializedRef.current = serialized;
       setAutoSaveStatus('saving');
-      saveStore(store, storeId, null).then(function(result) {
-        if (result && result.id && !storeId) setStoreId(result.id);
+      persistStore(store, { includeShareToken: false }).then(function() {
         setAutoSaveStatus('saved');
         setTimeout(function() { setAutoSaveStatus(function(s) { return s === 'saved' ? 'idle' : s; }); }, 2000);
       }).catch(function(err) {
@@ -334,7 +366,7 @@ export default function App() {
     return function() {
       if (dbAutoSaveTimerRef.current) clearTimeout(dbAutoSaveTimerRef.current);
     };
-  }, [store, shareToken, storeId]);
+  }, [store, shareToken, persistStore]);
 
   var page = store.pages.find(function(p) { return p.id === curPage; }) || store.pages[0] || null;
 
@@ -971,12 +1003,10 @@ export default function App() {
   var handleSave = async function() {
     if (!store.pages.length) return;
     try {
-      var result = await saveStore(store, storeId, shareToken);
-      if (result.id) setStoreId(result.id);
-      if (result.shareToken) setShareToken(result.shareToken);
+      var result = await persistStore(store, { includeShareToken: true });
       var stores = await loadSavedStores();
       setSavedStores(stores);
-      if (result.offline) {
+      if (result && result.offline) {
         alert('Server nicht erreichbar, Store nur lokal im Browser gesichert (' + (store.brandName || 'Untitled') + '). Bitte später erneut speichern, sobald die Verbindung wieder steht.');
       } else {
         alert('Store gespeichert. (' + (store.brandName || 'Untitled') + ')');
@@ -1308,14 +1338,13 @@ export default function App() {
       // Save first (or re-save) to ensure we have a share token
       var result;
       try {
-        result = await saveStore(store, storeId, shareToken);
+        result = await persistStore(store, { includeShareToken: true });
       } catch (saveErr) {
         console.error('Export Save fehlgeschlagen:', saveErr);
         alert('Export fehlgeschlagen.\n\n' + saveErr.message);
         return;
       }
       if (result && result.shareToken) {
-        if (result.id) setStoreId(result.id);
         setShareToken(result.shareToken);
         var shareUrl = window.location.origin + '/share/' + result.shareToken;
         // Copy to clipboard
@@ -1427,6 +1456,7 @@ export default function App() {
           onDuplicatePage={duplicatePage}
           onMovePage={movePageStructural}
           savedStores={savedStores}
+          currentStoreId={storeId}
           onLoadSaved={handleLoadSaved}
           onDeleteSaved={handleDeleteSaved}
           onImportStore={handleImportStore}
