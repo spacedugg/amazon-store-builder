@@ -104,8 +104,9 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
           </div>
           <div className="props-section">
             <label className="label">Text Overlay</label>
-            <input value={hPage.heroBannerTextOverlay || ''} onChange={function(e) { onHeroBannerChange('heroBannerTextOverlay', e.target.value); }}
-              placeholder="Slogan or claim for the hero banner" className="input" />
+            <textarea value={hPage.heroBannerTextOverlay || ''} onChange={function(e) { onHeroBannerChange('heroBannerTextOverlay', e.target.value); }}
+              placeholder="Slogan or claim, press Enter for line break" rows={2} className="input"
+              style={{ resize: 'vertical', lineHeight: 1.3 }} />
           </div>
           <div className="props-section">
             <label className="label">Banner Image</label>
@@ -361,17 +362,19 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   <div>
                     <div style={{ fontSize: 9, fontWeight: 700, color: '#1d4ed8', textTransform: 'uppercase', marginBottom: 2 }}>Heading</div>
-                    <input value={ov.heading || ''}
+                    <textarea value={ov.heading || ''}
                       onChange={function(e) { uOv('heading', e.target.value); }}
-                      placeholder="Hauptüberschrift, ein Wort als **WORT** für grünes Highlight"
-                      style={{ width: '100%', padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 12, fontWeight: 700, fontFamily: 'inherit', boxSizing: 'border-box' }} />
+                      placeholder="Hauptüberschrift, Enter für Zeilenumbruch, ein Wort als **WORT** für grünes Highlight"
+                      rows={2}
+                      style={{ width: '100%', padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 12, fontWeight: 700, fontFamily: 'inherit', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.25 }} />
                   </div>
                   <div>
                     <div style={{ fontSize: 9, fontWeight: 700, color: '#4338ca', textTransform: 'uppercase', marginBottom: 2 }}>Subheading</div>
-                    <input value={ov.subheading || ''}
+                    <textarea value={ov.subheading || ''}
                       onChange={function(e) { uOv('subheading', e.target.value); }}
-                      placeholder="Unterüberschrift"
-                      style={{ width: '100%', padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 11, fontFamily: 'inherit', boxSizing: 'border-box' }} />
+                      placeholder="Unterüberschrift, Enter für Zeilenumbruch"
+                      rows={2}
+                      style={{ width: '100%', padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 11, fontFamily: 'inherit', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.3 }} />
                   </div>
                   <div>
                     <div style={{ fontSize: 9, fontWeight: 700, color: '#475569', textTransform: 'uppercase', marginBottom: 2 }}>
@@ -804,10 +807,11 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
             var bodyLen = (ov.body || '').length;
             return (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                <input value={ov.heading || ''}
+                <textarea value={ov.heading || ''}
                   onChange={function(e) { uOv('heading', e.target.value); }}
-                  placeholder="Section Heading"
-                  style={{ width: '100%', padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 12, fontWeight: 700, fontFamily: 'inherit', boxSizing: 'border-box' }} />
+                  placeholder="Section Heading, Enter für Zeilenumbruch"
+                  rows={2}
+                  style={{ width: '100%', padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 12, fontWeight: 700, fontFamily: 'inherit', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.25 }} />
                 <textarea value={ov.body || ''}
                   onChange={function(e) { uOv('body', e.target.value); }}
                   placeholder="Optionaler Body Text"

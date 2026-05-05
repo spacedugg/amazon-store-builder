@@ -8,6 +8,18 @@ import { t } from './i18n';
 
 // ─── HELPERS ───
 
+// Wandelt einen mehrzeiligen String in TextRuns mit echten DOCX Line Breaks.
+// docx TextRun rendert \n nicht selbst, also muss pro Zeile ein neuer Run mit
+// break: 1 für alle außer dem ersten erzeugt werden.
+function multilineRuns(text, opts) {
+  var lines = String(text == null ? '' : text).split(/\r?\n/);
+  return lines.map(function(line, i) {
+    var runOpts = Object.assign({}, opts || {}, { text: line });
+    if (i > 0) runOpts.break = 1;
+    return new TextRun(runOpts);
+  });
+}
+
 function heading(text, level) {
   return new Paragraph({ heading: level || HeadingLevel.HEADING_1, spacing: { before: 300, after: 120 },
     children: [new TextRun({ text: text, bold: true })] });
@@ -379,21 +391,18 @@ function tileDescription(tile, tileIndex, productMap, lang, duplicateNote) {
       parts.push(boldPara(t('brief.textOverlay', lang) + alignHint + ': ', ''));
       if (ov.heading) {
         parts.push(new Paragraph({ children: [
-          new TextRun({ text: '  [HEADING] ', size: 18, bold: true, color: '1d4ed8' }),
-          new TextRun({ text: ov.heading, size: 22, bold: true })
-        ] }));
+          new TextRun({ text: '  [HEADING] ', size: 18, bold: true, color: '1d4ed8' })
+        ].concat(multilineRuns(ov.heading, { size: 22, bold: true })) }));
       }
       if (ov.subheading) {
         parts.push(new Paragraph({ children: [
-          new TextRun({ text: '  [SUBHEADING] ', size: 18, bold: true, color: '4338ca' }),
-          new TextRun({ text: ov.subheading, size: 20 })
-        ] }));
+          new TextRun({ text: '  [SUBHEADING] ', size: 18, bold: true, color: '4338ca' })
+        ].concat(multilineRuns(ov.subheading, { size: 20 })) }));
       }
       if (ov.body) {
         parts.push(new Paragraph({ children: [
-          new TextRun({ text: '  [BODY] ', size: 18, bold: true, color: '475569' }),
-          new TextRun({ text: ov.body, size: 18 })
-        ] }));
+          new TextRun({ text: '  [BODY] ', size: 18, bold: true, color: '475569' })
+        ].concat(multilineRuns(ov.body, { size: 18 })) }));
       }
       if (ov.bullets && ov.bullets.length > 0) {
         ov.bullets.forEach(function(b) {

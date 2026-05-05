@@ -624,19 +624,19 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
               {ov.heading && (
                 <div style={rowStyle}>
                   <span style={tagStyle('#dbeafe', '#1d4ed8')}>HEADING</span>
-                  <span style={{ fontSize: 12, fontWeight: 700, color: '#1e293b' }}>{renderHL(ov.heading)}</span>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: '#1e293b', whiteSpace: 'pre-line' }}>{renderHL(ov.heading)}</span>
                 </div>
               )}
               {ov.subheading && (
                 <div style={rowStyle}>
                   <span style={tagStyle('#e0e7ff', '#4338ca')}>SUBHEADING</span>
-                  <span style={{ fontSize: 11, fontWeight: 600, color: '#1e293b' }}>{ov.subheading}</span>
+                  <span style={{ fontSize: 11, fontWeight: 600, color: '#1e293b', whiteSpace: 'pre-line' }}>{ov.subheading}</span>
                 </div>
               )}
               {ov.body && (
                 <div style={rowStyle}>
                   <span style={tagStyle('#f1f5f9', '#475569')}>BODY</span>
-                  <span style={{ fontSize: 11, color: '#1e293b' }}>{ov.body}</span>
+                  <span style={{ fontSize: 11, color: '#1e293b', whiteSpace: 'pre-line' }}>{ov.body}</span>
                 </div>
               )}
               {ov.bullets && ov.bullets.filter(Boolean).map(function(b, bi) {
@@ -989,7 +989,7 @@ function StoreHeroBanner({ store, activePage, viewMode, onHeroClick, isSelected 
             <div className="briefing-hero-brief"><BriefTextHighlighted text={brief} /></div>
           )}
           {textOverlay && (
-            <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginTop: 4 }}>{textOverlay}</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginTop: 4, whiteSpace: 'pre-line' }}>{textOverlay}</div>
           )}
           {!brief && (
             <div style={{ fontSize: 11, color: '#94a3b8', fontStyle: 'italic', marginTop: 4 }}>No design brief set for this banner</div>
@@ -2499,7 +2499,7 @@ export default function BriefingView() {
                     {textOverlay && (
                       <div className="briefing-field">
                         <span className="briefing-field-label">Text on Banner:</span>
-                        <span className="briefing-field-value" style={{ fontWeight: 600 }}>{textOverlay}</span>
+                        <span className="briefing-field-value" style={{ fontWeight: 600, whiteSpace: 'pre-line' }}>{textOverlay}</span>
                       </div>
                     )}
                     <div className="briefing-tile-dims-row">

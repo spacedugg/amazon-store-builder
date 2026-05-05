@@ -4,12 +4,34 @@ import Wireframe from './Wireframe';
 
 function renderHeadingParts(heading) {
   if (!heading) return null;
-  var parts = heading.split(/(\*\*[^*]+\*\*)/g);
-  return parts.map(function(p, i) {
-    if (p.length > 4 && p.slice(0, 2) === '**' && p.slice(-2) === '**') {
-      return <span key={i} style={{ color: '#93bd26' }}>{p.slice(2, -2)}</span>;
-    }
-    return <span key={i}>{p}</span>;
+  var lines = heading.split(/\r?\n/);
+  return lines.map(function(line, li) {
+    var parts = line.split(/(\*\*[^*]+\*\*)/g);
+    var rendered = parts.map(function(p, i) {
+      if (p.length > 4 && p.slice(0, 2) === '**' && p.slice(-2) === '**') {
+        return <span key={i} style={{ color: '#93bd26' }}>{p.slice(2, -2)}</span>;
+      }
+      return <span key={i}>{p}</span>;
+    });
+    return (
+      <span key={li}>
+        {rendered}
+        {li < lines.length - 1 && <br />}
+      </span>
+    );
+  });
+}
+
+function renderMultilineText(text) {
+  if (!text) return null;
+  var lines = String(text).split(/\r?\n/);
+  return lines.map(function(line, li) {
+    return (
+      <span key={li}>
+        {line}
+        {li < lines.length - 1 && <br />}
+      </span>
+    );
   });
 }
 
@@ -24,8 +46,8 @@ function TextOverlayDisplay({ overlay, compact, textAlign }) {
   return (
     <div className="tile-overlay" style={{ textAlign: textAlign || 'left' }}>
       {ov.heading && <div className="tile-overlay-heading">{renderHeadingParts(ov.heading)}</div>}
-      {ov.subheading && <div className="tile-overlay-subheading">{ov.subheading}</div>}
-      {!compact && ov.body && <div className="tile-overlay-body">{ov.body}</div>}
+      {ov.subheading && <div className="tile-overlay-subheading">{renderMultilineText(ov.subheading)}</div>}
+      {!compact && ov.body && <div className="tile-overlay-body">{renderMultilineText(ov.body)}</div>}
       {!compact && ov.bullets && ov.bullets.length > 0 && (
         <ul className="tile-overlay-bullets">
           {ov.bullets.map(function(b, i) { return <li key={i}>{b}</li>; })}
