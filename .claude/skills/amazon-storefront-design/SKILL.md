@@ -464,7 +464,7 @@ Das Briefing JSON hat diese Struktur. Das Tool ergänzt fehlende IDs und Default
 | Feld | Typ | Pflicht | Bemerkung |
 |------|-----|---------|-----------|
 | `type` | string | ja | siehe Tile Types |
-| `textOverlay.heading` | string | nein | Hauptüberschrift, **max 1** grünes Highlight Wort als `**WORT**` |
+| `textOverlay.heading` | string | nein | Hauptüberschrift, kein Markup, Zeilenumbrüche per `\n` erlaubt |
 | `textOverlay.subheading` | string | nein | Unterüberschrift, kein Markup |
 | `textOverlay.body` | string | nein | Fließtext, **max 350 Zeichen** |
 | `textOverlay.bullets` | array | nein | Liste Kurzclaims, je 2 bis 4 Wörter |

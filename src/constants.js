@@ -777,12 +777,6 @@ export function validateStore(store) {
         if (ov.body && ov.body.length > 350) {
           warnings.push({ level: 'warning', message: loc + ': body has ' + ov.body.length + ' chars, max 350' });
         }
-        if (ov.heading) {
-          var greenMatches = (ov.heading.match(/\*\*[^*]+\*\*/g) || []);
-          if (greenMatches.length > 1) {
-            warnings.push({ level: 'warning', message: loc + ': heading has ' + greenMatches.length + ' green highlight markers, max 1 allowed' });
-          }
-        }
         if (t.type === 'shoppable_image' && t.hotspots && t.hotspots.length > 5) {
           warnings.push({ level: 'error', message: loc + ': shoppable_image has ' + t.hotspots.length + ' hotspots, max 5 allowed' });
         }

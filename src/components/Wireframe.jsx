@@ -72,15 +72,10 @@ function layoutLines(text, maxChars, maxLines) {
   return lines;
 }
 
-// Renders a parsed heading line as tspans, mapping **WORD** to a green span.
-function renderHeadingLine(line, key) {
-  var parts = String(line || '').split(/(\*\*[^*]+\*\*)/g);
-  return parts.map(function(p, i) {
-    if (p.length > 4 && p.slice(0, 2) === '**' && p.slice(-2) === '**') {
-      return <tspan key={key + '_' + i} fill="#93bd26">{p.slice(2, -2)}</tspan>;
-    }
-    return <tspan key={key + '_' + i}>{p}</tspan>;
-  });
+// Strippt Legacy **WORT** Marker, damit alte Stores ohne literale Sternchen
+// angezeigt werden. Headlines haben keine Inline Hervorhebung mehr.
+function stripBoldMarkers(text) {
+  return String(text == null ? '' : text).replace(/\*\*([^*]+)\*\*/g, '$1');
 }
 
 export default function Wireframe({ tile, width, viewMode, bgColor }) {
@@ -88,7 +83,9 @@ export default function Wireframe({ tile, width, viewMode, bgColor }) {
   var w = width || 280;
   var ht = Math.max(30, Math.round(w / (dims.w / dims.h)));
   var ov = (tile.textOverlay && typeof tile.textOverlay === 'object') ? tile.textOverlay : {};
-  var rawHeading = ov.heading || '';
+  var rawHeading = stripBoldMarkers(ov.heading || '');
+  var rawSubheading = stripBoldMarkers(ov.subheading || '');
+  var rawBody = stripBoldMarkers(ov.body || '');
   var cta = ov.cta || '';
   var isShoppable = tile.type === 'shoppable_image';
   var isImageText = tile.type === 'image_text';
@@ -138,23 +135,23 @@ export default function Wireframe({ tile, width, viewMode, bgColor }) {
   var usedH = headingLines.length * headingLineH;
 
   var subLines = [];
-  if (ov.subheading) {
+  if (rawSubheading) {
     var roomSub = Math.max(0, available - usedH);
     var maxSubLines = Math.max(0, Math.min(3, Math.floor(roomSub / subLineH)));
-    if (maxSubLines > 0) subLines = layoutLines(ov.subheading, maxCharsSub, maxSubLines);
+    if (maxSubLines > 0) subLines = layoutLines(rawSubheading, maxCharsSub, maxSubLines);
     usedH += subLines.length * subLineH;
   }
 
   var bodyLines = [];
-  if (ov.body) {
+  if (rawBody) {
     var roomBody = Math.max(0, available - usedH);
     var maxBodyLines = Math.max(0, Math.min(3, Math.floor(roomBody / bodyLineH)));
-    if (maxBodyLines > 0) bodyLines = layoutLines(ov.body, maxCharsBody, maxBodyLines);
+    if (maxBodyLines > 0) bodyLines = layoutLines(rawBody, maxCharsBody, maxBodyLines);
     usedH += bodyLines.length * bodyLineH;
   }
 
   var bulletLines = [];
-  var bullets = (ov.bullets || []).filter(function(b) { return b && String(b).trim(); });
+  var bullets = (ov.bullets || []).map(function(b) { return stripBoldMarkers(b); }).filter(function(b) { return b && String(b).trim(); });
   if (bullets.length > 0) {
     var roomBullets = Math.max(0, available - usedH);
     var maxBulletLines = Math.max(0, Math.min(bullets.length, Math.floor(roomBullets / bulletLineH)));
@@ -177,16 +174,14 @@ export default function Wireframe({ tile, width, viewMode, bgColor }) {
     <svg viewBox={'0 0 ' + w + ' ' + ht} style={{ width: '100%', display: 'block' }}>
       <rect width={w} height={ht} fill={bgFill} rx="2" />
 
-      {/* Heading, mehrzeilig mit **WORT** Highlight */}
+      {/* Heading, mehrzeilig */}
       {headingLines.length > 0 && (
         <text x={anchorX} y={startY} fontSize={headingFontSize}
           fontWeight="700" fill={textFill} fontFamily="system-ui, sans-serif" opacity=".85"
           textAnchor={anchor}>
           {headingLines.map(function(line, li) {
             return (
-              <tspan key={'h' + li} x={anchorX} dy={li === 0 ? 0 : headingLineH}>
-                {renderHeadingLine(line, 'h' + li)}
-              </tspan>
+              <tspan key={'h' + li} x={anchorX} dy={li === 0 ? 0 : headingLineH}>{line}</tspan>
             );
           })}
         </text>

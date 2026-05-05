@@ -263,17 +263,19 @@ function buildDuplicateMap(store) {
   return map;
 }
 
-// Render inline text with **bold**, "quoted", and category tags
+// Render inline text with category tags und "quoted" Zitate. Legacy
+// **bold** Marker werden ersatzlos gestrippt, damit alte Briefings nicht
+// mit literalen Sternchen erscheinen.
 function renderInlineFormatting(text, keyBase) {
+  var stripped = String(text == null ? '' : text).replace(/\*\*([^*]+)\*\*/g, '$1');
   var parts = [];
   var k = keyBase || 0;
-  // Process: category tags, **bold**, "quoted"
-  var pattern = /(\[(?:STORE_HERO|BENEFIT|PRODUCT|CREATIVE|LIFESTYLE|TEXT_IMAGE)\]|\*\*(.+?)\*\*|"([^"]+)")/g;
+  var pattern = /(\[(?:STORE_HERO|BENEFIT|PRODUCT|CREATIVE|LIFESTYLE|TEXT_IMAGE)\]|"([^"]+)")/g;
   var lastIndex = 0;
   var match;
-  while ((match = pattern.exec(text)) !== null) {
+  while ((match = pattern.exec(stripped)) !== null) {
     if (match.index > lastIndex) {
-      parts.push(<span key={k++}>{text.substring(lastIndex, match.index)}</span>);
+      parts.push(<span key={k++}>{stripped.substring(lastIndex, match.index)}</span>);
     }
     if (CATEGORY_TAG_MAP[match[0]]) {
       parts.push(
@@ -282,16 +284,12 @@ function renderInlineFormatting(text, keyBase) {
         </span>
       );
     } else if (match[2]) {
-      // **bold**
-      parts.push(<strong key={k++}>{match[2]}</strong>);
-    } else if (match[3]) {
-      // "quoted" — styled as quoted text for designer
-      parts.push(<span key={k++} style={{ fontStyle: 'italic', color: '#0f172a', background: '#fef9c3', padding: '0 3px', borderRadius: 2 }}>&bdquo;{match[3]}&ldquo;</span>);
+      parts.push(<span key={k++} style={{ fontStyle: 'italic', color: '#0f172a', background: '#fef9c3', padding: '0 3px', borderRadius: 2 }}>&bdquo;{match[2]}&ldquo;</span>);
     }
     lastIndex = pattern.lastIndex;
   }
-  if (lastIndex < text.length) {
-    parts.push(<span key={k++}>{text.substring(lastIndex)}</span>);
+  if (lastIndex < stripped.length) {
+    parts.push(<span key={k++}>{stripped.substring(lastIndex)}</span>);
   }
   return parts;
 }
@@ -606,14 +604,8 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
         var hasContent = ov.heading || ov.subheading || ov.body || (ov.bullets && ov.bullets.filter(Boolean).length) || ov.cta;
         if (!hasContent) return null;
         var renderHL = function(s) {
-          if (!s) return null;
-          var parts = s.split(/(\*\*[^*]+\*\*)/g);
-          return parts.map(function(p, i) {
-            if (p.length > 4 && p.slice(0, 2) === '**' && p.slice(-2) === '**') {
-              return <span key={i} style={{ color: '#93bd26', fontWeight: 700 }}>{p.slice(2, -2)}</span>;
-            }
-            return <span key={i}>{p}</span>;
-          });
+          if (s == null) return null;
+          return String(s).replace(/\*\*([^*]+)\*\*/g, '$1');
         };
         var rowStyle = { display: 'flex', gap: 6, alignItems: 'baseline', marginTop: 3 };
         var tagStyle = function(bg, color) { return { background: bg, color: color, borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, flexShrink: 0 }; };

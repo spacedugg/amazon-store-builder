@@ -1,56 +1,6 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, MAX_HOTSPOTS, createDefaultProductSelector } from '../constants';
 import { t } from '../i18n';
-
-// Toggle **bold** around selected text or at cursor
-function toggleBold(ref, value, onChange) {
-  var el = ref.current;
-  if (!el) return;
-  var start = el.selectionStart;
-  var end = el.selectionEnd;
-  if (start === end) return; // no selection
-  var selected = value.substring(start, end);
-  var newValue;
-  // Check if already bold
-  if (value.substring(start - 2, start) === '**' && value.substring(end, end + 2) === '**') {
-    newValue = value.substring(0, start - 2) + selected + value.substring(end + 2);
-    onChange(newValue);
-    setTimeout(function() { el.setSelectionRange(start - 2, end - 2); }, 0);
-  } else if (selected.startsWith('**') && selected.endsWith('**')) {
-    newValue = value.substring(0, start) + selected.slice(2, -2) + value.substring(end);
-    onChange(newValue);
-    setTimeout(function() { el.setSelectionRange(start, end - 4); }, 0);
-  } else {
-    newValue = value.substring(0, start) + '**' + selected + '**' + value.substring(end);
-    onChange(newValue);
-    setTimeout(function() { el.setSelectionRange(start + 2, end + 2); }, 0);
-  }
-}
-
-function TextFieldWithBold({ value, onChange, rows, placeholder, className }) {
-  var ref = useRef(null);
-  var isTextarea = rows && rows > 1;
-  return (
-    <div>
-      <div style={{ display: 'flex', gap: 2, marginBottom: 3 }}>
-        <button
-          type="button"
-          className="btn"
-          style={{ fontSize: 10, padding: '2px 8px', fontWeight: 800, minWidth: 24 }}
-          title="Fett (Text markieren, dann klicken)"
-          onClick={function() { toggleBold(ref, value || '', onChange); }}
-        >B</button>
-      </div>
-      {isTextarea ? (
-        <textarea ref={ref} value={value || ''} onChange={function(e) { onChange(e.target.value); }}
-          rows={rows} className={className || 'input'} placeholder={placeholder} />
-      ) : (
-        <input ref={ref} value={value || ''} onChange={function(e) { onChange(e.target.value); }}
-          className={className || 'input'} placeholder={placeholder} />
-      )}
-    </div>
-  );
-}
 
 var PRESET_COLORS = [
   '#f5f5f5', '#e0e0e0', '#bdbdbd', '#9e9e9e',
@@ -340,7 +290,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
         <>
           <div className="props-section">
             <label className="label">{t('props.designerBrief', uiLang)}</label>
-            <TextFieldWithBold value={tile.brief || ''} onChange={function(v) { u('brief', v); }}
+            <textarea value={tile.brief || ''} onChange={function(e) { u('brief', e.target.value); }}
               rows={3} placeholder={t('props.designerBriefPlaceholder', uiLang)} className="input" />
           </div>
           {tile.wireframeDescription && (
@@ -364,7 +314,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
                     <div style={{ fontSize: 9, fontWeight: 700, color: '#1d4ed8', textTransform: 'uppercase', marginBottom: 2 }}>Heading</div>
                     <textarea value={ov.heading || ''}
                       onChange={function(e) { uOv('heading', e.target.value); }}
-                      placeholder="Hauptüberschrift, Enter für Zeilenumbruch, ein Wort als **WORT** für grünes Highlight"
+                      placeholder="Hauptüberschrift, Enter für Zeilenumbruch"
                       rows={2}
                       style={{ width: '100%', padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 12, fontWeight: 700, fontFamily: 'inherit', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.25 }} />
                   </div>
