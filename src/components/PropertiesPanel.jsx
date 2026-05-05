@@ -1,18 +1,20 @@
 import { useState } from 'react';
-import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, MAX_HOTSPOTS, createDefaultProductSelector, getMinImageHeight, MIN_IMAGE_RATIO_DESKTOP, MIN_IMAGE_RATIO_MOBILE, MIN_TEXT_IMAGE_HEIGHT } from '../constants';
+import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, MAX_HOTSPOTS, createDefaultProductSelector, getMinImageHeight, tileHasDimensionRule, MIN_IMAGE_RATIO_DESKTOP, MIN_IMAGE_RATIO_MOBILE, MIN_TEXT_IMAGE_HEIGHT } from '../constants';
 import { t } from '../i18n';
 
-// Inline Hinweis unter den Dimension Inputs. Wenn die Höhe das Mindestmaß
-// (1/15 der Breite Desktop, 1/10 Mobile, 200px Floor für image_text)
-// unterschreitet, erscheint ein gelber Hinweis. Manuelle Eingabe wird nicht
-// blockiert, damit der User Werte temporär anpassen kann.
-function DimensionWarning({ width, height, viewMode, tileType }) {
+// Inline Hinweis unter den Dimension Inputs. Greift nur wenn das Tile unter
+// die Mindesthöhen Regel fällt (Image Tile mit imageCategory benefit oder
+// text_image). Wenn die Höhe das Mindestmaß (1/15 der Breite Desktop, 1/10
+// Mobile, harter 200 px Floor) unterschreitet, erscheint ein gelber
+// Hinweis. Manuelle Eingabe wird nicht blockiert, damit der User Werte
+// temporär anpassen kann.
+function DimensionWarning({ tile, width, height, viewMode }) {
+  if (!tileHasDimensionRule(tile)) return null;
   if (!width || !height) return null;
-  var minH = getMinImageHeight(width, viewMode, tileType);
+  var minH = getMinImageHeight(width, viewMode);
   if (height >= minH) return null;
   var ratioLabel = viewMode === 'mobile' ? '1/' + MIN_IMAGE_RATIO_MOBILE : '1/' + MIN_IMAGE_RATIO_DESKTOP;
-  var hint = 'Höhe ' + height + 'px ist zu flach. Mindestens ' + minH + 'px (' + ratioLabel + ' der Breite' +
-    (tileType === 'image_text' ? ', mindestens ' + MIN_TEXT_IMAGE_HEIGHT + 'px für Text Bilder' : '') + ').';
+  var hint = 'Höhe ' + height + 'px ist zu flach. Mindestens ' + minH + 'px (' + ratioLabel + ' der Breite, mindestens ' + MIN_TEXT_IMAGE_HEIGHT + 'px für Benefit und Text Image Tiles).';
   return (
     <div style={{ fontSize: 10, color: '#92400e', background: '#fffbeb', border: '1px solid #fde68a', padding: '4px 6px', borderRadius: 3, marginTop: 4, lineHeight: 1.4 }}>
       ⚠ {hint}
@@ -233,16 +235,6 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
             if (isProductType && !up.asins) up.asins = [];
             if (tt === 'video' && !up.dimensions) up.dimensions = { w: 3000, h: 1688 };
             if (tt === 'video' && !up.mobileDimensions) up.mobileDimensions = { w: 1680, h: 945 };
-            // Bei Wechsel auf image_text: Default Höhe 200px setzen (gilt für
-            // einfache Text Bilder mit einzeiliger Headline plus Subheadline).
-            // Vorhandene Höhen über 200px bleiben erhalten, nur extreme Banner
-            // Layouts (z.B. 600px Hero) werden auf 200px reduziert.
-            if (tt === 'image_text' && tile.type !== 'image_text') {
-              var dW = (tile.dimensions && tile.dimensions.w) || 3000;
-              var mW = (tile.mobileDimensions && tile.mobileDimensions.w) || 1680;
-              up.dimensions = { w: dW, h: MIN_TEXT_IMAGE_HEIGHT };
-              up.mobileDimensions = { w: mW, h: MIN_TEXT_IMAGE_HEIGHT };
-            }
             onChange(up);
           }}>
           {TILE_TYPES.filter(function(tt) {
@@ -260,7 +252,25 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
         <div className="props-section">
           <label className="label">{t('props.imageCategory', uiLang)}</label>
           <select className="input" value={tile.imageCategory || ''}
-            onChange={function(e) { u('imageCategory', e.target.value); }}>
+            onChange={function(e) {
+              var cat = e.target.value;
+              var up = Object.assign({}, tile, { imageCategory: cat });
+              // Bei Wechsel auf benefit oder text_image: Default Höhe 200px
+              // setzen, falls die aktuelle Höhe größer als 200 ist (z.B. weil
+              // das Tile vom Layout mit 600 oder 1200 px Höhe initialisiert
+              // wurde). Damit fängt der Designer mit dem Standard für Text
+              // und Benefit Bilder an. Größere Höhen werden auf 200 gekappt,
+              // bestehende kleinere Höhen werden NICHT vergrößert (User Wille).
+              if (tile.type === 'image' && (cat === 'benefit' || cat === 'text_image')) {
+                var dW = (tile.dimensions && tile.dimensions.w) || 3000;
+                var mW = (tile.mobileDimensions && tile.mobileDimensions.w) || 1680;
+                var dH = (tile.dimensions && tile.dimensions.h) || 0;
+                var mH = (tile.mobileDimensions && tile.mobileDimensions.h) || 0;
+                if (dH > MIN_TEXT_IMAGE_HEIGHT) up.dimensions = { w: dW, h: MIN_TEXT_IMAGE_HEIGHT };
+                if (mH > MIN_TEXT_IMAGE_HEIGHT) up.mobileDimensions = { w: mW, h: MIN_TEXT_IMAGE_HEIGHT };
+              }
+              onChange(up);
+            }}>
             <option value="">{t('props.imageCategoryNone', uiLang)}</option>
             {Object.keys(IMAGE_CATEGORIES).map(function(catId) {
               var cat = IMAGE_CATEGORIES[catId];
@@ -406,7 +416,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
               <input type="number" value={(tile.dimensions || {}).h || 1200}
                 onChange={function(e) { ud('desktop', 'h', parseInt(e.target.value) || 1200); }} className="input" />
             </div>
-            <DimensionWarning width={(tile.dimensions || {}).w} height={(tile.dimensions || {}).h} viewMode="desktop" tileType={tile.type} />
+            <DimensionWarning tile={tile} width={(tile.dimensions || {}).w} height={(tile.dimensions || {}).h} viewMode="desktop" />
           </div>
 
           {/* Sync Dimensions Checkbox */}
@@ -438,7 +448,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
             {(function() {
               var mw = tile.syncDimensions ? (tile.dimensions || {}).w : (tile.mobileDimensions || {}).w;
               var mh = tile.syncDimensions ? (tile.dimensions || {}).h : (tile.mobileDimensions || {}).h;
-              return <DimensionWarning width={mw} height={mh} viewMode="mobile" tileType={tile.type} />;
+              return <DimensionWarning tile={tile} width={mw} height={mh} viewMode="mobile" />;
             })()}
           </div>
 
@@ -1052,7 +1062,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
               <input type="number" value={(tile.dimensions || {}).h || 1688}
                 onChange={function(e) { ud('desktop', 'h', parseInt(e.target.value) || 1688); }} className="input" />
             </div>
-            <DimensionWarning width={(tile.dimensions || {}).w} height={(tile.dimensions || {}).h} viewMode="desktop" tileType={tile.type} />
+            <DimensionWarning tile={tile} width={(tile.dimensions || {}).w} height={(tile.dimensions || {}).h} viewMode="desktop" />
           </div>
           {/* Sync Dimensions Checkbox */}
           <div className="props-section">
@@ -1081,7 +1091,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
             {(function() {
               var mw = tile.syncDimensions ? (tile.dimensions || {}).w : (tile.mobileDimensions || {}).w;
               var mh = tile.syncDimensions ? (tile.dimensions || {}).h : (tile.mobileDimensions || {}).h;
-              return <DimensionWarning width={mw} height={mh} viewMode="mobile" tileType={tile.type} />;
+              return <DimensionWarning tile={tile} width={mw} height={mh} viewMode="mobile" />;
             })()}
           </div>
           {fileUpload(t('props.videoThumbnail', uiLang), tile.videoThumbnail,

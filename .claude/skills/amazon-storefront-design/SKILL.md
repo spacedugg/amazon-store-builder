@@ -736,7 +736,7 @@ Tile Dimensionen sind **nicht** auf 3000x600 fixiert. Wähle die Höhe **nach Fu
 
 | Tile Funktion | Empfohlene Desktop Höhe (bei 3000 Breite) | Mobile Höhe (bei 1680 Breite) |
 |---------------|-------------------------------------------:|-------------------------------:|
-| Text Bild (image_text) einzeilige Headline plus Subheadline | 200 (Default) bis 350 | 200 (Default) bis 350 |
+| Benefit / Text Image (image + imageCategory benefit oder text_image) einzeilige Headline plus Subheadline | 200 (Default) bis 350 | 200 (Default) bis 350 |
 | Trenner / Section Header / Kategorie Überschrift | 300 bis 500 | 300 bis 500 |
 | Hero Banner Page Header | 600 bis 900 | 600 bis 900 |
 | Lifestyle Bild mit Komposition | 1200 bis 1500 | 1200 bis 1500 |
@@ -746,11 +746,12 @@ Tile Dimensionen sind **nicht** auf 3000x600 fixiert. Wähle die Höhe **nach Fu
 
 Faustregel: ein schmaler Trenner braucht keine 600 Pixel Höhe, da reicht 350. Ein Shoppable Bild mit 5 Produkten braucht mehr als 600 Pixel sonst werden die Hotspots zu eng. Pro Tile bewusst die Höhe wählen, nicht stur 3000x600 als Default.
 
-**Mindesthöhe Regeln (vom Tool validiert)**:
+**Mindesthöhen Regeln (vom Tool validiert)**:
+Die folgenden Regeln gelten ausschließlich für `image` Tiles mit `imageCategory` `benefit` oder `text_image`. Andere Image Kategorien (`store_hero`, `product`, `creative`, `lifestyle`) sind in der Praxis immer hoch genug und stoßen nie an diese Limits.
 - Desktop: Höhe muss **mindestens 1/15 der Breite** sein (max Verhältnis 15:1). Bei 3000 Breite also mindestens 200 Pixel Höhe.
-- Mobile: Höhe muss **mindestens 1/10 der Breite** sein (max Verhältnis 10:1). Bei 1680 Breite also mindestens 168 Pixel Höhe.
-- Text Bilder (`image_text` Tiles): zusätzliche harte Mindesthöhe **200 Pixel** für Desktop und Mobile, damit Headline plus Subheadline lesbar bleiben.
-- Default für `image_text` Tiles ist 200 Pixel Höhe, wenn der User keinen größeren Wert angibt.
+- Mobile: Höhe muss **mindestens 1/10 der Breite** sein (max Verhältnis 10:1). Bei 1680 Breite also mindestens 168 Pixel, durch den 200 Pixel Floor effektiv 200.
+- Zusätzlich harter Floor von **200 Pixel** Höhe auf Desktop und Mobile.
+- Default für Benefit und Text Image Tiles: 200 Pixel Höhe, wenn der User keinen größeren Wert angibt.
 
 **Wie du das im Briefing JSON setzt**: Pro Tile das Feld `dimensions` (Desktop) und optional `mobileDimensions` (Mobile) angeben. Beispiele:
 

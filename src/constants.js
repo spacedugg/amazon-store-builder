@@ -156,45 +156,54 @@ export function emptyTile() {
 }
 
 // ─── DIMENSION RULES FÜR BILD TILES ───
-// Bilder dürfen niemals flacher sein als diese Mindestverhältnisse, sonst
-// werden sie auf Amazon als unbrauchbar dünne Streifen angezeigt.
+// Die Mindesthöhen Regeln gelten für Tiles vom Typ `image` mit den
+// imageCategory Werten `benefit` und `text_image`. Andere Image Kategorien
+// (store_hero, product, creative, lifestyle) sind in der Praxis immer
+// hoch genug und stoßen nie an diese Limits.
 //   Desktop: Höhe muss mindestens 1/15 der Breite betragen (max Verhältnis 15:1)
 //   Mobile:  Höhe muss mindestens 1/10 der Breite betragen (max Verhältnis 10:1)
-// Text Bilder (image_text Tiles) haben zusätzlich eine harte Mindesthöhe von
-// 200 Pixeln, damit Headlines plus Subheadlines lesbar gerendert werden.
+// Zusätzlich gilt eine harte Mindesthöhe von 200 Pixeln, damit Headlines
+// plus Subheadlines lesbar gerendert werden.
 export var MIN_IMAGE_RATIO_DESKTOP = 15;
 export var MIN_IMAGE_RATIO_MOBILE = 10;
 export var MIN_TEXT_IMAGE_HEIGHT = 200;
-export var IMAGE_TILE_TYPES = ['image', 'shoppable_image', 'image_text', 'video'];
+// Image Kategorien für die die Mindesthöhen gelten.
+export var DIM_RULE_CATEGORIES = ['benefit', 'text_image'];
 
-// Liefert die kleinste erlaubte Höhe für eine gegebene Breite und View Mode.
-// Für image_text Tiles gilt zusätzlich der harte 200 Pixel Floor.
-export function getMinImageHeight(width, viewMode, tileType) {
+// True wenn das Tile unter die Mindesthöhen Regeln fällt.
+export function tileHasDimensionRule(tile) {
+  if (!tile || tile.type !== 'image') return false;
+  return DIM_RULE_CATEGORIES.indexOf(tile.imageCategory) >= 0;
+}
+
+// Liefert die kleinste erlaubte Höhe für eine gegebene Breite und View Mode
+// für ein Tile mit Mindesthöhen Regel.
+export function getMinImageHeight(width, viewMode) {
   var w = Number(width) || 0;
   if (w <= 0) return 0;
   var ratio = viewMode === 'mobile' ? MIN_IMAGE_RATIO_MOBILE : MIN_IMAGE_RATIO_DESKTOP;
   var ratioMin = Math.ceil(w / ratio);
-  if (tileType === 'image_text') return Math.max(ratioMin, MIN_TEXT_IMAGE_HEIGHT);
-  return ratioMin;
+  return Math.max(ratioMin, MIN_TEXT_IMAGE_HEIGHT);
 }
 
 // Prüft die Maße eines einzelnen Tiles und gibt Warnungen zurück. Gibt ein
-// Array von Strings zurück, leer wenn alles OK.
+// leeres Array zurück wenn das Tile nicht unter die Regel fällt oder die
+// Maße in Ordnung sind.
 export function validateTileDimensions(tile) {
   var msgs = [];
-  if (!tile || IMAGE_TILE_TYPES.indexOf(tile.type) < 0) return msgs;
+  if (!tileHasDimensionRule(tile)) return msgs;
   var d = tile.dimensions || {};
   var m = tile.mobileDimensions || {};
   if (d.w && d.h) {
-    var minD = getMinImageHeight(d.w, 'desktop', tile.type);
+    var minD = getMinImageHeight(d.w, 'desktop');
     if (d.h < minD) {
-      msgs.push('Desktop Höhe ' + d.h + 'px ist zu flach für Breite ' + d.w + 'px. Mindesthöhe ' + minD + 'px (1/' + MIN_IMAGE_RATIO_DESKTOP + ' der Breite' + (tile.type === 'image_text' ? ' bzw. ' + MIN_TEXT_IMAGE_HEIGHT + 'px für Text Bilder' : '') + ').');
+      msgs.push('Desktop Höhe ' + d.h + 'px ist zu flach für Breite ' + d.w + 'px. Mindesthöhe ' + minD + 'px (1/' + MIN_IMAGE_RATIO_DESKTOP + ' der Breite, mindestens ' + MIN_TEXT_IMAGE_HEIGHT + 'px für Benefit und Text Image Tiles).');
     }
   }
   if (m.w && m.h) {
-    var minM = getMinImageHeight(m.w, 'mobile', tile.type);
+    var minM = getMinImageHeight(m.w, 'mobile');
     if (m.h < minM) {
-      msgs.push('Mobile Höhe ' + m.h + 'px ist zu flach für Breite ' + m.w + 'px. Mindesthöhe ' + minM + 'px (1/' + MIN_IMAGE_RATIO_MOBILE + ' der Breite' + (tile.type === 'image_text' ? ' bzw. ' + MIN_TEXT_IMAGE_HEIGHT + 'px für Text Bilder' : '') + ').');
+      msgs.push('Mobile Höhe ' + m.h + 'px ist zu flach für Breite ' + m.w + 'px. Mindesthöhe ' + minM + 'px (1/' + MIN_IMAGE_RATIO_MOBILE + ' der Breite, mindestens ' + MIN_TEXT_IMAGE_HEIGHT + 'px für Benefit und Text Image Tiles).');
     }
   }
   return msgs;
