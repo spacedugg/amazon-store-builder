@@ -1,6 +1,24 @@
 import { useState } from 'react';
-import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, MAX_HOTSPOTS, createDefaultProductSelector } from '../constants';
+import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, MAX_HOTSPOTS, createDefaultProductSelector, getMinImageHeight, MIN_IMAGE_RATIO_DESKTOP, MIN_IMAGE_RATIO_MOBILE, MIN_TEXT_IMAGE_HEIGHT } from '../constants';
 import { t } from '../i18n';
+
+// Inline Hinweis unter den Dimension Inputs. Wenn die Höhe das Mindestmaß
+// (1/15 der Breite Desktop, 1/10 Mobile, 200px Floor für image_text)
+// unterschreitet, erscheint ein gelber Hinweis. Manuelle Eingabe wird nicht
+// blockiert, damit der User Werte temporär anpassen kann.
+function DimensionWarning({ width, height, viewMode, tileType }) {
+  if (!width || !height) return null;
+  var minH = getMinImageHeight(width, viewMode, tileType);
+  if (height >= minH) return null;
+  var ratioLabel = viewMode === 'mobile' ? '1/' + MIN_IMAGE_RATIO_MOBILE : '1/' + MIN_IMAGE_RATIO_DESKTOP;
+  var hint = 'Höhe ' + height + 'px ist zu flach. Mindestens ' + minH + 'px (' + ratioLabel + ' der Breite' +
+    (tileType === 'image_text' ? ', mindestens ' + MIN_TEXT_IMAGE_HEIGHT + 'px für Text Bilder' : '') + ').';
+  return (
+    <div style={{ fontSize: 10, color: '#92400e', background: '#fffbeb', border: '1px solid #fde68a', padding: '4px 6px', borderRadius: 3, marginTop: 4, lineHeight: 1.4 }}>
+      ⚠ {hint}
+    </div>
+  );
+}
 
 var PRESET_COLORS = [
   '#f5f5f5', '#e0e0e0', '#bdbdbd', '#9e9e9e',
@@ -215,6 +233,16 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
             if (isProductType && !up.asins) up.asins = [];
             if (tt === 'video' && !up.dimensions) up.dimensions = { w: 3000, h: 1688 };
             if (tt === 'video' && !up.mobileDimensions) up.mobileDimensions = { w: 1680, h: 945 };
+            // Bei Wechsel auf image_text: Default Höhe 200px setzen (gilt für
+            // einfache Text Bilder mit einzeiliger Headline plus Subheadline).
+            // Vorhandene Höhen über 200px bleiben erhalten, nur extreme Banner
+            // Layouts (z.B. 600px Hero) werden auf 200px reduziert.
+            if (tt === 'image_text' && tile.type !== 'image_text') {
+              var dW = (tile.dimensions && tile.dimensions.w) || 3000;
+              var mW = (tile.mobileDimensions && tile.mobileDimensions.w) || 1680;
+              up.dimensions = { w: dW, h: MIN_TEXT_IMAGE_HEIGHT };
+              up.mobileDimensions = { w: mW, h: MIN_TEXT_IMAGE_HEIGHT };
+            }
             onChange(up);
           }}>
           {TILE_TYPES.filter(function(tt) {
@@ -378,6 +406,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
               <input type="number" value={(tile.dimensions || {}).h || 1200}
                 onChange={function(e) { ud('desktop', 'h', parseInt(e.target.value) || 1200); }} className="input" />
             </div>
+            <DimensionWarning width={(tile.dimensions || {}).w} height={(tile.dimensions || {}).h} viewMode="desktop" tileType={tile.type} />
           </div>
 
           {/* Sync Dimensions Checkbox */}
@@ -406,6 +435,11 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
               <input type="number" value={tile.syncDimensions ? ((tile.dimensions || {}).h || 1200) : ((tile.mobileDimensions || {}).h || 1200)}
                 onChange={function(e) { ud('mobile', 'h', parseInt(e.target.value) || 1200); }} className="input" disabled={!!tile.syncDimensions} />
             </div>
+            {(function() {
+              var mw = tile.syncDimensions ? (tile.dimensions || {}).w : (tile.mobileDimensions || {}).w;
+              var mh = tile.syncDimensions ? (tile.dimensions || {}).h : (tile.mobileDimensions || {}).h;
+              return <DimensionWarning width={mw} height={mh} viewMode="mobile" tileType={tile.type} />;
+            })()}
           </div>
 
           {/* Link / ASIN (single click-target for the whole image) */}
@@ -1006,7 +1040,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
         <>
           <div className="props-section">
             <label className="label">{t('props.videoBrief', uiLang)}</label>
-            <TextFieldWithBold value={tile.brief || ''} onChange={function(v) { u('brief', v); }}
+            <textarea value={tile.brief || ''} onChange={function(e) { u('brief', e.target.value); }}
               rows={3} placeholder={t('props.videoBriefPlaceholder', uiLang)} className="input" />
           </div>
           <div className="props-section">
@@ -1018,6 +1052,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
               <input type="number" value={(tile.dimensions || {}).h || 1688}
                 onChange={function(e) { ud('desktop', 'h', parseInt(e.target.value) || 1688); }} className="input" />
             </div>
+            <DimensionWarning width={(tile.dimensions || {}).w} height={(tile.dimensions || {}).h} viewMode="desktop" tileType={tile.type} />
           </div>
           {/* Sync Dimensions Checkbox */}
           <div className="props-section">
@@ -1043,6 +1078,11 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
               <input type="number" value={tile.syncDimensions ? ((tile.dimensions || {}).h || 1688) : ((tile.mobileDimensions || {}).h || 699)}
                 onChange={function(e) { ud('mobile', 'h', parseInt(e.target.value) || 699); }} className="input" disabled={!!tile.syncDimensions} />
             </div>
+            {(function() {
+              var mw = tile.syncDimensions ? (tile.dimensions || {}).w : (tile.mobileDimensions || {}).w;
+              var mh = tile.syncDimensions ? (tile.dimensions || {}).h : (tile.mobileDimensions || {}).h;
+              return <DimensionWarning width={mw} height={mh} viewMode="mobile" tileType={tile.type} />;
+            })()}
           </div>
           {fileUpload(t('props.videoThumbnail', uiLang), tile.videoThumbnail,
             function(v) { u('videoThumbnail', v); }, function() { u('videoThumbnail', null); }, uiLang)}

@@ -155,6 +155,51 @@ export function emptyTile() {
   };
 }
 
+// ─── DIMENSION RULES FÜR BILD TILES ───
+// Bilder dürfen niemals flacher sein als diese Mindestverhältnisse, sonst
+// werden sie auf Amazon als unbrauchbar dünne Streifen angezeigt.
+//   Desktop: Höhe muss mindestens 1/15 der Breite betragen (max Verhältnis 15:1)
+//   Mobile:  Höhe muss mindestens 1/10 der Breite betragen (max Verhältnis 10:1)
+// Text Bilder (image_text Tiles) haben zusätzlich eine harte Mindesthöhe von
+// 200 Pixeln, damit Headlines plus Subheadlines lesbar gerendert werden.
+export var MIN_IMAGE_RATIO_DESKTOP = 15;
+export var MIN_IMAGE_RATIO_MOBILE = 10;
+export var MIN_TEXT_IMAGE_HEIGHT = 200;
+export var IMAGE_TILE_TYPES = ['image', 'shoppable_image', 'image_text', 'video'];
+
+// Liefert die kleinste erlaubte Höhe für eine gegebene Breite und View Mode.
+// Für image_text Tiles gilt zusätzlich der harte 200 Pixel Floor.
+export function getMinImageHeight(width, viewMode, tileType) {
+  var w = Number(width) || 0;
+  if (w <= 0) return 0;
+  var ratio = viewMode === 'mobile' ? MIN_IMAGE_RATIO_MOBILE : MIN_IMAGE_RATIO_DESKTOP;
+  var ratioMin = Math.ceil(w / ratio);
+  if (tileType === 'image_text') return Math.max(ratioMin, MIN_TEXT_IMAGE_HEIGHT);
+  return ratioMin;
+}
+
+// Prüft die Maße eines einzelnen Tiles und gibt Warnungen zurück. Gibt ein
+// Array von Strings zurück, leer wenn alles OK.
+export function validateTileDimensions(tile) {
+  var msgs = [];
+  if (!tile || IMAGE_TILE_TYPES.indexOf(tile.type) < 0) return msgs;
+  var d = tile.dimensions || {};
+  var m = tile.mobileDimensions || {};
+  if (d.w && d.h) {
+    var minD = getMinImageHeight(d.w, 'desktop', tile.type);
+    if (d.h < minD) {
+      msgs.push('Desktop Höhe ' + d.h + 'px ist zu flach für Breite ' + d.w + 'px. Mindesthöhe ' + minD + 'px (1/' + MIN_IMAGE_RATIO_DESKTOP + ' der Breite' + (tile.type === 'image_text' ? ' bzw. ' + MIN_TEXT_IMAGE_HEIGHT + 'px für Text Bilder' : '') + ').');
+    }
+  }
+  if (m.w && m.h) {
+    var minM = getMinImageHeight(m.w, 'mobile', tile.type);
+    if (m.h < minM) {
+      msgs.push('Mobile Höhe ' + m.h + 'px ist zu flach für Breite ' + m.w + 'px. Mindesthöhe ' + minM + 'px (1/' + MIN_IMAGE_RATIO_MOBILE + ' der Breite' + (tile.type === 'image_text' ? ' bzw. ' + MIN_TEXT_IMAGE_HEIGHT + 'px für Text Bilder' : '') + ').');
+    }
+  }
+  return msgs;
+}
+
 export var DIMENSION_PRESETS = {
   desktop: { hero: { w: 3000, h: 600 }, category: { w: 3000, h: 1200 }, lifestyle: { w: 3000, h: 1500 }, video: { w: 3000, h: 1688 } },
   mobile: { hero: { w: 1680, h: 900 }, category: { w: 1680, h: 1200 }, lifestyle: { w: 1680, h: 1500 }, video: { w: 1680, h: 945 } },
@@ -169,7 +214,7 @@ export var AMAZON_IMG_TYPES = {
   LARGE_SQUARE: { w: 1500, h: 1500, label: 'Large Square' },
   SMALL_SQUARE: { w: 750, h: 750, label: 'Small Square' },
   WIDE: { w: 1500, h: 750, label: 'Wide' },
-  FULL_WIDTH: { w: 3000, h: 600, label: 'Full Width', maxRatio: 15, mobileW: 1680, mobileMaxRatio: 5 },
+  FULL_WIDTH: { w: 3000, h: 600, label: 'Full Width', maxRatio: 15, mobileW: 1680, mobileMaxRatio: 10 },
   // VH-specific (Variable Height layouts)
   VH_WIDE: { w: 3000, h: 1500, label: 'VH Wide' },
   VH_SQUARE: { w: 1500, h: 1500, label: 'VH Square' },
@@ -203,14 +248,14 @@ export var LAYOUT_TILE_DIMS = {
 
 // Helper: passende Mobile Dimensionen für eine Layout / Desktop Größe ableiten.
 // Standard Layouts: Mobile = Desktop. VH: fix 1500x750. Full Width: 1680
-// Pixel breit, Höhe folgt Desktop Höhe (mit 5:1 Mindestverhältnis Schutz).
+// Pixel breit, Höhe folgt Desktop Höhe (mit 1/MIN_IMAGE_RATIO_MOBILE Floor).
 export function deriveMobileDims(layoutId, desktopW, desktopH) {
   var resolved = resolveLayoutId(layoutId);
   var layout = findLayout(resolved);
   if (layout && layout.type === 'vh') {
     return { w: 1500, h: 750 };
   } else if (layout && layout.type === 'fullwidth') {
-    return { w: 1680, h: Math.max(Number(desktopH) || 600, Math.ceil(1680 / 5)) };
+    return { w: 1680, h: Math.max(Number(desktopH) || 600, Math.ceil(1680 / MIN_IMAGE_RATIO_MOBILE)) };
   } else {
     return { w: Number(desktopW) || 1500, h: Number(desktopH) || 1500 };
   }
@@ -780,6 +825,9 @@ export function validateStore(store) {
         if (t.type === 'shoppable_image' && t.hotspots && t.hotspots.length > 5) {
           warnings.push({ level: 'error', message: loc + ': shoppable_image has ' + t.hotspots.length + ' hotspots, max 5 allowed' });
         }
+        validateTileDimensions(t).forEach(function(msg) {
+          warnings.push({ level: 'warning', message: loc + ': ' + msg });
+        });
       });
     });
   });

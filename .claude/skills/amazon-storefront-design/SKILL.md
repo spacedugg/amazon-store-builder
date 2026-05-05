@@ -732,11 +732,12 @@ Lifestyle Tiles sind klickbar (linkAsin), Product Grid darunter zeigt die volle 
 
 ### Variable Tile Höhen je nach Funktion
 
-Tile Dimensionen sind **nicht** auf 3000x600 fixiert. Layout `1` (Full Width) erlaubt Höhen zwischen 200 (Desktop max 15:1 Verhältnis) und etwa 2400. Wähle die Höhe **nach Funktion des Tiles**:
+Tile Dimensionen sind **nicht** auf 3000x600 fixiert. Wähle die Höhe **nach Funktion des Tiles**:
 
 | Tile Funktion | Empfohlene Desktop Höhe (bei 3000 Breite) | Mobile Höhe (bei 1680 Breite) |
 |---------------|-------------------------------------------:|-------------------------------:|
-| Trenner / Section Header / Kategorie Überschrift | 300 bis 500 | 336 (5:1 Min) bis 500 |
+| Text Bild (image_text) einzeilige Headline plus Subheadline | 200 (Default) bis 350 | 200 (Default) bis 350 |
+| Trenner / Section Header / Kategorie Überschrift | 300 bis 500 | 300 bis 500 |
 | Hero Banner Page Header | 600 bis 900 | 600 bis 900 |
 | Lifestyle Bild mit Komposition | 1200 bis 1500 | 1200 bis 1500 |
 | Shoppable Image mit 3 bis 5 Produkten | 1500 bis 1800 | 1500 bis 1800 |
@@ -745,7 +746,11 @@ Tile Dimensionen sind **nicht** auf 3000x600 fixiert. Layout `1` (Full Width) er
 
 Faustregel: ein schmaler Trenner braucht keine 600 Pixel Höhe, da reicht 350. Ein Shoppable Bild mit 5 Produkten braucht mehr als 600 Pixel sonst werden die Hotspots zu eng. Pro Tile bewusst die Höhe wählen, nicht stur 3000x600 als Default.
 
-Mindestverhältnis: Desktop max 15:1 (Breite zu Höhe), Mobile max 5:1.
+**Mindesthöhe Regeln (vom Tool validiert)**:
+- Desktop: Höhe muss **mindestens 1/15 der Breite** sein (max Verhältnis 15:1). Bei 3000 Breite also mindestens 200 Pixel Höhe.
+- Mobile: Höhe muss **mindestens 1/10 der Breite** sein (max Verhältnis 10:1). Bei 1680 Breite also mindestens 168 Pixel Höhe.
+- Text Bilder (`image_text` Tiles): zusätzliche harte Mindesthöhe **200 Pixel** für Desktop und Mobile, damit Headline plus Subheadline lesbar bleiben.
+- Default für `image_text` Tiles ist 200 Pixel Höhe, wenn der User keinen größeren Wert angibt.
 
 **Wie du das im Briefing JSON setzt**: Pro Tile das Feld `dimensions` (Desktop) und optional `mobileDimensions` (Mobile) angeben. Beispiele:
 
