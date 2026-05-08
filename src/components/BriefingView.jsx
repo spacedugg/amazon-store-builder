@@ -18,6 +18,20 @@ function isSameAspectRatio(deskDims, mobDims) {
   return Math.abs(deskRatio - mobRatio) < 0.01;
 }
 
+// A tile is effectively synced (only one image needed) when:
+// - syncDimensions flag is explicitly set, OR
+// - mobile dimensions are absent (mobile inherits desktop), OR
+// - desktop and mobile dimensions share the same aspect ratio.
+// Without this, a tile whose desktop and mobile dims happen to be identical
+// but whose syncDimensions checkbox is unchecked would expect two separate
+// files and report 50 percent missing.
+function tileEffectivelySynced(tile) {
+  if (!tile) return false;
+  if (tile.syncDimensions) return true;
+  if (!tile.mobileDimensions) return true;
+  return isSameAspectRatio(tile.dimensions, tile.mobileDimensions);
+}
+
 // ─── META DESCRIPTION GENERATOR ───
 // Generates SEO-optimized meta descriptions for Amazon Brand Store pages.
 // Max 155 chars, front-loads brand + primary keywords within first 120 chars.
@@ -227,14 +241,19 @@ function buildFilenameMap(store) {
     (pg.sections || []).forEach(function(sec, si) {
       (sec.tiles || []).forEach(function(tile, ti) {
         if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text' || tile.type === 'product_selector') return;
-        if (tile.syncDimensions) {
+        if (tileEffectivelySynced(tile)) {
+          // Accept any of the three naming conventions the designer may have used.
           var fn = tileFilename(pg.name, si, ti, 'sync');
-          map[fn.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'sync' };
-        } else {
           var fnD = tileFilename(pg.name, si, ti, 'desktop');
           var fnM = tileFilename(pg.name, si, ti, 'mobile');
-          map[fnD.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'desktop' };
-          map[fnM.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'mobile' };
+          map[fn.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'sync' };
+          map[fnD.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'sync' };
+          map[fnM.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'sync' };
+        } else {
+          var fnD2 = tileFilename(pg.name, si, ti, 'desktop');
+          var fnM2 = tileFilename(pg.name, si, ti, 'mobile');
+          map[fnD2.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'desktop' };
+          map[fnM2.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'mobile' };
         }
       });
     });
@@ -1237,10 +1256,14 @@ function PreviewMode({ store, onClose }) {
       (pg.sections || []).forEach(function(sec, si) {
         (sec.tiles || []).forEach(function(tile, ti) {
           if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text' || tile.type === 'product_selector') return;
-          if (tile.syncDimensions) {
+          if (tileEffectivelySynced(tile)) {
             matchReport.total += 1;
             var fn = tileFilename(pg.name, si, ti, 'sync').toLowerCase();
-            if (imageMap[fn]) { matchReport.matched += 1; } else {
+            var fnDS = tileFilename(pg.name, si, ti, 'desktop').toLowerCase();
+            var fnMS = tileFilename(pg.name, si, ti, 'mobile').toLowerCase();
+            if (imageMap[fn] || imageMap[fnDS] || imageMap[fnMS]) {
+              matchReport.matched += 1;
+            } else {
               matchReport.missing.push({ page: pg.name, section: si + 1, tile: ti + 1, filename: tileFilename(pg.name, si, ti, 'sync') });
             }
           } else {
@@ -1291,8 +1314,10 @@ function PreviewMode({ store, onClose }) {
 
   var heroImgSrc = null;
   if (heroTile && heroPageName) {
-    if (heroTile.syncDimensions) {
-      heroImgSrc = findTileImage(heroPageName, heroSecIdx, heroTileIdx, 'sync');
+    if (tileEffectivelySynced(heroTile)) {
+      heroImgSrc = findTileImage(heroPageName, heroSecIdx, heroTileIdx, 'sync')
+        || findTileImage(heroPageName, heroSecIdx, heroTileIdx, 'desktop')
+        || findTileImage(heroPageName, heroSecIdx, heroTileIdx, 'mobile');
     } else {
       heroImgSrc = findTileImage(heroPageName, heroSecIdx, heroTileIdx, pvMode);
       if (!heroImgSrc) heroImgSrc = findTileImage(heroPageName, heroSecIdx, heroTileIdx, pvMode === 'desktop' ? 'mobile' : 'desktop');
@@ -1412,7 +1437,7 @@ function PreviewMode({ store, onClose }) {
             )}
             {showFilenames && heroTile && heroPageName && (
               <div style={{ position: 'absolute', bottom: 6, left: 8, background: 'rgba(0,0,0,.7)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 9, padding: '2px 6px', borderRadius: 2 }}>
-                {tileFilename(heroPageName, heroSecIdx, heroTileIdx, heroTile.syncDimensions ? 'sync' : pvMode)}
+                {tileFilename(heroPageName, heroSecIdx, heroTileIdx, tileEffectivelySynced(heroTile) ? 'sync' : pvMode)}
               </div>
             )}
           </div>
@@ -1512,8 +1537,10 @@ function PreviewMode({ store, onClose }) {
                       // Only show name-matched images from loaded folders — never show editor-uploaded images
                       var matchedImgSrc = null;
                       if (!isProduct && tile.type !== 'text' && tile.type !== 'product_selector') {
-                        if (tile.syncDimensions) {
-                          matchedImgSrc = findTileImage(activePg.name, si, ti, 'sync');
+                        if (tileEffectivelySynced(tile)) {
+                          matchedImgSrc = findTileImage(activePg.name, si, ti, 'sync')
+                            || findTileImage(activePg.name, si, ti, 'desktop')
+                            || findTileImage(activePg.name, si, ti, 'mobile');
                         } else {
                           matchedImgSrc = findTileImage(activePg.name, si, ti, pvMode);
                           if (!matchedImgSrc) matchedImgSrc = findTileImage(activePg.name, si, ti, pvMode === 'desktop' ? 'mobile' : 'desktop');
@@ -1554,7 +1581,7 @@ function PreviewMode({ store, onClose }) {
                             {/* Filename overlay */}
                             {showFilenames && !isProduct && tile.type !== 'text' && tile.type !== 'product_selector' && (
                               <div style={{ position: 'absolute', bottom: 4, left: 4, background: 'rgba(0,0,0,.75)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 8, padding: '1px 5px', borderRadius: 2, maxWidth: '90%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                                {tileFilename(activePg.name, si, ti, tile.syncDimensions ? 'sync' : pvMode)}
+                                {tileFilename(activePg.name, si, ti, tileEffectivelySynced(tile) ? 'sync' : pvMode)}
                               </div>
                             )}
                           </div>
