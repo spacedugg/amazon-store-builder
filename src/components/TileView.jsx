@@ -1,3 +1,4 @@
+import { useRef, useState, useEffect } from 'react';
 import { PRODUCT_TILE_TYPES, TILE_TYPE_LABELS } from '../constants';
 import { t } from '../i18n';
 import Wireframe from './Wireframe';
@@ -76,10 +77,41 @@ function ProductCardWireframe({ asins, products, tileType, bgColor, uiLang }) {
   );
 }
 
-export default function TileView({ tile, selected, onClick, viewMode, products, uiLang, previewImageSrc, onClearPreview }) {
+// Compute hotspots to display on a shoppable image. If the tile already has
+// hand placed hotspots, use them. Otherwise generate one default per linked
+// product so the designer immediately sees draggable markers.
+function effectiveShoppableHotspots(tile) {
+  if (Array.isArray(tile.hotspots) && tile.hotspots.length > 0) return tile.hotspots;
+  var asins = [];
+  if (tile.linkAsin) asins.push(tile.linkAsin);
+  (tile.asins || []).forEach(function(a) {
+    if (a && asins.indexOf(a) < 0) asins.push(a);
+  });
+  if (asins.length === 0) return [];
+  return asins.map(function(asin, i) {
+    var n = asins.length;
+    var x = ((i + 1) / (n + 1)) * 100;
+    return { asin: asin, x: x, y: 50 };
+  });
+}
+
+function clampPercent(v) {
+  if (v < 0) return 0;
+  if (v > 100) return 100;
+  return v;
+}
+
+export default function TileView({ tile, selected, onClick, viewMode, products, uiLang, previewImageSrc, onClearPreview, onChangeHotspots }) {
   var cls = 'tile' + (selected ? ' tile-selected' : '');
   var dims = (viewMode === 'mobile' ? tile.mobileDimensions : tile.dimensions) || tile.dimensions || { w: 3000, h: 1200 };
   var bgColor = tile.bgColor || '';
+
+  // Local drag override so we can render the dragged hotspot at the cursor
+  // without flooding the store with mousemove writes. Final position is
+  // committed via onChangeHotspots when the user releases the mouse.
+  var dragRef = useRef(null);
+  var [, setDragTick] = useState(0);
+  var tileRootRef = useRef(null);
 
   // × button to dismiss a folder-loaded preview image at this specific tile.
   function previewClearButton() {
@@ -90,6 +122,38 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
         title="Remove this preview image"
         style={{ position: 'absolute', top: 4, right: 4, width: 18, height: 18, borderRadius: '50%', background: 'rgba(15,23,42,.85)', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 11, fontWeight: 700, lineHeight: '16px', padding: 0, zIndex: 4 }}>&times;</button>
     );
+  }
+
+  function startHotspotDrag(e, hotspotIdx, currentList) {
+    if (!onChangeHotspots) return;
+    e.preventDefault();
+    e.stopPropagation();
+    var tileEl = tileRootRef.current;
+    if (!tileEl) return;
+    function onMove(ev) {
+      var rect = tileEl.getBoundingClientRect();
+      if (rect.width <= 0 || rect.height <= 0) return;
+      var x = clampPercent(((ev.clientX - rect.left) / rect.width) * 100);
+      var y = clampPercent(((ev.clientY - rect.top) / rect.height) * 100);
+      dragRef.current = { idx: hotspotIdx, x: x, y: y };
+      setDragTick(function(n) { return n + 1; });
+    }
+    function onUp() {
+      var override = dragRef.current;
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+      dragRef.current = null;
+      setDragTick(function(n) { return n + 1; });
+      if (override) {
+        var next = currentList.map(function(h, i) {
+          if (i !== override.idx) return h;
+          return Object.assign({}, h, { x: override.x, y: override.y });
+        });
+        onChangeHotspots(next);
+      }
+    }
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
   }
 
   // Product tile types
@@ -217,44 +281,59 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
 
   // image or shoppable_image
   var imgSrc = previewImageSrc || ((viewMode === 'mobile' ? tile.uploadedImageMobile : tile.uploadedImage) || tile.uploadedImage);
-  var hasHotspots = tile.type === 'shoppable_image' && (tile.hotspots || []).length > 0;
+  // Effective list shown on shoppable images: stored hotspots, or one
+  // default per linked product when none have been positioned yet.
+  var shoppableHotspots = tile.type === 'shoppable_image' ? effectiveShoppableHotspots(tile) : [];
+  var dragOverride = dragRef.current;
   return (
-    <div className={cls} onClick={onClick} style={Object.assign({ position: 'relative' }, bgColor ? { background: bgColor } : {})}>
+    <div ref={tileRootRef} className={cls} onClick={onClick} style={Object.assign({ position: 'relative' }, bgColor ? { background: bgColor } : {})}>
       {imgSrc
-        ? <img src={imgSrc} className="tile-uploaded-img" alt="" />
+        ? <img src={imgSrc} className="tile-uploaded-img" alt="" draggable={false} />
         : tile.wireframeImage
           ? <img src={tile.wireframeImage} className="tile-uploaded-img tile-wireframe-img" alt="Wireframe" />
           : <Wireframe tile={tile} viewMode={viewMode} bgColor={bgColor} />
       }
       {/* Sobald ein Bild geladen ist, wird angenommen dass das fertige Bild
           alle Elemente und Texte bereits enthält. Daher kein zusätzliches
-          Text Overlay, kein Hotspot Punkt, kein Shoppable oder ASIN Badge
-          auf der Kachel. Inhalte stehen weiterhin im Designer Briefing. */}
-      {!imgSrc && hasHotspots && (tile.hotspots || []).map(function(hs, i) {
+          Text Overlay und kein Shoppable oder ASIN Badge auf der Kachel.
+          Auf shoppable Bildern sind die Hotspots aber sichtbar und auf
+          dem Bild positionierbar. */}
+      {tile.type === 'shoppable_image' && shoppableHotspots.map(function(hs, i) {
+        var isDragging = dragOverride && dragOverride.idx === i;
+        var x = isDragging ? dragOverride.x : (hs.x || 0);
+        var y = isDragging ? dragOverride.y : (hs.y || 0);
+        var draggable = !!(imgSrc && onChangeHotspots);
+        var size = imgSrc ? 22 : 18;
         return (
-          <div key={i} className="tile-hotspot-dot" style={{
-            position: 'absolute',
-            left: (hs.x || 0) + '%',
-            top: (hs.y || 0) + '%',
-            transform: 'translate(-50%, -50%)',
-            width: 18, height: 18,
-            borderRadius: '50%',
-            background: 'rgba(17,24,39,0.75)',
-            border: '2px solid rgba(255,255,255,0.9)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            pointerEvents: 'none',
-            zIndex: 2,
-          }}>
+          <div key={i} className="tile-hotspot-dot"
+            onMouseDown={draggable ? function(ev) { startHotspotDrag(ev, i, shoppableHotspots); } : undefined}
+            onClick={function(ev) { if (draggable) ev.stopPropagation(); }}
+            title={hs.asin ? 'ASIN ' + hs.asin + (draggable ? ' (Mauszeiger gedrückt halten zum Verschieben)' : '') : ''}
+            style={{
+              position: 'absolute',
+              left: x + '%',
+              top: y + '%',
+              transform: 'translate(-50%, -50%)',
+              width: size, height: size,
+              borderRadius: '50%',
+              background: isDragging ? '#FF9900' : 'rgba(17,24,39,0.85)',
+              border: '2px solid rgba(255,255,255,0.95)',
+              boxShadow: imgSrc ? '0 1px 4px rgba(0,0,0,.35)' : 'none',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: draggable ? (isDragging ? 'grabbing' : 'grab') : 'default',
+              userSelect: 'none',
+              zIndex: 3,
+            }}>
             <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#fff' }} />
           </div>
         );
       })}
-      {!imgSrc && hasHotspots && (
+      {!imgSrc && shoppableHotspots.length > 0 && (
         <div style={{
           position: 'absolute', bottom: 4, right: 4,
           background: '#FF9900', color: '#fff', fontSize: 9, fontWeight: 700,
           padding: '1px 5px', borderRadius: 3, pointerEvents: 'none', zIndex: 2,
-        }}>{(tile.hotspots || []).length} Hotspot{(tile.hotspots || []).length > 1 ? 's' : ''}</div>
+        }}>{shoppableHotspots.length} Hotspot{shoppableHotspots.length > 1 ? 's' : ''}</div>
       )}
       {previewClearButton()}
     </div>
