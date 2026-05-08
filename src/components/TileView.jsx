@@ -76,28 +76,19 @@ function ProductCardWireframe({ asins, products, tileType, bgColor, uiLang }) {
   );
 }
 
-export default function TileView({ tile, selected, onClick, viewMode, products, uiLang, previewImageSrc, missingFilename, onClearPreview }) {
+export default function TileView({ tile, selected, onClick, viewMode, products, uiLang, previewImageSrc, onClearPreview }) {
   var cls = 'tile' + (selected ? ' tile-selected' : '');
   var dims = (viewMode === 'mobile' ? tile.mobileDimensions : tile.dimensions) || tile.dimensions || { w: 3000, h: 1200 };
   var bgColor = tile.bgColor || '';
 
-  // Folder-loaded preview takes precedence over editor uploaded image so the
-  // designer dashboard reflects the latest image set without leaving edit mode.
-  function previewBadgeAndClear() {
+  // × button to dismiss a folder-loaded preview image at this specific tile.
+  function previewClearButton() {
+    if (!previewImageSrc || !onClearPreview) return null;
     return (
-      <>
-        {previewImageSrc && onClearPreview && (
-          <button
-            onClick={function(e) { e.stopPropagation(); onClearPreview(); }}
-            title="Remove this preview image"
-            style={{ position: 'absolute', top: 4, right: 4, width: 18, height: 18, borderRadius: '50%', background: 'rgba(15,23,42,.85)', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 11, fontWeight: 700, lineHeight: '16px', padding: 0, zIndex: 4 }}>&times;</button>
-        )}
-        {!previewImageSrc && missingFilename && (
-          <div style={{ position: 'absolute', top: 4, right: 4, background: '#dc2626', color: '#fff', fontSize: 9, fontWeight: 700, fontFamily: 'monospace', padding: '2px 6px', borderRadius: 3, boxShadow: '0 1px 3px rgba(0,0,0,.25)', maxWidth: '90%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', pointerEvents: 'none', zIndex: 4 }} title={'Missing: ' + missingFilename}>
-            &#9888; {missingFilename}
-          </div>
-        )}
-      </>
+      <button
+        onClick={function(e) { e.stopPropagation(); onClearPreview(); }}
+        title="Remove this preview image"
+        style={{ position: 'absolute', top: 4, right: 4, width: 18, height: 18, borderRadius: '50%', background: 'rgba(15,23,42,.85)', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 11, fontWeight: 700, lineHeight: '16px', padding: 0, zIndex: 4 }}>&times;</button>
     );
   }
 
@@ -219,16 +210,7 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
             ? <img src={tile.wireframeImage} className="tile-uploaded-img tile-wireframe-img" alt="Wireframe" />
             : <Wireframe tile={tile} viewMode={viewMode} bgColor={bgColor} />
         }
-        {/* Text Block nur als finale Vorschau wenn ein echtes Bild hochgeladen ist.
-            Im Wireframe Modus ist Heading und CTA schon im SVG als Skizze, dann
-            kein doppelter Block mit grünem Button der wie Designvorlage wirkt.
-            Volle Texte (Subheading, Body) sieht der Operator im Properties Panel. */}
-        {img && hasOverlayContent(tile.textOverlay) && (
-          <div className="tile-it-text" style={{ textAlign: tile.textAlign || 'left' }}>
-            <TextOverlayDisplay overlay={tile.textOverlay} textAlign={tile.textAlign} />
-          </div>
-        )}
-        {previewBadgeAndClear()}
+        {previewClearButton()}
       </div>
     );
   }
@@ -244,16 +226,11 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
           ? <img src={tile.wireframeImage} className="tile-uploaded-img tile-wireframe-img" alt="Wireframe" />
           : <Wireframe tile={tile} viewMode={viewMode} bgColor={bgColor} />
       }
-      {hasOverlayContent(tile.textOverlay) && imgSrc && (
-        <div className="tile-image-overlay">
-          <TextOverlayDisplay overlay={tile.textOverlay} compact textAlign={tile.textAlign} />
-        </div>
-      )}
-      {/* Shoppable badge only shown when wireframe/image is NOT visible (wireframe SVG already has its own badges) */}
-      {tile.type === 'shoppable_image' && imgSrc && <div className="tile-shoppable-badge">{t('tile.shoppable', uiLang)}</div>}
-      {/* ASIN link shown subtly only when an uploaded image is present (otherwise wireframe shows it) */}
-      {tile.linkAsin && imgSrc && <div className="tile-link-badge">ASIN: {tile.linkAsin}</div>}
-      {hasHotspots && (tile.hotspots || []).map(function(hs, i) {
+      {/* Sobald ein Bild geladen ist, wird angenommen dass das fertige Bild
+          alle Elemente und Texte bereits enthält. Daher kein zusätzliches
+          Text Overlay, kein Hotspot Punkt, kein Shoppable oder ASIN Badge
+          auf der Kachel. Inhalte stehen weiterhin im Designer Briefing. */}
+      {!imgSrc && hasHotspots && (tile.hotspots || []).map(function(hs, i) {
         return (
           <div key={i} className="tile-hotspot-dot" style={{
             position: 'absolute',
@@ -272,14 +249,14 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
           </div>
         );
       })}
-      {hasHotspots && (
+      {!imgSrc && hasHotspots && (
         <div style={{
           position: 'absolute', bottom: 4, right: 4,
           background: '#FF9900', color: '#fff', fontSize: 9, fontWeight: 700,
           padding: '1px 5px', borderRadius: 3, pointerEvents: 'none', zIndex: 2,
         }}>{(tile.hotspots || []).length} Hotspot{(tile.hotspots || []).length > 1 ? 's' : ''}</div>
       )}
-      {previewBadgeAndClear()}
+      {previewClearButton()}
     </div>
   );
 }

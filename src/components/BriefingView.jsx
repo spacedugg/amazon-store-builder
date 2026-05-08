@@ -922,8 +922,9 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
 function SectionBriefing({ section, sectionIndex, viewMode, products, sectionColor, selectedTile, onTileSelect, pageName, localImageMap, onClearTilePreview }) {
   var layout = findLayout(section.layoutId);
 
-  // Build per-tile preview metadata: which loaded image to display, which
-  // expected filename is missing, and a clear-this-tile callback.
+  // Build per-tile preview metadata: which loaded image to display and a
+  // clear-this-tile callback. Missing-image hints belong in Preview Mode
+  // only (rendered next to the section), so we do not pass `missing` here.
   var previewByTileIndex = null;
   if (pageName && localImageMap) {
     previewByTileIndex = {};
@@ -933,18 +934,14 @@ function SectionBriefing({ section, sectionIndex, viewMode, products, sectionCol
       var fnD = tileFilename(pageName, sectionIndex, ti, 'desktop').toLowerCase();
       var fnM = tileFilename(pageName, sectionIndex, ti, 'mobile').toLowerCase();
       var src = null;
-      var missing = null;
       if (tileEffectivelySynced(tile)) {
         src = localImageMap[fnSync] || localImageMap[fnD] || localImageMap[fnM] || null;
-        if (!src) missing = tileFilename(pageName, sectionIndex, ti, 'sync');
       } else {
         var wantedKey = viewMode === 'mobile' ? fnM : fnD;
         src = localImageMap[wantedKey] || localImageMap[fnSync] || null;
-        if (!src) missing = tileFilename(pageName, sectionIndex, ti, viewMode === 'mobile' ? 'mobile' : 'desktop');
       }
       previewByTileIndex[ti] = {
         src: src,
-        missing: missing,
         onClear: src && onClearTilePreview ? function() { onClearTilePreview(pageName, sectionIndex, ti); } : null,
       };
     });
@@ -1555,6 +1552,18 @@ function PreviewMode({ store, onClose }) {
               var config = getGridConfig(layout, isMobile);
               var sectionLabel = sec.name || ('Section ' + (si + 1));
               var layoutLabel = layout ? layout.name : sec.layoutId;
+              // Collect per-tile missing filename hints for the right-side column
+              var sectionMissingItems = [];
+              if (folderLoaded) {
+                sec.tiles.forEach(function(tile, ti) {
+                  var isProductT = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
+                  if (isProductT || tile.type === 'text' || tile.type === 'product_selector') return;
+                  var miss = missingTileSet[activePg.name + '|' + (si + 1) + '|' + (ti + 1)];
+                  if (miss && miss.length > 0) {
+                    sectionMissingItems.push({ ti: ti, filenames: miss });
+                  }
+                });
+              }
               return (
                 <div key={sec.id} style={{ position: 'relative', marginBottom: isMobile ? 10 : 20 }}>
                   {/* Section label outside the store mask, positioned to the left */}
@@ -1563,6 +1572,26 @@ function PreviewMode({ store, onClose }) {
                     <div style={{ fontSize: 9, color: '#94a3b8', maxWidth: 120, overflow: 'hidden', textOverflow: 'ellipsis' }}>{sectionLabel}</div>
                     <div style={{ fontSize: 8, color: '#b0b8c4', fontStyle: 'italic' }}>{layoutLabel}</div>
                   </div>
+                  {/* Missing-image hint column outside the store mask, positioned to the right */}
+                  {sectionMissingItems.length > 0 && (
+                    <div style={{ position: 'absolute', left: '100%', top: 0, paddingLeft: 10, display: 'flex', flexDirection: 'column', gap: 4, maxWidth: 240 }}>
+                      {sectionMissingItems.map(function(item) {
+                        return (
+                          <div key={item.ti} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                            {item.filenames.map(function(fn, mi) {
+                              return (
+                                <div key={mi} title={'Missing: ' + fn}
+                                  style={{ background: '#fee2e2', border: '1px solid #fecaca', color: '#b91c1c', fontSize: 9, fontWeight: 700, fontFamily: 'monospace', padding: '2px 6px', borderRadius: 3, lineHeight: 1.3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                  <span style={{ color: '#64748b', marginRight: 4, fontWeight: 600 }}>T{item.ti + 1}</span>
+                                  &#9888; {fn}
+                                </div>
+                              );
+                            })}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                   <div style={Object.assign({}, config.gridStyle, { display: 'grid', gap: isMobile ? 9 : 18, width: '100%', overflow: 'hidden' })}>
                     {sec.tiles.map(function(tile, ti) {
                       var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
@@ -1585,15 +1614,28 @@ function PreviewMode({ store, onClose }) {
                         }
                       }
 
-                      // List of expected filenames that did not match for this tile
-                      var missingFilenames = (folderLoaded && !isProduct && tile.type !== 'text' && tile.type !== 'product_selector')
-                        ? (missingTileSet[activePg.name + '|' + (si + 1) + '|' + (ti + 1)] || null)
-                        : null;
+                      // Click target: subpage link wins over ASIN link
+                      var pageTarget = null;
+                      if (tile.linkUrl) {
+                        var linkPid = String(tile.linkUrl).replace(/^\//, '');
+                        if (pages.find(function(p) { return p.id === linkPid; })) pageTarget = linkPid;
+                      }
+                      var asinTarget = (!pageTarget && tile.linkAsin) ? tile.linkAsin : null;
+                      var hasClick = pageTarget || asinTarget;
+
+                      function handleTileClick() {
+                        if (pageTarget) { setPvPage(pageTarget); return; }
+                        if (asinTarget) {
+                          var tld = (store.marketplace || 'de') === 'uk' ? 'co.uk' : (store.marketplace || 'de');
+                          window.open('https://www.amazon.' + tld + '/dp/' + asinTarget, '_blank', 'noopener');
+                        }
+                      }
 
                       return (
                         <div key={ti} style={tileStyle}>
                           {/* Fixed aspect ratio container based on tile dimensions */}
-                          <div style={{ width: '100%', aspectRatio: dims.w + '/' + dims.h, background: tile.bgColor || '#f0f0f0', position: 'relative', overflow: 'hidden' }}>
+                          <div onClick={hasClick ? handleTileClick : undefined}
+                            style={{ width: '100%', aspectRatio: dims.w + '/' + dims.h, background: tile.bgColor || '#f0f0f0', position: 'relative', overflow: 'hidden', cursor: hasClick ? 'pointer' : 'default' }}>
                             {matchedImgSrc ? (
                               <img src={matchedImgSrc} alt={'Tile ' + (ti + 1)} style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }} />
                             ) : isProduct ? (
@@ -1613,21 +1655,23 @@ function PreviewMode({ store, onClose }) {
                                 <span style={{ fontFamily: 'monospace', fontSize: isMobile ? 8 : 10 }}>{dims.w}&times;{dims.h}</span>
                               </div>
                             )}
-                            {/* Small badge listing missing filename(s) for this tile, no full tile wash */}
-                            {missingFilenames && missingFilenames.length > 0 && (
-                              <div style={{ position: 'absolute', top: 4, right: 4, maxWidth: '90%', display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'flex-end', pointerEvents: 'none' }}>
-                                {missingFilenames.map(function(fn, mi) {
-                                  return (
-                                    <div key={mi} style={{ background: '#dc2626', color: '#fff', fontSize: 9, fontWeight: 700, fontFamily: 'monospace', padding: '2px 6px', borderRadius: 3, boxShadow: '0 1px 3px rgba(0,0,0,.25)', maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={'Missing: ' + fn}>
-                                      &#9888; {fn}
-                                    </div>
-                                  );
-                                })}
-                              </div>
-                            )}
+                            {/* Hotspots for shoppable images, each clickable to its ASIN */}
+                            {tile.type === 'shoppable_image' && (tile.hotspots || []).map(function(hs, hi) {
+                              if (!hs || !hs.asin) return null;
+                              var tld = (store.marketplace || 'de') === 'uk' ? 'co.uk' : (store.marketplace || 'de');
+                              var hsHref = 'https://www.amazon.' + tld + '/dp/' + hs.asin;
+                              return (
+                                <a key={hi} href={hsHref} target="_blank" rel="noopener noreferrer"
+                                  onClick={function(e) { e.stopPropagation(); }}
+                                  title={'ASIN ' + hs.asin}
+                                  style={{ position: 'absolute', left: (hs.x || 0) + '%', top: (hs.y || 0) + '%', transform: 'translate(-50%, -50%)', width: 22, height: 22, borderRadius: '50%', background: 'rgba(17,24,39,.85)', border: '2px solid rgba(255,255,255,.95)', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', zIndex: 3 }}>
+                                  <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#fff' }} />
+                                </a>
+                              );
+                            })}
                             {/* Filename overlay */}
                             {showFilenames && !isProduct && tile.type !== 'text' && tile.type !== 'product_selector' && (
-                              <div style={{ position: 'absolute', bottom: 4, left: 4, background: 'rgba(0,0,0,.75)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 8, padding: '1px 5px', borderRadius: 2, maxWidth: '90%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                              <div style={{ position: 'absolute', bottom: 4, left: 4, background: 'rgba(0,0,0,.75)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 8, padding: '1px 5px', borderRadius: 2, maxWidth: '90%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', pointerEvents: 'none' }}>
                                 {tileFilename(activePg.name, si, ti, tileEffectivelySynced(tile) ? 'sync' : pvMode)}
                               </div>
                             )}

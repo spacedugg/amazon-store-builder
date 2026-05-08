@@ -544,7 +544,6 @@ export default function SectionView({ section, idx, totalSections, sel, onSelect
                 products={products}
                 uiLang={uiLang}
                 previewImageSrc={previewByTileIndex && previewByTileIndex[i] ? previewByTileIndex[i].src : null}
-                missingFilename={previewByTileIndex && previewByTileIndex[i] ? previewByTileIndex[i].missing : null}
                 onClearPreview={previewByTileIndex && previewByTileIndex[i] ? previewByTileIndex[i].onClear : null}
               />
             </div>
