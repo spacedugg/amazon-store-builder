@@ -919,8 +919,36 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
 // ─── SECTION BRIEFING (visual preview only) ───
 // Section label is positioned to the LEFT of the actual store content,
 // so the store layout itself looks clean (like real Amazon) without colored borders.
-function SectionBriefing({ section, sectionIndex, viewMode, products, sectionColor, selectedTile, onTileSelect }) {
+function SectionBriefing({ section, sectionIndex, viewMode, products, sectionColor, selectedTile, onTileSelect, pageName, localImageMap, onClearTilePreview }) {
   var layout = findLayout(section.layoutId);
+
+  // Build per-tile preview metadata: which loaded image to display, which
+  // expected filename is missing, and a clear-this-tile callback.
+  var previewByTileIndex = null;
+  if (pageName && localImageMap) {
+    previewByTileIndex = {};
+    (section.tiles || []).forEach(function(tile, ti) {
+      if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text' || tile.type === 'product_selector') return;
+      var fnSync = tileFilename(pageName, sectionIndex, ti, 'sync').toLowerCase();
+      var fnD = tileFilename(pageName, sectionIndex, ti, 'desktop').toLowerCase();
+      var fnM = tileFilename(pageName, sectionIndex, ti, 'mobile').toLowerCase();
+      var src = null;
+      var missing = null;
+      if (tileEffectivelySynced(tile)) {
+        src = localImageMap[fnSync] || localImageMap[fnD] || localImageMap[fnM] || null;
+        if (!src) missing = tileFilename(pageName, sectionIndex, ti, 'sync');
+      } else {
+        var wantedKey = viewMode === 'mobile' ? fnM : fnD;
+        src = localImageMap[wantedKey] || localImageMap[fnSync] || null;
+        if (!src) missing = tileFilename(pageName, sectionIndex, ti, viewMode === 'mobile' ? 'mobile' : 'desktop');
+      }
+      previewByTileIndex[ti] = {
+        src: src,
+        missing: missing,
+        onClear: src && onClearTilePreview ? function() { onClearTilePreview(pageName, sectionIndex, ti); } : null,
+      };
+    });
+  }
 
   return (
     <div style={{ display: 'flex', alignItems: 'stretch', position: 'relative' }}>
@@ -947,6 +975,7 @@ function SectionBriefing({ section, sectionIndex, viewMode, products, sectionCol
           viewMode={viewMode}
           products={products || []}
           uiLang="en"
+          previewByTileIndex={previewByTileIndex}
         />
       </div>
     </div>
@@ -955,7 +984,7 @@ function SectionBriefing({ section, sectionIndex, viewMode, products, sectionCol
 
 // ─── PAGE BRIEFING (center content — visual only, single page) ───
 // No page header inside the store layout — sections connect edge-to-edge like Amazon.
-function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTile, onTileSelect, store }) {
+function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTile, onTileSelect, store, localImageMap, onClearTilePreview }) {
   return (
     <div className="briefing-page" style={{ display: 'flex', flexDirection: 'column' }}>
       {page.sections.map(function(sec, si) {
@@ -969,6 +998,9 @@ function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTil
             sectionColor={getSectionColor(sectionStartIndex + si)}
             selectedTile={selectedTile}
             onTileSelect={onTileSelect}
+            pageName={page.name}
+            localImageMap={localImageMap}
+            onClearTilePreview={onClearTilePreview}
           />
         );
       })}
@@ -1283,12 +1315,14 @@ function PreviewMode({ store, onClose }) {
   }
   var matchPct = matchReport.total > 0 ? Math.round((matchReport.matched / matchReport.total) * 100) : 0;
 
-  // Build a set of missing tile keys for red highlighting in preview
+  // Build a map of tile keys → list of expected-but-missing filenames
+  // (for a small badge next to the tile, no full red wash)
   var missingTileSet = {};
   if (folderLoaded) {
     matchReport.missing.forEach(function(m) {
-      // key: "pageName|section|tile" (1-based section/tile)
-      missingTileSet[m.page + '|' + m.section + '|' + m.tile] = true;
+      var key = m.page + '|' + m.section + '|' + m.tile;
+      if (!missingTileSet[key]) missingTileSet[key] = [];
+      missingTileSet[key].push(m.filename);
     });
   }
 
@@ -1433,7 +1467,10 @@ function PreviewMode({ store, onClose }) {
               </div>
             )}
             {folderLoaded && heroTile && !heroImgSrc && (
-              <div style={{ position: 'absolute', inset: 0, background: 'rgba(239,68,68,0.12)', border: '2px solid #ef4444', pointerEvents: 'none' }} />
+              <div style={{ position: 'absolute', top: 8, right: 8, background: '#dc2626', color: '#fff', fontSize: 11, fontWeight: 700, fontFamily: 'monospace', padding: '4px 8px', borderRadius: 4, boxShadow: '0 2px 6px rgba(0,0,0,.3)', pointerEvents: 'none', zIndex: 4 }}
+                title={'Missing: ' + tileFilename(heroPageName || 'page', heroSecIdx, heroTileIdx, tileEffectivelySynced(heroTile) ? 'sync' : pvMode)}>
+                &#9888; {tileFilename(heroPageName || 'page', heroSecIdx, heroTileIdx, tileEffectivelySynced(heroTile) ? 'sync' : pvMode)}
+              </div>
             )}
             {showFilenames && heroTile && heroPageName && (
               <div style={{ position: 'absolute', bottom: 6, left: 8, background: 'rgba(0,0,0,.7)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 9, padding: '2px 6px', borderRadius: 2 }}>
@@ -1548,8 +1585,10 @@ function PreviewMode({ store, onClose }) {
                         }
                       }
 
-                      // Check if this tile is missing an image (red highlight)
-                      var isMissing = folderLoaded && !isProduct && tile.type !== 'text' && tile.type !== 'product_selector' && missingTileSet[activePg.name + '|' + (si + 1) + '|' + (ti + 1)];
+                      // List of expected filenames that did not match for this tile
+                      var missingFilenames = (folderLoaded && !isProduct && tile.type !== 'text' && tile.type !== 'product_selector')
+                        ? (missingTileSet[activePg.name + '|' + (si + 1) + '|' + (ti + 1)] || null)
+                        : null;
 
                       return (
                         <div key={ti} style={tileStyle}>
@@ -1574,9 +1613,17 @@ function PreviewMode({ store, onClose }) {
                                 <span style={{ fontFamily: 'monospace', fontSize: isMobile ? 8 : 10 }}>{dims.w}&times;{dims.h}</span>
                               </div>
                             )}
-                            {/* Red overlay for missing/unmatched tiles */}
-                            {isMissing && (
-                              <div style={{ position: 'absolute', inset: 0, background: 'rgba(239,68,68,0.12)', border: '2px solid #ef4444', pointerEvents: 'none' }} />
+                            {/* Small badge listing missing filename(s) for this tile, no full tile wash */}
+                            {missingFilenames && missingFilenames.length > 0 && (
+                              <div style={{ position: 'absolute', top: 4, right: 4, maxWidth: '90%', display: 'flex', flexDirection: 'column', gap: 2, alignItems: 'flex-end', pointerEvents: 'none' }}>
+                                {missingFilenames.map(function(fn, mi) {
+                                  return (
+                                    <div key={mi} style={{ background: '#dc2626', color: '#fff', fontSize: 9, fontWeight: 700, fontFamily: 'monospace', padding: '2px 6px', borderRadius: 3, boxShadow: '0 1px 3px rgba(0,0,0,.25)', maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={'Missing: ' + fn}>
+                                      &#9888; {fn}
+                                    </div>
+                                  );
+                                })}
+                              </div>
                             )}
                             {/* Filename overlay */}
                             {showFilenames && !isProduct && tile.type !== 'text' && tile.type !== 'product_selector' && (
@@ -1706,6 +1753,26 @@ export default function BriefingView() {
     Object.values(localImageMap).forEach(function(url) { try { URL.revokeObjectURL(url); } catch(e) {} });
     setLocalImageMap({});
     setFolderMatchCount(0);
+  }
+
+  // Remove all loaded preview images for a single tile (sync, desktop and
+  // mobile variants). Lets the designer dismiss an image at one tile spot
+  // without affecting the rest of the store.
+  function handleClearTilePreview(pageName, sectionIndex, tileIndex) {
+    var keys = ['sync', 'desktop', 'mobile'].map(function(v) {
+      return tileFilename(pageName, sectionIndex, tileIndex, v).toLowerCase();
+    });
+    setLocalImageMap(function(prev) {
+      var next = Object.assign({}, prev);
+      keys.forEach(function(k) {
+        if (next[k]) {
+          try { URL.revokeObjectURL(next[k]); } catch(e) {}
+          delete next[k];
+        }
+      });
+      setFolderMatchCount(Object.keys(next).length);
+      return next;
+    });
   }
 
   // Lookup a local folder image for a tile
@@ -2470,7 +2537,7 @@ export default function BriefingView() {
           {/* Single page content — meta descriptions moved to Store Info tab */}
           {(function() {
             if (!activePage) return <div className="briefing-empty">No pages found.</div>;
-            return <PageBriefing page={activePage} viewMode={viewMode} products={store.products || []} sectionStartIndex={0} selectedTile={selectedTile} onTileSelect={handleTileSelect} store={store} />;
+            return <PageBriefing page={activePage} viewMode={viewMode} products={store.products || []} sectionStartIndex={0} selectedTile={selectedTile} onTileSelect={handleTileSelect} store={store} localImageMap={localImageMap} onClearTilePreview={handleClearTilePreview} />;
           })()}
           </div>
         </div>

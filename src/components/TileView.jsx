@@ -76,10 +76,30 @@ function ProductCardWireframe({ asins, products, tileType, bgColor, uiLang }) {
   );
 }
 
-export default function TileView({ tile, selected, onClick, viewMode, products, uiLang }) {
+export default function TileView({ tile, selected, onClick, viewMode, products, uiLang, previewImageSrc, missingFilename, onClearPreview }) {
   var cls = 'tile' + (selected ? ' tile-selected' : '');
   var dims = (viewMode === 'mobile' ? tile.mobileDimensions : tile.dimensions) || tile.dimensions || { w: 3000, h: 1200 };
   var bgColor = tile.bgColor || '';
+
+  // Folder-loaded preview takes precedence over editor uploaded image so the
+  // designer dashboard reflects the latest image set without leaving edit mode.
+  function previewBadgeAndClear() {
+    return (
+      <>
+        {previewImageSrc && onClearPreview && (
+          <button
+            onClick={function(e) { e.stopPropagation(); onClearPreview(); }}
+            title="Remove this preview image"
+            style={{ position: 'absolute', top: 4, right: 4, width: 18, height: 18, borderRadius: '50%', background: 'rgba(15,23,42,.85)', color: '#fff', border: 'none', cursor: 'pointer', fontSize: 11, fontWeight: 700, lineHeight: '16px', padding: 0, zIndex: 4 }}>&times;</button>
+        )}
+        {!previewImageSrc && missingFilename && (
+          <div style={{ position: 'absolute', top: 4, right: 4, background: '#dc2626', color: '#fff', fontSize: 9, fontWeight: 700, fontFamily: 'monospace', padding: '2px 6px', borderRadius: 3, boxShadow: '0 1px 3px rgba(0,0,0,.25)', maxWidth: '90%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', pointerEvents: 'none', zIndex: 4 }} title={'Missing: ' + missingFilename}>
+            &#9888; {missingFilename}
+          </div>
+        )}
+      </>
+    );
+  }
 
   // Product tile types
   if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0) {
@@ -190,9 +210,9 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
   }
 
   if (tile.type === 'image_text') {
-    var img = (viewMode === 'mobile' ? tile.uploadedImageMobile : tile.uploadedImage) || tile.uploadedImage;
+    var img = previewImageSrc || ((viewMode === 'mobile' ? tile.uploadedImageMobile : tile.uploadedImage) || tile.uploadedImage);
     return (
-      <div className={cls} onClick={onClick} style={bgColor ? { background: bgColor } : undefined}>
+      <div className={cls} onClick={onClick} style={Object.assign({ position: 'relative' }, bgColor ? { background: bgColor } : {})}>
         {img
           ? <img src={img} className="tile-uploaded-img" alt="" />
           : tile.wireframeImage
@@ -208,12 +228,13 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
             <TextOverlayDisplay overlay={tile.textOverlay} textAlign={tile.textAlign} />
           </div>
         )}
+        {previewBadgeAndClear()}
       </div>
     );
   }
 
   // image or shoppable_image
-  var imgSrc = (viewMode === 'mobile' ? tile.uploadedImageMobile : tile.uploadedImage) || tile.uploadedImage;
+  var imgSrc = previewImageSrc || ((viewMode === 'mobile' ? tile.uploadedImageMobile : tile.uploadedImage) || tile.uploadedImage);
   var hasHotspots = tile.type === 'shoppable_image' && (tile.hotspots || []).length > 0;
   return (
     <div className={cls} onClick={onClick} style={Object.assign({ position: 'relative' }, bgColor ? { background: bgColor } : {})}>
@@ -258,6 +279,7 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
           padding: '1px 5px', borderRadius: 3, pointerEvents: 'none', zIndex: 2,
         }}>{(tile.hotspots || []).length} Hotspot{(tile.hotspots || []).length > 1 ? 's' : ''}</div>
       )}
+      {previewBadgeAndClear()}
     </div>
   );
 }
