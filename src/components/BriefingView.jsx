@@ -1467,7 +1467,10 @@ function PreviewMode({ store, onClose }) {
               </div>
             )}
             {folderLoaded && heroTile && !heroImgSrc && (
-              <div style={{ position: 'absolute', inset: 0, background: 'rgba(239,68,68,0.12)', border: '2px solid #ef4444', pointerEvents: 'none' }} />
+              <div style={{ position: 'absolute', top: 8, right: 8, background: '#dc2626', color: '#fff', fontSize: 11, fontWeight: 700, fontFamily: 'monospace', padding: '4px 8px', borderRadius: 4, boxShadow: '0 2px 6px rgba(0,0,0,.3)', pointerEvents: 'none', zIndex: 4 }}
+                title={'Missing: ' + tileFilename(heroPageName || 'page', heroSecIdx, heroTileIdx, tileEffectivelySynced(heroTile) ? 'sync' : pvMode)}>
+                &#9888; {tileFilename(heroPageName || 'page', heroSecIdx, heroTileIdx, tileEffectivelySynced(heroTile) ? 'sync' : pvMode)}
+              </div>
             )}
             {showFilenames && heroTile && heroPageName && (
               <div style={{ position: 'absolute', bottom: 6, left: 8, background: 'rgba(0,0,0,.7)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 9, padding: '2px 6px', borderRadius: 2 }}>
