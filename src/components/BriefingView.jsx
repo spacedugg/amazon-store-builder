@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, findLayout } from '../constants';
-import { loadStoreByShareToken } from '../storage';
+import { loadStoreByShareToken, saveStore } from '../storage';
 import { translateStoreForDesigner } from '../translateBriefing';
 import SectionView, { getGridConfig } from './SectionView';
 
@@ -919,30 +919,22 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
 // ─── SECTION BRIEFING (visual preview only) ───
 // Section label is positioned to the LEFT of the actual store content,
 // so the store layout itself looks clean (like real Amazon) without colored borders.
-function SectionBriefing({ section, sectionIndex, viewMode, products, sectionColor, selectedTile, onTileSelect, pageName, localImageMap, onClearTilePreview }) {
+function SectionBriefing({ section, sectionIndex, viewMode, products, sectionColor, selectedTile, onTileSelect, pageId, pageName, onClearTilePreview, onChangeTileHotspots }) {
   var layout = findLayout(section.layoutId);
 
-  // Build per-tile preview metadata: which loaded image to display and a
-  // clear-this-tile callback. Missing-image hints belong in Preview Mode
-  // only (rendered next to the section), so we do not pass `missing` here.
+  // Per tile callbacks. The actual image src lives on tile.uploadedImage and
+  // is read inside TileView, so we no longer need to pass it through.
   var previewByTileIndex = null;
-  if (pageName && localImageMap) {
+  if (pageName) {
     previewByTileIndex = {};
     (section.tiles || []).forEach(function(tile, ti) {
-      if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text' || tile.type === 'product_selector') return;
-      var fnSync = tileFilename(pageName, sectionIndex, ti, 'sync').toLowerCase();
-      var fnD = tileFilename(pageName, sectionIndex, ti, 'desktop').toLowerCase();
-      var fnM = tileFilename(pageName, sectionIndex, ti, 'mobile').toLowerCase();
-      var src = null;
-      if (tileEffectivelySynced(tile)) {
-        src = localImageMap[fnSync] || localImageMap[fnD] || localImageMap[fnM] || null;
-      } else {
-        var wantedKey = viewMode === 'mobile' ? fnM : fnD;
-        src = localImageMap[wantedKey] || localImageMap[fnSync] || null;
-      }
+      var hasImg = !!(tile.uploadedImage || tile.uploadedImageMobile);
       previewByTileIndex[ti] = {
-        src: src,
-        onClear: src && onClearTilePreview ? function() { onClearTilePreview(pageName, sectionIndex, ti); } : null,
+        src: null,
+        onClear: hasImg && onClearTilePreview ? function() { onClearTilePreview(pageName, sectionIndex, ti); } : null,
+        onChangeHotspots: (tile.type === 'shoppable_image' && onChangeTileHotspots && pageId)
+          ? function(newList) { onChangeTileHotspots(pageId, section.id, ti, newList); }
+          : null,
       };
     });
   }
@@ -981,7 +973,7 @@ function SectionBriefing({ section, sectionIndex, viewMode, products, sectionCol
 
 // ─── PAGE BRIEFING (center content — visual only, single page) ───
 // No page header inside the store layout — sections connect edge-to-edge like Amazon.
-function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTile, onTileSelect, store, localImageMap, onClearTilePreview }) {
+function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTile, onTileSelect, store, onClearTilePreview, onChangeTileHotspots }) {
   return (
     <div className="briefing-page" style={{ display: 'flex', flexDirection: 'column' }}>
       {page.sections.map(function(sec, si) {
@@ -995,9 +987,10 @@ function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTil
             sectionColor={getSectionColor(sectionStartIndex + si)}
             selectedTile={selectedTile}
             onTileSelect={onTileSelect}
+            pageId={page.id}
             pageName={page.name}
-            localImageMap={localImageMap}
             onClearTilePreview={onClearTilePreview}
+            onChangeTileHotspots={onChangeTileHotspots}
           />
         );
       })}
@@ -1739,6 +1732,7 @@ function MetaDescriptionsPanel({ pages, store }) {
 // ─── MAIN BRIEFING VIEW ───
 export default function BriefingView() {
   var [store, setStore] = useState(null);
+  var [storeId, setStoreId] = useState(null);
   var [loading, setLoading] = useState(true);
   var [error, setError] = useState(null);
   var [viewMode, setViewMode] = useState('desktop');
@@ -1754,17 +1748,52 @@ export default function BriefingView() {
   var pollRef = useRef(null);
   var bannerTimeoutRef = useRef(null);
   var folderInputRef = useRef(null);
-  var [localImageMap, setLocalImageMap] = useState({}); // { canonical_filename -> blob URL }
-  var [folderMatchCount, setFolderMatchCount] = useState(0);
+  var [isDirty, setIsDirty] = useState(false);
+  var isDirtyRef = useRef(false);
+  var [saving, setSaving] = useState(false);
+  var [saveStatus, setSaveStatus] = useState(null); // { kind, msg }
   var rightPanelRef = useRef(null);
 
-  // ─── FOLDER IMAGE UPLOAD (local preview in designer dashboard) ───
+  // Keep the polling loop in sync with the latest dirty flag without restarting the interval
+  useEffect(function() { isDirtyRef.current = isDirty; }, [isDirty]);
+
+  // Count tiles whose uploadedImage(s) are populated, used for the folder
+  // counter chip in the toolbar.
+  function countTileImages(s) {
+    if (!s) return 0;
+    var n = 0;
+    (s.pages || []).forEach(function(pg) {
+      (pg.sections || []).forEach(function(sec) {
+        (sec.tiles || []).forEach(function(tile) {
+          if (tile.uploadedImage) n++;
+          if (tile.uploadedImageMobile && tile.uploadedImageMobile !== tile.uploadedImage) n++;
+        });
+      });
+    });
+    return n;
+  }
+  var folderMatchCount = countTileImages(store);
+
+  function readFileAsDataUrl(file) {
+    return new Promise(function(resolve, reject) {
+      var reader = new FileReader();
+      reader.onload = function() { resolve(reader.result); };
+      reader.onerror = function() { reject(reader.error || new Error('Read failed')); };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // ─── FOLDER IMAGE UPLOAD ───
+  // Reads each file, matches it via the canonical filename map, and writes
+  // the data URL onto the matching tile in the store. The Save button later
+  // pushes the store back to /api/stores so the operator sees the same state.
   function handleBriefingFolderSelect(e) {
     var files = e.target.files;
     if (!files || files.length === 0 || !store) return;
     var fnMap = buildFilenameMap(store);
     var imageExts = /\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i;
-    var merged = Object.assign({}, localImageMap);
+    var assignments = []; // { entry, dataUrl }
+    var pending = [];
     for (var i = 0; i < files.length; i++) {
       var file = files[i];
       if (!imageExts.test(file.name)) continue;
@@ -1772,57 +1801,122 @@ export default function BriefingView() {
       if (rawName.normalize) rawName = rawName.normalize('NFC');
       var name = rawName.toLowerCase();
       var nameNoExt = name.replace(/\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i, '');
-      if (fnMap[name] && !merged[name]) {
-        merged[name] = URL.createObjectURL(file);
-      } else if (fnMap[nameNoExt + '.jpg'] && !merged[nameNoExt + '.jpg']) {
-        merged[nameNoExt + '.jpg'] = URL.createObjectURL(file);
-      } else {
+      var fnKey = null;
+      if (fnMap[name]) fnKey = name;
+      else if (fnMap[nameNoExt + '.jpg']) fnKey = nameNoExt + '.jpg';
+      else {
         var keys = Object.keys(fnMap);
         for (var k = 0; k < keys.length; k++) {
-          if (merged[keys[k]]) continue;
           var keyBase = keys[k].replace('.jpg', '');
           if (nameNoExt === keyBase || nameNoExt.indexOf(keyBase) >= 0 || keyBase.indexOf(nameNoExt) >= 0) {
-            merged[keys[k]] = URL.createObjectURL(file);
-            break;
+            fnKey = keys[k]; break;
           }
         }
       }
+      if (!fnKey) continue;
+      var entry = fnMap[fnKey];
+      pending.push(readFileAsDataUrl(file).then((function(en) {
+        return function(dataUrl) { assignments.push({ entry: en, dataUrl: dataUrl }); };
+      })(entry)));
     }
-    setLocalImageMap(merged);
-    setFolderMatchCount(Object.keys(merged).length);
     e.target.value = '';
+    Promise.all(pending).then(function() {
+      if (assignments.length === 0) return;
+      setStore(function(prev) {
+        if (!prev) return prev;
+        var clone = JSON.parse(JSON.stringify(prev));
+        assignments.forEach(function(a) {
+          var entry = a.entry;
+          var pg = (clone.pages || []).find(function(p) { return p.id === entry.pageId; });
+          if (!pg) return;
+          var sec = (pg.sections || []).find(function(s) { return s.id === entry.secId; });
+          if (!sec) return;
+          var tile = (sec.tiles || [])[entry.ti];
+          if (!tile) return;
+          if (entry.variant === 'sync') {
+            tile.uploadedImage = a.dataUrl;
+            tile.uploadedImageMobile = a.dataUrl;
+          } else if (entry.variant === 'desktop') {
+            tile.uploadedImage = a.dataUrl;
+          } else if (entry.variant === 'mobile') {
+            tile.uploadedImageMobile = a.dataUrl;
+          }
+        });
+        return clone;
+      });
+      setIsDirty(true);
+    });
   }
 
   function handleBriefingClearImages() {
-    Object.values(localImageMap).forEach(function(url) { try { URL.revokeObjectURL(url); } catch(e) {} });
-    setLocalImageMap({});
-    setFolderMatchCount(0);
-  }
-
-  // Remove all loaded preview images for a single tile (sync, desktop and
-  // mobile variants). Lets the designer dismiss an image at one tile spot
-  // without affecting the rest of the store.
-  function handleClearTilePreview(pageName, sectionIndex, tileIndex) {
-    var keys = ['sync', 'desktop', 'mobile'].map(function(v) {
-      return tileFilename(pageName, sectionIndex, tileIndex, v).toLowerCase();
-    });
-    setLocalImageMap(function(prev) {
-      var next = Object.assign({}, prev);
-      keys.forEach(function(k) {
-        if (next[k]) {
-          try { URL.revokeObjectURL(next[k]); } catch(e) {}
-          delete next[k];
-        }
+    if (!store) return;
+    setStore(function(prev) {
+      if (!prev) return prev;
+      var clone = JSON.parse(JSON.stringify(prev));
+      (clone.pages || []).forEach(function(pg) {
+        (pg.sections || []).forEach(function(sec) {
+          (sec.tiles || []).forEach(function(tile) {
+            if (tile.uploadedImage) tile.uploadedImage = '';
+            if (tile.uploadedImageMobile) tile.uploadedImageMobile = '';
+          });
+        });
       });
-      setFolderMatchCount(Object.keys(next).length);
-      return next;
+      return clone;
     });
+    setIsDirty(true);
   }
 
-  // Lookup a local folder image for a tile
-  function findLocalImage(pageName, sectionIndex, tileIndex, variant) {
-    var fn = tileFilename(pageName, sectionIndex, tileIndex, variant).toLowerCase();
-    return localImageMap[fn] || null;
+  // Clear uploadedImage/Mobile for one tile, addressed by page name + indices.
+  function handleClearTilePreview(pageName, sectionIndex, tileIndex) {
+    setStore(function(prev) {
+      if (!prev) return prev;
+      var clone = JSON.parse(JSON.stringify(prev));
+      var pg = (clone.pages || []).find(function(p) { return p.name === pageName; });
+      if (!pg) return prev;
+      var sec = (pg.sections || [])[sectionIndex];
+      if (!sec) return prev;
+      var tile = (sec.tiles || [])[tileIndex];
+      if (!tile) return prev;
+      tile.uploadedImage = '';
+      tile.uploadedImageMobile = '';
+      return clone;
+    });
+    setIsDirty(true);
+  }
+
+  // Replace the hotspots array on a single tile (used by drag and drop on
+  // shoppable images in the designer dashboard).
+  function handleChangeTileHotspots(pageId, sectionId, tileIndex, newHotspots) {
+    setStore(function(prev) {
+      if (!prev) return prev;
+      var clone = JSON.parse(JSON.stringify(prev));
+      var pg = (clone.pages || []).find(function(p) { return p.id === pageId; });
+      if (!pg) return prev;
+      var sec = (pg.sections || []).find(function(s) { return s.id === sectionId; });
+      if (!sec) return prev;
+      var tile = (sec.tiles || [])[tileIndex];
+      if (!tile) return prev;
+      tile.hotspots = newHotspots;
+      return clone;
+    });
+    setIsDirty(true);
+  }
+
+  function handleSaveBriefing() {
+    if (!store || !storeId || !token || saving) return;
+    setSaving(true);
+    setSaveStatus(null);
+    saveStore(JSON.parse(JSON.stringify(store)), storeId, token).then(function(result) {
+      setSaving(false);
+      setIsDirty(false);
+      // Fresh prev snapshot so polling does not flag our own write as a remote change
+      prevStoreRef.current = JSON.stringify(store);
+      setSaveStatus({ kind: 'ok', msg: 'Saved' + (result && result.imagesUploaded ? ' (' + result.imagesUploaded + ' images)' : '') });
+      setTimeout(function() { setSaveStatus(null); }, 4000);
+    }).catch(function(err) {
+      setSaving(false);
+      setSaveStatus({ kind: 'err', msg: 'Save failed: ' + (err && err.message ? err.message : 'unknown') });
+    });
   }
 
   var rawToken = window.location.pathname.split('/share/')[1] || '';
@@ -1838,6 +1932,7 @@ export default function BriefingView() {
     loadAttemptRef.current += 1;
     loadStoreByShareToken(token).then(function(result) {
       if (!result || !result.data) { setError('Store not found or link expired. Please request a new link.'); setLoading(false); return; }
+      setStoreId(result.id || null);
       setCurPage(result.data.pages && result.data.pages[0] ? result.data.pages[0].id : '');
       // Designer facing Felder direkt beim Initial Load ins Englische übersetzen.
       // Erst danach setStore, damit kein Flackern Deutsch zu Englisch entsteht.
@@ -1869,6 +1964,9 @@ export default function BriefingView() {
 
     pollRef.current = setInterval(function() {
       if (!prevStoreRef.current) return;
+      // Skip remote sync while the designer has unsaved local changes,
+      // otherwise their hotspot drags or uploaded images would be lost.
+      if (isDirtyRef.current) return;
       loadStoreByShareToken(token).then(function(result) {
         if (!result || !result.data) return;
         // Vor dem Vergleich übersetzen, sonst flackert die View bei jedem
@@ -2082,6 +2180,25 @@ export default function BriefingView() {
               title="Remove all loaded images">
               &times;
             </button>
+          )}
+          {/* Save button — only enabled when local edits exist */}
+          <button onClick={handleSaveBriefing}
+            disabled={!isDirty || saving || !storeId}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 5, marginLeft: 8,
+              background: isDirty ? 'rgba(34,197,94,.18)' : 'rgba(255,255,255,.04)',
+              border: '1px solid ' + (isDirty ? 'rgba(34,197,94,.45)' : 'rgba(255,255,255,.08)'),
+              color: isDirty ? '#4ade80' : 'rgba(255,255,255,.35)',
+              fontSize: 11, fontWeight: 700, padding: '5px 14px', borderRadius: 6,
+              cursor: (isDirty && !saving) ? 'pointer' : 'default', transition: 'all .2s'
+            }}
+            title={isDirty ? 'Save uploaded images and hotspot positions' : 'No unsaved changes'}>
+            {saving ? 'Saving…' : (isDirty ? 'Save' : 'Saved')}
+          </button>
+          {saveStatus && (
+            <span style={{ marginLeft: 6, fontSize: 11, fontWeight: 600, color: saveStatus.kind === 'ok' ? '#4ade80' : '#f87171' }}>
+              {saveStatus.msg}
+            </span>
           )}
           {/* Preview button — secondary, further out */}
           <button onClick={function() { setShowPreview(true); }}
@@ -2581,7 +2698,7 @@ export default function BriefingView() {
           {/* Single page content — meta descriptions moved to Store Info tab */}
           {(function() {
             if (!activePage) return <div className="briefing-empty">No pages found.</div>;
-            return <PageBriefing page={activePage} viewMode={viewMode} products={store.products || []} sectionStartIndex={0} selectedTile={selectedTile} onTileSelect={handleTileSelect} store={store} localImageMap={localImageMap} onClearTilePreview={handleClearTilePreview} />;
+            return <PageBriefing page={activePage} viewMode={viewMode} products={store.products || []} sectionStartIndex={0} selectedTile={selectedTile} onTileSelect={handleTileSelect} store={store} onClearTilePreview={handleClearTilePreview} onChangeTileHotspots={handleChangeTileHotspots} />;
           })()}
           </div>
         </div>

@@ -545,6 +545,7 @@ export default function SectionView({ section, idx, totalSections, sel, onSelect
                 uiLang={uiLang}
                 previewImageSrc={previewByTileIndex && previewByTileIndex[i] ? previewByTileIndex[i].src : null}
                 onClearPreview={previewByTileIndex && previewByTileIndex[i] ? previewByTileIndex[i].onClear : null}
+                onChangeHotspots={previewByTileIndex && previewByTileIndex[i] ? previewByTileIndex[i].onChangeHotspots : null}
               />
             </div>
           );
