@@ -238,10 +238,14 @@ export async function fetchDesignerTimer(shareToken) {
   } catch (e) { return { seconds: 0, running: false }; }
 }
 
-// Auto-save stays in localStorage (frequent writes, no need for DB)
-export function autoSave(store) {
+// Auto-save stays in localStorage (frequent writes, no need for DB).
+// Speichert zusätzlich storeId und shareToken damit nach einem Browser
+// Reload die Verbindung zum Backend Eintrag erhalten bleibt und nicht ein
+// neuer Saved Store Eintrag entsteht.
+export function autoSave(store, storeId, shareToken) {
   try {
-    localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(store));
+    var payload = { store: store, storeId: storeId || null, shareToken: shareToken || null };
+    localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(payload));
   } catch (e) { /* ignore */ }
 }
 
@@ -249,6 +253,10 @@ export function loadAutoSave() {
   try {
     var raw = localStorage.getItem(AUTOSAVE_KEY);
     if (!raw) return null;
-    return JSON.parse(raw);
+    var parsed = JSON.parse(raw);
+    // Backward Compat: alte autoSave hatte direkt den Store ohne Wrapper
+    if (parsed && parsed.store && parsed.store.pages) return parsed;
+    if (parsed && parsed.pages) return { store: parsed, storeId: null, shareToken: null };
+    return null;
   } catch (e) { return null; }
 }

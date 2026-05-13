@@ -339,10 +339,13 @@ export default function App() {
   // Designer keine Notification Flut bei jeder kleinen Änderung bekommt.
   useEffect(function() {
     if (store.pages.length > 0) {
-      autoSave(store);
+      // storeId und shareToken mitschreiben damit nach Browser Reload die
+      // Verbindung zum Backend Eintrag erhalten bleibt und kein neuer
+      // Saved Store Eintrag entsteht.
+      autoSave(store, storeId, shareToken);
       setWarnings(validateStore(store));
     }
-  }, [store]);
+  }, [store, storeId, shareToken]);
 
   var [autoSaveStatus, setAutoSaveStatus] = useState('idle'); // idle | saving | saved | error
   var dbAutoSaveTimerRef = useRef(null);
@@ -1081,10 +1084,18 @@ export default function App() {
 
   var handleLoadAutoSave = function() {
     var data = loadAutoSave();
-    if (data && data.pages && data.pages.length > 0) {
-      setStore(refreshImageRefs(data));
-      setCurPage(data.pages[0] ? data.pages[0].id : '');
+    var s = data && data.store;
+    if (s && s.pages && s.pages.length > 0) {
+      setStore(refreshImageRefs(s));
+      setCurPage(s.pages[0] ? s.pages[0].id : '');
       setSel(null);
+      // Backend Verbindung wiederherstellen damit Save den vorhandenen
+      // Eintrag aktualisiert statt einen neuen anzulegen.
+      if (data.storeId) {
+        setStoreId(data.storeId);
+        storeIdRef.current = data.storeId;
+      }
+      if (data.shareToken) setShareToken(data.shareToken);
     }
   };
 
@@ -1468,7 +1479,7 @@ export default function App() {
   var hasAutoSave = false;
   try {
     var autoData = loadAutoSave();
-    hasAutoSave = autoData && autoData.pages && autoData.pages.length > 0;
+    hasAutoSave = autoData && autoData.store && autoData.store.pages && autoData.store.pages.length > 0;
   } catch(e) { /* ignore */ }
 
   return (
