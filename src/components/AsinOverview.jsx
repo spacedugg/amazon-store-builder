@@ -1,5 +1,35 @@
 import { useState } from 'react';
 
+// Aggregiert die Store internen Kategorien pro ASIN aus store.asins[].
+// Eine ASIN kann mehreren Kategorien zugeordnet sein, wenn sie mehrfach mit
+// unterschiedlichen category Werten in der asins Liste auftaucht.
+function buildCategoryMap(store) {
+  var map = {};
+  (store.asins || []).forEach(function(entry) {
+    var asin = typeof entry === 'string' ? entry : (entry && entry.asin);
+    var cat = entry && typeof entry === 'object' ? (entry.category || '') : '';
+    if (!asin) return;
+    if (!map[asin]) map[asin] = [];
+    if (cat && map[asin].indexOf(cat) < 0) map[asin].push(cat);
+  });
+  return map;
+}
+
+// Baut einen Tab Separated Text Block aus allen ASINs im Store mit Title und
+// Store internen Kategorien. Format ist Header plus eine Zeile pro ASIN,
+// Spalten ASIN, Title, Categories. Mehrere Kategorien pro ASIN werden durch
+// Komma getrennt. Direkt pastebar in Claude Code, Sheets, Editoren.
+function buildAsinCopyText(asins, productMap, categoryMap) {
+  var lines = ['ASIN\tTitle\tCategories'];
+  asins.forEach(function(asin) {
+    var prod = productMap[asin];
+    var title = (prod && prod.name) ? prod.name.replace(/\t/g, ' ').replace(/\r?\n/g, ' ').trim() : '';
+    var cats = (categoryMap[asin] || []).join(', ');
+    lines.push(asin + '\t' + title + '\t' + cats);
+  });
+  return lines.join('\n');
+}
+
 // Sammelt alle ASINs aus dem Store: tile.asins (nur echte B0...), tile.linkAsin,
 // tile.hotspots[].asin und store.asins[].asin. Gibt Liste plus Locations zurück.
 function gatherStoreAsins(store) {
@@ -40,6 +70,7 @@ export default function AsinOverview({ store, products, onClose, onMoveAsin, onS
   var [scraping, setScraping] = useState(false);
   var [scrapeMsg, setScrapeMsg] = useState('');
   var [sortMsg, setSortMsg] = useState('');
+  var [copyMsg, setCopyMsg] = useState('');
 
   if (!store || !store.pages || store.pages.length === 0) {
     return (
@@ -58,6 +89,7 @@ export default function AsinOverview({ store, products, onClose, onMoveAsin, onS
   // Alle ASINs im Store sammeln, plus Locations
   var asinLocations = gatherStoreAsins(store);
   var allAsins = Object.keys(asinLocations);
+  var categoryMap = buildCategoryMap(store);
 
   // Wer hat Produktdaten, wer fehlt
   var productMap = {};
@@ -105,7 +137,41 @@ export default function AsinOverview({ store, products, onClose, onMoveAsin, onS
             <span style={{ fontSize: 11, color: '#64748b' }}>
               Mit Produktdaten: <b>{withData.length}</b>, ohne: <b>{withoutData.length}</b>
             </span>
+            {/* Copy ASIN Liste mit Title und Store Kategorien als TSV in die
+                Zwischenablage. Praktisch um sie in Claude Code, Sheets oder
+                Editor weiterzuverarbeiten. Seitenzuordnung wird bewusst NICHT
+                exportiert, nur die Store internen Produkt Kategorien. */}
+            <button
+              className="btn"
+              disabled={allAsins.length === 0}
+              onClick={async function() {
+                var text = buildAsinCopyText(allAsins, productMap, categoryMap);
+                try {
+                  await navigator.clipboard.writeText(text);
+                  setCopyMsg(allAsins.length + ' ASINs (Title und Kategorien) in die Zwischenablage kopiert');
+                  setTimeout(function() { setCopyMsg(''); }, 2500);
+                } catch (e) {
+                  // Fallback wenn Clipboard API blockiert ist (alte Browser, http)
+                  var ta = document.createElement('textarea');
+                  ta.value = text;
+                  document.body.appendChild(ta);
+                  ta.select();
+                  try { document.execCommand('copy'); setCopyMsg(allAsins.length + ' ASINs kopiert (Fallback)'); }
+                  catch (e2) { setCopyMsg('Kopieren fehlgeschlagen, bitte manuell kopieren'); }
+                  document.body.removeChild(ta);
+                  setTimeout(function() { setCopyMsg(''); }, 2500);
+                }
+              }}
+              title="Kopiert ASIN, Title und Store Kategorie pro Zeile als Tab Separated Text. Direkt in Claude Code oder Sheets pastebar."
+              style={{ fontSize: 12, padding: '6px 14px', marginLeft: 'auto' }}>
+              ASIN Liste kopieren
+            </button>
           </div>
+          {copyMsg && (
+            <div style={{ marginTop: 6, padding: '6px 8px', background: '#dbeafe', borderRadius: 4, fontSize: 11, color: '#1e40af' }}>
+              {copyMsg}
+            </div>
+          )}
           {scrapeMsg && (
             <div style={{ marginTop: 6, padding: '6px 8px', background: scrapeMsg.indexOf('Fehler') === 0 ? '#fee2e2' : '#dcfce7', borderRadius: 4, fontSize: 11, color: scrapeMsg.indexOf('Fehler') === 0 ? '#991b1b' : '#166534' }}>
               {scrapeMsg}

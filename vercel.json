@@ -6,6 +6,8 @@
     "api/amazon-search.js": { "maxDuration": 300 },
     "api/amazon-brand-discover.js": { "maxDuration": 60 },
     "api/stores.js": { "maxDuration": 30 },
+    "api/store-images.js": { "maxDuration": 30 },
+    "api/translate.js": { "maxDuration": 60 },
     "api/scrape-website.js": { "maxDuration": 300 },
     "api/crawl-brand-store.js": { "maxDuration": 60 },
     "api/analyze-images.js": { "maxDuration": 60 },
@@ -14,7 +16,8 @@
     "api/generate-wireframe.js": { "maxDuration": 60 },
     "api/crawl-store-nav.js": { "maxDuration": 60 },
     "api/analyze-store-page.js": { "maxDuration": 60 },
-    "api/juskys-store.js": { "includeFiles": "seed/juskys-store.json" }
+    "api/juskys-store.js": { "includeFiles": "seed/juskys-store.json" },
+    "api/true-nature-store.js": { "includeFiles": "seed/true-nature-store.json" }
   },
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },

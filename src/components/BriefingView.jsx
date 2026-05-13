@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, findLayout } from '../constants';
-import { loadStoreByShareToken } from '../storage';
+import { loadStoreByShareToken, saveStore } from '../storage';
+import { translateStoreForDesigner } from '../translateBriefing';
 import SectionView, { getGridConfig } from './SectionView';
 
 var noop = function() {};
@@ -15,6 +16,20 @@ function isSameAspectRatio(deskDims, mobDims) {
   var deskRatio = deskDims.w / deskDims.h;
   var mobRatio = mobDims.w / mobDims.h;
   return Math.abs(deskRatio - mobRatio) < 0.01;
+}
+
+// A tile is effectively synced (only one image needed) when:
+// - syncDimensions flag is explicitly set, OR
+// - mobile dimensions are absent (mobile inherits desktop), OR
+// - desktop and mobile dimensions share the same aspect ratio.
+// Without this, a tile whose desktop and mobile dims happen to be identical
+// but whose syncDimensions checkbox is unchecked would expect two separate
+// files and report 50 percent missing.
+function tileEffectivelySynced(tile) {
+  if (!tile) return false;
+  if (tile.syncDimensions) return true;
+  if (!tile.mobileDimensions) return true;
+  return isSameAspectRatio(tile.dimensions, tile.mobileDimensions);
 }
 
 // ─── META DESCRIPTION GENERATOR ───
@@ -226,14 +241,19 @@ function buildFilenameMap(store) {
     (pg.sections || []).forEach(function(sec, si) {
       (sec.tiles || []).forEach(function(tile, ti) {
         if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text' || tile.type === 'product_selector') return;
-        if (tile.syncDimensions) {
+        if (tileEffectivelySynced(tile)) {
+          // Accept any of the three naming conventions the designer may have used.
           var fn = tileFilename(pg.name, si, ti, 'sync');
-          map[fn.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'sync' };
-        } else {
           var fnD = tileFilename(pg.name, si, ti, 'desktop');
           var fnM = tileFilename(pg.name, si, ti, 'mobile');
-          map[fnD.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'desktop' };
-          map[fnM.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'mobile' };
+          map[fn.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'sync' };
+          map[fnD.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'sync' };
+          map[fnM.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'sync' };
+        } else {
+          var fnD2 = tileFilename(pg.name, si, ti, 'desktop');
+          var fnM2 = tileFilename(pg.name, si, ti, 'mobile');
+          map[fnD2.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'desktop' };
+          map[fnM2.toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'mobile' };
         }
       });
     });
@@ -262,17 +282,19 @@ function buildDuplicateMap(store) {
   return map;
 }
 
-// Render inline text with **bold**, "quoted", and category tags
+// Render inline text with category tags und "quoted" Zitate. Legacy
+// **bold** Marker werden ersatzlos gestrippt, damit alte Briefings nicht
+// mit literalen Sternchen erscheinen.
 function renderInlineFormatting(text, keyBase) {
+  var stripped = String(text == null ? '' : text).replace(/\*\*([^*]+)\*\*/g, '$1');
   var parts = [];
   var k = keyBase || 0;
-  // Process: category tags, **bold**, "quoted"
-  var pattern = /(\[(?:STORE_HERO|BENEFIT|PRODUCT|CREATIVE|LIFESTYLE|TEXT_IMAGE)\]|\*\*(.+?)\*\*|"([^"]+)")/g;
+  var pattern = /(\[(?:STORE_HERO|BENEFIT|PRODUCT|CREATIVE|LIFESTYLE|TEXT_IMAGE)\]|"([^"]+)")/g;
   var lastIndex = 0;
   var match;
-  while ((match = pattern.exec(text)) !== null) {
+  while ((match = pattern.exec(stripped)) !== null) {
     if (match.index > lastIndex) {
-      parts.push(<span key={k++}>{text.substring(lastIndex, match.index)}</span>);
+      parts.push(<span key={k++}>{stripped.substring(lastIndex, match.index)}</span>);
     }
     if (CATEGORY_TAG_MAP[match[0]]) {
       parts.push(
@@ -281,16 +303,12 @@ function renderInlineFormatting(text, keyBase) {
         </span>
       );
     } else if (match[2]) {
-      // **bold**
-      parts.push(<strong key={k++}>{match[2]}</strong>);
-    } else if (match[3]) {
-      // "quoted" — styled as quoted text for designer
-      parts.push(<span key={k++} style={{ fontStyle: 'italic', color: '#0f172a', background: '#fef9c3', padding: '0 3px', borderRadius: 2 }}>&bdquo;{match[3]}&ldquo;</span>);
+      parts.push(<span key={k++} style={{ fontStyle: 'italic', color: '#0f172a', background: '#fef9c3', padding: '0 3px', borderRadius: 2 }}>&bdquo;{match[2]}&ldquo;</span>);
     }
     lastIndex = pattern.lastIndex;
   }
-  if (lastIndex < text.length) {
-    parts.push(<span key={k++}>{text.substring(lastIndex)}</span>);
+  if (lastIndex < stripped.length) {
+    parts.push(<span key={k++}>{stripped.substring(lastIndex)}</span>);
   }
   return parts;
 }
@@ -554,16 +572,13 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
       </div>
 
       {duplicateInfo && duplicateInfo.count > 1 && (
-        <div className="briefing-field" style={{ background: '#ecfdf5', border: '2px solid #10b981', borderRadius: 4, padding: '6px 10px', marginBottom: 6 }}>
-          <div style={{ fontSize: 11, fontWeight: 700, color: '#047857', marginBottom: 2 }}>
-            Diese Kachel kommt {duplicateInfo.count} mal im Store vor
-          </div>
-          <div style={{ fontSize: 10, color: '#065f46', lineHeight: 1.4 }}>
-            Bild nur einmal designen. Beim Upload ins Tool reicht der Reuse Filename in einem Ordner, das Tool verteilt das Bild automatisch auf alle {duplicateInfo.count} Stellen. Bei Per Page Ordner Übergabe an den Kunden: dasselbe File in alle {duplicateInfo.count} Page Ordner kopieren, damit pro Page Ordner alle Bilder dieser Page liegen.
+        <div className="briefing-field" style={{ background: '#ecfdf5', border: '1px solid #10b981', borderRadius: 4, padding: '4px 8px', marginBottom: 6 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, color: '#047857' }}>
+            Reused {duplicateInfo.count}× — design once, see Upload Instructions
           </div>
           {duplicateInfo.others && duplicateInfo.others.length > 0 && (
             <div style={{ marginTop: 4, fontSize: 10, color: '#065f46' }}>
-              Auch in:
+              Also in:
               <ul style={{ margin: '2px 0 0 14px', padding: 0 }}>
                 {duplicateInfo.others.slice(0, 8).map(function(loc, i) {
                   return <li key={i}><b>{loc.page}</b>, S{loc.section} T{loc.tile}</li>;
@@ -608,14 +623,8 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
         var hasContent = ov.heading || ov.subheading || ov.body || (ov.bullets && ov.bullets.filter(Boolean).length) || ov.cta;
         if (!hasContent) return null;
         var renderHL = function(s) {
-          if (!s) return null;
-          var parts = s.split(/(\*\*[^*]+\*\*)/g);
-          return parts.map(function(p, i) {
-            if (p.length > 4 && p.slice(0, 2) === '**' && p.slice(-2) === '**') {
-              return <span key={i} style={{ color: '#93bd26', fontWeight: 700 }}>{p.slice(2, -2)}</span>;
-            }
-            return <span key={i}>{p}</span>;
-          });
+          if (s == null) return null;
+          return String(s).replace(/\*\*([^*]+)\*\*/g, '$1');
         };
         var rowStyle = { display: 'flex', gap: 6, alignItems: 'baseline', marginTop: 3 };
         var tagStyle = function(bg, color) { return { background: bg, color: color, borderRadius: 2, padding: '0 4px', fontSize: 8, fontWeight: 700, flexShrink: 0 }; };
@@ -626,19 +635,19 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
               {ov.heading && (
                 <div style={rowStyle}>
                   <span style={tagStyle('#dbeafe', '#1d4ed8')}>HEADING</span>
-                  <span style={{ fontSize: 12, fontWeight: 700, color: '#1e293b' }}>{renderHL(ov.heading)}</span>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: '#1e293b', whiteSpace: 'pre-line' }}>{renderHL(ov.heading)}</span>
                 </div>
               )}
               {ov.subheading && (
                 <div style={rowStyle}>
                   <span style={tagStyle('#e0e7ff', '#4338ca')}>SUBHEADING</span>
-                  <span style={{ fontSize: 11, fontWeight: 600, color: '#1e293b' }}>{ov.subheading}</span>
+                  <span style={{ fontSize: 11, fontWeight: 600, color: '#1e293b', whiteSpace: 'pre-line' }}>{ov.subheading}</span>
                 </div>
               )}
               {ov.body && (
                 <div style={rowStyle}>
                   <span style={tagStyle('#f1f5f9', '#475569')}>BODY</span>
-                  <span style={{ fontSize: 11, color: '#1e293b' }}>{ov.body}</span>
+                  <span style={{ fontSize: 11, color: '#1e293b', whiteSpace: 'pre-line' }}>{ov.body}</span>
                 </div>
               )}
               {ov.bullets && ov.bullets.filter(Boolean).map(function(b, bi) {
@@ -749,7 +758,7 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
                     href={amazonUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    title={'Auf Amazon öffnen: ' + p.asin}
+                    title={'Open on Amazon: ' + p.asin}
                     style={{ display: 'flex', alignItems: 'center', gap: 5, background: '#fff', borderRadius: 4, padding: '3px 6px', border: '1px solid #e0f2fe', maxWidth: 200, textDecoration: 'none', cursor: 'pointer' }}
                     onMouseEnter={function(e) { e.currentTarget.style.borderColor = '#0369a1'; e.currentTarget.style.boxShadow = '0 1px 4px rgba(3,105,161,.18)'; }}
                     onMouseLeave={function(e) { e.currentTarget.style.borderColor = '#e0f2fe'; e.currentTarget.style.boxShadow = 'none'; }}
@@ -837,7 +846,7 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
           <div style={{ marginTop: 4, padding: '4px 0', fontSize: 10, lineHeight: 1.8 }}>
             {hasReuse && (
               <div style={{ marginBottom: 4 }}>
-                <div style={{ fontSize: 9, fontWeight: 700, color: '#047857', marginBottom: 2 }}>Reuse Filename (ein File für alle {duplicateInfo.count} Stellen)</div>
+                <div style={{ fontSize: 9, fontWeight: 700, color: '#047857', marginBottom: 2 }}>Reuse Filename (one file for all {duplicateInfo.count} places)</div>
                 {sameRatio
                   ? <CopyableFilename filename={tile.imageRef + '.jpg'} />
                   : (
@@ -848,7 +857,7 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
                   )}
               </div>
             )}
-            {hasReuse && <div style={{ fontSize: 9, fontWeight: 700, color: '#475569', marginBottom: 2 }}>Per Tile Filename (Alternative, einzeln)</div>}
+            {hasReuse && <div style={{ fontSize: 9, fontWeight: 700, color: '#475569', marginBottom: 2 }}>Per Tile Filename (alternative, separate)</div>}
             {sameRatio
               ? <CopyableFilename filename={tileFilename(pageName, sectionIndex, tileIndex, 'sync')} />
               : (
@@ -910,8 +919,25 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
 // ─── SECTION BRIEFING (visual preview only) ───
 // Section label is positioned to the LEFT of the actual store content,
 // so the store layout itself looks clean (like real Amazon) without colored borders.
-function SectionBriefing({ section, sectionIndex, viewMode, products, sectionColor, selectedTile, onTileSelect }) {
+function SectionBriefing({ section, sectionIndex, viewMode, products, sectionColor, selectedTile, onTileSelect, pageId, pageName, onClearTilePreview, onChangeTileHotspots }) {
   var layout = findLayout(section.layoutId);
+
+  // Per tile callbacks. The actual image src lives on tile.uploadedImage and
+  // is read inside TileView, so we no longer need to pass it through.
+  var previewByTileIndex = null;
+  if (pageName) {
+    previewByTileIndex = {};
+    (section.tiles || []).forEach(function(tile, ti) {
+      var hasImg = !!(tile.uploadedImage || tile.uploadedImageMobile);
+      previewByTileIndex[ti] = {
+        src: null,
+        onClear: hasImg && onClearTilePreview ? function() { onClearTilePreview(pageName, sectionIndex, ti); } : null,
+        onChangeHotspots: (tile.type === 'shoppable_image' && onChangeTileHotspots && pageId)
+          ? function(newList) { onChangeTileHotspots(pageId, section.id, ti, newList); }
+          : null,
+      };
+    });
+  }
 
   return (
     <div style={{ display: 'flex', alignItems: 'stretch', position: 'relative' }}>
@@ -938,6 +964,7 @@ function SectionBriefing({ section, sectionIndex, viewMode, products, sectionCol
           viewMode={viewMode}
           products={products || []}
           uiLang="en"
+          previewByTileIndex={previewByTileIndex}
         />
       </div>
     </div>
@@ -946,7 +973,7 @@ function SectionBriefing({ section, sectionIndex, viewMode, products, sectionCol
 
 // ─── PAGE BRIEFING (center content — visual only, single page) ───
 // No page header inside the store layout — sections connect edge-to-edge like Amazon.
-function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTile, onTileSelect, store }) {
+function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTile, onTileSelect, store, onClearTilePreview, onChangeTileHotspots }) {
   return (
     <div className="briefing-page" style={{ display: 'flex', flexDirection: 'column' }}>
       {page.sections.map(function(sec, si) {
@@ -960,6 +987,10 @@ function PageBriefing({ page, viewMode, products, sectionStartIndex, selectedTil
             sectionColor={getSectionColor(sectionStartIndex + si)}
             selectedTile={selectedTile}
             onTileSelect={onTileSelect}
+            pageId={page.id}
+            pageName={page.name}
+            onClearTilePreview={onClearTilePreview}
+            onChangeTileHotspots={onChangeTileHotspots}
           />
         );
       })}
@@ -991,7 +1022,7 @@ function StoreHeroBanner({ store, activePage, viewMode, onHeroClick, isSelected 
             <div className="briefing-hero-brief"><BriefTextHighlighted text={brief} /></div>
           )}
           {textOverlay && (
-            <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginTop: 4 }}>{textOverlay}</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: '#1e293b', marginTop: 4, whiteSpace: 'pre-line' }}>{textOverlay}</div>
           )}
           {!brief && (
             <div style={{ fontSize: 11, color: '#94a3b8', fontStyle: 'italic', marginTop: 4 }}>No design brief set for this banner</div>
@@ -1247,10 +1278,14 @@ function PreviewMode({ store, onClose }) {
       (pg.sections || []).forEach(function(sec, si) {
         (sec.tiles || []).forEach(function(tile, ti) {
           if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text' || tile.type === 'product_selector') return;
-          if (tile.syncDimensions) {
+          if (tileEffectivelySynced(tile)) {
             matchReport.total += 1;
             var fn = tileFilename(pg.name, si, ti, 'sync').toLowerCase();
-            if (imageMap[fn]) { matchReport.matched += 1; } else {
+            var fnDS = tileFilename(pg.name, si, ti, 'desktop').toLowerCase();
+            var fnMS = tileFilename(pg.name, si, ti, 'mobile').toLowerCase();
+            if (imageMap[fn] || imageMap[fnDS] || imageMap[fnMS]) {
+              matchReport.matched += 1;
+            } else {
               matchReport.missing.push({ page: pg.name, section: si + 1, tile: ti + 1, filename: tileFilename(pg.name, si, ti, 'sync') });
             }
           } else {
@@ -1270,12 +1305,14 @@ function PreviewMode({ store, onClose }) {
   }
   var matchPct = matchReport.total > 0 ? Math.round((matchReport.matched / matchReport.total) * 100) : 0;
 
-  // Build a set of missing tile keys for red highlighting in preview
+  // Build a map of tile keys → list of expected-but-missing filenames
+  // (for a small badge next to the tile, no full red wash)
   var missingTileSet = {};
   if (folderLoaded) {
     matchReport.missing.forEach(function(m) {
-      // key: "pageName|section|tile" (1-based section/tile)
-      missingTileSet[m.page + '|' + m.section + '|' + m.tile] = true;
+      var key = m.page + '|' + m.section + '|' + m.tile;
+      if (!missingTileSet[key]) missingTileSet[key] = [];
+      missingTileSet[key].push(m.filename);
     });
   }
 
@@ -1301,8 +1338,10 @@ function PreviewMode({ store, onClose }) {
 
   var heroImgSrc = null;
   if (heroTile && heroPageName) {
-    if (heroTile.syncDimensions) {
-      heroImgSrc = findTileImage(heroPageName, heroSecIdx, heroTileIdx, 'sync');
+    if (tileEffectivelySynced(heroTile)) {
+      heroImgSrc = findTileImage(heroPageName, heroSecIdx, heroTileIdx, 'sync')
+        || findTileImage(heroPageName, heroSecIdx, heroTileIdx, 'desktop')
+        || findTileImage(heroPageName, heroSecIdx, heroTileIdx, 'mobile');
     } else {
       heroImgSrc = findTileImage(heroPageName, heroSecIdx, heroTileIdx, pvMode);
       if (!heroImgSrc) heroImgSrc = findTileImage(heroPageName, heroSecIdx, heroTileIdx, pvMode === 'desktop' ? 'mobile' : 'desktop');
@@ -1418,11 +1457,14 @@ function PreviewMode({ store, onClose }) {
               </div>
             )}
             {folderLoaded && heroTile && !heroImgSrc && (
-              <div style={{ position: 'absolute', inset: 0, background: 'rgba(239,68,68,0.12)', border: '2px solid #ef4444', pointerEvents: 'none' }} />
+              <div style={{ position: 'absolute', top: 8, right: 8, background: '#dc2626', color: '#fff', fontSize: 11, fontWeight: 700, fontFamily: 'monospace', padding: '4px 8px', borderRadius: 4, boxShadow: '0 2px 6px rgba(0,0,0,.3)', pointerEvents: 'none', zIndex: 4 }}
+                title={'Missing: ' + tileFilename(heroPageName || 'page', heroSecIdx, heroTileIdx, tileEffectivelySynced(heroTile) ? 'sync' : pvMode)}>
+                &#9888; {tileFilename(heroPageName || 'page', heroSecIdx, heroTileIdx, tileEffectivelySynced(heroTile) ? 'sync' : pvMode)}
+              </div>
             )}
             {showFilenames && heroTile && heroPageName && (
               <div style={{ position: 'absolute', bottom: 6, left: 8, background: 'rgba(0,0,0,.7)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 9, padding: '2px 6px', borderRadius: 2 }}>
-                {tileFilename(heroPageName, heroSecIdx, heroTileIdx, heroTile.syncDimensions ? 'sync' : pvMode)}
+                {tileFilename(heroPageName, heroSecIdx, heroTileIdx, tileEffectivelySynced(heroTile) ? 'sync' : pvMode)}
               </div>
             )}
           </div>
@@ -1503,6 +1545,18 @@ function PreviewMode({ store, onClose }) {
               var config = getGridConfig(layout, isMobile);
               var sectionLabel = sec.name || ('Section ' + (si + 1));
               var layoutLabel = layout ? layout.name : sec.layoutId;
+              // Collect per-tile missing filename hints for the right-side column
+              var sectionMissingItems = [];
+              if (folderLoaded) {
+                sec.tiles.forEach(function(tile, ti) {
+                  var isProductT = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
+                  if (isProductT || tile.type === 'text' || tile.type === 'product_selector') return;
+                  var miss = missingTileSet[activePg.name + '|' + (si + 1) + '|' + (ti + 1)];
+                  if (miss && miss.length > 0) {
+                    sectionMissingItems.push({ ti: ti, filenames: miss });
+                  }
+                });
+              }
               return (
                 <div key={sec.id} style={{ position: 'relative', marginBottom: isMobile ? 10 : 20 }}>
                   {/* Section label outside the store mask, positioned to the left */}
@@ -1511,6 +1565,26 @@ function PreviewMode({ store, onClose }) {
                     <div style={{ fontSize: 9, color: '#94a3b8', maxWidth: 120, overflow: 'hidden', textOverflow: 'ellipsis' }}>{sectionLabel}</div>
                     <div style={{ fontSize: 8, color: '#b0b8c4', fontStyle: 'italic' }}>{layoutLabel}</div>
                   </div>
+                  {/* Missing-image hint column outside the store mask, positioned to the right */}
+                  {sectionMissingItems.length > 0 && (
+                    <div style={{ position: 'absolute', left: '100%', top: 0, paddingLeft: 10, display: 'flex', flexDirection: 'column', gap: 4, maxWidth: 240 }}>
+                      {sectionMissingItems.map(function(item) {
+                        return (
+                          <div key={item.ti} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                            {item.filenames.map(function(fn, mi) {
+                              return (
+                                <div key={mi} title={'Missing: ' + fn}
+                                  style={{ background: '#fee2e2', border: '1px solid #fecaca', color: '#b91c1c', fontSize: 9, fontWeight: 700, fontFamily: 'monospace', padding: '2px 6px', borderRadius: 3, lineHeight: 1.3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                  <span style={{ color: '#64748b', marginRight: 4, fontWeight: 600 }}>T{item.ti + 1}</span>
+                                  &#9888; {fn}
+                                </div>
+                              );
+                            })}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                   <div style={Object.assign({}, config.gridStyle, { display: 'grid', gap: isMobile ? 9 : 18, width: '100%', overflow: 'hidden' })}>
                     {sec.tiles.map(function(tile, ti) {
                       var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
@@ -1522,8 +1596,10 @@ function PreviewMode({ store, onClose }) {
                       // Only show name-matched images from loaded folders — never show editor-uploaded images
                       var matchedImgSrc = null;
                       if (!isProduct && tile.type !== 'text' && tile.type !== 'product_selector') {
-                        if (tile.syncDimensions) {
-                          matchedImgSrc = findTileImage(activePg.name, si, ti, 'sync');
+                        if (tileEffectivelySynced(tile)) {
+                          matchedImgSrc = findTileImage(activePg.name, si, ti, 'sync')
+                            || findTileImage(activePg.name, si, ti, 'desktop')
+                            || findTileImage(activePg.name, si, ti, 'mobile');
                         } else {
                           matchedImgSrc = findTileImage(activePg.name, si, ti, pvMode);
                           if (!matchedImgSrc) matchedImgSrc = findTileImage(activePg.name, si, ti, pvMode === 'desktop' ? 'mobile' : 'desktop');
@@ -1531,13 +1607,28 @@ function PreviewMode({ store, onClose }) {
                         }
                       }
 
-                      // Check if this tile is missing an image (red highlight)
-                      var isMissing = folderLoaded && !isProduct && tile.type !== 'text' && tile.type !== 'product_selector' && missingTileSet[activePg.name + '|' + (si + 1) + '|' + (ti + 1)];
+                      // Click target: subpage link wins over ASIN link
+                      var pageTarget = null;
+                      if (tile.linkUrl) {
+                        var linkPid = String(tile.linkUrl).replace(/^\//, '');
+                        if (pages.find(function(p) { return p.id === linkPid; })) pageTarget = linkPid;
+                      }
+                      var asinTarget = (!pageTarget && tile.linkAsin) ? tile.linkAsin : null;
+                      var hasClick = pageTarget || asinTarget;
+
+                      function handleTileClick() {
+                        if (pageTarget) { setPvPage(pageTarget); return; }
+                        if (asinTarget) {
+                          var tld = (store.marketplace || 'de') === 'uk' ? 'co.uk' : (store.marketplace || 'de');
+                          window.open('https://www.amazon.' + tld + '/dp/' + asinTarget, '_blank', 'noopener');
+                        }
+                      }
 
                       return (
                         <div key={ti} style={tileStyle}>
                           {/* Fixed aspect ratio container based on tile dimensions */}
-                          <div style={{ width: '100%', aspectRatio: dims.w + '/' + dims.h, background: tile.bgColor || '#f0f0f0', position: 'relative', overflow: 'hidden' }}>
+                          <div onClick={hasClick ? handleTileClick : undefined}
+                            style={{ width: '100%', aspectRatio: dims.w + '/' + dims.h, background: tile.bgColor || '#f0f0f0', position: 'relative', overflow: 'hidden', cursor: hasClick ? 'pointer' : 'default' }}>
                             {matchedImgSrc ? (
                               <img src={matchedImgSrc} alt={'Tile ' + (ti + 1)} style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }} />
                             ) : isProduct ? (
@@ -1557,14 +1648,24 @@ function PreviewMode({ store, onClose }) {
                                 <span style={{ fontFamily: 'monospace', fontSize: isMobile ? 8 : 10 }}>{dims.w}&times;{dims.h}</span>
                               </div>
                             )}
-                            {/* Red overlay for missing/unmatched tiles */}
-                            {isMissing && (
-                              <div style={{ position: 'absolute', inset: 0, background: 'rgba(239,68,68,0.12)', border: '2px solid #ef4444', pointerEvents: 'none' }} />
-                            )}
+                            {/* Hotspots for shoppable images, each clickable to its ASIN */}
+                            {tile.type === 'shoppable_image' && (tile.hotspots || []).map(function(hs, hi) {
+                              if (!hs || !hs.asin) return null;
+                              var tld = (store.marketplace || 'de') === 'uk' ? 'co.uk' : (store.marketplace || 'de');
+                              var hsHref = 'https://www.amazon.' + tld + '/dp/' + hs.asin;
+                              return (
+                                <a key={hi} href={hsHref} target="_blank" rel="noopener noreferrer"
+                                  onClick={function(e) { e.stopPropagation(); }}
+                                  title={'ASIN ' + hs.asin}
+                                  style={{ position: 'absolute', left: (hs.x || 0) + '%', top: (hs.y || 0) + '%', transform: 'translate(-50%, -50%)', width: 22, height: 22, borderRadius: '50%', background: 'rgba(17,24,39,.85)', border: '2px solid rgba(255,255,255,.95)', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', zIndex: 3 }}>
+                                  <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#fff' }} />
+                                </a>
+                              );
+                            })}
                             {/* Filename overlay */}
                             {showFilenames && !isProduct && tile.type !== 'text' && tile.type !== 'product_selector' && (
-                              <div style={{ position: 'absolute', bottom: 4, left: 4, background: 'rgba(0,0,0,.75)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 8, padding: '1px 5px', borderRadius: 2, maxWidth: '90%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                                {tileFilename(activePg.name, si, ti, tile.syncDimensions ? 'sync' : pvMode)}
+                              <div style={{ position: 'absolute', bottom: 4, left: 4, background: 'rgba(0,0,0,.75)', color: '#a5b4fc', fontFamily: 'monospace', fontSize: 8, padding: '1px 5px', borderRadius: 2, maxWidth: '90%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', pointerEvents: 'none' }}>
+                                {tileFilename(activePg.name, si, ti, tileEffectivelySynced(tile) ? 'sync' : pvMode)}
                               </div>
                             )}
                           </div>
@@ -1631,6 +1732,7 @@ function MetaDescriptionsPanel({ pages, store }) {
 // ─── MAIN BRIEFING VIEW ───
 export default function BriefingView() {
   var [store, setStore] = useState(null);
+  var [storeId, setStoreId] = useState(null);
   var [loading, setLoading] = useState(true);
   var [error, setError] = useState(null);
   var [viewMode, setViewMode] = useState('desktop');
@@ -1646,17 +1748,52 @@ export default function BriefingView() {
   var pollRef = useRef(null);
   var bannerTimeoutRef = useRef(null);
   var folderInputRef = useRef(null);
-  var [localImageMap, setLocalImageMap] = useState({}); // { canonical_filename -> blob URL }
-  var [folderMatchCount, setFolderMatchCount] = useState(0);
+  var [isDirty, setIsDirty] = useState(false);
+  var isDirtyRef = useRef(false);
+  var [saving, setSaving] = useState(false);
+  var [saveStatus, setSaveStatus] = useState(null); // { kind, msg }
   var rightPanelRef = useRef(null);
 
-  // ─── FOLDER IMAGE UPLOAD (local preview in designer dashboard) ───
+  // Keep the polling loop in sync with the latest dirty flag without restarting the interval
+  useEffect(function() { isDirtyRef.current = isDirty; }, [isDirty]);
+
+  // Count tiles whose uploadedImage(s) are populated, used for the folder
+  // counter chip in the toolbar.
+  function countTileImages(s) {
+    if (!s) return 0;
+    var n = 0;
+    (s.pages || []).forEach(function(pg) {
+      (pg.sections || []).forEach(function(sec) {
+        (sec.tiles || []).forEach(function(tile) {
+          if (tile.uploadedImage) n++;
+          if (tile.uploadedImageMobile && tile.uploadedImageMobile !== tile.uploadedImage) n++;
+        });
+      });
+    });
+    return n;
+  }
+  var folderMatchCount = countTileImages(store);
+
+  function readFileAsDataUrl(file) {
+    return new Promise(function(resolve, reject) {
+      var reader = new FileReader();
+      reader.onload = function() { resolve(reader.result); };
+      reader.onerror = function() { reject(reader.error || new Error('Read failed')); };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // ─── FOLDER IMAGE UPLOAD ───
+  // Reads each file, matches it via the canonical filename map, and writes
+  // the data URL onto the matching tile in the store. The Save button later
+  // pushes the store back to /api/stores so the operator sees the same state.
   function handleBriefingFolderSelect(e) {
     var files = e.target.files;
     if (!files || files.length === 0 || !store) return;
     var fnMap = buildFilenameMap(store);
     var imageExts = /\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i;
-    var merged = Object.assign({}, localImageMap);
+    var assignments = []; // { entry, dataUrl }
+    var pending = [];
     for (var i = 0; i < files.length; i++) {
       var file = files[i];
       if (!imageExts.test(file.name)) continue;
@@ -1664,37 +1801,122 @@ export default function BriefingView() {
       if (rawName.normalize) rawName = rawName.normalize('NFC');
       var name = rawName.toLowerCase();
       var nameNoExt = name.replace(/\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i, '');
-      if (fnMap[name] && !merged[name]) {
-        merged[name] = URL.createObjectURL(file);
-      } else if (fnMap[nameNoExt + '.jpg'] && !merged[nameNoExt + '.jpg']) {
-        merged[nameNoExt + '.jpg'] = URL.createObjectURL(file);
-      } else {
+      var fnKey = null;
+      if (fnMap[name]) fnKey = name;
+      else if (fnMap[nameNoExt + '.jpg']) fnKey = nameNoExt + '.jpg';
+      else {
         var keys = Object.keys(fnMap);
         for (var k = 0; k < keys.length; k++) {
-          if (merged[keys[k]]) continue;
           var keyBase = keys[k].replace('.jpg', '');
           if (nameNoExt === keyBase || nameNoExt.indexOf(keyBase) >= 0 || keyBase.indexOf(nameNoExt) >= 0) {
-            merged[keys[k]] = URL.createObjectURL(file);
-            break;
+            fnKey = keys[k]; break;
           }
         }
       }
+      if (!fnKey) continue;
+      var entry = fnMap[fnKey];
+      pending.push(readFileAsDataUrl(file).then((function(en) {
+        return function(dataUrl) { assignments.push({ entry: en, dataUrl: dataUrl }); };
+      })(entry)));
     }
-    setLocalImageMap(merged);
-    setFolderMatchCount(Object.keys(merged).length);
     e.target.value = '';
+    Promise.all(pending).then(function() {
+      if (assignments.length === 0) return;
+      setStore(function(prev) {
+        if (!prev) return prev;
+        var clone = JSON.parse(JSON.stringify(prev));
+        assignments.forEach(function(a) {
+          var entry = a.entry;
+          var pg = (clone.pages || []).find(function(p) { return p.id === entry.pageId; });
+          if (!pg) return;
+          var sec = (pg.sections || []).find(function(s) { return s.id === entry.secId; });
+          if (!sec) return;
+          var tile = (sec.tiles || [])[entry.ti];
+          if (!tile) return;
+          if (entry.variant === 'sync') {
+            tile.uploadedImage = a.dataUrl;
+            tile.uploadedImageMobile = a.dataUrl;
+          } else if (entry.variant === 'desktop') {
+            tile.uploadedImage = a.dataUrl;
+          } else if (entry.variant === 'mobile') {
+            tile.uploadedImageMobile = a.dataUrl;
+          }
+        });
+        return clone;
+      });
+      setIsDirty(true);
+    });
   }
 
   function handleBriefingClearImages() {
-    Object.values(localImageMap).forEach(function(url) { try { URL.revokeObjectURL(url); } catch(e) {} });
-    setLocalImageMap({});
-    setFolderMatchCount(0);
+    if (!store) return;
+    setStore(function(prev) {
+      if (!prev) return prev;
+      var clone = JSON.parse(JSON.stringify(prev));
+      (clone.pages || []).forEach(function(pg) {
+        (pg.sections || []).forEach(function(sec) {
+          (sec.tiles || []).forEach(function(tile) {
+            if (tile.uploadedImage) tile.uploadedImage = '';
+            if (tile.uploadedImageMobile) tile.uploadedImageMobile = '';
+          });
+        });
+      });
+      return clone;
+    });
+    setIsDirty(true);
   }
 
-  // Lookup a local folder image for a tile
-  function findLocalImage(pageName, sectionIndex, tileIndex, variant) {
-    var fn = tileFilename(pageName, sectionIndex, tileIndex, variant).toLowerCase();
-    return localImageMap[fn] || null;
+  // Clear uploadedImage/Mobile for one tile, addressed by page name + indices.
+  function handleClearTilePreview(pageName, sectionIndex, tileIndex) {
+    setStore(function(prev) {
+      if (!prev) return prev;
+      var clone = JSON.parse(JSON.stringify(prev));
+      var pg = (clone.pages || []).find(function(p) { return p.name === pageName; });
+      if (!pg) return prev;
+      var sec = (pg.sections || [])[sectionIndex];
+      if (!sec) return prev;
+      var tile = (sec.tiles || [])[tileIndex];
+      if (!tile) return prev;
+      tile.uploadedImage = '';
+      tile.uploadedImageMobile = '';
+      return clone;
+    });
+    setIsDirty(true);
+  }
+
+  // Replace the hotspots array on a single tile (used by drag and drop on
+  // shoppable images in the designer dashboard).
+  function handleChangeTileHotspots(pageId, sectionId, tileIndex, newHotspots) {
+    setStore(function(prev) {
+      if (!prev) return prev;
+      var clone = JSON.parse(JSON.stringify(prev));
+      var pg = (clone.pages || []).find(function(p) { return p.id === pageId; });
+      if (!pg) return prev;
+      var sec = (pg.sections || []).find(function(s) { return s.id === sectionId; });
+      if (!sec) return prev;
+      var tile = (sec.tiles || [])[tileIndex];
+      if (!tile) return prev;
+      tile.hotspots = newHotspots;
+      return clone;
+    });
+    setIsDirty(true);
+  }
+
+  function handleSaveBriefing() {
+    if (!store || !storeId || !token || saving) return;
+    setSaving(true);
+    setSaveStatus(null);
+    saveStore(JSON.parse(JSON.stringify(store)), storeId, token).then(function(result) {
+      setSaving(false);
+      setIsDirty(false);
+      // Fresh prev snapshot so polling does not flag our own write as a remote change
+      prevStoreRef.current = JSON.stringify(store);
+      setSaveStatus({ kind: 'ok', msg: 'Saved' + (result && result.imagesUploaded ? ' (' + result.imagesUploaded + ' images)' : '') });
+      setTimeout(function() { setSaveStatus(null); }, 4000);
+    }).catch(function(err) {
+      setSaving(false);
+      setSaveStatus({ kind: 'err', msg: 'Save failed: ' + (err && err.message ? err.message : 'unknown') });
+    });
   }
 
   var rawToken = window.location.pathname.split('/share/')[1] || '';
@@ -1704,17 +1926,29 @@ export default function BriefingView() {
   var loadAttemptRef = useRef(0);
 
   function loadShareData() {
-    if (!token) { setError('Kein Share-Token in der URL gefunden. Bitte prüfe den Link.'); setLoading(false); return; }
+    if (!token) { setError('No share token found in the URL. Please check the link.'); setLoading(false); return; }
     setLoading(true);
     setError(null);
     loadAttemptRef.current += 1;
     loadStoreByShareToken(token).then(function(result) {
-      if (!result || !result.data) { setError('Store nicht gefunden oder Link abgelaufen. Bitte fordere einen neuen Link an.'); setLoading(false); return; }
-      setStore(result.data);
-      setLastUpdated(result.updatedAt || new Date().toISOString());
+      if (!result || !result.data) { setError('Store not found or link expired. Please request a new link.'); setLoading(false); return; }
+      setStoreId(result.id || null);
       setCurPage(result.data.pages && result.data.pages[0] ? result.data.pages[0].id : '');
-      prevStoreRef.current = JSON.stringify(result.data);
-      setLoading(false);
+      // Designer facing Felder direkt beim Initial Load ins Englische übersetzen.
+      // Erst danach setStore, damit kein Flackern Deutsch zu Englisch entsteht.
+      // textOverlay, Page Namen, Brand Namen bleiben in Originalsprache.
+      translateStoreForDesigner(result.data, 'en').then(function(translated) {
+        setStore(translated);
+        setLastUpdated(result.updatedAt || new Date().toISOString());
+        prevStoreRef.current = JSON.stringify(translated);
+        setLoading(false);
+      }).catch(function() {
+        // Fallback: Original anzeigen wenn die Übersetzung fehlschlägt.
+        setStore(result.data);
+        setLastUpdated(result.updatedAt || new Date().toISOString());
+        prevStoreRef.current = JSON.stringify(result.data);
+        setLoading(false);
+      });
     }).catch(function(e) { setError(e.message); setLoading(false); });
   }
 
@@ -1730,14 +1964,20 @@ export default function BriefingView() {
 
     pollRef.current = setInterval(function() {
       if (!prevStoreRef.current) return;
+      // Skip remote sync while the designer has unsaved local changes,
+      // otherwise their hotspot drags or uploaded images would be lost.
+      if (isDirtyRef.current) return;
       loadStoreByShareToken(token).then(function(result) {
         if (!result || !result.data) return;
-        var newJson = JSON.stringify(result.data);
-        var oldJson = prevStoreRef.current;
-        if (newJson !== oldJson) {
+        // Vor dem Vergleich übersetzen, sonst flackert die View bei jedem
+        // Polling Zyklus zwischen Deutsch und Englisch hin und her.
+        translateStoreForDesigner(result.data, 'en').then(function(translated) {
+          var newJson = JSON.stringify(translated);
+          var oldJson = prevStoreRef.current;
+          if (newJson === oldJson) return;
           var changeResult = detectChanges(
             oldJson ? JSON.parse(oldJson) : null,
-            result.data
+            translated
           );
           setChangeHighlights(changeResult.highlights);
           var now = new Date();
@@ -1745,12 +1985,12 @@ export default function BriefingView() {
             return [{ time: now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }), descriptions: changeResult.descriptions }].concat(prev).slice(0, 10);
           });
           setUpdateBanner(true);
-          setStore(result.data);
+          setStore(translated);
           setLastUpdated(result.updatedAt || new Date().toISOString());
           prevStoreRef.current = newJson;
           if (bannerTimeoutRef.current) clearTimeout(bannerTimeoutRef.current);
           bannerTimeoutRef.current = setTimeout(function() { setUpdateBanner(false); }, 60000);
-        }
+        }).catch(function() { /* silent, keep previous store */ });
       }).catch(function() { /* silent retry */ });
     }, 15000);
 
@@ -1863,7 +2103,7 @@ export default function BriefingView() {
   if (!store) return (
     <div className="briefing-error">
       <div className="briefing-error-icon">!</div>
-      <div className="briefing-error-msg">Keine Store-Daten vorhanden. Der Store wurde möglicherweise nicht korrekt gespeichert.</div>
+      <div className="briefing-error-msg">No store data available. The store may not have been saved correctly.</div>
     </div>
   );
 
@@ -1932,7 +2172,7 @@ export default function BriefingView() {
             onMouseEnter={function(e) { e.currentTarget.style.background = 'rgba(245,158,11,.15)'; e.currentTarget.style.color = '#f59e0b'; }}
             onMouseLeave={function(e) { e.currentTarget.style.background = folderMatchCount > 0 ? 'rgba(245,158,11,.2)' : 'rgba(255,255,255,.06)'; e.currentTarget.style.color = folderMatchCount > 0 ? '#f59e0b' : '#94a3b8'; }}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" /></svg>
-            {folderMatchCount > 0 ? folderMatchCount + ' Images' : 'Ordner laden'}
+            {folderMatchCount > 0 ? folderMatchCount + ' Images' : 'Load Folder'}
           </button>
           {folderMatchCount > 0 && (
             <button onClick={handleBriefingClearImages}
@@ -1940,6 +2180,25 @@ export default function BriefingView() {
               title="Remove all loaded images">
               &times;
             </button>
+          )}
+          {/* Save button — only enabled when local edits exist */}
+          <button onClick={handleSaveBriefing}
+            disabled={!isDirty || saving || !storeId}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 5, marginLeft: 8,
+              background: isDirty ? 'rgba(34,197,94,.18)' : 'rgba(255,255,255,.04)',
+              border: '1px solid ' + (isDirty ? 'rgba(34,197,94,.45)' : 'rgba(255,255,255,.08)'),
+              color: isDirty ? '#4ade80' : 'rgba(255,255,255,.35)',
+              fontSize: 11, fontWeight: 700, padding: '5px 14px', borderRadius: 6,
+              cursor: (isDirty && !saving) ? 'pointer' : 'default', transition: 'all .2s'
+            }}
+            title={isDirty ? 'Save uploaded images and hotspot positions' : 'No unsaved changes'}>
+            {saving ? 'Saving…' : (isDirty ? 'Save' : 'Saved')}
+          </button>
+          {saveStatus && (
+            <span style={{ marginLeft: 6, fontSize: 11, fontWeight: 600, color: saveStatus.kind === 'ok' ? '#4ade80' : '#f87171' }}>
+              {saveStatus.msg}
+            </span>
           )}
           {/* Preview button — secondary, further out */}
           <button onClick={function() { setShowPreview(true); }}
@@ -2055,11 +2314,11 @@ export default function BriefingView() {
               <div className="briefing-sidebar-section" style={{ background: '#faf5ff', borderRadius: 8, margin: '0 8px 10px', padding: '12px' }}>
                 <div className="briefing-sidebar-title" style={{ color: '#7c3aed', marginBottom: 8 }}>Corporate Identity</div>
                 <div className="briefing-legend" style={{ fontSize: 11, lineHeight: 1.6 }}>
-                  <p style={{ marginBottom: 8, color: '#6b21a8', fontWeight: 600 }}>Farben, Schriften und Stil — editierbar.</p>
+                  <p style={{ marginBottom: 8, color: '#6b21a8', fontWeight: 600 }}>Colors, fonts and style, editable.</p>
 
                   {/* Colors — editable */}
                   <div style={{ marginBottom: 10 }}>
-                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Farbpalette</div>
+                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Color Palette</div>
                     {(store.manualCI && store.manualCI.colors && store.manualCI.colors.length > 0) || (store.websiteData && store.websiteData.colors && store.websiteData.colors.length > 0) ? (
                       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 4 }}>
                         {((store.manualCI && store.manualCI.colors) || (store.websiteData && store.websiteData.colors) || []).map(function(c, i) {
@@ -2073,7 +2332,7 @@ export default function BriefingView() {
                       </div>
                     ) : null}
                     <input
-                      placeholder="Farben eingeben: #FF5733, #2E86C1, ..."
+                      placeholder="Enter colors: #FF5733, #2E86C1, ..."
                       value={(store.manualCI && store.manualCI.colorsInput) || ''}
                       onChange={function(e) {
                         var val = e.target.value;
@@ -2092,16 +2351,16 @@ export default function BriefingView() {
                   {/* Product CI from Gemini Vision analysis */}
                   {store.productCI && (
                     <div style={{ marginBottom: 10, background: '#fefce8', border: '1px solid #fde68a', borderRadius: 6, padding: 8 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#92400e', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '.05em' }}>CI aus Listing-Bildern (KI-Analyse)</div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#92400e', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '.05em' }}>CI from Listing Images (AI Analysis)</div>
                       {store.productCI.visualMood && (
                         <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Visueller Stil: </span>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Visual Style: </span>
                           <span style={{ fontSize: 10, color: '#78350f', fontWeight: 700 }}>{store.productCI.visualMood}</span>
                         </div>
                       )}
                       {store.productCI.primaryColors && store.productCI.primaryColors.length > 0 && (
                         <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Primärfarben: </span>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Primary Colors: </span>
                           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 2 }}>
                             {store.productCI.primaryColors.map(function(c, i) {
                               return <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
@@ -2114,25 +2373,25 @@ export default function BriefingView() {
                       )}
                       {store.productCI.backgroundPattern && (
                         <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Hintergründe: </span>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Backgrounds: </span>
                           <span style={{ fontSize: 10, color: '#475569' }}>{store.productCI.backgroundPattern}</span>
                         </div>
                       )}
                       {store.productCI.typographyStyle && (
                         <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Typografie: </span>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Typography: </span>
                           <span style={{ fontSize: 10, color: '#475569' }}>{store.productCI.typographyStyle}</span>
                         </div>
                       )}
                       {store.productCI.photographyStyle && (
                         <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Fotostil: </span>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Photography Style: </span>
                           <span style={{ fontSize: 10, color: '#475569' }}>{store.productCI.photographyStyle}</span>
                         </div>
                       )}
                       {store.productCI.recurringElements && store.productCI.recurringElements.length > 0 && (
                         <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Wiederkehrende Elemente: </span>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Recurring Elements: </span>
                           <div style={{ display: 'flex', gap: 3, flexWrap: 'wrap', marginTop: 2 }}>
                             {store.productCI.recurringElements.map(function(el, i) {
                               return <span key={i} style={{ background: '#fef3c7', color: '#78350f', borderRadius: 3, padding: '1px 6px', fontSize: 9, fontWeight: 600 }}>{el}</span>;
@@ -2142,13 +2401,13 @@ export default function BriefingView() {
                       )}
                       {store.productCI.designerNotes && (
                         <div style={{ marginTop: 6, padding: '6px 8px', background: '#fff', border: '1px solid #fde68a', borderRadius: 4, fontSize: 10, lineHeight: 1.5, color: '#475569' }}>
-                          <span style={{ fontWeight: 700, color: '#92400e' }}>Designer-Hinweise: </span>
+                          <span style={{ fontWeight: 700, color: '#92400e' }}>Designer Notes: </span>
                           {store.productCI.designerNotes}
                         </div>
                       )}
                       {store.productCI.sourceImages && store.productCI.sourceImages.length > 0 && (
                         <div style={{ marginTop: 6 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Analysierte Bilder ({store.productCI.imagesAnalyzed}):</span>
+                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Analyzed Images ({store.productCI.imagesAnalyzed}):</span>
                           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 4 }}>
                             {store.productCI.sourceImages.slice(0, 6).map(function(url, i) {
                               return <img key={i} src={url} style={{ width: 48, height: 48, objectFit: 'cover', borderRadius: 4, border: '1px solid #e5e7eb' }} alt="" />;
@@ -2161,7 +2420,7 @@ export default function BriefingView() {
 
                   {/* Fonts — editable */}
                   <div style={{ marginBottom: 10 }}>
-                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Schriftarten</div>
+                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Fonts</div>
                     {store.websiteData && store.websiteData.userFonts && (
                       <div style={{ marginBottom: 4 }}>
                         <span style={{ fontSize: 9, color: '#92400e', fontWeight: 700 }}>Brand Fonts (user-specified):</span>
@@ -2180,7 +2439,7 @@ export default function BriefingView() {
                       </div>
                     )}
                     <input
-                      placeholder="z.B. Montserrat, Open Sans, Playfair Display"
+                      placeholder="e.g. Montserrat, Open Sans, Playfair Display"
                       value={(store.manualCI && store.manualCI.fonts) || ''}
                       onChange={function(e) {
                         setStore(function(prev) {
@@ -2195,7 +2454,7 @@ export default function BriefingView() {
 
                   {/* Brand Tone — editable */}
                   <div style={{ marginBottom: 10 }}>
-                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Markentonalität</div>
+                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Tone</div>
                     <input
                       value={(store.manualCI && store.manualCI.brandTone) || store.brandTone || (store.analysis && store.analysis.brandTone) || ''}
                       onChange={function(e) {
@@ -2205,14 +2464,14 @@ export default function BriefingView() {
                           return Object.assign({}, prev, { manualCI: mc });
                         });
                       }}
-                      placeholder="z.B. natürlich, minimalistisch, premium"
+                      placeholder="e.g. natural, minimalist, premium"
                       style={{ width: '100%', fontSize: 10, padding: '4px 6px', border: '1px solid #e5e7eb', borderRadius: 4 }}
                     />
                   </div>
 
                   {/* CI Notes — free text */}
                   <div style={{ marginBottom: 10 }}>
-                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>CI Notizen (für Designer)</div>
+                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>CI Notes (for Designer)</div>
                     <textarea
                       value={(store.manualCI && store.manualCI.notes) || ''}
                       onChange={function(e) {
@@ -2223,7 +2482,7 @@ export default function BriefingView() {
                         });
                       }}
                       rows={3}
-                      placeholder="Weitere Hinweise: Logo-Varianten, Bildsprache, Stilrichtung..."
+                      placeholder="Additional notes: logo variants, imagery, style direction..."
                       style={{ width: '100%', fontSize: 10, padding: '4px 6px', border: '1px solid #e5e7eb', borderRadius: 4, resize: 'vertical' }}
                     />
                   </div>
@@ -2231,27 +2490,27 @@ export default function BriefingView() {
                   {/* Typography Style */}
                   {store.websiteData && store.websiteData.typographyStyle && (
                     <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Typografie-Stil (erkannt)</div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Typography Style (detected)</div>
                       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 6 }}>
                         <span style={{ background: store.websiteData.typographyStyle.textDensity === 'minimalist' ? '#dcfce7' : store.websiteData.typographyStyle.textDensity === 'text-heavy' ? '#fef3c7' : '#eff6ff', color: store.websiteData.typographyStyle.textDensity === 'minimalist' ? '#166534' : store.websiteData.typographyStyle.textDensity === 'text-heavy' ? '#92400e' : '#1e40af', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 700 }}>
-                          {store.websiteData.typographyStyle.textDensity === 'minimalist' ? 'Minimalistisch' : store.websiteData.typographyStyle.textDensity === 'text-heavy' ? 'Textlastig' : 'Ausgewogen'}
+                          {store.websiteData.typographyStyle.textDensity === 'minimalist' ? 'Minimalist' : store.websiteData.typographyStyle.textDensity === 'text-heavy' ? 'Text Heavy' : 'Balanced'}
                         </span>
                         <span style={{ background: '#f1f5f9', color: '#475569', borderRadius: 3, padding: '2px 8px', fontSize: 10 }}>
                           {store.websiteData.typographyStyle.headingCount} Headings
                         </span>
                         <span style={{ background: '#f1f5f9', color: '#475569', borderRadius: 3, padding: '2px 8px', fontSize: 10 }}>
-                          ~{store.websiteData.typographyStyle.avgParagraphLength} Zeichen/Absatz
+                          ~{store.websiteData.typographyStyle.avgParagraphLength} chars/paragraph
                         </span>
                       </div>
                       {store.websiteData.typographyStyle.fontWeights && store.websiteData.typographyStyle.fontWeights.length > 0 && (
                         <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#7c3aed', fontWeight: 600 }}>Schriftgewichte: </span>
+                          <span style={{ fontSize: 9, color: '#7c3aed', fontWeight: 600 }}>Font Weights: </span>
                           <span style={{ fontSize: 10, fontFamily: 'monospace', color: '#475569' }}>{store.websiteData.typographyStyle.fontWeights.join(', ')}</span>
                         </div>
                       )}
                       {store.websiteData.typographyStyle.fontSizes && store.websiteData.typographyStyle.fontSizes.length > 0 && (
                         <div>
-                          <span style={{ fontSize: 9, color: '#7c3aed', fontWeight: 600 }}>Schriftgrößen: </span>
+                          <span style={{ fontSize: 9, color: '#7c3aed', fontWeight: 600 }}>Font Sizes: </span>
                           <span style={{ fontSize: 10, fontFamily: 'monospace', color: '#475569' }}>{store.websiteData.typographyStyle.fontSizes.slice(0, 6).join(', ')}</span>
                         </div>
                       )}
@@ -2261,7 +2520,7 @@ export default function BriefingView() {
                   {/* Brand Story */}
                   {(store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.brandStory) || (store.analysis && store.analysis.brandStory) || (store.websiteData && store.websiteData.aboutText) ? (
                     <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Story (erkannt)</div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Story (detected)</div>
                       <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11, lineHeight: 1.5, maxHeight: 80, overflow: 'auto' }}>
                         {(store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.brandStory) || (store.analysis && store.analysis.brandStory) || (store.websiteData && store.websiteData.aboutText ? store.websiteData.aboutText.substring(0, 300) + '...' : '')}
                       </div>
@@ -2271,7 +2530,7 @@ export default function BriefingView() {
                   {/* Target Audience (AI) */}
                   {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.targetAudience && (
                     <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Zielgruppe (KI-Analyse)</div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Target Audience (AI Analysis)</div>
                       <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11, lineHeight: 1.5 }}>
                         {store.websiteData.aiAnalysis.targetAudience}
                       </div>
@@ -2281,7 +2540,7 @@ export default function BriefingView() {
                   {/* Brand Values (AI) */}
                   {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.brandValues && store.websiteData.aiAnalysis.brandValues.length > 0 && (
                     <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Markenwerte (KI-Analyse)</div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Values (AI Analysis)</div>
                       <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                         {store.websiteData.aiAnalysis.brandValues.map(function(v, i) {
                           return <span key={i} style={{ background: '#ede9fe', color: '#5b21b6', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{v}</span>;
@@ -2293,7 +2552,7 @@ export default function BriefingView() {
                   {/* Visual Style (AI) */}
                   {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.visualStyle && (
                     <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Visueller Stil (KI-Analyse)</div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Visual Style (AI Analysis)</div>
                       <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11 }}>
                         {store.websiteData.aiAnalysis.visualStyle}
                       </div>
@@ -2303,7 +2562,7 @@ export default function BriefingView() {
                   {/* Sustainability (AI) */}
                   {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.sustainabilityFocus && (
                     <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Nachhaltigkeit (KI-Analyse)</div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Sustainability (AI Analysis)</div>
                       <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11, lineHeight: 1.5 }}>
                         {store.websiteData.aiAnalysis.sustainabilityFocus}
                       </div>
@@ -2313,7 +2572,7 @@ export default function BriefingView() {
                   {/* Key Ingredients / Materials (AI) */}
                   {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.keyIngredients && store.websiteData.aiAnalysis.keyIngredients.length > 0 && (
                     <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Schlüssel-Inhaltsstoffe (KI-Analyse)</div>
+                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Key Ingredients (AI Analysis)</div>
                       <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                         {store.websiteData.aiAnalysis.keyIngredients.map(function(ing, i) {
                           return <span key={i} style={{ background: '#ecfdf5', color: '#065f46', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{ing}</span>;
@@ -2382,10 +2641,19 @@ export default function BriefingView() {
                     Homepage_S1_T1_desktop.jpg<br />
                     Homepage_S1_T1_mobile.jpg<br />
                     Homepage_S2_T1.jpg<br />
-                    Kategorie_1_S1_T1_desktop.jpg<br />
+                    Category_1_S1_T1_desktop.jpg<br />
                     ...
                   </div>
-                  <p style={{ marginTop: 6, fontSize: 10, color: '#92400e' }}>Tip: Use the Preview button to verify your images. Select the folder and images are matched automatically.</p>
+                  <p style={{ marginTop: 10, marginBottom: 4 }}><strong style={{ color: '#047857' }}>Image Reuse (green hint on tiles):</strong></p>
+                  <p style={{ fontSize: 11, lineHeight: 1.5 }}>
+                    Some tiles repeat the same image across pages or sections. They show a green <em>"Reused N×"</em> badge and a <strong>Reuse Filename</strong> on top of the per tile filename.
+                  </p>
+                  <ul style={{ margin: '4px 0 0 18px', padding: 0, fontSize: 11, lineHeight: 1.5 }}>
+                    <li>Design the image <strong>only once</strong>.</li>
+                    <li>Save it under the Reuse Filename. The tool distributes it automatically to every place that shares the same reference.</li>
+                    <li>If you deliver per page folders to the client, copy the same file into every page folder that uses it, so each page folder is self contained.</li>
+                  </ul>
+                  <p style={{ marginTop: 8, fontSize: 10, color: '#92400e' }}>Tip: Use the Preview button to verify your images. Select the folder and images are matched automatically.</p>
                 </div>
               </div>
 
@@ -2430,7 +2698,7 @@ export default function BriefingView() {
           {/* Single page content — meta descriptions moved to Store Info tab */}
           {(function() {
             if (!activePage) return <div className="briefing-empty">No pages found.</div>;
-            return <PageBriefing page={activePage} viewMode={viewMode} products={store.products || []} sectionStartIndex={0} selectedTile={selectedTile} onTileSelect={handleTileSelect} store={store} />;
+            return <PageBriefing page={activePage} viewMode={viewMode} products={store.products || []} sectionStartIndex={0} selectedTile={selectedTile} onTileSelect={handleTileSelect} store={store} onClearTilePreview={handleClearTilePreview} onChangeTileHotspots={handleChangeTileHotspots} />;
           })()}
           </div>
         </div>
@@ -2478,7 +2746,7 @@ export default function BriefingView() {
                     {textOverlay && (
                       <div className="briefing-field">
                         <span className="briefing-field-label">Text on Banner:</span>
-                        <span className="briefing-field-value" style={{ fontWeight: 600 }}>{textOverlay}</span>
+                        <span className="briefing-field-value" style={{ fontWeight: 600, whiteSpace: 'pre-line' }}>{textOverlay}</span>
                       </div>
                     )}
                     <div className="briefing-tile-dims-row">

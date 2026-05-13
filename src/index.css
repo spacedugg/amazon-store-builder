@@ -79,8 +79,10 @@ textarea.input { resize: vertical; min-height: 44px; }
 .saved-header:hover { background: #f8fafc; }
 
 /* ─── SAVED STORES ─── */
-.saved-store-item { display: flex; align-items: center; gap: 6px; padding: 6px 10px; font-size: 11px; border-radius: 6px; cursor: pointer; transition: all .15s; }
+.saved-store-item { display: flex; align-items: center; gap: 6px; padding: 6px 10px; font-size: 11px; border-radius: 6px; cursor: pointer; transition: all .15s; border-left: 3px solid transparent; }
 .saved-store-item:hover { background: #f8fafc; }
+.saved-store-item.active { background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%); border-left-color: #6366f1; }
+.saved-store-item.active .saved-store-name { color: #4338ca; font-weight: 700; }
 .saved-store-name { flex: 1; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #475569; cursor: pointer; }
 .saved-store-meta { font-size: 9px; color: #94a3b8; white-space: nowrap; }
 

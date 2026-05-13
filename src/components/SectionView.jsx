@@ -392,7 +392,7 @@ function LayoutPicker({ value, onChange, isMobile }) {
   );
 }
 
-export default function SectionView({ section, idx, totalSections, sel, onSelect, onDelete, onDuplicate, onCopy, onMoveUp, onMoveDown, onChangeLayout, onApplyImageCategory, onSwapTiles, viewMode, products, uiLang }) {
+export default function SectionView({ section, idx, totalSections, sel, onSelect, onDelete, onDuplicate, onCopy, onMoveUp, onMoveDown, onChangeLayout, onApplyImageCategory, onSwapTiles, viewMode, products, uiLang, previewByTileIndex }) {
   // Drag and Drop State pro Section. dragIdx ist der Tile Index der gerade
   // gezogen wird, dropIdx ist der Hover Tile Index. swappedIdx ist der
   // Index der Zielposition direkt nach dem Drop, für eine 600ms Pulse
@@ -543,6 +543,9 @@ export default function SectionView({ section, idx, totalSections, sel, onSelect
                 viewMode={viewMode}
                 products={products}
                 uiLang={uiLang}
+                previewImageSrc={previewByTileIndex && previewByTileIndex[i] ? previewByTileIndex[i].src : null}
+                onClearPreview={previewByTileIndex && previewByTileIndex[i] ? previewByTileIndex[i].onClear : null}
+                onChangeHotspots={previewByTileIndex && previewByTileIndex[i] ? previewByTileIndex[i].onChangeHotspots : null}
               />
             </div>
           );

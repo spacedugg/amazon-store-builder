@@ -80,6 +80,39 @@ async function migrate() {
   try {
     await db.execute({ sql: `ALTER TABLE stores ADD COLUMN generation_step INTEGER DEFAULT NULL` });
   } catch (e) { /* column already exists */ }
+
+  // Image Auslagerung: hash basierte Bildablage, damit der Store JSON Body
+  // unter dem 4,5 MB Vercel Limit bleibt. data Spalte enthält die Base64
+  // Data URL inklusive mime Prefix. Eine Row pro Hash, content addressed,
+  // wird zwischen Stores geteilt wenn das Bild bitidentisch ist.
+  await db.batch([
+    {
+      sql: `CREATE TABLE IF NOT EXISTS store_images (
+        hash TEXT PRIMARY KEY,
+        data TEXT NOT NULL,
+        byte_size INTEGER DEFAULT 0,
+        created_at TEXT DEFAULT (datetime('now'))
+      )`,
+    },
+  ]);
+
+  // Translation Cache: Designer Briefing Felder werden beim Anzeigen im
+  // Share View on the fly ins Englische übersetzt. Cache ist content
+  // addressed über (sourceHash, targetLang) damit derselbe Source Text in
+  // einer Sprache nur einmal übersetzt wird, egal ob er in mehreren Stores
+  // oder Tiles vorkommt.
+  await db.batch([
+    {
+      sql: `CREATE TABLE IF NOT EXISTS translations (
+        source_hash TEXT NOT NULL,
+        target_lang TEXT NOT NULL,
+        source_text TEXT NOT NULL,
+        translated_text TEXT NOT NULL,
+        created_at TEXT DEFAULT (datetime('now')),
+        PRIMARY KEY (source_hash, target_lang)
+      )`,
+    },
+  ]);
 }
 
 module.exports = { getClient: getClient, migrate: migrate };

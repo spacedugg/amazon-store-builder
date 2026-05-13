@@ -8,6 +8,20 @@ import { t } from './i18n';
 
 // ─── HELPERS ───
 
+// Wandelt einen mehrzeiligen String in TextRuns mit echten DOCX Line Breaks.
+// docx TextRun rendert \n nicht selbst, also muss pro Zeile ein neuer Run mit
+// break: 1 für alle außer dem ersten erzeugt werden. Legacy **bold** Marker
+// aus alten Stores werden vor der Ausgabe ersatzlos gestrippt.
+function multilineRuns(text, opts) {
+  var raw = String(text == null ? '' : text).replace(/\*\*([^*]+)\*\*/g, '$1');
+  var lines = raw.split(/\r?\n/);
+  return lines.map(function(line, i) {
+    var runOpts = Object.assign({}, opts || {}, { text: line });
+    if (i > 0) runOpts.break = 1;
+    return new TextRun(runOpts);
+  });
+}
+
 function heading(text, level) {
   return new Paragraph({ heading: level || HeadingLevel.HEADING_1, spacing: { before: 300, after: 120 },
     children: [new TextRun({ text: text, bold: true })] });
@@ -379,21 +393,18 @@ function tileDescription(tile, tileIndex, productMap, lang, duplicateNote) {
       parts.push(boldPara(t('brief.textOverlay', lang) + alignHint + ': ', ''));
       if (ov.heading) {
         parts.push(new Paragraph({ children: [
-          new TextRun({ text: '  [HEADING] ', size: 18, bold: true, color: '1d4ed8' }),
-          new TextRun({ text: ov.heading, size: 22, bold: true })
-        ] }));
+          new TextRun({ text: '  [HEADING] ', size: 18, bold: true, color: '1d4ed8' })
+        ].concat(multilineRuns(ov.heading, { size: 22, bold: true })) }));
       }
       if (ov.subheading) {
         parts.push(new Paragraph({ children: [
-          new TextRun({ text: '  [SUBHEADING] ', size: 18, bold: true, color: '4338ca' }),
-          new TextRun({ text: ov.subheading, size: 20 })
-        ] }));
+          new TextRun({ text: '  [SUBHEADING] ', size: 18, bold: true, color: '4338ca' })
+        ].concat(multilineRuns(ov.subheading, { size: 20 })) }));
       }
       if (ov.body) {
         parts.push(new Paragraph({ children: [
-          new TextRun({ text: '  [BODY] ', size: 18, bold: true, color: '475569' }),
-          new TextRun({ text: ov.body, size: 18 })
-        ] }));
+          new TextRun({ text: '  [BODY] ', size: 18, bold: true, color: '475569' })
+        ].concat(multilineRuns(ov.body, { size: 18 })) }));
       }
       if (ov.bullets && ov.bullets.length > 0) {
         ov.bullets.forEach(function(b) {
@@ -419,16 +430,18 @@ function tileDescription(tile, tileIndex, productMap, lang, duplicateNote) {
           var bulletMatch = line.match(/^\s*[-•]\s+(.*)/);
           var content = bulletMatch ? bulletMatch[1] : line.trim();
           if (!content) return;
-          // Parse **bold** and "quoted"
+          // Legacy **bold** Marker werden gestrippt. Nur "quoted" Zitate
+          // werden weiterhin als kursiver Text mit Anf\u00FChrungszeichen
+          // gerendert, damit Designer Zitate vom Rest abheben k\u00F6nnen.
+          content = content.replace(/\*\*([^*]+)\*\*/g, '$1');
           var runs = [];
-          var boldPattern = /(\*\*(.+?)\*\*|"([^"]+)")/g;
+          var quotePattern = /"([^"]+)"/g;
           var lastIdx = 0;
           var m;
-          while ((m = boldPattern.exec(content)) !== null) {
+          while ((m = quotePattern.exec(content)) !== null) {
             if (m.index > lastIdx) runs.push(new TextRun({ text: content.substring(lastIdx, m.index), size: 22 }));
-            if (m[2]) runs.push(new TextRun({ text: m[2], bold: true, size: 22 }));
-            else if (m[3]) runs.push(new TextRun({ text: '\u201E' + m[3] + '\u201C', italics: true, size: 22 }));
-            lastIdx = boldPattern.lastIndex;
+            runs.push(new TextRun({ text: '\u201E' + m[1] + '\u201C', italics: true, size: 22 }));
+            lastIdx = quotePattern.lastIndex;
           }
           if (lastIdx < content.length) runs.push(new TextRun({ text: content.substring(lastIdx), size: 22 }));
           if (bulletMatch) {

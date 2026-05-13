@@ -1,3 +1,5 @@
+import { extractImagesFromStore, inflateImagesIntoStore, uploadImages } from './imageStorage';
+
 var AUTOSAVE_KEY = 'amazon-store-builder-autosave';
 
 // ─── TURSO API (primary) with localStorage fallback ───
@@ -30,46 +32,107 @@ export async function loadSavedStores() {
 }
 
 // Save store to DB. Pass existing id/shareToken to update rather than create.
+// Throws on server errors so the caller can surface them to the user.
+// Falls back to localStorage only if the network is completely unreachable.
+//
+// Vor dem POST werden alle Base64 Bilder aus dem Store ausgelagert in die
+// store_images Tabelle, damit der eigentliche Store JSON Body weit unter
+// dem 4,5 MB Vercel Limit bleibt.
 export async function saveStore(store, existingId, existingShareToken) {
+  // Bilder ausgliedern, hochladen, dann den schlanken Store schicken.
+  var extracted = await extractImagesFromStore(store);
+  var imagesUploaded = 0;
+  if (extracted.images.size > 0) {
+    var upResult = await uploadImages(extracted.images);
+    imagesUploaded = upResult.uploaded;
+    if (upResult.failed.length > 0) {
+      // Wenn ein Bild Upload fehlschlägt, brechen wir den Save ab. Andernfalls
+      // würde der Store mit nicht auflösbaren Sentinels gespeichert werden.
+      var firstFail = upResult.failed[0];
+      var err = new Error(
+        'Bild Upload fehlgeschlagen (' + upResult.failed.length + ' von ' + extracted.images.size + ' Bildern). ' +
+        'Erster Fehler: HTTP ' + firstFail.status + (firstFail.message ? ', ' + firstFail.message : '')
+      );
+      err.code = 'IMAGE_UPLOAD_FAILED';
+      throw err;
+    }
+  }
+
+  var body = { data: extracted.storeForWire };
+  if (existingId) body.id = existingId;
+  if (existingShareToken) body.shareToken = existingShareToken;
+  var serialized = JSON.stringify(body);
+  var sizeMb = serialized.length / 1024 / 1024;
+
+  var resp;
   try {
-    var body = { data: store };
-    if (existingId) body.id = existingId;
-    if (existingShareToken) body.shareToken = existingShareToken;
-    var resp = await fetch('/api/stores', {
+    resp = await fetch('/api/stores', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
+      body: serialized,
     });
-    if (!resp.ok) throw new Error('API error');
+  } catch (networkErr) {
+    // Echte Netzwerkstörung, fallback auf localStorage
+    console.warn('Netzwerkfehler beim Save, nutze localStorage:', networkErr.message);
+    return saveToLocalStorage(store, existingId);
+  }
+
+  if (resp.ok) {
     var json = await resp.json();
-    return { id: json.id, shareToken: json.shareToken };
+    return { id: json.id, shareToken: json.shareToken, imagesUploaded: imagesUploaded };
+  }
+
+  // Server hat geantwortet, aber mit Fehler. Echte Meldung holen.
+  var serverMsg = '';
+  try {
+    var errJson = await resp.json();
+    serverMsg = errJson.error || '';
   } catch (e) {
-    console.warn('DB save failed, using localStorage fallback:', e.message);
-    try {
-      var id = existingId || (Date.now().toString(36) + Math.random().toString(36).slice(2, 5));
-      var stores = [];
-      var raw = localStorage.getItem('amazon-store-builder');
-      if (raw) stores = JSON.parse(raw);
-      // Update existing or add new
-      var idx = stores.findIndex(function(s) { return s.id === id; });
-      var entry = {
-        id: id,
-        brandName: store.brandName,
-        marketplace: store.marketplace || 'de',
-        savedAt: new Date().toISOString(),
-        pageCount: (store.pages || []).length,
-        productCount: (store.products || []).length,
-        data: store,
-      };
-      if (idx >= 0) {
-        stores[idx] = entry;
-      } else {
-        stores.unshift(entry);
-      }
-      if (stores.length > 20) stores = stores.slice(0, 20);
-      localStorage.setItem('amazon-store-builder', JSON.stringify(stores));
-      return { id: id, shareToken: null };
-    } catch (e2) { return null; }
+    try { serverMsg = await resp.text(); } catch (e2) { /* ignore */ }
+  }
+
+  if (resp.status === 413 || /payload.too.large|entity.too.large/i.test(serverMsg)) {
+    var err = new Error(
+      'Store ist zu groß für den Server (' + sizeMb.toFixed(1) + ' MB, Limit 4,5 MB). ' +
+      'Vermutlich liegt das an Base64 Bildern im Store. ' +
+      'Reduziere die Anzahl hochgeladener Bilder oder warte auf den Image Auslagerungs Fix.'
+    );
+    err.code = 'PAYLOAD_TOO_LARGE';
+    err.sizeMb = sizeMb;
+    throw err;
+  }
+
+  throw new Error(
+    'Save fehlgeschlagen (HTTP ' + resp.status + ')' +
+    (serverMsg ? ': ' + serverMsg : '') +
+    ' [Payload ' + sizeMb.toFixed(1) + ' MB]'
+  );
+}
+
+function saveToLocalStorage(store, existingId) {
+  try {
+    var id = existingId || (Date.now().toString(36) + Math.random().toString(36).slice(2, 5));
+    var stores = [];
+    var raw = localStorage.getItem('amazon-store-builder');
+    if (raw) stores = JSON.parse(raw);
+    var idx = stores.findIndex(function(s) { return s.id === id; });
+    var entry = {
+      id: id,
+      brandName: store.brandName,
+      marketplace: store.marketplace || 'de',
+      savedAt: new Date().toISOString(),
+      pageCount: (store.pages || []).length,
+      productCount: (store.products || []).length,
+      data: store,
+    };
+    if (idx >= 0) stores[idx] = entry; else stores.unshift(entry);
+    if (stores.length > 20) stores = stores.slice(0, 20);
+    localStorage.setItem('amazon-store-builder', JSON.stringify(stores));
+    return { id: id, shareToken: null, offline: true };
+  } catch (e) {
+    var err = new Error('localStorage Fallback fehlgeschlagen: ' + e.message);
+    err.code = 'STORAGE_QUOTA';
+    throw err;
   }
 }
 
@@ -78,7 +141,9 @@ export async function loadStore(id) {
     var resp = await fetch('/api/stores?id=' + encodeURIComponent(id));
     if (!resp.ok) throw new Error('API error');
     var json = await resp.json();
-    return { data: json.data || null, shareToken: json.shareToken || null };
+    var data = json.data || null;
+    if (data) data = await inflateImagesIntoStore(data);
+    return { data: data, shareToken: json.shareToken || null };
   } catch (e) {
     console.warn('DB load failed, using localStorage fallback:', e.message);
     try {
@@ -137,6 +202,9 @@ export async function loadStoreByShareToken(shareToken) {
     throw new Error('API liefert HTML statt JSON. Der /api/stores Endpoint ist nicht korrekt deployed.');
   }
   var json = await resp.json();
+  if (json && json.data) {
+    json.data = await inflateImagesIntoStore(json.data);
+  }
   return json;
 }
 

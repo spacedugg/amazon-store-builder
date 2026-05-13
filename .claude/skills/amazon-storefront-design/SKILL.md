@@ -150,7 +150,19 @@ Test pro Headline: Wenn ich den Markennamen oder Kategorie Namen aus der Headlin
 
 ### Default Sprache
 
-Standard ist **Deutsch** (Marktplatz `amazon.de`). Andere Sprachen nur wenn User explizit angibt.
+Standard für **kundensichtbare Brand Store Inhalte** ist **Deutsch** (Marktplatz `amazon.de`). Andere Sprachen nur wenn User explizit angibt. Kundensichtbar sind: `textOverlay.heading`, `textOverlay.subheading`, `textOverlay.body`, `textOverlay.bullets`, `textOverlay.cta`, Page Namen (`name`), Header Banner Text Overlay (`heroBannerTextOverlay`), Meta Descriptions, Brand Story als Page Inhalt, USP Headlines.
+
+**Designer facing Felder sind immer Englisch**, unabhängig vom Marktplatz. Der Designer arbeitet international und das Briefing Dashboard ist auf Englisch. Englisch sind:
+
+- `brief` auf jeder Tile (Beschreibung der Bildidee, Komposition, Hotspots)
+- `heroBannerBrief` auf jeder Page
+- `manualCI.notes`, alle Designer Hinweise, Stilbeschreibungen, KI Analyse Ergebnisse zur Marke (productCI Felder, aiAnalysis Felder etc.) sind Englisch wenn neu erzeugt
+
+Beispiel:
+- `brief: "Lifestyle scene of a family in a cozy living room with the Juskys sofa, warm afternoon light, plants in the foreground."` (Englisch, Designer Anweisung)
+- `textOverlay.heading: "Wohlfühlmomente zuhause"` (Deutsch, kommt so auf das Bild)
+- `textOverlay.body: "Möbel die deine Familie über Jahre begleiten"` (Deutsch, kommt so auf das Bild)
+- `name: "Wohnzimmer"` (Deutsch, Kategorie Name den der Kunde sieht)
 
 ## Wie der Skill arbeitet
 
@@ -418,7 +430,7 @@ Das Briefing JSON hat diese Struktur. Das Tool ergänzt fehlende IDs und Default
                 "bullets": [],
                 "cta": "Sortiment entdecken"
               },
-              "brief": "Hero Bild Startseite. Wohnraum mit Sofa, Sessel, Beistelltisch, Lampe, Teppich, im Hintergrund Übergang in Garten."
+              "brief": "Homepage hero image. Living room scene with sofa, armchair, side table, lamp, rug, with a transition to a garden in the background."
             }
           ]
         }
@@ -452,7 +464,7 @@ Das Briefing JSON hat diese Struktur. Das Tool ergänzt fehlende IDs und Default
 | Feld | Typ | Pflicht | Bemerkung |
 |------|-----|---------|-----------|
 | `type` | string | ja | siehe Tile Types |
-| `textOverlay.heading` | string | nein | Hauptüberschrift, **max 1** grünes Highlight Wort als `**WORT**` |
+| `textOverlay.heading` | string | nein | Hauptüberschrift, kein Markup, Zeilenumbrüche per `\n` erlaubt |
 | `textOverlay.subheading` | string | nein | Unterüberschrift, kein Markup |
 | `textOverlay.body` | string | nein | Fließtext, **max 350 Zeichen** |
 | `textOverlay.bullets` | array | nein | Liste Kurzclaims, je 2 bis 4 Wörter |
@@ -573,7 +585,7 @@ tiles:
     textOverlay:
       heading: "Mehr aus **Garten**"
       subheading: ""
-    brief: "Trenner Textbild als Kategorie Überschrift vor dem Cross Nav Grid."
+    brief: "Divider text image, category headline above the cross nav grid."
 ```
 
 Falsch wäre `imageCategory: store_hero` (das ist nur für den Page
@@ -586,7 +598,7 @@ Header Banner über der Menüleiste reserviert).
 Pro Page muss befüllt werden:
 
 ```yaml
-heroBannerBrief: "Beschreibung was das Banner zeigt, z.B. Lifestyle Komposition Wohnzimmer"
+heroBannerBrief: "English description of what the banner shows, e.g. lifestyle composition living room"
 heroBannerTextOverlay: "Optionaler Slogan auf dem Banner"
 ```
 
@@ -720,11 +732,13 @@ Lifestyle Tiles sind klickbar (linkAsin), Product Grid darunter zeigt die volle 
 
 ### Variable Tile Höhen je nach Funktion
 
-Tile Dimensionen sind **nicht** auf 3000x600 fixiert. Layout `1` (Full Width) erlaubt Höhen zwischen 200 (Desktop max 15:1 Verhältnis) und etwa 2400. Wähle die Höhe **nach Funktion des Tiles**:
+Tile Dimensionen sind **nicht** auf 3000x600 fixiert. Wähle die Höhe **nach Funktion des Tiles**:
 
 | Tile Funktion | Empfohlene Desktop Höhe (bei 3000 Breite) | Mobile Höhe (bei 1680 Breite) |
 |---------------|-------------------------------------------:|-------------------------------:|
-| Trenner / Section Header / Kategorie Überschrift | 300 bis 500 | 336 (5:1 Min) bis 500 |
+| Benefit / Text Image (image + imageCategory benefit oder text_image), einzeilige Headline plus Subheadline | 200 (Min) bis offen | 200 (Min) bis offen |
+| Benefit / Text Image mit mehrzeiligem Body oder mehreren Bullets | 300 bis 600 oder mehr je nach Inhalt | 300 bis 600 oder mehr je nach Inhalt |
+| Trenner / Section Header / Kategorie Überschrift | 300 bis 500 | 300 bis 500 |
 | Hero Banner Page Header | 600 bis 900 | 600 bis 900 |
 | Lifestyle Bild mit Komposition | 1200 bis 1500 | 1200 bis 1500 |
 | Shoppable Image mit 3 bis 5 Produkten | 1500 bis 1800 | 1500 bis 1800 |
@@ -733,7 +747,24 @@ Tile Dimensionen sind **nicht** auf 3000x600 fixiert. Layout `1` (Full Width) er
 
 Faustregel: ein schmaler Trenner braucht keine 600 Pixel Höhe, da reicht 350. Ein Shoppable Bild mit 5 Produkten braucht mehr als 600 Pixel sonst werden die Hotspots zu eng. Pro Tile bewusst die Höhe wählen, nicht stur 3000x600 als Default.
 
-Mindestverhältnis: Desktop max 15:1 (Breite zu Höhe), Mobile max 5:1.
+**Mindesthöhen Regeln (vom Tool validiert)**:
+Die folgenden Regeln gelten ausschließlich für `image` Tiles mit `imageCategory` `benefit` oder `text_image`. Andere Image Kategorien (`store_hero`, `product`, `creative`, `lifestyle`) sind in der Praxis immer hoch genug und stoßen nie an diese Limits.
+
+Es handelt sich ausschließlich um **Mindesthöhen**, nie um Maximalhöhen. Nach oben sind die Höhen offen, das Tile kann auf Mobile vertikal sein, auf Desktop quadratisch, je nach Inhalt. Höhen werden vom Tool **niemals nach unten gekappt**.
+
+- Desktop: Höhe muss **mindestens 1/15 der Breite** sein (max Verhältnis 15:1). Bei 3000 Breite also mindestens 200 Pixel Höhe.
+- Mobile: Höhe muss **mindestens 1/10 der Breite** sein (max Verhältnis 10:1). Bei 1680 Breite also mindestens 168 Pixel, durch den 200 Pixel Floor effektiv 200.
+- Zusätzlich harter Floor von **200 Pixel** Höhe auf Desktop und Mobile.
+- Wenn die Höhe unterschritten wird, erscheint im Properties Panel ein gelber Warnhinweis und im Validate Store Output eine Warnung.
+
+**Default Höhe 200 Pixel: nur bei einzeiligem Text Inhalt**
+
+Das 200 Pixel Default greift nur, wenn der `textOverlay` Inhalt einzeilig ist:
+- einzeilige `heading` allein, oder
+- einzeilige `heading` plus einzeilige `subheading`, oder
+- nur ein einziger Text Baustein (nur `heading`, nur `subheading`, nur kurzer `body`).
+
+Sobald der Inhalt komplexer wird (mehrzeilige Headline, mehrzeilige Subheading, längerer `body`, mehrere `bullets`), wähle eine entsprechend größere Höhe je nach Lesbarkeit des Briefings, mindestens 250 bis 400 Pixel oder mehr. Der Tool Validator setzt die Höhe **nicht** automatisch zurück, also entscheidet hier der Inhalt.
 
 **Wie du das im Briefing JSON setzt**: Pro Tile das Feld `dimensions` (Desktop) und optional `mobileDimensions` (Mobile) angeben. Beispiele:
 
@@ -743,7 +774,7 @@ Trenner Tile, flach (Layout 1):
 {
   "type": "image",
   "textOverlay": { "heading": "Bereit für die **Saison**" },
-  "brief": "Trenner Textbild mit Stoff Makro im Hintergrund.",
+  "brief": "Divider text image with a fabric macro in the background.",
   "imageCategory": "text_image",
   "dimensions": { "w": 3000, "h": 350 }
 }
@@ -755,7 +786,7 @@ Shoppable Image, hoch (Layout 1):
 {
   "type": "shoppable_image",
   "textOverlay": { "heading": "Lounge, **fertig** zum Loslegen" },
-  "brief": "Shoppable Terrasse mit 3 Produkten.",
+  "brief": "Shoppable terrace scene with 3 products.",
   "asins": ["B0...", "B0...", "B0..."],
   "dimensions": { "w": 3000, "h": 1500 }
 }
@@ -767,7 +798,7 @@ Hero Page Header (Layout 1):
 {
   "type": "image",
   "textOverlay": { "heading": "Was **dein** Zuhause braucht" },
-  "brief": "Hero Bild Wohnraum mit Übergang Terrasse.",
+  "brief": "Hero image, living room with a transition to a terrace.",
   "dimensions": { "w": 3000, "h": 800 }
 }
 ```
@@ -1134,20 +1165,20 @@ Nach Bestätigung:
           {
             "type": "image",
             "textOverlay": { "heading": "**Stoffqualität** geprüft" },
-            "brief": "Wide Bild Stoff Detail in Wohnsetting.",
+            "brief": "Wide image, fabric detail in a living room setting.",
             "imageCategory": "benefit",
             "dimensions": { "w": 3000, "h": 1500 }
           },
           {
             "type": "image",
             "textOverlay": { "heading": "**Massivholz** Rahmen" },
-            "brief": "Square Bild Holz Detail.",
+            "brief": "Square image, wood detail.",
             "imageCategory": "benefit"
           },
           {
             "type": "image",
             "textOverlay": { "heading": "**Bezug** wechselbar" },
-            "brief": "Square Bild Reißverschluss Detail.",
+            "brief": "Square image, zipper detail.",
             "imageCategory": "benefit"
           }
         ]

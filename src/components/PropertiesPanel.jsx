@@ -1,53 +1,23 @@
-import { useState, useRef } from 'react';
-import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, MAX_HOTSPOTS, createDefaultProductSelector } from '../constants';
+import { useState } from 'react';
+import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, MAX_HOTSPOTS, createDefaultProductSelector, getMinImageHeight, tileHasDimensionRule, MIN_IMAGE_RATIO_DESKTOP, MIN_IMAGE_RATIO_MOBILE, MIN_TEXT_IMAGE_HEIGHT } from '../constants';
 import { t } from '../i18n';
 
-// Toggle **bold** around selected text or at cursor
-function toggleBold(ref, value, onChange) {
-  var el = ref.current;
-  if (!el) return;
-  var start = el.selectionStart;
-  var end = el.selectionEnd;
-  if (start === end) return; // no selection
-  var selected = value.substring(start, end);
-  var newValue;
-  // Check if already bold
-  if (value.substring(start - 2, start) === '**' && value.substring(end, end + 2) === '**') {
-    newValue = value.substring(0, start - 2) + selected + value.substring(end + 2);
-    onChange(newValue);
-    setTimeout(function() { el.setSelectionRange(start - 2, end - 2); }, 0);
-  } else if (selected.startsWith('**') && selected.endsWith('**')) {
-    newValue = value.substring(0, start) + selected.slice(2, -2) + value.substring(end);
-    onChange(newValue);
-    setTimeout(function() { el.setSelectionRange(start, end - 4); }, 0);
-  } else {
-    newValue = value.substring(0, start) + '**' + selected + '**' + value.substring(end);
-    onChange(newValue);
-    setTimeout(function() { el.setSelectionRange(start + 2, end + 2); }, 0);
-  }
-}
-
-function TextFieldWithBold({ value, onChange, rows, placeholder, className }) {
-  var ref = useRef(null);
-  var isTextarea = rows && rows > 1;
+// Inline Hinweis unter den Dimension Inputs. Greift nur wenn das Tile unter
+// die Mindesthöhen Regel fällt (Image Tile mit imageCategory benefit oder
+// text_image). Wenn die Höhe das Mindestmaß (1/15 der Breite Desktop, 1/10
+// Mobile, harter 200 px Floor) unterschreitet, erscheint ein gelber
+// Hinweis. Manuelle Eingabe wird nicht blockiert, damit der User Werte
+// temporär anpassen kann.
+function DimensionWarning({ tile, width, height, viewMode }) {
+  if (!tileHasDimensionRule(tile)) return null;
+  if (!width || !height) return null;
+  var minH = getMinImageHeight(width, viewMode);
+  if (height >= minH) return null;
+  var ratioLabel = viewMode === 'mobile' ? '1/' + MIN_IMAGE_RATIO_MOBILE : '1/' + MIN_IMAGE_RATIO_DESKTOP;
+  var hint = 'Höhe ' + height + 'px ist zu flach. Mindestens ' + minH + 'px (' + ratioLabel + ' der Breite, mindestens ' + MIN_TEXT_IMAGE_HEIGHT + 'px für Benefit und Text Image Tiles).';
   return (
-    <div>
-      <div style={{ display: 'flex', gap: 2, marginBottom: 3 }}>
-        <button
-          type="button"
-          className="btn"
-          style={{ fontSize: 10, padding: '2px 8px', fontWeight: 800, minWidth: 24 }}
-          title="Fett (Text markieren, dann klicken)"
-          onClick={function() { toggleBold(ref, value || '', onChange); }}
-        >B</button>
-      </div>
-      {isTextarea ? (
-        <textarea ref={ref} value={value || ''} onChange={function(e) { onChange(e.target.value); }}
-          rows={rows} className={className || 'input'} placeholder={placeholder} />
-      ) : (
-        <input ref={ref} value={value || ''} onChange={function(e) { onChange(e.target.value); }}
-          className={className || 'input'} placeholder={placeholder} />
-      )}
+    <div style={{ fontSize: 10, color: '#92400e', background: '#fffbeb', border: '1px solid #fde68a', padding: '4px 6px', borderRadius: 3, marginTop: 4, lineHeight: 1.4 }}>
+      ⚠ {hint}
     </div>
   );
 }
@@ -104,8 +74,9 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
           </div>
           <div className="props-section">
             <label className="label">Text Overlay</label>
-            <input value={hPage.heroBannerTextOverlay || ''} onChange={function(e) { onHeroBannerChange('heroBannerTextOverlay', e.target.value); }}
-              placeholder="Slogan or claim for the hero banner" className="input" />
+            <textarea value={hPage.heroBannerTextOverlay || ''} onChange={function(e) { onHeroBannerChange('heroBannerTextOverlay', e.target.value); }}
+              placeholder="Slogan or claim, press Enter for line break" rows={2} className="input"
+              style={{ resize: 'vertical', lineHeight: 1.3 }} />
           </div>
           <div className="props-section">
             <label className="label">Banner Image</label>
@@ -339,7 +310,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
         <>
           <div className="props-section">
             <label className="label">{t('props.designerBrief', uiLang)}</label>
-            <TextFieldWithBold value={tile.brief || ''} onChange={function(v) { u('brief', v); }}
+            <textarea value={tile.brief || ''} onChange={function(e) { u('brief', e.target.value); }}
               rows={3} placeholder={t('props.designerBriefPlaceholder', uiLang)} className="input" />
           </div>
           {tile.wireframeDescription && (
@@ -361,17 +332,19 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   <div>
                     <div style={{ fontSize: 9, fontWeight: 700, color: '#1d4ed8', textTransform: 'uppercase', marginBottom: 2 }}>Heading</div>
-                    <input value={ov.heading || ''}
+                    <textarea value={ov.heading || ''}
                       onChange={function(e) { uOv('heading', e.target.value); }}
-                      placeholder="Hauptüberschrift, ein Wort als **WORT** für grünes Highlight"
-                      style={{ width: '100%', padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 12, fontWeight: 700, fontFamily: 'inherit', boxSizing: 'border-box' }} />
+                      placeholder="Hauptüberschrift, Enter für Zeilenumbruch"
+                      rows={2}
+                      style={{ width: '100%', padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 12, fontWeight: 700, fontFamily: 'inherit', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.25 }} />
                   </div>
                   <div>
                     <div style={{ fontSize: 9, fontWeight: 700, color: '#4338ca', textTransform: 'uppercase', marginBottom: 2 }}>Subheading</div>
-                    <input value={ov.subheading || ''}
+                    <textarea value={ov.subheading || ''}
                       onChange={function(e) { uOv('subheading', e.target.value); }}
-                      placeholder="Unterüberschrift"
-                      style={{ width: '100%', padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 11, fontFamily: 'inherit', boxSizing: 'border-box' }} />
+                      placeholder="Unterüberschrift, Enter für Zeilenumbruch"
+                      rows={2}
+                      style={{ width: '100%', padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 11, fontFamily: 'inherit', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.3 }} />
                   </div>
                   <div>
                     <div style={{ fontSize: 9, fontWeight: 700, color: '#475569', textTransform: 'uppercase', marginBottom: 2 }}>
@@ -425,6 +398,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
               <input type="number" value={(tile.dimensions || {}).h || 1200}
                 onChange={function(e) { ud('desktop', 'h', parseInt(e.target.value) || 1200); }} className="input" />
             </div>
+            <DimensionWarning tile={tile} width={(tile.dimensions || {}).w} height={(tile.dimensions || {}).h} viewMode="desktop" />
           </div>
 
           {/* Sync Dimensions Checkbox */}
@@ -453,6 +427,11 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
               <input type="number" value={tile.syncDimensions ? ((tile.dimensions || {}).h || 1200) : ((tile.mobileDimensions || {}).h || 1200)}
                 onChange={function(e) { ud('mobile', 'h', parseInt(e.target.value) || 1200); }} className="input" disabled={!!tile.syncDimensions} />
             </div>
+            {(function() {
+              var mw = tile.syncDimensions ? (tile.dimensions || {}).w : (tile.mobileDimensions || {}).w;
+              var mh = tile.syncDimensions ? (tile.dimensions || {}).h : (tile.mobileDimensions || {}).h;
+              return <DimensionWarning tile={tile} width={mw} height={mh} viewMode="mobile" />;
+            })()}
           </div>
 
           {/* Link / ASIN (single click-target for the whole image) */}
@@ -804,10 +783,11 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
             var bodyLen = (ov.body || '').length;
             return (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                <input value={ov.heading || ''}
+                <textarea value={ov.heading || ''}
                   onChange={function(e) { uOv('heading', e.target.value); }}
-                  placeholder="Section Heading"
-                  style={{ width: '100%', padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 12, fontWeight: 700, fontFamily: 'inherit', boxSizing: 'border-box' }} />
+                  placeholder="Section Heading, Enter für Zeilenumbruch"
+                  rows={2}
+                  style={{ width: '100%', padding: '4px 6px', border: '1px solid #e2e8f0', borderRadius: 4, fontSize: 12, fontWeight: 700, fontFamily: 'inherit', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.25 }} />
                 <textarea value={ov.body || ''}
                   onChange={function(e) { uOv('body', e.target.value); }}
                   placeholder="Optionaler Body Text"
@@ -1052,7 +1032,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
         <>
           <div className="props-section">
             <label className="label">{t('props.videoBrief', uiLang)}</label>
-            <TextFieldWithBold value={tile.brief || ''} onChange={function(v) { u('brief', v); }}
+            <textarea value={tile.brief || ''} onChange={function(e) { u('brief', e.target.value); }}
               rows={3} placeholder={t('props.videoBriefPlaceholder', uiLang)} className="input" />
           </div>
           <div className="props-section">
@@ -1064,6 +1044,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
               <input type="number" value={(tile.dimensions || {}).h || 1688}
                 onChange={function(e) { ud('desktop', 'h', parseInt(e.target.value) || 1688); }} className="input" />
             </div>
+            <DimensionWarning tile={tile} width={(tile.dimensions || {}).w} height={(tile.dimensions || {}).h} viewMode="desktop" />
           </div>
           {/* Sync Dimensions Checkbox */}
           <div className="props-section">
@@ -1089,6 +1070,11 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
               <input type="number" value={tile.syncDimensions ? ((tile.dimensions || {}).h || 1688) : ((tile.mobileDimensions || {}).h || 699)}
                 onChange={function(e) { ud('mobile', 'h', parseInt(e.target.value) || 699); }} className="input" disabled={!!tile.syncDimensions} />
             </div>
+            {(function() {
+              var mw = tile.syncDimensions ? (tile.dimensions || {}).w : (tile.mobileDimensions || {}).w;
+              var mh = tile.syncDimensions ? (tile.dimensions || {}).h : (tile.mobileDimensions || {}).h;
+              return <DimensionWarning tile={tile} width={mw} height={mh} viewMode="mobile" />;
+            })()}
           </div>
           {fileUpload(t('props.videoThumbnail', uiLang), tile.videoThumbnail,
             function(v) { u('videoThumbnail', v); }, function() { u('videoThumbnail', null); }, uiLang)}
