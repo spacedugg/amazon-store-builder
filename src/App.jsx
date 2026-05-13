@@ -1553,6 +1553,7 @@ export default function App() {
         <ExportModal
           onClose={function() { setShowExport(false); }}
           onExport={handleExportDocx}
+          store={store}
           uiLang={uiLang}
         />
       )}

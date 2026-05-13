@@ -1166,6 +1166,54 @@ User kopiert den Patch JSON, klickt im Tool `+ Snippet`, fügt ein, klickt `Anwe
 - Wenn der User mehrere Page Anpassungen mischt, alle Operationen in **einem** ops Array kombinieren
 - linkUrl Refs auf neue Pages in `page:Name` Form, das Tool resolved beim Apply auf interne UID
 
+## Refactor Mode (bestehenden Store nach neuen Regeln neu generieren)
+
+Wenn der Skill **selbst Updates bekommt** (neue Regeln, neue Pattern, schärferes Self Check) und der User seinen bereits fertigen Store nach diesen neuen Regeln **neu generieren** möchte ohne von Null anzufangen, ist Refactor Mode der Weg.
+
+**Use Case**: User hat einen Store gemacht, danach wurde der Skill verbessert (z.B. neue Headline Regel, schärferer ASIN Stack Check, neue Layout Konvention). Statt mit `+ Snippet` 50 Patches einzeln einzuspielen, lässt der User den ganzen Store einmal durch den Skill laufen.
+
+**Workflow**:
+
+1. User exportiert seinen Store als JSON Datei aus dem Tool (Export Modal, "Schlank ohne Bilder" Button)
+2. User öffnet Claude Code Chat, hängt die JSON Datei als File Attachment an, sendet folgenden Prompt:
+
+```
+Aktiviere den Organisations Skill amazon-storefront-design im Refactor Mode.
+
+Hier mein aktueller Store als File Attachment. Wende alle aktuellen Self Check Regeln und Brand Voice Regeln neu auf den Store an. Behalte folgende Felder pro Tile unverändert:
+- uploadedImage, uploadedImageMobile, videoThumbnail, wireframeImage
+- asins, linkAsin, hotspots, imageRef Solo Suffixe
+- productSelector Schema
+- bgColor, textAlign
+
+Ändere wo nötig:
+- Headlines, Subheadings, Bodies, Bullets, CTAs nach Brand Voice und Headline Regeln
+- Layouts wo ASIN Grid Stacks vorhanden sind (Self Check Punkt 1)
+- imageCategory Defaults wo nicht passend
+- Section Reihenfolge wo nötig um Stacks aufzulösen
+- Brand Story Tiles auf image (kein image_text mehr)
+- Versand und Lieferung Phrasen ersatzlos streichen
+
+Gib den aktualisierten Store als kompletten JSON zurück. Ich importiere ihn dann über "Neuer Store" plus "JSON Datei wählen" zurück ins Tool.
+```
+
+3. Claude führt den Refactor durch, prüft jede Page gegen alle Self Check Regeln, gibt das aktualisierte Store JSON aus
+4. User importiert das JSON über NewStoreModal → Tool ersetzt den Store
+
+**Wichtig für Claude im Refactor Mode**:
+
+- **Bilder erhalten**: `uploadedImage`, `uploadedImageMobile`, `wireframeImage`, `videoThumbnail`, `referenceImages` werden niemals geändert. Wenn das Briefing JSON sie als `<image>` Platzhalter enthält (so liefert das Tool den schlanken Export), darf Claude nicht versuchen sie zu füllen. Importer im Tool kennt diese Platzhalter und mergt ggf. mit dem aktuellen In Memory Store.
+- **ASIN Listen erhalten**: `asins`, `linkAsin`, `hotspots[].asin`, `productSelector.questions[].answers[].asins` bleiben unverändert. Der User pflegt diese manuell.
+- **imageRef Stems erhalten, nur WxH Suffix darf neu**: wenn Layout sich ändert und damit die Tile Dimensionen, wird der WxH Teil im imageRef neu berechnet. Stem (Topic) bleibt. Solo Suffix bleibt.
+- **Self Check Pflicht**: alle sieben Self Check Punkte aus Schritt 5 auf jede Page anwenden. Bei Verletzung umbauen.
+- **Keine Erfindung neuer ASINs**: nur die bestehenden ASIN Listen ggf. neu sortieren (z.B. wenn ein Tile zu best_sellers wird).
+- **Diff Hinweis am Ende**: nach dem JSON Output eine kurze Liste was geändert wurde, damit der User Übersicht hat (z.B. "12 Headlines aktualisiert, 3 ASIN Stacks aufgelöst, 5 image_text Tiles auf image konvertiert, 2 Versand Phrasen entfernt").
+
+**Wann nicht Refactor Mode**:
+- Bei kleinen Änderungen (1 bis 3 Tiles): Patch Mode ist effizienter
+- Wenn der User Brand Voice grundlegend ändern will: Full Store Neugenerierung ist sauberer als Refactor
+- Wenn der Store sehr groß ist (über 5 MB JSON): Refactor in zwei Hälften aufteilen (Hauptkategorien Pages separat von Subpages)
+
 ## Output Beispiel
 
 Nach den Rückfragen lieferst du:
