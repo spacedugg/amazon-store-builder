@@ -6,53 +6,194 @@
   "brandStory": "True Nature ist ein Familienunternehmen aus Köln, gegründet 2019 von Lukas und Samuel Peto. Wir bauen hochwirksame Rezepturen aus natürlichen Inhaltsstoffen, kombiniert mit moderner Wissenschaft und strengen Qualitätsstandards. Made in Germany, unabhängig geprüft, große Dosen zum fairen Preis.",
   "headerBannerColor": "#003e2a",
   "asins": [
-    { "asin": "B0FY73CZM8", "category": "Schlaf" },
-    { "asin": "B09DQ4MW18", "category": "Herz-Kreislauf" },
-    { "asin": "B0DJT5NKYG", "category": "Herz-Kreislauf" },
-    { "asin": "B0CYTJKZML", "category": "Immunsystem & Vitalität" },
-    { "asin": "B0F3XW4P7Z", "category": "Immunsystem & Vitalität" },
-    { "asin": "B0DHY9K7XM", "category": "Körper & Balance" },
-    { "asin": "B09BD49H7K", "category": "Immunsystem & Vitalität" },
-    { "asin": "B0DYF4GQ38", "category": "Körper & Balance" },
-    { "asin": "B0FCYQKVF7", "category": "Verdauung" },
-    { "asin": "B0CYM13PB4", "category": "Immunsystem & Vitalität" },
-    { "asin": "B0DJT57NST", "category": "Verdauung" },
-    { "asin": "B0DRD7NQ9D", "category": "Immunsystem & Vitalität" },
-    { "asin": "B0DT1BTWYM", "category": "Verdauung" },
-    { "asin": "B0DLL1NLB8", "category": "Gelenke & Sport" },
-    { "asin": "B0D6G7LPKZ", "category": "Immunsystem & Vitalität" },
-    { "asin": "B089K48RVT", "category": "Körper & Balance" },
-    { "asin": "B0DN1NTRZC", "category": "Energie" },
-    { "asin": "B088TT7J1G", "category": "Energie" },
-    { "asin": "B0DK3BCF64", "category": "Verdauung" },
-    { "asin": "B0FH6V5V3H", "category": "Gelenke & Sport" },
-    { "asin": "B089YWB481", "category": "Schlaf" },
-    { "asin": "B0DT18M4CN", "category": "Körper & Balance" },
-    { "asin": "B09CQ674JG", "category": "Verdauung" },
-    { "asin": "B0FR9GMDR1", "category": "Gelenke & Sport" },
-    { "asin": "B0DX7J3FDW", "category": "Körper & Balance" },
-    { "asin": "B0CYLVMGGZ", "category": "Immunsystem & Vitalität" },
-    { "asin": "B0DPN4LF94", "category": "Energie" },
-    { "asin": "B0892PK5DX", "category": "Gelenke & Sport" },
-    { "asin": "B0D3HQ8TYJ", "category": "Immunsystem & Vitalität" },
-    { "asin": "B0CYLX4YWT", "category": "Immunsystem & Vitalität" },
-    { "asin": "B0DJT8BVPS", "category": "Immunsystem & Vitalität" },
-    { "asin": "B0CYT4MXMF", "category": "Körper & Balance" },
-    { "asin": "B0F3NTB8Y7", "category": "Gelenke & Sport" },
-    { "asin": "B0DQ64G6HL", "category": "Verdauung" },
-    { "asin": "B0DK26YYS9", "category": "Verdauung" },
-    { "asin": "B0DBM2SPLG", "category": "Immunsystem & Vitalität" },
-    { "asin": "B0CLD91XC9", "category": "Schlaf" },
-    { "asin": "B081TBTJRK", "category": "Immunsystem & Vitalität" },
-    { "asin": "B0CMDHFD46", "category": "Herz-Kreislauf" },
-    { "asin": "B0D2PDRKQ5", "category": "Herz-Kreislauf" },
-    { "asin": "B0DBLPCNHC", "category": "Energie" },
-    { "asin": "B0D496GM3H", "category": "Schlaf" },
-    { "asin": "B0DYK2148G", "category": "Schlaf" },
-    { "asin": "B07TWGVD2L", "category": "Körper & Balance" },
-    { "asin": "B0G1NF2S2X", "category": "Körper & Balance" },
-    { "asin": "B086X6HD6R", "category": "Verdauung" },
-    { "asin": "B0D45SBLXF", "category": "Verdauung" }
+    {
+      "asin": "B0FY73CZM8",
+      "category": "Schlaf"
+    },
+    {
+      "asin": "B09DQ4MW18",
+      "category": "Herz-Kreislauf"
+    },
+    {
+      "asin": "B0DJT5NKYG",
+      "category": "Herz-Kreislauf"
+    },
+    {
+      "asin": "B0CYTJKZML",
+      "category": "Immunsystem & Vitalität"
+    },
+    {
+      "asin": "B0F3XW4P7Z",
+      "category": "Immunsystem & Vitalität"
+    },
+    {
+      "asin": "B0DHY9K7XM",
+      "category": "Körper & Balance"
+    },
+    {
+      "asin": "B09BD49H7K",
+      "category": "Immunsystem & Vitalität"
+    },
+    {
+      "asin": "B0DYF4GQ38",
+      "category": "Körper & Balance"
+    },
+    {
+      "asin": "B0FCYQKVF7",
+      "category": "Verdauung"
+    },
+    {
+      "asin": "B0CYM13PB4",
+      "category": "Immunsystem & Vitalität"
+    },
+    {
+      "asin": "B0DJT57NST",
+      "category": "Verdauung"
+    },
+    {
+      "asin": "B0DRD7NQ9D",
+      "category": "Immunsystem & Vitalität"
+    },
+    {
+      "asin": "B0DT1BTWYM",
+      "category": "Verdauung"
+    },
+    {
+      "asin": "B0DLL1NLB8",
+      "category": "Gelenke & Sport"
+    },
+    {
+      "asin": "B0D6G7LPKZ",
+      "category": "Immunsystem & Vitalität"
+    },
+    {
+      "asin": "B089K48RVT",
+      "category": "Körper & Balance"
+    },
+    {
+      "asin": "B0DN1NTRZC",
+      "category": "Energie"
+    },
+    {
+      "asin": "B088TT7J1G",
+      "category": "Energie"
+    },
+    {
+      "asin": "B0DK3BCF64",
+      "category": "Verdauung"
+    },
+    {
+      "asin": "B0FH6V5V3H",
+      "category": "Gelenke & Sport"
+    },
+    {
+      "asin": "B089YWB481",
+      "category": "Schlaf"
+    },
+    {
+      "asin": "B0DT18M4CN",
+      "category": "Körper & Balance"
+    },
+    {
+      "asin": "B09CQ674JG",
+      "category": "Verdauung"
+    },
+    {
+      "asin": "B0FR9GMDR1",
+      "category": "Gelenke & Sport"
+    },
+    {
+      "asin": "B0DX7J3FDW",
+      "category": "Körper & Balance"
+    },
+    {
+      "asin": "B0CYLVMGGZ",
+      "category": "Immunsystem & Vitalität"
+    },
+    {
+      "asin": "B0DPN4LF94",
+      "category": "Energie"
+    },
+    {
+      "asin": "B0892PK5DX",
+      "category": "Gelenke & Sport"
+    },
+    {
+      "asin": "B0D3HQ8TYJ",
+      "category": "Immunsystem & Vitalität"
+    },
+    {
+      "asin": "B0CYLX4YWT",
+      "category": "Immunsystem & Vitalität"
+    },
+    {
+      "asin": "B0DJT8BVPS",
+      "category": "Immunsystem & Vitalität"
+    },
+    {
+      "asin": "B0CYT4MXMF",
+      "category": "Körper & Balance"
+    },
+    {
+      "asin": "B0F3NTB8Y7",
+      "category": "Gelenke & Sport"
+    },
+    {
+      "asin": "B0DQ64G6HL",
+      "category": "Verdauung"
+    },
+    {
+      "asin": "B0DK26YYS9",
+      "category": "Verdauung"
+    },
+    {
+      "asin": "B0DBM2SPLG",
+      "category": "Immunsystem & Vitalität"
+    },
+    {
+      "asin": "B0CLD91XC9",
+      "category": "Schlaf"
+    },
+    {
+      "asin": "B081TBTJRK",
+      "category": "Immunsystem & Vitalität"
+    },
+    {
+      "asin": "B0CMDHFD46",
+      "category": "Herz-Kreislauf"
+    },
+    {
+      "asin": "B0D2PDRKQ5",
+      "category": "Herz-Kreislauf"
+    },
+    {
+      "asin": "B0DBLPCNHC",
+      "category": "Energie"
+    },
+    {
+      "asin": "B0D496GM3H",
+      "category": "Schlaf"
+    },
+    {
+      "asin": "B0DYK2148G",
+      "category": "Schlaf"
+    },
+    {
+      "asin": "B07TWGVD2L",
+      "category": "Körper & Balance"
+    },
+    {
+      "asin": "B0G1NF2S2X",
+      "category": "Körper & Balance"
+    },
+    {
+      "asin": "B086X6HD6R",
+      "category": "Verdauung"
+    },
+    {
+      "asin": "B0D45SBLXF",
+      "category": "Verdauung"
+    }
   ],
   "pages": [
     {
@@ -241,7 +382,13 @@
                 "cta": ""
               },
               "brief": "Lifestyle Aufnahme einer Frühstücksszene auf hellem Holztisch. Verteilt: Daily Sleep Dose, Propionsäure, Bockshornklee, PQQ, Grünlippmuschel. Dazwischen Glas Wasser, frische Blaubeeren, Walnüsse, aufgeschlagenes Notizbuch. Hotspots auf den 5 Dosen.",
-              "asins": ["B0FY73CZM8", "B0FCYQKVF7", "B0DJT57NST", "B0DN1NTRZC", "B0892PK5DX"],
+              "asins": [
+                "B0FY73CZM8",
+                "B0FCYQKVF7",
+                "B0DJT57NST",
+                "B0DN1NTRZC",
+                "B0892PK5DX"
+              ],
               "hotspots": []
             }
           ]
@@ -695,19 +842,6 @@
               "imageCategory": "benefit",
               "bgColor": "#f8f7f0",
               "textOverlay": {
-                "heading": "Hochdosiert",
-                "subheading": "Große Dosen statt halbe Sachen",
-                "body": "",
-                "bullets": [],
-                "cta": ""
-              },
-              "brief": "Quadrat, Icon Kapsel mit Pluszeichen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
-            },
-            {
-              "type": "image_text",
-              "imageCategory": "benefit",
-              "bgColor": "#f8f7f0",
-              "textOverlay": {
                 "heading": "Made in **Germany**",
                 "subheading": "Hergestellt in Deutschland, unabhängig geprüft",
                 "body": "",
@@ -715,6 +849,19 @@
                 "cta": ""
               },
               "brief": "Quadrat, Icon Deutschlandkonturen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+            },
+            {
+              "type": "image_text",
+              "imageCategory": "benefit",
+              "bgColor": "#f8f7f0",
+              "textOverlay": {
+                "heading": "365 Tage **Geld-zurück**",
+                "subheading": "Risikofrei testen, weniger als 2 Prozent Retourenquote",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Quadrat, Icon Geldmünze mit Pfeil zurück mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
             }
           ]
         },
@@ -946,26 +1093,26 @@
               "imageCategory": "benefit",
               "bgColor": "#f8f7f0",
               "textOverlay": {
-                "heading": "Unabhängig **geprüft**",
-                "subheading": "Jede Charge im Labor",
+                "heading": "Made in **Germany**",
+                "subheading": "Hergestellt in Deutschland, unabhängig geprüft",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Quadrat, Icon Lupe mit Häkchen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+              "brief": "Quadrat, Icon Deutschlandkonturen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
             },
             {
               "type": "image_text",
               "imageCategory": "benefit",
               "bgColor": "#f8f7f0",
               "textOverlay": {
-                "heading": "Hohe **Reinheit**",
-                "subheading": "Frei von unnötigen Zusätzen",
+                "heading": "365 Tage **Geld-zurück**",
+                "subheading": "Risikofrei testen, weniger als 2 Prozent Retourenquote",
                 "body": "",
                 "bullets": [],
                 "cta": ""
               },
-              "brief": "Quadrat, Icon Tropfen mit Häkchen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+              "brief": "Quadrat, Icon Geldmünze mit Pfeil zurück mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
             }
           ]
         },
@@ -1028,7 +1175,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Schlaf**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Schlaf**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Daily Sleep Dose mit Lavendel.",
               "linkUrl": "page:Schlaf"
             },
@@ -1036,7 +1189,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Energie**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Energie**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Maca Dose mit Macawurzel.",
               "linkUrl": "page:Energie"
             },
@@ -1044,7 +1203,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Gelenke** und Sport", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Gelenke** und Sport",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Glucosamin Dose mit Weihrauchharz.",
               "linkUrl": "page:Gelenke & Sport"
             },
@@ -1052,7 +1217,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Verdauung**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Verdauung**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Bockshornklee Dose mit Flohsamen.",
               "linkUrl": "page:Verdauung"
             },
@@ -1060,7 +1231,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Herz** und Kreislauf", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Herz** und Kreislauf",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Safran Dose mit Safranfäden.",
               "linkUrl": "page:Herz-Kreislauf"
             },
@@ -1068,7 +1245,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Körper** und Balance", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Körper** und Balance",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Ashwagandha Dose mit Wurzel.",
               "linkUrl": "page:Körper & Balance"
             }
@@ -1169,15 +1352,27 @@
               "type": "image_text",
               "imageCategory": "benefit",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "Hochdosiert", "subheading": "Große Dosen, faire Preise", "body": "", "bullets": [], "cta": "" },
-              "brief": "Quadrat, Icon Kapsel mit Plus mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+              "textOverlay": {
+                "heading": "Made in **Germany**",
+                "subheading": "Hergestellt in Deutschland, unabhängig geprüft",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Quadrat, Icon Deutschlandkonturen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
             },
             {
               "type": "image_text",
               "imageCategory": "benefit",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "Made in **Germany**", "subheading": "Hergestellt in Deutschland", "body": "", "bullets": [], "cta": "" },
-              "brief": "Quadrat, Icon Deutschlandkonturen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+              "textOverlay": {
+                "heading": "365 Tage **Geld-zurück**",
+                "subheading": "Risikofrei testen, weniger als 2 Prozent Retourenquote",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Quadrat, Icon Geldmünze mit Pfeil zurück mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
             }
           ]
         },
@@ -1236,7 +1431,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Schlaf**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Schlaf**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Daily Sleep Dose mit Lavendel.",
               "linkUrl": "page:Schlaf"
             },
@@ -1244,7 +1445,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Immunsystem** und Vitalität", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Immunsystem** und Vitalität",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Cordyceps Dose mit Pilzen.",
               "linkUrl": "page:Immunsystem & Vitalität"
             },
@@ -1252,7 +1459,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Gelenke** und Sport", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Gelenke** und Sport",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Glucosamin Dose mit Weihrauchharz.",
               "linkUrl": "page:Gelenke & Sport"
             },
@@ -1260,7 +1473,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Verdauung**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Verdauung**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Bockshornklee Dose mit Flohsamen.",
               "linkUrl": "page:Verdauung"
             },
@@ -1268,7 +1487,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Herz** und Kreislauf", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Herz** und Kreislauf",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Safran Dose mit Safranfäden.",
               "linkUrl": "page:Herz-Kreislauf"
             },
@@ -1276,7 +1501,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Körper** und Balance", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Körper** und Balance",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Ashwagandha Dose mit Wurzel.",
               "linkUrl": "page:Körper & Balance"
             }
@@ -1377,15 +1608,27 @@
               "type": "image_text",
               "imageCategory": "benefit",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "Hochdosiert", "subheading": "Große Dosen, faire Preise", "body": "", "bullets": [], "cta": "" },
-              "brief": "Quadrat, Icon Kapsel mit Plus mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+              "textOverlay": {
+                "heading": "Made in **Germany**",
+                "subheading": "Hergestellt in Deutschland, unabhängig geprüft",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Quadrat, Icon Deutschlandkonturen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
             },
             {
               "type": "image_text",
               "imageCategory": "benefit",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "Unabhängig **geprüft**", "subheading": "Jede Charge im Labor", "body": "", "bullets": [], "cta": "" },
-              "brief": "Quadrat, Icon Lupe mit Häkchen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+              "textOverlay": {
+                "heading": "365 Tage **Geld-zurück**",
+                "subheading": "Risikofrei testen, weniger als 2 Prozent Retourenquote",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Quadrat, Icon Geldmünze mit Pfeil zurück mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
             }
           ]
         },
@@ -1442,7 +1685,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Schlaf**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Schlaf**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Daily Sleep Dose mit Lavendel.",
               "linkUrl": "page:Schlaf"
             },
@@ -1450,7 +1699,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Immunsystem** und Vitalität", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Immunsystem** und Vitalität",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Cordyceps Dose mit Pilzen.",
               "linkUrl": "page:Immunsystem & Vitalität"
             },
@@ -1458,7 +1713,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Energie**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Energie**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Maca Dose mit Macawurzel.",
               "linkUrl": "page:Energie"
             },
@@ -1466,7 +1727,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Verdauung**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Verdauung**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Bockshornklee Dose mit Flohsamen.",
               "linkUrl": "page:Verdauung"
             },
@@ -1474,7 +1741,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Herz** und Kreislauf", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Herz** und Kreislauf",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Safran Dose mit Safranfäden.",
               "linkUrl": "page:Herz-Kreislauf"
             },
@@ -1482,7 +1755,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Körper** und Balance", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Körper** und Balance",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Ashwagandha Dose mit Wurzel.",
               "linkUrl": "page:Körper & Balance"
             }
@@ -1583,15 +1862,27 @@
               "type": "image_text",
               "imageCategory": "benefit",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "Hohe **Reinheit**", "subheading": "Frei von unnötigen Zusätzen", "body": "", "bullets": [], "cta": "" },
-              "brief": "Quadrat, Icon Tropfen mit Häkchen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+              "textOverlay": {
+                "heading": "Made in **Germany**",
+                "subheading": "Hergestellt in Deutschland, unabhängig geprüft",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Quadrat, Icon Deutschlandkonturen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
             },
             {
               "type": "image_text",
               "imageCategory": "benefit",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "Made in **Germany**", "subheading": "Hergestellt in Deutschland", "body": "", "bullets": [], "cta": "" },
-              "brief": "Quadrat, Icon Deutschlandkonturen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+              "textOverlay": {
+                "heading": "365 Tage **Geld-zurück**",
+                "subheading": "Risikofrei testen, weniger als 2 Prozent Retourenquote",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Quadrat, Icon Geldmünze mit Pfeil zurück mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
             }
           ]
         },
@@ -1650,7 +1941,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Schlaf**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Schlaf**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Daily Sleep Dose mit Lavendel.",
               "linkUrl": "page:Schlaf"
             },
@@ -1658,7 +1955,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Immunsystem** und Vitalität", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Immunsystem** und Vitalität",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Cordyceps Dose mit Pilzen.",
               "linkUrl": "page:Immunsystem & Vitalität"
             },
@@ -1666,7 +1969,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Energie**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Energie**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Maca Dose mit Macawurzel.",
               "linkUrl": "page:Energie"
             },
@@ -1674,7 +1983,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Gelenke** und Sport", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Gelenke** und Sport",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Glucosamin Dose mit Weihrauchharz.",
               "linkUrl": "page:Gelenke & Sport"
             },
@@ -1682,7 +1997,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Herz** und Kreislauf", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Herz** und Kreislauf",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Safran Dose mit Safranfäden.",
               "linkUrl": "page:Herz-Kreislauf"
             },
@@ -1690,7 +2011,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Körper** und Balance", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Körper** und Balance",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Ashwagandha Dose mit Wurzel.",
               "linkUrl": "page:Körper & Balance"
             }
@@ -1790,14 +2117,26 @@
               "type": "image_text",
               "imageCategory": "benefit",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "Hochdosiert", "subheading": "Große Dosen, faire Preise", "body": "", "bullets": [], "cta": "" },
-              "brief": "Quadrat, Icon Kapsel mit Plus mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+              "textOverlay": {
+                "heading": "Made in **Germany**",
+                "subheading": "Hergestellt in Deutschland, unabhängig geprüft",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Quadrat, Icon Deutschlandkonturen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
             },
             {
               "type": "image_text",
               "imageCategory": "benefit",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "365 Tage **Geld-zurück**", "subheading": "Risikofrei testen", "body": "", "bullets": [], "cta": "" },
+              "textOverlay": {
+                "heading": "365 Tage **Geld-zurück**",
+                "subheading": "Risikofrei testen, weniger als 2 Prozent Retourenquote",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
               "brief": "Quadrat, Icon Geldmünze mit Pfeil zurück mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
             }
           ]
@@ -1854,7 +2193,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Schlaf**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Schlaf**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Daily Sleep Dose mit Lavendel.",
               "linkUrl": "page:Schlaf"
             },
@@ -1862,7 +2207,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Immunsystem** und Vitalität", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Immunsystem** und Vitalität",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Cordyceps Dose mit Pilzen.",
               "linkUrl": "page:Immunsystem & Vitalität"
             },
@@ -1870,7 +2221,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Energie**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Energie**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Maca Dose mit Macawurzel.",
               "linkUrl": "page:Energie"
             },
@@ -1878,7 +2235,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Gelenke** und Sport", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Gelenke** und Sport",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Glucosamin Dose mit Weihrauchharz.",
               "linkUrl": "page:Gelenke & Sport"
             },
@@ -1886,7 +2249,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Verdauung**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Verdauung**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Bockshornklee Dose mit Flohsamen.",
               "linkUrl": "page:Verdauung"
             },
@@ -1894,7 +2263,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Körper** und Balance", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Körper** und Balance",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Ashwagandha Dose mit Wurzel.",
               "linkUrl": "page:Körper & Balance"
             }
@@ -1995,14 +2370,26 @@
               "type": "image_text",
               "imageCategory": "benefit",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "Hochdosiert", "subheading": "Große Dosen, faire Preise", "body": "", "bullets": [], "cta": "" },
-              "brief": "Quadrat, Icon Kapsel mit Plus mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
+              "textOverlay": {
+                "heading": "Made in **Germany**",
+                "subheading": "Hergestellt in Deutschland, unabhängig geprüft",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
+              "brief": "Quadrat, Icon Deutschlandkonturen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
             },
             {
               "type": "image_text",
               "imageCategory": "benefit",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "365 Tage **Geld-zurück**", "subheading": "Risikofrei testen", "body": "", "bullets": [], "cta": "" },
+              "textOverlay": {
+                "heading": "365 Tage **Geld-zurück**",
+                "subheading": "Risikofrei testen, weniger als 2 Prozent Retourenquote",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
               "brief": "Quadrat, Icon Geldmünze mit Pfeil zurück mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
             }
           ]
@@ -2072,7 +2459,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Schlaf**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Schlaf**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Daily Sleep Dose mit Lavendel.",
               "linkUrl": "page:Schlaf"
             },
@@ -2080,7 +2473,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Immunsystem** und Vitalität", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Immunsystem** und Vitalität",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Cordyceps Dose mit Pilzen.",
               "linkUrl": "page:Immunsystem & Vitalität"
             },
@@ -2088,7 +2487,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Energie**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Energie**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Maca Dose mit Macawurzel.",
               "linkUrl": "page:Energie"
             },
@@ -2096,7 +2501,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Gelenke** und Sport", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Gelenke** und Sport",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Glucosamin Dose mit Weihrauchharz.",
               "linkUrl": "page:Gelenke & Sport"
             },
@@ -2104,7 +2515,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Verdauung**", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Verdauung**",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Bockshornklee Dose mit Flohsamen.",
               "linkUrl": "page:Verdauung"
             },
@@ -2112,7 +2529,13 @@
               "type": "image",
               "imageCategory": "product",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "**Herz** und Kreislauf", "subheading": "", "body": "", "bullets": [], "cta": "Entdecken" },
+              "textOverlay": {
+                "heading": "**Herz** und Kreislauf",
+                "subheading": "",
+                "body": "",
+                "bullets": [],
+                "cta": "Entdecken"
+              },
               "brief": "Freigestellte Safran Dose mit Safranfäden.",
               "linkUrl": "page:Herz-Kreislauf"
             }
@@ -2179,14 +2602,26 @@
               "type": "image_text",
               "imageCategory": "benefit",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "Maximale **Reinheit**", "subheading": "Frei von potenziell schädlichen Substanzen", "body": "", "bullets": [], "cta": "" },
+              "textOverlay": {
+                "heading": "Maximale **Reinheit**",
+                "subheading": "Frei von potenziell schädlichen Substanzen",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
               "brief": "Quadrat, Icon Tropfen mit Häkchen mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
             },
             {
               "type": "image_text",
               "imageCategory": "benefit",
               "bgColor": "#f8f7f0",
-              "textOverlay": { "heading": "365 Tage **Geld-zurück**", "subheading": "Risikofrei testen", "body": "", "bullets": [], "cta": "" },
+              "textOverlay": {
+                "heading": "365 Tage **Geld-zurück**",
+                "subheading": "Risikofrei testen",
+                "body": "",
+                "bullets": [],
+                "cta": ""
+              },
               "brief": "Quadrat, Icon Geldmünze mit Pfeil zurück mittig oben in Markenprimärgrün, cremeweißer Hintergrund."
             }
           ]
