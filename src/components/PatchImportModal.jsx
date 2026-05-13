@@ -120,7 +120,7 @@ export default function PatchImportModal({ onClose, onApply, store, currentPageI
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-box" onClick={function(e) { e.stopPropagation(); }} style={{ maxWidth: 720, padding: 24, maxHeight: '90vh', overflow: 'auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
-          <h2 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: '#0f172a' }}>Snippet einfügen, Patch Mode</h2>
+          <h2 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: '#0f172a' }}>Patch Mode, kleine Änderung mit KI</h2>
           <button onClick={onClose} style={{ background: 'none', border: 'none', fontSize: 20, color: '#64748b', cursor: 'pointer', lineHeight: 1, padding: 0 }}>&times;</button>
         </div>
 
