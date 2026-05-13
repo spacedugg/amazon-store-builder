@@ -10,6 +10,7 @@ import PropertiesPanel from './components/PropertiesPanel';
 import AsinPanel from './components/AsinPanel';
 import NewStoreModal from './components/NewStoreModal';
 import PatchImportModal from './components/PatchImportModal';
+import JsonExportModal from './components/JsonExportModal';
 import PriceCalculator from './components/PriceCalculator';
 import ExportModal from './components/ExportModal';
 import BriefingView from './components/BriefingView';
@@ -209,6 +210,7 @@ export default function App() {
   var [showSaved, setShowSaved] = useState(false);
   var [showExport, setShowExport] = useState(false);
   var [showPatchImport, setShowPatchImport] = useState(false);
+  var [showJsonExport, setShowJsonExport] = useState(false);
   var [showAsinOverview, setShowAsinOverview] = useState(false);
 
   var [storeId, setStoreId] = useState(null);
@@ -1475,7 +1477,7 @@ export default function App() {
         store={store}
         onExport={handleExport}
         onSave={handleSave}
-        onDownloadJson={handleDownloadStoreJson}
+        onShowJsonExport={store.pages.length > 0 ? function() { setShowJsonExport(true); } : null}
         autoSaveStatus={autoSaveStatus}
         hasShareToken={!!shareToken}
         viewMode={viewMode}
@@ -1582,6 +1584,13 @@ export default function App() {
           onApply={applyPatch}
           store={store}
           currentPageId={curPage}
+        />
+      )}
+
+      {showJsonExport && (
+        <JsonExportModal
+          onClose={function() { setShowJsonExport(false); }}
+          store={store}
         />
       )}
 

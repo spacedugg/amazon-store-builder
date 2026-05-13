@@ -8,7 +8,7 @@ function AutoSaveBadge({ status, hasShareToken }) {
   return <span style={{ fontSize: 10, color: '#9ca3af', marginRight: 6 }}>Auto</span>;
 }
 
-export default function Topbar({ store, onExport, onSave, onDownloadJson, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken }) {
+export default function Topbar({ store, onExport, onSave, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken }) {
   return (
     <div className="topbar">
       <div className="topbar-brand">
@@ -61,22 +61,22 @@ export default function Topbar({ store, onExport, onSave, onDownloadJson, viewMo
             </button>
           )}
           <AutoSaveBadge status={autoSaveStatus} hasShareToken={hasShareToken} />
-          <button className="btn btn-green" onClick={onSave} title="Save store">Save</button>
-          {onDownloadJson && (
-            <button className="btn" onClick={function(e) { onDownloadJson(e && e.shiftKey ? 'full' : 'slim'); }} title="Store JSON herunterladen. Schlank ohne Bilder (Default), mit Shift Click komplett inklusive Bilder. Für Backup, Migration oder Skill Refactor Mode." style={{ fontSize: 11 }}>
+          <button className="btn btn-green" onClick={onSave} title="Store im Backend speichern">Save</button>
+          {onShowJsonExport && (
+            <button className="btn" onClick={onShowJsonExport} title="Store als JSON Datei runterladen. Zwei Use Cases: lokales Backup ODER kompletter Refactor mit KI (Skill Refactor Mode, alle Pages werden nach aktuellen Skill Regeln neu generiert)." style={{ fontSize: 11 }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: 'middle', marginRight: 3 }}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
-              JSON
+              JSON / Refactor
             </button>
           )}
-          <button className="btn btn-primary" onClick={onExport} title="Generate share link for designer">Export</button>
+          <button className="btn btn-primary" onClick={onExport} title="Designer Briefing als DOCX exportieren oder Share Link generieren">Export</button>
           {onShowAsinOverview && (
-            <button className="btn" onClick={onShowAsinOverview} title="ASIN Overview" style={{ fontSize: 11 }}>ASINs</button>
+            <button className="btn" onClick={onShowAsinOverview} title="ASIN Übersicht aller Stores plus BSR Sortierung" style={{ fontSize: 11 }}>ASINs</button>
           )}
-          <button className="btn" onClick={onShowPrice} title="Price calculator" style={{ fontSize: 11 }}>&#128176;</button>
+          <button className="btn" onClick={onShowPrice} title="Preis Kalkulator" style={{ fontSize: 11 }}>&#128176;</button>
           {onPatchImport && (
-            <button className="btn" onClick={onPatchImport} title="Snippet einfügen, Patch JSON aus dem Chat anwenden ohne den Store neu zu importieren" style={{ fontSize: 11 }}>+ Snippet</button>
+            <button className="btn" onClick={onPatchImport} title="Patch Mode: kleine Änderung am Store mit KI. Claude generiert Operationen (Section ergänzen, Tile ändern), die additiv auf den bestehenden Store angewendet werden. Bestehende Edits bleiben erhalten." style={{ fontSize: 11 }}>+ Snippet (Patch)</button>
           )}
-          <button className="btn" onClick={onNewStore} title="Start a new store">New Store</button>
+          <button className="btn" onClick={onNewStore} title="Neuen Store von Grund auf erstellen, bestehender Store wird ersetzt">New Store</button>
         </>
       )}
 
