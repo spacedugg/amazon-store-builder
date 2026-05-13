@@ -1017,6 +1017,55 @@ export default function App() {
     }
   };
 
+  // Store JSON Download. mode 'slim' (ohne Bilder, klein, für Chat plus
+  // Skill Refactor Mode) oder 'full' (mit base64 Bildern, vollständig für
+  // lokales Backup). Schlank ist Default, mit Shift Click holt der User die
+  // volle Variante.
+  var handleDownloadStoreJson = function(mode) {
+    if (!store || !store.pages || !store.pages.length) return;
+    var slug = (store.brandName || 'store').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'store';
+    var data;
+    var filename;
+    if (mode === 'full') {
+      data = store;
+      filename = slug + '-store-full.json';
+    } else {
+      // Bilder durch <image> Platzhalter ersetzen
+      data = Object.assign({}, store, {
+        headerBanner: store.headerBanner ? '<image>' : null,
+        headerBannerMobile: store.headerBannerMobile ? '<image>' : null,
+        pages: (store.pages || []).map(function(pg) {
+          return Object.assign({}, pg, {
+            sections: (pg.sections || []).map(function(sec) {
+              return Object.assign({}, sec, {
+                tiles: (sec.tiles || []).map(function(t) {
+                  var c = Object.assign({}, t);
+                  if (c.uploadedImage) c.uploadedImage = '<image>';
+                  if (c.uploadedImageMobile) c.uploadedImageMobile = '<image>';
+                  if (c.videoThumbnail) c.videoThumbnail = '<image>';
+                  if (c.wireframeImage) c.wireframeImage = '<image>';
+                  if (c.referenceImages) c.referenceImages = (c.referenceImages || []).map(function() { return '<ref image>'; });
+                  return c;
+                }),
+              });
+            }),
+          });
+        }),
+      });
+      filename = slug + '-store-slim.json';
+    }
+    var content = JSON.stringify(data, null, 2);
+    var blob = new Blob([content], { type: 'application/json;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+  };
+
   var handleLoadSaved = async function(id) {
     var result = await loadStore(id);
     if (result && result.data) {
@@ -1426,6 +1475,7 @@ export default function App() {
         store={store}
         onExport={handleExport}
         onSave={handleSave}
+        onDownloadJson={handleDownloadStoreJson}
         autoSaveStatus={autoSaveStatus}
         hasShareToken={!!shareToken}
         viewMode={viewMode}
@@ -1646,7 +1696,6 @@ export default function App() {
         <ExportModal
           onClose={function() { setShowExport(false); }}
           onExport={handleExportDocx}
-          store={store}
           uiLang={uiLang}
         />
       )}
