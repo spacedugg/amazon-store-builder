@@ -1,4 +1,4 @@
-export default function Topbar({ store, onExport, onSave, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef }) {
+export default function Topbar({ store, onExport, onSave, onDownloadJson, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef }) {
   return (
     <div className="topbar">
       <div className="topbar-brand">
@@ -51,6 +51,12 @@ export default function Topbar({ store, onExport, onSave, viewMode, onToggleView
             </button>
           )}
           <button className="btn btn-green" onClick={onSave} title="Save store">Save</button>
+          {onDownloadJson && (
+            <button className="btn" onClick={function(e) { onDownloadJson(e && e.shiftKey ? 'full' : 'slim'); }} title="Store JSON herunterladen. Schlank ohne Bilder (Default), mit Shift Click komplett inklusive Bilder. Für Backup, Migration oder Skill Refactor Mode." style={{ fontSize: 11 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: 'middle', marginRight: 3 }}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+              JSON
+            </button>
+          )}
           <button className="btn btn-primary" onClick={onExport} title="Generate share link for designer">Export</button>
           {onShowAsinOverview && (
             <button className="btn" onClick={onShowAsinOverview} title="ASIN Overview" style={{ fontSize: 11 }}>ASINs</button>
