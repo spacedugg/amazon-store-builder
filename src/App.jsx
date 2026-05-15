@@ -1575,6 +1575,33 @@ export default function App() {
     e.target.value = '';
   };
 
+  // ─── CUSTOMER PREVIEW LINK ───
+  // Damit hochgeladene Bilder, die der Operator gerade lokal im Editor
+  // gemacht hat, im Customer Preview tatsaechlich erscheinen, speichert
+  // dieser Button den Store erst und kopiert dann erst den Link. Ohne
+  // diesen Save Schritt wuerde der Customer Link auf einen aelteren
+  // Datenbankstand zeigen, weil der Editor Autosave bei vorhandenem
+  // shareToken deaktiviert ist.
+  var handleCopyCustomerLink = async function() {
+    if (!store.pages.length) { alert('Bitte erst einen Store anlegen.'); return; }
+    try {
+      var result = await persistStore(store, { includeShareToken: true });
+      if (!result || !result.shareToken) {
+        alert('Customer Link konnte nicht erzeugt werden. Bitte erst speichern.');
+        return;
+      }
+      var url = window.location.origin + '/customer/' + result.shareToken;
+      try {
+        await navigator.clipboard.writeText(url);
+        alert('Customer Preview Link kopiert.\n\nStore inklusive aktuellen Bildern gespeichert. Dieser Link zeigt deinem Kunden den fertigen Brand Store ohne Designer Tools:\n\n' + url);
+      } catch (e) {
+        prompt('Customer Preview Link:', url);
+      }
+    } catch (e) {
+      alert('Save fehlgeschlagen: ' + (e && e.message ? e.message : 'unbekannt'));
+    }
+  };
+
   // ─── EXPORT (generate share link — always reuses same link per store) ───
   var handleExport = async function() {
     if (!store.pages.length) return;
@@ -1672,6 +1699,7 @@ export default function App() {
         shareToken={shareToken}
         onExport={handleExport}
         onSave={handleSave}
+        onCopyCustomerLink={store.pages.length > 0 ? handleCopyCustomerLink : null}
         onShowJsonExport={store.pages.length > 0 ? function() { setShowJsonExport(true); } : null}
         autoSaveStatus={autoSaveStatus}
         hasShareToken={!!shareToken}

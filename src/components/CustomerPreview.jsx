@@ -449,7 +449,12 @@ export default function CustomerPreview() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#fff', display: 'flex', flexDirection: 'column' }}>
+    // Globale CSS in index.css setzt html, body, #root auf overflow hidden,
+    // damit der Editor selbst nicht scrollt. Fuer die Customer Preview muss
+    // die ganze Page aber scrollbar sein. Unser Root Container bekommt eine
+    // feste Hoehe und eigenes overflow auto, damit Hero, Nav und Sections
+    // erreichbar bleiben.
+    <div style={{ height: '100vh', background: '#fff', display: 'flex', flexDirection: 'column', overflowY: 'auto', overflowX: 'hidden' }}>
       {/* ─── DEVICE TOGGLE (subtil, oben rechts, schliesst sich beim Klick auf den Store) ─── */}
       <div style={{ position: 'fixed', top: 10, right: 10, zIndex: 100, display: 'flex', gap: 4, background: 'rgba(15,23,42,.85)', padding: 4, borderRadius: 6, boxShadow: '0 2px 8px rgba(0,0,0,.18)' }}>
         <button onClick={function() { setViewMode('desktop'); }}
