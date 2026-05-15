@@ -198,3 +198,19 @@ Wenn ein neues Briefing JSON oder ein Patch generiert wird, müssen Prompts für
 ### Tool UI
 
 Logs, Toasts, Fehlermeldungen und Editor UI bleiben Deutsch. Das Briefing Dashboard auf der Designer Share URL ist Englisch.
+
+## 8. Verlinkung von Kategoriekacheln zu Subpages: immer beim Generieren setzen
+
+Wenn ein Brand Store Konzept Subpages enthält und die Parent Page Bildkacheln zeigt, die diese Subpages thematisch repräsentieren (Kategorienavigation, "Erkunde unsere Welten", "Unsere Kollektionen", Kategorie Tiles mit Headline), dann **muss** der `linkUrl` der jeweiligen Kachel **bereits beim Generieren** auf die passende Subpage gesetzt sein. Format: `linkUrl: "page:<exakter Subpage Name>"`. Der briefingImport löst das in die echte Page ID auf.
+
+### Anforderung
+
+1. Vor dem Festlegen einer Kategoriesektion auf einer Parent Page: prüfe, welche Subpages existieren.
+2. Ordne jeder Bildkachel der Sektion eine Subpage zu, indem die Headline oder das Sujet der Kachel zur Subpage passt. Mismatches sind unzulässig (also keine Metallbetten Kachel die auf Sofas verlinkt).
+3. Setze `linkUrl: "page:<Subpage Name>"`. Wenn keine Subpage passt, lass `linkUrl` leer und melde den Mismatch.
+4. Auch bei Patches (Snippet Patch Modus): wenn neue Subpages dazukommen oder Tiles auf Parent Pages neu angelegt werden, setze `linkUrl` direkt mit.
+5. Im Brand Store Builder existiert zwar ein Auto-Link Button als Fallback, er ist aber zweite Wahl. Erstwahl: vom AI direkt richtig verlinkt.
+
+### Begründung
+
+Der Operator soll im Anschluss keine manuelle Nacharbeit haben. Ein nachgelagerter Auto-Link auf Wortmatch kommt nicht ohne Fehler aus, also lieber von vornherein gleich richtig.

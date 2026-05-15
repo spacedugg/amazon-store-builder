@@ -171,7 +171,7 @@ export default function Wireframe({ tile, width, viewMode, bgColor }) {
   var anchorX = tile.textAlign === 'right' ? rightX : tile.textAlign === 'center' ? centerX : leftX;
 
   return (
-    <svg viewBox={'0 0 ' + w + ' ' + ht} preserveAspectRatio="xMidYMid meet" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }}>
+    <svg viewBox={'0 0 ' + w + ' ' + ht} style={{ width: '100%', display: 'block' }}>
       <rect width={w} height={ht} fill={bgFill} rx="2" />
 
       {/* Heading, mehrzeilig */}
