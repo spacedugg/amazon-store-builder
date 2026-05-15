@@ -2210,15 +2210,38 @@ export default function BriefingView() {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
             Preview
           </button>
-          {/* Customer Link button — kopiert die /customer/<token> URL fuer Endkunden */}
+          {/* Customer Link button — speichert ggf. lokale Aenderungen und
+              kopiert dann die /customer/<token> URL fuer Endkunden. Damit
+              landen frisch hochgeladene Bilder direkt im Customer Preview. */}
           {token && (
             <button onClick={function() {
-              var url = window.location.origin + '/customer/' + token;
-              try {
-                navigator.clipboard.writeText(url).then(function() {
-                  alert('Customer Preview Link kopiert.\n\nDieser Link zeigt deinem Kunden den fertigen Brand Store ohne Designer Tools:\n\n' + url);
-                }).catch(function() { prompt('Customer Preview Link:', url); });
-              } catch (e) { prompt('Customer Preview Link:', url); }
+              function doCopy() {
+                var url = window.location.origin + '/customer/' + token;
+                try {
+                  navigator.clipboard.writeText(url).then(function() {
+                    alert('Customer Preview Link kopiert.\n\nDieser Link zeigt deinem Kunden den fertigen Brand Store ohne Designer Tools:\n\n' + url);
+                  }).catch(function() { prompt('Customer Preview Link:', url); });
+                } catch (e) { prompt('Customer Preview Link:', url); }
+              }
+              if (isDirty && !saving && storeId && store) {
+                // Erst speichern damit hochgeladene Bilder mitgehen
+                setSaving(true);
+                setSaveStatus(null);
+                saveStore(JSON.parse(JSON.stringify(store)), storeId, token).then(function() {
+                  setSaving(false);
+                  setIsDirty(false);
+                  prevStoreRef.current = JSON.stringify(store);
+                  doCopy();
+                }).catch(function(err) {
+                  setSaving(false);
+                  setSaveStatus({ kind: 'err', msg: 'Save failed: ' + (err && err.message ? err.message : 'unknown') });
+                  if (confirm('Save vor dem Customer Link Kopieren fehlgeschlagen. Trotzdem den Link mit dem alten Stand kopieren?')) {
+                    doCopy();
+                  }
+                });
+              } else {
+                doCopy();
+              }
             }}
               style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(255,153,0,.18)', border: '1px solid rgba(255,153,0,.45)', color: '#FF9900', fontSize: 11, padding: '5px 12px', borderRadius: 6, cursor: 'pointer', marginLeft: 6, transition: 'all .2s' }}
               title="Customer Preview Link kopieren. Premium Amazon Look ohne Designer Tools, fuer Endkunden."

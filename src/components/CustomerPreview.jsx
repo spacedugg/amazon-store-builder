@@ -141,8 +141,11 @@ export function AmazonProductGrid({ tile, products, marketplace, isMobile }) {
     };
   }
 
+  // Produkt Grid waechst nach Anzahl der ASINs. Kein height 100%, kein
+  // overflow, damit die Sektion vertikal so lang wird wie noetig. Nur der
+  // Slider Modus (best_sellers) bleibt horizontal scrollbar.
   return (
-    <div style={{ width: '100%', height: '100%', background: tile.bgColor || '#fff', padding: isMobile ? '12px 8px' : '16px 12px', display: 'flex', flexDirection: 'column', boxSizing: 'border-box', overflow: 'auto' }}>
+    <div style={{ width: '100%', background: tile.bgColor || '#fff', padding: isMobile ? '12px 8px' : '16px 12px', display: 'flex', flexDirection: 'column', boxSizing: 'border-box' }}>
       <div style={{ fontSize: isMobile ? 14 : 18, fontWeight: 700, color: '#0F1111', marginBottom: isMobile ? 8 : 12 }}>{title}</div>
       <div style={listStyle}>
         {items.map(function(p, i) {
@@ -327,20 +330,43 @@ function CustomerSection({ section, products, marketplace, isMobile, pages, setA
   var layout = findLayout(section.layoutId);
   if (!layout) return null;
   var config = getGridConfig(layout, isMobile);
+
+  // Wenn die Sektion Produkt Tiles enthaelt, soll sie keinen festen
+  // aspectRatio haben und auch keine festen Row Heights. Auf Amazon waechst
+  // ein Produkt Grid mit der Anzahl an Reihen nach unten. Wir geben der
+  // Sektion deshalb Auto Hoehe, damit das Grid so lang wird wie noetig.
+  var hasProductTile = (section.tiles || []).some(function(t) {
+    return PRODUCT_TILE_TYPES.indexOf(t.type) >= 0;
+  });
+  var gridStyle = Object.assign({}, config.gridStyle);
+  if (hasProductTile) {
+    delete gridStyle.aspectRatio;
+    delete gridStyle.gridTemplateRows;
+  }
+
   return (
-    <div style={Object.assign({}, config.gridStyle, { display: 'grid', gap: isMobile ? 6 : 8, width: '100%', marginBottom: isMobile ? 8 : 16 })}>
+    <div style={Object.assign({}, gridStyle, { display: 'grid', gap: isMobile ? 6 : 8, width: '100%', marginBottom: isMobile ? 8 : 16 })}>
       {(section.tiles || []).map(function(tile, ti) {
-        var tileStyle = Object.assign({}, config.getTileStyle(ti), { position: 'relative', overflow: 'hidden', minHeight: 0, background: tile.bgColor || '#fff' });
+        var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
+        var tileStyle = Object.assign({}, config.getTileStyle(ti), { position: 'relative', minHeight: 0, background: tile.bgColor || '#fff' });
+        if (!isProduct) tileStyle.overflow = 'hidden';
+        // Produkt Kachel wraps in einen flow Container ohne absolute Hoehe,
+        // damit die Anzahl der Produktreihen das Modul vertikal wachsen laesst.
+        var content = isProduct ? (
+          <AmazonProductGrid tile={tile} products={products} marketplace={marketplace} isMobile={isMobile} />
+        ) : (
+          <CustomerTile
+            tile={tile}
+            products={products}
+            marketplace={marketplace}
+            isMobile={isMobile}
+            pages={pages}
+            setActivePage={setActivePage}
+          />
+        );
         return (
           <div key={ti} style={tileStyle}>
-            <CustomerTile
-              tile={tile}
-              products={products}
-              marketplace={marketplace}
-              isMobile={isMobile}
-              pages={pages}
-              setActivePage={setActivePage}
-            />
+            {content}
           </div>
         );
       })}
@@ -423,7 +449,12 @@ export default function CustomerPreview() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#fff', display: 'flex', flexDirection: 'column' }}>
+    // Globale CSS in index.css setzt html, body, #root auf overflow hidden,
+    // damit der Editor selbst nicht scrollt. Fuer die Customer Preview muss
+    // die ganze Page aber scrollbar sein. Unser Root Container bekommt eine
+    // feste Hoehe und eigenes overflow auto, damit Hero, Nav und Sections
+    // erreichbar bleiben.
+    <div style={{ height: '100vh', background: '#fff', display: 'flex', flexDirection: 'column', overflowY: 'auto', overflowX: 'hidden' }}>
       {/* ─── DEVICE TOGGLE (subtil, oben rechts, schliesst sich beim Klick auf den Store) ─── */}
       <div style={{ position: 'fixed', top: 10, right: 10, zIndex: 100, display: 'flex', gap: 4, background: 'rgba(15,23,42,.85)', padding: 4, borderRadius: 6, boxShadow: '0 2px 8px rgba(0,0,0,.18)' }}>
         <button onClick={function() { setViewMode('desktop'); }}

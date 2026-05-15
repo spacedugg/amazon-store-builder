@@ -8,24 +8,7 @@ function AutoSaveBadge({ status, hasShareToken }) {
   return <span style={{ fontSize: 10, color: '#9ca3af', marginRight: 6 }}>Auto</span>;
 }
 
-function copyCustomerLink(shareToken) {
-  if (!shareToken) {
-    alert('Bitte erst den Store speichern, damit ein Customer Link erzeugt werden kann (Save oder Export).');
-    return;
-  }
-  var url = window.location.origin + '/customer/' + shareToken;
-  try {
-    navigator.clipboard.writeText(url).then(function() {
-      alert('Customer Preview Link kopiert.\n\nDieser Link zeigt deinem Kunden den fertigen Brand Store ohne Designer Tools:\n\n' + url);
-    }).catch(function() {
-      prompt('Customer Preview Link:', url);
-    });
-  } catch (e) {
-    prompt('Customer Preview Link:', url);
-  }
-}
-
-export default function Topbar({ store, shareToken, onExport, onSave, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken }) {
+export default function Topbar({ store, shareToken, onExport, onSave, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink }) {
   return (
     <div className="topbar">
       <div className="topbar-brand">
@@ -86,10 +69,10 @@ export default function Topbar({ store, shareToken, onExport, onSave, onShowJson
             </button>
           )}
           <button className="btn btn-primary" onClick={onExport} title="Designer Briefing als DOCX exportieren oder Share Link generieren">Export</button>
-          <button className="btn" onClick={function() { copyCustomerLink(shareToken); }}
-            disabled={!shareToken}
-            title={shareToken ? 'Customer Preview Link kopieren. Premium Amazon Brand Store Vorschau ohne Designer Tools, ideal fuer Unternehmenskunden.' : 'Erst Store speichern oder Export ausfuehren um einen Customer Link zu generieren.'}
-            style={{ fontSize: 11, background: shareToken ? '#0F1111' : '#f1f5f9', color: shareToken ? '#fff' : '#94a3b8', borderColor: shareToken ? '#0F1111' : '#e2e8f0' }}>
+          <button className="btn" onClick={onCopyCustomerLink}
+            disabled={!onCopyCustomerLink}
+            title="Speichert den Store inkl. hochgeladenen Bildern und kopiert den Customer Preview Link. Premium Amazon Brand Store Vorschau ohne Designer Tools, ideal fuer Unternehmenskunden."
+            style={{ fontSize: 11, background: '#0F1111', color: '#fff', borderColor: '#0F1111' }}>
             Customer
           </button>
           {onShowAsinOverview && (
