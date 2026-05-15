@@ -240,9 +240,10 @@ export default function App() {
   var saveQueueRef = useRef(Promise.resolve());
   var persistStore = useCallback(function(targetStore, opts) {
     var useShareToken = opts && opts.includeShareToken;
+    var onProgress = opts && opts.onProgress;
     var p = saveQueueRef.current.catch(function() {}).then(function() {
       var tokenArg = useShareToken ? shareTokenRef.current : null;
-      return saveStore(targetStore, storeIdRef.current, tokenArg);
+      return saveStore(targetStore, storeIdRef.current, tokenArg, onProgress);
     }).then(function(result) {
       if (result && result.id) {
         storeIdRef.current = result.id;
@@ -1578,27 +1579,47 @@ export default function App() {
   // ─── CUSTOMER PREVIEW LINK ───
   // Damit hochgeladene Bilder, die der Operator gerade lokal im Editor
   // gemacht hat, im Customer Preview tatsaechlich erscheinen, speichert
-  // dieser Button den Store erst und kopiert dann erst den Link. Ohne
-  // diesen Save Schritt wuerde der Customer Link auf einen aelteren
-  // Datenbankstand zeigen, weil der Editor Autosave bei vorhandenem
-  // shareToken deaktiviert ist.
+  // dieser Button den Store erst und kopiert dann erst den Link. Bekannte
+  // Bilder werden via Hash Cache uebersprungen, neue Bilder mit hoher
+  // Concurrency hochgeladen, Progress wird live im Topbar Badge gezeigt.
+  // Teilfehler brechen den Save nicht ab, der Link wird trotzdem kopiert,
+  // fehlende Bilder bekommt der Customer beim naechsten Versuch.
+  var [customerSaveProgress, setCustomerSaveProgress] = useState(null);
   var handleCopyCustomerLink = async function() {
     if (!store.pages.length) { alert('Bitte erst einen Store anlegen.'); return; }
+    setCustomerSaveProgress({ stage: 'extract' });
     try {
-      var result = await persistStore(store, { includeShareToken: true });
+      var result = await persistStore(store, {
+        includeShareToken: true,
+        onProgress: function(p) { setCustomerSaveProgress(p); },
+      });
+      setCustomerSaveProgress(null);
       if (!result || !result.shareToken) {
         alert('Customer Link konnte nicht erzeugt werden. Bitte erst speichern.');
         return;
       }
       var url = window.location.origin + '/customer/' + result.shareToken;
+      var msg = 'Customer Preview Link kopiert.\n\n' + url;
+      if (result.imagesUploaded > 0 || (result.imagesSkipped || 0) > 0) {
+        msg += '\n\nBilder: ' + (result.imagesUploaded || 0) + ' neu hochgeladen, ' + (result.imagesSkipped || 0) + ' bereits in DB.';
+      }
+      if (result.imageFailures && result.imageFailures.length > 0) {
+        var sizeTotal = result.imageFailures.reduce(function(s, f) { return s + (f.size || 0); }, 0);
+        msg += '\n\nWARNUNG: ' + result.imageFailures.length + ' Bild(er) konnten nicht hochgeladen werden';
+        if (result.imageFailures.some(function(f) { return f.status === 413; })) {
+          msg += ' (mindestens eines ist zu gross, > 4 MB pro Bild). Bitte zu grosse Bilder skalieren.';
+        }
+        msg += '. Save erneut versuchen, dann landen die fehlenden Bilder auch im Customer Preview.';
+      }
       try {
         await navigator.clipboard.writeText(url);
-        alert('Customer Preview Link kopiert.\n\nStore inklusive aktuellen Bildern gespeichert. Dieser Link zeigt deinem Kunden den fertigen Brand Store ohne Designer Tools:\n\n' + url);
+        alert(msg);
       } catch (e) {
         prompt('Customer Preview Link:', url);
       }
     } catch (e) {
-      alert('Save fehlgeschlagen: ' + (e && e.message ? e.message : 'unbekannt'));
+      setCustomerSaveProgress(null);
+      alert('Save fehlgeschlagen: ' + (e && e.message ? e.message : 'unbekannt') + '\n\nDein lokaler Stand bleibt im Tab erhalten.');
     }
   };
 
@@ -1700,6 +1721,7 @@ export default function App() {
         onExport={handleExport}
         onSave={handleSave}
         onCopyCustomerLink={store.pages.length > 0 ? handleCopyCustomerLink : null}
+        customerSaveProgress={customerSaveProgress}
         onShowJsonExport={store.pages.length > 0 ? function() { setShowJsonExport(true); } : null}
         autoSaveStatus={autoSaveStatus}
         hasShareToken={!!shareToken}

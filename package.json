@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@libsql/client": "^0.17.0",
+    "@vercel/blob": "^1.1.0",
     "docx": "^9.5.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

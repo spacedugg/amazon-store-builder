@@ -82,19 +82,26 @@ async function migrate() {
   } catch (e) { /* column already exists */ }
 
   // Image Auslagerung: hash basierte Bildablage, damit der Store JSON Body
-  // unter dem 4,5 MB Vercel Limit bleibt. data Spalte enthält die Base64
-  // Data URL inklusive mime Prefix. Eine Row pro Hash, content addressed,
-  // wird zwischen Stores geteilt wenn das Bild bitidentisch ist.
+  // unter dem 4,5 MB Vercel Limit bleibt. data Spalte enthaelt die Base64
+  // Data URL inklusive mime Prefix (Legacy). Neue Eintraege benutzen
+  // blob_url, dann liegt das Bild physisch im Vercel Blob Store und wird
+  // beim Laden direkt von dort gefetched. Eine Row pro Hash, content
+  // addressed, wird zwischen Stores geteilt wenn das Bild bitidentisch ist.
   await db.batch([
     {
       sql: `CREATE TABLE IF NOT EXISTS store_images (
         hash TEXT PRIMARY KEY,
-        data TEXT NOT NULL,
+        data TEXT NOT NULL DEFAULT '',
+        blob_url TEXT DEFAULT NULL,
         byte_size INTEGER DEFAULT 0,
         created_at TEXT DEFAULT (datetime('now'))
       )`,
     },
   ]);
+  // Migration fuer bestehende Tabellen ohne blob_url Spalte
+  try {
+    await db.execute({ sql: `ALTER TABLE store_images ADD COLUMN blob_url TEXT DEFAULT NULL` });
+  } catch (e) { /* column already exists */ }
 
   // Translation Cache: Designer Briefing Felder werden beim Anzeigen im
   // Share View on the fly ins Englische übersetzt. Cache ist content

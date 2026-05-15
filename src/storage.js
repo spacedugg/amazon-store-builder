@@ -38,24 +38,25 @@ export async function loadSavedStores() {
 // Vor dem POST werden alle Base64 Bilder aus dem Store ausgelagert in die
 // store_images Tabelle, damit der eigentliche Store JSON Body weit unter
 // dem 4,5 MB Vercel Limit bleibt.
-export async function saveStore(store, existingId, existingShareToken) {
+export async function saveStore(store, existingId, existingShareToken, onProgress) {
   // Bilder ausgliedern, hochladen, dann den schlanken Store schicken.
+  if (typeof onProgress === 'function') onProgress({ stage: 'extract' });
   var extracted = await extractImagesFromStore(store);
   var imagesUploaded = 0;
+  var imageFailures = [];
+  var imagesSkipped = 0;
   if (extracted.images.size > 0) {
-    var upResult = await uploadImages(extracted.images);
+    if (typeof onProgress === 'function') onProgress({ stage: 'upload', uploaded: 0, total: extracted.images.size });
+    var upResult = await uploadImages(extracted.images, function(p) {
+      if (typeof onProgress === 'function') onProgress({ stage: 'upload', uploaded: p.uploaded, total: p.total, skipped: p.skipped, failed: p.failed });
+    });
     imagesUploaded = upResult.uploaded;
-    if (upResult.failed.length > 0) {
-      // Wenn ein Bild Upload fehlschlägt, brechen wir den Save ab. Andernfalls
-      // würde der Store mit nicht auflösbaren Sentinels gespeichert werden.
-      var firstFail = upResult.failed[0];
-      var err = new Error(
-        'Bild Upload fehlgeschlagen (' + upResult.failed.length + ' von ' + extracted.images.size + ' Bildern). ' +
-        'Erster Fehler: HTTP ' + firstFail.status + (firstFail.message ? ', ' + firstFail.message : '')
-      );
-      err.code = 'IMAGE_UPLOAD_FAILED';
-      throw err;
-    }
+    imageFailures = upResult.failed || [];
+    imagesSkipped = upResult.skipped || 0;
+    // Wir brechen den Save NICHT mehr bei einzelnen Bildfehlern ab. Stattdessen
+    // wird der Store mit dem aktuellen Stand gespeichert, fehlende Bilder
+    // bleiben als Sentinel im Store und werden beim naechsten Save erneut
+    // versucht. Operator bekommt eine Warnung mit Anzahl und ersten Details.
   }
 
   var body = { data: extracted.storeForWire };
@@ -78,8 +79,15 @@ export async function saveStore(store, existingId, existingShareToken) {
   }
 
   if (resp.ok) {
+    if (typeof onProgress === 'function') onProgress({ stage: 'done' });
     var json = await resp.json();
-    return { id: json.id, shareToken: json.shareToken, imagesUploaded: imagesUploaded };
+    return {
+      id: json.id,
+      shareToken: json.shareToken,
+      imagesUploaded: imagesUploaded,
+      imagesSkipped: imagesSkipped,
+      imageFailures: imageFailures,
+    };
   }
 
   // Server hat geantwortet, aber mit Fehler. Echte Meldung holen.

@@ -1,9 +1,11 @@
-// Image Auslagerung: Base64 Data URLs werden vor dem Save aus dem Store
-// extrahiert, hash basiert in der store_images Tabelle abgelegt und durch
-// einen Sentinel String ersetzt. Damit bleibt der Store JSON Body weit
-// unter dem 4,5 MB Vercel Body Limit. Beim Laden werden die Sentinels
-// transparent zurück in Data URLs aufgelöst, der Rest der App sieht den
-// gleichen Store wie vorher.
+import { upload } from '@vercel/blob/client';
+
+// Image Auslagerung: Data URLs werden vor dem Save aus dem Store extrahiert,
+// hash basiert in die Vercel Blob Infrastruktur hochgeladen und durch einen
+// Sentinel String im Store JSON ersetzt. Der Client uploaded direkt nach
+// Blob, damit das 4,5 MB Vercel Function Body Limit komplett umgangen wird.
+// Beim Laden werden die Sentinels transparent zurueck in Blob URLs aufgeloest,
+// der Rest der App sieht weiterhin den gleichen Store wie vorher.
 
 var SENTINEL_PREFIX = '#imgref:sha256:';
 
@@ -11,6 +13,34 @@ var SENTINEL_PREFIX = '#imgref:sha256:';
 var IMAGE_FIELDS_TILE = ['uploadedImage', 'uploadedImageMobile', 'videoThumbnail'];
 var IMAGE_FIELDS_PAGE = ['headerBanner', 'headerBannerMobile'];
 var IMAGE_FIELDS_STORE = ['headerBanner', 'headerBannerMobile'];
+
+// localStorage Cache der bereits hochgeladenen Hashes. Damit muss bei einem
+// erneuten Save eines Stores mit 380 Bildern nicht jeder einzelne Hash erneut
+// gegen den Server gecheckt werden.
+var UPLOADED_CACHE_KEY = 'amazon-store-builder-uploaded-hashes';
+function getUploadedCache() {
+  try {
+    var raw = localStorage.getItem(UPLOADED_CACHE_KEY);
+    if (!raw) return {};
+    var parsed = JSON.parse(raw);
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  } catch (e) { return {}; }
+}
+function markUploaded(hash) {
+  try {
+    var cache = getUploadedCache();
+    cache[hash] = 1;
+    // Cache nicht beliebig wachsen lassen, bei 5000 Eintraegen halbieren.
+    var keys = Object.keys(cache);
+    if (keys.length > 5000) {
+      var trimmed = {};
+      keys.slice(-2500).forEach(function(k) { trimmed[k] = 1; });
+      cache = trimmed;
+      cache[hash] = 1;
+    }
+    localStorage.setItem(UPLOADED_CACHE_KEY, JSON.stringify(cache));
+  } catch (e) { /* localStorage voll, ignorieren */ }
+}
 
 function isDataUrl(v) {
   return typeof v === 'string' && v.indexOf('data:') === 0;
@@ -201,7 +231,10 @@ export async function inflateImagesIntoStore(store) {
         var resp = await fetch('/api/store-images?hash=' + encodeURIComponent(h));
         if (resp.ok) {
           var json = await resp.json();
-          if (json && json.data) resolved.set(h, json.data);
+          // Neuer Pfad: Blob URL direkt verwenden. Legacy Pfad: Base64
+          // Data URL als Fallback.
+          if (json && json.url) resolved.set(h, json.url);
+          else if (json && json.data) resolved.set(h, json.data);
         }
       } catch (e) { /* image bleibt als Sentinel, UI zeigt leeres Image */ }
     }
@@ -297,44 +330,126 @@ function sweepReplaceSentinels(node, resolved) {
   });
 }
 
-// Lädt eine Map von hash → dataUrl in den Server hoch. Jeder Upload ist
-// ein eigener POST, damit jede Request weit unter dem 4,5 MB Limit bleibt.
-// Bekannte Hashes werden serverseitig dedupliziert.
-export async function uploadImages(images) {
-  if (!images || images.size === 0) return { uploaded: 0, failed: [] };
+// Batched Check welche Hashes bereits in der DB sind. Aufruf in einem
+// einzigen Roundtrip statt 380 mal Einzelpost. localStorage Cache vorab,
+// damit Re Saves quasi instant durchlaufen.
+async function fetchExistingHashes(hashes) {
+  var cache = getUploadedCache();
+  var toCheck = hashes.filter(function(h) { return !cache[h]; });
+  var existing = {};
+  hashes.forEach(function(h) { if (cache[h]) existing[h] = true; });
+  if (toCheck.length === 0) return existing;
+  // Vercel Body Limit beachten, Hashes sind kurz (64 hex chars) aber sicher
+  // gehen wir in 500er Bloecken.
+  var CHUNK = 500;
+  for (var i = 0; i < toCheck.length; i += CHUNK) {
+    var slice = toCheck.slice(i, i + CHUNK);
+    try {
+      var resp = await fetch('/api/store-images?action=exists', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ hashes: slice }),
+      });
+      if (resp.ok) {
+        var json = await resp.json();
+        var map = (json && json.exists) || {};
+        Object.keys(map).forEach(function(h) {
+          if (map[h]) { existing[h] = true; markUploaded(h); }
+        });
+      }
+    } catch (e) { /* Fallback: einzeln pruefen via POST upload, der dedupliziert */ }
+  }
+  return existing;
+}
+
+// Wandelt eine Data URL in einen Blob fuer den Vercel Blob Upload. mime
+// Type wird aus dem Data URL Prefix gezogen.
+async function dataUrlToBlob(dataUrl) {
+  var response = await fetch(dataUrl);
+  return await response.blob();
+}
+
+function extractMime(dataUrl) {
+  var match = /^data:([^;,]+)[;,]/.exec(dataUrl || '');
+  return match ? match[1] : 'image/jpeg';
+}
+
+function extFromMime(mime) {
+  if (mime === 'image/png') return 'png';
+  if (mime === 'image/webp') return 'webp';
+  if (mime === 'image/gif') return 'gif';
+  if (mime === 'image/svg+xml') return 'svg';
+  if (mime === 'image/bmp') return 'bmp';
+  if (mime === 'image/tiff') return 'tiff';
+  return 'jpg';
+}
+
+// Laedt jeden Hash zu Data URL Eintrag in der Map nach Vercel Blob hoch.
+// Der eigentliche Upload geht direkt vom Browser nach Blob, nicht durch
+// unseren Serverless Endpoint, damit es kein 4,5 MB Limit gibt. Bekannte
+// Hashes werden via Batch Check und localStorage Cache ausgefiltert.
+// Verbleibende Bilder werden mit hoher Concurrency parallel hochgeladen.
+// onProgress liefert Live Status fuer das UI. Teilfehler brechen den
+// Save nicht ab, der Aufrufer bekommt die Liste der gescheiterten Bilder.
+export async function uploadImages(images, onProgress) {
+  if (!images || images.size === 0) return { uploaded: 0, failed: [], skipped: 0 };
   var entries = Array.from(images.entries());
+  var hashes = entries.map(function(e) { return e[0]; });
+  var existing = await fetchExistingHashes(hashes);
+  var toUpload = entries.filter(function(e) { return !existing[e[0]]; });
+  var skipped = entries.length - toUpload.length;
+  var totalToDo = toUpload.length;
+  if (typeof onProgress === 'function') onProgress({ uploaded: 0, total: totalToDo, skipped: skipped });
+
+  if (totalToDo === 0) {
+    return { uploaded: 0, failed: [], skipped: skipped };
+  }
+
   var failed = [];
   var uploaded = 0;
-  var concurrency = 4;
+  var concurrency = 8;
   var idx = 0;
 
   async function worker() {
-    while (idx < entries.length) {
+    while (idx < toUpload.length) {
       var myIdx = idx++;
-      var pair = entries[myIdx];
+      var pair = toUpload[myIdx];
       var hash = pair[0];
-      var data = pair[1];
+      var dataUrl = pair[1];
       try {
-        var resp = await fetch('/api/store-images', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ hash: hash, data: data }),
+        var mime = extractMime(dataUrl);
+        var ext = extFromMime(mime);
+        var blob = await dataUrlToBlob(dataUrl);
+        var pathname = 'store-images/' + hash + '.' + ext;
+        var result = await upload(pathname, blob, {
+          access: 'public',
+          handleUploadUrl: '/api/blob-upload',
+          contentType: mime,
+          clientPayload: JSON.stringify({ hash: hash }),
         });
-        if (!resp.ok) {
-          var msg = '';
-          try { msg = (await resp.json()).error || ''; } catch (e) { /* ignore */ }
-          failed.push({ hash: hash, status: resp.status, message: msg });
-        } else {
-          uploaded++;
-        }
+        // Fallback Registrierung. Der onUploadCompleted Callback auf der
+        // Server Seite traegt ebenfalls Hash zu URL in die DB ein, aber
+        // wenn dieser Callback aus irgendeinem Grund nicht durchlaeuft
+        // (Local Dev, Vercel Probleme), sichert dieser POST ab dass die
+        // Zuordnung in der DB landet.
+        try {
+          await fetch('/api/store-images?action=register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ hash: hash, blob_url: result.url, byte_size: blob.size || 0 }),
+          });
+        } catch (e) { /* nicht kritisch, onUploadCompleted laeuft eh */ }
+        uploaded++;
+        markUploaded(hash);
       } catch (e) {
-        failed.push({ hash: hash, status: 0, message: e.message });
+        failed.push({ hash: hash, status: 0, message: e.message || 'Blob upload fehlgeschlagen', size: dataUrl ? dataUrl.length : 0 });
       }
+      if (typeof onProgress === 'function') onProgress({ uploaded: uploaded, total: totalToDo, skipped: skipped, failed: failed.length });
     }
   }
 
   var workers = [];
   for (var w = 0; w < concurrency; w++) workers.push(worker());
   await Promise.all(workers);
-  return { uploaded: uploaded, failed: failed };
+  return { uploaded: uploaded, failed: failed, skipped: skipped };
 }
