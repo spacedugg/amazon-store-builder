@@ -456,6 +456,43 @@ export default function App() {
     });
   };
 
+  // ─── AUTO LINK TILES TO SUBPAGES ───
+  // Setzt linkUrl auf allen Image Kacheln einer Parent Page in der Reihenfolge
+  // ihrer Subpages. Kacheln, die schon eine linkUrl oder einen linkAsin haben,
+  // bleiben unangetastet, damit manuelle Eintraege nicht ueberschrieben werden.
+  // Gibt die Anzahl der neu verknuepften Kacheln zurueck.
+  var autoLinkTilesToSubpages = function(pageId) {
+    if (!pageId) return 0;
+    var subpages = (store.pages || []).filter(function(p) { return p.parentId === pageId; });
+    if (subpages.length === 0) return 0;
+    var IMAGE_TILE_TYPES = { image: 1, shoppable_image: 1, image_text: 1 };
+    var queue = subpages.map(function(p) { return p.id; });
+    var queueIdx = 0;
+    var assignedCount = 0;
+    var newPages = (store.pages || []).map(function(pg) {
+      if (pg.id !== pageId) return pg;
+      return Object.assign({}, pg, {
+        sections: (pg.sections || []).map(function(sec) {
+          return Object.assign({}, sec, {
+            tiles: (sec.tiles || []).map(function(t) {
+              if (!IMAGE_TILE_TYPES[t.type]) return t;
+              if (t.linkUrl || t.linkAsin) return t;
+              if (queueIdx >= queue.length) return t;
+              var targetId = queue[queueIdx];
+              queueIdx += 1;
+              assignedCount += 1;
+              return Object.assign({}, t, { linkUrl: '/' + targetId });
+            }),
+          });
+        }),
+      });
+    });
+    if (assignedCount > 0) {
+      setStoreWithUndo(function(s) { return Object.assign({}, s, { pages: newPages }); });
+    }
+    return assignedCount;
+  };
+
   // ─── SECTION MANAGEMENT ───
   var addSection = function() {
     if (!page) return;
@@ -1551,6 +1588,15 @@ export default function App() {
           onLoadAutoSave={handleLoadAutoSave}
           onImportRescueJson={handleImportRescueJson}
           onGenerate={handleNewStore}
+          onAutoLinkSubpages={function() {
+            if (!page) return;
+            var count = autoLinkTilesToSubpages(page.id);
+            if (count === 0) {
+              alert('Keine Kacheln verknuepft. Pruefe, ob diese Page Subpages hat und ob die Bildkacheln noch keine Verlinkung haben.');
+            } else {
+              alert(count + ' Bildkachel(n) wurden automatisch mit Subpages verknuepft.');
+            }
+          }}
         />
 
         <PropertiesPanel
