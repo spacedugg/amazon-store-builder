@@ -457,36 +457,123 @@ export default function App() {
   };
 
   // ─── AUTO LINK TILES TO SUBPAGES ───
+  // Versucht die richtigen Verlinkungen ueber Wortmatching zu finden, statt
+  // stumpf nach Reihenfolge. Beruecksichtigt textOverlay.heading,
+  // textOverlay.subheading, textOverlay.cta und designer brief der Kachel.
+  // Pro Kachel wird die Subpage mit dem hoechsten Score gewaehlt. Nur Pairs
+  // ueber einer Mindestschwelle werden geschrieben, schlechte Matches lieber
+  // gar nicht verlinken. Gibt {assigned, suggestions, unmatched} zurueck.
+  function normalizeText(s) {
+    return String(s == null ? '' : s).toLowerCase()
+      .replace(/[äÄ]/g, 'a').replace(/[öÖ]/g, 'o')
+      .replace(/[üÜ]/g, 'u').replace(/[ßẞ]/g, 'ss')
+      .replace(/[^a-z0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+  function tokens(s) {
+    return normalizeText(s).split(' ').filter(function(t) { return t.length >= 3; });
+  }
+  function scoreTilePagePair(tile, pageName) {
+    if (!pageName) return 0;
+    var candidates = [];
+    var ov = tile.textOverlay || {};
+    if (ov.heading) candidates.push(ov.heading);
+    if (ov.subheading) candidates.push(ov.subheading);
+    if (ov.cta) candidates.push(ov.cta);
+    if (Array.isArray(ov.bullets)) candidates.push(ov.bullets.join(' '));
+    if (tile.brief) candidates.push(tile.brief);
+    var pageNorm = normalizeText(pageName);
+    var pageTokens = tokens(pageName);
+    if (pageTokens.length === 0) return 0;
+    var best = 0;
+    candidates.forEach(function(c) {
+      var cNorm = normalizeText(c);
+      if (!cNorm) return;
+      if (cNorm === pageNorm) { best = Math.max(best, 100); return; }
+      if (cNorm.indexOf(pageNorm) >= 0) { best = Math.max(best, 90); return; }
+      if (pageNorm.indexOf(cNorm) >= 0 && cNorm.length >= 4) { best = Math.max(best, 75); return; }
+      var cTokens = tokens(c);
+      if (cTokens.length === 0) return;
+      var matched = 0;
+      pageTokens.forEach(function(pt) {
+        var hit = cTokens.some(function(ct) {
+          if (ct === pt) return true;
+          if (ct.length >= 5 && pt.length >= 5 && (ct.indexOf(pt) >= 0 || pt.indexOf(ct) >= 0)) return true;
+          return false;
+        });
+        if (hit) matched += 1;
+      });
+      var score = Math.round((matched / pageTokens.length) * 70);
+      best = Math.max(best, score);
+    });
+    return best;
+  }
   var autoLinkTilesToSubpages = function(pageId) {
-    if (!pageId) return 0;
+    if (!pageId) return { assigned: 0, total: 0, unmatched: 0 };
     var subpages = (store.pages || []).filter(function(p) { return p.parentId === pageId; });
-    if (subpages.length === 0) return 0;
+    if (subpages.length === 0) return { assigned: 0, total: 0, unmatched: 0 };
     var IMAGE_TILE_TYPES = { image: 1, shoppable_image: 1, image_text: 1 };
-    var queue = subpages.map(function(p) { return p.id; });
-    var queueIdx = 0;
-    var assignedCount = 0;
+    var MIN_SCORE = 30;
+
+    // Sammle alle freien Kacheln auf dieser Page
+    var parentPage = (store.pages || []).find(function(p) { return p.id === pageId; });
+    if (!parentPage) return { assigned: 0, total: 0, unmatched: 0 };
+    var freeTiles = [];
+    (parentPage.sections || []).forEach(function(sec, si) {
+      (sec.tiles || []).forEach(function(t, ti) {
+        if (!IMAGE_TILE_TYPES[t.type]) return;
+        if (t.linkUrl || t.linkAsin) return;
+        freeTiles.push({ sectionId: sec.id, tileIndex: ti, tile: t, key: si + '-' + ti });
+      });
+    });
+    if (freeTiles.length === 0) return { assigned: 0, total: 0, unmatched: 0 };
+
+    // Alle Paar Scores ausrechnen
+    var pairs = [];
+    freeTiles.forEach(function(ft) {
+      subpages.forEach(function(sp) {
+        pairs.push({ tileKey: ft.key, pageId: sp.id, score: scoreTilePagePair(ft.tile, sp.name) });
+      });
+    });
+    pairs.sort(function(a, b) { return b.score - a.score; });
+
+    // Greedy Zuweisung
+    var assignments = {}; // tileKey -> pageId
+    var usedPages = {};
+    pairs.forEach(function(p) {
+      if (p.score < MIN_SCORE) return;
+      if (assignments[p.tileKey]) return;
+      if (usedPages[p.pageId]) return;
+      assignments[p.tileKey] = p.pageId;
+      usedPages[p.pageId] = true;
+    });
+
+    var assignedCount = Object.keys(assignments).length;
+    if (assignedCount === 0) {
+      return { assigned: 0, total: freeTiles.length, unmatched: freeTiles.length };
+    }
+
+    // In den Store schreiben
     var newPages = (store.pages || []).map(function(pg) {
       if (pg.id !== pageId) return pg;
       return Object.assign({}, pg, {
-        sections: (pg.sections || []).map(function(sec) {
+        sections: (pg.sections || []).map(function(sec, si) {
           return Object.assign({}, sec, {
-            tiles: (sec.tiles || []).map(function(t) {
-              if (!IMAGE_TILE_TYPES[t.type]) return t;
-              if (t.linkUrl || t.linkAsin) return t;
-              if (queueIdx >= queue.length) return t;
-              var targetId = queue[queueIdx];
-              queueIdx += 1;
-              assignedCount += 1;
-              return Object.assign({}, t, { linkUrl: '/' + targetId });
+            tiles: (sec.tiles || []).map(function(t, ti) {
+              var key = si + '-' + ti;
+              if (!assignments[key]) return t;
+              return Object.assign({}, t, { linkUrl: '/' + assignments[key] });
             }),
           });
         }),
       });
     });
-    if (assignedCount > 0) {
-      setStoreWithUndo(function(s) { return Object.assign({}, s, { pages: newPages }); });
-    }
-    return assignedCount;
+    setStoreWithUndo(function(s) { return Object.assign({}, s, { pages: newPages }); });
+
+    return {
+      assigned: assignedCount,
+      total: freeTiles.length,
+      unmatched: freeTiles.length - assignedCount,
+    };
   };
 
   // ─── HOTSPOT DRAG IM EDITOR ───
@@ -1611,12 +1698,20 @@ export default function App() {
           onGenerate={handleNewStore}
           onAutoLinkSubpages={function() {
             if (!page) return;
-            var count = autoLinkTilesToSubpages(page.id);
-            if (count === 0) {
-              alert('Keine Kacheln verknuepft. Pruefe, ob diese Page Subpages hat und ob die Bildkacheln noch keine Verlinkung haben.');
-            } else {
-              alert(count + ' Bildkachel(n) wurden automatisch mit Subpages verknuepft.');
+            var result = autoLinkTilesToSubpages(page.id);
+            if (result.assigned === 0) {
+              if (result.total === 0) {
+                alert('Keine freien Bildkacheln gefunden. Pruefe, ob diese Page Subpages hat und ob die Bildkacheln noch keine Verlinkung haben.');
+              } else {
+                alert('Keine zuverlaessigen Treffer gefunden (' + result.total + ' freie Kacheln, kein Textmatch zu den Subpages). Bitte die Kacheln manuell ueber das Dropdown im rechten Panel verlinken.');
+              }
+              return;
             }
+            var msg = result.assigned + ' Kachel(n) ueber Textmatch verlinkt.';
+            if (result.unmatched > 0) {
+              msg += '\n\n' + result.unmatched + ' Kachel(n) konnten nicht sicher zugeordnet werden und bleiben offen, bitte manuell setzen.';
+            }
+            alert(msg);
           }}
         />
 

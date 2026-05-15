@@ -119,16 +119,35 @@ export function AmazonProductGrid({ tile, products, marketplace, isMobile }) {
   };
   var title = titleMap[tile.type] || 'Produkte';
 
-  // Card width auf etwa 5 Karten auf Desktop, 2 auf Mobile.
-  var cardWidth = isMobile ? 150 : 200;
+  // Amazon zeigt Bestseller als horizontalen Slider, normale Produkt Grids
+  // dagegen als tabellarisches Raster mit 5 Karten pro Reihe auf Desktop und
+  // 2 pro Reihe auf Mobile. Wir bilden das hier nach.
+  var isSlider = tile.type === 'best_sellers';
+  var cols = isMobile ? 2 : 5;
+
+  var listStyle;
+  if (isSlider) {
+    listStyle = {
+      display: 'grid', gridAutoFlow: 'column',
+      gridAutoColumns: (isMobile ? 150 : 200) + 'px',
+      gap: isMobile ? 8 : 12, overflowX: 'auto', overflowY: 'hidden',
+      paddingBottom: 6, scrollSnapType: 'x mandatory',
+    };
+  } else {
+    listStyle = {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(' + cols + ', 1fr)',
+      gap: isMobile ? 8 : 14,
+    };
+  }
 
   return (
-    <div style={{ width: '100%', height: '100%', background: tile.bgColor || '#fff', padding: isMobile ? '12px 8px' : '16px 12px', display: 'flex', flexDirection: 'column', boxSizing: 'border-box' }}>
+    <div style={{ width: '100%', height: '100%', background: tile.bgColor || '#fff', padding: isMobile ? '12px 8px' : '16px 12px', display: 'flex', flexDirection: 'column', boxSizing: 'border-box', overflow: 'auto' }}>
       <div style={{ fontSize: isMobile ? 14 : 18, fontWeight: 700, color: '#0F1111', marginBottom: isMobile ? 8 : 12 }}>{title}</div>
-      <div style={{ display: 'grid', gridAutoFlow: 'column', gridAutoColumns: cardWidth + 'px', gap: isMobile ? 8 : 12, overflowX: 'auto', overflowY: 'hidden', paddingBottom: 6, scrollSnapType: 'x mandatory' }}>
+      <div style={listStyle}>
         {items.map(function(p, i) {
           return (
-            <div key={i} style={{ scrollSnapAlign: 'start' }}>
+            <div key={i} style={isSlider ? { scrollSnapAlign: 'start' } : undefined}>
               <AmazonProductCard product={p} marketplace={marketplace} isMobile={isMobile} />
             </div>
           );
