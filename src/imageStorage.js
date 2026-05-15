@@ -12,6 +12,34 @@ var IMAGE_FIELDS_TILE = ['uploadedImage', 'uploadedImageMobile', 'videoThumbnail
 var IMAGE_FIELDS_PAGE = ['headerBanner', 'headerBannerMobile'];
 var IMAGE_FIELDS_STORE = ['headerBanner', 'headerBannerMobile'];
 
+// localStorage Cache der bereits hochgeladenen Hashes. Damit muss bei einem
+// erneuten Save eines Stores mit 380 Bildern nicht jeder einzelne Hash erneut
+// gegen den Server gecheckt werden.
+var UPLOADED_CACHE_KEY = 'amazon-store-builder-uploaded-hashes';
+function getUploadedCache() {
+  try {
+    var raw = localStorage.getItem(UPLOADED_CACHE_KEY);
+    if (!raw) return {};
+    var parsed = JSON.parse(raw);
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  } catch (e) { return {}; }
+}
+function markUploaded(hash) {
+  try {
+    var cache = getUploadedCache();
+    cache[hash] = 1;
+    // Cache nicht beliebig wachsen lassen, bei 5000 Eintraegen halbieren.
+    var keys = Object.keys(cache);
+    if (keys.length > 5000) {
+      var trimmed = {};
+      keys.slice(-2500).forEach(function(k) { trimmed[k] = 1; });
+      cache = trimmed;
+      cache[hash] = 1;
+    }
+    localStorage.setItem(UPLOADED_CACHE_KEY, JSON.stringify(cache));
+  } catch (e) { /* localStorage voll, ignorieren */ }
+}
+
 function isDataUrl(v) {
   return typeof v === 'string' && v.indexOf('data:') === 0;
 }
@@ -297,21 +325,67 @@ function sweepReplaceSentinels(node, resolved) {
   });
 }
 
-// Lädt eine Map von hash → dataUrl in den Server hoch. Jeder Upload ist
-// ein eigener POST, damit jede Request weit unter dem 4,5 MB Limit bleibt.
-// Bekannte Hashes werden serverseitig dedupliziert.
-export async function uploadImages(images) {
-  if (!images || images.size === 0) return { uploaded: 0, failed: [] };
+// Batched Check welche Hashes bereits in der DB sind. Aufruf in einem
+// einzigen Roundtrip statt 380 mal Einzelpost. localStorage Cache vorab,
+// damit Re Saves quasi instant durchlaufen.
+async function fetchExistingHashes(hashes) {
+  var cache = getUploadedCache();
+  var toCheck = hashes.filter(function(h) { return !cache[h]; });
+  var existing = {};
+  hashes.forEach(function(h) { if (cache[h]) existing[h] = true; });
+  if (toCheck.length === 0) return existing;
+  // Vercel Body Limit beachten, Hashes sind kurz (64 hex chars) aber sicher
+  // gehen wir in 500er Bloecken.
+  var CHUNK = 500;
+  for (var i = 0; i < toCheck.length; i += CHUNK) {
+    var slice = toCheck.slice(i, i + CHUNK);
+    try {
+      var resp = await fetch('/api/store-images?action=exists', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ hashes: slice }),
+      });
+      if (resp.ok) {
+        var json = await resp.json();
+        var map = (json && json.exists) || {};
+        Object.keys(map).forEach(function(h) {
+          if (map[h]) { existing[h] = true; markUploaded(h); }
+        });
+      }
+    } catch (e) { /* Fallback: einzeln pruefen via POST upload, der dedupliziert */ }
+  }
+  return existing;
+}
+
+// Lädt eine Map von hash → dataUrl in den Server hoch. Bekannte Hashes
+// werden vorab ausgefiltert via Batch Check. Verbleibende Bilder werden
+// mit hoher Concurrency parallel hochgeladen. onProgress wird nach jedem
+// erledigten Upload aufgerufen, fuer eine Live Statusanzeige im UI.
+// Liefert auch bei Teilfehlern was geschafft wurde, ein Save bricht nicht
+// mehr ab, wenn ein einzelnes Bild zu gross ist.
+export async function uploadImages(images, onProgress) {
+  if (!images || images.size === 0) return { uploaded: 0, failed: [], skipped: 0 };
   var entries = Array.from(images.entries());
+  var hashes = entries.map(function(e) { return e[0]; });
+  var existing = await fetchExistingHashes(hashes);
+  var toUpload = entries.filter(function(e) { return !existing[e[0]]; });
+  var skipped = entries.length - toUpload.length;
+  var totalToDo = toUpload.length;
+  if (typeof onProgress === 'function') onProgress({ uploaded: 0, total: totalToDo, skipped: skipped });
+
+  if (totalToDo === 0) {
+    return { uploaded: 0, failed: [], skipped: skipped };
+  }
+
   var failed = [];
   var uploaded = 0;
-  var concurrency = 4;
+  var concurrency = 12;
   var idx = 0;
 
   async function worker() {
-    while (idx < entries.length) {
+    while (idx < toUpload.length) {
       var myIdx = idx++;
-      var pair = entries[myIdx];
+      var pair = toUpload[myIdx];
       var hash = pair[0];
       var data = pair[1];
       try {
@@ -323,18 +397,20 @@ export async function uploadImages(images) {
         if (!resp.ok) {
           var msg = '';
           try { msg = (await resp.json()).error || ''; } catch (e) { /* ignore */ }
-          failed.push({ hash: hash, status: resp.status, message: msg });
+          failed.push({ hash: hash, status: resp.status, message: msg, size: data ? data.length : 0 });
         } else {
           uploaded++;
+          markUploaded(hash);
         }
       } catch (e) {
-        failed.push({ hash: hash, status: 0, message: e.message });
+        failed.push({ hash: hash, status: 0, message: e.message, size: data ? data.length : 0 });
       }
+      if (typeof onProgress === 'function') onProgress({ uploaded: uploaded, total: totalToDo, skipped: skipped, failed: failed.length });
     }
   }
 
   var workers = [];
   for (var w = 0; w < concurrency; w++) workers.push(worker());
   await Promise.all(workers);
-  return { uploaded: uploaded, failed: failed };
+  return { uploaded: uploaded, failed: failed, skipped: skipped };
 }

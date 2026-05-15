@@ -8,7 +8,18 @@ function AutoSaveBadge({ status, hasShareToken }) {
   return <span style={{ fontSize: 10, color: '#9ca3af', marginRight: 6 }}>Auto</span>;
 }
 
-export default function Topbar({ store, shareToken, onExport, onSave, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink }) {
+function formatCustomerProgress(p) {
+  if (!p) return '';
+  if (p.stage === 'extract') return 'Bilder extrahieren...';
+  if (p.stage === 'upload') {
+    if (!p.total) return 'Speichere...';
+    return 'Bilder ' + (p.uploaded || 0) + ' / ' + p.total;
+  }
+  if (p.stage === 'done') return 'Fertig';
+  return 'Speichere...';
+}
+
+export default function Topbar({ store, shareToken, onExport, onSave, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress }) {
   return (
     <div className="topbar">
       <div className="topbar-brand">
@@ -70,10 +81,10 @@ export default function Topbar({ store, shareToken, onExport, onSave, onShowJson
           )}
           <button className="btn btn-primary" onClick={onExport} title="Designer Briefing als DOCX exportieren oder Share Link generieren">Export</button>
           <button className="btn" onClick={onCopyCustomerLink}
-            disabled={!onCopyCustomerLink}
+            disabled={!onCopyCustomerLink || !!customerSaveProgress}
             title="Speichert den Store inkl. hochgeladenen Bildern und kopiert den Customer Preview Link. Premium Amazon Brand Store Vorschau ohne Designer Tools, ideal fuer Unternehmenskunden."
-            style={{ fontSize: 11, background: '#0F1111', color: '#fff', borderColor: '#0F1111' }}>
-            Customer
+            style={{ fontSize: 11, background: '#0F1111', color: '#fff', borderColor: '#0F1111', minWidth: customerSaveProgress ? 140 : undefined }}>
+            {customerSaveProgress ? formatCustomerProgress(customerSaveProgress) : 'Customer'}
           </button>
           {onShowAsinOverview && (
             <button className="btn" onClick={onShowAsinOverview} title="ASIN Übersicht aller Stores plus BSR Sortierung" style={{ fontSize: 11 }}>ASINs</button>
