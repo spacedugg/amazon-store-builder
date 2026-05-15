@@ -1587,15 +1587,20 @@ export default function App() {
   var [customerSaveProgress, setCustomerSaveProgress] = useState(null);
   var handleCopyCustomerLink = async function() {
     if (!store.pages.length) { alert('Bitte erst einen Store anlegen.'); return; }
+    console.log('[Customer] Start, store has', (store.pages || []).length, 'pages');
     setCustomerSaveProgress({ stage: 'extract' });
     try {
       var result = await persistStore(store, {
         includeShareToken: true,
-        onProgress: function(p) { setCustomerSaveProgress(p); },
+        onProgress: function(p) {
+          console.log('[Customer] Progress', p);
+          setCustomerSaveProgress(p);
+        },
       });
+      console.log('[Customer] persistStore result', result);
       setCustomerSaveProgress(null);
       if (!result || !result.shareToken) {
-        alert('Customer Link konnte nicht erzeugt werden. Bitte erst speichern.');
+        alert('Customer Link konnte nicht erzeugt werden. Server hat keinen shareToken zurueckgegeben. Bitte einmal manuell ueber Save speichern.');
         return;
       }
       var url = window.location.origin + '/customer/' + result.shareToken;
@@ -1604,12 +1609,12 @@ export default function App() {
         msg += '\n\nBilder: ' + (result.imagesUploaded || 0) + ' neu hochgeladen, ' + (result.imagesSkipped || 0) + ' bereits in DB.';
       }
       if (result.imageFailures && result.imageFailures.length > 0) {
-        var sizeTotal = result.imageFailures.reduce(function(s, f) { return s + (f.size || 0); }, 0);
-        msg += '\n\nWARNUNG: ' + result.imageFailures.length + ' Bild(er) konnten nicht hochgeladen werden';
-        if (result.imageFailures.some(function(f) { return f.status === 413; })) {
-          msg += ' (mindestens eines ist zu gross, > 4 MB pro Bild). Bitte zu grosse Bilder skalieren.';
+        msg += '\n\nWARNUNG: ' + result.imageFailures.length + ' Bild(er) konnten nicht hochgeladen werden.';
+        var firstErr = result.imageFailures[0];
+        if (firstErr && firstErr.message) {
+          msg += '\nErster Fehler: ' + firstErr.message;
         }
-        msg += '. Save erneut versuchen, dann landen die fehlenden Bilder auch im Customer Preview.';
+        msg += '\n\nSave erneut versuchen, dann landen die fehlenden Bilder auch im Customer Preview.';
       }
       try {
         await navigator.clipboard.writeText(url);
@@ -1618,8 +1623,9 @@ export default function App() {
         prompt('Customer Preview Link:', url);
       }
     } catch (e) {
+      console.error('[Customer] Fehler im handleCopyCustomerLink', e);
       setCustomerSaveProgress(null);
-      alert('Save fehlgeschlagen: ' + (e && e.message ? e.message : 'unbekannt') + '\n\nDein lokaler Stand bleibt im Tab erhalten.');
+      alert('Save fehlgeschlagen.\n\nFehler: ' + (e && e.message ? e.message : 'unbekannt') + '\n\nBitte die Browser Console mit F12 oeffnen, dort steht der vollstaendige Stack Trace. Dein lokaler Stand bleibt im Tab erhalten.');
     }
   };
 

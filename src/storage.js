@@ -65,14 +65,27 @@ export async function saveStore(store, existingId, existingShareToken, onProgres
   var serialized = JSON.stringify(body);
   var sizeMb = serialized.length / 1024 / 1024;
 
+  if (typeof onProgress === 'function') onProgress({ stage: 'store-save', sizeMb: sizeMb });
+
   var resp;
   try {
+    // 60 Sekunden Timeout. Wenn die Function laenger braucht, soll der
+    // Benutzer eine klare Fehlermeldung sehen, statt unsichtbar zu warten.
+    var controller = new AbortController();
+    var timeoutId = setTimeout(function() { controller.abort(); }, 60000);
     resp = await fetch('/api/stores', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: serialized,
+      signal: controller.signal,
     });
+    clearTimeout(timeoutId);
   } catch (networkErr) {
+    if (networkErr.name === 'AbortError') {
+      var abortErr = new Error('Save Timeout, /api/stores hat innerhalb von 60 Sekunden nicht geantwortet. Bitte erneut versuchen.');
+      abortErr.code = 'SAVE_TIMEOUT';
+      throw abortErr;
+    }
     // Echte Netzwerkstörung, fallback auf localStorage
     console.warn('Netzwerkfehler beim Save, nutze localStorage:', networkErr.message);
     return saveToLocalStorage(store, existingId);
