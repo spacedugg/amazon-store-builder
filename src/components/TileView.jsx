@@ -304,7 +304,10 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
         var isDragging = dragOverride && dragOverride.idx === i;
         var x = isDragging ? dragOverride.x : (hs.x || 0);
         var y = isDragging ? dragOverride.y : (hs.y || 0);
-        var draggable = !!(imgSrc && onChangeHotspots);
+        // Drag erlaubt sobald onChangeHotspots vorhanden ist, also auch ohne
+        // hochgeladenes Bild auf der Wireframe Darstellung. Damit kann der
+        // Operator die Punkte schon waehrend des Konzepts platzieren.
+        var draggable = !!onChangeHotspots;
         var size = imgSrc ? 22 : 18;
         return (
           <div key={i} className="tile-hotspot-dot"

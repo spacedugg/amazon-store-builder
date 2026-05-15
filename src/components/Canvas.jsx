@@ -2,7 +2,7 @@ import { useState } from 'react';
 import SectionView from './SectionView';
 import { t } from '../i18n';
 
-export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onSwapTiles, onChangeLayout, onApplySectionImageCategory, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onImportRescueJson, onGenerate, onAutoLinkSubpages }) {
+export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onSwapTiles, onChangeLayout, onApplySectionImageCategory, onChangeTileHotspots, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onImportRescueJson, onGenerate, onAutoLinkSubpages }) {
   var [hoveredNav, setHoveredNav] = useState(null);
   var [showHeroPicker, setShowHeroPicker] = useState(false);
 
@@ -194,6 +194,21 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
 
         {/* Sections */}
         {page.sections.map(function(sec, si) {
+          // Hotspot Drag Callbacks pro shoppable_image Kachel aufbauen. Damit
+          // bekommt TileView ein onChangeHotspots, sobald der Operator den
+          // Mauszeiger auf einem Hotspot drueckt.
+          var previewByTileIndex = null;
+          if (onChangeTileHotspots) {
+            previewByTileIndex = {};
+            (sec.tiles || []).forEach(function(tile, ti) {
+              if (tile.type !== 'shoppable_image') return;
+              previewByTileIndex[ti] = {
+                src: null,
+                onClear: null,
+                onChangeHotspots: function(newList) { onChangeTileHotspots(sec.id, ti, newList); },
+              };
+            });
+          }
           return (
             <SectionView key={sec.id} section={sec} idx={si}
               totalSections={page.sections.length} sel={sel} onSelect={onSelect}
@@ -208,6 +223,7 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
               viewMode={viewMode}
               products={products}
               uiLang={uiLang}
+              previewByTileIndex={previewByTileIndex}
             />
           );
         })}

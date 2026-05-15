@@ -457,10 +457,6 @@ export default function App() {
   };
 
   // ─── AUTO LINK TILES TO SUBPAGES ───
-  // Setzt linkUrl auf allen Image Kacheln einer Parent Page in der Reihenfolge
-  // ihrer Subpages. Kacheln, die schon eine linkUrl oder einen linkAsin haben,
-  // bleiben unangetastet, damit manuelle Eintraege nicht ueberschrieben werden.
-  // Gibt die Anzahl der neu verknuepften Kacheln zurueck.
   var autoLinkTilesToSubpages = function(pageId) {
     if (!pageId) return 0;
     var subpages = (store.pages || []).filter(function(p) { return p.parentId === pageId; });
@@ -491,6 +487,30 @@ export default function App() {
       setStoreWithUndo(function(s) { return Object.assign({}, s, { pages: newPages }); });
     }
     return assignedCount;
+  };
+
+  // ─── HOTSPOT DRAG IM EDITOR ───
+  // Wird vom Canvas auf jede shoppable_image Kachel durchgereicht, damit der
+  // Operator die Hotspot Punkte direkt auf der Kachel ziehen kann. Akzeptiert
+  // die komplette neue Hotspot Liste und schreibt sie zurueck in den Store.
+  var updateTileHotspots = function(sectionId, tileIndex, newHotspots) {
+    setStoreWithUndo(function(s) {
+      return Object.assign({}, s, {
+        pages: s.pages.map(function(pg) {
+          return Object.assign({}, pg, {
+            sections: (pg.sections || []).map(function(sec) {
+              if (sec.id !== sectionId) return sec;
+              return Object.assign({}, sec, {
+                tiles: (sec.tiles || []).map(function(t, i) {
+                  if (i !== tileIndex) return t;
+                  return Object.assign({}, t, { hotspots: newHotspots });
+                }),
+              });
+            }),
+          });
+        }),
+      });
+    });
   };
 
   // ─── SECTION MANAGEMENT ───
@@ -1578,6 +1598,7 @@ export default function App() {
           onSwapTiles={swapTiles}
           onChangeLayout={changeLayout}
           onApplySectionImageCategory={applySectionImageCategory}
+          onChangeTileHotspots={updateTileHotspots}
           viewMode={viewMode}
           onHeaderBannerUpload={handleHeaderBannerUpload}
           headerBannerColor={store.headerBannerColor || ''}
