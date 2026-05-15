@@ -576,6 +576,49 @@ export default function App() {
     };
   };
 
+  // Wird vom Canvas Banner benutzt um zu pruefen, wie viele Kacheln tatsaechlich
+  // ein verlinkbares Wortmatch zu einer Subpage haben. Nur diese werden gezaehlt.
+  // Damit verschwindet das Banner auf Pages, deren freie Kacheln rein dekorativ
+  // sind (Lifestyle, Hero, Stimmungsbilder ohne Bezug zu Subpages).
+  var countLinkableTiles = function(pageId) {
+    if (!pageId) return 0;
+    var subpages = (store.pages || []).filter(function(p) { return p.parentId === pageId; });
+    if (subpages.length === 0) return 0;
+    var IMAGE_TILE_TYPES = { image: 1, shoppable_image: 1, image_text: 1 };
+    var MIN_SCORE = 30;
+    var parentPage = (store.pages || []).find(function(p) { return p.id === pageId; });
+    if (!parentPage) return 0;
+    var freeTiles = [];
+    (parentPage.sections || []).forEach(function(sec) {
+      (sec.tiles || []).forEach(function(t) {
+        if (!IMAGE_TILE_TYPES[t.type]) return;
+        if (t.linkUrl || t.linkAsin) return;
+        freeTiles.push(t);
+      });
+    });
+    if (freeTiles.length === 0) return 0;
+    // Greedy Simulation ohne Schreiben
+    var pairs = [];
+    freeTiles.forEach(function(t, ti) {
+      subpages.forEach(function(sp) {
+        pairs.push({ tileIdx: ti, pageId: sp.id, score: scoreTilePagePair(t, sp.name) });
+      });
+    });
+    pairs.sort(function(a, b) { return b.score - a.score; });
+    var usedTiles = {};
+    var usedPages = {};
+    var count = 0;
+    pairs.forEach(function(p) {
+      if (p.score < MIN_SCORE) return;
+      if (usedTiles[p.tileIdx]) return;
+      if (usedPages[p.pageId]) return;
+      usedTiles[p.tileIdx] = true;
+      usedPages[p.pageId] = true;
+      count += 1;
+    });
+    return count;
+  };
+
   // ─── HOTSPOT DRAG IM EDITOR ───
   // Wird vom Canvas auf jede shoppable_image Kachel durchgereicht, damit der
   // Operator die Hotspot Punkte direkt auf der Kachel ziehen kann. Akzeptiert
@@ -1696,22 +1739,15 @@ export default function App() {
           onLoadAutoSave={handleLoadAutoSave}
           onImportRescueJson={handleImportRescueJson}
           onGenerate={handleNewStore}
+          linkableTileCount={page ? countLinkableTiles(page.id) : 0}
           onAutoLinkSubpages={function() {
             if (!page) return;
             var result = autoLinkTilesToSubpages(page.id);
             if (result.assigned === 0) {
-              if (result.total === 0) {
-                alert('Keine freien Bildkacheln gefunden. Pruefe, ob diese Page Subpages hat und ob die Bildkacheln noch keine Verlinkung haben.');
-              } else {
-                alert('Keine zuverlaessigen Treffer gefunden (' + result.total + ' freie Kacheln, kein Textmatch zu den Subpages). Bitte die Kacheln manuell ueber das Dropdown im rechten Panel verlinken.');
-              }
+              alert('Keine sicheren Textmatches gefunden. Die Kachel Headlines passen zu keinem Subpage Namen. Bitte ueber das Dropdown im rechten Panel manuell verlinken.');
               return;
             }
-            var msg = result.assigned + ' Kachel(n) ueber Textmatch verlinkt.';
-            if (result.unmatched > 0) {
-              msg += '\n\n' + result.unmatched + ' Kachel(n) konnten nicht sicher zugeordnet werden und bleiben offen, bitte manuell setzen.';
-            }
-            alert(msg);
+            alert(result.assigned + ' Kachel(n) automatisch verlinkt.');
           }}
         />
 
