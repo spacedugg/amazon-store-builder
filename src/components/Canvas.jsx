@@ -2,7 +2,7 @@ import { useState } from 'react';
 import SectionView from './SectionView';
 import { t } from '../i18n';
 
-export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onSwapTiles, onChangeLayout, onApplySectionImageCategory, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onImportRescueJson, onGenerate }) {
+export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onSwapTiles, onChangeLayout, onApplySectionImageCategory, onChangeTileHotspots, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onImportRescueJson, onGenerate, onAutoLinkSubpages }) {
   var [hoveredNav, setHoveredNav] = useState(null);
   var [showHeroPicker, setShowHeroPicker] = useState(false);
 
@@ -155,8 +155,60 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
           </div>
         </div>
 
+        {/* Auto Link Subpages Toolbar. Zeigt sich nur auf Parent Pages, die
+            mindestens eine Subpage haben und mindestens eine Bildkachel ohne
+            Link enthalten. Verlinkt die Kacheln in Reihenfolge mit den
+            Subpages, ueberschreibt nichts Bestehendes. */}
+        {(function() {
+          if (!onAutoLinkSubpages) return null;
+          var subpages = store.pages.filter(function(p) { return p.parentId === page.id; });
+          if (subpages.length === 0) return null;
+          var IMAGE_TYPES = { image: 1, shoppable_image: 1, image_text: 1 };
+          var unlinkedCount = 0;
+          (page.sections || []).forEach(function(sec) {
+            (sec.tiles || []).forEach(function(t) {
+              if (IMAGE_TYPES[t.type] && !t.linkUrl && !t.linkAsin) unlinkedCount += 1;
+            });
+          });
+          if (unlinkedCount === 0) return null;
+          var willLink = Math.min(unlinkedCount, subpages.length);
+          return (
+            <div style={{
+              margin: '8px 12px', padding: '8px 12px',
+              background: 'linear-gradient(90deg, rgba(124,58,237,.08), rgba(99,102,241,.08))',
+              border: '1px dashed #a78bfa', borderRadius: 8,
+              display: 'flex', alignItems: 'center', gap: 10, fontSize: 11, color: '#4c1d95',
+            }}>
+              <span style={{ fontSize: 14 }}>&#128279;</span>
+              <div style={{ flex: 1 }}>
+                Diese Page hat <b>{subpages.length}</b> Subpage{subpages.length !== 1 ? 's' : ''} und <b>{unlinkedCount}</b> noch nicht verlinkte Bildkachel{unlinkedCount !== 1 ? 'n' : ''}.
+              </div>
+              <button onClick={onAutoLinkSubpages}
+                style={{ background: '#7c3aed', color: '#fff', border: 'none', borderRadius: 6, padding: '6px 14px', fontSize: 11, fontWeight: 700, cursor: 'pointer' }}
+                title={'Verlinkt die naechsten ' + willLink + ' Bildkachel(n) automatisch mit den Subpages.'}>
+                Auto-Link {willLink} Kachel{willLink !== 1 ? 'n' : ''}
+              </button>
+            </div>
+          );
+        })()}
+
         {/* Sections */}
         {page.sections.map(function(sec, si) {
+          // Hotspot Drag Callbacks pro shoppable_image Kachel aufbauen. Damit
+          // bekommt TileView ein onChangeHotspots, sobald der Operator den
+          // Mauszeiger auf einem Hotspot drueckt.
+          var previewByTileIndex = null;
+          if (onChangeTileHotspots) {
+            previewByTileIndex = {};
+            (sec.tiles || []).forEach(function(tile, ti) {
+              if (tile.type !== 'shoppable_image') return;
+              previewByTileIndex[ti] = {
+                src: null,
+                onClear: null,
+                onChangeHotspots: function(newList) { onChangeTileHotspots(sec.id, ti, newList); },
+              };
+            });
+          }
           return (
             <SectionView key={sec.id} section={sec} idx={si}
               totalSections={page.sections.length} sel={sel} onSelect={onSelect}
@@ -171,6 +223,7 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
               viewMode={viewMode}
               products={products}
               uiLang={uiLang}
+              previewByTileIndex={previewByTileIndex}
             />
           );
         })}

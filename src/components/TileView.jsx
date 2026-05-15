@@ -267,7 +267,8 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
   if (tile.type === 'image_text') {
     var img = previewImageSrc || ((viewMode === 'mobile' ? tile.uploadedImageMobile : tile.uploadedImage) || tile.uploadedImage);
     return (
-      <div className={cls} onClick={onClick} style={Object.assign({ position: 'relative' }, bgColor ? { background: bgColor } : {})}>
+      <div className={cls} onClick={onClick}
+        style={Object.assign({ position: 'relative', aspectRatio: dims.w + '/' + dims.h }, bgColor ? { background: bgColor } : {})}>
         {img
           ? <img src={img} className="tile-uploaded-img" alt="" />
           : tile.wireframeImage
@@ -286,7 +287,8 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
   var shoppableHotspots = tile.type === 'shoppable_image' ? effectiveShoppableHotspots(tile) : [];
   var dragOverride = dragRef.current;
   return (
-    <div ref={tileRootRef} className={cls} onClick={onClick} style={Object.assign({ position: 'relative' }, bgColor ? { background: bgColor } : {})}>
+    <div ref={tileRootRef} className={cls} onClick={onClick}
+      style={Object.assign({ position: 'relative', aspectRatio: dims.w + '/' + dims.h }, bgColor ? { background: bgColor } : {})}>
       {imgSrc
         ? <img src={imgSrc} className="tile-uploaded-img" alt="" draggable={false} />
         : tile.wireframeImage
@@ -302,7 +304,10 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
         var isDragging = dragOverride && dragOverride.idx === i;
         var x = isDragging ? dragOverride.x : (hs.x || 0);
         var y = isDragging ? dragOverride.y : (hs.y || 0);
-        var draggable = !!(imgSrc && onChangeHotspots);
+        // Drag erlaubt sobald onChangeHotspots vorhanden ist, also auch ohne
+        // hochgeladenes Bild auf der Wireframe Darstellung. Damit kann der
+        // Operator die Punkte schon waehrend des Konzepts platzieren.
+        var draggable = !!onChangeHotspots;
         var size = imgSrc ? 22 : 18;
         return (
           <div key={i} className="tile-hotspot-dot"

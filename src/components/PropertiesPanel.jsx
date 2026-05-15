@@ -441,20 +441,83 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
               className="input input-mono" placeholder="B0XXXXXXXXXX" />
           </div>
 
-          {/* Link to store subpage (internal page link) */}
+          {/* Link to store subpage (internal page link) — Dropdown plus
+              optionaler Custom Path. Subpages werden hierarchisch angezeigt,
+              damit der Operator nicht den internen Page Code wissen muss. */}
           <div className="props-section">
             <label className="label">Link to Subpage</label>
-            <input value={tile.linkUrl || ''} onChange={function(e) { u('linkUrl', e.target.value.trim()); }}
-              className="input input-mono" placeholder="/page-id (e.g. /cat-0)" />
-            {tile.linkUrl && (function() {
-              var pageId = tile.linkUrl.replace(/^\//, '');
-              var match = (pages || []).find(function(p) { return p.id === pageId; });
-              var label = match ? match.name : tile.linkUrl;
+            {(function() {
+              var allPages = pages || [];
+              var topLevel = allPages.filter(function(p) { return !p.parentId; });
+              var currentValue = tile.linkUrl ? String(tile.linkUrl).replace(/^\//, '') : '';
+              var matchedById = currentValue ? allPages.find(function(p) { return p.id === currentValue; }) : null;
+              // Wenn der Wert nicht einer Page id entspricht, dann ist es ein
+              // freier Pfad und wir aktivieren Custom Mode.
+              var isCustom = currentValue && !matchedById;
               return (
-                <div style={{ fontSize: 10, color: '#7c3aed', marginTop: 2 }}>
-                  Verlinkt auf Subpage: <b>{label}</b>
-                  {match && <span style={{ color: '#94a3b8', fontFamily: 'monospace', marginLeft: 6 }}>({tile.linkUrl})</span>}
-                </div>
+                <>
+                  <select
+                    value={isCustom ? '__custom__' : (matchedById ? matchedById.id : '')}
+                    onChange={function(e) {
+                      var v = e.target.value;
+                      if (v === '') { u('linkUrl', ''); return; }
+                      if (v === '__custom__') {
+                        // Custom Mode anschalten ohne den bestehenden Wert zu zerstoeren.
+                        // Wenn vorher eine Page verlinkt war, bleibt der Pfad als Default stehen.
+                        u('linkUrl', tile.linkUrl || '/');
+                        return;
+                      }
+                      u('linkUrl', '/' + v);
+                    }}
+                    className="input"
+                    style={{ width: '100%' }}>
+                    <option value="">— keine Verlinkung —</option>
+                    {topLevel.map(function(pg) {
+                      var children = allPages.filter(function(cp) { return cp.parentId === pg.id; });
+                      return (
+                        <optgroup key={pg.id} label={pg.name || pg.id}>
+                          <option value={pg.id}>{pg.name || pg.id}</option>
+                          {children.map(function(cp) {
+                            return <option key={cp.id} value={cp.id}>&nbsp;&nbsp;{cp.name || cp.id}</option>;
+                          })}
+                        </optgroup>
+                      );
+                    })}
+                    {/* Orphaned subpages, deren Parent nicht mehr existiert, trotzdem zeigen */}
+                    {(function() {
+                      var orphans = allPages.filter(function(p) {
+                        return p.parentId && !allPages.find(function(pp) { return pp.id === p.parentId; });
+                      });
+                      if (orphans.length === 0) return null;
+                      return (
+                        <optgroup label="Subpages ohne Parent">
+                          {orphans.map(function(op) {
+                            return <option key={op.id} value={op.id}>{op.name || op.id}</option>;
+                          })}
+                        </optgroup>
+                      );
+                    })()}
+                    <option value="__custom__">Custom Pfad eingeben...</option>
+                  </select>
+                  {isCustom && (
+                    <input value={tile.linkUrl || ''}
+                      onChange={function(e) { u('linkUrl', e.target.value.trim()); }}
+                      className="input input-mono"
+                      style={{ marginTop: 4 }}
+                      placeholder="/page-id oder externer Pfad" />
+                  )}
+                  {matchedById && (
+                    <div style={{ fontSize: 10, color: '#7c3aed', marginTop: 4 }}>
+                      Verlinkt auf: <b>{matchedById.name || matchedById.id}</b>
+                      <span style={{ color: '#94a3b8', fontFamily: 'monospace', marginLeft: 6 }}>(/{matchedById.id})</span>
+                    </div>
+                  )}
+                  {isCustom && (
+                    <div style={{ fontSize: 10, color: '#f59e0b', marginTop: 4 }}>
+                      Custom Pfad: <span style={{ fontFamily: 'monospace' }}>{tile.linkUrl}</span>
+                    </div>
+                  )}
+                </>
               );
             })()}
           </div>

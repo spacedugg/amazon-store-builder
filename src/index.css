@@ -162,8 +162,13 @@ textarea.input { resize: vertical; min-height: 44px; }
 .tile.tile-selected { border: 2px solid #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,.12); }
 .tile:not(.tile-selected) { box-shadow: none; }
 .tile:not(.tile-selected):hover { box-shadow: 0 2px 8px rgba(0,0,0,.06); }
-.tile-uploaded-img { width: 100%; display: block; }
-.tile-wireframe-img { opacity: 0.85; filter: saturate(0.7); }
+/* Bilder fuellen die Tile Zelle vollstaendig (cover) damit ein W oder LS Bild,
+   das in eine 2 Spalten x 1 Zeile Zelle gelegt wird, nicht unten abgeschnitten
+   oder mit Weissraum unter dem Bild dargestellt wird. Das Bild wird zentriert
+   beschnitten, so wie ein echter Amazon Brand Store es macht. */
+.tile-uploaded-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Wireframe Platzhalter: ganzes Bild sichtbar, ohne Zuschnitt */
+.tile-wireframe-img { object-fit: contain; opacity: 0.85; filter: saturate(0.7); background: #f8fafc; }
 .tile-shoppable-badge { position: absolute; top: 6px; right: 6px; background: linear-gradient(135deg, #FF9900, #e88b00); color: #fff; font-size: 8px; font-weight: 700; padding: 3px 8px; border-radius: 5px; letter-spacing: .03em; }
 .tile-link-badge { position: absolute; bottom: 6px; left: 6px; background: rgba(99,102,241,.9); color: #fff; font-size: 8px; font-weight: 600; padding: 2px 8px; border-radius: 5px; backdrop-filter: blur(4px); }
 

@@ -14,6 +14,7 @@ import JsonExportModal from './components/JsonExportModal';
 import PriceCalculator from './components/PriceCalculator';
 import ExportModal from './components/ExportModal';
 import BriefingView from './components/BriefingView';
+import CustomerPreview from './components/CustomerPreview';
 import AdminAnalyze from './components/AdminAnalyze';
 import AdminScrapingTest from './components/AdminScrapingTest';
 import AsinOverview from './components/AsinOverview';
@@ -185,6 +186,12 @@ export default function App() {
   // Check if this is a share link — render full BriefingView
   if (window.location.pathname.indexOf('/share/') === 0) {
     return <BriefingView />;
+  }
+
+  // Customer Preview link — premium Amazon style preview ohne Designer Tools.
+  // Wird an Endkunden geschickt, nutzt denselben Share Token wie der Designer.
+  if (window.location.pathname.indexOf('/customer/') === 0) {
+    return <CustomerPreview />;
   }
 
   // Admin pages
@@ -440,6 +447,63 @@ export default function App() {
                   if (i !== sel.ti) return t;
                   if (!t.imageRef) return t;
                   return Object.assign({}, t, { imageRef: t.imageRef + '-solo-' + uid() });
+                }),
+              });
+            }),
+          });
+        }),
+      });
+    });
+  };
+
+  // ─── AUTO LINK TILES TO SUBPAGES ───
+  var autoLinkTilesToSubpages = function(pageId) {
+    if (!pageId) return 0;
+    var subpages = (store.pages || []).filter(function(p) { return p.parentId === pageId; });
+    if (subpages.length === 0) return 0;
+    var IMAGE_TILE_TYPES = { image: 1, shoppable_image: 1, image_text: 1 };
+    var queue = subpages.map(function(p) { return p.id; });
+    var queueIdx = 0;
+    var assignedCount = 0;
+    var newPages = (store.pages || []).map(function(pg) {
+      if (pg.id !== pageId) return pg;
+      return Object.assign({}, pg, {
+        sections: (pg.sections || []).map(function(sec) {
+          return Object.assign({}, sec, {
+            tiles: (sec.tiles || []).map(function(t) {
+              if (!IMAGE_TILE_TYPES[t.type]) return t;
+              if (t.linkUrl || t.linkAsin) return t;
+              if (queueIdx >= queue.length) return t;
+              var targetId = queue[queueIdx];
+              queueIdx += 1;
+              assignedCount += 1;
+              return Object.assign({}, t, { linkUrl: '/' + targetId });
+            }),
+          });
+        }),
+      });
+    });
+    if (assignedCount > 0) {
+      setStoreWithUndo(function(s) { return Object.assign({}, s, { pages: newPages }); });
+    }
+    return assignedCount;
+  };
+
+  // ─── HOTSPOT DRAG IM EDITOR ───
+  // Wird vom Canvas auf jede shoppable_image Kachel durchgereicht, damit der
+  // Operator die Hotspot Punkte direkt auf der Kachel ziehen kann. Akzeptiert
+  // die komplette neue Hotspot Liste und schreibt sie zurueck in den Store.
+  var updateTileHotspots = function(sectionId, tileIndex, newHotspots) {
+    setStoreWithUndo(function(s) {
+      return Object.assign({}, s, {
+        pages: s.pages.map(function(pg) {
+          return Object.assign({}, pg, {
+            sections: (pg.sections || []).map(function(sec) {
+              if (sec.id !== sectionId) return sec;
+              return Object.assign({}, sec, {
+                tiles: (sec.tiles || []).map(function(t, i) {
+                  if (i !== tileIndex) return t;
+                  return Object.assign({}, t, { hotspots: newHotspots });
                 }),
               });
             }),
@@ -1475,6 +1539,7 @@ export default function App() {
     <div className="app-root">
       <Topbar
         store={store}
+        shareToken={shareToken}
         onExport={handleExport}
         onSave={handleSave}
         onShowJsonExport={store.pages.length > 0 ? function() { setShowJsonExport(true); } : null}
@@ -1533,6 +1598,7 @@ export default function App() {
           onSwapTiles={swapTiles}
           onChangeLayout={changeLayout}
           onApplySectionImageCategory={applySectionImageCategory}
+          onChangeTileHotspots={updateTileHotspots}
           viewMode={viewMode}
           onHeaderBannerUpload={handleHeaderBannerUpload}
           headerBannerColor={store.headerBannerColor || ''}
@@ -1543,6 +1609,15 @@ export default function App() {
           onLoadAutoSave={handleLoadAutoSave}
           onImportRescueJson={handleImportRescueJson}
           onGenerate={handleNewStore}
+          onAutoLinkSubpages={function() {
+            if (!page) return;
+            var count = autoLinkTilesToSubpages(page.id);
+            if (count === 0) {
+              alert('Keine Kacheln verknuepft. Pruefe, ob diese Page Subpages hat und ob die Bildkacheln noch keine Verlinkung haben.');
+            } else {
+              alert(count + ' Bildkachel(n) wurden automatisch mit Subpages verknuepft.');
+            }
+          }}
         />
 
         <PropertiesPanel
