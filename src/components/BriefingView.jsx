@@ -3,6 +3,7 @@ import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_
 import { loadStoreByShareToken, saveStore } from '../storage';
 import { translateStoreForDesigner } from '../translateBriefing';
 import SectionView, { getGridConfig } from './SectionView';
+import { AmazonProductGrid } from './CustomerPreview';
 
 var noop = function() {};
 
@@ -1632,8 +1633,8 @@ function PreviewMode({ store, onClose }) {
                             {matchedImgSrc ? (
                               <img src={matchedImgSrc} alt={'Tile ' + (ti + 1)} style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }} />
                             ) : isProduct ? (
-                              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', color: '#94a3b8', fontSize: isMobile ? 10 : 12 }}>
-                                <span style={{ color: '#888' }}>Product Grid</span>
+                              <div style={{ position: 'absolute', inset: 0 }}>
+                                <AmazonProductGrid tile={tile} products={store.products || []} marketplace={store.marketplace || 'de'} isMobile={isMobile} />
                               </div>
                             ) : tile.type === 'product_selector' ? (
                               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', background: (tile.productSelector && tile.productSelector.styling && tile.productSelector.styling.bgColor) || '#f8f4ff', padding: isMobile ? 6 : 12 }}>
@@ -2209,6 +2210,24 @@ export default function BriefingView() {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
             Preview
           </button>
+          {/* Customer Link button — kopiert die /customer/<token> URL fuer Endkunden */}
+          {token && (
+            <button onClick={function() {
+              var url = window.location.origin + '/customer/' + token;
+              try {
+                navigator.clipboard.writeText(url).then(function() {
+                  alert('Customer Preview Link kopiert.\n\nDieser Link zeigt deinem Kunden den fertigen Brand Store ohne Designer Tools:\n\n' + url);
+                }).catch(function() { prompt('Customer Preview Link:', url); });
+              } catch (e) { prompt('Customer Preview Link:', url); }
+            }}
+              style={{ display: 'flex', alignItems: 'center', gap: 5, background: 'rgba(255,153,0,.18)', border: '1px solid rgba(255,153,0,.45)', color: '#FF9900', fontSize: 11, padding: '5px 12px', borderRadius: 6, cursor: 'pointer', marginLeft: 6, transition: 'all .2s' }}
+              title="Customer Preview Link kopieren. Premium Amazon Look ohne Designer Tools, fuer Endkunden."
+              onMouseEnter={function(e) { e.currentTarget.style.background = 'rgba(255,153,0,.28)'; }}
+              onMouseLeave={function(e) { e.currentTarget.style.background = 'rgba(255,153,0,.18)'; }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg>
+              Customer
+            </button>
+          )}
         </div>
       </div>
 

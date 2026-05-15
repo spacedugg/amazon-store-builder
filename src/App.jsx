@@ -14,6 +14,7 @@ import JsonExportModal from './components/JsonExportModal';
 import PriceCalculator from './components/PriceCalculator';
 import ExportModal from './components/ExportModal';
 import BriefingView from './components/BriefingView';
+import CustomerPreview from './components/CustomerPreview';
 import AdminAnalyze from './components/AdminAnalyze';
 import AdminScrapingTest from './components/AdminScrapingTest';
 import AsinOverview from './components/AsinOverview';
@@ -185,6 +186,12 @@ export default function App() {
   // Check if this is a share link — render full BriefingView
   if (window.location.pathname.indexOf('/share/') === 0) {
     return <BriefingView />;
+  }
+
+  // Customer Preview link — premium Amazon style preview ohne Designer Tools.
+  // Wird an Endkunden geschickt, nutzt denselben Share Token wie der Designer.
+  if (window.location.pathname.indexOf('/customer/') === 0) {
+    return <CustomerPreview />;
   }
 
   // Admin pages
@@ -1475,6 +1482,7 @@ export default function App() {
     <div className="app-root">
       <Topbar
         store={store}
+        shareToken={shareToken}
         onExport={handleExport}
         onSave={handleSave}
         onShowJsonExport={store.pages.length > 0 ? function() { setShowJsonExport(true); } : null}
