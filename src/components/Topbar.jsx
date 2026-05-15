@@ -12,9 +12,12 @@ function formatCustomerProgress(p) {
   if (!p) return '';
   if (p.stage === 'extract') return 'Bilder extrahieren...';
   if (p.stage === 'upload') {
-    if (!p.total) return 'Speichere...';
-    return 'Bilder ' + (p.uploaded || 0) + ' / ' + p.total;
+    if (!p.total) return 'Store speichern...';
+    var label = 'Bilder ' + (p.uploaded || 0) + ' / ' + p.total;
+    if (p.failed) label += ' (' + p.failed + ' Fehler)';
+    return label;
   }
+  if (p.stage === 'store-save') return 'Store speichern...';
   if (p.stage === 'done') return 'Fertig';
   return 'Speichere...';
 }
