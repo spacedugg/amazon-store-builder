@@ -1530,10 +1530,46 @@ export default function App() {
     });
 
     setFolderUploadProgress(null);
-    var msg = (total - failed) + ' von ' + total + ' Bild(ern) nach Vercel Blob hochgeladen.';
-    if (failed > 0) msg += '\n\n' + failed + ' Upload(s) fehlgeschlagen, Details in der Browser Console (F12).';
-    msg += '\n\nClick auf Customer im Topbar generiert jetzt den Kunden Link, der Store ist gleich gesichert.';
-    alert(msg);
+
+    // Nach dem State Update zaehle Kacheln, die noch keinen Image haben.
+    // Dafuer brauchen wir den aktuellen Store nach dem setStoreWithUndo.
+    // Wir geben einen Tick, dann lesen wir.
+    setTimeout(function() {
+      setStore(function(currentStore) {
+        var missing = [];
+        var matchedCount = 0;
+        (currentStore.pages || []).forEach(function(pg) {
+          (pg.sections || []).forEach(function(sec, si) {
+            (sec.tiles || []).forEach(function(t, ti) {
+              if (PRODUCT_TYPES.indexOf(t.type) >= 0 || t.type === 'text' || t.type === 'product_selector') return;
+              if (t.uploadedImage || t.uploadedImageMobile) {
+                matchedCount += 1;
+              } else {
+                // Erwarteter Filename fuer diese Kachel zeigen
+                var safeName = (pg.name || 'page');
+                if (safeName.normalize) safeName = safeName.normalize('NFC');
+                safeName = safeName.replace(/[^a-zA-Z0-9äöüÄÖÜß]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
+                var base = safeName + '_S' + (si + 1) + '_T' + (ti + 1);
+                missing.push(t.syncDimensions ? (base + '.jpg') : (base + '_desktop.jpg / _mobile.jpg'));
+              }
+            });
+          });
+        });
+        var msg = (total - failed) + ' von ' + total + ' File(s) nach Vercel Blob hochgeladen.\n\n';
+        msg += matchedCount + ' Kachel(n) haben jetzt ein Bild.';
+        if (failed > 0) msg += '\n\n' + failed + ' Upload(s) fehlgeschlagen, Details in der Browser Console (F12).';
+        if (missing.length > 0) {
+          msg += '\n\nNoch ohne Bild: ' + missing.length + ' Kachel(n).';
+          msg += '\nErwartete Dateinamen (erste 20):\n  - ' + missing.slice(0, 20).join('\n  - ');
+          if (missing.length > 20) msg += '\n  ... plus ' + (missing.length - 20) + ' weitere';
+          msg += '\n\nBitte beim Designer nachfragen oder Dateinamen anpassen, dann Folder Upload erneut starten. Bekannte Bilder werden uebersprungen.';
+        } else {
+          msg += '\n\nAlle Kacheln haben Bilder. Click auf Customer im Topbar generiert jetzt den Kunden Link.';
+        }
+        alert(msg);
+        return currentStore;
+      });
+    }, 50);
   };
 
   // ─── REMOVE ALL UPLOADED IMAGES ───
