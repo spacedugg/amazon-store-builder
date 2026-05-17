@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, findLayout, LAYOUT_TILE_DIMS } from './constants';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink } from './storage';
+import { uploadFileToBlob } from './imageStorage';
 import { importBriefingToStore, importPageFromBriefing, importSectionFromBriefing, importTileFromBriefing } from './briefingImport';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
 import Topbar from './components/Topbar';
@@ -1382,11 +1383,17 @@ export default function App() {
   //     → Bild geht an ALLE Tiles mit identischem imageRef. Da imageRef die
   //     Dimensionen WxH bereits enthält, wird nie auf einer anderen Bildgröße
   //     überschrieben. Bilder werden nicht gestreckt oder anders gefüllt.
-  var handleFolderImageUpload = function(files) {
+  // ─── FOLDER IMAGE UPLOAD ───
+  // Lädt jedes File direkt nach Vercel Blob, speichert NUR die Blob URL in
+  // tile.uploadedImage. Keine Data URLs mehr im React State, keine 300 MB im
+  // Browser Memory bei 380 Bildern. Nach dem Upload ist der Store schon
+  // praktisch fertig, das anschliessende Save schreibt nur noch das schlanke
+  // JSON. Auto Save danach, damit der Operator kein extra Save mehr braucht.
+  var [folderUploadProgress, setFolderUploadProgress] = useState(null);
+  var handleFolderImageUpload = async function(files) {
     if (!files || files.length === 0 || !store.pages || store.pages.length === 0) return;
-    // Build filename map
+    // Filename Map: erwartete Dateinamen pro Tile, plus imageRef Reuse Map.
     var fnMap = {};
-    // imageRef Map: refKey:variant → Liste aller Tiles mit dem Ref
     var refMap = {};
     var PRODUCT_TYPES = ['product_grid', 'product_selector'];
     store.pages.forEach(function(pg) {
@@ -1403,7 +1410,6 @@ export default function App() {
             fnMap[(base + '_desktop.jpg').toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'desktop' };
             fnMap[(base + '_mobile.jpg').toLowerCase()] = { pageId: pg.id, secId: sec.id, ti: ti, variant: 'mobile' };
           }
-          // imageRef → mehrere Tiles teilen sich ein Bild
           if (tile.imageRef) {
             var refKey = String(tile.imageRef).toLowerCase();
             if (!refMap[refKey]) refMap[refKey] = [];
@@ -1412,10 +1418,10 @@ export default function App() {
         });
       });
     });
-    // Match files and read as data URLs
+
     var imageExts = /\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i;
-    var matched = {}; // key: "pageId|secId|ti|variant" → { entries: [...], file }
-    var matchedRefs = {}; // ref → { variant, file }
+    var matched = {};
+    var matchedRefs = {};
     for (var i = 0; i < files.length; i++) {
       var file = files[i];
       if (!imageExts.test(file.name)) continue;
@@ -1423,18 +1429,15 @@ export default function App() {
       if (rawName.normalize) rawName = rawName.normalize('NFC');
       var name = rawName.toLowerCase();
       var nameNoExt = name.replace(/\.(jpg|jpeg|png|webp|gif|svg|bmp|tiff?)$/i, '');
-      // Variante aus Suffix ableiten
       var refVariant = 'sync';
       var refStem = nameNoExt;
       if (/_desktop$/.test(nameNoExt)) { refVariant = 'desktop'; refStem = nameNoExt.replace(/_desktop$/, ''); }
       else if (/_mobile$/.test(nameNoExt)) { refVariant = 'mobile'; refStem = nameNoExt.replace(/_mobile$/, ''); }
-      // 1. imageRef Match (Bild Reuse über mehrere Tiles)
       if (refMap[refStem]) {
         var rkey = refStem + '|' + refVariant;
         if (!matchedRefs[rkey]) matchedRefs[rkey] = { ref: refStem, variant: refVariant, file: file, entries: refMap[refStem] };
         continue;
       }
-      // 2. Per Tile Filename Match (existierend)
       var entry = null;
       if (fnMap[name]) entry = fnMap[name];
       else if (fnMap[nameNoExt + '.jpg']) entry = fnMap[nameNoExt + '.jpg'];
@@ -1453,83 +1456,84 @@ export default function App() {
         if (!matched[mkey]) matched[mkey] = { entry: entry, file: file };
       }
     }
-    // Read matched files as data URLs and update tiles
+
     var matchKeys = Object.keys(matched);
     var refKeys = Object.keys(matchedRefs);
-    if (matchKeys.length === 0 && refKeys.length === 0) { alert('Kein Bild zugeordnet.\nErwartete Filenames:\n• Per Tile: PageName_S1_T1_desktop.jpg\n• Per imageRef: cat-garten-lifestyle-1500x750.jpg (oder _desktop / _mobile Variante)'); return; }
-    // imageRef Files lesen und auf alle zugehörigen Tiles anwenden
-    var refProcessed = 0;
-    var totalReuses = 0;
-    refKeys.forEach(function(rkey) {
-      var item = matchedRefs[rkey];
-      var reader = new FileReader();
-      reader.onload = function(ev) {
-        var dataUrl = ev.target.result;
-        setStore(function(s) {
-          return Object.assign({}, s, {
-            pages: s.pages.map(function(pg) {
-              return Object.assign({}, pg, {
-                sections: pg.sections.map(function(sec) {
-                  return Object.assign({}, sec, {
-                    tiles: sec.tiles.map(function(t, ti) {
-                      var hit = item.entries.some(function(e) { return e.pageId === pg.id && e.secId === sec.id && e.ti === ti; });
-                      if (!hit) return t;
-                      var updates = {};
-                      if (item.variant === 'sync' || item.variant === 'desktop') updates.uploadedImage = dataUrl;
-                      if (item.variant === 'sync' || item.variant === 'mobile') updates.uploadedImageMobile = dataUrl;
-                      return Object.assign({}, t, updates);
-                    }),
-                  });
-                }),
-              });
-            }),
-          });
-        });
-        totalReuses += item.entries.length;
-        refProcessed++;
-        if (refProcessed === refKeys.length && matchKeys.length === 0) {
-          alert(refKeys.length + ' imageRef Bild(er) verteilt auf ' + totalReuses + ' Tile(s).');
+    if (matchKeys.length === 0 && refKeys.length === 0) {
+      alert('Kein Bild zugeordnet.\nErwartete Filenames:\n• Per Tile: PageName_S1_T1_desktop.jpg\n• Per imageRef: cat-garten-lifestyle-1500x750.jpg (oder _desktop / _mobile Variante)');
+      return;
+    }
+
+    // Parallel nach Vercel Blob hochladen mit Concurrency 6, Progress Anzeige.
+    var allItems = matchKeys.map(function(k) { return { kind: 'tile', key: k }; })
+      .concat(refKeys.map(function(k) { return { kind: 'ref', key: k }; }));
+    var total = allItems.length;
+    var done = 0;
+    var failed = 0;
+    setFolderUploadProgress({ uploaded: 0, total: total, failed: 0 });
+
+    var results = []; // { kind, key, url, error }
+    var concurrency = 6;
+    var idx = 0;
+    async function worker() {
+      while (idx < allItems.length) {
+        var myIdx = idx++;
+        var item = allItems[myIdx];
+        var file = item.kind === 'tile' ? matched[item.key].file : matchedRefs[item.key].file;
+        try {
+          var r = await uploadFileToBlob(file);
+          results.push({ kind: item.kind, key: item.key, url: r.url });
+        } catch (e) {
+          results.push({ kind: item.kind, key: item.key, error: e.message || 'Upload fehlgeschlagen' });
+          failed++;
+          console.error('[FolderUpload] ' + file.name + ': ' + (e.message || e));
         }
-      };
-      reader.readAsDataURL(item.file);
-    });
-    if (matchKeys.length === 0) return;
-    var processed = 0;
-    matchKeys.forEach(function(mkey) {
-      var item = matched[mkey];
-      var reader = new FileReader();
-      reader.onload = function(ev) {
-        var dataUrl = ev.target.result;
-        setStore(function(s) {
-          return Object.assign({}, s, {
-            pages: s.pages.map(function(pg) {
-              if (pg.id !== item.entry.pageId) return pg;
-              return Object.assign({}, pg, {
-                sections: pg.sections.map(function(sec) {
-                  if (sec.id !== item.entry.secId) return sec;
-                  return Object.assign({}, sec, {
-                    tiles: sec.tiles.map(function(t, ti) {
-                      if (ti !== item.entry.ti) return t;
-                      var updates = {};
-                      if (item.entry.variant === 'sync' || item.entry.variant === 'desktop') updates.uploadedImage = dataUrl;
-                      if (item.entry.variant === 'sync' || item.entry.variant === 'mobile') updates.uploadedImageMobile = dataUrl;
-                      return Object.assign({}, t, updates);
-                    }),
-                  });
-                }),
-              });
-            }),
-          });
+        done++;
+        setFolderUploadProgress({ uploaded: done, total: total, failed: failed });
+      }
+    }
+    var workers = [];
+    for (var w = 0; w < concurrency; w++) workers.push(worker());
+    await Promise.all(workers);
+
+    // Eine Store Mutation mit allen Zuordnungen statt 380 einzelner setState.
+    setStoreWithUndo(function(s) {
+      var newPages = s.pages.map(function(pg) {
+        return Object.assign({}, pg, {
+          sections: pg.sections.map(function(sec) {
+            return Object.assign({}, sec, {
+              tiles: sec.tiles.map(function(t, ti) {
+                var updates = {};
+                results.forEach(function(r) {
+                  if (!r.url) return;
+                  if (r.kind === 'tile') {
+                    var ent = matched[r.key].entry;
+                    if (ent.pageId !== pg.id || ent.secId !== sec.id || ent.ti !== ti) return;
+                    if (ent.variant === 'sync' || ent.variant === 'desktop') updates.uploadedImage = r.url;
+                    if (ent.variant === 'sync' || ent.variant === 'mobile') updates.uploadedImageMobile = r.url;
+                  } else {
+                    var item = matchedRefs[r.key];
+                    var hit = item.entries.some(function(e) { return e.pageId === pg.id && e.secId === sec.id && e.ti === ti; });
+                    if (!hit) return;
+                    if (item.variant === 'sync' || item.variant === 'desktop') updates.uploadedImage = r.url;
+                    if (item.variant === 'sync' || item.variant === 'mobile') updates.uploadedImageMobile = r.url;
+                  }
+                });
+                if (Object.keys(updates).length === 0) return t;
+                return Object.assign({}, t, updates);
+              }),
+            });
+          }),
         });
-        processed++;
-        if (processed === matchKeys.length) {
-          var msg = matchKeys.length + ' Tile Bild(er) zugeordnet.';
-          if (refKeys.length > 0) msg += ' Plus ' + refKeys.length + ' imageRef Bild(er) auf ' + totalReuses + ' Tile(s).';
-          alert(msg);
-        }
-      };
-      reader.readAsDataURL(item.file);
+      });
+      return Object.assign({}, s, { pages: newPages });
     });
+
+    setFolderUploadProgress(null);
+    var msg = (total - failed) + ' von ' + total + ' Bild(ern) nach Vercel Blob hochgeladen.';
+    if (failed > 0) msg += '\n\n' + failed + ' Upload(s) fehlgeschlagen, Details in der Browser Console (F12).';
+    msg += '\n\nClick auf Customer im Topbar generiert jetzt den Kunden Link, der Store ist gleich gesichert.';
+    alert(msg);
   };
 
   // ─── REMOVE ALL UPLOADED IMAGES ───
@@ -1728,6 +1732,7 @@ export default function App() {
         onSave={handleSave}
         onCopyCustomerLink={store.pages.length > 0 ? handleCopyCustomerLink : null}
         customerSaveProgress={customerSaveProgress}
+        folderUploadProgress={folderUploadProgress}
         onShowJsonExport={store.pages.length > 0 ? function() { setShowJsonExport(true); } : null}
         autoSaveStatus={autoSaveStatus}
         hasShareToken={!!shareToken}

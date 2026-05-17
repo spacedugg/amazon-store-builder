@@ -384,6 +384,56 @@ function extFromMime(mime) {
   return 'jpg';
 }
 
+// Laedt ein einzelnes File Objekt aus einem File Input direkt nach Vercel
+// Blob hoch. Content addressed: das File wird zuerst gehashed, schon
+// existierende Hashes werden in einem Roundtrip via fetchExistingHashes
+// gefiltert, neue Bilder wandern via @vercel/blob client upload direkt
+// an die Blob Infrastruktur ohne durch unsere Serverless Function zu
+// laufen. Damit gibt es kein 4,5 MB Per Bild Limit und keine Data URL
+// im Browser Memory mehr. Liefert { hash, url, deduped }.
+export async function uploadFileToBlob(file) {
+  if (!file) throw new Error('Kein File');
+  var buf = await file.arrayBuffer();
+  var hashBuf = await crypto.subtle.digest('SHA-256', buf);
+  var bytes = new Uint8Array(hashBuf);
+  var hex = '';
+  for (var i = 0; i < bytes.length; i++) {
+    var h = bytes[i].toString(16);
+    if (h.length === 1) h = '0' + h;
+    hex += h;
+  }
+  var hash = hex;
+  var existing = await fetchExistingHashes([hash]);
+  if (existing[hash]) {
+    try {
+      var resp = await fetch('/api/store-images?hash=' + encodeURIComponent(hash));
+      if (resp.ok) {
+        var json = await resp.json();
+        if (json && (json.url || json.data)) {
+          return { hash: hash, url: json.url || json.data, deduped: true };
+        }
+      }
+    } catch (e) { /* fall through to upload */ }
+  }
+  var ext = (file.name || '').split('.').pop() || 'jpg';
+  var pathname = 'store-images/' + hash + '.' + ext;
+  var result = await upload(pathname, file, {
+    access: 'public',
+    handleUploadUrl: '/api/blob-upload',
+    contentType: file.type || 'image/jpeg',
+    clientPayload: JSON.stringify({ hash: hash }),
+  });
+  try {
+    await fetch('/api/store-images?action=register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ hash: hash, blob_url: result.url, byte_size: file.size }),
+    });
+  } catch (e) { /* nicht kritisch, onUploadCompleted laeuft eh */ }
+  markUploaded(hash);
+  return { hash: hash, url: result.url, deduped: false };
+}
+
 // Laedt jeden Hash zu Data URL Eintrag in der Map nach Vercel Blob hoch.
 // Der eigentliche Upload geht direkt vom Browser nach Blob, nicht durch
 // unseren Serverless Endpoint, damit es kein 4,5 MB Limit gibt. Bekannte

@@ -22,7 +22,12 @@ function formatCustomerProgress(p) {
   return 'Speichere...';
 }
 
-export default function Topbar({ store, shareToken, onExport, onSave, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress }) {
+export default function Topbar({ store, shareToken, onExport, onSave, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress, folderUploadProgress }) {
+  var folderProgressLabel = '';
+  if (folderUploadProgress) {
+    folderProgressLabel = 'Bilder ' + (folderUploadProgress.uploaded || 0) + ' / ' + folderUploadProgress.total;
+    if (folderUploadProgress.failed) folderProgressLabel += ' (' + folderUploadProgress.failed + ' Fehler)';
+  }
   return (
     <div className="topbar">
       <div className="topbar-brand">
@@ -64,8 +69,14 @@ export default function Topbar({ store, shareToken, onExport, onSave, onShowJson
             <>
               <input type="file" ref={folderInputRef} style={{ display: 'none' }} webkitdirectory="" directory="" multiple
                 onChange={function(e) { onFolderImageUpload(e.target.files); e.target.value = ''; }} />
-              <button className="btn" onClick={function() { folderInputRef.current && folderInputRef.current.click(); }} title="Load image folder" style={{ background: '#f59e0b', color: '#fff', border: 'none' }}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" /></svg>
+              <button className="btn"
+                onClick={function() { folderInputRef.current && folderInputRef.current.click(); }}
+                disabled={!!folderUploadProgress}
+                title={folderUploadProgress ? 'Lade Bilder nach Vercel Blob hoch' : 'Bilder Ordner hochladen. Jedes Bild geht direkt in den Cloud Speicher, der Store ist danach sofort bereit fuer Customer.'}
+                style={{ background: '#f59e0b', color: '#fff', border: 'none', minWidth: folderUploadProgress ? 130 : undefined, paddingLeft: folderUploadProgress ? 10 : undefined, paddingRight: folderUploadProgress ? 10 : undefined, fontSize: 11 }}>
+                {folderUploadProgress ? folderProgressLabel : (
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" /></svg>
+                )}
               </button>
             </>
           )}
