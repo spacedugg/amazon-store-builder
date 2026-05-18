@@ -531,8 +531,12 @@ export default function CustomerPreview() {
       <div style={{ width: '100%', display: 'flex', justifyContent: 'center', background: '#fff' }}>
         <div style={{ width: storeWidth, maxWidth: '100%', background: '#fff' }}>
 
-          {/* ─── HERO BANNER ─── */}
-          <div style={{ width: '100%', aspectRatio: isMobile ? '1680/900' : '3000/600', background: '#232f3e', position: 'relative', overflow: 'hidden' }}>
+          {/* ─── HERO BANNER ─── Aspect Ratio kommt aus den Page Hero Dims
+              wenn der Operator sie ueberschrieben hat, sonst Amazon Defaults. */}
+          <div style={{ width: '100%', aspectRatio: (isMobile
+              ? (((activePage && activePage.heroBannerMobileDimensions && activePage.heroBannerMobileDimensions.w) || 1680) + '/' + ((activePage && activePage.heroBannerMobileDimensions && activePage.heroBannerMobileDimensions.h) || 900))
+              : (((activePage && activePage.heroBannerDimensions && activePage.heroBannerDimensions.w) || 3000) + '/' + ((activePage && activePage.heroBannerDimensions && activePage.heroBannerDimensions.h) || 600))
+            ), background: '#232f3e', position: 'relative', overflow: 'hidden' }}>
             {heroImg ? (
               <img src={heroImg} alt="" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
             ) : (

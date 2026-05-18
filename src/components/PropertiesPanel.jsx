@@ -50,6 +50,40 @@ function fileUpload(label, value, onSet, onRemove, uiLang) {
   );
 }
 
+// Width und Height Inputs fuer eine Hero Banner Variante. Funktioniert
+// wie die Dimensions Inputs bei normalen Tiles, schreibt das ganze
+// Dimension Objekt {w, h} via onChange zurueck. Defaults werden vom
+// Aufrufer angegeben.
+function HeroBannerDimensionRow({ label, value, onChange }) {
+  var w = (value && value.w) || 0;
+  var h = (value && value.h) || 0;
+  function setW(v) {
+    var n = parseInt(v, 10);
+    if (!isFinite(n) || n <= 0) return;
+    onChange({ w: n, h: h });
+  }
+  function setH(v) {
+    var n = parseInt(v, 10);
+    if (!isFinite(n) || n <= 0) return;
+    onChange({ w: w, h: n });
+  }
+  return (
+    <div className="props-section" style={{ borderTop: '1px solid #f1f5f9', paddingTop: 10 }}>
+      <label className="label">{label}</label>
+      <div className="props-dims" style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
+        <input className="input" type="number" min="1" value={w}
+          onChange={function(e) { setW(e.target.value); }}
+          style={{ width: 80, fontSize: 11 }} />
+        <span className="props-dims-x">x</span>
+        <input className="input" type="number" min="1" value={h}
+          onChange={function(e) { setH(e.target.value); }}
+          style={{ width: 80, fontSize: 11 }} />
+        <span style={{ fontSize: 10, color: '#94a3b8' }}>px</span>
+      </div>
+    </div>
+  );
+}
+
 // Eine Zeile pro Banner Variante. Zeigt Preview, Upload Knopf und Clear
 // Knopf, jeweils fuer Desktop oder Mobile getrennt. Bilder gehen ueber
 // onUpload direkt nach Vercel Blob, currentUrl ist entweder die Blob URL
@@ -108,7 +142,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
         <div className="props-body">
           <div className="props-section">
             <div style={{ fontSize: 10, color: '#92400e', background: '#fffbeb', padding: '6px 8px', borderRadius: 4, marginBottom: 8, lineHeight: 1.5 }}>
-              This is the banner image ABOVE the store menu bar. It is independent from the sections below. Dimensions: {viewMode === 'mobile' ? '1680 x 900' : '3000 x 600'}
+              This is the banner image ABOVE the store menu bar. It is independent from the sections below.
             </div>
           </div>
           <div className="props-section">
@@ -122,19 +156,32 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
               placeholder="Slogan or claim, press Enter for line break" rows={2} className="input"
               style={{ resize: 'vertical', lineHeight: 1.3 }} />
           </div>
+          {/* Dimensionen Desktop und Mobile separat einstellbar, wie bei den
+              regulaeren Image Tiles. Defaults bleiben Amazon Standard 3000x600
+              und 1680x900, der Operator kann beides aber ueberschreiben. */}
+          <HeroBannerDimensionRow
+            label="Desktop Dimensions"
+            value={hPage.heroBannerDimensions || { w: 3000, h: 600 }}
+            onChange={function(d) { onHeroBannerChange('heroBannerDimensions', d); }}
+          />
+          <HeroBannerDimensionRow
+            label="Mobile Dimensions"
+            value={hPage.heroBannerMobileDimensions || { w: 1680, h: 900 }}
+            onChange={function(d) { onHeroBannerChange('heroBannerMobileDimensions', d); }}
+          />
           {/* Desktop und Mobile Banner werden hier getrennt verwaltet, damit
               der Operator beide Varianten unabhaengig hochladen kann. Bilder
               gehen direkt nach Vercel Blob, der Store haelt nur die URL. */}
           <HeroBannerVariantRow
             label="Desktop Banner"
-            dimensions="3000 x 600 px"
+            dimensions={((hPage.heroBannerDimensions && hPage.heroBannerDimensions.w) || 3000) + ' x ' + ((hPage.heroBannerDimensions && hPage.heroBannerDimensions.h) || 600) + ' px'}
             currentUrl={storeHeaderBanner}
             onUpload={onHeroBannerImageUpload ? function(file) { onHeroBannerImageUpload('desktop', file); } : null}
             onClear={onHeroBannerImageClear ? function() { onHeroBannerImageClear('desktop'); } : null}
           />
           <HeroBannerVariantRow
             label="Mobile Banner"
-            dimensions="1680 x 900 px"
+            dimensions={((hPage.heroBannerMobileDimensions && hPage.heroBannerMobileDimensions.w) || 1680) + ' x ' + ((hPage.heroBannerMobileDimensions && hPage.heroBannerMobileDimensions.h) || 900) + ' px'}
             currentUrl={storeHeaderBannerMobile}
             onUpload={onHeroBannerImageUpload ? function(file) { onHeroBannerImageUpload('mobile', file); } : null}
             onClear={onHeroBannerImageClear ? function() { onHeroBannerImageClear('mobile'); } : null}

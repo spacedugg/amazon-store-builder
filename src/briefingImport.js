@@ -60,6 +60,14 @@ export function importPageFromBriefing(p, pageIdByName) {
   if (parentRef) {
     page.parentId = pageIdByName[parentRef] || parentRef;
   }
+  if (typeof p.heroBannerBrief === 'string') page.heroBannerBrief = p.heroBannerBrief;
+  if (typeof p.heroBannerTextOverlay === 'string') page.heroBannerTextOverlay = p.heroBannerTextOverlay;
+  if (p.heroBannerDimensions && Number(p.heroBannerDimensions.w) > 0 && Number(p.heroBannerDimensions.h) > 0) {
+    page.heroBannerDimensions = { w: Number(p.heroBannerDimensions.w), h: Number(p.heroBannerDimensions.h) };
+  }
+  if (p.heroBannerMobileDimensions && Number(p.heroBannerMobileDimensions.w) > 0 && Number(p.heroBannerMobileDimensions.h) > 0) {
+    page.heroBannerMobileDimensions = { w: Number(p.heroBannerMobileDimensions.w), h: Number(p.heroBannerMobileDimensions.h) };
+  }
   return page;
 }
 
