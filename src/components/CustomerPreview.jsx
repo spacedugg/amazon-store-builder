@@ -332,24 +332,40 @@ function CustomerSection({ section, products, marketplace, isMobile, pages, setA
   var config = getGridConfig(layout, isMobile);
 
   // Wenn die Sektion Produkt Tiles enthaelt, soll sie keinen festen
+  // Wenn die Sektion Produkt Tiles enthaelt, soll sie keinen festen
   // aspectRatio haben und auch keine festen Row Heights. Auf Amazon waechst
   // ein Produkt Grid mit der Anzahl an Reihen nach unten. Wir geben der
   // Sektion deshalb Auto Hoehe, damit das Grid so lang wird wie noetig.
-  var hasProductTile = (section.tiles || []).some(function(t) {
+  // Aber nur wenn ALLE Tiles Produkt Tiles sind. Bei gemischten Sektionen
+  // muss der aspectRatio erhalten bleiben, sonst kollabieren die Bildkacheln
+  // auf 0 Hoehe.
+  var tiles = section.tiles || [];
+  var allProduct = tiles.length > 0 && tiles.every(function(t) {
     return PRODUCT_TILE_TYPES.indexOf(t.type) >= 0;
   });
   var gridStyle = Object.assign({}, config.gridStyle);
-  if (hasProductTile) {
+  if (allProduct) {
     delete gridStyle.aspectRatio;
     delete gridStyle.gridTemplateRows;
   }
+  var sectionHasNoVerticalConstraint = !gridStyle.aspectRatio && !gridStyle.gridTemplateRows;
 
   return (
     <div style={Object.assign({}, gridStyle, { display: 'grid', gap: isMobile ? 6 : 8, width: '100%', marginBottom: isMobile ? 8 : 16 })}>
-      {(section.tiles || []).map(function(tile, ti) {
+      {tiles.map(function(tile, ti) {
         var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
         var tileStyle = Object.assign({}, config.getTileStyle(ti), { position: 'relative', minHeight: 0, background: tile.bgColor || '#fff' });
         if (!isProduct) tileStyle.overflow = 'hidden';
+        // Wenn die Sektion keinen vertikalen Constraint hat (Fullwidth Sektion
+        // oder gemischte Sektion mit Produkt Grid), bekommt jede Bildkachel
+        // eine aspect-ratio basierend auf ihren Tile Dimensions, damit das
+        // Bild sich richtig dehnt statt auf 0 Hoehe zu kollabieren.
+        if (!isProduct && sectionHasNoVerticalConstraint) {
+          var dims = (isMobile ? tile.mobileDimensions : tile.dimensions) || tile.dimensions;
+          if (dims && dims.w > 0 && dims.h > 0) {
+            tileStyle.aspectRatio = dims.w + '/' + dims.h;
+          }
+        }
         // Produkt Kachel wraps in einen flow Container ohne absolute Hoehe,
         // damit die Anzahl der Produktreihen das Modul vertikal wachsen laesst.
         var content = isProduct ? (
