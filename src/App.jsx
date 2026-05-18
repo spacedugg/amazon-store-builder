@@ -1594,26 +1594,42 @@ export default function App() {
     });
   };
 
-  // ─── HEADER BANNER ───
+  // ─── HERO BANNER ───
+  // Single Image Upload via Canvas Knopf, nutzt aktuellen viewMode als
+  // Default. Wer beide Varianten setzen will, geht uebers Properties Panel.
   var handleHeaderBannerUpload = function() {
     if (!headerBannerInputRef.current) return;
     headerBannerInputRef.current.click();
   };
 
-  var handleHeaderBannerFile = function(e) {
+  var handleHeaderBannerFile = async function(e) {
     var f = e.target.files && e.target.files[0];
     if (!f) return;
-    var reader = new FileReader();
-    reader.onload = function(ev) {
-      var data = ev.target.result;
-      if (viewMode === 'mobile') {
-        setStoreWithUndo(function(s) { return Object.assign({}, s, { headerBannerMobile: data }); });
-      } else {
-        setStoreWithUndo(function(s) { return Object.assign({}, s, { headerBanner: data }); });
-      }
-    };
-    reader.readAsDataURL(f);
     e.target.value = '';
+    var variant = viewMode === 'mobile' ? 'mobile' : 'desktop';
+    await persistHeroBannerImage(variant, f);
+  };
+
+  // Lade ein Hero Banner Bild direkt nach Vercel Blob, speichere die URL
+  // in store.headerBanner oder store.headerBannerMobile.
+  var persistHeroBannerImage = async function(variant, file) {
+    try {
+      var result = await uploadFileToBlob(file);
+      setStoreWithUndo(function(s) {
+        if (variant === 'mobile') return Object.assign({}, s, { headerBannerMobile: result.url });
+        return Object.assign({}, s, { headerBanner: result.url });
+      });
+    } catch (err) {
+      console.error('[HeroBanner] Upload fehlgeschlagen', err);
+      alert('Hero Banner Upload fehlgeschlagen: ' + (err && err.message ? err.message : 'unbekannt'));
+    }
+  };
+
+  var clearHeroBannerImage = function(variant) {
+    setStoreWithUndo(function(s) {
+      if (variant === 'mobile') return Object.assign({}, s, { headerBannerMobile: null });
+      return Object.assign({}, s, { headerBanner: null });
+    });
   };
 
   // ─── CUSTOMER PREVIEW LINK ───
@@ -1861,6 +1877,10 @@ export default function App() {
           allPages={store.pages}
           heroBanner={selHeroBanner ? page : null}
           onHeroBannerChange={selHeroBanner ? updateHeroBanner : null}
+          onHeroBannerImageUpload={selHeroBanner ? persistHeroBannerImage : null}
+          onHeroBannerImageClear={selHeroBanner ? clearHeroBannerImage : null}
+          storeHeaderBanner={store.headerBanner || null}
+          storeHeaderBannerMobile={store.headerBannerMobile || null}
         />
       </div>
 

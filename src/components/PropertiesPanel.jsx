@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, MAX_HOTSPOTS, createDefaultProductSelector, getMinImageHeight, tileHasDimensionRule, MIN_IMAGE_RATIO_DESKTOP, MIN_IMAGE_RATIO_MOBILE, MIN_TEXT_IMAGE_HEIGHT } from '../constants';
 import { t } from '../i18n';
 
@@ -50,7 +50,51 @@ function fileUpload(label, value, onSet, onRemove, uiLang) {
   );
 }
 
-export default function PropertiesPanel({ tile, onChange, onDetachReuse, products, viewMode, uiLang, layoutType, pages, allPages, heroBanner, onHeroBannerChange }) {
+// Eine Zeile pro Banner Variante. Zeigt Preview, Upload Knopf und Clear
+// Knopf, jeweils fuer Desktop oder Mobile getrennt. Bilder gehen ueber
+// onUpload direkt nach Vercel Blob, currentUrl ist entweder die Blob URL
+// oder eine Legacy Data URL.
+function HeroBannerVariantRow({ label, dimensions, currentUrl, onUpload, onClear }) {
+  var inputRef = useRef(null);
+  return (
+    <div className="props-section" style={{ borderTop: '1px solid #f1f5f9', paddingTop: 10 }}>
+      <label className="label" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <span>{label}</span>
+        <span style={{ fontSize: 9, color: '#94a3b8', fontWeight: 400 }}>{dimensions}</span>
+      </label>
+      {currentUrl ? (
+        <div style={{ position: 'relative', marginBottom: 6 }}>
+          <img src={currentUrl} alt={label} style={{ width: '100%', borderRadius: 4, border: '1px solid #e2e8f0', display: 'block' }} />
+        </div>
+      ) : (
+        <div style={{ background: '#f8fafc', border: '1px dashed #cbd5e1', borderRadius: 4, padding: '14px 8px', textAlign: 'center', fontSize: 10, color: '#94a3b8', marginBottom: 6 }}>
+          Kein Bild hochgeladen
+        </div>
+      )}
+      <div style={{ display: 'flex', gap: 4 }}>
+        <input ref={inputRef} type="file" accept="image/*" style={{ display: 'none' }}
+          onChange={function(e) {
+            var f = e.target.files && e.target.files[0];
+            if (f && onUpload) onUpload(f);
+            e.target.value = '';
+          }} />
+        <button className="btn" style={{ flex: 1, fontSize: 10 }}
+          onClick={function() { inputRef.current && inputRef.current.click(); }}
+          disabled={!onUpload}>
+          {currentUrl ? 'Bild ersetzen' : 'Bild hochladen'}
+        </button>
+        {currentUrl && onClear && (
+          <button className="btn" style={{ fontSize: 10, color: '#dc2626' }}
+            onClick={onClear} title="Bild entfernen">
+            &times;
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function PropertiesPanel({ tile, onChange, onDetachReuse, products, viewMode, uiLang, layoutType, pages, allPages, heroBanner, onHeroBannerChange, onHeroBannerImageUpload, onHeroBannerImageClear, storeHeaderBanner, storeHeaderBannerMobile }) {
   // Top N Eingabe für markenübergreifende BSR Vorschläge auf Product Tiles
   var [topNInput, setTopNInput] = useState('');
   // ─── HERO BANNER MODE ───
@@ -78,17 +122,23 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
               placeholder="Slogan or claim, press Enter for line break" rows={2} className="input"
               style={{ resize: 'vertical', lineHeight: 1.3 }} />
           </div>
-          <div className="props-section">
-            <label className="label">Banner Image</label>
-            <div style={{ display: 'flex', gap: 6, flexDirection: 'column' }}>
-              {(viewMode === 'mobile' ? hPage.headerBannerMobile : hPage.headerBanner) && (
-                <img src={viewMode === 'mobile' ? (hPage.headerBannerMobile || hPage.headerBanner) : hPage.headerBanner} alt="" style={{ width: '100%', borderRadius: 4, border: '1px solid #e2e8f0' }} />
-              )}
-              <div style={{ fontSize: 10, color: '#64748b' }}>
-                Use the image upload button on the banner area or the folder upload to set the banner image.
-              </div>
-            </div>
-          </div>
+          {/* Desktop und Mobile Banner werden hier getrennt verwaltet, damit
+              der Operator beide Varianten unabhaengig hochladen kann. Bilder
+              gehen direkt nach Vercel Blob, der Store haelt nur die URL. */}
+          <HeroBannerVariantRow
+            label="Desktop Banner"
+            dimensions="3000 x 600 px"
+            currentUrl={storeHeaderBanner}
+            onUpload={onHeroBannerImageUpload ? function(file) { onHeroBannerImageUpload('desktop', file); } : null}
+            onClear={onHeroBannerImageClear ? function() { onHeroBannerImageClear('desktop'); } : null}
+          />
+          <HeroBannerVariantRow
+            label="Mobile Banner"
+            dimensions="1680 x 900 px"
+            currentUrl={storeHeaderBannerMobile}
+            onUpload={onHeroBannerImageUpload ? function(file) { onHeroBannerImageUpload('mobile', file); } : null}
+            onClear={onHeroBannerImageClear ? function() { onHeroBannerImageClear('mobile'); } : null}
+          />
         </div>
       </div>
     );
