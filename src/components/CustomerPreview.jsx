@@ -259,7 +259,7 @@ function CustomerTile({ tile, products, marketplace, isMobile, pages, setActiveP
   var hasClick = !!(pageTarget || asinTarget);
 
   function handleClick() {
-    if (pageTarget) { setActivePage(pageTarget); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    if (pageTarget) { setActivePage(pageTarget); return; }
     if (asinTarget) {
       var tld = marketplaceTld(marketplace);
       window.open('https://www.amazon.' + tld + '/dp/' + asinTarget, '_blank', 'noopener');
@@ -402,6 +402,15 @@ export default function CustomerPreview() {
   var [hoveredTab, setHoveredTab] = useState(null);
   var [moreOpen, setMoreOpen] = useState(false);
   var morePopupRef = useRef(null);
+  // Scroll Container Ref: damit beim Wechsel auf eine andere (Sub)Page der
+  // Customer wieder am Anfang der neuen Seite startet, statt mit der alten
+  // Scrollposition irgendwo in der Mitte zu landen.
+  var scrollContainerRef = useRef(null);
+  useEffect(function() {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({ top: 0, behavior: 'auto' });
+    }
+  }, [activePageId]);
 
   useEffect(function() {
     if (!token) { setError('Kein Customer Token in der URL.'); setLoading(false); return; }
@@ -470,7 +479,7 @@ export default function CustomerPreview() {
     // die ganze Page aber scrollbar sein. Unser Root Container bekommt eine
     // feste Hoehe und eigenes overflow auto, damit Hero, Nav und Sections
     // erreichbar bleiben.
-    <div style={{ height: '100vh', background: '#fff', display: 'flex', flexDirection: 'column', overflowY: 'auto', overflowX: 'hidden' }}>
+    <div ref={scrollContainerRef} style={{ height: '100vh', background: '#fff', display: 'flex', flexDirection: 'column', overflowY: 'auto', overflowX: 'hidden' }}>
       {/* ─── DEVICE TOGGLE (subtil, oben rechts, schliesst sich beim Klick auf den Store) ─── */}
       <div style={{ position: 'fixed', top: 10, right: 10, zIndex: 100, display: 'flex', gap: 4, background: 'rgba(15,23,42,.85)', padding: 4, borderRadius: 6, boxShadow: '0 2px 8px rgba(0,0,0,.18)' }}>
         <button onClick={function() { setViewMode('desktop'); }}
