@@ -227,15 +227,34 @@ function getTileImage(tile, isMobile) {
   return tile.uploadedImage || tile.uploadedImageMobile || null;
 }
 
-// Findet das Store Hero Bild fuer den oberen Banner.
-function findStoreHero(pages) {
+// Liefert das Hero Banner Bild. Reihenfolge: Page Override, Store Default,
+// Fallback auf eine Tile mit imageCategory store_hero. Mobile Variante hat
+// Vorrang auf Mobile, faellt aber auf Desktop zurueck wenn nicht gesetzt.
+function resolveHeroBannerUrl(store, page, isMobile) {
+  if (page) {
+    if (isMobile && page.headerBannerMobile) return page.headerBannerMobile;
+    if (page.headerBanner) return page.headerBanner;
+  }
+  if (store) {
+    if (isMobile && store.headerBannerMobile) return store.headerBannerMobile;
+    if (store.headerBanner) return store.headerBanner;
+    // Wenn auf Mobile kein Mobile Slot gesetzt ist, nutze Desktop als
+    // Fallback statt einer leeren Banner Flaeche.
+    if (isMobile && page && page.headerBanner) return page.headerBanner;
+    if (isMobile && store.headerBanner) return store.headerBanner;
+  }
+  // Letzter Fallback: Tile mit imageCategory store_hero (Legacy Konzepte
+  // aus dem AI Generator, die noch keinen store level Banner nutzen).
+  var pages = (store && store.pages) || [];
   for (var pi = 0; pi < pages.length; pi++) {
     var pg = pages[pi];
     for (var si = 0; si < (pg.sections || []).length; si++) {
       var sec = pg.sections[si];
       for (var ti = 0; ti < (sec.tiles || []).length; ti++) {
         var tile = sec.tiles[ti];
-        if (tile && tile.imageCategory === 'store_hero') return tile;
+        if (tile && tile.imageCategory === 'store_hero') {
+          return getTileImage(tile, isMobile);
+        }
       }
     }
   }
@@ -412,18 +431,36 @@ export default function CustomerPreview() {
     }
   }, [activePageId]);
 
-  useEffect(function() {
-    if (!token) { setError('Kein Customer Token in der URL.'); setLoading(false); return; }
+  // Erstladung plus stiller Reload, wenn der Tab wieder Fokus bekommt.
+  // Damit muss der Operator nach einem Save im Editor nicht F5 druecken,
+  // er kann einfach den Customer Tab anklicken und der neue Stand erscheint.
+  function fetchStoreData(silent) {
+    if (!token) {
+      if (!silent) { setError('Kein Customer Token in der URL.'); setLoading(false); }
+      return;
+    }
     loadStoreByShareToken(token).then(function(result) {
-      if (!result || !result.data) { setError('Store nicht gefunden oder Link abgelaufen.'); setLoading(false); return; }
+      if (!result || !result.data) {
+        if (!silent) { setError('Store nicht gefunden oder Link abgelaufen.'); setLoading(false); }
+        return;
+      }
       setStore(result.data);
-      var firstPage = result.data.pages && result.data.pages[0];
-      setActivePageId(firstPage ? firstPage.id : '');
-      setLoading(false);
+      if (!silent) {
+        var firstPage = result.data.pages && result.data.pages[0];
+        setActivePageId(firstPage ? firstPage.id : '');
+        setLoading(false);
+      }
     }).catch(function(e) {
-      setError(e.message || 'Fehler beim Laden des Stores.');
-      setLoading(false);
+      if (!silent) { setError(e.message || 'Fehler beim Laden des Stores.'); setLoading(false); }
     });
+  }
+  useEffect(function() {
+    fetchStoreData(false);
+    function onVisible() {
+      if (document.visibilityState === 'visible') fetchStoreData(true);
+    }
+    document.addEventListener('visibilitychange', onVisible);
+    return function() { document.removeEventListener('visibilitychange', onVisible); };
   }, [token]);
 
   useEffect(function() {
@@ -459,8 +496,7 @@ export default function CustomerPreview() {
   var activePage = pages.find(function(p) { return p.id === activePageId; }) || pages[0];
   var marketplace = store.marketplace || 'de';
 
-  var heroTile = findStoreHero(pages);
-  var heroImg = heroTile ? getTileImage(heroTile, isMobile) : null;
+  var heroImg = resolveHeroBannerUrl(store, activePage, isMobile);
 
   var MAX_NAV_TABS = isMobile ? 4 : 7;
   var visibleTabs = topPages.slice(0, MAX_NAV_TABS);
