@@ -60,11 +60,18 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
   var headerBannerMobile = page.headerBannerMobile || store.headerBannerMobile || null;
   var bannerSrc = isMobile ? (headerBannerMobile || headerBanner) : headerBanner;
 
+  // Hero Banner Aspect Ratio: aus Page Override holen, sonst Amazon Defaults.
+  // Damit das Banner Feld im Editor genauso wirkt wie im Customer Preview.
+  var heroBannerDims = isMobile
+    ? (page.heroBannerMobileDimensions || { w: 1680, h: 900 })
+    : (page.heroBannerDimensions || { w: 3000, h: 600 });
+
   return (
     <div className="canvas">
       <div className={'canvas-inner' + (isMobile ? ' canvas-mobile' : '')}>
         {/* Header banner (above nav) — independent from sections */}
-        <div className="canvas-header-banner" onClick={handleHeroBannerClick} style={{ cursor: 'pointer', outline: isHeroBannerSelected ? '2px solid #f59e0b' : undefined, outlineOffset: -2, borderRadius: 2, position: 'relative' }}>
+        <div className="canvas-header-banner" onClick={handleHeroBannerClick}
+          style={{ cursor: 'pointer', outline: isHeroBannerSelected ? '2px solid #f59e0b' : undefined, outlineOffset: -2, borderRadius: 2, position: 'relative', aspectRatio: heroBannerDims.w + '/' + heroBannerDims.h, overflow: 'hidden' }}>
           {isHeroBannerSelected && (
             <div style={{ position: 'absolute', top: 4, left: 4, zIndex: 2, background: '#f59e0b', color: '#fff', fontSize: 9, padding: '2px 6px', borderRadius: 3, fontWeight: 600 }}>Store Hero Banner</div>
           )}
@@ -79,7 +86,7 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
             </div>
           ) : (
             <div className="header-banner-placeholder" style={headerBannerColor ? { background: headerBannerColor, borderColor: headerBannerColor } : undefined}>
-              <span>{t('canvas.headerBanner', uiLang)} ({isMobile ? '1680 x 900' : '3000 x 600'})</span>
+              <span>{t('canvas.headerBanner', uiLang)} ({heroBannerDims.w + ' x ' + heroBannerDims.h})</span>
               <div className="header-banner-actions">
                 <button className="btn" style={{ fontSize: 10, padding: '4px 10px' }} onClick={function(e) { e.stopPropagation(); onHeaderBannerUpload && onHeaderBannerUpload(); }}>
                   Bild hochladen
