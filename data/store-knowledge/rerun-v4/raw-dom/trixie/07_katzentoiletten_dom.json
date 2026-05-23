@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "store": "trixie",
+    "pageSlug": "07_katzentoiletten",
+    "pageId": "1EF28941-C4BE-4B99-9E79-8757C0720511",
+    "pageName": "Katzentoiletten",
+    "pageLevel": 2,
+    "extractedAt": "2026-05-23",
+    "pageUrl": "https://www.amazon.de/stores/page/1EF28941-C4BE-4B99-9E79-8757C0720511",
+    "scrollHeight": 5370,
+    "domRowsTotal": 6,
+    "totalImages": 27,
+    "totalVideos": 0,
+    "totalUniqueAsins": 25,
+    "note": "Sub-Kategorie-Page Katzentoiletten: BrandHeader plus Editorial-Hero mit Headline und Body-Copy (erstmaliger Text-Hero in TRIXIE) plus ProductGrid 25 ASINs plus Tile-Pair plus Footer. Sortimentsbreite Klumpstreu plus smarte automatische Katzentoilette."
+  },
+  "modules": [
+    {"domRowIdx": 0, "top": 99, "height": 395, "widgetType": "BrandHeader", "imgCount": 1, "note": "Nav header mit Brand-Banner plus Mega-Nav, Pfad anzeige: 'Katze > Katzentoiletten'."},
+    {"domRowIdx": 1, "top": 99, "height": 300, "widgetType": "StoreHero_overlap", "imgCount": 1, "note": "Brand-Banner als Hero-Overlay."},
+    {"domRowIdx": 2, "top": 502, "height": 505, "widgetType": "EditorialRow_double", "imgCount": 1, "tileCount": 1, "headline": "Fuer ein sauberes Katzenzuhause", "body": "Unser Katzentoiletten-Sortiment bietet dir alles, von klassischen Modellen bis zur automatischen Katzentoilette. Hygienisch, komfortabel und perfekt auf das Wohlbefinden deiner Samtpfote abgestimmt.", "note": "Editorial-Hero mit echter Headline plus Body-Copy. Erstmaliger 'Story-Hero' (Text plus Bild Komposition). Halb-Hoehe (505 vs 743)."},
+    {"domRowIdx": 3, "top": 1081, "height": 2828, "widgetType": "ProductGrid", "imgCount": 25, "asinCount": 25, "note": "ProductGrid 25 ASINs Tofu-Klumpstreu (40250 2,5kg) plus smarte Katzentoilette 40050 plus klassische Modelle.", "asins": ["B0FXM8XJ9L","B0FXMCCK1J","B0C61X21L7","B0FPGF531Y","B01IK5093Y","B01IK5097U","B07XSM8QP8","B09RF39DDF","B000RYAQEO","B000WFDOVA","B01LVW026J","B08FLSWZRH","B08FMJ3CCM","B000RW86HA","B0D79H7493","B08FF2N1JP","B096MYWD4Q","B0D62Q7WCR","B0089AY8UQ","B00DC43ZHG","B08F78XHWG","B07DF7Z2HW","B096MVZTRV","B08N5X59GM","B0D6NF8TGP"]},
+    {"domRowIdx": 4, "top": 3909, "height": 200, "widgetType": "EditorialRow_double", "imgCount": 0, "tileCount": 1, "note": "Footer-naher Tile-Pair-Spacer."},
+    {"domRowIdx": 5, "top": 3909, "height": 200, "widgetType": "AmazonShareFooter", "note": "Amazon Share Footer."}
+  ]
+}

@@ -1,0 +1,351 @@
+{
+  "brandName": "TRIXIE Heimtierbedarf GmbH & Co. KG",
+  "storeUrl": "https://www.amazon.de/stores/page/30552E59-AC22-47B1-BBBB-AEA9225BD614",
+  "totalPages": 49,
+  "extractedFromV3At": "2026-05-23",
+  "pages": [
+    {
+      "position": 1,
+      "pageName": "Startseite",
+      "pageId": "30552E59-AC22-47B1-BBBB-AEA9225BD614",
+      "url": "https://www.amazon.de/stores/page/30552E59-AC22-47B1-BBBB-AEA9225BD614",
+      "hasOldModuleData": true
+    },
+    {
+      "position": 2,
+      "pageName": "Neuheiten",
+      "pageId": "41FA7DEE",
+      "url": "https://www.amazon.de/stores/page/41FA7DEE",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 3,
+      "pageName": "TRIXIE SERIEN",
+      "pageId": "9A368574",
+      "url": "https://www.amazon.de/stores/page/9A368574",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 4,
+      "pageName": "BE NORDIC",
+      "pageId": "162DCC92",
+      "url": "https://www.amazon.de/stores/page/162DCC92",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 5,
+      "pageName": "Autozubehör",
+      "pageId": "744B60E7",
+      "url": "https://www.amazon.de/stores/page/744B60E7",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 6,
+      "pageName": "Leuchthalsbänder/Warnwesten",
+      "pageId": "DE37903F",
+      "url": "https://www.amazon.de/stores/page/DE37903F",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 7,
+      "pageName": "Katzentoiletten",
+      "pageId": "1EF28941",
+      "url": "https://www.amazon.de/stores/page/1EF28941",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 8,
+      "pageName": "BE ECO",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 9,
+      "pageName": "BOHO",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 10,
+      "pageName": "DOG ACTIVITY",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 11,
+      "pageName": "CAT ACTIVITY",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 12,
+      "pageName": "Hund",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 13,
+      "pageName": "Halsbänder",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 14,
+      "pageName": "Geschirre",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 15,
+      "pageName": "Hundeleinen",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 16,
+      "pageName": "Snacks & Ernährung (Hund)",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 17,
+      "pageName": "Liegeplätze (Hund)",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 18,
+      "pageName": "Spielzeug (Hund)",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 19,
+      "pageName": "Zuhause (Hund)",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 20,
+      "pageName": "Unterwegs (Hund)",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 21,
+      "pageName": "Ausbildung & Sport",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 22,
+      "pageName": "Gesundheit/Pflege/Hygiene (Hund)",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 23,
+      "pageName": "Katze",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 24,
+      "pageName": "Liegeplätze (Katze)",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 25,
+      "pageName": "Zuhause (Katze)",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 26,
+      "pageName": "Kratzbäume",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 27,
+      "pageName": "Kratz- & Kletterartikel",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 28,
+      "pageName": "Katzenspielzeug",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 29,
+      "pageName": "Snacks & Ernährung (Katze)",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 30,
+      "pageName": "Unterwegs (Katze)",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 31,
+      "pageName": "Gesundheit/Pflege/Hygiene (Katze)",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 32,
+      "pageName": "Kleintier",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 33,
+      "pageName": "Ställe & Gehege",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 34,
+      "pageName": "Kleintierspielzeug",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 35,
+      "pageName": "Einrichtung (Kleintier)",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 36,
+      "pageName": "Pflege & Hygiene (Kleintier)",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 37,
+      "pageName": "Snacks & Ernährung (Kleintier)",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 38,
+      "pageName": "Unterwegs (Kleintier)",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 39,
+      "pageName": "Vogel",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 40,
+      "pageName": "Einrichtung (Vogel)",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 41,
+      "pageName": "Spielzeug (Vogel)",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 42,
+      "pageName": "Ernährung (Vogel)",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 43,
+      "pageName": "Terraristik",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 44,
+      "pageName": "Terrarienzubehör",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 45,
+      "pageName": "Futter & Mineralstoffe",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 46,
+      "pageName": "Terrarien-Einrichtung",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 47,
+      "pageName": "Tiere im Garten",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 48,
+      "pageName": "Vögel (Garten)",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 49,
+      "pageName": "Wildtiere & Insekten",
+      "pageId": null,
+      "url": "https://www.amazon.de/stores/page/None",
+      "hasOldModuleData": false
+    }
+  ]
+}

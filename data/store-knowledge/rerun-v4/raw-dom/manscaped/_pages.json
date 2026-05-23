@@ -1,0 +1,13 @@
+{
+  "store": "manscaped",
+  "storeUrl": "https://www.amazon.de/stores/page/44908195-3880-47D6-9EC0-D2A1543EB718",
+  "discoveredAt": "2026-05-13",
+  "pages": [
+    { "slug": "01_startseite",       "name": "Startseite",     "level": 0, "pageId": "44908195-3880-47D6-9EC0-D2A1543EB718", "url": "https://www.amazon.de/stores/page/44908195-3880-47D6-9EC0-D2A1543EB718" },
+    { "slug": "02_bestseller",       "name": "Bestseller",     "level": 1, "pageId": "A6D978D0-0FA4-4D40-90A6-070E950B7AF7", "url": "https://www.amazon.de/stores/page/A6D978D0-0FA4-4D40-90A6-070E950B7AF7" },
+    { "slug": "03_intimpflege",      "name": "Intimpflege",    "level": 1, "pageId": "5E8779F0-69E8-4B1B-919E-8D608323F41C", "url": "https://www.amazon.de/stores/page/5E8779F0-69E8-4B1B-919E-8D608323F41C" },
+    { "slug": "04_bart-gesicht",     "name": "Bart und Gesicht","level": 1, "pageId": "B9156B89-6D11-4DB0-8531-9C8616A9AAAA", "url": "https://www.amazon.de/stores/page/B9156B89-6D11-4DB0-8531-9C8616A9AAAA" },
+    { "slug": "05_kopf-koerper",     "name": "Kopf und Koerper","level": 1, "pageId": "8378B173-54DF-410C-AF93-45DC9BC292ED", "url": "https://www.amazon.de/stores/page/8378B173-54DF-410C-AF93-45DC9BC292ED" },
+    { "slug": "06_alle-produkte",    "name": "Alle Produkte",  "level": 1, "pageId": "2A73DBBB-F712-422E-86F2-67468B9CAC49", "url": "https://www.amazon.de/stores/page/2A73DBBB-F712-422E-86F2-67468B9CAC49" }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "store": "blackroll", "pageSlug": "04_faszienrollen", "pageName": "Faszienrollen",
+    "pageId": "0C47A3FC-C1D2-4C30-B03C-86EDFB3B607A",
+    "url": "https://www.amazon.de/stores/page/0C47A3FC-C1D2-4C30-B03C-86EDFB3B607A",
+    "extractedAt": "2026-05-12", "extractor": "chrome_mcp_javascript_tool_compact",
+    "scrollHeight": 8459, "domRowsTotal": 14, "contentModulesCount": 12
+  },
+  "modules": [
+    { "domRowIdx":  0, "top":   99, "height":  408, "tileCount":  0, "imgCount":  3, "videoCount": 0, "productCount":  0, "note": "Nav header" },
+    { "domRowIdx":  1, "top":  507, "height":  520, "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Page Hero Faszienrollen" },
+    { "domRowIdx":  2, "top": 1026, "height": 1263, "tileCount":  2, "imgCount": 16, "videoCount": 0, "productCount": 15, "note": "ProductGrid Faszienrollen-Sortiment mit 15 ASINs" },
+    { "domRowIdx":  3, "top": 2289, "height":  743, "tileCount": 62, "imgCount":  7, "videoCount": 0, "productCount":  0, "note": "Sehr grosses Tile-Grid 62 tile-Marker" },
+    { "domRowIdx":  4, "top": 3031, "height":  743, "tileCount": 16, "imgCount":  2, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  5, "top": 3774, "height":  743, "tileCount": 16, "imgCount":  2, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  6, "top": 4516, "height":  258, "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro" },
+    { "domRowIdx":  7, "top": 4774, "height":  520, "tileCount":  4, "imgCount":  0, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  8, "top": 5294, "height":  258, "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro" },
+    { "domRowIdx":  9, "top": 5551, "height":  500, "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx": 10, "top": 6052, "height":  258, "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro" },
+    { "domRowIdx": 11, "top": 6309, "height":  317, "tileCount":  0, "imgCount": 10, "videoCount": 0, "productCount":  0, "note": "Press-Logo-Band, wiederkehrend Blackroll-Signature" },
+    { "domRowIdx": 12, "top": 6626, "height":  371, "tileCount": 32, "imgCount":  4, "videoCount": 0, "productCount":  0, "note": "Kategorien-Verteiler-Grid 32 Tiles" },
+    { "domRowIdx": 13, "top": 6997, "height":  200, "tileCount":  4, "imgCount":  0, "videoCount": 0, "productCount":  0, "note": "amazon_share_footer" }
+  ]
+}

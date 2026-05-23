@@ -1,0 +1,113 @@
+{
+  "brandName": "MORE Nutrition",
+  "storeUrl": "https://www.amazon.de/stores/page/7AD425C6-C3C5-402D-A69D-D6201F98F888",
+  "totalPages": 15,
+  "extractedFromV3At": "2026-05-23",
+  "pages": [
+    {
+      "position": 1,
+      "pageName": "Startseite",
+      "pageId": "7AD425C6-C3C5-402D-A69D-D6201F98F888",
+      "url": "https://www.amazon.de/stores/page/7AD425C6-C3C5-402D-A69D-D6201F98F888",
+      "hasOldModuleData": true
+    },
+    {
+      "position": 2,
+      "pageName": "BESTSELLER",
+      "pageId": "B0B4CEEB-909A-4DC6-A571-6AA4D718DB21",
+      "url": "https://www.amazon.de/stores/page/B0B4CEEB-909A-4DC6-A571-6AA4D718DB21",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 3,
+      "pageName": "ZERUP",
+      "pageId": "DA439A68-D45D-4BB9-97CC-5D706DC1CF89",
+      "url": "https://www.amazon.de/stores/page/DA439A68-D45D-4BB9-97CC-5D706DC1CF89",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 4,
+      "pageName": "CHUNKY FLAVOUR",
+      "pageId": "D5FF78A5-8306-4D4B-80F7-F20BFBA08472",
+      "url": "https://www.amazon.de/stores/page/D5FF78A5-8306-4D4B-80F7-F20BFBA08472",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 5,
+      "pageName": "PROTEINE",
+      "pageId": "9A82B50C-BA5A-4A3B-ADBB-7B729770F289",
+      "url": "https://www.amazon.de/stores/page/9A82B50C-BA5A-4A3B-ADBB-7B729770F289",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 6,
+      "pageName": "PROTEIN MILKSHAKE",
+      "pageId": "5C4AE7B3-FEE1-4887-B719-D0188FF74E51",
+      "url": "https://www.amazon.de/stores/page/5C4AE7B3-FEE1-4887-B719-D0188FF74E51",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 7,
+      "pageName": "PROTEIN ICED COFFEE",
+      "pageId": "3D5F63E7-0917-4ABF-9F07-7D10B2AC1639",
+      "url": "https://www.amazon.de/stores/page/3D5F63E7-0917-4ABF-9F07-7D10B2AC1639",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 8,
+      "pageName": "CLEAR PROTEIN",
+      "pageId": "55FD402B-A0DC-4A7C-BD00-2D0ECE353C4D",
+      "url": "https://www.amazon.de/stores/page/55FD402B-A0DC-4A7C-BD00-2D0ECE353C4D",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 9,
+      "pageName": "CLEAR GLOW PEPTIDES",
+      "pageId": "483E27E9-01B3-441C-B1B9-DD468E87F786",
+      "url": "https://www.amazon.de/stores/page/483E27E9-01B3-441C-B1B9-DD468E87F786",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 10,
+      "pageName": "VEGAN PROTEIN",
+      "pageId": "A217601D-395D-4DF1-B940-4BABA3DAD6E5",
+      "url": "https://www.amazon.de/stores/page/A217601D-395D-4DF1-B940-4BABA3DAD6E5",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 11,
+      "pageName": "RIEGEL & LIGHT FOOD",
+      "pageId": "48018341-612A-4387-8B80-C2B4BE8FD4E1",
+      "url": "https://www.amazon.de/stores/page/48018341-612A-4387-8B80-C2B4BE8FD4E1",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 12,
+      "pageName": "VITALSTOFFE",
+      "pageId": "DCB9D63B-78C7-46D4-8DEA-53DB08EDEF28",
+      "url": "https://www.amazon.de/stores/page/DCB9D63B-78C7-46D4-8DEA-53DB08EDEF28",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 13,
+      "pageName": "BUNDLE",
+      "pageId": "B0C9AE88-4FDC-423E-9101-40DA4F857EA1",
+      "url": "https://www.amazon.de/stores/page/B0C9AE88-4FDC-423E-9101-40DA4F857EA1",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 14,
+      "pageName": "ALLE PRODUKTE",
+      "pageId": "F081FD4B-1559-4A38-A4F3-FC8E6732BCEB",
+      "url": "https://www.amazon.de/stores/page/F081FD4B-1559-4A38-A4F3-FC8E6732BCEB",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 15,
+      "pageName": "PRODUKTSELEKTOR",
+      "pageId": "8790A8BC-31A4-4810-8B75-BF1AFCE858B5",
+      "url": "https://www.amazon.de/stores/page/8790A8BC-31A4-4810-8B75-BF1AFCE858B5",
+      "hasOldModuleData": false
+    }
+  ]
+}

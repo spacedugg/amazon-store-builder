@@ -1,0 +1,27 @@
+{
+  "_meta": {
+    "store": "nespresso",
+    "pageSlug": "02_deals",
+    "pageName": "Deals",
+    "pageId": "3C855FAA-0378-428B-8D15-701AA8800EE3",
+    "url": "https://www.amazon.de/stores/page/3C855FAA-0378-428B-8D15-701AA8800EE3",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_compact",
+    "extractorNote": "Phase 1 via Chrome MCP javascript_tool. Output kompakt.",
+    "scrollHeight": 4142,
+    "viewport": { "w": 1599, "h": 842 },
+    "domRowsTotal": 6,
+    "contentModulesCount": 6
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height":  395, "widgetType": "Header",       "tileCount": 0, "imgCount": 1, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Nav header." },
+    { "domRowIdx": 1, "top":  502, "height":   86, "widgetType": "EditorialRow", "tileCount": 0, "imgCount": 0, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Sehr schmaler 86px Spacer/Title-Row." },
+    { "domRowIdx": 2, "top":  627, "height":  309, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 1, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Section Intro Banner (309px hoch, 1 img)." },
+    { "domRowIdx": 3, "top":  936, "height":  573, "widgetType": "ProductGrid",  "tileCount": 0, "imgCount": 4, "videoCount": 0, "productCount": 8, "asinCount": 4, "note": "ProductGrid mit 8 product-Markern (4 unique ASINs: Vertuo Up Deals).", "sampleAsins": ["B0GKH2LNW4","B0GKNPLF2T","B0GKH2WHPZ","B0GKP23BKB"] },
+    { "domRowIdx": 4, "top": 1509, "height": 1171, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 1, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Sehr grosser Promo-Banner Vollformat 1171px hoch (saisonale Aktions-Banner)." },
+    { "domRowIdx": 5, "top": 2680, "height":  200, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 0, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Amazon Share Footer." }
+  ],
+  "openQuestionsLocal": [
+    "Deals-Page sehr kurz mit nur 6 Modulen: minimaler Aktions-Hub. Pattern aehnlich Kaercher Home-and-Garden-Week (saisonale_promo)."
+  ]
+}

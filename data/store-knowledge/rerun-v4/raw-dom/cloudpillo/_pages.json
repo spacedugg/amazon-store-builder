@@ -1,0 +1,15 @@
+{
+  "store": "cloudpillo",
+  "storeUrl": "https://www.amazon.de/stores/page/741141B6-87D5-44F9-BE63-71B55CD51198",
+  "discoveredAt": "2026-05-13",
+  "discoveryMethod": "navigation_bar_dynamic_crawl_via_chrome_mcp",
+  "pages": [
+    { "slug": "01_startseite",   "name": "Startseite",   "level": 0, "pageId": "741141B6-87D5-44F9-BE63-71B55CD51198", "url": "https://www.amazon.de/stores/page/741141B6-87D5-44F9-BE63-71B55CD51198" },
+    { "slug": "02_alle-produkte","name": "Alle Produkte","level": 1, "pageId": "23BD4500-CF41-4E60-BB7C-C9C7ABC049BA", "url": "https://www.amazon.de/stores/page/23BD4500-CF41-4E60-BB7C-C9C7ABC049BA" },
+    { "slug": "03_kissen",       "name": "Kissen",       "level": 1, "pageId": "D73418D9-C2AA-46C1-95C3-C7C1E13EBA10", "url": "https://www.amazon.de/stores/page/D73418D9-C2AA-46C1-95C3-C7C1E13EBA10" },
+    { "slug": "04_toppers",      "name": "Toppers",      "level": 1, "pageId": "2DAF08C8-3817-4AC8-A428-061B697A1BE8", "url": "https://www.amazon.de/stores/page/2DAF08C8-3817-4AC8-A428-061B697A1BE8" },
+    { "slug": "05_bettdecke",    "name": "Bettdecke",    "level": 1, "pageId": "2F1BB578-35E0-470C-96E4-5AD4AAE447CD", "url": "https://www.amazon.de/stores/page/2F1BB578-35E0-470C-96E4-5AD4AAE447CD" },
+    { "slug": "06_bettwaesche",  "name": "Bettwaesche",  "level": 1, "pageId": "885D4993-7DFA-4028-BC3E-AEB374452AF9", "url": "https://www.amazon.de/stores/page/885D4993-7DFA-4028-BC3E-AEB374452AF9" },
+    { "slug": "07_unsere-mission","name": "Unsere Mission","level": 1, "pageId": "49C41ED6-29D9-4150-8735-3C811514ACF2", "url": "https://www.amazon.de/stores/page/49C41ED6-29D9-4150-8735-3C811514ACF2" }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "_meta": {
+    "store": "bedsure",
+    "pageSlug": "03_kuscheldecken",
+    "pageName": "Kuscheldecken",
+    "pageId": "2F249C26-269C-4A0B-ACB2-7AB6436FFDC5",
+    "url": "https://www.amazon.de/stores/page/2F249C26-269C-4A0B-ACB2-7AB6436FFDC5",
+    "extractedAt": "2026-05-12",
+    "extractor": "chrome_mcp_javascript_tool_compact",
+    "scrollHeight": 9617,
+    "domRowsTotal": 16,
+    "contentModulesCount": 14
+  },
+  "modules": [
+    { "domRowIdx":  0, "top":   99, "height":  408, "widgetClass": null,                                "tileCount":  0, "imgCount":  3, "videoCount": 0, "productCount":  0, "note": "Nav header plus Hero-Banner Bereich ueber Menueleiste." },
+    { "domRowIdx":  1, "top":  507, "height":  309, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Page-Hero/Headline Banner Kuscheldecken." },
+    { "domRowIdx":  2, "top":  816, "height":  113, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro." },
+    { "domRowIdx":  3, "top":  929, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 48, "imgCount":  2, "videoCount": 0, "productCount":  0, "note": "Sehr grosses Tile-Grid 48 Tiles." },
+    { "domRowIdx":  4, "top": 1671, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 16, "imgCount":  2, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  5, "top": 2414, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 44, "imgCount":  6, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  6, "top": 3156, "height":  113, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro." },
+    { "domRowIdx":  7, "top": 3269, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 16, "imgCount":  2, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  8, "top": 4012, "height":  113, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro." },
+    { "domRowIdx":  9, "top": 4125, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 16, "imgCount":  2, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx": 10, "top": 4867, "height":  113, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro." },
+    { "domRowIdx": 11, "top": 4980, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 43, "imgCount":  5, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx": 12, "top": 5723, "height":  113, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro." },
+    { "domRowIdx": 13, "top": 5836, "height": 1577, "widgetClass": "ProductGrid__gridContainer__bRK6J", "tileCount":  2, "imgCount": 20, "videoCount": 0, "productCount": 19, "note": "ProductGrid Kategorie-Sortiment mit 19 ASINs." },
+    { "domRowIdx": 14, "top": 7412, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 56, "imgCount":  7, "videoCount": 0, "productCount":  0, "note": "Sehr grosses Tile-Grid 56 Tiles." },
+    { "domRowIdx": 15, "top": 8155, "height":  201, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  4, "imgCount":  0, "videoCount": 0, "productCount":  0, "note": "Schmale 201px-Row am Ende, vermutlich Awards oder Share Footer." }
+  ]
+}

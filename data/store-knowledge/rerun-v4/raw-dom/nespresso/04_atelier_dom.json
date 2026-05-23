@@ -1,0 +1,26 @@
+{
+  "_meta": {
+    "store": "nespresso",
+    "pageSlug": "04_atelier",
+    "pageName": "Atelier",
+    "pageId": "94253EAE-5C50-41D7-82CB-FE0439ACCB32",
+    "url": "https://www.amazon.de/stores/page/94253EAE-5C50-41D7-82CB-FE0439ACCB32",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_compact",
+    "scrollHeight": 3016,
+    "viewport": { "w": 1599, "h": 842 },
+    "domRowsTotal": 5,
+    "contentModulesCount": 5
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height": 395, "widgetType": "Header",       "tileCount": 0, "imgCount": 1, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Nav header." },
+    { "domRowIdx": 1, "top":  502, "height":   0, "widgetType": "EditorialRow", "tileCount": 0, "imgCount": 0, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Hidden/empty row (vermutlich Tracking-Pixel oder leerer Container)." },
+    { "domRowIdx": 2, "top":  503, "height": 743, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 0, "videoCount": 1, "productCount": 0, "asinCount": 0, "note": "Hero-Video Vollformat (Video statt Image, 743px hoch). Premium-Maschinen-Demo." },
+    { "domRowIdx": 3, "top": 1245, "height": 309, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 1, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Section Intro / Brand-Statement Banner (309px)." },
+    { "domRowIdx": 4, "top": 1554, "height": 200, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 0, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Amazon Share Footer." }
+  ],
+  "openQuestionsLocal": [
+    "Atelier-Page sehr kurz mit nur 5 Modulen: minimaler Premium-Modell-Showcase mit Hero-Video.",
+    "Auffaellig: Atelier nutzt VIDEO im Hero statt Image (Premium-Modell-Praesentation)."
+  ]
+}

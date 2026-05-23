@@ -1,0 +1,30 @@
+{
+  "_meta": {
+    "store": "bedsure",
+    "pageSlug": "08_heizdecke",
+    "pageName": "Heizdecke",
+    "pageId": "86EE23E4-B85F-4167-8FE0-E32C59862F42",
+    "url": "https://www.amazon.de/stores/page/86EE23E4-B85F-4167-8FE0-E32C59862F42",
+    "extractedAt": "2026-05-12",
+    "extractor": "chrome_mcp_javascript_tool_compact",
+    "scrollHeight": 8560,
+    "domRowsTotal": 14,
+    "contentModulesCount": 12
+  },
+  "modules": [
+    { "domRowIdx":  0, "top":   99, "height":  408, "widgetClass": null,                                "tileCount":  0, "imgCount":  3, "videoCount": 0, "productCount":  0, "note": "Nav header plus Hero-Banner Bereich ueber Menueleiste." },
+    { "domRowIdx":  1, "top":  507, "height":  665, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Hero-Banner Heizdecke (665px hoch)." },
+    { "domRowIdx":  2, "top": 1171, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 24, "imgCount":  3, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  3, "top": 1914, "height":  193, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro mit 193px Hoehe." },
+    { "domRowIdx":  4, "top": 2107, "height":  456, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  5, "top": 2563, "height":  456, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  6, "top": 3019, "height":  146, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro." },
+    { "domRowIdx":  7, "top": 3165, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 15, "imgCount":  1, "videoCount": 1, "productCount":  0, "note": "Video-Banner mit 15 Tiles plus 1 Video." },
+    { "domRowIdx":  8, "top": 3908, "height":  333, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  9, "top": 4240, "height":  144, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro." },
+    { "domRowIdx": 10, "top": 4385, "height": 1860, "widgetClass": "ProductGrid__gridContainer__bRK6J", "tileCount":  2, "imgCount": 15, "videoCount": 0, "productCount": 30, "note": "ProductGrid Heizdecken-Sortiment mit 30 ASINs." },
+    { "domRowIdx": 11, "top": 6245, "height":  101, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro." },
+    { "domRowIdx": 12, "top": 6346, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 56, "imgCount":  7, "videoCount": 0, "productCount":  0, "note": "Sehr grosses Tile-Grid 56 Tiles." },
+    { "domRowIdx": 13, "top": 7298, "height":    0, "widgetClass": null,                                "tileCount":  0, "imgCount":  0, "videoCount": 0, "productCount":  0, "note": "Leerer Row (Spacer oder Share-Footer-Trigger)." }
+  ]
+}

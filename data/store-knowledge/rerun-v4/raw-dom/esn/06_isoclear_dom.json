@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "store": "esn",
+    "pageSlug": "06_isoclear",
+    "pageId": "F7E30D0D-D2C4-4493-BE92-B7F0C8ACFC5C",
+    "pageUrl": "https://www.amazon.de/stores/page/F7E30D0D-D2C4-4493-BE92-B7F0C8ACFC5C",
+    "extractedAt": "2026-05-23",
+    "extractor": "v4_phase1_chrome_mcp_live",
+    "scrollHeight": 5120,
+    "viewport": { "w": 1599, "h": 842 },
+    "domRowsTotal": 6,
+    "note": "ISOCLEAR Sub-Category-Page: Hero-Banner (1 Lead-ASIN Peach Iced Tea) plus ProductGrid 7 Geschmacks-Varianten plus Produktselektor-Bridge plus Alle-Produkte-Bridge plus Footer. Spiegelt Designer Whey Page-Architektur."
+  },
+  "modules": [
+    { "domRowIdx": 0, "position": 1, "top": 99, "height": 403, "widgetType": "Header", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": ["Folgen"], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/acf527f7-c905-4e51-ad44-ec32c24f89cc._CR0%2C0%2C1920%2C384_SX1500_.jpg"], "asins": [], "pageLinks": [], "note": "Amazon Nav Header." },
+    { "domRowIdx": 1, "position": 2, "top": 403, "height": 784, "widgetType": "EditorialRow", "imgCount": 1, "videoCount": 0, "productCount": 1, "headings": [], "ctas": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/57ebf7ce-6f8b-457e-bc69-4f5dbddb07b9._CR0%2C0%2C1200%2C628_SX1500_.jpg"], "asins": ["B0CHMQ7MRW"], "pageLinks": [], "note": "Hero-Banner 1200x628 mit verlinktem Lead-ASIN (ISOCLEAR Peach Iced Tea 1kg)." },
+    { "domRowIdx": 2, "position": 3, "top": 1187, "height": 1239, "widgetType": "ProductGrid", "imgCount": 7, "videoCount": 0, "productCount": 7, "headings": ["ESN ISOCLEAR Whey Isolate Protein Pulver, 1000g, Peach Iced Tea"], "ctas": [], "imageUrls": [], "asins": ["B0FMRSD467", "B0FMRRFJKQ", "B0FMRT62RN", "B0FMRRFVNL", "B0FMRPVFXR", "B0FMRNJJNR", "B0FMRS1YLK"], "pageLinks": [], "note": "ProductGrid mit 7 ISOCLEAR Geschmacks-Varianten als Kern-Konversion." },
+    { "domRowIdx": 3, "position": 4, "top": 2426, "height": 750, "widgetType": "EditorialRow", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c0cacc85-510c-474a-8e3d-244467c95b46._CR0%2C0%2C1500%2C750_SX1500_.png"], "asins": [], "pageLinks": ["2AFC0A42-A702-462D-B255-B5203C7449F8"], "note": "Image-Banner PNG verlinkt nach PRODUKTSELEKTOR." },
+    { "domRowIdx": 4, "position": 5, "top": 3176, "height": 383, "widgetType": "EditorialRow", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bb6ee5ba-f109-4c8a-a8d3-9eebe477d015._CR0%2C0%2C3000%2C750_SX1500_.jpg"], "asins": [], "pageLinks": ["9FED5CCC-6284-44BD-AD83-AAEEBF48E23F"], "note": "Schluss-Banner zu ALLE PRODUKTE." },
+    { "domRowIdx": 5, "position": 6, "top": 3558, "height": 201, "widgetType": "EditorialRow", "imgCount": 0, "videoCount": 0, "productCount": 0, "headings": [], "ctas": ["Teilen"], "imageUrls": [], "asins": [], "pageLinks": [], "note": "Amazon Share Footer." }
+  ]
+}

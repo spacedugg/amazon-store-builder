@@ -1,0 +1,20 @@
+{
+  "_meta": {
+    "store": "twentythree", "pageSlug": "01_startseite", "pageName": "Startseite",
+    "pageId": "0E8D9A31-200C-4EC5-BC94-CBBC023B28A4",
+    "url": "https://www.amazon.de/stores/twentythree/page/0E8D9A31-200C-4EC5-BC94-CBBC023B28A4",
+    "extractedAt": "2026-05-13", "extractor": "chrome_mcp_javascript_tool_v2_with_urls",
+    "scrollHeight": 4661, "viewport": {"w": 1826, "h": 888},
+    "domRowsTotal": 7, "contentModulesCount": 5,
+    "uniqueAsinsOnPage": ["B0CB1RQWQ4", "B09R7WDDDL", "B0DKPLMB12", "B0CPTCZC5J"]
+  },
+  "modules": [
+    {"domRowIdx": 0, "top": 99, "height": 395, "widgetClass": "Header", "tileCount": 0, "imgCount": 3, "videoCount": 0, "productCount": 0, "note": "Nav header twenty:three Spuere den Unterschied", "links": [], "asins": []},
+    {"domRowIdx": 1, "top": 502, "height": 202, "widgetClass": "EditorialRow", "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Section Intro Dein Traum wird wahr Guter Schlaf kann so einfach sein", "links": [], "asins": []},
+    {"domRowIdx": 2, "top": 704, "height": 743, "widgetClass": "EditorialRow", "tileCount": 24, "imgCount": 3, "videoCount": 0, "productCount": 0, "note": "Tile-Row 3-fach Lifestyle", "links": [{"linkType": "asin", "target": "B0CB1RQWQ4"}, {"linkType": "asin", "target": "B09R7WDDDL"}, {"linkType": "asin", "target": "B0DKPLMB12"}], "asins": ["B0CB1RQWQ4", "B09R7WDDDL", "B0DKPLMB12"]},
+    {"domRowIdx": 3, "top": 1446, "height": 505, "widgetClass": "EditorialRow", "tileCount": 16, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Tile-Pair Bettwaesche plus Bezuege fuer Decken", "links": [{"linkType": "asin", "target": "B0CB1RQWQ4"}], "asins": ["B0CB1RQWQ4"]},
+    {"domRowIdx": 4, "top": 1951, "height": 743, "widgetClass": "EditorialRow", "tileCount": 16, "imgCount": 2, "videoCount": 0, "productCount": 0, "note": "Hero Bettwaesche-Sets Kissen Deckenbezuege 100 Prozent Lyocell", "links": [{"linkType": "asin", "target": "B0CPTCZC5J"}], "asins": ["B0CPTCZC5J"]},
+    {"domRowIdx": 5, "top": 2694, "height": 505, "widgetClass": "EditorialRow", "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Matratzen Section", "links": [], "asins": []},
+    {"domRowIdx": 6, "top": 3199, "height": 201, "widgetClass": "EditorialRow", "tileCount": 4, "imgCount": 0, "videoCount": 0, "productCount": 0, "note": "amazon_share_footer", "links": [], "asins": []}
+  ]
+}

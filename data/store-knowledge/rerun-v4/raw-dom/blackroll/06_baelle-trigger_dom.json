@@ -1,0 +1,23 @@
+{
+  "_meta": {
+    "store": "blackroll", "pageSlug": "06_baelle-trigger", "pageName": "Baelle und Trigger",
+    "pageId": "DD99AD6C-2ABA-4720-8BE8-06517078F35B",
+    "url": "https://www.amazon.de/stores/page/DD99AD6C-2ABA-4720-8BE8-06517078F35B",
+    "extractedAt": "2026-05-12", "extractor": "chrome_mcp_javascript_tool_compact",
+    "scrollHeight": 7697, "domRowsTotal": 12, "contentModulesCount": 10
+  },
+  "modules": [
+    { "domRowIdx":  0, "top":   99, "height":  408, "tileCount":  0, "imgCount":  3, "videoCount": 0, "productCount":  0, "note": "Nav header" },
+    { "domRowIdx":  1, "top":  507, "height":  520, "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Page Hero Baelle und Trigger" },
+    { "domRowIdx":  2, "top": 1026, "height": 1278, "tileCount":  2, "imgCount": 18, "videoCount": 0, "productCount": 18, "note": "ProductGrid mit 18 ASINs" },
+    { "domRowIdx":  3, "top": 2304, "height":  743, "tileCount": 64, "imgCount":  9, "videoCount": 0, "productCount":  0, "note": "Sehr grosses Tile-Grid 64 tile-Marker" },
+    { "domRowIdx":  4, "top": 3047, "height":  743, "tileCount": 16, "imgCount":  2, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  5, "top": 3789, "height":  743, "tileCount": 16, "imgCount":  2, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  6, "top": 4532, "height":  258, "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro" },
+    { "domRowIdx":  7, "top": 4789, "height":  500, "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  8, "top": 5289, "height":  258, "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro" },
+    { "domRowIdx":  9, "top": 5547, "height":  317, "tileCount":  0, "imgCount": 10, "videoCount": 0, "productCount":  0, "note": "Press-Logo-Band, wiederkehrend" },
+    { "domRowIdx": 10, "top": 5864, "height":  371, "tileCount": 32, "imgCount":  4, "videoCount": 0, "productCount":  0, "note": "Kategorien-Verteiler-Grid" },
+    { "domRowIdx": 11, "top": 6235, "height":  200, "tileCount":  4, "imgCount":  0, "videoCount": 0, "productCount":  0, "note": "amazon_share_footer" }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "store": "holy-energy",
+  "brandName": "HOLY Energy",
+  "storeUrl": "https://www.amazon.de/stores/HOLYEnergy/page/7913E121-CB43-4349-A8D2-9F0843B226E4",
+  "extractedAt": "2026-05-23",
+  "navigation": [
+    { "slug": "01_startseite",         "label": "Startseite",        "pageId": "7913E121-CB43-4349-A8D2-9F0843B226E4", "level": 0 },
+    { "slug": "02_fuer-neueinsteiger", "label": "Fuer Neueinsteiger", "pageId": "E0597C1D-5961-4E87-9CA5-2FAF0299330D", "level": 1 },
+    { "slug": "03_bestseller",         "label": "Bestseller",         "pageId": "E8F850A5-CE46-4877-88C4-F4F5A0365D02", "level": 1 },
+    { "slug": "04_energy",             "label": "Energy",             "pageId": "18BC62B2-B4AF-4995-B743-E80AECFA53AA", "level": 1 },
+    { "slug": "05_iced-tea",           "label": "Iced Tea",           "pageId": "527A4D3B-EC68-4755-BF8D-2BF264AE1694", "level": 1 },
+    { "slug": "06_hydration",          "label": "Hydration",          "pageId": "34F0F6AC-314F-4167-9EDA-54E94AC937C7", "level": 1 },
+    { "slug": "07_milkshakes",         "label": "Milkshakes",         "pageId": "6AD7F40F-ED3C-4B02-BDC9-310A071E3EC7", "level": 1 },
+    { "slug": "08_starter-sets",       "label": "Starter Sets",       "pageId": "15F6D24E-FF9D-4FE5-A1FB-5A2AD609CFE1", "level": 1 },
+    { "slug": "09_shaker",             "label": "Shaker",             "pageId": "3B80FD95-4F71-4D28-944B-EA001C45FF3C", "level": 1 },
+    { "slug": "10_probier-boxen",      "label": "Probier-Boxen",      "pageId": "229C0965-6260-45EF-8A4F-1723BD514037", "level": 1 }
+  ],
+  "extraPagesNotInScope": [
+    { "label": "Adventskalender", "pageId": "0AB41119-9BEE-431D-B7CC-346E3516D209" },
+    { "label": "Ueber uns",       "pageId": "69AF9424-DDC3-4F16-8AE0-F35BB75BD83A" }
+  ]
+}

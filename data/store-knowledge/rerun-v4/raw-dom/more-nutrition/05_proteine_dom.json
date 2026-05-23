@@ -1,0 +1,104 @@
+{
+  "_meta": {
+    "store": "more-nutrition",
+    "pageSlug": "05_proteine",
+    "pageId": "9A82B50C-BA5A-4A3B-ADBB-7B729770F289",
+    "url": "https://www.amazon.de/stores/page/9A82B50C-BA5A-4A3B-ADBB-7B729770F289",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_v4_widget_scan",
+    "scrollHeight": 5920,
+    "viewport": { "w": 1582, "h": 872 },
+    "domWidgetsTotal": 10,
+    "note": "PROTEINE Hub-Page. Folgt strukturell der Bestseller-Page, aber als Sub-Category-Hub. Jede Row ist ein 'Kategorie-Lead-Image plus 2 ASIN-Tiles' Block, verlinkt auf die jeweilige Protein-Sub-Page. Plus FeaturedDeal Milkyccino in der Mitte, Produktselektor-Banner und Closing-Banner."
+  },
+  "hero": {
+    "section": "hero", "widgetIdx": 0, "top": 99,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/813c8a61-ea74-4e67-859e-4aa9c950e915._CR0%2C0%2C3000%2C600_SX1500_.jpg",
+    "imageSize": { "w": 1500, "h": 300 },
+    "note": "PROTEINE Hero-Banner."
+  },
+  "navigation": "siehe 01_startseite_dom.json",
+  "modules": [
+    {
+      "userModuleId": 1, "widgetIdx": 1, "top": 497, "height": 371,
+      "widgetClass": "EditorialRow", "layoutType": "kategorie_lead_image_plus_2_asins", "tileCount": 3,
+      "leadImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/1e6e9ca5-d2e2-48ef-ae88-6e4451c91fa3._SL5000_CR0%2C0%2C5000%2C2500_SX750_SY375_.jpg", "linkPageId": "5C4AE7B3-FEE1-4887-B719-D0188FF74E51", "ariaLabel": "Chocolate protein milkshake with whipped cream, banana slices, and caramel drizzle. Product features include high protein content and creamy texture, shown with icons." },
+      "asins": ["B0GBWW4R88","B07VFSG17K"],
+      "tiles": [
+        { "asin": "B0GBWW4R88", "productTitleAria": "MORE Protein, Sahne, 750 g, Mix aus Whey Konzentrat und Casein ideal zum Muskelaufbau und -erhalt, mit Laktase, perfekt zum kochen & backen - made in Germany" },
+        { "asin": "B07VFSG17K", "productTitleAria": "MORE Protein, Vanille-Eiscreme, 600 g, Mix aus Whey Konzentrat und Casein ideal zum Muskelaufbau und -erhalt, mit Laktase - made in Germany" }
+      ],
+      "note": "PROTEIN MILKSHAKE Kategorie-Block. Lead-Image plus 2 ASIN-Tiles."
+    },
+    {
+      "userModuleId": 2, "widgetIdx": 2, "top": 868, "height": 371,
+      "widgetClass": "EditorialRow", "layoutType": "kategorie_lead_image_plus_2_asins", "tileCount": 3,
+      "leadImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/a901c663-381d-48f8-8c35-1d2d207061e3._SL5000_CR0%2C0%2C5000%2C2500_SX750_SY375_.jpg", "linkPageId": "55FD402B-A0DC-4A7C-BD00-2D0ECE353C4D", "ariaLabel": "Advertisement for Clear Protein drink showing a glass jar filled with orange liquid, ice, and citrus slices. Blue background with product features: sugar-free, high in protein, and fruit-based." },
+      "asins": ["B0BNC77W7N","B0BNC6NJSG"],
+      "tiles": [
+        { "asin": "B0BNC77W7N", "productTitleAria": "MORE Clear Protein, Mango Juice, 600 g, Protein Drink mit Whey Isolat, clear Whey - made in Germany" },
+        { "asin": "B0BNC6NJSG", "productTitleAria": "MORE Clear Protein, Peach Passionfruit Ice Tea, 600 g, Protein Drink mit Whey Isolat - made in Germany" }
+      ],
+      "note": "CLEAR PROTEIN Kategorie-Block."
+    },
+    {
+      "userModuleId": 3, "widgetIdx": 3, "top": 1239, "height": 371,
+      "widgetClass": "EditorialRow", "layoutType": "kategorie_lead_image_plus_2_asins", "tileCount": 3,
+      "leadImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/95adff31-0700-4e0e-b0c6-c04bc0524ca5._SL5000_CR0%2C0%2C5000%2C2500_SX750_SY375_.jpg", "linkPageId": "3D5F63E7-0917-4ABF-9F07-7D10B2AC1639", "ariaLabel": "Iced coffee drink with whipped cream, chocolate drizzle, and cookie crumbles. Product features high protein content, as indicated by icons. Purple background with white text." },
+      "asins": ["B0GBXNTKZV","B0CJFFFGFG"],
+      "tiles": [
+        { "asin": "B0GBXNTKZV", "productTitleAria": "MORE Protein Iced Coffee, 650g, Dark Chocolate Lover, Eiskaffee mit wertvollen Proteinen, wenig Zucker und Fett - made in Germany" },
+        { "asin": "B0CJFFFGFG", "productTitleAria": "MORE Protein Iced Coffee, 500g, Vanilla Chocolate Chip Cookie, Eiskaffee mit wertvollen Proteinen, wenig Zucker und Fett - made in Germany" }
+      ],
+      "note": "PROTEIN ICED COFFEE Kategorie-Block."
+    },
+    {
+      "userModuleId": 4, "widgetIdx": 4, "top": 1610, "height": 605,
+      "widgetClass": "EditorialRow", "layoutType": "featured_deal_asin_showcase", "tileCount": 1,
+      "featuredAsin": "B0FKNFQWJY",
+      "featuredProductTitle": "MORE Protein Milkyccino, White Almond Coconut, 500 g, Mix aus Whey Konzentrat und Casein ideal zum Muskelaufbau und -erhalt, mit Koffein & Laktase - made in Germany",
+      "rating": "4,3 von 5 Sternen, 113 Bewertungen", "imgCount": 24, "videoCount": 6,
+      "note": "FeaturedDeal Milkyccino als Hero-Produkt der Page. Bridge zwischen oberen und unteren Kategorie-Bloecken."
+    },
+    {
+      "userModuleId": 5, "widgetIdx": 5, "top": 2216, "height": 371,
+      "widgetClass": "EditorialRow", "layoutType": "kategorie_lead_image_plus_2_asins", "tileCount": 3,
+      "asins": ["B0CDX6K61G","B0BLZ5DB55"],
+      "tiles": [
+        { "asin": "B0CDX6K61G", "productTitleAria": "MORE Vegan Protein, 600 g, Vanilla, Proteinpulver mit bis zu 26 g Protein pro Portion, mit Soja- und Mandelprotein - made in Germany" },
+        { "asin": "B0BLZ5DB55", "productTitleAria": "MORE Vegan Protein - Fine Milk Chocolate - 600 g, Proteinpulver mit bis zu 22 g Protein pro Portion, mit Erbsen-, Sonnenblumen- und Kürbiskernprotein - made in Germany" }
+      ],
+      "leadImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c2fabcdf-b33e-4bab-8c6b-2051eda2a89b._SL5000_CR0%2C0%2C5000%2C2500_SX750_SY375_.jpg", "linkPageId": "A217601D-395D-4DF1-B940-4BABA3DAD6E5", "ariaLabel": "Vegan protein product advertisement featuring a creamy vanilla milkshake topped with vanilla flower, against green background with protein benefit icons." },
+      "note": "VEGAN PROTEIN Kategorie-Block."
+    },
+    {
+      "userModuleId": 6, "widgetIdx": 6, "top": 2587, "height": 371,
+      "widgetClass": "EditorialRow", "layoutType": "kategorie_lead_image_plus_2_asins", "tileCount": 3,
+      "leadImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/f3a60454-a9d8-4bfd-857a-edddbc83f33a._SL5000_CR0%2C0%2C5000%2C2500_SX750_SY375_.jpg", "linkPageId": "483E27E9-01B3-441C-B1B9-DD468E87F786", "ariaLabel": "Clear Glow Peptides product advertisement featuring iced tea with citrus slices, alongside three circular icons indicating product benefits." },
+      "asins": ["B0CJCGS88X","B0CN6NFXRQ"],
+      "tiles": [
+        { "asin": "B0CJCGS88X", "productTitleAria": "MORE Clear Glow Peptides, Wassermelone, 600 g, unterstützt Muskeln, Haut, Gelenke, Sehnen und Bänder - made in Germany" },
+        { "asin": "B0CN6NFXRQ", "productTitleAria": "MORE Clear Glow Peptides, Green Tea Lime, 600 g, unterstützt Muskeln, Haut, Gelenke, Sehnen und Bänder - made in Germany" }
+      ],
+      "note": "CLEAR GLOW PEPTIDES Kategorie-Block."
+    },
+    {
+      "userModuleId": 7, "widgetIdx": 7, "top": 2958, "height": 750,
+      "widgetClass": "EditorialRow", "layoutType": "full_width_image_creative", "tileCount": 1,
+      "mainImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d6865a5f-5e09-4f0a-b72c-b6bb65ac059d._CR0%2C0%2C1280%2C640_SX1500_.jpg" },
+      "links": [{"pageId": "8790A8BC-31A4-4810-8B75-BF1AFCE858B5", "ariaLabel": "Weitere Informationen"}],
+      "note": "Produktselektor-Banner."
+    },
+    {
+      "userModuleId": 8, "widgetIdx": 8, "top": 3708, "height": 750,
+      "widgetClass": "EditorialRow", "layoutType": "full_width_image_closing", "tileCount": 1,
+      "mainImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d359c2c9-b952-47a2-b88a-864e11ffc31c._CR0%2C0%2C3000%2C1500_SX1500_.png" },
+      "links": [{"pageId": "F081FD4B-1559-4A38-A4F3-FC8E6732BCEB", "ariaLabel": "Weitere Informationen"}],
+      "note": "Closing-Banner."
+    }
+  ],
+  "excluded": [
+    { "widgetIdx": 9, "top": 4458, "height": 200, "reason": "Amazon Share-Footer." }
+  ],
+  "uniqueAsinsOnPage": ["B0GBWW4R88","B07VFSG17K","B0BNC77W7N","B0BNC6NJSG","B0GBXNTKZV","B0CJFFFGFG","B0FKNFQWJY","B0CDX6K61G","B0BLZ5DB55","B0CJCGS88X","B0CN6NFXRQ"]
+}

@@ -1,0 +1,155 @@
+{
+  "brandName": "ESN (Elite Sports Nutrition)",
+  "storeUrl": "https://www.amazon.de/stores/ESN/page/F5F8CAD5-7990-44CF-9F5B-61DFFF5E8581",
+  "totalPages": 21,
+  "extractedFromV3At": "2026-05-23",
+  "pages": [
+    {
+      "position": 1,
+      "pageName": "Startseite",
+      "pageId": "F5F8CAD5-7990-44CF-9F5B-61DFFF5E8581",
+      "url": "https://www.amazon.de/stores/page/F5F8CAD5-7990-44CF-9F5B-61DFFF5E8581",
+      "hasOldModuleData": true
+    },
+    {
+      "position": 2,
+      "pageName": "Bestseller",
+      "pageId": "137F3F89-CAFA-407C-A947-6985172B0E8F",
+      "url": "https://www.amazon.de/stores/page/137F3F89-CAFA-407C-A947-6985172B0E8F",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 3,
+      "pageName": "Neuheiten",
+      "pageId": "F2F0F62B-C596-4268-893C-6D98CC7D8AAB",
+      "url": "https://www.amazon.de/stores/page/F2F0F62B-C596-4268-893C-6D98CC7D8AAB",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 4,
+      "pageName": "PROTEINE",
+      "pageId": "05C54A75-8964-41E5-9C10-19EB32583205",
+      "url": "https://www.amazon.de/stores/page/05C54A75-8964-41E5-9C10-19EB32583205",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 5,
+      "pageName": "DESIGNER WHEY",
+      "pageId": "8F9839F1-7792-40E9-BC87-D8253DB32928",
+      "url": "https://www.amazon.de/stores/page/8F9839F1-7792-40E9-BC87-D8253DB32928",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 6,
+      "pageName": "ISOCLEAR",
+      "pageId": "F7E30D0D-D2C4-4493-BE92-B7F0C8ACFC5C",
+      "url": "https://www.amazon.de/stores/page/F7E30D0D-D2C4-4493-BE92-B7F0C8ACFC5C",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 7,
+      "pageName": "FLEXPRESSO",
+      "pageId": "2B83B00A-4B34-4164-AE99-370F051B7A19",
+      "url": "https://www.amazon.de/stores/page/2B83B00A-4B34-4164-AE99-370F051B7A19",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 8,
+      "pageName": "ISOWHEY HARDCORE",
+      "pageId": "7A0AC72C-C59B-4C49-84EE-3E43C4D89AF1",
+      "url": "https://www.amazon.de/stores/page/7A0AC72C-C59B-4C49-84EE-3E43C4D89AF1",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 9,
+      "pageName": "VITALSTOFFE",
+      "pageId": "4903A282-E37D-4D91-BB9F-281622934C0B",
+      "url": "https://www.amazon.de/stores/page/4903A282-E37D-4D91-BB9F-281622934C0B",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 10,
+      "pageName": "PERFORMANCE",
+      "pageId": "58488065-5C6A-4494-A3DB-AB7D86AB0081",
+      "url": "https://www.amazon.de/stores/page/58488065-5C6A-4494-A3DB-AB7D86AB0081",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 11,
+      "pageName": "CREATINE",
+      "pageId": "7E18C3B4-AB9A-40B8-8555-84E9967150DF",
+      "url": "https://www.amazon.de/stores/page/7E18C3B4-AB9A-40B8-8555-84E9967150DF",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 12,
+      "pageName": "AUSDAUER",
+      "pageId": "61DF7835-CF8D-4EE0-A1FC-990F40F50828",
+      "url": "https://www.amazon.de/stores/page/61DF7835-CF8D-4EE0-A1FC-990F40F50828",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 13,
+      "pageName": "FOOD & SNACKS",
+      "pageId": "8781E3CA-F1B1-411C-9D4A-FDCEF80DE443",
+      "url": "https://www.amazon.de/stores/page/8781E3CA-F1B1-411C-9D4A-FDCEF80DE443",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 14,
+      "pageName": "RIEGEL",
+      "pageId": "4C57C5A9-3D08-4FC4-8FFA-1A84A0E71385",
+      "url": "https://www.amazon.de/stores/page/4C57C5A9-3D08-4FC4-8FFA-1A84A0E71385",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 15,
+      "pageName": "FLAVOR POWDER",
+      "pageId": "4DEFD04A-0432-4AB6-A9E3-B88BEBD37D72",
+      "url": "https://www.amazon.de/stores/page/4DEFD04A-0432-4AB6-A9E3-B88BEBD37D72",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 16,
+      "pageName": "SYRUPS",
+      "pageId": "232C8E9D-A079-4E48-9657-88134BF45B97",
+      "url": "https://www.amazon.de/stores/page/232C8E9D-A079-4E48-9657-88134BF45B97",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 17,
+      "pageName": "ZUBEHÖR",
+      "pageId": "A009E059-5CA2-40E3-9324-76C75CA694D7",
+      "url": "https://www.amazon.de/stores/page/A009E059-5CA2-40E3-9324-76C75CA694D7",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 18,
+      "pageName": "BUNDLES",
+      "pageId": "70838D1C-F961-4660-A2B1-84A5A5A69D67",
+      "url": "https://www.amazon.de/stores/page/70838D1C-F961-4660-A2B1-84A5A5A69D67",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 19,
+      "pageName": "ALLE PRODUKTE",
+      "pageId": "9FED5CCC-6284-44BD-AD83-AAEEBF48E23F",
+      "url": "https://www.amazon.de/stores/page/9FED5CCC-6284-44BD-AD83-AAEEBF48E23F",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 20,
+      "pageName": "PRODUKTSELEKTOR",
+      "pageId": "2AFC0A42-A702-462D-B255-B5203C7449F8",
+      "url": "https://www.amazon.de/stores/page/2AFC0A42-A702-462D-B255-B5203C7449F8",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 21,
+      "pageName": "ÜBER ESN",
+      "pageId": "44C5F932-97AA-4A1B-A7F1-207D5450AF8F",
+      "url": "https://www.amazon.de/stores/page/44C5F932-97AA-4A1B-A7F1-207D5450AF8F",
+      "hasOldModuleData": false
+    }
+  ]
+}

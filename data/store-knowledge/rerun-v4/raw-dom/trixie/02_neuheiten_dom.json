@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "store": "trixie",
+    "pageSlug": "02_neuheiten",
+    "pageId": "41FA7DEE-3E12-4288-97A2-C3C4BF57CB4A",
+    "pageName": "Neuheiten",
+    "pageLevel": 1,
+    "extractedAt": "2026-05-23",
+    "pageUrl": "https://www.amazon.de/stores/page/41FA7DEE-3E12-4288-97A2-C3C4BF57CB4A",
+    "scrollHeight": 5712,
+    "domRowsTotal": 6,
+    "totalImages": 28,
+    "totalVideos": 0,
+    "totalUniqueAsins": 25,
+    "note": "Schlanke Neuheiten-Page: BrandHeader plus StoreHero plus ein einziges grosses EditorialRow_double Hero plus ProductGrid 25 Neuheiten-ASINs plus Tile-Pair plus Footer."
+  },
+  "modules": [
+    {"domRowIdx": 0, "top": 99, "height": 395, "widgetType": "BrandHeader", "imgCount": 1, "tileCount": 0, "asinCount": 0, "note": "Nav header mit Brand-Banner und Mega-Nav (STARTSEITE, ALLE ANGEBOTE, NEUHEITEN, TRIXIE SERIEN, HUND, KATZE, KLEINTIER, VOGEL, TERRARISTIK, TIERE IM GARTEN, MEHR). CTA: Folgen."},
+    {"domRowIdx": 1, "top": 99, "height": 300, "widgetType": "StoreHero_overlap", "imgCount": 1, "note": "Brand-Banner als Hero-Overlay innerhalb BrandHeader. TRIXIE rotes Logo."},
+    {"domRowIdx": 2, "top": 502, "height": 743, "widgetType": "EditorialRow_double", "imgCount": 1, "videoCount": 0, "tileCount": 1, "asinCount": 0, "note": "Hero-Banner (3000x1500 ausgespielt als 1500x743) mit interaktiver Hotspot-Funktion 'Produkte ansehen' (interactiveImage Tile). Stellt Highlight-Neuheit dar."},
+    {"domRowIdx": 3, "top": 1244, "height": 3007, "widgetType": "ProductGrid", "imgCount": 25, "asinCount": 25, "note": "ProductGrid 25 Neuheiten-ASINs (Schwerpunkt: Trixie smarte Katzentoilette 40050, Tofu-Klumpstreu 40250/40251, Katzensnack Premio Pulled Tuna 42694, Mini Cubes 42765, weitere Katze/Hund/Kleintier-Neuheiten).", "asins": ["B0FPGF531Y","B0FXM8XJ9L","B0FXMCCK1J","B0FXWYNTM8","B0FXX16XFC","B0FXGQBQZ5","B0FXWX3J33","B0FXGR2MBV","B0FXGPQT32","B0FXGRMVJ1","B0FXGRB4RP","B0FXWY3D78","B0FXGSMLL3","B0FXWZP66S","B0FXM8S52Y","B0FXWYVLJH","B0FXMBY4D2","B0FXMDCWMQ","B0FXMCPVYY","B0FXMBH3Q4","B0FXMDNDRN","B0FXM9YP3H","B0FXM82J8T","B0FXMCJHWQ","B0FXM9M6GY"]},
+    {"domRowIdx": 4, "top": 4251, "height": 200, "widgetType": "EditorialRow_double", "imgCount": 0, "tileCount": 1, "note": "Footer-naher Tile-Pair-Spacer. Niedrige Hoehe (200) deutet auf reduzierten Spacer hin."},
+    {"domRowIdx": 5, "top": 4451, "height": 200, "widgetType": "AmazonShareFooter", "note": "Amazon Share Footer Teilen-Bereich."}
+  ]
+}

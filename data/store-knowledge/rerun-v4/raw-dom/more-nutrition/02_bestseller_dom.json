@@ -1,0 +1,218 @@
+{
+  "_meta": {
+    "store": "more-nutrition",
+    "pageSlug": "02_bestseller",
+    "pageId": "B0B4CEEB-909A-4DC6-A571-6AA4D718DB21",
+    "url": "https://www.amazon.de/stores/page/B0B4CEEB-909A-4DC6-A571-6AA4D718DB21",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_v4_widget_scan",
+    "scrollHeight": 9035,
+    "viewport": { "w": 1582, "h": 872 },
+    "domWidgetsTotal": 12,
+    "note": "Bestseller-Page. Hat ein dynamisches 'Empfohlene Angebote' Amazon-native Modul oben (lazy load, kein Brand-Design), ein Video, vier Tile-Row Sequenzen jeweils Kategorie-Bild plus 4 ASIN-Tiles, ProductGrid 9 ASINs Vitalstoffe, sowie Promo-Banner Produktselektor und Closing-Banner."
+  },
+  "hero": {
+    "section": "hero",
+    "widgetIdx": 0,
+    "top": 99,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/6ddb04ce-8539-4a64-86dc-23d78715e418._CR0%2C0%2C1280%2C256_SX1500_.jpg",
+    "imageSize": { "w": 1280, "h": 256 },
+    "imageAltText": "",
+    "note": "Hero-Banner BESTSELLER-Variante oberhalb der Menueleiste. Bildtext per Vision lesbar."
+  },
+  "navigation": "siehe 01_startseite_dom.json (identische 15 Page-Links)",
+  "modules": [
+    {
+      "userModuleId": 1,
+      "widgetIdx": 1,
+      "top": 502,
+      "height": 125,
+      "widgetClass": "ProductGrid",
+      "layoutType": "amazon_recommended_offers",
+      "tileCount": 0,
+      "headings": ["Empfohlene Angebote"],
+      "note": "Amazon-natives 'Empfohlene Angebote' Modul, lazy-loaded. Kein Brand-Design, Amazon-Mechanik."
+    },
+    {
+      "userModuleId": 2,
+      "widgetIdx": 2,
+      "top": 627,
+      "height": 743,
+      "widgetClass": "EditorialRow",
+      "layoutType": "video_module",
+      "tileCount": 1,
+      "videoCount": 1,
+      "note": "Brand-Video, kein DOM-Zugriff auf Inhalt. Vision Follow-up empfohlen."
+    },
+    {
+      "userModuleId": 3,
+      "widgetIdx": 3,
+      "top": 1369,
+      "height": 743,
+      "widgetClass": "EditorialRow",
+      "layoutType": "kategorie_lead_image_plus_4_asins",
+      "tileCount": 5,
+      "leadImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e111c5be-3f4e-4aef-8468-e9b9026f84d3._CR0%2C0%2C1500%2C1500_SX750_SY750_.jpg",
+        "size": { "w": 750, "h": 750 },
+        "linkPageId": "DA439A68-D45D-4BB9-97CC-5D706DC1CF89",
+        "ariaLabel": "Three colorful fruit-infused drinks in glasses with ice, garnished with mint leaves and fruit slices. Product name 'ZERUP' displayed prominently."
+      },
+      "tiles": [
+        { "asin": "B0CF65DKX9", "productTitleAria": "MORE Zerup, Pink Grapefruit, 65 ml, für bis zu 8 l Fertiggetränk, zuckerfreier Sirup mit u.a. echten Fruchtextrakten, vegan, zero Kalorien - made in Germany", "productImageSrc": "https://m.media-amazon.com/images/I/61PMzkrn71L._AC_CR0%2C0%2C0%2C0_SX375_.jpg" },
+        { "asin": "B0C3MCXRG1", "productTitleAria": "MORE Zerup, Lemon Iced Tea, 65 ml, für bis zu 8 l Fertiggetränk, zuckerfreier Sirup mit u.a. echten Fruchtextrakten, vegan, zero Kalorien - made in Germany", "productImageSrc": "https://m.media-amazon.com/images/I/51xMZD47jpL._AC_CR0%2C0%2C0%2C0_SX375_.jpg" },
+        { "asin": "B0C3M6NRXD", "productTitleAria": "MORE Zerup, Capri Orange, 65 ml, für bis zu 8 l Fertiggetränk, zuckerfreier Sirup mit u.a. echten Fruchtextrakten, vegan, zero Kalorien - made in Germany", "productImageSrc": "https://m.media-amazon.com/images/I/61JumCh+4zL._AC_CR0%2C0%2C0%2C0_SX375_.jpg" },
+        { "asin": "B0C3LZ2RC2", "productTitleAria": "MORE Zerup, Red Apple, 65 ml, für bis zu 8 l Fertiggetränk, zuckerfreier Sirup mit u.a. echten Fruchtextrakten, vegan, zero Kalorien - made in Germany", "productImageSrc": "https://m.media-amazon.com/images/I/6150kw8-7KL._AC_CR0%2C0%2C0%2C0_SX375_.jpg" }
+      ],
+      "note": "ZERUP-Kategorie-Block. Erstes Tile ist Lifestyle-Image mit Kategorienamen, klickt auf ZERUP Page. Naechste 4 Tiles sind ASIN-Schnellansicht-Tiles. Layout 5er-Reihe."
+    },
+    {
+      "userModuleId": 4,
+      "widgetIdx": 4,
+      "top": 2112,
+      "height": 743,
+      "widgetClass": "EditorialRow",
+      "layoutType": "kategorie_lead_image_plus_4_asins",
+      "tileCount": 5,
+      "tiles": [
+        { "asin": "B0D3M1JNDG", "productTitleAria": "MORE Chunky Flavour, Vanilla Perfection, 150 g, vegan, Geschmackspulver zum Süßen, ohne viel Zucker und Kalorien, mit Inulin und Laktase", "productImageSrc": "https://m.media-amazon.com/images/I/61SAhl+Y1eL._AC_CR0%2C0%2C0%2C0_SX375_.jpg" },
+        { "asin": "B0D3M26DTL", "productTitleAria": "MORE Chunky Flavour, Fudge Brownie, 150 g, Geschmackspulver zum Süßen, ohne viel Zucker und Kalorien, mit Inulin und Laktase", "productImageSrc": "https://m.media-amazon.com/images/I/61kq5x7HZUL._AC_CR0%2C0%2C0%2C0_SX375_.jpg" },
+        { "asin": "B0D3M2KFC6", "productTitleAria": "MORE Chunky Flavour, Stracciatella, 150 g, vegan, Geschmackspulver zum Süßen, ohne viel Zucker und Kalorien, mit Inulin und Laktase", "productImageSrc": "https://m.media-amazon.com/images/I/61ZMunu+pJL._AC_CR0%2C0%2C0%2C0_SX375_.jpg" },
+        { "asin": "B0D3M23WNV", "productTitleAria": "MORE Chunky Flavour, Blueberry Cheesecake, 150 g, vegan, Geschmackspulver zum Süßen, ohne viel Zucker und Kalorien, mit Inulin und Laktase", "productImageSrc": "https://m.media-amazon.com/images/I/61ukKhNiZtL._AC_CR0%2C0%2C0%2C0_SX375_.jpg" }
+      ],
+      "leadImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/ee234500-3692-449d-b34a-1d734e00897a._CR0%2C0%2C1500%2C1500_SX750_SY750_.jpg",
+        "size": { "w": 750, "h": 750 },
+        "linkPageId": "D5FF78A5-8306-4D4B-80F7-F20BFBA08472",
+        "ariaLabel": "Two bowls of dessert: one with granola, peaches, and caramel; another with pink swirled yogurt. 'CHUNKY FLAVOUR' text at bottom."
+      },
+      "note": "CHUNKY FLAVOUR-Kategorie-Block. Vier ASIN-Tiles links plus Lead-Image rechts. Spiegel-Variante des ZERUP-Blocks."
+    },
+    {
+      "userModuleId": 5,
+      "widgetIdx": 5,
+      "top": 2854,
+      "height": 743,
+      "widgetClass": "EditorialRow",
+      "layoutType": "kategorie_lead_image_plus_4_asins",
+      "tileCount": 5,
+      "leadImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/0bb179c2-a6de-47b6-ae3a-89d7efbec543._CR0%2C0%2C1500%2C1500_SX750_SY750_.jpg",
+        "size": { "w": 750, "h": 750 },
+        "linkPageId": "5C4AE7B3-FEE1-4887-B719-D0188FF74E51",
+        "ariaLabel": "Two protein shakes on purple background. One white shake topped with flower, one purple shake with fruit toppings. Text 'PROTEIN' at bottom."
+      },
+      "tiles": [
+        { "asin": "B07VFSG17K", "productTitleAria": "MORE Protein, Vanille-Eiscreme, 600 g, Mix aus Whey Konzentrat und Casein ideal zum Muskelaufbau und -erhalt, mit Laktase - made in Germany", "productImageSrc": "https://m.media-amazon.com/images/I/61N9yZfClUL._AC_CR0%2C0%2C0%2C0_SX375_.jpg" },
+        { "asin": "B07VHZD7YH", "productTitleAria": "MORE Protein, Eiskaffee, 600 g, Mix aus Whey Konzentrat und Casein, ideal zum Muskelaufbau und -erhalt, mit Laktase, geprüfte Qualität - made in Germany", "productImageSrc": "https://m.media-amazon.com/images/I/61zQGRuwTIL._AC_CR0%2C0%2C0%2C0_SX375_.jpg" },
+        { "asin": "B07VDR1TCP", "productTitleAria": "MORE Protein, Geschmacksneutral, 600 g, Mix aus Whey Konzentrat und Casein ideal zum Muskelaufbau und -erhalt, mit Laktase - made in Germany", "productImageSrc": "https://m.media-amazon.com/images/I/61IP1gZT7oL._AC_CR0%2C0%2C0%2C0_SX375_.jpg" },
+        { "asin": "B0B8VKF7LH", "productTitleAria": "MORE Protein Milkshake, Cinnalicious, 600 g, Mix aus Whey Konzentrat und Casein ideal zum Muskelaufbau und -erhalt, mit Laktase - made in Germany", "productImageSrc": "https://m.media-amazon.com/images/I/61sOfMC3fmL._AC_CR0%2C0%2C0%2C0_SX375_.jpg" }
+      ],
+      "note": "PROTEIN MILKSHAKE-Kategorie-Block. Lead Image links plus 4 ASIN-Tiles rechts. Lead klickt auf PROTEIN MILKSHAKE Page."
+    },
+    {
+      "userModuleId": 6,
+      "widgetIdx": 6,
+      "top": 3597,
+      "height": 743,
+      "widgetClass": "EditorialRow",
+      "layoutType": "kategorie_lead_image_plus_3_asins",
+      "tileCount": 4,
+      "leadImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/077a5d7c-4f99-4682-9b39-ee1909ddef0c._CR0%2C0%2C1500%2C1500_SX750_SY750_.jpg",
+        "size": { "w": 750, "h": 750 },
+        "linkPageId": "48018341-612A-4387-8B80-C2B4BE8FD4E1",
+        "ariaLabel": "Protein bar with melted white coating on pink background. Bar interior visible, showing golden-brown filling. Text reads 'PROTEIN BARS'."
+      },
+      "tiles": [
+        { "asin": "B0G4DMP28R", "productTitleAria": "MORE Protein Satisbites, 12er Box Proteinriegel, 12 x 2 x 25 g, Dark Chocolate Caramel Brownie, bis zu 16 g Protein pro Portion, ohne Zuckerzusatz, made in Germany", "productImageSrc": "https://m.media-amazon.com/images/I/71rM5V1QdzL._AC_CR0%2C0%2C0%2C0_SX750_.jpg" },
+        { "asin": "B0DRW5MBG2", "productTitleAria": "MORE Protein Bar, 10er Box, 10 x 50 g, White Chocolate Caramel Crunch, Protein Riegel ohne Zuckerzusatz (Design kann variieren)", "productImageSrc": "https://m.media-amazon.com/images/I/81f0tGy2YmL._AC_CR0%2C0%2C0%2C0_SX375_.jpg" },
+        { "asin": "B0CJFTKZ2M", "productTitleAria": "MORE Protein Bar, 10er Box Protein Riegel, 10 x 50 g, Caramel Crunch, Protein Riegel ohne Zuckerzusatz (Design kann variieren)", "productImageSrc": "https://m.media-amazon.com/images/I/81w+EZ0T5EL._AC_CR0%2C0%2C0%2C0_SX375_.jpg" }
+      ],
+      "note": "RIEGEL & LIGHT FOOD-Kategorie-Block. Lead-Image plus 3 ASIN-Tiles. Visible heading 'More Protein Satisbites' im DOM."
+    },
+    {
+      "userModuleId": 7,
+      "widgetIdx": 7,
+      "top": 4339,
+      "height": 438,
+      "widgetClass": "EditorialRow",
+      "layoutType": "editorial_banner_intro",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d43a5c24-915a-4a55-b2b2-a6cd09b1ab3a._CR0%2C82%2C1680%2C483_SX1500_.jpg",
+        "size": { "w": 1500, "h": 431 }
+      },
+      "links": [
+        { "pageId": "DCB9D63B-78C7-46D4-8DEA-53DB08EDEF28", "ariaLabel": "Various supplement capsules and pills scattered on a green background. Text 'VITALSTOFFE' prominently displayed, suggesting nutrient or vitamin supplements." }
+      ],
+      "note": "Sektion-Intro Banner VITALSTOFFE auf gruenem Hintergrund, klickt auf VITALSTOFFE Page."
+    },
+    {
+      "userModuleId": 8,
+      "widgetIdx": 8,
+      "top": 4777,
+      "height": 1310,
+      "widgetClass": "ProductGrid",
+      "layoutType": "product_grid_vitalstoffe",
+      "tileCount": 9,
+      "asins": ["B0CJFHP8CJ", "B0GPD88D7W", "B0BJW1QSJW", "B0BQ3TT4CB", "B0CD2M6TDJ", "B0DRVYV7TK", "B0GBX8YSS6", "B0GBX4CBCD", "B0CVBFT8ZP"],
+      "asinTitlesVisible": [
+        "More Mineral Complete V4, 150 Kapseln mit Vitamin-Mineralstoff-Komplex (Design kann variieren)",
+        "MORE Essentials O3-D3-K2, 60 Fischöl Kapseln mit 500mg EPA & 250mg DHA pro Tag, Vitamin D3 & Vitamin K2, Kapselhülle aus Rindergelatine",
+        "MORE Vegan Essentials O3-D3-K2, 80 Kapseln - Veganes Omega 3 aus Algenöl, mit Vitamin D3 & Vitamin K2, Kapselhülle aus Stärke (Design kann variieren)",
+        "MORE Curcumore, 180 g - 210 Kurkuma Kapseln mit Curcuminoiden, Sulforaphan und Piperin, mit Biotin, vegan (Design kann variieren)",
+        "MORE Harmony, 90 Kapseln, mit Ashwagandha KSM-66, Melissenblüten und Maca, vegan",
+        "More Nutrition Cycle Balance 2.0, 120 Kapseln, mit L-Carnitin, Mineralstoffen, Vitaminen und Mönchspfeffer Extrakt (Design kann variieren)",
+        "MORE Collagen+, 300 g, Watermelon Mint, mit Kollagenhydrolysat, Hyaluronsäure, Vitaminen, Mineralstoffen und Glycin, made in Germany",
+        "MORE Creatin + Carnitin Sticks, 30 x 5 g, Zitrone, mit 3,5 g Kreatin Monohydrat und 1 g L-Carnitin-L-Tartrat",
+        "MORE Skin Structure Formula, Pink Grapefruit, 270 g, mit Kollagen & Hyaluron - made in Germany"
+      ],
+      "note": "ProductGrid 9 Vitalstoffe-ASINs als Hauptkonversion. Amazon rendert Titel, Sterne-Bewertung, Preis und Schnellansicht plus In den Einkaufswagen pro Tile."
+    },
+    {
+      "userModuleId": 9,
+      "widgetIdx": 9,
+      "top": 6087,
+      "height": 750,
+      "widgetClass": "EditorialRow",
+      "layoutType": "full_width_image_creative",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d6865a5f-5e09-4f0a-b72c-b6bb65ac059d._CR0%2C0%2C1280%2C640_SX1500_.jpg",
+        "size": { "w": 1280, "h": 640 }
+      },
+      "links": [
+        { "pageId": "8790A8BC-31A4-4810-8B75-BF1AFCE858B5", "ariaLabel": "Weitere Informationen" }
+      ],
+      "note": "Identisches Produktselektor-Promo-Banner wie auf Startseite, klickt auf PRODUKTSELEKTOR Page."
+    },
+    {
+      "userModuleId": 10,
+      "widgetIdx": 10,
+      "top": 6837,
+      "height": 737,
+      "widgetClass": "EditorialRow",
+      "layoutType": "full_width_image_closing",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d359c2c9-b952-47a2-b88a-864e11ffc31c._CR0%2C0%2C3000%2C1473_SX1500_.png",
+        "size": { "w": 1500, "h": 736 }
+      },
+      "links": [
+        { "pageId": "F081FD4B-1559-4A38-A4F3-FC8E6732BCEB", "ariaLabel": "Weitere Informationen" }
+      ],
+      "note": "Closing-Banner gross-quadratisch, klickt auf ALLE PRODUKTE Page."
+    }
+  ],
+  "excluded": [
+    { "widgetIdx": 11, "top": 7574, "height": 200, "reason": "Amazon Share-Footer." }
+  ],
+  "uniqueAsinsOnPage": [
+    "B0CF65DKX9","B0C3MCXRG1","B0C3M6NRXD","B0C3LZ2RC2",
+    "B0D3M1JNDG","B0D3M26DTL","B0D3M2KFC6","B0D3M23WNV",
+    "B07VFSG17K","B07VHZD7YH","B07VDR1TCP","B0B8VKF7LH",
+    "B0G4DMP28R","B0DRW5MBG2","B0CJFTKZ2M",
+    "B0CJFHP8CJ","B0GPD88D7W","B0BJW1QSJW","B0BQ3TT4CB","B0CD2M6TDJ","B0DRVYV7TK","B0GBX8YSS6","B0GBX4CBCD","B0CVBFT8ZP"
+  ]
+}

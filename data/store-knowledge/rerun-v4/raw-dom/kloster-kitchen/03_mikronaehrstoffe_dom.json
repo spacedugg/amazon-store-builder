@@ -1,0 +1,42 @@
+{
+  "_meta": {
+    "store": "kloster-kitchen",
+    "pageSlug": "03_mikronaehrstoffe",
+    "pageName": "Mikronaehrstoffe",
+    "pageId": "E337104E-63D3-41B2-8560-D92F482B2790",
+    "url": "https://www.amazon.de/stores/page/E337104E-63D3-41B2-8560-D92F482B2790",
+    "extractedAt": "2026-05-13",
+    "extractor": "chrome_mcp_javascript_tool_compact",
+    "extractorNote": "Phase 1 via Chrome MCP javascript_tool. Module-Skelett mit widgetClass (data-widgettype), tileCount ([class*=Tile]), imgCount, videoCount, productCount ([data-csa-c-item-id]). Hero-Bild-URLs, Tile-ASINs und Bildtexte gehen in Phase 2 per Vision.",
+    "scrollHeight": 5305,
+    "viewport": { "w": 1599, "h": 842 },
+    "domRowsTotal": 10,
+    "contentModulesCount": 8
+  },
+  "navigation": {
+    "pages": [
+      { "label": "Startseite",                "pageId": "34D4A812-9A68-4602-A6A0-30565D399620" },
+      { "label": "Ingwer Shots",              "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2" },
+      { "label": "Mikronaehrstoffe",          "pageId": "E337104E-63D3-41B2-8560-D92F482B2790" },
+      { "label": "Saftkuren",                 "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606" },
+      { "label": "Smoothies",                 "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E" },
+      { "label": "Shot Kur",                  "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043" },
+      { "label": "Probiersets / Geschenkidee","pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A" },
+      { "label": "Zubehoer",                  "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A" },
+      { "label": "Spar-Abo",                  "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E" },
+      { "label": "Ueber Uns",                 "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF" }
+    ]
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height": 400, "widgetClass": "Header",       "tileCount":  0, "imgCount": 3, "videoCount": 0, "productCount": 0, "note": "Nav header" },
+    { "domRowIdx": 1, "top":  507, "height": 167, "widgetClass": "EditorialRow", "tileCount":  7, "imgCount": 0, "videoCount": 1, "productCount": 0, "note": "Video-Modul" },
+    { "domRowIdx": 2, "top":  673, "height": 269, "widgetClass": "EditorialRow", "tileCount":  8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Image-Modul" },
+    { "domRowIdx": 3, "top":  942, "height": 371, "widgetClass": "EditorialRow", "tileCount": 30, "imgCount": 3, "videoCount": 0, "productCount": 2, "note": "Tile-Row 3-fach mit 2 ASIN-Karten" },
+    { "domRowIdx": 4, "top": 1313, "height": 371, "widgetClass": "EditorialRow", "tileCount": 16, "imgCount": 2, "videoCount": 0, "productCount": 0, "note": "Tile-Row 2-fach" },
+    { "domRowIdx": 5, "top": 1684, "height": 464, "widgetClass": "EditorialRow", "tileCount":  8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Image-Modul" },
+    { "domRowIdx": 6, "top": 2148, "height": 750, "widgetClass": "EditorialRow", "tileCount":  8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Hero Image" },
+    { "domRowIdx": 7, "top": 2898, "height": 628, "widgetClass": "EditorialRow", "tileCount":  8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Image-Modul" },
+    { "domRowIdx": 8, "top": 3525, "height": 318, "widgetClass": "EditorialRow", "tileCount":  8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Image-Modul" },
+    { "domRowIdx": 9, "top": 3843, "height": 200, "widgetClass": "EditorialRow", "tileCount":  4, "imgCount": 0, "videoCount": 0, "productCount": 0, "note": "amazon_share_footer" }
+  ]
+}

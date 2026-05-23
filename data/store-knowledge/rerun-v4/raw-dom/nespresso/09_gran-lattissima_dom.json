@@ -1,0 +1,27 @@
+{
+  "_meta": {
+    "store": "nespresso",
+    "pageSlug": "09_gran-lattissima",
+    "pageName": "Gran Lattissima",
+    "pageId": "FD504600-955A-4341-AD26-CBB826145D63",
+    "url": "https://www.amazon.de/stores/page/FD504600-955A-4341-AD26-CBB826145D63",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_compact",
+    "scrollHeight": 4120,
+    "viewport": { "w": 1599, "h": 842 },
+    "domRowsTotal": 6,
+    "contentModulesCount": 6
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height": 395, "widgetType": "Header",       "tileCount": 0, "imgCount":  1, "videoCount":  0, "productCount": 0, "asinCount": 0, "note": "Nav header." },
+    { "domRowIdx": 1, "top":  502, "height": 553, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 32, "videoCount": 18, "productCount": 0, "asinCount": 1, "note": "Rich-Media-Tile Modell-Profil (32 Bilder + 18 Videos = Image+Video-Karussell pro Tile). Gran Lattissima Detail-Tile.", "sampleAsins": ["B0B8D8S7PB"] },
+    { "domRowIdx": 2, "top": 1054, "height": 553, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 32, "videoCount": 18, "productCount": 0, "asinCount": 1, "note": "Rich-Media-Tile Modell-Profil (zweite Variante).", "sampleAsins": ["B0B2S1YK1S"] },
+    { "domRowIdx": 3, "top": 1607, "height": 743, "widgetType": "EditorialRow", "tileCount": 1, "imgCount":  0, "videoCount":  1, "productCount": 0, "asinCount": 0, "note": "Hero-Video Vollformat." },
+    { "domRowIdx": 4, "top": 2349, "height": 309, "widgetType": "EditorialRow", "tileCount": 1, "imgCount":  1, "videoCount":  0, "productCount": 0, "asinCount": 0, "note": "Section Intro / Brand-Statement Banner." },
+    { "domRowIdx": 5, "top": 2658, "height": 200, "widgetType": "EditorialRow", "tileCount": 1, "imgCount":  0, "videoCount":  0, "productCount": 0, "asinCount": 0, "note": "Amazon Share Footer." }
+  ],
+  "openQuestionsLocal": [
+    "Auffaellig: Gran Lattissima zeigt RICH-MEDIA-TILES mit 32 Bildern und 18 Videos pro Tile. Eine sehr Premium-Variante des Modell-Profil-Patterns.",
+    "Pattern: rich_media_tile_with_carousel mit Image+Video-Pool pro Modell-Tile."
+  ]
+}

@@ -1,0 +1,471 @@
+{
+  "schemaVersion": "v4-2026-05",
+  "store": "bedsure",
+  "pageUrl": "https://www.amazon.de/stores/page/2F249C26-269C-4A0B-ACB2-7AB6436FFDC5",
+  "pageName": "Kuscheldecken",
+  "pageId": "2F249C26-269C-4A0B-ACB2-7AB6436FFDC5",
+  "pageSlug": "03_kuscheldecken",
+  "pageLevel": 1,
+  "pageType": "hub_category",
+  "scrollHeight": 9617,
+  "viewport": { "w": 1599, "h": 842 },
+  "extractedAt": "2026-05-12",
+  "extractor": "v4_vision_pass_chrome_mcp",
+  "phase1Source": "data/store-knowledge/rerun-v4/raw-dom/bedsure/03_kuscheldecken_dom.json",
+  "contentStats": {
+    "domModules": 16,
+    "logicalModules": 16,
+    "brandModules": 14,
+    "asinGridSortiment": 19
+  },
+  "heroBanner": {
+    "description": "Identischer Bedsure Get cozy Hero ueber der Menueleiste.",
+    "textOnImage": { "visibleText": "Bedsure Get cozy", "textType": "tagline", "origin": "baked_in", "headline": "Bedsure", "subline": "Get cozy", "cta": null, "directionCues": null },
+    "estimatedDimensions": "3000x600",
+    "imageCategory": "lifestyle",
+    "elementProportions": { "lifestyle_photo": 80, "logo": 10, "text": 10 }
+  },
+  "modules": [
+    {
+      "position": 1, "moduleId": "kuscheldecken_mod_01", "moduleName": "Amazon Nav Header",
+      "layoutType": "amazon_nav_header", "layoutShape": "chrome_thin", "tileCount": 0,
+      "designIntent": "mimics_native_chrome", "designIntentDetail": "Amazon Store Navigation.",
+      "structuralPattern": "Schmale Leiste mit Brand-Logo, Folgen-Button, Page-Tabs und Suche. Breadcrumb Bedsure greater than Kuscheldecken.",
+      "moduleFunction": "Navigationschicht.",
+      "relationToPrevious": "none", "relationToNext": "hands_off_to_navigation",
+      "visualBridge": "hard_break_intentional", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Bedsure > Kuscheldecken Folgen STARTSEITE SANFT IN DEN SOMMER KUSCHELDECKEN", "textType": "section_label", "origin": "amazon_chrome", "headline": null, "subline": null, "cta": null, "directionCues": null },
+      "tiles": [], "dom": { "widgetClass": null, "visibleHeadings": [], "ctaLabels": ["Folgen"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": null, "toolLayoutName": null, "toolLayoutType": "amazon_native", "toolLayoutRole": "amazon_native"
+    },
+    {
+      "position": 2, "moduleId": "kuscheldecken_mod_02", "moduleName": "Page Hero Kuscheldecken und Wohndecken",
+      "layoutType": "editorial_section_intro", "layoutShape": "full_width_banner", "tileCount": 1,
+      "designIntent": "section_intro", "designIntentDetail": "Page-Hero mit eingebrannter Headline und Subline auf Lifestyle-Hintergrund einer weissen Kuscheldecke auf Sofa.",
+      "structuralPattern": "Full-Width-Hintergrund: weisse strukturierte Bedsure-Kuscheldecke locker drapiert ueber beiges Sofa. Mittig zentriert in dunkelgrauer Sans-Serif die Headline Kuscheldecken und Wohndecken, darunter zweizeilige Subline.",
+      "moduleFunction": "Page-Hero etabliert das Kategorie-Thema Kuscheldecken und Wohndecken plus Versprechen (Look-Upgrade plus Waerme).",
+      "relationToPrevious": "opens_section_thematically", "relationToNext": "sets_up_next",
+      "visualBridge": "hard_break_intentional", "copyBridge": "continues_idea", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Kuscheldecken & Wohndecken Diese vielseitigen Decken verleihen Ihrem Zuhause sofort einen frischen Look und spenden bei Bedarf zusaetzliche Waerme.", "textType": "headline", "origin": "baked_in", "headline": "Kuscheldecken & Wohndecken", "subline": "Diese vielseitigen Decken verleihen Ihrem Zuhause sofort einen frischen Look und spenden bei Bedarf zusaetzliche Waerme.", "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "text_image", "toolTileType": "image_text", "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Page Title Kuscheldecken Kategorie", "productOrCategoryRef": null, "intent": "story", "rolePosition": "Page Hero" },
+          "visualContent": "Hintergrundfoto: weisse strukturierte Bedsure-Kuscheldecke gefaltet auf beigem Sofa. Mittig der Headline-Block in dunkelgrauer Sans-Serif.",
+          "elementProportions": { "lifestyle_photo": 70, "text": 20, "solid_background": 10 },
+          "textOnImage": { "visibleText": "Kuscheldecken & Wohndecken Diese vielseitigen Decken verleihen Ihrem Zuhause sofort einen frischen Look und spenden bei Bedarf zusaetzliche Waerme.", "textType": "headline", "origin": "baked_in", "headline": "Kuscheldecken & Wohndecken", "subline": "Diese vielseitigen Decken verleihen Ihrem Zuhause sofort einen frischen Look und spenden bei Bedarf zusaetzliche Waerme.", "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": ["Kuscheldecken & Wohndecken"], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "section_intro"
+    },
+    {
+      "position": 3, "moduleId": "kuscheldecken_mod_03", "moduleName": "Kuscheldecke in Kord-Optik Hero plus USP-Block",
+      "layoutType": "editorial_tile_pair", "layoutShape": "split_two_columns", "tileCount": 2,
+      "designIntent": "product_showcase", "designIntentDetail": "2-Spalten-Modul mit linkem Lifestyle-Lead Kuscheldecke in Kord-Optik und rechtem USP-Block ueber 1,9 Millionen Verkauefe plus Farben-Auswahl plus Produkte ansehen CTA.",
+      "structuralPattern": "Linkes grosses Lifestyle-Tile: Frau mit lockigem Haar sitzt auf Sofa mit weisser Kord-Optik-Kuscheldecke, Bottom-Overlay Kuscheldecke in Kord-Optik. Rechtes Tile: Closeup weiche weisse Decke mit Hand-Detail, oben eingebrannt Ueber 1,9 Millionen Verkauefe weltweit. Global geschaetzt und von Experten empfohlen. Darunter Section-Heading SO WEICH, SO BESONDERS! plus 5 farbige Kord-Stoffmuster-Swatches (beige, dunkelgrau, hellblau, rosa, dunkelgruen). Dunkelgrauer Pill-CTA Produkte ansehen.",
+      "moduleFunction": "Hero-Tile fuer Bestseller-Kord-Kuscheldecke. Verbindet emotionale Lifestyle-Aufnahme mit Verkaufszahlen-Beweis und Farb-Auswahl als Conversion-Pfad.",
+      "relationToPrevious": "zooms_into_above_subject", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_subject_class", "copyBridge": "continues_idea", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Kuscheldecke in Kord-Optik UEBER 1,9 MILLIONEN VERKAUEFE WELTWEIT Global geschaetzt und von experten empfohlen SO WEICH, SO BESONDERS! Produkte ansehen", "textType": "headline_cta", "origin": "baked_in", "headline": "UEBER 1,9 MILLIONEN VERKAUEFE WELTWEIT", "subline": "Global geschaetzt und von experten empfohlen", "cta": "Produkte ansehen", "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Kuscheldecke in Kord-Optik", "ctaLabel": "Kuscheldecke in Kord-Optik" },
+          "tileContentTopic": { "primarySubject": "Kord-Optik Kuscheldecke Lifestyle Lead", "productOrCategoryRef": null, "intent": "navigate", "rolePosition": "Lifestyle Lead" },
+          "visualContent": "Lifestyle-Foto: junge Frau mit dunkelbraunem lockigem Haar im weissen Top sitzt auf einem Sofa, eingehuellt in eine weisse Decke mit ausgepraegter vertikaler Kord-Optik. Hinter ihr ein rosa Kissen. Bottom-Overlay weisse Schrift Kuscheldecke in Kord-Optik.",
+          "elementProportions": { "lifestyle_photo": 88, "product_photo": 5, "text": 7 },
+          "textOnImage": { "visibleText": "Kuscheldecke in Kord-Optik", "textType": "category_label", "origin": "layered_text", "headline": "Kuscheldecke in Kord-Optik", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Kuscheldecke in Kord-Optik"
+        },
+        { "position": 2, "imageCategory": "creative_lifestyle_hybrid", "toolTileType": "image_text", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Kuscheldecke in Kord-Optik Sortiment", "ctaLabel": "Produkte ansehen" },
+          "tileContentTopic": { "primarySubject": "Verkaufszahlen-Trust plus Farb-Auswahl-Conversion", "productOrCategoryRef": null, "intent": "convert", "rolePosition": "USP plus Color Picker" },
+          "visualContent": "Oberer Bereich: Closeup einer weissen Kord-Decke, eine Hand hebt den Stoff. Eingebrannte Headline UEBER 1,9 MILLIONEN VERKAUEFE WELTWEIT plus Subline Global geschaetzt und von experten empfohlen. Unterer Bereich heller Hintergrund mit Headline SO WEICH, SO BESONDERS! plus 5 Stoffmuster-Tiles in beige, dunkelgrau, hellblau, rosa, dunkelgruen. Darunter dunkelgrauer Pill-CTA Produkte ansehen.",
+          "elementProportions": { "lifestyle_photo": 40, "product_photo": 18, "text": 18, "cta_button": 6, "graphic_elements": 18 },
+          "textOnImage": { "visibleText": "UEBER 1,9 MILLIONEN VERKAUEFE WELTWEIT Global geschaetzt und von experten empfohlen SO WEICH, SO BESONDERS! Produkte ansehen", "textType": "headline_cta", "origin": "baked_in", "headline": "UEBER 1,9 MILLIONEN VERKAUEFE WELTWEIT", "subline": "Global geschaetzt und von experten empfohlen", "cta": "Produkte ansehen", "directionCues": null },
+          "ctaText": "Produkte ansehen", "linksTo": "Kuscheldecke in Kord-Optik Sortiment"
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": [], "ctaLabels": ["Produkte ansehen"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "std-2equal", "toolLayoutName": "2 Equal", "toolLayoutType": "standard", "toolLayoutRole": "editorial_pair"
+    },
+    {
+      "position": 4, "moduleId": "kuscheldecken_mod_04", "moduleName": "Bubble Kuscheldecke plus Karierte Jacquard Pair",
+      "layoutType": "editorial_tile_pair", "layoutShape": "split_two_columns", "tileCount": 2,
+      "designIntent": "product_showcase", "designIntentDetail": "2-Tile-Pair mit zwei Lifestyle-Aufnahmen fuer zwei Decken-Varianten Bubble Kuscheldecke und Karierte Jacquard Flauschige Kuscheldecke.",
+      "structuralPattern": "Linkes Tile blau-rauestige Bubble-Decke auf Sofa mit Bottom-Overlay weisser Schrift. Rechtes Tile Frau mit roter Haarpracht eingehuellt in beige-karierte Jacquard-Decke, Bottom-Overlay weisse Schrift.",
+      "moduleFunction": "Sortimentsschau mit zwei differenzierenden Decken-Varianten in unterschiedlichen Materialien.",
+      "relationToPrevious": "repeats_pattern", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_pattern", "copyBridge": "repeats_keyword", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Bubble Kuscheldecke Leicht und doch warm, ideal fuer jeden gemuetlichen Moment. Karierte Jacquard Flauschige Kuscheldecke Diese Decke bietet das ideale Gleichgewicht zwischen Gewicht und Waerme.", "textType": "category_label", "origin": "layered_text", "headline": null, "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Bubble Kuscheldecke", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Bubble Kuscheldecke Lifestyle", "productOrCategoryRef": null, "intent": "navigate", "rolePosition": "Decken-Variante 1" },
+          "visualContent": "Lifestyle: dunkelblaue gewellte Bubble-Decke locker auf Sofa, Bottom-Overlay weisse Schrift Bubble Kuscheldecke plus kursive Subline Leicht und doch warm, ideal fuer jeden gemuetlichen Moment.",
+          "elementProportions": { "lifestyle_photo": 85, "text": 15 },
+          "textOnImage": { "visibleText": "Bubble Kuscheldecke Leicht und doch warm, ideal fuer jeden gemuetlichen Moment.", "textType": "category_label", "origin": "layered_text", "headline": "Bubble Kuscheldecke", "subline": "Leicht und doch warm, ideal fuer jeden gemuetlichen Moment.", "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Bubble Kuscheldecke"
+        },
+        { "position": 2, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Karierte Jacquard Flauschige Kuscheldecke", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Karierte Jacquard Flauschige Kuscheldecke Lifestyle", "productOrCategoryRef": null, "intent": "navigate", "rolePosition": "Decken-Variante 2" },
+          "visualContent": "Lifestyle: Frau mit rotem Haar im weissen Top, haelt eine beige Jacquard-Decke mit Karo-Muster eng an sich. Bottom-Overlay weisse Schrift Karierte Jacquard Flauschige Kuscheldecke plus kursive Subline.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Karierte Jacquard Flauschige Kuscheldecke Diese Decke bietet das ideale Gleichgewicht zwischen Gewicht und Waerme.", "textType": "category_label", "origin": "layered_text", "headline": "Karierte Jacquard Flauschige Kuscheldecke", "subline": "Diese Decke bietet das ideale Gleichgewicht zwischen Gewicht und Waerme.", "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Karierte Jacquard Flauschige Kuscheldecke"
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": [], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "std-2equal", "toolLayoutName": "2 Equal", "toolLayoutType": "standard", "toolLayoutRole": "editorial_pair"
+    },
+    {
+      "position": 5, "moduleId": "kuscheldecken_mod_05", "moduleName": "Fleece Kuscheldecke Lifestyle plus USP-Liste plus 2 Produkt-Tiles",
+      "layoutType": "editorial_tile_quad", "layoutShape": "split_two_columns", "tileCount": 4,
+      "designIntent": "product_showcase", "designIntentDetail": "Komposit-Modul mit grossem Lifestyle-Tile links plus USP-Liste mit Good Housekeeping Approved 2025 Siegel rechts oben plus zwei kaufbare Produkt-Tiles unten.",
+      "structuralPattern": "Linkes grosses Lifestyle-Tile: Frau in weissem Top liegt unter grauer Fleece-Kuscheldecke und liest, Bottom-Overlay Fleece Kuscheldecke. Rechte Spalte oben Good-Housekeeping-Institute-Approved-2025-Siegel mit Bullet-List Extrem kuschelweich, Hautfreundlich, Weich und Komfortabel, Atmungsaktive Waerme, Wolkengleich weich. Rechte Spalte unten 2 Produkt-Tiles mit gefalteten Decken: mintgruene Decke 17,59 Euro mit 96/100 Eccellente-Siegel und Prime, blaue Decke 22,99 Euro Prime.",
+      "moduleFunction": "Detail-Showcase fuer Fleece Kuscheldecke mit doppelter Konversion: ueber Pruefsiegel-USPs und ueber direkte ASIN-Tile-Klicks.",
+      "relationToPrevious": "zooms_into_above_subject", "relationToNext": "closes_chapter",
+      "visualBridge": "shared_subject_class", "copyBridge": "continues_idea", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Fleece Kuscheldecke GOOD HOUSEKEEPING INSTITUTE APPROVED 2025 Extrem kuschelweich Hautfreundlich Weich & Komfortabel Atmungsaktive Waerme Wolkengleich weich 17,59 Euro 22,99 Euro", "textType": "headline_cta", "origin": "baked_in", "headline": "Fleece Kuscheldecke", "subline": "GOOD HOUSEKEEPING INSTITUTE APPROVED 2025", "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Fleece Kuscheldecke", "ctaLabel": "Fleece Kuscheldecke" },
+          "tileContentTopic": { "primarySubject": "Fleece Kuscheldecke Lifestyle", "productOrCategoryRef": null, "intent": "navigate", "rolePosition": "Lifestyle Lead" },
+          "visualContent": "Frau in weissem Top liest entspannt unter einer grauen Fleece-Kuscheldecke auf einem hellen Sofa. Bottom-Overlay weisse Schrift Fleece Kuscheldecke.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Fleece Kuscheldecke", "textType": "category_label", "origin": "layered_text", "headline": "Fleece Kuscheldecke", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Fleece Kuscheldecke"
+        },
+        { "position": 2, "imageCategory": "benefit", "toolTileType": "image_text", "toolImageType": "WIDE",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Fleece USP-Liste plus Pruefsiegel", "productOrCategoryRef": null, "intent": "trust", "rolePosition": "USP Block" },
+          "visualContent": "Closeup einer grauen Fleece-Decke als Hintergrund. Oben links das runde rote Good Housekeeping Institute Approved 2025 Siegel. Darunter Bullet-Liste mit fuenf Eigenschaften Extrem kuschelweich, Hautfreundlich, Weich und Komfortabel, Atmungsaktive Waerme, Wolkengleich weich.",
+          "elementProportions": { "lifestyle_photo": 40, "badge": 18, "text": 30, "graphic_elements": 12 },
+          "textOnImage": { "visibleText": "GOOD HOUSEKEEPING INSTITUTE APPROVED 2025 Extrem kuschelweich Hautfreundlich Weich & Komfortabel Atmungsaktive Waerme Wolkengleich weich", "textType": "story_copy", "origin": "baked_in", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        },
+        { "position": 3, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "fleece_decke_mintgruen_asin", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Fleece Kuscheldecke mintgruen 17,59 Euro", "productOrCategoryRef": null, "intent": "convert", "rolePosition": "Produkt ASIN 1" },
+          "visualContent": "Amazon ASIN Tile, gefaltete mintgruene Kuscheldecke mit 96/100 Eccellente Pruefsiegel. Amazon Overlay liefert Titel und Preis 17,59 Euro plus Prime.",
+          "elementProportions": { "product_photo": 90, "badge": 8, "solid_background": 2 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "fleece_decke_mintgruen_asin"
+        },
+        { "position": 4, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "fleece_decke_blau_asin", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Fleece Kuscheldecke blau 22,99 Euro", "productOrCategoryRef": null, "intent": "convert", "rolePosition": "Produkt ASIN 2" },
+          "visualContent": "Amazon ASIN Tile, gefaltete dunkelblaue Kuscheldecke. Amazon Overlay liefert Titel und Preis 22,99 Euro plus Prime.",
+          "elementProportions": { "product_photo": 92, "solid_background": 8 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "fleece_decke_blau_asin"
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": [], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "lg-w2s", "toolLayoutName": "Large + Wide & 2 Small", "toolLayoutType": "standard", "toolLayoutRole": "product_showcase"
+    },
+    {
+      "position": 6, "moduleId": "kuscheldecken_mod_06", "moduleName": "Section Intro Saisonbereit",
+      "layoutType": "editorial_section_intro", "layoutShape": "full_width_banner", "tileCount": 1,
+      "designIntent": "section_intro", "designIntentDetail": "Section-Header Saisonbereit.",
+      "structuralPattern": "Schmale 113px-Row, zentrierte Headline Saisonbereit auf hellem Hintergrund.",
+      "moduleFunction": "Section-Trennung zu sommerlichen Decken-Varianten.",
+      "relationToPrevious": "summarizes_above", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_typography_treatment", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Saisonbereit", "textType": "section_label", "origin": "baked_in", "headline": "Saisonbereit", "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "text_image", "toolTileType": "image_text", "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Section Intro Saisonbereit", "productOrCategoryRef": null, "intent": "navigate", "rolePosition": "Section Intro" },
+          "visualContent": "Heller Hintergrund mit zentrierter Headline Saisonbereit in dunkelgrauer Sans-Serif.",
+          "elementProportions": { "text": 20, "solid_background": 80 },
+          "textOnImage": { "visibleText": "Saisonbereit", "textType": "section_label", "origin": "baked_in", "headline": "Saisonbereit", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": ["Saisonbereit"], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "section_intro"
+    },
+    {
+      "position": 7, "moduleId": "kuscheldecken_mod_07", "moduleName": "Kuehlende Decke plus Wendbare Kuehlende Decke Pair",
+      "layoutType": "editorial_tile_pair", "layoutShape": "split_two_columns", "tileCount": 2,
+      "designIntent": "product_showcase", "designIntentDetail": "2-Tile-Pair mit zwei kuehlenden Varianten fuer Sommer.",
+      "structuralPattern": "Linkes Tile Lifestyle Frau im weissen Top haelt orange-weisse Katze, bedeckt mit hellblauer Kuehl-Decke. Bottom-Overlay Kuehlende Decke plus Subline. Rechtes Tile graue Kuehl-Decke auf Holz-Liegestuhl am Pool, Bottom-Overlay Wendbare Kuehlende Decke plus Subline.",
+      "moduleFunction": "Saison-Sortimentsverteiler fuer Sommer-Kuehl-Varianten der Kuscheldecken-Kategorie.",
+      "relationToPrevious": "lists_subordinate_options", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_subject_class", "copyBridge": "continues_idea", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Kuehlende Decke Verleiht eine einzigartig geschmeidige Weichheit. Wendbare Kuehlende Decke Doppelseitiges Design garantiert ganzjaehrig nahtlosen Komfort.", "textType": "category_label", "origin": "layered_text", "headline": null, "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Kuehlende Decke", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Kuehlende Decke Lifestyle Katze", "productOrCategoryRef": null, "intent": "navigate", "rolePosition": "Kuehl-Variante 1" },
+          "visualContent": "Lifestyle: junge Frau mit dunkelbraunem Haar im weissen Top haelt eine orange-weisse Katze, beide mit einer hellblauen Bedsure Kuehl-Decke bedeckt. Bottom-Overlay weisse Schrift Kuehlende Decke plus kursive Subline.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Kuehlende Decke Verleiht eine einzigartig geschmeidige Weichheit.", "textType": "category_label", "origin": "layered_text", "headline": "Kuehlende Decke", "subline": "Verleiht eine einzigartig geschmeidige Weichheit.", "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Kuehlende Decke"
+        },
+        { "position": 2, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Wendbare Kuehlende Decke", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Wendbare Kuehlende Decke Lifestyle Pool", "productOrCategoryRef": null, "intent": "navigate", "rolePosition": "Kuehl-Variante 2" },
+          "visualContent": "Lifestyle: helle Pool-Szene, ein Holz-Liegestuhl drapiert mit einer grauen wendbaren Kuehl-Decke mit dunkler Borduere. Bottom-Overlay weisse Schrift Wendbare Kuehlende Decke plus kursive Subline.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Wendbare Kuehlende Decke Doppelseitiges Design garantiert ganzjaehrig nahtlosen Komfort.", "textType": "category_label", "origin": "layered_text", "headline": "Wendbare Kuehlende Decke", "subline": "Doppelseitiges Design garantiert ganzjaehrig nahtlosen Komfort.", "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Wendbare Kuehlende Decke"
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": [], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "std-2equal", "toolLayoutName": "2 Equal", "toolLayoutType": "standard", "toolLayoutRole": "editorial_pair"
+    },
+    {
+      "position": 8, "moduleId": "kuscheldecken_mod_08", "moduleName": "Fleece im Geschenkdesign plus Baumwolldecke Pair",
+      "layoutType": "editorial_tile_pair", "layoutShape": "split_two_columns", "tileCount": 2,
+      "designIntent": "product_showcase", "designIntentDetail": "2-Tile-Pair Geschenk-Edition plus Baumwoll-Variante.",
+      "structuralPattern": "Linkes Tile Closeup Fleece-Decke mit buntem Blumenmuster auf weissem Untergrund, Bottom-Overlay Fleece-Kuscheldecke im Geschenkdesign plus englische Subline Wrapped in comfort, filled with care. Rechtes Tile Lifestyle Frau im weissen Top entspannt unter dunkelgruener Baumwoll-Decke mit Diamantstruktur. Bottom-Overlay Baumwolldecke mit Diamantstruktur plus deutsche Subline.",
+      "moduleFunction": "Differenzierte Sortimentsschau Geschenk plus Baumwoll-Variante.",
+      "relationToPrevious": "repeats_pattern", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_pattern", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Fleece-Kuscheldecke im Geschenkdesign Wrapped in comfort, filled with care. Baumwolldecke mit Diamantstruktur Die mehrschichtige Struktur sorgt fuer luftige Abdeckung und flexiblen Komfort zu jeder Jahreszeit.", "textType": "category_label", "origin": "layered_text", "headline": null, "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "product", "toolTileType": "image", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Fleece-Kuscheldecke im Geschenkdesign", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Geschenk-Edition Fleece-Decke", "productOrCategoryRef": null, "intent": "navigate", "rolePosition": "Geschenk-Variante" },
+          "visualContent": "Closeup einer hellbeigen Fleece-Decke mit gemaltem Blumenmuster (lila, blau, rosa, gelbe Blueten plus gruene Blaetter). Bottom-Overlay weisse Schrift Fleece-Kuscheldecke im Geschenkdesign plus englische kursive Subline Wrapped in comfort, filled with care.",
+          "elementProportions": { "product_photo": 80, "decorative_elements": 8, "text": 12 },
+          "textOnImage": { "visibleText": "Fleece-Kuscheldecke im Geschenkdesign Wrapped in comfort, filled with care.", "textType": "category_label", "origin": "layered_text", "headline": "Fleece-Kuscheldecke im Geschenkdesign", "subline": "Wrapped in comfort, filled with care.", "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Fleece-Kuscheldecke im Geschenkdesign"
+        },
+        { "position": 2, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Baumwolldecke mit Diamantstruktur", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Baumwolldecke Diamantstruktur Lifestyle", "productOrCategoryRef": null, "intent": "navigate", "rolePosition": "Baumwoll-Variante" },
+          "visualContent": "Lifestyle: Frau im weissen Top liegt entspannt unter einer dunkelgruenen Baumwoll-Decke mit klarer Diamantstruktur-Webung. Bottom-Overlay weisse Schrift Baumwolldecke mit Diamantstruktur plus deutsche Subline.",
+          "elementProportions": { "lifestyle_photo": 85, "text": 15 },
+          "textOnImage": { "visibleText": "Baumwolldecke mit Diamantstruktur Die mehrschichtige Struktur sorgt fuer luftige Abdeckung und flexiblen Komfort zu jeder Jahreszeit.", "textType": "category_label", "origin": "layered_text", "headline": "Baumwolldecke mit Diamantstruktur", "subline": "Die mehrschichtige Struktur sorgt fuer luftige Abdeckung und flexiblen Komfort zu jeder Jahreszeit.", "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Baumwolldecke mit Diamantstruktur"
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": [], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "std-2equal", "toolLayoutName": "2 Equal", "toolLayoutType": "standard", "toolLayoutRole": "editorial_pair"
+    },
+    {
+      "position": 9, "moduleId": "kuscheldecken_mod_09", "moduleName": "Section Intro Immer Qualitaet",
+      "layoutType": "editorial_section_intro", "layoutShape": "full_width_banner", "tileCount": 1,
+      "designIntent": "section_intro", "designIntentDetail": "Section-Header mit Brand-Versprechen-Claim.",
+      "structuralPattern": "Schmale 113px-Row, zentrierte Headline Immer Qualitaet. Immer An Ihrer Seite.",
+      "moduleFunction": "Brand-Versprechen-Anker zwischen Sortimentsschau und Sherpa-Modul.",
+      "relationToPrevious": "summarizes_above", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_typography_treatment", "copyBridge": "continues_idea", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Immer Qualitaet. Immer An Ihrer Seite.", "textType": "tagline", "origin": "baked_in", "headline": "Immer Qualitaet. Immer An Ihrer Seite.", "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "text_image", "toolTileType": "image_text", "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Brand Versprechen Section Header", "productOrCategoryRef": null, "intent": "trust", "rolePosition": "Section Intro plus Tagline" },
+          "visualContent": "Heller Hintergrund mit zentrierter Headline in dunkelgrauer Sans-Serif Immer Qualitaet. Immer An Ihrer Seite.",
+          "elementProportions": { "text": 25, "solid_background": 75 },
+          "textOnImage": { "visibleText": "Immer Qualitaet. Immer An Ihrer Seite.", "textType": "tagline", "origin": "baked_in", "headline": "Immer Qualitaet. Immer An Ihrer Seite.", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": ["Immer Qualitaet. Immer An Ihrer Seite."], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "section_intro"
+    },
+    {
+      "position": 10, "moduleId": "kuscheldecken_mod_10", "moduleName": "Flauschige Sherpa Lifestyle plus 2 Produkt-Tiles",
+      "layoutType": "editorial_tile_quad", "layoutShape": "split_two_columns", "tileCount": 3,
+      "designIntent": "product_showcase", "designIntentDetail": "Komposit-Modul mit grossem Lifestyle-Tile plus 2 kaufbare Produkt-Tiles fuer Sherpa-Decke.",
+      "structuralPattern": "Linkes grosses Lifestyle-Tile: Closeup grauer Sherpa-Decke mit weisser kuschelig-flauschiger Unterseite, draufgelegt auf hellem Sofa. Bottom-Overlay Flauschige Sherpa Kuscheldecke. Rechts 2 Produkt-Tiles untereinander: beige gefaltete Sherpa-Decke 27,99 Euro, mintgruene gefaltete Sherpa-Decke 29,99 Euro Prime.",
+      "moduleFunction": "Showcase fuer die Flauschige Sherpa Kuscheldecke mit zwei Farb-Varianten als direkter Conversion-Pfad.",
+      "relationToPrevious": "opens_section_thematically", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_subject_class", "copyBridge": "continues_idea", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Flauschige Sherpa Kuscheldecke 27,99 Euro 29,99 Euro", "textType": "category_label", "origin": "layered_text", "headline": "Flauschige Sherpa Kuscheldecke", "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Flauschige Sherpa Kuscheldecke", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Sherpa Kuscheldecke Lifestyle", "productOrCategoryRef": null, "intent": "navigate", "rolePosition": "Lifestyle Lead" },
+          "visualContent": "Closeup einer grauen Bedsure Sherpa-Kuscheldecke mit weisser flauschiger Unterseite. Stilvolles, weiches Material. Bottom-Overlay weisse Schrift Flauschige Sherpa Kuscheldecke.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Flauschige Sherpa Kuscheldecke", "textType": "category_label", "origin": "layered_text", "headline": "Flauschige Sherpa Kuscheldecke", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Flauschige Sherpa Kuscheldecke"
+        },
+        { "position": 2, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "WIDE",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "sherpa_beige_asin", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Sherpa Kuscheldecke beige", "productOrCategoryRef": null, "intent": "convert", "rolePosition": "Produkt ASIN 1" },
+          "visualContent": "Amazon ASIN Tile, gefaltete beige Sherpa-Decke mit weisser Unterseite. Amazon Overlay liefert Titel und Preis 27,99 Euro.",
+          "elementProportions": { "product_photo": 92, "solid_background": 8 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "sherpa_beige_asin"
+        },
+        { "position": 3, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "WIDE",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "sherpa_mintgruen_asin", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Sherpa Kuscheldecke mintgruen", "productOrCategoryRef": null, "intent": "convert", "rolePosition": "Produkt ASIN 2" },
+          "visualContent": "Amazon ASIN Tile, gefaltete mintgruene Sherpa-Decke mit weisser Unterseite. Amazon Overlay liefert Titel und Preis 29,99 Euro plus Prime.",
+          "elementProportions": { "product_photo": 92, "solid_background": 8 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "sherpa_mintgruen_asin"
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": [], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "lg-2stack", "toolLayoutName": "Large + 2 Stacked", "toolLayoutType": "standard", "toolLayoutRole": "product_showcase"
+    },
+    {
+      "position": 11, "moduleId": "kuscheldecken_mod_11", "moduleName": "Section Intro Mehr Entdecken",
+      "layoutType": "editorial_section_intro", "layoutShape": "full_width_banner", "tileCount": 1,
+      "designIntent": "section_intro", "designIntentDetail": "Section-Header zum Sortiments-ProductGrid.",
+      "structuralPattern": "Schmale 113px-Row, zentrierte Headline Mehr Entdecken.",
+      "moduleFunction": "Leitet das full_catalog ProductGrid ein.",
+      "relationToPrevious": "summarizes_above", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_typography_treatment", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Mehr Entdecken", "textType": "section_label", "origin": "baked_in", "headline": "Mehr Entdecken", "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "text_image", "toolTileType": "image_text", "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Section Intro Mehr Entdecken", "productOrCategoryRef": null, "intent": "navigate", "rolePosition": "Section Intro" },
+          "visualContent": "Heller Hintergrund mit zentrierter Headline Mehr Entdecken in dunkelgrauer Sans-Serif.",
+          "elementProportions": { "text": 20, "solid_background": 80 },
+          "textOnImage": { "visibleText": "Mehr Entdecken", "textType": "section_label", "origin": "baked_in", "headline": "Mehr Entdecken", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": ["Mehr Entdecken"], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "section_intro"
+    },
+    {
+      "position": 12, "moduleId": "kuscheldecken_mod_12", "moduleName": "ProductGrid Kuscheldecken Sortiment 19 ASINs",
+      "layoutType": "product_grid_category", "layoutShape": "grid_four_columns", "tileCount": 19,
+      "designIntent": "product_showcase", "designIntentDetail": "ProductGrid mit 19 ASINs der Kuscheldecken-Kategorie. Amazon rendert Tiles mit Bestseller-Labels und Warentest 1,1 SEHR GUT Siegeln.",
+      "structuralPattern": "ProductGrid-Container mit 19 ASIN-Tiles. Bestseller-Tags und Pruefsiegel werden ueber Amazon-Mechanik gerendert.",
+      "moduleFunction": "Vollkatalog der Kuscheldecken-Kategorie, ermoeglicht direkte Conversion ueber Amazon-Standard-Tiles.",
+      "relationToPrevious": "lists_subordinate_options", "relationToNext": "closes_chapter",
+      "visualBridge": "hard_break_intentional", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": null, "textType": "product_title", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "PRODUCT_TILE_ASIN",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "amazon_rendered_tiles", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Kuscheldecken Kategorie-Sortiment (aggregiert)", "productOrCategoryRef": "amazon_rendered_19_asins", "intent": "convert", "rolePosition": "Conversion Sortiment" },
+          "visualContent": "Amazon ASIN Tile, kein Brand Design. Amazon rendert 19 Produkttiles inklusive Bestseller-Labels und Warentest-1,1-SEHR-GUT-Siegel. Auf User-Entscheidung 2026-05-12 NICHT pro Produkt aufgeschluesselt.",
+          "elementProportions": {},
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "amazon_rendered_tiles"
+        }
+      ],
+      "dom": { "widgetClass": "ProductGrid__gridContainer__bRK6J", "visibleHeadings": [], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "product_grid_asin", "toolLayoutName": "Product Grid (ASIN)", "toolLayoutType": "fullwidth_asin", "toolLayoutRole": "product_grid",
+      "productGridAggregate": { "toolTileType": "product_grid", "toolImageType": "PRODUCT_TILE_ASIN", "asinTileCount": 19, "note": "Amazon rendert die 19 ASIN-Tiles selbst. Auf User-Entscheidung nicht einzeln erfasst." }
+    },
+    {
+      "position": 13, "moduleId": "kuscheldecken_mod_13", "moduleName": "Alle Kategorien entdecken 7-Tile Grid",
+      "layoutType": "subcategory_tile_grid_octet", "layoutShape": "grid_four_columns", "tileCount": 7,
+      "designIntent": "navigation_bridge", "designIntentDetail": "Vision-Followup 2026-05-12: Wiederverwendetes Bedsure-Kategorien-Verteiler-Grid am Page-Ende, identisch zu Ueber-Bedsure-Page Modul 14. Sieben Lifestyle-Tiles mit Bottom-Overlay-Labels in der unterstrichenen Link-Headline.",
+      "structuralPattern": "Mehrzeiliges Grid. Obere Reihe Kuscheldecken & Wohndecken (Paar im Bett mit Kord-Decke), Bettwaesche-Sets (cremefarbenes Bett mit Kissen-Stapel), Bettdecken (Frau schlaeft auf Decke). Untere Reihe Haustierbedarf (franzoesische Bulldogge auf Hundebett), Kuscheldecke mit Aermeln (Frau in rosa Hoodie-Decke mit Katze), Heizdecke (Frau im weissen Pulli auf hellem Sofa mit grauer Decke), Kissenbezug & Spannbettlaken (graues Spannbettlaken auf Bett).",
+      "moduleFunction": "Wiederkehrendes Bedsure-Page-Closing-Pattern. Cross-Sell-Verteiler am Ende jeder Page zu allen anderen Sortimentskategorien. Bedsure-Signature.",
+      "relationToPrevious": "summarizes_above", "relationToNext": "closes_chapter",
+      "visualBridge": "shared_pattern", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Kuscheldecken & Wohndecken Bettwaesche-Sets Bettdecken Haustierbedarf Kuscheldecke mit Aermeln Heizdecke Kissenbezug & Spannbettlaken", "textType": "category_label", "origin": "layered_text", "headline": null, "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Kuscheldecken", "ctaLabel": "Kuscheldecken & Wohndecken" },
+          "tileContentTopic": { "primarySubject": "Kuscheldecken Kategorie", "productOrCategoryRef": "2F249C26-269C-4A0B-ACB2-7AB6436FFDC5", "intent": "navigate", "rolePosition": "Kategorie Tile 1" },
+          "visualContent": "Lifestyle: junges Paar im Bett kuschelt unter weisser Kord-Optik-Kuscheldecke, Fenster mit verschneiter Landschaft im Hintergrund. Bottom-Overlay unterstrichener Link Kuscheldecken & Wohndecken.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Kuscheldecken & Wohndecken", "textType": "category_label", "origin": "layered_text", "headline": "Kuscheldecken & Wohndecken", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Kuscheldecken"
+        },
+        { "position": 2, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Bettwaesche-Sets", "ctaLabel": "Bettwaesche-Sets" },
+          "tileContentTopic": { "primarySubject": "Bettwaesche-Sets Kategorie", "productOrCategoryRef": "D537A0F0-8099-477C-A9CE-4E44DA3B8F13", "intent": "navigate", "rolePosition": "Kategorie Tile 2" },
+          "visualContent": "Lifestyle: helles Bett mit cremefarbenem Bettbezug, gestapelten Kissen in Beige und Senfgelb, dunkelbraunes Kopfteil. Bottom-Overlay unterstrichener Link Bettwaesche-Sets.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Bettwaesche-Sets", "textType": "category_label", "origin": "layered_text", "headline": "Bettwaesche-Sets", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Bettwaesche-Sets"
+        },
+        { "position": 3, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Bettdecke und Kissen", "ctaLabel": "Bettdecken" },
+          "tileContentTopic": { "primarySubject": "Bettdecken Kategorie", "productOrCategoryRef": "0327D6BF-BFA7-49D7-80B2-31707A7C0AF9", "intent": "navigate", "rolePosition": "Kategorie Tile 3" },
+          "visualContent": "Lifestyle: Frau mit dunklen Locken schlaeft entspannt unter einer weichen weissen Bedsure-Bettdecke. Bottom-Overlay unterstrichener Link Bettdecken.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Bettdecken", "textType": "category_label", "origin": "layered_text", "headline": "Bettdecken", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Bettdecke und Kissen"
+        },
+        { "position": 4, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Haustierbedarf", "ctaLabel": "Haustierbedarf" },
+          "tileContentTopic": { "primarySubject": "Haustierbedarf Kategorie", "productOrCategoryRef": "B3B34DD4-8067-4CF4-B764-5BEDBD5B40E8", "intent": "navigate", "rolePosition": "Kategorie Tile 4" },
+          "visualContent": "Lifestyle: kleine franzoesische Bulldogge in beige-weiss liegt entspannt auf einem grauen Bedsure-Hundebett mit grauer Decke. Bottom-Overlay unterstrichener Link Haustierbedarf.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Haustierbedarf", "textType": "category_label", "origin": "layered_text", "headline": "Haustierbedarf", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Haustierbedarf"
+        },
+        { "position": 5, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Kuscheldecke mit Aermeln", "ctaLabel": "Kuscheldecke mit Aermeln" },
+          "tileContentTopic": { "primarySubject": "Kuscheldecke mit Aermeln Kategorie", "productOrCategoryRef": "8B9660CA-9C46-42A4-B289-C08618110009", "intent": "navigate", "rolePosition": "Kategorie Tile 5" },
+          "visualContent": "Lifestyle: Frau in rosafarbener Hoodie-Decke mit Aermeln haelt Tasse, dunkelorange Katze sitzt neben ihr auf dem Sofa. Bottom-Overlay unterstrichener Link Kuscheldecke mit Aermeln.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Kuscheldecke mit Aermeln", "textType": "category_label", "origin": "layered_text", "headline": "Kuscheldecke mit Aermeln", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Kuscheldecke mit Aermeln"
+        },
+        { "position": 6, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Heizdecke", "ctaLabel": "Heizdecke" },
+          "tileContentTopic": { "primarySubject": "Heizdecke Kategorie", "productOrCategoryRef": "86EE23E4-B85F-4167-8FE0-E32C59862F42", "intent": "navigate", "rolePosition": "Kategorie Tile 6" },
+          "visualContent": "Lifestyle: Frau mit dunklem Haar im cremeweissen Pullover sitzt auf hellem Boucle-Sessel mit grauer Bedsure-Heizdecke, haelt dunkle Tasse. Bottom-Overlay unterstrichener Link Heizdecke.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Heizdecke", "textType": "category_label", "origin": "layered_text", "headline": "Heizdecke", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Heizdecke"
+        },
+        { "position": 7, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Kissenbezuege und Spannbettlaken", "ctaLabel": "Kissenbezug & Spannbettlaken" },
+          "tileContentTopic": { "primarySubject": "Kissenbezuege und Spannbettlaken Kategorie", "productOrCategoryRef": "652C1CB5-3C1F-41DB-802F-9A308D45AE28", "intent": "navigate", "rolePosition": "Kategorie Tile 7" },
+          "visualContent": "Lifestyle: graues Spannbettlaken locker auf cremefarbener Bettmatratze, kleines Detail eines hellen Stofftiers im Hintergrund. Bottom-Overlay unterstrichener Link Kissenbezug & Spannbettlaken.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Kissenbezug & Spannbettlaken", "textType": "category_label", "origin": "layered_text", "headline": "Kissenbezug & Spannbettlaken", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Kissenbezuege und Spannbettlaken"
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": [], "ctaLabels": ["Kuscheldecken & Wohndecken", "Bettwaesche-Sets", "Bettdecken", "Haustierbedarf", "Kuscheldecke mit Aermeln", "Heizdecke", "Kissenbezug & Spannbettlaken"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "4x2grid", "toolLayoutName": "4x2 Grid", "toolLayoutType": "standard", "toolLayoutRole": "navigation_bridge"
+    },
+    {
+      "position": 14, "moduleId": "kuscheldecken_mod_14", "moduleName": "Amazon Share Footer",
+      "layoutType": "amazon_share_footer", "layoutShape": "chrome_thin", "tileCount": 0,
+      "designIntent": "mimics_native_chrome", "designIntentDetail": "Vision-Followup 2026-05-12: Modul 14 ist amazon_share_footer mit Teilen-Button und Hinweistext plus Zurueck zum Seitenanfang Link.",
+      "structuralPattern": "Schmaler 201px-Streifen mit zentriertem hellem Teilen-Button und Subtext Teilen Sie diese Seite mit Ihren Freunden. Darunter dunkelgrauer Streifen mit Link Zurueck zum Seitenanfang.",
+      "moduleFunction": "Amazon-Mechanik. Wird in der Brand-Generierung ausgefiltert.",
+      "relationToPrevious": "none", "relationToNext": "none",
+      "visualBridge": "hard_break_intentional", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Teilen Teilen Sie diese Seite mit Ihren Freunden. Zurueck zum Seitenanfang", "textType": "section_label", "origin": "amazon_chrome", "headline": null, "subline": null, "cta": "Teilen", "directionCues": null },
+      "tiles": [],
+      "dom": { "widgetClass": "ShareFooter", "visibleHeadings": [], "ctaLabels": ["Teilen", "Zurueck zum Seitenanfang"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": null, "toolLayoutName": null, "toolLayoutType": "amazon_native", "toolLayoutRole": "amazon_native"
+    }
+  ],
+  "voiceMarkers": {
+    "voiceRegister": "professionell",
+    "sentencePattern": "kurze_aussage",
+    "vocabularyField": "lifestyle",
+    "claimType": "social_proof",
+    "rhetoricalDevice": "konkrete_zahl"
+  },
+  "voiceExamples": [
+    "Diese vielseitigen Decken verleihen Ihrem Zuhause sofort einen frischen Look und spenden bei Bedarf zusaetzliche Waerme.",
+    "UEBER 1,9 MILLIONEN VERKAUEFE WELTWEIT - Global geschaetzt und von experten empfohlen",
+    "Immer Qualitaet. Immer An Ihrer Seite."
+  ],
+  "pageAnalysis": {
+    "tonalityVisual": "Sehr konsistent zur Startseite. Warme Wohnaufnahmen mit Decken in unterschiedlichen Materialien (Kord, Bubble, Fleece, Sherpa, Baumwolle), kombiniert mit Pruefsiegel-Trust. Sehr klarer Aufbau pro Decken-Variante: Lifestyle-Tile plus Subline plus optional Produkt-Tile.",
+    "ctaStrategies": "Hero und Section-Intros sind nicht-klickbar. Sortiment-Pairs und Lifestyle-Module sind durchklickbar via Tile. Ein expliziter Pill-CTA Produkte ansehen im Kord-Bestseller-Modul. ProductGrid am Ende fuer direkte ASIN-Conversion.",
+    "contentDepth": "14 Brand-Module, davon 4 Section-Intros, 7 Decken-Sortimentstiles (Kord, Bubble plus Jacquard, Fleece, Kuehlend Pair, Geschenk plus Baumwoll, Sherpa) und ein full_catalog-Grid mit 19 ASINs.",
+    "useForArchetype": "Eignet sich als Vorlage fuer Hub-Category-Pages mit mehreren Material-Varianten einer Produktfamilie. Wiederkehrendes 2-Tile-Pair plus 1-Lifestyle-plus-USP-Pattern.",
+    "moduleClusters": [
+      "Page Intro Cluster: Page-Hero plus Kord-Bestseller-USP-Pair",
+      "Sortimentsschau Cluster: Bubble/Jacquard Pair plus Fleece Quad mit USP plus Kuehlende-Decke Pair plus Geschenk/Baumwoll Pair",
+      "Brand-Versprechen Cluster: Saisonbereit Intro plus Sherpa Showcase plus Immer-Qualitaet Tagline",
+      "Conversion Closer: Mehr-Entdecken plus ProductGrid 19 ASINs plus Cross-Sell-Banner plus Schluss-Banner"
+    ]
+  },
+  "pageArchitecture": "Kuscheldecken-Page folgt einem Material-Variation-Funnel. Page-Hero etabliert das Kategoriethema. Kord-Bestseller-Modul liefert sofort den Verkaufszahlen-Trust plus eine Farb-Auswahl. Sechs weitere Sortimentstiles zeigen die Material-Varianten (Bubble, Jacquard, Fleece, Kuehlende, Geschenk, Baumwoll, Sherpa). Brand-Versprechen-Tagline Immer Qualitaet schliesst die Lifestyle-Sektion ab. ProductGrid 19 ASINs ist der direkte Conversion-Pfad. Cross-Sell-Banner plus Schluss-Banner schliessen die Page.",
+  "openQuestions": [
+    "Module 13 und 14 wurden mit screenshot_required Platzhaltern erfasst, weil Cross-Sell-Carousel und Schluss-Banner im Probe-Run nicht im Detail gesichtet wurden. In zweitem Vision-Lauf nachholen.",
+    "Modul 5 ist eine lg-w2s-Komposition (1 grosses Lifestyle plus 1 USP-Block plus 2 Produkt-Tiles). Im v4-Schema als editorial_tile_quad mit 4 Tiles klassifiziert, semantisch passt das tileCount 4. Das Bedsure-Pattern mit USP-Block plus Produkt-Tiles ist ein wiederkehrendes Signature.",
+    "voiceMarkers.claimType wurde als social_proof klassifiziert wegen ueber 1,9 Millionen Verkauefe weltweit und Pruefsiegel-Dominanz. rhetoricalDevice konkrete_zahl passt zu 1,9 Millionen und 96/100 Eccellente Pruefsiegel.",
+    "Modul 8 enthaelt englische Subline Wrapped in comfort, filled with care. neben deutschem Hauptcontent. Bedsure mischt hier Sprachen, was bei einer Brand-Generierung beruecksichtigt werden muss falls das gewollt ist."
+  ]
+}

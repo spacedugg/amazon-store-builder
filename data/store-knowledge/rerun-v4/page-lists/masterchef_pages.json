@@ -1,0 +1,148 @@
+{
+  "brandName": "MasterChef Deutschland",
+  "storeUrl": "https://www.amazon.de/stores/page/4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6",
+  "totalPages": 20,
+  "extractedFromV3At": "2026-05-23",
+  "pages": [
+    {
+      "position": 1,
+      "pageName": "Startseite",
+      "pageId": "4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6",
+      "url": "https://www.amazon.de/stores/page/4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6",
+      "hasOldModuleData": true
+    },
+    {
+      "position": 2,
+      "pageName": "Angebote",
+      "pageId": "AD9DA30F-0413-40BB-8668-4E4626C227C7",
+      "url": "https://www.amazon.de/stores/page/AD9DA30F-0413-40BB-8668-4E4626C227C7",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 3,
+      "pageName": "Kochgeschirr",
+      "pageId": "91EE7C50-94C4-4AEF-85D6-5CEC3D1AF277",
+      "url": "https://www.amazon.de/stores/page/91EE7C50-94C4-4AEF-85D6-5CEC3D1AF277",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 4,
+      "pageName": "Messer",
+      "pageId": "D50D11DB-429B-4600-8F69-33042D3E5AB7",
+      "url": "https://www.amazon.de/stores/page/D50D11DB-429B-4600-8F69-33042D3E5AB7",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 5,
+      "pageName": "Messersets",
+      "pageId": "4581AA3F-2BF3-4CEC-851C-3EE86651CE94",
+      "url": "https://www.amazon.de/stores/page/4581AA3F-2BF3-4CEC-851C-3EE86651CE94",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 6,
+      "pageName": "Messerblocksets",
+      "pageId": "D0BD345C-31E0-47CC-9290-DC7723820D79",
+      "url": "https://www.amazon.de/stores/page/D0BD345C-31E0-47CC-9290-DC7723820D79",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 7,
+      "pageName": "Kochmessersets",
+      "pageId": "372D6A52-920B-437D-B8AE-EA612A8D5B11",
+      "url": "https://www.amazon.de/stores/page/372D6A52-920B-437D-B8AE-EA612A8D5B11",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 8,
+      "pageName": "Schneidebretter",
+      "pageId": "05C28D39-AAD4-4C8A-94AD-AEF60EB0E627",
+      "url": "https://www.amazon.de/stores/page/05C28D39-AAD4-4C8A-94AD-AEF60EB0E627",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 9,
+      "pageName": "Küchengeräte",
+      "pageId": "94D8A993-F4BD-48DB-98FD-8CD0CE744C5F",
+      "url": "https://www.amazon.de/stores/page/94D8A993-F4BD-48DB-98FD-8CD0CE744C5F",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 10,
+      "pageName": "Textilien",
+      "pageId": "F4A1543F-B1F0-42BC-9850-A9E4D8A44C68",
+      "url": "https://www.amazon.de/stores/page/F4A1543F-B1F0-42BC-9850-A9E4D8A44C68",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 11,
+      "pageName": "Werkzeuge und Utensilien",
+      "pageId": "E460228E-BA5D-4F00-8967-EE02AE4D65C1",
+      "url": "https://www.amazon.de/stores/page/E460228E-BA5D-4F00-8967-EE02AE4D65C1",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 12,
+      "pageName": "Kollektionen",
+      "pageId": "607606C8-1527-469B-8ED0-1C7C063E017D",
+      "url": "https://www.amazon.de/stores/page/607606C8-1527-469B-8ED0-1C7C063E017D",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 13,
+      "pageName": "Essentials Kollektion",
+      "pageId": "568E7D4B-7577-4D3D-9CFF-97DB541335AC",
+      "url": "https://www.amazon.de/stores/page/568E7D4B-7577-4D3D-9CFF-97DB541335AC",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 14,
+      "pageName": "Natürliche Kollektion",
+      "pageId": "BBB1ED05-7F98-4F17-A5B6-F166CCD29327",
+      "url": "https://www.amazon.de/stores/page/BBB1ED05-7F98-4F17-A5B6-F166CCD29327",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 15,
+      "pageName": "Lebendige Kollektion",
+      "pageId": "D97E6AEB-EBBA-4E72-8EA2-C7AF3034EF56",
+      "url": "https://www.amazon.de/stores/page/D97E6AEB-EBBA-4E72-8EA2-C7AF3034EF56",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 16,
+      "pageName": "Erde Kollektion",
+      "pageId": "D553719D-0B3A-4CA1-9E2B-5DEE6BB195FA",
+      "url": "https://www.amazon.de/stores/page/D553719D-0B3A-4CA1-9E2B-5DEE6BB195FA",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 17,
+      "pageName": "Nordische Kolletion",
+      "pageId": "D96246EF-D729-44F1-9A58-4767167EC36F",
+      "url": "https://www.amazon.de/stores/page/D96246EF-D729-44F1-9A58-4767167EC36F",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 18,
+      "pageName": "Caption Kollektion",
+      "pageId": "9887D02E-D77C-4121-9EA5-BDEE63ADC75E",
+      "url": "https://www.amazon.de/stores/page/9887D02E-D77C-4121-9EA5-BDEE63ADC75E",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 19,
+      "pageName": "Professionelle Kollektion",
+      "pageId": "987B2255-9774-46FA-A3AE-A5E510D61209",
+      "url": "https://www.amazon.de/stores/page/987B2255-9774-46FA-A3AE-A5E510D61209",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 20,
+      "pageName": "ALLE PRODUKTE",
+      "pageId": "FCCF7F55-7AD5-4EA4-8E2C-303B13F93C18",
+      "url": "https://www.amazon.de/stores/page/FCCF7F55-7AD5-4EA4-8E2C-303B13F93C18",
+      "hasOldModuleData": false
+    }
+  ]
+}

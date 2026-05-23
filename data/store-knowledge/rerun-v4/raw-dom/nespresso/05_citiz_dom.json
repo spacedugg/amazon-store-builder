@@ -1,0 +1,26 @@
+{
+  "_meta": {
+    "store": "nespresso",
+    "pageSlug": "05_citiz",
+    "pageName": "Citiz",
+    "pageId": "6D635ABA-55B7-4E3D-9A6F-1E1783414242",
+    "url": "https://www.amazon.de/stores/page/6D635ABA-55B7-4E3D-9A6F-1E1783414242",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_compact",
+    "scrollHeight": 3649,
+    "viewport": { "w": 1599, "h": 842 },
+    "domRowsTotal": 5,
+    "contentModulesCount": 5
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height": 395, "widgetType": "Header",       "tileCount": 0, "imgCount": 1, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Nav header." },
+    { "domRowIdx": 1, "top":  502, "height": 635, "widgetType": "ProductGrid",  "tileCount": 0, "imgCount": 5, "videoCount": 0, "productCount": 9, "asinCount": 5, "note": "ProductGrid mit 9 product-Markern (5 unique ASINs: Citiz Modell-Varianten Schwarz/Silber/etc.).", "sampleAsins": ["B01ITG2JEQ","B01ITGGKBY","B07P6YDWTS","B07P9K976P"] },
+    { "domRowIdx": 2, "top": 1136, "height": 743, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 0, "videoCount": 1, "productCount": 0, "asinCount": 0, "note": "Hero-Video Vollformat (Maschinen-Demo Citiz)." },
+    { "domRowIdx": 3, "top": 1879, "height": 309, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 1, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Section Intro / Brand-Statement Banner (309px)." },
+    { "domRowIdx": 4, "top": 2188, "height": 200, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 0, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Amazon Share Footer." }
+  ],
+  "openQuestionsLocal": [
+    "Citiz-Page kurz mit 5 Modulen: ProductGrid mit 5 ASIN-Varianten plus Hero-Video plus Section Banner.",
+    "Pattern: model_landing_with_variant_grid_plus_video."
+  ]
+}

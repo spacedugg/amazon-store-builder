@@ -1,0 +1,210 @@
+{
+  "schemaVersion": "v4-2026-05",
+  "store": "hansegruen",
+  "brandName": "Hansegrün",
+  "storeUrl": "https://www.amazon.de/stores/Hansegr%C3%BCn/page/BC9A9642-4612-460E-81B4-985E9AF6A7D2",
+  "analyzedAt": "2026-05-23",
+  "methodology": "v4-top-10-pages-from-19-pages-chrome-mcp-aria-pass-plus-per-page-blueprints",
+  "scopeNote": "Top 10 von 19 Hansegruen-Pages erfasst. Per-Page-Blueprints im pragmatischen Modus auf Basis Chrome-MCP-Phase-1-DOM plus Amazon-AI-Aria-Label-Vision-Pass. Marktplatz amazon.de, Marktsegment Bio-Superfood-Shots.",
+  "navigation": {
+    "pageCount": 19,
+    "scopedPages": 10,
+    "structure": "Hierarchical (level 0 Startseite, level 1 Catalog/Hub-Pages, level 2 Benefit-Sub-Pages)",
+    "pages": [
+      { "name": "Startseite", "level": 0, "pageId": "BC9A9642-4612-460E-81B4-985E9AF6A7D2" },
+      { "name": "Alle Produkte", "level": 1, "pageId": "0599725A-6655-4CC0-BEF9-A1611BA0DF50" },
+      { "name": "Neuheiten", "level": 1, "pageId": "8593169F-6771-4714-8946-B310EAAA30F7" },
+      { "name": "Spar-Sets", "level": 1, "pageId": "0DB9FDD8-7C90-4CAC-BFF6-BAEBC586C20C" },
+      { "name": "Shots", "level": 1, "pageId": "E3FD5652-9AC5-4AC2-BD9C-F784C33A22D5" },
+      { "name": "Ingwer-Shots", "level": 1, "pageId": "EEB1E137-CE92-47E2-AB61-F7CD0360E56D" },
+      { "name": "Benefits", "level": 1, "pageId": "5DB7F16C-C04D-4386-B9B7-B1593215B7A4" },
+      { "name": "Immunsystem", "level": 2, "pageId": "4927D23C-78ED-498D-B776-821846C16EF4" },
+      { "name": "Energie und Sport", "level": 2, "pageId": "46F5F32D-2512-43B8-9014-03B2E7C34E43" },
+      { "name": "Darmfunktion", "level": 2, "pageId": "8012E3F8-58F8-4E4E-A449-138CB6957417" }
+    ],
+    "notInScope": [
+      { "name": "Anti-Muedigkeit", "level": 2, "pageId": "D7E40E02-645F-4075-920E-13EF29A5E155" },
+      { "name": "Zahnfunktion", "level": 2, "pageId": "9FF2F0B5-FEF0-440C-BC89-96F38A3A0AB3" },
+      { "name": "Zellschutz", "level": 2, "pageId": "D8C5667C-2A77-44D0-9763-5CDAF47FF323" },
+      { "name": "Eisenaufnahme", "level": 2, "pageId": "1A36A785-C6EF-41F1-BBE7-96999ABEFF86" },
+      { "name": "Hautfunktion", "level": 2, "pageId": "80F669C1-CF9D-417C-8854-2DA0327F856B" },
+      { "name": "Stoffwechsel", "level": 2, "pageId": "B1F30782-EE07-438C-A81E-BF3EEFA3D864" },
+      { "name": "Knochenfunktion", "level": 2, "pageId": "2446F867-676F-4181-9407-E1CFA2DEAF1E" },
+      { "name": "Ueber Uns", "level": 1, "pageId": "FE5A6FE8-EC0C-49F0-A53E-48C85B7E36EE" },
+      { "name": "Produktfinder", "level": 1, "pageId": "84B4DA7A-F7B4-4899-BDCC-02B15DAC9661" }
+    ]
+  },
+  "contentSummary": {
+    "pagesAnalyzed": 10,
+    "totalBrandModulesAcrossPages": 53,
+    "totalUniqueAsins": 11,
+    "wiederkehrendeModuleCrossPage": {
+      "amazon_nav_header_with_10_tabs": "alle 10 Pages mit identischem Nav-Header (Hansegruen-Logo plus 8 sichtbare Tabs plus Mehr-Dropdown)",
+      "amazon_share_footer": "alle 10 Pages mit identischem Share-Footer",
+      "brand_hero_3000x1000_or_3000x600": "alle Sub-Pages (ausser Startseite und Alle Produkte) starten mit 3000x1000 Brand-Hero",
+      "sub_banner_3000x650_after_hero": "8 von 10 Pages haben Sub-Banner-Schicht zwischen Hero und Content-Module",
+      "section_intro_3000x316_before_footer": "9 von 10 Pages haben schmalen Section-Intro (170px hoch) als Spacer vor Amazon Share Footer",
+      "featured_asin_showcase_full_width": "5 Pages nutzen Featured-ASIN-Showcase-Modul (Neuheiten 2x, Spar-Sets 3x, Ingwer-Shots 2x, Darmfunktion 1x) als Single-Product-Conversion-Pattern"
+    }
+  },
+  "pages": [
+    { "pageName": "Startseite", "pageSlug": "01_startseite", "pageId": "BC9A9642-4612-460E-81B4-985E9AF6A7D2", "pageType": "startseite", "scrollHeight": 6075, "brandModules": 12, "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "naturwissenschaftlich", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl" }, "pageArchitecture": "Bridge-Banner-Funnel mit Hero plus Video plus Tile-Pair Spar-Sets+Shots plus Benefits-Promo plus Produktfinder-Promo plus Neuheiten-Promo plus Founder-Bridge plus Tile-Quad-Showcase. Keine ASIN-Tiles auf der Page, Conversion ueber Sub-Page-Navigation." },
+    { "pageName": "Alle Produkte", "pageSlug": "02_alle-produkte", "pageId": "0599725A-6655-4CC0-BEF9-A1611BA0DF50", "pageType": "all_products", "scrollHeight": 4128, "brandModules": 2, "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "naturwissenschaftlich", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl" }, "pageArchitecture": "Catalog-Page mit Brand-Banner plus ProductGrid mit 11 Brand-ASINs. Keine Editorial-Module." },
+    { "pageName": "Neuheiten", "pageSlug": "03_neuheiten", "pageId": "8593169F-6771-4714-8946-B310EAAA30F7", "pageType": "new_arrivals", "scrollHeight": 4131, "brandModules": 6, "voiceMarkers": { "voiceRegister": "expert", "sentencePattern": "kurze_aussage", "vocabularyField": "naturwissenschaftlich", "claimType": "expertise_signal", "rhetoricalDevice": "konkrete_zahl" }, "pageArchitecture": "Dual-Featured-Showcase mit Brand-Hero plus Sub-Banner plus Daily All-in-One Video-Showcase plus 1px-Spacer plus Frauen Beauty Showcase mit Vanessa-Blumhagen-Endorsement." },
+    { "pageName": "Spar-Sets", "pageSlug": "04_spar-sets", "pageId": "0DB9FDD8-7C90-4CAC-BFF6-BAEBC586C20C", "pageType": "category", "scrollHeight": 4682, "brandModules": 6, "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "naturwissenschaftlich", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl" }, "pageArchitecture": "Triple-Featured-Showcase-Sequence: Brand-Hero plus Sub-Banner plus 3 sequentielle Featured-ASIN-Showcases (Routineset + 2 weitere Bundles)." },
+    { "pageName": "Shots", "pageSlug": "05_shots", "pageId": "E3FD5652-9AC5-4AC2-BD9C-F784C33A22D5", "pageType": "category", "scrollHeight": 4308, "brandModules": 4, "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "naturwissenschaftlich", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl" }, "pageArchitecture": "Sub-Kategorie-Catalog: Brand-Hero plus Sub-Banner plus ProductGrid mit allen 10 Shot-ASINs." },
+    { "pageName": "Ingwer-Shots", "pageSlug": "06_ingwer-shots", "pageId": "EEB1E137-CE92-47E2-AB61-F7CD0360E56D", "pageType": "sub_category", "scrollHeight": 4139, "brandModules": 4, "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "naturwissenschaftlich", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl" }, "pageArchitecture": "Variant-Vergleich: Brand-Hero plus Sub-Banner plus 2 Featured-ASIN-Showcases fuer 2 Ingwer-Shot-Varianten." },
+    { "pageName": "Benefits", "pageSlug": "07_benefits", "pageId": "5DB7F16C-C04D-4386-B9B7-B1593215B7A4", "pageType": "hub_category", "scrollHeight": 5003, "brandModules": 7, "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "naturwissenschaftlich", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl" }, "pageArchitecture": "Symptom-Hub mit Brand-Hero plus Sub-Banner plus 3 Tile-Rows (4+4+2 Pattern) als Verteiler auf 10 Benefit-Sub-Pages." },
+    { "pageName": "Immunsystem", "pageSlug": "08_immunsystem", "pageId": "4927D23C-78ED-498D-B776-821846C16EF4", "pageType": "benefit_sub_page", "scrollHeight": 3683, "brandModules": 4, "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "naturwissenschaftlich", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl" }, "pageArchitecture": "Benefit-Sub-Page mit kuratiertem 5er-ProductGrid: Brand-Hero plus Sub-Banner plus 5 ASINs (B0DJR9D7ZS, B0FC35KJ1F, B0F2CFJ91B, B0FQ66419V, B0F4535RFY)." },
+    { "pageName": "Energie und Sport", "pageSlug": "09_energie-sport", "pageId": "46F5F32D-2512-43B8-9014-03B2E7C34E43", "pageType": "benefit_sub_page", "scrollHeight": 3683, "brandModules": 4, "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "naturwissenschaftlich", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl" }, "pageArchitecture": "Benefit-Sub-Page mit kuratiertem 5er-ProductGrid. ASIN-Selection mit B0DGF6ZMBD anstatt Beauty-Shot." },
+    { "pageName": "Darmfunktion", "pageSlug": "10_darmfunktion", "pageId": "8012E3F8-58F8-4E4E-A449-138CB6957417", "pageType": "benefit_sub_page", "scrollHeight": 3605, "brandModules": 4, "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "naturwissenschaftlich", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl" }, "pageArchitecture": "Single-Product-Benefit-Page: Brand-Hero plus Sub-Banner plus Single Featured-ASIN-Showcase fuer B0CQ59NNTN (Darmfunktion-Shot). Forking-Pattern fuer Benefits mit nur einem passenden Produkt." }
+  ],
+  "storeAnalysis": {
+    "marketSegment": "Bio-Superfood-Shots im Pulverformat. Direct-to-Consumer-Bio-Supplement. 19 Pages total, 11 ASINs im Sortiment. Selbstpositionierung als Deutschlands meistverkauftes Bio Shotpulver.",
+    "primaryAudience": "Gesundheitsbewusste Konsumenten mit Lifestyle-Anspruch. Vor allem Frauen (Frauen Beauty Shots, Vanessa-Blumhagen-Endorsement), aktive Mid-Age-Zielgruppe. Vegan-Bio-Sortiment.",
+    "priceTier": "Premium-Bio-Supplement.",
+    "productComplexity": "11 ASINs in Subkategorien: 7 Shot-Varianten (Ingwer, Daily, Frauen Beauty, Energie, Variante), 3 Bundle-Sets (Routineset plus 2 Spar-Sets), 1 Tropfen-Variante (D3K2). Pulverformat mit Refill-Verpackung als USP-Anker.",
+    "brandVoice": {
+      "tonality": "Direkt und naturwissenschaftlich. Du-Ansprache, kurze Aussagen, konkrete Zahlen (60 Stk., 50 Stk., 100 Prozent, Deutschlands meistverkauftes). Funktionale Health-Claims mit Hochzahl-Quellverweisen (Immunsystem¹, Darmfunktion², Energiestoffwechsel³).",
+      "adjectives": ["bio", "vegan", "natuerlich", "nachhaltig", "ehrlich", "wissenschaftlich"],
+      "signatureClaims": ["Superfoodpulver im Shotformat", "Deutschlands meistverkauftes Bio Shotpulver", "100 Prozent echte Zutaten", "nachhaltig gesund trinken", "STAY TUNED"],
+      "voiceContrasts": ["Founder-Storytelling Lukas und Till plus naturwissenschaftliche Wirkungs-Hochzahlen", "Bio-Natuerlich plus Expert-Endorsement (Vanessa Blumhagen)"]
+    },
+    "designAesthetic": {
+      "colorPalette": "Tealgruen-weiss als Brand-Code (rundes Hansegruen-Logo-Badge). Warme Lifestyle-Toene fuer Fotos. Natuerliche Zutaten-Stillife (Ingwer, Kurkuma, Beeren, Mango).",
+      "typography": "Sans-Serif klassisch. Versalien-CTAs (JETZT ENTDECKEN, STAY TUNED, ALLE PRODUKTE).",
+      "photographyStyle": "Lifestyle-Portraets plus Produkt-Stillife mit Zutaten. Foto-Code mit warmem Outdoor-Licht. Founder-Doppelportraet als Trust-Anker.",
+      "layoutSignals": "Wiederkehrendes Pattern: Brand-Hero 3000x1000 plus Sub-Banner 3000x650 plus Content-Modul plus Section-Intro 3000x316 plus Amazon-Footer. Tile-Pair plus Tile-Quad plus Tile-Pair als Verteiler-Repertoire. Featured-ASIN-Showcase als Conversion-Anker fuer Single-Product- und Variant-Pages."
+    },
+    "positioningClaim": "Hansegruen ist Deutschlands meistverkauftes Bio-Shotpulver. Superfood-Pulver im Shotformat mit nachhaltiger Refill-Verpackung, 100 Prozent echten Zutaten und wissenschaftlich belegten Health-Claims fuer Immunsystem, Energie, Darm und Beauty.",
+    "contentStrategy": {
+      "approach": "Bridge-Banner-Funnel auf der Startseite plus symptomorientierter Benefits-Hub plus Featured-Showcase-Pages fuer Featured-Products. Hierarchische 3-Level-Architektur (Startseite plus Kategorie- und Hub-Pages plus Benefit-Sub-Pages).",
+      "emotionalLayer": "Founder-Story Lukas und Till plus Lifestyle-Portraets plus Bewegtbild-Storytelling (Videos auf der Startseite und Neuheiten-Page).",
+      "rationalLayer": "Health-Claims mit Hochzahl-Quellverweisen, kuratierte Benefit-Selections, Bestseller-Claim Deutschlands meistverkauftes, Expert-Endorsement (Vanessa Blumhagen).",
+      "modulePreferences": "hero_banner_tall, editorial_banner (Sub-Banner-Schicht), editorial_section_intro (Spacer), featured_asin_showcase, product_grid_curated_benefit (5 ASINs), product_grid_full_catalog (10-11 ASINs), editorial_tile_pair, editorial_tile_quad, video_showcase.",
+      "editorialDepth": "Variable. Startseite mit 12 Modulen sehr reich, Catalog-Pages schlank (Alle Produkte 2 Brand-Module), Benefit-Sub-Pages mittel (4 Brand-Module)."
+    },
+    "conversionPath": {
+      "primary": "ProductGrid am Page-Ende (Alle Produkte 11 ASINs, Shots 10 ASINs, Benefit-Pages 5 ASINs kuratiert)",
+      "secondary": "Featured-ASIN-Showcase fuer Single-Product- und Variant-Pages (Neuheiten, Spar-Sets, Ingwer-Shots, Darmfunktion)",
+      "tertiary": "Bridge-Banner-Funnel auf Startseite mit Verteilung in Sub-Pages, plus Founder-Bridge zu Ueber-Uns"
+    },
+    "keyStrengths": [
+      "Klare 3-Level-Architektur (Startseite plus Kategorie-/Hub-Pages plus Benefit-Sub-Pages)",
+      "Founder-Storytelling Lukas und Till als Trust-Anker auf Startseite",
+      "Symptom-Hub Benefits mit 10 Benefit-Sub-Pages und symptomatischer Sortimentsverteilung",
+      "Featured-ASIN-Showcase-Pattern als reicher Conversion-Anker mit Karussell und Detail-Text",
+      "Bestseller-Claim Deutschlands meistverkauftes Bio Shotpulver als USP-Anker im Hero",
+      "Expert-Endorsement Vanessa Blumhagen fuer Frauen Beauty Shot",
+      "Forking-Pattern: Benefit-Pages mit mehreren passenden Produkten als 5er-Grid, mit einem Produkt als Single-Featured-Showcase"
+    ],
+    "brandUSPs": [
+      "Bio-Qualitaet (alle Produkte als Bio-Shots im Pulverformat)",
+      "Pulverformat statt Fluessig-Shot als Differenzierung (Superfoodpulver im Shotformat)",
+      "Refill-Verpackung als Nachhaltigkeits-Anker",
+      "Deutschlands meistverkauftes Bio Shotpulver als Bestseller-Claim",
+      "100 Prozent echte Zutaten (vegan, ohne kuenstliche Zusaetze)",
+      "Founder-Marke Lukas und Till mit direkter Mission-Statement-Sichtbarkeit",
+      "Expert-Endorsement Vanessa Blumhagen fuer Frauen-Health-Variante"
+    ],
+    "moduleFunctionalTaxonomy": {
+      "hero_plus_sub_banner_layer": "Wiederkehrender Page-Header auf 9 von 10 Pages: Brand-Hero 3000x1000 plus Sub-Banner 3000x650 als Doppel-Schicht-Header. Strukturell uebertragbar fuer Sub-Page-Templates.",
+      "featured_asin_showcase_with_carousel": "Single-Product-Conversion-Pattern mit reichem Karussell (30+ Bilder, optional Videos) plus Detail-Beschreibung. Genutzt fuer Featured-Single-Product- und Variant-Pages.",
+      "product_grid_curated_benefit_5_asins": "Auf Benefit-Sub-Pages konsistent 5 kuratierte ASINs (4 Allround-Shots plus 1 benefit-spezifischer Shot als Position 3 oder 4).",
+      "product_grid_full_catalog_10_to_11_asins": "Auf Alle-Produkte- und Shots-Pages Vollkatalog-Grid mit 10-11 ASINs.",
+      "tile_row_4_plus_4_plus_2_hub_pattern": "Benefits-Hub-Page als 4+4+2 Tile-Sequenz fuer 10 Benefit-Sub-Pages.",
+      "tile_pair_plus_full_width_bridges_startseite": "Startseiten-Verteiler-Pattern: Tile-Pair Spar-Sets+Shots plus Single-Full-Width Benefits-Promo plus weitere Single-Full-Width-Bridges (Produktfinder, Neuheiten, Founder).",
+      "founder_bridge_with_mission_statement": "Mission-Statement Founder-Bridge als Trust-Anker auf der Startseite. Linkt auf Ueber-Uns-Page.",
+      "section_intro_spacer_3000x316": "Schmaler Section-Intro-Banner (170px hoch) als visueller Block-Trenner. Auf 9 von 10 Pages vor dem Amazon Share Footer."
+    },
+    "pageArchetypes": {
+      "startseite": {
+        "primaryFunction": "Bridge-Banner-Funnel mit Verteilung in Sub-Pages plus Founder-Storytelling",
+        "conversionMode": "Soft via Sub-Page-Verteilung",
+        "transferableTo": "Supplement-/Wellness-Marken mit symptomorientiertem Sortiment plus Founder-Trust-Story"
+      },
+      "all_products": {
+        "primaryFunction": "Vollkatalog ohne Editorial",
+        "conversionMode": "Hard via ProductGrid",
+        "transferableTo": "Marken mit kleinem bis mittlerem Sortiment (10-15 ASINs) und ohne komplexe Sortimentsgliederung"
+      },
+      "new_arrivals": {
+        "primaryFunction": "Dual-Featured-Showcase fuer Neuheits-Produkte mit Video-Storytelling und Expert-Endorsement",
+        "conversionMode": "Hard via Featured-ASIN-Showcase",
+        "transferableTo": "Marken mit 1-2 echten Neuheits-Produkten pro Saison",
+        "exampleHansegruen": "Bio Daily All-in-One Shots plus Bio Frauen Beauty Shots"
+      },
+      "category_bundle_showcase": {
+        "primaryFunction": "Sequenz aus 3 Featured-ASIN-Showcases fuer Bundle-Produkte",
+        "conversionMode": "Hard via mehrfache Featured-Showcases",
+        "transferableTo": "Marken mit kuratierter Bundle-/Set-Strategie",
+        "exampleHansegruen": "Spar-Sets-Page"
+      },
+      "category_full_catalog": {
+        "primaryFunction": "Vollkatalog der Sub-Kategorie mit ProductGrid",
+        "conversionMode": "Hard via Grid",
+        "transferableTo": "Hauptsortimentskategorien wo alle Varianten als Grid sichtbar sein sollen",
+        "exampleHansegruen": "Shots-Page"
+      },
+      "sub_category_variant_comparison": {
+        "primaryFunction": "Sequenz aus 2 Featured-ASIN-Showcases fuer Produkt-Varianten",
+        "conversionMode": "Hard via mehrfache Featured-Showcases",
+        "transferableTo": "Sub-Kategorien mit nur 2 Varianten",
+        "exampleHansegruen": "Ingwer-Shots-Page"
+      },
+      "hub_category_symptom_distribution": {
+        "primaryFunction": "Tile-Grid-Verteiler auf Sub-Pages mit symptomatischer Sortimentsgliederung",
+        "conversionMode": "Soft via Sub-Page-Verteilung",
+        "transferableTo": "Health-/Beauty-Marken mit symptomatischer Sortimentsgliederung",
+        "exampleHansegruen": "Benefits-Page mit 10 Benefit-Sub-Pages"
+      },
+      "benefit_sub_page_curated_grid": {
+        "primaryFunction": "Kuratierte 5er-ASIN-Selection fuer einen Benefit",
+        "conversionMode": "Hard via curated Grid",
+        "transferableTo": "Benefit-Sub-Pages mit mehreren passenden Produkten",
+        "exampleHansegruen": "Immunsystem, Energie und Sport (und 6 weitere Benefit-Sub-Pages)"
+      },
+      "benefit_sub_page_single_featured": {
+        "primaryFunction": "Single Featured-ASIN-Showcase fuer einen Benefit mit nur einem passenden Produkt",
+        "conversionMode": "Hard via Single-Showcase",
+        "transferableTo": "Benefit-Sub-Pages mit nur einem passenden Produkt",
+        "exampleHansegruen": "Darmfunktion"
+      }
+    },
+    "brandSpecificVsStructuralExtraction": {
+      "strukturell_uebertragbar_an_neue_brands": [
+        "3-Level-Architektur (Startseite plus Kategorie-/Hub-Pages plus Benefit-Sub-Pages)",
+        "Hero-3000x1000 plus Sub-Banner-3000x650 plus Content plus Section-Intro-3000x316 Page-Template",
+        "Bridge-Banner-Funnel auf Startseite mit Tile-Pair plus Full-Width-Bridges",
+        "Founder-Bridge als Trust-Anker mit Mission-Statement und Link auf Ueber-Uns",
+        "Symptom-Hub-Pattern mit 4+4+2 Tile-Sequenz fuer 10 Sub-Pages",
+        "Benefit-Sub-Page-Forking-Pattern: 5er-Grid fuer Benefits mit mehreren Produkten, Single-Featured-Showcase fuer Benefits mit einem Produkt",
+        "Featured-ASIN-Showcase mit Karussell plus Detail-Text als Conversion-Pattern",
+        "Triple-/Dual-Featured-Showcase-Sequence fuer Bundle-/Variant-Pages",
+        "voiceMarkers direkt naturwissenschaftlich benefit_funktional konkrete_zahl",
+        "Health-Claims mit Hochzahl-Quellverweisen (Hochstellungen)",
+        "Versalien-CTAs JETZT ENTDECKEN als wiederkehrender Action-Marker"
+      ],
+      "brand_spezifisch_NICHT_uebertragbar": [
+        "Wortbildmarke Hansegruen und tealgruenes Logo-Badge",
+        "Tealgruen-weiss Farbcode",
+        "Bestseller-Claim Deutschlands meistverkauftes Bio Shotpulver (Wahrheitsanspruch nur fuer Hansegruen)",
+        "Founder-Namen Lukas und Till mit Mission-Statement Unser Ziel ist es, durch ehrliche Beratung und vor allem Qualitaet",
+        "Konkrete Benefit-Namen (Immunsystem, Darmfunktion, Anti-Muedigkeit, Zahnfunktion etc.) - nur uebertragbar wenn neue Brand auch symptomorientiert sortiert",
+        "Konkrete Sortimentsfamilien (Shots, Ingwer-Shots, Spar-Sets) - nicht 1:1 uebernehmbar",
+        "Konkrete Produktnamen (Bio Ingwer Kurkuma Shots, Bio Daily All-in-One Shots, Bio Frauen Beauty Shots, Routineset)",
+        "Expert-Endorsement Vanessa Blumhagen (Hashimoto-Frauengesundheitsexpertin)",
+        "Konkrete Inhaltsstoffe (Kurkuma, Zitronenschale, Acerola, Amla-Fruchtfleisch, Maca, D3K2)",
+        "Visuelle Lifestyle-Welt mit Ingwer-Wurzel-Stillife, warmem Outdoor-Licht, Bio-Natuerlich-Anspruch"
+      ]
+    }
+  },
+  "openQuestions": [
+    "9 weitere Pages von Hansegruen nicht in dieser Iteration erfasst (Anti-Muedigkeit, Zahnfunktion, Zellschutz, Eisenaufnahme, Hautfunktion, Stoffwechsel, Knochenfunktion, Ueber Uns, Produktfinder). Vermutlich folgen die 7 Benefit-Sub-Pages entweder dem 5er-Grid-Pattern (Immunsystem-Style) oder dem Single-Featured-Pattern (Darmfunktion-Style) je nach Anzahl der passenden ASINs im Sortiment.",
+    "Banner-Inhalte (Sub-Banner 3000x650 und Section-Intros 3000x316) sind ohne Vision-Pass nur teilweise aufloesbar. Aria-Labels von Amazon-AI sind nur fuer Tile-Bilder und Hero-Bilder gesetzt, nicht fuer schmale Banner.",
+    "Tile-Quad-Modul auf Startseite (Modul 10 mit 4 Tiles 750x750) bleibt unaufgeloest - vermutlich Featured-Products oder Benefit-Symbol-Kacheln.",
+    "Neue Vokabular-Vorschlaege fuer v4: layoutType featured_asin_showcase, featured_asin_showcase_video (Showcase mit eingebetteten Videos), product_grid_curated_benefit (5er-Grid fuer Benefit-Sub-Pages), product_grid_full_catalog, editorial_separator (1px-Spacer), editorial_banner_section_header. pageType benefit_sub_page, hub_category_symptom_distribution, sub_category_variant_comparison. voiceRegister expert fuer Pages mit Expert-Endorsement und naturwissenschaftlichen Hochzahlen.",
+    "Mission-Statement-Text aus aria-label des Founder-Bridge-Moduls hat OCR-Artefakte (Wir leben ist uns gelungen). In voiceExamples die als gut belegbar einstufbare Kernaussage uebernommen.",
+    "Pattern Triple-Featured-Showcase-Sequence (Spar-Sets-Page) und Dual-Featured-Showcase-Sequence (Ingwer-Shots-Page, Neuheiten-Page) sind ein wiederkehrendes Brand-Pattern, koennten als ein einziges Schema-Element multi_featured_asin_showcase_sequence formalisiert werden mit Konfigurations-Parameter sequence_length 1 bis 3."
+  ]
+}

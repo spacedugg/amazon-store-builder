@@ -1,0 +1,33 @@
+{
+  "_meta": {
+    "store": "holy-energy",
+    "pageSlug": "09_shaker",
+    "pageName": "Shaker",
+    "pageId": "3B80FD95-4F71-4D28-944B-EA001C45FF3C",
+    "url": "https://www.amazon.de/stores/page/3B80FD95-4F71-4D28-944B-EA001C45FF3C",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_v4",
+    "scrollHeight": 4955,
+    "viewport": { "w": 1582, "h": 928 },
+    "domRowsTotal": 4,
+    "contentModulesCount": 3
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height":  400, "widgetClass": "Header",       "tileCount":  0, "imgCount":  3, "videoCount": 0, "productCount":  0, "note": "Header plus Brand-Hero 1500x300." },
+    { "domRowIdx": 1, "top":  507, "height": 1745, "widgetClass": "ProductGrid",  "tileCount":  0, "imgCount": 12, "videoCount": 0, "productCount": 12, "note": "ProductGrid Shaker-Sortiment mit 12 ASINs. Heading 'Holy Energy New Animal Shaker - Unser Premium Shaker passend fuer deine Lieblings...'. AUFFAELLIG: ProductGrid kommt DIREKT nach Header, BEVOR Page-Hero." },
+    { "domRowIdx": 2, "top": 2252, "height": 1242, "widgetClass": "EditorialRow", "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Page-Hero XL 1470x1227 NACH Grid. Shaker-Brand-Story-Banner. Inverse Reihenfolge." },
+    { "domRowIdx": 3, "top": 3494, "height":  200, "widgetClass": "EditorialRow", "tileCount":  4, "imgCount":  0, "videoCount": 0, "productCount":  0, "note": "Share-Footer." }
+  ],
+  "editorialBanners": [
+    { "modulePos": 3, "top": 2259, "w": 1470, "h": 1227, "asset": "48694ecf-8e3c-4999-b6a0-70892c680fc0", "note": "Page-Hero XL NACH Grid" }
+  ],
+  "uniqueAsinsOnPage": [
+    "B0DD4B832R","B0DD4C6JZ4","B0DD4BHSYH","B0DD4BG7PM","B0DD4BNH4B",
+    "B0DD49TZ81","B0DD4CQ7SJ","B0DD49JSV5","B0DD4B4GGX","B0DWXT4HLM",
+    "B0DWXRQDWJ","B0DWXQQ2G4"
+  ],
+  "openQuestionsLocal": [
+    "Inverse Page-Architektur: ProductGrid kommt VOR dem Page-Hero. Vermutung: bei Shaker (Sortiment mit klarem Produkt-Mehrwert) erst die Animal-Shaker-Auswahl direkt zur Conversion, dann unten ein emotionaler Hero. Anderer Funnel als bei Pulver-Kategorien.",
+    "Shaker-Sortiment ist nach Tier-Themen benannt (Strawberry Shark, Watermelon Whale, Citrus Cobra etc. analog zu Energy-Flavors). Shaker-Designs vermutlich pro Flavor."
+  ]
+}

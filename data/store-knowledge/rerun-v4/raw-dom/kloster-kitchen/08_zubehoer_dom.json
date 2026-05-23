@@ -1,0 +1,19 @@
+{
+  "_meta": {
+    "store": "kloster-kitchen", "pageSlug": "08_zubehoer", "pageName": "Zubehoer",
+    "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A",
+    "url": "https://www.amazon.de/stores/page/95330F7A-5A8A-44E2-B872-B761E4DEF56A",
+    "extractedAt": "2026-05-13", "extractor": "chrome_mcp_javascript_tool_v2_with_urls",
+    "scrollHeight": 4259, "viewport": {"w": 1826, "h": 888},
+    "domRowsTotal": 6, "contentModulesCount": 4,
+    "uniqueAsinsOnPage": ["B07VTN5R3K"]
+  },
+  "modules": [
+    {"domRowIdx": 0, "top": 99, "height": 395, "widgetClass": "Header", "tileCount": 0, "imgCount": 3, "videoCount": 0, "productCount": 0, "note": "Nav header", "links": [], "asins": []},
+    {"domRowIdx": 1, "top": 502, "height": 752, "widgetClass": "EditorialRow", "tileCount": 7, "imgCount": 0, "videoCount": 1, "productCount": 0, "note": "Video Hero unscharf grau Stoff Background", "links": [], "asins": []},
+    {"domRowIdx": 2, "top": 1254, "height": 470, "widgetClass": "EditorialRow", "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Image-Modul Bridge", "links": [{"linkType": "asin", "target": "B07VTN5R3K"}], "asins": ["B07VTN5R3K"]},
+    {"domRowIdx": 3, "top": 1723, "height": 743, "widgetClass": "EditorialRow", "tileCount": 17, "imgCount": 1, "videoCount": 0, "productCount": 1, "note": "Shot Glaeser Hero plus Produktbeschreibung", "links": [{"linkType": "asin", "target": "B07VTN5R3K"}], "asins": ["B07VTN5R3K"]},
+    {"domRowIdx": 4, "top": 2466, "height": 331, "widgetClass": "EditorialRow", "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Awards Banner Ausgezeichnete Innovationen", "links": [{"linkType": "page", "target": "F031D76B-9B76-426A-93A9-2EBBCB5150CF"}], "asins": []},
+    {"domRowIdx": 5, "top": 2797, "height": 201, "widgetClass": "EditorialRow", "tileCount": 4, "imgCount": 0, "videoCount": 0, "productCount": 0, "note": "amazon_share_footer", "links": [], "asins": []}
+  ]
+}

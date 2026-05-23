@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "store": "esn",
+    "pageSlug": "10_performance",
+    "pageId": "58488065-5C6A-4494-A3DB-AB7D86AB0081",
+    "pageUrl": "https://www.amazon.de/stores/page/58488065-5C6A-4494-A3DB-AB7D86AB0081",
+    "extractedAt": "2026-05-23",
+    "extractor": "v4_phase1_chrome_mcp_live",
+    "scrollHeight": 7164,
+    "viewport": { "w": 1599, "h": 842 },
+    "domRowsTotal": 6,
+    "note": "PERFORMANCE Hub-Page: Hero Video plus massiver ProductGrid 24 ASINs (Creatine, Pre-Workouts, BCAAs, Aminos) plus Produktselektor-Bridge plus Alle-Produkte-Bridge plus Footer."
+  },
+  "modules": [
+    { "domRowIdx": 0, "position": 1, "top": 99, "height": 403, "widgetType": "Header", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": ["Folgen"], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/acf527f7-c905-4e51-ad44-ec32c24f89cc._CR0%2C0%2C1920%2C384_SX1500_.jpg"], "asins": [], "pageLinks": [], "note": "Amazon Nav Header." },
+    { "domRowIdx": 1, "position": 2, "top": 403, "height": 743, "widgetType": "EditorialRow", "imgCount": 0, "videoCount": 1, "productCount": 0, "headings": [], "ctas": ["Play Video", "Play", "Mute"], "imageUrls": [], "asins": [], "pageLinks": [], "note": "Hero Video 3000x1500 als Performance-Auftakt." },
+    { "domRowIdx": 2, "position": 3, "top": 1145, "height": 3325, "widgetType": "ProductGrid", "imgCount": 24, "videoCount": 0, "productCount": 24, "headings": ["ESN Ultrapure Creatine Monohydrate, 500 g, 142 Portionen"], "ctas": [], "imageUrls": [], "asins": ["B0057ED9AM", "B074J8D4QZ", "B0F3DMTJJS", "B0DX7DZKKS", "B0GLYMYPC8", "B0GC6QVZVD", "B0DLPFDSJJ", "B0058TOBN0", "B0CLLYS2K4", "B0CLLYL8Q5", "B0CTCX9JB3", "B0CVL5Q7YS", "B0FZHH4H5S", "B0FZL5YN3L", "B0FZL7BLL7", "B0FZLF3FJK", "B00V07S4VE", "B00V07S54U", "B01C5G61KE", "B0CVN8FRVQ", "B0CV4YQR92", "B0G8YH93XY", "B0GBXMWW3H", "B0GBXHLZ9R"], "pageLinks": [], "note": "ProductGrid mit 24 Performance-ASINs (Creatine, Pre-Workouts, BCAAs, Aminos, Citrullin)." },
+    { "domRowIdx": 3, "position": 4, "top": 4470, "height": 750, "widgetType": "EditorialRow", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c0cacc85-510c-474a-8e3d-244467c95b46._CR0%2C0%2C1500%2C750_SX1500_.png"], "asins": [], "pageLinks": ["2AFC0A42-A702-462D-B255-B5203C7449F8"], "note": "Image-Banner PNG verlinkt nach PRODUKTSELEKTOR." },
+    { "domRowIdx": 4, "position": 5, "top": 5220, "height": 383, "widgetType": "EditorialRow", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bb6ee5ba-f109-4c8a-a8d3-9eebe477d015._CR0%2C0%2C3000%2C750_SX1500_.jpg"], "asins": [], "pageLinks": ["9FED5CCC-6284-44BD-AD83-AAEEBF48E23F"], "note": "Schluss-Banner zu ALLE PRODUKTE." },
+    { "domRowIdx": 5, "position": 6, "top": 5603, "height": 201, "widgetType": "EditorialRow", "imgCount": 0, "videoCount": 0, "productCount": 0, "headings": [], "ctas": ["Teilen"], "imageUrls": [], "asins": [], "pageLinks": [], "note": "Amazon Share Footer." }
+  ]
+}

@@ -1,0 +1,264 @@
+{
+  "_meta": {
+    "store": "more-nutrition",
+    "pageSlug": "01_startseite",
+    "pageId": "7AD425C6-C3C5-402D-A69D-D6201F98F888",
+    "url": "https://www.amazon.de/stores/page/7AD425C6-C3C5-402D-A69D-D6201F98F888",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_v4_widget_scan",
+    "scrollHeight": 6499,
+    "viewport": { "w": 1582, "h": 872 },
+    "domWidgetsTotal": 12,
+    "note": "Live Chrome MCP DOM-Scan. Alle [data-widgettype] Container, mit Images, Links und Page-IDs extrahiert. Hero-Banner ist Modul 0 (Header) zugeordnet. Video Modul 9 ohne Bilder, Container haelt videoCount=1."
+  },
+  "hero": {
+    "section": "hero",
+    "widgetIdx": 0,
+    "top": 99,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/9962d728-5544-400e-8acc-36fd4e2ba845._CR0%2C0%2C3000%2C600_SX1500_.jpg",
+    "imageSize": { "w": 1500, "h": 300 },
+    "imageAltText": "Colorful food banner with 'More' text. Displays various fruits, cereals, and salads in bowls against an orange background, showcasing variety and freshness.",
+    "note": "Hero-Banner oberhalb der Menueleiste. Wort-Bild-Marke MORE Nutrition auf orangem Hintergrund mit Schalen voll Lebensmitteln."
+  },
+  "navigation": {
+    "section": "nav",
+    "widgetIdx": 0,
+    "top": 386,
+    "pages": [
+      { "label": "Startseite",           "pageId": "7AD425C6-C3C5-402D-A69D-D6201F98F888" },
+      { "label": "BESTSELLER",           "pageId": "B0B4CEEB-909A-4DC6-A571-6AA4D718DB21" },
+      { "label": "ZERUP",                "pageId": "DA439A68-D45D-4BB9-97CC-5D706DC1CF89" },
+      { "label": "CHUNKY FLAVOUR",       "pageId": "D5FF78A5-8306-4D4B-80F7-F20BFBA08472" },
+      { "label": "PROTEINE",             "pageId": "9A82B50C-BA5A-4A3B-ADBB-7B729770F289" },
+      { "label": "PROTEIN MILKSHAKE",    "pageId": "5C4AE7B3-FEE1-4887-B719-D0188FF74E51" },
+      { "label": "PROTEIN ICED COFFEE",  "pageId": "3D5F63E7-0917-4ABF-9F07-7D10B2AC1639" },
+      { "label": "CLEAR PROTEIN",        "pageId": "55FD402B-A0DC-4A7C-BD00-2D0ECE353C4D" },
+      { "label": "CLEAR GLOW PEPTIDES",  "pageId": "483E27E9-01B3-441C-B1B9-DD468E87F786" },
+      { "label": "VEGAN PROTEIN",        "pageId": "A217601D-395D-4DF1-B940-4BABA3DAD6E5" },
+      { "label": "RIEGEL & LIGHT FOOD",  "pageId": "48018341-612A-4387-8B80-C2B4BE8FD4E1" },
+      { "label": "VITALSTOFFE",          "pageId": "DCB9D63B-78C7-46D4-8DEA-53DB08EDEF28" },
+      { "label": "BUNDLE",               "pageId": "B0C9AE88-4FDC-423E-9101-40DA4F857EA1" },
+      { "label": "ALLE PRODUKTE",        "pageId": "F081FD4B-1559-4A38-A4F3-FC8E6732BCEB" },
+      { "label": "PRODUKTSELEKTOR",      "pageId": "8790A8BC-31A4-4810-8B75-BF1AFCE858B5" }
+    ],
+    "note": "15 sichtbare Page-Links im Nav-Header (PROTEINE Dropdown enthaelt PROTEIN MILKSHAKE, PROTEIN ICED COFFEE, CLEAR PROTEIN, CLEAR GLOW PEPTIDES, VEGAN PROTEIN)."
+  },
+  "modules": [
+    {
+      "userModuleId": 1,
+      "widgetIdx": 1,
+      "top": 502,
+      "height": 125,
+      "widgetClass": "EditorialRow",
+      "layoutType": "follow_us_strip",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/188fce4f-6b3f-4949-b662-43da9632e1a1._CR160%2C0%2C2680%2C200_SX1500_.png",
+        "size": { "w": 1500, "h": 111 },
+        "alt": ""
+      },
+      "links": [
+        { "pageId": "F081FD4B-1559-4A38-A4F3-FC8E6732BCEB", "ariaLabel": "Orange banner with German text 'FOLGE UNS FÜR MORE NEUIGKEITEN' and decorative curved line element." }
+      ],
+      "note": "Schmaler orangefarbener Strip-Banner zwischen Nav und Hero. Bildtext 'FOLGE UNS FUER MORE NEUIGKEITEN' Aufforderung zur Brand-Folgen Aktion, klickt auf ALLE PRODUKTE Page."
+    },
+    {
+      "userModuleId": 2,
+      "widgetIdx": 2,
+      "top": 626,
+      "height": 743,
+      "widgetClass": "EditorialRow",
+      "layoutType": "full_width_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bc799122-4c2f-48c5-ab48-4e8815fde8f7._CR0%2C0%2C3000%2C1500_.jpg",
+        "size": { "w": 3000, "h": 1500 },
+        "alt": ""
+      },
+      "ctas": ["Produkte ansehen"],
+      "note": "Quadratisches grosses Brand-Hero Bild 3000x1500, CTA Button 'Produkte ansehen'. Bildtext nur via Vision lesbar."
+    },
+    {
+      "userModuleId": 3,
+      "widgetIdx": 3,
+      "top": 1369,
+      "height": 383,
+      "widgetClass": "EditorialRow",
+      "layoutType": "editorial_banner_intro",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/51eb7372-d21e-44f7-926b-436333e310b8._CR0%2C0%2C3000%2C750_SX1500_.jpg",
+        "size": { "w": 1500, "h": 375 },
+        "alt": ""
+      },
+      "links": [
+        { "pageId": "F081FD4B-1559-4A38-A4F3-FC8E6732BCEB", "ariaLabel": "Product display banner showing various bottled beverages against pink background with German text 'ENTDECKE UNSER SORTIMENT'." }
+      ],
+      "note": "Sektion-Intro Banner 'ENTDECKE UNSER SORTIMENT', klickt auf ALLE PRODUKTE."
+    },
+    {
+      "userModuleId": 4,
+      "widgetIdx": 4,
+      "top": 1751,
+      "height": 371,
+      "widgetClass": "EditorialRow",
+      "layoutType": "tile_row_2x_square",
+      "tileCount": 2,
+      "tiles": [
+        {
+          "position": "left",
+          "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/297fd3ac-4a94-484c-ba6c-31db978e9326._CR0%2C0%2C1500%2C750_SX750_SY375_.jpg",
+          "linkPageId": "DA439A68-D45D-4BB9-97CC-5D706DC1CF89",
+          "ariaLabel": "Beverage advertisement showing two glasses with orange slices and berries on bright pink background, with 'ZERUP' text and 'JETZT PROBIEREN' button."
+        },
+        {
+          "position": "right",
+          "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/54073feb-5775-45b0-ab5d-9c16be9da71a._CR0%2C0%2C1500%2C750_SX750_SY375_.jpg",
+          "linkPageId": "D5FF78A5-8306-4D4B-80F7-F20BFBA08472",
+          "ariaLabel": "Food advertisement showing two bowls - one with creamy dessert topped with sprinkles, another with colorful savory dish containing vegetables and grains."
+        }
+      ],
+      "note": "Tile-Row 2-fach Kategorie-Verteiler ZERUP plus CHUNKY FLAVOUR."
+    },
+    {
+      "userModuleId": 5,
+      "widgetIdx": 5,
+      "top": 2122,
+      "height": 371,
+      "widgetClass": "EditorialRow",
+      "layoutType": "tile_row_2x_square",
+      "tileCount": 2,
+      "tiles": [
+        {
+          "position": "left",
+          "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/f5537a76-b6af-40f7-9148-f300a84eecab._CR0%2C0%2C1500%2C750_SX750_SY375_.jpg",
+          "linkPageId": "9A82B50C-BA5A-4A3B-ADBB-7B729770F289",
+          "ariaLabel": "Advertisement showing two protein milkshakes - one vanilla-colored with sprinkles and one purple with toppings, against a purple background with 'PROTEIN' text."
+        },
+        {
+          "position": "right",
+          "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/dbb0817f-ccd7-4eb2-b3a8-918f2e1a4a35._CR0%2C0%2C1500%2C750_SX750_SY375_.jpg",
+          "linkPageId": "A217601D-395D-4DF1-B940-4BABA3DAD6E5",
+          "ariaLabel": "Two milkshake-style drinks against orange background - one vanilla-colored and one chocolate, both topped with whipped cream and drizzle. Text promotes vegan protein."
+        }
+      ],
+      "note": "Tile-Row 2-fach Kategorie-Verteiler PROTEINE plus VEGAN PROTEIN."
+    },
+    {
+      "userModuleId": 6,
+      "widgetIdx": 6,
+      "top": 2494,
+      "height": 371,
+      "widgetClass": "EditorialRow",
+      "layoutType": "tile_row_2x_square",
+      "tileCount": 2,
+      "tiles": [
+        {
+          "position": "left",
+          "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/46d3068f-e550-49f2-837c-2d6d373be94c._CR0%2C0%2C1500%2C750_SX750_SY375_.jpg",
+          "linkPageId": "48018341-612A-4387-8B80-C2B4BE8FD4E1",
+          "ariaLabel": "Light food advertisement featuring a sandwich garnished with tomatoes, greens, and a side of yellow sauce on coral background."
+        },
+        {
+          "position": "right",
+          "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d8da0b0c-4c65-43ae-a627-bf8c0988ab0d._CR0%2C0%2C1500%2C750_SX750_SY375_.jpg",
+          "linkPageId": "DCB9D63B-78C7-46D4-8DEA-53DB08EDEF28",
+          "ariaLabel": "Marketing graphic showing vitamin or supplement capsules in orange and white floating on green background with text 'VITALSTOFFE' and action button."
+        }
+      ],
+      "note": "Tile-Row 2-fach Kategorie-Verteiler RIEGEL und LIGHT FOOD plus VITALSTOFFE."
+    },
+    {
+      "userModuleId": 7,
+      "widgetIdx": 7,
+      "top": 2865,
+      "height": 371,
+      "widgetClass": "EditorialRow",
+      "layoutType": "product_grid_quad",
+      "tileCount": 4,
+      "tiles": [
+        {
+          "position": 1,
+          "asin": "B0FF561GRF",
+          "productTitleAria": "MORE Premium Shaker, 700 ml, Rot, integriertes Mischsieb & Trageschlaufe, geräuschlos, mit hochwertigem ECOZEN Kunststoff",
+          "productImageSrc": "https://m.media-amazon.com/images/I/616GnGkCd5L._AC_CR0%2C0%2C0%2C0_SX375_.jpg"
+        },
+        {
+          "position": 2,
+          "asin": "B0FF52KGH8",
+          "productTitleAria": "MORE Premium Shaker, 700 ml, Lila, integriertes Mischsieb & Trageschlaufe, geräuschlos, mit hochwertigem ECOZEN Kunststoff",
+          "productImageSrc": "https://m.media-amazon.com/images/I/61VCihvml5L._AC_CR0%2C0%2C0%2C0_SX375_.jpg"
+        },
+        {
+          "position": 3,
+          "asin": "B0G8J5KBDH",
+          "productTitleAria": "MORE Fizi, White Peach, 330 ml (6er Pack), Ballaststoff-Limo mit 10 g Ballaststoffe pro Dose",
+          "productImageSrc": "https://m.media-amazon.com/images/I/711r3QZ1C5L._AC_CR0%2C0%2C0%2C0_SX375_.jpg"
+        },
+        {
+          "position": 4,
+          "asin": "B0G8K45X87",
+          "productTitleAria": "MORE Fizi, Lemon Lime, 330 ml (6er Pack), Ballaststoff-Limo mit 10 g Ballaststoffe pro Dose",
+          "productImageSrc": "https://m.media-amazon.com/images/I/71dwji7BXNL._AC_CR0%2C0%2C0%2C0_SX375_.jpg"
+        }
+      ],
+      "note": "ProductGrid 4 ASINs (Premium Shaker 2x plus Fizi Limo 2x), Schnellansicht-CTA pro Tile."
+    },
+    {
+      "userModuleId": 8,
+      "widgetIdx": 8,
+      "top": 3236,
+      "height": 750,
+      "widgetClass": "EditorialRow",
+      "layoutType": "full_width_image_creative",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d6865a5f-5e09-4f0a-b72c-b6bb65ac059d._CR0%2C0%2C1280%2C640_SX1500_.jpg",
+        "size": { "w": 1280, "h": 640 },
+        "alt": ""
+      },
+      "links": [
+        { "pageId": "8790A8BC-31A4-4810-8B75-BF1AFCE858B5", "ariaLabel": "Weitere Informationen" }
+      ],
+      "note": "Grosses Creative-Image Banner. Klick fuehrt zu Page PRODUKTSELEKTOR. Bildtext per Vision lesbar."
+    },
+    {
+      "userModuleId": 9,
+      "widgetIdx": 9,
+      "top": 3986,
+      "height": 743,
+      "widgetClass": "EditorialRow",
+      "layoutType": "video_module",
+      "tileCount": 1,
+      "videoCount": 1,
+      "note": "Video-Modul. Inhalt nicht im DOM lesbar, vermutlich Brand-Story oder Produkt-Demo. Vision Follow-up empfohlen."
+    },
+    {
+      "userModuleId": 10,
+      "widgetIdx": 10,
+      "top": 4729,
+      "height": 309,
+      "widgetClass": "EditorialRow",
+      "layoutType": "editorial_banner_closing",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/12430409-12ed-4980-9d59-3e2dc8ccf9f1._CR0%2C0%2C3000%2C600_SX1500_.jpg",
+        "size": { "w": 1500, "h": 300 },
+        "alt": ""
+      },
+      "links": [
+        { "pageId": "F081FD4B-1559-4A38-A4F3-FC8E6732BCEB", "ariaLabel": "Multiple colorful packages of Glore snack products arranged on a pink background. Text 'ALLE PRODUKTE' visible at the top." }
+      ],
+      "note": "Closing-Banner mit Pink-Hintergrund und Produkt-Stillife. Headline ALLE PRODUKTE, klickt auf ALLE PRODUKTE Page."
+    }
+  ],
+  "excluded": [
+    {
+      "widgetIdx": 11,
+      "top": 5038,
+      "height": 200,
+      "reason": "Amazon Share-Footer. Fuer Brand-Analyse nicht relevant, wird aus Phase 2 ausgeschlossen."
+    }
+  ],
+  "uniqueAsinsOnPage": ["B0FF561GRF", "B0FF52KGH8", "B0G8J5KBDH", "B0G8K45X87"]
+}

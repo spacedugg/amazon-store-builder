@@ -1,0 +1,92 @@
+{
+  "brandName": "HOLY Energy",
+  "storeUrl": "https://www.amazon.de/stores/HOLYEnergy/page/7913E121-CB43-4349-A8D2-9F0843B226E4",
+  "totalPages": 12,
+  "extractedFromV3At": "2026-05-23",
+  "pages": [
+    {
+      "position": 1,
+      "pageName": "Startseite",
+      "pageId": "7913E121-CB43-4349-A8D2-9F0843B226E4",
+      "url": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F0843B226E4",
+      "hasOldModuleData": true
+    },
+    {
+      "position": 2,
+      "pageName": "Für Neueinsteiger",
+      "pageId": "E0597C1D-5961-4E87-9CA5-2FAF0299330D",
+      "url": "https://www.amazon.de/stores/page/E0597C1D-5961-4E87-9CA5-2FAF0299330D",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 3,
+      "pageName": "Bestseller",
+      "pageId": "E8F850A5-CE46-4877-88C4-F4F5A0365D02",
+      "url": "https://www.amazon.de/stores/page/E8F850A5-CE46-4877-88C4-F4F5A0365D02",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 4,
+      "pageName": "Energy",
+      "pageId": "18BC62B2-B4AF-4995-B743-E80AECFA53AA",
+      "url": "https://www.amazon.de/stores/page/18BC62B2-B4AF-4995-B743-E80AECFA53AA",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 5,
+      "pageName": "Iced Tea",
+      "pageId": "527A4D3B-EC68-4755-BF8D-2BF264AE1694",
+      "url": "https://www.amazon.de/stores/page/527A4D3B-EC68-4755-BF8D-2BF264AE1694",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 6,
+      "pageName": "Hydration",
+      "pageId": "34F0F6AC-314F-4167-9EDA-54E94AC937C7",
+      "url": "https://www.amazon.de/stores/page/34F0F6AC-314F-4167-9EDA-54E94AC937C7",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 7,
+      "pageName": "Milkshakes",
+      "pageId": "6AD7F40F-ED3C-4B02-BDC9-310A071E3EC7",
+      "url": "https://www.amazon.de/stores/page/6AD7F40F-ED3C-4B02-BDC9-310A071E3EC7",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 8,
+      "pageName": "Starter Sets",
+      "pageId": "15F6D24E-FF9D-4FE5-A1FB-5A2AD609CFE1",
+      "url": "https://www.amazon.de/stores/page/15F6D24E-FF9D-4FE5-A1FB-5A2AD609CFE1",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 9,
+      "pageName": "Shaker",
+      "pageId": "3B80FD95-4F71-4D28-944B-EA001C45FF3C",
+      "url": "https://www.amazon.de/stores/page/3B80FD95-4F71-4D28-944B-EA001C45FF3C",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 10,
+      "pageName": "Probier-Boxen",
+      "pageId": "229C0965-6260-45EF-8A4F-1723BD514037",
+      "url": "https://www.amazon.de/stores/page/229C0965-6260-45EF-8A4F-1723BD514037",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 11,
+      "pageName": "Adventskalender",
+      "pageId": "0AB41119-9BEE-431D-B7CC-346E3516D209",
+      "url": "https://www.amazon.de/stores/page/0AB41119-9BEE-431D-B7CC-346E3516D209",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 12,
+      "pageName": "Über uns",
+      "pageId": "69AF9424-DDC3-4F16-8AE0-F35BB75BD83A",
+      "url": "https://www.amazon.de/stores/page/69AF9424-DDC3-4F16-8AE0-F35BB75BD83A",
+      "hasOldModuleData": false
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "_meta": {
+    "store": "bedsure",
+    "pageSlug": "11_ueber-bedsure",
+    "pageName": "Ueber Bedsure",
+    "pageId": "ED1B32C3-3890-4245-8A84-ECD16C98BFAF",
+    "url": "https://www.amazon.de/stores/page/ED1B32C3-3890-4245-8A84-ECD16C98BFAF",
+    "extractedAt": "2026-05-12",
+    "extractor": "chrome_mcp_javascript_tool_compact",
+    "scrollHeight": 9681,
+    "domRowsTotal": 15,
+    "contentModulesCount": 13
+  },
+  "modules": [
+    { "domRowIdx":  0, "top":   99, "height":  408, "widgetClass": null,                                "tileCount":  0, "imgCount":  3, "videoCount": 0, "productCount":  0, "note": "Nav header plus Hero-Banner Bereich ueber Menueleiste." },
+    { "domRowIdx":  1, "top":  507, "height":  769, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Hero-Banner Ueber Bedsure (769px hoch)." },
+    { "domRowIdx":  2, "top": 1275, "height":  694, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Editorial-Banner gross." },
+    { "domRowIdx":  3, "top": 1969, "height":  385, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  7, "imgCount":  0, "videoCount": 1, "productCount":  0, "note": "Video-Banner." },
+    { "domRowIdx":  4, "top": 2354, "height":  153, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro." },
+    { "domRowIdx":  5, "top": 2507, "height":  556, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 32, "imgCount":  4, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  6, "top": 3063, "height":  556, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 32, "imgCount":  4, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  7, "top": 3620, "height":  124, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro." },
+    { "domRowIdx":  8, "top": 3743, "height":  973, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 16, "imgCount":  2, "videoCount": 0, "productCount":  0, "note": "Sehr grosser Editorial-Block (973px hoch), wahrscheinlich Brand-Story-Modul." },
+    { "domRowIdx":  9, "top": 4717, "height":  973, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 16, "imgCount":  2, "videoCount": 0, "productCount":  0, "note": "Identische Komposition wie Modul 8, vermutlich weiteres Brand-Story-Pair." },
+    { "domRowIdx": 10, "top": 5690, "height":  973, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 16, "imgCount":  2, "videoCount": 0, "productCount":  0, "note": "Drittes Brand-Story-Pair, gleiches Pattern." },
+    { "domRowIdx": 11, "top": 6663, "height":  712, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx": 12, "top": 7375, "height":  101, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro." },
+    { "domRowIdx": 13, "top": 7476, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 56, "imgCount":  7, "videoCount": 0, "productCount":  0, "note": "Sehr grosses Tile-Grid 56 Tiles." },
+    { "domRowIdx": 14, "top": 8218, "height":  201, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  4, "imgCount":  0, "videoCount": 0, "productCount":  0, "note": "Schmale 201px-Row am Ende, vermutlich Awards oder Share Footer." }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "store": "nespresso",
+    "pageSlug": "07_inissia",
+    "pageName": "Inissia",
+    "pageId": "C90F9D89-ECF7-4A54-B6C5-3D2AB6D2B51F",
+    "url": "https://www.amazon.de/stores/page/C90F9D89-ECF7-4A54-B6C5-3D2AB6D2B51F",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_compact",
+    "scrollHeight": 3752,
+    "viewport": { "w": 1599, "h": 842 },
+    "domRowsTotal": 5,
+    "contentModulesCount": 5
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height": 395, "widgetType": "Header",       "tileCount": 0, "imgCount": 1, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Nav header." },
+    { "domRowIdx": 1, "top":  576, "height": 663, "widgetType": "ProductGrid",  "tileCount": 0, "imgCount": 5, "videoCount": 0, "productCount": 8, "asinCount": 6, "note": "ProductGrid mit 8 product-Markern (6 unique ASINs: Inissia Farbvarianten).", "sampleAsins": ["B00IALN0GW","B00G5YP1ZE","B00G5YOVZA","B00G98EJHM"] },
+    { "domRowIdx": 2, "top": 1238, "height": 743, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 0, "videoCount": 1, "productCount": 0, "asinCount": 0, "note": "Hero-Video Vollformat (Inissia Maschinen-Demo)." },
+    { "domRowIdx": 3, "top": 1981, "height": 309, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 1, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Section Intro / Brand-Statement Banner." },
+    { "domRowIdx": 4, "top": 2290, "height": 201, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 0, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Amazon Share Footer." }
+  ],
+  "openQuestionsLocal": [
+    "Inissia hat 6 ASIN-Varianten. Pattern aehnlich Essenza Mini/Citiz."
+  ]
+}

@@ -1,0 +1,236 @@
+{
+  "schemaVersion": "v4-2026-05",
+  "store": "more-nutrition",
+  "pageUrl": "https://www.amazon.de/stores/page/B0B4CEEB-909A-4DC6-A571-6AA4D718DB21",
+  "pageName": "BESTSELLER",
+  "pageId": "B0B4CEEB-909A-4DC6-A571-6AA4D718DB21",
+  "pageSlug": "02_bestseller",
+  "pageLevel": 1,
+  "pageType": "bestseller",
+  "scrollHeight": 9035,
+  "viewport": { "w": 1582, "h": 872 },
+  "extractedAt": "2026-05-23",
+  "extractor": "v4_chrome_mcp_widget_scan",
+  "phase1Source": "data/store-knowledge/rerun-v4/raw-dom/more-nutrition/02_bestseller_dom.json",
+  "contentStats": { "domModules": 12, "logicalModules": 12, "brandModules": 10, "totalImages": 26, "totalVideos": 1, "uniqueAsinsOnPage": 24 },
+  "heroBanner": {
+    "description": "BESTSELLER Hero-Banner ueber der Menueleiste. Header-Bild 1280x256 mit Produktansicht. Bildtext nur via Vision lesbar.",
+    "textOnImage": { "visibleText": null, "textType": "section_label", "origin": "baked_in", "headline": "BESTSELLER", "subline": null, "cta": null, "directionCues": null },
+    "estimatedDimensions": "3000x600",
+    "imageCategory": "product_in_setting",
+    "elementProportions": { "lifestyle_photo": 40, "product_photo": 30, "text": 15, "solid_background": 15, "logo": 0, "graphic_elements": 0, "icons": 0, "decorative_elements": 0 }
+  },
+  "modules": [
+    {
+      "position": 1, "moduleId": "bestseller_mod_01", "moduleName": "Amazon Nav Header",
+      "layoutType": "amazon_nav_header", "layoutShape": "chrome_thin", "tileCount": 0,
+      "designIntent": "mimics_native_chrome", "designIntentDetail": "Identisch zur Startseite.",
+      "structuralPattern": "Nav-Leiste.", "moduleFunction": "Navigationsschicht.",
+      "relationToPrevious": "none", "relationToNext": "hands_off_to_navigation",
+      "visualBridge": "hard_break_intentional", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": null, "textType": "section_label", "origin": "amazon_chrome", "headline": null, "subline": null, "cta": "Folgen", "directionCues": null },
+      "tiles": [],
+      "dom": { "widgetClass": "Header", "visibleHeadings": [], "ctaLabels": ["Folgen", "Teilen"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": null, "toolLayoutName": null, "toolLayoutType": "amazon_native", "toolLayoutRole": "amazon_native"
+    },
+    {
+      "position": 2, "moduleId": "bestseller_mod_02", "moduleName": "Amazon Empfohlene Angebote Block",
+      "layoutType": "amazon_recommended_offers", "layoutShape": "chrome_thin", "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": "Amazon-natives 'Empfohlene Angebote' Modul. Lazy-loaded, kein Brand-Design.",
+      "structuralPattern": "Schmaler Header-Block ohne Brand-Inhalt.", "moduleFunction": "Amazon Personalisierung.",
+      "relationToPrevious": "extends_chrome", "relationToNext": "hands_off_to_navigation",
+      "visualBridge": "hard_break_intentional", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Empfohlene Angebote", "textType": "section_label", "origin": "amazon_chrome", "headline": "Empfohlene Angebote", "subline": null, "cta": null, "directionCues": null },
+      "tiles": [],
+      "dom": { "widgetClass": "ProductGrid", "visibleHeadings": ["Empfohlene Angebote"], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": null, "toolLayoutName": null, "toolLayoutType": "amazon_native", "toolLayoutRole": "amazon_native"
+    },
+    {
+      "position": 3, "moduleId": "bestseller_mod_03", "moduleName": "Brand Video Modul",
+      "layoutType": "video_module", "layoutShape": "full_width_video", "tileCount": 1,
+      "designIntent": "brand_story", "designIntentDetail": "Brand-Video direkt nach Empfohlene-Angebote.",
+      "structuralPattern": "Vollbreite-Videoplayer.", "moduleFunction": "Markenstimmung als Page-Auftakt.",
+      "relationToPrevious": "opens_section_thematically", "relationToNext": "sets_up_next",
+      "visualBridge": "hard_break_intentional", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null },
+      "tiles": [{ "position": 1, "imageCategory": "video", "toolTileType": "video", "toolImageType": "FULL_WIDTH", "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null }, "tileContentTopic": { "primarySubject": "Brand Video", "productOrCategoryRef": null, "intent": "story", "rolePosition": "Brand Video" }, "visualContent": "Brand-Video, Inhalt nicht im DOM lesbar.", "elementProportions": { "lifestyle_photo": 100 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": null, "linksTo": null }],
+      "dom": { "widgetClass": "EditorialRow", "visibleHeadings": [], "ctaLabels": [], "imageUrls": [], "videoCount": 1 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "editorial"
+    },
+    {
+      "position": 4, "moduleId": "bestseller_mod_04", "moduleName": "ZERUP Kategorie Lead Image + 4 ASIN Tiles",
+      "layoutType": "category_block_lead_image_plus_quad", "layoutShape": "grid_five_columns", "tileCount": 5,
+      "designIntent": "category_bestseller_block",
+      "designIntentDetail": "Bestseller-Block ZERUP: linkes grosses Lead-Image als Brand-Tile plus 4 ASIN-Schnellansicht-Tiles rechts. Layout: 1 Lead + 4 ASIN-Tiles in einer Reihe.",
+      "structuralPattern": "5-spaltige Reihe: erste Spalte ist quadratisches Brand-Lead-Image, naechste 4 sind ASIN-Schnellansicht-Tiles.",
+      "moduleFunction": "Zeigt Bestseller pro Sortimentskategorie. Lead-Image verlinkt auf ZERUP-Page, ASIN-Tiles ermoeglichen Direkt-Conversion.",
+      "relationToPrevious": "promises_proof_below", "relationToNext": "repeats_pattern_to_next",
+      "visualBridge": "shared_subject_class", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "ZERUP", "textType": "category_label", "origin": "baked_in", "headline": "ZERUP", "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "product", "toolTileType": "image", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "page", "linkTarget": "DA439A68-D45D-4BB9-97CC-5D706DC1CF89", "ctaLabel": null }, "tileContentTopic": { "primarySubject": "ZERUP Kategorie Lead", "productOrCategoryRef": "DA439A68-D45D-4BB9-97CC-5D706DC1CF89", "intent": "navigate", "rolePosition": "Kategorie Lead" }, "visualContent": "Drei bunte fruchtige Drinks in Glaesern mit Eis, garniert mit Minze und Fruechten. Bildtext 'ZERUP'.", "elementProportions": { "lifestyle_photo": 60, "product_photo": 25, "text": 15 }, "textOnImage": { "visibleText": "ZERUP", "textType": "category_label", "origin": "baked_in", "headline": "ZERUP", "subline": null, "cta": null, "directionCues": null }, "ctaText": null, "linksTo": "ZERUP" },
+        { "position": 2, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0CF65DKX9", "ctaLabel": "Schnellansicht" }, "tileContentTopic": { "primarySubject": "Zerup Pink Grapefruit", "productOrCategoryRef": "B0CF65DKX9", "intent": "convert", "rolePosition": "ASIN Tile 1" }, "visualContent": "Amazon ASIN Tile Zerup Pink Grapefruit Flasche.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "Schnellansicht", "linksTo": "B0CF65DKX9" },
+        { "position": 3, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0C3MCXRG1", "ctaLabel": "Schnellansicht" }, "tileContentTopic": { "primarySubject": "Zerup Lemon Iced Tea", "productOrCategoryRef": "B0C3MCXRG1", "intent": "convert", "rolePosition": "ASIN Tile 2" }, "visualContent": "Amazon ASIN Tile Zerup Lemon Iced Tea.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "Schnellansicht", "linksTo": "B0C3MCXRG1" },
+        { "position": 4, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0C3M6NRXD", "ctaLabel": "Schnellansicht" }, "tileContentTopic": { "primarySubject": "Zerup Capri Orange", "productOrCategoryRef": "B0C3M6NRXD", "intent": "convert", "rolePosition": "ASIN Tile 3" }, "visualContent": "Amazon ASIN Tile Zerup Capri Orange.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "Schnellansicht", "linksTo": "B0C3M6NRXD" },
+        { "position": 5, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0C3LZ2RC2", "ctaLabel": "Schnellansicht" }, "tileContentTopic": { "primarySubject": "Zerup Red Apple", "productOrCategoryRef": "B0C3LZ2RC2", "intent": "convert", "rolePosition": "ASIN Tile 4" }, "visualContent": "Amazon ASIN Tile Zerup Red Apple.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "Schnellansicht", "linksTo": "B0C3LZ2RC2" }
+      ],
+      "dom": { "widgetClass": "EditorialRow", "visibleHeadings": [], "ctaLabels": ["Schnellansicht", "Schnellansicht", "Schnellansicht", "Schnellansicht"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "5grid", "toolLayoutName": "Lead + 4 Tiles", "toolLayoutType": "standard", "toolLayoutRole": "category_bestseller"
+    },
+    {
+      "position": 5, "moduleId": "bestseller_mod_05", "moduleName": "CHUNKY FLAVOUR Kategorie Lead Image + 4 ASIN Tiles",
+      "layoutType": "category_block_lead_image_plus_quad", "layoutShape": "grid_five_columns", "tileCount": 5,
+      "designIntent": "category_bestseller_block",
+      "designIntentDetail": "Spiegel-Block CHUNKY FLAVOUR: 4 ASIN-Tiles links plus Lead-Image rechts.",
+      "structuralPattern": "5-spaltige Reihe wie Modul 4 aber mit umgekehrter Anordnung Lead-rechts.",
+      "moduleFunction": "Wiederholt das Bestseller-Block-Pattern fuer CHUNKY FLAVOUR.",
+      "relationToPrevious": "repeats_pattern", "relationToNext": "repeats_pattern_to_next",
+      "visualBridge": "shared_pattern", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "CHUNKY FLAVOUR", "textType": "category_label", "origin": "baked_in", "headline": "CHUNKY FLAVOUR", "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0D3M1JNDG", "ctaLabel": "Schnellansicht" }, "tileContentTopic": { "primarySubject": "Chunky Flavour Vanilla Perfection", "productOrCategoryRef": "B0D3M1JNDG", "intent": "convert", "rolePosition": "ASIN Tile 1" }, "visualContent": "Amazon ASIN Tile Chunky Flavour Vanilla.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "Schnellansicht", "linksTo": "B0D3M1JNDG" },
+        { "position": 2, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0D3M26DTL", "ctaLabel": "Schnellansicht" }, "tileContentTopic": { "primarySubject": "Chunky Flavour Fudge Brownie", "productOrCategoryRef": "B0D3M26DTL", "intent": "convert", "rolePosition": "ASIN Tile 2" }, "visualContent": "Amazon ASIN Tile Chunky Flavour Fudge Brownie.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "Schnellansicht", "linksTo": "B0D3M26DTL" },
+        { "position": 3, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0D3M2KFC6", "ctaLabel": "Schnellansicht" }, "tileContentTopic": { "primarySubject": "Chunky Flavour Stracciatella", "productOrCategoryRef": "B0D3M2KFC6", "intent": "convert", "rolePosition": "ASIN Tile 3" }, "visualContent": "Amazon ASIN Tile Chunky Flavour Stracciatella.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "Schnellansicht", "linksTo": "B0D3M2KFC6" },
+        { "position": 4, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0D3M23WNV", "ctaLabel": "Schnellansicht" }, "tileContentTopic": { "primarySubject": "Chunky Flavour Blueberry Cheesecake", "productOrCategoryRef": "B0D3M23WNV", "intent": "convert", "rolePosition": "ASIN Tile 4" }, "visualContent": "Amazon ASIN Tile Blueberry Cheesecake.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "Schnellansicht", "linksTo": "B0D3M23WNV" },
+        { "position": 5, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "page", "linkTarget": "D5FF78A5-8306-4D4B-80F7-F20BFBA08472", "ctaLabel": null }, "tileContentTopic": { "primarySubject": "CHUNKY FLAVOUR Kategorie Lead", "productOrCategoryRef": "D5FF78A5-8306-4D4B-80F7-F20BFBA08472", "intent": "navigate", "rolePosition": "Kategorie Lead" }, "visualContent": "Zwei Bowls, eine mit Granola, Pfirsichen, Karamell, eine mit pink-marmoriertem Joghurt. Bildtext 'CHUNKY FLAVOUR' unten.", "elementProportions": { "lifestyle_photo": 75, "text": 15, "solid_background": 10 }, "textOnImage": { "visibleText": "CHUNKY FLAVOUR", "textType": "category_label", "origin": "baked_in", "headline": "CHUNKY FLAVOUR", "subline": null, "cta": null, "directionCues": null }, "ctaText": null, "linksTo": "CHUNKY FLAVOUR" }
+      ],
+      "dom": { "widgetClass": "EditorialRow", "visibleHeadings": [], "ctaLabels": ["Schnellansicht", "Schnellansicht", "Schnellansicht", "Schnellansicht"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "5grid", "toolLayoutName": "4 Tiles + Lead", "toolLayoutType": "standard", "toolLayoutRole": "category_bestseller"
+    },
+    {
+      "position": 6, "moduleId": "bestseller_mod_06", "moduleName": "PROTEIN MILKSHAKE Kategorie Lead Image + 4 ASIN Tiles",
+      "layoutType": "category_block_lead_image_plus_quad", "layoutShape": "grid_five_columns", "tileCount": 5,
+      "designIntent": "category_bestseller_block",
+      "designIntentDetail": "Lead-Image PROTEIN MILKSHAKE links plus 4 Protein-ASIN-Tiles rechts.",
+      "structuralPattern": "Wie Modul 4: Lead-Image links + 4 ASIN-Tiles rechts.",
+      "moduleFunction": "Wiederholt Bestseller-Block-Pattern fuer PROTEIN MILKSHAKE.",
+      "relationToPrevious": "repeats_pattern", "relationToNext": "repeats_pattern_to_next",
+      "visualBridge": "shared_pattern", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "PROTEIN", "textType": "category_label", "origin": "baked_in", "headline": "PROTEIN", "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "product", "toolTileType": "image", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "page", "linkTarget": "5C4AE7B3-FEE1-4887-B719-D0188FF74E51", "ctaLabel": null }, "tileContentTopic": { "primarySubject": "PROTEIN MILKSHAKE Kategorie Lead", "productOrCategoryRef": "5C4AE7B3-FEE1-4887-B719-D0188FF74E51", "intent": "navigate", "rolePosition": "Kategorie Lead" }, "visualContent": "Lila Hintergrund. Zwei Protein-Shakes: weiss mit Blume, lila mit Frucht-Toppings. Bildtext 'PROTEIN'.", "elementProportions": { "solid_background": 35, "product_photo": 35, "lifestyle_photo": 20, "text": 10 }, "textOnImage": { "visibleText": "PROTEIN", "textType": "category_label", "origin": "baked_in", "headline": "PROTEIN", "subline": null, "cta": null, "directionCues": null }, "ctaText": null, "linksTo": "PROTEIN MILKSHAKE" },
+        { "position": 2, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B07VFSG17K", "ctaLabel": "Schnellansicht" }, "tileContentTopic": { "primarySubject": "Protein Vanille-Eiscreme 600g", "productOrCategoryRef": "B07VFSG17K", "intent": "convert", "rolePosition": "ASIN Tile 1" }, "visualContent": "Amazon ASIN Tile Protein Vanille-Eiscreme.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "Schnellansicht", "linksTo": "B07VFSG17K" },
+        { "position": 3, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B07VHZD7YH", "ctaLabel": "Schnellansicht" }, "tileContentTopic": { "primarySubject": "Protein Eiskaffee 600g", "productOrCategoryRef": "B07VHZD7YH", "intent": "convert", "rolePosition": "ASIN Tile 2" }, "visualContent": "Amazon ASIN Tile Protein Eiskaffee.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "Schnellansicht", "linksTo": "B07VHZD7YH" },
+        { "position": 4, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B07VDR1TCP", "ctaLabel": "Schnellansicht" }, "tileContentTopic": { "primarySubject": "Protein Geschmacksneutral 600g", "productOrCategoryRef": "B07VDR1TCP", "intent": "convert", "rolePosition": "ASIN Tile 3" }, "visualContent": "Amazon ASIN Tile Protein Geschmacksneutral.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "Schnellansicht", "linksTo": "B07VDR1TCP" },
+        { "position": 5, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0B8VKF7LH", "ctaLabel": "Schnellansicht" }, "tileContentTopic": { "primarySubject": "Protein Milkshake Cinnalicious", "productOrCategoryRef": "B0B8VKF7LH", "intent": "convert", "rolePosition": "ASIN Tile 4" }, "visualContent": "Amazon ASIN Tile Protein Milkshake Cinnalicious.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "Schnellansicht", "linksTo": "B0B8VKF7LH" }
+      ],
+      "dom": { "widgetClass": "EditorialRow", "visibleHeadings": [], "ctaLabels": ["Schnellansicht", "Schnellansicht", "Schnellansicht", "Schnellansicht"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "5grid", "toolLayoutName": "Lead + 4 Tiles", "toolLayoutType": "standard", "toolLayoutRole": "category_bestseller"
+    },
+    {
+      "position": 7, "moduleId": "bestseller_mod_07", "moduleName": "RIEGEL Kategorie Lead Image + 3 ASIN Tiles",
+      "layoutType": "category_block_lead_image_plus_triple", "layoutShape": "grid_four_columns", "tileCount": 4,
+      "designIntent": "category_bestseller_block",
+      "designIntentDetail": "Variant mit nur 3 ASIN-Tiles statt 4: PROTEIN BARS Lead-Image plus 3 Riegel/Bar-ASINs.",
+      "structuralPattern": "4-spaltige Reihe Lead + 3 ASIN-Tiles, kuerzere Variante des Bestseller-Blocks.",
+      "moduleFunction": "Kuerzerer Bestseller-Block fuer eine Sub-Kategorie mit weniger Featured-Bestsellern.",
+      "relationToPrevious": "repeats_pattern", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_pattern", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "PROTEIN BARS", "textType": "category_label", "origin": "baked_in", "headline": "PROTEIN BARS", "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "product", "toolTileType": "image", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "page", "linkTarget": "48018341-612A-4387-8B80-C2B4BE8FD4E1", "ctaLabel": null }, "tileContentTopic": { "primarySubject": "RIEGEL & LIGHT FOOD Lead", "productOrCategoryRef": "48018341-612A-4387-8B80-C2B4BE8FD4E1", "intent": "navigate", "rolePosition": "Kategorie Lead" }, "visualContent": "Pink Hintergrund. Protein-Riegel mit weisser Glasur, Bruchstelle zeigt goldbraune Fuellung. Bildtext 'PROTEIN BARS'.", "elementProportions": { "solid_background": 40, "product_photo": 40, "text": 15, "lifestyle_photo": 5 }, "textOnImage": { "visibleText": "PROTEIN BARS", "textType": "category_label", "origin": "baked_in", "headline": "PROTEIN BARS", "subline": null, "cta": null, "directionCues": null }, "ctaText": null, "linksTo": "RIEGEL & LIGHT FOOD" },
+        { "position": 2, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0G4DMP28R", "ctaLabel": "Schnellansicht" }, "tileContentTopic": { "primarySubject": "Protein Satisbites 12er", "productOrCategoryRef": "B0G4DMP28R", "intent": "convert", "rolePosition": "ASIN Tile 1" }, "visualContent": "Amazon ASIN Tile Protein Satisbites Dark Chocolate Caramel Brownie.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "Schnellansicht", "linksTo": "B0G4DMP28R" },
+        { "position": 3, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0DRW5MBG2", "ctaLabel": "Schnellansicht" }, "tileContentTopic": { "primarySubject": "Protein Bar White Chocolate Caramel Crunch", "productOrCategoryRef": "B0DRW5MBG2", "intent": "convert", "rolePosition": "ASIN Tile 2" }, "visualContent": "Amazon ASIN Tile Protein Bar White Chocolate Caramel Crunch.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "Schnellansicht", "linksTo": "B0DRW5MBG2" },
+        { "position": 4, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0CJFTKZ2M", "ctaLabel": "Schnellansicht" }, "tileContentTopic": { "primarySubject": "Protein Bar Caramel Crunch", "productOrCategoryRef": "B0CJFTKZ2M", "intent": "convert", "rolePosition": "ASIN Tile 3" }, "visualContent": "Amazon ASIN Tile Protein Bar Caramel Crunch.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "Schnellansicht", "linksTo": "B0CJFTKZ2M" }
+      ],
+      "dom": { "widgetClass": "EditorialRow", "visibleHeadings": ["More Protein Satisbites"], "ctaLabels": ["Schnellansicht", "Schnellansicht", "Schnellansicht"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "4grid", "toolLayoutName": "Lead + 3 Tiles", "toolLayoutType": "standard", "toolLayoutRole": "category_bestseller"
+    },
+    {
+      "position": 8, "moduleId": "bestseller_mod_08", "moduleName": "VITALSTOFFE Sektion Intro Banner",
+      "layoutType": "editorial_section_intro", "layoutShape": "full_width_banner", "tileCount": 1,
+      "designIntent": "section_intro",
+      "designIntentDetail": "Sektion-Intro Banner auf Gruen mit Kapseln/Pillen-Visual und Headline 'VITALSTOFFE'.",
+      "structuralPattern": "Vollbreiter Banner als Trennlinie zu VITALSTOFFE-Sortiment.",
+      "moduleFunction": "Setzt visuelles Kapitel-Marker fuer VITALSTOFFE-Bereich darunter.",
+      "relationToPrevious": "summarizes_above", "relationToNext": "sets_up_next",
+      "visualBridge": "hard_break_intentional", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "VITALSTOFFE", "textType": "section_label", "origin": "baked_in", "headline": "VITALSTOFFE", "subline": null, "cta": null, "directionCues": null },
+      "tiles": [{ "position": 1, "imageCategory": "product", "toolTileType": "image", "toolImageType": "FULL_WIDTH", "link": { "clickable": true, "linkType": "page", "linkTarget": "DCB9D63B-78C7-46D4-8DEA-53DB08EDEF28", "ctaLabel": null }, "tileContentTopic": { "primarySubject": "VITALSTOFFE Section Intro", "productOrCategoryRef": "DCB9D63B-78C7-46D4-8DEA-53DB08EDEF28", "intent": "navigate", "rolePosition": "Section Intro" }, "visualContent": "Verschiedene Supplement-Kapseln und Pillen verstreut auf gruenem Hintergrund. Bildtext 'VITALSTOFFE'.", "elementProportions": { "solid_background": 50, "product_photo": 35, "text": 15 }, "textOnImage": { "visibleText": "VITALSTOFFE", "textType": "section_label", "origin": "baked_in", "headline": "VITALSTOFFE", "subline": null, "cta": null, "directionCues": null }, "ctaText": null, "linksTo": "VITALSTOFFE" }],
+      "dom": { "widgetClass": "EditorialRow", "visibleHeadings": [], "ctaLabels": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d43a5c24-915a-4a55-b2b2-a6cd09b1ab3a._CR0%2C82%2C1680%2C483_SX1500_.jpg"], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "editorial"
+    },
+    {
+      "position": 9, "moduleId": "bestseller_mod_09", "moduleName": "VITALSTOFFE ProductGrid 9 ASINs",
+      "layoutType": "product_grid_full_catalog", "layoutShape": "grid_three_columns", "tileCount": 9,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "ProductGrid mit 9 Vitalstoffe-ASINs als Conversion-Hauptblock.",
+      "structuralPattern": "3x3 Grid mit Amazon-nativen Produkt-Tiles inkl. Title, Sterne-Bewertung, Preis, Schnellansicht und 'In den Einkaufswagen' Button.",
+      "moduleFunction": "Hauptkonversion der Page. Direkter Kaufpfad fuer die 9 Top-Verkaeufer im VITALSTOFFE-Sortiment.",
+      "relationToPrevious": "proves_above_claim", "relationToNext": "closes_chapter",
+      "visualBridge": "shared_subject_class", "copyBridge": "continues_idea", "heroArchetype": null,
+      "textOnImage": { "visibleText": null, "textType": "product_title", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": "In den Einkaufswagen", "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0CJFHP8CJ", "ctaLabel": "In den Einkaufswagen" }, "tileContentTopic": { "primarySubject": "Mineral Complete V4", "productOrCategoryRef": "B0CJFHP8CJ", "intent": "convert", "rolePosition": "ASIN 1" }, "visualContent": "Amazon ASIN Tile Mineral Complete V4 150 Kapseln.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "In den Einkaufswagen", "linksTo": "B0CJFHP8CJ" },
+        { "position": 2, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0GPD88D7W", "ctaLabel": "In den Einkaufswagen" }, "tileContentTopic": { "primarySubject": "Essentials O3-D3-K2", "productOrCategoryRef": "B0GPD88D7W", "intent": "convert", "rolePosition": "ASIN 2" }, "visualContent": "Amazon ASIN Tile Essentials Fischoel Kapseln.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "In den Einkaufswagen", "linksTo": "B0GPD88D7W" },
+        { "position": 3, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0BJW1QSJW", "ctaLabel": "In den Einkaufswagen" }, "tileContentTopic": { "primarySubject": "Vegan Essentials O3-D3-K2", "productOrCategoryRef": "B0BJW1QSJW", "intent": "convert", "rolePosition": "ASIN 3" }, "visualContent": "Amazon ASIN Tile Vegan Essentials Algenoel.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "In den Einkaufswagen", "linksTo": "B0BJW1QSJW" },
+        { "position": 4, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0BQ3TT4CB", "ctaLabel": "In den Einkaufswagen" }, "tileContentTopic": { "primarySubject": "Curcumore Kurkuma", "productOrCategoryRef": "B0BQ3TT4CB", "intent": "convert", "rolePosition": "ASIN 4" }, "visualContent": "Amazon ASIN Tile Curcumore 210 Kapseln.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "In den Einkaufswagen", "linksTo": "B0BQ3TT4CB" },
+        { "position": 5, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0CD2M6TDJ", "ctaLabel": "In den Einkaufswagen" }, "tileContentTopic": { "primarySubject": "Harmony Ashwagandha", "productOrCategoryRef": "B0CD2M6TDJ", "intent": "convert", "rolePosition": "ASIN 5" }, "visualContent": "Amazon ASIN Tile Harmony.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "In den Einkaufswagen", "linksTo": "B0CD2M6TDJ" },
+        { "position": 6, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0DRVYV7TK", "ctaLabel": "In den Einkaufswagen" }, "tileContentTopic": { "primarySubject": "Cycle Balance 2.0", "productOrCategoryRef": "B0DRVYV7TK", "intent": "convert", "rolePosition": "ASIN 6" }, "visualContent": "Amazon ASIN Tile Cycle Balance.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "In den Einkaufswagen", "linksTo": "B0DRVYV7TK" },
+        { "position": 7, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0GBX8YSS6", "ctaLabel": "In den Einkaufswagen" }, "tileContentTopic": { "primarySubject": "Collagen+ Watermelon Mint", "productOrCategoryRef": "B0GBX8YSS6", "intent": "convert", "rolePosition": "ASIN 7" }, "visualContent": "Amazon ASIN Tile Collagen+.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "In den Einkaufswagen", "linksTo": "B0GBX8YSS6" },
+        { "position": 8, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0GBX4CBCD", "ctaLabel": "In den Einkaufswagen" }, "tileContentTopic": { "primarySubject": "Creatin + Carnitin Sticks", "productOrCategoryRef": "B0GBX4CBCD", "intent": "convert", "rolePosition": "ASIN 8" }, "visualContent": "Amazon ASIN Tile Creatin + Carnitin Sticks.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "In den Einkaufswagen", "linksTo": "B0GBX4CBCD" },
+        { "position": 9, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "SMALL_SQUARE", "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0CVBFT8ZP", "ctaLabel": "In den Einkaufswagen" }, "tileContentTopic": { "primarySubject": "Skin Structure Formula", "productOrCategoryRef": "B0CVBFT8ZP", "intent": "convert", "rolePosition": "ASIN 9" }, "visualContent": "Amazon ASIN Tile Skin Structure Formula.", "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 }, "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null }, "ctaText": "In den Einkaufswagen", "linksTo": "B0CVBFT8ZP" }
+      ],
+      "dom": { "widgetClass": "ProductGrid", "visibleHeadings": [], "ctaLabels": ["Schnellansicht", "In den Einkaufswagen"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "full-grid", "toolLayoutName": "Product Grid", "toolLayoutType": "standard", "toolLayoutRole": "product_showcase"
+    },
+    {
+      "position": 10, "moduleId": "bestseller_mod_10", "moduleName": "Produktselektor Promo Banner",
+      "layoutType": "editorial_banner_large", "layoutShape": "full_width_tall", "tileCount": 1,
+      "designIntent": "tool_promo", "designIntentDetail": "Identischer Produktselektor-Banner wie auf Startseite.",
+      "structuralPattern": "Vollbild 1280x640 Banner.", "moduleFunction": "Cross-Sell zum Produktselektor-Tool.",
+      "relationToPrevious": "summarizes_above", "relationToNext": "repeats_pattern_to_next",
+      "visualBridge": "hard_break_intentional", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Weitere Informationen", "textType": "cta", "origin": "baked_in", "headline": null, "subline": null, "cta": "Weitere Informationen", "directionCues": null },
+      "tiles": [{ "position": 1, "imageCategory": "creative_lifestyle_hybrid", "toolTileType": "image", "toolImageType": "FULL_WIDTH", "link": { "clickable": true, "linkType": "page", "linkTarget": "8790A8BC-31A4-4810-8B75-BF1AFCE858B5", "ctaLabel": "Weitere Informationen" }, "tileContentTopic": { "primarySubject": "Produktselektor Promo", "productOrCategoryRef": null, "intent": "discover", "rolePosition": "Tool Promo Bridge" }, "visualContent": "Identisches Produktselektor-Lifestyle-Banner wie auf Startseite.", "elementProportions": { "lifestyle_photo": 45, "product_photo": 25, "solid_background": 15, "text": 8, "cta_button": 5, "graphic_elements": 2 }, "textOnImage": { "visibleText": "Weitere Informationen", "textType": "cta", "origin": "baked_in", "headline": null, "subline": null, "cta": "Weitere Informationen", "directionCues": null }, "ctaText": "Weitere Informationen", "linksTo": "PRODUKTSELEKTOR" }],
+      "dom": { "widgetClass": "EditorialRow", "visibleHeadings": [], "ctaLabels": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d6865a5f-5e09-4f0a-b72c-b6bb65ac059d._CR0%2C0%2C1280%2C640_SX1500_.jpg"], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "editorial"
+    },
+    {
+      "position": 11, "moduleId": "bestseller_mod_11", "moduleName": "Closing Banner",
+      "layoutType": "editorial_banner", "layoutShape": "full_width_tall", "tileCount": 1,
+      "designIntent": "navigation_bridge", "designIntentDetail": "Closing-Banner quadratisch 3000x1473, klickt auf ALLE PRODUKTE.",
+      "structuralPattern": "Vollbreiter quadratischer Banner.", "moduleFunction": "Letzter Conversion-Bridge.",
+      "relationToPrevious": "summarizes_above", "relationToNext": "closes_chapter",
+      "visualBridge": "shared_pattern", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": null, "textType": "section_label", "origin": "baked_in", "headline": null, "subline": null, "cta": "Weitere Informationen", "directionCues": null },
+      "tiles": [{ "position": 1, "imageCategory": "product", "toolTileType": "image", "toolImageType": "FULL_WIDTH", "link": { "clickable": true, "linkType": "page", "linkTarget": "F081FD4B-1559-4A38-A4F3-FC8E6732BCEB", "ctaLabel": "Weitere Informationen" }, "tileContentTopic": { "primarySubject": "ALLE PRODUKTE Closing", "productOrCategoryRef": "F081FD4B-1559-4A38-A4F3-FC8E6732BCEB", "intent": "navigate", "rolePosition": "Closing Conversion Bridge" }, "visualContent": "Quadratischer Vollbild-Banner mit MORE-Sortimentsuebersicht. Bildtext per Vision lesbar.", "elementProportions": { "product_photo": 45, "solid_background": 35, "text": 15, "lifestyle_photo": 5 }, "textOnImage": { "visibleText": null, "textType": "section_label", "origin": "baked_in", "headline": null, "subline": null, "cta": "Weitere Informationen", "directionCues": null }, "ctaText": "Weitere Informationen", "linksTo": "ALLE PRODUKTE" }],
+      "dom": { "widgetClass": "EditorialRow", "visibleHeadings": [], "ctaLabels": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d359c2c9-b952-47a2-b88a-864e11ffc31c._CR0%2C0%2C3000%2C1473_SX1500_.png"], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "editorial"
+    },
+    {
+      "position": 12, "moduleId": "bestseller_mod_12", "moduleName": "Amazon Share Footer",
+      "layoutType": "amazon_share_footer", "layoutShape": "chrome_thin", "tileCount": 0,
+      "designIntent": "mimics_native_chrome", "designIntentDetail": "Amazon Share-Footer.",
+      "structuralPattern": "Teilen-Button.", "moduleFunction": "Amazon-Mechanik.",
+      "relationToPrevious": "closes_chapter", "relationToNext": "none",
+      "visualBridge": "hard_break_intentional", "copyBridge": "none", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Teilen", "textType": "section_label", "origin": "amazon_chrome", "headline": null, "subline": null, "cta": "Teilen", "directionCues": null },
+      "tiles": [],
+      "dom": { "widgetClass": "ShareFooter", "visibleHeadings": [], "ctaLabels": ["Teilen"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": null, "toolLayoutName": null, "toolLayoutType": "amazon_native", "toolLayoutRole": "amazon_native"
+    }
+  ],
+  "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "kulinarisch", "claimType": "social_proof", "rhetoricalDevice": "konkrete_zahl" },
+  "voiceExamples": ["PROTEIN BARS", "VITALSTOFFE", "made in Germany"],
+  "pageAnalysis": {
+    "tonalityVisual": "Bestseller-Page kombiniert Lifestyle-Bowls (Pink) plus Lila-Protein plus Coral-Riegel plus Gruene Vitalstoffe-Akzentfarben. Visueller Code: jede Sortimentskategorie hat eigenen farbigen Brand-Lead-Tile, der mit Amazon-nativen ASIN-Tiles in einer 5er-Reihe kombiniert wird.",
+    "ctaStrategies": "Kategorie-Bestseller-Bloecke mit Lead-Image (Page-Link) plus 3-4 ASIN-Tiles (Direct-Conversion via Schnellansicht). Vitalstoffe als groesste Conversion-Block mit 3x3 ProductGrid und 'In den Einkaufswagen' direkt aus dem Grid.",
+    "contentDepth": "Sehr Conversion-fokussiert. Brand-Video als Story-Layer am Anfang, danach reine Conversion-Bloecke pro Kategorie, kein redaktioneller Inhalt zwischendrin.",
+    "useForArchetype": "Vorlage fuer Bestseller-Sammel-Pages, die ein Cross-Category-Top-Performance-Sortiment kuratieren. Funktioniert fuer FMCG/Food-Marken mit mindestens 5 Sub-Kategorien.",
+    "moduleClusters": [
+      "Amazon Chrome Cluster: Header plus Empfohlene-Angebote-Block",
+      "Story Cluster: Brand-Video Auftakt",
+      "Conversion Cluster: 4x Kategorie-Bestseller-Blocks (Lead + 3-4 ASINs)",
+      "Conversion Cluster: VITALSTOFFE Section-Intro plus 9er ProductGrid",
+      "Bridge Cluster: Produktselektor-Promo plus Closing-Banner"
+    ]
+  },
+  "pageArchitecture": "Bestseller-Page nutzt das 'Category-Block-Lead-Image-plus-Quad' Pattern als Hauptmechanik: pro Sortimentsfamilie ein Brand-farbiges Lead-Image plus 3-4 ASIN-Schnellansicht-Tiles in einer 5-spaltigen Reihe. Vier solcher Bloecke hintereinander (ZERUP, CHUNKY FLAVOUR, PROTEIN MILKSHAKE, RIEGEL) decken die Top-Sortimente ab. VITALSTOFFE wird stattdessen als Section-Intro plus 9-ASIN ProductGrid behandelt (kein Mini-Block, weil mehr Featured-Bestseller). Schluss mit Produktselektor-Tool-Promo und ALLE-PRODUKTE-Closing-Banner.",
+  "openQuestions": [
+    "category_block_lead_image_plus_quad ist ein neues Pattern: Brand-Lead-Tile plus 3-4 Amazon-ASIN-Tiles in einer Reihe. Vorschlag fuer v4-Vokabular als layoutType.",
+    "Modul 2 'Empfohlene Angebote' ist ein Amazon-natives Personalisierungsmodul, das auf der Bestseller-Page erscheint. v4-Schema kennt amazon_share_footer und amazon_nav_header, aber nicht amazon_recommended_offers. Vorschlag: neuer layoutType.",
+    "Bestseller-Page hat insgesamt 24 unique ASINs auf der Page verteilt ueber 4 Mini-Bloecke plus 1 Grid. Sehr breite Conversion-Strategie."
+  ]
+}

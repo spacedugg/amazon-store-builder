@@ -1,0 +1,27 @@
+{
+  "_meta": {
+    "store": "kloster-kitchen",
+    "pageSlug": "05_smoothies",
+    "pageName": "Smoothies",
+    "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E",
+    "url": "https://www.amazon.de/stores/page/BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E",
+    "extractedAt": "2026-05-13",
+    "extractor": "chrome_mcp_javascript_tool_v2_with_urls",
+    "scrollHeight": 6538,
+    "viewport": { "w": 1826, "h": 888 },
+    "domRowsTotal": 9,
+    "contentModulesCount": 7,
+    "uniqueAsinsOnPage": ["B0CWH8T7SW", "B0CWH9MV6D", "B0CWH3F7NR", "B0D4V5BQC5", "B0D4V2GBJX", "B0D4VM21XT", "B0CWH8YV42"]
+  },
+  "modules": [
+    {"domRowIdx": 0, "top": 99, "height": 400, "widgetClass": "Header", "tileCount": 0, "imgCount": 3, "videoCount": 0, "productCount": 0, "note": "Nav header", "imageUrls": [], "links": [], "asins": []},
+    {"domRowIdx": 1, "top": 507, "height": 711, "widgetClass": "EditorialRow", "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Hero Image rot Smoothies", "imageUrls": [], "links": [{"linkType": "asin", "target": "B0CWH8T7SW"}], "asins": ["B0CWH8T7SW"]},
+    {"domRowIdx": 2, "top": 1217, "height": 743, "widgetClass": "EditorialRow", "tileCount": 28, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Hero Image Smoothie Section", "imageUrls": [], "links": [], "asins": []},
+    {"domRowIdx": 3, "top": 1960, "height": 743, "widgetClass": "EditorialRow", "tileCount": 16, "imgCount": 2, "videoCount": 0, "productCount": 0, "note": "Tile-Row 2-fach Flat-Lay plus Lifestyle", "imageUrls": [], "links": [{"linkType": "asin", "target": "B0CWH8T7SW"}, {"linkType": "asin", "target": "B0CWH9MV6D"}], "asins": ["B0CWH8T7SW", "B0CWH9MV6D"]},
+    {"domRowIdx": 4, "top": 2702, "height": 551, "widgetClass": "EditorialRow", "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Image-Modul CTA Bridge Produkte ansehen", "imageUrls": [], "links": [{"linkType": "asin", "target": "B0CWH3F7NR"}], "asins": ["B0CWH3F7NR"]},
+    {"domRowIdx": 5, "top": 3253, "height": 743, "widgetClass": "EditorialRow", "tileCount": 54, "imgCount": 6, "videoCount": 0, "productCount": 3, "note": "Tile-Row 3-fach Smoothie 12x 250ml Sortenpaecke", "imageUrls": [], "links": [{"linkType": "asin", "target": "B0D4V5BQC5"}, {"linkType": "asin", "target": "B0D4V2GBJX"}, {"linkType": "asin", "target": "B0D4VM21XT"}], "asins": ["B0D4V5BQC5", "B0D4V2GBJX", "B0D4VM21XT"]},
+    {"domRowIdx": 6, "top": 3996, "height": 750, "widgetClass": "EditorialRow", "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Hero Image Lifestyle Frau mit Smoothie", "imageUrls": [], "links": [{"linkType": "asin", "target": "B0CWH8YV42"}], "asins": ["B0CWH8YV42"]},
+    {"domRowIdx": 7, "top": 4746, "height": 330, "widgetClass": "EditorialRow", "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Awards Banner Ausgezeichnete Innovationen", "imageUrls": [], "links": [{"linkType": "page", "target": "F031D76B-9B76-426A-93A9-2EBBCB5150CF"}], "asins": []},
+    {"domRowIdx": 8, "top": 5076, "height": 201, "widgetClass": "EditorialRow", "tileCount": 4, "imgCount": 0, "videoCount": 0, "productCount": 0, "note": "amazon_share_footer", "imageUrls": [], "links": [], "asins": []}
+  ]
+}

@@ -1,0 +1,326 @@
+{
+  "schemaVersion": "v4-2026-05",
+  "store": "masterchef",
+  "brandName": "MasterChef Deutschland",
+  "storeUrl": "https://www.amazon.de/stores/page/4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6",
+  "analyzedAt": "2026-05-23",
+  "methodology": "v4-top-10-pages-from-21-pages-express-from-phase1-doms-plus-per-page-blueprints",
+  "scopeNote": "Top 10 von 21 MasterChef-Pages (Startseite plus 9 Sub-Pages) erfasst (Stand 2026-05-23) im Express-Modus: Phase-1-DOMs plus Per-Page-Blueprints plus Phase-3 Synthese. Kollektionen-Hubs (11 weitere Pages) und Werkzeuge-Page nicht im Top-10-Scope.",
+  "navigation": {
+    "pageCount": 21,
+    "scopedPages": 10,
+    "structure": "Hierarchical (level 0 + level 1 + level 2)",
+    "pages": [
+      {"name": "Startseite", "level": 0, "pageId": "4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6"},
+      {"name": "Angebote", "level": 1, "pageId": "AD9DA30F-0413-40BB-8668-4E4626C227C7"},
+      {"name": "Kochgeschirr", "level": 1, "pageId": "91EE7C50-94C4-4AEF-85D6-5CEC3D1AF277"},
+      {"name": "Messer", "level": 1, "pageId": "D50D11DB-429B-4600-8F69-33042D3E5AB7"},
+      {"name": "Messersets", "level": 2, "pageId": "4581AA3F-2BF3-4CEC-851C-3EE86651CE94"},
+      {"name": "Messerblocksets", "level": 2, "pageId": "D0BD345C-31E0-47CC-9290-DC7723820D79"},
+      {"name": "Kochmessersets", "level": 2, "pageId": "372D6A52-920B-437D-B8AE-EA612A8D5B11"},
+      {"name": "Schneidebretter", "level": 1, "pageId": "05C28D39-AAD4-4C8A-94AD-AEF60EB0E627"},
+      {"name": "Kuechengeraete", "level": 1, "pageId": "94D8A993-F4BD-48DB-98FD-8CD0CE744C5F"},
+      {"name": "Textilien", "level": 1, "pageId": "F4A1543F-B1F0-42BC-9850-A9E4D8A44C68"},
+      {"name": "Werkzeuge und Utensilien", "level": 1, "pageId": "E460228E-BA5D-4F00-8967-EE02AE4D65C1"},
+      {"name": "Kollektionen", "level": 1, "pageId": "607606C8-1527-469B-8ED0-1C7C063E017D"},
+      {"name": "Essentials Kollektion", "level": 2, "pageId": "568E7D4B-7577-4D3D-9CFF-97DB541335AC"},
+      {"name": "Natuerliche Kollektion", "level": 2, "pageId": "BBB1ED05-7F98-4F17-A5B6-F166CCD29327"},
+      {"name": "Lebendige Kollektion", "level": 2, "pageId": "D97E6AEB-EBBA-4E72-8EA2-C7AF3034EF56"},
+      {"name": "Erde Kollektion", "level": 2, "pageId": "D553719D-0B3A-4CA1-9E2B-5DEE6BB195FA"},
+      {"name": "Nordische Kolletion", "level": 2, "pageId": "D96246EF-D729-44F1-9A58-4767167EC36F"},
+      {"name": "Caption Kollektion", "level": 2, "pageId": "9887D02E-D77C-4121-9EA5-BDEE63ADC75E"},
+      {"name": "Professionelle Kollektion", "level": 2, "pageId": "987B2255-9774-46FA-A3AE-A5E510D61209"},
+      {"name": "ALLE PRODUKTE", "level": 1, "pageId": "FCCF7F55-7AD5-4EA4-8E2C-303B13F93C18"}
+    ]
+  },
+  "contentSummary": {
+    "pagesAnalyzed": 10,
+    "wiederkehrendeModuleCrossPage": {
+      "amazon_nav_header_per_page_image": "Jede Page hat eigene Header-Banner-Grafik (Page-spezifisch gestaltet, Lifestyle-Setting passend zur Kategorie)",
+      "amazon_share_footer": "alle 10 Pages",
+      "editorial_tile_pair_kollektions_paarung": "Startseite 8 Pairs, Kochgeschirr 5 Pairs, Schneidebretter 2 Pairs, Textilien 2 Pairs - Tile-Pair Essentials plus Natuerliche oder Erde plus Lebendige als Kollektions-Paarung ist Signature-Muster",
+      "product_showcase_featured_mit_title": "Auf Messerblocksets, Kochmessersets, Schneidebretter, Kuechengeraete, Textilien als Hauptkonversion fuer Top-ASINs",
+      "section_intro_verb_imperativ": "Auf Kuechengeraete: FRITTIEREN, WIEGEN als Funktions-Section-Heads"
+    }
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "pageSlug": "01_startseite",
+      "pageId": "4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6",
+      "pageType": "startseite",
+      "scrollHeight": 7903,
+      "brandModules": 8,
+      "voiceMarkers": {"voiceRegister": "professionell", "sentencePattern": "kurze_aussage", "vocabularyField": "lifestyle", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl"},
+      "pageArchitecture": "Reine 8-fache Tile-Pair-Sequenz ohne klassischen Hero und ohne Brand-Manifest-Modul. Jede Tile-Pair koppelt Lifestyle-Bild und Produkt-Tile und verweist auf Sortiments-Hub. Ungewoehnliche Startseite ohne emotionalen Anker.",
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/masterchef_startseite.json"
+    },
+    {
+      "pageName": "Angebote",
+      "pageSlug": "02_angebote",
+      "pageId": "AD9DA30F-0413-40BB-8668-4E4626C227C7",
+      "pageType": "saisonale-promo",
+      "scrollHeight": 2653,
+      "brandModules": 1,
+      "voiceMarkers": {"voiceRegister": "professionell", "sentencePattern": "kurze_aussage", "vocabularyField": "technisch", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl"},
+      "pageArchitecture": "Header plus einzelnes Amazon-natives Featured-Offers ProductGrid plus Footer. Keine Brand-eigenen Editorial-Module.",
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/masterchef_angebote.json"
+    },
+    {
+      "pageName": "Kochgeschirr",
+      "pageSlug": "03_kochgeschirr",
+      "pageId": "91EE7C50-94C4-4AEF-85D6-5CEC3D1AF277",
+      "pageType": "hub_category",
+      "scrollHeight": 7610,
+      "brandModules": 9,
+      "voiceMarkers": {"voiceRegister": "professionell", "sentencePattern": "kurze_aussage", "vocabularyField": "technisch", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl"},
+      "pageArchitecture": "Doppel-Hero-Banner-Sequenz oben (zwei Vollformat-Lifestyle-Hero getrennt durch Spacer) plus 5 Tile-Pair-Module je Sub-Kategorie (Bratpfannen, Kochtoepfe, Toepfe, Pancake Pfannen, Wok Pfannen) mit Essentials plus Natuerliche Kollektions-Paarung.",
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/masterchef_kochgeschirr.json"
+    },
+    {
+      "pageName": "Messer",
+      "pageSlug": "04_messer",
+      "pageId": "D50D11DB-429B-4600-8F69-33042D3E5AB7",
+      "pageType": "hub_category",
+      "scrollHeight": 5517,
+      "brandModules": 2,
+      "voiceMarkers": {"voiceRegister": "professionell", "sentencePattern": "kurze_aussage", "vocabularyField": "technisch", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl"},
+      "pageArchitecture": "Minimaler Hub: Tile-Row 3-fach Sub-Verteiler (Messersets, Messerblock, Kochmesser) plus Vollkatalog-ProductGrid 25 Messer-ASINs.",
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/masterchef_messer.json"
+    },
+    {
+      "pageName": "Messersets",
+      "pageSlug": "05_messersets",
+      "pageId": "4581AA3F-2BF3-4CEC-851C-3EE86651CE94",
+      "pageType": "sub_category",
+      "scrollHeight": 5636,
+      "brandModules": 2,
+      "voiceMarkers": {"voiceRegister": "professionell", "sentencePattern": "kurze_aussage", "vocabularyField": "technisch", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl"},
+      "pageArchitecture": "Zwei ProductCollections mit Lifestyle-Hero-Cover je Set-Groesse (3-teilig oben mit 9 Varianten, 5-teilig unten mit 9 Varianten).",
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/masterchef_messersets.json"
+    },
+    {
+      "pageName": "Messerblocksets",
+      "pageSlug": "06_messerblocksets",
+      "pageId": "D0BD345C-31E0-47CC-9290-DC7723820D79",
+      "pageType": "sub_category",
+      "scrollHeight": 4768,
+      "brandModules": 5,
+      "voiceMarkers": {"voiceRegister": "professionell", "sentencePattern": "kurze_aussage", "vocabularyField": "technisch", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl"},
+      "pageArchitecture": "Mosaic-Layout: Single Tile plus Tile-Pair plus Tile-Quad Detail plus Featured-ASIN Profi 15-teilig plus Tile-Quad Profi Detail. Wenig ASINs aber abwechslungsreiches Layout.",
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/masterchef_messerblocksets.json"
+    },
+    {
+      "pageName": "Kochmessersets",
+      "pageSlug": "07_kochmessersets",
+      "pageId": "372D6A52-920B-437D-B8AE-EA612A8D5B11",
+      "pageType": "sub_category",
+      "scrollHeight": 5411,
+      "brandModules": 4,
+      "voiceMarkers": {"voiceRegister": "professionell", "sentencePattern": "kurze_aussage", "vocabularyField": "technisch", "claimType": "expertise_signal", "rhetoricalDevice": "konkrete_zahl"},
+      "pageArchitecture": "Drei sequenzielle Featured-Tile-Module je mit Banner-Visual als Hero-ASINs plus ProductGrid 7 Profi-Einzelmesser als Cross-Sell-Erweiterung.",
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/masterchef_kochmessersets.json"
+    },
+    {
+      "pageName": "Schneidebretter",
+      "pageSlug": "08_schneidebretter",
+      "pageId": "05C28D39-AAD4-4C8A-94AD-AEF60EB0E627",
+      "pageType": "sub_category",
+      "scrollHeight": 6064,
+      "brandModules": 5,
+      "voiceMarkers": {"voiceRegister": "professionell", "sentencePattern": "kurze_aussage", "vocabularyField": "technisch", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl"},
+      "pageArchitecture": "Klassischer Funnel: Page-Intro-Hero Schneide Bretter plus Tile-Pair Einzelne Bretter plus Tile-Pair Schneidebrett Set plus Featured ASIN Bambus 3-Set plus Lifestyle-Hero-Closer.",
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/masterchef_schneidebretter.json"
+    },
+    {
+      "pageName": "Kuechengeraete",
+      "pageSlug": "09_kuechengeraete",
+      "pageId": "94D8A993-F4BD-48DB-98FD-8CD0CE744C5F",
+      "pageType": "sub_category",
+      "scrollHeight": 4810,
+      "brandModules": 4,
+      "voiceMarkers": {"voiceRegister": "professionell", "sentencePattern": "kurze_aussage", "vocabularyField": "technisch", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl"},
+      "pageArchitecture": "Strukturiert nach Verb-Imperativ-Sections FRITTIEREN und WIEGEN. Hero FRITTIEREN plus 2 Featured-ASINs Heissluftfritteuse und Stabmixer plus Tile-Pair WIEGEN mit Kuechenwaagen.",
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/masterchef_kuechengeraete.json"
+    },
+    {
+      "pageName": "Textilien",
+      "pageSlug": "10_textilien",
+      "pageId": "F4A1543F-B1F0-42BC-9850-A9E4D8A44C68",
+      "pageType": "sub_category",
+      "scrollHeight": 9217,
+      "brandModules": 10,
+      "voiceMarkers": {"voiceRegister": "professionell", "sentencePattern": "kurze_aussage", "vocabularyField": "lifestyle", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl"},
+      "pageArchitecture": "Modul-reich: Page-Intro-Hero plus 2 Tile-Triples (Kochschuerze, Topflappen) plus 2 Tile-Pairs (Ofenhandschuhe, Geschirrtuecher) plus interner Section-Hero Geschenksets plus 3 Featured-ASIN-Sequenz (Lebendige, Erde, 3er Set Grau).",
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/masterchef_textilien.json"
+    }
+  ],
+  "storeAnalysis": {
+    "schemaVersion": "v3-brand-identity-2",
+    "synthesizedAt": "2026-05-23",
+    "synthesisNote": "Phase-3 Brand Identity basierend auf 10 von 21 MasterChef-Pages.",
+    "marketSegment": "Premium-Kuechenausstattung Mid-Market mit Sortimentsbreite. Kategorien: Kochgeschirr (Bratpfannen, Toepfe, Wok), Messer (Messersets, Messerblocksets, Kochmessersets, Einzelmesser), Schneidebretter, Kuechengeraete (Heissluftfritteuse, Stabmixer, Kuechenwaage), Textilien (Kochschuerzen, Geschirrtuecher, Ofenhandschuhe, Topflappen), Werkzeuge und Utensilien.",
+    "primaryAudience": "Ambitionierte Hobbykoeche und Familien-Haushalte die Kuechenausstattung mit Kollektions-Logik (8 Kollektionen mit eigenem Design-Code) bevorzugen.",
+    "priceTier": "Mid-Market mit Kollektions-Differenzierung. 8 Kollektionen mit klarer Farb- und Stil-Sprache (Essentials, Natuerliche, Lebendige, Erde, Nordische, Caption, Vivid, Professionelle).",
+    "productComplexity": "Breit ueber 7 Sortimentskategorien plus 8 Kollektionen als Design-Sub-Achse. Jedes Sortiments-Produkt existiert typischerweise in 2-4 Kollektions-Varianten.",
+    "brandVoice": {
+      "tonality": "Sachlich-professionell ohne emotionalen Manifest-Anker. Voice-Marker fast einheitlich professionell plus kurze_aussage plus technisch ueber alle Pages. Eine Besonderheit: Verb-Imperativ-Section-Heads (FRITTIEREN, WIEGEN) auf der Kuechengeraete-Page.",
+      "adjectives": ["professionell", "scharf", "antihaftbeschichtet", "hitzebestaendig", "superscharf", "vernietet"],
+      "signatureClaims": [
+        "MasterChef Deutschland",
+        "Aus der Essentials Kollektion / Natuerliche Kollektion / Erde Kollektion / Lebendige Kollektion",
+        "Antihaftbeschichtete Edelstahlklingen",
+        "Soft-Touch-Griffe",
+        "Dreifach Vernieteter Griff Stahl Kropf Vollzapfen Superscharf",
+        "Kohlenstoffreicher Edelstahl"
+      ],
+      "voiceContrasts": [
+        "Sehr nuechterne Brand-Voice ohne Manifesto-Modul oder Brand-Story",
+        "Kollektions-Namen als Hauptdifferenzierungs-Code statt emotionaler Tagline",
+        "Verb-Imperativ-Section-Heads (FRITTIEREN, WIEGEN) auf Kuechengeraete-Page sind die einzige rhetorische Auffaelligkeit"
+      ]
+    },
+    "designAesthetic": {
+      "colorPalette": "Page-spezifische Header-Banner-Grafiken mit Lifestyle-Settings (Kueche, Holzbrett, Frittier-Setting). Kein einheitlicher Brand-Farbcode. Kollektions-Codes (Essentials Schwarz, Natuerliche Holz, Erde Grau, Lebendige Bunt) als Sortiments-Differenzierung.",
+      "typography": "Sans-Serif konsistent. Versalien fuer Section-Heads (FRITTIEREN, WIEGEN, Geschenksets, Einzelne Bretter, Schneidebrett Set, Schneide Bretter).",
+      "photographyStyle": "Produkt-Stillife auf hellem Hintergrund plus Lifestyle-Kuechen-Settings als Hero-Banner. Jede Page hat eigene Header-Bild-Komposition.",
+      "layoutSignals": "Tile-Pair als dominantes Layout-Pattern (Startseite 8 Pairs, Kochgeschirr 5 Pairs). Featured-ASIN-Sequenz mit Title fuer Top-Produkte. Hero-Banner-Module sehr breit eingesetzt mit Sub-Section-Heads."
+    },
+    "positioningClaim": "MasterChef Deutschland positioniert sich als Multi-Kollektion-Kuechenausstattungs-Marke mit breitem Sortiment ueber Kochgeschirr, Messer, Schneidebretter, Kuechengeraete und Textilien. Differenzierung erfolgt primaer ueber 8 visuell unterschiedliche Kollektionen mit klarer Farb- und Stil-Sprache.",
+    "contentStrategy": {
+      "approach": "Sortiments- und Kollektions-getriebene Architektur. Tile-Pair-Sequenz als Signature-Verteilungs-Muster. Hub-Pages mit Doppel-Hero plus Sub-Kategorie-Tile-Pairs. Sub-Categories mit Mix aus Tile-Pairs/Triples und Featured ASINs.",
+      "emotionalLayer": "Sehr schwach: kein Brand-Manifesto, keine Werte-Module, keine Awards-Banner. Nur Lifestyle-Hero-Banner liefern emotionalen Anker.",
+      "rationalLayer": "Tech-Specs in Featured-ASIN-Titeln (Watt-Angaben, cm-Klingenlaenge, teilig-Counts, Material-Beschreibungen).",
+      "modulePreferences": "editorial_tile_pair (Signature, Startseite 8 Pairs), hero_banner_tall (Page-Intro plus Sub-Section-Marker), product_showcase_featured (Featured-ASIN mit Title plus Produktinfos), product_collection (mit Lifestyle-Hero-Cover), product_grid_full_catalog (auf Messer-Hub), editorial_tile_triple (Textilien), editorial_section_separator (Spacer).",
+      "editorialDepth": "Variable: Startseite 8 Module, Hub-Pages 2-9 Module, Sub-Category-Pages 4-10 Module."
+    },
+    "conversionPath": {
+      "primary": "Tile-Pair-Klick zur ASIN (auf Startseite und Hub-Pages dominant)",
+      "secondary": "Featured-ASIN-Block mit Title (auf Sub-Category-Pages fuer Top-Produkte)",
+      "tertiary": "ProductGrid Vollkatalog (auf Messer-Hub mit 25 ASINs)",
+      "collections": "ProductCollection mit Lifestyle-Hero-Cover (auf Messersets-Page nach Set-Groesse strukturiert)"
+    },
+    "keyStrengths": [
+      "8 visuell differenzierte Kollektionen als Sortiments-Differenzierungs-Code",
+      "Tile-Pair-Sequenz als sehr klares Sortimentsverteilungs-Muster",
+      "Page-spezifische Header-Banner-Grafiken liefern Page-Identifizierung",
+      "Verb-Imperativ-Section-Heads auf Kuechengeraete-Page als rhetorische Auffaelligkeit",
+      "Konsistente Sans-Serif-Versalien fuer Section-Marker"
+    ],
+    "brandUSPs": [
+      "Multi-Kollektion-Sortimentslogik (8 Kollektionen mit eigenem Design)",
+      "Breites Sortiment ueber Kochgeschirr, Messer, Schneidebretter, Kuechengeraete und Textilien",
+      "Antihaftbeschichtete Edelstahlklingen und Soft-Touch-Griffe als wiederkehrendes Produkt-Versprechen",
+      "Profi-Linie mit Vollzapfen-Konstruktion und kohlenstoffreichem Edelstahl",
+      "Geschenkset-Bundles als eigene interne Sub-Section (Textilien-Page)"
+    ],
+    "moduleFunctionalTaxonomy": {
+      "tile_pair_kollektions_paarung": "Signature-Pattern Tile-Pair koppelt zwei Kollektions-Varianten desselben Produkts (Essentials plus Natuerliche, Erde plus Lebendige etc.). Verwendet auf Startseite, Kochgeschirr, Schneidebretter, Textilien.",
+      "doppel_hero_banner_mit_spacer": "AUFFAELLIG auf Kochgeschirr-Page: zwei Vollformat-Hero-Banner direkt hintereinander getrennt durch Spacer als doppelter Page-Einstieg.",
+      "product_showcase_featured_mit_title": "Featured-ASIN-Block mit ausgeschriebenem Produkttitel plus Produktinfos als Hauptkonversion auf Sub-Category-Pages.",
+      "product_collection_mit_hero_cover": "AUFFAELLIG auf Messersets-Page: ProductCollection-Modul mit eigenem Lifestyle-Hero-Cover plus 9 ASIN-Varianten.",
+      "verb_imperativ_section_intro": "AUFFAELLIG auf Kuechengeraete: Verb-Imperativ-Section-Heads FRITTIEREN, WIEGEN als Page-Strukturierung.",
+      "editorial_tile_single_with_banner": "AUFFAELLIG auf Kochmessersets: Featured-Tile mit zugehoerigem Lifestyle-Banner-Visual seitlich.",
+      "mosaic_layout_messerblocksets": "AUFFAELLIG auf Messerblocksets: Mosaic-Layout aus Single-Tile, Tile-Pair, Tile-Quad-Detail, Featured-ASIN, Tile-Quad-Profi-Detail. Mix aus 5 verschiedenen Tile-Groessen auf einer Page.",
+      "kein_brand_manifesto_kein_awards": "Auffaellige Abwesenheit von Brand-Manifesto-Modul, Brand-Story-Modul und Awards-Banner ueber alle 10 Pages. Sehr produkt-zentrierte Architektur."
+    },
+    "pageArchetypes": {
+      "startseite_pair_sequence_only": {
+        "primaryFunction": "8-fache Tile-Pair-Sequenz als reiner Sortimentsverteiler ohne Hero und ohne Brand-Story",
+        "conversionMode": "Soft (Pair-Klick zur ASIN oder Hub-Page)",
+        "transferableTo": "Multi-Sortimentsmarken die Sortimentsbreite ueber emotionalem Manifesto priorisieren",
+        "exampleMasterChef": "Startseite mit 8 Tile-Pairs als komplette Page-Architektur"
+      },
+      "hub_category_doppel_hero": {
+        "primaryFunction": "Doppel-Hero-Banner als Page-Einstieg plus 5 Tile-Pair-Module je Sub-Kategorie",
+        "conversionMode": "Soft (Tile-Klick zur Sub-Hub oder ASIN)",
+        "transferableTo": "Hub-Kategorien mit 5 Sub-Kategorien und Kollektions-Paarung",
+        "exampleMasterChef": "Kochgeschirr"
+      },
+      "hub_category_tile_row_plus_grid": {
+        "primaryFunction": "Tile-Row 3-fach Sub-Verteiler plus Vollkatalog-ProductGrid",
+        "conversionMode": "Soft (Sub-Verteiler) plus Hard (Grid)",
+        "transferableTo": "Hub-Kategorien mit klarer 3-Sub-Verteilung plus Vollkatalog",
+        "exampleMasterChef": "Messer"
+      },
+      "sub_category_product_collections": {
+        "primaryFunction": "Zwei ProductCollections nach Set-Groesse je mit Lifestyle-Hero-Cover plus ASIN-Varianten",
+        "conversionMode": "Hard (Collection-Tile-Klick)",
+        "transferableTo": "Sub-Kategorien mit klarer Set-Groessen-Struktur",
+        "exampleMasterChef": "Messersets"
+      },
+      "sub_category_mosaic_layout": {
+        "primaryFunction": "Mosaic-Layout aus Single, Pair, Quad, Featured und Quad mit wenig ASINs aber abwechslungsreichen Tile-Groessen",
+        "conversionMode": "Soft (Tile-Klick) plus Hard (Featured-ASIN)",
+        "transferableTo": "Sub-Kategorien mit wenig ASINs aber starkem Detail-Storytelling",
+        "exampleMasterChef": "Messerblocksets"
+      },
+      "sub_category_featured_sequence": {
+        "primaryFunction": "Sequenz aus mehreren Featured-Tile-Modulen mit Banner-Visual plus ProductGrid Cross-Sell",
+        "conversionMode": "Hard (Featured-Klick)",
+        "transferableTo": "Sub-Kategorien mit klaren Top-Produkten und Profi-Einzelteilen",
+        "exampleMasterChef": "Kochmessersets"
+      },
+      "sub_category_funnel_hero_pair_featured_hero": {
+        "primaryFunction": "Klassischer Funnel mit Page-Intro-Hero plus 2 Tile-Pairs plus Featured ASIN plus Lifestyle-Hero-Closer",
+        "conversionMode": "Soft plus Hard",
+        "transferableTo": "Sub-Kategorien mit wenigen Produkten aber starker editorialer Klammer",
+        "exampleMasterChef": "Schneidebretter"
+      },
+      "sub_category_verb_imperativ_funktionen": {
+        "primaryFunction": "Strukturiert nach Verb-Imperativ-Funktions-Sections mit Featured-ASIN je Funktion",
+        "conversionMode": "Hard (Featured-Klick)",
+        "transferableTo": "Sub-Kategorien wo Produkte ueber Funktion (nicht ueber Kategorie-Name) strukturiert werden",
+        "exampleMasterChef": "Kuechengeraete (FRITTIEREN, WIEGEN)"
+      },
+      "sub_category_module_rich_mit_geschenk_section": {
+        "primaryFunction": "Modul-reiche Page mit Page-Intro-Hero, Tile-Triple und Tile-Pair-Mix plus interner Sub-Section Geschenksets plus Featured-ASIN-Sequenz",
+        "conversionMode": "Soft plus Hard",
+        "transferableTo": "Sub-Kategorien mit eigener Sub-Section fuer Geschenk-Bundles",
+        "exampleMasterChef": "Textilien"
+      },
+      "angebote_amazon_native": {
+        "primaryFunction": "Reine Amazon-native Featured-Offers Anzeige",
+        "conversionMode": "Amazon-System",
+        "transferableTo": "Aktions-Pages ohne Brand-Editorial",
+        "exampleMasterChef": "Angebote"
+      }
+    },
+    "brandSpecificVsStructuralExtraction": {
+      "strukturell_uebertragbar_an_neue_brands": [
+        "Tile-Pair-Sequenz als reiner Sortimentsverteiler (Startseite-Pattern)",
+        "Doppel-Hero-Banner mit Spacer als Hub-Einstieg-Pattern",
+        "Tile-Row 3-fach Sub-Verteiler plus Vollkatalog-ProductGrid (Messer-Hub-Pattern)",
+        "ProductCollection mit Lifestyle-Hero-Cover (Set-Groessen-Strukturierung)",
+        "Mosaic-Layout mit Mix aus Single/Pair/Quad/Featured/Quad (Sub-Category mit wenig ASINs)",
+        "Featured-Tile-Sequenz mit Banner-Visual plus ProductGrid Cross-Sell",
+        "Klassischer Funnel Hero-Intro plus 2 Pairs plus Featured plus Hero-Closer (Schneidebretter-Pattern)",
+        "Verb-Imperativ-Section-Heads als Funktions-Strukturierung",
+        "Modul-reiche Sub-Category mit interner Sub-Section fuer Geschenkset-Bundles",
+        "voiceMarkers professionell technisch benefit_funktional konkrete_zahl als sachliche Marken-Voice ohne Manifesto",
+        "8-fache Tile-Pair-Wiederholung als Startseite-Architektur",
+        "editorial_section_separator (Spacer) als optischer Block-Trenner"
+      ],
+      "brand_spezifisch_NICHT_uebertragbar": [
+        "Wortbildmarke MasterChef Deutschland",
+        "Konkrete 8 Kollektions-Namen (Essentials, Natuerliche, Lebendige, Erde, Nordische, Caption, Vivid, Professionelle)",
+        "Konkrete Sortimentskategorien (Kochgeschirr, Messer, Schneidebretter, Kuechengeraete, Textilien, Werkzeuge)",
+        "Konkrete Produkt-Spezifikationen (4,5L Airfryer 1400W, Dreifach Vernieteter Griff, Kohlenstoffreicher Edelstahl)",
+        "Konkrete Page-Header-Banner-Grafiken pro Page (jede Page hat eigenes Lifestyle-Setting)",
+        "Konkrete Verb-Imperativ-Wahl FRITTIEREN, WIEGEN (Marke-spezifisch fuer Kuechengeraete-Kontext)",
+        "Konkrete Set-Groessen-Logik 3-teilig und 5-teilig (Messer-spezifisch)",
+        "Konkrete Sub-Section-Namen Einzelne Bretter, Schneidebrett Set, Geschenksets"
+      ]
+    }
+  },
+  "openQuestions": [
+    "11 weitere Pages von MasterChef (Werkzeuge und Utensilien plus 8 Kollektions-Hubs plus ALLE PRODUKTE) nicht in dieser Iteration erfasst (Scope: Top 10).",
+    "Vorschlag fuer Vokabular: section_intro_verb_imperative als Variante von editorial_section_intro mit voiceMarkers Tag verb_imperativ fuer Kuechengeraete-Pattern.",
+    "Vorschlag fuer Vokabular: editorial_tile_single_with_banner als eigenes Layout fuer Featured-Tile mit Lifestyle-Banner-Visual seitlich (Kochmessersets-Pattern).",
+    "Vorschlag fuer Vokabular: collection_with_hero als layoutShape fuer ProductCollection mit eigenem Lifestyle-Hero-Cover (Messersets-Pattern).",
+    "Vorschlag fuer Vokabular: pair_sequence_only_no_hero als pageArchetype-Bezeichnung fuer Startseite ohne Hero/Manifesto die ausschliesslich aus Tile-Pairs besteht.",
+    "Vision-Pass auf Header-Banner-Grafiken und Hero-Bildern koennte Kollektions-Stilistiken (Farb-Code je Kollektion, Material-Code) konkreter ableiten.",
+    "Modul 7 auf der Kuechengeraete-Page heisst WIEGEN, ist aber im DOM in der gleichen EditorialRow wie das Kuechenwaagen-Pair. Eventuell ist WIEGEN ein eingebrannter Text im Lifestyle-Bild und nicht ein eigenes Section-Intro-Modul. Vision-Pass koennte das klaeren.",
+    "Auf Angebote-Page ist ProductGrid Amazon-system-generiert (Featured Offers Layout). Strukturell ein product_grid_featured Pattern, brand-spezifisch nur in ASIN-Auswahl. Eventuell sollte Phase 3 noch eine pageType-Differenzierung amazon_native_promo vs brand_editorial_promo aufnehmen."
+  ]
+}

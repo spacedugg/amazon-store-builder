@@ -1,0 +1,20 @@
+{
+  "_meta": {
+    "store": "twentythree", "pageSlug": "02_alle-produkte", "pageName": "Alle Produkte",
+    "pageId": "F0FD66FC-88D8-4CB9-ACFA-3669EF15A5E5",
+    "url": "https://www.amazon.de/stores/page/F0FD66FC-88D8-4CB9-ACFA-3669EF15A5E5",
+    "extractedAt": "2026-05-13", "extractor": "chrome_mcp_javascript_tool_v2_with_urls",
+    "scrollHeight": 4726, "viewport": {"w": 1826, "h": 888},
+    "domRowsTotal": 7, "contentModulesCount": 5,
+    "uniqueAsinsOnPage": 5
+  },
+  "modules": [
+    {"domRowIdx": 0, "top": 99, "height": 400, "widgetClass": "Header", "tileCount": 0, "imgCount": 3, "videoCount": 0, "productCount": 0, "note": "Nav header twenty:three"},
+    {"domRowIdx": 1, "top": 507, "height": 578, "widgetClass": "EditorialRow", "tileCount": 4, "imgCount": 33, "videoCount": 6, "productCount": 2, "note": "Inline PDP Variant 1 Lyocell Bettwaesche Forest Green"},
+    {"domRowIdx": 2, "top": 1084, "height": 540, "widgetClass": "EditorialRow", "tileCount": 4, "imgCount": 32, "videoCount": 6, "productCount": 2, "note": "Inline PDP Variant 2"},
+    {"domRowIdx": 3, "top": 1625, "height": 578, "widgetClass": "EditorialRow", "tileCount": 4, "imgCount": 35, "videoCount": 0, "productCount": 2, "note": "Inline PDP Variant 3"},
+    {"domRowIdx": 4, "top": 2203, "height": 578, "widgetClass": "EditorialRow", "tileCount": 4, "imgCount": 34, "videoCount": 0, "productCount": 2, "note": "Inline PDP Variant 4"},
+    {"domRowIdx": 5, "top": 2780, "height": 483, "widgetClass": "EditorialRow", "tileCount": 4, "imgCount": 30, "videoCount": 0, "productCount": 2, "note": "Inline PDP Variant 5"},
+    {"domRowIdx": 6, "top": 3263, "height": 201, "widgetClass": "EditorialRow", "tileCount": 4, "imgCount": 0, "videoCount": 0, "productCount": 0, "note": "amazon_share_footer"}
+  ]
+}

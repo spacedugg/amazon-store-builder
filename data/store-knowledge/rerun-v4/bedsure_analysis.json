@@ -1,0 +1,315 @@
+{
+  "schemaVersion": "v4-2026-05",
+  "store": "bedsure",
+  "brandName": "Bedsure",
+  "storeUrl": "https://www.amazon.de/stores/Bedsure/page/7DC5A9F8-2A3D-426B-B2F2-F819AE825B1F",
+  "analyzedAt": "2026-05-12",
+  "methodology": "v4-probe-run-4-pages",
+  "scopeNote": "Vier Probe-Pages aus elf Bedsure-Pages erfasst auf User-Entscheidung 2026-05-12: Startseite, Kuscheldecken, Heizdecke, Ueber-Bedsure. ASIN-Grids als ein Modul aggregiert, nicht pro Produkt aufgeschluesselt.",
+  "navigation": {
+    "pageCount": 11,
+    "structure": "Flat (level 0 + level 1)",
+    "pages": [
+      {
+        "name": "Startseite",
+        "level": 0,
+        "pageId": "7DC5A9F8-2A3D-426B-B2F2-F819AE825B1F"
+      },
+      {
+        "name": "Sanft in den Sommer",
+        "level": 1,
+        "pageId": "4647A147-C667-43C9-ACB3-55D0A86680EF"
+      },
+      {
+        "name": "Kuscheldecken",
+        "level": 1,
+        "pageId": "2F249C26-269C-4A0B-ACB2-7AB6436FFDC5"
+      },
+      {
+        "name": "Bettwaesche-Sets",
+        "level": 1,
+        "pageId": "D537A0F0-8099-477C-A9CE-4E44DA3B8F13"
+      },
+      {
+        "name": "Haustierbedarf",
+        "level": 1,
+        "pageId": "B3B34DD4-8067-4CF4-B764-5BEDBD5B40E8"
+      },
+      {
+        "name": "Bettdecke und Kissen",
+        "level": 1,
+        "pageId": "0327D6BF-BFA7-49D7-80B2-31707A7C0AF9"
+      },
+      {
+        "name": "Kissenbezuege und Spannbettlaken",
+        "level": 1,
+        "pageId": "652C1CB5-3C1F-41DB-802F-9A308D45AE28"
+      },
+      {
+        "name": "Heizdecke",
+        "level": 1,
+        "pageId": "86EE23E4-B85F-4167-8FE0-E32C59862F42"
+      },
+      {
+        "name": "Kuscheldecke mit Aermeln",
+        "level": 1,
+        "pageId": "8B9660CA-9C46-42A4-B289-C08618110009"
+      },
+      {
+        "name": "Angebote",
+        "level": 1,
+        "pageId": "C2FACEA3-48EC-4B21-A2B3-4B2691A2F8D9"
+      },
+      {
+        "name": "Ueber Bedsure",
+        "level": 1,
+        "pageId": "ED1B32C3-3890-4245-8A84-ECD16C98BFAF"
+      }
+    ]
+  },
+  "contentSummary": {
+    "pagesAnalyzed": 4,
+    "totalModulesAnalyzed": 61,
+    "totalTilesAnalyzed": 97,
+    "totalToolGapMarkers": 3,
+    "totalScreenshotRequiredMarkers": 15,
+    "visionFollowupCompletedAt": "2026-05-12",
+    "screenshotRequiredReductionFromInitial": "77 Prozent (von 64 auf 15)"
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "pageSlug": "01_startseite",
+      "pageId": "7DC5A9F8-2A3D-426B-B2F2-F819AE825B1F",
+      "pageType": "startseite",
+      "scrollHeight": 14641,
+      "brandModules": 19,
+      "voiceMarkers": {
+        "voiceRegister": "professionell",
+        "sentencePattern": "kurze_aussage",
+        "vocabularyField": "lifestyle",
+        "claimType": "ergebnis_versprechen",
+        "rhetoricalDevice": "kontrast"
+      },
+      "voiceExamples": [
+        "Die EM endet, Ihr Schlaf nicht.",
+        "Ihr atmungsaktiver Begleiter fuer entspannte Abende und erholsamen Schlaf.",
+        "Haustierbedarf | Besiege die Sommerhitze!"
+      ],
+      "pageArchitecture": "Startseite folgt einem Lifestyle-zu-Sortiment-zu-Conversion-Funnel. Hero setzt saisonalen Anker mit EM-Bezug. Beliebt Bei Uns plus Video bauen Markenstimmung auf. BEKANNT AUS plus Press-Logo-Carousel liefern Trust. Dann sechs Sortimentsfamilien jeweils mit Section-Intro Dashes-Pattern plus lg-4grid oder Pair. ProductGrid full_catalog am Ende fuer Conversion. Schluss-Banner als Trust- oder Footer-Bridge.",
+      "moduleClusters": [
+        "Hero Cluster: Header-Banner plus Saison-Hero EM",
+        "Top-Kategorien Cluster: Beliebt Bei Uns Pair plus Video-Bridge",
+        "Trust Cluster: BEKANNT AUS plus Press-Logos",
+        "Sortimentsfamilien Cluster: Section-Intro plus Grid pro Familie (Kuscheldecken, Bettwaesche, Bettdecken, Heizdecke, Haustier)",
+        "Conversion Closer: Editorial-Banner plus Full-Catalog-Grid plus Schluss-Banner"
+      ],
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/bedsure_startseite.json"
+    },
+    {
+      "pageName": "Kuscheldecken",
+      "pageSlug": "03_kuscheldecken",
+      "pageId": "2F249C26-269C-4A0B-ACB2-7AB6436FFDC5",
+      "pageType": "hub_category",
+      "scrollHeight": 9617,
+      "brandModules": 14,
+      "voiceMarkers": {
+        "voiceRegister": "professionell",
+        "sentencePattern": "kurze_aussage",
+        "vocabularyField": "lifestyle",
+        "claimType": "social_proof",
+        "rhetoricalDevice": "konkrete_zahl"
+      },
+      "voiceExamples": [
+        "Diese vielseitigen Decken verleihen Ihrem Zuhause sofort einen frischen Look und spenden bei Bedarf zusaetzliche Waerme.",
+        "UEBER 1,9 MILLIONEN VERKAUEFE WELTWEIT - Global geschaetzt und von experten empfohlen",
+        "Immer Qualitaet. Immer An Ihrer Seite."
+      ],
+      "pageArchitecture": "Kuscheldecken-Page folgt einem Material-Variation-Funnel. Page-Hero etabliert das Kategoriethema. Kord-Bestseller-Modul liefert sofort den Verkaufszahlen-Trust plus eine Farb-Auswahl. Sechs weitere Sortimentstiles zeigen die Material-Varianten (Bubble, Jacquard, Fleece, Kuehlende, Geschenk, Baumwoll, Sherpa). Brand-Versprechen-Tagline Immer Qualitaet schliesst die Lifestyle-Sektion ab. ProductGrid 19 ASINs ist der direkte Conversion-Pfad. Cross-Sell-Banner plus Schluss-Banner schliessen die Page.",
+      "moduleClusters": [
+        "Page Intro Cluster: Page-Hero plus Kord-Bestseller-USP-Pair",
+        "Sortimentsschau Cluster: Bubble/Jacquard Pair plus Fleece Quad mit USP plus Kuehlende-Decke Pair plus Geschenk/Baumwoll Pair",
+        "Brand-Versprechen Cluster: Saisonbereit Intro plus Sherpa Showcase plus Immer-Qualitaet Tagline",
+        "Conversion Closer: Mehr-Entdecken plus ProductGrid 19 ASINs plus Cross-Sell-Banner plus Schluss-Banner"
+      ],
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/bedsure_kuscheldecken.json"
+    },
+    {
+      "pageName": "Heizdecke",
+      "pageSlug": "08_heizdecke",
+      "pageId": "86EE23E4-B85F-4167-8FE0-E32C59862F42",
+      "pageType": "sub_category",
+      "scrollHeight": 8560,
+      "brandModules": 12,
+      "voiceMarkers": {
+        "voiceRegister": "technisch",
+        "sentencePattern": "kurze_aussage",
+        "vocabularyField": "industriell",
+        "claimType": "expertise_signal",
+        "rhetoricalDevice": "konkrete_zahl"
+      },
+      "voiceExamples": [
+        "Sanfte Waerme und kontinuierliche Beheizung, fuer langanhaltenden Komfort.",
+        "74 Sicherheitstests fuer hoechste Sicherheit und Leistung, uebertrifft UL-Standards und ist GS-, CE- sowie RoHS-zertifiziert.",
+        "UEBER 1 MILLION MAL VERKAUFT, VON FAMILIEN WELTWEIT GESCHAETZT."
+      ],
+      "pageArchitecture": "Heizdecke-Page baut einen stark technisch-getriebenen Sicherheits-zu-Conversion-Funnel. Page-Hero etabliert das Versprechen sanfte Waerme. Zertifikats-Banner gibt sofort den Trust-Anker. WARM und SICHER plus Schalter-Demo plus PTC NTC plus Ueberhitzungsschutz vertiefen die Sicherheits-Mechanik. 1 Mio Verkaeufe Tagline als Social-Proof-Bruecke. Einfarbige Flanell-Heizdecke Video-Showcase als emotionale Conversion. INTERTEK-Labor als industrieller Trust-Closer. ProductGrid 30 ASINs fuer direkten Kauf. Cross-Sell-Banner schliesst.",
+      "moduleClusters": [
+        "Page Intro Cluster: Page-Hero plus Zertifikats-Sortiments-Banner",
+        "Sicherheits-USP Cluster: WARM und SICHER plus Schalter-Demo plus Ueberhitzungsschutz",
+        "Trust Cluster: 1-Mio-Verkaeufe Tagline plus INTERTEK-Labor",
+        "Conversion Cluster: Einfarbige Flanell-Heizdecke Video-Showcase plus Variante 2 plus ProductGrid 30 ASINs",
+        "Cross-Sell Closer: Section Intro plus 56-Tile-Cross-Sell"
+      ],
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/bedsure_heizdecke.json"
+    },
+    {
+      "pageName": "Ueber Bedsure",
+      "pageSlug": "11_ueber-bedsure",
+      "pageId": "ED1B32C3-3890-4245-8A84-ECD16C98BFAF",
+      "pageType": "about",
+      "scrollHeight": 9681,
+      "brandModules": 13,
+      "voiceMarkers": {
+        "voiceRegister": "emotional",
+        "sentencePattern": "kurze_aussage",
+        "vocabularyField": "lifestyle",
+        "claimType": "zugehoerigkeit",
+        "rhetoricalDevice": "wiederholung_anapher"
+      },
+      "voiceExamples": [
+        "COZY heisst gemeinsam wachsen. Wir setzen auf faire, langfristige Partnerschaften, fuer eine nachhaltige Zukunft.",
+        "COZY soll fuer alle erreichbar sein. Guter Komfort braucht keine hohen Preise.",
+        "75 Mio.+ zufriedene Kundinnen und Kunden weltweit"
+      ],
+      "pageArchitecture": "Ueber-Bedsure-Page baut einen Brand-Werte-Funnel. Hero etabliert UEBER BEDSURE Story. 75 Mio Social Proof plus Brand-Video plus Premium-Press-Logos liefern Trust. Bestseller-Showcase macht die Marke greifbar. Drei Werte-Halbtafel-Pairs erklaeren COZY-Bedeutungen mit Anapher COZY heisst und Sortiments-Bruecken. Kategorien-Grid am Ende verteilt in alle Sortimentsfamilien.",
+      "moduleClusters": [
+        "Brand Intro Cluster: Page-Hero plus 75 Mio Social Proof plus Brand-Video",
+        "Trust Cluster: BEKANNT AUS plus Premium-Press-Logos",
+        "Bestseller Cluster: UNSERE BELIEBTESTEN PRODUKTE plus 4-Tile Quad",
+        "Werte Cluster: WAS COZY FUER UNS BEDEUTET plus drei Werte-Halbtafel-Pairs",
+        "Kategorien-Verteiler: ALLE KATEGORIEN ENTDECKEN plus 7-Tile Grid"
+      ],
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/bedsure_ueber-bedsure.json"
+    }
+  ],
+  "storeAnalysis": {
+    "schemaVersion": "v3-brand-identity-2",
+    "synthesizedAt": "2026-05-12",
+    "synthesisNote": "Phase 3 Brand Identity basierend auf 4 von 11 Bedsure-Pages. Bei voller 11-Page-Analyse waere diese Synthese robuster, hier auf den Probe-Scope bezogen.",
+    "marketSegment": "Heimtextilien Mid-Market mit Premium-Anspruch",
+    "primaryAudience": "Familien und Paare die warmen Wohnkomfort suchen, plus zunehmend Haustierbesitzer. Adressiert weibliche Kaeuferinnen 25-55 als Haupt-Zielgruppe.",
+    "priceTier": "Mid-Market mit Premium-Beweis (Pruefsiegel 1,1 SEHR GUT, Good Housekeeping Approved 2025, Intertek-Zertifizierung). COZY soll fuer alle erreichbar sein, Guter Komfort braucht keine hohen Preise als Brand-Versprechen.",
+    "productComplexity": "Breites Sortiment ueber 6 Sortimentsfamilien Kuscheldecken Bettwaesche Bettdecken Heizdecke Haustierbedarf Kissenbezuege.",
+    "brandVoice": {
+      "tonality": "Professionell und einladend, mit warmen Cozy-Anker. Page-spezifisch differenziert: Startseite professionell, Kuscheldecken sozial-bewiesen, Heizdecke technisch-industriell, Ueber-Bedsure emotional-werte-getrieben.",
+      "adjectives": [
+        "professionell",
+        "warm",
+        "cozy",
+        "atmungsaktiv",
+        "kuschelweich",
+        "geprueft",
+        "ausgezeichnet"
+      ],
+      "signatureClaims": [
+        "Get cozy als ubiquitaere Tagline",
+        "Ueber 1,9 Millionen Verkaeufe weltweit",
+        "75 Millionen+ zufriedene Kundinnen und Kunden weltweit",
+        "Ueber 1 Million Mal verkauft, von Familien weltweit geschaetzt",
+        "Global geschaetzt und von Experten empfohlen",
+        "Immer Qualitaet. Immer An Ihrer Seite.",
+        "COZY heisst gemeinsam wachsen / COZY soll fuer alle erreichbar sein"
+      ],
+      "voiceContrasts": [
+        "Bedsure verwendet Sie-Form (professionell), waehrend Vergleichsmarken wie kloster-kitchen duzen (nahbar)",
+        "Innerhalb Bedsure variieren die Voice-Marker stark zwischen Pages: Heizdecke ist technisch-industriell mit konkrete_zahl, Ueber-Bedsure ist emotional mit wiederholung_anapher"
+      ]
+    },
+    "designAesthetic": {
+      "colorPalette": "Cremiges Weiss als Grundton, dunkelgraue Sans-Serif Typografie, orange Akzent-Buttons fuer Jetzt Entdecken CTAs, viel Whitespace. Heizdecke nutzt zusaetzlich Schwarz und orange Pill-Badges.",
+      "typography": "Sans-Serif konsistent. Versalien fuer Headlines, Mixed Case fuer Sublines. Kursive Subtext-Subtitel bei Decken-Kategorien.",
+      "photographyStyle": "Warm-natuerliche Lifestyle-Photography mit Menschen in Wohnambiente. Pool- und Garten-Szenen bei Sommer-Kollektion. Tiere (Hunde, Katzen) als emotionaler Anker. Closeup-Material-Aufnahmen bei Heizdecke-USPs.",
+      "layoutSignals": "Section-Intros mit Dashes-Wrapper-Pattern (-- Titel --) sind klares Bedsure-Signature auf der Startseite. lg-4grid (1 Lifestyle plus 4 Produkt-Tiles) wiederkehrendes Sortimentsmuster. 56-Tile-Schluss-Cross-Sell-Modul wiederkehrend auf 3 Pages."
+    },
+    "positioningClaim": "Bedsure macht Cozy weltweit zugaenglich, von der schlichten Fleece-Decke bis zur technisch zertifizierten Heizdecke, mit Pruefsiegel-Trust und Lifestyle-Bildsprache als Klammer.",
+    "contentStrategy": {
+      "approach": "Trust-getriebener Sortimentsfunnel. Hero etabliert saisonalen oder kategorialen Anker. Section-Intros strukturieren Sortimentsfamilien. Lifestyle-plus-Produkt-Pairs zeigen Varianten. ASIN-Grids konvertieren.",
+      "emotionalLayer": "Cozy Get cozy als Brand-Anker. Familien-, Paar- und Tier-Lifestyle als emotionaler Beweis. Wohlfuehl-Wortfeld kuschelweich, atmungsaktiv, hautfreundlich.",
+      "rationalLayer": "Verkaufszahlen-Social-Proof (1,9 Mio, 75 Mio, 1 Mio). Press-Logos (VOGUE, GQ, ntv, F.A.Z., testsieger.de). Pruefsiegel (1,1 SEHR GUT, OEKO-TEX, Good Housekeeping, CE, RoHS, GS, Intertek). Material-Layer-Diagramme bei Heizdecke.",
+      "modulePreferences": "editorial_section_intro (Dashes-Pattern), editorial_tile_pair, editorial_tile_quad mit lg-4grid Anordnung, product_grid_full_catalog am Page-Ende",
+      "editorialDepth": "Mittel bis hoch. Startseite 19 Module, Kuscheldecken 14, Heizdecke 12, Ueber-Bedsure 13. Section-Intros strukturieren stark."
+    },
+    "conversionPath": {
+      "primary": "ProductGrid am Page-Ende (44, 19, 30 ASINs je nach Page) plus eingebrannte CTAs Jetzt Entdecken oder Produkte ansehen",
+      "secondary": "lg-4grid Module mit Lifestyle plus 4 Produkt-Tiles als softer Conversion-Pfad",
+      "gifting": "Bedruckte Flanell-Fleece-Decke zum Verschenken plus Fleece-Kuscheldecke im Geschenkdesign auf Kuscheldecken-Page",
+      "trustLoop": "Press-Logos plus Pruefsiegel auf jeder Page, Awards-Banner-Cross-Sell-Schluss-Modul wiederkehrend"
+    },
+    "keyStrengths": [
+      "Verkaufszahlen-Social-Proof prominent platziert (1,9 Mio, 75 Mio, 1 Mio)",
+      "Pruefsiegel-Trust quer ueber alle Produkt-Tiles (Stiftung Warentest 1,1 SEHR GUT)",
+      "Premium-Press-Logos auf Ueber-Bedsure (VOGUE, GQ, F.A.Z.) statt nur Vergleichsplattformen",
+      "Wiederkehrendes lg-4grid Sortimentsmuster fuer Konsistenz",
+      "Saisonale Heroes (EM-Bezug, Sommer-Kollektion)",
+      "Brand-Story-Page mit Anapher-Pattern COZY heisst plus Sortiments-Bruecken"
+    ],
+    "brandUSPs": [
+      "Globale Marktreichweite mit 75 Millionen zufriedenen Kundinnen und Kunden weltweit",
+      "Verkaufszahlen-Beweis mit 1,9 Millionen verkauften Kuscheldecken weltweit",
+      "Externe Pruefsiegel-Validierung (Stiftung Warentest 1,1 SEHR GUT, Good Housekeeping Approved 2025, Intertek-zertifiziert)",
+      "Breites Sortiments-Portfolio ueber 6 Sortimentsfamilien (Kuscheldecken, Bettwaesche, Bettdecken, Heizdecke, Haustierbedarf, Kissenbezuege)",
+      "Premium-Press-Berichterstattung in Lifestyle-Magazinen (VOGUE Germany, GQ, Welt)",
+      "COZY-Brand-Versprechen erschwinglicher Wohnkomfort fuer alle"
+    ],
+    "moduleFunctionalTaxonomy": {
+      "section_intro_dashes": "Mehrfach pro Page, Bedsure-Signature mit Pattern -- Titel --",
+      "lg_4grid": "Sortimentsverteiler pro Familie, 1 Lifestyle plus 4 Produkt-Tiles",
+      "editorial_tile_pair": "Zwei Produkt-Varianten nebeneinander, mit kursivem Subline-Pattern",
+      "product_grid_full_catalog": "Sortimentsabschluss mit allen ASINs",
+      "press_logo_carousel": "Trust-Anker mit Medienprasenz",
+      "social_proof_tagline": "Verkaufszahlen-Highlight (1,9 Mio, 75 Mio, 1 Mio)",
+      "schluss_56_tile_cross_sell": "Wiederkehrendes Cross-Sell-Modul auf 3 Probe-Pages"
+    },
+    "pageArchetypes": {
+      "startseite": {
+        "primaryFunction": "Saisonaler Hero plus Sortimentsuebersicht plus full_catalog Grid",
+        "conversionMode": "Soft (Tile-Click) plus Hard (ASIN-Grid)",
+        "transferableTo": "Andere Heimtextilien-Stores mit breitem Sortiment"
+      },
+      "hub_category": {
+        "primaryFunction": "Material-Variantenschau plus Bestseller-Showcase plus Kategorie-ProductGrid",
+        "conversionMode": "Hard (Pill-CTA Produkte ansehen plus ASIN-Grid)",
+        "transferableTo": "Sortimentstiefe Kategorien mit 5-7 Material-Varianten"
+      },
+      "sub_category": {
+        "primaryFunction": "Technisches Trust-Showcase plus Sicherheits-Beweis plus ProductGrid",
+        "conversionMode": "Hard (Pill-CTAs Jetzt Entdecken plus Jetzt Kaufen)",
+        "transferableTo": "Premium-Spezialprodukte mit Sicherheits-Anforderungen"
+      },
+      "about": {
+        "primaryFunction": "Brand-Werte-Storytelling plus Social Proof plus Kategorien-Verteiler",
+        "conversionMode": "Soft (Sortiments-Links pro Werte-Halbtafel)",
+        "transferableTo": "About-Pages mit Werte-Anapher und Sortimentsbruecken"
+      }
+    },
+    "visionFollowupFindings_2026-05-12": {
+      "patternConfirmation": [
+        "Wiederkehrendes Bedsure-Page-Closing-Pattern bestaetigt: ALLE KATEGORIEN ENTDECKEN Section Intro plus 7-Tile Kategorien-Verteiler-Grid plus amazon_share_footer. Identisch auf Kuscheldecken, Heizdecke und Ueber-Bedsure.",
+        "Premium-Press-Logos VOGUE Germany, GQ, WELT, F.A.Z. Kaufkompass, ntv, Vergleich.org sind sowohl auf Startseite als auch auf Ueber-Bedsure-Page eingebaut, nicht nur auf About-Page.",
+        "Startseite enthaelt ein vollwertiges UEBER BEDSURE Brand-Manifesto-Modul mit Lifestyle-Hero (schlafende Katze) und drei Icon-USP-Saeulen. Bedeutet: Brand-Story-Anker wiederholt sich auf der Startseite, nicht erst auf der Ueber-Bedsure-Page."
+      ],
+      "moduleCorrections": [
+        "Bedsure-Startseite Modul 4 ist nicht ein renderndes Video sondern ein DOM-Video-Element ohne sichtbares Rendering (Hidden-Video-Trigger).",
+        "Bedsure-Startseite Modul 12 ist nicht Bettdecken-Section sondern Kissenbezuege & Spannbettlaken Section.",
+        "Bedsure-Startseite Modul 18 ist nicht Zusatz-Sortiment-Banner sondern UEBER BEDSURE Brand-Manifesto-Block.",
+        "Bedsure-Heizdecke Modul 8 ist nicht eine zweite Heizdecke-Variante sondern ein Qualitaetsversprechen-Comparison-Block (Bedsure vs Anderen Heatmaps und Kurvendiagramme).",
+        "Bedsure-Ueber-Bedsure Modul 11 ist ein reines Lifestyle-Pair OHNE eingebrannten Text, anders als die anderen Werte-Pairs mit COZY-Anapher.",
+        "Auf Kuscheldecken, Heizdecke und Ueber-Bedsure waren die Schluss-Cross-Sell-Module falsch als 56-Tile-Cross-Sell-Carousels annotiert. Echte Realitaet: 7-Tile Kategorien-Verteiler subcategory_tile_grid_octet plus amazon_share_footer.",
+        "Bedsure-Heizdecke ProductGrid-Section Intro lautet MEHR ENTDECKEN."
+      ],
+      "verbleibendeScreenshotRequiredMarker": 15,
+      "verbleibendeMarkerStandort": "Ueberwiegend in Detail-Tiles (Bettwaesche-Sets Lifestyle-Lead, Haustier-Lifestyle-Lead, einige Tile-Details), nicht in der Modul-Architektur. Page-Architektur ist voll dokumentiert."
+    }
+  }
+}

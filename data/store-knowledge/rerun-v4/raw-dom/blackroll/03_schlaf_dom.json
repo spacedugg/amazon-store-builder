@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "store": "blackroll", "pageSlug": "03_schlaf", "pageName": "Schlaf",
+    "pageId": "870649DE-4F7E-421F-B141-C4C47864D539",
+    "url": "https://www.amazon.de/stores/page/870649DE-4F7E-421F-B141-C4C47864D539",
+    "extractedAt": "2026-05-12", "extractor": "chrome_mcp_javascript_tool_compact",
+    "scrollHeight": 8739, "domRowsTotal": 14, "contentModulesCount": 12, "totalVideos": 2
+  },
+  "modules": [
+    { "domRowIdx":  0, "top":   99, "height":  408, "tileCount":  0, "imgCount":  3, "videoCount": 0, "productCount":  0, "note": "Nav header" },
+    { "domRowIdx":  1, "top":  507, "height":  520, "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Page Hero Schlaf" },
+    { "domRowIdx":  2, "top": 1026, "height": 1301, "tileCount":  2, "imgCount": 10, "videoCount": 0, "productCount": 17, "note": "ProductGrid Schlaf-Sortiment mit 17 ASINs" },
+    { "domRowIdx":  3, "top": 2327, "height":  743, "tileCount": 56, "imgCount":  4, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  4, "top": 3069, "height":  743, "tileCount": 15, "imgCount":  1, "videoCount": 1, "productCount":  0, "note": "Video-Modul" },
+    { "domRowIdx":  5, "top": 3812, "height":  743, "tileCount": 16, "imgCount":  2, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  6, "top": 4554, "height":  258, "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro" },
+    { "domRowIdx":  7, "top": 4812, "height":  520, "tileCount":  4, "imgCount":  0, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  8, "top": 5332, "height":  743, "tileCount":  6, "imgCount":  0, "videoCount": 1, "productCount":  0, "note": "Video-Modul" },
+    { "domRowIdx":  9, "top": 6074, "height":  258, "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro" },
+    { "domRowIdx": 10, "top": 6332, "height":  258, "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro" },
+    { "domRowIdx": 11, "top": 6589, "height":  317, "tileCount":  0, "imgCount": 10, "videoCount": 0, "productCount":  0, "note": "Press-Logo-Band (10 imgs, 0 tiles) - identisch wie Startseite Modul 3" },
+    { "domRowIdx": 12, "top": 6906, "height":  371, "tileCount": 32, "imgCount":  4, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx": 13, "top": 7278, "height":  200, "tileCount":  4, "imgCount":  0, "videoCount": 0, "productCount":  0, "note": "amazon_share_footer" }
+  ]
+}

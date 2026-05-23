@@ -1,0 +1,75 @@
+{
+  "_meta": {
+    "store": "more-nutrition",
+    "pageSlug": "09_clear-glow-peptides",
+    "pageId": "483E27E9-01B3-441C-B1B9-DD468E87F786",
+    "url": "https://www.amazon.de/stores/page/483E27E9-01B3-441C-B1B9-DD468E87F786",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_v4_widget_scan",
+    "scrollHeight": 6166,
+    "viewport": { "w": 1582, "h": 872 },
+    "domWidgetsTotal": 8,
+    "note": "CLEAR GLOW PEPTIDES Sub-Page. Hero, FeaturedDeal Cherry White Tea, ProductGrid 3 ASINs, dann 2 weitere Infografik-Banner (vermutlich Kollagen-Benefit und Inhaltsstoffe), Standard-Banner-Schluss."
+  },
+  "hero": {
+    "section": "hero", "widgetIdx": 0, "top": 99,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/588cdc08-3bb5-4951-8aac-f731623ca377._SL5000_CR0%2C0%2C5000%2C1000_SX1500_.jpg",
+    "imageSize": { "w": 1500, "h": 300 },
+    "note": "CLEAR GLOW PEPTIDES Hero-Banner."
+  },
+  "navigation": "siehe 01_startseite_dom.json",
+  "modules": [
+    {
+      "userModuleId": 1, "widgetIdx": 1, "top": 502, "height": 627,
+      "widgetClass": "EditorialRow", "layoutType": "featured_deal_asin_showcase", "tileCount": 1,
+      "featuredAsin": "B0D4ZFB62K",
+      "featuredProductTitle": "MORE Clear Glow Peptides, Cherry White Tea, 600 g, unterstützt Muskeln, Haut, Gelenke, Sehnen und Bänder - made in Germany",
+      "rating": "4,4 von 5 Sternen, 38 Bewertungen", "imgCount": 24, "videoCount": 6,
+      "note": "FeaturedDeal Cherry White Tea."
+    },
+    {
+      "userModuleId": 2, "widgetIdx": 2, "top": 1129, "height": 645,
+      "widgetClass": "ProductGrid", "layoutType": "product_grid_full_catalog", "tileCount": 3,
+      "asins": ["B0CJCGS88X","B0CN6NFXRQ","B0DXFV1PM1"],
+      "exampleTitles": [
+        "MORE Clear Glow Peptides, Wassermelone, 600 g",
+        "MORE Clear Glow Peptides, Green Tea Lime, 600 g",
+        "MORE Clear Glow Peptides, Whey Isolat mit Kollagen, Lemon Iced Tea, 600 g, laktosefrei"
+      ],
+      "note": "ProductGrid 3 weitere Sorten."
+    },
+    {
+      "userModuleId": 3, "widgetIdx": 3, "top": 1774, "height": 743,
+      "widgetClass": "EditorialRow", "layoutType": "infographic_benefit", "tileCount": 1,
+      "mainImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/97caf922-d779-48eb-ab27-889f0446a01b._CR0%2C0%2C1972%2C986_.png" },
+      "altText": "(kein Alt-Text)",
+      "note": "Infografik-Banner ohne Alt-Text. Bildinhalt per Vision lesbar."
+    },
+    {
+      "userModuleId": 4, "widgetIdx": 4, "top": 2517, "height": 688,
+      "widgetClass": "EditorialRow", "layoutType": "infographic_benefit_4box", "tileCount": 1,
+      "mainImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/7128088b-1a55-4604-9065-3368ef1c2bd1._CR0%2C0%2C2188%2C1002_SX1500_.png" },
+      "altText": "Infographic showing four quadrants with text and a central explosion of colorful powder. Unable to read specific text due to image resolution.",
+      "linkedAsin": "B0CN6NFXRQ",
+      "note": "Vier-Quadranten-Infografik mit zentralem Pulver-Explosion-Visual. Linkt auf Green Tea Lime ASIN."
+    },
+    {
+      "userModuleId": 5, "widgetIdx": 5, "top": 3205, "height": 750,
+      "widgetClass": "EditorialRow", "layoutType": "full_width_image_creative", "tileCount": 1,
+      "mainImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d6865a5f-5e09-4f0a-b72c-b6bb65ac059d._CR0%2C0%2C1280%2C640_SX1500_.jpg" },
+      "links": [{"pageId": "8790A8BC-31A4-4810-8B75-BF1AFCE858B5", "ariaLabel": "Weitere Informationen"}],
+      "note": "Produktselektor-Banner."
+    },
+    {
+      "userModuleId": 6, "widgetIdx": 6, "top": 3955, "height": 750,
+      "widgetClass": "EditorialRow", "layoutType": "full_width_image_closing", "tileCount": 1,
+      "mainImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d359c2c9-b952-47a2-b88a-864e11ffc31c._CR0%2C0%2C3000%2C1500_SX1500_.png" },
+      "links": [{"pageId": "F081FD4B-1559-4A38-A4F3-FC8E6732BCEB", "ariaLabel": "Weitere Informationen"}],
+      "note": "Closing-Banner."
+    }
+  ],
+  "excluded": [
+    { "widgetIdx": 7, "top": 4705, "height": 200, "reason": "Amazon Share-Footer." }
+  ],
+  "uniqueAsinsOnPage": ["B0D4ZFB62K","B0CJCGS88X","B0CN6NFXRQ","B0DXFV1PM1"]
+}

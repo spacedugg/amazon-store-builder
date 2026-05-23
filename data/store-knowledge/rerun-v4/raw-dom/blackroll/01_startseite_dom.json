@@ -1,0 +1,23 @@
+{
+  "_meta": {
+    "store": "blackroll", "pageSlug": "01_startseite", "pageName": "Startseite",
+    "pageId": "03098AB4-BDD5-4A23-A7DD-5C10153C5D58",
+    "url": "https://www.amazon.de/stores/page/03098AB4-BDD5-4A23-A7DD-5C10153C5D58",
+    "extractedAt": "2026-05-12", "extractor": "chrome_mcp_javascript_tool_compact",
+    "scrollHeight": 7537, "domRowsTotal": 12, "contentModulesCount": 10
+  },
+  "modules": [
+    { "domRowIdx":  0, "top":   99, "height":  408, "widgetClass": null,                              "tileCount":  0, "imgCount":  3, "videoCount": 0, "productCount": 0, "note": "Nav header plus Hero-Banner Bereich" },
+    { "domRowIdx":  1, "top":  507, "height":  525, "widgetClass": "EditorialRow__row__W3W3h",        "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount": 0, "note": "Hero-Banner Page mit Dein Leben kennt keine Grenzen Claim" },
+    { "domRowIdx":  2, "top": 1031, "height":  317, "widgetClass": null,                              "tileCount":  0, "imgCount": 10, "videoCount": 0, "productCount": 0, "note": "Auffaellig: 10 Bilder ohne Tile-Marker, vermutlich Press-Logo-Carousel oder Logo-Band" },
+    { "domRowIdx":  3, "top": 1348, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",        "tileCount": 16, "imgCount":  2, "videoCount": 0, "productCount": 0 },
+    { "domRowIdx":  4, "top": 2090, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",        "tileCount": 16, "imgCount":  2, "videoCount": 0, "productCount": 0 },
+    { "domRowIdx":  5, "top": 2833, "height":  258, "widgetClass": "EditorialRow__row__W3W3h",        "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount": 0, "note": "Section Intro" },
+    { "domRowIdx":  6, "top": 3091, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",        "tileCount": 24, "imgCount":  3, "videoCount": 0, "productCount": 0 },
+    { "domRowIdx":  7, "top": 3833, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",        "tileCount": 24, "imgCount":  3, "videoCount": 0, "productCount": 0 },
+    { "domRowIdx":  8, "top": 4576, "height":  500, "widgetClass": "EditorialRow__row__W3W3h",        "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount": 0 },
+    { "domRowIdx":  9, "top": 5076, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",        "tileCount": 16, "imgCount":  2, "videoCount": 0, "productCount": 0 },
+    { "domRowIdx": 10, "top": 5818, "height":  258, "widgetClass": "EditorialRow__row__W3W3h",        "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount": 0, "note": "Section Intro" },
+    { "domRowIdx": 11, "top": 6076, "height":  200, "widgetClass": "EditorialRow__row__W3W3h",        "tileCount":  4, "imgCount":  0, "videoCount": 0, "productCount": 0, "note": "Schluss-Banner 200px, vermutlich amazon_share_footer" }
+  ]
+}

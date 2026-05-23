@@ -1,0 +1,19 @@
+{
+  "_meta": {
+    "store": "twentythree", "pageSlug": "03_bettwaesche", "pageName": "Bettwaesche",
+    "pageId": "15C8BFA1-4A3D-4C7E-82A3-2A626199A6B7",
+    "url": "https://www.amazon.de/stores/page/15C8BFA1-4A3D-4C7E-82A3-2A626199A6B7",
+    "extractedAt": "2026-05-13", "extractor": "chrome_mcp_javascript_tool_v2_with_urls",
+    "scrollHeight": 5096, "viewport": {"w": 1826, "h": 888},
+    "domRowsTotal": 7, "contentModulesCount": 5
+  },
+  "modules": [
+    {"domRowIdx": 0, "top": 99, "height": 400, "widgetClass": "Header", "tileCount": 0, "imgCount": 3, "videoCount": 0, "productCount": 0, "note": "Nav header"},
+    {"domRowIdx": 1, "top": 507, "height": 211, "widgetClass": "EditorialRow", "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Section Intro Gut Besser Lyocell Der Wie-fuer-dich-gemachte Stoff"},
+    {"domRowIdx": 2, "top": 718, "height": 743, "widgetClass": "EditorialRow", "tileCount": 16, "imgCount": 3, "videoCount": 0, "productCount": 1, "note": "Hero Image plus Lifestyle"},
+    {"domRowIdx": 3, "top": 1460, "height": 689, "widgetClass": "ProductGrid", "tileCount": 0, "imgCount": 4, "videoCount": 0, "productCount": 6, "note": "ProductGrid 6 ASINs"},
+    {"domRowIdx": 4, "top": 2149, "height": 743, "widgetClass": "EditorialRow", "tileCount": 16, "imgCount": 3, "videoCount": 0, "productCount": 1, "note": "Image Modul Hero"},
+    {"domRowIdx": 5, "top": 2891, "height": 743, "widgetClass": "EditorialRow", "tileCount": 16, "imgCount": 3, "videoCount": 0, "productCount": 1, "note": "Image Modul plus Tiles"},
+    {"domRowIdx": 6, "top": 3634, "height": 201, "widgetClass": "EditorialRow", "tileCount": 4, "imgCount": 0, "videoCount": 0, "productCount": 0, "note": "amazon_share_footer"}
+  ]
+}

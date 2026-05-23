@@ -1,0 +1,68 @@
+{
+  "_meta": {
+    "store": "holy-energy",
+    "pageSlug": "01_startseite",
+    "pageName": "Startseite",
+    "pageId": "7913E121-CB43-4349-A8D2-9F0843B226E4",
+    "url": "https://www.amazon.de/stores/HOLYEnergy/page/7913E121-CB43-4349-A8D2-9F0843B226E4",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_v4",
+    "extractorNote": "Phase 1 via Chrome MCP. Module-Skelett (top, height, widgetClass, tileCount, imgCount, videoCount, productCount) plus Headings, Alt-Texte, Hero-Bild-URLs und ASINs. Bildtexte sind ueberwiegend in Bildebene (kein alt-Text), in Phase 2 per Vision nachzuholen.",
+    "scrollHeight": 6078,
+    "viewport": { "w": 1582, "h": 928 },
+    "domRowsTotal": 10,
+    "contentModulesCount": 9
+  },
+  "navigation": {
+    "pages": [
+      { "label": "Startseite",         "pageId": "7913E121-CB43-4349-A8D2-9F0843B226E4" },
+      { "label": "Fuer Neueinsteiger", "pageId": "E0597C1D-5961-4E87-9CA5-2FAF0299330D" },
+      { "label": "Bestseller",         "pageId": "E8F850A5-CE46-4877-88C4-F4F5A0365D02" },
+      { "label": "Energy",             "pageId": "18BC62B2-B4AF-4995-B743-E80AECFA53AA" },
+      { "label": "Iced Tea",           "pageId": "527A4D3B-EC68-4755-BF8D-2BF264AE1694" },
+      { "label": "Hydration",          "pageId": "34F0F6AC-314F-4167-9EDA-54E94AC937C7" },
+      { "label": "Milkshakes",         "pageId": "6AD7F40F-ED3C-4B02-BDC9-310A071E3EC7" },
+      { "label": "Starter Sets",       "pageId": "15F6D24E-FF9D-4FE5-A1FB-5A2AD609CFE1" },
+      { "label": "Shaker",             "pageId": "3B80FD95-4F71-4D28-944B-EA001C45FF3C" },
+      { "label": "Probier-Boxen",      "pageId": "229C0965-6260-45EF-8A4F-1723BD514037" },
+      { "label": "Adventskalender",    "pageId": "0AB41119-9BEE-431D-B7CC-346E3516D209" },
+      { "label": "Ueber uns",          "pageId": "69AF9424-DDC3-4F16-8AE0-F35BB75BD83A" }
+    ]
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height":  400, "widgetClass": "Header",         "tileCount":  0, "imgCount":  3, "videoCount": 0, "productCount": 0, "note": "Header plus Brand-Hero (1500x300) ueber Menueleiste. Alt-Text: Colorful product display of drink mix containers and a shaker bottle against a blue background. Text reads DIE SOFTDRINK REVOLUTION." },
+    { "domRowIdx": 1, "top":  507, "height":  272, "widgetClass": "EditorialRow",   "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount": 0, "note": "Editorial-Banner schmal 1470x257 unterhalb Menueleiste. Wahrscheinlich Section Intro mit USP- oder Trust-Statement." },
+    { "domRowIdx": 2, "top":  778, "height":  371, "widgetClass": "EditorialRow",   "tileCount": 32, "imgCount":  4, "videoCount": 0, "productCount": 0, "note": "Tile-Row 4-fach Kategorien-Verteiler (4 grosse Tiles, viele Sub-Klassen)." },
+    { "domRowIdx": 3, "top": 1150, "height":  582, "widgetClass": "ProductGrid",    "tileCount":  0, "imgCount":  4, "videoCount": 0, "productCount": 4, "note": "ProductGrid 4 ASINs: Starter Set Trio (B0CKLHP414), Energy Strawberry Shark (B0CPJNZL8Z), Hydration Lemon (B0D1CQMS61), Iced Tea Peach (B0D9QJWBYM). productCount 8 weil duplizierte data-asin-Wrapper." },
+    { "domRowIdx": 4, "top": 1731, "height":  279, "widgetClass": "EditorialRow",   "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount": 0, "note": "Editorial-Banner schmal 1470x264. Vermutlich Section Intro oder Brand-Claim." },
+    { "domRowIdx": 5, "top": 2010, "height":  743, "widgetClass": "EditorialRow",   "tileCount":  6, "imgCount":  0, "videoCount": 1, "productCount": 0, "note": "Video-Modul Hero (Vollformat, ein video-Element). Wahrscheinlich Brand-Story-Video." },
+    { "domRowIdx": 6, "top": 2752, "height": 1242, "widgetClass": "EditorialRow",   "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount": 0, "note": "Image-Modul XL 1470x1227. Lifestyle- oder Manifest-Banner mit eingebranntem Text." },
+    { "domRowIdx": 7, "top": 4014, "height":  297, "widgetClass": "ProductCarousel", "tileCount":  0, "imgCount": 10, "videoCount": 0, "productCount": 0, "note": "ProductCarousel Bestseller von HOLY Energy (Heading nachgewiesen). Amazon native Bestseller-Carousel." },
+    { "domRowIdx": 8, "top": 4311, "height":  305, "widgetClass": "EditorialRow",   "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount": 0, "note": "Editorial-Banner 1470x290 Closing. Vermutlich Schluss-Banner oder Cross-Sell." },
+    { "domRowIdx": 9, "top": 4616, "height":  201, "widgetClass": "EditorialRow",   "tileCount":  4, "imgCount":  0, "videoCount": 0, "productCount": 0, "note": "Share-Footer (Teilen Sie diese Seite)." }
+  ],
+  "heroImage": {
+    "src": "https://m.media-amazon.com/images/.../6fc595b8-9258-43e3-8f47-80e8b2e250eb._CR...",
+    "w": 1500,
+    "h": 300,
+    "alt": "Colorful product display of drink mix containers and a shaker bottle against a blue background. Text reads 'DIE SOFTDRINK REVOLUTION'. Products include powders and flavoring drops."
+  },
+  "editorialBanners": [
+    { "modulePos": 2, "top":  514, "w": 1470, "h":  257, "asset": "3640ea73-7424-4372-9adb-37f2c788e05c" },
+    { "modulePos": 5, "top": 1739, "w": 1470, "h":  264, "asset": "7e16901c-f626-4347-9afb-c4acf0b51341" },
+    { "modulePos": 7, "top": 2760, "w": 1470, "h": 1227, "asset": "4f70e258-e058-4760-985d-0a98b0e3d31a" },
+    { "modulePos": 9, "top": 4319, "w": 1470, "h":  290, "asset": "234434b7-fa49-4308-b88b-f48fa3418cf0" }
+  ],
+  "uniqueAsinsOnPage": ["B0CKLHP414", "B0CPJNZL8Z", "B0D1CQMS61", "B0D9QJWBYM"],
+  "asinProductTitles": [
+    "HOLY Starter Set Trio - Energy, Iced Tea & Hydration - 42 Portionen in 21 fruchtigen Geschmacksrichtungen - Vegan & zuckerfrei mit 100% natuerlichen Fruchtaromen",
+    "HOLY Energy 'Strawberry Shark' Booster mit Erdbeer & Mandarine Geschmack - 50 Portionen mit NewCaff & Gruentee Extrakt",
+    "HOLY Hydration Elektrolyte Pulver 'Lemon' - Vegan mit 100% natuerlichen Fruchtaromen - 50 Portionen Hydration Drink",
+    "HOLY Iced Tea Peach x Black Tea | 50 Portionen mit Antioxidantien | Zuckerfreier Eistee mit Relax Formel"
+  ],
+  "openQuestionsLocal": [
+    "Module 1, 4, 6, 8 sind Editorial-Banner mit eingebranntem Text. Bildtext in Phase 2 per Vision zu extrahieren.",
+    "Modul 5 Video-Modul: Video-Inhalt (Brand-Story?) in Phase 2 zu transkribieren.",
+    "Modul 2 mit 32 Tiles aber nur 4 Images: 4 grosse Kategorien-Tiles mit jeweils ~8 Sub-Markern (Amazon Tile-DOM-Komplexitaet)."
+  ]
+}

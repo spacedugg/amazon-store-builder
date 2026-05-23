@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "store": "esn",
+    "pageSlug": "04_proteine",
+    "pageId": "05C54A75-8964-41E5-9C10-19EB32583205",
+    "pageUrl": "https://www.amazon.de/stores/page/05C54A75-8964-41E5-9C10-19EB32583205",
+    "extractedAt": "2026-05-23",
+    "extractor": "v4_phase1_chrome_mcp_live",
+    "scrollHeight": 4581,
+    "viewport": { "w": 1599, "h": 842 },
+    "domRowsTotal": 6,
+    "note": "PROTEINE Hub-Page: Hero Video plus Tile-Quad zu vier Protein-Sub-Linien plus Produktselektor-Bridge plus Alle-Produkte-Schluss plus Footer."
+  },
+  "modules": [
+    { "domRowIdx": 0, "position": 1, "top": 99, "height": 403, "widgetType": "Header", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": ["Folgen"], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/acf527f7-c905-4e51-ad44-ec32c24f89cc._CR0%2C0%2C1920%2C384_SX1500_.jpg"], "asins": [], "pageLinks": [], "note": "Amazon Nav Header mit ESN Marken-Hero." },
+    { "domRowIdx": 1, "position": 2, "top": 403, "height": 743, "widgetType": "EditorialRow", "imgCount": 0, "videoCount": 1, "productCount": 0, "headings": [], "ctas": ["Play Video", "Play", "Mute"], "imageUrls": [], "asins": [], "pageLinks": [], "note": "Hero Video 3000x1500 als Page-Auftakt der Proteine-Hub-Page. Vollflaechen-Brand-Mood-Video." },
+    { "domRowIdx": 2, "position": 3, "top": 1145, "height": 743, "widgetType": "EditorialRow", "imgCount": 4, "videoCount": 0, "productCount": 0, "headings": [], "ctas": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/b6c2bbd1-0956-4daa-9cd3-f0cb49fe297e._CR0%2C0%2C3000%2C1500_SX750_SY375_.jpg", "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/58e30a8a-a70c-4e23-ae41-338a392511e7._CR0%2C0%2C3000%2C1500_SX750_SY375_.jpg", "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/199bf1ed-13cc-4e1b-a23b-e44f8b2c97bd._CR0%2C0%2C3000%2C1500_SX750_SY375_.jpg", "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2b5616b4-7cbf-4c1e-b1bb-bb3f2644a56c._CR0%2C0%2C3000%2C1500_SX750_SY375_.jpg"], "asins": [], "pageLinks": ["8F9839F1-7792-40E9-BC87-D8253DB32928", "F7E30D0D-D2C4-4493-BE92-B7F0C8ACFC5C", "2B83B00A-4B34-4164-AE99-370F051B7A19", "7A0AC72C-C59B-4C49-84EE-3E43C4D89AF1"], "note": "Tile-Quad 4-fach (2x2-Grid) verlinkt nach DESIGNER WHEY, ISOCLEAR, FLEXPRESSO, ISOWHEY HARDCORE als vier Protein-Produktlinien." },
+    { "domRowIdx": 3, "position": 4, "top": 1888, "height": 750, "widgetType": "EditorialRow", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c0cacc85-510c-474a-8e3d-244467c95b46._CR0%2C0%2C1500%2C750_SX1500_.png"], "asins": [], "pageLinks": ["2AFC0A42-A702-462D-B255-B5203C7449F8"], "note": "Image-Banner 1500x750 PNG verlinkt nach PRODUKTSELEKTOR (wiederkehrendes Beratungs-Tool-Modul)." },
+    { "domRowIdx": 4, "position": 5, "top": 2638, "height": 383, "widgetType": "EditorialRow", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bb6ee5ba-f109-4c8a-a8d3-9eebe477d015._CR0%2C0%2C3000%2C750_SX1500_.jpg"], "asins": [], "pageLinks": ["9FED5CCC-6284-44BD-AD83-AAEEBF48E23F"], "note": "Schluss-Banner 3000x750 verlinkt nach ALLE PRODUKTE." },
+    { "domRowIdx": 5, "position": 6, "top": 3020, "height": 201, "widgetType": "EditorialRow", "imgCount": 0, "videoCount": 0, "productCount": 0, "headings": [], "ctas": ["Teilen"], "imageUrls": [], "asins": [], "pageLinks": [], "note": "Amazon Share Footer." }
+  ]
+}

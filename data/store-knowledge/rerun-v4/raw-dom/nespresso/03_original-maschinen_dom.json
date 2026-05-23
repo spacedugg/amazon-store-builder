@@ -1,0 +1,40 @@
+{
+  "_meta": {
+    "store": "nespresso",
+    "pageSlug": "03_original-maschinen",
+    "pageName": "Original Maschinen",
+    "pageId": "FCA8433A-D425-45C9-A777-FDFB8BF4A978",
+    "url": "https://www.amazon.de/stores/page/FCA8433A-D425-45C9-A777-FDFB8BF4A978",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_compact",
+    "extractorNote": "Phase 1 via Chrome MCP javascript_tool. Output kompakt.",
+    "scrollHeight": 13482,
+    "viewport": { "w": 1599, "h": 842 },
+    "domRowsTotal": 18,
+    "contentModulesCount": 18
+  },
+  "modules": [
+    { "domRowIdx":  0, "top":    99, "height":  395, "widgetType": "Header",       "tileCount": 0, "imgCount": 1, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Nav header." },
+    { "domRowIdx":  1, "top":   502, "height": 1118, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 1, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Sehr grosser Brand-Hero Vollformat (1118px hoch) mit Maschine im Setting." },
+    { "domRowIdx":  2, "top":  1619, "height":  743, "widgetType": "EditorialRow", "tileCount": 3, "imgCount": 3, "videoCount": 0, "productCount": 0, "asinCount": 1, "note": "Modell-Profil-Modul Tile-Triple (Atelier).", "sampleAsins": ["B084XQGQTP"] },
+    { "domRowIdx":  3, "top":  2362, "height":  743, "widgetType": "EditorialRow", "tileCount": 3, "imgCount": 3, "videoCount": 0, "productCount": 0, "asinCount": 1, "note": "Modell-Profil-Modul Tile-Triple (Citiz).", "sampleAsins": ["B01ITGGKBY"] },
+    { "domRowIdx":  4, "top":  3104, "height":  743, "widgetType": "EditorialRow", "tileCount": 3, "imgCount": 3, "videoCount": 0, "productCount": 0, "asinCount": 1, "note": "Modell-Profil-Modul Tile-Triple (Essenza Mini).", "sampleAsins": ["B0BZJNRL4B"] },
+    { "domRowIdx":  5, "top":  3847, "height":  743, "widgetType": "EditorialRow", "tileCount": 3, "imgCount": 3, "videoCount": 0, "productCount": 0, "asinCount": 1, "note": "Modell-Profil-Modul Tile-Triple (Inissia).", "sampleAsins": ["B06XJ4G828"] },
+    { "domRowIdx":  6, "top":  4589, "height":  743, "widgetType": "EditorialRow", "tileCount": 3, "imgCount": 3, "videoCount": 0, "productCount": 0, "asinCount": 1, "note": "Modell-Profil-Modul Tile-Triple (Pixie).", "sampleAsins": ["B00G5YOVZA"] },
+    { "domRowIdx":  7, "top":  5332, "height":  743, "widgetType": "EditorialRow", "tileCount": 3, "imgCount": 3, "videoCount": 0, "productCount": 0, "asinCount": 1, "note": "Modell-Profil-Modul Tile-Triple (Gran Lattissima).", "sampleAsins": ["B0CQPM89H9"] },
+    { "domRowIdx":  8, "top":  6074, "height":  407, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 1, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Image-Banner Mid-Page (407px hoch, vermutlich Section-Break)." },
+    { "domRowIdx":  9, "top":  6481, "height":  309, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 1, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Section Intro Banner (309px)." },
+    { "domRowIdx": 10, "top":  6790, "height":  743, "widgetType": "EditorialRow", "tileCount": 3, "imgCount": 3, "videoCount": 0, "productCount": 0, "asinCount": 1, "note": "Modell-Profil-Modul Tile-Triple (Lattissima One).", "sampleAsins": ["B0B8D8S7PB"] },
+    { "domRowIdx": 11, "top":  7533, "height":  743, "widgetType": "EditorialRow", "tileCount": 3, "imgCount": 3, "videoCount": 0, "productCount": 0, "asinCount": 1, "note": "Modell-Profil-Modul Tile-Triple (Creatista).", "sampleAsins": ["B08VD5FS1D"] },
+    { "domRowIdx": 12, "top":  8275, "height":  743, "widgetType": "EditorialRow", "tileCount": 3, "imgCount": 3, "videoCount": 0, "productCount": 0, "asinCount": 1, "note": "Modell-Profil-Modul Tile-Triple.", "sampleAsins": ["B0CFTXZGBJ"] },
+    { "domRowIdx": 13, "top":  9018, "height":  743, "widgetType": "EditorialRow", "tileCount": 3, "imgCount": 3, "videoCount": 0, "productCount": 0, "asinCount": 1, "note": "Modell-Profil-Modul Tile-Triple.", "sampleAsins": ["B07KR5MPWK"] },
+    { "domRowIdx": 14, "top":  9760, "height":  743, "widgetType": "EditorialRow", "tileCount": 3, "imgCount": 3, "videoCount": 0, "productCount": 0, "asinCount": 1, "note": "Modell-Profil-Modul Tile-Triple.", "sampleAsins": ["B01ITGS3UU"] },
+    { "domRowIdx": 15, "top": 10503, "height":  743, "widgetType": "EditorialRow", "tileCount": 3, "imgCount": 3, "videoCount": 0, "productCount": 0, "asinCount": 1, "note": "Modell-Profil-Modul Tile-Triple.", "sampleAsins": ["B0CWPKR32Q"] },
+    { "domRowIdx": 16, "top": 11245, "height":  309, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 1, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Section Intro / Trust-Bar Banner (309px)." },
+    { "domRowIdx": 17, "top": 11554, "height":  200, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 0, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Amazon Share Footer." }
+  ],
+  "openQuestionsLocal": [
+    "Original Maschinen ist sehr lange Page (13482px) mit 12 fast identischen Modell-Profil-Tile-Triples in Folge. Jedes Triple = ein Maschinen-Modell.",
+    "Pattern: long_modell_profile_sequence mit 11-12 Tile-Triple-Modulen (Atelier, Citiz, Essenza, Inissia, Pixie, Gran Lattissima, Lattissima One, Creatista, plus weitere)."
+  ]
+}

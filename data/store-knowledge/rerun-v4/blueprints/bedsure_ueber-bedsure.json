@@ -1,0 +1,451 @@
+{
+  "schemaVersion": "v4-2026-05",
+  "store": "bedsure",
+  "pageUrl": "https://www.amazon.de/stores/page/ED1B32C3-3890-4245-8A84-ECD16C98BFAF",
+  "pageName": "Ueber Bedsure",
+  "pageId": "ED1B32C3-3890-4245-8A84-ECD16C98BFAF",
+  "pageSlug": "11_ueber-bedsure",
+  "pageLevel": 1,
+  "pageType": "about",
+  "scrollHeight": 9681,
+  "viewport": { "w": 1599, "h": 842 },
+  "extractedAt": "2026-05-12",
+  "extractor": "v4_vision_pass_chrome_mcp",
+  "phase1Source": "data/store-knowledge/rerun-v4/raw-dom/bedsure/11_ueber-bedsure_dom.json",
+  "contentStats": { "domModules": 15, "logicalModules": 15, "brandModules": 13, "totalVideos": 1 },
+  "heroBanner": {
+    "description": "Identischer Bedsure Get cozy Hero.",
+    "textOnImage": { "visibleText": "Bedsure Get cozy", "textType": "tagline", "origin": "baked_in", "headline": "Bedsure", "subline": "Get cozy", "cta": null, "directionCues": null },
+    "estimatedDimensions": "3000x600",
+    "imageCategory": "lifestyle",
+    "elementProportions": { "lifestyle_photo": 80, "logo": 10, "text": 10 }
+  },
+  "modules": [
+    {
+      "position": 1, "moduleId": "ueber-bedsure_mod_01", "moduleName": "Amazon Nav Header",
+      "layoutType": "amazon_nav_header", "layoutShape": "chrome_thin", "tileCount": 0,
+      "designIntent": "mimics_native_chrome", "designIntentDetail": "Amazon Store Navigation mit Breadcrumb.",
+      "structuralPattern": "Schmale Leiste mit Logo, Folgen, Page-Tabs und Suche.",
+      "moduleFunction": "Navigationschicht.",
+      "relationToPrevious": "none", "relationToNext": "hands_off_to_navigation",
+      "visualBridge": "hard_break_intentional", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Bedsure > Ueber Bedsure Folgen STARTSEITE ...", "textType": "section_label", "origin": "amazon_chrome", "headline": null, "subline": null, "cta": null, "directionCues": null },
+      "tiles": [], "dom": { "widgetClass": null, "visibleHeadings": [], "ctaLabels": ["Folgen"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": null, "toolLayoutName": null, "toolLayoutType": "amazon_native", "toolLayoutRole": "amazon_native"
+    },
+    {
+      "position": 2, "moduleId": "ueber-bedsure_mod_02", "moduleName": "Page Hero UEBER BEDSURE",
+      "layoutType": "hero_banner_tall", "layoutShape": "full_width_tall", "tileCount": 1,
+      "designIntent": "emotional_hook", "designIntentDetail": "Page-Hero (769px hoch) mit Lifestyle-Hintergrund einer schlafenden orange-weissen Katze auf weisser Bedsure-Sherpa-Decke, eingebrannte Headline UEBER BEDSURE plus Story-Intro Von Anfang an moechten wir eines.",
+      "structuralPattern": "Hintergrund Lifestyle-Foto: orange-weisse Katze schlaeft entspannt auf einer weissen Bedsure-Sherpa-Decke mit Kord-Struktur. Mittig im unteren Drittel eingebrannte weisse Versalien-Headline UEBER BEDSURE plus Subline-Beginn.",
+      "moduleFunction": "Etabliert die Brand-Story-Page mit warmem Cozy-Anker (Tier-Lifestyle) und beginnt die Story-Erzaehlung.",
+      "relationToPrevious": "opens_section_thematically", "relationToNext": "sets_up_next",
+      "visualBridge": "hard_break_intentional", "copyBridge": "continues_idea", "heroArchetype": "product_in_setting_with_claim",
+      "textOnImage": { "visibleText": "UEBER BEDSURE Von Anfang an moechten wir eines:", "textType": "headline", "origin": "baked_in", "headline": "UEBER BEDSURE", "subline": "Von Anfang an moechten wir eines:", "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "creative_lifestyle_hybrid", "toolTileType": "image_text", "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Page Hero About-Bedsure Lifestyle Katze", "productOrCategoryRef": null, "intent": "story", "rolePosition": "Page Hero" },
+          "visualContent": "Lifestyle-Foto: orange-weisse Hauskatze schlaeft eingerollt auf einer weissen Bedsure-Sherpa-Kuscheldecke mit deutlicher Kord-Optik. Warmes Tageslicht, intime Stimmung. Im unteren Bildteil eingebrannte weisse Versalien-Headline UEBER BEDSURE plus erster Satz der Subline.",
+          "elementProportions": { "lifestyle_photo": 80, "text": 18, "decorative_elements": 2 },
+          "textOnImage": { "visibleText": "UEBER BEDSURE Von Anfang an moechten wir eines:", "textType": "headline", "origin": "baked_in", "headline": "UEBER BEDSURE", "subline": "Von Anfang an moechten wir eines:", "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": ["UEBER BEDSURE"], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "hero"
+    },
+    {
+      "position": 3, "moduleId": "ueber-bedsure_mod_03", "moduleName": "Social Proof 75 Mio plus Lifestyle-Foto",
+      "layoutType": "editorial_banner_large", "layoutShape": "full_width_tall", "tileCount": 1,
+      "designIntent": "editorial", "designIntentDetail": "Editorial-Banner (694px) mit Lifestyle-Foto einer Hand auf weisser Bedsure-Decke links und prominentem Social-Proof 75 Mio. zufriedene Kundinnen und Kunden weltweit rechts.",
+      "structuralPattern": "Linke Bildhaelfte Closeup einer hellen weiblichen Hand, die ueber eine weisse Bedsure-Decke mit Kord-Struktur streicht. Rechte Bildhaelfte heller cremiger Hintergrund mit Personen-Icon plus Tagline 75 Mio.+ zufriedene Kundinnen und Kunden weltweit. Darunter klein die Disclosure *Stand: Oktober 2025.",
+      "moduleFunction": "Social-Proof-Anker direkt nach dem Hero. Etabliert die globale Bedsure-Brand-Groesse.",
+      "relationToPrevious": "proves_above_claim", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_subject_class", "copyBridge": "continues_idea", "heroArchetype": null,
+      "textOnImage": { "visibleText": "75 Mio.+ zufriedene Kundinnen und Kunden weltweit *Stand: Oktober 2025", "textType": "tagline", "origin": "baked_in", "headline": "75 Mio.+", "subline": "zufriedene Kundinnen und Kunden weltweit", "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "creative_lifestyle_hybrid", "toolTileType": "image_text", "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Social Proof 75 Mio Kunden weltweit", "productOrCategoryRef": null, "intent": "trust", "rolePosition": "Trust Anchor" },
+          "visualContent": "Linke Haelfte Lifestyle-Foto einer weiblichen Hand auf weisser Bedsure-Sherpa-Decke mit Kord-Struktur. Rechte Haelfte heller cremiger Hintergrund mit Personen-Icon plus Tagline 75 Mio.+ zufriedene Kundinnen und Kunden weltweit. Unten Disclaimer *Stand: Oktober 2025.",
+          "elementProportions": { "lifestyle_photo": 55, "text": 30, "icons": 8, "solid_background": 7 },
+          "textOnImage": { "visibleText": "75 Mio.+ zufriedene Kundinnen und Kunden weltweit *Stand: Oktober 2025", "textType": "tagline", "origin": "baked_in", "headline": "75 Mio.+", "subline": "zufriedene Kundinnen und Kunden weltweit", "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": [], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "editorial"
+    },
+    {
+      "position": 4, "moduleId": "ueber-bedsure_mod_04", "moduleName": "Video Banner Brand Story",
+      "layoutType": "hero_video", "layoutShape": "full_width_banner", "tileCount": 1,
+      "designIntent": "emotional_hook", "designIntentDetail": "Schmaler Video-Banner (385px) zwischen Social-Proof und Press-Logos. screenshot_required fuer Frame-Inhalte.",
+      "structuralPattern": "Full-Width-Video, vermutlich Brand-Image-Loop.",
+      "moduleFunction": "Visueller Brand-Story-Anker zwischen rationalen Trust-Bloecken.",
+      "relationToPrevious": "zooms_into_above_subject", "relationToNext": "sets_up_next",
+      "visualBridge": "hard_break_intentional", "copyBridge": "fresh_topic", "heroArchetype": "kinetic_lifestyle_loop",
+      "textOnImage": { "visibleText": "screenshot_required", "textType": "unknown", "origin": "baked_in", "headline": null, "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "lifestyle", "toolTileType": "video", "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Brand Story Video Loop", "productOrCategoryRef": null, "intent": "story", "rolePosition": "Brand Story Bridge" },
+          "visualContent": "screenshot_required, Frame-Sampling im naechsten Vision-Lauf nachholen.",
+          "elementProportions": { "lifestyle_photo": 100 },
+          "textOnImage": { "visibleText": null, "textType": "unknown", "origin": "baked_in", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": [], "ctaLabels": [], "imageUrls": [], "videoCount": 1 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "hero_video"
+    },
+    {
+      "position": 5, "moduleId": "ueber-bedsure_mod_05", "moduleName": "Section Intro BEKANNT AUS",
+      "layoutType": "editorial_section_intro", "layoutShape": "full_width_banner", "tileCount": 1,
+      "designIntent": "section_intro", "designIntentDetail": "Section-Header zur Press-Logo-Section.",
+      "structuralPattern": "Schmale 153px-Row, zentrierte Versalien-Headline BEKANNT AUS.",
+      "moduleFunction": "Leitet Press-Logo-Section ein.",
+      "relationToPrevious": "summarizes_above", "relationToNext": "promises_proof_below",
+      "visualBridge": "shared_typography_treatment", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "BEKANNT AUS", "textType": "section_label", "origin": "baked_in", "headline": "BEKANNT AUS", "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "text_image", "toolTileType": "image_text", "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Section Intro Bekannt Aus", "productOrCategoryRef": null, "intent": "trust", "rolePosition": "Section Intro" },
+          "visualContent": "Heller cremiger Hintergrund mit zentriertem schwarzem Versalien-Headline BEKANNT AUS.",
+          "elementProportions": { "text": 20, "solid_background": 80 },
+          "textOnImage": { "visibleText": "BEKANNT AUS", "textType": "section_label", "origin": "baked_in", "headline": "BEKANNT AUS", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": ["BEKANNT AUS"], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "section_intro"
+    },
+    {
+      "position": 6, "moduleId": "ueber-bedsure_mod_06", "moduleName": "Press Logos Carousel",
+      "layoutType": "editorial_banner", "layoutShape": "full_width_banner", "tileCount": 1,
+      "designIntent": "editorial", "designIntentDetail": "Press-Logo-Carousel mit Premium-Medien-Logos VOGUE GERMANY, GQ, WELT, F.A.Z.-Kaufkompass, ntv, Vergleich.org.",
+      "structuralPattern": "Helles Carousel mit 6 Press-Logos in einer horizontalen Reihe.",
+      "moduleFunction": "Premium-Press-Trust. Anders als Startseite Press-Logos (ntv, Gala, testsieger) sind hier hochwertigere Lifestyle-Marken (VOGUE, GQ) plus F.A.Z. dabei.",
+      "relationToPrevious": "proves_above_claim", "relationToNext": "closes_chapter",
+      "visualBridge": "shared_typography_treatment", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "VOGUE GERMANY GQ WELT F Kaufkompass Das Testportal des F.A.Z.-Verlags ntv Vergleich.org Wir bewerten unabhaengig", "textType": "tagline", "origin": "baked_in", "headline": null, "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "benefit", "toolTileType": "image", "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Premium Press Logos", "productOrCategoryRef": null, "intent": "trust", "rolePosition": "Trust Logos" },
+          "visualContent": "Heller cremiger Hintergrund. Sechs Press-Logos in einer Reihe: VOGUE GERMANY (klassische Serif-Wortmarke), GQ (fette schwarze Initialen), WELT (graue Sans-Serif), F.A.Z.-Kaufkompass mit Subline Das Testportal des F.A.Z.-Verlags, ntv (rotes Quadrat-Logo), Vergleich.org mit Tagline Wir bewerten unabhaengig.",
+          "elementProportions": { "logo": 70, "solid_background": 25, "text": 5 },
+          "textOnImage": { "visibleText": "VOGUE GERMANY GQ WELT F Kaufkompass Das Testportal des F.A.Z.-Verlags ntv Vergleich.org Wir bewerten unabhaengig", "textType": "tagline", "origin": "baked_in", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": [], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "editorial"
+    },
+    {
+      "position": 7, "moduleId": "ueber-bedsure_mod_07", "moduleName": "Section Intro UNSERE BELIEBTESTEN PRODUKTE",
+      "layoutType": "editorial_section_intro", "layoutShape": "full_width_banner", "tileCount": 1,
+      "designIntent": "section_intro", "designIntentDetail": "Section-Header zum Bestseller-Sortimentsraster.",
+      "structuralPattern": "Schmale 124px-Row, zentrierte Versalien-Headline UNSERE BELIEBTESTEN PRODUKTE.",
+      "moduleFunction": "Leitet Bestseller-Showcase ein.",
+      "relationToPrevious": "summarizes_above", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_typography_treatment", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "UNSERE BELIEBTESTEN PRODUKTE", "textType": "section_label", "origin": "baked_in", "headline": "UNSERE BELIEBTESTEN PRODUKTE", "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "text_image", "toolTileType": "image_text", "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Section Intro Beliebteste Produkte", "productOrCategoryRef": null, "intent": "navigate", "rolePosition": "Section Intro" },
+          "visualContent": "Heller Hintergrund mit zentrierter Versalien-Headline UNSERE BELIEBTESTEN PRODUKTE.",
+          "elementProportions": { "text": 20, "solid_background": 80 },
+          "textOnImage": { "visibleText": "UNSERE BELIEBTESTEN PRODUKTE", "textType": "section_label", "origin": "baked_in", "headline": "UNSERE BELIEBTESTEN PRODUKTE", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": ["UNSERE BELIEBTESTEN PRODUKTE"], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "section_intro"
+    },
+    {
+      "position": 8, "moduleId": "ueber-bedsure_mod_08", "moduleName": "Bestseller 4-Tile Grid plus JETZT ENTDECKEN CTAs",
+      "layoutType": "editorial_tile_quad", "layoutShape": "grid_four_columns", "tileCount": 4,
+      "designIntent": "product_showcase", "designIntentDetail": "4-Tile-Grid mit vier Bestseller-Produkten, jeweils mit 5-Sterne-Rating-Aussage plus eingebranntem orange Pill-CTA JETZT ENTDECKEN.",
+      "structuralPattern": "Vier gleiche Tiles nebeneinander: jedes Tile zeigt oben das Produktbild plus Pruefsiegel, darunter 5 gelbe Sterne, dann Produktname plus Subline, schliesslich orangefarbener Pill-CTA JETZT ENTDECKEN.",
+      "moduleFunction": "Bestseller-Conversion-Modul. Statt eines ASIN-Grids inszeniert Bedsure die Top-Produkte als Brand-Cards mit konsistenter Conversion-CTA.",
+      "relationToPrevious": "lists_subordinate_options", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_pattern", "copyBridge": "continues_idea", "heroArchetype": null,
+      "textOnImage": { "visibleText": "100% Perkal-Baumwolle Bettwaesche Set Daunenbettdecke - 90% Daunen, Bezug aus 100% Baumwolle Fleece Kuscheldecke Sherpa Hoodie Decke mit Aermeln JETZT ENTDECKEN", "textType": "headline_cta", "origin": "baked_in", "headline": null, "subline": null, "cta": "JETZT ENTDECKEN", "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "product", "toolTileType": "image_text", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "100% Perkal-Baumwolle Bettwaesche Set", "ctaLabel": "JETZT ENTDECKEN" },
+          "tileContentTopic": { "primarySubject": "Perkal-Baumwolle Bettwaesche Set Bestseller", "productOrCategoryRef": null, "intent": "convert", "rolePosition": "Bestseller Tile 1" },
+          "visualContent": "Helle Tile mit Produktbild eines weissen Bettwaesche-Sets, 5 gelbe Sterne, Produktname 100% Perkal-Baumwolle Bettwaesche Set, Subline Die Bettwaesche aus Baumwolle sorgt durch ihre hohe Atmungsaktivitaet fuer ein angenehmes Schlafklima, orangefarbener Pill-CTA JETZT ENTDECKEN.",
+          "elementProportions": { "product_photo": 50, "text": 30, "cta_button": 12, "graphic_elements": 8 },
+          "textOnImage": { "visibleText": "100% Perkal-Baumwolle Bettwaesche Set JETZT ENTDECKEN", "textType": "headline_cta", "origin": "baked_in", "headline": "100% Perkal-Baumwolle Bettwaesche Set", "subline": "Die Bettwaesche aus Baumwolle sorgt durch ihre hohe Atmungsaktivitaet fuer ein angenehmes Schlafklima", "cta": "JETZT ENTDECKEN", "directionCues": null },
+          "ctaText": "JETZT ENTDECKEN", "linksTo": "100% Perkal-Baumwolle Bettwaesche Set"
+        },
+        { "position": 2, "imageCategory": "product", "toolTileType": "image_text", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Daunenbettdecke", "ctaLabel": "JETZT ENTDECKEN" },
+          "tileContentTopic": { "primarySubject": "Daunenbettdecke Bestseller", "productOrCategoryRef": null, "intent": "convert", "rolePosition": "Bestseller Tile 2" },
+          "visualContent": "Tile mit gefalteter weisser Daunendecke plus gelbem Bedsure-Tag, 5 gelbe Sterne, Produktname Daunenbettdecke - 90 Prozent Daunen, Bezug aus 100 Prozent Baumwolle, dreizeilige Subline Problemlose Reinigung plus Qualitatives Material plus Weicher Schlafkomfort plus Waermesicherheit rundum, orange CTA.",
+          "elementProportions": { "product_photo": 50, "text": 30, "cta_button": 12, "badge": 8 },
+          "textOnImage": { "visibleText": "Daunenbettdecke - 90% Daunen, Bezug aus 100% Baumwolle Problemlose Reinigung & Qualitatives Material Weicher Schlafkomfort Waermesicherheit rundum JETZT ENTDECKEN", "textType": "headline_cta", "origin": "baked_in", "headline": "Daunenbettdecke - 90% Daunen, Bezug aus 100% Baumwolle", "subline": "Problemlose Reinigung & Qualitatives Material, Weicher Schlafkomfort, Waermesicherheit rundum", "cta": "JETZT ENTDECKEN", "directionCues": null },
+          "ctaText": "JETZT ENTDECKEN", "linksTo": "Daunenbettdecke"
+        },
+        { "position": 3, "imageCategory": "product", "toolTileType": "image_text", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Fleece Kuscheldecke", "ctaLabel": "JETZT ENTDECKEN" },
+          "tileContentTopic": { "primarySubject": "Fleece Kuscheldecke Bestseller", "productOrCategoryRef": null, "intent": "convert", "rolePosition": "Bestseller Tile 3" },
+          "visualContent": "Tile mit gefalteter grauer Fleece-Decke plus Pruefsiegel, 5 gelbe Sterne, Produktname Fleece Kuscheldecke, Subline Fuer alle, die es sich am liebsten auf dem Sofa gemuetlich machen, orange CTA.",
+          "elementProportions": { "product_photo": 55, "text": 25, "cta_button": 12, "badge": 8 },
+          "textOnImage": { "visibleText": "Fleece Kuscheldecke Fuer alle, die es sich am liebsten auf dem Sofa gemuetlich machen JETZT ENTDECKEN", "textType": "headline_cta", "origin": "baked_in", "headline": "Fleece Kuscheldecke", "subline": "Fuer alle, die es sich am liebsten auf dem Sofa gemuetlich machen", "cta": "JETZT ENTDECKEN", "directionCues": null },
+          "ctaText": "JETZT ENTDECKEN", "linksTo": "Fleece Kuscheldecke"
+        },
+        { "position": 4, "imageCategory": "product", "toolTileType": "image_text", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Sherpa Hoodie Decke mit Aermeln", "ctaLabel": "JETZT ENTDECKEN" },
+          "tileContentTopic": { "primarySubject": "Sherpa Hoodie Decke mit Aermeln Bestseller", "productOrCategoryRef": null, "intent": "convert", "rolePosition": "Bestseller Tile 4" },
+          "visualContent": "Tile mit Lifestyle-Aufnahme einer Person, eingehuellt in eine graue Sherpa-Hoodie-Decke mit Aermeln. 5 gelbe Sterne, Produktname Sherpa Hoodie Decke mit Aermeln, Subline Eine Kombi aus Pullover und Decke ist perfekt fuer einen gemuetlichen Fernsehabend, orange CTA.",
+          "elementProportions": { "lifestyle_photo": 55, "text": 25, "cta_button": 12, "graphic_elements": 8 },
+          "textOnImage": { "visibleText": "Sherpa Hoodie Decke mit Aermeln Eine Kombi aus Pullover und Decke ist perfekt fuer einen gemuetlichen Fernsehabend JETZT ENTDECKEN", "textType": "headline_cta", "origin": "baked_in", "headline": "Sherpa Hoodie Decke mit Aermeln", "subline": "Eine Kombi aus Pullover und Decke ist perfekt fuer einen gemuetlichen Fernsehabend", "cta": "JETZT ENTDECKEN", "directionCues": null },
+          "ctaText": "JETZT ENTDECKEN", "linksTo": "Sherpa Hoodie Decke mit Aermeln"
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": [], "ctaLabels": ["JETZT ENTDECKEN", "JETZT ENTDECKEN", "JETZT ENTDECKEN", "JETZT ENTDECKEN"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "2x2wide", "toolLayoutName": "4 Equal (2x2 Wide)", "toolLayoutType": "standard", "toolLayoutRole": "product_showcase"
+    },
+    {
+      "position": 9, "moduleId": "ueber-bedsure_mod_09", "moduleName": "Section Intro WAS COZY FUER UNS BEDEUTET",
+      "layoutType": "editorial_section_intro", "layoutShape": "full_width_banner", "tileCount": 1,
+      "designIntent": "section_intro", "designIntentDetail": "Section-Header zur Brand-Werte-Story.",
+      "structuralPattern": "Schmale 101px-Row, zentrierte schwarze Versalien-Headline WAS COZY FUER UNS BEDEUTET auf hellem Hintergrund.",
+      "moduleFunction": "Leitet die zwei Brand-Wert-Halbtafel-Pairs ein, die das COZY-Markenversprechen erklaeren.",
+      "relationToPrevious": "summarizes_above", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_typography_treatment", "copyBridge": "continues_idea", "heroArchetype": null,
+      "textOnImage": { "visibleText": "WAS COZY FUER UNS BEDEUTET", "textType": "section_label", "origin": "baked_in", "headline": "WAS COZY FUER UNS BEDEUTET", "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "text_image", "toolTileType": "image_text", "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Section Intro COZY Werte", "productOrCategoryRef": null, "intent": "story", "rolePosition": "Section Intro" },
+          "visualContent": "Heller Hintergrund mit zentrierter schwarzer Versalien-Headline WAS COZY FUER UNS BEDEUTET.",
+          "elementProportions": { "text": 20, "solid_background": 80 },
+          "textOnImage": { "visibleText": "WAS COZY FUER UNS BEDEUTET", "textType": "section_label", "origin": "baked_in", "headline": "WAS COZY FUER UNS BEDEUTET", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": ["WAS COZY FUER UNS BEDEUTET"], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "section_intro"
+    },
+    {
+      "position": 10, "moduleId": "ueber-bedsure_mod_10", "moduleName": "Brand Werte Pair 1 - Partnerschaften plus Erreichbarkeit",
+      "layoutType": "editorial_tile_pair", "layoutShape": "split_two_columns", "tileCount": 2,
+      "designIntent": "editorial", "designIntentDetail": "2-Tile-Pair mit zwei COZY-Werte-Aussagen. Erste Etappe der Brand-Werte-Story.",
+      "structuralPattern": "Linkes Tile: dunkles Lifestyle-Foto einer gestapelten weissen Bedsure-Bettdecke mit eingebrannten weissem Story-Text COZY heisst gemeinsam wachsen plus Link Alle Bettdecken entdecken. Rechtes Tile: Closeup einer Person, die mit verschiedenen Kissenbezuegen kuschelt, eingebrannter Text COZY soll fuer alle erreichbar sein plus Link Alle Kissenbezuege und Spannbettlaken entdecken.",
+      "moduleFunction": "Brand-Werte-Story. Erklaert die zwei ersten COZY-Bedeutungen Partnerschaften plus Erreichbarkeit, jeweils mit einer Sortiments-Bruecke als Link.",
+      "relationToPrevious": "zooms_into_above_subject", "relationToNext": "repeats_pattern_to_next",
+      "visualBridge": "shared_typography_treatment", "copyBridge": "continues_idea", "heroArchetype": null,
+      "textOnImage": { "visibleText": "COZY heisst gemeinsam wachsen. Wir setzen auf faire, langfristige Partnerschaften, fuer eine nachhaltige Zukunft. Alle Bettdecken entdecken COZY soll fuer alle erreichbar sein. Guter Komfort braucht keine hohen Preise. Alle Kissenbezuege und Spannbettlaken entdecken", "textType": "story_copy", "origin": "baked_in", "headline": null, "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "creative_lifestyle_hybrid", "toolTileType": "image_text", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Bettdecke und Kissen", "ctaLabel": "Alle Bettdecken entdecken" },
+          "tileContentTopic": { "primarySubject": "Brand-Wert Partnerschaften plus Bettdecken-Bridge", "productOrCategoryRef": "0327D6BF-BFA7-49D7-80B2-31707A7C0AF9", "intent": "story", "rolePosition": "Werte-Tile 1" },
+          "visualContent": "Lifestyle-Closeup einer gestapelten weissen Bedsure-Bettdecke. Eingebrannter weisser Story-Text unten links COZY heisst gemeinsam wachsen. Wir setzen auf faire, langfristige Partnerschaften, fuer eine nachhaltige Zukunft. Darunter unterstrichener Link Alle Bettdecken entdecken mit Pfeil.",
+          "elementProportions": { "lifestyle_photo": 65, "text": 30, "cta_button": 5 },
+          "textOnImage": { "visibleText": "COZY heisst gemeinsam wachsen. Wir setzen auf faire, langfristige Partnerschaften, fuer eine nachhaltige Zukunft. Alle Bettdecken entdecken", "textType": "story_copy", "origin": "baked_in", "headline": null, "subline": "COZY heisst gemeinsam wachsen. Wir setzen auf faire, langfristige Partnerschaften, fuer eine nachhaltige Zukunft.", "cta": "Alle Bettdecken entdecken", "directionCues": "Pfeil-Symbol hinter dem Link" },
+          "ctaText": "Alle Bettdecken entdecken", "linksTo": "Bettdecke und Kissen"
+        },
+        { "position": 2, "imageCategory": "creative_lifestyle_hybrid", "toolTileType": "image_text", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Kissenbezuege und Spannbettlaken", "ctaLabel": "Alle Kissenbezuege und Spannbettlaken entdecken" },
+          "tileContentTopic": { "primarySubject": "Brand-Wert Erreichbarkeit plus Kissenbezuege-Bridge", "productOrCategoryRef": "652C1CB5-3C1F-41DB-802F-9A308D45AE28", "intent": "story", "rolePosition": "Werte-Tile 2" },
+          "visualContent": "Lifestyle-Closeup einer Person eingehuellt in verschiedene Bettwaesche-Texturen (dunkel, rosa, schwarz). Eingebrannter weisser Story-Text COZY soll fuer alle erreichbar sein. Guter Komfort braucht keine hohen Preise. Darunter unterstrichener Link Alle Kissenbezuege und Spannbettlaken entdecken.",
+          "elementProportions": { "lifestyle_photo": 65, "text": 30, "cta_button": 5 },
+          "textOnImage": { "visibleText": "COZY soll fuer alle erreichbar sein. Guter Komfort braucht keine hohen Preise. Alle Kissenbezuege und Spannbettlaken entdecken", "textType": "story_copy", "origin": "baked_in", "headline": null, "subline": "COZY soll fuer alle erreichbar sein. Guter Komfort braucht keine hohen Preise.", "cta": "Alle Kissenbezuege und Spannbettlaken entdecken", "directionCues": "Pfeil-Symbol" },
+          "ctaText": "Alle Kissenbezuege und Spannbettlaken entdecken", "linksTo": "Kissenbezuege und Spannbettlaken"
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": [], "ctaLabels": ["Alle Bettdecken entdecken", "Alle Kissenbezuege und Spannbettlaken entdecken"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "std-2equal", "toolLayoutName": "2 Equal", "toolLayoutType": "standard", "toolLayoutRole": "editorial_pair"
+    },
+    {
+      "position": 11, "moduleId": "ueber-bedsure_mod_11", "moduleName": "Lifestyle Pair Schlafkomfort und Kissen-Liebe",
+      "layoutType": "editorial_tile_pair", "layoutShape": "split_two_columns", "tileCount": 2,
+      "designIntent": "emotional_hook", "designIntentDetail": "Vision-Followup 2026-05-12: Modul 11 ist ein reines Lifestyle-Pair OHNE eingebrannten Text, anders als die anderen Werte-Pairs. Es zeigt zwei emotionale Schlafkomfort-Momente.",
+      "structuralPattern": "Zwei grosse Lifestyle-Fotos nebeneinander, beide vollformatig ohne Text-Overlay.",
+      "moduleFunction": "Emotionaler Anker zwischen den COZY-Werte-Pairs mit Sortiments-Links und reine Brand-Stimmung. Zeigt zwei Schlafkomfort-Momente, die das Bedsure-Versprechen visuell verkoerpern.",
+      "relationToPrevious": "zooms_into_above_subject", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_subject_class", "copyBridge": "none", "heroArchetype": null,
+      "textOnImage": { "visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Schlafkomfort Lifestyle", "productOrCategoryRef": null, "intent": "story", "rolePosition": "Lifestyle Schlaf" },
+          "visualContent": "Lifestyle-Foto von oben: junge Frau mit dunklen Locken liegt entspannt schlafend in weissem Bett, eingehuellt in eine weiche weisse Bedsure-Decke. Hellbeiges Kopfteil, warmes Tageslicht, friedliche Atmosphaere.",
+          "elementProportions": { "lifestyle_photo": 100 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        },
+        { "position": 2, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Kissen-Liebe Lifestyle", "productOrCategoryRef": null, "intent": "story", "rolePosition": "Lifestyle Kissen" },
+          "visualContent": "Lifestyle: junge Frau mit braunem schulterlangem Haar lacht herzlich und umarmt einen Stapel aus drei seidenglatten Kissenbezuegen in Rosa, Beige und Hellgrau. Warmer Holz-Wandhintergrund, gold-getoenter Innenraum, Stimmung sehr emotional und vergnuegt.",
+          "elementProportions": { "lifestyle_photo": 95, "product_photo": 5 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": [], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "std-2equal", "toolLayoutName": "2 Equal", "toolLayoutType": "standard", "toolLayoutRole": "editorial_pair"
+    },
+    {
+      "position": 12, "moduleId": "ueber-bedsure_mod_12", "moduleName": "Brand Werte Pair 2 - COZY verbindet plus COZY ist individuell",
+      "layoutType": "editorial_tile_pair", "layoutShape": "split_two_columns", "tileCount": 2,
+      "designIntent": "editorial", "designIntentDetail": "Vision-Followup 2026-05-12: Zweites Werte-Pair mit eingebranntem COZY-Anapher-Pattern. Linke Halbtafel COZY verbindet (Frau mit Tasse plus Heizdecke), rechte Halbtafel COZY ist individuell (Frau mit Hund auf Hundebett).",
+      "structuralPattern": "Wiederholt das Pattern aus Modul 10. Zwei vollformatige Lifestyle-Fotos nebeneinander, jeweils mit eingebranntem weissen Story-Text im unteren Bildteil.",
+      "moduleFunction": "Zweite COZY-Werte-Etappe. Erklaert zwei weitere Bedeutungen Verbindung und Individualitaet. Anapher COZY plus Verb-Pattern ist Bedsure-Signature.",
+      "relationToPrevious": "repeats_pattern", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_pattern", "copyBridge": "continues_idea", "heroArchetype": null,
+      "textOnImage": { "visibleText": "COZY verbindet. Es sind die Gespraeche, das Lachen und die gemeinsamen Momente, die unter unseren Decken entstehen. COZY ist individuell. Jeder Mensch lebt anders, jedes Zuhause ist anders. Deshalb passt sich Gemuetlichkeit Ihren Beduerfnissen an.", "textType": "story_copy", "origin": "baked_in", "headline": null, "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "creative_lifestyle_hybrid", "toolTileType": "image_text", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Brand-Wert COZY verbindet", "productOrCategoryRef": null, "intent": "story", "rolePosition": "Werte-Tile 3" },
+          "visualContent": "Lifestyle: Frau mit hellen langen Haaren sitzt entspannt auf cremefarbenem Boucle-Sessel, schaut nachdenklich nach links, haelt eine dunkle Kaffeetasse in beiden Haenden. Auf ihrem Schoss eine dunkelgraue Bedsure-Heizdecke. Warmes ruhiges Innen-Setting. Eingebrannter weisser Text unten links COZY verbindet. Es sind die Gespraeche, das Lachen und die gemeinsamen Momente, die unter unseren Decken entstehen.",
+          "elementProportions": { "lifestyle_photo": 70, "text": 25, "product_photo": 5 },
+          "textOnImage": { "visibleText": "COZY verbindet. Es sind die Gespraeche, das Lachen und die gemeinsamen Momente, die unter unseren Decken entstehen.", "textType": "story_copy", "origin": "baked_in", "headline": null, "subline": "COZY verbindet. Es sind die Gespraeche, das Lachen und die gemeinsamen Momente, die unter unseren Decken entstehen.", "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        },
+        { "position": 2, "imageCategory": "creative_lifestyle_hybrid", "toolTileType": "image_text", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Brand-Wert COZY ist individuell", "productOrCategoryRef": null, "intent": "story", "rolePosition": "Werte-Tile 4" },
+          "visualContent": "Lifestyle: Frau im weissen Hemd mit dunkelbraunem schulterlangem Haar kniet vor einem flauschigen beigen Bedsure-Haustier-Bett, streichelt einen kleinen weiss-braunen Jack-Russell-Terrier-Hund, der entspannt auf dem Bett liegt. Im Hintergrund Buecher, Tasse und kleiner Holztisch. Sehr warmes Wohnzimmer-Setting. Eingebrannter weisser Text unten links COZY ist individuell. Jeder Mensch lebt anders, jedes Zuhause ist anders. Deshalb passt sich Gemuetlichkeit Ihren Beduerfnissen an.",
+          "elementProportions": { "lifestyle_photo": 70, "text": 25, "decorative_elements": 5 },
+          "textOnImage": { "visibleText": "COZY ist individuell. Jeder Mensch lebt anders, jedes Zuhause ist anders. Deshalb passt sich Gemuetlichkeit Ihren Beduerfnissen an.", "textType": "story_copy", "origin": "baked_in", "headline": null, "subline": "COZY ist individuell. Jeder Mensch lebt anders, jedes Zuhause ist anders. Deshalb passt sich Gemuetlichkeit Ihren Beduerfnissen an.", "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": [], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "std-2equal", "toolLayoutName": "2 Equal", "toolLayoutType": "standard", "toolLayoutRole": "editorial_pair"
+    },
+    {
+      "position": 13, "moduleId": "ueber-bedsure_mod_13", "moduleName": "Section Intro ALLE KATEGORIEN ENTDECKEN",
+      "layoutType": "editorial_section_intro", "layoutShape": "full_width_banner", "tileCount": 1,
+      "designIntent": "section_intro", "designIntentDetail": "Section-Header zum Sortimentsverteiler am Page-Ende.",
+      "structuralPattern": "Schmale Row, zentrierte schwarze Versalien-Headline ALLE KATEGORIEN ENTDECKEN auf hellem Hintergrund.",
+      "moduleFunction": "Leitet das abschliessende Kategorien-Grid ein.",
+      "relationToPrevious": "summarizes_above", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_typography_treatment", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "ALLE KATEGORIEN ENTDECKEN", "textType": "section_label", "origin": "baked_in", "headline": "ALLE KATEGORIEN ENTDECKEN", "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "text_image", "toolTileType": "image_text", "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Section Intro Alle Kategorien", "productOrCategoryRef": null, "intent": "navigate", "rolePosition": "Section Intro" },
+          "visualContent": "Heller Hintergrund mit zentrierter schwarzer Versalien-Headline ALLE KATEGORIEN ENTDECKEN.",
+          "elementProportions": { "text": 20, "solid_background": 80 },
+          "textOnImage": { "visibleText": "ALLE KATEGORIEN ENTDECKEN", "textType": "section_label", "origin": "baked_in", "headline": "ALLE KATEGORIEN ENTDECKEN", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": ["ALLE KATEGORIEN ENTDECKEN"], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "section_intro"
+    },
+    {
+      "position": 14, "moduleId": "ueber-bedsure_mod_14", "moduleName": "Kategorien-Grid 56 Tiles",
+      "layoutType": "subcategory_tile_grid_octet", "layoutShape": "grid_four_columns", "tileCount": 7,
+      "designIntent": "navigation_bridge", "designIntentDetail": "Kategorien-Navigationsraster mit Lifestyle-Tiles, jedes Tile mit unterstrichener Kategorienamen-Headline. Sichtbar: Kuscheldecken und Wohndecken, Bettwaesche-Sets, Bettdecken plus mindestens 4 weitere Tiles.",
+      "structuralPattern": "Mehrzeiliges Grid mit Lifestyle-Aufnahmen. Jedes Tile zeigt unten zentriert die Kategorie als unterstrichene Link-Headline.",
+      "moduleFunction": "Sortimentsverteiler am Page-Ende fuer alle wichtigen Bedsure-Kategorien. Ermoeglicht direkt von Ueber-Bedsure-Page in jede Kategorie zu springen.",
+      "relationToPrevious": "lists_subordinate_options", "relationToNext": "closes_chapter",
+      "visualBridge": "shared_setting", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Kuscheldecken & Wohndecken Bettwaesche-Sets Bettdecken", "textType": "category_label", "origin": "layered_text", "headline": null, "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Kuscheldecken", "ctaLabel": "Kuscheldecken & Wohndecken" },
+          "tileContentTopic": { "primarySubject": "Kuscheldecken Kategorie", "productOrCategoryRef": "2F249C26-269C-4A0B-ACB2-7AB6436FFDC5", "intent": "navigate", "rolePosition": "Kategorie Tile 1" },
+          "visualContent": "Lifestyle-Foto: Paar im Bett kuschelt unter weisser Kord-Optik-Decke, Fenster mit Berglandschaft im Hintergrund. Bottom-Overlay unterstrichener Link Kuscheldecken und Wohndecken.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Kuscheldecken & Wohndecken", "textType": "category_label", "origin": "layered_text", "headline": "Kuscheldecken & Wohndecken", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Kuscheldecken"
+        },
+        { "position": 2, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Bettwaesche-Sets", "ctaLabel": "Bettwaesche-Sets" },
+          "tileContentTopic": { "primarySubject": "Bettwaesche-Sets Kategorie", "productOrCategoryRef": "D537A0F0-8099-477C-A9CE-4E44DA3B8F13", "intent": "navigate", "rolePosition": "Kategorie Tile 2" },
+          "visualContent": "Lifestyle-Foto: helles Bett mit cremefarbener Bettdecke, gestapelten Kissen in Beige und Senfgelb, dunkelbraunes Kopfteil. Bottom-Overlay unterstrichener Link Bettwaesche-Sets.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Bettwaesche-Sets", "textType": "category_label", "origin": "layered_text", "headline": "Bettwaesche-Sets", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Bettwaesche-Sets"
+        },
+        { "position": 3, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Bettdecke und Kissen", "ctaLabel": "Bettdecken" },
+          "tileContentTopic": { "primarySubject": "Bettdecken Kategorie", "productOrCategoryRef": "0327D6BF-BFA7-49D7-80B2-31707A7C0AF9", "intent": "navigate", "rolePosition": "Kategorie Tile 3" },
+          "visualContent": "Lifestyle-Foto: Frau mit dunklen Locken schlaeft entspannt auf einer weichen weissen Bedsure-Bettdecke. Bottom-Overlay unterstrichener Link Bettdecken.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Bettdecken", "textType": "category_label", "origin": "layered_text", "headline": "Bettdecken", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Bettdecke und Kissen"
+        },
+        { "position": 4, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Haustierbedarf", "ctaLabel": "Haustierbedarf" },
+          "tileContentTopic": { "primarySubject": "Haustierbedarf Kategorie", "productOrCategoryRef": "B3B34DD4-8067-4CF4-B764-5BEDBD5B40E8", "intent": "navigate", "rolePosition": "Kategorie Tile 4" },
+          "visualContent": "Lifestyle: kleine franzoesische Bulldogge in beige-weiss liegt entspannt auf grauem Bedsure-Hundebett mit grauer Decke, warmes Wohnzimmer im Hintergrund. Bottom-Overlay unterstrichener Link Haustierbedarf.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Haustierbedarf", "textType": "category_label", "origin": "layered_text", "headline": "Haustierbedarf", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Haustierbedarf"
+        },
+        { "position": 5, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Kuscheldecke mit Aermeln", "ctaLabel": "Kuscheldecke mit Aermeln" },
+          "tileContentTopic": { "primarySubject": "Kuscheldecke mit Aermeln Kategorie", "productOrCategoryRef": "8B9660CA-9C46-42A4-B289-C08618110009", "intent": "navigate", "rolePosition": "Kategorie Tile 5" },
+          "visualContent": "Lifestyle: Frau in rosafarbener Hoodie-Decke mit Aermeln haelt Tasse, dunkelorange Katze sitzt neben ihr auf dem Sofa. Bottom-Overlay unterstrichener Link Kuscheldecke mit Aermeln.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Kuscheldecke mit Aermeln", "textType": "category_label", "origin": "layered_text", "headline": "Kuscheldecke mit Aermeln", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Kuscheldecke mit Aermeln"
+        },
+        { "position": 6, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Heizdecke", "ctaLabel": "Heizdecke" },
+          "tileContentTopic": { "primarySubject": "Heizdecke Kategorie", "productOrCategoryRef": "86EE23E4-B85F-4167-8FE0-E32C59862F42", "intent": "navigate", "rolePosition": "Kategorie Tile 6" },
+          "visualContent": "Lifestyle: Frau mit dunklem Haar im cremeweissen Pullover sitzt auf hellem Boucle-Sessel mit grauer Bedsure-Heizdecke, haelt dunkle Tasse. Bottom-Overlay unterstrichener Link Heizdecke.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Heizdecke", "textType": "category_label", "origin": "layered_text", "headline": "Heizdecke", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Heizdecke"
+        },
+        { "position": 7, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Kissenbezuege und Spannbettlaken", "ctaLabel": "Kissenbezug & Spannbettlaken" },
+          "tileContentTopic": { "primarySubject": "Kissenbezuege und Spannbettlaken Kategorie", "productOrCategoryRef": "652C1CB5-3C1F-41DB-802F-9A308D45AE28", "intent": "navigate", "rolePosition": "Kategorie Tile 7" },
+          "visualContent": "Lifestyle: graues Spannbettlaken locker auf cremefarbener Bettmatratze, kleines Detail eines hellen Stofftiers im Hintergrund. Bottom-Overlay unterstrichener Link Kissenbezug & Spannbettlaken.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Kissenbezug & Spannbettlaken", "textType": "category_label", "origin": "layered_text", "headline": "Kissenbezug & Spannbettlaken", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Kissenbezuege und Spannbettlaken"
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": [], "ctaLabels": ["Kuscheldecken & Wohndecken", "Bettwaesche-Sets", "Bettdecken"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "4x2grid", "toolLayoutName": "4x2 Grid", "toolLayoutType": "standard", "toolLayoutRole": "navigation_bridge"
+    }
+  ],
+  "voiceMarkers": {
+    "voiceRegister": "emotional",
+    "sentencePattern": "kurze_aussage",
+    "vocabularyField": "lifestyle",
+    "claimType": "zugehoerigkeit",
+    "rhetoricalDevice": "wiederholung_anapher"
+  },
+  "voiceExamples": [
+    "COZY heisst gemeinsam wachsen. Wir setzen auf faire, langfristige Partnerschaften, fuer eine nachhaltige Zukunft.",
+    "COZY soll fuer alle erreichbar sein. Guter Komfort braucht keine hohen Preise.",
+    "75 Mio.+ zufriedene Kundinnen und Kunden weltweit"
+  ],
+  "pageAnalysis": {
+    "tonalityVisual": "Sehr emotional und warm im Vergleich zur Heizdecke-Page. Lifestyle-Fotos mit Tieren (Katze), gemeinsamen Momenten (Paar, Familie) und Brand-Werte-Storytelling. Premium-Press-Logos (VOGUE, GQ) anstatt der Vergleichsplattformen der Startseite.",
+    "ctaStrategies": "Vier explizite orange Pill-CTAs JETZT ENTDECKEN im Bestseller-Modul. Brand-Werte-Pairs haben Sortiments-Links statt Pill-CTAs. Page-Closer ist ein Kategorien-Grid mit 7 Tiles als Verteiler.",
+    "contentDepth": "13 Brand-Module mit klarem Storytelling-Aufbau: Hero plus Social Proof plus Press plus Bestseller plus drei Werte-Halbtafel-Pairs plus Kategorien-Grid.",
+    "useForArchetype": "Eignet sich als Vorlage fuer About-Pages mit Brand-Werte-Storytelling. Anapher-Pattern COZY heisst plus erklaerender Satz plus Sortiments-Link ist ein klares Bedsure-Signature.",
+    "moduleClusters": [
+      "Brand Intro Cluster: Page-Hero plus 75 Mio Social Proof plus Brand-Video",
+      "Trust Cluster: BEKANNT AUS plus Premium-Press-Logos",
+      "Bestseller Cluster: UNSERE BELIEBTESTEN PRODUKTE plus 4-Tile Quad",
+      "Werte Cluster: WAS COZY FUER UNS BEDEUTET plus drei Werte-Halbtafel-Pairs",
+      "Kategorien-Verteiler: ALLE KATEGORIEN ENTDECKEN plus 7-Tile Grid"
+    ]
+  },
+  "pageArchitecture": "Ueber-Bedsure-Page baut einen Brand-Werte-Funnel. Hero etabliert UEBER BEDSURE Story. 75 Mio Social Proof plus Brand-Video plus Premium-Press-Logos liefern Trust. Bestseller-Showcase macht die Marke greifbar. Drei Werte-Halbtafel-Pairs erklaeren COZY-Bedeutungen mit Anapher COZY heisst und Sortiments-Bruecken. Kategorien-Grid am Ende verteilt in alle Sortimentsfamilien.",
+  "openQuestions": [
+    "Module 4, 11, 12 wurden teilweise mit screenshot_required Platzhaltern erfasst. Brand-Video (Modul 4) ist lazy-loaded, Werte-Pair-Texte 3-6 (Module 11, 12) im Probe-Run nicht voll sichtbar. Zweiter Vision-Lauf nachholen.",
+    "voiceMarkers wurden hier emotional und zugehoerigkeit kodiert, deutlich anders als Startseite und Heizdecke. rhetoricalDevice wiederholung_anapher passt zum COZY heisst Pattern, das mehrfach wiederholt wird. Brand-Werte-Page zeigt eine eigene Voice.",
+    "heroArchetype product_in_setting_with_claim verwendet, obwohl das Produkt hier eine Decke und kein klassisches Produkt ist (die Katze ist das Subject, die Decke das Setting). Die Definition aus dem Vokabular passt aber generell.",
+    "Modul 14 ist als subcategory_tile_grid_octet kodiert, hat aber nur 7 sichtbare Tiles. Vermutlich gibt es ein 8. Tile im Phase-1-DOM, das im Probe-Run nicht sichtbar war. Der Wert subcategory_tile_grid_octet (2026-05-11 ins Schema aufgenommen) passt strukturell hier am besten."
+  ]
+}

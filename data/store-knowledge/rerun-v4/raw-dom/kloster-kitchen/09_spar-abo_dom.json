@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "store": "kloster-kitchen", "pageSlug": "09_spar-abo", "pageName": "Spar-Abo",
+    "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E",
+    "url": "https://www.amazon.de/stores/page/137B3A93-BC04-42D0-89A9-8EFD54CF895E",
+    "extractedAt": "2026-05-13", "extractor": "chrome_mcp_javascript_tool_v2_with_urls",
+    "scrollHeight": 6628, "viewport": {"w": 1826, "h": 888},
+    "domRowsTotal": 9, "contentModulesCount": 7,
+    "uniqueAsinsOnPage": ["B09R4Y8VDW", "B09R83KXVW", "B09R4ZYTND", "B09R82G5WT", "B0859KWFM6", "B08NYQQHGF", "B0859L1D55", "B07V1HNJNZ", "B08NYNT1WC", "B09X5R7B6P", "B09R817S3L", "B0CP49VNYT", "B0CP4C7XYM", "B09R8HBG5N", "B07V1HQQ2V"]
+  },
+  "modules": [
+    {"domRowIdx": 0, "top": 99, "height": 395, "widgetClass": "Header", "tileCount": 0, "imgCount": 3, "videoCount": 0, "productCount": 0, "note": "Nav header", "links": [], "asins": []},
+    {"domRowIdx": 1, "top": 502, "height": 767, "widgetClass": "EditorialRow", "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Hero Lifestyle Frau lachend mit Spar-Abo-Karton", "links": [{"linkType": "asin", "target": "B09R4Y8VDW"}], "asins": ["B09R4Y8VDW"]},
+    {"domRowIdx": 2, "top": 1268, "height": 470, "widgetClass": "EditorialRow", "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Image-Modul Brand Bridge", "links": [{"linkType": "asin", "target": "B09R4Y8VDW"}], "asins": ["B09R4Y8VDW"]},
+    {"domRowIdx": 3, "top": 1738, "height": 434, "widgetClass": "EditorialRow", "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Image-Modul Brand Bridge 2", "links": [{"linkType": "asin", "target": "B09R8HBG5N"}], "asins": ["B09R8HBG5N"]},
+    {"domRowIdx": 4, "top": 2172, "height": 371, "widgetClass": "EditorialRow", "tileCount": 16, "imgCount": 2, "videoCount": 0, "productCount": 0, "note": "Tile-Pair Paerchen plus Unboxing", "links": [{"linkType": "asin", "target": "B09R83KXVW"}, {"linkType": "asin", "target": "B07V1HQQ2V"}], "asins": ["B09R83KXVW", "B07V1HQQ2V"]},
+    {"domRowIdx": 5, "top": 2544, "height": 370, "widgetClass": "EditorialRow", "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "USP-Banner Spar-Abo Vorteile (5 Checkmarks)", "links": [{"linkType": "asin", "target": "B07V1HNJNZ"}], "asins": ["B07V1HNJNZ"]},
+    {"domRowIdx": 6, "top": 2913, "height": 1929, "widgetClass": "ProductGrid", "tileCount": 0, "imgCount": 39, "videoCount": 0, "productCount": 37, "note": "ProductGrid 37 ASINs - komplettes Spar-Abo-Sortiment", "links": [], "asins": ["B09R4Y8VDW", "B09R83KXVW", "B09R4ZYTND", "B09R82G5WT", "B0859KWFM6", "B08NYQQHGF", "B0859L1D55", "B07V1HNJNZ", "B08NYNT1WC", "B09X5R7B6P", "B09R817S3L", "B0CP49VNYT", "B0CP4C7XYM"]},
+    {"domRowIdx": 7, "top": 4842, "height": 324, "widgetClass": "EditorialRow", "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Awards Banner Ausgezeichnete Innovationen", "links": [{"linkType": "page", "target": "F031D76B-9B76-426A-93A9-2EBBCB5150CF"}], "asins": []},
+    {"domRowIdx": 8, "top": 5166, "height": 201, "widgetClass": "EditorialRow", "tileCount": 4, "imgCount": 0, "videoCount": 0, "productCount": 0, "note": "amazon_share_footer", "links": [], "asins": []}
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "store": "bedsure",
+    "pageSlug": "01_startseite",
+    "pageName": "Startseite",
+    "pageId": "7DC5A9F8-2A3D-426B-B2F2-F819AE825B1F",
+    "url": "https://www.amazon.de/stores/page/7DC5A9F8-2A3D-426B-B2F2-F819AE825B1F",
+    "extractedAt": "2026-05-12",
+    "extractor": "chrome_mcp_javascript_tool_compact",
+    "extractorNote": "Phase 1 via Chrome MCP javascript_tool. Output auf Skelett reduziert (top, height, widgetClass, tileCount, imgCount, videoCount, productCount) weil javascript_tool fuer amazon.de URL-Pattern teilweise blockiert ist (Cookie/Query-String-Filter) und Tool-Response auf ~2KB pro Aufruf gekappt wird. Bilder, Headlines und CTAs sind in Phase 2 per Vision zu erfassen.",
+    "scrollHeight": 14641,
+    "viewport": { "w": 1599, "h": 842 },
+    "domRowsTotal": 21,
+    "contentModulesCount": 19
+  },
+  "navigation": {
+    "pages": [
+      { "label": "Startseite",                   "pageId": "7DC5A9F8-2A3D-426B-B2F2-F819AE825B1F" },
+      { "label": "Sanft in den Sommer",          "pageId": "4647A147-C667-43C9-ACB3-55D0A86680EF" },
+      { "label": "Kuscheldecken",                "pageId": "2F249C26-269C-4A0B-ACB2-7AB6436FFDC5" },
+      { "label": "Bettwaesche-Sets",             "pageId": "D537A0F0-8099-477C-A9CE-4E44DA3B8F13" },
+      { "label": "Haustierbedarf",               "pageId": "B3B34DD4-8067-4CF4-B764-5BEDBD5B40E8" },
+      { "label": "Bettdecke und Kissen",         "pageId": "0327D6BF-BFA7-49D7-80B2-31707A7C0AF9" },
+      { "label": "Kissenbezuege und Spannbettlaken", "pageId": "652C1CB5-3C1F-41DB-802F-9A308D45AE28" },
+      { "label": "Heizdecke",                    "pageId": "86EE23E4-B85F-4167-8FE0-E32C59862F42" },
+      { "label": "Kuscheldecke mit Aermeln",     "pageId": "8B9660CA-9C46-42A4-B289-C08618110009" },
+      { "label": "Angebote",                     "pageId": "C2FACEA3-48EC-4B21-A2B3-4B2691A2F8D9" },
+      { "label": "Ueber Bedsure",                "pageId": "ED1B32C3-3890-4245-8A84-ECD16C98BFAF" }
+    ]
+  },
+  "modules": [
+    { "domRowIdx":  0, "top":   99, "height":  408, "widgetClass": null,                                "tileCount":  0, "imgCount":  3, "videoCount": 0, "productCount":  0, "note": "Nav header plus Hero-Banner Bereich ueber Menueleiste." },
+    { "domRowIdx":  1, "top":  507, "height":  995, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Hero direkt unter Menueleiste. Sehr hoch (995px), viele Tiles." },
+    { "domRowIdx":  2, "top": 1502, "height":  610, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 16, "imgCount":  2, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  3, "top": 2111, "height":  331, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  7, "imgCount":  0, "videoCount": 1, "productCount":  0, "note": "Video Banner." },
+    { "domRowIdx":  4, "top": 2442, "height":  113, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Schmale 113px-Row, vermutlich Section Intro Banner." },
+    { "domRowIdx":  5, "top": 2555, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 40, "imgCount":  5, "videoCount": 0, "productCount":  0, "note": "Massives Tile-Grid mit 40 tile-Markern (vermutlich Carousel von ASIN-Tiles)." },
+    { "domRowIdx":  6, "top": 3297, "height":  113, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Schmaler Section Intro." },
+    { "domRowIdx":  7, "top": 3410, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 24, "imgCount":  3, "videoCount": 0, "productCount":  0, "note": "Weiteres Tile-Grid mit 24 Tiles." },
+    { "domRowIdx":  8, "top": 4153, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 24, "imgCount":  3, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx":  9, "top": 4895, "height":  113, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro." },
+    { "domRowIdx": 10, "top": 5008, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 24, "imgCount":  3, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx": 11, "top": 5751, "height":  584, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 16, "imgCount":  2, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx": 12, "top": 6335, "height":  113, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro." },
+    { "domRowIdx": 13, "top": 6448, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 32, "imgCount":  4, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx": 14, "top": 7191, "height":  113, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro." },
+    { "domRowIdx": 15, "top": 7304, "height":  594, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 16, "imgCount":  2, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx": 16, "top": 7898, "height":  113, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro." },
+    { "domRowIdx": 17, "top": 8011, "height":  743, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount": 40, "imgCount":  5, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx": 18, "top": 8753, "height":  769, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx": 19, "top": 9522, "height": 3657, "widgetClass": "ProductGrid__gridContainer__bRK6J", "tileCount":  2, "imgCount": 48, "videoCount": 0, "productCount": 44, "note": "Massives ProductGrid mit 44 ASINs ueber 3657px Hoehe. Wahrscheinlich product_grid_full_catalog." },
+    { "domRowIdx": 20, "top": 13179, "height": 201, "widgetClass": "EditorialRow__row__W3W3h",          "tileCount":  4, "imgCount":  0, "videoCount": 0, "productCount":  0, "note": "Schmale 201px-Row am Ende, vermutlich Awards oder Share Footer." }
+  ],
+  "openQuestionsLocal": [
+    "Phase 1 wurde mit kompaktem Skript erfasst, weil das volle extract-page-dom.js-Skript durch den javascript_tool Query-String-Filter geblockt wurde. Headlines, Bild-URLs und CTAs muessen in Phase 2 per Vision plus optional read_page-Trigger nachgeholt werden.",
+    "Modul 19 ist ein full_catalog Grid mit 44 ASIN-Tiles und 3657px Hoehe. Alle Tiles bekommen automatisch imageCategory product_tile_asin (Amazon rendert).",
+    "Module 4, 6, 9, 12, 14, 16 sind jeweils 113px hoch und haben 8 tile-Marker plus 1 img. Sehr wahrscheinlich Section Intros mit einem Bild plus eingebrannter Headline."
+  ]
+}

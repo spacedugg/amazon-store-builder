@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "v4-2026-05",
+  "store": "kloster-kitchen",
+  "brandName": "Kloster Kitchen",
+  "storeUrl": "https://www.amazon.de/stores/page/34D4A812-9A68-4602-A6A0-30565D399620",
+  "analyzedAt": "2026-05-13",
+  "methodology": "v4-full-store-10-pages",
+  "scopeNote": "Alle 10 Pages des Stores im v4-Goldstandard erfasst. 3 Pages (Startseite, Ingwer Shots, Ueber Uns) im manual_verified_v3.1-Format mit detaillierten Tile-ASINs und Bild-URLs. 7 Pages (Mikronaehrstoffe, Saftkuren, Smoothies, Shot Kur, Probiersets, Zubehoer, Spar-Abo) im chrome_mcp_javascript_tool_v2_with_urls Format inklusive Image-URLs und ASIN-Links. Gesamt: 100+ Module, 50+ unique ASINs.",
+  "navigation": {
+    "pageCount": 10,
+    "structure": "Flat (level 0 plus level 1)",
+    "pages": [
+      {"name": "Startseite", "level": 0, "pageId": "34D4A812-9A68-4602-A6A0-30565D399620"},
+      {"name": "Ingwer Shots", "level": 1, "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2"},
+      {"name": "Mikronaehrstoffe", "level": 1, "pageId": "E337104E-63D3-41B2-8560-D92F482B2790"},
+      {"name": "Saftkuren", "level": 1, "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606"},
+      {"name": "Smoothies", "level": 1, "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E"},
+      {"name": "Shot Kur", "level": 1, "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043"},
+      {"name": "Probiersets / Geschenkidee", "level": 1, "pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A"},
+      {"name": "Zubehoer", "level": 1, "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A"},
+      {"name": "Spar-Abo", "level": 1, "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E"},
+      {"name": "Ueber Uns", "level": 1, "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF"}
+    ]
+  },
+  "contentSummary": {
+    "pagesAnalyzed": 10,
+    "totalModulesAnalyzed": 92,
+    "uniqueAsinsAcrossPages": 50,
+    "wiederkehrendeModuleCrossPage": {
+      "amazon_nav_header_brand_streifen": "Page 1-10 identisch (BETTER THAN GOOD Brand-Banner sticky)",
+      "awards_banner_ausgezeichnete_innovationen": "Page 2-10 identisch (4 Tiles, verlinkt zu Ueber Uns)",
+      "amazon_share_footer": "Page 2-10 identisch"
+    }
+  },
+  "pages": [
+    {
+      "pageName": "Startseite", "pageSlug": "01_startseite", "pageId": "34D4A812-9A68-4602-A6A0-30565D399620",
+      "pageType": "startseite", "scrollHeight": 4802, "brandModules": 5,
+      "voiceMarkers": {"voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "kulinarisch", "claimType": "expertise_signal", "rhetoricalDevice": "kontrast"},
+      "pageArchitecture": "Kompakte Startseite mit 7 DOM-Modulen. Hero-Banner BETTER THAN GOOD, zwei Full-Width-Image-Module, ein 3-Tile-ASIN-Grid (Vital Flow plus Saftkur), ein 4x2 Subkategorie-Grid mit 8 Page-Tiles, plus ein Awards-Banner."
+    },
+    {
+      "pageName": "Ingwer Shots", "pageSlug": "02_ingwer-shots", "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2",
+      "pageType": "hub_category", "scrollHeight": 6440, "brandModules": 10,
+      "voiceMarkers": {"voiceRegister": "direkt", "sentencePattern": "frage_pattern", "vocabularyField": "kulinarisch", "claimType": "herkunft_prozess", "rhetoricalDevice": "kontrast"},
+      "pageArchitecture": "Reiche Page mit Vorratspack-Strategie, mehreren Sortenvarianten, plus Ueber-Uns-Bruecke."
+    },
+    {
+      "pageName": "Mikronaehrstoffe", "pageSlug": "03_mikronaehrstoffe", "pageId": "E337104E-63D3-41B2-8560-D92F482B2790",
+      "pageType": "hub_category", "scrollHeight": 5305, "brandModules": 8,
+      "voiceMarkers": {"voiceRegister": "direkt", "sentencePattern": "frage_pattern", "vocabularyField": "naturwissenschaftlich", "claimType": "expertise_signal", "rhetoricalDevice": "kontrast"},
+      "pageArchitecture": "Vier semantische Bloecke: Marken-Identitaet via Sticky-Brand-Header, Vital-Flow-Produktlinie ueber Section Intro plus Showcase plus Lifestyle-Validation, Reason-to-Believe-Statement PFLANZLICH GEDACHT plus emotionales Hero plus EU-Health-Claims, Trust-Loop Awards-Banner. Bedarfsfall ist die alltaegliche Naehrstoff-Routine fuer gesundheits-bewusste Frau ueber 30."
+    },
+    {
+      "pageName": "Saftkuren", "pageSlug": "04_saftkuren", "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606",
+      "pageType": "hub_category", "scrollHeight": 7571, "brandModules": 10,
+      "voiceMarkers": {"voiceRegister": "nahbar", "sentencePattern": "komma_erklaerung", "vocabularyField": "kulinarisch", "claimType": "herkunft_prozess", "rhetoricalDevice": "konkrete_zahl"},
+      "pageArchitecture": "Sieben Bloecke: Markenrahmen, atmospherischer Video-Auftakt plus rationale Headline, Sortiments-Lineup mit Lifestyle und CTA-Bruecke, paralleler Set-Showcase Saftkur plus Better Balance je in drei Tage-Optionen, emotionales Unboxing-Hero, 6-fach Einzelsorten-Grid, Awards. Bedarfsfall Detox-Routine mit 3- oder 7-Tage-Kur oder Einzelsaeften."
+    },
+    {
+      "pageName": "Smoothies", "pageSlug": "05_smoothies", "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E",
+      "pageType": "hub_category", "scrollHeight": 6538, "brandModules": 7,
+      "voiceMarkers": {"voiceRegister": "nahbar", "sentencePattern": "listen_aufzaehlung", "vocabularyField": "kulinarisch", "claimType": "herkunft_prozess", "rhetoricalDevice": "konkrete_zahl"},
+      "pageArchitecture": "Sieben Bloecke: Markenrahmen, zwei Hero-Section mit Smoothie-Vorstellung, Tile-Pair als Story (Inhaltsstoffe plus Konsum), Bridge zur Produkt-Tile-Row, drei Sorten Vorratspacks im Showcase, emotionaler Outdoor-Hero, Awards-Trust, Footer. Bedarfsfall taegliche Smoothie-Routine fuer junge Erwachsene mit heimischen Zutaten."
+    },
+    {
+      "pageName": "Shot Kur", "pageSlug": "06_shot-kur", "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043",
+      "pageType": "hub_category", "scrollHeight": 5149, "brandModules": 6,
+      "voiceMarkers": {"voiceRegister": "direkt", "sentencePattern": "komma_erklaerung", "vocabularyField": "kulinarisch", "claimType": "benefit_funktional", "rhetoricalDevice": "kontrast"},
+      "pageArchitecture": "Sechs Bloecke: Markenrahmen, Video-Hero plus Bridge, Lifestyle-Routine in zwei Anwendungen Fruehstueck und Yoga, Produkt-Tile-Pair plus inline-PDP-Modul mit In-den-Einkaufswagen-Button, Trust-Loop, Footer. Bedarfsfall ist die taegliche Shot-Routine als 6-Wochen-Test."
+    },
+    {
+      "pageName": "Probiersets / Geschenkidee", "pageSlug": "07_probiersets-geschenkidee", "pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A",
+      "pageType": "gift_sets", "scrollHeight": 6558, "brandModules": 9,
+      "voiceMarkers": {"voiceRegister": "nahbar", "sentencePattern": "kurze_aussage", "vocabularyField": "familiaer", "claimType": "zugehoerigkeit", "rhetoricalDevice": "konkrete_zahl"},
+      "pageArchitecture": "Sechs Bloecke: Markenrahmen, Familien-Unboxing-Video, Section-Intro Set-Logik, Set-Triple-Showcase, drei Inline-PDP-Module, Trust-Loop, Footer. Bedarfsfall Geschenk-Schenken und Probier-Einstieg."
+    },
+    {
+      "pageName": "Zubehoer", "pageSlug": "08_zubehoer", "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A",
+      "pageType": "sub_category", "scrollHeight": 4259, "brandModules": 4,
+      "voiceMarkers": {"voiceRegister": "professionell", "sentencePattern": "listen_aufzaehlung", "vocabularyField": "industriell", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl"},
+      "pageArchitecture": "Sehr knappe Page: Markenrahmen, Video-Auftakt, Bridge, Single-Product-Showcase Shot Glaeser 4er-Pack, Trust-Awards, Footer. Bedarfsfall Ergaenzung der Routine mit passendem Trink-Equipment."
+    },
+    {
+      "pageName": "Spar-Abo", "pageSlug": "09_spar-abo", "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E",
+      "pageType": "sub_category", "scrollHeight": 6628, "brandModules": 7,
+      "voiceMarkers": {"voiceRegister": "direkt", "sentencePattern": "listen_aufzaehlung", "vocabularyField": "industriell", "claimType": "benefit_funktional", "rhetoricalDevice": "wiederholung_anapher"},
+      "pageArchitecture": "Sieben Bloecke: Markenrahmen, Lifestyle-Hero lachende Frau, zwei Brand-Bridges, Lifestyle-Tile-Pair Paerchen plus Unboxing, USP-Block mit 5 Abo-Vorteilen (NIE WIEDER OHNE INGWER SHOTS, AUTOMATISCHE LIEFERUNG, LIEFERINTERVALLE FLEXIBEL WAEHLBAR, JEDERZEIT AENDERBAR, JEDERZEIT KUENDBAR), riesiges ProductGrid 37 ASINs, Awards, Footer."
+    },
+    {
+      "pageName": "Ueber Uns", "pageSlug": "10_ueber-uns", "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF",
+      "pageType": "about", "scrollHeight": 9000, "brandModules": 11,
+      "voiceMarkers": {"voiceRegister": "emotional", "sentencePattern": "frage_pattern", "vocabularyField": "traditionell", "claimType": "herkunft_prozess", "rhetoricalDevice": "metapher"},
+      "pageArchitecture": "Brand-Story-Page mit Werte-Storytelling. Sicherheitlich nicht im neuen Scope, aber existierender manual_verified_v3.1-Blueprint dokumentiert die Werte-Anker und Brand-Geschichte."
+    }
+  ],
+  "storeAnalysis": {
+    "marketSegment": "Functional Beverages und Supplements Premium-Mid-Market, Bio-positioniert. Fokus auf Ingwer-Shots, Saftkuren, Smoothies und Mikronaehrstoffe als alltagliche Selfcare-Routinen.",
+    "primaryAudience": "Gesundheits-bewusste Frauen 25-45 als Haupt-Zielgruppe, plus Paare und Eltern als Erweiterung. Selfcare-orientiert, ernaehrungs-interessiert, mit Anspruch auf Bio-Qualitaet und Wissenschaftlichkeit.",
+    "priceTier": "Premium-Mid-Market mit Bio-Aufpreis. Einzel-Shots ab 36,90 EUR (12,30 EUR/l) im Vorratspack, Saftkur-Sets 85,40 bis 185,40 EUR, Mikronaehrstoff-Konzentrat 35,90 EUR fuer 500 ml. Probier-Sets fuer Geschenkanlass.",
+    "productComplexity": "Sechs Produktlinien: Ingwer Shots, Mikronaehrstoffe (Vital Flow), Saftkuren (Klassisch plus Better Balance), Smoothies, Shot Kur 6-Wochen, Probiersets. Plus Zubehoer Shot Glaeser und Spar-Abo als Konversions-Format.",
+    "brandVoice": {
+      "tonality": "Direkt-nahbar mit Du-Form. Mischung aus naturwissenschaftlicher Praezision (Vitamin-Bezeichnungen, EU-Health-Claims auf Mikronaehrstoffe) und kulinarisch-emotionaler Ansprache (Saftkuren, Smoothies). Kontrastrhetorik PFLANZLICH GEDACHT plus WISSENSCHAFTLICH GEMACHT als Signature.",
+      "adjectives": ["pflanzlich", "wissenschaftlich", "ausgezeichnet", "natuerlich", "vegan", "bio", "scharf-suess", "kraeftig", "kompromisslos"],
+      "signatureClaims": [
+        "BETTER THAN GOOD als ubiquitaere Tagline",
+        "PFLANZLICH GEDACHT. WISSENSCHAFTLICH GEMACHT.",
+        "Trink, was dir gut tut",
+        "Weil dein Tag mehr verdient als nur Routine",
+        "Unsere Saftkuren mit 6 Fastensaefte pro Tag und insgesamt 18 verschiedenen Obst-, Gemuese-, und Getreidesorten",
+        "NIE WIEDER OHNE INGWER SHOTS (Spar-Abo)",
+        "Bereit fuer alles, was dein Tag bringt?"
+      ],
+      "voiceContrasts": [
+        "Kloster Kitchen duzt durchgaengig (nahbar), waehrend Vergleichsmarken wie Bedsure siezen (professionell)",
+        "Mikronaehrstoffe-Page nutzt naturwissenschaftliches Vokabular (Vitamin B6, Pantothensaeure), waehrend Smoothies-Page in kulinarischem Vokabular bleibt (Gurke Spinat Minze Apfel)",
+        "Spar-Abo nutzt rhetorische Wiederholung_anapher (NIE WIEDER, JEDERZEIT, JEDERZEIT) - andere Pages nutzen Kontrast oder konkrete_zahl"
+      ]
+    },
+    "designAesthetic": {
+      "colorPalette": "Dunkelgrün als dominanter Marken-Anker (Ingwerblatt-Hintergrund, Brand-Hero-Banner, USP-Banner). Off-White und cremiges Beige als Grundton. Bio-Gold-Akzente auf Produkt-Etiketten. Sortenfarben kraeftig (Rot fuer Granatapfel, Gelb fuer Classic, Orange fuer Kurkuma, Lila fuer Acai, Gruen fuer Saftkur 3).",
+      "typography": "Fette schwarze Sans-Serif Versalien fuer Headlines (BETTER THAN GOOD, VITAL FLOW, SAFTKUREN, AUSGEZEICHNETE INNOVATIONEN). Normale Sans-Serif fuer Subtext und Body-Copy. Versalien dominieren die Brand-Stimmung.",
+      "photographyStyle": "Lifestyle-Photography mit Frauen 25-45 als Persona. Outdoor- und Indoor-Setting (Wohnzimmer, Sofa, Kueche, Hausfassade-Bokeh). Frische Zutaten als Flat-Lay-Anker (Ingwer-Wurzel, Erdbeeren, Karotten, Spinat, Zitronen, Birnen). Top-View-Stillleben kombiniert mit Closeup-Lifestyle.",
+      "layoutSignals": "Sticky-Brand-Banner KLOSTER KITCHEN BETTER THAN GOOD plus Sub-Nav auf jeder Page identisch. Awards-Banner AUSGEZEICHNETE INNOVATIONEN auf Ingwerblatt-Hintergrund mit 4 Trust-Tiles als wiederkehrendes Page-Ende-Pattern. Tile-Pair-Struktur (Lifestyle plus Inhaltsstoffe) mehrfach wiederkehrend. Inline-PDP-Module fuer direkte Konversion auf Detail-Pages."
+    },
+    "positioningClaim": "Kloster Kitchen macht alltagliche Naehrstoff- und Detox-Routinen einfach und wissenschaftlich-glaubwuerdig, mit Bio-Zutaten und Geschmack als Klammer, und mit klarer Versprechen-Kombination PFLANZLICH GEDACHT plus WISSENSCHAFTLICH GEMACHT.",
+    "contentStrategy": {
+      "approach": "Page-spezifische Tonalitaet pro Produktlinie (Mikronaehrstoffe naturwissenschaftlich, Saftkuren kulinarisch-nahbar, Spar-Abo industriell-funktional). Konsistenter Markenrahmen ueber alle Pages durch Sticky-Hero und Awards-Banner.",
+      "emotionalLayer": "Lifestyle-Validation mit Frauen-Persona in entspannten Selfcare-Momenten (Trinken, Fruehstueck, Yoga, Unboxing). Familien-Persona auf Probiersets (Mutter und Kind). Paerchen-Persona auf Spar-Abo.",
+      "rationalLayer": "EU-Health-Claims-Fussnoten auf Mikronaehrstoffe. Vier Awards/Pruefsiegel (German Brand Award 25 Winner, German Brand Award 25 Product Brand of the Year, Produkt Innovation in Glas, DIN Geprueft Qualitaet) auf jeder Page. Konkrete Zahlen (6 Fastensaefte, 18 Sorten, 74 pflanzliche Zutaten, 42x 30 ml, 12x 250 ml).",
+      "modulePreferences": "hero_video oder hero_banner_tall am Auftakt jeder Page, editorial_tile_pair fuer Lifestyle-Story, product_grid_featured fuer Set-Showcase, product_showcase_video fuer Inline-PDP-Konversion, editorial_banner fuer Awards-Loop.",
+      "editorialDepth": "Mittel bis hoch. Saftkuren 10 Module, Mikronaehrstoffe 8, Smoothies 7, Spar-Abo 7, Probiersets 9, Shot Kur 6, Zubehoer 4. Pro Produktlinie eigene Tile-Row-Tiefe."
+    },
+    "conversionPath": {
+      "primary": "ASIN-Tile-Klicks in Tile-Rows (3-fach, 6-fach) plus Inline-PDP-Module mit In-den-Einkaufswagen-Button (Shot Kur, Probiersets)",
+      "secondary": "Hero-Image-Klicks mit ASIN-Link als softer Konversionspfad",
+      "gifting": "Probiersets-Page explizit als Geschenk-Idee positioniert mit Set-Groessen S/M/L Logik",
+      "subscription": "Spar-Abo-Page mit 37 ASINs als komplettes Abo-Sortiment plus USP-Block (NIE WIEDER OHNE, AUTOMATISCHE LIEFERUNG, etc.)",
+      "trustLoop": "Awards-Banner AUSGEZEICHNETE INNOVATIONEN auf jeder Page-Ende, mit Page-Link zur Ueber-Uns-Seite als vertiefende Markentransparenz"
+    },
+    "keyStrengths": [
+      "Sehr konsistenter Markenrahmen ueber alle 10 Pages (Sticky-Hero plus Awards-Banner)",
+      "Klar differenzierte Tonalitaet pro Produktlinie (naturwissenschaftlich fuer Mikronaehrstoffe, kulinarisch fuer Saftkuren)",
+      "Drei externe Auszeichnungen (German Brand Award 25 Winner und Product Brand of the Year, Produkt Innovation in Glas, DIN-Pruefsiegel) als Trust-Anker",
+      "Inline-PDP-Module ermoeglichen direkte Konversion ohne Page-Wechsel",
+      "Komplettes Spar-Abo-Sortiment in einem ProductGrid (37 ASINs) klar als Abo-Hub positioniert",
+      "Visuelle Marken-Identitaet sehr klar durch Ingwerblatt-Hintergrund-Pattern und Versalien-Sans-Serif-Typografie"
+    ],
+    "brandUSPs": [
+      "Bio-Zertifizierung auf jeder Produkt-Linie (BIO-Sechseck auf allen Flaschen)",
+      "Vier externe Auszeichnungen wiederkehrend auf jeder Page (German Brand Award 25 doppelt, Produkt Innovation in Glas, DIN Pruefsiegel)",
+      "Vielfaeltige Sortenauswahl pro Produktlinie (6 Fastensaefte in Saftkur, 6 Smoothie-Sorten, 6 Ingwer-Shot-Sorten)",
+      "EU-Health-Claims-konforme Wirkversprechen mit Fussnoten (Vitamin C, D, B6 fuer Immunsystem, Eisen fuer Energie und kognitive Funktion)",
+      "Spar-Abo mit 5 expliziten USP-Versprechen (NIE WIEDER OHNE, AUTOMATISCHE LIEFERUNG, FLEXIBEL, AENDERBAR, KUENDBAR)",
+      "Mehrere Konversions-Pfade pro Page (Tile-Klick, Inline-PDP-Button, Spar-Abo)"
+    ],
+    "moduleFunctionalTaxonomy": {
+      "sticky_brand_header": "Identisch auf 10 Pages: Amazon Nav plus Kloster Kitchen Wortbildmarke plus Tagline BETTER THAN GOOD plus Sub-Nav-Bar",
+      "hero_video_atmosphaerisch": "Video-Hero mit Closeup oder Lifestyle-Loop, kein Text-Overlay (Mikronaehrstoffe, Saftkuren, Shot Kur, Probiersets, Zubehoer)",
+      "section_intro_versalien": "Zentrierte Versalien-Headline in dicker Sans-Serif plus Subline (SAFTKUREN, VITAL FLOW, SHOT GLAESER)",
+      "editorial_tile_pair_lifestyle_plus_produkt": "Zwei nebeneinander stehende Tiles, links Lifestyle-Foto rechts Produkt-Flat-Lay oder Closeup",
+      "product_grid_featured_3fach_sets": "Drei Set-Varianten in 3 Tage-Optionen (Saftkuren, Probiersets)",
+      "product_grid_line_6fach_einzelsaefte": "Sechs Einzelsorten-Karten in 2x3-Grid (Saftkuren)",
+      "product_showcase_video_inline_pdp": "Amazon-natives ASIN-Detail-Modul mit Carousel, Sterne-Bewertung, Preis, USP-Bullet, In-den-Einkaufswagen-Button (Shot Kur, Probiersets)",
+      "usp_banner_checkmark_liste": "Dunkelgruener Ingwerblatt-Hintergrund mit Produkt-Lineup links und vertikaler Checkmark-USP-Liste rechts (Spar-Abo)",
+      "product_grid_full_catalog_37asins": "Riesiges ProductGrid mit komplettem Abo-Sortiment (Spar-Abo)",
+      "awards_banner_4_tiles_ingwerblatt": "Page-Ende-Trust-Loop auf jeder Page identisch, verlinkt zu Ueber-Uns-Page"
+    },
+    "pageArchetypes": {
+      "startseite": {
+        "primaryFunction": "Brand-Identitaets-Vermittlung plus Subkategorie-Verteiler plus ASIN-Lead-Showcase",
+        "conversionMode": "Soft (Tile-Klick) plus Hub-Navigation",
+        "transferableTo": "Brand-Stores mit Multi-Produktlinien-Sortiment und Kategorie-Hub-Struktur"
+      },
+      "hub_category_produktlinie": {
+        "primaryFunction": "Produktlinien-Story plus Showcase plus Konversion",
+        "conversionMode": "Hard (Tile-Klick zu ASIN) plus Soft (Lifestyle-Hero zu PDP)",
+        "transferableTo": "Functional-Beverage- und Supplement-Hubs mit klarer Produktlinien-Identitaet"
+      },
+      "gift_sets": {
+        "primaryFunction": "Geschenk-Positionierung plus Set-Logik plus Inline-PDP-Konversion",
+        "conversionMode": "Hard (Inline-PDP-Button In-den-Einkaufswagen)",
+        "transferableTo": "Geschenk-Set-Hubs mit Set-Groessen-Staffelung S/M/L"
+      },
+      "sub_category_zubehoer": {
+        "primaryFunction": "Single-Product-Showcase mit puristischer Optik",
+        "conversionMode": "Soft (Klick auf Hero-Tile)",
+        "transferableTo": "Zubehoer-Pages mit limitiertem Sortiment (1-2 ASINs)"
+      },
+      "sub_category_spar_abo": {
+        "primaryFunction": "Abo-USP-Vermittlung plus Voll-Catalog-Sortiments-Sicht",
+        "conversionMode": "Hard (ProductGrid Catalog plus Inline-Abo-Anmeldung)",
+        "transferableTo": "Abo-Hubs mit grossem Sortiment und expliziten Abo-Vorteilen"
+      },
+      "about": {
+        "primaryFunction": "Brand-Werte-Storytelling und Herkunfts-Geschichte",
+        "conversionMode": "Soft (keine direkte ASIN-Konversion, Marken-Trust)",
+        "transferableTo": "About-Pages mit emotionaler Markenstimme"
+      }
+    },
+    "brandSpecificVsStructuralExtraction": {
+      "strukturell_uebertragbar_an_neue_brands": [
+        "Sticky-Brand-Header plus Sub-Nav-Pattern",
+        "Awards-Banner-am-Page-Ende-Pattern mit 4 Tiles verlinkt zu About",
+        "Hero-Video-am-Page-Auftakt-Pattern (atmosphaerisch ohne Text)",
+        "Section-Intro plus Tile-Row 3-fach plus Tile-Row 6-fach Sortiments-Pattern",
+        "Inline-PDP-Modul fuer direkte Konversion (Amazon-natives Format)",
+        "USP-Banner mit Checkmark-Liste plus Produkt-Lineup links Pattern (Spar-Abo)",
+        "ProductGrid full_catalog am Page-Ende fuer Abo-Sortiment",
+        "voiceMarkers Tags (direkt, nahbar, naturwissenschaftlich, kulinarisch, konkrete_zahl, kontrast, wiederholung_anapher)"
+      ],
+      "brand_spezifisch_NICHT_uebertragbar": [
+        "Tagline BETTER THAN GOOD (gehoert nur Kloster Kitchen)",
+        "Ingwerblatt-Hintergrund (gehoert nur als pflanzliche Supplement-Marke)",
+        "Konkrete Awards (German Brand Award 25 winner ist eine Auszeichnung)",
+        "DIN Pruefsiegel mit Aufdruck Bio Ingwer Shot",
+        "Konkrete ASINs und Page-IDs",
+        "Konkrete Brand-Headlines (PFLANZLICH GEDACHT. WISSENSCHAFTLICH GEMACHT., NIE WIEDER OHNE INGWER SHOTS, VITAL FLOW)",
+        "Konkrete USP-Beispiele (74 pflanzliche Zutaten, 6 Fastensaefte pro Tag, 18 Sorten)",
+        "Konkrete Lifestyle-Persona-Bilder (Frau mit Glas vor Ingwerblatt, Yoga-Pose mit Shot)"
+      ]
+    }
+  },
+  "openQuestions": [
+    "Modul 3 in mehreren Pages (Smoothies, Shot Kur, Probiersets, Zubehoer, Spar-Abo) ist Bridge-Banner mit unklarem Vision-Inhalt. Ein dedizierter zweiter Vision-Pass koennte die Bridge-Patterns detaillierter dokumentieren.",
+    "Im Spar-Abo ProductGrid sind 37 ASINs nicht einzeln klassifiziert. Eine separate Catalog-Mapping-Tabelle waere fuer die Generierungs-Pipeline hilfreich.",
+    "Die Mikronaehrstoffe-Blueprint enthaelt noch screenshot_required-Marker fuer einige imageUrls. Diese koennten in einem v3-Upgrade nachgereicht werden (Task 34 und 35 ausstehend)."
+  ]
+}

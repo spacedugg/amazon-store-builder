@@ -1,0 +1,43 @@
+{
+  "_meta": {
+    "store": "holy-energy",
+    "pageSlug": "04_energy",
+    "pageName": "Energy",
+    "pageId": "18BC62B2-B4AF-4995-B743-E80AECFA53AA",
+    "url": "https://www.amazon.de/stores/page/18BC62B2-B4AF-4995-B743-E80AECFA53AA",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_v4",
+    "scrollHeight": 7674,
+    "viewport": { "w": 1582, "h": 928 },
+    "domRowsTotal": 7,
+    "contentModulesCount": 6
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height":  400, "widgetClass": "Header",        "tileCount":  0, "imgCount":  3, "videoCount":  0, "productCount":  0, "note": "Header plus Brand-Hero 1500x300." },
+    { "domRowIdx": 1, "top":  507, "height": 1242, "widgetClass": "EditorialRow",  "tileCount":  8, "imgCount":  1, "videoCount":  0, "productCount":  0, "note": "Page-Hero XL 1470x1227. Energy-Manifest Banner mit eingebranntem Text." },
+    { "domRowIdx": 2, "top": 1749, "height":  577, "widgetClass": "EditorialRow",  "tileCount":  4, "imgCount": 28, "videoCount": 10, "productCount":  0, "note": "Spotlight-Tile Raspberry Raptor (Heading nachgewiesen). 1 ASIN-Showcase mit 28 Bildern und 10 Videos (Produkt-Video-Carousel)." },
+    { "domRowIdx": 3, "top": 2326, "height":  540, "widgetClass": "EditorialRow",  "tileCount":  4, "imgCount": 28, "videoCount": 10, "productCount":  0, "note": "Spotlight-Tile Watermelon Whale 10er Probier-Box (Heading nachgewiesen). 1 ASIN-Showcase mit Video-Carousel." },
+    { "domRowIdx": 4, "top": 2866, "height":  305, "widgetClass": "EditorialRow",  "tileCount":  8, "imgCount":  1, "videoCount":  0, "productCount":  0, "note": "Editorial-Banner 1470x290 als Section-Intro fuer Produkt-Vollkatalog." },
+    { "domRowIdx": 5, "top": 3171, "height": 3041, "widgetClass": "ProductGrid",   "tileCount":  0, "imgCount": 25, "videoCount":  0, "productCount": 25, "note": "Massives ProductGrid mit 25 Energy-ASINs (~3041px Hoehe). Full-Catalog Energy." },
+    { "domRowIdx": 6, "top": 6212, "height":  200, "widgetClass": "EditorialRow",  "tileCount":  4, "imgCount":  0, "videoCount":  0, "productCount":  0, "note": "Share-Footer." }
+  ],
+  "editorialBanners": [
+    { "modulePos": 2, "top":  514, "w": 1470, "h": 1227, "asset": "19b435ae-0814-44dc-bb6f-50d751161851", "note": "Page-Hero XL" },
+    { "modulePos": 5, "top": 2873, "w": 1470, "h":  290, "asset": "f8593e33-d780-4572-9447-dc44272c0220", "note": "Section-Intro vor Grid" }
+  ],
+  "uniqueAsinsOnPage": [
+    "B0C2NDJV3N","B0CPJLMQWR","B0CPJNV4WV","B0CPJNZL8Z","B09579255N",
+    "B0CPJMJ6TM","B0CPJMR1B9","B0DCVRZ6WC","B0CPJNY9RS","B0CPJP84YH",
+    "B0CPJMMM3G","B0CPJMVL5Z","B0CPJND4VK","B0DCVT13P1","B0CPJM8YG1",
+    "B0CPJM5Y59","B0DCVTXGRS","B0CPJP2STM","B0DCVR9NN1","B0DCK9NTLB",
+    "B0DCKDRNPD","B0DCKBZNRZ","B0FS22YHCT","B0DCK9R9HZ","B0DCK8YRF2"
+  ],
+  "spotlightedFlavors": [
+    {"modulePos": 3, "name": "Raspberry Raptor", "tagline": "Himbeer & Yuzu Geschmack, 50 Portionen mit NewCaff & Gruentee Extrakt"},
+    {"modulePos": 4, "name": "Watermelon Whale", "tagline": "10er Probier-Box mit Wassermelonen Geschmack, 10 Portionen, NewCaff & Gruentee Extrakt"}
+  ],
+  "openQuestionsLocal": [
+    "Module 3 und 4 (ASIN-Spotlight mit jeweils 28 Bildern und 10 Videos) sind moeglicherweise Brand-Story-Showcases mit eingebetteter Produkt-Video-Galerie. In Phase 2 zu vertiefen.",
+    "Page-Hero Modul 2 (1470x1227): Energy-Manifest mit Bildtext in Phase 2 per Vision."
+  ]
+}

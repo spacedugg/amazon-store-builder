@@ -1,0 +1,20 @@
+{
+  "store": "bedsure",
+  "storeUrl": "https://www.amazon.de/stores/Bedsure/page/7DC5A9F8-2A3D-426B-B2F2-F819AE825B1F",
+  "discoveredAt": "2026-05-12",
+  "discoveryMethod": "navigation_bar_dynamic_crawl_via_chrome_mcp_read_page",
+  "noteToFutureRuns": "Page-IDs muessen bei jedem neuen Lauf dynamisch entdeckt werden, die alten v1-IDs sind veraltet und sind nicht logisch ableitbar. CLAUDE.md Regel 4 verbietet explizit hartkodierte URL-Suffixe.",
+  "pages": [
+    { "slug": "01_startseite",                "name": "Startseite",                "level": 0, "pageId": "7DC5A9F8-2A3D-426B-B2F2-F819AE825B1F", "url": "https://www.amazon.de/stores/page/7DC5A9F8-2A3D-426B-B2F2-F819AE825B1F" },
+    { "slug": "02_sanft-in-den-sommer",       "name": "Sanft in den Sommer",       "level": 1, "pageId": "4647A147-C667-43C9-ACB3-55D0A86680EF", "url": "https://www.amazon.de/stores/page/4647A147-C667-43C9-ACB3-55D0A86680EF" },
+    { "slug": "03_kuscheldecken",             "name": "Kuscheldecken",             "level": 1, "pageId": "2F249C26-269C-4A0B-ACB2-7AB6436FFDC5", "url": "https://www.amazon.de/stores/page/2F249C26-269C-4A0B-ACB2-7AB6436FFDC5" },
+    { "slug": "04_bettwaesche-sets",          "name": "Bettwaesche-Sets",          "level": 1, "pageId": "D537A0F0-8099-477C-A9CE-4E44DA3B8F13", "url": "https://www.amazon.de/stores/page/D537A0F0-8099-477C-A9CE-4E44DA3B8F13" },
+    { "slug": "05_haustierbedarf",            "name": "Haustierbedarf",            "level": 1, "pageId": "B3B34DD4-8067-4CF4-B764-5BEDBD5B40E8", "url": "https://www.amazon.de/stores/page/B3B34DD4-8067-4CF4-B764-5BEDBD5B40E8" },
+    { "slug": "06_bettdecke-kissen",          "name": "Bettdecke und Kissen",      "level": 1, "pageId": "0327D6BF-BFA7-49D7-80B2-31707A7C0AF9", "url": "https://www.amazon.de/stores/page/0327D6BF-BFA7-49D7-80B2-31707A7C0AF9" },
+    { "slug": "07_kissenbezuege-spannbettlaken", "name": "Kissenbezuege und Spannbettlaken", "level": 1, "pageId": "652C1CB5-3C1F-41DB-802F-9A308D45AE28", "url": "https://www.amazon.de/stores/page/652C1CB5-3C1F-41DB-802F-9A308D45AE28" },
+    { "slug": "08_heizdecke",                 "name": "Heizdecke",                 "level": 1, "pageId": "86EE23E4-B85F-4167-8FE0-E32C59862F42", "url": "https://www.amazon.de/stores/page/86EE23E4-B85F-4167-8FE0-E32C59862F42" },
+    { "slug": "09_kuscheldecke-aermeln",      "name": "Kuscheldecke mit Aermeln",  "level": 1, "pageId": "8B9660CA-9C46-42A4-B289-C08618110009", "url": "https://www.amazon.de/stores/page/8B9660CA-9C46-42A4-B289-C08618110009" },
+    { "slug": "10_angebote",                  "name": "Angebote",                  "level": 1, "pageId": "C2FACEA3-48EC-4B21-A2B3-4B2691A2F8D9", "url": "https://www.amazon.de/stores/page/C2FACEA3-48EC-4B21-A2B3-4B2691A2F8D9" },
+    { "slug": "11_ueber-bedsure",             "name": "Ueber Bedsure",             "level": 1, "pageId": "ED1B32C3-3890-4245-8A84-ECD16C98BFAF", "url": "https://www.amazon.de/stores/page/ED1B32C3-3890-4245-8A84-ECD16C98BFAF" }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "store": "gritin",
+  "storeUrl": "https://www.amazon.de/stores/page/1758941C-AE87-4628-AB45-62C0A2BDB75C",
+  "discoveredAt": "2026-05-13",
+  "pages": [
+    { "slug": "01_startseite",                  "name": "Startseite",                "level": 0, "pageId": "1758941C-AE87-4628-AB45-62C0A2BDB75C", "url": "https://www.amazon.de/stores/page/1758941C-AE87-4628-AB45-62C0A2BDB75C" },
+    { "slug": "02_alle-angebote",               "name": "Alle Angebote",             "level": 1, "pageId": "EDF8B249-9C2C-4577-8F0F-3C9FA6BDA0AB", "url": "https://www.amazon.de/stores/page/EDF8B249-9C2C-4577-8F0F-3C9FA6BDA0AB" },
+    { "slug": "03_new",                         "name": "New",                       "level": 1, "pageId": "A4017677-EBF9-4873-A364-ED9A9D416C0D", "url": "https://www.amazon.de/stores/page/A4017677-EBF9-4873-A364-ED9A9D416C0D" },
+    { "slug": "04_superhelle-unterbauleuchten", "name": "Superhelle Unterbauleuchten","level": 1, "pageId": "4285DBDF-69D4-49C1-943D-61ED6288D412", "url": "https://www.amazon.de/stores/page/4285DBDF-69D4-49C1-943D-61ED6288D412" },
+    { "slug": "05_clip-on-buchlampe",           "name": "Clip-On Buchlampe",         "level": 1, "pageId": "5695F3F8-6261-4C3A-9510-4032FEC5A794", "url": "https://www.amazon.de/stores/page/5695F3F8-6261-4C3A-9510-4032FEC5A794" },
+    { "slug": "06_faltbare-mini-buchlampe",     "name": "Faltbare Mini-Buchlampe",   "level": 1, "pageId": "920A83F8-D01D-4102-AAF2-00F6FC0DBEEB", "url": "https://www.amazon.de/stores/page/920A83F8-D01D-4102-AAF2-00F6FC0DBEEB" },
+    { "slug": "07_hals-leselampe",              "name": "Hals-Leselampe",            "level": 1, "pageId": "F147BF5F-2041-4612-8C4F-35DC5DEC71F0", "url": "https://www.amazon.de/stores/page/F147BF5F-2041-4612-8C4F-35DC5DEC71F0" },
+    { "slug": "08_augenmaske",                  "name": "Augenmaske",                "level": 1, "pageId": "12519950-E137-4034-96CF-5BCEE6F6C635", "url": "https://www.amazon.de/stores/page/12519950-E137-4034-96CF-5BCEE6F6C635" },
+    { "slug": "09_sport",                       "name": "Sport",                     "level": 1, "pageId": "74A69D57-0036-4599-BE65-892C69946180", "url": "https://www.amazon.de/stores/page/74A69D57-0036-4599-BE65-892C69946180" }
+  ]
+}

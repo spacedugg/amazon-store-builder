@@ -1,0 +1,244 @@
+{
+  "pageUrl": "https://www.amazon.de/stores/page/998F3BE4-E37F-47C7-8539-A79DE27AF043",
+  "pageName": "Shot Kur",
+  "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043",
+  "pageLevel": 1,
+  "pageType": "hub_category",
+  "scrollHeight": 5149,
+  "contentStats": {"domModules": 8, "logicalModules": 6, "totalImages": 39, "totalVideos": 1},
+  "heroBanner": {
+    "description": "Sticky-Hero KLOSTER KITCHEN BETTER THAN GOOD identisch zu allen Pages.",
+    "textOnImage": {"visibleText": "KLOSTER KITCHEN BETTER THAN GOOD", "textType": "tagline", "origin": "baked_in", "headline": "BETTER THAN GOOD", "subline": null, "cta": null, "directionCues": null},
+    "estimatedDimensions": "3000x500"
+  },
+  "modules": [
+    {
+      "position": 1, "moduleId": "shot-kur_mod_01", "moduleName": "Amazon Nav plus Brand Header sticky",
+      "layoutType": "amazon_nav_header", "layoutShape": "chrome_thin", "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": "Identisch zu allen Pages.",
+      "structuralPattern": "Amazon Header plus Brand-Streifen plus Sub-Nav aktive Page SHOT KUR.",
+      "moduleFunction": "Markenrahmen plus Navigation.",
+      "relationToPrevious": "none", "relationToNext": "hands_off_to_navigation",
+      "visualBridge": "none", "copyBridge": "none", "heroArchetype": null,
+      "textOnImage": {"visibleText": "KLOSTER KITCHEN BETTER THAN GOOD SHOT KUR", "textType": "tagline", "origin": "amazon_chrome", "headline": "BETTER THAN GOOD", "subline": null, "cta": "Folgen", "directionCues": null},
+      "tiles": [],
+      "dom": {"widgetClass": "Header", "visibleHeadings": ["KLOSTER KITCHEN"], "ctaLabels": ["Folgen"], "imageUrls": [], "videoCount": 0}
+    },
+    {
+      "position": 2, "moduleId": "shot-kur_mod_02", "moduleName": "Video Hero Ingwer-Shot Closeup",
+      "layoutType": "hero_video", "layoutShape": "full_width_tall", "tileCount": 1,
+      "designIntent": "emotional_hook",
+      "designIntentDetail": "Grossformatiges Video-Hero mit Closeup-Schwenk auf eine rote Kloster-Kitchen-Ingwer-Shot-Flasche im Anschnitt vor weichgelbem Bokeh-Hintergrund.",
+      "structuralPattern": "Vollflaechiges Video-Element, weicher Bokeh, Closeup-Optik. Kein Text-Overlay.",
+      "moduleFunction": "Emotionaler Auftakt der Shot Kur Page, betont Produkt-Detail und Frische.",
+      "relationToPrevious": "none", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_subject_class", "copyBridge": "none",
+      "heroArchetype": "brand_mood_no_product",
+      "textOnImage": {"visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null},
+      "tiles": [{
+        "position": 1, "imageCategory": "lifestyle", "toolTileType": "video", "toolImageType": "video_hero",
+        "link": {"clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null},
+        "tileContentTopic": {"primarySubject": "Ingwer Shot Closeup Video Loop", "productOrCategoryRef": null, "intent": "story", "rolePosition": "Page Hero Video"},
+        "visualContent": "Closeup einer roten Kloster-Kitchen-Ingwer-Shot-Flasche mit weisser Logo-Auspraegung, Flasche im Anschnitt, kurz vor dem Schluesselbild des Etiketts, dahinter weiches gelbes Bokeh. Beweglicher Loop in ruhigen Schnitten.",
+        "elementProportions": {"product_photo": 50, "lifestyle_photo": 50},
+        "textOnImage": {"visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null},
+        "ctaText": null, "linksTo": null
+      }],
+      "toolLayoutId": "vh-full",
+      "dom": {"widgetClass": "EditorialRow", "visibleHeadings": [], "ctaLabels": [], "imageUrls": [], "videoCount": 1}
+    },
+    {
+      "position": 3, "moduleId": "shot-kur_mod_03", "moduleName": "Image Modul Brand Statement Bridge",
+      "layoutType": "editorial_banner", "layoutShape": "full_width_banner", "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": "Schmales Banner zwischen Video-Hero und Tile-Pair. Vermutlich Statement-Bild oder Bridge ohne dominanten Text.",
+      "structuralPattern": "Querformat-Banner, leichte Lifestyle-Optik.",
+      "moduleFunction": "Bridge vom Video-Hero zur Lifestyle-Sektion.",
+      "relationToPrevious": "summarizes_above", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_subject_class", "copyBridge": "continues_idea", "heroArchetype": null,
+      "textOnImage": {"visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null},
+      "tiles": [{
+        "position": 1, "imageCategory": "creative_lifestyle_hybrid", "toolTileType": "image", "toolImageType": "banner_narrow",
+        "link": {"clickable": true, "linkType": "asin", "linkTarget": "B09X5R7B6P", "ctaLabel": null},
+        "tileContentTopic": {"primarySubject": "Shot Kur Brand Bridge", "productOrCategoryRef": "B09X5R7B6P", "intent": "story", "rolePosition": "Bridge Banner"},
+        "visualContent": "Bridge-Banner mit Lifestyle-Optik, geringer Text-Anteil.",
+        "elementProportions": {"lifestyle_photo": 70, "product_photo": 20, "solid_background": 10},
+        "textOnImage": {"visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null},
+        "ctaText": null, "linksTo": "Shot Kur ASIN"
+      }],
+      "toolLayoutId": "1",
+      "dom": {"widgetClass": "EditorialRow", "visibleHeadings": [], "ctaLabels": [], "imageUrls": [], "videoCount": 0}
+    },
+    {
+      "position": 4, "moduleId": "shot-kur_mod_04", "moduleName": "Tile Pair Lifestyle Routine Morgen plus Yoga",
+      "layoutType": "editorial_tile_pair", "layoutShape": "split_two_columns", "tileCount": 2,
+      "designIntent": "editorial",
+      "designIntentDetail": "Links Frau haelt roten Ingwer Shot Classic ueber eine Frühstücks-Schale mit Beeren und Obst. Rechts Yoga-Pose Frau in Pose, gelblicher Ingwer Shot Classic auf Yogamatte mit Wasserglas daneben.",
+      "structuralPattern": "Zwei gleich grosse Lifestyle-Tiles. Beide Anwendungsmomente erzaehlen Routine: Frühstück und Yoga.",
+      "moduleFunction": "Lifestyle-Validation Shot Kur: zwei Anwendungsmomente (Fruehstueck und Sport) als Brand-Story.",
+      "relationToPrevious": "zooms_into_above_subject", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_subject_class", "copyBridge": "none", "heroArchetype": null,
+      "textOnImage": {"visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null},
+      "tiles": [
+        {
+          "position": 1, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "tile_pair_left",
+          "link": {"clickable": true, "linkType": "asin", "linkTarget": "B09X5R7B6P", "ctaLabel": null},
+          "tileContentTopic": {"primarySubject": "Fruehstuecks-Routine mit Ingwer Shot", "productOrCategoryRef": "B09X5R7B6P", "intent": "story", "rolePosition": "Routine Morgen"},
+          "visualContent": "Frauen-Haende halten eine rote Kloster-Kitchen-Ingwer-Shot-Classic-Flasche ueber eine helle Keramik-Bowl mit Granola, Heidelbeeren, geschnittenen Bananen und einem Erdbeer-Anschnitt. Holztisch im Hintergrund mit Apfel-Halb und Birne.",
+          "elementProportions": {"lifestyle_photo": 80, "product_photo": 20},
+          "textOnImage": {"visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null},
+          "ctaText": null, "linksTo": "Shot Kur ASIN"
+        },
+        {
+          "position": 2, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "tile_pair_right",
+          "link": {"clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null},
+          "tileContentTopic": {"primarySubject": "Yoga-Routine mit Ingwer Shot", "productOrCategoryRef": null, "intent": "story", "rolePosition": "Routine Sport"},
+          "visualContent": "Frau in dunkler Hose und gelben/orangenen Top in einer Yoga-Vorbeugung. Vor ihr auf der rosa Yogamatte steht eine gelbe Kloster-Kitchen-Ingwer-Shot-Classic-Flasche, daneben Wasserglas auf grauer Matte mit Gummibaender. Sofa im Hintergrund.",
+          "elementProportions": {"lifestyle_photo": 80, "product_photo": 20},
+          "textOnImage": {"visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null},
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "toolLayoutId": "split-w2s",
+      "dom": {"widgetClass": "EditorialRow", "visibleHeadings": [], "ctaLabels": [], "imageUrls": [], "videoCount": 0}
+    },
+    {
+      "position": 5, "moduleId": "shot-kur_mod_05", "moduleName": "Tile Pair ASIN-Boxen Probier-Set plus Unboxing",
+      "layoutType": "product_grid_featured", "layoutShape": "split_two_columns", "tileCount": 2,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Zwei Produkt-Tiles im Paar: Links geoeffnete Karton-Box mit Pfeilen-Logo (vermutlich Probier-Box), rechts Karton-Box dekoriert mit frischem Ingwer und gruenen Blaettern.",
+      "structuralPattern": "Zwei Tile-Cards mit Karton-Boxen als Hero-Visual, jeweils mit ASIN-Link.",
+      "moduleFunction": "Konversions-Punkt: zwei Karton-Box-Varianten der Shot Kur.",
+      "relationToPrevious": "lists_subordinate_options", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_subject_class", "copyBridge": "answers_above_question",
+      "heroArchetype": null,
+      "textOnImage": {"visibleText": null, "textType": "product_title", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null},
+      "tiles": [
+        {
+          "position": 1, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "product_card_1of2",
+          "link": {"clickable": true, "linkType": "asin", "linkTarget": "B09X5R7B6P", "ctaLabel": null},
+          "tileContentTopic": {"primarySubject": "Shot Kur Karton Variante 1", "productOrCategoryRef": "B09X5R7B6P", "intent": "convert", "rolePosition": "Variant Box A"},
+          "visualContent": "Geoeffnete Karton-Box mit gestickerten Pfeilen-Markierungen, von oben fotografiert. Sehr clean, kein Dekorationselement.",
+          "elementProportions": {"product_photo": 90, "solid_background": 10},
+          "textOnImage": {"visibleText": null, "textType": "product_title", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null},
+          "ctaText": null, "linksTo": "ASIN Variant A"
+        },
+        {
+          "position": 2, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "product_card_2of2",
+          "link": {"clickable": true, "linkType": "asin", "linkTarget": "B0GH8XPJX5", "ctaLabel": null},
+          "tileContentTopic": {"primarySubject": "Shot Kur Karton Variante 2 mit Ingwer", "productOrCategoryRef": "B0GH8XPJX5", "intent": "convert", "rolePosition": "Variant Box B"},
+          "visualContent": "Karton-Box von rechts mit frischem Ingwer-Wurzelstock und gruenen Blaettern als Dekoration. Karton mit grauer Markierung.",
+          "elementProportions": {"product_photo": 80, "decorative_elements": 15, "solid_background": 5},
+          "textOnImage": {"visibleText": null, "textType": "product_title", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null},
+          "ctaText": null, "linksTo": "ASIN Variant B"
+        }
+      ],
+      "toolLayoutId": "split-w2s",
+      "dom": {"widgetClass": "EditorialRow", "visibleHeadings": [], "ctaLabels": [], "imageUrls": [], "videoCount": 0}
+    },
+    {
+      "position": 6, "moduleId": "shot-kur_mod_06", "moduleName": "Multi Image Carousel ASIN-Detail Bio Saftkur Alternative",
+      "layoutType": "product_showcase_video", "layoutShape": "split_two_columns", "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Amazon-natives ASIN-Detail-Modul mit Karton-Box-Hero und Carousel-Navigations-Punkten, links Bild rechts Produkt-Details mit Bewertungen, Preis, Bullet-USPs, Buttons.",
+      "structuralPattern": "Links grosses Produktbild mit Carousel-Dots, rechts Produkt-Beschreibung wie Amazon-PDP: Titel, Bewertungs-Sterne, Preis, Lieferzeit, ein Bullet, CTAs.",
+      "moduleFunction": "Tiefe Produkt-Detail-Sektion direkt in der Brand-Store-Page, ermoeglicht in-line Konversion ohne Page-Wechsel.",
+      "relationToPrevious": "zooms_into_above_subject", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_subject_class", "copyBridge": "continues_idea",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "Kloster Kitchen Bio Saftkur Alternative | 6 Wochen Ingwer Shot Kur | 6 Sorten | 42x 30 ml mit echten Ingwerstuecken | Ingwershot vegan | suess-scharf 4.6 185 69,90 EUR (55,48 EUR/l) Lieferung bis Samstag, 23. Mai. Wird versendet von und verkauft durch Kloster Kitchen. EINZIGARTIG ERFRISCHENDER GESCHMACK Unser Ingwer-Shot ueberzeugt mit einer wunderbar stimmigen Balance der hochwertigen Zutaten: Scharfer Ingwer trifft auf fruchtigen Zitronensaft und suesse Agave Mehr anzeigen Alle Details anzeigen In den Einkaufswagen",
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": "Kloster Kitchen Bio Saftkur Alternative",
+        "subline": "6 Wochen Ingwer Shot Kur, 6 Sorten, 42x 30 ml mit echten Ingwerstuecken, Ingwershot vegan, suess-scharf",
+        "cta": "In den Einkaufswagen",
+        "directionCues": null
+      },
+      "tiles": [{
+        "position": 1, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "pdp_inline",
+        "link": {"clickable": true, "linkType": "asin", "linkTarget": "B09X5R7B6P", "ctaLabel": "In den Einkaufswagen"},
+        "tileContentTopic": {"primarySubject": "Bio Saftkur Alternative 6 Wochen Ingwer Shot Kur", "productOrCategoryRef": "B09X5R7B6P", "intent": "convert", "rolePosition": "Inline PDP"},
+        "visualContent": "Links grosses Produktbild von oben, geoeffnete Karton-Box mit 42 Ingwer-Shot-Flaschen verschiedener Farben sortiert in Reihen. Schwarze Carousel-Pfeile links und rechts. Sechs Pagination-Dots darunter. Rechts Produkt-Titel in dunklem Sans-Serif, darunter Bewertungs-Sterne (4.6, 185 Reviews), Preis 69,90 EUR (55,48 EUR/l), Lieferinfo, ein USP-Bullet mit Versalien-Header EINZIGARTIG ERFRISCHENDER GESCHMACK, dunkler Bottom-Button Alle Details anzeigen und gelber In-den-Einkaufswagen-Button.",
+        "elementProportions": {"product_photo": 50, "text": 30, "cta_button": 10, "badge": 5, "solid_background": 5},
+        "textOnImage": {
+          "visibleText": "Kloster Kitchen Bio Saftkur Alternative 6 Wochen Ingwer Shot Kur 6 Sorten 42x 30 ml 4.6 (185) 69,90 EUR Alle Details anzeigen In den Einkaufswagen",
+          "textType": "product_title",
+          "origin": "amazon_overlay",
+          "headline": "Kloster Kitchen Bio Saftkur Alternative",
+          "subline": "6 Wochen Ingwer Shot Kur, 6 Sorten, 42x 30 ml mit echten Ingwerstuecken, Ingwershot vegan, suess-scharf",
+          "cta": "In den Einkaufswagen",
+          "directionCues": null
+        },
+        "ctaText": "In den Einkaufswagen",
+        "linksTo": "ASIN B09X5R7B6P"
+      }],
+      "toolLayoutId": "pdp",
+      "dom": {"widgetClass": "EditorialRow", "visibleHeadings": ["Kloster Kitchen Bio Saftkur Alternative"], "ctaLabels": ["Alle Details anzeigen", "In den Einkaufswagen", "Mehr anzeigen"], "imageUrls": [], "videoCount": 0}
+    },
+    {
+      "position": 7, "moduleId": "shot-kur_mod_07", "moduleName": "Awards Banner Ausgezeichnete Innovationen",
+      "layoutType": "editorial_banner", "layoutShape": "full_width_banner", "tileCount": 4,
+      "designIntent": "editorial",
+      "designIntentDetail": "Brand-uebergreifender Awards-Banner identisch zu allen Pages, verlinkt zu Ueber Uns.",
+      "structuralPattern": "Vollflaeche Ingwerblatt-Hintergrund, Headline AUSGEZEICHNETE INNOVATIONEN, vier Trust-Tiles.",
+      "moduleFunction": "Trust-Loop, Page-Link Ueber Uns.",
+      "relationToPrevious": "summarizes_above", "relationToNext": "closes_chapter",
+      "visualBridge": "hard_break_intentional", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": {"visibleText": "AUSGEZEICHNETE INNOVATIONEN", "textType": "headline", "origin": "baked_in", "headline": "AUSGEZEICHNETE INNOVATIONEN", "subline": null, "cta": null, "directionCues": null},
+      "tiles": [
+        {"position": 1, "imageCategory": "benefit", "toolTileType": "image_text", "toolImageType": "award_tile_1of4", "link": {"clickable": true, "linkType": "page", "linkTarget": "F031D76B-9B76-426A-93A9-2EBBCB5150CF", "ctaLabel": null}, "tileContentTopic": {"primarySubject": "German Brand Award 25 Winner", "productOrCategoryRef": null, "intent": "trust", "rolePosition": "Award Tile"}, "visualContent": "Weisses German Brand Award Logo 25 winner.", "elementProportions": {"logo": 70, "photographic_background": 30}, "textOnImage": {"visibleText": "german brand award 25 winner", "textType": "headline", "origin": "baked_in", "headline": null, "subline": null, "cta": null, "directionCues": null}, "ctaText": null, "linksTo": "Ueber Uns"},
+        {"position": 2, "imageCategory": "benefit", "toolTileType": "image_text", "toolImageType": "award_tile_2of4", "link": {"clickable": true, "linkType": "page", "linkTarget": "F031D76B-9B76-426A-93A9-2EBBCB5150CF", "ctaLabel": null}, "tileContentTopic": {"primarySubject": "German Brand Award 25 Product Brand of the Year", "productOrCategoryRef": null, "intent": "trust", "rolePosition": "Award Tile"}, "visualContent": "Weisses German Brand Award Logo 25 product brand of the year.", "elementProportions": {"logo": 70, "photographic_background": 30}, "textOnImage": {"visibleText": "german brand award 25 product brand of the year", "textType": "headline", "origin": "baked_in", "headline": null, "subline": null, "cta": null, "directionCues": null}, "ctaText": null, "linksTo": "Ueber Uns"},
+        {"position": 3, "imageCategory": "benefit", "toolTileType": "image_text", "toolImageType": "award_tile_3of4", "link": {"clickable": true, "linkType": "page", "linkTarget": "F031D76B-9B76-426A-93A9-2EBBCB5150CF", "ctaLabel": null}, "tileContentTopic": {"primarySubject": "Produkt Innovation in Glas", "productOrCategoryRef": null, "intent": "trust", "rolePosition": "Award Tile"}, "visualContent": "Weisses abstraktes Logo plus Text PRODUKT INNOVATION IN GLAS.", "elementProportions": {"logo": 50, "text": 30, "photographic_background": 20}, "textOnImage": {"visibleText": "PRODUKT INNOVATION IN GLAS", "textType": "headline", "origin": "baked_in", "headline": "PRODUKT INNOVATION IN GLAS", "subline": null, "cta": null, "directionCues": null}, "ctaText": null, "linksTo": "Ueber Uns"},
+        {"position": 4, "imageCategory": "benefit", "toolTileType": "image_text", "toolImageType": "award_tile_4of4", "link": {"clickable": true, "linkType": "page", "linkTarget": "F031D76B-9B76-426A-93A9-2EBBCB5150CF", "ctaLabel": null}, "tileContentTopic": {"primarySubject": "DIN Pruefsiegel Geprueft Qualitaet Bio Ingwer Shot", "productOrCategoryRef": null, "intent": "trust", "rolePosition": "Award Tile"}, "visualContent": "Helles DIN Pruefsiegel-Etikett mit Headline Geprueft Qualitaet, Produktname Kloster Kitchen Bio Ingwer Shot, Logo Deutsches Institut fuer Verbraucherschutz.", "elementProportions": {"logo": 60, "text": 30, "photographic_background": 10}, "textOnImage": {"visibleText": "Geprueft Qualitaet Kloster Kitchen Bio Ingwer Shot Deutsches Institut fuer Verbraucherschutz", "textType": "headline", "origin": "baked_in", "headline": "Geprueft Qualitaet", "subline": "Kloster Kitchen Bio Ingwer Shot", "cta": null, "directionCues": null}, "ctaText": null, "linksTo": "Ueber Uns"}
+      ],
+      "toolLayoutId": "4grid",
+      "dom": {"widgetClass": "EditorialRow", "visibleHeadings": ["AUSGEZEICHNETE INNOVATIONEN"], "ctaLabels": [], "imageUrls": [], "videoCount": 0}
+    },
+    {
+      "position": 8, "moduleId": "shot-kur_mod_08", "moduleName": "Amazon Share Footer",
+      "layoutType": "amazon_share_footer", "layoutShape": "chrome_thin", "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": "Amazon Share-Block.",
+      "structuralPattern": "Teilen-Button plus Disclaimer.",
+      "moduleFunction": "Amazon Plattform-Footer.",
+      "relationToPrevious": "closes_chapter", "relationToNext": "none",
+      "visualBridge": "hard_break_intentional", "copyBridge": "none", "heroArchetype": null,
+      "textOnImage": {"visibleText": "Teilen", "textType": "section_label", "origin": "amazon_chrome", "headline": null, "subline": null, "cta": "Teilen", "directionCues": null},
+      "tiles": [],
+      "dom": {"widgetClass": "EditorialRow", "visibleHeadings": [], "ctaLabels": ["Teilen"], "imageUrls": [], "videoCount": 0}
+    }
+  ],
+  "voiceMarkers": {
+    "voiceRegister": "direkt",
+    "sentencePattern": "komma_erklaerung",
+    "vocabularyField": "kulinarisch",
+    "claimType": "benefit_funktional",
+    "rhetoricalDevice": "kontrast"
+  },
+  "voiceExamples": [
+    "Kloster Kitchen Bio Saftkur Alternative, 6 Wochen Ingwer Shot Kur, 6 Sorten, 42x 30 ml mit echten Ingwerstuecken",
+    "EINZIGARTIG ERFRISCHENDER GESCHMACK",
+    "Scharfer Ingwer trifft auf fruchtigen Zitronensaft und suesse Agave"
+  ],
+  "pageAnalysis": {
+    "tonalityVisual": "Erdige Lifestyle-Bilder mit Ingwer-Wurzel als visueller Anker, dazu rote und gelbe Shot-Flaschen als Farbcode. Routine-Erzaehlung mit Frühstücks- und Yoga-Setting.",
+    "ctaStrategies": "Inline-PDP-Modul (Modul 6) mit echtem In-den-Einkaufswagen-Button als Hauptkonversion. 2 ASIN-Tiles in Modul 5 als zusaetzlicher Showcase. Hero-Bilder mit Sekundaer-ASIN-Linkpunkten.",
+    "contentDepth": "Eine Hauptprodukt-Achse (Shot Kur 6 Wochen, 6 Sorten), zwei ASIN-Varianten plus eine inline-PDP-Konversionseinheit. Total 2 unique ASINs, aber starke Fokussierung auf eine.",
+    "useForArchetype": "Eignet sich als Vorlage fuer Single-Hero-Produkt-Hubs mit starker Inline-PDP-Konversion und Lifestyle-Routine-Validation.",
+    "moduleClusters": [
+      "Cluster 1 Markenrahmen: Modul 1 Header.",
+      "Cluster 2 Atmospherischer Auftakt: Modul 2 Video-Hero plus Modul 3 Bridge.",
+      "Cluster 3 Lifestyle Story: Modul 4 Tile-Pair Fruehstueck plus Yoga.",
+      "Cluster 4 Produkt-Showcase: Modul 5 Tile-Pair Boxen plus Modul 6 Inline PDP.",
+      "Cluster 5 Trust-Loop: Modul 7 Awards.",
+      "Cluster 6 Plattform-Chrome: Modul 8 Footer."
+    ]
+  },
+  "pageArchitecture": "Die Shot Kur Page fuehrt in sechs Bloecken: Markenrahmen, Video-Hero plus Bridge, Lifestyle-Routine in zwei Anwendungen (Fruehstueck und Yoga), Produkt-Tile-Pair plus inline-PDP-Modul mit In-den-Einkaufswagen-Button, Trust-Loop, Footer. Bedarfsfall ist die taegliche Shot-Routine fuer Gesundheits-Orientierte, die einen 6-Wochen-Test mit verschiedenen Geschmacksrichtungen suchen.",
+  "openQuestions": [
+    "Modul 3 wurde nicht in Screenshots erfasst, Klassifikation als Bridge-Banner ist Annahme aufgrund Phase-1-Position.",
+    "Modul 6 Carousel-Slides (6 Pagination-Dots sichtbar) wurden nur in der ersten Slide gesehen. Weitere Slides koennten Variante-Bilder oder Inhaltsstoff-Detail-Bilder zeigen."
+  ]
+}

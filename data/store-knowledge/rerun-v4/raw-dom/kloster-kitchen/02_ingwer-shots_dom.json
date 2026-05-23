@@ -1,0 +1,182 @@
+{
+  "_meta": {
+    "store": "kloster-kitchen",
+    "pageSlug": "02_ingwer-shots",
+    "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2",
+    "url": "https://www.amazon.de/stores/page/EF234CA2-C1C8-4B07-B2CC-1553E231D3F2",
+    "extractor": "manual_verified_v3.1",
+    "scrollHeight": 6440,
+    "viewport": {"w": 1181, "h": 946},
+    "domRowsTotal": 12,
+    "contentModulesCount": 10
+  },
+
+  "hero": {
+    "section": "hero",
+    "domRowIdx": 0,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c62dc5c8-f812-4754-8a90-674b1f1c66a8._CR0%2C10%2C1280%2C256_SX1500_.jpg",
+    "imageSize": {"w": 1181, "h": 236},
+    "imageAltText": "Text reads \"KLOSTER KITCHEN BETTER THAN GOOD\". Green leaf background. Person holding glass with yellow liquid, viewed from side profile."
+  },
+
+  "navigation": {
+    "section": "nav",
+    "domRowIdx": 0,
+    "pages": [
+      {"label": "Startseite",                  "pageId": "34D4A812-9A68-4602-A6A0-30565D399620"},
+      {"label": "Ingwer Shots",                "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2"},
+      {"label": "Mikronaehrstoffe",            "pageId": "E337104E-63D3-41B2-8560-D92F482B2790"},
+      {"label": "Saftkuren",                   "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606"},
+      {"label": "Smoothies",                   "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E"},
+      {"label": "Shot Kur",                    "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043"},
+      {"label": "Probiersets / Geschenkidee",  "pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A"},
+      {"label": "Zubehoer",                    "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A"},
+      {"label": "Spar-Abo",                    "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E"},
+      {"label": "Ueber Uns",                   "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF"}
+    ]
+  },
+
+  "modules": [
+    {
+      "userModuleId": 1,
+      "domRowIdx": 1,
+      "top": 443, "height": 168,
+      "layoutType": "video_banner",
+      "tileCount": 1,
+      "video": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/f2812a20-aba2-44f2-b8d5-7ea06cd42bb6.mp4",
+        "size": {"w": 1151, "h": 150}
+      },
+      "note": "Autoplay-Video-Banner als Auftakt der Kategorieseite. Inhalt nur per Vision aus Video-Frames zu erfassen."
+    },
+    {
+      "userModuleId": 2,
+      "domRowIdx": 2,
+      "top": 610, "height": 312,
+      "layoutType": "full_width_asin_link_text_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bfad00af-cfa8-489e-8255-b6978679b3ac._CR204%2C81%2C1512%2C390_SX1500_.jpg",
+        "size": {"w": 1151, "h": 297}
+      },
+      "linkedAsin": "B09R4Y8VDW",
+      "ariaBildtext": "Text reads \"INGWER SHOTS Unsere große 360ml Flasche mit 12 Shots für fast zwei W",
+      "note": "Full-Width Text-Image. Verlinkt zur 360ml Flasche. Amazon liefert den Bildtext teilweise im aria-label des Anchors."
+    },
+    {
+      "userModuleId": 3,
+      "domRowIdx": 3,
+      "top": 922, "height": 583,
+      "layoutType": "full_width_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2edc52f2-73c1-4c4c-8e8e-3df143d6be42._CR267%2C3%2C1389%2C694_.jpg",
+        "size": {"w": 1151, "h": 568}
+      },
+      "cta": "Produkte ansehen",
+      "note": "Full-Width Creative mit CTA-Text. CTA hat keinen direkten href im DOM, Ziel via Vision zu ermitteln."
+    },
+    {
+      "userModuleId": 4,
+      "domRowIdx": 4,
+      "top": 1505, "height": 583,
+      "layoutType": "full_width_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/05eb84b3-e319-49b8-a539-a4ebd59f1d6a._CR286%2C25%2C1299%2C650_.jpg",
+        "size": {"w": 1151, "h": 568}
+      },
+      "cta": "Produkte ansehen"
+    },
+    {
+      "userModuleId": 5,
+      "domRowIdx": 5,
+      "top": 2088, "height": 583,
+      "layoutType": "asin_square_single",
+      "tileCount": 1,
+      "tiles": [
+        {
+          "asin": "B09R4Y8VDW",
+          "size": {"w": 568, "h": 568},
+          "ariaBildtext": "Person drinking from small yellow glass bottle. Blurred background shows shelves",
+          "productImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/5d5176e8-b9af-40c9-9f54-08790dffaa1f._CR125%2C0%2C500%2C500_SX750_SY750_.jpg"
+        }
+      ]
+    },
+    {
+      "userModuleId": 6,
+      "domRowIdx": 6,
+      "top": 2671, "height": 289,
+      "layoutType": "full_width_asin_link_text_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/9bb77c44-ffe5-4014-a55c-38a1d61508aa._CR204%2C105%2C1512%2C360_SX1500_.jpg",
+        "size": {"w": 1151, "h": 274}
+      },
+      "linkedAsin": "B0B9SNL9PZ",
+      "ariaBildtext": "Text reads \"BOXEN Alle unsere Ingwer Shot Sorten gibts auch im praktischen Preis"
+    },
+    {
+      "userModuleId": 7,
+      "domRowIdx": 7,
+      "top": 2961, "height": 583,
+      "layoutType": "asin_grid_4tiles",
+      "tileCount": 4,
+      "tiles": [
+        {"asin": "B09R4Y8VDW", "productTitleAria": "Kloster Kitchen Bio Ingwer Shot Classic ",   "productImageSrc": "https://m.media-amazon.com/images/I/71SpozZU2bL._AC_CR0%2C0%2C0%2C0_SX750_.jpg"},
+        {"asin": "B0B9SNL9PZ", "productTitleAria": "Kloster Kitchen Bio Ingwer Shot 3er Mix ",    "productImageSrc": "https://m.media-amazon.com/images/I/71BVP-HGS9L._AC_CR0%2C0%2C0%2C0_SX750_.jpg"},
+        {"asin": "B09R817S3L", "productTitleAria": "Kloster Kitchen Bio Ingwer Shot Granatap",    "productImageSrc": "https://m.media-amazon.com/images/I/71NkVX+OLHL._AC_CR0%2C0%2C0%2C0_SX375_.jpg"},
+        {"asin": "B09R82G5WT", "productTitleAria": "Kloster Kitchen Bio Ingwer Shot Kurkuma ",    "productImageSrc": "https://m.media-amazon.com/images/I/71jN819SxYL._AC_CR0%2C0%2C0%2C0_SX375_.jpg"}
+      ],
+      "note": "Mix-Grid mit Sichtbarem Preis: '28,90 Euro INGWER SHOT MIX 3x360ml Ingwer Shot Classic, Kurkuma & ...'"
+    },
+    {
+      "userModuleId": 8,
+      "domRowIdx": 8,
+      "top": 3544, "height": 583,
+      "layoutType": "asin_grid_4tiles",
+      "tileCount": 4,
+      "tiles": [
+        {"asin": "B07V1HQQ2V", "productImageSrc": "https://m.media-amazon.com/images/I/71PAwNv36iL._AC_CR0%2C0%2C0%2C0_SX750_.jpg"},
+        {"asin": "B0859KWFM6", "productImageSrc": "https://m.media-amazon.com/images/I/71R+3VwZFHL._AC_CR0%2C0%2C0%2C0_SX750_.jpg"},
+        {"asin": "B08NYQQHGF", "productImageSrc": "https://m.media-amazon.com/images/I/71hlDsvQSiL._AC_CR0%2C0%2C0%2C0_SX750_.jpg"},
+        {"asin": "B0B21Q9WBC", "productImageSrc": "https://m.media-amazon.com/images/I/7177bSGHGzL._AC_CR0%2C0%2C0%2C0_SX750_.jpg"}
+      ],
+      "note": "Classic-Grid: 'CLASSIC INGWER Classic 28 x 30 ml mit echten Ingwerstueckchen I Bio Ingwer Shot vegan in der To Go Gl...'"
+    },
+    {
+      "userModuleId": 9,
+      "domRowIdx": 9,
+      "top": 4127, "height": 591,
+      "layoutType": "full_width_asin_link_creative_png",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2da2125e-cf4f-49ea-a765-a331bbed3dae._CR0%2C0%2C1920%2C960_SX1500_.png",
+        "size": {"w": 1151, "h": 576}
+      },
+      "linkedAsin": "B09R4Y8VDW",
+      "note": "Grosses Creative-PNG, verlinkt zur 360ml-Hauptflasche."
+    },
+    {
+      "userModuleId": 10,
+      "domRowIdx": 10,
+      "top": 4718, "height": 262,
+      "layoutType": "full_width_awards_badges",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2eb471fe-f331-4cbc-89cd-8896df9c0d33._CR0%2C0%2C1280%2C275_SX1500_.jpg",
+        "size": {"w": 1151, "h": 247}
+      },
+      "headline": "AUSGEZEICHNETE INNOVATIONEN",
+      "headlineSource": "aria-label (Amazon liefert diesen Text via aria-label, nicht per Vision notwendig)",
+      "linkedPage": {"pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF", "label": "Ueber Uns"},
+      "note": "Identisches Creative wie Startseite Modul 5. Verlinkt zu 'Ueber Uns'. Headline 'AUSGEZEICHNETE INNOVATIONEN' kommt aus aria-label, 4 Auszeichnungs-Badges sind Teil des Bildes (Vision-Job)."
+    }
+  ],
+
+  "excluded": [
+    {"domRowIdx": 11, "top": 4979, "height": 200, "reason": "Share-Footer, irrelevant fuer Brand-Analyse."}
+  ],
+
+  "uniqueAsinsOnPage": ["B09R4Y8VDW", "B0B9SNL9PZ", "B09R817S3L", "B09R82G5WT", "B07V1HQQ2V", "B0859KWFM6", "B08NYQQHGF", "B0B21Q9WBC"]
+}

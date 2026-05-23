@@ -1,0 +1,10 @@
+{
+  "store": "nucompany",
+  "storeUrl": "https://www.amazon.de/stores/thenucompany/page/A096FF51-79D5-440D-8789-6255E9DFE87D",
+  "discoveredAt": "2026-05-13",
+  "pages": [
+    { "slug": "01_startseite",     "name": "Startseite",    "level": 0, "pageId": "A096FF51-79D5-440D-8789-6255E9DFE87D", "url": "https://www.amazon.de/stores/thenucompany/page/A096FF51-79D5-440D-8789-6255E9DFE87D" },
+    { "slug": "02_schokoriegel",   "name": "Schokoriegel",  "level": 1, "pageId": "5B32FE23-1CC5-409A-873C-85CF22210E68", "url": "https://www.amazon.de/stores/page/5B32FE23-1CC5-409A-873C-85CF22210E68" },
+    { "slug": "03_schokosnacks",   "name": "Schokosnacks",  "level": 1, "pageId": "654596DD-6DFD-4395-97A1-320EA951D651", "url": "https://www.amazon.de/stores/page/654596DD-6DFD-4395-97A1-320EA951D651" }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "store": "esn",
+    "pageSlug": "02_bestseller",
+    "pageId": "137F3F89-CAFA-407C-A947-6985172B0E8F",
+    "pageUrl": "https://www.amazon.de/stores/page/137F3F89-CAFA-407C-A947-6985172B0E8F",
+    "extractedAt": "2026-05-23",
+    "extractor": "v4_phase1_chrome_mcp_live",
+    "scrollHeight": 5164,
+    "viewport": { "w": 1599, "h": 842 },
+    "domRowsTotal": 6,
+    "note": "Bestseller-Page: Section-Header Empfohlene Angebote plus ProductGrid 12 ASINs plus Image-Banner zu Produktselektor plus Trust-Banner zu Alle-Produkte plus Footer."
+  },
+  "modules": [
+    { "domRowIdx": 0, "position": 1, "top": 99, "height": 403, "widgetType": "Header", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": ["Folgen", "Zurück"], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/acf527f7-c905-4e51-ad44-ec32c24f89cc._CR0%2C0%2C1920%2C384_SX1500_.jpg"], "asins": [], "pageLinks": [], "note": "Amazon Nav Header mit ESN Marken-Hero." },
+    { "domRowIdx": 1, "position": 2, "top": 403, "height": 125, "widgetType": "ProductGrid", "imgCount": 0, "videoCount": 0, "productCount": 0, "headings": ["Empfohlene Angebote"], "ctas": [], "imageUrls": [], "asins": [], "pageLinks": [], "note": "Section-Header Empfohlene Angebote als ProductGrid-Intro." },
+    { "domRowIdx": 2, "position": 3, "top": 528, "height": 2004, "widgetType": "ProductGrid", "imgCount": 12, "videoCount": 0, "productCount": 12, "headings": [], "ctas": [], "imageUrls": ["https://m.media-amazon.com/images/I/71YWIHMAE9L._AC_UL320_.jpg", "https://m.media-amazon.com/images/I/71ptV6flOVL._AC_UL320_.jpg", "https://m.media-amazon.com/images/I/61rwcZl7qrL._AC_UL320_.jpg"], "asins": ["B0057DVWYI", "B0FMRSD467", "B0057ED9AM", "B074J8D4QZ", "B09N9K5TXG", "B0DWXLWDFL", "B0F32TYHXY", "B0DWXS9ZQB", "B0GDQY4JGP", "B0GDQFDYV9", "B01MYEY0LH", "B0176O2F0K"], "pageLinks": [], "note": "ProductGrid mit 12 Bestseller-ASINs (Whey, Creatine, Isoclear, Designer Bar, Riegel)." },
+    { "domRowIdx": 3, "position": 4, "top": 2531, "height": 750, "widgetType": "EditorialRow", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c0cacc85-510c-474a-8e3d-244467c95b46._CR0%2C0%2C1500%2C750_SX1500_.png"], "asins": [], "pageLinks": ["2AFC0A42-A702-462D-B255-B5203C7449F8"], "note": "Image-Banner 1500x750 PNG verlinkt nach PRODUKTSELEKTOR (Beratungstool, wiederkehrendes Modul)." },
+    { "domRowIdx": 4, "position": 5, "top": 3281, "height": 322, "widgetType": "EditorialRow", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bb6ee5ba-f109-4c8a-a8d3-9eebe477d015._CR0%2C0%2C2681%2C560_SX1500_.jpg"], "asins": [], "pageLinks": ["9FED5CCC-6284-44BD-AD83-AAEEBF48E23F"], "note": "Schmales Image-Banner 2681x560 verlinkt nach ALLE PRODUKTE." },
+    { "domRowIdx": 5, "position": 6, "top": 3603, "height": 200, "widgetType": "EditorialRow", "imgCount": 0, "videoCount": 0, "productCount": 0, "headings": [], "ctas": ["Teilen"], "imageUrls": [], "asins": [], "pageLinks": [], "note": "Amazon Share Footer." }
+  ]
+}

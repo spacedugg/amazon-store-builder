@@ -1,0 +1,879 @@
+{
+  "schemaVersion": "v4-2026-05",
+  "store": "kloster-kitchen",
+  "pageUrl": "https://www.amazon.de/stores/page/EF234CA2-C1C8-4B07-B2CC-1553E231D3F2",
+  "pageName": "Ingwer Shots",
+  "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2",
+  "pageSlug": "02_ingwer-shots",
+  "pageLevel": 1,
+  "pageType": "hub_category",
+  "scrollHeight": 6440,
+  "viewport": { "w": 1181, "h": 946 },
+  "extractedAt": "2026-05-10",
+  "extractor": "v4_vision_pass_chrome_mcp",
+  "phase1Source": "data/store-knowledge/rerun-v4/raw-dom/kloster-kitchen/02_ingwer-shots_dom.json",
+  "contentStats": {
+    "domModules": 12,
+    "logicalModules": 12,
+    "brandModules": 10,
+    "totalImages": 18,
+    "totalVideos": 1,
+    "uniqueAsinsOnPage": 8
+  },
+  "heroBanner": {
+    "description": "Identischer Header-Banner wie Startseite. Lifestyle-Aufnahme mit Frau im Profil und Glas mit gelblicher Fluessigkeit, dunkelgruene Ingwerblaetter, Wortmarke und Tagline weiss eingebrannt.",
+    "textOnImage": {
+      "visibleText": "KLOSTER KITCHEN BETTER THAN GOOD",
+      "textType": "tagline",
+      "origin": "baked_in",
+      "headline": "BETTER THAN GOOD",
+      "subline": "KLOSTER KITCHEN",
+      "cta": null,
+      "directionCues": null
+    },
+    "estimatedDimensions": "3000x600",
+    "imageCategory": "lifestyle",
+    "elementProportions": {
+      "lifestyle_photo": 70,
+      "logo": 8,
+      "text": 18,
+      "icons": 4,
+      "graphic_elements": 0,
+      "solid_background": 0,
+      "decorative_elements": 0,
+      "photographic_background": 0
+    }
+  },
+  "modules": [
+    {
+      "position": 1,
+      "moduleId": "ingwer-shots_mod_01",
+      "moduleName": "Amazon Nav Header",
+      "layoutType": "amazon_nav_header",
+      "layoutShape": "chrome_thin",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": "Standard Amazon Store Navigation, identisch ueber alle 10 Pages.",
+      "structuralPattern": "Schmale Leiste mit Brand-Logo, Folgen-Button, Page-Tabs und Suche.",
+      "moduleFunction": "Navigationschicht. Gleicher Aufbau wie auf der Startseite.",
+      "relationToPrevious": "none",
+      "relationToNext": "hands_off_to_navigation",
+      "visualBridge": "hard_break_intentional",
+      "copyBridge": "fresh_topic",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "Folgen STARTSEITE ALLE ANGEBOTE INGWER SHOTS MIKRONAEHRSTOFFE SAFTKUREN SMOOTHIES MEHR",
+        "textType": "section_label",
+        "origin": "amazon_chrome",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "StoreNav",
+        "visibleHeadings": [],
+        "ctaLabels": ["Folgen"],
+        "imageUrls": [],
+        "videoCount": 0
+      },
+      "toolLayoutId": null,
+      "toolLayoutName": null,
+      "toolLayoutType": "amazon_native",
+      "toolLayoutRole": "amazon_native"
+    },
+    {
+      "position": 2,
+      "moduleId": "ingwer-shots_mod_02",
+      "moduleName": "Hero Banner Original mit Ingwerstuckchen",
+      "layoutType": "hero_banner_tall",
+      "layoutShape": "full_width_tall",
+      "tileCount": 1,
+      "designIntent": "emotional_hook",
+      "designIntentDetail": "Vision-Followup 2026-05-12: Modul 2 ist KEIN Video sondern ein 752px hoher Hero-Banner mit dramatischem Produkt-Closeup der gruenen Kloster-Kitchen Ingwer-Shot-Classic-Flasche und drei eingebrannten Markenclaims. Das Video-Element im DOM ist ein Hidden-Trigger ohne sichtbares Rendering.",
+      "structuralPattern": "Full-Width-Hintergrund mit dunkelgrauem Bokeh-Setting. Rechts dominiert eine grosse gruene Glasflasche mit gelbem Verschluss und Kloster-Kitchen-Emblem plus Ingwer-Shot-Etikett. Links eingebrannt in Weiss drei Textebenen: ORIGINAL MIT DEN INGWERSTUECKCHEN als Headline, Traditionsrezeptur, neu gedacht als Subline 1, Inspiration fuer deinen gesunden Lebensstil als Subline 2.",
+      "moduleFunction": "Page-Hero etabliert das Kategoriethema Ingwer-Shots mit Produkt-Closeup plus eingebrannten Markenclaims. Verbindet Tradition (Traditionsrezeptur) und Modern Lifestyle (gesunder Lebensstil) ueber das Hero-Visual.",
+      "relationToPrevious": "opens_section_thematically",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "hard_break_intentional",
+      "copyBridge": "continues_idea",
+      "heroArchetype": "product_in_setting_with_claim",
+      "textOnImage": {
+        "visibleText": "ORIGINAL MIT DEN INGWERSTUECKCHEN Traditionsrezeptur, neu gedacht. Inspiration fuer deinen gesunden Lebensstil",
+        "textType": "headline",
+        "origin": "baked_in",
+        "headline": "ORIGINAL MIT DEN INGWERSTUECKCHEN",
+        "subline": "Traditionsrezeptur, neu gedacht. Inspiration fuer deinen gesunden Lebensstil",
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "creative_lifestyle_hybrid",
+          "toolTileType": "image_text",
+          "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Hero Banner Ingwer Shot Classic Closeup",
+            "productOrCategoryRef": "B09R4Y8VDW",
+            "intent": "story",
+            "rolePosition": "Page Hero"
+          },
+          "visualContent": "Dramatischer Produkt-Closeup: grosse gruene Glasflasche mit gelbem Schraubverschluss dominiert die rechte Bildhaelfte. Kondensationstropfen auf der Flasche, Aufdruck im Glas KLOSTER KITCHEN INGWER mit Kloster-Symbol, kleines gelbes Etikett mit der Nummer 12. Linke Bildhaelfte dunkelgrauer Bokeh-Hintergrund mit eingebranntem weissen Text in drei Ebenen: grosse Versalien-Headline ORIGINAL MIT DEN INGWERSTUECKCHEN, darunter zwei Sublines in kleinerer Schrift.",
+          "elementProportions": { "product_photo": 55, "text": 25, "photographic_background": 20 },
+          "textOnImage": { "visibleText": "ORIGINAL MIT DEN INGWERSTUECKCHEN Traditionsrezeptur, neu gedacht. Inspiration fuer deinen gesunden Lebensstil", "textType": "headline", "origin": "baked_in", "headline": "ORIGINAL MIT DEN INGWERSTUECKCHEN", "subline": "Traditionsrezeptur, neu gedacht. Inspiration fuer deinen gesunden Lebensstil", "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 1
+      },
+      "toolLayoutId": "1",
+      "toolLayoutName": "Full Width",
+      "toolLayoutType": "fullwidth",
+      "toolLayoutRole": "hero"
+    },
+    {
+      "position": 3,
+      "moduleId": "ingwer-shots_mod_03",
+      "moduleName": "INGWER SHOTS Page Headline",
+      "layoutType": "editorial_section_intro",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "section_intro",
+      "designIntentDetail": "Typografische Page-Headline auf weissem Grund. Macht das Kategoriethema explizit, ohne Produkt zu zeigen.",
+      "structuralPattern": "Vollflaechig weisser Hintergrund. Mittig grosse schwarze Headline INGWER SHOTS in Versalien Sans-Serif. Darunter ein zentrierter Erklaerungstext in Mixed Case Sans-Serif.",
+      "moduleFunction": "Pagetitel und Erklaerungsclaim, der die Differenzierung 360ml gross gegen 30ml klein gleich am Anfang einfuehrt. Bereitet die folgenden Hero-Banner vor, die genau diesen Gegensatz visualisieren.",
+      "relationToPrevious": "opens_section_thematically",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "hard_break_intentional",
+      "copyBridge": "continues_idea",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "INGWER SHOTS Unsere grosse 360ml Flasche mit 12 Shots fuer fast zwei Wochen. Oder die kleine 30ml Flasche fuer den Frischekick to go.",
+        "textType": "headline",
+        "origin": "baked_in",
+        "headline": "INGWER SHOTS",
+        "subline": "Unsere grosse 360ml Flasche mit 12 Shots fuer fast zwei Wochen. Oder die kleine 30ml Flasche fuer den Frischekick to go.",
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "toolTileType": "image_text",
+          "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B09R4Y8VDW", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Page Title Ingwer Shots Kategorie Manifest",
+            "productOrCategoryRef": "B09R4Y8VDW",
+            "intent": "story",
+            "rolePosition": "Page Header"
+          },
+          "visualContent": "Weisser Hintergrund. Zentriert eine grosse schwarze Headline in fetten Versalien Sans-Serif INGWER SHOTS. Darunter ein dreizeiliger zentrierter Subtext in Mixed Case Sans-Serif, schwarz, deutlich kleiner als die Headline.",
+          "elementProportions": { "text": 35, "solid_background": 65 },
+          "textOnImage": {
+            "visibleText": "INGWER SHOTS Unsere grosse 360ml Flasche mit 12 Shots fuer fast zwei Wochen. Oder die kleine 30ml Flasche fuer den Frischekick to go.",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "INGWER SHOTS",
+            "subline": "Unsere grosse 360ml Flasche mit 12 Shots fuer fast zwei Wochen. Oder die kleine 30ml Flasche fuer den Frischekick to go.",
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "B09R4Y8VDW"
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": ["INGWER SHOTS"],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bfad00af-cfa8-489e-8255-b6978679b3ac._CR204%2C81%2C1512%2C390_SX1500_.jpg"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "1",
+      "toolLayoutName": "Full Width",
+      "toolLayoutType": "fullwidth",
+      "toolLayoutRole": "section_intro"
+    },
+    {
+      "position": 4,
+      "moduleId": "ingwer-shots_mod_04",
+      "moduleName": "3-Sorten Lineup Classic Kurkuma Granatapfel",
+      "layoutType": "editorial_banner_large",
+      "layoutShape": "full_width_tall",
+      "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Drei 360ml-Flaschen plus jeweils 30ml-Tochterflasche im Lineup, weisser Hintergrund. Visualisiert das Page-Versprechen aus Modul 3 mit echten Produktfotos.",
+      "structuralPattern": "Weisser Vollflaechen-Hintergrund. Drei Flaschen-Pairs nebeneinander mittig, jeweils eine grosse 360ml-Flasche und davor eine kleine 30ml-Flasche. Pair eins gruen Classic, Pair zwei gelb Kurkuma, Pair drei rosa Granatapfel. Unter dem Lineup ein dunkler abgerundeter Pill-Button mit weisser Schrift Produkte ansehen.",
+      "moduleFunction": "Beweist den 360ml-vs-30ml-Claim aus Modul 3 mit Produktfoto. Stellt gleich die drei Bestseller-Sorten vor und navigiert per CTA zur Produktauswahl.",
+      "relationToPrevious": "proves_above_claim",
+      "relationToNext": "repeats_pattern_to_next",
+      "visualBridge": "shared_typography_treatment",
+      "copyBridge": "answers_above_question",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "Produkte ansehen",
+        "textType": "cta",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": "Produkte ansehen",
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product",
+          "toolTileType": "image_text",
+          "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "category_listing", "ctaLabel": "Produkte ansehen" },
+          "tileContentTopic": {
+            "primarySubject": "3-Sorten Lineup Classic Kurkuma Granatapfel",
+            "productOrCategoryRef": "B09R4Y8VDW",
+            "intent": "showcase",
+            "rolePosition": "Sortimentsdemo Hauptsorten"
+          },
+          "visualContent": "Weisser Hintergrund. Drei 360ml-Flaschen mittig nebeneinander, klar fotografiert mit dezentem Bodenschatten. Links eine gruene Glasflasche mit gelbem Schraubverschluss und Etikett INGWER SHOT CLASSIC, B 12. Mittig eine transparente Flasche mit gelber Fluessigkeit, oranger Verschluss, Etikett INGWER SHOT KURKUMA B 12. Rechts eine rosafarbene Flasche mit purpurnem Verschluss, Etikett INGWER SHOT GRANATAPFEL B 12. Vor jeder grossen Flasche steht eine kleine 30ml-Flasche der gleichen Sorte. Unter dem Lineup, zentriert, ein abgerundeter dunkelgrau-schwarzer Pill-Button mit weisser Aufschrift Produkte ansehen.",
+          "elementProportions": { "product_photo": 45, "solid_background": 45, "cta_button": 5, "text": 5 },
+          "textOnImage": {
+            "visibleText": "Produkte ansehen",
+            "textType": "cta",
+            "origin": "baked_in",
+            "headline": null,
+            "subline": null,
+            "cta": "Produkte ansehen",
+            "directionCues": null
+          },
+          "ctaText": "Produkte ansehen",
+          "linksTo": "category_listing"
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": ["Produkte ansehen"],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2edc52f2-73c1-4c4c-8e8e-3df143d6be42._CR267%2C3%2C1389%2C694_.jpg"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "1",
+      "toolLayoutName": "Full Width",
+      "toolLayoutType": "fullwidth",
+      "toolLayoutRole": "product_showcase"
+    },
+    {
+      "position": 5,
+      "moduleId": "ingwer-shots_mod_05",
+      "moduleName": "3-Sorten Lineup Ananas Acai Frucht",
+      "layoutType": "editorial_banner_large",
+      "layoutShape": "full_width_tall",
+      "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Drei weitere Sorten im gleichen Lineup-Schema. Wiederholt den Aufbau aus Modul 4 mit anderen Geschmaecken und Farben.",
+      "structuralPattern": "Identische Komposition wie Modul 4. Drei 360ml-Flaschen plus 30ml-Tochterflaschen, weisser Hintergrund, Pill-CTA Produkte ansehen unten zentriert.",
+      "moduleFunction": "Erweitert die im Vor-Modul gezeigte Sortimentsbreite. Zeigt dass das Sortiment ueber Classic-Kurkuma-Granatapfel hinausgeht und die Sorten Ananas, Vitamin Acai und Frucht-Shot mit umfasst. Repeating-Pattern mit Modul 4 erzeugt visuelle Beweisfuehrung der Sortimentstiefe.",
+      "relationToPrevious": "repeats_pattern",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "shared_pattern",
+      "copyBridge": "repeats_keyword",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "Produkte ansehen",
+        "textType": "cta",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": "Produkte ansehen",
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product",
+          "toolTileType": "image_text",
+          "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "category_listing", "ctaLabel": "Produkte ansehen" },
+          "tileContentTopic": {
+            "primarySubject": "3-Sorten Lineup Ananas Acai Frucht",
+            "productOrCategoryRef": null,
+            "intent": "showcase",
+            "rolePosition": "Sortimentsdemo Sekundaersorten"
+          },
+          "visualContent": "Weisser Hintergrund. Drei 360ml-Flaschen mittig nebeneinander. Links eine helle gelbe Flasche mit gruenem Verschluss, Etikett INGWER SHOT ANANAS. Mitte eine purpur-violette Flasche mit silbernem Verschluss, Etikett VITAMIN SHOT ACAI mit blauer Schrift. Rechts eine orange Flasche mit silbernem Verschluss, Etikett FRUCHT SHOT mit blau-bunter Typografie. Vor jeder grossen Flasche eine kleine 30ml-Flasche der gleichen Sorte. Identischer Pill-Button Produkte ansehen unten.",
+          "elementProportions": { "product_photo": 45, "solid_background": 45, "cta_button": 5, "text": 5 },
+          "textOnImage": {
+            "visibleText": "Produkte ansehen",
+            "textType": "cta",
+            "origin": "baked_in",
+            "headline": null,
+            "subline": null,
+            "cta": "Produkte ansehen",
+            "directionCues": null
+          },
+          "ctaText": "Produkte ansehen",
+          "linksTo": "category_listing"
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": ["Produkte ansehen"],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/05eb84b3-e319-49b8-a539-a4ebd59f1d6a._CR286%2C25%2C1299%2C650_.jpg"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "1",
+      "toolLayoutName": "Full Width",
+      "toolLayoutType": "fullwidth",
+      "toolLayoutRole": "product_showcase"
+    },
+    {
+      "position": 6,
+      "moduleId": "ingwer-shots_mod_06",
+      "moduleName": "Lifestyle Pair Trinken plus Bowl",
+      "layoutType": "editorial_tile_pair",
+      "layoutShape": "split_two_columns",
+      "tileCount": 2,
+      "designIntent": "emotional_hook",
+      "designIntentDetail": "Zwei nebeneinander stehende Lifestyle-Aufnahmen, links eine Frau die aus dem 30ml-Glas trinkt, rechts ein Hand-Stillife mit Joghurt-Bowl und Beeren plus 30ml-Glas. Anwendungssituationen.",
+      "structuralPattern": "2-Spalten-Lifestyle-Foto-Pair, beide Tiles gleicher Hoehe, kein Text im Bild.",
+      "moduleFunction": "Etabliert zwei Anwendungs-Szenarien fuer das Produkt: einmal das schnelle Trinken to-go und einmal die Integration ins Fruehstueck. Ueberbrueckt zwischen Sortimentsschau und Box-Cluster, indem es Gebrauchssituationen einfuehrt.",
+      "relationToPrevious": "zooms_into_above_subject",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "shared_setting",
+      "copyBridge": "fresh_topic",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "lifestyle",
+          "toolTileType": "image",
+          "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B09R4Y8VDW", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Lifestyle Anwendung Trinkmoment to go",
+            "productOrCategoryRef": "B09R4Y8VDW",
+            "intent": "story",
+            "rolePosition": "Anwendungsmoment 1"
+          },
+          "visualContent": "Lifestyle-Foto, junge Frau mit dunklem Haar, beigefarbenem Strickpullover, Profilansicht von rechts, fuehrt eine kleine 30ml-Glasflasche mit gelblicher Fluessigkeit zum Mund. Im Hintergrund leicht unscharf ein helles Holzregal. Warmes Tageslicht, ruhige Stimmung.",
+          "elementProportions": { "lifestyle_photo": 95, "product_photo": 5 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "B09R4Y8VDW"
+        },
+        {
+          "position": 2,
+          "imageCategory": "lifestyle",
+          "toolTileType": "image",
+          "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Lifestyle Anwendung Fruehstueck",
+            "productOrCategoryRef": null,
+            "intent": "story",
+            "rolePosition": "Anwendungsmoment 2"
+          },
+          "visualContent": "Lifestyle-Foto, helle Tischsituation. Eine Hand haelt eine kleine helle Schale mit gestapelten Erdbeerhaelften, Brombeeren und Granola. Im Vordergrund unscharf eine 30ml-Glasflasche mit gelblicher Fluessigkeit. Heller Naturholz-Untergrund, helle Bettlaken im Hintergrund.",
+          "elementProportions": { "lifestyle_photo": 88, "product_photo": 7, "decorative_elements": 5 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/5d5176e8-b9af-40c9-9f54-08790dffaa1f._CR125%2C0%2C500%2C500_SX750_SY750_.jpg"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "std-2equal",
+      "toolLayoutName": "2 Equal",
+      "toolLayoutType": "standard",
+      "toolLayoutRole": "editorial_pair",
+      "openQuestionsLocal": [
+        "Phase-1-DOM listet Modul 5 als asin_square_single mit 1 Tile (B09R4Y8VDW). Vision zeigt klar 2 nebeneinander liegende Lifestyle-Tiles. Im v4-Aggregat als 2-Tile editorial_tile_pair gefuehrt. DOM-Eintrag in der manual_verified_v3.1 ist hier konservativer als die echte Renderschau."
+      ]
+    },
+    {
+      "position": 7,
+      "moduleId": "ingwer-shots_mod_07",
+      "moduleName": "BOXEN Section Headline plus Mix-Box-Promo",
+      "layoutType": "editorial_section_intro",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "section_intro",
+      "designIntentDetail": "Headline BOXEN als Cluster-Eroeffnung plus typografischer Mix-Box-Claim. Bereitet die folgenden 4-Tile-Grids vor.",
+      "structuralPattern": "Weisser Hintergrund mit grosser zentrierter Headline BOXEN in fetten schwarzen Versalien Sans-Serif. Darunter Erklaerung zur Box-Logik in Mixed Case.",
+      "moduleFunction": "Eroeffnet die Boxen-Sektion mit einer klaren Themenmarke. Differenziert das Sortiment in Mehrfach-Kaufeinheiten (Boxen) versus Einzelflasche und vertikalisiert den Conversion-Pfad in Richtung Multipack.",
+      "relationToPrevious": "summarizes_above",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "shared_typography_treatment",
+      "copyBridge": "fresh_topic",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "BOXEN Alle unsere Ingwer Shot Sorten gibts auch im praktischen Preis",
+        "textType": "headline",
+        "origin": "baked_in",
+        "headline": "BOXEN",
+        "subline": "Alle unsere Ingwer Shot Sorten gibts auch im praktischen Preisvorteilspack.",
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "toolTileType": "image_text",
+          "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0B9SNL9PZ", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Boxen Cluster Headline",
+            "productOrCategoryRef": "B0B9SNL9PZ",
+            "intent": "story",
+            "rolePosition": "Section Intro Boxen"
+          },
+          "visualContent": "Weisser Vollflaechen-Hintergrund. Mittig grosse schwarze Sans-Serif Versalien BOXEN, darunter ein zentrierter dreizeiliger Subtext in Mixed Case. Saubere typografische Komposition.",
+          "elementProportions": { "text": 30, "solid_background": 70 },
+          "textOnImage": {
+            "visibleText": "BOXEN Alle unsere Ingwer Shot Sorten gibts auch im praktischen Preisvorteilspack.",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "BOXEN",
+            "subline": "Alle unsere Ingwer Shot Sorten gibts auch im praktischen Preisvorteilspack.",
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "B0B9SNL9PZ"
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": ["BOXEN"],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/9bb77c44-ffe5-4014-a55c-38a1d61508aa._CR204%2C105%2C1512%2C360_SX1500_.jpg"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "1",
+      "toolLayoutName": "Full Width",
+      "toolLayoutType": "fullwidth",
+      "toolLayoutRole": "section_intro"
+    },
+    {
+      "position": 8,
+      "moduleId": "ingwer-shots_mod_08",
+      "moduleName": "Mix Box Grid 4 ASINs",
+      "layoutType": "product_grid_featured",
+      "layoutShape": "split_two_columns",
+      "tileCount": 4,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Vier ASIN-Tiles fuer die Mix-Box-Variante. Links das grosse 3er-Mix-Pack als Lead, rechts die einzelnen Sortenboxen.",
+      "structuralPattern": "Links eine grosse Square-Tile mit der 3er-Mix-Box-Visualisierung (Klassik-Flasche plus Versandkarton mit 3x-Aufdruck). Rechts drei flache ASIN-Tiles, jeweils 360ml-Flasche im Lineup mit Sorten-Etikett.",
+      "moduleFunction": "Liefert den Box-Conversion-Pfad fuer Mix-Sortiment. Differenziert zwischen Mix-Pack (alle drei Sorten) und Sorten-Box (nur eine Sorte). Vermittelt Sortimentsoption ueber Bild plus Amazon-Overlay-Preis.",
+      "relationToPrevious": "lists_subordinate_options",
+      "relationToNext": "repeats_pattern_to_next",
+      "visualBridge": "shared_subject_class",
+      "copyBridge": "fresh_topic",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "best_sellers",
+          "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B09R4Y8VDW", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Ingwer Shot Classic 360ml grosse Flasche", "productOrCategoryRef": "B09R4Y8VDW", "intent": "convert", "rolePosition": "Hauptsorten Lead" },
+          "visualContent": "Amazon ASIN Tile, kein Brand Design. Grosse gruene Glasflasche mit gelbem Verschluss, daneben ein Versandkarton mit aufgedrucktem 3x-Hinweis. Amazon Overlay liefert Titel, Preis und ASIN-Link.",
+          "elementProportions": { "product_photo": 90, "solid_background": 10 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "B09R4Y8VDW"
+        },
+        {
+          "position": 2,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "WIDE",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0B9SNL9PZ", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "3er Mix Box Classic Kurkuma Granatapfel", "productOrCategoryRef": "B0B9SNL9PZ", "intent": "convert", "rolePosition": "3er Mix Box Lead" },
+          "visualContent": "Amazon ASIN Tile. 3er-Lineup der drei 360ml-Flaschen Granatapfel, Classic, Kurkuma stehend nebeneinander. Amazon Overlay liefert Titel und 28,15 Euro Preis und Hinweis 3x360ml.",
+          "elementProportions": { "product_photo": 88, "solid_background": 12 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "B0B9SNL9PZ"
+        },
+        {
+          "position": 3,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "WIDE",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B09R817S3L", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Granatapfel Box", "productOrCategoryRef": "B09R817S3L", "intent": "convert", "rolePosition": "Granatapfel ASIN Sorten Box" },
+          "visualContent": "Amazon ASIN Tile, Granatapfel Box-Variante. Amazon liefert Titel und Preis im Overlay.",
+          "elementProportions": { "product_photo": 88, "solid_background": 12 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "B09R817S3L"
+        },
+        {
+          "position": 4,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "WIDE",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B09R82G5WT", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Kurkuma Box", "productOrCategoryRef": "B09R82G5WT", "intent": "convert", "rolePosition": "Kurkuma ASIN Sorten Box" },
+          "visualContent": "Amazon ASIN Tile, Kurkuma Box-Variante. Amazon liefert Titel und Preis im Overlay.",
+          "elementProportions": { "product_photo": 88, "solid_background": 12 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "B09R82G5WT"
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/I/71SpozZU2bL._AC_CR0%2C0%2C0%2C0_SX750_.jpg",
+          "https://m.media-amazon.com/images/I/71BVP-HGS9L._AC_CR0%2C0%2C0%2C0_SX750_.jpg",
+          "https://m.media-amazon.com/images/I/71NkVX+OLHL._AC_CR0%2C0%2C0%2C0_SX375_.jpg",
+          "https://m.media-amazon.com/images/I/71jN819SxYL._AC_CR0%2C0%2C0%2C0_SX375_.jpg"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "lg-2stack",
+      "toolLayoutName": "Large + 2 Stacked",
+      "toolLayoutType": "standard",
+      "toolLayoutRole": "product_grid"
+    },
+    {
+      "position": 9,
+      "moduleId": "ingwer-shots_mod_09",
+      "moduleName": "Classic 28er Big Pack Grid 4 ASINs",
+      "layoutType": "product_grid_featured",
+      "layoutShape": "grid_four_columns",
+      "tileCount": 4,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Vier ASIN-Tiles fuer die 28x30ml-Boxen. Repetierende Variante des Mix-Box-Grids fuer das 30ml-Sortiment.",
+      "structuralPattern": "Vier Tiles in einer Reihe oder 2x2-Anordnung. Jedes Tile zeigt eine 30ml-Flasche samt 28er-Versandkarton im Stillife. Amazon Overlay liefert Titel und Preis.",
+      "moduleFunction": "Verbreitert den Box-Conversion-Pfad um die 30ml-Variante. Adressiert Heavy-Use-Konsumenten mit Vorratsbox.",
+      "relationToPrevious": "repeats_pattern",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "shared_pattern",
+      "copyBridge": "repeats_keyword",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B07V1HQQ2V", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Classic 28x30ml Box", "productOrCategoryRef": "B07V1HQQ2V", "intent": "convert", "rolePosition": "Classic 28er" },
+          "visualContent": "Amazon ASIN Tile. 30ml-Flasche Classic Ingwer Shot mit gruener Fluessigkeit und gelbem Verschluss, dahinter Versandkarton mit aufgedruckten 28x. Amazon Overlay liefert Titel Classic 28x30ml und Preis 60,90 Euro.",
+          "elementProportions": { "product_photo": 88, "solid_background": 12 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "B07V1HQQ2V"
+        },
+        {
+          "position": 2,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0859KWFM6", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Kurkuma 28x30ml Box", "productOrCategoryRef": "B0859KWFM6", "intent": "convert", "rolePosition": "Kurkuma 28er" },
+          "visualContent": "Amazon ASIN Tile. 30ml-Flasche Kurkuma mit gelber Fluessigkeit und orangefarbenem Verschluss, dahinter 28x-Karton. Amazon Overlay liefert Titel und Preis 60,90 Euro.",
+          "elementProportions": { "product_photo": 88, "solid_background": 12 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "B0859KWFM6"
+        },
+        {
+          "position": 3,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B08NYQQHGF", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Granatapfel 28x30ml Box", "productOrCategoryRef": "B08NYQQHGF", "intent": "convert", "rolePosition": "Granatapfel 28er" },
+          "visualContent": "Amazon ASIN Tile, Granatapfel-Variante 28x30ml. Amazon Overlay liefert Titel und Preis.",
+          "elementProportions": { "product_photo": 88, "solid_background": 12 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "B08NYQQHGF"
+        },
+        {
+          "position": 4,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0B21Q9WBC", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Mix 28x30ml Box", "productOrCategoryRef": "B0B21Q9WBC", "intent": "convert", "rolePosition": "Mix 28er" },
+          "visualContent": "Amazon ASIN Tile, Mix-Variante 28x30ml. Amazon Overlay liefert Titel und Preis.",
+          "elementProportions": { "product_photo": 88, "solid_background": 12 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "B0B21Q9WBC"
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/I/71PAwNv36iL._AC_CR0%2C0%2C0%2C0_SX750_.jpg",
+          "https://m.media-amazon.com/images/I/71R+3VwZFHL._AC_CR0%2C0%2C0%2C0_SX750_.jpg",
+          "https://m.media-amazon.com/images/I/71hlDsvQSiL._AC_CR0%2C0%2C0%2C0_SX750_.jpg",
+          "https://m.media-amazon.com/images/I/7177bSGHGzL._AC_CR0%2C0%2C0%2C0_SX750_.jpg"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "2x2wide",
+      "toolLayoutName": "4 Equal (2x2 Wide)",
+      "toolLayoutType": "standard",
+      "toolLayoutRole": "product_grid"
+    },
+    {
+      "position": 10,
+      "moduleId": "ingwer-shots_mod_10",
+      "moduleName": "Lifestyle Banner Morgen-Routine im Bett",
+      "layoutType": "editorial_banner_large",
+      "layoutShape": "full_width_tall",
+      "tileCount": 1,
+      "designIntent": "emotional_hook",
+      "designIntentDetail": "Vision-Followup 2026-05-12: Modul 10 ist ein 750px hohes Lifestyle-Banner mit Morgen-Routine-Setting (Bett mit Kissen + Rattan-Tablett mit Ingwer-Shot plus Saft-Glaesern plus Cherry-Tomaten plus Holz-Nachttisch mit Wasserkanne). Verlinkt zur 360ml Hauptflasche. Kein eingebrannter Text sichtbar.",
+      "structuralPattern": "Full-Width-Lifestyle-Foto. Vordergrund Rattan-Tablett auf grauem Leinenbettzeug, auf dem Tablett gruene Ingwer-Shot-Classic-Flasche plus zwei kleine Glaeser mit gelbem Saft plus weisser Teller mit Cherry-Tomaten plus zwei kleine Keramik-Schalen. Hintergrund cremefarbene Kissen plus Holz-Nachttisch mit klarer Wasserkanne, gefuelltem Glas und Eukalyptus-Zweig. Warmes Morgentageslicht.",
+      "moduleFunction": "Lifestyle-Anker als emotionale Atempause zwischen den Sortimentsmodulen und dem Awards-Banner. Setzt den Ingwer-Shot in einen kontextuellen Tagesstart-Moment, ohne Verkaufs-CTA.",
+      "relationToPrevious": "summarizes_above",
+      "relationToNext": "prepares_visual_break",
+      "visualBridge": "shared_setting",
+      "copyBridge": "fresh_topic",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "lifestyle",
+          "toolTileType": "image",
+          "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B09R4Y8VDW", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Morgen-Routine Lifestyle Ingwer-Shot im Bett",
+            "productOrCategoryRef": "B09R4Y8VDW",
+            "intent": "story",
+            "rolePosition": "Lifestyle Wendepunkt"
+          },
+          "visualContent": "Lifestyle-Aufnahme: cremefarbenes Bettzeug mit grauer Bettdecke und mehreren weichen Kissen. Mittig auf dem Bett ein rundes Rattan-Tablett mit der gruenen Kloster-Kitchen Ingwer-Shot-Classic-Flasche, zwei kleinen Glaesern mit gelb-orangem Saft, einem weissen Teller mit roten Cherry-Tomaten und einem Bund frischer Trauben plus zwei kleinen Keramik-Schalen in Olive und Weiss. Rechts ein Holz-Nachttisch mit klarer Wasserkanne, gefuelltem Glas und einem Eukalyptus-Zweig. Warmes Morgentageslicht. Kein Text eingebrannt.",
+          "elementProportions": { "lifestyle_photo": 88, "product_photo": 8, "decorative_elements": 4 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "B09R4Y8VDW"
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2da2125e-cf4f-49ea-a765-a331bbed3dae._CR0%2C0%2C1920%2C960_SX1500_.png"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "1",
+      "toolLayoutName": "Full Width",
+      "toolLayoutType": "fullwidth",
+      "toolLayoutRole": "editorial"
+    },
+    {
+      "position": 11,
+      "moduleId": "ingwer-shots_mod_11",
+      "moduleName": "Awards Banner Ausgezeichnete Innovationen",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": "Identisches Awards-Modul wie auf der Startseite. Wiederholt das Trust-Signal als Page-Schluss.",
+      "structuralPattern": "Schmaler Vollbild-Banner. Hintergrund glaenzende dunkelgruene Ingwerblaetter. Headline AUSGEZEICHNETE INNOVATIONEN weiss zentriert. Vier weisse Awards-Badges nebeneinander.",
+      "moduleFunction": "Wiederverwendete Trust-Komponente quer ueber den Store. Schliesst die Ingwer-Shots-Page mit dem gleichen externen Glaubwuerdigkeitssignal wie die Startseite und verlinkt zusaetzlich zur Ueber-Uns-Page.",
+      "relationToPrevious": "summarizes_above",
+      "relationToNext": "closes_chapter",
+      "visualBridge": "shared_pattern",
+      "copyBridge": "repeats_keyword",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "AUSGEZEICHNETE INNOVATIONEN german brand award 25 winner german brand award 25 product brand of the year PRODUKT INNOVATION IN GLAS Geprueffte Qualitaet Kloster Kitchen Bio Ingwer Shot LfV Deutsches Institut fuer Verbraucherschutz",
+        "textType": "headline",
+        "origin": "baked_in",
+        "headline": "AUSGEZEICHNETE INNOVATIONEN",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "benefit",
+          "toolTileType": "image_text",
+          "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Ueber Uns", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Awards und Pruefsiegel der Marke",
+            "productOrCategoryRef": "F031D76B-9B76-426A-93A9-2EBBCB5150CF",
+            "intent": "trust",
+            "rolePosition": "Trust Anchor Page Closing"
+          },
+          "visualContent": "Querformatiger Banner. Bildhintergrund vollflaechig dunkelgruene, frische, glaenzende Ingwerblaetter. Mittig oben weisse Versalien-Headline AUSGEZEICHNETE INNOVATIONEN. Darunter vier weisse Logo-Badges nebeneinander, identisch zur Startseite Modul 6.",
+          "elementProportions": {
+            "lifestyle_photo": 60,
+            "badge": 25,
+            "text": 12,
+            "graphic_elements": 3
+          },
+          "textOnImage": {
+            "visibleText": "AUSGEZEICHNETE INNOVATIONEN german brand award 25 winner german brand award 25 product brand of the year PRODUKT INNOVATION IN GLAS Geprueffte Qualitaet LfV Deutsches Institut fuer Verbraucherschutz",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "AUSGEZEICHNETE INNOVATIONEN",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "Ueber Uns"
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2eb471fe-f331-4cbc-89cd-8896df9c0d33._CR0%2C0%2C1280%2C275_SX1500_.jpg"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "1",
+      "toolLayoutName": "Full Width",
+      "toolLayoutType": "fullwidth",
+      "toolLayoutRole": "editorial"
+    },
+    {
+      "position": 12,
+      "moduleId": "ingwer-shots_mod_12",
+      "moduleName": "Amazon Share Footer",
+      "layoutType": "amazon_share_footer",
+      "layoutShape": "chrome_thin",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": "Amazon Share-Footer.",
+      "structuralPattern": "Schmaler Streifen mit Teilen-Button und Link Zurueck zum Seitenanfang.",
+      "moduleFunction": "Amazon-Mechanik. Wird in der Brand-Generierung ausgefiltert.",
+      "relationToPrevious": "none",
+      "relationToNext": "none",
+      "visualBridge": "hard_break_intentional",
+      "copyBridge": "fresh_topic",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "Teilen Teilen Sie diese Seite mit Ihren Freunden Zurueck zum Seitenanfang",
+        "textType": "section_label",
+        "origin": "amazon_chrome",
+        "headline": null,
+        "subline": null,
+        "cta": "Teilen",
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": { "widgetClass": "ShareFooter", "visibleHeadings": [], "ctaLabels": ["Teilen"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": null,
+      "toolLayoutName": null,
+      "toolLayoutType": "amazon_native",
+      "toolLayoutRole": "amazon_native"
+    }
+  ],
+  "voiceMarkers": {
+    "voiceRegister": "direkt",
+    "sentencePattern": "kurze_aussage",
+    "vocabularyField": "kulinarisch",
+    "claimType": "benefit_funktional",
+    "rhetoricalDevice": "kontrast"
+  },
+  "voiceExamples": [
+    "Unsere grosse 360ml Flasche mit 12 Shots fuer fast zwei Wochen. Oder die kleine 30ml Flasche fuer den Frischekick to go.",
+    "Alle unsere Ingwer Shot Sorten gibts auch im praktischen Preisvorteilspack.",
+    "AUSGEZEICHNETE INNOVATIONEN"
+  ],
+  "pageAnalysis": {
+    "tonalityVisual": "Sehr ruhige typografische Komposition mit weissem Hintergrund und freistellenden Produktfotos. Lifestyle-Aufnahmen sind warm-natuerlich, Tageslicht. Im Awards-Block dominiert das gruene Ingwerblatt-Foto. Auffaellig viele typografisch reine Module ohne Foto.",
+    "ctaStrategies": "Zweistufiger Funnel. Lineup-Module haben einen passiven Pill-Button Produkte ansehen, der zum Sortimentsbereich fuehrt. Unter den Lineups die ASIN-Box-Grids als direkter Conversion-Pfad mit Amazon-Overlay-Klick.",
+    "contentDepth": "Tiefe Produkt-Page mit zehn Brand-Modulen, klar strukturiert in Auftakt, Sortimentsschau, Lifestyle, Boxen-Cluster, Editorial-Pause, Trust-Loop. Sortimentsbreite wird ueber zwei sich wiederholende 3-Sorten-Lineup-Module bewiesen, was ein deutliches Wiederholungsmuster ist.",
+    "useForArchetype": "Eignet sich als Vorlage fuer Hub-Category-Pages mit zwei Sortenfamilien (Hauptsorten plus Sekundaersorten) und differenzierten Mehrfach-Boxen-Optionen.",
+    "moduleClusters": [
+      "Auftakt Cluster: Video-Banner plus typografische Page-Headline",
+      "Sortimentsschau Cluster: zwei 3-Sorten-Lineups mit identischer Komposition",
+      "Lifestyle Cluster: Trink-und-Bowl Pair",
+      "Boxen Cluster: BOXEN Headline plus Mix-Box-ASIN-Grid plus Classic-28er-ASIN-Grid",
+      "Trust Cluster: Creative-Pause plus Awards-Banner"
+    ]
+  },
+  "pageArchitecture": "Ingwer-Shots-Page baut einen klassischen Hub-Category-Funnel auf. Video-Auftakt setzt Bewegung. Typografische Page-Headline macht das Versprechen explizit. Zwei Lineup-Module beweisen die Sortimentsbreite mit identischer Komposition. Lifestyle-Pair zeigt Anwendungsmomente. Box-Sektion bildet einen eigenen Conversion-Funnel mit Headline plus Mix-Pack-Grid plus Classic-28er-Grid. Editorial-Pause leitet zum Awards-Banner als Page-Schluss und Trust-Anker.",
+  "openQuestions": [
+    "Modul 5 wurde im Phase-1-DOM als asin_square_single mit 1 Tile gefuehrt, Vision zeigt aber 2 Lifestyle-Tiles nebeneinander. Im v4-Aggregat als 2-Tile editorial_tile_pair gefuehrt, Diskrepanz markiert.",
+    "Modul 10 (Creative-PNG zur 360ml-Hauptflasche) konnte im Probe-Run wegen Lazy-Loading nicht visuell erfasst werden. Inhalt mit screenshot_required gemarkt, im naechsten Vision-Lauf nachholen.",
+    "Modul 2 (Video Banner) liefert nur eine Video-URL, keine Frame-Inhalte. textOnImage und visualContent sind screenshot_required, bei Frame-Sampling nachholbar.",
+    "heroArchetype kinetic_lifestyle_loop ist neu eingefuehrt fuer Modul 2 und muss in _hero_archetype_vocabulary.md ergaenzt werden mit Definitionssatz und dem Hinweis dass das ein autoplaying Lifestyle-Video-Banner ist als Page-Auftakt."
+  ]
+}

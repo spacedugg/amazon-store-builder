@@ -1,0 +1,12 @@
+{
+  "store": "twentythree",
+  "storeUrl": "https://www.amazon.de/stores/twentythree/page/0E8D9A31-200C-4EC5-BC94-CBBC023B28A4",
+  "discoveredAt": "2026-05-13",
+  "pages": [
+    { "slug": "01_startseite",          "name": "Startseite",          "level": 0, "pageId": "0E8D9A31-200C-4EC5-BC94-CBBC023B28A4", "url": "https://www.amazon.de/stores/twentythree/page/0E8D9A31-200C-4EC5-BC94-CBBC023B28A4" },
+    { "slug": "02_alle-produkte",       "name": "Alle Produkte",       "level": 1, "pageId": "F0FD66FC-88D8-4CB9-ACFA-3669EF15A5E5", "url": "https://www.amazon.de/stores/page/F0FD66FC-88D8-4CB9-ACFA-3669EF15A5E5" },
+    { "slug": "03_bettwaesche",         "name": "Bettwaesche",         "level": 1, "pageId": "15C8BFA1-4A3D-4C7E-82A3-2A626199A6B7", "url": "https://www.amazon.de/stores/page/15C8BFA1-4A3D-4C7E-82A3-2A626199A6B7" },
+    { "slug": "04_bettlaken",           "name": "Bettlaken",           "level": 1, "pageId": "009D4AA9-B7AD-4F33-BBCC-9531AEF53709", "url": "https://www.amazon.de/stores/page/009D4AA9-B7AD-4F33-BBCC-9531AEF53709" },
+    { "slug": "05_bettdecke-kissen",    "name": "Bettdecke und Kissen", "level": 1, "pageId": "F43A372B-1D99-4754-8B6F-879D8E039AF8", "url": "https://www.amazon.de/stores/page/F43A372B-1D99-4754-8B6F-879D8E039AF8" }
+  ]
+}
