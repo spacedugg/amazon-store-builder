@@ -1,0 +1,39 @@
+{
+  "_meta": {
+    "store": "holy-energy",
+    "pageSlug": "10_probier-boxen",
+    "pageName": "Probier-Boxen",
+    "pageId": "229C0965-6260-45EF-8A4F-1723BD514037",
+    "url": "https://www.amazon.de/stores/page/229C0965-6260-45EF-8A4F-1723BD514037",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_v4",
+    "scrollHeight": 6196,
+    "viewport": { "w": 1582, "h": 928 },
+    "domRowsTotal": 6,
+    "contentModulesCount": 5
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height":  400, "widgetClass": "Header",       "tileCount":  0, "imgCount":  3, "videoCount":  0, "productCount":  0, "note": "Header plus globaler Brand-Hero (DIE SOFTDRINK REVOLUTION). Kein eigener Page-Hero." },
+    { "domRowIdx": 1, "top":  507, "height":  577, "widgetClass": "EditorialRow", "tileCount":  4, "imgCount": 28, "videoCount": 10, "productCount":  0, "note": "ASIN-Spotlight Energy 10er Probier-Box Lion's Lemonade." },
+    { "domRowIdx": 2, "top": 1084, "height":  577, "widgetClass": "EditorialRow", "tileCount":  4, "imgCount": 28, "videoCount": 10, "productCount":  0, "note": "ASIN-Spotlight Hydration 10er Probier-Box Cranberry." },
+    { "domRowIdx": 3, "top": 1661, "height":  577, "widgetClass": "EditorialRow", "tileCount":  4, "imgCount": 28, "videoCount": 10, "productCount":  0, "note": "ASIN-Spotlight Iced Tea 10er Probier-Box Acai x Hibiscus." },
+    { "domRowIdx": 4, "top": 2238, "height": 2496, "widgetClass": "ProductGrid",  "tileCount":  0, "imgCount": 17, "videoCount":  0, "productCount": 17, "note": "ProductGrid Full-Catalog Probier-Boxen mit 17 ASINs (Mix aus Energy, Hydration, Iced Tea Probier-Boxen)." },
+    { "domRowIdx": 5, "top": 4734, "height":  200, "widgetClass": "EditorialRow", "tileCount":  4, "imgCount":  0, "videoCount":  0, "productCount":  0, "note": "Share-Footer." }
+  ],
+  "editorialBanners": [],
+  "uniqueAsinsOnPage": [
+    "B0DCKBJ7PQ","B0DCKFQT5Y","B0DCK9NTLB","B0DCKGHSGS","B0DCK9SYR2",
+    "B0DCKDCVBW","B0DCKCJGRQ","B0DCKGCVZZ","B0DCKDDJST","B0DCKDBKM5",
+    "B0DCKBQPSV","B0DCKBT8Z9","B0DCK9R9HZ","B0F37ZQKXG","B0F3NZTY2Y",
+    "B0F3NYN5XK","B0F3NYDZN2"
+  ],
+  "spotlightedProducts": [
+    {"modulePos": 2, "name": "Energy Lion's Lemonade",      "tagline": "10er Probier-Box mit Mango & Kiwi Geschmack"},
+    {"modulePos": 3, "name": "Hydration Cranberry",         "tagline": "10er Probier-Box Elektrolyte Pulver mit Cranberry"},
+    {"modulePos": 4, "name": "Iced Tea Acai x Hibiscus",    "tagline": "10er Probier-Box mit Acai Hibiskus Geschmack"}
+  ],
+  "openQuestionsLocal": [
+    "Probier-Boxen-Page hat KEINEN page-spezifischen Page-Hero. Steigt direkt mit 3 ASIN-Spotlights ein (je 1 pro Hauptkategorie Energy, Hydration, Iced Tea) und schliesst mit Full-Catalog-Grid.",
+    "Schluss-Banner fehlt komplett. Anders als andere Kategorie-Pages."
+  ]
+}

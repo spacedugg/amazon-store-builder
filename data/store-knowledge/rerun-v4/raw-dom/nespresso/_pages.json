@@ -1,0 +1,19 @@
+{
+  "brandName": "Nespresso",
+  "storeUrl": "https://www.amazon.de/stores/page/2429E3F3-8BFA-466A-9185-35FB47867B06",
+  "scannedAt": "2026-05-23",
+  "scope": "top-10-pages-from-19-total",
+  "pages": [
+    { "position":  1, "pageName": "Startseite",         "pageId": "2429E3F3-8BFA-466A-9185-35FB47867B06", "url": "https://www.amazon.de/stores/page/2429E3F3-8BFA-466A-9185-35FB47867B06", "level": 0 },
+    { "position":  2, "pageName": "Deals",              "pageId": "3C855FAA-0378-428B-8D15-701AA8800EE3", "url": "https://www.amazon.de/stores/page/3C855FAA-0378-428B-8D15-701AA8800EE3", "level": 1 },
+    { "position":  3, "pageName": "Original Maschinen", "pageId": "FCA8433A-D425-45C9-A777-FDFB8BF4A978", "url": "https://www.amazon.de/stores/page/FCA8433A-D425-45C9-A777-FDFB8BF4A978", "level": 1 },
+    { "position":  4, "pageName": "Atelier",            "pageId": "94253EAE-5C50-41D7-82CB-FE0439ACCB32", "url": "https://www.amazon.de/stores/page/94253EAE-5C50-41D7-82CB-FE0439ACCB32", "level": 2 },
+    { "position":  5, "pageName": "Citiz",              "pageId": "6D635ABA-55B7-4E3D-9A6F-1E1783414242", "url": "https://www.amazon.de/stores/page/6D635ABA-55B7-4E3D-9A6F-1E1783414242", "level": 2 },
+    { "position":  6, "pageName": "Essenza Mini",       "pageId": "C6658D50-ED49-4786-BD4A-9F697562B320", "url": "https://www.amazon.de/stores/page/C6658D50-ED49-4786-BD4A-9F697562B320", "level": 2 },
+    { "position":  7, "pageName": "Inissia",            "pageId": "C90F9D89-ECF7-4A54-B6C5-3D2AB6D2B51F", "url": "https://www.amazon.de/stores/page/C90F9D89-ECF7-4A54-B6C5-3D2AB6D2B51F", "level": 2 },
+    { "position":  8, "pageName": "Pixie",              "pageId": "73BA5A55-F2AD-4EFD-8BD1-22A38C1F80DA", "url": "https://www.amazon.de/stores/page/73BA5A55-F2AD-4EFD-8BD1-22A38C1F80DA", "level": 2 },
+    { "position":  9, "pageName": "Gran Lattissima",    "pageId": "FD504600-955A-4341-AD26-CBB826145D63", "url": "https://www.amazon.de/stores/page/FD504600-955A-4341-AD26-CBB826145D63", "level": 2 },
+    { "position": 10, "pageName": "Lattissima one",     "pageId": "E0DF17AD-CF05-4AF0-8D67-A31E3D754D92", "url": "https://www.amazon.de/stores/page/E0DF17AD-CF05-4AF0-8D67-A31E3D754D92", "level": 2 }
+  ],
+  "outOfScope": "9 weitere Pages (Creatista Pro, Creatista Plus, Citiz & Milk, Original Kaffee, Ispirazione Italiana, World Explorations, Master Origin, Barista Creations, The Original Collection) sind nicht Teil dieser Top-10-Iteration."
+}

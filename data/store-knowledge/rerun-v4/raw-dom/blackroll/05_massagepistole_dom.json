@@ -1,0 +1,24 @@
+{
+  "_meta": {
+    "store": "blackroll", "pageSlug": "05_massagepistole", "pageName": "Massagepistole",
+    "pageId": "9A8C7424-898F-4E76-9442-CBCDB511CECB",
+    "url": "https://www.amazon.de/stores/page/9A8C7424-898F-4E76-9442-CBCDB511CECB",
+    "extractedAt": "2026-05-12", "extractor": "chrome_mcp_javascript_tool_compact",
+    "scrollHeight": 7739, "domRowsTotal": 13, "contentModulesCount": 11, "totalVideos": 20
+  },
+  "modules": [
+    { "domRowIdx":  0, "top":   99, "height":  408, "tileCount":  0, "imgCount":  3, "videoCount":  0, "productCount":  0, "note": "Nav header" },
+    { "domRowIdx":  1, "top":  507, "height":  520, "tileCount":  8, "imgCount":  1, "videoCount":  0, "productCount":  0, "note": "Page Hero Massagepistole" },
+    { "domRowIdx":  2, "top": 1026, "height":  577, "tileCount":  4, "imgCount": 29, "videoCount": 18, "productCount":  0, "note": "AUFFAELLIG: 18 Videos in einem Modul plus 29 Bilder. Vermutlich Multi-Video-Demo-Carousel oder Shoppable-Interactive-Multi-Video" },
+    { "domRowIdx":  3, "top": 1603, "height":  743, "tileCount": 16, "imgCount":  2, "videoCount":  0, "productCount":  0 },
+    { "domRowIdx":  4, "top": 2346, "height":  743, "tileCount": 15, "imgCount":  1, "videoCount":  1, "productCount":  0, "note": "Video-Modul" },
+    { "domRowIdx":  5, "top": 3088, "height":  743, "tileCount": 16, "imgCount":  2, "videoCount":  0, "productCount":  0 },
+    { "domRowIdx":  6, "top": 3831, "height":  743, "tileCount":  6, "imgCount":  0, "videoCount":  1, "productCount":  0, "note": "Video-Modul" },
+    { "domRowIdx":  7, "top": 4573, "height":  258, "tileCount":  8, "imgCount":  1, "videoCount":  0, "productCount":  0, "note": "Section Intro" },
+    { "domRowIdx":  8, "top": 4831, "height":  500, "tileCount":  8, "imgCount":  1, "videoCount":  0, "productCount":  0 },
+    { "domRowIdx":  9, "top": 5331, "height":  258, "tileCount":  8, "imgCount":  1, "videoCount":  0, "productCount":  0, "note": "Section Intro" },
+    { "domRowIdx": 10, "top": 5589, "height":  317, "tileCount":  0, "imgCount": 10, "videoCount":  0, "productCount":  0, "note": "Press-Logo-Band, wiederkehrend" },
+    { "domRowIdx": 11, "top": 5906, "height":  371, "tileCount": 32, "imgCount":  4, "videoCount":  0, "productCount":  0, "note": "Kategorien-Verteiler-Grid" },
+    { "domRowIdx": 12, "top": 6277, "height":  200, "tileCount":  4, "imgCount":  0, "videoCount":  0, "productCount":  0, "note": "amazon_share_footer" }
+  ]
+}

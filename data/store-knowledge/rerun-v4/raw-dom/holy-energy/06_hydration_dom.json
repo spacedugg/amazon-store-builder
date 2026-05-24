@@ -1,0 +1,39 @@
+{
+  "_meta": {
+    "store": "holy-energy",
+    "pageSlug": "06_hydration",
+    "pageName": "Hydration",
+    "pageId": "34F0F6AC-314F-4167-9EDA-54E94AC937C7",
+    "url": "https://www.amazon.de/stores/page/34F0F6AC-314F-4167-9EDA-54E94AC937C7",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_v4",
+    "scrollHeight": 5894,
+    "viewport": { "w": 1582, "h": 928 },
+    "domRowsTotal": 7,
+    "contentModulesCount": 6
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height":  400, "widgetClass": "Header",       "tileCount":  0, "imgCount":  3, "videoCount":  0, "productCount":  0, "note": "Header plus Brand-Hero 1500x300." },
+    { "domRowIdx": 1, "top":  507, "height": 1242, "widgetClass": "EditorialRow", "tileCount":  8, "imgCount":  1, "videoCount":  0, "productCount":  0, "note": "Page-Hero XL 1470x1227. Hydration-Manifest Banner." },
+    { "domRowIdx": 2, "top": 1749, "height":  577, "widgetClass": "EditorialRow", "tileCount":  4, "imgCount": 28, "videoCount": 10, "productCount":  0, "note": "Spotlight-Tile Hydration Strawberry Kiwi (Heading nachgewiesen). ASIN-Showcase mit Video-Carousel." },
+    { "domRowIdx": 3, "top": 2326, "height":  577, "widgetClass": "EditorialRow", "tileCount":  4, "imgCount": 28, "videoCount": 10, "productCount":  0, "note": "Spotlight-Tile Hydration 10er Probier-Box Cranberry (Heading nachgewiesen)." },
+    { "domRowIdx": 4, "top": 2903, "height":  305, "widgetClass": "EditorialRow", "tileCount":  8, "imgCount":  1, "videoCount":  0, "productCount":  0, "note": "Editorial-Banner 1470x290 als Section-Intro vor ProductGrid." },
+    { "domRowIdx": 5, "top": 3209, "height": 1224, "widgetClass": "ProductGrid",  "tileCount":  0, "imgCount": 10, "videoCount":  0, "productCount": 10, "note": "ProductGrid mit 10 Hydration-ASINs." },
+    { "domRowIdx": 6, "top": 4433, "height":  200, "widgetClass": "EditorialRow", "tileCount":  4, "imgCount":  0, "videoCount":  0, "productCount":  0, "note": "Share-Footer." }
+  ],
+  "editorialBanners": [
+    { "modulePos": 2, "top":  514, "w": 1470, "h": 1227, "asset": "120d2006-fc6d-4582-91f5-31388ddebeb6", "note": "Page-Hero XL" },
+    { "modulePos": 5, "top": 2911, "w": 1470, "h":  290, "asset": "1dad3396-696d-4015-bdd7-87c2583a80e4", "note": "Section-Intro vor Grid" }
+  ],
+  "uniqueAsinsOnPage": [
+    "B0CZ4NC39W","B0CZ53JZDT","B0D9QJWBYM","B0CZ5BKXPQ","B0CZ5BKXPS",
+    "B0CZ56R4R7","B0F2T8K5Z5","B0F33VRJ9G","B0F33P8SXM","B0F32SLQJC"
+  ],
+  "spotlightedFlavors": [
+    {"modulePos": 3, "name": "Strawberry Kiwi", "tagline": "Elektrolyte Pulver, vegan mit 100% natuerlichen Fruchtaromen"},
+    {"modulePos": 4, "name": "Cranberry",       "tagline": "10er Probier-Box, Elektrolyte Pulver mit Cranberry Geschmack"}
+  ],
+  "openQuestionsLocal": [
+    "Standard-Kategorie-Pattern wie Energy/Iced Tea: Page-Hero plus 2 Spotlight-Tiles plus Section-Intro plus ProductGrid. Hier zusaetzlich ein Section-Intro-Banner zwischen Spotlights und ProductGrid."
+  ]
+}

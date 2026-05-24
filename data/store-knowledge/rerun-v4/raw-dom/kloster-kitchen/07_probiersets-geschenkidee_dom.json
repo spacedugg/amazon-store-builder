@@ -1,0 +1,24 @@
+{
+  "_meta": {
+    "store": "kloster-kitchen", "pageSlug": "07_probiersets-geschenkidee", "pageName": "Probiersets / Geschenkidee",
+    "pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A",
+    "url": "https://www.amazon.de/stores/page/33D8D5E6-A887-4D06-87F4-212CC0D6E24A",
+    "extractedAt": "2026-05-13", "extractor": "chrome_mcp_javascript_tool_v2_with_urls",
+    "scrollHeight": 6558, "viewport": {"w": 1826, "h": 888},
+    "domRowsTotal": 11, "contentModulesCount": 9,
+    "uniqueAsinsOnPage": ["B09X5NB3RY", "B0DJM3N37D", "B0DN6NC4VM", "B0CP4C7XYM", "B0CP49VNYT"]
+  },
+  "modules": [
+    {"domRowIdx": 0, "top": 99, "height": 395, "widgetClass": "Header", "tileCount": 0, "imgCount": 3, "videoCount": 0, "productCount": 0, "note": "Nav header", "links": [], "asins": []},
+    {"domRowIdx": 1, "top": 502, "height": 844, "widgetClass": "EditorialRow", "tileCount": 7, "imgCount": 0, "videoCount": 1, "productCount": 0, "note": "Video Hero Mutter und Kind Unboxing-Moment", "links": [], "asins": []},
+    {"domRowIdx": 2, "top": 1345, "height": 469, "widgetClass": "EditorialRow", "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Image-Modul Brand Bridge", "links": [{"linkType": "asin", "target": "B09X5NB3RY"}], "asins": ["B09X5NB3RY"]},
+    {"domRowIdx": 3, "top": 1814, "height": 743, "widgetClass": "EditorialRow", "tileCount": 28, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Section Intro Bis zu 5 Sorten in 3 Set Groessen vorgepackt", "links": [], "asins": []},
+    {"domRowIdx": 4, "top": 2557, "height": 371, "widgetClass": "EditorialRow", "tileCount": 16, "imgCount": 2, "videoCount": 0, "productCount": 0, "note": "Tile-Pair Probier-Boxen 1", "links": [{"linkType": "asin", "target": "B09X5NB3RY"}], "asins": ["B09X5NB3RY"]},
+    {"domRowIdx": 5, "top": 2928, "height": 371, "widgetClass": "EditorialRow", "tileCount": 24, "imgCount": 2, "videoCount": 0, "productCount": 2, "note": "Tile-Pair Probier-Boxen 2 mit 2 ASIN-Karten", "links": [{"linkType": "asin", "target": "B0DJM3N37D"}, {"linkType": "asin", "target": "B0DN6NC4VM"}], "asins": ["B0DJM3N37D", "B0DN6NC4VM"]},
+    {"domRowIdx": 6, "top": 3299, "height": 505, "widgetClass": "EditorialRow", "tileCount": 4, "imgCount": 30, "videoCount": 0, "productCount": 2, "note": "Multi-Image-Carousel ASIN-Detail Variant 1", "links": [{"linkType": "asin", "target": "B09X5NB3RY"}], "asins": ["B09X5NB3RY"]},
+    {"domRowIdx": 7, "top": 3804, "height": 527, "widgetClass": "EditorialRow", "tileCount": 4, "imgCount": 34, "videoCount": 0, "productCount": 2, "note": "Multi-Image-Carousel ASIN-Detail Variant 2", "links": [{"linkType": "asin", "target": "B0CP4C7XYM"}], "asins": ["B0CP4C7XYM"]},
+    {"domRowIdx": 8, "top": 4331, "height": 505, "widgetClass": "EditorialRow", "tileCount": 4, "imgCount": 34, "videoCount": 0, "productCount": 2, "note": "Multi-Image-Carousel ASIN-Detail Variant 3", "links": [{"linkType": "asin", "target": "B0CP49VNYT"}], "asins": ["B0CP49VNYT"]},
+    {"domRowIdx": 9, "top": 4836, "height": 260, "widgetClass": "EditorialRow", "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Awards Banner Ausgezeichnete Innovationen", "links": [{"linkType": "page", "target": "F031D76B-9B76-426A-93A9-2EBBCB5150CF"}], "asins": []},
+    {"domRowIdx": 10, "top": 5095, "height": 201, "widgetClass": "EditorialRow", "tileCount": 4, "imgCount": 0, "videoCount": 0, "productCount": 0, "note": "amazon_share_footer", "links": [], "asins": []}
+  ]
+}

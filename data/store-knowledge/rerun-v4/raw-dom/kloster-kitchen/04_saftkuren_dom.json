@@ -1,0 +1,213 @@
+{
+  "_meta": {
+    "store": "kloster-kitchen",
+    "pageSlug": "04_saftkuren",
+    "pageName": "Saftkuren",
+    "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606",
+    "url": "https://www.amazon.de/stores/page/3745E0C5-D470-4291-A735-27CF83DD1606",
+    "extractedAt": "2026-05-13",
+    "extractor": "chrome_mcp_javascript_tool_v2_with_urls",
+    "extractorNote": "Phase 1 v2 via Chrome MCP. Erweitert um imageUrls (alle img src), links (mit linkType asin|page|url), asins (unique). Vision Pass in Phase 2 baut darauf auf, keine screenshot_required Marker mehr fuer URLs und Links.",
+    "scrollHeight": 9887,
+    "viewport": { "w": 1512, "h": 796 },
+    "domRowsTotal": 12,
+    "contentModulesCount": 10,
+    "uniqueAsinsOnPage": [
+      "B0DFMLSLPH", "B0DFMMBJWC", "B0DFMM4TTX",
+      "B0G81CTV55", "B0G82B62F7", "B0G8GV17SK",
+      "B0GGSYCJHQ", "B0GGSGQTK8", "B0GGRZL2L9",
+      "B0GGRG2M4Z", "B0GGJ22LSP", "B0GGHW2QKX"
+    ]
+  },
+  "navigation": {
+    "pages": [
+      { "label": "Startseite",                "pageId": "34D4A812-9A68-4602-A6A0-30565D399620" },
+      { "label": "Ingwer Shots",              "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2" },
+      { "label": "Mikronaehrstoffe",          "pageId": "E337104E-63D3-41B2-8560-D92F482B2790" },
+      { "label": "Saftkuren",                 "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606" },
+      { "label": "Smoothies",                 "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E" },
+      { "label": "Shot Kur",                  "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043" },
+      { "label": "Probiersets / Geschenkidee","pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A" },
+      { "label": "Zubehoer",                  "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A" },
+      { "label": "Spar-Abo",                  "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E" },
+      { "label": "Ueber Uns",                 "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF" }
+    ]
+  },
+  "modules": [
+    {
+      "domRowIdx": 0,
+      "top": 99, "height": 283,
+      "widgetClass": "Header",
+      "tileCount": 0, "imgCount": 1, "videoCount": 0, "productCount": 0,
+      "note": "Nav header",
+      "imageUrls": [
+        "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c62dc5c8-f812-4754-8a90-674b1f1c66a8._CR0%2C0%2C1500%2C300_SX1500_.jpg"
+      ],
+      "links": [],
+      "asins": []
+    },
+    {
+      "domRowIdx": 1,
+      "top": 382, "height": 162,
+      "widgetClass": "EditorialRow",
+      "tileCount": 7, "imgCount": 0, "videoCount": 1, "productCount": 0,
+      "note": "Video-Modul",
+      "imageUrls": [],
+      "links": [],
+      "asins": []
+    },
+    {
+      "domRowIdx": 2,
+      "top": 544, "height": 192,
+      "widgetClass": "EditorialRow",
+      "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0,
+      "note": "Section Intro",
+      "imageUrls": [
+        "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/ecc613c9-7499-4e79-b6da-31de4f0431e6._CR46%2C155%2C1873%2C351_SX1500_.jpg"
+      ],
+      "links": [
+        { "linkType": "asin", "target": "B0DFMLSLPH" }
+      ],
+      "asins": ["B0DFMLSLPH"]
+    },
+    {
+      "domRowIdx": 3,
+      "top": 736, "height": 493,
+      "widgetClass": "EditorialRow",
+      "tileCount": 28, "imgCount": 1, "videoCount": 0, "productCount": 0,
+      "note": "Image-Modul",
+      "imageUrls": [
+        "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/6645424e-cc4d-411a-b495-bee75e5cb704._CR156%2C0%2C1600%2C800_.jpg"
+      ],
+      "links": [],
+      "asins": []
+    },
+    {
+      "domRowIdx": 4,
+      "top": 1228, "height": 1970,
+      "widgetClass": "EditorialRow",
+      "tileCount": 16, "imgCount": 2, "videoCount": 0, "productCount": 0,
+      "note": "Story-Tile-Pair (2-fach, hoher Container)",
+      "imageUrls": [
+        "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/28c2531f-acad-4a5c-bedb-733a1e44ac18._CR0%2C0%2C750%2C500_SX750_SY750_.jpg",
+        "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c13767f7-7c9d-457d-b205-860b8aa473cd._CR55%2C0%2C500%2C500_SX750_SY750_.jpg"
+      ],
+      "links": [
+        { "linkType": "asin", "target": "B0DFMLSLPH" }
+      ],
+      "asins": ["B0DFMLSLPH"]
+    },
+    {
+      "domRowIdx": 5,
+      "top": 3198, "height": 262,
+      "widgetClass": "EditorialRow",
+      "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0,
+      "note": "Image-Modul (Section Header Style)",
+      "imageUrls": [
+        "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/6e408a64-59bd-4598-98cd-1f00f7227728._CR15%2C111%2C1905%2C493_SX1500_.jpg"
+      ],
+      "links": [
+        { "linkType": "asin", "target": "B0DFMLSLPH" }
+      ],
+      "asins": ["B0DFMLSLPH"]
+    },
+    {
+      "domRowIdx": 6,
+      "top": 3460, "height": 985,
+      "widgetClass": "EditorialRow",
+      "tileCount": 42, "imgCount": 3, "videoCount": 0, "productCount": 3,
+      "note": "Tile-Row 3-fach mit 3 ASIN-Karten (Saftkur Varianten Set 1)",
+      "imageUrls": [
+        "https://m.media-amazon.com/images/I/71fyxKnH4-L._AC_CR0%2C0%2C0%2C0_SX750_.jpg",
+        "https://m.media-amazon.com/images/I/71qBgilyFzL._AC_CR0%2C0%2C0%2C0_SX375_.jpg",
+        "https://m.media-amazon.com/images/I/71-dXVHnP0L._AC_CR0%2C0%2C0%2C0_SX375_.jpg"
+      ],
+      "links": [
+        { "linkType": "asin", "target": "B0DFMMBJWC" },
+        { "linkType": "asin", "target": "B0DFMLSLPH" },
+        { "linkType": "asin", "target": "B0DFMM4TTX" }
+      ],
+      "asins": ["B0DFMMBJWC", "B0DFMLSLPH", "B0DFMM4TTX"]
+    },
+    {
+      "domRowIdx": 7,
+      "top": 4445, "height": 1300,
+      "widgetClass": "EditorialRow",
+      "tileCount": 43, "imgCount": 3, "videoCount": 0, "productCount": 3,
+      "note": "Tile-Row 3-fach mit 3 ASIN-Karten (Saftkur Varianten Set 2)",
+      "imageUrls": [
+        "https://m.media-amazon.com/images/I/71ShHuINk2L._AC_CR0%2C0%2C0%2C0_SX750_.jpg",
+        "https://m.media-amazon.com/images/I/71BhpqooedL._AC_CR0%2C0%2C0%2C0_SX375_.jpg",
+        "https://m.media-amazon.com/images/I/71JYS7LflwL._AC_CR0%2C0%2C0%2C0_SX375_.jpg"
+      ],
+      "links": [
+        { "linkType": "asin", "target": "B0G81CTV55" },
+        { "linkType": "asin", "target": "B0G82B62F7" },
+        { "linkType": "asin", "target": "B0G8GV17SK" }
+      ],
+      "asins": ["B0G81CTV55", "B0G82B62F7", "B0G8GV17SK"]
+    },
+    {
+      "domRowIdx": 8,
+      "top": 5745, "height": 498,
+      "widgetClass": "EditorialRow",
+      "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0,
+      "note": "Image-Modul (Section Header Style)",
+      "imageUrls": [
+        "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/432b1402-a545-4731-a625-ef4123824ff1._CR0%2C0%2C1577%2C789_SX1500_.jpg"
+      ],
+      "links": [
+        { "linkType": "asin", "target": "B0DFMLSLPH" }
+      ],
+      "asins": ["B0DFMLSLPH"]
+    },
+    {
+      "domRowIdx": 9,
+      "top": 6243, "height": 1970,
+      "widgetClass": "EditorialRow",
+      "tileCount": 90, "imgCount": 6, "videoCount": 0, "productCount": 6,
+      "note": "Tile-Row 6-fach mit 6 ASIN-Karten (Spar-Abo oder weitere Saftkur-Varianten)",
+      "imageUrls": [
+        "https://m.media-amazon.com/images/I/61AaY6pLIZL._AC_CR0%2C0%2C0%2C0_SX750_.jpg",
+        "https://m.media-amazon.com/images/I/61cv9TY-sJL._AC_CR0%2C0%2C0%2C0_SX375_.jpg",
+        "https://m.media-amazon.com/images/I/6161XtDs2qL._AC_CR0%2C0%2C0%2C0_SX375_.jpg",
+        "https://m.media-amazon.com/images/I/61PId1K4beL._AC_CR0%2C0%2C0%2C0_SX750_.jpg",
+        "https://m.media-amazon.com/images/I/61msBy8K7EL._AC_CR0%2C0%2C0%2C0_SX375_.jpg",
+        "https://m.media-amazon.com/images/I/618i8yPVupL._AC_CR0%2C0%2C0%2C0_SX375_.jpg"
+      ],
+      "links": [
+        { "linkType": "asin", "target": "B0GGSYCJHQ" },
+        { "linkType": "asin", "target": "B0GGSGQTK8" },
+        { "linkType": "asin", "target": "B0GGRZL2L9" },
+        { "linkType": "asin", "target": "B0GGRG2M4Z" },
+        { "linkType": "asin", "target": "B0GGJ22LSP" },
+        { "linkType": "asin", "target": "B0GGHW2QKX" }
+      ],
+      "asins": ["B0GGSYCJHQ", "B0GGSGQTK8", "B0GGRZL2L9", "B0GGRG2M4Z", "B0GGJ22LSP", "B0GGHW2QKX"]
+    },
+    {
+      "domRowIdx": 10,
+      "top": 8213, "height": 219,
+      "widgetClass": "EditorialRow",
+      "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0,
+      "note": "Awards-Banner Section Intro (verlinkt zur Ueber-Uns-Page)",
+      "imageUrls": [
+        "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2eb471fe-f331-4cbc-89cd-8896df9c0d33._CR0%2C0%2C1280%2C275_SX1500_.jpg"
+      ],
+      "links": [
+        { "linkType": "page", "target": "F031D76B-9B76-426A-93A9-2EBBCB5150CF" }
+      ],
+      "asins": []
+    },
+    {
+      "domRowIdx": 11,
+      "top": 8432, "height": 194,
+      "widgetClass": "EditorialRow",
+      "tileCount": 4, "imgCount": 0, "videoCount": 0, "productCount": 0,
+      "note": "amazon_share_footer",
+      "imageUrls": [],
+      "links": [],
+      "asins": []
+    }
+  ]
+}

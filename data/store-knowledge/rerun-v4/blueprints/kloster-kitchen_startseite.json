@@ -1,0 +1,665 @@
+{
+  "schemaVersion": "v4-2026-05",
+  "store": "kloster-kitchen",
+  "pageUrl": "https://www.amazon.de/stores/page/34D4A812-9A68-4602-A6A0-30565D399620",
+  "pageName": "Startseite",
+  "pageId": "34D4A812-9A68-4602-A6A0-30565D399620",
+  "pageSlug": "01_startseite",
+  "pageLevel": 0,
+  "pageType": "startseite",
+  "scrollHeight": 4802,
+  "viewport": { "w": 1181, "h": 946 },
+  "extractedAt": "2026-05-10",
+  "extractor": "v4_vision_pass_chrome_mcp",
+  "phase1Source": "data/store-knowledge/rerun-v4/raw-dom/kloster-kitchen/01_startseite_dom.json",
+  "contentStats": {
+    "domModules": 7,
+    "logicalModules": 7,
+    "brandModules": 5,
+    "totalImages": 11,
+    "totalVideos": 0,
+    "uniqueAsinsOnPage": 3
+  },
+  "heroBanner": {
+    "description": "Lifestyle Hero ueber der Menueleiste. Frau im Profil von links, beigefarbener Strickpullover, haelt ein Glas mit gelblicher Fluessigkeit (Ingwer Shot). Im Hintergrund grossflaechig grosse, glaenzende, dunkelgruene Ingwerblaetter. Mittig bis rechts in Weiss die Kloster Kitchen Wortmarke samt 8 schwarz-konturierten Drop-Symbol als zentrales Brandzeichen, daneben grosse weisse Tagline.",
+    "textOnImage": {
+      "visibleText": "KLOSTER KITCHEN BETTER THAN GOOD",
+      "textType": "tagline",
+      "origin": "baked_in",
+      "headline": "BETTER THAN GOOD",
+      "subline": "KLOSTER KITCHEN",
+      "cta": null,
+      "directionCues": null
+    },
+    "estimatedDimensions": "3000x600",
+    "imageCategory": "lifestyle",
+    "elementProportions": {
+      "lifestyle_photo": 70,
+      "photographic_background": 0,
+      "logo": 8,
+      "text": 18,
+      "graphic_elements": 0,
+      "solid_background": 0,
+      "icons": 4,
+      "decorative_elements": 0
+    }
+  },
+  "modules": [
+    {
+      "position": 1,
+      "moduleId": "startseite_mod_01",
+      "moduleName": "Amazon Nav Header",
+      "layoutType": "amazon_nav_header",
+      "layoutShape": "chrome_thin",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": "Amazon Store Navigation. Logo, Folgen-Button, Teilen-Icon, 7 Page-Tabs sichtbar plus Mehr-Dropdown, Suchfeld am rechten Rand.",
+      "structuralPattern": "Schmale graue Leiste mit Brand-Logo links, Page-Tabs mittig, Suche rechts.",
+      "moduleFunction": "Navigationschicht zwischen Header-Banner und Brand-Content. Erlaubt Sprung in jede der 10 Unterseiten und in die Suche. Reine Amazon-Mechanik, nicht Marken gestaltet, deshalb fuer Generierungs-Pipeline ausgefiltert.",
+      "relationToPrevious": "none",
+      "relationToNext": "hands_off_to_navigation",
+      "visualBridge": "hard_break_intentional",
+      "copyBridge": "fresh_topic",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "STARTSEITE | ALLE ANGEBOTE | INGWER SHOTS | MIKRONAEHRSTOFFE | SAFTKUREN | SMOOTHIES | MEHR",
+        "textType": "section_label",
+        "origin": "amazon_chrome",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "StoreNav",
+        "visibleHeadings": [],
+        "ctaLabels": ["Folgen"],
+        "imageUrls": [],
+        "videoCount": 0
+      },
+      "toolLayoutId": null,
+      "toolLayoutName": null,
+      "toolLayoutType": "amazon_native",
+      "toolLayoutRole": "amazon_native"
+    },
+    {
+      "position": 2,
+      "moduleId": "startseite_mod_02",
+      "moduleName": "Brand Manifesto Logo Headline",
+      "layoutType": "editorial_banner_solid_color",
+      "layoutShape": "full_width_tall",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": "Brand Manifest, kein Verkauf. Whitespace-Banner mit zentralem Markensymbol und Mission Headline plus kurzem Pay-Off.",
+      "structuralPattern": "Vollflaechig cremig-weisser Hintergrund, mittig schwarz das 8-Drop-Symbol als Markenzeichen, darunter grosszeilige zentrierte Headline in Versalien, darunter Subline in Mixed Case.",
+      "moduleFunction": "Setzt direkt nach dem Hero den inhaltlichen Markenanker: was die Marke verspricht und woran sie sich messen lassen will. Kein Produkt, kein CTA, sondern Mission Statement, das als Tonalitaets-Anker fuer alles Weitere dient.",
+      "relationToPrevious": "opens_section_thematically",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "hard_break_intentional",
+      "copyBridge": "continues_idea",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "FUER DEINEN BEWUSSTEREN UND NATUERLICHEREN LEBENSSTIL Trink, was dir gut tut. Nicht, was nur gut klingt.",
+        "textType": "tagline",
+        "origin": "baked_in",
+        "headline": "FUER DEINEN BEWUSSTEREN UND NATUERLICHEREN LEBENSSTIL",
+        "subline": "Trink, was dir gut tut. Nicht, was nur gut klingt.",
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "toolTileType": "image_text",
+          "toolImageType": "FULL_WIDTH",
+          "link": {
+            "clickable": false,
+            "linkType": "none",
+            "linkTarget": null,
+            "ctaLabel": null
+          },
+          "tileContentTopic": {
+            "primarySubject": "Markenmission Lebensstil-Versprechen",
+            "productOrCategoryRef": null,
+            "intent": "story",
+            "rolePosition": "Brand Manifesto"
+          },
+          "visualContent": "Crememeisser Vollflaechen-Hintergrund. Mittig oben schwarzes Kloster-Kitchen-Symbol aus 8 tropfen-foermigen schwarzen Formen, kreisfoermig angeordnet. Darunter zentriert die zweizeilige Headline in fetten schwarzen Versalien einer Sans-Serif. Unter der Headline mit etwas Abstand der ruhig gesetzte Pay-Off in Mixed Case Sans-Serif. Keine weiteren grafischen Elemente, sehr viel Whitespace.",
+          "elementProportions": {
+            "logo": 14,
+            "text": 20,
+            "solid_background": 66,
+            "product_photo": 0,
+            "lifestyle_photo": 0,
+            "icons": 0,
+            "graphic_elements": 0,
+            "decorative_elements": 0,
+            "cta_button": 0,
+            "badge": 0
+          },
+          "textOnImage": {
+            "visibleText": "FUER DEINEN BEWUSSTEREN UND NATUERLICHEREN LEBENSSTIL Trink, was dir gut tut. Nicht, was nur gut klingt.",
+            "textType": "tagline",
+            "origin": "baked_in",
+            "headline": "FUER DEINEN BEWUSSTEREN UND NATUERLICHEREN LEBENSSTIL",
+            "subline": "Trink, was dir gut tut. Nicht, was nur gut klingt.",
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/b34df377-a26b-4764-8e6f-a35cefbbae70._CR0%2C0%2C1920%2C1200_SX1500_.jpg"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "1",
+      "toolLayoutName": "Full Width",
+      "toolLayoutType": "fullwidth",
+      "toolLayoutRole": "editorial"
+    },
+    {
+      "position": 3,
+      "moduleId": "startseite_mod_03",
+      "moduleName": "NEU Mikronaehrstoff-Konzentrat Promo",
+      "layoutType": "editorial_banner_large",
+      "layoutShape": "full_width_tall",
+      "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Produkt-Promo Banner fuer das Neuheits-Produkt Vital Flow Mikronaehrstoffkonzentrat. Headline plus Speech Bubble Claim plus Person-mit-Produkt Lifestyle Foto.",
+      "structuralPattern": "Linke Bildhaelfte typografisch: ueberdimensioniertes gelbes NEU als Aufmerksamkeitsanker, darunter schwarze Headline MIKRONAEHRSTOFF-KONZENTRAT, darunter Subline und Erklaerungstext. Rechte Bildhaelfte foto-grafisch: gelber Speech-Bubble-Claim ueber einer Frau im beigen Pulli, die das schwarze Vital Flow Glas zum Mund fuehrt, davor Pflanzen- und Frucht-Stillife.",
+      "moduleFunction": "Lenkt direkt nach dem Markenversprechen auf die juengste Produktneuheit, das einzige Produkt im Sortiment, das laut Phase 1 zwischen Sortimentsblock und Markenkern eigene Aufmerksamkeit bekommt. Erklaert den Nutzen taegliche Naehrstoffbasis und verbindet wissenschaftliche Plausibilitaet mit Lifestyle-Bild. Vorbereitung fuer Modul 4 ASIN-Grid, das die Vital-Flow-Varianten kaufbar macht.",
+      "relationToPrevious": "zooms_into_above_subject",
+      "relationToNext": "promises_proof_below",
+      "visualBridge": "hard_break_intentional",
+      "copyBridge": "continues_idea",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "NEU: MIKRONAEHRSTOFF-KONZENTRAT DEINE TAEGLICHE NAEHRSTOFFBASIS MIT VITAMINEN UND MINERALSTOFFEN fuer dein Immunsystem, deine Energie und deine kraftvolle Mischung aus Obst, Gemuese, Pflanzenextrakten und Kloster Kraeutern fuer deinen Flow. WISSEN DAS WIRKT Fuer alle, die ihre Gesundheit gezielt und pflanzlich unterstuetzen moechten. Ergaenzt mit 15 Mikronaehrstoffen und deren wissenschaftlich bestaetigten Wirkungen. PFLANZLICH GEDACHT. WISSENSCHAFTLICH GEMACHT.",
+        "textType": "headline",
+        "origin": "baked_in",
+        "headline": "MIKRONAEHRSTOFF-KONZENTRAT",
+        "subline": "DEINE TAEGLICHE NAEHRSTOFFBASIS MIT VITAMINEN UND MINERALSTOFFEN",
+        "cta": null,
+        "directionCues": "Gelber Speech-Bubble-Pfeil rechts oben deutet vom Claim auf das Produkt"
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "creative_lifestyle_hybrid",
+          "toolTileType": "image",
+          "toolImageType": "FULL_WIDTH",
+          "link": {
+            "clickable": false,
+            "linkType": "none",
+            "linkTarget": null,
+            "ctaLabel": null
+          },
+          "tileContentTopic": {
+            "primarySubject": "Vital Flow Mikronaehrstoffkonzentrat Produktneuheit",
+            "productOrCategoryRef": "B0FG874B5H",
+            "intent": "showcase",
+            "rolePosition": "Promo Hero fuer Neuheit"
+          },
+          "visualContent": "Linke Haelfte: weisser Hintergrund, oben links extrem gross gesetztes gelbes NEU mit Doppelpunkt, klare Sans-Serif Versalien. Mitte links zweizeilige schwarze Headline MIKRONAEHRSTOFF-KONZENTRAT in fetter Sans-Serif, darunter eine zweizeilige Subline und ein laengerer Fliesstext mit Hochstellungen 1, 2, 3 als Quellverweisen. Subblock WISSEN DAS WIRKT als kleinerer Subhead, darunter weiterer Erklaerungstext mit Hochstellung 1/2/3. Rechte Haelfte: lebensechte Lifestyle-Szene, junge Frau im Profil rechts, beiger Cardigan, fuehrt schwarze Vital Flow Flasche mit kleinem MIKRONAEHRSTOFFKONZENTRAT-Etikett zum Mund. Vor ihr ein Stillife aus dunkelroten Beeren, Birnen, Zitronen, Aubergine, Ingwerwurzel, Lorbeerzweig, Pflanzenblaettern und purpurnen Karotten. Ueber der Szene schwebt ein leuchtend gelber abgerundeter Speech-Bubble mit drei Zeilen schwarzer Versalien PFLANZLICH GEDACHT. WISSENSCHAFTLICH GEMACHT.",
+          "elementProportions": {
+            "lifestyle_photo": 35,
+            "product_photo": 10,
+            "text": 30,
+            "graphic_elements": 12,
+            "solid_background": 8,
+            "decorative_elements": 5,
+            "logo": 0,
+            "icons": 0,
+            "cta_button": 0,
+            "badge": 0
+          },
+          "textOnImage": {
+            "visibleText": "NEU: MIKRONAEHRSTOFF-KONZENTRAT DEINE TAEGLICHE NAEHRSTOFFBASIS MIT VITAMINEN UND MINERALSTOFFEN PFLANZLICH GEDACHT. WISSENSCHAFTLICH GEMACHT.",
+            "textType": "headline_cta",
+            "origin": "baked_in",
+            "headline": "MIKRONAEHRSTOFF-KONZENTRAT",
+            "subline": "DEINE TAEGLICHE NAEHRSTOFFBASIS MIT VITAMINEN UND MINERALSTOFFEN",
+            "cta": null,
+            "directionCues": "Gelber Speech-Bubble Pfeil zeigt vom Claim Richtung Produkt"
+          },
+          "ctaText": null,
+          "linksTo": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/10d49af9-f80b-4250-bd0c-ef21cbf534b2._CR1%2C0%2C1918%2C1200_SX1500_.jpg"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "1",
+      "toolLayoutName": "Full Width",
+      "toolLayoutType": "fullwidth",
+      "toolLayoutRole": "editorial"
+    },
+    {
+      "position": 4,
+      "moduleId": "startseite_mod_04",
+      "moduleName": "Vital Flow Featured ASIN Grid",
+      "layoutType": "product_grid_featured",
+      "layoutShape": "split_two_columns",
+      "tileCount": 3,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "ASIN Grid mit 1 grossem Hauptprodukt links und 2 gestapelten Sekundaerprodukten rechts. Direkter Kaufpfad nach dem Promo-Banner.",
+      "structuralPattern": "Links grosses 2x2-Quadrat-Tile mit Vital Flow 3er-Pack. Rechts in zwei flachen 1x2-Tiles uebereinander die Vital Flow Einzelflasche und die Bio Saftkur 3 Tage. Amazon rendert Titel und Preis in standardisiertem Overlay.",
+      "moduleFunction": "Direkter Conversion-Pfad fuer das im Modul davor angekuendigte Mikronaehrstoffkonzentrat. Bietet eine Eintrittsgroesse 3er-Pack und einen Einstiegs-SKU plus eine Cross-Sell-Bridge zur Saftkur-Kategorie. Erfuellt das im Promo gegebene Versprechen mit echten ASINs.",
+      "relationToPrevious": "proves_above_claim",
+      "relationToNext": "hands_off_to_navigation",
+      "visualBridge": "shared_subject_class",
+      "copyBridge": "fresh_topic",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "LARGE_SQUARE",
+          "link": {
+            "clickable": true,
+            "linkType": "asin",
+            "linkTarget": "B0FG874B5H",
+            "ctaLabel": null
+          },
+          "tileContentTopic": {
+            "primarySubject": "Vital Flow 3er Pack 3x500ml",
+            "productOrCategoryRef": "B0FG874B5H",
+            "intent": "convert",
+            "rolePosition": "Hauptkonversion Hero ASIN"
+          },
+          "visualContent": "Amazon ASIN Tile, kein Brand Design. Drei dunkle Flaschen mit gelbem Verschluss nebeneinander, gelbes 74-Tag-Anhaenger, weisser Loeffel im Vordergrund. Amazon legt Produkttitel und Preis automatisch ueber das Bild.",
+          "elementProportions": { "product_photo": 90, "solid_background": 8, "badge": 2 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "B0FG874B5H"
+        },
+        {
+          "position": 2,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "WIDE",
+          "link": {
+            "clickable": true,
+            "linkType": "asin",
+            "linkTarget": "B0FG36751H",
+            "ctaLabel": null
+          },
+          "tileContentTopic": {
+            "primarySubject": "Vital Flow Einzelflasche 500ml",
+            "productOrCategoryRef": "B0FG36751H",
+            "intent": "convert",
+            "rolePosition": "Einstiegs-Konversion"
+          },
+          "visualContent": "Amazon ASIN Tile, kein Brand Design. Einzelne Vital Flow Flasche mit gelbem 74-Tag, eingebettet in Beeren und Gemuesescheiben. Amazon Overlay liefert Titel und 35,90 Euro Preis.",
+          "elementProportions": { "product_photo": 88, "solid_background": 10, "badge": 2 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "B0FG36751H"
+        },
+        {
+          "position": 3,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "WIDE",
+          "link": {
+            "clickable": true,
+            "linkType": "asin",
+            "linkTarget": "B0G81CTV55",
+            "ctaLabel": null
+          },
+          "tileContentTopic": {
+            "primarySubject": "Bio Saftkur 3 Tage 18x250ml",
+            "productOrCategoryRef": "B0G81CTV55",
+            "intent": "convert",
+            "rolePosition": "Cross-Sell zur Saftkur"
+          },
+          "visualContent": "Amazon ASIN Tile, kein Brand Design. Saftkur-Set mit mehreren bunten Flaschen plus Tee-Doese, Lifestyle-Komposition mit Pflanzen. Amazon Overlay liefert Produkttitel und Preis 99,90 Euro plus Hinweis Nur noch 17 auf Lager.",
+          "elementProportions": { "product_photo": 85, "solid_background": 10, "decorative_elements": 5 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "B0G81CTV55"
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/I/71OVYK+wpxL._AC_CR0%2C0%2C0%2C0_SX750_.jpg",
+          "https://m.media-amazon.com/images/I/61yJxQEpDNL._AC_CR0%2C0%2C0%2C0_SX750_.jpg",
+          "https://m.media-amazon.com/images/I/71ShHuINk2L._AC_CR0%2C0%2C0%2C0_SX750_.jpg"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "lg-2stack",
+      "toolLayoutName": "Large + 2 Stacked",
+      "toolLayoutType": "standard",
+      "toolLayoutRole": "product_showcase"
+    },
+    {
+      "position": 5,
+      "moduleId": "startseite_mod_05",
+      "moduleName": "Kategorie-Grid 4x2 Sortimentsuebersicht",
+      "layoutType": "subcategory_tile_grid_octet",
+      "layoutShape": "grid_four_columns",
+      "tileCount": 8,
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": "Acht Lifestyle-Kacheln in einem 4x2-Raster, jede mit weissem Bottom-Overlay-Label, fuehren zu den 8 Sortimentskategorien des Stores.",
+      "structuralPattern": "Vier Tiles oben, vier Tiles unten, jedes Tile ein quadratisches Lifestyle- oder Produkt-Stillife mit Kategorienamen als weissem Label im unteren Drittel. BIO-Hexagon oben rechts auf den Bio-zertifizierten Kategorien.",
+      "moduleFunction": "Hauptverteiler der Startseite. Bringt den Nutzer in einem Schritt in jede der acht Sortimentskategorien. Visuell konsistent gehalten, alle Kacheln im gleichen Bildstil, damit das Raster wie ein Sortimentstisch wirkt. Wichtigste Navigationsbruecke des gesamten Stores.",
+      "relationToPrevious": "lists_subordinate_options",
+      "relationToNext": "closes_chapter",
+      "visualBridge": "shared_setting",
+      "copyBridge": "fresh_topic",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "Ingwer Shots Smoothies Saftkuren NEU: Mikronaehrstoffe Shot Kur Probiersets / Geschenkidee Zubehoer Spar-Abo",
+        "textType": "category_label",
+        "origin": "layered_text",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product",
+          "toolTileType": "image",
+          "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Ingwer Shots", "ctaLabel": "Ingwer Shots" },
+          "tileContentTopic": { "primarySubject": "Kategorie Ingwer Shots", "productOrCategoryRef": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2", "intent": "navigate", "rolePosition": "Kategorie Tile 1" },
+          "visualContent": "Schraege Aufsicht: gruene Ingwer-Shot-Classic-Flasche steht in einem Bett aus aufgeschnittenen Ingwerwurzeln, frische Schnittflaechen sichtbar. BIO-Hexagon Badge oben rechts. Bottom-Overlay weisses Tag mit dunkelblauem Label Ingwer Shots.",
+          "elementProportions": { "product_photo": 30, "lifestyle_photo": 55, "badge": 5, "text": 10 },
+          "textOnImage": { "visibleText": "Ingwer Shots", "textType": "category_label", "origin": "layered_text", "headline": "Ingwer Shots", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "Ingwer Shots"
+        },
+        {
+          "position": 2,
+          "imageCategory": "product",
+          "toolTileType": "image",
+          "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Smoothies", "ctaLabel": "Smoothies" },
+          "tileContentTopic": { "primarySubject": "Kategorie Smoothies", "productOrCategoryRef": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E", "intent": "navigate", "rolePosition": "Kategorie Tile 2" },
+          "visualContent": "Aufsicht: braunliche Smoothie-Flasche mittig auf einem Stillife aus gruenen Spinatblaettern, Apfelhaelfte, Gurkenscheiben, halbiertem Apfel und Rhabarberstangen. BIO-Hexagon Badge oben rechts. Bottom-Overlay weisses Tag Smoothies.",
+          "elementProportions": { "product_photo": 28, "lifestyle_photo": 57, "badge": 5, "text": 10 },
+          "textOnImage": { "visibleText": "Smoothies", "textType": "category_label", "origin": "layered_text", "headline": "Smoothies", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "Smoothies"
+        },
+        {
+          "position": 3,
+          "imageCategory": "product",
+          "toolTileType": "image",
+          "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Saftkuren", "ctaLabel": "Saftkuren" },
+          "tileContentTopic": { "primarySubject": "Kategorie Saftkuren", "productOrCategoryRef": "3745E0C5-D470-4291-A735-27CF83DD1606", "intent": "navigate", "rolePosition": "Kategorie Tile 3" },
+          "visualContent": "Aufsicht: helle Saftkur-Flasche mit der Aufschrift SAFTKUR 1 mittig auf einem Stillife aus gerade aufgeschnittenen Birnen, Hafer-Aehren und Vanille-Schoten. BIO-Hexagon Badge oben rechts. Bottom-Overlay weisses Tag Saftkuren.",
+          "elementProportions": { "product_photo": 28, "lifestyle_photo": 57, "badge": 5, "text": 10 },
+          "textOnImage": { "visibleText": "Saftkuren", "textType": "category_label", "origin": "layered_text", "headline": "Saftkuren", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "Saftkuren"
+        },
+        {
+          "position": 4,
+          "imageCategory": "product",
+          "toolTileType": "image",
+          "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Mikronaehrstoffe", "ctaLabel": "NEU: Mikronaehrstoffe" },
+          "tileContentTopic": { "primarySubject": "Kategorie Mikronaehrstoffe Neuheit", "productOrCategoryRef": "E337104E-63D3-41B2-8560-D92F482B2790", "intent": "navigate", "rolePosition": "Kategorie Tile 4 Neuheit" },
+          "visualContent": "Aufsicht: schwarze Vital Flow Flasche mittig auf einem Stillife aus dunkelroten Himbeeren, gruenen Pfefferminzblaettern, purpurnen Karotten und Ingwerwurzeln. Kein BIO-Hexagon hier. Bottom-Overlay weisses Tag NEU: Mikronaehrstoffe.",
+          "elementProportions": { "product_photo": 30, "lifestyle_photo": 60, "text": 10 },
+          "textOnImage": { "visibleText": "NEU: Mikronaehrstoffe", "textType": "category_label", "origin": "layered_text", "headline": "NEU: Mikronaehrstoffe", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "Mikronaehrstoffe"
+        },
+        {
+          "position": 5,
+          "imageCategory": "lifestyle",
+          "toolTileType": "image",
+          "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Shot Kur", "ctaLabel": "Shot Kur" },
+          "tileContentTopic": { "primarySubject": "Kategorie Shot Kur", "productOrCategoryRef": "998F3BE4-E37F-47C7-8539-A79DE27AF043", "intent": "navigate", "rolePosition": "Kategorie Tile 5" },
+          "visualContent": "Lifestyle-Szene: Hand haelt eine kleine dunkelrote Shot-Flasche ueber eine helle Schale mit Joghurt, Granola und Bananenscheiben. Im Hintergrund unscharf Obstschale. BIO-Hexagon Badge oben rechts. Bottom-Overlay weisses Tag Shot Kur.",
+          "elementProportions": { "lifestyle_photo": 75, "product_photo": 12, "badge": 5, "text": 8 },
+          "textOnImage": { "visibleText": "Shot Kur", "textType": "category_label", "origin": "layered_text", "headline": "Shot Kur", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "Shot Kur"
+        },
+        {
+          "position": 6,
+          "imageCategory": "lifestyle",
+          "toolTileType": "image",
+          "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Probiersets / Geschenkidee", "ctaLabel": "Probiersets / Geschenkidee" },
+          "tileContentTopic": { "primarySubject": "Kategorie Probiersets Geschenk", "productOrCategoryRef": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A", "intent": "navigate", "rolePosition": "Kategorie Tile 6 Geschenk" },
+          "visualContent": "Lifestyle-Szene: junger Mann in weissem Hoodie haelt einer Frau eine offene Geschenkbox mit Ingwer Shots Classic Flasche entgegen, beide laecheln, im Vordergrund die geoeffnete Kartonbox mit weiteren Flaschen. Bottom-Overlay weisses Tag Probiersets / Geschenkidee.",
+          "elementProportions": { "lifestyle_photo": 85, "product_photo": 5, "text": 10 },
+          "textOnImage": { "visibleText": "Probiersets / Geschenkidee", "textType": "category_label", "origin": "layered_text", "headline": "Probiersets / Geschenkidee", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "Probiersets / Geschenkidee"
+        },
+        {
+          "position": 7,
+          "imageCategory": "lifestyle",
+          "toolTileType": "image",
+          "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Zubehoer", "ctaLabel": "Zubehoer" },
+          "tileContentTopic": { "primarySubject": "Kategorie Zubehoer", "productOrCategoryRef": "95330F7A-5A8A-44E2-B872-B761E4DEF56A", "intent": "navigate", "rolePosition": "Kategorie Tile 7 Zubehoer" },
+          "visualContent": "Lifestyle-Szene: zwei Haende halten leere Glaeser, in jedes Glas wird gleichzeitig aus einer dunklen und einer hellen Flasche gegossen, gelbliche und gruene Fluessigkeiten treffen synchron auf den Glasboden. Heller neutraler Hintergrund. Bottom-Overlay weisses Tag Zubehoer.",
+          "elementProportions": { "lifestyle_photo": 80, "product_photo": 8, "text": 12 },
+          "textOnImage": { "visibleText": "Zubehoer", "textType": "category_label", "origin": "layered_text", "headline": "Zubehoer", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "Zubehoer"
+        },
+        {
+          "position": 8,
+          "imageCategory": "lifestyle",
+          "toolTileType": "image",
+          "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Spar-Abo", "ctaLabel": "Spar-Abo" },
+          "tileContentTopic": { "primarySubject": "Kategorie Spar-Abo", "productOrCategoryRef": "137B3A93-BC04-42D0-89A9-8EFD54CF895E", "intent": "navigate", "rolePosition": "Kategorie Tile 8 Abo" },
+          "visualContent": "Lifestyle-Szene: lachende Frau im weissen Strick-Cardigan sitzt auf einem hellen Sofa und oeffnet eine geliefferte Kraftpapierbox, auf der Boxoberseite das schwarze Kloster-Kitchen-8-Drop-Symbol gedruckt. Bottom-Overlay weisses Tag Spar-Abo.",
+          "elementProportions": { "lifestyle_photo": 85, "logo": 3, "text": 12 },
+          "textOnImage": { "visibleText": "Spar-Abo", "textType": "category_label", "origin": "layered_text", "headline": "Spar-Abo", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "Spar-Abo"
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": ["Ingwer Shots", "Smoothies", "Saftkuren", "NEU: Mikronaehrstoffe", "Shot Kur", "Probiersets / Geschenkidee", "Zubehoer", "Spar-Abo"],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/89600578-d6ae-427f-b7c1-9c7e8f34b034._CR0%2C0%2C750%2C750_SX375_SY375_.jpg",
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c79cea7d-3c69-471c-a402-9302c7b56f5b._CR0%2C0%2C750%2C750_SX375_SY375_.jpg",
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/36c44675-c0e5-4c16-aca5-e4311d806a64._CR0%2C0%2C750%2C750_SX375_SY375_.jpg",
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/098944c1-741d-415d-8a2b-d8af020fd749._CR0%2C0%2C750%2C750_SX375_SY375_.jpg",
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/70515947-c0dc-4e51-ba13-92606896367c._CR0%2C0%2C750%2C750_SX375_SY375_.jpg",
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c6656b68-4664-4426-b9e0-99c03578bc86._CR128%2C0%2C1920%2C1920_SX375_SY375_.jpg",
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/8abc6de0-03f5-4932-87f3-43065fdfcb74._CR113%2C0%2C500%2C500_SX375_SY375_.png",
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/df0841d5-ca02-42b4-bab9-d27d19596a19._CR476%2C0%2C767%2C767_SX375_SY375_.jpg"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "4x2grid",
+      "toolLayoutName": "4x2 Grid",
+      "toolLayoutType": "standard",
+      "toolLayoutRole": "navigation_bridge"
+    },
+    {
+      "position": 6,
+      "moduleId": "startseite_mod_06",
+      "moduleName": "Awards Banner Ausgezeichnete Innovationen",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": "Trust-Anker am Ende der Page mit drei Industriepreisen plus einem Pruefsiegel. Schliesst die Startseite mit Glaubwuerdigkeitssignal ab.",
+      "structuralPattern": "Schmaler Vollbild-Banner. Hintergrund grossflaechig grosse, glaenzende, dunkelgruene Ingwerblaetter. Zentrierte weisse Headline AUSGEZEICHNETE INNOVATIONEN. Darunter eine Reihe aus vier weissen Logo-Badges nebeneinander.",
+      "moduleFunction": "Schluss-Trust-Loop der Startseite. Nimmt die im Brand-Manifest und Promo-Modul aufgebaute Wissenschaftsglaubwuerdigkeit und unterfuettert sie mit drei externen Brand-Awards plus einem Pruefsiegel des Deutschen Instituts fuer Verbraucherschutz. Liefert das Plausibilitaets-Argument fuer die Konversion.",
+      "relationToPrevious": "summarizes_above",
+      "relationToNext": "closes_chapter",
+      "visualBridge": "shared_pattern",
+      "copyBridge": "fresh_topic",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "AUSGEZEICHNETE INNOVATIONEN german brand award 25 winner german brand award 25 product brand of the year PRODUKT INNOVATION IN GLAS Geprueffte Qualitaet Kloster Kitchen Bio Ingwer Shot LfV Deutsches Institut fuer Verbraucherschutz",
+        "textType": "headline",
+        "origin": "baked_in",
+        "headline": "AUSGEZEICHNETE INNOVATIONEN",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "benefit",
+          "toolTileType": "image_text",
+          "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Awards und Pruefsiegel der Marke",
+            "productOrCategoryRef": null,
+            "intent": "trust",
+            "rolePosition": "Trust Anchor Page Closing"
+          },
+          "visualContent": "Querformatiger Banner. Bildhintergrund vollflaechig dunkelgruene, frische, glaenzende Ingwerblaetter in Nahaufnahme. Mittig oben in schmalen weissen Versalien die Headline AUSGEZEICHNETE INNOVATIONEN. Darunter vier weisse Logo-Badges nebeneinander. Erstes Badge ein vertikales Wappen mit Schriftzug german brand award, Jahr 25, winner. Zweites Badge gleiches Wappen-Layout, Jahr 25, product brand of the year. Drittes Badge ein abstraktes Tropfen-Symbol mit Schriftzug PRODUKT INNOVATION IN GLAS. Viertes Badge ein blau-weisses Pruefsiegel mit Aufschrift Geprueffte Qualitaet, Zertifizierungs-Code, Kloster Kitchen Bio Ingwer Shot, LfV Deutsches Institut fuer Verbraucherschutz.",
+          "elementProportions": {
+            "lifestyle_photo": 60,
+            "badge": 25,
+            "text": 12,
+            "graphic_elements": 3,
+            "product_photo": 0,
+            "logo": 0,
+            "icons": 0,
+            "solid_background": 0,
+            "decorative_elements": 0,
+            "cta_button": 0
+          },
+          "textOnImage": {
+            "visibleText": "AUSGEZEICHNETE INNOVATIONEN german brand award 25 winner german brand award 25 product brand of the year PRODUKT INNOVATION IN GLAS Geprueffte Qualitaet LfV Deutsches Institut fuer Verbraucherschutz",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "AUSGEZEICHNETE INNOVATIONEN",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2eb471fe-f331-4cbc-89cd-8896df9c0d33._CR0%2C0%2C1280%2C275_SX1500_.jpg"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "1",
+      "toolLayoutName": "Full Width",
+      "toolLayoutType": "fullwidth",
+      "toolLayoutRole": "editorial"
+    },
+    {
+      "position": 7,
+      "moduleId": "startseite_mod_07",
+      "moduleName": "Amazon Share Footer",
+      "layoutType": "amazon_share_footer",
+      "layoutShape": "chrome_thin",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": "Standard Amazon Share-Footer ausserhalb des Brand-Designs.",
+      "structuralPattern": "Schmaler weisser Streifen mit zentriertem Teilen-Button und Hinweistext. Darunter Zurueck zum Seitenanfang Link.",
+      "moduleFunction": "Amazon-Mechanik. Erlaubt Teilen der Page-URL und Sprung an den Seitenanfang. Fuer Brand-Generierung ausgefiltert.",
+      "relationToPrevious": "none",
+      "relationToNext": "none",
+      "visualBridge": "hard_break_intentional",
+      "copyBridge": "fresh_topic",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "Teilen Teilen Sie diese Seite mit Ihren Freunden Zurueck zum Seitenanfang",
+        "textType": "section_label",
+        "origin": "amazon_chrome",
+        "headline": null,
+        "subline": null,
+        "cta": "Teilen",
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "ShareFooter",
+        "visibleHeadings": [],
+        "ctaLabels": ["Teilen", "Zurueck zum Seitenanfang"],
+        "imageUrls": [],
+        "videoCount": 0
+      },
+      "toolLayoutId": null,
+      "toolLayoutName": null,
+      "toolLayoutType": "amazon_native",
+      "toolLayoutRole": "amazon_native"
+    }
+  ],
+  "voiceMarkers": {
+    "voiceRegister": "direkt",
+    "sentencePattern": "kurze_aussage",
+    "vocabularyField": "naturwissenschaftlich",
+    "claimType": "expertise_signal",
+    "rhetoricalDevice": "kontrast"
+  },
+  "voiceExamples": [
+    "Trink, was dir gut tut. Nicht, was nur gut klingt.",
+    "PFLANZLICH GEDACHT. WISSENSCHAFTLICH GEMACHT.",
+    "FUER DEINEN BEWUSSTEREN UND NATUERLICHEREN LEBENSSTIL"
+  ],
+  "pageAnalysis": {
+    "tonalityVisual": "Crememeisser Whitespace plus dunkelgruene Ingwerblatt-Lifestyle-Aufnahmen plus gelbe Akzente in Speech Bubble und NEU-Lettering plus schwarze Sans-Serif. Sehr ruhig und reduziert, sucht den Kontrast aus Stille (weisse Bildflaechen) und einzelnen Statement-Elementen.",
+    "ctaStrategies": "Keine sichtbaren Brand-CTAs auf Headline-Ebene. Conversion laeuft komplett ueber das ASIN-Grid und das Kategorie-Grid, beide sind klickbar ohne Button-Beschriftung. Brand-Manifest und Awards-Banner sind nicht klickbar.",
+    "contentDepth": "Schlanke Startseite, sechs Brand-Module von Manifesto ueber Promo zu ASIN-Grid zu Kategorienverteiler zu Awards-Loop. Keine Story-Module, keine Videos, keine USP-Bar, keine Testimonials.",
+    "useForArchetype": "Eignet sich als Vorlage fuer Brand-Stores, die Mission Statement plus Neuheiten-Promo plus Featured-Grid plus Sortimentsverteiler plus Awards-Loop in einem schlanken 6-Modul-Pfad kombinieren wollen.",
+    "moduleClusters": [
+      "Manifesto Cluster: Header-Banner plus Brand Manifesto Modul",
+      "Conversion Cluster: Promo-Banner plus Featured ASIN Grid",
+      "Navigation Cluster: Kategorie-Grid 4x2",
+      "Trust Cluster: Awards Banner"
+    ]
+  },
+  "pageArchitecture": "Startseite folgt einem klassischen Funnel von emotional zu rational. Der Header-Banner setzt das Markengefuehl mit Lifestyle und Tagline. Das Brand-Manifesto-Modul liefert die Mission. Der Promo-Banner zoomt auf die Neuheit und gibt den wissenschaftlichen Plausibilitaets-Anker. Das Featured-ASIN-Grid macht die Promo direkt kaufbar. Das 4x2-Kategorie-Grid verteilt Nutzer mit anderem Kaufinteresse in die acht Sortimentskategorien. Der Awards-Banner schliesst die Page mit externem Trust-Signal ab.",
+  "openQuestions": [
+    "Modul 5 wurde nach Probe-Run-Review auf subcategory_tile_grid_octet umgestellt (Schema-Update 2026-05-11). Vorher als toolGap geflaggt mit Vorschlag subcategory_tile_grid_octet, der jetzt offiziell ins v4-Schema aufgenommen wurde.",
+    "Modul 5 vocabularyField wurde als naturwissenschaftlich klassifiziert, mischt sich aber mit kulinarischem Wortfeld (Saftkur, Smoothie, Ingwer Shot). Dominant naturwissenschaftlich wegen Mikronaehrstoffen und wissenschaftlich bestaetigte Wirkungen, aber Mischtonalitaet vorhanden.",
+    "Hero-Banner ueber der Menueleiste hat keinen heroArchetype, weil heroArchetype laut v4-Schema Modul-Level ist und nicht fuer den heroBanner-Page-Block gilt. In einem spaeteren Schema-Update koennte heroArchetype optional auch fuer den heroBanner-Block geoeffnet werden, da der Hero hier semantisch ein lifestyle_with_brand_claim Archetype waere.",
+    "Modul 6 imageCategory ist benefit, der Hintergrund ist aber ein Lifestyle-Ingwerblatt-Foto. Im v4-Schema gibt es keinen imageCategory-Wert benefit_with_lifestyle_background. Pragmatisch benefit gewaehlt, weil Awards die Hauptaussage sind.",
+    "Modul 1 (amazon_nav_header) und Modul 7 (amazon_share_footer) wurden im Phase-1-DOM nicht als modules gefuehrt sondern als navigation und excluded. v4-Schema sagt Amazon Chrome wird als Modul mitgefuehrt mit designIntent mimics_native_chrome, deshalb wurden sie hier nachgefuehrt."
+  ]
+}

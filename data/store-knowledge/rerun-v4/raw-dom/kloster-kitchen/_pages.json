@@ -1,0 +1,17 @@
+{
+  "store": "kloster-kitchen",
+  "storeUrl": "https://www.amazon.de/stores/page/34D4A812-9A68-4602-A6A0-30565D399620",
+  "discoveredAt": "2026-05-13",
+  "pages": [
+    { "slug": "01_startseite",                 "name": "Startseite",                 "level": 0, "pageId": "34D4A812-9A68-4602-A6A0-30565D399620", "url": "https://www.amazon.de/stores/page/34D4A812-9A68-4602-A6A0-30565D399620" },
+    { "slug": "02_ingwer-shots",               "name": "Ingwer Shots",               "level": 1, "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2", "url": "https://www.amazon.de/stores/page/EF234CA2-C1C8-4B07-B2CC-1553E231D3F2" },
+    { "slug": "03_mikronaehrstoffe",           "name": "Mikronaehrstoffe",           "level": 1, "pageId": "E337104E-63D3-41B2-8560-D92F482B2790", "url": "https://www.amazon.de/stores/page/E337104E-63D3-41B2-8560-D92F482B2790" },
+    { "slug": "04_saftkuren",                  "name": "Saftkuren",                  "level": 1, "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606", "url": "https://www.amazon.de/stores/page/3745E0C5-D470-4291-A735-27CF83DD1606" },
+    { "slug": "05_smoothies",                  "name": "Smoothies",                  "level": 1, "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E", "url": "https://www.amazon.de/stores/page/BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E" },
+    { "slug": "06_shot-kur",                   "name": "Shot Kur",                   "level": 1, "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043", "url": "https://www.amazon.de/stores/page/998F3BE4-E37F-47C7-8539-A79DE27AF043" },
+    { "slug": "07_probiersets-geschenkidee",   "name": "Probiersets / Geschenkidee", "level": 1, "pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A", "url": "https://www.amazon.de/stores/page/33D8D5E6-A887-4D06-87F4-212CC0D6E24A" },
+    { "slug": "08_zubehoer",                   "name": "Zubehoer",                   "level": 1, "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A", "url": "https://www.amazon.de/stores/page/95330F7A-5A8A-44E2-B872-B761E4DEF56A" },
+    { "slug": "09_spar-abo",                   "name": "Spar-Abo",                   "level": 1, "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E", "url": "https://www.amazon.de/stores/page/137B3A93-BC04-42D0-89A9-8EFD54CF895E" },
+    { "slug": "10_ueber-uns",                  "name": "Ueber Uns",                  "level": 1, "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF", "url": "https://www.amazon.de/stores/page/F031D76B-9B76-426A-93A9-2EBBCB5150CF" }
+  ]
+}

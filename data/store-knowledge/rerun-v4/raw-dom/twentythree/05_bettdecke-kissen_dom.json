@@ -1,0 +1,17 @@
+{
+  "_meta": {
+    "store": "twentythree", "pageSlug": "05_bettdecke-kissen", "pageName": "Bettdecke und Kissen",
+    "pageId": "F43A372B-1D99-4754-8B6F-879D8E039AF8",
+    "url": "https://www.amazon.de/stores/page/F43A372B-1D99-4754-8B6F-879D8E039AF8",
+    "extractedAt": "2026-05-13", "extractor": "chrome_mcp_javascript_tool_v2_with_urls",
+    "scrollHeight": 3665, "viewport": {"w": 1826, "h": 888},
+    "domRowsTotal": 5, "contentModulesCount": 3
+  },
+  "modules": [
+    {"domRowIdx": 0, "top": 99, "height": 400, "widgetClass": "Header", "tileCount": 0, "imgCount": 3, "videoCount": 0, "productCount": 0, "note": "Nav header"},
+    {"domRowIdx": 1, "top": 507, "height": 211, "widgetClass": "EditorialRow", "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Section Intro twenty:three Lyocell Kopfkissen und Decken"},
+    {"domRowIdx": 2, "top": 718, "height": 743, "widgetClass": "EditorialRow", "tileCount": 16, "imgCount": 3, "videoCount": 0, "productCount": 1, "note": "Hero Tile-Pair Lifestyle plus Kissen"},
+    {"domRowIdx": 3, "top": 1460, "height": 743, "widgetClass": "EditorialRow", "tileCount": 16, "imgCount": 2, "videoCount": 0, "productCount": 0, "note": "Image Modul Page-Closing"},
+    {"domRowIdx": 4, "top": 2203, "height": 201, "widgetClass": "EditorialRow", "tileCount": 4, "imgCount": 0, "videoCount": 0, "productCount": 0, "note": "amazon_share_footer"}
+  ]
+}

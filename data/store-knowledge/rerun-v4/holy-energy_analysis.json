@@ -1,0 +1,449 @@
+{
+  "schemaVersion": "v4-2026-05",
+  "store": "holy-energy",
+  "brandName": "HOLY Energy",
+  "storeUrl": "https://www.amazon.de/stores/HOLYEnergy/page/7913E121-CB43-4349-A8D2-9F0843B226E4",
+  "analyzedAt": "2026-05-23",
+  "methodology": "v4-top-10-pages-from-12-pages-express-from-phase1-doms-plus-per-page-blueprints",
+  "scopeNote": "Top 10 von 12 HOLY-Energy-Pages erfasst (Adventskalender und Ueber-uns ausserhalb Scope) plus Per-Page-Blueprints im Express-Modus generiert (Stand 2026-05-23). HOLY-Brand-Pattern: kompakte Stores mit XL-Manifest-Page-Heroes plus 1-2 ASIN-Spotlights mit Video-Carousel plus Full-Catalog-ProductGrid pro Kategorie. Animal-Themed Flavor-Naming bei Energy (Strawberry Shark, Watermelon Whale, Pomegranate Piranha etc.) als Brand-Signature.",
+  "navigation": {
+    "pageCount": 12,
+    "scopedPages": 10,
+    "structure": "Flat (level 0 + level 1)",
+    "pages": [
+      { "name": "Startseite",         "level": 0, "pageId": "7913E121-CB43-4349-A8D2-9F0843B226E4" },
+      { "name": "Fuer Neueinsteiger", "level": 1, "pageId": "E0597C1D-5961-4E87-9CA5-2FAF0299330D" },
+      { "name": "Bestseller",         "level": 1, "pageId": "E8F850A5-CE46-4877-88C4-F4F5A0365D02" },
+      { "name": "Energy",             "level": 1, "pageId": "18BC62B2-B4AF-4995-B743-E80AECFA53AA" },
+      { "name": "Iced Tea",           "level": 1, "pageId": "527A4D3B-EC68-4755-BF8D-2BF264AE1694" },
+      { "name": "Hydration",          "level": 1, "pageId": "34F0F6AC-314F-4167-9EDA-54E94AC937C7" },
+      { "name": "Milkshakes",         "level": 1, "pageId": "6AD7F40F-ED3C-4B02-BDC9-310A071E3EC7" },
+      { "name": "Starter Sets",       "level": 1, "pageId": "15F6D24E-FF9D-4FE5-A1FB-5A2AD609CFE1" },
+      { "name": "Shaker",             "level": 1, "pageId": "3B80FD95-4F71-4D28-944B-EA001C45FF3C" },
+      { "name": "Probier-Boxen",      "level": 1, "pageId": "229C0965-6260-45EF-8A4F-1723BD514037" }
+    ],
+    "extraPagesNotInScope": [
+      { "name": "Adventskalender", "pageId": "0AB41119-9BEE-431D-B7CC-346E3516D209" },
+      { "name": "Ueber uns",       "pageId": "69AF9424-DDC3-4F16-8AE0-F35BB75BD83A" }
+    ]
+  },
+  "contentSummary": {
+    "pagesAnalyzed": 10,
+    "wiederkehrendeModuleCrossPage": {
+      "amazon_nav_header": "alle 10 Pages mit page-spezifischem oder globalem Brand-Hero DIE SOFTDRINK REVOLUTION",
+      "amazon_share_footer": "alle 10 Pages",
+      "page_hero_xl_1470x1227": "auf Energy, Iced Tea, Hydration, Starter Sets, Fuer-Neueinsteiger, Shaker als XL-Manifest-Banner",
+      "asin_showcase_with_video": "auf Energy, Iced Tea, Hydration, Starter Sets, Probier-Boxen jeweils 2-5 Mal als Spotlight-Modul mit 28 Bildern und 10 Videos pro Spotlight",
+      "product_grid_full_catalog": "auf Energy (25 ASINs), Iced Tea (21), Hydration (10), Probier-Boxen (17), Shaker (12) als Konversionsanker",
+      "product_grid_carousel_bestseller": "auf Startseite, Fuer-Neueinsteiger und Bestseller-Page als 'Bestseller von HOLY Energy' Amazon native Carousel"
+    }
+  },
+  "pages": [
+    {
+      "pageName": "Startseite",
+      "pageSlug": "01_startseite",
+      "pageId": "7913E121-CB43-4349-A8D2-9F0843B226E4",
+      "pageType": "startseite",
+      "scrollHeight": 6078,
+      "brandModules": 9,
+      "voiceMarkers": {
+        "voiceRegister": "jung_lebendig",
+        "sentencePattern": "kurze_aussage",
+        "vocabularyField": "lifestyle",
+        "claimType": "benefit_funktional",
+        "rhetoricalDevice": "alliteration"
+      },
+      "voiceExamples": ["DIE SOFTDRINK REVOLUTION", "HOLY Energy Strawberry Shark", "HOLY Hydration Lemon"],
+      "pageArchitecture": "HOLY Energy Startseite mit kompakter Brand-Story-Architektur. Header plus Section-Intro plus Tile-Row 4 plus ProductGrid 4 plus Section-Intro plus Video Hero plus XL-Manifest-Image plus Bestseller-Carousel plus Closing-Banner plus Footer.",
+      "moduleClusters": [
+        "Header Cluster: Header plus globaler Brand-Hero",
+        "Sortimentsverteiler Cluster: Section-Intro Banner plus Tile-Row 4 Kategorien",
+        "Hauptkonversion Cluster: ProductGrid 4 Top-Produkte (Trio, Energy, Hydration, Iced Tea)",
+        "Brand-Story Cluster: Section-Intro plus Video Hero plus XL-Manifest-Image",
+        "Bestseller Cluster: Bestseller-Carousel plus Closing-Banner",
+        "Footer Cluster: Share-Footer"
+      ],
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/holy-energy_startseite.json"
+    },
+    {
+      "pageName": "Fuer Neueinsteiger",
+      "pageSlug": "02_fuer-neueinsteiger",
+      "pageId": "E0597C1D-5961-4E87-9CA5-2FAF0299330D",
+      "pageType": "onboarding",
+      "scrollHeight": 4783,
+      "brandModules": 6,
+      "voiceMarkers": {
+        "voiceRegister": "jung_lebendig",
+        "sentencePattern": "kurze_aussage",
+        "vocabularyField": "lifestyle",
+        "claimType": "benefit_funktional",
+        "rhetoricalDevice": "alliteration"
+      },
+      "voiceExamples": ["HOLY Starter Set Trio", "42 Portionen in 21 fruchtigen Geschmacksrichtungen", "Vegan & zuckerfrei mit 100 Prozent natuerlichen Fruchtaromen"],
+      "pageArchitecture": "Onboarding-Page mit XL-Manifest plus ProductGrid 5 Starter Sets plus Section-Intro plus Kategorien-Tile-Row plus Bestseller-Carousel.",
+      "moduleClusters": [
+        "Onboarding-Manifest Cluster: Header plus XL-Banner als Erklaerstueck",
+        "Hauptkonversion Cluster: ProductGrid 5 Starter Sets",
+        "Sortimentsverteiler Cluster: Section-Intro plus Kategorien-Tile-Row 4",
+        "Trust Cluster: Bestseller-Carousel",
+        "Footer Cluster: Share-Footer"
+      ],
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/holy-energy_fuer-neueinsteiger.json"
+    },
+    {
+      "pageName": "Bestseller",
+      "pageSlug": "03_bestseller",
+      "pageId": "E8F850A5-CE46-4877-88C4-F4F5A0365D02",
+      "pageType": "bestseller",
+      "scrollHeight": 5599,
+      "brandModules": 8,
+      "voiceMarkers": {
+        "voiceRegister": "jung_lebendig",
+        "sentencePattern": "kurze_aussage",
+        "vocabularyField": "lifestyle",
+        "claimType": "social_proof",
+        "rhetoricalDevice": "alliteration"
+      },
+      "voiceExamples": ["BESTSELLER", "Bestseller von HOLY Energy"],
+      "pageArchitecture": "Bestseller-Page mit Carousel-First-Architektur. Header plus Bestseller-Carousel sofort plus 3x wiederholtes Pattern (Section-Intro plus 728x728 Lifestyle-Showcase) plus Footer.",
+      "moduleClusters": [
+        "Conversion-First Cluster: Header plus Bestseller-Carousel sofort",
+        "Kategorien-Triade Cluster: 3x (Section-Intro plus quadratisches Showcase 728x728), wahrscheinlich Energy/IcedTea/Hydration",
+        "Footer Cluster: Share-Footer"
+      ],
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/holy-energy_bestseller.json"
+    },
+    {
+      "pageName": "Energy",
+      "pageSlug": "04_energy",
+      "pageId": "18BC62B2-B4AF-4995-B743-E80AECFA53AA",
+      "pageType": "hub_category",
+      "scrollHeight": 7674,
+      "brandModules": 6,
+      "voiceMarkers": {
+        "voiceRegister": "jung_lebendig",
+        "sentencePattern": "kurze_aussage",
+        "vocabularyField": "lifestyle",
+        "claimType": "benefit_funktional",
+        "rhetoricalDevice": "alliteration"
+      },
+      "voiceExamples": ["Raspberry Raptor", "Watermelon Whale", "Strawberry Shark", "Citrus Cobra", "Pomegranate Piranha", "Peach Panther", "NewCaff & Gruentee Extrakt"],
+      "pageArchitecture": "Energy-Kategorie-Page mit XL-Manifest plus 2 ASIN-Spotlights mit Video-Carousel plus Section-Intro plus Full-Catalog Grid 25 Energy-ASINs.",
+      "moduleClusters": [
+        "Page-Hero Cluster: Header plus XL-Manifest 1470x1227",
+        "Spotlight-Cluster: 2x ASIN-Spotlight mit Video (Raspberry Raptor plus Watermelon Whale Probier-Box)",
+        "Hauptkonversion Cluster: Section-Intro plus Full-Catalog Grid 25 ASINs",
+        "Footer Cluster: Share-Footer"
+      ],
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/holy-energy_energy.json"
+    },
+    {
+      "pageName": "Iced Tea",
+      "pageSlug": "05_iced-tea",
+      "pageId": "527A4D3B-EC68-4755-BF8D-2BF264AE1694",
+      "pageType": "hub_category",
+      "scrollHeight": 7280,
+      "brandModules": 5,
+      "voiceMarkers": {
+        "voiceRegister": "jung_lebendig",
+        "sentencePattern": "kurze_aussage",
+        "vocabularyField": "lifestyle",
+        "claimType": "benefit_funktional",
+        "rhetoricalDevice": "alliteration"
+      },
+      "voiceExamples": ["Peach x Black Tea", "Acai x Hibiscus", "Raspberry x Vanilla", "Antioxidantien", "Relax Formel", "Zuckerfreier Eistee"],
+      "pageArchitecture": "Iced-Tea-Kategorie-Page mit XL-Manifest plus 2 ASIN-Spotlights mit Video-Carousel plus Full-Catalog Grid 21 Iced-Tea-ASINs.",
+      "moduleClusters": [
+        "Page-Hero Cluster: Header plus XL-Manifest 1470x1227",
+        "Spotlight-Cluster: 2x ASIN-Spotlight mit Video (Peach x Black Tea plus Acai x Hibiscus Probier-Box)",
+        "Hauptkonversion Cluster: Full-Catalog Grid 21 ASINs",
+        "Footer Cluster: Share-Footer"
+      ],
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/holy-energy_iced-tea.json"
+    },
+    {
+      "pageName": "Hydration",
+      "pageSlug": "06_hydration",
+      "pageId": "34F0F6AC-314F-4167-9EDA-54E94AC937C7",
+      "pageType": "hub_category",
+      "scrollHeight": 5894,
+      "brandModules": 6,
+      "voiceMarkers": {
+        "voiceRegister": "jung_lebendig",
+        "sentencePattern": "kurze_aussage",
+        "vocabularyField": "lifestyle",
+        "claimType": "benefit_funktional",
+        "rhetoricalDevice": "alliteration"
+      },
+      "voiceExamples": ["Strawberry Kiwi", "Cranberry", "Lemon", "Elektrolyte Pulver", "Vegan mit 100 Prozent natuerlichen Fruchtaromen"],
+      "pageArchitecture": "Hydration-Kategorie-Page mit XL-Manifest plus 2 ASIN-Spotlights mit Video-Carousel plus Section-Intro plus Full-Catalog Grid 10 Hydration-ASINs.",
+      "moduleClusters": [
+        "Page-Hero Cluster: Header plus XL-Manifest 1470x1227",
+        "Spotlight-Cluster: 2x ASIN-Spotlight mit Video (Strawberry Kiwi plus Cranberry Probier-Box)",
+        "Hauptkonversion Cluster: Section-Intro plus Full-Catalog Grid 10 ASINs",
+        "Footer Cluster: Share-Footer"
+      ],
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/holy-energy_hydration.json"
+    },
+    {
+      "pageName": "Milkshakes",
+      "pageSlug": "07_milkshakes",
+      "pageId": "6AD7F40F-ED3C-4B02-BDC9-310A071E3EC7",
+      "pageType": "sub_category_minimal",
+      "scrollHeight": 3078,
+      "brandModules": 2,
+      "voiceMarkers": {
+        "voiceRegister": "jung_lebendig",
+        "sentencePattern": "kurze_aussage",
+        "vocabularyField": "lifestyle",
+        "claimType": "benefit_funktional",
+        "rhetoricalDevice": "alliteration"
+      },
+      "voiceExamples": ["Holy Milkshakes"],
+      "pageArchitecture": "Minimaler Stub mit nur 1 ProductCollection-Widget. Header plus Holy-Milkshakes-Collection mit eingebautem Banner und 5 ASINs plus Footer.",
+      "moduleClusters": [
+        "Header Cluster: Header (globaler Brand-Hero, kein page-spezifischer Hero)",
+        "Conversion Cluster: ProductCollection mit eigenem Banner und 5 Milkshake-ASINs",
+        "Footer Cluster: Share-Footer"
+      ],
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/holy-energy_milkshakes.json"
+    },
+    {
+      "pageName": "Starter Sets",
+      "pageSlug": "08_starter-sets",
+      "pageId": "15F6D24E-FF9D-4FE5-A1FB-5A2AD609CFE1",
+      "pageType": "hub_category",
+      "scrollHeight": 6163,
+      "brandModules": 7,
+      "voiceMarkers": {
+        "voiceRegister": "jung_lebendig",
+        "sentencePattern": "kurze_aussage",
+        "vocabularyField": "lifestyle",
+        "claimType": "benefit_funktional",
+        "rhetoricalDevice": "alliteration"
+      },
+      "voiceExamples": ["Starter Set Trio", "Starter Set Duo", "2x7 Sorten", "42 Portionen in 21 fruchtigen Geschmacksrichtungen"],
+      "pageArchitecture": "Starter-Sets-Page mit Spotlight-Stack-Architektur. Header plus XL-Manifest plus 5 sequentielle ASIN-Spotlights (Trio plus Duo plus Energy plus Hydration plus Iced Tea) plus Footer. Kein abschliessendes ProductGrid.",
+      "moduleClusters": [
+        "Page-Hero Cluster: Header plus XL-Manifest 1470x1227",
+        "Spotlight-Stack Cluster: 5x ASIN-Spotlight (Trio, Duo, Energy, Hydration, Iced Tea Starter Set)",
+        "Footer Cluster: Share-Footer"
+      ],
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/holy-energy_starter-sets.json"
+    },
+    {
+      "pageName": "Shaker",
+      "pageSlug": "09_shaker",
+      "pageId": "3B80FD95-4F71-4D28-944B-EA001C45FF3C",
+      "pageType": "sub_category",
+      "scrollHeight": 4955,
+      "brandModules": 3,
+      "voiceMarkers": {
+        "voiceRegister": "jung_lebendig",
+        "sentencePattern": "kurze_aussage",
+        "vocabularyField": "lifestyle",
+        "claimType": "benefit_funktional",
+        "rhetoricalDevice": "alliteration"
+      },
+      "voiceExamples": ["Holy Energy New Animal Shaker", "Unser Premium Shaker"],
+      "pageArchitecture": "Shaker-Page mit INVERSE Architektur. Header plus ProductGrid 12 ASINs SOFORT plus Page-Hero XL als Brand-Story-Closer plus Footer.",
+      "moduleClusters": [
+        "Conversion-First Cluster: Header plus ProductGrid 12 Animal-Shaker",
+        "Brand-Story-Closer Cluster: Page-Hero XL 1470x1227",
+        "Footer Cluster: Share-Footer"
+      ],
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/holy-energy_shaker.json"
+    },
+    {
+      "pageName": "Probier-Boxen",
+      "pageSlug": "10_probier-boxen",
+      "pageId": "229C0965-6260-45EF-8A4F-1723BD514037",
+      "pageType": "hub_category",
+      "scrollHeight": 6196,
+      "brandModules": 5,
+      "voiceMarkers": {
+        "voiceRegister": "jung_lebendig",
+        "sentencePattern": "kurze_aussage",
+        "vocabularyField": "lifestyle",
+        "claimType": "benefit_funktional",
+        "rhetoricalDevice": "alliteration"
+      },
+      "voiceExamples": ["Lion's Lemonade", "Peacock's Punch", "Cranberry", "Acai x Hibiscus", "10er Probier-Box"],
+      "pageArchitecture": "Probier-Boxen-Page mit Triade-plus-Grid-Architektur. Header plus 3 sequentielle Spotlight-Showcases (Energy, Hydration, Iced Tea jeweils mit einer 10er Probier-Box) plus Full-Catalog Grid 17 ASINs plus Footer.",
+      "moduleClusters": [
+        "Header Cluster: Header (globaler Brand-Hero, kein page-spezifischer Hero)",
+        "Kategorien-Triade Cluster: 3x ASIN-Spotlight (Energy Lion's Lemonade, Hydration Cranberry, Iced Tea Acai x Hibiscus)",
+        "Hauptkonversion Cluster: Full-Catalog Grid 17 ASINs",
+        "Footer Cluster: Share-Footer"
+      ],
+      "blueprintPath": "data/store-knowledge/rerun-v4/blueprints/holy-energy_probier-boxen.json"
+    }
+  ],
+  "storeAnalysis": {
+    "schemaVersion": "v3-brand-identity-2",
+    "synthesizedAt": "2026-05-23",
+    "synthesisNote": "Phase 3 Brand Identity basierend auf 10 von 12 HOLY-Energy-Pages. Adventskalender und Ueber-uns Pages nicht in Scope.",
+    "marketSegment": "Zuckerfreie Pulver-Softdrinks und Elektrolyt-Mischungen. Direct-to-Consumer Fitness- und Lifestyle-Brand mit jungem urbanen Anstrich. Sortimentskategorien: Energy (NewCaff Gruentee Extrakt), Iced Tea (Antioxidantien Relax Formel), Hydration (Elektrolyte), Milkshakes, Starter Sets, Shaker, Probier-Boxen.",
+    "primaryAudience": "Junge urbane Konsumenten (18-35), Fitness- und Lifestyle-affin, suchen zuckerfreie Alternative zu konventionellen Softdrinks und Energy-Drinks. Du-Form, Animal-Naming und alliterative Flavor-Namen sprechen direkt jungen Pop-Culture-affinen Zielmarkt an.",
+    "priceTier": "Mid-Market mit Premium-Inszenierung. Starter Sets und Probier-Boxen mit reduziertem Risiko-Einstieg, Full-Sortiment Pulver mit 50 Portionen pro Packung als Volumen-Variante.",
+    "productComplexity": "Mittel. 4 Konsumkategorien (Energy, Iced Tea, Hydration, Milkshakes) plus 3 Begleitkategorien (Starter Sets, Shaker, Probier-Boxen). Innerhalb Energy 25 Flavor-Varianten, Iced Tea 21, Hydration 10.",
+    "brandVoice": {
+      "tonality": "Jung, lebendig, alliterativ, mit kreativen Tier-Themen-Naming bei Energy. Du-Form. Lifestyle-Vokabular plus Funktions-Claims (NewCaff, Gruentee Extrakt, Antioxidantien, Elektrolyte, Relax Formel, vegan, zuckerfrei, 100 Prozent natuerliche Fruchtaromen).",
+      "adjectives": ["jung", "lebendig", "fruchtig", "natuerlich", "vegan", "zuckerfrei", "kreativ", "spielerisch"],
+      "signatureClaims": [
+        "DIE SOFTDRINK REVOLUTION",
+        "Vegan & zuckerfrei mit 100 Prozent natuerlichen Fruchtaromen",
+        "NewCaff & Gruentee Extrakt (Energy)",
+        "Antioxidantien plus Relax Formel (Iced Tea)",
+        "Elektrolyte Pulver (Hydration)",
+        "Animal-Themed Flavor-Naming bei Energy: Strawberry Shark, Watermelon Whale, Citrus Cobra, Pomegranate Piranha, Peach Panther, Raspberry Raptor, Lion's Lemonade, Peacock's Punch",
+        "x-Naming-Konvention bei Iced Tea: Peach x Black Tea, Acai x Hibiscus, Raspberry x Vanilla",
+        "Probier-Box als 10er Einstieg pro Kategorie"
+      ],
+      "voiceContrasts": [
+        "HOLY duzt explizit (junge Pop-Culture) waehrend Vergleichsmarken wie Bedsure und Kaercher siezen",
+        "Konsequent alliterative Flavor-Namen bei Energy (zwei Worte mit gleichem Anlaut, jeweils Frucht plus Tier)",
+        "Sehr kompakte Page-Architektur (durchschnittlich 5-7 Module) im Vergleich zu Bedsure (12-19 Module) oder Kaercher (5-19 Module)"
+      ]
+    },
+    "designAesthetic": {
+      "colorPalette": "Blau-getoenter Brand-Hero-Background mit bunten Produkt-Tubes und Shakern als Hauptmotiv. Pro Kategorie eigene Farbwelt (Energy etwa pink-violett, Iced Tea grun-braun, Hydration blau-tuerkis vermutlich).",
+      "typography": "Bold Sans-Serif Versalien fuer Headlines wie DIE SOFTDRINK REVOLUTION und BESTSELLER. Mixed Case fuer Produkt-Sublines mit Englischsprachigen Flavor-Namen.",
+      "photographyStyle": "Studio-Produkt-Stillleben mit Pulver-Tubes, Shakern und Drink-Visualisierung. Bunte Hintergruende. Saisonale Variationen (Bestseller-Hero mit ice cream-thema deutet auf saisonalen oder Drink-thematischen Hero hin).",
+      "layoutSignals": [
+        "Page-Hero XL 1470x1227 als Manifest-Banner ist wiederkehrende Brand-Signature auf 6 von 10 Pages",
+        "ASIN-Spotlight mit 28 Bildern und 10 Videos als Brand-Signature-Pattern auf 5 Pages (Energy, Iced Tea, Hydration, Starter Sets, Probier-Boxen)",
+        "Full-Catalog ProductGrid am Page-Ende mit 10-25 ASINs pro Kategorie",
+        "Sehr kompakte Module-Anzahl (durchschnittlich 5-7 Module pro Page) im Vergleich zu anderen v4-Stores"
+      ]
+    },
+    "positioningClaim": "HOLY Energy ist die zuckerfreie Pulver-Softdrink-Revolution fuer junge urbane Konsumenten mit kreativem Animal-Themed Flavor-Naming als Brand-Signature und vegan plus 100 Prozent natuerlichen Fruchtaromen als funktionalem Kern-USP.",
+    "contentStrategy": {
+      "approach": "Spotlight-getriebener Kategorie-Hub mit XL-Manifest-Hero plus 2 ASIN-Spotlights mit Video-Carousel plus Full-Catalog-Grid als Standard-Template fuer Hauptkategorien. Onboarding-Page fuer Neueinsteiger mit Starter-Set-Fokus. Conversion-First fuer Bestseller- und Shaker-Pages.",
+      "emotionalLayer": "Junge Pop-Culture-Asthetik mit kreativem Tier-Themen-Naming (Animal-Energy-Flavors) plus alliterativen Wort-Spielen. Lifestyle-Wortfeld jung, lebendig, fruchtig.",
+      "rationalLayer": "Vegan plus zuckerfrei plus 100 Prozent natuerliche Fruchtaromen plus Portions-Angabe (50 Portionen Hauptvariante, 10 Portionen Probier-Box, 28 Portionen Duo, 42 Portionen Trio). Energie-Funktion via NewCaff und Gruentee Extrakt. Relax-Funktion via Iced-Tea-Formel. Elektrolyt-Funktion via Hydration.",
+      "modulePreferences": "amazon_nav_header mit page-spezifischem Hero, hero_banner_tall 1470x1227 als Page-Hero, asin_showcase_with_video als Spotlight, product_grid_full_catalog als Konversionsanker, editorial_section_intro als Bruecke, product_grid_carousel fuer Bestseller-Anzeige.",
+      "editorialDepth": "Niedrig bis mittel. Durchschnitt 5-7 Module pro Page. Milkshakes-Stub mit nur 2 Inhaltsmodulen, Starter Sets mit 7 Spotlight-Stack-Modulen. Sehr kompakte Architektur."
+    },
+    "conversionPath": {
+      "primary": "ProductGrid Full-Catalog am Page-Ende (10-25 ASINs je Kategorie) plus eingebrannte Animal-Themed Flavor-Naming als Wiedererkennungsanker",
+      "secondary": "ASIN-Spotlights mit Video-Carousel als Premium-Conversion-Pfad pro Spotlight-Modul",
+      "onboarding": "Starter-Sets Page mit 5 Spotlight-Stack-Varianten als reduzierter Einstiegs-Pfad (Trio, Duo, Energy, Hydration, Iced Tea)",
+      "trial": "Probier-Boxen-Page mit Triade-Spotlights und Full-Catalog Grid 17 ASINs fuer Low-Commitment-Conversion (10 Portionen statt 50 Portionen)",
+      "crossSell": "Shaker-Page mit ProductGrid-First-Architektur (12 Animal-Themed-Shaker passend zu Energy-Flavor-Naming) als Sortiments-Cross-Sell",
+      "trustLoop": "Bestseller-Carousel auf Startseite plus Fuer-Neueinsteiger-Page plus dedizierte Bestseller-Page mit 3-Cluster-Pattern"
+    },
+    "keyStrengths": [
+      "Animal-Themed Flavor-Naming als wiederkehrende Brand-Signature (Energy nutzt durchgehend Tier-Namen plus Fruechte: Strawberry Shark, Watermelon Whale etc.)",
+      "Konsequente Spotlight-Architektur mit XL-Manifest plus 2 ASIN-Spotlights plus Full-Catalog als wiederholbares Hauptkategorie-Template",
+      "Sehr kompakte Pages (durchschnittlich 5-7 Module) ermoeglichen schnelle User-Navigation",
+      "Drei differenzierte Einstiegs-Pfade: Starter-Sets fuer Neue, Probier-Boxen fuer Risiko-Reduktion, Full-Catalog fuer Wiederkaeufer",
+      "ASIN-Spotlight mit 28 Bildern und 10 Videos pro Spotlight als dichter Produkt-Inhalt",
+      "Animal-Themed Shaker-Linie (Cross-Sell-Logik zu Energy-Flavor-Naming) als kreative Sortiments-Erweiterung"
+    ],
+    "brandUSPs": [
+      "Vegan plus zuckerfrei plus 100 Prozent natuerliche Fruchtaromen als Marken-Versprechen ueber alle Konsumkategorien (Energy, Iced Tea, Hydration, Milkshakes)",
+      "Animal-Themed Flavor-Naming als Wiedererkennungs-USP der Brand-Identitaet (Strawberry Shark plus Watermelon Whale plus Pomegranate Piranha plus Citrus Cobra plus Peach Panther plus Raspberry Raptor)",
+      "Pulver-Drink-Format als Kategorie-Innovation (DIE SOFTDRINK REVOLUTION) gegenueber Dosen-Konventionalen",
+      "Drei differenzierte Drink-Funktionen: NewCaff plus Gruentee Extrakt fuer Energy, Antioxidantien plus Relax Formel fuer Iced Tea, Elektrolyte fuer Hydration",
+      "Probier-Box als 10er-Einstieg pro Hauptkategorie zur Risiko-Reduktion",
+      "Starter Sets als gebundelte Onboarding-Variante (Trio mit allen 3 Hauptkategorien, Duo mit 2)"
+    ],
+    "moduleFunctionalTaxonomy": {
+      "page_hero_xl_1470x1227_manifest": "XL-Banner als Page-Hero-Manifest pro Hauptkategorie (Energy, Iced Tea, Hydration, Starter Sets, Fuer-Neueinsteiger, Shaker)",
+      "asin_showcase_with_video": "WIEDERKEHREND auf 5 Pages: Spotlight-Modul mit 1 ASIN, 24-28 Bildern und 10 Videos pro Modul. HOLY-Brand-Signature.",
+      "product_grid_full_catalog_10_to_25_asins": "Pro Kategorie ein Full-Catalog Grid mit 10-25 ASINs als Konversionsanker (Energy 25, Iced Tea 21, Hydration 10, Probier-Boxen 17, Shaker 12).",
+      "spotlight_stack_5x": "Auf Starter-Sets-Page: 5 sequentielle ASIN-Spotlights ohne abschliessendes Grid",
+      "spotlight_triade_3x_plus_grid": "Auf Probier-Boxen-Page: 3 Spotlights (je 1 pro Hauptkategorie) plus Full-Catalog-Grid",
+      "inverse_grid_first": "Auf Shaker-Page: ProductGrid vor Page-Hero (inverse Architektur)",
+      "bestseller_carousel_amazon_native": "Amazon native ProductCarousel auf 3 Pages (Startseite, Fuer-Neueinsteiger, Bestseller) mit Heading 'Bestseller von HOLY Energy'",
+      "showcase_pair_pattern_3x": "Auf Bestseller-Page: Section-Intro plus 728x728 Lifestyle-Showcase, dreifach wiederholt fuer Kategorien-Cluster Energy/IcedTea/Hydration",
+      "minimal_product_collection_stub": "Auf Milkshakes-Page: Amazon native ProductCollection-Widget statt Custom-Editorial (Stub-Pattern fuer neue Launches)"
+    },
+    "pageArchetypes": {
+      "startseite": {
+        "primaryFunction": "Brand-Story plus Sortimentsuebersicht plus Bestseller-Loop",
+        "conversionMode": "Soft (Tile-Click) plus Hard (ProductGrid 4 Top-Produkte) plus Trust (Bestseller-Carousel)",
+        "transferableTo": "Junge Lifestyle-Brands mit kompakter Sortimentsbreite"
+      },
+      "onboarding_starter_sets": {
+        "primaryFunction": "Manifest-Erklaerstueck plus Starter-Set-Fokus plus Kategorien-Verteiler",
+        "conversionMode": "Soft Onboarding (XL-Banner) plus Hard (ProductGrid 5 Starter Sets)",
+        "transferableTo": "D2C-Brands mit Erklaerungs-beduerftigem Produkt-Konzept",
+        "exampleHoly": "Fuer-Neueinsteiger"
+      },
+      "hub_category_spotlight": {
+        "primaryFunction": "Premium-Flavor-Showcase plus Probier-Box-Einstieg plus Full-Catalog-Grid",
+        "conversionMode": "Soft (XL-Hero) plus Hard (Spotlights plus Grid)",
+        "transferableTo": "Konsumkategorien mit 10-25 SKUs und klarem Flavor-Differenzierungs-Bedarf",
+        "exampleHoly": "Energy, Iced Tea, Hydration"
+      },
+      "hub_category_spotlight_stack": {
+        "primaryFunction": "Sequentielle Spotlights als Bundle-Vergleich, kein Grid",
+        "conversionMode": "Hard via individuelle Spotlights",
+        "transferableTo": "Bundle-Sets mit fester Anzahl Varianten (3-5)",
+        "exampleHoly": "Starter Sets"
+      },
+      "hub_category_spotlight_triade_plus_grid": {
+        "primaryFunction": "Drei Kategorien-Spotlights plus Full-Catalog-Grid ohne Page-Hero",
+        "conversionMode": "Hard direkt",
+        "transferableTo": "Cross-Kategorie-Sammlungen wo Risiko-Reduktion (Trial) der Hauptanwendungsfall ist",
+        "exampleHoly": "Probier-Boxen"
+      },
+      "sub_category_inverse": {
+        "primaryFunction": "Grid sofort plus Brand-Story-Closer",
+        "conversionMode": "Hard sofort plus Trust-Loop unten",
+        "transferableTo": "Accessoire- oder Cross-Sell-Kategorien wo Brand-Story sekundaer ist",
+        "exampleHoly": "Shaker"
+      },
+      "bestseller_carousel_first_plus_triade": {
+        "primaryFunction": "Sofortige Bestseller-Conversion plus Kategorien-Triade",
+        "conversionMode": "Hard sofort plus Soft (Showcase-Triade)",
+        "transferableTo": "Multi-Kategorie-Brands mit klaren Bestseller-Listen pro Kategorie",
+        "exampleHoly": "Bestseller"
+      },
+      "sub_category_minimal_stub": {
+        "primaryFunction": "ProductCollection als einzelner Inhalt, kein Custom-Editorial",
+        "conversionMode": "Hard (Amazon natives Widget)",
+        "transferableTo": "Neuheiten- und Saisonal-Launches die noch keinen vollen Page-Hero/Spotlight-Pattern haben",
+        "exampleHoly": "Milkshakes"
+      }
+    },
+    "brandSpecificVsStructuralExtraction": {
+      "strukturell_uebertragbar_an_neue_brands": [
+        "Hauptkategorie-Template: Page-Hero XL plus 2 ASIN-Spotlights mit Video plus Full-Catalog-Grid",
+        "Starter-Sets-Template: Page-Hero plus N sequentielle ASIN-Spotlights ohne Grid",
+        "Probier-Boxen-Template: Spotlight-Triade plus Grid ohne Page-Hero",
+        "Shaker-Template: ProductGrid first plus Page-Hero als Brand-Story-Closer (inverse)",
+        "Bestseller-Template: Carousel sofort plus Showcase-Triade (Section-Intro plus 728x728 Lifestyle-Pair)",
+        "Onboarding-Template: XL-Manifest plus Starter-Set-Grid plus Kategorien-Verteiler",
+        "Stub-Template: Amazon native ProductCollection als einzelnes Inhalt fuer Neuheiten-Launches",
+        "voiceMarkers jung_lebendig lifestyle benefit_funktional alliteration",
+        "asin_showcase_with_video als Premium-Spotlight-Pattern mit 24-28 Bildern und 10 Videos pro Modul",
+        "Triade-Pattern: drei Kategorien-Spotlights als Page-Struktur (Probier-Boxen, Bestseller)"
+      ],
+      "brand_spezifisch_NICHT_uebertragbar": [
+        "Wortbildmarke HOLY Energy",
+        "Tagline DIE SOFTDRINK REVOLUTION",
+        "Animal-Themed Flavor-Naming der Energy-Linie (Strawberry Shark, Watermelon Whale, Pomegranate Piranha, Citrus Cobra, Peach Panther, Raspberry Raptor, Lion's Lemonade, Peacock's Punch)",
+        "x-Naming-Konvention der Iced-Tea-Linie (Peach x Black Tea, Acai x Hibiscus, Raspberry x Vanilla)",
+        "NewCaff plus Gruentee Extrakt als konkreter Energy-Wirkstoff",
+        "Relax Formel als konkreter Iced-Tea-Wirkstoff",
+        "Bunte blau-getoente Produkt-Hero-Background-Asthetik",
+        "Animal-Shaker-Linie als Cross-Sell-Logik zu Energy-Flavor-Naming",
+        "50-Portionen pro Hauptvariante / 28-Portionen Duo / 42-Portionen Trio / 10-Portionen Probier-Box Mengen-Konvention",
+        "konkrete ASIN-Nummern (B0CKL..., B0CPJ..., B0CZ5..., B0D1C..., B0D9Q..., B0DCK..., B0DD4..., B0DWX..., B0FQC..., B0F3N...)"
+      ]
+    }
+  },
+  "openQuestions": [
+    "Adventskalender (Saisonal) und Ueber-uns (Brand-Story) Pages nicht in dieser Iteration erfasst (Scope: Top 10).",
+    "Hero-Banner Alt-Text der Bestseller-Page erwaehnt 'ice cream pints with patterned lids on green background'. Pruefen ob HOLY Energy eine Ice Cream Linie hat oder ob der Hero ein zukuenftiges Feature ist. Aktuell sieht das nicht wie HOLYs sonstige Produkt-Asthetik (Pulver-Tubes, Drinks) aus.",
+    "Page-Hero-XL-Banner-Bildtexte in Phase 2 per Vision zu extrahieren (Energy-Manifest, Iced-Tea-Manifest, Hydration-Manifest, Starter-Sets-Manifest, Fuer-Neueinsteiger-Manifest, Shaker-Brand-Story).",
+    "Video-Inhalte im Startseite-Video-Modul und in den ASIN-Spotlight-Videos sind in Phase 2 zu transkribieren fuer Brand-Voice-Vertiefung.",
+    "Vokabular-Vorschlag fuer voiceRegister: 'jung_lebendig' (HOLY's du-Form plus alliterative Animal-Themed Flavor-Naming) ist ggf. ein neuer Register-Tag, der nicht in Bedsure/Kaercher/Kloster-Kitchen vorkommt. Bei Aufnahme ins Schema dann sortieren mit professionell, emotional, technisch, saisonal.",
+    "Vokabular-Vorschlag fuer layoutType: 'asin_showcase_with_video' (1 ASIN plus 28 Bilder plus 10 Videos in einem Split-Modul) als neues HOLY-Brand-Pattern, das in anderen v4-Stores nicht so prominent vorkommt.",
+    "Vokabular-Vorschlag fuer pageType: 'onboarding' (Fuer-Neueinsteiger-Archetyp), 'sub_category_minimal' (Milkshakes-Stub-Archetyp).",
+    "Vokabular-Vorschlag fuer claimType: 'naming_signature' fuer Flavor-Naming-Konventionen wie HOLY's Tier-Naming (kann sich ggf. mit benefit_funktional ergaenzen)."
+  ]
+}

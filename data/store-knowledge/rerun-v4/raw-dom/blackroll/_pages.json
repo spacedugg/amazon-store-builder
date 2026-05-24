@@ -1,0 +1,17 @@
+{
+  "store": "blackroll",
+  "storeUrl": "https://www.amazon.de/stores/page/03098AB4-BDD5-4A23-A7DD-5C10153C5D58",
+  "discoveredAt": "2026-05-12",
+  "discoveryMethod": "navigation_bar_dynamic_crawl_via_chrome_mcp_read_page",
+  "noteToFutureRuns": "Page-IDs sind identisch zur v1-Analyse (2026-04-09), kein Migrations-Update bei Blackroll.",
+  "pages": [
+    { "slug": "01_startseite",       "name": "Startseite",      "level": 0, "pageId": "03098AB4-BDD5-4A23-A7DD-5C10153C5D58", "url": "https://www.amazon.de/stores/page/03098AB4-BDD5-4A23-A7DD-5C10153C5D58" },
+    { "slug": "02_bestseller",       "name": "Bestseller",      "level": 1, "pageId": "A2470DD2-F6B7-49D3-9DE1-4BC9FBE710B0", "url": "https://www.amazon.de/stores/page/A2470DD2-F6B7-49D3-9DE1-4BC9FBE710B0" },
+    { "slug": "03_schlaf",           "name": "Schlaf",          "level": 1, "pageId": "870649DE-4F7E-421F-B141-C4C47864D539", "url": "https://www.amazon.de/stores/page/870649DE-4F7E-421F-B141-C4C47864D539" },
+    { "slug": "04_faszienrollen",    "name": "Faszienrollen",   "level": 1, "pageId": "0C47A3FC-C1D2-4C30-B03C-86EDFB3B607A", "url": "https://www.amazon.de/stores/page/0C47A3FC-C1D2-4C30-B03C-86EDFB3B607A" },
+    { "slug": "05_massagepistole",   "name": "Massagepistole",  "level": 1, "pageId": "9A8C7424-898F-4E76-9442-CBCDB511CECB", "url": "https://www.amazon.de/stores/page/9A8C7424-898F-4E76-9442-CBCDB511CECB" },
+    { "slug": "06_baelle-trigger",   "name": "Baelle und Trigger", "level": 1, "pageId": "DD99AD6C-2ABA-4720-8BE8-06517078F35B", "url": "https://www.amazon.de/stores/page/DD99AD6C-2ABA-4720-8BE8-06517078F35B" },
+    { "slug": "07_trainingsbaender", "name": "Trainingsbaender","level": 1, "pageId": "0EC7448C-FEF3-4672-BB11-15EAD7208270", "url": "https://www.amazon.de/stores/page/0EC7448C-FEF3-4672-BB11-15EAD7208270" },
+    { "slug": "08_ueber-blackroll",  "name": "Ueber BLACKROLL", "level": 1, "pageId": "031EB79B-C8A4-4E6D-ADBF-B84F0D3957ED", "url": "https://www.amazon.de/stores/page/031EB79B-C8A4-4E6D-ADBF-B84F0D3957ED" }
+  ]
+}

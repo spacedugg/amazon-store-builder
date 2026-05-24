@@ -1,0 +1,833 @@
+{
+  "pageUrl": "https://www.amazon.de/stores/page/E337104E-63D3-41B2-8560-D92F482B2790",
+  "pageName": "Mikronaehrstoffe",
+  "pageId": "E337104E-63D3-41B2-8560-D92F482B2790",
+  "pageLevel": 1,
+  "pageType": "hub_category",
+  "scrollHeight": 5305,
+  "contentStats": {
+    "domModules": 10,
+    "logicalModules": 9,
+    "totalImages": 11,
+    "totalVideos": 1
+  },
+  "heroBanner": {
+    "description": "Markenuebergreifender Sticky-Hero ueber alle Pages des Stores. Linke Haelfte zeigt eine Frau im beigen Pullover im Halbprofil, die aus einem Glas mit gelblicher Fluessigkeit trinkt. Rechte Haelfte: grosser dunkelgruener Ingwerblatt-Hintergrund mit weisser Wortbildmarke KLOSTER KITCHEN und Tagline BETTER THAN GOOD in fetter Versalien-Sans-Serif.",
+    "textOnImage": {
+      "visibleText": "KLOSTER KITCHEN BETTER THAN GOOD",
+      "textType": "tagline",
+      "origin": "baked_in",
+      "headline": "BETTER THAN GOOD",
+      "subline": null,
+      "cta": null,
+      "directionCues": null
+    },
+    "estimatedDimensions": "3000x500"
+  },
+  "modules": [
+    {
+      "position": 1,
+      "moduleId": "mikronaehrstoffe_mod_01",
+      "moduleName": "Amazon Nav plus Brand Header sticky",
+      "layoutType": "amazon_nav_header",
+      "layoutShape": "chrome_thin",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": "Amazon Stores Chrome plus Brand Header mit Tagline und Sub-Navigation. Nicht markenexklusiv generierbar, gehoert zur Amazon Plattform.",
+      "structuralPattern": "Amazon globaler Header, darunter Kloster Kitchen Brand-Streifen mit Wortbildmarke und Tagline, darunter Sub-Nav-Bar mit Kategorien (Startseite, Ingwer Shots, MIKRONAEHRSTOFFE active, Saftkuren, Smoothies, Shot Kur, Mehr) und Folgen-Button.",
+      "moduleFunction": "Stellt die Marken-Identitaet (KLOSTER KITCHEN, Tagline BETTER THAN GOOD) sticky ueber die gesamte Page und ermoeglicht Navigation zwischen den 10 Kategorie-Seiten. Aktive Page ist hervorgehoben.",
+      "relationToPrevious": "none",
+      "relationToNext": "hands_off_to_navigation",
+      "visualBridge": "none",
+      "copyBridge": "none",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "KLOSTER KITCHEN BETTER THAN GOOD STARTSEITE INGWER SHOTS MIKRONAEHRSTOFFE SAFTKUREN SMOOTHIES SHOT KUR MEHR",
+        "textType": "tagline",
+        "origin": "amazon_chrome",
+        "headline": "BETTER THAN GOOD",
+        "subline": null,
+        "cta": "Folgen",
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "Header",
+        "visibleHeadings": ["KLOSTER KITCHEN", "BETTER THAN GOOD"],
+        "ctaLabels": ["Folgen", "Teilen", "Startseite", "Ingwer Shots", "Mikronaehrstoffe", "Saftkuren", "Smoothies", "Shot Kur", "Mehr"],
+        "imageUrls": ["screenshot_required"],
+        "videoCount": 0
+      }
+    },
+    {
+      "position": 2,
+      "moduleId": "mikronaehrstoffe_mod_02",
+      "moduleName": "Schmaler Brand-Akzent Video oder Spacer",
+      "layoutType": "editorial_banner_solid_color",
+      "layoutShape": "full_width_banner",
+      "tileCount": 0,
+      "designIntent": "visual_separator",
+      "designIntentDetail": "Sehr schmales Modul (167 px) zwischen Sub-Nav und VITAL FLOW Headline. Phase 1 zaehlt 1 video, aber visuell ist die Flaeche leer beziehungsweise eine helle Spacer-Sektion. Vermutlich ein animierter Brand-Akzent (z.B. dezenter Hintergrund-Loop) oder ein Spacer mit unsichtbarem Video-Tag.",
+      "structuralPattern": "Schmaler Full-Width-Streifen unterhalb der Sub-Nav, vor der ersten inhaltlichen Section.",
+      "moduleFunction": "Visueller Atemraum zwischen Sticky-Nav und der ersten Content-Section VITAL FLOW. Kein eigenstaendiger Inhalt sichtbar.",
+      "relationToPrevious": "none",
+      "relationToNext": "prepares_visual_break",
+      "visualBridge": "shared_color",
+      "copyBridge": "none",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 1
+      },
+      "toolGap": {
+        "description": "Unsichtbare Spacer mit Video-Tag werden im Generator nicht abgebildet. Phase 1 markiert es als video, Vision sieht keine Inhalte.",
+        "suggestedExtension": "Spacer-Modul mit optionalem Hintergrund-Loop als eigener layoutType einfuehren, falls dieses Pattern bei mehreren Brands auftritt."
+      }
+    },
+    {
+      "position": 3,
+      "moduleId": "mikronaehrstoffe_mod_03",
+      "moduleName": "VITAL FLOW Produktlinien Section Intro",
+      "layoutType": "editorial_section_intro",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "section_intro",
+      "designIntentDetail": "Zentrierte schwarze Versalien-Headline VITAL FLOW mit zweizeiliger Subline. Markiert den Beginn der Produktlinien-Sektion auf der Mikronaehrstoffe-Page.",
+      "structuralPattern": "Weisser Hintergrund, zentriert, oben Versalien-Headline VITAL FLOW in dicker Sans-Serif, darunter normale Sans-Serif-Subline ueber zwei Zeilen.",
+      "moduleFunction": "Eroeffnet die Produktlinie VITAL FLOW und positioniert sie als taegliche Naehrstoffbasis. Bereitet semantisch den unmittelbar folgenden Produkt-Tile-Row vor.",
+      "relationToPrevious": "opens_section_thematically",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "shared_color",
+      "copyBridge": "poses_question_for_below",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "VITAL FLOW Deine taegliche Naehrstoffbasis mit Vitaminen und Mineralstoffen",
+        "textType": "category_headline",
+        "origin": "layered_text",
+        "headline": "VITAL FLOW",
+        "subline": "Deine taegliche Naehrstoffbasis mit Vitaminen und Mineralstoffen",
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "toolTileType": "image_text",
+          "toolImageType": "screenshot_required",
+          "link": {
+            "clickable": false,
+            "linkType": "none",
+            "linkTarget": null,
+            "ctaLabel": null
+          },
+          "tileContentTopic": {
+            "primarySubject": "Vital Flow Produktlinie",
+            "productOrCategoryRef": null,
+            "intent": "story",
+            "rolePosition": "Section Header"
+          },
+          "visualContent": "Zentrierte Headline VITAL FLOW in schwarzer Versalien-Sans-Serif, darunter zweizeilige Subline in normaler Sans-Serif. Weisser Hintergrund, keine Bildelemente.",
+          "elementProportions": {
+            "text": 30,
+            "solid_background": 70
+          },
+          "textOnImage": {
+            "visibleText": "VITAL FLOW Deine taegliche Naehrstoffbasis mit Vitaminen und Mineralstoffen",
+            "textType": "category_headline",
+            "origin": "layered_text",
+            "headline": "VITAL FLOW",
+            "subline": "Deine taegliche Naehrstoffbasis mit Vitaminen und Mineralstoffen",
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null
+        }
+      ],
+      "toolLayoutId": "screenshot_required",
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": ["VITAL FLOW"],
+        "ctaLabels": [],
+        "imageUrls": ["screenshot_required"],
+        "videoCount": 0
+      }
+    },
+    {
+      "position": 4,
+      "moduleId": "mikronaehrstoffe_mod_04",
+      "moduleName": "VITAL FLOW Produkt-Showcase 2 ASINs",
+      "layoutType": "product_grid_featured",
+      "layoutShape": "split_two_columns",
+      "tileCount": 2,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Zwei nebeneinander stehende Produkt-Karten mit dunklem Vital-Flow-Glasgebinde und gelbem Sticker 74 PFLANZLICHE ZUTATEN. Links Einzelflasche, rechts 3er-Set mit Holzloeffel.",
+      "structuralPattern": "Zwei gleich grosse Produktkarten nebeneinander, jede mit Produktbild zentriert, darunter Preis in grosser Schrift und Liter-Preis kleiner, plus Verfuegbarkeitshinweis oder Prime-Badge.",
+      "moduleFunction": "Direkter Konversions-Punkt nach der Section Intro: zwei Varianten des Vital-Flow-Konzentrats als Einstieg und Bundle. Bedient sowohl Erstprobierer (Einzelflasche, niedriger Einstiegspreis) als auch wiederkehrende Kunden (3er Bundle mit besserem Liter-Preis).",
+      "relationToPrevious": "lists_subordinate_options",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "shared_subject_class",
+      "copyBridge": "answers_above_question",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "screenshot_required",
+          "link": {
+            "clickable": true,
+            "linkType": "asin",
+            "linkTarget": "screenshot_required",
+            "ctaLabel": null
+          },
+          "tileContentTopic": {
+            "primarySubject": "Vital Flow Einzelflasche 500 ml",
+            "productOrCategoryRef": "screenshot_required",
+            "intent": "convert",
+            "rolePosition": "Entry Product"
+          },
+          "visualContent": "Schwarze Glasflasche Vital Flow mit weissem Wortbildmarken-Label, gelber Anhaenger-Sticker rechts mit grossem 74 und Untertitel PFLANZLICHE ZUTATEN. Daneben dunkle Frucht- oder Smoothie-Spritzer als visueller Frische-Akzent.",
+          "elementProportions": {
+            "product_photo": 75,
+            "solid_background": 15,
+            "text": 5,
+            "badge": 5
+          },
+          "textOnImage": {
+            "visibleText": "35,90 EUR 71,80 EUR/l",
+            "textType": "product_title",
+            "origin": "amazon_overlay",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "ASIN-Detailseite Vital Flow 500ml"
+        },
+        {
+          "position": 2,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "screenshot_required",
+          "link": {
+            "clickable": true,
+            "linkType": "asin",
+            "linkTarget": "screenshot_required",
+            "ctaLabel": null
+          },
+          "tileContentTopic": {
+            "primarySubject": "Vital Flow 3er Bundle mit Holzloeffel",
+            "productOrCategoryRef": "screenshot_required",
+            "intent": "convert",
+            "rolePosition": "Bundle Upsell"
+          },
+          "visualContent": "Drei schwarze Vital-Flow-Flaschen nebeneinander, gleiche Optik wie Tile 1, plus heller Holzloeffel als Beigabe. Gleicher gelber 74-Sticker. Verfuegbarkeitshinweis Nur noch 15 auf Lager unter dem Preis.",
+          "elementProportions": {
+            "product_photo": 80,
+            "solid_background": 10,
+            "text": 7,
+            "badge": 3
+          },
+          "textOnImage": {
+            "visibleText": "99,90 EUR 66,60 EUR/l Nur noch 15 auf Lager",
+            "textType": "product_title",
+            "origin": "amazon_overlay",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "ASIN-Detailseite Vital Flow 3er Bundle"
+        }
+      ],
+      "toolLayoutId": "screenshot_required",
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": ["screenshot_required"],
+        "videoCount": 0
+      }
+    },
+    {
+      "position": 5,
+      "moduleId": "mikronaehrstoffe_mod_05",
+      "moduleName": "Lifestyle Tile-Row 2-fach Anwendungsmomente",
+      "layoutType": "editorial_tile_pair",
+      "layoutShape": "split_two_columns",
+      "tileCount": 2,
+      "designIntent": "editorial",
+      "designIntentDetail": "Zwei nebeneinander stehende Lifestyle-Vollflaechen ohne sichtbaren Text. Zeigen das Produkt in zwei Anwendungsmomenten (Kueche und Spiegel-Selfcare).",
+      "structuralPattern": "Zwei gleich grosse Vollflaechen-Lifestyle-Fotos ohne CTAs, ohne Text-Overlay. Reine emotionale Validation der Vital-Flow-Routine.",
+      "moduleFunction": "Visuelle Validation der Routine nach dem Showcase: zeigt Vital Flow in zwei typischen Anwendungs-Momenten (Fruehstueck am Tisch, Selfcare am Spiegel) und bedient damit die Lifestyle-Komponente fuer Frauen 30 plus.",
+      "relationToPrevious": "zooms_into_above_subject",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "shared_subject_class",
+      "copyBridge": "none",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "lifestyle",
+          "toolTileType": "image",
+          "toolImageType": "screenshot_required",
+          "link": {
+            "clickable": false,
+            "linkType": "none",
+            "linkTarget": null,
+            "ctaLabel": null
+          },
+          "tileContentTopic": {
+            "primarySubject": "Lifestyle Fruehstueck Vital Flow",
+            "productOrCategoryRef": null,
+            "intent": "story",
+            "rolePosition": "Anwendungs Szene 1"
+          },
+          "visualContent": "Frau in beigem Pullover sitzt entspannt am gedeckten Tisch und schenkt sich Vital Flow in ein Weinglas. Im Bildvordergrund Blumen-Strauss und kleine graue Schale, im Hintergrund Sofa und helles Tageslicht. Warme, ruhige Wohn-Atmosphaere.",
+          "elementProportions": {
+            "lifestyle_photo": 95,
+            "product_photo": 5
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null
+        },
+        {
+          "position": 2,
+          "imageCategory": "lifestyle",
+          "toolTileType": "image",
+          "toolImageType": "screenshot_required",
+          "link": {
+            "clickable": false,
+            "linkType": "none",
+            "linkTarget": null,
+            "ctaLabel": null
+          },
+          "tileContentTopic": {
+            "primarySubject": "Lifestyle Selfcare Vital Flow",
+            "productOrCategoryRef": null,
+            "intent": "story",
+            "rolePosition": "Anwendungs Szene 2"
+          },
+          "visualContent": "Frau trinkt aus einem Glas mit dunkelroter Fluessigkeit, im Bild rechts ihr Spiegelbild. Ruhiger, intimer Moment, vermutlich Bad-Setting. Naturlicht, weiches Hautbild.",
+          "elementProportions": {
+            "lifestyle_photo": 100
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null
+        }
+      ],
+      "toolLayoutId": "screenshot_required",
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": ["screenshot_required"],
+        "videoCount": 0
+      }
+    },
+    {
+      "position": 6,
+      "moduleId": "mikronaehrstoffe_mod_06",
+      "moduleName": "Reason-to-Believe Statement Pflanzlich Gedacht",
+      "layoutType": "editorial_banner_solid_color",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": "Zentrale Headline in zwei Versalien-Zeilen plus laengere Sub-Copy. Argumentations-Sektion, die das Vital-Flow-Versprechen begruendet. Verwendet Fussnoten zu EU-Health-Claims.",
+      "structuralPattern": "Weisser Hintergrund, zentriert. Oben fette schwarze Sans-Serif-Headline in zwei Zeilen, darunter mehrzeilige Sub-Copy in normaler Sans-Serif. Drei hochgestellte Ziffern verweisen auf Fussnoten unten in Modul 8.",
+      "moduleFunction": "Liefert die Begruendung fuer das Vital-Flow-Versprechen. Schlaegt die Bruecke vom Lifestyle-Tile-Row zur emotionalen Hero-Image-Sektion und legt die Health-Claims fuer den spaeteren Awards-Banner.",
+      "relationToPrevious": "summarizes_above",
+      "relationToNext": "promises_proof_below",
+      "visualBridge": "hard_break_intentional",
+      "copyBridge": "continues_idea",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "PFLANZLICH GEDACHT. WISSENSCHAFTLICH GEMACHT. Bereit fuer alles, was dein Tag bringt? VITAL FLOW - Dein Mikronaehrstoffkonzentrat mit ueber 70 pflanzliche Zutaten, kombiniert mit essenziellen Vitaminen und Mineralstoffen fuer dein Immunsystem, deine Energie und deine kognitive Funktion. VITAL FLOW - Weil dein Tag mehr verdient als nur Routine.",
+        "textType": "headline",
+        "origin": "layered_text",
+        "headline": "PFLANZLICH GEDACHT. WISSENSCHAFTLICH GEMACHT.",
+        "subline": "Bereit fuer alles, was dein Tag bringt? VITAL FLOW, Dein Mikronaehrstoffkonzentrat mit ueber 70 pflanzliche Zutaten, kombiniert mit essenziellen Vitaminen und Mineralstoffen fuer dein Immunsystem, deine Energie und deine kognitive Funktion. VITAL FLOW, Weil dein Tag mehr verdient als nur Routine.",
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "toolTileType": "image_text",
+          "toolImageType": "screenshot_required",
+          "link": {
+            "clickable": false,
+            "linkType": "none",
+            "linkTarget": null,
+            "ctaLabel": null
+          },
+          "tileContentTopic": {
+            "primarySubject": "Reason to Believe Vital Flow",
+            "productOrCategoryRef": null,
+            "intent": "story",
+            "rolePosition": "Brand Claim Statement"
+          },
+          "visualContent": "Zentrierte Text-Komposition auf weissem Hintergrund. Oben zwei Versalien-Zeilen in dicker Sans-Serif. Darunter mehrzeilige Sub-Copy in normaler Sans-Serif mit Fragezeichen am Anfang. Drei Fussnoten-Indizes hinter Immunsystem, Energie und kognitive Funktion.",
+          "elementProportions": {
+            "text": 70,
+            "solid_background": 30
+          },
+          "textOnImage": {
+            "visibleText": "PFLANZLICH GEDACHT. WISSENSCHAFTLICH GEMACHT. Bereit fuer alles, was dein Tag bringt? VITAL FLOW - Dein Mikronaehrstoffkonzentrat mit ueber 70 pflanzliche Zutaten, kombiniert mit essenziellen Vitaminen und Mineralstoffen fuer dein Immunsystem, deine Energie und deine kognitive Funktion. VITAL FLOW - Weil dein Tag mehr verdient als nur Routine.",
+            "textType": "headline",
+            "origin": "layered_text",
+            "headline": "PFLANZLICH GEDACHT. WISSENSCHAFTLICH GEMACHT.",
+            "subline": "Bereit fuer alles, was dein Tag bringt? VITAL FLOW, Dein Mikronaehrstoffkonzentrat mit ueber 70 pflanzliche Zutaten, kombiniert mit essenziellen Vitaminen und Mineralstoffen fuer dein Immunsystem, deine Energie und deine kognitive Funktion. VITAL FLOW, Weil dein Tag mehr verdient als nur Routine.",
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null
+        }
+      ],
+      "toolLayoutId": "screenshot_required",
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": ["PFLANZLICH GEDACHT.", "WISSENSCHAFTLICH GEMACHT."],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 0
+      }
+    },
+    {
+      "position": 7,
+      "moduleId": "mikronaehrstoffe_mod_07",
+      "moduleName": "Hero Lifestyle Outdoor Glas mit Zitronen",
+      "layoutType": "hero_banner_tall",
+      "layoutShape": "full_width_tall",
+      "tileCount": 1,
+      "designIntent": "emotional_hook",
+      "designIntentDetail": "Grosses textfreies Lifestyle-Bild als emotionaler Anker. Glas mit dunkelrot-amber Fluessigkeit auf einem hellen Tisch, Frau im Hintergrund (Knie und Haende), Zitrone und Schale im Vordergrund.",
+      "structuralPattern": "Vollflaechiges Lifestyle-Foto, kein Text-Overlay, kein CTA. Vermittelt Atmosphaere und ruhige Selbstfuersorge.",
+      "moduleFunction": "Emotionale Ruhe-Pause nach dem dichten Reason-to-Believe-Statement. Verankert die Routine in einem warmen Outdoor-Sommer-Moment.",
+      "relationToPrevious": "proves_above_claim",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "shared_subject_class",
+      "copyBridge": "none",
+      "heroArchetype": "product_in_setting_with_claim",
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "lifestyle",
+          "toolTileType": "image",
+          "toolImageType": "screenshot_required",
+          "link": {
+            "clickable": false,
+            "linkType": "none",
+            "linkTarget": null,
+            "ctaLabel": null
+          },
+          "tileContentTopic": {
+            "primarySubject": "Lifestyle Outdoor Sommer-Moment Vital Flow",
+            "productOrCategoryRef": null,
+            "intent": "story",
+            "rolePosition": "Page Hero Emotional"
+          },
+          "visualContent": "Hochformatiges Lifestyle-Foto, Querformat ueber die ganze Page-Breite. Im Zentrum ein bauchiges Trinkglas mit dunkelrot-amberfarbener Fluessigkeit auf hellem Holz oder Stein. Rechts eine gelbe Zitrone in einer hellen Keramik-Schale. Im Hintergrund unscharf Beine und Haende einer Frau, sitzend, sommerlich gekleidet, Grasflaeche im weichen Bokeh.",
+          "elementProportions": {
+            "lifestyle_photo": 90,
+            "product_photo": 10
+          },
+          "textOnImage": {
+            "visibleText": null,
+            "textType": "none",
+            "origin": "none",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null
+        }
+      ],
+      "toolLayoutId": "screenshot_required",
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": ["screenshot_required"],
+        "videoCount": 0
+      }
+    },
+    {
+      "position": 8,
+      "moduleId": "mikronaehrstoffe_mod_08",
+      "moduleName": "EU Health Claims Fussnoten",
+      "layoutType": "editorial_banner_solid_color",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": "Reine Text-Sektion mit drei nummerierten Health-Claims-Fussnoten gemaess EU-Verordnung 432/2012. Kleines Asterisk-Symbol als Sonnen-Icon links oben.",
+      "structuralPattern": "Weisser Hintergrund, links oben kleines gelbliches Sonnen- oder Asterisk-Icon. Rechts daneben Fliesstext in drei nummerierten Absaetzen plus ein Schluss-Disclaimer ueber ausgewogene Ernaehrung.",
+      "moduleFunction": "Erfuellt die EU-Health-Claims-Pflicht fuer die in Modul 6 erwaehnten Wirkversprechen (Immunsystem, Energie, kognitive Funktion). Pflichtkomponente, keine Vermarktungs-Funktion.",
+      "relationToPrevious": "proves_above_claim",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "hard_break_intentional",
+      "copyBridge": "continues_idea",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "1 Vitamin C, Vitamin D, Vitamin B6, Vitamin B12, Folsaeure, Eisen und Zink tragen zu einer normalen Funktion des Immunsystems bei. 2 Vitamin B2, Vitamin B6, Vitamin B12, Niacin, Pantothensaeure, Folsaeure, Vitamin C, Eisen und Magnesium tragen zu einem normalen Energiestoffwechsel und zur Verringerung von Muedigkeit und Ermuedung bei. 3 Eisen und Zink tragen zu einer normalen kognitiven Funktion bei. Pantothensaeure traegt zu einer normalen geistigen Leistung bei. Eine ausgewogene, abwechslungsreiche Ernaehrung und eine gesunde Lebensweise sind wichtig.",
+        "textType": "story_copy",
+        "origin": "layered_text",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "toolTileType": "image_text",
+          "toolImageType": "screenshot_required",
+          "link": {
+            "clickable": false,
+            "linkType": "none",
+            "linkTarget": null,
+            "ctaLabel": null
+          },
+          "tileContentTopic": {
+            "primarySubject": "EU Health Claims Pflicht-Fussnoten",
+            "productOrCategoryRef": null,
+            "intent": "trust",
+            "rolePosition": "Legal Compliance"
+          },
+          "visualContent": "Links oben kleines schwarzes Asterisk-Symbol auf gelbem Sun-Blob. Rechts davon dreigliedriger Fliesstext mit hochgestellten Ziffern und Endsatz zu ausgewogener Ernaehrung. Schwarze normale Sans-Serif auf weissem Grund.",
+          "elementProportions": {
+            "text": 80,
+            "icons": 5,
+            "solid_background": 15
+          },
+          "textOnImage": {
+            "visibleText": "Health Claims Texte siehe Modul Level",
+            "textType": "story_copy",
+            "origin": "layered_text",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null
+        }
+      ],
+      "toolLayoutId": "screenshot_required",
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": ["screenshot_required"],
+        "videoCount": 0
+      }
+    },
+    {
+      "position": 9,
+      "moduleId": "mikronaehrstoffe_mod_09",
+      "moduleName": "Awards Banner Ausgezeichnete Innovationen",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 4,
+      "designIntent": "editorial",
+      "designIntentDetail": "Trust-Anker am Page-Ende: vier Award-Tiles auf dunkelgruenem Ingwerblatt-Hintergrund. Oben Headline in weisser Versalien-Sans-Serif AUSGEZEICHNETE INNOVATIONEN.",
+      "structuralPattern": "Vollflaeche dunkelgruener Ingwerblatt-Hintergrund. Oben zentrierte weisse Versalien-Headline. Darunter vier nebeneinander stehende Trust-Tiles (drei Award-Logos in Weiss plus ein Bild eines DIN-Pruefsiegels rechts).",
+      "moduleFunction": "Trust-Loop am Ende der Page. Sammelt vier Auszeichnungen und Pruefsiegel als sozialer Beweis fuer Innovationskraft und gepruefte Qualitaet. Markentyp-uebergreifender Abschluss vor dem Amazon Share-Footer.",
+      "relationToPrevious": "summarizes_above",
+      "relationToNext": "closes_chapter",
+      "visualBridge": "hard_break_intentional",
+      "copyBridge": "fresh_topic",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "AUSGEZEICHNETE INNOVATIONEN",
+        "textType": "headline",
+        "origin": "baked_in",
+        "headline": "AUSGEZEICHNETE INNOVATIONEN",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "benefit",
+          "toolTileType": "image_text",
+          "toolImageType": "screenshot_required",
+          "link": {
+            "clickable": false,
+            "linkType": "none",
+            "linkTarget": null,
+            "ctaLabel": null
+          },
+          "tileContentTopic": {
+            "primarySubject": "German Brand Award 25 Winner",
+            "productOrCategoryRef": null,
+            "intent": "trust",
+            "rolePosition": "Award Tile"
+          },
+          "visualContent": "Weisses German Brand Award Wortbildmarken-Logo mit eckigem Banner-Element, darunter Schrift 25 winner. Auf dunkelgruenem Ingwerblatt-Hintergrund.",
+          "elementProportions": {
+            "logo": 70,
+            "photographic_background": 30
+          },
+          "textOnImage": {
+            "visibleText": "german brand award 25 winner",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null
+        },
+        {
+          "position": 2,
+          "imageCategory": "benefit",
+          "toolTileType": "image_text",
+          "toolImageType": "screenshot_required",
+          "link": {
+            "clickable": false,
+            "linkType": "none",
+            "linkTarget": null,
+            "ctaLabel": null
+          },
+          "tileContentTopic": {
+            "primarySubject": "German Brand Award 25 Product Brand of the Year",
+            "productOrCategoryRef": null,
+            "intent": "trust",
+            "rolePosition": "Award Tile"
+          },
+          "visualContent": "Weisses German Brand Award Wortbildmarken-Logo, darunter Schrift 25 product brand of the year. Auf dunkelgruenem Ingwerblatt-Hintergrund.",
+          "elementProportions": {
+            "logo": 70,
+            "photographic_background": 30
+          },
+          "textOnImage": {
+            "visibleText": "german brand award 25 product brand of the year",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null
+        },
+        {
+          "position": 3,
+          "imageCategory": "benefit",
+          "toolTileType": "image_text",
+          "toolImageType": "screenshot_required",
+          "link": {
+            "clickable": false,
+            "linkType": "none",
+            "linkTarget": null,
+            "ctaLabel": null
+          },
+          "tileContentTopic": {
+            "primarySubject": "Produkt Innovation in Glas",
+            "productOrCategoryRef": null,
+            "intent": "trust",
+            "rolePosition": "Award Tile"
+          },
+          "visualContent": "Weisses abstraktes Logo (organische Linien-Form), daneben weisser Schriftzug PRODUKT INNOVATION IN GLAS. Auf dunkelgruenem Ingwerblatt-Hintergrund.",
+          "elementProportions": {
+            "logo": 50,
+            "text": 30,
+            "photographic_background": 20
+          },
+          "textOnImage": {
+            "visibleText": "PRODUKT INNOVATION IN GLAS",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "PRODUKT INNOVATION IN GLAS",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null
+        },
+        {
+          "position": 4,
+          "imageCategory": "benefit",
+          "toolTileType": "image_text",
+          "toolImageType": "screenshot_required",
+          "link": {
+            "clickable": false,
+            "linkType": "none",
+            "linkTarget": null,
+            "ctaLabel": null
+          },
+          "tileContentTopic": {
+            "primarySubject": "Geprueftes DIN Siegel Bio Ingwer Shot",
+            "productOrCategoryRef": null,
+            "intent": "trust",
+            "rolePosition": "Award Tile"
+          },
+          "visualContent": "Helles, leicht hellblaues Pruefsiegel-Etikett mit Headline Geprueft Qualitaet, darunter Produktname Kloster Kitchen Bio Ingwer Shot, ganz unten Logo Deutsches Institut fuer Verbraucherschutz. Im Anschnitt steht das Siegel etwas erhoeht, leicht freigestellt vor dem dunkelgruenen Ingwerblatt-Hintergrund.",
+          "elementProportions": {
+            "logo": 60,
+            "text": 30,
+            "photographic_background": 10
+          },
+          "textOnImage": {
+            "visibleText": "Geprueft Qualitaet Kloster Kitchen Bio Ingwer Shot Deutsches Institut fuer Verbraucherschutz",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "Geprueft Qualitaet",
+            "subline": "Kloster Kitchen Bio Ingwer Shot",
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null
+        }
+      ],
+      "toolLayoutId": "screenshot_required",
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": ["AUSGEZEICHNETE INNOVATIONEN"],
+        "ctaLabels": [],
+        "imageUrls": ["screenshot_required"],
+        "videoCount": 0
+      }
+    },
+    {
+      "position": 10,
+      "moduleId": "mikronaehrstoffe_mod_10",
+      "moduleName": "Amazon Share Footer",
+      "layoutType": "amazon_share_footer",
+      "layoutShape": "chrome_thin",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": "Amazon-eigener Share-Block am Page-Ende, mit Teilen-Button und Disclaimer-Text. Nicht markeneigenes Element.",
+      "structuralPattern": "Zentriert, weisser Hintergrund, oben Teilen-Button mit Icon, darunter Mikrotext Teilen Sie diese Seite mit Ihren Freunden, darunter dunkelblauer Streifen Zurueck zum Seitenanfang.",
+      "moduleFunction": "Amazon Plattform-Footer, nicht markenrelevant. Wird in der Generierungs-Pipeline ueber designIntent mimics_native_chrome herausgefiltert.",
+      "relationToPrevious": "closes_chapter",
+      "relationToNext": "none",
+      "visualBridge": "hard_break_intentional",
+      "copyBridge": "none",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "Teilen Teilen Sie diese Seite mit Ihren Freunden Zurueck zum Seitenanfang",
+        "textType": "section_label",
+        "origin": "amazon_chrome",
+        "headline": null,
+        "subline": null,
+        "cta": "Teilen",
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": ["Teilen", "Zurueck zum Seitenanfang"],
+        "imageUrls": [],
+        "videoCount": 0
+      }
+    }
+  ],
+  "voiceMarkers": {
+    "voiceRegister": "direkt",
+    "sentencePattern": "frage_pattern",
+    "vocabularyField": "naturwissenschaftlich",
+    "claimType": "expertise_signal",
+    "rhetoricalDevice": "kontrast"
+  },
+  "voiceExamples": [
+    "PFLANZLICH GEDACHT. WISSENSCHAFTLICH GEMACHT.",
+    "Bereit fuer alles, was dein Tag bringt?",
+    "Weil dein Tag mehr verdient als nur Routine."
+  ],
+  "pageAnalysis": {
+    "tonalityVisual": "Warmer, ruhiger Lifestyle-Look mit erdigen Toenen (Beige, Off-White, dunkles Gruen, gedaempftes Gelb, dunkelrot-amber Saft). Frauen 30 plus als Persona, indoor und outdoor, immer entspannt und in Selfcare-Pose. Hero-Banner schaerft den Brand-Auftritt mit dunkelgruenem Ingwerblatt-Hintergrund und weisser Versalien-Tagline BETTER THAN GOOD.",
+    "ctaStrategies": "Page hat keine eigenen Buttons. Konversion laeuft ausschliesslich ueber die zwei ASIN-Tiles in Modul 4 (Direkt-Kauf via Amazon Overlay). Trust-Aufbau geht ueber Awards-Banner (Modul 9) und Health-Claims-Fussnoten (Modul 8), nicht ueber CTA-Sprache.",
+    "contentDepth": "Mittlere Tiefe: eine Produktlinie (Vital Flow) wird mit zwei Varianten gezeigt, durch eine Reason-to-Believe-Statement-Sektion gestuetzt und durch ein emotionales Hero-Image plus Awards-Sektion abgerundet. Keine Inhaltsstoff-Detail-Auflistung, keine Anwendungs-Anleitung, keine Testimonials.",
+    "useForArchetype": "Eignet sich als Vorlage fuer Supplement- und Functional-Drink-Produktdetail-Hubs mit Single-Produktlinie, die emotionale Lifestyle-Validation, Reason-to-Believe-Statement und Awards-Trust kombinieren wollen.",
+    "moduleClusters": [
+      "Cluster 1 Markenrahmen: Modul 1 Header plus Modul 2 Spacer.",
+      "Cluster 2 Produkt-Pitch: Modul 3 Section Intro plus Modul 4 Produkt-Showcase plus Modul 5 Lifestyle-Validation.",
+      "Cluster 3 Reason-to-Believe: Modul 6 Statement plus Modul 7 Hero-Emotion plus Modul 8 Health-Claims.",
+      "Cluster 4 Trust-Loop: Modul 9 Awards-Banner.",
+      "Cluster 5 Plattform-Chrome: Modul 10 Share-Footer."
+    ]
+  },
+  "pageArchitecture": "Die Page fuehrt den Nutzer in vier semantischen Bloecken: zuerst Marken-Identitaet ueber den Sticky-Brand-Header, dann die Vital-Flow-Produktlinie ueber Section Intro plus Showcase plus Lifestyle-Validation, dann das Reason-to-Believe-Statement plus emotionales Hero plus EU-Health-Claims als Argumentations-Block, und schliesslich der Trust-Loop ueber Awards und Pruefsiegel vor dem Amazon Share-Footer. Bedarfsfall ist die alltaegliche Naehrstoff-Routine fuer eine ueberforderte, gesundheits-bewusste Frau ueber 30, die einen einfachen und glaubwuerdigen Weg sucht, Vitamine und Mineralstoffe als Lifestyle-Komponente in den Tag einzubauen.",
+  "openQuestions": [
+    "Modul 2 ist laut Phase 1 ein Video-Modul (videoCount 1, height 167 px), Vision sieht aber keinen Inhalt. Vermutlich animierter Hintergrund-Loop oder reiner Spacer mit Video-Tag. Wuerde im Screenshot mit aktivierter Video-Wiedergabe geprueft werden muessen.",
+    "imageUrls und linkTargets sind aktuell auf screenshot_required, weil Phase 1 die rohen Bild- und Link-URLs nicht uebergeben hat. Naechste Iteration: Bild-URLs und href-Werte direkt aus Phase 1 DOM-Skript anreichern.",
+    "Phase 1 zaehlt fuer Modul 4 Tile-Row 3-fach, Vision sieht aber nur 2 sichtbare Produkt-Karten. Moeglicherweise dritter dekorativer Tile oder Hover-Variant der von Phase 1 als eigener Tile gezaehlt wird. Manueller Verify-Pass empfohlen.",
+    "voiceExamples sind drei Saetze aus der Page, davon enthaelt der zweite das Wort Tag, das in voiceExamples 1 und 3 wiederkehrt (Stilanker: Tag als Bezugspunkt der Marke). In Phase 3 Brand Identity ueberpruefen, ob dieses Wort als Brand-Keyword wiederkehrt."
+  ]
+}

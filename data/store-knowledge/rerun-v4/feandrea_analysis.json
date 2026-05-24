@@ -1,0 +1,183 @@
+{
+  "schemaVersion": "v4-2026-05",
+  "store": "feandrea",
+  "brandName": "Feandrea (by SONGMICS HOME)",
+  "storeUrl": "https://www.amazon.de/stores/Feandrea/page/FB4FA857-CD07-4E92-A32C-CF0CD556ACF6",
+  "analyzedAt": "2026-05-23",
+  "methodology": "v4-top-10-pages-from-18-pages-with-page-validation-via-live-nav-and-per-page-blueprints",
+  "scopeNote": "Top 10 von 18 Feandrea-Pages nach 10-Page-Regel erfasst (Stand 2026-05-23). Validierung der pageIds gegen live Brand-Store-Nav hat ergeben, dass v3-Liste zwei deprecated pageIds enthielt: 'Reisen (Katzen)' (BB994C34) und 'Schlafen' (CAB36812) sind beide 404. Substituiert mit aktuellen Pages aus der Live-Navigation: 'Reisen' (00DBC12A) ersetzt 'Reisen (Katzen)' und 'Haustierdecken' (02B002CE) ersetzt 'Schlafen'. Alle uebrigen pageIds funktionsfaehig.",
+  "navigation": {
+    "pageCount": 18,
+    "scopedPages": 10,
+    "structure": "Hierarchical (level 0 Startseite plus level 1 Promo plus Spezies-Hubs plus level 2 Sub-Kategorien plus Brand-Pages)",
+    "pages": [
+      {"name": "Startseite", "level": 0, "pageId": "FB4FA857-CD07-4E92-A32C-CF0CD556ACF6"},
+      {"name": "Sonderangebote", "level": 1, "pageId": "22136B4B-B7BE-458B-8950-8DEC2FEB2DFF"},
+      {"name": "NEU", "level": 1, "pageId": "79CD69FF-F2DB-4E27-8F9E-3F695FB9DFB8"},
+      {"name": "FÜR KATZEN", "level": 1, "pageId": "2473A208-0A9B-400F-BEE1-5524BD21C6CE"},
+      {"name": "Kratzbäume", "level": 2, "pageId": "0969F474-6991-44A8-864E-BAC3587E4935"},
+      {"name": "Katzenklos & Katzenklo-Schränke", "level": 2, "pageId": "0B547FBB-8DCA-4C30-99F3-693B36741CEB"},
+      {"name": "Reisen", "level": 2, "pageId": "00DBC12A-7F8E-4D37-9AE8-4C36995BAD61"},
+      {"name": "Haustierdecken", "level": 2, "pageId": "02B002CE-AFBB-4AFD-92E6-F72091C8AF8F"},
+      {"name": "FÜR HUNDE", "level": 1, "pageId": "97D6A597-37C0-4276-9466-0273791DE1EF"},
+      {"name": "Hundebetten", "level": 2, "pageId": "C4BB408C-0A39-419A-AAC6-8842A2C07C6E"}
+    ]
+  },
+  "contentSummary": {
+    "pagesAnalyzed": 10,
+    "wiederkehrendeModuleCrossPage": {
+      "amazon_nav_header": "alle 10 Pages mit Feandrea by SONGMICS HOME Wortbildmarke plus Folgen-Button",
+      "amazon_share_footer": "alle 10 Pages mit Teilen-CTA",
+      "product_collection_or_grid_38_to_50_asins": "9 von 10 Pages enden mit grossem ProductGrid oder ProductCollection 38-50 ASINs als Hauptkonversion",
+      "fsc_und_recycled_standard_tags_in_product_grids": "Auf Startseite, Sonderangebote, FÜR KATZEN, Kratzbäume, Hundebetten als persistente Per-Tile-Sustainability-Annotation",
+      "tile_row_5_fach": "Auf Startseite (4 Vorkommen) plus FÜR KATZEN plus FÜR HUNDE als wiederkehrender Sub-Kategorie-Verteiler in 5er-Reihen, gelegentlich auch 7-9 fach",
+      "schnellansicht_cta_per_tile": "Konsistent auf Tile-Rows aller Spezies-Hubs und Sub-Cat-Pages",
+      "product_carousel_bestseller_amazon_native": "Auf Startseite und NEU als Amazon-native Cross-Sell vor Footer"
+    }
+  },
+  "pages": [
+    {"pageName": "Startseite", "pageSlug": "01_startseite", "pageId": "FB4FA857-CD07-4E92-A32C-CF0CD556ACF6", "pageType": "startseite", "scrollHeight": 13765, "brandModules": 14, "voiceMarkers": {"voiceRegister": "freundlich", "sentencePattern": "kurze_aussage", "vocabularyField": "lifestyle", "claimType": "benefit_emotional", "rhetoricalDevice": "none"}, "pageArchitecture": "Brand-Hero plus alternierender Section-Intro plus Tile-Row-5-fach Sortiments-Verteiler-Sequenz (4x Tile-Row-5 plus 1 Tile-Pair) plus 3 grossen Image-Modulen plus ProductCollection 45 ASINs Topseller plus ProductCarousel Amazon-native Bestseller."},
+    {"pageName": "Sonderangebote", "pageSlug": "02_sonderangebote", "pageId": "22136B4B-B7BE-458B-8950-8DEC2FEB2DFF", "pageType": "saisonal_promo", "scrollHeight": 9224, "brandModules": 4, "voiceMarkers": {"voiceRegister": "saisonal", "sentencePattern": "kurze_aussage", "vocabularyField": "lifestyle", "claimType": "ergebnis_versprechen", "rhetoricalDevice": "none"}, "pageArchitecture": "Reine Deal-Page mit ProductGrid 50 ASINs Empfohlene Angebote plus Spacer plus ProductGrid 48 ASINs. Kein Hero, Sustainability-Tags als persistenter Trust-Anker."},
+    {"pageName": "NEU", "pageSlug": "03_neu", "pageId": "79CD69FF-F2DB-4E27-8F9E-3F695FB9DFB8", "pageType": "new_arrivals", "scrollHeight": 5361, "brandModules": 3, "voiceMarkers": {"voiceRegister": "saisonal", "sentencePattern": "kurze_aussage", "vocabularyField": "alltagspraktisch", "claimType": "ergebnis_versprechen", "rhetoricalDevice": "none"}, "pageArchitecture": "Minimaler Direkt-Konversions-Snapshot mit ProductGrid 41 ASINs direkt nach Nav plus Amazon-native Bestseller-Carousel als Cross-Sell."},
+    {"pageName": "FÜR KATZEN", "pageSlug": "04_fuer-katzen", "pageId": "2473A208-0A9B-400F-BEE1-5524BD21C6CE", "pageType": "kategorie-hub", "scrollHeight": 8021, "brandModules": 5, "voiceMarkers": {"voiceRegister": "freundlich", "sentencePattern": "kurze_aussage", "vocabularyField": "lifestyle", "claimType": "zugehoerigkeit", "rhetoricalDevice": "none"}, "pageArchitecture": "Top-Level-Spezies-Hub mit drei Tile-Rows 5-bis-7-fach direkt nach Nav (ohne Hero) plus ProductCollection 48 ASINs Noch mehr für Katzen."},
+    {"pageName": "Kratzbäume", "pageSlug": "05_kratzbaeume", "pageId": "0969F474-6991-44A8-864E-BAC3587E4935", "pageType": "sub_category", "scrollHeight": 9929, "brandModules": 10, "voiceMarkers": {"voiceRegister": "freundlich", "sentencePattern": "kurze_aussage", "vocabularyField": "lifestyle", "claimType": "benefit_funktional", "rhetoricalDevice": "none"}, "pageArchitecture": "Hero plus alternierende Image-plus-Video Multi-Media-Sequenz plus ProductCollection 40 ASINs mit FSC plus Nachhaltigeres-Beforsten-Tag plus Tile-Pair Closing."},
+    {"pageName": "Katzenklos & Katzenklo-Schränke", "pageSlug": "06_katzenklo-schraenke", "pageId": "0B547FBB-8DCA-4C30-99F3-693B36741CEB", "pageType": "sub_category", "scrollHeight": 8551, "brandModules": 7, "voiceMarkers": {"voiceRegister": "freundlich", "sentencePattern": "kurze_aussage", "vocabularyField": "alltagspraktisch", "claimType": "benefit_funktional", "rhetoricalDevice": "none"}, "pageArchitecture": "Hero plus Tile-Row 4-fach Funktions-Verteiler (offen/mit-Deckel/Schrank/Edelstahl) plus Image plus Tile-Pair Featured plus ProductCollection 44 ASINs plus Tile-Pair Closing."},
+    {"pageName": "Reisen", "pageSlug": "07_reisen", "pageId": "00DBC12A-7F8E-4D37-9AE8-4C36995BAD61", "pageType": "sub_category", "scrollHeight": 3825, "brandModules": 4, "voiceMarkers": {"voiceRegister": "freundlich", "sentencePattern": "komma_erklaerung", "vocabularyField": "alltagspraktisch", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl"}, "pageArchitecture": "AUFFAELLIG single_hero_product_page mit Featured Product Multi-Video-Demo (10 Videos plus 34 Bilder) plus Featured Product Detail-Embed mit Add-to-Cart plus ProductGrid 9 ASINs Hundebox-Varianten. Page nur 3825px hoch, kompakt fokussiert auf einen Hero-ASIN."},
+    {"pageName": "Haustierdecken", "pageSlug": "08_haustierdecken", "pageId": "02B002CE-AFBB-4AFD-92E6-F72091C8AF8F", "pageType": "sub_category", "scrollHeight": 7790, "brandModules": 6, "voiceMarkers": {"voiceRegister": "freundlich", "sentencePattern": "kurze_aussage", "vocabularyField": "alltagspraktisch", "claimType": "benefit_funktional", "rhetoricalDevice": "none"}, "pageArchitecture": "Kompakter Hero (603px) plus 2 Tile-Pairs Featured plus ProductCollection 38 ASINs Hundedecken plus Tile-Pair Closing."},
+    {"pageName": "FÜR HUNDE", "pageSlug": "09_fuer-hunde", "pageId": "97D6A597-37C0-4276-9466-0273791DE1EF", "pageType": "kategorie-hub", "scrollHeight": 10570, "brandModules": 8, "voiceMarkers": {"voiceRegister": "freundlich", "sentencePattern": "kurze_aussage", "vocabularyField": "lifestyle", "claimType": "zugehoerigkeit", "rhetoricalDevice": "none"}, "pageArchitecture": "AUFFAELLIG: Top-Level-Spezies-Hub mit 6 hintereinander geschalteten Tile-Rows verschiedener Groessen (8-5-8-8-6-9 Tiles) ohne Hero plus ProductCollection 46 ASINs Noch mehr für Hunde. Reine Tile-Row-Avalanche."},
+    {"pageName": "Hundebetten", "pageSlug": "10_hundebetten", "pageId": "C4BB408C-0A39-419A-AAC6-8842A2C07C6E", "pageType": "sub_category", "scrollHeight": 12298, "brandModules": 12, "voiceMarkers": {"voiceRegister": "freundlich", "sentencePattern": "komma_erklaerung", "vocabularyField": "lifestyle", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl"}, "pageArchitecture": "Hero plus alternierende Image-plus-Tile-Pair-Sequenz (3 Wechsel) plus Video plus ProductGrid 45 ASINs (Global Recycled Standard plus Recycelte-Materialien) plus Tile-Pair Closing."}
+  ],
+  "storeAnalysis": {
+    "marketSegment": "Haustier-Lifestyle und Haustier-Moebel. Sortimentsbreite: Kratzbäume, Katzenklos, Katzenklo-Schränke, Hundebetten, Hundekäfige, Welpenauslauf, Haustierdecken, Hundeboxen, Reise-Equipment. Insgesamt 18 Pages, Schwerpunkt Katze und Hund.",
+    "primaryAudience": "Haustier-Besitzer mit Praxis-orientiertem Wohnraum-Anspruch, die Haustier-Equipment als Wohn-Moebel verstehen (Katzenklo-Schraenke als Beistelltisch). Nachhaltigkeits-sensible Konsumenten als Sub-Zielgruppe.",
+    "priceTier": "Mid-Market Haustier-Equipment mit Premium-Anspruch via Sustainability-Zertifikate.",
+    "productComplexity": "Breit: ueber 200 ASINs in der Brand. 18 Pages decken Spezies-Hubs (Katze, Hund), Sub-Kategorien pro Spezies (Kratzbäume, Klo-Schrank, Decken, Betten, Käfige, Reise), Promo (Sonderangebote, NEU) und Brand-Pages (Über uns, Verantwortung) ab.",
+    "brandVoice": {
+      "tonality": "Freundlich-praktisch mit Lifestyle-Note plus konsequenter Nachhaltigkeits-Trust-Layer. Konstant freundlich-Register quer ueber alle Sub-Cat-Pages, Promo-Pages wechseln zu saisonal.",
+      "adjectives": ["freundlich", "praktisch", "nachhaltig", "wohnraum-integriert"],
+      "signatureClaims": ["Feandrea by SONGMICS HOME", "Noch mehr für Katzen", "Noch mehr für Hunde", "Topseller", "Nachhaltigeres Beforsten"],
+      "voiceContrasts": ["Spezies-spezifische Sortiments-Trennung (FÜR KATZEN/FÜR HUNDE) mit identischem Sprach-Pattern", "Funktional-praktisch in Sub-Cat-Pages mit Komma-Erklaerung (Decken: 'Sherpa Fleece, wasserdicht, maschinenwaschbar')"]
+    },
+    "designAesthetic": {
+      "colorPalette": "Erd- und Naturtoene als Brand-Farb-Code: Taubengrau, Greige, Haferflocken-Farben, Vintage-Braun, Wolkenweiss. Kontrastreich-warm.",
+      "typography": "Sans-Serif clean.",
+      "photographyStyle": "Wohnraum-Setting mit Haustier in Aktion (Katze auf Kratzbaum, Hund auf Decke). Praxis-Demonstration via Video-Module. Funktions-Closeups mit Material-Detail.",
+      "layoutSignals": "Wiederkehrende Patterns: Hero plus Multi-Image-Tile-Pair-Sequenz auf Sub-Cat-Pages. Reine Tile-Row-Wiederholung auf Spezies-Hubs. ProductGrid oder ProductCollection 38-50 ASINs als Page-Ende-Konversion. Sustainability-Chips als persistente Per-Tile-Annotation in ProductGrids."
+    },
+    "positioningClaim": "Feandrea ist die freundlich-praktische Haustier-Moebel-Marke fuer Katze und Hund mit konsequentem Nachhaltigkeits-Trust-Layer.",
+    "contentStrategy": {
+      "approach": "Spezies-getrennte Hub-Architektur (FÜR KATZEN plus FÜR HUNDE) mit Sub-Cat-Pages pro Funktionsklasse (Kratzbaum, Klo-Schrank, Decken, Betten, Käfige, Reise). Promo-Pages (Sonderangebote, NEU) als reine Konversions-Schnellzugaenge.",
+      "emotionalLayer": "Haustier-Lifestyle Bilder plus Spezies-Zugehoerigkeit ('Noch mehr für Katzen' / 'Noch mehr für Hunde').",
+      "rationalLayer": "Sustainability-Zertifikate (FSC, Global Recycled Standard, Nachhaltigeres Beforsten, Recycelte Materialien) als Trust-Anker. Funktions-Specs in Komma-getrennten Aufzaehlungen (Material, Groesse, Eigenschaft).",
+      "modulePreferences": "hero_banner, hero_banner_tall, editorial_tile_pair, editorial_tile_quad (5-9 Tiles), product_collection, product_grid_featured (38-50 ASINs), hero_video, section_separator, product_detail_embed (auffaellig bei Reisen-Page).",
+      "editorialDepth": "Variable: Spezies-Hubs Tile-Row-lastig 6-9 Module, Sub-Cat-Pages 6-12 Module mit Multi-Media-Sequenz, Promo-Pages 3-4 Module reine Konversion."
+    },
+    "conversionPath": {
+      "primary": "ProductCollection oder ProductGrid am Page-Ende mit 38-50 ASINs (Topseller, Noch mehr für Katzen/Hunde, Vollkatalog Sub-Kategorien)",
+      "secondary": "Tile-Row 5-9-fach Sub-Kategorien-Verteiler auf Spezies-Hubs mit Schnellansicht-CTAs",
+      "tertiary": "Featured Product Multi-Video-Demo plus Detail-Embed auf Reisen-Page (single_hero_product_page Pattern)"
+    },
+    "keyStrengths": [
+      "Spezies-getrennte Hub-Architektur mit klarer Top-Level-Trennung FÜR KATZEN und FÜR HUNDE",
+      "Sustainability-Trust-Layer via FSC, Global Recycled Standard, Nachhaltigeres Beforsten, Recycelte Materialien als persistente Per-Tile-Annotation in ProductGrids",
+      "Multi-Funktions-Differenzierung in Sub-Cat-Pages (Katzenklo: offen, mit Deckel, Schrank, Edelstahl)",
+      "Alternierende Image-plus-Tile-Pair-Sequenz auf Sub-Cat-Pages als rhythmischer Sortiments-Erzaehler",
+      "ProductCollection 40-50 ASINs als Vollkatalog-Pattern am Page-Ende",
+      "Reise-Sub-Cat-Page als single_hero_product_page mit Multi-Video-Demo (10 Videos) plus Varianten-Grid",
+      "Erd- und Naturtoene als konsistente Farb-Codeline (Taubengrau, Greige, Vintage-Braun)"
+    ],
+    "brandUSPs": [
+      "Haustier-Moebel als Wohnraum-Integration (Katzenklo als Beistelltisch, Hundebett als Plüsch-Sofa)",
+      "Nachhaltige Materialien mit Zertifikaten (FSC fuer Holz, Global Recycled Standard fuer Textilien)",
+      "Spezies-gerechte Sortiments-Differenzierung fuer Katze und Hund"
+    ],
+    "moduleFunctionalTaxonomy": {
+      "spezies_hub_tile_row_avalanche_plus_full_collection": "AUFFAELLIG: Top-Level-Spezies-Hubs (FÜR HUNDE 6 Tile-Rows, FÜR KATZEN 3 Tile-Rows) ohne Hero, reine Tile-Row-Wiederholung in verschiedenen Tile-Counts (5-9 fach) plus Vollkatalog-ProductCollection 46-48 ASINs am Ende",
+      "alternierendes_image_plus_tile_pair_sequenz": "AUFFAELLIG auf Hundebetten-Page: 3 Wechsel von Image-Modul plus Tile-Pair als rhythmischer Sortiments-Erzaehler vor dem Video plus ProductGrid",
+      "single_hero_product_page_pattern": "AUFFAELLIG auf Reisen-Page: kompakte 3825px Sub-Cat-Page wird zur fokussierten Single-Product-Showcase mit Featured Product Multi-Video-Demo (10 Videos in einem Modul) plus Detail-Embed mit Sterne plus Add-to-Cart plus ProductGrid 9 Varianten",
+      "sustainability_chip_layer_in_product_grids": "AUFFAELLIG cross-page: FSC, Global Recycled Standard, Nachhaltigeres Beforsten, Recycelte Materialien als persistente Per-Tile-Annotation in ProductGrids und ProductCollections. Auf Startseite, Sonderangebote, FÜR KATZEN, Kratzbäume, Hundebetten beobachtet",
+      "sub_category_hero_plus_multi_image_tile_pair_plus_full_collection": "Standard-Pattern Sub-Cat-Pages: Hero plus 1-3 Image-Module plus 1-2 Tile-Pairs plus ProductCollection 38-50 plus Tile-Pair-Closing",
+      "promo_page_dual_product_grid_with_spacer": "Sonderangebote-Page: zwei grosse ProductGrids 48-50 ASINs hintereinander mit Spacer dazwischen, ohne Hero",
+      "tile_row_5_fach_recurring_module": "AUFFAELLIG: Tile-Row mit 5 Tiles (statt 4 oder 8) als Feandrea-eigenes Tile-Row-Format auf Startseite (4 Vorkommen) plus FÜR KATZEN plus FÜR HUNDE"
+    },
+    "pageArchetypes": {
+      "startseite": {
+        "primaryFunction": "Multi-Sortiments-Verteiler mit Brand-Hero plus Tile-Row-5-Sequenz plus Image-Module plus Vollkatalog Topseller",
+        "conversionMode": "Soft plus Hard",
+        "transferableTo": "Haustier-Multi-Spezies-Marken mit breitem Sortiment"
+      },
+      "kategorie_hub_spezies": {
+        "primaryFunction": "Top-Level-Spezies-Hub als reine Tile-Row-Wiederholungs-Page (FÜR KATZEN 3 Tile-Rows, FÜR HUNDE 6 Tile-Rows) plus Vollkatalog-ProductCollection 46-48",
+        "conversionMode": "Soft (Verteilung) plus Hard (Click-out auf Sub-Cats plus ProductCollection)",
+        "transferableTo": "Multi-Spezies-Marken oder breite Sortiments-Hubs wo Top-Level-Trennung die Hauptachse ist",
+        "exampleFeandrea": "FÜR KATZEN und FÜR HUNDE"
+      },
+      "sub_category_multi_media_showcase": {
+        "primaryFunction": "Hero plus alternierende Image-plus-Tile-Pair-Sequenz plus Video plus Vollkatalog plus Closing",
+        "conversionMode": "Hard via Vollkatalog plus Soft via Multi-Media-Lifestyle",
+        "transferableTo": "Sub-Kategorien mit Funktions-Differenzierung und Lifestyle-Komponente",
+        "exampleFeandrea": "Hundebetten, Kratzbaeume, Katzenklo-Schraenke"
+      },
+      "sub_category_minimal_pair_focus": {
+        "primaryFunction": "Kompakter Hero plus 2 Tile-Pairs plus Vollkatalog plus Closing-Pair",
+        "conversionMode": "Hard",
+        "transferableTo": "Sub-Kategorien mit reduzierter Featured-Auswahl",
+        "exampleFeandrea": "Haustierdecken"
+      },
+      "sub_category_single_hero_product_with_multi_video_demo": {
+        "primaryFunction": "Featured Product Multi-Video-Demo (10 Videos in einem Modul) plus Detail-Embed mit Add-to-Cart plus ProductGrid Varianten",
+        "conversionMode": "Hard fokussiert auf Hero-ASIN",
+        "transferableTo": "Sub-Kategorien wo eine Hero-ASIN mit Modell-Varianten der gesamte Sortiments-Wert ist",
+        "exampleFeandrea": "Reisen"
+      },
+      "promo_dual_product_grid": {
+        "primaryFunction": "Zwei ProductGrids 48-50 ASINs hintereinander mit Spacer, ohne Hero",
+        "conversionMode": "Hard",
+        "transferableTo": "Deal-Sammelseiten oder Promo-Pages mit mehreren Sortiments-Bloecken",
+        "exampleFeandrea": "Sonderangebote"
+      },
+      "new_arrivals_minimal": {
+        "primaryFunction": "ProductGrid 41 ASINs direkt nach Nav plus Amazon-native Bestseller-Carousel",
+        "conversionMode": "Hard",
+        "transferableTo": "Schnell-Konversions-Pages New Arrivals",
+        "exampleFeandrea": "NEU"
+      }
+    },
+    "brandSpecificVsStructuralExtraction": {
+      "strukturell_uebertragbar_an_neue_brands": [
+        "Spezies-Hub-Avalanche Pattern (reine Tile-Row-Wiederholung 3-6 Stueck verschiedener Groessen ohne Hero plus Vollkatalog)",
+        "Alternierendes Image-plus-Tile-Pair-Sequenz Pattern (3 Wechsel als Sortiments-Rhythmus)",
+        "Single-Hero-Product-Page Pattern (Featured Multi-Video-Demo plus Detail-Embed plus Varianten-Grid)",
+        "Sustainability-Chip-Layer in ProductGrids (Per-Tile-Annotation mit Trust-Zertifikaten)",
+        "Sub-Category-Multi-Media-Showcase Pattern (Hero plus Image-Tile-Pair-Sequenz plus Video plus ProductCollection)",
+        "Promo-Dual-ProductGrid Pattern (zwei Grids 48-50 mit Spacer)",
+        "ProductCollection 38-50 ASINs als Vollkatalog am Page-Ende Pattern",
+        "voiceMarkers freundlich plus lifestyle plus benefit_funktional als Tonalitaet fuer Haustier-Lifestyle-Marken",
+        "Tile-Row 5-fach als Tile-Count zwischen klassischer 4-er und 8-er Reihe",
+        "Tile-Pair-Closing-Modul als Page-Abschluss vor Footer"
+      ],
+      "brand_spezifisch_NICHT_uebertragbar": [
+        "Wortbildmarke Feandrea by SONGMICS HOME",
+        "Erd- und Naturtoene als spezifische Brand-Farbpalette (Taubengrau, Greige, Vintagebraun, Wolkenweiss, Haferflockenfarben)",
+        "Konkrete Sortimentsfamilien (Kratzbaum, Katzenklo-Schrank, Hundebox)",
+        "Konkrete Spezies-Hub-Namen FÜR KATZEN, FÜR HUNDE",
+        "Wortmarken Headlines wie Noch mehr für Katzen, Noch mehr für Hunde, Topseller",
+        "Konkrete Sustainability-Zertifikat-Marken (FSC, Global Recycled Standard, Nachhaltigeres Beforsten als TextureWording)",
+        "Konkrete ASINs und Produkt-Bezeichnungen (PCT003W01, PPT001G01 etc.)",
+        "Konkretes Wohnraum-Setting mit Haustier-Modellen (Katze auf Kratzbaum, Hund auf Decke)",
+        "Konkrete Marken-Tagline-Variation (Feandrea ist by SONGMICS HOME)"
+      ]
+    }
+  },
+  "openQuestions": [
+    "8 weitere Pages von Feandrea nicht in dieser Iteration erfasst (Scope: Top 10 von 18). Nicht erfasst: Hundekäfige & Welpenauslauf, Reisen (Hunde) im Original-v3 vorhanden, Mehr, Clickat Kollektion, Über uns, Verantwortung und nachhaltige Entwicklung, Amazon Basics.",
+    "v3-page-list enthielt 2 deprecated pageIds (404): 'Reisen (Katzen)' BB994C34 und 'Schlafen' CAB36812. Beide durch aktuelle Pages aus live Brand-Store-Nav substituiert: 'Reisen' 00DBC12A und 'Haustierdecken' 02B002CE. Die page-lists/feandrea_pages.json sollte aktualisiert werden um diese 2 Eintraege zu bereinigen.",
+    "Vorschlag fuer Page-Architecture-Vokabular-Erweiterung: spezies_hub_tile_row_avalanche_plus_full_collection (FÜR HUNDE 6 Tile-Rows, FÜR KATZEN 3 Tile-Rows). Definition: Top-Level-Spezies-Hub mit reiner Tile-Row-Wiederholung verschiedener Groessen (5-9-fach) ohne Hero plus Vollkatalog-ProductCollection. Verwandt mit kaercher reine_tile_row_wiederholungs_page_ohne_hero, aber mit variierenden Tile-Counts statt identischen.",
+    "Vorschlag fuer Page-Architecture-Vokabular-Erweiterung: alternierendes_image_plus_tile_pair_sequenz (Hundebetten-Page mit 3 Wechseln). Definition: Sub-Cat-Page mit 3-mal hintereinandergeschalteter Image-Modul plus Tile-Pair Kombination als rhythmischer Sortiments-Erzaehler vor dem Video plus ProductGrid. Verwandt mit night-cat alternierendes_tile_row_plus_video_modul_sortimentsrhythmus.",
+    "Vorschlag fuer Page-Architecture-Vokabular-Erweiterung: sub_category_single_hero_product_with_multi_video_demo (Reisen-Page). Definition: Sub-Cat-Page wird zur kompakten Single-Product-Showcase mit Featured Product Multi-Video-Demo (10 Videos in einem Modul) plus Detail-Embed mit Add-to-Cart plus ProductGrid Varianten. Auffaellig kurze Page (unter 4000px), fokussiert auf einen Hero-ASIN.",
+    "Vorschlag fuer Module-Vokabular-Erweiterung: product_grid_with_sustainability_chips als Variante von product_grid_featured. Definition: ProductGrid mit Per-Tile-Sustainability-Annotation (FSC, Global Recycled Standard, Recycelte Materialien). Beobachtet auf Startseite, Sonderangebote, FÜR KATZEN, Kratzbaeume, Hundebetten.",
+    "Vorschlag fuer Module-Vokabular-Erweiterung: editorial_tile_quint mit tileCount 5 als Variante zwischen tile_quad (4) und tile_octet (8). Alternativ tile_count 5 in editorial_tile_quad lassen und nur die Position-Anzahl flexibel handhaben. Feandrea verwendet 5-er Reihen auffaellig oft.",
+    "Vorschlag fuer Voice-Marker-Vokabular-Erweiterung: claimType certified_sustainability oder voiceMarker `nachhaltig` zur Diskussion stellen. FSC-Tag, Global Recycled Standard, Nachhaltigeres Beforsten als Per-Tile-Trust-Layer ist eigener Voice-Beitrag (jenseits von claimType expertise_signal).",
+    "Vision-Pass auf Hero-Bildern und Tile-Bildern koennte konkrete Spezies-Subjekte (Katzen-Rasse, Hunde-Rasse), Wohnraum-Setting (Sofa, Boden, Garten) und Material-Anmutung (Holz, Stoff, Stahl) anreichern. Aktuell nur strukturell extrahiert."
+  ]
+}

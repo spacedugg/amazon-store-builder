@@ -1,0 +1,26 @@
+{
+  "_meta": {
+    "store": "kloster-kitchen",
+    "pageSlug": "06_shot-kur",
+    "pageName": "Shot Kur",
+    "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043",
+    "url": "https://www.amazon.de/stores/page/998F3BE4-E37F-47C7-8539-A79DE27AF043",
+    "extractedAt": "2026-05-13",
+    "extractor": "chrome_mcp_javascript_tool_v2_with_urls",
+    "scrollHeight": 5149,
+    "viewport": { "w": 1826, "h": 888 },
+    "domRowsTotal": 8,
+    "contentModulesCount": 6,
+    "uniqueAsinsOnPage": ["B09X5R7B6P", "B0GH8XPJX5"]
+  },
+  "modules": [
+    {"domRowIdx": 0, "top": 99, "height": 400, "widgetClass": "Header", "tileCount": 0, "imgCount": 3, "videoCount": 0, "productCount": 0, "note": "Nav header", "links": [], "asins": []},
+    {"domRowIdx": 1, "top": 507, "height": 752, "widgetClass": "EditorialRow", "tileCount": 7, "imgCount": 0, "videoCount": 1, "productCount": 0, "note": "Video-Hero Ingwer-Shot Closeup", "links": [], "asins": []},
+    {"domRowIdx": 2, "top": 1259, "height": 457, "widgetClass": "EditorialRow", "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Image-Modul Brand Bridge", "links": [{"linkType": "asin", "target": "B09X5R7B6P"}], "asins": ["B09X5R7B6P"]},
+    {"domRowIdx": 3, "top": 1715, "height": 371, "widgetClass": "EditorialRow", "tileCount": 16, "imgCount": 2, "videoCount": 0, "productCount": 0, "note": "Tile-Pair Lifestyle Routine plus Yoga", "links": [{"linkType": "asin", "target": "B09X5R7B6P"}], "asins": ["B09X5R7B6P"]},
+    {"domRowIdx": 4, "top": 2087, "height": 743, "widgetClass": "EditorialRow", "tileCount": 29, "imgCount": 2, "videoCount": 0, "productCount": 2, "note": "Tile-Pair 2 ASIN-Karten Ingwer-Shot Boxen", "links": [{"linkType": "asin", "target": "B09X5R7B6P"}, {"linkType": "asin", "target": "B0GH8XPJX5"}], "asins": ["B09X5R7B6P", "B0GH8XPJX5"]},
+    {"domRowIdx": 5, "top": 2829, "height": 527, "widgetClass": "EditorialRow", "tileCount": 4, "imgCount": 30, "videoCount": 0, "productCount": 2, "note": "Multi-Image-Carousel mit ASIN-Detail (Bio Saftkur Alternative 6 Wochen Ingwer Shot Kur)", "links": [{"linkType": "asin", "target": "B09X5R7B6P"}], "asins": ["B09X5R7B6P"]},
+    {"domRowIdx": 6, "top": 3356, "height": 331, "widgetClass": "EditorialRow", "tileCount": 8, "imgCount": 1, "videoCount": 0, "productCount": 0, "note": "Awards Banner Ausgezeichnete Innovationen", "links": [{"linkType": "page", "target": "F031D76B-9B76-426A-93A9-2EBBCB5150CF"}], "asins": []},
+    {"domRowIdx": 7, "top": 3687, "height": 201, "widgetClass": "EditorialRow", "tileCount": 4, "imgCount": 0, "videoCount": 0, "productCount": 0, "note": "amazon_share_footer", "links": [], "asins": []}
+  ]
+}

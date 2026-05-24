@@ -1,0 +1,56 @@
+{
+  "_meta": {
+    "store": "nespresso",
+    "pageSlug": "01_startseite",
+    "pageName": "Startseite",
+    "pageId": "2429E3F3-8BFA-466A-9185-35FB47867B06",
+    "url": "https://www.amazon.de/stores/page/2429E3F3-8BFA-466A-9185-35FB47867B06",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_compact",
+    "extractorNote": "Phase 1 via Chrome MCP javascript_tool. Output kompakt (top, height, widgetType, tileCount, imgCount, videoCount, productCount, asinCount). Bilder, Headlines und CTAs sind in Phase 2 per Vision zu erfassen.",
+    "scrollHeight": 9633,
+    "viewport": { "w": 1599, "h": 842 },
+    "domRowsTotal": 19,
+    "contentModulesCount": 19
+  },
+  "navigation": {
+    "pages": [
+      { "label": "Startseite",         "pageId": "2429E3F3-8BFA-466A-9185-35FB47867B06" },
+      { "label": "Deals",              "pageId": "3C855FAA-0378-428B-8D15-701AA8800EE3" },
+      { "label": "Original Maschinen", "pageId": "FCA8433A-D425-45C9-A777-FDFB8BF4A978" },
+      { "label": "Atelier",            "pageId": "94253EAE-5C50-41D7-82CB-FE0439ACCB32" },
+      { "label": "Citiz",              "pageId": "6D635ABA-55B7-4E3D-9A6F-1E1783414242" },
+      { "label": "Essenza Mini",       "pageId": "C6658D50-ED49-4786-BD4A-9F697562B320" },
+      { "label": "Inissia",            "pageId": "C90F9D89-ECF7-4A54-B6C5-3D2AB6D2B51F" },
+      { "label": "Pixie",              "pageId": "73BA5A55-F2AD-4EFD-8BD1-22A38C1F80DA" },
+      { "label": "Gran Lattissima",    "pageId": "FD504600-955A-4341-AD26-CBB826145D63" },
+      { "label": "Lattissima one",     "pageId": "E0DF17AD-CF05-4AF0-8D67-A31E3D754D92" }
+    ]
+  },
+  "modules": [
+    { "domRowIdx":  0, "top":   99, "height": 395, "widgetType": "Header",        "tileCount":  0, "imgCount": 1, "videoCount": 0, "productCount":  0, "asinCount": 0, "note": "Nav header mit Nespresso Brand-Logo plus Menueleiste." },
+    { "domRowIdx":  1, "top":  502, "height": 750, "widgetType": "EditorialRow",  "tileCount":  1, "imgCount": 1, "videoCount": 0, "productCount":  0, "asinCount": 0, "note": "Brand-Hero (vermutlich Lifestyle-Hero mit Nespresso-Tagline und Maschine im Setting). Vollformat 750px hoch." },
+    { "domRowIdx":  2, "top": 1252, "height": 224, "widgetType": "EditorialRow",  "tileCount":  1, "imgCount": 0, "videoCount": 0, "productCount":  0, "asinCount": 0, "note": "Section Intro (224px hoch, ohne img). Vermutlich Text-Banner mit Subline." },
+    { "domRowIdx":  3, "top": 1476, "height": 743, "widgetType": "EditorialRow",  "tileCount":  3, "imgCount": 3, "videoCount": 0, "productCount":  0, "asinCount": 0, "note": "Tile-Row 3-fach (vermutlich Vertuo / Original / Atelier Auswahl-Verteiler)." },
+    { "domRowIdx":  4, "top": 2218, "height": 224, "widgetType": "EditorialRow",  "tileCount":  1, "imgCount": 0, "videoCount": 0, "productCount":  0, "asinCount": 0, "note": "Section Intro." },
+    { "domRowIdx":  5, "top": 2443, "height": 574, "widgetType": "ProductGrid",   "tileCount":  0, "imgCount": 4, "videoCount": 0, "productCount":  8, "asinCount": 4, "note": "ProductGrid mit 8 product-Markern (4 unique ASINs: Vertuo Up Maschinen). Featured-Maschinen.", "sampleAsins": ["B0GKH2LNW4","B0GKNPLF2T","B0GKP23BKB","B0GKH2WHPZ"] },
+    { "domRowIdx":  6, "top": 3017, "height": 287, "widgetType": "EditorialRow",  "tileCount":  1, "imgCount": 0, "videoCount": 0, "productCount":  0, "asinCount": 0, "note": "Section Intro." },
+    { "domRowIdx":  7, "top": 3304, "height": 743, "widgetType": "EditorialRow",  "tileCount":  3, "imgCount": 3, "videoCount": 0, "productCount":  0, "asinCount": 0, "note": "Tile-Row 3-fach (Sortiments-Cluster)." },
+    { "domRowIdx":  8, "top": 4046, "height": 224, "widgetType": "EditorialRow",  "tileCount":  1, "imgCount": 0, "videoCount": 0, "productCount":  0, "asinCount": 0, "note": "Section Intro." },
+    { "domRowIdx":  9, "top": 4271, "height": 371, "widgetType": "EditorialRow",  "tileCount":  4, "imgCount": 4, "videoCount": 0, "productCount":  0, "asinCount": 4, "note": "Tile-Row 4-fach ProductTiles (Pixie/Inissia/Citiz/Essenza ASINs).", "sampleAsins": ["B00G98EJHM","B06XJ4G828","B01ITG2JEQ","B01ITICQR4"] },
+    { "domRowIdx": 10, "top": 4642, "height": 371, "widgetType": "EditorialRow",  "tileCount":  2, "imgCount": 2, "videoCount": 0, "productCount":  0, "asinCount": 0, "note": "Tile-Pair 2-fach (vermutlich Vertuo vs Original Vergleichs-Tiles)." },
+    { "domRowIdx": 11, "top": 5013, "height": 224, "widgetType": "EditorialRow",  "tileCount":  1, "imgCount": 0, "videoCount": 0, "productCount":  0, "asinCount": 0, "note": "Section Intro." },
+    { "domRowIdx": 12, "top": 5237, "height": 743, "widgetType": "EditorialRow",  "tileCount":  3, "imgCount": 3, "videoCount": 0, "productCount":  0, "asinCount": 0, "note": "Tile-Row 3-fach (Lattissima/Gran Lattissima/Creatista Milk-System-Linie)." },
+    { "domRowIdx": 13, "top": 5980, "height": 224, "widgetType": "EditorialRow",  "tileCount":  1, "imgCount": 0, "videoCount": 0, "productCount":  0, "asinCount": 0, "note": "Section Intro." },
+    { "domRowIdx": 14, "top": 6204, "height": 371, "widgetType": "EditorialRow",  "tileCount":  4, "imgCount": 4, "videoCount": 0, "productCount":  0, "asinCount": 4, "note": "Tile-Row 4-fach ProductTiles (vermutlich Kaffee-Sortiment Cluster).", "sampleAsins": ["B0F1CXH4NG","B0F19DLRLN","B0F1CXZJZB","B0F19C5XJM"] },
+    { "domRowIdx": 15, "top": 6576, "height": 628, "widgetType": "EditorialRow",  "tileCount":  1, "imgCount": 1, "videoCount": 0, "productCount":  0, "asinCount": 0, "note": "Image-Modul Vollformat (Lifestyle-Banner mittig)." },
+    { "domRowIdx": 16, "top": 7203, "height": 743, "widgetType": "EditorialRow",  "tileCount":  2, "imgCount": 2, "videoCount": 0, "productCount":  0, "asinCount": 0, "note": "Tile-Pair 2-fach (Sub-Cluster). Beide Tiles vermutlich Sortiments-Familien." },
+    { "domRowIdx": 17, "top": 7946, "height": 224, "widgetType": "EditorialRow",  "tileCount":  1, "imgCount": 0, "videoCount": 0, "productCount":  0, "asinCount": 0, "note": "Section Intro." },
+    { "domRowIdx": 18, "top": 8170, "height": 201, "widgetType": "EditorialRow",  "tileCount":  1, "imgCount": 0, "videoCount": 0, "productCount":  0, "asinCount": 0, "note": "Amazon Share Footer (201px hoch)." }
+  ],
+  "openQuestionsLocal": [
+    "Phase 1 mit kompaktem Skelett. Bilder, Headlines und CTAs muessen in Phase 2 per Vision nachgeholt werden.",
+    "Module 2, 4, 6, 8, 11, 13, 17 sind alle 224-287px hoch und ohne img: vermutlich text-only Section Intros oder Brand-Statements.",
+    "Module 5 ist ein ProductGrid mit 8 product-Markern und 4 unique ASINs: vermutlich Vertuo Up Featured Lineup."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "_meta": {
+    "store": "trixie",
+    "pageSlug": "10_dog-activity",
+    "pageId": "182C9D19-A7A4-4CAB-B7D4-982D2DB2D14A",
+    "pageName": "Dog Activity",
+    "pageLevel": 1,
+    "extractedAt": "2026-05-23",
+    "pageUrl": "https://www.amazon.de/stores/page/182C9D19-A7A4-4CAB-B7D4-982D2DB2D14A",
+    "scrollHeight": 5128,
+    "domRowsTotal": 5,
+    "totalImages": 23,
+    "totalVideos": 0,
+    "totalUniqueAsins": 21,
+    "note": "DOG ACTIVITY Brand-Serie Hub-Page (von TRIXIE SERIEN verlinkt): BrandHeader plus ProductGrid 21 ASINs Intelligenzspielzeug-Linie (Flower Tower 32000, Flip & Fun 32001, Flip Bone 32002 plus weitere Strategiespiele) plus Tile-Pair plus Footer. KEIN Hero."
+  },
+  "modules": [
+    {"domRowIdx": 0, "top": 99, "height": 395, "widgetType": "BrandHeader", "imgCount": 1, "note": "Nav header. Pfad anzeige: 'TRIXIE SERIEN > DOG ACTIVITY'."},
+    {"domRowIdx": 1, "top": 99, "height": 300, "widgetType": "StoreHero_overlap", "imgCount": 1, "note": "Brand-Banner als Hero-Overlay."},
+    {"domRowIdx": 2, "top": 502, "height": 3165, "widgetType": "ProductGrid", "imgCount": 21, "asinCount": 21, "note": "ProductGrid 21 ASINs Intelligenzspielzeug Strategiespiele (Flower Tower 32000, Flip & Fun 32001, Flip Bone 32002, weitere Schwierigkeitsstufen).", "asins": ["B07VP9QPGT","B07VHN95XM","B07VGQ19WD","B07VMCRZFL","B08FM5SKZJ","B0BCGF295Z","B001I83T9M","B001R84KKU","B009WPTW9E","B002XCTUIQ","B003TOKTEG","B003TOKTFK","B003X19R7U","B003TOQ2U6","B0054LTPTC","B0054Q9TMA","B00D7G9050","B00DRR7AYM","B01M0K0Z8O","B076BMCMB1","B07VGQ1LN4"]},
+    {"domRowIdx": 3, "top": 3666, "height": 200, "widgetType": "EditorialRow_double", "imgCount": 0, "tileCount": 1, "note": "Footer-naher Tile-Pair-Spacer."},
+    {"domRowIdx": 4, "top": 3666, "height": 200, "widgetType": "AmazonShareFooter", "note": "Amazon Share Footer."}
+  ]
+}

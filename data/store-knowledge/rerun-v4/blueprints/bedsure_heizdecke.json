@@ -1,0 +1,394 @@
+{
+  "schemaVersion": "v4-2026-05",
+  "store": "bedsure",
+  "pageUrl": "https://www.amazon.de/stores/page/86EE23E4-B85F-4167-8FE0-E32C59862F42",
+  "pageName": "Heizdecke",
+  "pageId": "86EE23E4-B85F-4167-8FE0-E32C59862F42",
+  "pageSlug": "08_heizdecke",
+  "pageLevel": 1,
+  "pageType": "sub_category",
+  "scrollHeight": 8560,
+  "viewport": { "w": 1599, "h": 842 },
+  "extractedAt": "2026-05-12",
+  "extractor": "v4_vision_pass_chrome_mcp",
+  "phase1Source": "data/store-knowledge/rerun-v4/raw-dom/bedsure/08_heizdecke_dom.json",
+  "contentStats": {
+    "domModules": 14,
+    "logicalModules": 14,
+    "brandModules": 12,
+    "asinGridSortiment": 30,
+    "totalVideos": 1
+  },
+  "heroBanner": {
+    "description": "Identischer Bedsure Get cozy Hero.",
+    "textOnImage": { "visibleText": "Bedsure Get cozy", "textType": "tagline", "origin": "baked_in", "headline": "Bedsure", "subline": "Get cozy", "cta": null, "directionCues": null },
+    "estimatedDimensions": "3000x600",
+    "imageCategory": "lifestyle",
+    "elementProportions": { "lifestyle_photo": 80, "logo": 10, "text": 10 }
+  },
+  "modules": [
+    {
+      "position": 1, "moduleId": "heizdecke_mod_01", "moduleName": "Amazon Nav Header",
+      "layoutType": "amazon_nav_header", "layoutShape": "chrome_thin", "tileCount": 0,
+      "designIntent": "mimics_native_chrome", "designIntentDetail": "Amazon Store Navigation mit Breadcrumb Bedsure greater Heizdecke.",
+      "structuralPattern": "Schmale Leiste mit Logo, Folgen, Page-Tabs und Suche.",
+      "moduleFunction": "Navigationschicht.",
+      "relationToPrevious": "none", "relationToNext": "hands_off_to_navigation",
+      "visualBridge": "hard_break_intentional", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Bedsure > Heizdecke Folgen STARTSEITE ...", "textType": "section_label", "origin": "amazon_chrome", "headline": null, "subline": null, "cta": null, "directionCues": null },
+      "tiles": [], "dom": { "widgetClass": null, "visibleHeadings": [], "ctaLabels": ["Folgen"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": null, "toolLayoutName": null, "toolLayoutType": "amazon_native", "toolLayoutRole": "amazon_native"
+    },
+    {
+      "position": 2, "moduleId": "heizdecke_mod_02", "moduleName": "HEIZDECKE Page Hero",
+      "layoutType": "hero_banner_tall", "layoutShape": "full_width_tall", "tileCount": 1,
+      "designIntent": "emotional_hook", "designIntentDetail": "Tall Hero (665px) mit grossem HEIZDECKE-Schriftzug links plus Lifestyle-Setting Wohnzimmer mit grauer Heizdecke auf braunem Ledersofa.",
+      "structuralPattern": "Linke Bildhaelfte heller Hintergrund mit grossem schwarzen HEIZDECKE Versalien-Schriftzug plus Subline Sanfte Waerme und kontinuierliche Beheizung, fuer langanhaltenden Komfort. Rechte Bildhaelfte Lifestyle-Foto eines braunen Ledersofas mit grauer Bedsure-Heizdecke und Steuerungs-Remote, Stehlampe, Wohnzimmer-Setting.",
+      "moduleFunction": "Page-Hero etabliert das Kategoriethema Heizdecke mit Versprechen sanfter Waerme und Komfort.",
+      "relationToPrevious": "opens_section_thematically", "relationToNext": "sets_up_next",
+      "visualBridge": "hard_break_intentional", "copyBridge": "continues_idea", "heroArchetype": "product_in_setting_with_claim",
+      "textOnImage": { "visibleText": "HEIZDECKE Sanfte Waerme und kontinuierliche Beheizung, fuer langanhaltenden Komfort.", "textType": "headline", "origin": "baked_in", "headline": "HEIZDECKE", "subline": "Sanfte Waerme und kontinuierliche Beheizung, fuer langanhaltenden Komfort.", "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "creative_lifestyle_hybrid", "toolTileType": "image_text", "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Heizdecke Kategorie Page Hero", "productOrCategoryRef": null, "intent": "story", "rolePosition": "Page Hero" },
+          "visualContent": "Splitscreen: Links ueberdimensionierter schwarzer Schriftzug HEIZDECKE in fetten Versalien Sans-Serif auf hellem Hintergrund, darunter zweizeilige dunkelgraue Subline. Rechts braunes Ledersofa mit grauer Bedsure Heizdecke locker drapiert, Steuerungs-Remote sichtbar, runde Stehlampe daneben, warmes Wohnzimmer-Ambiente mit Holz-Sprossenfenstern im Hintergrund.",
+          "elementProportions": { "lifestyle_photo": 55, "text": 30, "solid_background": 15 },
+          "textOnImage": { "visibleText": "HEIZDECKE Sanfte Waerme und kontinuierliche Beheizung, fuer langanhaltenden Komfort.", "textType": "headline", "origin": "baked_in", "headline": "HEIZDECKE", "subline": "Sanfte Waerme und kontinuierliche Beheizung, fuer langanhaltenden Komfort.", "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": ["HEIZDECKE"], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "hero"
+    },
+    {
+      "position": 3, "moduleId": "heizdecke_mod_03", "moduleName": "Zertifikats-Section CE RoHS plus Decken-Stapel plus CTA",
+      "layoutType": "editorial_banner_large", "layoutShape": "full_width_tall", "tileCount": 1,
+      "designIntent": "editorial", "designIntentDetail": "Editorial-Banner (743px hoch) mit Zertifikats-Logos CE und RoHS, gestapelten Heizdecken in unterschiedlichen Farben, schwarzem Pill-CTA Jetzt Entdecken.",
+      "structuralPattern": "Linke Bildhaelfte zeigt Zertifikats-Logos (CE-Kreis, RoHS, weiteres Pruefsiegel) auf hellem Hintergrund, darunter schwarzer Pill-CTA Jetzt Entdecken. Rechte Bildhaelfte ein Stapel gefalteter Heizdecken in vier Farben (rot-bordeaux, beige, gruen-oliv, blau-grau), dahinter eine graue Heizdecke ueber Holz-Hocker drapiert.",
+      "moduleFunction": "Sortimentsdemo plus Zertifikats-Trust-Anker direkt nach dem Hero. Visualisiert die Vielfalt der Heizdecken-Sortenpalette.",
+      "relationToPrevious": "proves_above_claim", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_subject_class", "copyBridge": "continues_idea", "heroArchetype": null,
+      "textOnImage": { "visibleText": "CE RoHS Jetzt Entdecken", "textType": "cta", "origin": "baked_in", "headline": null, "subline": null, "cta": "Jetzt Entdecken", "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "creative_lifestyle_hybrid", "toolTileType": "image_text", "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Heizdecke Sortiment", "ctaLabel": "Jetzt Entdecken" },
+          "tileContentTopic": { "primarySubject": "Sortiments-Showcase plus Zertifikats-Trust plus CTA", "productOrCategoryRef": null, "intent": "convert", "rolePosition": "Sortimentsdemo" },
+          "visualContent": "Links Zertifikate-Block (CE, RoHS, GS-Zertifikat) plus schwarzer Pill-CTA Jetzt Entdecken. Rechts Stapel gefalteter Heizdecken in vier Farben (rot, beige, gruen, blau-grau) plus graue Heizdecke ueber Hocker drapiert.",
+          "elementProportions": { "product_photo": 50, "badge": 20, "cta_button": 8, "solid_background": 22 },
+          "textOnImage": { "visibleText": "CE RoHS Jetzt Entdecken", "textType": "cta", "origin": "baked_in", "headline": null, "subline": null, "cta": "Jetzt Entdecken", "directionCues": null },
+          "ctaText": "Jetzt Entdecken", "linksTo": "Heizdecke Sortiment"
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": [], "ctaLabels": ["Jetzt Entdecken"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "product_showcase"
+    },
+    {
+      "position": 4, "moduleId": "heizdecke_mod_04", "moduleName": "WARM und SICHER USP-Block plus Schalter-Demo",
+      "layoutType": "editorial_tile_pair", "layoutShape": "split_two_columns", "tileCount": 2,
+      "designIntent": "editorial", "designIntentDetail": "2-Tile-Pair mit USP-Block links (WARM und SICHER mit Material-Layer-Diagramm) und Schalter-Showcase rechts (ABNEHMBARE INTELLIGENTE SCHALTER mit Stufen-Bullets).",
+      "structuralPattern": "Linkes Tile: heller Hintergrund mit WARM & SICHER schwarzer Versalien-Headline. Darunter Material-Layer-Diagramm mit drei Beschriftungen Besonders weiches Flanell-Fleece, Fortschrittliche Heizdraehte, Fluffiges und dickes Sherpa-Fleece. Rechtes Tile: graue Heizdecken-Closeup mit ABNEHMBARE INTELLIGENTE SCHALTER Headline weiss, zwei orange Pill-Badges 6 Heizstufen und 10 Zeitvoreinstellungen plus weisse Remote-Steuerung.",
+      "moduleFunction": "Technischer Beweis-Block. USPs Material und Schalter werden konkret gezeigt, nicht nur behauptet. Wichtigster Trust-Anker fuer Heizdecke-Spezifik.",
+      "relationToPrevious": "zooms_into_above_subject", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_typography_treatment", "copyBridge": "continues_idea", "heroArchetype": null,
+      "textOnImage": { "visibleText": "WARM & SICHER Besonders weiches Flanell-Fleece Fortschrittliche Heizdraehte Fluffiges und dickes Sherpa-Fleece ABNEHMBARE INTELLIGENTE SCHALTER 6 Heizstufen 10 Zeitvoreinstellungen", "textType": "story_copy", "origin": "baked_in", "headline": "WARM & SICHER", "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "benefit", "toolTileType": "image_text", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Material-Layer-Diagramm Heizdecke", "productOrCategoryRef": null, "intent": "trust", "rolePosition": "Material-USP Block" },
+          "visualContent": "Heller hellbeiger Hintergrund. Oben mittig die schwarze Versalien-Headline WARM und SICHER. Darunter eine Material-Layer-Aufnahme: gefaltete Schichten zeigen oben aussen das weisse Sherpa-Fleece, in der Mitte oranges Heizdraht-Geflecht, unten innen Sherpa-Fleece. Drei orange Linien zu Beschriftungen Besonders weiches Flanell-Fleece, Fortschrittliche Heizdraehte, Fluffiges und dickes Sherpa-Fleece.",
+          "elementProportions": { "product_photo": 50, "text": 30, "graphic_elements": 15, "solid_background": 5 },
+          "textOnImage": { "visibleText": "WARM & SICHER Besonders weiches Flanell-Fleece Fortschrittliche Heizdraehte Fluffiges und dickes Sherpa-Fleece", "textType": "story_copy", "origin": "baked_in", "headline": "WARM & SICHER", "subline": "Besonders weiches Flanell-Fleece, Fortschrittliche Heizdraehte, Fluffiges und dickes Sherpa-Fleece", "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        },
+        { "position": 2, "imageCategory": "benefit", "toolTileType": "image_text", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Schalter-Funktionen Heizdecke", "productOrCategoryRef": null, "intent": "trust", "rolePosition": "Schalter-USP Block" },
+          "visualContent": "Hintergrund Closeup grauer Heizdecke. Mittig oben weisse Versalien-Headline ABNEHMBARE INTELLIGENTE SCHALTER. Darunter zwei orange Pill-Badges 6 Heizstufen und 10 Zeitvoreinstellungen mit weissen Icons. Rechts unten weisse Steuerungs-Remote mit Display 06.",
+          "elementProportions": { "product_photo": 50, "text": 18, "graphic_elements": 25, "badge": 7 },
+          "textOnImage": { "visibleText": "ABNEHMBARE INTELLIGENTE SCHALTER 6 Heizstufen 10 Zeitvoreinstellungen", "textType": "story_copy", "origin": "baked_in", "headline": "ABNEHMBARE INTELLIGENTE SCHALTER", "subline": "6 Heizstufen, 10 Zeitvoreinstellungen", "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": ["WARM & SICHER", "ABNEHMBARE INTELLIGENTE SCHALTER"], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "std-2equal", "toolLayoutName": "2 Equal", "toolLayoutType": "standard", "toolLayoutRole": "editorial_pair"
+    },
+    {
+      "position": 5, "moduleId": "heizdecke_mod_05", "moduleName": "Heizdraht-Update plus Ueberhitzungsschutz Pair",
+      "layoutType": "editorial_tile_pair", "layoutShape": "split_two_columns", "tileCount": 2,
+      "designIntent": "editorial", "designIntentDetail": "2-Tile-Pair mit technischem Update-Hinweis links und Ueberhitzungsschutz rechts.",
+      "structuralPattern": "Linkes Tile: heller Hintergrund mit zwei Heizdraht-Kreisen plus Erklaerungstext zur PTC/NTC-Modernisierung. Rechtes Tile: Lifestyle-Frau im Sessel eingehuellt in Decke, eingebrannte Headline UEBERHITZUNGSSCHUTZ plus orange Pill-Badge Automatische Abschaltung nach 8 Stunden.",
+      "moduleFunction": "Vertieft den Sicherheits-USP mit konkreter Technologie-Erklaerung (PTC/NTC) und Schutzfunktion (Abschaltung nach 8 Stunden).",
+      "relationToPrevious": "repeats_pattern", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_pattern", "copyBridge": "continues_idea", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Jetzt mit modernisierten PTC-/NTC-Heizdraehten anstelle von Einzelschicht-Heizdraehten, fuer noch mehr Sicherheit und Zuverlaessigkeit. UEBERHITZUNGSSCHUTZ Automatische Abschaltung nach 8 Stunden.", "textType": "story_copy", "origin": "baked_in", "headline": null, "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "benefit", "toolTileType": "image_text", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "PTC NTC Heizdraht Update", "productOrCategoryRef": null, "intent": "trust", "rolePosition": "Technik USP" },
+          "visualContent": "Heller hellbeiger Hintergrund. Zwei Heizdraht-Kreis-Diagramme oben links plus Erklaersatz Jetzt mit modernisierten PTC-/NTC-Heizdraehten anstelle von Einzelschicht-Heizdraehten, fuer noch mehr Sicherheit und Zuverlaessigkeit.",
+          "elementProportions": { "graphic_elements": 30, "text": 50, "solid_background": 20 },
+          "textOnImage": { "visibleText": "Jetzt mit modernisierten PTC-/NTC-Heizdraehten anstelle von Einzelschicht-Heizdraehten, fuer noch mehr Sicherheit und Zuverlaessigkeit.", "textType": "story_copy", "origin": "baked_in", "headline": null, "subline": "Jetzt mit modernisierten PTC-/NTC-Heizdraehten anstelle von Einzelschicht-Heizdraehten, fuer noch mehr Sicherheit und Zuverlaessigkeit.", "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        },
+        { "position": 2, "imageCategory": "lifestyle", "toolTileType": "image_text", "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Ueberhitzungsschutz Auto-Abschaltung", "productOrCategoryRef": null, "intent": "trust", "rolePosition": "Sicherheits USP" },
+          "visualContent": "Lifestyle-Aufnahme einer Frau in cremefarbenem Strick-Pulli im Sessel, eingehuellt in beige Bedsure-Heizdecke. Eingebrannte weisse Headline UEBERHITZUNGSSCHUTZ oben rechts plus orange Pill-Badge Automatische Abschaltung nach 8 Stunden mit Uhr-Icon.",
+          "elementProportions": { "lifestyle_photo": 60, "text": 20, "badge": 12, "graphic_elements": 8 },
+          "textOnImage": { "visibleText": "UEBERHITZUNGSSCHUTZ Automatische Abschaltung nach 8 Stunden", "textType": "story_copy", "origin": "baked_in", "headline": "UEBERHITZUNGSSCHUTZ", "subline": "Automatische Abschaltung nach 8 Stunden", "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": ["UEBERHITZUNGSSCHUTZ"], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "std-2equal", "toolLayoutName": "2 Equal", "toolLayoutType": "standard", "toolLayoutRole": "editorial_pair"
+    },
+    {
+      "position": 6, "moduleId": "heizdecke_mod_06", "moduleName": "Social Proof Mio Verkaeufe",
+      "layoutType": "editorial_section_intro", "layoutShape": "full_width_banner", "tileCount": 1,
+      "designIntent": "section_intro", "designIntentDetail": "Schmaler 146px Section-Header mit Social-Proof-Tagline UEBER 1 MILLION MAL VERKAUFT.",
+      "structuralPattern": "Hell-cremeweisser Hintergrund, zentrierte schwarze Versalien-Tagline mit orangem 1 MILLION als Highlight.",
+      "moduleFunction": "Social-Proof-Tagline-Anker zwischen Technik-Beweis und Produkt-Showcase.",
+      "relationToPrevious": "summarizes_above", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_typography_treatment", "copyBridge": "continues_idea", "heroArchetype": null,
+      "textOnImage": { "visibleText": "UEBER 1 MILLION MAL VERKAUFT, VON FAMILIEN WELTWEIT GESCHAETZT.", "textType": "tagline", "origin": "baked_in", "headline": "UEBER 1 MILLION MAL VERKAUFT, VON FAMILIEN WELTWEIT GESCHAETZT.", "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "text_image", "toolTileType": "image_text", "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Social Proof Tagline 1 Million", "productOrCategoryRef": null, "intent": "trust", "rolePosition": "Trust Anchor" },
+          "visualContent": "Heller Hintergrund, zentriert schwarze Sans-Serif Versalien-Tagline UEBER mit orangem 1 MILLION MAL VERKAUFT, VON FAMILIEN WELTWEIT GESCHAETZT.",
+          "elementProportions": { "text": 30, "solid_background": 70 },
+          "textOnImage": { "visibleText": "UEBER 1 MILLION MAL VERKAUFT, VON FAMILIEN WELTWEIT GESCHAETZT.", "textType": "tagline", "origin": "baked_in", "headline": "UEBER 1 MILLION MAL VERKAUFT, VON FAMILIEN WELTWEIT GESCHAETZT.", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": ["UEBER 1 MILLION MAL VERKAUFT, VON FAMILIEN WELTWEIT GESCHAETZT."], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "section_intro"
+    },
+    {
+      "position": 7, "moduleId": "heizdecke_mod_07", "moduleName": "Video-Modul Einfarbige Flanell-Heizdecke",
+      "layoutType": "product_showcase_video", "layoutShape": "full_width_tall", "tileCount": 1,
+      "designIntent": "product_showcase", "designIntentDetail": "Video-Modul (743px Hoehe, 1 Video) zu Einfarbige Flanell-Heizdecke mit Lifestyle-Frau am Kamin plus Produkt-Tile rechts.",
+      "structuralPattern": "Linke Bildhaelfte Lifestyle-Frau im weissen Pulli sitzt im Sessel am Kamin mit grauer Heizdecke. Rechts Headline Einfarbige Flanell-Heizdecke plus Subline Die Waerme entsteht von innen, breitet sich nach aussen aus und bleibt fuer kontinuierlichen Komfort eingeschlossen. Dunkelgrauer Pill-CTA Jetzt Kaufen. Daneben gefaltete graue Heizdecke mit Steuerungs-Display.",
+      "moduleFunction": "Konkretes Produkt-Hero mit Lifestyle-Beweisaufnahme und direktem Conversion-CTA.",
+      "relationToPrevious": "proves_above_claim", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_subject_class", "copyBridge": "continues_idea", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Einfarbige Flanell-Heizdecke Die Waerme entsteht von innen, breitet sich nach aussen aus und bleibt fuer kontinuierlichen Komfort eingeschlossen. Jetzt Kaufen", "textType": "headline_cta", "origin": "baked_in", "headline": "Einfarbige Flanell-Heizdecke", "subline": "Die Waerme entsteht von innen, breitet sich nach aussen aus und bleibt fuer kontinuierlichen Komfort eingeschlossen.", "cta": "Jetzt Kaufen", "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "creative_lifestyle_hybrid", "toolTileType": "video", "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Einfarbige Flanell-Heizdecke", "ctaLabel": "Jetzt Kaufen" },
+          "tileContentTopic": { "primarySubject": "Einfarbige Flanell-Heizdecke Lifestyle plus Conversion", "productOrCategoryRef": null, "intent": "convert", "rolePosition": "Produkt Showcase" },
+          "visualContent": "Splitscreen: Linke Haelfte Lifestyle Frau mit dunklem Haar im cremeweissen Strickpulli sitzt im Sessel am Kamin mit lodernde Flammen, haelt eine dunkle Tasse, in grauer Bedsure-Heizdecke eingehuellt. Rechte Haelfte heller Hintergrund mit Headline Einfarbige Flanell-Heizdecke plus dreizeiliger Subline plus dunkelgrauer Pill-CTA Jetzt Kaufen mit Pfeil. Daneben rechts gefaltete graue Heizdecke mit weissem Steuerungs-Display.",
+          "elementProportions": { "lifestyle_photo": 50, "product_photo": 15, "text": 25, "cta_button": 5, "solid_background": 5 },
+          "textOnImage": { "visibleText": "Einfarbige Flanell-Heizdecke Die Waerme entsteht von innen, breitet sich nach aussen aus und bleibt fuer kontinuierlichen Komfort eingeschlossen. Jetzt Kaufen", "textType": "headline_cta", "origin": "baked_in", "headline": "Einfarbige Flanell-Heizdecke", "subline": "Die Waerme entsteht von innen, breitet sich nach aussen aus und bleibt fuer kontinuierlichen Komfort eingeschlossen.", "cta": "Jetzt Kaufen", "directionCues": null },
+          "ctaText": "Jetzt Kaufen", "linksTo": "Einfarbige Flanell-Heizdecke"
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": ["Einfarbige Flanell-Heizdecke"], "ctaLabels": ["Jetzt Kaufen"], "imageUrls": [], "videoCount": 1 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "product_showcase"
+    },
+    {
+      "position": 8, "moduleId": "heizdecke_mod_08", "moduleName": "Qualitaetsversprechen Bedsure vs Anderen Comparison Block",
+      "layoutType": "editorial_banner_large", "layoutShape": "full_width_banner", "tileCount": 1,
+      "designIntent": "editorial", "designIntentDetail": "Vision-Followup 2026-05-12: Modul 8 ist ein Qualitaetsversprechen-Comparison-Block mit dunklem Hintergrund und 3 USP-Saeulen, die Bedsure mit anderen Heizdecken vergleichen.",
+      "structuralPattern": "Dunkler Hintergrund mit Smoke-Texture. Linke Bildhaelfte weisse Headline Unser Qualitaetsversprechen sorgt fuer ein noch besseres Erlebnis, fuer Sie und Ihre Liebsten. Rechte Bildhaelfte drei USP-Saeulen nebeneinander: 1) Vergroessterte Heizflaeche (zwei Heatmap-Figuren Bedsure vs Anderen), 2) Schnellere und gleichmaessige Waerme (Kurven-Diagramm 125,6 vs 86 Grad), 3) Optimierte Heizdraehte (Querschnitt-Vergleich Anderen vs Bedsure).",
+      "moduleFunction": "Technischer Trust-Block, der Bedsure direkt gegen Konkurrenten positioniert. Dunkler Hintergrund unterscheidet ihn visuell vom hellen Rest der Page und verstaerkt den Premium-Anspruch.",
+      "relationToPrevious": "summarizes_above", "relationToNext": "sets_up_next",
+      "visualBridge": "hard_break_intentional", "copyBridge": "continues_idea", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Unser Qualitaetsversprechen sorgt fuer ein noch besseres Erlebnis, fuer Sie und Ihre Liebsten. Vergroessterte Heizflaeche Bedsure Anderen Schnellere und gleichmaessige Waerme 125,6 Grad 86 Grad Optimierte Heizdraehte Anderen Bedsure", "textType": "story_copy", "origin": "baked_in", "headline": "Unser Qualitaetsversprechen sorgt fuer ein noch besseres Erlebnis, fuer Sie und Ihre Liebsten.", "subline": "Vergroessterte Heizflaeche, Schnellere und gleichmaessige Waerme, Optimierte Heizdraehte", "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "benefit", "toolTileType": "image_text", "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Bedsure vs Anderen Qualitaetsvergleich", "productOrCategoryRef": null, "intent": "trust", "rolePosition": "Technischer Vergleichs-Trust" },
+          "visualContent": "Dunkler Smoke-Texture-Hintergrund. Linke Bildhaelfte weisser Headline-Block. Rechte Bildhaelfte drei USP-Saeulen mit Vergleichsgrafiken: zwei Mensch-Heatmap-Silhouetten (Bedsure rot mit grossflaechiger Waerme vs Anderen orange mit kleineren Heatzonen), Diagramm mit Bedsure-Kurve (oranger Punkt bei 125,6 Grad) gegen Anderen-Kurve (86 Grad nach gleicher Zeit), Querschnitt-Vergleich zweier Heizdraht-Kabel (Anderen einfach links vs Bedsure mehrschichtig rechts).",
+          "elementProportions": { "graphic_elements": 50, "text": 35, "solid_background": 15 },
+          "textOnImage": { "visibleText": "Unser Qualitaetsversprechen sorgt fuer ein noch besseres Erlebnis, fuer Sie und Ihre Liebsten. Vergroessterte Heizflaeche Schnellere und gleichmaessige Waerme Optimierte Heizdraehte", "textType": "story_copy", "origin": "baked_in", "headline": "Unser Qualitaetsversprechen sorgt fuer ein noch besseres Erlebnis", "subline": "Vergroessterte Heizflaeche, Schnellere und gleichmaessige Waerme, Optimierte Heizdraehte", "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": [], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "editorial"
+    },
+    {
+      "position": 9, "moduleId": "heizdecke_mod_09", "moduleName": "Section Intro INTERTEK-Labor",
+      "layoutType": "editorial_section_intro", "layoutShape": "full_width_banner", "tileCount": 1,
+      "designIntent": "section_intro", "designIntentDetail": "Section-Header zur Labor-Section.",
+      "structuralPattern": "Schmale 144px-Row, zentrierte Headline INTERTEK-ZERTIFIZIERTES BEDSURE SATELLITE-LABOR auf hellem Hintergrund.",
+      "moduleFunction": "Leitet den industriellen Trust-Beweis-Block ein.",
+      "relationToPrevious": "summarizes_above", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_typography_treatment", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "INTERTEK-ZERTIFIZIERTES BEDSURE SATELLITE-LABOR", "textType": "section_label", "origin": "baked_in", "headline": "INTERTEK-ZERTIFIZIERTES BEDSURE SATELLITE-LABOR", "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "text_image", "toolTileType": "image_text", "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Section Intro INTERTEK Labor", "productOrCategoryRef": null, "intent": "trust", "rolePosition": "Section Intro Trust" },
+          "visualContent": "Heller Hintergrund mit zentrierter Versalien-Headline INTERTEK-ZERTIFIZIERTES BEDSURE SATELLITE-LABOR.",
+          "elementProportions": { "text": 25, "solid_background": 75 },
+          "textOnImage": { "visibleText": "INTERTEK-ZERTIFIZIERTES BEDSURE SATELLITE-LABOR", "textType": "section_label", "origin": "baked_in", "headline": "INTERTEK-ZERTIFIZIERTES BEDSURE SATELLITE-LABOR", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": ["INTERTEK-ZERTIFIZIERTES BEDSURE SATELLITE-LABOR"], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "section_intro"
+    },
+    {
+      "position": 10, "moduleId": "heizdecke_mod_10", "moduleName": "ProductGrid Heizdecken Sortiment 30 ASINs",
+      "layoutType": "product_grid_category", "layoutShape": "grid_four_columns", "tileCount": 30,
+      "designIntent": "product_showcase", "designIntentDetail": "ProductGrid mit 30 ASINs der Heizdecken-Kategorie. Amazon rendert.",
+      "structuralPattern": "ProductGrid-Container mit 30 ASIN-Tiles ueber 1860px Hoehe.",
+      "moduleFunction": "Vollkatalog der Heizdecken-Kategorie. Direkter Conversion-Pfad.",
+      "relationToPrevious": "lists_subordinate_options", "relationToNext": "closes_chapter",
+      "visualBridge": "hard_break_intentional", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": null, "textType": "product_title", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "product_tile_asin", "toolTileType": "product_grid", "toolImageType": "PRODUCT_TILE_ASIN",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "amazon_rendered_tiles", "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Heizdecken Kategorie-Sortiment (aggregiert)", "productOrCategoryRef": "amazon_rendered_30_asins", "intent": "convert", "rolePosition": "Conversion Sortiment" },
+          "visualContent": "Amazon ASIN Tile, kein Brand Design. Amazon rendert 30 Heizdecken-Produkttiles mit Titel und Preis. Auf User-Entscheidung 2026-05-12 NICHT pro Produkt aufgeschluesselt.",
+          "elementProportions": {},
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "amazon_rendered_tiles"
+        }
+      ],
+      "dom": { "widgetClass": "ProductGrid__gridContainer__bRK6J", "visibleHeadings": [], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "product_grid_asin", "toolLayoutName": "Product Grid (ASIN)", "toolLayoutType": "fullwidth_asin", "toolLayoutRole": "product_grid",
+      "productGridAggregate": { "toolTileType": "product_grid", "toolImageType": "PRODUCT_TILE_ASIN", "asinTileCount": 30, "note": "Amazon rendert die 30 ASIN-Tiles selbst. Auf User-Entscheidung nicht einzeln erfasst." }
+    },
+    {
+      "position": 11, "moduleId": "heizdecke_mod_11", "moduleName": "Section Intro ALLE KATEGORIEN ENTDECKEN",
+      "layoutType": "editorial_section_intro", "layoutShape": "full_width_banner", "tileCount": 1,
+      "designIntent": "section_intro", "designIntentDetail": "Vision-Followup 2026-05-12: Section-Header ALLE KATEGORIEN ENTDECKEN vor dem Kategorien-Verteiler-Grid.",
+      "structuralPattern": "Schmale 101px-Row, zentrierte schwarze Versalien-Headline ALLE KATEGORIEN ENTDECKEN auf hellem Hintergrund.",
+      "moduleFunction": "Leitet den Kategorien-Verteiler ein. Wiederkehrendes Bedsure-Schluss-Pattern.",
+      "relationToPrevious": "summarizes_above", "relationToNext": "sets_up_next",
+      "visualBridge": "shared_typography_treatment", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "ALLE KATEGORIEN ENTDECKEN", "textType": "section_label", "origin": "baked_in", "headline": "ALLE KATEGORIEN ENTDECKEN", "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "text_image", "toolTileType": "image_text", "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": { "primarySubject": "Section Intro Alle Kategorien", "productOrCategoryRef": null, "intent": "navigate", "rolePosition": "Section Intro" },
+          "visualContent": "Heller Hintergrund mit zentrierter schwarzer Versalien-Headline ALLE KATEGORIEN ENTDECKEN.",
+          "elementProportions": { "text": 25, "solid_background": 75 },
+          "textOnImage": { "visibleText": "ALLE KATEGORIEN ENTDECKEN", "textType": "section_label", "origin": "baked_in", "headline": "ALLE KATEGORIEN ENTDECKEN", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": null
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": ["ALLE KATEGORIEN ENTDECKEN"], "ctaLabels": [], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "1", "toolLayoutName": "Full Width", "toolLayoutType": "fullwidth", "toolLayoutRole": "section_intro"
+    },
+    {
+      "position": 12, "moduleId": "heizdecke_mod_12", "moduleName": "Alle Kategorien entdecken 7-Tile Grid",
+      "layoutType": "subcategory_tile_grid_octet", "layoutShape": "grid_four_columns", "tileCount": 7,
+      "designIntent": "navigation_bridge", "designIntentDetail": "Vision-Followup 2026-05-12: Identisches Bedsure-Kategorien-Verteiler-Grid wie auf Kuscheldecken und Ueber-Bedsure. Sieben Lifestyle-Tiles mit Bottom-Overlay-Labels.",
+      "structuralPattern": "Mehrzeiliges Grid mit 7 Lifestyle-Tiles: Kuscheldecken & Wohndecken, Bettwaesche-Sets, Bettdecken (obere Reihe); Haustierbedarf, Kuscheldecke mit Aermeln, Heizdecke, Kissenbezug & Spannbettlaken (untere Reihe).",
+      "moduleFunction": "Wiederkehrendes Bedsure-Page-Closing-Pattern. Cross-Sell-Verteiler zu allen anderen Sortimentskategorien.",
+      "relationToPrevious": "lists_subordinate_options", "relationToNext": "closes_chapter",
+      "visualBridge": "shared_pattern", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Kuscheldecken & Wohndecken Bettwaesche-Sets Bettdecken Haustierbedarf Kuscheldecke mit Aermeln Heizdecke Kissenbezug & Spannbettlaken", "textType": "category_label", "origin": "layered_text", "headline": null, "subline": null, "cta": null, "directionCues": null },
+      "tiles": [
+        { "position": 1, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Kuscheldecken", "ctaLabel": "Kuscheldecken & Wohndecken" },
+          "tileContentTopic": { "primarySubject": "Kuscheldecken Kategorie", "productOrCategoryRef": "2F249C26-269C-4A0B-ACB2-7AB6436FFDC5", "intent": "navigate", "rolePosition": "Kategorie Tile 1" },
+          "visualContent": "Lifestyle: Paar im Bett kuschelt unter weisser Kord-Optik-Kuscheldecke. Bottom-Overlay unterstrichener Link Kuscheldecken & Wohndecken.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Kuscheldecken & Wohndecken", "textType": "category_label", "origin": "layered_text", "headline": "Kuscheldecken & Wohndecken", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Kuscheldecken"
+        },
+        { "position": 2, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Bettwaesche-Sets", "ctaLabel": "Bettwaesche-Sets" },
+          "tileContentTopic": { "primarySubject": "Bettwaesche-Sets Kategorie", "productOrCategoryRef": "D537A0F0-8099-477C-A9CE-4E44DA3B8F13", "intent": "navigate", "rolePosition": "Kategorie Tile 2" },
+          "visualContent": "Lifestyle: helles Bett mit cremefarbenem Bettbezug und gestapelten Kissen.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Bettwaesche-Sets", "textType": "category_label", "origin": "layered_text", "headline": "Bettwaesche-Sets", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Bettwaesche-Sets"
+        },
+        { "position": 3, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Bettdecke und Kissen", "ctaLabel": "Bettdecken" },
+          "tileContentTopic": { "primarySubject": "Bettdecken Kategorie", "productOrCategoryRef": "0327D6BF-BFA7-49D7-80B2-31707A7C0AF9", "intent": "navigate", "rolePosition": "Kategorie Tile 3" },
+          "visualContent": "Lifestyle: Frau mit dunklen Locken schlaeft entspannt unter weisser Bedsure-Bettdecke.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Bettdecken", "textType": "category_label", "origin": "layered_text", "headline": "Bettdecken", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Bettdecke und Kissen"
+        },
+        { "position": 4, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Haustierbedarf", "ctaLabel": "Haustierbedarf" },
+          "tileContentTopic": { "primarySubject": "Haustierbedarf Kategorie", "productOrCategoryRef": "B3B34DD4-8067-4CF4-B764-5BEDBD5B40E8", "intent": "navigate", "rolePosition": "Kategorie Tile 4" },
+          "visualContent": "Lifestyle: franzoesische Bulldogge auf grauem Hundebett.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Haustierbedarf", "textType": "category_label", "origin": "layered_text", "headline": "Haustierbedarf", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Haustierbedarf"
+        },
+        { "position": 5, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Kuscheldecke mit Aermeln", "ctaLabel": "Kuscheldecke mit Aermeln" },
+          "tileContentTopic": { "primarySubject": "Kuscheldecke mit Aermeln Kategorie", "productOrCategoryRef": "8B9660CA-9C46-42A4-B289-C08618110009", "intent": "navigate", "rolePosition": "Kategorie Tile 5" },
+          "visualContent": "Lifestyle: Frau in rosa Hoodie-Decke mit Aermeln und Katze.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Kuscheldecke mit Aermeln", "textType": "category_label", "origin": "layered_text", "headline": "Kuscheldecke mit Aermeln", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Kuscheldecke mit Aermeln"
+        },
+        { "position": 6, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Heizdecke", "ctaLabel": "Heizdecke" },
+          "tileContentTopic": { "primarySubject": "Heizdecke Kategorie (Self-Loop)", "productOrCategoryRef": "86EE23E4-B85F-4167-8FE0-E32C59862F42", "intent": "navigate", "rolePosition": "Kategorie Tile 6 Self-Loop" },
+          "visualContent": "Lifestyle: Frau im weissen Pullover auf hellem Sofa mit grauer Bedsure-Heizdecke. Self-Loop zur aktuellen Page.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Heizdecke", "textType": "category_label", "origin": "layered_text", "headline": "Heizdecke", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Heizdecke"
+        },
+        { "position": 7, "imageCategory": "lifestyle", "toolTileType": "image", "toolImageType": "SMALL_SQUARE",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Kissenbezuege und Spannbettlaken", "ctaLabel": "Kissenbezug & Spannbettlaken" },
+          "tileContentTopic": { "primarySubject": "Kissenbezuege und Spannbettlaken Kategorie", "productOrCategoryRef": "652C1CB5-3C1F-41DB-802F-9A308D45AE28", "intent": "navigate", "rolePosition": "Kategorie Tile 7" },
+          "visualContent": "Lifestyle: graues Spannbettlaken auf cremefarbenem Bett.",
+          "elementProportions": { "lifestyle_photo": 88, "text": 12 },
+          "textOnImage": { "visibleText": "Kissenbezug & Spannbettlaken", "textType": "category_label", "origin": "layered_text", "headline": "Kissenbezug & Spannbettlaken", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null, "linksTo": "Kissenbezuege und Spannbettlaken"
+        }
+      ],
+      "dom": { "widgetClass": "EditorialRow__row__W3W3h", "visibleHeadings": [], "ctaLabels": ["Kuscheldecken & Wohndecken", "Bettwaesche-Sets", "Bettdecken", "Haustierbedarf", "Kuscheldecke mit Aermeln", "Heizdecke", "Kissenbezug & Spannbettlaken"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": "4x2grid", "toolLayoutName": "4x2 Grid", "toolLayoutType": "standard", "toolLayoutRole": "navigation_bridge"
+    },
+    {
+      "position": 13, "moduleId": "heizdecke_mod_13", "moduleName": "Amazon Share Footer",
+      "layoutType": "amazon_share_footer", "layoutShape": "chrome_thin", "tileCount": 0,
+      "designIntent": "mimics_native_chrome", "designIntentDetail": "Vision-Followup 2026-05-12 ergaenzt: amazon_share_footer am Page-Ende, war im ursprung Blueprint nicht erfasst.",
+      "structuralPattern": "Schmaler Streifen mit Teilen-Button und Zurueck zum Seitenanfang Link.",
+      "moduleFunction": "Amazon-Mechanik. Wird in der Brand-Generierung ausgefiltert.",
+      "relationToPrevious": "none", "relationToNext": "none",
+      "visualBridge": "hard_break_intentional", "copyBridge": "fresh_topic", "heroArchetype": null,
+      "textOnImage": { "visibleText": "Teilen Teilen Sie diese Seite mit Ihren Freunden. Zurueck zum Seitenanfang", "textType": "section_label", "origin": "amazon_chrome", "headline": null, "subline": null, "cta": "Teilen", "directionCues": null },
+      "tiles": [],
+      "dom": { "widgetClass": "ShareFooter", "visibleHeadings": [], "ctaLabels": ["Teilen", "Zurueck zum Seitenanfang"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": null, "toolLayoutName": null, "toolLayoutType": "amazon_native", "toolLayoutRole": "amazon_native"
+    }
+  ],
+  "voiceMarkers": {
+    "voiceRegister": "technisch",
+    "sentencePattern": "kurze_aussage",
+    "vocabularyField": "industriell",
+    "claimType": "expertise_signal",
+    "rhetoricalDevice": "konkrete_zahl"
+  },
+  "voiceExamples": [
+    "Sanfte Waerme und kontinuierliche Beheizung, fuer langanhaltenden Komfort.",
+    "74 Sicherheitstests fuer hoechste Sicherheit und Leistung, uebertrifft UL-Standards und ist GS-, CE- sowie RoHS-zertifiziert.",
+    "UEBER 1 MILLION MAL VERKAUFT, VON FAMILIEN WELTWEIT GESCHAETZT."
+  ],
+  "pageAnalysis": {
+    "tonalityVisual": "Deutlich technischer und industrieller als die anderen Bedsure-Pages. Material-Layer-Diagramme, Industriefotos mit Spinnerei-Maschinen, Zertifikats-Logos (CE, RoHS, GS, UL). Lifestyle bleibt warm (Kamin, Sessel, Decke) aber Trust-Anker sind stark technisch dominiert.",
+    "ctaStrategies": "Mehrere expliziter Pill-CTAs (Jetzt Entdecken in Modul 3, Jetzt Kaufen in Modul 7). Stark technisch unterfuetterte Conversion ueber Zertifikats-Beweise.",
+    "contentDepth": "12 Brand-Module mit klarem Trust-zu-Conversion-Aufbau. Drei Trust-Blocks (WARM und SICHER, UEBERHITZUNGSSCHUTZ, INTERTEK-Labor) plus 1 Mio-Verkaeufe-Social-Proof.",
+    "useForArchetype": "Eignet sich als Vorlage fuer Sub-Category-Pages mit Sicherheits-/Technologie-fokus. Materialschichten-Diagramm plus Schalter-Demo plus Zertifikats-Wand sind ein klares Heizdecken-Signature.",
+    "moduleClusters": [
+      "Page Intro Cluster: Page-Hero plus Zertifikats-Sortiments-Banner",
+      "Sicherheits-USP Cluster: WARM und SICHER plus Schalter-Demo plus Ueberhitzungsschutz",
+      "Trust Cluster: 1-Mio-Verkaeufe Tagline plus INTERTEK-Labor",
+      "Conversion Cluster: Einfarbige Flanell-Heizdecke Video-Showcase plus Variante 2 plus ProductGrid 30 ASINs",
+      "Cross-Sell Closer: Section Intro plus 56-Tile-Cross-Sell"
+    ]
+  },
+  "pageArchitecture": "Heizdecke-Page baut einen stark technisch-getriebenen Sicherheits-zu-Conversion-Funnel. Page-Hero etabliert das Versprechen sanfte Waerme. Zertifikats-Banner gibt sofort den Trust-Anker. WARM und SICHER plus Schalter-Demo plus PTC NTC plus Ueberhitzungsschutz vertiefen die Sicherheits-Mechanik. 1 Mio Verkaeufe Tagline als Social-Proof-Bruecke. Einfarbige Flanell-Heizdecke Video-Showcase als emotionale Conversion. INTERTEK-Labor als industrieller Trust-Closer. ProductGrid 30 ASINs fuer direkten Kauf. Cross-Sell-Banner schliesst.",
+  "openQuestions": [
+    "Module 8, 11, 12 wurden mit screenshot_required Platzhaltern erfasst. Im zweiten Vision-Lauf nachholen.",
+    "voiceMarkers wurden hier deutlich anders kodiert als auf den anderen Bedsure-Pages: voiceRegister technisch (statt professionell), vocabularyField industriell (statt lifestyle), claimType expertise_signal (statt social_proof), rhetoricalDevice konkrete_zahl (1 Million, 74 Sicherheitstests, 6 Heizstufen, 10 Zeitvoreinstellungen, 8 Stunden Abschaltung). Die Heizdecke-Page hat eine messbar andere Voice als die anderen Bedsure-Pages.",
+    "Modul 7 ist ein product_showcase_video mit Video. Heroes mit Video kommen bei Bedsure selten vor, das ist ein Conversion-Anker fuer die Hauptvariante."
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "_meta": {
+    "store": "more-nutrition",
+    "pageSlug": "08_clear-protein",
+    "pageId": "55FD402B-A0DC-4A7C-BD00-2D0ECE353C4D",
+    "url": "https://www.amazon.de/stores/page/55FD402B-A0DC-4A7C-BD00-2D0ECE353C4D",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_v4_widget_scan",
+    "scrollHeight": 6608,
+    "viewport": { "w": 1582, "h": 872 },
+    "domWidgetsTotal": 8,
+    "note": "CLEAR PROTEIN Sub-Page. Reichste Sub-Page mit Hero, FeaturedDeal Peach Passionfruit, Infografik-Banner mit 4 USP-Boxen, Lifestyle-mit-Produkt Split-Banner mit eigenem CTA 'Jetzt einkaufen', ProductGrid 8 ASINs, Standard-Banner-Schluss."
+  },
+  "hero": {
+    "section": "hero", "widgetIdx": 0, "top": 99,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/b630abd5-b8c4-491b-bbba-810a278605e2._CR0%2C0%2C3000%2C600_SX1500_.png",
+    "imageSize": { "w": 1500, "h": 300 },
+    "note": "CLEAR PROTEIN Hero-Banner."
+  },
+  "navigation": "siehe 01_startseite_dom.json",
+  "modules": [
+    {
+      "userModuleId": 1, "widgetIdx": 1, "top": 502, "height": 591,
+      "widgetClass": "EditorialRow", "layoutType": "featured_deal_asin_showcase", "tileCount": 1,
+      "featuredAsin": "B0BNC6NJSG",
+      "featuredProductTitle": "MORE Clear Protein, Peach Passionfruit Ice Tea, 600 g, Protein Drink mit Whey Isolat - made in Germany",
+      "rating": "4,3 von 5 Sternen, 374 Bewertungen", "imgCount": 24, "videoCount": 6,
+      "note": "FeaturedDeal Peach Passionfruit Ice Tea."
+    },
+    {
+      "userModuleId": 2, "widgetIdx": 2, "top": 1093, "height": 697,
+      "widgetClass": "EditorialRow", "layoutType": "infographic_benefit_4box", "tileCount": 1,
+      "mainImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/b48b4b04-2661-4ba8-ae59-6c4158b77023._CR0%2C0%2C2190%2C1016_SX1500_.png" },
+      "altText": "Infographic with colorful abstract shape in center, surrounded by four text boxes with product information.",
+      "note": "Infografik-Banner: zentrale Grafik plus 4 Text-Boxen mit Produktinfo. Bildtext per Vision lesbar. AUFFAELLIG: erstmals ein klar didaktisches Benefit-Modul mit Vier-Box-Layout."
+    },
+    {
+      "userModuleId": 3, "widgetIdx": 3, "top": 1790, "height": 743,
+      "widgetClass": "EditorialRow", "layoutType": "split_lifestyle_product_with_cta", "tileCount": 2,
+      "tiles": [
+        { "position": "lifestyle", "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/f6365487-0538-4d45-a9e2-a53d010e057a._CR0%2C0%2C1280%2C1280_SX750_SY750_.jpg", "ariaLabel": "Woman in yellow tank top drinking from a clear water bottle outdoors. Sunlight illuminates her face and hair as she tilts her head back." },
+        { "position": "product", "asin": "B0BNC77W7N", "imageSrc": "https://m.media-amazon.com/images/I/618lPqpU0kL._AC_CR0%2C0%2C0%2C0_SX750_.jpg", "productTitleAria": "MORE Clear Protein, Mango Juice, 600 g, Protein Drink mit Whey Isolat, clear Whey - made in Germany" }
+      ],
+      "headings": ["Clear Protein, Mango Juice, 600 g", "Unser erfrischend klarer Protein-Drink aus Molkenproteinisolat."],
+      "ctaText": "Jetzt einkaufen",
+      "note": "Split-Banner Lifestyle links plus Produkt rechts. Eigene Headline 'Clear Protein, Mango Juice, 600 g' plus Subline 'Unser erfrischend klarer Protein-Drink aus Molkenproteinisolat' im DOM lesbar plus 'Jetzt einkaufen' CTA. AUFFAELLIG: erstmals echte Editorial-Headline-Text-im-DOM bei dieser Brand."
+    },
+    {
+      "userModuleId": 4, "widgetIdx": 4, "top": 2532, "height": 1114,
+      "widgetClass": "ProductGrid", "layoutType": "product_grid_full_catalog", "tileCount": 8,
+      "asins": ["B0D424HTJS","B0CT357MVM","B0DXFTT76L","B0CVBK61KS","B0BNC7LXFZ","B0C55BLFSK","B0D425FT5K","B0CV9PZW7D"],
+      "exampleTitles": [
+        "MORE Clear Protein, Peach Iced Tea, 600 g",
+        "MORE Clear Protein, Lemon Iced Tea, 600 g",
+        "MORE Clear Protein Lemonade Style, Virgin Mojito, 600 g"
+      ],
+      "note": "ProductGrid 8 weitere Clear-Protein-Sorten."
+    },
+    {
+      "userModuleId": 5, "widgetIdx": 5, "top": 3647, "height": 750,
+      "widgetClass": "EditorialRow", "layoutType": "full_width_image_creative", "tileCount": 1,
+      "mainImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d6865a5f-5e09-4f0a-b72c-b6bb65ac059d._CR0%2C0%2C1280%2C640_SX1500_.jpg" },
+      "links": [{"pageId": "8790A8BC-31A4-4810-8B75-BF1AFCE858B5", "ariaLabel": "Weitere Informationen"}],
+      "note": "Produktselektor-Banner."
+    },
+    {
+      "userModuleId": 6, "widgetIdx": 6, "top": 4397, "height": 750,
+      "widgetClass": "EditorialRow", "layoutType": "full_width_image_closing", "tileCount": 1,
+      "mainImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d359c2c9-b952-47a2-b88a-864e11ffc31c._CR0%2C0%2C3000%2C1500_SX1500_.png" },
+      "links": [{"pageId": "F081FD4B-1559-4A38-A4F3-FC8E6732BCEB", "ariaLabel": "Weitere Informationen"}],
+      "note": "Closing-Banner."
+    }
+  ],
+  "excluded": [
+    { "widgetIdx": 7, "top": 5147, "height": 200, "reason": "Amazon Share-Footer." }
+  ],
+  "uniqueAsinsOnPage": ["B0BNC6NJSG","B0BNC77W7N","B0D424HTJS","B0CT357MVM","B0DXFTT76L","B0CVBK61KS","B0BNC7LXFZ","B0C55BLFSK","B0D425FT5K","B0CV9PZW7D"]
+}

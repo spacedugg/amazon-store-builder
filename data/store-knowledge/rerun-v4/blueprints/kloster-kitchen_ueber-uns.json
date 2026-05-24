@@ -1,0 +1,682 @@
+{
+  "schemaVersion": "v4-2026-05",
+  "store": "kloster-kitchen",
+  "pageUrl": "https://www.amazon.de/stores/page/F031D76B-9B76-426A-93A9-2EBBCB5150CF",
+  "pageName": "Ueber Uns",
+  "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF",
+  "pageSlug": "10_ueber-uns",
+  "pageLevel": 1,
+  "pageType": "about",
+  "scrollHeight": 4839,
+  "viewport": { "w": 1181, "h": 1155 },
+  "extractedAt": "2026-05-10",
+  "extractor": "v4_vision_pass_chrome_mcp",
+  "phase1Source": "data/store-knowledge/rerun-v4/raw-dom/kloster-kitchen/10_ueber-uns_dom.json",
+  "contentStats": {
+    "domModules": 9,
+    "logicalModules": 9,
+    "brandModules": 7,
+    "totalImages": 8,
+    "totalVideos": 1,
+    "uniqueAsinsOnPage": 3
+  },
+  "heroBanner": {
+    "description": "Identischer Header-Banner wie Startseite. KLOSTER KITCHEN BETTER THAN GOOD auf gruenen Ingwerblaettern.",
+    "textOnImage": {
+      "visibleText": "KLOSTER KITCHEN BETTER THAN GOOD",
+      "textType": "tagline",
+      "origin": "baked_in",
+      "headline": "BETTER THAN GOOD",
+      "subline": "KLOSTER KITCHEN",
+      "cta": null,
+      "directionCues": null
+    },
+    "estimatedDimensions": "3000x600",
+    "imageCategory": "lifestyle",
+    "elementProportions": { "lifestyle_photo": 70, "logo": 8, "text": 18, "icons": 4 }
+  },
+  "modules": [
+    {
+      "position": 1,
+      "moduleId": "ueber-uns_mod_01",
+      "moduleName": "Amazon Nav Header",
+      "layoutType": "amazon_nav_header",
+      "layoutShape": "chrome_thin",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": "Standard Amazon Store Navigation.",
+      "structuralPattern": "Schmale Leiste mit Brand-Logo, Folgen-Button, Page-Tabs und Suche.",
+      "moduleFunction": "Navigationschicht. Identisch ueber alle Pages.",
+      "relationToPrevious": "none",
+      "relationToNext": "hands_off_to_navigation",
+      "visualBridge": "hard_break_intentional",
+      "copyBridge": "fresh_topic",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "Folgen STARTSEITE ALLE ANGEBOTE INGWER SHOTS MIKRONAEHRSTOFFE SAFTKUREN SMOOTHIES MEHR",
+        "textType": "section_label",
+        "origin": "amazon_chrome",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": { "widgetClass": "StoreNav", "visibleHeadings": [], "ctaLabels": ["Folgen"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": null,
+      "toolLayoutName": null,
+      "toolLayoutType": "amazon_native",
+      "toolLayoutRole": "amazon_native"
+    },
+    {
+      "position": 2,
+      "moduleId": "ueber-uns_mod_02",
+      "moduleName": "Brand Story Video",
+      "layoutType": "hero_video",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "emotional_hook",
+      "designIntentDetail": "Vision-Followup 2026-05-12: Full-Width-Brand-Story-Video als Page-Auftakt. 1470x735px gerendert. Zeigt das Kloster-Kitchen-Team bei einem Sommer-Brainstorming-Meeting in hellem Buero mit grossen Sprossenfenstern.",
+      "structuralPattern": "Vollflaechiges Autoplay-Video. Frame-Inhalt: helles modernes Buero mit grossen Sprossenfenstern (geoeffnet, Sommer), junge Frau im hellgruenen T-Shirt mit Hochsteckhaar steht vor einer Whiteboard-Tafel mit beschriebenen Notizen, drei Kollegen am Holz-Konferenztisch (Mann in dunklem T-Shirt, Frau im weissen Top, Mann in weissem T-Shirt) - lachen und hoeren zu. Dunkle Pendelleuchten von der Decke. Sehr persoenliche Team-Stimmung.",
+      "moduleFunction": "Setzt den Brand-Story-Ton mit einer authentischen Team-Meeting-Szene. Macht die Marke nahbar durch echte Mitarbeiter-Aufnahmen statt Stock-Bildern. Verbindet das Markenversprechen TEAMGEIST (siehe Modul 5) mit visueller Realitaet.",
+      "relationToPrevious": "opens_section_thematically",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "hard_break_intentional",
+      "copyBridge": "fresh_topic",
+      "heroArchetype": "brand_story_video_intro",
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "lifestyle",
+          "toolTileType": "video",
+          "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Brand Story Auftakt Video Kloster Kitchen Team",
+            "productOrCategoryRef": null,
+            "intent": "story",
+            "rolePosition": "Page Hero Video"
+          },
+          "visualContent": "Vision-Followup Frame: helles modernes Buero mit grossen Sprossenfenstern (geoeffnet, Sommer-Atmosphaere). Junge Frau mit Hochsteckhaar im hellgruenen T-Shirt und dunklem Rock steht aktiv vor einer beschriebenen Whiteboard-Tafel. Vor ihr am Holz-Konferenztisch sitzen drei Kollegen: Mann im dunklen T-Shirt und kurzen Hosen, Frau mit langen dunklen Haaren im weissen Top und Mann im weissen T-Shirt. Beide lachen entspannt. Im Hintergrund warme Sonnenstrahlen durch geoeffnete Fenster, mehrere dunkle Pendelleuchten haengen von der Decke. Heizkoerper, weisse Waende, helles Tageslicht. Atmosphaere: authentisches Team-Brainstorming.",
+          "elementProportions": { "lifestyle_photo": 100 },
+          "textOnImage": { "visibleText": null, "textType": "unknown", "origin": "baked_in", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 1
+      },
+      "toolLayoutId": "1",
+      "toolLayoutName": "Full Width",
+      "toolLayoutType": "fullwidth",
+      "toolLayoutRole": "hero_video"
+    },
+    {
+      "position": 3,
+      "moduleId": "ueber-uns_mod_03",
+      "moduleName": "KLOSTER KITCHEN Brand Intro",
+      "layoutType": "editorial_banner_solid_color",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": "Typografisches Brand-Intro mit Markenname als Headline und einem zentralen Markenmanifest-Satz auf weissem Grund.",
+      "structuralPattern": "Vollflaechiger weisser Hintergrund. Mittig grosse schwarze Sans-Serif-Headline KLOSTER KITCHEN in fetten Versalien. Darunter ein dreizeiliger Erklaersatz, zentriert in Mixed Case Sans-Serif.",
+      "moduleFunction": "Schafft den ruhigen typografischen Anker nach dem dynamischen Video. Gibt den Markennamen als visuelle Marke und macht im Subtext klar, was die Marke heute ist und wie gross sie inzwischen ist. Bereitet die folgenden Story-Module vor.",
+      "relationToPrevious": "summarizes_above",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "hard_break_intentional",
+      "copyBridge": "continues_idea",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "KLOSTER KITCHEN 2016 klein begonnen, ist die Marke Kloster Kitchen heute mit ueber 40 leidenschaftlichen Mitarbeitern zu einem echten Unternehmen gewachsen.",
+        "textType": "headline",
+        "origin": "baked_in",
+        "headline": "KLOSTER KITCHEN",
+        "subline": "2016 klein begonnen, ist die Marke Kloster Kitchen heute mit ueber 40 leidenschaftlichen Mitarbeitern zu einem echten Unternehmen gewachsen.",
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "toolTileType": "image_text",
+          "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B09R4Y8VDW", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Brand Manifest mit Markenname und Wachstumsclaim",
+            "productOrCategoryRef": "B09R4Y8VDW",
+            "intent": "story",
+            "rolePosition": "Brand Intro"
+          },
+          "visualContent": "Weisser Vollflaechen-Hintergrund. Mittig zentriert eine grosse schwarze Headline in fetter Sans-Serif Versalien KLOSTER KITCHEN. Darunter ein zentrierter dreizeiliger Erklaersatz in Mixed Case Sans-Serif schwarz. Sehr ruhige Komposition mit reichlich Whitespace.",
+          "elementProportions": { "text": 25, "solid_background": 75 },
+          "textOnImage": {
+            "visibleText": "KLOSTER KITCHEN 2016 klein begonnen, ist die Marke Kloster Kitchen heute mit ueber 40 leidenschaftlichen Mitarbeitern zu einem echten Unternehmen gewachsen.",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "KLOSTER KITCHEN",
+            "subline": "2016 klein begonnen, ist die Marke Kloster Kitchen heute mit ueber 40 leidenschaftlichen Mitarbeitern zu einem echten Unternehmen gewachsen.",
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "B09R4Y8VDW"
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/aaf0fa85-e81e-4086-9f36-08a7bb8f2a1e._CR0%2C0%2C1919%2C593_SX1500_.png"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "1",
+      "toolLayoutName": "Full Width",
+      "toolLayoutType": "fullwidth",
+      "toolLayoutRole": "editorial"
+    },
+    {
+      "position": 4,
+      "moduleId": "ueber-uns_mod_04",
+      "moduleName": "Halbtafel-Creative Wurzel des Guten Geschmacks",
+      "layoutType": "editorial_tile_pair",
+      "layoutShape": "split_two_columns",
+      "tileCount": 2,
+      "designIntent": "editorial",
+      "designIntentDetail": "Halbtafel-Creative-Modul mit Foto-Pair links und Story-Text rechts. Erstes von vier abwechselnden Story-Modulen.",
+      "structuralPattern": "Linke Bildhaelfte zwei collagierte Lifestyle-Fotos versetzt: oben links Closeup einer rohen Ingwerwurzel, ueberlappt unten rechts ein Foto einer Hand, die eine Ingwer Shot Classic Flasche haelt, dahinter im Profil das Lachen einer Person. Rechte Texthaelfte weisser Whitespace mit linksbuendigem schwarzem Fliesstext.",
+      "moduleFunction": "Erste Story-Etappe der Brand-Reise. Verknuepft den Rohstoff Ingwer mit dem Gruendungsmoment der Marke und etabliert das Hauptnarrativ Kloster-Rezeptur trifft Bauernmarkt-Entdeckung.",
+      "relationToPrevious": "zooms_into_above_subject",
+      "relationToNext": "repeats_pattern_to_next",
+      "visualBridge": "shared_typography_treatment",
+      "copyBridge": "continues_idea",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "DIE WURZEL DES GUTEN GESCHMACKS: Es war Liebe auf der ersten Kick. Eine alte Rezeptur aus der Klosterkueche weckte auf einem Bauernmarkt die Neugier unseres Gruenders Mario. Und dann ging es los...",
+        "textType": "story_copy",
+        "origin": "layered_text",
+        "headline": "DIE WURZEL DES GUTEN GESCHMACKS",
+        "subline": "Es war Liebe auf der ersten Kick. Eine alte Rezeptur aus der Klosterkueche weckte auf einem Bauernmarkt die Neugier unseres Gruenders Mario. Und dann ging es los...",
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "lifestyle",
+          "toolTileType": "image",
+          "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B07V1HQQ2V", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Rohstoff Ingwer plus Gruender-Geschmacksmoment",
+            "productOrCategoryRef": "B07V1HQQ2V",
+            "intent": "story",
+            "rolePosition": "Story Halbtafel Bild Wurzel"
+          },
+          "visualContent": "Foto-Collage in der linken Bildhaelfte. Hauptbild im Hintergrund: makro-nahe Aufnahme einer rohen, leicht gelblich-beigen Ingwerwurzel mit ihrer typischen knorrigen Struktur. Davor versetzt unten rechts eingeschoben ein zweites Foto: junge dunkelhaarige Person leicht laechelnd im Profil, haelt eine kleine 30ml-Flasche INGWER SHOT CLASSIC mit gruener Fluessigkeit und gelbem Verschluss vor sich, Fingernaegel hellrosa.",
+          "elementProportions": { "lifestyle_photo": 78, "product_photo": 18, "decorative_elements": 4 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "B07V1HQQ2V"
+        },
+        {
+          "position": 2,
+          "imageCategory": "text_image",
+          "toolTileType": "image_text",
+          "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Story Copy Wurzel des guten Geschmacks",
+            "productOrCategoryRef": null,
+            "intent": "story",
+            "rolePosition": "Story Halbtafel Text"
+          },
+          "visualContent": "Rechte Bildhaelfte ist weisser Whitespace mit linksbuendigem Fliesstext in schwarzer Mixed Case Sans-Serif. Headline DIE WURZEL DES GUTEN GESCHMACKS gefolgt von Doppelpunkt und kurzem Story-Absatz.",
+          "elementProportions": { "text": 30, "solid_background": 70 },
+          "textOnImage": {
+            "visibleText": "DIE WURZEL DES GUTEN GESCHMACKS: Es war Liebe auf der ersten Kick. Eine alte Rezeptur aus der Klosterkueche weckte auf einem Bauernmarkt die Neugier unseres Gruenders Mario. Und dann ging es los...",
+            "textType": "story_copy",
+            "origin": "layered_text",
+            "headline": "DIE WURZEL DES GUTEN GESCHMACKS",
+            "subline": "Es war Liebe auf der ersten Kick. Eine alte Rezeptur aus der Klosterkueche weckte auf einem Bauernmarkt die Neugier unseres Gruenders Mario. Und dann ging es los...",
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": ["DIE WURZEL DES GUTEN GESCHMACKS"],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e7242c09-3e77-42e8-983d-29d772b65556._CR0%2C0%2C1600%2C995_SX750_SY550_.png"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "std-2equal",
+      "toolLayoutName": "2 Equal",
+      "toolLayoutType": "standard",
+      "toolLayoutRole": "editorial_pair",
+      "toolGap": {
+        "description": "Phase-1-DOM gibt half_width_asin_link_creative_left an, ein einzelnes halbbreites Tile mit Whitespace daneben. v4-Schema-layoutType kennt das Pattern nicht, deshalb auf editorial_tile_pair gemappt mit einem Bildtile und einem Texttile, jeweils halb-breit. Strukturell trifft das die Renderschau exakt, im DOM aber nicht so kodiert.",
+        "suggestedExtension": "Neuen layoutType-Wert editorial_halftile_image_left bzw editorial_halftile_image_right ergaenzen, der die DOM-Realitaet (1 Tile, halbe Breite, daneben Story-Whitespace mit Story-Text) eins zu eins abbildet."
+      }
+    },
+    {
+      "position": 5,
+      "moduleId": "ueber-uns_mod_05",
+      "moduleName": "Halbtafel-Creative Teamgeist",
+      "layoutType": "editorial_tile_pair",
+      "layoutShape": "split_two_columns",
+      "tileCount": 2,
+      "designIntent": "editorial",
+      "designIntentDetail": "Zweite Story-Etappe. Lifestyle-Foto im rechten Halb mit Pflanzen-Frame, Story-Copy in der linken Haelfte.",
+      "structuralPattern": "Spiegelt Modul 4. Linke Texthaelfte mit Story-Copy, rechte Bildhaelfte mit Pflanzen-Frame und Innenraum-Aufnahme.",
+      "moduleFunction": "Zweite Story-Etappe. Verschiebt den Fokus vom Gruender auf das Team und die gelebte Unternehmenskultur. Zeigt die Marke als Ort und nicht nur als Produkt.",
+      "relationToPrevious": "repeats_pattern",
+      "relationToNext": "repeats_pattern_to_next",
+      "visualBridge": "shared_pattern",
+      "copyBridge": "continues_idea",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "TEAMGEIST: Kloster Kitchen ist ein Ort an dem eine gemeinsame Vision, Leidenschaft und Teamgeist Hand in Hand gehen. Teamarbeit ist der Puls der unser Unternehmen antreibt.",
+        "textType": "story_copy",
+        "origin": "layered_text",
+        "headline": "TEAMGEIST",
+        "subline": "Kloster Kitchen ist ein Ort an dem eine gemeinsame Vision, Leidenschaft und Teamgeist Hand in Hand gehen. Teamarbeit ist der Puls der unser Unternehmen antreibt.",
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "toolTileType": "image_text",
+          "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Story Copy Teamgeist",
+            "productOrCategoryRef": null,
+            "intent": "story",
+            "rolePosition": "Story Halbtafel Text"
+          },
+          "visualContent": "Linke Bildhaelfte weisser Whitespace mit linksbuendigem Fliesstext, Headline TEAMGEIST gefolgt von Doppelpunkt und Erklaersatz.",
+          "elementProportions": { "text": 30, "solid_background": 70 },
+          "textOnImage": {
+            "visibleText": "TEAMGEIST: Kloster Kitchen ist ein Ort an dem eine gemeinsame Vision, Leidenschaft und Teamgeist Hand in Hand gehen. Teamarbeit ist der Puls der unser Unternehmen antreibt.",
+            "textType": "story_copy",
+            "origin": "layered_text",
+            "headline": "TEAMGEIST",
+            "subline": "Kloster Kitchen ist ein Ort an dem eine gemeinsame Vision, Leidenschaft und Teamgeist Hand in Hand gehen. Teamarbeit ist der Puls der unser Unternehmen antreibt.",
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null
+        },
+        {
+          "position": 2,
+          "imageCategory": "lifestyle",
+          "toolTileType": "image",
+          "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B09R4Y8VDW", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Team in modernem Buero Lifestyle Aufnahme",
+            "productOrCategoryRef": "B09R4Y8VDW",
+            "intent": "story",
+            "rolePosition": "Story Halbtafel Bild Team"
+          },
+          "visualContent": "Rechte Bildhaelfte ist eingerahmt von dunkelgruenen Pflanzenblaettern. Im Inneren ein helles Buero mit grossen Fenstern. Eine junge Frau steht links und beschreibt ein Whiteboard. Rechts sitzen zwei weitere Personen am Holztisch, eine hoert zu, die andere arbeitet. Helles Tageslicht, frische Buerostimmung.",
+          "elementProportions": { "lifestyle_photo": 75, "decorative_elements": 20, "graphic_elements": 5 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "B09R4Y8VDW"
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": ["TEAMGEIST"],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/714fdd1c-e90e-425e-8b10-d79860cf734a._CR0%2C0%2C1600%2C995_SX750_SY550_.png"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "std-2equal",
+      "toolLayoutName": "2 Equal",
+      "toolLayoutType": "standard",
+      "toolLayoutRole": "editorial_pair",
+      "toolGap": {
+        "description": "Wie Modul 4. DOM gibt half_width_asin_link_creative_right an, ein einzelnes halbbreites Tile rechts mit Whitespace links. v4-Schema-layoutType kennt das Pattern nicht.",
+        "suggestedExtension": "Siehe Modul 4. editorial_halftile_image_right als neuer Wert."
+      }
+    },
+    {
+      "position": 6,
+      "moduleId": "ueber-uns_mod_06",
+      "moduleName": "Halbtafel-Creative Office Home und Home Office",
+      "layoutType": "editorial_tile_pair",
+      "layoutShape": "split_two_columns",
+      "tileCount": 2,
+      "designIntent": "editorial",
+      "designIntentDetail": "Dritte Story-Etappe mit Foto-Collage links und Story-Copy rechts.",
+      "structuralPattern": "Wieder linke Halbtafel mit Foto-Collage versetzt, rechte Halbtafel mit Story-Copy.",
+      "moduleFunction": "Dritte Story-Etappe. Konkretisiert die Unternehmenskultur mit Arbeitsplatz-Versprechen Kloster Cooking, Sport Units, Pausenspass, flexiblen Arbeitszeiten, Home Office.",
+      "relationToPrevious": "repeats_pattern",
+      "relationToNext": "repeats_pattern_to_next",
+      "visualBridge": "shared_pattern",
+      "copyBridge": "continues_idea",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "OFFICE HOME UND HOME OFFICE: Ein Arbeitsplatz zum Wohlfuehlen mit Kloster Cooking, Sport Units, Pausenspass, flexiblen Arbeitszeiten und der Moeglichkeit fuer Home Office.",
+        "textType": "story_copy",
+        "origin": "layered_text",
+        "headline": "OFFICE HOME UND HOME OFFICE",
+        "subline": "Ein Arbeitsplatz zum Wohlfuehlen mit Kloster Cooking, Sport Units, Pausenspass, flexiblen Arbeitszeiten und der Moeglichkeit fuer Home Office.",
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "lifestyle",
+          "toolTileType": "image",
+          "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0CC2NCY1W", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Office-Lifestyle plus Vitamin Shot Acai und Granatapfel Flaschen",
+            "productOrCategoryRef": "B0CC2NCY1W",
+            "intent": "story",
+            "rolePosition": "Story Halbtafel Bild Office"
+          },
+          "visualContent": "Foto-Collage. Im Hintergrund eine helle, lichtdurchflutete Pausen-Loungezone mit zwei Personen die sich entspannt unterhalten, Sessel, Beistelltisch. Im Vordergrund versetzt eingeschoben ein Stillife mit zwei kleinen 30ml-Flaschen auf hellem Tisch, eine VITAMIN SHOT ACAI mit weissem Verschluss und braeunlich-rosa Fluessigkeit, eine INGWER SHOT GRANATAPFEL mit rotem Verschluss.",
+          "elementProportions": { "lifestyle_photo": 75, "product_photo": 18, "decorative_elements": 7 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "B0CC2NCY1W"
+        },
+        {
+          "position": 2,
+          "imageCategory": "text_image",
+          "toolTileType": "image_text",
+          "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Story Copy Arbeitsplatzversprechen",
+            "productOrCategoryRef": null,
+            "intent": "story",
+            "rolePosition": "Story Halbtafel Text"
+          },
+          "visualContent": "Rechte Bildhaelfte weisser Whitespace mit linksbuendigem Fliesstext, Headline OFFICE HOME UND HOME OFFICE plus erklaerender Aufzaehlung der Benefits.",
+          "elementProportions": { "text": 30, "solid_background": 70 },
+          "textOnImage": {
+            "visibleText": "OFFICE HOME UND HOME OFFICE: Ein Arbeitsplatz zum Wohlfuehlen mit Kloster Cooking, Sport Units, Pausenspass, flexiblen Arbeitszeiten und der Moeglichkeit fuer Home Office.",
+            "textType": "story_copy",
+            "origin": "layered_text",
+            "headline": "OFFICE HOME UND HOME OFFICE",
+            "subline": "Ein Arbeitsplatz zum Wohlfuehlen mit Kloster Cooking, Sport Units, Pausenspass, flexiblen Arbeitszeiten und der Moeglichkeit fuer Home Office.",
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": ["OFFICE HOME UND HOME OFFICE"],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/b7d314c9-55f4-4f13-9a59-e09d2835d46d._CR0%2C0%2C1600%2C1241_SX750_SY550_.png"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "std-2equal",
+      "toolLayoutName": "2 Equal",
+      "toolLayoutType": "standard",
+      "toolLayoutRole": "editorial_pair",
+      "toolGap": {
+        "description": "Wie Modul 4. half_width_asin_link_creative_left, im v4-Schema noch ohne passendem layoutType.",
+        "suggestedExtension": "editorial_halftile_image_left als neuer Wert."
+      }
+    },
+    {
+      "position": 7,
+      "moduleId": "ueber-uns_mod_07",
+      "moduleName": "Halbtafel-Creative Von Uns Zu Euch",
+      "layoutType": "editorial_tile_pair",
+      "layoutShape": "split_two_columns",
+      "tileCount": 2,
+      "designIntent": "editorial",
+      "designIntentDetail": "Vierte Story-Etappe mit Story-Copy links und Foto-Collage rechts. Lager und Versand als Markenversprechen.",
+      "structuralPattern": "Spiegelt Modul 5. Story-Copy links, rechte Halbtafel zwei collagierte Fotos vom Lager und Verpackungsprozess.",
+      "moduleFunction": "Letzte Story-Etappe vor dem Awards-Banner. Verlagert den Fokus von Mensch und Kultur auf den operativen Heartbeat der Marke, naemlich Lager und Versand. Achtung: enthaelt eine Aussage zum tag-genauen Versand, die laut CLAUDE.md Regel 6 in einer Re-Generation NICHT als Marken-Aussage uebernommen werden darf.",
+      "relationToPrevious": "repeats_pattern",
+      "relationToNext": "closes_chapter",
+      "visualBridge": "shared_pattern",
+      "copyBridge": "continues_idea",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "VON UNS ZU EUCH: Unser Lager ist das Herzstueck von Kloster Kitchen. Von hier aus werden unsere Produkte noch am Tag der Bestellung direkt zu euch nach Hause geschickt.",
+        "textType": "story_copy",
+        "origin": "layered_text",
+        "headline": "VON UNS ZU EUCH",
+        "subline": "Unser Lager ist das Herzstueck von Kloster Kitchen. Von hier aus werden unsere Produkte noch am Tag der Bestellung direkt zu euch nach Hause geschickt.",
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "toolTileType": "image_text",
+          "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Story Copy Lager und Versand",
+            "productOrCategoryRef": null,
+            "intent": "story",
+            "rolePosition": "Story Halbtafel Text"
+          },
+          "visualContent": "Linke Bildhaelfte weisser Whitespace mit linksbuendigem Fliesstext, Headline VON UNS ZU EUCH plus erklaerender Lager- und Versandhinweis.",
+          "elementProportions": { "text": 30, "solid_background": 70 },
+          "textOnImage": {
+            "visibleText": "VON UNS ZU EUCH: Unser Lager ist das Herzstueck von Kloster Kitchen. Von hier aus werden unsere Produkte noch am Tag der Bestellung direkt zu euch nach Hause geschickt.",
+            "textType": "story_copy",
+            "origin": "layered_text",
+            "headline": "VON UNS ZU EUCH",
+            "subline": "Unser Lager ist das Herzstueck von Kloster Kitchen. Von hier aus werden unsere Produkte noch am Tag der Bestellung direkt zu euch nach Hause geschickt.",
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null
+        },
+        {
+          "position": 2,
+          "imageCategory": "lifestyle",
+          "toolTileType": "image",
+          "toolImageType": "LARGE_SQUARE",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B07V1HQQ2V", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Lager und Verpackung Lifestyle Aufnahme",
+            "productOrCategoryRef": "B07V1HQQ2V",
+            "intent": "story",
+            "rolePosition": "Story Halbtafel Bild Lager"
+          },
+          "visualContent": "Foto-Collage. Linkes Foto zeigt eine Hand, die in einen Versandkarton voll mit Bio Ingwer Shot Classic 30ml-Flaschen mit gelben Verschluessen greift. Rechtes Foto eine Hand mit weissem Schutzhandschuh, die einen Klebeband-Spender ueber einen Versandkarton mit aufgedrucktem Kloster Kitchen Schriftzug fuehrt.",
+          "elementProportions": { "lifestyle_photo": 50, "product_photo": 30, "decorative_elements": 20 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "B07V1HQQ2V"
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": ["VON UNS ZU EUCH"],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/7b4ac7a3-cec9-4b64-82ec-94c5b7947ddc._CR0%2C0%2C1600%2C995_SX750_SY550_.png"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "std-2equal",
+      "toolLayoutName": "2 Equal",
+      "toolLayoutType": "standard",
+      "toolLayoutRole": "editorial_pair",
+      "toolGap": {
+        "description": "Wie Modul 4. half_width_asin_link_creative_right, im v4-Schema noch ohne passendem layoutType.",
+        "suggestedExtension": "editorial_halftile_image_right als neuer Wert."
+      }
+    },
+    {
+      "position": 8,
+      "moduleId": "ueber-uns_mod_08",
+      "moduleName": "Awards Banner Ausgezeichnete Innovationen",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "editorial",
+      "designIntentDetail": "Identisches Awards-Modul wie auf der Startseite und der Ingwer-Shots-Page. Hier verlinkt zur Startseite, weil der Nutzer schon auf Ueber Uns ist.",
+      "structuralPattern": "Schmaler Vollbild-Banner. Hintergrund glaenzende dunkelgruene Ingwerblaetter, Headline AUSGEZEICHNETE INNOVATIONEN weiss zentriert, vier weisse Awards-Badges nebeneinander.",
+      "moduleFunction": "Wiederverwendete Trust-Komponente quer ueber den Store. Auf der Ueber-Uns-Page der Schluss-Anker und logischer Rueckweg zur Startseite.",
+      "relationToPrevious": "summarizes_above",
+      "relationToNext": "closes_chapter",
+      "visualBridge": "shared_pattern",
+      "copyBridge": "fresh_topic",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "AUSGEZEICHNETE INNOVATIONEN german brand award 25 winner german brand award 25 product brand of the year PRODUKT INNOVATION IN GLAS Geprueffte Qualitaet Kloster Kitchen Bio Ingwer Shot LfV Deutsches Institut fuer Verbraucherschutz",
+        "textType": "headline",
+        "origin": "baked_in",
+        "headline": "AUSGEZEICHNETE INNOVATIONEN",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "benefit",
+          "toolTileType": "image_text",
+          "toolImageType": "FULL_WIDTH",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "Startseite", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Awards und Pruefsiegel der Marke",
+            "productOrCategoryRef": "34D4A812-9A68-4602-A6A0-30565D399620",
+            "intent": "trust",
+            "rolePosition": "Trust Anchor Page Closing"
+          },
+          "visualContent": "Querformatiger Banner. Hintergrund dunkelgruene Ingwerblaetter. Mittig oben weisse Versalien-Headline AUSGEZEICHNETE INNOVATIONEN. Vier weisse Awards-Badges identisch zur Startseite und Ingwer-Shots.",
+          "elementProportions": { "lifestyle_photo": 60, "badge": 25, "text": 12, "graphic_elements": 3 },
+          "textOnImage": {
+            "visibleText": "AUSGEZEICHNETE INNOVATIONEN",
+            "textType": "headline",
+            "origin": "baked_in",
+            "headline": "AUSGEZEICHNETE INNOVATIONEN",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "Startseite"
+        }
+      ],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": ["AUSGEZEICHNETE INNOVATIONEN"],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2eb471fe-f331-4cbc-89cd-8896df9c0d33._CR0%2C0%2C1280%2C275_SX1500_.jpg"
+        ],
+        "videoCount": 0
+      },
+      "toolLayoutId": "1",
+      "toolLayoutName": "Full Width",
+      "toolLayoutType": "fullwidth",
+      "toolLayoutRole": "editorial"
+    },
+    {
+      "position": 9,
+      "moduleId": "ueber-uns_mod_09",
+      "moduleName": "Amazon Share Footer",
+      "layoutType": "amazon_share_footer",
+      "layoutShape": "chrome_thin",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": "Amazon Share-Footer.",
+      "structuralPattern": "Schmaler Streifen mit Teilen-Button und Link Zurueck zum Seitenanfang.",
+      "moduleFunction": "Amazon-Mechanik. Wird in der Brand-Generierung ausgefiltert.",
+      "relationToPrevious": "none",
+      "relationToNext": "none",
+      "visualBridge": "hard_break_intentional",
+      "copyBridge": "fresh_topic",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "Teilen Teilen Sie diese Seite mit Ihren Freunden Zurueck zum Seitenanfang",
+        "textType": "section_label",
+        "origin": "amazon_chrome",
+        "headline": null,
+        "subline": null,
+        "cta": "Teilen",
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": { "widgetClass": "ShareFooter", "visibleHeadings": [], "ctaLabels": ["Teilen"], "imageUrls": [], "videoCount": 0 },
+      "toolLayoutId": null,
+      "toolLayoutName": null,
+      "toolLayoutType": "amazon_native",
+      "toolLayoutRole": "amazon_native"
+    }
+  ],
+  "voiceMarkers": {
+    "voiceRegister": "nahbar",
+    "sentencePattern": "komma_erklaerung",
+    "vocabularyField": "traditionell",
+    "claimType": "herkunft_prozess",
+    "rhetoricalDevice": "metapher"
+  },
+  "voiceExamples": [
+    "DIE WURZEL DES GUTEN GESCHMACKS: Es war Liebe auf der ersten Kick. Eine alte Rezeptur aus der Klosterkueche weckte auf einem Bauernmarkt die Neugier unseres Gruenders Mario. Und dann ging es los...",
+    "TEAMGEIST: Kloster Kitchen ist ein Ort an dem eine gemeinsame Vision, Leidenschaft und Teamgeist Hand in Hand gehen.",
+    "2016 klein begonnen, ist die Marke Kloster Kitchen heute mit ueber 40 leidenschaftlichen Mitarbeitern zu einem echten Unternehmen gewachsen."
+  ],
+  "pageAnalysis": {
+    "tonalityVisual": "Sehr ruhig, viel Whitespace, Fotografien sind warm-natuerlich. Die Halbtafel-Komposition mit jeweils nur einer Bildseite und viel Textraum erzeugt einen erzaehlenden, fast magazinhaften Ton. Das Pflanzen-Frame-Element in Modul 5 ist der einzige bewusste dekorative Bruch.",
+    "ctaStrategies": "Keine sichtbaren Brand-CTAs. Storytelling ohne Conversion-Fokus. Die ASIN-Verlinkungen pro Modul sind nicht beworben sondern dienen als Linkanker fuer Crawler und gelegentlich Klicker. Page treibt Trust und Markenverstaendnis, nicht Verkauf.",
+    "contentDepth": "Tiefe Brand-Story-Page. Sieben Brand-Module entlang einer klaren Erzaehlung Auftakt-Video, Markenname, Geschmacksursprung, Team, Buerokultur, Lager-Versand, Awards-Loop. Diese Page-Konzeption setzt komplett auf Halbtafel-Komposition.",
+    "useForArchetype": "Eignet sich als Vorlage fuer About-Pages mit Story-Bogen. Vier abwechselnd ausgerichtete Halbtafel-Creatives sind ein klares wiederkehrendes Muster, das aus dem v4-Schema heraus heute nur als toolGap kodierbar ist.",
+    "moduleClusters": [
+      "Auftakt Cluster: Video-Hero plus typografisches Brand-Intro",
+      "Story Cluster: vier abwechselnde Halbtafel-Creatives (Wurzel, Teamgeist, Office, Versand)",
+      "Trust Cluster: Awards Banner zurueck zur Startseite"
+    ]
+  },
+  "pageArchitecture": "Ueber-Uns-Page baut einen kontinuierlichen Story-Bogen ueber sieben Module. Video-Hero stimmt emotional ein. Brand-Intro setzt den Markennamen. Vier Halbtafel-Creatives erzaehlen den Kern in vier Stationen: Geschmacksursprung, Team, Office-Kultur, Lager-und-Versand. Awards-Banner schliesst die Reise ab und verlinkt zurueck zur Startseite. Die abwechselnde Bild-Links-Bild-Rechts-Komposition macht die Erzaehlung visuell rhythmisch.",
+  "openQuestions": [
+    "Modul 2 Brand Story Video konnte im Probe-Run nicht durch Vision-Frame-Sampling erfasst werden, Inhalt mit screenshot_required gemarkt. heroArchetype brand_story_video_intro neu eingefuehrt.",
+    "Module 4, 5, 6, 7 sind im DOM als half_width_asin_link_creative_left bzw _right kodiert. v4-Schema kennt keinen passenden layoutType fuer halbbreite Tiles mit Story-Whitespace daneben. Pragmatisch auf editorial_tile_pair gemappt mit toolGap-Markern. Schemavorschlag editorial_halftile_image_left bzw _right in toolGap.suggestedExtension.",
+    "Modul 7 enthaelt einen Versandhinweis (am Tag der Bestellung verschickt). Laut CLAUDE.md Regel 6 darf das in einer Re-Generation des Brand Stores NICHT als Marken-USP oder Marken-Aussage uebernommen werden, weil Versand Amazon-Sache ist. Wert hier in der Analyse erfasst, aber Generierungs-Pipeline muss diese Phrase verwerfen oder durch eine markenneutrale Aussage ersetzen.",
+    "voiceMarkers.sentencePattern wurde als komma_erklaerung kodiert, obwohl das Trennzeichen tatsaechlich ein Doppelpunkt ist (DIE WURZEL DES GUTEN GESCHMACKS:). Bestehender Wert komma_erklaerung deckt das Pattern Tag-plus-Erklaerung am ehesten ab, ein neuer Wert doppelpunkt_erklaerung waere praeziser.",
+    "vocabularyField traditionell ist dominant, mischt sich aber stark mit familiaer (Teamgeist, gemeinsam, Hand in Hand, ueber 40 Mitarbeitern). Mischtonalitaet hier wichtiger Befund."
+  ]
+}

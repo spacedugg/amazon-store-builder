@@ -1,0 +1,60 @@
+{
+  "_meta": {
+    "store": "more-nutrition",
+    "pageSlug": "10_vegan-protein",
+    "pageId": "A217601D-395D-4DF1-B940-4BABA3DAD6E5",
+    "url": "https://www.amazon.de/stores/page/A217601D-395D-4DF1-B940-4BABA3DAD6E5",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_v4_widget_scan",
+    "scrollHeight": 4766,
+    "viewport": { "w": 1582, "h": 872 },
+    "domWidgetsTotal": 6,
+    "note": "VEGAN PROTEIN Sub-Page. Strukturell identisch zu PROTEIN MILKSHAKE: Hero, FeaturedDeal Vanilla (Best-Seller-Sorte), ProductGrid 3 weitere Sorten, Standard-Banner-Schluss."
+  },
+  "hero": {
+    "section": "hero", "widgetIdx": 0, "top": 99,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/62602072-edfe-4664-8e22-c8e47923ef4d._SL5000_CR0%2C0%2C5000%2C1000_SX1500_.jpg",
+    "imageSize": { "w": 1500, "h": 300 },
+    "note": "VEGAN PROTEIN Hero-Banner mit gruenem Hintergrund laut PROTEINE-Hub-Tile."
+  },
+  "navigation": "siehe 01_startseite_dom.json",
+  "modules": [
+    {
+      "userModuleId": 1, "widgetIdx": 1, "top": 502, "height": 657,
+      "widgetClass": "EditorialRow", "layoutType": "featured_deal_asin_showcase", "tileCount": 1,
+      "featuredAsin": "B0CDX6K61G",
+      "featuredProductTitle": "MORE Vegan Protein, 600 g, Vanilla, Proteinpulver mit bis zu 26 g Protein pro Portion, mit Soja- und Mandelprotein - made in Germany",
+      "rating": "4,1 von 5 Sternen, 123 Bewertungen", "imgCount": 24, "videoCount": 6,
+      "note": "FeaturedDeal Vegan Protein Vanilla als Hero-Produkt."
+    },
+    {
+      "userModuleId": 2, "widgetIdx": 2, "top": 1159, "height": 645,
+      "widgetClass": "ProductGrid", "layoutType": "product_grid_full_catalog", "tileCount": 3,
+      "asins": ["B0BLZ5DB55","B0CZXV5BND","B0CP81FVBC"],
+      "exampleTitles": [
+        "MORE Vegan Protein - Fine Milk Chocolate - 600 g",
+        "MORE Vegan Protein, Cinnalicious, 600 g",
+        "MORE Vegan Protein, 600 g, Geschmacksneutral"
+      ],
+      "note": "ProductGrid 3 weitere Vegan-Protein-Sorten."
+    },
+    {
+      "userModuleId": 3, "widgetIdx": 3, "top": 1804, "height": 750,
+      "widgetClass": "EditorialRow", "layoutType": "full_width_image_creative", "tileCount": 1,
+      "mainImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d6865a5f-5e09-4f0a-b72c-b6bb65ac059d._CR0%2C0%2C1280%2C640_SX1500_.jpg" },
+      "links": [{"pageId": "8790A8BC-31A4-4810-8B75-BF1AFCE858B5", "ariaLabel": "Weitere Informationen"}],
+      "note": "Produktselektor-Banner."
+    },
+    {
+      "userModuleId": 4, "widgetIdx": 4, "top": 2554, "height": 750,
+      "widgetClass": "EditorialRow", "layoutType": "full_width_image_closing", "tileCount": 1,
+      "mainImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d359c2c9-b952-47a2-b88a-864e11ffc31c._CR0%2C0%2C3000%2C1500_SX1500_.png" },
+      "links": [{"pageId": "F081FD4B-1559-4A38-A4F3-FC8E6732BCEB", "ariaLabel": "Weitere Informationen"}],
+      "note": "Closing-Banner."
+    }
+  ],
+  "excluded": [
+    { "widgetIdx": 5, "top": 3304, "height": 200, "reason": "Amazon Share-Footer." }
+  ],
+  "uniqueAsinsOnPage": ["B0CDX6K61G","B0BLZ5DB55","B0CZXV5BND","B0CP81FVBC"]
+}

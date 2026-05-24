@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "store": "esn",
+    "pageSlug": "07_flexpresso",
+    "pageId": "2B83B00A-4B34-4164-AE99-370F051B7A19",
+    "pageUrl": "https://www.amazon.de/stores/page/2B83B00A-4B34-4164-AE99-370F051B7A19",
+    "extractedAt": "2026-05-23",
+    "extractor": "v4_phase1_chrome_mcp_live",
+    "scrollHeight": 4554,
+    "viewport": { "w": 1599, "h": 842 },
+    "domRowsTotal": 6,
+    "note": "FLEXPRESSO Sub-Category-Page: Hero-Banner (Lead Flexpresso Coffee 908g) plus ProductGrid 5 Varianten plus Produktselektor-Bridge plus Alle-Produkte-Bridge plus Footer. Spiegelt Designer Whey / Isoclear Pattern (Hero plus ProductGrid plus Bridges)."
+  },
+  "modules": [
+    { "domRowIdx": 0, "position": 1, "top": 99, "height": 403, "widgetType": "Header", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": ["Folgen"], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/acf527f7-c905-4e51-ad44-ec32c24f89cc._CR0%2C0%2C1920%2C384_SX1500_.jpg"], "asins": [], "pageLinks": [], "note": "Amazon Nav Header." },
+    { "domRowIdx": 1, "position": 2, "top": 403, "height": 784, "widgetType": "EditorialRow", "imgCount": 1, "videoCount": 0, "productCount": 1, "headings": [], "ctas": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/f2838c93-863a-4f92-9cde-bab9b97ea116._CR0%2C0%2C1200%2C628_SX1500_.jpg"], "asins": ["B07RCGMPD6"], "pageLinks": [], "note": "Hero-Banner 1200x628 mit Lead-ASIN Flexpresso Coffee." },
+    { "domRowIdx": 2, "position": 3, "top": 1187, "height": 674, "widgetType": "ProductGrid", "imgCount": 5, "videoCount": 0, "productCount": 5, "headings": ["ESN Flexpresso Protein Coffee, 908 g"], "ctas": [], "imageUrls": [], "asins": ["B07RCGMPD6", "B0C3M7SW4J", "B0F7973W32", "B0CN2WCGWX", "B0CN2X8LJP"], "pageLinks": [], "note": "ProductGrid mit 5 Flexpresso-Geschmacks-Varianten." },
+    { "domRowIdx": 3, "position": 4, "top": 1860, "height": 750, "widgetType": "EditorialRow", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c0cacc85-510c-474a-8e3d-244467c95b46._CR0%2C0%2C1500%2C750_SX1500_.png"], "asins": [], "pageLinks": ["2AFC0A42-A702-462D-B255-B5203C7449F8"], "note": "Image-Banner PNG verlinkt nach PRODUKTSELEKTOR." },
+    { "domRowIdx": 4, "position": 5, "top": 2610, "height": 383, "widgetType": "EditorialRow", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bb6ee5ba-f109-4c8a-a8d3-9eebe477d015._CR0%2C0%2C3000%2C750_SX1500_.jpg"], "asins": [], "pageLinks": ["9FED5CCC-6284-44BD-AD83-AAEEBF48E23F"], "note": "Schluss-Banner zu ALLE PRODUKTE." },
+    { "domRowIdx": 5, "position": 6, "top": 2993, "height": 201, "widgetType": "EditorialRow", "imgCount": 0, "videoCount": 0, "productCount": 0, "headings": [], "ctas": ["Teilen"], "imageUrls": [], "asins": [], "pageLinks": [], "note": "Amazon Share Footer." }
+  ]
+}

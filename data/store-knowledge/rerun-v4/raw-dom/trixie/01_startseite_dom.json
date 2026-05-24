@@ -1,0 +1,31 @@
+{
+  "_meta": {
+    "store": "trixie",
+    "pageSlug": "01_startseite",
+    "pageId": "30552E59-AC22-47B1-BBBB-AEA9225BD614",
+    "pageName": "Startseite",
+    "pageLevel": 0,
+    "extractedAt": "2026-05-23",
+    "pageUrl": "https://www.amazon.de/stores/page/30552E59-AC22-47B1-BBBB-AEA9225BD614",
+    "scrollHeight": 6166,
+    "domRowsTotal": 12,
+    "totalImages": 24,
+    "totalVideos": 1,
+    "totalUniqueAsins": 0,
+    "note": "Image-fokussierte Tier-Verteiler-Startseite: BrandHeader plus Hero-Video plus Tile-Pair plus 2 Cluster (HUND, KATZE) jeweils aus Section-Hero 5-fach Verteiler plus Tile-Row 4-fach Sub-Kategorie. Zwischen den Clustern Neuheiten-Section-Banner Tile-Pair. KEIN ProductGrid auf Startseite, reines Verteiler-Layout."
+  },
+  "modules": [
+    {"domRowIdx": 0, "top": 99, "height": 395, "widgetType": "BrandHeader", "imgCount": 1, "note": "Nav header mit Brand-Banner (TRIXIE rotes Logo) und Mega-Nav (STARTSEITE, ALLE ANGEBOTE, NEUHEITEN, TRIXIE SERIEN, HUND, KATZE, KLEINTIER, VOGEL, TERRARISTIK, TIERE IM GARTEN, MEHR). CTA: Folgen."},
+    {"domRowIdx": 1, "top": 99, "height": 300, "widgetType": "StoreHero_overlap", "imgCount": 1, "note": "Brand-Banner als Hero-Overlay innerhalb BrandHeader."},
+    {"domRowIdx": 2, "top": 502, "height": 743, "widgetType": "EditorialRow_double", "videoCount": 1, "tileCount": 1, "note": "Video-Hero gross (1500x743). Markenstatement-Video TRIXIE Heimtierbedarf."},
+    {"domRowIdx": 3, "top": 1244, "height": 426, "widgetType": "EditorialRow_single", "imgCount": 2, "tileCount": 2, "note": "Tile-Pair 2-fach (1500x426) als Sektions-Trenner ohne Link. Vermutlich Brand-Banner-Pair oder visueller Hub-Marker fuer kommende HUND-Sektion."},
+    {"domRowIdx": 4, "top": 1670, "height": 743, "widgetType": "EditorialRow_double", "imgCount": 5, "tileCount": 5, "note": "HUND Section-Hero 5-fach Verteiler (gross). 5 Tiles linken auf HUND-Hub plus 4 Top-Sub-Kategorien Hundeleinen, Snacks und Ernaehrung, Liegeplaetze, Geschirre.", "tileLinks": ["05E05F3B-9AA2-4443-88A5-75FB27D4533B (HUND)", "D8D9E7C1-294E-4995-9C1A-9ADD113E3ABF (Hundeleinen)", "6CA70A51-1C21-45E3-A6BF-CB6B7CB79385 (Snacks und Ernaehrung Hund)", "ABF3C7D8-3F96-457F-9D05-887EF4D78D73 (Liegeplaetze Hund)", "DF1874DD-B8D1-495A-9513-666219E8400F (Geschirre)"]},
+    {"domRowIdx": 5, "top": 2412, "height": 371, "widgetType": "EditorialRow_single", "imgCount": 4, "tileCount": 4, "note": "HUND Tile-Row 4-fach Sub-Kategorie-Verteiler. 4 Tiles linken auf Halsbaender, Spielzeug, Ausbildung und Sport, Zuhause.", "tileLinks": ["0FCC26F2-CE84-4B44-A403-1EE94B26C23E (Halsbaender)", "3FD30ACE-F082-4D6E-86CA-921E718E307A (Spielzeug Hund)", "62899586-682B-4BDA-B0F0-D81446272E8F (Ausbildung und Sport)", "0245D1EE-E0A1-49D6-B2FA-F62E1081504D (Zuhause Hund)"]},
+    {"domRowIdx": 6, "top": 2783, "height": 419, "widgetType": "EditorialRow_single", "imgCount": 2, "tileCount": 2, "note": "Tile-Pair 2-fach (1500x419) Neuheiten-Section-Banner. Beide Tiles verlinken auf NEUHEITEN-Page.", "tileLinks": ["41FA7DEE-3E12-4288-97A2-C3C4BF57CB4A (NEUHEITEN)"]},
+    {"domRowIdx": 7, "top": 3202, "height": 743, "widgetType": "EditorialRow_double", "imgCount": 5, "tileCount": 5, "note": "KATZE Section-Hero 5-fach Verteiler (gross). 5 Tiles linken auf KATZE-Hub plus 4 Top-Sub-Kategorien Kratzbaeume, Snacks und Ernaehrung Katze, Liegeplaetze Katze, Kratz- und Kletterartikel.", "tileLinks": ["D5A331A1-584D-4897-B323-504B7D6B2A6F (KATZE)", "A0591E57-425B-4A13-A41B-FB1F4575F0E0 (Kratzbaeume)", "90F46AD9-EE04-4F67-B1A4-C4F67F8CD185 (Snacks und Ernaehrung Katze)", "BDFF706C-F6C6-4829-BE70-3A4327965C41 (Liegeplaetze Katze)", "D3C5CEE7-BEA4-4FEE-9259-068F4F31EDAA (Kratz- und Kletterartikel)"]},
+    {"domRowIdx": 8, "top": 3945, "height": 371, "widgetType": "EditorialRow_single", "imgCount": 4, "tileCount": 4, "note": "KATZE Tile-Row 4-fach Sub-Kategorie-Verteiler. 4 Tiles linken auf Zuhause Katze, Katzenspielzeug, Unterwegs Katze, Gesundheit-Pflege-Hygiene Katze.", "tileLinks": ["AE652544-8FBC-43F9-826F-F1005AACB2BA (Zuhause Katze)", "0BC32C36-8485-4365-A9C2-45BC84058FC0 (Katzenspielzeug)", "9EE82C2F-2674-40F6-BA79-5BB7BD8E7FB0 (Unterwegs Katze)", "D64C8140-3E5A-472D-896D-7A724DC0892B (Gesundheit Pflege Hygiene Katze)"]},
+    {"domRowIdx": 9, "top": 4316, "height": 371, "widgetType": "EditorialRow_single", "imgCount": 2, "tileCount": 2, "note": "Tile-Pair 2-fach (1500x371) Footer-naher Spacer ohne Link. Vermutlich Brand-Closing-Banner."},
+    {"domRowIdx": 10, "top": 4687, "height": 200, "widgetType": "EditorialRow_double", "imgCount": 0, "tileCount": 1, "note": "Letzter Tile-Pair-Spacer (200 Hoehe)."},
+    {"domRowIdx": 11, "top": 4687, "height": 200, "widgetType": "AmazonShareFooter", "note": "Amazon Share Footer Teilen-Bereich."}
+  ]
+}

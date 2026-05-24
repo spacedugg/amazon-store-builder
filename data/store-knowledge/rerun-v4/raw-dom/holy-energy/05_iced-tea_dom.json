@@ -1,0 +1,39 @@
+{
+  "_meta": {
+    "store": "holy-energy",
+    "pageSlug": "05_iced-tea",
+    "pageName": "Iced Tea",
+    "pageId": "527A4D3B-EC68-4755-BF8D-2BF264AE1694",
+    "url": "https://www.amazon.de/stores/page/527A4D3B-EC68-4755-BF8D-2BF264AE1694",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_v4",
+    "scrollHeight": 7280,
+    "viewport": { "w": 1582, "h": 928 },
+    "domRowsTotal": 6,
+    "contentModulesCount": 5
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height":  400, "widgetClass": "Header",       "tileCount":  0, "imgCount":  3, "videoCount":  0, "productCount":  0, "note": "Header plus Brand-Hero 1500x300." },
+    { "domRowIdx": 1, "top":  507, "height": 1242, "widgetClass": "EditorialRow", "tileCount":  8, "imgCount":  1, "videoCount":  0, "productCount":  0, "note": "Page-Hero XL 1470x1227. Iced-Tea-Manifest Banner." },
+    { "domRowIdx": 2, "top": 1748, "height":  578, "widgetClass": "EditorialRow", "tileCount":  4, "imgCount": 28, "videoCount": 10, "productCount":  0, "note": "Spotlight-Tile Iced Tea Peach x Black Tea (Heading nachgewiesen). ASIN-Showcase mit Video-Carousel." },
+    { "domRowIdx": 3, "top": 2326, "height":  578, "widgetClass": "EditorialRow", "tileCount":  4, "imgCount": 28, "videoCount": 10, "productCount":  0, "note": "Spotlight-Tile Iced Tea 10er Probier-Box Acai x Hibiscus (Heading nachgewiesen)." },
+    { "domRowIdx": 4, "top": 2904, "height": 2914, "widgetClass": "ProductGrid",  "tileCount":  0, "imgCount": 21, "videoCount":  0, "productCount": 21, "note": "Full-Catalog Iced Tea ProductGrid mit 21 ASINs." },
+    { "domRowIdx": 5, "top": 5818, "height":  201, "widgetClass": "EditorialRow", "tileCount":  4, "imgCount":  0, "videoCount":  0, "productCount":  0, "note": "Share-Footer." }
+  ],
+  "editorialBanners": [
+    { "modulePos": 2, "top":  514, "w": 1470, "h": 1227, "asset": "94251715-9218-4f88-b24d-9d806a427a2b", "note": "Page-Hero XL" }
+  ],
+  "uniqueAsinsOnPage": [
+    "B0CKLFVMJG","B0CKLGPRZZ","B0CKLK35G2","B0CKLJ98BS","B0CKLJZMNW",
+    "B0CKLJD1V1","B0F3NZSP4Q","B0CKLJN7TJ","B0CKLHP414","B0F37ZQKXG",
+    "B0F3NX9Q1L","B0F3NV6CK7","B0F3NZTY2Y","B0F3P27J26","B0F3NYN5XK",
+    "B0F3NYDZN2","B0F3NYQB8N","B0F3NHPVPW","B0F3NZ6SHX","B0F3NVL9BG","B0F3NV9MWW"
+  ],
+  "spotlightedFlavors": [
+    {"modulePos": 3, "name": "Peach x Black Tea", "tagline": "50 Portionen mit Antioxidantien, zuckerfreier Eistee mit Relax Formel"},
+    {"modulePos": 4, "name": "Acai x Hibiscus", "tagline": "10er Probier-Box, Iced Tea mit Acai Hibiskus Geschmack"}
+  ],
+  "openQuestionsLocal": [
+    "Same Pattern wie Energy-Page: Page-Hero XL plus 2 ASIN-Spotlights plus Full-Catalog ProductGrid. Voraussichtlich Standard-Kategorie-Page-Template."
+  ]
+}

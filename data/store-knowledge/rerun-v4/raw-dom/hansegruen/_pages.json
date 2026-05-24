@@ -1,0 +1,21 @@
+{
+  "store": "hansegruen",
+  "brandName": "Hansegrün",
+  "storeUrl": "https://www.amazon.de/stores/Hansegr%C3%BCn/page/BC9A9642-4612-460E-81B4-985E9AF6A7D2",
+  "totalPagesInStore": 19,
+  "scopedPagesForV4": 10,
+  "extractedAt": "2026-05-23",
+  "extractor": "v4_chrome_mcp_aria_pass",
+  "pages": [
+    { "position": 1, "pageName": "Startseite", "pageSlug": "01_startseite", "pageId": "BC9A9642-4612-460E-81B4-985E9AF6A7D2", "pageType": "startseite", "pageLevel": 0, "domFile": "01_startseite_dom.json", "blueprintFile": "../../blueprints/hansegruen_startseite.json" },
+    { "position": 2, "pageName": "Alle Produkte", "pageSlug": "02_alle-produkte", "pageId": "0599725A-6655-4CC0-BEF9-A1611BA0DF50", "pageType": "all_products", "pageLevel": 1, "domFile": "02_alle-produkte_dom.json", "blueprintFile": "../../blueprints/hansegruen_alle-produkte.json" },
+    { "position": 3, "pageName": "Neuheiten", "pageSlug": "03_neuheiten", "pageId": "8593169F-6771-4714-8946-B310EAAA30F7", "pageType": "new_arrivals", "pageLevel": 1, "domFile": "03_neuheiten_dom.json", "blueprintFile": "../../blueprints/hansegruen_neuheiten.json" },
+    { "position": 4, "pageName": "Spar-Sets", "pageSlug": "04_spar-sets", "pageId": "0DB9FDD8-7C90-4CAC-BFF6-BAEBC586C20C", "pageType": "category", "pageLevel": 1, "domFile": "04_spar-sets_dom.json", "blueprintFile": "../../blueprints/hansegruen_spar-sets.json" },
+    { "position": 5, "pageName": "Shots", "pageSlug": "05_shots", "pageId": "E3FD5652-9AC5-4AC2-BD9C-F784C33A22D5", "pageType": "category", "pageLevel": 1, "domFile": "05_shots_dom.json", "blueprintFile": "../../blueprints/hansegruen_shots.json" },
+    { "position": 6, "pageName": "Ingwer-Shots", "pageSlug": "06_ingwer-shots", "pageId": "EEB1E137-CE92-47E2-AB61-F7CD0360E56D", "pageType": "sub_category", "pageLevel": 1, "domFile": "06_ingwer-shots_dom.json", "blueprintFile": "../../blueprints/hansegruen_ingwer-shots.json" },
+    { "position": 7, "pageName": "Benefits", "pageSlug": "07_benefits", "pageId": "5DB7F16C-C04D-4386-B9B7-B1593215B7A4", "pageType": "hub_category", "pageLevel": 1, "domFile": "07_benefits_dom.json", "blueprintFile": "../../blueprints/hansegruen_benefits.json" },
+    { "position": 8, "pageName": "Immunsystem", "pageSlug": "08_immunsystem", "pageId": "4927D23C-78ED-498D-B776-821846C16EF4", "pageType": "benefit_sub_page", "pageLevel": 2, "domFile": "08_immunsystem_dom.json", "blueprintFile": "../../blueprints/hansegruen_immunsystem.json" },
+    { "position": 9, "pageName": "Energie und Sport", "pageSlug": "09_energie-sport", "pageId": "46F5F32D-2512-43B8-9014-03B2E7C34E43", "pageType": "benefit_sub_page", "pageLevel": 2, "domFile": "09_energie-sport_dom.json", "blueprintFile": "../../blueprints/hansegruen_energie-sport.json" },
+    { "position": 10, "pageName": "Darmfunktion", "pageSlug": "10_darmfunktion", "pageId": "8012E3F8-58F8-4E4E-A449-138CB6957417", "pageType": "benefit_sub_page", "pageLevel": 2, "domFile": "10_darmfunktion_dom.json", "blueprintFile": "../../blueprints/hansegruen_darmfunktion.json" }
+  ]
+}

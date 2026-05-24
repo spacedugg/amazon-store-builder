@@ -1,0 +1,26 @@
+{
+  "_meta": {
+    "store": "trixie",
+    "pageSlug": "06_leuchthalsbaender-warnwesten",
+    "pageId": "DE37903F-2420-4242-9AC9-DD650BAA110C",
+    "pageName": "Leuchthalsbaender, Warnwesten und Co.",
+    "pageLevel": 2,
+    "extractedAt": "2026-05-23",
+    "pageUrl": "https://www.amazon.de/stores/page/DE37903F-2420-4242-9AC9-DD650BAA110C",
+    "scrollHeight": 5932,
+    "domRowsTotal": 7,
+    "totalImages": 26,
+    "totalVideos": 1,
+    "totalUniqueAsins": 24,
+    "note": "Sub-Kategorie-Page mit erweitertem Template: BrandHeader plus Hero-Overlay plus Section-Intro-Banner ('BLINKENDE, LEUCHTENDE UND REFLEKTIERENDE PRODUKTE VON TRIXIE', 287 height) plus Video-Hero plus ProductGrid 24 ASINs plus Tile-Pair plus Footer. Erstmaliger Section-Intro-Banner in TRIXIE-Pages."
+  },
+  "modules": [
+    {"domRowIdx": 0, "top": 99, "height": 395, "widgetType": "BrandHeader", "imgCount": 1, "note": "Nav header mit Brand-Banner und Mega-Nav."},
+    {"domRowIdx": 1, "top": 99, "height": 300, "widgetType": "StoreHero_overlap", "imgCount": 1, "note": "Brand-Banner als Hero-Overlay."},
+    {"domRowIdx": 2, "top": 502, "height": 287, "widgetType": "EditorialRow_double", "imgCount": 0, "tileCount": 1, "headlineSample": "BLINKENDE, LEUCHTENDE UND REFLEKTIERENDE PRODUKTE VON TRIXIE", "note": "Section-Intro-Banner (1500x287). Reine Headline-Tile als visueller Marker vor dem Video. Erstmaliger Section-Intro in TRIXIE-Pages."},
+    {"domRowIdx": 3, "top": 788, "height": 743, "widgetType": "EditorialRow_double", "imgCount": 0, "videoCount": 1, "tileCount": 1, "note": "Video-Hero gross (1500x743). Zeigt reflektierende Produkte in Anwendung (Sicherheits-Szene Dunkelheit)."},
+    {"domRowIdx": 4, "top": 1531, "height": 3124, "widgetType": "ProductGrid", "imgCount": 24, "asinCount": 24, "note": "ProductGrid 24 ASINs Sicherheitswesten Leuchthalsbaender Flasher-Anhaenger Leuchtbaender (30091 Sicherheitsweste XS Neongelb plus weitere Groessen plus Flasher).", "asins": ["B0BLT3WBQT","B0BLT2XBM6","B0BLSZPYV5","B0BLT1T5JM","B07JCVCRCZ","B08G4DGS85","B08G4PJ65Z","B08G4BGCYP","B08G44VZGV","B08G4KR2XP","B08G444Z52","B08G4CL79Y","B08G4Q4CCX","B00YKRQR7E","B00YKRR1TM","B00YKRR6UQ","B0BNBPM8C9","B097NN5HLW","B097NFZZ8K","B00YKROVLS","B00YKRP09A","B0BN9HTYXN","B00YKRO2S0","B00YKRO6W2"]},
+    {"domRowIdx": 5, "top": 4655, "height": 200, "widgetType": "EditorialRow_double", "imgCount": 0, "tileCount": 1, "note": "Footer-naher Tile-Pair-Spacer."},
+    {"domRowIdx": 6, "top": 4655, "height": 200, "widgetType": "AmazonShareFooter", "note": "Amazon Share Footer."}
+  ]
+}

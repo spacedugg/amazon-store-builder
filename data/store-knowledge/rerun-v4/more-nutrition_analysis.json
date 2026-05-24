@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "v4-2026-05",
+  "store": "more-nutrition",
+  "brandName": "MORE Nutrition",
+  "storeUrl": "https://www.amazon.de/stores/page/7AD425C6-C3C5-402D-A69D-D6201F98F888",
+  "analyzedAt": "2026-05-23",
+  "methodology": "v4-top-10-pages-chrome-mcp-widget-scan-plus-per-page-blueprints",
+  "scopeNote": "Top 10 von 15 sichtbaren MORE Nutrition Pages erfasst (Startseite plus 9 Top-Level/Sub-Pages). 5 Pages NICHT analysiert: RIEGEL & LIGHT FOOD, VITALSTOFFE, BUNDLE, ALLE PRODUKTE, PRODUKTSELEKTOR. Phase-1 DOMs per Chrome MCP javascript_tool extrahiert pro Page via [data-widgettype]-Scan, anschliessend Per-Page-Blueprints v4 generiert.",
+  "navigation": {
+    "pageCount": 15,
+    "scopedPages": 10,
+    "structure": "Hierarchical (level 0 + level 1 Top-Level + level 2 Protein-Sub-Pages)",
+    "pages": [
+      { "name": "Startseite",            "level": 0, "pageId": "7AD425C6-C3C5-402D-A69D-D6201F98F888" },
+      { "name": "BESTSELLER",            "level": 1, "pageId": "B0B4CEEB-909A-4DC6-A571-6AA4D718DB21" },
+      { "name": "ZERUP",                 "level": 1, "pageId": "DA439A68-D45D-4BB9-97CC-5D706DC1CF89" },
+      { "name": "CHUNKY FLAVOUR",        "level": 1, "pageId": "D5FF78A5-8306-4D4B-80F7-F20BFBA08472" },
+      { "name": "PROTEINE",              "level": 1, "pageId": "9A82B50C-BA5A-4A3B-ADBB-7B729770F289" },
+      { "name": "PROTEIN MILKSHAKE",     "level": 2, "pageId": "5C4AE7B3-FEE1-4887-B719-D0188FF74E51" },
+      { "name": "PROTEIN ICED COFFEE",   "level": 2, "pageId": "3D5F63E7-0917-4ABF-9F07-7D10B2AC1639" },
+      { "name": "CLEAR PROTEIN",         "level": 2, "pageId": "55FD402B-A0DC-4A7C-BD00-2D0ECE353C4D" },
+      { "name": "CLEAR GLOW PEPTIDES",   "level": 2, "pageId": "483E27E9-01B3-441C-B1B9-DD468E87F786" },
+      { "name": "VEGAN PROTEIN",         "level": 2, "pageId": "A217601D-395D-4DF1-B940-4BABA3DAD6E5" }
+    ]
+  },
+  "contentSummary": {
+    "pagesAnalyzed": 10,
+    "wiederkehrendeModuleCrossPage": {
+      "amazon_nav_header": "alle 10 Pages",
+      "amazon_share_footer": "alle 10 Pages",
+      "produktselektor_promo_banner_1280x640": "9 von 10 Pages (alle ausser PROTEIN ICED COFFEE, dort am Page-Ende auch vorhanden) als universelles Tool-Cross-Sell",
+      "alle_produkte_closing_banner_3000x1500": "9 von 10 Pages als Conversion-Bridge zur ALLE PRODUKTE Page",
+      "featured_deal_asin_showcase": "auf allen 7 Sub-Category-Pages plus PROTEINE-Hub (Milkyccino) plus 3x auf PROTEIN ICED COFFEE",
+      "brand_video": "auf Startseite, BESTSELLER, ZERUP, CHUNKY FLAVOUR (4 Pages)"
+    }
+  },
+  "pages": [
+    { "pageName": "Startseite",            "pageSlug": "01_startseite",            "pageId": "7AD425C6-C3C5-402D-A69D-D6201F98F888", "pageType": "startseite",                 "scrollHeight": 6499, "brandModules": 10, "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "kulinarisch", "claimType": "lifestyle_versprechen", "rhetoricalDevice": "wortspiel" },     "pageArchitecture": "Brand-Hero plus drei Tile-Row-2-Pattern als Kategorie-Verteiler plus Featured-Product-Grid 4-fach plus Produktselektor-Promo plus Video plus ALLE-PRODUKTE-Closing." },
+    { "pageName": "BESTSELLER",            "pageSlug": "02_bestseller",            "pageId": "B0B4CEEB-909A-4DC6-A571-6AA4D718DB21", "pageType": "bestseller",                 "scrollHeight": 9035, "brandModules": 10, "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "kulinarisch", "claimType": "social_proof",         "rhetoricalDevice": "konkrete_zahl" }, "pageArchitecture": "Brand-Video plus vier Kategorie-Bestseller-Bloecke (Lead-Image plus 3-4 ASIN-Tiles) plus VITALSTOFFE Section-Intro plus 9er ProductGrid plus Bridge-Banner." },
+    { "pageName": "ZERUP",                 "pageSlug": "03_zerup",                 "pageId": "DA439A68-D45D-4BB9-97CC-5D706DC1CF89", "pageType": "sub_category",               "scrollHeight": 9574, "brandModules": 8,  "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "kulinarisch", "claimType": "benefit_funktional",   "rhetoricalDevice": "konkrete_zahl" }, "pageArchitecture": "Hero plus Video plus FeaturedDeal plus Vollkatalog 19 plus Bundle-Promo plus Bundle-Tile-Row 4 plus Brand-Story plus Bridge-Banner." },
+    { "pageName": "CHUNKY FLAVOUR",        "pageSlug": "04_chunky-flavour",        "pageId": "D5FF78A5-8306-4D4B-80F7-F20BFBA08472", "pageType": "sub_category",               "scrollHeight": 8312, "brandModules": 6,  "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "kulinarisch", "claimType": "benefit_funktional",   "rhetoricalDevice": "konkrete_zahl" }, "pageArchitecture": "Hero plus Video plus FeaturedDeal plus Vollkatalog 17 plus Joghurt-Bowl-Lifestyle-Bridge plus Bridge-Banner." },
+    { "pageName": "PROTEINE",              "pageSlug": "05_proteine",              "pageId": "9A82B50C-BA5A-4A3B-ADBB-7B729770F289", "pageType": "hub_category",               "scrollHeight": 5920, "brandModules": 8,  "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "kulinarisch", "claimType": "benefit_funktional",   "rhetoricalDevice": "konkrete_zahl" }, "pageArchitecture": "Fuenf Sub-Category-Lead-plus-Pair-Bloecke fuer die fuenf Protein-Sub-Pages plus FeaturedDeal Milkyccino als Cross-Sell plus Bridge-Banner." },
+    { "pageName": "PROTEIN MILKSHAKE",     "pageSlug": "06_protein-milkshake",     "pageId": "5C4AE7B3-FEE1-4887-B719-D0188FF74E51", "pageType": "sub_category_lean",          "scrollHeight": 4766, "brandModules": 4,  "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "kulinarisch", "claimType": "benefit_funktional",   "rhetoricalDevice": "konkrete_zahl" }, "pageArchitecture": "Lean-Sub-Category: FeaturedDeal Hero plus Mini-Grid 5 plus Bridge-Banner. Kein Video, kein Editorial-Layer." },
+    { "pageName": "PROTEIN ICED COFFEE",   "pageSlug": "07_protein-iced-coffee",   "pageId": "3D5F63E7-0917-4ABF-9F07-7D10B2AC1639", "pageType": "sub_category_storytelling",  "scrollHeight": 5295, "brandModules": 5,  "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "kulinarisch", "claimType": "benefit_funktional",   "rhetoricalDevice": "konkrete_zahl" }, "pageArchitecture": "AUFFAELLIG Featured-Deal-Sequenz-Page: drei aufeinanderfolgende FeaturedDeal-Showcases (Matcha Latte, Chai Latte, Milkyccino) statt klassisches Hero+Grid plus Bridge-Banner." },
+    { "pageName": "CLEAR PROTEIN",         "pageSlug": "08_clear-protein",         "pageId": "55FD402B-A0DC-4A7C-BD00-2D0ECE353C4D", "pageType": "sub_category_rich",          "scrollHeight": 6608, "brandModules": 6,  "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "kulinarisch", "claimType": "benefit_funktional",   "rhetoricalDevice": "konkrete_zahl" }, "pageArchitecture": "Reichste Sub-Page: FeaturedDeal plus Infografik-4-Box plus Split-Lifestyle-Produkt-Banner mit Editorial-Headline und CTA plus Vollkatalog 8 plus Bridge-Banner." },
+    { "pageName": "CLEAR GLOW PEPTIDES",   "pageSlug": "09_clear-glow-peptides",   "pageId": "483E27E9-01B3-441C-B1B9-DD468E87F786", "pageType": "sub_category_rich",          "scrollHeight": 6166, "brandModules": 6,  "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "kulinarisch", "claimType": "benefit_funktional",   "rhetoricalDevice": "konkrete_zahl" }, "pageArchitecture": "Education-dichte Page: FeaturedDeal plus Mini-Grid 3 plus zwei aufeinanderfolgende Infografiken (eine ohne, eine mit ASIN-Click) plus Bridge-Banner." },
+    { "pageName": "VEGAN PROTEIN",         "pageSlug": "10_vegan-protein",         "pageId": "A217601D-395D-4DF1-B940-4BABA3DAD6E5", "pageType": "sub_category_lean",          "scrollHeight": 4766, "brandModules": 4,  "voiceMarkers": { "voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "kulinarisch", "claimType": "benefit_funktional",   "rhetoricalDevice": "konkrete_zahl" }, "pageArchitecture": "Lean-Sub-Category strukturell identisch zu PROTEIN MILKSHAKE: FeaturedDeal plus Mini-Grid 3 plus Bridge-Banner." }
+  ],
+  "storeAnalysis": {
+    "marketSegment": "Functional Food und Sport-Nutrition mit Lifestyle-Brand-DNA. Sortimentsbreite: Sirupe (ZERUP), Geschmackspulver (CHUNKY FLAVOUR), Proteine in 5 Varianten (Milkshake, Iced Coffee, Clear, Glow Peptides, Vegan), Protein-Riegel/Light-Food, Vitalstoffe-Supplements, Bundles, Shaker-Zubehoer.",
+    "primaryAudience": "Fitness- und Wellness-bewusste Konsumenten mit Interesse an kalorienarmen Lifestyle-Lebensmitteln, Sport-Supplements und Vitalstoff-Versorgung.",
+    "priceTier": "Mid-Premium Functional Food. Hauptprodukte 13-35 Euro.",
+    "productComplexity": "Sehr breit aufgestellt: ueber 80 ASINs ueber 8 Sortimentskategorien. Innerhalb der PROTEINE-Linie eigene Sub-Page-Hierarchie mit 5 Sub-Kategorien Level 2.",
+    "brandVoice": {
+      "tonality": "Direkt, motivierend, kulinarisch-lifestyle. Mischung aus Sport-Nutrition-Vokabular (Whey Konzentrat, Casein, Mikronaehrstoff) und kulinarisch-genussorientiertem Vokabular (Vanille-Eiscreme, Cinnalicious, Trinkschokolade). Markenklang spielt mit dem Wort MORE als Markenname und als 'mehr' im Sinn von Steigerung.",
+      "adjectives": ["zuckerfrei", "vegan", "klar", "cremig", "ohne viel Zucker"],
+      "signatureClaims": ["made in Germany", "bis zu X g Protein pro Portion", "zero Kalorien", "ohne Zuckerzusatz", "Whey Konzentrat und Casein"],
+      "voiceContrasts": ["MORE Wortspiel Marke plus Adjektiv 'mehr'", "Sport-Nutrition Faktentonalitaet plus Lifestyle-Genuss-Bildwelt", "Klar/Clear-Range als Kontrast zu Cremig/Shake-Range"]
+    },
+    "designAesthetic": {
+      "colorPalette": "Akzentfarben pro Sortimentskategorie: Orange Hero MORE-Brand, Pink ZERUP, Coral CHUNKY FLAVOUR/RIEGEL, Lila PROTEIN/PROTEIN MILKSHAKE/ICED COFFEE, Blau CLEAR PROTEIN, Cyan CLEAR GLOW PEPTIDES, Gruen VEGAN PROTEIN/VITALSTOFFE.",
+      "typography": "Fette Sans-Serif Versalien fuer Brand-Wordmark und Headlines. Mixed Case fuer Editorial-Sublines.",
+      "photographyStyle": "Lifestyle-Stillife mit Drinks und Bowls auf gesaettigten Vollflaechen-Hintergruenden. Wenig Personen im Bild, eher Produkte und Speisen.",
+      "layoutSignals": "Wiederkehrende Patterns: Tile-Row 2-fach Verteiler-Pattern auf Startseite, Category-Block-Lead-Image-plus-Quad auf Bestseller, Subcategory-Lead-plus-Pair auf Hub-Pages, FeaturedDeal-ASIN-Showcase auf allen Sub-Category-Pages."
+    },
+    "positioningClaim": "MORE Nutrition ist die Lifestyle-Brand fuer Functional Food und Sport-Nutrition, die Genuss (kulinarische Geschmacks-Innovation) mit Funktion (Protein, Vitalstoffe, kalorienfreundliche Sirupe) verbindet.",
+    "contentStrategy": {
+      "approach": "Multi-Layer-Architektur mit drei Tier-Levels: Startseite-Verteiler (Level 0), Top-Level-Kategorien (Level 1), PROTEINE-Sub-Pages (Level 2). Hub-Pages mit Sub-Category-Lead-plus-Pair, Sub-Pages mit Featured-Deal-Showcase plus Vollkatalog-Mini-Grid.",
+      "emotionalLayer": "Brand-Hero plus drei Tile-Row-2-Verteiler mit jeweils eigener Akzentfarbe plus Brand-Video.",
+      "rationalLayer": "Featured-Deal-Showcases mit Detail-Bilder-Galerien und Sterne-Bewertungen plus Infografiken auf Erklaerungsbeduerftigen Pages (Clear Protein, Clear Glow Peptides).",
+      "modulePreferences": "featured_deal_asin_showcase (Detailpage-im-Store), product_grid_full_catalog, subcategory_tile_pair, subcategory_lead_plus_pair, category_block_lead_image_plus_quad, infographic_benefit_4box, split_lifestyle_product_with_cta, full_width_image_creative (Produktselektor-Promo), editorial_banner (Closing-Banner).",
+      "editorialDepth": "Variable: Lean-Sub-Pages (4-6 Module), Rich-Sub-Pages (8 Module mit Educational-Layer), Hub-Pages (10 Module), Startseite (12 Module)."
+    },
+    "conversionPath": {
+      "primary": "Featured-Deal-ASIN-Showcase plus Vollkatalog-ProductGrid auf Sub-Category-Pages.",
+      "secondary": "Tile-Row-Verteiler auf Startseite, Sub-Category-Lead-plus-Pair auf Hub-Pages, ALLE-PRODUKTE-Closing-Banner als Fallback."
+    },
+    "keyStrengths": [
+      "Wiederkehrender Produktselektor-Promo-Banner plus ALLE-PRODUKTE-Closing-Banner als Cross-Page-Footer-Pattern",
+      "FeaturedDeal-ASIN-Showcase als Detailpage-Eintauchung im Store auf jeder Sub-Category-Page",
+      "Akzentfarben-System pro Sortimentskategorie als visueller Anker",
+      "Hierarchische 3-Tier-Architektur (Startseite plus Top-Level plus Protein-Sub-Pages)",
+      "MORE-Wortspiel als Brand-Anker (Marke plus 'mehr')"
+    ],
+    "brandUSPs": [
+      "Functional Food mit Genuss-Faktor",
+      "Made in Germany",
+      "Breite Geschmacks-Innovation (Cinnalicious, Stracciatella, Pink Grapefruit, Capri Orange)",
+      "Vegan-Linie als eigene Sub-Page",
+      "Compact-by-Design Amazon-Zertifizierung auf vielen Zerup-ASINs"
+    ],
+    "moduleFunctionalTaxonomy": {
+      "hero_plus_tile_pair_sequence_3x": "Startseite-Pattern: Brand-Hero plus drei aufeinanderfolgende Tile-Row-2-Pattern als Kategorie-Verteiler statt klassischem 8-Octet-Grid",
+      "category_block_lead_image_plus_quad": "Bestseller-Page-Pattern: 5-spaltige Reihe mit Brand-Lead-Image plus 3-4 Amazon-ASIN-Tiles je Sortimentskategorie",
+      "subcategory_lead_plus_pair": "Hub-Page-Pattern (PROTEINE): 3-Tile-Reihe mit Brand-Lead-Image und 2 Hero-ASIN-Tiles, wechselt zwischen Lead-Links und Lead-Rechts fuer rhythmische Abwechslung",
+      "featured_deal_asin_showcase": "Detailpage-aehnliches Showcase eines Hero-ASIN im Store mit Bildgalerie 20+ Bilder, eingebettetem Produkt-Video, Sterne-Bewertungen, 'Informationen zu diesem Artikel' Akkordeon",
+      "lean_sub_category": "FeaturedDeal plus Mini-Grid plus Bridge-Banner ohne weitere Schichten (PROTEIN MILKSHAKE, VEGAN PROTEIN)",
+      "rich_sub_category_with_education": "FeaturedDeal plus Mini-Grid plus Infografik-Layers plus Bridge-Banner (CLEAR GLOW PEPTIDES, CLEAR PROTEIN)",
+      "featured_deal_sequence": "Drei aufeinanderfolgende FeaturedDeal-Showcases statt Hero+Grid (PROTEIN ICED COFFEE)",
+      "split_lifestyle_product_with_cta": "Erstmals echte Editorial-Headline-Subline-CTA im DOM auf einer Sub-Page (Clear Protein Mango Juice)",
+      "infographic_benefit_4box": "Vier-Quadranten-Layout mit Text-Boxen um zentrale grafische Form als Educational Layer",
+      "produktselektor_promo_universal": "Identisches Promo-Banner 1280x640 auf 9 von 10 Pages als Cross-Page-Tool-Cross-Sell",
+      "alle_produkte_closing_universal": "Identischer Closing-Banner 3000x1500 auf 9 von 10 Pages als Cross-Page-Conversion-Fallback",
+      "follow_us_strip": "Schmaler orangefarbener Strip-Banner mit 'FOLGE UNS FUER MORE NEUIGKEITEN' direkt unter der Amazon-Nav als Brand-Follower-Konversion (nur Startseite)"
+    },
+    "pageArchetypes": {
+      "startseite": {
+        "primaryFunction": "Brand-Personality-zu-Verteiler-zu-Conversion-Funnel mit Akzentfarben-Tile-Row-2-Sequenz",
+        "conversionMode": "Soft plus Hard",
+        "transferableTo": "Lifestyle-Food-Marken mit 5-7 Sortimentsfamilien, die Brand-Personality ueber Akzentfarben pro Kategorie kommunizieren",
+        "exampleMore": "Startseite mit 3x Tile-Row-2 plus Featured-Product-Grid 4-fach"
+      },
+      "bestseller": {
+        "primaryFunction": "Cross-Sortiment-Top-Performance-Sammlung mit Kategorie-Bestseller-Bloecken",
+        "conversionMode": "Hard (Schnellansicht direkt aus Tiles)",
+        "transferableTo": "FMCG-Brand-Stores mit Bestseller-Sammel-Page-Bedarf",
+        "exampleMore": "BESTSELLER-Page mit 4x Lead-Image-plus-Quad-Block plus 9er Vitalstoffe-Grid"
+      },
+      "hub_category": {
+        "primaryFunction": "Sub-Category-Verteiler-Hub mit Lead-Image-plus-Pair-Pattern",
+        "conversionMode": "Soft (Sub-Page-Navigation) plus Hard (Hero-ASIN-Schnellansicht)",
+        "transferableTo": "Multi-Sub-Category-Stores mit 4+ Sub-Sortimentslinien",
+        "exampleMore": "PROTEINE-Hub mit 5 Sub-Category-Lead-plus-Pair-Bloecken"
+      },
+      "sub_category": {
+        "primaryFunction": "Vollkatalog mit FeaturedDeal-Detailpage-Showcase plus Vollkatalog-Grid",
+        "conversionMode": "Hard",
+        "transferableTo": "Sub-Category-Pages mit 10+ SKUs derselben Sortimentslinie",
+        "exampleMore": "ZERUP, CHUNKY FLAVOUR"
+      },
+      "sub_category_lean": {
+        "primaryFunction": "FeaturedDeal plus Mini-Grid plus Bridge-Banner ohne weitere Schichten",
+        "conversionMode": "Hard",
+        "transferableTo": "Sub-Category-Pages mit weniger als 10 SKUs",
+        "exampleMore": "PROTEIN MILKSHAKE, VEGAN PROTEIN"
+      },
+      "sub_category_rich": {
+        "primaryFunction": "FeaturedDeal plus Vollkatalog plus Educational-Layer (Infografiken oder Editorial-Split-Banner)",
+        "conversionMode": "Hard mit Educational Bridge",
+        "transferableTo": "Erklaerungsbeduerftige Produkte (z.B. Wirkmechanismus-Erlaeuterung)",
+        "exampleMore": "CLEAR PROTEIN, CLEAR GLOW PEPTIDES"
+      },
+      "sub_category_storytelling": {
+        "primaryFunction": "Mehrere aufeinanderfolgende FeaturedDeal-Showcases als 'Featured-Deal-Sequenz' statt klassisches Hero+Grid",
+        "conversionMode": "Hard",
+        "transferableTo": "Sub-Category-Pages mit sehr wenigen Hero-SKUs (2-3)",
+        "exampleMore": "PROTEIN ICED COFFEE (3 Hero-SKUs als Detailpage-Sequenz)"
+      }
+    },
+    "brandSpecificVsStructuralExtraction": {
+      "strukturell_uebertragbar_an_neue_brands": [
+        "Hierarchische 3-Tier-Architektur (Startseite plus Top-Level plus Sub-Pages)",
+        "Tile-Row-2-Sequenz-Pattern (drei aufeinanderfolgende Tile-Pair-Module statt 8-Octet)",
+        "Category-Block-Lead-Image-plus-Quad als Bestseller-Page-Layout",
+        "Subcategory-Lead-plus-Pair als Hub-Page-Verteiler-Layout",
+        "Featured-Deal-ASIN-Showcase als Detailpage-im-Store auf Sub-Category-Pages",
+        "Lean/Rich/Storytelling Sub-Category-Page-Variant-System je nach SKU-Anzahl und Erklaerungsbedarf",
+        "Produktselektor-Promo plus ALLE-PRODUKTE-Closing als universelle Cross-Page-Footer-Pattern",
+        "Akzentfarben-Mapping pro Sortimentskategorie als visueller Anker",
+        "voiceMarkers direkt kulinarisch konkrete_zahl benefit_funktional",
+        "Follow-Us-Strip-Banner als Brand-Follower-CTA direkt unter Amazon-Nav"
+      ],
+      "brand_spezifisch_NICHT_uebertragbar": [
+        "Wortbildmarke MORE Nutrition und MORE-Wortspiel",
+        "Konkrete Akzentfarben-Zuordnung (Pink ZERUP, Lila PROTEIN etc.)",
+        "Konkrete Sortimentsfamilien (ZERUP, CHUNKY FLAVOUR, Clear Glow Peptides)",
+        "Konkrete Produkt-Namen (Cinnalicious, Milkyccino, Capri Orange)",
+        "Konkrete Brand-Tagline 'FOLGE UNS FUER MORE NEUIGKEITEN'",
+        "Konkrete Brand-Story-Visuals (Frau im gelben Tank-Top, Joghurt-Bowl-Stillife etc.)",
+        "Konkrete made-in-Germany-Claims (gilt nur fuer Brand mit Production in Deutschland)",
+        "Konkrete Bundle-Konfigurationen (6er, 12er, Mocktail, Barista)"
+      ]
+    }
+  },
+  "openQuestions": [
+    "Vokabular-Vorschlag fuer v4-Schema: 'featured_deal_asin_showcase' als neuer layoutType. Bedingung: heightening dass 'Informationen zu diesem Artikel' im DOM erscheint und 20+ Detail-Bilder vorhanden sind. Funktional ein eingebettetes ASIN-Detail-Modul im Brand Store.",
+    "Vokabular-Vorschlag fuer v4-Schema: 'category_block_lead_image_plus_quad' als neuer layoutType fuer Bestseller-Pages (5-spaltige Reihe Lead + 4 ASIN-Tiles).",
+    "Vokabular-Vorschlag fuer v4-Schema: 'subcategory_lead_plus_pair' als neuer layoutType fuer Hub-Pages (3-Tile-Reihe Lead + 2 ASIN-Tiles).",
+    "Vokabular-Vorschlag fuer v4-Schema: 'infographic_benefit_4box' als neuer layoutType (Vier-Quadranten-Layout mit Text-Boxen um zentrale grafische Form).",
+    "Vokabular-Vorschlag fuer v4-Schema: 'split_lifestyle_product_with_cta' als neuer layoutType (Zwei-Spalten-Split mit Lifestyle plus Produkt-mit-eigener-Headline und CTA).",
+    "Vokabular-Vorschlag fuer v4-Schema: 'follow_us_strip' als neuer layoutType (schmaler farbiger Strip-Banner mit Follow-CTA direkt unter Amazon-Nav).",
+    "Vokabular-Vorschlag fuer v4-Schema: 'amazon_recommended_offers' als neuer layoutType fuer das Amazon-native 'Empfohlene Angebote' Personalisierungsmodul auf Bestseller-Pages.",
+    "Vokabular-Vorschlag fuer voiceMarkers: 'rhetoricalDevice: wortspiel' fuer Brands, die ihren Markennamen mit einem semantischen Wortspiel verbinden (MORE als Marke und als 'mehr').",
+    "Vokabular-Vorschlag fuer Phase-3-pageType-Taxonomy: 'sub_category_lean', 'sub_category_rich', 'sub_category_storytelling' als Sub-Variant-System nach SKU-Anzahl und Erklaerungsbedarf.",
+    "Vokabular-Vorschlag fuer Page-Archetyp: 'featured_deal_sequence' als Page-Pattern (mehrere FeaturedDeal-Showcases hintereinander statt Hero+Grid).",
+    "Hauptseiten-Pattern: drei aufeinanderfolgende Tile-Row-2-Pattern auf der Startseite statt klassisches 8-Octet-Grid. Vorschlag fuer Phase-3-Vokabular: 'tile_pair_sequence_3x' als Pattern-Marker (nicht layoutType).",
+    "5 weitere Pages nicht in dieser Iteration erfasst (Scope: Top 10): RIEGEL & LIGHT FOOD, VITALSTOFFE, BUNDLE, ALLE PRODUKTE, PRODUKTSELEKTOR. Besonders die PRODUKTSELEKTOR-Page als interaktive Beratungstool waere aufschlussreich, weil sie als Cross-Page-Tool-Promo auf 9 von 10 Pages verlinkt wird. ALLE PRODUKTE Page als Vollkatalog ueber alle Sortimentsfamilien waere ebenfalls hoch relevant.",
+    "Inkonsistenz: Cinnalicious-ASIN B0B8VKF7LH erscheint auf Bestseller-Page in PROTEIN MILKSHAKE-Block, aber NICHT in PROTEIN MILKSHAKE Sub-Page Mini-Grid. Tag-Logik des Stores nicht ueberall konsistent.",
+    "PROTEINE-Hub Modul-2 verlinkt sowohl auf PROTEIN MILKSHAKE Sub-Page als auch zu PROTEIN-Kategorie (gleicher pageId). PROTEINE-Hub-Page und die PROTEIN MILKSHAKE Sub-Page tragen denselben Visual-Code (Lila), nutzen aber unterschiedliche Page-IDs.",
+    "Vision-Pass auf Hero-Banner-Bildern und Featured-Deal-Showcase-Galerien koennte konkrete Bildtexte, Brand-Claims und visuelle USPs extrahieren, die aktuell als 'Bildtext per Vision lesbar' markiert sind."
+  ]
+}

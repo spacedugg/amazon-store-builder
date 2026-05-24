@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "store": "nespresso",
+    "pageSlug": "06_essenza-mini",
+    "pageName": "Essenza Mini",
+    "pageId": "C6658D50-ED49-4786-BD4A-9F697562B320",
+    "url": "https://www.amazon.de/stores/page/C6658D50-ED49-4786-BD4A-9F697562B320",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_compact",
+    "scrollHeight": 4260,
+    "viewport": { "w": 1599, "h": 842 },
+    "domRowsTotal": 5,
+    "contentModulesCount": 5
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height":  395, "widgetType": "Header",       "tileCount": 0, "imgCount": 1, "videoCount": 0, "productCount":  0, "asinCount": 0, "note": "Nav header." },
+    { "domRowIdx": 1, "top":  502, "height": 1245, "widgetType": "ProductGrid",  "tileCount": 0, "imgCount": 7, "videoCount": 0, "productCount": 13, "asinCount": 7, "note": "ProductGrid mit 13 product-Markern (7 unique ASINs: Essenza Mini Farbvarianten). Sehr hoch (1245px).", "sampleAsins": ["B06XJ3MFMN","B06XHNK8NP","B06XJ4G828","B07FM9ZQ4B"] },
+    { "domRowIdx": 2, "top": 1747, "height":  743, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 0, "videoCount": 1, "productCount":  0, "asinCount": 0, "note": "Hero-Video Vollformat (Essenza Mini Maschinen-Demo)." },
+    { "domRowIdx": 3, "top": 2489, "height":  309, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 1, "videoCount": 0, "productCount":  0, "asinCount": 0, "note": "Section Intro / Brand-Statement Banner." },
+    { "domRowIdx": 4, "top": 2798, "height":  201, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 0, "videoCount": 0, "productCount":  0, "asinCount": 0, "note": "Amazon Share Footer." }
+  ],
+  "openQuestionsLocal": [
+    "Essenza Mini hat 7 ASIN-Varianten im ProductGrid (mehr Farb/Variant-Vielfalt als Citiz)."
+  ]
+}

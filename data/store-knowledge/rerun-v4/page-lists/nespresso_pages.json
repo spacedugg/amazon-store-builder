@@ -1,0 +1,141 @@
+{
+  "brandName": "Nespresso",
+  "storeUrl": "https://www.amazon.de/stores/Nespresso/page/2429E3F3-B1F4-4DE2-A912-9E55CF5765A3",
+  "totalPages": 19,
+  "extractedFromV3At": "2026-05-23",
+  "pages": [
+    {
+      "position": 1,
+      "pageName": "Startseite",
+      "pageId": "2429E3F3-B1F4-4DE2-A912-9E55CF5765A3",
+      "url": "https://www.amazon.de/stores/page/2429E3F3-B1F4-4DE2-A912-9E55CF5765A3",
+      "hasOldModuleData": true
+    },
+    {
+      "position": 2,
+      "pageName": "Deals",
+      "pageId": "3C855FAA",
+      "url": "https://www.amazon.de/stores/page/3C855FAA",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 3,
+      "pageName": "Original Maschinen",
+      "pageId": "FCA8433A",
+      "url": "https://www.amazon.de/stores/page/FCA8433A",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 4,
+      "pageName": "Atelier",
+      "pageId": "94253EAE",
+      "url": "https://www.amazon.de/stores/page/94253EAE",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 5,
+      "pageName": "Citiz",
+      "pageId": "6D635ABA",
+      "url": "https://www.amazon.de/stores/page/6D635ABA",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 6,
+      "pageName": "Essenza Mini",
+      "pageId": "C6658D50",
+      "url": "https://www.amazon.de/stores/page/C6658D50",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 7,
+      "pageName": "Inissia",
+      "pageId": "C90F9D89",
+      "url": "https://www.amazon.de/stores/page/C90F9D89",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 8,
+      "pageName": "Pixie",
+      "pageId": "73BA5A55",
+      "url": "https://www.amazon.de/stores/page/73BA5A55",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 9,
+      "pageName": "Gran Lattissima",
+      "pageId": "FD504600",
+      "url": "https://www.amazon.de/stores/page/FD504600",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 10,
+      "pageName": "Lattissima one",
+      "pageId": "E0DF17AD",
+      "url": "https://www.amazon.de/stores/page/E0DF17AD",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 11,
+      "pageName": "Creatista Pro",
+      "pageId": "6ADAE8B6",
+      "url": "https://www.amazon.de/stores/page/6ADAE8B6",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 12,
+      "pageName": "Creatista Plus",
+      "pageId": "BF431986",
+      "url": "https://www.amazon.de/stores/page/BF431986",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 13,
+      "pageName": "Citiz & Milk",
+      "pageId": "54143694",
+      "url": "https://www.amazon.de/stores/page/54143694",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 14,
+      "pageName": "Original Kaffee",
+      "pageId": "D99A9525",
+      "url": "https://www.amazon.de/stores/page/D99A9525",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 15,
+      "pageName": "Ispirazione Italiana",
+      "pageId": "AE7ED400",
+      "url": "https://www.amazon.de/stores/page/AE7ED400",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 16,
+      "pageName": "World Explorations",
+      "pageId": "14CA3927",
+      "url": "https://www.amazon.de/stores/page/14CA3927",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 17,
+      "pageName": "Master Origin (Original)",
+      "pageId": "65AE62D2",
+      "url": "https://www.amazon.de/stores/page/65AE62D2",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 18,
+      "pageName": "Barista Creations (Original)",
+      "pageId": "7858C8D7",
+      "url": "https://www.amazon.de/stores/page/7858C8D7",
+      "hasOldModuleData": false
+    },
+    {
+      "position": 19,
+      "pageName": "The Original Collection",
+      "pageId": "2F01C872",
+      "url": "https://www.amazon.de/stores/page/2F01C872",
+      "hasOldModuleData": false
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "store": "more-nutrition",
+    "pageSlug": "04_chunky-flavour",
+    "pageId": "D5FF78A5-8306-4D4B-80F7-F20BFBA08472",
+    "url": "https://www.amazon.de/stores/page/D5FF78A5-8306-4D4B-80F7-F20BFBA08472",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_v4_widget_scan",
+    "scrollHeight": 8312,
+    "viewport": { "w": 1582, "h": 872 },
+    "domWidgetsTotal": 8,
+    "note": "CHUNKY FLAVOUR Kategorie-Page. Folgt strukturell der ZERUP-Page: Hero, Video, FeaturedDeal Vanilla Perfection, ProductGrid 17 weitere Sorten, Lifestyle-Banner, Produktselektor-Banner, Closing-Banner."
+  },
+  "hero": {
+    "section": "hero", "widgetIdx": 0, "top": 99,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/f51796fa-deb8-4c67-9601-89afc4d611ac._CR0%2C0%2C3000%2C600_SX1500_.jpg",
+    "imageSize": { "w": 1500, "h": 300 },
+    "note": "CHUNKY FLAVOUR Hero-Banner. Bildtext per Vision lesbar."
+  },
+  "navigation": "siehe 01_startseite_dom.json",
+  "modules": [
+    { "userModuleId": 1, "widgetIdx": 1, "top": 502, "height": 743, "widgetClass": "EditorialRow", "layoutType": "video_module", "tileCount": 1, "videoCount": 1, "note": "Brand-Video."},
+    {
+      "userModuleId": 2, "widgetIdx": 2, "top": 1244, "height": 925,
+      "widgetClass": "EditorialRow", "layoutType": "featured_deal_asin_showcase", "tileCount": 1,
+      "featuredAsin": "B0D3M1JNDG",
+      "featuredProductTitle": "MORE Chunky Flavour, Vanilla Perfection, 150 g, vegan, Geschmackspulver zum Süßen, ohne viel Zucker und Kalorien, mit Inulin und Laktase",
+      "rating": "4,6 von 5 Sternen, 1750 Bewertungen", "imgCount": 24, "videoCount": 10,
+      "note": "FeaturedDeal-Modul Vanilla Perfection als Best-Seller-Sorte. Identische Struktur wie ZERUP Modul 2."
+    },
+    {
+      "userModuleId": 3, "widgetIdx": 3, "top": 2169, "height": 2432,
+      "widgetClass": "ProductGrid", "layoutType": "product_grid_full_catalog", "tileCount": 17,
+      "asins": ["B0D3M26DTL","B0D3M2KFC6","B0DZ7774P4","B0DS5ZD7Q1","B0FF58NHB2","B0D3M1HL93","B0D3M23WNV","B0DS5YY5JY","B0DS61S3YV","B0D3LYNFNC","B0FF5B5Z2K","B0D3LZQ23Q","B0F6D7HJZ5","B0F6CX54QH","B0DZJ57PYT","B0DQPT32JX","B0D3HVS8HB"],
+      "exampleTitles": [
+        "MORE Chunky Flavour, Fudge Brownie",
+        "MORE Chunky Flavour, Stracciatella",
+        "MORE Chunky Flavour, Milchreis Zimt",
+        "MORE Chunky Flavour, Vanilla Chocolate Chip Cookie",
+        "MORE Chunky Flavour, Pistachio White Chocolate"
+      ],
+      "note": "Vollkatalog-ProductGrid mit allen 17 CHUNKY FLAVOUR Sorten (ohne den Featured Vanilla Perfection darueber)."
+    },
+    {
+      "userModuleId": 4, "widgetIdx": 4, "top": 4601, "height": 750,
+      "widgetClass": "EditorialRow", "layoutType": "full_width_image_brand_story", "tileCount": 1,
+      "mainImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/607f788b-bc84-40ba-95bb-a21e95879f5f._CR0%2C0%2C3000%2C1500_SX1500_.jpg" },
+      "linkedAsin": "B0D3M1JNDG",
+      "altText": "White bowl of yogurt topped with blueberries, strawberries, and granola on blue background with German text describing nutritional information.",
+      "note": "Lifestyle-Banner mit Joghurt-Bowl Stillife, Bildtext beschreibt Nutrition. Klickt zurueck auf den Featured-ASIN Vanilla Perfection."
+    },
+    {
+      "userModuleId": 5, "widgetIdx": 5, "top": 5351, "height": 750,
+      "widgetClass": "EditorialRow", "layoutType": "full_width_image_creative", "tileCount": 1,
+      "mainImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d6865a5f-5e09-4f0a-b72c-b6bb65ac059d._CR0%2C0%2C1280%2C640_SX1500_.jpg" },
+      "links": [{"pageId": "8790A8BC-31A4-4810-8B75-BF1AFCE858B5", "ariaLabel": "Weitere Informationen"}],
+      "note": "Produktselektor-Banner."
+    },
+    {
+      "userModuleId": 6, "widgetIdx": 6, "top": 6101, "height": 750,
+      "widgetClass": "EditorialRow", "layoutType": "full_width_image_closing", "tileCount": 1,
+      "mainImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d359c2c9-b952-47a2-b88a-864e11ffc31c._CR0%2C0%2C3000%2C1500_SX1500_.png" },
+      "links": [{"pageId": "F081FD4B-1559-4A38-A4F3-FC8E6732BCEB", "ariaLabel": "Weitere Informationen"}],
+      "note": "Closing-Banner."
+    }
+  ],
+  "excluded": [
+    { "widgetIdx": 7, "top": 6851, "height": 200, "reason": "Amazon Share-Footer." }
+  ],
+  "uniqueAsinsOnPage": ["B0D3M1JNDG","B0D3M26DTL","B0D3M2KFC6","B0DZ7774P4","B0DS5ZD7Q1","B0FF58NHB2","B0D3M1HL93","B0D3M23WNV","B0DS5YY5JY","B0DS61S3YV","B0D3LYNFNC","B0FF5B5Z2K","B0D3LZQ23Q","B0F6D7HJZ5","B0F6CX54QH","B0DZJ57PYT","B0DQPT32JX","B0D3HVS8HB"]
+}

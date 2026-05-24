@@ -1,0 +1,18 @@
+{
+  "_meta": {
+    "store": "blackroll", "pageSlug": "02_bestseller", "pageName": "Bestseller",
+    "pageId": "A2470DD2-F6B7-49D3-9DE1-4BC9FBE710B0",
+    "url": "https://www.amazon.de/stores/page/A2470DD2-F6B7-49D3-9DE1-4BC9FBE710B0",
+    "extractedAt": "2026-05-12", "extractor": "chrome_mcp_javascript_tool_compact",
+    "scrollHeight": 6483, "domRowsTotal": 7, "contentModulesCount": 5
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height":  408, "tileCount":  0, "imgCount":  3, "videoCount": 0, "productCount":  0, "note": "Nav header" },
+    { "domRowIdx": 1, "top":  507, "height": 2514, "tileCount":  2, "imgCount": 27, "videoCount": 0, "productCount": 34, "note": "Massives ProductGrid mit 34 ASINs (Bestseller-Vollkatalog), 2514px hoch" },
+    { "domRowIdx": 2, "top": 3020, "height":  743, "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx": 3, "top": 3763, "height":  743, "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0 },
+    { "domRowIdx": 4, "top": 4506, "height":  258, "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro" },
+    { "domRowIdx": 5, "top": 4763, "height":  258, "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Section Intro" },
+    { "domRowIdx": 6, "top": 5021, "height":  200, "tileCount":  4, "imgCount":  0, "videoCount": 0, "productCount":  0, "note": "amazon_share_footer" }
+  ]
+}

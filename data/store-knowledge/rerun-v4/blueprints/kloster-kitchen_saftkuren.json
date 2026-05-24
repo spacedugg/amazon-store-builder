@@ -1,0 +1,1010 @@
+{
+  "pageUrl": "https://www.amazon.de/stores/page/3745E0C5-D470-4291-A735-27CF83DD1606",
+  "pageName": "Saftkuren",
+  "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606",
+  "pageLevel": 1,
+  "pageType": "hub_category",
+  "scrollHeight": 7571,
+  "contentStats": {
+    "domModules": 12,
+    "logicalModules": 11,
+    "totalImages": 20,
+    "totalVideos": 1
+  },
+  "heroBanner": {
+    "description": "Marken-Sticky-Hero ueber alle Pages des Stores. Linke Haelfte zeigt eine Frau im beigen Pullover im Halbprofil beim Trinken aus Glas. Rechte Haelfte dunkelgruener Ingwerblatt-Hintergrund mit weisser Wortbildmarke KLOSTER KITCHEN und Tagline BETTER THAN GOOD in fetter Versalien-Sans-Serif. Identisch zu allen anderen Pages des Stores.",
+    "textOnImage": {
+      "visibleText": "KLOSTER KITCHEN BETTER THAN GOOD",
+      "textType": "tagline",
+      "origin": "baked_in",
+      "headline": "BETTER THAN GOOD",
+      "subline": null,
+      "cta": null,
+      "directionCues": null
+    },
+    "estimatedDimensions": "3000x500"
+  },
+  "modules": [
+    {
+      "position": 1,
+      "moduleId": "saftkuren_mod_01",
+      "moduleName": "Amazon Nav plus Brand Header sticky",
+      "layoutType": "amazon_nav_header",
+      "layoutShape": "chrome_thin",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": "Identisch zu allen anderen Pages: Amazon Stores Chrome plus Brand Header mit Tagline und Sub-Navigation.",
+      "structuralPattern": "Amazon globaler Header, darunter Kloster Kitchen Brand-Streifen mit Wortbildmarke und Tagline, darunter Sub-Nav-Bar mit Kategorien (Startseite, Ingwer Shots, Mikronaehrstoffe, SAFTKUREN active, Smoothies, Shot Kur, Mehr) und Folgen-Button.",
+      "moduleFunction": "Markenrahmen sticky ueber die gesamte Page, Navigation zwischen den 10 Kategorie-Seiten, aktive Page SAFTKUREN hervorgehoben.",
+      "relationToPrevious": "none",
+      "relationToNext": "hands_off_to_navigation",
+      "visualBridge": "none",
+      "copyBridge": "none",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "KLOSTER KITCHEN BETTER THAN GOOD STARTSEITE INGWER SHOTS MIKRONAEHRSTOFFE SAFTKUREN SMOOTHIES SHOT KUR MEHR",
+        "textType": "tagline",
+        "origin": "amazon_chrome",
+        "headline": "BETTER THAN GOOD",
+        "subline": null,
+        "cta": "Folgen",
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "Header",
+        "visibleHeadings": ["KLOSTER KITCHEN", "BETTER THAN GOOD"],
+        "ctaLabels": ["Folgen", "Teilen", "Startseite", "Ingwer Shots", "Mikronaehrstoffe", "Saftkuren", "Smoothies", "Shot Kur", "Mehr"],
+        "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c62dc5c8-f812-4754-8a90-674b1f1c66a8._CR0%2C0%2C1500%2C300_SX1500_.jpg"],
+        "videoCount": 0
+      }
+    },
+    {
+      "position": 2,
+      "moduleId": "saftkuren_mod_02",
+      "moduleName": "Video Hero Saftkuren Detail Closeup",
+      "layoutType": "hero_video",
+      "layoutShape": "full_width_tall",
+      "tileCount": 1,
+      "designIntent": "emotional_hook",
+      "designIntentDetail": "Grossflaechiger Video-Hero mit weicher unscharfer Closeup-Aufnahme einer dunkelgruenen Saftkur-Flasche mit weisser Aufschrift. Stimmungs-Loop ohne Headline-Overlay, dient als Atmospheric Setup.",
+      "structuralPattern": "Vollflaechiges Video-Element, weicher Fokus, dunklere natuerliche Farben. Kein Text-Overlay, keine CTA, keine Hotspots.",
+      "moduleFunction": "Emotionaler Auftakt der Saftkuren-Page. Stellt das Produkt visuell vor (Close-up-Optik signalisiert Frische, Detail, Qualitaet) bevor die rationale SAFTKUREN-Headline folgt.",
+      "relationToPrevious": "none",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "shared_color",
+      "copyBridge": "none",
+      "heroArchetype": "brand_mood_no_product",
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "lifestyle",
+          "toolTileType": "video",
+          "toolImageType": "video_hero",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Saftkur Closeup Video Loop",
+            "productOrCategoryRef": null,
+            "intent": "story",
+            "rolePosition": "Page Hero Video"
+          },
+          "visualContent": "Stark unscharfe Closeup-Aufnahme einer dunkelgruenen Glasflasche mit weisser Schrift, vermutlich Saftkur 3 (Bio Spinat). Vordergrund weiches Bokeh in Erdtoenen, Hintergrund dunkel und ruhig. Video-Loop in entspannten Schnitten.",
+          "elementProportions": { "lifestyle_photo": 100 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": null
+        }
+      ],
+      "toolLayoutId": "vh-full",
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [],
+        "videoCount": 1
+      }
+    },
+    {
+      "position": 3,
+      "moduleId": "saftkuren_mod_03",
+      "moduleName": "Saftkuren Section Intro",
+      "layoutType": "editorial_section_intro",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "section_intro",
+      "designIntentDetail": "Zentrierte schwarze Versalien-Headline SAFTKUREN mit dreizeiliger Subline. Markiert den thematischen Beginn der Saftkuren-Kategorie.",
+      "structuralPattern": "Weisser Hintergrund, zentriert, oben Versalien-Headline SAFTKUREN in dicker Sans-Serif, darunter normale Sans-Serif-Subline ueber drei Zeilen mit Komma-Aufzaehlung.",
+      "moduleFunction": "Positioniert die Saftkuren-Kategorie sachlich. Erklaert das Produkt rationale (6 Fastensaefte pro Tag, 18 Obst-, Gemuese- und Getreidesorten) und bereitet das Sortiment vor.",
+      "relationToPrevious": "opens_section_thematically",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "hard_break_intentional",
+      "copyBridge": "fresh_topic",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "SAFTKUREN Unsere Saftkuren mit 6 Fastensaefte pro Tag und insgesamt 18 verschiedenen Obst-, Gemuese-, und Getreidesorten.",
+        "textType": "category_headline",
+        "origin": "layered_text",
+        "headline": "SAFTKUREN",
+        "subline": "Unsere Saftkuren mit 6 Fastensaefte pro Tag und insgesamt 18 verschiedenen Obst-, Gemuese-, und Getreidesorten.",
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "toolTileType": "image_text",
+          "toolImageType": "section_intro_full",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0DFMLSLPH", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Saftkuren Kategorie Intro",
+            "productOrCategoryRef": null,
+            "intent": "story",
+            "rolePosition": "Section Header"
+          },
+          "visualContent": "Zentriert auf weissem Hintergrund. Oben Versalien-Headline SAFTKUREN in schwarzer dicker Sans-Serif. Darunter dreizeilige Subline mit drei zentral angeordneten Zeilen, Komma-Aufzaehlung der Inhaltsstoff-Familien.",
+          "elementProportions": { "text": 25, "solid_background": 75 },
+          "textOnImage": {
+            "visibleText": "SAFTKUREN Unsere Saftkuren mit 6 Fastensaefte pro Tag und insgesamt 18 verschiedenen Obst-, Gemuese-, und Getreidesorten.",
+            "textType": "category_headline",
+            "origin": "layered_text",
+            "headline": "SAFTKUREN",
+            "subline": "Unsere Saftkuren mit 6 Fastensaefte pro Tag und insgesamt 18 verschiedenen Obst-, Gemuese-, und Getreidesorten.",
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null
+        }
+      ],
+      "toolLayoutId": "1",
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": ["SAFTKUREN"],
+        "ctaLabels": [],
+        "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/ecc613c9-7499-4e79-b6da-31de4f0431e6._CR46%2C155%2C1873%2C351_SX1500_.jpg"],
+        "videoCount": 0
+      }
+    },
+    {
+      "position": 4,
+      "moduleId": "saftkuren_mod_04",
+      "moduleName": "Sortiments Hero 6 Saftkur Flaschen Reihe",
+      "layoutType": "hero_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Sechs Bio-Saftkur-Flaschen mit weissen Deckeln nebeneinander angeordnet, alle mit BIO-Sechseck-Siegel. Visualisierung der kompletten 7-Tage-Auswahl in einer Reihe als Brand-Familie.",
+      "structuralPattern": "Vollflaechiges Foto mit hellem Hintergrund. Sechs gleich grosse Flaschen frontal, jede in eigener Saft-Farbe (von Karamell ueber Rot, Tomatengruen, Lila, Gelb, Orange). Weisse Deckel mit weissem BIO-Sechseck-Logo.",
+      "moduleFunction": "Visueller Beweis fuer die Vielfalt der Saftkur. Bereitet ProductGrid-Sektion vor, indem es alle sechs Tagessaefte einer Kur als Familie zeigt. Subkategorie-Pre-View ohne Verkauf.",
+      "relationToPrevious": "proves_above_claim",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "shared_subject_class",
+      "copyBridge": "answers_above_question",
+      "heroArchetype": "multi_product_lineup",
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product",
+          "toolTileType": "image",
+          "toolImageType": "hero_full",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Saftkur 6-Tage Sortimentsfamilie",
+            "productOrCategoryRef": null,
+            "intent": "showcase",
+            "rolePosition": "Sortiments Hero"
+          },
+          "visualContent": "Sechs Saftkur-Flaschen in einer Reihe, jeweils dunkles Glas mit weissem Schraubdeckel. Inhalte in unterschiedlichen Farben: links beginnt mit Karamell-Braun (vermutlich Hafer), dann Pink-Rot (Rote Beete), Tomatengruen (Gruener Saft), Lila-Aubergine, Honig-Gelb, Orange. Alle Deckel tragen weisses BIO-Sechseck-Logo.",
+          "elementProportions": { "product_photo": 80, "solid_background": 20 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": null
+        }
+      ],
+      "toolLayoutId": "1",
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/6645424e-cc4d-411a-b495-bee75e5cb704._CR156%2C0%2C1600%2C800_.jpg"],
+        "videoCount": 0
+      }
+    },
+    {
+      "position": 5,
+      "moduleId": "saftkuren_mod_05",
+      "moduleName": "Story Tile Pair Lifestyle Trinkmoment plus Sortiment Tafel",
+      "layoutType": "editorial_tile_pair",
+      "layoutShape": "split_two_columns",
+      "tileCount": 2,
+      "designIntent": "editorial",
+      "designIntentDetail": "Linker Tile zeigt Frau, die aus einer Saftkur-Flasche trinkt. Rechter Tile zeigt Saftkur-Flaschen mit Sortier-Tafel und frischen Zutaten (Ingwer, Erdbeere, Karotte). Visualisierung von Konsum und Rohstoffen.",
+      "structuralPattern": "Zwei gleich grosse Lifestyle-Fotos nebeneinander. Links Person-zentriertes Foto (Konsum-Moment), rechts Produkt-zentriertes Foto mit dekorativer Tafel-Anordnung von Zutaten.",
+      "moduleFunction": "Doppelte Lifestyle-Validation: einerseits Anwender-Moment (Trinken), andererseits Rohstoff-Beleg (frische Zutaten neben Flaschen). Liefert die emotionale und die rationale Bruecke gleichzeitig.",
+      "relationToPrevious": "zooms_into_above_subject",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "shared_subject_class",
+      "copyBridge": "none",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "lifestyle",
+          "toolTileType": "image",
+          "toolImageType": "tile_pair_left",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0DFMLSLPH", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Trinkmoment Saftkur",
+            "productOrCategoryRef": "B0DFMLSLPH",
+            "intent": "story",
+            "rolePosition": "Lifestyle Tile Konsum"
+          },
+          "visualContent": "Junge Frau im Halbprofil mit langen dunklen Haaren trinkt mit geschlossenen Augen aus einer dunkelgruenen Saftkur-Flasche mit weisser SAFTKUR 3 Aufschrift und BIO-Sechseck. Innen-Setting, weiches Tageslicht, ruhige Stimmung.",
+          "elementProportions": { "lifestyle_photo": 90, "product_photo": 10 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "Saftkur Produktseite"
+        },
+        {
+          "position": 2,
+          "imageCategory": "product",
+          "toolTileType": "image",
+          "toolImageType": "tile_pair_right",
+          "link": { "clickable": false, "linkType": "none", "linkTarget": null, "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Saftkur Sortiment mit Zutaten",
+            "productOrCategoryRef": null,
+            "intent": "showcase",
+            "rolePosition": "Product Flat Lay"
+          },
+          "visualContent": "Flat-Lay-Anordnung auf hellem Tuch: fuenf Saftkur-Flaschen mit weissen Etiketten SAFTKUR 1 bis 5 in den jeweiligen Farben, dazwischen frischer Ingwer-Wurzelstock, Erdbeeren, Karotten, Birnen, Salatblaetter. Top-View, leicht von oben fotografiert.",
+          "elementProportions": { "product_photo": 50, "lifestyle_photo": 40, "solid_background": 10 },
+          "textOnImage": {
+            "visibleText": "SAFTKUR 1 SAFTKUR 2 SAFTKUR 3 SAFTKUR 4 SAFTKUR 5",
+            "textType": "product_title",
+            "origin": "baked_in",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": null
+        }
+      ],
+      "toolLayoutId": "split-w2s",
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/28c2531f-acad-4a5c-bedb-733a1e44ac18._CR0%2C0%2C750%2C500_SX750_SY750_.jpg",
+          "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c13767f7-7c9d-457d-b205-860b8aa473cd._CR55%2C0%2C500%2C500_SX750_SY750_.jpg"
+        ],
+        "videoCount": 0
+      }
+    },
+    {
+      "position": 6,
+      "moduleId": "saftkuren_mod_06",
+      "moduleName": "Image Modul Produkte ansehen Bridge",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 1,
+      "designIntent": "navigation_bridge",
+      "designIntentDetail": "Schmales Bridge-Modul mit Produkte-ansehen-Button. Leitet vom Lifestyle-Pair zur Produkt-Tile-Row ueber.",
+      "structuralPattern": "Heller Hintergrund mit weichem Bild-Anschnitt der Saftkur-Reihe, links unten eine schwarze Pill-Button mit der Beschriftung Produkte ansehen.",
+      "moduleFunction": "Konversions-Bruecke: leitet den emotional vorbereiteten Nutzer zum unmittelbar folgenden Produkt-Showcase. Funktioniert als sichtbarer Sprungpunkt in das Sortiment.",
+      "relationToPrevious": "summarizes_above",
+      "relationToNext": "hands_off_to_navigation",
+      "visualBridge": "shared_subject_class",
+      "copyBridge": "poses_question_for_below",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "Produkte ansehen",
+        "textType": "cta",
+        "origin": "layered_text",
+        "headline": null,
+        "subline": null,
+        "cta": "Produkte ansehen",
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "text_image",
+          "toolTileType": "image_text",
+          "toolImageType": "narrow_banner",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0DFMLSLPH", "ctaLabel": "Produkte ansehen" },
+          "tileContentTopic": {
+            "primarySubject": "Sortiment Sprung CTA",
+            "productOrCategoryRef": null,
+            "intent": "convert",
+            "rolePosition": "Bridge CTA"
+          },
+          "visualContent": "Schmaler Streifen mit hellem Foto-Ausschnitt der sechs Saftkur-Flaschen oben. Unten links schwarze Pill-Button mit weisser Schrift Produkte ansehen.",
+          "elementProportions": { "product_photo": 70, "cta_button": 15, "solid_background": 15 },
+          "textOnImage": {
+            "visibleText": "Produkte ansehen",
+            "textType": "cta",
+            "origin": "layered_text",
+            "headline": null,
+            "subline": null,
+            "cta": "Produkte ansehen",
+            "directionCues": null
+          },
+          "ctaText": "Produkte ansehen",
+          "linksTo": "Saftkur Produktseite"
+        }
+      ],
+      "toolLayoutId": "1",
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": ["Produkte ansehen"],
+        "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/6e408a64-59bd-4598-98cd-1f00f7227728._CR15%2C111%2C1905%2C493_SX1500_.jpg"],
+        "videoCount": 0
+      }
+    },
+    {
+      "position": 7,
+      "moduleId": "saftkuren_mod_07",
+      "moduleName": "Tile Row 3-fach Saftkur Sets 3 5 7 Tage",
+      "layoutType": "product_grid_featured",
+      "layoutShape": "grid_three_columns",
+      "tileCount": 3,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Drei nebeneinander stehende Produkt-Karten mit Saftkur-Sets in den Varianten 7, 3 und 5 Tage. Jede Karte mit Sticker-Tag fuer die Tage-Anzahl, Preis und Liter-Preis.",
+      "structuralPattern": "Drei gleich grosse Produktkarten, jede mit Hero-Composition aus Saftkur-Flaschen-Lineup und dekorativen Frischeelementen (Ingwer, Karotten, Kuerbis-Anschnitt). Gelber Anhaenger-Sticker oben rechts mit Tage-Zahl.",
+      "moduleFunction": "Konversions-Punkt: zeigt die drei verfuegbaren Saftkur-Set-Laengen direkt nebeneinander. Bedient sowohl Probierer (3-Tage) als auch Disziplin-Sucher (7-Tage).",
+      "relationToPrevious": "lists_subordinate_options",
+      "relationToNext": "repeats_pattern_to_next",
+      "visualBridge": "shared_subject_class",
+      "copyBridge": "answers_above_question",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "7 TAGE 3 TAGE 5 TAGE",
+        "textType": "product_title",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "product_card_1of3",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0DFMMBJWC", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Saftkur Set 7 Tage",
+            "productOrCategoryRef": "B0DFMMBJWC",
+            "intent": "convert",
+            "rolePosition": "Long Set"
+          },
+          "visualContent": "Gruppen-Komposition aus etwa 12 Saftkur-Flaschen vor dunkelroten und gruenen Spritzern, mit Karotten, Ingwer und Kuerbis als Frischeelementen. Gelber Anhaenger-Sticker oben rechts 7 TAGE. Preis darunter 185,40 EUR (40,39 EUR/l).",
+          "elementProportions": { "product_photo": 80, "decorative_elements": 10, "text": 5, "badge": 5 },
+          "textOnImage": {
+            "visibleText": "7 TAGE 185,40 EUR 40,39 EUR/l",
+            "textType": "product_title",
+            "origin": "amazon_overlay",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "ASIN Saftkur 7-Tage"
+        },
+        {
+          "position": 2,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "product_card_2of3",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0DFMLSLPH", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Saftkur Set 3 Tage",
+            "productOrCategoryRef": "B0DFMLSLPH",
+            "intent": "convert",
+            "rolePosition": "Entry Set"
+          },
+          "visualContent": "Aehnliche Komposition wie Tile 1 aber mit 5 Flaschen, gelber Anhaenger 3 TAGE. Preis 85,40 EUR (18,61 EUR/l).",
+          "elementProportions": { "product_photo": 80, "decorative_elements": 10, "text": 5, "badge": 5 },
+          "textOnImage": {
+            "visibleText": "3 TAGE 85,40 EUR 18,61 EUR/l",
+            "textType": "product_title",
+            "origin": "amazon_overlay",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "ASIN Saftkur 3-Tage"
+        },
+        {
+          "position": 3,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "product_card_3of3",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0DFMM4TTX", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Saftkur Set 5 Tage",
+            "productOrCategoryRef": "B0DFMM4TTX",
+            "intent": "convert",
+            "rolePosition": "Medium Set"
+          },
+          "visualContent": "Aehnliche Komposition mit ca. 8 Flaschen, gelber Anhaenger 5 TAGE. Preis 138,40 EUR (30,15 EUR/l).",
+          "elementProportions": { "product_photo": 80, "decorative_elements": 10, "text": 5, "badge": 5 },
+          "textOnImage": {
+            "visibleText": "5 TAGE 138,40 EUR 30,15 EUR/l",
+            "textType": "product_title",
+            "origin": "amazon_overlay",
+            "headline": null,
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "ASIN Saftkur 5-Tage"
+        }
+      ],
+      "toolLayoutId": "3grid",
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/I/71fyxKnH4-L._AC_CR0%2C0%2C0%2C0_SX750_.jpg",
+          "https://m.media-amazon.com/images/I/71qBgilyFzL._AC_CR0%2C0%2C0%2C0_SX375_.jpg",
+          "https://m.media-amazon.com/images/I/71-dXVHnP0L._AC_CR0%2C0%2C0%2C0_SX375_.jpg"
+        ],
+        "videoCount": 0
+      }
+    },
+    {
+      "position": 8,
+      "moduleId": "saftkuren_mod_08",
+      "moduleName": "Tile Row 3-fach Better Balance Sets 3 5 7 Tage",
+      "layoutType": "product_grid_featured",
+      "layoutShape": "grid_three_columns",
+      "tileCount": 3,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Parallele Tile-Row zur Modul 7, aber mit Better Balance Set-Variante (kombinierte Saftkur mit Ergaenzungs-Box). Wieder drei Tage-Optionen 3, 5, 7.",
+      "structuralPattern": "Identische Komposition wie Modul 7 mit drei Karten nebeneinander, jeweils mit hellbrauner BETTER BALANCE Karton-Box neben den Flaschen. Gelber Anhaenger-Sticker mit Tage-Zahl.",
+      "moduleFunction": "Spiegelung des Saftkur-Set-Showcase fuer die Premium-Variante Better Balance. Zeigt die zweite Produktlinie der Marke in der gleichen Sortier-Logik.",
+      "relationToPrevious": "repeats_pattern",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "shared_typography_treatment",
+      "copyBridge": "continues_idea",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "BETTER BALANCE 3 TAGE 5 TAGE 7 TAGE",
+        "textType": "product_title",
+        "origin": "baked_in",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "product_card_1of3",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0G81CTV55", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Better Balance Set 3 Tage",
+            "productOrCategoryRef": "B0G81CTV55",
+            "intent": "convert",
+            "rolePosition": "Entry Premium Set"
+          },
+          "visualContent": "Saftkur-Flaschen-Gruppe vor gelb-orangenen Splash-Elementen, plus hellbraune BETTER BALANCE Karton-Box mit weissen Logo-Akzenten. Gelber Anhaenger 3 TAGE. Preis 95,40 EUR (20,78 EUR/l).",
+          "elementProportions": { "product_photo": 70, "decorative_elements": 15, "text": 10, "badge": 5 },
+          "textOnImage": {
+            "visibleText": "BETTER BALANCE 3 TAGE 95,40 EUR 20,78 EUR/l",
+            "textType": "product_title",
+            "origin": "amazon_overlay",
+            "headline": "BETTER BALANCE",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "ASIN Better Balance 3-Tage"
+        },
+        {
+          "position": 2,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "product_card_2of3",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0G82B62F7", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Better Balance Set 5 Tage",
+            "productOrCategoryRef": "B0G82B62F7",
+            "intent": "convert",
+            "rolePosition": "Medium Premium Set"
+          },
+          "visualContent": "Aehnliche Komposition mit BETTER BALANCE Box, mehr Flaschen, gelber Anhaenger 5 TAGE.",
+          "elementProportions": { "product_photo": 70, "decorative_elements": 15, "text": 10, "badge": 5 },
+          "textOnImage": {
+            "visibleText": "BETTER BALANCE 5 TAGE",
+            "textType": "product_title",
+            "origin": "amazon_overlay",
+            "headline": "BETTER BALANCE",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "ASIN Better Balance 5-Tage"
+        },
+        {
+          "position": 3,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "product_card_3of3",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0G8GV17SK", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Better Balance Set 7 Tage",
+            "productOrCategoryRef": "B0G8GV17SK",
+            "intent": "convert",
+            "rolePosition": "Long Premium Set"
+          },
+          "visualContent": "Aehnliche Komposition mit BETTER BALANCE Box, vollstaendige Flaschen-Reihe, gelber Anhaenger 7 TAGE.",
+          "elementProportions": { "product_photo": 70, "decorative_elements": 15, "text": 10, "badge": 5 },
+          "textOnImage": {
+            "visibleText": "BETTER BALANCE 7 TAGE",
+            "textType": "product_title",
+            "origin": "amazon_overlay",
+            "headline": "BETTER BALANCE",
+            "subline": null,
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "ASIN Better Balance 7-Tage"
+        }
+      ],
+      "toolLayoutId": "3grid",
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/I/71ShHuINk2L._AC_CR0%2C0%2C0%2C0_SX750_.jpg",
+          "https://m.media-amazon.com/images/I/71BhpqooedL._AC_CR0%2C0%2C0%2C0_SX375_.jpg",
+          "https://m.media-amazon.com/images/I/71JYS7LflwL._AC_CR0%2C0%2C0%2C0_SX375_.jpg"
+        ],
+        "videoCount": 0
+      }
+    },
+    {
+      "position": 9,
+      "moduleId": "saftkuren_mod_09",
+      "moduleName": "Lifestyle Hero Paar packt Saftkur Box aus",
+      "layoutType": "hero_banner_tall",
+      "layoutShape": "full_width_tall",
+      "tileCount": 1,
+      "designIntent": "emotional_hook",
+      "designIntentDetail": "Grosses Lifestyle-Foto von zwei Menschen, die auf dem Boden sitzen und gemeinsam eine Saftkur-Lieferung auspacken. Visualisiert Auspack-Moment und gemeinsames Konsum-Ritual.",
+      "structuralPattern": "Vollflaechiges horizontales Lifestyle-Foto, im Vordergrund eine geoeffnete Karton-Box mit Saftkur-Flaschen sichtbar, dahinter die zwei sitzenden Personen, Pflanze rechts im Vordergrund.",
+      "moduleFunction": "Emotionale Pause vor der finalen Einzelflaschen-Sektion. Vermittelt, dass die Saftkur als Paar-Ritual und freudiger Unboxing-Moment funktioniert.",
+      "relationToPrevious": "proves_above_claim",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "shared_setting",
+      "copyBridge": "none",
+      "heroArchetype": "product_in_setting_with_claim",
+      "textOnImage": {
+        "visibleText": null,
+        "textType": "none",
+        "origin": "none",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "lifestyle",
+          "toolTileType": "image",
+          "toolImageType": "hero_full",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0DFMLSLPH", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Saftkur Unboxing Paar Moment",
+            "productOrCategoryRef": "B0DFMLSLPH",
+            "intent": "story",
+            "rolePosition": "Lifestyle Hero"
+          },
+          "visualContent": "Zwei Personen in Jeans und beigen Pullovern sitzen am Boden vor einem hellgrauen Sofa, gemeinsam um eine geoeffnete Karton-Box knien. In der Box stehen sechs Saftkur-Flaschen mit BIO-Sechseck-Logo aufrecht. Rechts im Vordergrund eine gruene Zimmerpflanze. Natuerliches Tageslicht, warmer Innenraum.",
+          "elementProportions": { "lifestyle_photo": 80, "product_photo": 20 },
+          "textOnImage": { "visibleText": null, "textType": "none", "origin": "none", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "Saftkur Produktseite"
+        }
+      ],
+      "toolLayoutId": "1",
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/432b1402-a545-4731-a625-ef4123824ff1._CR0%2C0%2C1577%2C789_SX1500_.jpg"],
+        "videoCount": 0
+      }
+    },
+    {
+      "position": 10,
+      "moduleId": "saftkuren_mod_10",
+      "moduleName": "Tile Row 6-fach Einzel Saefte SAFTKUR 1 bis 6",
+      "layoutType": "product_grid_line",
+      "layoutShape": "grid_three_columns",
+      "tileCount": 6,
+      "designIntent": "product_showcase",
+      "designIntentDetail": "Sechs Produkt-Karten, jeweils mit einer Einzel-Saftkur-Variante in 12er-Vorratspack-Verpackung. Jeder Saft mit eigenem Produkttitel und identischem Preis.",
+      "structuralPattern": "Zwei-zeiliger Grid mit je drei Karten. Jede Karte zeigt einen Karton mit zwoelf Glasflaschen einer Sortenvariante, links Beschreibungs-Text in zwei Zeilen plus Inhaltsangabe und Preis darunter. Alle Karten gleich aufgebaut.",
+      "moduleFunction": "Tiefes Produkt-Sortiment: zeigt die sechs Einzel-Saefte (SAFTKUR 1 bis SAFTKUR 6), die zusammen das Saftkur-Sortiment der Marke bilden. Ermoeglicht gezielten Kauf einzelner Sorten ausserhalb des Kombi-Sets.",
+      "relationToPrevious": "zooms_into_above_subject",
+      "relationToNext": "sets_up_next",
+      "visualBridge": "shared_subject_class",
+      "copyBridge": "continues_idea",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "Kloster Kitchen Bio Hafer Saft 12x 250 ml Vegan 150 kcal pro Saft Vorratspack zzgl. 3,00 EUR Einwegpfand Kloster Kitchen Bio Rote Beete Saft 12x 250 ml Vegan Kraeftig und natuerlich 87,5 kcal pro Saft Vorratspack",
+        "textType": "product_title",
+        "origin": "amazon_overlay",
+        "headline": null,
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "product_card_1of6",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0GGSYCJHQ", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Bio Hafer Saft (Saftkur 1) 12x 250 ml",
+            "productOrCategoryRef": "B0GGSYCJHQ",
+            "intent": "convert",
+            "rolePosition": "Single Sorte 1"
+          },
+          "visualContent": "Hellbrauner Karton mit zwoelf Hafer-Saft-Flaschen, Aufschrift SAFTKUR 1 plus 12x 250ml plus BIO-Sechseck. Frontalsicht.",
+          "elementProportions": { "product_photo": 90, "solid_background": 10 },
+          "textOnImage": {
+            "visibleText": "Kloster Kitchen Bio Hafer Saft 12x 250 ml Vegan 150 kcal pro Saft Vorratspack zzgl. 3,00 EUR Einwegpfand 36,90 EUR (12,30 EUR/l)",
+            "textType": "product_title",
+            "origin": "amazon_overlay",
+            "headline": "Kloster Kitchen Bio Hafer Saft",
+            "subline": "12x 250 ml, Vegan, 150 kcal pro Saft, Vorratspack",
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "ASIN Bio Hafer Saft"
+        },
+        {
+          "position": 2,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "product_card_2of6",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0GGSGQTK8", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Bio Saftkur 2 (rot) 12x 250 ml",
+            "productOrCategoryRef": "B0GGSGQTK8",
+            "intent": "convert",
+            "rolePosition": "Single Sorte 2"
+          },
+          "visualContent": "Karton mit zwoelf SAFTKUR 2 Flaschen, dunkelrote Fluessigkeit (vermutlich Cranberry oder Beerenmix). Vorratspack 12x 250ml. Preis 36,90 EUR.",
+          "elementProportions": { "product_photo": 90, "solid_background": 10 },
+          "textOnImage": { "visibleText": "36,90 EUR (12,30 EUR/l)", "textType": "product_title", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "ASIN Saftkur 2"
+        },
+        {
+          "position": 3,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "product_card_3of6",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0GGRZL2L9", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Bio Saftkur 3 (gruen) 12x 250 ml",
+            "productOrCategoryRef": "B0GGRZL2L9",
+            "intent": "convert",
+            "rolePosition": "Single Sorte 3"
+          },
+          "visualContent": "Karton mit zwoelf SAFTKUR 3 Flaschen, dunkelgruene Fluessigkeit (vermutlich Spinat-Algen-Mix). Preis 36,90 EUR.",
+          "elementProportions": { "product_photo": 90, "solid_background": 10 },
+          "textOnImage": { "visibleText": "36,90 EUR (12,30 EUR/l)", "textType": "product_title", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "ASIN Saftkur 3"
+        },
+        {
+          "position": 4,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "product_card_4of6",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0GGRG2M4Z", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Bio Rote Beete Saft (Saftkur 4) 12x 250 ml",
+            "productOrCategoryRef": "B0GGRG2M4Z",
+            "intent": "convert",
+            "rolePosition": "Single Sorte 4"
+          },
+          "visualContent": "Karton mit zwoelf SAFTKUR 4 Flaschen, kraeftig rot-violetter Saft. Produktbeschreibung Kloster Kitchen Bio Rote Beete Saft, 12x 250 ml, Vegan, Kraeftig und natuerlich, 87,5 kcal pro Saft, Vorratspack.",
+          "elementProportions": { "product_photo": 90, "solid_background": 10 },
+          "textOnImage": {
+            "visibleText": "Kloster Kitchen Bio Rote Beete Saft 12x 250 ml Vegan Kraeftig und natuerlich 87,5 kcal pro Saft Vorratspack 36,90 EUR (12,30 EUR/l)",
+            "textType": "product_title",
+            "origin": "amazon_overlay",
+            "headline": "Kloster Kitchen Bio Rote Beete Saft",
+            "subline": "12x 250 ml, Vegan, Kraeftig und natuerlich, 87,5 kcal pro Saft, Vorratspack",
+            "cta": null,
+            "directionCues": null
+          },
+          "ctaText": null,
+          "linksTo": "ASIN Bio Rote Beete Saft"
+        },
+        {
+          "position": 5,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "product_card_5of6",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0GGJ22LSP", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Bio Saftkur 5 (gelb) 12x 250 ml",
+            "productOrCategoryRef": "B0GGJ22LSP",
+            "intent": "convert",
+            "rolePosition": "Single Sorte 5"
+          },
+          "visualContent": "Karton mit zwoelf SAFTKUR 5 Flaschen, honig-gelber Saft. Preis 36,90 EUR.",
+          "elementProportions": { "product_photo": 90, "solid_background": 10 },
+          "textOnImage": { "visibleText": "36,90 EUR (12,30 EUR/l)", "textType": "product_title", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "ASIN Saftkur 5"
+        },
+        {
+          "position": 6,
+          "imageCategory": "product_tile_asin",
+          "toolTileType": "product_grid",
+          "toolImageType": "product_card_6of6",
+          "link": { "clickable": true, "linkType": "asin", "linkTarget": "B0GGHW2QKX", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Bio Saftkur 6 (orange) 12x 250 ml",
+            "productOrCategoryRef": "B0GGHW2QKX",
+            "intent": "convert",
+            "rolePosition": "Single Sorte 6"
+          },
+          "visualContent": "Karton mit zwoelf SAFTKUR 6 Flaschen, oranger Saft (Karotten-Pfirsich-Mix). Preis 36,90 EUR.",
+          "elementProportions": { "product_photo": 90, "solid_background": 10 },
+          "textOnImage": { "visibleText": "36,90 EUR (12,30 EUR/l)", "textType": "product_title", "origin": "amazon_overlay", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "ASIN Saftkur 6"
+        }
+      ],
+      "toolLayoutId": "6grid",
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": [],
+        "imageUrls": [
+          "https://m.media-amazon.com/images/I/61AaY6pLIZL._AC_CR0%2C0%2C0%2C0_SX750_.jpg",
+          "https://m.media-amazon.com/images/I/61cv9TY-sJL._AC_CR0%2C0%2C0%2C0_SX375_.jpg",
+          "https://m.media-amazon.com/images/I/6161XtDs2qL._AC_CR0%2C0%2C0%2C0_SX375_.jpg",
+          "https://m.media-amazon.com/images/I/61PId1K4beL._AC_CR0%2C0%2C0%2C0_SX750_.jpg",
+          "https://m.media-amazon.com/images/I/61msBy8K7EL._AC_CR0%2C0%2C0%2C0_SX375_.jpg",
+          "https://m.media-amazon.com/images/I/618i8yPVupL._AC_CR0%2C0%2C0%2C0_SX375_.jpg"
+        ],
+        "videoCount": 0
+      }
+    },
+    {
+      "position": 11,
+      "moduleId": "saftkuren_mod_11",
+      "moduleName": "Awards Banner Ausgezeichnete Innovationen",
+      "layoutType": "editorial_banner",
+      "layoutShape": "full_width_banner",
+      "tileCount": 4,
+      "designIntent": "editorial",
+      "designIntentDetail": "Identischer Awards-Banner wie auf allen Pages des Stores. Vier Trust-Tiles auf dunkelgruenem Ingwerblatt-Hintergrund, Headline AUSGEZEICHNETE INNOVATIONEN in weisser Versalien-Sans-Serif. Verlinkt zur Ueber-Uns-Page.",
+      "structuralPattern": "Vollflaeche dunkelgruener Ingwerblatt-Hintergrund. Oben zentrierte weisse Versalien-Headline. Darunter vier nebeneinander stehende Trust-Tiles.",
+      "moduleFunction": "Trust-Loop am Page-Ende. Brand-uebergreifend wiederholendes Element, das vier Auszeichnungen sammelt. Verlinkt zur Ueber-Uns-Page als vertiefende Markentransparenz.",
+      "relationToPrevious": "summarizes_above",
+      "relationToNext": "closes_chapter",
+      "visualBridge": "hard_break_intentional",
+      "copyBridge": "fresh_topic",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "AUSGEZEICHNETE INNOVATIONEN",
+        "textType": "headline",
+        "origin": "baked_in",
+        "headline": "AUSGEZEICHNETE INNOVATIONEN",
+        "subline": null,
+        "cta": null,
+        "directionCues": null
+      },
+      "tiles": [
+        {
+          "position": 1,
+          "imageCategory": "benefit",
+          "toolTileType": "image_text",
+          "toolImageType": "award_tile_1of4",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "F031D76B-9B76-426A-93A9-2EBBCB5150CF", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "German Brand Award 25 Winner",
+            "productOrCategoryRef": null,
+            "intent": "trust",
+            "rolePosition": "Award Tile"
+          },
+          "visualContent": "Weisses German Brand Award Wortbildmarken-Logo mit eckigem Banner-Element, darunter Schrift 25 winner. Auf dunkelgruenem Ingwerblatt-Hintergrund.",
+          "elementProportions": { "logo": 70, "photographic_background": 30 },
+          "textOnImage": { "visibleText": "german brand award 25 winner", "textType": "headline", "origin": "baked_in", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "Ueber Uns Page"
+        },
+        {
+          "position": 2,
+          "imageCategory": "benefit",
+          "toolTileType": "image_text",
+          "toolImageType": "award_tile_2of4",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "F031D76B-9B76-426A-93A9-2EBBCB5150CF", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "German Brand Award 25 Product Brand of the Year",
+            "productOrCategoryRef": null,
+            "intent": "trust",
+            "rolePosition": "Award Tile"
+          },
+          "visualContent": "Weisses German Brand Award Logo, darunter Schrift 25 product brand of the year. Gleicher Hintergrund.",
+          "elementProportions": { "logo": 70, "photographic_background": 30 },
+          "textOnImage": { "visibleText": "german brand award 25 product brand of the year", "textType": "headline", "origin": "baked_in", "headline": null, "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "Ueber Uns Page"
+        },
+        {
+          "position": 3,
+          "imageCategory": "benefit",
+          "toolTileType": "image_text",
+          "toolImageType": "award_tile_3of4",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "F031D76B-9B76-426A-93A9-2EBBCB5150CF", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Produkt Innovation in Glas",
+            "productOrCategoryRef": null,
+            "intent": "trust",
+            "rolePosition": "Award Tile"
+          },
+          "visualContent": "Weisses abstraktes Logo (organische Linien-Form), daneben Schriftzug PRODUKT INNOVATION IN GLAS.",
+          "elementProportions": { "logo": 50, "text": 30, "photographic_background": 20 },
+          "textOnImage": { "visibleText": "PRODUKT INNOVATION IN GLAS", "textType": "headline", "origin": "baked_in", "headline": "PRODUKT INNOVATION IN GLAS", "subline": null, "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "Ueber Uns Page"
+        },
+        {
+          "position": 4,
+          "imageCategory": "benefit",
+          "toolTileType": "image_text",
+          "toolImageType": "award_tile_4of4",
+          "link": { "clickable": true, "linkType": "page", "linkTarget": "F031D76B-9B76-426A-93A9-2EBBCB5150CF", "ctaLabel": null },
+          "tileContentTopic": {
+            "primarySubject": "Geprueftes DIN Siegel Bio Ingwer Shot",
+            "productOrCategoryRef": null,
+            "intent": "trust",
+            "rolePosition": "Award Tile"
+          },
+          "visualContent": "Helles Pruefsiegel-Etikett mit Headline Geprueft Qualitaet, Produktname Kloster Kitchen Bio Ingwer Shot, Logo Deutsches Institut fuer Verbraucherschutz.",
+          "elementProportions": { "logo": 60, "text": 30, "photographic_background": 10 },
+          "textOnImage": { "visibleText": "Geprueft Qualitaet Kloster Kitchen Bio Ingwer Shot Deutsches Institut fuer Verbraucherschutz", "textType": "headline", "origin": "baked_in", "headline": "Geprueft Qualitaet", "subline": "Kloster Kitchen Bio Ingwer Shot", "cta": null, "directionCues": null },
+          "ctaText": null,
+          "linksTo": "Ueber Uns Page"
+        }
+      ],
+      "toolLayoutId": "4grid",
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": ["AUSGEZEICHNETE INNOVATIONEN"],
+        "ctaLabels": [],
+        "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2eb471fe-f331-4cbc-89cd-8896df9c0d33._CR0%2C0%2C1280%2C275_SX1500_.jpg"],
+        "videoCount": 0
+      }
+    },
+    {
+      "position": 12,
+      "moduleId": "saftkuren_mod_12",
+      "moduleName": "Amazon Share Footer",
+      "layoutType": "amazon_share_footer",
+      "layoutShape": "chrome_thin",
+      "tileCount": 0,
+      "designIntent": "mimics_native_chrome",
+      "designIntentDetail": "Amazon-eigener Share-Block, identisch zu allen Pages.",
+      "structuralPattern": "Zentriert auf hellem Hintergrund, Teilen-Button, Disclaimer, darunter dunkler Streifen Zurueck zum Seitenanfang.",
+      "moduleFunction": "Amazon Plattform-Footer, in der Generierungs-Pipeline herauszufiltern.",
+      "relationToPrevious": "closes_chapter",
+      "relationToNext": "none",
+      "visualBridge": "hard_break_intentional",
+      "copyBridge": "none",
+      "heroArchetype": null,
+      "textOnImage": {
+        "visibleText": "Teilen Teilen Sie diese Seite mit Ihren Freunden Zurueck zum Seitenanfang",
+        "textType": "section_label",
+        "origin": "amazon_chrome",
+        "headline": null,
+        "subline": null,
+        "cta": "Teilen",
+        "directionCues": null
+      },
+      "tiles": [],
+      "dom": {
+        "widgetClass": "EditorialRow",
+        "visibleHeadings": [],
+        "ctaLabels": ["Teilen", "Zurueck zum Seitenanfang"],
+        "imageUrls": [],
+        "videoCount": 0
+      }
+    }
+  ],
+  "voiceMarkers": {
+    "voiceRegister": "nahbar",
+    "sentencePattern": "komma_erklaerung",
+    "vocabularyField": "kulinarisch",
+    "claimType": "herkunft_prozess",
+    "rhetoricalDevice": "konkrete_zahl"
+  },
+  "voiceExamples": [
+    "Unsere Saftkuren mit 6 Fastensaefte pro Tag und insgesamt 18 verschiedenen Obst-, Gemuese-, und Getreidesorten.",
+    "Produkte ansehen",
+    "12x 250 ml, Vegan, Kraeftig und natuerlich, 87,5 kcal pro Saft, Vorratspack"
+  ],
+  "pageAnalysis": {
+    "tonalityVisual": "Erdige, natuerliche Lifestyle-Optik mit gedaempften Naturtoenen (Beige, Off-White, dunkles Glas-Gruen, BIO-Gold, kraeftiges Rot-Violett der Rote-Beete-Sorte). Frischeelemente (Ingwer, Karotten, Beeren, Pflanzen) sind durchgehend als Authentizitaets-Anker eingebettet. Hero-Banner ueber alle Pages konsistent (Ingwerblatt-Hintergrund).",
+    "ctaStrategies": "Eine einzige sichtbare CTA-Pille (Produkte ansehen in Modul 6) leitet vom Lifestyle zur Produkt-Tile-Row. Konversion sonst ueber direkte ASIN-Karten in 4 Produkt-Showcase-Modulen (3+3+6 = 12 ASINs). Trust-Aufbau via Awards-Banner am Ende mit Page-Link zur Ueber-Uns-Seite.",
+    "contentDepth": "Tiefes Produkt-Sortiment: zwei Set-Linien (klassische Saftkur und Better Balance), jede in drei Tage-Varianten, plus sechs Einzelsaefte als gezielte Einzelkauf-Option. Insgesamt 12 unique ASINs auf einer Seite. Lifestyle-Validation in zwei Modulen (Trinken plus Unboxing).",
+    "useForArchetype": "Eignet sich als Vorlage fuer Detox-, Saft- und Functional-Beverage-Hubs mit klar gestaffeltem Set-Sortiment (kurz, mittel, lang) plus Einzel-Sorten-Sortiment. Pattern Section-Intro plus Lifestyle plus Tile-Row 3-fach plus Tile-Row 6-fach plus Awards ist uebertragbar.",
+    "moduleClusters": [
+      "Cluster 1 Markenrahmen: Modul 1 Header.",
+      "Cluster 2 Atmospherischer Auftakt: Modul 2 Video-Hero plus Modul 3 Section Intro.",
+      "Cluster 3 Sortiments-Preview: Modul 4 Lineup-Hero plus Modul 5 Lifestyle-Pair plus Modul 6 CTA-Bridge.",
+      "Cluster 4 Produkt-Showcase Sets: Modul 7 Saftkur 3-Tage-Variante plus Modul 8 Better Balance 3-Tage-Variante (parallele Sortier-Logik).",
+      "Cluster 5 Emotional Bridge plus Einzel-Sorten: Modul 9 Unboxing-Hero plus Modul 10 6-fach Einzelsaefte.",
+      "Cluster 6 Trust-Loop: Modul 11 Awards-Banner.",
+      "Cluster 7 Plattform-Chrome: Modul 12 Share-Footer."
+    ]
+  },
+  "pageArchitecture": "Die Saftkuren-Page fuehrt den Nutzer in sieben funktionalen Bloecken: Markenrahmen sticky, atmosphaerischer Video-Auftakt plus rationale Headline, Sortiments-Lineup mit Lifestyle und Conversion-Bridge, paralleler Showcase der zwei Set-Linien (klassische Saftkur und Better Balance) jeweils in drei Tage-Optionen, emotionales Unboxing-Hero, Einzelsorten-Sortiment in 6-fach-Grid, und schliesslich Awards-Trust-Loop mit Link zu Ueber Uns. Bedarfsfall ist die Detox- oder Fasten-Routine fuer gesundheits-bewusste Erwachsene, die entweder einen kompakten 3-Tage-Einstieg, eine 5- oder 7-Tage Kur oder gezielte Einzelsaefte als Vorratspack suchen.",
+  "openQuestions": [
+    "Modul 2 ist Phase-1-Video-Modul mit 1 Video-Tag, Vision sieht unscharfen Bottle-Closeup-Loop. Welche Sorte exakt im Loop ist (Saftkur 1 bis 6) waere ueber Video-Frame-Extraktion zu pruefen. Aktuelle Vermutung Saftkur 3 (dunkelgruen).",
+    "Tile-Texte auf den Better-Balance-Tiles (Position 2 und 3) waren in den Screenshots teilweise abgeschnitten, exakte Preise wurden nicht erfasst. Eine zusaetzliche Vision-Pruefung der Tiles 7-2, 7-3, 8-2, 8-3, 10-2, 10-3, 10-5, 10-6 koennte die wortgetreuen Preise ergaenzen.",
+    "Modul 4 wurde im Phase-1-DOM-File als Story-Tile-Pair mit Tile-Count 16 erfasst (1970 px im 1512-Viewport, 743 px im 1826-Viewport). Vision sieht jedoch nur den Hero-Lineup oben, nicht den vermeintlichen Story-Pair-Inhalt darunter. Vermutlich war Modul 4 in der ersten Messung ein zusammengesetztes Containermodul, das im breiten Viewport verkuerzt wird. Hier waere ein direkter DOM-Strukturlauf hilfreich um zwischen Container und Layout-Component zu unterscheiden."
+  ]
+}

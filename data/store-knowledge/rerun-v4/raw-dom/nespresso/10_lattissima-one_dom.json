@@ -1,0 +1,26 @@
+{
+  "_meta": {
+    "store": "nespresso",
+    "pageSlug": "10_lattissima-one",
+    "pageName": "Lattissima one",
+    "pageId": "E0DF17AD-CF05-4AF0-8D67-A31E3D754D92",
+    "url": "https://www.amazon.de/stores/page/E0DF17AD-CF05-4AF0-8D67-A31E3D754D92",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_compact",
+    "scrollHeight": 4084,
+    "viewport": { "w": 1599, "h": 842 },
+    "domRowsTotal": 6,
+    "contentModulesCount": 6
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height": 395, "widgetType": "Header",       "tileCount": 0, "imgCount":  1, "videoCount":  0, "productCount": 0, "asinCount": 0, "note": "Nav header." },
+    { "domRowIdx": 1, "top":  502, "height": 517, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 32, "videoCount": 18, "productCount": 0, "asinCount": 1, "note": "Rich-Media-Tile Modell-Profil mit Image+Video-Karussell.", "sampleAsins": ["B08VD5FS1D"] },
+    { "domRowIdx": 2, "top": 1018, "height": 553, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 32, "videoCount": 18, "productCount": 0, "asinCount": 1, "note": "Rich-Media-Tile Modell-Profil (zweite Variante).", "sampleAsins": ["B08VCXM3VH"] },
+    { "domRowIdx": 3, "top": 1571, "height": 743, "widgetType": "EditorialRow", "tileCount": 1, "imgCount":  0, "videoCount":  1, "productCount": 0, "asinCount": 0, "note": "Hero-Video Vollformat." },
+    { "domRowIdx": 4, "top": 2313, "height": 309, "widgetType": "EditorialRow", "tileCount": 1, "imgCount":  1, "videoCount":  0, "productCount": 0, "asinCount": 0, "note": "Section Intro / Brand-Statement Banner." },
+    { "domRowIdx": 5, "top": 2622, "height": 200, "widgetType": "EditorialRow", "tileCount": 1, "imgCount":  0, "videoCount":  0, "productCount": 0, "asinCount": 0, "note": "Amazon Share Footer." }
+  ],
+  "openQuestionsLocal": [
+    "Lattissima One folgt aehnlichem rich_media_tile_pattern wie Gran Lattissima: 2 Tile-Varianten plus Hero-Video plus Section-Banner."
+  ]
+}

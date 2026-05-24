@@ -2,6 +2,32 @@
 
 Dieses Projekt erzeugt Amazon Brand Stores für die Agentur TEMOA. Die folgenden Regeln gelten verbindlich für jeden Output, jeden Prompt im Code und jede Antwort von Claude.
 
+## 0. Brand-spezifisch vs. strukturell-übertragbar (Generierungs-Pipeline)
+
+**Diese Regel ist die wichtigste für die Datenbasis und die Generierungs-Pipeline.** Wenn das Tool aus den Store-Analysen Brand Stores für neue Marken generiert, MUSS es zwischen zwei Kategorien von Informationen unterscheiden:
+
+**Strukturell-übertragbar** (darf zwischen Brands wiederverwendet werden):
+- Modul-Patterns (`layoutType`, `layoutShape`, `tileCount`)
+- Funktions-Rollen (`designIntent`, `moduleFunction` als abstrakte Beschreibung)
+- Sequenz-Beziehungen (`relationToPrevious`, `relationToNext`, `visualBridge`, `copyBridge`)
+- Tonalitäts-Klassifikation (`voiceMarkers` Tags wie `professionell`, `kontrast`, `konkrete_zahl`)
+- Hero-Archetypen-Kategorien (`product_in_setting_with_claim`, `seasonal_thematic` etc.)
+- Tool-Layout-Mapping (`toolLayoutId`, `toolImageType`, `toolTileType`)
+- Klassifikations-Enums (`imageCategory`, `textType`, `origin`)
+
+**Brand-spezifisch** (NUR für die Re-Generierung dieses einen Stores gültig, NIEMALS als Template auf andere Brands kopieren):
+- Konkrete Bildmotive, Settings, Farbpaletten (`visualContent`-Beschreibungen)
+- Wörtliche Texte, Headlines, Sublines, CTAs (`textOnImage.visibleText`, `voiceExamples`)
+- Konkrete Prüfsiegel, Awards-Logos, Pressezitate
+- Konkrete ASINs, Page-IDs, Brand-Logos
+- Vertikals-Kontext-Visuals wie Pflanzenhintergrund, Pool-Setting, Küchen-Setting
+
+**Beispiel zur Klarstellung:** Der kloster-kitchen-Awards-Banner zeigt vier Prüfsiegel auf einem grünen Ingwerblatt-Hintergrund. Strukturell-übertragbar ist nur das abstrakte Pattern: `editorial_banner` mit `imageCategory: benefit`, vier Award-Tiles, Headline `AUSGEZEICHNETE INNOVATIONEN`, Position am Page-Ende als Trust-Loop. Der Ingwerblatt-Hintergrund ist eine kontextuelle Brand-Entscheidung dieser Supplement-Marke (pflanzliche Inhaltsstoffe → pflanzliche Bildsprache) und gehört **niemals** als Template in einen Technik-, Möbel- oder Tech-Store. Die Generierungs-Pipeline darf für eine neue Marke nur das abstrakte Awards-Pattern übernehmen und muss für das Hintergrund-Visual eine zur neuen Marke passende Entscheidung treffen (z.B. Tech-Hintergrund für Tech-Marke, Outdoor-Hintergrund für Outdoor-Marke).
+
+Gleichermaßen gelten für `voiceMarkers` nur die Tags als übertragbar, nicht die `voiceExamples`. Die Beispielsätze aus kloster-kitchen ("Trink, was dir gut tut") sind Brand-Stil-Anker zur Demonstration der `voiceRegister: direkt` plus `rhetoricalDevice: kontrast` Tonalität, aber nie wörtlich für andere Brands zu übernehmen.
+
+Im v4-Schema ist diese Trennung in §0a `BLUEPRINT_EXTRACTION_PROMPT_V4.md` formell dokumentiert.
+
 ## 1. Schreibweise und Interpunktion
 
 ### Geltungsbereich

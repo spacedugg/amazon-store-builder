@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "v4-2026-05",
+  "store": "esn",
+  "brandName": "ESN (Elite Sports Nutrition)",
+  "storeUrl": "https://www.amazon.de/stores/ESN/page/F5F8CAD5-7990-44CF-9F5B-61DFFF5E8581",
+  "analyzedAt": "2026-05-23",
+  "methodology": "v4-top-10-pages-from-21-pages-express-from-phase1-doms-plus-per-page-blueprints",
+  "scopeNote": "Top 10 von 21 ESN-Pages erfasst (Stand 2026-05-23). Per-Page-Blueprints im Express-Modus aus Phase-1-DOMs generiert. Vision-Pass auf Hero-, Editorial- und Tile-Texten ausstehend (alle textOnImage Felder als screenshot_required markiert). Page-IDs aus esn_pages.json validiert: alle 10 Top-IDs sind live, keine Stale-Redirects.",
+  "navigation": {
+    "pageCount": 21,
+    "scopedPages": 10,
+    "structure": "Hierarchical (level 0 + level 1 + level 2)",
+    "pages": [
+      {"name": "Startseite", "level": 0, "pageId": "F5F8CAD5-7990-44CF-9F5B-61DFFF5E8581"},
+      {"name": "Bestseller", "level": 1, "pageId": "137F3F89-CAFA-407C-A947-6985172B0E8F"},
+      {"name": "Neuheiten", "level": 1, "pageId": "F2F0F62B-C596-4268-893C-6D98CC7D8AAB"},
+      {"name": "PROTEINE", "level": 1, "pageId": "05C54A75-8964-41E5-9C10-19EB32583205"},
+      {"name": "DESIGNER WHEY", "level": 2, "pageId": "8F9839F1-7792-40E9-BC87-D8253DB32928"},
+      {"name": "ISOCLEAR", "level": 2, "pageId": "F7E30D0D-D2C4-4493-BE92-B7F0C8ACFC5C"},
+      {"name": "FLEXPRESSO", "level": 2, "pageId": "2B83B00A-4B34-4164-AE99-370F051B7A19"},
+      {"name": "ISOWHEY HARDCORE", "level": 2, "pageId": "7A0AC72C-C59B-4C49-84EE-3E43C4D89AF1"},
+      {"name": "VITALSTOFFE", "level": 1, "pageId": "4903A282-E37D-4D91-BB9F-281622934C0B"},
+      {"name": "PERFORMANCE", "level": 1, "pageId": "58488065-5C6A-4494-A3DB-AB7D86AB0081"}
+    ]
+  },
+  "contentSummary": {
+    "pagesAnalyzed": 10,
+    "totalModulesAnalyzed": 60,
+    "totalUniqueAsinsAcrossPages": 110,
+    "wiederkehrendeModuleCrossPage": {
+      "amazon_nav_header_esn_marke": "alle 10 Pages mit identischem ESN-Wortbildmarke-Hero 1920x384",
+      "amazon_share_footer": "alle 10 Pages",
+      "image_banner_produktselektor": "8 von 10 Pages (alle ausser Neuheiten und Startseite-Modul-Position 7), wiederkehrendes PNG-Banner zu PRODUKTSELEKTOR Page-ID 2AFC0A42-A702-462D-B255-B5203C7449F8",
+      "image_banner_alle_produkte": "9 von 10 Pages mit identischer JPG-Bridge zu ALLE PRODUKTE Page-ID 9FED5CCC-6284-44BD-AD83-AAEEBF48E23F",
+      "hero_banner_lead_asin_plus_product_grid": "4 Sub-Category-Pages (Designer Whey, Isoclear, Flexpresso, Isowhey Hardcore) folgen identischem Hero-plus-ProductGrid-Pattern",
+      "hero_video_plus_product_grid_24_asins": "2 Hub-Pages (Vitalstoffe, Performance) folgen Video-Hero-plus-Vollsortiment-Pattern"
+    }
+  },
+  "pages": [
+    {"pageName": "Startseite", "pageSlug": "01_startseite", "pageId": "F5F8CAD5-7990-44CF-9F5B-61DFFF5E8581", "pageType": "startseite", "scrollHeight": 6073, "brandModules": 8, "voiceMarkers": {"voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "sportlich", "claimType": "benefit_funktional", "rhetoricalDevice": "none"}, "pageArchitecture": "Hero-Banner mit 5-ASIN-Lineup als Brand-Hero plus Tile-Verteiler-Sequenz (Image-Banner plus Tile-Pair plus Tile-Quad plus Tile-Pair) zu 8 Sub-Pages plus Image-Banner zu Alle-Produkte plus Image-Banner zu Produktselektor. Keine ProductGrid am Page-Ende."},
+    {"pageName": "Bestseller", "pageSlug": "02_bestseller", "pageId": "137F3F89-CAFA-407C-A947-6985172B0E8F", "pageType": "bestsellers", "scrollHeight": 5164, "brandModules": 5, "voiceMarkers": {"voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "sportlich", "claimType": "social_proof", "rhetoricalDevice": "none"}, "pageArchitecture": "Section-Intro Empfohlene Angebote plus ProductGrid 12 Bestseller-ASINs direkt nach Nav plus zwei Schluss-Bridges (Produktselektor, Alle Produkte)."},
+    {"pageName": "Neuheiten", "pageSlug": "03_neuheiten", "pageId": "F2F0F62B-C596-4268-893C-6D98CC7D8AAB", "pageType": "new_arrivals", "scrollHeight": 4295, "brandModules": 3, "voiceMarkers": {"voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "sportlich", "claimType": "benefit_funktional", "rhetoricalDevice": "none"}, "pageArchitecture": "ProductGrid 11 Neuheiten-ASINs direkt nach Nav ohne eigenen Page-Hero plus ein Schluss-Banner zu Alle Produkte. Entspricht produkt_grid_direkt_nach_nav_ohne_page_hero Pattern."},
+    {"pageName": "PROTEINE", "pageSlug": "04_proteine", "pageId": "05C54A75-8964-41E5-9C10-19EB32583205", "pageType": "hub_category", "scrollHeight": 4581, "brandModules": 5, "voiceMarkers": {"voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "sportlich", "claimType": "benefit_funktional", "rhetoricalDevice": "none"}, "pageArchitecture": "Hero-Video plus Tile-Quad-Verteiler zu 4 Protein-Sub-Linien (Designer Whey, Isoclear, Flexpresso, IsoWhey Hardcore) plus 2 Bridges. Kein ProductGrid auf der Hub-Page, Konversion via Sub-Page-Click."},
+    {"pageName": "DESIGNER WHEY", "pageSlug": "05_designer-whey", "pageId": "8F9839F1-7792-40E9-BC87-D8253DB32928", "pageType": "sub_category", "scrollHeight": 5733, "brandModules": 5, "voiceMarkers": {"voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "sportlich", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl"}, "pageArchitecture": "Hero-Banner mit Lead-ASIN-Hotspot plus ProductGrid 12 Geschmacks-Varianten plus 2 Schluss-Bridges. Pattern: hero_banner_lead_asin_plus_product_grid_varianten."},
+    {"pageName": "ISOCLEAR", "pageSlug": "06_isoclear", "pageId": "F7E30D0D-D2C4-4493-BE92-B7F0C8ACFC5C", "pageType": "sub_category", "scrollHeight": 5120, "brandModules": 5, "voiceMarkers": {"voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "sportlich", "claimType": "benefit_funktional", "rhetoricalDevice": "none"}, "pageArchitecture": "Identisches Sub-Category-Pattern: Hero-Banner mit Lead-ASIN plus ProductGrid 7 Geschmacks-Varianten plus 2 Schluss-Bridges."},
+    {"pageName": "FLEXPRESSO", "pageSlug": "07_flexpresso", "pageId": "2B83B00A-4B34-4164-AE99-370F051B7A19", "pageType": "sub_category", "scrollHeight": 4554, "brandModules": 5, "voiceMarkers": {"voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "sportlich", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl"}, "pageArchitecture": "Identisches Sub-Category-Pattern: Hero-Banner plus ProductGrid 5 Coffee-Varianten plus 2 Schluss-Bridges."},
+    {"pageName": "ISOWHEY HARDCORE", "pageSlug": "08_isowhey-hardcore", "pageId": "7A0AC72C-C59B-4C49-84EE-3E43C4D89AF1", "pageType": "sub_category", "scrollHeight": 4506, "brandModules": 5, "voiceMarkers": {"voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "sportlich", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl"}, "pageArchitecture": "Identisches Sub-Category-Pattern: Hero-Banner plus ProductGrid 4 Varianten plus 2 Schluss-Bridges."},
+    {"pageName": "VITALSTOFFE", "pageSlug": "09_vitalstoffe", "pageId": "4903A282-E37D-4D91-BB9F-281622934C0B", "pageType": "hub_category", "scrollHeight": 7978, "brandModules": 6, "voiceMarkers": {"voiceRegister": "professionell", "sentencePattern": "kurze_aussage", "vocabularyField": "naturwissenschaftlich", "claimType": "expertise_signal", "rhetoricalDevice": "konkrete_zahl"}, "pageArchitecture": "Hero-Video plus Editorial-Banner mit CTA plus massive ProductGrid 24 Vitalstoff-ASINs (Ashwagandha, Magnesium, Zink, Vitamine) plus 2 Schluss-Bridges. Wechselt vom sportlichen zum naturwissenschaftlich-professionellen Register."},
+    {"pageName": "PERFORMANCE", "pageSlug": "10_performance", "pageId": "58488065-5C6A-4494-A3DB-AB7D86AB0081", "pageType": "hub_category", "scrollHeight": 7164, "brandModules": 5, "voiceMarkers": {"voiceRegister": "direkt", "sentencePattern": "kurze_aussage", "vocabularyField": "sportlich", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl"}, "pageArchitecture": "Hero-Video direkt gefolgt von massiver ProductGrid 24 Performance-ASINs (Creatine, Pre-Workouts, BCAAs, Aminos, Citrullin) plus 2 Schluss-Bridges. Kein Editorial-Bridge zwischen Hero und Grid."}
+  ],
+  "storeAnalysis": {
+    "schemaVersion": "v3-brand-identity-2",
+    "synthesizedAt": "2026-05-23",
+    "synthesisNote": "Phase 3 Brand Identity basierend auf 10 von 21 ESN-Pages (Top-10-Regel). 11 weitere Pages nicht in dieser Iteration erfasst (Creatine, Ausdauer, Food & Snacks, Riegel, Flavor Powder, Syrups, Zubehoer, Bundles, Alle Produkte, Produktselektor, Ueber ESN).",
+    "marketSegment": "Premium-Sport-Nutrition Mid-Market. Sortimentsbreite: Whey-Protein-Pulver (vier Sub-Linien), Performance-Supplements (Creatine, Pre-Workouts, Aminos), Vitalstoffe (Ashwagandha, Magnesium, Vitamine), Food und Snacks (Riegel, Bars, Flavor Powder, Syrups), Zubehoer, Bundles. Insgesamt 21 Pages.",
+    "primaryAudience": "Trainierende und Athleten 18-45 mit Fokus auf Muskelaufbau, Performance-Steigerung und Lifestyle-Health. Adressiert sowohl Hardcore-Trainierende (IsoWhey Hardcore mit 26g Protein pro Portion) als auch Casual-Konsumenten (Flexpresso Protein-Coffee, Riegel).",
+    "priceTier": "Mid-Market mit Made-in-Germany-Anspruch. Keine externen Pruefsiegel oder Awards prominent platziert in den 10 Top-Pages (nur ProductGrid mit Amazon-Bewertungen).",
+    "productComplexity": "Sehr breit, mehr als 100 unique ASINs in 10 Top-Pages. Sortiments-Hierarchie: Hub-Pages (PROTEINE, VITALSTOFFE, PERFORMANCE) plus Sub-Linien-Pages (Designer Whey, Isoclear, Flexpresso, IsoWhey Hardcore). Variantenvielfalt pro Sub-Linie zwischen 4 (IsoWhey Hardcore) und 12 (Designer Whey).",
+    "brandVoice": {
+      "tonality": "Sehr konsistent direkt-sportlich-benefit_funktional ueber 8 von 10 Pages. Auf VITALSTOFFE wechselt der Voice-Register zu professionell-naturwissenschaftlich-expertise_signal mit Fachterminologie (Ashwagandha, KSM 66, Vitamin B6, Zink). Bestseller-Page wechselt von benefit_funktional zu social_proof als ClaimType.",
+      "adjectives": ["sportlich", "direkt", "Made in Germany", "hochdosiert", "mikrofein", "perfekt loeslich", "ideal fuer Muskelaufbau"],
+      "signatureClaims": ["ESN als reine Marken-Wortbildmarke wiederholt auf jeder Page", "bis zu X g Protein pro Portion (Designer Whey 23g, IsoWhey Hardcore 26g, Flexpresso 22g)", "made in Germany als Herkunfts-Anker", "Produkte ansehen als wiederkehrender Hero-CTA", "Empfohlene Angebote als Bestseller-Section-Label"],
+      "voiceContrasts": ["ESN verwendet konsistente direkte Tonalitaet ohne Duzen oder Nahbar-Register im Gegensatz zu kloster-kitchen (direkt mit Du-Form) oder gritin (freundlich mit Du-Form)", "VITALSTOFFE bricht das Performance-Sport-Register zugunsten von naturwissenschaftlich-klinischer Praeparat-Sprache", "Im Vergleich zu blackroll sehr aehnliches Konversions-Pattern (Hero plus ProductGrid plus Bridges) aber ohne starke Brand-Story-Module wie blackroll Ueber-Page"]
+    },
+    "designAesthetic": {
+      "colorPalette": "Schwarz-Weiss-Marken-Code als Branding-Anker (ESN Wortbildmarke), eingebrannte Produkt-Komposition in Lifestyle-Settings (screenshot_required fuer konkrete Farb-Aussagen pro Produkt-Hero).",
+      "typography": "Sans-Serif mit Versalien fuer Marken-Wortbildmarke und Produktnamen.",
+      "photographyStyle": "Image-fokussierte Hero-Banner mit Produkt-Lineups plus Lifestyle-Setting auf Sub-Linien-Pages. Hub-Pages (PROTEINE, VITALSTOFFE, PERFORMANCE) verwenden Hero-Video als Auftakt statt Hero-Image. Sub-Category-Pages (Designer Whey, Isoclear, Flexpresso, Hardcore) verwenden Hero-Image mit Lead-ASIN als Hotspot.",
+      "layoutSignals": "Wiederkehrendes Sub-Category-Pattern: Hero-Banner-mit-Lead-ASIN plus ProductGrid-Varianten plus 2-Schluss-Bridges identisch auf allen 4 Whey-Sub-Linien. Wiederkehrendes Hub-Pattern: Hero-Video plus optionales Editorial-Banner plus ProductGrid 24 ASINs. Startseite verwendet einzigartige Hero-with-Product-Lineup mit 5-ASIN-Hotspots."
+    },
+    "positioningClaim": "ESN positioniert sich als Premium-Sport-Nutrition aus Deutschland mit breitem Sortiment fuer Whey-Protein (vier differenzierte Sub-Linien), Performance-Supplements und Vitalstoffe. Sortiments-Logik: vier Whey-Linien decken Geschmacks-Vielfalt, klare Proteinlimo, Coffee-Innovation und Hochleistungs-Hardcore-Segment ab.",
+    "contentStrategy": {
+      "approach": "Hierarchische Hub-zu-Sub-Linien-Architektur mit drei Levels (Startseite plus Hub-Pages plus Sub-Linien). Pro Hub klare Sub-Linien-Verteiler (PROTEINE Hub mit 4 Sub-Pages) oder direkter Voll-Sortiment-ProductGrid (VITALSTOFFE 24 ASINs, PERFORMANCE 24 ASINs).",
+      "emotionalLayer": "Sportlich-direkt mit Hero-Video als Brand-Mood (PROTEINE, VITALSTOFFE, PERFORMANCE). Keine Werte- oder Brand-Story-Module in den Top 10 Pages.",
+      "rationalLayer": "Protein-Gehalt-Spezifikationen pro Sub-Linie (23g Designer Whey, 26g IsoWhey Hardcore, 22g Flexpresso). Made in Germany als Herkunfts-Trust. Voll-Sortiment-ProductGrid mit Amazon-Bewertungen als Social Proof.",
+      "modulePreferences": "hero_banner mit Lead-ASIN-Hotspot (Sub-Category), hero_video (Hub), product_grid_category mit Varianten-Vielfalt, editorial_banner_tall als Bridge-Banner, editorial_tile_pair und editorial_tile_quad als Startseite-Verteiler.",
+      "editorialDepth": "Niedrig bis mittel. Sub-Category-Pages 5 Module, Hub-Pages 5-6 Module, Startseite 8 Module. Keine langen Editorial-Strecken wie bedsure oder kloster-kitchen Ueber-Pages."
+    },
+    "conversionPath": {
+      "primary": "ProductGrid mit 4-24 ASINs je nach Page-Typ (Sub-Category 4-12 Varianten, Hub-Page 24 ASINs Vollkatalog, Bestseller 12 ASINs kuratiert, Neuheiten 11 ASINs)",
+      "secondary": "Hero-Banner-Lead-ASIN-Hotspot auf Sub-Category-Pages (1 ASIN als Hauptkonversion ueber dem Grid)",
+      "tertiary": "Tile-Verteiler auf Startseite mit 8 Sub-Page-Tiles (Soft-Konversion via Sub-Page-Click)",
+      "trustLoop": "Wiederkehrendes Produktselektor-Banner auf 8 von 10 Pages als Beratungs-Loop, Wiederkehrendes Alle-Produkte-Banner als Vollkatalog-Loop"
+    },
+    "keyStrengths": [
+      "Sehr konsistente Sub-Category-Page-Pattern (Hero plus ProductGrid plus Bridges) auf 4 Whey-Linien-Pages",
+      "Hub-Hub-Architektur (PROTEINE als Hub mit 4 Sub-Linien) reduziert Cognitive Load",
+      "Hero-Video als Hub-Page-Auftakt setzt Brand-Mood vor Voll-Sortiment-ProductGrid",
+      "Made-in-Germany-Anker auf allen Produkt-Headlines als Trust-Layer",
+      "Differenzierung der Whey-Linien (Designer Whey Geschmack, Isoclear Proteinlimo, Flexpresso Coffee, IsoWhey Hardcore High-Protein) als klare Sortiments-Logik"
+    ],
+    "keyWeaknesses": [
+      "Keine Brand-Story- oder About-Page in den Top 10 erfasst (Ueber-ESN Page nicht im Top-10-Scope)",
+      "Keine prominenten Pruefsiegel, Awards oder Press-Logos (im Gegensatz zu bedsure, kloster-kitchen)",
+      "Schlanke Module-Anzahl pro Page (3-8 Module) ohne tiefe Editorial-Strecken oder Werte-Module",
+      "Identische Sub-Category-Pages koennten von Page zu Page variantenstaerker werden (z.B. Highlight pro Sub-Linie statt identisches Lead-Hotspot-Pattern)"
+    ],
+    "brandUSPs": [
+      "Made-in-Germany Sport-Nutrition als geographischer Herkunfts-Anker (gilt fuer alle Produkte, brand-uebertragbar als USP)",
+      "Vier differenzierte Whey-Protein-Sub-Linien (Designer Whey Geschmack, Isoclear Proteinlimo, Flexpresso Protein-Coffee, IsoWhey Hardcore Hochprotein) als Sortimentsbreite",
+      "Breites Sortiment ueber 5+ Sortiments-Pillars (Proteine, Vitalstoffe, Performance, Food & Snacks, Zubehoer)",
+      "Mehrere Hochleistungs-Linien fuer differenzierte Trainingsstadien (Hardcore vs Standard vs Lifestyle-Coffee)"
+    ],
+    "moduleFunctionalTaxonomy": {
+      "hero_banner_lead_asin_plus_product_grid_varianten": "Sub-Category-Page-Pattern auf allen 4 Whey-Linien: Hero-Banner mit Lead-ASIN-Hotspot plus ProductGrid mit allen Geschmacks- oder Varianten-Versionen plus 2 Schluss-Bridges. Identisch wiederholt fuer Designer Whey, Isoclear, Flexpresso, IsoWhey Hardcore.",
+      "hero_video_plus_product_grid_voll_sortiment_24_asins": "Hub-Page-Pattern auf VITALSTOFFE und PERFORMANCE: Hero-Video plus optionales Editorial-Banner plus massive ProductGrid 24 ASINs als Vollkatalog der Hub-Page.",
+      "hub_zu_sub_linien_tile_quad_verteiler": "PROTEINE Hub-Page-Pattern: Hero-Video plus Tile-Quad mit 4 Sub-Linien-Tiles als Verteiler ohne eigenes ProductGrid auf der Hub-Page.",
+      "image_banner_produktselektor_wiederkehrend": "Wiederkehrendes PNG-Banner 1500x750 zu PRODUKTSELEKTOR-Page auf 8 von 10 Pages als Cross-Sell-Beratungs-Loop.",
+      "image_banner_alle_produkte_wiederkehrend": "Wiederkehrendes JPG-Banner 3000x750 oder 2681x560 zu ALLE-PRODUKTE-Page auf 9 von 10 Pages als Vollkatalog-Loop.",
+      "hero_with_product_lineup_5_hotspots": "Startseite-spezifisches Hero-Banner mit 5 ASIN-Hotspots als Brand-Hero-Produkt-Lineup.",
+      "produkt_grid_direkt_nach_nav_ohne_page_hero": "Neuheiten-Page-Pattern (verwandt mit blackroll Trainingsbaender): ProductGrid 11 ASINs direkt nach Nav, kein eigener Page-Hero, ein Schluss-Banner."
+    },
+    "pageArchetypes": {
+      "startseite": {
+        "primaryFunction": "Hero mit Produkt-Lineup plus Tile-Verteiler-Sequenz zu 8 Sub-Pages",
+        "conversionMode": "Soft (Tile-Click) plus Hard (Hero-ASIN-Hotspots)",
+        "transferableTo": "Multi-Sortiments-Marken mit mehr als 5 Sub-Sortiments-Pillars"
+      },
+      "hub_category_video_hero_plus_product_grid": {
+        "primaryFunction": "Hero-Video plus Vollkatalog-ProductGrid 24 ASINs",
+        "conversionMode": "Soft (Video) plus Hard (ProductGrid)",
+        "transferableTo": "Hub-Pages mit Vollkatalog-Anspruch ohne Sub-Page-Tiefe",
+        "exampleEsn": "VITALSTOFFE, PERFORMANCE"
+      },
+      "hub_category_tile_quad_verteiler": {
+        "primaryFunction": "Hero-Video plus Tile-Quad-Verteiler zu 4 Sub-Linien",
+        "conversionMode": "Soft (Tile-Click zu Sub-Page)",
+        "transferableTo": "Hub-Pages mit klarer Sub-Linien-Hierarchie",
+        "exampleEsn": "PROTEINE"
+      },
+      "sub_category_hero_banner_lead_asin_plus_product_grid": {
+        "primaryFunction": "Hero-Banner mit Lead-ASIN-Hotspot plus ProductGrid mit Varianten",
+        "conversionMode": "Hard (Hero-Hotspot plus ProductGrid)",
+        "transferableTo": "Sub-Linien-Pages mit Geschmacks- oder Varianten-Vielfalt",
+        "exampleEsn": "DESIGNER WHEY, ISOCLEAR, FLEXPRESSO, ISOWHEY HARDCORE"
+      },
+      "bestseller_section_intro_plus_product_grid": {
+        "primaryFunction": "Section-Intro Empfohlene Angebote plus ProductGrid 12 kuratierte ASINs",
+        "conversionMode": "Hard",
+        "transferableTo": "Bestseller- oder Highlight-Pages mit kuratiertem ASIN-Set",
+        "exampleEsn": "Bestseller"
+      },
+      "new_arrivals_product_grid_direkt_nach_nav": {
+        "primaryFunction": "ProductGrid Neuheiten direkt nach Nav ohne eigenen Page-Hero",
+        "conversionMode": "Hard",
+        "transferableTo": "Neuheiten-Listing-Pages oder Sub-Hubs mit grossem Sortiment ohne Hero-Bedarf",
+        "exampleEsn": "Neuheiten"
+      }
+    },
+    "brandSpecificVsStructuralExtraction": {
+      "strukturell_uebertragbar_an_neue_brands": [
+        "hero_banner_lead_asin_plus_product_grid_varianten Pattern (Sub-Category-Standard-Architektur)",
+        "hero_video_plus_product_grid_voll_sortiment_24_asins Pattern (Hub-Category-Standard-Architektur)",
+        "hub_zu_sub_linien_tile_quad_verteiler Pattern (Sub-Linien-Hierarchie auf Hub)",
+        "hero_with_product_lineup_5_hotspots Pattern (Startseite mit ASIN-Lineup-Hero)",
+        "produkt_grid_direkt_nach_nav_ohne_page_hero Pattern (Neuheiten-Pattern verwandt mit blackroll Trainingsbaender)",
+        "Wiederkehrendes Bridge-Banner-Pattern (zu Beratungs-Tool plus zu Vollkatalog) auf jeder Page",
+        "Multi-Level-Architektur (Startseite plus Hub-Pages plus Sub-Linien-Pages)",
+        "voiceMarkers direkt-sportlich-benefit_funktional als Sport-Nutrition-Anker-Voice",
+        "voiceMarkers professionell-naturwissenschaftlich-expertise_signal als Vitalstoff-Sub-Voice-Wechsel",
+        "Differenzierung der Sub-Linien nach Anwendungs-Segment (Hochleistung vs Standard vs Innovation vs Geschmack)"
+      ],
+      "brand_spezifisch_NICHT_uebertragbar": [
+        "Wortbildmarke ESN und Schwarz-Weiss-Marken-Code",
+        "Konkrete Produkt-Linien-Namen Designer Whey, Isoclear, Flexpresso, IsoWhey Hardcore",
+        "Konkrete Sortiments-Hub-Namen PROTEINE, VITALSTOFFE, PERFORMANCE, CREATINE, AUSDAUER, FOOD&SNACKS",
+        "Konkrete Protein-Gehalt-Spezifikationen pro Linie (23g, 26g, 22g)",
+        "Konkrete Vitalstoff-Inhaltsstoffe Ashwagandha KSM 66, Magnesium, Vitamin B6, Zink",
+        "Konkrete Made-in-Germany-Aussage (zwar branduebergreifend nutzbar wenn die neue Marke auch in DE produziert, aber niemals als Template ohne neue Quelle uebernehmen)",
+        "Konkrete ASIN-IDs und Page-IDs",
+        "Konkrete Produktselektor-Page (PRODUKTSELEKTOR als ESN-spezifisches Beratungs-Tool)",
+        "Hero-Video-Inhalte und Hero-Banner-Lifestyle-Settings"
+      ]
+    }
+  },
+  "openQuestions": [
+    "11 weitere ESN-Pages nicht in dieser Iteration erfasst (Scope: Top 10 von 21). Nicht-erfasste Pages: CREATINE, AUSDAUER, FOOD&SNACKS, RIEGEL, FLAVOR POWDER, SYRUPS, ZUBEHOER, BUNDLES, ALLE PRODUKTE, PRODUKTSELEKTOR, UEBER ESN.",
+    "Vision-Pass auf Hero-Bildern, Editorial-Bannern und Tile-Texten ausstehend. Alle textOnImage Felder sind als screenshot_required markiert. Insbesondere die Sub-Linien-Differenzierungs-Claims auf den 4 Whey-Hero-Bannern wuerden den Brand-Voice verfeinern.",
+    "PROTEINE Hero-Video, VITALSTOFFE Hero-Video und PERFORMANCE Hero-Video brauchen Vision-Pass um den Hero-Archetyp (atmospheric_brand_mood vs brand_story_video_intro vs kinetic_lifestyle_loop) zu verifizieren. Aktuell als atmospheric_brand_mood plausibilisiert.",
+    "UEBER ESN-Page (Page-ID 44C5F932-97AA-4A1B-A7F1-207D5450AF8F) nicht erfasst, daher keine Brand-Story- oder Werte-Module in der Analyse. Bei voller 21-Page-Analyse waere Brand-Voice robuster.",
+    "Keine Hero-Archetypen oder voiceMarkers-Werte neu vorgeschlagen, alle Werte bleiben innerhalb des bestehenden Vokabulars (hero_archetype_vocabulary, voice_marker_vocabulary). Sub-Category-Pattern hero_banner_lead_asin_plus_product_grid_varianten und Hub-Pattern hero_video_plus_product_grid_voll_sortiment_24_asins sind potentielle Kandidaten fuer neue Page-Architecture-Pattern in _page_architecture_pattern_vocabulary.md - User-Review empfohlen.",
+    "Page-ID-Validierung erfolgreich: Alle 10 Top-Page-IDs aus esn_pages.json sind live verfuegbar (entgegen der Warnung im Auftrag, dass IDs veraltet sein koennten). Die initiale Stale-Redirect-Beobachtung war ein Browser-Session-Quirk, nicht eine echte ID-Veraltung."
+  ]
+}

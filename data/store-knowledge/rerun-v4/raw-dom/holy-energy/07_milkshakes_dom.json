@@ -1,0 +1,30 @@
+{
+  "_meta": {
+    "store": "holy-energy",
+    "pageSlug": "07_milkshakes",
+    "pageName": "Milkshakes",
+    "pageId": "6AD7F40F-ED3C-4B02-BDC9-310A071E3EC7",
+    "url": "https://www.amazon.de/stores/page/6AD7F40F-ED3C-4B02-BDC9-310A071E3EC7",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_v4",
+    "scrollHeight": 3078,
+    "viewport": { "w": 1582, "h": 928 },
+    "domRowsTotal": 3,
+    "contentModulesCount": 2
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height":  400, "widgetClass": "Header",            "tileCount":  0, "imgCount": 3, "videoCount": 0, "productCount":  0, "note": "Header plus globaler Brand-Hero (DIE SOFTDRINK REVOLUTION). Diese Page nutzt KEINEN page-spezifischen Page-Hero - vermutlich neue saisonale Page in Aufbau." },
+    { "domRowIdx": 1, "top":  507, "height": 1110, "widgetClass": "ProductCollection", "tileCount": 11, "imgCount": 6, "videoCount": 0, "productCount": 10, "note": "Holy Milkshakes ProductCollection (Heading nachgewiesen). Einziges Inhalt-Modul, zeigt 5 Milkshake-ASINs in einem Collection-Widget mit 490px Header-Banner." },
+    { "domRowIdx": 2, "top": 1617, "height":  200, "widgetClass": "EditorialRow",      "tileCount":  4, "imgCount": 0, "videoCount": 0, "productCount":  0, "note": "Share-Footer." }
+  ],
+  "editorialBanners": [
+    { "modulePos": 2, "top":  514, "w": 1470, "h": 490, "asset": "714b4648-71d3-434c-b349-4a275f876025", "note": "ProductCollection-eigener Banner (innerhalb des Widgets)" }
+  ],
+  "uniqueAsinsOnPage": [
+    "B0FQCMT45R","B0FQCP2QZK","B0FQCQGMBG","B0FQCLJDWN","B0FQCPW6S1"
+  ],
+  "openQuestionsLocal": [
+    "Milkshakes ist eine Stub- oder Neuheiten-Page mit nur 1 Inhaltsmodul (ProductCollection). Wahrscheinlich saisonale Launch-Page, die noch keinen vollen Page-Hero/Spotlight-Pattern erhalten hat.",
+    "Page nutzt das Amazon native ProductCollection-Widget (anders als andere Kategorie-Pages, die ProductGrid plus Custom-Editorial nutzen). Strukturell ein anderer Page-Archetyp."
+  ]
+}

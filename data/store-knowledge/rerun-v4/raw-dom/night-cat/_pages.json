@@ -1,0 +1,17 @@
+{
+  "store": "night-cat",
+  "storeUrl": "https://www.amazon.de/stores/page/CC609240-DCC5-47C5-A171-3B973268CD34",
+  "discoveredAt": "2026-05-13",
+  "pages": [
+    { "slug": "01_startseite",         "name": "Startseite",         "level": 0, "pageId": "CC609240-DCC5-47C5-A171-3B973268CD34", "url": "https://www.amazon.de/stores/page/CC609240-DCC5-47C5-A171-3B973268CD34" },
+    { "slug": "02_haengemattenzelt",   "name": "Haengemattenzelt",   "level": 1, "pageId": "CE68CD68-132D-4570-84C5-31DDBDBD873F", "url": "https://www.amazon.de/stores/page/CE68CD68-132D-4570-84C5-31DDBDBD873F" },
+    { "slug": "03_kuppelzelt",         "name": "Kuppelzelt",         "level": 1, "pageId": "4FED862B-112B-41A6-B1A9-F8ED490BD6E7", "url": "https://www.amazon.de/stores/page/4FED862B-112B-41A6-B1A9-F8ED490BD6E7" },
+    { "slug": "04_feldbett-zelt",      "name": "Feldbett Zelt",      "level": 1, "pageId": "B4C3EA1C-1F72-4A54-9E6C-9D31CECA1F37", "url": "https://www.amazon.de/stores/page/B4C3EA1C-1F72-4A54-9E6C-9D31CECA1F37" },
+    { "slug": "05_wurfzelt",           "name": "Wurfzelt",           "level": 1, "pageId": "3E90B781-2F1D-4482-B744-B825EDF64968", "url": "https://www.amazon.de/stores/page/3E90B781-2F1D-4482-B744-B825EDF64968" },
+    { "slug": "06_ultraleichtes-zelt", "name": "Ultraleichtes Zelt", "level": 1, "pageId": "402D4646-6CC4-465D-B77B-005C65179575", "url": "https://www.amazon.de/stores/page/402D4646-6CC4-465D-B77B-005C65179575" },
+    { "slug": "07_wanderrucksaecke",   "name": "Wanderrucksaecke",   "level": 1, "pageId": "20A5B648-FC7B-4A1B-8E64-4C03A067AC8B", "url": "https://www.amazon.de/stores/page/20A5B648-FC7B-4A1B-8E64-4C03A067AC8B" },
+    { "slug": "08_strandzelt",         "name": "Strandzelt",         "level": 1, "pageId": "56EC8D6F-57EB-4BE8-9B59-2763880077B0", "url": "https://www.amazon.de/stores/page/56EC8D6F-57EB-4BE8-9B59-2763880077B0" },
+    { "slug": "09_wathose",            "name": "Wathose",            "level": 1, "pageId": "6F55DEE1-18D3-47DA-AFE4-72F0A074F6F8", "url": "https://www.amazon.de/stores/page/6F55DEE1-18D3-47DA-AFE4-72F0A074F6F8" },
+    { "slug": "10_campingzubehoer",    "name": "Campingzubehoer",    "level": 1, "pageId": "A706CCF3-A58C-43B1-B748-F2C858475F64", "url": "https://www.amazon.de/stores/page/A706CCF3-A58C-43B1-B748-F2C858475F64" }
+  ]
+}

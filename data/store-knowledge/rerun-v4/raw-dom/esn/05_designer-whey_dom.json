@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "store": "esn",
+    "pageSlug": "05_designer-whey",
+    "pageId": "8F9839F1-7792-40E9-BC87-D8253DB32928",
+    "pageUrl": "https://www.amazon.de/stores/page/8F9839F1-7792-40E9-BC87-D8253DB32928",
+    "extractedAt": "2026-05-23",
+    "extractor": "v4_phase1_chrome_mcp_live",
+    "scrollHeight": 5733,
+    "viewport": { "w": 1599, "h": 842 },
+    "domRowsTotal": 6,
+    "note": "DESIGNER WHEY Sub-Category-Page: Hero-Banner mit 1 ASIN-Link plus ProductGrid 12 ASINs plus Produktselektor-Bridge plus Alle-Produkte-Bridge plus Footer."
+  },
+  "modules": [
+    { "domRowIdx": 0, "position": 1, "top": 99, "height": 403, "widgetType": "Header", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": ["Folgen"], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/acf527f7-c905-4e51-ad44-ec32c24f89cc._CR0%2C0%2C1920%2C384_SX1500_.jpg"], "asins": [], "pageLinks": [], "note": "Amazon Nav Header." },
+    { "domRowIdx": 1, "position": 2, "top": 403, "height": 724, "widgetType": "EditorialRow", "imgCount": 1, "videoCount": 0, "productCount": 1, "headings": [], "ctas": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/ffa640fc-b38a-4319-866b-e588ce26940a._CR0%2C0%2C1200%2C579_SX1500_.jpg"], "asins": ["B0057DUWNK"], "pageLinks": [], "note": "Hero-Banner 1200x579 mit verlinktem Lead-ASIN (Designer Whey 1kg)." },
+    { "domRowIdx": 2, "position": 3, "top": 1127, "height": 1913, "widgetType": "ProductGrid", "imgCount": 12, "videoCount": 0, "productCount": 12, "headings": ["ESN Designer Whey Protein Pulver, Vanilla, 1 kg"], "ctas": [], "imageUrls": [], "asins": ["B0057DVWYI", "B018HQITBA", "B00SH2MBIM", "B005Q6CQZA", "B0057DWL16", "B0774SD52T", "B0057DUWNK", "B0CJLS7Q42", "B0CJMD9C2M", "B0DZ6N8F7P", "B0F79NV3KZ", "B01LYXBJS3"], "pageLinks": [], "note": "ProductGrid mit 12 Designer-Whey-Varianten (Vanilla, Schoko, Strawberry, etc.) als Kern-Konversion." },
+    { "domRowIdx": 3, "position": 4, "top": 3040, "height": 750, "widgetType": "EditorialRow", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/63460ccc-e989-4727-8424-c5ad0c6bd767._CR0%2C0%2C1500%2C750_SX1500_.png"], "asins": [], "pageLinks": ["2AFC0A42-A702-462D-B255-B5203C7449F8"], "note": "Image-Banner PNG verlinkt nach PRODUKTSELEKTOR (Hilfe bei Geschmacksauswahl)." },
+    { "domRowIdx": 4, "position": 5, "top": 3790, "height": 383, "widgetType": "EditorialRow", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bb6ee5ba-f109-4c8a-a8d3-9eebe477d015._CR0%2C0%2C3000%2C750_SX1500_.jpg"], "asins": [], "pageLinks": ["9FED5CCC-6284-44BD-AD83-AAEEBF48E23F"], "note": "Schluss-Banner zu ALLE PRODUKTE." },
+    { "domRowIdx": 5, "position": 6, "top": 4172, "height": 201, "widgetType": "EditorialRow", "imgCount": 0, "videoCount": 0, "productCount": 0, "headings": [], "ctas": ["Teilen"], "imageUrls": [], "asins": [], "pageLinks": [], "note": "Amazon Share Footer." }
+  ]
+}

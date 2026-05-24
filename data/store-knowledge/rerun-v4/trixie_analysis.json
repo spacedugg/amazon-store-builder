@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "v4-2026-05",
+  "store": "trixie",
+  "brandName": "TRIXIE Heimtierbedarf",
+  "storeUrl": "https://www.amazon.de/stores/page/30552E59-AC22-47B1-BBBB-AEA9225BD614",
+  "analyzedAt": "2026-05-23",
+  "methodology": "v4-top-10-pages-from-49-pages-express-from-phase1-doms-plus-per-page-blueprints",
+  "scopeNote": "Top 10 von 49 TRIXIE-Pages nach 10-Page-Regel per User-Spec erfasst (Startseite, Neuheiten, TRIXIE Serien, BE NORDIC, Autozubehoer, Leuchthalsbaender und Warnwesten und Co., Katzentoiletten, BE ECO, BOHO, Dog Activity) plus Per-Page-Blueprints im Express-Modus generiert (Stand 2026-05-23). Phase-3 erweitert um folgende v4-Pattern: 5-Tile-Asymmetric-Hub-Hero auf Startseite, vertikal-gestapelte Brand-Series-Distributor-Page mit 5 gleichformatigen Serien-Tiles, Editorial-Story-Hero mit Headline plus Body-Copy plus Bild, Interactive-Image-Hero mit Hotspot-Dots, Brand-Series-Sub-Minimal (Headerless) Pattern.",
+  "navigation": {
+    "pageCount": 49,
+    "scopedPages": 10,
+    "structure": "Hierarchical 3-level: Level 0 Startseite, Level 1 Brand-Serien plus Aktivitaeten plus Tier-Kategorien (HUND, KATZE, KLEINTIER, VOGEL, TERRARISTIK, TIERE IM GARTEN), Level 2 Sortiments-Sub-Kategorien pro Tier",
+    "pages": [
+      {"name": "Startseite", "level": 0, "pageId": "30552E59-AC22-47B1-BBBB-AEA9225BD614"},
+      {"name": "Neuheiten", "level": 1, "pageId": "41FA7DEE-3E12-4288-97A2-C3C4BF57CB4A"},
+      {"name": "TRIXIE Serien", "level": 1, "pageId": "9A368574-76A7-414F-9D55-8ACAC0E0199E"},
+      {"name": "TRIXIE BE NORDIC", "level": 2, "pageId": "162DCC92-677E-4162-AD5C-060183A4F8FB"},
+      {"name": "Autozubehoer", "level": 2, "pageId": "744B60E7-8F11-4E81-925F-1D15F8A93596"},
+      {"name": "Leuchthalsbaender, Warnwesten und Co.", "level": 2, "pageId": "DE37903F-2420-4242-9AC9-DD650BAA110C"},
+      {"name": "Katzentoiletten", "level": 2, "pageId": "1EF28941-C4BE-4B99-9E79-8757C0720511"},
+      {"name": "TRIXIE BE ECO", "level": 2, "pageId": "949C8052-6124-4DFD-81AC-4711897015BC"},
+      {"name": "TRIXIE BOHO", "level": 2, "pageId": "B05E0A77-E846-4D5F-A5EA-DD262482E308"},
+      {"name": "Dog Activity", "level": 1, "pageId": "182C9D19-A7A4-4CAB-B7D4-982D2DB2D14A"}
+    ]
+  },
+  "contentSummary": {
+    "pagesAnalyzed": 10,
+    "wiederkehrendeModuleCrossPage": {
+      "brand_header_trixie_red_logo": "alle 10 Pages mit TRIXIE rotem Wortbildlogo plus Mega-Nav",
+      "amazon_share_footer": "alle 10 Pages",
+      "tile_pair_footer_spacer": "alle 10 Pages als letzter Modul vor Footer",
+      "video_hero_3000x1500": "auf 3 Pages (BE NORDIC, Autozubehoer, Leuchthalsbaender) als Page-Header",
+      "product_grid_15_to_25_asins": "auf 8 von 10 Pages mit 7 bis 25 ASINs",
+      "no_section_intros_except_one": "Section-Intros sind selten, nur Leuchthalsbaender hat eine Section-Intro"
+    }
+  },
+  "pages": [
+    {"pageName": "Startseite", "pageSlug": "01_startseite", "pageId": "30552E59-AC22-47B1-BBBB-AEA9225BD614", "pageType": "startseite", "scrollHeight": 6166, "brandModules": 10, "voiceMarkers": {"voiceRegister": "warm", "sentencePattern": "kurze_aussage", "vocabularyField": "alltagsnah", "claimType": "benefit_emotional", "rhetoricalDevice": "direkte_ansprache"}, "pageArchitecture": "Video-Hero plus 2 Tier-Hub-Cluster (HUND, KATZE) jeweils aus 5-Tile-Hero plus 4-Tile-Sub-Row plus NEUHEITEN-Tile-Pair-Banner als Cluster-Trenner. Kein ProductGrid."},
+    {"pageName": "Neuheiten", "pageSlug": "02_neuheiten", "pageId": "41FA7DEE-3E12-4288-97A2-C3C4BF57CB4A", "pageType": "neuheiten", "scrollHeight": 5712, "brandModules": 4, "voiceMarkers": {"voiceRegister": "saisonal", "sentencePattern": "kurze_aussage", "vocabularyField": "alltagsnah", "claimType": "benefit_funktional", "rhetoricalDevice": "direkte_ansprache"}, "pageArchitecture": "Interactive-Image-Hotspot-Hero plus ProductGrid 25 ASINs Neuheiten."},
+    {"pageName": "TRIXIE Serien", "pageSlug": "03_trixie-serien", "pageId": "9A368574-76A7-414F-9D55-8ACAC0E0199E", "pageType": "brand_series_hub", "scrollHeight": 4756, "brandModules": 7, "voiceMarkers": {"voiceRegister": "warm", "sentencePattern": "kurze_aussage", "vocabularyField": "alltagsnah", "claimType": "benefit_emotional", "rhetoricalDevice": "direkte_ansprache"}, "pageArchitecture": "5 vertikal gestapelte Hero-Banner-Tall-Tiles als Serien-Verteiler (DOG ACTIVITY, CAT ACTIVITY, BE NORDIC, BOHO, BE ECO)."},
+    {"pageName": "TRIXIE BE NORDIC", "pageSlug": "04_be-nordic", "pageId": "162DCC92-677E-4162-AD5C-060183A4F8FB", "pageType": "brand_series_sub", "scrollHeight": 4557, "brandModules": 4, "voiceMarkers": {"voiceRegister": "warm", "sentencePattern": "kurze_aussage", "vocabularyField": "alltagsnah", "claimType": "benefit_emotional", "rhetoricalDevice": "direkte_ansprache"}, "pageArchitecture": "Video-Hero maritim plus ProductGrid 16 ASINs (Foehr-Hundebett-Linie)."},
+    {"pageName": "Autozubehoer", "pageSlug": "05_autozubehoer", "pageId": "744B60E7-8F11-4E81-925F-1D15F8A93596", "pageType": "sub_category", "scrollHeight": 5610, "brandModules": 4, "voiceMarkers": {"voiceRegister": "professionell", "sentencePattern": "kurze_aussage", "vocabularyField": "technisch", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl"}, "pageArchitecture": "Video-Hero plus ProductGrid 25 ASINs (Aluminium-Hunde-Transportboxen plus Sicherheits- und Schondecken)."},
+    {"pageName": "Leuchthalsbaender, Warnwesten und Co.", "pageSlug": "06_leuchthalsbaender-warnwesten", "pageId": "DE37903F-2420-4242-9AC9-DD650BAA110C", "pageType": "sub_category", "scrollHeight": 5932, "brandModules": 5, "voiceMarkers": {"voiceRegister": "professionell", "sentencePattern": "kurze_aussage", "vocabularyField": "technisch", "claimType": "benefit_funktional", "rhetoricalDevice": "direkte_ansprache"}, "pageArchitecture": "Section-Intro plus Video-Hero plus ProductGrid 24 ASINs (Sicherheitswesten, Leuchthalsbaender, Flasher). Einzige Page mit Section-Intro."},
+    {"pageName": "Katzentoiletten", "pageSlug": "07_katzentoiletten", "pageId": "1EF28941-C4BE-4B99-9E79-8757C0720511", "pageType": "sub_category", "scrollHeight": 5370, "brandModules": 4, "voiceMarkers": {"voiceRegister": "warm", "sentencePattern": "satz_mit_komma", "vocabularyField": "alltagsnah", "claimType": "benefit_emotional", "rhetoricalDevice": "direkte_ansprache"}, "pageArchitecture": "Editorial-Story-Hero mit Headline plus Body-Copy plus Bild ('Fuer ein sauberes Katzenzuhause') plus ProductGrid 25 ASINs Katzentoiletten plus Streu."},
+    {"pageName": "TRIXIE BE ECO", "pageSlug": "08_be-eco", "pageId": "949C8052-6124-4DFD-81AC-4711897015BC", "pageType": "brand_series_sub_minimal", "scrollHeight": 3143, "brandModules": 3, "voiceMarkers": {"voiceRegister": "professionell", "sentencePattern": "kurze_aussage", "vocabularyField": "nachhaltig", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl"}, "pageArchitecture": "Reines ProductGrid 14 ASINs ohne Hero. BrandHeader geht direkt in Grid ueber."},
+    {"pageName": "TRIXIE BOHO", "pageSlug": "09_boho", "pageId": "B05E0A77-E846-4D5F-A5EA-DD262482E308", "pageType": "brand_series_sub_minimal", "scrollHeight": 3114, "brandModules": 3, "voiceMarkers": {"voiceRegister": "warm", "sentencePattern": "kurze_aussage", "vocabularyField": "alltagsnah", "claimType": "benefit_emotional", "rhetoricalDevice": "direkte_ansprache"}, "pageArchitecture": "Reines ProductGrid 7 ASINs ohne Hero (Hundebett Boho plus Tipi Boho beige). Kuerzeste Seite der 10."},
+    {"pageName": "Dog Activity", "pageSlug": "10_dog-activity", "pageId": "182C9D19-A7A4-4CAB-B7D4-982D2DB2D14A", "pageType": "brand_series_sub_minimal", "scrollHeight": 5128, "brandModules": 3, "voiceMarkers": {"voiceRegister": "warm", "sentencePattern": "kurze_aussage", "vocabularyField": "alltagsnah", "claimType": "benefit_emotional", "rhetoricalDevice": "konkrete_zahl"}, "pageArchitecture": "Reines ProductGrid 21 ASINs Intelligenzspielzeug ohne Hero (Strategiespiele Flower Tower, Flip and Fun, Flip Bone)."}
+  ],
+  "storeAnalysis": {
+    "marketSegment": "Heimtierbedarf-Vollsortimenter mit hierarchischer Multi-Tier-Architektur. Sortimentsbreite: HUND, KATZE, KLEINTIER, VOGEL, TERRARISTIK, TIERE IM GARTEN plus Marken-Serien (BE NORDIC maritim, BE ECO nachhaltig, BOHO Naturtoene, DOG ACTIVITY Intelligenzspielzeug, CAT ACTIVITY). Insgesamt 49 Pages.",
+    "primaryAudience": "Tierhalter (Hund, Katze, Kleintier, Vogel, Reptilien, Wildtiere im Garten) mit moderaten bis premium-Anspruechen. Du-Ansprache und warmer Ton signalisieren Privatkunden-Zielgruppe.",
+    "priceTier": "Mid-Premium-Heimtierbedarf. Schwerpunkt auf funktionale Produkte (Sicherheit, Transport, Hygiene) plus Lifestyle-Linien (Boho, Be Nordic).",
+    "productComplexity": "Sehr breit: 49 Pages decken alle Heimtier-Sortimentskategorien ab plus 5 stilbasierte Brand-Serien (BE NORDIC, BE ECO, BOHO, DOG ACTIVITY, CAT ACTIVITY).",
+    "brandVoice": {
+      "tonality": "Warm und alltagsnah mit Du-Ansprache ('deiner Samtpfote'). Bei Tech-Sub-Kategorien (Autozubehoer, Leuchthalsbaender) wechselt der Ton zu professionell-technisch. Brand-Serien BE NORDIC/BOHO/BE ECO setzen auf Lifestyle und Stil-Tonalitaet.",
+      "adjectives": ["warm", "tierfreundlich", "alltagsnah", "professionell-funktional", "stil-orientiert"],
+      "signatureClaims": ["Heimtierbedarf", "Samtpfote", "Wohlbefinden", "Jetzt entdecken"],
+      "voiceContrasts": ["Tier-Hub-Verteiler-Architektur statt klassische Sortiments-Hub-Architektur", "Visual-First Startseite ohne ProductGrid, dafuer 5-Tile-Asymmetric-Hub-Hero pro Tier"]
+    },
+    "designAesthetic": {
+      "colorPalette": "TRIXIE-Rot als Wortbildmarke-Akzent. Warme Pet-Lifestyle-Visuals mit Tier-im-Setting Photographie. Brand-Serien mit eigenen Farbcodes (BE NORDIC blau/maritim, BE ECO oekoton, BOHO beige/Naturtoene).",
+      "typography": "Sans-Serif-Standard mit kraeftigen Headlines fuer Brand-Serien-Naming (DOG ACTIVITY, BE NORDIC, BE ECO im Caps-Stil).",
+      "photographyStyle": "Tier-im-Lebenskontext (Hund mit Halter, Katze im Wohnumfeld). Video-Hero auf Sub-Kategorien mit dynamischer Anwendung.",
+      "layoutSignals": "Wiederkehrendes Sub-Kategorie-Pattern: BrandHeader plus optional Video-Hero plus ProductGrid 15 bis 25 ASINs plus Tile-Pair-Spacer plus Footer. Brand-Serien-Subs sind oft Headerless (BE ECO, BOHO, Dog Activity). Sub-Kategorien mit Tech-Bezug (Autozubehoer, Leuchthalsbaender) bekommen Video-Hero."
+    },
+    "positioningClaim": "TRIXIE ist der Vollsortimenter fuer Heimtierbedarf mit Tier-Hub-Architektur und stilbasierten Brand-Serien (BE NORDIC, BE ECO, BOHO, DOG ACTIVITY, CAT ACTIVITY).",
+    "contentStrategy": {
+      "approach": "Tier-Hub-First Architektur. Startseite priorisiert Tier-Verteiler (HUND, KATZE) als 5-Tile-Asymmetric-Hub-Hero. Daneben gibt es Brand-Serien-Hub mit 5 vertikalen Serien-Verteiler-Tiles. Sub-Kategorien sind in Tier-Sektionen organisiert.",
+      "emotionalLayer": "Du-Ansprache plus Tier-Liebkosung ('Samtpfote', 'Wohlbefinden') auf den Editorial-Heros. Video-Hero zeigt Anwendung in Lebens-Setting.",
+      "rationalLayer": "Auf Tech-Sub-Kategorien (Autozubehoer, Leuchthalsbaender) Wechsel zu professioneller Sprache mit funktionalen Specs (Aluminium, Sicherheitsverschluss, reflektierend).",
+      "modulePreferences": "video_hero (Hauptkanal fuer Page-Header auf Sub-Kategorien), hero_banner_editorial (Story-Hero mit Body), section_hero_5tile_distributor (Startseite Tier-Verteiler), product_grid_featured 15 bis 25 ASINs.",
+      "editorialDepth": "Variable: Startseite extrem visual-fokussiert ohne ProductGrid, Sub-Kategorien meistens 1 Hero plus 1 ProductGrid (4 Module), Brand-Serie-Sub-Minimal nur 3 Module (kein Hero)."
+    },
+    "conversionPath": {
+      "primary": "ProductGrid 15 bis 25 ASINs am Page-Ende (8 von 10 Pages)",
+      "secondary": "Tier-Hub-5-Tile-Hero auf Startseite plus Brand-Serien-Tiles auf TRIXIE Serien als Soft-Verteiler"
+    },
+    "keyStrengths": [
+      "TRIXIE rotes Wortbildlogo als sehr klarer CI-Anker",
+      "Tier-Hub-Architektur mit 5-Tile-Asymmetric-Hub-Hero als Verteiler-Pattern",
+      "Brand-Serien-Hub (BE NORDIC, BE ECO, BOHO) mit vertikal-gestapelten 5 Serien-Tiles",
+      "Hierarchische 3-Level-Architektur mit 49 Pages",
+      "Editorial-Story-Hero mit Du-Ansprache fuer warme Tier-Tonalitaet",
+      "Wechsel zwischen warmer Tier-Voice (Katze, Brand-Serien) und professioneller Tech-Voice (Auto, Leuchthalsbaender)"
+    ],
+    "brandUSPs": [
+      "Vollsortimenter fuer alle Heimtier-Kategorien aus einer Hand",
+      "Stilbasierte Brand-Serien (BE NORDIC maritim, BE ECO nachhaltig, BOHO Naturtoene) fuer Lifestyle-Heimtierbedarf",
+      "Marken-Spielzeuglinien DOG ACTIVITY und CAT ACTIVITY mit Intelligenzspielzeug-Fokus"
+    ],
+    "moduleFunctionalTaxonomy": {
+      "section_hero_5tile_distributor": "AUFFAELLIG: 5-Tile-Asymmetric-Hub-Hero auf Startseite (1 grosses Hero-Tile plus 4 Sub-Tiles), tritt 2x in Folge auf (HUND, KATZE). Neues v4-Pattern.",
+      "brand_series_distributor_vertical_stack": "AUFFAELLIG: vertikal gestapelte 5 Hero-Banner-Tall-Tiles als Serien-Verteiler-Page (TRIXIE Serien). Neues v4-Pattern.",
+      "hero_banner_editorial_story": "AUFFAELLIG: Editorial-Hero mit echter Headline plus Body-Copy plus Bild-Komposition (Katzentoiletten). Erstmaliger Body-Hero in der TRIXIE-Datenbasis.",
+      "hero_banner_video_3000x1500": "Video-Hero mit Anwendungs-Szene als Page-Header auf 3 Sub-Kategorien (BE NORDIC, Autozubehoer, Leuchthalsbaender).",
+      "interactive_image_hotspot_hero": "AUFFAELLIG: Hotspot-Image-Hero auf Neuheiten-Page mit Direction-Cues 'hotspot_dots' und CTA 'Produkte ansehen'. Neues v4-Pattern.",
+      "brand_series_sub_minimal_headerless": "AUFFAELLIG: 3 Brand-Serien-Sub-Pages (BE ECO, BOHO, Dog Activity) sind Headerless: BrandHeader geht direkt in ProductGrid ueber. Erstmaliges 'Headerless'-Pattern in v4-Datenbasis.",
+      "tile_pair_section_banner": "Tile-Pair 2-fach als Section-Banner zwischen den Hub-Clustern (NEUHEITEN-Banner auf Startseite zwischen HUND und KATZE)."
+    },
+    "pageArchetypes": {
+      "startseite": {
+        "primaryFunction": "Tier-Verteiler-Startseite mit 5-Tile-Asymmetric-Hub-Hero pro Tier",
+        "conversionMode": "Soft (Verteilung), kein ProductGrid",
+        "transferableTo": "Multi-Kategorie-Brands mit klaren Sortiments-Tieren oder Sortiments-Familien als Top-Level-Verteiler"
+      },
+      "brand_series_hub": {
+        "primaryFunction": "Brand-Serien-Verteiler-Page mit gleichformatigen vertikalen Serien-Tiles",
+        "conversionMode": "Soft (Verteilung)",
+        "transferableTo": "Brands mit mehreren stilbasierten Serien oder Sub-Brand-Linien",
+        "exampleTrixie": "TRIXIE Serien"
+      },
+      "brand_series_sub": {
+        "primaryFunction": "Brand-Serien-Sub-Page mit Video-Hero plus ProductGrid",
+        "conversionMode": "Hard via ProductGrid",
+        "transferableTo": "Stilbasierte Brand-Linien mit moderater Tiefe",
+        "exampleTrixie": "BE NORDIC"
+      },
+      "brand_series_sub_minimal": {
+        "primaryFunction": "Brand-Serien-Sub-Page minimal ohne Hero, reines ProductGrid",
+        "conversionMode": "Hard",
+        "transferableTo": "Brand-Linien mit kleinem Sortiment (unter 25 ASINs) wo Hero-Investment nicht lohnt",
+        "exampleTrixie": "BE ECO, BOHO, Dog Activity"
+      },
+      "sub_category_with_video_hero": {
+        "primaryFunction": "Sub-Kategorie-Page mit Video-Hero plus ProductGrid",
+        "conversionMode": "Hard",
+        "transferableTo": "Sub-Kategorien mit Anwendungs-Bezug wo Video die Funktion zeigt",
+        "exampleTrixie": "Autozubehoer (Hund-im-Auto), Leuchthalsbaender (Dunkelheit-Setting)"
+      },
+      "sub_category_with_editorial_story_hero": {
+        "primaryFunction": "Sub-Kategorie-Page mit Story-Hero (Headline plus Body) plus ProductGrid",
+        "conversionMode": "Hard",
+        "transferableTo": "Sub-Kategorien mit emotionalem Beratungs-Bedarf",
+        "exampleTrixie": "Katzentoiletten"
+      },
+      "neuheiten_hotspot": {
+        "primaryFunction": "Neuheiten-Aktions-Page mit Interactive-Image-Hotspot-Hero plus ProductGrid",
+        "conversionMode": "Hard via ProductGrid plus Soft via Hotspot",
+        "transferableTo": "Aktions-Landings wo der Hero per Hotspot ein Produkt-Highlight ausspielt",
+        "exampleTrixie": "Neuheiten"
+      }
+    },
+    "brandSpecificVsStructuralExtraction": {
+      "strukturell_uebertragbar_an_neue_brands": [
+        "Tier-Hub-Architektur mit 5-Tile-Asymmetric-Hub-Hero pro Verteiler-Cluster",
+        "Brand-Serien-Hub als vertikal-gestapelte 5 Serien-Verteiler-Tiles ohne ProductGrid",
+        "Brand-Serien-Sub-Minimal (Headerless) Pattern fuer kleine Sortimente",
+        "Sub-Kategorie-Pattern Video-Hero plus ProductGrid 15 bis 25 ASINs",
+        "Editorial-Story-Hero mit Headline plus Body-Copy plus Bild als Story-Hero-Pattern",
+        "Interactive-Image-Hotspot-Hero auf Neuheiten/Aktions-Pages",
+        "voiceMarkers warm plus alltagsnah plus benefit_emotional fuer Pet/Lifestyle-Pages",
+        "Sprach-Switch zu professionell plus technisch plus konkrete_zahl auf Tech-Sub-Kategorien",
+        "Tile-Pair Section-Banner als Cluster-Trenner zwischen Hub-Clustern (zum Beispiel zwischen HUND und KATZE)"
+      ],
+      "brand_spezifisch_NICHT_uebertragbar": [
+        "Wortbildmarke TRIXIE in rot",
+        "Konkrete Brand-Serien-Bezeichnungen BE NORDIC, BE ECO, BOHO, DOG ACTIVITY, CAT ACTIVITY",
+        "Konkrete Tier-Kategorien HUND, KATZE, KLEINTIER, VOGEL, TERRARISTIK, TIERE IM GARTEN",
+        "Konkrete Produktnamen Foehr, Carlo, Coline, Flower Tower, Flip and Fun, Flip Bone, Tipi Boho",
+        "Konkrete Visuals Hund-im-Auto, Katze auf Klumpstreu, Dunkelheit-Setting fuer Reflektor-Produkte, maritimer Hintergrund fuer BE NORDIC",
+        "Konkrete Body-Copy 'deiner Samtpfote' (Brand-Stil-Marker)"
+      ]
+    }
+  },
+  "openQuestions": [
+    "39 weitere Pages von TRIXIE nicht in dieser Iteration erfasst (Scope: Top 10 per User-Spec). Insbesondere CAT ACTIVITY plus Tier-Hub-Pages (KLEINTIER, VOGEL, TERRARISTIK, TIERE IM GARTEN) plus Sortiments-Sub-Pages koennten weitere Patterns aufzeigen.",
+    "Vokabular-Vorschlaege (neu in Phase 3 dieser Iteration): layoutType 'section_hero_5tile_distributor' plus layoutShape 'asymmetric_5tile_hero' plus heroArchetype 'category_distributor_with_hero_tile' fuer das beobachtete 5-Tile-Asymmetric-Hub-Hero-Pattern. heroArchetype 'brand_series_distributor' fuer das vertikal-gestapelte Serien-Verteiler-Pattern. heroArchetype 'editorial_story_hero' plus layoutType 'hero_banner_editorial' plus layoutShape 'split_text_image' fuer den Editorial-Story-Hero (Text plus Bild) Pattern. layoutType 'hero_banner_video' fuer dedizierte Video-Hero-Module (bisher als hero_banner_tall klassifiziert). pageType 'brand_series_sub_minimal' fuer Headerless-Brand-Serie-Sub-Pages. directionCues 'hotspot_dots' fuer Interactive-Image-Heros mit Hotspot-Interaktion. vocabularyField 'nachhaltig' fuer Brand-Serien mit Recycling/Nachhaltigkeits-Code.",
+    "Vision-Pass auf Hero-Bildern (Video-Stills) plus baked-in-Text auf Section-Intros koennte konkrete Markenbotschaften, Settings und Farbpaletten pro Brand-Serie anreichern. Insbesondere die Brand-Serien BE NORDIC, BE ECO, BOHO koennten Visual-Codes (maritim, Natur, Beige) klarer dokumentieren.",
+    "Tier-Hub-Pages (HUND, KATZE, KLEINTIER, VOGEL, TERRARISTIK) wurden nicht direkt erfasst. Diese Mid-Level-Pages koennten weitere Architektur-Pattern aufzeigen."
+  ]
+}

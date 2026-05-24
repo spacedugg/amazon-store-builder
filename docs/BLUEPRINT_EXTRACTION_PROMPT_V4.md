@@ -30,7 +30,7 @@ zur Referenz erhalten, neue Analysen laufen ausschliesslich nach v4.
 
 **Unveraendert**
 
-`layoutType` (29 geschlossen), `layoutShape` (8), `imageCategory` (7),
+`layoutType` (30 geschlossen), `layoutShape` (8), `imageCategory` (7),
 `textOnImage` Struktur, `textType` (12), `origin` (5), `designIntent` (7),
 `toolTileType`, `toolImageType`, `link`, `tileContentTopic`,
 `elementProportions`, Page Level Felder ausser den entfernten Farben,
@@ -48,6 +48,51 @@ Phase 1 liefert die Geruest Ebene (Module, Tiles, Headlines, CTAs, Link
 Ziele, Bild URLs, Video Counts). Phase 2 liefert die Bild und Bedeutungs
 Ebene plus die neuen Beziehungs und Voice Felder. Phase 3 liefert die
 Marken Ebene (USPs, Tonalitaet, Positioning ueber alle Seiten).
+
+## 0a. Brand-spezifisch vs. strukturell-uebertragbar (KRITISCH)
+
+Jeder Wert in einem v4-Blueprint gehoert in genau eine von zwei
+Kategorien. Die Pipeline, die spaeter neue Brand Stores generiert, MUSS
+diese Trennung respektieren:
+
+**Strukturell-uebertragbar** (kann zwischen Brands wiederverwendet
+werden, ist ein generisches Modul-Pattern):
+
+- `layoutType`, `layoutShape`, `tileCount`
+- `designIntent`, `structuralPattern`, `moduleFunction` (sofern als
+  abstrakte Rolle formuliert, nicht als konkreter Produkt-Bezug)
+- `relationToPrevious`, `relationToNext`, `visualBridge`, `copyBridge`
+- `heroArchetype` (die Kategorie, nicht das konkrete Hero-Bild)
+- `voiceMarkers` Tags (Tonalitaets-Klassifikation, nicht die wortwoertlichen Saetze)
+- `toolLayoutId`, `toolLayoutName`, `toolImageType`, `toolTileType`
+- `imageCategory`, `elementProportions` Schluessel
+- `textOnImage.textType`, `textOnImage.origin` (Klassifikation,
+  nicht der konkrete Text)
+
+**Brand-spezifisch** (NUR fuer Re-Generierung dieses einen Stores
+gueltig, darf NIEMALS auf andere Brands kopiert werden):
+
+- `visualContent` (konkrete Bildbeschreibung mit Motiven, Farben,
+  Komposition)
+- `textOnImage.visibleText`, `headline`, `subline`, `cta`, `directionCues`
+- `voiceExamples` (wortwoertliche Saetze aus dem echten Store)
+- `tileContentTopic.primarySubject`, `productOrCategoryRef`
+- Konkrete Pruefsiegel, Awards, Pressezitate
+- Konkrete ASINs, Page-IDs, Hintergrund-Setting (Pflanzen, Pool, Kueche...)
+
+Beispiel zur Klarstellung: Ein Awards-Banner mit Pflanzen-Hintergrund
+auf einer Supplement-Marke ist kein generisches Awards-Banner-Pattern.
+Strukturell uebertragbar ist nur `editorial_banner` plus `imageCategory:
+benefit` plus 4-6 Award-Tiles plus Headline-Position. Der Pflanzen-
+Hintergrund gehoert ausschliesslich zu dieser einen Marke und ist als
+Vertikals-Kontext zu verstehen, nicht als Template.
+
+In Phase 3 Brand Identity wird genau diese Trennung explizit gemacht.
+Die Generierungs-Pipeline darf bei einer neuen Marke ausschliesslich
+die strukturell-uebertragbaren Werte aus aehnlichen v4-Blueprints lesen
+und ueber den brand-spezifischen Werten nur Stil-Tonalitaets-Anker
+(`voiceMarkers` Tags, `heroArchetype` Kategorien) uebernehmen, niemals
+die konkreten Inhalte.
 
 ## 1. Modul Segmentierung (gilt fuer Phase 1 und Phase 2)
 
@@ -78,7 +123,7 @@ Regeln:
 position              1-basiert, fortlaufend
 moduleId              <pageSlug>_mod_<zweistellig>, z.B. immunsystem_mod_03
 moduleName            deutsche Kurzrolle, z.B. "Hero Split Video", "USP-Bar"
-layoutType            Enum aus Paragraf 3, Gold aligned 29 Werte
+layoutType            Enum aus Paragraf 3, Gold aligned 30 Werte
 layoutShape           Enum aus Paragraf 4, 8 abstrakte Werte, aus layoutType abgeleitet
 tileCount             Anzahl Kacheln im Modul
 designIntent          Enum aus Paragraf 10, 7 Werte, Gold aligned
@@ -115,11 +160,17 @@ dom.imageUrls         Array der extrahierten Bild URLs
 dom.videoCount        Anzahl Video Elemente
 ```
 
-## 3. `layoutType`, 29 Werte, geschlossene Liste (Gold aligned)
+## 3. `layoutType`, 30 Werte, geschlossene Liste (Gold aligned)
 
 Gruppiert nach Familie, keine neuen erfinden. Falls ein Modul partout
 nicht passt, in `openQuestions` flaggen und den naechstliegenden Wert
 waehlen.
+
+Aenderungs-Log:
+- 2026-05-11, neuer Wert `subcategory_tile_grid_octet` aufgenommen. Quelle
+  Probe-Run kloster-kitchen Startseite Modul 5, ein 4x2-Subkategorie-
+  Navigationsraster mit acht Tiles. Vorher als toolGap markiert,
+  jetzt regulaer abbildbar.
 
 **Amazon Chrome**
 - `amazon_nav_header`
@@ -155,6 +206,7 @@ waehlen.
 
 **Navigation**
 - `subcategory_tile`
+- `subcategory_tile_grid_octet`
 - `shoppable_interactive_image`
 - `shoppable_interactive_image_set`
 

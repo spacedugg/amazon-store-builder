@@ -1,0 +1,276 @@
+{
+  "_meta": {
+    "store": "kloster-kitchen",
+    "pageSlug": "01_startseite",
+    "pageId": "34D4A812-9A68-4602-A6A0-30565D399620",
+    "url": "https://www.amazon.de/stores/page/34D4A812-9A68-4602-A6A0-30565D399620",
+    "extractedAt": "2026-04-23T20:00:00Z",
+    "extractor": "manual_verified_v3.1",
+    "note": "Manuell verifiziert nach Abgleich mit User-Feedback. Der generische extract-page-dom.js Extractor hat zwei offene Bugs (tileCount ueberzaehlt via [class*=Tile], storeNavLinks leer weil Amazon Nav als JS-Link rendert). Diese Datei nutzt die korrigierten Werte pro Modul.",
+    "scrollHeight": 4802,
+    "viewport": {
+      "w": 1181,
+      "h": 946
+    },
+    "domRowsTotal": 7,
+    "contentModulesCount": 5
+  },
+  "hero": {
+    "section": "hero",
+    "domRowIdx": 0,
+    "top": 99,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c62dc5c8-f812-4754-8a90-674b1f1c66a8._CR0%2C10%2C1280%2C256_SX1500_.jpg",
+    "imageSize": {
+      "w": 1181,
+      "h": 236
+    },
+    "imageAltText": "Text reads \"KLOSTER KITCHEN BETTER THAN GOOD\". Green leaf background. Person holding glass with yellow liquid, viewed from side profile.",
+    "note": "Hero-Banner oberhalb der Menueleiste. Alt-Text ist maschinengeneriert und enthaelt bereits den Bildtext plus eine Szenenbeschreibung."
+  },
+  "navigation": {
+    "section": "nav",
+    "domRowIdx": 0,
+    "top": 386,
+    "pages": [
+      {
+        "label": "Startseite",
+        "pageId": "34D4A812-9A68-4602-A6A0-30565D399620"
+      },
+      {
+        "label": "Ingwer Shots",
+        "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2"
+      },
+      {
+        "label": "Mikronaehrstoffe",
+        "pageId": "E337104E-63D3-41B2-8560-D92F482B2790"
+      },
+      {
+        "label": "Saftkuren",
+        "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606"
+      },
+      {
+        "label": "Smoothies",
+        "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E"
+      },
+      {
+        "label": "Shot Kur",
+        "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043"
+      },
+      {
+        "label": "Probiersets / Geschenkidee",
+        "pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A"
+      },
+      {
+        "label": "Zubehoer",
+        "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A"
+      },
+      {
+        "label": "Spar-Abo",
+        "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E"
+      },
+      {
+        "label": "Ueber Uns",
+        "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF"
+      }
+    ],
+    "note": "9 Menue-Links aus dem DOM plus Startseite verifiziert. 'Ueber Uns' fehlt in Modul 4 Kacheln und wurde durch Output-Cap abgeschnitten. Muss bei erstem Seitenwechsel nachgeholt werden (dann ist die komplette Menueleiste im kuerzeren Output sichtbar)."
+  },
+  "modules": [
+    {
+      "userModuleId": 1,
+      "domRowIdx": 1,
+      "top": 443,
+      "height": 735,
+      "widgetClass": "EditorialRow",
+      "layoutType": "full_width_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/b34df377-a26b-4764-8e6f-a35cefbbae70._CR0%2C0%2C1920%2C1200_SX1500_.jpg",
+        "size": {
+          "w": 1151,
+          "h": 720
+        },
+        "alt": ""
+      },
+      "links": [],
+      "note": "Full-Width Text-Image. Bildtext ist NICHT im DOM, muss in Phase 2 per Vision extrahiert werden."
+    },
+    {
+      "userModuleId": 2,
+      "domRowIdx": 2,
+      "top": 1177,
+      "height": 735,
+      "widgetClass": "EditorialRow",
+      "layoutType": "full_width_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/10d49af9-f80b-4250-bd0c-ef21cbf534b2._CR1%2C0%2C1918%2C1200_SX1500_.jpg",
+        "size": {
+          "w": 1151,
+          "h": 720
+        },
+        "alt": ""
+      },
+      "links": [],
+      "note": "Full-Width Creative-Image, User-Hinweis: zeigt Produkt 'Mikronaehrstoff-konzentrat'. Bildtext in Phase 2."
+    },
+    {
+      "userModuleId": 3,
+      "domRowIdx": 3,
+      "top": 1913,
+      "height": 583,
+      "widgetClass": "EditorialRow",
+      "layoutType": "asin_grid_3tiles_2x2+1x2+1x2",
+      "tileCount": 3,
+      "tiles": [
+        {
+          "position": "left_big_2x2",
+          "asin": "B0FG874B5H",
+          "size": {
+            "w": 568,
+            "h": 568
+          },
+          "productTitleAria": "Kloster Kitchen Mikronaehrstoffkonzentrat Vital Flow | 3x 500",
+          "productImageSrc": "https://m.media-amazon.com/images/I/71OVYK+wpxL._AC_CR0%2C0%2C0%2C0_SX750_.jpg"
+        },
+        {
+          "position": "right_top_1x2",
+          "asin": "B0FG36751H",
+          "size": {
+            "w": 568,
+            "h": 277
+          },
+          "productTitleAria": "Kloster Kitchen Mikronaehrstoffkonzentrat Vital Flow | 500 ml",
+          "productImageSrc": "https://m.media-amazon.com/images/I/61yJxQEpDNL._AC_CR0%2C0%2C0%2C0_SX750_.jpg"
+        },
+        {
+          "position": "right_bottom_1x2",
+          "asin": "B0G81CTV55",
+          "size": {
+            "w": 568,
+            "h": 277
+          },
+          "productTitleAria": "Kloster Kitchen Bio Saftkur 3 Tage + Bio Tee I 18x 250ml Saef",
+          "productImageSrc": "https://m.media-amazon.com/images/I/71ShHuINk2L._AC_CR0%2C0%2C0%2C0_SX750_.jpg"
+        }
+      ],
+      "note": "Produkt-Showcase: 3 ASIN-Kacheln. Grosses 2x2 Quadrat links, 2 schmale 1x2 Kacheln rechts uebereinander. Jede Kachel zeigt Hauptbild + Produkttitel (aus aria-label)."
+    },
+    {
+      "userModuleId": 4,
+      "domRowIdx": 4,
+      "top": 2496,
+      "height": 583,
+      "widgetClass": "EditorialRow",
+      "layoutType": "category_grid_8tiles_4x2",
+      "tileCount": 8,
+      "tiles": [
+        {
+          "label": "Ingwer Shots",
+          "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2",
+          "size": {
+            "w": 277,
+            "h": 277
+          },
+          "tileImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/89600578-d6ae-427f-b7c1-9c7e8f34b034._CR0%2C0%2C750%2C750_SX375_SY375_.jpg"
+        },
+        {
+          "label": "Smoothies",
+          "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E",
+          "size": {
+            "w": 277,
+            "h": 277
+          },
+          "tileImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c79cea7d-3c69-471c-a402-9302c7b56f5b._CR0%2C0%2C750%2C750_SX375_SY375_.jpg"
+        },
+        {
+          "label": "Saftkuren",
+          "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606",
+          "size": {
+            "w": 277,
+            "h": 277
+          },
+          "tileImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/36c44675-c0e5-4c16-aca5-e4311d806a64._CR0%2C0%2C750%2C750_SX375_SY375_.jpg"
+        },
+        {
+          "label": "NEU: Mikronaehrstoffe",
+          "pageId": "E337104E-63D3-41B2-8560-D92F482B2790",
+          "size": {
+            "w": 277,
+            "h": 277
+          },
+          "tileImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/098944c1-741d-415d-8a2b-d8af020fd749._CR0%2C0%2C750%2C750_SX375_SY375_.jpg"
+        },
+        {
+          "label": "Shot Kur",
+          "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043",
+          "size": {
+            "w": 277,
+            "h": 277
+          },
+          "tileImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/70515947-c0dc-4e51-ba13-92606896367c._CR0%2C0%2C750%2C750_SX375_SY375_.jpg"
+        },
+        {
+          "label": "Probiersets / Geschenkidee",
+          "pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A",
+          "size": {
+            "w": 277,
+            "h": 277
+          },
+          "tileImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c6656b68-4664-4426-b9e0-99c03578bc86._CR128%2C0%2C1920%2C1920_SX375_SY375_.jpg"
+        },
+        {
+          "label": "Zubehoer",
+          "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A",
+          "size": {
+            "w": 277,
+            "h": 277
+          },
+          "tileImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/8abc6de0-03f5-4932-87f3-43065fdfcb74._CR113%2C0%2C500%2C500_SX375_SY375_.png"
+        },
+        {
+          "label": "Spar-Abo",
+          "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E",
+          "size": {
+            "w": 277,
+            "h": 277
+          },
+          "tileImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/df0841d5-ca02-42b4-bab9-d27d19596a19._CR476%2C0%2C767%2C767_SX375_SY375_.jpg"
+        }
+      ],
+      "note": "Kategorie-Grid 4x2. Jede Kachel ist ein Bild 277x277 mit Text-Overlay (Kategoriename steht via aria-label am Link, nicht im img-alt). Kacheln verlinken zu Store-Unterseiten."
+    },
+    {
+      "userModuleId": 5,
+      "domRowIdx": 5,
+      "top": 3079,
+      "height": 262,
+      "widgetClass": "EditorialRow",
+      "layoutType": "full_width_image_with_badges",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2eb471fe-f331-4cbc-89cd-8896df9c0d33._CR0%2C0%2C1280%2C275_SX1500_.jpg",
+        "size": {
+          "w": 1151,
+          "h": 247
+        },
+        "alt": ""
+      },
+      "links": [],
+      "note": "Lifestyle-Background mit Pflanzen. User-Hinweis: enthaelt 4 Auszeichnungs-Badges plus kleine Headline 'Ausgezeichnete Innovationen'. Badges und Headline sind Teil des Bildes, nur per Vision lesbar."
+    }
+  ],
+  "excluded": [
+    {
+      "domRowIdx": 6,
+      "top": 3341,
+      "height": 200,
+      "reason": "Share-Footer (Teilen Sie diese Seite mit Ihren Freunden). Fuer Brand-Analyse nicht relevant, wird aus Phase 2 ausgeschlossen."
+    }
+  ],
+  "uniqueAsinsOnPage": [
+    "B0FG874B5H",
+    "B0FG36751H",
+    "B0G81CTV55"
+  ]
+}

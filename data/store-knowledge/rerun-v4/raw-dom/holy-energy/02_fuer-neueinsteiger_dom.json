@@ -1,0 +1,39 @@
+{
+  "_meta": {
+    "store": "holy-energy",
+    "pageSlug": "02_fuer-neueinsteiger",
+    "pageName": "Fuer Neueinsteiger",
+    "pageId": "E0597C1D-5961-4E87-9CA5-2FAF0299330D",
+    "url": "https://www.amazon.de/stores/page/E0597C1D-5961-4E87-9CA5-2FAF0299330D",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_v4",
+    "scrollHeight": 4783,
+    "viewport": { "w": 1582, "h": 928 },
+    "domRowsTotal": 7,
+    "contentModulesCount": 6
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height":  400, "widgetClass": "Header",          "tileCount":  0, "imgCount":  3, "videoCount": 0, "productCount":  0, "note": "Header plus Brand-Hero. Alt-Text: Colorful product display featuring snack packages and a black electronic device, possibly a vaporizer or e-cigarette." },
+    { "domRowIdx": 1, "top":  507, "height": 1241, "widgetClass": "EditorialRow",    "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Image-Modul XL 1470x1226 als Page-Hero. Lifestyle- oder Manifest-Banner." },
+    { "domRowIdx": 2, "top": 1747, "height":  581, "widgetClass": "ProductGrid",     "tileCount":  0, "imgCount":  5, "videoCount": 0, "productCount":  5, "note": "ProductGrid 5 Starter-Set-ASINs: Trio (B0CKLHP414 fehlt hier, geprueft 5 neu), Duo, Energy-Starter, Hydration-Starter, Iced-Tea-Starter." },
+    { "domRowIdx": 3, "top": 2328, "height":  305, "widgetClass": "EditorialRow",    "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount":  0, "note": "Editorial-Banner 1470x290. Vermutlich Section-Intro oder Cross-Sell-Banner." },
+    { "domRowIdx": 4, "top": 2633, "height":  371, "widgetClass": "EditorialRow",    "tileCount": 32, "imgCount":  4, "videoCount": 0, "productCount":  0, "note": "Tile-Row 4-fach Kategorien-Verteiler." },
+    { "domRowIdx": 5, "top": 3025, "height":  297, "widgetClass": "ProductCarousel", "tileCount":  0, "imgCount": 10, "videoCount": 0, "productCount":  0, "note": "ProductCarousel Bestseller von HOLY Energy." },
+    { "domRowIdx": 6, "top": 3322, "height":  200, "widgetClass": "EditorialRow",    "tileCount":  4, "imgCount":  0, "videoCount": 0, "productCount":  0, "note": "Share-Footer." }
+  ],
+  "editorialBanners": [
+    { "modulePos": 2, "top":  514, "w": 1470, "h": 1226, "asset": "485d9366-09c6-401e-8696-dd951b2736a9", "note": "Page-Hero XL" },
+    { "modulePos": 4, "top": 2336, "w": 1470, "h":  290, "asset": "2c15588a-5d4b-4e51-b92a-4d8ef7394ec7", "note": "Mittel-Banner" }
+  ],
+  "uniqueAsinsOnPage": ["B0D1CL8B2P", "B0D1CM3YFD", "B0D1CMB16L", "B0D1CQMS61", "B0D1CQVV6X"],
+  "asinProductTitles": [
+    "HOLY Starter Set Trio - Energy, Iced Tea & Hydration - 42 Portionen in 21 fruchtigen Geschmacksrichtungen - Vegan & zuckerfrei",
+    "HOLY Starter Set Duo - HOLY Energy & HOLY Iced Tea - 28 Portionen in 14 fruchtigen Geschmacksrichtungen - Vegan & zuckerfrei",
+    "HOLY Energy Starter Set - 2x7 Sorten mit fruchtig-intensivem Geschmack",
+    "HOLY Hydration Starter Set - 2x7 Sorten mit natuerlich-fruchtigem Geschmack - Zuckerfrei",
+    "HOLY Iced Tea Starter Set - 2x7 Sorten mit natuerlich-fruchtigem Geschmack - Zuckerfrei"
+  ],
+  "openQuestionsLocal": [
+    "Page-Hero Modul 2 (1470x1226) ist sehr gross und vermutlich Manifest- oder Onboarding-Banner mit eingebranntem Text. In Phase 2 per Vision."
+  ]
+}

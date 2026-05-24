@@ -1,0 +1,20 @@
+{
+  "_meta": {
+    "store": "esn",
+    "pageSlug": "03_neuheiten",
+    "pageId": "F2F0F62B-C596-4268-893C-6D98CC7D8AAB",
+    "pageUrl": "https://www.amazon.de/stores/page/F2F0F62B-C596-4268-893C-6D98CC7D8AAB",
+    "extractedAt": "2026-05-23",
+    "extractor": "v4_phase1_chrome_mcp_live",
+    "scrollHeight": 4295,
+    "viewport": { "w": 1599, "h": 842 },
+    "domRowsTotal": 4,
+    "note": "Neuheiten-Page: kein eigener Hero. ProductGrid 11 Neuheiten-ASINs direkt nach Nav plus Schluss-Banner zu Alle-Produkte plus Footer."
+  },
+  "modules": [
+    { "domRowIdx": 0, "position": 1, "top": 99, "height": 403, "widgetType": "Header", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": ["Folgen", "Zurück"], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/acf527f7-c905-4e51-ad44-ec32c24f89cc._CR0%2C0%2C1920%2C384_SX1500_.jpg"], "asins": [], "pageLinks": [], "note": "Amazon Nav Header mit ESN Marken-Hero." },
+    { "domRowIdx": 1, "position": 2, "top": 403, "height": 1949, "widgetType": "ProductGrid", "imgCount": 11, "videoCount": 0, "productCount": 11, "headings": ["ESN GOAT Bar, Berries"], "ctas": [], "imageUrls": [], "asins": ["B0G43BS6JN", "B0G3XYNPP3", "B0DWXS9ZQB", "B0FW4JKR45", "B0FMRFL7DS", "B0GDQF29DF", "B0GDQBW3SG", "B0GJTCZCS1", "B0DX238GSK", "B0GLYMYPC8", "B0GC6QVZVD"], "pageLinks": [], "note": "ProductGrid mit 11 Neuheiten-ASINs direkt nach Header, kein eigener Page-Hero. Sortierung nach Recommended/Neuheit." },
+    { "domRowIdx": 2, "position": 3, "top": 2351, "height": 383, "widgetType": "EditorialRow", "imgCount": 1, "videoCount": 0, "productCount": 0, "headings": [], "ctas": [], "imageUrls": ["https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bb6ee5ba-f109-4c8a-a8d3-9eebe477d015._CR0%2C0%2C3000%2C750_SX1500_.jpg"], "asins": [], "pageLinks": ["9FED5CCC-6284-44BD-AD83-AAEEBF48E23F"], "note": "Schluss-Banner 3000x750 verlinkt nach ALLE PRODUKTE." },
+    { "domRowIdx": 3, "position": 4, "top": 2734, "height": 201, "widgetType": "EditorialRow", "imgCount": 0, "videoCount": 0, "productCount": 0, "headings": [], "ctas": ["Teilen"], "imageUrls": [], "asins": [], "pageLinks": [], "note": "Amazon Share Footer." }
+  ]
+}

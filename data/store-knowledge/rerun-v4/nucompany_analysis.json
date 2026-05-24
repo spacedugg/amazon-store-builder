@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "v4-2026-05", "store": "nucompany", "brandName": "nucao (the nu company)",
+  "storeUrl": "https://www.amazon.de/stores/thenucompany/page/A096FF51-79D5-440D-8789-6255E9DFE87D",
+  "analyzedAt": "2026-05-13", "methodology": "v4-full-store-3-pages",
+  "scopeNote": "Alle 3 Pages des Stores im v4-Format erfasst. Store ist sehr knapp mit nur 3 Pages (Startseite, Schokoriegel, Schokosnacks). Erfassung in 8h-Marathon-Session.",
+  "navigation": {"pageCount": 3, "structure": "Flat", "pages": [{"name": "Startseite", "level": 0, "pageId": "A096FF51-79D5-440D-8789-6255E9DFE87D"}, {"name": "Schokoriegel", "level": 1, "pageId": "5B32FE23-1CC5-409A-873C-85CF22210E68"}, {"name": "Schokosnacks", "level": 1, "pageId": "654596DD-6DFD-4395-97A1-320EA951D651"}]},
+  "contentSummary": {"pagesAnalyzed": 3, "totalModulesAnalyzed": 18, "wiederkehrendeModuleCrossPage": {"brand_hero_violet_bio_vegan_fair": "Sticky-Brand-Banner auf allen 3 Pages mit nucao Wortbildmarke plus Bio/Vegan/Fair Pill-Badges", "amazon_share_footer": "alle 3 Pages"}},
+  "pages": [
+    {"pageName": "Startseite", "pageSlug": "01_startseite", "pageId": "A096FF51-79D5-440D-8789-6255E9DFE87D", "pageType": "startseite", "scrollHeight": 6377, "brandModules": 6, "voiceMarkers": {"voiceRegister": "verspielt", "sentencePattern": "kurze_aussage", "vocabularyField": "kulinarisch", "claimType": "herkunft_prozess", "rhetoricalDevice": "metapher"}, "pageArchitecture": "Markenrahmen plus Lifestyle-Hero (drei Freundinnen) plus Brand-Story-Doppel mit USPs vegan/bio/fair plus CTA-Hero zu Schokoriegeln plus Snacks-Verteiler plus Footer."},
+    {"pageName": "Schokoriegel", "pageSlug": "02_schokoriegel", "pageId": "5B32FE23-1CC5-409A-873C-85CF22210E68", "pageType": "hub_category", "scrollHeight": 3455, "brandModules": 3, "voiceMarkers": {"voiceRegister": "verspielt", "sentencePattern": "kurze_aussage", "vocabularyField": "kulinarisch", "claimType": "zugehoerigkeit", "rhetoricalDevice": "namens_callout"}, "pageArchitecture": "Markenrahmen plus Lifestyle-Hero Frau in Kueche plus ProductGrid mit 4 Riegel-Varianten plus Footer."},
+    {"pageName": "Schokosnacks", "pageSlug": "03_schokosnacks", "pageId": "654596DD-6DFD-4395-97A1-320EA951D651", "pageType": "hub_category", "scrollHeight": 4723, "brandModules": 5, "voiceMarkers": {"voiceRegister": "verspielt", "sentencePattern": "kurze_aussage", "vocabularyField": "kulinarisch", "claimType": "benefit_emotional", "rhetoricalDevice": "none"}, "pageArchitecture": "Markenrahmen plus Closeup-Lifestyle-Hero (Hand mit Pralinen) plus zwei Lifestyle-Bridges plus ProductGrid mit 4 Snack-Varianten plus Footer."}
+  ],
+  "storeAnalysis": {
+    "marketSegment": "Premium-Bio-Vegan-Schokolade. Hochpreisig positioniert mit klarem Nachhaltigkeitsfokus.",
+    "primaryAudience": "Junge urbane Frauen 20-35, werteorientiert, oekologisch und vegan-bewusst. Lifestyle-orientiert mit politischer Konsumentscheidung.",
+    "priceTier": "Premium-Bio. Schokolade als Statement-Produkt.",
+    "productComplexity": "Sehr fokussiertes Sortiment: Schokoriegel und Snacks in mehreren Sorten. Total ca. 8-10 unique ASINs im Store.",
+    "brandVoice": {
+      "tonality": "Verspielt, jugendlich, werteorientiert. Du-Form ueber alles. Wortwahl unverschaemt, sind da um sie zu brechen suggeriert subversive Schokoladen-Lust. Marken-Spielzeug-Schreibweise nucao klein geschrieben.",
+      "adjectives": ["bio", "vegan", "fair", "unverschaemt", "lecker", "nachhaltig", "umweltfreundlich"],
+      "signatureClaims": [
+        "nucao the good choc (Brand-Tagline)",
+        "Bio. Vegan. Fair. (Drei-Pill-USP-Pattern)",
+        "Riegel sind da, um sie zu brechen.",
+        "unverschaemt leckere und nachhaltige Schokolade",
+        "vollgepackt mit Bio-Zutaten und fairem Kakao",
+        "heimkompostierbarer Folie oder Papier",
+        "positives Wirtschaften keine Utopie mehr"
+      ],
+      "voiceContrasts": [
+        "nucao nutzt Du-Form und verspielten Slogan-Style (Riegel sind da um sie zu brechen) - Kontrast zu professionellen Marken wie Bedsure (Sie-Form)",
+        "Brand-Manifesto stark politisch-werteorientiert (positives Wirtschaften, Fair-Reforestation), nicht produktbezogen",
+        "Wenig konkrete_zahl-Pattern - Werte dominieren ueber Daten"
+      ]
+    },
+    "designAesthetic": {
+      "colorPalette": "Marken-Code violett-rosa-rot. Schokoriegel-Verpackungen kraeftig in Lila (Crisp und Crunch), Rot (Creamy Hazelnut), Orange (Salted Caramel), Pink (Crunchy Raspberries), je nach Sorte. Schwarze Schokoladen-Visuals als Produktanker.",
+      "typography": "Spielerische Sans-Serif Wortbildmarke nucao klein und verspielt geschrieben. Rote Versalien-Headlines fuer Sub-Pages (Schokoriegel, Schokosnacks). Bold Body-Text fuer USP-Keywords.",
+      "photographyStyle": "Urban-Lifestyle mit jungen Frauen in farbintensiver Mode, Stadtkontext (Industrieanlagen, Beton, Bahnhofs-Settings). Closeup-Lifestyle fuer Snacks (Hand mit Praline). Produkt-Stillleben mit Schokoladen-Aufbrechen und Frische-Anschnitt.",
+      "layoutSignals": "Drei-Pill-Pattern Bio. Vegan. Fair. als visueller Marken-Code wiederkehrend. Pill-CTA-Button in Rot mit weisser Schrift. Lifestyle-Tile-Pair als Story-Modul. ProductGrid als Konversions-Anker."
+    },
+    "positioningClaim": "nucao macht Schokolade politisch: jung, weiblich, urban, bio-vegan-fair. The Good Choc als ironisches Statement im Schokoladenregal.",
+    "contentStrategy": {
+      "approach": "Lifestyle dominiert ueber Produkt. Marken-Werte (Bio Vegan Fair) ueber Geschmack. Mission-Storytelling (Fair-Reforestation, positives Wirtschaften) als Differenzierung.",
+      "emotionalLayer": "Junge Persona, Stadtlebensgefuehl, lachende Freundinnen, lustvolle Schokoladen-Closeups.",
+      "rationalLayer": "Bio-Zutaten, fairer Kakao, oekologischer Anbau, heimkompostierbare Verpackung. Wenig Geschmacks-Details.",
+      "modulePreferences": "hero_banner_tall mit Lifestyle, editorial_banner_large mit Brand-Story, product_grid_featured mit 4 Karten am Page-Ende."
+    },
+    "conversionPath": {
+      "primary": "ProductGrid mit 4 Tiles auf Schokoriegel und Schokosnacks Pages",
+      "secondary": "Pill-CTA Zu den Schokoriegeln auf Startseite Modul 5",
+      "trustLoop": "Brand-Mission und Fair-Reforestation als Trust-Anker (keine externen Awards-Banner)"
+    },
+    "keyStrengths": [
+      "Klares Drei-USP-Pattern Bio. Vegan. Fair. ueber alle Pages",
+      "Sehr lifestyle-konzentriert mit konsistenter Zielgruppen-Persona",
+      "Brand-Manifesto-Block mit politischem Statement positives Wirtschaften",
+      "Konsistenter Marken-Farbcode violett-rosa-rot",
+      "Wortspiel-Marketing Riegel sind da um sie zu brechen"
+    ],
+    "brandUSPs": [
+      "Bio - vegane Schokolade aus oekologischem Anbau",
+      "Vegan - alle Produkte komplett pflanzlich",
+      "Fair - fairer Kakao mit Fair-Reforestation-Projekten",
+      "Umweltfreundlich verpackt in heimkompostierbarer Folie oder Papier",
+      "Brand-Mission positives Wirtschaften"
+    ],
+    "moduleFunctionalTaxonomy": {
+      "brand_hero_violet_pill_usps": "Brand-Hero mit Schokoriegel-Visual links plus Brand-Wortbildmarke rechts plus drei Pill-USPs Bio Vegan Fair am unteren Rand",
+      "lifestyle_hero_urban_frauen": "Lifestyle-Hero mit jungen Frauen in Stadtkontext",
+      "brand_story_text_plus_produkt": "Split-Layout mit Brand-Statement-Text und USP-Keywords gefettet plus Produkt-Stillleben",
+      "brand_manifesto_block": "Split-Layout mit Lifestyle-Visual und Mission-Statement-Text",
+      "cta_hero_riegel_breaking": "Lifestyle-Hero mit Versalien-Headline und Pill-CTA-Button",
+      "product_grid_4_varianten": "Vier Schokoriegel/Snack-Karten als Sortiment-Showcase"
+    },
+    "pageArchetypes": {
+      "startseite": {"primaryFunction": "Brand-Story plus Werte-Vermittlung plus Sub-Kategorie-Verteiler", "conversionMode": "Soft (Tile-Klick)", "transferableTo": "Bio-Vegan-Marken mit politischem Werte-Statement"},
+      "hub_category": {"primaryFunction": "Lifestyle-Hero plus ProductGrid", "conversionMode": "Hard (Tile-Klick zu ASIN)", "transferableTo": "Sortimentspages mit kompaktem Produkt-Set"}
+    },
+    "brandSpecificVsStructuralExtraction": {
+      "strukturell_uebertragbar_an_neue_brands": [
+        "Drei-Pill-USP-Pattern (3 prägnante Marken-Werte als Pill-Badges im Hero)",
+        "Brand-Manifesto-Block-Pattern mit Lifestyle plus Mission-Text",
+        "Lifestyle-Hero-mit-Persona-Pattern (urban-junge Zielgruppe)",
+        "CTA-Hero-mit-Pill-Button-Pattern",
+        "Wortspiel-Slogan als rhetoricalDevice",
+        "voiceMarkers (verspielt, kulinarisch)"
+      ],
+      "brand_spezifisch_NICHT_uebertragbar": [
+        "Tagline the good choc (gehoert nur nucao)",
+        "Drei Werte-Begriffe Bio Vegan Fair (sind allgemeine Begriffe, aber konkrete Auswahl gehoert dieser Marke)",
+        "Headline Riegel sind da um sie zu brechen.",
+        "Marken-Farbcode violett-rosa-rot",
+        "Fair-Reforestation-Mission (Marken-spezifische Mission)",
+        "Wortbildmarke nucao Schreibweise"
+      ]
+    }
+  },
+  "openQuestions": ["ASIN-Targets in Detail-Tiles und Lifestyle-Bridges nicht im Detail erfasst (Placeholder ASIN_A, ASIN_B etc.)."]
+}

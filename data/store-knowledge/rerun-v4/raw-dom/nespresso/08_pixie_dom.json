@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "store": "nespresso",
+    "pageSlug": "08_pixie",
+    "pageName": "Pixie",
+    "pageId": "73BA5A55-F2AD-4EFD-8BD1-22A38C1F80DA",
+    "url": "https://www.amazon.de/stores/page/73BA5A55-F2AD-4EFD-8BD1-22A38C1F80DA",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_compact",
+    "scrollHeight": 3616,
+    "viewport": { "w": 1599, "h": 842 },
+    "domRowsTotal": 5,
+    "contentModulesCount": 5
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height": 395, "widgetType": "Header",       "tileCount": 0, "imgCount": 1, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Nav header." },
+    { "domRowIdx": 1, "top":  502, "height": 602, "widgetType": "ProductGrid",  "tileCount": 0, "imgCount": 3, "videoCount": 0, "productCount": 6, "asinCount": 3, "note": "ProductGrid mit 6 product-Markern (3 unique ASINs: Pixie Varianten).", "sampleAsins": ["B0CQPM89H9","B0CQPN4ZT3","B0D1GFXFZ5"] },
+    { "domRowIdx": 2, "top": 1103, "height": 743, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 0, "videoCount": 1, "productCount": 0, "asinCount": 0, "note": "Hero-Video Vollformat (Pixie Maschinen-Demo)." },
+    { "domRowIdx": 3, "top": 1846, "height": 309, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 1, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Section Intro / Brand-Statement Banner." },
+    { "domRowIdx": 4, "top": 2155, "height": 200, "widgetType": "EditorialRow", "tileCount": 1, "imgCount": 0, "videoCount": 0, "productCount": 0, "asinCount": 0, "note": "Amazon Share Footer." }
+  ],
+  "openQuestionsLocal": [
+    "Pixie hat 3 ASIN-Varianten. Standard Modell-Landing-Pattern wie andere Maschinen-Pages."
+  ]
+}

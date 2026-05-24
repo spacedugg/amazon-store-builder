@@ -1,0 +1,24 @@
+{
+  "_meta": {
+    "store": "trixie",
+    "pageSlug": "09_boho",
+    "pageId": "B05E0A77-E846-4D5F-A5EA-DD262482E308",
+    "pageName": "TRIXIE BOHO",
+    "pageLevel": 2,
+    "extractedAt": "2026-05-23",
+    "pageUrl": "https://www.amazon.de/stores/page/B05E0A77-E846-4D5F-A5EA-DD262482E308",
+    "scrollHeight": 3114,
+    "domRowsTotal": 5,
+    "totalImages": 9,
+    "totalVideos": 0,
+    "totalUniqueAsins": 7,
+    "note": "BOHO Brand-Serie Sub-Page minimal: BrandHeader plus ProductGrid 7 ASINs (Hundebett Boho 38213/38214, Tipi Boho 38211, beige Naturtoene) plus Tile-Pair plus Footer. Kuerzestes BrandStore-Sub-Page der 10."
+  },
+  "modules": [
+    {"domRowIdx": 0, "top": 99, "height": 395, "widgetType": "BrandHeader", "imgCount": 1, "note": "Nav header. Pfad anzeige: 'TRIXIE SERIEN > TRIXIE BOHO'."},
+    {"domRowIdx": 1, "top": 99, "height": 300, "widgetType": "StoreHero_overlap", "imgCount": 1, "note": "Brand-Banner als Hero-Overlay."},
+    {"domRowIdx": 2, "top": 502, "height": 1151, "widgetType": "ProductGrid", "imgCount": 7, "asinCount": 7, "note": "ProductGrid 7 ASINs BOHO-Linie (Hundebett 38213/38214 beige, Tipi 38211 mit Wendekissen).", "asins": ["B0BPCYX4SZ","B0BPDP45TT","B0BPHH6DLX","B0BPD2D5LR","B0BPCWQWYV","B0BPD1F5NZ","B0BN9HQ3M8"]},
+    {"domRowIdx": 3, "top": 1653, "height": 200, "widgetType": "EditorialRow_double", "imgCount": 0, "tileCount": 1, "note": "Footer-naher Tile-Pair-Spacer."},
+    {"domRowIdx": 4, "top": 1653, "height": 200, "widgetType": "AmazonShareFooter", "note": "Amazon Share Footer."}
+  ]
+}

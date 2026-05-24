@@ -1,0 +1,148 @@
+{
+  "_meta": {
+    "store": "more-nutrition",
+    "pageSlug": "03_zerup",
+    "pageId": "DA439A68-D45D-4BB9-97CC-5D706DC1CF89",
+    "url": "https://www.amazon.de/stores/page/DA439A68-D45D-4BB9-97CC-5D706DC1CF89",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_v4_widget_scan",
+    "scrollHeight": 9574,
+    "viewport": { "w": 1582, "h": 872 },
+    "domWidgetsTotal": 10,
+    "note": "ZERUP Kategorie-Page. Hero, Video, FeaturedDealShowcase eines Best-Seller-ASIN, grosses ProductGrid 19 Zerup-ASINs, Promo-Banner, Bundle-Tile-Row 4-fach, Brand-Banner, Produktselektor-Banner, Closing-Banner, Footer."
+  },
+  "hero": {
+    "section": "hero",
+    "widgetIdx": 0,
+    "top": 99,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/8e0d60bf-7c5a-4a0a-9093-0fbeb800ac0d._CR0%2C0%2C3000%2C600_SX1500_.jpg",
+    "imageSize": { "w": 1500, "h": 300 },
+    "note": "ZERUP Hero-Banner. Bildtext per Vision lesbar (vermutlich ZERUP Brandname plus Pink-Hintergrund laut Tile auf Startseite)."
+  },
+  "navigation": "siehe 01_startseite_dom.json",
+  "modules": [
+    {
+      "userModuleId": 1,
+      "widgetIdx": 1,
+      "top": 502,
+      "height": 743,
+      "widgetClass": "EditorialRow",
+      "layoutType": "video_module",
+      "tileCount": 1,
+      "videoCount": 1,
+      "note": "Brand-Video direkt nach Hero, vor Featured-Deal."
+    },
+    {
+      "userModuleId": 2,
+      "widgetIdx": 2,
+      "top": 1244,
+      "height": 706,
+      "widgetClass": "EditorialRow",
+      "layoutType": "featured_deal_asin_showcase",
+      "tileCount": 1,
+      "featuredAsin": "B0C3M23PD8",
+      "featuredProductTitle": "MORE Zerup, Peach Iced Tea, 65 ml, für bis zu 8 l Fertiggetränk, zuckerfreier Sirup mit u.a. echten Fruchtextrakten, vegan, zero Kalorien - made in Germany",
+      "rating": "4,6 von 5 Sternen, 2400 Bewertungen",
+      "imgCount": 24,
+      "videoCount": 10,
+      "note": "FeaturedDeal-Modul mit grosser Produktbild-Galerie, Detail-Sub-Bildern, eingebettetem Produkt-Video, Sterne-Bewertung. Funktioniert wie ein eingebetteter ASIN-Detailpage-Vorschau."
+    },
+    {
+      "userModuleId": 3,
+      "widgetIdx": 3,
+      "top": 1950,
+      "height": 2790,
+      "widgetClass": "ProductGrid",
+      "layoutType": "product_grid_full_catalog",
+      "tileCount": 19,
+      "asins": ["B0C3M23PD8","B0C3MCXRG1","B0C3M6NRXD","B0C3M31QJ2","B0DWXXC99Z","B0D4DPH19W","B0C3LT4XTW","B0C3LZ2RC2","B0D4CRNBWK","B0D4CZ3L89","B0D4DHHQ22","B0CF65DKX9","B0DRW5KRGP","B0DRW54P3W","B0G1NBS7GL","B0DWXZ4WMY","B0DWXZ2XBF","B0DY8MDRL1","B0FJYN2QY1"],
+      "exampleTitles": [
+        "MORE Zerup, Peach Iced Tea, 65 ml",
+        "MORE Zerup, Lemon Iced Tea, 65 ml",
+        "MORE Zerup, Capri Orange, 65 ml"
+      ],
+      "amazonCertifications": ["Compact by Design (Amazon-Zertifizierung auf mehreren ASINs)"],
+      "note": "Vollkatalog-ProductGrid mit allen 19 ZERUP-Sorten als Einzelflaschen plus Mehrpack-Varianten. Hauptkonversion der Page."
+    },
+    {
+      "userModuleId": 4,
+      "widgetIdx": 4,
+      "top": 4741,
+      "height": 750,
+      "widgetClass": "EditorialRow",
+      "layoutType": "editorial_banner_promo_asin",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/745c056d-2bec-47b1-91ec-0ab10d9b8031._CR0%2C0%2C3000%2C1500_SX1500_.jpg"
+      },
+      "linkedAsin": "B0CFB57JXF",
+      "ctaText": "Jetzt einkaufen",
+      "note": "Quadratisches Promo-Banner mit CTA 'Jetzt einkaufen', verlinkt direkt auf einen Bundle-ASIN."
+    },
+    {
+      "userModuleId": 5,
+      "widgetIdx": 5,
+      "top": 5491,
+      "height": 371,
+      "widgetClass": "EditorialRow",
+      "layoutType": "product_grid_quad",
+      "tileCount": 4,
+      "asins": ["B0CFB57JXF","B0DYDJM8HH","B0F59YS4YW","B0DY8NH26N"],
+      "tiles": [
+        { "asin": "B0CFB57JXF", "productTitleAria": "MORE Zerup, mixed 6er Bundle, 6 x 65 ml, verschiedene Sorten" },
+        { "asin": "B0DYDJM8HH", "productTitleAria": "MORE Zerup, mixed 12er Bundle, 12 x 65 ml" },
+        { "asin": "B0F59YS4YW", "productTitleAria": "MORE Zerup, mixed 6er Mocktail Bundle, 6 x 65 ml, Mojito & Moreperello" },
+        { "asin": "B0DY8NH26N", "productTitleAria": "MORE Barista Zerup, mixed 6er Bundle, 6 x 65 ml, für Kaffee, Tee und Heißgetränke" }
+      ],
+      "note": "Tile-Row 4-fach Bundle-Selektion."
+    },
+    {
+      "userModuleId": 6,
+      "widgetIdx": 6,
+      "top": 5862,
+      "height": 750,
+      "widgetClass": "EditorialRow",
+      "layoutType": "full_width_image_brand_story",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/598e645e-7af3-4977-a640-ec885910806b._CR0%2C0%2C3000%2C1500_SX1500_.png"
+      },
+      "links": [
+        { "pageId": "DA439A68-D45D-4BB9-97CC-5D706DC1CF89", "ariaLabel": "Weitere Informationen" }
+      ],
+      "note": "ZERUP Brand-Story-Banner quadratisch. Self-link auf eigene Page."
+    },
+    {
+      "userModuleId": 7,
+      "widgetIdx": 7,
+      "top": 6612,
+      "height": 750,
+      "widgetClass": "EditorialRow",
+      "layoutType": "full_width_image_creative",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d6865a5f-5e09-4f0a-b72c-b6bb65ac059d._CR0%2C0%2C1280%2C640_SX1500_.jpg"
+      },
+      "links": [{"pageId": "8790A8BC-31A4-4810-8B75-BF1AFCE858B5", "ariaLabel": "Weitere Informationen"}],
+      "note": "Identisches Produktselektor-Promo-Banner wie auf Startseite."
+    },
+    {
+      "userModuleId": 8,
+      "widgetIdx": 8,
+      "top": 7362,
+      "height": 750,
+      "widgetClass": "EditorialRow",
+      "layoutType": "full_width_image_closing",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d359c2c9-b952-47a2-b88a-864e11ffc31c._CR0%2C0%2C3000%2C1500_SX1500_.png"
+      },
+      "links": [{"pageId": "F081FD4B-1559-4A38-A4F3-FC8E6732BCEB", "ariaLabel": "Weitere Informationen"}],
+      "note": "Closing-Banner ALLE PRODUKTE, wie auf Bestseller-Page."
+    }
+  ],
+  "excluded": [
+    { "widgetIdx": 9, "top": 8112, "height": 200, "reason": "Amazon Share-Footer." }
+  ],
+  "uniqueAsinsOnPage": ["B0C3M23PD8","B0C3MCXRG1","B0C3M6NRXD","B0C3M31QJ2","B0DWXXC99Z","B0D4DPH19W","B0C3LT4XTW","B0C3LZ2RC2","B0D4CRNBWK","B0D4CZ3L89","B0D4DHHQ22","B0CF65DKX9","B0DRW5KRGP","B0DRW54P3W","B0G1NBS7GL","B0DWXZ4WMY","B0DWXZ2XBF","B0DY8MDRL1","B0FJYN2QY1","B0CFB57JXF","B0DYDJM8HH","B0F59YS4YW","B0DY8NH26N"]
+}

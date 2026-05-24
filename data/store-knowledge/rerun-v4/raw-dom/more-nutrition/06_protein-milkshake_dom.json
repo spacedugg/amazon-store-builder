@@ -1,0 +1,60 @@
+{
+  "_meta": {
+    "store": "more-nutrition",
+    "pageSlug": "06_protein-milkshake",
+    "pageId": "5C4AE7B3-FEE1-4887-B719-D0188FF74E51",
+    "url": "https://www.amazon.de/stores/page/5C4AE7B3-FEE1-4887-B719-D0188FF74E51",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_v4_widget_scan",
+    "scrollHeight": 4766,
+    "viewport": { "w": 1582, "h": 872 },
+    "domWidgetsTotal": 6,
+    "note": "PROTEIN MILKSHAKE Sub-Page. Sehr schlanke Page mit Hero, FeaturedDeal Sahne plus ProductGrid 5 ASINs plus Standard-Banner-Schluss. Kein eigenes Video. Vermutlich ein 'Sub-Category Skeleton' Pattern."
+  },
+  "hero": {
+    "section": "hero", "widgetIdx": 0, "top": 99,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/5e4933d0-bc85-43be-bbc3-b4c79b9b6ff9._CR0%2C0%2C3000%2C600_SX1500_.png",
+    "imageSize": { "w": 1500, "h": 300 },
+    "note": "PROTEIN MILKSHAKE Hero-Banner mit lila Hintergrund laut Startseite-Tile."
+  },
+  "navigation": "siehe 01_startseite_dom.json",
+  "modules": [
+    {
+      "userModuleId": 1, "widgetIdx": 1, "top": 502, "height": 657,
+      "widgetClass": "EditorialRow", "layoutType": "featured_deal_asin_showcase", "tileCount": 1,
+      "featuredAsin": "B0GBWW4R88",
+      "featuredProductTitle": "MORE Protein, Sahne, 750 g, Mix aus Whey Konzentrat und Casein ideal zum Muskelaufbau und -erhalt, mit Laktase, perfekt zum kochen & backen - made in Germany",
+      "rating": "4,4 von 5 Sternen, 1568 Bewertungen", "imgCount": 22, "videoCount": 0,
+      "note": "FeaturedDeal Sahne 750 g als Hero-Produkt."
+    },
+    {
+      "userModuleId": 2, "widgetIdx": 2, "top": 1159, "height": 645,
+      "widgetClass": "ProductGrid", "layoutType": "product_grid_full_catalog", "tileCount": 5,
+      "asins": ["B0CDX546MR","B0DBZZ5C6K","B0CDX3GCZR","B07VDR1TCP","B0B8VKF7LH"],
+      "exampleTitles": [
+        "MORE Protein, Sahne, 600 g",
+        "MORE Protein, Coconut Milk, 600 g",
+        "MORE Protein Milkshake, Trinkschokolade, 600 g"
+      ],
+      "note": "Kompaktes ProductGrid 5 ASINs als Vollkatalog der Sub-Category."
+    },
+    {
+      "userModuleId": 3, "widgetIdx": 3, "top": 1804, "height": 750,
+      "widgetClass": "EditorialRow", "layoutType": "full_width_image_creative", "tileCount": 1,
+      "mainImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d6865a5f-5e09-4f0a-b72c-b6bb65ac059d._CR0%2C0%2C1280%2C640_SX1500_.jpg" },
+      "links": [{"pageId": "8790A8BC-31A4-4810-8B75-BF1AFCE858B5", "ariaLabel": "Weitere Informationen"}],
+      "note": "Produktselektor-Banner."
+    },
+    {
+      "userModuleId": 4, "widgetIdx": 4, "top": 2554, "height": 750,
+      "widgetClass": "EditorialRow", "layoutType": "full_width_image_closing", "tileCount": 1,
+      "mainImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d359c2c9-b952-47a2-b88a-864e11ffc31c._CR0%2C0%2C3000%2C1500_SX1500_.png" },
+      "links": [{"pageId": "F081FD4B-1559-4A38-A4F3-FC8E6732BCEB", "ariaLabel": "Weitere Informationen"}],
+      "note": "Closing-Banner."
+    }
+  ],
+  "excluded": [
+    { "widgetIdx": 5, "top": 3304, "height": 200, "reason": "Amazon Share-Footer." }
+  ],
+  "uniqueAsinsOnPage": ["B0GBWW4R88","B0CDX546MR","B0DBZZ5C6K","B0CDX3GCZR","B07VDR1TCP","B0B8VKF7LH"]
+}

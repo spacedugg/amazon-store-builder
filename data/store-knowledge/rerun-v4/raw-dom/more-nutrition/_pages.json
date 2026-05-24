@@ -1,0 +1,17 @@
+{
+  "store": "more-nutrition",
+  "storeUrl": "https://www.amazon.de/stores/page/7AD425C6-C3C5-402D-A69D-D6201F98F888",
+  "discoveredAt": "2026-05-23",
+  "pages": [
+    { "slug": "01_startseite",            "name": "Startseite",            "level": 0, "pageId": "7AD425C6-C3C5-402D-A69D-D6201F98F888", "url": "https://www.amazon.de/stores/page/7AD425C6-C3C5-402D-A69D-D6201F98F888" },
+    { "slug": "02_bestseller",            "name": "BESTSELLER",            "level": 1, "pageId": "B0B4CEEB-909A-4DC6-A571-6AA4D718DB21", "url": "https://www.amazon.de/stores/page/B0B4CEEB-909A-4DC6-A571-6AA4D718DB21" },
+    { "slug": "03_zerup",                 "name": "ZERUP",                 "level": 1, "pageId": "DA439A68-D45D-4BB9-97CC-5D706DC1CF89", "url": "https://www.amazon.de/stores/page/DA439A68-D45D-4BB9-97CC-5D706DC1CF89" },
+    { "slug": "04_chunky-flavour",        "name": "CHUNKY FLAVOUR",        "level": 1, "pageId": "D5FF78A5-8306-4D4B-80F7-F20BFBA08472", "url": "https://www.amazon.de/stores/page/D5FF78A5-8306-4D4B-80F7-F20BFBA08472" },
+    { "slug": "05_proteine",              "name": "PROTEINE",              "level": 1, "pageId": "9A82B50C-BA5A-4A3B-ADBB-7B729770F289", "url": "https://www.amazon.de/stores/page/9A82B50C-BA5A-4A3B-ADBB-7B729770F289" },
+    { "slug": "06_protein-milkshake",     "name": "PROTEIN MILKSHAKE",     "level": 2, "pageId": "5C4AE7B3-FEE1-4887-B719-D0188FF74E51", "url": "https://www.amazon.de/stores/page/5C4AE7B3-FEE1-4887-B719-D0188FF74E51" },
+    { "slug": "07_protein-iced-coffee",   "name": "PROTEIN ICED COFFEE",   "level": 2, "pageId": "3D5F63E7-0917-4ABF-9F07-7D10B2AC1639", "url": "https://www.amazon.de/stores/page/3D5F63E7-0917-4ABF-9F07-7D10B2AC1639" },
+    { "slug": "08_clear-protein",         "name": "CLEAR PROTEIN",         "level": 2, "pageId": "55FD402B-A0DC-4A7C-BD00-2D0ECE353C4D", "url": "https://www.amazon.de/stores/page/55FD402B-A0DC-4A7C-BD00-2D0ECE353C4D" },
+    { "slug": "09_clear-glow-peptides",   "name": "CLEAR GLOW PEPTIDES",   "level": 2, "pageId": "483E27E9-01B3-441C-B1B9-DD468E87F786", "url": "https://www.amazon.de/stores/page/483E27E9-01B3-441C-B1B9-DD468E87F786" },
+    { "slug": "10_vegan-protein",         "name": "VEGAN PROTEIN",         "level": 2, "pageId": "A217601D-395D-4DF1-B940-4BABA3DAD6E5", "url": "https://www.amazon.de/stores/page/A217601D-395D-4DF1-B940-4BABA3DAD6E5" }
+  ]
+}

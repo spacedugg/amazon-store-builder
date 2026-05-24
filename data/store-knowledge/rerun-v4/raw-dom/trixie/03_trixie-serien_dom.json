@@ -1,0 +1,28 @@
+{
+  "_meta": {
+    "store": "trixie",
+    "pageSlug": "03_trixie-serien",
+    "pageId": "9A368574-76A7-414F-9D55-8ACAC0E0199E",
+    "pageName": "TRIXIE Serien",
+    "pageLevel": 1,
+    "extractedAt": "2026-05-23",
+    "pageUrl": "https://www.amazon.de/stores/page/9A368574-76A7-414F-9D55-8ACAC0E0199E",
+    "scrollHeight": 4756,
+    "domRowsTotal": 9,
+    "totalImages": 5,
+    "totalVideos": 0,
+    "totalUniqueAsins": 0,
+    "note": "Reiner Serien-Hub: BrandHeader plus 5 vertikal gestapelte Hero-Banner-Tall-Tiles, jeder verlinkt auf eine Brand-Serie-Subpage. Kein ProductGrid. CTA-Modus: Soft (Verteilen)."
+  },
+  "modules": [
+    {"domRowIdx": 0, "top": 99, "height": 395, "widgetType": "BrandHeader", "imgCount": 1, "note": "Nav header mit Brand-Banner und Mega-Nav. CTA: Folgen."},
+    {"domRowIdx": 1, "top": 99, "height": 300, "widgetType": "StoreHero_overlap", "imgCount": 1, "note": "Brand-Banner als Hero-Overlay innerhalb BrandHeader."},
+    {"domRowIdx": 2, "top": 502, "height": 737, "widgetType": "EditorialRow_double", "imgCount": 1, "tileCount": 1, "heading": "DOG ACTIVITY", "subline": "Interaktives Intelligenzspielzeug fuer Hunde", "cta": "Jetzt entdecken", "linkPageId": "182C9D19-A7A4-4CAB-B7D4-982D2DB2D14A", "note": "Hero-Banner-Tall (1500x740) Serie-Verteiler mit Headline plus Subline plus CTA."},
+    {"domRowIdx": 3, "top": 1239, "height": 690, "widgetType": "EditorialRow_double", "imgCount": 1, "tileCount": 1, "heading": "CAT ACTIVITY", "subline": "Interaktives Intelligenzspielzeug fuer Katzen", "cta": "Jetzt entdecken", "linkPageId": "2EF98BB6-9043-44EA-92B5-796EDFD9B35D", "note": "Hero-Banner-Tall Serie-Verteiler."},
+    {"domRowIdx": 4, "top": 1929, "height": 591, "widgetType": "EditorialRow_double", "imgCount": 1, "tileCount": 1, "heading": "BE NORDIC", "subline": "Maritimes Haustierzubehoer", "cta": "Jetzt entdecken", "linkPageId": "162DCC92-677E-4162-AD5C-060183A4F8FB", "note": "Hero-Banner-Tall Serie-Verteiler."},
+    {"domRowIdx": 5, "top": 2520, "height": 640, "widgetType": "EditorialRow_double", "imgCount": 1, "tileCount": 1, "heading": "BOHO", "subline": "Haustierzubehoer in angesagten Naturtoenen", "cta": "Jetzt entdecken", "linkPageId": "B05E0A77-E846-4D5F-A5EA-DD262482E308", "note": "Hero-Banner-Tall Serie-Verteiler."},
+    {"domRowIdx": 6, "top": 3160, "height": 730, "widgetType": "EditorialRow_double", "imgCount": 1, "tileCount": 1, "heading": "BE ECO", "subline": "Haustierzubehoer aus recycelten Materialien", "cta": "Jetzt entdecken", "linkPageId": "949C8052-6124-4DFD-81AC-4711897015BC", "note": "Hero-Banner-Tall Serie-Verteiler. Nachhaltigkeits-Signal."},
+    {"domRowIdx": 7, "top": 3891, "height": 201, "widgetType": "EditorialRow_double", "imgCount": 0, "tileCount": 1, "note": "Footer-naher Tile-Pair-Spacer."},
+    {"domRowIdx": 8, "top": 3891, "height": 201, "widgetType": "AmazonShareFooter", "note": "Amazon Share Footer."}
+  ]
+}

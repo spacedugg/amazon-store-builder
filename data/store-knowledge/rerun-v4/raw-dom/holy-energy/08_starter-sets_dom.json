@@ -1,0 +1,41 @@
+{
+  "_meta": {
+    "store": "holy-energy",
+    "pageSlug": "08_starter-sets",
+    "pageName": "Starter Sets",
+    "pageId": "15F6D24E-FF9D-4FE5-A1FB-5A2AD609CFE1",
+    "url": "https://www.amazon.de/stores/page/15F6D24E-FF9D-4FE5-A1FB-5A2AD609CFE1",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_v4",
+    "scrollHeight": 6163,
+    "viewport": { "w": 1582, "h": 928 },
+    "domRowsTotal": 8,
+    "contentModulesCount": 7
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height":  400, "widgetClass": "Header",       "tileCount":  0, "imgCount":  3, "videoCount":  0, "productCount":  0, "note": "Header plus Brand-Hero 1500x300." },
+    { "domRowIdx": 1, "top":  507, "height": 1242, "widgetClass": "EditorialRow", "tileCount":  8, "imgCount":  1, "videoCount":  0, "productCount":  0, "note": "Page-Hero XL 1470x1227. Starter-Sets-Manifest Banner." },
+    { "domRowIdx": 2, "top": 1749, "height":  599, "widgetClass": "EditorialRow", "tileCount":  4, "imgCount": 24, "videoCount": 10, "productCount":  0, "note": "ASIN-Spotlight Starter Set Trio (Heading nachgewiesen)." },
+    { "domRowIdx": 3, "top": 2348, "height":  599, "widgetClass": "EditorialRow", "tileCount":  4, "imgCount": 24, "videoCount": 10, "productCount":  0, "note": "ASIN-Spotlight Starter Set Duo." },
+    { "domRowIdx": 4, "top": 2948, "height":  577, "widgetClass": "EditorialRow", "tileCount":  4, "imgCount": 24, "videoCount": 10, "productCount":  0, "note": "ASIN-Spotlight Energy Starter Set." },
+    { "domRowIdx": 5, "top": 3525, "height":  599, "widgetClass": "EditorialRow", "tileCount":  4, "imgCount": 24, "videoCount": 10, "productCount":  0, "note": "ASIN-Spotlight Hydration Starter Set." },
+    { "domRowIdx": 6, "top": 4124, "height":  577, "widgetClass": "EditorialRow", "tileCount":  4, "imgCount": 24, "videoCount": 10, "productCount":  0, "note": "ASIN-Spotlight Iced Tea Starter Set." },
+    { "domRowIdx": 7, "top": 4702, "height":  200, "widgetClass": "EditorialRow", "tileCount":  4, "imgCount":  0, "videoCount":  0, "productCount":  0, "note": "Share-Footer." }
+  ],
+  "editorialBanners": [
+    { "modulePos": 2, "top": 514, "w": 1470, "h": 1227, "asset": "9f613f24-8705-4b59-8757-ae964129f072", "note": "Page-Hero XL" }
+  ],
+  "uniqueAsinsOnPage": [],
+  "spotlightedProducts": [
+    {"modulePos": 3, "name": "Starter Set Trio", "tagline": "Energy, Iced Tea & Hydration, 42 Portionen in 21 fruchtigen Geschmacksrichtungen"},
+    {"modulePos": 4, "name": "Starter Set Duo",  "tagline": "HOLY Energy & HOLY Iced Tea, 28 Portionen in 14 fruchtigen Geschmacksrichtungen"},
+    {"modulePos": 5, "name": "Energy Starter Set",     "tagline": "2x7 Sorten mit fruchtig-intensivem Geschmack"},
+    {"modulePos": 6, "name": "Hydration Starter Set",  "tagline": "2x7 Sorten mit natuerlich-fruchtigem Geschmack, zuckerfrei"},
+    {"modulePos": 7, "name": "Iced Tea Starter Set",   "tagline": "2x7 Sorten mit natuerlich-fruchtigem Geschmack, zuckerfrei"}
+  ],
+  "openQuestionsLocal": [
+    "Page hat 5 nahezu identische ASIN-Spotlight-Module hintereinander (jeweils 1 ASIN mit Video-Carousel und ~24 Bildern). Vermutlich ASIN-Showcase-Stacks fuer jedes Starter-Set einzeln (Trio, Duo, Energy, Hydration, Iced Tea).",
+    "Kein ProductGrid am Ende, weil die Produkt-Auswahl pro Spotlight bereits konvertierungsfaehig dargestellt wird.",
+    "Keine data-asin im DOM gefunden weil ASIN-Showcase per JS gerendert wird."
+  ]
+}

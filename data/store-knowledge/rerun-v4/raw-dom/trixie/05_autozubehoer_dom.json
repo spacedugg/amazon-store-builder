@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "store": "trixie",
+    "pageSlug": "05_autozubehoer",
+    "pageId": "744B60E7-8F11-4E81-925F-1D15F8A93596",
+    "pageName": "Autozubehoer",
+    "pageLevel": 2,
+    "extractedAt": "2026-05-23",
+    "pageUrl": "https://www.amazon.de/stores/page/744B60E7-8F11-4E81-925F-1D15F8A93596",
+    "scrollHeight": 5610,
+    "domRowsTotal": 6,
+    "totalImages": 27,
+    "totalVideos": 1,
+    "totalUniqueAsins": 25,
+    "note": "Autozubehoer Sub-Kategorie-Page: BrandHeader plus Video-Hero plus ProductGrid 25 ASINs (Schwerpunkt Hundetransportboxen Aluminium 39340/39341 plus Sicherheitsgurte plus Rueckbank-Schondecken) plus Tile-Pair plus Footer."
+  },
+  "modules": [
+    {"domRowIdx": 0, "top": 99, "height": 395, "widgetType": "BrandHeader", "imgCount": 1, "note": "Nav header mit Brand-Banner und Mega-Nav. CTA: Folgen."},
+    {"domRowIdx": 1, "top": 99, "height": 300, "widgetType": "StoreHero_overlap", "imgCount": 1, "note": "Brand-Banner als Hero-Overlay."},
+    {"domRowIdx": 2, "top": 502, "height": 743, "widgetType": "EditorialRow_double", "imgCount": 0, "videoCount": 1, "tileCount": 1, "note": "Video-Hero gross (1500x743). Stellt Autozubehoer-Anwendungs-Szene dar (Hund im Auto)."},
+    {"domRowIdx": 3, "top": 1244, "height": 2904, "widgetType": "ProductGrid", "imgCount": 25, "asinCount": 25, "note": "ProductGrid 25 ASINs Schwerpunkt Hundetransportboxen Aluminium (39340 graphit L, 39341 silber M) plus weiteres Autozubehoer Sicherheitsgurte Schondecken.", "asins": ["B005X97PL0","B0054JE8ZA","B0054JE92C","B07H7N7JYQ","B0054JE94A","B008JWSDWI","B00G2J0DYG","B07DB84CVQ","B07DB827HG","B07DB7K93D","B07DB7NDR3","B08DQXP4FL","B00DMSA9SU","B00140TTTS","B08F9TYWLH","B000OM1EMC","B01GLYTBS0","B08B39P88Q","B0C7LNWT54","B000WFBNKY","B0C7LP49B7","B0C7LNW12C","B000M2WMR0","B01GRTLBWS","B001RLU772"]},
+    {"domRowIdx": 4, "top": 4148, "height": 200, "widgetType": "EditorialRow_double", "imgCount": 0, "tileCount": 1, "note": "Footer-naher Tile-Pair-Spacer."},
+    {"domRowIdx": 5, "top": 4148, "height": 200, "widgetType": "AmazonShareFooter", "note": "Amazon Share Footer."}
+  ]
+}

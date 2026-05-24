@@ -1,0 +1,166 @@
+{
+  "_meta": {
+    "store": "kloster-kitchen",
+    "pageSlug": "10_ueber-uns",
+    "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF",
+    "url": "https://www.amazon.de/stores/page/F031D76B-9B76-426A-93A9-2EBBCB5150CF",
+    "extractedAt": "2026-04-23T20:45:00Z",
+    "extractor": "manual_verified_v3.1",
+    "note": "Brand-Story-Seite. Struktur: Video-Hero, Intro-Banner, 4 abwechselnd links/rechts platzierte Halbtafel-Creatives (je 568px breit, 413px hoch), Awards-Banner. Rows 3 bis 6 sind Einzelkacheln in einer eigenen Row, kein 2-Kachel-Grid. Awards-Streifen verlinkt hier zur Startseite.",
+    "scrollHeight": 4839,
+    "viewport": {"w": 1181, "h": 1155},
+    "domRowsTotal": 9,
+    "contentModulesCount": 7
+  },
+
+  "hero": {
+    "section": "hero",
+    "domRowIdx": 0,
+    "top": 99,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c62dc5c8-f812-4754-8a90-674b1f1c66a8._CR0%2C10%2C1280%2C256_SX1500_.jpg",
+    "imageSize": {"w": 1015, "h": 203},
+    "imageAltText": "Text reads \"KLOSTER KITCHEN BETTER THAN GOOD\". Green leaf background."
+  },
+
+  "navigation": {
+    "section": "nav",
+    "domRowIdx": 0,
+    "pages": [
+      {"label": "Startseite",                  "pageId": "34D4A812-9A68-4602-A6A0-30565D399620"},
+      {"label": "Ingwer Shots",                "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2"},
+      {"label": "Mikronährstoffe",             "pageId": "E337104E-63D3-41B2-8560-D92F482B2790"},
+      {"label": "Saftkuren",                   "pageId": "3745E0C5-D470-4291-A735-27CF83DD1606"},
+      {"label": "SMOOTHIES",                   "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E"},
+      {"label": "Shot Kur",                    "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043"},
+      {"label": "Probiersets / Geschenkidee",  "pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A"},
+      {"label": "Zubehör",                     "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A"},
+      {"label": "Spar-Abo",                    "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E"},
+      {"label": "Über Uns",                    "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF"}
+    ]
+  },
+
+  "modules": [
+    {
+      "userModuleId": 1,
+      "domRowIdx": 1,
+      "top": 443,
+      "height": 593,
+      "layoutType": "full_width_video",
+      "tileCount": 1,
+      "video": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/6634f36d-3343-4e22-a747-1481376a9148.mp4",
+        "size": {"w": 2160, "h": 1080}
+      },
+      "note": "Video-Banner Ueber Uns Brand-Story. Vision-Frame in Phase 2."
+    },
+    {
+      "userModuleId": 2,
+      "domRowIdx": 2,
+      "top": 1035,
+      "height": 371,
+      "layoutType": "full_width_asin_link_text_image",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/aaf0fa85-e81e-4086-9f36-08a7bb8f2a1e._CR0%2C0%2C1919%2C593_SX1500_.png",
+        "size": {"w": 1151, "h": 356},
+        "alt": ""
+      },
+      "asin": "B09R4Y8VDW",
+      "linkAria": "Text 'KLOSTER KITCHEN' followed by German text. Minimal design with black text on white background.",
+      "note": "Intro-Banner KLOSTER KITCHEN Markenname plus Fliesstext. Vision-Frame in Phase 2 extrahiert den Brand-Story-Text."
+    },
+    {
+      "userModuleId": 3,
+      "domRowIdx": 3,
+      "top": 1406,
+      "height": 428,
+      "layoutType": "half_width_asin_link_creative_left",
+      "tileCount": 1,
+      "tile": {
+        "position": "left",
+        "asin": "B07V1HQQ2V",
+        "size": {"w": 568, "h": 413},
+        "creativeImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e7242c09-3e77-42e8-983d-29d772b65556._CR0%2C0%2C1600%2C995_SX750_SY550_.png",
+        "creativeImageAria": "Split image: Left shows fresh ginger roots. Right shows a hand holding a small glass bottle with yellow liquid, likely ginger juice."
+      },
+      "note": "Halbtafel-Creative linksbuendig. Rohstoff Ingwer plus fertiger Shot. Rechter Bereich frei fuer Text in Phase 2."
+    },
+    {
+      "userModuleId": 4,
+      "domRowIdx": 4,
+      "top": 1834,
+      "height": 428,
+      "layoutType": "half_width_asin_link_creative_right",
+      "tileCount": 1,
+      "tile": {
+        "position": "right",
+        "asin": "B09R4Y8VDW",
+        "size": {"w": 568, "h": 413},
+        "creativeImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/714fdd1c-e90e-425e-8b10-d79860cf734a._CR0%2C0%2C1600%2C995_SX750_SY550_.png",
+        "creativeImageAria": "Bright interior room with large windows, featuring people exercising or stretching, framed by green plant leaves in foreground.",
+        "xOffset": 598
+      },
+      "note": "Halbtafel-Creative rechtsbuendig. Lifestyle-Szene Bewegung und Wohlbefinden. Linker Bereich frei fuer Text in Phase 2."
+    },
+    {
+      "userModuleId": 5,
+      "domRowIdx": 5,
+      "top": 2261,
+      "height": 428,
+      "layoutType": "half_width_asin_link_creative_left",
+      "tileCount": 1,
+      "tile": {
+        "position": "left",
+        "asin": "B0CC2NCY1W",
+        "size": {"w": 568, "h": 413},
+        "creativeImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/b7d314c9-55f4-4f13-9a59-e09d2835d46d._CR0%2C0%2C1600%2C1241_SX750_SY550_.png",
+        "creativeImageAria": "Two small bottles with white and red caps on a table. People sitting in a bright room with windows in the background."
+      },
+      "note": "Halbtafel-Creative linksbuendig. Produktszene in sozialem Kontext. Neue ASIN B0CC2NCY1W, nur auf Ueber Uns referenziert."
+    },
+    {
+      "userModuleId": 6,
+      "domRowIdx": 6,
+      "top": 2689,
+      "height": 428,
+      "layoutType": "half_width_asin_link_creative_right",
+      "tileCount": 1,
+      "tile": {
+        "position": "right",
+        "asin": "B07V1HQQ2V",
+        "size": {"w": 568, "h": 413},
+        "creativeImageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/7b4ac7a3-cec9-4b64-82ec-94c5b7947ddc._CR0%2C0%2C1600%2C995_SX750_SY550_.png",
+        "creativeImageAria": "Split image: Left shows hands holding yellow-capped bottles in a box. Right displays a tape gun sealing a cardboard box labeled 'Blister Kitchen'.",
+        "xOffset": 598
+      },
+      "note": "Halbtafel-Creative rechtsbuendig. Produktion und Verpackung. aria-label nennt 'Blister Kitchen' (OCR-Fehler, gemeint ist Kloster Kitchen). Vision-Frame korrigiert in Phase 2."
+    },
+    {
+      "userModuleId": 7,
+      "domRowIdx": 7,
+      "top": 3116,
+      "height": 262,
+      "layoutType": "full_width_awards_badges",
+      "tileCount": 1,
+      "mainImage": {
+        "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/2eb471fe-f331-4cbc-89cd-8896df9c0d33._CR0%2C0%2C1280%2C275_SX1500_.jpg",
+        "size": {"w": 1151, "h": 247},
+        "alt": ""
+      },
+      "linkedPageId": "34D4A812-9A68-4602-A6A0-30565D399620",
+      "linkAria": "Text reads 'AUSGEZEICHNETE INNOVATIONEN'. Four award logos on green leaf background: 'german design award winner', 'german brand award winner', 'FAUUNJI FOUNDATION FINALIST', and 'GERMAN INNOVATION AWARD WINNER'.",
+      "note": "Awards Streifen. Abweichung: hier Link zurueck zur Startseite statt zu Ueber Uns (weil Nutzer ja bereits auf Ueber Uns ist)."
+    }
+  ],
+
+  "excluded": [
+    {
+      "domRowIdx": 8,
+      "top": 3379,
+      "height": 199,
+      "reason": "Share-Footer."
+    }
+  ],
+
+  "uniqueAsinsOnPage": ["B09R4Y8VDW", "B07V1HQQ2V", "B0CC2NCY1W"]
+}

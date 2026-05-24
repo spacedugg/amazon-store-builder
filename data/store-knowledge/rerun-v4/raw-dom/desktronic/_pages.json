@@ -1,0 +1,14 @@
+{
+  "store": "desktronic",
+  "storeUrl": "https://www.amazon.de/stores/page/1A862649-6CEA-4E30-855F-0C27A1F99A6C",
+  "discoveredAt": "2026-05-13",
+  "pages": [
+    { "slug": "01_startseite",             "name": "Startseite",            "level": 0, "pageId": "1A862649-6CEA-4E30-855F-0C27A1F99A6C", "url": "https://www.amazon.de/stores/page/1A862649-6CEA-4E30-855F-0C27A1F99A6C" },
+    { "slug": "02_homeone-schreibtisch",   "name": "HomeOne Schreibtisch",  "level": 1, "pageId": "993B6236-F91F-4736-B15E-C5E5A0562567", "url": "https://www.amazon.de/stores/page/993B6236-F91F-4736-B15E-C5E5A0562567" },
+    { "slug": "03_homepro-schreibtisch",   "name": "HomePro Schreibtisch",  "level": 1, "pageId": "5C77F5BF-E87C-439D-B24B-BFAB70D81229", "url": "https://www.amazon.de/stores/page/5C77F5BF-E87C-439D-B24B-BFAB70D81229" },
+    { "slug": "04_sitone-buerostuhl",      "name": "SitOne Buerostuhl",     "level": 1, "pageId": "B5810344-5F1D-4970-9C50-544F424C30AA", "url": "https://www.amazon.de/stores/page/B5810344-5F1D-4970-9C50-544F424C30AA" },
+    { "slug": "05_sitpro-buerostuhl",      "name": "SitPro Buerostuhl",     "level": 1, "pageId": "3193146C-9ED2-4026-86E4-87ED24387F0D", "url": "https://www.amazon.de/stores/page/3193146C-9ED2-4026-86E4-87ED24387F0D" },
+    { "slug": "06_zubehoer",               "name": "Zubehoer",              "level": 1, "pageId": "8C7A8AE9-1F24-4831-8F46-7CEB09ED2B5E", "url": "https://www.amazon.de/stores/page/8C7A8AE9-1F24-4831-8F46-7CEB09ED2B5E" },
+    { "slug": "07_alle-produkte",          "name": "Alle Produkte",         "level": 1, "pageId": "0E499C6E-8685-43CC-933A-35AB977CF3C6", "url": "https://www.amazon.de/stores/page/0E499C6E-8685-43CC-933A-35AB977CF3C6" }
+  ]
+}

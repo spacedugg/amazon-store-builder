@@ -1,0 +1,65 @@
+{
+  "_meta": {
+    "store": "more-nutrition",
+    "pageSlug": "07_protein-iced-coffee",
+    "pageId": "3D5F63E7-0917-4ABF-9F07-7D10B2AC1639",
+    "url": "https://www.amazon.de/stores/page/3D5F63E7-0917-4ABF-9F07-7D10B2AC1639",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_v4_widget_scan",
+    "scrollHeight": 5295,
+    "viewport": { "w": 1582, "h": 872 },
+    "domWidgetsTotal": 7,
+    "note": "PROTEIN ICED COFFEE Sub-Page. Drei aufeinanderfolgende FeaturedDeal-Modul-aehnliche Bloecke (Matcha Latte, Chai Latte, Milkyccino) statt einem Vollkatalog. Letztes Widget hat data-widgettype ProductGrid aber zeigt nur ein einzelnes Featured-Produkt mit Gallery. AUFFAELLIG: Page baut auf Storytelling mit 3 Sub-Produkt-Showcases, nicht auf Grid-Conversion."
+  },
+  "hero": {
+    "section": "hero", "widgetIdx": 0, "top": 99,
+    "imageSrc": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/82c1897e-3db6-49f4-a036-f20582a37e1c._CR0%2C0%2C3000%2C600_SX1500_.png",
+    "imageSize": { "w": 1500, "h": 300 },
+    "note": "PROTEIN ICED COFFEE Hero-Banner, lila Background laut Startseite-Tile."
+  },
+  "navigation": "siehe 01_startseite_dom.json",
+  "modules": [
+    {
+      "userModuleId": 1, "widgetIdx": 1, "top": 502, "height": 657,
+      "widgetClass": "EditorialRow", "layoutType": "featured_deal_asin_showcase", "tileCount": 1,
+      "featuredAsin": "B0DVYZZ8VD",
+      "featuredProductTitle": "MORE Protein Iced Matcha Latte, 500g, Matcha Grünteepulver mit wertvollen Proteinen, wenig Zucker und Fett - made in Germany",
+      "rating": "4,3 von 5 Sternen, 437 Bewertungen", "imgCount": 24, "videoCount": 6,
+      "note": "FeaturedDeal Matcha Latte."
+    },
+    {
+      "userModuleId": 2, "widgetIdx": 2, "top": 1159, "height": 541,
+      "widgetClass": "EditorialRow", "layoutType": "featured_deal_asin_showcase", "tileCount": 1,
+      "featuredAsin": "B0DXFVHDGD",
+      "featuredProductTitle": "MORE Protein Iced Chai Latte, 500g, mit wertvollen Proteinen, wenig Zucker und Fett - made in Germany",
+      "rating": "4,2 von 5 Sternen, 49 Bewertungen", "imgCount": 24, "videoCount": 6,
+      "note": "FeaturedDeal Chai Latte."
+    },
+    {
+      "userModuleId": 3, "widgetIdx": 3, "top": 1700, "height": 633,
+      "widgetClass": "ProductGrid", "layoutType": "featured_deal_asin_showcase", "tileCount": 1,
+      "featuredAsin": "B0FKNFQWJY",
+      "featuredProductTitle": "MORE Protein Milkyccino, White Almond Coconut, 500 g, Mix aus Whey Konzentrat und Casein ideal zum Muskelaufbau und -erhalt, mit Koffein & Laktase - made in Germany",
+      "rating": "4,3 von 5 Sternen, 113 Bewertungen", "imgCount": 24, "videoCount": 6,
+      "note": "Single-ASIN-ProductGrid-Showcase Milkyccino. Trotz wtype=ProductGrid funktional ein Featured Deal, nicht ein klassisches Grid."
+    },
+    {
+      "userModuleId": 4, "widgetIdx": 4, "top": 2334, "height": 750,
+      "widgetClass": "EditorialRow", "layoutType": "full_width_image_creative", "tileCount": 1,
+      "mainImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d6865a5f-5e09-4f0a-b72c-b6bb65ac059d._CR0%2C0%2C1280%2C640_SX1500_.jpg" },
+      "links": [{"pageId": "8790A8BC-31A4-4810-8B75-BF1AFCE858B5", "ariaLabel": "Weitere Informationen"}],
+      "note": "Produktselektor-Banner."
+    },
+    {
+      "userModuleId": 5, "widgetIdx": 5, "top": 3084, "height": 750,
+      "widgetClass": "EditorialRow", "layoutType": "full_width_image_closing", "tileCount": 1,
+      "mainImage": { "src": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/d359c2c9-b952-47a2-b88a-864e11ffc31c._CR0%2C0%2C3000%2C1500_SX1500_.png" },
+      "links": [{"pageId": "F081FD4B-1559-4A38-A4F3-FC8E6732BCEB", "ariaLabel": "Weitere Informationen"}],
+      "note": "Closing-Banner."
+    }
+  ],
+  "excluded": [
+    { "widgetIdx": 6, "top": 3834, "height": 200, "reason": "Amazon Share-Footer." }
+  ],
+  "uniqueAsinsOnPage": ["B0DVYZZ8VD","B0DXFVHDGD","B0FKNFQWJY"]
+}

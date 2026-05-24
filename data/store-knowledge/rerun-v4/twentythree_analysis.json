@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "v4-2026-05",
+  "store": "twentythree",
+  "brandName": "twenty:three",
+  "storeUrl": "https://www.amazon.de/stores/twentythree/page/0E8D9A31-200C-4EC5-BC94-CBBC023B28A4",
+  "analyzedAt": "2026-05-13",
+  "methodology": "v4-full-store-5-pages",
+  "scopeNote": "Alle 5 erreichbaren Pages des Stores (Startseite, Alle Produkte, Bettwaesche, Bettlaken, Bettdecke und Kissen) im v4-Format erfasst. Store hat keine weiteren Sub-Pages, daher 5 Pages = vollstaendiger Store-Scope.",
+  "navigation": {
+    "pageCount": 5,
+    "structure": "Flat (level 0 plus level 1)",
+    "pages": [
+      {"name": "Startseite", "level": 0, "pageId": "0E8D9A31-200C-4EC5-BC94-CBBC023B28A4"},
+      {"name": "Alle Produkte", "level": 1, "pageId": "F0FD66FC-88D8-4CB9-ACFA-3669EF15A5E5"},
+      {"name": "Bettwaesche", "level": 1, "pageId": "15C8BFA1-4A3D-4C7E-82A3-2A626199A6B7"},
+      {"name": "Bettlaken", "level": 1, "pageId": "009D4AA9-B7AD-4F33-BBCC-9531AEF53709"},
+      {"name": "Bettdecke und Kissen", "level": 1, "pageId": "F43A372B-1D99-4754-8B6F-879D8E039AF8"}
+    ]
+  },
+  "contentSummary": {
+    "pagesAnalyzed": 5,
+    "totalModulesAnalyzed": 31,
+    "wiederkehrendeModuleCrossPage": {
+      "amazon_nav_header_brand_streifen": "Page 1-5 identisch (twenty:three Spuere den Unterschied. Sticky-Brand-Banner)",
+      "amazon_share_footer": "Page 1-5 identisch",
+      "section_intro_dunkelgruen": "Pages 2-5 nutzen alle dunkelgruene Section-Intros mit weisser Versalien-Headline als wiederkehrendes Pattern"
+    }
+  },
+  "pages": [
+    {"pageName": "Startseite", "pageSlug": "01_startseite", "pageId": "0E8D9A31-200C-4EC5-BC94-CBBC023B28A4", "pageType": "startseite", "scrollHeight": 4661, "brandModules": 5, "voiceMarkers": {"voiceRegister": "nahbar", "sentencePattern": "kurze_aussage", "vocabularyField": "lifestyle", "claimType": "ergebnis_versprechen", "rhetoricalDevice": "metapher"}, "pageArchitecture": "Markenrahmen plus Schlaf-Versprechen plus Lifestyle-Showcase plus Kategorie-Bruecke plus Material-USP-Hero plus Matratzen-Section plus Footer. Sehr knapp, fokussiert auf Material-Versprechen."},
+    {"pageName": "Alle Produkte", "pageSlug": "02_alle-produkte", "pageId": "F0FD66FC-88D8-4CB9-ACFA-3669EF15A5E5", "pageType": "all_products", "scrollHeight": 4726, "brandModules": 5, "voiceMarkers": {"voiceRegister": "professionell", "sentencePattern": "listen_aufzaehlung", "vocabularyField": "industriell", "claimType": "benefit_funktional", "rhetoricalDevice": "konkrete_zahl"}, "pageArchitecture": "Markenrahmen plus 5 parallele Inline-PDP-Module mit In-den-Einkaufswagen-Buttons. Hoechste CTA-Dichte im Vergleich."},
+    {"pageName": "Bettwaesche", "pageSlug": "03_bettwaesche", "pageId": "15C8BFA1-4A3D-4C7E-82A3-2A626199A6B7", "pageType": "hub_category", "scrollHeight": 5096, "brandModules": 5, "voiceMarkers": {"voiceRegister": "nahbar", "sentencePattern": "kurze_aussage", "vocabularyField": "lifestyle", "claimType": "ergebnis_versprechen", "rhetoricalDevice": "alliteration"}, "pageArchitecture": "Markenrahmen plus dunkelgruener Material-USP-Anker (Gut. Besser. Lyocell.) plus Hero-Tile-Pair plus ProductGrid 6 ASINs plus 2 Lifestyle-Bridges plus Footer."},
+    {"pageName": "Bettlaken", "pageSlug": "04_bettlaken", "pageId": "009D4AA9-B7AD-4F33-BBCC-9531AEF53709", "pageType": "sub_category", "scrollHeight": 3665, "brandModules": 3, "voiceMarkers": {"voiceRegister": "professionell", "sentencePattern": "kurze_aussage", "vocabularyField": "industriell", "claimType": "herkunft_prozess", "rhetoricalDevice": "none"}, "pageArchitecture": "Markenrahmen plus knappes Section-Intro twenty:three Lyocell Spannbettlaken plus Material-Demo-Tile-Pair plus Closing-Lifestyle plus Footer."},
+    {"pageName": "Bettdecke und Kissen", "pageSlug": "05_bettdecke-kissen", "pageId": "F43A372B-1D99-4754-8B6F-879D8E039AF8", "pageType": "sub_category", "scrollHeight": 3665, "brandModules": 3, "voiceMarkers": {"voiceRegister": "professionell", "sentencePattern": "kurze_aussage", "vocabularyField": "industriell", "claimType": "herkunft_prozess", "rhetoricalDevice": "none"}, "pageArchitecture": "Identische Struktur zu Bettlaken-Page mit Section-Intro twenty:three Lyocell Kopfkissen und Decken. Parallele Sub-Category-Logik."}
+  ],
+  "storeAnalysis": {
+    "marketSegment": "Premium-Heimtextilien mit Material-USP-Positionierung. Fokus auf Lyocell-Bettwaesche und Bettlaken als hochwertige Bett-Auswahl.",
+    "primaryAudience": "Schlafqualitaets-orientierte Erwachsene 25-50, mit Wunsch nach natuerlichen Materialien (Tencel/Lyocell aus Eukalyptus) und ruhiger Wohnatmosphaere.",
+    "priceTier": "Premium. Bettwaesche-Set 99,00 EUR fuer ein Kissen plus Decken-Bezug 135x200. Material-Anker rechtfertigt Preis.",
+    "productComplexity": "Schmales Sortiment: Bettwaesche-Sets, Spannbettlaken, Kopfkissen und Decken, alle aus Lyocell. Wenige Farb-Varianten (Forest Green und cremebeige dominant). Insgesamt ueber alle 5 Pages nur ca. 5-10 unique ASINs.",
+    "brandVoice": {
+      "tonality": "Sehr knapp, Material-USP-fokussiert. Tagline Spuere den Unterschied. plus Steigerungs-Headlines wie Gut. Besser. Lyocell. plus Der Wie-fuer-dich-gemachte Stoff. Sprachlich elegant mit Wortspielen und Alliterationen.",
+      "adjectives": ["lyocell", "hochwertig", "premium", "weich", "natuerlich", "spuerbar"],
+      "signatureClaims": [
+        "Spuere den Unterschied. (Brand-Tagline)",
+        "Dein Traum wird wahr. Guter Schlaf kann so einfach sein. (Startseite)",
+        "Gut. Besser. Lyocell. (Bettwaesche)",
+        "Der Wie-fuer-dich-gemachte Stoff. (Bettwaesche)",
+        "100 Prozent Tencel - Gewonnen aus Eukalyptus - Hochwertig",
+        "100 Prozent Lyocell (Pill-Tag auf Bettwaesche-Sets)"
+      ],
+      "voiceContrasts": [
+        "twenty:three nutzt direkte Du-Form (Dein Traum, Wie-fuer-dich-gemacht) - das war bei Bedsure nicht der Fall",
+        "Sehr kurze Versalien-Sentence-Pattern (Gut. Besser. Lyocell.) als Brand-Signature",
+        "Alle Produkte Page ist sehr Amazon-PDP-getrieben (industrielles Vokabular Tencel, Eukalyptus) - waehrend Kategorie-Pages emotional bleiben (Spuere den Unterschied)"
+      ]
+    },
+    "designAesthetic": {
+      "colorPalette": "Dunkelgruen (Forest Green) als Marken-Hauptfarbe, plus cremeweiss als Bettwaesche-Material-Code. Marineblau und Sandbeige als Sekundaer-Tonen aus dem Brand-Hero-Mosaik. Schwarze Sans-Serif als Typo-Anker.",
+      "typography": "Sans-Serif Versalien fuer Brand-Tagline und Section-Headlines. Steigerungs-Sentence-Pattern mit Punkten als Wortgliederung (Gut. Besser. Lyocell.).",
+      "photographyStyle": "Closeup-Material-Demo (Stoff-Haut-Kontakt, Bettlaken-Falte, Kissen-Detail) plus Indoor-Lifestyle-Settings mit Bettszenen vor Fenstern, mit Pflanzen. Sehr ruhig, hochwertig, kein Familien-Bezug.",
+      "layoutSignals": "Brand-Hero-Mosaik aus 6 Produkt-Tiles (Bettwaesche-Varianten) plus Tagline rechts ist Brand-Signature. Dunkelgruener Section-Intro mit weisser Versalien-Headline wiederkehrend auf Sub-Pages. Tile-Pair fuer Material-Demo plus Lifestyle wiederkehrend. ProductGrid auf nur einer Page (Bettwaesche). Inline-PDP-Stack auf Alle-Produkte-Page."
+    },
+    "positioningClaim": "twenty:three macht Lyocell-Bettwaesche zur sinnlich-spuerbaren Premium-Selbstverstaendlichkeit, mit klarer Material-Herkunft (Tencel aus Eukalyptus) und ruhigem Lifestyle-Anker.",
+    "contentStrategy": {
+      "approach": "Sehr reduziert. Material-USP dominiert. Knappe Section-Intros mit Versalien-Headlines, gefolgt von Material-Demo-Tile-Pairs. Inline-PDPs auf der Alle-Produkte-Page als Konversions-Cluster.",
+      "emotionalLayer": "Schlaf-Sinnlichkeit (Closeups von Stoff-Haut-Kontakt, sinnliche Bettlaken-Falten) plus Wohn-Atmosphaere (Pflanzen, Fenster, ruhige Tageslicht-Settings).",
+      "rationalLayer": "Lyocell und Tencel als Material-USP. 100 Prozent Pill-Tags als sichtbarer Trust-Anker. Eukalyptus als natuerliche Herkunft.",
+      "modulePreferences": "editorial_section_intro mit dunkelgruenem Hintergrund und weisser Versalien-Headline, editorial_tile_pair fuer Material-Demo plus Lifestyle, product_showcase_video fuer Inline-PDP-Stack, sehr selten ProductGrid.",
+      "editorialDepth": "Sehr knapp. Startseite 5 Module, Bettwaesche 5, Alle Produkte 5 (alles PDPs), Bettlaken 3, Bettdecke und Kissen 3. Sehr fokussierter Brand-Auftritt ohne Ueberbau."
+    },
+    "conversionPath": {
+      "primary": "Inline-PDP-Stack auf Alle-Produkte-Page mit 5 direkten In-den-Einkaufswagen-Buttons",
+      "secondary": "ProductGrid mit 6 ASINs auf Bettwaesche-Page",
+      "softConversion": "Tile-Klick auf Lifestyle-Tiles ohne sichtbare CTA-Buttons auf den anderen Pages"
+    },
+    "keyStrengths": [
+      "Sehr klares Material-USP-Branding (Lyocell, Tencel, Eukalyptus)",
+      "Reduzierter Brand-Auftritt mit hoher visueller Konsistenz",
+      "Premium-Wortspiel-Headlines (Gut. Besser. Lyocell., Wie-fuer-dich-gemacht)",
+      "Inline-PDP-Konversions-Cluster auf der Alle-Produkte-Page (5 ASINs parallel)",
+      "Dunkelgruene Section-Anker als visueller Marken-Code",
+      "Lyocell-Material-Demo durch Closeup-Stoff-Haut-Kontakt"
+    ],
+    "brandUSPs": [
+      "100 Prozent Lyocell als Material-Versprechen",
+      "100 Prozent Tencel - Gewonnen aus Eukalyptus als Herkunfts-Beweis",
+      "Hochwertig als Premium-Anker",
+      "Spuerbares Material-Erlebnis (Brand-Tagline)",
+      "Direkte Inline-Konversion (kein Page-Wechsel)"
+    ],
+    "moduleFunctionalTaxonomy": {
+      "brand_hero_mosaik": "Sticky-Brand-Hero mit 6-Tile-Mosaik plus Tagline auf allen 5 Pages identisch",
+      "section_intro_dunkelgruen": "Vollflaechiges dunkelgruenes Section-Intro mit weisser Versalien-Headline auf Sub-Category-Pages (Pages 2-5)",
+      "material_demo_tile_pair": "Tile-Pair links Lifestyle rechts Material-Closeup, wiederkehrendes Pattern",
+      "inline_pdp_stack": "Sequenz aus 5 Inline-PDPs nur auf Alle-Produkte-Page",
+      "product_grid_6": "ProductGrid mit 6 ASINs nur auf Bettwaesche-Page"
+    },
+    "pageArchetypes": {
+      "startseite": {"primaryFunction": "Brand-Identitaets-Vermittlung plus Subkategorie-Verteiler plus Material-USP-Hero", "conversionMode": "Soft (Tile-Klick)", "transferableTo": "Premium-Heimtextilien-Stores mit klarer Material-USP"},
+      "all_products": {"primaryFunction": "Direkte Konversions-Sicht mit 5 parallelen Inline-PDPs", "conversionMode": "Hard (In-den-Einkaufswagen)", "transferableTo": "Stores mit kompaktem Sortiment, die direkte Konversion priorisieren"},
+      "hub_category": {"primaryFunction": "Material-USP-Anker plus ProductGrid", "conversionMode": "Hard (Tile-Klick zu ASIN)", "transferableTo": "Material-USP-getriebene Premium-Hubs"},
+      "sub_category": {"primaryFunction": "Knappe Material-Showcase mit Section-Intro plus Tile-Pair", "conversionMode": "Soft (Tile-Klick, kein direkter CTA)", "transferableTo": "Sub-Categories mit limitiertem Sortiment"}
+    },
+    "brandSpecificVsStructuralExtraction": {
+      "strukturell_uebertragbar_an_neue_brands": [
+        "Sticky-Brand-Header mit Brand-Tagline plus Sub-Nav Pattern",
+        "Dunkelfarbiger Section-Intro mit weisser Versalien-Headline Pattern",
+        "Material-Demo-Tile-Pair Pattern (Lifestyle plus Stoff-Closeup)",
+        "Inline-PDP-Stack als Konversions-Cluster auf einer dedizierten Alle-Produkte-Page",
+        "Steigerungs-Sentence-Pattern mit Punkten (Gut. Besser. XY.)",
+        "voiceMarkers Tags (nahbar, professionell, kurze_aussage, alliteration)"
+      ],
+      "brand_spezifisch_NICHT_uebertragbar": [
+        "Brand-Tagline Spuere den Unterschied. (gehoert nur twenty:three)",
+        "Lyocell und Tencel als spezifische Materialien (nur Heimtextilien-Vertikale)",
+        "Konkrete Headlines Gut. Besser. Lyocell., Wie-fuer-dich-gemacht, Dein Traum wird wahr.",
+        "Dunkelgruene Marken-Farbe (Forest Green) als Pantone-Anker",
+        "Konkrete ASIN-Produkte (Forest Green Bettwaesche etc.)"
+      ]
+    }
+  },
+  "openQuestions": [
+    "Store hat nur 5 Pages erreichbar, User wollte 10 Pages. Hier sind alle vorhandenen Pages dokumentiert.",
+    "Tile-Pair und Bridge-Module wurden teilweise nicht im Detail per Vision erfasst. Eine zweite Iteration koennte konkrete Produkt-Bilder und Lifestyle-Details ergaenzen."
+  ]
+}

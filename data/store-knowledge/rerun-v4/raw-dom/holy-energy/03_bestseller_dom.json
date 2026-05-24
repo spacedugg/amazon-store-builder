@@ -1,0 +1,39 @@
+{
+  "_meta": {
+    "store": "holy-energy",
+    "pageSlug": "03_bestseller",
+    "pageName": "Bestseller",
+    "pageId": "E8F850A5-CE46-4877-88C4-F4F5A0365D02",
+    "url": "https://www.amazon.de/stores/page/E8F850A5-CE46-4877-88C4-F4F5A0365D02",
+    "extractedAt": "2026-05-23",
+    "extractor": "chrome_mcp_javascript_tool_v4",
+    "scrollHeight": 5599,
+    "viewport": { "w": 1582, "h": 928 },
+    "domRowsTotal": 9,
+    "contentModulesCount": 8
+  },
+  "modules": [
+    { "domRowIdx": 0, "top":   99, "height":  400, "widgetClass": "Header",          "tileCount":  0, "imgCount":  3, "videoCount": 0, "productCount": 0, "note": "Header plus Brand-Hero 1500x300 mit Bildtext BESTSELLER. Alt-Text erwaehnt 'Multiple colorful ice cream pints with patterned lids arranged on a green background. Text BESTSELL...' (HOLY hat eine Ice Cream Linie als saisonale Bestseller-Variation; oder Alt-Text bezieht sich auf Produkt-Becher)." },
+    { "domRowIdx": 1, "top":  527, "height":  297, "widgetClass": "ProductCarousel", "tileCount":  0, "imgCount": 10, "videoCount": 0, "productCount": 0, "note": "ProductCarousel Bestseller von HOLY Energy direkt unter Hero. Frueher Conversion-Anker." },
+    { "domRowIdx": 2, "top":  823, "height":  363, "widgetClass": "EditorialRow",    "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount": 0, "note": "Editorial-Banner 1470x348. Wahrscheinlich Section-Intro Energy oder Bestseller-Highlight." },
+    { "domRowIdx": 3, "top": 1187, "height":  743, "widgetClass": "EditorialRow",    "tileCount": 64, "imgCount":  5, "videoCount": 0, "productCount": 0, "note": "Showcase-Modul mit 1 grossem Visual 728x728 plus 4 Produkt-Tile-Markern. Wahrscheinlich lg-4grid (Lifestyle plus 4 Produkte) oder 2x2 Tile-Block." },
+    { "domRowIdx": 4, "top": 1929, "height":  364, "widgetClass": "EditorialRow",    "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount": 0, "note": "Editorial-Banner 1470x349. Section-Intro 2." },
+    { "domRowIdx": 5, "top": 2293, "height":  743, "widgetClass": "EditorialRow",    "tileCount": 62, "imgCount":  5, "videoCount": 0, "productCount": 0, "note": "Showcase-Modul 728x728 plus 4 Tiles (Wiederholung des Pattern). " },
+    { "domRowIdx": 6, "top": 3036, "height":  359, "widgetClass": "EditorialRow",    "tileCount":  8, "imgCount":  1, "videoCount": 0, "productCount": 0, "note": "Editorial-Banner 1470x344. Section-Intro 3." },
+    { "domRowIdx": 7, "top": 3395, "height":  743, "widgetClass": "EditorialRow",    "tileCount": 64, "imgCount":  5, "videoCount": 0, "productCount": 0, "note": "Showcase-Modul 728x728 plus 4 Tiles (drittes Pattern-Wiederholung)." },
+    { "domRowIdx": 8, "top": 4137, "height":  200, "widgetClass": "EditorialRow",    "tileCount":  4, "imgCount":  0, "videoCount": 0, "productCount": 0, "note": "Share-Footer." }
+  ],
+  "editorialBanners": [
+    { "modulePos": 3, "top":  831, "w": 1470, "h": 348, "asset": "6b680183-89e7-4541-a337-2e450b5367c7", "note": "Section-Intro 1" },
+    { "modulePos": 4, "top": 1194, "w":  728, "h": 728, "asset": "0ac12f46-9f42-4c14-89a9-67a8b91cf184", "note": "Lifestyle-Showcase 1" },
+    { "modulePos": 5, "top": 1937, "w": 1470, "h": 349, "asset": "cf683520-409b-4dc2-8bdf-7964ebfe7526", "note": "Section-Intro 2" },
+    { "modulePos": 6, "top": 2301, "w":  728, "h": 728, "asset": "4ae53b75-6a66-476d-ace6-5c300b37084f", "note": "Lifestyle-Showcase 2" },
+    { "modulePos": 7, "top": 3043, "w": 1470, "h": 344, "asset": "25c2475b-ae15-46f8-b82a-deb40421b550", "note": "Section-Intro 3" },
+    { "modulePos": 8, "top": 3402, "w":  728, "h": 728, "asset": "3d080566-6990-4325-9dde-55ed77f5e25e", "note": "Lifestyle-Showcase 3" }
+  ],
+  "uniqueAsinsOnPage": [],
+  "openQuestionsLocal": [
+    "Keine data-asin Eintraege per DOM gefunden, weil ProductCarousel ASINs ueber JS lazy-lazyt und Editorial-Showcases keine ASIN-Wrapper haben. ASINs sind in Phase 2 per Vision oder Render-Screenshot zu identifizieren.",
+    "Pattern wiederholt sich dreimal: Section-Intro 1470x~348 plus Lifestyle-Showcase 728x728 plus 4 Produkt-Tiles. Wahrscheinlich nach Kategorie (Energy, Iced Tea, Hydration) gegliederte Bestseller."
+  ]
+}
