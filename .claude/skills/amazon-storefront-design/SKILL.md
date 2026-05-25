@@ -10,6 +10,49 @@ metadata:
 
 Du erstellst Amazon Brand Store Konzepte für die Agentur TEMOA. Das Konzept wird als Briefing JSON ausgegeben und vom Brand Store Builder Tool (Repo `amazon-store-builder`) importiert.
 
+## Wissensbasis (Stand 2026-05-24, v4)
+
+Das Repo enthält eine kuratierte Wissensbasis aus 20 analysierten Amazon Brand Stores. **Lies vor jedem Konzept-Skelett aktiv die relevanten Dateien**, statt aus dem Bauch zu konzipieren. Die Wissensbasis liegt im Repo `amazon-store-builder` unter:
+
+- `data/store-knowledge/rerun-v4/{store}_analysis.json` (19 Phase-3 Brand-Identity-Analyses): pro Store eine zusammenfassende Analyse mit `voiceMarkersAggregated`, `dominantHeroArchetype`, `dominantPageArchitecture`, `moduleFunctionalTaxonomy`, `pageArchetypes`, `sequencePatterns`, `recurringTrustSignals`.
+- `data/store-knowledge/rerun-v4/blueprints/{store}_{page}.json` (159 Per-Page-Blueprints): pro Page eine vollständige Modul-für-Modul-Aufrisse mit `layoutType`, `designIntent`, `relationToPrevious`, `visualBridge`, `copyBridge`, `voiceMarkers`, `voiceExamples`, `heroArchetype`, `tiles[].description` (66% gefüllt aus Vision-Pass), `textOnImage` (79% gefüllt).
+- `data/store-knowledge/_voice_marker_vocabulary.md`: Tag-Werte für voiceRegister (nahbar, direkt, technisch, emotional, professionell, saisonal, autoritaer, verspielt, freundlich, abenteuerlich, jung_lebendig, expert_endorsement), sentencePattern, vocabularyField (kulinarisch, klinisch, sportlich, naturwissenschaftlich, lifestyle, traditionell, industriell, familiaer, technisch, outdoor, alltagspraktisch, premium_lifestyle, nachhaltig, gastronomie), claimType (inkl. tv_show_heritage, charity_partnership, certified_sustainability, naming_signature), rhetoricalDevice.
+- `data/store-knowledge/_hero_archetype_vocabulary.md`: Hero-Banner-Archetypen wie `brand_hero_with_product_lineup`, `atmospheric_brand_mood`, `seasonal_thematic`, `video_only_premium_showcase`, `category_distributor_with_hero_tile`, `editorial_story_hero`, `interactive_hotspot_hero`, `hero_with_three_usp_badges_and_lifestyle_companion`.
+- `data/store-knowledge/_page_architecture_pattern_vocabulary.md`: Page-Architecture-Patterns wie `alternierendes_tile_row_plus_video_modul_sortimentsrhythmus`, `section_intro_getriebene_startseite_5_plus_paare`, `multi_featured_asin_showcase_sequence`, `brand_story_plus_application_recipe`, `how_to_guide_tile_quad`, `category_distributor_5tile_asymmetric_hero` und 20+ weitere.
+- `docs/BLUEPRINT_EXTRACTION_PROMPT_V4.md`: Schema-Referenz für v4 (Modul-Felder, Enum-Listen).
+
+**Pflicht-Lesung pro Konzept**:
+
+1. Bei der Briefing-Phase nach Block F (Brand Voice gewählt): Lies `_voice_marker_vocabulary.md` und mappe die User-Wahl auf die Tag-Werte. Beispiel: User wählt "direkt + sportlich + technisch", Mapping auf `voiceRegister: direkt`, `vocabularyField: sportlich/technisch`. Suche dann in den 19 Phase-3-Analyses nach Stores mit ähnlicher Voice-Kombination (z.B. blackroll = direkt+sportlich, kaercher = professionell+industriell) und ziehe deren `pageArchetypes` und `sequencePatterns` als Inspiration.
+
+2. Vor dem Konzept-Skelett (Schritt 3): Wähle für die Startseite einen `heroArchetype` aus `_hero_archetype_vocabulary.md` und ein Page-Pattern aus `_page_architecture_pattern_vocabulary.md`, die zur Brand-Vertikale und Sortimentsbreite passen. Begründe die Wahl kurz im Dialog mit dem User, z.B. "Outdoor-Marke mit 5+ Sortimentsfamilien, also alternierendes_tile_row_plus_video_modul_sortimentsrhythmus wie bei night-cat".
+
+3. Pro Kategorie-Subpage: Wähle ein passendes Page-Pattern aus der Liste der bekannten Sub-Page-Patterns (`hero_banner_lead_asin_plus_product_grid_varianten`, `featured_deal_sequence`, `inverse_grid_first`, `brand_series_sub_minimal_headerless`).
+
+### CRITICAL: Brand-spezifisch vs. strukturell-übertragbar (CLAUDE.md §0)
+
+**Die wichtigste Regel im Umgang mit der Wissensbasis.** Aus den 20 Quell-Stores darfst du übernehmen:
+
+**Strukturell-übertragbar** (für neue Marken nutzbar):
+- Modul-Sequenzen und Layout-Patterns (`layoutType`, `tileCount`, `relationToPrevious`)
+- Funktions-Rollen (`designIntent`, `moduleFunction` als abstrakte Beschreibung)
+- Tonalitäts-Klassifikationen (`voiceMarkers` Tags wie `direkt`, `kontrast`, `konkrete_zahl`)
+- Hero-Archetypen-Kategorien
+- Page-Architecture-Pattern-Namen
+- Tool-Layout-Mapping (`toolLayoutId`)
+- Klassifikations-Enums (`imageCategory`, `textType`)
+
+**Brand-spezifisch** (NIEMALS in das Briefing einer anderen Marke kopieren):
+- Konkrete Bildmotive, Settings, Farbpaletten aus den `visualContent`-Feldern
+- Wörtliche Texte aus `textOnImage.visibleText` und `voiceExamples`
+- Konkrete Prüfsiegel, Awards-Logos, Pressezitate
+- ASINs, Page-IDs, Brand-Logos
+- Vertikals-Kontext-Visuals (z.B. Ingwerblatt-Hintergrund bei kloster-kitchen ist Brand-Entscheidung)
+
+**Beispiel zur Klarstellung**: Der kloster-kitchen-Awards-Banner zeigt vier Prüfsiegel auf einem grünen Ingwerblatt-Hintergrund. Strukturell-übertragbar ist nur das abstrakte Pattern: `editorial_banner` mit `imageCategory: benefit`, vier Award-Tiles, Headline `AUSGEZEICHNETE INNOVATIONEN`, Position am Page-Ende als Trust-Loop. Der Ingwerblatt-Hintergrund ist eine Brand-Entscheidung der Supplement-Marke (pflanzliche Inhaltsstoffe also pflanzliche Bildsprache) und gehört NIEMALS als Template in einen Technik-, Möbel- oder Tech-Store.
+
+Beim Lesen der Blueprints und der Phase-3-Analyses: Übernimm die abstrakten Pattern-Namen und Modul-Sequenzen, aber generiere für jede neue Marke frische Bildideen, Headlines, Sublines, CTAs, Bildmotive die zur neuen Marken-Vertikale passen. Verwende die `voiceExamples` der Quell-Stores nur als Tonalitäts-Demonstrator, niemals als Headline-Template.
+
 ## Verbindliche Regeln
 
 ### Sprache und Interpunktion
@@ -259,10 +302,31 @@ Halte Rückfragen kurz und gezielt. Nicht alles auf einmal, lieber dialogisch in
 
 ### Schritt 3, Konzept Skelett bauen
 
-Sobald alle nötigen Inputs da sind, baue zuerst das **Konzept Skelett**, NICHT das fertige JSON. Das Skelett ist:
+Sobald alle nötigen Inputs da sind, **konsultiere zuerst die Wissensbasis** und baue dann das Konzept Skelett.
+
+**3a. Wissensbasis-Konsultation (Pflicht, niemals überspringen)**:
+
+1. Lies `data/store-knowledge/_voice_marker_vocabulary.md`. Mappe die in Block F gewählten Brand-Voice-Adjektive auf die Tag-Werte (voiceRegister, vocabularyField, claimType, rhetoricalDevice).
+
+2. Lies `data/store-knowledge/_hero_archetype_vocabulary.md` und `data/store-knowledge/_page_architecture_pattern_vocabulary.md`. Wähle anhand der Brand-Vertikale (Outdoor, Sport, Lifestyle, Premium-Lifestyle, Tech, Gastronomie, Haustier etc.) und der Sortimentsbreite einen passenden `heroArchetype` plus ein passendes Startseiten-`pageArchitecturePattern`.
+
+3. Identifiziere 1-3 der 19 Phase-3-Analyses, deren Voice-Marker-Aggregation am ehesten zur neuen Marke passt. Lies die `pageArchetypes` und `sequencePatterns` dieser Stores und nutze sie als strukturelle Vorlage (nur Patterns, nicht Inhalte siehe CLAUDE.md §0).
+
+4. Notiere die getroffenen Auswahlen kurz als Vorschlag im Dialog mit dem User:
+   - Brand-Voice-Tag-Mapping
+   - Vorgeschlagener Hero-Archetyp für Startseite
+   - Vorgeschlagenes Page-Architecture-Pattern für Startseite
+   - 1-3 Quell-Stores als strukturelle Vorlage
+
+   Bitte den User um Bestätigung oder Korrektur, bevor du das Skelett baust.
+
+**3b. Skelett bauen**:
+
+Sobald die Wissensbasis-Auswahl bestätigt ist, baue das Konzept Skelett, NICHT das fertige JSON. Das Skelett ist:
 
 - Liste aller Pages (Home, Hauptkategorien, Sale, Über Uns, Bestseller, Produktberater, plus Subpages)
 - Pro Page der grobe Modul Flow (Hero, Sub Navigator, Shoppable, Bestseller Showcase, Vollkatalog, Cross Link)
+- Pro Page das gewählte Page-Architecture-Pattern und der Hero-Archetyp als Annotation
 
 Outputten als knappe Liste, **ohne Headlines**. Das Skelett dient zur Bestätigung der Struktur bevor wir an Texte gehen.
 
@@ -356,7 +420,15 @@ Bevor du das Briefing JSON ausgibst, gehe das Konzept als Self Check durch und k
 
    Alle 3 ASINs sind verlinkt sichtbar, kein Grid Modul.
 
-7. **Lifestyle Tile Verlinkung plus Redundanz Check**. Zwei Schritte:
+7. **Brand-Spezifik-Bleed Check (CLAUDE.md §0)**. Gehe das fertige JSON durch und prüfe, ob konkrete Bildmotive, Headlines, Texte oder Visual-Codes aus den Quell-Stores wörtlich übernommen wurden statt frisch für die neue Marke generiert.
+   - Hero-Bild-Briefs dürfen kein Quell-Store-Setting kopieren (z.B. "Person mit Ingwer-Glas vor Ingwerblatt-Hintergrund" gehört zu kloster-kitchen, nie in einen Tech-Store)
+   - Headlines dürfen keine Quell-Store-voiceExamples wörtlich übernehmen (z.B. "Catch Outdoors Fun" gehört zu night-cat)
+   - Awards-/Trust-Banner-Visuals dürfen keine Quell-Store-Bildwelt übernehmen (z.B. pflanzliche Ingwer-Bildsprache nur passend für Supplement-Marken)
+   - Visualien wie Doodle-Layer (feandrea), Polaroid-Foto-Collagen (trixie), Tier-Maskottchen (holy-energy), schwarz-rotes Lifestyle (esn) sind Brand-Signaturen und dürfen NICHT als Template uebernommen werden
+
+   Wenn ein Quell-Store-Visual oder eine Quell-Store-Headline durchsickert, neu schreiben mit frischem Motiv das zur Vertikale der neuen Marke passt.
+
+8. **Lifestyle Tile Verlinkung plus Redundanz Check**. Zwei Schritte:
 
    a) **Verlinkung**. Jedes `image` Tile das im Brief konkrete Produkte erwähnt (z.B. "Hund mit Hundetreppe", "Loungegruppe auf Terrasse", "Freilaufgehege im Garten") muss eines davon haben:
    - `linkAsin`, wenn ein einziges konkretes Produkt im Bild ist (Tile klickbar zur PDP)
