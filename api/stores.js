@@ -28,6 +28,11 @@ module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  // Browser und Vercel Edge sollen Store Responses nicht cachen. Sonst
+  // sieht der Operator nach einem Save oder Slug Wechsel u.U. eine alte
+  // 404 Response per If-None-Match Revalidation (HTTP 304) und denkt der
+  // Store fehlt, obwohl er längst in der DB liegt.
+  res.setHeader('Cache-Control', 'no-store, must-revalidate');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   var db = getClient();
