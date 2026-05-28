@@ -258,11 +258,15 @@ export default function App() {
     }).then(function(result) {
       if (result && result.id) {
         storeIdRef.current = result.id;
-        setStoreId(function(prev) { return prev || result.id; });
+        // Setze die State Variable auf die vom Server zurückgegebene ID.
+        // Wenn der Server beim Save den kryptischen Initial Identifier durch
+        // den Brand Slug ersetzt, wird der neue Wert hier übernommen, damit
+        // sessionStorage und PageList Highlight konsistent bleiben.
+        setStoreId(result.id);
       }
       if (result && result.shareToken) {
         shareTokenRef.current = result.shareToken;
-        setShareToken(function(prev) { return prev || result.shareToken; });
+        setShareToken(result.shareToken);
       }
       return result;
     });
