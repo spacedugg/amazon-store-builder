@@ -1833,6 +1833,9 @@ export default function App() {
         shareToken={shareToken}
         onExport={handleExport}
         onSave={handleSave}
+        onChangeBrandName={function(name) {
+          setStoreWithUndo(function(s) { return Object.assign({}, s, { brandName: name }); });
+        }}
         onCopyCustomerLink={store.pages.length > 0 ? handleCopyCustomerLink : null}
         customerSaveProgress={customerSaveProgress}
         folderUploadProgress={folderUploadProgress}
