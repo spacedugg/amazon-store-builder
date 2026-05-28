@@ -1,6 +1,7 @@
 import { extractImagesFromStore, inflateImagesIntoStore, uploadImages } from './imageStorage';
 
 var AUTOSAVE_KEY = 'amazon-store-builder-autosave';
+var AUTOSAVE_META_KEY = 'amazon-store-builder-autosave-meta';
 
 // ─── TURSO API (primary) with localStorage fallback ───
 
@@ -260,15 +261,53 @@ export async function fetchDesignerTimer(shareToken) {
 }
 
 // Auto-save stays in localStorage (frequent writes, no need for DB)
-export function autoSave(store) {
+export function autoSave(store, meta) {
   try {
     localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(store));
+    if (meta && meta.storeId) {
+      localStorage.setItem(AUTOSAVE_META_KEY, JSON.stringify({
+        storeId: meta.storeId,
+        shareToken: meta.shareToken || null,
+        savedAt: new Date().toISOString(),
+      }));
+    }
   } catch (e) { /* ignore */ }
 }
 
 export function loadAutoSave() {
   try {
     var raw = localStorage.getItem(AUTOSAVE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch (e) { return null; }
+}
+
+export function loadAutoSaveMeta() {
+  try {
+    var raw = localStorage.getItem(AUTOSAVE_META_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch (e) { return null; }
+}
+
+// Session pointer in sessionStorage so a tab reload keeps the same DB row,
+// but a closed and reopened tab starts fresh. Holds only storeId and
+// shareToken — the actual store data still flows through the DB load.
+var SESSION_KEY = 'amazon-store-builder-session';
+
+export function setSessionStore(storeId, shareToken) {
+  try {
+    if (storeId) {
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify({ storeId: storeId, shareToken: shareToken || null }));
+    } else {
+      sessionStorage.removeItem(SESSION_KEY);
+    }
+  } catch (e) { /* ignore */ }
+}
+
+export function getSessionStore() {
+  try {
+    var raw = sessionStorage.getItem(SESSION_KEY);
     if (!raw) return null;
     return JSON.parse(raw);
   } catch (e) { return null; }

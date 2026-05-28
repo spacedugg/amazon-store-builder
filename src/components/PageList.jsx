@@ -8,6 +8,15 @@ export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSub
   var [importUrl, setImportUrl] = useState('');
   var [importBusy, setImportBusy] = useState(false);
   var [importError, setImportError] = useState('');
+  var [loadingStoreId, setLoadingStoreId] = useState(null);
+
+  var handleLoadStore = function(id) {
+    if (loadingStoreId || id === currentStoreId) return;
+    setLoadingStoreId(id);
+    Promise.resolve(onLoadSaved(id)).catch(function() {}).finally(function() {
+      setLoadingStoreId(null);
+    });
+  };
   // Drag and Drop State
   var [dragId, setDragId] = useState(null);
   var [dropOver, setDropOver] = useState(null); // { id, pos: 'above'|'below'|'into' }
@@ -174,15 +183,27 @@ export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSub
             <div className="page-list-body">
               {savedStores.map(function(s) {
                 var isCurrent = currentStoreId && s.id === currentStoreId;
+                var isLoading = loadingStoreId === s.id;
+                var anyLoading = !!loadingStoreId;
+                var rowTitle = isCurrent
+                  ? t('pages.currentStore', uiLang)
+                  : (isLoading ? 'Lädt…' : 'Diesen Store öffnen');
                 return (
-                  <div key={s.id} className={'saved-store-item' + (isCurrent ? ' active' : '')} title={isCurrent ? t('pages.currentStore', uiLang) : undefined}>
-                    <div className="saved-store-name" onClick={function() { onLoadSaved(s.id); }}>
-                      {isCurrent ? '● ' : ''}{s.brandName}
+                  <div key={s.id}
+                    className={'saved-store-item' + (isCurrent ? ' active' : '') + (isLoading ? ' loading' : '')}
+                    title={rowTitle}
+                    onClick={isCurrent || anyLoading ? undefined : function() { handleLoadStore(s.id); }}
+                    style={isCurrent ? { cursor: 'default' } : (anyLoading ? { cursor: 'progress', opacity: 0.6 } : { cursor: 'pointer' })}>
+                    <div className="saved-store-name">
+                      {isLoading ? '⏳ ' : (isCurrent ? '● ' : '')}{s.brandName}
                     </div>
                     <div className="saved-store-meta">
                       {s.pageCount}p &middot; {s.productCount} ASINs
                     </div>
-                    <button className="btn-icon-sm btn-icon-danger" onClick={function() { onDeleteSaved(s.id); }} title={t('pages.delete', uiLang)}>&times;</button>
+                    <button className="btn-icon-sm btn-icon-danger"
+                      onClick={function(e) { e.stopPropagation(); onDeleteSaved(s.id); }}
+                      disabled={isLoading}
+                      title={t('pages.delete', uiLang)}>&times;</button>
                   </div>
                 );
               })}
