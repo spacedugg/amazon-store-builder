@@ -264,6 +264,199 @@ function resolveHeroBannerUrl(store, page, isMobile) {
 // Single tile renderer fuer den Customer Preview. Aspect Ratio kommt aus dem
 // Layout (Grid Cell), das eigentliche Bild fuellt die Zelle mit object-fit
 // cover. Keine Wireframes, kein Designer Overlay.
+// Produktauswahl Quiz: interaktives Modul. Phase wechselt zwischen Intro,
+// Frage und Ergebnis. Auf Amazon zeigt das Modul nach dem letzten Klick
+// eine Empfehlungsliste basierend auf den Antworten des Kunden.
+function CustomerProductSelector({ tile, products, marketplace, isMobile }) {
+  var ps = tile.productSelector || {};
+  var psBg = (ps.styling || {}).bgColor || '#fff';
+  var psFont = (ps.styling || {}).typography === 'serif' ? 'Georgia, serif' : 'system-ui, -apple-system, sans-serif';
+  var introEnabled = !!(ps.intro && ps.intro.enabled);
+  var introImage = ps.intro && ps.intro.image;
+  var imagePos = (ps.intro && ps.intro.imagePosition) === 'right' ? 'right' : 'left';
+  var questions = Array.isArray(ps.questions) ? ps.questions : [];
+  var results = ps.results || {};
+
+  var initialPhase = introEnabled ? 'intro' : (questions.length > 0 ? 'question' : 'results');
+  var [phase, setPhase] = useState(initialPhase);
+  var [currentQ, setCurrentQ] = useState(0);
+  var [chosen, setChosen] = useState({}); // questionId -> answer.asins[]
+
+  function reset() {
+    setPhase(initialPhase);
+    setCurrentQ(0);
+    setChosen({});
+  }
+
+  function startQuiz() {
+    if (questions.length === 0) { setPhase('results'); return; }
+    setPhase('question');
+    setCurrentQ(0);
+  }
+
+  function pickAnswer(qIdx, answer) {
+    var q = questions[qIdx];
+    var nextChosen = Object.assign({}, chosen);
+    nextChosen[q.id || 'q' + qIdx] = Array.isArray(answer.asins) ? answer.asins : [];
+    setChosen(nextChosen);
+    if (qIdx + 1 < questions.length) {
+      setCurrentQ(qIdx + 1);
+    } else {
+      setPhase('results');
+    }
+  }
+
+  // ── Renderer für Inhalte ──
+  function renderIntroContent() {
+    return (
+      <div style={{ textAlign: 'center', maxWidth: isMobile ? '100%' : 360 }}>
+        {ps.intro && ps.intro.headline && (
+          <div style={{ fontWeight: 700, fontSize: isMobile ? 20 : 28, color: '#0F1111', marginBottom: 8, lineHeight: 1.2 }}>{ps.intro.headline}</div>
+        )}
+        {ps.intro && ps.intro.description && (
+          <div style={{ fontSize: isMobile ? 13 : 15, color: '#565959', marginBottom: 18, lineHeight: 1.4 }}>{ps.intro.description}</div>
+        )}
+        {ps.intro && ps.intro.buttonLabel && (
+          <button onClick={startQuiz}
+            style={{ background: '#FFD814', color: '#0F1111', fontSize: isMobile ? 13 : 14, fontWeight: 700, padding: isMobile ? '10px 22px' : '12px 28px', borderRadius: 100, border: '1px solid #FCD200', cursor: 'pointer' }}>
+            {ps.intro.buttonLabel}
+          </button>
+        )}
+      </div>
+    );
+  }
+
+  function renderQuestion() {
+    var q = questions[currentQ];
+    if (!q) return null;
+    var answers = Array.isArray(q.answers) ? q.answers : [];
+    var anyAnswerImage = answers.some(function(a) { return !!a.image; });
+    return (
+      <div style={{ width: '100%', maxWidth: 720, textAlign: 'center' }}>
+        {q.questionText && (
+          <div style={{ fontWeight: 700, fontSize: isMobile ? 18 : 24, color: '#0F1111', marginBottom: 6, lineHeight: 1.2 }}>{q.questionText}</div>
+        )}
+        {q.descriptionText && (
+          <div style={{ fontSize: isMobile ? 12 : 14, color: '#565959', marginBottom: 16, lineHeight: 1.4 }}>{q.descriptionText}</div>
+        )}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(' + (isMobile ? '120px' : '140px') + ', 1fr))', gap: isMobile ? 8 : 12, marginTop: 8 }}>
+          {answers.map(function(a, ai) {
+            return (
+              <button key={a.id || ai}
+                onClick={function() { pickAnswer(currentQ, a); }}
+                style={{
+                  border: '1px solid #d5d9d9', borderRadius: 10, background: '#fff',
+                  padding: a.image ? 0 : (isMobile ? '14px 10px' : '18px 12px'),
+                  cursor: 'pointer', textAlign: 'center', overflow: 'hidden',
+                  display: 'flex', flexDirection: 'column', alignItems: 'stretch',
+                  transition: 'box-shadow .15s, border-color .15s',
+                  font: 'inherit', color: '#0F1111',
+                }}
+                onMouseEnter={function(e) { e.currentTarget.style.borderColor = '#FF9900'; e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,.08)'; }}
+                onMouseLeave={function(e) { e.currentTarget.style.borderColor = '#d5d9d9'; e.currentTarget.style.boxShadow = 'none'; }}>
+                {a.image && (
+                  <div style={{ width: '100%', aspectRatio: '1 / 1', background: '#fff' }}>
+                    <img src={a.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </div>
+                )}
+                <div style={{ fontSize: isMobile ? 12 : 14, fontWeight: 600, padding: a.image ? (isMobile ? '8px 10px' : '10px 12px') : 0 }}>
+                  {a.text || 'Antwort ' + (ai + 1)}
+                </div>
+              </button>
+            );
+          })}
+          {!anyAnswerImage && answers.length === 0 && (
+            <div style={{ color: '#94a3b8', fontSize: 13 }}>Keine Antworten konfiguriert</div>
+          )}
+        </div>
+        {questions.length > 1 && (
+          <div style={{ marginTop: 18, fontSize: isMobile ? 11 : 12, color: '#888' }}>
+            Frage {currentQ + 1} / {questions.length}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  function renderResults() {
+    // ASINs aus Antworten sammeln, dedupliziert, sonst Fallback auf
+    // recommendedAsins aus dem Quiz Setup.
+    var asinSet = [];
+    Object.keys(chosen).forEach(function(qid) {
+      (chosen[qid] || []).forEach(function(a) {
+        if (a && asinSet.indexOf(a) < 0) asinSet.push(a);
+      });
+    });
+    if (asinSet.length === 0 && Array.isArray(ps.recommendedAsins)) {
+      ps.recommendedAsins.forEach(function(a) {
+        if (a && asinSet.indexOf(a) < 0) asinSet.push(a);
+      });
+    }
+    var productMap = {};
+    (products || []).forEach(function(p) { if (p && p.asin) productMap[p.asin] = p; });
+    var items = asinSet.map(function(a) { return productMap[a] || { asin: a }; });
+    return (
+      <div style={{ width: '100%', maxWidth: 980 }}>
+        <div style={{ textAlign: 'center', marginBottom: 18 }}>
+          {results.headline && (
+            <div style={{ fontWeight: 700, fontSize: isMobile ? 20 : 26, color: '#0F1111', marginBottom: 6, lineHeight: 1.2 }}>{results.headline}</div>
+          )}
+          {results.description && (
+            <div style={{ fontSize: isMobile ? 13 : 15, color: '#565959', lineHeight: 1.4 }}>{results.description}</div>
+          )}
+        </div>
+        {items.length > 0 ? (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(' + (isMobile ? '140px' : '180px') + ', 1fr))', gap: isMobile ? 10 : 16 }}>
+            {items.map(function(p, i) {
+              return (
+                <div key={p.asin || i}>
+                  <AmazonProductCard product={p} marketplace={marketplace} isMobile={isMobile} />
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div style={{ textAlign: 'center', color: '#94a3b8', padding: '20px 0', fontSize: 13 }}>Keine Empfehlungen verfügbar</div>
+        )}
+        <div style={{ textAlign: 'center', marginTop: 24 }}>
+          <button onClick={reset}
+            style={{ background: 'transparent', color: '#0F1111', fontSize: isMobile ? 12 : 13, fontWeight: 600, padding: '8px 20px', borderRadius: 100, border: '1px solid #d5d9d9', cursor: 'pointer' }}>
+            {results.restartLabel || 'Quiz wiederholen'}
+          </button>
+        </div>
+        {results.disclaimer && (
+          <div style={{ fontSize: 10, color: '#94a3b8', marginTop: 18, textAlign: 'center', lineHeight: 1.4 }}>{results.disclaimer}</div>
+        )}
+      </div>
+    );
+  }
+
+  var contentNode = phase === 'intro' ? renderIntroContent()
+    : phase === 'question' ? renderQuestion()
+    : renderResults();
+
+  // Im Intro mit Bild: 50/50 Split Layout analog zum std-2equal Standard.
+  // In allen anderen Phasen volles Modul, zentriert.
+  var splitActive = phase === 'intro' && introEnabled && !!introImage;
+  if (splitActive) {
+    var imageCell = { flex: '0 0 50%', aspectRatio: '1 / 1', backgroundImage: 'url(' + introImage + ')', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' };
+    var contentCell = { flex: '0 0 50%', aspectRatio: '1 / 1', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: isMobile ? '16px 14px' : '24px 32px' };
+    return (
+      <div style={{ width: '100%', height: '100%', background: psBg, fontFamily: psFont, display: 'flex', alignItems: 'stretch' }}>
+        {imagePos === 'left' && <div style={imageCell} />}
+        <div style={contentCell}>{contentNode}</div>
+        {imagePos === 'right' && <div style={imageCell} />}
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ width: '100%', height: '100%', background: psBg, fontFamily: psFont, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: isMobile ? '24px 16px' : '40px 32px', boxSizing: 'border-box' }}>
+      {contentNode}
+    </div>
+  );
+}
+
 function CustomerTile({ tile, products, marketplace, isMobile, pages, setActivePage }) {
   var bgColor = tile.bgColor || '#f5f5f5';
   var imgSrc = getTileImage(tile, isMobile);
@@ -288,6 +481,11 @@ function CustomerTile({ tile, products, marketplace, isMobile, pages, setActiveP
   // Produkt Kacheln: Amazon Produkt Grid.
   if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0) {
     return <AmazonProductGrid tile={tile} products={products} marketplace={marketplace} isMobile={isMobile} />;
+  }
+
+  // Produktauswahl Quiz: interaktives Modul wie auf Amazon.
+  if (tile.type === 'product_selector') {
+    return <CustomerProductSelector tile={tile} products={products} marketplace={marketplace} isMobile={isMobile} />;
   }
 
   // Text Kachel: native Amazon Text Modul.
@@ -359,11 +557,15 @@ function CustomerSection({ section, products, marketplace, isMobile, pages, setA
   // muss der aspectRatio erhalten bleiben, sonst kollabieren die Bildkacheln
   // auf 0 Hoehe.
   var tiles = section.tiles || [];
-  var allProduct = tiles.length > 0 && tiles.every(function(t) {
-    return PRODUCT_TILE_TYPES.indexOf(t.type) >= 0;
-  });
+  // Tiles, die ihre Hoehe dem Inhalt folgen lassen sollen statt einem
+  // festen aspectRatio: Produktgrids und das Quiz Modul. Wenn alle Tiles
+  // dieser Kategorie angehoeren, darf die Sektion frei wachsen.
+  function isGrowingTile(t) {
+    return PRODUCT_TILE_TYPES.indexOf(t.type) >= 0 || t.type === 'product_selector';
+  }
+  var allGrowing = tiles.length > 0 && tiles.every(isGrowingTile);
   var gridStyle = Object.assign({}, config.gridStyle);
-  if (allProduct) {
+  if (allGrowing) {
     delete gridStyle.aspectRatio;
     delete gridStyle.gridTemplateRows;
   }
@@ -373,13 +575,14 @@ function CustomerSection({ section, products, marketplace, isMobile, pages, setA
     <div style={Object.assign({}, gridStyle, { display: 'grid', gap: isMobile ? 6 : 8, width: '100%', marginBottom: isMobile ? 8 : 16 })}>
       {tiles.map(function(tile, ti) {
         var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
+        var isQuiz = tile.type === 'product_selector';
         var tileStyle = Object.assign({}, config.getTileStyle(ti), { position: 'relative', minHeight: 0, background: tile.bgColor || '#fff' });
-        if (!isProduct) tileStyle.overflow = 'hidden';
+        if (!isProduct && !isQuiz) tileStyle.overflow = 'hidden';
         // Wenn die Sektion keinen vertikalen Constraint hat (Fullwidth Sektion
         // oder gemischte Sektion mit Produkt Grid), bekommt jede Bildkachel
         // eine aspect-ratio basierend auf ihren Tile Dimensions, damit das
         // Bild sich richtig dehnt statt auf 0 Hoehe zu kollabieren.
-        if (!isProduct && sectionHasNoVerticalConstraint) {
+        if (!isProduct && !isQuiz && sectionHasNoVerticalConstraint) {
           var dims = (isMobile ? tile.mobileDimensions : tile.dimensions) || tile.dimensions;
           if (dims && dims.w > 0 && dims.h > 0) {
             tileStyle.aspectRatio = dims.w + '/' + dims.h;
