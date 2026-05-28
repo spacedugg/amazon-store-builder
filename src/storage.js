@@ -217,8 +217,18 @@ export async function loadStoreBySlug(slug) {
   }
   if (!resp.ok) {
     var serverMsg = '';
-    try { var errJson = await resp.json(); serverMsg = errJson.error || ''; } catch (e) { /* ignore */ }
-    if (resp.status === 404) throw new Error('Store nicht gefunden für Slug ' + slug + '. ' + (serverMsg || ''));
+    var available = [];
+    try {
+      var errJson = await resp.json();
+      serverMsg = errJson.error || '';
+      available = errJson.availableSlugs || [];
+    } catch (e) { /* ignore */ }
+    if (resp.status === 404) {
+      var hint = available.length > 0
+        ? '\n\nVerfügbare Stores: ' + available.map(function(s) { return s.slug; }).join(', ')
+        : '';
+      throw new Error('Store nicht gefunden für Slug ' + slug + '.' + hint);
+    }
     throw new Error('HTTP ' + resp.status + (serverMsg ? ': ' + serverMsg : ''));
   }
   var json = await resp.json();

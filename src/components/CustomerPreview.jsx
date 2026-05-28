@@ -691,7 +691,7 @@ export default function CustomerPreview() {
   }
   if (error) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff', color: '#dc2626', fontSize: 14, padding: 40, textAlign: 'center' }}>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff', color: '#dc2626', fontSize: 14, padding: 40, textAlign: 'center', whiteSpace: 'pre-wrap' }}>
         {error}
       </div>
     );
