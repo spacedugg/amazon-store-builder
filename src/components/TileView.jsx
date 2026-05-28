@@ -179,17 +179,30 @@ function ProductSelectorPreview({ tile, fallbackBg }) {
   if (showIntro) {
     var introInner = <QuizIntroContent ps={ps} onStart={handleStart} />;
     if (hasSplitIntro) {
+      // Two equal squares side-by-side, mirroring the std-2equal layout
+      // (LARGE_SQUARE 1500×1500). Each half is a 1:1 cell so an uploaded
+      // square image fills its half completely without distortion.
+      var imageCell = {
+        flex: '0 0 50%',
+        aspectRatio: '1 / 1',
+        backgroundImage: 'url(' + introImage + ')',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      };
+      var contentCell = {
+        flex: '0 0 50%',
+        aspectRatio: '1 / 1',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '14px 16px',
+      };
       return (
-        <div style={{ background: psBg, minHeight: 120, display: 'flex', alignItems: 'stretch', fontFamily: psFont }}>
-          {imagePos === 'left' && (
-            <div style={{ flex: '0 0 50%', backgroundImage: 'url(' + introImage + ')', backgroundSize: 'cover', backgroundPosition: 'center' }} />
-          )}
-          <div style={{ flex: '0 0 50%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '14px 16px' }}>
-            {introInner}
-          </div>
-          {imagePos === 'right' && (
-            <div style={{ flex: '0 0 50%', backgroundImage: 'url(' + introImage + ')', backgroundSize: 'cover', backgroundPosition: 'center' }} />
-          )}
+        <div style={{ background: psBg, display: 'flex', alignItems: 'stretch', fontFamily: psFont }}>
+          {imagePos === 'left' && <div style={imageCell} />}
+          <div style={contentCell}>{introInner}</div>
+          {imagePos === 'right' && <div style={imageCell} />}
         </div>
       );
     }
