@@ -3,6 +3,21 @@ import { extractImagesFromStore, inflateImagesIntoStore, uploadImages } from './
 var AUTOSAVE_KEY = 'amazon-store-builder-autosave';
 var AUTOSAVE_META_KEY = 'amazon-store-builder-autosave-meta';
 
+// Build a URL safe slug from a brand name. Diacritics werden in ASCII
+// Ersatz aufgelöst (ä -> ae usw.), alles andere wird zu einem einzigen
+// Bindestrich getrennten Lowercase Block. Liefert einen leeren String
+// wenn der Name keine slugfähigen Zeichen enthält. Wird sowohl für die
+// Customer URL als auch für die Slug Auflösung beim Laden benutzt, damit
+// Konstruktion und Lookup garantiert dasselbe Ergebnis erzeugen.
+export function brandToSlug(name) {
+  if (!name) return '';
+  var s = String(name).toLowerCase();
+  s = s.replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss');
+  s = s.normalize ? s.normalize('NFKD').replace(/[̀-ͯ]/g, '') : s;
+  s = s.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  return s;
+}
+
 // ─── TURSO API (primary) with localStorage fallback ───
 
 export async function loadSavedStores() {
@@ -191,6 +206,26 @@ export async function deleteSavedStore(id) {
       localStorage.setItem('amazon-store-builder', JSON.stringify(stores));
     } catch (e2) { /* ignore */ }
   }
+}
+
+export async function loadStoreBySlug(slug) {
+  var resp;
+  try {
+    resp = await fetch('/api/stores?slug=' + encodeURIComponent(slug));
+  } catch (networkErr) {
+    throw new Error('Netzwerkfehler: API nicht erreichbar.');
+  }
+  if (!resp.ok) {
+    var serverMsg = '';
+    try { var errJson = await resp.json(); serverMsg = errJson.error || ''; } catch (e) { /* ignore */ }
+    if (resp.status === 404) throw new Error('Store nicht gefunden für Slug ' + slug + '. ' + (serverMsg || ''));
+    throw new Error('HTTP ' + resp.status + (serverMsg ? ': ' + serverMsg : ''));
+  }
+  var json = await resp.json();
+  if (json && json.data) {
+    json.data = await inflateImagesIntoStore(json.data);
+  }
+  return json;
 }
 
 export async function loadStoreByShareToken(shareToken) {

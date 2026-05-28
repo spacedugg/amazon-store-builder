@@ -4,6 +4,17 @@ function generateId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 }
 
+// Slug Logik muss byteidentisch mit src/storage.js#brandToSlug sein,
+// damit dieselbe Brand serverseitig und clientseitig denselben Slug ergibt.
+function brandToSlug(name) {
+  if (!name) return '';
+  var s = String(name).toLowerCase();
+  s = s.replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss');
+  s = s.normalize ? s.normalize('NFKD').replace(/[̀-ͯ]/g, '') : s;
+  s = s.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  return s;
+}
+
 function generateShareToken() {
   var chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
   var token = '';
@@ -68,6 +79,46 @@ module.exports = async function handler(req, res) {
       });
     } catch (err) {
       return res.status(500).json({ error: err.message });
+    }
+  }
+
+  // GET /api/stores?slug=xxx — get store by brand name slug (read-only,
+  // für Customer Preview URLs nach dem Schema /<brand-slug>).
+  if (req.method === 'GET' && req.query.slug) {
+    try {
+      var slug = String(req.query.slug || '').trim().toLowerCase();
+      if (!slug) return res.status(400).json({ error: 'Empty slug' });
+      var listResult = await db.execute('SELECT id, brand_name, updated_at FROM stores ORDER BY updated_at DESC');
+      var match = null;
+      for (var i = 0; i < listResult.rows.length; i++) {
+        if (brandToSlug(listResult.rows[i].brand_name) === slug) {
+          match = listResult.rows[i];
+          break;
+        }
+      }
+      if (!match) return res.status(404).json({ error: 'No store found for slug: ' + slug });
+      var fullResult = await db.execute({ sql: 'SELECT * FROM stores WHERE id = ?', args: [match.id] });
+      if (fullResult.rows.length === 0) return res.status(404).json({ error: 'Store not found' });
+      var row = fullResult.rows[0];
+      var parsedData;
+      try {
+        parsedData = JSON.parse(row.data);
+      } catch (parseErr) {
+        return res.status(500).json({ error: 'Store data is corrupted and could not be parsed.' });
+      }
+      if (!parsedData || !parsedData.pages) {
+        return res.status(500).json({ error: 'Store data is empty or incomplete.' });
+      }
+      return res.status(200).json({
+        id: row.id,
+        brandName: row.brand_name,
+        createdAt: row.created_at,
+        updatedAt: row.updated_at,
+        data: parsedData,
+        readOnly: true,
+      });
+    } catch (err) {
+      return res.status(500).json({ error: 'Database error: ' + err.message });
     }
   }
 
