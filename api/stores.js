@@ -89,25 +89,21 @@ module.exports = async function handler(req, res) {
       var slug = String(req.query.slug || '').trim().toLowerCase();
       if (!slug) return res.status(400).json({ error: 'Empty slug' });
       var listResult = await db.execute('SELECT id, brand_name, updated_at FROM stores ORDER BY updated_at DESC');
-      // Stufe 1: exakter Slug Match. Stufe 2: requestSlug ist Prefix eines
-      // existierenden Slugs (z.B. /true-nature matched True Naturals).
-      // Stufe 3: requestSlug enthält oder wird enthalten vom Brand Slug
-      // (lockere Übereinstimmung). Damit findet der Operator auch dann den
-      // Store, wenn der genaue Name nicht im Kopf ist.
+      // Exakter Slug Match. Pro Brand existiert idealerweise nur ein Eintrag,
+      // ältere Duplikate aus früheren Bugs werden beim nächsten Save derselben
+      // Brand automatisch konsolidiert. Falls trotzdem mehrere Rows mit
+      // identischem Brand Slug existieren, gewinnt die zuletzt aktualisierte.
       var available = [];
-      var exact = null;
-      var prefix = null;
-      var loose = null;
+      var match = null;
       for (var i = 0; i < listResult.rows.length; i++) {
         var row = listResult.rows[i];
         var rowSlug = brandToSlug(row.brand_name);
         if (!rowSlug) continue;
-        available.push({ slug: rowSlug, brandName: row.brand_name });
-        if (!exact && rowSlug === slug) exact = row;
-        if (!prefix && rowSlug.indexOf(slug) === 0) prefix = row;
-        if (!loose && (rowSlug.indexOf(slug) >= 0 || slug.indexOf(rowSlug) >= 0)) loose = row;
+        if (available.findIndex(function(a) { return a.slug === rowSlug; }) < 0) {
+          available.push({ slug: rowSlug, brandName: row.brand_name });
+        }
+        if (!match && rowSlug === slug) match = row;
       }
-      var match = exact || prefix || loose;
       if (!match) {
         return res.status(404).json({
           error: 'No store found for slug: ' + slug,
@@ -176,12 +172,47 @@ module.exports = async function handler(req, res) {
       var storeData = body.data;
       if (!storeData) return res.status(400).json({ error: 'Missing data field' });
 
-      var id = body.id || generateId();
+      var requestedId = body.id || null;
       var brandName = storeData.brandName || '';
       var marketplace = storeData.marketplace || 'de';
       var pageCount = (storeData.pages || []).length;
       var productCount = (storeData.products || []).length;
       var shareToken = body.shareToken || generateShareToken();
+
+      // Wenn ein Brand Name vorliegt ist der Brand Slug die kanonische ID.
+      // Damit ist pro Brand garantiert nur ein Eintrag in der Datenbank und
+      // ältere Duplikate werden beim Save automatisch konsolidiert.
+      var brandSlug = brandToSlug(brandName);
+      var id;
+      if (brandSlug) {
+        id = brandSlug;
+        // Alle anderen Rows der selben Brand und die alte zufällige ID
+        // einsammeln und entfernen.
+        var existing = await db.execute('SELECT id, brand_name, share_token FROM stores');
+        var idsToDelete = [];
+        var carriedShareToken = null;
+        existing.rows.forEach(function(r) {
+          if (r.id === id) return;
+          var rowSlug = brandToSlug(r.brand_name);
+          var isDupe = rowSlug === brandSlug;
+          var isCurrentRequest = requestedId && r.id === requestedId;
+          if (isDupe || isCurrentRequest) {
+            idsToDelete.push(r.id);
+            // Wenn die Quelle einen shareToken hatte und der Body keinen
+            // expliziten mitgeschickt hat, halten wir den bestehenden Token
+            // fest, damit Designer Share Links nicht ungewollt brechen.
+            if (!body.shareToken && !carriedShareToken && r.share_token) {
+              carriedShareToken = r.share_token;
+            }
+          }
+        });
+        if (carriedShareToken) shareToken = carriedShareToken;
+        for (var di = 0; di < idsToDelete.length; di++) {
+          await db.execute({ sql: 'DELETE FROM stores WHERE id = ?', args: [idsToDelete[di]] });
+        }
+      } else {
+        id = requestedId || generateId();
+      }
 
       await db.execute({
         sql: `INSERT INTO stores (id, brand_name, marketplace, data, share_token, page_count, product_count, updated_at)
