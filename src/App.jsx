@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, findLayout, LAYOUT_TILE_DIMS } from './constants';
-import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink } from './storage';
+import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink, setSessionStore, getSessionStore } from './storage';
 import { uploadFileToBlob } from './imageStorage';
 import { importBriefingToStore, importPageFromBriefing, importSectionFromBriefing, importTileFromBriefing } from './briefingImport';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
@@ -341,6 +341,40 @@ export default function App() {
     });
   }, []);
 
+  // Session restore: wenn dieser Tab vorher schon einen Store geladen
+  // hatte, holen wir denselben Store frisch aus der DB. So überlebt der
+  // Editor State einen Reload, ohne dass beim nächsten Save ein neuer
+  // Eintrag entsteht. sessionStorage liegt per Tab, ein geschlossenes
+  // und neu geöffnetes Tab startet damit sauber leer.
+  useEffect(function() {
+    var session = getSessionStore();
+    if (!session || !session.storeId) return;
+    loadStore(session.storeId).then(function(result) {
+      if (result && result.data && result.data.pages && result.data.pages.length > 0) {
+        setStore(refreshImageRefs(result.data));
+        setStoreId(session.storeId);
+        storeIdRef.current = session.storeId;
+        if (result.shareToken) {
+          setShareToken(result.shareToken);
+          shareTokenRef.current = result.shareToken;
+        } else if (session.shareToken) {
+          setShareToken(session.shareToken);
+          shareTokenRef.current = session.shareToken;
+        }
+        setCurPage(result.data.pages[0].id);
+        setSel(null);
+      } else {
+        setSessionStore(null);
+      }
+    }).catch(function() { setSessionStore(null); });
+  }, []);
+
+  // Spiegelt den aktiven Store in sessionStorage, damit ein Tab Reload
+  // den Editor State automatisch wiederherstellen kann.
+  useEffect(function() {
+    setSessionStore(storeId, shareToken);
+  }, [storeId, shareToken]);
+
   // Auto-save and validate whenever store changes.
   // localStorage Autosave läuft immer (Tab Crash Schutz).
   // DB Autosave nur wenn KEIN Designer Share Token existiert. Sobald der
@@ -348,7 +382,7 @@ export default function App() {
   // Designer keine Notification Flut bei jeder kleinen Änderung bekommt.
   useEffect(function() {
     if (store.pages.length > 0) {
-      autoSave(store);
+      autoSave(store, { storeId: storeIdRef.current, shareToken: shareTokenRef.current });
       setWarnings(validateStore(store));
     }
   }, [store]);
