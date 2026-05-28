@@ -69,6 +69,8 @@ Regeln zur Erweiterung:
 - `zugehoerigkeit` - "fuer Menschen die ...", Identitaet
 - `naming_signature` - Kreative Naming-Konvention als Brand-Differenzierung. Beobachtet bei holy-energy mit alliterativen Tier-Themen-Flavor-Namen (Strawberry Shark, Watermelon Whale) und bei more-nutrition mit CHUNKY FLAVOUR, ZERUP, CLEAR GLOW PEPTIDES.
 - `certified_sustainability` - explizite Zertifikats-Bezuege wie FSC, GRS, Bio, Nachhaltigeres Beforsten als Vertrauenssignal pro Produkt. Beobachtet bei feandrea als per-Tile-Annotation cross-page.
+- `tv_show_heritage` - Berufung auf eine TV-Show oder VIP-Kuration als Trust-Anker. Beispiele: "VON MASTERCHEF GENEHMIGT", "Genehmigt vom MasterChef-Team und getragen von den Teilnehmern der 12. Staffel". Beobachtet bei masterchef als Brand-Heritage-Claim ueber alle Pages.
+- `charity_partnership` - explizite Charity- oder Spendenpartnerschaft als Trust-Marker am Sub-Header oder Tile. Beispiel: "SAVE THE OCEAN" Badge bei trixie BE NORDIC. Anders als `certified_sustainability` (Zertifikat fuer Material) referenziert dieser claimType eine Geldspende oder gesellschaftliche Initiative.
 
 ## rhetoricalDevice, bekannte Werte
 

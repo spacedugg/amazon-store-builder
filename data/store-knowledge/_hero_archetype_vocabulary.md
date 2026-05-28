@@ -130,3 +130,16 @@ mit Dot-Markern an strategischen Punkten.
 - Quelle: trixie, Neuheiten-Page (Hero mit Hotspot-Dots und CTA "Produkte ansehen").
 - Quelle: esn, Startseite (Hero with Product Lineup mit 5 ASIN-Hotspots).
 - Beispiel: Vollflaechen-Hero-Bild mit 3-5 sichtbaren Hotspot-Dots, jeder Dot verlinkt zu einem ASIN oder einer Sub-Page.
+
+### `hero_with_three_usp_badges_and_lifestyle_companion`
+
+Sub-Category-Hero mit strikt einheitlichem Pattern: Vollflaechen-Akzentfarbe
+plus diagonaler dunklerer Schraegstreifen, grosse weisse Versalien-Headline
+links, drei runde farbige Badge-Kreise mit Icon und kurzem Label (typischer-
+weise 2-3 Worte in Versalien) als USP-Triplet, rechts ein einzelnes
+Lifestyle-Foto (Person oder Drink-Glas) das den USP-Inhalt visualisiert.
+Diese Architektur wiederholt sich Page-fuer-Page in einer Sub-Category-Serie
+und macht die Tonalitaet jedes Sortiment-Segments sofort lesbar.
+
+- Quelle: more-nutrition, alle 7 Sub-Pages (ZERUP, CHUNKY FLAVOUR, PROTEIN MILKSHAKE, PROTEIN ICED COFFEE, CLEAR PROTEIN, CLEAR GLOW PEPTIDES, VEGAN PROTEIN) jeweils mit eigenem Akzentfarben-Code und drei kategoriespezifischen USP-Badges.
+- Beispiel: Vollflaechen-Pink mit "ZERUP" Versalien-Headline links, drei Badge-Kreise "SEHR ERGIEBIG / VEGAN / 100% GESCHMACK", rechts Frau mit Eistee. Diagonaler dunklerer Schatten als Akzentstreifen.

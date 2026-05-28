@@ -249,6 +249,30 @@ Promo-/Sale-Page mit zwei aufeinanderfolgenden ProductGrids (50 und 48 ASINs) pl
 - Sequenz: Header > Hero > ProductGrid 50 > Spacer > ProductGrid 48 > Footer.
 - Wann verwenden: Sale-Pages mit sehr grosser ASIN-Liste wo eine logische Trennung (z.B. Top-Deals oben, weitere Deals unten) sinnvoller ist als ein einziges riesiges Grid.
 
+### `brand_story_plus_application_recipe`
+
+Zweiteiliges Editorial-Modul: oben "UNSER X" Brand-Story-Headline plus 6-8 USP-Bullets, unten ein Anwendungs-Rezept oder Use-Case-Block mit Schritt-Anleitung. Zwei narrative Schichten in einem einzigen Modul.
+
+- Quelle: more-nutrition ZERUP (Modul 7: "UNSER ZERUP" Brand-Story mit 7 USP-Bullets plus "ORANGE BASIL FIZZ REZEPT" mit Schritt-Anleitung darunter).
+- Sequenz innerhalb des Moduls: Brand-Story-Headline > USP-Bullets > Rezept-/Use-Case-Headline > Schritt-Anleitung.
+- Wann verwenden: Featured-ASIN- oder Sub-Category-Pages wo das Produkt eine Anwendungs-Storyline transportiert (Cocktails, Rezepte, Smoothie-Bowls, Workouts) und gleichzeitig die Brand-USP-Story erzaehlt werden soll.
+
+### `how_to_guide_tile_quad`
+
+4-Schritt-Anwendungsguide als nummeriertes Tile-Quad mit Lifestyle-Foto pro Schritt plus kurzer Schritt-Beschreibung. Anders als ein Brand-Story-Banner zeigt dieses Pattern den konkreten Produkt-Use im Lifestyle-Kontext.
+
+- Quelle: hansegruen Startseite Modul 10 (1. Pulver aus Dose entnehmen, 2. Pulver einfuellen, 3. Kurz schuetteln, 4. Geniessen und wohlfuehlen) - im urspruenglichen Blueprint faelschlich als `product_showcase` klassifiziert.
+- Sequenz innerhalb des Moduls: Section-Headline > 4 nummerierte Tiles mit Lifestyle-Foto + kurzem Action-Text.
+- Wann verwenden: Produkte mit nicht-selbsterklaerender Anwendung (Pulver, Konzentrate, Powder-to-Drink, DIY-Sets) wo die Pipeline visuell die Hemmschwelle nehmen muss.
+
+### `brand_story_trio_trenner`
+
+Drei kurze Brand-Story-Tile-Pair-Trenner mit unterschiedlichen Text-Typen (Mission, Sortimentsbreite, Promise) als Soft-Bridges zwischen Sortiment-Modulen. Visuell als Body-Copy-Cards mit Brand-Foto und kurzem Statement, kein Produkt.
+
+- Quelle: trixie Startseite (3x Tile-Pair-Trenner mit Mission "Friends for Life", Sortiments-Body-Copy "6500 vielfaeltige Artikel", Brand-Promise).
+- Sequenz: nach jedem 2-3 Sortiment-Modulen ein Tile-Pair-Trenner mit jeweils anderem Text-Typ.
+- Wann verwenden: Grosse Verteiler-Startseiten mit vielen Sortiments-Modulen wo Brand-Anker zwischen den Modulen verhindern dass die Page rein verkauft-orientiert wirkt.
+
 ## Verwendung in der Generierungs-Pipeline
 
 Wenn die Pipeline aus den Store-Analysen ein Brand-Store-Konzept fuer eine neue Marke erzeugt, kann sie:
