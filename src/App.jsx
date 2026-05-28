@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, findLayout, LAYOUT_TILE_DIMS } from './constants';
-import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink, setSessionStore, getSessionStore } from './storage';
+import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink, setSessionStore, getSessionStore, brandToSlug } from './storage';
 import { uploadFileToBlob } from './imageStorage';
 import { importBriefingToStore, importPageFromBriefing, importSectionFromBriefing, importTileFromBriefing } from './briefingImport';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
@@ -184,23 +184,33 @@ function refreshImageRefs(store) {
 }
 
 export default function App() {
+  var pathname = window.location.pathname;
+
   // Check if this is a share link — render full BriefingView
-  if (window.location.pathname.indexOf('/share/') === 0) {
+  if (pathname.indexOf('/share/') === 0) {
     return <BriefingView />;
   }
 
   // Customer Preview link — premium Amazon style preview ohne Designer Tools.
-  // Wird an Endkunden geschickt, nutzt denselben Share Token wie der Designer.
-  if (window.location.pathname.indexOf('/customer/') === 0) {
+  // Legacy Route /customer/<token> bleibt für bestehende Links erhalten.
+  if (pathname.indexOf('/customer/') === 0) {
     return <CustomerPreview />;
   }
 
   // Admin pages
-  if (window.location.pathname.indexOf('/admin/analyze') === 0) {
+  if (pathname.indexOf('/admin/analyze') === 0) {
     return <AdminAnalyze />;
   }
-  if (window.location.pathname.indexOf('/admin/scraping-test') === 0) {
+  if (pathname.indexOf('/admin/scraping-test') === 0) {
     return <AdminScrapingTest />;
+  }
+
+  // Neue Customer Preview Route /<brand-slug>: einzelnes Segment, kein
+  // reservierter Prefix. Slug muss zu einem aktiven Brand Namen aufgelöst
+  // werden, sonst landet der Benutzer im Editor.
+  var slugMatch = pathname.match(/^\/([a-z0-9][a-z0-9-]*)\/?$/);
+  if (slugMatch) {
+    return <CustomerPreview />;
   }
 
   var uiLang = 'en';
@@ -1693,7 +1703,10 @@ export default function App() {
         alert('Customer Link konnte nicht erzeugt werden. Server hat keinen shareToken zurueckgegeben. Bitte einmal manuell ueber Save speichern.');
         return;
       }
-      var url = window.location.origin + '/customer/' + result.shareToken;
+      // Bevorzugt die lesbare URL nach dem Brand Slug. Fällt auf den
+      // klassischen Token Link zurück, wenn der Store keinen Namen hat.
+      var slug = brandToSlug(store.brandName);
+      var url = window.location.origin + (slug ? '/' + slug : '/customer/' + result.shareToken);
       var msg = 'Customer Preview Link kopiert.\n\n' + url;
       if (result.imagesUploaded > 0 || (result.imagesSkipped || 0) > 0) {
         msg += '\n\nBilder: ' + (result.imagesUploaded || 0) + ' neu hochgeladen, ' + (result.imagesSkipped || 0) + ' bereits in DB.';

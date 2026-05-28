@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { PRODUCT_TILE_TYPES, findLayout } from '../constants';
-import { loadStoreByShareToken } from '../storage';
+import { loadStoreByShareToken, loadStoreBySlug } from '../storage';
 import { getGridConfig } from './SectionView';
 
 // Customer facing preview. Erreichbar unter /customer/<shareToken>.
@@ -613,8 +613,14 @@ function CustomerSection({ section, products, marketplace, isMobile, pages, setA
 }
 
 export default function CustomerPreview() {
-  var rawToken = window.location.pathname.split('/customer/')[1] || '';
-  var token = rawToken.split('/')[0].split('?')[0].trim();
+  // Zwei URL Formate werden unterstützt:
+  //   /customer/<shareToken>  Legacy Link mit kryptischem Token
+  //   /<brand-slug>           Neue, lesbare URL mit Markennamen
+  var pathname = window.location.pathname;
+  var legacyMatch = pathname.match(/^\/customer\/([^/?]+)/);
+  var slugMatch = pathname.match(/^\/([a-z0-9][a-z0-9-]*)\/?$/);
+  var mode = legacyMatch ? 'token' : (slugMatch ? 'slug' : null);
+  var identifier = legacyMatch ? legacyMatch[1] : (slugMatch ? slugMatch[1] : '');
 
   var [store, setStore] = useState(null);
   var [loading, setLoading] = useState(true);
@@ -638,11 +644,12 @@ export default function CustomerPreview() {
   // Damit muss der Operator nach einem Save im Editor nicht F5 druecken,
   // er kann einfach den Customer Tab anklicken und der neue Stand erscheint.
   function fetchStoreData(silent) {
-    if (!token) {
-      if (!silent) { setError('Kein Customer Token in der URL.'); setLoading(false); }
+    if (!identifier || !mode) {
+      if (!silent) { setError('Kein Customer Identifier in der URL.'); setLoading(false); }
       return;
     }
-    loadStoreByShareToken(token).then(function(result) {
+    var loader = mode === 'slug' ? loadStoreBySlug(identifier) : loadStoreByShareToken(identifier);
+    loader.then(function(result) {
       if (!result || !result.data) {
         if (!silent) { setError('Store nicht gefunden oder Link abgelaufen.'); setLoading(false); }
         return;
@@ -664,7 +671,7 @@ export default function CustomerPreview() {
     }
     document.addEventListener('visibilitychange', onVisible);
     return function() { document.removeEventListener('visibilitychange', onVisible); };
-  }, [token]);
+  }, [identifier, mode]);
 
   useEffect(function() {
     if (!moreOpen) return;
