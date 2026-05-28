@@ -89,14 +89,31 @@ module.exports = async function handler(req, res) {
       var slug = String(req.query.slug || '').trim().toLowerCase();
       if (!slug) return res.status(400).json({ error: 'Empty slug' });
       var listResult = await db.execute('SELECT id, brand_name, updated_at FROM stores ORDER BY updated_at DESC');
-      var match = null;
+      // Stufe 1: exakter Slug Match. Stufe 2: requestSlug ist Prefix eines
+      // existierenden Slugs (z.B. /true-nature matched True Naturals).
+      // Stufe 3: requestSlug enthält oder wird enthalten vom Brand Slug
+      // (lockere Übereinstimmung). Damit findet der Operator auch dann den
+      // Store, wenn der genaue Name nicht im Kopf ist.
+      var available = [];
+      var exact = null;
+      var prefix = null;
+      var loose = null;
       for (var i = 0; i < listResult.rows.length; i++) {
-        if (brandToSlug(listResult.rows[i].brand_name) === slug) {
-          match = listResult.rows[i];
-          break;
-        }
+        var row = listResult.rows[i];
+        var rowSlug = brandToSlug(row.brand_name);
+        if (!rowSlug) continue;
+        available.push({ slug: rowSlug, brandName: row.brand_name });
+        if (!exact && rowSlug === slug) exact = row;
+        if (!prefix && rowSlug.indexOf(slug) === 0) prefix = row;
+        if (!loose && (rowSlug.indexOf(slug) >= 0 || slug.indexOf(rowSlug) >= 0)) loose = row;
       }
-      if (!match) return res.status(404).json({ error: 'No store found for slug: ' + slug });
+      var match = exact || prefix || loose;
+      if (!match) {
+        return res.status(404).json({
+          error: 'No store found for slug: ' + slug,
+          availableSlugs: available.slice(0, 50),
+        });
+      }
       var fullResult = await db.execute({ sql: 'SELECT * FROM stores WHERE id = ?', args: [match.id] });
       if (fullResult.rows.length === 0) return res.status(404).json({ error: 'Store not found' });
       var row = fullResult.rows[0];
