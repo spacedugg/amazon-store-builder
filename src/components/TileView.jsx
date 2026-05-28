@@ -101,7 +101,7 @@ function clampPercent(v) {
   return v;
 }
 
-function QuizIntroContent({ ps }) {
+function QuizIntroContent({ ps, onStart }) {
   return (
     <div style={{ textAlign: 'center' }}>
       {ps.intro.headline && (
@@ -111,7 +111,8 @@ function QuizIntroContent({ ps }) {
         <div style={{ fontSize: 10, color: '#565959', marginBottom: 6 }}>{ps.intro.description}</div>
       )}
       {ps.intro.buttonLabel && (
-        <div style={{ display: 'inline-block', background: '#FF9900', color: '#111', fontSize: 10, fontWeight: 700, padding: '4px 16px', borderRadius: 20, cursor: 'default' }}>{ps.intro.buttonLabel}</div>
+        <div onClick={onStart}
+          style={{ display: 'inline-block', background: '#FF9900', color: '#111', fontSize: 10, fontWeight: 700, padding: '4px 16px', borderRadius: 20, cursor: onStart ? 'pointer' : 'default' }}>{ps.intro.buttonLabel}</div>
       )}
     </div>
   );
@@ -163,35 +164,52 @@ function ProductSelectorPreview({ tile, fallbackBg }) {
   var introImage = ps.intro && ps.intro.image;
   var imagePos = (ps.intro && ps.intro.imagePosition) === 'right' ? 'right' : 'left';
   var hasSplitIntro = introEnabled && !!introImage;
+  var [started, setStarted] = useState(false);
 
-  // Intro renders either as 50/50 split with the optional image, or
-  // full width centered when no image is set.
-  var introBlock = introEnabled ? (
-    hasSplitIntro ? (
-      <div style={{ display: 'flex', alignItems: 'stretch', minHeight: 120 }}>
-        {imagePos === 'left' && (
-          <div style={{ flex: '0 0 50%', backgroundImage: 'url(' + introImage + ')', backgroundSize: 'cover', backgroundPosition: 'center' }} />
-        )}
-        <div style={{ flex: '0 0 50%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '14px 16px', fontFamily: psFont }}>
-          <QuizIntroContent ps={ps} />
+  // Intro is its own phase when enabled. The questions only show after the
+  // operator clicks the Quiz starten button. When intro is disabled the
+  // questions are visible immediately.
+  var showIntro = introEnabled && !started;
+
+  function handleStart(e) {
+    e.stopPropagation();
+    setStarted(true);
+  }
+
+  if (showIntro) {
+    var introInner = <QuizIntroContent ps={ps} onStart={handleStart} />;
+    if (hasSplitIntro) {
+      return (
+        <div style={{ background: psBg, minHeight: 120, display: 'flex', alignItems: 'stretch', fontFamily: psFont }}>
+          {imagePos === 'left' && (
+            <div style={{ flex: '0 0 50%', backgroundImage: 'url(' + introImage + ')', backgroundSize: 'cover', backgroundPosition: 'center' }} />
+          )}
+          <div style={{ flex: '0 0 50%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '14px 16px' }}>
+            {introInner}
+          </div>
+          {imagePos === 'right' && (
+            <div style={{ flex: '0 0 50%', backgroundImage: 'url(' + introImage + ')', backgroundSize: 'cover', backgroundPosition: 'center' }} />
+          )}
         </div>
-        {imagePos === 'right' && (
-          <div style={{ flex: '0 0 50%', backgroundImage: 'url(' + introImage + ')', backgroundSize: 'cover', backgroundPosition: 'center' }} />
-        )}
+      );
+    }
+    return (
+      <div style={{ background: psBg, minHeight: 120, padding: '14px 16px', fontFamily: psFont }}>
+        {introInner}
       </div>
-    ) : (
-      <div style={{ padding: '14px 16px', fontFamily: psFont }}>
-        <QuizIntroContent ps={ps} />
-      </div>
-    )
-  ) : null;
+    );
+  }
 
   return (
-    <div style={{ background: psBg, minHeight: 120 }}>
-      {introBlock}
-      <div style={{ padding: '14px 16px', fontFamily: psFont }}>
-        <QuizQuestionContent ps={ps} />
-      </div>
+    <div style={{ background: psBg, minHeight: 120, padding: '14px 16px', fontFamily: psFont, position: 'relative' }}>
+      <QuizQuestionContent ps={ps} />
+      {introEnabled && (
+        <button onClick={function(e) { e.stopPropagation(); setStarted(false); }}
+          title="Zurück zum Intro"
+          style={{ position: 'absolute', top: 6, right: 6, background: 'rgba(124,58,237,0.1)', color: '#7c3aed', border: '1px solid #c4b5fd', borderRadius: 4, padding: '2px 6px', fontSize: 9, cursor: 'pointer' }}>
+          ↺ Intro
+        </button>
+      )}
     </div>
   );
 }
