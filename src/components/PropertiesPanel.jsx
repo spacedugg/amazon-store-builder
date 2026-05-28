@@ -1038,11 +1038,22 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
                   {/* Intro image upload */}
                   <div style={{ fontSize: 10, fontWeight: 600, color: '#6b21a8', marginBottom: 3 }}>Intro-Bild (optional)</div>
                   {ps.intro.image ? (
-                    <div style={{ position: 'relative', marginBottom: 4 }}>
-                      <img src={ps.intro.image} alt="Intro" style={{ width: '100%', maxHeight: 80, objectFit: 'cover', borderRadius: 4, border: '1px solid #e5e7eb' }} />
-                      <button onClick={function() { updatePS('intro.image', null); }}
-                        style={{ position: 'absolute', top: 2, right: 2, background: '#dc2626', color: '#fff', border: 'none', borderRadius: '50%', width: 16, height: 16, fontSize: 9, cursor: 'pointer', lineHeight: '14px' }}>✕</button>
-                    </div>
+                    <>
+                      <div style={{ position: 'relative', marginBottom: 6 }}>
+                        <img src={ps.intro.image} alt="Intro" style={{ width: '100%', maxHeight: 80, objectFit: 'cover', borderRadius: 4, border: '1px solid #e5e7eb' }} />
+                        <button onClick={function() { updatePS('intro.image', null); }}
+                          style={{ position: 'absolute', top: 2, right: 2, background: '#dc2626', color: '#fff', border: 'none', borderRadius: '50%', width: 16, height: 16, fontSize: 9, cursor: 'pointer', lineHeight: '14px' }}>✕</button>
+                      </div>
+                      <div style={{ fontSize: 10, fontWeight: 600, color: '#6b21a8', marginBottom: 3 }}>Bildposition im Modul</div>
+                      <div style={{ display: 'flex', gap: 4, marginBottom: 4 }}>
+                        <button className={'btn' + ((ps.intro.imagePosition || 'left') === 'left' ? ' active' : '')}
+                          onClick={function() { updatePS('intro.imagePosition', 'left'); }}
+                          style={{ flex: 1, fontSize: 9, padding: '3px 0' }}>Bild links</button>
+                        <button className={'btn' + ((ps.intro.imagePosition || 'left') === 'right' ? ' active' : '')}
+                          onClick={function() { updatePS('intro.imagePosition', 'right'); }}
+                          style={{ flex: 1, fontSize: 9, padding: '3px 0' }}>Bild rechts</button>
+                      </div>
+                    </>
                   ) : (
                     <label style={{ display: 'inline-block', fontSize: 9, color: '#7c3aed', border: '1px dashed #c4b5fd', borderRadius: 3, padding: '3px 10px', cursor: 'pointer', marginBottom: 4 }}>
                       + Bild hochladen
