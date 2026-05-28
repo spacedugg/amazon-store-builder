@@ -93,6 +93,7 @@ export function createDefaultProductSelector() {
       description: '',
       buttonLabel: 'Quiz starten',
       image: null,
+      imagePosition: 'left',
     },
     questions: [
       {

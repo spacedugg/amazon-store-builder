@@ -101,6 +101,119 @@ function clampPercent(v) {
   return v;
 }
 
+function QuizIntroContent({ ps, onStart }) {
+  return (
+    <div style={{ textAlign: 'center' }}>
+      {ps.intro.headline && (
+        <div style={{ fontWeight: 700, fontSize: 14, color: '#111', marginBottom: 2 }}>{ps.intro.headline}</div>
+      )}
+      {ps.intro.description && (
+        <div style={{ fontSize: 10, color: '#565959', marginBottom: 6 }}>{ps.intro.description}</div>
+      )}
+      {ps.intro.buttonLabel && (
+        <div onClick={onStart}
+          style={{ display: 'inline-block', background: '#FF9900', color: '#111', fontSize: 10, fontWeight: 700, padding: '4px 16px', borderRadius: 20, cursor: onStart ? 'pointer' : 'default' }}>{ps.intro.buttonLabel}</div>
+      )}
+    </div>
+  );
+}
+
+function QuizQuestionContent({ ps }) {
+  var firstQ = (ps.questions || [])[0];
+  if (!firstQ) return null;
+  return (
+    <div style={{ textAlign: 'center' }}>
+      {firstQ.questionText && (
+        <div style={{ fontWeight: 700, fontSize: 13, color: '#111', marginBottom: 2 }}>{firstQ.questionText}</div>
+      )}
+      {firstQ.descriptionText && (
+        <div style={{ fontSize: 9, color: '#565959', marginBottom: 8 }}>{firstQ.descriptionText}</div>
+      )}
+      <div style={{ display: 'flex', gap: 6, justifyContent: 'center', flexWrap: 'wrap' }}>
+        {(firstQ.answers || []).map(function(a, ai) {
+          return (
+            <div key={ai} style={{
+              border: '1px solid #d5d9d9', borderRadius: 8, padding: a.image ? 0 : '8px 10px',
+              minWidth: 60, maxWidth: 90, textAlign: 'center', background: '#fff',
+              overflow: 'hidden', cursor: 'default',
+            }}>
+              {a.image && (
+                <img src={a.image} alt="" style={{ width: '100%', height: 50, objectFit: 'cover' }} />
+              )}
+              <div style={{ fontSize: 9, fontWeight: 600, color: '#0F1111', padding: a.image ? '3px 4px' : 0 }}>
+                {a.text || 'Antwort ' + (ai + 1)}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      {(ps.questions || []).length > 1 && (
+        <div style={{ marginTop: 8, fontSize: 8, color: '#888' }}>
+          1 / {(ps.questions || []).length}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ProductSelectorPreview({ tile, fallbackBg }) {
+  var ps = tile.productSelector || {};
+  var psBg = (ps.styling || {}).bgColor || fallbackBg || '#fff';
+  var psFont = (ps.styling || {}).typography === 'serif' ? 'Georgia, serif' : 'system-ui, -apple-system, sans-serif';
+  var introEnabled = !!(ps.intro && ps.intro.enabled);
+  var introImage = ps.intro && ps.intro.image;
+  var imagePos = (ps.intro && ps.intro.imagePosition) === 'right' ? 'right' : 'left';
+  var hasSplitIntro = introEnabled && !!introImage;
+  var [started, setStarted] = useState(false);
+
+  // Intro is its own phase when enabled. The questions only show after the
+  // operator clicks the Quiz starten button. When intro is disabled the
+  // questions are visible immediately.
+  var showIntro = introEnabled && !started;
+
+  function handleStart(e) {
+    e.stopPropagation();
+    setStarted(true);
+  }
+
+  if (showIntro) {
+    var introInner = <QuizIntroContent ps={ps} onStart={handleStart} />;
+    if (hasSplitIntro) {
+      return (
+        <div style={{ background: psBg, minHeight: 120, display: 'flex', alignItems: 'stretch', fontFamily: psFont }}>
+          {imagePos === 'left' && (
+            <div style={{ flex: '0 0 50%', backgroundImage: 'url(' + introImage + ')', backgroundSize: 'cover', backgroundPosition: 'center' }} />
+          )}
+          <div style={{ flex: '0 0 50%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '14px 16px' }}>
+            {introInner}
+          </div>
+          {imagePos === 'right' && (
+            <div style={{ flex: '0 0 50%', backgroundImage: 'url(' + introImage + ')', backgroundSize: 'cover', backgroundPosition: 'center' }} />
+          )}
+        </div>
+      );
+    }
+    return (
+      <div style={{ background: psBg, minHeight: 120, padding: '14px 16px', fontFamily: psFont }}>
+        {introInner}
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ background: psBg, minHeight: 120, padding: '14px 16px', fontFamily: psFont, position: 'relative' }}>
+      <QuizQuestionContent ps={ps} />
+      {introEnabled && (
+        <button onClick={function(e) { e.stopPropagation(); setStarted(false); }}
+          title="Zurück zum Intro"
+          style={{ position: 'absolute', top: 6, right: 6, background: 'rgba(124,58,237,0.1)', color: '#7c3aed', border: '1px solid #c4b5fd', borderRadius: 4, padding: '2px 6px', fontSize: 9, cursor: 'pointer' }}>
+          ↺ Intro
+        </button>
+      )}
+    </div>
+  );
+}
+
 export default function TileView({ tile, selected, onClick, viewMode, products, uiLang, previewImageSrc, onClearPreview, onChangeHotspots }) {
   var cls = 'tile' + (selected ? ' tile-selected' : '');
   var dims = (viewMode === 'mobile' ? tile.mobileDimensions : tile.dimensions) || tile.dimensions || { w: 3000, h: 1200 };
@@ -167,67 +280,9 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
 
   // Product Selector (Quiz) tile — displayed as Amazon customer-facing preview
   if (tile.type === 'product_selector') {
-    var ps = tile.productSelector || {};
-    var firstQ = (ps.questions || [])[0];
-    var psBg = (ps.styling || {}).bgColor || bgColor || '#fff';
-    var psFont = (ps.styling || {}).typography === 'serif' ? 'Georgia, serif' : 'system-ui, -apple-system, sans-serif';
     return (
-      <div className={cls} onClick={onClick} style={{ background: psBg, minHeight: 120 }}>
-        <div style={{ padding: '14px 16px', fontFamily: psFont }}>
-          {/* Intro section (like Amazon shows it) */}
-          {ps.intro && ps.intro.enabled && (
-            <div style={{ textAlign: 'center', marginBottom: 10 }}>
-              {ps.intro.image && (
-                <img src={ps.intro.image} alt="" style={{ width: '100%', maxHeight: 60, objectFit: 'cover', borderRadius: 4, marginBottom: 6 }} />
-              )}
-              {ps.intro.headline && (
-                <div style={{ fontWeight: 700, fontSize: 14, color: '#111', marginBottom: 2 }}>{ps.intro.headline}</div>
-              )}
-              {ps.intro.description && (
-                <div style={{ fontSize: 10, color: '#565959', marginBottom: 6 }}>{ps.intro.description}</div>
-              )}
-              {ps.intro.buttonLabel && (
-                <div style={{ display: 'inline-block', background: '#FF9900', color: '#111', fontSize: 10, fontWeight: 700, padding: '4px 16px', borderRadius: 20, cursor: 'default' }}>{ps.intro.buttonLabel}</div>
-              )}
-            </div>
-          )}
-          {/* Question display (Amazon-style) */}
-          {firstQ && (
-            <div style={{ textAlign: 'center' }}>
-              {firstQ.questionText && (
-                <div style={{ fontWeight: 700, fontSize: 13, color: '#111', marginBottom: 2 }}>{firstQ.questionText}</div>
-              )}
-              {firstQ.descriptionText && (
-                <div style={{ fontSize: 9, color: '#565959', marginBottom: 8 }}>{firstQ.descriptionText}</div>
-              )}
-              {/* Answer choices as clickable cards (Amazon style) */}
-              <div style={{ display: 'flex', gap: 6, justifyContent: 'center', flexWrap: 'wrap' }}>
-                {(firstQ.answers || []).map(function(a, ai) {
-                  return (
-                    <div key={ai} style={{
-                      border: '1px solid #d5d9d9', borderRadius: 8, padding: a.image ? 0 : '8px 10px',
-                      minWidth: 60, maxWidth: 90, textAlign: 'center', background: '#fff',
-                      overflow: 'hidden', cursor: 'default',
-                    }}>
-                      {a.image && (
-                        <img src={a.image} alt="" style={{ width: '100%', height: 50, objectFit: 'cover' }} />
-                      )}
-                      <div style={{ fontSize: 9, fontWeight: 600, color: '#0F1111', padding: a.image ? '3px 4px' : 0 }}>
-                        {a.text || 'Antwort ' + (ai + 1)}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-          {/* Quiz indicator */}
-          {(ps.questions || []).length > 1 && (
-            <div style={{ textAlign: 'center', marginTop: 8, fontSize: 8, color: '#888' }}>
-              1 / {(ps.questions || []).length}
-            </div>
-          )}
-        </div>
+      <div className={cls} onClick={onClick}>
+        <ProductSelectorPreview tile={tile} fallbackBg={bgColor} />
       </div>
     );
   }
