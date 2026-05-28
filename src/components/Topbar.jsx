@@ -1,3 +1,42 @@
+import { useState, useEffect } from 'react';
+import { brandToSlug } from '../storage';
+
+// Inline editierbarer Brand Name. Klickt der Operator auf das Feld, kann er
+// den Namen tippen. Der Slug wird live unter dem Feld angezeigt, damit klar
+// ist welche Customer URL beim nächsten Save herauskommt.
+function BrandNameField({ value, onChange }) {
+  var [draft, setDraft] = useState(value || '');
+  var [focused, setFocused] = useState(false);
+  useEffect(function() { setDraft(value || ''); }, [value]);
+  var slug = brandToSlug(draft);
+  function commit() {
+    setFocused(false);
+    var next = draft.trim();
+    if (next !== (value || '')) onChange(next);
+  }
+  var inputStyle = {
+    background: focused ? '#fff' : 'transparent',
+    border: '1px solid ' + (focused ? '#cbd5e1' : 'transparent'),
+    borderRadius: 4, padding: '2px 6px',
+    font: 'inherit', fontWeight: 600, color: '#0f172a',
+    minWidth: 80, maxWidth: 220,
+  };
+  return (
+    <div className="topbar-brand-name" style={{ display: 'inline-flex', alignItems: 'center' }}>
+      <input value={draft}
+        placeholder="Brand-Name"
+        onChange={function(e) { setDraft(e.target.value); }}
+        onFocus={function() { setFocused(true); }}
+        onBlur={commit}
+        onKeyDown={function(e) { if (e.key === 'Enter') e.target.blur(); }}
+        style={inputStyle} />
+      {slug && (
+        <span style={{ fontSize: 10, color: '#94a3b8', marginLeft: 6 }} title="Customer URL Pfad nach dem nächsten Save">/{slug}</span>
+      )}
+    </div>
+  );
+}
+
 function AutoSaveBadge({ status, hasShareToken }) {
   if (hasShareToken) {
     return <span style={{ fontSize: 10, color: '#9ca3af', marginRight: 6 }} title="Designer Link aktiv, Autosave deaktiviert. Bitte manuell speichern, sobald du fertig bist.">Manuell</span>;
@@ -22,7 +61,7 @@ function formatCustomerProgress(p) {
   return 'Speichere...';
 }
 
-export default function Topbar({ store, shareToken, onExport, onSave, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress, folderUploadProgress }) {
+export default function Topbar({ store, shareToken, onExport, onSave, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress, folderUploadProgress, onChangeBrandName }) {
   var folderProgressLabel = '';
   if (folderUploadProgress) {
     folderProgressLabel = 'Bilder ' + (folderUploadProgress.uploaded || 0) + ' / ' + folderUploadProgress.total;
@@ -34,7 +73,16 @@ export default function Topbar({ store, shareToken, onExport, onSave, onShowJson
         <span className="topbar-icon">&#x1F3EA;</span>
         <span className="topbar-title"><span style={{ color: '#FF9900' }}>Store</span> Builder</span>
       </div>
-      {store.brandName && (
+      {onChangeBrandName ? (
+        <div className="topbar-info" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <BrandNameField value={store.brandName || ''} onChange={onChangeBrandName} />
+          {((store.products || []).length > 0 || (store.pages || []).length > 0) && (
+            <span style={{ fontSize: 10, color: '#94a3b8' }}>
+              {(store.products || []).length} products &middot; {(store.pages || []).length} pages
+            </span>
+          )}
+        </div>
+      ) : store.brandName && (
         <div className="topbar-info">
           {store.brandName} &middot; {(store.products || []).length} products &middot; {(store.pages || []).length} pages
         </div>
