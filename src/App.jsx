@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, findLayout, LAYOUT_TILE_DIMS } from './constants';
-import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink, setSessionStore, getSessionStore, brandToSlug } from './storage';
+import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink, setSessionStore, getSessionStore, brandToSlug, shareBaseUrl } from './storage';
 import { uploadFileToBlob } from './imageStorage';
 import { importBriefingToStore, importPageFromBriefing, importSectionFromBriefing, importTileFromBriefing } from './briefingImport';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
@@ -1710,7 +1710,7 @@ export default function App() {
       // Bevorzugt die lesbare URL nach dem Brand Slug. Fällt auf den
       // klassischen Token Link zurück, wenn der Store keinen Namen hat.
       var slug = brandToSlug(store.brandName);
-      var url = window.location.origin + (slug ? '/' + slug : '/customer/' + result.shareToken);
+      var url = shareBaseUrl() + (slug ? '/' + slug : '/customer/' + result.shareToken);
       var msg = 'Customer Preview Link kopiert.\n\n' + url;
       if (result.imagesUploaded > 0 || (result.imagesSkipped || 0) > 0) {
         msg += '\n\nBilder: ' + (result.imagesUploaded || 0) + ' neu hochgeladen, ' + (result.imagesSkipped || 0) + ' bereits in DB.';
@@ -1752,7 +1752,7 @@ export default function App() {
       }
       if (result && result.shareToken) {
         setShareToken(result.shareToken);
-        var shareUrl = window.location.origin + '/share/' + result.shareToken;
+        var shareUrl = shareBaseUrl() + '/share/' + result.shareToken;
         // Copy to clipboard
         try {
           await navigator.clipboard.writeText(shareUrl);

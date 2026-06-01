@@ -18,6 +18,21 @@ export function brandToSlug(name) {
   return s;
 }
 
+// Liefert die oeffentliche Basis URL fuer geteilte Links (Designer Briefing
+// und Customer Preview). Bewusst NICHT window.location.origin, weil das Tool
+// haeufig auf einer geschuetzten *.vercel.app Deployment URL laeuft, die ein
+// Vercel Login erzwingt. Geteilte Links muessen immer auf die oeffentliche
+// Custom Domain zeigen, die im Vercel Projekt auf das Production Deployment
+// gemappt ist. Ueber VITE_SHARE_BASE_URL ueberschreibbar (ohne abschliessenden
+// Slash), faellt sonst auf die fest hinterlegte Domain zurueck.
+export function shareBaseUrl() {
+  var configured = (typeof import.meta !== 'undefined' && import.meta.env)
+    ? import.meta.env.VITE_SHARE_BASE_URL
+    : undefined;
+  var base = configured || 'https://brand-store-preview.temoa.de';
+  return String(base).replace(/\/+$/, '');
+}
+
 // ─── TURSO API (primary) with localStorage fallback ───
 
 export async function loadSavedStores() {
