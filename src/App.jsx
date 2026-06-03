@@ -218,6 +218,7 @@ export default function App() {
   var [curPage, setCurPage] = useState('');
   var [sel, setSel] = useState(null);
   var [clipboardSection, setClipboardSection] = useState(null);
+  var [clipboardTile, setClipboardTile] = useState(null);
   var [showAsins, setShowAsins] = useState(false);
   var [showPrice, setShowPrice] = useState(false);
   var [showNewStoreModal, setShowNewStoreModal] = useState(false);
@@ -768,6 +769,61 @@ export default function App() {
         pages: s.pages.map(function(pg) {
           if (pg.id !== page.id) return pg;
           return Object.assign({}, pg, { sections: pg.sections.concat([clone]) });
+        }),
+      });
+    });
+  };
+
+  // ─── EINZELNE KACHEL KOPIEREN / EINSETZEN ───
+  // Kopiert eine komplette Kachel inklusive Texte, Brief, Bildkategorie,
+  // hochgeladener Bilder (uploadedImage / uploadedImageMobile), verknüpfter
+  // ASINs, Hotspots, Links und imageRef in eine Zwischenablage. Damit lässt
+  // sich eine Kachel an anderer Stelle wieder einsetzen ohne alles neu
+  // anzulegen.
+  var copyTile = function(sectionId, tileIndex) {
+    var sec = null;
+    store.pages.forEach(function(pg) {
+      (pg.sections || []).forEach(function(s) { if (s.id === sectionId) sec = s; });
+    });
+    if (!sec) return;
+    var tile = (sec.tiles || [])[tileIndex];
+    if (!tile) return;
+    setClipboardTile(JSON.parse(JSON.stringify(tile)));
+  };
+
+  // Setzt die kopierte Kachel in eine vorhandene Ziel Kachel ein. Übernommen
+  // werden alle Inhalte der Quelle (Texte, Brief, Bildkategorie, hochgeladene
+  // Bilder, ASINs, Hotspots, Links, imageRef). Beibehalten werden die
+  // Dimensionen der Ziel Kachel, weil diese durch das Layout der Zielsektion
+  // vorgegeben sind. Dadurch greift die bestehende imageRef Logik in
+  // refreshImageRefs automatisch: Sind Quelle und Ziel gleich groß, teilen
+  // sich beide Kacheln dasselbe Bild (connected, identischer imageRef WxH
+  // Suffix). Unterscheiden sich die Maße, schreibt refreshImageRefs den WxH
+  // Suffix neu und die Kacheln bleiben entkoppelt. Die für den Upload
+  // erforderliche Bildbenennung leitet sich in der BriefingView aus der
+  // Position der Kachel ab und passt sich darum automatisch an den neuen
+  // Platz im Store an.
+  var pasteTileIntoSelected = function() {
+    if (!sel || !clipboardTile) return;
+    setStoreWithUndo(function(s) {
+      return Object.assign({}, s, {
+        pages: s.pages.map(function(pg) {
+          return Object.assign({}, pg, {
+            sections: (pg.sections || []).map(function(sec) {
+              if (sec.id !== sel.sid) return sec;
+              return Object.assign({}, sec, {
+                tiles: (sec.tiles || []).map(function(t, i) {
+                  if (i !== sel.ti) return t;
+                  var pasted = JSON.parse(JSON.stringify(clipboardTile));
+                  // Maße der Ziel Kachel beibehalten (Layout vorgegeben).
+                  pasted.dimensions = t.dimensions ? Object.assign({}, t.dimensions) : pasted.dimensions;
+                  pasted.mobileDimensions = t.mobileDimensions ? Object.assign({}, t.mobileDimensions) : pasted.mobileDimensions;
+                  pasted.syncDimensions = t.syncDimensions;
+                  return pasted;
+                }),
+              });
+            }),
+          });
         }),
       });
     });
@@ -1923,6 +1979,9 @@ export default function App() {
           tile={selTile}
           onChange={updateTile}
           onDetachReuse={detachTileFromReuse}
+          onCopyTile={sel && sel.ti != null ? function() { copyTile(sel.sid, sel.ti); } : null}
+          onPasteTile={sel && sel.ti != null && clipboardTile ? pasteTileIntoSelected : null}
+          clipboardTile={clipboardTile}
           products={store.products}
           viewMode={viewMode}
           uiLang={uiLang}

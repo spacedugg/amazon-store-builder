@@ -128,7 +128,17 @@ function HeroBannerVariantRow({ label, dimensions, currentUrl, onUpload, onClear
   );
 }
 
-export default function PropertiesPanel({ tile, onChange, onDetachReuse, products, viewMode, uiLang, layoutType, pages, allPages, heroBanner, onHeroBannerChange, onHeroBannerImageUpload, onHeroBannerImageClear, storeHeaderBanner, storeHeaderBannerMobile }) {
+// Kurzer, sprechender Name für die Kachel in der Zwischenablage. Bevorzugt
+// die Headline, fällt sonst auf Brief oder den Tile Typ zurück.
+function tileClipboardLabel(tile) {
+  if (!tile) return '';
+  var ov = (tile.textOverlay && typeof tile.textOverlay === 'object') ? tile.textOverlay : {};
+  var label = ov.heading || ov.subheading || tile.brief || (TILE_TYPE_LABELS[tile.type] || tile.type || 'Kachel');
+  label = String(label).replace(/\s+/g, ' ').trim();
+  return label.length > 40 ? label.slice(0, 40) + '…' : label;
+}
+
+export default function PropertiesPanel({ tile, onChange, onDetachReuse, onCopyTile, onPasteTile, clipboardTile, products, viewMode, uiLang, layoutType, pages, allPages, heroBanner, onHeroBannerChange, onHeroBannerImageUpload, onHeroBannerImageClear, storeHeaderBanner, storeHeaderBannerMobile }) {
   // Top N Eingabe für markenübergreifende BSR Vorschläge auf Product Tiles
   var [topNInput, setTopNInput] = useState('');
   // ─── HERO BANNER MODE ───
@@ -245,6 +255,40 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, product
   return (
     <div className="props-panel">
       <div className="props-header">{t('props.title', uiLang)}</div>
+
+      {/* ─── KACHEL KOPIEREN / EINSETZEN ─── */}
+      {(onCopyTile || onPasteTile) && (
+        <div className="props-section" style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+            {onCopyTile && (
+              <button
+                onClick={onCopyTile}
+                title="Diese Kachel mit allen Texten, hochgeladenen Bildern und Verknüpfungen kopieren"
+                style={{ fontSize: 11, padding: '5px 10px', background: '#fff', border: '1px solid #cbd5e1', borderRadius: 4, color: '#334155', cursor: 'pointer', fontWeight: 600 }}>
+                &#x2398; Kachel kopieren
+              </button>
+            )}
+            {onPasteTile && (
+              <button
+                onClick={onPasteTile}
+                title="Kopierte Kachel hier einsetzen. Maße dieser Ziel Kachel bleiben erhalten. Bei gleichen Maßen wird das Bild geteilt (connected)."
+                style={{ fontSize: 11, padding: '5px 10px', background: '#6366f1', border: '1px solid #6366f1', borderRadius: 4, color: '#fff', cursor: 'pointer', fontWeight: 600 }}>
+                &#x2399; Kopierte Kachel hier einsetzen
+              </button>
+            )}
+          </div>
+          {clipboardTile && (
+            <div style={{ fontSize: 10, color: '#64748b', marginTop: 6, lineHeight: 1.4 }}>
+              In Zwischenablage: <strong>{tileClipboardLabel(clipboardTile)}</strong>
+              {clipboardTile.dimensions ? (' · ' + clipboardTile.dimensions.w + '×' + clipboardTile.dimensions.h) : ''}
+              {(clipboardTile.uploadedImage || clipboardTile.uploadedImageMobile) ? ' · mit Bild' : ''}
+              <div style={{ marginTop: 3 }}>
+                Gleiche Maße wie die Ziel Kachel verbinden beide Kacheln zu einem geteilten Bild. Andere Maße bleiben getrennt.
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* ─── IMAGE REUSE INFO BANNER ─── */}
       {reuseInfo.count > 1 && (
