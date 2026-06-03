@@ -10,6 +10,34 @@ export default function PriceCalculator({ store, shareToken, onClose, uiLang }) 
   var [timerSeconds, setTimerSeconds] = useState(0);
   var [timerLoading, setTimerLoading] = useState(false);
 
+  // Editierbare Preise. Initial aus den Defaults in PRICING, lokal
+  // anpassbar und in localStorage gemerkt, damit die Einstellung über
+  // Sitzungen hinweg erhalten bleibt.
+  var loadOverrides = function() {
+    try {
+      var raw = window.localStorage.getItem('tps_pricing_overrides');
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) { return {}; }
+  };
+  var overrides = loadOverrides();
+  var [setupFee, setSetupFee] = useState(overrides.baseSetupFee != null ? overrides.baseSetupFee : PRICING.baseSetupFee);
+  var [imagePrice, setImagePrice] = useState(overrides.imagePrice != null ? overrides.imagePrice : PRICING.imagePrice);
+  var [videoPrice, setVideoPrice] = useState(overrides.videoPrice != null ? overrides.videoPrice : PRICING.videoPrice);
+
+  // Persist price overrides whenever they change.
+  useEffect(function() {
+    try {
+      window.localStorage.setItem('tps_pricing_overrides', JSON.stringify({
+        baseSetupFee: setupFee, imagePrice: imagePrice, videoPrice: videoPrice,
+      }));
+    } catch (e) {}
+  }, [setupFee, imagePrice, videoPrice]);
+
+  function numOr(v, fallback) {
+    var n = parseFloat(v);
+    return isNaN(n) ? fallback : n;
+  }
+
   var handleUnlock = function() {
     if (password === PRICING.password) {
       setUnlocked(true);
@@ -44,10 +72,10 @@ export default function PriceCalculator({ store, shareToken, onClose, uiLang }) 
 
   var assets = countStoreAssets(store);
 
-  // Selling price calculation
-  var imageTotal = assets.images * PRICING.imagePrice;
-  var videoTotal = assets.videos * PRICING.videoPrice;
-  var sellingPrice = PRICING.baseSetupFee + imageTotal + videoTotal;
+  // Selling price calculation — auf Basis unika Bilder, nicht jeder Bildplatz
+  var imageTotal = assets.images * imagePrice;
+  var videoTotal = assets.videos * videoPrice;
+  var sellingPrice = setupFee + imageTotal + videoTotal;
 
   // Designer time cost (USD $14/hr → EUR)
   var designerHours = timerSeconds / 3600;
@@ -97,14 +125,46 @@ export default function PriceCalculator({ store, shareToken, onClose, uiLang }) 
           </div>
         ) : (
           <div className="price-breakdown">
-            {/* Asset overview */}
+            {/* Asset overview — unika Bilder sind die Abrechnungsgrundlage */}
             <div className="price-row">
-              <span className="price-label">{t('price.totalImages', uiLang)}</span>
+              <span className="price-label">Unika Bilder (abgerechnet)</span>
               <span className="price-value">{assets.images}</span>
             </div>
+            <div className="price-row price-row-detail">
+              <span className="price-label" style={{ color: '#64748b' }}>Bildplätze gesamt</span>
+              <span className="price-value" style={{ color: '#64748b' }}>{assets.imagePlacements}</span>
+            </div>
+            {assets.reusedSaved > 0 && (
+              <div className="price-row price-row-detail">
+                <span className="price-label" style={{ color: '#16a34a' }}>Durch Wiederverwendung gespart</span>
+                <span className="price-value" style={{ color: '#16a34a' }}>{assets.reusedSaved} Plätze</span>
+              </div>
+            )}
             <div className="price-row">
               <span className="price-label">{t('price.totalVideos', uiLang)}</span>
               <span className="price-value">{assets.videos}</span>
+            </div>
+
+            {/* Editierbare Preise */}
+            <div className="price-divider" />
+            <div className="price-section-header">Preise anpassen</div>
+            <div className="price-row price-row-detail">
+              <span className="price-label">Setup Fee ({PRICING.currency})</span>
+              <input type="number" className="input" value={setupFee} min={0} step={10}
+                onChange={function(e) { setSetupFee(numOr(e.target.value, 0)); }}
+                style={{ width: 90, textAlign: 'right', padding: '2px 6px' }} />
+            </div>
+            <div className="price-row price-row-detail">
+              <span className="price-label">Pro Bild ({PRICING.currency})</span>
+              <input type="number" className="input" value={imagePrice} min={0} step={1}
+                onChange={function(e) { setImagePrice(numOr(e.target.value, 0)); }}
+                style={{ width: 90, textAlign: 'right', padding: '2px 6px' }} />
+            </div>
+            <div className="price-row price-row-detail">
+              <span className="price-label">Pro Video ({PRICING.currency})</span>
+              <input type="number" className="input" value={videoPrice} min={0} step={10}
+                onChange={function(e) { setVideoPrice(numOr(e.target.value, 0)); }}
+                style={{ width: 90, textAlign: 'right', padding: '2px 6px' }} />
             </div>
 
             {/* Designer Time */}
@@ -126,15 +186,15 @@ export default function PriceCalculator({ store, shareToken, onClose, uiLang }) 
             <div className="price-section-header" style={{ color: '#1d4ed8' }}>Selling Price (Customer)</div>
             <div className="price-row price-row-detail">
               <span className="price-label">{t('price.setup', uiLang)}</span>
-              <span className="price-value">{PRICING.baseSetupFee} {PRICING.currency}</span>
+              <span className="price-value">{setupFee} {PRICING.currency}</span>
             </div>
             <div className="price-row price-row-detail">
-              <span className="price-label">{assets.images} x {PRICING.imagePrice} {PRICING.currency} ({t('price.images', uiLang)})</span>
+              <span className="price-label">{assets.images} x {imagePrice} {PRICING.currency} ({t('price.images', uiLang)})</span>
               <span className="price-value">{imageTotal} {PRICING.currency}</span>
             </div>
             {assets.videos > 0 && (
               <div className="price-row price-row-detail">
-                <span className="price-label">{assets.videos} x {PRICING.videoPrice} {PRICING.currency} ({t('price.videos', uiLang)})</span>
+                <span className="price-label">{assets.videos} x {videoPrice} {PRICING.currency} ({t('price.videos', uiLang)})</span>
                 <span className="price-value">{videoTotal} {PRICING.currency}</span>
               </div>
             )}
