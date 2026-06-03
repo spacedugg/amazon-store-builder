@@ -737,11 +737,19 @@ export var STORE_PRINCIPLES = {
 
 // ─── HELPER: Count images and videos in a store ───
 export function countStoreAssets(store) {
-  var images = 0;
   var videos = 0;
   var hasHeader = store.headerBanner || store.headerBannerMobile ? 1 : 0;
-  // Header banner counts as 1 image (desktop+mobile = 1 asset)
-  images += hasHeader ? 0 : 1; // always need header designed
+  // Header banner always counts as 1 unique image to design (desktop+mobile = 1 asset)
+  var headerImages = hasHeader ? 0 : 1;
+
+  // Unika Bilder zählen statt jeden Bildplatz. Kacheln die sich über die
+  // Reuse Logik dasselbe Bild teilen, haben denselben imageRef (siehe
+  // refreshImageRefs). Jeder nicht leere imageRef wird darum nur einmal
+  // gezählt, egal an wie vielen Stellen er im Store auftaucht. Kacheln ohne
+  // imageRef sind eigenständige Bilder und zählen einzeln.
+  var seenRefs = {};
+  var uniqueImages = 0;
+  var imagePlacements = 0;
 
   (store.pages || []).forEach(function(pg) {
     (pg.sections || []).forEach(function(sec) {
@@ -750,13 +758,27 @@ export function countStoreAssets(store) {
           videos++;
         } else if (PRODUCT_TILE_TYPES.indexOf(tile.type) < 0 && tile.type !== 'text') {
           // image, shoppable_image, image_text all need design
-          images++;
+          imagePlacements++;
+          var ref = tile.imageRef ? String(tile.imageRef).toLowerCase() : '';
+          if (ref) {
+            if (seenRefs[ref]) return; // bereits gezählt, wiederverwendetes Bild
+            seenRefs[ref] = true;
+          }
+          uniqueImages++;
         }
       });
     });
   });
 
-  return { images: images, videos: videos };
+  var images = headerImages + uniqueImages;
+  var totalPlacements = headerImages + imagePlacements;
+
+  return {
+    images: images,                          // unika Bilder, Abrechnungsgrundlage
+    videos: videos,
+    imagePlacements: totalPlacements,        // alle Bildplätze inkl. Wiederverwendungen
+    reusedSaved: totalPlacements - images,   // wie viele Plätze durch Reuse gespart wurden
+  };
 }
 
 // ─── VALIDATION HELPERS ───
