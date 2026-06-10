@@ -45,7 +45,11 @@ module.exports = async function handler(req, res) {
   }
 
   // GET /api/stores — list all stores (without full data)
-  if (req.method === 'GET' && !req.query.id && !req.query.shareToken) {
+  // Wichtig: slug muss hier ausgeschlossen werden, sonst verschluckt dieser
+  // Handler die ?slug=... Anfragen (er steht vor dem Slug-Handler weiter unten)
+  // und der Customer Preview bekommt die Liste statt des Einzel-Stores, was
+  // faelschlich als "Store nicht gefunden oder Link abgelaufen" erscheint.
+  if (req.method === 'GET' && !req.query.id && !req.query.shareToken && !req.query.slug) {
     try {
       var result = await db.execute(
         'SELECT id, brand_name, marketplace, page_count, product_count, share_token, created_at, updated_at FROM stores ORDER BY updated_at DESC'
