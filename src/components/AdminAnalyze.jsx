@@ -21,6 +21,7 @@ var STORES = [
   { file: 'bears-with-benefits', brand: 'Bears with Benefits', url: 'https://www.amazon.de/stores/BearswithBenefits/page/AFC77FAF-F173-4A4E-A7DF-8779F7E16E97', category: 'supplements', quality: 2 },
   { file: 'twentythree', brand: 'twentythree', url: 'https://www.amazon.de/stores/twentythree/page/0E8D9A31-200C-4EC5-BC94-CBBC023B28A4', category: 'home_kitchen', quality: 3 },
   { file: 'gritin', brand: 'Gritin', url: 'https://www.amazon.de/stores/page/1758941C-AE87-4628-AB45-62C0A2BDB75C', category: 'home_kitchen', quality: 3 },
+  { file: 'wiltec', brand: 'WilTec', url: 'https://www.amazon.de/stores/Wiltec/page/358D9C91-49E4-436C-A4C0-C1BA823461DC', category: 'tools_technical', quality: 3 },
   { file: 'trixie', brand: 'TRIXIE', url: 'https://www.amazon.de/stores/page/30552E59-AC22-47B1-BBBB-AEA9225BD614', category: 'pets', quality: 3 },
   { file: 'nightcat', brand: 'Night Cat', url: 'https://www.amazon.de/stores/page/CC609240-DCC5-47C5-A171-3B973268CD34', category: 'sports', quality: 2 },
   { file: 'masterchef', brand: 'MasterChef', url: 'https://www.amazon.de/stores/page/4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6', category: 'kitchen', quality: 2 },
@@ -238,6 +239,10 @@ export default function AdminAnalyze() {
                     </div>
                   )}
                 </div>
+                <a href={store.url} target="_blank" rel="noopener noreferrer" title={store.url}
+                  style={{ padding: '5px 10px', fontSize: 11, fontWeight: 600, borderRadius: 5, border: '1px solid #e2e8f0', background: '#fff', color: '#475569', textDecoration: 'none', whiteSpace: 'nowrap' }}>
+                  Store ↗
+                </a>
                 <button onClick={function() {
                     var f = store.file;
                     if (expandedStore === f) { setExpandedStore(null); return; }
