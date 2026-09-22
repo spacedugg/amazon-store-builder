@@ -33,7 +33,7 @@ export function shareBaseUrl() {
   return String(base).replace(/\/+$/, '');
 }
 
-// ─── TURSO API (primary) with localStorage fallback ───
+// ─── Supabase-backed API (primary) with localStorage fallback ───
 
 export async function loadSavedStores() {
   try {

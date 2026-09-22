@@ -109,7 +109,7 @@ module.exports = async function handler(req, res) {
 
       await db.execute({
         sql: `INSERT INTO reference_stores (id, brand_name, store_url, marketplace, category, tags, page_count, image_count, parsed_data, image_analyses, claude_analysis, quality_score, updated_at)
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now())
               ON CONFLICT(id) DO UPDATE SET
                 brand_name = excluded.brand_name,
                 store_url = excluded.store_url,
@@ -122,7 +122,7 @@ module.exports = async function handler(req, res) {
                 image_analyses = excluded.image_analyses,
                 claude_analysis = excluded.claude_analysis,
                 quality_score = excluded.quality_score,
-                updated_at = datetime('now')`,
+                updated_at = now()`,
         args: [
           id,
           body.brandName,
