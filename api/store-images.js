@@ -68,7 +68,7 @@ module.exports = async function handler(req, res) {
       // der Client unfertige Eintraege erneut hochladen kann.
       var placeholders = hashes.map(function() { return '?'; }).join(',');
       var rows = await db.execute({
-        sql: 'SELECT hash FROM store_images WHERE hash IN (' + placeholders + ') AND (blob_url IS NOT NULL OR (data IS NOT NULL AND data != ""))',
+        sql: "SELECT hash FROM store_images WHERE hash IN (" + placeholders + ") AND (blob_url IS NOT NULL OR (data IS NOT NULL AND data != ''))",
         args: hashes,
       });
       var existsMap = {};

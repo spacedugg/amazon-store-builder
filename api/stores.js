@@ -225,14 +225,14 @@ module.exports = async function handler(req, res) {
 
       await db.execute({
         sql: `INSERT INTO stores (id, brand_name, marketplace, data, share_token, page_count, product_count, updated_at)
-              VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))
+              VALUES (?, ?, ?, ?, ?, ?, ?, now())
               ON CONFLICT(id) DO UPDATE SET
                 brand_name = excluded.brand_name,
                 marketplace = excluded.marketplace,
                 data = excluded.data,
                 page_count = excluded.page_count,
                 product_count = excluded.product_count,
-                updated_at = datetime('now')`,
+                updated_at = now()`,
         args: [id, brandName, marketplace, JSON.stringify(storeData), shareToken, pageCount, productCount],
       });
 
