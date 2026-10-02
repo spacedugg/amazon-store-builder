@@ -3,6 +3,7 @@ import { PRODUCT_TILE_TYPES, TILE_TYPE_LABELS } from '../constants';
 import { t } from '../i18n';
 import Wireframe from './Wireframe';
 import { tileImageForView } from '../tileSync';
+import { effectiveShoppableHotspots } from '../hotspots';
 
 // Entfernt eventuell noch in alten Stores vorhandene **WORT** Marker, ohne
 // sie zu rendern. Headlines werden ohne jede Inline Formatierung angezeigt.
@@ -76,24 +77,6 @@ function ProductCardWireframe({ asins, products, tileType, bgColor, uiLang }) {
       </div>
     </div>
   );
-}
-
-// Compute hotspots to display on a shoppable image. If the tile already has
-// hand placed hotspots, use them. Otherwise generate one default per linked
-// product so the designer immediately sees draggable markers.
-function effectiveShoppableHotspots(tile) {
-  if (Array.isArray(tile.hotspots) && tile.hotspots.length > 0) return tile.hotspots;
-  var asins = [];
-  if (tile.linkAsin) asins.push(tile.linkAsin);
-  (tile.asins || []).forEach(function(a) {
-    if (a && asins.indexOf(a) < 0) asins.push(a);
-  });
-  if (asins.length === 0) return [];
-  return asins.map(function(asin, i) {
-    var n = asins.length;
-    var x = ((i + 1) / (n + 1)) * 100;
-    return { asin: asin, x: x, y: 50 };
-  });
 }
 
 function clampPercent(v) {

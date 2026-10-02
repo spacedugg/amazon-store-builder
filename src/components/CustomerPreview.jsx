@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { PRODUCT_TILE_TYPES, findLayout } from '../constants';
 import { loadStoreByShareToken, loadStoreBySlug } from '../storage';
 import { getGridConfig } from './SectionView';
 import { tileImageForView } from '../tileSync';
+import { effectiveShoppableHotspots } from '../hotspots';
 
 // Customer facing preview. Erreichbar unter /customer/<shareToken>.
 // Zeigt den Brand Store so, wie er fertig auf Amazon aussehen wuerde:
@@ -52,49 +54,63 @@ function StarsDisplay({ rating, reviews }) {
   );
 }
 
-// Eine echte Amazon Produktkarte. Bild, Titel, Sterne, Reviews Count, Preis.
-// Klick oeffnet die Amazon Produktseite in einem neuen Tab.
+// Produktkarte wie in einem Amazon Brand Store: quadratisches Bild, Titel
+// (2 Zeilen), Sterne mit Bewertungen, Preis. Klick oeffnet die Amazon Seite in
+// einem neuen Tab. Liegen zu einer ASIN noch keine Produktdaten vor, erscheint
+// ein ruhiger Platzhalter mit der ASIN statt eines kaputt wirkenden Bildes.
+function hasProductData(p) {
+  return !!(p && (p.name || p.image || (p.price != null && p.price !== '')));
+}
+
 function AmazonProductCard({ product, marketplace, isMobile }) {
   if (!product) return null;
   var tld = marketplaceTld(marketplace);
   var href = product.asin ? 'https://www.amazon.' + tld + '/dp/' + product.asin : null;
-  var title = product.name || product.asin || '';
+  var known = hasProductData(product);
+  var title = product.name || '';
   var priceText = formatPrice(product.price, product.currency);
-  var imgH = isMobile ? 110 : 150;
   var content = (
-    <div style={{
-      background: '#fff', display: 'flex', flexDirection: 'column',
-      padding: isMobile ? 8 : 12, height: '100%', boxSizing: 'border-box',
-      transition: 'box-shadow .15s',
-    }}>
-      <div style={{ height: imgH, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 8, background: '#fff' }}>
+    <div style={{ background: '#fff', display: 'flex', flexDirection: 'column', padding: isMobile ? '6px 6px 10px' : '8px 8px 12px', height: '100%', boxSizing: 'border-box' }}>
+      <div style={{ width: '100%', aspectRatio: '1 / 1', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: isMobile ? 8 : 10, background: '#fff', position: 'relative' }}>
         {product.image ? (
           <img src={product.image} alt={title}
             style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
         ) : (
-          <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #f1f5f9, #e2e8f0)', borderRadius: 4 }} />
+          <div style={{ width: '100%', height: '100%', background: '#f3f4f6', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <svg width={isMobile ? 34 : 44} height={isMobile ? 34 : 44} viewBox="0 0 24 24" fill="none" stroke="#c4c9d1" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 8l-9-5-9 5v8l9 5 9-5V8z" /><path d="M3 8l9 5 9-5" /><path d="M12 13v8" />
+            </svg>
+          </div>
         )}
       </div>
-      <div style={{
-        fontSize: isMobile ? 11 : 12, color: '#0F1111', lineHeight: 1.35,
-        display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical',
-        overflow: 'hidden', minHeight: isMobile ? 30 : 34, marginBottom: 4,
-      }}>
-        {title}
-      </div>
-      <StarsDisplay rating={product.rating} reviews={product.reviews} />
-      {priceText && (
-        <div style={{ marginTop: 6, fontSize: isMobile ? 14 : 16, color: '#0F1111', fontWeight: 500 }}>
-          {priceText}
+      {title ? (
+        <div style={{
+          fontSize: isMobile ? 12 : 14, color: '#0F1111', lineHeight: 1.35,
+          display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical',
+          overflow: 'hidden', minHeight: (isMobile ? 12 : 14) * 1.35 * 2, marginBottom: 4,
+        }}>
+          {title}
+        </div>
+      ) : (
+        <div style={{ fontSize: isMobile ? 11 : 12, color: '#565959', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', minHeight: (isMobile ? 12 : 14) * 1.35 * 2, marginBottom: 4 }}>
+          {product.asin}
         </div>
       )}
+      <StarsDisplay rating={product.rating} reviews={product.reviews} />
+      {priceText ? (
+        <div style={{ marginTop: 6, fontSize: isMobile ? 16 : 20, color: '#0F1111', fontWeight: 500, lineHeight: 1.1 }}>
+          {priceText}
+        </div>
+      ) : (!known && (
+        <div style={{ marginTop: 6, fontSize: isMobile ? 11 : 12, color: '#007185' }}>Auf Amazon ansehen ›</div>
+      ))}
     </div>
   );
   if (href) {
     return (
       <a href={href} target="_blank" rel="noopener noreferrer"
-        style={{ textDecoration: 'none', color: 'inherit', display: 'block', height: '100%', border: '1px solid transparent', borderRadius: 4 }}
-        onMouseEnter={function(e) { e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,.12)'; e.currentTarget.style.borderColor = '#e7e7e7'; }}
+        style={{ textDecoration: 'none', color: 'inherit', display: 'block', height: '100%', border: '1px solid transparent', borderRadius: 6 }}
+        onMouseEnter={function(e) { e.currentTarget.style.boxShadow = '0 2px 10px rgba(0,0,0,.14)'; e.currentTarget.style.borderColor = '#e7e7e7'; }}
         onMouseLeave={function(e) { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.borderColor = 'transparent'; }}>
         {content}
       </a>
@@ -103,14 +119,18 @@ function AmazonProductCard({ product, marketplace, isMobile }) {
   return content;
 }
 
-// Amazon Produkt Grid: zeigt ein Banner mit Titel (zum Beispiel Best Sellers,
-// Empfohlen) plus ein horizontales Scrollband mit den ASIN Produkten der Kachel.
-export function AmazonProductGrid({ tile, products, marketplace, isMobile }) {
+// Amazon Produkt Grid: Titel (zum Beispiel Produkte, Bestseller) plus die ASIN
+// Produkte der Kachel. Wie in einem Brand Store: Produktraster mit 4 Karten
+// pro Reihe auf Desktop und 2 auf Mobile; Bestseller als horizontaler Slider.
+// showMissingHint: im Editor und in der Designer Preview ein Hinweis, wenn zu
+// ASINs noch keine Produktdaten abgerufen wurden (Kunden sehen ihn nicht).
+export function AmazonProductGrid({ tile, products, marketplace, isMobile, showMissingHint }) {
   var asins = tile.asins || [];
   if (!asins.length) return null;
   var map = {};
   (products || []).forEach(function(p) { if (p && p.asin) map[p.asin] = p; });
   var items = asins.map(function(a) { return map[a] || { asin: a }; });
+  var missing = items.filter(function(p) { return !hasProductData(p); }).length;
 
   var titleMap = {
     product_grid: 'Produkte',
@@ -120,34 +140,34 @@ export function AmazonProductGrid({ tile, products, marketplace, isMobile }) {
   };
   var title = titleMap[tile.type] || 'Produkte';
 
-  // Amazon zeigt Bestseller als horizontalen Slider, normale Produkt Grids
-  // dagegen als tabellarisches Raster mit 5 Karten pro Reihe auf Desktop und
-  // 2 pro Reihe auf Mobile. Wir bilden das hier nach.
   var isSlider = tile.type === 'best_sellers';
-  var cols = isMobile ? 2 : 5;
+  var cols = isMobile ? 2 : 4;
 
   var listStyle;
   if (isSlider) {
     listStyle = {
       display: 'grid', gridAutoFlow: 'column',
-      gridAutoColumns: (isMobile ? 150 : 200) + 'px',
-      gap: isMobile ? 8 : 12, overflowX: 'auto', overflowY: 'hidden',
+      gridAutoColumns: (isMobile ? 160 : 210) + 'px',
+      gap: isMobile ? 8 : 14, overflowX: 'auto', overflowY: 'hidden',
       paddingBottom: 6, scrollSnapType: 'x mandatory',
     };
   } else {
     listStyle = {
       display: 'grid',
-      gridTemplateColumns: 'repeat(' + cols + ', 1fr)',
-      gap: isMobile ? 8 : 14,
+      gridTemplateColumns: 'repeat(' + cols + ', minmax(0, 1fr))',
+      gap: isMobile ? 6 : 16,
     };
   }
 
-  // Produkt Grid waechst nach Anzahl der ASINs. Kein height 100%, kein
-  // overflow, damit die Sektion vertikal so lang wird wie noetig. Nur der
-  // Slider Modus (best_sellers) bleibt horizontal scrollbar.
+  // Das Grid waechst nach Anzahl der ASINs; nur der Slider scrollt horizontal.
   return (
-    <div style={{ width: '100%', background: tile.bgColor || '#fff', padding: isMobile ? '12px 8px' : '16px 12px', display: 'flex', flexDirection: 'column', boxSizing: 'border-box' }}>
-      <div style={{ fontSize: isMobile ? 14 : 18, fontWeight: 700, color: '#0F1111', marginBottom: isMobile ? 8 : 12 }}>{title}</div>
+    <div style={{ width: '100%', background: tile.bgColor || '#fff', padding: isMobile ? '14px 8px 10px' : '20px 16px 14px', display: 'flex', flexDirection: 'column', boxSizing: 'border-box' }}>
+      <div style={{ fontSize: isMobile ? 18 : 24, fontWeight: 700, color: '#0F1111', marginBottom: isMobile ? 8 : 14, letterSpacing: '-0.01em' }}>{title}</div>
+      {showMissingHint && missing > 0 && (
+        <div style={{ fontSize: 11, color: '#92400e', background: '#fffbeb', border: '1px solid #fde68a', borderRadius: 4, padding: '5px 8px', marginBottom: 10, lineHeight: 1.4 }}>
+          Für {missing} von {items.length} ASINs liegen noch keine Produktdaten (Titel, Bild, Preis) vor. Im Editor unter „ASIN Übersicht" abrufen, dann erscheinen sie hier wie auf Amazon.
+        </div>
+      )}
       <div style={listStyle}>
         {items.map(function(p, i) {
           return (
@@ -161,62 +181,124 @@ export function AmazonProductGrid({ tile, products, marketplace, isMobile }) {
   );
 }
 
-// Hotspot mit ASIN Vorschau on hover. Klick oeffnet das Produkt auf Amazon.
-function ShoppableHotspot({ hotspot, product, marketplace }) {
+// Hotspot auf einem shoppable Bild. Hover (Desktop) oder Antippen (Touch) zeigt
+// die Produktkarte mit Bild, Titel, Preis; ein Klick auf die Karte oeffnet das
+// Produkt auf Amazon. Die Karte wird per Portal direkt in die Seite gezeichnet
+// und an der Position des Punkts ausgerichtet: In der Kachel (overflow hidden)
+// wuerde sie bei kleinen Kacheln, vor allem mobil, abgeschnitten.
+export function ShoppableHotspot({ hotspot, product, marketplace }) {
   var [hover, setHover] = useState(false);
+  var [pinned, setPinned] = useState(false);
+  var [pos, setPos] = useState(null);
+  var dotRef = useRef(null);
+  var closeTimer = useRef(null);
+  var open = hover || pinned;
+
+  function place() {
+    if (!dotRef.current) return;
+    var r = dotRef.current.getBoundingClientRect();
+    var cardW = 240, cardH = 96, margin = 8;
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var left = Math.min(Math.max(r.left + r.width / 2 - cardW / 2, margin), Math.max(margin, vw - cardW - margin));
+    var below = r.bottom + 8;
+    var top = (below + cardH > vh - margin) ? Math.max(margin, r.top - 8 - cardH) : below;
+    setPos({ left: left, top: top, width: cardW });
+  }
+
+  useEffect(function() {
+    if (!open) return;
+    place();
+    function onScroll() { place(); }
+    window.addEventListener('scroll', onScroll, true);
+    window.addEventListener('resize', onScroll);
+    return function() {
+      window.removeEventListener('scroll', onScroll, true);
+      window.removeEventListener('resize', onScroll);
+    };
+  }, [open]);
+
+  // Angetippt/angeklickt: schliesst bei Klick irgendwo anders.
+  useEffect(function() {
+    if (!pinned) return;
+    function onDown(e) {
+      var inDot = dotRef.current && dotRef.current.contains(e.target);
+      var inCard = e.target.closest && e.target.closest('[data-hotspot-card]');
+      if (!inDot && !inCard) setPinned(false);
+    }
+    document.addEventListener('mousedown', onDown);
+    document.addEventListener('touchstart', onDown);
+    return function() {
+      document.removeEventListener('mousedown', onDown);
+      document.removeEventListener('touchstart', onDown);
+    };
+  }, [pinned]);
+
+  useEffect(function() { return function() { clearTimeout(closeTimer.current); }; }, []);
+
   if (!hotspot || !hotspot.asin) return null;
   var tld = marketplaceTld(marketplace);
   var href = 'https://www.amazon.' + tld + '/dp/' + hotspot.asin;
-  var title = (product && product.name) || hotspot.asin;
+  var title = (product && product.name) || '';
   var priceText = product ? formatPrice(product.price, product.currency) : '';
+
+  function show() { clearTimeout(closeTimer.current); setHover(true); }
+  function hide() { clearTimeout(closeTimer.current); closeTimer.current = setTimeout(function() { setHover(false); }, 140); }
+
+  var card = (open && pos) ? createPortal(
+    <a data-hotspot-card="1" href={href} target="_blank" rel="noopener noreferrer"
+      onMouseEnter={show} onMouseLeave={hide}
+      onClick={function(e) { e.stopPropagation(); }}
+      style={{
+        position: 'fixed', left: pos.left, top: pos.top, width: pos.width, boxSizing: 'border-box',
+        background: '#fff', border: '1px solid #d5d9d9', borderRadius: 8, padding: 10,
+        boxShadow: '0 8px 24px rgba(0,0,0,.2)', display: 'flex', gap: 10, alignItems: 'center',
+        textDecoration: 'none', color: '#0F1111', zIndex: 2147483000,
+        fontFamily: 'Amazon Ember, Arial, sans-serif',
+      }}>
+      <div style={{ width: 56, height: 56, flexShrink: 0, background: '#f7f7f7', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+        {product && product.image
+          ? <img src={product.image} alt="" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+          : <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c4c9d1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z" /><path d="M3 8l9 5 9-5" /><path d="M12 13v8" /></svg>}
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 3, minWidth: 0, flex: 1 }}>
+        <div style={{ fontSize: 12, fontWeight: 600, lineHeight: 1.3, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+          {title || 'ASIN ' + hotspot.asin}
+        </div>
+        {product && product.rating > 0 && <StarsDisplay rating={product.rating} reviews={product.reviews} />}
+        {priceText
+          ? <div style={{ fontSize: 14, fontWeight: 700, color: '#B12704' }}>{priceText}</div>
+          : <div style={{ fontSize: 11, color: '#007185' }}>Auf Amazon ansehen ›</div>}
+      </div>
+    </a>,
+    document.body
+  ) : null;
+
   return (
     <div
-      onMouseEnter={function() { setHover(true); }}
-      onMouseLeave={function() { setHover(false); }}
       style={{
         position: 'absolute',
         left: (hotspot.x || 0) + '%',
         top: (hotspot.y || 0) + '%',
         transform: 'translate(-50%, -50%)',
-        zIndex: hover ? 5 : 3,
+        zIndex: open ? 5 : 3,
       }}
     >
-      <a href={href} target="_blank" rel="noopener noreferrer"
-        onClick={function(e) { e.stopPropagation(); }}
-        title={'ASIN ' + hotspot.asin}
+      <div ref={dotRef} role="button" tabIndex={0}
+        aria-label={'Produkt ' + (title || hotspot.asin) + ' anzeigen'}
+        onMouseEnter={show} onMouseLeave={hide}
+        onClick={function(e) { e.stopPropagation(); setPinned(function(v) { return !v; }); }}
+        onKeyDown={function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); setPinned(function(v) { return !v; }); } }}
         style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          width: 26, height: 26, borderRadius: '50%',
-          background: hover ? '#FF9900' : 'rgba(17,24,39,.85)',
+          width: 28, height: 28, borderRadius: '50%', cursor: 'pointer',
+          background: open ? '#FF9900' : 'rgba(17,24,39,.85)',
           border: '2px solid rgba(255,255,255,.95)',
           boxShadow: '0 1px 6px rgba(0,0,0,.35)',
-          textDecoration: 'none',
+          transition: 'background .12s',
         }}>
         <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#fff' }} />
-      </a>
-      {hover && (
-        <a href={href} target="_blank" rel="noopener noreferrer"
-          onClick={function(e) { e.stopPropagation(); }}
-          style={{
-            position: 'absolute', top: 32, left: '50%', transform: 'translateX(-50%)',
-            background: '#fff', border: '1px solid #d5d9d9', borderRadius: 6,
-            padding: 8, minWidth: 180, maxWidth: 220,
-            boxShadow: '0 6px 18px rgba(0,0,0,.18)',
-            display: 'flex', gap: 8, alignItems: 'center',
-            textDecoration: 'none', color: '#0F1111',
-            zIndex: 10,
-          }}>
-          {product && product.image && (
-            <img src={product.image} alt=""
-              style={{ width: 48, height: 48, objectFit: 'contain', flexShrink: 0 }} />
-          )}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 2, minWidth: 0 }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: '#0F1111', lineHeight: 1.3, overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>{title}</div>
-            <div style={{ fontSize: 10, color: '#007185' }}>ASIN {hotspot.asin}</div>
-            {priceText && <div style={{ fontSize: 12, fontWeight: 700, color: '#B12704' }}>{priceText}</div>}
-          </div>
-        </a>
-      )}
+      </div>
+      {card}
     </div>
   );
 }
@@ -536,7 +618,7 @@ function CustomerTile({ tile, products, marketplace, isMobile, pages, setActiveP
         </div>
       )}
 
-      {tile.type === 'shoppable_image' && (tile.hotspots || []).map(function(hs, hi) {
+      {tile.type === 'shoppable_image' && effectiveShoppableHotspots(tile).map(function(hs, hi) {
         return <ShoppableHotspot key={hi} hotspot={hs} product={productMap[hs.asin]} marketplace={marketplace} />;
       })}
     </div>
