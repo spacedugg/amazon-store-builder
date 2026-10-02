@@ -31,6 +31,10 @@ var INSPIRATION_LINKS = [
   { brand: 'North Face', url: 'https://www.amazon.de/stores/THENORTHFACE/page/91172724-C342-482B-A300-564D9EA5E09F', category: 'Outdoor' },
   { brand: 'More Nutrition', url: 'https://www.amazon.de/stores/page/7AD425C6-C3C5-402D-A69D-D6201F98F888', category: 'Sports Nutrition' },
   { brand: 'Kloster Kitchen', url: 'https://www.amazon.de/stores/page/34D4A812-9A68-4602-A6A0-30565D399620', category: 'Organic' },
+  { brand: 'Manscaped', url: 'https://www.amazon.de/stores/MANSCAPED/page/44908195-3880-47D6-9EC0-D2A1543EB718', category: 'Grooming' },
+  { brand: 'Feandrea', url: 'https://www.amazon.de/stores/FeandreabySONGMICSHOME/page/FB4FA857-CD07-4E92-A32C-CF0CD556ACF6', category: 'Home & Living' },
+  { brand: 'Cloud Pillow', url: 'https://www.amazon.de/stores/Cloudpillo/page/741141B6-87D5-44F9-BE63-71B55CD51198', category: 'Sleep' },
+  { brand: 'Bedsure', url: 'https://www.amazon.de/stores/Bedsure/page/7DC5A9F8-2A3D-426B-B2F2-F819AE825B1F', category: 'Home Textiles' },
 ];
 
 // ─── IMAGE CATEGORY EXAMPLES (Google Drive folders with reference images) ───
