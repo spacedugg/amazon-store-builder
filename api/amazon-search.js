@@ -1,6 +1,8 @@
 var BRIGHT_DATA_TOKEN = process.env.BRIGHT_DATA_API_KEY;
 var DATASET_ID = 'gd_l7q7dkf244hwjntr0';
 
+function sleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
+
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
@@ -19,35 +21,48 @@ module.exports = async function handler(req, res) {
       return { url: domain + '/dp/' + asin };
     });
 
+    // Bright Data "scrape" antwortet synchron — aber nur, wenn es in etwa einer Minute fertig wird. Dauert es laenger
+    // (viele ASINs, Bot-Schutz), kommt HTTP 202 mit einer snapshot_id. Frueher wurde das wie ein Erfolg behandelt:
+    // ohne Produkte, ohne Fehlermeldung — „es wird nichts gezogen“. Jetzt warten wir auf den Snapshot.
+    var deadline = Date.now() + 270000; // Vercel erlaubt hier 300 s
     var url = 'https://api.brightdata.com/datasets/v3/scrape?dataset_id=' + DATASET_ID + '&notify=false&include_errors=true';
-
-    // Timeout for Bright Data API: 4 minutes (large ASIN lists need more time)
-    var controller = new AbortController();
-    var timeout = setTimeout(function() { controller.abort(); }, 240000);
+    var authHeader = { 'Authorization': 'Bearer ' + BRIGHT_DATA_TOKEN };
 
     var resp;
-    try {
-      resp = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Authorization': 'Bearer ' + BRIGHT_DATA_TOKEN,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ input: inputItems }),
-        signal: controller.signal,
-      });
-    } catch (fetchErr) {
-      clearTimeout(timeout);
-      if (fetchErr.name === 'AbortError') {
-        return res.status(504).json({ error: 'Bright Data API timed out after 4 minutes. Please try again with fewer ASINs.' });
+    var pending = null;
+    for (var attempt = 0; attempt < 2; attempt++) {
+      var controller = new AbortController();
+      var timeout = setTimeout(function() { controller.abort(); }, Math.max(5000, Math.min(240000, deadline - Date.now())));
+      try {
+        resp = await fetch(url, {
+          method: 'POST',
+          headers: Object.assign({ 'Content-Type': 'application/json' }, authHeader),
+          body: JSON.stringify({ input: inputItems }),
+          signal: controller.signal,
+        });
+      } catch (fetchErr) {
+        clearTimeout(timeout);
+        if (fetchErr.name === 'AbortError') {
+          return res.status(504).json({ error: 'Bright Data hat nicht rechtzeitig geantwortet. Bitte mit weniger ASINs noch einmal versuchen.' });
+        }
+        if (attempt === 0) { await sleep(2000); continue; }
+        throw fetchErr;
       }
-      throw fetchErr;
+      clearTimeout(timeout);
+      // Kurzzeitige Fehler (Ueberlastung, Bot-Schutz) einmal wiederholen
+      if ((resp.status === 429 || resp.status >= 500) && attempt === 0) { await sleep(3000); continue; }
+      break;
     }
-    clearTimeout(timeout);
 
     if (!resp.ok) {
-      var errText = await resp.text();
-      return res.status(resp.status).json({ error: 'Bright Data error', detail: errText });
+      var errText = (await resp.text()).slice(0, 500);
+      return res.status(resp.status).json({
+        error: 'Bright Data error (HTTP ' + resp.status + ')',
+        detail: errText,
+        hint: resp.status === 401 || resp.status === 403
+          ? 'Der Bright-Data-Schluessel (BRIGHT_DATA_API_KEY in Vercel) wird abgelehnt — abgelaufen, widerrufen oder Konto gesperrt/ohne Guthaben.'
+          : undefined,
+      });
     }
 
     var rawText = await resp.text();
@@ -66,6 +81,41 @@ module.exports = async function handler(req, res) {
         .filter(function(item) { return item !== null; });
     }
 
+    // HTTP 202 / {snapshot_id}: noch nicht fertig → abfragen, bis die Daten da sind
+    var first = Array.isArray(rawData) ? rawData[0] : rawData;
+    if (resp.status === 202 || (first && first.snapshot_id && !first.asin && !first.title)) {
+      var snapshotId = first && first.snapshot_id;
+      if (!snapshotId) {
+        return res.status(502).json({ error: 'Bright Data hat keine Daten und keine snapshot_id geliefert', detail: rawText.slice(0, 300) });
+      }
+      var ready = false;
+      while (Date.now() < deadline) {
+        await sleep(5000);
+        var pr = await fetch('https://api.brightdata.com/datasets/v3/progress/' + snapshotId, { headers: authHeader });
+        if (!pr.ok) continue;
+        var pj = await pr.json().catch(function() { return {}; });
+        if (pj.status === 'ready') { ready = true; break; }
+        if (pj.status === 'failed' || pj.status === 'cancelled') {
+          return res.status(502).json({ error: 'Bright Data Auftrag ' + pj.status, detail: JSON.stringify(pj).slice(0, 300) });
+        }
+      }
+      if (!ready) {
+        return res.status(504).json({ error: 'Bright Data braucht zu lange (Auftrag ' + snapshotId + ' laeuft noch). Bitte mit weniger ASINs noch einmal versuchen.' });
+      }
+      var sr = await fetch('https://api.brightdata.com/datasets/v3/snapshot/' + snapshotId + '?format=json', { headers: authHeader });
+      if (!sr.ok) {
+        return res.status(sr.status).json({ error: 'Bright Data Ergebnis nicht abrufbar (HTTP ' + sr.status + ')', detail: (await sr.text()).slice(0, 300) });
+      }
+      var snapText = await sr.text();
+      try {
+        rawData = JSON.parse(snapText);
+      } catch (e) {
+        rawData = snapText.split('\n').filter(function(l) { return l.trim(); }).map(function(l) {
+          try { return JSON.parse(l); } catch (e2) { return null; }
+        }).filter(function(x) { return x !== null; });
+      }
+    }
+
     if (!Array.isArray(rawData)) rawData = [rawData];
 
     // DEBUG MODE: Return raw BrightData response to see all available fields
@@ -77,6 +127,11 @@ module.exports = async function handler(req, res) {
         totalItems: rawData.length,
       });
     }
+
+    // Eintraege, bei denen Bright Data einen Fehler meldet, nicht mehr stillschweigend verwerfen: der Aufrufer sieht warum
+    var failed = rawData
+      .filter(function(p) { return p && p.error; })
+      .map(function(p) { return { asin: (p.input && p.input.url ? (p.input.url.match(/\/dp\/([A-Z0-9]{10})/i) || [])[1] : '') || p.asin || '', reason: String(p.error).slice(0, 200) }; });
 
     var products = rawData
       .filter(function(p) { return p && !p.error; })
@@ -144,7 +199,7 @@ module.exports = async function handler(req, res) {
         };
       });
 
-    return res.status(200).json({ products: products, count: products.length });
+    return res.status(200).json({ products: products, count: products.length, failed: failed });
 
   } catch (err) {
     console.error('[amazon-search] Error:', err.message, err.stack);
