@@ -3,7 +3,8 @@ import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_
 import { loadStoreByShareToken, saveStore } from '../storage';
 import { translateStoreForDesigner } from '../translateBriefing';
 import SectionView, { getGridConfig } from './SectionView';
-import { AmazonProductGrid } from './CustomerPreview';
+import { AmazonProductGrid, ShoppableHotspot } from './CustomerPreview';
+import { effectiveShoppableHotspots } from '../hotspots';
 import { isSameAspectRatio, tileEffectivelySynced, tileImageForView } from '../tileSync';
 
 var noop = function() {};
@@ -1570,7 +1571,7 @@ function PreviewMode({ store, onClose }) {
                   <div style={Object.assign({}, config.gridStyle, { display: 'grid', gap: isMobile ? 9 : 18, width: '100%', overflow: 'hidden' })}>
                     {sec.tiles.map(function(tile, ti) {
                       var isProduct = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
-                      var tileStyle = Object.assign({}, config.getTileStyle(ti), { position: 'relative', overflow: 'hidden', minHeight: 0 });
+                      var tileStyle = Object.assign({}, config.getTileStyle(ti), { position: 'relative', overflow: isProduct ? 'visible' : 'hidden', minHeight: 0 });
 
                       // Determine tile dimensions for aspect ratio
                       var dims = (isMobile ? tile.mobileDimensions : tile.dimensions) || tile.dimensions || { w: 3000, h: 1200 };
@@ -1602,12 +1603,12 @@ function PreviewMode({ store, onClose }) {
                         <div key={ti} style={tileStyle}>
                           {/* Fixed aspect ratio container based on tile dimensions */}
                           <div onClick={hasClick ? handleTileClick : undefined}
-                            style={{ width: '100%', aspectRatio: dims.w + '/' + dims.h, background: tile.bgColor || '#f0f0f0', position: 'relative', overflow: 'hidden', cursor: hasClick ? 'pointer' : 'default' }}>
+                            style={{ width: '100%', aspectRatio: isProduct ? undefined : dims.w + '/' + dims.h, background: tile.bgColor || '#f0f0f0', position: 'relative', overflow: isProduct ? 'visible' : 'hidden', cursor: hasClick ? 'pointer' : 'default' }}>
                             {matchedImgSrc ? (
                               <img src={matchedImgSrc} alt={'Tile ' + (ti + 1)} style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }} />
                             ) : isProduct ? (
-                              <div style={{ position: 'absolute', inset: 0 }}>
-                                <AmazonProductGrid tile={tile} products={store.products || []} marketplace={store.marketplace || 'de'} isMobile={isMobile} />
+                              <div>
+                                <AmazonProductGrid tile={tile} products={store.products || []} marketplace={store.marketplace || 'de'} isMobile={isMobile} showMissingHint />
                               </div>
                             ) : tile.type === 'product_selector' ? (
                               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', background: (tile.productSelector && tile.productSelector.styling && tile.productSelector.styling.bgColor) || '#f8f4ff', padding: isMobile ? 6 : 12 }}>
@@ -1622,19 +1623,11 @@ function PreviewMode({ store, onClose }) {
                                 <span style={{ fontFamily: 'monospace', fontSize: isMobile ? 8 : 10 }}>{dims.w}&times;{dims.h}</span>
                               </div>
                             )}
-                            {/* Hotspots for shoppable images, each clickable to its ASIN */}
-                            {tile.type === 'shoppable_image' && (tile.hotspots || []).map(function(hs, hi) {
+                            {/* Hotspots wie im Editor (auch ohne von Hand gesetzte Punkte); Hover/Tippen zeigt das Produkt */}
+                            {tile.type === 'shoppable_image' && effectiveShoppableHotspots(tile).map(function(hs, hi) {
                               if (!hs || !hs.asin) return null;
-                              var tld = (store.marketplace || 'de') === 'uk' ? 'co.uk' : (store.marketplace || 'de');
-                              var hsHref = 'https://www.amazon.' + tld + '/dp/' + hs.asin;
-                              return (
-                                <a key={hi} href={hsHref} target="_blank" rel="noopener noreferrer"
-                                  onClick={function(e) { e.stopPropagation(); }}
-                                  title={'ASIN ' + hs.asin}
-                                  style={{ position: 'absolute', left: (hs.x || 0) + '%', top: (hs.y || 0) + '%', transform: 'translate(-50%, -50%)', width: 22, height: 22, borderRadius: '50%', background: 'rgba(17,24,39,.85)', border: '2px solid rgba(255,255,255,.95)', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', zIndex: 3 }}>
-                                  <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#fff' }} />
-                                </a>
-                              );
+                              var hsProduct = (store.products || []).find(function(p) { return p && p.asin === hs.asin; });
+                              return <ShoppableHotspot key={hi} hotspot={hs} product={hsProduct} marketplace={store.marketplace || 'de'} />;
                             })}
                             {/* Filename overlay */}
                             {showFilenames && !isProduct && tile.type !== 'text' && tile.type !== 'product_selector' && (
