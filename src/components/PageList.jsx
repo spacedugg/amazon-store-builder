@@ -1,7 +1,18 @@
 import { useState } from 'react';
 import { t } from '../i18n';
 
-export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSubPage, onRenamePage, onDeletePage, onReorderPage, onDuplicatePage, onMovePage, savedStores, currentStoreId, onLoadSaved, onDeleteSaved, onImportStore, uiLang, showSaved, onToggleSaved }) {
+
+// Kleine rote Zahl: so viele neue Kunden-Feedbacks warten
+function FbBadge({ n, title }) {
+  return (
+    <span title={title} style={{ marginLeft: 6, background: '#dc2626', color: '#fff', borderRadius: 9, minWidth: 16, height: 16, padding: '0 5px', boxSizing: 'border-box', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 700, verticalAlign: 'middle' }}>{n > 99 ? '99+' : n}</span>
+  );
+}
+
+export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSubPage, onRenamePage, onDeletePage, onReorderPage, onDuplicatePage, onMovePage, savedStores, currentStoreId, onLoadSaved, onDeleteSaved, onImportStore, uiLang, showSaved, onToggleSaved, feedbackCounts }) {
+  var fbMap = feedbackCounts || {};
+  function fbOf(id) { return Number(fbMap[id]) || 0; }
+  var totalFb = Object.keys(fbMap).reduce(function(sum, k) { return sum + (Number(fbMap[k]) || 0); }, 0);
   var [editingId, setEditingId] = useState(null);
   var [editName, setEditName] = useState('');
   var [showImport, setShowImport] = useState(false);
@@ -176,7 +187,7 @@ export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSub
       {savedStores && savedStores.length > 0 && (
         <>
           <div className="page-list-header saved-header" style={{ marginTop: 4, cursor: 'pointer' }} onClick={onToggleSaved}>
-            <span>{t('pages.savedStores', uiLang)}</span>
+            <span>{t('pages.savedStores', uiLang)}{totalFb > 0 && <FbBadge n={totalFb} title={totalFb + ' neue Kunden-Feedbacks'} />}</span>
             <span className="btn-icon-sm" style={{ fontSize: 10, fontWeight: 700 }}>{showSaved ? '▲' : '▼'}</span>
           </div>
           {showSaved && (
@@ -196,6 +207,7 @@ export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSub
                     style={isCurrent ? { cursor: 'default' } : (anyLoading ? { cursor: 'progress', opacity: 0.6 } : { cursor: 'pointer' })}>
                     <div className="saved-store-name">
                       {isLoading ? '⏳ ' : (isCurrent ? '● ' : '')}{s.brandName}
+                      {fbOf(s.id) > 0 && <FbBadge n={fbOf(s.id)} title={fbOf(s.id) + ' neue Kunden-Feedbacks'} />}
                     </div>
                     <div className="saved-store-meta">
                       {s.pageCount}p &middot; {s.productCount} ASINs

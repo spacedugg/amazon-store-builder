@@ -5,7 +5,7 @@ import { translateStoreForDesigner } from '../translateBriefing';
 import SectionView, { getGridConfig } from './SectionView';
 import { AmazonProductGrid, ShoppableHotspot } from './CustomerPreview';
 import { effectiveShoppableHotspots } from '../hotspots';
-import { loadFeedback, tileKey as fbTileKey } from '../feedbackApi';
+import { loadFeedback, updateFeedback, tileKey as fbTileKey } from '../feedbackApi';
 import { isSameAspectRatio, tileEffectivelySynced, tileImageForView } from '../tileSync';
 
 var noop = function() {};
@@ -523,6 +523,32 @@ function CopyableFilename({ filename, label }) {
 }
 
 // ─── TILE DETAIL CARD (for right panel) ───
+// Ein Feedback Punkt in der Designer Ansicht: Text (vom Team ggf. umformuliert), Haekchen "umgesetzt".
+function FeedbackTask({ item, where, onToggle, onJump }) {
+  var [busy, setBusy] = useState(false);
+  var [err, setErr] = useState('');
+  async function toggle() {
+    setBusy(true); setErr('');
+    try { await onToggle(item, !item.designerDone); }
+    catch (e) { setErr((e && e.message) || 'Could not save, please try again.'); }
+    finally { setBusy(false); }
+  }
+  return (
+    <div style={{ border: '1px solid ' + (item.designerDone ? '#bbf7d0' : '#fde68a'), background: item.designerDone ? '#f0fdf4' : '#fffbeb', borderRadius: 8, padding: '8px 10px', marginBottom: 8 }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginBottom: 4 }}>
+        <span style={{ fontSize: 10.5, fontWeight: 700, color: '#92400e', textTransform: 'uppercase', letterSpacing: '.03em' }}>{where}</span>
+        {onJump && <button onClick={function() { onJump(item); }} style={{ background: 'none', border: 'none', color: '#2563eb', fontSize: 11, fontWeight: 600, cursor: 'pointer', padding: 0 }}>Show tile</button>}
+      </div>
+      <div style={{ fontSize: 12.5, lineHeight: 1.45, color: '#451a03', whiteSpace: 'pre-wrap', wordBreak: 'break-word', textDecoration: item.designerDone ? 'line-through' : 'none', opacity: item.designerDone ? 0.65 : 1 }}>{item.designerText || item.text}</div>
+      <button onClick={toggle} disabled={busy}
+        style={{ marginTop: 8, display: 'inline-flex', alignItems: 'center', gap: 6, background: item.designerDone ? '#fff' : '#16a34a', color: item.designerDone ? '#166534' : '#fff', border: '1px solid ' + (item.designerDone ? '#86efac' : '#16a34a'), borderRadius: 6, padding: '4px 10px', fontSize: 11.5, fontWeight: 700, cursor: busy ? 'default' : 'pointer', opacity: busy ? 0.6 : 1 }}>
+        {busy ? 'Saving…' : (item.designerDone ? '✓ Implemented · undo' : 'Mark as implemented')}
+      </button>
+      {err && <div role="alert" style={{ color: '#b91c1c', fontSize: 11, marginTop: 4 }}>{err}</div>}
+    </div>
+  );
+}
+
 function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile, duplicateInfo, pageId, pageName, sectionIndex, products, store, clientFeedback }) {
   var dims = LAYOUT_TILE_DIMS[layoutId];
   var desktopType = dims && dims[tileIndex] ? dims[tileIndex] : null;
@@ -559,8 +585,8 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
           {clientFeedback.map(function(fb, fi) {
             return (
               <div key={fi} style={{ fontSize: 12, color: '#451a03', lineHeight: 1.4, marginTop: fi ? 6 : 0, whiteSpace: 'pre-wrap' }}>
-                {fb.text}
-                <span style={{ color: '#a16207', fontSize: 10.5 }}>{'  ·  ' + (fb.author || 'Client') + ' · ' + (fb.viewMode === 'mobile' ? 'mobile' : 'desktop') + (fb.status === 'erledigt' ? ' · done' : '')}</span>
+                <span style={{ textDecoration: fb.designerDone ? 'line-through' : 'none', opacity: fb.designerDone ? 0.6 : 1 }}>{fb.designerText || fb.text}</span>
+                {fb.designerDone && <span style={{ color: '#166534', fontSize: 10.5 }}>{'  ·  done'}</span>}
               </div>
             );
           })}
@@ -1726,7 +1752,7 @@ export default function BriefingView() {
   var [updateBanner, setUpdateBanner] = useState(false);
   var [changeLog, setChangeLog] = useState([]); // [{ time, descriptions[] }]
   var [selectedTile, setSelectedTile] = useState(null); // { sid, ti }
-  var [sidebarTab, setSidebarTab] = useState('design'); // 'design', 'ci', or 'info'
+  var [sidebarTab, setSidebarTab] = useState('design'); // 'design', 'feedback' or 'info'
   var [showPreview, setShowPreview] = useState(false);
   var prevStoreRef = useRef(null);
   var pollRef = useRef(null);
@@ -1906,32 +1932,42 @@ export default function BriefingView() {
   var rawToken = window.location.pathname.split('/share/')[1] || '';
   var token = rawToken.split('/')[0].split('?')[0].trim(); // Strip trailing slashes, query params
 
+  function pullDesignerFeedback() {
+    if (!token) return Promise.resolve();
+    return loadFeedback({ shareToken: token }, { forwarded: 1 }).then(function(r) {
+      var byTile = {};
+      var general = [];
+      var all = (r && r.items) || [];
+      all.forEach(function(it) {
+        if (it.scope === 'store') { general.push(it); return; }
+        var k = fbTileKey(it.pageId, it.sectionId, it.tileIndex);
+        (byTile[k] = byTile[k] || []).push(it);
+      });
+      setDesignerFeedback({ byTile: byTile, general: general, all: all });
+    }).catch(function() { /* stilles Nachladen */ });
+  }
   useEffect(function() {
     if (!token) return;
-    var stopped = false;
-    function pull() {
-      loadFeedback({ shareToken: token }, { forwarded: 1 }).then(function(r) {
-        if (stopped) return;
-        var byTile = {};
-        var general = [];
-        ((r && r.items) || []).forEach(function(it) {
-          if (it.scope === 'store') { general.push(it); return; }
-          var k = fbTileKey(it.pageId, it.sectionId, it.tileIndex);
-          (byTile[k] = byTile[k] || []).push(it);
-        });
-        setDesignerFeedback({ byTile: byTile, general: general });
-      }).catch(function() { /* stilles Nachladen */ });
-    }
-    pull();
-    var t = setInterval(pull, 60000);
-    return function() { stopped = true; clearInterval(t); };
+    pullDesignerFeedback();
+    var t = setInterval(pullDesignerFeedback, 60000);
+    return function() { clearInterval(t); };
   }, [token]);
+
+  async function setFeedbackDone(item, done) {
+    await updateFeedback(token, item.id, { designerDone: done });
+    await pullDesignerFeedback();
+  }
+  function jumpToFeedbackTile(item) {
+    if (item.pageId) setCurPage(item.pageId);
+    setTimeout(function() { handleTileSelect({ sid: item.sectionId, ti: item.tileIndex }); }, 250);
+  }
 
 
   // ─── INITIAL LOAD ───
   var loadAttemptRef = useRef(0);
   // Vom Team weitergeleitetes Kunden Feedback, je Kachel (nur lesen)
-  var [designerFeedback, setDesignerFeedback] = useState({ byTile: {}, general: [] });
+  var [designerFeedback, setDesignerFeedback] = useState({ byTile: {}, general: [], all: [] });
+  var openFeedbackCount = designerFeedback.all.filter(function(it) { return !it.designerDone; }).length;
 
   function loadShareData() {
     if (!token) { setError('No share token found in the URL. Please check the link.'); setLoading(false); return; }
@@ -2223,12 +2259,10 @@ export default function BriefingView() {
       {/* Designer Timer — sticky at top */}
       {token && <DesignerTimer shareToken={token} />}
 
-      {designerFeedback.general.length > 0 && (
-        <div style={{ margin: '8px 16px', background: '#fffbeb', border: '1px solid #f59e0b', borderRadius: 6, padding: '8px 12px', fontSize: 12, color: '#451a03' }}>
-          <b style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '.04em', color: '#92400e' }}>General client feedback ({designerFeedback.general.length})</b>
-          {designerFeedback.general.map(function(fb, i) {
-            return <div key={i} style={{ marginTop: 4, whiteSpace: 'pre-wrap' }}>{fb.text}<span style={{ color: '#a16207', fontSize: 10.5 }}>{'  ·  ' + (fb.author || 'Client')}</span></div>;
-          })}
+      {openFeedbackCount > 0 && sidebarTab !== 'feedback' && (
+        <div style={{ margin: '8px 16px', background: '#fffbeb', border: '1px solid #f59e0b', borderRadius: 6, padding: '8px 12px', fontSize: 12, color: '#451a03', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <span><b>{openFeedbackCount}</b> open client feedback {openFeedbackCount === 1 ? 'item' : 'items'} to implement.</span>
+          <button onClick={function() { setSidebarTab('feedback'); }} style={{ marginLeft: 'auto', background: '#f59e0b', color: '#fff', border: 'none', borderRadius: 5, padding: '4px 10px', fontSize: 11, fontWeight: 700, cursor: 'pointer' }}>Open feedback</button>
         </div>
       )}
 
@@ -2266,8 +2300,9 @@ export default function BriefingView() {
             <button onClick={function() { setSidebarTab('design'); }} style={{ flex: 1, padding: '8px 0', fontSize: 11, fontWeight: 700, background: 'none', border: 'none', cursor: 'pointer', borderBottom: sidebarTab === 'design' ? '2px solid #3b82f6' : '2px solid transparent', color: sidebarTab === 'design' ? '#1d4ed8' : '#94a3b8', marginBottom: -2 }}>
               Design
             </button>
-            <button onClick={function() { setSidebarTab('ci'); }} style={{ flex: 1, padding: '8px 0', fontSize: 11, fontWeight: 700, background: 'none', border: 'none', cursor: 'pointer', borderBottom: sidebarTab === 'ci' ? '2px solid #3b82f6' : '2px solid transparent', color: sidebarTab === 'ci' ? '#1d4ed8' : '#94a3b8', marginBottom: -2 }}>
-              Brand CI
+            <button onClick={function() { setSidebarTab('feedback'); }} style={{ flex: 1, padding: '8px 0', fontSize: 11, fontWeight: 700, background: 'none', border: 'none', cursor: 'pointer', borderBottom: sidebarTab === 'feedback' ? '2px solid #3b82f6' : '2px solid transparent', color: sidebarTab === 'feedback' ? '#1d4ed8' : '#94a3b8', marginBottom: -2 }}>
+              Feedback
+              {openFeedbackCount > 0 && <span style={{ marginLeft: 5, background: '#dc2626', color: '#fff', borderRadius: 9, minWidth: 16, height: 16, padding: '0 4px', boxSizing: 'border-box', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 9.5, fontWeight: 700 }}>{openFeedbackCount}</span>}
             </button>
             <button onClick={function() { setSidebarTab('info'); }} style={{ flex: 1, padding: '8px 0', fontSize: 11, fontWeight: 700, background: 'none', border: 'none', cursor: 'pointer', borderBottom: sidebarTab === 'info' ? '2px solid #3b82f6' : '2px solid transparent', color: sidebarTab === 'info' ? '#1d4ed8' : '#94a3b8', marginBottom: -2 }}>
               Store Info
@@ -2325,315 +2360,24 @@ export default function BriefingView() {
             </div>
           )}
 
-          {/* ═══ BRAND CI TAB ═══ */}
-          {sidebarTab === 'ci' && (
-            <div>
-              <div className="briefing-sidebar-section" style={{ background: '#faf5ff', borderRadius: 8, margin: '0 8px 10px', padding: '12px' }}>
-                <div className="briefing-sidebar-title" style={{ color: '#7c3aed', marginBottom: 8 }}>Corporate Identity</div>
-                <div className="briefing-legend" style={{ fontSize: 11, lineHeight: 1.6 }}>
-                  <p style={{ marginBottom: 8, color: '#6b21a8', fontWeight: 600 }}>Colors, fonts and style, editable.</p>
-
-                  {/* Colors — editable */}
-                  <div style={{ marginBottom: 10 }}>
-                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Color Palette</div>
-                    {(store.manualCI && store.manualCI.colors && store.manualCI.colors.length > 0) || (store.websiteData && store.websiteData.colors && store.websiteData.colors.length > 0) ? (
-                      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 4 }}>
-                        {((store.manualCI && store.manualCI.colors) || (store.websiteData && store.websiteData.colors) || []).map(function(c, i) {
-                          return (
-                            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 4, background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '3px 8px' }}>
-                              <div style={{ width: 16, height: 16, borderRadius: 3, background: c, border: '1px solid rgba(0,0,0,.15)' }} />
-                              <span style={{ fontSize: 10, fontFamily: 'monospace' }}>{c}</span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    ) : null}
-                    <input
-                      placeholder="Enter colors: #FF5733, #2E86C1, ..."
-                      value={(store.manualCI && store.manualCI.colorsInput) || ''}
-                      onChange={function(e) {
-                        var val = e.target.value;
-                        var colors = val.match(/#[0-9A-Fa-f]{3,6}/g) || [];
-                        setStore(function(prev) {
-                          var mc = Object.assign({}, prev.manualCI || {});
-                          mc.colorsInput = val;
-                          if (colors.length > 0) mc.colors = colors.slice(0, 8);
-                          return Object.assign({}, prev, { manualCI: mc });
-                        });
-                      }}
-                      style={{ width: '100%', fontSize: 10, padding: '4px 6px', border: '1px solid #e5e7eb', borderRadius: 4, fontFamily: 'monospace' }}
-                    />
+          {/* ═══ FEEDBACK TAB ═══ */}
+          {sidebarTab === 'feedback' && (
+            <div style={{ padding: '0 8px 16px' }}>
+              {designerFeedback.all.length === 0 ? (
+                <div style={{ fontSize: 12, color: '#64748b', padding: '16px 6px' }}>No client feedback to implement right now.</div>
+              ) : (
+                <>
+                  <div style={{ fontSize: 11, color: '#64748b', padding: '2px 4px 8px' }}>
+                    Tick an item once it is implemented. The team sees your tick.
                   </div>
-
-                  {/* Product CI from Gemini Vision analysis */}
-                  {store.productCI && (
-                    <div style={{ marginBottom: 10, background: '#fefce8', border: '1px solid #fde68a', borderRadius: 6, padding: 8 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#92400e', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '.05em' }}>CI from Listing Images (AI Analysis)</div>
-                      {store.productCI.visualMood && (
-                        <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Visual Style: </span>
-                          <span style={{ fontSize: 10, color: '#78350f', fontWeight: 700 }}>{store.productCI.visualMood}</span>
-                        </div>
-                      )}
-                      {store.productCI.primaryColors && store.productCI.primaryColors.length > 0 && (
-                        <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Primary Colors: </span>
-                          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 2 }}>
-                            {store.productCI.primaryColors.map(function(c, i) {
-                              return <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
-                                <div style={{ width: 14, height: 14, borderRadius: 3, background: c, border: '1px solid rgba(0,0,0,.15)' }} />
-                                <span style={{ fontSize: 9, fontFamily: 'monospace' }}>{c}</span>
-                              </div>;
-                            })}
-                          </div>
-                        </div>
-                      )}
-                      {store.productCI.backgroundPattern && (
-                        <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Backgrounds: </span>
-                          <span style={{ fontSize: 10, color: '#475569' }}>{store.productCI.backgroundPattern}</span>
-                        </div>
-                      )}
-                      {store.productCI.typographyStyle && (
-                        <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Typography: </span>
-                          <span style={{ fontSize: 10, color: '#475569' }}>{store.productCI.typographyStyle}</span>
-                        </div>
-                      )}
-                      {store.productCI.photographyStyle && (
-                        <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Photography Style: </span>
-                          <span style={{ fontSize: 10, color: '#475569' }}>{store.productCI.photographyStyle}</span>
-                        </div>
-                      )}
-                      {store.productCI.recurringElements && store.productCI.recurringElements.length > 0 && (
-                        <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Recurring Elements: </span>
-                          <div style={{ display: 'flex', gap: 3, flexWrap: 'wrap', marginTop: 2 }}>
-                            {store.productCI.recurringElements.map(function(el, i) {
-                              return <span key={i} style={{ background: '#fef3c7', color: '#78350f', borderRadius: 3, padding: '1px 6px', fontSize: 9, fontWeight: 600 }}>{el}</span>;
-                            })}
-                          </div>
-                        </div>
-                      )}
-                      {store.productCI.designerNotes && (
-                        <div style={{ marginTop: 6, padding: '6px 8px', background: '#fff', border: '1px solid #fde68a', borderRadius: 4, fontSize: 10, lineHeight: 1.5, color: '#475569' }}>
-                          <span style={{ fontWeight: 700, color: '#92400e' }}>Designer Notes: </span>
-                          {store.productCI.designerNotes}
-                        </div>
-                      )}
-                      {store.productCI.sourceImages && store.productCI.sourceImages.length > 0 && (
-                        <div style={{ marginTop: 6 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Analyzed Images ({store.productCI.imagesAnalyzed}):</span>
-                          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 4 }}>
-                            {store.productCI.sourceImages.slice(0, 6).map(function(url, i) {
-                              return <img key={i} src={url} style={{ width: 48, height: 48, objectFit: 'cover', borderRadius: 4, border: '1px solid #e5e7eb' }} alt="" />;
-                            })}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  )}
-
-                  {/* Fonts — editable */}
-                  <div style={{ marginBottom: 10 }}>
-                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Fonts</div>
-                    {store.websiteData && store.websiteData.userFonts && (
-                      <div style={{ marginBottom: 4 }}>
-                        <span style={{ fontSize: 9, color: '#92400e', fontWeight: 700 }}>Brand Fonts (user-specified):</span>
-                        <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 2 }}>
-                          {store.websiteData.userFonts.split(/[,;]+/).map(function(f, i) {
-                            return <span key={i} style={{ background: '#fef3c7', color: '#92400e', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 700 }}>{f.trim()}</span>;
-                          })}
-                        </div>
-                      </div>
-                    )}
-                    {store.websiteData && store.websiteData.fonts && store.websiteData.fonts.length > 0 && (
-                      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 4 }}>
-                        {store.websiteData.fonts.map(function(f, i) {
-                          return <span key={i} style={{ background: '#f3e8ff', color: '#6b21a8', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{f}</span>;
-                        })}
-                      </div>
-                    )}
-                    <input
-                      placeholder="e.g. Montserrat, Open Sans, Playfair Display"
-                      value={(store.manualCI && store.manualCI.fonts) || ''}
-                      onChange={function(e) {
-                        setStore(function(prev) {
-                          var mc = Object.assign({}, prev.manualCI || {});
-                          mc.fonts = e.target.value;
-                          return Object.assign({}, prev, { manualCI: mc });
-                        });
-                      }}
-                      style={{ width: '100%', fontSize: 10, padding: '4px 6px', border: '1px solid #e5e7eb', borderRadius: 4 }}
-                    />
-                  </div>
-
-                  {/* Brand Tone — editable */}
-                  <div style={{ marginBottom: 10 }}>
-                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Tone</div>
-                    <input
-                      value={(store.manualCI && store.manualCI.brandTone) || store.brandTone || (store.analysis && store.analysis.brandTone) || ''}
-                      onChange={function(e) {
-                        setStore(function(prev) {
-                          var mc = Object.assign({}, prev.manualCI || {});
-                          mc.brandTone = e.target.value;
-                          return Object.assign({}, prev, { manualCI: mc });
-                        });
-                      }}
-                      placeholder="e.g. natural, minimalist, premium"
-                      style={{ width: '100%', fontSize: 10, padding: '4px 6px', border: '1px solid #e5e7eb', borderRadius: 4 }}
-                    />
-                  </div>
-
-                  {/* CI Notes — free text */}
-                  <div style={{ marginBottom: 10 }}>
-                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>CI Notes (for Designer)</div>
-                    <textarea
-                      value={(store.manualCI && store.manualCI.notes) || ''}
-                      onChange={function(e) {
-                        setStore(function(prev) {
-                          var mc = Object.assign({}, prev.manualCI || {});
-                          mc.notes = e.target.value;
-                          return Object.assign({}, prev, { manualCI: mc });
-                        });
-                      }}
-                      rows={3}
-                      placeholder="Additional notes: logo variants, imagery, style direction..."
-                      style={{ width: '100%', fontSize: 10, padding: '4px 6px', border: '1px solid #e5e7eb', borderRadius: 4, resize: 'vertical' }}
-                    />
-                  </div>
-
-                  {/* Typography Style */}
-                  {store.websiteData && store.websiteData.typographyStyle && (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Typography Style (detected)</div>
-                      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 6 }}>
-                        <span style={{ background: store.websiteData.typographyStyle.textDensity === 'minimalist' ? '#dcfce7' : store.websiteData.typographyStyle.textDensity === 'text-heavy' ? '#fef3c7' : '#eff6ff', color: store.websiteData.typographyStyle.textDensity === 'minimalist' ? '#166534' : store.websiteData.typographyStyle.textDensity === 'text-heavy' ? '#92400e' : '#1e40af', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 700 }}>
-                          {store.websiteData.typographyStyle.textDensity === 'minimalist' ? 'Minimalist' : store.websiteData.typographyStyle.textDensity === 'text-heavy' ? 'Text Heavy' : 'Balanced'}
-                        </span>
-                        <span style={{ background: '#f1f5f9', color: '#475569', borderRadius: 3, padding: '2px 8px', fontSize: 10 }}>
-                          {store.websiteData.typographyStyle.headingCount} Headings
-                        </span>
-                        <span style={{ background: '#f1f5f9', color: '#475569', borderRadius: 3, padding: '2px 8px', fontSize: 10 }}>
-                          ~{store.websiteData.typographyStyle.avgParagraphLength} chars/paragraph
-                        </span>
-                      </div>
-                      {store.websiteData.typographyStyle.fontWeights && store.websiteData.typographyStyle.fontWeights.length > 0 && (
-                        <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#7c3aed', fontWeight: 600 }}>Font Weights: </span>
-                          <span style={{ fontSize: 10, fontFamily: 'monospace', color: '#475569' }}>{store.websiteData.typographyStyle.fontWeights.join(', ')}</span>
-                        </div>
-                      )}
-                      {store.websiteData.typographyStyle.fontSizes && store.websiteData.typographyStyle.fontSizes.length > 0 && (
-                        <div>
-                          <span style={{ fontSize: 9, color: '#7c3aed', fontWeight: 600 }}>Font Sizes: </span>
-                          <span style={{ fontSize: 10, fontFamily: 'monospace', color: '#475569' }}>{store.websiteData.typographyStyle.fontSizes.slice(0, 6).join(', ')}</span>
-                        </div>
-                      )}
-                    </div>
-                  )}
-
-                  {/* Brand Story */}
-                  {(store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.brandStory) || (store.analysis && store.analysis.brandStory) || (store.websiteData && store.websiteData.aboutText) ? (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Story (detected)</div>
-                      <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11, lineHeight: 1.5, maxHeight: 80, overflow: 'auto' }}>
-                        {(store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.brandStory) || (store.analysis && store.analysis.brandStory) || (store.websiteData && store.websiteData.aboutText ? store.websiteData.aboutText.substring(0, 300) + '...' : '')}
-                      </div>
-                    </div>
-                  ) : null}
-
-                  {/* Target Audience (AI) */}
-                  {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.targetAudience && (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Target Audience (AI Analysis)</div>
-                      <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11, lineHeight: 1.5 }}>
-                        {store.websiteData.aiAnalysis.targetAudience}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Brand Values (AI) */}
-                  {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.brandValues && store.websiteData.aiAnalysis.brandValues.length > 0 && (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Values (AI Analysis)</div>
-                      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-                        {store.websiteData.aiAnalysis.brandValues.map(function(v, i) {
-                          return <span key={i} style={{ background: '#ede9fe', color: '#5b21b6', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{v}</span>;
-                        })}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Visual Style (AI) */}
-                  {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.visualStyle && (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Visual Style (AI Analysis)</div>
-                      <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11 }}>
-                        {store.websiteData.aiAnalysis.visualStyle}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Sustainability (AI) */}
-                  {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.sustainabilityFocus && (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Sustainability (AI Analysis)</div>
-                      <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11, lineHeight: 1.5 }}>
-                        {store.websiteData.aiAnalysis.sustainabilityFocus}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Key Ingredients / Materials (AI) */}
-                  {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.keyIngredients && store.websiteData.aiAnalysis.keyIngredients.length > 0 && (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Key Ingredients (AI Analysis)</div>
-                      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-                        {store.websiteData.aiAnalysis.keyIngredients.map(function(ing, i) {
-                          return <span key={i} style={{ background: '#ecfdf5', color: '#065f46', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{ing}</span>;
-                        })}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Certifications / USPs */}
-                  {store.websiteData && store.websiteData.certifications && store.websiteData.certifications.length > 0 && (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Zertifizierungen & USPs (erkannt)</div>
-                      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-                        {store.websiteData.certifications.map(function(cert, i) {
-                          return <span key={i} style={{ background: '#f3e8ff', color: '#6b21a8', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{cert}</span>;
-                        })}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Product Categories (AI) */}
-                  {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.productCategories && store.websiteData.aiAnalysis.productCategories.length > 0 && (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Produktkategorien (erkannt)</div>
-                      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-                        {store.websiteData.aiAnalysis.productCategories.map(function(cat, i) {
-                          return <span key={i} style={{ background: '#eff6ff', color: '#1e40af', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{cat}</span>;
-                        })}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Website URL + Pages Scraped */}
-                  {store.websiteData && store.websiteData.url && (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Website</div>
-                      <a href={store.websiteData.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: '#7c3aed', wordBreak: 'break-all' }}>{store.websiteData.url}</a>
-                      {store.websiteData.pagesScraped && store.websiteData.pagesScraped > 1 && (
-                        <div style={{ fontSize: 10, color: '#a78bfa', marginTop: 2 }}>{store.websiteData.pagesScraped} Seiten gecrawlt (Deep Crawl)</div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
+                  {designerFeedback.all.slice().sort(function(a, b) { return (a.designerDone ? 1 : 0) - (b.designerDone ? 1 : 0); }).map(function(it) {
+                    var where = it.scope === 'store' ? 'General' : ((it.pageName || 'Page') + ' · Section ' + (it.sectionIndex + 1) + ' · Tile ' + (it.tileIndex + 1));
+                    return (
+                      <FeedbackTask key={it.id} item={it} where={where} onToggle={setFeedbackDone} onJump={it.scope === 'store' ? null : jumpToFeedbackTile} />
+                    );
+                  })}
+                </>
+              )}
             </div>
           )}
 

@@ -105,6 +105,14 @@ async function migrate() {
     await db.execute({ sql: `ALTER TABLE stores ADD COLUMN generation_step INTEGER DEFAULT NULL` });
   } catch (e) { /* column already exists */ }
 
+  // Kunden Feedback: vom Team umformulierte Fassung fuer den Designer und sein Haekchen
+  try {
+    await db.execute({ sql: `ALTER TABLE feedback ADD COLUMN team_text TEXT DEFAULT ''` });
+  } catch (e) { /* column already exists */ }
+  try {
+    await db.execute({ sql: `ALTER TABLE feedback ADD COLUMN designer_done INTEGER NOT NULL DEFAULT 0` });
+  } catch (e) { /* column already exists */ }
+
   // Image Auslagerung: hash basierte Bildablage, damit der Store JSON Body
   // unter dem 4,5 MB Vercel Limit bleibt. data Spalte enthaelt die Base64
   // Data URL inklusive mime Prefix (Legacy). Neue Eintraege benutzen

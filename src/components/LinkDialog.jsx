@@ -6,7 +6,7 @@ import { useRef, useEffect, useState } from 'react';
 // Zwischenablage gern blockiert, und der Link waere weg. Hier steht der Link
 // immer sichtbar im Feld, kann markiert, kopiert oder geoeffnet werden.
 //
-// dialog: { kind: 'ok' | 'error', title, url?, message?, notes?: string[], copied?: boolean }
+// dialog: { kind: 'ok' | 'error' | 'info', title, url?, message?, notes?: string[], copied?: boolean }
 export default function LinkDialog({ dialog, onClose }) {
   var inputRef = useRef(null);
   var [copyState, setCopyState] = useState(dialog && dialog.copied ? 'copied' : '');
@@ -25,6 +25,7 @@ export default function LinkDialog({ dialog, onClose }) {
 
   if (!dialog) return null;
   var isError = dialog.kind === 'error';
+  var isInfo = dialog.kind === 'info'; // nur eine Meldung, kein Link
 
   var copy = async function() {
     var url = dialog.url || '';
@@ -53,8 +54,8 @@ export default function LinkDialog({ dialog, onClose }) {
           <button className="modal-close" onClick={onClose} title="Schließen" aria-label="Schließen">×</button>
         </div>
         <div style={{ padding: '4px 20px 20px' }}>
-          {isError ? (
-            <div style={{ fontSize: 13, lineHeight: 1.55, color: '#334155', whiteSpace: 'pre-wrap' }} role="alert">{dialog.message}</div>
+          {isError || isInfo ? (
+            <div style={{ fontSize: 13, lineHeight: 1.55, color: '#334155', whiteSpace: 'pre-wrap' }} role={isError ? 'alert' : 'status'}>{dialog.message}</div>
           ) : (
             <>
               <div style={{ display: 'flex', gap: 8 }}>

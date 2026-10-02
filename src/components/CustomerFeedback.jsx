@@ -17,31 +17,37 @@ function BubbleIcon({ size, color }) {
   );
 }
 
-// Schmale Leiste oben. Im Feedback Modus erklaert sie, was zu tun ist.
+// Schmale Leiste oben. Zu Beginn zeigt sie nur einen unauffaelligen Knopf, damit der Kunde
+// nicht zum Feedback gedraengt wird. Erst nach dem Klick erklaert sie den Modus.
 export function FeedbackBar({ on, onToggle, onGeneral, count, isMobile }) {
+  var font = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  var btn = { borderRadius: 8, padding: '6px 12px', fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' };
+  if (!on) {
+    return (
+      <div style={{ position: 'sticky', top: 0, zIndex: 99, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: 10, background: '#F7F7F8', borderBottom: '1px solid #E3E5E8', paddingTop: 6, paddingBottom: 6, paddingLeft: isMobile ? 12 : 20, paddingRight: 170, fontFamily: font }}>
+        <button onClick={onToggle} style={{ ...btn, background: '#fff', color: ACCENT, border: '1px solid ' + ACCENT, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+          <BubbleIcon size={15} /> Feedback geben
+        </button>
+      </div>
+    );
+  }
   return (
     <div style={{
       position: 'sticky', top: 0, zIndex: 99, flexShrink: 0,
-      background: on ? '#EDECFC' : '#F7F7F8', borderBottom: '1px solid ' + (on ? '#C9C6F7' : '#E3E5E8'),
+      background: '#EDECFC', borderBottom: '1px solid #C9C6F7',
       paddingTop: 8, paddingBottom: 8, paddingLeft: isMobile ? 12 : 20, paddingRight: 170,
       display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif', fontSize: 13, color: '#1E1B15',
+      fontFamily: font, fontSize: 13, color: '#1E1B15',
     }}>
       <span style={{ display: 'inline-flex', color: ACCENT }}><BubbleIcon size={18} /></span>
       <span style={{ flex: '1 1 220px', minWidth: 0, lineHeight: 1.35 }}>
-        {on
-          ? <><b>Feedback geben:</b> Klicke auf eine Kachel und schreibe uns, was wir ändern sollen.</>
-          : <>Feedback-Modus ist aus. Du kannst den Store jetzt normal durchklicken.</>}
+        <b>Feedback-Modus:</b> Klicke auf eine markierte Kachel, um dazu etwas zu schreiben.
       </span>
-      {on && (
-        <button onClick={onGeneral}
-          style={{ background: '#fff', color: ACCENT, border: '1px solid ' + ACCENT, borderRadius: 8, padding: '6px 12px', fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>
-          Allgemeines Feedback{count > 0 ? ' (' + count + ')' : ''}
-        </button>
-      )}
-      <button onClick={onToggle}
-        style={{ background: on ? 'transparent' : ACCENT, color: on ? '#4B4A58' : '#fff', border: on ? '1px solid #C9C6F7' : '1px solid ' + ACCENT, borderRadius: 8, padding: '6px 12px', fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}>
-        {on ? 'Feedback beenden' : 'Feedback geben'}
+      <button onClick={onGeneral} style={{ ...btn, background: '#fff', color: ACCENT, border: '1px solid ' + ACCENT }}>
+        Allgemeines Feedback{count > 0 ? ' (' + count + ')' : ''}
+      </button>
+      <button onClick={onToggle} style={{ ...btn, background: 'transparent', color: '#4B4A58', border: '1px solid #C9C6F7' }}>
+        Fertig
       </button>
     </div>
   );
@@ -172,10 +178,9 @@ export function FeedbackDialog({ target, items, onClose, onSubmit }) {
           <textarea ref={areaRef} value={text} rows={4} maxLength={2000}
             onChange={function(e) { setText(e.target.value); setSentNote(false); }}
             onKeyDown={function(e) { if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') send(); }}
-            placeholder="Zum Beispiel: Das Logo bitte größer, der Text ist zu klein, anderes Produktbild …"
             style={{ width: '100%', boxSizing: 'border-box', border: '1px solid #cbd5e1', borderRadius: 8, padding: '9px 10px', fontSize: 14, fontFamily: 'inherit', resize: 'vertical', color: '#1E1B15' }} />
           <input value={name} onChange={function(e) { setName(e.target.value); }} maxLength={80}
-            placeholder="Dein Name (optional, damit wir wissen, von wem das kommt)"
+            placeholder="Dein Name (optional)"
             style={{ width: '100%', boxSizing: 'border-box', border: '1px solid #cbd5e1', borderRadius: 8, padding: '9px 10px', fontSize: 13, fontFamily: 'inherit', marginTop: 8, color: '#1E1B15' }} />
           {error && <div role="alert" style={{ color: '#b91c1c', fontSize: 12.5, marginTop: 8 }}>{error}</div>}
           <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 12 }}>

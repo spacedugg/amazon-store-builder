@@ -5,7 +5,8 @@ import { tileImageForView } from '../tileSync';
 // Team Ansicht "Kunden-Feedback": alles, was Kunden in der Customer Preview
 // an Kacheln hinterlassen haben, an einem Ort. Statt Mails mit Screenshots
 // sieht man hier die Kachel, den Text und von wem er kommt, setzt den Status
-// und leitet bei Bedarf direkt an den Designer weiter.
+// und leitet bei Bedarf direkt an den Designer weiter. Den Text kann das Team
+// fuer den Designer umformulieren, das Original des Kunden bleibt erhalten.
 
 var ACCENT = '#423CE0';
 
@@ -42,6 +43,10 @@ export default function FeedbackPanel({ store, shareToken, customerUrl, onClose,
   var [filter, setFilter] = useState('neu');
   var [busy, setBusy] = useState('');
   var [copied, setCopied] = useState(false);
+  var [note, setNote] = useState('');
+  var [editing, setEditing] = useState(null); // { id, text }
+  var [confirmDel, setConfirmDel] = useState('');
+  var noteTimer = useRef(null);
   var inputRef = useRef(null);
 
   function reload() {
@@ -62,18 +67,34 @@ export default function FeedbackPanel({ store, shareToken, customerUrl, onClose,
     return function() { window.removeEventListener('keydown', onKey); };
   }, [onClose]);
 
-  async function patch(item, change) {
-    setBusy(item.id);
-    try { await updateFeedback(shareToken, item.id, change); await reload(); }
+  function flash(msg) {
+    setNote(msg);
+    if (noteTimer.current) clearTimeout(noteTimer.current);
+    noteTimer.current = setTimeout(function() { setNote(''); }, 2500);
+  }
+  async function patch(item, change, okMsg) {
+    setBusy(item.id); setError('');
+    try { await updateFeedback(shareToken, item.id, change); await reload(); if (okMsg) flash(okMsg); return true; }
+    catch (e) { setError(e.message || 'Das hat nicht geklappt.'); return false; }
+    finally { setBusy(''); }
+  }
+  // Kein window.confirm: im eingebetteten Fenster (iframe) wird es vom Browser oft blockiert,
+  // dann passierte beim Klick auf "Loeschen" gar nichts. Stattdessen ein zweiter Klick.
+  async function remove(item) {
+    setBusy(item.id); setError('');
+    try { await removeFeedback(shareToken, item.id); setConfirmDel(''); await reload(); flash('Feedback gelöscht'); }
     catch (e) { setError(e.message || 'Das hat nicht geklappt.'); }
     finally { setBusy(''); }
   }
-  async function remove(item) {
-    if (!window.confirm('Dieses Feedback endgültig löschen?')) return;
-    setBusy(item.id);
-    try { await removeFeedback(shareToken, item.id); await reload(); }
-    catch (e) { setError(e.message || 'Das hat nicht geklappt.'); }
-    finally { setBusy(''); }
+  async function saveEdit() {
+    if (!editing) return;
+    var item = (items || []).find(function(i) { return i.id === editing.id; });
+    if (!item) { setEditing(null); return; }
+    var text = editing.text.trim();
+    // Entspricht die Fassung dem Original, brauchen wir keine eigene
+    var teamText = text === item.text.trim() ? '' : text;
+    var ok = await patch(item, { teamText: teamText }, 'Fassung für den Designer gespeichert');
+    if (ok) setEditing(null);
   }
   async function copyLink() {
     try { await navigator.clipboard.writeText(customerUrl); setCopied(true); return; } catch (e) { /* Fallback */ }
@@ -101,7 +122,7 @@ export default function FeedbackPanel({ store, shareToken, customerUrl, onClose,
     return ((pageIdx[x.pageId] || 0) - (pageIdx[y.pageId] || 0)) || (x.sectionIndex - y.sectionIndex) || (x.tileIndex - y.tileIndex);
   });
 
-  var tabs = [['neu', 'Neu'], ['offen', 'Übernommen'], ['erledigt', 'Erledigt'], ['alle', 'Alle']];
+  var tabs = [['neu', 'Neu'], ['offen', 'In Arbeit'], ['erledigt', 'Erledigt'], ['alle', 'Alle']];
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" style={{ maxWidth: 820, maxHeight: '90vh', display: 'flex', flexDirection: 'column' }} onClick={function(e) { e.stopPropagation(); }}>
@@ -124,7 +145,7 @@ export default function FeedbackPanel({ store, shareToken, customerUrl, onClose,
             </>
           ) : (
             <div style={{ fontSize: 13, color: '#92400e', background: '#fffbeb', border: '1px solid #fde68a', borderRadius: 8, padding: '8px 10px' }}>
-              Es gibt noch keinen Kunden-Link. Klick oben auf „Customer", dann wird der Store gespeichert und der Link erzeugt.
+              Es gibt noch keinen Kunden-Link. Klick oben auf „Kunden-Link", dann wird der Store gespeichert und der Link erzeugt.
             </div>
           )}
         </div>
@@ -141,6 +162,7 @@ export default function FeedbackPanel({ store, shareToken, customerUrl, onClose,
           })}
         </div>
 
+        {note && <div role="status" style={{ margin: '0 20px 8px', color: '#166534', background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 8, padding: '6px 10px', fontSize: 12.5 }}>{note}</div>}
         {error && <div role="alert" style={{ margin: '0 20px 8px', color: '#b91c1c', fontSize: 12.5 }}>{error}</div>}
 
         <div style={{ overflowY: 'auto', padding: '0 20px 20px', flex: 1 }}>
@@ -157,7 +179,7 @@ export default function FeedbackPanel({ store, shareToken, customerUrl, onClose,
             var heading = isStore ? 'Allgemeines Feedback' : ((g.first.pageName || (f.page && f.page.name) || 'Seite') + ' · Abschnitt ' + (g.first.sectionIndex + 1) + ' · Kachel ' + (g.first.tileIndex + 1));
             return (
               <div key={key} style={{ display: 'flex', gap: 14, border: '1px solid #e2e8f0', borderRadius: 10, padding: 12, marginTop: 12, alignItems: 'flex-start' }}>
-                {!isStore && <Thumb tile={f.tile} mobile={g.first.viewMode === 'mobile'} />}
+                {!isStore && <Thumb tile={f.tile} mobile={false} />}
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginBottom: 6 }}>
                     <b style={{ fontSize: 13.5 }}>{heading}</b>
@@ -173,19 +195,54 @@ export default function FeedbackPanel({ store, shareToken, customerUrl, onClose,
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', fontSize: 12, color: '#64748b', marginBottom: 3 }}>
                           <span style={{ color: '#0f172a', fontWeight: 600 }}>{it.author || 'Gast'}</span>
                           <span>{timeAgo(it.createdAt)}</span>
-                          {!isStore && <span style={{ background: '#f1f5f9', borderRadius: 8, padding: '1px 7px' }}>{it.viewMode === 'mobile' ? 'Mobil' : 'Desktop'}</span>}
                           <span style={{ background: c[0], color: c[1], borderRadius: 10, padding: '1px 8px', fontWeight: 600 }}>{STATUS_LABEL_TEAM[it.status] || it.status}</span>
                           {it.forwarded && <span style={{ background: '#E0F2FE', color: '#075985', borderRadius: 10, padding: '1px 8px', fontWeight: 600 }}>Beim Designer</span>}
                         </div>
                         <div style={{ fontSize: 14, lineHeight: 1.45, whiteSpace: 'pre-wrap', wordBreak: 'break-word', color: '#0f172a' }}>{it.text}</div>
+                        {editing && editing.id === it.id ? (
+                          <div style={{ marginTop: 8 }}>
+                            <div style={{ fontSize: 11.5, color: '#64748b', marginBottom: 4 }}>Fassung für den Designer (das Original des Kunden bleibt oben stehen)</div>
+                            <textarea value={editing.text} autoFocus rows={4} maxLength={2000}
+                              onChange={function(e) { setEditing({ id: it.id, text: e.target.value }); }}
+                              style={{ width: '100%', boxSizing: 'border-box', padding: 8, border: '1px solid #cbd5e1', borderRadius: 8, fontFamily: 'inherit', fontSize: 13.5, resize: 'vertical' }} />
+                            <div style={{ display: 'flex', gap: 6, marginTop: 6 }}>
+                              <button className="btn btn-primary" disabled={disabled || !editing.text.trim()} style={{ fontSize: 11 }} onClick={saveEdit}>{disabled ? 'Speichert …' : 'Speichern'}</button>
+                              <button className="btn" disabled={disabled} style={{ fontSize: 11 }} onClick={function() { setEditing(null); }}>Abbrechen</button>
+                            </div>
+                          </div>
+                        ) : (
+                          it.teamText && (
+                            <div style={{ marginTop: 8, borderLeft: '3px solid #38bdf8', background: '#f0f9ff', borderRadius: 4, padding: '6px 10px' }}>
+                              <div style={{ fontSize: 10.5, fontWeight: 700, color: '#075985', textTransform: 'uppercase', letterSpacing: '.04em', marginBottom: 2 }}>Fassung für den Designer</div>
+                              <div style={{ fontSize: 13.5, lineHeight: 1.45, whiteSpace: 'pre-wrap', wordBreak: 'break-word', color: '#0c4a6e' }}>{it.teamText}</div>
+                            </div>
+                          )
+                        )}
+                        {it.forwarded && (
+                          <div style={{ marginTop: 6, fontSize: 12, color: it.designerDone ? '#166534' : '#075985' }}>
+                            {it.designerDone ? '✓ Der Designer hat das als umgesetzt abgehakt' : 'Der Designer hat das noch nicht abgehakt'}
+                          </div>
+                        )}
                         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 8 }}>
-                          {it.status === 'neu' && <button className="btn" disabled={disabled} style={{ fontSize: 11 }} onClick={function() { patch(it, { status: 'offen' }); }}>Übernehmen</button>}
-                          {it.status !== 'erledigt' && <button className="btn" disabled={disabled} style={{ fontSize: 11 }} onClick={function() { patch(it, { status: 'erledigt' }); }}>Erledigt</button>}
-                          {it.status === 'erledigt' && <button className="btn" disabled={disabled} style={{ fontSize: 11 }} onClick={function() { patch(it, { status: 'offen' }); }}>Wieder öffnen</button>}
-                          <button className="btn" disabled={disabled} style={{ fontSize: 11 }} onClick={function() { patch(it, { forwarded: !it.forwarded }); }}>
-                            {it.forwarded ? 'Beim Designer zurückziehen' : 'An Designer weiterleiten'}
+                          {it.status === 'neu' && <button className="btn" disabled={disabled} style={{ fontSize: 11 }} onClick={function() { patch(it, { status: 'offen' }, 'Auf „In Arbeit“ gesetzt'); }}>In Arbeit nehmen</button>}
+                          {it.status !== 'erledigt' && <button className="btn" disabled={disabled} style={{ fontSize: 11 }} onClick={function() { patch(it, { status: 'erledigt' }, 'Als erledigt markiert'); }}>Erledigt</button>}
+                          {it.status === 'erledigt' && <button className="btn" disabled={disabled} style={{ fontSize: 11 }} onClick={function() { patch(it, { status: 'offen' }, 'Wieder in Arbeit'); }}>Wieder öffnen</button>}
+                          {!(editing && editing.id === it.id) && (
+                            <button className="btn" disabled={disabled} style={{ fontSize: 11 }} onClick={function() { setEditing({ id: it.id, text: it.teamText || it.text }); }}>
+                              {it.teamText ? 'Fassung für Designer ändern' : 'Für Designer umformulieren'}
+                            </button>
+                          )}
+                          <button className="btn" disabled={disabled} style={{ fontSize: 11 }} onClick={function() { patch(it, { forwarded: !it.forwarded }, it.forwarded ? 'Beim Designer zurückgezogen' : 'An den Designer weitergeleitet'); }}>
+                            {disabled ? '…' : (it.forwarded ? 'Beim Designer zurückziehen' : 'An Designer weiterleiten')}
                           </button>
-                          <button className="btn" disabled={disabled} style={{ fontSize: 11, color: '#b91c1c' }} onClick={function() { remove(it); }}>Löschen</button>
+                          {confirmDel === it.id ? (
+                            <>
+                              <button className="btn" disabled={disabled} style={{ fontSize: 11, background: '#dc2626', color: '#fff', borderColor: '#dc2626' }} onClick={function() { remove(it); }}>{disabled ? 'Löscht …' : 'Wirklich löschen'}</button>
+                              <button className="btn" disabled={disabled} style={{ fontSize: 11 }} onClick={function() { setConfirmDel(''); }}>Abbrechen</button>
+                            </>
+                          ) : (
+                            <button className="btn" disabled={disabled} style={{ fontSize: 11, color: '#b91c1c' }} onClick={function() { setConfirmDel(it.id); }}>Löschen</button>
+                          )}
                         </div>
                       </div>
                     );

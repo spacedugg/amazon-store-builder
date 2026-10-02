@@ -2,7 +2,14 @@
 // Server siehe api/feedback.js.
 
 export var STATUS_LABEL_CUSTOMER = { neu: 'Gesendet', offen: 'In Bearbeitung', erledigt: 'Erledigt' };
-export var STATUS_LABEL_TEAM = { neu: 'Neu', offen: 'Übernommen', erledigt: 'Erledigt' };
+export var STATUS_LABEL_TEAM = { neu: 'Neu', offen: 'In Arbeit', erledigt: 'Erledigt' };
+
+// Anzahl neuer Eintraege je Store-Id, damit die Store Liste ohne Oeffnen einen Zaehler zeigen kann.
+export async function loadFeedbackCounts() {
+  var resp = await fetch('/api/feedback?counts=1');
+  var json = await readJson(resp);
+  return (json && json.counts) || {};
+}
 
 function qs(params) {
   return Object.keys(params).filter(function(k) { return params[k] != null && params[k] !== ''; })
