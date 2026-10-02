@@ -117,7 +117,7 @@ export default function Topbar({ store, shareToken, onExport, onSave, onShowJson
             <>
               <input type="file" ref={folderInputRef} style={{ display: 'none' }} webkitdirectory="" directory="" multiple
                 onChange={function(e) { onFolderImageUpload(e.target.files); e.target.value = ''; }} />
-              <button className="btn"
+              <button className="btn btn-folder"
                 onClick={function() { folderInputRef.current && folderInputRef.current.click(); }}
                 disabled={!!folderUploadProgress}
                 title={folderUploadProgress ? 'Lade Bilder nach Vercel Blob hoch' : 'Bilder Ordner hochladen. Jedes Bild geht direkt in den Cloud Speicher, der Store ist danach sofort bereit fuer Customer.'}
@@ -142,7 +142,7 @@ export default function Topbar({ store, shareToken, onExport, onSave, onShowJson
             </button>
           )}
           <button className="btn btn-primary" onClick={onExport} title="Designer Briefing als DOCX exportieren oder Share Link generieren">Export</button>
-          <button className="btn" onClick={onCopyCustomerLink}
+          <button className="btn btn-customer" onClick={onCopyCustomerLink}
             disabled={!onCopyCustomerLink || !!customerSaveProgress}
             title="Speichert den Store inkl. hochgeladenen Bildern und kopiert den Customer Preview Link. Premium Amazon Brand Store Vorschau ohne Designer Tools, ideal fuer Unternehmenskunden."
             style={{ fontSize: 11, background: '#0F1111', color: '#fff', borderColor: '#0F1111', minWidth: customerSaveProgress ? 140 : undefined }}>
