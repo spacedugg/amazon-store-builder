@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { PRODUCT_TILE_TYPES, findLayout } from '../constants';
 import { loadStoreByShareToken, loadStoreBySlug } from '../storage';
 import { getGridConfig } from './SectionView';
+import { tileImageForView } from '../tileSync';
 
 // Customer facing preview. Erreichbar unter /customer/<shareToken>.
 // Zeigt den Brand Store so, wie er fertig auf Amazon aussehen wuerde:
@@ -222,9 +223,8 @@ function ShoppableHotspot({ hotspot, product, marketplace }) {
 
 // Liefert das fertige Bild fuer eine Kachel basierend auf View Mode.
 function getTileImage(tile, isMobile) {
-  if (!tile) return null;
-  if (isMobile) return tile.uploadedImageMobile || tile.uploadedImage || null;
-  return tile.uploadedImage || tile.uploadedImageMobile || null;
+  // Das Bild der anderen Ansicht springt nur bei gleichem Format ein (siehe tileSync.js)
+  return tileImageForView(tile, isMobile);
 }
 
 // Liefert das Hero Banner Bild. Reihenfolge: Page Override, Store Default,
