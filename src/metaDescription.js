@@ -3,7 +3,7 @@
 // Eine Quelle fuer die Designer Ansicht und den DOCX Export (vorher zweimal kopiert).
 //
 // Regeln, nach denen der Text gebaut wird:
-//  - Laenge hoechstens META_MAX Zeichen (Google zeigt ca. 155 Zeichen am Desktop, mobil weniger:
+//  - Laenge hoechstens META_MAX Zeichen (empfohlen sind ca. 150 bis 160 Zeichen inklusive Leerzeichen, mobil zeigt Google weniger:
 //    das Wichtigste steht deshalb in den ersten ~120 Zeichen). Es wird nie mitten im Wort oder
 //    mit "..." abgeschnitten, lieber wird ein optionaler Teil weggelassen.
 //  - Jede Seite bekommt einen eigenen Text. Doppelte Texte schreibt Google haeufig um.
@@ -17,7 +17,7 @@
 // Die genaue Zeichengrenze des Meta Description Felds im Amazon Stores Builder ist nicht
 // oeffentlich verlaesslich dokumentiert: META_MAX bei Bedarf hier an einer Stelle anpassen.
 
-export var META_MAX = 155;
+export var META_MAX = 160;
 var META_TARGET_MIN = 100;
 
 var TEXTS = {
