@@ -12,6 +12,7 @@ import AsinPanel from './components/AsinPanel';
 import NewStoreModal from './components/NewStoreModal';
 import PatchImportModal from './components/PatchImportModal';
 import JsonExportModal from './components/JsonExportModal';
+import LinkDialog from './components/LinkDialog';
 import PriceCalculator from './components/PriceCalculator';
 import ExportModal from './components/ExportModal';
 import BriefingView from './components/BriefingView';
@@ -228,6 +229,8 @@ export default function App() {
   var [requestedAsins, setRequestedAsins] = useState([]);
   var [showSaved, setShowSaved] = useState(false);
   var [showExport, setShowExport] = useState(false);
+  // Link/Fehler Dialog fuer Customer Link und Export (statt alert/prompt, siehe LinkDialog.jsx)
+  var [linkDialog, setLinkDialog] = useState(null);
   var [showPatchImport, setShowPatchImport] = useState(false);
   var [showJsonExport, setShowJsonExport] = useState(false);
   var [showAsinOverview, setShowAsinOverview] = useState(false);
@@ -1746,7 +1749,11 @@ export default function App() {
   // fehlende Bilder bekommt der Customer beim naechsten Versuch.
   var [customerSaveProgress, setCustomerSaveProgress] = useState(null);
   var handleCopyCustomerLink = async function() {
-    if (!store.pages.length) { alert('Bitte erst einen Store anlegen.'); return; }
+    var dlgTitle = 'Customer Preview Link';
+    if (!store.pages.length) {
+      setLinkDialog({ kind: 'error', title: dlgTitle, message: 'Bitte erst einen Store anlegen.' });
+      return;
+    }
     console.log('[Customer] Start, store has', (store.pages || []).length, 'pages');
     setCustomerSaveProgress({ stage: 'extract' });
     try {
@@ -1760,41 +1767,52 @@ export default function App() {
       console.log('[Customer] persistStore result', result);
       setCustomerSaveProgress(null);
       if (!result || !result.shareToken) {
-        alert('Customer Link konnte nicht erzeugt werden. Server hat keinen shareToken zurueckgegeben. Bitte einmal manuell ueber Save speichern.');
+        setLinkDialog({
+          kind: 'error', title: dlgTitle,
+          message: (result && result.offline
+            ? 'Der Server war nicht erreichbar. Der Store ist nur lokal im Browser gesichert, deshalb gibt es noch keinen Link.'
+            : 'Der Server hat keinen Link zurückgegeben.') +
+            '\n\nBitte kurz warten und noch einmal auf Customer klicken. Dein Stand bleibt im Tab erhalten.',
+        });
         return;
       }
       // Bevorzugt die lesbare URL nach dem Brand Slug. Fällt auf den
       // klassischen Token Link zurück, wenn der Store keinen Namen hat.
       var slug = brandToSlug(store.brandName);
       var url = shareBaseUrl() + (slug ? '/' + slug : '/customer/' + result.shareToken);
-      var msg = 'Customer Preview Link kopiert.\n\n' + url;
+      var notes = [];
       if (result.imagesUploaded > 0 || (result.imagesSkipped || 0) > 0) {
-        msg += '\n\nBilder: ' + (result.imagesUploaded || 0) + ' neu hochgeladen, ' + (result.imagesSkipped || 0) + ' bereits in DB.';
+        notes.push('Bilder: ' + (result.imagesUploaded || 0) + ' neu hochgeladen, ' + (result.imagesSkipped || 0) + ' bereits in DB.');
       }
       if (result.imageFailures && result.imageFailures.length > 0) {
-        msg += '\n\nWARNUNG: ' + result.imageFailures.length + ' Bild(er) konnten nicht hochgeladen werden.';
+        var warn = 'WARNUNG: ' + result.imageFailures.length + ' Bild(er) konnten nicht hochgeladen werden.';
         var firstErr = result.imageFailures[0];
-        if (firstErr && firstErr.message) {
-          msg += '\nErster Fehler: ' + firstErr.message;
-        }
-        msg += '\n\nSave erneut versuchen, dann landen die fehlenden Bilder auch im Customer Preview.';
+        if (firstErr && firstErr.message) warn += '\nErster Fehler: ' + firstErr.message;
+        warn += '\nSave erneut versuchen, dann landen die fehlenden Bilder auch im Customer Preview.';
+        notes.push(warn);
       }
-      try {
-        await navigator.clipboard.writeText(url);
-        alert(msg);
-      } catch (e) {
-        prompt('Customer Preview Link:', url);
-      }
+      // Zwischenablage nur als Zugabe: der Link steht auf jeden Fall im Dialog.
+      var copied = false;
+      try { await navigator.clipboard.writeText(url); copied = true; } catch (e) { /* gesperrt, z. B. im iframe */ }
+      setLinkDialog({ kind: 'ok', title: dlgTitle, url: url, notes: notes, copied: copied });
     } catch (e) {
       console.error('[Customer] Fehler im handleCopyCustomerLink', e);
       setCustomerSaveProgress(null);
-      alert('Save fehlgeschlagen.\n\nFehler: ' + (e && e.message ? e.message : 'unbekannt') + '\n\nBitte die Browser Console mit F12 oeffnen, dort steht der vollstaendige Stack Trace. Dein lokaler Stand bleibt im Tab erhalten.');
+      setLinkDialog({
+        kind: 'error', title: dlgTitle,
+        message: 'Speichern fehlgeschlagen.\n\nFehler: ' + (e && e.message ? e.message : 'unbekannt') +
+          '\n\nDein lokaler Stand bleibt im Tab erhalten. Bitte erneut versuchen. Falls es bleibt: Browser Console (F12) öffnen, dort steht der Stack Trace.',
+      });
     }
   };
 
   // ─── EXPORT (generate share link — always reuses same link per store) ───
   var handleExport = async function() {
-    if (!store.pages.length) return;
+    var dlgTitle = 'Designer Briefing Link';
+    if (!store.pages.length) {
+      setLinkDialog({ kind: 'error', title: dlgTitle, message: 'Bitte erst einen Store anlegen.' });
+      return;
+    }
     try {
       var hadToken = !!shareToken;
       // Save first (or re-save) to ensure we have a share token
@@ -1803,31 +1821,32 @@ export default function App() {
         result = await persistStore(store, { includeShareToken: true });
       } catch (saveErr) {
         console.error('Export Save fehlgeschlagen:', saveErr);
-        alert('Export fehlgeschlagen.\n\n' + saveErr.message);
+        setLinkDialog({ kind: 'error', title: dlgTitle, message: 'Export fehlgeschlagen.\n\n' + saveErr.message });
         return;
       }
       if (result && result.shareToken) {
         setShareToken(result.shareToken);
         var shareUrl = shareBaseUrl() + '/share/' + result.shareToken;
-        // Copy to clipboard
-        try {
-          await navigator.clipboard.writeText(shareUrl);
-          if (hadToken) {
-            alert('Store saved & link copied to clipboard (same link as before).\n\n' + shareUrl);
-          } else {
-            alert('Designer briefing link created & copied to clipboard!\n\n' + shareUrl);
-          }
-        } catch (clipErr) {
-          prompt('Copy this link and share it with your designer:', shareUrl);
-        }
+        // Zwischenablage nur als Zugabe: der Link steht auf jeden Fall im Dialog.
+        var copied = false;
+        try { await navigator.clipboard.writeText(shareUrl); copied = true; } catch (clipErr) { /* gesperrt, z. B. im iframe */ }
+        setLinkDialog({
+          kind: 'ok', title: dlgTitle, url: shareUrl, copied: copied,
+          notes: [hadToken ? 'Store gespeichert. Das ist derselbe Link wie zuvor.' : 'Store gespeichert, neuer Link für den Designer erzeugt.'],
+        });
         // Also refresh saved stores list
         var stores = await loadSavedStores();
         setSavedStores(stores);
       } else {
-        alert('Export failed: could not generate share link.');
+        setLinkDialog({
+          kind: 'error', title: dlgTitle,
+          message: (result && result.offline
+            ? 'Der Server war nicht erreichbar. Der Store ist nur lokal im Browser gesichert, deshalb gibt es noch keinen Link.'
+            : 'Der Server hat keinen Link zurückgegeben.') + '\n\nBitte kurz warten und noch einmal auf Export klicken.',
+        });
       }
     } catch (e) {
-      alert('Export failed: ' + e.message);
+      setLinkDialog({ kind: 'error', title: dlgTitle, message: 'Export fehlgeschlagen: ' + e.message });
     }
   };
 
@@ -2021,6 +2040,10 @@ export default function App() {
           store={store}
           currentPageId={curPage}
         />
+      )}
+
+      {linkDialog && (
+        <LinkDialog dialog={linkDialog} onClose={function() { setLinkDialog(null); }} />
       )}
 
       {showJsonExport && (
