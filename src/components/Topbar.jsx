@@ -61,7 +61,7 @@ function formatCustomerProgress(p) {
   return 'Speichere...';
 }
 
-export default function Topbar({ store, shareToken, onExport, onSave, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress, folderUploadProgress, onChangeBrandName }) {
+export default function Topbar({ store, shareToken, onExport, onSave, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress, folderUploadProgress, onChangeBrandName, onShowFeedback, feedbackNew }) {
   var folderProgressLabel = '';
   if (folderUploadProgress) {
     folderProgressLabel = 'Bilder ' + (folderUploadProgress.uploaded || 0) + ' / ' + folderUploadProgress.total;
@@ -148,6 +148,15 @@ export default function Topbar({ store, shareToken, onExport, onSave, onShowJson
             style={{ fontSize: 11, background: '#0F1111', color: '#fff', borderColor: '#0F1111', minWidth: customerSaveProgress ? 140 : undefined }}>
             {customerSaveProgress ? formatCustomerProgress(customerSaveProgress) : 'Customer'}
           </button>
+          {onShowFeedback && (
+            <button className="btn" onClick={onShowFeedback} style={{ fontSize: 11, position: 'relative' }}
+              title="Kunden-Feedback zur Preview: alles, was der Kunde an Kacheln hinterlassen hat">
+              Kunden-Feedback
+              {feedbackNew > 0 && (
+                <span style={{ marginLeft: 6, background: '#dc2626', color: '#fff', borderRadius: 9, minWidth: 18, height: 18, padding: '0 5px', boxSizing: 'border-box', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700 }}>{feedbackNew}</span>
+              )}
+            </button>
+          )}
           {onShowAsinOverview && (
             <button className="btn" onClick={onShowAsinOverview} title="ASIN Übersicht aller Stores plus BSR Sortierung" style={{ fontSize: 11 }}>ASINs</button>
           )}

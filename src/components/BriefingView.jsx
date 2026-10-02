@@ -5,6 +5,7 @@ import { translateStoreForDesigner } from '../translateBriefing';
 import SectionView, { getGridConfig } from './SectionView';
 import { AmazonProductGrid, ShoppableHotspot } from './CustomerPreview';
 import { effectiveShoppableHotspots } from '../hotspots';
+import { loadFeedback, tileKey as fbTileKey } from '../feedbackApi';
 import { isSameAspectRatio, tileEffectivelySynced, tileImageForView } from '../tileSync';
 
 var noop = function() {};
@@ -522,7 +523,7 @@ function CopyableFilename({ filename, label }) {
 }
 
 // ─── TILE DETAIL CARD (for right panel) ───
-function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile, duplicateInfo, pageId, pageName, sectionIndex, products, store }) {
+function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile, duplicateInfo, pageId, pageName, sectionIndex, products, store, clientFeedback }) {
   var dims = LAYOUT_TILE_DIMS[layoutId];
   var desktopType = dims && dims[tileIndex] ? dims[tileIndex] : null;
   var tileLabel = TILE_TYPE_LABELS[tile.type] || tile.type;
@@ -549,6 +550,22 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
         )}
         {/* dimensions shown in dims row below, no need to repeat layout label */}
       </div>
+
+      {clientFeedback && clientFeedback.length > 0 && (
+        <div className="briefing-field" style={{ background: '#fffbeb', border: '1px solid #f59e0b', borderRadius: 4, padding: '6px 8px', marginBottom: 6 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, color: '#92400e', marginBottom: 3, textTransform: 'uppercase', letterSpacing: '.04em' }}>
+            Client feedback ({clientFeedback.length})
+          </div>
+          {clientFeedback.map(function(fb, fi) {
+            return (
+              <div key={fi} style={{ fontSize: 12, color: '#451a03', lineHeight: 1.4, marginTop: fi ? 6 : 0, whiteSpace: 'pre-wrap' }}>
+                {fb.text}
+                <span style={{ color: '#a16207', fontSize: 10.5 }}>{'  ·  ' + (fb.author || 'Client') + ' · ' + (fb.viewMode === 'mobile' ? 'mobile' : 'desktop') + (fb.status === 'erledigt' ? ' · done' : '')}</span>
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       {duplicateInfo && duplicateInfo.count > 1 && (
         <div className="briefing-field" style={{ background: '#ecfdf5', border: '1px solid #10b981', borderRadius: 4, padding: '4px 8px', marginBottom: 6 }}>
@@ -1889,8 +1906,32 @@ export default function BriefingView() {
   var rawToken = window.location.pathname.split('/share/')[1] || '';
   var token = rawToken.split('/')[0].split('?')[0].trim(); // Strip trailing slashes, query params
 
+  useEffect(function() {
+    if (!token) return;
+    var stopped = false;
+    function pull() {
+      loadFeedback({ shareToken: token }, { forwarded: 1 }).then(function(r) {
+        if (stopped) return;
+        var byTile = {};
+        var general = [];
+        ((r && r.items) || []).forEach(function(it) {
+          if (it.scope === 'store') { general.push(it); return; }
+          var k = fbTileKey(it.pageId, it.sectionId, it.tileIndex);
+          (byTile[k] = byTile[k] || []).push(it);
+        });
+        setDesignerFeedback({ byTile: byTile, general: general });
+      }).catch(function() { /* stilles Nachladen */ });
+    }
+    pull();
+    var t = setInterval(pull, 60000);
+    return function() { stopped = true; clearInterval(t); };
+  }, [token]);
+
+
   // ─── INITIAL LOAD ───
   var loadAttemptRef = useRef(0);
+  // Vom Team weitergeleitetes Kunden Feedback, je Kachel (nur lesen)
+  var [designerFeedback, setDesignerFeedback] = useState({ byTile: {}, general: [] });
 
   function loadShareData() {
     if (!token) { setError('No share token found in the URL. Please check the link.'); setLoading(false); return; }
@@ -2181,6 +2222,15 @@ export default function BriefingView() {
 
       {/* Designer Timer — sticky at top */}
       {token && <DesignerTimer shareToken={token} />}
+
+      {designerFeedback.general.length > 0 && (
+        <div style={{ margin: '8px 16px', background: '#fffbeb', border: '1px solid #f59e0b', borderRadius: 6, padding: '8px 12px', fontSize: 12, color: '#451a03' }}>
+          <b style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '.04em', color: '#92400e' }}>General client feedback ({designerFeedback.general.length})</b>
+          {designerFeedback.general.map(function(fb, i) {
+            return <div key={i} style={{ marginTop: 4, whiteSpace: 'pre-wrap' }}>{fb.text}<span style={{ color: '#a16207', fontSize: 10.5 }}>{'  ·  ' + (fb.author || 'Client')}</span></div>;
+          })}
+        </div>
+      )}
 
       {/* Update banner */}
       {updateBanner && (
@@ -2772,6 +2822,7 @@ export default function BriefingView() {
                         sectionIndex={item.sectionIndex}
                         products={store ? store.products : []}
                         store={store}
+                        clientFeedback={designerFeedback.byTile[fbTileKey(item.pageId, item.section.id, ti)]}
                       />
                     );
                   })}
