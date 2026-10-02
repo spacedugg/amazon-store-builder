@@ -5,7 +5,7 @@ import { translateStoreForDesigner } from '../translateBriefing';
 import SectionView, { getGridConfig } from './SectionView';
 import { AmazonProductGrid, ShoppableHotspot } from './CustomerPreview';
 import { effectiveShoppableHotspots } from '../hotspots';
-import { loadFeedback, updateFeedback, tileKey as fbTileKey } from '../feedbackApi';
+import { loadFeedback, updateFeedback, sharedImageInfo, tileKey as fbTileKey } from '../feedbackApi';
 import { isSameAspectRatio, tileEffectivelySynced, tileImageForView } from '../tileSync';
 
 var noop = function() {};
@@ -217,11 +217,17 @@ function tileFilename(pageName, sectionIndex, tileIndex, variant) {
 // Build a complete filename map for the entire store: { filename -> { pageId, secId, tileIndex, variant } }
 function buildFilenameMap(store) {
   var map = {};
+  var groups = {}; // imageRef -> alle Kacheln, die dasselbe Bild nutzen
   (store.pages || []).forEach(function(pg) {
     (pg.sections || []).forEach(function(sec, si) {
       (sec.tiles || []).forEach(function(tile, ti) {
         if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text' || tile.type === 'product_selector') return;
-        if (tileEffectivelySynced(tile)) {
+        var synced = tileEffectivelySynced(tile);
+        if (tile.imageRef) {
+          var gk = String(tile.imageRef).toLowerCase();
+          (groups[gk] = groups[gk] || []).push({ pageId: pg.id, secId: sec.id, ti: ti, synced: synced });
+        }
+        if (synced) {
           // Accept any of the three naming conventions the designer may have used.
           var fn = tileFilename(pg.name, si, ti, 'sync');
           var fnD = tileFilename(pg.name, si, ti, 'desktop');
@@ -238,7 +244,31 @@ function buildFilenameMap(store) {
       });
     });
   });
+  // Wiederverwendete Bilder: EINE Datei mit dem Reuse Namen (imageRef.jpg bzw. _desktop/_mobile)
+  // ersetzt das Bild an ALLEN Stellen, die diese imageRef nutzen.
+  Object.keys(groups).forEach(function(gk) {
+    var list = groups[gk];
+    reuseFilenames(gk).forEach(function(r) {
+      if (map[r.name]) return;
+      var targets = list.map(function(t) {
+        var variant = t.synced ? 'sync' : (r.kind === 'mobile' ? 'mobile' : 'desktop');
+        return { pageId: t.pageId, secId: t.secId, ti: t.ti, variant: variant };
+      });
+      map[r.name] = Object.assign({}, targets[0], { targets: targets });
+    });
+  });
   return map;
+}
+
+// Dateinamen, unter denen ein wiederverwendetes Bild geliefert werden kann.
+function reuseFilenames(imageRef) {
+  var base = String(imageRef || '').toLowerCase();
+  if (!base) return [];
+  return [
+    { name: base + '.jpg', kind: 'sync' },
+    { name: base + '_desktop.jpg', kind: 'desktop' },
+    { name: base + '_mobile.jpg', kind: 'mobile' },
+  ];
 }
 
 // Build a map of tile fingerprints → all occurrences. Primärer Dedup
@@ -524,7 +554,7 @@ function CopyableFilename({ filename, label }) {
 
 // ─── TILE DETAIL CARD (for right panel) ───
 // Ein Feedback Punkt in der Designer Ansicht: Text (vom Team ggf. umformuliert), Haekchen "umgesetzt".
-function FeedbackTask({ item, where, onToggle, onJump }) {
+function FeedbackTask({ item, where, shared, onToggle, onJump }) {
   var [busy, setBusy] = useState(false);
   var [err, setErr] = useState('');
   async function toggle() {
@@ -540,6 +570,11 @@ function FeedbackTask({ item, where, onToggle, onJump }) {
         {onJump && <button onClick={function() { onJump(item); }} style={{ background: 'none', border: 'none', color: '#2563eb', fontSize: 11, fontWeight: 600, cursor: 'pointer', padding: 0 }}>Show tile</button>}
       </div>
       <div style={{ fontSize: 12.5, lineHeight: 1.45, color: '#451a03', whiteSpace: 'pre-wrap', wordBreak: 'break-word', textDecoration: item.designerDone ? 'line-through' : 'none', opacity: item.designerDone ? 0.65 : 1 }}>{item.designerText || item.text}</div>
+      {shared && (
+        <div style={{ marginTop: 6, fontSize: 11, lineHeight: 1.4, color: '#047857', background: '#ecfdf5', border: '1px solid #a7f3d0', borderRadius: 5, padding: '4px 6px' }}>
+          Same image is also used at: {shared.others.join('; ')}. Upload <b style={{ fontFamily: 'monospace' }}>{shared.imageRef}.jpg</b> once to replace it everywhere.
+        </div>
+      )}
       <button onClick={toggle} disabled={busy}
         style={{ marginTop: 8, display: 'inline-flex', alignItems: 'center', gap: 6, background: item.designerDone ? '#fff' : '#16a34a', color: item.designerDone ? '#166534' : '#fff', border: '1px solid ' + (item.designerDone ? '#86efac' : '#16a34a'), borderRadius: 6, padding: '4px 10px', fontSize: 11.5, fontWeight: 700, cursor: busy ? 'default' : 'pointer', opacity: busy ? 0.6 : 1 }}>
         {busy ? 'Saving…' : (item.designerDone ? '✓ Implemented · undo' : 'Mark as implemented')}
@@ -1292,7 +1327,18 @@ function PreviewMode({ store, onClose }) {
     var other = mode === 'desktop' ? 'mobile' : 'desktop';
     return findTileImage(pageName, sectionIndex, tileIndex, mode)
       || findTileImage(pageName, sectionIndex, tileIndex, 'sync')
-      || (tileEffectivelySynced(tile) ? findTileImage(pageName, sectionIndex, tileIndex, other) : null);
+      || (tileEffectivelySynced(tile) ? findTileImage(pageName, sectionIndex, tileIndex, other) : null)
+      || findReuseImage(tile, mode);
+  }
+
+  // Wiederverwendetes Bild (gleiche imageRef): die Datei mit dem Reuse Namen gilt fuer jede Stelle.
+  function findReuseImage(tile, mode) {
+    if (!tile || !tile.imageRef) return null;
+    var names = reuseFilenames(tile.imageRef);
+    var byKind = {};
+    names.forEach(function(r) { byKind[r.kind] = imageMap[r.name] || null; });
+    var other = mode === 'desktop' ? 'mobile' : 'desktop';
+    return byKind[mode] || byKind.sync || (tileEffectivelySynced(tile) ? byKind[other] : null) || null;
   }
 
   // Close more popup on outside click
@@ -1317,7 +1363,7 @@ function PreviewMode({ store, onClose }) {
             var fn = tileFilename(pg.name, si, ti, 'sync').toLowerCase();
             var fnDS = tileFilename(pg.name, si, ti, 'desktop').toLowerCase();
             var fnMS = tileFilename(pg.name, si, ti, 'mobile').toLowerCase();
-            if (imageMap[fn] || imageMap[fnDS] || imageMap[fnMS]) {
+            if (imageMap[fn] || imageMap[fnDS] || imageMap[fnMS] || findReuseImage(tile, 'desktop')) {
               matchReport.matched += 1;
             } else {
               matchReport.missing.push({ page: pg.name, section: si + 1, tile: ti + 1, filename: tileFilename(pg.name, si, ti, 'sync') });
@@ -1326,10 +1372,10 @@ function PreviewMode({ store, onClose }) {
             matchReport.total += 2;
             var fnD = tileFilename(pg.name, si, ti, 'desktop').toLowerCase();
             var fnM = tileFilename(pg.name, si, ti, 'mobile').toLowerCase();
-            if (imageMap[fnD]) { matchReport.matched += 1; } else {
+            if (imageMap[fnD] || findReuseImage(tile, 'desktop')) { matchReport.matched += 1; } else {
               matchReport.missing.push({ page: pg.name, section: si + 1, tile: ti + 1, filename: tileFilename(pg.name, si, ti, 'desktop') });
             }
-            if (imageMap[fnM]) { matchReport.matched += 1; } else {
+            if (imageMap[fnM] || findReuseImage(tile, 'mobile')) { matchReport.matched += 1; } else {
               matchReport.missing.push({ page: pg.name, section: si + 1, tile: ti + 1, filename: tileFilename(pg.name, si, ti, 'mobile') });
             }
           }
@@ -1836,21 +1882,23 @@ export default function BriefingView() {
         if (!prev) return prev;
         var clone = JSON.parse(JSON.stringify(prev));
         assignments.forEach(function(a) {
-          var entry = a.entry;
-          var pg = (clone.pages || []).find(function(p) { return p.id === entry.pageId; });
-          if (!pg) return;
-          var sec = (pg.sections || []).find(function(s) { return s.id === entry.secId; });
-          if (!sec) return;
-          var tile = (sec.tiles || [])[entry.ti];
-          if (!tile) return;
-          if (entry.variant === 'sync') {
-            tile.uploadedImage = a.dataUrl;
-            tile.uploadedImageMobile = a.dataUrl;
-          } else if (entry.variant === 'desktop') {
-            tile.uploadedImage = a.dataUrl;
-          } else if (entry.variant === 'mobile') {
-            tile.uploadedImageMobile = a.dataUrl;
-          }
+          // Reuse Datei: ein Eintrag mit mehreren Zielen, sonst genau eine Kachel
+          (a.entry.targets || [a.entry]).forEach(function(entry) {
+            var pg = (clone.pages || []).find(function(p) { return p.id === entry.pageId; });
+            if (!pg) return;
+            var sec = (pg.sections || []).find(function(s) { return s.id === entry.secId; });
+            if (!sec) return;
+            var tile = (sec.tiles || [])[entry.ti];
+            if (!tile) return;
+            if (entry.variant === 'sync') {
+              tile.uploadedImage = a.dataUrl;
+              tile.uploadedImageMobile = a.dataUrl;
+            } else if (entry.variant === 'desktop') {
+              tile.uploadedImage = a.dataUrl;
+            } else if (entry.variant === 'mobile') {
+              tile.uploadedImageMobile = a.dataUrl;
+            }
+          });
         });
         return clone;
       });
@@ -2373,7 +2421,7 @@ export default function BriefingView() {
                   {designerFeedback.all.slice().sort(function(a, b) { return (a.designerDone ? 1 : 0) - (b.designerDone ? 1 : 0); }).map(function(it) {
                     var where = it.scope === 'store' ? 'General' : ((it.pageName || 'Page') + ' · Section ' + (it.sectionIndex + 1) + ' · Tile ' + (it.tileIndex + 1));
                     return (
-                      <FeedbackTask key={it.id} item={it} where={where} onToggle={setFeedbackDone} onJump={it.scope === 'store' ? null : jumpToFeedbackTile} />
+                      <FeedbackTask key={it.id} item={it} where={where} shared={sharedImageInfo(store, it)} onToggle={setFeedbackDone} onJump={it.scope === 'store' ? null : jumpToFeedbackTile} />
                     );
                   })}
                 </>

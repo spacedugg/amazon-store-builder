@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { loadFeedback, updateFeedback, removeFeedback, tileKey, timeAgo, STATUS_LABEL_TEAM } from '../feedbackApi';
+import { loadFeedback, updateFeedback, removeFeedback, tileKey, timeAgo, sharedImageInfo, STATUS_LABEL_TEAM } from '../feedbackApi';
 import { tileImageForView } from '../tileSync';
 
 // Team Ansicht "Kunden-Feedback": alles, was Kunden in der Customer Preview
@@ -187,6 +187,14 @@ export default function FeedbackPanel({ store, shareToken, customerUrl, onClose,
                       <button className="btn" style={{ fontSize: 11, padding: '3px 9px' }} onClick={function() { onJump(g.first); }}>Zur Kachel</button>
                     )}
                   </div>
+                  {!isStore && (function() {
+                    var sh = sharedImageInfo(store, g.first);
+                    return sh ? (
+                      <div style={{ fontSize: 12, color: '#047857', background: '#ecfdf5', border: '1px solid #a7f3d0', borderRadius: 6, padding: '4px 8px', marginBottom: 4 }}>
+                        Dasselbe Bild wird auch hier verwendet: {sh.others.join('; ')}. Wer das Bild ersetzt, ersetzt es überall.
+                      </div>
+                    ) : null;
+                  })()}
                   {g.list.map(function(it) {
                     var c = chipColors(it.status);
                     var disabled = busy === it.id;

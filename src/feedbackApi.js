@@ -85,3 +85,25 @@ export function timeAgo(s) {
   if (days < 14) return 'vor ' + days + (days === 1 ? ' Tag' : ' Tagen');
   return d.toLocaleDateString('de-DE');
 }
+
+// Wird das Bild einer Kachel (gleiche imageRef) noch an anderen Stellen verwendet?
+// Gibt { imageRef, others: ["Seite · Abschnitt 2 · Kachel 1", ...] } zurueck, sonst null.
+export function sharedImageInfo(store, item) {
+  if (!store || !item || item.scope === 'store') return null;
+  var page = (store.pages || []).find(function(p) { return p.id === item.pageId; });
+  var section = page && (page.sections || []).find(function(sec) { return sec.id === item.sectionId; });
+  var tile = section && section.tiles ? section.tiles[item.tileIndex] : null;
+  if (!tile || !tile.imageRef) return null;
+  var ref = String(tile.imageRef).toLowerCase();
+  var others = [];
+  (store.pages || []).forEach(function(pg) {
+    (pg.sections || []).forEach(function(sec, si) {
+      (sec.tiles || []).forEach(function(t, ti) {
+        if (!t || !t.imageRef || String(t.imageRef).toLowerCase() !== ref) return;
+        if (pg.id === item.pageId && sec.id === item.sectionId && ti === item.tileIndex) return;
+        others.push((pg.name || 'Seite') + ' · Abschnitt ' + (si + 1) + ' · Kachel ' + (ti + 1));
+      });
+    });
+  });
+  return others.length ? { imageRef: tile.imageRef, others: others } : null;
+}
