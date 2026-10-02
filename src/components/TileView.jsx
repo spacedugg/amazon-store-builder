@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { PRODUCT_TILE_TYPES, TILE_TYPE_LABELS } from '../constants';
 import { t } from '../i18n';
 import Wireframe from './Wireframe';
+import { tileImageForView } from '../tileSync';
 
 // Entfernt eventuell noch in alten Stores vorhandene **WORT** Marker, ohne
 // sie zu rendern. Headlines werden ohne jede Inline Formatierung angezeigt.
@@ -333,7 +334,7 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
   }
 
   if (tile.type === 'image_text') {
-    var img = previewImageSrc || ((viewMode === 'mobile' ? tile.uploadedImageMobile : tile.uploadedImage) || tile.uploadedImage);
+    var img = previewImageSrc || (viewMode === 'mobile' ? tileImageForView(tile, true) : tile.uploadedImage);
     return (
       <div className={cls} onClick={onClick} style={Object.assign({ position: 'relative' }, bgColor ? { background: bgColor } : {})}>
         {img
@@ -348,7 +349,7 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
   }
 
   // image or shoppable_image
-  var imgSrc = previewImageSrc || ((viewMode === 'mobile' ? tile.uploadedImageMobile : tile.uploadedImage) || tile.uploadedImage);
+  var imgSrc = previewImageSrc || (viewMode === 'mobile' ? tileImageForView(tile, true) : tile.uploadedImage);
   // Effective list shown on shoppable images: stored hotspots, or one
   // default per linked product when none have been positioned yet.
   var shoppableHotspots = tile.type === 'shoppable_image' ? effectiveShoppableHotspots(tile) : [];

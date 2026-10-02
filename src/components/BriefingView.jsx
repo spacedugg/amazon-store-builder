@@ -4,34 +4,11 @@ import { loadStoreByShareToken, saveStore } from '../storage';
 import { translateStoreForDesigner } from '../translateBriefing';
 import SectionView, { getGridConfig } from './SectionView';
 import { AmazonProductGrid } from './CustomerPreview';
+import { isSameAspectRatio, tileEffectivelySynced, tileImageForView } from '../tileSync';
 
 var noop = function() {};
 
-// ─── ASPECT RATIO HELPER ───
-// Returns true if desktop and mobile dimensions have the same aspect ratio
-// (e.g. 3000x1500 and 1500x750 are both 2:1, or 1000x1000 and 500x500 are both 1:1)
-function isSameAspectRatio(deskDims, mobDims) {
-  if (!deskDims || !mobDims) return false;
-  if (deskDims.w === mobDims.w && deskDims.h === mobDims.h) return true;
-  // Compare ratios with tolerance for floating point
-  var deskRatio = deskDims.w / deskDims.h;
-  var mobRatio = mobDims.w / mobDims.h;
-  return Math.abs(deskRatio - mobRatio) < 0.01;
-}
-
-// A tile is effectively synced (only one image needed) when:
-// - syncDimensions flag is explicitly set, OR
-// - mobile dimensions are absent (mobile inherits desktop), OR
-// - desktop and mobile dimensions share the same aspect ratio.
-// Without this, a tile whose desktop and mobile dims happen to be identical
-// but whose syncDimensions checkbox is unchecked would expect two separate
-// files and report 50 percent missing.
-function tileEffectivelySynced(tile) {
-  if (!tile) return false;
-  if (tile.syncDimensions) return true;
-  if (!tile.mobileDimensions) return true;
-  return isSameAspectRatio(tile.dimensions, tile.mobileDimensions);
-}
+// Aspect Ratio und Sync Regeln liegen in ../tileSync.js (auch vom Editor und der Customer Preview genutzt).
 
 // ─── META DESCRIPTION GENERATOR ───
 // Generates SEO-optimized meta descriptions for Amazon Brand Store pages.
@@ -1262,6 +1239,18 @@ function PreviewMode({ store, onClose }) {
     return imageMap[fn] || null;
   }
 
+  // Welche Datei gehoert zur Ansicht `mode`? Die Datei der eigenen Ansicht
+  // gewinnt immer (auch bei Kacheln mit gleichem Format, fuer die der Designer
+  // trotzdem eine eigene _mobile Datei geliefert hat). Danach die geteilte
+  // Datei ohne Suffix. Die Datei der ANDEREN Ansicht springt nur ein, wenn
+  // beide Formate gleich sind; sonst wuerde Mobil das Desktop Bild zeigen.
+  function pickTileFile(pageName, sectionIndex, tileIndex, tile, mode) {
+    var other = mode === 'desktop' ? 'mobile' : 'desktop';
+    return findTileImage(pageName, sectionIndex, tileIndex, mode)
+      || findTileImage(pageName, sectionIndex, tileIndex, 'sync')
+      || (tileEffectivelySynced(tile) ? findTileImage(pageName, sectionIndex, tileIndex, other) : null);
+  }
+
   // Close more popup on outside click
   useEffect(function() {
     if (!moreOpen) return;
@@ -1339,16 +1328,8 @@ function PreviewMode({ store, onClose }) {
 
   var heroImgSrc = null;
   if (heroTile && heroPageName) {
-    if (tileEffectivelySynced(heroTile)) {
-      heroImgSrc = findTileImage(heroPageName, heroSecIdx, heroTileIdx, 'sync')
-        || findTileImage(heroPageName, heroSecIdx, heroTileIdx, 'desktop')
-        || findTileImage(heroPageName, heroSecIdx, heroTileIdx, 'mobile');
-    } else {
-      heroImgSrc = findTileImage(heroPageName, heroSecIdx, heroTileIdx, pvMode);
-      if (!heroImgSrc) heroImgSrc = findTileImage(heroPageName, heroSecIdx, heroTileIdx, pvMode === 'desktop' ? 'mobile' : 'desktop');
-      if (!heroImgSrc) heroImgSrc = findTileImage(heroPageName, heroSecIdx, heroTileIdx, 'sync');
-    }
-    if (!heroImgSrc) heroImgSrc = pvMode === 'desktop' ? (heroTile.uploadedImage || null) : (heroTile.uploadedImageMobile || heroTile.uploadedImage || null);
+    heroImgSrc = pickTileFile(heroPageName, heroSecIdx, heroTileIdx, heroTile, pvMode)
+      || tileImageForView(heroTile, pvMode === 'mobile');
   }
 
   var isMobile = pvMode === 'mobile';
@@ -1597,15 +1578,7 @@ function PreviewMode({ store, onClose }) {
                       // Only show name-matched images from loaded folders — never show editor-uploaded images
                       var matchedImgSrc = null;
                       if (!isProduct && tile.type !== 'text' && tile.type !== 'product_selector') {
-                        if (tileEffectivelySynced(tile)) {
-                          matchedImgSrc = findTileImage(activePg.name, si, ti, 'sync')
-                            || findTileImage(activePg.name, si, ti, 'desktop')
-                            || findTileImage(activePg.name, si, ti, 'mobile');
-                        } else {
-                          matchedImgSrc = findTileImage(activePg.name, si, ti, pvMode);
-                          if (!matchedImgSrc) matchedImgSrc = findTileImage(activePg.name, si, ti, pvMode === 'desktop' ? 'mobile' : 'desktop');
-                          if (!matchedImgSrc) matchedImgSrc = findTileImage(activePg.name, si, ti, 'sync');
-                        }
+                        matchedImgSrc = pickTileFile(activePg.name, si, ti, tile, pvMode);
                       }
 
                       // Click target: subpage link wins over ASIN link
