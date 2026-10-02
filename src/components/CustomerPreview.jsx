@@ -5,6 +5,8 @@ import { loadStoreByShareToken, loadStoreBySlug } from '../storage';
 import { getGridConfig } from './SectionView';
 import { tileImageForView } from '../tileSync';
 import { effectiveShoppableHotspots } from '../hotspots';
+import { FeedbackBar, FeedbackTileLayer, FeedbackDialog } from './CustomerFeedback';
+import { loadFeedback, sendFeedback, tileKey } from '../feedbackApi';
 
 // Customer facing preview. Erreichbar unter /customer/<shareToken>.
 // Zeigt den Brand Store so, wie er fertig auf Amazon aussehen wuerde:
@@ -625,7 +627,7 @@ function CustomerTile({ tile, products, marketplace, isMobile, pages, setActiveP
   );
 }
 
-function CustomerSection({ section, products, marketplace, isMobile, pages, setActivePage }) {
+function CustomerSection({ section, products, marketplace, isMobile, pages, setActivePage, fb, pageId, pageName, sectionIndex }) {
   var layout = findLayout(section.layoutId);
   if (!layout) return null;
   var config = getGridConfig(layout, isMobile);
@@ -684,9 +686,16 @@ function CustomerSection({ section, products, marketplace, isMobile, pages, setA
             setActivePage={setActivePage}
           />
         );
+        // Feedback Modus: transparente Ebene ueber der Kachel, ein Klick oeffnet das Feedback Fenster
+        var fbCount = fb ? fb.countFor(pageId, section.id, ti) : 0;
         return (
           <div key={ti} style={tileStyle}>
             {content}
+            {fb && fb.on && (
+              <FeedbackTileLayer count={fbCount}
+                label={'Feedback zu Abschnitt ' + (sectionIndex + 1) + ', Kachel ' + (ti + 1)}
+                onOpen={function() { fb.open({ scope: 'tile', pageId: pageId, pageName: pageName, sectionId: section.id, sectionIndex: sectionIndex, tileIndex: ti }); }} />
+            )}
           </div>
         );
       })}
@@ -764,6 +773,26 @@ export default function CustomerPreview() {
     return function() { document.removeEventListener('mousedown', handleClick); };
   }, [moreOpen]);
 
+  // ─── KUNDEN FEEDBACK ───
+  // Der Kunde klickt eine Kachel an und schreibt, was geaendert werden soll.
+  // ?nofeedback=1 blendet alles aus (zum Beispiel fuer die interne Ansicht).
+  var feedbackEnabled = !/[?&]nofeedback=1(&|$)/.test(window.location.search);
+  var feedbackRef = mode === 'slug' ? { slug: identifier } : { shareToken: identifier };
+  var [feedbackOn, setFeedbackOn] = useState(true);
+  var [feedbackItems, setFeedbackItems] = useState([]);
+  var [feedbackDialog, setFeedbackDialog] = useState(null);
+
+  function refreshFeedback() {
+    if (!feedbackEnabled || !identifier || !mode) return;
+    loadFeedback(feedbackRef).then(function(r) { setFeedbackItems((r && r.items) || []); }).catch(function() { /* stilles Nachladen */ });
+  }
+  useEffect(function() {
+    refreshFeedback();
+    function onVisible() { if (document.visibilityState === 'visible') refreshFeedback(); }
+    document.addEventListener('visibilitychange', onVisible);
+    return function() { document.removeEventListener('visibilitychange', onVisible); };
+  }, [identifier, mode]);
+
   if (loading) {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff', color: '#565959', fontSize: 14 }}>
@@ -795,6 +824,40 @@ export default function CustomerPreview() {
   var overflowTabs = topPages.slice(MAX_NAV_TABS);
   var storeWidth = isMobile ? 420 : 1500;
 
+  // Was die Kacheln fuers Feedback brauchen
+  var fb = feedbackEnabled ? {
+    on: feedbackOn,
+    countFor: function(pageId, sectionId, tileIndex) {
+      var key = tileKey(pageId, sectionId, tileIndex);
+      return feedbackItems.filter(function(it) { return it.scope === 'tile' && tileKey(it.pageId, it.sectionId, it.tileIndex) === key; }).length;
+    },
+    open: function(target) { setFeedbackDialog(target); },
+  } : null;
+  var generalCount = feedbackItems.filter(function(it) { return it.scope === 'store'; }).length;
+
+  function dialogInfo(target) {
+    if (target.scope === 'store') {
+      return { title: 'Allgemeines Feedback', subtitle: 'Alles, was nicht zu einer bestimmten Kachel gehört.' };
+    }
+    return {
+      title: 'Feedback zu dieser Kachel',
+      subtitle: 'Seite „' + target.pageName + '“ · Abschnitt ' + (target.sectionIndex + 1) + ' · Kachel ' + (target.tileIndex + 1) + (isMobile ? ' · Mobil' : ' · Desktop'),
+    };
+  }
+  function dialogItems(target) {
+    if (target.scope === 'store') return feedbackItems.filter(function(it) { return it.scope === 'store'; });
+    var key = tileKey(target.pageId, target.sectionId, target.tileIndex);
+    return feedbackItems.filter(function(it) { return it.scope === 'tile' && tileKey(it.pageId, it.sectionId, it.tileIndex) === key; });
+  }
+  async function submitFeedback(target, extra) {
+    var r = await sendFeedback(feedbackRef, Object.assign({
+      scope: target.scope, pageId: target.pageId || '', pageName: target.pageName || '',
+      sectionId: target.sectionId || '', sectionIndex: target.sectionIndex || 0, tileIndex: target.tileIndex || 0,
+      viewMode: isMobile ? 'mobile' : 'desktop',
+    }, extra));
+    if (r && r.item) setFeedbackItems(function(prev) { return prev.concat([r.item]); });
+  }
+
   function setActivePage(pid) {
     setActivePageId(pid);
     setHoveredTab(null);
@@ -808,6 +871,16 @@ export default function CustomerPreview() {
     // feste Hoehe und eigenes overflow auto, damit Hero, Nav und Sections
     // erreichbar bleiben.
     <div ref={scrollContainerRef} style={{ height: '100vh', background: '#fff', display: 'flex', flexDirection: 'column', overflowY: 'auto', overflowX: 'hidden' }}>
+      {feedbackEnabled && (
+        <FeedbackBar on={feedbackOn} isMobile={isMobile} count={generalCount}
+          onToggle={function() { setFeedbackOn(!feedbackOn); }}
+          onGeneral={function() { setFeedbackDialog({ scope: 'store' }); }} />
+      )}
+      {feedbackDialog && (
+        <FeedbackDialog target={dialogInfo(feedbackDialog)} items={dialogItems(feedbackDialog)}
+          onClose={function() { setFeedbackDialog(null); }}
+          onSubmit={function(extra) { return submitFeedback(feedbackDialog, extra); }} />
+      )}
       {/* ─── DEVICE TOGGLE (subtil, oben rechts, schliesst sich beim Klick auf den Store) ─── */}
       <div style={{ position: 'fixed', top: 10, right: 10, zIndex: 100, display: 'flex', gap: 4, background: 'rgba(15,23,42,.85)', padding: 4, borderRadius: 6, boxShadow: '0 2px 8px rgba(0,0,0,.18)' }}>
         <button onClick={function() { setViewMode('desktop'); }}
@@ -910,6 +983,7 @@ export default function CustomerPreview() {
             {activePage && (activePage.sections || []).map(function(sec) {
               return (
                 <CustomerSection key={sec.id}
+                  fb={fb} pageId={activePage.id} pageName={activePage.name} sectionIndex={(activePage.sections || []).indexOf(sec)}
                   section={sec}
                   products={store.products || []}
                   marketplace={marketplace}

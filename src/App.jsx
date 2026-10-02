@@ -13,6 +13,8 @@ import NewStoreModal from './components/NewStoreModal';
 import PatchImportModal from './components/PatchImportModal';
 import JsonExportModal from './components/JsonExportModal';
 import LinkDialog from './components/LinkDialog';
+import FeedbackPanel from './components/FeedbackPanel';
+import { loadFeedback } from './feedbackApi';
 import PriceCalculator from './components/PriceCalculator';
 import ExportModal from './components/ExportModal';
 import BriefingView from './components/BriefingView';
@@ -231,12 +233,31 @@ export default function App() {
   var [showExport, setShowExport] = useState(false);
   // Link/Fehler Dialog fuer Customer Link und Export (statt alert/prompt, siehe LinkDialog.jsx)
   var [linkDialog, setLinkDialog] = useState(null);
+  // Kunden Feedback: Panel + Zaehler der neuen Eintraege (rote Zahl im Topbar)
+  var [showFeedback, setShowFeedback] = useState(false);
+  var [feedbackNew, setFeedbackNew] = useState(0);
   var [showPatchImport, setShowPatchImport] = useState(false);
   var [showJsonExport, setShowJsonExport] = useState(false);
   var [showAsinOverview, setShowAsinOverview] = useState(false);
 
   var [storeId, setStoreId] = useState(null);
   var [shareToken, setShareToken] = useState(null);
+
+  // Zaehler fuer neues Kunden Feedback: beim Start, jede Minute und wenn der Tab wieder Fokus bekommt
+  useEffect(function() {
+    if (!shareToken) { setFeedbackNew(0); return; }
+    var stopped = false;
+    function poll() {
+      loadFeedback({ shareToken: shareToken }, { summary: 1 }).then(function(c) {
+        if (!stopped && c) setFeedbackNew(Number(c.neu) || 0);
+      }).catch(function() { /* stilles Nachladen */ });
+    }
+    poll();
+    var t = setInterval(poll, 60000);
+    function onVis() { if (document.visibilityState === 'visible') poll(); }
+    document.addEventListener('visibilitychange', onVis);
+    return function() { stopped = true; clearInterval(t); document.removeEventListener('visibilitychange', onVis); };
+  }, [shareToken]);
   var headerBannerInputRef = useRef(null);
   var folderInputRef = useRef(null);
 
@@ -1912,6 +1933,8 @@ export default function App() {
           setStoreWithUndo(function(s) { return Object.assign({}, s, { brandName: name }); });
         }}
         onCopyCustomerLink={store.pages.length > 0 ? handleCopyCustomerLink : null}
+        onShowFeedback={store.pages.length > 0 ? function() { setShowFeedback(true); } : null}
+        feedbackNew={feedbackNew}
         customerSaveProgress={customerSaveProgress}
         folderUploadProgress={folderUploadProgress}
         onShowJsonExport={store.pages.length > 0 ? function() { setShowJsonExport(true); } : null}
@@ -2040,6 +2063,14 @@ export default function App() {
           store={store}
           currentPageId={curPage}
         />
+      )}
+
+      {showFeedback && (
+        <FeedbackPanel store={store} shareToken={shareToken}
+          customerUrl={shareToken ? shareBaseUrl() + (brandToSlug(store.brandName) ? '/' + brandToSlug(store.brandName) : '/customer/' + shareToken) : ''}
+          onClose={function() { setShowFeedback(false); }}
+          onChanged={function(list) { setFeedbackNew((list || []).filter(function(it) { return it.status === 'neu'; }).length); }}
+          onJump={function(item) { setCurPage(item.pageId); setSel({ sid: item.sectionId, ti: item.tileIndex }); setShowFeedback(false); }} />
       )}
 
       {linkDialog && (

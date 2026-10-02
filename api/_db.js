@@ -34,6 +34,30 @@ async function migrate() {
     {
       sql: `CREATE INDEX IF NOT EXISTS idx_stores_share_token ON stores(share_token)`,
     },
+    // Kunden Feedback: Kommentare, die Kunden in der Customer Preview an
+    // Kacheln hinterlassen (siehe api/feedback.js).
+    {
+      sql: `CREATE TABLE IF NOT EXISTS feedback (
+        id TEXT PRIMARY KEY,
+        store_id TEXT NOT NULL,
+        scope TEXT NOT NULL DEFAULT 'tile',
+        page_id TEXT DEFAULT '',
+        page_name TEXT DEFAULT '',
+        section_id TEXT DEFAULT '',
+        section_index INTEGER DEFAULT 0,
+        tile_index INTEGER DEFAULT 0,
+        view_mode TEXT DEFAULT 'desktop',
+        author TEXT DEFAULT '',
+        text TEXT NOT NULL,
+        status TEXT NOT NULL DEFAULT 'neu',
+        forwarded INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT DEFAULT (datetime('now')),
+        updated_at TEXT DEFAULT (datetime('now'))
+      )`,
+    },
+    {
+      sql: `CREATE INDEX IF NOT EXISTS idx_feedback_store ON feedback(store_id, created_at)`,
+    },
   ]);
   // Reference stores knowledge base table
   await db.batch([

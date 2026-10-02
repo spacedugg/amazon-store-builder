@@ -18,7 +18,7 @@ function BrandNameField({ value, onChange }) {
     background: focused ? '#fff' : 'transparent',
     border: '1px solid ' + (focused ? '#cbd5e1' : 'transparent'),
     borderRadius: 4, padding: '2px 6px',
-    font: 'inherit', fontWeight: 600, color: '#0f172a',
+    font: 'inherit', fontWeight: 600, color: focused ? '#0f172a' : 'inherit',
     minWidth: 80, maxWidth: 220,
   };
   return (
@@ -47,6 +47,36 @@ function AutoSaveBadge({ status, hasShareToken }) {
   return <span style={{ fontSize: 10, color: '#9ca3af', marginRight: 6 }}>Auto</span>;
 }
 
+// Selten gebrauchte Funktionen verstecken sich hier, damit die Leiste ruhig bleibt.
+function MoreMenu({ items }) {
+  var [open, setOpen] = useState(false);
+  var [alignLeft, setAlignLeft] = useState(false);
+  var list = items.filter(Boolean);
+  return (
+    <div style={{ position: 'relative', flexShrink: 0 }}>
+      <button className="btn" onClick={function(e) { setAlignLeft(e.currentTarget.getBoundingClientRect().left < 240); setOpen(!open); }} title="Weitere Funktionen" aria-haspopup="menu" aria-expanded={open}>Mehr &#9662;</button>
+      {open && (
+        <>
+          <div onClick={function() { setOpen(false); }} style={{ position: 'fixed', inset: 0, zIndex: 150 }} />
+          <div role="menu" style={{ position: 'absolute', [alignLeft ? 'left' : 'right']: 0, top: '100%', marginTop: 6, zIndex: 151, background: '#fff', border: '1px solid #e2e8f0', borderRadius: 10, boxShadow: '0 8px 24px rgba(0,0,0,.18)', padding: 6, minWidth: 230 }}>
+            {list.map(function(it, i) {
+              return (
+                <button key={i} role="menuitem" onClick={function() { setOpen(false); it.onClick(); }}
+                  style={{ display: 'block', width: '100%', textAlign: 'left', background: 'transparent', border: 'none', borderRadius: 6, padding: '7px 10px', cursor: 'pointer', fontFamily: 'inherit', color: it.danger ? '#dc2626' : '#1e293b' }}
+                  onMouseEnter={function(e) { e.currentTarget.style.background = '#f1f5f9'; }}
+                  onMouseLeave={function(e) { e.currentTarget.style.background = 'transparent'; }}>
+                  <div style={{ fontSize: 12, fontWeight: 600 }}>{it.label}</div>
+                  {it.hint && <div style={{ fontSize: 10.5, color: '#94a3b8', marginTop: 1 }}>{it.hint}</div>}
+                </button>
+              );
+            })}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 function formatCustomerProgress(p) {
   if (!p) return '';
   if (p.stage === 'extract') return 'Bilder extrahieren...';
@@ -61,7 +91,7 @@ function formatCustomerProgress(p) {
   return 'Speichere...';
 }
 
-export default function Topbar({ store, shareToken, onExport, onSave, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress, folderUploadProgress, onChangeBrandName }) {
+export default function Topbar({ store, shareToken, onExport, onSave, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress, folderUploadProgress, onChangeBrandName, onShowFeedback, feedbackNew }) {
   var folderProgressLabel = '';
   if (folderUploadProgress) {
     folderProgressLabel = 'Bilder ' + (folderUploadProgress.uploaded || 0) + ' / ' + folderUploadProgress.total;
@@ -76,11 +106,6 @@ export default function Topbar({ store, shareToken, onExport, onSave, onShowJson
       {onChangeBrandName ? (
         <div className="topbar-info" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <BrandNameField value={store.brandName || ''} onChange={onChangeBrandName} />
-          {((store.products || []).length > 0 || (store.pages || []).length > 0) && (
-            <span style={{ fontSize: 10, color: '#94a3b8' }}>
-              {(store.products || []).length} products &middot; {(store.pages || []).length} pages
-            </span>
-          )}
         </div>
       ) : store.brandName && (
         <div className="topbar-info">
@@ -101,18 +126,8 @@ export default function Topbar({ store, shareToken, onExport, onSave, onShowJson
             </button>
           </div>
 
-          <button className="btn" onClick={onUndo} disabled={!canUndo} title="Undo (Ctrl+Z)">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="1 4 1 10 7 10" />
-              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
-            </svg>
-          </button>
-          <button className="btn" onClick={onRedo} disabled={!canRedo} title="Redo (Ctrl+Shift+Z)">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="23 4 23 10 17 10" />
-              <path d="M20.49 15a9 9 0 1 1-2.13-9.36L23 10" />
-            </svg>
-          </button>
+          <button className="btn" onClick={onUndo} disabled={!canUndo} title="Rückgängig (Strg+Z)">&#8630;</button>
+          <button className="btn" onClick={onRedo} disabled={!canRedo} title="Wiederholen (Strg+Umschalt+Z)">&#8631;</button>
           {onFolderImageUpload && (
             <>
               <input type="file" ref={folderInputRef} style={{ display: 'none' }} webkitdirectory="" directory="" multiple
@@ -120,42 +135,40 @@ export default function Topbar({ store, shareToken, onExport, onSave, onShowJson
               <button className="btn btn-folder"
                 onClick={function() { folderInputRef.current && folderInputRef.current.click(); }}
                 disabled={!!folderUploadProgress}
-                title={folderUploadProgress ? 'Lade Bilder nach Vercel Blob hoch' : 'Bilder Ordner hochladen. Jedes Bild geht direkt in den Cloud Speicher, der Store ist danach sofort bereit fuer Customer.'}
-                style={{ background: '#f59e0b', color: '#fff', border: 'none', minWidth: folderUploadProgress ? 130 : undefined, paddingLeft: folderUploadProgress ? 10 : undefined, paddingRight: folderUploadProgress ? 10 : undefined, fontSize: 11 }}>
-                {folderUploadProgress ? folderProgressLabel : (
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" /></svg>
-                )}
+                title="Ordner mit fertigen Bildern hochladen. Die Bilder gehen direkt in den Cloud Speicher, danach ist der Store bereit für den Kunden."
+                style={{ background: '#f59e0b', color: '#fff', border: 'none' }}>
+                {folderUploadProgress ? folderProgressLabel : 'Bilder hochladen'}
               </button>
             </>
           )}
-          {onRemoveAllImages && (
-            <button className="btn" onClick={onRemoveAllImages} title="Remove all images" style={{ fontSize: 10, padding: '4px 8px' }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
-            </button>
-          )}
+          <span className="topbar-sep" />
           <AutoSaveBadge status={autoSaveStatus} hasShareToken={hasShareToken} />
-          <button className="btn btn-green" onClick={onSave} title="Store im Backend speichern">Save</button>
-          {onShowJsonExport && (
-            <button className="btn" onClick={onShowJsonExport} title="Store als JSON Datei runterladen. Zwei Use Cases: lokales Backup ODER kompletter Refactor mit KI (Skill Refactor Mode, alle Pages werden nach aktuellen Skill Regeln neu generiert)." style={{ fontSize: 11 }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: 'middle', marginRight: 3 }}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
-              JSON / Refactor
-            </button>
-          )}
-          <button className="btn btn-primary" onClick={onExport} title="Designer Briefing als DOCX exportieren oder Share Link generieren">Export</button>
+          <button className="btn btn-green" onClick={onSave} title="Store im Backend speichern">Speichern</button>
+          <span className="topbar-sep" />
+          <button className="btn btn-primary" onClick={onExport} title="Briefing für den Designer: Share Link erzeugen oder als DOCX exportieren">Designer</button>
           <button className="btn btn-customer" onClick={onCopyCustomerLink}
             disabled={!onCopyCustomerLink || !!customerSaveProgress}
-            title="Speichert den Store inkl. hochgeladenen Bildern und kopiert den Customer Preview Link. Premium Amazon Brand Store Vorschau ohne Designer Tools, ideal fuer Unternehmenskunden."
-            style={{ fontSize: 11, background: '#0F1111', color: '#fff', borderColor: '#0F1111', minWidth: customerSaveProgress ? 140 : undefined }}>
-            {customerSaveProgress ? formatCustomerProgress(customerSaveProgress) : 'Customer'}
+            title="Speichert den Store samt Bildern und zeigt den Link für den Kunden zum Kopieren."
+            style={{ background: '#0F1111', color: '#fff', borderColor: '#0F1111' }}>
+            {customerSaveProgress ? formatCustomerProgress(customerSaveProgress) : 'Kunden-Link'}
           </button>
-          {onShowAsinOverview && (
-            <button className="btn" onClick={onShowAsinOverview} title="ASIN Übersicht aller Stores plus BSR Sortierung" style={{ fontSize: 11 }}>ASINs</button>
+          {onShowFeedback && (
+            <button className="btn" onClick={onShowFeedback}
+              title="Feedback, das der Kunde in der Vorschau hinterlassen hat">
+              Feedback
+              {feedbackNew > 0 && (
+                <span style={{ marginLeft: 6, background: '#dc2626', color: '#fff', borderRadius: 9, minWidth: 18, height: 18, padding: '0 5px', boxSizing: 'border-box', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 700 }}>{feedbackNew > 99 ? '99+' : feedbackNew}</span>
+              )}
+            </button>
           )}
-          <button className="btn" onClick={onShowPrice} title="Preis Kalkulator" style={{ fontSize: 11 }}>&#128176;</button>
-          {onPatchImport && (
-            <button className="btn" onClick={onPatchImport} title="Patch Mode: kleine Änderung am Store mit KI. Claude generiert Operationen (Section ergänzen, Tile ändern), die additiv auf den bestehenden Store angewendet werden. Bestehende Edits bleiben erhalten." style={{ fontSize: 11 }}>+ Snippet (Patch)</button>
-          )}
-          <button className="btn" onClick={onNewStore} title="Neuen Store von Grund auf erstellen, bestehender Store wird ersetzt">New Store</button>
+          <MoreMenu items={[
+            onShowJsonExport && { label: 'JSON / Refactor', hint: 'Backup als Datei oder Umbau mit KI', onClick: onShowJsonExport },
+            onPatchImport && { label: '+ Snippet (Patch)', hint: 'Kleine Änderung per KI einspielen', onClick: onPatchImport },
+            onShowAsinOverview && { label: 'ASIN Übersicht', hint: 'Alle Stores, sortiert nach BSR', onClick: onShowAsinOverview },
+            { label: 'Preis-Kalkulator', onClick: onShowPrice },
+            onRemoveAllImages && { label: 'Alle Bilder entfernen', danger: true, onClick: onRemoveAllImages },
+            { label: 'Neuer Store', hint: 'Ersetzt den aktuellen Store', danger: true, onClick: onNewStore },
+          ]} />
         </>
       )}
 

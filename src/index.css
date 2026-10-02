@@ -584,3 +584,13 @@ html.embed .input:focus { border-color: #423CE0; box-shadow: 0 0 0 3px rgba(66,6
 html.embed .view-toggle-btn:hover { color: #423CE0; background: #EDECFC; }
 html.embed .canvas-empty .empty-icon, html.embed .canvas-empty .empty-title { display: none; }
 html.embed .canvas-empty { padding-top: 120px; }
+
+/* Topbar: Knoepfe werden nie zusammengequetscht, bei wenig Platz bricht die Leiste um */
+.topbar { height: auto; min-height: 52px; flex-wrap: wrap; row-gap: 6px; padding-top: 6px; padding-bottom: 6px; }
+.topbar .btn, .view-toggle, .view-toggle-btn { flex-shrink: 0; white-space: nowrap; }
+.topbar-info { min-width: 0; flex-shrink: 1; }
+.topbar-sep { width: 1px; height: 22px; background: rgba(255,255,255,.14); flex-shrink: 0; }
+html.embed .topbar-sep { background: #E3DED1; }
+.topbar { gap: 6px; padding-left: 14px; padding-right: 14px; }
+.topbar .btn { padding: 6px 10px; }
+.topbar-brand-name input { max-width: 150px !important; }
