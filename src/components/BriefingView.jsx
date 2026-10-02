@@ -5,6 +5,7 @@ import { translateStoreForDesigner } from '../translateBriefing';
 import SectionView, { getGridConfig } from './SectionView';
 import { AmazonProductGrid, ShoppableHotspot } from './CustomerPreview';
 import { effectiveShoppableHotspots } from '../hotspots';
+import { generateMetaDescription, metaDescriptionIssues, META_MAX } from '../metaDescription';
 import { loadFeedback, updateFeedback, sharedImageInfo, tileKey as fbTileKey } from '../feedbackApi';
 import { isSameAspectRatio, tileEffectivelySynced, tileImageForView } from '../tileSync';
 
@@ -12,137 +13,7 @@ var noop = function() {};
 
 // Aspect Ratio und Sync Regeln liegen in ../tileSync.js (auch vom Editor und der Customer Preview genutzt).
 
-// ─── META DESCRIPTION GENERATOR ───
-// Generates SEO-optimized meta descriptions for Amazon Brand Store pages.
-// Max 155 chars, front-loads brand + primary keywords within first 120 chars.
-function generateMetaDescription(page, store) {
-  var brand = store.brandName || 'Brand';
-  var marketplace = store.marketplace || 'de';
-  var products = store.products || [];
-  var pageName = page.name || '';
-  var isHomepage = pageName.toLowerCase() === 'homepage' || pageName.toLowerCase() === 'home';
-
-  // Collect ASINs used on this page
-  var pageAsins = {};
-  (page.sections || []).forEach(function(sec) {
-    (sec.tiles || []).forEach(function(tile) {
-      (tile.asins || []).forEach(function(a) { pageAsins[a] = true; });
-      if (tile.linkAsin) pageAsins[tile.linkAsin] = true;
-      (tile.hotspots || []).forEach(function(hs) { if (hs.asin) pageAsins[hs.asin] = true; });
-    });
-  });
-
-  // Get product names and categories for this page
-  var pageProducts = products.filter(function(p) { return pageAsins[p.asin]; });
-  var categories = {};
-  pageProducts.forEach(function(p) {
-    if (p.category) categories[p.category] = (categories[p.category] || 0) + 1;
-  });
-  var topCategories = Object.keys(categories).sort(function(a, b) { return categories[b] - categories[a]; }).slice(0, 3);
-
-  // Collect text overlays and CTA texts for keyword hints
-  var keywords = [];
-  (page.sections || []).forEach(function(sec) {
-    (sec.tiles || []).forEach(function(tile) {
-      var heading = (tile.textOverlay && typeof tile.textOverlay === 'object') ? (tile.textOverlay.heading || '') : '';
-      heading = heading.replace(/\*\*([^*]+)\*\*/g, '$1');
-      if (heading.length > 3 && heading.length < 60) {
-        keywords.push(heading);
-      }
-    });
-  });
-
-  // Determine page type for appropriate template
-  var lowerName = pageName.toLowerCase();
-  var isAbout = lowerName.indexOf('about') >= 0 || lowerName.indexOf('über') >= 0 || lowerName.indexOf('story') >= 0 || lowerName.indexOf('geschichte') >= 0;
-  var isBestseller = lowerName.indexOf('bestseller') >= 0 || lowerName.indexOf('best seller') >= 0 || lowerName.indexOf('top') >= 0;
-
-  var desc = '';
-
-  if (marketplace === 'de' || marketplace === 'at') {
-    // German meta descriptions
-    if (isHomepage) {
-      var catText = topCategories.length > 0 ? topCategories.slice(0, 2).join(', ') : 'Produkte';
-      desc = 'Entdecke ' + brand + ' auf Amazon: ' + catText;
-      if (store.heroMessage) {
-        desc += '. ' + store.heroMessage.replace(/["„"]/g, '').slice(0, 60);
-      } else if (keywords.length > 0) {
-        desc += '. ' + keywords[0].replace(/["„"]/g, '').slice(0, 50);
-      }
-      desc += '. Jetzt den offiziellen ' + brand + ' Store entdecken.';
-    } else if (isAbout) {
-      desc = 'Erfahre mehr über ' + brand;
-      if (store.brandTone) desc += ' — ' + store.brandTone;
-      desc += '. Unsere Geschichte, Werte und was uns antreibt. Jetzt auf Amazon entdecken.';
-    } else if (isBestseller) {
-      desc = 'Die beliebtesten ' + brand + ' Produkte auf Amazon. Top-bewertete Bestseller';
-      if (topCategories.length > 0) desc += ' aus ' + topCategories[0];
-      desc += '. Jetzt entdecken und bestellen.';
-    } else {
-      // Category page
-      desc = brand + ' ' + pageName + ' auf Amazon entdecken';
-      if (pageProducts.length > 0) {
-        desc += ': ' + pageProducts.length + ' Produkte';
-        if (topCategories.length > 0 && topCategories[0] !== pageName) desc += ' aus ' + topCategories[0];
-      }
-      if (keywords.length > 0) {
-        desc += '. ' + keywords[0].replace(/["„"]/g, '').slice(0, 50);
-      }
-      desc += '. Jetzt im offiziellen Store shoppen.';
-    }
-  } else if (marketplace === 'es') {
-    if (isHomepage) {
-      var catTextEs = topCategories.length > 0 ? topCategories.slice(0, 2).join(', ') : 'productos';
-      desc = 'Descubre ' + brand + ' en Amazon: ' + catTextEs + '. Explora nuestra colección completa en la tienda oficial.';
-    } else if (isAbout) {
-      desc = 'Conoce ' + brand + ': nuestra historia, valores y misión. Descubre la marca en Amazon.';
-    } else {
-      desc = 'Compra ' + brand + ' ' + pageName + ' en Amazon. ';
-      if (pageProducts.length > 0) desc += pageProducts.length + ' productos disponibles. ';
-      desc += 'Visita la tienda oficial ahora.';
-    }
-  } else {
-    // English (default)
-    if (isHomepage) {
-      var catTextEn = topCategories.length > 0 ? topCategories.slice(0, 2).join(', ') : 'products';
-      desc = 'Discover ' + brand + ' on Amazon: ' + catTextEn;
-      if (store.heroMessage) {
-        desc += '. ' + store.heroMessage.replace(/["„"]/g, '').slice(0, 60);
-      } else if (keywords.length > 0) {
-        desc += '. ' + keywords[0].replace(/["„"]/g, '').slice(0, 50);
-      }
-      desc += '. Shop the official ' + brand + ' store now.';
-    } else if (isAbout) {
-      desc = 'Learn about ' + brand;
-      if (store.brandTone) desc += ' — ' + store.brandTone;
-      desc += '. Our story, values, and what drives us. Discover more on Amazon.';
-    } else if (isBestseller) {
-      desc = 'Shop ' + brand + '\'s most popular products on Amazon. Top-rated bestsellers';
-      if (topCategories.length > 0) desc += ' in ' + topCategories[0];
-      desc += '. Browse and order now.';
-    } else {
-      desc = 'Shop ' + brand + ' ' + pageName + ' on Amazon';
-      if (pageProducts.length > 0) {
-        desc += ': ' + pageProducts.length + ' products';
-        if (topCategories.length > 0 && topCategories[0] !== pageName) desc += ' in ' + topCategories[0];
-      }
-      if (keywords.length > 0) {
-        desc += '. ' + keywords[0].replace(/["„"]/g, '').slice(0, 50);
-      }
-      desc += '. Visit the official store.';
-    }
-  }
-
-  // Truncate to 155 chars without cutting mid-word
-  if (desc.length > 155) {
-    desc = desc.slice(0, 155);
-    var lastSpace = desc.lastIndexOf(' ');
-    if (lastSpace > 120) desc = desc.slice(0, lastSpace);
-    if (!/[.!]$/.test(desc)) desc += '...';
-  }
-
-  return desc;
-}
+// Meta Descriptions: Generator und Regeln liegen in ../metaDescription.js (auch vom DOCX Export genutzt).
 
 // ─── INSPIRATION LIBRARY ───
 var INSPIRATION_LINKS = [
@@ -1777,7 +1648,8 @@ function MetaDescriptionsPanel({ pages, store }) {
               <span style={{ fontSize: 9, color: isCopied ? '#16a34a' : '#94a3b8', fontWeight: 600 }}>{isCopied ? 'Copied!' : 'Click to copy'}</span>
             </div>
             <div style={{ fontSize: 10, color: '#475569', lineHeight: 1.4, marginTop: 2 }}>{md}</div>
-            <div style={{ fontSize: 9, color: '#94a3b8', marginTop: 2 }}>{md.length}/155 chars</div>
+            <div style={{ fontSize: 9, color: '#94a3b8', marginTop: 2 }}>{md.length}/{META_MAX} chars</div>
+            {metaDescriptionIssues(md).length > 0 && <div style={{ fontSize: 9, color: '#b45309', marginTop: 2 }}>Check: {metaDescriptionIssues(md).join('; ')}</div>}
           </div>
         );
       })}
