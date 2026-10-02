@@ -32,7 +32,7 @@ export async function scrapeAsins(asins, domain) {
   }, SCRAPE_TIMEOUT_MS);
   if (!resp.ok) {
     var e = await resp.json().catch(function() { return {}; });
-    throw new Error(e.error || e.detail || 'Scrape failed');
+    throw new Error((e.error || 'Scrape failed') + (e.detail ? ' — ' + String(e.detail).slice(0, 200) : '') + (e.hint ? ' ' + e.hint : ''));
   }
   return resp.json();
 }
