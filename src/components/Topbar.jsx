@@ -80,6 +80,7 @@ function MoreMenu({ items }) {
 function formatCustomerProgress(p) {
   if (!p) return '';
   if (p.stage === 'extract') return 'Bilder extrahieren...';
+  if (p.stage === 'products') return 'Produktdaten ' + (p.done || 0) + ' / ' + (p.total || 0);
   if (p.stage === 'upload') {
     if (!p.total) return 'Store speichern...';
     var label = 'Bilder ' + (p.uploaded || 0) + ' / ' + p.total;
@@ -91,7 +92,7 @@ function formatCustomerProgress(p) {
   return 'Speichere...';
 }
 
-export default function Topbar({ store, shareToken, onExport, onSave, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onShowPrice, onShowAsinOverview, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress, folderUploadProgress, onChangeBrandName, onShowFeedback, feedbackNew }) {
+export default function Topbar({ store, shareToken, onExport, onSave, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onLoadProducts, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress, folderUploadProgress, onChangeBrandName, onShowFeedback, feedbackNew }) {
   var folderProgressLabel = '';
   if (folderUploadProgress) {
     folderProgressLabel = 'Bilder ' + (folderUploadProgress.uploaded || 0) + ' / ' + folderUploadProgress.total;
@@ -164,10 +165,8 @@ export default function Topbar({ store, shareToken, onExport, onSave, onShowJson
           <MoreMenu items={[
             onShowJsonExport && { label: 'JSON / Refactor', hint: 'Backup als Datei oder Umbau mit KI', onClick: onShowJsonExport },
             onPatchImport && { label: '+ Snippet (Patch)', hint: 'Kleine Änderung per KI einspielen', onClick: onPatchImport },
-            onShowAsinOverview && { label: 'ASIN Übersicht', hint: 'Alle Stores, sortiert nach BSR', onClick: onShowAsinOverview },
-            { label: 'Preis-Kalkulator', onClick: onShowPrice },
+            onLoadProducts && { label: 'Produktdaten laden', hint: 'Bild, Titel und Preis aller ASINs von Amazon holen', onClick: onLoadProducts },
             onRemoveAllImages && { label: 'Alle Bilder entfernen', danger: true, onClick: onRemoveAllImages },
-            { label: 'Neuer Store', hint: 'Ersetzt den aktuellen Store', danger: true, onClick: onNewStore },
           ]} />
         </>
       )}

@@ -2,7 +2,14 @@
 // Server siehe api/feedback.js.
 
 export var STATUS_LABEL_CUSTOMER = { neu: 'Gesendet', offen: 'In Bearbeitung', erledigt: 'Erledigt' };
-export var STATUS_LABEL_TEAM = { neu: 'Neu', offen: 'Übernommen', erledigt: 'Erledigt' };
+export var STATUS_LABEL_TEAM = { neu: 'Neu', offen: 'In Arbeit', erledigt: 'Erledigt' };
+
+// Anzahl neuer Eintraege je Store-Id, damit die Store Liste ohne Oeffnen einen Zaehler zeigen kann.
+export async function loadFeedbackCounts() {
+  var resp = await fetch('/api/feedback?counts=1');
+  var json = await readJson(resp);
+  return (json && json.counts) || {};
+}
 
 function qs(params) {
   return Object.keys(params).filter(function(k) { return params[k] != null && params[k] !== ''; })
@@ -77,4 +84,26 @@ export function timeAgo(s) {
   var days = Math.round(h / 24);
   if (days < 14) return 'vor ' + days + (days === 1 ? ' Tag' : ' Tagen');
   return d.toLocaleDateString('de-DE');
+}
+
+// Wird das Bild einer Kachel (gleiche imageRef) noch an anderen Stellen verwendet?
+// Gibt { imageRef, others: ["Seite · Abschnitt 2 · Kachel 1", ...] } zurueck, sonst null.
+export function sharedImageInfo(store, item) {
+  if (!store || !item || item.scope === 'store') return null;
+  var page = (store.pages || []).find(function(p) { return p.id === item.pageId; });
+  var section = page && (page.sections || []).find(function(sec) { return sec.id === item.sectionId; });
+  var tile = section && section.tiles ? section.tiles[item.tileIndex] : null;
+  if (!tile || !tile.imageRef) return null;
+  var ref = String(tile.imageRef).toLowerCase();
+  var others = [];
+  (store.pages || []).forEach(function(pg) {
+    (pg.sections || []).forEach(function(sec, si) {
+      (sec.tiles || []).forEach(function(t, ti) {
+        if (!t || !t.imageRef || String(t.imageRef).toLowerCase() !== ref) return;
+        if (pg.id === item.pageId && sec.id === item.sectionId && ti === item.tileIndex) return;
+        others.push((pg.name || 'Seite') + ' · Abschnitt ' + (si + 1) + ' · Kachel ' + (ti + 1));
+      });
+    });
+  });
+  return others.length ? { imageRef: tile.imageRef, others: others } : null;
 }

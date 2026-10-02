@@ -778,7 +778,7 @@ export default function CustomerPreview() {
   // ?nofeedback=1 blendet alles aus (zum Beispiel fuer die interne Ansicht).
   var feedbackEnabled = !/[?&]nofeedback=1(&|$)/.test(window.location.search);
   var feedbackRef = mode === 'slug' ? { slug: identifier } : { shareToken: identifier };
-  var [feedbackOn, setFeedbackOn] = useState(true);
+  var [feedbackOn, setFeedbackOn] = useState(false); // erst auf Wunsch des Kunden, nie aufdraengen
   var [feedbackItems, setFeedbackItems] = useState([]);
   var [feedbackDialog, setFeedbackDialog] = useState(null);
 
@@ -841,7 +841,7 @@ export default function CustomerPreview() {
     }
     return {
       title: 'Feedback zu dieser Kachel',
-      subtitle: 'Seite „' + target.pageName + '“ · Abschnitt ' + (target.sectionIndex + 1) + ' · Kachel ' + (target.tileIndex + 1) + (isMobile ? ' · Mobil' : ' · Desktop'),
+      subtitle: 'Seite „' + target.pageName + '“ · Abschnitt ' + (target.sectionIndex + 1) + ' · Kachel ' + (target.tileIndex + 1),
     };
   }
   function dialogItems(target) {
@@ -853,7 +853,6 @@ export default function CustomerPreview() {
     var r = await sendFeedback(feedbackRef, Object.assign({
       scope: target.scope, pageId: target.pageId || '', pageName: target.pageName || '',
       sectionId: target.sectionId || '', sectionIndex: target.sectionIndex || 0, tileIndex: target.tileIndex || 0,
-      viewMode: isMobile ? 'mobile' : 'desktop',
     }, extra));
     if (r && r.item) setFeedbackItems(function(prev) { return prev.concat([r.item]); });
   }

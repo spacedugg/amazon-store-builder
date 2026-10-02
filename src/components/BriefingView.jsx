@@ -5,144 +5,15 @@ import { translateStoreForDesigner } from '../translateBriefing';
 import SectionView, { getGridConfig } from './SectionView';
 import { AmazonProductGrid, ShoppableHotspot } from './CustomerPreview';
 import { effectiveShoppableHotspots } from '../hotspots';
-import { loadFeedback, tileKey as fbTileKey } from '../feedbackApi';
+import { generateMetaDescription, metaDescriptionIssues, META_MAX } from '../metaDescription';
+import { loadFeedback, updateFeedback, sharedImageInfo, tileKey as fbTileKey } from '../feedbackApi';
 import { isSameAspectRatio, tileEffectivelySynced, tileImageForView } from '../tileSync';
 
 var noop = function() {};
 
 // Aspect Ratio und Sync Regeln liegen in ../tileSync.js (auch vom Editor und der Customer Preview genutzt).
 
-// ─── META DESCRIPTION GENERATOR ───
-// Generates SEO-optimized meta descriptions for Amazon Brand Store pages.
-// Max 155 chars, front-loads brand + primary keywords within first 120 chars.
-function generateMetaDescription(page, store) {
-  var brand = store.brandName || 'Brand';
-  var marketplace = store.marketplace || 'de';
-  var products = store.products || [];
-  var pageName = page.name || '';
-  var isHomepage = pageName.toLowerCase() === 'homepage' || pageName.toLowerCase() === 'home';
-
-  // Collect ASINs used on this page
-  var pageAsins = {};
-  (page.sections || []).forEach(function(sec) {
-    (sec.tiles || []).forEach(function(tile) {
-      (tile.asins || []).forEach(function(a) { pageAsins[a] = true; });
-      if (tile.linkAsin) pageAsins[tile.linkAsin] = true;
-      (tile.hotspots || []).forEach(function(hs) { if (hs.asin) pageAsins[hs.asin] = true; });
-    });
-  });
-
-  // Get product names and categories for this page
-  var pageProducts = products.filter(function(p) { return pageAsins[p.asin]; });
-  var categories = {};
-  pageProducts.forEach(function(p) {
-    if (p.category) categories[p.category] = (categories[p.category] || 0) + 1;
-  });
-  var topCategories = Object.keys(categories).sort(function(a, b) { return categories[b] - categories[a]; }).slice(0, 3);
-
-  // Collect text overlays and CTA texts for keyword hints
-  var keywords = [];
-  (page.sections || []).forEach(function(sec) {
-    (sec.tiles || []).forEach(function(tile) {
-      var heading = (tile.textOverlay && typeof tile.textOverlay === 'object') ? (tile.textOverlay.heading || '') : '';
-      heading = heading.replace(/\*\*([^*]+)\*\*/g, '$1');
-      if (heading.length > 3 && heading.length < 60) {
-        keywords.push(heading);
-      }
-    });
-  });
-
-  // Determine page type for appropriate template
-  var lowerName = pageName.toLowerCase();
-  var isAbout = lowerName.indexOf('about') >= 0 || lowerName.indexOf('über') >= 0 || lowerName.indexOf('story') >= 0 || lowerName.indexOf('geschichte') >= 0;
-  var isBestseller = lowerName.indexOf('bestseller') >= 0 || lowerName.indexOf('best seller') >= 0 || lowerName.indexOf('top') >= 0;
-
-  var desc = '';
-
-  if (marketplace === 'de' || marketplace === 'at') {
-    // German meta descriptions
-    if (isHomepage) {
-      var catText = topCategories.length > 0 ? topCategories.slice(0, 2).join(', ') : 'Produkte';
-      desc = 'Entdecke ' + brand + ' auf Amazon: ' + catText;
-      if (store.heroMessage) {
-        desc += '. ' + store.heroMessage.replace(/["„"]/g, '').slice(0, 60);
-      } else if (keywords.length > 0) {
-        desc += '. ' + keywords[0].replace(/["„"]/g, '').slice(0, 50);
-      }
-      desc += '. Jetzt den offiziellen ' + brand + ' Store entdecken.';
-    } else if (isAbout) {
-      desc = 'Erfahre mehr über ' + brand;
-      if (store.brandTone) desc += ' — ' + store.brandTone;
-      desc += '. Unsere Geschichte, Werte und was uns antreibt. Jetzt auf Amazon entdecken.';
-    } else if (isBestseller) {
-      desc = 'Die beliebtesten ' + brand + ' Produkte auf Amazon. Top-bewertete Bestseller';
-      if (topCategories.length > 0) desc += ' aus ' + topCategories[0];
-      desc += '. Jetzt entdecken und bestellen.';
-    } else {
-      // Category page
-      desc = brand + ' ' + pageName + ' auf Amazon entdecken';
-      if (pageProducts.length > 0) {
-        desc += ': ' + pageProducts.length + ' Produkte';
-        if (topCategories.length > 0 && topCategories[0] !== pageName) desc += ' aus ' + topCategories[0];
-      }
-      if (keywords.length > 0) {
-        desc += '. ' + keywords[0].replace(/["„"]/g, '').slice(0, 50);
-      }
-      desc += '. Jetzt im offiziellen Store shoppen.';
-    }
-  } else if (marketplace === 'es') {
-    if (isHomepage) {
-      var catTextEs = topCategories.length > 0 ? topCategories.slice(0, 2).join(', ') : 'productos';
-      desc = 'Descubre ' + brand + ' en Amazon: ' + catTextEs + '. Explora nuestra colección completa en la tienda oficial.';
-    } else if (isAbout) {
-      desc = 'Conoce ' + brand + ': nuestra historia, valores y misión. Descubre la marca en Amazon.';
-    } else {
-      desc = 'Compra ' + brand + ' ' + pageName + ' en Amazon. ';
-      if (pageProducts.length > 0) desc += pageProducts.length + ' productos disponibles. ';
-      desc += 'Visita la tienda oficial ahora.';
-    }
-  } else {
-    // English (default)
-    if (isHomepage) {
-      var catTextEn = topCategories.length > 0 ? topCategories.slice(0, 2).join(', ') : 'products';
-      desc = 'Discover ' + brand + ' on Amazon: ' + catTextEn;
-      if (store.heroMessage) {
-        desc += '. ' + store.heroMessage.replace(/["„"]/g, '').slice(0, 60);
-      } else if (keywords.length > 0) {
-        desc += '. ' + keywords[0].replace(/["„"]/g, '').slice(0, 50);
-      }
-      desc += '. Shop the official ' + brand + ' store now.';
-    } else if (isAbout) {
-      desc = 'Learn about ' + brand;
-      if (store.brandTone) desc += ' — ' + store.brandTone;
-      desc += '. Our story, values, and what drives us. Discover more on Amazon.';
-    } else if (isBestseller) {
-      desc = 'Shop ' + brand + '\'s most popular products on Amazon. Top-rated bestsellers';
-      if (topCategories.length > 0) desc += ' in ' + topCategories[0];
-      desc += '. Browse and order now.';
-    } else {
-      desc = 'Shop ' + brand + ' ' + pageName + ' on Amazon';
-      if (pageProducts.length > 0) {
-        desc += ': ' + pageProducts.length + ' products';
-        if (topCategories.length > 0 && topCategories[0] !== pageName) desc += ' in ' + topCategories[0];
-      }
-      if (keywords.length > 0) {
-        desc += '. ' + keywords[0].replace(/["„"]/g, '').slice(0, 50);
-      }
-      desc += '. Visit the official store.';
-    }
-  }
-
-  // Truncate to 155 chars without cutting mid-word
-  if (desc.length > 155) {
-    desc = desc.slice(0, 155);
-    var lastSpace = desc.lastIndexOf(' ');
-    if (lastSpace > 120) desc = desc.slice(0, lastSpace);
-    if (!/[.!]$/.test(desc)) desc += '...';
-  }
-
-  return desc;
-}
+// Meta Descriptions: Generator und Regeln liegen in ../metaDescription.js (auch vom DOCX Export genutzt).
 
 // ─── INSPIRATION LIBRARY ───
 var INSPIRATION_LINKS = [
@@ -217,11 +88,17 @@ function tileFilename(pageName, sectionIndex, tileIndex, variant) {
 // Build a complete filename map for the entire store: { filename -> { pageId, secId, tileIndex, variant } }
 function buildFilenameMap(store) {
   var map = {};
+  var groups = {}; // imageRef -> alle Kacheln, die dasselbe Bild nutzen
   (store.pages || []).forEach(function(pg) {
     (pg.sections || []).forEach(function(sec, si) {
       (sec.tiles || []).forEach(function(tile, ti) {
         if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0 || tile.type === 'text' || tile.type === 'product_selector') return;
-        if (tileEffectivelySynced(tile)) {
+        var synced = tileEffectivelySynced(tile);
+        if (tile.imageRef) {
+          var gk = String(tile.imageRef).toLowerCase();
+          (groups[gk] = groups[gk] || []).push({ pageId: pg.id, secId: sec.id, ti: ti, synced: synced });
+        }
+        if (synced) {
           // Accept any of the three naming conventions the designer may have used.
           var fn = tileFilename(pg.name, si, ti, 'sync');
           var fnD = tileFilename(pg.name, si, ti, 'desktop');
@@ -238,7 +115,31 @@ function buildFilenameMap(store) {
       });
     });
   });
+  // Wiederverwendete Bilder: EINE Datei mit dem Reuse Namen (imageRef.jpg bzw. _desktop/_mobile)
+  // ersetzt das Bild an ALLEN Stellen, die diese imageRef nutzen.
+  Object.keys(groups).forEach(function(gk) {
+    var list = groups[gk];
+    reuseFilenames(gk).forEach(function(r) {
+      if (map[r.name]) return;
+      var targets = list.map(function(t) {
+        var variant = t.synced ? 'sync' : (r.kind === 'mobile' ? 'mobile' : 'desktop');
+        return { pageId: t.pageId, secId: t.secId, ti: t.ti, variant: variant };
+      });
+      map[r.name] = Object.assign({}, targets[0], { targets: targets });
+    });
+  });
   return map;
+}
+
+// Dateinamen, unter denen ein wiederverwendetes Bild geliefert werden kann.
+function reuseFilenames(imageRef) {
+  var base = String(imageRef || '').toLowerCase();
+  if (!base) return [];
+  return [
+    { name: base + '.jpg', kind: 'sync' },
+    { name: base + '_desktop.jpg', kind: 'desktop' },
+    { name: base + '_mobile.jpg', kind: 'mobile' },
+  ];
 }
 
 // Build a map of tile fingerprints → all occurrences. Primärer Dedup
@@ -523,6 +424,37 @@ function CopyableFilename({ filename, label }) {
 }
 
 // ─── TILE DETAIL CARD (for right panel) ───
+// Ein Feedback Punkt in der Designer Ansicht: Text (vom Team ggf. umformuliert), Haekchen "umgesetzt".
+function FeedbackTask({ item, where, shared, onToggle, onJump }) {
+  var [busy, setBusy] = useState(false);
+  var [err, setErr] = useState('');
+  async function toggle() {
+    setBusy(true); setErr('');
+    try { await onToggle(item, !item.designerDone); }
+    catch (e) { setErr((e && e.message) || 'Could not save, please try again.'); }
+    finally { setBusy(false); }
+  }
+  return (
+    <div style={{ border: '1px solid ' + (item.designerDone ? '#bbf7d0' : '#fde68a'), background: item.designerDone ? '#f0fdf4' : '#fffbeb', borderRadius: 8, padding: '8px 10px', marginBottom: 8 }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginBottom: 4 }}>
+        <span style={{ fontSize: 10.5, fontWeight: 700, color: '#92400e', textTransform: 'uppercase', letterSpacing: '.03em' }}>{where}</span>
+        {onJump && <button onClick={function() { onJump(item); }} style={{ background: 'none', border: 'none', color: '#2563eb', fontSize: 11, fontWeight: 600, cursor: 'pointer', padding: 0 }}>Show tile</button>}
+      </div>
+      <div style={{ fontSize: 12.5, lineHeight: 1.45, color: '#451a03', whiteSpace: 'pre-wrap', wordBreak: 'break-word', textDecoration: item.designerDone ? 'line-through' : 'none', opacity: item.designerDone ? 0.65 : 1 }}>{item.designerText || item.text}</div>
+      {shared && (
+        <div style={{ marginTop: 6, fontSize: 11, lineHeight: 1.4, color: '#047857', background: '#ecfdf5', border: '1px solid #a7f3d0', borderRadius: 5, padding: '4px 6px' }}>
+          Same image is also used at: {shared.others.join('; ')}. Upload <b style={{ fontFamily: 'monospace' }}>{shared.imageRef}.jpg</b> once to replace it everywhere.
+        </div>
+      )}
+      <button onClick={toggle} disabled={busy}
+        style={{ marginTop: 8, display: 'inline-flex', alignItems: 'center', gap: 6, background: item.designerDone ? '#fff' : '#16a34a', color: item.designerDone ? '#166534' : '#fff', border: '1px solid ' + (item.designerDone ? '#86efac' : '#16a34a'), borderRadius: 6, padding: '4px 10px', fontSize: 11.5, fontWeight: 700, cursor: busy ? 'default' : 'pointer', opacity: busy ? 0.6 : 1 }}>
+        {busy ? 'Saving…' : (item.designerDone ? '✓ Implemented · undo' : 'Mark as implemented')}
+      </button>
+      {err && <div role="alert" style={{ color: '#b91c1c', fontSize: 11, marginTop: 4 }}>{err}</div>}
+    </div>
+  );
+}
+
 function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, sectionId, isSelected, onClickTile, duplicateInfo, pageId, pageName, sectionIndex, products, store, clientFeedback }) {
   var dims = LAYOUT_TILE_DIMS[layoutId];
   var desktopType = dims && dims[tileIndex] ? dims[tileIndex] : null;
@@ -559,8 +491,8 @@ function TileDetail({ tile, tileIndex, layoutId, viewMode, sectionColor, section
           {clientFeedback.map(function(fb, fi) {
             return (
               <div key={fi} style={{ fontSize: 12, color: '#451a03', lineHeight: 1.4, marginTop: fi ? 6 : 0, whiteSpace: 'pre-wrap' }}>
-                {fb.text}
-                <span style={{ color: '#a16207', fontSize: 10.5 }}>{'  ·  ' + (fb.author || 'Client') + ' · ' + (fb.viewMode === 'mobile' ? 'mobile' : 'desktop') + (fb.status === 'erledigt' ? ' · done' : '')}</span>
+                <span style={{ textDecoration: fb.designerDone ? 'line-through' : 'none', opacity: fb.designerDone ? 0.6 : 1 }}>{fb.designerText || fb.text}</span>
+                {fb.designerDone && <span style={{ color: '#166534', fontSize: 10.5 }}>{'  ·  done'}</span>}
               </div>
             );
           })}
@@ -1266,7 +1198,18 @@ function PreviewMode({ store, onClose }) {
     var other = mode === 'desktop' ? 'mobile' : 'desktop';
     return findTileImage(pageName, sectionIndex, tileIndex, mode)
       || findTileImage(pageName, sectionIndex, tileIndex, 'sync')
-      || (tileEffectivelySynced(tile) ? findTileImage(pageName, sectionIndex, tileIndex, other) : null);
+      || (tileEffectivelySynced(tile) ? findTileImage(pageName, sectionIndex, tileIndex, other) : null)
+      || findReuseImage(tile, mode);
+  }
+
+  // Wiederverwendetes Bild (gleiche imageRef): die Datei mit dem Reuse Namen gilt fuer jede Stelle.
+  function findReuseImage(tile, mode) {
+    if (!tile || !tile.imageRef) return null;
+    var names = reuseFilenames(tile.imageRef);
+    var byKind = {};
+    names.forEach(function(r) { byKind[r.kind] = imageMap[r.name] || null; });
+    var other = mode === 'desktop' ? 'mobile' : 'desktop';
+    return byKind[mode] || byKind.sync || (tileEffectivelySynced(tile) ? byKind[other] : null) || null;
   }
 
   // Close more popup on outside click
@@ -1291,7 +1234,7 @@ function PreviewMode({ store, onClose }) {
             var fn = tileFilename(pg.name, si, ti, 'sync').toLowerCase();
             var fnDS = tileFilename(pg.name, si, ti, 'desktop').toLowerCase();
             var fnMS = tileFilename(pg.name, si, ti, 'mobile').toLowerCase();
-            if (imageMap[fn] || imageMap[fnDS] || imageMap[fnMS]) {
+            if (imageMap[fn] || imageMap[fnDS] || imageMap[fnMS] || findReuseImage(tile, 'desktop')) {
               matchReport.matched += 1;
             } else {
               matchReport.missing.push({ page: pg.name, section: si + 1, tile: ti + 1, filename: tileFilename(pg.name, si, ti, 'sync') });
@@ -1300,10 +1243,10 @@ function PreviewMode({ store, onClose }) {
             matchReport.total += 2;
             var fnD = tileFilename(pg.name, si, ti, 'desktop').toLowerCase();
             var fnM = tileFilename(pg.name, si, ti, 'mobile').toLowerCase();
-            if (imageMap[fnD]) { matchReport.matched += 1; } else {
+            if (imageMap[fnD] || findReuseImage(tile, 'desktop')) { matchReport.matched += 1; } else {
               matchReport.missing.push({ page: pg.name, section: si + 1, tile: ti + 1, filename: tileFilename(pg.name, si, ti, 'desktop') });
             }
-            if (imageMap[fnM]) { matchReport.matched += 1; } else {
+            if (imageMap[fnM] || findReuseImage(tile, 'mobile')) { matchReport.matched += 1; } else {
               matchReport.missing.push({ page: pg.name, section: si + 1, tile: ti + 1, filename: tileFilename(pg.name, si, ti, 'mobile') });
             }
           }
@@ -1705,7 +1648,8 @@ function MetaDescriptionsPanel({ pages, store }) {
               <span style={{ fontSize: 9, color: isCopied ? '#16a34a' : '#94a3b8', fontWeight: 600 }}>{isCopied ? 'Copied!' : 'Click to copy'}</span>
             </div>
             <div style={{ fontSize: 10, color: '#475569', lineHeight: 1.4, marginTop: 2 }}>{md}</div>
-            <div style={{ fontSize: 9, color: '#94a3b8', marginTop: 2 }}>{md.length}/155 chars</div>
+            <div style={{ fontSize: 9, color: '#94a3b8', marginTop: 2 }}>{md.length}/{META_MAX} chars</div>
+            {metaDescriptionIssues(md).length > 0 && <div style={{ fontSize: 9, color: '#b45309', marginTop: 2 }}>Check: {metaDescriptionIssues(md).join('; ')}</div>}
           </div>
         );
       })}
@@ -1726,7 +1670,7 @@ export default function BriefingView() {
   var [updateBanner, setUpdateBanner] = useState(false);
   var [changeLog, setChangeLog] = useState([]); // [{ time, descriptions[] }]
   var [selectedTile, setSelectedTile] = useState(null); // { sid, ti }
-  var [sidebarTab, setSidebarTab] = useState('design'); // 'design', 'ci', or 'info'
+  var [sidebarTab, setSidebarTab] = useState('design'); // 'design', 'feedback' or 'info'
   var [showPreview, setShowPreview] = useState(false);
   var prevStoreRef = useRef(null);
   var pollRef = useRef(null);
@@ -1810,21 +1754,23 @@ export default function BriefingView() {
         if (!prev) return prev;
         var clone = JSON.parse(JSON.stringify(prev));
         assignments.forEach(function(a) {
-          var entry = a.entry;
-          var pg = (clone.pages || []).find(function(p) { return p.id === entry.pageId; });
-          if (!pg) return;
-          var sec = (pg.sections || []).find(function(s) { return s.id === entry.secId; });
-          if (!sec) return;
-          var tile = (sec.tiles || [])[entry.ti];
-          if (!tile) return;
-          if (entry.variant === 'sync') {
-            tile.uploadedImage = a.dataUrl;
-            tile.uploadedImageMobile = a.dataUrl;
-          } else if (entry.variant === 'desktop') {
-            tile.uploadedImage = a.dataUrl;
-          } else if (entry.variant === 'mobile') {
-            tile.uploadedImageMobile = a.dataUrl;
-          }
+          // Reuse Datei: ein Eintrag mit mehreren Zielen, sonst genau eine Kachel
+          (a.entry.targets || [a.entry]).forEach(function(entry) {
+            var pg = (clone.pages || []).find(function(p) { return p.id === entry.pageId; });
+            if (!pg) return;
+            var sec = (pg.sections || []).find(function(s) { return s.id === entry.secId; });
+            if (!sec) return;
+            var tile = (sec.tiles || [])[entry.ti];
+            if (!tile) return;
+            if (entry.variant === 'sync') {
+              tile.uploadedImage = a.dataUrl;
+              tile.uploadedImageMobile = a.dataUrl;
+            } else if (entry.variant === 'desktop') {
+              tile.uploadedImage = a.dataUrl;
+            } else if (entry.variant === 'mobile') {
+              tile.uploadedImageMobile = a.dataUrl;
+            }
+          });
         });
         return clone;
       });
@@ -1906,32 +1852,42 @@ export default function BriefingView() {
   var rawToken = window.location.pathname.split('/share/')[1] || '';
   var token = rawToken.split('/')[0].split('?')[0].trim(); // Strip trailing slashes, query params
 
+  function pullDesignerFeedback() {
+    if (!token) return Promise.resolve();
+    return loadFeedback({ shareToken: token }, { forwarded: 1 }).then(function(r) {
+      var byTile = {};
+      var general = [];
+      var all = (r && r.items) || [];
+      all.forEach(function(it) {
+        if (it.scope === 'store') { general.push(it); return; }
+        var k = fbTileKey(it.pageId, it.sectionId, it.tileIndex);
+        (byTile[k] = byTile[k] || []).push(it);
+      });
+      setDesignerFeedback({ byTile: byTile, general: general, all: all });
+    }).catch(function() { /* stilles Nachladen */ });
+  }
   useEffect(function() {
     if (!token) return;
-    var stopped = false;
-    function pull() {
-      loadFeedback({ shareToken: token }, { forwarded: 1 }).then(function(r) {
-        if (stopped) return;
-        var byTile = {};
-        var general = [];
-        ((r && r.items) || []).forEach(function(it) {
-          if (it.scope === 'store') { general.push(it); return; }
-          var k = fbTileKey(it.pageId, it.sectionId, it.tileIndex);
-          (byTile[k] = byTile[k] || []).push(it);
-        });
-        setDesignerFeedback({ byTile: byTile, general: general });
-      }).catch(function() { /* stilles Nachladen */ });
-    }
-    pull();
-    var t = setInterval(pull, 60000);
-    return function() { stopped = true; clearInterval(t); };
+    pullDesignerFeedback();
+    var t = setInterval(pullDesignerFeedback, 60000);
+    return function() { clearInterval(t); };
   }, [token]);
+
+  async function setFeedbackDone(item, done) {
+    await updateFeedback(token, item.id, { designerDone: done });
+    await pullDesignerFeedback();
+  }
+  function jumpToFeedbackTile(item) {
+    if (item.pageId) setCurPage(item.pageId);
+    setTimeout(function() { handleTileSelect({ sid: item.sectionId, ti: item.tileIndex }); }, 250);
+  }
 
 
   // ─── INITIAL LOAD ───
   var loadAttemptRef = useRef(0);
   // Vom Team weitergeleitetes Kunden Feedback, je Kachel (nur lesen)
-  var [designerFeedback, setDesignerFeedback] = useState({ byTile: {}, general: [] });
+  var [designerFeedback, setDesignerFeedback] = useState({ byTile: {}, general: [], all: [] });
+  var openFeedbackCount = designerFeedback.all.filter(function(it) { return !it.designerDone; }).length;
 
   function loadShareData() {
     if (!token) { setError('No share token found in the URL. Please check the link.'); setLoading(false); return; }
@@ -2223,12 +2179,10 @@ export default function BriefingView() {
       {/* Designer Timer — sticky at top */}
       {token && <DesignerTimer shareToken={token} />}
 
-      {designerFeedback.general.length > 0 && (
-        <div style={{ margin: '8px 16px', background: '#fffbeb', border: '1px solid #f59e0b', borderRadius: 6, padding: '8px 12px', fontSize: 12, color: '#451a03' }}>
-          <b style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '.04em', color: '#92400e' }}>General client feedback ({designerFeedback.general.length})</b>
-          {designerFeedback.general.map(function(fb, i) {
-            return <div key={i} style={{ marginTop: 4, whiteSpace: 'pre-wrap' }}>{fb.text}<span style={{ color: '#a16207', fontSize: 10.5 }}>{'  ·  ' + (fb.author || 'Client')}</span></div>;
-          })}
+      {openFeedbackCount > 0 && sidebarTab !== 'feedback' && (
+        <div style={{ margin: '8px 16px', background: '#fffbeb', border: '1px solid #f59e0b', borderRadius: 6, padding: '8px 12px', fontSize: 12, color: '#451a03', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <span><b>{openFeedbackCount}</b> open client feedback {openFeedbackCount === 1 ? 'item' : 'items'} to implement.</span>
+          <button onClick={function() { setSidebarTab('feedback'); }} style={{ marginLeft: 'auto', background: '#f59e0b', color: '#fff', border: 'none', borderRadius: 5, padding: '4px 10px', fontSize: 11, fontWeight: 700, cursor: 'pointer' }}>Open feedback</button>
         </div>
       )}
 
@@ -2266,8 +2220,9 @@ export default function BriefingView() {
             <button onClick={function() { setSidebarTab('design'); }} style={{ flex: 1, padding: '8px 0', fontSize: 11, fontWeight: 700, background: 'none', border: 'none', cursor: 'pointer', borderBottom: sidebarTab === 'design' ? '2px solid #3b82f6' : '2px solid transparent', color: sidebarTab === 'design' ? '#1d4ed8' : '#94a3b8', marginBottom: -2 }}>
               Design
             </button>
-            <button onClick={function() { setSidebarTab('ci'); }} style={{ flex: 1, padding: '8px 0', fontSize: 11, fontWeight: 700, background: 'none', border: 'none', cursor: 'pointer', borderBottom: sidebarTab === 'ci' ? '2px solid #3b82f6' : '2px solid transparent', color: sidebarTab === 'ci' ? '#1d4ed8' : '#94a3b8', marginBottom: -2 }}>
-              Brand CI
+            <button onClick={function() { setSidebarTab('feedback'); }} style={{ flex: 1, padding: '8px 0', fontSize: 11, fontWeight: 700, background: 'none', border: 'none', cursor: 'pointer', borderBottom: sidebarTab === 'feedback' ? '2px solid #3b82f6' : '2px solid transparent', color: sidebarTab === 'feedback' ? '#1d4ed8' : '#94a3b8', marginBottom: -2 }}>
+              Feedback
+              {openFeedbackCount > 0 && <span style={{ marginLeft: 5, background: '#dc2626', color: '#fff', borderRadius: 9, minWidth: 16, height: 16, padding: '0 4px', boxSizing: 'border-box', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 9.5, fontWeight: 700 }}>{openFeedbackCount}</span>}
             </button>
             <button onClick={function() { setSidebarTab('info'); }} style={{ flex: 1, padding: '8px 0', fontSize: 11, fontWeight: 700, background: 'none', border: 'none', cursor: 'pointer', borderBottom: sidebarTab === 'info' ? '2px solid #3b82f6' : '2px solid transparent', color: sidebarTab === 'info' ? '#1d4ed8' : '#94a3b8', marginBottom: -2 }}>
               Store Info
@@ -2325,315 +2280,24 @@ export default function BriefingView() {
             </div>
           )}
 
-          {/* ═══ BRAND CI TAB ═══ */}
-          {sidebarTab === 'ci' && (
-            <div>
-              <div className="briefing-sidebar-section" style={{ background: '#faf5ff', borderRadius: 8, margin: '0 8px 10px', padding: '12px' }}>
-                <div className="briefing-sidebar-title" style={{ color: '#7c3aed', marginBottom: 8 }}>Corporate Identity</div>
-                <div className="briefing-legend" style={{ fontSize: 11, lineHeight: 1.6 }}>
-                  <p style={{ marginBottom: 8, color: '#6b21a8', fontWeight: 600 }}>Colors, fonts and style, editable.</p>
-
-                  {/* Colors — editable */}
-                  <div style={{ marginBottom: 10 }}>
-                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Color Palette</div>
-                    {(store.manualCI && store.manualCI.colors && store.manualCI.colors.length > 0) || (store.websiteData && store.websiteData.colors && store.websiteData.colors.length > 0) ? (
-                      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 4 }}>
-                        {((store.manualCI && store.manualCI.colors) || (store.websiteData && store.websiteData.colors) || []).map(function(c, i) {
-                          return (
-                            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 4, background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '3px 8px' }}>
-                              <div style={{ width: 16, height: 16, borderRadius: 3, background: c, border: '1px solid rgba(0,0,0,.15)' }} />
-                              <span style={{ fontSize: 10, fontFamily: 'monospace' }}>{c}</span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    ) : null}
-                    <input
-                      placeholder="Enter colors: #FF5733, #2E86C1, ..."
-                      value={(store.manualCI && store.manualCI.colorsInput) || ''}
-                      onChange={function(e) {
-                        var val = e.target.value;
-                        var colors = val.match(/#[0-9A-Fa-f]{3,6}/g) || [];
-                        setStore(function(prev) {
-                          var mc = Object.assign({}, prev.manualCI || {});
-                          mc.colorsInput = val;
-                          if (colors.length > 0) mc.colors = colors.slice(0, 8);
-                          return Object.assign({}, prev, { manualCI: mc });
-                        });
-                      }}
-                      style={{ width: '100%', fontSize: 10, padding: '4px 6px', border: '1px solid #e5e7eb', borderRadius: 4, fontFamily: 'monospace' }}
-                    />
+          {/* ═══ FEEDBACK TAB ═══ */}
+          {sidebarTab === 'feedback' && (
+            <div style={{ padding: '0 8px 16px' }}>
+              {designerFeedback.all.length === 0 ? (
+                <div style={{ fontSize: 12, color: '#64748b', padding: '16px 6px' }}>No client feedback to implement right now.</div>
+              ) : (
+                <>
+                  <div style={{ fontSize: 11, color: '#64748b', padding: '2px 4px 8px' }}>
+                    Tick an item once it is implemented. The team sees your tick.
                   </div>
-
-                  {/* Product CI from Gemini Vision analysis */}
-                  {store.productCI && (
-                    <div style={{ marginBottom: 10, background: '#fefce8', border: '1px solid #fde68a', borderRadius: 6, padding: 8 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#92400e', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '.05em' }}>CI from Listing Images (AI Analysis)</div>
-                      {store.productCI.visualMood && (
-                        <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Visual Style: </span>
-                          <span style={{ fontSize: 10, color: '#78350f', fontWeight: 700 }}>{store.productCI.visualMood}</span>
-                        </div>
-                      )}
-                      {store.productCI.primaryColors && store.productCI.primaryColors.length > 0 && (
-                        <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Primary Colors: </span>
-                          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 2 }}>
-                            {store.productCI.primaryColors.map(function(c, i) {
-                              return <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
-                                <div style={{ width: 14, height: 14, borderRadius: 3, background: c, border: '1px solid rgba(0,0,0,.15)' }} />
-                                <span style={{ fontSize: 9, fontFamily: 'monospace' }}>{c}</span>
-                              </div>;
-                            })}
-                          </div>
-                        </div>
-                      )}
-                      {store.productCI.backgroundPattern && (
-                        <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Backgrounds: </span>
-                          <span style={{ fontSize: 10, color: '#475569' }}>{store.productCI.backgroundPattern}</span>
-                        </div>
-                      )}
-                      {store.productCI.typographyStyle && (
-                        <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Typography: </span>
-                          <span style={{ fontSize: 10, color: '#475569' }}>{store.productCI.typographyStyle}</span>
-                        </div>
-                      )}
-                      {store.productCI.photographyStyle && (
-                        <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Photography Style: </span>
-                          <span style={{ fontSize: 10, color: '#475569' }}>{store.productCI.photographyStyle}</span>
-                        </div>
-                      )}
-                      {store.productCI.recurringElements && store.productCI.recurringElements.length > 0 && (
-                        <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Recurring Elements: </span>
-                          <div style={{ display: 'flex', gap: 3, flexWrap: 'wrap', marginTop: 2 }}>
-                            {store.productCI.recurringElements.map(function(el, i) {
-                              return <span key={i} style={{ background: '#fef3c7', color: '#78350f', borderRadius: 3, padding: '1px 6px', fontSize: 9, fontWeight: 600 }}>{el}</span>;
-                            })}
-                          </div>
-                        </div>
-                      )}
-                      {store.productCI.designerNotes && (
-                        <div style={{ marginTop: 6, padding: '6px 8px', background: '#fff', border: '1px solid #fde68a', borderRadius: 4, fontSize: 10, lineHeight: 1.5, color: '#475569' }}>
-                          <span style={{ fontWeight: 700, color: '#92400e' }}>Designer Notes: </span>
-                          {store.productCI.designerNotes}
-                        </div>
-                      )}
-                      {store.productCI.sourceImages && store.productCI.sourceImages.length > 0 && (
-                        <div style={{ marginTop: 6 }}>
-                          <span style={{ fontSize: 9, color: '#92400e', fontWeight: 600 }}>Analyzed Images ({store.productCI.imagesAnalyzed}):</span>
-                          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 4 }}>
-                            {store.productCI.sourceImages.slice(0, 6).map(function(url, i) {
-                              return <img key={i} src={url} style={{ width: 48, height: 48, objectFit: 'cover', borderRadius: 4, border: '1px solid #e5e7eb' }} alt="" />;
-                            })}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  )}
-
-                  {/* Fonts — editable */}
-                  <div style={{ marginBottom: 10 }}>
-                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Fonts</div>
-                    {store.websiteData && store.websiteData.userFonts && (
-                      <div style={{ marginBottom: 4 }}>
-                        <span style={{ fontSize: 9, color: '#92400e', fontWeight: 700 }}>Brand Fonts (user-specified):</span>
-                        <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 2 }}>
-                          {store.websiteData.userFonts.split(/[,;]+/).map(function(f, i) {
-                            return <span key={i} style={{ background: '#fef3c7', color: '#92400e', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 700 }}>{f.trim()}</span>;
-                          })}
-                        </div>
-                      </div>
-                    )}
-                    {store.websiteData && store.websiteData.fonts && store.websiteData.fonts.length > 0 && (
-                      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 4 }}>
-                        {store.websiteData.fonts.map(function(f, i) {
-                          return <span key={i} style={{ background: '#f3e8ff', color: '#6b21a8', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{f}</span>;
-                        })}
-                      </div>
-                    )}
-                    <input
-                      placeholder="e.g. Montserrat, Open Sans, Playfair Display"
-                      value={(store.manualCI && store.manualCI.fonts) || ''}
-                      onChange={function(e) {
-                        setStore(function(prev) {
-                          var mc = Object.assign({}, prev.manualCI || {});
-                          mc.fonts = e.target.value;
-                          return Object.assign({}, prev, { manualCI: mc });
-                        });
-                      }}
-                      style={{ width: '100%', fontSize: 10, padding: '4px 6px', border: '1px solid #e5e7eb', borderRadius: 4 }}
-                    />
-                  </div>
-
-                  {/* Brand Tone — editable */}
-                  <div style={{ marginBottom: 10 }}>
-                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Tone</div>
-                    <input
-                      value={(store.manualCI && store.manualCI.brandTone) || store.brandTone || (store.analysis && store.analysis.brandTone) || ''}
-                      onChange={function(e) {
-                        setStore(function(prev) {
-                          var mc = Object.assign({}, prev.manualCI || {});
-                          mc.brandTone = e.target.value;
-                          return Object.assign({}, prev, { manualCI: mc });
-                        });
-                      }}
-                      placeholder="e.g. natural, minimalist, premium"
-                      style={{ width: '100%', fontSize: 10, padding: '4px 6px', border: '1px solid #e5e7eb', borderRadius: 4 }}
-                    />
-                  </div>
-
-                  {/* CI Notes — free text */}
-                  <div style={{ marginBottom: 10 }}>
-                    <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>CI Notes (for Designer)</div>
-                    <textarea
-                      value={(store.manualCI && store.manualCI.notes) || ''}
-                      onChange={function(e) {
-                        setStore(function(prev) {
-                          var mc = Object.assign({}, prev.manualCI || {});
-                          mc.notes = e.target.value;
-                          return Object.assign({}, prev, { manualCI: mc });
-                        });
-                      }}
-                      rows={3}
-                      placeholder="Additional notes: logo variants, imagery, style direction..."
-                      style={{ width: '100%', fontSize: 10, padding: '4px 6px', border: '1px solid #e5e7eb', borderRadius: 4, resize: 'vertical' }}
-                    />
-                  </div>
-
-                  {/* Typography Style */}
-                  {store.websiteData && store.websiteData.typographyStyle && (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Typography Style (detected)</div>
-                      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 6 }}>
-                        <span style={{ background: store.websiteData.typographyStyle.textDensity === 'minimalist' ? '#dcfce7' : store.websiteData.typographyStyle.textDensity === 'text-heavy' ? '#fef3c7' : '#eff6ff', color: store.websiteData.typographyStyle.textDensity === 'minimalist' ? '#166534' : store.websiteData.typographyStyle.textDensity === 'text-heavy' ? '#92400e' : '#1e40af', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 700 }}>
-                          {store.websiteData.typographyStyle.textDensity === 'minimalist' ? 'Minimalist' : store.websiteData.typographyStyle.textDensity === 'text-heavy' ? 'Text Heavy' : 'Balanced'}
-                        </span>
-                        <span style={{ background: '#f1f5f9', color: '#475569', borderRadius: 3, padding: '2px 8px', fontSize: 10 }}>
-                          {store.websiteData.typographyStyle.headingCount} Headings
-                        </span>
-                        <span style={{ background: '#f1f5f9', color: '#475569', borderRadius: 3, padding: '2px 8px', fontSize: 10 }}>
-                          ~{store.websiteData.typographyStyle.avgParagraphLength} chars/paragraph
-                        </span>
-                      </div>
-                      {store.websiteData.typographyStyle.fontWeights && store.websiteData.typographyStyle.fontWeights.length > 0 && (
-                        <div style={{ marginBottom: 4 }}>
-                          <span style={{ fontSize: 9, color: '#7c3aed', fontWeight: 600 }}>Font Weights: </span>
-                          <span style={{ fontSize: 10, fontFamily: 'monospace', color: '#475569' }}>{store.websiteData.typographyStyle.fontWeights.join(', ')}</span>
-                        </div>
-                      )}
-                      {store.websiteData.typographyStyle.fontSizes && store.websiteData.typographyStyle.fontSizes.length > 0 && (
-                        <div>
-                          <span style={{ fontSize: 9, color: '#7c3aed', fontWeight: 600 }}>Font Sizes: </span>
-                          <span style={{ fontSize: 10, fontFamily: 'monospace', color: '#475569' }}>{store.websiteData.typographyStyle.fontSizes.slice(0, 6).join(', ')}</span>
-                        </div>
-                      )}
-                    </div>
-                  )}
-
-                  {/* Brand Story */}
-                  {(store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.brandStory) || (store.analysis && store.analysis.brandStory) || (store.websiteData && store.websiteData.aboutText) ? (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Story (detected)</div>
-                      <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11, lineHeight: 1.5, maxHeight: 80, overflow: 'auto' }}>
-                        {(store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.brandStory) || (store.analysis && store.analysis.brandStory) || (store.websiteData && store.websiteData.aboutText ? store.websiteData.aboutText.substring(0, 300) + '...' : '')}
-                      </div>
-                    </div>
-                  ) : null}
-
-                  {/* Target Audience (AI) */}
-                  {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.targetAudience && (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Target Audience (AI Analysis)</div>
-                      <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11, lineHeight: 1.5 }}>
-                        {store.websiteData.aiAnalysis.targetAudience}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Brand Values (AI) */}
-                  {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.brandValues && store.websiteData.aiAnalysis.brandValues.length > 0 && (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Values (AI Analysis)</div>
-                      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-                        {store.websiteData.aiAnalysis.brandValues.map(function(v, i) {
-                          return <span key={i} style={{ background: '#ede9fe', color: '#5b21b6', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{v}</span>;
-                        })}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Visual Style (AI) */}
-                  {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.visualStyle && (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Visual Style (AI Analysis)</div>
-                      <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11 }}>
-                        {store.websiteData.aiAnalysis.visualStyle}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Sustainability (AI) */}
-                  {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.sustainabilityFocus && (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Sustainability (AI Analysis)</div>
-                      <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, padding: '6px 8px', fontSize: 11, lineHeight: 1.5 }}>
-                        {store.websiteData.aiAnalysis.sustainabilityFocus}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Key Ingredients / Materials (AI) */}
-                  {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.keyIngredients && store.websiteData.aiAnalysis.keyIngredients.length > 0 && (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Key Ingredients (AI Analysis)</div>
-                      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-                        {store.websiteData.aiAnalysis.keyIngredients.map(function(ing, i) {
-                          return <span key={i} style={{ background: '#ecfdf5', color: '#065f46', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{ing}</span>;
-                        })}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Certifications / USPs */}
-                  {store.websiteData && store.websiteData.certifications && store.websiteData.certifications.length > 0 && (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Zertifizierungen & USPs (erkannt)</div>
-                      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-                        {store.websiteData.certifications.map(function(cert, i) {
-                          return <span key={i} style={{ background: '#f3e8ff', color: '#6b21a8', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{cert}</span>;
-                        })}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Product Categories (AI) */}
-                  {store.websiteData && store.websiteData.aiAnalysis && store.websiteData.aiAnalysis.productCategories && store.websiteData.aiAnalysis.productCategories.length > 0 && (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Produktkategorien (erkannt)</div>
-                      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-                        {store.websiteData.aiAnalysis.productCategories.map(function(cat, i) {
-                          return <span key={i} style={{ background: '#eff6ff', color: '#1e40af', borderRadius: 3, padding: '2px 8px', fontSize: 10, fontWeight: 600 }}>{cat}</span>;
-                        })}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Website URL + Pages Scraped */}
-                  {store.websiteData && store.websiteData.url && (
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ fontWeight: 700, fontSize: 10, color: '#7c3aed', marginBottom: 4, textTransform: 'uppercase', letterSpacing: '.05em' }}>Brand Website</div>
-                      <a href={store.websiteData.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, color: '#7c3aed', wordBreak: 'break-all' }}>{store.websiteData.url}</a>
-                      {store.websiteData.pagesScraped && store.websiteData.pagesScraped > 1 && (
-                        <div style={{ fontSize: 10, color: '#a78bfa', marginTop: 2 }}>{store.websiteData.pagesScraped} Seiten gecrawlt (Deep Crawl)</div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
+                  {designerFeedback.all.slice().sort(function(a, b) { return (a.designerDone ? 1 : 0) - (b.designerDone ? 1 : 0); }).map(function(it) {
+                    var where = it.scope === 'store' ? 'General' : ((it.pageName || 'Page') + ' · Section ' + (it.sectionIndex + 1) + ' · Tile ' + (it.tileIndex + 1));
+                    return (
+                      <FeedbackTask key={it.id} item={it} where={where} shared={sharedImageInfo(store, it)} onToggle={setFeedbackDone} onJump={it.scope === 'store' ? null : jumpToFeedbackTile} />
+                    );
+                  })}
+                </>
+              )}
             </div>
           )}
 

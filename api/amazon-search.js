@@ -1,6 +1,18 @@
 var BRIGHT_DATA_TOKEN = process.env.BRIGHT_DATA_API_KEY;
 var DATASET_ID = 'gd_l7q7dkf244hwjntr0';
 
+// Bright Data liefert Preise je nach Feld als Zahl oder Text wie "1.299,00 €" / "$19.99"
+function toPrice(v) {
+  if (v == null || v === '') return null;
+  if (typeof v === 'number') return isFinite(v) ? v : null;
+  var t = String(v).replace(/[^0-9.,]/g, '');
+  if (!t) return null;
+  var lastComma = t.lastIndexOf(','), lastDot = t.lastIndexOf('.');
+  if (lastComma > lastDot) t = t.replace(/\./g, '').replace(',', '.'); else t = t.replace(/,/g, '');
+  var n = parseFloat(t);
+  return isFinite(n) ? n : null;
+}
+
 function sleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
 
 module.exports = async function handler(req, res) {
@@ -176,6 +188,10 @@ module.exports = async function handler(req, res) {
           rating: p.rating || 0,
           reviews: p.reviews_count || 0,
           image: p.image || p.image_url || '',
+          // Preis: aktueller Preis (final_price), sonst Streichpreis. null = Bright Data kennt keinen
+          // Preis (z. B. nicht lieferbar); das Feld ist immer da, damit man "noch nicht geladen" erkennt.
+          price: toPrice(p.final_price != null ? p.final_price : (p.initial_price != null ? p.initial_price : p.price)),
+          currency: p.currency || '',
           images: images,
           bulletPoints: bulletPoints,
           categories: p.categories || [],

@@ -12,7 +12,8 @@ var { getClient, migrate } = require('./_db');
 // GET    /api/feedback?shareToken=xxx            Liste fuers Team (mit ids)
 //        optional &summary=1 (nur Zaehler) oder &forwarded=1 (nur Weitergeleitete)
 // POST   /api/feedback  { slug|shareToken, ... } neues Feedback
-// PATCH  /api/feedback  { shareToken, id, status?, forwarded? }
+// GET    /api/feedback?counts=1                  Zaehler neuer Eintraege je Store (fuer die Store Liste)
+// PATCH  /api/feedback  { shareToken, id, status?, forwarded?, teamText?, designerDone? }
 // DELETE /api/feedback  { shareToken, id }
 
 var STATUS = ['neu', 'offen', 'erledigt'];
@@ -68,6 +69,10 @@ function teamItem(row) {
   o.id = row.id;
   o.forwarded = !!row.forwarded;
   o.updatedAt = row.updated_at;
+  o.teamText = row.team_text || '';
+  // Fassung, die der Designer sieht: die vom Team bearbeitete, sonst das Original
+  o.designerText = row.team_text || row.text;
+  o.designerDone = !!row.designer_done;
   return o;
 }
 
@@ -91,6 +96,12 @@ module.exports = async function handler(req, res) {
 
     // ─── Liste ───
     if (req.method === 'GET') {
+      if (query.counts) {
+        var cr = await db.execute("SELECT store_id, COUNT(*) AS n FROM feedback WHERE status = 'neu' GROUP BY store_id");
+        var counts = {};
+        cr.rows.forEach(function(r) { counts[r.store_id] = Number(r.n); });
+        return res.status(200).json({ counts: counts });
+      }
       var store = await resolveStore(db, { shareToken: query.shareToken, slug: query.slug });
       if (!store) return res.status(404).json({ error: 'Store nicht gefunden.' });
       var isTeam = !!query.shareToken;
@@ -153,6 +164,16 @@ module.exports = async function handler(req, res) {
       }
       if (body.forwarded != null) {
         sets.push('forwarded = ?'); args.push(body.forwarded ? 1 : 0);
+        // Wird neu weitergeleitet, soll der Designer wieder ein offenes Feedback sehen
+        if (body.forwarded) sets.push('designer_done = 0');
+      }
+      if (body.teamText != null) {
+        var tt = String(body.teamText).trim();
+        if (tt.length > MAX_TEXT) return res.status(400).json({ error: 'Der Text ist zu lang (höchstens ' + MAX_TEXT + ' Zeichen).' });
+        sets.push('team_text = ?'); args.push(tt);
+      }
+      if (body.designerDone != null) {
+        sets.push('designer_done = ?'); args.push(body.designerDone ? 1 : 0);
       }
       if (!sets.length) return res.status(400).json({ error: 'Nichts zu ändern.' });
       sets.push("updated_at = datetime('now')");

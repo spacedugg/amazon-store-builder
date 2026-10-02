@@ -14,14 +14,13 @@ import PatchImportModal from './components/PatchImportModal';
 import JsonExportModal from './components/JsonExportModal';
 import LinkDialog from './components/LinkDialog';
 import FeedbackPanel from './components/FeedbackPanel';
-import { loadFeedback } from './feedbackApi';
-import PriceCalculator from './components/PriceCalculator';
+import { loadFeedback, loadFeedbackCounts } from './feedbackApi';
 import ExportModal from './components/ExportModal';
 import BriefingView from './components/BriefingView';
 import CustomerPreview from './components/CustomerPreview';
 import AdminAnalyze from './components/AdminAnalyze';
 import AdminScrapingTest from './components/AdminScrapingTest';
-import AsinOverview from './components/AsinOverview';
+import { missingProductAsins, fetchProductData, mergeProducts, gatherStoreAsins } from './productData';
 
 var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, headerBannerColor: '', category: 'generic', googleDriveUrl: '' };
 
@@ -223,9 +222,9 @@ export default function App() {
   var [clipboardSection, setClipboardSection] = useState(null);
   var [clipboardTile, setClipboardTile] = useState(null);
   var [showAsins, setShowAsins] = useState(false);
-  var [showPrice, setShowPrice] = useState(false);
   var [showNewStoreModal, setShowNewStoreModal] = useState(false);
   var [savedStores, setSavedStores] = useState([]);
+  var [storeFeedbackCounts, setStoreFeedbackCounts] = useState({});
   var [warnings, setWarnings] = useState([]);
   var [viewMode, setViewMode] = useState('desktop');
   var [requestedAsins, setRequestedAsins] = useState([]);
@@ -238,7 +237,6 @@ export default function App() {
   var [feedbackNew, setFeedbackNew] = useState(0);
   var [showPatchImport, setShowPatchImport] = useState(false);
   var [showJsonExport, setShowJsonExport] = useState(false);
-  var [showAsinOverview, setShowAsinOverview] = useState(false);
 
   var [storeId, setStoreId] = useState(null);
   var [shareToken, setShareToken] = useState(null);
@@ -372,6 +370,15 @@ export default function App() {
     window.addEventListener('keydown', handler);
     return function() { window.removeEventListener('keydown', handler); };
   }, [handleUndo, handleRedo]);
+
+  // Neue Kunden-Feedbacks je Store: rote Zahl in der Store Liste, ohne den Store zu oeffnen
+  useEffect(function() {
+    var stopped = false;
+    function pull() { loadFeedbackCounts().then(function(c) { if (!stopped) setStoreFeedbackCounts(c); }).catch(function() { /* still */ }); }
+    pull();
+    var t = setInterval(pull, 60000);
+    return function() { stopped = true; clearInterval(t); };
+  }, []);
 
   // Load saved stores on mount
   useEffect(function() {
@@ -1014,64 +1021,6 @@ export default function App() {
     return summary;
   };
 
-  // Globale BSR Sortierung. Geht durch alle Tiles mit asins Liste (Product
-  // Grid, Bestseller, Recommended, Deals plus optional Image und Shoppable),
-  // sortiert pro Tile die ASINs aufsteigend nach subcategoryRank (oder
-  // bestsellerRank Fallback). ASINs ohne BSR Daten landen am Ende. Gibt
-  // Statistik zurück: wieviele Tiles sortiert, wieviele ASINs konnten nach
-  // BSR sortiert werden.
-  var sortAllBestsellersByBSR = function() {
-    var products = store.products || [];
-    if (!products.length) {
-      return { tilesUpdated: 0, asinsRanked: 0, totalAsins: 0, error: 'Keine Produktdaten im Store. Erst ASINs scrapen.' };
-    }
-    var productMap = {};
-    products.forEach(function(p) { productMap[p.asin] = p; });
-    var stats = { tilesUpdated: 0, asinsRanked: 0, totalAsins: 0 };
-    setStoreWithUndo(function(s) {
-      return Object.assign({}, s, {
-        pages: s.pages.map(function(pg) {
-          return Object.assign({}, pg, {
-            sections: (pg.sections || []).map(function(sec) {
-              return Object.assign({}, sec, {
-                tiles: (sec.tiles || []).map(function(t) {
-                  // Nur Tiles mit ASIN Listen sortieren. Hotspot ASINs nicht
-                  // anfassen, da Position auf dem Bild bewusst gesetzt ist.
-                  if (!t.asins || t.asins.length < 2) return t;
-                  var typesToSort = ['best_sellers', 'product_grid', 'recommended', 'deals'];
-                  if (typesToSort.indexOf(t.type) < 0) return t;
-                  var withRankCount = 0;
-                  t.asins.forEach(function(a) {
-                    var p = productMap[a];
-                    if (p && (p.subcategoryRank || p.bestsellerRank)) withRankCount++;
-                  });
-                  if (withRankCount === 0) return t;
-                  var sorted = t.asins.slice().sort(function(a, b) {
-                    var pa = productMap[a];
-                    var pb = productMap[b];
-                    var ra = (pa && (pa.subcategoryRank || pa.bestsellerRank)) || 1e9;
-                    var rb = (pb && (pb.subcategoryRank || pb.bestsellerRank)) || 1e9;
-                    return ra - rb;
-                  });
-                  // Nur als geändert zählen wenn die Reihenfolge tatsächlich anders ist
-                  var changed = false;
-                  for (var i = 0; i < sorted.length; i++) {
-                    if (sorted[i] !== t.asins[i]) { changed = true; break; }
-                  }
-                  if (!changed) return t;
-                  stats.tilesUpdated++;
-                  stats.asinsRanked += withRankCount;
-                  stats.totalAsins += t.asins.length;
-                  return Object.assign({}, t, { asins: sorted });
-                }),
-              });
-            }),
-          });
-        }),
-      });
-    });
-    return stats;
-  };
   // Tiles innerhalb einer Section per Drag and Drop tauschen.
   // fromIdx und toIdx sind die Tile Positionen innerhalb der Section.
   var swapTiles = function(sectionId, fromIdx, toIdx) {
@@ -1769,6 +1718,45 @@ export default function App() {
   // Teilfehler brechen den Save nicht ab, der Link wird trotzdem kopiert,
   // fehlende Bilder bekommt der Customer beim naechsten Versuch.
   var [customerSaveProgress, setCustomerSaveProgress] = useState(null);
+  // Bild, Titel und Preis der ASINs von Amazon holen (Bright Data) und in store.products ablegen.
+  // Holt nur, was noch fehlt. Gibt den Store mit den neuen Produkten zurueck, damit der Aufrufer
+  // ihn sofort speichern kann, ohne auf das naechste Rendern zu warten.
+  var loadMissingProducts = async function(current) {
+    var missing = missingProductAsins(current);
+    if (!missing.length) return { store: current, loaded: 0, failed: [], missing: 0 };
+    setCustomerSaveProgress({ stage: 'products', done: 0, total: missing.length });
+    var res = await fetchProductData(missing, current.marketplace, function(p) {
+      setCustomerSaveProgress({ stage: 'products', done: p.done, total: p.total });
+    });
+    var next = Object.assign({}, current, { products: mergeProducts(current.products, res.products) });
+    setStoreWithUndo(function(s) { return Object.assign({}, s, { products: mergeProducts(s.products, res.products) }); });
+    return { store: next, loaded: res.products.length, failed: res.failed, missing: missing.length };
+  };
+
+  var handleLoadProducts = async function() {
+    var title = 'Produktdaten laden';
+    var total = gatherStoreAsins(store).length;
+    if (!total) {
+      setLinkDialog({ kind: 'info', title: title, message: 'In diesem Store sind noch keine ASINs hinterlegt.' });
+      return;
+    }
+    try {
+      var r = await loadMissingProducts(store);
+      setCustomerSaveProgress(null);
+      if (!r.missing) {
+        setLinkDialog({ kind: 'info', title: title, message: 'Alle ' + total + ' ASINs haben schon Bild und Preis. Es gibt nichts nachzuladen.' });
+        return;
+      }
+      var msg = r.loaded + ' von ' + r.missing + ' ASINs geladen. Bild und Preis stehen jetzt in der Vorschau.';
+      if (r.failed.length) msg += '\n\nNicht geladen werden konnten: ' + r.failed.join(', ') + '. Bitte später noch einmal versuchen.';
+      msg += '\n\nDamit der Kunde sie sieht, klicke noch auf „Speichern“ oder „Kunden-Link“.';
+      setLinkDialog({ kind: 'info', title: title, message: msg });
+    } catch (e) {
+      setCustomerSaveProgress(null);
+      setLinkDialog({ kind: 'error', title: title, message: 'Die Produktdaten konnten nicht geladen werden.\n\n' + (e && e.message ? e.message : 'Unbekannter Fehler') });
+    }
+  };
+
   var handleCopyCustomerLink = async function() {
     var dlgTitle = 'Customer Preview Link';
     if (!store.pages.length) {
@@ -1778,7 +1766,19 @@ export default function App() {
     console.log('[Customer] Start, store has', (store.pages || []).length, 'pages');
     setCustomerSaveProgress({ stage: 'extract' });
     try {
-      var result = await persistStore(store, {
+      // Produktbilder und Preise automatisch nachladen, sonst sieht der Kunde nur graue Platzhalter.
+      // Scheitert das, geht der Link trotzdem raus; die Warnung steht danach im Dialog.
+      var storeToSave = store;
+      var productWarn = '';
+      try {
+        var pr = await loadMissingProducts(store);
+        storeToSave = pr.store;
+        if (pr.failed.length) productWarn = 'Für ' + pr.failed.length + ' ASIN(s) konnten Bild/Preis nicht geladen werden (' + pr.failed.slice(0, 5).join(', ') + (pr.failed.length > 5 ? ' …' : '') + '). Dort sieht der Kunde einen Platzhalter. Über „Mehr → Produktdaten laden“ noch einmal versuchen.';
+      } catch (pe) {
+        productWarn = 'Produktdaten (Bild, Preis) konnten nicht geladen werden: ' + (pe && pe.message ? pe.message : 'unbekannter Fehler') + '. Der Kunde sieht dort vorerst Platzhalter.';
+      }
+      setCustomerSaveProgress({ stage: 'extract' });
+      var result = await persistStore(storeToSave, {
         includeShareToken: true,
         onProgress: function(p) {
           console.log('[Customer] Progress', p);
@@ -1802,6 +1802,7 @@ export default function App() {
       var slug = brandToSlug(store.brandName);
       var url = shareBaseUrl() + (slug ? '/' + slug : '/customer/' + result.shareToken);
       var notes = [];
+      if (productWarn) notes.push(productWarn);
       if (result.imagesUploaded > 0 || (result.imagesSkipped || 0) > 0) {
         notes.push('Bilder: ' + (result.imagesUploaded || 0) + ' neu hochgeladen, ' + (result.imagesSkipped || 0) + ' bereits in DB.');
       }
@@ -1948,8 +1949,7 @@ export default function App() {
         canUndo={undoStackRef.current.length > 0}
         onRedo={handleRedo}
         canRedo={redoStackRef.current.length > 0}
-        onShowPrice={function() { setShowPrice(true); }}
-        onShowAsinOverview={store.pages.length > 0 ? function() { setShowAsinOverview(true); } : null}
+        onLoadProducts={store.pages.length > 0 ? handleLoadProducts : null}
         onFolderImageUpload={handleFolderImageUpload}
         onRemoveAllImages={handleRemoveAllImages}
         folderInputRef={folderInputRef}
@@ -1958,6 +1958,7 @@ export default function App() {
       <div className="app-body">
         <PageList
           pages={store.pages}
+          feedbackCounts={storeFeedbackCounts}
           curPage={page ? page.id : ''}
           onSelect={function(id) { setCurPage(id); setSel(null); }}
           onAddPage={addPage}
@@ -2118,78 +2119,6 @@ export default function App() {
         />
       )}
 
-      {showPrice && (
-        <PriceCalculator
-          store={store}
-          shareToken={shareToken}
-          onClose={function() { setShowPrice(false); }}
-          uiLang={uiLang}
-        />
-      )}
-
-      {showAsinOverview && (
-        <AsinOverview
-          store={store}
-          products={store.products}
-          onSortAllByBsr={sortAllBestsellersByBSR}
-          onClose={function() { setShowAsinOverview(false); }}
-          onScrape={async function(asinList) {
-            setRequestedAsins(asinList);
-            var domain = DOMAINS[store.marketplace] || DOMAINS.de;
-            var resp = await fetch('/api/amazon-search', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ asins: asinList, domain: domain }),
-            });
-            if (!resp.ok) {
-              var e = await resp.json().catch(function() { return {}; });
-              throw new Error((e.error || 'Scrape failed') + (e.detail ? ' — ' + String(e.detail).slice(0, 200) : '') + (e.hint ? ' ' + e.hint : ''));
-            }
-            var json = await resp.json();
-            var newProducts = json.products || [];
-            setStoreWithUndo(function(s) {
-              var existing = {};
-              (s.products || []).forEach(function(p) { existing[p.asin] = p; });
-              newProducts.forEach(function(p) { existing[p.asin] = p; });
-              return Object.assign({}, s, { products: Object.keys(existing).map(function(k) { return existing[k]; }) });
-            });
-            return { success: newProducts.length, failed: asinList.length - newProducts.length };
-          }}
-          onMoveAsin={function(asin, targetPageId) {
-            // Add the ASIN to the target page's last product_grid section
-            // or create a new product_grid section if none exists
-            setStoreWithUndo(function(s) {
-              return Object.assign({}, s, {
-                pages: s.pages.map(function(pg) {
-                  if (pg.id !== targetPageId) return pg;
-                  var sections = (pg.sections || []).slice();
-                  // Find existing product_grid section
-                  var gridIdx = -1;
-                  for (var i = sections.length - 1; i >= 0; i--) {
-                    var hasPG = sections[i].tiles.some(function(t) { return t.type === 'product_grid'; });
-                    if (hasPG) { gridIdx = i; break; }
-                  }
-                  if (gridIdx >= 0) {
-                    // Add ASIN to existing product_grid tile
-                    sections[gridIdx] = Object.assign({}, sections[gridIdx], {
-                      tiles: sections[gridIdx].tiles.map(function(t) {
-                        if (t.type !== 'product_grid') return t;
-                        var newAsins = (t.asins || []).slice();
-                        if (newAsins.indexOf(asin) < 0) newAsins.push(asin);
-                        return Object.assign({}, t, { asins: newAsins });
-                      }),
-                    });
-                  } else {
-                    // Create new product_grid section with the ASIN
-                    sections.push({ id: uid(), layoutId: '1', tiles: [Object.assign(emptyTile(), { type: 'product_grid', asins: [asin] })] });
-                  }
-                  return Object.assign({}, pg, { sections: sections });
-                }),
-              });
-            });
-          }}
-        />
-      )}
 
       {showExport && (
         <ExportModal
