@@ -1,4 +1,4 @@
-// Vision-Extraktion v3: ruft die Anthropic-API mit claude-sonnet-4-6 auf,
+// Vision-Extraktion v3: ruft die Anthropic-API mit claude-sonnet-5-5 auf,
 // liefert Phase-2-Blueprints gemaess docs/BLUEPRINT_EXTRACTION_PROMPT.md.
 //
 // Input pro Seite:
@@ -15,7 +15,7 @@
 //   A) VISION_PROXY_URL  -> Vercel-Proxy api/vision-extract (empfohlen, keine Keys in Sandbox)
 //      Optional: VISION_PROXY_TOKEN wird als Header x-vision-proxy-token gesendet
 //   B) VITE_ANTHROPIC_API_KEY oder ANTHROPIC_API_KEY -> direkter Anthropic-Call
-//   VITE_ANTHROPIC_MODEL (optional, default claude-sonnet-4-6)
+//   VITE_ANTHROPIC_MODEL (optional, default claude-sonnet-5-5)
 //
 // Usage:
 //   node scripts/vision-extract-blueprint.mjs \
@@ -37,7 +37,7 @@ const V3 = path.join(KNOWLEDGE, 'rerun-v3');
 const PROXY_URL = process.env.VISION_PROXY_URL || '';
 const PROXY_TOKEN = process.env.VISION_PROXY_TOKEN || '';
 const API_KEY = process.env.VITE_ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY || '';
-const MODEL = process.env.VITE_ANTHROPIC_MODEL || 'claude-sonnet-4-6';
+const MODEL = process.env.VITE_ANTHROPIC_MODEL || 'claude-sonnet-5-5';
 const ANTHROPIC_URL = 'https://api.anthropic.com/v1/messages';
 
 const USE_PROXY = !!PROXY_URL;
@@ -121,7 +121,9 @@ async function callClaudeVisionDirect({ systemPrompt, userText, imagesB64, maxTo
   const body = {
     model: MODEL,
     max_tokens: maxTokens,
-    temperature,
+    // Sonnet 5.5: kein temperature (400 bei anderen Werten); Denken aus wie bisher, Aufwand medium
+    thinking: { type: 'between_tools' },
+    output_config: { effort: 'medium' },
     system: systemPrompt,
     messages: [{ role: 'user', content }]
   };
@@ -140,7 +142,7 @@ async function callClaudeVisionDirect({ systemPrompt, userText, imagesB64, maxTo
     throw new Error(`Anthropic ${resp.status}: ${errText.slice(0, 500)}`);
   }
   const data = await resp.json();
-  const text = (data.content && data.content[0]) ? data.content[0].text : '';
+  const text = (data.content || []).filter(b => b.type === 'text').map(b => b.text || '').join('');
   return { text, usage: data.usage };
 }
 
@@ -155,8 +157,7 @@ async function callClaudeVisionProxy({ systemPrompt, userText, imagesB64, maxTok
       system: systemPrompt,
       userText,
       imagesB64,
-      maxTokens,
-      temperature
+      maxTokens
     })
   });
   if (!resp.ok) {

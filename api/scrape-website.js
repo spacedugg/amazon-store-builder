@@ -497,8 +497,11 @@ async function analyzeWithAI(content, url) {
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 1500,
+        model: 'claude-sonnet-5-5',
+        max_tokens: 3000,
+        // Denken aus wie bisher (between_tools = nur zwischen Werkzeugaufrufen), Aufwand niedrig: reine Extraktion
+        thinking: { type: 'between_tools' },
+        output_config: { effort: 'low' },
         system: system,
         messages: [{ role: 'user', content: user }],
       }),
@@ -506,7 +509,7 @@ async function analyzeWithAI(content, url) {
 
     if (!resp.ok) return null;
     var data = await resp.json();
-    var text = (data.content || []).map(function(b) { return b.text || ''; }).join('');
+    var text = (data.content || []).filter(function(b) { return b.type === 'text'; }).map(function(b) { return b.text || ''; }).join('');
     // Extract JSON
     var jsonStart = text.indexOf('{');
     var jsonEnd = text.lastIndexOf('}');

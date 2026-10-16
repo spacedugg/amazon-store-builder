@@ -8,7 +8,7 @@ var { getClient, migrate } = require('./_db');
 
 var ANTHROPIC_URL = 'https://api.anthropic.com/v1/messages';
 var ANTHROPIC_VERSION = '2023-06-01';
-var MODEL = 'claude-haiku-4-5-20251001'; // Schnell und günstig genug für Briefing Übersetzungen
+var MODEL = 'claude-haiku-5-5'; // Schnell und günstig genug für Briefing Übersetzungen ($0,10 / $0,50 je Mio. Token)
 var BATCH_SIZE = 30; // Wieviele Texte pro Claude Call. Hält den Prompt kurz und reduziert Latenz.
 
 function sha256Hex(text) {
@@ -73,8 +73,10 @@ async function translateBatch(apiKey, texts, targetLang) {
     },
     body: JSON.stringify({
       model: MODEL,
-      max_tokens: 4096,
-      temperature: 0,
+      // Haiku 5.5 denkt standardmäßig mit, und das zählt zu max_tokens: mehr Luft als früher (4096).
+      // temperature wird nicht mehr gesetzt: jeder andere Wert als der Standard ist ein 400.
+      max_tokens: 8192,
+      output_config: { effort: 'low' },
       system: system,
       messages: [{ role: 'user', content: userText }],
     }),
@@ -84,7 +86,8 @@ async function translateBatch(apiKey, texts, targetLang) {
     throw new Error('anthropic_error ' + resp.status + ': ' + errText.slice(0, 500));
   }
   var data = await resp.json();
-  var raw = (data.content && data.content[0]) ? data.content[0].text : '';
+  // Die Antwort kann mit einem thinking-Block beginnen: Text nach Typ lesen, nicht content[0]
+  var raw = (data.content || []).filter(function(b) { return b.type === 'text'; }).map(function(b) { return b.text || ''; }).join('');
   var parts = raw.split(/\n?<<<NEXT>>>\n?/);
   // Anzahl muss matchen, sonst fallen wir auf die Originaltexte zurück (besser als kaputt mappen)
   if (parts.length !== texts.length) {

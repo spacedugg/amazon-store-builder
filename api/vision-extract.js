@@ -4,12 +4,12 @@
 // POST /api/vision-extract
 // Body:
 // {
-//   model?: string,               // default "claude-sonnet-4-6"
+//   model?: string,               // default "claude-sonnet-5-5"
 //   system: string,               // Systemprompt, i.d.R. BLUEPRINT_EXTRACTION_PROMPT.md
 //   userText: string,             // Nutzer-Message-Text (DOM-Extrakt plus Seitenmeta)
 //   imagesB64: string[],          // Screenshot-Segmente als reines Base64, ohne Data-URL-Prefix
 //   maxTokens?: number,           // default 8192
-//   temperature?: number,         // default 0
+//   temperature?: number,         // wird ignoriert (Sonnet 5.5 akzeptiert nur den Standardwert)
 //   responseFormat?: "json"|null  // falls "json" erzwingt das Wrapper-Prompting
 // }
 //
@@ -61,12 +61,11 @@ export default async function handler(req, res) {
   try { body = await readJsonBody(req); }
   catch (e) { res.status(400).json({ error: 'invalid JSON body' }); return; }
 
-  var model = body.model || 'claude-sonnet-4-6';
+  var model = body.model || 'claude-sonnet-5-5';
   var system = body.system;
   var userText = body.userText;
   var imagesB64 = Array.isArray(body.imagesB64) ? body.imagesB64 : [];
   var maxTokens = typeof body.maxTokens === 'number' ? body.maxTokens : 8192;
-  var temperature = typeof body.temperature === 'number' ? body.temperature : 0;
 
   if (!system || !userText) { res.status(400).json({ error: 'system und userText sind Pflicht' }); return; }
   if (imagesB64.length > 20) { res.status(400).json({ error: 'zu viele Images (max 20)' }); return; }
@@ -89,7 +88,11 @@ export default async function handler(req, res) {
   var anthropicBody = {
     model: model,
     max_tokens: maxTokens,
-    temperature: temperature,
+    // Sonnet 5.5: kein temperature (400 bei anderen Werten). Das Denken bleibt wie bei Sonnet 4.6 aus
+    // ("between_tools" = nur zwischen Werkzeugaufrufen; hier gibt es keine) — sonst reichen die 60 s Laufzeit
+    // und max_tokens nicht mehr. Aufwand "medium" statt des Standards "high".
+    thinking: { type: 'between_tools' },
+    output_config: { effort: 'medium' },
     system: system,
     messages: [{ role: 'user', content: content }]
   };
@@ -110,7 +113,7 @@ export default async function handler(req, res) {
       return;
     }
     var data = await resp.json();
-    var text = (data.content && data.content[0]) ? data.content[0].text : '';
+    var text = (data.content || []).filter(function(b) { return b.type === 'text'; }).map(function(b) { return b.text || ''; }).join('');
     res.status(200).json({ text: text, usage: data.usage || null, model: model });
   } catch (e) {
     res.status(502).json({ error: 'proxy_error', detail: String(e && e.message || e).slice(0, 500) });
