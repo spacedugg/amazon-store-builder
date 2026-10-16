@@ -93,7 +93,7 @@ export default function FeedbackPanel({ store, shareToken, customerUrl, onClose,
     var text = editing.text.trim();
     // Entspricht die Fassung dem Original, brauchen wir keine eigene
     var teamText = text === item.text.trim() ? '' : text;
-    var ok = await patch(item, { teamText: teamText }, 'Fassung für den Designer gespeichert');
+    var ok = await patch(item, { teamText: teamText }, 'Gespeichert');
     if (ok) setEditing(null);
   }
   async function copyLink() {
@@ -209,7 +209,7 @@ export default function FeedbackPanel({ store, shareToken, customerUrl, onClose,
                         <div style={{ fontSize: 14, lineHeight: 1.45, whiteSpace: 'pre-wrap', wordBreak: 'break-word', color: '#0f172a' }}>{it.text}</div>
                         {editing && editing.id === it.id ? (
                           <div style={{ marginTop: 8 }}>
-                            <div style={{ fontSize: 11.5, color: '#64748b', marginBottom: 4 }}>Fassung für den Designer (das Original des Kunden bleibt oben stehen)</div>
+                            <div style={{ fontSize: 11.5, color: '#64748b', marginBottom: 4 }}>Text für den Designer (das Original des Kunden bleibt oben stehen)</div>
                             <textarea value={editing.text} autoFocus rows={4} maxLength={2000}
                               onChange={function(e) { setEditing({ id: it.id, text: e.target.value }); }}
                               style={{ width: '100%', boxSizing: 'border-box', padding: 8, border: '1px solid #cbd5e1', borderRadius: 8, fontFamily: 'inherit', fontSize: 13.5, resize: 'vertical' }} />
@@ -232,17 +232,15 @@ export default function FeedbackPanel({ store, shareToken, customerUrl, onClose,
                           </div>
                         )}
                         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 8 }}>
-                          {it.status === 'neu' && <button className="btn" disabled={disabled} style={{ fontSize: 11 }} onClick={function() { patch(it, { status: 'offen' }, 'Auf „In Arbeit“ gesetzt'); }}>In Arbeit nehmen</button>}
-                          {it.status !== 'erledigt' && <button className="btn" disabled={disabled} style={{ fontSize: 11 }} onClick={function() { patch(it, { status: 'erledigt' }, 'Als erledigt markiert'); }}>Erledigt</button>}
-                          {it.status === 'erledigt' && <button className="btn" disabled={disabled} style={{ fontSize: 11 }} onClick={function() { patch(it, { status: 'offen' }, 'Wieder in Arbeit'); }}>Wieder öffnen</button>}
                           {!(editing && editing.id === it.id) && (
-                            <button className="btn" disabled={disabled} style={{ fontSize: 11 }} onClick={function() { setEditing({ id: it.id, text: it.teamText || it.text }); }}>
-                              {it.teamText ? 'Fassung für Designer ändern' : 'Für Designer umformulieren'}
-                            </button>
+                            <button className="btn" disabled={disabled} style={{ fontSize: 11 }} onClick={function() { setEditing({ id: it.id, text: it.teamText || it.text }); }}>Bearbeiten</button>
                           )}
                           <button className="btn" disabled={disabled} style={{ fontSize: 11 }} onClick={function() { patch(it, { forwarded: !it.forwarded }, it.forwarded ? 'Beim Designer zurückgezogen' : 'An den Designer weitergeleitet'); }}>
                             {disabled ? '…' : (it.forwarded ? 'Beim Designer zurückziehen' : 'An Designer weiterleiten')}
                           </button>
+                          {it.status !== 'erledigt'
+                            ? <button className="btn" disabled={disabled} style={{ fontSize: 11 }} onClick={function() { patch(it, { status: 'erledigt' }, 'Als erledigt markiert'); }}>Erledigt</button>
+                            : <button className="btn" disabled={disabled} style={{ fontSize: 11 }} onClick={function() { patch(it, { status: 'offen' }, 'Wieder in Arbeit'); }}>Wieder öffnen</button>}
                           {confirmDel === it.id ? (
                             <>
                               <button className="btn" disabled={disabled} style={{ fontSize: 11, background: '#dc2626', color: '#fff', borderColor: '#dc2626' }} onClick={function() { remove(it); }}>{disabled ? 'Löscht …' : 'Wirklich löschen'}</button>
