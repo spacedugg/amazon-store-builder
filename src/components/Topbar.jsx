@@ -92,7 +92,7 @@ function formatCustomerProgress(p) {
   return 'Speichere...';
 }
 
-export default function Topbar({ store, shareToken, onExport, onSave, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onLoadProducts, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress, folderUploadProgress, onChangeBrandName, onShowFeedback, feedbackNew, onShowStores }) {
+export default function Topbar({ store, shareToken, onExport, onSave, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onLoadProducts, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress, folderUploadProgress, onChangeBrandName, onShowFeedback, feedbackNew, onShowStores, returningToOverview }) {
   var folderProgressLabel = '';
   if (folderUploadProgress) {
     folderProgressLabel = 'Bilder ' + (folderUploadProgress.uploaded || 0) + ' / ' + folderUploadProgress.total;
@@ -100,6 +100,7 @@ export default function Topbar({ store, shareToken, onExport, onSave, onShowJson
   }
   return (
     <div className="topbar">
+      {onShowStores && <button className="btn topbar-back" onClick={onShowStores} disabled={returningToOverview} title="Zur Übersicht aller Stores zurück">← {returningToOverview ? "Speichert…" : "Alle Stores"}</button>}
       <div className="topbar-brand">
         <span className="topbar-icon">&#x1F3EA;</span>
         <span className="topbar-title"><span style={{ color: '#FF9900' }}>Store</span> Builder</span>
@@ -114,7 +115,6 @@ export default function Topbar({ store, shareToken, onExport, onSave, onShowJson
         </div>
       )}
       <div style={{ flex: 1 }} />
-      {onShowStores && <button className="btn" onClick={onShowStores} title="Alle gespeicherten Stores anzeigen">Alle Stores</button>}
 
       {store.pages.length > 0 && (
         <>

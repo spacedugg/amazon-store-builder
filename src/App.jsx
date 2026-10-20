@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, findLayout, LAYOUT_TILE_DIMS } from './constants';
-import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink, setSessionStore, getSessionStore, brandToSlug, shareBaseUrl } from './storage';
+import { saveStore, loadSavedStores, loadStore, autoSave, loadAutoSave, importStoreByShareLink, setSessionStore, getSessionStore, brandToSlug, shareBaseUrl } from './storage';
 import { uploadFileToBlob } from './imageStorage';
 import { importBriefingToStore, importPageFromBriefing, importSectionFromBriefing, importTileFromBriefing } from './briefingImport';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
@@ -15,7 +15,7 @@ import PatchImportModal from './components/PatchImportModal';
 import JsonExportModal from './components/JsonExportModal';
 import LinkDialog from './components/LinkDialog';
 import FeedbackPanel from './components/FeedbackPanel';
-import { loadFeedback, loadFeedbackCounts } from './feedbackApi';
+import { loadFeedback } from './feedbackApi';
 import ExportModal from './components/ExportModal';
 import BriefingView from './components/BriefingView';
 import CustomerPreview from './components/CustomerPreview';
@@ -229,11 +229,10 @@ export default function App() {
   var [savedStoresError, setSavedStoresError] = useState('');
   var [showOverview, setShowOverview] = useState(function() { var last = getSessionStore(); return !last || !last.storeId; });
   var [restoringStore, setRestoringStore] = useState(function() { var last = getSessionStore(); return !!(last && last.storeId); });
-  var [storeFeedbackCounts, setStoreFeedbackCounts] = useState({});
   var [warnings, setWarnings] = useState([]);
   var [viewMode, setViewMode] = useState('desktop');
   var [requestedAsins, setRequestedAsins] = useState([]);
-  var [showSaved, setShowSaved] = useState(false);
+  var [returningToOverview, setReturningToOverview] = useState(false);
   var [showExport, setShowExport] = useState(false);
   // Link/Fehler Dialog fuer Customer Link und Export (statt alert/prompt, siehe LinkDialog.jsx)
   var [linkDialog, setLinkDialog] = useState(null);
@@ -377,14 +376,6 @@ export default function App() {
   }, [handleUndo, handleRedo]);
 
   // Neue Kunden-Feedbacks je Store: rote Zahl in der Store Liste, ohne den Store zu oeffnen
-  useEffect(function() {
-    var stopped = false;
-    function pull() { loadFeedbackCounts().then(function(c) { if (!stopped) setStoreFeedbackCounts(c); }).catch(function() { /* still */ }); }
-    pull();
-    var t = setInterval(pull, 60000);
-    return function() { stopped = true; clearInterval(t); };
-  }, []);
-
   // Load saved stores on mount
   useEffect(function() {
     loadSavedStores().then(setSavedStores).catch(function(err) { setSavedStoresError(err.message || 'Stores konnten nicht geladen werden.'); }).finally(function() { setSavedStoresLoading(false); });
@@ -1347,6 +1338,22 @@ export default function App() {
     setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
   };
 
+  var handleShowStores = async function() {
+    if (returningToOverview) return;
+    setReturningToOverview(true);
+    try {
+      // The editor may still have unsaved changes, especially with a designer link.
+      if (store.pages.length) await persistStore(store, { includeShareToken: !!shareTokenRef.current });
+      setSavedStores(await loadSavedStores());
+      setSavedStoresError('');
+      setShowOverview(true);
+    } catch (err) {
+      alert('Store konnte nicht gespeichert werden: ' + (err.message || 'Bitte erneut versuchen.'));
+    } finally {
+      setReturningToOverview(false);
+    }
+  };
+
   var handleLoadSaved = async function(id) {
     var result = await loadStore(id);
     if (!result || !result.data || !result.data.pages || !result.data.pages.length) return false;
@@ -1391,12 +1398,6 @@ export default function App() {
     alert('Rescue JSON geladen. Bitte einmal manuell speichern, sobald der Image Auslagerungs Fix live ist.');
   };
 
-  var handleDeleteSaved = async function(id) {
-    await deleteSavedStore(id);
-    var stores = await loadSavedStores();
-    setSavedStores(stores);
-  };
-
   // ─── IMPORT STORE BY SHARE LINK ───
   var handleImportStore = async function(url) {
     try {
@@ -1422,7 +1423,7 @@ export default function App() {
   // Klick auf "New Store" öffnet Modal mit Briefing JSON Import.
   // Modal bietet außerdem die Option, einen leeren Store zu starten.
   var handleNewStore = function() {
-    if (store.pages.length > 0 && !confirm('Neuen Store anlegen? Ungespeicherte Änderungen gehen verloren.')) return;
+    if (!showOverview && store.pages.length > 0 && !confirm('Neuen Store anlegen? Ungespeicherte Änderungen gehen verloren.')) return;
     setShowNewStoreModal(true);
   };
 
@@ -1987,7 +1988,8 @@ export default function App() {
         viewMode={viewMode}
         onToggleView={handleToggleView}
         onNewStore={handleNewStore}
-        onShowStores={function() { setShowOverview(true); }}
+        onShowStores={handleShowStores}
+        returningToOverview={returningToOverview}
         onPatchImport={store.pages.length > 0 ? function() { setShowPatchImport(true); } : null}
         onUndo={handleUndo}
         canUndo={undoStackRef.current.length > 0}
@@ -2002,7 +2004,6 @@ export default function App() {
       <div className="app-body">
         <PageList
           pages={store.pages}
-          feedbackCounts={storeFeedbackCounts}
           curPage={page ? page.id : ''}
           onSelect={function(id) { setCurPage(id); setSel(null); }}
           onAddPage={addPage}
@@ -2012,14 +2013,7 @@ export default function App() {
           onReorderPage={reorderPage}
           onDuplicatePage={duplicatePage}
           onMovePage={movePageStructural}
-          savedStores={savedStores}
-          currentStoreId={storeId}
-          onLoadSaved={handleLoadSaved}
-          onDeleteSaved={handleDeleteSaved}
-          onImportStore={handleImportStore}
           uiLang={uiLang}
-          showSaved={showSaved}
-          onToggleSaved={function() { setShowSaved(!showSaved); }}
         />
 
         <Canvas
