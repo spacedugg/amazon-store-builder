@@ -44,17 +44,50 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'Database not available: ' + e.message });
   }
 
-  // GET /api/stores — list all stores (without full data)
-  // Wichtig: slug muss hier ausgeschlossen werden, sonst verschluckt dieser
-  // Handler die ?slug=... Anfragen (er steht vor dem Slug-Handler weiter unten)
-  // und der Customer Preview bekommt die Liste statt des Einzel-Stores, was
-  // faelschlich als "Store nicht gefunden oder Link abgelaufen" erscheint.
+  // GET /api/stores — lightweight card metadata. Extract only a handful of
+  // homepage image references, never the full store JSON or embedded image data.
   if (req.method === 'GET' && !req.query.id && !req.query.shareToken && !req.query.slug) {
     try {
+      var previewColumns = [
+        "json_extract(data, '$.pages[0].name') AS homepage_name",
+        "json_extract(data, '$.pages[0].headerBanner') AS page_banner",
+        "json_extract(data, '$.headerBanner') AS store_banner",
+      ];
+      for (var section = 0; section < 2; section++) {
+        for (var tile = 0; tile < 3; tile++) {
+          previewColumns.push("json_extract(data, '$.pages[0].sections[" + section + "].tiles[" + tile + "].uploadedImage') AS preview_" + section + "_" + tile);
+        }
+      }
       var result = await db.execute(
-        'SELECT id, brand_name, marketplace, page_count, product_count, share_token, created_at, updated_at FROM stores ORDER BY updated_at DESC'
+        'SELECT id, brand_name, marketplace, page_count, product_count, share_token, created_at, updated_at, ' +
+        previewColumns.join(', ') + ' FROM stores ORDER BY updated_at DESC'
       );
+      var fields = ['page_banner', 'store_banner', 'preview_0_0', 'preview_0_1', 'preview_0_2', 'preview_1_0', 'preview_1_1', 'preview_1_2'];
+      var hashes = new Set();
+      result.rows.forEach(function(row) {
+        fields.forEach(function(key) {
+          var value = row[key];
+          if (typeof value === 'string' && /^#imgref:sha256:[a-f0-9]{64}$/.test(value)) hashes.add(value.slice(15));
+        });
+      });
+      var imageUrls = new Map();
+      var allHashes = Array.from(hashes);
+      for (var i = 0; i < allHashes.length; i += 200) {
+        var chunk = allHashes.slice(i, i + 200);
+        var images = await db.execute({
+          sql: 'SELECT hash, blob_url FROM store_images WHERE hash IN (' + chunk.map(function() { return '?'; }).join(',') + ')',
+          args: chunk,
+        });
+        images.rows.forEach(function(row) { if (row.blob_url) imageUrls.set(row.hash, row.blob_url); });
+      }
+      function previewUrl(value) {
+        if (typeof value !== 'string') return null;
+        if (/^https:\/\//i.test(value)) return value;
+        if (/^#imgref:sha256:[a-f0-9]{64}$/.test(value)) return imageUrls.get(value.slice(15)) || null;
+        return null;
+      }
       var stores = result.rows.map(function(row) {
+        var tileImages = fields.slice(2).map(function(key) { return previewUrl(row[key]); }).filter(Boolean);
         return {
           id: row.id,
           brandName: row.brand_name,
@@ -64,6 +97,11 @@ module.exports = async function handler(req, res) {
           shareToken: row.share_token,
           createdAt: row.created_at,
           updatedAt: row.updated_at,
+          preview: {
+            pageName: row.homepage_name || 'Home',
+            banner: previewUrl(row.page_banner) || previewUrl(row.store_banner),
+            tiles: tileImages.slice(0, 3),
+          },
         };
       });
       return res.status(200).json({ stores: stores });
