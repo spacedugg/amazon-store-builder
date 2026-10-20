@@ -226,6 +226,7 @@ export default function App() {
   var [showNewStoreModal, setShowNewStoreModal] = useState(false);
   var [savedStores, setSavedStores] = useState([]);
   var [savedStoresLoading, setSavedStoresLoading] = useState(true);
+  var [savedStoresError, setSavedStoresError] = useState('');
   var [showOverview, setShowOverview] = useState(function() { var last = getSessionStore(); return !last || !last.storeId; });
   var [restoringStore, setRestoringStore] = useState(function() { var last = getSessionStore(); return !!(last && last.storeId); });
   var [storeFeedbackCounts, setStoreFeedbackCounts] = useState({});
@@ -386,7 +387,7 @@ export default function App() {
 
   // Load saved stores on mount
   useEffect(function() {
-    loadSavedStores().then(setSavedStores).finally(function() { setSavedStoresLoading(false); });
+    loadSavedStores().then(setSavedStores).catch(function(err) { setSavedStoresError(err.message || 'Stores konnten nicht geladen werden.'); }).finally(function() { setSavedStoresLoading(false); });
   }, []);
 
   // Session restore: wenn dieser Tab vorher schon einen Store geladen
@@ -1363,6 +1364,10 @@ export default function App() {
   var handleLoadAutoSave = function() {
     var data = loadAutoSave();
     if (data && data.pages && data.pages.length > 0) {
+      storeIdRef.current = null;
+      shareTokenRef.current = null;
+      setStoreId(null);
+      setShareToken(null);
       setStore(refreshImageRefs(data));
       setCurPage(data.pages[0] ? data.pages[0].id : '');
       setSel(null);
@@ -1943,6 +1948,7 @@ export default function App() {
       <StoreOverview
         stores={savedStores}
         loading={savedStoresLoading}
+        loadError={savedStoresError}
         hasAutoSave={hasAutoSave}
         onContinue={handleLoadAutoSave}
         onOpen={handleLoadSaved}
