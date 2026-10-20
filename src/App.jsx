@@ -5,6 +5,7 @@ import { uploadFileToBlob } from './imageStorage';
 import { importBriefingToStore, importPageFromBriefing, importSectionFromBriefing, importTileFromBriefing } from './briefingImport';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
 import Topbar from './components/Topbar';
+import StoreOverview from './components/StoreOverview';
 import PageList from './components/PageList';
 import Canvas from './components/Canvas';
 import PropertiesPanel from './components/PropertiesPanel';
@@ -224,6 +225,10 @@ export default function App() {
   var [showAsins, setShowAsins] = useState(false);
   var [showNewStoreModal, setShowNewStoreModal] = useState(false);
   var [savedStores, setSavedStores] = useState([]);
+  var [savedStoresLoading, setSavedStoresLoading] = useState(true);
+  var [savedStoresError, setSavedStoresError] = useState('');
+  var [showOverview, setShowOverview] = useState(function() { var last = getSessionStore(); return !last || !last.storeId; });
+  var [restoringStore, setRestoringStore] = useState(function() { var last = getSessionStore(); return !!(last && last.storeId); });
   var [storeFeedbackCounts, setStoreFeedbackCounts] = useState({});
   var [warnings, setWarnings] = useState([]);
   var [viewMode, setViewMode] = useState('desktop');
@@ -382,9 +387,7 @@ export default function App() {
 
   // Load saved stores on mount
   useEffect(function() {
-    loadSavedStores().then(function(stores) {
-      setSavedStores(stores);
-    });
+    loadSavedStores().then(setSavedStores).catch(function(err) { setSavedStoresError(err.message || 'Stores konnten nicht geladen werden.'); }).finally(function() { setSavedStoresLoading(false); });
   }, []);
 
   // Session restore: wenn dieser Tab vorher schon einen Store geladen
@@ -409,10 +412,13 @@ export default function App() {
         }
         setCurPage(result.data.pages[0].id);
         setSel(null);
+        setShowOverview(false);
       } else {
         setSessionStore(null);
+        setShowOverview(true);
       }
-    }).catch(function() { setSessionStore(null); });
+    }).catch(function() { setSessionStore(null); setShowOverview(true); })
+      .finally(function() { setRestoringStore(false); });
   }, []);
 
   // Spiegelt den aktiven Store in sessionStorage, damit ein Tab Reload
@@ -1343,21 +1349,29 @@ export default function App() {
 
   var handleLoadSaved = async function(id) {
     var result = await loadStore(id);
-    if (result && result.data) {
-      setStore(refreshImageRefs(result.data));
-      setStoreId(id);
-      if (result.shareToken) setShareToken(result.shareToken);
-      setCurPage(result.data.pages[0] ? result.data.pages[0].id : '');
-      setSel(null);
-    }
+    if (!result || !result.data || !result.data.pages || !result.data.pages.length) return false;
+    storeIdRef.current = id;
+    shareTokenRef.current = result.shareToken || null;
+    setStore(refreshImageRefs(result.data));
+    setStoreId(id);
+    setShareToken(result.shareToken || null);
+    setCurPage(result.data.pages[0].id);
+    setSel(null);
+    setShowOverview(false);
+    return true;
   };
 
   var handleLoadAutoSave = function() {
     var data = loadAutoSave();
     if (data && data.pages && data.pages.length > 0) {
+      storeIdRef.current = null;
+      shareTokenRef.current = null;
+      setStoreId(null);
+      setShareToken(null);
       setStore(refreshImageRefs(data));
       setCurPage(data.pages[0] ? data.pages[0].id : '');
       setSel(null);
+      setShowOverview(false);
     }
   };
 
@@ -1373,6 +1387,7 @@ export default function App() {
     setSel(null);
     setStoreId(null);     // Rescue erzwingt neuen Save, alte ID gehört evtl. zu einem stale Stand
     setShareToken(null);  // Designer Token wird beim nächsten Save neu erzeugt, falls Export gedrückt wird
+    setShowOverview(false);
     alert('Rescue JSON geladen. Bitte einmal manuell speichern, sobald der Image Auslagerungs Fix live ist.');
   };
 
@@ -1393,6 +1408,7 @@ export default function App() {
       setShareToken(result.shareToken || null);
       setCurPage(result.data.pages && result.data.pages[0] ? result.data.pages[0].id : '');
       setSel(null);
+      setShowOverview(false);
       // Refresh saved stores list
       var stores = await loadSavedStores();
       setSavedStores(stores);
@@ -1430,6 +1446,7 @@ export default function App() {
     setStoreId(null);
     setShareToken(null);
     setShowNewStoreModal(false);
+    setShowOverview(false);
   };
 
   var handleImportBriefing = function(briefingData) {
@@ -1443,6 +1460,7 @@ export default function App() {
       setStoreId(null);
       setShareToken(null);
       setShowNewStoreModal(false);
+      setShowOverview(false);
     } catch (e) {
       alert('Import fehlgeschlagen, ' + e.message);
     }
@@ -1923,6 +1941,31 @@ export default function App() {
     hasAutoSave = autoData && autoData.pages && autoData.pages.length > 0;
   } catch(e) { /* ignore */ }
 
+  if (restoringStore) return <div className="store-home-loading">Store wird geöffnet …</div>;
+
+  if (showOverview) return (
+    <div className="app-root">
+      <StoreOverview
+        stores={savedStores}
+        loading={savedStoresLoading}
+        loadError={savedStoresError}
+        hasAutoSave={hasAutoSave}
+        onContinue={handleLoadAutoSave}
+        onOpen={handleLoadSaved}
+        onNewStore={handleNewStore}
+        onImportRescueJson={handleImportRescueJson}
+        onImportStore={handleImportStore}
+      />
+      {showNewStoreModal && (
+        <NewStoreModal
+          onClose={function() { setShowNewStoreModal(false); }}
+          onImport={handleImportBriefing}
+          onCreateEmpty={handleCreateEmpty}
+        />
+      )}
+    </div>
+  );
+
   return (
     <div className="app-root">
       <Topbar
@@ -1944,6 +1987,7 @@ export default function App() {
         viewMode={viewMode}
         onToggleView={handleToggleView}
         onNewStore={handleNewStore}
+        onShowStores={function() { setShowOverview(true); }}
         onPatchImport={store.pages.length > 0 ? function() { setShowPatchImport(true); } : null}
         onUndo={handleUndo}
         canUndo={undoStackRef.current.length > 0}

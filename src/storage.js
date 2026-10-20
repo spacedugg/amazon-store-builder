@@ -49,6 +49,8 @@ export async function loadSavedStores() {
         pageCount: s.pageCount,
         productCount: s.productCount,
         shareToken: s.shareToken,
+        preview: s.preview || null,
+        createdBy: s.createdBy || null,
       };
     });
   } catch (e) {
@@ -57,7 +59,17 @@ export async function loadSavedStores() {
       var raw = localStorage.getItem('amazon-store-builder');
       if (!raw) return [];
       var stores = JSON.parse(raw);
-      return Array.isArray(stores) ? stores : [];
+      return Array.isArray(stores) ? stores.map(function(s) {
+        var home = s.data && s.data.pages && s.data.pages[0];
+        var banner = home && home.headerBanner || s.data && s.data.headerBanner || null;
+        return Object.assign({}, s, {
+          preview: s.preview || {
+            pageName: home && home.name || 'Home',
+            banner: typeof banner === 'string' && /^(https:\/\/|data:image\/)/.test(banner) ? banner : null,
+            tiles: [],
+          },
+        });
+      }) : [];
     } catch (e2) { return []; }
   }
 }
