@@ -30,7 +30,7 @@ function Preview({ store }) {
   );
 }
 
-export default function StoreOverview({ stores, loading, hasAutoSave, onContinue, onOpen, onNewStore, onImportRescueJson, onImportStore }) {
+export default function StoreOverview({ stores, loading, loadError, hasAutoSave, onContinue, onOpen, onNewStore, onImportRescueJson, onImportStore }) {
   var [opening, setOpening] = useState(null);
   var [error, setError] = useState('');
   var [importOpen, setImportOpen] = useState(false);
@@ -99,7 +99,7 @@ export default function StoreOverview({ stores, loading, hasAutoSave, onContinue
           <input type="url" required placeholder="Link zum Store einfügen" value={importUrl} onChange={function(e) { setImportUrl(e.target.value); }} />
           <button type="submit" disabled={importing}>{importing ? 'Importiere …' : 'Importieren'}</button>
         </form>}
-        {error && <p className="store-home-error" role="alert">{error}</p>}
+        {(error || loadError) && <p className="store-home-error" role="alert">{error || loadError}</p>}
         {loading ? <div className="store-home-loading">Stores werden geladen …</div> : stores.length ? (
           <div className="store-home-grid">
             {stores.map(function(store) {
@@ -117,7 +117,7 @@ export default function StoreOverview({ stores, loading, hasAutoSave, onContinue
               </button>;
             })}
           </div>
-        ) : <div className="store-home-empty"><h3>Noch keine Stores gespeichert</h3><p>Erstelle deinen ersten Store oder importiere einen bestehenden Link.</p><button className="store-home-create" onClick={onNewStore}>Neuen Store anlegen</button></div>}
+        ) : loadError ? null : <div className="store-home-empty"><h3>Noch keine Stores gespeichert</h3><p>Erstelle deinen ersten Store oder importiere einen bestehenden Link.</p><button className="store-home-create" onClick={onNewStore}>Neuen Store anlegen</button></div>}
       </main>
     </div>
   );
