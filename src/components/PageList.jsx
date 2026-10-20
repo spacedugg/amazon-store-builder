@@ -2,32 +2,9 @@ import { useState } from 'react';
 import { t } from '../i18n';
 
 
-// Kleine rote Zahl: so viele neue Kunden-Feedbacks warten
-function FbBadge({ n, title }) {
-  return (
-    <span title={title} style={{ marginLeft: 6, background: '#dc2626', color: '#fff', borderRadius: 9, minWidth: 16, height: 16, padding: '0 5px', boxSizing: 'border-box', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 700, verticalAlign: 'middle' }}>{n > 99 ? '99+' : n}</span>
-  );
-}
-
-export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSubPage, onRenamePage, onDeletePage, onReorderPage, onDuplicatePage, onMovePage, savedStores, currentStoreId, onLoadSaved, onDeleteSaved, onImportStore, uiLang, showSaved, onToggleSaved, feedbackCounts }) {
-  var fbMap = feedbackCounts || {};
-  function fbOf(id) { return Number(fbMap[id]) || 0; }
-  var totalFb = Object.keys(fbMap).reduce(function(sum, k) { return sum + (Number(fbMap[k]) || 0); }, 0);
+export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSubPage, onRenamePage, onDeletePage, onReorderPage, onDuplicatePage, onMovePage, uiLang }) {
   var [editingId, setEditingId] = useState(null);
   var [editName, setEditName] = useState('');
-  var [showImport, setShowImport] = useState(false);
-  var [importUrl, setImportUrl] = useState('');
-  var [importBusy, setImportBusy] = useState(false);
-  var [importError, setImportError] = useState('');
-  var [loadingStoreId, setLoadingStoreId] = useState(null);
-
-  var handleLoadStore = function(id) {
-    if (loadingStoreId || id === currentStoreId) return;
-    setLoadingStoreId(id);
-    Promise.resolve(onLoadSaved(id)).catch(function() {}).finally(function() {
-      setLoadingStoreId(null);
-    });
-  };
   // Drag and Drop State
   var [dragId, setDragId] = useState(null);
   var [dropOver, setDropOver] = useState(null); // { id, pos: 'above'|'below'|'into' }
@@ -183,80 +160,6 @@ export default function PageList({ pages, curPage, onSelect, onAddPage, onAddSub
         })}
       </div>
 
-      {/* Saved stores section: collapsed by default, toggle to show */}
-      {savedStores && savedStores.length > 0 && (
-        <>
-          <div className="page-list-header saved-header" style={{ marginTop: 4, cursor: 'pointer' }} onClick={onToggleSaved}>
-            <span>{t('pages.savedStores', uiLang)}{totalFb > 0 && <FbBadge n={totalFb} title={totalFb + ' neue Kunden-Feedbacks'} />}</span>
-            <span className="btn-icon-sm" style={{ fontSize: 10, fontWeight: 700 }}>{showSaved ? '▲' : '▼'}</span>
-          </div>
-          {showSaved && (
-            <div className="page-list-body">
-              {savedStores.map(function(s) {
-                var isCurrent = currentStoreId && s.id === currentStoreId;
-                var isLoading = loadingStoreId === s.id;
-                var anyLoading = !!loadingStoreId;
-                var rowTitle = isCurrent
-                  ? t('pages.currentStore', uiLang)
-                  : (isLoading ? 'Lädt…' : 'Diesen Store öffnen');
-                return (
-                  <div key={s.id}
-                    className={'saved-store-item' + (isCurrent ? ' active' : '') + (isLoading ? ' loading' : '')}
-                    title={rowTitle}
-                    onClick={isCurrent || anyLoading ? undefined : function() { handleLoadStore(s.id); }}
-                    style={isCurrent ? { cursor: 'default' } : (anyLoading ? { cursor: 'progress', opacity: 0.6 } : { cursor: 'pointer' })}>
-                    <div className="saved-store-name">
-                      {isLoading ? '⏳ ' : (isCurrent ? '● ' : '')}{s.brandName}
-                      {fbOf(s.id) > 0 && <FbBadge n={fbOf(s.id)} title={fbOf(s.id) + ' neue Kunden-Feedbacks'} />}
-                    </div>
-                    <div className="saved-store-meta">
-                      {s.pageCount}p &middot; {s.productCount} ASINs
-                    </div>
-                    <button className="btn-icon-sm btn-icon-danger"
-                      onClick={function(e) { e.stopPropagation(); onDeleteSaved(s.id); }}
-                      disabled={isLoading}
-                      title={t('pages.delete', uiLang)}>&times;</button>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </>
-      )}
-
-      {/* Import store by share link */}
-      <div className="page-list-header" style={{ marginTop: 4 }}>
-        <span
-          style={{ cursor: 'pointer', fontSize: 11, opacity: 0.8 }}
-          onClick={function() { setShowImport(!showImport); setImportError(''); }}
-        >
-          {showImport ? '▲' : '+'} {t('pages.importStore', uiLang)}
-        </span>
-      </div>
-      {showImport && (
-        <div style={{ padding: '4px 8px 8px' }}>
-          <input
-            className="input"
-            type="url"
-            placeholder={t('pages.importPlaceholder', uiLang)}
-            value={importUrl}
-            onChange={function(e) { setImportUrl(e.target.value); setImportError(''); }}
-            onKeyDown={function(e) { if (e.key === 'Enter') handleImport(); }}
-            style={{ width: '100%', fontSize: 11, marginBottom: 4 }}
-          />
-          <button
-            className="btn btn-primary"
-            style={{ width: '100%', fontSize: 11, padding: '3px 0' }}
-            onClick={handleImport}
-            disabled={importBusy || !importUrl.trim()}
-          >
-            {importBusy ? 'Importing...' : t('pages.importBtn', uiLang)}
-          </button>
-          {importError && (
-            <div style={{ color: '#e74c3c', fontSize: 10, marginTop: 3 }}>{importError}</div>
-          )}
-        </div>
-      )}
     </div>
   );
 }
