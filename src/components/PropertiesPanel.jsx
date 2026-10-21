@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, MAX_HOTSPOTS, createDefaultProductSelector, getMinImageHeight, tileHasDimensionRule, MIN_IMAGE_RATIO_DESKTOP, MIN_IMAGE_RATIO_MOBILE, MIN_TEXT_IMAGE_HEIGHT } from '../constants';
 import { t } from '../i18n';
+import { pageCounts, MAX_PRODUCT_COLLECTIONS } from '../storeRules.mjs';
 
 // Inline Hinweis unter den Dimension Inputs. Greift nur wenn das Tile unter
 // die Mindesthöhen Regel fällt (Image Tile mit imageCategory benefit oder
@@ -46,6 +47,37 @@ function fileUpload(label, value, onSet, onRemove, uiLang) {
           reader.readAsDataURL(f);
         }} />
       {value && <button className="btn" style={{ marginTop: 4 }} onClick={onRemove}>{t('props.remove', uiLang)}</button>}
+    </div>
+  );
+}
+
+function collectionImageUpload(label, value, onSet, onRemove, mobile) {
+  var minW = 1920, minH = mobile ? 1920 : 640;
+  return (
+    <div className="props-section">
+      <label className="label">{label} · mindestens {minW} × {minH} px · maximal 5 MB</label>
+      {value && <img src={value} alt={label} style={{ width: '100%', maxHeight: 110, objectFit: 'contain', marginBottom: 5 }} />}
+      <input type="file" accept="image/jpeg,image/png,image/webp" style={{ fontSize: 11 }} onChange={function(e) {
+        var file = e.target.files && e.target.files[0];
+        if (!file) return;
+        if (file.size > 5 * 1024 * 1024) { alert('Das Titelbild darf maximal 5 MB groß sein.'); e.target.value = ''; return; }
+        var url = URL.createObjectURL(file);
+        var img = new Image();
+        img.onload = function() {
+          URL.revokeObjectURL(url);
+          var ratio = img.width / img.height;
+          if (img.width < minW || img.height < minH || Math.abs(ratio - (mobile ? 1 : 3)) > 0.03) {
+            alert('Bitte ' + (mobile ? 'ein quadratisches mobiles Bild (1:1, mindestens 1920 × 1920 px)' : 'ein Desktop-Bild im Format 3:1 (mindestens 1920 × 640 px)') + ' hochladen.');
+            return;
+          }
+          var reader = new FileReader();
+          reader.onload = function(ev) { onSet(ev.target.result); };
+          reader.readAsDataURL(file);
+        };
+        img.onerror = function() { URL.revokeObjectURL(url); alert('Bild konnte nicht gelesen werden.'); };
+        img.src = url;
+      }} />
+      {value && <button className="btn" style={{ marginTop: 4 }} onClick={onRemove}>Entfernen</button>}
     </div>
   );
 }
@@ -138,7 +170,7 @@ function tileClipboardLabel(tile) {
   return label.length > 40 ? label.slice(0, 40) + '…' : label;
 }
 
-export default function PropertiesPanel({ tile, onChange, onDetachReuse, onCopyTile, onPasteTile, clipboardTile, products, viewMode, uiLang, layoutType, pages, allPages, heroBanner, onHeroBannerChange, onHeroBannerImageUpload, onHeroBannerImageClear, storeHeaderBanner, storeHeaderBannerMobile }) {
+export default function PropertiesPanel({ tile, onChange, onDetachReuse, onCopyTile, onPasteTile, clipboardTile, products, viewMode, uiLang, layoutType, pages, allPages, currentPage, heroBanner, onHeroBannerChange, onHeroBannerImageUpload, onHeroBannerImageClear, storeHeaderBanner, storeHeaderBannerMobile }) {
   // Top N Eingabe für markenübergreifende BSR Vorschläge auf Product Tiles
   var [topNInput, setTopNInput] = useState('');
   // ─── HERO BANNER MODE ───
@@ -226,6 +258,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, onCopyT
   (products || []).forEach(function(p) { productMap[p.asin] = p; });
   var isImageType = tile.type === 'image' || tile.type === 'shoppable_image' || tile.type === 'image_text';
   var isProductType = PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0;
+  var pageModules = pageCounts(currentPage);
 
   // Sammle alle ASINs die mit diesem Tile verknüpft sind: linkAsin, hotspots, asins Array
   var linkedAsins = [];
@@ -373,7 +406,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, onCopyT
           onChange={function(e) {
             var tt = e.target.value;
             var up = Object.assign({}, tile, { type: tt });
-            if (isProductType && !up.asins) up.asins = [];
+            if (PRODUCT_TILE_TYPES.indexOf(tt) >= 0 && !up.asins) up.asins = [];
             if (tt === 'video' && !up.dimensions) up.dimensions = { w: 3000, h: 1688 };
             if (tt === 'video' && !up.mobileDimensions) up.mobileDimensions = { w: 1680, h: 945 };
             onChange(up);
@@ -383,7 +416,9 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, onCopyT
             if (tt === 'shoppable_image' && layoutType === 'vh') return false;
             return true;
           }).map(function(tt) {
-            return <option key={tt} value={tt}>{TILE_TYPE_LABELS[tt] || tt}</option>;
+            var cap = tt === 'product_collection' ? MAX_PRODUCT_COLLECTIONS : 1;
+            var atLimit = (tt === 'product_grid' || tt === 'best_sellers' || tt === 'product_collection') && pageModules[tt] >= cap && tile.type !== tt;
+            return <option key={tt} value={tt} disabled={atLimit}>{TILE_TYPE_LABELS[tt] || tt}{atLimit ? ' · Limit erreicht' : ''}</option>;
           })}
         </select>
       </div>
@@ -858,6 +893,19 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, onCopyT
         </>
       )}
 
+      {tile.type === 'product_collection' && (
+        <>
+          <div className="props-section">
+            <label className="label">Titel der Produktsammlung</label>
+            <input className="input" value={tile.collectionTitle || ''} onChange={function(e) { u('collectionTitle', e.target.value); }} placeholder="z. B. Unsere Favoriten" />
+          </div>
+          {collectionImageUpload('Desktop-Titelbild (3:1)', tile.uploadedImage,
+            function(v) { u('uploadedImage', v); }, function() { u('uploadedImage', null); }, false)}
+          {collectionImageUpload('Mobiles Titelbild (1:1)', tile.uploadedImageMobile,
+            function(v) { u('uploadedImageMobile', v); }, function() { u('uploadedImageMobile', null); }, true)}
+        </>
+      )}
+
       {/* PRODUCT TYPES und IMAGE / SHOPPABLE_IMAGE Tiles, ASIN Editor.
           Intern editierbar: hinzufügen, entfernen, Reihenfolge per Zeilen.
           Im Designer Briefing nicht angezeigt. */}
@@ -867,8 +915,9 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, onCopyT
             {isProductType ? t('props.asins', uiLang) : 'ASINs verknüpft (intern, optional)'}
           </label>
           <textarea value={(tile.asins || []).join('\n')}
-            onChange={function(e) { u('asins', e.target.value.split('\n').map(function(s) { return s.trim(); }).filter(Boolean)); }}
+            onChange={function(e) { u('asins', e.target.value.split(/[\s,;]+/).map(function(s) { return s.trim(); }).filter(Boolean)); }}
             rows={isProductType ? 8 : 4} className="input input-mono" placeholder="B0XXXXXXXXXX, eine ASIN pro Zeile" />
+          {tile.type === 'product_collection' && <div style={{ fontSize: 10, color: (tile.asins || []).length > 60 ? '#b91c1c' : '#64748b' }}>{(tile.asins || []).length}/60 Produkte</div>}
           {/* Bestseller Rang Sortierung (nutzt die BSR Daten aus dem Bright
               Data Scrape). Sortiert die existierenden ASINs aufsteigend nach
               subcategoryRank (oder bestsellerRank als Fallback). ASINs ohne
@@ -1298,3 +1347,4 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, onCopyT
     </div>
   );
 }
+
