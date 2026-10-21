@@ -15,15 +15,15 @@ test('20 total sections including the built-in header; the 20th content section 
 
 test('counts all product tiles on the page, including multiple tiles within one section', () => {
   const crowded = page([section('product_grid', 'product_grid', 'best_sellers', 'best_sellers')]);
-  assert.deepEqual(pageCounts(crowded), { sections: 1, product_grid: 2, best_sellers: 2, product_collection: 0 });
+  assert.deepEqual(pageCounts(crowded), { sections: 1, product_grid: 2, best_sellers: 2 });
   assert.equal(pageLimitErrors(crowded).length, 2);
 });
 
-test('multiple collections are allowed up to five with 60 products each', () => {
-  const five = page(Array.from({ length: 5 }, () => section('product_collection')));
-  assert.deepEqual(storeLimitErrors({ pages: [five] }), []);
-  assert.equal(pageLimitErrors(page([...five.sections, section('product_collection')])).length, 1);
-  assert.equal(collectionContentErrors({ pages: [five] }).length, 0);
+test('collections have no separate module limit, only the page section limit', () => {
+  const nineteen = page(Array.from({ length: 19 }, () => section('product_collection')));
+  assert.deepEqual(storeLimitErrors({ pages: [nineteen] }), []);
+  assert.equal(pageLimitErrors(page([...nineteen.sections, section('product_collection')])).length, 1);
+  assert.equal(collectionContentErrors({ pages: [nineteen] }).length, 0);
   const incomplete = page([section('product_collection')]);
   incomplete.sections[0].tiles[0] = { type: 'product_collection', asins: [] };
   assert.equal(collectionContentErrors({ pages: [incomplete] }).length, 4);

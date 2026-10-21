@@ -1,11 +1,10 @@
 // Amazon counts its built-in header in the 20 sections per page. The editor
 // stores only content sections, so at most 19 can be added here.
 export const MAX_SECTIONS = 19;
-export const MAX_PRODUCT_COLLECTIONS = 5;
 
 export function pageCounts(page) {
   const sections = page?.sections || [];
-  const counts = { sections: sections.length, product_grid: 0, best_sellers: 0, product_collection: 0 };
+  const counts = { sections: sections.length, product_grid: 0, best_sellers: 0 };
   sections.forEach(section => (section.tiles || []).forEach(tile => {
     if (tile && Object.hasOwn(counts, tile.type)) counts[tile.type]++;
   }));
@@ -19,7 +18,6 @@ export function pageLimitErrors(page) {
     c.sections > MAX_SECTIONS && `${prefix}: maximal ${MAX_SECTIONS} Inhaltsabschnitte plus Header erlaubt (20 insgesamt; ${c.sections} Inhaltsabschnitte vorhanden).`,
     c.product_grid > 1 && `${prefix}: maximal ein Produktraster erlaubt.`,
     c.best_sellers > 1 && `${prefix}: maximal ein Bestseller-Modul erlaubt.`,
-    c.product_collection > MAX_PRODUCT_COLLECTIONS && `${prefix}: maximal ${MAX_PRODUCT_COLLECTIONS} Produktsammlungen erlaubt.`,
   ].filter(Boolean);
 }
 
@@ -32,13 +30,13 @@ export function storeLimitErrors(store) {
 export function introducedLimitErrors(previous, next) {
   const oldPages = new Map((previous?.pages || []).map(p => [p.id, pageCounts(p)]));
   return (next?.pages || []).flatMap(page => {
-    const before = oldPages.get(page.id) || { sections: 0, product_grid: 0, best_sellers: 0, product_collection: 0 };
+    const before = oldPages.get(page.id) || { sections: 0, product_grid: 0, best_sellers: 0 };
     const now = pageCounts(page);
     return pageLimitErrors(page).filter(message => {
       if (message.includes('Header')) return now.sections > before.sections;
       if (message.includes('Produktraster')) return now.product_grid > before.product_grid;
       if (message.includes('Bestseller')) return now.best_sellers > before.best_sellers;
-      return now.product_collection > before.product_collection;
+      return false;
     });
   });
 }
