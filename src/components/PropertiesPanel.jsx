@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { TILE_TYPES, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, MAX_HOTSPOTS, createDefaultProductSelector, getMinImageHeight, tileHasDimensionRule, MIN_IMAGE_RATIO_DESKTOP, MIN_IMAGE_RATIO_MOBILE, MIN_TEXT_IMAGE_HEIGHT } from '../constants';
 import { t } from '../i18n';
-import { pageCounts, MAX_PRODUCT_COLLECTIONS } from '../storeRules.mjs';
+import { pageCounts } from '../storeRules.mjs';
 
 // Inline Hinweis unter den Dimension Inputs. Greift nur wenn das Tile unter
 // die Mindesthöhen Regel fällt (Image Tile mit imageCategory benefit oder
@@ -416,8 +416,7 @@ export default function PropertiesPanel({ tile, onChange, onDetachReuse, onCopyT
             if (tt === 'shoppable_image' && layoutType === 'vh') return false;
             return true;
           }).map(function(tt) {
-            var cap = tt === 'product_collection' ? MAX_PRODUCT_COLLECTIONS : 1;
-            var atLimit = (tt === 'product_grid' || tt === 'best_sellers' || tt === 'product_collection') && pageModules[tt] >= cap && tile.type !== tt;
+            var atLimit = (tt === 'product_grid' || tt === 'best_sellers') && pageModules[tt] >= 1 && tile.type !== tt;
             return <option key={tt} value={tt} disabled={atLimit}>{TILE_TYPE_LABELS[tt] || tt}{atLimit ? ' · Limit erreicht' : ''}</option>;
           })}
         </select>
