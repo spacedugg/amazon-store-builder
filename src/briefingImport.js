@@ -13,6 +13,9 @@ export function importTileFromBriefing(t, layoutId, ti, pageIdByName) {
     if (!Array.isArray(tile.textOverlay.bullets)) tile.textOverlay.bullets = [];
   }
   if (Array.isArray(t.asins)) tile.asins = t.asins.slice();
+  if (typeof t.collectionTitle === 'string') tile.collectionTitle = t.collectionTitle;
+  if (typeof t.uploadedImage === 'string') tile.uploadedImage = t.uploadedImage;
+  if (typeof t.uploadedImageMobile === 'string') tile.uploadedImageMobile = t.uploadedImageMobile;
   if (Array.isArray(t.hotspots)) tile.hotspots = t.hotspots.slice();
   if (typeof t.bgColor === 'string') tile.bgColor = t.bgColor;
   if (typeof t.imageCategory === 'string') tile.imageCategory = t.imageCategory;
@@ -125,3 +128,4 @@ export function importBriefingToStore(briefing) {
     googleDriveUrl: data.googleDriveUrl || '',
   };
 }
+
