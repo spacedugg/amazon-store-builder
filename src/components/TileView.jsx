@@ -270,6 +270,11 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
   if (PRODUCT_TILE_TYPES.indexOf(tile.type) >= 0) {
     return (
       <div className={cls} onClick={onClick} style={bgColor ? { background: bgColor } : undefined}>
+        {tile.type === 'product_collection' && <div style={{ position: 'relative', width: '100%', aspectRatio: viewMode === 'mobile' ? '1 / 1' : '3 / 1', background: '#e8edf2' }}>
+          {(viewMode === 'mobile' ? tile.uploadedImageMobile : tile.uploadedImage) && <img src={viewMode === 'mobile' ? tile.uploadedImageMobile : tile.uploadedImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
+          {viewMode !== 'mobile' && <strong style={{ position: 'absolute', left: 12, top: '35%', color: '#fff', textShadow: '0 1px 5px #000' }}>{tile.collectionTitle || 'Produktsammlung'}</strong>}
+        </div>}
+        {tile.type === 'product_collection' && viewMode === 'mobile' && <strong style={{ padding: 8 }}>{tile.collectionTitle || 'Produktsammlung'}</strong>}
         <ProductCardWireframe asins={tile.asins} products={products} tileType={tile.type} bgColor={bgColor} uiLang={uiLang} />
       </div>
     );
@@ -394,3 +399,4 @@ export default function TileView({ tile, selected, onClick, viewMode, products, 
     </div>
   );
 }
+

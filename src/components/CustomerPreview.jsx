@@ -128,7 +128,7 @@ function AmazonProductCard({ product, marketplace, isMobile }) {
 // ASINs noch keine Produktdaten abgerufen wurden (Kunden sehen ihn nicht).
 export function AmazonProductGrid({ tile, products, marketplace, isMobile, showMissingHint }) {
   var asins = tile.asins || [];
-  if (!asins.length) return null;
+  if (!asins.length && tile.type !== 'product_collection') return null;
   var map = {};
   (products || []).forEach(function(p) { if (p && p.asin) map[p.asin] = p; });
   var items = asins.map(function(a) { return map[a] || { asin: a }; });
@@ -141,6 +141,9 @@ export function AmazonProductGrid({ tile, products, marketplace, isMobile, showM
     deals: 'Angebote',
   };
   var title = titleMap[tile.type] || 'Produkte';
+  var isCollection = tile.type === 'product_collection';
+  var collectionImage = isMobile ? tile.uploadedImageMobile : tile.uploadedImage;
+  var collectionTitle = tile.collectionTitle || 'Produktsammlung';
 
   var isSlider = tile.type === 'best_sellers';
   var cols = isMobile ? 2 : 4;
@@ -164,7 +167,15 @@ export function AmazonProductGrid({ tile, products, marketplace, isMobile, showM
   // Das Grid waechst nach Anzahl der ASINs; nur der Slider scrollt horizontal.
   return (
     <div style={{ width: '100%', background: tile.bgColor || '#fff', padding: isMobile ? '14px 8px 10px' : '20px 16px 14px', display: 'flex', flexDirection: 'column', boxSizing: 'border-box' }}>
-      <div style={{ fontSize: isMobile ? 18 : 24, fontWeight: 700, color: '#0F1111', marginBottom: isMobile ? 8 : 14, letterSpacing: '-0.01em' }}>{title}</div>
+      {isCollection ? (
+        <>
+          <div style={{ width: '100%', position: 'relative', marginBottom: isMobile ? 4 : 14, aspectRatio: isMobile ? '1 / 1' : '3 / 1', background: '#e8edf2', overflow: 'hidden' }}>
+            {collectionImage && <img src={collectionImage} alt={collectionTitle} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
+            {!isMobile && <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', padding: '6%', color: '#fff', fontSize: 28, fontWeight: 700, textShadow: '0 2px 8px #0009' }}>{collectionTitle}</div>}
+          </div>
+          {isMobile && <div style={{ fontSize: 19, fontWeight: 700, padding: '10px 4px 14px' }}>{collectionTitle}</div>}
+        </>
+      ) : <div style={{ fontSize: isMobile ? 18 : 24, fontWeight: 700, color: '#0F1111', marginBottom: isMobile ? 8 : 14, letterSpacing: '-0.01em' }}>{title}</div>}
       {showMissingHint && missing > 0 && (
         <div style={{ fontSize: 11, color: '#92400e', background: '#fffbeb', border: '1px solid #fde68a', borderRadius: 4, padding: '5px 8px', marginBottom: 10, lineHeight: 1.4 }}>
           Für {missing} von {items.length} ASINs liegen noch keine Produktdaten (Titel, Bild, Preis) vor. Im Editor unter „ASIN Übersicht" abrufen, dann erscheinen sie hier wie auf Amazon.
@@ -1010,3 +1021,4 @@ export default function CustomerPreview() {
     </div>
   );
 }
+

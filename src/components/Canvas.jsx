@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import SectionView from './SectionView';
 import { t } from '../i18n';
+import { MAX_SECTIONS } from '../storeRules.mjs';
 
 export default function Canvas({ store, page, curPage, onSelectPage, sel, onSelect, onAddSection, onDeleteSection, onDuplicateSection, onCopySection, onPasteSection, onMoveSection, onSwapTiles, onChangeLayout, onApplySectionImageCategory, onChangeTileHotspots, viewMode, onHeaderBannerUpload, headerBannerColor, onHeaderBannerColorChange, products, uiLang, hasAutoSave, onLoadAutoSave, onImportRescueJson, onGenerate, onAutoLinkSubpages, linkableTileCount }) {
   var [hoveredNav, setHoveredNav] = useState(null);
@@ -231,7 +232,7 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
         })}
 
         <div className="add-section-bar">
-          <button className="btn add-section-btn" onClick={onAddSection}>+ {t('canvas.addSection', uiLang)}</button>
+          <button className="btn add-section-btn" onClick={onAddSection} disabled={page.sections.length >= MAX_SECTIONS} title={page.sections.length >= MAX_SECTIONS ? 'Amazon erlaubt 20 Abschnitte inklusive festem Header: maximal 19 Inhaltsabschnitte.' : undefined}>+ {t('canvas.addSection', uiLang)} ({page.sections.length}/{MAX_SECTIONS} + Header)</button>
           {onPasteSection && (
             <button className="btn add-section-btn" onClick={onPasteSection} style={{ marginLeft: 8 }}>
               {t('section.paste', uiLang)}
@@ -242,3 +243,4 @@ export default function Canvas({ store, page, curPage, onSelectPage, sel, onSele
     </div>
   );
 }
+

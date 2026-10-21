@@ -73,16 +73,16 @@ export function findLayout(id) {
   return LAYOUTS[0];
 }
 
-export var TILE_TYPES = ['image', 'product_grid', 'best_sellers', 'recommended', 'deals', 'video', 'text', 'shoppable_image', 'image_text', 'product_selector'];
+export var TILE_TYPES = ['image', 'product_grid', 'product_collection', 'best_sellers', 'recommended', 'deals', 'video', 'text', 'shoppable_image', 'image_text', 'product_selector'];
 
 export var TILE_TYPE_LABELS = {
-  image: 'Image', product_grid: 'Product Grid (ASIN)', best_sellers: 'Best Sellers',
+  image: 'Image', product_grid: 'Product Grid (ASIN)', product_collection: 'Produktsammlung', best_sellers: 'Best Sellers',
   recommended: 'Recommended Products', deals: 'Deals / Offers', video: 'Video',
   text: 'Text (native)', shoppable_image: 'Shoppable Image (Hotspots)', image_text: 'Image with Text',
   product_selector: 'Produktauswahl (Quiz)',
 };
 
-export var PRODUCT_TILE_TYPES = ['product_grid', 'best_sellers', 'recommended', 'deals'];
+export var PRODUCT_TILE_TYPES = ['product_grid', 'product_collection', 'best_sellers', 'recommended', 'deals'];
 
 // Default structure for a new Product Selector quiz
 export function createDefaultProductSelector() {
@@ -147,7 +147,7 @@ export function emptyTile() {
   return {
     type: 'image', brief: '', textOverlay: emptyTextOverlay(),
     dimensions: { w: 3000, h: 1200 }, mobileDimensions: { w: 1680, h: 1200 },
-    asins: [], linkAsin: '', linkUrl: '',
+    asins: [], collectionTitle: '', linkAsin: '', linkUrl: '',
     hotspots: [], // Array of { x: 0-100, y: 0-100, asin: 'B0...' } — max 5, for shoppable_image tiles
     uploadedImage: null, uploadedImageMobile: null, videoThumbnail: null,
     bgColor: '',
@@ -282,7 +282,7 @@ export function emptyTileForLayout(layoutId, tileIndex) {
     type: 'image', brief: '', textOverlay: emptyTextOverlay(),
     dimensions: { w: d.w, h: d.h },
     mobileDimensions: { w: mob.w, h: mob.h },
-    asins: [], linkAsin: '', linkUrl: '',
+    asins: [], collectionTitle: '', linkAsin: '', linkUrl: '',
     uploadedImage: null, uploadedImageMobile: null, videoThumbnail: null,
     bgColor: '',
     imageRef: '',
@@ -866,3 +866,4 @@ export function validateStore(store) {
 
   return warnings;
 }
+
