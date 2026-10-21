@@ -22,6 +22,7 @@ import CustomerPreview from './components/CustomerPreview';
 import AdminAnalyze from './components/AdminAnalyze';
 import AdminScrapingTest from './components/AdminScrapingTest';
 import { missingProductAsins, fetchProductData, mergeProducts, gatherStoreAsins } from './productData';
+import { introducedLimitErrors, storeLimitErrors, collectionContentErrors } from './storeRules.mjs';
 
 var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, headerBannerColor: '', category: 'generic', googleDriveUrl: '' };
 
@@ -350,6 +351,11 @@ export default function App() {
   var setStoreWithUndo = useCallback(function(updater) {
     setStore(function(prev) {
       var next = typeof updater === 'function' ? updater(prev) : updater;
+      var violations = introducedLimitErrors(prev, next);
+      if (violations.length) {
+        window.setTimeout(function() { alert(violations.join('\n')); }, 0);
+        return prev;
+      }
       if (!skipHistoryRef.current && prev.pages.length > 0) {
         pushUndo(prev);
       }
@@ -426,7 +432,7 @@ export default function App() {
   useEffect(function() {
     if (store.pages.length > 0) {
       autoSave(store, { storeId: storeIdRef.current, shareToken: shareTokenRef.current });
-      setWarnings(validateStore(store));
+      setWarnings(validateStore(store).concat(storeLimitErrors(store).map(function(message) { return { level: 'error', message: message }; }), collectionContentErrors(store).map(function(message) { return { level: 'warning', message: message }; })));
     }
   }, [store]);
 
@@ -437,6 +443,7 @@ export default function App() {
   useEffect(function() {
     if (shareToken) return; // Designer Link existiert, kein DB Autosave
     if (!store.pages.length) return;
+    if (storeLimitErrors(store).length || collectionContentErrors(store).length) return;
     if (dbAutoSaveTimerRef.current) clearTimeout(dbAutoSaveTimerRef.current);
     dbAutoSaveTimerRef.current = setTimeout(function() {
       var serialized = JSON.stringify(store);
@@ -1274,6 +1281,8 @@ export default function App() {
   // ─── SAVED STORES ───
   var handleSave = async function() {
     if (!store.pages.length) return;
+    var problems = storeLimitErrors(store).concat(collectionContentErrors(store));
+    if (problems.length) { alert('Bitte vor dem Speichern beheben:\n\n' + problems.join('\n')); return; }
     try {
       var result = await persistStore(store, { includeShareToken: true });
       var stores = await loadSavedStores();
@@ -1340,6 +1349,8 @@ export default function App() {
 
   var handleShowStores = async function() {
     if (returningToOverview) return;
+    var problems = storeLimitErrors(store).concat(collectionContentErrors(store));
+    if (problems.length) { alert('Bitte vor dem Verlassen beheben:\n\n' + problems.join('\n')); return; }
     setReturningToOverview(true);
     try {
       // The editor may still have unsaved changes, especially with a designer link.
@@ -1453,6 +1464,8 @@ export default function App() {
   var handleImportBriefing = function(briefingData) {
     try {
       var imported = importBriefingToStore(briefingData);
+      var problems = storeLimitErrors(imported);
+      if (problems.length) throw new Error(problems.join('\n'));
       setStore(imported);
       setCurPage(imported.pages[0] ? imported.pages[0].id : '');
       setSel(null);
@@ -2069,6 +2082,7 @@ export default function App() {
           layoutType={selLayoutType}
           pages={store.pages}
           allPages={store.pages}
+          currentPage={page}
           heroBanner={selHeroBanner ? page : null}
           onHeroBannerChange={selHeroBanner ? updateHeroBanner : null}
           onHeroBannerImageUpload={selHeroBanner ? persistHeroBannerImage : null}
@@ -2173,3 +2187,4 @@ export default function App() {
     </div>
   );
 }
+
