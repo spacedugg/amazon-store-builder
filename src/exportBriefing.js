@@ -247,6 +247,11 @@ function tileDescription(tile, tileIndex, productMap, lang, duplicateNote) {
     parts.push(boldPara(t('brief.type', lang) + ': ', typeName));
     parts.push(boldPara('ASINs: ', asins.join(', ') || t('brief.autoSelected', lang)));
     parts.push(boldPara(t('brief.productCount', lang) + ': ', String(asins.length)));
+    if (tile.type === 'product_collection') {
+      parts.push(boldPara('Titel: ', tile.collectionTitle || '—'));
+      parts.push(boldPara('Desktop-Titelbild (1920 × 640 px): ', tile.uploadedImage ? 'hochgeladen' : 'fehlt'));
+      parts.push(boldPara('Mobiles Titelbild (1920 × 1920 px): ', tile.uploadedImageMobile ? 'hochgeladen' : 'fehlt'));
+    }
     asins.slice(0, 10).forEach(function(a) {
       var p = productMap[a];
       if (p) parts.push(new Paragraph({ spacing: { before: 20, after: 20 },
@@ -579,3 +584,4 @@ export function downloadBlob(blob, filename) {
   document.body.appendChild(a); a.click();
   document.body.removeChild(a); URL.revokeObjectURL(url);
 }
+
