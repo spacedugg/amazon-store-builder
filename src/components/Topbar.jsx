@@ -150,7 +150,7 @@ export default function Topbar({ store, shareToken, onExport, onSave, onShowJson
           <button className="btn btn-primary" onClick={onExport} title="Briefing für den Designer: Share Link erzeugen oder als DOCX exportieren">Designer</button>
           <button className="btn btn-customer" onClick={onCopyCustomerLink}
             disabled={!onCopyCustomerLink || !!customerSaveProgress}
-            title="Speichert den Store samt Bildern und zeigt den Link für den Kunden zum Kopieren."
+            title="Zeigt den bestehenden Kunden-Link sofort. Neue Änderungen über Speichern veröffentlichen."
             style={{ background: '#0F1111', color: '#fff', borderColor: '#0F1111' }}>
             {customerSaveProgress ? formatCustomerProgress(customerSaveProgress) : 'Kunden-Link'}
           </button>
