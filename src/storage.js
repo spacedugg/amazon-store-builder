@@ -100,10 +100,9 @@ export async function saveStore(store, existingId, existingShareToken, onProgres
       throw new Error(imageFailures.length + ' Bild(er) konnten nicht hochgeladen werden. ' +
         'Der bisherige Kundenstand bleibt bestehen. Bitte erneut speichern.');
     }
-    // Wir brechen den Save NICHT mehr bei einzelnen Bildfehlern ab. Stattdessen
-    // wird der Store mit dem aktuellen Stand gespeichert, fehlende Bilder
-    // bleiben als Sentinel im Store und werden beim naechsten Save erneut
-    // versucht. Operator bekommt eine Warnung mit Anzahl und ersten Details.
+    // Ein lokaler Entwurf kann mit Sentinels gesichert werden, die beim
+    // naechsten Save erneut versucht werden. Ein Kundenstand wird dagegen
+    // bei Bildfehlern nicht veroeffentlicht.
   }
 
   var body = { data: extracted.storeForWire };
