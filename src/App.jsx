@@ -270,6 +270,7 @@ export default function App() {
   // ungewollt einen zweiten Datenbankeintrag anlegen.
   var storeIdRef = useRef(null);
   var shareTokenRef = useRef(null);
+  var savedBrandNameRef = useRef('');
   useEffect(function() { storeIdRef.current = storeId; }, [storeId]);
   useEffect(function() { shareTokenRef.current = shareToken; }, [shareToken]);
 
@@ -286,6 +287,7 @@ export default function App() {
     }).then(function(result) {
       if (result && result.id) {
         storeIdRef.current = result.id;
+        savedBrandNameRef.current = targetStore.brandName || '';
         // Setze die State Variable auf die vom Server zurückgegebene ID.
         // Wenn der Server beim Save den kryptischen Initial Identifier durch
         // den Brand Slug ersetzt, wird der neue Wert hier übernommen, damit
@@ -398,6 +400,7 @@ export default function App() {
     loadStore(session.storeId).then(function(result) {
       if (result && result.data && result.data.pages && result.data.pages.length > 0) {
         setStore(refreshImageRefs(result.data));
+        savedBrandNameRef.current = result.data.brandName || '';
         setStoreId(session.storeId);
         storeIdRef.current = session.storeId;
         if (result.shareToken) {
@@ -1370,6 +1373,7 @@ export default function App() {
     if (!result || !result.data || !result.data.pages || !result.data.pages.length) return false;
     storeIdRef.current = id;
     shareTokenRef.current = result.shareToken || null;
+    savedBrandNameRef.current = result.data.brandName || '';
     setStore(refreshImageRefs(result.data));
     setStoreId(id);
     setShareToken(result.shareToken || null);
@@ -1384,6 +1388,7 @@ export default function App() {
     if (data && data.pages && data.pages.length > 0) {
       storeIdRef.current = null;
       shareTokenRef.current = null;
+      savedBrandNameRef.current = '';
       setStoreId(null);
       setShareToken(null);
       setStore(refreshImageRefs(data));
@@ -1405,6 +1410,9 @@ export default function App() {
     setSel(null);
     setStoreId(null);     // Rescue erzwingt neuen Save, alte ID gehört evtl. zu einem stale Stand
     setShareToken(null);  // Designer Token wird beim nächsten Save neu erzeugt, falls Export gedrückt wird
+    storeIdRef.current = null;
+    shareTokenRef.current = null;
+    savedBrandNameRef.current = '';
     setShowOverview(false);
     alert('Rescue JSON geladen. Bitte einmal manuell speichern, sobald der Image Auslagerungs Fix live ist.');
   };
@@ -1418,6 +1426,9 @@ export default function App() {
       setStore(refreshImageRefs(result.data));
       setStoreId(result.id);
       setShareToken(result.shareToken || null);
+      storeIdRef.current = result.id;
+      shareTokenRef.current = result.shareToken || null;
+      savedBrandNameRef.current = result.data.brandName || '';
       setCurPage(result.data.pages && result.data.pages[0] ? result.data.pages[0].id : '');
       setSel(null);
       setShowOverview(false);
@@ -1457,6 +1468,9 @@ export default function App() {
     setRequestedAsins([]);
     setStoreId(null);
     setShareToken(null);
+    storeIdRef.current = null;
+    shareTokenRef.current = null;
+    savedBrandNameRef.current = '';
     setShowNewStoreModal(false);
     setShowOverview(false);
   };
@@ -1473,6 +1487,9 @@ export default function App() {
       setRequestedAsins(imported.asins.map(function(a) { return a.asin; }));
       setStoreId(null);
       setShareToken(null);
+      storeIdRef.current = null;
+      shareTokenRef.current = null;
+      savedBrandNameRef.current = '';
       setShowNewStoreModal(false);
       setShowOverview(false);
     } catch (e) {
@@ -1781,12 +1798,25 @@ export default function App() {
       }
       var msg = r.loaded + ' von ' + r.missing + ' ASINs geladen. Bild und Preis stehen jetzt in der Vorschau.';
       if (r.failed.length) msg += '\n\nNicht geladen werden konnten: ' + r.failed.join(', ') + '. Bitte später noch einmal versuchen.';
-      msg += '\n\nDamit der Kunde sie sieht, klicke noch auf „Speichern“ oder „Kunden-Link“.';
+      msg += '\n\nDamit der Kunde sie sieht, klicke noch auf „Speichern“.';
       setLinkDialog({ kind: 'info', title: title, message: msg });
     } catch (e) {
       setCustomerSaveProgress(null);
       setLinkDialog({ kind: 'error', title: title, message: 'Die Produktdaten konnten nicht geladen werden.\n\n' + (e && e.message ? e.message : 'Unbekannter Fehler') });
     }
+  };
+
+  var showCustomerLink = function(token, brandName, notes) {
+    var slug = brandToSlug(brandName);
+    var url = shareBaseUrl() + (slug ? '/' + slug : '/customer/' + token);
+    // Der Dialog erscheint sofort. Clipboard-Zugriff kann im iframe blockiert
+    // oder verzögert sein und darf die Anzeige nicht aufhalten.
+    setLinkDialog({ kind: 'ok', title: 'Customer Preview Link', url: url, notes: notes || [], copied: false });
+    try {
+      Promise.resolve(navigator.clipboard.writeText(url)).then(function() {
+        setLinkDialog(function(d) { return d && d.url === url ? Object.assign({}, d, { copied: true }) : d; });
+      }).catch(function() { /* Link bleibt im Dialog kopierbar */ });
+    } catch (e) { /* Zwischenablage im iframe nicht verfügbar */ }
   };
 
   var handleCopyCustomerLink = async function() {
@@ -1795,22 +1825,17 @@ export default function App() {
       setLinkDialog({ kind: 'error', title: dlgTitle, message: 'Bitte erst einen Store anlegen.' });
       return;
     }
+    if (shareTokenRef.current && storeIdRef.current) {
+      showCustomerLink(shareTokenRef.current, savedBrandNameRef.current,
+        ['Der Link zeigt den zuletzt gespeicherten Stand. Neue Änderungen mit „Speichern“ veröffentlichen.']);
+      return;
+    }
     console.log('[Customer] Start, store has', (store.pages || []).length, 'pages');
     setCustomerSaveProgress({ stage: 'extract' });
     try {
-      // Produktbilder und Preise automatisch nachladen, sonst sieht der Kunde nur graue Platzhalter.
-      // Scheitert das, geht der Link trotzdem raus; die Warnung steht danach im Dialog.
-      var storeToSave = store;
-      var productWarn = '';
-      try {
-        var pr = await loadMissingProducts(store);
-        storeToSave = pr.store;
-        if (pr.failed.length) productWarn = 'Für ' + pr.failed.length + ' ASIN(s) konnten Bild/Preis nicht geladen werden (' + pr.failed.slice(0, 5).join(', ') + (pr.failed.length > 5 ? ' …' : '') + '). Dort sieht der Kunde einen Platzhalter. Über „Mehr → Produktdaten laden“ noch einmal versuchen.';
-      } catch (pe) {
-        productWarn = 'Produktdaten (Bild, Preis) konnten nicht geladen werden: ' + (pe && pe.message ? pe.message : 'unbekannter Fehler') + '. Der Kunde sieht dort vorerst Platzhalter.';
-      }
-      setCustomerSaveProgress({ stage: 'extract' });
-      var result = await persistStore(storeToSave, {
+      // Nur beim ersten Link muss der Store gespeichert werden. Produktdaten
+      // laden bleibt eine eigene Aktion und blockiert die Freigabe nicht.
+      var result = await persistStore(store, {
         includeShareToken: true,
         onProgress: function(p) {
           console.log('[Customer] Progress', p);
@@ -1829,12 +1854,7 @@ export default function App() {
         });
         return;
       }
-      // Bevorzugt die lesbare URL nach dem Brand Slug. Fällt auf den
-      // klassischen Token Link zurück, wenn der Store keinen Namen hat.
-      var slug = brandToSlug(store.brandName);
-      var url = shareBaseUrl() + (slug ? '/' + slug : '/customer/' + result.shareToken);
       var notes = [];
-      if (productWarn) notes.push(productWarn);
       if (result.imagesUploaded > 0 || (result.imagesSkipped || 0) > 0) {
         notes.push('Bilder: ' + (result.imagesUploaded || 0) + ' neu hochgeladen, ' + (result.imagesSkipped || 0) + ' bereits in DB.');
       }
@@ -1845,10 +1865,7 @@ export default function App() {
         warn += '\nSave erneut versuchen, dann landen die fehlenden Bilder auch im Customer Preview.';
         notes.push(warn);
       }
-      // Zwischenablage nur als Zugabe: der Link steht auf jeden Fall im Dialog.
-      var copied = false;
-      try { await navigator.clipboard.writeText(url); copied = true; } catch (e) { /* gesperrt, z. B. im iframe */ }
-      setLinkDialog({ kind: 'ok', title: dlgTitle, url: url, notes: notes, copied: copied });
+      showCustomerLink(result.shareToken, savedBrandNameRef.current, notes);
     } catch (e) {
       console.error('[Customer] Fehler im handleCopyCustomerLink', e);
       setCustomerSaveProgress(null);
@@ -2187,4 +2204,3 @@ export default function App() {
     </div>
   );
 }
-
