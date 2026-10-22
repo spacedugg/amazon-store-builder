@@ -1,6 +1,7 @@
 var { createClient } = require('@libsql/client');
 
 var _client = null;
+var _migration = null;
 
 function getClient() {
   if (!_client) {
@@ -13,6 +14,41 @@ function getClient() {
 }
 
 async function migrate() {
+  // Alle API-Routen teilen sich diese Funktion. Nicht pro Request DDL und
+  // zehn bereits fehlgeschlagene ALTER TABLEs an Turso schicken.
+  if (!_migration) {
+    _migration = migrateIfNeeded().catch(function(err) {
+      _migration = null; // nach einem temporaeren Fehler spaeter neu versuchen
+      throw err;
+    });
+  }
+  return _migration;
+}
+
+async function migrateIfNeeded() {
+  var db = getClient();
+  // Eine Abfrage statt vieler Netzwerk-Roundtrips im Normalfall. Wenn spaeter
+  // eine Migration dazukommt, hier das neue Feld/die neue Tabelle mit pruefen.
+  var status = await db.execute(`
+    SELECT
+      (SELECT COUNT(*) FROM pragma_table_info('stores') WHERE name IN
+        ('timer_seconds','timer_running','timer_started_at','checks_json','generation_state','generation_step')) AS store_cols,
+      (SELECT COUNT(*) FROM pragma_table_info('feedback') WHERE name IN
+        ('team_text','designer_done')) AS feedback_cols,
+      (SELECT COUNT(*) FROM pragma_table_info('store_images') WHERE name = 'blob_url') AS image_cols,
+      (SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name IN
+        ('stores','feedback','reference_stores','store_images','translations')) AS tables_count,
+      (SELECT COUNT(*) FROM sqlite_master WHERE type = 'index' AND name IN
+        ('idx_stores_share_token','idx_feedback_store','idx_ref_stores_category')) AS indexes_count
+  `);
+  var row = status.rows[0];
+  if (Number(row.store_cols) === 6 && Number(row.feedback_cols) === 2 &&
+      Number(row.image_cols) === 1 && Number(row.tables_count) === 5 &&
+      Number(row.indexes_count) === 3) return;
+  return runMigrations();
+}
+
+async function runMigrations() {
   var db = getClient();
   await db.batch([
     {
