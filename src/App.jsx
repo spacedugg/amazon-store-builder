@@ -1860,8 +1860,11 @@ export default function App() {
       return;
     }
     if (shareTokenRef.current && storeIdRef.current) {
-      showCustomerLink(shareTokenRef.current, savedBrandNameRef.current,
-        ['Der Link zeigt den zuletzt gespeicherten Stand. Neue Änderungen mit „Speichern“ veröffentlichen.']);
+      var pendingProducts = missingProductAsins(store);
+      var message = pendingProducts.length
+        ? pendingProducts.length + ' Produkt(e) im Editor haben noch keine vollständigen Daten. Bitte vor dem Weitergeben auf „Speichern“ klicken.'
+        : 'Der Link zeigt den zuletzt gespeicherten Stand. Neue Änderungen mit „Speichern“ veröffentlichen.';
+      showCustomerLink(shareTokenRef.current, savedBrandNameRef.current, [message]);
       return;
     }
     console.log('[Customer] Start, store has', (store.pages || []).length, 'pages');
