@@ -145,7 +145,7 @@ export default function FeedbackPanel({ store, shareToken, customerUrl, onClose,
             </>
           ) : (
             <div style={{ fontSize: 13, color: '#92400e', background: '#fffbeb', border: '1px solid #fde68a', borderRadius: 8, padding: '8px 10px' }}>
-              Es gibt noch keinen Kunden-Link. Klick oben auf „Kunden-Link", dann wird der Store gespeichert und der Link erzeugt.
+              Es gibt noch keinen Kunden-Link. Klick oben auf „Kunden-Link", dann wird er beim ersten Mal erstellt.
             </div>
           )}
         </div>
