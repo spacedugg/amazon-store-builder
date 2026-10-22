@@ -219,6 +219,8 @@ export default function App() {
 
   var uiLang = 'en';
   var [store, setStore] = useState(EMPTY_STORE);
+  var currentStoreRef = useRef(store);
+  currentStoreRef.current = store;
   var [curPage, setCurPage] = useState('');
   var [sel, setSel] = useState(null);
   var [clipboardSection, setClipboardSection] = useState(null);
@@ -281,13 +283,46 @@ export default function App() {
   var persistStore = useCallback(function(targetStore, opts) {
     var useShareToken = opts && opts.includeShareToken;
     var onProgress = opts && opts.onProgress;
-    var p = saveQueueRef.current.catch(function() {}).then(function() {
+    var p = saveQueueRef.current.catch(function() {}).then(async function() {
+      var preparedStore = targetStore;
+      // Ein veroeffentlichter Store muss die Daten aller verwendeten ASINs
+      // enthalten. Den teuren Abruf nur beim Speichern ausfuehren, nie beim
+      // blossen Anzeigen eines bereits vorhandenen Kunden-Links.
+      if (useShareToken) {
+        var missing = missingProductAsins(targetStore);
+        if (missing.length) {
+          if (onProgress) onProgress({ stage: 'products', done: 0, total: missing.length });
+          var fetched = await fetchProductData(missing, targetStore.marketplace, function(progress) {
+            if (onProgress) onProgress({ stage: 'products', done: progress.done, total: progress.total });
+          });
+          preparedStore = Object.assign({}, targetStore, {
+            products: mergeProducts(targetStore.products, fetched.products),
+          });
+          var unresolved = missingProductAsins(preparedStore);
+          if (unresolved.length) {
+            throw new Error('Produktdaten fehlen fuer ' + unresolved.length + ' ASIN(s): ' + unresolved.join(', ') +
+              '. Der bisherige Kundenstand wurde nicht veraendert. Bitte spaeter erneut speichern.');
+          }
+          if (currentStoreRef.current !== targetStore) {
+            throw new Error('Der Store wurde waehrend des Produktabrufs geaendert. Bitte erneut speichern, damit die Kunden-Vorschau den aktuellen Stand enthaelt.');
+          }
+          if (fetched.products.length) {
+            setStore(function(current) {
+              return Object.assign({}, current, { products: mergeProducts(current.products, fetched.products) });
+            });
+          }
+        }
+        if (!missing.length && currentStoreRef.current !== targetStore) {
+          throw new Error('Der Store wurde waehrend des Speicherns geaendert. Bitte erneut speichern, damit die Kunden-Vorschau den aktuellen Stand enthaelt.');
+        }
+      }
       var tokenArg = useShareToken ? shareTokenRef.current : null;
-      return saveStore(targetStore, storeIdRef.current, tokenArg, onProgress);
-    }).then(function(result) {
+      return { result: await saveStore(preparedStore, storeIdRef.current, tokenArg, onProgress, !!useShareToken), savedStore: preparedStore };
+    }).then(function(saved) {
+      var result = saved.result;
       if (result && result.id) {
         storeIdRef.current = result.id;
-        savedBrandNameRef.current = targetStore.brandName || '';
+        savedBrandNameRef.current = saved.savedStore.brandName || '';
         // Setze die State Variable auf die vom Server zurückgegebene ID.
         // Wenn der Server beim Save den kryptischen Initial Identifier durch
         // den Brand Slug ersetzt, wird der neue Wert hier übernommen, damit
@@ -440,6 +475,7 @@ export default function App() {
   }, [store]);
 
   var [autoSaveStatus, setAutoSaveStatus] = useState('idle'); // idle | saving | saved | error
+  var [manualSaveProgress, setManualSaveProgress] = useState(null);
   var dbAutoSaveTimerRef = useRef(null);
   var dbAutoSaveLastSerializedRef = useRef('');
 
@@ -1286,8 +1322,9 @@ export default function App() {
     if (!store.pages.length) return;
     var problems = storeLimitErrors(store).concat(collectionContentErrors(store));
     if (problems.length) { alert('Bitte vor dem Speichern beheben:\n\n' + problems.join('\n')); return; }
+    setManualSaveProgress({ stage: 'store-save' });
     try {
-      var result = await persistStore(store, { includeShareToken: true });
+      var result = await persistStore(store, { includeShareToken: true, onProgress: setManualSaveProgress });
       var stores = await loadSavedStores();
       setSavedStores(stores);
       if (result && result.offline) {
@@ -1298,6 +1335,8 @@ export default function App() {
     } catch (err) {
       console.error('Save fehlgeschlagen:', err);
       alert('Speichern fehlgeschlagen.\n\n' + err.message + '\n\nDein aktueller Stand bleibt im Tab erhalten. Schließe den Tab nicht, bevor das Problem behoben ist.');
+    } finally {
+      setManualSaveProgress(null);
     }
   };
 
@@ -1759,13 +1798,8 @@ export default function App() {
   };
 
   // ─── CUSTOMER PREVIEW LINK ───
-  // Damit hochgeladene Bilder, die der Operator gerade lokal im Editor
-  // gemacht hat, im Customer Preview tatsaechlich erscheinen, speichert
-  // dieser Button den Store erst und kopiert dann erst den Link. Bekannte
-  // Bilder werden via Hash Cache uebersprungen, neue Bilder mit hoher
-  // Concurrency hochgeladen, Progress wird live im Topbar Badge gezeigt.
-  // Teilfehler brechen den Save nicht ab, der Link wird trotzdem kopiert,
-  // fehlende Bilder bekommt der Customer beim naechsten Versuch.
+  // Der Link zeigt den zuletzt gespeicherten Stand sofort. Ein neuer Stand
+  // wird erst nach vollstaendigem Produkt- und Bildabruf veroeffentlicht.
   var [customerSaveProgress, setCustomerSaveProgress] = useState(null);
   // Bild, Titel und Preis der ASINs von Amazon holen (Bright Data) und in store.products ablegen.
   // Holt nur, was noch fehlt. Gibt den Store mit den neuen Produkten zurueck, damit der Aufrufer
@@ -1826,15 +1860,18 @@ export default function App() {
       return;
     }
     if (shareTokenRef.current && storeIdRef.current) {
-      showCustomerLink(shareTokenRef.current, savedBrandNameRef.current,
-        ['Der Link zeigt den zuletzt gespeicherten Stand. Neue Änderungen mit „Speichern“ veröffentlichen.']);
+      var pendingProducts = missingProductAsins(store);
+      var message = pendingProducts.length
+        ? pendingProducts.length + ' Produkt(e) im Editor haben noch keine vollständigen Daten. Bitte vor dem Weitergeben auf „Speichern“ klicken.'
+        : 'Der Link zeigt den zuletzt gespeicherten Stand. Neue Änderungen mit „Speichern“ veröffentlichen.';
+      showCustomerLink(shareTokenRef.current, savedBrandNameRef.current, [message]);
       return;
     }
     console.log('[Customer] Start, store has', (store.pages || []).length, 'pages');
     setCustomerSaveProgress({ stage: 'extract' });
     try {
-      // Nur beim ersten Link muss der Store gespeichert werden. Produktdaten
-      // laden bleibt eine eigene Aktion und blockiert die Freigabe nicht.
+      // Beim erstmaligen Freigeben werden fehlende Produktdaten und Bilder
+      // vor dem Speichern geladen. Spaeter bleibt der Linkaufruf sofortig.
       var result = await persistStore(store, {
         includeShareToken: true,
         onProgress: function(p) {
@@ -2004,6 +2041,7 @@ export default function App() {
         shareToken={shareToken}
         onExport={handleExport}
         onSave={handleSave}
+        manualSaveProgress={manualSaveProgress}
         onChangeBrandName={function(name) {
           setStoreWithUndo(function(s) { return Object.assign({}, s, { brandName: name }); });
         }}

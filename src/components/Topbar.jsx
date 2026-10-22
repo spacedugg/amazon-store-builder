@@ -92,7 +92,7 @@ function formatCustomerProgress(p) {
   return 'Speichere...';
 }
 
-export default function Topbar({ store, shareToken, onExport, onSave, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onLoadProducts, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress, folderUploadProgress, onChangeBrandName, onShowFeedback, feedbackNew, onShowStores, returningToOverview }) {
+export default function Topbar({ store, shareToken, onExport, onSave, manualSaveProgress, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onLoadProducts, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress, folderUploadProgress, onChangeBrandName, onShowFeedback, feedbackNew, onShowStores, returningToOverview }) {
   var folderProgressLabel = '';
   if (folderUploadProgress) {
     folderProgressLabel = 'Bilder ' + (folderUploadProgress.uploaded || 0) + ' / ' + folderUploadProgress.total;
@@ -145,7 +145,7 @@ export default function Topbar({ store, shareToken, onExport, onSave, onShowJson
           )}
           <span className="topbar-sep" />
           <AutoSaveBadge status={autoSaveStatus} hasShareToken={hasShareToken} />
-          <button className="btn btn-green" onClick={onSave} title="Store im Backend speichern">Speichern</button>
+          <button className="btn btn-green" onClick={onSave} disabled={!!manualSaveProgress} title="Produktdaten vervollständigen und Store im Backend speichern">{manualSaveProgress ? formatCustomerProgress(manualSaveProgress) : 'Speichern'}</button>
           <span className="topbar-sep" />
           <button className="btn btn-primary" onClick={onExport} title="Briefing für den Designer: Share Link erzeugen oder als DOCX exportieren">Designer</button>
           <button className="btn btn-customer" onClick={onCopyCustomerLink}

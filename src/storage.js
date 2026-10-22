@@ -81,7 +81,7 @@ export async function loadSavedStores() {
 // Vor dem POST werden alle Base64 Bilder aus dem Store ausgelagert in die
 // store_images Tabelle, damit der eigentliche Store JSON Body weit unter
 // dem 4,5 MB Vercel Limit bleibt.
-export async function saveStore(store, existingId, existingShareToken, onProgress) {
+export async function saveStore(store, existingId, existingShareToken, onProgress, requireCompleteImages) {
   // Bilder ausgliedern, hochladen, dann den schlanken Store schicken.
   if (typeof onProgress === 'function') onProgress({ stage: 'extract' });
   var extracted = await extractImagesFromStore(store);
@@ -96,10 +96,13 @@ export async function saveStore(store, existingId, existingShareToken, onProgres
     imagesUploaded = upResult.uploaded;
     imageFailures = upResult.failed || [];
     imagesSkipped = upResult.skipped || 0;
-    // Wir brechen den Save NICHT mehr bei einzelnen Bildfehlern ab. Stattdessen
-    // wird der Store mit dem aktuellen Stand gespeichert, fehlende Bilder
-    // bleiben als Sentinel im Store und werden beim naechsten Save erneut
-    // versucht. Operator bekommt eine Warnung mit Anzahl und ersten Details.
+    if (requireCompleteImages && imageFailures.length) {
+      throw new Error(imageFailures.length + ' Bild(er) konnten nicht hochgeladen werden. ' +
+        'Der bisherige Kundenstand bleibt bestehen. Bitte erneut speichern.');
+    }
+    // Ein lokaler Entwurf kann mit Sentinels gesichert werden, die beim
+    // naechsten Save erneut versucht werden. Ein Kundenstand wird dagegen
+    // bei Bildfehlern nicht veroeffentlicht.
   }
 
   var body = { data: extracted.storeForWire };
