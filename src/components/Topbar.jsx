@@ -145,7 +145,7 @@ export default function Topbar({ store, shareToken, onExport, onSave, manualSave
           )}
           <span className="topbar-sep" />
           <AutoSaveBadge status={autoSaveStatus} hasShareToken={hasShareToken} />
-          <button className="btn btn-green" onClick={onSave} disabled={!!manualSaveProgress} title="Produktdaten vervollständigen und Store im Backend speichern">{manualSaveProgress ? formatCustomerProgress(manualSaveProgress) : 'Speichern'}</button>
+          <button className="btn btn-green" onClick={onSave} disabled={!!manualSaveProgress} title="Änderungen und Bilder speichern. Produktdaten separat unter ASIN Übersicht nachladen.">{manualSaveProgress ? formatCustomerProgress(manualSaveProgress) : 'Speichern'}</button>
           <span className="topbar-sep" />
           <button className="btn btn-primary" onClick={onExport} title="Briefing für den Designer: Share Link erzeugen oder als DOCX exportieren">Designer</button>
           <button className="btn btn-customer" onClick={onCopyCustomerLink}
@@ -178,3 +178,4 @@ export default function Topbar({ store, shareToken, onExport, onSave, manualSave
     </div>
   );
 }
+
