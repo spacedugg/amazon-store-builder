@@ -21,7 +21,7 @@ import BriefingView from './components/BriefingView';
 import CustomerPreview from './components/CustomerPreview';
 import AdminAnalyze from './components/AdminAnalyze';
 import AdminScrapingTest from './components/AdminScrapingTest';
-import { missingProductAsins, fetchProductData, mergeProducts, gatherStoreAsins } from './productData';
+import { missingProductAsins, missingUsedProductAsins, productDataWarning, fetchProductData, mergeProducts, gatherStoreAsins } from './productData';
 import { introducedLimitErrors, storeLimitErrors, collectionContentErrors } from './storeRules.mjs';
 
 var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, headerBannerColor: '', category: 'generic', googleDriveUrl: '' };
@@ -285,36 +285,10 @@ export default function App() {
     var onProgress = opts && opts.onProgress;
     var p = saveQueueRef.current.catch(function() {}).then(async function() {
       var preparedStore = targetStore;
-      // Ein veroeffentlichter Store muss die Daten aller verwendeten ASINs
-      // enthalten. Den teuren Abruf nur beim Speichern ausfuehren, nie beim
-      // blossen Anzeigen eines bereits vorhandenen Kunden-Links.
-      if (useShareToken) {
-        var missing = missingProductAsins(targetStore);
-        if (missing.length) {
-          if (onProgress) onProgress({ stage: 'products', done: 0, total: missing.length });
-          var fetched = await fetchProductData(missing, targetStore.marketplace, function(progress) {
-            if (onProgress) onProgress({ stage: 'products', done: progress.done, total: progress.total });
-          });
-          preparedStore = Object.assign({}, targetStore, {
-            products: mergeProducts(targetStore.products, fetched.products),
-          });
-          var unresolved = missingProductAsins(preparedStore);
-          if (unresolved.length) {
-            throw new Error('Produktdaten fehlen fuer ' + unresolved.length + ' ASIN(s): ' + unresolved.join(', ') +
-              '. Der bisherige Kundenstand wurde nicht veraendert. Bitte spaeter erneut speichern.');
-          }
-          if (currentStoreRef.current !== targetStore) {
-            throw new Error('Der Store wurde waehrend des Produktabrufs geaendert. Bitte erneut speichern, damit die Kunden-Vorschau den aktuellen Stand enthaelt.');
-          }
-          if (fetched.products.length) {
-            setStore(function(current) {
-              return Object.assign({}, current, { products: mergeProducts(current.products, fetched.products) });
-            });
-          }
-        }
-        if (!missing.length && currentStoreRef.current !== targetStore) {
-          throw new Error('Der Store wurde waehrend des Speicherns geaendert. Bitte erneut speichern, damit die Kunden-Vorschau den aktuellen Stand enthaelt.');
-        }
+      // Bearbeitungen sichern darf nicht vom externen Produktabruf abhaengen.
+      // Fehlende Daten bleiben als Hinweis sichtbar; Nachladen ist eine eigene Aktion.
+      if (useShareToken && currentStoreRef.current !== targetStore) {
+        throw new Error('Der Store wurde waehrend des Speicherns geaendert. Bitte erneut speichern, damit die Kunden-Vorschau den aktuellen Stand enthaelt.');
       }
       var tokenArg = useShareToken ? shareTokenRef.current : null;
       return { result: await saveStore(preparedStore, storeIdRef.current, tokenArg, onProgress, !!useShareToken), savedStore: preparedStore };
@@ -470,7 +444,8 @@ export default function App() {
   useEffect(function() {
     if (store.pages.length > 0) {
       autoSave(store, { storeId: storeIdRef.current, shareToken: shareTokenRef.current });
-      setWarnings(validateStore(store).concat(storeLimitErrors(store).map(function(message) { return { level: 'error', message: message }; }), collectionContentErrors(store).map(function(message) { return { level: 'warning', message: message }; })));
+      var productWarning = productDataWarning(store);
+      setWarnings(validateStore(store).concat(storeLimitErrors(store).map(function(message) { return { level: 'error', message: message }; }), collectionContentErrors(store).map(function(message) { return { level: 'warning', message: message }; }), productWarning ? [{ level: 'warning', message: productWarning }] : []));
     }
   }, [store]);
 
@@ -1330,7 +1305,8 @@ export default function App() {
       if (result && result.offline) {
         alert('Server nicht erreichbar, Store nur lokal im Browser gesichert (' + (store.brandName || 'Untitled') + '). Bitte später erneut speichern, sobald die Verbindung wieder steht.');
       } else {
-        alert('Store gespeichert. (' + (store.brandName || 'Untitled') + ')');
+        var productWarning = productDataWarning(store);
+        alert('Store gespeichert. (' + (store.brandName || 'Untitled') + ')' + (productWarning ? '\n\nHinweis: ' + productWarning : ''));
       }
     } catch (err) {
       console.error('Save fehlgeschlagen:', err);
@@ -1799,7 +1775,7 @@ export default function App() {
 
   // ─── CUSTOMER PREVIEW LINK ───
   // Der Link zeigt den zuletzt gespeicherten Stand sofort. Ein neuer Stand
-  // wird erst nach vollstaendigem Produkt- und Bildabruf veroeffentlicht.
+  // wird mit Speichern veroeffentlicht; fehlende Produktdaten blockieren keine Bildkorrekturen.
   var [customerSaveProgress, setCustomerSaveProgress] = useState(null);
   // Bild, Titel und Preis der ASINs von Amazon holen (Bright Data) und in store.products ablegen.
   // Holt nur, was noch fehlt. Gibt den Store mit den neuen Produkten zurueck, damit der Aufrufer
@@ -1860,9 +1836,9 @@ export default function App() {
       return;
     }
     if (shareTokenRef.current && storeIdRef.current) {
-      var pendingProducts = missingProductAsins(store);
+      var pendingProducts = missingUsedProductAsins(store);
       var message = pendingProducts.length
-        ? pendingProducts.length + ' Produkt(e) im Editor haben noch keine vollständigen Daten. Bitte vor dem Weitergeben auf „Speichern“ klicken.'
+        ? productDataWarning(store) + ' Der Link zeigt den zuletzt gespeicherten Stand.'
         : 'Der Link zeigt den zuletzt gespeicherten Stand. Neue Änderungen mit „Speichern“ veröffentlichen.';
       showCustomerLink(shareTokenRef.current, savedBrandNameRef.current, [message]);
       return;
@@ -1870,8 +1846,8 @@ export default function App() {
     console.log('[Customer] Start, store has', (store.pages || []).length, 'pages');
     setCustomerSaveProgress({ stage: 'extract' });
     try {
-      // Beim erstmaligen Freigeben werden fehlende Produktdaten und Bilder
-      // vor dem Speichern geladen. Spaeter bleibt der Linkaufruf sofortig.
+      // Bilder werden vor dem Freigeben gesichert. Fehlende Produktdaten
+      // werden separat nachgeladen und duerfen die Speicherung nicht blockieren.
       var result = await persistStore(store, {
         includeShareToken: true,
         onProgress: function(p) {
@@ -1892,6 +1868,8 @@ export default function App() {
         return;
       }
       var notes = [];
+      var productWarning = productDataWarning(store);
+      if (productWarning) notes.push(productWarning);
       if (result.imagesUploaded > 0 || (result.imagesSkipped || 0) > 0) {
         notes.push('Bilder: ' + (result.imagesUploaded || 0) + ' neu hochgeladen, ' + (result.imagesSkipped || 0) + ' bereits in DB.');
       }
@@ -2242,3 +2220,4 @@ export default function App() {
     </div>
   );
 }
+

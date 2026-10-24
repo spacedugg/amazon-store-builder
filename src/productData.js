@@ -41,6 +41,19 @@ export function missingProductAsins(store) {
   return gatherStoreAsins(store).filter(function(a) { return !productIsComplete(map[a]); });
 }
 
+// Nur im Store platzierte ASINs brauchen Daten fuer die Vorschau. Die allgemeine
+// Import-/Produktliste bleibt erhalten, darf aber keine entfernte Kachel blockieren.
+export function missingUsedProductAsins(store) {
+  return missingProductAsins(Object.assign({}, store, { asins: [] }));
+}
+
+export function productDataWarning(store) {
+  var missing = missingUsedProductAsins(store);
+  return missing.length
+    ? 'Produktdaten fehlen für ' + missing.join(', ') + '. Änderungen können trotzdem gespeichert werden. Unter „ASIN Übersicht“ die Produktdaten nachladen und danach speichern.'
+    : '';
+}
+
 // Holt die Daten in kleinen Paketen, damit ein Fehler nicht alles kostet.
 // onProgress({ done, total }) wird nach jedem Paket gerufen. Gibt { products, failed } zurueck.
 export async function fetchProductData(asins, marketplace, onProgress) {
@@ -82,3 +95,4 @@ export function mergeProducts(existing, fresh) {
   (fresh || []).forEach(function(p) { if (p && p.asin) { if (!map[p.asin]) order.push(p.asin); map[p.asin] = p; } });
   return order.map(function(a) { return map[a]; });
 }
+
