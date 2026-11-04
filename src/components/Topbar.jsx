@@ -92,7 +92,7 @@ function formatCustomerProgress(p) {
   return 'Speichere...';
 }
 
-export default function Topbar({ store, shareToken, onExport, onSave, manualSaveProgress, onShowJsonExport, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onLoadProducts, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress, folderUploadProgress, onChangeBrandName, onShowFeedback, feedbackNew, onShowStores, returningToOverview }) {
+export default function Topbar({ store, shareToken, onExport, onSave, manualSaveProgress, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onLoadProducts, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress, folderUploadProgress, onChangeBrandName, onShowFeedback, feedbackNew, onShowStores, returningToOverview }) {
   var folderProgressLabel = '';
   if (folderUploadProgress) {
     folderProgressLabel = 'Bilder ' + (folderUploadProgress.uploaded || 0) + ' / ' + folderUploadProgress.total;
@@ -164,8 +164,7 @@ export default function Topbar({ store, shareToken, onExport, onSave, manualSave
             </button>
           )}
           <MoreMenu items={[
-            onShowJsonExport && { label: 'JSON / Refactor', hint: 'Backup als Datei oder Umbau mit KI', onClick: onShowJsonExport },
-            onPatchImport && { label: '+ Snippet (Patch)', hint: 'Kleine Änderung per KI einspielen', onClick: onPatchImport },
+            onPatchImport && { label: 'Mit Claude bearbeiten', hint: 'Aktuellen Store übergeben und Änderungen einspielen', onClick: onPatchImport },
             onLoadProducts && { label: 'Produktdaten laden', hint: 'Bild, Titel und Preis aller ASINs von Amazon holen', onClick: onLoadProducts },
             onRemoveAllImages && { label: 'Alle Bilder entfernen', danger: true, onClick: onRemoveAllImages },
           ]} />
@@ -178,4 +177,5 @@ export default function Topbar({ store, shareToken, onExport, onSave, manualSave
     </div>
   );
 }
+
 

@@ -1,201 +1,106 @@
-import { useState } from 'react';
+import { useState, useRef, useMemo } from 'react';
+import { makeClaudeContext } from '../storePatch';
 
-var PATCH_PROMPT = 'Aktiviere den Skill amazon-storefront-design (Source: .claude/skills/amazon-storefront-design/SKILL.md im Repo amazon-store-builder) im Patch Mode. Ich möchte eine kleine Änderung an meinem bestehenden Brand Store machen, ohne den ganzen Store neu zu generieren.\n\nDer Skill nutzt eine v4-Wissensbasis aus 20 analysierten Stores. Beim Patch Mode wendest du dieselbe Wissensbasis und dieselben Voice-Tags an, damit der Patch konsistent zum Rest der Marke ist und CLAUDE.md Paragraf 0 (strukturell-uebertragbar vs. brand-spezifisch) eingehalten wird.\n\nMein Brand Voice plus Page Index als Kontext (kopiere ich gleich rein im nächsten Block) damit du Tonalität, Struktur und Hero Headlines vom Rest kennst und der Patch konsistent ist. Falls du für eine bestimmte Page das volle Detail brauchst (z.B. um Wording zu matchen), sag mir welche, dann liefere ich nur die Page nach.\n\nMeine Änderung:\n[hier konkret beschreiben, z.B.]\n- Auf Sub Page Sofas eine Section am Ende ergänzen mit drei Fakten zu Stoffqualität, Massivholz und Bezug Wahl.\n- Oder: Headline auf Hero von Garten ändern.\n- Oder: Eine neue Subpage Boxspring Premium an Möbel anhängen mit eigenem Konzept.\n\nGehe dialogisch vor wie bei einem Full Store. Stell mir Headline Vorschläge vor (drei Optionen), wenn das Layout unklar ist frag nach, frag bei Position Detail nach (vor oder nach welcher Section). Nach unserer Abstimmung gib am Ende NUR den Patch JSON mit ops Array aus, kein Full Store JSON. Die Self Check Regeln aus Schritt 5 (ASIN Stack, Headline Bezug, Versand Verbot, Tile Type Whitelist, Repetition, Brand-Spezifik-Bleed Check) gelten auch im Patch Mode auf das Resultat.';
+const EDIT_PROMPT = `Aktiviere den Skill amazon-storefront-design (Source: .claude/skills/amazon-storefront-design/SKILL.md im Repo amazon-store-builder) im Patch Mode. Hilf mir, meinen bestehenden Brand Store gezielt zu ändern oder seine Struktur zu erweitern. Der folgende aktuelle Store enthält bereits manuelle Änderungen und ist die verbindliche Ausgangsbasis.
 
-// Erzeugt einen kompakten Brand Voice Index ohne Tile Briefs, Bilder oder
-// Vollkatalog Listen. Nur Brand Felder plus pro Page name, parentName,
-// Section Modul Namen plus Hero Headline plus vorhandene imageRef Tags
-// als Hint für Reuse Konsistenz. Klein genug für jeden Chat.
-function makeBrandIndex(store) {
-  if (!store) return '';
-  var index = {
-    brandName: store.brandName || '',
-    marketplace: store.marketplace || 'de',
-    brandTone: store.brandTone || '',
-    brandStory: store.brandStory || '',
-    headerBannerColor: store.headerBannerColor || '',
-    pages: (store.pages || []).map(function(p) {
-      var heroHeadline = '';
-      var modules = [];
-      var imageRefs = {};
-      (p.sections || []).forEach(function(sec) {
-        modules.push((sec.module || '?') + ' (' + (sec.layoutId || '?') + ')');
-        (sec.tiles || []).forEach(function(t) {
-          if (t && t.imageRef) imageRefs[t.imageRef] = true;
-          if (!heroHeadline && t && t.textOverlay && t.textOverlay.heading
-              && sec.module && sec.module.indexOf('hero') === 0) {
-            heroHeadline = t.textOverlay.heading;
-          }
-        });
-      });
-      return {
-        name: p.name,
-        parentName: (function() {
-          if (!p.parentId) return null;
-          var parent = (store.pages || []).find(function(pp) { return pp.id === p.parentId; });
-          return parent ? parent.name : null;
-        })(),
-        sectionCount: (p.sections || []).length,
-        heroHeadline: heroHeadline,
-        modules: modules.slice(0, 12),
-        imageRefs: Object.keys(imageRefs),
-      };
-    }),
-  };
-  return JSON.stringify(index, null, 2);
-}
+Lies die v4-Wissensbasis unter data/store-knowledge/ aktiv. Halte CLAUDE.md Paragraf 0 ein: nur abstrakte Strukturmuster aus anderen Marken übernehmen, keine fremden Produktfakten, Headlines oder Bildmotive. Keine Versand- oder Lieferzeit-USPs. Kundensichtbare Texte auf Deutsch (bzw. in der Marktplatzsprache), Designer-Briefings immer auf Englisch. Keine Em Dashes oder En Dashes in kundensichtbaren Texten; Bindestriche nur innerhalb zusammengesetzter Wörter.
 
-// Vollständige Page (eine einzige) als JSON mit allen Tile Details, ohne
-// Bilder. Für Detail Kontext wenn der User Wording einer konkreten Page
-// matchen möchte.
-function makeSinglePage(store, pageId) {
-  if (!store || !pageId) return '';
-  var page = (store.pages || []).find(function(p) { return p.id === pageId; });
-  if (!page) return '';
-  var slim = Object.assign({}, page, {
-    sections: (page.sections || []).map(function(s) {
-      return Object.assign({}, s, {
-        tiles: (s.tiles || []).map(function(t) {
-          var c = Object.assign({}, t);
-          if (c.uploadedImage) c.uploadedImage = '<image weggelassen>';
-          if (c.uploadedImageMobile) c.uploadedImageMobile = '<image weggelassen>';
-          if (c.referenceImages) c.referenceImages = (c.referenceImages || []).map(function() { return '<ref image>'; });
-          return c;
-        }),
-      });
-    }),
-  });
-  return JSON.stringify(slim, null, 2);
-}
+Meine gewünschte Änderung: [hier beschreiben]
 
-export default function PatchImportModal({ onClose, onApply, store, currentPageId }) {
-  var [text, setText] = useState('');
-  var [error, setError] = useState('');
-  var [busy, setBusy] = useState(false);
-  var [copied, setCopied] = useState('');
+Nutze die vorhandenen IDs und Namen. Behalte alle nicht ausdrücklich geänderten Texte, ASIN-Zuordnungen, Hotspots, Links, imageRef und Einstellungen bei. Bildfelder werden im Chat-Kontext ausgelassen; sie bleiben im Tool erhalten und dürfen im Patch nicht ersetzt werden. Gib keinen kompletten Ersatz-Store aus.
 
-  var doCopy = function(content, label) {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(content).then(function() {
-        setCopied(label);
-        setTimeout(function() { setCopied(''); }, 3000);
-      });
-    }
-  };
+Gib nach unserer Abstimmung genau ein JSON-Objekt mit baseRevision und einem ops Array zurück: {"baseRevision":"exakt der Wert aus dem aktuellen Store-Kontext","ops":[...]}. Kopiere baseRevision unverändert. Sie schützt vor dem Anwenden auf einen inzwischen geänderten Store. Die Operationen werden der Reihe nach angewendet. sectionIdx, tileIdx und toIndex sind nullbasiert. Ziele bevorzugt über pageId adressieren, alternativ über den eindeutigen pageName.
 
-  var brandIndex = makeBrandIndex(store);
-  var indexSize = Math.round(brandIndex.length / 1024);
-  var currentPage = store && currentPageId ? (store.pages || []).find(function(p) { return p.id === currentPageId; }) : null;
-  var currentPageJson = currentPage ? makeSinglePage(store, currentPage.id) : '';
-  var currentPageSize = currentPageJson ? Math.round(currentPageJson.length / 1024) : 0;
+Erlaubte Operationen:
+- addPage: {op:"addPage", page:{name, parentName?, sections:[{layoutId, tiles:[]}]}, afterPageName?}
+- modifyPage: {op:"modifyPage", pageId, patch:{name?, heroBannerBrief?, heroBannerTextOverlay?}}
+- movePage: {op:"movePage", pageId, toIndex}
+- addSection: {op:"addSection", pageId, after?:0, before?:0, atStart?:true, section:{layoutId, tiles:[]}}
+- moveSection: {op:"moveSection", pageId, sectionIdx, toPageId, toIndex}
+- modifySection: {op:"modifySection", pageId, sectionIdx, patch:{layoutId?, module?}}
+- deleteSection: {op:"deleteSection", pageId, sectionIdx}
+- addTile: {op:"addTile", pageId, sectionIdx, after?:0, atStart?:true, tile:{type, brief, textOverlay, imageRef?, linkUrl?}}
+- modifyTile: {op:"modifyTile", pageId, sectionIdx, tileIdx, patch:{textOverlay?:{heading?, subheading?, body?, bullets?, cta?}, brief?, linkUrl?}}
+- deleteTile: {op:"deleteTile", pageId, sectionIdx, tileIdx}
 
-  var handleApply = function() {
+Kein id, sections oder tiles in patch ersetzen. TextOverlay wird feldweise ergänzt. Neue Kacheln nur mit erlaubten Typen image, shoppable_image, product_grid, product_collection, best_sellers, recommended, deals, video, product_selector. Für neue Links zu Unterseiten linkUrl:"page:Exakter Seitenname" verwenden. Maximal 19 Inhaltsabschnitte plus Header, ein Produktraster und ein Bestseller-Modul pro Seite. Prüfe ASIN-Stacks, Headline-Bezug, Repetition und markenfremde Aussagen vor der Ausgabe.`;
+
+export default function PatchImportModal({ onClose, onApply, store }) {
+  const [text, setText] = useState('');
+  const [error, setError] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const fileInput = useRef(null);
+  const pending = useRef(false);
+  const context = useMemo(() => JSON.stringify(makeClaudeContext(store), null, 2), [store]);
+  const prompt = EDIT_PROMPT + '\n\nAktueller Store:\n' + context;
+
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(prompt);
+      setCopied(true); setError('');
+    } catch (e) { setError('Kopieren fehlgeschlagen. Lade den aktuellen Store als Datei herunter.'); }
+  }
+  function download(full) {
+    const content = full ? JSON.stringify(store, null, 2) : context;
+    const url = URL.createObjectURL(new Blob([content], { type: 'application/json;charset=utf-8' }));
+    const a = document.createElement('a'); a.href = url;
+    a.download = 'store-' + (full ? 'backup' : 'claude-kontext') + '.json';
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+  function fileChanged(e) {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => { setText(String(reader.result || '')); setError(''); };
+    reader.onerror = () => setError('JSON-Datei konnte nicht gelesen werden.');
+    reader.readAsText(file); e.target.value = '';
+  }
+  async function apply() {
+    if (pending.current) return;
     setError('');
-    if (!text.trim()) { setError('Patch JSON ist leer'); return; }
-    var data;
-    try {
-      data = JSON.parse(text);
-    } catch (e) {
-      setError('JSON nicht parsbar, ' + e.message);
-      return;
+    let data;
+    try { data = JSON.parse(text.trim().replace(/^```(?:json)?\s*([\s\S]*?)\s*```$/, '$1')); }
+    catch (e) { setError('JSON nicht lesbar: ' + e.message); return; }
+    if (!data || !Array.isArray(data.ops) || !data.ops.length) {
+      setError('Bitte das Änderungs-JSON mit einem nicht leeren ops Array einfügen. Ein kompletter Store ersetzt hier nicht deinen bearbeiteten Stand.'); return;
     }
-    if (!data.ops || !Array.isArray(data.ops)) {
-      setError('Patch JSON braucht ein "ops" Array');
-      return;
-    }
-    setBusy(true);
+    pending.current = true; setBusy(true);
     try {
-      var summary = onApply(data);
-      setBusy(false);
-      var msg = (summary && summary.length ? summary.join('\n') : 'Keine Änderungen');
-      alert('Patch angewendet:\n\n' + msg);
+      const summary = await onApply(data);
+      alert('Änderungen angewendet:\n\n' + (summary || []).join('\n'));
       onClose();
-    } catch (e) {
-      setBusy(false);
-      setError('Fehler beim Anwenden, ' + e.message);
-    }
-  };
-
+    } catch (e) { setError(e.message || 'Änderungen konnten nicht angewendet werden.'); }
+    finally { pending.current = false; setBusy(false); }
+  }
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-box" onClick={function(e) { e.stopPropagation(); }} style={{ maxWidth: 720, padding: 24, maxHeight: '90vh', overflow: 'auto' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
-          <h2 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: '#0f172a' }}>Patch Mode, kleine Änderung mit KI</h2>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', fontSize: 20, color: '#64748b', cursor: 'pointer', lineHeight: 1, padding: 0 }}>&times;</button>
+    <div className="modal-overlay" onClick={busy ? undefined : onClose}>
+      <div className="modal-box workflow-modal" role="dialog" aria-modal="true" aria-labelledby="claude-edit-title" onClick={e => e.stopPropagation()} style={{ maxWidth: 760, padding: 24 }}>
+        <div className="modal-header">
+          <h2 id="claude-edit-title" style={{ margin: 0, fontSize: 18 }}>Mit Claude bearbeiten</h2>
+          <button className="modal-close" onClick={onClose} disabled={busy} aria-label="Schließen">×</button>
         </div>
-
-        {/* Schritt 1, Prompt im Chat einfügen */}
-        <div style={{ background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 6, padding: 12, marginBottom: 12 }}>
-          <div style={{ fontWeight: 700, marginBottom: 6, color: '#0369a1', fontSize: 13 }}>Schritt 1: Prompt in Claude Code einfügen</div>
-          <div style={{ fontSize: 11, lineHeight: 1.5, color: '#334155', marginBottom: 8 }}>
-            Öffne einen neuen Claude Code oder Cowork Chat. Kopiere diesen Prompt, füge ihn ein, schreib deine konkrete Änderung rein wo es im Prompt steht. Der Skill amazon-storefront-design liegt im Repo unter .claude/skills/ und wird durch den Prompt aktiviert. Nutzt dieselbe v4-Wissensbasis wie beim Full-Store-Konzept.
-          </div>
-          <div style={{ background: '#fff', border: '1px solid #cbd5e1', borderRadius: 4, padding: 10, fontSize: 11, fontFamily: 'monospace', lineHeight: 1.4, color: '#334155', whiteSpace: 'pre-wrap', maxHeight: 160, overflow: 'auto', marginBottom: 8 }}>
-            {PATCH_PROMPT}
-          </div>
-          <div style={{ display: 'flex', gap: 6, alignItems: 'center', flexWrap: 'wrap' }}>
-            <button className="btn btn-primary" onClick={function() { doCopy(PATCH_PROMPT, 'prompt'); }} style={{ fontSize: 12, padding: '6px 14px' }}>
-              Prompt kopieren
-            </button>
-            {copied === 'prompt' && <span style={{ fontSize: 11, color: '#15803d', fontWeight: 600 }}>Prompt kopiert</span>}
-          </div>
-        </div>
-
-        {/* Schritt 2, Brand Voice Index als Kontext */}
-        <div style={{ background: '#fefce8', border: '1px solid #fde68a', borderRadius: 6, padding: 12, marginBottom: 12 }}>
-          <div style={{ fontWeight: 700, marginBottom: 6, color: '#92400e', fontSize: 13 }}>Schritt 2: Kontext mitgeben (zwei Optionen)</div>
-          <div style={{ fontSize: 11, lineHeight: 1.5, color: '#334155', marginBottom: 8 }}>
-            Damit Claude Brand Voice und Page Struktur kennt, gib einen Kontext Block mit. Default ist der schlanke <b>Brand Voice Index</b> (Brand Felder plus pro Page Name, Hero Headline, Modul Liste, imageRef Tags). Klein genug für jeden Chat. Wenn Claude Detail einer bestimmten Page braucht, fragt es nach und du kannst die Page einzeln nachliefern.
-          </div>
-          <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', marginBottom: 6 }}>
-            <button className="btn" onClick={function() { doCopy(brandIndex, 'index'); }} style={{ fontSize: 12, padding: '6px 14px', background: '#fff', border: '1px solid #fde68a' }}>
-              Brand Voice Index kopieren
-            </button>
-            <span style={{ fontSize: 10, color: '#92400e' }}>kompakt, {indexSize} KB</span>
-            {copied === 'index' && <span style={{ fontSize: 11, color: '#15803d', fontWeight: 600 }}>Index kopiert</span>}
-          </div>
-          {currentPage && (
-            <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
-              <button className="btn" onClick={function() { doCopy(currentPageJson, 'page'); }} style={{ fontSize: 12, padding: '6px 14px', background: '#fff', border: '1px solid #fde68a' }}>
-                Aktuelle Page voll kopieren
-              </button>
-              <span style={{ fontSize: 10, color: '#92400e' }}>{currentPage.name}, {currentPageSize} KB</span>
-              {copied === 'page' && <span style={{ fontSize: 11, color: '#15803d', fontWeight: 600 }}>Page kopiert</span>}
-            </div>
-          )}
-          <div style={{ fontSize: 10, color: '#78716c', marginTop: 6, fontStyle: 'italic' }}>
-            Tipp: erst Index, dann nur die Page voll wenn Claude sie braucht.
-          </div>
-        </div>
-
-        {/* Schritt 3, Patch JSON einfügen */}
-        <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 6, padding: 12, marginBottom: 10 }}>
-          <div style={{ fontWeight: 700, marginBottom: 4, color: '#0f172a', fontSize: 13 }}>Schritt 3: Patch JSON aus Claude hier einfügen</div>
-          <div style={{ fontSize: 11, lineHeight: 1.5, color: '#334155', marginBottom: 6 }}>
-            Nach eurer Abstimmung im Chat gibt Claude einen Patch JSON aus. Hier einfügen, Anwenden klicken. Bestehender Store wird nicht überschrieben.
-          </div>
-          <div style={{ fontSize: 10, color: '#64748b' }}>
-            Verfügbare Operationen: <code>addPage, addSection, addTile, modifyTile, modifySection, deleteSection, deleteTile</code>
-          </div>
-        </div>
-
-        <textarea
-          value={text}
-          onChange={function(e) { setText(e.target.value); setError(''); }}
-          placeholder='{"ops": [{"op": "addSection", "pageName": "Sofas", "after": 2, "section": {...}}]}'
-          rows={12}
-          style={{ width: '100%', fontFamily: 'monospace', fontSize: 11, padding: 8, border: '1px solid ' + (error ? '#ef4444' : '#e2e8f0'), borderRadius: 4, resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.4 }}
-        />
-
-        {error && (
-          <div style={{ color: '#ef4444', fontSize: 12, marginTop: 6 }}>{error}</div>
-        )}
-
-        <div style={{ marginTop: 14, display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
-          <button className="btn btn-primary" onClick={handleApply} disabled={!text.trim() || busy}>
-            {busy ? 'Wird angewendet...' : 'Anwenden'}
-          </button>
-          <button className="btn" onClick={onClose}>Abbrechen</button>
+        <section className="asin-workflow-step">
+          <h3>Schritt 1: Aktuellen Stand an Claude übergeben</h3>
+          <p>Öffne Claude Code oder Cowork im Projekt amazon-store-builder. Kopiere Prompt und aktuellen Store gemeinsam und beschreibe deine Änderung. Claude erhält alle Seiten, Texte und IDs einschließlich deiner bisherigen Bearbeitungen. Bilddateien und Produktkatalog werden ausgelassen.</p>
+          <button className="btn btn-primary" onClick={copy}>Prompt und aktuellen Store kopieren</button>
+          {copied && <p role="status">Prompt und aktueller Store kopiert.</p>}
+          <details><summary>Prompt und Store ansehen</summary><pre>{prompt}</pre></details>
+          <button className="btn" onClick={() => download(false)}>Store für Claude herunterladen</button>
+        </section>
+        <section className="asin-workflow-step">
+          <h3>Schritt 2: Änderungen zurück ins Tool übernehmen</h3>
+          <p>Füge Claudes Änderungs-JSON hier ein oder wähle seine JSON-Datei. Nur die angegebenen Änderungen werden übernommen. Bilder und nicht betroffene Bearbeitungen bleiben erhalten. Mit Rückgängig kannst du den Import zurücknehmen.</p>
+          <label htmlFor="claude-patch-json">Änderungs-JSON</label>
+          <textarea id="claude-patch-json" rows={12} value={text} onChange={e => { setText(e.target.value); setError(''); }} disabled={busy} placeholder='{"ops":[{"op":"modifyTile","pageId":"…","sectionIdx":0,"tileIdx":0,"patch":{"textOverlay":{"heading":"Neue Überschrift"}}}]}' style={{ display: 'block', width: '100%', minHeight: 220, boxSizing: 'border-box', resize: 'vertical', fontFamily: 'monospace', padding: 10, margin: '8px 0' }} />
+          <input ref={fileInput} type="file" accept=".json,application/json" onChange={fileChanged} disabled={busy} style={{ display: 'none' }} />
+          <button className="btn" onClick={() => fileInput.current.click()} disabled={busy}>JSON-Datei wählen</button>
+          {error && <p role="alert" style={{ color: '#b91c1c', whiteSpace: 'pre-wrap' }}>{error}</p>}
+        </section>
+        <div className="modal-footer">
+          <button className="btn" onClick={() => download(true)}>Backup herunterladen</button>
+          <button className="btn" onClick={onClose} disabled={busy}>Abbrechen</button>
+          <button className="btn btn-primary" onClick={apply} disabled={!text.trim() || busy}>{busy ? 'Wird angewendet…' : 'Änderungen anwenden'}</button>
         </div>
       </div>
     </div>
