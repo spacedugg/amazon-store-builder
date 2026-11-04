@@ -11,7 +11,7 @@ test('new feedback is visible at the bottom right of the correct store card', as
   expect(b.x).toBeGreaterThan(c.x + c.width / 2); expect(b.y).toBeGreaterThan(c.y + c.height / 2);
   expect(b.x + b.width).toBeLessThan(c.x + c.width); expect(b.y + b.height).toBeLessThan(c.y + c.height);
   await expect(page.getByRole('button', { name: 'Ohne Feedback öffnen', exact: true }).locator('.store-home-feedback')).toHaveCount(0);
-  await info.attach('overview', { body: await page.screenshot(), contentType: 'image/png' });
+  await info.attach('overview', { path: await page.screenshot({ path: info.outputPath('overview.png') }).then(() => info.outputPath('overview.png')), contentType: 'image/png' });
 });
 for (const viewport of [{ width: 1440, height: 600 }, { width: 390, height: 660 }]) {
   test(`JSON paste and file input stay usable at ${viewport.width}x${viewport.height}`, async ({ page }, info) => {
@@ -23,7 +23,7 @@ for (const viewport of [{ width: 1440, height: 600 }, { width: 390, height: 660 
     const baseRevision = await page.evaluate(() => window.__workflowRevision);
     await page.locator('input[type=file]').setInputFiles({ name: 'change.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify({ baseRevision, ops: [{ op: 'modifyTile', pageId: 'home', sectionIdx: 0, tileIdx: 0, patch: { textOverlay: { heading: 'Neue klare Headline' } } }] })) });
     await expect(input).toHaveValue(/Neue klare Headline/);
-    await info.attach('json-input', { body: await page.screenshot(), contentType: 'image/png' });
+    await info.attach('json-input', { path: await page.screenshot({ path: info.outputPath('json-input.png') }).then(() => info.outputPath('json-input.png')), contentType: 'image/png' });
     page.on('dialog', dialog => dialog.accept());
     await page.getByRole('button', { name: 'Änderungen anwenden', exact: true }).click();
     await expect(page.locator('output')).toHaveText('Neue klare Headline');
