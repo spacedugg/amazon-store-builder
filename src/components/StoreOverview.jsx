@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { loadFeedbackCounts } from '../feedbackApi';
 
 function formatDate(value) {
   if (!value) return '';
@@ -36,6 +37,26 @@ export default function StoreOverview({ stores, loading, loadError, hasAutoSave,
   var [importOpen, setImportOpen] = useState(false);
   var [importUrl, setImportUrl] = useState('');
   var [importing, setImporting] = useState(false);
+  var [feedbackCounts, setFeedbackCounts] = useState({});
+
+  useEffect(function() {
+    var stopped = false;
+    var pending = false;
+    async function refresh() {
+      if (pending) return;
+      pending = true;
+      try {
+        var counts = await loadFeedbackCounts();
+        if (!stopped) setFeedbackCounts(counts);
+      } catch (e) { /* Keep the last successful counts while offline. */ }
+      finally { pending = false; }
+    }
+    refresh();
+    var timer = setInterval(refresh, 60000);
+    function visible() { if (document.visibilityState !== 'hidden') refresh(); }
+    document.addEventListener('visibilitychange', visible);
+    return function() { stopped = true; clearInterval(timer); document.removeEventListener('visibilitychange', visible); };
+  }, []);
 
   async function openStore(id) {
     if (opening) return;
@@ -103,7 +124,10 @@ export default function StoreOverview({ stores, loading, loadError, hasAutoSave,
         {loading ? <div className="store-home-loading">Stores werden geladen …</div> : stores.length ? (
           <div className="store-home-grid">
             {stores.map(function(store) {
-              return <button className="store-home-card" key={store.id} onClick={function() { openStore(store.id); }} disabled={!!opening} aria-label={(store.brandName || 'Unbenannter Store') + ' öffnen'}>
+              var count = Number(feedbackCounts[store.id]);
+              if (!Number.isSafeInteger(count) || count < 1) count = 0;
+              var feedbackLabel = count ? count + (count === 1 ? ' neues Feedback' : ' neue Feedbacks') : '';
+              return <button className="store-home-card" key={store.id} onClick={function() { openStore(store.id); }} disabled={!!opening} aria-label={(store.brandName || 'Unbenannter Store') + ' öffnen' + (count ? ', ' + feedbackLabel : '')}>
                 <Preview store={store} />
                 <div className="store-home-card-details">
                   <div className="store-home-card-title">{store.brandName || 'Unbenannter Store'} <span aria-hidden="true">↗</span></div>
@@ -113,6 +137,7 @@ export default function StoreOverview({ stores, loading, loadError, hasAutoSave,
                     {store.savedAt && <span>Bearbeitet {formatDate(store.savedAt)}</span>}
                   </div>
                   {opening === store.id && <div className="store-home-opening">Store wird geöffnet …</div>}
+                  {count > 0 && <span className="store-home-feedback" title={feedbackLabel} aria-label={feedbackLabel}>{count}</span>}
                 </div>
               </button>;
             })}
@@ -122,3 +147,4 @@ export default function StoreOverview({ stores, loading, loadError, hasAutoSave,
     </div>
   );
 }
+

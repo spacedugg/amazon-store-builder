@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { STOREFRONT_ASIN_PROMPT } from '../storefrontAsinPrompt';
 
 var SKILL_PROMPT = 'Aktiviere den Skill amazon-storefront-design (Source: .claude/skills/amazon-storefront-design/SKILL.md im Repo amazon-store-builder) und erstelle ein Amazon Brand Store Konzept als Briefing JSON.\n\nDer Skill nutzt eine kuratierte v4-Wissensbasis aus 20 analysierten Amazon Brand Stores (19 Phase-3-Brand-Identity-Analyses + 159 Per-Page-Blueprints + 3 Vokabular-Dateien für Voice-Marker, Hero-Archetypen und Page-Architecture-Patterns). Pflicht: lies die Wissensbasis vor jedem Konzept-Skelett aktiv aus dem Repo unter data/store-knowledge/, statt aus dem Bauch zu konzipieren. Halte CLAUDE.md Paragraf 0 strikt ein (strukturell-uebertragbar vs. brand-spezifisch).\n\nStarte mit den Marken Basics: frag mich nach\n1. Markenname (Pflicht)\n2. Website URL der Marke (optional, falls vorhanden, hilft bei Tonalität und CI)\n3. Bestehender Amazon Brand Store URL (optional, für Relaunch oder Inspiration)\n\nWenn ich Website oder Brand Store leer lasse, bau das Konzept ohne sie.\n\nHinweis: ASIN Listen als Text oder CSV einfügen, nicht als Screenshot. Bilder dauern in der Verarbeitung lange und können den Chat blockieren.\n\nDann stelle die Multiple Choice Rückfragen zu Stand, Scope, Menüstruktur, Marktplatz und ASIN Lieferung.\n\nFrage zusätzlich zum Produktberater Quiz (Pflicht Subpage):\n- Welche Hauptkategorie deckt das Quiz ab (eine Sub Kategorie, mehrere oder alle Produkte gemischt)?\n- Welche Frage Typen sind sinnvoll für die Marke (z.B. Personen Anzahl, Einsatzort, Größe, Stil, Budget). Schlage 2 bis 4 Fragen mit jeweils 2 bis 4 Antworten vor.\n- Soll der User pro Antwort konkrete ASINs vorgeben oder den Skill aus den Top ASINs der Sub mappen lassen?\n\nNutze nur die erlaubten Tile Types (image, shoppable_image, product_grid, best_sellers, recommended, deals, video, product_selector). Niemals text oder image_text Tiles. Brand Story Tiles als image mit imageCategory text_image, der Designer rendert Heading, Subheading, Body und CTA grafisch ins Bild.\n\nWichtig: Bevor du das Briefing JSON ausgibst, schlage pro Page drei Hero Headline Optionen im Chat vor und warte auf meine Auswahl. Bei Subpages über zehn Stück nutze die Tabellen Variante mit Default Vorschlag pro Sub den ich punktuell ändern kann. Erst nach meiner Bestätigung der Headlines erzeugst du das Briefing JSON.\n\nFrage zur Brand Voice (Block F im Skill, Mehrfachauswahl, mind. 2). Bekannte voiceRegister-Werte aus dem v4-Vokabular (data/store-knowledge/_voice_marker_vocabulary.md): nahbar, direkt, technisch, emotional, professionell, saisonal, autoritaer, verspielt, freundlich, abenteuerlich, jung_lebendig, expert_endorsement. Jede Wahl verändert den Headline Stil direkt und wird auf die Tag-Werte in den 19 Phase-3-Analyses gemappt (Stores mit aehnlichem Voice-Profil als strukturelle Vorlage). Plus vocabularyField, claimType, sentencePattern und rhetoricalDevice nach Vokabular-Datei.\n\nVor dem Konzept-Skelett: waehle aus _hero_archetype_vocabulary.md einen passenden heroArchetype fuer die Startseite und aus _page_architecture_pattern_vocabulary.md ein passendes Page-Pattern. Begruende die Wahl kurz im Dialog (z.B. "Outdoor-Marke mit 5+ Sortimentsfamilien, also alternierendes_tile_row_plus_video_modul_sortimentsrhythmus wie bei night-cat"). Identifiziere 1 bis 3 Quell-Stores aus den Phase-3-Analyses als strukturelle Vorlage.\n\nGeneriere am Ende das Briefing JSON nach dem im Skill definierten Schema (textOverlay als Objekt mit heading, subheading, body, bullets, cta. brief nur Bildfunktion und Komposition. linkUrl Format page:Name. imageCategory Pflicht auf Image Tiles. productSelector Schema mit intro, questions, answers, results für die Produktberater Subpage).\n\nGib das Briefing JSON direkt im Chat aus, damit ich es per Copy Paste in den Store Builder importieren kann (Button "JSON Datei wählen" oder direkt in die Textarea unten einfügen).';
 
@@ -8,11 +9,10 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty }) {
   var [copied, setCopied] = useState(false);
   var fileRef = useRef(null);
 
-  function handleCopyPrompt() {
+  function handleCopyPrompt(content, kind) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(SKILL_PROMPT).then(function() {
-        setCopied(true);
-        setTimeout(function() { setCopied(false); }, 3000);
+      navigator.clipboard.writeText(content).then(function() {
+        setCopied(kind);
       });
     }
   }
@@ -46,14 +46,23 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty }) {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-box" onClick={function(e) { e.stopPropagation(); }} style={{ maxWidth: 640, padding: 24 }}>
+      <div className="modal-box workflow-modal" onClick={function(e) { e.stopPropagation(); }} style={{ maxWidth: 720, padding: 24 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
           <h2 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: '#0f172a' }}>Neuen Store anlegen</h2>
           <button onClick={onClose} style={{ background: 'none', border: 'none', fontSize: 20, color: '#64748b', cursor: 'pointer', lineHeight: 1, padding: 0 }}>&times;</button>
         </div>
 
+        <section className="asin-workflow-step">
+          <h3>Schritt 1: ASIN-Liste aus dem Amazon-Schaufenster holen</h3>
+          <p>Falls noch keine ASIN-Liste vorliegt: Verkäufer-Schaufenster auf Amazon öffnen, dessen URL im Prompt einsetzen und den Prompt in einem Chat mit Browserzugriff ausführen. Die CSV anschließend im Konzept-Chat mitgeben. Mit vorhandener Liste kannst du direkt zu Schritt 2 gehen.</p>
+          <details><summary>ASIN-Prompt ansehen</summary><pre>{STOREFRONT_ASIN_PROMPT}</pre></details>
+          <p>Der beschriebene Padding-Trick funktioniert nur in unterstützten Chat-Umgebungen. Der Prompt verlangt andernfalls einen verfügbaren Datei-Export.</p>
+          <button className="btn btn-primary" onClick={function() { handleCopyPrompt(STOREFRONT_ASIN_PROMPT, 'asin'); }}>ASIN-Prompt kopieren</button>
+          {copied === 'asin' && <span role="status"> ASIN-Prompt kopiert</span>}
+        </section>
+
         <div style={{ background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 6, padding: 12, marginBottom: 14 }}>
-          <div style={{ fontWeight: 700, marginBottom: 6, color: '#0369a1', fontSize: 13 }}>Schritt 1: Konzept in Claude Code erstellen</div>
+          <div style={{ fontWeight: 700, marginBottom: 6, color: '#0369a1', fontSize: 13 }}>Schritt 2: Konzept in Claude Code erstellen</div>
           <div style={{ fontSize: 12, lineHeight: 1.5, color: '#334155', marginBottom: 8 }}>
             Öffne einen neuen Claude Code oder Cowork Chat. Kopiere den Prompt unten und füge ihn ein. Der Skill <code style={{ background: '#e2e8f0', padding: '1px 6px', borderRadius: 3, fontSize: 11 }}>amazon-storefront-design</code> liegt im Repo unter <code style={{ background: '#e2e8f0', padding: '1px 6px', borderRadius: 3, fontSize: 11 }}>.claude/skills/</code> und nutzt eine v4-Wissensbasis aus 20 analysierten Amazon Brand Stores (Phase-3-Analyses + Per-Page-Blueprints + Voice-/Hero-/Page-Architecture-Vokabular).
           </div>
@@ -61,15 +70,15 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty }) {
             {SKILL_PROMPT}
           </div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
-            <button className="btn btn-primary" onClick={handleCopyPrompt} style={{ fontSize: 12, padding: '6px 14px' }}>
+            <button className="btn btn-primary" onClick={function() { handleCopyPrompt(SKILL_PROMPT, 'concept'); }} style={{ fontSize: 12, padding: '6px 14px' }}>
               Prompt kopieren
             </button>
-            {copied && <span style={{ fontSize: 11, color: '#15803d', fontWeight: 600 }}>Prompt in Zwischenablage</span>}
+            {copied === 'concept' && <span style={{ fontSize: 11, color: '#15803d', fontWeight: 600 }}>Prompt in Zwischenablage</span>}
           </div>
         </div>
 
         <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 6, padding: 12, marginBottom: 14 }}>
-          <div style={{ fontWeight: 700, marginBottom: 4, color: '#0f172a', fontSize: 13 }}>Schritt 2: Briefing JSON importieren</div>
+          <div style={{ fontWeight: 700, marginBottom: 4, color: '#0f172a', fontSize: 13 }}>Schritt 3: Briefing JSON importieren</div>
           <div style={{ fontSize: 12, lineHeight: 1.5, color: '#334155' }}>
             Sobald dein Briefing JSON aus dem Chat fertig ist, füge es unten ein oder lade es als <code style={{ background: '#e2e8f0', padding: '1px 6px', borderRadius: 3, fontSize: 11 }}>.json</code> Datei hoch.
           </div>
@@ -99,3 +108,4 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty }) {
     </div>
   );
 }
+

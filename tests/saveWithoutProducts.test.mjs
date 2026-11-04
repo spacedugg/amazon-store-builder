@@ -9,7 +9,7 @@ import React, { act } from 'react';
 import { createRoot } from 'react-dom/client';
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-let temp, App, productData, storage;
+let temp, App, productData, storage, storePatch;
 const ASIN = 'B0DGGYBSLR';
 const stubStorage = `
 export async function saveStore(...args){globalThis.__saveTest.saves.push(args);if(globalThis.__saveTest.error)throw Error(globalThis.__saveTest.error);return {id:'jowo',shareToken:'existing-link'};}
@@ -38,11 +38,12 @@ before(async () => {
     }}],
   });
   ({default:App}=await import(pathToFileURL(join(temp,'app.mjs'))));
-  for(const name of ['productData','storage']){
+  for(const name of ['productData','storage','storePatch']){
     await build({entryPoints:[join(rootDir,'src/'+name+'.js')],outfile:join(temp,name+'.mjs'),bundle:true,platform:'node',format:'esm',packages:'external'});
   }
   productData=await import(pathToFileURL(join(temp,'productData.mjs')));
   storage=await import(pathToFileURL(join(temp,'storage.mjs')));
+  storePatch=await import(pathToFileURL(join(temp,'storePatch.mjs')));
 });
 after(async()=>{await rm(temp,{recursive:true,force:true});});
 
@@ -123,3 +124,22 @@ test('storage POST preserves edited images and missing ASINs without a product r
     assert.equal(calls[0].body.data.pages[0].sections[0].tiles[0].uploadedImage,'https://images.test/edited-desktop.webp');
   }finally{globalThis.fetch=originalFetch;}
 });
+
+test('Claude edits save in the existing shared store and undo restores the full previous edit',async()=>{
+  await withEditor(fixture(),null,async(state)=>{
+    await act(async()=>state.components.Topbar.onPatchImport());
+    const current=state.components.PatchImportModal.store;
+    const change={baseRevision:storePatch.makeClaudeContext(current).baseRevision,ops:[{op:'modifyTile',pageId:'home',sectionIdx:0,tileIdx:0,patch:{textOverlay:{heading:'New concise headline'}}}]};
+    let summary;await act(async()=>{summary=state.components.PatchImportModal.onApply(change);});
+    assert.equal(summary.length,1);
+    await act(async()=>state.components.Topbar.onSave());
+    assert.equal(state.saves[0][0].pages[0].sections[0].tiles[0].textOverlay.heading,'New concise headline');
+    assert.equal(state.saves[0][0].pages[0].sections[0].tiles[0].uploadedImage,'https://images.test/edited-desktop.webp');
+    assert.equal(state.saves[0][1],'jowo');assert.equal(state.saves[0][2],'existing-link');
+    await act(async()=>state.components.Topbar.onUndo());
+    await act(async()=>state.components.Topbar.onSave());
+    assert.deepEqual(state.saves[1][0].pages,current.pages);
+    assert.equal(state.saves[1][1],'jowo');assert.equal(state.saves[1][2],'existing-link');
+  });
+});
+
