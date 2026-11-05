@@ -174,6 +174,19 @@ module.exports = async function handler(req, res) {
       }
       if (body.designerDone != null) {
         sets.push('designer_done = ?'); args.push(body.designerDone ? 1 : 0);
+        // Hakt der Designer ab, ist das Feedback intern erledigt (der Kunde sieht dann "Erledigt").
+        // Nimmt er den Haken zurueck, ist es wieder in Arbeit.
+        if (body.designerDone) {
+          if (body.status == null) { sets.push('status = ?'); args.push('erledigt'); }
+        } else if (body.status == null) {
+          var cur = await db.execute({ sql: 'SELECT status FROM feedback WHERE id = ?', args: [String(body.id)] });
+          if (cur.rows[0] && cur.rows[0].status === 'erledigt') { sets.push('status = ?'); args.push('offen'); }
+        }
+      }
+      // Wer Text bearbeitet oder weiterleitet, arbeitet daran: aus "neu" wird "in Arbeit"
+      if ((body.teamText != null || body.forwarded) && body.status == null) {
+        var cur2 = await db.execute({ sql: 'SELECT status FROM feedback WHERE id = ?', args: [String(body.id)] });
+        if (cur2.rows[0] && cur2.rows[0].status === 'neu') { sets.push('status = ?'); args.push('offen'); }
       }
       if (!sets.length) return res.status(400).json({ error: 'Nichts zu ändern.' });
       sets.push("updated_at = datetime('now')");
