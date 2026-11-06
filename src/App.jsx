@@ -1241,8 +1241,8 @@ export default function App() {
 
   var handleShowStores = async function() {
     if (returningToOverview) return;
-    var problems = storeLimitErrors(store).concat(collectionContentErrors(store));
-    if (problems.length) { alert('Bitte vor dem Verlassen beheben:\n\n' + problems.join('\n')); return; }
+    // Unvollstaendige Stores muessen speicherbar und verlassbar bleiben.
+    // Inhaltsfehler sperren die Kundenfreigabe, nicht die Navigation.
     setReturningToOverview(true);
     try {
       // The editor may still have unsaved changes, especially with a designer link.
@@ -1709,6 +1709,11 @@ export default function App() {
       setLinkDialog({ kind: 'error', title: dlgTitle, message: 'Bitte erst einen Store anlegen.' });
       return;
     }
+    var problems = storeLimitErrors(store).concat(collectionContentErrors(store));
+    if (problems.length) {
+      setLinkDialog({ kind: 'error', title: dlgTitle, message: 'Bitte vor dem Erstellen des Kunden-Preview-Links beheben:\n\n' + problems.join('\n') });
+      return;
+    }
     if (shareTokenRef.current && storeIdRef.current) {
       var pendingProducts = missingUsedProductAsins(store);
       var message = pendingProducts.length
@@ -2086,5 +2091,6 @@ export default function App() {
     </div>
   );
 }
+
 
 

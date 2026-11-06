@@ -114,6 +114,30 @@ test('real save failures remain errors and do not navigate away',async()=>{
   });}finally{console.error=originalError;}
 });
 
+for (const invalid of ['duplicate-modules', 'incomplete-collection']) {
+  test('invalid '+invalid+' store can return to overview but cannot create a customer preview link',async()=>{
+    const store = fixture();
+    const tiles = store.pages[0].sections[0].tiles;
+    if (invalid === 'duplicate-modules') {
+      tiles.push({id:'best1',type:'best_sellers'}, {id:'best2',type:'best_sellers'},
+        {id:'grid1',type:'product_grid'}, {id:'grid2',type:'product_grid'});
+    } else {
+      tiles.push({id:'collection',type:'product_collection',asins:[]});
+    }
+    await withEditor(store,null,async(state,dom)=>{
+      await act(async()=>state.components.Topbar.onShowStores());
+      assert(dom.window.document.querySelector('[data-component="StoreOverview"]'), 'Validation must not trap users in the editor');
+      assert.equal(state.alerts.some(a=>a.includes('vor dem Verlassen')),false);
+    });
+    await withEditor(store,null,async(state)=>{
+      await act(async()=>state.components.Topbar.onCopyCustomerLink());
+      assert.equal(state.components.LinkDialog.dialog.kind,'error');
+      assert.equal(state.components.LinkDialog.dialog.url,undefined);
+      assert.equal(state.saves.length,0,'Invalid content cannot be published through customer-link creation');
+    });
+  });
+}
+
 test('storage POST preserves edited images and missing ASINs without a product request',async()=>{
   const calls=[],originalFetch=globalThis.fetch;
   globalThis.fetch=async(url,opt)=>{calls.push({url,body:JSON.parse(opt.body)});return {ok:true,json:async()=>({id:'jowo',shareToken:'existing-link'})};};
@@ -142,4 +166,5 @@ test('Claude edits save in the existing shared store and undo restores the full 
     assert.equal(state.saves[1][1],'jowo');assert.equal(state.saves[1][2],'existing-link');
   });
 });
+
 
