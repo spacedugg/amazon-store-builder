@@ -22,8 +22,7 @@ async function editor(page,failAll=false){
   return route.fulfill({json:{counts:{},feedback:[],neu:0}});
  });
  await page.route('https://images.test/**',route=>route.fulfill({status:200,contentType:'image/svg+xml',body:'<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><rect width="20" height="20" fill="blue"/></svg>'}));
- await page.route('**/embedded-product-test',route=>route.fulfill({contentType:'text/html',body:'<iframe title="Store Builder" src="http://127.0.0.1:4174/?embed=1" style="position:fixed;inset:0;width:100%;height:100%;border:0"></iframe>'}));
- await page.goto('http://localhost:4174/embedded-product-test');
+ await page.goto('/tests/product-data-embed.html');
  const ui=page.frameLocator('iframe');
  try {await expect(ui.getByRole('button',{name:'Speichern',exact:true})).toBeVisible();}
  catch(error){console.log('Editor fixture failed',JSON.stringify({frames:page.frames().map(f=>f.url()),errors:state.errors,network:state.networkFailures}));throw error;}
