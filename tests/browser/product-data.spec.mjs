@@ -27,7 +27,7 @@ async function editor(page,failAll=false){
  try {await expect(ui.getByRole('button',{name:'Speichern',exact:true})).toBeVisible();}
  catch(error){console.log('Editor fixture failed',JSON.stringify({frames:page.frames().map(f=>f.url()),errors:state.errors,network:state.networkFailures}));throw error;}
  await ui.getByRole('button',{name:/^Mehr/}).click();
- await ui.getByRole('button',{name:/Produktdaten laden/}).click();
+ await ui.getByRole('menuitem',{name:/Produktdaten laden/}).click();
  return {...state,ui};
 }
 test('partial product load followed by save stays mounted past the autosave interval',async({page})=>{
