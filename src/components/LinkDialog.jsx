@@ -48,12 +48,12 @@ export default function LinkDialog({ dialog, onClose }) {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" style={{ maxWidth: 560 }} onClick={function(e) { e.stopPropagation(); }}>
-        <div className="modal-header">
+      <div className="modal" style={{ maxWidth: 560, maxHeight: 'calc(100dvh - 32px)', display: 'flex', flexDirection: 'column' }} onClick={function(e) { e.stopPropagation(); }}>
+        <div className="modal-header" style={{flexShrink:0}}>
           <span style={isError ? { color: '#b91c1c' } : undefined}>{dialog.title}</span>
           <button className="modal-close" onClick={onClose} title="Schließen" aria-label="Schließen">×</button>
         </div>
-        <div style={{ padding: '4px 20px 20px' }}>
+        <div style={{ padding: '4px 20px 20px', overflowY: 'auto', minHeight: 0 }}>
           {isError || isInfo ? (
             <div style={{ fontSize: 13, lineHeight: 1.55, color: '#334155', whiteSpace: 'pre-wrap' }} role={isError ? 'alert' : 'status'}>{dialog.message}</div>
           ) : (
@@ -83,11 +83,12 @@ export default function LinkDialog({ dialog, onClose }) {
               })}
             </>
           )}
-          <div className="modal-footer">
-            <button className="btn" onClick={onClose}>Schließen</button>
-          </div>
+        </div>
+        <div className="modal-footer" style={{flexShrink:0,padding:'12px 20px',margin:0}}>
+          <button className="btn" onClick={onClose}>Schließen</button>
         </div>
       </div>
     </div>
   );
 }
+

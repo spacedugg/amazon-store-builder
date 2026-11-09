@@ -32,7 +32,7 @@ export function gatherStoreAsins(store) {
 
 // Fehlt noch etwas fuer die Anzeige? Aeltere Abrufe kannten den Preis noch nicht (kein Feld "price").
 export function productIsComplete(p) {
-  return !!(p && p.image && Object.prototype.hasOwnProperty.call(p, 'price'));
+  return !!(p && typeof p.image === 'string' && p.image && Object.prototype.hasOwnProperty.call(p, 'price'));
 }
 
 export function missingProductAsins(store) {
@@ -57,9 +57,12 @@ export function productDataWarning(store) {
 // Holt die Daten in kleinen Paketen, damit ein Fehler nicht alles kostet.
 // onProgress({ done, total }) wird nach jedem Paket gerufen. Gibt { products, failed } zurueck.
 export async function fetchProductData(asins, marketplace, onProgress) {
+  asins = Array.from(new Set(asins.map(function(a) { return String(a).trim().toUpperCase(); })));
   var domain = DOMAINS[marketplace] || DOMAINS.de;
   var products = [];
   var failed = [];
+  var failures = [];
+  var seen = {};
   var CHUNK = 12;
   for (var i = 0; i < asins.length; i += CHUNK) {
     var part = asins.slice(i, i + CHUNK);
@@ -74,18 +77,37 @@ export async function fetchProductData(asins, marketplace, onProgress) {
         throw new Error((e.error || 'Abruf fehlgeschlagen') + (e.hint ? ' ' + e.hint : ''));
       }
       var json = await resp.json();
-      var got = json.products || [];
+      var got = (json.products || []).filter(function(p) {
+        var asin = p && String(p.asin || '').toUpperCase();
+        if (part.indexOf(asin) === -1 || !productIsComplete(p) || seen[asin]) return false;
+        seen[asin] = true;
+        return true;
+      });
       products = products.concat(got);
       var gotAsins = {};
       got.forEach(function(p) { gotAsins[String(p.asin).toUpperCase()] = true; });
-      part.forEach(function(a) { if (!gotAsins[a]) failed.push(a); });
+      part.forEach(function(a) {
+        if (gotAsins[a]) return;
+        failed.push(a);
+        var detail = (json.failed || []).find(function(f) { return String(f.asin || '').toUpperCase() === a; });
+        failures.push({ asin: a, reason: detail && detail.reason || 'Keine vollstaendigen Produktdaten erhalten.' });
+      });
     } catch (err) {
-      part.forEach(function(a) { failed.push(a); });
-      if (i === 0 && products.length === 0 && asins.length <= CHUNK) { err.failedAll = true; throw err; }
+      part.forEach(function(a) { failed.push(a); failures.push({ asin: a, reason: err.message || 'Abruf fehlgeschlagen.' }); });
     }
     if (onProgress) onProgress({ done: Math.min(asins.length, i + CHUNK), total: asins.length });
   }
-  return { products: products, failed: failed };
+  return { products: products, failed: failed, failures: failures };
+}
+
+export function formatProductFailures(failures) {
+  var groups = new Map();
+  (failures || []).forEach(function(f) {
+    var reason = f.reason || 'Keine verwertbaren Produktdaten erhalten.';
+    if (!groups.has(reason)) groups.set(reason, []);
+    groups.get(reason).push(f.asin);
+  });
+  return Array.from(groups, function(entry) { return entry[1].join(', ') + ': ' + entry[0]; }).join('\n\n');
 }
 
 export function mergeProducts(existing, fresh) {
@@ -95,4 +117,5 @@ export function mergeProducts(existing, fresh) {
   (fresh || []).forEach(function(p) { if (p && p.asin) { if (!map[p.asin]) order.push(p.asin); map[p.asin] = p; } });
   return order.map(function(a) { return map[a]; });
 }
+
 

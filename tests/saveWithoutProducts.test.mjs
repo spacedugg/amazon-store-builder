@@ -55,6 +55,27 @@ function fixture(used=false){return {
   }]}]}],
 };}
 
+test('batch load reports only usable products and preserves real reasons through saving',async()=>{
+  const store=fixture(true);
+  const asins=Array.from({length:25},(_,i)=>'B'+String(i).padStart(9,'0'));
+  store.asins=asins;store.pages[0].sections[0].tiles[0].asins=asins;
+  await withEditor(store,null,async state=>{
+    globalThis.fetch=async(url,opts)=>{
+      const requested=JSON.parse(opts.body).asins;
+      return {ok:true,json:async()=>({products:requested.includes(asins[0])?[{asin:asins[0],image:'https://images.test/a.jpg',price:12,name:'Produkt'}]:[],failed:requested.filter(a=>a!==asins[0]).map(asin=>({asin,reason:'Produktseite nicht gefunden (404)'}))})};
+    };
+    await act(async()=>state.components.Topbar.onLoadProducts());
+    const result=state.components.LinkDialog.dialog;
+    assert.match(result.message,/1 von 25 ASINs geladen/);
+    assert.match(result.message,/404/);
+    await act(async()=>state.components.LinkDialog.onClose());
+    await act(async()=>state.components.Topbar.onSave());
+    assert.equal(state.saves[0][0].products.length,1);
+    assert.deepEqual(state.alerts,[]);
+    assert(state.components.Canvas,'Editor stays mounted after save');
+  });
+});
+
 test('removed grid ASIN remains in catalog but is not reported as missing preview data',()=>{
   const store=fixture();
   assert.deepEqual(productData.missingProductAsins(store),[ASIN]);
@@ -94,8 +115,9 @@ for(const used of [false,true]){
       assert.equal(state.saves[0][0].pages[0].sections[0].tiles[0].uploadedImageMobile,'https://images.test/new-mobile-edit.webp');
       assert.deepEqual(state.saves[0][0].asins,[ASIN]);assert.equal(state.saves[0][1],'jowo');assert.equal(state.saves[0][2],'existing-link');
       assert.equal(state.saves[0][4],true,'Image upload protection must stay enabled');
-      assert(state.alerts.some(a=>a.startsWith('Store gespeichert.')));
-      assert.equal(state.alerts.some(a=>a.includes('Hinweis: Produktdaten fehlen')),used);
+      assert(state.components.LinkDialog.dialog.message.startsWith('Store gespeichert.'));
+      assert.equal(state.components.LinkDialog.dialog.message.includes('Hinweis: Produktdaten fehlen'),used);
+      assert.deepEqual(state.alerts,[],'Save must not open a native dialog in the embedded editor');
       await act(async()=>state.components.Topbar.onShowStores());
       assert.equal(state.saves.length,2);assert(dom.window.document.querySelector('[data-component="StoreOverview"]'));
       assert.deepEqual(state.fetches,[],'Save and navigation must not call Amazon product lookup');
@@ -107,10 +129,10 @@ test('real save failures remain errors and do not navigate away',async()=>{
   const originalError=console.error;console.error=()=>{};
   try{await withEditor(fixture(true),'Image upload failed',async(state,dom)=>{
     await act(async()=>state.components.Topbar.onSave());
-    assert(state.alerts.some(a=>a.includes('Speichern fehlgeschlagen')));
+    assert(state.components.LinkDialog.dialog.message.includes('Speichern fehlgeschlagen'));
     await act(async()=>state.components.Topbar.onShowStores());
     assert(!dom.window.document.querySelector('[data-component="StoreOverview"]'));
-    assert(state.alerts.some(a=>a.includes('Image upload failed')));
+    assert(state.components.LinkDialog.dialog.message.includes('Image upload failed'));
   });}finally{console.error=originalError;}
 });
 
@@ -166,5 +188,6 @@ test('Claude edits save in the existing shared store and undo restores the full 
     assert.equal(state.saves[1][1],'jowo');assert.equal(state.saves[1][2],'existing-link');
   });
 });
+
 
 
