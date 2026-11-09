@@ -13,6 +13,14 @@ function toPrice(v) {
   return isFinite(n) ? n : null;
 }
 
+function normalizedAsin(value) {
+  return typeof value === 'string' && /^[A-Z0-9]{10}$/i.test(value.trim()) ? value.trim().toUpperCase() : '';
+}
+function asinFromUrl(value) {
+  return typeof value === 'string' ? normalizedAsin((value.match(/\/(?:dp|gp\/product)\/([A-Z0-9]{10})(?:[/?#]|$)/i) || [])[1]) : '';
+}
+function text(value) { return typeof value === 'string' ? value : ''; }
+
 function sleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
 
 module.exports = async function handler(req, res) {
@@ -25,7 +33,8 @@ module.exports = async function handler(req, res) {
   var asins = body.asins;
   var domain = body.domain || 'https://www.amazon.de';
 
-  if (!asins || !asins.length) return res.status(400).json({ error: 'Missing asins array' });
+  if (!Array.isArray(asins) || !asins.length || asins.some(function(a) { return !normalizedAsin(a); })) return res.status(400).json({ error: 'Missing asins array' });
+  asins = Array.from(new Set(asins.map(normalizedAsin)));
   if (!BRIGHT_DATA_TOKEN) return res.status(500).json({ error: 'BRIGHT_DATA_API_KEY not configured' });
 
   try {
@@ -140,14 +149,26 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // Eintraege, bei denen Bright Data einen Fehler meldet, nicht mehr stillschweigend verwerfen: der Aufrufer sieht warum
-    var failed = rawData
-      .filter(function(p) { return p && p.error; })
-      .map(function(p) { return { asin: (p.input && p.input.url ? (p.input.url.match(/\/dp\/([A-Z0-9]{10})/i) || [])[1] : '') || p.asin || '', reason: String(p.error).slice(0, 200) }; });
-
-    var products = rawData
-      .filter(function(p) { return p && !p.error; })
-      .map(function(p) {
+    // Bei Parent-ASINs liefert Amazon eine konkrete Child-ASIN. Der
+    // Schluessel im Store bleibt die angefragte ASIN aus input.url;
+    // niemals nach Position zuordnen (Antworten koennen umsortiert sein).
+    var failed = [];
+    var products = rawData.map(function(p) {
+        if (!p || typeof p !== 'object') return null;
+        var requested = asinFromUrl(p.input && p.input.url) || normalizedAsin(p.input && p.input.asin);
+        var resolved = normalizedAsin(p.asin) || asinFromUrl(p.url);
+        if (!requested && asins.indexOf(resolved) !== -1) requested = resolved;
+        if (asins.indexOf(requested) === -1) return null;
+        if (p.error) {
+          var reason = String(p.error).slice(0, 300);
+          if (/404/.test(reason)) reason = 'Amazon hat eine Produktseite mit Fehler 404 geliefert. Bitte ASIN und Marktplatz pruefen.';
+          failed.push({ asin: requested, reason: reason });
+          return null;
+        }
+        if (resolved && resolved !== requested && normalizedAsin(p.parent_asin) !== requested) {
+          failed.push({ asin: requested, reason: 'Amazon liefert eine andere ASIN/Variante (' + resolved + '). Bitte die ASIN pruefen.' });
+          return null;
+        }
         // All 7 product images (MAIN + PT01-PT06)
         var images = [];
         if (p.images && Array.isArray(p.images)) {
@@ -180,18 +201,25 @@ module.exports = async function handler(req, res) {
           });
         }
 
+        var image = text(p.image) || text(p.image_url) || (images[0] && images[0].url) || '';
+        if (!image) {
+          failed.push({ asin: requested, reason: 'Amazon hat kein Produktbild geliefert.' });
+          return null;
+        }
         return {
-          asin: p.asin || '',
-          name: p.title || '',
-          brand: p.brand || '',
-          description: p.description || '',
-          rating: p.rating || 0,
-          reviews: p.reviews_count || 0,
-          image: p.image || p.image_url || '',
+          asin: requested,
+          resolvedAsin: resolved || requested,
+          parentAsin: normalizedAsin(p.parent_asin),
+          name: text(p.title),
+          brand: text(p.brand),
+          description: text(p.description),
+          rating: Math.max(0, Math.min(5, Number(p.rating) || 0)),
+          reviews: Math.max(0, Number(p.reviews_count) || 0),
+          image: image,
           // Preis: aktueller Preis (final_price), sonst Streichpreis. null = Bright Data kennt keinen
           // Preis (z. B. nicht lieferbar); das Feld ist immer da, damit man "noch nicht geladen" erkennt.
           price: toPrice(p.final_price != null ? p.final_price : (p.initial_price != null ? p.initial_price : p.price)),
-          currency: p.currency || '',
+          currency: text(p.currency),
           images: images,
           bulletPoints: bulletPoints,
           categories: p.categories || [],
@@ -213,7 +241,14 @@ module.exports = async function handler(req, res) {
           productDetails: p.product_details || [],
           storeUrl: p.store_url || null,
         };
-      });
+      }).filter(Boolean);
+    var seen = {};
+    products = products.filter(function(p) { if (seen[p.asin]) return false; seen[p.asin] = true; return true; });
+    failed = failed.filter(function(f) { return !seen[f.asin]; });
+    asins.forEach(function(a) {
+      if (!seen[a] && !failed.some(function(f) { return f.asin === a; }))
+        failed.push({ asin: a, reason: 'Amazon hat keine verwertbaren Produktdaten geliefert.' });
+    });
 
     return res.status(200).json({ products: products, count: products.length, failed: failed });
 
@@ -222,3 +257,4 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: err.message, stack: (err.stack || '').slice(0, 300) });
   }
 };
+

@@ -21,7 +21,7 @@ import BriefingView from './components/BriefingView';
 import CustomerPreview from './components/CustomerPreview';
 import AdminAnalyze from './components/AdminAnalyze';
 import AdminScrapingTest from './components/AdminScrapingTest';
-import { missingProductAsins, missingUsedProductAsins, productDataWarning, fetchProductData, mergeProducts, gatherStoreAsins } from './productData';
+import { missingProductAsins, missingUsedProductAsins, productDataWarning, fetchProductData, formatProductFailures, mergeProducts, gatherStoreAsins } from './productData';
 import { introducedLimitErrors, storeLimitErrors, collectionContentErrors } from './storeRules.mjs';
 
 var EMPTY_STORE = { brandName: '', marketplace: 'de', products: [], asins: [], pages: [], brandTone: '', brandStory: '', headerBanner: null, headerBannerMobile: null, headerBannerColor: '', category: 'generic', googleDriveUrl: '' };
@@ -1170,21 +1170,21 @@ export default function App() {
   var handleSave = async function() {
     if (!store.pages.length) return;
     var problems = storeLimitErrors(store).concat(collectionContentErrors(store));
-    if (problems.length) { alert('Bitte vor dem Speichern beheben:\n\n' + problems.join('\n')); return; }
+    if (problems.length) { setLinkDialog({kind:'error',title:'Speichern',message:'Bitte vor dem Speichern beheben:\n\n' + problems.join('\n')}); return; }
     setManualSaveProgress({ stage: 'store-save' });
     try {
       var result = await persistStore(store, { includeShareToken: true, onProgress: setManualSaveProgress });
       var stores = await loadSavedStores();
       setSavedStores(stores);
       if (result && result.offline) {
-        alert('Server nicht erreichbar, Store nur lokal im Browser gesichert (' + (store.brandName || 'Untitled') + '). Bitte später erneut speichern, sobald die Verbindung wieder steht.');
+        setLinkDialog({kind:'error',title:'Speichern',message:'Server nicht erreichbar, Store nur lokal im Browser gesichert (' + (store.brandName || 'Untitled') + '). Bitte später erneut speichern, sobald die Verbindung wieder steht.'});
       } else {
         var productWarning = productDataWarning(store);
-        alert('Store gespeichert. (' + (store.brandName || 'Untitled') + ')' + (productWarning ? '\n\nHinweis: ' + productWarning : ''));
+        setLinkDialog({kind:'info',title:'Speichern',message:'Store gespeichert. (' + (store.brandName || 'Untitled') + ')' + (productWarning ? '\n\nHinweis: ' + productWarning : '')});
       }
     } catch (err) {
       console.error('Save fehlgeschlagen:', err);
-      alert('Speichern fehlgeschlagen.\n\n' + err.message + '\n\nDein aktueller Stand bleibt im Tab erhalten. Schließe den Tab nicht, bevor das Problem behoben ist.');
+      setLinkDialog({kind:'error',title:'Speichern',message:'Speichern fehlgeschlagen.\n\n' + err.message + '\n\nDein aktueller Stand bleibt im Tab erhalten. Schließe den Tab nicht, bevor das Problem behoben ist.'});
     } finally {
       setManualSaveProgress(null);
     }
@@ -1663,7 +1663,7 @@ export default function App() {
     });
     var next = Object.assign({}, current, { products: mergeProducts(current.products, res.products) });
     setStoreWithUndo(function(s) { return Object.assign({}, s, { products: mergeProducts(s.products, res.products) }); });
-    return { store: next, loaded: res.products.length, failed: res.failed, missing: missing.length };
+    return { store: next, loaded: res.products.length, failed: res.failed, failures: res.failures, missing: missing.length };
   };
 
   var handleLoadProducts = async function() {
@@ -1680,10 +1680,11 @@ export default function App() {
         setLinkDialog({ kind: 'info', title: title, message: 'Alle ' + total + ' ASINs haben schon Bild und Preis. Es gibt nichts nachzuladen.' });
         return;
       }
-      var msg = r.loaded + ' von ' + r.missing + ' ASINs geladen. Bild und Preis stehen jetzt in der Vorschau.';
-      if (r.failed.length) msg += '\n\nNicht geladen werden konnten: ' + r.failed.join(', ') + '. Bitte später noch einmal versuchen.';
-      msg += '\n\nDamit der Kunde sie sieht, klicke noch auf „Speichern“.';
-      setLinkDialog({ kind: 'info', title: title, message: msg });
+      var msg = r.loaded + ' von ' + r.missing + ' ASINs geladen.';
+      if (r.loaded) msg += ' Die geladenen Produkte stehen jetzt in der Vorschau.';
+      if (r.failed.length) msg += '\n\nNicht geladen:\n' + formatProductFailures(r.failures);
+      if (r.loaded) msg += '\n\nDamit der Kunde sie sieht, klicke noch auf „Speichern“.';
+      setLinkDialog({ kind: r.loaded ? 'info' : 'error', title: title, message: msg });
     } catch (e) {
       setCustomerSaveProgress(null);
       setLinkDialog({ kind: 'error', title: title, message: 'Die Produktdaten konnten nicht geladen werden.\n\n' + (e && e.message ? e.message : 'Unbekannter Fehler') });
@@ -2050,26 +2051,11 @@ export default function App() {
           onClose={function() { setShowAsins(false); }}
           onScrape={async function(asinList) {
             setRequestedAsins(asinList);
-            var domain = DOMAINS[store.marketplace] || DOMAINS.de;
-            var resp = await fetch('/api/amazon-search', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ asins: asinList, domain: domain }),
-            });
-            if (!resp.ok) {
-              var e = await resp.json().catch(function() { return {}; });
-              throw new Error((e.error || 'Scrape failed') + (e.detail ? ' — ' + String(e.detail).slice(0, 200) : '') + (e.hint ? ' ' + e.hint : ''));
-            }
-            var json = await resp.json();
-            var newProducts = json.products || [];
-            // Merge mit bestehenden products, neue gewinnen bei Konflikt
+            var result = await fetchProductData(asinList, store.marketplace);
             setStoreWithUndo(function(s) {
-              var existing = {};
-              (s.products || []).forEach(function(p) { existing[p.asin] = p; });
-              newProducts.forEach(function(p) { existing[p.asin] = p; });
-              return Object.assign({}, s, { products: Object.keys(existing).map(function(k) { return existing[k]; }) });
+              return Object.assign({}, s, { products: mergeProducts(s.products, result.products) });
             });
-            return { success: newProducts.length, failed: asinList.length - newProducts.length };
+            return { success: result.products.length, failed: result.failed.length, failures: result.failures };
           }}
           uiLang={uiLang}
         />
@@ -2091,6 +2077,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 

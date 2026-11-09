@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { t } from '../i18n';
+import { formatProductFailures, gatherStoreAsins, productIsComplete } from '../productData';
 
 export default function AsinPanel({ asins, pages, products, requestedAsins, onClose, onScrape, uiLang }) {
+  asins = (asins || []).map(function(a) { return typeof a === 'string' ? {asin:a.toUpperCase()} : Object.assign({}, a, {asin:String(a && a.asin || '').toUpperCase()}); }).filter(function(a) { return /^[A-Z0-9]{10}$/.test(a.asin); });
   var [scraping, setScraping] = useState(false);
   var [scrapeMsg, setScrapeMsg] = useState('');
   // Build usage map
@@ -16,11 +18,12 @@ export default function AsinPanel({ asins, pages, products, requestedAsins, onCl
   });
 
   var productMap = {};
-  (products || []).forEach(function(p) { productMap[p.asin] = p; });
+  (products || []).forEach(function(p) { if (p && p.asin) productMap[String(p.asin).toUpperCase()] = p; });
 
   // Determine statuses
-  var scrapedAsins = (products || []).map(function(p) { return p.asin; });
-  var allRequested = requestedAsins || scrapedAsins;
+  var allRequested = gatherStoreAsins({pages:pages,asins:asins});
+  var scrapedAsins = allRequested.filter(function(a) { return productIsComplete(productMap[a]); });
+  gatherStoreAsins({pages:pages}).forEach(function(a) { used[a] = true; });
   var failedAsins = allRequested.filter(function(a) { return scrapedAsins.indexOf(a) < 0; });
 
   var cats = {};
@@ -32,8 +35,8 @@ export default function AsinPanel({ asins, pages, products, requestedAsins, onCl
 
   var totalRequested = allRequested.length;
   var scrapedCount = scrapedAsins.length;
-  var assignedCount = asins.filter(function(a) { return used[a.asin]; }).length;
-  var unassignedCount = asins.length - assignedCount;
+  var assignedCount = allRequested.filter(function(a) { return used[a]; }).length;
+  var unassignedCount = totalRequested - assignedCount;
   var failedCount = failedAsins.length;
 
   return (
@@ -58,21 +61,15 @@ export default function AsinPanel({ asins, pages, products, requestedAsins, onCl
                 className="btn btn-primary"
                 disabled={scraping}
                 onClick={async function() {
-                  // alle uniken ASINs aus dem Store sammeln
-                  var all = {};
-                  pages.forEach(function(pg) { pg.sections.forEach(function(sec) { sec.tiles.forEach(function(tl) {
-                    (tl.asins || []).forEach(function(a) { if (a && a.indexOf('B0') === 0) all[a] = true; });
-                    (tl.hotspots || []).forEach(function(h) { if (h.asin) all[h.asin] = true; });
-                    if (tl.linkAsin) all[tl.linkAsin] = true;
-                  }); }); });
-                  asins.forEach(function(a) { if (a && a.asin) all[a.asin] = true; });
-                  var list = Object.keys(all);
+                  var list = allRequested;
                   if (list.length === 0) { setScrapeMsg('Keine ASINs zum Scrapen gefunden'); return; }
                   setScraping(true);
                   setScrapeMsg('Lade ' + list.length + ' ASINs von Amazon, kann mehrere Minuten dauern...');
                   try {
                     var result = await onScrape(list);
-                    setScrapeMsg('Fertig: ' + (result && result.success || 0) + ' geladen, ' + (result && result.failed || 0) + ' fehlgeschlagen');
+                    var success = result && result.success || 0;
+                    var failed = result && result.failed || 0;
+                    setScrapeMsg((success ? 'Geladen: ' : 'Fehler: ') + success + ' von ' + list.length + ' ASINs' + (failed ? '\n\nNicht geladen:\n' + formatProductFailures(result.failures) : ''));
                   } catch (e) {
                     setScrapeMsg('Fehler: ' + e.message);
                   } finally {
@@ -87,7 +84,7 @@ export default function AsinPanel({ asins, pages, products, requestedAsins, onCl
           </div>
         </div>
         {scrapeMsg && (
-          <div style={{ padding: '6px 16px', background: scrapeMsg.indexOf('Fehler') === 0 ? '#fee2e2' : '#dcfce7', borderBottom: '1px solid #e2e8f0', fontSize: 11, color: scrapeMsg.indexOf('Fehler') === 0 ? '#991b1b' : '#166534' }}>
+          <div style={{ padding: '6px 16px', background: scrapeMsg.indexOf('Fehler') === 0 ? '#fee2e2' : '#dcfce7', borderBottom: '1px solid #e2e8f0', fontSize: 11, whiteSpace: 'pre-wrap', maxHeight: 180, overflowY: 'auto', color: scrapeMsg.indexOf('Fehler') === 0 ? '#991b1b' : '#166534' }}>
             {scrapeMsg}
           </div>
         )}
@@ -135,3 +132,4 @@ export default function AsinPanel({ asins, pages, products, requestedAsins, onCl
     </div>
   );
 }
+
