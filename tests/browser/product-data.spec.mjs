@@ -3,7 +3,8 @@ import {test,expect} from '@playwright/test';
 const asins=Array.from({length:25},(_,i)=>'B'+String(i).padStart(9,'0'));
 const fixture={brandName:'Produkt-Test',marketplace:'de',asins,products:[],pages:[{id:'home',name:'Startseite',sections:[{id:'section',layoutId:'full',tiles:[{id:'tile',type:'product_grid',asins:asins.slice(0,2)}]}]}]};
 async function editor(page,failAll=false){
- const state={saves:[],nativeDialogs:[],errors:[]};
+ const state={saves:[],nativeDialogs:[],errors:[],networkFailures:[]};
+ page.on('requestfailed',r=>state.networkFailures.push({url:r.url(),error:r.failure()?.errorText}));
  page.on('pageerror',e=>state.errors.push(e.message));
  page.on('dialog',d=>{state.nativeDialogs.push(d.message());return d.dismiss();});
  await page.addInitScript(()=>sessionStorage.setItem('amazon-store-builder-session',JSON.stringify({storeId:'test-store',shareToken:'test-share'})));
@@ -21,10 +22,11 @@ async function editor(page,failAll=false){
   return route.fulfill({json:{counts:{},feedback:[],neu:0}});
  });
  await page.route('https://images.test/**',route=>route.fulfill({status:200,contentType:'image/svg+xml',body:'<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><rect width="20" height="20" fill="blue"/></svg>'}));
- await page.route('**/embedded-product-test',route=>route.fulfill({contentType:'text/html',body:'<iframe title="Store Builder" src="http://localhost:4174/?embed=1" style="position:fixed;inset:0;width:100%;height:100%;border:0"></iframe>'}));
- await page.goto('/embedded-product-test');
+ await page.route('**/embedded-product-test',route=>route.fulfill({contentType:'text/html',body:'<iframe title="Store Builder" src="http://127.0.0.1:4174/?embed=1" style="position:fixed;inset:0;width:100%;height:100%;border:0"></iframe>'}));
+ await page.goto('http://localhost:4174/embedded-product-test');
  const ui=page.frameLocator('iframe');
- await expect(ui.getByRole('button',{name:'Speichern',exact:true})).toBeVisible();
+ try {await expect(ui.getByRole('button',{name:'Speichern',exact:true})).toBeVisible();}
+ catch(error){console.log('Editor fixture failed',JSON.stringify({frames:page.frames().map(f=>f.url()),errors:state.errors,network:state.networkFailures}));throw error;}
  await ui.getByRole('button',{name:/^Mehr/}).click();
  await ui.getByRole('button',{name:/Produktdaten laden/}).click();
  return {...state,ui};
