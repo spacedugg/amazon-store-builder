@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useId } from 'react';
 
 // Zeigt einen erzeugten Link (oder eine Fehlermeldung) direkt im Tool an.
 // Bewusst KEIN alert()/prompt(): Eingebettet im Salesboard laeuft der Store
@@ -9,9 +9,12 @@ import { useRef, useEffect, useState } from 'react';
 // dialog: { kind: 'ok' | 'error' | 'info', title, url?, message?, notes?: string[], copied?: boolean }
 export default function LinkDialog({ dialog, onClose }) {
   var inputRef = useRef(null);
+  var cancelRef = useRef(null);
+  var titleId = useId();
   var [copyState, setCopyState] = useState(dialog && dialog.copied ? 'copied' : '');
 
   useEffect(function() {
+    if (dialog && dialog.kind === 'confirm' && cancelRef.current) cancelRef.current.focus();
     if (inputRef.current) {
       try { inputRef.current.focus(); inputRef.current.select(); } catch (e) { /* ignore */ }
     }
@@ -25,6 +28,7 @@ export default function LinkDialog({ dialog, onClose }) {
 
   if (!dialog) return null;
   var isError = dialog.kind === 'error';
+  var isConfirm = dialog.kind === 'confirm';
   var isInfo = dialog.kind === 'info'; // nur eine Meldung, kein Link
 
   var copy = async function() {
@@ -48,13 +52,13 @@ export default function LinkDialog({ dialog, onClose }) {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" style={{ maxWidth: 560, maxHeight: 'calc(100dvh - 32px)', display: 'flex', flexDirection: 'column' }} onClick={function(e) { e.stopPropagation(); }}>
+      <div className="modal" role={isConfirm ? 'alertdialog' : 'dialog'} aria-modal="true" aria-labelledby={titleId} style={{ maxWidth: 560, maxHeight: 'calc(100dvh - 32px)', display: 'flex', flexDirection: 'column' }} onClick={function(e) { e.stopPropagation(); }}>
         <div className="modal-header" style={{flexShrink:0}}>
-          <span style={isError ? { color: '#b91c1c' } : undefined}>{dialog.title}</span>
+          <span id={titleId} style={isError ? { color: '#b91c1c' } : undefined}>{dialog.title}</span>
           <button className="modal-close" onClick={onClose} title="Schließen" aria-label="Schließen">×</button>
         </div>
         <div style={{ padding: '4px 20px 20px', overflowY: 'auto', minHeight: 0 }}>
-          {isError || isInfo ? (
+          {isError || isInfo || isConfirm ? (
             <div style={{ fontSize: 13, lineHeight: 1.55, color: '#334155', whiteSpace: 'pre-wrap' }} role={isError ? 'alert' : 'status'}>{dialog.message}</div>
           ) : (
             <>
@@ -85,10 +89,12 @@ export default function LinkDialog({ dialog, onClose }) {
           )}
         </div>
         <div className="modal-footer" style={{flexShrink:0,padding:'12px 20px',margin:0}}>
-          <button className="btn" onClick={onClose}>Schließen</button>
+          <button ref={cancelRef} className="btn" onClick={onClose}>{isConfirm ? 'Abbrechen' : 'Schließen'}</button>
+          {isConfirm && <button className="btn btn-primary" style={{background:'#b91c1c'}} onClick={dialog.onConfirm}>Bestehenden Store ersetzen</button>}
         </div>
       </div>
     </div>
   );
 }
+
 

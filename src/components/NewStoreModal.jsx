@@ -6,6 +6,7 @@ var SKILL_PROMPT = 'Aktiviere den Skill amazon-storefront-design (Source: .claud
 export default function NewStoreModal({ onClose, onImport, onCreateEmpty }) {
   var [text, setText] = useState('');
   var [error, setError] = useState('');
+  var [importing, setImporting] = useState(false);
   var [copied, setCopied] = useState(false);
   var fileRef = useRef(null);
 
@@ -17,16 +18,20 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty }) {
     }
   }
 
-  var handleImport = function() {
+  var handleImport = async function() {
+    if (importing) return;
     if (!text.trim()) {
       setError('Bitte Briefing JSON einfügen oder Datei wählen.');
       return;
     }
     try {
       var data = JSON.parse(text);
-      onImport(data);
+      setImporting(true);
+      await onImport(data);
     } catch (e) {
-      setError('JSON nicht parsbar, ' + e.message);
+      setError('Import fehlgeschlagen, ' + e.message);
+    } finally {
+      setImporting(false);
     }
   };
 
@@ -100,12 +105,13 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty }) {
         <div style={{ marginTop: 14, display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
           <input ref={fileRef} type="file" accept=".json,application/json" onChange={handleFile} style={{ display: 'none' }} />
           <button className="btn" onClick={function() { fileRef.current && fileRef.current.click(); }}>JSON Datei wählen</button>
-          <button className="btn btn-primary" onClick={handleImport} disabled={!text.trim()}>Importieren</button>
+          <button className="btn btn-primary" onClick={handleImport} disabled={!text.trim() || importing}>{importing ? 'Store prüfen …' : 'Importieren'}</button>
           <div style={{ flex: 1 }} />
-          <button className="btn" onClick={onCreateEmpty} style={{ fontSize: 11, color: '#64748b' }}>Stattdessen leeren Store starten</button>
+          <button className="btn" onClick={onCreateEmpty} disabled={importing} style={{ fontSize: 11, color: '#64748b' }}>Stattdessen leeren Store starten</button>
         </div>
       </div>
     </div>
   );
 }
+
 

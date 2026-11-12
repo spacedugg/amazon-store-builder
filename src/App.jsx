@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, findLayout, LAYOUT_TILE_DIMS } from './constants';
 import { saveStore, loadSavedStores, loadStore, autoSave, loadAutoSave, importStoreByShareLink, setSessionStore, getSessionStore, brandToSlug, shareBaseUrl } from './storage';
+import { checkStoreReplacement } from './importGuard';
 import { uploadFileToBlob } from './imageStorage';
 import { importBriefingToStore } from './briefingImport';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
@@ -239,6 +240,28 @@ export default function App() {
   var [showExport, setShowExport] = useState(false);
   // Link/Fehler Dialog fuer Customer Link und Export (statt alert/prompt, siehe LinkDialog.jsx)
   var [linkDialog, setLinkDialog] = useState(null);
+  var replacementGrantRef = useRef(null);
+  var storeContextRef = useRef(0);
+  var requestReplacementConfirmation = useCallback(function(existing) {
+    return new Promise(function(resolve) {
+      setLinkDialog({
+        kind: 'confirm', title: 'Bestehenden Store ersetzen?',
+        message: 'Ein Store mit dem Namen „' + existing.brandName + '“ existiert bereits. Möchtest du den bestehenden Store wirklich durch die neuen JSON-Inhalte ersetzen?\n\nBisherige Bilder, Texte und Seiten werden dabei überschrieben. Bereits verschickte Preview-Links zeigen anschließend den neuen Stand.',
+        onConfirm: function() { setLinkDialog(null); resolve(true); },
+        onCancel: function() { setLinkDialog(null); resolve(false); },
+      });
+    });
+  }, []);
+  var closeLinkDialog = function() {
+    if (linkDialog && linkDialog.onCancel) linkDialog.onCancel();
+    else setLinkDialog(null);
+  };
+  var approveImport = async function(imported) {
+    var existing = await checkStoreReplacement(imported.brandName);
+    if (existing && !await requestReplacementConfirmation(existing)) return false;
+    replacementGrantRef.current = existing;
+    return true;
+  };
   // Kunden Feedback: Panel + Zaehler der neuen Eintraege (rote Zahl im Topbar)
   var [showFeedback, setShowFeedback] = useState(false);
   var [feedbackNew, setFeedbackNew] = useState(0);
@@ -280,9 +303,11 @@ export default function App() {
   // nächsten Save verfügbar ist und nicht mehrere Inserts parallel laufen.
   var saveQueueRef = useRef(Promise.resolve());
   var persistStore = useCallback(function(targetStore, opts) {
+    var context = storeContextRef.current;
     var useShareToken = opts && opts.includeShareToken;
     var onProgress = opts && opts.onProgress;
     var p = saveQueueRef.current.catch(function() {}).then(async function() {
+      if (context !== storeContextRef.current) return {result:{superseded:true},savedStore:targetStore};
       var preparedStore = targetStore;
       // Bearbeitungen sichern darf nicht vom externen Produktabruf abhaengen.
       // Fehlende Daten bleiben als Hinweis sichtbar; Nachladen ist eine eigene Aktion.
@@ -290,8 +315,24 @@ export default function App() {
         throw new Error('Der Store wurde waehrend des Speicherns geaendert. Bitte erneut speichern, damit die Kunden-Vorschau den aktuellen Stand enthaelt.');
       }
       var tokenArg = useShareToken ? shareTokenRef.current : null;
-      return { result: await saveStore(preparedStore, storeIdRef.current, tokenArg, onProgress, !!useShareToken), savedStore: preparedStore };
+      var grant = replacementGrantRef.current;
+      var result;
+      try {
+        result = await saveStore(preparedStore, storeIdRef.current, tokenArg, onProgress, !!useShareToken, grant);
+      } catch (error) {
+        if (error.code !== 'STORE_EXISTS' || !error.existingStore) throw error;
+        if (!await requestReplacementConfirmation(error.existingStore)) {
+          throw new Error('Ersetzen abgebrochen. Der bestehende Store wurde nicht verändert.');
+        }
+        if (currentStoreRef.current !== targetStore) {
+          throw new Error('Der Import wurde während der Bestätigung geändert. Bitte erneut speichern.');
+        }
+        result = await saveStore(preparedStore, storeIdRef.current, tokenArg, onProgress, !!useShareToken, error.existingStore);
+      }
+      if (context === storeContextRef.current && replacementGrantRef.current === grant && result && !result.offline) replacementGrantRef.current = null;
+      return { result: result, savedStore: preparedStore };
     }).then(function(saved) {
+      if (context !== storeContextRef.current) return {superseded:true};
       var result = saved.result;
       if (result && result.id) {
         storeIdRef.current = result.id;
@@ -310,7 +351,7 @@ export default function App() {
     });
     saveQueueRef.current = p.catch(function() {});
     return p;
-  }, []);
+  }, [requestReplacementConfirmation]);
 
   // ─── UNDO HISTORY ───
   var undoStackRef = useRef([]);
@@ -1174,6 +1215,7 @@ export default function App() {
     setManualSaveProgress({ stage: 'store-save' });
     try {
       var result = await persistStore(store, { includeShareToken: true, onProgress: setManualSaveProgress });
+      if (result && result.superseded) return;
       var stores = await loadSavedStores();
       setSavedStores(stores);
       if (result && result.offline) {
@@ -1260,6 +1302,8 @@ export default function App() {
   var handleLoadSaved = async function(id) {
     var result = await loadStore(id);
     if (!result || !result.data || !result.data.pages || !result.data.pages.length) return false;
+    storeContextRef.current++;
+    replacementGrantRef.current = null;
     storeIdRef.current = id;
     shareTokenRef.current = result.shareToken || null;
     savedBrandNameRef.current = result.data.brandName || '';
@@ -1275,6 +1319,8 @@ export default function App() {
   var handleLoadAutoSave = function() {
     var data = loadAutoSave();
     if (data && data.pages && data.pages.length > 0) {
+      storeContextRef.current++;
+      replacementGrantRef.current = null;
       storeIdRef.current = null;
       shareTokenRef.current = null;
       savedBrandNameRef.current = '';
@@ -1289,11 +1335,18 @@ export default function App() {
 
   // Rescue JSON Datei aus dem DevTools Snippet zurück laden.
   // Nimmt rohe Store JSON Shape (gleiche Form wie Autosave).
-  var handleImportRescueJson = function(parsed) {
+  var handleImportRescueJson = async function(parsed) {
     if (!parsed || !Array.isArray(parsed.pages) || parsed.pages.length === 0) {
       alert('Diese JSON Datei sieht nicht wie ein Store aus. Erwartet wird ein Objekt mit pages Array.');
       return;
     }
+    try {
+      if (!await approveImport(parsed)) return;
+    } catch (error) {
+      setLinkDialog({kind:'error',title:'Import fehlgeschlagen',message:error.message});
+      return;
+    }
+    storeContextRef.current++;
     setStore(refreshImageRefs(parsed));
     setCurPage(parsed.pages[0] ? parsed.pages[0].id : '');
     setSel(null);
@@ -1339,6 +1392,8 @@ export default function App() {
   };
 
   var handleCreateEmpty = function() {
+    storeContextRef.current++;
+    replacementGrantRef.current = null;
     var firstPageId = uid();
     var initialStore = Object.assign({}, EMPTY_STORE, {
       pages: [{
@@ -1364,11 +1419,13 @@ export default function App() {
     setShowOverview(false);
   };
 
-  var handleImportBriefing = function(briefingData) {
+  var handleImportBriefing = async function(briefingData) {
     try {
       var imported = importBriefingToStore(briefingData);
       var problems = storeLimitErrors(imported);
       if (problems.length) throw new Error(problems.join('\n'));
+      if (!await approveImport(imported)) return;
+      storeContextRef.current++;
       setStore(imported);
       setCurPage(imported.pages[0] ? imported.pages[0].id : '');
       setSel(null);
@@ -1382,7 +1439,7 @@ export default function App() {
       setShowNewStoreModal(false);
       setShowOverview(false);
     } catch (e) {
-      alert('Import fehlgeschlagen, ' + e.message);
+      setLinkDialog({kind:'error',title:'Import fehlgeschlagen',message:e.message});
     }
   };
 
@@ -1889,6 +1946,7 @@ export default function App() {
           onCreateEmpty={handleCreateEmpty}
         />
       )}
+      {linkDialog && <LinkDialog dialog={linkDialog} onClose={closeLinkDialog} />}
     </div>
   );
 
@@ -2039,7 +2097,7 @@ export default function App() {
       )}
 
       {linkDialog && (
-        <LinkDialog dialog={linkDialog} onClose={function() { setLinkDialog(null); }} />
+        <LinkDialog dialog={linkDialog} onClose={closeLinkDialog} />
       )}
 
       {showAsins && (
@@ -2077,6 +2135,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 

@@ -81,7 +81,7 @@ export async function loadSavedStores() {
 // Vor dem POST werden alle Base64 Bilder aus dem Store ausgelagert in die
 // store_images Tabelle, damit der eigentliche Store JSON Body weit unter
 // dem 4,5 MB Vercel Limit bleibt.
-export async function saveStore(store, existingId, existingShareToken, onProgress, requireCompleteImages) {
+export async function saveStore(store, existingId, existingShareToken, onProgress, requireCompleteImages, replaceExisting) {
   // Bilder ausgliedern, hochladen, dann den schlanken Store schicken.
   if (typeof onProgress === 'function') onProgress({ stage: 'extract' });
   var extracted = await extractImagesFromStore(store);
@@ -106,6 +106,7 @@ export async function saveStore(store, existingId, existingShareToken, onProgres
   }
 
   var body = { data: extracted.storeForWire };
+  if (replaceExisting) body.replaceExisting = replaceExisting;
   if (existingId) body.id = existingId;
   if (existingShareToken) body.shareToken = existingShareToken;
   var serialized = JSON.stringify(body);
@@ -154,7 +155,14 @@ export async function saveStore(store, existingId, existingShareToken, onProgres
   try {
     var errJson = await resp.json();
     serverMsg = errJson.error || '';
+    if (resp.status === 409 && errJson.code === 'STORE_EXISTS') {
+      var conflict = new Error(serverMsg);
+      conflict.code = 'STORE_EXISTS';
+      conflict.existingStore = errJson.existingStore;
+      throw conflict;
+    }
   } catch (e) {
+    if (e.code === 'STORE_EXISTS') throw e;
     try { serverMsg = await resp.text(); } catch (e2) { /* ignore */ }
   }
 
@@ -251,6 +259,12 @@ export async function loadStoreBySlug(slug) {
     try {
       var errJson = await resp.json();
       serverMsg = errJson.error || '';
+    if (resp.status === 409 && errJson.code === 'STORE_EXISTS') {
+      var conflict = new Error(serverMsg);
+      conflict.code = 'STORE_EXISTS';
+      conflict.existingStore = errJson.existingStore;
+      throw conflict;
+    }
       available = errJson.availableSlugs || [];
     } catch (e) { /* ignore */ }
     if (resp.status === 404) {
@@ -285,6 +299,12 @@ export async function loadStoreByShareToken(shareToken) {
     try {
       var errJson = await resp.json();
       serverMsg = errJson.error || '';
+    if (resp.status === 409 && errJson.code === 'STORE_EXISTS') {
+      var conflict = new Error(serverMsg);
+      conflict.code = 'STORE_EXISTS';
+      conflict.existingStore = errJson.existingStore;
+      throw conflict;
+    }
     } catch (e) { /* ignore */ }
     if (resp.status === 404) {
       throw new Error('Store nicht gefunden (404). ' + (serverMsg || 'Der Share-Token existiert nicht in der Datenbank.'));
@@ -387,3 +407,4 @@ export function getSessionStore() {
     return JSON.parse(raw);
   } catch (e) { return null; }
 }
+
