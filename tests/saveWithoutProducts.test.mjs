@@ -241,3 +241,35 @@ test('an older in-flight save cannot attach a new import to its old store ID or 
     }finally{release();globalThis.confirm=previousConfirm;}
   });
 });
+
+test('closing the import dialog cancels a slow brand lookup before it can change the editor',async()=>{
+  await withEditor(fixture(),null,async state=>{
+    const previousConfirm=globalThis.confirm;globalThis.confirm=()=>true;
+    let finish;globalThis.fetch=()=>new Promise(resolve=>{finish=resolve;});
+    try{
+      await act(async()=>state.components.Topbar.onNewStore());
+      let pending;
+      await act(async()=>{pending=state.components.NewStoreModal.onImport({...fixture(),pages:[{id:'cancelled-import',sections:[]}]});await Promise.resolve();});
+      await act(async()=>state.components.NewStoreModal.onClose());
+      await act(async()=>{finish({ok:true,json:async()=>({existingStore:null})});await pending;});
+      assert.equal(state.components.Canvas.store.pages[0].id,'home');
+      assert.equal(state.saves.length,0);
+    }finally{globalThis.confirm=previousConfirm;}
+  });
+});
+
+test('importing a shared link opens its existing store without re-saving or overwriting it',async()=>{
+  const previous=globalThis.fetch, requests=[];
+  globalThis.fetch=async(url,options)=>{
+    requests.push({url,options});
+    return {ok:true,headers:{get:()=> 'application/json'},json:async()=>({id:'arensberger',data:{...fixture(),brandName:'Arensberger'}})};
+  };
+  try{
+    const result=await storage.importStoreByShareLink('https://preview.test/share/abcdef123456');
+    assert.equal(result.id,'arensberger');
+    assert.equal(result.shareToken,'abcdef123456');
+    assert.equal(requests.length,1);
+    assert.equal(requests[0].options,undefined,'opening an existing shared store does not POST a replacement');
+    assert.equal(result.data.pages[0].sections[0].tiles[0].uploadedImage,'https://images.test/edited-desktop.webp');
+  }finally{globalThis.fetch=previous;}
+});

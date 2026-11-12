@@ -326,7 +326,7 @@ export async function loadStoreByShareToken(shareToken) {
 }
 
 // Import a store into your history by share link or token.
-// Loads the store via shareToken, then saves a copy under your own id.
+// Loads the existing workspace store via shareToken without writing a replacement.
 export async function importStoreByShareLink(input) {
   // Extract share token from URL or use raw token
   var token = input.trim();
@@ -338,11 +338,10 @@ export async function importStoreByShareLink(input) {
   var storeData = await loadStoreByShareToken(token);
   if (!storeData || !storeData.data) return { error: 'Store not found' };
 
-  // Save a copy to the database (generates a new id for the importer)
-  var result = await saveStore(storeData.data, null, null);
-  if (!result) return { error: 'Could not save imported store' };
-
-  return { id: result.id, shareToken: result.shareToken, data: storeData.data };
+  // Shared links already identify a row in this workspace. Open it instead
+  // of writing a purported copy over the same canonical brand name.
+  if (!storeData.id) return { error: 'Der geteilte Store hat keine gespeicherte ID.' };
+  return { id: storeData.id, shareToken: token, data: storeData.data };
 }
 
 // Fetch designer timer for a store by shareToken

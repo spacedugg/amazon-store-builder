@@ -242,6 +242,7 @@ export default function App() {
   var [linkDialog, setLinkDialog] = useState(null);
   var replacementGrantRef = useRef(null);
   var storeContextRef = useRef(0);
+  var importAttemptRef = useRef(0);
   var requestReplacementConfirmation = useCallback(function(existing) {
     return new Promise(function(resolve) {
       setLinkDialog({
@@ -256,9 +257,24 @@ export default function App() {
     if (linkDialog && linkDialog.onCancel) linkDialog.onCancel();
     else setLinkDialog(null);
   };
+  var closeNewStoreModal = function() {
+    importAttemptRef.current++;
+    setShowNewStoreModal(false);
+  };
   var approveImport = async function(imported) {
-    var existing = await checkStoreReplacement(imported.brandName);
+    var attempt = ++importAttemptRef.current;
+    var context = storeContextRef.current;
+    var isCurrent = function() { return attempt === importAttemptRef.current && context === storeContextRef.current; };
+    var existing;
+    try {
+      existing = await checkStoreReplacement(imported.brandName);
+    } catch (error) {
+      if (!isCurrent()) return false;
+      throw error;
+    }
+    if (!isCurrent()) return false;
     if (existing && !await requestReplacementConfirmation(existing)) return false;
+    if (!isCurrent()) return false;
     replacementGrantRef.current = existing;
     return true;
   };
@@ -1941,7 +1957,7 @@ export default function App() {
       />
       {showNewStoreModal && (
         <NewStoreModal
-          onClose={function() { setShowNewStoreModal(false); }}
+          onClose={closeNewStoreModal}
           onImport={handleImportBriefing}
           onCreateEmpty={handleCreateEmpty}
         />
@@ -2073,7 +2089,7 @@ export default function App() {
 
       {showNewStoreModal && (
         <NewStoreModal
-          onClose={function() { setShowNewStoreModal(false); }}
+          onClose={closeNewStoreModal}
           onImport={handleImportBriefing}
           onCreateEmpty={handleCreateEmpty}
         />
