@@ -12,7 +12,7 @@ const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 let temp, App, productData, storage, storePatch;
 const ASIN = 'B0DGGYBSLR';
 const stubStorage = `
-export async function saveStore(...args){globalThis.__saveTest.saves.push(args);if(globalThis.__saveTest.error)throw Error(globalThis.__saveTest.error);return {id:'jowo',shareToken:'existing-link'};}
+export async function saveStore(...args){globalThis.__saveTest.saves.push(args);if(globalThis.__saveTest.saveGate)await globalThis.__saveTest.saveGate;if(globalThis.__saveTest.error)throw Error(globalThis.__saveTest.error);return {id:'jowo',shareToken:'existing-link'};}
 export async function loadSavedStores(){return [];}
 export async function loadStore(){return {data:globalThis.__saveTest.fixture,shareToken:'existing-link'};}
 export function getSessionStore(){return {storeId:'jowo',shareToken:'existing-link'};}
@@ -34,7 +34,7 @@ before(async () => {
         return {contents:`import React from 'react'; export default function Component(props){globalThis.__saveTest.components['${name}']=props;return React.createElement('div',{'data-component':'${name}'});}`,loader:'js'};
       });
       build.onResolve({filter:/^\.\/(storage|imageStorage|exportBriefing|briefingImport|feedbackApi)$/}, args=>({path:args.path,namespace:'service-stub'}));
-      build.onLoad({filter:/.*/,namespace:'service-stub'}, args=>({contents:args.path==='./storage'?stubStorage:args.path==='./feedbackApi'?'export async function loadFeedback(){return {neu:0}}':args.path==='./imageStorage'?'export async function uploadFileToBlob(){}':args.path==='./exportBriefing'?'export function generateBriefingDocx(){} export function downloadBlob(){}':'export function importBriefingToStore(){} export function importPageFromBriefing(){} export function importSectionFromBriefing(){} export function importTileFromBriefing(){}',loader:'js'}));
+      build.onLoad({filter:/.*/,namespace:'service-stub'}, args=>({contents:args.path==='./storage'?stubStorage:args.path==='./feedbackApi'?'export async function loadFeedback(){return {neu:0}}':args.path==='./imageStorage'?'export async function uploadFileToBlob(){}':args.path==='./exportBriefing'?'export function generateBriefingDocx(){} export function downloadBlob(){}':'export function importBriefingToStore(data){return data;} export function importPageFromBriefing(){} export function importSectionFromBriefing(){} export function importTileFromBriefing(){}',loader:'js'}));
     }}],
   });
   ({default:App}=await import(pathToFileURL(join(temp,'app.mjs'))));
@@ -191,3 +191,85 @@ test('Claude edits save in the existing shared store and undo restores the full 
 
 
 
+
+
+for (const confirmReplacement of [false, true]) {
+  test('same-brand import '+(confirmReplacement?'waits for explicit consent':'cancellation preserves the original store'), async()=>{
+    await withEditor(fixture(),null,async state=>{
+      const previousConfirm=globalThis.confirm;globalThis.confirm=()=>true;
+      try {
+        globalThis.fetch=async url=>({ok:true,json:async()=>({existingStore:{id:'jowo',brandName:'JOWO',brandSlug:'jowo',revision:'revision-1'}})});
+        await act(async()=>state.components.Topbar.onNewStore());
+        const imported={...fixture(),pages:[{id:'new-home',name:'New concept',sections:[]}]};
+        let pending;
+        await act(async()=>{pending=state.components.NewStoreModal.onImport(imported);await Promise.resolve();});
+        assert.equal(state.components.LinkDialog.dialog.kind,'confirm');
+        assert.match(state.components.LinkDialog.dialog.message,/JOWO/);
+        assert.equal(state.components.Canvas.store.pages[0].id,'home');
+        assert.equal(state.saves.length,0);
+        await act(async()=>{if(confirmReplacement)state.components.LinkDialog.dialog.onConfirm();else state.components.LinkDialog.onClose();await pending;});
+        if(confirmReplacement){
+          assert.equal(state.components.Canvas.store.pages[0].id,'new-home');
+          await act(async()=>state.components.Topbar.onSave());
+          assert.equal(state.saves.length,1);
+          assert.equal(state.saves[0][5].revision,'revision-1');
+        }else{
+          assert.equal(state.components.Canvas.store.pages[0].sections[0].tiles[0].uploadedImage,'https://images.test/edited-desktop.webp');
+          assert.equal(state.saves.length,0);
+        }
+      } finally {globalThis.confirm=previousConfirm;}
+    });
+  });
+}
+
+test('an older in-flight save cannot attach a new import to its old store ID or consume replacement consent',async()=>{
+  await withEditor(fixture(),null,async state=>{
+    const previousConfirm=globalThis.confirm;globalThis.confirm=()=>true;
+    let release;state.saveGate=new Promise(resolve=>{release=resolve;});
+    try{
+      let previousSave;
+      await act(async()=>{previousSave=state.components.Topbar.onSave();await Promise.resolve();});
+      globalThis.fetch=async()=>({ok:true,json:async()=>({existingStore:{id:'jowo',brandName:'JOWO',brandSlug:'jowo',revision:'revision-2'}})});
+      await act(async()=>state.components.Topbar.onNewStore());
+      let imported;
+      await act(async()=>{imported=state.components.NewStoreModal.onImport({...fixture(),pages:[{id:'replacement',sections:[]}]});await Promise.resolve();});
+      await act(async()=>{state.components.LinkDialog.dialog.onConfirm();await imported;});
+      await act(async()=>{state.saveGate=null;release();await previousSave;});
+      await act(async()=>state.components.Topbar.onSave());
+      assert.equal(state.saves[1][1],null,'the new import must not inherit the old in-flight save ID');
+      assert.equal(state.saves[1][5].revision,'revision-2','old work cannot consume new import permission');
+    }finally{release();globalThis.confirm=previousConfirm;}
+  });
+});
+
+test('closing the import dialog cancels a slow brand lookup before it can change the editor',async()=>{
+  await withEditor(fixture(),null,async state=>{
+    const previousConfirm=globalThis.confirm;globalThis.confirm=()=>true;
+    let finish;globalThis.fetch=()=>new Promise(resolve=>{finish=resolve;});
+    try{
+      await act(async()=>state.components.Topbar.onNewStore());
+      let pending;
+      await act(async()=>{pending=state.components.NewStoreModal.onImport({...fixture(),pages:[{id:'cancelled-import',sections:[]}]});await Promise.resolve();});
+      await act(async()=>state.components.NewStoreModal.onClose());
+      await act(async()=>{finish({ok:true,json:async()=>({existingStore:null})});await pending;});
+      assert.equal(state.components.Canvas.store.pages[0].id,'home');
+      assert.equal(state.saves.length,0);
+    }finally{globalThis.confirm=previousConfirm;}
+  });
+});
+
+test('importing a shared link opens its existing store without re-saving or overwriting it',async()=>{
+  const previous=globalThis.fetch, requests=[];
+  globalThis.fetch=async(url,options)=>{
+    requests.push({url,options});
+    return {ok:true,headers:{get:()=> 'application/json'},json:async()=>({id:'arensberger',data:{...fixture(),brandName:'Arensberger'}})};
+  };
+  try{
+    const result=await storage.importStoreByShareLink('https://preview.test/share/abcdef123456');
+    assert.equal(result.id,'arensberger');
+    assert.equal(result.shareToken,'abcdef123456');
+    assert.equal(requests.length,1);
+    assert.equal(requests[0].options,undefined,'opening an existing shared store does not POST a replacement');
+    assert.equal(result.data.pages[0].sections[0].tiles[0].uploadedImage,'https://images.test/edited-desktop.webp');
+  }finally{globalThis.fetch=previous;}
+});

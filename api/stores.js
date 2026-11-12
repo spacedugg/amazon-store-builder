@@ -1,4 +1,5 @@
 var { getClient, migrate } = require('./_db');
+var { createHash } = require('node:crypto');
 
 function generateId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
@@ -13,6 +14,23 @@ function brandToSlug(name) {
   s = s.normalize ? s.normalize('NFKD').replace(/[̀-ͯ]/g, '') : s;
   s = s.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
   return s;
+}
+
+// A confirmation describes the exact stored contents, not just a timestamp.
+// A second save in the same second must invalidate a previous confirmation.
+async function replacementDetails(db, matches, slug) {
+  if (!matches.length) return null;
+  var result = await db.execute({
+    sql: 'SELECT id, brand_name, data, share_token, updated_at FROM stores WHERE id IN (' + matches.map(function() { return '?'; }).join(',') + ') ORDER BY id',
+    args: matches.map(function(row) { return row.id; }),
+  });
+  var target = result.rows.find(function(row) { return row.id === slug; }) || result.rows[0];
+  return {
+    id: target.id, brandName: target.brand_name, brandSlug: slug,
+    revision: createHash('sha256').update(JSON.stringify(result.rows.map(function(row) {
+      return [row.id, row.brand_name, row.data, row.share_token, row.updated_at];
+    }))).digest('hex'),
+  };
 }
 
 function generateShareToken() {
@@ -42,6 +60,18 @@ module.exports = async function handler(req, res) {
     await migrate();
   } catch (e) {
     return res.status(500).json({ error: 'Database not available: ' + e.message });
+  }
+
+  // Check a new import before the editor or autosave can change the current store.
+  if (req.method === 'GET' && req.query.checkBrand !== undefined) {
+    try {
+      var checkSlug = brandToSlug(req.query.checkBrand);
+      var candidates = await db.execute('SELECT id, brand_name FROM stores');
+      var matches = candidates.rows.filter(function(row) { return checkSlug && brandToSlug(row.brand_name) === checkSlug; });
+      return res.status(200).json({ existingStore: await replacementDetails(db, matches, checkSlug) });
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
   }
 
   // GET /api/stores — lightweight card metadata. Extract only a handful of
@@ -214,6 +244,7 @@ module.exports = async function handler(req, res) {
 
   // POST /api/stores — create or update a store
   if (req.method === 'POST') {
+    var transaction = null;
     try {
       var body = req.body || {};
       var storeData = body.data;
@@ -230,12 +261,28 @@ module.exports = async function handler(req, res) {
       // Damit ist pro Brand garantiert nur ein Eintrag in der Datenbank und
       // ältere Duplikate werden beim Save automatisch konsolidiert.
       var brandSlug = brandToSlug(brandName);
+      // Keep the collision check, consolidation and write in one transaction.
+      transaction = await db.transaction('write');
+      var existing = await transaction.execute('SELECT id, brand_name, share_token FROM stores');
+      var sameBrand = existing.rows.filter(function(row) { return brandSlug && brandToSlug(row.brand_name) === brandSlug; });
+      if (sameBrand.length && (body.replaceExisting || sameBrand.some(function(row) { return row.id !== requestedId; }))) {
+        var details = await replacementDetails(transaction, sameBrand, brandSlug);
+        var confirmation = body.replaceExisting;
+        if (!confirmation || confirmation.id !== details.id || confirmation.revision !== details.revision) {
+          await transaction.rollback();
+          return res.status(409).json({
+            code: 'STORE_EXISTS', existingStore: details,
+            error: 'Ein Store mit dem Namen „' + details.brandName + '“ existiert bereits. Der bestehende Store wurde nicht verändert. Bitte den JSON-Import erneut starten und das Ersetzen ausdrücklich bestätigen.',
+          });
+        }
+      }
       var id;
       if (brandSlug) {
         id = brandSlug;
         // Alle anderen Rows der selben Brand und die alte zufällige ID
         // einsammeln und entfernen.
-        var existing = await db.execute('SELECT id, brand_name, share_token FROM stores');
+        var canonical = existing.rows.find(function(row) { return row.id === id; });
+        if (canonical && canonical.share_token) shareToken = canonical.share_token;
         var idsToDelete = [];
         var carriedShareToken = null;
         existing.rows.forEach(function(r) {
@@ -255,13 +302,13 @@ module.exports = async function handler(req, res) {
         });
         if (carriedShareToken) shareToken = carriedShareToken;
         for (var di = 0; di < idsToDelete.length; di++) {
-          await db.execute({ sql: 'DELETE FROM stores WHERE id = ?', args: [idsToDelete[di]] });
+          await transaction.execute({ sql: 'DELETE FROM stores WHERE id = ?', args: [idsToDelete[di]] });
         }
       } else {
         id = requestedId || generateId();
       }
 
-      await db.execute({
+      await transaction.execute({
         sql: `INSERT INTO stores (id, brand_name, marketplace, data, share_token, page_count, product_count, updated_at)
               VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))
               ON CONFLICT(id) DO UPDATE SET
@@ -274,9 +321,13 @@ module.exports = async function handler(req, res) {
         args: [id, brandName, marketplace, JSON.stringify(storeData), shareToken, pageCount, productCount],
       });
 
+      await transaction.commit();
       return res.status(200).json({ id: id, shareToken: shareToken });
     } catch (err) {
+      if (transaction && !transaction.closed) await transaction.rollback();
       return res.status(500).json({ error: err.message });
+    } finally {
+      if (transaction) transaction.close();
     }
   }
 
@@ -294,3 +345,4 @@ module.exports = async function handler(req, res) {
 
   return res.status(405).json({ error: 'Method not allowed' });
 };
+

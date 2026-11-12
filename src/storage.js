@@ -81,7 +81,7 @@ export async function loadSavedStores() {
 // Vor dem POST werden alle Base64 Bilder aus dem Store ausgelagert in die
 // store_images Tabelle, damit der eigentliche Store JSON Body weit unter
 // dem 4,5 MB Vercel Limit bleibt.
-export async function saveStore(store, existingId, existingShareToken, onProgress, requireCompleteImages) {
+export async function saveStore(store, existingId, existingShareToken, onProgress, requireCompleteImages, replaceExisting) {
   // Bilder ausgliedern, hochladen, dann den schlanken Store schicken.
   if (typeof onProgress === 'function') onProgress({ stage: 'extract' });
   var extracted = await extractImagesFromStore(store);
@@ -106,6 +106,7 @@ export async function saveStore(store, existingId, existingShareToken, onProgres
   }
 
   var body = { data: extracted.storeForWire };
+  if (replaceExisting) body.replaceExisting = replaceExisting;
   if (existingId) body.id = existingId;
   if (existingShareToken) body.shareToken = existingShareToken;
   var serialized = JSON.stringify(body);
@@ -154,7 +155,14 @@ export async function saveStore(store, existingId, existingShareToken, onProgres
   try {
     var errJson = await resp.json();
     serverMsg = errJson.error || '';
+    if (resp.status === 409 && errJson.code === 'STORE_EXISTS') {
+      var conflict = new Error(serverMsg);
+      conflict.code = 'STORE_EXISTS';
+      conflict.existingStore = errJson.existingStore;
+      throw conflict;
+    }
   } catch (e) {
+    if (e.code === 'STORE_EXISTS') throw e;
     try { serverMsg = await resp.text(); } catch (e2) { /* ignore */ }
   }
 
@@ -251,6 +259,12 @@ export async function loadStoreBySlug(slug) {
     try {
       var errJson = await resp.json();
       serverMsg = errJson.error || '';
+    if (resp.status === 409 && errJson.code === 'STORE_EXISTS') {
+      var conflict = new Error(serverMsg);
+      conflict.code = 'STORE_EXISTS';
+      conflict.existingStore = errJson.existingStore;
+      throw conflict;
+    }
       available = errJson.availableSlugs || [];
     } catch (e) { /* ignore */ }
     if (resp.status === 404) {
@@ -285,6 +299,12 @@ export async function loadStoreByShareToken(shareToken) {
     try {
       var errJson = await resp.json();
       serverMsg = errJson.error || '';
+    if (resp.status === 409 && errJson.code === 'STORE_EXISTS') {
+      var conflict = new Error(serverMsg);
+      conflict.code = 'STORE_EXISTS';
+      conflict.existingStore = errJson.existingStore;
+      throw conflict;
+    }
     } catch (e) { /* ignore */ }
     if (resp.status === 404) {
       throw new Error('Store nicht gefunden (404). ' + (serverMsg || 'Der Share-Token existiert nicht in der Datenbank.'));
@@ -306,7 +326,7 @@ export async function loadStoreByShareToken(shareToken) {
 }
 
 // Import a store into your history by share link or token.
-// Loads the store via shareToken, then saves a copy under your own id.
+// Loads the existing workspace store via shareToken without writing a replacement.
 export async function importStoreByShareLink(input) {
   // Extract share token from URL or use raw token
   var token = input.trim();
@@ -318,11 +338,10 @@ export async function importStoreByShareLink(input) {
   var storeData = await loadStoreByShareToken(token);
   if (!storeData || !storeData.data) return { error: 'Store not found' };
 
-  // Save a copy to the database (generates a new id for the importer)
-  var result = await saveStore(storeData.data, null, null);
-  if (!result) return { error: 'Could not save imported store' };
-
-  return { id: result.id, shareToken: result.shareToken, data: storeData.data };
+  // Shared links already identify a row in this workspace. Open it instead
+  // of writing a purported copy over the same canonical brand name.
+  if (!storeData.id) return { error: 'Der geteilte Store hat keine gespeicherte ID.' };
+  return { id: storeData.id, shareToken: token, data: storeData.data };
 }
 
 // Fetch designer timer for a store by shareToken
@@ -387,3 +406,4 @@ export function getSessionStore() {
     return JSON.parse(raw);
   } catch (e) { return null; }
 }
+
