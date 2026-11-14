@@ -3,6 +3,7 @@ import { upload } from "@vercel/blob/client";
 import { fetchProductData } from "../productData";
 import {
   SPECS,
+  resolveUploadTarget,
   newStory,
   newCard,
   safeUrl,
@@ -425,21 +426,25 @@ export default function BrandStoryBuilder() {
         report = [];
       const assigned = new Set();
       for (const f of files) {
-        const key = f.name.replace(/\.(png|jpe?g)$/i, "").toLowerCase();
-        let apply;
-        if (key === "background-desktop" || key === "background-mobile") {
-          const k = key.slice(11);
-          apply = (img) => (next.background[k] = img);
+        let target;
+        try {
+          target = resolveUploadTarget(next, f.webkitRelativePath || f.name);
+        } catch (e) {
+          report.push(`${f.name}: ${e.message}`);
+          continue;
         }
-        for (const c of next.cards) {
-          if (c.type === "media" && key === c.fileKey)
-            apply = (img) => (c.image = img);
-          if (c.type === "grid")
-            c.slots.forEach((slot, i) => {
-              if (key === `${c.fileKey}-${i + 1}`)
-                apply = (img) => (slot.image = img);
-            });
-        }
+        const key = target ? JSON.stringify(target) : f.name;
+        const apply = target
+          ? (img) => {
+              if (target.kind === "desktop" || target.kind === "mobile")
+                next.background[target.kind] = img;
+              else {
+                const c = next.cards.find((c) => c.id === target.cardId);
+                if (target.kind === "media") c.image = img;
+                else c.slots[target.slot].image = img;
+              }
+            }
+          : null;
         if (!apply) {
           report.push(`${f.name}: keine passende Position`);
           continue;
@@ -451,14 +456,7 @@ export default function BrandStoryBuilder() {
         try {
           const img = await uploadImage(f);
           apply(img);
-          const kind =
-            key === "background-desktop"
-              ? "desktop"
-              : key === "background-mobile"
-                ? "mobile"
-                : /^card-\d+-[1-4]$/.test(key)
-                  ? "product"
-                  : "media";
+          const kind = target.kind;
           report.push(
             ...imageWarnings(img, kind).map((w) => `${f.name}: WARNUNG: ${w}`),
           );
@@ -805,6 +803,13 @@ export default function BrandStoryBuilder() {
                             Karte entfernen
                           </button>
                         </div>
+                        {card.type === "media" && (
+                          <Field
+                            label="Datei im Designer-Ordner"
+                            value={card.assetFile}
+                            onChange={(v) => updateCard({ assetFile: v })}
+                          />
+                        )}
                         <Field
                           area
                           label="Designer brief (English)"
@@ -850,6 +855,15 @@ export default function BrandStoryBuilder() {
                             {card.slots.map((slot, i) => (
                               <section key={i} className="bs-slot">
                                 <h3>Produkt {i + 1}</h3>
+                                <Field
+                                  label="Datei im Designer-Ordner"
+                                  value={slot.assetFile}
+                                  onChange={(v) => {
+                                    const slots = structuredClone(card.slots);
+                                    slots[i].assetFile = v;
+                                    updateCard({ slots });
+                                  }}
+                                />
                                 <Field
                                   label="ASIN"
                                   maxLength={10}
@@ -929,7 +943,10 @@ export default function BrandStoryBuilder() {
                       : "Bilder aus Ordner zuordnen"}
                   </h2>
                   <p>
-                    Dateinamen: background-desktop.jpg, background-mobile.jpg,{" "}
+                    Dateien können in Hintergrund, Brand Media Assets und ASIN
+                    Grids liegen. Die hinterlegten Designer-Dateipfade werden
+                    zugeordnet. Alternativ: background-desktop.jpg,
+                    background-mobile.jpg,{" "}
                     {story.cards[0]?.fileKey || "card-01"}.jpg für Bildkarten;
                     card-02-1.jpg bis card-02-4.jpg für Grid-Plätze. Die
                     Dateischlüssel bleiben beim Umsortieren erhalten. Vorhandene
@@ -979,8 +996,14 @@ export default function BrandStoryBuilder() {
                   <blockquote>{c.copy}</blockquote>
                   <p>
                     {c.type === "grid"
-                      ? `${c.fileKey}-1.jpg … ${c.fileKey}-4.jpg · 1328 × 1456 px each`
-                      : `${c.fileKey}.jpg · 814 × 1019 px`}
+                      ? `${
+                          c.slots
+                            .map((slot) => slot.assetFile)
+                            .filter(Boolean)
+                            .join(" · ") ||
+                          c.fileKey + "-1.jpg … " + c.fileKey + "-4.jpg"
+                        } · 1328 × 1456 px each`
+                      : `${c.assetFile || c.fileKey + ".jpg"} · 814 × 1019 px`}
                   </p>
                   {c.type === "grid" && (
                     <>

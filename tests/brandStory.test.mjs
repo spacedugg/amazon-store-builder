@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   newStory,
+  resolveUploadTarget,
   newCard,
   offsets,
   customerStory,
@@ -58,4 +59,47 @@ test("only too small uploads produce resolution alarms and never expose minimum 
   const w = imageWarnings({ width: 100, height: 125, size: 1000 }, "media");
   assert(w.some((x) => x.includes("Bildauflösung")));
   assert(!w.join().includes("362"));
+});
+
+test("delivery folder paths and grid quadrants remain assigned after reorder", () => {
+  const s = newStory("Test"),
+    a = newCard("media"),
+    g = newCard("grid", [a]),
+    b = newCard("media", [a, g]);
+  s.cards = [b, g, a];
+  assert.deepEqual(
+    resolveUploadTarget(s, "Project/Hintergrund/Hintergrund_Desktop.jpg"),
+    { kind: "desktop" },
+  );
+  assert.deepEqual(
+    resolveUploadTarget(
+      s,
+      "Project/Brand Media Assets/media asset image 1.jpg",
+    ),
+    { kind: "media", cardId: a.id },
+  );
+  assert.deepEqual(
+    resolveUploadTarget(s, "Project/ASIN Grids/ASIN image 1c.png"),
+    { kind: "product", cardId: g.id, slot: 2 },
+  );
+  assert.equal(
+    resolveUploadTarget(s, "Project/Preview Neu/Preview_04.jpg"),
+    null,
+  );
+  assert.deepEqual(resolveUploadTarget(s, g.fileKey + "-4.jpg"), {
+    kind: "product",
+    cardId: g.id,
+    slot: 3,
+  });
+});
+test("all four composite image slots may link to the same ASIN", () => {
+  const s = newStory("Test"),
+    g = newCard("grid");
+  g.slots.forEach((slot) => (slot.asin = "B012345678"));
+  s.cards = [g];
+  assert.equal(validateStory(s), s);
+  assert.equal(
+    new Set(customerStory(s).cards[0].slots.map((slot) => slot.url)).size,
+    1,
+  );
 });

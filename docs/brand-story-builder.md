@@ -41,3 +41,9 @@ Local session recovery stores the current draft in sessionStorage. JSON export p
 `npm run build`: production bundle.
 
 `TEST_CHROMIUM_PATH=/usr/bin/chromium npx playwright test tests/browser/brand-story.spec.mjs`: real-browser navigation and shared-view checks. This environment prevented Chromium from opening its process socket, so these browser tests could not run here. Live Turso, Blob uploads and Amazon-provider calls also require deployment credentials and remain to be checked on staging.
+
+## Existing delivery folders and composition patterns
+
+The OmniRelexx delivery example uses Hintergrund, Brand Media Assets, ASIN Grids and Preview Neu. The original files match all four production specifications exactly. New cards receive stable assetFile paths using media asset image N.jpg or ASIN image Na.jpg through Nd.jpg. Folder imports match these paths including an optional outer project folder; canonical card-NN names still work. File paths are editable per image card and grid slot. Preview files are not mistaken for card assets.
+
+A background-colored logo/hashtag image is a real image card and scrolls with the rail. A logo embedded in the fixed background can be hidden under early cards and revealed in the final view. A four-image grid may compose one overall picture; all four links may use the same ASIN. The grid gutters remain part of the layout and must be considered in the designer composition. These are supported composition techniques, not additional native module types.

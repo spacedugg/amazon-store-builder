@@ -45,12 +45,19 @@ test("editor cards move over a stationary background, mobile changes step, instr
   );
   await page.goto("/brand-stories");
   await expect(page.getByRole("heading", { name: "Story-Test" })).toBeVisible();
-  const bg = page.locator(".bs-backdrop"),
-    before = await bg.boundingBox();
+  const bg = page.locator(".bs-backdrop");
+  const relativeBox = () =>
+    bg.evaluate((el) => {
+      const r = el.getBoundingClientRect(),
+        p = el.closest(".bs-carousel").getBoundingClientRect();
+      return { x: r.x - p.x, y: r.y - p.y, width: r.width, height: r.height };
+    });
+  await page.evaluate(() => document.fonts.ready);
+  const before = await relativeBox();
   await page.getByRole("button", { name: "Nächste Karten" }).click();
   await expect(page.locator(".bs-counter")).toHaveText("2 / 3");
   await expect(page.locator(".bs-rail")).toHaveAttribute("style", /80.34/);
-  expect(await bg.boundingBox()).toEqual(before);
+  expect(await relativeBox()).toEqual(before);
   await page.getByRole("button", { name: "Mobil", exact: true }).click();
   await expect(page.locator(".bs-counter")).toHaveText("1 / 7");
   await page.locator(".bs-carousel").focus();
@@ -61,6 +68,8 @@ test("editor cards move over a stationary background, mobile changes step, instr
     page.getByLabel("Grid-Überschrift", { exact: true }),
   ).toBeVisible();
   await page.getByLabel("Grid-Überschrift", { exact: true }).fill("Produkte");
+  for(let i=0;i<7;i++) await page.getByRole('button',{name:'Nächste Karten'}).click();
+  await expect(page.locator('.bs-counter')).toHaveText('8 / 8');
   await expect(page.getByText("Produkte", { exact: true })).toBeVisible();
   await page.getByRole("button", { name: "JSON-Import", exact: true }).click();
   await expect(page.getByLabel("Brand Story JSON")).toBeVisible();
