@@ -4,11 +4,14 @@ Entry: `/brand-stories` (also supports `?embed=1`). This is a separate workflow;
 
 ## Operator workflow
 
-1. Create a story for a brand. Set marketplace and language; fill verified brand facts and internal instructions.
-2. Copy the starting instruction under **Anweisungen & Claude**, develop the concept in Claude, and import the resulting JSON. Image cards and four-product grids are supported. Existing matching card images are retained if the imported JSON omits them.
-3. Edit English composition briefs and exact on-image copy. Review desktop intro, subsequent positions, end state and mobile. The optional overlay marks the area covered after advancing.
+1. Start from the project tile overview. Open an existing story, explicitly resume a local draft, or choose **Neue Brand Story**.
+2. The setup dialog gathers brand facts, audience, materials, desired products/ASINs and Store/subpage destinations. Copy its Claude instruction, discuss the concept in Claude, then paste or upload JSON. **JSON prüfen** shows the proposed card structure before **Konzept übernehmen** applies it. A foreign brand/marketplace opens a separate project. A draft can also start without JSON.
+3. Edit the fixed background or a card through the preview/sidebar and properties panel. There is one ordered list of up to 19 cards for both devices; only the background image differs. Mobile displays exactly one complete card, including all four slots of an ASIN-grid. The plus picker inserts either card type at a chosen position. Content, English briefs, per-background copy, grid headline, four ASIN/product targets and Store link are editable. Meaningful draft placeholders appear before image upload.
 4. Save. **Freigabelinks aktualisieren** creates stable designer and customer links using independent random tokens. Ordinary saves retain the previous shared snapshot.
-5. The designer link provides English design rules, brief, reference examples and folder upload. Designer uploads update the draft and designer snapshot. An operator must publish again to update the customer snapshot.
+5. **Designer & Kunde** manages the separate stable links. The designer view shows concrete briefs and image uploads for the selected card/background, concise functional guidance and six interactive reference stories using the same carousel. Designer uploads update the draft and designer snapshot. An operator must publish again to update the customer snapshot.
+6. The customer preview includes **Angaben für Seller Central**: card order/types, file links, grid headlines, four ASIN targets per grid and the Store/subpage link. Internal context and designer briefs are omitted.
+
+**Konzept mit Claude** reopens the context/import dialog; the former main instruction/import/reference tabs and project dropdown have been removed. The portable Claude skill can be downloaded from that dialog. Its source, the copied prompt and JSON schema share `src/brandStoryPrompt.mjs`; regenerate the files with `node scripts/build-brand-story-skill.mjs`. No skill is automatically installed into an account.
 
 Production dimensions: desktop background 3660 × 1563, mobile background 1389 × 1875, image card 814 × 1019, each custom grid image 1328 × 1456 px. JPG/PNG, 2 MB per file. Resolution, file-size and aspect-ratio warnings are shown when uploaded files differ; technical minimum dimensions are not displayed in the interface. Warnings allow work-in-progress previews.
 
@@ -32,7 +35,7 @@ Apply `docs/brand-story-cockpit.patch` to `spacedugg/temoa-salesboard`. This add
 
 The editor API follows the existing builder deployment access model. The cockpit enforces its own menu permissions; deployment-level access protection of the standalone builder must be checked before production. Shared token routes expose only their intended view; customer data omits internal instructions, source facts, designer briefs and reference material. Tokens are independent and randomly generated. Concurrent updates use revision checks. Designer tokens only accept image assignments; they cannot edit copy or links through that route.
 
-Local session recovery stores the current draft in sessionStorage. JSON export provides a portable backup. Stories have separate IDs, so multiple projects or marketplaces for one brand do not overwrite one another.
+Local session recovery stores the current draft in sessionStorage and offers explicit recovery from the overview. JSON export provides a portable backup. Stories have separate IDs, so multiple projects or marketplaces for one brand do not overwrite one another. Schema version 1 remains supported; missing new context/per-background fields fall back to legacy data. Matching imports preserve existing image assignments by stable card ID and grid slot; changed ASINs invalidate the loaded product image.
 
 ## Validation
 

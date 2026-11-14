@@ -6,6 +6,7 @@ module.exports = async (req, res) => {
   try {
     const { validateStory, customerStory } =
       await import("../src/brandStoryModel.mjs");
+    const { designerStory, storySummary } = await import('../src/brandStoryWorkflow.mjs');
     const db = getClient();
     if (!ready)
       ready = db
@@ -30,11 +31,7 @@ module.exports = async (req, res) => {
         designer = row.designer_token === req.query.token;
       if (req.method === "GET") {
         const data = designer
-          ? {
-              ...published.designer,
-              instructions: undefined,
-              brandFacts: undefined,
-            }
+          ? designerStory(published.designer)
           : published.customer;
         return res.json({
           data,
@@ -92,11 +89,7 @@ module.exports = async (req, res) => {
             "Story wurde inzwischen geändert. Bitte neu laden und erneut hochladen.",
         });
       return res.json({
-        data: {
-          ...published.designer,
-          instructions: undefined,
-          brandFacts: undefined,
-        },
+        data: designerStory(published.designer),
         revision: Number(row.revision) + 1,
       });
     }
@@ -119,9 +112,9 @@ module.exports = async (req, res) => {
           : res.status(404).json({ error: "Story nicht gefunden." });
       }
       const r = await db.execute(
-        "SELECT id,json_extract(data,'$.brandName') AS brandName,json_extract(data,'$.marketplace') AS marketplace,updated_at FROM brand_stories ORDER BY updated_at DESC",
+        'SELECT id,data,updated_at FROM brand_stories ORDER BY updated_at DESC',
       );
-      return res.json({ stories: r.rows });
+      return res.json({ stories: r.rows.map(row => ({ id: row.id, updated_at: row.updated_at, ...storySummary(JSON.parse(row.data)) })) });
     }
     if (req.method !== "POST")
       return res.status(405).json({ error: "Methode nicht erlaubt." });

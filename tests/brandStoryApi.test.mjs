@@ -34,6 +34,7 @@ test("isolated stories, revision conflicts, share privacy and designer images pr
   try {
     const s = newStory("Test");
     s.instructions = "PRIVATE";
+    s.context = { audience: 'PRIVATE_CONTEXT', products: 'PRIVATE_PRODUCTS' };
     s.cards = [newCard("media")];
     const created = (await request("POST", { data: s })).body;
     const other = (await request("POST", { data: s })).body;
@@ -57,6 +58,11 @@ test("isolated stories, revision conflicts, share privacy and designer images pr
     assert(!("instructions" in c.body.data));
     const d = await request("GET", {}, { token: published.designerToken });
     assert(!JSON.stringify(d.body).includes("PRIVATE"));
+    const list = await request('GET');
+    assert.equal(list.body.stories.length, 2);
+    assert.equal(list.body.stories[0].cardCount, 1);
+    assert(!JSON.stringify(list.body).includes('PRIVATE'));
+    assert(!JSON.stringify(list.body).includes(published.customerToken));
     const image = {
         url: "https://example.com/asset.jpg",
         width: 814,
