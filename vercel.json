@@ -3,26 +3,70 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "functions": {
-    "api/amazon-search.js": { "maxDuration": 300 },
-    "api/amazon-brand-discover.js": { "maxDuration": 60 },
-    "api/stores.js": { "maxDuration": 30 },
-    "api/feedback.js": { "maxDuration": 30 },
-    "api/store-images.js": { "maxDuration": 30 },
-    "api/blob-upload.js": { "maxDuration": 30 },
-    "api/translate.js": { "maxDuration": 60 },
-    "api/scrape-website.js": { "maxDuration": 300 },
-    "api/crawl-brand-store.js": { "maxDuration": 60 },
-    "api/analyze-images.js": { "maxDuration": 60 },
-    "api/analyze-ci.js": { "maxDuration": 60 },
-    "api/generate-image-descriptions.js": { "maxDuration": 60 },
-    "api/generate-wireframe.js": { "maxDuration": 60 },
-    "api/crawl-store-nav.js": { "maxDuration": 60 },
-    "api/analyze-store-page.js": { "maxDuration": 60 },
-    "api/juskys-store.js": { "includeFiles": "seed/juskys-store.json" },
-    "api/true-nature-store.js": { "includeFiles": "seed/true-nature-store.json" }
+    "api/amazon-search.js": {
+      "maxDuration": 300
+    },
+    "api/amazon-brand-discover.js": {
+      "maxDuration": 60
+    },
+    "api/stores.js": {
+      "maxDuration": 30
+    },
+    "api/feedback.js": {
+      "maxDuration": 30
+    },
+    "api/store-images.js": {
+      "maxDuration": 30
+    },
+    "api/blob-upload.js": {
+      "maxDuration": 30
+    },
+    "api/translate.js": {
+      "maxDuration": 60
+    },
+    "api/scrape-website.js": {
+      "maxDuration": 300
+    },
+    "api/crawl-brand-store.js": {
+      "maxDuration": 60
+    },
+    "api/analyze-images.js": {
+      "maxDuration": 60
+    },
+    "api/analyze-ci.js": {
+      "maxDuration": 60
+    },
+    "api/generate-image-descriptions.js": {
+      "maxDuration": 60
+    },
+    "api/generate-wireframe.js": {
+      "maxDuration": 60
+    },
+    "api/crawl-store-nav.js": {
+      "maxDuration": 60
+    },
+    "api/analyze-store-page.js": {
+      "maxDuration": 60
+    },
+    "api/juskys-store.js": {
+      "includeFiles": "seed/juskys-store.json"
+    },
+    "api/true-nature-store.js": {
+      "includeFiles": "seed/true-nature-store.json"
+    },
+    "api/brand-stories.js": {
+      "maxDuration": 30,
+      "includeFiles": "src/brandStoryModel.mjs"
+    }
   },
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
