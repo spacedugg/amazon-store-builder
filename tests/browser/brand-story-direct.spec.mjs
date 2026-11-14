@@ -91,8 +91,11 @@ test('manual path opens a blank editor and background is clearly editable with b
  await page.getByRole('button',{name:'Hintergrund bearbeiten',exact:true}).click();
  await expect(page.getByLabel('Desktop-Motiv und Inhalt (English)',{exact:true})).toBeVisible();
  await expect(page.getByRole('button',{name:'Karte hinzufügen',exact:true})).toHaveCSS('background-color','rgb(37, 99, 235)');
+ await expect(page.getByRole('button',{name:'Änderungen speichern',exact:true})).toHaveCSS('background-color','rgb(37, 99, 235)');
+ await expect(page.getByRole('button',{name:'Designer & Kunde',exact:true})).toHaveCSS('background-color','rgb(37, 99, 235)');
  await expect(page.locator('.bs-field-help')).toHaveCount(0);
  await page.getByRole('button',{name:'Alle Brand Stories',exact:true}).click();
+ await expect(page.getByRole('button',{name:'Neue Brand Story',exact:true}).first()).toHaveCSS('background-color','rgb(37, 99, 235)');
  await page.getByRole('button',{name:'Neue Brand Story',exact:true}).first().click();
  await page.getByLabel('Markenname',{exact:true}).fill('Manuelle Marke');
  await page.getByRole('button',{name:'Manuell starten',exact:true}).click();

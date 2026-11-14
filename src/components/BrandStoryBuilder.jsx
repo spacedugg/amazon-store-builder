@@ -287,7 +287,7 @@ export default function BrandStoryBuilder() {
         <h1>{story.brandName}</h1><span className="bs-mode-label">{designer ? 'Designer' : customer ? 'Kundenvorschau' : `${story.cards.length} / 19 Karten`}</span>
         <div className="bs-toolbar-spacer" />
         <div className="view-toggle"><button className="view-toggle-btn" aria-label="Desktop" title="Desktop" aria-pressed={!mobile} onClick={() => setMobile(false)}><DeviceIcon /></button><button className="view-toggle-btn" aria-label="Mobil" title="Mobil" aria-pressed={mobile} onClick={() => setMobile(true)}><DeviceIcon mobile /></button></div>
-        {!token && <><button className="btn" disabled={busy} onClick={() => setSetupOpen(true)}>Konzept mit Claude</button><button className="btn btn-green" disabled={busy} onClick={() => run(() => save())}>{dirty ? 'Änderungen speichern' : 'Speichern'}</button><button className="btn btn-primary" disabled={busy} onClick={() => setShareOpen(true)}>Designer & Kunde</button></>}
+        {!token && <><button className="btn" disabled={busy} onClick={() => setSetupOpen(true)}>Konzept mit Claude</button><button className="btn bs-primary" disabled={busy} onClick={() => run(() => save())}>{dirty ? 'Änderungen speichern' : 'Speichern'}</button><button className="btn bs-primary" disabled={busy} onClick={() => setShareOpen(true)}>Designer & Kunde</button></>}
         {!customer && <button className="btn" disabled={busy} onClick={()=>setUploadsOpen(true)}>Design-Dateien</button>}
       </header>
       {message && <div className="bs-message" role="status">{message}</div>}

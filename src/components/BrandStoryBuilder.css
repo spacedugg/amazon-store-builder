@@ -703,3 +703,10 @@
 .bs-app .bs-carousel>.bs-preview-add:hover, .bs-app .bs-carousel>.bs-preview-background:hover {
   background:#1d4ed8; border-color:#1d4ed8;
 }
+
+.bs-app .bs-toolbar .btn.bs-primary, .bs-app .bs-overview .store-home-create {
+  background:#2563eb; border-color:#2563eb; color:#fff;
+}
+.bs-app .bs-toolbar .btn.bs-primary:hover, .bs-app .bs-overview .store-home-create:hover {
+  background:#1d4ed8; border-color:#1d4ed8; box-shadow:0 2px 8px #2563eb33;
+}
