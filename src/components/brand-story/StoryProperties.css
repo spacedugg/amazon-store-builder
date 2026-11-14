@@ -1,0 +1,61 @@
+.bs-properties .bs-field select {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  background: #fff;
+  padding: 9px 10px;
+  color: #334155;
+  font: inherit;
+  font-size: 12px;
+}
+.bs-properties .bs-field-help {
+  margin: -7px 0 16px;
+  color: #64748b;
+  font-size: 11px;
+  line-height: 1.6;
+}
+.bs-properties .bs-slot-picker {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin: 18px 0;
+}
+.bs-properties .bs-slot-picker button {
+  padding: 9px 6px;
+  font-size: 11px;
+  text-align: left;
+}
+.bs-properties .bs-slot-picker button[aria-pressed="true"] {
+  background: #fff7ed;
+  border-color: #f59e0b;
+  color: #9a3412;
+}
+.bs-properties .bs-slot {
+  scroll-margin: 18px;
+  border-radius: 8px;
+}
+.bs-properties .bs-slot-selected {
+  box-shadow: 0 0 0 2px #f59e0b;
+  padding: 16px 10px 10px;
+  margin-right: -10px;
+  margin-left: -10px;
+}
+.bs-properties .bs-slot-image > .bs-placeholder {
+  min-height: 90px;
+  font-size: 11px;
+}
+.bs-properties .bs-slot-image button { margin-top: 8px; }
+.bs-properties .bs-file-path { display: block; margin-top: 8px; }
+.bs-properties .bs-slot:focus { outline: 2px solid #f59e0b; outline-offset: 3px; }
+.bs-grid-mode-options { border:0; padding:0; margin:16px 0; min-width:0; }
+.bs-grid-mode-options legend { font-size:12px; font-weight:600; margin-bottom:10px; }
+.bs-grid-mode-options>div { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.bs-grid-mode-option { display:flex; flex-direction:column; gap:9px; padding:10px; border:1px solid #d5dfeb; border-radius:8px; background:#f8fafc; cursor:pointer; min-width:0; }
+.bs-grid-mode-option.active { border-color:#d88700; box-shadow:0 0 0 1px #d88700; background:#fff9ed; }
+.bs-grid-mode-title { display:flex; align-items:flex-start; gap:5px; font-size:11px; line-height:1.5; }
+.bs-grid-mode-title input { margin:2px 0 0; accent-color:#b36b00; }
+.bs-grid-mode-preview { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:3px; aspect-ratio:1328/1456; background:#fff; padding:3px; }
+.bs-grid-mode-preview>span { overflow:hidden; min-height:0; }
+.bs-grid-mode-preview img { display:block; width:100%; height:100%; object-fit:cover; }
+.bs-mode-preview-placeholder { display:block; width:100%; height:100%; background:#dae4e8; }
+.bs-grid-mode-option>small { font-size:10px; color:#64748b; }

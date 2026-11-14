@@ -1,3 +1,4 @@
+import { validatePlanning } from './brandStoryPlanning.mjs';
 export const SPECS = {
   desktop: [3660, 1563],
   mobile: [1389, 1875],
@@ -47,6 +48,7 @@ export function newCard(type, cards = []) {
     id: uid(),
     fileKey: `card-${String(n).padStart(2, "0")}`,
     type,
+    ...(type === "grid" ? { gridMode: "individual" } : {}),
     assetFile:
       type === "media"
         ? `Brand Media Assets/media asset image ${assetIndex}.jpg`
@@ -60,6 +62,8 @@ export function newCard(type, cards = []) {
       type === "grid"
         ? Array.from({ length: 4 }, (_, i) => ({
             assetFile: `ASIN Grids/ASIN image ${assetIndex}${"abcd"[i]}.jpg`,
+            brief: "Use the original Amazon product main image unchanged.",
+            imageMode: "product",
             asin: "",
             url: "",
             image: null,
@@ -75,6 +79,48 @@ export function safeUrl(value) {
   } catch {
     return "";
   }
+}
+export function gridMode(card) {
+  return card.gridMode ?? 'composite';
+}
+export function slotImageMode(slot) {
+  return slot.imageMode ?? (slot.image ? 'custom' : 'product');
+}
+export function slotDisplayImage(slot) {
+  return (slotImageMode(slot) === 'custom' ? slot.image : slot.productImage) || null;
+}
+export function productAsin(slot, marketplace = 'de') {
+  const destination = safeUrl(slot.url);
+  if (!destination) return /^[A-Z0-9]{10}$/i.test(slot.asin || '') ? slot.asin.toUpperCase() : '';
+  try {
+    const url = new URL(destination);
+    const host = url.hostname.replace(/^(?:www\.|smile\.|m\.)/, '');
+    if (host !== `amazon.${marketplace}`) return '';
+    return url.pathname.match(/\/(?:dp|gp\/product)\/([A-Z0-9]{10})(?:\/|$)/i)?.[1].toUpperCase() || '';
+  } catch { return ''; }
+}
+export function sharingErrors(story) {
+  const out = [], hasText = value => typeof value === 'string' && !!value.trim();
+  for (const [kind, label] of [['desktop', 'Desktop'], ['mobile', 'Mobil']]) {
+    if (!hasText(story.background?.[kind + 'Brief'] ?? story.background?.brief)) out.push(`Hintergrund ${label}: Beschreibung fehlt.`);
+  }
+  if (!story.cards?.length) out.push('Mindestens eine Karte ist erforderlich.');
+  if (story.cards?.length > 19) out.push('Maximal 19 Karten sind zulässig.');
+  (story.cards || []).forEach((card, i) => {
+    const label = `Karte ${i + 1}`;
+    if (card.type === 'media' || gridMode(card) === 'composite') {
+      if (!hasText(card.brief)) out.push(`${label}: Beschreibung fehlt.`);
+    }
+    if (card.type !== 'grid') return;
+    if (!hasText(card.headline)) out.push(`${label}: Überschrift fehlt.`);
+    if (!safeUrl(card.shopUrl)) out.push(`${label}: gültiger Shop-Link fehlt.`);
+    for (let j = 0; j < 4; j++) {
+      const slot = card.slots?.[j] || {};
+      if (!productUrl(slot, story.marketplace)) out.push(`${label}, Platz ${j + 1}: gültiges Produktziel (ASIN oder URL) fehlt.`);
+      if (gridMode(card) === 'individual' && !hasText(slot.brief)) out.push(`${label}, Platz ${j + 1}: Beschreibung fehlt.`);
+    }
+  });
+  return out;
 }
 export function productUrl(slot, marketplace = "de") {
   return (
@@ -144,6 +190,7 @@ export function validateStory(s) {
     throw Error("Hintergrund und maximal 19 Karten erforderlich.");
   if ('mobileCards' in s || 'desktopCards' in s)
     throw Error('Desktop und Mobil verwenden eine gemeinsame Kartenliste.');
+  if (s.planning !== undefined) validatePlanning(s.planning);
   if (s.context && (typeof s.context !== 'object' || Array.isArray(s.context) || Object.values(s.context).some(v => typeof v !== 'string')))
     throw Error('Markeninformationen müssen Text enthalten.');
   if (!['desktopBrief', 'mobileBrief', 'desktopCopy', 'mobileCopy'].every(k => text(s.background[k])))
@@ -182,6 +229,8 @@ export function validateStory(s) {
       !image(c.image)
     )
       throw Error("Ungültige Kartenfelder.");
+    if (c.gridMode !== undefined && !["individual", "composite"].includes(c.gridMode))
+      throw Error("Ungültiger Grid-Modus.");
     if (!["media", "grid"].includes(c.type))
       throw Error("Nur Bildkarten und ASIN-Grids sind zulässig.");
     if (c.type === "grid" && (!Array.isArray(c.slots) || c.slots.length !== 4))
@@ -191,6 +240,8 @@ export function validateStory(s) {
     for (const slot of c.slots || []) {
       if (
         !slot ||
+        !text(slot.brief) ||
+        (slot.imageMode !== undefined && !["product", "custom"].includes(slot.imageMode)) ||
         !text(slot.asin) ||
         !text(slot.assetFile) ||
         !text(slot.url) ||
@@ -219,11 +270,11 @@ export function publicationWarnings(s) {
       if (!c.headline) out.push(`Karte ${i + 1}: Überschrift fehlt.`);
       if (!safeUrl(c.shopUrl)) out.push(`Karte ${i + 1}: Shop-Ziel fehlt.`);
       c.slots.forEach((slot, j) => {
-        if (!slot.image && !slot.productImage)
+        if (!slotDisplayImage(slot))
           out.push(`Karte ${i + 1}, Platz ${j + 1}: Bild fehlt.`);
         if (!productUrl(slot, s.marketplace))
           out.push(`Karte ${i + 1}, Platz ${j + 1}: Produktziel fehlt.`);
-        out.push(...imageWarnings(slot.image, "product"));
+        if (slotImageMode(slot) === "custom") out.push(...imageWarnings(slot.image, "product"));
       });
     }
   });
@@ -245,6 +296,7 @@ export function customerStory(s) {
       headline: c.headline,
       shopUrl: safeUrl(c.shopUrl),
       slots: (c.slots || []).map((slot) => ({
+        imageMode: slotImageMode(slot),
         asin: slot.asin,
         assetFile: slot.assetFile,
         url: productUrl(slot, s.marketplace),

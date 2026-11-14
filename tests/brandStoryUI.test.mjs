@@ -95,6 +95,9 @@ test("overview offers explicit draft recovery and editor uses a card picker plus
     assert(!d.querySelector('.bs-carousel'));
     await click(btn('Letzten Entwurf fortsetzen'));
     assert.match(d.body.textContent, /Testmarke/);
+    assert(!d.querySelector('.bs-sidebar'));
+    assert(!d.body.textContent.includes('Positionierung prüfen'));
+    assert(!d.body.textContent.includes('So funktioniert eine Brand Story'));
     assert(d.querySelector('textarea[aria-label="Desktop-Motiv und Inhalt (English)"]'));
     const background = d.querySelector('.bs-backdrop').outerHTML;
     await click(d.querySelector('[aria-label="Nächste Karten"]'));
@@ -107,19 +110,31 @@ test("overview offers explicit draft recovery and editor uses a card picker plus
     assert(d.body.textContent.includes('Grid-Überschrift'));
     assert.equal(d.querySelectorAll('.bs-slot').length, 4);
     assert.match(d.querySelector('.bs-counter').textContent, /8 \/ 8/);
+    await click(d.querySelector('[aria-label="Produkt 4"]'));
+    await click(btn('Karte hinzufügen'));
+    await click(btn('ASIN-Grid'));
+    assert.equal(d.querySelectorAll('.bs-slot-selected').length, 0);
     await click(btn('Konzept mit Claude'));
     assert(d.querySelector('[role="dialog"]'));
-    assert(d.body.textContent.includes('Anleitung kopieren'));
+    assert(d.body.textContent.includes('Auftrag für Claude kopieren'));
     assert(d.querySelector('[aria-label="Brand Story JSON"]'));
     assert(!btn('Anweisungen & Claude'));
     assert(!btn('JSON-Import'));
   }));
-test("new story opens a setup dialog with context before entering the visual draft", async () =>
+test("new story offers Store-first or manual entry without the former required context form", async () =>
   mount(false, async (d, click, btn) => {
     await click(btn('Neue Brand Story'));
     assert(d.querySelector('[role="dialog"]'));
-    for (const label of ['Markenname', 'Zielgruppe', 'Gewünschte Produkte und ASINs', 'Brand Store und gewünschte Unterseiten'])
+    for (const label of ['Markenname', 'Amazon Brand Store-Link'])
       assert([...d.querySelectorAll('label')].some(l => l.textContent.includes(label)));
+    assert(btn('Store übernehmen')); assert(btn('Manuell starten'));
+    assert(!d.querySelector('[aria-label="Zielgruppe"]'));
+    assert(!d.querySelector('a[download]'));
+  }));
+test('interactive examples are available directly from the overview without opening a project', async () =>
+  mount(false, async (d, click, btn) => {
+    await click(btn('Beispiele'));
+    assert.match(d.querySelector('[role="dialog"]').textContent,/Interaktive Brand-Story-Beispiele/);
   }));
 test("customer share has no editor, uploads, internal instructions or briefing tabs", async () =>
   mount(true, async (d) => {
@@ -137,7 +152,7 @@ test('designer has element briefs, matching specifications and image uploads wit
     assert(d.body.textContent.includes('1389 × 1875'));
     assert(d.querySelector('input[type=file]'));
     assert(!d.body.textContent.includes('Konzept mit Claude'));
-    const card = [...d.querySelectorAll('.bs-sidebar button')].find(b => b.textContent.includes('1. Brand Media Asset'));
+    const card = d.querySelector('[aria-label="Karte 1 bearbeiten"]');
     await click(card);
     assert(d.body.textContent.includes('814 × 1019'));
     assert(!d.querySelector('.bs-properties textarea'));

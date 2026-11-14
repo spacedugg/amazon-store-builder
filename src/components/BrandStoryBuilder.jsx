@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { upload } from '@vercel/blob/client';
 import { fetchProductData } from '../productData';
-import { newStory, newCard, validateStory, imageWarnings, resolveUploadTarget, publicationWarnings } from '../brandStoryModel.mjs';
+import { newStory, newCard, validateStory, imageWarnings, resolveUploadTarget, publicationWarnings, sharingErrors, productAsin } from '../brandStoryModel.mjs';
 import { normalizeStory, changedStoryAssets } from '../brandStoryWorkflow.mjs';
 import { StoryCarousel } from './brand-story/StoryCarousel';
 import { StoryProperties } from './brand-story/StoryElements';
@@ -10,6 +10,9 @@ import StorySetupDialog from './brand-story/StorySetupDialog';
 import StoryModal from './brand-story/StoryModal';
 import StoryReferences from './brand-story/StoryReferences';
 import { StoryPrinciples, StoryDelivery } from './brand-story/StoryDelivery';
+import { moveStoryCard } from '../brandStoryEditing.mjs';
+import { DeviceIcon, CardTypeIllustration } from './brand-story/StoryIcons';
+import useProductImages from './brand-story/useProductImages';
 import './BrandStoryBuilder.css';
 export { StoryCarousel } from './brand-story/StoryCarousel';
 async function api(query = "", body) {
@@ -64,11 +67,11 @@ export default function BrandStoryBuilder() {
   const token = new URLSearchParams(location.search).get('token');
   const [story, setStory] = useState(null), [record, setRecord] = useState({}), [stories, setStories] = useState([]),
     [mode, setMode] = useState(token ? 'loading' : 'editor'), [overview, setOverview] = useState(!token),
-    [selected, setSelected] = useState(null), [mobile, setMobile] = useState(() => window.innerWidth < 650),
-    [raster, setRaster] = useState(false), [busy, setBusy] = useState(false), [message, setMessage] = useState(''),
+    [selected, setSelected] = useState(null), [selectedSlot, setSelectedSlot] = useState(null), [mobile, setMobile] = useState(() => window.innerWidth < 650),
+    [busy, setBusy] = useState(false), [message, setMessage] = useState(''),
     [dirty, setDirty] = useState(false), [loading, setLoading] = useState(!token), [recovery, setRecovery] = useState(null),
-    [setupOpen, setSetupOpen] = useState(false), [referencesOpen, setReferencesOpen] = useState(false),
-    [shareOpen, setShareOpen] = useState(false), [pickerPosition, setPickerPosition] = useState(null),
+    [setupOpen, setSetupOpen] = useState(false), [referencesOpen, setReferencesOpen] = useState(false), [skillSetupOpen, setSkillSetupOpen] = useState(false),
+    [shareOpen, setShareOpen] = useState(false), [uploadsOpen, setUploadsOpen] = useState(false), [pickerPosition, setPickerPosition] = useState(null),
     [setupDraft, setSetupDraft] = useState({ json: '', review: null });
   useEffect(() => {
     if (token) api('?token=' + encodeURIComponent(token)).then(r => { setStory(r.mode === 'customer' ? r.data : normalizeStory(r.data)); setRecord({ revision: r.revision }); setMode(r.mode); }).catch(e => { setMode('error'); setMessage(e.message); });
@@ -85,6 +88,10 @@ export default function BrandStoryBuilder() {
     const f = e => { if (dirty) { e.preventDefault(); e.returnValue = ''; } };
     window.addEventListener('beforeunload', f); return () => window.removeEventListener('beforeunload', f);
   }, [dirty]);
+  const productImagesLoading = useProductImages(story, mode === 'editor' && !overview && !setupOpen, setStory, setDirty, setMessage);
+  function selectCard(id, slotIndex=null) { setSelected(id); setSelectedSlot(slotIndex); }
+  function removeCard(id) { if (confirm('Karte entfernen?')) { change(s => { s.cards=s.cards.filter(c=>c.id!==id);return s; }); if(selected===id)selectCard(null); } }
+  function dragReorder(sourceId,targetId,after) { change(s => { s.cards=moveStoryCard(s.cards,sourceId,targetId,after);return s; }); selectCard(sourceId); }
   const currentStory = useRef(story);
   currentStory.current = story;
   function change(fn) {
@@ -108,6 +115,7 @@ export default function BrandStoryBuilder() {
   }
   async function save(publish = false) {
     validateStory(story);
+    if(publish) { const errors=sharingErrors(story); if(errors.length)throw Error('Freigabe noch nicht möglich: '+errors.join(' ')); }
     let current = record;
     if (!current.id) {
       current = await api("", { data: story });
@@ -137,7 +145,7 @@ export default function BrandStoryBuilder() {
         );
       change((s) => {
         const target = s.cards.find((c) => c.id === cardId)?.slots[slotIndex];
-        if (target && target.asin === asin)
+        if (target && productAsin(target,s.marketplace) === asin)
           target.productImage = { url: p.image };
         return s;
       });
@@ -157,7 +165,7 @@ export default function BrandStoryBuilder() {
       setStory(normalizeStory(r.data));
       setSetupDraft({ json: '', review: null });
       setRecord({ ...r, identity: { brandName: (r.data || story).brandName, marketplace: (r.data || story).marketplace } });
-      setSelected(null);
+      selectCard(null);
       setDirty(false);
       setOverview(false);
     });
@@ -179,7 +187,7 @@ export default function BrandStoryBuilder() {
   }
   function add(type) {
     if (story.cards.length >= 19) return;
-    change(s => { const c = newCard(type, s.cards); s.cards.splice(pickerPosition ?? s.cards.length, 0, c); setSelected(c.id); return s; });
+    change(s => { const c = newCard(type, s.cards); s.cards.splice(pickerPosition ?? s.cards.length, 0, c); selectCard(c.id); return s; });
     setPickerPosition(null);
   }
   function reorder(delta) {
@@ -249,7 +257,7 @@ export default function BrandStoryBuilder() {
   function startNew() {
     if (running.current) return;
     setSetupDraft({ json: '', review: null });
-    setStory(normalizeStory(newStory(''))); setRecord({}); setSelected(null); setDirty(false); setSetupOpen(true); setMessage('');
+    setStory(normalizeStory(newStory(''))); setRecord({}); selectCard(null); setDirty(false); setSetupOpen(true); setMessage('');
   }
   async function resume() {
     if (!recovery || running.current) return;
@@ -259,53 +267,46 @@ export default function BrandStoryBuilder() {
         const remote = await api('?id=' + encodeURIComponent(savedRecord.id));
         savedRecord = { ...savedRecord, identity: { brandName: remote.data.brandName, marketplace: remote.data.marketplace } };
       }
-      setStory(normalizeStory(recovery.story)); setRecord(savedRecord); setDirty(recovery.dirty ?? true); setSelected(null); setOverview(false); setMessage(''); setSetupDraft({ json: '', review: null });
+      setStory(normalizeStory(recovery.story)); setRecord(savedRecord); setDirty(recovery.dirty ?? true); selectCard(null); setOverview(false); setMessage(''); setSetupDraft({ json: '', review: null });
     });
   }
   function applyImport(review) {
-    setSetupDraft({ json: '', review: null }); setStory(review.story); if (review.foreign) setRecord({}); setSelected(null); setDirty(true); setSetupOpen(false); setOverview(false); setMessage('Konzept übernommen. Inhalte prüfen und speichern.');
+    setSetupDraft({ json: '', review: null }); setStory(review.story); if (review.foreign) setRecord({}); selectCard(null); setDirty(true); setSetupOpen(false); setOverview(false); setMessage('Konzept übernommen. Inhalte prüfen und speichern.');
   }
   async function goBack() {
     await run(async () => { if (dirty) await save(); setOverview(true); setMessage(''); });
   }
   const designer = mode === 'designer', customer = mode === 'customer';
+  const shareErrors=story?sharingErrors(story):[];
   if (mode === 'loading' || mode === 'error') return <main className="bs-app"><p role={mode === 'error' ? 'alert' : 'status'}>{message || 'Brand Story wird geladen …'}</p></main>;
   return <main className={`bs-app ${customer ? 'bs-customer' : ''}`}>
-    {overview && !token ? <StoryOverview stories={stories} loading={loading} error={message} hasDraft={!!recovery} onResume={resume} onNew={startNew} onOpen={load} busy={busy} /> : story && <>
+    {overview && !token ? <StoryOverview stories={stories} loading={loading} error={message} hasDraft={!!recovery} onResume={resume} onNew={startNew} onOpen={load} onExamples={()=>setReferencesOpen(true)} onSkillSetup={()=>setSkillSetupOpen(true)} busy={busy} /> : story && <>
       <header className="topbar bs-toolbar">
         {!token && <button className="btn topbar-back" disabled={busy} onClick={goBack}>Alle Brand Stories</button>}
         <div className="topbar-brand"><span className="topbar-title"><span style={{ color: '#ff9900' }}>Brand Story</span> Builder</span></div>
         <h1>{story.brandName}</h1><span className="bs-mode-label">{designer ? 'Designer' : customer ? 'Kundenvorschau' : `${story.cards.length} / 19 Karten`}</span>
         <div className="bs-toolbar-spacer" />
-        <div className="view-toggle"><button className="view-toggle-btn" aria-pressed={!mobile} onClick={() => setMobile(false)}>Desktop</button><button className="view-toggle-btn" aria-pressed={mobile} onClick={() => setMobile(true)}>Mobil</button></div>
+        <div className="view-toggle"><button className="view-toggle-btn" aria-label="Desktop" title="Desktop" aria-pressed={!mobile} onClick={() => setMobile(false)}><DeviceIcon /></button><button className="view-toggle-btn" aria-label="Mobil" title="Mobil" aria-pressed={mobile} onClick={() => setMobile(true)}><DeviceIcon mobile /></button></div>
         {!token && <><button className="btn" disabled={busy} onClick={() => setSetupOpen(true)}>Konzept mit Claude</button><button className="btn btn-green" disabled={busy} onClick={() => run(() => save())}>{dirty ? 'Änderungen speichern' : 'Speichern'}</button><button className="btn btn-primary" disabled={busy} onClick={() => setShareOpen(true)}>Designer & Kunde</button></>}
-        {designer && <button className="btn" onClick={() => setReferencesOpen(true)}>Beispiele ansehen</button>}
+        {!customer && <button className="btn" disabled={busy} onClick={()=>setUploadsOpen(true)}>Design-Dateien</button>}
       </header>
       {message && <div className="bs-message" role="status">{message}</div>}
       {customer ? <div className="bs-customer-content"><StoryCarousel story={story} mobile={mobile} /><StoryDelivery story={story} /></div> : <div className="bs-workspace">
-        <aside className="bs-sidebar">
-          <div className="bs-sidebar-heading">Brand Story <span>{story.cards.length} / 19</span></div>
-          <button className={`bs-element-button ${!selected ? 'active' : ''}`} aria-pressed={!selected} onClick={() => setSelected(null)}><span className="bs-element-icon">▧</span><span>Hintergrund<small>Desktop und Mobil</small></span></button>
-          <div className="bs-sidebar-label">KARTENREIHENFOLGE</div>
-          {!designer && <button className="bs-insert-small" aria-label="Karte am Anfang einfügen" disabled={busy || story.cards.length >= 19} onClick={() => setPickerPosition(0)}>＋</button>}
-          {story.cards.map((c, i) => <React.Fragment key={c.id}><button className={`bs-element-button ${selected === c.id ? 'active' : ''}`} aria-pressed={selected === c.id} onClick={() => setSelected(c.id)}><span className={`bs-element-icon ${c.type === 'grid' ? 'is-grid' : ''}`}>{c.type === 'grid' ? '▦' : '▧'}</span><span>{i + 1}. {c.title || c.headline || (c.type === 'grid' ? 'ASIN-Grid' : 'Brand Media Asset')}<small>{c.type === 'grid' ? 'ASIN-Grid · 4 Bildplätze' : 'Brand Media Asset'}</small></span></button>{!designer && <button className="bs-insert-small" aria-label={`Karte nach Position ${i + 1} einfügen`} disabled={busy || story.cards.length >= 19} onClick={() => setPickerPosition(i + 1)}>＋</button>}</React.Fragment>)}
-          {!designer && <button className="bs-add-card" disabled={busy || story.cards.length >= 19} onClick={() => setPickerPosition(story.cards.length)}>Karte hinzufügen</button>}
-          {story.cards.length >= 19 && <p className="bs-help">Alle 19 Kartenplätze sind belegt.</p>}
-          <div className="bs-sidebar-bottom"><button onClick={() => setReferencesOpen(true)}>Beispiele ansehen</button><StoryPrinciples /></div>
-        </aside>
         <section className="bs-stage">
-          <div className="bs-stage-heading"><div><span className="bs-eyebrow">{mobile ? 'MOBIL' : 'DESKTOP'} · INTERAKTIVE VORSCHAU</span><h2>{story.brandName}</h2></div>{!mobile && <label className="bs-overlay-toggle"><input type="checkbox" checked={raster} onChange={e => setRaster(e.target.checked)} />Positionierung prüfen</label>}</div>
-          <div className="bs-stage-canvas"><StoryCarousel story={story} mobile={mobile} raster={raster && !mobile} showDraft onSelect={setSelected} selected={selected} />{!story.cards.length && <div className="bs-stage-empty"><h3>Deine Story beginnt hier</h3><p>Übernimm dein Konzept aus Claude oder füge die erste Karte hinzu.</p><button className="bs-primary" onClick={() => setPickerPosition(0)}>Karte hinzufügen</button></div>}</div>
-          <p className="bs-stage-hint">{mobile ? 'Dieselben Karten, einzeln dargestellt. Nur der Hintergrund wechselt.' : 'Der Hintergrund bleibt fest. Klicke durch die Story, um Überdeckungen und das Schlussbild zu prüfen.'}</p>
-          <section className="bs-folder-panel"><div><h3>{designer ? 'Design-Dateien hochladen' : 'Fertige Design-Dateien'}</h3><p>Ordnerstruktur: Hintergrund · Brand Media Assets · ASIN Grids. Preview Neu enthält nur Vergleichsbilder.</p></div><label className="bs-upload">Ordner auswählen<input disabled={busy} type="file" webkitdirectory="" multiple onChange={e => { folder(Array.from(e.target.files)); e.target.value = ''; }} /></label><details><summary>Prüfung der Vorschau</summary>{publicationWarnings(story).map((w, i) => <p className="bs-warning" key={i}>{w}</p>)}</details></section>
+          <div className="bs-stage-heading"><div><span className="bs-eyebrow">INTERAKTIVE VORSCHAU</span><h2>{story.brandName}</h2></div>{productImagesLoading && <span className="bs-help" role="status">Produkthauptbilder werden geladen …</span>}</div>
+          <div className="bs-stage-canvas"><StoryCarousel story={story} mobile={mobile} showDraft onSelect={selectCard} selected={selected} selectedSlot={selectedSlot} busy={busy} onAdd={designer?undefined:()=>setPickerPosition(story.cards.length)} onRemove={removeCard} onReorder={designer?undefined:dragReorder}/></div>
+          <div className="bs-stage-actions"><button className="bs-reference-action" onClick={()=>setReferencesOpen(true)}>Brand-Story-Beispiele ansehen ↗</button></div>
+          {designer && <StoryPrinciples />}
         </section>
-        <StoryProperties story={story} selected={selected} designer={designer} busy={busy} change={change} asset={asset} loadProduct={loadProduct} reorder={reorder} remove={() => { if (confirm('Karte entfernen?')) { change(s => { s.cards = s.cards.filter(c => c.id !== selected); return s; }); setSelected(null); } }} />
+        <StoryProperties story={story} selected={selected} selectedSlot={selectedSlot} onSlotSelect={setSelectedSlot} designer={designer} busy={busy} change={change} asset={asset} loadProduct={loadProduct} reorder={reorder} remove={() => { if (confirm('Karte entfernen?')) { change(s => { s.cards = s.cards.filter(c => c.id !== selected); return s; }); selectCard(null); } }} />
       </div>}
     </>}
     {setupOpen && story && <StorySetupDialog story={story} projectIdentity={record.identity} draft={setupDraft} setDraft={setSetupDraft} onChange={s => { setStory(s); setDirty(true); }} onClose={() => setSetupOpen(false)} onStart={() => { setSetupOpen(false); setOverview(false); setDirty(true); }} onImport={applyImport} onExport={() => download(story)} />}
-    {pickerPosition !== null && <StoryModal title="Welche Karte möchtest du hinzufügen?" onClose={() => setPickerPosition(null)}><p className="bs-help">{story.cards.length} von 19 Karten · dieselbe Karte für Desktop und Mobil.</p><div className="bs-type-options"><button aria-label="Brand Media Asset" onClick={() => add('media')}><span className="bs-type-media" aria-hidden="true">▧</span><strong>Brand Media Asset</strong><small>Ein vollständiges Bild mit deinem Inhalt.<br />814 × 1019 px</small></button><button aria-label="ASIN-Grid" onClick={() => add('grid')}><span className="bs-type-grid" aria-hidden="true">▦</span><strong>ASIN-Grid</strong><small>Vier Bildplätze, Überschrift und Shop-Link.<br />Je 1328 × 1456 px</small></button></div></StoryModal>}
+    {pickerPosition !== null && <StoryModal title="Welche Karte möchtest du hinzufügen?" onClose={() => setPickerPosition(null)}><p className="bs-help">{story.cards.length} von 19 Karten · dieselbe Karte für Desktop und Mobil.</p><div className="bs-type-options"><button aria-label="Brand Media Asset" onClick={() => add('media')}><CardTypeIllustration /><strong>Brand Media Asset</strong><small>Ein vollständiges Bild mit deinem Inhalt.<br />814 × 1019 px</small></button><button aria-label="ASIN-Grid" onClick={() => add('grid')}><CardTypeIllustration grid /><strong>ASIN-Grid</strong><small>Vier Bildplätze, Überschrift und Shop-Link.<br />Je 1328 × 1456 px</small></button></div></StoryModal>}
+    {uploadsOpen && <StoryModal title="Design-Dateien" onClose={()=>setUploadsOpen(false)} wide><p>Ordnerstruktur: Hintergrund · Brand Media Assets · ASIN Grids. Preview Neu enthält nur Vergleichsbilder.</p><label className="bs-upload">Ordner auswählen<input disabled={busy} type="file" webkitdirectory="" multiple onChange={e=>{folder(Array.from(e.target.files));e.target.value='';}}/></label><details><summary>Dateizuordnung und Bildprüfung</summary>{publicationWarnings(story).map((w,i)=><p className="bs-warning" key={i}>{w}</p>)}</details>{message&&<p role="status">{message}</p>}</StoryModal>}
     {referencesOpen && <StoryReferences onClose={() => setReferencesOpen(false)} />}
-    {shareOpen && <StoryModal title="Designer & Kunde" onClose={() => { if (!busy) setShareOpen(false); }}><p>Designer sehen die konkreten Briefings und können fertige Bilder hochladen. Kunden sehen nur den freigegebenen Stand und die Angaben für Seller Central.</p><button className="bs-primary" disabled={busy} onClick={() => run(() => save(true))}>Freigabelinks aktualisieren</button><p className="bs-help">Normales Speichern verändert die Kundenfreigabe nicht. Aktualisiere die Freigabe nach neuen Designer-Uploads bewusst.</p>{['designer', 'customer'].map(kind => record[kind + 'Token'] && <div className="bs-share" key={kind}><a href={link(kind)} target="_blank" rel="noreferrer">{kind === 'designer' ? 'Designer-Link öffnen' : 'Kunden-Preview öffnen'}</a><button disabled={busy} onClick={() => run(() => copy(link(kind)))}>Link kopieren</button></div>)}</StoryModal>}
+    {skillSetupOpen && <StoryModal title="Claude einmalig für die Organisation einrichten" onClose={()=>setSkillSetupOpen(false)}><p>Ein Organisationsinhaber lädt den Skill einmalig in Claude Team oder Enterprise unter Organisationseinstellungen → Plugins & Skills hoch. Stelle ihn für die Mitarbeiter bereit und aktiviere ihn standardmäßig. Er benötigt die in Claude freigeschalteten Skills und Codeausführung.</p><p>Danach kopiert jeder Mitarbeiter pro Brand Story nur noch den Projektauftrag. Das ZIP wird nicht für jede Story erneut benötigt. Falls bereits eine ältere Version installiert ist, aktualisiere denselben Organisations-Skill.</p><a className="bs-button-link" href="/brand-story-claude/amazon-brand-story.zip" download>Organisations-Skill herunterladen</a><p className="bs-help">Name in Claude: Amazon Brand Story. Die Installation und Freigabe erfolgen in eurer Claude-Organisation.</p></StoryModal>}
+    {shareOpen && <StoryModal title="Designer & Kunde" onClose={() => { if (!busy) setShareOpen(false); }}><p>Designer sehen die konkreten Briefings und können fertige Bilder hochladen. Kunden sehen nur den freigegebenen Stand und die Angaben für Seller Central.</p><button className="bs-primary" disabled={busy || shareErrors.length>0} onClick={() => run(() => save(true))}>Freigabelinks aktualisieren</button><p className="bs-help">Normales Speichern verändert die Kundenfreigabe nicht. Aktualisiere die Freigabe nach neuen Designer-Uploads bewusst.</p>{shareErrors.length>0 && <div role="alert" className="bs-readiness"><h3>Bitte vor der Freigabe ergänzen</h3><ul>{shareErrors.map((error,i)=><li key={i}>{error}</li>)}</ul><p>Speichern und Verlassen ist weiterhin möglich.</p></div>}{['designer', 'customer'].map(kind => !shareErrors.length && record[kind + 'Token'] && <div className="bs-share" key={kind}><a href={link(kind)} target="_blank" rel="noreferrer">{kind === 'designer' ? 'Designer-Link öffnen' : 'Kunden-Preview öffnen'}</a><button disabled={busy} onClick={() => run(() => copy(link(kind)))}>Link kopieren</button></div>)}</StoryModal>}
     {busy && <div className="bs-busy" role="status">Wird verarbeitet …</div>}
   </main>;
 }

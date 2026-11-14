@@ -4,7 +4,7 @@ let ready;
 module.exports = async (req, res) => {
   res.setHeader("Cache-Control", "no-store");
   try {
-    const { validateStory, customerStory } =
+    const { validateStory, customerStory, sharingErrors } =
       await import("../src/brandStoryModel.mjs");
     const { designerStory, storySummary } = await import('../src/brandStoryWorkflow.mjs');
     const db = getClient();
@@ -125,12 +125,18 @@ module.exports = async (req, res) => {
       return res.status(413).json({
         error: "Story zu groß. Bilder über die Bildablage hochladen.",
       });
+    if (b.publish) {
+      const errors = sharingErrors(data);
+      if (errors.length) return res.status(400).json({ error: errors.join('\n'), errors });
+    }
     if (!b.id) {
+      const designerToken = b.publish ? randomBytes(24).toString('hex') : null;
+      const customerToken = b.publish ? randomBytes(24).toString('hex') : null;
       await db.execute({
-        sql: "INSERT INTO brand_stories(id,data) VALUES(?,?)",
-        args: [id, JSON.stringify(data)],
+        sql: "INSERT INTO brand_stories(id,data,published,designer_token,customer_token) VALUES(?,?,?,?,?)",
+        args: [id, JSON.stringify(data), b.publish ? JSON.stringify({ designer: data, customer: customerStory(data) }) : null, designerToken, customerToken],
       });
-      return res.json({ id, revision: 1 });
+      return res.json({ id, revision: 1, ...(b.publish ? { designerToken, customerToken } : {}) });
     }
     const dt = randomBytes(24).toString("hex"),
       ct = randomBytes(24).toString("hex");

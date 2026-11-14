@@ -1753,6 +1753,362 @@
         }
       ],
       "references": []
+    },
+    {
+      "schemaVersion": 1,
+      "brandName": "Futum",
+      "marketplace": "de",
+      "language": "de",
+      "background": {
+        "desktop": {
+          "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/desktop-background.jpg",
+          "width": 3660,
+          "height": 1563,
+          "size": 662389
+        },
+        "mobile": null,
+        "brief": "",
+        "copy": ""
+      },
+      "cards": [
+        {
+          "id": "futum-1",
+          "fileKey": "card-01",
+          "type": "media",
+          "image": {
+            "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-01.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 252353
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "futum-2",
+          "fileKey": "card-02",
+          "type": "media",
+          "image": {
+            "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-02.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 672776
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "futum-3",
+          "fileKey": "card-03",
+          "type": "media",
+          "image": {
+            "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-03.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 573401
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "futum-4",
+          "fileKey": "card-04",
+          "type": "grid",
+          "image": null,
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-04-01.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 490287
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-04-02.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 368548
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-04-03.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 314178
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-04-04.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 415955
+              },
+              "productImage": null
+            }
+          ]
+        },
+        {
+          "id": "futum-5",
+          "fileKey": "card-05",
+          "type": "media",
+          "image": {
+            "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-05.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 239917
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "futum-6",
+          "fileKey": "card-06",
+          "type": "grid",
+          "image": null,
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-06-01.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 562397
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-06-02.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 559665
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-06-03.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 561785
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-06-04.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 554338
+              },
+              "productImage": null
+            }
+          ]
+        },
+        {
+          "id": "futum-7",
+          "fileKey": "card-07",
+          "type": "media",
+          "image": {
+            "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-07.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 386272
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "futum-8",
+          "fileKey": "card-08",
+          "type": "grid",
+          "image": null,
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-08-01.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 553923
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-08-02.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 668131
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-08-03.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 853700
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-08-04.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 730823
+              },
+              "productImage": null
+            }
+          ]
+        },
+        {
+          "id": "futum-9",
+          "fileKey": "card-09",
+          "type": "media",
+          "image": {
+            "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-09.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 695770
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "futum-10",
+          "fileKey": "card-10",
+          "type": "grid",
+          "image": null,
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-10-01.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 464911
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-10-02.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 695600
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-10-03.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 469488
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-10-04.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 469861
+              },
+              "productImage": null
+            }
+          ]
+        },
+        {
+          "id": "futum-11",
+          "fileKey": "card-11",
+          "type": "media",
+          "image": {
+            "url": "https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/card-11.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 667110
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        }
+      ],
+      "references": []
     }
   ]
 }
