@@ -1,0 +1,114 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { createRequire } from "node:module";
+import { createClient } from "@libsql/client";
+import { mkdtemp, rm } from "node:fs/promises";
+import { resolve, join } from "node:path";
+import { newStory, newCard } from "../src/brandStoryModel.mjs";
+const require = createRequire(import.meta.url);
+test("isolated stories, revision conflicts, share privacy and designer images preserve customer snapshots", async () => {
+  const tmp = await mkdtemp(resolve(".brandstory-api-")),
+    db = createClient({ url: "file:" + join(tmp, "test.db") });
+  const dbPath = require.resolve("../api/_db.js"),
+    handlerPath = require.resolve("../api/brand-stories.js");
+  const prior = require.cache[dbPath];
+  require.cache[dbPath] = { exports: { getClient: () => db } };
+  delete require.cache[handlerPath];
+  const handler = require(handlerPath);
+  async function request(method, body = {}, query = {}) {
+    const res = {
+      code: 200,
+      setHeader() {},
+      status(c) {
+        this.code = c;
+        return this;
+      },
+      json(b) {
+        this.body = b;
+        return this;
+      },
+    };
+    await handler({ method, body, query }, res);
+    return res;
+  }
+  try {
+    const s = newStory("Test");
+    s.instructions = "PRIVATE";
+    s.cards = [newCard("media")];
+    const created = (await request("POST", { data: s })).body;
+    const other = (await request("POST", { data: s })).body;
+    assert.notEqual(created.id, other.id);
+    const published = (
+      await request("POST", {
+        id: created.id,
+        revision: 1,
+        data: s,
+        publish: true,
+      })
+    ).body;
+    assert(published.designerToken);
+    assert.notEqual(published.designerToken, published.customerToken);
+    assert.equal(
+      (await request("POST", { id: created.id, revision: 1, data: s })).code,
+      409,
+    );
+    const c = await request("GET", {}, { token: published.customerToken });
+    assert(!JSON.stringify(c.body).includes("PRIVATE"));
+    assert(!("instructions" in c.body.data));
+    const d = await request("GET", {}, { token: published.designerToken });
+    assert(!JSON.stringify(d.body).includes("PRIVATE"));
+    const image = {
+        url: "https://example.com/asset.jpg",
+        width: 814,
+        height: 1019,
+        size: 1000,
+      },
+      assets = [{ kind: "media", cardId: s.cards[0].id, image }];
+    assert.equal(
+      (
+        await request(
+          "POST",
+          { assets, revision: 2 },
+          { token: published.customerToken },
+        )
+      ).code,
+      403,
+    );
+    assert.equal(
+      (
+        await request(
+          "POST",
+          { assets, revision: 2 },
+          { token: published.designerToken },
+        )
+      ).code,
+      200,
+    );
+    assert.equal(
+      (await request("GET", {}, { token: published.customerToken })).body.data
+        .cards[0].image,
+      null,
+    );
+    assert.deepEqual(
+      (await request("GET", {}, { id: created.id })).body.data.cards[0].image,
+      image,
+    );
+    assert.equal(
+      (
+        await request(
+          "POST",
+          { assets, revision: 2 },
+          { token: published.designerToken },
+        )
+      ).code,
+      409,
+    );
+    assert.equal((await request("GET", {}, { token: "unknown" })).code, 404);
+  } finally {
+    db.close();
+    delete require.cache[handlerPath];
+    if (prior) require.cache[dbPath] = prior;
+    else delete require.cache[dbPath];
+    await rm(tmp, { recursive: true, force: true });
+  }
+});
