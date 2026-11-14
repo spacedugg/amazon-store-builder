@@ -1,0 +1,1758 @@
+{
+  "source": "https://www.temoa.de/design-beispiele",
+  "capturedAt": "2026-11-14",
+  "stories": [
+    {
+      "schemaVersion": 1,
+      "brandName": "MyPuzzle",
+      "marketplace": "de",
+      "language": "de",
+      "background": {
+        "desktop": {
+          "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/bg-1779542825901-Brand-Story-Title-Image-1-.jpg",
+          "width": 2196,
+          "height": 938,
+          "size": 0
+        },
+        "mobile": null,
+        "brief": "",
+        "copy": ""
+      },
+      "cards": [
+        {
+          "id": "9f23effa-5a48-44b5-bf26-8378907dbb5f-1",
+          "fileKey": "card-01",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/1-bma-2-mpidvc1r.jpg",
+            "width": 996,
+            "height": 1246,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "9f23effa-5a48-44b5-bf26-8378907dbb5f-2",
+          "fileKey": "card-02",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/2-bma-3-mpidvf6y.jpg",
+            "width": 996,
+            "height": 1246,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "9f23effa-5a48-44b5-bf26-8378907dbb5f-3",
+          "fileKey": "card-03",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/3-bma-4-mpidvi6t.jpg",
+            "width": 996,
+            "height": 1246,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "9f23effa-5a48-44b5-bf26-8378907dbb5f-4",
+          "fileKey": "card-04",
+          "type": "grid",
+          "image": null,
+          "headline": "Bestseller Puzzles",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/4-asin-0-cleanshot-2026-05-23-at-10-29-23-2x-mpidyxzl.png",
+                "width": 444,
+                "height": 498,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/4-asin-1-cleanshot-2026-05-23-at-10-29-33-2x-mpidz09c.png",
+                "width": 448,
+                "height": 494,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/4-asin-2-cleanshot-2026-05-23-at-10-29-39-2x-mpidz67p.png",
+                "width": 444,
+                "height": 502,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/4-asin-3-cleanshot-2026-05-23-at-10-29-47-2x-mpidz8vp.png",
+                "width": 448,
+                "height": 486,
+                "size": 0
+              },
+              "productImage": null
+            }
+          ]
+        },
+        {
+          "id": "9f23effa-5a48-44b5-bf26-8378907dbb5f-5",
+          "fileKey": "card-05",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/5-bma-5-mpidzhxc.jpg",
+            "width": 996,
+            "height": 1246,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "9f23effa-5a48-44b5-bf26-8378907dbb5f-6",
+          "fileKey": "card-06",
+          "type": "grid",
+          "image": null,
+          "headline": "Dein Fotopuzzle",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/6-asin-0-fotopuzzles-1-mpie04r0.jpg",
+                "width": 830,
+                "height": 910,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/6-asin-1-fotopuzzles-2-mpie070h.jpg",
+                "width": 830,
+                "height": 910,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/6-asin-2-fotopuzzles-3-mpie09n3.jpg",
+                "width": 830,
+                "height": 910,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/6-asin-3-fotopuzzles-4-mpie0czf.jpg",
+                "width": 830,
+                "height": 910,
+                "size": 0
+              },
+              "productImage": null
+            }
+          ]
+        },
+        {
+          "id": "9f23effa-5a48-44b5-bf26-8378907dbb5f-7",
+          "fileKey": "card-07",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/7-bma-6-mpidzpnq.jpg",
+            "width": 996,
+            "height": 1246,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "9f23effa-5a48-44b5-bf26-8378907dbb5f-8",
+          "fileKey": "card-08",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/8-bma-7-mpidzscr.jpg",
+            "width": 996,
+            "height": 1246,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        }
+      ],
+      "references": []
+    },
+    {
+      "schemaVersion": 1,
+      "brandName": "PROCREA",
+      "marketplace": "de",
+      "language": "de",
+      "background": {
+        "desktop": {
+          "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/bg-1779485632635-Procrea_BrandStory_Background_Desktop.jpg",
+          "width": 3660,
+          "height": 1563,
+          "size": 0
+        },
+        "mobile": null,
+        "brief": "",
+        "copy": ""
+      },
+      "cards": [
+        {
+          "id": "a7d8e718-636d-4f36-80c8-69aed686cf88-1",
+          "fileKey": "card-01",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/1-1-2-mphftab4.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "a7d8e718-636d-4f36-80c8-69aed686cf88-2",
+          "fileKey": "card-02",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/2-2-2-mphftdz0.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "a7d8e718-636d-4f36-80c8-69aed686cf88-3",
+          "fileKey": "card-03",
+          "type": "grid",
+          "image": null,
+          "headline": "Klebstoffe",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/3-asin-0-cleanshot-2026-05-22-at-18-40-14-mphg22jm.png",
+                "width": 149,
+                "height": 197,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/3-asin-1-cleanshot-2026-05-22-at-18-40-01-mphg28lr.png",
+                "width": 150,
+                "height": 197,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/3-asin-2-71hm7z5chjl-sl1500-mphg07tv.jpg",
+                "width": 1500,
+                "height": 1500,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/3-asin-3-cleanshot-2026-05-22-at-18-40-22-mphg2cd4.png",
+                "width": 147,
+                "height": 194,
+                "size": 0
+              },
+              "productImage": null
+            }
+          ]
+        },
+        {
+          "id": "a7d8e718-636d-4f36-80c8-69aed686cf88-4",
+          "fileKey": "card-04",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/4-3-3-mphftp7y.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "a7d8e718-636d-4f36-80c8-69aed686cf88-5",
+          "fileKey": "card-05",
+          "type": "grid",
+          "image": null,
+          "headline": "Dichtstoffe",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/5-asin-0-cleanshot-2026-05-22-at-18-41-56-mphg401r.png",
+                "width": 172,
+                "height": 199,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/5-asin-1-cleanshot-2026-05-22-at-18-42-01-mphg42wu.png",
+                "width": 171,
+                "height": 197,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/5-asin-2-cleanshot-2026-05-22-at-18-42-09-mphg46vy.png",
+                "width": 164,
+                "height": 194,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/5-asin-3-cleanshot-2026-05-22-at-18-42-14-mphg49vt.png",
+                "width": 174,
+                "height": 194,
+                "size": 0
+              },
+              "productImage": null
+            }
+          ]
+        },
+        {
+          "id": "a7d8e718-636d-4f36-80c8-69aed686cf88-6",
+          "fileKey": "card-06",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/6-4-3-mphfu3fv.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "a7d8e718-636d-4f36-80c8-69aed686cf88-7",
+          "fileKey": "card-07",
+          "type": "grid",
+          "image": null,
+          "headline": "2K-Klebstoffe",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/7-asin-0-cleanshot-2026-05-22-at-18-43-00-mphg5ekg.png",
+                "width": 174,
+                "height": 193,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/7-asin-1-cleanshot-2026-05-22-at-18-43-10-mphg5he6.png",
+                "width": 172,
+                "height": 192,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/7-asin-2-cleanshot-2026-05-22-at-18-43-16-mphg5jv9.png",
+                "width": 172,
+                "height": 203,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/7-asin-3-cleanshot-2026-05-22-at-18-43-23-mphg5mgc.png",
+                "width": 167,
+                "height": 197,
+                "size": 0
+              },
+              "productImage": null
+            }
+          ]
+        },
+        {
+          "id": "a7d8e718-636d-4f36-80c8-69aed686cf88-8",
+          "fileKey": "card-08",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/8-5-mphfu7nj.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "a7d8e718-636d-4f36-80c8-69aed686cf88-9",
+          "fileKey": "card-09",
+          "type": "grid",
+          "image": null,
+          "headline": "Mantagemörtel",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/9-asin-0-cleanshot-2026-05-22-at-18-44-06-mphg6tyh.png",
+                "width": 172,
+                "height": 194,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/9-asin-1-cleanshot-2026-05-22-at-18-44-17-mphg6wer.png",
+                "width": 178,
+                "height": 194,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/9-asin-2-cleanshot-2026-05-22-at-18-44-23-mphg6y8v.png",
+                "width": 168,
+                "height": 199,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/9-asin-3-cleanshot-2026-05-22-at-18-44-28-mphg70gs.png",
+                "width": 176,
+                "height": 206,
+                "size": 0
+              },
+              "productImage": null
+            }
+          ]
+        },
+        {
+          "id": "a7d8e718-636d-4f36-80c8-69aed686cf88-10",
+          "fileKey": "card-10",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/10-6-mphfudli.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "a7d8e718-636d-4f36-80c8-69aed686cf88-11",
+          "fileKey": "card-11",
+          "type": "grid",
+          "image": null,
+          "headline": "Sekundenkleber",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/11-asin-0-cleanshot-2026-05-22-at-18-45-05-mphg7xsf.png",
+                "width": 165,
+                "height": 197,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/11-asin-1-cleanshot-2026-05-22-at-18-45-11-mphg7zra.png",
+                "width": 181,
+                "height": 197,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/11-asin-2-cleanshot-2026-05-22-at-18-45-16-mphg821s.png",
+                "width": 161,
+                "height": 195,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/11-asin-3-cleanshot-2026-05-22-at-18-45-21-mphg84oc.png",
+                "width": 165,
+                "height": 197,
+                "size": 0
+              },
+              "productImage": null
+            }
+          ]
+        }
+      ],
+      "references": []
+    },
+    {
+      "schemaVersion": 1,
+      "brandName": "Eglianos",
+      "marketplace": "de",
+      "language": "de",
+      "background": {
+        "desktop": {
+          "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/b2de7c10-84c6-4e9f-98db-373b4615a242/bg-1779542070902-cb13167a-ec46-42cf-871b-4f6414959987.__CR0-0-2562-1094_PT0_SX1464_V1___.jpg",
+          "width": 1464,
+          "height": 625,
+          "size": 0
+        },
+        "mobile": null,
+        "brief": "",
+        "copy": ""
+      },
+      "cards": [
+        {
+          "id": "b2de7c10-84c6-4e9f-98db-373b4615a242-1",
+          "fileKey": "card-01",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/b2de7c10-84c6-4e9f-98db-373b4615a242/1-1-mpidfymw.jpg",
+            "width": 769,
+            "height": 962,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "b2de7c10-84c6-4e9f-98db-373b4615a242-2",
+          "fileKey": "card-02",
+          "type": "grid",
+          "image": null,
+          "headline": "Unser Olivenöl",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/b2de7c10-84c6-4e9f-98db-373b4615a242/2-asin-0-cleanshot-2026-05-23-at-10-13-28-2x-mpidfdf9.png",
+                "width": 588,
+                "height": 646,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/b2de7c10-84c6-4e9f-98db-373b4615a242/2-asin-1-cleanshot-2026-05-23-at-10-13-37-2x-mpidfgww.png",
+                "width": 592,
+                "height": 644,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/b2de7c10-84c6-4e9f-98db-373b4615a242/2-asin-2-cleanshot-2026-05-23-at-10-13-44-2x-mpidfjsu.png",
+                "width": 566,
+                "height": 660,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/b2de7c10-84c6-4e9f-98db-373b4615a242/2-asin-3-cleanshot-2026-05-23-at-10-13-50-2x-mpidfmw6.png",
+                "width": 594,
+                "height": 652,
+                "size": 0
+              },
+              "productImage": null
+            }
+          ]
+        },
+        {
+          "id": "b2de7c10-84c6-4e9f-98db-373b4615a242-3",
+          "fileKey": "card-03",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/b2de7c10-84c6-4e9f-98db-373b4615a242/3-2-mpidfvaa.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "b2de7c10-84c6-4e9f-98db-373b4615a242-4",
+          "fileKey": "card-04",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/b2de7c10-84c6-4e9f-98db-373b4615a242/4-3-mpidg2me.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "b2de7c10-84c6-4e9f-98db-373b4615a242-5",
+          "fileKey": "card-05",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/b2de7c10-84c6-4e9f-98db-373b4615a242/5-4-mpidg5a6.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "b2de7c10-84c6-4e9f-98db-373b4615a242-6",
+          "fileKey": "card-06",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/b2de7c10-84c6-4e9f-98db-373b4615a242/6-5-mpidg85y.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "b2de7c10-84c6-4e9f-98db-373b4615a242-7",
+          "fileKey": "card-07",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/b2de7c10-84c6-4e9f-98db-373b4615a242/7-6-mpidgbfu.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "b2de7c10-84c6-4e9f-98db-373b4615a242-8",
+          "fileKey": "card-08",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/b2de7c10-84c6-4e9f-98db-373b4615a242/8-7-mpidgm17.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "b2de7c10-84c6-4e9f-98db-373b4615a242-9",
+          "fileKey": "card-09",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/b2de7c10-84c6-4e9f-98db-373b4615a242/9-8-mpidgoud.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "b2de7c10-84c6-4e9f-98db-373b4615a242-10",
+          "fileKey": "card-10",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/b2de7c10-84c6-4e9f-98db-373b4615a242/10-9-mpidgrvz.jpg",
+            "width": 769,
+            "height": 962,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "b2de7c10-84c6-4e9f-98db-373b4615a242-11",
+          "fileKey": "card-11",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/b2de7c10-84c6-4e9f-98db-373b4615a242/11-10-mpidguh6.jpg",
+            "width": 769,
+            "height": 963,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        }
+      ],
+      "references": []
+    },
+    {
+      "schemaVersion": 1,
+      "brandName": "OmniRelexx",
+      "marketplace": "de",
+      "language": "de",
+      "background": {
+        "desktop": {
+          "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/7bd78ebc-c286-4401-9ba6-9fe07ed377a0/bg-1779542647010-Hintergrund_Desktop.jpg",
+          "width": 3660,
+          "height": 1563,
+          "size": 0
+        },
+        "mobile": null,
+        "brief": "",
+        "copy": ""
+      },
+      "cards": [
+        {
+          "id": "7bd78ebc-c286-4401-9ba6-9fe07ed377a0-1",
+          "fileKey": "card-01",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/7bd78ebc-c286-4401-9ba6-9fe07ed377a0/1-media-asset-image-1-mpidrwn0.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "7bd78ebc-c286-4401-9ba6-9fe07ed377a0-2",
+          "fileKey": "card-02",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/7bd78ebc-c286-4401-9ba6-9fe07ed377a0/2-media-asset-image-2-mpids0f0.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "7bd78ebc-c286-4401-9ba6-9fe07ed377a0-3",
+          "fileKey": "card-03",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/7bd78ebc-c286-4401-9ba6-9fe07ed377a0/3-media-asset-image-3-mpids2py.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "7bd78ebc-c286-4401-9ba6-9fe07ed377a0-4",
+          "fileKey": "card-04",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/7bd78ebc-c286-4401-9ba6-9fe07ed377a0/4-media-asset-image-4-mpids5sd.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "7bd78ebc-c286-4401-9ba6-9fe07ed377a0-8",
+          "fileKey": "card-05",
+          "type": "grid",
+          "image": null,
+          "headline": "Schlafmasken",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/7bd78ebc-c286-4401-9ba6-9fe07ed377a0/8-asin-0-asin-image-1a-mpidss3a.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/7bd78ebc-c286-4401-9ba6-9fe07ed377a0/8-asin-1-asin-image-1b-mpidsvcn.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/7bd78ebc-c286-4401-9ba6-9fe07ed377a0/8-asin-2-asin-image-1c-mpidsyfv.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/7bd78ebc-c286-4401-9ba6-9fe07ed377a0/8-asin-3-asin-image-1d-mpidt1pm.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 0
+              },
+              "productImage": null
+            }
+          ]
+        },
+        {
+          "id": "7bd78ebc-c286-4401-9ba6-9fe07ed377a0-9",
+          "fileKey": "card-06",
+          "type": "grid",
+          "image": null,
+          "headline": "Kissen",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/7bd78ebc-c286-4401-9ba6-9fe07ed377a0/9-asin-0-asin-image-2a-mpidt5lw.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/7bd78ebc-c286-4401-9ba6-9fe07ed377a0/9-asin-1-asin-image-2b-mpidt89c.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/7bd78ebc-c286-4401-9ba6-9fe07ed377a0/9-asin-2-asin-image-2c-mpidtb5s.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/7bd78ebc-c286-4401-9ba6-9fe07ed377a0/9-asin-3-asin-image-2d-mpidte42.jpg",
+                "width": 1328,
+                "height": 1456,
+                "size": 0
+              },
+              "productImage": null
+            }
+          ]
+        },
+        {
+          "id": "7bd78ebc-c286-4401-9ba6-9fe07ed377a0-5",
+          "fileKey": "card-07",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/7bd78ebc-c286-4401-9ba6-9fe07ed377a0/5-media-asset-image-5-mpids8nd.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "7bd78ebc-c286-4401-9ba6-9fe07ed377a0-6",
+          "fileKey": "card-08",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/7bd78ebc-c286-4401-9ba6-9fe07ed377a0/6-media-asset-image-6-mpidsi9b.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "7bd78ebc-c286-4401-9ba6-9fe07ed377a0-7",
+          "fileKey": "card-09",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/7bd78ebc-c286-4401-9ba6-9fe07ed377a0/7-media-asset-image-7-mpidskpk.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        }
+      ],
+      "references": []
+    },
+    {
+      "schemaVersion": 1,
+      "brandName": "Bachgold",
+      "marketplace": "de",
+      "language": "de",
+      "background": {
+        "desktop": {
+          "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/4e649496-7f47-4949-a45e-703227c95ac4/bg-1779544581616-Brand-Story-Desktop.jpg",
+          "width": 4026,
+          "height": 1719,
+          "size": 0
+        },
+        "mobile": null,
+        "brief": "",
+        "copy": ""
+      },
+      "cards": [
+        {
+          "id": "4e649496-7f47-4949-a45e-703227c95ac4-1",
+          "fileKey": "card-01",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/4e649496-7f47-4949-a45e-703227c95ac4/1-bma-8-mpiexsq7.jpg",
+            "width": 1131,
+            "height": 1415,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "4e649496-7f47-4949-a45e-703227c95ac4-2",
+          "fileKey": "card-02",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/4e649496-7f47-4949-a45e-703227c95ac4/2-bma-1-mpiexygy.jpg",
+            "width": 1131,
+            "height": 1415,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "4e649496-7f47-4949-a45e-703227c95ac4-3",
+          "fileKey": "card-03",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/4e649496-7f47-4949-a45e-703227c95ac4/3-bma-2-mpiey6mt.jpg",
+            "width": 724,
+            "height": 906,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "4e649496-7f47-4949-a45e-703227c95ac4-4",
+          "fileKey": "card-04",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/4e649496-7f47-4949-a45e-703227c95ac4/4-bma-3-mpieyekj.jpg",
+            "width": 724,
+            "height": 906,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "4e649496-7f47-4949-a45e-703227c95ac4-5",
+          "fileKey": "card-05",
+          "type": "grid",
+          "image": null,
+          "headline": "Bestseller",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/4e649496-7f47-4949-a45e-703227c95ac4/5-asin-0-cleanshot-2026-05-23-at-10-54-58-2x-mpieyr3s.png",
+                "width": 394,
+                "height": 434,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/4e649496-7f47-4949-a45e-703227c95ac4/5-asin-1-cleanshot-2026-05-23-at-10-55-13-2x-mpieyu96.png",
+                "width": 404,
+                "height": 434,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/4e649496-7f47-4949-a45e-703227c95ac4/5-asin-2-cleanshot-2026-05-23-at-10-55-21-2x-mpieyx31.png",
+                "width": 384,
+                "height": 464,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/4e649496-7f47-4949-a45e-703227c95ac4/5-asin-3-cleanshot-2026-05-23-at-10-55-39-2x-mpieyzh3.png",
+                "width": 408,
+                "height": 448,
+                "size": 0
+              },
+              "productImage": null
+            }
+          ]
+        },
+        {
+          "id": "4e649496-7f47-4949-a45e-703227c95ac4-6",
+          "fileKey": "card-06",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/4e649496-7f47-4949-a45e-703227c95ac4/6-bma-4-mpiezcb5.jpg",
+            "width": 724,
+            "height": 906,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "4e649496-7f47-4949-a45e-703227c95ac4-7",
+          "fileKey": "card-07",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/4e649496-7f47-4949-a45e-703227c95ac4/7-bma-6-mpiezm6a.jpg",
+            "width": 1131,
+            "height": 1415,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "4e649496-7f47-4949-a45e-703227c95ac4-8",
+          "fileKey": "card-08",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/4e649496-7f47-4949-a45e-703227c95ac4/8-bma-7-mpiezsx7.jpg",
+            "width": 1131,
+            "height": 1415,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "4e649496-7f47-4949-a45e-703227c95ac4-9",
+          "fileKey": "card-09",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/4e649496-7f47-4949-a45e-703227c95ac4/9-bma-9-mpiezvy2.jpg",
+            "width": 1131,
+            "height": 1415,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        }
+      ],
+      "references": []
+    },
+    {
+      "schemaVersion": 1,
+      "brandName": "Sanquell",
+      "marketplace": "de",
+      "language": "de",
+      "background": {
+        "desktop": {
+          "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/bg-1781542467368-BG-Desktop.jpg",
+          "width": 3660,
+          "height": 1563,
+          "size": 0
+        },
+        "mobile": null,
+        "brief": "",
+        "copy": ""
+      },
+      "cards": [
+        {
+          "id": "987b45dd-91dc-4983-8352-38fdf959b80e-1",
+          "fileKey": "card-01",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/1-card-1-mqfgfl0o.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "987b45dd-91dc-4983-8352-38fdf959b80e-2",
+          "fileKey": "card-02",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/2-card-2-mqfgfq47.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "987b45dd-91dc-4983-8352-38fdf959b80e-3",
+          "fileKey": "card-03",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/3-card-6-mqfgg6h7.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "987b45dd-91dc-4983-8352-38fdf959b80e-4",
+          "fileKey": "card-04",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/4-card-3-mqfgggmj.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "987b45dd-91dc-4983-8352-38fdf959b80e-5",
+          "fileKey": "card-05",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/5-card-4-mqfghwh1.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "987b45dd-91dc-4983-8352-38fdf959b80e-6",
+          "fileKey": "card-06",
+          "type": "grid",
+          "image": null,
+          "headline": "Legionellenfilter",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/6-asin-0-safety-chrome-premium-7-cm-mqfh3k0w.jpg",
+                "width": 1080,
+                "height": 1080,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/6-asin-1-safety-chrome-premium-18-cm-mqfh3qny.jpg",
+                "width": 1080,
+                "height": 1080,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/6-asin-2-longlife-mqfh4kx0.jpg",
+                "width": 1080,
+                "height": 1080,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/6-asin-3-4-mqfh4tez.jpg",
+                "width": 1000,
+                "height": 1000,
+                "size": 0
+              },
+              "productImage": null
+            }
+          ]
+        },
+        {
+          "id": "987b45dd-91dc-4983-8352-38fdf959b80e-7",
+          "fileKey": "card-07",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/7-card-8-mqfgifmu.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "987b45dd-91dc-4983-8352-38fdf959b80e-8",
+          "fileKey": "card-08",
+          "type": "grid",
+          "image": null,
+          "headline": "Trinkwasserfilter",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/8-asin-0-3-mqfhacln.jpg",
+                "width": 1000,
+                "height": 1000,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/8-asin-1-4-mqfhdvl1.jpg",
+                "width": 1000,
+                "height": 1000,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/8-asin-2-5-mqfhenzc.jpg",
+                "width": 1000,
+                "height": 1000,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/8-asin-3-1-mqfhg2zm.jpg",
+                "width": 1000,
+                "height": 1000,
+                "size": 0
+              },
+              "productImage": null
+            }
+          ]
+        },
+        {
+          "id": "987b45dd-91dc-4983-8352-38fdf959b80e-9",
+          "fileKey": "card-09",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/9-card-9-mqfgik9o.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "987b45dd-91dc-4983-8352-38fdf959b80e-10",
+          "fileKey": "card-10",
+          "type": "grid",
+          "image": null,
+          "headline": "Wasseralarm",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/10-asin-0-intelligenter-wassermelder-mit-wlan-abschaltung-mqfhgv3z.jpg",
+                "width": 1080,
+                "height": 1080,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/10-asin-1-2-mqfibpbj.jpg",
+                "width": 1080,
+                "height": 1080,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/10-asin-2-3-mqfic084.jpg",
+                "width": 1080,
+                "height": 1080,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/10-asin-3-4-mqfibxph.jpg",
+                "width": 1080,
+                "height": 1080,
+                "size": 0
+              },
+              "productImage": null
+            }
+          ]
+        },
+        {
+          "id": "987b45dd-91dc-4983-8352-38fdf959b80e-11",
+          "fileKey": "card-11",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/11-card-10-mqfgiq38.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "987b45dd-91dc-4983-8352-38fdf959b80e-12",
+          "fileKey": "card-12",
+          "type": "grid",
+          "image": null,
+          "headline": "Wunddusche",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/12-asin-0-row-1-column-1-mqfhle29.jpg",
+                "width": 540,
+                "height": 540,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/12-asin-1-row-1-column-2-mqfhlhz4.jpg",
+                "width": 540,
+                "height": 540,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/12-asin-2-row-2-column-1-mqfhll48.jpg",
+                "width": 540,
+                "height": 540,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/12-asin-3-row-2-column-2-mqfhlp3h.jpg",
+                "width": 540,
+                "height": 540,
+                "size": 0
+              },
+              "productImage": null
+            }
+          ]
+        },
+        {
+          "id": "987b45dd-91dc-4983-8352-38fdf959b80e-13",
+          "fileKey": "card-13",
+          "type": "media",
+          "image": {
+            "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/13-card-7-1-mqfgj2dr.jpg",
+            "width": 814,
+            "height": 1019,
+            "size": 0
+          },
+          "headline": "",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": []
+        },
+        {
+          "id": "987b45dd-91dc-4983-8352-38fdf959b80e-14",
+          "fileKey": "card-14",
+          "type": "grid",
+          "image": null,
+          "headline": "Ersatzfilter",
+          "brief": "",
+          "copy": "",
+          "shopUrl": "",
+          "slots": [
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/14-asin-0-safety-chrom-premium-ersatzfilter-mqfho4vv.jpg",
+                "width": 1080,
+                "height": 1080,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/14-asin-1-safety-chrom-ersatzfilter-mqfhomwh.jpg",
+                "width": 1080,
+                "height": 1080,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/14-asin-2-longlife-ersatzfilter-mqfhoqft.jpg",
+                "width": 1080,
+                "height": 1080,
+                "size": 0
+              },
+              "productImage": null
+            },
+            {
+              "asin": "",
+              "url": "",
+              "image": {
+                "url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/987b45dd-91dc-4983-8352-38fdf959b80e/14-asin-3-superpure-mqfhov16.jpg",
+                "width": 1080,
+                "height": 1080,
+                "size": 0
+              },
+              "productImage": null
+            }
+          ]
+        }
+      ],
+      "references": []
+    }
+  ]
+}

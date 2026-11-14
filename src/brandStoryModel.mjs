@@ -142,6 +142,12 @@ export function validateStory(s) {
     throw Error("Marktplatz ungültig.");
   if (!s.background || !Array.isArray(s.cards) || s.cards.length > 19)
     throw Error("Hintergrund und maximal 19 Karten erforderlich.");
+  if ('mobileCards' in s || 'desktopCards' in s)
+    throw Error('Desktop und Mobil verwenden eine gemeinsame Kartenliste.');
+  if (s.context && (typeof s.context !== 'object' || Array.isArray(s.context) || Object.values(s.context).some(v => typeof v !== 'string')))
+    throw Error('Markeninformationen müssen Text enthalten.');
+  if (!['desktopBrief', 'mobileBrief', 'desktopCopy', 'mobileCopy'].every(k => text(s.background[k])))
+    throw Error('Hintergrundbeschreibungen müssen Text enthalten.');
   if (
     !["language", "instructions", "brandFacts"].every((k) => text(s[k])) ||
     !["brief", "copy"].every((k) => text(s.background[k]))
@@ -170,7 +176,7 @@ export function validateStory(s) {
     ids.add(c.id);
     keys.add(c.fileKey);
     if (
-      !["headline", "brief", "copy", "shopUrl", "assetFile"].every((k) =>
+      !["title", "headline", "brief", "copy", "shopUrl", "assetFile"].every((k) =>
         text(c[k]),
       ) ||
       !image(c.image)
@@ -232,11 +238,15 @@ export function customerStory(s) {
     cards: s.cards.map((c) => ({
       id: c.id,
       type: c.type,
+      fileKey: c.fileKey,
+      assetFile: c.assetFile,
+      copy: c.copy,
       image: c.image,
       headline: c.headline,
       shopUrl: safeUrl(c.shopUrl),
       slots: (c.slots || []).map((slot) => ({
         asin: slot.asin,
+        assetFile: slot.assetFile,
         url: productUrl(slot, s.marketplace),
         image: slot.image,
         productImage: slot.productImage,
@@ -244,15 +254,7 @@ export function customerStory(s) {
     })),
   };
 }
-export const DESIGN_RULES = `Create an Amazon Brand Story using image cards and four-product grids only. Desktop background: 3660 × 1563 px. Mobile background: 1389 × 1875 px. Image cards: 814 × 1019 px. Each grid image: 1328 × 1456 px. JPG/PNG, maximum 2 MB per file.
-A media card may match the background color and contain only a logo and hashtag. It remains a real card that scrolls. Background logos may be intentionally covered in earlier states and revealed in the final state when fewer cards remain. Four grid images may form one composite picture, with the same ASIN or destination repeated in all four slots; distinct products are not required. Design the four quadrants top-left, top-right, bottom-left, bottom-right while accounting for the visible grid gutters.
-Delivery folders: Hintergrund (Hintergrund_Desktop.jpg, Hintergrund_Mobile.jpg), Brand Media Assets (media asset image N.jpg), ASIN Grids (ASIN image Na.jpg through Nd.jpg), Preview Neu (Preview_01.jpg and subsequent carousel states). Set assetFile on cards and slots to the intended delivery path and preserve these paths when reordering. Previews are review files, not card images.
-The background is stationary. Desktop starts with a free area on the left, two full cards and a partial third. Subsequent views advance three card positions. Plan the left motif inside the area covered by a card after advancing, or intentionally let a larger photographic motif remain partly visible. Review all carousel states. Mobile has no introductory free area. Essential claims and trust factors belong on cards; avoid duplicate background and card copy.
-Embed all card copy in designed images except the grid headline (maximum 30 characters) and the fixed Shop besuchen link. Every grid has four independently linked slots, each with a product image or custom designed image. Product target and displayed image are independent. Do not use About Brand or Questions modules.
-Customer-facing copy uses the selected marketplace language. Designer briefs must be English. Do not invent claims, ASINs, certifications or brand history. Brand-wide USPs must apply across the portfolio. Never promote shipping or delivery as brand benefits. Do not use en/em dashes in customer copy. Use other brands only as structural references, never copy their claims, branding or specific designs.`;
-export function claudePrompt(s) {
-  return `${DESIGN_RULES}\n\nBrand: ${s.brandName}\nLanguage: ${s.language}\nVerified brand facts:\n${s.brandFacts}\nInternal instructions:\n${s.instructions}\n\nReturn a complete JSON object following the supplied schema. Card schemas: {"id":"unique-id","fileKey":"card-01","type":"media","brief":"English composition instructions","copy":"Exact customer-facing copy","image":null,"slots":[]} or {"id":"unique-id","fileKey":"card-02","type":"grid","headline":"Grid headline","brief":"English brief","copy":"","shopUrl":"https://www.amazon.de/stores/...","slots":[{"asin":"","url":"","image":null,"productImage":null},{"asin":"","url":"","image":null,"productImage":null},{"asin":"","url":"","image":null,"productImage":null},{"asin":"","url":"","image":null,"productImage":null}]}. Preserve existing IDs, fileKey values and image objects. Add new cards with unique IDs and unused card-NN fileKey values. Use brief for English designer directions and copy for exact on-image text. Keep the story understandable using cards alone. Ask for missing factual sources before producing final copy.\n\n${JSON.stringify(s, null, 2)}`;
-}
+export { DESIGN_RULES, claudePrompt } from './brandStoryPrompt.mjs';
 
 export function resolveUploadTarget(story, path) {
   const normalized = path

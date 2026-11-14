@@ -44,7 +44,8 @@ test("editor cards move over a stationary background, mobile changes step, instr
     story,
   );
   await page.goto("/brand-stories");
-  await expect(page.getByRole("heading", { name: "Story-Test" })).toBeVisible();
+  await page.getByRole("button", { name: "Letzten Entwurf fortsetzen" }).click();
+  await expect(page.getByRole("heading", { name: "Story-Test", exact: true }).first()).toBeVisible();
   const bg = page.locator(".bs-backdrop");
   const relativeBox = () =>
     bg.evaluate((el) => {
@@ -63,18 +64,18 @@ test("editor cards move over a stationary background, mobile changes step, instr
   await page.locator(".bs-carousel").focus();
   await page.keyboard.press("ArrowRight");
   await expect(page.locator(".bs-counter")).toHaveText("2 / 7");
-  await page.getByRole("button", { name: "＋ ASIN-Grid" }).click();
+  await page.getByRole("button", { name: "Karte hinzufügen", exact: true }).click();
+  await page.getByRole("button", { name: "ASIN-Grid", exact: true }).click();
   await expect(
     page.getByLabel("Grid-Überschrift", { exact: true }),
   ).toBeVisible();
   await page.getByLabel("Grid-Überschrift", { exact: true }).fill("Produkte");
-  for(let i=0;i<7;i++) await page.getByRole('button',{name:'Nächste Karten'}).click();
   await expect(page.locator('.bs-counter')).toHaveText('8 / 8');
   await expect(page.getByText("Produkte", { exact: true })).toBeVisible();
-  await page.getByRole("button", { name: "JSON-Import", exact: true }).click();
+  await page.getByRole("button", { name: "Konzept mit Claude", exact: true }).click();
   await expect(page.getByLabel("Brand Story JSON")).toBeVisible();
   await page.screenshot({
-    path: "tests/brand-story-editor.png",
+    path: "test-results/brand-story-editor.png",
     fullPage: true,
   });
 });
