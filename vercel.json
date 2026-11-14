@@ -45,6 +45,9 @@
     "api/crawl-store-nav.js": {
       "maxDuration": 60
     },
+    "api/brand-story-discover.js": {
+      "maxDuration": 60
+    },
     "api/analyze-store-page.js": {
       "maxDuration": 60
     },

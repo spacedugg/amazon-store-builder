@@ -27,7 +27,7 @@ export function backgroundBrief(s, kind) {
 }
 
 export function designerStory(s) {
-  const { context, instructions, brandFacts, ...visible } = s;
+  const { context, instructions, brandFacts, planning, ...visible } = s;
   return visible;
 }
 
@@ -60,6 +60,7 @@ export function prepareStoryImport(text, current, projectIdentity = current) {
     next.context = { ...normalizeStory(current).context, ...raw.context };
     next.brandFacts = raw.brandFacts ?? current.brandFacts ?? '';
     next.instructions = raw.instructions ?? current.instructions ?? '';
+    next.planning = raw.planning ?? current.planning;
     for (const kind of ['desktop', 'mobile']) next.background[kind] ||= current.background[kind];
     next.references = raw.references ?? current.references ?? [];
     for (const c of next.cards) {

@@ -1,7 +1,7 @@
 import React from 'react';
-export default function StoryOverview({ stories, loading, error, hasDraft, onResume, onOpen, onNew, busy }) {
+export default function StoryOverview({ stories, loading, error, hasDraft, onResume, onOpen, onNew, onExamples, onSkillSetup, busy }) {
   return <div className="store-home bs-overview">
-    <header className="store-home-header"><div><div className="store-home-eyebrow">Brand Story Builder</div><h1>Deine Brand Stories</h1><p>Markengeschichten planen, gestalten und freigeben.</p></div><button className="store-home-create" disabled={busy} onClick={onNew}>Neue Brand Story</button></header>
+    <header className="store-home-header"><div><div className="store-home-eyebrow">Brand Story Builder</div><h1>Deine Brand Stories</h1><p>Markengeschichten planen, gestalten und freigeben.</p></div><div className="bs-overview-actions"><button className="store-home-create" disabled={busy} onClick={onNew}>Neue Brand Story</button><button className="bs-overview-examples" onClick={onExamples}>Beispiele</button><button className="bs-setup-link" onClick={onSkillSetup}>Claude einmalig einrichten</button></div></header>
     <main className="store-home-main">
       <div className="store-home-section"><div><h2>Gespeicherte Brand Stories</h2><p>{loading ? 'Wird geladen …' : `${stories.length} ${stories.length === 1 ? 'Brand Story' : 'Brand Stories'}`}</p></div>
         {hasDraft && <button className="btn" disabled={busy} onClick={onResume}>Letzten Entwurf fortsetzen</button>}</div>

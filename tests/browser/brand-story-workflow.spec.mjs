@@ -58,7 +58,7 @@ test('Claude import is reviewed before adoption and background descriptions rema
   await page.getByRole('button', { name: 'Neue Brand Story', exact: true }).first().click();
   await expect(page.getByRole('dialog')).toBeVisible();
   await page.getByLabel('Markenname', { exact: true }).fill('Markenstudio');
-  await page.getByLabel('Zielgruppe', { exact: true }).fill('Erholung auf Reisen');
+  await page.getByRole('button', { name: 'Vorhandenes JSON importieren', exact: true }).click();
   await page.getByLabel('Brand Story JSON', { exact: true }).fill(JSON.stringify(s));
   await page.getByRole('button', { name: 'JSON prüfen', exact: true }).click();
   await expect(page.locator('.bs-import-review')).toContainText('7 Karten');
@@ -128,7 +128,9 @@ test('renaming context before importing another brand creates a new record inste
   });
   await page.getByRole('button', { name: 'Markenstudio öffnen' }).click();
   await page.getByRole('button', { name: 'Konzept mit Claude', exact: true }).click();
+  await page.getByRole('button', { name: '← Marke und Auswahl bearbeiten', exact: true }).click();
   await page.getByLabel('Markenname', { exact: true }).fill('Andere Marke');
+  await page.getByRole('button', { name: 'Weiter zu Claude', exact: true }).click();
   const incoming = fixture(); incoming.brandName = 'Andere Marke';
   await page.getByLabel('Brand Story JSON', { exact: true }).fill(JSON.stringify(incoming));
   await page.getByRole('button', { name: 'JSON prüfen', exact: true }).click();
@@ -148,4 +150,86 @@ test('overview is the entry point and saved stories are large project tiles, not
   await expect(page.locator('.bs-carousel')).toBeVisible();
   await expect(page.getByRole('button', { name: 'Alle Brand Stories' })).toBeVisible();
   for (const name of ['Anweisungen & Claude', 'JSON-Import', 'Editor']) await expect(page.getByRole('button', { name, exact: true })).toHaveCount(0);
+});
+
+test('Store-first discovery reviews categories, recovers a failed page, and copies only the skill invocation and project', async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read','clipboard-write']);
+  await setup(page);
+  const storeUrl='https://www.amazon.de/stores/Markenstudio';
+  const one=storeUrl+'/page/11111111-1111-1111-1111-111111111111';
+  const two=storeUrl+'/page/22222222-2222-2222-2222-222222222222';
+  let retry=false;
+  await page.route('**/api/brand-story-discover',route=>{
+    const input=route.request().postDataJSON();
+    if(!input.pageUrl) return route.fulfill({json:{storeUrl,brandName:'Markenstudio',marketplace:'de',warnings:[],pages:[
+      {url:storeUrl,name:'Startseite',asins:[],status:'loaded'},
+      {url:one,name:'Tapeten',asins:[],status:'pending'},
+      {url:two,name:'Teppiche',asins:[],status:'pending'},
+    ]}});
+    const fail=input.pageUrl===two&&!retry; if(input.pageUrl===two)retry=true;
+    return route.fulfill({json:{storeUrl,marketplace:'de',warnings:[],pages:[{url:input.pageUrl,name:input.pageUrl===one?'Tapeten':'Teppiche',asins:fail?[]:['B012345678','B000000001','B000000002','B000000003'],status:fail?'error':'loaded',error:fail?'Seite vorübergehend blockiert':''}]}});
+  });
+  await page.getByRole('button',{name:'Neue Brand Story',exact:true}).first().click();
+  await expect(page.getByLabel('Zielgruppe',{exact:true})).toHaveCount(0);
+  await expect(page.getByRole('link',{name:/Skill herunterladen/})).toHaveCount(0);
+  await page.getByLabel('Amazon Brand Store-Link',{exact:true}).fill(storeUrl);
+  await page.getByRole('button',{name:'Store auslesen',exact:true}).click();
+  await expect(page.getByLabel('Markenname',{exact:true})).toHaveValue('Markenstudio');
+  await expect(page.getByLabel('Tapeten aufnehmen',{exact:true})).toBeChecked();
+  await expect(page.getByLabel('Startseite aufnehmen',{exact:true})).not.toBeChecked();
+  await page.getByRole('button',{name:'Produkte der Auswahl laden',exact:true}).click();
+  await expect(page.getByLabel('Produkt-ASINs Tapeten',{exact:true})).toHaveValue('B012345678, B000000001, B000000002, B000000003');
+  await expect(page.getByRole('status')).toContainText('1 Unterseiten');
+  await page.locator('.bs-category-row').filter({has:page.getByLabel('Teppiche aufnehmen',{exact:true})}).getByRole('button',{name:'Produkte lesen / erneut versuchen',exact:true}).click();
+  await expect(page.getByLabel('Produkt-ASINs Teppiche',{exact:true})).toHaveValue('B012345678, B000000001, B000000002, B000000003');
+  await page.getByLabel('Schwerpunkt der Story',{exact:true}).selectOption('hero');
+  await page.getByText('Produkte besonders hervorheben (optional)',{exact:true}).click();
+  await page.getByLabel('Fokus-ASIN',{exact:true}).fill('B012345678');
+  await page.getByRole('button',{name:'Produkt aufnehmen',exact:true}).click();
+  await page.getByLabel('Auswahlgrund B012345678',{exact:true}).selectOption('bestseller');
+  await page.getByLabel('Hinweis B012345678',{exact:true}).fill('Redaktionelle Auswahl des Kunden, kein gemessener Rang');
+  await page.screenshot({path:'test-results/brand-story-store-first.png',fullPage:true});
+  await page.getByRole('button',{name:'Weiter zu Claude',exact:true}).click();
+  await page.getByRole('button',{name:'Auftrag für Claude kopieren',exact:true}).click();
+  const prompt=await page.evaluate(()=>navigator.clipboard.readText());
+  expect(prompt).toContain('temoa-brand-story'); expect(prompt).toContain(one); expect(prompt).toContain('B012345678');
+  expect(prompt).not.toContain('$schema');
+  const data=JSON.parse(prompt.slice(prompt.indexOf('{')));
+  expect(data.planning.goal).toBe('hero'); expect(data.planning.focusProducts).toHaveLength(1);
+  expect(data.planning.categories.find(c=>c.name==='Tapeten').asins).toHaveLength(4);
+  await page.getByRole('button',{name:'← Marke und Auswahl bearbeiten',exact:true}).click();
+  await page.getByRole('button',{name:'Kategorie-Grids als Layout öffnen',exact:true}).click();
+  await expect(page.locator('.bs-card')).toHaveCount(2);
+  await expect(page.locator('.bs-grid-footer').first()).toHaveAttribute('href',one);
+  await expect(page.locator('.bs-grid a').first()).toHaveAttribute('href','https://www.amazon.de/dp/B012345678');
+});
+
+test('manual route opens an empty shared preview and organization setup is separate from project creation', async ({ page }) => {
+  await setup(page);
+  await page.getByRole('button',{name:'Claude einmalig einrichten',exact:true}).click();
+  await expect(page.getByRole('link',{name:'Organisations-Skill herunterladen',exact:true})).toHaveAttribute('href','/brand-story-claude/temoa-brand-story.zip');
+  await page.getByRole('button',{name:'Dialog schließen',exact:true}).click();
+  await page.getByRole('button',{name:'Neue Brand Story',exact:true}).first().click();
+  await page.getByRole('button',{name:'Manuell starten',exact:true}).click();
+  await page.getByLabel('Markenname',{exact:true}).fill('Manuelle Marke');
+  await page.getByRole('button',{name:'Layout manuell öffnen',exact:true}).click();
+  await expect(page.locator('.bs-carousel')).toBeVisible();
+  await expect(page.locator('.bs-card')).toHaveCount(0);
+  await page.getByRole('button',{name:'Karte hinzufügen',exact:true}).first().click();
+  await page.getByRole('button',{name:'Brand Media Asset',exact:true}).click();
+  await page.getByRole('button',{name:'Mobil',exact:true}).click();
+  await expect(page.locator('.bs-card')).toHaveCount(1);
+  await page.screenshot({path:'test-results/brand-story-manual.png',fullPage:true});
+});
+
+test('overview examples show all stories as full-width interactive rows without loading a project', async ({page})=>{
+  await setup(page);
+  await page.getByRole('button',{name:'Beispiele',exact:true}).click();
+  const articles=page.locator('.bs-reference-list article');
+  await expect(articles).toHaveCount(6);
+  const first=await articles.nth(0).boundingBox(), second=await articles.nth(1).boundingBox();
+  expect(second.y).toBeGreaterThan(first.y+first.height);
+  await articles.first().getByRole('button',{name:'Nächste Karten',exact:true}).click();
+  await expect(articles.first().locator('.bs-counter')).toHaveText('2 / 3');
+  await page.screenshot({path:'test-results/brand-story-examples.png',fullPage:true});
 });

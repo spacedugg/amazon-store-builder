@@ -1,0 +1,1421 @@
+{
+  "date": "2026-11-14",
+  "status": "Research only; not yet integrated into the Claude skill or application",
+  "source": "https://www.temoa.de/design-beispiele",
+  "method": "Visual inspection of all 62 cards in six supplied reference sets, with selected originals inspected for small text and grid compositions. Editorial assessment, not performance testing.",
+  "limitations": [
+    "No sales or conversion data",
+    "Reference metadata does not establish ASIN or category link destinations",
+    "Very small packaging text not fully transcribed",
+    "Visible claims and seals are observations, not verified facts",
+    "Photographic provenance and authenticity cannot be established from visuals"
+  ],
+  "totals": {
+    "stories": 6,
+    "cards": 62,
+    "media": 46,
+    "grids": 16
+  },
+  "derived_rules": [
+    "Choose an explicit function for each card: identity, origin, category introduction, product choice, application, proof, hero or closure. Remove repetitive cards.",
+    "For broad assortments, category-in-use or category-hero followed by its matching grid is a useful pattern, not a mandatory pair for every category.",
+    "Use one short specific brand opening, authentic supplied people or places, and relevant cross-sell. The supplied best-practice slide is a heuristic, not proof of uplift.",
+    "Each grid can be assortment, variants/bundles, one-product mosaic or hybrid benefit composition. Four image slots do not establish four products.",
+    "Category footer targets and individual product targets are distinct facts. Do not infer them from image headings.",
+    "Best sellers require an explicit source, marketplace, period and metric or a user-curated selection. Public placement alone is insufficient.",
+    "Plan one shared card sequence for desktop and mobile, and separate background compositions. Ensure cards make sense one at a time on mobile.",
+    "Never transplant another brand’s claims, founder details, certifications, numerical results or imagery provenance.",
+    "Use a maximum of 19 cards as a budget, not a target."
+  ],
+  "brands": [
+    {
+      "brand": "MyPuzzle",
+      "counts": {
+        "total_cards": 8,
+        "media_cards": 6,
+        "grid_cards": 2,
+        "grid_cells": 8,
+        "desktop_backgrounds": 1
+      },
+      "order": "M M M G M G M M",
+      "desktop_background": "Cream field, upper-left puzzle-piece logo and mypuzzle.com wordmark, lower-left invitation to discover a world of puzzles. Open right field accommodates the carousel; not a missing card.",
+      "visual_system": "Cream/red identity with black/white type. Puzzle shapes, heart, arrows, family/lifestyle photography, gift and provenance motifs. Emotional rather than technical.",
+      "cards": [
+        {
+          "position": 1,
+          "type": "media",
+          "text_paraphrase": "Claims several thousand puzzle designs.",
+          "function": "Introduce assortment breadth and shared enjoyment.",
+          "image_subject": "Several hands assembling a puzzle on a table; red lower caption.",
+          "assessment": "Concise, quantified breadth; no catalog count/source shown. Scene illustrates activity, not assortment size."
+        },
+        {
+          "position": 2,
+          "type": "media",
+          "text_paraphrase": "Claims quality tested millions of times and more than 25 years of experience.",
+          "function": "Provide quality/experience reassurance.",
+          "image_subject": "Red puzzle-piece heart and loose piece under burgundy text panel.",
+          "assessment": "Clear number hierarchy; exact-looking years/scale but no dates, testing definition or supporting evidence. Heart illustrates affection, not measurable puzzle quality."
+        },
+        {
+          "position": 3,
+          "type": "media",
+          "text_paraphrase": "Bestseller label and rightward arrow.",
+          "function": "Direct into the following grid.",
+          "image_subject": "Oversized two-line red heading; blurred colored puzzle pieces.",
+          "assessment": "Exceptionally clear bridge to card 4 with very few words. Uses a full card for navigation and gives no selection rationale. Bestseller is observed editorial wording, not verified rank."
+        },
+        {
+          "position": 4,
+          "type": "grid",
+          "text_paraphrase": "Bestseller-category heading and store-visit CTA.",
+          "function": "Offer a curated motif selection.",
+          "image_subject": "Four separate motif images.",
+          "assessment": "Direct continuation of card 3. Strong motif diversity but uneven compositions, no piece counts or difficulty criteria. First tile is personalization-oriented, so not exclusively a fixed scenic-motif taxonomy. Destinations/ASINs unknown.",
+          "grid_cells_reading_order": [
+            "Fruit-decorated white cake/photo motif with customizable-picture placeholder and small pack mockup.",
+            "Botanical flower-and-plant illustration collage.",
+            "Vintage café/coffee ephemera collage.",
+            "Hamburg Elbphilharmonie waterfront at dusk."
+          ]
+        },
+        {
+          "position": 5,
+          "type": "media",
+          "text_paraphrase": "Invites the shopper to design a personal puzzle and positions it as a gift.",
+          "function": "Introduce personalization plus occasion before grid 6.",
+          "image_subject": "Family selfie in smartphone outline, gift icon, red arrow right.",
+          "assessment": "Clear action plus benefit, low reading burden. Phone suggests photo selection without explaining process or proving speed/ease. Strong bridge into card 6."
+        },
+        {
+          "position": 6,
+          "type": "grid",
+          "text_paraphrase": "Personal photo-puzzle category and store-visit CTA.",
+          "function": "Show the emotional finished result and enable category entry.",
+          "image_subject": "A framed woman-and-dog photo puzzle split across all four grid cells.",
+          "assessment": "Completes card 5. Four slots form one mosaic, not four visibly distinct products. Seams cross face and dog, reducing image continuity. Do not infer four variants or identical link targets.",
+          "grid_cells_reading_order": [
+            "Upper-left quarter of one framed woman-and-dog puzzle.",
+            "Upper-right quarter of the same composition.",
+            "Lower-left quarter of the same composition.",
+            "Lower-right quarter of the same composition."
+          ]
+        },
+        {
+          "position": 7,
+          "type": "media",
+          "text_paraphrase": "States German printing and that every puzzle comes from southern Germany.",
+          "function": "Add regional provenance reassurance.",
+          "image_subject": "Dotted red Germany map, German flag corner, black copy.",
+          "assessment": "Short and geographically specific; no town/factory/process evidence. Printed-in must not be expanded into full material sourcing or all-stage manufacturing. End trust card with no matching grid."
+        },
+        {
+          "position": 8,
+          "type": "media",
+          "text_paraphrase": "Says production uses climate-friendly electricity and supports climate-protection projects; includes ClimatePartner branding.",
+          "function": "Add environmental reassurance.",
+          "image_subject": "Aerial forest with white partner mark and copy.",
+          "assessment": "Named partner is a more specific cue than forest imagery alone, but no project, ID, electricity scope/mix or dates shown. Forest is symbolic, not proof of brand forestry activity. No matching grid."
+        }
+      ],
+      "strengths": [
+        "One clear job per card; short principal copy.",
+        "Two explicit directional signposts lead directly to the relevant shopping grid.",
+        "Combines assortment, gift/personalization, emotion and trust cues in a coherent cream/red identity."
+      ],
+      "weaknesses": [
+        "Quality, scale, age, provenance and climate claims are assertions in the assets; verification absent.",
+        "Bestseller selection lacks criteria, difficulty and piece-count guidance.",
+        "Four-cell personalized mosaic does not explain four shopping options.",
+        "Final trust cards are not paired with category grids."
+      ],
+      "transferable_patterns": [
+        "Build a deliberate signpost → matching-grid pair.",
+        "Show a finished personalized result after the personalization invitation.",
+        "Attach a gift occasion to a suitable product use case.",
+        "Use one principal point and strong visual hierarchy per card.",
+        "Use four-slot mosaics deliberately, checking seam placement and actual link behavior.",
+        "Never transfer another brand’s scale, age, location, partner or environmental claims."
+      ],
+      "inspection": {
+        "all_cards_visually_inspected": true,
+        "method": "Both contact sheets, each grid render individually, desktop backdrop; PROCREA media originals for detailed packaging copy."
+      },
+      "readability_limits": [
+        "All principal editorial text and grid category headings readable.",
+        "Small package lines and conditions are not all legible, some are obscured; no exhaustive pack transcription attempted."
+      ],
+      "evidence_limits": [
+        "No sales/conversion performance, verified bestseller rank, destination ASINs or live link behavior established.",
+        "Brand and packaging claims are observed source statements, not independently verified."
+      ],
+      "source_manifest": "/workspace/scratch/fda9e1e4fb6f/story-audit/mypuzzle/manifest.json",
+      "source_assets": [
+        {
+          "position": 1,
+          "type": "media",
+          "heading": "",
+          "image_url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/1-bma-2-mpidvc1r.jpg",
+          "grid_image_urls": []
+        },
+        {
+          "position": 2,
+          "type": "media",
+          "heading": "",
+          "image_url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/2-bma-3-mpidvf6y.jpg",
+          "grid_image_urls": []
+        },
+        {
+          "position": 3,
+          "type": "media",
+          "heading": "",
+          "image_url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/3-bma-4-mpidvi6t.jpg",
+          "grid_image_urls": []
+        },
+        {
+          "position": 4,
+          "type": "grid",
+          "heading": "Bestseller Puzzles",
+          "image_url": "",
+          "grid_image_urls": [
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/4-asin-0-cleanshot-2026-05-23-at-10-29-23-2x-mpidyxzl.png",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/4-asin-1-cleanshot-2026-05-23-at-10-29-33-2x-mpidz09c.png",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/4-asin-2-cleanshot-2026-05-23-at-10-29-39-2x-mpidz67p.png",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/4-asin-3-cleanshot-2026-05-23-at-10-29-47-2x-mpidz8vp.png"
+          ]
+        },
+        {
+          "position": 5,
+          "type": "media",
+          "heading": "",
+          "image_url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/5-bma-5-mpidzhxc.jpg",
+          "grid_image_urls": []
+        },
+        {
+          "position": 6,
+          "type": "grid",
+          "heading": "Dein Fotopuzzle",
+          "image_url": "",
+          "grid_image_urls": [
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/6-asin-0-fotopuzzles-1-mpie04r0.jpg",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/6-asin-1-fotopuzzles-2-mpie070h.jpg",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/6-asin-2-fotopuzzles-3-mpie09n3.jpg",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/6-asin-3-fotopuzzles-4-mpie0czf.jpg"
+          ]
+        },
+        {
+          "position": 7,
+          "type": "media",
+          "heading": "",
+          "image_url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/7-bma-6-mpidzpnq.jpg",
+          "grid_image_urls": []
+        },
+        {
+          "position": 8,
+          "type": "media",
+          "heading": "",
+          "image_url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/9f23effa-5a48-44b5-bf26-8378907dbb5f/8-bma-7-mpidzscr.jpg",
+          "grid_image_urls": []
+        }
+      ]
+    },
+    {
+      "brand": "PROCREA",
+      "counts": {
+        "total_cards": 11,
+        "media_cards": 6,
+        "grid_cards": 5,
+        "grid_cells": 20,
+        "desktop_backgrounds": 1
+      },
+      "order": "M M G M G M G M G M G",
+      "desktop_background": "Worker portrait at left: blue hard hat, glasses, dark shirt with PROCREA chest logo; charcoal open field to right. Trade context rather than proof of professional endorsement.",
+      "visual_system": "Dark gradient category heroes with large packs and rough condensed uppercase white titles along the bottom. White 2x2 grids and pack color accents alternate with the dark cards. Opening work scene supplies practical context.",
+      "cards": [
+        {
+          "position": 1,
+          "type": "media",
+          "text_paraphrase": "General promise of strong materials for strong projects.",
+          "function": "Introduce brand/project positioning.",
+          "image_subject": "Close-up of worker using caulking gun, upper-left logo, oversized white title.",
+          "assessment": "Readable and brief; generic strength positioning without evidence or specific material/application example. Work image suggests use but does not demonstrate a measured bond."
+        },
+        {
+          "position": 2,
+          "type": "media",
+          "text_paraphrase": "Adhesives category; featured acrylic mounting adhesive pack carries a 130 kg/m² claim and fast-drying/strong-adhesion wording.",
+          "function": "Introduce adhesive range.",
+          "image_subject": "Glue Max mounting-adhesive cartridge and nozzle on dark gradient.",
+          "assessment": "Only category is editorial headline; specifics are pack copy. Numeric claim lacks visible testing conditions. Lower label loses contrast and is overlapped by headline. Immediate category match to grid 3, but hero pack design differs from grid packs."
+        },
+        {
+          "position": 3,
+          "type": "grid",
+          "text_paraphrase": "Adhesives category and store-visit CTA.",
+          "function": "Present adhesive subtypes/pack choices.",
+          "image_subject": "Mounting-adhesive multipacks, contact adhesive tin, foil adhesive multipack.",
+          "assessment": "Follows hero 2. Broad assortment is evident, but mixes function and pack-size logic; criteria stay implicit in small labels. No targets established.",
+          "grid_cells_reading_order": [
+            "Orange-accent mounting adhesive marked 80, six-pack.",
+            "Teal-accent mounting adhesive marked 50, six-pack.",
+            "Contact-repair adhesive tin with cap brush, red accent.",
+            "Blue-accent construction foil adhesive, six-pack."
+          ]
+        },
+        {
+          "position": 4,
+          "type": "media",
+          "text_paraphrase": "Sealants category; premium neutral-silicone pack uses low-odor, universal-use and smoothing-related language.",
+          "function": "Introduce sealants.",
+          "image_subject": "Seal Max cartridge and nozzle with blue accent.",
+          "assessment": "Specific silicone category, brief title; 125 is a pack designation without explained performance meaning. Lower label is dark and partly covered. Grid 5 matches category but different line designs."
+        },
+        {
+          "position": 5,
+          "type": "grid",
+          "text_paraphrase": "Sealants category and store-visit CTA.",
+          "function": "Separate application/type and pack quantity.",
+          "image_subject": "Sanitary silicone and construction-sealing silicone in singles and three-packs.",
+          "assessment": "Clear 2x2 logic: rows change application/type, columns quantity. Water/dark splash graphics distinguish groups but do not independently establish waterproof performance. Matches card 4.",
+          "grid_cells_reading_order": [
+            "White sanitary silicone single, blue/water motif.",
+            "White sanitary silicone three-pack, blue/water motif.",
+            "Graphite construction-sealing silicone single, green/dark splash motif.",
+            "Graphite construction-sealing silicone three-pack, green/dark splash motif."
+          ]
+        },
+        {
+          "position": 6,
+          "type": "media",
+          "text_paraphrase": "Two-component adhesives category; epoxy pack carries clear appearance, five-minute, versatile use, high bond strength, fast curing, indoor/outdoor and tool-free wording.",
+          "function": "Introduce 2K family.",
+          "image_subject": "Power Repair epoxy dual syringe with carton.",
+          "assessment": "Very short editorial title, many small pack benefits. Timing/strength conditions absent. Product rather than an application scene. Strong visual continuity into first tile of grid 7."
+        },
+        {
+          "position": 7,
+          "type": "grid",
+          "text_paraphrase": "Two-component adhesives category and store-visit CTA.",
+          "function": "Separate formulations/use orientations.",
+          "image_subject": "Four dual syringes with cartons, round display bases, color accents.",
+          "assessment": "Good formulation-choice grid with distinct names/colors. Practical selection criteria remain small packaging text. Direct match to card 6 and its first product.",
+          "grid_cells_reading_order": [
+            "Power Repair, blue-accent epoxy repair set.",
+            "Carbon Extreme, dark/teal-accent set.",
+            "Turbo Repair, orange-accent set.",
+            "Metal Repair, gray-accent set."
+          ]
+        },
+        {
+          "position": 8,
+          "type": "media",
+          "text_paraphrase": "Mounting-mortar category; Ankerfix pack depicts anchor installation in building substrates.",
+          "function": "Introduce mounting mortar/chemical anchoring.",
+          "image_subject": "Large cartridge, two mixing nozzles, masonry/anchor pack illustration.",
+          "assessment": "Specific purpose and relevant pack diagram. No load ratings, substrate suitability or approvals explained in main copy. Tiny certification marks cannot be validated. Strong same-family continuation to grid 9."
+        },
+        {
+          "position": 9,
+          "type": "grid",
+          "text_paraphrase": "Mounting-mortar heading and store-visit CTA; heading contains a typo.",
+          "function": "Choose quantity within one family.",
+          "image_subject": "Ankerfix cartridges in increasing pack sizes.",
+          "assessment": "Clear single/3/6/12 pack progression. Quantity navigation, not four applications. Heading visibly says 'Mantagemörtel' while card 8 uses correct Montagemörtel. Same family as preceding hero.",
+          "grid_cells_reading_order": [
+            "Single cartridge and mixing nozzles.",
+            "Three-pack.",
+            "Six-pack.",
+            "Twelve-pack."
+          ]
+        },
+        {
+          "position": 10,
+          "type": "media",
+          "text_paraphrase": "Instant-glue category; universal gel pack suggests precise application and rapid curing.",
+          "function": "Introduce instant adhesives.",
+          "image_subject": "Very large white Power Kleber Classic bottle.",
+          "assessment": "Strong silhouette and contrast. Precise gel application is more specific than generic strength, but no curing conditions or compatibility evidence. Bottom title overlaps label. Category matches grid 11 while package/line differs."
+        },
+        {
+          "position": 11,
+          "type": "grid",
+          "text_paraphrase": "Instant-glue category and store-visit CTA.",
+          "function": "Offer all-round/material-specific choices.",
+          "image_subject": "Four 50 g XXL industrial adhesive bottles.",
+          "assessment": "Visible all-round/universal, metal and glass logic is useful. Suitability limits not explained; small secondary pack text unreadable. Final pair closes with category-level rather than identical hero-product continuity.",
+          "grid_cells_reading_order": [
+            "Turquoise-accent all-round industrial adhesive with splash effect.",
+            "Green-accent universal industrial adhesive.",
+            "Gray-accent metal industrial adhesive.",
+            "Blue-accent glass industrial adhesive."
+          ]
+        }
+      ],
+      "grid_logic": {
+        "3": "Broad subtype assortment with multipacks mixed in.",
+        "5": "Application/type by row and pack quantity by column.",
+        "7": "Formulation/use orientation.",
+        "9": "Same family by pack quantity.",
+        "11": "All-round versus substrate orientation."
+      },
+      "strengths": [
+        "Five category-hero → exact-category-grid pairs create explicit browsing structure.",
+        "Consistent dark heroes and white grids make a large technical assortment coherent.",
+        "Useful grid taxonomies include application, formulation, quantity and material.",
+        "Products remain visually dominant; little separate body copy."
+      ],
+      "weaknesses": [
+        "Primarily navigation rather than a distinctive brand story; little history, expertise or company-level evidence.",
+        "Technical detail sits inside small packaging labels, sometimes darkened or covered.",
+        "Ten cards repeat the same two-card rhythm.",
+        "Some hero line designs differ from their following grid products.",
+        "Visible category-heading typo reduces polish."
+      ],
+      "transferable_patterns": [
+        "Pair each category introduction immediately with its matching grid.",
+        "Choose a deliberate grid logic and make it legible: application, formulation, quantity or material.",
+        "Keep hero product visually consistent with grid choices where possible.",
+        "Surface essential choice criteria outside tiny pack labels when necessary.",
+        "Proofread repeated category names across media and grid.",
+        "Use product-specific performance numbers only with supplied evidence; never transfer pack claims to other brands."
+      ],
+      "inspection": {
+        "all_cards_visually_inspected": true,
+        "method": "Both contact sheets, each grid render individually, desktop backdrop; PROCREA media originals for detailed packaging copy."
+      },
+      "readability_limits": [
+        "All principal editorial text and grid category headings readable.",
+        "Small package lines and conditions are not all legible, some are obscured; no exhaustive pack transcription attempted."
+      ],
+      "evidence_limits": [
+        "No sales/conversion performance, verified bestseller rank, destination ASINs or live link behavior established.",
+        "Brand and packaging claims are observed source statements, not independently verified."
+      ],
+      "source_manifest": "/workspace/scratch/fda9e1e4fb6f/story-audit/procrea/manifest.json",
+      "source_assets": [
+        {
+          "position": 1,
+          "type": "media",
+          "heading": "",
+          "image_url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/1-1-2-mphftab4.jpg",
+          "grid_image_urls": []
+        },
+        {
+          "position": 2,
+          "type": "media",
+          "heading": "",
+          "image_url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/2-2-2-mphftdz0.jpg",
+          "grid_image_urls": []
+        },
+        {
+          "position": 3,
+          "type": "grid",
+          "heading": "Klebstoffe",
+          "image_url": "",
+          "grid_image_urls": [
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/3-asin-0-cleanshot-2026-05-22-at-18-40-14-mphg22jm.png",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/3-asin-1-cleanshot-2026-05-22-at-18-40-01-mphg28lr.png",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/3-asin-2-71hm7z5chjl-sl1500-mphg07tv.jpg",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/3-asin-3-cleanshot-2026-05-22-at-18-40-22-mphg2cd4.png"
+          ]
+        },
+        {
+          "position": 4,
+          "type": "media",
+          "heading": "",
+          "image_url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/4-3-3-mphftp7y.jpg",
+          "grid_image_urls": []
+        },
+        {
+          "position": 5,
+          "type": "grid",
+          "heading": "Dichtstoffe",
+          "image_url": "",
+          "grid_image_urls": [
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/5-asin-0-cleanshot-2026-05-22-at-18-41-56-mphg401r.png",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/5-asin-1-cleanshot-2026-05-22-at-18-42-01-mphg42wu.png",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/5-asin-2-cleanshot-2026-05-22-at-18-42-09-mphg46vy.png",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/5-asin-3-cleanshot-2026-05-22-at-18-42-14-mphg49vt.png"
+          ]
+        },
+        {
+          "position": 6,
+          "type": "media",
+          "heading": "",
+          "image_url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/6-4-3-mphfu3fv.jpg",
+          "grid_image_urls": []
+        },
+        {
+          "position": 7,
+          "type": "grid",
+          "heading": "2K-Klebstoffe",
+          "image_url": "",
+          "grid_image_urls": [
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/7-asin-0-cleanshot-2026-05-22-at-18-43-00-mphg5ekg.png",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/7-asin-1-cleanshot-2026-05-22-at-18-43-10-mphg5he6.png",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/7-asin-2-cleanshot-2026-05-22-at-18-43-16-mphg5jv9.png",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/7-asin-3-cleanshot-2026-05-22-at-18-43-23-mphg5mgc.png"
+          ]
+        },
+        {
+          "position": 8,
+          "type": "media",
+          "heading": "",
+          "image_url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/8-5-mphfu7nj.jpg",
+          "grid_image_urls": []
+        },
+        {
+          "position": 9,
+          "type": "grid",
+          "heading": "Mantagemörtel",
+          "image_url": "",
+          "grid_image_urls": [
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/9-asin-0-cleanshot-2026-05-22-at-18-44-06-mphg6tyh.png",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/9-asin-1-cleanshot-2026-05-22-at-18-44-17-mphg6wer.png",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/9-asin-2-cleanshot-2026-05-22-at-18-44-23-mphg6y8v.png",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/9-asin-3-cleanshot-2026-05-22-at-18-44-28-mphg70gs.png"
+          ]
+        },
+        {
+          "position": 10,
+          "type": "media",
+          "heading": "",
+          "image_url": "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/10-6-mphfudli.jpg",
+          "grid_image_urls": []
+        },
+        {
+          "position": 11,
+          "type": "grid",
+          "heading": "Sekundenkleber",
+          "image_url": "",
+          "grid_image_urls": [
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/11-asin-0-cleanshot-2026-05-22-at-18-45-05-mphg7xsf.png",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/11-asin-1-cleanshot-2026-05-22-at-18-45-11-mphg7zra.png",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/11-asin-2-cleanshot-2026-05-22-at-18-45-16-mphg821s.png",
+            "https://mdkzd29bnpshwsig.public.blob.vercel-storage.com/references/brand_story/a7d8e718-636d-4f36-80c8-69aed686cf88/11-asin-3-cleanshot-2026-05-22-at-18-45-21-mphg84oc.png"
+          ]
+        }
+      ]
+    },
+    {
+      "brand": "Eglianos",
+      "counts": {
+        "total_cards": 11,
+        "media_cards": 10,
+        "grid_cards": 1,
+        "grid_slots": 4
+      },
+      "sequence": [
+        "origin/heritage opener",
+        "oil pack-format grid",
+        "harvesting photograph",
+        "harvest explanation",
+        "olive photograph",
+        "variety explanation",
+        "sorting/washing photograph",
+        "selection explanation",
+        "oil-production photograph",
+        "certification explanation",
+        "brand-symbol finale"
+      ],
+      "source_order": "manifest positions 1–11",
+      "visual_system": {
+        "palette": "olive green, pale cream, natural green photography",
+        "typography": "large elegant serif headings with simpler sans-serif supporting copy and bold factual anchors",
+        "motifs": [
+          "olive grove",
+          "hand harvesting",
+          "green fruit",
+          "processing",
+          "liquid oil",
+          "certification emblems",
+          "right-pointing arrows",
+          "olive/oil brand symbol"
+        ],
+        "rhythm": "After the opener and grid, alternates full photographic cards with cream text cards, ending with a symbolic photograph/composite. Each text card explains the preceding photo, while its arrow asks the reader to continue right."
+      },
+      "cards": [
+        {
+          "position": 1,
+          "type": "media",
+          "content_paraphrase": "Introduces Greek heritage and displays certification/origin/organic emblems.",
+          "function": "Emotional origin framing and immediate trust cues.",
+          "image_subject": "Rows of mature olive trees, green atmospheric backdrop, four emblems across the bottom.",
+          "editorial": {
+            "specificity": "Country-level origin and recognizable named emblems are more concrete than heritage language alone.",
+            "evidence": "Visible emblems include TÜV NORD ISO 22000 system certification, protected designation of origin, BIO HELLAS GR-BIO-03 and AGROCERT PDO. Their presence is observable; current validity, scope and applicability to every product cannot be verified here.",
+            "wordiness": "Very low; large heading leaves the grove dominant.",
+            "grid_connection": "Immediately precedes the sole oil grid, connecting origin/trust positioning to the actual packs.",
+            "assessment": "Strong atmospheric introduction, although brand ownership is subtler than a logo-led opener and the seal strip is dense at small scale."
+          }
+        },
+        {
+          "position": 2,
+          "type": "grid",
+          "heading": "Unser Olivenöl",
+          "content_paraphrase": "Presents the olive-oil assortment through four pack-format images and a shop link.",
+          "function": "Early navigation and format choice before the longer manufacturing story.",
+          "image_subject": "Top left dark bottle, top right 3 L tin, bottom left 5 L tin, bottom right two 5 L tins. Each stands on a wooden round with olive branches against white.",
+          "grid": {
+            "composition": "Four complete independent pack shots, unlike a single scene sliced into four cells.",
+            "category": "One category, differentiated visibly by packaging/quantity.",
+            "slots": [
+              "Bottle, visible label approximately 750 ml; tiny label print not fully readable",
+              "3 L tin",
+              "5 L tin",
+              "2 × 5 L twin pack"
+            ],
+            "targets": "Unavailable; neither distinct ASIN count nor actual link destinations can be established."
+          },
+          "editorial": {
+            "specificity": "Pack sizes and bottle/tin formats give a concrete reason to compare.",
+            "evidence": "Visible packaging supports the format description only. Product label microcopy is partly soft/unreadable.",
+            "wordiness": "Minimal category heading and shop action.",
+            "grid_connection": "Directly follows heritage card; all subsequent story cards concern the same oil category, but no later grid or CTA reinforces the conclusion.",
+            "assessment": "Clear shopping utility and coherent matching presentation; much stronger choice signaling than a decorative mosaic."
+          }
+        },
+        {
+          "position": 3,
+          "type": "media",
+          "content_paraphrase": "No text.",
+          "function": "Visual introduction to manual harvesting.",
+          "image_subject": "Close view of a hand holding olives on a branch, with basket edge and grove background.",
+          "editorial": {
+            "specificity": "Shows the precise activity discussed on card 4.",
+            "evidence": "Illustrates harvesting; it cannot independently prove the brand's actual harvesting practices.",
+            "wordiness": "None.",
+            "grid_connection": "Following the oil grid, shifts attention from finished pack to source. Card 4 supplies its explanatory bridge.",
+            "assessment": "Relevant detail and human involvement without unnecessary copy; risks being missed when viewed alone because explanation is on the next card."
+          }
+        },
+        {
+          "position": 4,
+          "type": "media",
+          "content_paraphrase": "Says experienced growers pick every olive carefully by hand in Kalamata and Messinia.",
+          "function": "Makes the heritage promise tangible through named places and a manual process.",
+          "image_subject": "Cream text panel, olive-green typography, bold place names, right arrow.",
+          "editorial": {
+            "specificity": "Named production regions and a particular harvesting method are concrete.",
+            "evidence": "Claim is illustrated by adjacent harvest photo; no independent traceability record is supplied.",
+            "wordiness": "One heading and one compact paragraph, but many line breaks create a tall reading block.",
+            "grid_connection": "Explains card 3 and the oil already shown in the grid, rather than introducing a new range.",
+            "assessment": "One of the most brand-relevant copy cards. The claim that every olive is hand picked is absolute and should require substantiation when adapting the pattern."
+          }
+        },
+        {
+          "position": 5,
+          "type": "media",
+          "content_paraphrase": "No text.",
+          "function": "Sensory ingredient interlude and preparation for varietal explanation.",
+          "image_subject": "Frame-filling close-up of fresh green olives and leaves.",
+          "editorial": {
+            "specificity": "Highly category relevant but varieties cannot be identified reliably by appearance.",
+            "evidence": "Illustration, not independent proof of varieties or quality.",
+            "wordiness": "None.",
+            "grid_connection": "Supports the one oil category; card 6 names the varieties.",
+            "assessment": "Color and texture strengthen appetite and visual rhythm; the image alone communicates little unique to Eglianos."
+          }
+        },
+        {
+          "position": 6,
+          "type": "media",
+          "content_paraphrase": "Names Koroneiki and Mavrolia as old Greek olive varieties associated with aroma, quality and origin.",
+          "function": "Adds ingredient provenance and a specific vocabulary of differentiation.",
+          "image_subject": "Cream text card, large serif heading, bold variety names, right arrow.",
+          "editorial": {
+            "specificity": "Variety names are concrete; the general quality/aroma language is less distinctive.",
+            "evidence": "Names appear in copy, but composition, cultivar percentages and sourcing records are not provided.",
+            "wordiness": "Compact single paragraph; good hierarchy makes the names easy to scan.",
+            "grid_connection": "Explains the preceding fruit photo and the oil category; it gives no format-specific guidance for the grid.",
+            "assessment": "Useful brand-story detail; could be more informative if supported sensory differences were available, but these must not be invented."
+          }
+        },
+        {
+          "position": 7,
+          "type": "media",
+          "content_paraphrase": "No text.",
+          "function": "Moves the story from ingredient to production handling.",
+          "image_subject": "Green olives on a wet industrial surface with splashes/droplets and blurred machinery.",
+          "editorial": {
+            "specificity": "Plausible visible sorting/washing context, closely matched to card 8.",
+            "evidence": "Image does not verify the actual factory, process standard or producer identity.",
+            "wordiness": "None.",
+            "grid_connection": "Continues the process story behind the single oil category.",
+            "assessment": "Strong motion and process detail; aesthetically polished, with authenticity unknown."
+          }
+        },
+        {
+          "position": 8,
+          "type": "media",
+          "content_paraphrase": "Says olives are thoroughly sorted and washed before pressing and that selected fruit produces a clear taste.",
+          "function": "Links a handling step to a sensory benefit.",
+          "image_subject": "Cream panel with olive-green text, emphasized final taste phrase and arrow.",
+          "editorial": {
+            "specificity": "Sorting and washing are observable process concepts; selected fruit and clear taste are qualitative.",
+            "evidence": "Adjacent process imagery illustrates the statement without validating it or demonstrating a measured taste result.",
+            "wordiness": "Longer than earlier panels; multiple process/benefit clauses increase reading load.",
+            "grid_connection": "Explains card 7 and keeps the story tied to the oil, but remains far from the early shopping card.",
+            "assessment": "Useful action-to-benefit structure; a tighter edit could retain the process and remove some generic quality language."
+          }
+        },
+        {
+          "position": 9,
+          "type": "media",
+          "content_paraphrase": "No text.",
+          "function": "Sensory production climax after harvesting and fruit selection.",
+          "image_subject": "Vivid yellow-green liquid flowing into a metal processing vessel with rippling surface.",
+          "editorial": {
+            "specificity": "Concrete oil/production scene; exact processing stage cannot be determined confidently.",
+            "evidence": "Do not infer temperature, cold pressing, freshness metrics or extraction standard from this scene.",
+            "wordiness": "None.",
+            "grid_connection": "Shows the transformation underlying the oil grid; next card supplies certification/quality copy rather than a precise explanation of the pictured step.",
+            "assessment": "Strong sensory visual, but the adjacent text pairs certification with an image that cannot substantiate certification."
+          }
+        },
+        {
+          "position": 10,
+          "type": "media",
+          "content_paraphrase": "Describes the initial oil as vivid, natural and intense, and claims inspection by Agrocert and an agriculture ministry; repeats the four emblems.",
+          "function": "Ends the factual text sequence with assurance and sensory positioning.",
+          "image_subject": "Cream text panel with bold sensory descriptors, right arrow and certification/origin/organic strip.",
+          "editorial": {
+            "specificity": "Named inspection organizations improve specificity, but ministry identity, certification scope and dates are not explained.",
+            "evidence": "Repeated seals are visible asset claims; no certificate documents or independent verification available.",
+            "wordiness": "Moderate. Heading, two different ideas, arrow and four small emblems compete within one card.",
+            "grid_connection": "Recalls opener's trust cues and applies to the oil category; a final grid or shop bridge is absent.",
+            "assessment": "Trust-device consistency is useful, but sensory adjectives do not demonstrate certification and should be separated conceptually from verified manufacturing credentials."
+          }
+        },
+        {
+          "position": 11,
+          "type": "media",
+          "content_paraphrase": "No body text.",
+          "function": "Visual signature and sensory finale.",
+          "image_subject": "Stylized large olive/oil-droplet composite with leaves and a pale circular/letter-like brand symbol on a soft green background.",
+          "editorial": {
+            "specificity": "A distinctive visual device, not a new factual claim.",
+            "evidence": "Do not interpret composite as documentary evidence about real fruit appearance or oil production.",
+            "wordiness": "None.",
+            "grid_connection": "Closes the story aesthetically without returning to product choice or shop navigation.",
+            "assessment": "Memorable brand mood; finale is less commercially actionable than the early grid."
+          }
+        }
+      ],
+      "strengths": [
+        "Very cohesive category-specific imagery, color and typography.",
+        "Named regions, olive varieties and handling steps give substance beyond generic premium claims.",
+        "Alternation of photo and concise explanatory text creates a deliberate rhythm.",
+        "Early grid shows four genuine visual pack-format alternatives.",
+        "Process progression broadly follows grove/harvest → fruit → handling → oil."
+      ],
+      "weaknesses": [
+        "Eleven cards make a long journey around a single category; the only grid occurs at position 2.",
+        "Meaning often spans two separate cards; standalone photographs and text cards can lose context when only part of the carousel is visible.",
+        "Arrows on explanatory cards point onward even though the copy often explains the preceding photograph.",
+        "Certification logos are small and their legal/product scope is not explained or verified.",
+        "Some sensory/quality language is generic, and the finale supplies no renewed shopping bridge."
+      ],
+      "transferable_patterns": [
+        "Build provenance around actual named places, inputs and process steps supported by supplied evidence.",
+        "Use alternating image/explanation cards when source material warrants depth, but make every card understandable in partial carousel views.",
+        "Present pack sizes or use-case alternatives as complete independently legible grid cells.",
+        "Let one stable palette, type system and recurring motif connect product navigation and story.",
+        "Use certification cues only with verified current scope; neither seals nor specific origin claims are reusable boilerplate.",
+        "Reconsider early-only grid placement in a long story; connect later proof to the relevant assortment when the module setup permits."
+      ]
+    },
+    {
+      "brand": "OmniRelexx",
+      "counts": {
+        "total_cards": 9,
+        "media_cards": 7,
+        "grid_cards": 2,
+        "grid_slots": 8
+      },
+      "source_order": "User-delivered Preview reconstruction: media 1–4, grids 1–2, media 5–7. Public metadata originally grouped seven media before both grids; supplied local manifest/render order reflects the reconstruction.",
+      "sequence": [
+        "brand/logo",
+        "founders",
+        "sleep benefit",
+        "travel-origin problem",
+        "sleep-mask grid",
+        "pillow grid",
+        "mission/daytime result",
+        "development/testing",
+        "positive sleep outcome"
+      ],
+      "visual_system": {
+        "palette": "sage green, warm cream, charcoal products, natural bedroom photography",
+        "typography": "large uppercase sans-serif headings, selected bold words, rounded copy boxes; founders' first names in script",
+        "motifs": [
+          "mask and pillow together",
+          "rested people",
+          "train travel",
+          "founder portrait",
+          "sewing detail",
+          "lavender",
+          "moon/sun sleep icon"
+        ],
+        "rhythm": "Brand and people first, then problem and two central category grids, followed by mission/development/outcome. Most media combine the subject and its message on one card."
+      },
+      "cards": [
+        {
+          "position": 1,
+          "type": "media",
+          "content_paraphrase": "Shows the brand name and relaxation/recharge hashtag.",
+          "function": "Brand recognition and a simple lifestyle promise.",
+          "image_subject": "Large sage wordmark and thin italic tagline on a plain warm cream field.",
+          "editorial": {
+            "specificity": "Brand-specific spelling and tagline, but no product category or practical distinction.",
+            "evidence": "Identity device, not evidence of product results.",
+            "wordiness": "Very low.",
+            "grid_connection": "Establishes palette but is several cards away from either category grid.",
+            "assessment": "Clean and calm; considerable empty space and no product cue mean the first card does little explanatory work."
+          }
+        },
+        {
+          "position": 2,
+          "type": "media",
+          "content_paraphrase": "Identifies Jenny and Christian as the brand's founders.",
+          "function": "Humanizes the business and prepares the first-person origin account.",
+          "image_subject": "Couple portrait inside a rounded sage-and-white frame, script names and bold founder role line.",
+          "editorial": {
+            "specificity": "Named people and an explicit role are concrete.",
+            "evidence": "Names/roles are asserted by the card; identity and actual involvement cannot be independently established from the portrait.",
+            "wordiness": "Low; names plus role.",
+            "grid_connection": "Trust/human context before the problem and assortment; not yet tied to a specific product feature.",
+            "assessment": "A clear human anchor. The portrait supplies identity but not credentials, expertise or proof of development."
+          }
+        },
+        {
+          "position": 3,
+          "type": "media",
+          "content_paraphrase": "Promises sleep comfort leading to restful nights and relaxed days.",
+          "function": "States the overall consumer outcome and demonstrates product use.",
+          "image_subject": "Woman lying on a contoured white pillow wearing a black sleep mask, with a sleep icon and cream rounded copy panel.",
+          "editorial": {
+            "specificity": "Use context and both core product forms are visible; outcome wording is broad.",
+            "evidence": "Lifestyle scene illustrates an intended benefit, with no controlled test or measured outcome supplied.",
+            "wordiness": "Short heading with strong hierarchy.",
+            "grid_connection": "Previews both mask and pillow before their grids at 5–6.",
+            "assessment": "Efficient combination of category recognition, use demonstration and promise. Repeats the general sleep outcome later used on cards 7 and 9."
+          }
+        },
+        {
+          "position": 4,
+          "type": "media",
+          "content_paraphrase": "Explains that sleepless long plane and train journeys inspired the idea by revealing the importance of restorative sleep.",
+          "function": "Gives the founders a relatable problem-origin story.",
+          "image_subject": "Smiling woman on a train raising a black sleep mask; white headline and sage rounded copy block.",
+          "editorial": {
+            "specificity": "Concrete travel situations create a recognizable trigger.",
+            "evidence": "First-person experience claim supported illustratively by a train scene; no independent founding history supplied.",
+            "wordiness": "One short headline and a relatively dense uppercase sentence in the bottom panel.",
+            "grid_connection": "Immediately precedes masks, giving that grid a particularly natural need-to-product transition; pillow transition is less directly explained.",
+            "assessment": "The strongest narrative bridge in the sequence. May imply travel portability broadly, but no packing dimensions or suitability evidence is provided."
+          }
+        },
+        {
+          "position": 5,
+          "type": "grid",
+          "heading": "Schlafmasken",
+          "content_paraphrase": "Names the sleep-mask category and offers a shop link.",
+          "function": "Category navigation using an oversized product visual.",
+          "image_subject": "One black mask and lavender bouquet on cream, deliberately spread across four separate cropped cells.",
+          "grid": {
+            "composition": "A single mask/lavender composition divided into four quadrants with white gutters; not four complete product shots.",
+            "category": "Sleep masks.",
+            "slots": [
+              "Upper-left mask edge and large empty cream area",
+              "Upper-right contoured mask surface and strap tip",
+              "Lower-left mask and partial lavender",
+              "Lower-right lavender bouquet and tiny product edge"
+            ],
+            "targets": "Unavailable. Eight visual cells across two grids do not establish eight products or ASINs."
+          },
+          "editorial": {
+            "specificity": "Category name is clear; visible product texture and shape are useful.",
+            "evidence": "Lavender is a decorative visual; do not infer lavender filling, scent, ingredients, bundle inclusion or sleep efficacy.",
+            "wordiness": "Minimal.",
+            "grid_connection": "Travel story directly before it creates contextual relevance; neighboring pillow grid introduces the second category without extra copy.",
+            "assessment": "Cohesive, distinctive composition as a whole. Individual cropped cells, especially the lavender-only quadrant, do not explain a distinct product choice and may create ambiguous navigation if independently clickable."
+          }
+        },
+        {
+          "position": 6,
+          "type": "grid",
+          "heading": "Kissen",
+          "content_paraphrase": "Names the pillow category and offers a shop link.",
+          "function": "Second category route and visual companion to the mask grid.",
+          "image_subject": "One white contoured quilted pillow with black side mesh and lavender, divided into four cropped cells.",
+          "grid": {
+            "composition": "A single pillow/lavender composition in four quadrants; repeats the previous grid's oversized mosaic technique.",
+            "category": "Pillows.",
+            "slots": [
+              "Left pillow edge and black mesh side",
+              "Upper/right contoured white pillow surface",
+              "Lower-left pillow edge and cream space",
+              "Lower-right lavender plus pillow edge"
+            ],
+            "targets": "Unavailable; do not treat the quadrants as four separate pillow variants."
+          },
+          "editorial": {
+            "specificity": "Product form, contour and cover appearance are visible; material, dimensions and ergonomic effect are not established.",
+            "evidence": "Lavender is decorative unless separately documented. Shape alone does not prove health benefits.",
+            "wordiness": "Minimal.",
+            "grid_connection": "Pairs naturally with masks already shown together on card 3; followed by the broad sleep mission rather than a pillow-specific explanation.",
+            "assessment": "Strong visual consistency with prior category, weaker product-comparison utility than four complete alternative products."
+          }
+        },
+        {
+          "position": 7,
+          "type": "media",
+          "content_paraphrase": "States the goal of better sleep so people can start each day rested and energetic.",
+          "function": "Restates the mission as a daytime benefit after the assortment.",
+          "image_subject": "Smiling man stretching in bed with mask on forehead and pillow visible, plus top cream copy panel.",
+          "editorial": {
+            "specificity": "Specific everyday scenario, but general outcome language.",
+            "evidence": "Lifestyle illustration; no measured effect or evidence that all users achieve this result.",
+            "wordiness": "Moderate: heading and explanatory sentence repeat the outcome rather than adding a feature.",
+            "grid_connection": "Connects both preceding sleep-product categories to the common intended result.",
+            "assessment": "Emotionally coherent but overlaps substantially with cards 3 and 9; could be a candidate for consolidation."
+          }
+        },
+        {
+          "position": 8,
+          "type": "media",
+          "content_paraphrase": "Says personal experience led to the brand's sleep products and that the founders tested and refined them intensively.",
+          "function": "Development/craftsmanship reassurance after mission and product navigation.",
+          "image_subject": "Close-up of a sewing-machine foot stitching black textured material, headline and sage copy box.",
+          "editorial": {
+            "specificity": "Self-testing and refinement are stated, but no method, duration, test population or concrete improvement is named.",
+            "evidence": "Sewing close-up illustrates construction only; it does not verify founder participation, testing rigor, manufacturing location or a certification.",
+            "wordiness": "The densest Omni media card: a short two-line headline plus a multi-line uppercase development paragraph.",
+            "grid_connection": "Potentially reinforces both categories, but stitching visual resembles mask textile and provides no equally clear pillow-specific proof.",
+            "assessment": "Useful change of visual subject after repeated bed scenes, but generic passion/perfection language needs real development details to become persuasive evidence."
+          }
+        },
+        {
+          "position": 9,
+          "type": "media",
+          "content_paraphrase": "Ends with a strong promise of ending sleepless nights.",
+          "function": "Aspirational outcome finale.",
+          "image_subject": "Smiling woman stretching in bed wearing a mask on a white contoured pillow; sage wall and large white heading.",
+          "editorial": {
+            "specificity": "Both product forms visible, while the sleep result is sweeping.",
+            "evidence": "No substantiation for an absolute elimination of sleeplessness. Treat as a brand claim, not a verified sleep or health result.",
+            "wordiness": "Very low.",
+            "grid_connection": "Returns to both categories visually, but there is no final category/shop bridge after the development card.",
+            "assessment": "Clear, positive visual finish; repeated bedroom/result message and overly absolute benefit wording are its main weaknesses."
+          }
+        }
+      ],
+      "strengths": [
+        "Recognizable founders give the story a personal anchor.",
+        "Travel problem → masks grid creates a direct narrative-to-category bridge.",
+        "Consistent sage/cream palette, type hierarchy and rounded panels tie cards together.",
+        "Lifestyle scenes demonstrate both core categories in use, making the assortment easy to understand.",
+        "Central grid placement breaks up the narrative and gives category access before the final three reassurance cards."
+      ],
+      "weaknesses": [
+        "Three media cards repeat the broad rested-night/energetic-day outcome with limited new information.",
+        "Logo-only opener consumes a card without explaining the category.",
+        "Development/self-testing claims lack concrete method or observable improvement.",
+        "Grids are decorative mosaics rather than four independently useful product alternatives; crop-only cells can be confusing if separately linked.",
+        "Lavender can imply an unestablished ingredient or included accessory unless carefully contextualized.",
+        "The final sleep promise is absolute and unsupported by supplied evidence.",
+        "Uppercase multi-line body copy on cards 4 and 8 increases reading burden."
+      ],
+      "transferable_patterns": [
+        "Connect named founders to an actual experienced problem, then show how the relevant category addresses it.",
+        "Use category grids where the shopper has just encountered the corresponding need.",
+        "Show the exact product form in lifestyle scenes rather than relying entirely on generic wellbeing imagery.",
+        "Use one useful message per card; remove repeated mission/outcome statements unless they add a new context or proof.",
+        "Distinguish emotional reassurance, self-reported development and independently evidenced results.",
+        "If using a four-part mosaic, design and review every cell's standalone meaning and confirm actual link behavior; do not assume four crops represent four products.",
+        "Do not import lavender, founder stories, self-testing claims or absolute sleep outcomes into another brand's copy without supporting source material."
+      ]
+    },
+    {
+      "brand": "Bachgold",
+      "counts": {
+        "carousel_total": 9,
+        "media": 8,
+        "grid": 1,
+        "grid_tiles": 4,
+        "desktop_backgrounds": 1
+      },
+      "order": [
+        "founder origin",
+        "outdoor promise",
+        "bottle family visual",
+        "500 ml hero",
+        "bestseller-labelled grid",
+        "speed claim/use",
+        "charity/project cue",
+        "water-access photo",
+        "adventure close"
+      ],
+      "background": {
+        "subject": "Olive field with large white logo and photo of two outdoor-clad men; one holds bottle.",
+        "function": "Founder identity and outdoor authenticity; background is not an additional carousel card."
+      },
+      "cards": [
+        {
+          "position": 1,
+          "type": "media",
+          "content_paraphrase": "Jerome and Laurenz describe being Swiss outdoor enthusiasts whose concern about drinkable water limited freedom; they say this led them to develop a compact all-in-one bottle using self-press hollow-fiber filtration.",
+          "function": "Founder origin and problem-to-product rationale",
+          "image_subject": "Olive background, oversized two-color founder-story heading, white body copy; founders are pictured in separate desktop background.",
+          "editorial_assessment": {
+            "specificity": "Named people, place, problem and technology make this concrete.",
+            "evidence": "The claimed global first is asserted without supporting date, patent or evidence in these assets.",
+            "wordiness": "Densest Bachgold card; three text blocks demand reading before product imagery.",
+            "neighboring_grid_connection": "Three more media cards precede first grid; establishes motivation rather than choosing a SKU.",
+            "notes": []
+          }
+        },
+        {
+          "position": 2,
+          "type": "media",
+          "content_paraphrase": "Invites outdoor enjoyment through freedom and confidence without worrying about the next water source.",
+          "function": "Emotional promise and continuation cue",
+          "image_subject": "Large stacked nature invitation, small paragraph, orange right arrow on olive.",
+          "editorial_assessment": {
+            "specificity": "Clearly outdoor-specific but emotional promise is broad.",
+            "evidence": "Aspirational copy; no supporting proof needed for mood, but unconcerned-water implication should not replace use limits.",
+            "wordiness": "Headline-dominant with a moderate paragraph repeating freedom/nature.",
+            "neighboring_grid_connection": "Arrow points onward to bottle image, not directly to the later grid.",
+            "notes": []
+          }
+        },
+        {
+          "position": 3,
+          "type": "media",
+          "content_paraphrase": "No substantive copy beyond visible product branding.",
+          "function": "Product reveal and visual pause",
+          "image_subject": "Two black filter bottles, one slimmer and one wider with sports-style top, outdoors inside a rounded/teardrop mask on olive.",
+          "editorial_assessment": {
+            "specificity": "Shows actual form and relative silhouette.",
+            "evidence": "Visual appearance only; no size labels or mechanism explanation.",
+            "wordiness": "No reading load.",
+            "neighboring_grid_connection": "Broad product-family bridge before 500 ml spotlight and grid; no explicit variant mapping.",
+            "notes": []
+          }
+        },
+        {
+          "position": 4,
+          "type": "media",
+          "content_paraphrase": "Spotlights a 500 ml bottle and calls it a bestseller.",
+          "function": "Hero-product prioritization and handoff to shopping",
+          "image_subject": "Black bottle on wet woodland rock; olive strip and orange right arrow.",
+          "editorial_assessment": {
+            "specificity": "Capacity makes priority tangible.",
+            "evidence": "Bestseller is marketing wording visible in asset, not independently established rank or sales.",
+            "wordiness": "Very short; easy to scan.",
+            "neighboring_grid_connection": "Immediately precedes sole grid; strong directional handoff, but grid also includes larger bottle and refills.",
+            "notes": []
+          }
+        },
+        {
+          "position": 5,
+          "type": "grid",
+          "content_paraphrase": "Four tiles grouped under a bestseller label: two complete bottle/packaging presentations above and two replacement-filter/packaging presentations below.",
+          "function": "Browse entry for hero products and replenishment",
+          "image_subject": "White-background product composites; top images use water, moss, packaging and Swiss cues; lower images show filter inserts.",
+          "editorial_assessment": {
+            "specificity": "Visible families and format differences, but no four individual labels.",
+            "evidence": "Images do not establish verified ranking or destination ASINs.",
+            "wordiness": "Short category heading and shop CTA; pack text too small for reliable full transcription.",
+            "neighboring_grid_connection": "Connected to prior bottle spotlight; broader assortment than the 500 ml-only cue.",
+            "notes": [
+              "Four tiles do not prove four unique products or targets."
+            ]
+          }
+        },
+        {
+          "position": 6,
+          "type": "media",
+          "content_paraphrase": "Promises clean drinking water within ten seconds.",
+          "function": "Fast-use benefit after the shopping entry",
+          "image_subject": "Person in knit cap drinking from black bottle in woodland; large white/orange copy.",
+          "editorial_assessment": {
+            "specificity": "Time value is specific; outdoors usage is recognizable.",
+            "evidence": "No test conditions, water limits or substantiation in asset.",
+            "wordiness": "Short and forceful.",
+            "neighboring_grid_connection": "Follows grid as reassurance; no subsequent product grid to turn benefit into a new route.",
+            "notes": []
+          }
+        },
+        {
+          "position": 7,
+          "type": "media",
+          "content_paraphrase": "States support for Viva con Agua and names a Nepal project.",
+          "function": "Social-purpose association",
+          "image_subject": "Large blue charity-support seal on olive, project name and orange arrow.",
+          "editorial_assessment": {
+            "specificity": "Named organization and geography are concrete.",
+            "evidence": "No amount, mechanism, timing or impact figures are supplied.",
+            "wordiness": "Minimal.",
+            "neighboring_grid_connection": "Arrow leads to child-at-tap photograph, not a shopping grid.",
+            "notes": []
+          }
+        },
+        {
+          "position": 8,
+          "type": "media",
+          "content_paraphrase": "No headline or body copy.",
+          "function": "Human visual continuation of Nepal-support card",
+          "image_subject": "Child drinking from hands under outdoor brass tap, softly blurred greenery.",
+          "editorial_assessment": {
+            "specificity": "Concrete water-access scene.",
+            "evidence": "Photo supports theme, not proof of specific funded impact or beneficiary relationship.",
+            "wordiness": "None.",
+            "neighboring_grid_connection": "Closes the charity pair; no grid connection.",
+            "notes": []
+          }
+        },
+        {
+          "position": 9,
+          "type": "media",
+          "content_paraphrase": "Closes with an adventure-and-thirst wordplay and prominent Bachgold branding.",
+          "function": "Branded emotional sign-off",
+          "image_subject": "Hand filling a black bottle in running stream, dark rocks, white/orange words.",
+          "editorial_assessment": {
+            "specificity": "Specific outdoor action and product.",
+            "evidence": "Does not establish suitability for every stream or water source.",
+            "wordiness": "Very brief.",
+            "neighboring_grid_connection": "No final grid or category CTA; ends on identity.",
+            "notes": []
+          }
+        }
+      ],
+      "motifs": [
+        "Muted olive, dark forest photographs, white/dark-green type, orange accent and arrows",
+        "Water, wet rock, stream, bottle use and wilderness",
+        "Founder identity plus outdoor freedom plus water-access cause"
+      ],
+      "strengths": [
+        "Distinctive outdoor art direction and coherent photographic world.",
+        "Founder problem is connected to product idea rather than generic corporate history.",
+        "Alternates text, product image and lived use; one explicit shopping handoff.",
+        "Charity cue and next photo form a readable thematic pair."
+      ],
+      "weaknesses": [
+        "Only one grid; long tail of four media cards after it carries no further shopping/category entry.",
+        "Founder first card has unusually heavy copy.",
+        "World-first, bestseller, ten-second and support assertions have no substantiation in provided assets.",
+        "Grid mixes bottles and refills despite preceding 500 ml-only spotlight.",
+        "Project impact and product use limits are not explained."
+      ],
+      "transferable_patterns": [
+        "Build origin as people + category frustration + resulting design choice, using only known facts.",
+        "Use one dominant category/hero label and directional cue immediately before relevant grid.",
+        "Separate emotional lifestyle panels from factual mechanism or proof panels.",
+        "When invoking a cause, pair named initiative with relevant human image but require support terms/evidence.",
+        "Treat closing brand panel as optional, not mandatory if it displaces useful category navigation."
+      ],
+      "inspection": {
+        "contact_sheets": "All supplied contact sheets visually inspected, covering every card in order.",
+        "originals_checked": [
+          "desktop.jpg"
+        ],
+        "unreadable_text": [
+          "Tiny packaging/product-inset lettering is not reliably readable at sheet scale; not transcribed."
+        ],
+        "limitations": [
+          "No sales-performance conclusions.",
+          "Bestseller/leadership/quality/safety statements are observed claims, not independently verified facts.",
+          "Destination ASINs and link targets unavailable; tile count is not product count.",
+          "No conclusions about live Amazon compliance or actual clickability from static reference alone."
+        ]
+      }
+    },
+    {
+      "brand": "Sanquell",
+      "counts": {
+        "carousel_total": 14,
+        "media": 9,
+        "grid": 5,
+        "grid_tiles": 20,
+        "desktop_backgrounds": 1
+      },
+      "order": [
+        "customer/heritage proof",
+        "people/manufacture",
+        "technical trust",
+        "standards trust",
+        "legionella use",
+        "legionella grid",
+        "drinking-water use",
+        "drinking-water grid",
+        "alarm installation",
+        "alarm hybrid grid",
+        "wound-shower use",
+        "wound-shower mosaic grid",
+        "refill use",
+        "refill grid"
+      ],
+      "background": {
+        "subject": "Pale background with upper-right gray logo, large introductory brand text at left, thin water ripple at bottom.",
+        "content_paraphrase": "Introduces Sanquell and claims a leading position among German water-filter brands.",
+        "assessment": "Airy and consistent, but leadership is asserted without definition or evidence; background not a card."
+      },
+      "cards": [
+        {
+          "position": 1,
+          "type": "media",
+          "content_paraphrase": "Claims more than 31,000 satisfied customers and over twenty years as a German quality brand.",
+          "function": "Social proof, longevity and origin",
+          "image_subject": "Five small portrait circles, white text, German-flag color bar on blue gradient.",
+          "editorial_assessment": {
+            "specificity": "Two numerical claims sharpen credibility.",
+            "evidence": "No source, count date, satisfaction method or review context is visible.",
+            "wordiness": "Two concise blocks.",
+            "neighboring_grid_connection": "Starts four trust/technical media cards before category/shop pairs begin.",
+            "notes": []
+          }
+        },
+        {
+          "position": 2,
+          "type": "media",
+          "content_paraphrase": "States sustainable German manufacture and says partners provide high quality, transparency and traceability.",
+          "function": "Humanize supply chain and reinforce origin",
+          "image_subject": "Three adults outdoors behind railing; lower blue wash with copy and small German flag.",
+          "editorial_assessment": {
+            "specificity": "Country and partner relationship are concrete; sustainability is unspecific.",
+            "evidence": "No manufacturing site, partner name, process, certification or sustainability measure is visible.",
+            "wordiness": "Short heading plus two lines; photograph has substantial room.",
+            "neighboring_grid_connection": "Brand-level trust foundation before category-specific sequence.",
+            "notes": []
+          }
+        },
+        {
+          "position": 3,
+          "type": "media",
+          "content_paraphrase": "Presents 0.2 micrometer microfiltration with long-duration protection, more than ten years of legionella-protection experience, and immediately active protection.",
+          "function": "Technical reassurance around legionella filtration",
+          "image_subject": "Three stacked icon-and-text groups: water drop, trophy, shield, on blue.",
+          "editorial_assessment": {
+            "specificity": "Pore size and experience period are concrete; long duration lacks a duration value.",
+            "evidence": "No test scope, organism performance figures or use conditions visible; experience is not product efficacy evidence.",
+            "wordiness": "Three dense but organized information groups.",
+            "neighboring_grid_connection": "Content specifically prepares legionella category at cards 5–6 rather than all later categories.",
+            "notes": []
+          }
+        },
+        {
+          "position": 4,
+          "type": "media",
+          "content_paraphrase": "Declares tested safety and lists ASTM F838-05, ASTM F-383-15AE1, and DVGW TWIN 12 as displayed.",
+          "function": "Standards-based authority cue",
+          "image_subject": "Centered white text and thin dividers on blue gradient.",
+          "editorial_assessment": {
+            "specificity": "Names standards rather than merely saying high quality.",
+            "evidence": "No report, test body, date, certificate, product applicability or explanation supplied. Standards strings recorded as displayed, not validated.",
+            "wordiness": "Low word count; unexplained technical codes are cognitively demanding.",
+            "neighboring_grid_connection": "Immediately precedes legionella application and grid; scope must not be presumed to cover alarms or every product.",
+            "notes": []
+          }
+        },
+        {
+          "position": 5,
+          "type": "media",
+          "content_paraphrase": "Names the legionella-filter category.",
+          "function": "Category introduction with use-context explanation",
+          "image_subject": "Hand holding shower head with chrome filter housing and exposed/visible cream cartridge while water sprays in tiled bathroom.",
+          "editorial_assessment": {
+            "specificity": "Shows category location and filtration assembly.",
+            "evidence": "Demonstrative photo, not test evidence.",
+            "wordiness": "One category label.",
+            "neighboring_grid_connection": "Direct match to card 6 grid; strong application-to-assortment pairing.",
+            "notes": []
+          }
+        },
+        {
+          "position": 6,
+          "type": "grid",
+          "content_paraphrase": "Four legionella-filter product presentations: two different shower heads, a short cylindrical tap/filter attachment, and a longer inline chrome filter body.",
+          "function": "Category shopping entry",
+          "image_subject": "Four isolated chrome products on pale ground, each with blue quality/certification badge.",
+          "editorial_assessment": {
+            "specificity": "Product forms distinguish options visually but no names or compatibility criteria.",
+            "evidence": "Repeated certification badge gives no certificate scope in this grid.",
+            "wordiness": "Very brief; category heading plus shop CTA.",
+            "neighboring_grid_connection": "Direct continuation of card 5; individual choice remains unexplained.",
+            "notes": []
+          }
+        },
+        {
+          "position": 7,
+          "type": "media",
+          "content_paraphrase": "Names the drinking-water-filter category.",
+          "function": "Explain installation context before browsing",
+          "image_subject": "Under-sink filter mounted in kitchen cabinet among pipes and household cleaning items.",
+          "editorial_assessment": {
+            "specificity": "Shows concealed placement and practical scale.",
+            "evidence": "Photograph illustrates setup, not filter performance.",
+            "wordiness": "One category label.",
+            "neighboring_grid_connection": "Directly prepares card 8, but under-sink scene illustrates only part of mixed grid.",
+            "notes": []
+          }
+        },
+        {
+          "position": 8,
+          "type": "grid",
+          "content_paraphrase": "Four drinking-water-filter presentations: single housing, twin housing system, white countertop unit with faucet, and inline hose/connector assembly.",
+          "function": "Broaden category assortment",
+          "image_subject": "Isolated filter systems on pale ground with recurring certification/quality badges.",
+          "editorial_assessment": {
+            "specificity": "Multiple installation formats visible.",
+            "evidence": "No filtration scope, compatibility, or performance proof; badges remain unscoped.",
+            "wordiness": "Heading and CTA only.",
+            "neighboring_grid_connection": "Clear category match to card 7; visual variants exceed its under-sink example.",
+            "notes": []
+          }
+        },
+        {
+          "position": 9,
+          "type": "media",
+          "content_paraphrase": "Names water-alarm category.",
+          "function": "Show actual device installation",
+          "image_subject": "White motorized-looking actuator mounted over pipe valve against concrete wall, blue valve levers visible.",
+          "editorial_assessment": {
+            "specificity": "Concrete installed form.",
+            "evidence": "Shows placement only, not detection or shutoff reliability.",
+            "wordiness": "One category label.",
+            "neighboring_grid_connection": "Directly leads to card 10 hybrid explanatory grid.",
+            "notes": []
+          }
+        },
+        {
+          "position": 10,
+          "type": "grid",
+          "content_paraphrase": "Four tiles form an explanatory layout: shutoff devices, a Wi-Fi symbol, a claim of reliable shutdown with AI-assisted sensor detection even inside walls, and encrypted continuous internet monitoring. Small labels reinforce precision sensors and always-online status.",
+          "function": "One-product-family feature explanation inside a grid-shaped shopping module",
+          "image_subject": "Upper left product devices, upper right white Wi-Fi icon on blue; lower two tiles are text panels.",
+          "editorial_assessment": {
+            "specificity": "Mechanism and connectivity claims are more specific than category labels.",
+            "evidence": "Detection claim carries an asterisk with no explanation visible in supplied assets; no sensor conditions, test or encryption detail.",
+            "wordiness": "Much wordier than other grids, with small text at rendered size.",
+            "neighboring_grid_connection": "Matches card 9 alarm installation; four tiles are not four product choices.",
+            "notes": [
+              "Grid module should be classified as hybrid product/benefit composition, not four-SKU assortment."
+            ]
+          }
+        },
+        {
+          "position": 11,
+          "type": "media",
+          "content_paraphrase": "Names the wound-shower category.",
+          "function": "Show application context",
+          "image_subject": "White handheld shower with copper-colored face rinsing an open palm in tiled bathroom.",
+          "editorial_assessment": {
+            "specificity": "Recognizable action, but no wound treatment steps or clinical indication explained.",
+            "evidence": "Use photograph does not demonstrate therapeutic result or medical suitability.",
+            "wordiness": "One category label.",
+            "neighboring_grid_connection": "Directly leads to card 12 single-image mosaic.",
+            "notes": []
+          }
+        },
+        {
+          "position": 12,
+          "type": "grid",
+          "content_paraphrase": "Wound-shower shopping module uses four tiles to reconstruct one large white handheld shower on pale ground, plus a blue certification/quality badge.",
+          "function": "Single product hero presented through four-grid mosaic",
+          "image_subject": "One diagonal white shower head crosses tile boundaries; upper-right contains quality badge.",
+          "editorial_assessment": {
+            "specificity": "One product form is clear, not four options.",
+            "evidence": "Badge lacks visible issuer/scope.",
+            "wordiness": "Heading and CTA only.",
+            "neighboring_grid_connection": "Strong category match to card 11 but mosaic introduces gutters through product; target mapping unavailable.",
+            "notes": [
+              "Four quadrants reconstruct one image and must not be counted as four products."
+            ]
+          }
+        },
+        {
+          "position": 13,
+          "type": "media",
+          "content_paraphrase": "Names replacement filters.",
+          "function": "Introduce replenishment category",
+          "image_subject": "Hand under water at bathroom tap fitted with compact white attachment.",
+          "editorial_assessment": {
+            "specificity": "Shows in-use filter attachment, not the spare cartridge itself.",
+            "evidence": "No replacement interval or compatible model labels.",
+            "wordiness": "One category label.",
+            "neighboring_grid_connection": "Direct match by category to card 14, but imagery does not identify which spare fits installed unit.",
+            "notes": []
+          }
+        },
+        {
+          "position": 14,
+          "type": "grid",
+          "content_paraphrase": "Four replacement-filter presentations: long chrome cartridge/body, cream cartridge, white cylindrical cartridge, and pleated white cartridge with orange ends. Tiny corner insets show associated device forms.",
+          "function": "Replenishment and cross-sell navigation",
+          "image_subject": "Four isolated cartridges on pale background with parent-device miniatures.",
+          "editorial_assessment": {
+            "specificity": "Parent-device insets help visual compatibility recognition.",
+            "evidence": "Does not establish actual compatibility without names or destination detail.",
+            "wordiness": "Category and CTA only; inset details are visually small.",
+            "neighboring_grid_connection": "Completes card 13 pair, strongest visual attempt to relate refill to parent device.",
+            "notes": []
+          }
+        }
+      ],
+      "grid_categories": [
+        "Legionellenfilter",
+        "Trinkwasserfilter",
+        "Wasseralarm",
+        "Wunddusche",
+        "Ersatzfilter"
+      ],
+      "motifs": [
+        "Blue gradient, condensed white typography, pale isolated-product grid backgrounds",
+        "Bathroom/kitchen installation contexts, water streams, chrome and white equipment",
+        "Repeated certification/quality badges and German-origin flag cues"
+      ],
+      "strengths": [
+        "Very clear category rhythm: contextual image immediately followed by corresponding browse grid.",
+        "Five category labels make broad assortment legible.",
+        "Installation scenes explain where equipment belongs.",
+        "Replacement grid uses parent-product inset images as compatibility cues.",
+        "Stable color/type system reduces layout noise despite many cards."
+      ],
+      "weaknesses": [
+        "Four trust cards before first shopping grid delay assortment.",
+        "Brand age, customer count, sustainability and certification claims lack supporting context in supplied reference.",
+        "Legionella-specific safety statements precede diverse categories, creating possible scope ambiguity.",
+        "Water-alarm grid is benefit composition and wound-shower grid is a split-image mosaic; neither is four-product assortment.",
+        "Grid variants lack readable model/compatibility labels; broad health/protection language requires controlled scope."
+      ],
+      "transferable_patterns": [
+        "For multi-category brands, use repeated category-in-use → matching labelled grid pairs.",
+        "Choose category labels by buying task rather than internal model nomenclature.",
+        "Audit each grid tile semantically: product, benefit panel, icon or mosaic fragment.",
+        "Let category imagery explain placement; let grid images support selection.",
+        "Add named proof only when issuer, scope and evidence can be supplied; carry no water-safety claims to unrelated brands.",
+        "For consumables/refills, pair cartridge imagery with compatible parent-device cues and explicit compatibility data if available."
+      ],
+      "inspection": {
+        "contact_sheets": "All supplied contact sheets visually inspected, covering every card in order.",
+        "originals_checked": [
+          "desktop.jpg",
+          "card-04.jpg",
+          "card-10-3.jpg",
+          "card-10-4.jpg"
+        ],
+        "unreadable_text": [
+          "Tiny packaging/product-inset lettering is not reliably readable at sheet scale; not transcribed."
+        ],
+        "limitations": [
+          "No sales-performance conclusions.",
+          "Bestseller/leadership/quality/safety statements are observed claims, not independently verified facts.",
+          "Destination ASINs and link targets unavailable; tile count is not product count.",
+          "No conclusions about live Amazon compliance or actual clickability from static reference alone."
+        ]
+      }
+    }
+  ]
+}

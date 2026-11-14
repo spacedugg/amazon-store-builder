@@ -1,32 +1,37 @@
 import React, { useState } from 'react';
 import StoryModal from './StoryModal';
-import { CONTEXT_FIELDS, prepareStoryImport } from '../../brandStoryWorkflow.mjs';
-import { claudePrompt } from '../../brandStoryModel.mjs';
+import StoryPlanning from './StoryPlanning';
+import { prepareStoryImport } from '../../brandStoryWorkflow.mjs';
+import { claudePrompt, validateStory } from '../../brandStoryModel.mjs';
+import { appendPlannedGrids, defaultPlanning } from '../../brandStoryPlanning.mjs';
 
 export default function StorySetupDialog({ story, projectIdentity, draft, setDraft, onChange, onClose, onStart, onImport, onExport }) {
   const { json, review } = draft;
-  const setJson = json => setDraft(d => ({ ...d, json, review: null }));
-  const setReview = review => setDraft(d => ({ ...d, review }));
+  const [stage, setStage] = useState(story.cards.length || json ? 'claude' : 'plan');
   const [error, setError] = useState(''), [notice, setNotice] = useState('');
-  const field = (label, key, area = true, context = false) => <label className="bs-field" key={key}><span>{label}</span>{React.createElement(area ? 'textarea' : 'input', {
-    'aria-label': label,
-    value: context ? story.context?.[key] || '' : story[key] || '',
-    onChange: e => { onChange(context ? { ...story, context: { ...story.context, [key]: e.target.value } } : { ...story, [key]: e.target.value }); setReview(null); },
-  })}</label>;
-  function check() {
-    try { setReview(prepareStoryImport(json, story.brandName.trim() ? story : null, projectIdentity || (story.brandName.trim() ? story : null))); setError(''); }
-    catch (e) { setReview(null); setError('JSON konnte nicht übernommen werden: ' + e.message); }
+  const change = next => { onChange(next); setDraft(d=>({...d,review:null})); };
+  function ready() { validateStory({...story,planning:story.planning || defaultPlanning()}); }
+  function proceed() { try { ready(); setStage('claude'); setError(''); } catch(e) { setError(e.message); } }
+  function manual(withGrids=false) {
+    try { ready(); const next=withGrids?appendPlannedGrids(story):story; onChange(next); onStart(); }
+    catch(e) { setError(e.message); }
   }
-  return <StoryModal title="Brand Story mit Claude entwickeln" onClose={onClose} wide>
-    <div className="bs-setup-intro"><span className="bs-step">1</span><div><h3>Marke und Inhalte festlegen</h3><p>Was ist für diese Marke wichtig? Welche Produkte und Unterseiten sollen vorkommen? Ergänze belegbare Informationen und vorhandenes Material.</p></div></div>
-    <div className="bs-setup-fields">{field('Markenname', 'brandName', false)}{field('Marktplatz', 'marketplace', false)}{field('Sprache', 'language', false)}{field('Markeninformationen und Quellen', 'brandFacts')}{CONTEXT_FIELDS.map(([key, label]) => field(label, key, key !== 'cardCount', true))}{field('Eigene Hinweise zum Konzept', 'instructions')}</div>
-    <div className="bs-setup-intro"><span className="bs-step">2</span><div><h3>Konzept in Claude abstimmen</h3><p>Kopiere die Anleitung mit deinen Angaben nach Claude. Kläre dort die Inhalte, Hintergrundmotive und Kartenreihenfolge. Bitte erst danach um das fertige JSON. Dieselben maximal 19 Karten werden auf Desktop und Mobil verwendet.</p></div></div>
-    <div className="bs-dialog-actions"><button className="bs-primary" onClick={async () => { try { if (!story.brandName.trim()) throw Error('Bitte zuerst den Markennamen eingeben.'); await navigator.clipboard.writeText(claudePrompt(story)); setNotice('Anleitung mit Markenangaben kopiert.'); } catch (e) { setError(e.message); } }}>Anleitung kopieren</button><a className="bs-button-link" href="/brand-story-claude/temoa-brand-story.zip" download>Claude-Skill herunterladen</a><a className="bs-button-link" href="/brand-story-claude/SKILL.md" download>Anleitung als Text</a><button onClick={onExport}>Aktuellen Stand als JSON sichern</button></div>
-    <div className="bs-setup-intro"><span className="bs-step">3</span><div><h3>JSON einsetzen und Vorschau öffnen</h3><p>Füge das abgestimmte JSON ein oder lade die Datei hoch. Texte, Motive und Links kannst du anschließend direkt im Builder bearbeiten.</p></div></div>
-    <label className="bs-field"><span>Brand Story JSON</span><textarea aria-label="Brand Story JSON" className="bs-json" value={json} onChange={e => { setJson(e.target.value); setReview(null); }} placeholder={'{ "schemaVersion": 1, "brandName": "…", … }'} /></label>
-    <label className="bs-upload">JSON-Datei laden<input type="file" accept="application/json,.json" onChange={async e => { const file = e.target.files?.[0]; if (!file) return; try { setJson(await file.text()); setReview(null); setError(''); } catch (err) { setError(err.message); } e.target.value = ''; }} /></label>
+  function check() {
+    try { setDraft(d=>({...d,review:prepareStoryImport(json,story.brandName.trim()?story:null,projectIdentity || (story.brandName.trim()?story:null))})); setError(''); }
+    catch(e) { setDraft(d=>({...d,review:null})); setError('JSON konnte nicht übernommen werden: '+e.message); }
+  }
+  return <StoryModal title={stage==='plan'?'Brand Story anlegen':'Konzept mit Claude'} onClose={onClose} wide>
+    {stage==='plan'?<><p className="bs-help">Übernimm den Store oder lege dein Layout selbst an. Die Karten bleiben für Desktop und Mobil identisch.</p><StoryPlanning story={story} onChange={change} onContinue={proceed} onManual={manual} onJson={()=>setStage('claude')}/></>:<>
+      <button onClick={()=>setStage('plan')}>← Marke und Auswahl bearbeiten</button>
+      <div className="bs-setup-intro"><span className="bs-step">1</span><div><h3>Auftrag in Claude öffnen</h3><p>Der Organisations-Skill <strong>temoa-brand-story</strong> muss einmalig in Claude eingerichtet sein. Kopiere den Projektauftrag in einen Claude-Chat, stimme dort das Konzept ab und lasse anschließend das JSON ausgeben.</p></div></div>
+      <p className="bs-help">{story.brandName || 'Neue Marke'} · {story.cards.length} vorhandene Karten · {story.planning?.categories?.filter(c=>c.selected).length || 0} ausgewählte Kategorien</p>
+      <div className="bs-dialog-actions"><button className="bs-primary" onClick={async()=>{try{ready();await navigator.clipboard.writeText(claudePrompt(story));setNotice('Auftrag für den hinterlegten Claude-Skill kopiert.');setError('');}catch(e){setError(e.message);}}}>Auftrag für Claude kopieren</button><button onClick={onExport}>Projektstand als JSON sichern</button></div>
+      <div className="bs-setup-intro"><span className="bs-step">2</span><div><h3>Konzept importieren und Vorschau öffnen</h3><p>Füge das abgestimmte JSON ein oder lade die Datei hoch. Karten, Texte, Hintergrundmotive und Links bleiben im Builder bearbeitbar.</p></div></div>
+      <label className="bs-field"><span>Brand Story JSON</span><textarea aria-label="Brand Story JSON" className="bs-json" value={json} onChange={e=>setDraft(d=>({...d,json:e.target.value,review:null}))} placeholder={'{ "schemaVersion": 1, "brandName": "…", … }'}/></label>
+      <label className="bs-upload">JSON-Datei laden<input type="file" accept="application/json,.json" onChange={async e=>{const file=e.target.files?.[0];if(!file)return;try{const text=await file.text();setDraft(d=>({...d,json:text,review:null}));setError('');}catch(err){setError(err.message);}e.target.value='';}}/></label>
+      {review && <div className="bs-import-review"><h3>{review.story.brandName} · {review.story.marketplace.toUpperCase()}</h3><p>{review.summary}</p><p>Desktop und Mobil verwenden dieselbe Kartenfolge. Hintergrundmotive und Inhalte bleiben bearbeitbar.</p><ol>{review.story.cards.map(c=><li key={c.id}>{c.type==='grid'?'ASIN-Grid':'Brand Media Asset'}{c.headline || c.title || c.copy?` · ${c.headline || c.title || c.copy}`:''}</li>)}</ol><p>{review.foreign?'Dieser Import wird als eigenes Projekt geöffnet.':'Dieser Import ersetzt die Kartenstruktur des aktuellen Entwurfs. Passende vorhandene Bilder bleiben erhalten. Sichere den aktuellen Stand bei Bedarf vorher als JSON.'}</p></div>}
+      <footer className="bs-dialog-actions"><button className="bs-primary" disabled={!json.trim()} onClick={()=>review?onImport(review):check()}>{review?'Konzept übernehmen':'JSON prüfen'}</button><button onClick={()=>manual(false)}>Vorschau ohne JSON öffnen</button></footer>
+    </>}
     {notice && <p role="status">{notice}</p>}{error && <p className="bs-warning" role="alert">{error}</p>}
-    {review && <div className="bs-import-review"><h3>{review.story.brandName} · {review.story.marketplace.toUpperCase()}</h3><p>{review.summary}</p><p>Desktop und Mobil verwenden dieselbe Kartenfolge. Hintergrundmotive und Inhalte bleiben bearbeitbar.</p><ol>{review.story.cards.map(c => <li key={c.id}>{c.type === 'grid' ? 'ASIN-Grid' : 'Brand Media Asset'}{c.headline || c.title || c.copy ? ` · ${c.headline || c.title || c.copy}` : ''}</li>)}</ol><p>{review.foreign ? 'Dieser Import wird als eigenes Projekt geöffnet.' : 'Dieser Import ersetzt die Kartenstruktur des aktuellen Entwurfs. Passende vorhandene Bilder bleiben erhalten. Sichere den aktuellen Stand bei Bedarf vorher als JSON.'}</p></div>}
-    <footer className="bs-dialog-actions"><button className="bs-primary" disabled={!json.trim()} onClick={() => { if (review) onImport(review); else check(); }}>{review ? 'Konzept übernehmen' : 'JSON prüfen'}</button><button onClick={() => { if (!story.brandName.trim()) { setError('Bitte einen Markennamen eingeben.'); return; } if (!['de', 'com', 'co.uk', 'fr', 'it', 'es', 'nl', 'se', 'pl', 'com.be'].includes(story.marketplace)) { setError('Bitte einen unterstützten Marktplatz eingeben.'); return; } onStart(); }}>Vorschau ohne JSON öffnen</button></footer>
   </StoryModal>;
 }

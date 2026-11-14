@@ -1,3 +1,4 @@
+import { validatePlanning } from './brandStoryPlanning.mjs';
 export const SPECS = {
   desktop: [3660, 1563],
   mobile: [1389, 1875],
@@ -144,6 +145,7 @@ export function validateStory(s) {
     throw Error("Hintergrund und maximal 19 Karten erforderlich.");
   if ('mobileCards' in s || 'desktopCards' in s)
     throw Error('Desktop und Mobil verwenden eine gemeinsame Kartenliste.');
+  if (s.planning !== undefined) validatePlanning(s.planning);
   if (s.context && (typeof s.context !== 'object' || Array.isArray(s.context) || Object.values(s.context).some(v => typeof v !== 'string')))
     throw Error('Markeninformationen müssen Text enthalten.');
   if (!['desktopBrief', 'mobileBrief', 'desktopCopy', 'mobileCopy'].every(k => text(s.background[k])))

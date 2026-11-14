@@ -42,6 +42,99 @@
     "instructions": {
       "type": "string"
     },
+    "planning": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "mode",
+        "storeUrl",
+        "goal",
+        "categories",
+        "focusProducts",
+        "includeFocusGrid"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "store",
+            "manual"
+          ]
+        },
+        "storeUrl": {
+          "type": "string"
+        },
+        "goal": {
+          "type": "string"
+        },
+        "categories": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "required": [
+              "id",
+              "name",
+              "url",
+              "selected",
+              "asins"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "selected": {
+                "type": "boolean"
+              },
+              "asins": {
+                "type": "array",
+                "maxItems": 4,
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9]{10}$"
+                }
+              },
+              "status": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "focusProducts": {
+          "type": "array",
+          "maxItems": 19,
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "required": [
+              "asin",
+              "reason"
+            ],
+            "properties": {
+              "asin": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9]{10}$"
+              },
+              "reason": {
+                "type": "string"
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "includeFocusGrid": {
+          "type": "boolean"
+        }
+      }
+    },
     "context": {
       "type": "object",
       "additionalProperties": false,
