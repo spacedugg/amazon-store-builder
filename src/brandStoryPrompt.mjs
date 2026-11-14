@@ -96,7 +96,7 @@ export const STORY_EXAMPLE = {
 };
 
 export function claudePrompt(story) {
-  return `Nutze den in unserer Claude-Organisation installierten Skill temoa-brand-story für dieses Projekt. Lies seine Referenzen und entwickle aus dem folgenden Projektstand ein auftragsgerechtes Konzept. Stelle nur noch offene Fragen; bestätige das Konzept vor der finalen Ausgabe.
+  return `Nutze den in unserer Claude-Organisation installierten Skill Amazon Brand Story für dieses Projekt. Lies seine Referenzen und entwickle aus dem folgenden Projektstand ein auftragsgerechtes Konzept. Stelle nur noch offene Fragen; bestätige das Konzept vor der finalen Ausgabe.
 Danach erwarte ich ausschließlich vollständiges importierbares Builder-JSON (schemaVersion 1) gemäß dem Skill-Schema. Erhalte bestehende IDs, fileKey-Werte, Dateipfade, Bildobjekte sowie Kontext und Planungsmetadaten. Vorhandene Karten sind der editierbare Projektstand. Falls der Skill nicht verfügbar ist, melde das, statt Schema oder Methodik zu erraten.
 
 AKTUELLER PROJEKTSTAND
@@ -104,13 +104,13 @@ ${JSON.stringify(story, null, 2)}`;
 }
 
 export const CLAUDE_SKILL = `---
-name: temoa-brand-story
-description: Entwickle und überarbeite Amazon Brand Stories für den temoa Brand Story Builder aus Markeninformationen, Store-Kategorien, ausgewählten Produkten und vorhandenen Materialien. Nutze diesen Skill bei explizitem Aufruf von temoa-brand-story, für Story-Konzepte, Karten-/Hintergrundbriefings oder einen vollständigen JSON-Import.
+name: Amazon Brand Story
+description: Erstelle Amazon Brand Stories mit Kartenfolge, Texten, Hintergrund- und Designerbriefings sowie importierbarem JSON für den temoa Builder. Nutze diesen Skill für neue Stories und Überarbeitungen.
 ---
 
-# temoa Brand Story
+# Amazon Brand Story
 
-Einmal als Skill in der Claude-Organisation bereitstellen. Jedes Projekt ruft temoa-brand-story mit seinem aktuellen Builder-JSON auf. Dieses Paket enthält die Methode und den Importvertrag; der Projektprompt muss sie nicht wiederholen.
+Einmal als Skill in der Claude-Organisation bereitstellen. Jedes Projekt ruft Amazon Brand Story mit seinem aktuellen Builder-JSON auf. Dieses Paket enthält die Methode und den Importvertrag; der Projektprompt muss sie nicht wiederholen.
 
 ## Referenzen laden
 

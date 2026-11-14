@@ -192,7 +192,7 @@ test('Store-first discovery reviews categories, recovers a failed page, and copi
   await page.getByRole('button',{name:'Weiter zu Claude',exact:true}).click();
   await page.getByRole('button',{name:'Auftrag für Claude kopieren',exact:true}).click();
   const prompt=await page.evaluate(()=>navigator.clipboard.readText());
-  expect(prompt).toContain('temoa-brand-story'); expect(prompt).toContain(one); expect(prompt).toContain('B012345678');
+  expect(prompt).toContain('Amazon Brand Story'); expect(prompt).toContain(one); expect(prompt).toContain('B012345678');
   expect(prompt).not.toContain('$schema');
   const data=JSON.parse(prompt.slice(prompt.indexOf('{')));
   expect(data.planning.goal).toBe('hero'); expect(data.planning.focusProducts).toHaveLength(1);
@@ -207,7 +207,7 @@ test('Store-first discovery reviews categories, recovers a failed page, and copi
 test('manual route opens an empty shared preview and organization setup is separate from project creation', async ({ page }) => {
   await setup(page);
   await page.getByRole('button',{name:'Claude einmalig einrichten',exact:true}).click();
-  await expect(page.getByRole('link',{name:'Organisations-Skill herunterladen',exact:true})).toHaveAttribute('href','/brand-story-claude/temoa-brand-story.zip');
+  await expect(page.getByRole('link',{name:'Organisations-Skill herunterladen',exact:true})).toHaveAttribute('href','/brand-story-claude/amazon-brand-story.zip');
   await page.getByRole('button',{name:'Dialog schließen',exact:true}).click();
   await page.getByRole('button',{name:'Neue Brand Story',exact:true}).first().click();
   await page.getByRole('button',{name:'Manuell starten',exact:true}).click();

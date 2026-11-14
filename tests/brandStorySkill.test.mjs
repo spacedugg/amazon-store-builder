@@ -7,13 +7,13 @@ const root = new URL('../', import.meta.url);
 
 test('portable Claude package includes deterministic skill and both loaded references', async () => {
   execFileSync('node', ['scripts/build-brand-story-skill.mjs'], { cwd: root });
-  const archive = new URL('../public/brand-story-claude/temoa-brand-story.zip', import.meta.url);
+  const archive = new URL('../public/brand-story-claude/amazon-brand-story.zip', import.meta.url);
   const before = await readFile(archive);
   const entries = JSON.parse(execFileSync('python3', ['-c', 'import json,zipfile,sys; z=zipfile.ZipFile(sys.argv[1]); print(json.dumps({n:z.read(n).decode() for n in z.namelist()}))', archive.pathname], { encoding: 'utf8' }));
-  assert.deepEqual(Object.keys(entries), ['temoa-brand-story/SKILL.md', 'temoa-brand-story/references/story-patterns.md', 'temoa-brand-story/references/story-schema.json']);
-  assert.equal(entries['temoa-brand-story/SKILL.md'], CLAUDE_SKILL);
-  assert.equal(entries['temoa-brand-story/references/story-patterns.md'], STORY_PATTERNS);
-  assert.deepEqual(JSON.parse(entries['temoa-brand-story/references/story-schema.json']), STORY_SCHEMA);
+  assert.deepEqual(Object.keys(entries), ['amazon-brand-story/SKILL.md', 'amazon-brand-story/references/story-patterns.md', 'amazon-brand-story/references/story-schema.json']);
+  assert.equal(entries['amazon-brand-story/SKILL.md'], CLAUDE_SKILL);
+  assert.equal(entries['amazon-brand-story/references/story-patterns.md'], STORY_PATTERNS);
+  assert.deepEqual(JSON.parse(entries['amazon-brand-story/references/story-schema.json']), STORY_SCHEMA);
   execFileSync('node', ['scripts/build-brand-story-skill.mjs'], { cwd: root });
   assert.deepEqual(await readFile(archive), before);
 });

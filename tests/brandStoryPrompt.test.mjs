@@ -8,7 +8,7 @@ test('project prompt explicitly invokes the organization skill without duplicati
   s.context = { audience: 'Pendler', products: 'Maske B012345678', destinations: 'https://www.amazon.de/stores/page/existing' };
   s.planning = { mode: 'store', goal: 'Hero erklären', categories: [], focusProducts: [{ asin: 'B012345678', reason: 'explain' }], includeFocusGrid: true };
   const prompt = claudePrompt(s);
-  for (const value of ['temoa-brand-story', 'Pendler', 'B012345678', 'https://www.amazon.de/stores/page/existing', 'Hero erklären']) assert(prompt.includes(value), value);
+  for (const value of ['Amazon Brand Story', 'Pendler', 'B012345678', 'https://www.amazon.de/stores/page/existing', 'Hero erklären']) assert(prompt.includes(value), value);
   assert(prompt.length - JSON.stringify(s, null, 2).length < 1000);
   assert(!prompt.includes('$schema'));
   assert(!prompt.includes('3660'));
@@ -33,7 +33,7 @@ test('schema preserves version one with optional editable planning and shared ca
   assert.equal(planning.properties.includeFocusGrid.type, 'boolean');
   validateStory(STORY_EXAMPLE);
   assert.equal(await readFile(new URL('../public/brand-story-claude/SKILL.md', import.meta.url), 'utf8'), CLAUDE_SKILL);
-  assert.match(CLAUDE_SKILL, /^---\nname: temoa-brand-story/m);
+  assert.match(CLAUDE_SKILL, /^---\nname: Amazon Brand Story/m);
   assert.match(CLAUDE_SKILL, /references\/story-patterns\.md/);
   assert.match(CLAUDE_SKILL, /references\/story-schema\.json/);
   assert(!/"(?:mobileCards|desktopCards)"\s*:/.test(JSON.stringify(STORY_SCHEMA)));
