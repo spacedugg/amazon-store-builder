@@ -200,7 +200,7 @@ test('Store-first discovery reviews categories, recovers a failed page, and copi
   await page.getByRole('button',{name:'← Marke und Auswahl bearbeiten',exact:true}).click();
   await page.getByRole('button',{name:'Kategorie-Grids als Layout öffnen',exact:true}).click();
   await expect(page.locator('.bs-card')).toHaveCount(2);
-  await expect(page.locator('.bs-grid-footer').first()).toHaveAttribute('href',one);
+  await expect(page.locator('.bs-grid-footer a').first()).toHaveAttribute('href',one);
   await expect(page.locator('.bs-grid a').first()).toHaveAttribute('href','https://www.amazon.de/dp/B012345678');
 });
 

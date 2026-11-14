@@ -19,6 +19,10 @@ export function mergeStoreNavigation(planning, result) {
   const merged=mergeDiscoveredPages({...planning,categories:changed&&loaded?[]:planning.categories},result);
   return {...merged,storeUrl:result.storeUrl,...(loaded?{discoveredStoreUrl:result.storeUrl}:{})};
 }
+export function applyStoreDiscovery(story, result) {
+  const loaded=result.pages?.some(p=>p.status==='loaded');
+  return {...story,brandName:story.brandName || (loaded?result.brandName:'') || '',marketplace:loaded?(result.marketplace || story.marketplace):story.marketplace,planning:mergeStoreNavigation(story.planning || defaultPlanning(),result)};
+}
 
 export function mergeDiscoveredPages(planning, result) {
   const next = structuredClone(planning);

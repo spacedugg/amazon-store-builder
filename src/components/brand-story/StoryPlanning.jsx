@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { defaultPlanning, mergeDiscoveredPages, mergeStoreNavigation, parseAsins, STORY_GOALS, FOCUS_REASONS } from '../../brandStoryPlanning.mjs';
+import { defaultPlanning, mergeDiscoveredPages, applyStoreDiscovery, parseAsins, STORY_GOALS, FOCUS_REASONS } from '../../brandStoryPlanning.mjs';
 
 export default function StoryPlanning({ story, onChange, onContinue, onManual, onJson }) {
   const p = story.planning || defaultPlanning();
@@ -25,9 +25,7 @@ export default function StoryPlanning({ story, onChange, onContinue, onManual, o
         setProgress('Store-Navigation wird gelesen …');
         const result=await request(storeUrl,null,abort.signal);
         if(abort.signal.aborted) return;
-        const base=latest.current, plan=base.planning || defaultPlanning();
-        const merged=mergeStoreNavigation(plan,result);
-        apply({...base,brandName:base.brandName || result.brandName || '',marketplace:result.marketplace || base.marketplace,planning:merged});
+        apply(applyStoreDiscovery(latest.current,result));
         setProgress((result.warnings || []).join(' ') || 'Unterseiten gefunden. Auswahl und Namen bitte prüfen.');
       }else{
         const pages=page==='selected'?p.categories.filter(c=>c.selected&&c.url):[page];

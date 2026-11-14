@@ -54,3 +54,9 @@ test('first navigation crawl and failed replacement preserve manually curated ca
   const failed=planning.mergeStoreNavigation(loaded,{storeUrl:'https://www.amazon.de/stores/new',pages:[{url:'https://www.amazon.de/stores/new',status:'error',asins:[]}]});
   assert.deepEqual(failed.categories[0],p.categories[0]);assert.equal(failed.discoveredStoreUrl,p.storeUrl);
 });
+test('failed navigation does not change the marketplace of existing product targets', () => {
+  const s=newStory('DE Marke');s.planning={...planning.defaultPlanning(),storeUrl:'https://www.amazon.com/stores/new',discoveredStoreUrl:'https://www.amazon.de/stores/old'};
+  const result={storeUrl:s.planning.storeUrl,marketplace:'com',pages:[{url:s.planning.storeUrl,status:'error',asins:[]}]};
+  const next=planning.applyStoreDiscovery(s,result);
+  assert.equal(next.marketplace,'de');assert.equal(next.brandName,'DE Marke');
+});
