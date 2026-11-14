@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { upload } from '@vercel/blob/client';
 import { fetchProductData } from '../productData';
 import { newStory, newCard, validateStory, imageWarnings, resolveUploadTarget, publicationWarnings } from '../brandStoryModel.mjs';
-import { normalizeStory } from '../brandStoryWorkflow.mjs';
+import { normalizeStory, changedStoryAssets } from '../brandStoryWorkflow.mjs';
 import { StoryCarousel } from './brand-story/StoryCarousel';
 import { StoryProperties } from './brand-story/StoryElements';
 import StoryOverview from './brand-story/StoryOverview';
@@ -68,7 +68,8 @@ export default function BrandStoryBuilder() {
     [raster, setRaster] = useState(false), [busy, setBusy] = useState(false), [message, setMessage] = useState(''),
     [dirty, setDirty] = useState(false), [loading, setLoading] = useState(!token), [recovery, setRecovery] = useState(null),
     [setupOpen, setSetupOpen] = useState(false), [referencesOpen, setReferencesOpen] = useState(false),
-    [shareOpen, setShareOpen] = useState(false), [pickerPosition, setPickerPosition] = useState(null);
+    [shareOpen, setShareOpen] = useState(false), [pickerPosition, setPickerPosition] = useState(null),
+    [setupDraft, setSetupDraft] = useState({ json: '', review: null });
   useEffect(() => {
     if (token) api('?token=' + encodeURIComponent(token)).then(r => { setStory(r.mode === 'customer' ? r.data : normalizeStory(r.data)); setRecord({ revision: r.revision }); setMode(r.mode); }).catch(e => { setMode('error'); setMessage(e.message); });
     else {
@@ -86,19 +87,9 @@ export default function BrandStoryBuilder() {
   }, [dirty]);
   const currentStory = useRef(story);
   currentStory.current = story;
-  const card = story?.cards.find((c) => c.id === selected);
   function change(fn) {
     setStory((s) => fn(structuredClone(s)));
     setDirty(true);
-  }
-  function updateCard(patch) {
-    change((s) => {
-      Object.assign(
-        s.cards.find((c) => c.id === selected),
-        patch,
-      );
-      return s;
-    });
   }
   const running = useRef(false);
   async function run(fn) {
@@ -120,7 +111,7 @@ export default function BrandStoryBuilder() {
     let current = record;
     if (!current.id) {
       current = await api("", { data: story });
-      setRecord(current);
+      setRecord({ ...current, identity: { brandName: story.brandName, marketplace: story.marketplace } });
     }
     const r = await api("", {
       id: current.id,
@@ -128,7 +119,7 @@ export default function BrandStoryBuilder() {
       data: story,
       publish,
     });
-    setRecord(r);
+    setRecord({ ...r, identity: { brandName: (r.data || story).brandName, marketplace: (r.data || story).marketplace } });
     if (currentStory.current === story) setDirty(false);
     setMessage(publish ? "Freigabelinks aktualisiert." : "Gespeichert.");
     setStories((await api()).stories);
@@ -163,20 +154,17 @@ export default function BrandStoryBuilder() {
     if (dirty && !confirm("Ungespeicherte Änderungen verwerfen?")) return;
     await run(async () => {
       const r = await api("?id=" + encodeURIComponent(id));
-      setStory(r.data);
-      setRecord(r);
+      setStory(normalizeStory(r.data));
+      setSetupDraft({ json: '', review: null });
+      setRecord({ ...r, identity: { brandName: (r.data || story).brandName, marketplace: (r.data || story).marketplace } });
       setSelected(null);
       setDirty(false);
       setOverview(false);
     });
   }
   async function saveDesignerAssets(next) {
-    const assets = [];
-    for (const kind of ['desktop', 'mobile']) if (next.background[kind]) assets.push({ kind, image: next.background[kind] });
-    for (const c of next.cards) {
-      if (c.type === 'media' && c.image) assets.push({ kind: 'media', cardId: c.id, image: c.image });
-      if (c.type === 'grid') c.slots.forEach((slot, i) => { if (slot.image) assets.push({ kind: 'product', cardId: c.id, slot: i, image: slot.image }); });
-    }
+    const assets = changedStoryAssets(story, next);
+    if (!assets.length) return;
     const r = await api('?token=' + encodeURIComponent(token), { assets, revision: record.revision });
     setStory(r.data); setRecord({ revision: r.revision });
   }
@@ -259,14 +247,23 @@ export default function BrandStoryBuilder() {
     });
   }
   function startNew() {
+    if (running.current) return;
+    setSetupDraft({ json: '', review: null });
     setStory(normalizeStory(newStory(''))); setRecord({}); setSelected(null); setDirty(false); setSetupOpen(true); setMessage('');
   }
-  function resume() {
-    if (!recovery) return;
-    setStory(normalizeStory(recovery.story)); setRecord(recovery.record || {}); setDirty(recovery.dirty ?? true); setSelected(null); setOverview(false); setMessage('');
+  async function resume() {
+    if (!recovery || running.current) return;
+    await run(async () => {
+      let savedRecord = recovery.record || {};
+      if (savedRecord.id && !savedRecord.identity) {
+        const remote = await api('?id=' + encodeURIComponent(savedRecord.id));
+        savedRecord = { ...savedRecord, identity: { brandName: remote.data.brandName, marketplace: remote.data.marketplace } };
+      }
+      setStory(normalizeStory(recovery.story)); setRecord(savedRecord); setDirty(recovery.dirty ?? true); setSelected(null); setOverview(false); setMessage(''); setSetupDraft({ json: '', review: null });
+    });
   }
   function applyImport(review) {
-    setStory(review.story); if (review.foreign) setRecord({}); setSelected(null); setDirty(true); setSetupOpen(false); setOverview(false); setMessage('Konzept übernommen. Inhalte prüfen und speichern.');
+    setSetupDraft({ json: '', review: null }); setStory(review.story); if (review.foreign) setRecord({}); setSelected(null); setDirty(true); setSetupOpen(false); setOverview(false); setMessage('Konzept übernommen. Inhalte prüfen und speichern.');
   }
   async function goBack() {
     await run(async () => { if (dirty) await save(); setOverview(true); setMessage(''); });
@@ -305,7 +302,7 @@ export default function BrandStoryBuilder() {
         <StoryProperties story={story} selected={selected} designer={designer} busy={busy} change={change} asset={asset} loadProduct={loadProduct} reorder={reorder} remove={() => { if (confirm('Karte entfernen?')) { change(s => { s.cards = s.cards.filter(c => c.id !== selected); return s; }); setSelected(null); } }} />
       </div>}
     </>}
-    {setupOpen && story && <StorySetupDialog story={story} onChange={s => { setStory(s); setDirty(true); }} onClose={() => setSetupOpen(false)} onStart={() => { setSetupOpen(false); setOverview(false); setDirty(true); }} onImport={applyImport} onExport={() => download(story)} />}
+    {setupOpen && story && <StorySetupDialog story={story} projectIdentity={record.identity} draft={setupDraft} setDraft={setSetupDraft} onChange={s => { setStory(s); setDirty(true); }} onClose={() => setSetupOpen(false)} onStart={() => { setSetupOpen(false); setOverview(false); setDirty(true); }} onImport={applyImport} onExport={() => download(story)} />}
     {pickerPosition !== null && <StoryModal title="Welche Karte möchtest du hinzufügen?" onClose={() => setPickerPosition(null)}><p className="bs-help">{story.cards.length} von 19 Karten · dieselbe Karte für Desktop und Mobil.</p><div className="bs-type-options"><button aria-label="Brand Media Asset" onClick={() => add('media')}><span className="bs-type-media" aria-hidden="true">▧</span><strong>Brand Media Asset</strong><small>Ein vollständiges Bild mit deinem Inhalt.<br />814 × 1019 px</small></button><button aria-label="ASIN-Grid" onClick={() => add('grid')}><span className="bs-type-grid" aria-hidden="true">▦</span><strong>ASIN-Grid</strong><small>Vier Bildplätze, Überschrift und Shop-Link.<br />Je 1328 × 1456 px</small></button></div></StoryModal>}
     {referencesOpen && <StoryReferences onClose={() => setReferencesOpen(false)} />}
     {shareOpen && <StoryModal title="Designer & Kunde" onClose={() => { if (!busy) setShareOpen(false); }}><p>Designer sehen die konkreten Briefings und können fertige Bilder hochladen. Kunden sehen nur den freigegebenen Stand und die Angaben für Seller Central.</p><button className="bs-primary" disabled={busy} onClick={() => run(() => save(true))}>Freigabelinks aktualisieren</button><p className="bs-help">Normales Speichern verändert die Kundenfreigabe nicht. Aktualisiere die Freigabe nach neuen Designer-Uploads bewusst.</p>{['designer', 'customer'].map(kind => record[kind + 'Token'] && <div className="bs-share" key={kind}><a href={link(kind)} target="_blank" rel="noreferrer">{kind === 'designer' ? 'Designer-Link öffnen' : 'Kunden-Preview öffnen'}</a><button disabled={busy} onClick={() => run(() => copy(link(kind)))}>Link kopieren</button></div>)}</StoryModal>}

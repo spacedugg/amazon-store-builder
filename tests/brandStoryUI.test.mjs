@@ -25,7 +25,7 @@ before(async () => {
   Builder = (await import(pathToFileURL(out))).default;
 });
 after(async () => rm(tmp, { recursive: true, force: true }));
-async function mount(shared, run) {
+async function mount(shared, run, options = {}) {
   const dom = new JSDOM('<div id="root"></div>', {
       url: shared
         ? "https://builder.test/brand-stories?token=customer"
@@ -52,11 +52,11 @@ async function mount(shared, run) {
     sessionStorage: dom.window.sessionStorage,
     confirm: () => true,
     IS_REACT_ACT_ENVIRONMENT: true,
-    fetch: async () => ({
+    fetch: options.fetch || (async () => ({
       ok: true,
       json: async () =>
         shared ? { mode: shared === true ? 'customer' : shared, data: s } : { stories: [] },
-    }),
+    })),
   };
   for (const [key, value] of Object.entries(globals)) {
     prev[key] = Object.getOwnPropertyDescriptor(globalThis, key);
@@ -95,6 +95,7 @@ test("overview offers explicit draft recovery and editor uses a card picker plus
     assert(!d.querySelector('.bs-carousel'));
     await click(btn('Letzten Entwurf fortsetzen'));
     assert.match(d.body.textContent, /Testmarke/);
+    assert(d.querySelector('textarea[aria-label="Desktop-Motiv und Inhalt (English)"]'));
     const background = d.querySelector('.bs-backdrop').outerHTML;
     await click(d.querySelector('[aria-label="Nächste Karten"]'));
     assert.match(d.querySelector('.bs-rail').style.transform, /80.34/);
@@ -140,4 +141,30 @@ test('designer has element briefs, matching specifications and image uploads wit
     await click(card);
     assert(d.body.textContent.includes('814 × 1019'));
     assert(!d.querySelector('.bs-properties textarea'));
+  }));
+test('pending project loads disable new-project and draft-recovery actions', async () => {
+  let finish;
+  await mount(false, async (d, click, btn) => {
+    await click(d.querySelector('[aria-label="Gespeichert öffnen"]'));
+    assert(btn('Neue Brand Story').disabled);
+    assert(btn('Letzten Entwurf fortsetzen').disabled);
+    const s = newStory('Gespeichert');
+    await act(async () => finish({ ok: true, json: async () => ({ id: 'saved', data: s, revision: 1 }) }));
+    assert(d.querySelector('.bs-carousel'));
+  }, { fetch: async url => url.includes('?id=') ? new Promise(resolve => { finish = resolve; }) : ({ ok: true, json: async () => ({ stories: [{ id: 'saved', brandName: 'Gespeichert', cardCount: 0 }] }) }) });
+});
+test('closing the Claude dialog preserves pasted JSON and its import review', async () =>
+  mount(false, async (d, click, btn) => {
+    await click(btn('Letzten Entwurf fortsetzen'));
+    await click(btn('Konzept mit Claude'));
+    const file = d.querySelector('input[accept="application/json,.json"]');
+    const value = JSON.stringify(newStory('Importmarke'));
+    Object.defineProperty(file, 'files', { value: [{ text: async () => value }] });
+    await act(async () => file.dispatchEvent(new d.defaultView.Event('change', { bubbles: true })));
+    await click(btn('JSON prüfen'));
+    assert(d.querySelector('.bs-import-review'));
+    await click(btn('Dialog schließen'));
+    await click(btn('Konzept mit Claude'));
+    assert.equal(d.querySelector('[aria-label="Brand Story JSON"]').value, value);
+    assert(d.querySelector('.bs-import-review'));
   }));

@@ -5,6 +5,7 @@ import { createClient } from "@libsql/client";
 import { mkdtemp, rm } from "node:fs/promises";
 import { resolve, join } from "node:path";
 import { newStory, newCard } from "../src/brandStoryModel.mjs";
+import { changedStoryAssets } from '../src/brandStoryWorkflow.mjs';
 const require = createRequire(import.meta.url);
 test("isolated stories, revision conflicts, share privacy and designer images preserve customer snapshots", async () => {
   const tmp = await mkdtemp(resolve(".brandstory-api-")),
@@ -36,6 +37,7 @@ test("isolated stories, revision conflicts, share privacy and designer images pr
     s.instructions = "PRIVATE";
     s.context = { audience: 'PRIVATE_CONTEXT', products: 'PRIVATE_PRODUCTS' };
     s.cards = [newCard("media")];
+    s.cards[0].title = 'PRIVATE_CARD_NAME';
     const created = (await request("POST", { data: s })).body;
     const other = (await request("POST", { data: s })).body;
     assert.notEqual(created.id, other.id);
@@ -57,7 +59,9 @@ test("isolated stories, revision conflicts, share privacy and designer images pr
     assert(!JSON.stringify(c.body).includes("PRIVATE"));
     assert(!("instructions" in c.body.data));
     const d = await request("GET", {}, { token: published.designerToken });
-    assert(!JSON.stringify(d.body).includes("PRIVATE"));
+    assert(!('instructions' in d.body.data));
+    assert(!('context' in d.body.data));
+    assert.equal(d.body.data.cards[0].title, 'PRIVATE_CARD_NAME');
     const list = await request('GET');
     assert.equal(list.body.stories.length, 2);
     assert.equal(list.body.stories[0].cardCount, 1);
@@ -110,6 +114,15 @@ test("isolated stories, revision conflicts, share privacy and designer images pr
       409,
     );
     assert.equal((await request("GET", {}, { token: "unknown" })).code, 404);
+    const working = (await request('GET', {}, { id: created.id })).body;
+    const operatorBackground = { ...image, url: 'https://example.com/operator-background.jpg' };
+    working.data.background.desktop = operatorBackground;
+    await request('POST', { id: created.id, revision: working.revision, data: working.data });
+    const designerSnapshot = (await request('GET', {}, { token: published.designerToken })).body;
+    const updatedSnapshot = structuredClone(designerSnapshot.data);
+    updatedSnapshot.cards[0].image = { ...image, url: 'https://example.com/new-card.jpg' };
+    await request('POST', { revision: designerSnapshot.revision, assets: changedStoryAssets(designerSnapshot.data, updatedSnapshot) }, { token: published.designerToken });
+    assert.deepEqual((await request('GET', {}, { id: created.id })).body.data.background.desktop, operatorBackground);
   } finally {
     db.close();
     delete require.cache[handlerPath];

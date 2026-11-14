@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { newStory, newCard } from '../../src/brandStoryModel.mjs';
+import { readFile } from 'node:fs/promises';
 
 export function fixture() {
   const s = newStory('Markenstudio');
@@ -45,6 +46,11 @@ test('mobile shows precisely one complete card, including a four-slot grid, whil
   await expect.poll(visibleCards).toBe(1);
   expect(await page.locator('.bs-backdrop').boundingBox()).toEqual(background);
   await expect(page.locator('.bs-card').nth(3).locator('.bs-grid a')).toHaveCount(4);
+  const cardBox = await page.locator('.bs-card').nth(3).boundingBox();
+  const gridBox = await page.locator('.bs-card').nth(3).locator('.bs-grid').boundingBox();
+  const footerBox = await page.locator('.bs-card').nth(3).locator('.bs-grid-footer').boundingBox();
+  expect(gridBox.width / cardBox.width).toBeGreaterThan(.9);
+  expect(footerBox.y).toBeGreaterThanOrEqual(gridBox.y + gridBox.height - 1);
   await page.screenshot({ path: 'test-results/brand-story-mobile.png', fullPage: true });
 });
 test('Claude import is reviewed before adoption and background descriptions remain editable', async ({ page }) => {
@@ -91,6 +97,47 @@ test('customer reconstruction contains grid targets and file paths without brief
   await expect(page.locator('body')).not.toContainText('PRIVATE_');
   await expect(page.locator('body')).not.toContainText('DESIGNER_BRIEF');
   await expect(page.locator('input[type="file"]')).toHaveCount(0);
+});
+test('OmniRelexx reproduces the four delivered desktop states with the scrolling logo and final background reveal', async ({ page }) => {
+  const data = JSON.parse(await readFile('public/brand-story-examples/stories.json', 'utf8'));
+  const story = data.stories.find(s => s.brandName === 'OmniRelexx');
+  await page.route('**/api/brand-stories*', r => r.fulfill({ json: { mode: 'customer', data: story } }));
+  await page.goto('/brand-stories?token=omni-reference');
+  const carousel = page.locator('.bs-carousel');
+  await expect(carousel).toBeVisible();
+  await expect.poll(() => carousel.locator('img').evaluateAll(images => images.every(im => im.complete && im.naturalWidth > 0)), { timeout: 30000 }).toBe(true);
+  for (let step = 0; step < 4; step++) {
+    await expect(page.locator('.bs-counter')).toHaveText(`${step + 1} / 4`);
+    const firstIndex = [0, 2, 5, 8][step];
+    await expect.poll(() => carousel.evaluate((el, index) => {
+      const outer = el.getBoundingClientRect(), card = el.querySelectorAll('.bs-card')[index].getBoundingClientRect();
+      return Math.round(100 * (card.left - outer.left) / outer.width);
+    }, firstIndex)).toBe(step === 0 ? 32 : 5);
+    await carousel.screenshot({ path: `test-results/omni-preview-0${step + 1}.png` });
+    if (step < 3) await page.getByRole('button', { name: 'Nächste Karten', exact: true }).click();
+  }
+  await expect(page.getByRole('button', { name: 'Nächste Karten', exact: true })).toBeHidden();
+});
+test('renaming context before importing another brand creates a new record instead of replacing the saved project', async ({ page }) => {
+  await setup(page);
+  const posts = [];
+  await page.route('**/api/brand-stories*', route => {
+    if (route.request().method() !== 'POST') return route.fallback();
+    const payload = route.request().postDataJSON(); posts.push(payload);
+    return route.fulfill({ json: { id: 'new-project', revision: posts.length } });
+  });
+  await page.getByRole('button', { name: 'Markenstudio öffnen' }).click();
+  await page.getByRole('button', { name: 'Konzept mit Claude', exact: true }).click();
+  await page.getByLabel('Markenname', { exact: true }).fill('Andere Marke');
+  const incoming = fixture(); incoming.brandName = 'Andere Marke';
+  await page.getByLabel('Brand Story JSON', { exact: true }).fill(JSON.stringify(incoming));
+  await page.getByRole('button', { name: 'JSON prüfen', exact: true }).click();
+  await expect(page.locator('.bs-import-review')).toContainText('als neue Brand Story');
+  await page.getByRole('button', { name: 'Konzept übernehmen', exact: true }).click();
+  await page.getByRole('button', { name: 'Änderungen speichern', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Speichern', exact: true })).toBeEnabled();
+  expect(posts[0].id).toBeUndefined();
+  expect(posts.every(p => p.id !== 'saved')).toBe(true);
 });
 test('overview is the entry point and saved stories are large project tiles, not a dropdown', async ({ page }) => {
   await setup(page);

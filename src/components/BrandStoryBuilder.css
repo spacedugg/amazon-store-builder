@@ -222,7 +222,7 @@
 }
 .bs-mobile {
   width: 100%;
-  max-width: 463px;
+  max-width: min(463px, calc(74.08dvh - 170px));
   margin: auto;
   aspect-ratio: 463/625;
 }

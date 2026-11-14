@@ -20,6 +20,7 @@ export function Field({ label, value, onChange, area = false, ...props }) {
     <label className="bs-field">
       <span>{label}</span>
       <Tag
+        aria-label={label}
         value={value || ""}
         onChange={(e) => onChange(e.target.value)}
         {...props}

@@ -51,11 +51,11 @@ export function storySummary(s) {
   };
 }
 
-export function prepareStoryImport(text, current) {
+export function prepareStoryImport(text, current, projectIdentity = current) {
   const raw = JSON.parse(text.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, ''));
   validateStory(raw);
   const next = normalizeStory(raw);
-  const foreign = !!current && (next.brandName.trim().toLowerCase() !== current.brandName.trim().toLowerCase() || next.marketplace !== current.marketplace);
+  const foreign = !!projectIdentity && (next.brandName.trim().toLowerCase() !== projectIdentity.brandName.trim().toLowerCase() || next.marketplace !== projectIdentity.marketplace);
   if (current && !foreign) {
     next.context = { ...normalizeStory(current).context, ...raw.context };
     next.brandFacts = raw.brandFacts ?? current.brandFacts ?? '';
@@ -68,13 +68,27 @@ export function prepareStoryImport(text, current) {
       c.assetFile ||= old.assetFile;
       c.image ||= old.image;
       if (c.type === 'grid') c.slots.forEach((slot, i) => {
-        slot.assetFile ||= old.slots[i].assetFile;
-        slot.image ||= old.slots[i].image;
-        slot.productImage = slot.asin === old.slots[i].asin ? slot.productImage || old.slots[i].productImage : null;
+        const previous = old.slots.find(o => slot.assetFile && o.assetFile === slot.assetFile) || old.slots[i];
+        slot.assetFile ||= previous.assetFile;
+        slot.image ||= previous.image;
+        slot.productImage = slot.asin === previous.asin ? slot.productImage || previous.productImage : null;
       });
     }
   }
   validateStory(next);
   const stats = storySummary(next);
   return { story: next, foreign, summary: `${stats.cardCount} Karten · ${stats.mediaCount} Brand Media Assets · ${stats.gridCount} ASIN-Grids${foreign ? ' · wird als neue Brand Story angelegt' : ''}` };
+}
+
+export function changedStoryAssets(before, next) {
+  const assets = [];
+  const changed = (a, b) => JSON.stringify(a ?? null) !== JSON.stringify(b ?? null);
+  for (const kind of ['desktop', 'mobile']) if (changed(before.background[kind], next.background[kind])) assets.push({ kind, image: next.background[kind] });
+  for (const c of next.cards) {
+    const old = before.cards.find(o => o.id === c.id);
+    if (!old) continue;
+    if (c.type === 'media' && changed(old.image, c.image)) assets.push({ kind: 'media', cardId: c.id, image: c.image });
+    if (c.type === 'grid') c.slots.forEach((slot, i) => { if (changed(old.slots[i].image, slot.image)) assets.push({ kind: 'product', cardId: c.id, slot: i, image: slot.image }); });
+  }
+  return assets;
 }

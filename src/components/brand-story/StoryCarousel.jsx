@@ -65,7 +65,7 @@ export function StoryCarousel({ story, mobile = false, raster = false, onSelect,
         {story.cards.map((c, i) => (
           <div
             key={c.id}
-            className={`bs-card bs-${c.type}${selected === c.id ? ' is-selected' : ''}`}
+            className={`bs-card bs-${c.type === 'grid' ? 'grid-card' : 'media'}${selected === c.id ? ' is-selected' : ''}`}
             onClick={onSelect ? (e) => { e.preventDefault(); onSelect(c.id); } : undefined}
             onKeyDown={onSelect ? (e) => { if (e.key === 'Enter') { e.preventDefault(); onSelect(c.id); } } : undefined}
             tabIndex={onSelect ? 0 : undefined}

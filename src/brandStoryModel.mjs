@@ -176,7 +176,7 @@ export function validateStory(s) {
     ids.add(c.id);
     keys.add(c.fileKey);
     if (
-      !["headline", "brief", "copy", "shopUrl", "assetFile"].every((k) =>
+      !["title", "headline", "brief", "copy", "shopUrl", "assetFile"].every((k) =>
         text(c[k]),
       ) ||
       !image(c.image)
@@ -240,7 +240,6 @@ export function customerStory(s) {
       type: c.type,
       fileKey: c.fileKey,
       assetFile: c.assetFile,
-      title: c.title,
       copy: c.copy,
       image: c.image,
       headline: c.headline,

@@ -3,14 +3,18 @@ import StoryModal from './StoryModal';
 import { CONTEXT_FIELDS, prepareStoryImport } from '../../brandStoryWorkflow.mjs';
 import { claudePrompt } from '../../brandStoryModel.mjs';
 
-export default function StorySetupDialog({ story, onChange, onClose, onStart, onImport, onExport }) {
-  const [json, setJson] = useState(''), [review, setReview] = useState(null), [error, setError] = useState(''), [notice, setNotice] = useState('');
+export default function StorySetupDialog({ story, projectIdentity, draft, setDraft, onChange, onClose, onStart, onImport, onExport }) {
+  const { json, review } = draft;
+  const setJson = json => setDraft(d => ({ ...d, json, review: null }));
+  const setReview = review => setDraft(d => ({ ...d, review }));
+  const [error, setError] = useState(''), [notice, setNotice] = useState('');
   const field = (label, key, area = true, context = false) => <label className="bs-field" key={key}><span>{label}</span>{React.createElement(area ? 'textarea' : 'input', {
+    'aria-label': label,
     value: context ? story.context?.[key] || '' : story[key] || '',
     onChange: e => { onChange(context ? { ...story, context: { ...story.context, [key]: e.target.value } } : { ...story, [key]: e.target.value }); setReview(null); },
   })}</label>;
   function check() {
-    try { setReview(prepareStoryImport(json, story.brandName.trim() ? story : null)); setError(''); }
+    try { setReview(prepareStoryImport(json, story.brandName.trim() ? story : null, projectIdentity || (story.brandName.trim() ? story : null))); setError(''); }
     catch (e) { setReview(null); setError('JSON konnte nicht übernommen werden: ' + e.message); }
   }
   return <StoryModal title="Brand Story mit Claude entwickeln" onClose={onClose} wide>

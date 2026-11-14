@@ -1,10 +1,10 @@
 import React from 'react';
 export default function StoryOverview({ stories, loading, error, hasDraft, onResume, onOpen, onNew, busy }) {
   return <div className="store-home bs-overview">
-    <header className="store-home-header"><div><div className="store-home-eyebrow">Brand Story Builder</div><h1>Deine Brand Stories</h1><p>Markengeschichten planen, gestalten und freigeben.</p></div><button className="store-home-create" onClick={onNew}>Neue Brand Story</button></header>
+    <header className="store-home-header"><div><div className="store-home-eyebrow">Brand Story Builder</div><h1>Deine Brand Stories</h1><p>Markengeschichten planen, gestalten und freigeben.</p></div><button className="store-home-create" disabled={busy} onClick={onNew}>Neue Brand Story</button></header>
     <main className="store-home-main">
       <div className="store-home-section"><div><h2>Gespeicherte Brand Stories</h2><p>{loading ? 'Wird geladen …' : `${stories.length} ${stories.length === 1 ? 'Brand Story' : 'Brand Stories'}`}</p></div>
-        {hasDraft && <button className="btn" onClick={onResume}>Letzten Entwurf fortsetzen</button>}</div>
+        {hasDraft && <button className="btn" disabled={busy} onClick={onResume}>Letzten Entwurf fortsetzen</button>}</div>
       {error && <p className="store-home-error" role="alert">{error}</p>}
       {loading ? <p>Brand Stories werden geladen …</p> : <div className="store-home-grid">
         {stories.map(s => <button className="store-home-card" key={s.id} aria-label={`${s.brandName} öffnen`} disabled={busy} onClick={() => onOpen(s.id)}>
@@ -18,7 +18,7 @@ export default function StoryOverview({ stories, loading, error, hasDraft, onRes
           </div>
         </button>)}
       </div>}
-      {!loading && !stories.length && !error && <div className="store-home-empty"><h3>Deine erste Markengeschichte</h3><p>Starte mit der Marke und dem Konzept. Die Vorschau entsteht direkt aus deinem JSON.</p><button className="store-home-create" onClick={onNew}>Neue Brand Story</button></div>}
+      {!loading && !stories.length && !error && <div className="store-home-empty"><h3>Deine erste Markengeschichte</h3><p>Starte mit der Marke und dem Konzept. Die Vorschau entsteht direkt aus deinem JSON.</p><button className="store-home-create" disabled={busy} onClick={onNew}>Neue Brand Story</button></div>}
     </main>
   </div>;
 }

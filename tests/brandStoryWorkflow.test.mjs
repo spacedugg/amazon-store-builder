@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { newStory, newCard, validateStory, customerStory } from '../src/brandStoryModel.mjs';
-import { normalizeStory, backgroundBrief, designerStory, prepareStoryImport, storySummary } from '../src/brandStoryWorkflow.mjs';
+import * as workflow from '../src/brandStoryWorkflow.mjs';
+const { normalizeStory, backgroundBrief, designerStory, prepareStoryImport, storySummary } = workflow;
 
 const image = { url: 'https://example.com/art.jpg', width: 814, height: 1019, size: 1000 };
 test('legacy backgrounds remain editable without losing the original brief and copy', () => {
@@ -42,15 +43,41 @@ test('19 mixed cards are accepted, 20 or separate mobile cards are rejected', ()
   validateStory(s); s.cards.push(newCard('media', s.cards)); assert.throws(() => validateStory(s), /19/);
   s.cards.pop(); s.mobileCards = []; assert.throws(() => validateStory(s), /gemeinsame/);
 });
+test('invalid internal card names are rejected before rendering a concept', () => {
+  const s = newStory('Marke'); s.cards = [newCard('media')]; s.cards[0].title = { unexpected: 'object' };
+  assert.throws(() => validateStory(s), /Kartenfelder/);
+});
 test('designer and customer projections omit all internal context; customers retain reconstruction fields', () => {
   const s = newStory('Marke'); s.context = { audience: 'PRIVATE_AUDIENCE', products: 'PRIVATE_PRODUCTS' };
   s.brandFacts = 'PRIVATE_FACTS'; s.instructions = 'PRIVATE_INSTRUCTIONS';
   s.background.desktopBrief = 'DESIGNER_BACKGROUND'; const c = newCard('media');
   c.brief = 'DESIGNER_CARD'; c.copy = 'Public image text'; s.cards = [c];
+  c.title = 'INTERNAL_CARD_RATIONALE';
   const d = designerStory(s), p = customerStory(s);
   assert(!JSON.stringify(d).includes('PRIVATE')); assert.match(JSON.stringify(d), /DESIGNER_BACKGROUND/);
   assert(!JSON.stringify(p).includes('PRIVATE')); assert(!JSON.stringify(p).includes('DESIGNER'));
+  assert(!JSON.stringify(p).includes('INTERNAL_CARD_RATIONALE'));
   assert.equal(p.cards[0].assetFile, c.assetFile); assert.equal(p.cards[0].copy, c.copy);
+});
+test('import identity is compared to the saved project even after context renames it', () => {
+  const editing = newStory('Neue Marke'); editing.cards = [newCard('media')];
+  const result = prepareStoryImport(JSON.stringify(editing), editing, { brandName: 'Gespeicherte Marke', marketplace: 'de' });
+  assert.equal(result.foreign, true);
+});
+test('reordered grid slots recover their artwork by stable delivery path', () => {
+  const s = newStory('Marke'), c = newCard('grid'); s.cards = [c];
+  c.slots[0].image = { ...image, url: 'https://example.com/a.jpg' }; c.slots[1].image = { ...image, url: 'https://example.com/b.jpg' };
+  const incoming = structuredClone(s); [incoming.cards[0].slots[0], incoming.cards[0].slots[1]] = [incoming.cards[0].slots[1], incoming.cards[0].slots[0]];
+  incoming.cards[0].slots.forEach(slot => { slot.image = null; });
+  const result = prepareStoryImport(JSON.stringify(incoming), s).story;
+  assert.equal(result.cards[0].slots[0].image.url, 'https://example.com/b.jpg');
+  assert.equal(result.cards[0].slots[1].image.url, 'https://example.com/a.jpg');
+});
+test('designer upload payload contains only changed positions, never untouched snapshot images', () => {
+  const old = newStory('Marke'); old.cards = [newCard('media')]; old.cards[0].image = image; old.background.desktop = image;
+  const next = structuredClone(old); next.background.desktop = { ...image, url: 'https://example.com/new-bg.jpg' };
+  assert.deepEqual(workflow.changedStoryAssets(old, next), [{ kind: 'desktop', image: next.background.desktop }]);
+  assert.deepEqual(workflow.changedStoryAssets(old, structuredClone(old)), []);
 });
 test('project summaries expose counts and thumbnail data without sharing tokens or briefs', () => {
   const s = newStory('Marke'); s.context = { audience: 'SECRET' }; s.background.desktop = image;
