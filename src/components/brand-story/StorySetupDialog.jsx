@@ -3,7 +3,7 @@ import StoryModal from './StoryModal';
 import StoryPlanning from './StoryPlanning';
 import { prepareStoryImport } from '../../brandStoryWorkflow.mjs';
 import { claudePrompt, validateStory } from '../../brandStoryModel.mjs';
-import { appendPlannedGrids, defaultPlanning } from '../../brandStoryPlanning.mjs';
+import { defaultPlanning } from '../../brandStoryPlanning.mjs';
 
 export default function StorySetupDialog({ story, projectIdentity, draft, setDraft, onChange, onClose, onStart, onImport, onExport }) {
   const { json, review } = draft;
@@ -12,8 +12,8 @@ export default function StorySetupDialog({ story, projectIdentity, draft, setDra
   const change = next => { onChange(next); setDraft(d=>({...d,review:null})); };
   function ready() { validateStory({...story,planning:story.planning || defaultPlanning()}); }
   function proceed() { try { ready(); setStage('claude'); setError(''); } catch(e) { setError(e.message); } }
-  function manual(withGrids=false) {
-    try { ready(); const next=withGrids?appendPlannedGrids(story):story; onChange(next); onStart(); }
+  function manual() {
+    try { ready(); onChange({...story, planning:{...(story.planning || defaultPlanning()),mode:'manual'}}); onStart(); }
     catch(e) { setError(e.message); }
   }
   function check() {
@@ -21,7 +21,7 @@ export default function StorySetupDialog({ story, projectIdentity, draft, setDra
     catch(e) { setDraft(d=>({...d,review:null})); setError('JSON konnte nicht übernommen werden: '+e.message); }
   }
   return <StoryModal title={stage==='plan'?'Brand Story anlegen':'Konzept mit Claude'} onClose={onClose} wide>
-    {stage==='plan'?<><p className="bs-help">Übernimm den Store oder lege dein Layout selbst an. Die Karten bleiben für Desktop und Mobil identisch.</p><StoryPlanning story={story} onChange={change} onContinue={proceed} onManual={manual} onJson={()=>setStage('claude')}/></>:<>
+    {stage==='plan'?<><StoryPlanning story={story} onChange={change} onContinue={proceed} onManual={manual} onJson={()=>setStage('claude')}/></>:<>
       <button onClick={()=>setStage('plan')}>← Marke und Auswahl bearbeiten</button>
       <div className="bs-setup-intro"><span className="bs-step">1</span><div><h3>Auftrag in Claude öffnen</h3><p>Der Organisations-Skill <strong>Amazon Brand Story</strong> muss einmalig in Claude eingerichtet sein. Kopiere den Projektauftrag in einen Claude-Chat, stimme dort das Konzept ab und lasse anschließend das JSON ausgeben.</p></div></div>
       <p className="bs-help">{story.brandName || 'Neue Marke'} · {story.cards.length} vorhandene Karten · {story.planning?.categories?.filter(c=>c.selected).length || 0} ausgewählte Kategorien</p>

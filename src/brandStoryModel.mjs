@@ -83,11 +83,12 @@ export function safeUrl(value) {
 export function gridMode(card) {
   return card.gridMode ?? 'composite';
 }
-export function slotImageMode(slot) {
+export function slotImageMode(slot, card) {
+  if (card?.type === 'grid' && gridMode(card) === 'composite') return 'custom';
   return slot.imageMode ?? (slot.image ? 'custom' : 'product');
 }
-export function slotDisplayImage(slot) {
-  return (slotImageMode(slot) === 'custom' ? slot.image : slot.productImage) || null;
+export function slotDisplayImage(slot, card) {
+  return (slotImageMode(slot, card) === 'custom' ? slot.image : slot.productImage) || null;
 }
 export function productAsin(slot, marketplace = 'de') {
   const destination = safeUrl(slot.url);
@@ -112,6 +113,7 @@ export function sharingErrors(story) {
       if (!hasText(card.brief)) out.push(`${label}: Beschreibung fehlt.`);
     }
     if (card.type !== 'grid') return;
+    if (gridMode(card) === 'composite' && new Set((card.slots || []).map(slot=>productUrl(slot, story.marketplace))).size > 1) out.push(`${label}: Für das Gesamtbild ein gemeinsames Produktziel festlegen.`);
     if (!hasText(card.headline)) out.push(`${label}: Überschrift fehlt.`);
     if (!safeUrl(card.shopUrl)) out.push(`${label}: gültiger Shop-Link fehlt.`);
     for (let j = 0; j < 4; j++) {
@@ -270,11 +272,11 @@ export function publicationWarnings(s) {
       if (!c.headline) out.push(`Karte ${i + 1}: Überschrift fehlt.`);
       if (!safeUrl(c.shopUrl)) out.push(`Karte ${i + 1}: Shop-Ziel fehlt.`);
       c.slots.forEach((slot, j) => {
-        if (!slotDisplayImage(slot))
+        if (!slotDisplayImage(slot, c))
           out.push(`Karte ${i + 1}, Platz ${j + 1}: Bild fehlt.`);
         if (!productUrl(slot, s.marketplace))
           out.push(`Karte ${i + 1}, Platz ${j + 1}: Produktziel fehlt.`);
-        if (slotImageMode(slot) === "custom") out.push(...imageWarnings(slot.image, "product"));
+        if (slotImageMode(slot, c) === "custom") out.push(...imageWarnings(slot.image, "product"));
       });
     }
   });
@@ -290,13 +292,14 @@ export function customerStory(s) {
       id: c.id,
       type: c.type,
       fileKey: c.fileKey,
+      ...(c.type === 'grid' ? {gridMode:gridMode(c)} : {}),
       assetFile: c.assetFile,
       copy: c.copy,
       image: c.image,
       headline: c.headline,
       shopUrl: safeUrl(c.shopUrl),
       slots: (c.slots || []).map((slot) => ({
-        imageMode: slotImageMode(slot),
+        imageMode: slotImageMode(slot, c),
         asin: slot.asin,
         assetFile: slot.assetFile,
         url: productUrl(slot, s.marketplace),

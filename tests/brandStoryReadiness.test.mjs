@@ -20,7 +20,7 @@ test('ASIN extraction accepts actual Amazon product paths and rejects spoof host
 test('sharing requires explicit descriptions and targets but no finished images',()=>{
  const s=ready(); assert.deepEqual(model.sharingErrors(s),[]);
  s.cards[0].slots[1].brief=' '; assert.match(model.sharingErrors(s).join(' '),/Karte 1, Platz 2.*Beschreibung/);
- s.cards[0].gridMode='composite';s.cards[0].brief='Four connected parts'; assert.deepEqual(model.sharingErrors(s),[]);
+ s.cards[0].gridMode='composite';s.cards[0].brief='Four connected parts';s.cards[0].slots.forEach(slot=>slot.asin='B012345678'); assert.deepEqual(model.sharingErrors(s),[]);
  s.cards[0].brief='';assert.match(model.sharingErrors(s).join(' '),/Karte 1.*Beschreibung/);
  s.cards[0].slots[0].asin='';s.background.mobileBrief='';assert.match(model.sharingErrors(s).join(' '),/Mobil/);assert.match(model.sharingErrors(s).join(' '),/Platz 1.*Produktziel/);
  const draft=newStory('Entwurf');assert.doesNotThrow(()=>validateStory(draft));assert(model.sharingErrors(draft).length>=3);
@@ -56,4 +56,12 @@ test('imports retain existing source choices and metadata when inheriting omitte
  const incoming=structuredClone(s);delete incoming.cards[0].slots[0].image;delete incoming.cards[0].slots[0].imageMode;
  const result=prepareStoryImport(JSON.stringify(incoming),s).story.cards[0].slots[0];
  assert.equal(result.imageMode,'custom');assert.deepEqual(result.source,slot.source);
+});
+
+test('composite never displays a main image and cannot publish mismatched product targets',()=>{
+ const s=ready(),card=s.cards[0];card.gridMode='composite';card.brief='Shared artwork';card.slots[0].productImage=image;
+ assert.equal(model.slotDisplayImage(card.slots[0],card),null);
+ assert.match(model.sharingErrors(s).join(' '),/gemeinsames Produktziel/);
+ assert(normalizeStory(s).cards[0].slots.every(slot=>slot.imageMode==='custom'));
+ assert(model.customerStory(s).cards[0].slots.every(slot=>slot.imageMode==='custom'));
 });

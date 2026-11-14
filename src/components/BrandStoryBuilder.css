@@ -688,3 +688,18 @@
 @media(min-width:1700px) { .bs-workspace { grid-template-columns:minmax(0,1fr) 400px; } }
 @media(max-width:1000px) { .bs-workspace { grid-template-columns:minmax(0,1fr) 320px; }.bs-stage { padding:16px; } }
 @media(max-width:760px) { .bs-workspace { display:flex; flex-direction:column; }.bs-stage { padding:16px 12px; }.bs-properties { border-left:0; border-top:1px solid #e2e8f0; }.bs-preview-card-tools { top:-23px; }.bs-preview-remove { min-width:23px; } }
+
+/* Consistent blue actions, including preview controls. */
+.bs-app .store-home-create, .bs-app .bs-primary, .bs-app .btn-green, .bs-app .btn-primary,
+.bs-app .bs-reference-action, .bs-app .bs-carousel>.bs-preview-add,
+.bs-app .bs-carousel>.bs-preview-background {
+  background:#2563eb; border-color:#2563eb; color:#fff;
+}
+.bs-app .bs-carousel>.bs-preview-background {
+  width:auto; height:36px; padding:0 12px; font-size:12px; font-weight:600;
+}
+.bs-app .bs-reference-action { box-shadow:0 3px 12px #2563eb22; }
+.bs-app .bs-primary:hover, .bs-app .bs-reference-action:hover,
+.bs-app .bs-carousel>.bs-preview-add:hover, .bs-app .bs-carousel>.bs-preview-background:hover {
+  background:#1d4ed8; border-color:#1d4ed8;
+}

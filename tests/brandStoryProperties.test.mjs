@@ -83,3 +83,14 @@ test('designer sees brief and filenames read-only with upload slots', async () =
   assert(d.querySelector('input[type="file"]'));
   assert(d.body.textContent.includes('1328 × 1456'));
 }, { designer: true }));
+
+test('composite has one shared target, no main image choice and no field explanations',async()=>mount(async(d,card,select)=>{
+ await select('Aufbau des ASIN-Grids','composite');
+ assert(d.querySelector('[aria-label="ASIN oder Produktlink"]'));
+ assert.equal(d.querySelectorAll('[aria-label^="ASIN oder Produktlink"]').length,1);
+ assert.equal(d.querySelectorAll('select').length,0);
+ assert.equal(d.querySelectorAll('.bs-field-help').length,0);
+ assert.equal(d.querySelectorAll('.bs-properties p.bs-help').length,0);
+ assert(card().slots.every(slot=>slot.imageMode==='custom'));
+ assert(!d.querySelector('.bs-product-default'));
+}));

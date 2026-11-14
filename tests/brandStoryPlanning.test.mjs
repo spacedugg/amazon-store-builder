@@ -60,3 +60,7 @@ test('failed navigation does not change the marketplace of existing product targ
   const next=planning.applyStoreDiscovery(s,result);
   assert.equal(next.marketplace,'de');assert.equal(next.brandName,'DE Marke');
 });
+
+test('new plans leave the story goal for the Claude conversation',()=>{
+ assert.equal(planning.defaultPlanning().goal,'');
+});

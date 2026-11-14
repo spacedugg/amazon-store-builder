@@ -127,7 +127,7 @@ test("new story offers Store-first or manual entry without the former required c
     assert(d.querySelector('[role="dialog"]'));
     for (const label of ['Markenname', 'Amazon Brand Store-Link'])
       assert([...d.querySelectorAll('label')].some(l => l.textContent.includes(label)));
-    assert(btn('Store übernehmen')); assert(btn('Manuell starten'));
+    assert(btn('Automatisch')); assert(btn('Manuell starten'));
     assert(!d.querySelector('[aria-label="Zielgruppe"]'));
     assert(!d.querySelector('a[download]'));
   }));
@@ -183,3 +183,14 @@ test('closing the Claude dialog preserves pasted JSON and its import review', as
     assert.equal(d.querySelector('[aria-label="Brand Story JSON"]').value, value);
     assert(d.querySelector('.bs-import-review'));
   }));
+
+test('manual entry contains no Claude planning fields and opens an empty editor', async()=>mount(false,async(d,click,btn)=>{
+ await click(btn('Neue Brand Story'));
+ await click(btn('Manuell starten'));
+ assert(!d.querySelector('[aria-label="Amazon Brand Store-Link"]'));
+ assert(!d.querySelector('[aria-label="Schwerpunkt der Story"]'));
+ assert(!d.body.textContent.includes('Markenwissen und weitere Angaben'));
+ assert(!d.body.textContent.includes('Produkt aufnehmen'));
+ assert(!d.body.textContent.includes('Kategorie-Grids als Layout öffnen'));
+ assert(btn('Story öffnen'));
+}));

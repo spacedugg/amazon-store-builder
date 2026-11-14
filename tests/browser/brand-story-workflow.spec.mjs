@@ -182,12 +182,7 @@ test('Store-first discovery reviews categories, recovers a failed page, and copi
   await expect(page.getByRole('status')).toContainText('1 Unterseiten');
   await page.locator('.bs-category-row').filter({has:page.getByLabel('Teppiche aufnehmen',{exact:true})}).getByRole('button',{name:'Produkte lesen / erneut versuchen',exact:true}).click();
   await expect(page.getByLabel('Produkt-ASINs Teppiche',{exact:true})).toHaveValue('B012345678, B000000001, B000000002, B000000003');
-  await page.getByLabel('Schwerpunkt der Story',{exact:true}).selectOption('hero');
-  await page.getByText('Produkte besonders hervorheben (optional)',{exact:true}).click();
-  await page.getByLabel('Fokus-ASIN',{exact:true}).fill('B012345678');
-  await page.getByRole('button',{name:'Produkt aufnehmen',exact:true}).click();
-  await page.getByLabel('Auswahlgrund B012345678',{exact:true}).selectOption('bestseller');
-  await page.getByLabel('Hinweis B012345678',{exact:true}).fill('Redaktionelle Auswahl des Kunden, kein gemessener Rang');
+  await expect(page.getByLabel('Schwerpunkt der Story',{exact:true})).toHaveCount(0);
   await page.screenshot({path:'test-results/brand-story-store-first.png',fullPage:true});
   await page.getByRole('button',{name:'Weiter zu Claude',exact:true}).click();
   await page.getByRole('button',{name:'Auftrag für Claude kopieren',exact:true}).click();
@@ -195,15 +190,11 @@ test('Store-first discovery reviews categories, recovers a failed page, and copi
   expect(prompt).toContain('Amazon Brand Story'); expect(prompt).toContain(one); expect(prompt).toContain('B012345678');
   expect(prompt).not.toContain('$schema');
   const data=JSON.parse(prompt.slice(prompt.indexOf('{')));
-  expect(data.planning.goal).toBe('hero'); expect(data.planning.focusProducts).toHaveLength(1);
+  expect(data.planning.goal).toBe(''); expect(data.planning.focusProducts).toHaveLength(0);
   expect(data.planning.categories.find(c=>c.name==='Tapeten').asins).toHaveLength(4);
   await page.getByRole('button',{name:'← Marke und Auswahl bearbeiten',exact:true}).click();
-  await page.getByRole('button',{name:'Kategorie-Grids als Layout öffnen',exact:true}).click();
-  await expect(page.locator('.bs-card')).toHaveCount(2);
-  await expect(page.locator('.bs-grid-footer .bs-shop-label').first()).toHaveText('Shop besuchen');
-  await page.locator('.bs-grid button').first().click();
-  await expect(page.getByLabel('ASIN oder Produktlink · Platz 1',{exact:true})).toHaveValue('B012345678');
-  await expect(page.getByLabel('Shop-Link / Brand-Store-Unterseite',{exact:true})).toHaveValue(one);
+  await expect(page.getByRole('button',{name:'Kategorie-Grids als Layout öffnen',exact:true})).toHaveCount(0);
+  await expect(page.locator('.bs-card')).toHaveCount(0);
 });
 
 test('manual route opens an empty shared preview and organization setup is separate from project creation', async ({ page }) => {
@@ -214,7 +205,7 @@ test('manual route opens an empty shared preview and organization setup is separ
   await page.getByRole('button',{name:'Neue Brand Story',exact:true}).first().click();
   await page.getByRole('button',{name:'Manuell starten',exact:true}).click();
   await page.getByLabel('Markenname',{exact:true}).fill('Manuelle Marke');
-  await page.getByRole('button',{name:'Layout manuell öffnen',exact:true}).click();
+  await page.getByRole('button',{name:'Story öffnen',exact:true}).click();
   await expect(page.locator('.bs-carousel')).toBeVisible();
   await expect(page.locator('.bs-card')).toHaveCount(0);
   await page.getByRole('button',{name:'Karte hinzufügen',exact:true}).first().click();

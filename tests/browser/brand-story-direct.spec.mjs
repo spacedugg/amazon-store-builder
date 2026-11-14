@@ -10,7 +10,7 @@ async function open(page,s){
   if(route.request().method()==='POST'){const body=route.request().postDataJSON();posts.push(body);return route.fulfill({json:{id:'direct',revision:1+posts.length,designerToken:body.publish?'DESIGNER':undefined,customerToken:body.publish?'CUSTOMER':undefined}});}
   return route.fulfill({json:{stories:[]}});
  });
- await page.route('**/api/amazon-search',r=>r.fulfill({json:{products:[{asin:'B012345678',price:'10',image:'https://example.com/main.jpg'}]}}));
+ await page.route('**/api/amazon-search',r=>r.fulfill({json:{products:[{asin:'B012345678',price:'10',image:'https://example.com/main.jpg'},{asin:'B087654321',price:'10',image:'https://example.com/main.jpg'}]}}));
  await page.route('https://example.com/main.jpg',r=>r.fulfill({contentType:'image/svg+xml',body:'<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="green"/></svg>'}));
  await page.addInitScript(s=>sessionStorage.setItem('brand-story-draft',JSON.stringify({story:s,record:{id:'direct',revision:1,identity:{brandName:s.brandName,marketplace:s.marketplace}}})),s);
  await page.goto('/brand-stories');await page.getByRole('button',{name:'Letzten Entwurf fortsetzen',exact:true}).click();return posts;
@@ -51,8 +51,14 @@ test('grid cells select the right slot, auto-load main images and switch between
  await expect(page.getByLabel('Inhalt und Motiv (English)',{exact:true})).toBeVisible();
  await expect(page.getByLabel('Kartenname',{exact:true})).toHaveCount(0);
  await expect(page.getByLabel('Dateipfad · Platz 1',{exact:true})).toHaveCount(0);
- await page.getByLabel('Bildquelle · Platz 2',{exact:true}).selectOption('custom');
- await expect(page.locator('.bs-grid-target').nth(1).locator('img')).toHaveCount(0);
+ await expect(page.getByLabel('ASIN oder Produktlink',{exact:true})).toBeVisible();
+ await expect(page.locator('.bs-properties select')).toHaveCount(0);
+ await expect(page.locator('.bs-grid img')).toHaveCount(0);
+ await page.getByLabel('ASIN oder Produktlink',{exact:true}).fill('B087654321');
+ await page.getByRole('button',{name:'Änderungen speichern',exact:true}).click();
+ const saved=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('brand-story-draft')).story);
+ expect(saved.cards[0].slots.every(s=>s.asin==='B087654321' && s.imageMode==='custom')).toBe(true);
+ await page.getByRole('radio',{name:'Vier einzelne Bilder',exact:true}).check();
  await page.getByLabel('Bildquelle · Platz 2',{exact:true}).selectOption('product');
  await expect(page.locator('.bs-grid-target').nth(1).locator('img')).toHaveCount(1);
  await page.screenshot({path:'test-results/brand-story-direct-grid.png',fullPage:true});
@@ -77,4 +83,23 @@ test('Futum reference uses original separate assets and matches the eleven-card 
  await expect.poll(()=>futum.locator('img').evaluateAll(imgs=>imgs.every(im=>im.complete&&im.naturalWidth>0))).toBe(true);
  await expect(futum.locator('.bs-counter')).toHaveText('1 / 4');await futum.getByRole('button',{name:'Nächste Karten',exact:true}).click();await expect(futum.locator('.bs-counter')).toHaveText('2 / 4');
  await futum.locator('.bs-carousel').screenshot({path:'test-results/futum-interactive-preview.png'});
+});
+
+test('manual path opens a blank editor and background is clearly editable with blue controls',async({page})=>{
+ await open(page,sample(1));
+ await page.getByLabel('Karte 1 bearbeiten',{exact:true}).click();
+ await page.getByRole('button',{name:'Hintergrund bearbeiten',exact:true}).click();
+ await expect(page.getByLabel('Desktop-Motiv und Inhalt (English)',{exact:true})).toBeVisible();
+ await expect(page.getByRole('button',{name:'Karte hinzufügen',exact:true})).toHaveCSS('background-color','rgb(37, 99, 235)');
+ await expect(page.locator('.bs-field-help')).toHaveCount(0);
+ await page.getByRole('button',{name:'Alle Brand Stories',exact:true}).click();
+ await page.getByRole('button',{name:'Neue Brand Story',exact:true}).first().click();
+ await page.getByLabel('Markenname',{exact:true}).fill('Manuelle Marke');
+ await page.getByRole('button',{name:'Manuell starten',exact:true}).click();
+ await expect(page.getByLabel('Amazon Brand Store-Link',{exact:true})).toHaveCount(0);
+ await expect(page.getByLabel('Schwerpunkt der Story',{exact:true})).toHaveCount(0);
+ await expect(page.getByText('Produkte besonders hervorheben (optional)',{exact:true})).toHaveCount(0);
+ await page.getByRole('button',{name:'Story öffnen',exact:true}).click();
+ await expect(page.getByRole('dialog')).toHaveCount(0);
+ await expect(page.locator('.bs-card')).toHaveCount(0);
 });

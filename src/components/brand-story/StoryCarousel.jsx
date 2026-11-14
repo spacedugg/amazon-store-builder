@@ -45,14 +45,14 @@ export function StoryCarousel({story,mobile=false,onSelect,selected,selectedSlot
           <div className="bs-grid">{c.slots.map((slot,j)=>{
             const target=productUrl(slot,story.marketplace), Tag=onSelect?'button':'a';
             return <Tag key={j} className={`bs-grid-target${selected===c.id&&selectedSlot===j?' is-slot-selected':''}`} {...(onSelect?{type:'button',onClick:e=>{e.preventDefault();e.stopPropagation();onSelect(c.id,j);}}:{href:target||undefined,target:'_blank',rel:'noopener noreferrer'})} draggable={false} aria-label={`Produkt ${j+1}${slot.asin?' '+slot.asin:''}`}>
-              <Picture image={slotDisplayImage(slot)} placeholder={showDraft&&slot.brief?<><small>PRODUKT {j+1}</small><span>{slot.brief}</span></>:`Produkt ${j+1}`} fit={slotImageMode(slot)==='custom'?'cover':'contain'}/>
+              <Picture image={slotDisplayImage(slot,c)} placeholder={showDraft&&slot.brief?<><small>PRODUKT {j+1}</small><span>{slot.brief}</span></>:`Produkt ${j+1}`} fit={slotImageMode(slot,c)==='custom'?'cover':'contain'}/>
             </Tag>;
           })}</div>
           <div className="bs-grid-footer"><strong>{c.headline}</strong>{onSelect?<span className="bs-shop-label">Shop besuchen</span>:<a href={safeUrl(c.shopUrl)||undefined} target="_blank" rel="noopener noreferrer">Shop besuchen</a>}</div>
         </>}
       </div>)}
     </div></div>
-    {onSelect&&<button className="bs-preview-background" aria-label="Hintergrund bearbeiten" title="Hintergrund bearbeiten" onClick={()=>onSelect(null)}>▧</button>}
+    {onSelect&&<button className="bs-preview-background" aria-label="Hintergrund bearbeiten" title="Hintergrund bearbeiten" onClick={()=>onSelect(null)}>Hintergrund bearbeiten</button>}
     {editable&&<button className="bs-preview-add" aria-label="Karte hinzufügen" title="Karte hinzufügen" disabled={busy||story.cards.length>=19} onClick={onAdd}>＋</button>}
     <button className="bs-prev" aria-label="Vorherige Karten" disabled={index===0} onClick={()=>move(-1)}>‹</button>
     <button className="bs-next" aria-label="Nächste Karten" disabled={index>=steps.length-1} onClick={()=>move(1)}>›</button>
