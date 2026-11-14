@@ -38,10 +38,60 @@ test('schema preserves version one with optional editable planning and shared ca
   assert.match(CLAUDE_SKILL, /references\/story-schema\.json/);
   assert(!/"(?:mobileCards|desktopCards)"\s*:/.test(JSON.stringify(STORY_SCHEMA)));
 });
-test('six reference stories use separate assets and real four-image grids; OmniRelexx follows delivered previews', async () => {
+test('seven reference stories use separate assets and real four-image grids; OmniRelexx follows delivered previews', async () => {
   const data = JSON.parse(await readFile(new URL('../public/brand-story-examples/stories.json', import.meta.url), 'utf8'));
-  assert.equal(data.stories.length, 6);
+  assert.equal(data.stories.length, 7);
   for (const s of data.stories) { validateStory(s); assert(s.background.desktop.url); assert(s.cards.length > 3); assert(s.cards.some(c => c.type === 'grid' && c.slots.every(slot => slot.image.url))); }
   const omni = data.stories.find(s => s.brandName === 'OmniRelexx');
   assert.deepEqual(omni.cards.map(c => c.type), ['media', 'media', 'media', 'media', 'grid', 'grid', 'media', 'media', 'media']);
+});
+
+test('Futum reconstructs the delivered eleven-card sequence with original assets and no invented links', async () => {
+  const data = JSON.parse(await readFile(new URL('../public/brand-story-examples/stories.json', import.meta.url), 'utf8'));
+  const story = data.stories.find(s => s.brandName === 'Futum');
+  validateStory(story);
+  assert.equal(story.background.mobile, null);
+  assert.deepEqual(story.cards.map(c => c.type), ['media', 'media', 'media', 'grid', 'media', 'grid', 'media', 'grid', 'media', 'grid', 'media']);
+  const expected = (name) => `https://brand-store-preview.temoa.de/brand-story-examples/futum-assets/${name}`;
+  assert.equal(story.background.desktop.url, expected('desktop-background.jpg'));
+  const images = [story.background.desktop];
+  for (const [i, card] of story.cards.entries()) {
+    const number = String(i + 1).padStart(2, '0');
+    assert.equal(card.fileKey, `card-${number}`);
+    assert.equal(card.shopUrl, '');
+    if (card.type === 'media') {
+      assert.equal(card.image.url, expected(`card-${number}.jpg`));
+      assert.deepEqual([card.image.width, card.image.height], [814, 1019]);
+      images.push(card.image);
+    } else {
+      assert.equal(card.slots.length, 4);
+      for (const [quadrant, slot] of card.slots.entries()) {
+        assert.equal(slot.image.url, expected(`card-${number}-${String(quadrant + 1).padStart(2, '0')}.jpg`));
+        assert.deepEqual([slot.image.width, slot.image.height], [1328, 1456]);
+        assert.equal(slot.asin, '');
+        assert.equal(slot.url, '');
+        assert.equal(slot.productImage, null);
+        images.push(slot.image);
+      }
+    }
+  }
+  assert.deepEqual([story.background.desktop.width, story.background.desktop.height], [3660, 1563]);
+  assert.equal(images.length, 24);
+  assert.equal(new Set(images.map(img => img.url)).size, 24);
+  for (const img of images) {
+    const localPath = new URL(`../public${new URL(img.url).pathname}`, import.meta.url);
+    const bytes = await readFile(localPath);
+    assert.equal(bytes.byteLength, img.size);
+    assert.deepEqual([...bytes.subarray(0, 2)], [0xff, 0xd8]);
+  }
+});
+test('Claude import contract describes grid modes and per-slot sources without mixing copy and briefs', async () => {
+  const {STORY_SCHEMA,CLAUDE_SKILL,STORY_EXAMPLE}=await import('../src/brandStoryPrompt.mjs');
+  const card=STORY_SCHEMA.properties.cards.items, slot=card.properties.slots.items;
+  assert.deepEqual(card.properties.gridMode.enum,['individual','composite']);
+  assert.deepEqual(slot.properties.imageMode.enum,['product','custom']);
+  assert.equal(slot.properties.brief.type,'string');
+  assert.equal(STORY_EXAMPLE.cards[1].gridMode,'individual');
+  assert.match(CLAUDE_SKILL,/slot\.brief/);assert.match(CLAUDE_SKILL,/imageMode/);assert.match(CLAUDE_SKILL,/gridMode/);
+  assert.match(CLAUDE_SKILL,/Produkt-URLs/);assert.match(CLAUDE_SKILL,/exakten sichtbaren Text/);
 });

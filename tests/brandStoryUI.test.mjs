@@ -95,6 +95,9 @@ test("overview offers explicit draft recovery and editor uses a card picker plus
     assert(!d.querySelector('.bs-carousel'));
     await click(btn('Letzten Entwurf fortsetzen'));
     assert.match(d.body.textContent, /Testmarke/);
+    assert(!d.querySelector('.bs-sidebar'));
+    assert(!d.body.textContent.includes('Positionierung prüfen'));
+    assert(!d.body.textContent.includes('So funktioniert eine Brand Story'));
     assert(d.querySelector('textarea[aria-label="Desktop-Motiv und Inhalt (English)"]'));
     const background = d.querySelector('.bs-backdrop').outerHTML;
     await click(d.querySelector('[aria-label="Nächste Karten"]'));
@@ -107,6 +110,10 @@ test("overview offers explicit draft recovery and editor uses a card picker plus
     assert(d.body.textContent.includes('Grid-Überschrift'));
     assert.equal(d.querySelectorAll('.bs-slot').length, 4);
     assert.match(d.querySelector('.bs-counter').textContent, /8 \/ 8/);
+    await click(d.querySelector('[aria-label="Produkt 4"]'));
+    await click(btn('Karte hinzufügen'));
+    await click(btn('ASIN-Grid'));
+    assert.equal(d.querySelectorAll('.bs-slot-selected').length, 0);
     await click(btn('Konzept mit Claude'));
     assert(d.querySelector('[role="dialog"]'));
     assert(d.body.textContent.includes('Auftrag für Claude kopieren'));
@@ -145,7 +152,7 @@ test('designer has element briefs, matching specifications and image uploads wit
     assert(d.body.textContent.includes('1389 × 1875'));
     assert(d.querySelector('input[type=file]'));
     assert(!d.body.textContent.includes('Konzept mit Claude'));
-    const card = [...d.querySelectorAll('.bs-sidebar button')].find(b => b.textContent.includes('1. Brand Media Asset'));
+    const card = d.querySelector('[aria-label="Karte 1 bearbeiten"]');
     await click(card);
     assert(d.body.textContent.includes('814 × 1019'));
     assert(!d.querySelector('.bs-properties textarea'));

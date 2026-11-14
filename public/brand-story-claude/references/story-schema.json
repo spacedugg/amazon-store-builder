@@ -296,6 +296,12 @@
               "grid"
             ]
           },
+          "gridMode": {
+            "enum": [
+              "individual",
+              "composite"
+            ]
+          },
           "title": {
             "type": "string"
           },
@@ -364,6 +370,15 @@
                 "assetFile"
               ],
               "properties": {
+                "brief": {
+                  "type": "string"
+                },
+                "imageMode": {
+                  "enum": [
+                    "product",
+                    "custom"
+                  ]
+                },
                 "asin": {
                   "type": "string",
                   "pattern": "^$|^[A-Za-z0-9]{10}$"

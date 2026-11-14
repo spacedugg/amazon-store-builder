@@ -41,6 +41,16 @@ test("isolated stories, revision conflicts, share privacy and designer images pr
     const created = (await request("POST", { data: s })).body;
     const other = (await request("POST", { data: s })).body;
     assert.notEqual(created.id, other.id);
+    const blocked = await request('POST', { id: created.id, revision: 1, data: s, publish: true });
+    assert.equal(blocked.code, 400);
+    assert.match(blocked.body.error, /Beschreibung/);
+    assert.equal((await request('GET', {}, { id: created.id })).body.revision, 1);
+    const blockedNew = await request('POST', { data: s, publish: true });
+    assert.equal(blockedNew.code, 400);
+    assert.equal((await request('GET')).body.stories.length, 2);
+    s.background.desktopBrief = 'Describe desktop background';
+    s.background.mobileBrief = 'Describe mobile background';
+    s.cards[0].brief = 'Show the supplied brand logo';
     const published = (
       await request("POST", {
         id: created.id,
@@ -117,8 +127,11 @@ test("isolated stories, revision conflicts, share privacy and designer images pr
     const working = (await request('GET', {}, { id: created.id })).body;
     const operatorBackground = { ...image, url: 'https://example.com/operator-background.jpg' };
     working.data.background.desktop = operatorBackground;
+    working.data.cards[0].brief = '';
+    working.data.background.mobileBrief = '';
     await request('POST', { id: created.id, revision: working.revision, data: working.data });
     const designerSnapshot = (await request('GET', {}, { token: published.designerToken })).body;
+    assert.equal(designerSnapshot.data.cards[0].brief, 'Show the supplied brand logo');
     const updatedSnapshot = structuredClone(designerSnapshot.data);
     updatedSnapshot.cards[0].image = { ...image, url: 'https://example.com/new-card.jpg' };
     await request('POST', { revision: designerSnapshot.revision, assets: changedStoryAssets(designerSnapshot.data, updatedSnapshot) }, { token: published.designerToken });

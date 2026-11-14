@@ -1,4 +1,4 @@
-import { newStory, validateStory } from './brandStoryModel.mjs';
+import { newStory, validateStory, gridMode, slotImageMode, slotDisplayImage, productAsin, productUrl } from './brandStoryModel.mjs';
 
 export const CONTEXT_FIELDS = [
   ['audience', 'Zielgruppe'],
@@ -19,6 +19,10 @@ export function normalizeStory(story) {
     s.background[kind + 'Copy'] ??= s.background.copy || '';
   }
   s.references ||= [];
+  for (const card of s.cards) if (card.type === 'grid') {
+    card.gridMode = gridMode(card);
+    for (const slot of card.slots) { slot.imageMode = slotImageMode(slot); slot.brief ??= ''; }
+  }
   return s;
 }
 
@@ -45,7 +49,7 @@ export function storySummary(s) {
       cards: s.cards.slice(0, 3).map(c => ({
         type: c.type,
         image: c.image?.url || '',
-        images: (c.slots || []).map(slot => slot.image?.url || slot.productImage?.url || ''),
+        images: (c.slots || []).map(slot => slotDisplayImage(slot)?.url || ''),
       })),
     },
   };
@@ -72,7 +76,15 @@ export function prepareStoryImport(text, current, projectIdentity = current) {
         const previous = old.slots.find(o => slot.assetFile && o.assetFile === slot.assetFile) || old.slots[i];
         slot.assetFile ||= previous.assetFile;
         slot.image ||= previous.image;
-        slot.productImage = slot.asin === previous.asin ? slot.productImage || previous.productImage : null;
+        const rawSlot = raw.cards.find(item => item.id === c.id)?.slots?.[i];
+        if (rawSlot?.imageMode === undefined && !rawSlot?.image) slot.imageMode = slotImageMode(previous);
+        const target = value => {
+          const url = productUrl({ url: value.url }, next.marketplace);
+          return url ? productAsin({ url }, next.marketplace) || url : productAsin(value, next.marketplace);
+        };
+        const sameTarget = !!target(slot) && target(slot) === target(previous);
+        // Imported assets belong to the imported target; only inherited images need a match.
+        slot.productImage = slot.productImage || (sameTarget ? previous.productImage : null);
       });
     }
   }

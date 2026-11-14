@@ -9,7 +9,7 @@ export function fixture() {
   s.background.brief = 'A calm scene with a real founder';
   for (let i = 0; i < 7; i++) {
     const c = newCard(i === 3 ? 'grid' : 'media', s.cards); c.brief = 'DESIGNER_BRIEF'; c.copy = 'Geplanter Kartentext ' + (i + 1);
-    if (c.type === 'grid') { c.headline = 'Schlafmasken'; c.shopUrl = 'https://www.amazon.de/stores/page/example'; c.slots.forEach(slot => { slot.asin = 'B012345678'; }); }
+    if (c.type === 'grid') { c.gridMode = 'composite'; c.headline = 'Schlafmasken'; c.shopUrl = 'https://www.amazon.de/stores/page/example'; c.slots.forEach(slot => { slot.asin = 'B012345678'; }); }
     s.cards.push(c);
   }
   return s;
@@ -45,7 +45,7 @@ test('mobile shows precisely one complete card, including a four-slot grid, whil
   await expect(page.locator('.bs-counter')).toHaveText('4 / 7');
   await expect.poll(visibleCards).toBe(1);
   expect(await page.locator('.bs-backdrop').boundingBox()).toEqual(background);
-  await expect(page.locator('.bs-card').nth(3).locator('.bs-grid a')).toHaveCount(4);
+  await expect(page.locator('.bs-card').nth(3).locator('.bs-grid button')).toHaveCount(4);
   const cardBox = await page.locator('.bs-card').nth(3).boundingBox();
   const gridBox = await page.locator('.bs-card').nth(3).locator('.bs-grid').boundingBox();
   const footerBox = await page.locator('.bs-card').nth(3).locator('.bs-grid-footer').boundingBox();
@@ -78,13 +78,13 @@ test('designer receives specific element briefs, upload slots and interactive ex
   await expect(page.locator('.bs-properties')).toContainText('A calm scene with a real founder');
   await expect(page.locator('body')).not.toContainText('PRIVATE_');
   await expect(page.getByRole('button', { name: 'Konzept mit Claude' })).toHaveCount(0);
-  await page.getByRole('button', { name: /4\. Schlafmasken/ }).click();
+  await page.getByLabel('Karte 4 bearbeiten', {exact:true}).click();
   await expect(page.locator('.bs-properties')).toContainText('DESIGNER_BRIEF');
   await expect(page.locator('.bs-properties')).toContainText('1328 × 1456');
   await expect(page.locator('.bs-properties .bs-slot')).toHaveCount(4);
-  await page.getByRole('button', { name: 'Beispiele ansehen', exact: true }).first().click();
+  await page.getByRole('button', { name: 'Brand-Story-Beispiele ansehen ↗', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Interaktive Brand-Story-Beispiele' })).toBeVisible();
-  await expect(page.locator('.bs-reference-list .bs-carousel')).toHaveCount(6);
+  await expect(page.locator('.bs-reference-list .bs-carousel')).toHaveCount(7);
   await page.locator('.bs-reference-list article').first().getByRole('button', { name: 'Nächste Karten' }).click();
   await expect(page.locator('.bs-reference-list .bs-counter').first()).toHaveText('2 / 3');
 });
@@ -200,8 +200,10 @@ test('Store-first discovery reviews categories, recovers a failed page, and copi
   await page.getByRole('button',{name:'← Marke und Auswahl bearbeiten',exact:true}).click();
   await page.getByRole('button',{name:'Kategorie-Grids als Layout öffnen',exact:true}).click();
   await expect(page.locator('.bs-card')).toHaveCount(2);
-  await expect(page.locator('.bs-grid-footer a').first()).toHaveAttribute('href',one);
-  await expect(page.locator('.bs-grid a').first()).toHaveAttribute('href','https://www.amazon.de/dp/B012345678');
+  await expect(page.locator('.bs-grid-footer .bs-shop-label').first()).toHaveText('Shop besuchen');
+  await page.locator('.bs-grid button').first().click();
+  await expect(page.getByLabel('ASIN oder Produktlink · Platz 1',{exact:true})).toHaveValue('B012345678');
+  await expect(page.getByLabel('Shop-Link / Brand-Store-Unterseite',{exact:true})).toHaveValue(one);
 });
 
 test('manual route opens an empty shared preview and organization setup is separate from project creation', async ({ page }) => {
@@ -226,7 +228,7 @@ test('overview examples show all stories as full-width interactive rows without 
   await setup(page);
   await page.getByRole('button',{name:'Beispiele',exact:true}).click();
   const articles=page.locator('.bs-reference-list article');
-  await expect(articles).toHaveCount(6);
+  await expect(articles).toHaveCount(7);
   const first=await articles.nth(0).boundingBox(), second=await articles.nth(1).boundingBox();
   expect(second.y).toBeGreaterThan(first.y+first.height);
   await articles.first().getByRole('button',{name:'Nächste Karten',exact:true}).click();
