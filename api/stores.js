@@ -1,6 +1,7 @@
 var { getClient, migrate } = require('./_db');
 var { createHash } = require('node:crypto');
-var { homepageComplete } = require('./_homepage-complete');
+// Stable relative module path also works in isolated VM-based API tests.
+var { homepageComplete } = require('../api/_homepage-complete');
 
 function generateId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
