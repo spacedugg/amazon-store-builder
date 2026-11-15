@@ -72,3 +72,10 @@ test('automatic story share rejects home aliases and informational grid links',(
  s.cards[0].shopUrl='https://www.amazon.de/stores/Brand/page/about';s.cards[0].headline='Über uns';assert.match(model.sharingErrors(s).join(' '),/Informations/);
  s.cards[0].headline='Sale';s.cards[0].shopUrl='https://www.amazon.de/stores/Brand/page/sale';assert.deepEqual(model.sharingErrors(s),[]);
 });
+
+test('automatic share resolves known informational page UUID aliases even under neutral grid titles',()=>{
+ const s=ready(),root='https://www.amazon.de/stores/Brand/page/root',id='22222222-2222-2222-2222-222222222222';
+ s.planning={mode:'store',storeUrl:root,goal:'',focusProducts:[],includeFocusGrid:false,categories:[{id:'x',name:'Unterseite',observedName:'Über uns',url:'https://www.amazon.de/stores/Brand/page/'+id,selected:false,asins:[]}]};
+ s.cards[0].shopUrl='https://www.amazon.de/stores/page/'+id;s.cards[0].headline='Produkte';
+ assert.match(model.sharingErrors(s).join(' '),/Informations/);
+});

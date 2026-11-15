@@ -13,14 +13,22 @@ export function canonicalStoreUrl(value) {
   try { const url=new URL(value);url.search='';url.hash='';url.hostname=url.hostname.replace(/^www\./,'');url.pathname=url.pathname.replace(/\/+$/,'');return url.href; } catch { return value; }
 }
 
+export function sameStorePage(a,b) {
+  if(!a || !b)return false;
+  try {
+    const one=new URL(a),two=new URL(b);
+    if(one.hostname.replace(/^www\./,'')!==two.hostname.replace(/^www\./,''))return false;
+    const id=url=>url.pathname.match(/\/page\/([a-z0-9-]+)/i)?.[1]?.toLowerCase();
+    return canonicalStoreUrl(a)===canonicalStoreUrl(b) || !!(id(one) && id(one)===id(two));
+  }catch{return false;}
+}
 export function gridDestinationError(category, storeUrl='') {
-  const name=String(category.name || '').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+  const names=[category.name,category.observedName].filter(Boolean).map(name=>String(name).normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim());
   const value=String(category.url || '');
-  const pageId=url=>url.match(/\/page\/([a-z0-9-]+)/i)?.[1]?.toLowerCase();
-  if(value && storeUrl && (canonicalStoreUrl(value)===canonicalStoreUrl(storeUrl) || (pageId(value) && pageId(value)===pageId(storeUrl)))) return 'Die Store-Startseite ist kein Grid-Ziel.';
-  if(/^(?:home(?:page)?|start(?:seite)?|willkommen|welcome)(?:\s*[-–|:]|$)/i.test(name)) return 'Die Store-Startseite ist kein Grid-Ziel.';
-  let path='';try{path=decodeURIComponent(new URL(value).pathname).replace(/[-_]+/g,' ');}catch{}
-  if(/(?:\b(?:uber|ueber) (?:uns|die marke)\b|\babout(?: us| the brand)?\b|\b(?:unsere|our) (?:geschichte|werte|marke|story|brand)\b|\bmarkengeschichte\b|\bunternehmen\b|\b(?:produkt|kauf|product)[ -]?(?:berater|beratung|finder|advisor)\b|\bquiz\b|\bratgeber\b|\bberatung\b|\bkontakt\b|\bcontact\b|\bfaq\b)/i.test(name+' '+path)) return 'Informations- und Beratungsseiten sind keine Grid-Ziele.';
+  if(sameStorePage(value,storeUrl)) return 'Die Store-Startseite ist kein Grid-Ziel.';
+  if(names.some(name=>/^(?:home(?:page)?|start(?:seite)?|willkommen|welcome)(?:\s*[-–|:]|$)/i.test(name))) return 'Die Store-Startseite ist kein Grid-Ziel.';
+  let path='';try{path=decodeURIComponent(new URL(value).pathname.split('/').filter(Boolean).slice(2).join(' ')).replace(/[-_]+/g,' ').normalize('NFKD').replace(/[\u0300-\u036f]/g,'');}catch{}
+  if(/(?:\b(?:uber|ueber)\s*(?:uns|die marke)\b|\babout(?:\s*us| the brand)?\b|\b(?:unsere|our) (?:geschichte|werte|marke|story|brand)\b|\bmarkengeschichte\b|\bunternehmen\b|\bcompany\b|\binformation(?:en)?\b|\b(?:produkt|kauf|product)[ -]?(?:berater|beratung|finder|advisor)\b|\bquiz\b|\bratgeber\b|\bberatung\b|\bkontakt\b|\bcontact\b|\bfaq\b)/i.test([...names,path].join(' | '))) return 'Informations- und Beratungsseiten sind keine Grid-Ziele.';
   try {if(/^\/stores\/[^/]+\/?$/i.test(new URL(value).pathname))return 'Die Store-Startseite ist kein Grid-Ziel.';}catch{}
   return '';
 }
@@ -47,13 +55,14 @@ export function mergeDiscoveredPages(planning, result) {
     const old = next.categories.find(c=>canonicalStoreUrl(c.url)===canonicalStoreUrl(page.url));
     const observed = [...new Set(page.asins || [])];
     if (old) {
+      if(page.name?.trim())old.observedName=page.name;
       old.status = page.status; old.error = page.error || '';
       if (page.status === 'loaded') {
         old.observedAsins = observed;
         if (!old.asins.length && !old.productsEdited) old.asins = observed.slice(0,4);
       }
     } else next.categories.push({
-      id: page.pageId || page.url, name: page.name || 'Unterseite', url: page.url,
+      id: page.pageId || page.url, name: page.name || 'Unterseite', observedName:page.name || '', url: page.url,
       selected: !gridDestinationError(page,result.storeUrl || planning.storeUrl), asins: observed.slice(0,4), observedAsins: observed,
       status: page.status, error: page.error || '',
     });

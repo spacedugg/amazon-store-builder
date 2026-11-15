@@ -90,3 +90,17 @@ test('a renamed excluded destination cannot silently become selected after re-re
  const s=newStory('Brand');s.planning={...planning.defaultPlanning(),storeUrl:root,includeFocusGrid:true,focusProducts:[{asin:'B012345678',reason:'push'}]};
  assert.throws(()=>planning.appendPlannedGrids(s),/Unterseite/);
 });
+
+test('discovered informational names override neutral editable labels for eligibility without overwriting the label',()=>{
+ const root='https://www.amazon.de/stores/Brand/page/root',url='https://www.amazon.de/stores/Brand/page/info';
+ const p={...planning.defaultPlanning(),storeUrl:root,categories:[{id:'x',name:'Unterseite',url,selected:true,asins:[]}]};
+ const next=planning.mergeDiscoveredPages(p,{storeUrl:root,pages:[{name:'Über uns',url,status:'pending',asins:[]}]});
+ assert.equal(next.categories[0].name,'Unterseite');assert.equal(next.categories[0].selected,false);assert.match(planning.gridDestinationError(next.categories[0],root),/Informations/);
+ for(const name of ['Company','Information','Informationen','AboutUs','Überuns']) assert.match(planning.gridDestinationError({name,url},root),/Informations/);
+});
+
+test('informational words in a brand slug do not exclude valid shopping pages',()=>{
+ const root='https://www.amazon.de/stores/The-Organic-Company/page/root';
+ for(const name of ['Bestseller','Sale','Handtücher']) assert.equal(planning.gridDestinationError({name,url:'https://www.amazon.de/stores/The-Organic-Company/page/products'},root),'');
+ assert.match(planning.gridDestinationError({name:'Details',url:'https://www.amazon.de/stores/The-Organic-Company/about-us/page/info'},root),/Informations/);
+});
