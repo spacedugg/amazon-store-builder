@@ -272,7 +272,9 @@ test('commerce-only category choices explain optional inputs with real examples 
  await brand.screenshot({path:'test-results/brand-story-brand-info-examples.png'});
  await page.getByLabel('Markeninfos für Claude',{exact:true}).fill('Gegründet 2017 durch zwei Personen; Details werden in Claude ergänzt.');
  await page.getByRole('button',{name:'Weiter zu Claude',exact:true}).click();
- await expect(page.getByRole('link',{name:'Claude Cowork öffnen ↗',exact:true})).toHaveAttribute('href','claude://cowork/new');
+ await expect(page.getByRole('heading',{name:'Auftrag in Claude öffnen',exact:true})).toBeVisible();
+ await expect.poll(()=>page.locator('.bs-modal').evaluate(el=>el.scrollTop)).toBe(0);
+ await expect(page.getByRole('link',{name:'Claude Cowork öffnen (Desktop) ↗',exact:true})).toHaveAttribute('href','claude://cowork/new');
  await expect(page.getByRole('link',{name:'Claude im Browser öffnen ↗',exact:true})).toHaveAttribute('href','https://claude.ai/new');
  await expect(page.getByRole('link',{name:'Claude im Browser öffnen ↗',exact:true})).toHaveAttribute('target','_blank');
  await page.getByRole('button',{name:'Auftrag für Claude kopieren',exact:true}).click();const prompt=await page.evaluate(()=>navigator.clipboard.readText());const data=JSON.parse(prompt.slice(prompt.indexOf('{')));
