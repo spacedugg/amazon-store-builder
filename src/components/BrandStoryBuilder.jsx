@@ -293,7 +293,7 @@ export default function BrandStoryBuilder() {
       {message && <div className="bs-message" role="status">{message}</div>}
       {customer ? <div className="bs-customer-content"><StoryCarousel story={story} mobile={mobile} /><StoryDelivery story={story} /></div> : <div className="bs-workspace">
         <section className="bs-stage">
-          <div className="bs-stage-heading"><div><span className="bs-eyebrow">INTERAKTIVE VORSCHAU</span><h2>{story.brandName}</h2></div>{productImagesLoading && <span className="bs-help" role="status">Produkthauptbilder werden geladen …</span>}</div>
+          <div className="bs-stage-heading"><div><span className="bs-eyebrow">INTERAKTIVE VORSCHAU</span><h2>{story.brandName}</h2></div><button className="bs-background-action bs-primary" disabled={busy} onClick={()=>selectCard(null)}>Hintergrund bearbeiten</button>{productImagesLoading && <span className="bs-help" role="status">Produkthauptbilder werden geladen …</span>}</div>
           <div className="bs-stage-canvas"><StoryCarousel story={story} mobile={mobile} showDraft onSelect={selectCard} selected={selected} selectedSlot={selectedSlot} busy={busy} onAdd={designer?undefined:()=>setPickerPosition(story.cards.length)} onRemove={removeCard} onReorder={designer?undefined:dragReorder}/></div>
           <div className="bs-stage-actions"><button className="bs-reference-action" onClick={()=>setReferencesOpen(true)}>Brand-Story-Beispiele ansehen ↗</button></div>
           {designer && <StoryPrinciples />}

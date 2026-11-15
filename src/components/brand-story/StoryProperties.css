@@ -59,3 +59,6 @@
 .bs-grid-mode-preview img { display:block; width:100%; height:100%; object-fit:cover; }
 .bs-mode-preview-placeholder { display:block; width:100%; height:100%; background:#dae4e8; }
 .bs-grid-mode-option>small { font-size:10px; color:#64748b; }
+
+.bs-fixed-specs { display:flex; flex-direction:column; gap:4px; background:#eff6ff; border:1px solid #bfdbfe; border-left:4px solid #2563eb; border-radius:6px; color:#1e40af; padding:10px 12px; margin:10px 0 16px; font-size:11px; line-height:1.5; }
+.bs-fixed-specs strong { font-size:13px; font-weight:700; }

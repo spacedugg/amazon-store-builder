@@ -86,3 +86,23 @@ test('project summaries expose counts and thumbnail data without sharing tokens 
   assert.equal(result.cardCount, 2); assert.equal(result.mediaCount, 1); assert.equal(result.gridCount, 1);
   assert.equal(result.preview.background, image.url); assert(!JSON.stringify(result).includes('SECRET')); assert(!JSON.stringify(result).includes('INTERNAL'));
 });
+
+test('technical standard dimensions move out of briefs without removing product facts or on-image copy',()=>{
+ const s=newStory('Marke');s.background.desktopBrief='Desktop background, 3660 × 1563 px, logo left.';s.background.mobileBrief='1389 x 1875 px. Keep the portrait.';
+ const c=newCard('media');c.brief='Size: 814 x 1019 px. Two founders, established 2017; 90 capsules.';c.copy='Original visible copy';s.cards=[c];
+ const n=normalizeStory(s);assert(!n.background.desktopBrief.includes('3660'));assert(!n.background.mobileBrief.includes('1875'));assert(!n.cards[0].brief.includes('814'));
+ assert(n.cards[0].brief.includes('2017'));assert(n.cards[0].brief.includes('90 capsules'));assert.equal(n.cards[0].copy,c.copy);assert(s.cards[0].brief.includes('814'));
+ assert.equal(workflow.stripBriefSpecifications('Logo at 120 x 240 px; 2017.'),'Logo at 120 x 240 px; 2017.');
+});
+
+test('customer concepts keep visible background copy while withholding designer descriptions',()=>{
+ const s=newStory('Marke');s.background.desktopCopy='Visible desktop words';s.background.mobileCopy='Visible mobile words';s.background.desktopBrief='PRIVATE_DESIGNER';
+ const c=customerStory(s);assert.equal(c.background.desktopCopy,'Visible desktop words');assert.equal(c.background.mobileCopy,'Visible mobile words');assert(!JSON.stringify(c).includes('PRIVATE_DESIGNER'));
+});
+
+test('brief cleanup preserves physical product dimensions and exact unrelated punctuation',()=>{
+ for(const text of ['Show a poster measuring 814 × 1019 mm.','Keep the exact engraving: A;:B.','Keep  two spaces and\na new line.'])assert.equal(workflow.stripBriefSpecifications(text),text);
+ const text='Keep engraving A;:B. Desktop background, 3660 × 1563 px, logo left.';
+ assert.equal(workflow.stripBriefSpecifications(text),'Keep engraving A;:B. Desktop background, logo left.');
+ assert.equal(workflow.stripBriefSpecifications('Size: 814 x 1019 px.'),'');
+});

@@ -724,3 +724,18 @@
 .bs-planning-example-grid img { width:100%; height:100%; min-height:0; object-fit:cover; }
 .bs-planning-examples figcaption { margin-top:10px; text-align:center; font-size:12px; font-weight:600; }
 @media(max-width:500px) { .bs-planning-examples { grid-template-columns:1fr; } }
+
+.bs-focus-product { margin:16px 0; padding:12px; border:1px solid #e2e8f0; border-radius:8px; }
+.bs-focus-product .bs-focus-row { margin:0; align-items:end; }
+.bs-focus-product .bs-field { margin-bottom:0; }
+.bs-focus-effect { margin:10px 0 0; color:#475569; font-size:12px; line-height:1.6; }
+.bs-copy-status { padding:10px 14px; border-radius:7px; background:#dbeafe; color:#1e40af; font-weight:600; }
+.bs-claude-actions .bs-secondary-link { font-size:11px; color:#64748b; }
+
+.bs-draft-copy { display:block; white-space:pre-line; font-size:1.5cqw; line-height:1.3; max-width:100%; }
+.bs-draft-image-icon { width:40%; max-height:25%; fill:#cbd5e1; opacity:.65; }
+.bs-media>.bs-placeholder { background:#fff; padding:2cqw; border:1px dashed #cbd5e1; }
+.bs-grid { position:relative; }
+.bs-grid-draft-copy { position:absolute; inset:12%; display:grid; place-items:center; text-align:center; white-space:pre-line; font-size:1.25cqw; color:#334155; pointer-events:none; background:#ffffffdf; padding:1cqw; }
+.bs-stage-heading .bs-background-action { flex:none; padding:10px 14px; border-radius:7px; font-size:12px; }
+.bs-mobile .bs-draft-copy,.bs-mobile .bs-grid-draft-copy { font-size:4.5cqw; }

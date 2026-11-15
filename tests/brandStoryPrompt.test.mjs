@@ -9,7 +9,7 @@ test('project prompt explicitly invokes the organization skill without duplicati
   s.planning = { mode: 'store', goal: 'Hero erklären', categories: [], focusProducts: [{ asin: 'B012345678', reason: 'explain' }], includeFocusGrid: true };
   const prompt = claudePrompt(s);
   for (const value of ['Amazon Brand Story', 'Pendler', 'B012345678', 'https://www.amazon.de/stores/page/existing', 'Hero erklären']) assert(prompt.includes(value), value);
-  assert(prompt.length - JSON.stringify(s, null, 2).length < 1600);
+  assert(prompt.length - JSON.stringify(s, null, 2).length < 4700);
   assert(!prompt.includes('$schema'));
   assert(!prompt.includes('3660'));
   assert(!prompt.includes('Beispielstruktur'));
@@ -100,5 +100,34 @@ test('handoff removes non-commerce destinations and explicitly invites further i
  const s=newStory('Marke');s.planning={mode:'store',storeUrl:'https://www.amazon.de/stores/brand',goal:'',categories:[{name:'Homepage',url:'https://www.amazon.de/stores/brand',selected:true},{name:'Über uns',url:'https://www.amazon.de/stores/brand/page/about',selected:true},{name:'Schlaf',url:'https://www.amazon.de/stores/brand/page/sleep',selected:true}],focusProducts:[],includeFocusGrid:false};
  const prompt=claudePrompt(s),data=JSON.parse(prompt.slice(prompt.indexOf('{')));
  assert.deepEqual(data.planning.categories.map(c=>c.name),['Schlaf']);assert.equal(s.planning.categories.length,3);
- for(const text of ['Kategorie-Einstiegskarten','Gesamtmotive','Unternehmensgeschichten','Startpunkt','Nie Homepage','Bestseller und Sale']) assert(prompt.includes(text));
+ for(const pattern of [/Einstiegskarten/,/Gesamtmotiv/,/Unternehmens/,/Chat ergänzt/,/nie Homepage/i,/Bestseller und Sale/]) assert.match(prompt,pattern);
+});
+
+test('handoff inherits focus and separates combinable decisions and website research',()=>{
+ const s=newStory('Marke');s.planning={mode:'store',storeUrl:'https://www.amazon.de/stores/brand',websiteUrl:'marke.de',goal:'',categories:[],focusProducts:[{asin:'B012345678',reason:'bestseller',note:'Für Einsteiger zeigen'}],includeFocusGrid:false};
+ const prompt=claudePrompt(s),data=JSON.parse(prompt.slice(prompt.indexOf('{')));
+ assert.equal(data.planning.websiteUrl,'https://marke.de/');assert.equal(data.planning.focusProducts[0].note,'Für Einsteiger zeigen');
+ for(const text of ['keine erneute Pflicht-Zielabfrage','A) Einstiegskarten','B) Grid-Bildmodus','C) Reihenfolge','gültige Kombination','vor Fakten-Rückfragen','Quell-URLs','keine verifizierten Bestseller']) assert(prompt.includes(text),text);
+});
+
+test('portable skill derives existing goals rather than starting a duplicate goal questionnaire',async()=>{
+ const {CLAUDE_SKILL}=await import('../src/brandStoryPrompt.mjs');
+ assert(!CLAUDE_SKILL.includes('Bestimme zuerst das Ziel:'));assert(CLAUDE_SKILL.includes('Leite bereits festgelegte Ziele'));
+});
+
+test('Bestseller naming is fixed and is never reopened as a Hero rename question',async()=>{
+ const {CLAUDE_SKILL}=await import('../src/brandStoryPrompt.mjs');
+ for(const text of [CLAUDE_SKILL,claudePrompt(newStory('Marke'))]){
+  assert(text.includes('„Bestseller“ niemals durch „Hero“ ersetzen'));
+  assert(text.includes('Dazu keine Rückfrage stellen; die Antwort ist immer Nein'));
+ }
+});
+
+test('every concept has a distinct final visual copywriting review before JSON without editable technical specs',async()=>{
+ const {CLAUDE_SKILL}=await import('../src/brandStoryPrompt.mjs');const prompt=claudePrompt(newStory('Marke'));
+ for(const text of [CLAUDE_SKILL,prompt]){
+  assert(text.includes('eigenständigen Copywriting-Durchgang'));assert(text.includes('Eine klare Aufgabe pro Karte'));
+  assert(text.includes('Keine starre Wortgrenze'));assert(text.includes('technische Bildspezifikationen gehören nicht in brief/copy'));
+ }
+ assert(CLAUDE_SKILL.indexOf('4. ABSCHLIESSENDES COPYWRITING-REVIEW')<CLAUDE_SKILL.indexOf('5. VOLLSTÄNDIGES BUILDER-JSON'));
 });

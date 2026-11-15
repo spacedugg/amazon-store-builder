@@ -292,7 +292,7 @@ export function customerStory(s) {
     brandName: s.brandName,
     marketplace: s.marketplace,
     language: s.language,
-    background: { desktop: s.background.desktop, mobile: s.background.mobile },
+    background: { desktop: s.background.desktop, mobile: s.background.mobile, desktopCopy:s.background.desktopCopy ?? s.background.copy ?? '', mobileCopy:s.background.mobileCopy ?? s.background.copy ?? '' },
     cards: s.cards.map((c) => ({
       id: c.id,
       type: c.type,

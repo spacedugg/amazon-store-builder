@@ -106,3 +106,18 @@ test('manual path opens a blank editor and background is clearly editable with b
  await expect(page.getByRole('dialog')).toHaveCount(0);
  await expect(page.locator('.bs-card')).toHaveCount(0);
 });
+
+test('preview shows only intended copy, fixed specifications stay outside briefs, and background control never covers the canvas',async({page})=>{
+ const s=sample(2,true);s.background.desktopBrief='PRIVATE_BACKGROUND 3660 × 1563 px. Logo on the left.';s.background.mobileBrief='PRIVATE_MOBILE 1389 x 1875 px.';s.background.desktopCopy='Visible background slogan';s.background.mobileCopy='Mobile slogan';s.cards[1].brief='PRIVATE_MEDIA 814 × 1019 px. A real founder portrait.';s.cards[1].copy='People behind the product';s.cards[0].slots.forEach(slot=>{slot.imageMode='custom';slot.brief='PRIVATE_SLOT 1328 × 1456 px.';});s.cards[0].copy='Visible grid words';
+ await open(page,s);const carousel=page.locator('.bs-carousel');
+ await expect(carousel).not.toContainText('PRIVATE_');await expect(carousel).not.toContainText('3660');await expect(carousel).not.toContainText('814');
+ await expect(carousel).toContainText('Visible background slogan');await expect(carousel).toContainText('People behind the product');await expect(carousel).toContainText('Visible grid words');
+ const bg=page.getByRole('button',{name:'Hintergrund bearbeiten',exact:true});expect(await bg.evaluate(el=>!el.closest('.bs-carousel'))).toBe(true);
+ await bg.click();await expect(page.getByLabel('Desktop-Motiv und Inhalt (English)',{exact:true})).toHaveValue('PRIVATE_BACKGROUND. Logo on the left.');
+ await expect(page.locator('[data-spec-kind="desktop"]')).toContainText('3660 × 1563 px');await expect(page.locator('[data-spec-kind="mobile"]')).toContainText('1389 × 1875 px');
+ await page.getByLabel('Karte 2 bearbeiten',{exact:true}).click();await expect(page.getByLabel('Inhalt und Motiv (English)',{exact:true})).toHaveValue('PRIVATE_MEDIA. A real founder portrait.');await expect(page.locator('[data-spec-kind="media"]')).toContainText('814 × 1019 px');
+ await page.getByLabel('Inhalt und Motiv (English)',{exact:true}).fill('A shorter portrait description.');await expect(page.locator('[data-spec-kind="media"]')).toContainText('814 × 1019 px');await expect(carousel).not.toContainText('A shorter portrait description.');
+ await page.screenshot({path:'test-results/brand-story-clean-copy-preview.png',fullPage:true});
+ await page.getByRole('button',{name:'Mobil',exact:true}).click();await expect(carousel).toContainText('Mobile slogan');await expect(carousel).not.toContainText('PRIVATE_');
+ await page.getByRole('button',{name:'Desktop',exact:true}).click();await page.getByRole('button',{name:'Produkt 2 B012345678',exact:true}).click();await expect(page.locator('[data-spec-kind="product"]')).toHaveCount(4);await expect(page.getByLabel('Motivbeschreibung · Platz 2 (English)',{exact:true})).toHaveValue('PRIVATE_SLOT.');
+});

@@ -94,3 +94,11 @@ test('composite has one shared target, no main image choice and no field explana
  assert(card().slots.every(slot=>slot.imageMode==='custom'));
  assert(!d.querySelector('.bs-product-default'));
 }));
+
+test('image specifications stay fixed outside editable briefs for media, grids and backgrounds',async()=>mount(async(d,card,select)=>{
+ assert.equal(d.querySelectorAll('.bs-fixed-specs[data-spec-kind="product"]').length,4);
+ for(const panel of d.querySelectorAll('.bs-fixed-specs'))assert(!panel.closest('label'));
+ await select('Aufbau des ASIN-Grids','composite');
+ assert(d.querySelector('.bs-property-field .bs-fixed-specs').textContent.includes('4 Bilddateien'));
+ assert.equal(d.querySelectorAll('.bs-fixed-specs[data-spec-kind="product"]').length,5);
+}));
