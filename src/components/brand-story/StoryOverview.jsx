@@ -16,9 +16,9 @@ export default function StoryOverview({ stories, loading, error, hasDraft, onRes
           <div className="store-home-card-details"><div className="store-home-card-title">{s.brandName}<span aria-hidden="true">↗</span></div><div className="store-home-card-meta"><span>{s.cardCount ?? 0} Karten</span><span>{s.mediaCount ?? 0} Bildkarten · {s.gridCount ?? 0} ASIN-Grids</span><span>{s.marketplace?.toUpperCase()}</span></div>
             <p className="bs-project-status">Desktop {s.hasDesktop ? '✓' : 'offen'} · Mobil {s.hasMobile ? '✓' : 'offen'}{s.updated_at ? ` · ${new Intl.DateTimeFormat('de-DE', { day: '2-digit', month: 'short' }).format(new Date(s.updated_at.replace(' ', 'T') + (/Z$|[+-]\d\d:\d\d$/.test(s.updated_at) ? '' : 'Z')))}` : ''}</p>
           </div>
-        </button><button type="button" className="btn bs-story-delete" disabled={busy}
-          aria-label={`Brand Story ${s.brandName} löschen`}
-          onClick={() => onDelete(s)}>Brand Story löschen</button></div>)}
+        </button><button type="button" className="bs-story-delete-icon" disabled={busy}
+          aria-label={`Brand Story ${s.brandName} löschen`} title="Brand Story löschen"
+          onClick={() => onDelete(s)}><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></button></div>)}
       </div>}
       {!loading && !stories.length && !error && <div className="store-home-empty"><h3>Deine erste Markengeschichte</h3><p>Starte mit der Marke und dem Konzept. Die Vorschau entsteht direkt aus deinem JSON.</p><button className="store-home-create" disabled={busy} onClick={onNew}>Neue Brand Story</button></div>}
     </main>
