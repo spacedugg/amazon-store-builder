@@ -11,6 +11,7 @@ function storeTarget(value) {
   const marketplace = url.hostname.replace(/^www\./, '');
   if (!MARKETPLACES.has(marketplace) || ![marketplace,'www.' + marketplace].includes(url.hostname) || !/^\/stores\/[^/]+/i.test(url.pathname)) throw new Error('Use a supported Amazon marketplace Store URL');
   if (/%(?:2f|5c|2e)/i.test(url.pathname)) throw new Error('Encoded path separators are not allowed');
+  if (/\/page\//i.test(url.pathname) && !/\/page\/[a-z0-9-]+\/?$/i.test(url.pathname)) throw new Error('Use an Amazon Store page URL');
   url.search = '';
   url.pathname = url.pathname.replace(/\/+$/, '');
   const parts = url.pathname.split('/').filter(Boolean);
@@ -108,6 +109,7 @@ function parseStorePage(html, pageUrl) {
     }
   }
   configs.forEach(cfg=>visit(cfg));
+  if(process.env.VERCEL_ENV==='preview') console.info('[brand-story-discovery] '+JSON.stringify({title:text(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]),configKeys:configs.slice(0,4).map(cfg=>Object.keys(cfg || {}).slice(0,12)),brandName,pages:pages.length,products:asins.length,meta:[...html.matchAll(/<meta\b[^>]*>/gi)].map(m=>attributes(m[0])).filter(a=>/brand|title/i.test(a.name||a.property||'')).slice(0,8)}));
   for(const m of html.matchAll(/<meta\b[^>]*>/gi)) {
     const attrs=attributes(m[0]);
     if(/^(brand|og:brand)$/i.test(attrs.name||attrs.property||'') && attrs.content)brandName=brandName||text(attrs.content);
