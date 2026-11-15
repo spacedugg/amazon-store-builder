@@ -4,8 +4,11 @@ const imageSrc=x=>typeof x==='string'?x:x?.url;
 function Picture({image,placeholder='Bild fehlt',fit='cover'}) {
   return imageSrc(image)?<img src={imageSrc(image)} alt="" draggable={false} style={{objectFit:fit}}/>:<div className="bs-placeholder">{placeholder}</div>;
 }
-function DraftImage({copy=''}) {
-  return copy ? <strong className="bs-draft-copy">{copy}</strong> : <svg className="bs-draft-image-icon" viewBox="0 0 120 80" aria-hidden="true"><circle cx="88" cy="20" r="9"/><path d="M8 70 43 22 69 56 85 39 112 70Z"/></svg>;
+function DraftImage({copy='',headline=''}) {
+  return headline || copy ? <div className="bs-draft-copy">
+    {headline && <strong className="bs-draft-headline">{headline}</strong>}
+    {copy && <span className="bs-draft-body">{copy}</span>}
+  </div> : <svg className="bs-draft-image-icon" viewBox="0 0 120 80" aria-hidden="true"><circle cx="88" cy="20" r="9"/><path d="M8 70 43 22 69 56 85 39 112 70Z"/></svg>;
 }
 export function StoryCarousel({story,mobile=false,onSelect,selected,selectedSlot=null,showDraft=false,onAdd,onRemove,onReorder,busy=false}) {
   const [page,setPage]=useState(0), [dragging,setDragging]=useState(null), [edge,setEdge]=useState(0), [dropTarget,setDropTarget]=useState(null);
@@ -44,7 +47,7 @@ export function StoryCarousel({story,mobile=false,onSelect,selected,selectedSlot
         onDragEnd={endDrag} onDragOver={e=>{if(dragging){e.preventDefault();setDropTarget(c.id);}}}
         onDrop={e=>{const r=e.currentTarget.getBoundingClientRect();drop(e,c.id,e.clientX>r.left+r.width/2);}}>
         {editable&&<div className="bs-preview-card-tools"><span aria-hidden="true">⠿ {i+1}</span><button className="bs-preview-remove" draggable={false} aria-label={`Karte ${i+1} entfernen`} title="Karte entfernen" disabled={busy} onClick={e=>{e.stopPropagation();onRemove(c.id);}}>−</button></div>}
-        {c.type==='media'?<Picture image={c.image} placeholder={<DraftImage copy={c.copy || ''}/>}/>:<>
+        {c.type==='media'?<Picture image={c.image} placeholder={<DraftImage headline={c.headline || ''} copy={c.copy || ''}/>}/>:<>
           <div className="bs-grid">{c.slots.map((slot,j)=>{
             const target=productUrl(slot,story.marketplace), Tag=onSelect?'button':'a';
             return <Tag key={j} className={`bs-grid-target${selected===c.id&&selectedSlot===j?' is-slot-selected':''}`} {...(onSelect?{type:'button',onClick:e=>{e.preventDefault();e.stopPropagation();onSelect(c.id,j);}}:{href:target||undefined,target:'_blank',rel:'noopener noreferrer'})} draggable={false} aria-label={`Produkt ${j+1}${slot.asin?' '+slot.asin:''}`}>
