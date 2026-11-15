@@ -6,6 +6,7 @@ import { createRequire } from 'node:module';
 import vm from 'node:vm';
 
 const require=createRequire(import.meta.url);
+const requireApi=createRequire(new URL('../../api/stores.js',import.meta.url));
 const source=await readFile(new URL('../../api/stores.js',import.meta.url),'utf8');
 const original={brandName:'Arensberger',marketplace:'de',asins:[],products:[],pages:[{id:'original',name:'Gestaltete Startseite',sections:[{id:'hero',layoutId:'1',tiles:[{type:'image',textOverlay:{heading:'Bestehende Gestaltung'},uploadedImage:'https://images.test/original.webp'}]}]}]};
 const incoming={brandName:'Arensberger',pages:[{name:'Neue Startseite',sections:[{layoutId:'1',tiles:[{type:'image',brief:'New concept',textOverlay:{heading:'Neues Konzept'}}]}]}]};
@@ -16,7 +17,7 @@ async function setup(page) {
   await db.execute(`CREATE TABLE stores(id TEXT PRIMARY KEY,brand_name TEXT,marketplace TEXT,data TEXT,share_token TEXT UNIQUE,page_count INTEGER,product_count INTEGER,created_at TEXT DEFAULT '2026-10-07 11:39:41',updated_at TEXT DEFAULT '2026-11-11 10:18:22')`);
   await db.execute('CREATE TABLE store_images(hash TEXT PRIMARY KEY,blob_url TEXT)');
   await db.execute({sql:'INSERT INTO stores(id,brand_name,marketplace,data,share_token,page_count,product_count) VALUES (?,?,?,?,?,?,?)',args:['arensberger','Arensberger','de',JSON.stringify(original),'original-link',1,0]});
-  const context={module:{exports:{}},require:name=>name==='./_db'?{getClient:()=>db,migrate:async()=>{}}:require(name),console};
+  const context={module:{exports:{}},require:name=>name==='./_db'?{getClient:()=>db,migrate:async()=>{}}:requireApi(name),console};
   vm.runInNewContext(source,context);
   const writes=[];
   await page.route('**/api/stores*',async route=>{
