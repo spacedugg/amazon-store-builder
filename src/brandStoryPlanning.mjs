@@ -13,6 +13,18 @@ export function canonicalStoreUrl(value) {
   try { const url=new URL(value);url.search='';url.hash='';url.hostname=url.hostname.replace(/^www\./,'');url.pathname=url.pathname.replace(/\/+$/,'');return url.href; } catch { return value; }
 }
 
+export function gridDestinationError(category, storeUrl='') {
+  const name=String(category.name || '').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+  const value=String(category.url || '');
+  const pageId=url=>url.match(/\/page\/([a-z0-9-]+)/i)?.[1]?.toLowerCase();
+  if(value && storeUrl && (canonicalStoreUrl(value)===canonicalStoreUrl(storeUrl) || (pageId(value) && pageId(value)===pageId(storeUrl)))) return 'Die Store-Startseite ist kein Grid-Ziel.';
+  if(/^(?:home(?:page)?|start(?:seite)?|willkommen|welcome)(?:\s*[-–|:]|$)/i.test(name)) return 'Die Store-Startseite ist kein Grid-Ziel.';
+  let path='';try{path=decodeURIComponent(new URL(value).pathname).replace(/[-_]+/g,' ');}catch{}
+  if(/(?:\b(?:uber|ueber) (?:uns|die marke)\b|\babout(?: us| the brand)?\b|\b(?:unsere|our) (?:geschichte|werte|marke|story|brand)\b|\bmarkengeschichte\b|\bunternehmen\b|\b(?:produkt|kauf|product)[ -]?(?:berater|beratung|finder|advisor)\b|\bquiz\b|\bratgeber\b|\bberatung\b|\bkontakt\b|\bcontact\b|\bfaq\b)/i.test(name+' '+path)) return 'Informations- und Beratungsseiten sind keine Grid-Ziele.';
+  try {if(/^\/stores\/[^/]+\/?$/i.test(new URL(value).pathname))return 'Die Store-Startseite ist kein Grid-Ziel.';}catch{}
+  return '';
+}
+
 export function storePlanningReady(p) {
   return !!p?.discoveredStoreUrl && canonicalStoreUrl(p.storeUrl)===canonicalStoreUrl(p.discoveredStoreUrl);
 }
@@ -42,19 +54,22 @@ export function mergeDiscoveredPages(planning, result) {
       }
     } else next.categories.push({
       id: page.pageId || page.url, name: page.name || 'Unterseite', url: page.url,
-      selected: canonicalStoreUrl(page.url) !== canonicalStoreUrl(result.storeUrl), asins: observed.slice(0,4), observedAsins: observed,
+      selected: !gridDestinationError(page,result.storeUrl || planning.storeUrl), asins: observed.slice(0,4), observedAsins: observed,
       status: page.status, error: page.error || '',
     });
   }
+  for(const category of next.categories) if(gridDestinationError(category,result.storeUrl || planning.storeUrl)) category.selected=false;
   return next;
 }
 
 export function appendPlannedGrids(story) {
   const next=structuredClone(story), p=next.planning || defaultPlanning();
-  const wanted = (p.categories || []).filter(c=>c.selected && !next.cards.some(card=>card.type==='grid' && (c.url ? canonicalStoreUrl(card.shopUrl)===canonicalStoreUrl(c.url) : card.title===c.name)));
+  const wanted = (p.categories || []).filter(c=>c.selected && !gridDestinationError(c,p.storeUrl) && !next.cards.some(card=>card.type==='grid' && (c.url ? canonicalStoreUrl(card.shopUrl)===canonicalStoreUrl(c.url) : card.title===c.name)));
   if (p.includeFocusGrid && p.focusProducts?.length && !next.cards.some(c=>c.title==='Produktfokus')) {
     if (p.focusProducts.length>4) throw Error('Für das gemeinsame Fokus-Grid bitte höchstens vier Produkte auswählen. Weitere Produkte können eigene Karten bekommen.');
-    wanted.push({name:'Produktfokus', url:p.storeUrl, asins:p.focusProducts.map(f=>f.asin)});
+    const destination=p.categories.find(c=>c.selected && !gridDestinationError(c,p.storeUrl) && p.focusProducts.every(f=>c.asins.includes(f.asin)));
+    if(!destination) throw Error('Für das Fokus-Grid bitte eine passende produktführende Store-Unterseite in Claude abstimmen.');
+    wanted.push({name:'Produktfokus', url:destination.url, asins:p.focusProducts.map(f=>f.asin)});
   }
   if(next.cards.length+wanted.length>19) throw Error('Die Auswahl überschreitet 19 Karten. Bitte Kategorien reduzieren oder Karten entfernen.');
   for(const category of wanted){

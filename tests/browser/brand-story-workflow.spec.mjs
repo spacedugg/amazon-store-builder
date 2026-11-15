@@ -181,7 +181,7 @@ test('Store-first discovery reviews categories, recovers a failed page, and copi
   await expect(page.getByText('Wichtige Produkte (optional)',{exact:true})).toBeVisible();
   await expect(page.getByText('Markeninfos (optional)',{exact:true})).toBeVisible();
   await expect(page.getByLabel('Tapeten aufnehmen',{exact:true})).toBeChecked();
-  await expect(page.getByLabel('Startseite aufnehmen',{exact:true})).not.toBeChecked();
+  await expect(page.getByLabel('Startseite aufnehmen',{exact:true})).toHaveCount(0);
   await page.getByRole('button',{name:'Produkte der Auswahl laden',exact:true}).click();
   await expect(page.getByLabel('Produkt-ASINs Tapeten',{exact:true})).toHaveValue('B012345678, B000000001, B000000002, B000000003');
   await expect(page.getByRole('status')).toContainText('1 Unterseiten');
@@ -252,4 +252,31 @@ test('failed Store authentication keeps later steps hidden; retry detects brand 
  await page.getByLabel('Amazon Brand Store-Link',{exact:true}).fill('https://www.amazon.de/stores/Other');
  await expect(page.getByLabel('Markenname',{exact:true})).toHaveCount(0);
  await expect(page.getByRole('button',{name:'Weiter zu Claude',exact:true})).toBeDisabled();
+});
+
+test('commerce-only category choices explain optional inputs with real examples and hand off to Claude',async({page,context})=>{
+ await context.grantPermissions(['clipboard-read','clipboard-write']);await setup(page);
+ const root='https://www.amazon.de/stores/Brand/page/11111111-1111-1111-1111-111111111111';
+ const names=['Über uns','Produktberater','Quiz','Schlaf','Gelenke und Sport','Körper und Balance','Bestseller','Sale'];
+ await page.route('**/api/brand-story-discover',r=>r.fulfill({json:{storeUrl:root,brandName:'Brand',marketplace:'de',warnings:[],pages:[{url:root,name:'Homepage',status:'loaded',asins:[]},...names.map((name,i)=>({name,url:`https://www.amazon.de/stores/Brand/page/abc-${i}`,status:'pending',asins:[]}))]}}));
+ await page.getByRole('button',{name:'Neue Brand Story',exact:true}).first().click();await page.getByLabel('Amazon Brand Store-Link',{exact:true}).fill(root);await page.getByRole('button',{name:'Store auslesen',exact:true}).click();
+ for(const name of ['Homepage','Über uns','Produktberater','Quiz'])await expect(page.getByLabel(name+' aufnehmen',{exact:true})).toHaveCount(0);
+ for(const name of names.slice(3))await expect(page.getByLabel(name+' aufnehmen',{exact:true})).toBeChecked();
+ await page.getByText('Wichtige Produkte (optional)',{exact:true}).click();
+ const focus=page.getByLabel('Beispiele für Produktfokus',{exact:true});await expect(focus.locator('img')).toHaveCount(5);
+ await expect.poll(()=>focus.locator('img').evaluateAll(imgs=>imgs.every(im=>im.complete&&im.naturalWidth>0))).toBe(true);
+ await focus.screenshot({path:'test-results/brand-story-product-focus-examples.png'});
+ await page.getByLabel('Fokus-ASIN',{exact:true}).fill('B012345678');await page.getByRole('button',{name:'Produkt aufnehmen',exact:true}).click();
+ await page.getByText('Markeninfos (optional)',{exact:true}).click();const brand=page.getByLabel('Beispiele für Markeninfos',{exact:true});await expect(brand.locator('img')).toHaveCount(2);
+ await expect.poll(()=>brand.locator('img').evaluateAll(imgs=>imgs.every(im=>im.complete&&im.naturalWidth>0))).toBe(true);
+ await brand.screenshot({path:'test-results/brand-story-brand-info-examples.png'});
+ await page.getByLabel('Markeninfos für Claude',{exact:true}).fill('Gegründet 2017 durch zwei Personen; Details werden in Claude ergänzt.');
+ await page.getByRole('button',{name:'Weiter zu Claude',exact:true}).click();
+ await expect(page.getByRole('link',{name:'Claude Cowork öffnen ↗',exact:true})).toHaveAttribute('href','claude://cowork/new');
+ await expect(page.getByRole('link',{name:'Claude im Browser öffnen ↗',exact:true})).toHaveAttribute('href','https://claude.ai/new');
+ await expect(page.getByRole('link',{name:'Claude im Browser öffnen ↗',exact:true})).toHaveAttribute('target','_blank');
+ await page.getByRole('button',{name:'Auftrag für Claude kopieren',exact:true}).click();const prompt=await page.evaluate(()=>navigator.clipboard.readText());const data=JSON.parse(prompt.slice(prompt.indexOf('{')));
+ expect(data.planning.categories.map(c=>c.name)).toEqual(names.slice(3));expect(data.planning.focusProducts[0].asin).toBe('B012345678');expect(data.brandFacts).toContain('Gegründet 2017');
+ expect(prompt).toContain('Kategorie-Einstiegskarten');expect(prompt).toContain('Nie Homepage');
+ await page.screenshot({path:'test-results/brand-story-claude-handoff.png',fullPage:true});
 });

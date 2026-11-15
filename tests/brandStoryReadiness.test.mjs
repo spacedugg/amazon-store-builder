@@ -65,3 +65,10 @@ test('composite never displays a main image and cannot publish mismatched produc
  assert(normalizeStory(s).cards[0].slots.every(slot=>slot.imageMode==='custom'));
  assert(model.customerStory(s).cards[0].slots.every(slot=>slot.imageMode==='custom'));
 });
+
+test('automatic story share rejects home aliases and informational grid links',()=>{
+ const s=ready();s.planning={mode:'store',storeUrl:'https://www.amazon.de/stores/Brand/page/11111111-1111-1111-1111-111111111111',categories:[],focusProducts:[],goal:'',includeFocusGrid:false};
+ s.cards[0].shopUrl='https://www.amazon.de/stores/page/11111111-1111-1111-1111-111111111111';assert.match(model.sharingErrors(s).join(' '),/Startseite/);
+ s.cards[0].shopUrl='https://www.amazon.de/stores/Brand/page/about';s.cards[0].headline='Über uns';assert.match(model.sharingErrors(s).join(' '),/Informations/);
+ s.cards[0].headline='Sale';s.cards[0].shopUrl='https://www.amazon.de/stores/Brand/page/sale';assert.deepEqual(model.sharingErrors(s),[]);
+});
