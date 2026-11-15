@@ -739,3 +739,10 @@
 .bs-grid-draft-copy { position:absolute; inset:12%; display:grid; place-items:center; text-align:center; white-space:pre-line; font-size:1.25cqw; color:#334155; pointer-events:none; background:#ffffffdf; padding:1cqw; }
 .bs-stage-heading .bs-background-action { flex:none; padding:10px 14px; border-radius:7px; font-size:12px; }
 .bs-mobile .bs-draft-copy,.bs-mobile .bs-grid-draft-copy { font-size:4.5cqw; }
+
+/* Saved Brand Stories: separate delete action, never nested inside the open button. */
+.bs-story-entry { display: flex; flex-direction: column; min-width: 0; gap: 8px; }
+.bs-story-entry > .store-home-card { width: 100%; flex: 1; }
+.bs-story-delete { align-self: flex-end; color: #b83232; border: 1px solid rgba(184,50,50,.38); background: transparent; }
+.bs-story-delete:hover { color: #fff; border-color: #b83232; background: #b83232; }
+.bs-story-delete:disabled { opacity: .5; cursor: not-allowed; }
