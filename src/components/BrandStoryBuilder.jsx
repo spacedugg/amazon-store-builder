@@ -158,6 +158,32 @@ export default function BrandStoryBuilder() {
   function link(kind) {
     return `${location.origin}/brand-stories?token=${encodeURIComponent(record[kind + "Token"])}`;
   }
+  async function deleteStory(entry) {
+    if (running.current || !entry?.id) return;
+    if (!window.confirm(`Brand Story „${entry.brandName || 'Ohne Namen'}“ wirklich vollständig löschen? Diese Aktion kann nicht rückgängig gemacht werden.`)) return;
+    await run(async () => {
+      // Read the latest revision to ensure concurrent edits cannot be deleted silently.
+      const current = await api('?id=' + encodeURIComponent(entry.id));
+      const response = await fetch('/api/brand-stories', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: entry.id, revision: current.revision }),
+      });
+      const result = await response.json();
+      if (!response.ok) throw Error(result.error || 'Brand Story konnte nicht gelöscht werden.');
+      setStories(items => items.filter(item => item.id !== entry.id));
+      if (recovery?.record?.id === entry.id) {
+        sessionStorage.removeItem('brand-story-draft');
+        setRecovery(null);
+      }
+      if (record.id === entry.id) {
+        setStory(null);
+        setRecord({});
+        setDirty(false);
+      }
+      setMessage('Brand Story wurde gelöscht.');
+    });
+  }
   async function load(id) {
     if (dirty && !confirm("Ungespeicherte Änderungen verwerfen?")) return;
     await run(async () => {
@@ -280,7 +306,7 @@ export default function BrandStoryBuilder() {
   const shareErrors=story?sharingErrors(story):[];
   if (mode === 'loading' || mode === 'error') return <main className="bs-app"><p role={mode === 'error' ? 'alert' : 'status'}>{message || 'Brand Story wird geladen …'}</p></main>;
   return <main className={`bs-app ${customer ? 'bs-customer' : ''}`}>
-    {overview && !token ? <StoryOverview stories={stories} loading={loading} error={message} hasDraft={!!recovery} onResume={resume} onNew={startNew} onOpen={load} onExamples={()=>setReferencesOpen(true)} busy={busy} /> : story && <>
+    {overview && !token ? <StoryOverview stories={stories} loading={loading} error={message} hasDraft={!!recovery} onResume={resume} onNew={startNew} onOpen={load} onDelete={deleteStory} onExamples={()=>setReferencesOpen(true)} busy={busy} /> : story && <>
       <header className="topbar bs-toolbar">
         {!token && <button className="btn topbar-back" disabled={busy} onClick={goBack}>Alle Brand Stories</button>}
         <div className="topbar-brand"><span className="topbar-title"><span style={{ color: '#ff9900' }}>Brand Story</span> Builder</span></div>
