@@ -136,6 +136,16 @@ test("isolated stories, revision conflicts, share privacy and designer images pr
     updatedSnapshot.cards[0].image = { ...image, url: 'https://example.com/new-card.jpg' };
     await request('POST', { revision: designerSnapshot.revision, assets: changedStoryAssets(designerSnapshot.data, updatedSnapshot) }, { token: published.designerToken });
     assert.deepEqual((await request('GET', {}, { id: created.id })).body.data.background.desktop, operatorBackground);
+    const staleDelete = await request('DELETE', { id: created.id, revision: 1 });
+    assert.equal(staleDelete.code, 409);
+    const revisionToDelete = (await request('GET', {}, { id: created.id })).body.revision;
+    const deleted = await request('DELETE', { id: created.id, revision: revisionToDelete });
+    assert.equal(deleted.code, 200);
+    assert.equal(deleted.body.ok, true);
+    assert.equal((await request('GET', {}, { id: created.id })).code, 404);
+    assert.equal((await request('GET', {}, { token: published.designerToken })).code, 404);
+    assert.equal((await request('GET')).body.stories.length, 1);
+
   } finally {
     db.close();
     delete require.cache[handlerPath];
