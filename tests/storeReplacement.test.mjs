@@ -8,6 +8,7 @@ import { createRequire } from 'node:module';
 
 const source = await readFile(new URL('../api/stores.js', import.meta.url), 'utf8');
 const require = createRequire(import.meta.url);
+const requireApi = createRequire(new URL('../api/stores.js', import.meta.url));
 async function fixture(run) {
   const temp = await mkdtemp(resolve('.store-replacement-'));
   const db = createClient({ url: 'file:'+join(temp,'stores.db') });
@@ -16,7 +17,7 @@ async function fixture(run) {
     created_at TEXT DEFAULT '2026-10-07 11:39:41', updated_at TEXT DEFAULT '2026-11-11 10:18:22')`);
   const old = { brandName: 'Arensberger', pages: [{ id: 'original', sections: [{ tiles: [{ uploadedImage: 'https://images.test/original.webp' }] }] }] };
   await db.execute({ sql: 'INSERT INTO stores(id,brand_name,data,share_token,page_count,product_count) VALUES (?,?,?,?,?,?)', args: ['arensberger','Arensberger',JSON.stringify(old),'original-link',1,0] });
-  const context = { module: { exports: {} }, require: name => name === './_db' ? { getClient: () => db, migrate: async () => {} } : require(name), console };
+  const context = { module: { exports: {} }, require: name => name === './_db' ? { getClient: () => db, migrate: async () => {} } : requireApi(name), console };
   vm.runInNewContext(source, context);
   async function request(method, body = {}, query = {}) {
     const response = { statusCode: 200, setHeader() {}, status(code) { this.statusCode=code; return this; }, json(body) { this.body=body; return this; }, end() { return this; } };
