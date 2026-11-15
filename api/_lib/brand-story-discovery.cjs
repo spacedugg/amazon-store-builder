@@ -109,7 +109,6 @@ function parseStorePage(html, pageUrl) {
     }
   }
   configs.forEach(cfg=>visit(cfg));
-  if(process.env.VERCEL_ENV==='preview') console.info('[brand-story-discovery] '+JSON.stringify({title:text(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]),configKeys:configs.slice(0,4).map(cfg=>Object.keys(cfg || {}).slice(0,12)),brandName,pages:pages.length,products:asins.length,meta:[...html.matchAll(/<meta\b[^>]*>/gi)].map(m=>attributes(m[0])).filter(a=>/brand|title/i.test(a.name||a.property||'')).slice(0,8)}));
   for(const m of html.matchAll(/<meta\b[^>]*>/gi)) {
     const attrs=attributes(m[0]);
     if(/^(brand|og:brand)$/i.test(attrs.name||attrs.property||'') && attrs.content)brandName=brandName||text(attrs.content);
@@ -172,6 +171,7 @@ async function discoverStore(input, options={}) {
     const html=await Promise.race([(options.crawl||crawlPage)(targets.pageUrl,controller.signal),timeout]);
     if(!html || /<title[^>]*>\s*(?:robot check|amazon captcha)/i.test(html) || /validateCaptcha|automated access to Amazon/i.test(html))throw new Error('Amazon blocked this page; retry or continue manually.');
     const observed=parseStorePage(html,targets.pageUrl);
+    if(!input.pageUrl && !observed.brandName && !observed.pages.length) throw new Error('In der Antwort wurde kein Amazon Brand Store erkannt. Bitte den Store-Link prüfen und erneut einlesen.');
     result.brandName=observed.brandName;result.warnings=observed.warnings;
     Object.assign(page,{name:observed.pageName,asins:observed.asins,status:'loaded'});
     result.pages=[page];

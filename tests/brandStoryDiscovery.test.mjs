@@ -175,3 +175,10 @@ test('navigation endpoint reports the observed brand and rejects captcha HTML in
   globalThis.fetch=async()=>new Response('<title>Robot Check</title>'+' '.repeat(600));res=response();await handler({method:'GET',query:{storeUrl:root}},res);assert.equal(res.code,502);
  }finally{globalThis.fetch=oldFetch;if(oldToken===undefined)delete process.env.BRIGHTDATA_UNLOCKER_TOKEN;else process.env.BRIGHTDATA_UNLOCKER_TOKEN=oldToken;}
 });
+
+test('unrecognized pages and CSS-like navigation artifacts cannot report a successfully read Store',async()=>{
+ const {discoverStore,validateTargets}=load();
+ assert.throws(()=>validateTargets(root,'https://www.amazon.de/stores/Example/page/.s-asin%20a:has(h2)'));
+ const result=await discoverStore({storeUrl:root},{crawl:async()=>'<title>Amazon.de</title><main>Keine Store-Inhalte</main>'});
+ assert.equal(result.pages[0].status,'error');assert.match(result.warnings[0],/kein Amazon Brand Store erkannt/);
+});

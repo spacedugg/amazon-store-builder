@@ -34,6 +34,8 @@ module.exports = async function handler(req, res) {
     var subpages = extractNavFromConfig(html, storeUrl);
     if(!subpages.length) subpages=observation.pages.filter(page=>page.url!==observation.storeUrl);
 
+    subpages=subpages.filter(page=>{try{require('./_lib/brand-story-discovery.cjs').validateTargets(storeUrl,page.url);return true;}catch{return false;}});
+
     // Build page list: main page + all subpages
     var pages = [{ url: storeUrl, name: 'Startseite', pageId: 'main' }];
     for (var i = 0; i < subpages.length; i++) {
