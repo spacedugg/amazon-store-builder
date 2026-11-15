@@ -710,3 +710,8 @@
 .bs-app .bs-toolbar .btn.bs-primary:hover, .bs-app .bs-overview .store-home-create:hover {
   background:#1d4ed8; border-color:#1d4ed8; box-shadow:0 2px 8px #2563eb33;
 }
+
+.bs-planning-steps { display:flex; gap:8px; list-style:none; padding:0; margin:18px 0; flex-wrap:wrap; }
+.bs-planning-steps li { padding:8px 12px; border-radius:6px; background:#e2e8f0; color:#64748b; font-size:12px; }
+.bs-planning-steps li[aria-current="step"] { background:#dbeafe; color:#1d4ed8; font-weight:700; }
+.bs-store-details { margin-top:22px; padding-top:20px !important; border-top:1px solid #e2e8f0 !important; }

@@ -125,9 +125,14 @@ test("new story offers Store-first or manual entry without the former required c
   mount(false, async (d, click, btn) => {
     await click(btn('Neue Brand Story'));
     assert(d.querySelector('[role="dialog"]'));
-    for (const label of ['Markenname', 'Amazon Brand Store-Link'])
+    for (const label of ['Amazon Brand Store-Link'])
       assert([...d.querySelectorAll('label')].some(l => l.textContent.includes(label)));
     assert(btn('Automatisch')); assert(btn('Manuell starten'));
+    assert(!d.querySelector('[aria-label="Markenname"]'));
+    assert(btn('Weiter zu Claude').disabled);
+    assert(!d.body.textContent.includes('Wichtige Produkte (optional)'));
+    assert(!d.body.textContent.includes('Markeninfos (optional)'));
+    assert(!btn('Claude einmalig einrichten'));
     assert(!d.querySelector('[aria-label="Zielgruppe"]'));
     assert(!d.querySelector('a[download]'));
   }));

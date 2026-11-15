@@ -3,7 +3,7 @@ import StoryModal from './StoryModal';
 import StoryPlanning from './StoryPlanning';
 import { prepareStoryImport } from '../../brandStoryWorkflow.mjs';
 import { claudePrompt, validateStory } from '../../brandStoryModel.mjs';
-import { defaultPlanning } from '../../brandStoryPlanning.mjs';
+import { defaultPlanning, storePlanningReady } from '../../brandStoryPlanning.mjs';
 
 export default function StorySetupDialog({ story, projectIdentity, draft, setDraft, onChange, onClose, onStart, onImport, onExport }) {
   const { json, review } = draft;
@@ -11,7 +11,7 @@ export default function StorySetupDialog({ story, projectIdentity, draft, setDra
   const [error, setError] = useState(''), [notice, setNotice] = useState('');
   const change = next => { onChange(next); setDraft(d=>({...d,review:null})); };
   function ready() { validateStory({...story,planning:story.planning || defaultPlanning()}); }
-  function proceed() { try { ready(); setStage('claude'); setError(''); } catch(e) { setError(e.message); } }
+  function proceed() { try { if(story.planning?.mode==='store' && !storePlanningReady(story.planning)) throw Error('Bitte zuerst den aktuellen Store einlesen.'); ready(); setStage('claude'); setError(''); } catch(e) { setError(e.message); } }
   function manual() {
     try { ready(); onChange({...story, planning:{...(story.planning || defaultPlanning()),mode:'manual'}}); onStart(); }
     catch(e) { setError(e.message); }
@@ -23,7 +23,7 @@ export default function StorySetupDialog({ story, projectIdentity, draft, setDra
   return <StoryModal title={stage==='plan'?'Brand Story anlegen':'Konzept mit Claude'} onClose={onClose} wide>
     {stage==='plan'?<><StoryPlanning story={story} onChange={change} onContinue={proceed} onManual={manual} onJson={()=>setStage('claude')}/></>:<>
       <button onClick={()=>setStage('plan')}>← Marke und Auswahl bearbeiten</button>
-      <div className="bs-setup-intro"><span className="bs-step">1</span><div><h3>Auftrag in Claude öffnen</h3><p>Der Organisations-Skill <strong>Amazon Brand Story</strong> muss einmalig in Claude eingerichtet sein. Kopiere den Projektauftrag in einen Claude-Chat, stimme dort das Konzept ab und lasse anschließend das JSON ausgeben.</p></div></div>
+      <div className="bs-setup-intro"><span className="bs-step">1</span><div><h3>Auftrag in Claude öffnen</h3><p>Kopiere den Auftrag in Claude. Er ruft den hinterlegten Skill <strong>Amazon Brand Story</strong> auf. Stimme dort das Konzept ab und übernimm anschließend das JSON.</p></div></div>
       <p className="bs-help">{story.brandName || 'Neue Marke'} · {story.cards.length} vorhandene Karten · {story.planning?.categories?.filter(c=>c.selected).length || 0} ausgewählte Kategorien</p>
       <div className="bs-dialog-actions"><button className="bs-primary" onClick={async()=>{try{ready();await navigator.clipboard.writeText(claudePrompt(story));setNotice('Auftrag für den hinterlegten Claude-Skill kopiert.');setError('');}catch(e){setError(e.message);}}}>Auftrag für Claude kopieren</button><button onClick={onExport}>Projektstand als JSON sichern</button></div>
       <div className="bs-setup-intro"><span className="bs-step">2</span><div><h3>Konzept importieren und Vorschau öffnen</h3><p>Füge das abgestimmte JSON ein oder lade die Datei hoch. Karten, Texte, Hintergrundmotive und Links bleiben im Builder bearbeitbar.</p></div></div>

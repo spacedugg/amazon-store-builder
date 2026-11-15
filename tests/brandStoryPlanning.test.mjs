@@ -64,3 +64,14 @@ test('failed navigation does not change the marketplace of existing product targ
 test('new plans leave the story goal for the Claude conversation',()=>{
  assert.equal(planning.defaultPlanning().goal,'');
 });
+
+test('store planning unlocks only after a successful read of the current Store link',()=>{
+ const root='https://www.amazon.de/stores/example';let p=planning.defaultPlanning();p.storeUrl=root;
+ assert.equal(planning.storePlanningReady(p),false);
+ p=planning.mergeStoreNavigation(p,{storeUrl:root,pages:[{url:root,status:'loaded',asins:[]}]});assert.equal(planning.storePlanningReady(p),true);
+ p.storeUrl='https://www.amazon.de/stores/other';assert.equal(planning.storePlanningReady(p),false);
+});
+test('switching to a newly read Store replaces the old detected brand',()=>{
+ const old=newStory('Old Brand');old.planning={...planning.defaultPlanning(),storeUrl:'https://www.amazon.de/stores/new',discoveredStoreUrl:'https://www.amazon.de/stores/old'};
+ const next=planning.applyStoreDiscovery(old,{storeUrl:old.planning.storeUrl,brandName:'New Brand',pages:[{url:old.planning.storeUrl,status:'loaded',asins:[]}]});assert.equal(next.brandName,'New Brand');
+});

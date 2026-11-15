@@ -97,8 +97,8 @@ test('manual path opens a blank editor and background is clearly editable with b
  await page.getByRole('button',{name:'Alle Brand Stories',exact:true}).click();
  await expect(page.getByRole('button',{name:'Neue Brand Story',exact:true}).first()).toHaveCSS('background-color','rgb(37, 99, 235)');
  await page.getByRole('button',{name:'Neue Brand Story',exact:true}).first().click();
- await page.getByLabel('Markenname',{exact:true}).fill('Manuelle Marke');
  await page.getByRole('button',{name:'Manuell starten',exact:true}).click();
+ await page.getByLabel('Markenname',{exact:true}).fill('Manuelle Marke');
  await expect(page.getByLabel('Amazon Brand Store-Link',{exact:true})).toHaveCount(0);
  await expect(page.getByLabel('Schwerpunkt der Story',{exact:true})).toHaveCount(0);
  await expect(page.getByText('Produkte besonders hervorheben (optional)',{exact:true})).toHaveCount(0);

@@ -13,6 +13,10 @@ export function canonicalStoreUrl(value) {
   try { const url=new URL(value);url.search='';url.hash='';url.hostname=url.hostname.replace(/^www\./,'');url.pathname=url.pathname.replace(/\/+$/,'');return url.href; } catch { return value; }
 }
 
+export function storePlanningReady(p) {
+  return !!p?.discoveredStoreUrl && canonicalStoreUrl(p.storeUrl)===canonicalStoreUrl(p.discoveredStoreUrl);
+}
+
 export function mergeStoreNavigation(planning, result) {
   const loaded=result.pages?.some(p=>p.status==='loaded');
   const changed=planning.discoveredStoreUrl && canonicalStoreUrl(planning.discoveredStoreUrl)!==canonicalStoreUrl(result.storeUrl);
@@ -21,7 +25,8 @@ export function mergeStoreNavigation(planning, result) {
 }
 export function applyStoreDiscovery(story, result) {
   const loaded=result.pages?.some(p=>p.status==='loaded');
-  return {...story,brandName:story.brandName || (loaded?result.brandName:'') || '',marketplace:loaded?(result.marketplace || story.marketplace):story.marketplace,planning:mergeStoreNavigation(story.planning || defaultPlanning(),result)};
+  const changed=story.planning?.discoveredStoreUrl && canonicalStoreUrl(story.planning.discoveredStoreUrl)!==canonicalStoreUrl(result.storeUrl);
+  return {...story,brandName:loaded && (changed || !story.brandName)?(result.brandName || ''):story.brandName,marketplace:loaded?(result.marketplace || story.marketplace):story.marketplace,planning:mergeStoreNavigation(story.planning || defaultPlanning(),result)};
 }
 
 export function mergeDiscoveredPages(planning, result) {

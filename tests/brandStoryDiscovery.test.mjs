@@ -113,7 +113,7 @@ test('missing crawler configuration returns actionable page observation without 
     assert.equal(res.body.pages[0].status,'error');
     assert.equal(res.body.pages[0].url,category);
     assert.equal(res.body.pages[0].name,'');
-    assert.match(res.body.warnings[0],/configured/i);
+    assert.match(res.body.warnings[0],/nicht eingerichtet/i);
   } finally {
     if(originalToken!==undefined)process.env.BRIGHTDATA_UNLOCKER_TOKEN=originalToken;
     if(originalKey!==undefined)process.env.BRIGHT_DATA_API_KEY=originalKey;
@@ -140,4 +140,26 @@ test('fallback discovers only navigation Store links and current-page self links
   const third='https://www.amazon.de/stores/Example/page/33333333-3333-3333-3333-333333333333';
   const result=parseStorePage(`<nav><a href="${category}">Tools</a></nav><main><a href="${third}">Promotional category crosslink</a><a href="${root}">Current category</a></main>`,root);
   assert.deepEqual(result.pages.map(page=>page.url),[category,root]);
+});
+
+test('rejected dedicated crawler token retries the distinct existing Bright Data key once',async()=>{
+ const oldFetch=globalThis.fetch,oldToken=process.env.BRIGHTDATA_UNLOCKER_TOKEN,oldKey=process.env.BRIGHT_DATA_API_KEY;
+ process.env.BRIGHTDATA_UNLOCKER_TOKEN='rejected-fixture';process.env.BRIGHT_DATA_API_KEY='working-fixture';
+ const auth=[];
+ try{
+  globalThis.fetch=async(url,options)=>{auth.push(options.headers.Authorization);return auth.length===1?new Response('Invalid token',{status:401}):new Response(fixture);};
+  const result=await load().discoverStore({storeUrl:root});
+  assert.equal(result.pages[0].status,'loaded');assert.equal(auth.length,2);assert.notEqual(auth[0],auth[1]);
+ }finally{globalThis.fetch=oldFetch;for(const [key,value] of [['BRIGHTDATA_UNLOCKER_TOKEN',oldToken],['BRIGHT_DATA_API_KEY',oldKey]])if(value===undefined)delete process.env[key];else process.env[key]=value;}
+});
+test('crawler credential failures are actionable German service errors without exposing provider response or keys',async()=>{
+ const oldFetch=globalThis.fetch,oldToken=process.env.BRIGHTDATA_UNLOCKER_TOKEN,oldKey=process.env.BRIGHT_DATA_API_KEY;
+ process.env.BRIGHTDATA_UNLOCKER_TOKEN='same-fixture';process.env.BRIGHT_DATA_API_KEY='same-fixture';let calls=0;
+ try{
+  globalThis.fetch=async()=>{calls++;return new Response('PRIVATE PROVIDER BODY',{status:401});};
+  const result=await load().discoverStore({storeUrl:root});
+  assert.equal(calls,1);assert.equal(result.errorCode,'CRAWLER_AUTH');assert.match(result.warnings[0],/Zugangsschlüssel/);assert(!JSON.stringify(result).includes('PRIVATE'));
+  const res={setHeader(){},status(code){this.code=code;return this;},json(body){this.body=body;return this;}};
+  await require('../api/brand-story-discover.js')({method:'POST',body:{storeUrl:root}},res);assert.equal(res.code,503);
+ }finally{globalThis.fetch=oldFetch;for(const [key,value] of [['BRIGHTDATA_UNLOCKER_TOKEN',oldToken],['BRIGHT_DATA_API_KEY',oldKey]])if(value===undefined)delete process.env[key];else process.env[key]=value;}
 });
