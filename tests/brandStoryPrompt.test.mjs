@@ -9,7 +9,7 @@ test('project prompt explicitly invokes the organization skill without duplicati
   s.planning = { mode: 'store', goal: 'Hero erklären', categories: [], focusProducts: [{ asin: 'B012345678', reason: 'explain' }], includeFocusGrid: true };
   const prompt = claudePrompt(s);
   for (const value of ['Amazon Brand Story', 'Pendler', 'B012345678', 'https://www.amazon.de/stores/page/existing', 'Hero erklären']) assert(prompt.includes(value), value);
-  assert(prompt.length - JSON.stringify(s, null, 2).length < 1000);
+  assert(prompt.length - JSON.stringify(s, null, 2).length < 1600);
   assert(!prompt.includes('$schema'));
   assert(!prompt.includes('3660'));
   assert(!prompt.includes('Beispielstruktur'));
@@ -94,4 +94,11 @@ test('Claude import contract describes grid modes and per-slot sources without m
   assert.equal(STORY_EXAMPLE.cards[1].gridMode,'individual');
   assert.match(CLAUDE_SKILL,/slot\.brief/);assert.match(CLAUDE_SKILL,/imageMode/);assert.match(CLAUDE_SKILL,/gridMode/);
   assert.match(CLAUDE_SKILL,/Produkt-URLs/);assert.match(CLAUDE_SKILL,/exakten sichtbaren Text/);
+});
+
+test('handoff removes non-commerce destinations and explicitly invites further ideas without reinstalling the organization skill',()=>{
+ const s=newStory('Marke');s.planning={mode:'store',storeUrl:'https://www.amazon.de/stores/brand',goal:'',categories:[{name:'Homepage',url:'https://www.amazon.de/stores/brand',selected:true},{name:'Über uns',url:'https://www.amazon.de/stores/brand/page/about',selected:true},{name:'Schlaf',url:'https://www.amazon.de/stores/brand/page/sleep',selected:true}],focusProducts:[],includeFocusGrid:false};
+ const prompt=claudePrompt(s),data=JSON.parse(prompt.slice(prompt.indexOf('{')));
+ assert.deepEqual(data.planning.categories.map(c=>c.name),['Schlaf']);assert.equal(s.planning.categories.length,3);
+ for(const text of ['Kategorie-Einstiegskarten','Gesamtmotive','Unternehmensgeschichten','Startpunkt','Nie Homepage','Bestseller und Sale']) assert(prompt.includes(text));
 });

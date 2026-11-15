@@ -715,3 +715,12 @@
 .bs-planning-steps li { padding:8px 12px; border-radius:6px; background:#e2e8f0; color:#64748b; font-size:12px; }
 .bs-planning-steps li[aria-current="step"] { background:#dbeafe; color:#1d4ed8; font-weight:700; }
 .bs-store-details { margin-top:22px; padding-top:20px !important; border-top:1px solid #e2e8f0 !important; }
+
+.bs-optional-purpose { font-size:13px; line-height:1.65; color:#475569; margin:14px 0; }
+.bs-planning-examples { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin:16px 0; }
+.bs-planning-examples figure { margin:0; padding:12px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; }
+.bs-planning-examples figure>img { display:block; width:100%; height:200px; object-fit:contain; }
+.bs-planning-example-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:3px; width:160px; height:200px; margin:auto; }
+.bs-planning-example-grid img { width:100%; height:100%; min-height:0; object-fit:cover; }
+.bs-planning-examples figcaption { margin-top:10px; text-align:center; font-size:12px; font-weight:600; }
+@media(max-width:500px) { .bs-planning-examples { grid-template-columns:1fr; } }

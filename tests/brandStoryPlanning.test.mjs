@@ -75,3 +75,32 @@ test('switching to a newly read Store replaces the old detected brand',()=>{
  const old=newStory('Old Brand');old.planning={...planning.defaultPlanning(),storeUrl:'https://www.amazon.de/stores/new',discoveredStoreUrl:'https://www.amazon.de/stores/old'};
  const next=planning.applyStoreDiscovery(old,{storeUrl:old.planning.storeUrl,brandName:'New Brand',pages:[{url:old.planning.storeUrl,status:'loaded',asins:[]}]});assert.equal(next.brandName,'New Brand');
 });
+
+test('automatic category selection excludes home aliases and information pages while keeping category, sale and bestseller pages',()=>{
+ const root='https://www.amazon.de/stores/Brand/page/11111111-1111-1111-1111-111111111111';
+ const pages=[{url:root,name:'Startseite'},{url:'https://www.amazon.de/stores/page/11111111-1111-1111-1111-111111111111',name:'Willkommen'},...['Über uns','Produktberater','Quiz','Schlaf','Gelenke und Sport','Körper und Balance','Bestseller','Sale'].map((name,i)=>({name,url:`https://www.amazon.de/stores/Brand/page/abc-${i}`}))].map(p=>({...p,status:'pending',asins:[]}));
+ const p=planning.mergeDiscoveredPages(planning.defaultPlanning(),{storeUrl:root,pages});
+ assert.deepEqual(p.categories.filter(c=>c.selected).map(c=>c.name),['Schlaf','Gelenke und Sport','Körper und Balance','Bestseller','Sale']);
+ assert.equal(planning.gridDestinationError({name:'Home & Living',url:'https://www.amazon.de/stores/Brand/page/home-living'},root),'');
+});
+test('a renamed excluded destination cannot silently become selected after re-reading and a focus grid never falls back to home',()=>{
+ const root='https://www.amazon.de/stores/brand',url=root+'/page/about';
+ const p={...planning.defaultPlanning(),storeUrl:root,categories:[{id:'x',name:'Über uns',url,selected:true,asins:[]}]};
+ assert.equal(planning.mergeDiscoveredPages(p,{storeUrl:root,pages:[{name:'About us',url,status:'loaded',asins:['B012345678']}]}).categories[0].selected,false);
+ const s=newStory('Brand');s.planning={...planning.defaultPlanning(),storeUrl:root,includeFocusGrid:true,focusProducts:[{asin:'B012345678',reason:'push'}]};
+ assert.throws(()=>planning.appendPlannedGrids(s),/Unterseite/);
+});
+
+test('discovered informational names override neutral editable labels for eligibility without overwriting the label',()=>{
+ const root='https://www.amazon.de/stores/Brand/page/root',url='https://www.amazon.de/stores/Brand/page/info';
+ const p={...planning.defaultPlanning(),storeUrl:root,categories:[{id:'x',name:'Unterseite',url,selected:true,asins:[]}]};
+ const next=planning.mergeDiscoveredPages(p,{storeUrl:root,pages:[{name:'Über uns',url,status:'pending',asins:[]}]});
+ assert.equal(next.categories[0].name,'Unterseite');assert.equal(next.categories[0].selected,false);assert.match(planning.gridDestinationError(next.categories[0],root),/Informations/);
+ for(const name of ['Company','Information','Informationen','AboutUs','Überuns']) assert.match(planning.gridDestinationError({name,url},root),/Informations/);
+});
+
+test('informational words in a brand slug do not exclude valid shopping pages',()=>{
+ const root='https://www.amazon.de/stores/The-Organic-Company/page/root';
+ for(const name of ['Bestseller','Sale','Handtücher']) assert.equal(planning.gridDestinationError({name,url:'https://www.amazon.de/stores/The-Organic-Company/page/products'},root),'');
+ assert.match(planning.gridDestinationError({name:'Details',url:'https://www.amazon.de/stores/The-Organic-Company/about-us/page/info'},root),/Informations/);
+});

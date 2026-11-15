@@ -65,3 +65,17 @@ test('composite never displays a main image and cannot publish mismatched produc
  assert(normalizeStory(s).cards[0].slots.every(slot=>slot.imageMode==='custom'));
  assert(model.customerStory(s).cards[0].slots.every(slot=>slot.imageMode==='custom'));
 });
+
+test('automatic story share rejects home aliases and informational grid links',()=>{
+ const s=ready();s.planning={mode:'store',storeUrl:'https://www.amazon.de/stores/Brand/page/11111111-1111-1111-1111-111111111111',categories:[],focusProducts:[],goal:'',includeFocusGrid:false};
+ s.cards[0].shopUrl='https://www.amazon.de/stores/page/11111111-1111-1111-1111-111111111111';assert.match(model.sharingErrors(s).join(' '),/Startseite/);
+ s.cards[0].shopUrl='https://www.amazon.de/stores/Brand/page/about';s.cards[0].headline='Über uns';assert.match(model.sharingErrors(s).join(' '),/Informations/);
+ s.cards[0].headline='Sale';s.cards[0].shopUrl='https://www.amazon.de/stores/Brand/page/sale';assert.deepEqual(model.sharingErrors(s),[]);
+});
+
+test('automatic share resolves known informational page UUID aliases even under neutral grid titles',()=>{
+ const s=ready(),root='https://www.amazon.de/stores/Brand/page/root',id='22222222-2222-2222-2222-222222222222';
+ s.planning={mode:'store',storeUrl:root,goal:'',focusProducts:[],includeFocusGrid:false,categories:[{id:'x',name:'Unterseite',observedName:'Über uns',url:'https://www.amazon.de/stores/Brand/page/'+id,selected:false,asins:[]}]};
+ s.cards[0].shopUrl='https://www.amazon.de/stores/page/'+id;s.cards[0].headline='Produkte';
+ assert.match(model.sharingErrors(s).join(' '),/Informations/);
+});

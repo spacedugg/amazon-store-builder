@@ -1,4 +1,4 @@
-import { validatePlanning } from './brandStoryPlanning.mjs';
+import { validatePlanning, gridDestinationError, sameStorePage } from './brandStoryPlanning.mjs';
 export const SPECS = {
   desktop: [3660, 1563],
   mobile: [1389, 1875],
@@ -115,6 +115,11 @@ export function sharingErrors(story) {
     if (card.type !== 'grid') return;
     if (gridMode(card) === 'composite' && new Set((card.slots || []).map(slot=>productUrl(slot, story.marketplace))).size > 1) out.push(`${label}: Für das Gesamtbild ein gemeinsames Produktziel festlegen.`);
     if (!hasText(card.headline)) out.push(`${label}: Überschrift fehlt.`);
+    if(story.planning?.mode==='store' && card.shopUrl) {
+      const category=story.planning.categories?.find(c=>sameStorePage(c.url,card.shopUrl));
+      const reason=gridDestinationError({name:category?.name || card.headline,observedName:category?.observedName,url:card.shopUrl},story.planning.storeUrl);
+      if(reason)out.push(`${label}: ${reason}`);
+    }
     if (!safeUrl(card.shopUrl)) out.push(`${label}: gültiger Shop-Link fehlt.`);
     for (let j = 0; j < 4; j++) {
       const slot = card.slots?.[j] || {};

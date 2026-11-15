@@ -1,5 +1,6 @@
+import PlanningExamples from './PlanningExamples';
 import React, { useEffect, useRef, useState } from 'react';
-import { defaultPlanning, mergeDiscoveredPages, applyStoreDiscovery, parseAsins, storePlanningReady, FOCUS_REASONS } from '../../brandStoryPlanning.mjs';
+import { defaultPlanning, mergeDiscoveredPages, applyStoreDiscovery, parseAsins, storePlanningReady, FOCUS_REASONS, gridDestinationError } from '../../brandStoryPlanning.mjs';
 
 export default function StoryPlanning({ story, onChange, onContinue, onManual, onJson }) {
   const p = story.planning || defaultPlanning();
@@ -30,7 +31,7 @@ export default function StoryPlanning({ story, onChange, onContinue, onManual, o
         apply(applyStoreDiscovery(latest.current,result));
         setProgress((result.warnings || []).join(' ') || 'Store eingelesen.');
       }else{
-        const pages=page==='selected'?p.categories.filter(c=>c.selected&&c.url):[page];
+        const pages=page==='selected'?p.categories.filter(c=>c.selected&&c.url&&!gridDestinationError(c,p.storeUrl)):[page];
         let failed=0;
         for(let i=0;i<pages.length;i++){
           if(abort.signal.aborted) break;
@@ -80,7 +81,7 @@ export default function StoryPlanning({ story, onChange, onContinue, onManual, o
       {brandField}
       {!story.brandName && <p className="bs-warning" role="alert">Der Store wurde gelesen, aber der Markenname konnte nicht erkannt werden. Bitte ergänzen.</p>}
       <section className="bs-category-plan"><h3>Kategorien und Produkte</h3>
-        {p.categories.map(c=><article className="bs-category-row" key={c.id}>
+        {p.categories.filter(c=>!gridDestinationError(c,p.storeUrl)).map(c=><article className="bs-category-row" key={c.id}>
           <div className="bs-category-heading"><label><input type="checkbox" aria-label={`${c.name || 'Kategorie'} aufnehmen`} checked={c.selected} onChange={e=>category(c.id,{selected:e.target.checked})}/> Aufnehmen</label><span>{c.status==='loaded'?'Gelesen':c.status==='error'?'Bitte ergänzen':c.status==='manual'?'Manuell':'Noch nicht gelesen'}</span><button onClick={()=>update({categories:p.categories.filter(a=>a.id!==c.id)})} aria-label={`${c.name || 'Kategorie'} entfernen`}>Entfernen</button></div>
           <div className="bs-category-inputs"><label className="bs-field"><span>Kategorie</span><input aria-label={`Kategorie ${c.id}`} value={c.name} onChange={e=>category(c.id,{name:e.target.value})}/></label><label className="bs-field"><span>Unterseiten-Link</span><input aria-label={`Unterseiten-Link ${c.name}`} value={c.url} onChange={e=>category(c.id,{url:e.target.value})}/></label></div>
           <label className="bs-field"><span>Vier Produkt-ASINs · durch Komma getrennt</span><input aria-label={`Produkt-ASINs ${c.name}`} value={asinText[c.id] ?? c.asins.join(', ')} onChange={e=>{setAsinText(t=>({...t,[c.id]:e.target.value}));category(c.id,{asins:parseAsins(e.target.value),productsEdited:true});}} onBlur={()=>setAsinText(t=>{const next={...t};delete next[c.id];return next;})}/></label>
@@ -88,13 +89,13 @@ export default function StoryPlanning({ story, onChange, onContinue, onManual, o
           {c.error && <p className="bs-warning">{c.error}</p>}
           {c.url && <button onClick={()=>discover(c)}>{c.status==='loaded'?'Produkte erneut lesen':'Produkte lesen / erneut versuchen'}</button>}
         </article>)}
-        <div className="bs-dialog-actions"><button onClick={()=>update({categories:[...p.categories,{id:crypto.randomUUID(),name:'Neue Kategorie',url:'',selected:true,asins:[],status:'manual'}]})}>Kategorie manuell ergänzen</button>{p.categories.some(c=>c.selected&&c.url) && <button onClick={()=>discover('selected')}>Produkte der Auswahl laden</button>}</div>
+        <div className="bs-dialog-actions"><button onClick={()=>update({categories:[...p.categories,{id:crypto.randomUUID(),name:'Neue Kategorie',url:'',selected:true,asins:[],status:'manual'}]})}>Kategorie manuell ergänzen</button>{p.categories.some(c=>c.selected&&c.url&&!gridDestinationError(c,p.storeUrl)) && <button onClick={()=>discover('selected')}>Produkte der Auswahl laden</button>}</div>
       </section>
-      <details className="bs-optional"><summary>Wichtige Produkte (optional)</summary>
+      <details className="bs-optional"><summary>Wichtige Produkte (optional)</summary><p className="bs-optional-purpose">Welche Produkte soll Claude besonders erklären oder zeigen? Die ASIN setzt einen Schwerpunkt: Claude kann passende Erklärungen, Beispielmotive und ein Produkt-Grid vorschlagen. Zusätzliche Karten werden erst im Gespräch abgestimmt.</p><PlanningExamples kind="focus"/>
         <div className="bs-dialog-actions"><input aria-label="Fokus-ASIN" value={focusAsin} placeholder="ASIN" onChange={e=>setFocusAsin(e.target.value)}/><button onClick={addFocus}>Produkt aufnehmen</button></div>
         {p.focusProducts.map((f,i)=><div className="bs-focus-row" key={f.asin}><strong>{f.asin}</strong><select aria-label={`Auswahlgrund ${f.asin}`} value={f.reason} onChange={e=>update({focusProducts:p.focusProducts.map((x,j)=>j===i?{...x,reason:e.target.value}:x)})}>{!FOCUS_REASONS.some(([v])=>v===f.reason)&&<option value={f.reason}>{f.reason}</option>}{FOCUS_REASONS.map(([v,label])=><option key={v} value={v}>{label}</option>)}</select><input aria-label={`Hinweis ${f.asin}`} value={f.note || ''} placeholder="Hinweis" onChange={e=>update({focusProducts:p.focusProducts.map((x,j)=>j===i?{...x,note:e.target.value}:x)})}/><button onClick={()=>update({focusProducts:p.focusProducts.filter((_,j)=>j!==i)})}>Entfernen</button></div>)}
       </details>
-      <details className="bs-optional"><summary>Markeninfos (optional)</summary><label className="bs-field"><span>Markeninfos für Claude</span><textarea aria-label="Markeninfos für Claude" value={story.brandFacts || ''} onChange={e=>apply({...latest.current,brandFacts:e.target.value})}/></label></details>
+      <details className="bs-optional"><summary>Markeninfos (optional)</summary><p className="bs-optional-purpose">Hier kannst du belegte Fakten zu Gründern, Herkunft, Handwerk oder Unternehmen mitgeben. Daraus kann Claude persönliche oder erklärende Story-Karten vorschlagen. Du kannst das Feld auch leer lassen und die Infos erst im Claude-Chat ergänzen.</p><PlanningExamples kind="brand"/><label className="bs-field"><span>Markeninfos für Claude</span><textarea aria-label="Markeninfos für Claude" value={story.brandFacts || ''} onChange={e=>apply({...latest.current,brandFacts:e.target.value})}/></label></details>
     </fieldset>}
     <footer className="bs-dialog-actions"><button className="bs-primary" disabled={busy || !story.brandName.trim() || (p.mode==='store' && !storeReady)} onClick={p.mode==='manual'?onManual:onContinue}>{p.mode==='manual'?'Story öffnen':'Weiter zu Claude'}</button><button disabled={busy} onClick={onJson}>Vorhandenes JSON importieren</button></footer>
   </section>;

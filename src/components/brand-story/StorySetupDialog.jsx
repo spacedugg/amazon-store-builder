@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import StoryModal from './StoryModal';
 import StoryPlanning from './StoryPlanning';
 import { prepareStoryImport } from '../../brandStoryWorkflow.mjs';
@@ -8,6 +8,8 @@ import { defaultPlanning, storePlanningReady } from '../../brandStoryPlanning.mj
 export default function StorySetupDialog({ story, projectIdentity, draft, setDraft, onChange, onClose, onStart, onImport, onExport }) {
   const { json, review } = draft;
   const [stage, setStage] = useState(story.cards.length || json ? 'claude' : 'plan');
+  const stageTop=useRef(null);
+  useEffect(()=>{const modal=stageTop.current?.closest('.bs-modal');if(modal)modal.scrollTop=0;},[stage]);
   const [error, setError] = useState(''), [notice, setNotice] = useState('');
   const change = next => { onChange(next); setDraft(d=>({...d,review:null})); };
   function ready() { validateStory({...story,planning:story.planning || defaultPlanning()}); }
@@ -21,11 +23,12 @@ export default function StorySetupDialog({ story, projectIdentity, draft, setDra
     catch(e) { setDraft(d=>({...d,review:null})); setError('JSON konnte nicht übernommen werden: '+e.message); }
   }
   return <StoryModal title={stage==='plan'?'Brand Story anlegen':'Konzept mit Claude'} onClose={onClose} wide>
+    <span ref={stageTop} aria-hidden="true"/>
     {stage==='plan'?<><StoryPlanning story={story} onChange={change} onContinue={proceed} onManual={manual} onJson={()=>setStage('claude')}/></>:<>
       <button onClick={()=>setStage('plan')}>← Marke und Auswahl bearbeiten</button>
-      <div className="bs-setup-intro"><span className="bs-step">1</span><div><h3>Auftrag in Claude öffnen</h3><p>Kopiere den Auftrag in Claude. Er ruft den hinterlegten Skill <strong>Amazon Brand Story</strong> auf. Stimme dort das Konzept ab und übernimm anschließend das JSON.</p></div></div>
+      <div className="bs-setup-intro"><span className="bs-step">1</span><div><h3>Auftrag in Claude öffnen</h3><p>Kopiere den Auftrag in Claude. Er ruft den hinterlegten Skill <strong>Amazon Brand Story</strong> auf. Ergänze dort weitere Wünsche: Kategorie-Einstiegskarten, Gesamtmotive, zusätzliche Unternehmensgeschichten oder andere Reihenfolgen. Claude stimmt das Konzept mit dir ab; erst danach übernimmst du das JSON.</p></div></div>
       <p className="bs-help">{story.brandName || 'Neue Marke'} · {story.cards.length} vorhandene Karten · {story.planning?.categories?.filter(c=>c.selected).length || 0} ausgewählte Kategorien</p>
-      <div className="bs-dialog-actions"><button className="bs-primary" onClick={async()=>{try{ready();await navigator.clipboard.writeText(claudePrompt(story));setNotice('Auftrag für den hinterlegten Claude-Skill kopiert.');setError('');}catch(e){setError(e.message);}}}>Auftrag für Claude kopieren</button><button onClick={onExport}>Projektstand als JSON sichern</button></div>
+      <div className="bs-dialog-actions"><button className="bs-primary" onClick={async()=>{try{ready();await navigator.clipboard.writeText(claudePrompt(story));setNotice('Auftrag für den hinterlegten Claude-Skill kopiert.');setError('');}catch(e){setError(e.message);}}}>Auftrag für Claude kopieren</button><a className="bs-button-link" href="claude://cowork/new">Claude Cowork öffnen (Desktop) ↗</a><a className="bs-button-link" href="https://claude.ai/new" target="_blank" rel="noopener noreferrer">Claude im Browser öffnen ↗</a><button onClick={onExport}>Projektstand als JSON sichern</button></div>
       <div className="bs-setup-intro"><span className="bs-step">2</span><div><h3>Konzept importieren und Vorschau öffnen</h3><p>Füge das abgestimmte JSON ein oder lade die Datei hoch. Karten, Texte, Hintergrundmotive und Links bleiben im Builder bearbeitbar.</p></div></div>
       <label className="bs-field"><span>Brand Story JSON</span><textarea aria-label="Brand Story JSON" className="bs-json" value={json} onChange={e=>setDraft(d=>({...d,json:e.target.value,review:null}))} placeholder={'{ "schemaVersion": 1, "brandName": "…", … }'}/></label>
       <label className="bs-upload">JSON-Datei laden<input type="file" accept="application/json,.json" onChange={async e=>{const file=e.target.files?.[0];if(!file)return;try{const text=await file.text();setDraft(d=>({...d,json:text,review:null}));setError('');}catch(err){setError(err.message);}e.target.value='';}}/></label>
