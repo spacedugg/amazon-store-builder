@@ -51,6 +51,8 @@ test("isolated stories, revision conflicts, share privacy and designer images pr
     s.background.desktopBrief = 'Describe desktop background';
     s.background.mobileBrief = 'Describe mobile background';
     s.cards[0].brief = 'Show the supplied brand logo';
+    s.cards[0].headline = 'Unsere Marke';
+    s.cards[0].copy = 'Das ist der Body Text auf dem Bild.';
     const published = (
       await request("POST", {
         id: created.id,
@@ -72,6 +74,8 @@ test("isolated stories, revision conflicts, share privacy and designer images pr
     assert(!('instructions' in d.body.data));
     assert(!('context' in d.body.data));
     assert.equal(d.body.data.cards[0].title, 'PRIVATE_CARD_NAME');
+    assert.equal(d.body.data.cards[0].headline, 'Unsere Marke');
+    assert.equal(d.body.data.cards[0].copy, 'Das ist der Body Text auf dem Bild.');
     const list = await request('GET');
     assert.equal(list.body.stories.length, 2);
     assert.equal(list.body.stories[0].cardCount, 1);
@@ -136,6 +140,16 @@ test("isolated stories, revision conflicts, share privacy and designer images pr
     updatedSnapshot.cards[0].image = { ...image, url: 'https://example.com/new-card.jpg' };
     await request('POST', { revision: designerSnapshot.revision, assets: changedStoryAssets(designerSnapshot.data, updatedSnapshot) }, { token: published.designerToken });
     assert.deepEqual((await request('GET', {}, { id: created.id })).body.data.background.desktop, operatorBackground);
+    const staleDelete = await request('DELETE', { id: created.id, revision: 1 });
+    assert.equal(staleDelete.code, 409);
+    const revisionToDelete = (await request('GET', {}, { id: created.id })).body.revision;
+    const deleted = await request('DELETE', { id: created.id, revision: revisionToDelete });
+    assert.equal(deleted.code, 200);
+    assert.equal(deleted.body.ok, true);
+    assert.equal((await request('GET', {}, { id: created.id })).code, 404);
+    assert.equal((await request('GET', {}, { token: published.designerToken })).code, 404);
+    assert.equal((await request('GET')).body.stories.length, 1);
+
   } finally {
     db.close();
     delete require.cache[handlerPath];

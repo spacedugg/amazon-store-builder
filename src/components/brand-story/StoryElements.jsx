@@ -128,7 +128,10 @@ export function StoryProperties({ story, selected, selectedSlot = null, onSlotSe
 
     </>}
     {(card.type === 'media' || mode === 'composite') && brief('Inhalt und Motiv (English)', card.brief, value => set({ brief: value }), {specKind:card.type==='media'?'media':'product',count:mode==='composite'?4:1})}
-    {copy('Wortlaut im Bild', card.copy, value => set({ copy: value }))}
+    {card.type === 'media' ? <>
+      {content('Überschrift im Bild', card.headline || '', value => set({ headline: value }), false, { maxLength: 100, placeholder: 'Exakte Überschrift auf dem Bild' })}
+      {copy('Body Text im Bild', card.copy, value => set({ copy: value }))}
+    </> : copy('Wortlaut im Bild', card.copy, value => set({ copy: value }))}
     {card.type === 'media' ? <>
       <Asset specs={false} label="Brand Media Asset" kind="media" image={card.image} disabled={busy} onUpload={f => asset(f, (s, img) => { s.cards.find(c => c.id === selected).image = img; })} onRemove={designer ? undefined : () => set({ image: null })} />
       {fileName(card.assetFile || card.fileKey + '.jpg')}
