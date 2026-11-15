@@ -746,3 +746,7 @@
 .bs-story-delete { align-self: flex-end; color: #b83232; border: 1px solid rgba(184,50,50,.38); background: transparent; }
 .bs-story-delete:hover { color: #fff; border-color: #b83232; background: #b83232; }
 .bs-story-delete:disabled { opacity: .5; cursor: not-allowed; }
+
+/* Distinct text hierarchy in an unrendered Brand Media Asset draft. */
+.bs-draft-copy .bs-draft-headline { display:block; font-weight:800; font-size:1.12em; line-height:1.15; overflow-wrap:anywhere; }
+.bs-draft-copy .bs-draft-body { display:block; margin-top:.55em; font-size:.85em; line-height:1.35; font-weight:400; overflow-wrap:anywhere; white-space:pre-line; }
