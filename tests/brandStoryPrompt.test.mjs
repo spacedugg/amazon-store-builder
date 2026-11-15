@@ -114,3 +114,11 @@ test('portable skill derives existing goals rather than starting a duplicate goa
  const {CLAUDE_SKILL}=await import('../src/brandStoryPrompt.mjs');
  assert(!CLAUDE_SKILL.includes('Bestimme zuerst das Ziel:'));assert(CLAUDE_SKILL.includes('Leite bereits festgelegte Ziele'));
 });
+
+test('Bestseller naming is fixed and is never reopened as a Hero rename question',async()=>{
+ const {CLAUDE_SKILL}=await import('../src/brandStoryPrompt.mjs');
+ for(const text of [CLAUDE_SKILL,claudePrompt(newStory('Marke'))]){
+  assert(text.includes('„Bestseller“ niemals durch „Hero“ ersetzen'));
+  assert(text.includes('Dazu keine Rückfrage stellen; die Antwort ist immer Nein'));
+ }
+});
