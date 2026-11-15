@@ -4,6 +4,9 @@ const imageSrc=x=>typeof x==='string'?x:x?.url;
 function Picture({image,placeholder='Bild fehlt',fit='cover'}) {
   return imageSrc(image)?<img src={imageSrc(image)} alt="" draggable={false} style={{objectFit:fit}}/>:<div className="bs-placeholder">{placeholder}</div>;
 }
+function DraftImage({copy=''}) {
+  return copy ? <strong className="bs-draft-copy">{copy}</strong> : <svg className="bs-draft-image-icon" viewBox="0 0 120 80" aria-hidden="true"><circle cx="88" cy="20" r="9"/><path d="M8 70 43 22 69 56 85 39 112 70Z"/></svg>;
+}
 export function StoryCarousel({story,mobile=false,onSelect,selected,selectedSlot=null,showDraft=false,onAdd,onRemove,onReorder,busy=false}) {
   const [page,setPage]=useState(0), [dragging,setDragging]=useState(null), [edge,setEdge]=useState(0), [dropTarget,setDropTarget]=useState(null);
   const touch=useRef(null), steps=offsets(story.cards.length,mobile), index=Math.min(page,Math.max(steps.length-1,0));
@@ -31,7 +34,7 @@ export function StoryCarousel({story,mobile=false,onSelect,selected,selectedSlot
     onDragOver={dragOver} onDragLeave={e=>{if(!e.currentTarget.contains(e.relatedTarget))setEdge(0);}}
     onDrop={e=>{const i=Math.min(story.cards.length-1,(steps[index]||0)+(edge>0?(mobile?0:2):0));drop(e,story.cards[i]?.id,edge>0);}}
     onClick={e=>{if(onSelect&&!e.target.closest('.bs-card,button,a'))onSelect(null);}}>
-    <div className="bs-backdrop"><Picture image={story.background[mobile?'mobile':'desktop']} placeholder={showDraft?(story.background[(mobile?'mobile':'desktop')+'Brief']||story.background.brief||(mobile?'Mobiler Hintergrund':'Desktop-Hintergrund')):(mobile?'Mobiler Hintergrund':'Desktop-Hintergrund')}/></div>
+    <div className="bs-backdrop"><Picture image={story.background[mobile?'mobile':'desktop']} placeholder={<DraftImage copy={story.background[(mobile?'mobile':'desktop')+'Copy']??story.background.copy??''}/>}/></div>
     <div className="bs-card-viewport"><div className="bs-rail" style={{transform:`translateX(-${(steps[index]||0)*(mobile?100:26.78)}%)`}}>
       {story.cards.map((c,i)=><div key={c.id} data-card-id={c.id} className={`bs-card bs-${c.type==='grid'?'grid-card':'media'}${selected===c.id?' is-selected':''}${dragging===c.id?' is-dragging':''}${dropTarget===c.id?' is-drop-target':''}`}
         onClick={onSelect?e=>{e.preventDefault();onSelect(c.id);}:undefined} onKeyDown={onSelect?e=>{if(e.target===e.currentTarget&&e.key==='Enter'){e.preventDefault();onSelect(c.id);}}:undefined}
@@ -41,18 +44,18 @@ export function StoryCarousel({story,mobile=false,onSelect,selected,selectedSlot
         onDragEnd={endDrag} onDragOver={e=>{if(dragging){e.preventDefault();setDropTarget(c.id);}}}
         onDrop={e=>{const r=e.currentTarget.getBoundingClientRect();drop(e,c.id,e.clientX>r.left+r.width/2);}}>
         {editable&&<div className="bs-preview-card-tools"><span aria-hidden="true">⠿ {i+1}</span><button className="bs-preview-remove" draggable={false} aria-label={`Karte ${i+1} entfernen`} title="Karte entfernen" disabled={busy} onClick={e=>{e.stopPropagation();onRemove(c.id);}}>−</button></div>}
-        {c.type==='media'?<Picture image={c.image} placeholder={showDraft?<><small>KARTE {i+1}</small><strong>{c.copy||`Brand Media Asset ${i+1}`}</strong><span>{c.brief||'Beschreibung für den Designer ergänzen'}</span></>:`Bildkarte ${i+1}`}/>:<>
+        {c.type==='media'?<Picture image={c.image} placeholder={<DraftImage copy={c.copy || ''}/>}/>:<>
           <div className="bs-grid">{c.slots.map((slot,j)=>{
             const target=productUrl(slot,story.marketplace), Tag=onSelect?'button':'a';
             return <Tag key={j} className={`bs-grid-target${selected===c.id&&selectedSlot===j?' is-slot-selected':''}`} {...(onSelect?{type:'button',onClick:e=>{e.preventDefault();e.stopPropagation();onSelect(c.id,j);}}:{href:target||undefined,target:'_blank',rel:'noopener noreferrer'})} draggable={false} aria-label={`Produkt ${j+1}${slot.asin?' '+slot.asin:''}`}>
-              <Picture image={slotDisplayImage(slot,c)} placeholder={showDraft&&slot.brief?<><small>PRODUKT {j+1}</small><span>{slot.brief}</span></>:`Produkt ${j+1}`} fit={slotImageMode(slot,c)==='custom'?'cover':'contain'}/>
+              <Picture image={slotDisplayImage(slot,c)} placeholder={<DraftImage/>} fit={slotImageMode(slot,c)==='custom'?'cover':'contain'}/>
             </Tag>;
-          })}</div>
+          })}{c.copy&&c.slots.every(slot=>!slotDisplayImage(slot,c))&&<div className="bs-grid-draft-copy">{c.copy}</div>}</div>
           <div className="bs-grid-footer"><strong>{c.headline}</strong>{onSelect?<span className="bs-shop-label">Shop besuchen</span>:<a href={safeUrl(c.shopUrl)||undefined} target="_blank" rel="noopener noreferrer">Shop besuchen</a>}</div>
         </>}
       </div>)}
     </div></div>
-    {onSelect&&<button className="bs-preview-background" aria-label="Hintergrund bearbeiten" title="Hintergrund bearbeiten" onClick={()=>onSelect(null)}>Hintergrund bearbeiten</button>}
+
     {editable&&<button className="bs-preview-add" aria-label="Karte hinzufügen" title="Karte hinzufügen" disabled={busy||story.cards.length>=19} onClick={onAdd}>＋</button>}
     <button className="bs-prev" aria-label="Vorherige Karten" disabled={index===0} onClick={()=>move(-1)}>‹</button>
     <button className="bs-next" aria-label="Nächste Karten" disabled={index>=steps.length-1} onClick={()=>move(1)}>›</button>

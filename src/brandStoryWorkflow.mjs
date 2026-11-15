@@ -1,4 +1,4 @@
-import { newStory, validateStory, gridMode, slotImageMode, slotDisplayImage, productAsin, productUrl } from './brandStoryModel.mjs';
+import { SPECS, newStory, validateStory, gridMode, slotImageMode, slotDisplayImage, productAsin, productUrl } from './brandStoryModel.mjs';
 
 export const CONTEXT_FIELDS = [
   ['audience', 'Zielgruppe'],
@@ -10,18 +10,36 @@ export const CONTEXT_FIELDS = [
   ['cardCount', 'Gewünschte Kartenanzahl (optional)'],
 ];
 
+export function stripBriefSpecifications(value) {
+  if(typeof value!=='string')return value;
+  const pairs=Object.values(SPECS).map(([w,h])=>`${w}\\s*[x×]\\s*${h}`).join('|');
+  const pattern=new RegExp(`(?:\\b(?:size|dimensions|format|abmessungen|größe)\\s*:\\s*)?\\b(?:${pairs})\\s*(?:px|pixels?)\\b`,'gi');
+  let result=value;
+  for(const match of [...value.matchAll(pattern)].reverse()){
+    let left=result.slice(0,match.index).replace(/[ \t]+$/,''),right=result.slice(match.index+match[0].length).replace(/^[ \t]+/,'');
+    if(left && /[,;:]$/.test(left) && right[0]===left.at(-1))right=right.slice(1).replace(/^[ \t]+/,'');
+    if(!left)right=right.replace(/^[.,;:][ \t]*/,'');
+    const gap=left&&right&&!/[\r\n]$/.test(left)&&!/[.,;:\r\n]/.test(right[0])?' ':'';
+    result=left+gap+right;
+  }
+  return result;
+}
 export function normalizeStory(story) {
   const s = structuredClone(story);
   s.context = { ...Object.fromEntries(CONTEXT_FIELDS.map(([key]) => [key, ''])), ...s.context };
   s.background = { ...newStory().background, ...s.background };
   for (const kind of ['desktop', 'mobile']) {
-    s.background[kind + 'Brief'] ??= s.background.brief || '';
+    s.background[kind + 'Brief'] = stripBriefSpecifications(s.background[kind + 'Brief'] ?? s.background.brief ?? '');
     s.background[kind + 'Copy'] ??= s.background.copy || '';
   }
   s.references ||= [];
-  for (const card of s.cards) if (card.type === 'grid') {
-    card.gridMode = gridMode(card);
-    for (const slot of card.slots) { slot.imageMode = slotImageMode(slot, card); slot.brief ??= ''; }
+  s.background.brief=stripBriefSpecifications(s.background.brief);
+  for (const card of s.cards) {
+    card.brief=stripBriefSpecifications(card.brief);
+    if (card.type === 'grid') {
+      card.gridMode = gridMode(card);
+      for (const slot of card.slots) { slot.imageMode = slotImageMode(slot, card); slot.brief = stripBriefSpecifications(slot.brief ?? ''); }
+    }
   }
   return s;
 }

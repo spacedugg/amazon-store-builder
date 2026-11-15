@@ -68,7 +68,7 @@ test('Claude import is reviewed before adoption and background descriptions rema
   await expect(page.getByLabel('Desktop-Motiv und Inhalt (English)', { exact: true })).toHaveValue(s.background.brief);
   await page.getByLabel('Mobiles Motiv und Inhalt (English)', { exact: true }).fill('Logo above the same shared cards');
   await page.getByRole('button', { name: 'Mobil', exact: true }).click();
-  await expect(page.locator('.bs-backdrop')).toContainText('Logo above the same shared cards');
+  await expect(page.locator('.bs-backdrop')).not.toContainText('Logo above the same shared cards');
   await expect(page.locator('.bs-card')).toHaveCount(7);
   await page.screenshot({ path: 'test-results/brand-story-editor.png', fullPage: true });
 });
