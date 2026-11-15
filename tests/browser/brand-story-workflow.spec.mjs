@@ -179,10 +179,9 @@ test('Store-first discovery reviews categories, recovers a failed page, and copi
   await page.getByRole('button',{name:'Store auslesen',exact:true}).click();
   await expect(page.getByLabel('Markenname',{exact:true})).toHaveValue('Markenstudio');
   await expect(page.getByText('Wichtige Produkte (optional)',{exact:true})).toBeVisible();
-  await expect(page.getByText('Markeninfos (optional)',{exact:true})).toBeVisible();
+  await expect(page.getByLabel('Unternehmenswebsite für Claude',{exact:true})).toBeVisible();
   await expect(page.getByLabel('Tapeten aufnehmen',{exact:true})).toBeChecked();
   await expect(page.getByLabel('Startseite aufnehmen',{exact:true})).toHaveCount(0);
-  await page.getByRole('button',{name:'Produkte der Auswahl laden',exact:true}).click();
   await expect(page.getByLabel('Produkt-ASINs Tapeten',{exact:true})).toHaveValue('B012345678, B000000001, B000000002, B000000003');
   await expect(page.getByRole('status')).toContainText('1 Unterseiten');
   await page.locator('.bs-category-row').filter({has:page.getByLabel('Teppiche aufnehmen',{exact:true})}).getByRole('button',{name:'Produkte lesen / erneut versuchen',exact:true}).click();
@@ -267,10 +266,9 @@ test('commerce-only category choices explain optional inputs with real examples 
  await expect.poll(()=>focus.locator('img').evaluateAll(imgs=>imgs.every(im=>im.complete&&im.naturalWidth>0))).toBe(true);
  await focus.screenshot({path:'test-results/brand-story-product-focus-examples.png'});
  await page.getByLabel('Fokus-ASIN',{exact:true}).fill('B012345678');await page.getByRole('button',{name:'Produkt aufnehmen',exact:true}).click();
- await page.getByText('Markeninfos (optional)',{exact:true}).click();const brand=page.getByLabel('Beispiele für Markeninfos',{exact:true});await expect(brand.locator('img')).toHaveCount(2);
- await expect.poll(()=>brand.locator('img').evaluateAll(imgs=>imgs.every(im=>im.complete&&im.naturalWidth>0))).toBe(true);
- await brand.screenshot({path:'test-results/brand-story-brand-info-examples.png'});
- await page.getByLabel('Markeninfos für Claude',{exact:true}).fill('Gegründet 2017 durch zwei Personen; Details werden in Claude ergänzt.');
+ await page.getByLabel('Auswahlgrund B012345678',{exact:true}).selectOption('bestseller');
+ await page.getByLabel('Produktauftrag B012345678',{exact:true}).fill('Als Geschenk zeigen und früh platzieren.');
+ await page.getByLabel('Unternehmenswebsite für Claude',{exact:true}).fill('https://www.marke.de');
  await page.getByRole('button',{name:'Weiter zu Claude',exact:true}).click();
  await expect(page.getByRole('heading',{name:'Auftrag in Claude öffnen',exact:true})).toBeVisible();
  await expect.poll(()=>page.locator('.bs-modal').evaluate(el=>el.scrollTop)).toBe(0);
@@ -278,7 +276,31 @@ test('commerce-only category choices explain optional inputs with real examples 
  await expect(page.getByRole('link',{name:'Claude im Browser öffnen ↗',exact:true})).toHaveAttribute('href','https://claude.ai/new');
  await expect(page.getByRole('link',{name:'Claude im Browser öffnen ↗',exact:true})).toHaveAttribute('target','_blank');
  await page.getByRole('button',{name:'Auftrag für Claude kopieren',exact:true}).click();const prompt=await page.evaluate(()=>navigator.clipboard.readText());const data=JSON.parse(prompt.slice(prompt.indexOf('{')));
- expect(data.planning.categories.map(c=>c.name)).toEqual(names.slice(3));expect(data.planning.focusProducts[0].asin).toBe('B012345678');expect(data.brandFacts).toContain('Gegründet 2017');
- expect(prompt).toContain('Kategorie-Einstiegskarten');expect(prompt).toContain('Nie Homepage');
+ expect(data.planning.categories.map(c=>c.name)).toEqual(names.slice(3));expect(data.planning.focusProducts[0].asin).toBe('B012345678');expect(data.planning.websiteUrl).toBe('https://www.marke.de/');expect(data.planning.focusProducts[0].note).toContain('Als Geschenk');
+ expect(prompt).toContain('A) Einstiegskarten');expect(prompt).toContain('nie Homepage');
  await page.screenshot({path:'test-results/brand-story-claude-handoff.png',fullPage:true});
+});
+
+test('new automatic handoff gives inline copy feedback and only browser-first launch actions',async({page,context})=>{
+ await context.grantPermissions(['clipboard-read','clipboard-write']);await setup(page);
+ await page.getByRole('button',{name:'Neue Brand Story',exact:true}).first().click();
+ await page.getByRole('button',{name:'Vorhandenes JSON importieren',exact:true}).click();
+ await expect(page.getByRole('button',{name:'Projektstand als JSON sichern',exact:true})).toHaveCount(0);
+ await expect(page.getByRole('button',{name:'Vorschau ohne JSON öffnen',exact:true})).toHaveCount(0);
+ const links=page.locator('.bs-claude-actions a');await expect(links.nth(0)).toHaveAttribute('href','https://claude.ai/new');await expect(links.nth(1)).toHaveAttribute('href','claude://cowork/new');
+ await page.getByRole('button',{name:'← Marke und Auswahl bearbeiten',exact:true}).click();await page.getByRole('button',{name:'Manuell starten',exact:true}).click();await page.getByLabel('Markenname',{exact:true}).fill('Marke');await page.getByRole('button',{name:'Vorhandenes JSON importieren',exact:true}).click();
+ const copy=page.getByRole('button',{name:'Auftrag für Claude kopieren',exact:true});await copy.click();await expect(copy).toHaveText('✓ Auftrag kopiert');await expect(copy).toBeDisabled();await expect(page.locator('.bs-copy-status')).toBeVisible();await expect(copy).toBeEnabled({timeout:4000});
+});
+test('blocked clipboard exposes the selected prompt without claiming success',async({page})=>{
+ await setup(page);await resume(page);await page.getByRole('button',{name:'Konzept mit Claude',exact:true}).click();
+ await page.evaluate(()=>{Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async()=>{throw Error('denied');}}});document.execCommand=()=>false;});
+ await page.getByRole('button',{name:'Auftrag für Claude kopieren',exact:true}).click();const manual=page.getByLabel('Auftrag manuell kopieren',{exact:true});await expect(manual).toBeVisible();await expect(manual).toBeFocused();await expect(page.locator('.bs-copy-status')).toContainText('gesperrt');
+ expect(await manual.evaluate(el=>el.selectionStart===0&&el.selectionEnd===el.value.length)).toBe(true);await expect(page.getByRole('button',{name:'Auftrag für Claude kopieren',exact:true})).not.toHaveText('✓ Auftrag kopiert');
+});
+test('automatic product suggestions populate without a second click and preserve edited ASINs on refresh',async({page})=>{
+ await setup(page);const root='https://www.amazon.de/stores/Marke',category=root+'/page/tools';let reads=0;
+ await page.route('**/api/brand-story-discover',r=>{const input=r.request().postDataJSON();if(input.pageUrl)reads++;return r.fulfill({json:{storeUrl:root,brandName:'Marke',marketplace:'de',warnings:[],pages:input.pageUrl?[{url:category,name:'Tools',status:'loaded',asins:['B012345678','B000000001','B000000002','B000000003']}]:[{url:root,name:'Startseite',status:'loaded',asins:[]},{url:category,name:'Tools',status:'pending',asins:[]}]}});});
+ await page.getByRole('button',{name:'Neue Brand Story',exact:true}).first().click();await page.getByLabel('Amazon Brand Store-Link',{exact:true}).fill(root);await page.getByRole('button',{name:'Store auslesen',exact:true}).click();
+ const field=page.getByLabel('Produkt-ASINs Tools',{exact:true});await expect(field).toHaveValue('B012345678, B000000001, B000000002, B000000003');expect(reads).toBe(1);
+ await field.fill('B087654321, B000000001, B000000002, B000000003');await page.getByRole('button',{name:'Store erneut einlesen',exact:true}).click();await expect(page.getByRole('button',{name:'Weiter zu Claude',exact:true})).toBeEnabled();await expect(field).toHaveValue('B087654321, B000000001, B000000002, B000000003');expect(reads).toBe(1);
 });

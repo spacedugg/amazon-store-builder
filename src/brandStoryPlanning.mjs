@@ -9,6 +9,20 @@ export const STORY_GOALS = [
 export const FOCUS_REASONS = [['push', 'Gezielt hervorheben'], ['bestseller', 'Bestseller'], ['new', 'Neueinführung'], ['explain', 'Besonders erklären']];
 export const defaultPlanning = () => ({ mode: 'store', storeUrl: '', goal: '', categories: [], focusProducts: [], includeFocusGrid: false });
 export const parseAsins = text => text.split(/[\s,;]+/).filter(Boolean).map(a=>a.toUpperCase());
+export const FOCUS_DETAILS = {
+  push: {label:'Verkaufspriorität für dieses Produkt.',effect:'Claude plant eine auffällige Platzierung oder passende Anwendungsbilder.',example:'Als Geschenk zeigen und vor der Kategorie platzieren.'},
+  bestseller: {label:'Dieses Produkt als Bestseller-Auswahl aufnehmen.',effect:'Claude berücksichtigt es als festen Produktfokus. Ein Bestseller-Claim braucht einen Beleg; eine Hero-Erklärung ist keine erneute Pflichtauswahl.',example:'Unser meistverkauftes Set; Zeitraum/Quelle ergänzen. Für Einsteiger zeigen.'},
+  new: {label:'Ein neues Produkt bekannt machen.',effect:'Claude kann Neuheit, Nutzen und Unterschiede in passenden Karten vorstellen.',example:'Neue Größe seit Oktober; Unterschied zum bisherigen Modell zeigen.'},
+  explain: {label:'Funktionsweise oder Anwendung verständlich machen.',effect:'Claude berücksichtigt eine Produkterklärung mit geeigneten Bildkarten und Beispielen.',example:'Anwendung in drei Schritten zeigen; wann wird das Produkt eingesetzt?'},
+};
+export function normalizeBrandWebsite(value) {
+  if(!value?.trim())return '';
+  let url;try{url=new URL(/^[a-z][a-z0-9+.-]*:/i.test(value.trim())?value.trim():'https://'+value.trim());}catch{throw Error('Bitte eine gültige Unternehmenswebsite eingeben.');}
+  const host=url.hostname.toLowerCase();
+  if(!['https:','http:'].includes(url.protocol) || url.username || url.password || !host.includes('.') || host==='localhost' || /(?:\.local|\.localhost)$/.test(host) || /^[\d.]+$/.test(host) || host.includes(':'))throw Error('Bitte eine öffentliche Unternehmenswebsite ohne Zugangsdaten eingeben.');
+  url.hash='';return url.href;
+}
+
 export function canonicalStoreUrl(value) {
   try { const url=new URL(value);url.search='';url.hash='';url.hostname=url.hostname.replace(/^www\./,'');url.pathname=url.pathname.replace(/\/+$/,'');return url.href; } catch { return value; }
 }
@@ -94,6 +108,7 @@ export function validatePlanning(p) {
   const text=v=>typeof v==='string';
   if (!p || typeof p!=='object' || Array.isArray(p) || !['store','manual'].includes(p.mode) || !text(p.storeUrl) || !text(p.goal) || !Array.isArray(p.categories) || !Array.isArray(p.focusProducts) || typeof p.includeFocusGrid!=='boolean') throw Error('Ungültige Brand-Story-Planung.');
   if(p.mode==='store' && p.discoveredStoreUrl && canonicalStoreUrl(p.discoveredStoreUrl)!==canonicalStoreUrl(p.storeUrl)) throw Error('Der Store-Link wurde geändert. Bitte den neuen Store auslesen oder den vorherigen Link wiederherstellen, bevor du mit der Kategorie-Auswahl fortfährst.');
+  if(p.websiteUrl!==undefined){if(!text(p.websiteUrl))throw Error('Ungültige Unternehmenswebsite.');normalizeBrandWebsite(p.websiteUrl);}
   if(p.categories.length>100 || p.focusProducts.length>19) throw Error('Zu viele Kategorien oder Fokus-Produkte.');
   for(const c of p.categories){
     if(!c || !text(c.id) || !text(c.name) || !text(c.url) || typeof c.selected!=='boolean' || !Array.isArray(c.asins) || c.asins.length>4) throw Error('Pro Kategorie sind maximal vier ASIN-Plätze möglich.');

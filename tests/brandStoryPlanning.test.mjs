@@ -104,3 +104,11 @@ test('informational words in a brand slug do not exclude valid shopping pages',(
  for(const name of ['Bestseller','Sale','Handtücher']) assert.equal(planning.gridDestinationError({name,url:'https://www.amazon.de/stores/The-Organic-Company/page/products'},root),'');
  assert.match(planning.gridDestinationError({name:'Details',url:'https://www.amazon.de/stores/The-Organic-Company/about-us/page/info'},root),/Informations/);
 });
+
+test('company website accepts optional public URLs and rejects credentials and local targets',()=>{
+ assert.equal(planning.normalizeBrandWebsite(''), '');assert.equal(planning.normalizeBrandWebsite('marke.de'), 'https://marke.de/');
+ assert.equal(planning.normalizeBrandWebsite('https://www.marke.de/about#team'),'https://www.marke.de/about');
+ for(const value of ['javascript:alert(1)','https://user:pass@marke.de','http://localhost','http://127.0.0.1','https://intranet.local'])assert.throws(()=>planning.normalizeBrandWebsite(value));
+ const p={...planning.defaultPlanning(),websiteUrl:'https://marke.de'};assert.doesNotThrow(()=>planning.validatePlanning(p));
+ assert.throws(()=>planning.validatePlanning({...p,websiteUrl:42}));
+});
