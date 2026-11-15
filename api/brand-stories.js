@@ -116,6 +116,23 @@ module.exports = async (req, res) => {
       );
       return res.json({ stories: r.rows.map(row => ({ id: row.id, updated_at: row.updated_at, ...storySummary(JSON.parse(row.data)) })) });
     }
+    if (req.method === "DELETE") {
+      const id = req.body?.id;
+      const revision = Number(req.body?.revision);
+      if (typeof id !== "string" || !id.trim() ||
+          !Number.isSafeInteger(revision) || revision < 1)
+        return res.status(400).json({ error: "Story-ID und Revision erforderlich." });
+      // Guard against removing a story updated in a different browser tab.
+      const result = await db.execute({
+        sql: "DELETE FROM brand_stories WHERE id=? AND revision=?",
+        args: [id, revision],
+      });
+      if (!result.rowsAffected)
+        return res.status(409).json({
+          error: "Story nicht gelöscht: inzwischen geändert oder bereits entfernt. Bitte neu laden.",
+        });
+      return res.json({ ok: true, id });
+    }
     if (req.method !== "POST")
       return res.status(405).json({ error: "Methode nicht erlaubt." });
     const b = req.body || {},
