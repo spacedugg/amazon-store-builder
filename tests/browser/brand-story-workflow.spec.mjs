@@ -130,7 +130,7 @@ test('renaming context before importing another brand creates a new record inste
   await page.getByRole('button', { name: '← Marke und Auswahl bearbeiten', exact: true }).click();
   await page.getByRole('button',{name:'Manuell starten',exact:true}).click();
   await page.getByLabel('Markenname', { exact: true }).fill('Andere Marke');
-  await page.getByRole('button', { name: 'Weiter zu Claude', exact: true }).click();
+  await page.getByRole('button', { name: 'Vorhandenes JSON importieren', exact: true }).click();
   const incoming = fixture(); incoming.brandName = 'Andere Marke';
   await page.getByLabel('Brand Story JSON', { exact: true }).fill(JSON.stringify(incoming));
   await page.getByRole('button', { name: 'JSON prüfen', exact: true }).click();

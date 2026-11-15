@@ -28,7 +28,11 @@ module.exports = async function handler(req, res) {
       return res.status(502).json({ error: 'Empty response from crawler (' + (html ? html.length : 0) + ' chars)' });
     }
 
+    var observation = await require('./_lib/brand-story-discovery.cjs').discoverStore({storeUrl:storeUrl},{crawl:async()=>html});
+    if(!observation.pages.some(page=>page.status==='loaded')) return res.status(observation.httpStatus || 502).json({error:observation.warnings[0]});
+    brandName = body.brandName || observation.brandName || 'Unknown';
     var subpages = extractNavFromConfig(html, storeUrl);
+    if(!subpages.length) subpages=observation.pages.filter(page=>page.url!==observation.storeUrl);
 
     // Build page list: main page + all subpages
     var pages = [{ url: storeUrl, name: 'Startseite', pageId: 'main' }];

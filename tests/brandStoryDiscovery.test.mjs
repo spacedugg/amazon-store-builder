@@ -163,3 +163,15 @@ test('crawler credential failures are actionable German service errors without e
   await require('../api/brand-story-discover.js')({method:'POST',body:{storeUrl:root}},res);assert.equal(res.code,503);
  }finally{globalThis.fetch=oldFetch;for(const [key,value] of [['BRIGHTDATA_UNLOCKER_TOKEN',oldToken],['BRIGHT_DATA_API_KEY',oldKey]])if(value===undefined)delete process.env[key];else process.env[key]=value;}
 });
+
+test('navigation endpoint reports the observed brand and rejects captcha HTML instead of a false success',async()=>{
+ const oldFetch=globalThis.fetch,oldToken=process.env.BRIGHTDATA_UNLOCKER_TOKEN;
+ process.env.BRIGHTDATA_UNLOCKER_TOKEN='fixture';
+ try{
+  const handler=require('../api/crawl-store-nav.js');
+  const response=()=>({setHeader(){},status(code){this.code=code;return this;},json(body){this.body=body;return this;}});
+  globalThis.fetch=async()=>new Response(fixture);let res=response();await handler({method:'GET',query:{storeUrl:root}},res);
+  assert.equal(res.code,200);assert.equal(res.body.brandName,'Example');
+  globalThis.fetch=async()=>new Response('<title>Robot Check</title>'+' '.repeat(600));res=response();await handler({method:'GET',query:{storeUrl:root}},res);assert.equal(res.code,502);
+ }finally{globalThis.fetch=oldFetch;if(oldToken===undefined)delete process.env.BRIGHTDATA_UNLOCKER_TOKEN;else process.env.BRIGHTDATA_UNLOCKER_TOKEN=oldToken;}
+});
