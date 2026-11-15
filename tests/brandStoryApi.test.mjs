@@ -51,6 +51,8 @@ test("isolated stories, revision conflicts, share privacy and designer images pr
     s.background.desktopBrief = 'Describe desktop background';
     s.background.mobileBrief = 'Describe mobile background';
     s.cards[0].brief = 'Show the supplied brand logo';
+    s.cards[0].headline = 'Unsere Marke';
+    s.cards[0].copy = 'Das ist der Body Text auf dem Bild.';
     const published = (
       await request("POST", {
         id: created.id,
@@ -72,6 +74,8 @@ test("isolated stories, revision conflicts, share privacy and designer images pr
     assert(!('instructions' in d.body.data));
     assert(!('context' in d.body.data));
     assert.equal(d.body.data.cards[0].title, 'PRIVATE_CARD_NAME');
+    assert.equal(d.body.data.cards[0].headline, 'Unsere Marke');
+    assert.equal(d.body.data.cards[0].copy, 'Das ist der Body Text auf dem Bild.');
     const list = await request('GET');
     assert.equal(list.body.stories.length, 2);
     assert.equal(list.body.stories[0].cardCount, 1);
