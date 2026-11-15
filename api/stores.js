@@ -1,5 +1,6 @@
 var { getClient, migrate } = require('./_db');
 var { createHash } = require('node:crypto');
+var { homepageComplete } = require('./_homepage-complete');
 
 function generateId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
@@ -72,6 +73,33 @@ module.exports = async function handler(req, res) {
     } catch (err) {
       return res.status(500).json({ error: err.message });
     }
+  }
+
+  // Outreach only: candidate selection requires EVERY homepage image to be uploaded.
+  // The generic listing endpoint stays lightweight for the Store Builder UI.
+  if (req.method === 'GET' && req.query.completed === '1') {
+    try {
+      var all = await db.execute('SELECT id, brand_name, data, share_token FROM stores ORDER BY updated_at DESC');
+      var eligible = [];
+      for (var row of all.rows) {
+        if (!row.share_token) continue;
+        var store;
+        try { store = JSON.parse(row.data); } catch (_) { continue; }
+        if (!homepageComplete(store)) continue;
+        var home = store.pages[0];
+        var banner = home.headerBanner || store.headerBanner;
+        if (typeof banner === 'string' && /^#imgref:sha256:[a-f0-9]{64}$/.test(banner)) {
+          var imageRow = await db.execute({sql:'SELECT blob_url FROM store_images WHERE hash = ?',args:[banner.slice(15)]});
+          banner = imageRow.rows[0]?.blob_url || null;
+        }
+        eligible.push({
+          id: row.id, brandName: row.brand_name, shareToken: row.share_token,
+          preview: {banner: typeof banner === 'string' && /^https:\/\//.test(banner) ? banner : null},
+          homepageComplete: true
+        });
+      }
+      return res.status(200).json({stores:eligible});
+    } catch (err) { return res.status(500).json({error:'Interne Stores konnten nicht geprüft werden.'}); }
   }
 
   // GET /api/stores — lightweight card metadata. Extract only a handful of
