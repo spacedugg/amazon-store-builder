@@ -181,7 +181,7 @@ export default function BrandStoryBuilder() {
         setRecord({});
         setDirty(false);
       }
-      setMessage('Brand Story wurde gelöscht.');
+      setMessage('');
     });
   }
   async function load(id) {
