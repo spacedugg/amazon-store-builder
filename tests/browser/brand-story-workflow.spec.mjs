@@ -57,7 +57,6 @@ test('Claude import is reviewed before adoption and background descriptions rema
   const s = await setup(page);
   await page.getByRole('button', { name: 'Neue Brand Story', exact: true }).first().click();
   await expect(page.getByRole('dialog')).toBeVisible();
-  await page.getByLabel('Markenname', { exact: true }).fill('Markenstudio');
   await page.getByRole('button', { name: 'Vorhandenes JSON importieren', exact: true }).click();
   await page.getByLabel('Brand Story JSON', { exact: true }).fill(JSON.stringify(s));
   await page.getByRole('button', { name: 'JSON prüfen', exact: true }).click();
@@ -129,8 +128,9 @@ test('renaming context before importing another brand creates a new record inste
   await page.getByRole('button', { name: 'Markenstudio öffnen' }).click();
   await page.getByRole('button', { name: 'Konzept mit Claude', exact: true }).click();
   await page.getByRole('button', { name: '← Marke und Auswahl bearbeiten', exact: true }).click();
+  await page.getByRole('button',{name:'Manuell starten',exact:true}).click();
   await page.getByLabel('Markenname', { exact: true }).fill('Andere Marke');
-  await page.getByRole('button', { name: 'Weiter zu Claude', exact: true }).click();
+  await page.getByRole('button', { name: 'Vorhandenes JSON importieren', exact: true }).click();
   const incoming = fixture(); incoming.brandName = 'Andere Marke';
   await page.getByLabel('Brand Story JSON', { exact: true }).fill(JSON.stringify(incoming));
   await page.getByRole('button', { name: 'JSON prüfen', exact: true }).click();
@@ -172,9 +172,14 @@ test('Store-first discovery reviews categories, recovers a failed page, and copi
   await page.getByRole('button',{name:'Neue Brand Story',exact:true}).first().click();
   await expect(page.getByLabel('Zielgruppe',{exact:true})).toHaveCount(0);
   await expect(page.getByRole('link',{name:/Skill herunterladen/})).toHaveCount(0);
+  await expect(page.getByLabel('Markenname',{exact:true})).toHaveCount(0);
+  await expect(page.getByText('Wichtige Produkte (optional)',{exact:true})).toHaveCount(0);
+  await expect(page.getByRole('button',{name:'Weiter zu Claude',exact:true})).toBeDisabled();
   await page.getByLabel('Amazon Brand Store-Link',{exact:true}).fill(storeUrl);
   await page.getByRole('button',{name:'Store auslesen',exact:true}).click();
   await expect(page.getByLabel('Markenname',{exact:true})).toHaveValue('Markenstudio');
+  await expect(page.getByText('Wichtige Produkte (optional)',{exact:true})).toBeVisible();
+  await expect(page.getByText('Markeninfos (optional)',{exact:true})).toBeVisible();
   await expect(page.getByLabel('Tapeten aufnehmen',{exact:true})).toBeChecked();
   await expect(page.getByLabel('Startseite aufnehmen',{exact:true})).not.toBeChecked();
   await page.getByRole('button',{name:'Produkte der Auswahl laden',exact:true}).click();
@@ -182,12 +187,7 @@ test('Store-first discovery reviews categories, recovers a failed page, and copi
   await expect(page.getByRole('status')).toContainText('1 Unterseiten');
   await page.locator('.bs-category-row').filter({has:page.getByLabel('Teppiche aufnehmen',{exact:true})}).getByRole('button',{name:'Produkte lesen / erneut versuchen',exact:true}).click();
   await expect(page.getByLabel('Produkt-ASINs Teppiche',{exact:true})).toHaveValue('B012345678, B000000001, B000000002, B000000003');
-  await page.getByLabel('Schwerpunkt der Story',{exact:true}).selectOption('hero');
-  await page.getByText('Produkte besonders hervorheben (optional)',{exact:true}).click();
-  await page.getByLabel('Fokus-ASIN',{exact:true}).fill('B012345678');
-  await page.getByRole('button',{name:'Produkt aufnehmen',exact:true}).click();
-  await page.getByLabel('Auswahlgrund B012345678',{exact:true}).selectOption('bestseller');
-  await page.getByLabel('Hinweis B012345678',{exact:true}).fill('Redaktionelle Auswahl des Kunden, kein gemessener Rang');
+  await expect(page.getByLabel('Schwerpunkt der Story',{exact:true})).toHaveCount(0);
   await page.screenshot({path:'test-results/brand-story-store-first.png',fullPage:true});
   await page.getByRole('button',{name:'Weiter zu Claude',exact:true}).click();
   await page.getByRole('button',{name:'Auftrag für Claude kopieren',exact:true}).click();
@@ -195,26 +195,20 @@ test('Store-first discovery reviews categories, recovers a failed page, and copi
   expect(prompt).toContain('Amazon Brand Story'); expect(prompt).toContain(one); expect(prompt).toContain('B012345678');
   expect(prompt).not.toContain('$schema');
   const data=JSON.parse(prompt.slice(prompt.indexOf('{')));
-  expect(data.planning.goal).toBe('hero'); expect(data.planning.focusProducts).toHaveLength(1);
+  expect(data.planning.goal).toBe(''); expect(data.planning.focusProducts).toHaveLength(0);
   expect(data.planning.categories.find(c=>c.name==='Tapeten').asins).toHaveLength(4);
   await page.getByRole('button',{name:'← Marke und Auswahl bearbeiten',exact:true}).click();
-  await page.getByRole('button',{name:'Kategorie-Grids als Layout öffnen',exact:true}).click();
-  await expect(page.locator('.bs-card')).toHaveCount(2);
-  await expect(page.locator('.bs-grid-footer .bs-shop-label').first()).toHaveText('Shop besuchen');
-  await page.locator('.bs-grid button').first().click();
-  await expect(page.getByLabel('ASIN oder Produktlink · Platz 1',{exact:true})).toHaveValue('B012345678');
-  await expect(page.getByLabel('Shop-Link / Brand-Store-Unterseite',{exact:true})).toHaveValue(one);
+  await expect(page.getByRole('button',{name:'Kategorie-Grids als Layout öffnen',exact:true})).toHaveCount(0);
+  await expect(page.locator('.bs-card')).toHaveCount(0);
 });
 
-test('manual route opens an empty shared preview and organization setup is separate from project creation', async ({ page }) => {
+test('manual route opens an empty shared preview without installation controls', async ({ page }) => {
   await setup(page);
-  await page.getByRole('button',{name:'Claude einmalig einrichten',exact:true}).click();
-  await expect(page.getByRole('link',{name:'Organisations-Skill herunterladen',exact:true})).toHaveAttribute('href','/brand-story-claude/amazon-brand-story.zip');
-  await page.getByRole('button',{name:'Dialog schließen',exact:true}).click();
+  await expect(page.getByRole('button',{name:'Claude einmalig einrichten',exact:true})).toHaveCount(0);
   await page.getByRole('button',{name:'Neue Brand Story',exact:true}).first().click();
   await page.getByRole('button',{name:'Manuell starten',exact:true}).click();
   await page.getByLabel('Markenname',{exact:true}).fill('Manuelle Marke');
-  await page.getByRole('button',{name:'Layout manuell öffnen',exact:true}).click();
+  await page.getByRole('button',{name:'Story öffnen',exact:true}).click();
   await expect(page.locator('.bs-carousel')).toBeVisible();
   await expect(page.locator('.bs-card')).toHaveCount(0);
   await page.getByRole('button',{name:'Karte hinzufügen',exact:true}).first().click();
@@ -234,4 +228,28 @@ test('overview examples show all stories as full-width interactive rows without 
   await articles.first().getByRole('button',{name:'Nächste Karten',exact:true}).click();
   await expect(articles.first().locator('.bs-counter')).toHaveText('2 / 3');
   await page.screenshot({path:'test-results/brand-story-examples.png',fullPage:true});
+});
+
+test('failed Store authentication keeps later steps hidden; retry detects brand and changing the URL locks the next step',async({page})=>{
+ await setup(page);let fail=true;
+ const storeUrl='https://www.amazon.de/stores/Markenstudio';
+ await page.route('**/api/brand-story-discover',route=>fail?route.fulfill({status:503,json:{errorCode:'CRAWLER_AUTH',warnings:['Bright Data lehnt den Zugangsschlüssel ab.'],pages:[]}}):route.fulfill({json:{storeUrl,brandName:'Markenstudio',marketplace:'de',warnings:[],pages:[{url:storeUrl,name:'Startseite',status:'loaded',asins:[]}]}}));
+ await page.getByRole('button',{name:'Neue Brand Story',exact:true}).first().click();
+ await expect(page.getByLabel('Markenname',{exact:true})).toHaveCount(0);
+ await page.getByLabel('Amazon Brand Store-Link',{exact:true}).fill(storeUrl);
+ await page.getByRole('button',{name:'Store auslesen',exact:true}).click();
+ await expect(page.getByRole('alert')).toContainText('Zugangsschlüssel');
+ await expect(page.getByLabel('Markenname',{exact:true})).toHaveCount(0);
+ await expect(page.getByText('Wichtige Produkte (optional)',{exact:true})).toHaveCount(0);
+ await expect(page.getByRole('button',{name:'Weiter zu Claude',exact:true})).toBeDisabled();
+ fail=false;await page.getByRole('button',{name:'Store auslesen',exact:true}).click();
+ await expect(page.getByLabel('Markenname',{exact:true})).toHaveValue('Markenstudio');
+ await expect(page.getByRole('button',{name:'Weiter zu Claude',exact:true})).toBeEnabled();
+ await page.getByText('Wichtige Produkte (optional)',{exact:true}).click();
+ await page.getByLabel('Fokus-ASIN',{exact:true}).fill('B012345678');await page.getByRole('button',{name:'Produkt aufnehmen',exact:true}).click();
+ await expect(page.getByLabel('Auswahlgrund B012345678',{exact:true})).toBeVisible();
+ await page.screenshot({path:'test-results/brand-story-ordered-store.png',fullPage:true});
+ await page.getByLabel('Amazon Brand Store-Link',{exact:true}).fill('https://www.amazon.de/stores/Other');
+ await expect(page.getByLabel('Markenname',{exact:true})).toHaveCount(0);
+ await expect(page.getByRole('button',{name:'Weiter zu Claude',exact:true})).toBeDisabled();
 });

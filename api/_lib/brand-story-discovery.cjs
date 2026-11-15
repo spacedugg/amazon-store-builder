@@ -11,6 +11,7 @@ function storeTarget(value) {
   const marketplace = url.hostname.replace(/^www\./, '');
   if (!MARKETPLACES.has(marketplace) || ![marketplace,'www.' + marketplace].includes(url.hostname) || !/^\/stores\/[^/]+/i.test(url.pathname)) throw new Error('Use a supported Amazon marketplace Store URL');
   if (/%(?:2f|5c|2e)/i.test(url.pathname)) throw new Error('Encoded path separators are not allowed');
+  if (/\/page\//i.test(url.pathname) && !/\/page\/[a-z0-9-]+\/?$/i.test(url.pathname)) throw new Error('Use an Amazon Store page URL');
   url.search = '';
   url.pathname = url.pathname.replace(/\/+$/, '');
   const parts = url.pathname.split('/').filter(Boolean);
@@ -145,12 +146,20 @@ async function readBounded(response) {
   try {for(;;){const {done,value}=await reader.read();if(done)break;bytes+=value.byteLength;if(bytes>LIMITS.htmlBytes)throw new Error('Crawler HTML is too large');chunks.push(Buffer.from(value));}return Buffer.concat(chunks).toString('utf8');}
   finally {await reader.cancel().catch(()=>{});}
 }
+function crawlerError(message, code, status) { return Object.assign(new Error(message),{code,status}); }
 async function crawlPage(url,signal) {
-  const token=process.env.BRIGHTDATA_UNLOCKER_TOKEN||process.env.BRIGHT_DATA_API_KEY;
-  if(!token)throw new Error('Store crawler is not configured; continue manually.');
-  const response=await fetch('https://api.brightdata.com/request',{method:'POST',redirect:'error',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({zone:process.env.BRIGHTDATA_UNLOCKER_ZONE||'amz_brand_store_studio',url,format:'raw'}),signal});
-  if(!response.ok)throw new Error('Store crawler HTTP '+response.status+'; retry or continue manually.');
-  return readBounded(response);
+  const tokens=[...new Set([process.env.BRIGHTDATA_UNLOCKER_TOKEN,process.env.BRIGHT_DATA_API_KEY].map(t=>t?.trim()).filter(Boolean))];
+  if(!tokens.length)throw crawlerError('Der Store-Abruf ist nicht eingerichtet. Bitte den Administrator informieren.','CRAWLER_CONFIG',503);
+  for(let i=0;i<tokens.length;i++){
+    const response=await fetch('https://api.brightdata.com/request',{method:'POST',redirect:'error',headers:{'Content-Type':'application/json',Authorization:'Bearer '+tokens[i]},body:JSON.stringify({zone:process.env.BRIGHTDATA_UNLOCKER_ZONE||'amz_brand_store_studio',url,format:'raw'}),signal});
+    if(response.status===401){
+      await response.body?.cancel?.().catch(()=>{});
+      if(i+1<tokens.length)continue;
+      throw crawlerError('Der Store-Abruf ist derzeit nicht verfügbar: Bright Data lehnt den Zugangsschlüssel ab. Bitte den Administrator informieren.','CRAWLER_AUTH',503);
+    }
+    if(!response.ok)throw crawlerError(response.status===403?'Der Store-Abruf hat keine Berechtigung für die konfigurierte Bright-Data-Zone. Bitte den Administrator informieren.':`Der Store konnte nicht gelesen werden (Abrufdienst HTTP ${response.status}). Bitte erneut versuchen.`,'CRAWLER_UPSTREAM',502);
+    return readBounded(response);
+  }
 }
 async function discoverStore(input, options={}) {
   const targets=validateTargets(input?.storeUrl,input?.pageUrl);
@@ -162,12 +171,13 @@ async function discoverStore(input, options={}) {
     const html=await Promise.race([(options.crawl||crawlPage)(targets.pageUrl,controller.signal),timeout]);
     if(!html || /<title[^>]*>\s*(?:robot check|amazon captcha)/i.test(html) || /validateCaptcha|automated access to Amazon/i.test(html))throw new Error('Amazon blocked this page; retry or continue manually.');
     const observed=parseStorePage(html,targets.pageUrl);
+    if(!input.pageUrl && !observed.brandName && !observed.pages.length) throw new Error('In der Antwort wurde kein Amazon Brand Store erkannt. Bitte den Store-Link prüfen und erneut einlesen.');
     result.brandName=observed.brandName;result.warnings=observed.warnings;
     Object.assign(page,{name:observed.pageName,asins:observed.asins,status:'loaded'});
     result.pages=[page];
     if(!input.pageUrl)for(const nav of observed.pages)if(nav.url!==page.url && result.pages.length<LIMITS.pages)result.pages.push({...nav,asins:[],status:'pending'});
-  }catch(error){page.error=error.message || 'Store discovery failed; continue manually.';result.pages=[page];result.warnings=[page.error];}
+  }catch(error){page.error=error.message || 'Der Store konnte nicht gelesen werden. Bitte erneut versuchen.';result.pages=[page];result.warnings=[page.error];if(error.code){result.errorCode=error.code;result.httpStatus=error.status || 502;}}
   finally{clearTimeout(timer);}
   return result;
 }
-module.exports={LIMITS,validateTargets,parseStorePage,discoverStore};
+module.exports={LIMITS,validateTargets,parseStorePage,discoverStore,crawlPage};

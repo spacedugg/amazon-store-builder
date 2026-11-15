@@ -13,5 +13,5 @@ module.exports = async function handler(req, res) {
   catch (error) { return res.status(400).json({ error: error.message }); }
   const result = await discoverStore(body);
   const configured = process.env.BRIGHTDATA_UNLOCKER_TOKEN || process.env.BRIGHT_DATA_API_KEY;
-  return res.status(configured ? 200 : 503).json(result);
+  return res.status(result.httpStatus || (configured ? 200 : 503)).json(result);
 };

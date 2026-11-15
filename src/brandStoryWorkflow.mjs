@@ -21,7 +21,7 @@ export function normalizeStory(story) {
   s.references ||= [];
   for (const card of s.cards) if (card.type === 'grid') {
     card.gridMode = gridMode(card);
-    for (const slot of card.slots) { slot.imageMode = slotImageMode(slot); slot.brief ??= ''; }
+    for (const slot of card.slots) { slot.imageMode = slotImageMode(slot, card); slot.brief ??= ''; }
   }
   return s;
 }
@@ -49,7 +49,7 @@ export function storySummary(s) {
       cards: s.cards.slice(0, 3).map(c => ({
         type: c.type,
         image: c.image?.url || '',
-        images: (c.slots || []).map(slot => slotDisplayImage(slot)?.url || ''),
+        images: (c.slots || []).map(slot => slotDisplayImage(slot, c)?.url || ''),
       })),
     },
   };
@@ -88,6 +88,7 @@ export function prepareStoryImport(text, current, projectIdentity = current) {
       });
     }
   }
+  for (const card of next.cards) if(card.type==='grid' && gridMode(card)==='composite') card.slots.forEach(slot=>{slot.imageMode='custom';});
   validateStory(next);
   const stats = storySummary(next);
   return { story: next, foreign, summary: `${stats.cardCount} Karten · ${stats.mediaCount} Brand Media Assets · ${stats.gridCount} ASIN-Grids${foreign ? ' · wird als neue Brand Story angelegt' : ''}` };

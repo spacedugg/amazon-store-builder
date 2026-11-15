@@ -34,7 +34,7 @@ export default function useProductImages(story, enabled, setStory, setDirty, set
       if (card.type !== 'grid') continue;
       for (let j = 0; j < card.slots.length; j++) {
         const slot = card.slots[j];
-        if (slotImageMode(slot) !== 'product' || slot.productImage) continue;
+        if (slotImageMode(slot, card) !== 'product' || slot.productImage) continue;
         const asin = productAsin(slot, market);
         if (!asin) continue;
         const key = keyFor(asin);

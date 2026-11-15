@@ -28,7 +28,13 @@ module.exports = async function handler(req, res) {
       return res.status(502).json({ error: 'Empty response from crawler (' + (html ? html.length : 0) + ' chars)' });
     }
 
+    var observation = await require('./_lib/brand-story-discovery.cjs').discoverStore({storeUrl:storeUrl},{crawl:async()=>html});
+    if(!observation.pages.some(page=>page.status==='loaded')) return res.status(observation.httpStatus || 502).json({error:observation.warnings[0]});
+    brandName = body.brandName || observation.brandName || 'Unknown';
     var subpages = extractNavFromConfig(html, storeUrl);
+    if(!subpages.length) subpages=observation.pages.filter(page=>page.url!==observation.storeUrl);
+
+    subpages=subpages.filter(page=>{try{require('./_lib/brand-story-discovery.cjs').validateTargets(storeUrl,page.url);return true;}catch{return false;}});
 
     // Build page list: main page + all subpages
     var pages = [{ url: storeUrl, name: 'Startseite', pageId: 'main' }];
@@ -43,27 +49,10 @@ module.exports = async function handler(req, res) {
 };
 
 async function crawlPage(url) {
-  var controller = new AbortController();
-  var timeout = setTimeout(function() { controller.abort(); }, 45000);
-  try {
-    var reqBody = { zone: UNLOCKER_ZONE, url: url, format: 'raw' };
-    console.log('[crawl-store-nav] Crawling:', url, 'Zone:', UNLOCKER_ZONE, 'Token present:', !!UNLOCKER_TOKEN);
-    var resp = await fetch('https://api.brightdata.com/request', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + UNLOCKER_TOKEN },
-      body: JSON.stringify(reqBody),
-      signal: controller.signal,
-    });
-    clearTimeout(timeout);
-    if (!resp.ok) {
-      var errBody = await resp.text().catch(function() { return ''; });
-      console.log('[crawl-store-nav] BrightData error:', resp.status, errBody.slice(0, 300));
-      throw new Error('BrightData ' + resp.status + ': ' + errBody.slice(0, 200));
-    }
-    var html = await resp.text();
-    console.log('[crawl-store-nav] Got HTML:', html.length, 'chars');
-    return html;
-  } catch (err) { clearTimeout(timeout); console.log('[crawl-store-nav] Fetch error:', err.message); throw err; }
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),45000);
+  try { return await require('./_lib/brand-story-discovery.cjs').crawlPage(url,controller.signal); }
+  finally { clearTimeout(timeout); }
 }
 
 function extractNavFromConfig(html, mainUrl) {

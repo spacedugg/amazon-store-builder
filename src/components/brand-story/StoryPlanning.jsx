@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { defaultPlanning, mergeDiscoveredPages, applyStoreDiscovery, parseAsins, STORY_GOALS, FOCUS_REASONS } from '../../brandStoryPlanning.mjs';
+import { defaultPlanning, mergeDiscoveredPages, applyStoreDiscovery, parseAsins, storePlanningReady, FOCUS_REASONS } from '../../brandStoryPlanning.mjs';
 
 export default function StoryPlanning({ story, onChange, onContinue, onManual, onJson }) {
   const p = story.planning || defaultPlanning();
   const [busy, setBusy] = useState(false), [error, setError] = useState(''), [progress, setProgress] = useState('');
-  const [focusAsin, setFocusAsin] = useState(''), [asinText, setAsinText] = useState({});
+  const [asinText, setAsinText] = useState({}), [focusAsin,setFocusAsin]=useState('');
+  const storeReady=storePlanningReady(p);
   const latest = useRef(story), controller = useRef(null); latest.current = story;
   useEffect(()=>()=>controller.current?.abort(),[]);
   const apply = next => { latest.current=next; onChange(next); };
@@ -25,8 +26,9 @@ export default function StoryPlanning({ story, onChange, onContinue, onManual, o
         setProgress('Store-Navigation wird gelesen …');
         const result=await request(storeUrl,null,abort.signal);
         if(abort.signal.aborted) return;
+        if(!result.pages?.some(page=>page.status==='loaded')) throw Error(result.warnings?.[0] || 'Der Store konnte nicht gelesen werden. Bitte erneut versuchen.');
         apply(applyStoreDiscovery(latest.current,result));
-        setProgress((result.warnings || []).join(' ') || 'Unterseiten gefunden. Auswahl und Namen bitte prüfen.');
+        setProgress((result.warnings || []).join(' ') || 'Store eingelesen.');
       }else{
         const pages=page==='selected'?p.categories.filter(c=>c.selected&&c.url):[page];
         let failed=0;
@@ -52,44 +54,48 @@ export default function StoryPlanning({ story, onChange, onContinue, onManual, o
   function addFocus(){
     const asin=focusAsin.trim().toUpperCase();
     if(!/^[A-Z0-9]{10}$/.test(asin)){setError('Bitte eine gültige ASIN mit zehn Zeichen eingeben.');return;}
-    if(p.focusProducts.some(f=>f.asin===asin)){setError('Dieses Produkt ist bereits im Fokus.');return;}
+    if(p.focusProducts.some(f=>f.asin===asin)){setError('Dieses Produkt ist bereits ausgewählt.');return;}
     if(p.focusProducts.length>=19){setError('Maximal 19 Fokus-Produkte möglich.');return;}
     update({focusProducts:[...p.focusProducts,{asin,reason:'push',note:''}]});setFocusAsin('');setError('');
   }
+  const brandField=<label className="bs-field"><span>Markenname</span><input aria-label="Markenname" value={story.brandName} onChange={e=>apply({...latest.current,brandName:e.target.value})}/></label>;
   return <section className="bs-planning">
     <div className="bs-entry-options" role="group" aria-label="Brand Story starten">
-      <button aria-label="Store übernehmen" className={p.mode==='store'?'active':''} aria-pressed={p.mode==='store'} disabled={busy} onClick={()=>update({mode:'store'})}><strong>Store übernehmen</strong><span>Kategorien und Produkte aus dem Amazon Store prüfen.</span></button>
-      <button aria-label="Manuell starten" className={p.mode==='manual'?'active':''} aria-pressed={p.mode==='manual'} disabled={busy} onClick={()=>update({mode:'manual'})}><strong>Manuell starten</strong><span>Karten, Themen und Briefings selbst anlegen.</span></button>
+      <button aria-label="Automatisch" className={p.mode==='store'?'active':''} aria-pressed={p.mode==='store'} disabled={busy} onClick={()=>update({mode:'store'})}><strong>Automatisch</strong></button>
+      <button aria-label="Manuell starten" className={p.mode==='manual'?'active':''} aria-pressed={p.mode==='manual'} disabled={busy} onClick={()=>update({mode:'manual'})}><strong>Manuell starten</strong></button>
     </div>
-    <fieldset disabled={busy} className="bs-planning-fields">
-      <label className="bs-field"><span>Markenname</span><input aria-label="Markenname" value={story.brandName} placeholder="Wird nach Möglichkeit aus dem Store übernommen" onChange={e=>onChange({...latest.current,brandName:e.target.value})}/></label>
-      {p.mode==='store' && <><label className="bs-field"><span>Amazon Brand Store-Link</span><input aria-label="Amazon Brand Store-Link" type="url" value={p.storeUrl} placeholder="https://www.amazon.de/stores/…" onChange={e=>update({storeUrl:e.target.value})}/></label><button className="bs-primary" disabled={!p.storeUrl.trim()} onClick={()=>discover()}>Store auslesen</button></>}
-    </fieldset>
-    {busy && <div role="status"><p>{progress}</p><button onClick={()=>{controller.current?.abort();setBusy(false);setProgress('Abgebrochen. Bereits geladene Ergebnisse bleiben erhalten.');}}>Auslesen abbrechen</button></div>}
-    {!busy && progress && <p className="bs-help" role="status">{progress}</p>}
+    {p.mode==='store' ? <>
+      <ol className="bs-planning-steps" aria-label="Ablauf der automatischen Erstellung"><li aria-current={!storeReady?'step':undefined}>1 · Store einlesen</li><li aria-current={storeReady?'step':undefined}>2 · Auswahl und Angaben</li><li>3 · Konzept in Claude</li></ol>
+      <fieldset disabled={busy} className="bs-planning-fields">
+        <h3>1. Store einlesen</h3>
+        <label className="bs-field"><span>Amazon Brand Store-Link</span><input aria-label="Amazon Brand Store-Link" type="url" value={p.storeUrl} placeholder="https://www.amazon.de/stores/…" onChange={e=>{update({storeUrl:e.target.value});setError('');setProgress('');}}/></label>
+        <button className="bs-primary" disabled={!p.storeUrl.trim()} onClick={()=>discover()}>{storeReady?'Store erneut einlesen':'Store auslesen'}</button>
+      </fieldset>
+    </> : <fieldset disabled={busy} className="bs-planning-fields">{brandField}</fieldset>}
+    {busy && <div role="status"><p>{progress}</p><button onClick={()=>{controller.current?.abort();setBusy(false);setProgress('Abgebrochen.');}}>Auslesen abbrechen</button></div>}
+    {p.mode==='store' && !busy && progress && <p className="bs-help" role="status">{progress}</p>}
     {error && <p className="bs-warning" role="alert">{error}</p>}
-    <fieldset disabled={busy} className="bs-planning-fields">
-      {p.mode==='store' && <section className="bs-category-plan"><h3>Kategorien und Produkte</h3>
-        <p className="bs-help">Wähle die gewünschten Unterseiten. Pro Grid: unten der Kategorie-Link, darüber vier Produktziele. Weniger Produkte sind möglich; eine ASIN darf mehrfach vorkommen.</p>
+    {p.mode==='store' && storeReady && <fieldset disabled={busy} className="bs-planning-fields bs-store-details">
+      <h3>2. Auswahl und Angaben</h3>
+      {brandField}
+      {!story.brandName && <p className="bs-warning" role="alert">Der Store wurde gelesen, aber der Markenname konnte nicht erkannt werden. Bitte ergänzen.</p>}
+      <section className="bs-category-plan"><h3>Kategorien und Produkte</h3>
         {p.categories.map(c=><article className="bs-category-row" key={c.id}>
           <div className="bs-category-heading"><label><input type="checkbox" aria-label={`${c.name || 'Kategorie'} aufnehmen`} checked={c.selected} onChange={e=>category(c.id,{selected:e.target.checked})}/> Aufnehmen</label><span>{c.status==='loaded'?'Gelesen':c.status==='error'?'Bitte ergänzen':c.status==='manual'?'Manuell':'Noch nicht gelesen'}</span><button onClick={()=>update({categories:p.categories.filter(a=>a.id!==c.id)})} aria-label={`${c.name || 'Kategorie'} entfernen`}>Entfernen</button></div>
           <div className="bs-category-inputs"><label className="bs-field"><span>Kategorie</span><input aria-label={`Kategorie ${c.id}`} value={c.name} onChange={e=>category(c.id,{name:e.target.value})}/></label><label className="bs-field"><span>Unterseiten-Link</span><input aria-label={`Unterseiten-Link ${c.name}`} value={c.url} onChange={e=>category(c.id,{url:e.target.value})}/></label></div>
           <label className="bs-field"><span>Vier Produkt-ASINs · durch Komma getrennt</span><input aria-label={`Produkt-ASINs ${c.name}`} value={asinText[c.id] ?? c.asins.join(', ')} onChange={e=>{setAsinText(t=>({...t,[c.id]:e.target.value}));category(c.id,{asins:parseAsins(e.target.value),productsEdited:true});}} onBlur={()=>setAsinText(t=>{const next={...t};delete next[c.id];return next;})}/></label>
-          {!!c.observedAsins?.length && <details><summary>{c.observedAsins.length} gefundene ASINs ansehen</summary><div className="bs-asin-options">{c.observedAsins.map(asin=><button key={asin} disabled={c.asins.length>=4} onClick={()=>category(c.id,{asins:[...c.asins,asin],productsEdited:true})}>{asin} hinzufügen</button>)}</div><p className="bs-help">Aus der gelesenen Seite, ohne Vollständigkeits- oder Ranggarantie.</p></details>}
+          {!!c.observedAsins?.length && <details><summary>{c.observedAsins.length} gefundene ASINs ansehen</summary><div className="bs-asin-options">{c.observedAsins.map(asin=><button key={asin} disabled={c.asins.length>=4} onClick={()=>category(c.id,{asins:[...c.asins,asin],productsEdited:true})}>{asin} hinzufügen</button>)}</div></details>}
           {c.error && <p className="bs-warning">{c.error}</p>}
           {c.url && <button onClick={()=>discover(c)}>{c.status==='loaded'?'Produkte erneut lesen':'Produkte lesen / erneut versuchen'}</button>}
         </article>)}
         <div className="bs-dialog-actions"><button onClick={()=>update({categories:[...p.categories,{id:crypto.randomUUID(),name:'Neue Kategorie',url:'',selected:true,asins:[],status:'manual'}]})}>Kategorie manuell ergänzen</button>{p.categories.some(c=>c.selected&&c.url) && <button onClick={()=>discover('selected')}>Produkte der Auswahl laden</button>}</div>
-      </section>}
-      <label className="bs-field"><span>Was soll die Story vor allem erreichen?</span><select aria-label="Schwerpunkt der Story" value={p.goal} onChange={e=>update({goal:e.target.value})}>{!STORY_GOALS.some(([v])=>v===p.goal)&&<option value={p.goal}>{p.goal || 'Noch offen'}</option>}{STORY_GOALS.map(([v,label])=><option key={v} value={v}>{label}</option>)}</select></label>
-      <details className="bs-optional"><summary>Produkte besonders hervorheben (optional){p.focusProducts.length?` · ${p.focusProducts.length} ausgewählt`:''}</summary>
-        <p className="bs-help">Ein Hero-Produkt kann erklärt und mit Beispielen gezeigt werden. „Bestseller“ ist ein möglicher Auswahlgrund; es entsteht dadurch keine zusätzliche doppelte Karte.</p>
+      </section>
+      <details className="bs-optional"><summary>Wichtige Produkte (optional)</summary>
         <div className="bs-dialog-actions"><input aria-label="Fokus-ASIN" value={focusAsin} placeholder="ASIN" onChange={e=>setFocusAsin(e.target.value)}/><button onClick={addFocus}>Produkt aufnehmen</button></div>
-        {p.focusProducts.map((f,i)=><div className="bs-focus-row" key={f.asin}><strong>{f.asin}</strong><select aria-label={`Auswahlgrund ${f.asin}`} value={f.reason} onChange={e=>update({focusProducts:p.focusProducts.map((x,j)=>j===i?{...x,reason:e.target.value}:x)})}>{!FOCUS_REASONS.some(([v])=>v===f.reason)&&<option value={f.reason}>{f.reason}</option>}{FOCUS_REASONS.map(([v,label])=><option key={v} value={v}>{label}</option>)}</select><input aria-label={`Hinweis ${f.asin}`} value={f.note || ''} placeholder={f.reason==='bestseller'?'Quelle, Zeitraum und Marktplatz oder redaktionelle Auswahl':'Was soll erklärt oder gezeigt werden?'} onChange={e=>update({focusProducts:p.focusProducts.map((x,j)=>j===i?{...x,note:e.target.value}:x)})}/><button onClick={()=>update({focusProducts:p.focusProducts.filter((_,j)=>j!==i)})}>Entfernen</button></div>)}
-        <label><input type="checkbox" checked={p.includeFocusGrid} onChange={e=>update({includeFocusGrid:e.target.checked})}/> Zusätzlich ein gemeinsames Produktfokus-Grid vorsehen</label>
+        {p.focusProducts.map((f,i)=><div className="bs-focus-row" key={f.asin}><strong>{f.asin}</strong><select aria-label={`Auswahlgrund ${f.asin}`} value={f.reason} onChange={e=>update({focusProducts:p.focusProducts.map((x,j)=>j===i?{...x,reason:e.target.value}:x)})}>{!FOCUS_REASONS.some(([v])=>v===f.reason)&&<option value={f.reason}>{f.reason}</option>}{FOCUS_REASONS.map(([v,label])=><option key={v} value={v}>{label}</option>)}</select><input aria-label={`Hinweis ${f.asin}`} value={f.note || ''} placeholder="Hinweis" onChange={e=>update({focusProducts:p.focusProducts.map((x,j)=>j===i?{...x,note:e.target.value}:x)})}/><button onClick={()=>update({focusProducts:p.focusProducts.filter((_,j)=>j!==i)})}>Entfernen</button></div>)}
       </details>
-      <details className="bs-optional"><summary>Markenwissen und weitere Angaben (optional)</summary><label className="bs-field"><span>Was sollte Claude über die Marke wissen?</span><textarea aria-label="Markenwissen und Quellen" value={story.brandFacts || ''} placeholder="Auftrag, belegbare Besonderheiten, Gründer, Materialien oder Quellen …" onChange={e=>onChange({...latest.current,brandFacts:e.target.value})}/></label><div className="bs-category-inputs"><label className="bs-field"><span>Marktplatz</span><select aria-label="Marktplatz" value={story.marketplace} onChange={e=>onChange({...latest.current,marketplace:e.target.value})}>{['de','com','co.uk','fr','it','es','nl','se','pl','com.be'].map(v=><option key={v}>{v}</option>)}</select></label><label className="bs-field"><span>Sprache</span><input aria-label="Sprache" value={story.language || ''} onChange={e=>onChange({...latest.current,language:e.target.value})}/></label></div></details>
-    </fieldset>
-    <footer className="bs-dialog-actions"><button className="bs-primary" disabled={busy} onClick={p.mode==='manual'?()=>onManual(false):onContinue}>{p.mode==='manual'?'Layout manuell öffnen':'Weiter zu Claude'}</button>{p.mode==='store' && p.categories.some(c=>c.selected) && <button disabled={busy} onClick={()=>onManual(true)}>Kategorie-Grids als Layout öffnen</button>}<button disabled={busy} onClick={onJson}>Vorhandenes JSON importieren</button></footer>
+      <details className="bs-optional"><summary>Markeninfos (optional)</summary><label className="bs-field"><span>Markeninfos für Claude</span><textarea aria-label="Markeninfos für Claude" value={story.brandFacts || ''} onChange={e=>apply({...latest.current,brandFacts:e.target.value})}/></label></details>
+    </fieldset>}
+    <footer className="bs-dialog-actions"><button className="bs-primary" disabled={busy || !story.brandName.trim() || (p.mode==='store' && !storeReady)} onClick={p.mode==='manual'?onManual:onContinue}>{p.mode==='manual'?'Story öffnen':'Weiter zu Claude'}</button><button disabled={busy} onClick={onJson}>Vorhandenes JSON importieren</button></footer>
   </section>;
 }
