@@ -232,18 +232,28 @@ export async function loadStore(id) {
 }
 
 export async function deleteSavedStore(id) {
+  if (!id || typeof id !== 'string') throw new Error('Ungültiger Store.');
+  let response;
   try {
-    var resp = await fetch('/api/stores?id=' + encodeURIComponent(id), { method: 'DELETE' });
-    if (!resp.ok) throw new Error('API error');
-  } catch (e) {
-    console.warn('DB delete failed, using localStorage fallback:', e.message);
-    try {
-      var raw = localStorage.getItem('amazon-store-builder');
-      if (!raw) return;
-      var stores = JSON.parse(raw).filter(function(s) { return s.id !== id; });
-      localStorage.setItem('amazon-store-builder', JSON.stringify(stores));
-    } catch (e2) { /* ignore */ }
+    response = await fetch('/api/stores?id=' + encodeURIComponent(id), { method: 'DELETE' });
+  } catch (error) {
+    throw new Error('Netzwerkfehler beim Löschen. Der Store wurde nicht aus der Übersicht entfernt.');
   }
+  if (!response.ok) {
+    throw new Error('Store konnte nicht gelöscht werden (HTTP ' + response.status + ').');
+  }
+  // Remove any legacy local backup only after the server confirmed deletion.
+  try {
+    const raw = localStorage.getItem('amazon-store-builder');
+    if (raw) {
+      const stores = JSON.parse(raw);
+      if (Array.isArray(stores)) {
+        localStorage.setItem('amazon-store-builder',
+          JSON.stringify(stores.filter(store => store.id !== id)));
+      }
+    }
+  } catch (error) { /* Stale legacy cache must not affect the DB result. */ }
+  return true;
 }
 
 export async function loadStoreBySlug(slug) {

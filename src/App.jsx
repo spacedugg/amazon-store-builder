@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, findLayout, LAYOUT_TILE_DIMS } from './constants';
-import { saveStore, loadSavedStores, loadStore, autoSave, loadAutoSave, importStoreByShareLink, setSessionStore, getSessionStore, brandToSlug, shareBaseUrl } from './storage';
+import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink, setSessionStore, getSessionStore, brandToSlug, shareBaseUrl } from './storage';
 import { checkStoreReplacement } from './importGuard';
 import { uploadFileToBlob } from './imageStorage';
 import { importBriefingToStore } from './briefingImport';
@@ -1315,6 +1315,26 @@ export default function App() {
     }
   };
 
+  var handleDeleteSaved = async function(id) {
+    // The backend is authoritative. Only remove a card after DELETE succeeds.
+    await deleteSavedStore(id);
+    setSavedStores(function(prev) { return prev.filter(function(row) { return row.id !== id; }); });
+    setSavedStoresError('');
+    if (storeIdRef.current === id) {
+      storeContextRef.current++;
+      replacementGrantRef.current = null;
+      storeIdRef.current = null;
+      shareTokenRef.current = null;
+      savedBrandNameRef.current = '';
+      setStoreId(null);
+      setShareToken(null);
+      setSessionStore(null);
+      setStore(EMPTY_STORE);
+      setCurPage('');
+      setSel(null);
+    }
+  };
+
   var handleLoadSaved = async function(id) {
     var result = await loadStore(id);
     if (!result || !result.data || !result.data.pages || !result.data.pages.length) return false;
@@ -1952,6 +1972,7 @@ export default function App() {
         hasAutoSave={hasAutoSave}
         onContinue={handleLoadAutoSave}
         onOpen={handleLoadSaved}
+        onDelete={handleDeleteSaved}
         onNewStore={handleNewStore}
         onImportRescueJson={handleImportRescueJson}
         onImportStore={handleImportStore}
