@@ -31,8 +31,11 @@ function Preview({ store }) {
   );
 }
 
-export default function StoreOverview({ stores, loading, loadError, hasAutoSave, onContinue, onOpen, onNewStore, onImportRescueJson, onImportStore }) {
+export default function StoreOverview({ stores, loading, loadError, hasAutoSave, onContinue, onOpen, onDelete, onNewStore, onImportRescueJson, onImportStore }) {
   var [opening, setOpening] = useState(null);
+  var [deleting, setDeleting] = useState(null);
+  var [deleteTarget, setDeleteTarget] = useState(null);
+  var [deleteStage, setDeleteStage] = useState(1);
   var [error, setError] = useState('');
   var [importOpen, setImportOpen] = useState(false);
   var [importUrl, setImportUrl] = useState('');
@@ -69,6 +72,33 @@ export default function StoreOverview({ stores, loading, loadError, hasAutoSave,
     } finally {
       setOpening(null);
     }
+  }
+
+  async function confirmDelete() {
+    if (!deleteTarget || deleting) return;
+    if (deleteStage === 1) {
+      setDeleteStage(2);
+      return;
+    }
+    var store = deleteTarget;
+    setDeleting(store.id);
+    setError('');
+    try {
+      await onDelete(store.id);
+      setDeleteTarget(null);
+      setDeleteStage(1);
+    } catch (e) {
+      setError(e.message || 'Store konnte nicht gelöscht werden.');
+      // Keep the second confirmation dialog open for an explicit retry.
+    } finally {
+      setDeleting(null);
+    }
+  }
+
+  function closeDelete() {
+    if (deleting) return;
+    setDeleteTarget(null);
+    setDeleteStage(1);
   }
 
   async function importLink(e) {
@@ -127,7 +157,7 @@ export default function StoreOverview({ stores, loading, loadError, hasAutoSave,
               var count = Number(feedbackCounts[store.id]);
               if (!Number.isSafeInteger(count) || count < 1) count = 0;
               var feedbackLabel = count ? count + (count === 1 ? ' neues Feedback' : ' neue Feedbacks') : '';
-              return <button className="store-home-card" key={store.id} onClick={function() { openStore(store.id); }} disabled={!!opening} aria-label={(store.brandName || 'Unbenannter Store') + ' öffnen' + (count ? ', ' + feedbackLabel : '')}>
+              return <div className="store-home-entry" key={store.id}><button className="store-home-card" onClick={function() { openStore(store.id); }} disabled={!!opening || !!deleting} aria-label={(store.brandName || 'Unbenannter Store') + ' öffnen' + (count ? ', ' + feedbackLabel : '')}>
                 <Preview store={store} />
                 <div className="store-home-card-details">
                   <div className="store-home-card-title">{store.brandName || 'Unbenannter Store'} <span aria-hidden="true">↗</span></div>
@@ -139,11 +169,36 @@ export default function StoreOverview({ stores, loading, loadError, hasAutoSave,
                   {opening === store.id && <div className="store-home-opening">Store wird geöffnet …</div>}
                   {count > 0 && <span className="store-home-feedback" title={feedbackLabel} aria-label={feedbackLabel}>{count}</span>}
                 </div>
-              </button>;
+              </button><button type="button" className="store-home-delete-icon"
+                aria-label={'Brand Store ' + (store.brandName || 'Unbenannter Store') + ' löschen'}
+                title="Brand Store löschen"
+                disabled={!!opening || !!deleting}
+                onClick={function() { setError(''); setDeleteTarget(store); setDeleteStage(1); }}>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+                  strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/>
+                </svg>
+              </button></div>;
             })}
           </div>
         ) : loadError ? null : <div className="store-home-empty"><h3>Noch keine Stores gespeichert</h3><p>Erstelle deinen ersten Store oder importiere einen bestehenden Link.</p><button className="store-home-create" onClick={onNewStore}>Neuen Store anlegen</button></div>}
       </main>
+      {deleteTarget && <div className="store-delete-backdrop" role="presentation" onMouseDown={function(e) { if (e.target === e.currentTarget) closeDelete(); }}>
+        <div className="store-delete-dialog" role="alertdialog" aria-modal="true" aria-labelledby="store-delete-title" aria-describedby="store-delete-message">
+          <h2 id="store-delete-title">{deleteStage === 1 ? 'Brand Store löschen?' : 'Löschung endgültig bestätigen'}</h2>
+          <p id="store-delete-message">
+            {deleteStage === 1
+              ? <>Möchtest du den Brand Store <strong>{deleteTarget.brandName || 'Unbenannter Store'}</strong> wirklich löschen? Der gespeicherte Store und sein öffentlicher Kundenlink werden dadurch entfernt.</>
+              : <>Letzte Bestätigung: <strong>{deleteTarget.brandName || 'Unbenannter Store'}</strong> wird dauerhaft aus den gespeicherten Brand Stores gelöscht. Diese Aktion kann nicht rückgängig gemacht werden.</>}
+          </p>
+          <div className="store-delete-actions">
+            <button type="button" onClick={closeDelete} disabled={!!deleting}>Abbrechen</button>
+            <button type="button" className="store-delete-confirm" onClick={confirmDelete} disabled={!!deleting}>
+              {deleting ? 'Wird gelöscht …' : deleteStage === 1 ? 'Weiter' : 'Endgültig löschen'}
+            </button>
+          </div>
+        </div>
+      </div>}
     </div>
   );
 }
