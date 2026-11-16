@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
-const {homepageComplete} = require('../api/_homepage-complete.js');
+const {homepageComplete, homepageStatus} = require('../api/_homepage-complete.js');
 const image='https://assets.example.test/real-upload.jpg';
 const base=()=>({headerBanner:image,pages:[{sections:[{tiles:[{type:'image',uploadedImage:image},{type:'image_text',uploadedImage:image},{type:'product_grid'}]}]}]});
 test('requires homepage banner, real visual assets and at least one designed tile',()=>{
@@ -17,4 +17,21 @@ test('requires mobile artwork when aspect ratios differ',()=>{
  assert.equal(homepageComplete(s),false);
  t.uploadedImageMobile=image;assert.equal(homepageComplete(s),true);
  t.uploadedImageMobile=null;t.syncDimensions=true;assert.equal(homepageComplete(s),true);
+});
+
+test('native product collection needs no designer image; hero tile can replace separate banner',()=>{
+ const store=base();
+ store.pages[0].sections[0].tiles.push({type:'product_collection'});
+ store.headerBanner=null;
+ assert.equal(homepageComplete(store),false);
+ store.pages[0].sections[0].tiles[0].imageCategory='store_hero';
+ assert.equal(homepageComplete(store),true);
+});
+test('reports the precise missing visual asset without calling an existing store unfinished for native tiles',()=>{
+ const store=base();
+ store.pages[0].sections[0].tiles[1].uploadedImage=null;
+ assert.equal(homepageStatus(store).reason,'missing_desktop_image');
+ store.pages[0].sections[0].tiles[1].uploadedImage=image;
+ store.pages[0].sections[0].tiles.push({type:'video'});
+ assert.equal(homepageComplete(store),true);
 });
