@@ -4,6 +4,7 @@ import { saveStore, loadSavedStores, loadStore, autoSave, loadAutoSave, importSt
 import { checkStoreReplacement } from './importGuard';
 import { uploadFileToBlob } from './imageStorage';
 import { importBriefingToStore } from './briefingImport';
+import trueNatureRecoveryBriefing from '../seed/true-nature-store.json';
 import { generateBriefingDocx, downloadBlob } from './exportBriefing';
 import Topbar from './components/Topbar';
 import StoreOverview from './components/StoreOverview';
@@ -1459,6 +1460,56 @@ export default function App() {
     }
   };
 
+  // True Nature recovery. Prefer the actual saved DB record; only reconstruct
+  // from the verified repository JSON when no saved brand exists. No overwrite.
+  var handleRestoreTrueNature = async function() {
+    try {
+      var existing = await checkStoreReplacement('True Nature');
+      if (existing) {
+        var opened = await handleLoadSaved(existing.id);
+        if (!opened) throw new Error('True Nature existiert bereits, konnte aber nicht geöffnet werden.');
+        return 'existing';
+      }
+      var imported = importBriefingToStore(trueNatureRecoveryBriefing);
+      var problems = storeLimitErrors(imported);
+      if (problems.length) throw new Error(problems.join('\n'));
+      if (imported.brandName !== 'True Nature' || !Array.isArray(imported.pages) ||
+          imported.pages.length !== 10 || !imported.pages[0].sections?.length) {
+        throw new Error('Die True-Nature-Vorlage entspricht nicht der erwarteten Store-Struktur.');
+      }
+      // Double-check before any write: NEVER replace an existing store silently.
+      var concurrent = await checkStoreReplacement(imported.brandName);
+      if (concurrent) {
+        var alreadyOpened = await handleLoadSaved(concurrent.id);
+        if (!alreadyOpened) throw new Error('Ein bereits vorhandener True-Nature-Store konnte nicht geöffnet werden.');
+        return 'existing';
+      }
+      storeContextRef.current++;
+      replacementGrantRef.current = null;
+      storeIdRef.current = null;
+      shareTokenRef.current = null;
+      savedBrandNameRef.current = '';
+      setStoreId(null);
+      setShareToken(null);
+      setStore(imported);
+      setCurPage(imported.pages[0].id);
+      setSel(null);
+      setWarnings([]);
+      setRequestedAsins(imported.asins.map(function(a) { return a.asin; }));
+      setShowOverview(false);
+      // Save the structure immediately so it appears in the saved store list;
+      // all uploaded images can be added afterwards and saved normally.
+      var result = await persistStore(imported, {includeShareToken:false});
+      if (result && result.offline) throw new Error('Vorlage im Editor geöffnet, aber die Datenbank ist offline. Bitte später manuell speichern.');
+      if (!result || !result.id) throw new Error('Vorlage im Editor geöffnet, aber noch nicht in der Datenbank gespeichert. Bitte manuell speichern.');
+      setSavedStores(await loadSavedStores());
+      return 'created';
+    } catch (error) {
+      setLinkDialog({kind:'error',title:'True Nature wiederherstellen',message:error.message || 'Wiederherstellung fehlgeschlagen.'});
+      throw error;
+    }
+  };
+
   // ─── VIEW MODE ───
   var handleToggleView = function(mode) {
     setViewMode(mode);
@@ -1954,6 +2005,7 @@ export default function App() {
         onNewStore={handleNewStore}
         onImportRescueJson={handleImportRescueJson}
         onImportStore={handleImportStore}
+        onRestoreTrueNature={handleRestoreTrueNature}
       />
       {showNewStoreModal && (
         <NewStoreModal
