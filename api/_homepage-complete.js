@@ -32,12 +32,9 @@ function homepageStatus(store) {
       count++;
       if (!hasImage(tile.uploadedImage))
         return {complete:false,reason:'missing_desktop_image',imageCount:count};
-      // Different mobile aspect ratios require their own image. Same aspect,
-      // or syncDimensions, deliberately reuse the desktop asset.
-      if (tile.mobileDimensions && !tile.syncDimensions &&
-          !sameAspect(tile.dimensions,tile.mobileDimensions) &&
-          !hasImage(tile.uploadedImageMobile))
-        return {complete:false,reason:'missing_mobile_image',imageCount:count};
+      // Outreach screenshots always use the desktop homepage. A separate
+      // mobile upload is NOT required to show a fully pictured desktop store.
+      // Missing desktop tiles still disqualify the candidate.
     }
   }
   if (!hero) return {complete:false,reason:'missing_header',imageCount:count};
