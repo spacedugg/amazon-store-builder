@@ -1,4 +1,3 @@
-import trueNatureRecoveryBriefing from '../../seed/true-nature-store.json';
 import { useState, useEffect } from 'react';
 import { loadFeedbackCounts } from '../feedbackApi';
 
@@ -32,13 +31,12 @@ function Preview({ store }) {
   );
 }
 
-export default function StoreOverview({ stores, loading, loadError, hasAutoSave, onContinue, onOpen, onNewStore, onImportRescueJson, onImportStore, onRestoreTrueNature }) {
+export default function StoreOverview({ stores, loading, loadError, hasAutoSave, onContinue, onOpen, onNewStore, onImportRescueJson, onImportStore }) {
   var [opening, setOpening] = useState(null);
   var [error, setError] = useState('');
   var [importOpen, setImportOpen] = useState(false);
   var [importUrl, setImportUrl] = useState('');
   var [importing, setImporting] = useState(false);
-  var [restoringTrueNature, setRestoringTrueNature] = useState(false);
   var [feedbackCounts, setFeedbackCounts] = useState({});
 
   useEffect(function() {
@@ -87,32 +85,6 @@ export default function StoreOverview({ stores, loading, loadError, hasAutoSave,
     }
   }
 
-  async function restoreTrueNature() {
-    if (restoringTrueNature || loading) return;
-    setError('');
-    setRestoringTrueNature(true);
-    try {
-      await onRestoreTrueNature();
-    } catch (err) {
-      setError(err.message || 'True Nature konnte nicht wiederhergestellt werden.');
-    } finally {
-      setRestoringTrueNature(false);
-    }
-  }
-
-  function downloadTrueNatureJson() {
-    var blob = new Blob([JSON.stringify(trueNatureRecoveryBriefing, null, 2)],
-      {type:'application/json'});
-    var url = URL.createObjectURL(blob);
-    var link = document.createElement('a');
-    link.href = url;
-    link.download = 'true-nature-store-recovery.json';
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
-  }
-
   function rescue(e) {
     var file = e.target.files && e.target.files[0];
     if (!file) return;
@@ -144,29 +116,6 @@ export default function StoreOverview({ stores, loading, loadError, hasAutoSave,
             <label>Rescue JSON laden<input type="file" accept="application/json,.json" onChange={rescue} /></label>
           </div>
         </div>
-        {!loading && !stores.some(function(s) {
-          return String(s.brandName || '').trim().toLowerCase().replace(/[\\s_-]+/g, '') === 'truenature';
-        }) && <section className="store-home-recovery" aria-label="True Nature Store wiederherstellen"
-          style={{background:'linear-gradient(125deg,#edf6ed,#f9fcfa)',border:'1px solid #b7d8bd',
-            padding:'20px 22px',borderRadius:14,margin:'16px 0 24px'}}>
-          <h3 style={{margin:'0 0 7px',color:'#1f4b32',fontSize:17}}>True Nature wiederherstellen</h3>
-          <p style={{fontSize:13,lineHeight:1.6,margin:'0 0 14px',color:'#4b6453'}}>
-            Wiederhergestellte JSON-Vorlage mit 10 Seiten einschließlich Homepage,
-            allen Modulen und Bildbriefings. Die Bilddateien müssen noch hochgeladen werden.
-            Existiert True Nature bereits in der Datenbank, wird der vorhandene Store geöffnet statt überschrieben.
-          </p>
-          <div style={{display:'flex',alignItems:'center',gap:12,flexWrap:'wrap'}}>
-            <button type="button" className="store-home-create" onClick={restoreTrueNature}
-              disabled={restoringTrueNature || !!loadError}>
-              {restoringTrueNature ? 'Wiederherstellung läuft …' : 'True Nature anlegen'}
-            </button>
-            <button type="button" onClick={downloadTrueNatureJson}
-              style={{background:'#fff',border:'1px solid #a6c9ad',borderRadius:9,
-                      padding:'11px 15px',color:'#24623e',cursor:'pointer',fontWeight:700}}>
-              JSON als Sicherung herunterladen
-            </button>
-          </div>
-        </section>}
         {importOpen && <form className="store-home-import" onSubmit={importLink}>
           <input type="url" required placeholder="Link zum Store einfügen" value={importUrl} onChange={function(e) { setImportUrl(e.target.value); }} />
           <button type="submit" disabled={importing}>{importing ? 'Importiere …' : 'Importieren'}</button>
