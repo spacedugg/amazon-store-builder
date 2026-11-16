@@ -81,19 +81,27 @@ module.exports = async function handler(req, res) {
     try {
       var all = await db.execute('SELECT id, brand_name, data, share_token FROM stores ORDER BY updated_at DESC');
       var eligible = [];
+      var knownSlugs = new Set();
       for (var row of all.rows) {
-        if (!row.share_token) continue;
+        var brandSlug = brandToSlug(row.brand_name);
+        if (!brandSlug || knownSlugs.has(brandSlug)) continue;
         var store;
         try { store = JSON.parse(row.data); } catch (_) { continue; }
         if (!homepageComplete(store)) continue;
+        // Customer Preview supports both /customer/<token> and /<brand-slug>.
+        // Missing legacy share tokens must not hide already completed stores.
+        knownSlugs.add(brandSlug);
         var home = store.pages[0];
-        var banner = home.headerBanner || store.headerBanner;
+        var heroTile = (home.sections || []).flatMap(s => s.tiles || []).find(t =>
+          t && t.imageCategory === 'store_hero' && typeof t.uploadedImage === 'string');
+        var banner = home.headerBanner || store.headerBanner || (heroTile && heroTile.uploadedImage);
         if (typeof banner === 'string' && /^#imgref:sha256:[a-f0-9]{64}$/.test(banner)) {
           var imageRow = await db.execute({sql:'SELECT blob_url FROM store_images WHERE hash = ?',args:[banner.slice(15)]});
           banner = imageRow.rows[0]?.blob_url || null;
         }
         eligible.push({
-          id: row.id, brandName: row.brand_name, shareToken: row.share_token,
+          id: row.id, brandName: row.brand_name,
+          shareToken: row.share_token || null, brandSlug,
           preview: {banner: typeof banner === 'string' && /^https:\/\//.test(banner) ? banner : null},
           homepageComplete: true
         });

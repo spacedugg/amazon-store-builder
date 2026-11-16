@@ -11,10 +11,10 @@ test('requires homepage banner, real visual assets and at least one designed til
   const native=base();native.pages[0].sections[0].tiles=[{type:'text'},{type:'product_grid'}];assert.equal(homepageComplete(native),false);
   const withoutBanner=base();withoutBanner.headerBanner=null;assert.equal(homepageComplete(withoutBanner),false);
 });
-test('requires mobile artwork when aspect ratios differ',()=>{
+test('desktop-only outreach eligibility does not depend on mobile art',()=>{
  const s=base(),t=s.pages[0].sections[0].tiles[0];
  t.dimensions={w:1500,h:700};t.mobileDimensions={w:750,h:1500};
- assert.equal(homepageComplete(s),false);
+ assert.equal(homepageComplete(s),true);
  t.uploadedImageMobile=image;assert.equal(homepageComplete(s),true);
  t.uploadedImageMobile=null;t.syncDimensions=true;assert.equal(homepageComplete(s),true);
 });
