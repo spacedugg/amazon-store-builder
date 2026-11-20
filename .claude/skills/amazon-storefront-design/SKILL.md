@@ -12,7 +12,7 @@ Du erstellst Amazon Brand Store Konzepte für die Agentur TEMOA. Das Konzept wir
 
 ## Portable Installation in Claude
 
-Im installierten ZIP liegen `CLAUDE.md`, `data/store-knowledge/` und `docs/BLUEPRINT_EXTRACTION_PROMPT_V4.md` relativ zu diesem `SKILL.md`. Lies diese mitgelieferten Dateien vom Skill-Verzeichnis aus; ein separater GitHub-Zugang ist dafür nicht nötig. Im Repository gelten dieselben Pfade relativ zur Repo-Wurzel. Falls eine Datei fehlt, melde die Lücke statt die vorgeschriebene Recherche als erledigt darzustellen.
+Im installierten ZIP liegen `CLAUDE.md`, `data/store-knowledge/` und `docs/BLUEPRINT_EXTRACTION_PROMPT_V4.md` relativ zu diesem `SKILL.md`. Lies diese mitgelieferten Dateien vom Skill-Verzeichnis aus; ein separater GitHub-Zugang ist dafür nicht nötig. Das Upload-Paket enthält nur die 19 v4-Analysen, 159 Seiten-Blueprints und drei Vokabulare, keine Roh-DOM-Daten oder alten Analysefassungen, und bleibt unter 200 Dateien. Im Repository gelten dieselben Pfade relativ zur Repo-Wurzel. Falls eine Datei fehlt, melde die Lücke statt die vorgeschriebene Recherche als erledigt darzustellen.
 
 ## Wissensbasis (Stand 2026-05-24, v4)
 
@@ -328,6 +328,7 @@ Sobald alle nötigen Inputs da sind, **konsultiere zuerst die Wissensbasis** und
 **3a.1. Zusätzliche Referenz-Stores prüfen (wenn mitgegeben)**:
 
 - Trenne eigenen Relaunch-Store und fremde Inspirations-Stores. Öffne die Homepage und relevante Kategorie-/Unterseiten über die verfügbaren Browser-/Lese-Werkzeuge; mobile Ansicht nur als beobachtet kennzeichnen, wenn tatsächlich geprüft. Keine Zugriffssperren umgehen.
+- Wenn Referenz-Links mit Hinweisen bereits im kopierten Builder-Auftrag stehen, übernimm sie und frage sie nicht erneut ab. Ein reiner Textabruf belegt weder die genaue Layoutstruktur noch grafische Komposition; hierfür gerenderte Ansichten oder Screenshots prüfen. Kennzeichne eine nur textuell gelesene Seite als teilweise geprüft.
 - Pro tatsächlich gelesener Seite kurz dokumentieren: URL, Seitentyp, Modulfolge von oben nach unten, Bildproportionen, Kachelgruppierungen, Wechsel von Lifestyle/Produkten/Text, Navigation und besondere grafische Übergänge. Kennzeichne sichtbare Beobachtungen und Vermutungen getrennt. Ein Hero-Screenshot belegt keine vollständige Seitenstruktur.
 - Status pro URL: geprüft, teilweise geprüft oder nicht erreichbar. Bei fehlenden Browser-Werkzeugen oder gesperrten Seiten nichts erfinden. Bitte um Screenshots der vollständigen Seite, mobile Screenshots oder einen Export; arbeite auf Wunsch mit der kuratierten Wissensbasis weiter und benenne diese Grenze.
 - Schlage daraus eine passende Architektur vor: Welche Struktur wird übernommen, für welche eigene Seite, warum passt sie zu Sortiment und Ziel? Benenne ebenso, was nicht passt. Nur abstrakte Muster übertragen, niemals fremde Texte, Bilder, Logos, ASINs oder Markensignaturen kopieren.

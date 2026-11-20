@@ -1,22 +1,32 @@
-import { STOREFRONT_CONCEPT_PROMPT } from '../storefrontConceptPrompt';
+import { buildStorefrontConceptPrompt, validateStorefrontReferences } from '../storefrontConceptPrompt';
 import { useState, useRef } from 'react';
 import { STOREFRONT_ASIN_PROMPT } from '../storefrontAsinPrompt';
-
-var SKILL_PROMPT = STOREFRONT_CONCEPT_PROMPT;
 
 export default function NewStoreModal({ onClose, onImport, onCreateEmpty }) {
   var [text, setText] = useState('');
   var [error, setError] = useState('');
   var [importing, setImporting] = useState(false);
   var [copied, setCopied] = useState(false);
+  var [references, setReferences] = useState([{ url: '', notes: '' }]);
+  var [copyError, setCopyError] = useState('');
+  var referenceError = validateStorefrontReferences(references);
+  var conceptPrompt = referenceError ? '' : buildStorefrontConceptPrompt(references);
+
+  function updateReference(index, field, value) {
+    setReferences(function(rows) { return rows.map(function(row, i) { return i === index ? { ...row, [field]: value } : row; }); });
+    setCopied(false);
+    setCopyError('');
+  }
   var fileRef = useRef(null);
 
   function handleCopyPrompt(content, kind) {
+    setCopyError('');
+    if (kind === 'concept' && referenceError) { setCopyError(referenceError); return; }
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(content).then(function() {
         setCopied(kind);
-      });
-    }
+      }).catch(function() { setCopyError('Kopieren fehlgeschlagen. Bitte den angezeigten Prompt markieren und manuell kopieren.'); });
+    } else { setCopyError('Bitte den angezeigten Prompt markieren und manuell kopieren.'); }
   }
 
   var handleImport = async function() {
@@ -68,18 +78,37 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty }) {
         </section>
 
         <div style={{ background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 6, padding: 12, marginBottom: 14 }}>
-          <div style={{ fontWeight: 700, marginBottom: 6, color: '#0369a1', fontSize: 13 }}>Schritt 2: Konzept in Claude Code erstellen</div>
+          <div style={{ fontWeight: 700, marginBottom: 6, color: '#0369a1', fontSize: 13 }}>Schritt 2: Konzept in Claude erstellen</div>
           <div style={{ fontSize: 12, lineHeight: 1.5, color: '#334155', marginBottom: 8 }}>
-            Öffne einen neuen Claude Code oder Cowork Chat. Kopiere den Prompt unten und füge ihn ein. Der Skill <code style={{ background: '#e2e8f0', padding: '1px 6px', borderRadius: 3, fontSize: 11 }}>amazon-storefront-design</code> liegt im Repo unter <code style={{ background: '#e2e8f0', padding: '1px 6px', borderRadius: 3, fontSize: 11 }}>.claude/skills/</code> und nutzt eine v4-Wissensbasis aus 20 analysierten Amazon Brand Stores (Phase-3-Analyses + Per-Page-Blueprints + Voice-/Hero-/Page-Architecture-Vokabular).
+            Öffne einen neuen Claude-Chat mit dem installierten Skill <code>amazon-storefront-design</code>. Kopiere den Auftrag und gib deine ASIN-Liste dazu. Der Skill enthält die kuratierte Wissensbasis und kann zusätzliche Referenz-Stores berücksichtigen.
+            {' '}<a href="/brand-store-claude/amazon-storefront-design.zip" download>Aktualisierten Skill herunterladen</a>
           </div>
+          <fieldset style={{ border: '1px solid #cbd5e1', borderRadius: 6, padding: 12, margin: '12px 0' }}>
+            <legend style={{ fontWeight: 700, fontSize: 13 }}>Referenz-Stores (optional)</legend>
+            {references.map(function(reference, index) { return (
+              <div key={index} style={{ display: 'grid', gap: 6, marginBottom: 12 }}>
+                <label style={{ fontSize: 12 }}>Amazon-Store-Link {index + 1}
+                  <input className="input" type="url" value={reference.url} placeholder="https://www.amazon.de/stores/…" onChange={function(e) { updateReference(index, 'url', e.target.value); }} style={{ width: '100%', boxSizing: 'border-box' }} />
+                </label>
+                <label style={{ fontSize: 12 }}>Was gefällt dir an Referenz {index + 1}? (optional)
+                  <textarea className="input" rows={2} value={reference.notes} placeholder="Zum Beispiel: Aufbau der Startseite, Wechsel von Lifestyle und Produkten oder Gestaltung einer Unterseite" onChange={function(e) { updateReference(index, 'notes', e.target.value); }} style={{ width: '100%', boxSizing: 'border-box', resize: 'vertical' }} />
+                </label>
+                {references.length > 1 && <button className="btn" type="button" aria-label={'Referenz ' + (index + 1) + ' entfernen'} onClick={function() { setReferences(function(rows) { return rows.filter(function(_, i) { return i !== index; }); }); setCopied(false); setCopyError(''); }} style={{ justifySelf: 'start', fontSize: 12 }}>Entfernen</button>}
+              </div>
+            ); })}
+            <button className="btn" type="button" onClick={function() { setReferences(function(rows) { return [...rows, { url: '', notes: '' }]; }); setCopied(false); }}>Referenz hinzufügen</button>
+            <p style={{ fontSize: 12, marginBottom: 0 }}>Links und Hinweise werden mitkopiert. Claude prüft erreichbare Seiten; bei gesperrten Seiten sind Screenshots oder ein Export nötig.</p>
+            {referenceError && <div role="alert" style={{ color: '#b91c1c', fontSize: 12, marginTop: 6 }}>{referenceError}</div>}
+          </fieldset>
           <div style={{ background: '#fff', border: '1px solid #cbd5e1', borderRadius: 4, padding: 10, fontSize: 11, fontFamily: 'monospace', lineHeight: 1.4, color: '#334155', whiteSpace: 'pre-wrap', maxHeight: 180, overflow: 'auto', marginBottom: 8 }}>
-            {SKILL_PROMPT}
+            {conceptPrompt || 'Bitte die Referenz-Links prüfen, um den vollständigen Auftrag anzuzeigen.'}
           </div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
-            <button className="btn btn-primary" onClick={function() { handleCopyPrompt(SKILL_PROMPT, 'concept'); }} style={{ fontSize: 12, padding: '6px 14px' }}>
+            <button className="btn btn-primary" onClick={function() { handleCopyPrompt(conceptPrompt, 'concept'); }} disabled={!!referenceError} style={{ fontSize: 12, padding: '6px 14px' }}>
               Prompt kopieren
             </button>
-            {copied === 'concept' && <span style={{ fontSize: 11, color: '#15803d', fontWeight: 600 }}>Prompt in Zwischenablage</span>}
+            {copyError && <span role="alert" style={{ color: '#b91c1c', fontSize: 12 }}>{copyError}</span>}
+            {copied === 'concept' && <span role="status" style={{ fontSize: 11, color: '#15803d', fontWeight: 600 }}>Prompt in Zwischenablage</span>}
           </div>
         </div>
 
