@@ -59,3 +59,13 @@ test('capture API rejects unauthorized changes and retains the previous screensh
  assert.equal((await call('GET')).body.stores.length,1);
  }finally{db.close();require.cache[dbPath]=oldDb;require.cache[capturePath]=oldCapture;delete require.cache[handlerPath];if(oldSecret===undefined)delete process.env.STORE_REFERENCE_ADMIN_SECRET;else process.env.STORE_REFERENCE_ADMIN_SECRET=oldSecret;}
 });
+test('screenshot capture uses the working alternate credential after an expired primary key',async()=>{
+ const previous=[process.env.BRIGHTDATA_UNLOCKER_TOKEN,process.env.BRIGHT_DATA_API_KEY];
+ process.env.BRIGHTDATA_UNLOCKER_TOKEN='expired-primary';process.env.BRIGHT_DATA_API_KEY='working-alternate';
+ const bytes=Buffer.alloc(33);Buffer.from([137,80,78,71,13,10,26,10]).copy(bytes);bytes.write('IHDR',12);bytes.writeUInt32BE(1440,16);bytes.writeUInt32BE(6000,20);
+ const credentials=[];
+ try{
+ const result=await captureReference(url,{load:async()=>'<meta name="brand" content="Example">',fetch:async(_,options)=>{credentials.push(options.headers.Authorization);return credentials.length===1?new Response('Expired',{status:401}):new Response(bytes,{headers:{'content-type':'image/png'}});},put:async()=>({url:'https://example.com/captured.png'})});
+ assert.deepEqual(credentials,['Bearer expired-primary','Bearer working-alternate']);assert.equal(result.screenshot.height,6000);assert.equal(result.brandName,'Example');
+ }finally{for(const [i,key]of ['BRIGHTDATA_UNLOCKER_TOKEN','BRIGHT_DATA_API_KEY'].entries()){if(previous[i]===undefined)delete process.env[key];else process.env[key]=previous[i];}}
+});

@@ -31,7 +31,11 @@ async function captureReference(url, dependencies={}) {
     if(home && home.url !== source){source=target(home.url).url; html=await load(source,timer.signal);parsed=parseStorePage(html,source);}
     const key=process.env.BRIGHTDATA_UNLOCKER_TOKEN || process.env.BRIGHT_DATA_API_KEY;
     if(!key)throw Error('Der Amazon-Aufnahmedienst ist nicht eingerichtet.');
-    const response=await fetcher('https://api.brightdata.com/request',{method:'POST',headers:{Authorization:'Bearer '+key,'Content-Type':'application/json'},body:JSON.stringify({zone:process.env.BRIGHTDATA_UNLOCKER_ZONE || 'amz_brand_store_studio',url:source,format:'raw',data_format:'screenshot',render:'true'}),signal:timer.signal});
+    let response;
+    for(const credential of new Set([process.env.BRIGHTDATA_UNLOCKER_TOKEN,process.env.BRIGHT_DATA_API_KEY].filter(Boolean))){
+    response=await fetcher('https://api.brightdata.com/request',{method:'POST',headers:{Authorization:'Bearer '+credential,'Content-Type':'application/json'},body:JSON.stringify({zone:process.env.BRIGHTDATA_UNLOCKER_ZONE || 'amz_brand_store_studio',url:source,format:'raw',data_format:'screenshot',render:'true'}),signal:timer.signal});
+    if(![401,403].includes(response.status))break;
+    }
     if(!response.ok)throw Error(`Der Aufnahmedienst meldet HTTP ${response.status}. Bitte erneut versuchen.`);
     const bytes=await bounded(response,20*1024*1024), dimensions=pngSize(bytes);
     const digest=createHash('sha256').update(source).digest('hex').slice(0,20);
