@@ -180,4 +180,4 @@ async function discoverStore(input, options={}) {
   finally{clearTimeout(timer);}
   return result;
 }
-module.exports={LIMITS,validateTargets,parseStorePage,discoverStore,crawlPage};
+module.exports={LIMITS,storeTarget,validateTargets,parseStorePage,discoverStore,crawlPage};

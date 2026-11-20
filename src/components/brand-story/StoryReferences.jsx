@@ -15,6 +15,8 @@ const purposes = {
 export default function StoryReferences({ onClose, canManage = false }) {
   const [stories, setStories] = useState([]), [custom, setCustom] = useState([]);
   const [error, setError] = useState(''), [loading, setLoading] = useState(true);
+  const [importProgress,setImportProgress]=useState(''), [importNotice,setImportNotice]=useState('');
+  async function importZip(file){setBusy(true);setError('');try{const {importStoryZip}=await import('../../brandStoryZipUpload');const result=await importStoryZip(file,setImportProgress);setDraft({data:result.data,purpose:result.purpose});setImportNotice(result.notice);setDirty(true);}catch(error){setError(error.message);}finally{setBusy(false);setImportProgress('');}}
   const [draft, setDraft] = useState(null), [dirty, setDirty] = useState(false), [busy, setBusy] = useState(false), [message, setMessage] = useState('');
   useEffect(() => {
     const abort = new AbortController();
@@ -41,9 +43,9 @@ export default function StoryReferences({ onClose, canManage = false }) {
   return <StoryModal title={draft ? (draft.id ? 'Beispiel bearbeiten' : 'Beispiel hinzufügen') : 'Interaktive Brand-Story-Beispiele'} wide onClose={() => leave(onClose)}>
     {draft ? <>
       <button disabled={busy} onClick={() => leave(() => setDraft(null))}>← Alle Beispiele</button>
-      <StoryExampleEditor draft={draft} busy={busy} setBusy={setBusy} onChange={value => { setDraft(value); setDirty(true); }} onSaved={value => { setCustom(items => [value, ...items.filter(item => item.id !== value.id)]); setDraft(null); setDirty(false); setMessage('Beispiel gespeichert – für Team und Designer verfügbar.'); }} />
+      {importNotice && <p role="status">{importNotice}</p>}<StoryExampleEditor draft={draft} busy={busy} setBusy={setBusy} onChange={value => { setDraft(value); setDirty(true); }} onSaved={value => { setCustom(items => [value, ...items.filter(item => item.id !== value.id)]); setDraft(null); setDirty(false); setMessage('Beispiel gespeichert – für Team und Designer verfügbar.'); }} />
     </> : <>
-      <div className="bs-example-actions">{canManage && <button className="bs-primary" onClick={() => { setDraft({ data: newStory(), purpose: '' }); setDirty(false); setMessage(''); }}>+ Beispiel hinzufügen</button>}</div>
+      {importProgress && <p role="status">{importProgress}</p>}<div className="bs-example-actions">{canManage && <label className="bs-upload">ZIP importieren<input type="file" accept=".zip,application/zip" disabled={busy} onChange={event=>{if(event.target.files[0])importZip(event.target.files[0]);event.target.value='';}} /></label>}{canManage && <button className="bs-primary" onClick={() => { setDraft({ data: newStory(), purpose: '' }); setDirty(false); setMessage(''); setImportNotice(''); }} disabled={busy}>+ Beispiel hinzufügen</button>}</div>
       {message && <p role="status">{message}</p>}{error && <p role="alert">{error}</p>}{loading && <p>Beispiele werden geladen …</p>}
       <div className="bs-reference-list">{[...custom.map(item => ({ ...item.data, example: item })), ...stories].map((story, index) => <article key={story.example?.id || 'builtin-' + index}>
         <header><h3>{story.brandName}</h3><span>{story.cards.length} Karten · {story.cards.filter(card => card.type === 'media').length} Full Image · {story.cards.filter(card => card.type === 'grid').length} Grids</span>

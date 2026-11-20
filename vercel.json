@@ -64,6 +64,12 @@
     "api/brand-story-examples.js": {
       "maxDuration": 30,
       "includeFiles": "src/brandStory*.mjs"
+    },
+    "api/store-reference-captures.js": {
+      "maxDuration": 180
+    },
+    "api/brand-story-zip-analysis.js": {
+      "maxDuration": 120
     }
   },
   "rewrites": [
