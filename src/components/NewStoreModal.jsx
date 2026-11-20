@@ -91,7 +91,7 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty }) {
                   <input className="input" type="url" value={reference.url} placeholder="https://www.amazon.de/stores/…" onChange={function(e) { updateReference(index, 'url', e.target.value); }} style={{ width: '100%', boxSizing: 'border-box' }} />
                 </label>
                 <label style={{ fontSize: 12 }}>Was gefällt dir an Referenz {index + 1}? (optional)
-                  <textarea className="input" rows={2} value={reference.notes} placeholder="Zum Beispiel: Aufbau der Startseite, Wechsel von Lifestyle und Produkten oder Gestaltung einer Unterseite" onChange={function(e) { updateReference(index, 'notes', e.target.value); }} style={{ width: '100%', boxSizing: 'border-box', resize: 'vertical' }} />
+                  <textarea className="input" rows={2} value={reference.notes} placeholder="Zum Beispiel: Aufbau der Startseite, Wechsel von Lifestyle und Produkten oder Gestaltung einer Unterseite" onChange={function(e) { updateReference(index, 'notes', e.target.value); }} style={{ width: '100%', boxSizing: 'border-box', resize: 'vertical', minHeight: 64, height: 64 }} />
                 </label>
                 {references.length > 1 && <button className="btn" type="button" aria-label={'Referenz ' + (index + 1) + ' entfernen'} onClick={function() { setReferences(function(rows) { return rows.filter(function(_, i) { return i !== index; }); }); setCopied(false); setCopyError(''); }} style={{ justifySelf: 'start', fontSize: 12 }}>Entfernen</button>}
               </div>
