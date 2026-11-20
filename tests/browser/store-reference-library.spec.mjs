@@ -25,12 +25,12 @@ for (const width of [1440, 390]) {
     await library.getByLabel('Als Referenz wählen: HSHOP-SPORT', { exact: true }).check();
     await library.getByRole('button', { name: 'Auswahl übernehmen', exact: true }).click();
     await expect(library).toBeHidden();
-    await expect(page.getByLabel('Amazon-Store-Link 1', { exact: true })).toHaveValue(/C36736E3/);
-    await expect(page.getByLabel('Amazon-Store-Link 2', { exact: true })).toHaveValue(/8B640FD7/);
+    await expect(page.getByLabel('Referenz-Link 1', { exact: true })).toHaveValue(/C36736E3/);
+    await expect(page.getByLabel('Referenz-Link 2', { exact: true })).toHaveValue(/8B640FD7/);
     await page.getByRole('button', { name: 'Prompt kopieren', exact: true }).click();
     const copied = await page.evaluate(() => window.__referencePrompt);
-    expect(copied).toContain('C36736E3-EDE2-46C1-812C-9030BDA1EEEB');
-    expect(copied).toContain('8B640FD7-98E9-4C48-9BF0-422ED3F14A3A');
+    expect(copied).not.toContain('C36736E3-EDE2-46C1-812C-9030BDA1EEEB');
+    expect(copied).not.toContain('8B640FD7-98E9-4C48-9BF0-422ED3F14A3A');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await page.getByRole('button', { name: 'Aus Beispielen auswählen', exact: true }).click();
     await library.getByLabel('Beispiele suchen', { exact: true }).fill('B0CLDWHKCB');

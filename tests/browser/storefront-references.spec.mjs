@@ -1,36 +1,36 @@
 import { test, expect } from '@playwright/test';
-
 for (const width of [1440, 390]) {
-  test(`reference URLs and design preferences are copied together at ${width}px`, async ({ page }) => {
-    await page.setViewportSize({ width, height: 800 });
-    await page.addInitScript(() => {
-      window.__copiedStorePrompt = '';
-      Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async value => { window.__copiedStorePrompt = value; } } });
+  test(`project-only style references survive import and later edits at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 850 });
+    let libraryWrites = 0;
+    await page.route('**/api/**', route => {
+      if (/reference/.test(route.request().url()) && route.request().method() !== 'GET') libraryWrites++;
+      return route.fulfill({ json: { stores: [], counts: {} } });
     });
-    await page.route('**/api/feedback?counts=1', route => route.fulfill({ json: { counts: {} } }));
-    await page.goto('/tests/workflow-browser.html');
-    await page.getByRole('button', { name: 'Neuer Store', exact: true }).click();
-    await page.getByLabel('Amazon-Store-Link 1', { exact: true }).fill('https://www.amazon.de/stores/page/123');
-    await page.getByLabel('Was gefällt dir an Referenz 1? (optional)', { exact: true }).fill('Bildfolge der Homepage');
-    await page.getByRole('button', { name: 'Referenz hinzufügen', exact: true }).click();
-    await page.getByLabel('Amazon-Store-Link 2', { exact: true }).fill('https://www.amazon.de/stores/page/456');
-    await page.getByLabel('Was gefällt dir an Referenz 2? (optional)', { exact: true }).fill('Kategorie-Aufbau');
-    await page.screenshot({ path: test.info().outputPath('reference-inputs.png'), fullPage: true });
-    await page.getByRole('button', { name: 'Prompt kopieren', exact: true }).click();
-    await expect(page.getByRole('status').filter({ hasText: 'Prompt in Zwischenablage' })).toHaveText('Prompt in Zwischenablage');
-    const copied = await page.evaluate(() => window.__copiedStorePrompt);
-    expect(copied).toContain('https://www.amazon.de/stores/page/123');
-    expect(copied).toContain('Bildfolge der Homepage');
-    expect(copied).toContain('https://www.amazon.de/stores/page/456');
-    expect(copied).toContain('Kategorie-Aufbau');
-    await page.getByLabel('Amazon-Store-Link 2', { exact: true }).fill('https://www.amazon.de/dp/B012345678');
-    await expect(page.getByRole('button', { name: 'Prompt kopieren', exact: true })).toBeDisabled();
-    await expect(page.getByRole('alert')).toContainText('Amazon-Brand-Store-Link');
-    await expect(page.getByRole('status').filter({ hasText: 'Prompt in Zwischenablage' })).toHaveCount(0);
-    await page.getByRole('button', { name: 'Referenz 2 entfernen', exact: true }).click();
-    await page.getByRole('button', { name: 'Prompt kopieren', exact: true }).click();
-    expect(await page.evaluate(() => window.__copiedStorePrompt)).not.toContain('Kategorie-Aufbau');
+    await page.goto('/');
+    await page.getByRole('button', { name: '+ Neuer Store', exact: true }).click();
+    await expect(page.getByRole('button', { name: 'Stattdessen leeren Store starten' })).toBeDisabled();
+    await page.getByLabel('Stilreferenzen auswählen', { exact: true }).check();
+    await page.getByLabel('Referenz-Link 1', { exact: true }).fill('https://example.com/style');
+    await page.getByLabel('Designhinweis 1 (für den Designer)').fill('Warm colours and large lifestyle imagery');
+    await page.getByLabel('Briefing JSON', { exact: true }).fill(JSON.stringify({ brandName: 'Style Test', pages: [{ name: 'Home', sections: [] }] }));
+    await page.getByRole('button', { name: 'Importieren', exact: true }).click();
+    await page.getByRole('button', { name: 'Designrichtung (1)', exact: true }).click();
+    await expect(page.getByLabel('Referenz-Link 1', { exact: true })).toHaveValue('https://example.com/style');
+    await expect(page.getByLabel('Designhinweis 1 (für den Designer)')).toHaveValue('Warm colours and large lifestyle imagery');
+    await page.getByLabel('Referenz-Link 1', { exact: true }).fill('https://example.com/updated');
+    await page.getByRole('button', { name: 'Übernehmen', exact: true }).click();
+    await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('amazon-store-builder-autosave') || '{}').designReferences?.[0]?.url)).toBe('https://example.com/updated');
+    expect(libraryWrites).toBe(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-    await expect(page.getByRole('link', { name: 'Aktualisierten Skill herunterladen' })).toHaveAttribute('href', '/brand-store-claude/amazon-storefront-design.zip');
   });
 }
+
+test('designer sees project direction above the work area', async ({ page }) => {
+  await page.route('**/api/**', route => route.fulfill({ json: route.request().url().includes('/api/stores') ? { id: 'fixture', shareToken: 'example', data: { brandName: 'Design', pages: [], products: [], asins: [], designReferences: [{ url: 'https://example.com/style', notes: 'Warm colours' }] } } : { items: [], totalSeconds: 0, running: false } }));
+  await page.goto('/share/example');
+  const direction = page.getByRole('region', { name: 'Design direction' });
+  await expect(direction).toContainText('Warm colours');
+  await expect(direction.getByRole('link')).toHaveAttribute('href', 'https://example.com/style');
+  await expect(direction.getByRole('button')).toHaveCount(0);
+});

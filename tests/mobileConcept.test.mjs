@@ -6,8 +6,11 @@ import { readFile } from 'node:fs/promises';
 const constantsSource = await readFile(new URL('../src/constants.js', import.meta.url), 'utf8');
 const constantsUrl = 'data:text/javascript;base64,' + Buffer.from(constantsSource).toString('base64');
 const constants = await import(constantsUrl);
+const directionSource = await readFile(new URL('../src/designDirection.mjs', import.meta.url), 'utf8');
+const directionUrl = 'data:text/javascript;base64,' + Buffer.from(directionSource).toString('base64');
 const importerSource = (await readFile(new URL('../src/briefingImport.js', import.meta.url), 'utf8'))
-  .replace("from './constants'", 'from ' + JSON.stringify(constantsUrl));
+  .replace("from './constants'", 'from ' + JSON.stringify(constantsUrl))
+  .replace("from './designDirection.mjs'", 'from ' + JSON.stringify(directionUrl));
 const { importTileFromBriefing } = await import('data:text/javascript;base64,' + Buffer.from(importerSource).toString('base64'));
 
 test('all four desktop squares default to mobile squares before any manual editing', () => {

@@ -34,6 +34,7 @@ async function setup(page) {
   await page.goto('/');
   await expect(page.getByRole('button',{name:'Arensberger öffnen',exact:true})).toBeVisible();
   await page.getByRole('button',{name:'+ Neuer Store',exact:true}).click();
+  await page.getByLabel('Ohne Stilreferenz fortfahren').check();
   await page.getByLabel('Briefing JSON', { exact: true }).fill(JSON.stringify(incoming));
   await page.getByRole('button',{name:'Importieren',exact:true}).click();
   return {db,writes,close:async()=>{await page.close();db.close();await rm(temp,{recursive:true,force:true});}};

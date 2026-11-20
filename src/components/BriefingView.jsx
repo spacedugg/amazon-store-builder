@@ -1,3 +1,4 @@
+import { DesignerDesignDirection } from './DesignDirection';
 import StoreReferenceLibraryButton from './StoreReferenceLibrary';
 import { useState, useEffect, useRef } from 'react';
 import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, findLayout } from '../constants';
@@ -29,7 +30,6 @@ var INSPIRATION_LINKS = [
   { brand: 'ESN', url: 'https://www.amazon.de/stores/ESN/page/F5F8CAD5-7990-44CF-9F5B-61DFFF5E8581', category: 'Sports Nutrition' },
   { brand: 'Blackroll', url: 'https://www.amazon.de/stores/page/870649DE-4F7E-421F-B141-C4C47864D539', category: 'Fitness' },
   { brand: 'AG1', url: 'https://www.amazon.de/stores/AG1/page/E676C84A-8A86-4F92-B978-3343F367DD0C', category: 'Health' },
-  { brand: 'North Face', url: 'https://www.amazon.de/stores/THENORTHFACE/page/91172724-C342-482B-A300-564D9EA5E09F', category: 'Outdoor' },
   { brand: 'More Nutrition', url: 'https://www.amazon.de/stores/page/7AD425C6-C3C5-402D-A69D-D6201F98F888', category: 'Sports Nutrition' },
   { brand: 'Kloster Kitchen', url: 'https://www.amazon.de/stores/page/34D4A812-9A68-4602-A6A0-30565D399620', category: 'Organic' },
 ];
@@ -2177,6 +2177,8 @@ export default function BriefingView() {
           </button>
         </div>
       </div>
+
+      <DesignerDesignDirection store={store} />
 
       {/* Designer Timer — sticky at top */}
       {token && <DesignerTimer shareToken={token} />}
