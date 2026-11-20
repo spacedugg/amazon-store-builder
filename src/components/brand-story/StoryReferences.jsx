@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import StoryModal from './StoryModal';
-import { StoryCarousel } from './StoryCarousel';
+import { newStory } from '../../brandStoryModel.mjs';
+import StoryExampleEditor, { ExamplePreview } from './StoryExampleEditor';
+import './StoryExamples.css';
 const purposes = {
   MyPuzzle: 'Hero-Produkt: das individuelle Fotopuzzle erklären und fertige Beispiele zeigen.',
   PROCREA: 'Sortiment: Kategorien mit Produkt-Hero und anschließendem Grid erschließen.',
@@ -10,12 +12,46 @@ const purposes = {
   Futum: 'Breites Sortiment: Kategorie-Motive führen zu vier passenden Produktgrids für Haus, Garten und Tiere.',
   Sanquell: 'Kategorien in der Anwendung zeigen und passende Produkte sowie Ersatzbedarf zugänglich machen.',
 };
-export default function StoryReferences({ onClose }) {
-  const [stories, setStories] = useState([]), [error, setError] = useState(''), [loading, setLoading] = useState(true);
+export default function StoryReferences({ onClose, canManage = false }) {
+  const [stories, setStories] = useState([]), [custom, setCustom] = useState([]);
+  const [error, setError] = useState(''), [loading, setLoading] = useState(true);
+  const [draft, setDraft] = useState(null), [dirty, setDirty] = useState(false), [busy, setBusy] = useState(false), [message, setMessage] = useState('');
   useEffect(() => {
     const abort = new AbortController();
-    fetch('/brand-story-examples/stories.json', { signal: abort.signal }).then(r => { if (!r.ok) throw Error('Beispiele konnten nicht geladen werden.'); return r.json(); }).then(r => { setStories((r.stories || []).map(story=>{ const copy=structuredClone(story); const local=image=>{if(image?.url?.startsWith('https://brand-store-preview.temoa.de/brand-story-examples/'))image.url=image.url.replace('https://brand-store-preview.temoa.de','');}; local(copy.background.desktop);local(copy.background.mobile);copy.cards.forEach(card=>{local(card.image);card.slots?.forEach(slot=>{local(slot.image);local(slot.productImage);});});return copy; })); setLoading(false); }).catch(e => { if (e.name !== 'AbortError') { setError(e.message); setLoading(false); } });
+    const json = async url => { const response = await fetch(url, { signal: abort.signal }); if (!response.ok) throw Error('Beispiele konnten nicht geladen werden.'); return response.json(); };
+    Promise.allSettled([json('/brand-story-examples/stories.json'), json('/api/brand-story-examples')]).then(([builtins, added]) => {
+      if (abort.signal.aborted) return;
+      if (builtins.status === 'fulfilled') setStories((builtins.value.stories || []).map(story => {
+        const copy = structuredClone(story);
+        const local = image => { if (image?.url?.startsWith('https://brand-store-preview.temoa.de/brand-story-examples/')) image.url = image.url.replace('https://brand-store-preview.temoa.de', ''); };
+        local(copy.background.desktop); local(copy.background.mobile);
+        copy.cards.forEach(card => { local(card.image); card.slots?.forEach(slot => { local(slot.image); local(slot.productImage); }); });
+        return copy;
+      }));
+      if (added.status === 'fulfilled') setCustom(added.value.examples || []);
+      if (builtins.status === 'rejected' || added.status === 'rejected') setError('Ein Teil der Beispiele konnte nicht geladen werden. Bitte erneut öffnen.');
+      setLoading(false);
+    });
     return () => abort.abort();
   }, []);
-  return <StoryModal title="Interaktive Brand-Story-Beispiele" wide onClose={onClose}><p className="bs-help">Klicke durch die Karten und prüfe, wie Motive verdeckt oder wieder sichtbar werden. Die Beispiele zeigen unterschiedliche Aufträge und Gestaltungsmöglichkeiten.</p>{error && <p role="alert">{error}</p>}{loading && <p>Beispiele werden geladen …</p>}<div className="bs-reference-list">{stories.map(s => <article key={s.brandName}><header><h3>{s.brandName}</h3><span>{s.cards.length} Karten · {s.cards.filter(c=>c.type==='media').length} Full Image · {s.cards.filter(c=>c.type==='grid').length} Grids</span></header><p className="bs-help">{purposes[s.brandName]}</p><StoryCarousel story={s} /><p className="bs-help">Desktop-Referenz · Für dieses Beispiel liegt kein eigener Mobilhintergrund vor. Beispielaussagen und Verkaufswirkung sind nicht unabhängig geprüft.</p></article>)}</div></StoryModal>;
+  function leave(action) {
+    if (busy) return;
+    if (!dirty || confirm('Ungespeicherte Änderungen am Beispiel verwerfen?')) { setDirty(false); action(); }
+  }
+  return <StoryModal title={draft ? (draft.id ? 'Beispiel bearbeiten' : 'Beispiel hinzufügen') : 'Interaktive Brand-Story-Beispiele'} wide onClose={() => leave(onClose)}>
+    {draft ? <>
+      <button disabled={busy} onClick={() => leave(() => setDraft(null))}>← Alle Beispiele</button>
+      <StoryExampleEditor draft={draft} busy={busy} setBusy={setBusy} onChange={value => { setDraft(value); setDirty(true); }} onSaved={value => { setCustom(items => [value, ...items.filter(item => item.id !== value.id)]); setDraft(null); setDirty(false); setMessage('Beispiel gespeichert – für Team und Designer verfügbar.'); }} />
+    </> : <>
+      <div className="bs-example-actions">{canManage && <button className="bs-primary" onClick={() => { setDraft({ data: newStory(), purpose: '' }); setDirty(false); setMessage(''); }}>+ Beispiel hinzufügen</button>}</div>
+      {message && <p role="status">{message}</p>}{error && <p role="alert">{error}</p>}{loading && <p>Beispiele werden geladen …</p>}
+      <div className="bs-reference-list">{[...custom.map(item => ({ ...item.data, example: item })), ...stories].map((story, index) => <article key={story.example?.id || 'builtin-' + index}>
+        <header><h3>{story.brandName}</h3><span>{story.cards.length} Karten · {story.cards.filter(card => card.type === 'media').length} Full Image · {story.cards.filter(card => card.type === 'grid').length} Grids</span>
+          {canManage && story.example && <button onClick={() => { setDraft(structuredClone(story.example)); setDirty(false); }}>Beispiel bearbeiten</button>}
+        </header>
+        <p className="bs-help">{story.example?.purpose || purposes[story.brandName]}</p>
+        <ExamplePreview story={story} />
+      </article>)}</div>
+    </>}
+  </StoryModal>;
 }

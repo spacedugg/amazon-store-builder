@@ -1,0 +1,14 @@
+.bs-example-actions { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:12px 0; }
+.bs-example-actions span { color:#64748b; font-size:12px; }
+.bs-example-actions button[aria-pressed="true"] { color:#1d4ed8; background:#eff6ff; border-color:#2563eb; }
+.bs-example-fields { border:0; padding:0; margin:16px 0; min-width:0; }
+.bs-example-backgrounds,.bs-example-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+.bs-example-upload { min-width:0; }
+.bs-example-upload .bs-asset img { max-height:180px; width:100%; object-fit:contain; }
+.bs-example-card { border:1px solid #dbe4ee; border-radius:12px; padding:18px; margin:16px 0; }
+.bs-example-card > header { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+.bs-example-card h4 { margin:0; }
+.bs-example-save { display:flex; justify-content:flex-end; margin:20px 0; }
+.bs-example-preview { margin:16px 0 28px; }
+.bs-reference-list article > header { gap:12px; flex-wrap:wrap; align-items:center; }
+@media(max-width:650px) { .bs-example-backgrounds { grid-template-columns:1fr; } .bs-example-grid { gap:10px; } .bs-example-card { padding:10px; } }

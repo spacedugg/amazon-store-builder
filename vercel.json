@@ -60,6 +60,10 @@
     "api/brand-stories.js": {
       "maxDuration": 30,
       "includeFiles": "src/brandStoryModel.mjs"
+    },
+    "api/brand-story-examples.js": {
+      "maxDuration": 30,
+      "includeFiles": "src/brandStory*.mjs"
     }
   },
   "rewrites": [

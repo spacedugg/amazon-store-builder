@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { upload } from '@vercel/blob/client';
+import { uploadImage } from '../brandStoryImageUpload';
 import { fetchProductData } from '../productData';
 import { newStory, newCard, validateStory, imageWarnings, resolveUploadTarget, publicationWarnings, sharingErrors, productAsin } from '../brandStoryModel.mjs';
 import { normalizeStory, changedStoryAssets } from '../brandStoryWorkflow.mjs';
@@ -39,29 +39,6 @@ function download(s) {
   a.download = `${s.brandName || "brand-story"}.json`;
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
-async function uploadImage(file) {
-  if (!["image/png", "image/jpeg"].includes(file.type))
-    throw Error("Bitte JPG oder PNG hochladen.");
-  const local = URL.createObjectURL(file);
-  let dimensions;
-  try {
-    dimensions = await new Promise((resolve, reject) => {
-      const im = new Image();
-      im.onload = () =>
-        resolve({ width: im.naturalWidth, height: im.naturalHeight });
-      im.onerror = () => reject(Error("Bild kann nicht gelesen werden."));
-      im.src = local;
-    });
-  } finally {
-    URL.revokeObjectURL(local);
-  }
-  const blob = await upload(
-    `brand-stories/${crypto.randomUUID()}/${file.name}`,
-    file,
-    { access: "public", handleUploadUrl: "/api/blob-upload" },
-  );
-  return { url: blob.url, name: file.name, size: file.size, ...dimensions };
 }
 export default function BrandStoryBuilder() {
   const token = new URLSearchParams(location.search).get('token');
@@ -330,7 +307,7 @@ export default function BrandStoryBuilder() {
     {setupOpen && story && <StorySetupDialog story={story} projectIdentity={record.identity} draft={setupDraft} setDraft={setSetupDraft} onChange={s => { setStory(s); setDirty(true); }} onClose={() => setSetupOpen(false)} onStart={() => { setSetupOpen(false); setOverview(false); setDirty(true); }} onImport={applyImport} onExport={() => download(story)} />}
     {pickerPosition !== null && <StoryModal title="Welche Karte möchtest du hinzufügen?" onClose={() => setPickerPosition(null)}><p className="bs-help">{story.cards.length} von 19 Karten · dieselbe Karte für Desktop und Mobil.</p><div className="bs-type-options"><button aria-label="Brand Media Asset" onClick={() => add('media')}><CardTypeIllustration /><strong>Brand Media Asset</strong><small>Ein vollständiges Bild mit deinem Inhalt.<br />814 × 1019 px</small></button><button aria-label="ASIN-Grid" onClick={() => add('grid')}><CardTypeIllustration grid /><strong>ASIN-Grid</strong><small>Vier Bildplätze, Überschrift und Shop-Link.<br />Je 1328 × 1456 px</small></button></div></StoryModal>}
     {uploadsOpen && <StoryModal title="Design-Dateien" onClose={()=>setUploadsOpen(false)} wide><p>Ordnerstruktur: Hintergrund · Brand Media Assets · ASIN Grids. Preview Neu enthält nur Vergleichsbilder.</p><label className="bs-upload">Ordner auswählen<input disabled={busy} type="file" webkitdirectory="" multiple onChange={e=>{folder(Array.from(e.target.files));e.target.value='';}}/></label><details><summary>Dateizuordnung und Bildprüfung</summary>{publicationWarnings(story).map((w,i)=><p className="bs-warning" key={i}>{w}</p>)}</details>{message&&<p role="status">{message}</p>}</StoryModal>}
-    {referencesOpen && <StoryReferences onClose={() => setReferencesOpen(false)} />}
+    {referencesOpen && <StoryReferences canManage={!token && mode === 'editor'} onClose={() => setReferencesOpen(false)} />}
 
     {shareOpen && <StoryModal title="Designer & Kunde" onClose={() => { if (!busy) setShareOpen(false); }}><p>Designer sehen die konkreten Briefings und können fertige Bilder hochladen. Kunden sehen nur den freigegebenen Stand und die Angaben für Seller Central.</p><button className="bs-primary" disabled={busy || shareErrors.length>0} onClick={() => run(() => save(true))}>Freigabelinks aktualisieren</button><p className="bs-help">Normales Speichern verändert die Kundenfreigabe nicht. Aktualisiere die Freigabe nach neuen Designer-Uploads bewusst.</p>{shareErrors.length>0 && <div role="alert" className="bs-readiness"><h3>Bitte vor der Freigabe ergänzen</h3><ul>{shareErrors.map((error,i)=><li key={i}>{error}</li>)}</ul><p>Speichern und Verlassen ist weiterhin möglich.</p></div>}{['designer', 'customer'].map(kind => !shareErrors.length && record[kind + 'Token'] && <div className="bs-share" key={kind}><a href={link(kind)} target="_blank" rel="noreferrer">{kind === 'designer' ? 'Designer-Link öffnen' : 'Kunden-Preview öffnen'}</a><button disabled={busy} onClick={() => run(() => copy(link(kind)))}>Link kopieren</button></div>)}</StoryModal>}
     {busy && <div className="bs-busy" role="status">Wird verarbeitet …</div>}
