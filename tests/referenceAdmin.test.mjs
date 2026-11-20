@@ -82,3 +82,11 @@ test('ZIP image recognition switches to the configured OpenAI vision key when Ge
  assert.equal(result.brandName,'Brand');assert.equal(calls.length,2);assert.equal(calls[1].body.store,false);assert.equal(calls[1].body.input[0].content[1].type,'input_image');
  }finally{for(const[i,key]of['GEMINI_API_KEY','CHATGPT_API_KEY'].entries()){if(previous[i]===undefined)delete process.env[key];else process.env[key]=previous[i];}}
 });
+
+test('overlapping previews determine the order; thematic model order cannot move grids behind the next intro',()=>{
+ const {observedCardOrder}=require('../api/_lib/story-zip-order.cjs');const candidates=['m0','g0','m1','m2','g1','m3'].map(id=>({id}));
+ const result={cards:[...candidates].reverse(),pages:[{previewIndex:1,visibleCards:['m0','g0','m1']},{previewIndex:2,visibleCards:['m1','m2','g1','m3']}]};
+ assert.deepEqual(observedCardOrder(result,candidates,2).map(card=>card.id),['m0','g0','m1','m2','g1','m3']);
+ assert.throws(()=>observedCardOrder({...result,pages:[{previewIndex:1,visibleCards:['m0','g0']},{previewIndex:2,visibleCards:['m1','m2','g1','m3']}]},candidates,2),/nicht eindeutig/);
+ assert.throws(()=>observedCardOrder({...result,pages:[{previewIndex:1,visibleCards:['m0','g0','m1']},{previewIndex:2,visibleCards:['m1','m0','m2','g1','m3']}]},candidates,2),/nicht eindeutig/);
+});

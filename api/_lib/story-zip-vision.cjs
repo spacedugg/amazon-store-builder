@@ -13,7 +13,7 @@ async function analyzeZipImages(parts, signal, fetcher=fetch) {
   if(key){
     try{
       const content=parts.map(part=>part.text?{type:'input_text',text:part.text}:{type:'input_image',detail:'high',image_url:`data:${part.inlineData.mimeType};base64,${part.inlineData.data}`});
-      const response=await fetcher('https://api.openai.com/v1/responses',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:JSON.stringify({model:process.env.STORY_ZIP_OPENAI_MODEL||'gpt-5.4-mini',store:false,input:[{role:'user',content}],text:{format:{type:'json_object'}},reasoning:{effort:'low'},max_output_tokens:5000}),signal});
+      const response=await fetcher('https://api.openai.com/v1/responses',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:JSON.stringify({model:process.env.STORY_ZIP_OPENAI_MODEL||'gpt-5.4',store:false,input:[{role:'user',content}],text:{format:{type:'json_object'}},reasoning:{effort:'medium'},max_output_tokens:8000}),signal});
       if(!response.ok)throw Error('OpenAI HTTP '+response.status);
       const data=await response.json();const text=(data.output||[]).flatMap(item=>item.content||[]).filter(item=>item.type==='output_text').map(item=>item.text).join('');
       return JSON.parse(text);
