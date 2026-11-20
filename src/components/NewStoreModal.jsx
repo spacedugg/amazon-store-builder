@@ -119,8 +119,9 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty }) {
           </div>
         </div>
 
-        <label style={{ fontSize: 11, fontWeight: 700, color: '#475569', textTransform: 'uppercase', letterSpacing: 0.5, display: 'block', marginBottom: 4 }}>Briefing JSON</label>
+        <label htmlFor="store-briefing-json" style={{ fontSize: 11, fontWeight: 700, color: '#475569', textTransform: 'uppercase', letterSpacing: 0.5, display: 'block', marginBottom: 4 }}>Briefing JSON</label>
         <textarea
+          id="store-briefing-json"
           value={text}
           onChange={function(e) { setText(e.target.value); setError(''); }}
           placeholder='{"brandName": "Juskys", "marketplace": "de", "pages": [...]}'

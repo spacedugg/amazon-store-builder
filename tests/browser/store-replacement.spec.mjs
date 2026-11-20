@@ -34,7 +34,7 @@ async function setup(page) {
   await page.goto('/');
   await expect(page.getByRole('button',{name:'Arensberger öffnen',exact:true})).toBeVisible();
   await page.getByRole('button',{name:'+ Neuer Store',exact:true}).click();
-  await page.locator('textarea').fill(JSON.stringify(incoming));
+  await page.getByLabel('Briefing JSON', { exact: true }).fill(JSON.stringify(incoming));
   await page.getByRole('button',{name:'Importieren',exact:true}).click();
   return {db,writes,close:async()=>{await page.close();db.close();await rm(temp,{recursive:true,force:true});}};
 }
@@ -53,7 +53,7 @@ for(const width of [1440,390]) {
       await info.attach('replacement-warning',{path:await page.screenshot({path:info.outputPath('replacement-warning.png')}).then(()=>info.outputPath('replacement-warning.png')),contentType:'image/png'});
       await dialog.getByRole('button',{name:'Abbrechen',exact:true}).click();
       await expect(dialog).toHaveCount(0);
-      await expect(page.locator('textarea')).toHaveValue(JSON.stringify(incoming));
+      await expect(page.getByLabel('Briefing JSON', { exact: true })).toHaveValue(JSON.stringify(incoming));
       expect(fixture.writes).toHaveLength(0);
       expect(JSON.parse((await fixture.db.execute("SELECT data FROM stores WHERE id='arensberger'")).rows[0].data)).toEqual(original);
     }finally{await fixture.close();}
