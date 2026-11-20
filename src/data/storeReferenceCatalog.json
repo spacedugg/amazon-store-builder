@@ -1,0 +1,1509 @@
+[
+  {
+    "id": "snocks",
+    "brandName": "SNOCKS",
+    "storeUrl": "https://www.amazon.de/stores/SNOCKS/page/C0392661-40E4-498F-992D-2FFEB9086ABB",
+    "category": "fashion",
+    "kind": "store",
+    "source": "existing"
+  },
+  {
+    "id": "the-north-face",
+    "brandName": "The North Face",
+    "storeUrl": "https://www.amazon.de/stores/THENORTHFACE/page/91172724-C342-482B-A300-564D9EA5E09F",
+    "category": "outdoor",
+    "kind": "store",
+    "source": "existing"
+  },
+  {
+    "id": "esn",
+    "brandName": "ESN",
+    "storeUrl": "https://www.amazon.de/stores/ESN/page/F5F8CAD5-7990-44CF-9F5B-61DFFF5E8581",
+    "category": "supplements",
+    "kind": "store",
+    "source": "existing",
+    "analyzedAt": "2026-05-23",
+    "modules": [
+      {
+        "name": "Hero-Banner mit Produkt-Lineup",
+        "layout": "hero_banner",
+        "tiles": 1
+      },
+      {
+        "name": "Image-Banner Neuheiten",
+        "layout": "editorial_banner_tall",
+        "tiles": 1
+      },
+      {
+        "name": "Tile-Pair Proteine plus Creatine",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Tile-Quad Vitalstoffe Food Performance Bundles",
+        "layout": "editorial_tile_quad",
+        "tiles": 4
+      },
+      {
+        "name": "Tile-Pair Zubehoer plus Ausdauer",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Image-Banner Alle Produkte",
+        "layout": "editorial_banner_large",
+        "tiles": 1
+      },
+      {
+        "name": "Image-Banner Produktselektor",
+        "layout": "editorial_banner_tall",
+        "tiles": 1
+      }
+    ],
+    "summary": "",
+    "images": [
+      {
+        "url": "/store-reference-previews/esn.jpg",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/acf527f7-c905-4e51-ad44-ec32c24f89cc._CR0%2C0%2C1920%2C384_SX1500_.jpg",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/6958bd1c-97ab-4a1a-9070-b8edd1cb9775._CR0%2C0%2C3000%2C1500_.jpg",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/6958bd1c-97ab-4a1a-9070-b8edd1cb9775._CR0%2C0%2C3000%2C1500_.jpg",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/61e6730c-3776-4bc3-a111-a8d4625488bb._CR0%2C0%2C3000%2C750_SX1500_.jpg",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/61e6730c-3776-4bc3-a111-a8d4625488bb._CR0%2C0%2C3000%2C750_SX1500_.jpg",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/50688c3d-b8b2-40ee-be4e-f9e601d6dd78._CR0%2C0%2C1500%2C750_SX750_SY375_.jpg",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/50688c3d-b8b2-40ee-be4e-f9e601d6dd78._CR0%2C0%2C1500%2C750_SX750_SY375_.jpg",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/ae109ab8-1fbf-43db-8a10-c9cbe8947d3c._CR0%2C0%2C1500%2C750_SX750_SY375_.jpg",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/ae109ab8-1fbf-43db-8a10-c9cbe8947d3c._CR0%2C0%2C1500%2C750_SX750_SY375_.jpg",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/13d9cd60-5fe1-4cc0-8a56-043c85b8d686._CR0%2C0%2C1500%2C750_SX750_SY375_.jpg",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/13d9cd60-5fe1-4cc0-8a56-043c85b8d686._CR0%2C0%2C1500%2C750_SX750_SY375_.jpg",
+        "kind": "archived-motif"
+      }
+    ]
+  },
+  {
+    "id": "ag1",
+    "brandName": "AG1",
+    "storeUrl": "https://www.amazon.de/stores/AG1/page/E676C84A-8A86-4F92-B978-3343F367DD0C",
+    "category": "supplements",
+    "kind": "store",
+    "source": "existing"
+  },
+  {
+    "id": "nespresso",
+    "brandName": "Nespresso",
+    "storeUrl": "https://www.amazon.de/stores/page/2429E3F3-8BFA-466A-9185-35FB47867B06",
+    "category": "food",
+    "kind": "store",
+    "source": "existing",
+    "analyzedAt": "2026-05-23",
+    "modules": [
+      {
+        "name": "Hero Image",
+        "layout": "hero_banner",
+        "tiles": 1
+      },
+      {
+        "name": "Section Intro 1",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "Tile-Row 3-fach Vertuo Cluster",
+        "layout": "editorial_tile_triple",
+        "tiles": 3
+      },
+      {
+        "name": "Section Intro 2",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "ProductGrid 8 Vertuo Up",
+        "layout": "product_grid_featured",
+        "tiles": 8
+      },
+      {
+        "name": "Section Intro 3",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "Tile-Row 3-fach Original Cluster",
+        "layout": "editorial_tile_triple",
+        "tiles": 3
+      },
+      {
+        "name": "Section Intro 4",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "Tile-Row 4-fach Maschinen",
+        "layout": "editorial_tile_quad",
+        "tiles": 4
+      },
+      {
+        "name": "Tile-Pair Accessoires + Angebote",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Section Intro 5",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "Tile-Row 3-fach Professional Cluster",
+        "layout": "editorial_tile_triple",
+        "tiles": 3
+      },
+      {
+        "name": "Section Intro 6",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "Tile-Row 4-fach Professional Kaffee",
+        "layout": "editorial_tile_quad",
+        "tiles": 4
+      },
+      {
+        "name": "Image-Modul Lifestyle Store App",
+        "layout": "hero_banner_tall",
+        "tiles": 1
+      },
+      {
+        "name": "Tile-Pair Abo + Recycling",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Section Intro 7",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      }
+    ],
+    "summary": "",
+    "images": [],
+    "alternativeUrls": [
+      "https://www.amazon.de/stores/Nespresso/page/2429E3F3-B1F4-4DE2-A912-9E55CF5765A3"
+    ]
+  },
+  {
+    "id": "kaercher",
+    "brandName": "Kärcher",
+    "storeUrl": "https://www.amazon.de/stores/Kärcher/page/EFE3653A-1163-432C-A85B-0486A31C0E3D",
+    "category": "household",
+    "kind": "store",
+    "source": "existing",
+    "analyzedAt": "2026-05-23",
+    "modules": [
+      {
+        "name": "Hero Image",
+        "layout": "hero_banner",
+        "tiles": 8
+      },
+      {
+        "name": "Image-Modul 1",
+        "layout": "hero_banner_tall",
+        "tiles": 8
+      },
+      {
+        "name": "Section Intro",
+        "layout": "editorial_section_intro",
+        "tiles": 8
+      },
+      {
+        "name": "Tile-Row 8-fach",
+        "layout": "editorial_tile_quad",
+        "tiles": 8
+      },
+      {
+        "name": "Tile-Row 4-fach",
+        "layout": "editorial_tile_quad",
+        "tiles": 4
+      },
+      {
+        "name": "Image-Modul 2",
+        "layout": "hero_banner_tall",
+        "tiles": 8
+      },
+      {
+        "name": "Image-Modul 3",
+        "layout": "hero_banner_tall",
+        "tiles": 8
+      },
+      {
+        "name": "Image-Modul 4",
+        "layout": "hero_banner_tall",
+        "tiles": 8
+      },
+      {
+        "name": "Image-Modul 5",
+        "layout": "hero_banner_tall",
+        "tiles": 8
+      },
+      {
+        "name": "ProductGrid 16 ASINs",
+        "layout": "product_grid_featured",
+        "tiles": 16
+      }
+    ],
+    "summary": "",
+    "images": [],
+    "alternativeUrls": [
+      "https://www.amazon.de/stores/page/5765AC3A-DB09-4547-857E-AC23C8E1D964"
+    ]
+  },
+  {
+    "id": "blackroll",
+    "brandName": "BLACKROLL",
+    "storeUrl": "https://www.amazon.de/stores/page/03098AB4-BDD5-4A23-A7DD-5C10153C5D58",
+    "category": "",
+    "kind": "store",
+    "source": "knowledge",
+    "analyzedAt": "2026-05-23",
+    "modules": [
+      {
+        "name": "Hero-Banner Dein Leben kennt keine Grenzen",
+        "layout": "hero_banner",
+        "tiles": 8
+      },
+      {
+        "name": "Press-Logo-Carousel 10 Logos",
+        "layout": "editorial_banner",
+        "tiles": 0
+      },
+      {
+        "name": "Tile-Pair Sortimentsfamilie 1",
+        "layout": "editorial_tile_pair",
+        "tiles": 16
+      },
+      {
+        "name": "Tile-Pair Sortimentsfamilie 2",
+        "layout": "editorial_tile_pair",
+        "tiles": 16
+      },
+      {
+        "name": "Section Intro",
+        "layout": "editorial_section_intro",
+        "tiles": 8
+      },
+      {
+        "name": "Tile-Row 3-fach Sub-Sortiment 1",
+        "layout": "editorial_tile_quad",
+        "tiles": 24
+      },
+      {
+        "name": "Tile-Row 3-fach Sub-Sortiment 2",
+        "layout": "editorial_tile_quad",
+        "tiles": 24
+      },
+      {
+        "name": "Image-Modul Hero",
+        "layout": "hero_banner_tall",
+        "tiles": 8
+      },
+      {
+        "name": "Tile-Pair Sortiment",
+        "layout": "editorial_tile_pair",
+        "tiles": 16
+      },
+      {
+        "name": "Section Intro Closing",
+        "layout": "editorial_section_intro",
+        "tiles": 8
+      }
+    ],
+    "summary": "",
+    "images": [],
+    "alternativeUrls": [
+      "https://www.amazon.de/stores/page/870649DE-4F7E-421F-B141-C4C47864D539"
+    ]
+  },
+  {
+    "id": "more-nutrition",
+    "brandName": "MORE Nutrition",
+    "storeUrl": "https://www.amazon.de/stores/page/7AD425C6-C3C5-402D-A69D-D6201F98F888",
+    "category": "supplements",
+    "kind": "store",
+    "source": "existing",
+    "analyzedAt": "2026-05-23",
+    "modules": [
+      {
+        "name": "Folge Uns Strip Banner",
+        "layout": "editorial_banner",
+        "tiles": 1
+      },
+      {
+        "name": "Brand Hero Image mit CTA",
+        "layout": "hero_banner_tall",
+        "tiles": 1
+      },
+      {
+        "name": "Sektion Intro ENTDECKE UNSER SORTIMENT",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "Kategorie Tile Row ZERUP + CHUNKY FLAVOUR",
+        "layout": "subcategory_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Kategorie Tile Row PROTEINE + VEGAN PROTEIN",
+        "layout": "subcategory_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Kategorie Tile Row RIEGEL + VITALSTOFFE",
+        "layout": "subcategory_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Featured Products Grid 4er",
+        "layout": "product_grid_quad",
+        "tiles": 4
+      },
+      {
+        "name": "Produktselektor Promo Banner",
+        "layout": "editorial_banner_large",
+        "tiles": 1
+      },
+      {
+        "name": "Brand Video Modul",
+        "layout": "video_module",
+        "tiles": 1
+      },
+      {
+        "name": "Closing Banner ALLE PRODUKTE",
+        "layout": "editorial_banner",
+        "tiles": 1
+      }
+    ],
+    "summary": "",
+    "images": [
+      {
+        "url": "/store-reference-previews/more-nutrition.jpg",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/9962d728-5544-400e-8acc-36fd4e2ba845._CR0%2C0%2C3000%2C600_SX1500_.jpg",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/188fce4f-6b3f-4949-b662-43da9632e1a1._CR160%2C0%2C2680%2C200_SX1500_.png",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/188fce4f-6b3f-4949-b662-43da9632e1a1._CR160%2C0%2C2680%2C200_SX1500_.png",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bc799122-4c2f-48c5-ab48-4e8815fde8f7._CR0%2C0%2C3000%2C1500_.jpg",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/bc799122-4c2f-48c5-ab48-4e8815fde8f7._CR0%2C0%2C3000%2C1500_.jpg",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/51eb7372-d21e-44f7-926b-436333e310b8._CR0%2C0%2C3000%2C750_SX1500_.jpg",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/51eb7372-d21e-44f7-926b-436333e310b8._CR0%2C0%2C3000%2C750_SX1500_.jpg",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/297fd3ac-4a94-484c-ba6c-31db978e9326._CR0%2C0%2C1500%2C750_SX750_SY375_.jpg",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/297fd3ac-4a94-484c-ba6c-31db978e9326._CR0%2C0%2C1500%2C750_SX750_SY375_.jpg",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/54073feb-5775-45b0-ab5d-9c16be9da71a._CR0%2C0%2C1500%2C750_SX750_SY375_.jpg",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/54073feb-5775-45b0-ab5d-9c16be9da71a._CR0%2C0%2C1500%2C750_SX750_SY375_.jpg",
+        "kind": "archived-motif"
+      }
+    ]
+  },
+  {
+    "id": "hansegruen",
+    "brandName": "Hansegrün",
+    "storeUrl": "https://www.amazon.de/stores/page/BC9A9642-4612-460E-81B4-985E9AF6A7D2",
+    "category": "home_kitchen",
+    "kind": "store",
+    "source": "existing",
+    "analyzedAt": "2026-05-23",
+    "modules": [
+      {
+        "name": "Hero Image Brand Statement",
+        "layout": "hero_banner_tall",
+        "tiles": 1
+      },
+      {
+        "name": "Beauty Shots Video Showcase",
+        "layout": "video_showcase",
+        "tiles": 1
+      },
+      {
+        "name": "Section Intro vor Tile-Pair",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "Tile-Pair Sparsets und Shots",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Benefits Promo Banner",
+        "layout": "editorial_banner_large",
+        "tiles": 1
+      },
+      {
+        "name": "Produktfinder Promo",
+        "layout": "editorial_banner_large",
+        "tiles": 1
+      },
+      {
+        "name": "Neuheiten Promo Stay Tuned",
+        "layout": "editorial_banner_large",
+        "tiles": 1
+      },
+      {
+        "name": "Section Intro vor Tile-Quad",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "Tile-Quad 4-fach",
+        "layout": "editorial_tile_quad",
+        "tiles": 4
+      },
+      {
+        "name": "Section Intro vor Ueber-Uns",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "Die Gruender Lukas und Till Bridge",
+        "layout": "editorial_banner_large",
+        "tiles": 1
+      },
+      {
+        "name": "Section Intro Closer",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      }
+    ],
+    "summary": "",
+    "images": []
+  },
+  {
+    "id": "holy-energy",
+    "brandName": "HOLY Energy",
+    "storeUrl": "https://www.amazon.de/stores/HOLYEnergy/page/7913E121-CB43-4349-A8D2-9F0843B226E4",
+    "category": "food",
+    "kind": "store",
+    "source": "existing",
+    "analyzedAt": "2026-05-23",
+    "modules": [
+      {
+        "name": "Section Intro Banner schmal",
+        "layout": "editorial_section_intro",
+        "tiles": 8
+      },
+      {
+        "name": "Tile-Row 4-fach Kategorien",
+        "layout": "editorial_tile_quad",
+        "tiles": 4
+      },
+      {
+        "name": "ProductGrid Hero 4 ASINs",
+        "layout": "product_grid_featured",
+        "tiles": 4
+      },
+      {
+        "name": "Section Intro Banner mittel",
+        "layout": "editorial_section_intro",
+        "tiles": 8
+      },
+      {
+        "name": "Video Hero",
+        "layout": "video_hero",
+        "tiles": 6
+      },
+      {
+        "name": "Image-Modul XL Manifesto",
+        "layout": "hero_banner_tall",
+        "tiles": 8
+      },
+      {
+        "name": "Bestseller Carousel",
+        "layout": "product_grid_carousel",
+        "tiles": 10
+      },
+      {
+        "name": "Closing Banner",
+        "layout": "editorial_section_intro",
+        "tiles": 8
+      }
+    ],
+    "summary": "",
+    "images": []
+  },
+  {
+    "id": "manscaped",
+    "brandName": "Manscaped",
+    "storeUrl": "https://www.amazon.de/stores/page/44908195-3880-47D6-9EC0-D2A1543EB718",
+    "category": "beauty",
+    "kind": "store",
+    "source": "existing",
+    "analyzedAt": "2026-05-13",
+    "modules": [
+      {
+        "name": "Hero Image The Beard Hedger",
+        "layout": "hero_banner_tall",
+        "tiles": 1
+      },
+      {
+        "name": "Tile-Row 4-fach Bart-Sortiment Visuals",
+        "layout": "editorial_tile_quad",
+        "tiles": 4
+      },
+      {
+        "name": "Section Intro Bart und Gesicht",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "ASIN-Hero Beard Pflege Variant 1",
+        "layout": "hero_banner",
+        "tiles": 1
+      },
+      {
+        "name": "Hero Plus Tile-Pair Bart Sortiment",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Tile-Row 8-fach Bart-Sortiment-Grid",
+        "layout": "subcategory_tile_grid_octet",
+        "tiles": 8
+      },
+      {
+        "name": "Section Intro Kopf und Koerper",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "ASIN-Hero Kopf-und-Koerper Variant 1",
+        "layout": "hero_banner",
+        "tiles": 1
+      },
+      {
+        "name": "ASIN-Hero Kopf-und-Koerper Variant 2",
+        "layout": "hero_banner",
+        "tiles": 1
+      },
+      {
+        "name": "ASIN-Hero Kopf-und-Koerper Variant 3",
+        "layout": "hero_banner",
+        "tiles": 1
+      },
+      {
+        "name": "Tile-Pair Kopf-und-Koerper Sortiment",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Tile-Row 8-fach Kopf-und-Koerper-Grid",
+        "layout": "subcategory_tile_grid_octet",
+        "tiles": 8
+      },
+      {
+        "name": "Section Intro Intimpflege",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "ASIN-Hero Intimpflege Variant 1",
+        "layout": "hero_banner",
+        "tiles": 1
+      },
+      {
+        "name": "ASIN-Hero Intimpflege Variant 2",
+        "layout": "hero_banner",
+        "tiles": 1
+      },
+      {
+        "name": "Tile-Pair Intimpflege Sortiment",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Tile-Row 8-fach Intimpflege-Grid",
+        "layout": "subcategory_tile_grid_octet",
+        "tiles": 8
+      },
+      {
+        "name": "Section Intro Closing",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "Hero Image Final Brand-Statement",
+        "layout": "hero_banner_tall",
+        "tiles": 1
+      },
+      {
+        "name": "ProductGrid 24 ASINs komplettes Sortiment",
+        "layout": "product_grid_full_catalog",
+        "tiles": 24
+      }
+    ],
+    "summary": "",
+    "images": []
+  },
+  {
+    "id": "desktronic",
+    "brandName": "Desktronic",
+    "storeUrl": "https://www.amazon.de/stores/Desktronic/page/1A862649-6CEA-4E30-855F-0C27A1F99A6C",
+    "category": "office",
+    "kind": "store",
+    "source": "existing",
+    "analyzedAt": "2026-05-13",
+    "modules": [
+      {
+        "name": "Hero plus Tile-Grid 1",
+        "layout": "hero_banner_tall",
+        "tiles": 32
+      },
+      {
+        "name": "Hero plus Tile-Grid 2",
+        "layout": "hero_banner_tall",
+        "tiles": 32
+      },
+      {
+        "name": "Video-Modul Hero",
+        "layout": "hero_video",
+        "tiles": 6
+      },
+      {
+        "name": "Section Intro",
+        "layout": "editorial_section_intro",
+        "tiles": 8
+      },
+      {
+        "name": "Hero plus Tiles 3",
+        "layout": "hero_banner_tall",
+        "tiles": 32
+      },
+      {
+        "name": "Hero plus Tiles 4",
+        "layout": "hero_banner_tall",
+        "tiles": 16
+      },
+      {
+        "name": "Video-Modul gross",
+        "layout": "hero_video_tall",
+        "tiles": 7
+      }
+    ],
+    "summary": "",
+    "images": []
+  },
+  {
+    "id": "cloudpillo",
+    "brandName": "Cloudpillo",
+    "storeUrl": "https://www.amazon.de/stores/Cloudpillo/page/741141B6-87D5-44F9-BE63-71B55CD51198",
+    "category": "home_kitchen",
+    "kind": "store",
+    "source": "existing",
+    "analyzedAt": "2026-05-13",
+    "modules": [
+      {
+        "name": "Hero Image Lifestyle Traeume nicht dein Leben",
+        "layout": "hero_banner_tall",
+        "tiles": 1
+      },
+      {
+        "name": "Tile-Row 4-fach Sortiment",
+        "layout": "editorial_tile_quad",
+        "tiles": 4
+      },
+      {
+        "name": "Image Modul Bridge",
+        "layout": "editorial_banner",
+        "tiles": 1
+      },
+      {
+        "name": "Section Intro",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "Tile-Pair Produkt-Showcase 1",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Tile-Pair Produkt-Showcase 2",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Tile-Pair Produkt-Showcase 3",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Tile-Pair Hero",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Image Modul Closing",
+        "layout": "editorial_banner_large",
+        "tiles": 1
+      }
+    ],
+    "summary": "",
+    "images": []
+  },
+  {
+    "id": "bedsure",
+    "brandName": "Bedsure",
+    "storeUrl": "https://www.amazon.de/stores/page/7DC5A9F8-2A3D-426B-B2F2-F819AE825B1F",
+    "category": "home_kitchen",
+    "kind": "store",
+    "source": "existing",
+    "analyzedAt": "2026-05-12",
+    "modules": [
+      {
+        "name": "Sommer-Kollektion Hero EM-Bezug",
+        "layout": "hero_banner_tall",
+        "tiles": 1
+      },
+      {
+        "name": "Beliebt Bei Uns - Top-Kategorien Pair",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Video Banner",
+        "layout": "hero_video",
+        "tiles": 1
+      },
+      {
+        "name": "BEKANNT AUS Section Header",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "Press-Logos Carousel",
+        "layout": "editorial_banner",
+        "tiles": 7
+      },
+      {
+        "name": "Section Intro Kuscheldecken und Wohndecken",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "Kuscheldecken Grid lg-4grid",
+        "layout": "editorial_tile_quad",
+        "tiles": 5
+      },
+      {
+        "name": "Section Intro Bettwaesche-Sets",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "Bettwaesche-Sets Sortimentsgrid",
+        "layout": "editorial_tile_quad",
+        "tiles": 5
+      },
+      {
+        "name": "Bettdecken Sortiment 2-Tile Pair Bettdecke inklusive 2 Decken",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Section Intro Kissenbezuege und Spannbettlaken",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "Bettdecken Grid 4-Tile",
+        "layout": "editorial_tile_quad",
+        "tiles": 4
+      },
+      {
+        "name": "Section Intro Heizdecke",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "Heizdecke 2-Tile Pair",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Section Intro Haustierbedarf",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "Haustierbedarf Sortimentsgrid",
+        "layout": "editorial_tile_quad",
+        "tiles": 5
+      },
+      {
+        "name": "UEBER BEDSURE Brand-Manifesto Block",
+        "layout": "editorial_banner_large",
+        "tiles": 2
+      },
+      {
+        "name": "Product Grid Full Catalog 44 ASINs",
+        "layout": "product_grid_full_catalog",
+        "tiles": 44
+      }
+    ],
+    "summary": "",
+    "images": [],
+    "alternativeUrls": [
+      "https://www.amazon.de/stores/Bedsure/page/7DC5A9F8-F498-41E2-9145-0B2F0F498AFE"
+    ]
+  },
+  {
+    "id": "feandrea",
+    "brandName": "Feandrea",
+    "storeUrl": "https://www.amazon.de/stores/page/FB4FA857-CD07-4E92-A32C-CF0CD556ACF6",
+    "category": "pets",
+    "kind": "store",
+    "source": "existing",
+    "analyzedAt": "2026-05-23",
+    "modules": [
+      {
+        "name": "Hero Image",
+        "layout": "hero_banner",
+        "tiles": 8
+      },
+      {
+        "name": "Section Intro 1",
+        "layout": "editorial_section_intro",
+        "tiles": 8
+      },
+      {
+        "name": "Tile-Pair Für Katzen / Für Hunde",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Tile-Row 5-fach (a)",
+        "layout": "editorial_tile_quad",
+        "tiles": 5
+      },
+      {
+        "name": "Tile-Row 5-fach (b)",
+        "layout": "editorial_tile_quad",
+        "tiles": 5
+      },
+      {
+        "name": "Tile-Row 5-fach (c)",
+        "layout": "editorial_tile_quad",
+        "tiles": 5
+      },
+      {
+        "name": "Tile-Row 2-fach",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Section Intro 3",
+        "layout": "editorial_section_intro",
+        "tiles": 8
+      },
+      {
+        "name": "Tile-Row 5-fach (d)",
+        "layout": "editorial_tile_quad",
+        "tiles": 5
+      },
+      {
+        "name": "Image-Modul #Feandrea im echten Leben (UGC)",
+        "layout": "hero_banner_tall",
+        "tiles": 8
+      },
+      {
+        "name": "Image-Modul Soziales Engagement",
+        "layout": "hero_banner_tall",
+        "tiles": 8
+      },
+      {
+        "name": "Image-Modul Design-Auszeichnungen + Stats + Topseller Hero",
+        "layout": "hero_banner_tall",
+        "tiles": 8
+      },
+      {
+        "name": "ProductCollection Topseller 45 ASINs",
+        "layout": "product_collection",
+        "tiles": 45
+      },
+      {
+        "name": "ProductCarousel Bestseller",
+        "layout": "product_carousel",
+        "tiles": 10
+      }
+    ],
+    "summary": "",
+    "images": []
+  },
+  {
+    "id": "nucompany",
+    "brandName": "the nu company",
+    "storeUrl": "https://www.amazon.de/stores/thenucompany/page/A096FF51-79D5-440D-8789-6255E9DFE87D",
+    "category": "food",
+    "kind": "store",
+    "source": "existing",
+    "analyzedAt": "2026-05-13",
+    "modules": [
+      {
+        "name": "Hero Lifestyle drei Freundinnen",
+        "layout": "hero_banner_tall",
+        "tiles": 1
+      },
+      {
+        "name": "Brand Story Text plus Produkt-Stillleben",
+        "layout": "editorial_banner_large",
+        "tiles": 2
+      },
+      {
+        "name": "Brand Manifesto plus Produkt-Visual",
+        "layout": "editorial_banner_large",
+        "tiles": 2
+      },
+      {
+        "name": "Brand Statement Hero Riegel sind da um sie zu brechen",
+        "layout": "hero_banner_tall",
+        "tiles": 1
+      },
+      {
+        "name": "Schokosnacks Tile-Pair Almonds plus Crunchy",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      }
+    ],
+    "summary": "",
+    "images": []
+  },
+  {
+    "id": "klosterkitchen",
+    "brandName": "Kloster Kitchen",
+    "storeUrl": "https://www.amazon.de/stores/page/34D4A812-9A68-4602-A6A0-30565D399620",
+    "category": "food",
+    "kind": "store",
+    "source": "existing",
+    "analyzedAt": "2026-05-13",
+    "modules": [
+      {
+        "name": "Brand Manifesto Logo Headline",
+        "layout": "editorial_banner_solid_color",
+        "tiles": 1
+      },
+      {
+        "name": "NEU Mikronaehrstoff-Konzentrat Promo",
+        "layout": "editorial_banner_large",
+        "tiles": 1
+      },
+      {
+        "name": "Vital Flow Featured ASIN Grid",
+        "layout": "product_grid_featured",
+        "tiles": 3
+      },
+      {
+        "name": "Kategorie-Grid 4x2 Sortimentsuebersicht",
+        "layout": "subcategory_tile_grid_octet",
+        "tiles": 8
+      },
+      {
+        "name": "Awards Banner Ausgezeichnete Innovationen",
+        "layout": "editorial_banner",
+        "tiles": 1
+      }
+    ],
+    "summary": "",
+    "images": [
+      {
+        "url": "/store-reference-previews/klosterkitchen.jpg",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c62dc5c8-f812-4754-8a90-674b1f1c66a8._CR0%2C10%2C1280%2C256_SX1500_.jpg",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/b34df377-a26b-4764-8e6f-a35cefbbae70._CR0%2C0%2C1920%2C1200_SX1500_.jpg",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/b34df377-a26b-4764-8e6f-a35cefbbae70._CR0%2C0%2C1920%2C1200_SX1500_.jpg",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/10d49af9-f80b-4250-bd0c-ef21cbf534b2._CR1%2C0%2C1918%2C1200_SX1500_.jpg",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/10d49af9-f80b-4250-bd0c-ef21cbf534b2._CR1%2C0%2C1918%2C1200_SX1500_.jpg",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/89600578-d6ae-427f-b7c1-9c7e8f34b034._CR0%2C0%2C750%2C750_SX375_SY375_.jpg",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/89600578-d6ae-427f-b7c1-9c7e8f34b034._CR0%2C0%2C750%2C750_SX375_SY375_.jpg",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c79cea7d-3c69-471c-a402-9302c7b56f5b._CR0%2C0%2C750%2C750_SX375_SY375_.jpg",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/c79cea7d-3c69-471c-a402-9302c7b56f5b._CR0%2C0%2C750%2C750_SX375_SY375_.jpg",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/36c44675-c0e5-4c16-aca5-e4311d806a64._CR0%2C0%2C750%2C750_SX375_SY375_.jpg",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/36c44675-c0e5-4c16-aca5-e4311d806a64._CR0%2C0%2C750%2C750_SX375_SY375_.jpg",
+        "kind": "archived-motif"
+      }
+    ]
+  },
+  {
+    "id": "bears-with-benefits",
+    "brandName": "Bears with Benefits",
+    "storeUrl": "https://www.amazon.de/stores/BearswithBenefits/page/AFC77FAF-F173-4A4E-A7DF-8779F7E16E97",
+    "category": "supplements",
+    "kind": "store",
+    "source": "existing"
+  },
+  {
+    "id": "twentythree",
+    "brandName": "twentythree",
+    "storeUrl": "https://www.amazon.de/stores/twentythree/page/0E8D9A31-200C-4EC5-BC94-CBBC023B28A4",
+    "category": "home_kitchen",
+    "kind": "store",
+    "source": "existing",
+    "analyzedAt": "2026-05-13",
+    "modules": [
+      {
+        "name": "Section Intro Dein Traum wird wahr",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      },
+      {
+        "name": "Tile Row 3-fach Lifestyle-Stillleben",
+        "layout": "editorial_tile_quad",
+        "tiles": 3
+      },
+      {
+        "name": "Tile Pair Bettwaesche plus Bezuege fuer Decken",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Bettwaesche-Sets Kissen Deckenbezuege 100 Prozent Lyocell Hero",
+        "layout": "hero_banner",
+        "tiles": 1
+      },
+      {
+        "name": "Matratzen Section Intro",
+        "layout": "editorial_section_intro",
+        "tiles": 1
+      }
+    ],
+    "summary": "",
+    "images": []
+  },
+  {
+    "id": "gritin",
+    "brandName": "Gritin",
+    "storeUrl": "https://www.amazon.de/stores/page/1758941C-AE87-4628-AB45-62C0A2BDB75C",
+    "category": "home_kitchen",
+    "kind": "store",
+    "source": "existing",
+    "analyzedAt": "2026-05-23",
+    "modules": [
+      {
+        "name": "Mini-Section Intro",
+        "layout": "editorial_section_intro",
+        "tiles": 8
+      },
+      {
+        "name": "Hero Image",
+        "layout": "hero_banner_tall",
+        "tiles": 8
+      },
+      {
+        "name": "Section Intro",
+        "layout": "editorial_section_intro",
+        "tiles": 8
+      },
+      {
+        "name": "Tile-Row 7-fach Kategorie-Verteiler",
+        "layout": "editorial_tile_quad",
+        "tiles": 7
+      },
+      {
+        "name": "Section Intro 2",
+        "layout": "editorial_section_intro",
+        "tiles": 8
+      },
+      {
+        "name": "Tile-Row 8-fach Sub-Kategorie",
+        "layout": "editorial_tile_quad",
+        "tiles": 8
+      },
+      {
+        "name": "Section Intro 3",
+        "layout": "editorial_section_intro",
+        "tiles": 8
+      },
+      {
+        "name": "ProductGrid 3 ASINs",
+        "layout": "product_grid_featured",
+        "tiles": 3
+      },
+      {
+        "name": "Section Intro 4",
+        "layout": "editorial_section_intro",
+        "tiles": 8
+      },
+      {
+        "name": "ProductGrid 4 ASINs",
+        "layout": "product_grid_featured",
+        "tiles": 4
+      },
+      {
+        "name": "Section Intro 5",
+        "layout": "editorial_section_intro",
+        "tiles": 8
+      },
+      {
+        "name": "ProductGrid 3 ASINs (2)",
+        "layout": "product_grid_featured",
+        "tiles": 3
+      },
+      {
+        "name": "Image-Modul",
+        "layout": "hero_banner_tall",
+        "tiles": 8
+      },
+      {
+        "name": "Section Intro 6",
+        "layout": "editorial_section_intro",
+        "tiles": 8
+      },
+      {
+        "name": "ProductGrid 4 ASINs (2)",
+        "layout": "product_grid_featured",
+        "tiles": 4
+      },
+      {
+        "name": "Section Intro 7",
+        "layout": "editorial_section_intro",
+        "tiles": 8
+      },
+      {
+        "name": "ProductGrid 3 ASINs (3)",
+        "layout": "product_grid_featured",
+        "tiles": 3
+      },
+      {
+        "name": "Section Intro Closing",
+        "layout": "editorial_section_intro",
+        "tiles": 8
+      },
+      {
+        "name": "Image Closing",
+        "layout": "hero_banner_tall",
+        "tiles": 8
+      }
+    ],
+    "summary": "",
+    "images": []
+  },
+  {
+    "id": "trixie",
+    "brandName": "TRIXIE",
+    "storeUrl": "https://www.amazon.de/stores/page/30552E59-AC22-47B1-BBBB-AEA9225BD614",
+    "category": "pets",
+    "kind": "store",
+    "source": "existing",
+    "analyzedAt": "2026-05-23",
+    "modules": [
+      {
+        "name": "Video-Hero",
+        "layout": "hero_banner_video",
+        "tiles": 1
+      },
+      {
+        "name": "Tile-Pair Section-Trenner Brand-Statement",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "HUND Section-Hero 5-fach Verteiler",
+        "layout": "section_hero_5tile_distributor",
+        "tiles": 5
+      },
+      {
+        "name": "HUND Tile-Row 4-fach Sub-Verteiler",
+        "layout": "editorial_tile_quad",
+        "tiles": 4
+      },
+      {
+        "name": "Neuheiten Tile-Pair-Banner Marken-Statement",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "KATZE Section-Hero 5-fach Verteiler",
+        "layout": "section_hero_5tile_distributor",
+        "tiles": 5
+      },
+      {
+        "name": "KATZE Tile-Row 4-fach Sub-Verteiler",
+        "layout": "editorial_tile_quad",
+        "tiles": 4
+      },
+      {
+        "name": "Closing Tile-Pair Brand-Statement",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      }
+    ],
+    "summary": "",
+    "images": []
+  },
+  {
+    "id": "nightcat",
+    "brandName": "Night Cat",
+    "storeUrl": "https://www.amazon.de/stores/page/CC609240-DCC5-47C5-A171-3B973268CD34",
+    "category": "sports",
+    "kind": "store",
+    "source": "existing",
+    "analyzedAt": "2026-05-23",
+    "modules": [
+      {
+        "name": "Hero Image",
+        "layout": "hero_banner",
+        "tiles": 8
+      },
+      {
+        "name": "Tile-Row 3-fach",
+        "layout": "editorial_tile_quad",
+        "tiles": 3
+      },
+      {
+        "name": "Video-Modul 1",
+        "layout": "product_showcase_video",
+        "tiles": 8
+      },
+      {
+        "name": "Tile-Row 5-fach 1",
+        "layout": "editorial_tile_quad",
+        "tiles": 5
+      },
+      {
+        "name": "Video-Modul 2",
+        "layout": "product_showcase_video",
+        "tiles": 8
+      },
+      {
+        "name": "Tile-Row 4-fach",
+        "layout": "editorial_tile_quad",
+        "tiles": 4
+      },
+      {
+        "name": "Video-Modul 3",
+        "layout": "product_showcase_video",
+        "tiles": 8
+      },
+      {
+        "name": "Tile-Row 5-fach 2",
+        "layout": "editorial_tile_quad",
+        "tiles": 5
+      },
+      {
+        "name": "Video-Modul 4",
+        "layout": "product_showcase_video",
+        "tiles": 8
+      },
+      {
+        "name": "Tile-Row 5-fach 3",
+        "layout": "editorial_tile_quad",
+        "tiles": 5
+      },
+      {
+        "name": "Video-Modul 5",
+        "layout": "product_showcase_video",
+        "tiles": 8
+      },
+      {
+        "name": "Tile-Row 5-fach 4",
+        "layout": "editorial_tile_quad",
+        "tiles": 5
+      },
+      {
+        "name": "ProductGrid 10 ASINs",
+        "layout": "product_grid_featured",
+        "tiles": 10
+      },
+      {
+        "name": "Press-Award-Band",
+        "layout": "editorial_banner",
+        "tiles": 0
+      }
+    ],
+    "summary": "",
+    "images": []
+  },
+  {
+    "id": "masterchef",
+    "brandName": "MasterChef",
+    "storeUrl": "https://www.amazon.de/stores/page/4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6",
+    "category": "kitchen",
+    "kind": "store",
+    "source": "existing",
+    "analyzedAt": "2026-05-23",
+    "modules": [
+      {
+        "name": "Tile-Pair Messersets",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Tile-Pair Kochmessersets",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Tile-Pair Messerblocksets",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Tile-Pair Schneidebretter",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Tile-Pair Werkzeuge",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Tile-Pair Kuechengeraete",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Tile-Pair Textilien",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      },
+      {
+        "name": "Tile-Pair Kollektionen",
+        "layout": "editorial_tile_pair",
+        "tiles": 2
+      }
+    ],
+    "summary": "",
+    "images": [
+      {
+        "url": "/store-reference-previews/masterchef.jpg",
+        "sourceUrl": "https://m.media-amazon.com/images/S/stores-image-uploads-eu-prod/3/AmazonStores/A1PA6795UKMFR9/97a04711b6fd854af54440731f55084c.w3000.h603._CR0%2C0%2C3000%2C603_SX1500_.png",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/08e107a9-8b62-43cf-83ea-468c07e776e0._CR0%2C0%2C1500%2C1500_SX750_SY750_.png",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/08e107a9-8b62-43cf-83ea-468c07e776e0._CR0%2C0%2C1500%2C1500_SX750_SY750_.png",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e60f8ea8-9076-420d-bb53-03027e789dfa._CR0%2C0%2C1500%2C1500_SX750_SY750_.png",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/e60f8ea8-9076-420d-bb53-03027e789dfa._CR0%2C0%2C1500%2C1500_SX750_SY750_.png",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/a1c8bb93-8397-4106-8bc9-baf6de0f1242._CR0%2C0%2C1500%2C1500_SX750_SY750_.png",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/a1c8bb93-8397-4106-8bc9-baf6de0f1242._CR0%2C0%2C1500%2C1500_SX750_SY750_.png",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/b5bf8abc-0194-41f8-8c8f-5df3cbec8e67._CR0%2C0%2C1500%2C1500_SX750_SY750_.png",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/b5bf8abc-0194-41f8-8c8f-5df3cbec8e67._CR0%2C0%2C1500%2C1500_SX750_SY750_.png",
+        "kind": "archived-motif"
+      },
+      {
+        "url": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/1469d710-c5d8-4b6a-b3de-76c8571133f6._CR0%2C0%2C1500%2C1500_SX750_SY750_.png",
+        "sourceUrl": "https://m.media-amazon.com/images/S/al-eu-726f4d26-7fdb/1469d710-c5d8-4b6a-b3de-76c8571133f6._CR0%2C0%2C1500%2C1500_SX750_SY750_.png",
+        "kind": "archived-motif"
+      }
+    ]
+  },
+  {
+    "id": "natural-elements",
+    "brandName": "natural elements",
+    "storeUrl": "https://www.amazon.de/stores/page/3955CCD4-902C-4679-9265-DEC4FCBAA8C8",
+    "category": "",
+    "kind": "store",
+    "source": "knowledge"
+  },
+  {
+    "id": "store-5cb87a1c",
+    "brandName": "Brand Store · 5CB87A1C",
+    "storeUrl": "https://www.amazon.de/stores/page/5CB87A1C-536A-4D4A-A3C1-635F7F0CC092",
+    "kind": "store",
+    "category": "",
+    "source": "provided",
+    "nameVerified": false
+  },
+  {
+    "id": "einhell",
+    "brandName": "Einhell",
+    "storeUrl": "https://www.amazon.de/stores/Einhell/page/C36736E3-EDE2-46C1-812C-9030BDA1EEEB",
+    "kind": "store",
+    "category": "tools",
+    "source": "provided",
+    "nameVerified": true
+  },
+  {
+    "id": "hshop-sport",
+    "brandName": "HSHOP-SPORT",
+    "storeUrl": "https://www.amazon.de/stores/HSHOP-SPORT/page/8B640FD7-98E9-4C48-9BF0-422ED3F14A3A",
+    "kind": "store",
+    "category": "fitness",
+    "source": "provided",
+    "nameVerified": true
+  },
+  {
+    "id": "tierliebhaber",
+    "brandName": "TIERLIEBHABER",
+    "storeUrl": "https://www.amazon.de/stores/TIERLIEBHABER/page/3EB222DB-B679-4317-BFB8-B3F87C7A3E9A",
+    "kind": "store",
+    "category": "pets",
+    "source": "provided",
+    "nameVerified": true
+  },
+  {
+    "id": "felmo",
+    "brandName": "felmo",
+    "storeUrl": "https://www.amazon.de/stores/felmo/page/77AE223F-04C0-420D-8A78-05A0A57D6258",
+    "kind": "store",
+    "category": "pets",
+    "source": "provided",
+    "nameVerified": true
+  },
+  {
+    "id": "product-b0cldwhkcb",
+    "brandName": "Produktreferenz · B0CLDWHKCB",
+    "storeUrl": "https://www.amazon.de/dp/B0CLDWHKCB",
+    "kind": "product",
+    "category": "",
+    "source": "provided",
+    "nameVerified": false
+  }
+]

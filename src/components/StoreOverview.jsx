@@ -1,3 +1,4 @@
+import StoreReferenceLibraryButton from './StoreReferenceLibrary';
 import { useState, useEffect } from 'react';
 import { loadFeedbackCounts } from '../feedbackApi';
 
@@ -132,7 +133,7 @@ export default function StoreOverview({ stores, loading, loadError, hasAutoSave,
           <h1>Deine Stores</h1>
           <p>Öffne einen Store, um seine Seiten anzusehen und weiterzubearbeiten.</p>
         </div>
-        <button className="store-home-create" onClick={onNewStore}>+ Neuer Store</button>
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}><StoreReferenceLibraryButton onSelect={onNewStore ? choices => onNewStore(choices.map(c => ({ url: c.storeUrl, notes: '' }))) : undefined} /><button className="store-home-create" onClick={onNewStore}>+ Neuer Store</button></div>
       </header>
       <main className="store-home-main">
         <div className="store-home-section">

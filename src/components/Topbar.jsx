@@ -1,3 +1,4 @@
+import StoreReferenceLibraryButton from './StoreReferenceLibrary';
 import { useState, useEffect } from 'react';
 import { brandToSlug } from '../storage';
 
@@ -100,6 +101,7 @@ export default function Topbar({ store, shareToken, onExport, onSave, manualSave
   }
   return (
     <div className="topbar">
+      <StoreReferenceLibraryButton />
       {onShowStores && <button className="btn topbar-back" onClick={onShowStores} disabled={returningToOverview} title="Zur Übersicht aller Stores zurück">← {returningToOverview ? "Speichert…" : "Alle Stores"}</button>}
       <div className="topbar-brand">
         <span className="topbar-icon">&#x1F3EA;</span>

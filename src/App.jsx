@@ -228,6 +228,7 @@ export default function App() {
   var [clipboardTile, setClipboardTile] = useState(null);
   var [showAsins, setShowAsins] = useState(false);
   var [showNewStoreModal, setShowNewStoreModal] = useState(false);
+  var [newStoreReferences, setNewStoreReferences] = useState([]);
   var [savedStores, setSavedStores] = useState([]);
   var [savedStoresLoading, setSavedStoresLoading] = useState(true);
   var [savedStoresError, setSavedStoresError] = useState('');
@@ -1422,8 +1423,9 @@ export default function App() {
   // ─── NEW STORE ───
   // Klick auf "New Store" öffnet Modal mit Briefing JSON Import.
   // Modal bietet außerdem die Option, einen leeren Store zu starten.
-  var handleNewStore = function() {
+  var handleNewStore = function(references) {
     if (!showOverview && store.pages.length > 0 && !confirm('Neuen Store anlegen? Ungespeicherte Änderungen gehen verloren.')) return;
+    setNewStoreReferences(Array.isArray(references) ? references : []);
     setShowNewStoreModal(true);
   };
 
@@ -1979,6 +1981,7 @@ export default function App() {
       />
       {showNewStoreModal && (
         <NewStoreModal
+          initialReferences={newStoreReferences}
           onClose={closeNewStoreModal}
           onImport={handleImportBriefing}
           onCreateEmpty={handleCreateEmpty}
@@ -2111,6 +2114,7 @@ export default function App() {
 
       {showNewStoreModal && (
         <NewStoreModal
+          initialReferences={newStoreReferences}
           onClose={closeNewStoreModal}
           onImport={handleImportBriefing}
           onCreateEmpty={handleCreateEmpty}
