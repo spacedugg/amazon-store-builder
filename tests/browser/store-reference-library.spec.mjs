@@ -15,6 +15,7 @@ for (const width of [1440, 390]) {
     await library.getByLabel('Beispiele suchen', { exact: true }).fill('MasterChef');
     await library.getByRole('button', { name: 'Beispiel ansehen: MasterChef', exact: true }).click();
     await expect(library).toContainText('kein aktueller Screenshot');
+    await library.getByText('Ergänzendes Archiv: Motive und aufgezeichneter Aufbau', { exact: true }).click();
     await expect.poll(() => library.locator('figure img').first().evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
     await library.getByRole('button', { name: '← Alle Beispiele', exact: true }).click();
     await library.getByLabel('Beispiele suchen', { exact: true }).fill('Einhell');
