@@ -1,13 +1,15 @@
+import StoreReferenceLibraryButton from './StoreReferenceLibrary';
+import { appendReferenceChoices } from '../storeReferences.mjs';
 import { buildStorefrontConceptPrompt, validateStorefrontReferences } from '../storefrontConceptPrompt';
 import { useState, useRef } from 'react';
 import { STOREFRONT_ASIN_PROMPT } from '../storefrontAsinPrompt';
 
-export default function NewStoreModal({ onClose, onImport, onCreateEmpty }) {
+export default function NewStoreModal({ onClose, onImport, onCreateEmpty, initialReferences = [] }) {
   var [text, setText] = useState('');
   var [error, setError] = useState('');
   var [importing, setImporting] = useState(false);
   var [copied, setCopied] = useState(false);
-  var [references, setReferences] = useState([{ url: '', notes: '' }]);
+  var [references, setReferences] = useState(() => initialReferences.length ? initialReferences.map(r => ({ url: r.url, notes: r.notes || '' })) : [{ url: '', notes: '' }]);
   var [copyError, setCopyError] = useState('');
   var referenceError = validateStorefrontReferences(references);
   var conceptPrompt = referenceError ? '' : buildStorefrontConceptPrompt(references);
@@ -85,6 +87,7 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty }) {
           </div>
           <fieldset style={{ border: '1px solid #cbd5e1', borderRadius: 6, padding: 12, margin: '12px 0' }}>
             <legend style={{ fontWeight: 700, fontSize: 13 }}>Referenz-Stores (optional)</legend>
+            <div style={{ marginBottom: 12 }}><StoreReferenceLibraryButton label="Aus Beispielen auswählen" selectedUrls={references.map(r => r.url)} onSelect={choices => { setReferences(rows => appendReferenceChoices(rows, choices)); setCopied(false); setCopyError(''); }} /></div>
             {references.map(function(reference, index) { return (
               <div key={index} style={{ display: 'grid', gap: 6, marginBottom: 12 }}>
                 <label style={{ fontSize: 12 }}>Amazon-Store-Link {index + 1}

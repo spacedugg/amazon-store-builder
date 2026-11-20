@@ -1,3 +1,4 @@
+import StoreReferenceLibraryButton from './StoreReferenceLibrary';
 import { useState, useEffect, useRef } from 'react';
 import { LAYOUTS, LAYOUT_TILE_DIMS, TILE_TYPE_LABELS, PRODUCT_TILE_TYPES, IMAGE_CATEGORIES, findLayout } from '../constants';
 import { loadStoreByShareToken, saveStore } from '../storage';
@@ -2108,6 +2109,7 @@ export default function BriefingView() {
           <span className="briefing-readonly-badge">Read Only</span>
         </div>
         <div className="briefing-header-right">
+          <StoreReferenceLibraryButton lang="en" />
           {/* Desktop/Mobile toggle — prominent, centered */}
           <div style={{ display: 'flex', gap: 2, background: 'rgba(255,255,255,.06)', borderRadius: 8, padding: 3, border: '1px solid rgba(255,255,255,.1)' }}>
             <button onClick={function() { setViewMode('desktop'); }}
