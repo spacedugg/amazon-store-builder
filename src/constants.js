@@ -14,7 +14,7 @@
 //
 // Mobile:
 //   Standard: default = desktop dims, height variable
-//   VH: fixed min 1500×750
+//   VH: four-square rows 750×750; other VH defaults 1500×750
 //
 // IMPORTANT: VH desktop ↔ VH mobile ONLY. Standard desktop ↔ Standard mobile ONLY.
 
@@ -219,7 +219,7 @@ export var DIMENSION_PRESETS = {
 // ─── AMAZON DESKTOP IMAGE TYPES ───
 // Desktop formats based on 4-column grid. No vertical images on desktop.
 // Standard mobile: default = desktop dims (height variable)
-// VH mobile: fixed min 1500×750
+// VH mobile: four-square rows stay square (750×750); other VH defaults 1500×750.
 export var AMAZON_IMG_TYPES = {
   LARGE_SQUARE: { w: 1500, h: 1500, label: 'Large Square' },
   SMALL_SQUARE: { w: 750, h: 750, label: 'Small Square' },
@@ -257,12 +257,14 @@ export var LAYOUT_TILE_DIMS = {
 };
 
 // Helper: passende Mobile Dimensionen für eine Layout / Desktop Größe ableiten.
-// Standard Layouts: Mobile = Desktop. VH: fix 1500x750. Full Width: 1680
+// Standard: Mobile = Desktop. VH four-square: 750x750, other VH: 1500x750. Full Width: 1680
 // Pixel breit, Höhe folgt Desktop Höhe (mit 1/MIN_IMAGE_RATIO_MOBILE Floor).
 export function deriveMobileDims(layoutId, desktopW, desktopH) {
   var resolved = resolveLayoutId(layoutId);
   var layout = findLayout(resolved);
-  if (layout && layout.type === 'vh') {
+  if (resolved === 'vh-4square') {
+    return { w: 750, h: 750 };
+  } else if (layout && layout.type === 'vh') {
     return { w: 1500, h: 750 };
   } else if (layout && layout.type === 'fullwidth') {
     return { w: 1680, h: Math.max(Number(desktopH) || 600, Math.ceil(1680 / MIN_IMAGE_RATIO_MOBILE)) };
@@ -866,4 +868,5 @@ export function validateStore(store) {
 
   return warnings;
 }
+
 

@@ -10,6 +10,10 @@ metadata:
 
 Du erstellst Amazon Brand Store Konzepte für die Agentur TEMOA. Das Konzept wird als Briefing JSON ausgegeben und vom Brand Store Builder Tool (Repo `amazon-store-builder`) importiert.
 
+## Portable Installation in Claude
+
+Im installierten ZIP liegen `CLAUDE.md`, `data/store-knowledge/` und `docs/BLUEPRINT_EXTRACTION_PROMPT_V4.md` relativ zu diesem `SKILL.md`. Lies diese mitgelieferten Dateien vom Skill-Verzeichnis aus; ein separater GitHub-Zugang ist dafür nicht nötig. Im Repository gelten dieselben Pfade relativ zur Repo-Wurzel. Falls eine Datei fehlt, melde die Lücke statt die vorgeschriebene Recherche als erledigt darzustellen.
+
 ## Wissensbasis (Stand 2026-05-24, v4)
 
 Das Repo enthält eine kuratierte Wissensbasis aus 20 analysierten Amazon Brand Stores. **Lies vor jedem Konzept-Skelett aktiv die relevanten Dateien**, statt aus dem Bauch zu konzipieren. Die Wissensbasis liegt im Repo `amazon-store-builder` unter:
@@ -83,7 +87,7 @@ Wenn die Brand Story Logistik Fakten enthält (eigenes Lager, Logistikzentrum), 
 
 ### Headline Copywriting Regeln
 
-**Konkret schreiben, nicht poetisch.** Die Headline soll auf einen Blick sagen was der User auf der Page bekommt, nicht ein abstraktes Werbeagentur Bild aufmachen.
+**Konkret und bildnah schreiben.** Headlines vermitteln auf einen Blick Nutzen oder Anlass. Emotionale Sprache ist für Hero und Shoppable erlaubt, sofern die Szene den Kategoriebezug trägt; abstrakte Werbefloskeln bleiben ausgeschlossen.
 
 **Verbotene Patterns:**
 
@@ -105,7 +109,7 @@ Wenn die Brand Story Logistik Fakten enthält (eigenes Lager, Logistikzentrum), 
 - Imperativ: `Hol dir den Sommer`, `Gib deinem Garten Schatten`
 - Rhetorische Frage: `Welches Sofa passt zu dir`
 
-Pro Page maximal **eine** poetische Headline (z.B. die Hero Headline). Alle anderen Headlines (Trenner, Bestseller, Shoppable) müssen konkret und funktional sein.
+Headlines bleiben kurz und konkret im Nutzungskontext. Hero und Shoppable dürfen emotional formuliert sein, wenn Szene und Sortiment den Bezug klar machen. Keine abstrakten Floskeln; Trenner und Grids dienen der Orientierung. Eine emotionale Hotspot-Headline ist keine Aufzählung der sichtbaren Produkte.
 
 ### Redundanz Check innerhalb Section
 
@@ -178,7 +182,7 @@ Richtig:
 - `Sofas in jeder Größe` (Möbel Page, konkret)
 - `Lounge bereit für die Saison` (Garten Page, saisonal konkret)
 
-Test pro Headline: Wenn ich den Markennamen oder Kategorie Namen aus der Headline streiche, ergibt sie noch Sinn? Wenn ja, ist sie zu generisch.
+Test pro Headline: Ist aus Headline und Motiv gemeinsam ein konkreter Anlass oder Nutzen dieser Kategorie erkennbar? Nicht jede Headline muss den Marken- oder Produktnamen wiederholen. Reine Objektlisten sind Bildbeschreibungen, keine verkaufsstarken Hotspot-Headlines.
 
 ### Konkrete Sprache pro Modul Typ
 
@@ -187,7 +191,7 @@ Test pro Headline: Wenn ich den Markennamen oder Kategorie Namen aus der Headlin
 | Hero (Page Section 1) | 1 poetische Headline mit grünem Highlight, OK auch mit Komma Pattern |
 | Trenner (Section Header) | konkret, kurz, max 4 Wörter, beschreibt was im nächsten Block kommt |
 | Bestseller Grid | direkt, z.B. `Top in Garten`, `Die meistgekauften Sofas` |
-| Shoppable Image | beschreibt die Szene, z.B. `Lounge plus Sonnenschirm` |
+| Shoppable Image | kurzer Nutzen, Anlass oder Lebensgefühl passend zur Szene, z.B. `Dein Garten, deine Regeln` oder `Genieße den Sommer im Garten`; niemals nur die abgebildeten Gegenstände aufzählen |
 | USP Leiste | Markenwert klar, z.B. `Warum Juskys`, `Aus einer Hand` |
 | Cross Link Banner | Imperativ, z.B. `Jetzt zu Garten`, `Weiter zu Möbeln` |
 
@@ -211,7 +215,7 @@ Beispiel:
 
 ### Schritt 1, Eingaben sammeln
 
-Begrüße kurz, dann frage in **einem** Multiple Choice Block alle Pflichtinformationen ab. Erlaube Mehrfachauswahl wo sinnvoll.
+Begrüße kurz, frage zuerst die Marken-Basics ab und danach die noch offenen Konzeptfragen in einem gebündelten Multiple-Choice-Block. Bereits bekannte Informationen nicht erneut abfragen. Erlaube Mehrfachauswahl wo sinnvoll.
 
 ```
 ### Schritt 1, Eingaben sammeln
@@ -221,11 +225,12 @@ Begrüße kurz und stelle in zwei Blöcken die Eingaben:
 **Block 1, Marken Basics (frage zuerst, alle optional außer Markenname)**
 
 ```
-Bevor ich starte, drei Basics:
+Bevor ich starte, die Marken-Basics:
 
 1. Markenname (Pflicht)
 2. Website URL der Marke (optional, hilft mir bei Tonalität, Brand Story und CI). Wenn keine vorhanden, leer lassen.
-3. Bestehender Amazon Brand Store URL (optional, für Relaunch oder Inspiration). Wenn neu, leer lassen.
+3. Eigener bestehender Amazon Brand Store URL (optional, für Relaunch). Wenn neu, leer lassen.
+4. Referenz-Stores (optional): mehrere Amazon-Brand-Store-Links, gern mit Links zu konkreten Unterseiten und kurzem Hinweis, was daran gefällt (Aufbau, Rhythmus, Bildsprache, mobile Komposition). Bereits genannte Links nicht erneut abfragen.
 
 Hinweis zu ASIN Listen: bitte als Text oder CSV einfügen, nicht als
 Screenshot. Bilder dauern lange in der Verarbeitung und können den
@@ -320,19 +325,31 @@ Sobald alle nötigen Inputs da sind, **konsultiere zuerst die Wissensbasis** und
 
    Bitte den User um Bestätigung oder Korrektur, bevor du das Skelett baust.
 
+**3a.1. Zusätzliche Referenz-Stores prüfen (wenn mitgegeben)**:
+
+- Trenne eigenen Relaunch-Store und fremde Inspirations-Stores. Öffne die Homepage und relevante Kategorie-/Unterseiten über die verfügbaren Browser-/Lese-Werkzeuge; mobile Ansicht nur als beobachtet kennzeichnen, wenn tatsächlich geprüft. Keine Zugriffssperren umgehen.
+- Pro tatsächlich gelesener Seite kurz dokumentieren: URL, Seitentyp, Modulfolge von oben nach unten, Bildproportionen, Kachelgruppierungen, Wechsel von Lifestyle/Produkten/Text, Navigation und besondere grafische Übergänge. Kennzeichne sichtbare Beobachtungen und Vermutungen getrennt. Ein Hero-Screenshot belegt keine vollständige Seitenstruktur.
+- Status pro URL: geprüft, teilweise geprüft oder nicht erreichbar. Bei fehlenden Browser-Werkzeugen oder gesperrten Seiten nichts erfinden. Bitte um Screenshots der vollständigen Seite, mobile Screenshots oder einen Export; arbeite auf Wunsch mit der kuratierten Wissensbasis weiter und benenne diese Grenze.
+- Schlage daraus eine passende Architektur vor: Welche Struktur wird übernommen, für welche eigene Seite, warum passt sie zu Sortiment und Ziel? Benenne ebenso, was nicht passt. Nur abstrakte Muster übertragen, niemals fremde Texte, Bilder, Logos, ASINs oder Markensignaturen kopieren.
+- Ein aufwendiger grafischer Aufbau wird im Designer-Brief als Komposition, Übergänge und separate mobile Umsetzung beschrieben. Nur vom Builder unterstützte Layouts/Tile-Typen verwenden. Ein Screenshot beweist weder Hotspot-Positionen noch unsichtbare Interaktionen.
+
 **3b. Skelett bauen**:
 
 Sobald die Wissensbasis-Auswahl bestätigt ist, baue das Konzept Skelett, NICHT das fertige JSON. Das Skelett ist:
 
-- Liste aller Pages (Home, Hauptkategorien, Sale, Über Uns, Bestseller, Produktberater, plus Subpages)
-- Pro Page der grobe Modul Flow (Hero, Sub Navigator, Shoppable, Bestseller Showcase, Vollkatalog, Cross Link)
+- Liste der tatsächlich benötigten und freigegebenen Pages. Home und relevante Kategorien zuerst; Sale, Über Uns, Bestseller, Produktberater oder weitere Subpages nur mit inhaltlichem Bedarf. Keine zusätzlichen Seiten allein aus einer Standardvorlage erzeugen.
+- Pro Page eine begründete Modulfolge aus den geprüften Referenzen und der Wissensbasis. Beispielsweise kompakter Kategorie-Einstieg, redaktioneller Lifestyle-Aufbau oder wechselnde Produkt-/Bildgruppen. Keine identische Pflichtabfolge auf jeder Page. Harte Modulgrenzen, Navigation und ASIN-Abdeckung bleiben gültig.
 - Pro Page das gewählte Page-Architecture-Pattern und der Hero-Archetyp als Annotation
 
 Outputten als knappe Liste, **ohne Headlines**. Das Skelett dient zur Bestätigung der Struktur bevor wir an Texte gehen.
 
 ### Schritt 4, Headlines im Chat abstimmen (Pflicht, niemals überspringen)
 
-**Bevor das Briefing JSON erzeugt wird**, schlage pro Page **drei Hero Headline Optionen** im Chat vor und warte auf User Auswahl. Das verhindert dass schwache Headlines erst im fertigen Store sichtbar werden.
+**Hotspot-Copywriting**: Für jedes geplante `shoppable_image` drei kurze Headline-Alternativen entwickeln: Nutzen, Anlass, Lebensgefühl. Richtwert 3–8 Wörter, passend zur Brand Voice und zur konkreten Szene. Nicht „Stühle, Tisch und Pflanze“ oder „Garten, Liege, Terrasse, Rasen“. Outdoor-Beispiele: „Genieße die Zeit an der frischen Luft“, „Dein Garten, deine Regeln“, „Genieße den Sommer im Garten“. Dies sind Stilbeispiele, keine immer wieder zu kopierenden Standardtexte. Keine unbelegten Claims. Produktnamen, ASINs und Szenenbeschreibung gehören in Hotspots bzw. den englischen `brief`, nicht als Inventarliste in `textOverlay.heading`.
+
+Zeige die Varianten gesammelt mit Page-/Modul-Zuordnung und empfohlenem Favoriten zusammen mit der Hero-Abstimmung. Bereits freigegebene Headlines übernehmen; wenn der User die Auswahl ausdrücklich delegiert, Favoriten selbst wählen. Keine erneuten Fragen zu geklärten Entscheidungen. Nur die gewählte Headline ins JSON schreiben; Briefing und Alternativen nicht ins sichtbare Bild kopieren.
+
+**Bevor das Briefing JSON erzeugt wird**, schlage pro Page **drei Hero Headline Optionen** im Chat vor. Warte auf die Auswahl, sofern der User sie nicht bereits getroffen oder ausdrücklich delegiert hat. Das verhindert dass schwache Headlines erst im fertigen Store sichtbar werden.
 
 Format pro Page:
 
@@ -371,6 +388,8 @@ Bevor du das Briefing JSON ausgibst, gehe das Konzept als Self Check durch und k
 
 **Self Check Algorithmus**:
 
+0. **Mobile- und Referenz-Check**. Jedes neu konzipierte `image`/`shoppable_image` enthält explizite positive `dimensions` und `mobileDimensions`. Vier quadratische Icon-Kacheln bleiben mobil quadratisch. Content-Hero/Lifestyle mit Bild und Copy bekommen eine bewusst neu komponierte mobile Variante gemäß Abschnitt Mobile Image Dimensions. Header oberhalb der Navigation nicht damit verwechseln. Referenzquellen und nicht geprüfte Seiten sind im Dialog ehrlich benannt; die Modulfolge ist für diese Marke begründet, nicht automatisch eine universelle Vorlage. Beim Patch nur neue/geänderte Tiles prüfen; vorhandene Assets und manuelle Overrides nicht stillschweigend umformatieren.
+
 1. **ASIN Grid Stack Check**. Für jede Page durchlaufe alle Section Paare in Reihenfolge. Module mit ASIN Grid sind: `product_grid`, `best_sellers`, `recommended`, `deals`. Wenn zwei aufeinanderfolgende Sections beide ein ASIN Grid Modul enthalten, **ist das ein Stack und muss umgebaut werden**, nicht im Output stehen lassen. Drei Fix Optionen, in dieser Priorität:
    - **Option A, konsolidieren**. Wenn beide Grids überlappende ASINs zeigen (z.B. Bestseller Top 8 plus Vollkatalog der dieselben ASINs enthält), streiche das Bestseller Grid komplett. Vollkatalog reicht, sortiert nach Bestseller Rang.
    - **Option B, zweites Grid zu Showcase Layout konvertieren**. Wandle das zweite ASIN Grid in eine `lg-2stack` Section um mit drei `image` Tiles, jeweils mit `linkAsin` auf einen der Top 3 ASINs. Erstes Tile als Lifestyle Bild, zweites und drittes als freigestellte Produkt Bilder. So bleibt der Bestseller Effekt sichtbar ohne ASIN Grid Modul.
@@ -378,7 +397,7 @@ Bevor du das Briefing JSON ausgibst, gehe das Konzept als Self Check durch und k
 
 2. **Page Level Repetition Check**. Pro Page jede Marken Fakt Phrase (z.B. "Inhabergeführt seit 2005", "Aus Deutschland", "Hersteller besucht") in Hero Subheadings, Brand Story Bodies, USP Tile Headings und Cross Link Bannern aufzählen. Wenn ein Fakt mehr als einmal auftaucht, an allen Stellen außer einer (die kompakteste, meist USP Tile) umformulieren oder streichen.
 
-3. **Headline Bezugsstärke Check**. Pro Hero Headline prüfen: Wenn ich den Markennamen oder Kategorie Namen aus der Headline streiche, ergibt sie noch Sinn? Wenn ja, Headline neu schreiben mit klarem Page Bezug.
+3. **Headline Bezugsstärke Check**. Pro Hero und Shoppable prüfen: konkreter Bezug zu Szene, Anlass oder Nutzen, passende Brand Voice, keine Objektliste, keine unbelegten Versprechen. Lange oder austauschbare Headlines kürzen. Emotionale, kategorienahe Formulierungen sind zulässig ohne zwingend jeden Produktnamen zu wiederholen.
 
 4. **Tile Type Whitelist Check**. Kein Tile darf `text` oder `image_text` als Type haben. Brand Story Tiles sind `image` mit `imageCategory: text_image`.
 
@@ -548,8 +567,8 @@ Das Briefing JSON hat diese Struktur. Das Tool ergänzt fehlende IDs und Default
 | `bgColor` | string | nein | HEX Farbe |
 | `imageCategory` | string | nein | `store_hero`, `benefit`, `product`, `creative`, `lifestyle`, `text_image` |
 | `imageRef` | string | nein | Topic Tag für Bild Reuse (siehe Abschnitt Image Reuse) |
-| `dimensions` | object {w, h} | nein | Override für Tile Pixel Dimensionen Desktop. Wenn nicht gesetzt, nutzt das Tool den Layout Default. Pflicht wenn das Tile von der Default Höhe abweichen soll (z.B. Trenner flach, Shoppable hoch) |
-| `mobileDimensions` | object {w, h} | nein | Override für Mobile Dimensionen. Wenn nicht gesetzt, wird Mobile aus dem Layout Typ und der Desktop Höhe abgeleitet (Standard Layout: Mobile gleich Desktop, VH: 1500x750 fix, Full Width: 1680 breit) |
+| `dimensions` | object {w, h} | bei neuen Bild-Tiles ja | Desktop-Maße explizit nach Tile-Funktion planen; bestehende Overrides respektieren. Alte Imports ohne Maße nutzen weiterhin Layout-Defaults. |
+| `mobileDimensions` | object {w, h} | bei neuen Bild-Tiles ja | Für neu erzeugte image/shoppable_image-Tiles explizit nach Funktion planen; nicht auf Import-Defaults verlassen. Vorhandene, ausdrücklich gewählte mobile Maße bei Patches respektieren. |
 
 ### Tile Types
 
@@ -599,6 +618,8 @@ Der Operator ersetzt sie später im Tool oder per CSV Import.
 
 ## Page Type Konventionen
 
+Die folgenden Flows sind Beispiele, keine vollständigen Pflicht-Checklisten. Wähle und variiere Module anhand Sortiment, Ziel und geprüften Referenzen. Verbindlich bleiben nur ausdrücklich genannte technische Grenzen und bestätigte Navigation; keine Seiten oder Module ohne Zweck ergänzen.
+
 | Page Type | Typischer Module Flow |
 |-----------|----------------------|
 | Homepage | hero, kategorie navigator, brand story, trenner, shoppable, **EINE** bestseller grid (kuratiert max 6 bis 8 ASINs gemischt), trenner, shoppable saisonal, USP leiste. **Nie** mehr als eine Bestseller Section auf der Home. **Keine** Footer Kategorie Nav, die Top Navigation oben zeigt schon alle Kategorien, eine zweite Liste am Page Ende ist redundant. |
@@ -607,7 +628,7 @@ Der Operator ersetzt sie später im Tool oder per CSV Import.
 | Subpage | schmaler hero (eigener Claim, nicht "Sub-Name bei Sub-Name"), bestseller in der sub, vollkatalog der sub, **cross navigation** zu allen anderen Subs der Eltern Kategorie, cross link zurück zur Eltern Page |
 | Sale | hero, navigator filter, deals grids je Kategorie |
 | Über Uns | hero, brand story split, werte block, gallery, service block |
-| Produktberater | hero plus product_selector Quiz Tile mit Intro Bild plus 2 bis 4 Fragen plus Antworten mit ASIN Mapping. **Pflicht Subpage** (siehe Abschnitt Produktberater Subpage). |
+| Produktberater | hero plus product_selector Quiz Tile mit Intro Bild plus 2 bis 4 Fragen plus Antworten mit ASIN Mapping. Optional bei erklärungsbedürftiger Auswahl und ausdrücklicher Freigabe (siehe Abschnitt Produktberater Subpage). |
 
 ### Footer und Page Ende
 
@@ -811,8 +832,8 @@ Tile Dimensionen sind **nicht** auf 3000x600 fixiert. Wähle die Höhe **nach Fu
 | Benefit / Text Image (image + imageCategory benefit oder text_image), einzeilige Headline plus Subheadline | 200 (Min) bis offen | 200 (Min) bis offen |
 | Benefit / Text Image mit mehrzeiligem Body oder mehreren Bullets | 300 bis 600 oder mehr je nach Inhalt | 300 bis 600 oder mehr je nach Inhalt |
 | Trenner / Section Header / Kategorie Überschrift | 300 bis 500 | 300 bis 500 |
-| Hero Banner Page Header | 600 bis 900 | 600 bis 900 |
-| Lifestyle Bild mit Komposition | 1200 bis 1500 | 1200 bis 1500 |
+| Content-Hero innerhalb der Seite (nicht Amazon Header) | 600 bis 900 | 1680 (1:1), bei begründetem Bedarf 2100 (4:5) |
+| Lifestyle Bild mit Komposition | 1200 bis 1500 | 1680 (1:1), bei begründetem Bedarf 2100 (4:5) |
 | Shoppable Image mit 3 bis 5 Produkten | 1500 bis 1800 | 1500 bis 1800 |
 | Bestseller als Composite Image (Bestseller Bild im Tile) | 1200 bis 1500 | 1200 bis 1500 |
 | Video 16:9 | 1688 | 945 |
@@ -838,7 +859,7 @@ Das 200 Pixel Default greift nur, wenn der `textOverlay` Inhalt einzeilig ist:
 
 Sobald der Inhalt komplexer wird (mehrzeilige Headline, mehrzeilige Subheading, längerer `body`, mehrere `bullets`), wähle eine entsprechend größere Höhe je nach Lesbarkeit des Briefings, mindestens 250 bis 400 Pixel oder mehr. Der Tool Validator setzt die Höhe **nicht** automatisch zurück, also entscheidet hier der Inhalt.
 
-**Wie du das im Briefing JSON setzt**: Pro Tile das Feld `dimensions` (Desktop) und optional `mobileDimensions` (Mobile) angeben. Beispiele:
+**Wie du das im Briefing JSON setzt**: Pro Tile das Feld `dimensions` (Desktop) und explizit `mobileDimensions` (Mobile) angeben. Beispiele:
 
 Trenner Tile, flach (Layout 1):
 
@@ -848,7 +869,8 @@ Trenner Tile, flach (Layout 1):
   "textOverlay": { "heading": "Bereit für die **Saison**" },
   "brief": "Divider text image with a fabric macro in the background.",
   "imageCategory": "text_image",
-  "dimensions": { "w": 3000, "h": 350 }
+  "dimensions": { "w": 3000, "h": 350 },
+  "mobileDimensions": { "w": 1680, "h": 350 }
 }
 ```
 
@@ -858,24 +880,28 @@ Shoppable Image, hoch (Layout 1):
 {
   "type": "shoppable_image",
   "textOverlay": { "heading": "Lounge, **fertig** zum Loslegen" },
-  "brief": "Shoppable terrace scene with 3 products.",
+  "brief": "Shoppable terrace scene with 3 products. Recompose seating and copy for the square mobile canvas.",
+  "imageCategory": "lifestyle",
   "asins": ["B0...", "B0...", "B0..."],
-  "dimensions": { "w": 3000, "h": 1500 }
+  "dimensions": { "w": 3000, "h": 1500 },
+  "mobileDimensions": { "w": 1680, "h": 1680 }
 }
 ```
 
-Hero Page Header (Layout 1):
+Content-Hero innerhalb der Page (Layout 1, nicht Amazon Header):
 
 ```json
 {
   "type": "image",
   "textOverlay": { "heading": "Was **dein** Zuhause braucht" },
-  "brief": "Hero image, living room with a transition to a terrace.",
-  "dimensions": { "w": 3000, "h": 800 }
+  "brief": "Hero image, living room with a transition to a terrace. Reposition furniture and copy for the square mobile composition.",
+  "imageCategory": "store_hero",
+  "dimensions": { "w": 3000, "h": 800 },
+  "mobileDimensions": { "w": 1680, "h": 1680 }
 }
 ```
 
-Wenn `dimensions` nicht angegeben ist, fällt das Tool zurück auf den Layout Default (Layout 1: 3000x600). `mobileDimensions` ist optional, wenn nicht angegeben wird Mobile automatisch abgeleitet (Standard Layout: Mobile gleich Desktop, VH: fix 1500x750, Full Width: 1680 breit, Höhe folgt Desktop).
+Wenn `dimensions` nicht angegeben ist, fällt das Tool zurück auf den Layout Default (Layout 1: 3000x600). Bei neu erzeugten Bild-Tiles `mobileDimensions` immer explizit setzen; die Import-Fallbacks sind kein Gestaltungskonzept. Vierer-Square-Reihen bleiben mobil 750x750; Content-Banner werden mobil separat komponiert.
 
 ### Layout Variation pro Page
 
@@ -893,9 +919,9 @@ Empfohlene Mischung pro Hauptkategorie Page:
 
 So entsteht visueller Rhythmus statt monotoner Stack. Die Bestseller können direkt im Lifestyle Layout via linkAsin verlinkt sein, dadurch fällt der separate Bestseller Grid weg.
 
-### Produktberater Subpage (Pflicht)
+### Produktberater Subpage (optional)
 
-**Jeder Brand Store bekommt eine eigene Subpage `Produktberater`** mit einem `product_selector` Tile. Das ist ein interaktives Quiz auf Amazon, das den Kunden über 2 bis 4 Fragen zum passenden Produkt führt. Reduziert Bounce Rate und navigiert weniger entschlossene Käufer aktiv zur richtigen ASIN.
+**Nur bei passendem Sortiment und Zustimmung des Users** bekommt der Brand Store eine eigene Subpage `Produktberater` mit einem `product_selector` Tile. Das ist ein interaktives Quiz auf Amazon, das den Kunden über 2 bis 4 Fragen zum passenden Produkt führt. Reduziert Bounce Rate und navigiert weniger entschlossene Käufer aktiv zur richtigen ASIN.
 
 **Schema des `productSelector` Felds**:
 
@@ -960,7 +986,7 @@ page('Produktberater', [
 
 **Was du im Konzept Schritt fragst**:
 
-Bei der Konzept Phase fragt der Skill den User **ob ein Produktberater Quiz gewünscht ist** (default ja). Wenn ja, erfragt er:
+Bei der Konzept Phase fragt der Skill den User **ob ein Produktberater Quiz bei diesem Sortiment sinnvoll und gewünscht ist** (keine automatische Pflichtseite). Wenn ja, erfragt er:
 
 1. Welche **Hauptkategorie** soll das Quiz abdecken (z.B. Sofas, Wasserflaschen, alle Produkte gemischt)
 2. **Welche Frage Typen** sind sinnvoll (z.B. Personen Anzahl, Einsatzort, Größe, Stil, Budget). Skill schlägt 2 bis 4 sinnvolle Fragen vor basierend auf Kategorie und Produktportfolio.
@@ -968,11 +994,21 @@ Bei der Konzept Phase fragt der Skill den User **ob ein Produktberater Quiz gew�
 
 ### Mobile Image Dimensions
 
-Bei Standard Layouts (std-2equal, lg-2stack, 2x2wide etc.) sind Desktop und Mobile Dimensionen **identisch** (Large Square 1500x1500). Designer braucht nur **ein** Bild.
+Plane Desktop und Mobile vor dem JSON, nicht erst nach dem Import. Für jedes neue Bild-Tile beide Dimensionen explizit setzen. Das sind Gestaltungsdefaults dieses Workflows, keine universellen Amazon-Pflichtmaße.
 
-Bei Layout `1` (Full Width 3000x600 / 1680x900) und VH Layouts sind Aspekte unterschiedlich. Designer braucht zwei Bilder.
+| Funktion | Desktop-Beispiel | Mobile-Konzept |
+|---|---|---|
+| Vier quadratische Icon-/USP-Tiles, `vh-4square` | je 1500×1500 | je 750×750, 2×2-Anordnung; niemals pauschal 1500×750 |
+| Content-Hero/Lifestyle-Banner innerhalb einer Page | z.B. 3000×800 | standardmäßig 1680×1680; bei passendem Inhalt optional 1680×2100 (4:5), nach Layout-/Vorschauprüfung |
+| Flacher Trenner, reine Überschrift | funktionsabhängig | darf flach bleiben; nicht zwangsläufig zum Quadrat aufblasen |
+| Andere Bildgruppen | passendes Desktop-Layout | Funktion und unterstütztes mobiles Layout prüfen; quadratische Motive nicht pauschal zu Landscape machen |
+| Amazon Header oberhalb der Navigation | `heroBannerDesktopDims`, Standard 3000×600 | `heroBannerMobileDims`, Builder-Standard 1680×900; getrennt von Content-Tiles behandeln |
 
-Mindestverhältnisse: Desktop max 15:1 Breite zu Höhe, Mobile max 5:1.
+Mobile-Brief im englischen `brief` separat beschreiben: Reposition text and products for the mobile canvas, maintain readable hierarchy and safe spacing. Nicht nur Desktop beschneiden oder verkleinern. Gleiche Aussage/Markenwelt, eigens komponiertes Motiv, wo nötig separate Dateien. Bei identischem Seitenverhältnis kann ein ausreichend aufgelöstes Motiv wiederverwendet werden, sofern Lesbarkeit und Ausschnitt passen.
+
+Beispiel Content-Tile: `"dimensions":{"w":3000,"h":800},"mobileDimensions":{"w":1680,"h":1680}`. Beispiel je Vierer-Icon-Tile: `"dimensions":{"w":1500,"h":1500},"mobileDimensions":{"w":750,"h":750}`.
+
+Bestehende Uploads/Overrides bei Refactor oder Patch erhalten; notwendige neue mobile Gestaltung ausdrücklich benennen statt alte Dateien still zu strecken. Aktuelle Amazon-Spezifikationen für den verwendeten Tile-Typ prüfen: https://advertising.amazon.com/resources/ad-specs/stores. Kein pauschales Seitenverhältnis für alle Module behaupten.
 
 ### ASIN im Designer Briefing
 
@@ -1308,7 +1344,7 @@ Gib den aktualisierten Store als kompletten JSON zurück. Ich importiere ihn dan
 - **Bilder erhalten**: `uploadedImage`, `uploadedImageMobile`, `wireframeImage`, `videoThumbnail`, `referenceImages` werden niemals geändert. Wenn das Briefing JSON sie als `<image>` Platzhalter enthält (so liefert das Tool den schlanken Export), darf Claude nicht versuchen sie zu füllen. Importer im Tool kennt diese Platzhalter und mergt ggf. mit dem aktuellen In Memory Store.
 - **ASIN Listen erhalten**: `asins`, `linkAsin`, `hotspots[].asin`, `productSelector.questions[].answers[].asins` bleiben unverändert. Der User pflegt diese manuell.
 - **imageRef Stems erhalten, nur WxH Suffix darf neu**: wenn Layout sich ändert und damit die Tile Dimensionen, wird der WxH Teil im imageRef neu berechnet. Stem (Topic) bleibt. Solo Suffix bleibt.
-- **Self Check Pflicht**: alle sieben Self Check Punkte aus Schritt 5 auf jede Page anwenden. Bei Verletzung umbauen.
+- **Self Check Pflicht**: alle Self Check Punkte aus Schritt 5 auf jede Page anwenden. Bei Verletzung umbauen.
 - **Keine Erfindung neuer ASINs**: nur die bestehenden ASIN Listen ggf. neu sortieren (z.B. wenn ein Tile zu best_sellers wird).
 - **Diff Hinweis am Ende**: nach dem JSON Output eine kurze Liste was geändert wurde, damit der User Übersicht hat (z.B. "12 Headlines aktualisiert, 3 ASIN Stacks aufgelöst, 5 image_text Tiles auf image konvertiert, 2 Versand Phrasen entfernt").
 
@@ -1344,3 +1380,4 @@ Halte den finalen Output **kompakt**, alle Konzeptdetails leben im JSON, nicht i
 ## Built by
 
 TEMOA Agentur, in Anlehnung an Nexscope Skill Vorlage.
+
