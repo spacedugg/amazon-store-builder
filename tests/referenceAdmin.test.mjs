@@ -70,3 +70,15 @@ test('screenshot capture uses the working alternate credential after an expired 
  assert.deepEqual(credentials,['Bearer expired-primary','Bearer working-alternate']);assert.equal(result.screenshot.height,6000);assert.equal(result.brandName,'Example');
  }finally{for(const [i,key]of ['BRIGHTDATA_UNLOCKER_TOKEN','BRIGHT_DATA_API_KEY'].entries()){if(previous[i]===undefined)delete process.env[key];else process.env[key]=previous[i];}}
 });
+
+test('ZIP image recognition switches to the configured OpenAI vision key when Gemini rejects billing',async()=>{
+ const {analyzeZipImages}=require('../api/_lib/story-zip-vision.cjs');
+ const previous=[process.env.GEMINI_API_KEY,process.env.CHATGPT_API_KEY];process.env.GEMINI_API_KEY='gemini-test';process.env.CHATGPT_API_KEY='openai-test';const calls=[];
+ try{
+ const result=await analyzeZipImages([{text:'Return JSON'},{inlineData:{mimeType:'image/jpeg',data:'dGVzdA=='}}],new AbortController().signal,async(url,options)=>{
+ calls.push({url,body:JSON.parse(options.body)});
+ return calls.length===1?new Response('{}',{status:402}):Response.json({output:[{content:[{type:'output_text',text:JSON.stringify({brandName:'Brand',cards:[]})}]}]});
+ });
+ assert.equal(result.brandName,'Brand');assert.equal(calls.length,2);assert.equal(calls[1].body.store,false);assert.equal(calls[1].body.input[0].content[1].type,'input_image');
+ }finally{for(const[i,key]of['GEMINI_API_KEY','CHATGPT_API_KEY'].entries()){if(previous[i]===undefined)delete process.env[key];else process.env[key]=previous[i];}}
+});
