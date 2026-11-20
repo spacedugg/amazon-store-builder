@@ -34,15 +34,15 @@ export function appendReferenceChoices(current, choices) {
   return result;
 }
 
-// Only explicitly recorded full-page captures may represent a homepage.
+// Only explicit page captures represent a homepage; truncated captures stay labeled.
 // Logos and archived motif arrays are never treated as page screenshots.
 export function homepageScreenshot(entry) {
   const image = entry?.homepageScreenshot;
-  if (!image || image.fullPage !== true || !(image.width > 0) || !(image.height > 0)
+  if (!image || (image.fullPage !== true && !(image.fullPage===false && image.truncated===true)) || !(image.width > 0) || !(image.height > 0)
       || !image.capturedAt || !Number.isFinite(Date.parse(image.capturedAt))) return null;
   if (typeof image.url !== 'string' || !(/^(https:\/\/|\/store-homepage-screenshots\/)/.test(image.url))) return null;
   const keys = [entry.storeUrl, ...(entry.alternativeUrls || [])].map(referenceKey);
   if (!referenceKey(image.sourceUrl) || !keys.includes(referenceKey(image.sourceUrl))
       || referenceKey(image.sourceUrl).startsWith('product:')) return null;
-  return image;
+  return image.height>=16384 ? {...image,fullPage:false,truncated:true} : image;
 }

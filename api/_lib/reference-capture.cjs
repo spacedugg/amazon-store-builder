@@ -40,7 +40,7 @@ async function captureReference(url, dependencies={}) {
     const bytes=await bounded(response,20*1024*1024), dimensions=pngSize(bytes);
     const digest=createHash('sha256').update(source).digest('hex').slice(0,20);
     const blob=await upload(`store-homepage-screenshots/${digest}-${Date.now()}.png`,bytes,{access:'public',contentType:'image/png'});
-    return {brandName:parsed.brandName, screenshot:{url:blob.url,...dimensions,capturedAt:new Date().toISOString(),sourceUrl:source,fullPage:true}};
+    return {brandName:parsed.brandName, screenshot:{url:blob.url,...dimensions,capturedAt:new Date().toISOString(),sourceUrl:source,fullPage:dimensions.height<16384,...(dimensions.height>=16384?{truncated:true}:{})}};
   } catch(error) { if(error.name==='AbortError')throw Error('Die Aufnahme hat zu lange gedauert. Bitte erneut versuchen.');throw error; }
   finally {clearTimeout(timeout);}
 }

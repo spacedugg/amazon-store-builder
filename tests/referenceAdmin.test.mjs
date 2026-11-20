@@ -42,6 +42,7 @@ test('captures supplement built-in references while preserving archived motifs a
  const screenshot={url:'https://example.com/home.png',width:1440,height:9000,capturedAt:new Date().toISOString(),sourceUrl:url,fullPage:true};
  const rows=mergeReferenceCatalog([old],[{storeUrl:url+'?x=y',captureStatus:'ready',homepageScreenshot:screenshot}]);
  assert.equal(rows.length,1);assert.equal(rows[0].images[0].url,'/archive.jpg');assert.deepEqual(homepageScreenshot(rows[0]),screenshot);
+ assert.equal(homepageScreenshot({...rows[0],homepageScreenshot:{...screenshot,height:16384}}).truncated,true);
 });
 test('capture API rejects unauthorized changes and retains the previous screenshot when a refresh fails',async()=>{
  const {createClient}=await import('@libsql/client');const db=createClient({url:':memory:'});

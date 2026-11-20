@@ -12,7 +12,7 @@ function captureDate(value, en) {
 function HomepagePreview({ entry, en }) {
   const [failed, setFailed] = useState(false);
   const image = homepageScreenshot(entry);
-  if (image && !failed) return <div className="srl-homepage-preview"><img src={image.url} alt={(en ? 'Full homepage: ' : 'Vollständige Homepage: ') + entry.brandName} width={image.width} height={image.height} loading="lazy" onError={() => setFailed(true)} /></div>;
+  if (image && !failed) return <div className="srl-homepage-preview"><img src={image.url} alt={(en ? 'Homepage capture: ' : 'Homepage-Aufnahme: ') + entry.brandName} width={image.width} height={image.height} loading="lazy" onError={() => setFailed(true)} /></div>;
   return <div className="srl-motif srl-missing-homepage"><span className="srl-no-image"><b>{entry.brandName}</b><small>{entry.kind === 'product' ? (en ? 'Product reference' : 'Produktreferenz') : (image && failed ? (en ? 'Screenshot could not be loaded' : 'Screenshot konnte nicht geladen werden') : (en ? 'Homepage screenshot missing' : 'Homepage-Screenshot fehlt'))}</small></span></div>;
 }
 
@@ -20,7 +20,7 @@ function HomepageCapture({ entry, en }) {
   const [failed, setFailed] = useState(false);
   const image = homepageScreenshot(entry);
   if (!image) return null;
-  return <figure className="srl-homepage-figure">{failed ? <p role="alert">{en ? 'The saved homepage screenshot could not be loaded.' : 'Der gespeicherte Homepage-Screenshot konnte nicht geladen werden.'}</p> : <img src={image.url} alt={(en ? 'Full homepage: ' : 'Vollständige Homepage: ') + entry.brandName} width={image.width} height={image.height} onError={() => setFailed(true)} />}<figcaption>{en ? 'Captured on ' : 'Aufgenommen am '}<time dateTime={image.capturedAt}>{captureDate(image.capturedAt, en)}</time> · <a href={image.sourceUrl} target="_blank" rel="noopener noreferrer">{en ? 'Source page' : 'Quellseite'}</a></figcaption></figure>;
+  return <figure className="srl-homepage-figure">{failed ? <p role="alert">{en ? 'The saved homepage screenshot could not be loaded.' : 'Der gespeicherte Homepage-Screenshot konnte nicht geladen werden.'}</p> : <img src={image.url} alt={(en ? 'Homepage capture: ' : 'Homepage-Aufnahme: ') + entry.brandName} width={image.width} height={image.height} onError={() => setFailed(true)} />}<figcaption>{en ? 'Captured on ' : 'Aufgenommen am '}<time dateTime={image.capturedAt}>{captureDate(image.capturedAt, en)}</time>{image.truncated && <strong> · {en?'Image height limit reached; capture may be incomplete':'Bildhöhen-Grenze erreicht; Aufnahme möglicherweise unvollständig'}</strong>} · <a href={image.sourceUrl} target="_blank" rel="noopener noreferrer">{en ? 'Source page' : 'Quellseite'}</a></figcaption></figure>;
 }
 
 export function StoreReferenceLibrary({ onClose, onSelect, selectedUrls = [], lang = 'de' }) {

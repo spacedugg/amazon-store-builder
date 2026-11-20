@@ -10,7 +10,8 @@ module.exports=async(req,res)=>{
     const db=getClient();
     if(!ready)ready=db.execute(`CREATE TABLE IF NOT EXISTS store_reference_captures (id TEXT PRIMARY KEY,store_url TEXT NOT NULL,brand_name TEXT NOT NULL DEFAULT '',screenshot TEXT,capture_status TEXT NOT NULL DEFAULT 'pending',capture_error TEXT NOT NULL DEFAULT '',started_at INTEGER NOT NULL DEFAULT 0,updated_at TEXT DEFAULT CURRENT_TIMESTAMP)`).catch(e=>{ready=null;throw e;});
     await ready;
-    const rowData=row=>({id:row.id,storeUrl:row.store_url,brandName:row.brand_name,homepageScreenshot:row.screenshot?JSON.parse(row.screenshot):null,alternativeUrls:row.screenshot?[JSON.parse(row.screenshot).sourceUrl]:[],captureStatus:row.capture_status,captureError:row.capture_error});
+    const snapshot=row=>{const image=row.screenshot?JSON.parse(row.screenshot):null;return image?.height>=16384?{...image,fullPage:false,truncated:true}:image;};
+    const rowData=row=>({id:row.id,storeUrl:row.store_url,brandName:row.brand_name,homepageScreenshot:snapshot(row),alternativeUrls:row.screenshot?[JSON.parse(row.screenshot).sourceUrl]:[],captureStatus:row.capture_status,captureError:row.capture_error});
     if(req.method==='GET')return res.json({stores:(await db.execute('SELECT * FROM store_reference_captures ORDER BY updated_at DESC')).rows.map(rowData)});
     const body=req.body||{}, t=target(body.url), id=t.marketplace+':'+t.pageId.toUpperCase();
     if(body.brandName!==undefined && (typeof body.brandName!=='string'||body.brandName.length>150))throw Error('Markenname ungültig.');
