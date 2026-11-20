@@ -402,6 +402,16 @@ export async function generateBriefingDocx(store, briefingLang) {
   if (store.category && store.category !== 'generic') children.push(boldPara(t('brief.niche', lang) + ': ', store.category));
   children.push(divider());
 
+  if (store.designReferences?.length) {
+    children.push(heading('Design direction', HeadingLevel.HEADING_1));
+    children.push(boldPara('Visual style: ', 'Imagery, colours, typography and overall feel.'));
+    store.designReferences.forEach(function(reference) {
+      children.push(boldPara('Reference: ', reference.url));
+      if (reference.notes) children.push(boldPara('Design notes: ', reference.notes));
+    });
+    children.push(divider());
+  }
+
   // ─── IMAGE SPECIFICATIONS ───
   children.push(heading(t('brief.imageSpecs', lang), HeadingLevel.HEADING_2));
   children.push(new Paragraph({ spacing: { before: 60, after: 60 },

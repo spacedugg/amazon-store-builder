@@ -1,3 +1,4 @@
+import DesignDirectionDialog from './components/DesignDirection';
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { uid, emptyTile, emptyTileForLayout, LANGS, DOMAINS, validateStore, findLayout, LAYOUT_TILE_DIMS } from './constants';
 import { saveStore, loadSavedStores, loadStore, deleteSavedStore, autoSave, loadAutoSave, importStoreByShareLink, setSessionStore, getSessionStore, brandToSlug, shareBaseUrl } from './storage';
@@ -1423,17 +1424,18 @@ export default function App() {
   // ─── NEW STORE ───
   // Klick auf "New Store" öffnet Modal mit Briefing JSON Import.
   // Modal bietet außerdem die Option, einen leeren Store zu starten.
+  var [showDesignDirection, setShowDesignDirection] = useState(false);
   var handleNewStore = function(references) {
     if (!showOverview && store.pages.length > 0 && !confirm('Neuen Store anlegen? Ungespeicherte Änderungen gehen verloren.')) return;
     setNewStoreReferences(Array.isArray(references) ? references : []);
     setShowNewStoreModal(true);
   };
 
-  var handleCreateEmpty = function() {
+  var handleCreateEmpty = function(direction = {}) {
     storeContextRef.current++;
     replacementGrantRef.current = null;
     var firstPageId = uid();
-    var initialStore = Object.assign({}, EMPTY_STORE, {
+    var initialStore = Object.assign({}, EMPTY_STORE, direction, {
       pages: [{
         id: firstPageId,
         name: 'Home',
@@ -1997,6 +1999,7 @@ export default function App() {
         store={store}
         shareToken={shareToken}
         onExport={handleExport}
+        onEditDesignDirection={() => setShowDesignDirection(true)}
         onSave={handleSave}
         manualSaveProgress={manualSaveProgress}
         onChangeBrandName={function(name) {
@@ -2112,6 +2115,7 @@ export default function App() {
         </div>
       )}
 
+      {showDesignDirection && <DesignDirectionDialog store={store} onClose={() => setShowDesignDirection(false)} onSave={direction => setStoreWithUndo(current => ({ ...current, ...direction }))} />}
       {showNewStoreModal && (
         <NewStoreModal
           initialReferences={newStoreReferences}

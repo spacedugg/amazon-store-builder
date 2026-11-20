@@ -2,7 +2,6 @@ import { useState, useRef } from 'react';
 
 var STORES = [
   { file: 'snocks', brand: 'SNOCKS', url: 'https://www.amazon.de/stores/SNOCKS/page/C0392661-40E4-498F-992D-2FFEB9086ABB', category: 'fashion', quality: 5 },
-  { file: 'the-north-face', brand: 'The North Face', url: 'https://www.amazon.de/stores/THENORTHFACE/page/91172724-C342-482B-A300-564D9EA5E09F', category: 'outdoor', quality: 5 },
   { file: 'esn', brand: 'ESN', url: 'https://www.amazon.de/stores/ESN/page/F5F8CAD5-7990-44CF-9F5B-61DFFF5E8581', category: 'supplements', quality: 5 },
   { file: 'ag1', brand: 'AG1', url: 'https://www.amazon.de/stores/AG1/page/E676C84A-8A86-4F92-B978-3343F367DD0C', category: 'supplements', quality: 5 },
   { file: 'nespresso', brand: 'Nespresso', url: 'https://www.amazon.de/stores/page/2429E3F3-8BFA-466A-9185-35FB47867B06', category: 'food', quality: 5 },

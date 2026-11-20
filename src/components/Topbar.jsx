@@ -93,7 +93,7 @@ function formatCustomerProgress(p) {
   return 'Speichere...';
 }
 
-export default function Topbar({ store, shareToken, onExport, onSave, manualSaveProgress, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onLoadProducts, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress, folderUploadProgress, onChangeBrandName, onShowFeedback, feedbackNew, onShowStores, returningToOverview }) {
+export default function Topbar({ onEditDesignDirection, store, shareToken, onExport, onSave, manualSaveProgress, viewMode, onToggleView, onNewStore, onPatchImport, onUndo, canUndo, onRedo, canRedo, onLoadProducts, onFolderImageUpload, onRemoveAllImages, folderInputRef, autoSaveStatus, hasShareToken, onCopyCustomerLink, customerSaveProgress, folderUploadProgress, onChangeBrandName, onShowFeedback, feedbackNew, onShowStores, returningToOverview }) {
   var folderProgressLabel = '';
   if (folderUploadProgress) {
     folderProgressLabel = 'Bilder ' + (folderUploadProgress.uploaded || 0) + ' / ' + folderUploadProgress.total;
@@ -101,6 +101,7 @@ export default function Topbar({ store, shareToken, onExport, onSave, manualSave
   }
   return (
     <div className="topbar">
+      <button className="btn btn-primary" onClick={onEditDesignDirection}>Designrichtung {store.designReferences?.length ? `(${store.designReferences.length})` : store.designDirectionReviewed ? "· ohne Referenz" : "· prüfen"}</button>
       <StoreReferenceLibraryButton />
       {onShowStores && <button className="btn topbar-back" onClick={onShowStores} disabled={returningToOverview} title="Zur Übersicht aller Stores zurück">← {returningToOverview ? "Speichert…" : "Alle Stores"}</button>}
       <div className="topbar-brand">

@@ -30,6 +30,8 @@ function pickStringRefs(store) {
     });
   }
 
+  (store.designReferences || []).forEach(function(row) { fieldRef(row, 'notes'); });
+
   // Store level designer context
   fieldRef(store, 'brandStory');
   fieldRef(store, 'brandTone');

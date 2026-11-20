@@ -1,3 +1,4 @@
+import { normaliseDesignReferences } from './designDirection.mjs';
 import { uid, emptyTile, emptyTileForLayout, emptyTextOverlay, deriveMobileDims } from './constants';
 
 // Hilfsfunktion: Tile aus Briefing Dict normalisieren (Default Felder ergänzen,
@@ -114,6 +115,8 @@ export function importBriefingToStore(briefing) {
   }
 
   return {
+    designReferences: normaliseDesignReferences(data.designReferences),
+    designDirectionReviewed: data.designDirectionReviewed === true,
     brandName: data.brandName || '',
     marketplace: data.marketplace || 'de',
     category: data.category || 'generic',

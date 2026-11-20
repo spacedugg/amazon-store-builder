@@ -8,14 +8,6 @@
     "source": "existing"
   },
   {
-    "id": "the-north-face",
-    "brandName": "The North Face",
-    "storeUrl": "https://www.amazon.de/stores/THENORTHFACE/page/91172724-C342-482B-A300-564D9EA5E09F",
-    "category": "outdoor",
-    "kind": "store",
-    "source": "existing"
-  },
-  {
     "id": "esn",
     "brandName": "ESN",
     "storeUrl": "https://www.amazon.de/stores/ESN/page/F5F8CAD5-7990-44CF-9F5B-61DFFF5E8581",

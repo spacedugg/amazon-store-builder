@@ -1,6 +1,6 @@
-import StoreReferenceLibraryButton from './StoreReferenceLibrary';
-import { appendReferenceChoices } from '../storeReferences.mjs';
-import { buildStorefrontConceptPrompt, validateStorefrontReferences } from '../storefrontConceptPrompt';
+import { DesignDirectionFields } from './DesignDirection';
+import { designDirectionData, designReferenceError } from '../designDirection.mjs';
+import { buildStorefrontConceptPrompt } from '../storefrontConceptPrompt';
 import { useState, useRef } from 'react';
 import { STOREFRONT_ASIN_PROMPT } from '../storefrontAsinPrompt';
 
@@ -11,18 +11,16 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty, initia
   var [copied, setCopied] = useState(false);
   var [references, setReferences] = useState(() => initialReferences.length ? initialReferences.map(r => ({ url: r.url, notes: r.notes || '' })) : [{ url: '', notes: '' }]);
   var [copyError, setCopyError] = useState('');
-  var referenceError = validateStorefrontReferences(references);
-  var conceptPrompt = referenceError ? '' : buildStorefrontConceptPrompt(references);
+  var [choice, setChoice] = useState(initialReferences.length ? true : null);
+  var referenceError = choice === true ? designReferenceError(references) : '';
+  var directionReady = choice !== null && !referenceError && (choice === false || references.some(row => row.url.trim()));
+  var conceptPrompt = referenceError ? '' : buildStorefrontConceptPrompt([]);
 
-  function updateReference(index, field, value) {
-    setReferences(function(rows) { return rows.map(function(row, i) { return i === index ? { ...row, [field]: value } : row; }); });
-    setCopied(false);
-    setCopyError('');
-  }
   var fileRef = useRef(null);
 
   function handleCopyPrompt(content, kind) {
     setCopyError('');
+    if (kind === 'concept' && !directionReady) { setCopyError('Bitte zuerst die Designrichtung festlegen.'); return; }
     if (kind === 'concept' && referenceError) { setCopyError(referenceError); return; }
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(content).then(function() {
@@ -32,7 +30,7 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty, initia
   }
 
   var handleImport = async function() {
-    if (importing) return;
+    if (importing || !directionReady) return;
     if (!text.trim()) {
       setError('Bitte Briefing JSON einfügen oder Datei wählen.');
       return;
@@ -40,7 +38,7 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty, initia
     try {
       var data = JSON.parse(text);
       setImporting(true);
-      await onImport(data);
+      await onImport({ ...data, ...designDirectionData(references, choice) });
     } catch (e) {
       setError('Import fehlgeschlagen, ' + e.message);
     } finally {
@@ -70,6 +68,8 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty, initia
           <button onClick={onClose} style={{ background: 'none', border: 'none', fontSize: 20, color: '#64748b', cursor: 'pointer', lineHeight: 1, padding: 0 }}>&times;</button>
         </div>
 
+        <DesignDirectionFields references={references} setReferences={setReferences} choice={choice} setChoice={setChoice} />
+
         <section className="asin-workflow-step">
           <h3>Schritt 1: ASIN-Liste aus dem Amazon-Schaufenster holen</h3>
           <p>Falls noch keine ASIN-Liste vorliegt: Verkäufer-Schaufenster auf Amazon öffnen, dessen URL im Prompt einsetzen und den Prompt in einem Chat mit Browserzugriff ausführen. Die CSV anschließend im Konzept-Chat mitgeben. Mit vorhandener Liste kannst du direkt zu Schritt 2 gehen.</p>
@@ -82,32 +82,15 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty, initia
         <div style={{ background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 6, padding: 12, marginBottom: 14 }}>
           <div style={{ fontWeight: 700, marginBottom: 6, color: '#0369a1', fontSize: 13 }}>Schritt 2: Konzept in Claude erstellen</div>
           <div style={{ fontSize: 12, lineHeight: 1.5, color: '#334155', marginBottom: 8 }}>
-            Öffne einen neuen Claude-Chat mit dem installierten Skill <code>amazon-storefront-design</code>. Kopiere den Auftrag und gib deine ASIN-Liste dazu. Der Skill enthält die kuratierte Wissensbasis und kann zusätzliche Referenz-Stores berücksichtigen.
+            Öffne einen neuen Claude-Chat mit dem installierten Skill <code>amazon-storefront-design</code>. Kopiere den Auftrag und gib deine ASIN-Liste dazu. Der Skill enthält die kuratierte Wissensbasis. Die Designrichtung wird separat für den Designer gespeichert.
             {' '}<a href="/brand-store-claude/amazon-storefront-design.zip" download>Aktualisierten Skill herunterladen</a>
           </div>
-          <fieldset style={{ border: '1px solid #cbd5e1', borderRadius: 6, padding: 12, margin: '12px 0' }}>
-            <legend style={{ fontWeight: 700, fontSize: 13 }}>Referenz-Stores (optional)</legend>
-            <div style={{ marginBottom: 12 }}><StoreReferenceLibraryButton label="Aus Beispielen auswählen" selectedUrls={references.map(r => r.url)} onSelect={choices => { setReferences(rows => appendReferenceChoices(rows, choices)); setCopied(false); setCopyError(''); }} /></div>
-            {references.map(function(reference, index) { return (
-              <div key={index} style={{ display: 'grid', gap: 6, marginBottom: 12 }}>
-                <label style={{ fontSize: 12 }}>Amazon-Store-Link {index + 1}
-                  <input className="input" type="url" value={reference.url} placeholder="https://www.amazon.de/stores/…" onChange={function(e) { updateReference(index, 'url', e.target.value); }} style={{ width: '100%', boxSizing: 'border-box' }} />
-                </label>
-                <label style={{ fontSize: 12 }}>Was gefällt dir an Referenz {index + 1}? (optional)
-                  <textarea className="input" rows={2} value={reference.notes} placeholder="Zum Beispiel: Aufbau der Startseite, Wechsel von Lifestyle und Produkten oder Gestaltung einer Unterseite" onChange={function(e) { updateReference(index, 'notes', e.target.value); }} style={{ width: '100%', boxSizing: 'border-box', resize: 'vertical', minHeight: 64, height: 64 }} />
-                </label>
-                {references.length > 1 && <button className="btn" type="button" aria-label={'Referenz ' + (index + 1) + ' entfernen'} onClick={function() { setReferences(function(rows) { return rows.filter(function(_, i) { return i !== index; }); }); setCopied(false); setCopyError(''); }} style={{ justifySelf: 'start', fontSize: 12 }}>Entfernen</button>}
-              </div>
-            ); })}
-            <button className="btn" type="button" onClick={function() { setReferences(function(rows) { return [...rows, { url: '', notes: '' }]; }); setCopied(false); }}>Referenz hinzufügen</button>
-            <p style={{ fontSize: 12, marginBottom: 0 }}>Links und Hinweise werden mitkopiert. Claude prüft erreichbare Seiten; bei gesperrten Seiten sind Screenshots oder ein Export nötig.</p>
-            {referenceError && <div role="alert" style={{ color: '#b91c1c', fontSize: 12, marginTop: 6 }}>{referenceError}</div>}
-          </fieldset>
+
           <div style={{ background: '#fff', border: '1px solid #cbd5e1', borderRadius: 4, padding: 10, fontSize: 11, fontFamily: 'monospace', lineHeight: 1.4, color: '#334155', whiteSpace: 'pre-wrap', maxHeight: 180, overflow: 'auto', marginBottom: 8 }}>
             {conceptPrompt || 'Bitte die Referenz-Links prüfen, um den vollständigen Auftrag anzuzeigen.'}
           </div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
-            <button className="btn btn-primary" onClick={function() { handleCopyPrompt(conceptPrompt, 'concept'); }} disabled={!!referenceError} style={{ fontSize: 12, padding: '6px 14px' }}>
+            <button className="btn btn-primary" onClick={function() { handleCopyPrompt(conceptPrompt, 'concept'); }} disabled={!directionReady} style={{ fontSize: 12, padding: '6px 14px' }}>
               Prompt kopieren
             </button>
             {copyError && <span role="alert" style={{ color: '#b91c1c', fontSize: 12 }}>{copyError}</span>}
@@ -139,9 +122,9 @@ export default function NewStoreModal({ onClose, onImport, onCreateEmpty, initia
         <div style={{ marginTop: 14, display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
           <input ref={fileRef} type="file" accept=".json,application/json" onChange={handleFile} style={{ display: 'none' }} />
           <button className="btn" onClick={function() { fileRef.current && fileRef.current.click(); }}>JSON Datei wählen</button>
-          <button className="btn btn-primary" onClick={handleImport} disabled={!text.trim() || importing}>{importing ? 'Store prüfen …' : 'Importieren'}</button>
+          <button className="btn btn-primary" onClick={handleImport} disabled={!text.trim() || importing || !directionReady}>{importing ? 'Store prüfen …' : 'Importieren'}</button>
           <div style={{ flex: 1 }} />
-          <button className="btn" onClick={onCreateEmpty} disabled={importing} style={{ fontSize: 11, color: '#64748b' }}>Stattdessen leeren Store starten</button>
+          <button className="btn" onClick={() => onCreateEmpty(designDirectionData(references, choice))} disabled={importing || !directionReady} style={{ fontSize: 11, color: '#64748b' }}>Stattdessen leeren Store starten</button>
         </div>
       </div>
     </div>

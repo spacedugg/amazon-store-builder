@@ -12,7 +12,7 @@ export function referenceKey(url) {
 export function mergeReferenceCatalog(catalog, additions = []) {
   const rows = new Map();
   for (const row of [...catalog, ...additions]) {
-    if (!row || !referenceKey(row.storeUrl)) continue;
+    if (!row || !referenceKey(row.storeUrl) || referenceKey(row.storeUrl).endsWith(':91172724-C342-482B-A300-564D9EA5E09F')) continue;
     const key = referenceKey(row.storeUrl);
     if (rows.has(key) && row.captureStatus) { const current=rows.get(key); rows.set(key, { ...current, brandName: row.brandName || current.brandName, alternativeUrls: [...new Set([...(current.alternativeUrls || []),...(row.alternativeUrls || [])])], homepageScreenshot: row.homepageScreenshot || current.homepageScreenshot, captureStatus: row.captureStatus, captureError: row.captureError }); }
     if (!rows.has(key)) rows.set(key, { ...row, id: key, kind: key.startsWith('product:') ? 'product' : 'store', images: row.images || [], modules: row.modules || [] });
