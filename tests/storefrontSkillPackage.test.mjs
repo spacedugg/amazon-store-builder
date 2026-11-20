@@ -14,11 +14,17 @@ with zipfile.ZipFile(root/'public/brand-store-claude/amazon-storefront-design.zi
  assert z.read(prefix+'SKILL.md') == (root/'.claude/skills/amazon-storefront-design/SKILL.md').read_bytes()
  for name in ['CLAUDE.md','docs/BLUEPRINT_EXTRACTION_PROMPT_V4.md']:
   assert z.read(prefix+name) == (root/name).read_bytes()
- files=[p for p in (root/'data/store-knowledge').rglob('*') if p.is_file()]
+ knowledge=root/'data/store-knowledge'
+ files=[knowledge/name for name in ['_voice_marker_vocabulary.md','_hero_archetype_vocabulary.md','_page_architecture_pattern_vocabulary.md']]
+ files+=sorted((knowledge/'rerun-v4').glob('*_analysis.json'))
+ files+=sorted((knowledge/'rerun-v4/blueprints').glob('*.json'))
+ assert 0<len(z.namelist())<=200
+ assert not any('/raw-dom/' in name or '/page-lists/' in name for name in z.namelist())
  for p in files:
   assert z.read(prefix+p.relative_to(root).as_posix()) == p.read_bytes()
  print(json.dumps({'files':len(files),'entries':len(z.namelist())}))
 `, fileURLToPath(new URL('../', import.meta.url))], { encoding: 'utf8' }));
   assert.ok(result.files > 0);
+  assert.ok(result.entries <= 200, 'Claude rejects more than 200 files');
   assert.equal(result.entries, result.files + 3);
 });
