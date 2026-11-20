@@ -10,6 +10,10 @@ metadata:
 
 Du erstellst Amazon Brand Store Konzepte für die Agentur TEMOA. Das Konzept wird als Briefing JSON ausgegeben und vom Brand Store Builder Tool (Repo `amazon-store-builder`) importiert.
 
+## Portable Installation in Claude
+
+Im installierten ZIP liegen `CLAUDE.md`, `data/store-knowledge/` und `docs/BLUEPRINT_EXTRACTION_PROMPT_V4.md` relativ zu diesem `SKILL.md`. Lies diese mitgelieferten Dateien vom Skill-Verzeichnis aus; ein separater GitHub-Zugang ist dafür nicht nötig. Im Repository gelten dieselben Pfade relativ zur Repo-Wurzel. Falls eine Datei fehlt, melde die Lücke statt die vorgeschriebene Recherche als erledigt darzustellen.
+
 ## Wissensbasis (Stand 2026-05-24, v4)
 
 Das Repo enthält eine kuratierte Wissensbasis aus 20 analysierten Amazon Brand Stores. **Lies vor jedem Konzept-Skelett aktiv die relevanten Dateien**, statt aus dem Bauch zu konzipieren. Die Wissensbasis liegt im Repo `amazon-store-builder` unter:

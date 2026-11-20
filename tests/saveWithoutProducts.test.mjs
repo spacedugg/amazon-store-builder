@@ -14,6 +14,7 @@ const ASIN = 'B0DGGYBSLR';
 const stubStorage = `
 export async function saveStore(...args){globalThis.__saveTest.saves.push(args);if(globalThis.__saveTest.saveGate)await globalThis.__saveTest.saveGate;if(globalThis.__saveTest.error)throw Error(globalThis.__saveTest.error);return {id:'jowo',shareToken:'existing-link'};}
 export async function loadSavedStores(){return [];}
+export async function deleteSavedStore(){throw Error("Unexpected delete in save/import test");}
 export async function loadStore(){return {data:globalThis.__saveTest.fixture,shareToken:'existing-link'};}
 export function getSessionStore(){return {storeId:'jowo',shareToken:'existing-link'};}
 export function autoSave(store){globalThis.__saveTest.backups.push(store);}

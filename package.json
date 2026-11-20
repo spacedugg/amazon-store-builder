@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "test": "node scripts/build-brand-story-skill.mjs && node --test tests/*.test.mjs",
+    "test": "node scripts/build-brand-story-skill.mjs && node scripts/build-storefront-skill.mjs && node --test tests/*.test.mjs",
     "dev": "vite",
-    "build": "node scripts/build-brand-story-skill.mjs && vite build",
+    "build": "node scripts/build-brand-story-skill.mjs && node scripts/build-storefront-skill.mjs && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
