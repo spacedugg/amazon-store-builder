@@ -1,0 +1,1072 @@
+{
+  "schemaVersion": 1,
+  "reviewDate": "2026-11-21",
+  "scope": "Macro-style observations from all 24 active reference homepage captures; separate current navigation inventory. This is not a new full visual subpage or mobile audit.",
+  "transferPolicy": "New brand CI, own assortment and approved scope govern. Observations describe sources; principles and applications are editorial adaptations. Do not copy source colours, fonts, icons, images, claims, ASINs or product counts. No unseen subpage structure or interaction is inferred.",
+  "stores": [
+    {
+      "id": "snocks",
+      "brandName": "SNOCKS",
+      "sourceUrl": "https://www.amazon.de/stores/SNOCKS/page/C0392661-40E4-498F-992D-2FFEB9086ABB",
+      "capturedAt": "2026-11-21T02:12:34.344Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/496ddd2e06c1db28cbd1-1795227153106.png",
+        "width": 1440,
+        "height": 3804,
+        "imagesComplete": true
+      },
+      "macroStyle": "minimal, photographic, concise",
+      "observations": [
+        "Wide lifestyle lead with large short copy followed by a paired category row, a compact product-image row, another lifestyle lead and a large category pair.",
+        "Warm neutral photography and generous plain areas carry the products; small secondary labels replace explanatory paragraphs."
+      ],
+      "observedHomeSequence": "lifestyle lead → paired categories → compact product row → lifestyle lead → large category pair",
+      "transferablePrinciples": [
+        "Alternate a small number of immersive category images with compact product/category groups.",
+        "Use a clear large heading and restrained supporting copy; carry the new brand CI rather than these exact warm settings."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 12,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": null
+      }
+    },
+    {
+      "id": "esn",
+      "brandName": "ESN",
+      "sourceUrl": "https://www.amazon.de/stores/ESN/page/F5F8CAD5-7990-44CF-9F5B-61DFFF5E8581",
+      "capturedAt": "2026-11-21T02:12:27.764Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/938b99570c33c25d68e2-1795227147132.png",
+        "width": 1440,
+        "height": 4833,
+        "imagesComplete": true
+      },
+      "macroStyle": "bold, high contrast, compact navigation",
+      "observations": [
+        "Dark product-and-athlete imagery uses large condensed category labels and small light CTA shapes.",
+        "A two-column category grid follows larger promotional/athlete scenes; a product-lineup image and split selector teaser close the page."
+      ],
+      "observedHomeSequence": "promotion → product/lifestyle scene → news split → category grid → product lineup → selector teaser",
+      "transferablePrinciples": [
+        "Make product silhouettes and category names the dominant hierarchy, with very short secondary copy.",
+        "Create contrast through scale and value using the target CI; do not copy black, athlete photography or the condensed font automatically."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 22,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": {
+          "path": "data/store-knowledge/rerun-v4/esn_analysis.json",
+          "analyzedAt": "2026-05-23",
+          "pageCount": 10,
+          "status": "historical_only_not_revalidated"
+        }
+      }
+    },
+    {
+      "id": "ag1",
+      "brandName": "AG1",
+      "sourceUrl": "https://www.amazon.de/stores/page/E676C84A-8A86-4F92-B978-3343F367DD0C",
+      "capturedAt": "2026-11-21T13:33:02.640Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/3c9c938cf14b1609f9ec-1795267979470.png",
+        "width": 1440,
+        "height": 7838,
+        "imagesComplete": true
+      },
+      "macroStyle": "editorial, spacious, explanatory",
+      "observations": [
+        "Large product/lifestyle splits and a landscape video poster are followed by visible product cards and further product/explanation splits.",
+        "Small lifestyle benefit tiles, outlined symbols, ingredient collage and evidence-oriented panels introduce several levels of explanation."
+      ],
+      "observedHomeSequence": "product/lifestyle split → video poster → product cards → benefit scenes → product/benefit split → ingredient/evidence panels",
+      "transferablePrinciples": [
+        "Pair a large product or application visual with a concise explanation, then change visual scale for benefit or ingredient details.",
+        "Use spacious evidence blocks only when the new brand has verified substantiation; preserve its own typography and colours."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 4,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": null
+      }
+    },
+    {
+      "id": "nespresso",
+      "brandName": "Nespresso",
+      "sourceUrl": "https://www.amazon.de/stores/page/2429E3F3-8BFA-466A-9185-35FB47867B06",
+      "capturedAt": "2026-11-21T02:21:51.293Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/16127c015d34c4c0d624-1795227709608.png",
+        "width": 1440,
+        "height": 9149,
+        "imagesComplete": true
+      },
+      "macroStyle": "polished, colourful product staging, modular families",
+      "observations": [
+        "Pastel/gradient studio-style product scenes alternate with white product-card rows.",
+        "Each product family has a heading and a large staged image beside smaller coffee/machine information tiles; service and accessory promotions follow."
+      ],
+      "observedHomeSequence": "promotion pair → large studio scene → family feature group → product cards → next family group → accessories/services",
+      "transferablePrinciples": [
+        "Establish a repeatable visual family: large use/product scene plus compact detail choices, separated by breathing room.",
+        "Use controlled staging and concise secondary text; family count and native listings follow the new assortment, not this source."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 42,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": {
+          "path": "data/store-knowledge/rerun-v4/nespresso_analysis.json",
+          "analyzedAt": "2026-05-23",
+          "pageCount": 10,
+          "status": "historical_only_not_revalidated"
+        }
+      }
+    },
+    {
+      "id": "kaercher",
+      "brandName": "Kärcher",
+      "sourceUrl": "https://www.amazon.de/stores/page/EFE3653A-1163-432C-A85B-0486A31C0E3D",
+      "capturedAt": "2026-11-21T02:23:17.983Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/c8ccebe6769bb2845bed-1795227795992.png",
+        "width": 1440,
+        "height": 9928,
+        "imagesComplete": true
+      },
+      "macroStyle": "promotional, dense, application led",
+      "observations": [
+        "Several promotion and product-launch banners mix application photographs, large headings, badges and product cutouts.",
+        "A compact application-category matrix, further feature campaigns and a long visible product-card area create a dense page."
+      ],
+      "observedHomeSequence": "promotions → application feature banners → compact category matrix → feature campaigns → product-card area",
+      "transferablePrinciples": [
+        "Use application navigation to orient a broad assortment, and separate promotions from durable product discovery.",
+        "Adopt density only if the brief calls for it; do not copy seasonal offers, yellow panels, badges or unsupported product claims."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 50,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": {
+          "path": "data/store-knowledge/rerun-v4/kaercher_analysis.json",
+          "analyzedAt": "2026-05-23",
+          "pageCount": 10,
+          "status": "historical_only_not_revalidated"
+        }
+      }
+    },
+    {
+      "id": "blackroll",
+      "brandName": "BLACKROLL",
+      "sourceUrl": "https://www.amazon.de/stores/page/03098AB4-BDD5-4A23-A7DD-5C10153C5D58",
+      "capturedAt": "2026-11-21T02:21:28.765Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/516d08ea14c426e97d2e-1795227687357.png",
+        "width": 1440,
+        "height": 8918,
+        "imagesComplete": true
+      },
+      "macroStyle": "performance editorial, image/text alternation",
+      "observations": [
+        "A large lifestyle promotion and a substantial product-card block precede alternating image-and-dark-text pairs.",
+        "Large category photographs, an app panel, a lifestyle/outlined-icon split and a logo strip close the page."
+      ],
+      "observedHomeSequence": "lifestyle lead → product cards → image/text pairs → large category tiles → app/benefit panels → trust strip",
+      "transferablePrinciples": [
+        "Alternate a strong application photograph with a focused benefit panel, switching left/right emphasis where useful.",
+        "Use a separate icon/benefit area when it adds clarity; preserve new-brand CI and verified trust evidence."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 8,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": {
+          "path": "data/store-knowledge/rerun-v4/blackroll_analysis.json",
+          "analyzedAt": "2026-05-23",
+          "pageCount": 8,
+          "status": "historical_only_not_revalidated"
+        }
+      }
+    },
+    {
+      "id": "more-nutrition",
+      "brandName": "MORE Nutrition",
+      "sourceUrl": "https://www.amazon.de/stores/page/7AD425C6-C3C5-402D-A69D-D6201F98F888",
+      "capturedAt": "2026-11-21T13:34:10.673Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/ae0864ac2f9a9a122fad-1795268049579.png",
+        "width": 1440,
+        "height": 4067,
+        "imagesComplete": true
+      },
+      "macroStyle": "playful, bold, colourful, short labels",
+      "observations": [
+        "A prominent single-product area and promotional banner lead into bright two-column category tiles with large short headings and food/product compositions.",
+        "A small product row and a spacious image-led closing banner contrast with the compact category area."
+      ],
+      "observedHomeSequence": "featured product → promotion → colourful category pairs → product row → spacious closing banner",
+      "transferablePrinciples": [
+        "Let category labels, product packaging and contextual ingredients create a fast visual route without long paragraphs.",
+        "Use the target brand palette and category logic; colourful category differentiation is optional and not a licence to copy flavours or claims."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 17,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": {
+          "path": "data/store-knowledge/rerun-v4/more-nutrition_analysis.json",
+          "analyzedAt": "2026-05-23",
+          "pageCount": 10,
+          "status": "historical_only_not_revalidated"
+        }
+      }
+    },
+    {
+      "id": "hansegruen",
+      "brandName": "Hansegrün",
+      "sourceUrl": "https://www.amazon.de/stores/page/BC9A9642-4612-460E-81B4-985E9AF6A7D2",
+      "capturedAt": "2026-11-21T02:14:40.281Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/659b1ad8125b3d1f714b-1795227278743.png",
+        "width": 1440,
+        "height": 5650,
+        "imagesComplete": true
+      },
+      "macroStyle": "approachable, calm, product-and-use guidance",
+      "observations": [
+        "Muted product compositions with ingredients alternate with a product-plus-short-benefit split and asymmetric category groups.",
+        "A selector teaser, lifestyle news panel, numbered preparation sequence and founder photo/text area add guidance and explanation."
+      ],
+      "observedHomeSequence": "product lineup → short benefit → need-led categories → selector teaser → lifestyle/news → numbered use steps → founders",
+      "transferablePrinciples": [
+        "Organise by user need, then add a short use sequence only where the product benefits from instruction.",
+        "Balance product still lifes with human scenes and concise explanation; do not invent founder stories, ingredient claims or a quiz."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 20,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": {
+          "path": "data/store-knowledge/rerun-v4/hansegruen_analysis.json",
+          "analyzedAt": "2026-05-23",
+          "pageCount": 10,
+          "status": "historical_only_not_revalidated"
+        }
+      }
+    },
+    {
+      "id": "holy-energy",
+      "brandName": "HOLY Energy",
+      "sourceUrl": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F0843B226E4",
+      "capturedAt": "2026-11-21T02:13:40.453Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/5dc4bbd91b18777e528a-1795227219081.png",
+        "width": 1440,
+        "height": 4634,
+        "imagesComplete": true
+      },
+      "macroStyle": "playful, loud, graphic, community led",
+      "observations": [
+        "Saturated blocks, very large short display copy and graphic product packs define the header, starter banner and four-category row.",
+        "Visible product cards, a large product/video poster, founder photograph, a bestseller row and a separate illustrated benefit strip add distinct roles."
+      ],
+      "observedHomeSequence": "starter banner → compact categories → product cards → large product/video scene → founders → bestseller row → icon strip",
+      "transferablePrinciples": [
+        "Communicate one short message per graphic block, alternating category choices, product display and human/community content.",
+        "Use expressive type scale and graphic energy in the new CI; do not copy mascots, founder imagery or source promises."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 12,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": {
+          "path": "data/store-knowledge/rerun-v4/holy-energy_analysis.json",
+          "analyzedAt": "2026-05-23",
+          "pageCount": 10,
+          "status": "historical_only_not_revalidated"
+        }
+      }
+    },
+    {
+      "id": "manscaped",
+      "brandName": "Manscaped",
+      "sourceUrl": "https://www.amazon.de/stores/page/44908195-3880-47D6-9EC0-D2A1543EB718",
+      "capturedAt": "2026-11-21T02:22:23.219Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/0efde20d70d811f574c0-1795227741855.png",
+        "width": 1440,
+        "height": 13213,
+        "imagesComplete": true
+      },
+      "macroStyle": "technical premium, rendering-like closeups, dense product families",
+      "observations": [
+        "Large polished product closeups on dark, gold and coloured grounds mix with smaller product families and short product labels.",
+        "Category headings separate grooming families; oversized product/type compositions, detailed product groups and a kit scene precede native-looking product cards."
+      ],
+      "observedHomeSequence": "campaign lead → category choices → family hero/detail groups → accessories → kit scene → product cards",
+      "transferablePrinciples": [
+        "Give key products a large, carefully lit closeup; use smaller consistent portraits for alternatives within each family.",
+        "Brief material, depth and type scale without assuming the source was CGI; only commission renders from verified product assets."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 7,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": {
+          "path": "data/store-knowledge/rerun-v4/manscaped_analysis.json",
+          "analyzedAt": "2026-05-13",
+          "pageCount": 6,
+          "status": "historical_only_not_revalidated"
+        }
+      }
+    },
+    {
+      "id": "desktronic",
+      "brandName": "Desktronic",
+      "sourceUrl": "https://www.amazon.de/stores/Desktronic/page/1A862649-6CEA-4E30-855F-0C27A1F99A6C",
+      "capturedAt": "2026-11-21T02:17:19.892Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/4b0623c20ae1c7c1613c-1795227438827.png",
+        "width": 1440,
+        "height": 6955,
+        "imagesComplete": true
+      },
+      "macroStyle": "professional, restrained, warm lifestyle versus clean product detail",
+      "observations": [
+        "After a seasonal banner and product cards, paired warm office photographs carry small product labels and short copy.",
+        "A wide lifestyle/video poster is followed by pale product/accessory splits, clean frame images, a material-detail scene and a compact trust area."
+      ],
+      "observedHomeSequence": "product cards → lifestyle pairs → wide video poster → clean accessory splits → product frames → material scene → trust area",
+      "transferablePrinciples": [
+        "Contrast immersive warm use-scenes with precise clean product/detail panels to move from aspiration to comparison.",
+        "Keep secondary copy small and sparse but readable on mobile; use the new brand atmosphere and verified product/quality evidence."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 7,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": {
+          "path": "data/store-knowledge/rerun-v4/desktronic_analysis.json",
+          "analyzedAt": "2026-05-13",
+          "pageCount": 7,
+          "status": "historical_only_not_revalidated"
+        }
+      }
+    },
+    {
+      "id": "cloudpillo",
+      "brandName": "Cloudpillo",
+      "sourceUrl": "https://www.amazon.de/stores/Cloudpillo/page/741141B6-87D5-44F9-BE63-71B55CD51198",
+      "capturedAt": "2026-11-21T02:19:06.988Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/28e921d428cf120467f4-1795227545741.png",
+        "width": 1440,
+        "height": 4180,
+        "imagesComplete": true
+      },
+      "macroStyle": "friendly, spacious, graphic product staging",
+      "observations": [
+        "A bright lifestyle header and a large category image beside four smaller product portraits establish an asymmetric composition.",
+        "Award photo/text, a mirrored small-product/large-feature group, a mission collage and team/video poster create a compact narrative."
+      ],
+      "observedHomeSequence": "lifestyle lead → large category plus product quad → trust split → mirrored feature group → mission → team/video poster",
+      "transferablePrinciples": [
+        "Use one large category or hero image to anchor a compact group of product alternatives, then mirror emphasis for the next role.",
+        "Separate selection, substantiated trust and story; do not copy cloud shapes, colours, typography or awards."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 7,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": {
+          "path": "data/store-knowledge/rerun-v4/cloudpillo_analysis.json",
+          "analyzedAt": "2026-05-13",
+          "pageCount": 7,
+          "status": "historical_only_not_revalidated"
+        }
+      }
+    },
+    {
+      "id": "bedsure",
+      "brandName": "Bedsure",
+      "sourceUrl": "https://www.amazon.de/stores/page/7DC5A9F8-2A3D-426B-B2F2-F819AE825B1F",
+      "capturedAt": "2026-11-21T02:20:24.429Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/8a7b13a4bac5e87aa3bc-1795227622019.png",
+        "width": 1440,
+        "height": 11237,
+        "imagesComplete": true
+      },
+      "macroStyle": "warm, catalogue rich, repeatable family groups",
+      "observations": [
+        "A large home/lifestyle lead and seasonal product area are followed by repeated family headings.",
+        "Each family pairs a large room/use photograph with smaller product images on light grounds; a substantial product-card area follows."
+      ],
+      "observedHomeSequence": "lifestyle lead → seasonal selection → repeated family image/product groups → product cards",
+      "transferablePrinciples": [
+        "For a broad assortment, repeat a clear family composition with one dominant lifestyle anchor and smaller alternatives.",
+        "Make each repetition serve a distinct family; avoid copying source product counts, heating claims, promotions or native listing length."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 14,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": {
+          "path": "data/store-knowledge/rerun-v4/bedsure_analysis.json",
+          "analyzedAt": "2026-05-12",
+          "pageCount": 4,
+          "status": "historical_only_not_revalidated"
+        }
+      }
+    },
+    {
+      "id": "feandrea",
+      "brandName": "Feandrea",
+      "sourceUrl": "https://www.amazon.de/stores/page/FB4FA857-CD07-4E92-A32C-CF0CD556ACF6",
+      "capturedAt": "2026-11-21T13:33:04.585Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/57a53c4199308abfba08-1795267982803.png",
+        "width": 1440,
+        "height": 11945,
+        "imagesComplete": true
+      },
+      "macroStyle": "friendly, colourful modular families, illustrative accents",
+      "observations": [
+        "A seasonal composite and compact promotion row are followed by repeated large application images beside four smaller product options.",
+        "News features, customer/pet photo collages, social engagement, awards and a story panel precede extensive product-card areas."
+      ],
+      "observedHomeSequence": "seasonal lead → compact promotions → family image/product quads → news → community collage → trust/story → product cards",
+      "transferablePrinciples": [
+        "Use a dominant animal/application image to explain a family, with quieter product alternatives beside it.",
+        "Add editorial or community modules only with real assets and a purpose; recreate no proprietary illustrations, awards or source stories."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 19,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": {
+          "path": "data/store-knowledge/rerun-v4/feandrea_analysis.json",
+          "analyzedAt": "2026-05-23",
+          "pageCount": 10,
+          "status": "historical_only_not_revalidated"
+        }
+      }
+    },
+    {
+      "id": "klosterkitchen",
+      "brandName": "Kloster Kitchen",
+      "sourceUrl": "https://www.amazon.de/stores/page/34D4A812-9A68-4602-A6A0-30565D399620",
+      "capturedAt": "2026-11-21T02:17:58.358Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/1916e917478dd2c848db-1795227476644.png",
+        "width": 1440,
+        "height": 4132,
+        "imagesComplete": true
+      },
+      "macroStyle": "graphic editorial, sparse typography, ingredient imagery",
+      "observations": [
+        "A wide leaf/product header leads into a large typographic statement with broad blank space and a more detailed seasonal product editorial.",
+        "A compact product display and category image matrix precede a narrow award panel."
+      ],
+      "observedHomeSequence": "typographic statement → product editorial → product display → category matrix → trust strip",
+      "transferablePrinciples": [
+        "Use a spacious typographic statement as a deliberate pause, then one more detailed product story before compact category discovery.",
+        "Keep natural imagery and trust evidence specific to the target brand; no copied leaf background, awards or seasonal claims."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 9,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": {
+          "path": "data/store-knowledge/rerun-v4/kloster-kitchen_analysis.json",
+          "analyzedAt": "2026-05-13",
+          "pageCount": 10,
+          "status": "historical_only_not_revalidated"
+        }
+      }
+    },
+    {
+      "id": "bears-with-benefits",
+      "brandName": "Bears with Benefits",
+      "sourceUrl": "https://www.amazon.de/stores/BearswithBenefits/page/AFC77FAF-F173-4A4E-A7DF-8779F7E16E97",
+      "capturedAt": "2026-11-21T02:14:37.658Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/9734acd2aab55de8e3d6-1795227276588.png",
+        "width": 1440,
+        "height": 3554,
+        "imagesComplete": true
+      },
+      "macroStyle": "friendly, pastel, lifestyle and icon pairing",
+      "observations": [
+        "A product lineup hero with floating product details is followed by a separate outlined-benefit row.",
+        "A bestseller banner leads into repeated lifestyle-image and icon/label category pairs, then a subscription-style promotional close."
+      ],
+      "observedHomeSequence": "product lineup → benefit icons → bestseller banner → lifestyle/icon category pairs → promotional close",
+      "transferablePrinciples": [
+        "Pair human use-context with simple category symbols and short labels to make categories easy to scan.",
+        "Keep benefit icons and any subscription promise grounded in the new brand; do not transfer health claims or the bear identity."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 11,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": null
+      }
+    },
+    {
+      "id": "twentythree",
+      "brandName": "twentythree",
+      "sourceUrl": "https://www.amazon.de/stores/twentythree/page/0E8D9A31-200C-4EC5-BC94-CBBC023B28A4",
+      "capturedAt": "2026-11-21T13:33:53.758Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/625fc790a077e7e285d8-1795268032890.png",
+        "width": 1440,
+        "height": 3924,
+        "imagesComplete": true
+      },
+      "macroStyle": "quiet, clean, product focused",
+      "observations": [
+        "A bestseller card row precedes a short dark statement and an asymmetric large room image beside two product portraits.",
+        "Pale product-led banners and a lifestyle category pair form a short selection-oriented continuation."
+      ],
+      "observedHomeSequence": "product cards → short statement → room/product split → clean product banners → lifestyle pair",
+      "transferablePrinciples": [
+        "Use one quiet lifestyle anchor and a small number of clean product choices rather than a long explanatory page.",
+        "Scale and group choices from the new assortment; keep visual accents secondary and transfer no source claims."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 5,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": {
+          "path": "data/store-knowledge/rerun-v4/twentythree_analysis.json",
+          "analyzedAt": "2026-05-13",
+          "pageCount": 5,
+          "status": "historical_only_not_revalidated"
+        }
+      }
+    },
+    {
+      "id": "nightcat",
+      "brandName": "Night Cat",
+      "sourceUrl": "https://www.amazon.de/stores/page/CC609240-DCC5-47C5-A171-3B973268CD34",
+      "capturedAt": "2026-11-21T13:33:35.923Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/f7e8e5da77bafede1c00-1795268013738.png",
+        "width": 1440,
+        "height": 9456,
+        "imagesComplete": true
+      },
+      "macroStyle": "demonstration led, outdoor photography, repeated product comparison",
+      "observations": [
+        "Several large outdoor video posters alternate with compact two-column product-card groups.",
+        "Later accessory/product areas and a closing outdoor video poster keep the same practical show-then-select rhythm."
+      ],
+      "observedHomeSequence": "outdoor poster → product pairs → further demonstration/product groups → accessories → closing poster",
+      "transferablePrinciples": [
+        "Where demonstration assets exist, alternate use-context or short demonstrations with a relevant comparison group.",
+        "Do not prescribe video, the number of repetitions or camping imagery for another brand; a poster review does not analyse the video itself."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 10,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": {
+          "path": "data/store-knowledge/rerun-v4/night-cat_analysis.json",
+          "analyzedAt": "2026-05-23",
+          "pageCount": 10,
+          "status": "historical_only_not_revalidated"
+        }
+      }
+    },
+    {
+      "id": "masterchef",
+      "brandName": "MasterChef",
+      "sourceUrl": "https://www.amazon.de/stores/page/4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6",
+      "capturedAt": "2026-11-21T02:18:41.971Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/a2ff551e97ebc05b29e0-1795227520915.png",
+        "width": 1440,
+        "height": 6291,
+        "imagesComplete": true
+      },
+      "macroStyle": "functional, clean, application paired with products",
+      "observations": [
+        "A repeated asymmetric pattern places a large cooking/application image beside two compact product presentations.",
+        "The large image changes side across knife, utensil, appliance and textile families; short assertive copy appears inside creative images."
+      ],
+      "observedHomeSequence": "repeated alternating application image plus compact product pair, family by family",
+      "transferablePrinciples": [
+        "Alternate application and product choice within each family, switching emphasis to avoid a uniform visual column.",
+        "Use restrained category-specific copy and real product imagery; never copy television identity, endorsements or source product counts."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 20,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": {
+          "path": "data/store-knowledge/rerun-v4/masterchef_analysis.json",
+          "analyzedAt": "2026-05-23",
+          "pageCount": 10,
+          "status": "historical_only_not_revalidated"
+        }
+      }
+    },
+    {
+      "id": "natural-elements",
+      "brandName": "natural elements",
+      "sourceUrl": "https://www.amazon.de/stores/page/3955CCD4-902C-4679-9265-DEC4FCBAA8C8",
+      "capturedAt": "2026-11-21T02:21:50.825Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/3fb1384439c7375eaa22-1795227709571.png",
+        "width": 1440,
+        "height": 7363,
+        "imagesComplete": true
+      },
+      "macroStyle": "clear, restrained, need led with promotional accents",
+      "observations": [
+        "A seasonal promotion and a product-lineup split are followed by a sparse statement/product panel.",
+        "A small brand-line banner leads into lifestyle-image and icon/category pairs, followed by extensive product cards."
+      ],
+      "observedHomeSequence": "promotion → product lineup → short statement → line banner → lifestyle/icon categories → product cards",
+      "transferablePrinciples": [
+        "Separate brief brand/benefit communication from a clear need-led category matrix and a purposeful product comparison area.",
+        "Use concise claims only when verified; source health categories, packaging, seasonal offer and listing volume are not target defaults."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 57,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": null
+      }
+    },
+    {
+      "id": "store-5cb87a1c",
+      "brandName": "Apriwell",
+      "sourceUrl": "https://www.amazon.de/stores/page/5CB87A1C-536A-4D4A-A3C1-635F7F0CC092",
+      "capturedAt": "2026-11-21T02:18:45.593Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/d04e7825deb81239909d-1795227524173.png",
+        "width": 1440,
+        "height": 3967,
+        "imagesComplete": true
+      },
+      "macroStyle": "approachable professional, illustrated need-led navigation",
+      "observations": [
+        "The visible Apriwell header and product/lifestyle split lead into four pastel illustrated category choices.",
+        "A product-lineup scene, advice teaser and light image/text trust panels give the compact page several levels of information."
+      ],
+      "observedHomeSequence": "product/lifestyle split → illustrated category choices → product lineup → advice teaser → trust/story panels",
+      "transferablePrinciples": [
+        "Use restrained illustrated category signposts to communicate user needs, then separate selection from evidence and advice.",
+        "Preserve own CI and verify every medical or quality claim; do not infer that an advice teaser is a working quiz."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 5,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": null
+      }
+    },
+    {
+      "id": "einhell",
+      "brandName": "Einhell",
+      "sourceUrl": "https://www.amazon.de/stores/Einhell/page/C36736E3-EDE2-46C1-812C-9030BDA1EEEB",
+      "capturedAt": "2026-11-21T02:14:54.372Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/95be730ca63586b5ed15-1795227292967.png",
+        "width": 1440,
+        "height": 3550,
+        "imagesComplete": true
+      },
+      "macroStyle": "bold, technical, modular category navigation",
+      "observations": [
+        "Dark and bright accent panels frame a short system/lifestyle lead and a four-icon navigation strip.",
+        "A large branded video poster is followed by category rows with an introductory panel and compact application photographs; partner panels close."
+      ],
+      "observedHomeSequence": "system/lifestyle lead → icon navigation → large video poster → application category rows → partner panels",
+      "transferablePrinciples": [
+        "Combine a short system proposition, highly scannable function/category navigation and one immersive demonstration area.",
+        "Use owned CI and actual ecosystem/partner evidence; do not copy sponsorships, logos or battery compatibility claims."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 113,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": null
+      }
+    },
+    {
+      "id": "hshop-sport",
+      "brandName": "HSHOP-SPORT",
+      "sourceUrl": "https://www.amazon.de/stores/HSHOP-SPORT/page/8B640FD7-98E9-4C48-9BF0-422ED3F14A3A",
+      "capturedAt": "2026-11-21T02:22:50.286Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/98abef3d7d0648c49db6-1795227768883.png",
+        "width": 1440,
+        "height": 10650,
+        "imagesComplete": true
+      },
+      "macroStyle": "dynamic lifestyle, typographic depth, product comparison",
+      "observations": [
+        "Compact lifestyle-category tiles have small labels on white cut-in corner areas, followed by large exercise images with oversized partly occluded background lettering.",
+        "Large application photographs alternate with clean product choices, a category banner, compact trust items and visible product-card areas."
+      ],
+      "observedHomeSequence": "compact lifestyle navigation → bestseller row → immersive type/photo scene → category/product groups → trust items → product cards",
+      "transferablePrinciples": [
+        "Create depth inside commissioned image assets: type behind a person/object, white cut-ins joining the page ground, readable foreground copy.",
+        "Alternate immersive use-scenes with quiet product alternatives; realise complex visual layering inside images using supported Amazon layouts, preserving own CI."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 50,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": null
+      }
+    },
+    {
+      "id": "felmo",
+      "brandName": "felmo",
+      "sourceUrl": "https://www.amazon.de/stores/felmo/page/77AE223F-04C0-420D-8A78-05A0A57D6258",
+      "capturedAt": "2026-11-21T02:22:11.502Z",
+      "reviewedAt": "2026-11-21",
+      "evidence": {
+        "kind": "full_desktop_homepage_screenshot",
+        "url": "https://89rz5ryw0faogjza.public.blob.vercel-storage.com/store-homepage-screenshots/44a633400daec13228fc-1795227730122.png",
+        "width": 1440,
+        "height": 8561,
+        "imagesComplete": true
+      },
+      "macroStyle": "playful editorial, rounded collage, explanatory benefits",
+      "observations": [
+        "Pastel split compositions combine large editorial headings with rounded pet/human photo crops and small product overlays.",
+        "Separate trust/icon cards, ingredient circles, dog/cat product-callout scenes and distinct coloured icon/category strips precede product rows."
+      ],
+      "observedHomeSequence": "split lead → trust cards → ingredient/use panels → product callouts → category icon strips → editorial scenes → product rows",
+      "transferablePrinciples": [
+        "Separate an emotional human/pet scene, concise benefit proof and product selection, using gentle shape rhythm and clear text hierarchy.",
+        "Adapt collage and image/copy balance to the new brand; copy no veterinary endorsement, ingredient, health, guarantee or delivery claims."
+      ],
+      "application": {
+        "designerFields": [
+          "brief",
+          "heroBannerBrief"
+        ],
+        "instructions": "Choose relevant principles by target page role. Specify image type, grouping, relative text hierarchy, spacing/depth, adjacent-module relationship and dedicated mobile composition in English. Use the new brand CI and own assortment; module counts and source wording are not templates."
+      },
+      "coverage": {
+        "homepage": "visually_reviewed",
+        "navigation": "retrieved",
+        "discoveredNavigationEntries": 4,
+        "subpages": "not_newly_visually_reviewed",
+        "mobile": "not_visually_reviewed",
+        "videoPlayback": "not_reviewed",
+        "interactionBehaviour": "not_verified_from_screenshot",
+        "historicalSubpageAnalysis": null
+      }
+    }
+  ]
+}
