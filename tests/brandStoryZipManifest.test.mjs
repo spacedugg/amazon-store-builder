@@ -57,3 +57,13 @@ test('earlier extraction metadata retains the same strict path, URL and position
  const duplicate=structuredClone(extracted);duplicate.cards[1].position=1;assert.throws(()=>unpackStoryZip(extractedArchive(duplicate)),/Kartenpositionen/);
  const future=structuredClone(extracted);future.format='unknown';assert.throws(()=>unpackStoryZip(extractedArchive(future)),/Format/);
 });
+
+test('a collection validates each nested ZIP and preserves three independent stories',async()=>{
+ const {unpackStoryZipCollection}=await import('../src/brandStoryZip.mjs');
+ const nested=Object.fromEntries(['One','Two','Three'].map(brand=>{const data=structuredClone(original);data.brandName=brand;return [brand+'.zip',archive(data)];}));
+ const plans=unpackStoryZipCollection(zipSync(nested));
+ assert.deepEqual(plans.map(plan=>plan.manifestAnalysis.brandName),['One','Two','Three']);
+ assert(plans.every(plan=>plan.candidates.length===8));
+ assert.throws(()=>unpackStoryZipCollection(zipSync({...nested,'broken.zip':new Uint8Array([1,2,3])})),/broken.zip/);
+ assert.throws(()=>unpackStoryZipCollection(zipSync({'../private.zip':archive()})),/Pfad/);
+});

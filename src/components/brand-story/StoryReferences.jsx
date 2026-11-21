@@ -17,12 +17,14 @@ export default function StoryReferences({ onClose, canManage = false }) {
   const zipInput=useRef(null);
   const [stories, setStories] = useState([]), [custom, setCustom] = useState([]);
   const [error, setError] = useState(''), [loading, setLoading] = useState(true);
+  const [pendingImports,setPendingImports]=useState([]);
   const [importProgress,setImportProgress]=useState(''), [importNotice,setImportNotice]=useState('');
   async function importZip(file){
     setBusy(true);setError('');setMessage('');setImportNotice('');let pending;
     try{
       const {importStoryZip}=await import('../../brandStoryZipUpload');
       const result=await importStoryZip(file,setImportProgress);
+      if(result.examples){const queue=result.examples.map(item=>({data:item.data,purpose:item.purpose,createId:crypto.randomUUID()}));setPendingImports(queue);setDirty(true);await saveCollection(queue);return;}
       pending={data:result.data,purpose:result.purpose,createId:crypto.randomUUID()};
       setDraft(pending);setDirty(true);setImportNotice(result.notice);
       setImportProgress('Beispiel wird gespeichert …');
@@ -34,6 +36,22 @@ export default function StoryReferences({ onClose, canManage = false }) {
       if(pending)setImportNotice('ZIP importiert, aber noch nicht gespeichert. Die Daten bleiben zum Ergänzen oder erneuten Speichern erhalten.');
       setError(error.message);
     }finally{setBusy(false);setImportProgress('');}
+  }
+
+  async function saveCollection(queue){
+    setBusy(true);setError('');setMessage('');
+    let index=0;
+    try{
+      for(;index<queue.length;index++){
+        setPendingImports(queue.slice(index));
+        setImportProgress(`Beispiele werden gespeichert · ${index+1}/${queue.length}`);
+        const saved=await saveStoryExample(queue[index]);
+        setCustom(items=>[saved,...items.filter(item=>item.id!==saved.id)]);
+      }
+      setPendingImports([]);setDirty(false);
+      setMessage(`${queue.length} Brand-Story-Beispiele wurden hochgeladen und gespeichert. Für Team und Designer verfügbar.`);
+    }catch(error){setPendingImports(queue.slice(index));setDirty(true);setError(error.message+` ${queue.length-index} Beispiele sind noch nicht bestätigt. Bitte den Import fortsetzen.`);}
+    finally{setBusy(false);setImportProgress('');}
   }
 
   const [draft, setDraft] = useState(null), [dirty, setDirty] = useState(false), [busy, setBusy] = useState(false), [message, setMessage] = useState('');
@@ -62,15 +80,16 @@ export default function StoryReferences({ onClose, canManage = false }) {
   return <StoryModal title={draft ? (draft.id ? 'Beispiel bearbeiten' : 'Beispiel hinzufügen') : 'Interaktive Brand-Story-Beispiele'} wide onClose={() => leave(onClose)}>
     {importProgress && <p className="bs-import-feedback" role="status" aria-live="polite">{importProgress}</p>}
     {error && <p className="bs-import-error" role="alert">{error}</p>}
+    {pendingImports.length>0 && !busy && <div className="bs-example-actions"><p role="status">{pendingImports.length} Beispiele warten auf das Speichern. Bereits gespeicherte Beispiele bleiben erhalten.</p><button className="bs-primary" onClick={()=>saveCollection(pendingImports)}>Import fortsetzen</button></div>}
     {draft ? <>
       <button disabled={busy} onClick={() => leave(() => setDraft(null))}>← Alle Beispiele</button>
       {importNotice && <p role="status">{importNotice}</p>}<StoryExampleEditor draft={draft} busy={busy} setBusy={setBusy} onChange={value => { setDraft(value); setDirty(true); }} onSaved={value => { setCustom(items => [value, ...items.filter(item => item.id !== value.id)]); setDraft(null); setDirty(false); setMessage('Beispiel gespeichert – für Team und Designer verfügbar.');setError('');setImportNotice(''); }} />
     </> : <>
-      <div className="bs-example-actions">{canManage && <><button type="button" className="bs-primary" disabled={busy} onClick={()=>zipInput.current?.click()}>Brand-Story-ZIP hochladen</button><input ref={zipInput} type="file" accept=".zip,application/zip" aria-label="Brand-Story-ZIP" style={{display:'none'}} disabled={busy} onChange={event=>{if(event.target.files[0])importZip(event.target.files[0]);event.target.value='';}} /></>}{canManage && <button className="bs-primary" onClick={() => { setDraft({ data: newStory(), purpose: '', createId:crypto.randomUUID() }); setDirty(false); setMessage(''); setImportNotice(''); }} disabled={busy}>+ Beispiel hinzufügen</button>}</div>
+      <div className="bs-example-actions">{canManage && <><button type="button" className="bs-primary" disabled={busy||pendingImports.length>0} onClick={()=>zipInput.current?.click()}>Brand-Story-ZIP hochladen</button><input ref={zipInput} type="file" accept=".zip,application/zip" aria-label="Brand-Story-ZIP" style={{display:'none'}} disabled={busy} onChange={event=>{if(event.target.files[0])importZip(event.target.files[0]);event.target.value='';}} /></>}{canManage && <button className="bs-primary" onClick={() => { setDraft({ data: newStory(), purpose: '', createId:crypto.randomUUID() }); setDirty(false); setMessage(''); setImportNotice(''); }} disabled={busy||pendingImports.length>0}>+ Beispiel hinzufügen</button>}</div>
       {message && <p className="bs-import-feedback" role="status">{message}</p>}{loading && <p>Beispiele werden geladen …</p>}
       <div className="bs-reference-list">{[...custom.map(item => ({ ...item.data, example: item })), ...stories].map((story, index) => <article key={story.example?.id || 'builtin-' + index}>
         <header><h3>{story.brandName}</h3><span>{story.cards.length} Karten · {story.cards.filter(card => card.type === 'media').length} Full Image · {story.cards.filter(card => card.type === 'grid').length} Grids</span>
-          {canManage && story.example && <button onClick={() => { setDraft(structuredClone(story.example)); setDirty(false); }}>Beispiel bearbeiten</button>}
+          {canManage && story.example && <button disabled={busy||pendingImports.length>0} onClick={() => { setDraft(structuredClone(story.example)); setDirty(false); }}>Beispiel bearbeiten</button>}
         </header>
         <p className="bs-help">{story.example?.purpose || purposes[story.brandName]}</p>
         <ExamplePreview story={story} />

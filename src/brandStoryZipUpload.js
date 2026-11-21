@@ -1,4 +1,4 @@
-import { unpackStoryZip, storyFromZip } from './brandStoryZip.mjs';
+import { unpackStoryZipCollection, storyFromZip } from './brandStoryZip.mjs';
 import { uploadImage } from './brandStoryImageUpload';
 import { referenceAdminTicket } from './referenceAdmin';
 async function bitmap(entry){return createImageBitmap(new Blob([entry.bytes],{type:/\.png$/i.test(entry.path)?'image/png':'image/jpeg'}));}
@@ -24,7 +24,15 @@ async function sheet(plan){
   return new File([await new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',.88))],'contact-sheet.jpg',{type:'image/jpeg'});
 }
 export async function importStoryZip(file,progress){
-  progress('ZIP wird gelesen …');const plan=unpackStoryZip(new Uint8Array(await file.arrayBuffer())),images={};
+  progress('ZIP wird gelesen …');
+  const plans=unpackStoryZipCollection(new Uint8Array(await file.arrayBuffer()));
+  if(plans.length===1)return importPlan(plans[0],progress);
+  const examples=[];
+  for(let index=0;index<plans.length;index++)examples.push(await importPlan(plans[index],text=>progress(`Beispiel ${index+1}/${plans.length} · ${text}`)));
+  return {examples};
+}
+async function importPlan(plan,progress){
+  const images={};
   const paths=[...new Set([plan.desktop,plan.mobile,...plan.candidates.flatMap(card=>card.files)].filter(Boolean))];
   for(let index=0;index<paths.length;index++){
     progress(`Originalbilder werden hochgeladen · ${index+1}/${paths.length}`);

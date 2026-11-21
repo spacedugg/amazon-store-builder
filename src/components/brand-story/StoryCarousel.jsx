@@ -54,7 +54,7 @@ export function StoryCarousel({story,mobile=false,onSelect,selected,selectedSlot
               <Picture image={slotDisplayImage(slot,c)} placeholder={<DraftImage/>} fit={slotImageMode(slot,c)==='custom'?'cover':'contain'}/>
             </Tag>;
           })}{c.copy&&c.slots.every(slot=>!slotDisplayImage(slot,c))&&<div className="bs-grid-draft-copy">{c.copy}</div>}</div>
-          <div className="bs-grid-footer"><strong>{c.headline}</strong>{onSelect?<span className="bs-shop-label">Shop besuchen</span>:<a href={safeUrl(c.shopUrl)||undefined} target="_blank" rel="noopener noreferrer">Shop besuchen</a>}</div>
+          <div className="bs-grid-footer"><strong>{c.headline}</strong>{onSelect?<span className="bs-shop-label">Shop besuchen</span>:safeUrl(c.shopUrl)&&<a href={safeUrl(c.shopUrl)} target="_blank" rel="noopener noreferrer">Shop besuchen</a>}</div>
         </>}
       </div>)}
     </div></div>

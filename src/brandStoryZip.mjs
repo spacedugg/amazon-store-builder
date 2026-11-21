@@ -119,3 +119,19 @@ function normalizeExtractedManifest(data) {
     }))
   };
 }
+
+// A collection ZIP contains complete, independently importable story ZIPs.
+// Validate every inner archive before uploading any image.
+export function unpackStoryZipCollection(bytes) {
+  if(bytes.length>80*1024*1024)throw Error('ZIP darf maximal 80 MB groß sein.');
+  let count=0,total=0;
+  const nested=unzipSync(bytes,{filter(entry){
+    if(++count>200 || (total+=entry.originalSize)>100*1024*1024 || entry.originalSize>80*1024*1024)throw Error('ZIP enthält zu viele oder zu große Dateien.');
+    if(/(^|\/)\.\.(\/|$)|^[/\\]|\\/.test(entry.name))throw Error('Ungültiger Pfad in der ZIP.');
+    return /\.zip$/i.test(entry.name)&&!/(^|\/)(?:__MACOSX|\.[^/]*)(\/|$)/.test(entry.name);
+  }});
+  const archives=Object.entries(nested);
+  if(!archives.length)return [unpackStoryZip(bytes)];
+  if(archives.length>10)throw Error('Eine Sammel-ZIP darf höchstens zehn Brand Stories enthalten.');
+  return archives.map(([name,content])=>{try{return unpackStoryZip(content);}catch(error){throw Error(name+': '+error.message);}});
+}
