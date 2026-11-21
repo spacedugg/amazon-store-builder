@@ -30,3 +30,30 @@ test('bad metadata is rejected before uploading any originals',()=>{
  const short=structuredClone(original);short.cards[2].slots.pop();assert.throws(()=>unpackStoryZip(archive(short)),/vier/);
  assert.throws(()=>unpackStoryZip(archive(original,{'other/brand-story.json':strToU8(JSON.stringify(original))})),/nur eine/);
 });
+
+const extracted=JSON.parse(readFileSync(new URL('./fixtures/holy-brand-story-extracted.json',import.meta.url)));
+function extractedArchive(data=extracted){
+ const files={'HOLY-Brand-Story/Brand-Story.json':strToU8(JSON.stringify(data))};
+ for(const file of [extracted.backgroundDesktop.file,...extracted.cards.flatMap(c=>c.type==='brand_media_asset'?[c.image.file]:c.slots.map(s=>s.image.file))])files['HOLY-Brand-Story/'+file]=new Uint8Array([1]);
+ return zipSync(files);
+}
+test('the earlier HOLY extraction ZIP imports nested files, positions and all product targets',()=>{
+ const shuffled=structuredClone(extracted);shuffled.cards.reverse();
+ const plan=unpackStoryZip(extractedArchive(shuffled));
+ const images=Object.fromEntries(plan.entries.map(e=>[e.path,{url:'https://example.com/'+encodeURIComponent(e.path),width:664,height:728,size:1}]));
+ const story=storyFromZip(plan,images);
+ assert.equal(story.brandName,'HOLY');assert.equal(story.cards.length,8);assert.equal(plan.entries.length,27);
+ assert.equal(story.background.mobile,null);
+ assert.equal(story.cards[0].assetFile,'HOLY-Brand-Story/Brand Media Assets/Brand Image 0.png');
+ assert.deepEqual(story.cards.filter(c=>c.type==='grid').map(c=>c.headline),extracted.cards.filter(c=>c.type==='asin_grid').map(c=>c.headline));
+ assert.deepEqual(story.cards.flatMap(c=>c.slots.map(s=>s.asin)),extracted.cards.flatMap(c=>(c.slots||[]).map(s=>s.asin)));
+ assert.deepEqual(story.cards.filter(c=>c.type==='grid').map(c=>c.shopUrl),extracted.cards.filter(c=>c.type==='asin_grid').map(c=>c.shopLink));
+ assert.equal(exampleData(story).cards.length,8);
+});
+test('earlier extraction metadata retains the same strict path, URL and position validation',()=>{
+ const missing=structuredClone(extracted);missing.backgroundDesktop.file='Background/missing.jpg';assert.throws(()=>unpackStoryZip(extractedArchive(missing)),/Bilddatei fehlt/);
+ const evil=structuredClone(extracted);evil.cards[2].slots[0].productUrl='https://evil.test/dp/B0CPJM5Y59';assert.throws(()=>unpackStoryZip(extractedArchive(evil)),/Amazon-Link/);
+ const traversal=structuredClone(extracted);traversal.cards[0].image.file='../private.png';assert.throws(()=>unpackStoryZip(extractedArchive(traversal)),/Bildpfad/);
+ const duplicate=structuredClone(extracted);duplicate.cards[1].position=1;assert.throws(()=>unpackStoryZip(extractedArchive(duplicate)),/Kartenpositionen/);
+ const future=structuredClone(extracted);future.format='unknown';assert.throws(()=>unpackStoryZip(extractedArchive(future)),/Format/);
+});

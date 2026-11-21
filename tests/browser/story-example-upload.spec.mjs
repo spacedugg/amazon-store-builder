@@ -112,3 +112,27 @@ test('valid ZIP shows saving feedback, saves automatically and is present after 
  await page.reload();await page.getByRole('button',{name:'Beispiele',exact:true}).click();
  await expect(page.getByRole('heading',{name:'Automatisch gespeichert',exact:true})).toBeVisible();
 });
+
+test('the original nested HOLY extraction ZIP imports, saves and survives reload',async({page})=>{
+ test.setTimeout(90000);
+ const {readFileSync}=await import('node:fs');
+ const {zipSync,strToU8}=await import('fflate');
+ const original=JSON.parse(readFileSync(new URL('../fixtures/holy-brand-story-extracted.json',import.meta.url)));
+ const files={'HOLY-Brand-Story/Brand-Story.json':strToU8(JSON.stringify(original))};
+ for(const file of [original.backgroundDesktop.file,...original.cards.flatMap(c=>c.type==='brand_media_asset'?[c.image.file]:c.slots.map(s=>s.image.file))])files['HOLY-Brand-Story/'+file]=pixel;
+ const buffer=process.env.HOLY_TEST_ZIP?readFileSync(process.env.HOLY_TEST_ZIP):Buffer.from(zipSync(files));
+ const records=await setup(page,false,false);let analysisRequests=0;
+ await page.route('**/api/brand-story-zip-analysis',route=>{analysisRequests++;return route.fulfill({status:500,json:{error:'Metadata must not need AI'}});});
+ await page.getByLabel('Brand-Story-ZIP',{exact:true}).setInputFiles({name:'HOLY-Brand-Story(1).zip',mimeType:'application/zip',buffer});
+ await expect(page.getByRole('status').filter({hasText:'hochgeladen und gespeichert'})).toBeVisible({timeout:60000});
+ expect(analysisRequests).toBe(0);expect(records()).toHaveLength(1);
+ const saved=records()[0].data;
+ expect(saved.cards).toHaveLength(8);
+ expect(saved.cards[0].assetFile).toBe('HOLY-Brand-Story/Brand Media Assets/Brand Image 0.png');
+ expect(saved.cards.filter(c=>c.type==='grid').map(c=>c.headline)).toEqual(original.cards.filter(c=>c.type==='asin_grid').map(c=>c.headline));
+ expect(saved.cards.flatMap(c=>c.slots.map(s=>s.asin))).toEqual(original.cards.flatMap(c=>(c.slots||[]).map(s=>s.asin)));
+ expect(saved.cards[2].slots[0].url).toBe(original.cards[2].slots[0].productUrl);
+ if(process.env.HOLY_TEST_ZIP){expect(saved.background.desktop.width).toBe(1464);expect(saved.cards[0].image.width).toBe(1448);}
+ await page.reload();await page.getByRole('button',{name:'Beispiele',exact:true}).click();
+ await expect(page.locator('.bs-reference-list').getByRole('heading',{name:'HOLY',exact:true})).toBeVisible();
+});
