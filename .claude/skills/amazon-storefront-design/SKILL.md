@@ -12,13 +12,14 @@ Du erstellst Amazon Brand Store Konzepte für die Agentur TEMOA. Das Konzept wir
 
 ## Portable Installation in Claude
 
-Im installierten ZIP liegen `CLAUDE.md`, `data/store-knowledge/` und `docs/BLUEPRINT_EXTRACTION_PROMPT_V4.md` relativ zu diesem `SKILL.md`. Lies diese mitgelieferten Dateien vom Skill-Verzeichnis aus; ein separater GitHub-Zugang ist dafür nicht nötig. Das Upload-Paket enthält nur die 19 v4-Analysen, 159 Seiten-Blueprints und drei Vokabulare, keine Roh-DOM-Daten oder alten Analysefassungen, und bleibt unter 200 Dateien. Im Repository gelten dieselben Pfade relativ zur Repo-Wurzel. Falls eine Datei fehlt, melde die Lücke statt die vorgeschriebene Recherche als erledigt darzustellen.
+Im installierten ZIP liegen `CLAUDE.md`, `data/store-knowledge/` und `docs/BLUEPRINT_EXTRACTION_PROMPT_V4.md` relativ zu diesem `SKILL.md`. Lies diese mitgelieferten Dateien vom Skill-Verzeichnis aus; ein separater GitHub-Zugang ist dafür nicht nötig. Das Upload-Paket enthält die 19 v4-Analysen, 159 Seiten-Blueprints, drei Vokabulare und eine gemeinsame Datei mit 24 Homepage-Stilprofilen, keine Roh-DOM-Daten oder alten Analysefassungen, und bleibt unter 200 Dateien. Im Repository gelten dieselben Pfade relativ zur Repo-Wurzel. Falls eine Datei fehlt, melde die Lücke statt die vorgeschriebene Recherche als erledigt darzustellen.
 
-## Wissensbasis (Stand 2026-05-24, v4)
+## Wissensbasis: Archiv v4 und aktuelle Homepage-Stilprofile
 
-Das Repo enthält eine kuratierte Wissensbasis aus 20 analysierten Amazon Brand Stores. **Lies vor jedem Konzept-Skelett aktiv die relevanten Dateien**, statt aus dem Bauch zu konzipieren. Die Wissensbasis liegt im Repo `amazon-store-builder` unter:
+Das Repo enthält 19 archivierte Store-Analysen mit 159 Seiten-Blueprints sowie aktuelle Makro-Stilprofile der 24 aktiven Homepage-Referenzen. **Lies vor jedem Konzept-Skelett aktiv die relevanten Dateien**, statt aus dem Bauch zu konzipieren. Die Wissensbasis liegt im Repo `amazon-store-builder` unter:
 
-- `data/store-knowledge/rerun-v4/{store}_analysis.json` (19 Phase-3 Brand-Identity-Analyses): pro Store eine zusammenfassende Analyse mit `voiceMarkersAggregated`, `dominantHeroArchetype`, `dominantPageArchitecture`, `moduleFunctionalTaxonomy`, `pageArchetypes`, `sequencePatterns`, `recurringTrustSignals`.
+- `data/store-knowledge/_reference_style_profiles.json`: 24 am 21.11.2026 visuell geprüfte Desktop-Homepage-Aufnahmen mit getrennten Beobachtungen, übertragbaren Prinzipien und Anwendungshinweisen. Bei ausgewählten Referenzen das Profil anhand der Store-Page-ID in der URL zuordnen und zuerst die gewünschten Makro-Prinzipien berücksichtigen. Die `coverage`-Felder begrenzen die Aussage: keine neue visuelle Unterseiten-, Mobile-, Video- oder Interaktionsprüfung daraus ableiten. Historische Seitenanalysen bleiben gesondert datiert.
+- `data/store-knowledge/rerun-v4/{store}_analysis.json` (19 archivierte Store-Analysen): `storeAnalysis.brandVoice`, `storeAnalysis.contentStrategy`, `storeAnalysis.moduleFunctionalTaxonomy` und `storeAnalysis.pageArchetypes` beschreiben die übergreifenden Muster. Seitenbezogene Beobachtungen stehen unter `pages[].voiceMarkers`, `pages[].pageArchitecture` und `pages[].brandModules`. Hero- und Sequenzdetails anhand der passenden Seiten-Blueprints lesen, nicht aus einer vermeintlich vorhandenen Zusammenfassung ableiten.
 - `data/store-knowledge/rerun-v4/blueprints/{store}_{page}.json` (159 Per-Page-Blueprints): pro Page eine vollständige Modul-für-Modul-Aufrisse mit `layoutType`, `designIntent`, `relationToPrevious`, `visualBridge`, `copyBridge`, `voiceMarkers`, `voiceExamples`, `heroArchetype`, `tiles[].description` (66% gefüllt aus Vision-Pass), `textOnImage` (79% gefüllt).
 - `data/store-knowledge/_voice_marker_vocabulary.md`: Tag-Werte für voiceRegister (nahbar, direkt, technisch, emotional, professionell, saisonal, autoritaer, verspielt, freundlich, abenteuerlich, jung_lebendig, expert_endorsement), sentencePattern, vocabularyField (kulinarisch, klinisch, sportlich, naturwissenschaftlich, lifestyle, traditionell, industriell, familiaer, technisch, outdoor, alltagspraktisch, premium_lifestyle, nachhaltig, gastronomie), claimType (inkl. tv_show_heritage, charity_partnership, certified_sustainability, naming_signature), rhetoricalDevice.
 - `data/store-knowledge/_hero_archetype_vocabulary.md`: Hero-Banner-Archetypen wie `brand_hero_with_product_lineup`, `atmospheric_brand_mood`, `seasonal_thematic`, `video_only_premium_showcase`, `category_distributor_with_hero_tile`, `editorial_story_hero`, `interactive_hotspot_hero`, `hero_with_three_usp_badges_and_lifestyle_companion`.
@@ -27,7 +28,7 @@ Das Repo enthält eine kuratierte Wissensbasis aus 20 analysierten Amazon Brand 
 
 **Pflicht-Lesung pro Konzept**:
 
-1. Bei der Briefing-Phase nach Block F (Brand Voice gewählt): Lies `_voice_marker_vocabulary.md` und mappe die User-Wahl auf die Tag-Werte. Beispiel: User wählt "direkt + sportlich + technisch", Mapping auf `voiceRegister: direkt`, `vocabularyField: sportlich/technisch`. Suche dann in den 19 Phase-3-Analyses nach Stores mit ähnlicher Voice-Kombination (z.B. blackroll = direkt+sportlich, kaercher = professionell+industriell) und ziehe deren `pageArchetypes` und `sequencePatterns` als Inspiration.
+1. Bei der Briefing-Phase nach Block F (Brand Voice gewählt): Lies `_voice_marker_vocabulary.md` und mappe die User-Wahl auf die Tag-Werte. Beispiel: User wählt "direkt + sportlich + technisch", Mapping auf `voiceRegister: direkt`, `vocabularyField: sportlich/technisch`. Suche dann in den 19 Phase-3-Analyses nach Stores mit ähnlicher Voice-Kombination (z.B. blackroll = direkt+sportlich, kaercher = professionell+industriell) und ziehe `storeAnalysis.pageArchetypes`, `pages[].pageArchitecture` sowie die Sequenzbeziehungen in den passenden Blueprints als Inspiration heran.
 
 2. Vor dem Konzept-Skelett (Schritt 3): Wähle für die Startseite einen `heroArchetype` aus `_hero_archetype_vocabulary.md` und ein Page-Pattern aus `_page_architecture_pattern_vocabulary.md`, die zur Brand-Vertikale und Sortimentsbreite passen. Begründe die Wahl kurz im Dialog mit dem User, z.B. "Outdoor-Marke mit 5+ Sortimentsfamilien, also alternierendes_tile_row_plus_video_modul_sortimentsrhythmus wie bei night-cat".
 
@@ -35,7 +36,7 @@ Das Repo enthält eine kuratierte Wissensbasis aus 20 analysierten Amazon Brand 
 
 ### CRITICAL: Brand-spezifisch vs. strukturell-übertragbar (CLAUDE.md §0)
 
-**Die wichtigste Regel im Umgang mit der Wissensbasis.** Aus den 20 Quell-Stores darfst du übernehmen:
+**Die wichtigste Regel im Umgang mit der Wissensbasis.** Aus den Quell-Stores darfst du übernehmen:
 
 **Strukturell-übertragbar** (für neue Marken nutzbar):
 - Modul-Sequenzen und Layout-Patterns (`layoutType`, `tileCount`, `relationToPrevious`)
@@ -310,7 +311,7 @@ Sobald alle nötigen Inputs da sind, **konsultiere zuerst die Wissensbasis** und
 
 2. Lies `data/store-knowledge/_hero_archetype_vocabulary.md` und `data/store-knowledge/_page_architecture_pattern_vocabulary.md`. Wähle anhand der Brand-Vertikale (Outdoor, Sport, Lifestyle, Premium-Lifestyle, Tech, Gastronomie, Haustier etc.) und der Sortimentsbreite einen passenden `heroArchetype` plus ein passendes Startseiten-`pageArchitecturePattern`.
 
-3. Identifiziere 1-3 der 19 Phase-3-Analyses, deren Voice-Marker-Aggregation am ehesten zur neuen Marke passt. Lies die `pageArchetypes` und `sequencePatterns` dieser Stores und nutze sie als strukturelle Vorlage (nur Patterns, nicht Inhalte siehe CLAUDE.md §0).
+3. Identifiziere 1-3 der 19 archivierten Analysen anhand der gewünschten Makro-Gestaltung, Seitenaufgaben und Markenstimme. Lies `storeAnalysis.brandVoice`, `pages[].voiceMarkers`, `storeAnalysis.pageArchetypes` und `pages[].pageArchitecture`; prüfe Modulfolge, Hero-Archetyp und Übergänge in den passenden Blueprints (`heroArchetype`, `relationToPrevious`, `visualBridge`, `copyBridge`). Nur belegte abstrakte Muster übertragen, keine fremden Inhalte (CLAUDE.md §0).
 
 4. Notiere die getroffenen Auswahlen kurz als Vorschlag im Dialog mit dem User:
    - Brand-Voice-Tag-Mapping

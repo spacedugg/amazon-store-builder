@@ -1,0 +1,2897 @@
+{
+  "retrievalMethod": "existing_store_navigation_endpoint",
+  "coverageNote": "Home navigation retrieved for the 24 active catalogue stores. Listed URLs are discovered candidates, not confirmed reachable or visually analysed subpages. The historical knowledge corpus has separate coverage.",
+  "stores": [
+    {
+      "id": "snocks",
+      "catalogBrand": "SNOCKS",
+      "sourceUrl": "https://www.amazon.de/stores/SNOCKS/page/C0392661-40E4-498F-992D-2FFEB9086ABB",
+      "retrievedAt": "2026-11-21T15:41:40.820866+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "SNOCKS",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/SNOCKS/page/C0392661-40E4-498F-992D-2FFEB9086ABB",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/9095E656-EB29-48F1-B242-3499E3409B44",
+          "name": "Damen Shapewear",
+          "pageId": "9095E656-EB29-48F1-B242-3499E3409B44"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/555DB690-ED63-42FE-9EA9-A49F765B58BB",
+          "name": "Bestseller",
+          "pageId": "555DB690-ED63-42FE-9EA9-A49F765B58BB"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/37D0FD2E-0E39-42E9-8AED-C331D55B1086",
+          "name": "Damen Bekleidung",
+          "pageId": "37D0FD2E-0E39-42E9-8AED-C331D55B1086"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/07F4E00B-EC0F-4421-9DE3-171B71D209A9",
+          "name": "Herren Bekleidung",
+          "pageId": "07F4E00B-EC0F-4421-9DE3-171B71D209A9"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/8DB4CE2C-6A3E-4AF4-A49E-762071428B5B",
+          "name": "Damen Socken",
+          "pageId": "8DB4CE2C-6A3E-4AF4-A49E-762071428B5B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/ECC4DEDA-B2B3-4A27-BF17-985ADBAB1D70",
+          "name": "Damen Unterwäsche",
+          "pageId": "ECC4DEDA-B2B3-4A27-BF17-985ADBAB1D70"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/7B77D2BB-6A96-4463-AE18-2FE50CE01AFC",
+          "name": "Herren Unterwäsche",
+          "pageId": "7B77D2BB-6A96-4463-AE18-2FE50CE01AFC"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/BFC6A7D3-E8C3-4CE3-AD57-99B3E841119A",
+          "name": "Deals",
+          "pageId": "BFC6A7D3-E8C3-4CE3-AD57-99B3E841119A"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/69163286-E2B0-49BF-8FBF-2EDF8D4C539E",
+          "name": "Herren",
+          "pageId": "69163286-E2B0-49BF-8FBF-2EDF8D4C539E"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/C092E62F-9E96-4953-96FB-DB1BE5D3AA97",
+          "name": "Herren Socken",
+          "pageId": "C092E62F-9E96-4953-96FB-DB1BE5D3AA97"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/DF27C925-4455-4E32-9592-E9D202DA368C",
+          "name": "Damen",
+          "pageId": "DF27C925-4455-4E32-9592-E9D202DA368C"
+        }
+      ]
+    },
+    {
+      "id": "esn",
+      "catalogBrand": "ESN",
+      "sourceUrl": "https://www.amazon.de/stores/ESN/page/F5F8CAD5-7990-44CF-9F5B-61DFFF5E8581",
+      "retrievedAt": "2026-11-21T15:41:40.821347+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "ESN",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/ESN/page/F5F8CAD5-7990-44CF-9F5B-61DFFF5E8581",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/137F3F89-CAFA-407C-A947-6985172B0E8F",
+          "name": "DEALS",
+          "pageId": "137F3F89-CAFA-407C-A947-6985172B0E8F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/7E18C3B4-AB9A-40B8-8555-84E9967150DF",
+          "name": "CREATINE",
+          "pageId": "7E18C3B4-AB9A-40B8-8555-84E9967150DF"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/44C5F932-97AA-4A1B-A7F1-207D5450AF8F",
+          "name": "ÜBER ESN",
+          "pageId": "44C5F932-97AA-4A1B-A7F1-207D5450AF8F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/AEFC82D1-BB1A-4C47-BAA0-351BB117560F",
+          "name": "BESTSELLER",
+          "pageId": "AEFC82D1-BB1A-4C47-BAA0-351BB117560F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/58488065-5C6A-4494-A3DB-AB7D86AB0081",
+          "name": "PERFORMANCE",
+          "pageId": "58488065-5C6A-4494-A3DB-AB7D86AB0081"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/9FED5CCC-6284-44BD-AD83-AAEEBF48E23F",
+          "name": "ALLE PRODUKTE",
+          "pageId": "9FED5CCC-6284-44BD-AD83-AAEEBF48E23F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2B83B00A-4B34-4164-AE99-370F051B7A19",
+          "name": "FLEXPRESSO",
+          "pageId": "2B83B00A-4B34-4164-AE99-370F051B7A19"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/4DEFD04A-0432-4AB6-A9E3-B88BEBD37D72",
+          "name": "FLAVOR POWDER",
+          "pageId": "4DEFD04A-0432-4AB6-A9E3-B88BEBD37D72"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/4903A282-E37D-4D91-BB9F-281622934C0B",
+          "name": "VITALSTOFFE",
+          "pageId": "4903A282-E37D-4D91-BB9F-281622934C0B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/05C54A75-8964-41E5-9C10-19EB32583205",
+          "name": "PROTEINE",
+          "pageId": "05C54A75-8964-41E5-9C10-19EB32583205"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/F2F0F62B-C596-4268-893C-6D98CC7D8AAB",
+          "name": "Neuheiten",
+          "pageId": "F2F0F62B-C596-4268-893C-6D98CC7D8AAB"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/4C57C5A9-3D08-4FC4-8FFA-1A84A0E71385",
+          "name": "RIEGEL",
+          "pageId": "4C57C5A9-3D08-4FC4-8FFA-1A84A0E71385"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/70838D1C-F961-4660-A2B1-84A5A5A69D67",
+          "name": "BUNDLES",
+          "pageId": "70838D1C-F961-4660-A2B1-84A5A5A69D67"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/7A0AC72C-C59B-4C49-84EE-3E43C4D89AF1",
+          "name": "ISOWHEY HARDCORE",
+          "pageId": "7A0AC72C-C59B-4C49-84EE-3E43C4D89AF1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2AFC0A42-A702-462D-B255-B5203C7449F8",
+          "name": "PRODUKTSELEKTOR",
+          "pageId": "2AFC0A42-A702-462D-B255-B5203C7449F8"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/61DF7835-CF8D-4EE0-A1FC-990F40F50828",
+          "name": "AUSDAUER",
+          "pageId": "61DF7835-CF8D-4EE0-A1FC-990F40F50828"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/F7E30D0D-D2C4-4493-BE92-B7F0C8ACFC5C",
+          "name": "ISOCLEAR",
+          "pageId": "F7E30D0D-D2C4-4493-BE92-B7F0C8ACFC5C"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/232C8E9D-A079-4E48-9657-88134BF45B97",
+          "name": "SYRUPS",
+          "pageId": "232C8E9D-A079-4E48-9657-88134BF45B97"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/8781E3CA-F1B1-411C-9D4A-FDCEF80DE443",
+          "name": "FOOD & SNACKS",
+          "pageId": "8781E3CA-F1B1-411C-9D4A-FDCEF80DE443"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/A009E059-5CA2-40E3-9324-76C75CA694D7",
+          "name": "ZUBEHÖR",
+          "pageId": "A009E059-5CA2-40E3-9324-76C75CA694D7"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/8F9839F1-7792-40E9-BC87-D8253DB32928",
+          "name": "DESIGNER WHEY",
+          "pageId": "8F9839F1-7792-40E9-BC87-D8253DB32928"
+        }
+      ]
+    },
+    {
+      "id": "ag1",
+      "catalogBrand": "AG1",
+      "sourceUrl": "https://www.amazon.de/stores/AG1/page/E676C84A-8A86-4F92-B978-3343F367DD0C",
+      "retrievedAt": "2026-11-21T15:41:40.821778+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "AG1",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/AG1/page/E676C84A-8A86-4F92-B978-3343F367DD0C",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/69FAC810-7BAD-410C-9DA2-A4BC3901C96C",
+          "name": "Zutaten",
+          "pageId": "69FAC810-7BAD-410C-9DA2-A4BC3901C96C"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/4E61320F-5759-49E9-B9AF-77F7861679F3",
+          "name": "Was ist AG1?",
+          "pageId": "4E61320F-5759-49E9-B9AF-77F7861679F3"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/06350DED-921B-4418-A693-AA63BB9D443C",
+          "name": "Qualitätsstandards",
+          "pageId": "06350DED-921B-4418-A693-AA63BB9D443C"
+        }
+      ]
+    },
+    {
+      "id": "nespresso",
+      "catalogBrand": "Nespresso",
+      "sourceUrl": "https://www.amazon.de/stores/page/2429E3F3-8BFA-466A-9185-35FB47867B06",
+      "retrievedAt": "2026-11-21T15:41:49.723704+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "Nespresso",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/page/2429E3F3-8BFA-466A-9185-35FB47867B06",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/D99A9525-EC3E-4165-ACF4-7F5E44D788A5",
+          "name": "Original Kaffee",
+          "pageId": "D99A9525-EC3E-4165-ACF4-7F5E44D788A5"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/6ADAE8B6-5BB2-4921-A765-C15FAD9D6F90",
+          "name": "Creatista Pro",
+          "pageId": "6ADAE8B6-5BB2-4921-A765-C15FAD9D6F90"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/EAA859D0-68B3-4C91-8B0B-38D7FDDCE2E4",
+          "name": "Accessoires",
+          "pageId": "EAA859D0-68B3-4C91-8B0B-38D7FDDCE2E4"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/BBC0DD4D-EC6C-4004-B217-F7504EFE2237",
+          "name": "Original Decaffeinato",
+          "pageId": "BBC0DD4D-EC6C-4004-B217-F7504EFE2237"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/54143694-B289-417F-9FAB-2F0B632D1C14",
+          "name": "Citiz & Milk",
+          "pageId": "54143694-B289-417F-9FAB-2F0B632D1C14"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/61089F8E-8935-4692-9A3E-02B6FC9DF824",
+          "name": "VERTUO UP",
+          "pageId": "61089F8E-8935-4692-9A3E-02B6FC9DF824"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/7AD0C1BD-C5AB-4646-A72D-F8A3ADB654B8",
+          "name": "Master Origin",
+          "pageId": "7AD0C1BD-C5AB-4646-A72D-F8A3ADB654B8"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/65AE62D2-C16D-47AC-8644-F36E9081A4ED",
+          "name": "Master Origin",
+          "pageId": "65AE62D2-C16D-47AC-8644-F36E9081A4ED"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/93C4B7B5-B5FF-4936-A722-860265B87D7A",
+          "name": "Registrierung",
+          "pageId": "93C4B7B5-B5FF-4936-A722-860265B87D7A"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/14CA3927-5574-46B1-B65A-D6E1386E9E68",
+          "name": "World Explorations",
+          "pageId": "14CA3927-5574-46B1-B65A-D6E1386E9E68"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0D8B4AE0-8B89-48E7-8C26-46D8ED82CDE5",
+          "name": "Kaffee-Abonnement",
+          "pageId": "0D8B4AE0-8B89-48E7-8C26-46D8ED82CDE5"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/FCA8433A-D425-45C9-A777-FDFB8BF4A978",
+          "name": "Original Maschinen",
+          "pageId": "FCA8433A-D425-45C9-A777-FDFB8BF4A978"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/3296B733-4313-46D4-B8EB-9C1A627E0AAB",
+          "name": "VERTUO Pop",
+          "pageId": "3296B733-4313-46D4-B8EB-9C1A627E0AAB"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/730199DF-787E-4599-A268-6E57DA122DE8",
+          "name": "Vertuo Kaffee",
+          "pageId": "730199DF-787E-4599-A268-6E57DA122DE8"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/94253EAE-5C50-41D7-82CB-FE0439ACCB32",
+          "name": "Atelier",
+          "pageId": "94253EAE-5C50-41D7-82CB-FE0439ACCB32"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/28127934-1B2A-4EF8-808A-352926F492A0",
+          "name": "Travel Mug",
+          "pageId": "28127934-1B2A-4EF8-808A-352926F492A0"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/C2AEF786-2E07-4CE7-A300-0B20FC9371CC",
+          "name": "Espresso 40 - 80 ml",
+          "pageId": "C2AEF786-2E07-4CE7-A300-0B20FC9371CC"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/73BA5A55-F2AD-4EFD-8BD1-22A38C1F80DA",
+          "name": "Pixie",
+          "pageId": "73BA5A55-F2AD-4EFD-8BD1-22A38C1F80DA"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/D23BDC04-4D69-43A8-985E-C439795AF823",
+          "name": "VERTUO Creatista",
+          "pageId": "D23BDC04-4D69-43A8-985E-C439795AF823"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/9348A08B-1421-490D-B288-F44BE6BE7306",
+          "name": "Vertuo Maschinen",
+          "pageId": "9348A08B-1421-490D-B288-F44BE6BE7306"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E0DF17AD-CF05-4AF0-8D67-A31E3D754D92",
+          "name": "Lattissima one",
+          "pageId": "E0DF17AD-CF05-4AF0-8D67-A31E3D754D92"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/F8D38EDC-5C02-4676-A26D-9B5CFD02274A",
+          "name": "Welcher Kaffeetrinker bist Du?",
+          "pageId": "F8D38EDC-5C02-4676-A26D-9B5CFD02274A"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/9444C852-22B3-4DE6-8B59-78A50845E6AF",
+          "name": "Vertuo Decaffeinato",
+          "pageId": "9444C852-22B3-4DE6-8B59-78A50845E6AF"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/ABAB564D-85D1-4426-B908-DFDCDBD615B8",
+          "name": "Professional",
+          "pageId": "ABAB564D-85D1-4426-B908-DFDCDBD615B8"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/FD504600-955A-4341-AD26-CBB826145D63",
+          "name": "Gran Lattissima",
+          "pageId": "FD504600-955A-4341-AD26-CBB826145D63"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/3C855FAA-0378-428B-8D15-701AA8800EE3",
+          "name": "Deals",
+          "pageId": "3C855FAA-0378-428B-8D15-701AA8800EE3"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2FCC37D6-184D-43C0-A471-F176F8E3C2D4",
+          "name": "VERTUO Lattissima",
+          "pageId": "2FCC37D6-184D-43C0-A471-F176F8E3C2D4"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/C6658D50-ED49-4786-BD4A-9F697562B320",
+          "name": "Essenza Mini ",
+          "pageId": "C6658D50-ED49-4786-BD4A-9F697562B320"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/C90F9D89-ECF7-4A54-B6C5-3D2AB6D2B51F",
+          "name": "Inissia",
+          "pageId": "C90F9D89-ECF7-4A54-B6C5-3D2AB6D2B51F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/ECBC1E4D-2E82-4A75-A3CD-B001AE9BD94E",
+          "name": "Service ",
+          "pageId": "ECBC1E4D-2E82-4A75-A3CD-B001AE9BD94E"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/7858C8D7-4ECB-47DE-8A80-C8008B5581CA",
+          "name": "Barista Creations",
+          "pageId": "7858C8D7-4ECB-47DE-8A80-C8008B5581CA"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/37448C0F-43D5-44DC-A8CE-5E16EED565AF",
+          "name": "Barista Creations",
+          "pageId": "37448C0F-43D5-44DC-A8CE-5E16EED565AF"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/AE7ED400-0FE7-4B0F-AE70-039F8A0B1167",
+          "name": "Ispirazione Italiana",
+          "pageId": "AE7ED400-0FE7-4B0F-AE70-039F8A0B1167"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2F01C872-FB41-4597-B132-CE16C86CB487",
+          "name": "The Original Collection",
+          "pageId": "2F01C872-FB41-4597-B132-CE16C86CB487"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/6D635ABA-55B7-4E3D-9A6F-1E1783414242",
+          "name": "Citiz",
+          "pageId": "6D635ABA-55B7-4E3D-9A6F-1E1783414242"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/7B701A80-E90F-4ED1-A265-9B0D075ACD62",
+          "name": "Nachhaltigkeit",
+          "pageId": "7B701A80-E90F-4ED1-A265-9B0D075ACD62"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/BF431986-B06D-42E0-9C7E-228EFBC79E69",
+          "name": "Creatista Plus",
+          "pageId": "BF431986-B06D-42E0-9C7E-228EFBC79E69"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/8BFB3CA6-755B-41B6-8480-F160C9EBC8B6",
+          "name": "Ersatzteile",
+          "pageId": "8BFB3CA6-755B-41B6-8480-F160C9EBC8B6"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/9284DFD0-836F-41EE-BE0B-917541939155",
+          "name": "VERTUO Next",
+          "pageId": "9284DFD0-836F-41EE-BE0B-917541939155"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/9CED9ED9-D8F6-4EEC-99EE-4FD61D1A1987",
+          "name": "Coffee (150 - 230 ml)",
+          "pageId": "9CED9ED9-D8F6-4EEC-99EE-4FD61D1A1987"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E9C8E74F-13E9-48A6-BDAA-891830468723",
+          "name": "Milchaufschäumer",
+          "pageId": "E9C8E74F-13E9-48A6-BDAA-891830468723"
+        }
+      ]
+    },
+    {
+      "id": "kaercher",
+      "catalogBrand": "Kärcher",
+      "sourceUrl": "https://www.amazon.de/stores/Kärcher/page/EFE3653A-1163-432C-A85B-0486A31C0E3D",
+      "retrievedAt": "2026-11-21T15:41:50.780221+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "retrievalUrl": "https://www.amazon.de/stores/page/EFE3653A-1163-432C-A85B-0486A31C0E3D",
+      "observedBrand": "Kärcher",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/page/EFE3653A-1163-432C-A85B-0486A31C0E3D",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/BD8FE6E6-7CAD-4F73-9A94-604D61AA36CE",
+          "name": "Zubehör",
+          "pageId": "BD8FE6E6-7CAD-4F73-9A94-604D61AA36CE"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/BECBEC9A-A1EA-4205-920E-033559E3104F",
+          "name": "Zubehör & Reinigungsmittel",
+          "pageId": "BECBEC9A-A1EA-4205-920E-033559E3104F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/AC7263E7-B33E-431B-B803-6C27FC6897CE",
+          "name": "Matratzensauger",
+          "pageId": "AC7263E7-B33E-431B-B803-6C27FC6897CE"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/06406C10-993B-4DF0-A0CB-899AF6527E26",
+          "name": "36 V Akku-Plattform",
+          "pageId": "06406C10-993B-4DF0-A0CB-899AF6527E26"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/373E26EC-8397-45F3-9EB1-18893AC48596",
+          "name": "Standard Range",
+          "pageId": "373E26EC-8397-45F3-9EB1-18893AC48596"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/97B62778-1E8C-41DA-9A60-C519CC8EA850",
+          "name": "Hochdruckreiniger",
+          "pageId": "97B62778-1E8C-41DA-9A60-C519CC8EA850"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E0972E71-BFA7-41DC-94F2-8381F366F2B8",
+          "name": "Gartengeräte",
+          "pageId": "E0972E71-BFA7-41DC-94F2-8381F366F2B8"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/AB307551-BA34-4906-ADBB-7A79AED902DA",
+          "name": "Support",
+          "pageId": "AB307551-BA34-4906-ADBB-7A79AED902DA"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/81BA87F5-1357-4D70-98E9-A84A96D9A08B",
+          "name": "Sauger",
+          "pageId": "81BA87F5-1357-4D70-98E9-A84A96D9A08B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/19EFC758-407E-4A48-9E50-7D0C964A76B4",
+          "name": "Auto-Innenreinigung",
+          "pageId": "19EFC758-407E-4A48-9E50-7D0C964A76B4"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/09DDA5BE-4FED-49BF-8750-C8557319810A",
+          "name": "Wisch- und Saugroboter",
+          "pageId": "09DDA5BE-4FED-49BF-8750-C8557319810A"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/AFC416C2-B173-4908-A1D4-9860C0EFEDE9",
+          "name": "Tauchpumpen",
+          "pageId": "AFC416C2-B173-4908-A1D4-9860C0EFEDE9"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E882A94D-9BEB-42E6-B8F0-63F622B18BBC",
+          "name": "Eiskratzer",
+          "pageId": "E882A94D-9BEB-42E6-B8F0-63F622B18BBC"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/A78A4AC1-E163-4316-897B-DCDC52B3BDD9",
+          "name": "Classic Range",
+          "pageId": "A78A4AC1-E163-4316-897B-DCDC52B3BDD9"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/C7D9DFBD-B897-40C7-A791-CAC893F0CFF1",
+          "name": "Nass-/Trockensauger mit Kabel",
+          "pageId": "C7D9DFBD-B897-40C7-A791-CAC893F0CFF1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/7F8C6863-F622-4CD3-90F5-C1AE24E7AC48",
+          "name": "18 V Akku-Plattform",
+          "pageId": "7F8C6863-F622-4CD3-90F5-C1AE24E7AC48"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/AA7927A1-66A2-4455-9A31-5A45750B327A",
+          "name": "Zubehör & Reinigungsmittel",
+          "pageId": "AA7927A1-66A2-4455-9A31-5A45750B327A"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/5380C0E8-0F8F-4BDA-8268-0BD662D0DE02",
+          "name": "Boden",
+          "pageId": "5380C0E8-0F8F-4BDA-8268-0BD662D0DE02"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E6FE68FD-8409-43E5-8203-41850F9AB237",
+          "name": "Bewässerung",
+          "pageId": "E6FE68FD-8409-43E5-8203-41850F9AB237"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/B34598C1-89EA-459E-8034-55C6246262F5",
+          "name": "Professionelle Reinigung",
+          "pageId": "B34598C1-89EA-459E-8034-55C6246262F5"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/124DD6B7-CFC4-4DB9-8015-5A8375FFD5E3",
+          "name": "Garten",
+          "pageId": "124DD6B7-CFC4-4DB9-8015-5A8375FFD5E3"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/CF7C5057-C93C-49C3-933D-43EEE2E45E5B",
+          "name": "Robotics",
+          "pageId": "CF7C5057-C93C-49C3-933D-43EEE2E45E5B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/8A45100B-B5A9-4120-B63A-0906FD9E9DC0",
+          "name": "Fensterputzroboter",
+          "pageId": "8A45100B-B5A9-4120-B63A-0906FD9E9DC0"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/AE5F8E0F-B355-4059-9891-BCBC76BCBE1E",
+          "name": "Black Week ",
+          "pageId": "AE5F8E0F-B355-4059-9891-BCBC76BCBE1E"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/D0304A6E-C096-4C83-A3DA-17032E31773B",
+          "name": "Staubsauger mit Akku",
+          "pageId": "D0304A6E-C096-4C83-A3DA-17032E31773B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/CF4F79EB-8324-4AEE-BF86-65184069C8D6",
+          "name": "Dampfsauger",
+          "pageId": "CF4F79EB-8324-4AEE-BF86-65184069C8D6"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/87F34C5B-B16F-4041-A94D-EEF96F055932",
+          "name": "Terrassenreiniger",
+          "pageId": "87F34C5B-B16F-4041-A94D-EEF96F055932"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/F84FBA16-3D3D-4919-B48C-549DB15BBD72",
+          "name": "Akku-Plattform",
+          "pageId": "F84FBA16-3D3D-4919-B48C-549DB15BBD72"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/AEB8D47F-2A78-46BC-915B-50AE686F44CD",
+          "name": "Dampfreiniger",
+          "pageId": "AEB8D47F-2A78-46BC-915B-50AE686F44CD"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/F748B9D5-73BA-491A-923B-7175C799FB53",
+          "name": "Luftreiniger",
+          "pageId": "F748B9D5-73BA-491A-923B-7175C799FB53"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/45A44D2D-902C-4274-9474-2B35A9F03EF9",
+          "name": "Nass-/Trockensauger mit Akku",
+          "pageId": "45A44D2D-902C-4274-9474-2B35A9F03EF9"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/94131FA2-C4EC-4CEC-965A-555A03CA8DB6",
+          "name": "Neuheiten",
+          "pageId": "94131FA2-C4EC-4CEC-965A-555A03CA8DB6"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/3A63C461-9D61-4B02-9906-C98DAF77B75E",
+          "name": "Auto-Außenreinigung",
+          "pageId": "3A63C461-9D61-4B02-9906-C98DAF77B75E"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/AC790771-8C36-4807-BF25-FD09E800DA4D",
+          "name": "Mähroboter",
+          "pageId": "AC790771-8C36-4807-BF25-FD09E800DA4D"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0A1B603B-5F29-4F97-BBF0-2005E2851470",
+          "name": "Comfort Range",
+          "pageId": "0A1B603B-5F29-4F97-BBF0-2005E2851470"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/56929E1C-3EF3-4319-ABA8-EF46A8105555",
+          "name": "Reinigungsmittel",
+          "pageId": "56929E1C-3EF3-4319-ABA8-EF46A8105555"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/1A86069C-1631-4B83-8A34-9272E13066D7",
+          "name": "Dampf",
+          "pageId": "1A86069C-1631-4B83-8A34-9272E13066D7"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/98F6CA92-0973-4672-9C74-D81D7975913B",
+          "name": "Druckerzeugende Pumpen",
+          "pageId": "98F6CA92-0973-4672-9C74-D81D7975913B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/4B3D877E-69BA-4C65-A452-83CC00E467D1",
+          "name": "Rund ums Auto",
+          "pageId": "4B3D877E-69BA-4C65-A452-83CC00E467D1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E146F317-BCC1-49BC-8852-B91574CB67EF",
+          "name": "Kehrmaschinen",
+          "pageId": "E146F317-BCC1-49BC-8852-B91574CB67EF"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/8B390E3E-468D-4D33-9757-77981BB3C5F4",
+          "name": "Saugwischer",
+          "pageId": "8B390E3E-468D-4D33-9757-77981BB3C5F4"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/523B98FB-04AF-4BB6-B81A-4D1827CECD84",
+          "name": "Zubehör",
+          "pageId": "523B98FB-04AF-4BB6-B81A-4D1827CECD84"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/FFA50349-EB09-48B1-B2B9-C4B89DBD6439",
+          "name": "Waschsauger",
+          "pageId": "FFA50349-EB09-48B1-B2B9-C4B89DBD6439"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/B8583127-7487-4FF2-BAE9-D10A2061E130",
+          "name": "Zubehör & Reinigungsmittel",
+          "pageId": "B8583127-7487-4FF2-BAE9-D10A2061E130"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/DBF29C9C-8682-4585-A15F-9920FD1073E2",
+          "name": "Aschesauger",
+          "pageId": "DBF29C9C-8682-4585-A15F-9920FD1073E2"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/8BDCFBCD-E6D6-49ED-A50C-FDD132670143",
+          "name": "Fenstersauger",
+          "pageId": "8BDCFBCD-E6D6-49ED-A50C-FDD132670143"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/FBCA4DDE-C60F-45DD-8153-ACFCA0309A71",
+          "name": "Mobile Reinigung",
+          "pageId": "FBCA4DDE-C60F-45DD-8153-ACFCA0309A71"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/A2F9F4C0-013D-4A9A-A106-5380AFC6E0D1",
+          "name": "Akkubesen",
+          "pageId": "A2F9F4C0-013D-4A9A-A106-5380AFC6E0D1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/7F3376BB-553A-44D7-B696-5EFC64787804",
+          "name": "Staubsauger mit Kabel",
+          "pageId": "7F3376BB-553A-44D7-B696-5EFC64787804"
+        }
+      ],
+      "retryNote": "Canonical page URL without non-ASCII brand path"
+    },
+    {
+      "id": "blackroll",
+      "catalogBrand": "BLACKROLL",
+      "sourceUrl": "https://www.amazon.de/stores/page/03098AB4-BDD5-4A23-A7DD-5C10153C5D58",
+      "retrievedAt": "2026-11-21T15:41:51.555196+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "BLACKROLL",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/page/03098AB4-BDD5-4A23-A7DD-5C10153C5D58",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0C47A3FC-C1D2-4C30-B03C-86EDFB3B607A",
+          "name": "Faszienrollen",
+          "pageId": "0C47A3FC-C1D2-4C30-B03C-86EDFB3B607A"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0EC7448C-FEF3-4672-BB11-15EAD7208270",
+          "name": "Trainingsbänder",
+          "pageId": "0EC7448C-FEF3-4672-BB11-15EAD7208270"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/870649DE-4F7E-421F-B141-C4C47864D539",
+          "name": "Schlaf",
+          "pageId": "870649DE-4F7E-421F-B141-C4C47864D539"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/DD99AD6C-2ABA-4720-8BE8-06517078F35B",
+          "name": "Bälle & Trigger",
+          "pageId": "DD99AD6C-2ABA-4720-8BE8-06517078F35B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/031EB79B-C8A4-4E6D-ADBF-B84F0D3957ED",
+          "name": "Über BLACKROLL",
+          "pageId": "031EB79B-C8A4-4E6D-ADBF-B84F0D3957ED"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/9A8C7424-898F-4E76-9442-CBCDB511CECB",
+          "name": "Massagepistole",
+          "pageId": "9A8C7424-898F-4E76-9442-CBCDB511CECB"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/A2470DD2-F6B7-49D3-9DE1-4BC9FBE710B0",
+          "name": "Bestseller",
+          "pageId": "A2470DD2-F6B7-49D3-9DE1-4BC9FBE710B0"
+        }
+      ]
+    },
+    {
+      "id": "more-nutrition",
+      "catalogBrand": "MORE Nutrition",
+      "sourceUrl": "https://www.amazon.de/stores/page/7AD425C6-C3C5-402D-A69D-D6201F98F888",
+      "retrievedAt": "2026-11-21T15:41:55.840178+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "MORE",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/page/7AD425C6-C3C5-402D-A69D-D6201F98F888",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/55FD402B-A0DC-4A7C-BD00-2D0ECE353C4D",
+          "name": "CLEAR PROTEIN",
+          "pageId": "55FD402B-A0DC-4A7C-BD00-2D0ECE353C4D"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/9A82B50C-BA5A-4A3B-ADBB-7B729770F289",
+          "name": "PROTEINE",
+          "pageId": "9A82B50C-BA5A-4A3B-ADBB-7B729770F289"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/A217601D-395D-4DF1-B940-4BABA3DAD6E5",
+          "name": "VEGAN PROTEIN",
+          "pageId": "A217601D-395D-4DF1-B940-4BABA3DAD6E5"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/DA439A68-D45D-4BB9-97CC-5D706DC1CF89",
+          "name": "ZERUP",
+          "pageId": "DA439A68-D45D-4BB9-97CC-5D706DC1CF89"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/B0C9AE88-4FDC-423E-9101-40DA4F857EA1",
+          "name": "BUNDLE",
+          "pageId": "B0C9AE88-4FDC-423E-9101-40DA4F857EA1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/3D5F63E7-0917-4ABF-9F07-7D10B2AC1639",
+          "name": "PROTEIN ICED COFFEE",
+          "pageId": "3D5F63E7-0917-4ABF-9F07-7D10B2AC1639"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/48018341-612A-4387-8B80-C2B4BE8FD4E1",
+          "name": "RIEGEL & BREAKFAST",
+          "pageId": "48018341-612A-4387-8B80-C2B4BE8FD4E1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/955D7A8F-262D-4CA3-9F17-E5925A283BCA",
+          "name": "EMMAS SUPPLEMENT FAVORITEN",
+          "pageId": "955D7A8F-262D-4CA3-9F17-E5925A283BCA"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/5C4AE7B3-FEE1-4887-B719-D0188FF74E51",
+          "name": "PROTEIN MILKSHAKE",
+          "pageId": "5C4AE7B3-FEE1-4887-B719-D0188FF74E51"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/D5FF78A5-8306-4D4B-80F7-F20BFBA08472",
+          "name": "CHUNKY FLAVOUR",
+          "pageId": "D5FF78A5-8306-4D4B-80F7-F20BFBA08472"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/FF02FFDF-61F9-432B-8AE1-DD74BC62FF11",
+          "name": "FIZI",
+          "pageId": "FF02FFDF-61F9-432B-8AE1-DD74BC62FF11"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/B0B4CEEB-909A-4DC6-A571-6AA4D718DB21",
+          "name": "BESTSELLER",
+          "pageId": "B0B4CEEB-909A-4DC6-A571-6AA4D718DB21"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/DCB9D63B-78C7-46D4-8DEA-53DB08EDEF28",
+          "name": "VITALSTOFFE",
+          "pageId": "DCB9D63B-78C7-46D4-8DEA-53DB08EDEF28"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/3F52E257-1181-4E18-B346-6996AF9487AF",
+          "name": "DEALS",
+          "pageId": "3F52E257-1181-4E18-B346-6996AF9487AF"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/F081FD4B-1559-4A38-A4F3-FC8E6732BCEB",
+          "name": "ALLE PRODUKTE",
+          "pageId": "F081FD4B-1559-4A38-A4F3-FC8E6732BCEB"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/483E27E9-01B3-441C-B1B9-DD468E87F786",
+          "name": "CLEAR GLOW PEPTIDES",
+          "pageId": "483E27E9-01B3-441C-B1B9-DD468E87F786"
+        }
+      ]
+    },
+    {
+      "id": "hansegruen",
+      "catalogBrand": "Hansegrün",
+      "sourceUrl": "https://www.amazon.de/stores/page/BC9A9642-4612-460E-81B4-985E9AF6A7D2",
+      "retrievedAt": "2026-11-21T15:41:57.265874+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "Hansegrün",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/page/BC9A9642-4612-460E-81B4-985E9AF6A7D2",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/9FF2F0B5-FEF0-440C-BC89-96F38A3A0AB3",
+          "name": "Zahnfunktion",
+          "pageId": "9FF2F0B5-FEF0-440C-BC89-96F38A3A0AB3"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/B1F30782-EE07-438C-A81E-BF3EEFA3D864",
+          "name": "Stoffwechsel",
+          "pageId": "B1F30782-EE07-438C-A81E-BF3EEFA3D864"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0DB9FDD8-7C90-4CAC-BFF6-BAEBC586C20C",
+          "name": "Spar-Sets",
+          "pageId": "0DB9FDD8-7C90-4CAC-BFF6-BAEBC586C20C"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2446F867-676F-4181-9407-E1CFA2DEAF1E",
+          "name": "Knochenfunktion",
+          "pageId": "2446F867-676F-4181-9407-E1CFA2DEAF1E"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/4927D23C-78ED-498D-B776-821846C16EF4",
+          "name": "Immunsystem",
+          "pageId": "4927D23C-78ED-498D-B776-821846C16EF4"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/FE5A6FE8-EC0C-49F0-A53E-48C85B7E36EE",
+          "name": "Über Uns ",
+          "pageId": "FE5A6FE8-EC0C-49F0-A53E-48C85B7E36EE"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/932921B2-3CF0-4811-A47A-57F30802258D",
+          "name": "Vitamine",
+          "pageId": "932921B2-3CF0-4811-A47A-57F30802258D"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/84B4DA7A-F7B4-4899-BDCC-02B15DAC9661",
+          "name": "Produktfinder",
+          "pageId": "84B4DA7A-F7B4-4899-BDCC-02B15DAC9661"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E3FD5652-9AC5-4AC2-BD9C-F784C33A22D5",
+          "name": "Shots",
+          "pageId": "E3FD5652-9AC5-4AC2-BD9C-F784C33A22D5"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0599725A-6655-4CC0-BEF9-A1611BA0DF50",
+          "name": "Alle Produkte",
+          "pageId": "0599725A-6655-4CC0-BEF9-A1611BA0DF50"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/EEB1E137-CE92-47E2-AB61-F7CD0360E56D",
+          "name": "Ingwer-Shots",
+          "pageId": "EEB1E137-CE92-47E2-AB61-F7CD0360E56D"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/80F669C1-CF9D-417C-8854-2DA0327F856B",
+          "name": "Hautfunktion ",
+          "pageId": "80F669C1-CF9D-417C-8854-2DA0327F856B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/8012E3F8-58F8-4E4E-A449-138CB6957417",
+          "name": "Darmfunktion",
+          "pageId": "8012E3F8-58F8-4E4E-A449-138CB6957417"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/46F5F32D-2512-43B8-9014-03B2E7C34E43",
+          "name": "Energie & Sport",
+          "pageId": "46F5F32D-2512-43B8-9014-03B2E7C34E43"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/D7E40E02-645F-4075-920E-13EF29A5E155",
+          "name": "Anti-Müdigkeit",
+          "pageId": "D7E40E02-645F-4075-920E-13EF29A5E155"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/8593169F-6771-4714-8946-B310EAAA30F7",
+          "name": "Neuheiten",
+          "pageId": "8593169F-6771-4714-8946-B310EAAA30F7"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/D8C5667C-2A77-44D0-9763-5CDAF47FF323",
+          "name": "Zellschutz",
+          "pageId": "D8C5667C-2A77-44D0-9763-5CDAF47FF323"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/1A36A785-C6EF-41F1-BBE7-96999ABEFF86",
+          "name": "Eisenaufnahme",
+          "pageId": "1A36A785-C6EF-41F1-BBE7-96999ABEFF86"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/5DB7F16C-C04D-4386-B9B7-B1593215B7A4",
+          "name": "Benefits",
+          "pageId": "5DB7F16C-C04D-4386-B9B7-B1593215B7A4"
+        }
+      ]
+    },
+    {
+      "id": "holy-energy",
+      "catalogBrand": "HOLY Energy",
+      "sourceUrl": "https://www.amazon.de/stores/HOLYEnergy/page/7913E121-CB43-4349-A8D2-9F0843B226E4",
+      "retrievedAt": "2026-11-21T15:42:01.084201+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "HOLY Energy",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/HOLYEnergy/page/7913E121-CB43-4349-A8D2-9F0843B226E4",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/6AD7F40F-ED3C-4B02-BDC9-310A071E3EC7",
+          "name": "Milkshakes",
+          "pageId": "6AD7F40F-ED3C-4B02-BDC9-310A071E3EC7"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/229C0965-6260-45EF-8A4F-1723BD514037",
+          "name": "Probier-Boxen",
+          "pageId": "229C0965-6260-45EF-8A4F-1723BD514037"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0AB41119-9BEE-431D-B7CC-346E3516D209",
+          "name": "Adventskalender",
+          "pageId": "0AB41119-9BEE-431D-B7CC-346E3516D209"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/18BC62B2-B4AF-4995-B743-E80AECFA53AA",
+          "name": "Energy",
+          "pageId": "18BC62B2-B4AF-4995-B743-E80AECFA53AA"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E0597C1D-5961-4E87-9CA5-2FAF0299330D",
+          "name": "Für Neueinsteiger",
+          "pageId": "E0597C1D-5961-4E87-9CA5-2FAF0299330D"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/69AF9424-DDC3-4F16-8AE0-F35BB75BD83A",
+          "name": "Über uns",
+          "pageId": "69AF9424-DDC3-4F16-8AE0-F35BB75BD83A"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/3B80FD95-4F71-4D28-944B-EA001C45FF3C",
+          "name": "Shaker",
+          "pageId": "3B80FD95-4F71-4D28-944B-EA001C45FF3C"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/527A4D3B-EC68-4755-BF8D-2BF264AE1694",
+          "name": "Iced Tea ",
+          "pageId": "527A4D3B-EC68-4755-BF8D-2BF264AE1694"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/34F0F6AC-314F-4167-9EDA-54E94AC937C7",
+          "name": "Hydration",
+          "pageId": "34F0F6AC-314F-4167-9EDA-54E94AC937C7"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E8F850A5-CE46-4877-88C4-F4F5A0365D02",
+          "name": "Bestseller",
+          "pageId": "E8F850A5-CE46-4877-88C4-F4F5A0365D02"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/15F6D24E-FF9D-4FE5-A1FB-5A2AD609CFE1",
+          "name": "Starter Sets",
+          "pageId": "15F6D24E-FF9D-4FE5-A1FB-5A2AD609CFE1"
+        }
+      ]
+    },
+    {
+      "id": "manscaped",
+      "catalogBrand": "Manscaped",
+      "sourceUrl": "https://www.amazon.de/stores/page/44908195-3880-47D6-9EC0-D2A1543EB718",
+      "retrievedAt": "2026-11-21T15:42:03.766540+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "MANSCAPED",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/page/44908195-3880-47D6-9EC0-D2A1543EB718",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/F47CDB54-243B-4F80-85AA-DE78C5D20670",
+          "name": "Geschenke!",
+          "pageId": "F47CDB54-243B-4F80-85AA-DE78C5D20670"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/8378B173-54DF-410C-AF93-45DC9BC292ED",
+          "name": "Kopf & Körper",
+          "pageId": "8378B173-54DF-410C-AF93-45DC9BC292ED"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/A6D978D0-0FA4-4D40-90A6-070E950B7AF7",
+          "name": "Bestseller",
+          "pageId": "A6D978D0-0FA4-4D40-90A6-070E950B7AF7"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/B9156B89-6D11-4DB0-8531-9C8616A9AAAA",
+          "name": "Bart & Gesicht",
+          "pageId": "B9156B89-6D11-4DB0-8531-9C8616A9AAAA"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/5E8779F0-69E8-4B1B-919E-8D608323F41C",
+          "name": "Intimpflege",
+          "pageId": "5E8779F0-69E8-4B1B-919E-8D608323F41C"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2A73DBBB-F712-422E-86F2-67468B9CAC49",
+          "name": "Alle Produkte",
+          "pageId": "2A73DBBB-F712-422E-86F2-67468B9CAC49"
+        }
+      ]
+    },
+    {
+      "id": "desktronic",
+      "catalogBrand": "Desktronic",
+      "sourceUrl": "https://www.amazon.de/stores/Desktronic/page/1A862649-6CEA-4E30-855F-0C27A1F99A6C",
+      "retrievedAt": "2026-11-21T15:42:04.148497+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "Desktronic",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/Desktronic/page/1A862649-6CEA-4E30-855F-0C27A1F99A6C",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/8C7A8AE9-1F24-4831-8F46-7CEB09ED2B5E",
+          "name": "Zubehör",
+          "pageId": "8C7A8AE9-1F24-4831-8F46-7CEB09ED2B5E"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/993B6236-F91F-4736-B15E-C5E5A0562567",
+          "name": "HomeOne Schreibtisch",
+          "pageId": "993B6236-F91F-4736-B15E-C5E5A0562567"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/B5810344-5F1D-4970-9C50-544F424C30AA",
+          "name": "SitOne Bürostuhl",
+          "pageId": "B5810344-5F1D-4970-9C50-544F424C30AA"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/3193146C-9ED2-4026-86E4-87ED24387F0D",
+          "name": "SitPro Bürostuhl",
+          "pageId": "3193146C-9ED2-4026-86E4-87ED24387F0D"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0E499C6E-8685-43CC-933A-35AB977CF3C6",
+          "name": "Alle Produkte",
+          "pageId": "0E499C6E-8685-43CC-933A-35AB977CF3C6"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/5C77F5BF-E87C-439D-B24B-BFAB70D81229",
+          "name": "HomePro Schreibtisch",
+          "pageId": "5C77F5BF-E87C-439D-B24B-BFAB70D81229"
+        }
+      ]
+    },
+    {
+      "id": "cloudpillo",
+      "catalogBrand": "Cloudpillo",
+      "sourceUrl": "https://www.amazon.de/stores/Cloudpillo/page/741141B6-87D5-44F9-BE63-71B55CD51198",
+      "retrievedAt": "2026-11-21T15:42:09.443943+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "Cloudpillo",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/Cloudpillo/page/741141B6-87D5-44F9-BE63-71B55CD51198",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/49C41ED6-29D9-4150-8735-3C811514ACF2",
+          "name": "Unsere Mission",
+          "pageId": "49C41ED6-29D9-4150-8735-3C811514ACF2"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2F1BB578-35E0-470C-96E4-5AD4AAE447CD",
+          "name": "Bettdecke",
+          "pageId": "2F1BB578-35E0-470C-96E4-5AD4AAE447CD"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2DAF08C8-3817-4AC8-A428-061B697A1BE8",
+          "name": "Toppers",
+          "pageId": "2DAF08C8-3817-4AC8-A428-061B697A1BE8"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/D73418D9-C2AA-46C1-95C3-C7C1E13EBA10",
+          "name": "Kissen",
+          "pageId": "D73418D9-C2AA-46C1-95C3-C7C1E13EBA10"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/885D4993-7DFA-4028-BC3E-AEB374452AF9",
+          "name": "Bettwäsche",
+          "pageId": "885D4993-7DFA-4028-BC3E-AEB374452AF9"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/23BD4500-CF41-4E60-BB7C-C9C7ABC049BA",
+          "name": "Alle Produkte",
+          "pageId": "23BD4500-CF41-4E60-BB7C-C9C7ABC049BA"
+        }
+      ]
+    },
+    {
+      "id": "bedsure",
+      "catalogBrand": "Bedsure",
+      "sourceUrl": "https://www.amazon.de/stores/page/7DC5A9F8-2A3D-426B-B2F2-F819AE825B1F",
+      "retrievedAt": "2026-11-21T15:42:10.966425+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "Bedsure",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/page/7DC5A9F8-2A3D-426B-B2F2-F819AE825B1F",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/ED1B32C3-3890-4245-8A84-ECD16C98BFAF",
+          "name": "Über Bedsure",
+          "pageId": "ED1B32C3-3890-4245-8A84-ECD16C98BFAF"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/8B9660CA-9C46-42A4-B289-C08618110009",
+          "name": "Kuscheldecke mit Ärmeln",
+          "pageId": "8B9660CA-9C46-42A4-B289-C08618110009"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/86EE23E4-B85F-4167-8FE0-E32C59862F42",
+          "name": "Heizdecke",
+          "pageId": "86EE23E4-B85F-4167-8FE0-E32C59862F42"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0327D6BF-BFA7-49D7-80B2-31707A7C0AF9",
+          "name": "Bettdecke & Kissen",
+          "pageId": "0327D6BF-BFA7-49D7-80B2-31707A7C0AF9"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/C2FACEA3-48EC-4B21-A2B3-4B2691A2F8D9",
+          "name": "Angebote",
+          "pageId": "C2FACEA3-48EC-4B21-A2B3-4B2691A2F8D9"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2F249C26-269C-4A0B-ACB2-7AB6436FFDC5",
+          "name": "Kuscheldecken",
+          "pageId": "2F249C26-269C-4A0B-ACB2-7AB6436FFDC5"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/B1CD25B0-00E2-4612-AE9D-651A966B8695",
+          "name": "Matratzen-Topper & Schoner",
+          "pageId": "B1CD25B0-00E2-4612-AE9D-651A966B8695"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/4647A147-C667-43C9-ACB3-55D0A86680EF",
+          "name": "Sanft in den Sommer",
+          "pageId": "4647A147-C667-43C9-ACB3-55D0A86680EF"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/D3572273-7281-48F0-A73C-DBEBE742C517",
+          "name": "Geschenkideen aus dem TV",
+          "pageId": "D3572273-7281-48F0-A73C-DBEBE742C517"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/652C1CB5-3C1F-41DB-802F-9A308D45AE28",
+          "name": "Kissenbezüge & Spannbettlaken",
+          "pageId": "652C1CB5-3C1F-41DB-802F-9A308D45AE28"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/D537A0F0-8099-477C-A9CE-4E44DA3B8F13",
+          "name": "Bettwäsche-Sets",
+          "pageId": "D537A0F0-8099-477C-A9CE-4E44DA3B8F13"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/B3B34DD4-8067-4CF4-B764-5BEDBD5B40E8",
+          "name": "Haustierbedarf",
+          "pageId": "B3B34DD4-8067-4CF4-B764-5BEDBD5B40E8"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/C816FA15-39F5-4087-9822-ED9E29A7A369",
+          "name": "Unsere Winter-Favoriten",
+          "pageId": "C816FA15-39F5-4087-9822-ED9E29A7A369"
+        }
+      ]
+    },
+    {
+      "id": "feandrea",
+      "catalogBrand": "Feandrea",
+      "sourceUrl": "https://www.amazon.de/stores/page/FB4FA857-CD07-4E92-A32C-CF0CD556ACF6",
+      "retrievedAt": "2026-11-21T15:42:11.061872+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "Feandrea by SONGMICS HOME",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/page/FB4FA857-CD07-4E92-A32C-CF0CD556ACF6",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/00DBC12A-7F8E-4D37-9AE8-4C36995BAD61",
+          "name": "Reisen",
+          "pageId": "00DBC12A-7F8E-4D37-9AE8-4C36995BAD61"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E638C3C6-6987-4A7C-82A7-B48428BFD042",
+          "name": "Verantwortung und nachhaltige Entwicklung",
+          "pageId": "E638C3C6-6987-4A7C-82A7-B48428BFD042"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/676BAC71-9894-4E30-8FB6-EEF836E3B01B",
+          "name": "Angebote für Liegeplätze",
+          "pageId": "676BAC71-9894-4E30-8FB6-EEF836E3B01B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2473A208-0A9B-400F-BEE1-5524BD21C6CE",
+          "name": "FÜR KATZEN",
+          "pageId": "2473A208-0A9B-400F-BEE1-5524BD21C6CE"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/DB55E390-463A-429C-A40C-34A65AFAF7D6",
+          "name": "Plüsch-Katzenbaum",
+          "pageId": "DB55E390-463A-429C-A40C-34A65AFAF7D6"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/97D6A597-37C0-4276-9466-0273791DE1EF",
+          "name": "FÜR HUNDE",
+          "pageId": "97D6A597-37C0-4276-9466-0273791DE1EF"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/79CD69FF-F2DB-4E27-8F9E-3F695FB9DFB8",
+          "name": "NEU",
+          "pageId": "79CD69FF-F2DB-4E27-8F9E-3F695FB9DFB8"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/06E41D00-37AB-410B-806A-F61ED995EC21",
+          "name": "Angebote für Kratzbäume",
+          "pageId": "06E41D00-37AB-410B-806A-F61ED995EC21"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0969F474-6991-44A8-864E-BAC3587E4935",
+          "name": "Kratzbäume",
+          "pageId": "0969F474-6991-44A8-864E-BAC3587E4935"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/97094D2F-563F-4422-B710-28841A9F6683",
+          "name": "Angebote für Katzentoiletten",
+          "pageId": "97094D2F-563F-4422-B710-28841A9F6683"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/8E84A731-73B4-4D1F-BACB-BB771254EC72",
+          "name": "Hundekäfige & Welpenauslauf",
+          "pageId": "8E84A731-73B4-4D1F-BACB-BB771254EC72"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/02B002CE-AFBB-4AFD-92E6-F72091C8AF8F",
+          "name": "Haustierdecken",
+          "pageId": "02B002CE-AFBB-4AFD-92E6-F72091C8AF8F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/C4BB408C-0A39-419A-AAC6-8842A2C07C6E",
+          "name": "Hundebetten",
+          "pageId": "C4BB408C-0A39-419A-AAC6-8842A2C07C6E"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/DBB6865F-DE30-4750-8C40-DD758D358CF8",
+          "name": "Angebote für Hundeboxen",
+          "pageId": "DBB6865F-DE30-4750-8C40-DD758D358CF8"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/9FD71EC8-799E-4138-B6F0-1BA84F03F656",
+          "name": "Über uns",
+          "pageId": "9FD71EC8-799E-4138-B6F0-1BA84F03F656"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/22136B4B-B7BE-458B-8950-8DEC2FEB2DFF",
+          "name": "Sonderangebote",
+          "pageId": "22136B4B-B7BE-458B-8950-8DEC2FEB2DFF"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/9D292035-B55B-4F3C-A8D2-50B5823F3A49",
+          "name": "Moderner Katzenbaum",
+          "pageId": "9D292035-B55B-4F3C-A8D2-50B5823F3A49"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0B547FBB-8DCA-4C30-99F3-693B36741CEB",
+          "name": "Katzenklos & -schränke",
+          "pageId": "0B547FBB-8DCA-4C30-99F3-693B36741CEB"
+        }
+      ]
+    },
+    {
+      "id": "klosterkitchen",
+      "catalogBrand": "Kloster Kitchen",
+      "sourceUrl": "https://www.amazon.de/stores/page/34D4A812-9A68-4602-A6A0-30565D399620",
+      "retrievedAt": "2026-11-21T15:42:12.973316+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "Kloster Kitchen",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/page/34D4A812-9A68-4602-A6A0-30565D399620",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E",
+          "name": "SMOOTHIES",
+          "pageId": "BD9C34C6-7E66-4235-BA0C-2E8AAFF2CC7E"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/137B3A93-BC04-42D0-89A9-8EFD54CF895E",
+          "name": "Spar-Abo",
+          "pageId": "137B3A93-BC04-42D0-89A9-8EFD54CF895E"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/F031D76B-9B76-426A-93A9-2EBBCB5150CF",
+          "name": "Über Uns",
+          "pageId": "F031D76B-9B76-426A-93A9-2EBBCB5150CF"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/998F3BE4-E37F-47C7-8539-A79DE27AF043",
+          "name": "Shot Kur",
+          "pageId": "998F3BE4-E37F-47C7-8539-A79DE27AF043"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/EF234CA2-C1C8-4B07-B2CC-1553E231D3F2",
+          "name": "Ingwer Shots",
+          "pageId": "EF234CA2-C1C8-4B07-B2CC-1553E231D3F2"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/33D8D5E6-A887-4D06-87F4-212CC0D6E24A",
+          "name": "Geschenkidee",
+          "pageId": "33D8D5E6-A887-4D06-87F4-212CC0D6E24A"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/95330F7A-5A8A-44E2-B872-B761E4DEF56A",
+          "name": "Zubehör",
+          "pageId": "95330F7A-5A8A-44E2-B872-B761E4DEF56A"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E337104E-63D3-41B2-8560-D92F482B2790",
+          "name": "Mikronährstoffe",
+          "pageId": "E337104E-63D3-41B2-8560-D92F482B2790"
+        }
+      ]
+    },
+    {
+      "id": "bears-with-benefits",
+      "catalogBrand": "Bears with Benefits",
+      "sourceUrl": "https://www.amazon.de/stores/BearswithBenefits/page/AFC77FAF-F173-4A4E-A7DF-8779F7E16E97",
+      "retrievedAt": "2026-11-21T15:42:17.942433+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "Bears with Benefits",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/BearswithBenefits/page/AFC77FAF-F173-4A4E-A7DF-8779F7E16E97",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/20D48309-9A8C-4DB5-BF33-0F6267E70AB0",
+          "name": "Bestseller",
+          "pageId": "20D48309-9A8C-4DB5-BF33-0F6267E70AB0"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E45E1287-A5C1-446F-9121-4ECB82E439BE",
+          "name": "Für deine Haare",
+          "pageId": "E45E1287-A5C1-446F-9121-4ECB82E439BE"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/D907AF58-3D4B-437C-B95A-04F0B8191096",
+          "name": "Immunsystem & Abwehrkräfte",
+          "pageId": "D907AF58-3D4B-437C-B95A-04F0B8191096"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/3AE789FC-334A-465D-81C1-985D718BB16A",
+          "name": "Essentials",
+          "pageId": "3AE789FC-334A-465D-81C1-985D718BB16A"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/5F58F818-ADD1-4080-BC12-876871183A18",
+          "name": "Für deine Haut",
+          "pageId": "5F58F818-ADD1-4080-BC12-876871183A18"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/7F466F17-DBBD-4B07-AF14-670887D4FDC1",
+          "name": "Frauengesundheit",
+          "pageId": "7F466F17-DBBD-4B07-AF14-670887D4FDC1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/20A398FB-7DE1-4563-9EBA-78633469A4CA",
+          "name": "Figur & Stoffwechsel",
+          "pageId": "20A398FB-7DE1-4563-9EBA-78633469A4CA"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/C7BA935B-3A14-485C-9A31-9389412562A3",
+          "name": "Über uns ",
+          "pageId": "C7BA935B-3A14-485C-9A31-9389412562A3"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/283E86DE-EE6A-494E-AD44-65BB19D6BAB4",
+          "name": "Spar-Abo",
+          "pageId": "283E86DE-EE6A-494E-AD44-65BB19D6BAB4"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/45D3D792-9300-4577-B09D-EBA4C1549A43",
+          "name": "Kids",
+          "pageId": "45D3D792-9300-4577-B09D-EBA4C1549A43"
+        }
+      ]
+    },
+    {
+      "id": "twentythree",
+      "catalogBrand": "twentythree",
+      "sourceUrl": "https://www.amazon.de/stores/twentythree/page/0E8D9A31-200C-4EC5-BC94-CBBC023B28A4",
+      "retrievedAt": "2026-11-21T15:42:18.301195+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "twentythree",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/twentythree/page/0E8D9A31-200C-4EC5-BC94-CBBC023B28A4",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/F0FD66FC-88D8-4CB9-ACFA-3669EF15A5E5",
+          "name": "Alle Produkte",
+          "pageId": "F0FD66FC-88D8-4CB9-ACFA-3669EF15A5E5"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/009D4AA9-B7AD-4F33-BBCC-9531AEF53709",
+          "name": "Bettlaken",
+          "pageId": "009D4AA9-B7AD-4F33-BBCC-9531AEF53709"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/15C8BFA1-4A3D-4C7E-82A3-2A626199A6B7",
+          "name": "Bettwäsche",
+          "pageId": "15C8BFA1-4A3D-4C7E-82A3-2A626199A6B7"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/F43A372B-1D99-4754-8B6F-879D8E039AF8",
+          "name": "Bettdecke & Kissen",
+          "pageId": "F43A372B-1D99-4754-8B6F-879D8E039AF8"
+        }
+      ]
+    },
+    {
+      "id": "nightcat",
+      "catalogBrand": "Night Cat",
+      "sourceUrl": "https://www.amazon.de/stores/page/CC609240-DCC5-47C5-A171-3B973268CD34",
+      "retrievedAt": "2026-11-21T15:42:19.604282+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "Night Cat, Catch Outdoors Fun",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/page/CC609240-DCC5-47C5-A171-3B973268CD34",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/402D4646-6CC4-465D-B77B-005C65179575",
+          "name": "Ultraleichtes Zelt ",
+          "pageId": "402D4646-6CC4-465D-B77B-005C65179575"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/20A5B648-FC7B-4A1B-8E64-4C03A067AC8B",
+          "name": "Wanderrucksäcke",
+          "pageId": "20A5B648-FC7B-4A1B-8E64-4C03A067AC8B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/4FED862B-112B-41A6-B1A9-F8ED490BD6E7",
+          "name": "Kuppelzelt ",
+          "pageId": "4FED862B-112B-41A6-B1A9-F8ED490BD6E7"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/56EC8D6F-57EB-4BE8-9B59-2763880077B0",
+          "name": "Strandzelt",
+          "pageId": "56EC8D6F-57EB-4BE8-9B59-2763880077B0"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/B4C3EA1C-1F72-4A54-9E6C-9D31CECA1F37",
+          "name": "Feldbett Zelt ",
+          "pageId": "B4C3EA1C-1F72-4A54-9E6C-9D31CECA1F37"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/CE68CD68-132D-4570-84C5-31DDBDBD873F",
+          "name": "Hängemattenzelt",
+          "pageId": "CE68CD68-132D-4570-84C5-31DDBDBD873F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/6F55DEE1-18D3-47DA-AFE4-72F0A074F6F8",
+          "name": "Wathose",
+          "pageId": "6F55DEE1-18D3-47DA-AFE4-72F0A074F6F8"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/3E90B781-2F1D-4482-B744-B825EDF64968",
+          "name": "WurfZelt",
+          "pageId": "3E90B781-2F1D-4482-B744-B825EDF64968"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/A706CCF3-A58C-43B1-B748-F2C858475F64",
+          "name": "Campingzubehör",
+          "pageId": "A706CCF3-A58C-43B1-B748-F2C858475F64"
+        }
+      ]
+    },
+    {
+      "id": "masterchef",
+      "catalogBrand": "MasterChef",
+      "sourceUrl": "https://www.amazon.de/stores/page/4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6",
+      "retrievedAt": "2026-11-21T15:42:24.497644+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "MasterChef Deutschland",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/page/4E8E4B73-1DA5-45E1-8EFA-5EB4A3A758F6",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/D96246EF-D729-44F1-9A58-4767167EC36F",
+          "name": "Nordische Kolletion",
+          "pageId": "D96246EF-D729-44F1-9A58-4767167EC36F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E460228E-BA5D-4F00-8967-EE02AE4D65C1",
+          "name": "Werkzeuge und Utensilien",
+          "pageId": "E460228E-BA5D-4F00-8967-EE02AE4D65C1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/607606C8-1527-469B-8ED0-1C7C063E017D",
+          "name": "Kollektionen",
+          "pageId": "607606C8-1527-469B-8ED0-1C7C063E017D"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/987B2255-9774-46FA-A3AE-A5E510D61209",
+          "name": "Professionelle Kollektion",
+          "pageId": "987B2255-9774-46FA-A3AE-A5E510D61209"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/9887D02E-D77C-4121-9EA5-BDEE63ADC75E",
+          "name": "Caption Kollektion",
+          "pageId": "9887D02E-D77C-4121-9EA5-BDEE63ADC75E"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/372D6A52-920B-437D-B8AE-EA612A8D5B11",
+          "name": "Kochmessersets",
+          "pageId": "372D6A52-920B-437D-B8AE-EA612A8D5B11"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/D553719D-0B3A-4CA1-9E2B-5DEE6BB195FA",
+          "name": "Erde Kollektion",
+          "pageId": "D553719D-0B3A-4CA1-9E2B-5DEE6BB195FA"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/91EE7C50-94C4-4AEF-85D6-5CEC3D1AF277",
+          "name": "Kochgeschirr",
+          "pageId": "91EE7C50-94C4-4AEF-85D6-5CEC3D1AF277"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/D50D11DB-429B-4600-8F69-33042D3E5AB7",
+          "name": "Messer",
+          "pageId": "D50D11DB-429B-4600-8F69-33042D3E5AB7"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/94D8A993-F4BD-48DB-98FD-8CD0CE744C5F",
+          "name": "Küchengeräte",
+          "pageId": "94D8A993-F4BD-48DB-98FD-8CD0CE744C5F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/F4A1543F-B1F0-42BC-9850-A9E4D8A44C68",
+          "name": "Textilien",
+          "pageId": "F4A1543F-B1F0-42BC-9850-A9E4D8A44C68"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/AD9DA30F-0413-40BB-8668-4E4626C227C7",
+          "name": "Angebote",
+          "pageId": "AD9DA30F-0413-40BB-8668-4E4626C227C7"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/4581AA3F-2BF3-4CEC-851C-3EE86651CE94",
+          "name": "Messersets",
+          "pageId": "4581AA3F-2BF3-4CEC-851C-3EE86651CE94"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/05C28D39-AAD4-4C8A-94AD-AEF60EB0E627",
+          "name": "Schneidebretter",
+          "pageId": "05C28D39-AAD4-4C8A-94AD-AEF60EB0E627"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/BBB1ED05-7F98-4F17-A5B6-F166CCD29327",
+          "name": "Natürliche Kollektion",
+          "pageId": "BBB1ED05-7F98-4F17-A5B6-F166CCD29327"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/568E7D4B-7577-4D3D-9CFF-97DB541335AC",
+          "name": "Essentials Kollektion",
+          "pageId": "568E7D4B-7577-4D3D-9CFF-97DB541335AC"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/FCCF7F55-7AD5-4EA4-8E2C-303B13F93C18",
+          "name": "ALLE PRODUKTE",
+          "pageId": "FCCF7F55-7AD5-4EA4-8E2C-303B13F93C18"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/D0BD345C-31E0-47CC-9290-DC7723820D79",
+          "name": "Messerblocksets",
+          "pageId": "D0BD345C-31E0-47CC-9290-DC7723820D79"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/D97E6AEB-EBBA-4E72-8EA2-C7AF3034EF56",
+          "name": "Lebendige Kollektion",
+          "pageId": "D97E6AEB-EBBA-4E72-8EA2-C7AF3034EF56"
+        }
+      ]
+    },
+    {
+      "id": "natural-elements",
+      "catalogBrand": "natural elements",
+      "sourceUrl": "https://www.amazon.de/stores/page/3955CCD4-902C-4679-9265-DEC4FCBAA8C8",
+      "retrievedAt": "2026-11-21T15:42:25.322452+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "natural elements",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/page/3955CCD4-902C-4679-9265-DEC4FCBAA8C8",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2A4CBB9C-0C16-48EF-B384-E47188AA20AA",
+          "name": "Nerven & Energie ",
+          "pageId": "2A4CBB9C-0C16-48EF-B384-E47188AA20AA"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/6901DCDE-4293-4134-A4F6-E09B8E48BB84",
+          "name": "Melatonin ",
+          "pageId": "6901DCDE-4293-4134-A4F6-E09B8E48BB84"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/26C6215F-F342-4387-B970-CEC2960BE627",
+          "name": "Daily Fitness",
+          "pageId": "26C6215F-F342-4387-B970-CEC2960BE627"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0C2927AB-0C3A-4990-9D68-2F25281BEE79",
+          "name": "Verdauung & Gewicht",
+          "pageId": "0C2927AB-0C3A-4990-9D68-2F25281BEE79"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/C53F8A83-396B-4DB4-BF3B-FFE371D35B9B",
+          "name": "Sirups",
+          "pageId": "C53F8A83-396B-4DB4-BF3B-FFE371D35B9B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/D788E930-2688-4AC4-B88E-49575F840258",
+          "name": "Omega 3",
+          "pageId": "D788E930-2688-4AC4-B88E-49575F840258"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/FDE3409D-50AF-4D67-81B4-C4D8EB5570F8",
+          "name": "Gewichtsmanagement",
+          "pageId": "FDE3409D-50AF-4D67-81B4-C4D8EB5570F8"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/5ECE8C6B-95C4-4830-9D18-2EABCAC7CADD",
+          "name": "Haut",
+          "pageId": "5ECE8C6B-95C4-4830-9D18-2EABCAC7CADD"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/30298D32-3452-4FD2-9700-E4237CD2C230",
+          "name": "Gaming",
+          "pageId": "30298D32-3452-4FD2-9700-E4237CD2C230"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/B77CB4EF-4CCF-4FB0-9251-53DF11DCCE12",
+          "name": "Unsere Black-Week-Angebote",
+          "pageId": "B77CB4EF-4CCF-4FB0-9251-53DF11DCCE12"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/C823DA3C-10A3-48F8-9A7E-E23CBA091433",
+          "name": "Mineralien",
+          "pageId": "C823DA3C-10A3-48F8-9A7E-E23CBA091433"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/219CE952-F518-4857-959B-98A34D4A405C",
+          "name": "Protein - Whey Complex",
+          "pageId": "219CE952-F518-4857-959B-98A34D4A405C"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/AEFF9C75-7DBF-4E44-AEF4-90B0A4FC8170",
+          "name": "Verdauung ",
+          "pageId": "AEFF9C75-7DBF-4E44-AEF4-90B0A4FC8170"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/1A5ECF37-615B-4FBB-8620-C629481CB321",
+          "name": "Road to HYROX",
+          "pageId": "1A5ECF37-615B-4FBB-8620-C629481CB321"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/4F023B05-A058-4625-BB29-416280CC5A1B",
+          "name": "Körperbewusstsein",
+          "pageId": "4F023B05-A058-4625-BB29-416280CC5A1B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/4A5AF019-F326-4B06-8049-827104C543EC",
+          "name": "Wohlbefinden & Anti Stress",
+          "pageId": "4A5AF019-F326-4B06-8049-827104C543EC"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/EA15A99D-4434-412C-A1D1-422859992763",
+          "name": "Protein - Riegel",
+          "pageId": "EA15A99D-4434-412C-A1D1-422859992763"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/56C2E5EE-81A5-4F07-8BB3-38927E13937B",
+          "name": "Alle Produkte",
+          "pageId": "56C2E5EE-81A5-4F07-8BB3-38927E13937B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/FB2AFA11-6BAF-4AF9-9A6A-1248D99BD4F1",
+          "name": "Trinkmahlzeiten",
+          "pageId": "FB2AFA11-6BAF-4AF9-9A6A-1248D99BD4F1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0DCC0265-4D32-4C1B-917F-53AEB5A5D14F",
+          "name": "Beweglichkeit ",
+          "pageId": "0DCC0265-4D32-4C1B-917F-53AEB5A5D14F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/9B6D8AB7-862F-41FD-B977-E5BE17A77996",
+          "name": "Ruhiger Schlaf",
+          "pageId": "9B6D8AB7-862F-41FD-B977-E5BE17A77996"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/7A98FD63-BC7F-4576-9FE2-58A90E312293",
+          "name": "Probiotika",
+          "pageId": "7A98FD63-BC7F-4576-9FE2-58A90E312293"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/50B1B8C1-7F47-4544-9445-AF37B3550E69",
+          "name": "Immunsystem",
+          "pageId": "50B1B8C1-7F47-4544-9445-AF37B3550E69"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/C86B7462-30CF-4C0A-87D2-D4AA4A861A7F",
+          "name": "Wohlbefinden & Anti Stress",
+          "pageId": "C86B7462-30CF-4C0A-87D2-D4AA4A861A7F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/83319A03-DDB5-44BD-B06C-43DE119E3D37",
+          "name": "NBA",
+          "pageId": "83319A03-DDB5-44BD-B06C-43DE119E3D37"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/664DFD7E-CDA1-40F5-BF13-5E18404F3CC6",
+          "name": "Sport & Energie",
+          "pageId": "664DFD7E-CDA1-40F5-BF13-5E18404F3CC6"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/B2D25413-5963-4325-A18F-5EACCE9C6FE9",
+          "name": "Protein - Vegan",
+          "pageId": "B2D25413-5963-4325-A18F-5EACCE9C6FE9"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/63C24E05-D18F-4776-8FA1-69CB3D7B75C4",
+          "name": "Knochen & Beweglichkeit",
+          "pageId": "63C24E05-D18F-4776-8FA1-69CB3D7B75C4"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/4CD6E345-D764-4B9D-B004-6D3CEF022BE8",
+          "name": "Multivitamin",
+          "pageId": "4CD6E345-D764-4B9D-B004-6D3CEF022BE8"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/75F3A0FF-BAAA-4DC8-8B76-7B7C416B2CCA",
+          "name": "Protein - Clear Whey Isolate",
+          "pageId": "75F3A0FF-BAAA-4DC8-8B76-7B7C416B2CCA"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/4DD7B591-C168-4B3B-BF0F-DA3040A9FFE1",
+          "name": "Nägel",
+          "pageId": "4DD7B591-C168-4B3B-BF0F-DA3040A9FFE1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/1B1E5B14-3E24-4435-90AC-1028937D2104",
+          "name": "Alle Produkte",
+          "pageId": "1B1E5B14-3E24-4435-90AC-1028937D2104"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2FDD6025-7104-4D7C-A305-1CF0AD5C2EF3",
+          "name": "Neuprodukte",
+          "pageId": "2FDD6025-7104-4D7C-A305-1CF0AD5C2EF3"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/7CCF0BFB-88C4-4819-BA9C-21B7D1DE1B3A",
+          "name": "Beauty & Anti-Aging",
+          "pageId": "7CCF0BFB-88C4-4819-BA9C-21B7D1DE1B3A"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/3AF34351-7387-4E87-9581-E84EB3E1FC04",
+          "name": "Champions League",
+          "pageId": "3AF34351-7387-4E87-9581-E84EB3E1FC04"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/FE657234-26BB-457E-889E-57048ABF42F3",
+          "name": "Sport & Energie",
+          "pageId": "FE657234-26BB-457E-889E-57048ABF42F3"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/04421BD1-5AA4-483E-B7E2-6161036601EC",
+          "name": "Beast Games",
+          "pageId": "04421BD1-5AA4-483E-B7E2-6161036601EC"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0C5288E7-93DF-4272-890E-78EFF3DD0813",
+          "name": "Make it full size",
+          "pageId": "0C5288E7-93DF-4272-890E-78EFF3DD0813"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/9FAC7647-0B6E-4B83-AF7B-24DF23E42EA2",
+          "name": "Hydration",
+          "pageId": "9FAC7647-0B6E-4B83-AF7B-24DF23E42EA2"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/53E0C3C9-DBCA-4C91-8E21-494AC466FEC2",
+          "name": "Knochen",
+          "pageId": "53E0C3C9-DBCA-4C91-8E21-494AC466FEC2"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/6FB59F47-6124-4486-AE5A-8D62C4469E87",
+          "name": "Knochen & Beweglichkeit",
+          "pageId": "6FB59F47-6124-4486-AE5A-8D62C4469E87"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/1B2D6D85-21E1-4BBE-AD98-EBDE6CFEA02F",
+          "name": "Immunsystem",
+          "pageId": "1B2D6D85-21E1-4BBE-AD98-EBDE6CFEA02F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E3653495-9130-48DC-BFA4-F38BD9C7AEF1",
+          "name": "unsere Neuheiten",
+          "pageId": "E3653495-9130-48DC-BFA4-F38BD9C7AEF1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/5DF9227A-372F-4144-8FE4-73B4797BAABD",
+          "name": "Vitamine",
+          "pageId": "5DF9227A-372F-4144-8FE4-73B4797BAABD"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E4745A5C-D78F-47D4-8471-835F3E0770F9",
+          "name": "Verdauung & Gewicht",
+          "pageId": "E4745A5C-D78F-47D4-8471-835F3E0770F9"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/08D24436-0B93-42FB-ABBD-E0246DE45156",
+          "name": "Workout",
+          "pageId": "08D24436-0B93-42FB-ABBD-E0246DE45156"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/AC7D08F4-D0B6-45FE-A123-C433329DE39A",
+          "name": "Geschmackspulver",
+          "pageId": "AC7D08F4-D0B6-45FE-A123-C433329DE39A"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/28BD2C62-EC3D-4E53-A530-0EB360A24902",
+          "name": "Haare",
+          "pageId": "28BD2C62-EC3D-4E53-A530-0EB360A24902"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/F0DE8314-33B1-48B3-87A3-404B46F722B9",
+          "name": "Pflanzenstoffe",
+          "pageId": "F0DE8314-33B1-48B3-87A3-404B46F722B9"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/428F17F5-8142-4421-8806-F3EE4667D39E",
+          "name": "Beauty & Anti Aging",
+          "pageId": "428F17F5-8142-4421-8806-F3EE4667D39E"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/279B33DB-A71A-4978-A455-90D0B7DE211B",
+          "name": "Innere Ruhe",
+          "pageId": "279B33DB-A71A-4978-A455-90D0B7DE211B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/13693C4B-CFF2-4EA9-9E9F-CFD3CDFFA215",
+          "name": "Aminosäuren",
+          "pageId": "13693C4B-CFF2-4EA9-9E9F-CFD3CDFFA215"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2E3F7FDD-F374-4EA9-A8DA-51BCEC11BF49",
+          "name": "Regeneration",
+          "pageId": "2E3F7FDD-F374-4EA9-A8DA-51BCEC11BF49"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/808E247F-2081-40D2-9259-56150461CF7E",
+          "name": "Pre Workout",
+          "pageId": "808E247F-2081-40D2-9259-56150461CF7E"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/C199E0D4-B434-4DFA-8DF0-2D5601387A8B",
+          "name": "ÜBER UNS",
+          "pageId": "C199E0D4-B434-4DFA-8DF0-2D5601387A8B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/A050A8AF-92DA-4365-92BB-29A610671B82",
+          "name": "Magnesium ",
+          "pageId": "A050A8AF-92DA-4365-92BB-29A610671B82"
+        }
+      ]
+    },
+    {
+      "id": "store-5cb87a1c",
+      "catalogBrand": "Brand Store · 5CB87A1C",
+      "sourceUrl": "https://www.amazon.de/stores/page/5CB87A1C-536A-4D4A-A3C1-635F7F0CC092",
+      "retrievedAt": "2026-11-21T15:42:25.880524+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "Apriwell",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/page/5CB87A1C-536A-4D4A-A3C1-635F7F0CC092",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/69D982D6-F38C-43D1-9336-89CA3EC0C26C",
+          "name": "Darm & Verdauung",
+          "pageId": "69D982D6-F38C-43D1-9336-89CA3EC0C26C"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/50D31D19-B268-47A4-9092-C39C9373D1E6",
+          "name": "Migräne",
+          "pageId": "50D31D19-B268-47A4-9092-C39C9373D1E6"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/F2B60F33-ED28-4281-8325-635A641AB2D9",
+          "name": "Hämorrhoiden",
+          "pageId": "F2B60F33-ED28-4281-8325-635A641AB2D9"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/58B5715D-1394-4B9A-B60A-BFC8BB839440",
+          "name": "Wohlbefinden & Balance",
+          "pageId": "58B5715D-1394-4B9A-B60A-BFC8BB839440"
+        }
+      ]
+    },
+    {
+      "id": "einhell",
+      "catalogBrand": "Einhell",
+      "sourceUrl": "https://www.amazon.de/stores/Einhell/page/C36736E3-EDE2-46C1-812C-9030BDA1EEEB",
+      "retrievedAt": "2026-11-21T15:42:31.141405+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "Einhell",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/Einhell/page/C36736E3-EDE2-46C1-812C-9030BDA1EEEB",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/3C83C02E-ED6D-4D46-AEB5-24F7F1021393",
+          "name": "Sägekettenschärfgerät",
+          "pageId": "3C83C02E-ED6D-4D46-AEB5-24F7F1021393"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/BDED271F-3F0F-4018-B5E2-649682787654",
+          "name": "Werkzeug",
+          "pageId": "BDED271F-3F0F-4018-B5E2-649682787654"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/7E977AE3-5B0E-44E9-B723-16A7AA95BA7F",
+          "name": "Mini-Handkreissäge",
+          "pageId": "7E977AE3-5B0E-44E9-B723-16A7AA95BA7F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/154AA2B0-97D2-458A-B533-ADA3564E7006",
+          "name": "Hebetechnik",
+          "pageId": "154AA2B0-97D2-458A-B533-ADA3564E7006"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/4BD0F1C5-0E89-4154-AD31-D570A0E4158E",
+          "name": "Säulenbohrmaschine",
+          "pageId": "4BD0F1C5-0E89-4154-AD31-D570A0E4158E"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/5DC6649F-F483-4F94-A575-E26F36615244",
+          "name": "PXC-Garten",
+          "pageId": "5DC6649F-F483-4F94-A575-E26F36615244"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/07B9E5EA-75B7-40C9-85E6-28F1D8BB4F7A",
+          "name": "Werkstattwagen",
+          "pageId": "07B9E5EA-75B7-40C9-85E6-28F1D8BB4F7A"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/73F002B0-19D1-43BE-A6B3-2E84529F1412",
+          "name": "Stichsäge",
+          "pageId": "73F002B0-19D1-43BE-A6B3-2E84529F1412"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/4D25E2D4-DB85-4F57-94D8-7D94ECED9075",
+          "name": "Autopoliermaschine ",
+          "pageId": "4D25E2D4-DB85-4F57-94D8-7D94ECED9075"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/DA253EE8-7C8A-46FE-9A85-24BA1764D7B3",
+          "name": "Schmutzwasserpumpe",
+          "pageId": "DA253EE8-7C8A-46FE-9A85-24BA1764D7B3"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/543AC525-A3A6-480E-8DE7-DB46B7E83656",
+          "name": "Zubehör & mehr",
+          "pageId": "543AC525-A3A6-480E-8DE7-DB46B7E83656"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/967F47BA-72D5-4ECE-87C9-6F36DB2DC61D",
+          "name": "Abbruchhammer",
+          "pageId": "967F47BA-72D5-4ECE-87C9-6F36DB2DC61D"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/224DD3F0-6C03-4B35-A50D-FE3B1ADD8BD0",
+          "name": "Silent-Kompressoren",
+          "pageId": "224DD3F0-6C03-4B35-A50D-FE3B1ADD8BD0"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/9CBD3593-9F6D-473B-9683-F8CCC8E40D11",
+          "name": "Schlagschrauber",
+          "pageId": "9CBD3593-9F6D-473B-9683-F8CCC8E40D11"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/518117D7-A6DA-41A4-AB12-8B53F33A01AA",
+          "name": "Kettensägen",
+          "pageId": "518117D7-A6DA-41A4-AB12-8B53F33A01AA"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/DA5B1E99-BE5B-484E-81B2-2CD18169395A",
+          "name": "Farbsprühsystem",
+          "pageId": "DA5B1E99-BE5B-484E-81B2-2CD18169395A"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/529AFCD9-7617-4389-B7D7-C4194EC7565B",
+          "name": "Leuchten",
+          "pageId": "529AFCD9-7617-4389-B7D7-C4194EC7565B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/91EEB99A-FB0F-49B9-97ED-000220E9AA71",
+          "name": "Nagler",
+          "pageId": "91EEB99A-FB0F-49B9-97ED-000220E9AA71"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/1B8E6C38-1F6A-4EB9-B925-5F488127338B",
+          "name": "Starthilfekabel & Jump-Starter",
+          "pageId": "1B8E6C38-1F6A-4EB9-B925-5F488127338B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/510EDF0E-FE6D-4010-BD5D-7AABA1E8B95D",
+          "name": "Elektro-Werkzeuge",
+          "pageId": "510EDF0E-FE6D-4010-BD5D-7AABA1E8B95D"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0C3001C5-5097-4476-9DB4-E83E8C64332B",
+          "name": "Handstaubsauger",
+          "pageId": "0C3001C5-5097-4476-9DB4-E83E8C64332B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/F1A0101B-BAD0-4566-A626-C0F2B25F74DB",
+          "name": "Vertikutierer",
+          "pageId": "F1A0101B-BAD0-4566-A626-C0F2B25F74DB"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/10CFC2B8-4C1B-4694-A3A3-6E08479655C1",
+          "name": "Wassertechnik",
+          "pageId": "10CFC2B8-4C1B-4694-A3A3-6E08479655C1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/C18ADEA9-FD97-42EA-B78B-315B278589EA",
+          "name": "Professional",
+          "pageId": "C18ADEA9-FD97-42EA-B78B-315B278589EA"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/76F2EADB-EC91-41C3-9A19-80FAF3EB5221",
+          "name": "Nass-Trockensauger",
+          "pageId": "76F2EADB-EC91-41C3-9A19-80FAF3EB5221"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2FAE3863-B088-4956-A139-1C1AB0DC2D40",
+          "name": "Produkt des Monats",
+          "pageId": "2FAE3863-B088-4956-A139-1C1AB0DC2D40"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/9CA31A6E-A561-4372-8104-A09E4C904D7C",
+          "name": "Sensen",
+          "pageId": "9CA31A6E-A561-4372-8104-A09E4C904D7C"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/AB71B1AF-135A-4E83-B1D7-4152D70D21A1",
+          "name": "Gartenpumpe",
+          "pageId": "AB71B1AF-135A-4E83-B1D7-4152D70D21A1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/A76C47EE-F3E8-49CE-BE72-39C0DFB58D43",
+          "name": "Rasarro",
+          "pageId": "A76C47EE-F3E8-49CE-BE72-39C0DFB58D43"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/BC9565DF-A80C-412A-8248-F806FB8402D7",
+          "name": "Schlagschrauber",
+          "pageId": "BC9565DF-A80C-412A-8248-F806FB8402D7"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/5974F607-FC65-406B-9B4A-7D4D652FCB4A",
+          "name": "Power X-Change",
+          "pageId": "5974F607-FC65-406B-9B4A-7D4D652FCB4A"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/EFE6EC24-464E-4CC8-9093-2FA2EDC0C7BE",
+          "name": "Rasentrimmer",
+          "pageId": "EFE6EC24-464E-4CC8-9093-2FA2EDC0C7BE"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/FAE605B8-EECF-4296-B9FB-6B703D6BE5C1",
+          "name": "Benzin-Wasserpumpe",
+          "pageId": "FAE605B8-EECF-4296-B9FB-6B703D6BE5C1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/24BEEB49-FD2D-4FF0-AE28-26B7881167A4",
+          "name": "Gras- & Strauchscheren",
+          "pageId": "24BEEB49-FD2D-4FF0-AE28-26B7881167A4"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/026D3491-4479-4420-9FD9-896BAE8BBC9C",
+          "name": "Tischkreissäge",
+          "pageId": "026D3491-4479-4420-9FD9-896BAE8BBC9C"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/1EF2AFC0-6D8D-414A-9CA0-C06744C3E843",
+          "name": "PXC-Werkzeug",
+          "pageId": "1EF2AFC0-6D8D-414A-9CA0-C06744C3E843"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/4EF1654A-95BB-4705-889E-BF241D6D24C2",
+          "name": "Maschinen-Set",
+          "pageId": "4EF1654A-95BB-4705-889E-BF241D6D24C2"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/19A5A1F7-3A16-4B42-84AE-CD2779A55E13",
+          "name": "Druckspühgeräte",
+          "pageId": "19A5A1F7-3A16-4B42-84AE-CD2779A55E13"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/73DFF3D0-2D44-48DB-A87F-36AE12841153",
+          "name": "Werkzeug - Entdecke jetzt mehr von Einhell",
+          "pageId": "73DFF3D0-2D44-48DB-A87F-36AE12841153"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/82B0F28D-60AD-4770-8451-B12B31FEE913",
+          "name": "Mauernutfräse",
+          "pageId": "82B0F28D-60AD-4770-8451-B12B31FEE913"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/B8218F13-D2CC-4934-A507-3F7B5A6219E2",
+          "name": "Autozubehör",
+          "pageId": "B8218F13-D2CC-4934-A507-3F7B5A6219E2"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2E1ADE7C-B8A1-4240-950C-99AFE529CF73",
+          "name": "Weitere Neuheiten",
+          "pageId": "2E1ADE7C-B8A1-4240-950C-99AFE529CF73"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0FFD1F65-77AE-44BF-B143-C390D4A9CC75",
+          "name": "Tacker",
+          "pageId": "0FFD1F65-77AE-44BF-B143-C390D4A9CC75"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/206610DB-4E26-4936-9E40-FAE6B624D427",
+          "name": "Mercedes-AMG PETRONAS F1 Team",
+          "pageId": "206610DB-4E26-4936-9E40-FAE6B624D427"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/363990D7-6AAB-4CA3-BDC4-3F92B73DEB5C",
+          "name": "Sealed Akku",
+          "pageId": "363990D7-6AAB-4CA3-BDC4-3F92B73DEB5C"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/6339679F-DB6F-4069-AC79-BD80663450E1",
+          "name": "Aschesauger",
+          "pageId": "6339679F-DB6F-4069-AC79-BD80663450E1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/20C44A8C-AB63-4C62-9D96-5E8A8EB4ED20",
+          "name": "Akku-Pumpen",
+          "pageId": "20C44A8C-AB63-4C62-9D96-5E8A8EB4ED20"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/435DFE6A-F549-4464-A742-5D8C00D5B7F6",
+          "name": "Hauswasserwerk",
+          "pageId": "435DFE6A-F549-4464-A742-5D8C00D5B7F6"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/9A8160D2-C921-4CBC-ACB3-2AF880620DAC",
+          "name": "Winkelschleifer",
+          "pageId": "9A8160D2-C921-4CBC-ACB3-2AF880620DAC"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/991CD113-20C2-4ECA-8136-FF24457C116C",
+          "name": "Heißluftpistole",
+          "pageId": "991CD113-20C2-4ECA-8136-FF24457C116C"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/98FF66DE-CC35-4EBD-92DF-3DBF7FC5C27A",
+          "name": "Elektro-Fugenreiniger",
+          "pageId": "98FF66DE-CC35-4EBD-92DF-3DBF7FC5C27A"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/DF41D2F4-1AA2-451E-929F-D7C39DEB4455",
+          "name": "Kooperationen",
+          "pageId": "DF41D2F4-1AA2-451E-929F-D7C39DEB4455"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/EDA548FB-0ADD-4F8E-969D-A3D945E3C2D9",
+          "name": "Akkus & Ladegeräte",
+          "pageId": "EDA548FB-0ADD-4F8E-969D-A3D945E3C2D9"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0568DA2D-0D4B-41FB-B213-38966D0F862C",
+          "name": "Schneefräse",
+          "pageId": "0568DA2D-0D4B-41FB-B213-38966D0F862C"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E467CE57-AA2B-402C-A5A9-57342F20F0E2",
+          "name": "Hochentaster",
+          "pageId": "E467CE57-AA2B-402C-A5A9-57342F20F0E2"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/42FE356F-46E9-471B-94FA-0C79E297C5D0",
+          "name": "Metall-Trennmaschine",
+          "pageId": "42FE356F-46E9-471B-94FA-0C79E297C5D0"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/CF3B54EE-5F25-4811-A668-276843ABE9D3",
+          "name": "Bodenhacken",
+          "pageId": "CF3B54EE-5F25-4811-A668-276843ABE9D3"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/F7C790A5-3495-448B-A19D-567F1A79E9AC",
+          "name": "Holzbearbeitung ",
+          "pageId": "F7C790A5-3495-448B-A19D-567F1A79E9AC"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0706F25F-DF9C-46FD-A3D2-0CD5C526DA72",
+          "name": "Exzenter- & Multischleifer",
+          "pageId": "0706F25F-DF9C-46FD-A3D2-0CD5C526DA72"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/70E55B86-DA29-4129-9E3C-A47E89C121DE",
+          "name": "Kapp- & Tischkreissägen",
+          "pageId": "70E55B86-DA29-4129-9E3C-A47E89C121DE"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/EE70DF25-51B3-4439-9013-8C7564E33A91",
+          "name": "Heckenscheren",
+          "pageId": "EE70DF25-51B3-4439-9013-8C7564E33A91"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/C70893FC-A359-476D-A7C3-21F34799AD1A",
+          "name": "Garten - Entdecke jetzt mehr von Einhell",
+          "pageId": "C70893FC-A359-476D-A7C3-21F34799AD1A"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/6BB32330-C028-492F-A254-AEBBCFFE7A8E",
+          "name": "Werkstattbläser",
+          "pageId": "6BB32330-C028-492F-A254-AEBBCFFE7A8E"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/5C4FEE52-384A-4285-AC41-4B02CA2B3C4B",
+          "name": "Trockenbau",
+          "pageId": "5C4FEE52-384A-4285-AC41-4B02CA2B3C4B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/3480907F-A152-490F-990C-E4BD5B72DE12",
+          "name": "Testsieger",
+          "pageId": "3480907F-A152-490F-990C-E4BD5B72DE12"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/4E9B4BA5-52AA-49E7-838E-EB63C9C95D08",
+          "name": "Ratschenschrauber",
+          "pageId": "4E9B4BA5-52AA-49E7-838E-EB63C9C95D08"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/7697A018-D750-464E-A7D8-247DCD76C02D",
+          "name": "Baum- & Strauchpflege",
+          "pageId": "7697A018-D750-464E-A7D8-247DCD76C02D"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/7895B946-261B-4F10-ACE7-4ED62526B0B6",
+          "name": "Angebote",
+          "pageId": "7895B946-261B-4F10-ACE7-4ED62526B0B6"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/3EACC1C6-85B4-467C-9534-15F4CD3BEA47",
+          "name": "Tiefbrunnenpumpe",
+          "pageId": "3EACC1C6-85B4-467C-9534-15F4CD3BEA47"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2A15A77E-CF70-43CC-9896-39010F35395F",
+          "name": "Multifunktionswerkzeug",
+          "pageId": "2A15A77E-CF70-43CC-9896-39010F35395F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/BFC85A51-6329-42AC-B0A8-D64EC9A42F22",
+          "name": "Tauchpumpe",
+          "pageId": "BFC85A51-6329-42AC-B0A8-D64EC9A42F22"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/6575CA52-701C-4D57-AB16-24D5CB2D3E75",
+          "name": "Wassertechnik Zubehör",
+          "pageId": "6575CA52-701C-4D57-AB16-24D5CB2D3E75"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/B4C8E302-A945-44B7-B86F-8B585E3DEB95",
+          "name": "Fliesenschneidmaschine",
+          "pageId": "B4C8E302-A945-44B7-B86F-8B585E3DEB95"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/D01E30E9-9881-4EBF-8BB0-8CCB7D538601",
+          "name": "Power X-Change Werkzeug",
+          "pageId": "D01E30E9-9881-4EBF-8BB0-8CCB7D538601"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/BF15E027-B1DB-459C-A809-6EB2BE2AE6A7",
+          "name": "FC Bayern München",
+          "pageId": "BF15E027-B1DB-459C-A809-6EB2BE2AE6A7"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/96BC6A49-0279-4E66-AE0C-63E7A8109DA5",
+          "name": "Schleifer",
+          "pageId": "96BC6A49-0279-4E66-AE0C-63E7A8109DA5"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/7D95AC30-14E3-4D97-BE1C-0BBAD6CE7898",
+          "name": "Kompressoren",
+          "pageId": "7D95AC30-14E3-4D97-BE1C-0BBAD6CE7898"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/9A617C0C-99E6-4F4E-B6A3-615047801A88",
+          "name": "Band- & Deltaschleifer",
+          "pageId": "9A617C0C-99E6-4F4E-B6A3-615047801A88"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/1B737165-97C1-4A4C-8E0F-FC790BE12019",
+          "name": "Zug-/Kapp-Gehrungssägen",
+          "pageId": "1B737165-97C1-4A4C-8E0F-FC790BE12019"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/637EC4CC-6E2A-4D5C-8B7B-1633CF97E495",
+          "name": "Batterie-Ladegeräte",
+          "pageId": "637EC4CC-6E2A-4D5C-8B7B-1633CF97E495"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/97DE1F2B-A94B-4ADA-92C3-CF7DF2725FA8",
+          "name": "Trockenbauschrauber",
+          "pageId": "97DE1F2B-A94B-4ADA-92C3-CF7DF2725FA8"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/7E58DDB7-B8DC-4AD4-B8BA-8420D0701634",
+          "name": "Farbmörtelrührer",
+          "pageId": "7E58DDB7-B8DC-4AD4-B8BA-8420D0701634"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/00861D81-637B-47C6-A6FB-E1A960F59560",
+          "name": "Stationärgeräte",
+          "pageId": "00861D81-637B-47C6-A6FB-E1A960F59560"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/605726C4-5B8B-494F-A9EC-10E174DCEE94",
+          "name": "Oberflächenbürste & Fugenreiniger",
+          "pageId": "605726C4-5B8B-494F-A9EC-10E174DCEE94"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/6840B2FA-2A7A-4299-A8D6-7E2B3115CB14",
+          "name": "Heißklebepistole",
+          "pageId": "6840B2FA-2A7A-4299-A8D6-7E2B3115CB14"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/FC86F500-214C-4B2C-B392-61D18969D2C3",
+          "name": "Kehrmaschine",
+          "pageId": "FC86F500-214C-4B2C-B392-61D18969D2C3"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/59FA0611-73BF-430B-BE06-E53D763C39BE",
+          "name": "Handkreissäge",
+          "pageId": "59FA0611-73BF-430B-BE06-E53D763C39BE"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2A9DB429-1535-4DEB-AE89-F7671B361487",
+          "name": "Universalsäge",
+          "pageId": "2A9DB429-1535-4DEB-AE89-F7671B361487"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/06FB7CBF-BDEF-4B9C-AF21-EE46DFB6B1AB",
+          "name": "Oberfräse",
+          "pageId": "06FB7CBF-BDEF-4B9C-AF21-EE46DFB6B1AB"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/EF7B1BF2-D0FD-4A16-A403-9905AB16819F",
+          "name": "Garten",
+          "pageId": "EF7B1BF2-D0FD-4A16-A403-9905AB16819F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/B863795E-08A1-4CEC-89E0-C04E5B40A81D",
+          "name": "Bohrhämmer",
+          "pageId": "B863795E-08A1-4CEC-89E0-C04E5B40A81D"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/FA902768-DE9E-4AE3-81EB-EB160C62BE90",
+          "name": "Messerhäcksler",
+          "pageId": "FA902768-DE9E-4AE3-81EB-EB160C62BE90"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/811878CE-3896-492B-9F41-ED8C570ED364",
+          "name": "Stromerzeuger",
+          "pageId": "811878CE-3896-492B-9F41-ED8C570ED364"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/93E53003-30A6-4883-9B68-F2ED336495EF",
+          "name": "Rohrreiniger",
+          "pageId": "93E53003-30A6-4883-9B68-F2ED336495EF"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/3677ACB8-5E95-4DDE-BC2C-7BF6331446D9",
+          "name": "Laser & Messgeräte",
+          "pageId": "3677ACB8-5E95-4DDE-BC2C-7BF6331446D9"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/23A6BBB5-322C-4A4F-B1C0-5B971F122F24",
+          "name": "Rasenmäher",
+          "pageId": "23A6BBB5-322C-4A4F-B1C0-5B971F122F24"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/65DBE0F6-AF8D-470D-B9A1-C584715DEFA4",
+          "name": "Tauchsäge",
+          "pageId": "65DBE0F6-AF8D-470D-B9A1-C584715DEFA4"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/001AD340-9B78-4E74-BA93-3FCCEAC6A162",
+          "name": "Schlagbohrschrauber",
+          "pageId": "001AD340-9B78-4E74-BA93-3FCCEAC6A162"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/86C90356-4A9B-4FE4-A5ED-AA130F416048",
+          "name": "E-Case System",
+          "pageId": "86C90356-4A9B-4FE4-A5ED-AA130F416048"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/5D14F08F-2D57-47BB-8AF0-535A9CBEB28B",
+          "name": "Elektrohobel",
+          "pageId": "5D14F08F-2D57-47BB-8AF0-535A9CBEB28B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/01AD4556-FE6F-4DAC-B5FD-4BCD97E46A79",
+          "name": "Klarwasserpumpe",
+          "pageId": "01AD4556-FE6F-4DAC-B5FD-4BCD97E46A79"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E9A07FA3-D33E-4D89-8A31-B0FD6E6CE557",
+          "name": "Hauswasserautomat ",
+          "pageId": "E9A07FA3-D33E-4D89-8A31-B0FD6E6CE557"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/023DEDD8-1791-4923-B363-4A2F9B960A2B",
+          "name": "Akkuschrauber",
+          "pageId": "023DEDD8-1791-4923-B363-4A2F9B960A2B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/F68C615A-5156-46F3-886C-869D80D1BED2",
+          "name": "Rasenpflege",
+          "pageId": "F68C615A-5156-46F3-886C-869D80D1BED2"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/34B77327-52A0-4B08-942C-92CFE00C9477",
+          "name": "Neuheiten",
+          "pageId": "34B77327-52A0-4B08-942C-92CFE00C9477"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/65BE1637-688A-4661-B4A0-118764330319",
+          "name": "Power X-Change Garten",
+          "pageId": "65BE1637-688A-4661-B4A0-118764330319"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/643FCCA5-5FCF-4977-B42B-FEAD416747F5",
+          "name": "Mähroboter",
+          "pageId": "643FCCA5-5FCF-4977-B42B-FEAD416747F5"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/F2F552AF-FDD3-44CA-A976-C63A64305E16",
+          "name": "Doppelschleifer",
+          "pageId": "F2F552AF-FDD3-44CA-A976-C63A64305E16"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/B39E5EDD-605E-4544-B882-1E0E0A4F1E83",
+          "name": "Nass-Trockensauger",
+          "pageId": "B39E5EDD-605E-4544-B882-1E0E0A4F1E83"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/13A10CCB-1C24-42EF-9497-C3C6DD1FCBB1",
+          "name": "Laubbläser/ -sauger",
+          "pageId": "13A10CCB-1C24-42EF-9497-C3C6DD1FCBB1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/5848E207-6972-46DE-8400-BBAA77273B23",
+          "name": "Bandsägen",
+          "pageId": "5848E207-6972-46DE-8400-BBAA77273B23"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E6B77E8B-D0BB-45C6-8633-142576270F43",
+          "name": "Haushalt",
+          "pageId": "E6B77E8B-D0BB-45C6-8633-142576270F43"
+        }
+      ]
+    },
+    {
+      "id": "hshop-sport",
+      "catalogBrand": "HSHOP-SPORT",
+      "sourceUrl": "https://www.amazon.de/stores/HSHOP-SPORT/page/8B640FD7-98E9-4C48-9BF0-422ED3F14A3A",
+      "retrievedAt": "2026-11-21T15:42:31.335579+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "HS HOP-SPORT",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/HSHOP-SPORT/page/8B640FD7-98E9-4C48-9BF0-422ED3F14A3A",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/AA79EA01-7018-46B6-9396-14DF1E22A8A1",
+          "name": "Rudergeräte",
+          "pageId": "AA79EA01-7018-46B6-9396-14DF1E22A8A1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/EDA925CB-CA3B-4718-B03C-870BBC2F5174",
+          "name": "Balancetrainer",
+          "pageId": "EDA925CB-CA3B-4718-B03C-870BBC2F5174"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/4699B1F7-DE4F-47D6-AF1E-0AAC49066717",
+          "name": "Gymnastikbälle",
+          "pageId": "4699B1F7-DE4F-47D6-AF1E-0AAC49066717"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/B38C37B8-9884-4ADA-9D3E-A75A3C66D925",
+          "name": "Gewichte",
+          "pageId": "B38C37B8-9884-4ADA-9D3E-A75A3C66D925"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/D22C9055-9584-4B7A-AC58-4EBE0E2EB2D1",
+          "name": "Trekkingstöcke",
+          "pageId": "D22C9055-9584-4B7A-AC58-4EBE0E2EB2D1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0100F783-3EFB-40A1-AEFB-8A13CF6A1B0F",
+          "name": "Liegeergometer",
+          "pageId": "0100F783-3EFB-40A1-AEFB-8A13CF6A1B0F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/5D792C18-A4E8-485E-BFDB-DB74B75639A0",
+          "name": "Trainingsset",
+          "pageId": "5D792C18-A4E8-485E-BFDB-DB74B75639A0"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/B5A32D18-F02A-4D05-BD9F-B605389234B5",
+          "name": "Tischkicker",
+          "pageId": "B5A32D18-F02A-4D05-BD9F-B605389234B5"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/8498F5C0-A69D-4688-8AD4-7BC1F823E288",
+          "name": "Fitness-Zubehör",
+          "pageId": "8498F5C0-A69D-4688-8AD4-7BC1F823E288"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/3A63F284-0B11-4993-ACB4-880509583760",
+          "name": "Massagebälle",
+          "pageId": "3A63F284-0B11-4993-ACB4-880509583760"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/8A6E52A9-8800-4CC2-B75B-836015F284F2",
+          "name": "Hantelsets",
+          "pageId": "8A6E52A9-8800-4CC2-B75B-836015F284F2"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/8F24E1BC-4DDC-4D66-9ABC-2930A847211C",
+          "name": "Kurzhanteln",
+          "pageId": "8F24E1BC-4DDC-4D66-9ABC-2930A847211C"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/FC576D84-AA5E-4454-BA8A-46B04E29A94F",
+          "name": "Hantelbank mit Gewichten",
+          "pageId": "FC576D84-AA5E-4454-BA8A-46B04E29A94F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/DF973958-0833-411A-A1DC-D691B5D9E97B",
+          "name": "Crosstrainer",
+          "pageId": "DF973958-0833-411A-A1DC-D691B5D9E97B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E9183BF4-D654-42FD-BD87-ACE6E0A91DB1",
+          "name": "Trainingsbänder",
+          "pageId": "E9183BF4-D654-42FD-BD87-ACE6E0A91DB1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/6D568AAF-FFD2-4A6F-B490-BB2E1C980E14",
+          "name": "Klimmzugstangen & Dip-Stationen",
+          "pageId": "6D568AAF-FFD2-4A6F-B490-BB2E1C980E14"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/C00EC406-C355-4AEE-A1EB-732BF7EC04AD",
+          "name": "Fitnessgeräte",
+          "pageId": "C00EC406-C355-4AEE-A1EB-732BF7EC04AD"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/83A78FCD-6B31-43ED-867F-88336BDF1012",
+          "name": "Gewichtsweste",
+          "pageId": "83A78FCD-6B31-43ED-867F-88336BDF1012"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/DC11E8BE-0C0F-4170-82C5-EECE058D6A24",
+          "name": "Stepper",
+          "pageId": "DC11E8BE-0C0F-4170-82C5-EECE058D6A24"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/119B8F51-0654-49BA-9CAD-E18FDBB6B663",
+          "name": "Turnmatten",
+          "pageId": "119B8F51-0654-49BA-9CAD-E18FDBB6B663"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/6746C6E8-EC66-48AC-8AB1-AFFFC03D71C4",
+          "name": "Gymnastikmatten",
+          "pageId": "6746C6E8-EC66-48AC-8AB1-AFFFC03D71C4"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/B2BE92D2-8AC1-4D60-9C46-21366144A8F4",
+          "name": "Hula Hoop",
+          "pageId": "B2BE92D2-8AC1-4D60-9C46-21366144A8F4"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/BB1C8AC6-1BAF-4217-ABC3-37631D44A1EB",
+          "name": "Hantelstangen",
+          "pageId": "BB1C8AC6-1BAF-4217-ABC3-37631D44A1EB"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/CC2031DB-37D9-419A-B86F-4196BDEB8C56",
+          "name": "Gewichtsmanschetten",
+          "pageId": "CC2031DB-37D9-419A-B86F-4196BDEB8C56"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/00994E28-6FB6-4838-8023-A3C4117579B8",
+          "name": "Heimtrainer",
+          "pageId": "00994E28-6FB6-4838-8023-A3C4117579B8"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/8F23DDC6-518A-418D-ACC4-E3C83AE97595",
+          "name": "Liegestützgriffe",
+          "pageId": "8F23DDC6-518A-418D-ACC4-E3C83AE97595"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/30D61218-A2BC-4B57-B841-3C7F2E5001C2",
+          "name": "Box-Zubehör",
+          "pageId": "30D61218-A2BC-4B57-B841-3C7F2E5001C2"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E71AB5BB-E16A-4EEF-A5F5-6009CA64EEAD",
+          "name": "Bauch-, Bein- und Rückentrainer",
+          "pageId": "E71AB5BB-E16A-4EEF-A5F5-6009CA64EEAD"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/63AB730D-0296-40A1-BFD1-BE2DAE8EAD8B",
+          "name": "Hantelbänke",
+          "pageId": "63AB730D-0296-40A1-BFD1-BE2DAE8EAD8B"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/23332A0F-DBB7-461A-96A3-E90A1A819E30",
+          "name": "Bestseller",
+          "pageId": "23332A0F-DBB7-461A-96A3-E90A1A819E30"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/7DEDF301-F4F6-4EC9-BE5E-072898EF8F48",
+          "name": "Trampolin-Zubehör",
+          "pageId": "7DEDF301-F4F6-4EC9-BE5E-072898EF8F48"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/8C87C7B9-B748-4779-B91D-D928B25F7E3A",
+          "name": "Krafttraining",
+          "pageId": "8C87C7B9-B748-4779-B91D-D928B25F7E3A"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/587DB195-EABB-4BB1-8A6F-7DC73B5F7B4E",
+          "name": "Aerobic Stepper",
+          "pageId": "587DB195-EABB-4BB1-8A6F-7DC73B5F7B4E"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2F9B9100-2259-4479-8CE9-FA5D0CD9D6CE",
+          "name": "Bauchtrainer Roller",
+          "pageId": "2F9B9100-2259-4479-8CE9-FA5D0CD9D6CE"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/229345EA-5294-433B-AADF-EF458149DDA1",
+          "name": "Unterlegmatten",
+          "pageId": "229345EA-5294-433B-AADF-EF458149DDA1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/83259551-E012-4EB5-A08C-EC2A51BE3961",
+          "name": "Boxsäcke",
+          "pageId": "83259551-E012-4EB5-A08C-EC2A51BE3961"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/578C6B5C-908B-418D-8C66-BE55F332035F",
+          "name": "Kettlebell",
+          "pageId": "578C6B5C-908B-418D-8C66-BE55F332035F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/A6ED3DEF-8901-4D4B-B71E-755764F534FB",
+          "name": "Akupressurmatten",
+          "pageId": "A6ED3DEF-8901-4D4B-B71E-755764F534FB"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/7A337FC6-F77E-4D00-A7DA-6A9B6DC5C00F",
+          "name": "Trampolin",
+          "pageId": "7A337FC6-F77E-4D00-A7DA-6A9B6DC5C00F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/572BD183-6415-4B8F-83A6-FBF866C51D56",
+          "name": "Hanteln",
+          "pageId": "572BD183-6415-4B8F-83A6-FBF866C51D56"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2900836E-6990-4953-AA4A-38F044BCEA0F",
+          "name": "Laufbänder",
+          "pageId": "2900836E-6990-4953-AA4A-38F044BCEA0F"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2044F5BC-F9C0-41B4-80C8-4B9BB92CF916",
+          "name": "Kraftstationen",
+          "pageId": "2044F5BC-F9C0-41B4-80C8-4B9BB92CF916"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/597A2E03-FBB2-47EE-A469-C5A99DD7EC1C",
+          "name": "Handtrainer",
+          "pageId": "597A2E03-FBB2-47EE-A469-C5A99DD7EC1C"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/0842A137-BF6E-4838-8105-FFB5BA8E4BC2",
+          "name": "Matten",
+          "pageId": "0842A137-BF6E-4838-8105-FFB5BA8E4BC2"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/FE85EABA-BE7F-4E36-8557-476A77B331C7",
+          "name": "Faszienrollen",
+          "pageId": "FE85EABA-BE7F-4E36-8557-476A77B331C7"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/DA4DB3E6-5101-4028-AC9B-048F74E9C5CA",
+          "name": "Hantelablagen",
+          "pageId": "DA4DB3E6-5101-4028-AC9B-048F74E9C5CA"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/A676B6CA-30F3-408C-ACC0-48A496EABC4C",
+          "name": "Indoors Bikes",
+          "pageId": "A676B6CA-30F3-408C-ACC0-48A496EABC4C"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/F66D3FD9-D596-4E43-BACA-88E4F3D3F2E1",
+          "name": "Aktuelle Angebote",
+          "pageId": "F66D3FD9-D596-4E43-BACA-88E4F3D3F2E1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/2BECFB5D-D045-4ECE-B9FE-FB4DB31B6ACF",
+          "name": "Haus und Garten",
+          "pageId": "2BECFB5D-D045-4ECE-B9FE-FB4DB31B6ACF"
+        }
+      ]
+    },
+    {
+      "id": "felmo",
+      "catalogBrand": "felmo",
+      "sourceUrl": "https://www.amazon.de/stores/felmo/page/77AE223F-04C0-420D-8A78-05A0A57D6258",
+      "retrievedAt": "2026-11-21T15:42:39.497219+00:00",
+      "visualAnalysisCompleted": false,
+      "status": "navigation_retrieved",
+      "observedBrand": "felmo",
+      "pages": [
+        {
+          "url": "https://www.amazon.de/stores/felmo/page/77AE223F-04C0-420D-8A78-05A0A57D6258",
+          "name": "Startseite",
+          "pageId": "main"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/E7F28C9A-A6EC-4B2F-B19F-9568D44B5DF1",
+          "name": "Über Uns",
+          "pageId": "E7F28C9A-A6EC-4B2F-B19F-9568D44B5DF1"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/43E60832-BDF9-4496-863D-12969E89B384",
+          "name": "Für Katzen",
+          "pageId": "43E60832-BDF9-4496-863D-12969E89B384"
+        },
+        {
+          "url": "https://www.amazon.de/stores/page/ABE127DE-0465-4013-BC6E-C378A74DF796",
+          "name": "Für Hunde",
+          "pageId": "ABE127DE-0465-4013-BC6E-C378A74DF796"
+        }
+      ]
+    }
+  ]
+}

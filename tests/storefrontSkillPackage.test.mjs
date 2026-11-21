@@ -15,7 +15,7 @@ with zipfile.ZipFile(root/'public/brand-store-claude/amazon-storefront-design.zi
  for name in ['CLAUDE.md','docs/BLUEPRINT_EXTRACTION_PROMPT_V4.md']:
   assert z.read(prefix+name) == (root/name).read_bytes()
  knowledge=root/'data/store-knowledge'
- files=[knowledge/name for name in ['_voice_marker_vocabulary.md','_hero_archetype_vocabulary.md','_page_architecture_pattern_vocabulary.md']]
+ files=[knowledge/name for name in ['_voice_marker_vocabulary.md','_hero_archetype_vocabulary.md','_page_architecture_pattern_vocabulary.md','_reference_style_profiles.json']]
  files+=sorted((knowledge/'rerun-v4').glob('*_analysis.json'))
  files+=sorted((knowledge/'rerun-v4/blueprints').glob('*.json'))
  assert 0<len(z.namelist())<=200
