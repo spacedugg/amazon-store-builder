@@ -1109,114 +1109,6 @@
     "images": []
   },
   {
-    "id": "gritin",
-    "brandName": "Gritin",
-    "storeUrl": "https://www.amazon.de/stores/page/1758941C-AE87-4628-AB45-62C0A2BDB75C",
-    "category": "home_kitchen",
-    "kind": "store",
-    "source": "existing",
-    "analyzedAt": "2026-05-23",
-    "modules": [
-      {
-        "name": "Mini-Section Intro",
-        "layout": "editorial_section_intro",
-        "tiles": 8
-      },
-      {
-        "name": "Hero Image",
-        "layout": "hero_banner_tall",
-        "tiles": 8
-      },
-      {
-        "name": "Section Intro",
-        "layout": "editorial_section_intro",
-        "tiles": 8
-      },
-      {
-        "name": "Tile-Row 7-fach Kategorie-Verteiler",
-        "layout": "editorial_tile_quad",
-        "tiles": 7
-      },
-      {
-        "name": "Section Intro 2",
-        "layout": "editorial_section_intro",
-        "tiles": 8
-      },
-      {
-        "name": "Tile-Row 8-fach Sub-Kategorie",
-        "layout": "editorial_tile_quad",
-        "tiles": 8
-      },
-      {
-        "name": "Section Intro 3",
-        "layout": "editorial_section_intro",
-        "tiles": 8
-      },
-      {
-        "name": "ProductGrid 3 ASINs",
-        "layout": "product_grid_featured",
-        "tiles": 3
-      },
-      {
-        "name": "Section Intro 4",
-        "layout": "editorial_section_intro",
-        "tiles": 8
-      },
-      {
-        "name": "ProductGrid 4 ASINs",
-        "layout": "product_grid_featured",
-        "tiles": 4
-      },
-      {
-        "name": "Section Intro 5",
-        "layout": "editorial_section_intro",
-        "tiles": 8
-      },
-      {
-        "name": "ProductGrid 3 ASINs (2)",
-        "layout": "product_grid_featured",
-        "tiles": 3
-      },
-      {
-        "name": "Image-Modul",
-        "layout": "hero_banner_tall",
-        "tiles": 8
-      },
-      {
-        "name": "Section Intro 6",
-        "layout": "editorial_section_intro",
-        "tiles": 8
-      },
-      {
-        "name": "ProductGrid 4 ASINs (2)",
-        "layout": "product_grid_featured",
-        "tiles": 4
-      },
-      {
-        "name": "Section Intro 7",
-        "layout": "editorial_section_intro",
-        "tiles": 8
-      },
-      {
-        "name": "ProductGrid 3 ASINs (3)",
-        "layout": "product_grid_featured",
-        "tiles": 3
-      },
-      {
-        "name": "Section Intro Closing",
-        "layout": "editorial_section_intro",
-        "tiles": 8
-      },
-      {
-        "name": "Image Closing",
-        "layout": "hero_banner_tall",
-        "tiles": 8
-      }
-    ],
-    "summary": "",
-    "images": []
-  },
-  {
     "id": "trixie",
     "brandName": "TRIXIE",
     "storeUrl": "https://www.amazon.de/stores/page/30552E59-AC22-47B1-BBBB-AEA9225BD614",
@@ -1488,14 +1380,5 @@
     "category": "pets",
     "source": "provided",
     "nameVerified": true
-  },
-  {
-    "id": "product-b0cldwhkcb",
-    "brandName": "Produktreferenz · B0CLDWHKCB",
-    "storeUrl": "https://www.amazon.de/dp/B0CLDWHKCB",
-    "kind": "product",
-    "category": "",
-    "source": "provided",
-    "nameVerified": false
   }
 ]

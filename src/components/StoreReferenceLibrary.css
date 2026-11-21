@@ -14,3 +14,14 @@
 @media(max-width:600px){.srl-grid{grid-template-columns:minmax(0,1fr)}}
 
 .srl-admin{margin-bottom:16px}.srl-admin button{background:#2563eb;color:#fff;border:0;border-radius:7px;padding:10px 14px;cursor:pointer}.srl-admin form{display:grid;gap:12px;max-width:600px;margin:14px 0}.srl-admin label{display:grid;gap:6px;font-size:13px}.srl-admin input{padding:10px;border:1px solid #cbd5e1;border-radius:7px;color:#172b40;background:#fff}.srl-admin button:disabled{opacity:.5;cursor:wait}
+
+.srl-card-heading,.srl-detail-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px}
+.srl-card-heading h3,.srl-detail-heading h3{margin:0;font-size:19px;line-height:1.3}
+.srl-card-heading h3 a,.srl-detail-heading h3 a{color:#172b40;text-decoration:none}
+.srl-card-heading h3 a:hover,.srl-detail-heading h3 a:hover{text-decoration:underline;color:#1d4ed8}
+.srl-select{margin:0;gap:9px;font-size:13px;font-weight:600;cursor:pointer;flex-shrink:0;max-width:150px}
+.srl-select input{width:27px;height:27px;margin:0;flex-shrink:0;cursor:pointer;accent-color:#2563eb}
+.srl-select:has(input:checked){color:#1d4ed8}
+.srl-detail-heading{padding:0;margin:18px 0}
+.srl-capture-warning{padding:12px 16px;color:#92400e!important;margin:0!important}
+@media(max-width:600px){.srl-card-heading{padding:14px}.srl-card-heading h3{font-size:17px}.srl-select{max-width:135px;font-size:12px}}
