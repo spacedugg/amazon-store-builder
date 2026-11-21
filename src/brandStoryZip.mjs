@@ -51,6 +51,7 @@ export function storyFromZip(plan, images, analysis={}) {
 
 function manifestPlan(path,bytes,entries) {
   let data;try{data=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));}catch{throw Error('brand-story.json enthält kein gültiges JSON.');}
+  data=normalizeExtractedManifest(data);
   if(data?.format!=='temoa-brand-story-example' || data.version!==1)throw Error('Das Format der brand-story.json wird nicht unterstützt.');
   if(typeof data.brandName!=='string' || !data.brandName.trim() || data.brandName.length>200)throw Error('Der Markenname fehlt in brand-story.json.');
   const marketplace=data.marketplace || 'de';
@@ -93,4 +94,28 @@ function manifestPlan(path,bytes,entries) {
   });
   const desktop=asset(data.background?.desktop),mobile=data.background?.mobile?asset(data.background.mobile):null;
   return {entries,desktop,mobile,candidates,previews:[],manifestAnalysis:{brandName:data.brandName.trim(),marketplace,cards},purpose:text(data.purpose,'Beschreibung')};
+}
+
+// Earlier Amazon extracts used nested image records instead of the versioned
+// example schema. Normalize only that known shape; all paths, links, slots and
+// card limits still pass through manifestPlan's existing validation.
+function normalizeExtractedManifest(data) {
+  if(!data || data.format!==undefined || data.version!==undefined || typeof data.brand!=='string' || !data.backgroundDesktop || !Array.isArray(data.cards))return data;
+  if(!data.cards.every(card=>card && ['brand_media_asset','asin_grid'].includes(card.type)))return data;
+  let cards=[...data.cards];
+  if(cards.some(card=>card.position!==undefined)){
+    const positions=new Set(cards.map(card=>card.position));
+    if(positions.size!==cards.length || !cards.every(card=>Number.isInteger(card.position)&&card.position>=1&&card.position<=cards.length))throw Error('Die Kartenpositionen in brand-story.json sind unvollständig oder doppelt.');
+    cards.sort((a,b)=>a.position-b.position);
+  }
+  return {
+    format:'temoa-brand-story-example',version:1,brandName:data.brand,
+    marketplace:data.marketplace || 'de',purpose:data.purpose,
+    background:{desktop:data.backgroundDesktop.file,mobile:data.backgroundMobile?.file},
+    cards:cards.map(card=>({
+      type:card.type==='brand_media_asset'?'media':'grid',file:card.image?.file,
+      headline:card.headline,copy:card.copy,shopUrl:card.shopLink,gridMode:card.gridMode,
+      slots:Array.isArray(card.slots)?card.slots.map(slot=>({file:slot?.image?.file,asin:slot?.asin,url:slot?.productUrl})):card.slots
+    }))
+  };
 }

@@ -1,0 +1,324 @@
+{
+  "brand": "HOLY",
+  "sourceUrl": "https://www.amazon.de/dp/B0CPJNZL8Z",
+  "backgroundDesktop": {
+    "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/0958c398-8353-44e6-a0bb-8ceb59713669.__CR0,0,1464,625_PT0_SX1464_V1___.jpg",
+    "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/0958c398-8353-44e6-a0bb-8ceb59713669.__CR0,0,1464,625_PT0_SX1464_V1___.jpg",
+    "alt": "Drei Personen in schwarzen Hemden und Jeans posieren vor hellgelbem Hintergrund und halten scheinbar kleine rosafarbene oder rote Gegenstände in ihren Händen.",
+    "file": "Background/desktop.jpg"
+  },
+  "cards": [
+    {
+      "position": 1,
+      "type": "brand_media_asset",
+      "headline": "",
+      "shopLink": "",
+      "image": {
+        "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/32261a0d-4278-44e6-928a-de12c19ea566.__CR0,0,1448,1812_PT0_SX1448_V1___.png",
+        "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/32261a0d-4278-44e6-928a-de12c19ea566.__CR0,0,1448,1812_PT0_SX362_V1___.png",
+        "alt": "Der Text lautet „HI, wir sind Fredi, Matze &amp; Phil“, gefolgt von einem deutschen Text über die Überwindung von Erfrischungsgetränken durch funktionale Getränke mit wenig Zucker und weniger Kalorien, der mit dem „HOLLY“ -Logo auf gelbem Hintergrund endet.",
+        "file": "Brand Media Assets/Brand Image 0.png"
+      }
+    },
+    {
+      "position": 2,
+      "type": "brand_media_asset",
+      "headline": "",
+      "shopLink": "",
+      "image": {
+        "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/cdc15ba3-0bdd-4e04-a825-1cec7f8400aa.__CR0,0,1448,1812_PT0_SX1448_V1___.png",
+        "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/cdc15ba3-0bdd-4e04-a825-1cec7f8400aa.__CR0,0,1448,1812_PT0_SX362_V1___.png",
+        "alt": "Text lautet &#39;Mixen, shaken, genießen&#39; (Überschrift) und &#39;Eggit, worsuf du gerade Bock hast... &#39; (Produktbeschreibung auf Deutsch). Hellgelber Hintergrund mit sieben bunten Getränkeflaschen mit verschiedenen Designs und Geschmacksrichtungen.",
+        "file": "Brand Media Assets/Brand Image 1.png"
+      }
+    },
+    {
+      "position": 3,
+      "type": "asin_grid",
+      "headline": "HOLY Bestseller",
+      "shopLink": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F0843B226E4?store_ref=storeRecs_dp_aplus",
+      "slots": [
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/a225e420-477e-4d6c-b6fd-5d36c1553a25.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/a225e420-477e-4d6c-b6fd-5d36c1553a25.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "Zwei farbenfrohe Shaker-Flaschen mit gelbem Hintergrund: eine leuchtend rosa/magentafarbene Flasche und eine schwarz-weiße Flasche mit Grafikdesign, beide mit Charaktergrafiken und Markenetiketten.",
+            "file": "ASIN Grids/Card 03/Product Image 1.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0CPJM5Y59/ref=emc_bcc_2_i",
+          "asin": "B0CPJM5Y59"
+        },
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/4d01225a-6900-4d14-88a3-2fb9255b9fac.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/4d01225a-6900-4d14-88a3-2fb9255b9fac.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "aplus content image",
+            "file": "ASIN Grids/Card 03/Product Image 2.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0CZ56R4R7/ref=emc_bcc_2_i",
+          "asin": "B0CZ56R4R7"
+        },
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/e73fc44e-deed-4c25-aaea-7274bc0d01ba.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/e73fc44e-deed-4c25-aaea-7274bc0d01ba.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "Orangefarbene Getränkeflasche mit Charaktergesicht und schwarzem Behälter mit Karomuster mit Charakterdesign auf rosafarbenem Hintergrund.",
+            "file": "ASIN Grids/Card 03/Product Image 3.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0CKLHP414/ref=emc_bcc_2_i",
+          "asin": "B0CKLHP414"
+        },
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/49c3e52b-2ab7-4102-8613-7b082bb23e36.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/49c3e52b-2ab7-4102-8613-7b082bb23e36.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "aplus content image",
+            "file": "ASIN Grids/Card 03/Product Image 4.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0FQCP2QZK/ref=emc_bcc_2_i",
+          "asin": "B0FQCP2QZK"
+        }
+      ]
+    },
+    {
+      "position": 4,
+      "type": "asin_grid",
+      "headline": "HOLY Energy mit NewCaffⓇ",
+      "shopLink": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F0843B226E4?store_ref=storeRecs_dp_aplus",
+      "slots": [
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/fde66a34-b30c-47b5-a529-010daba725b6.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/fde66a34-b30c-47b5-a529-010daba725b6.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "Auf zwei Getränkebehältern steht „HOLI“. Neonpinke Shaker-Flasche und Aufbewahrungsglas mit grün/violettem Farbverlauf mit tropischem Grafikdesign auf hellgelbem Hintergrund.",
+            "file": "ASIN Grids/Card 04/Product Image 1.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0CPJNY9RS/ref=emc_bcc_2_i",
+          "asin": "B0CPJNY9RS"
+        },
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/4d85f36d-65c5-45c7-b764-5ea95cc93d27.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/4d85f36d-65c5-45c7-b764-5ea95cc93d27.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "aplus content image",
+            "file": "ASIN Grids/Card 04/Product Image 2.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0DCVR9NN1/ref=emc_bcc_2_i",
+          "asin": "B0DCVR9NN1"
+        },
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/a6842169-68e6-4f6c-8e15-f45e6ff909ac.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/a6842169-68e6-4f6c-8e15-f45e6ff909ac.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "aplus content image",
+            "file": "ASIN Grids/Card 04/Product Image 3.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0DCKBQPSV/ref=emc_bcc_2_i",
+          "asin": "B0DCKBQPSV"
+        },
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/77e63530-14af-4a52-bac8-a2ee65d8c5f9.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/77e63530-14af-4a52-bac8-a2ee65d8c5f9.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "aplus content image",
+            "file": "ASIN Grids/Card 04/Product Image 4.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0DCKDDJST/ref=emc_bcc_2_i",
+          "asin": "B0DCKDDJST"
+        }
+      ]
+    },
+    {
+      "position": 5,
+      "type": "asin_grid",
+      "headline": "HOLY Hydration mit Elektrolyte",
+      "shopLink": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F0843B226E4?store_ref=storeRecs_dp_aplus",
+      "slots": [
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/a33780d5-a2e6-4c98-aeb4-25cd96f21026.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/a33780d5-a2e6-4c98-aeb4-25cd96f21026.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "aplus content image",
+            "file": "ASIN Grids/Card 05/Product Image 1.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0CZ53JZDT/ref=emc_bcc_2_i",
+          "asin": "B0CZ53JZDT"
+        },
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/1fb82b8d-a52a-43e7-94ca-e4e7eef67d96.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/1fb82b8d-a52a-43e7-94ca-e4e7eef67d96.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "aplus content image",
+            "file": "ASIN Grids/Card 05/Product Image 2.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0D9QJWBYM/ref=emc_bcc_2_i",
+          "asin": "B0D9QJWBYM"
+        },
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/1511e781-0ae9-4cd7-92da-ec1eb190dea6.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/1511e781-0ae9-4cd7-92da-ec1eb190dea6.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "aplus content image",
+            "file": "ASIN Grids/Card 05/Product Image 3.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0F33VRJ9G/ref=emc_bcc_2_i",
+          "asin": "B0F33VRJ9G"
+        },
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/a260f6a6-cc5a-4a4a-bfee-84d4ac72384b.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/a260f6a6-cc5a-4a4a-bfee-84d4ac72384b.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "Hellrosa Wasserflasche mit blauem Eulendesign, begleitet von bunten Müslischachteln mit den Aufschriften „Froot Loops“ und „Hershey&#39;s“ vor leuchtendem blauem Hintergrund. Sammlung von Frühstücks- und Getränkeprodukten.",
+            "file": "ASIN Grids/Card 05/Product Image 4.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0F2T8Z8D8/ref=emc_bcc_2_i",
+          "asin": "B0F2T8Z8D8"
+        }
+      ]
+    },
+    {
+      "position": 6,
+      "type": "asin_grid",
+      "headline": "HOLY Iced Tea mit Botanicals",
+      "shopLink": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F0843B226E4?store_ref=storeRecs_dp_aplus",
+      "slots": [
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/730aaf21-c381-421e-b4ba-b5f4f20ed2ae.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/730aaf21-c381-421e-b4ba-b5f4f20ed2ae.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "aplus content image",
+            "file": "ASIN Grids/Card 06/Product Image 1.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0F3NZSP4Q/ref=emc_bcc_2_i",
+          "asin": "B0F3NZSP4Q"
+        },
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/153b456a-58d7-4592-8010-06e19ae98178.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/153b456a-58d7-4592-8010-06e19ae98178.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "Zwei farbenfrohe Trinkgeschirr auf rosafarbenem Hintergrund: roter Becher mit gelbem Deckel mit Zeichentrickfigur und schwarzer zylindrischer Becher mit Karomuster und passendem Cartoon-Design.",
+            "file": "ASIN Grids/Card 06/Product Image 2.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0CKLFVMJG/ref=emc_bcc_2_i",
+          "asin": "B0CKLFVMJG"
+        },
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/a085fffa-7481-47b4-91ed-d898f4d55c83.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/a085fffa-7481-47b4-91ed-d898f4d55c83.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "Der Text lautet „HOP“ wiederholt auf der Verpackung. Limettengelbe Flüssigkeit in einer Flasche mit rosafarbenem Deckel und schwarz-weiß karierten Schachteln und Beuteln der Marke HOP auf rosafarbenem Hintergrund.",
+            "file": "ASIN Grids/Card 06/Product Image 3.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0F3NYQB8N/ref=emc_bcc_2_i",
+          "asin": "B0F3NYQB8N"
+        },
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/95732d19-717b-4a4d-822c-acb8a82cf0cd.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/95732d19-717b-4a4d-822c-acb8a82cf0cd.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "aplus content image",
+            "file": "ASIN Grids/Card 06/Product Image 4.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0F3NHPVPW/ref=emc_bcc_2_i",
+          "asin": "B0F3NHPVPW"
+        }
+      ]
+    },
+    {
+      "position": 7,
+      "type": "asin_grid",
+      "headline": "HOLY Milkshake - kalorienarm",
+      "shopLink": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F0843B226E4?store_ref=storeRecs_dp_aplus",
+      "slots": [
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/344b212c-b843-4747-9728-b31c5de3894b.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/344b212c-b843-4747-9728-b31c5de3894b.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "Der Text lautet „HOTTY“. Zwei rosafarbene Trinkgefäße: großer Becher mit Axolotl-Charakter-Abbildung und passender rosafarbener Vorratsdose mit Deckel und Axolotl-Design.",
+            "file": "ASIN Grids/Card 07/Product Image 1.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0FQCMT45R/ref=emc_bcc_2_i",
+          "asin": "B0FQCMT45R"
+        },
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/b928ca4c-889e-4c95-bf58-f61d01e3ce35.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/b928ca4c-889e-4c95-bf58-f61d01e3ce35.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "aplus content image",
+            "file": "ASIN Grids/Card 07/Product Image 2.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0FQCQGMBG/ref=emc_bcc_2_i",
+          "asin": "B0FQCQGMBG"
+        },
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/ba750573-ffd3-45cd-aa6c-68bb52c0b863.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/ba750573-ffd3-45cd-aa6c-68bb52c0b863.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "Der Text lautet „Hold Hold“. Violetter Spielzeugspender mit Figuren aus Zeichentrickfiguren und lila zylindrischen Kapselbehältern auf cremefarbenem Hintergrund.",
+            "file": "ASIN Grids/Card 07/Product Image 3.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0FS1VPZ7C/ref=emc_bcc_2_i",
+          "asin": "B0FS1VPZ7C"
+        },
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/b55bdad2-5d5d-4294-9f95-14e45e00aba3.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/b55bdad2-5d5d-4294-9f95-14e45e00aba3.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "aplus content image",
+            "file": "ASIN Grids/Card 07/Product Image 4.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0FS1VNHYY/ref=emc_bcc_2_i",
+          "asin": "B0FS1VNHYY"
+        }
+      ]
+    },
+    {
+      "position": 8,
+      "type": "asin_grid",
+      "headline": "Shaker Bestseller",
+      "shopLink": "https://www.amazon.de/stores/page/7913E121-CB43-4349-A8D2-9F0843B226E4?store_ref=storeRecs_dp_aplus",
+      "slots": [
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/73181f39-12b0-492a-a7cb-2a3a8b5379d9.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/73181f39-12b0-492a-a7cb-2a3a8b5379d9.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "aplus content image",
+            "file": "ASIN Grids/Card 08/Product Image 1.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0DD4C43D1/ref=emc_bcc_2_i",
+          "asin": "B0DD4C43D1"
+        },
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/c58b91fb-8c0c-4b97-b283-16d90cd8cc2c.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/c58b91fb-8c0c-4b97-b283-16d90cd8cc2c.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "Frau mit Sonnenbrille fährt Auto, hält sich mit beiden Händen ein Fernglas an die Augen, während das Lenkrad sichtbar ist.",
+            "file": "ASIN Grids/Card 08/Product Image 2.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0DWXRL7SD/ref=emc_bcc_2_i",
+          "asin": "B0DWXRL7SD"
+        },
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/85fa48b0-f219-4141-b2e0-aa44a311331b.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/85fa48b0-f219-4141-b2e0-aa44a311331b.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "aplus content image",
+            "file": "ASIN Grids/Card 08/Product Image 3.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0DWXT4HLM/ref=emc_bcc_2_i",
+          "asin": "B0DWXT4HLM"
+        },
+        {
+          "image": {
+            "url": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/3df99af1-bec2-433b-9559-b305f41debdb.__CR0,0,664,728_PT0_SX664_V1___.png",
+            "renderedUrl": "https://m.media-amazon.com/images/S/aplus-media-library-service-media/3df99af1-bec2-433b-9559-b305f41debdb.__CR0,0,664,728_PT0_SX166_V1___.png",
+            "alt": "aplus content image",
+            "file": "ASIN Grids/Card 08/Product Image 4.png"
+          },
+          "productUrl": "https://www.amazon.de/dp/B0H34SFYL6/ref=emc_bcc_2_i",
+          "asin": "B0H34SFYL6"
+        }
+      ]
+    }
+  ]
+}
