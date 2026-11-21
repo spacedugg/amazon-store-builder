@@ -12,3 +12,6 @@
 .bs-example-preview { margin:16px 0 28px; }
 .bs-reference-list article > header { gap:12px; flex-wrap:wrap; align-items:center; }
 @media(max-width:650px) { .bs-example-backgrounds { grid-template-columns:1fr; } .bs-example-grid { gap:10px; } .bs-example-card { padding:10px; } }
+
+.bs-import-feedback { background:#eff6ff; border:1px solid #93c5fd; border-radius:8px; padding:12px 16px; color:#1e40af; font-weight:600; }
+.bs-import-error { background:#fef2f2; border:1px solid #fca5a5; border-radius:8px; padding:12px 16px; color:#991b1b; }
