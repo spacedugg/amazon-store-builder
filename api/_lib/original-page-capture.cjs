@@ -128,11 +128,21 @@ async function captureOriginalPage(url,options={}) {
     if(await dismissConsent(page))state=await settlePage(page,{...options,selector});
     if(await page.getByText(/^(Cookies und Werbeoptionen|Cookies and advertising)$/i).isVisible())throw Error('Cookie-Hinweis konnte nicht geschlossen werden.');
     const session=await page.context().newCDPSession(page);
-    const shot=await session.send('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip:{...state.region,scale:1}});
-    const bytes=Buffer.from(shot.data,'base64');
+    // Keep each compositor capture below its texture limit. Very long single
+    // captures can repeat the upper page even when every DOM image is ready.
+    const {PNG}=require('pngjs');
+    const output=new PNG({width:state.region.width,height:state.region.height});
+    for(let offset=0;offset<state.region.height;offset+=2000){
+      const height=Math.min(2000,state.region.height-offset);
+      const shot=await session.send('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip:{...state.region,y:state.region.y+offset,height,scale:1}});
+      const tile=PNG.sync.read(Buffer.from(shot.data,'base64'));
+      if(tile.width!==output.width || tile.height!==height)throw Error('Ein Teil der Store-Aufnahme ist abgeschnitten.');
+      PNG.bitblt(tile,output,0,0,tile.width,tile.height,0,offset);
+    }
+    const bytes=PNG.sync.write(output);
     const {pngSize}=require('./reference-capture.cjs'),size=pngSize(bytes);
     if(Math.abs(size.height-state.region.height)>2 || Math.abs(size.width-state.region.width)>2)throw Error('Die Store-Aufnahme wurde abgeschnitten.');
-    return {bytes,...size,quality:{version:2,imagesComplete:true,imageCount:state.images,scrollPasses:state.scrollPasses,documentHeight:state.region.height,originalPageHeight:state.height,sourceHtmlHash:createHash('sha256').update(options.html).digest('hex')}};
+    return {bytes,...size,quality:{version:2,imagesComplete:true,tiled:true,imageCount:state.images,scrollPasses:state.scrollPasses,documentHeight:state.region.height,originalPageHeight:state.height,sourceHtmlHash:createHash('sha256').update(options.html).digest('hex')}};
   } finally {clearTimeout(timeout);await browser?.close().catch(()=>{});}
 }
 module.exports={loadOriginalPage,anonymousCookies,permittedResource,pageReadiness,assertReady,settlePage,storeSelector,captureOriginalPage};

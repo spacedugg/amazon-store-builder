@@ -13,7 +13,7 @@ test('missing images and empty or oversized captures fail before uploading',()=>
 });
 test('only the checked unobstructed original-page pipeline removes warnings from long screenshots',()=>{
  const source='https://www.amazon.de/stores/page/11111111-2222-3333-4444-555555555555';
- const image={url:'https://example.com/store.png',sourceUrl:source,capturedAt:new Date().toISOString(),width:1440,height:18000,fullPage:true,captureEngine:'original-html-scroll-v1',quality:{version:2,imagesComplete:true,imageCount:12,scrollPasses:2,documentHeight:18000}};
+ const image={url:'https://example.com/store.png',sourceUrl:source,capturedAt:new Date().toISOString(),width:1440,height:18000,fullPage:true,captureEngine:'original-html-scroll-v1',quality:{version:2,imagesComplete:true,tiled:true,imageCount:12,scrollPasses:2,documentHeight:18000}};
  assert(verifiedHomepageScreenshot(image));assert(!homepageScreenshot({storeUrl:source,homepageScreenshot:image}).truncated);
  assert(!verifiedHomepageScreenshot({...image,quality:{...image.quality,version:1}}));assert(!verifiedHomepageScreenshot({...image,quality:{...image.quality,documentHeight:20000}}));
 });

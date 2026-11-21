@@ -48,5 +48,5 @@ export function homepageScreenshot(entry) {
 }
 
 export function verifiedHomepageScreenshot(image) {
-  return image?.captureEngine==='original-html-scroll-v1' && image.fullPage===true && image.quality?.version>=2 && image.quality?.imagesComplete===true && image.quality?.imageCount>0 && image.quality?.scrollPasses>=2 && Math.abs(image.height-image.quality.documentHeight)<=2;
+  return image?.captureEngine==='original-html-scroll-v1' && image.fullPage===true && (image.height<=7000 || image.quality?.tiled===true) && image.quality?.version>=2 && image.quality?.imagesComplete===true && image.quality?.imageCount>0 && image.quality?.scrollPasses>=2 && Math.abs(image.height-image.quality.documentHeight)<=2;
 }
