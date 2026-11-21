@@ -44,5 +44,9 @@ export function homepageScreenshot(entry) {
   const keys = [entry.storeUrl, ...(entry.alternativeUrls || [])].map(referenceKey);
   if (!referenceKey(image.sourceUrl) || !keys.includes(referenceKey(image.sourceUrl))
       || referenceKey(image.sourceUrl).startsWith('product:')) return null;
-  return image.height>=16384 ? {...image,fullPage:false,truncated:true} : image;
+  return image.height>=16384 && image.captureEngine!=='browser-scroll-v1' ? {...image,fullPage:false,truncated:true} : image;
+}
+
+export function verifiedHomepageScreenshot(image) {
+  return image?.captureEngine === 'browser-scroll-v1' && image.fullPage === true && image.quality?.imagesComplete === true && image.quality?.imageCount > 0 && image.quality?.scrollPasses >= 2 && Math.abs(image.quality.documentHeight-image.height) <= 2;
 }

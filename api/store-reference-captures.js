@@ -10,14 +10,14 @@ module.exports=async(req,res)=>{
     const db=getClient();
     if(!ready)ready=db.execute(`CREATE TABLE IF NOT EXISTS store_reference_captures (id TEXT PRIMARY KEY,store_url TEXT NOT NULL,brand_name TEXT NOT NULL DEFAULT '',screenshot TEXT,capture_status TEXT NOT NULL DEFAULT 'pending',capture_error TEXT NOT NULL DEFAULT '',started_at INTEGER NOT NULL DEFAULT 0,updated_at TEXT DEFAULT CURRENT_TIMESTAMP)`).catch(e=>{ready=null;throw e;});
     await ready;
-    const snapshot=row=>{const image=row.screenshot?JSON.parse(row.screenshot):null;return image?.height>=16384?{...image,fullPage:false,truncated:true}:image;};
+    const snapshot=row=>{const image=row.screenshot?JSON.parse(row.screenshot):null;return image?.height>=16384 && image.captureEngine!=='browser-scroll-v1'?{...image,fullPage:false,truncated:true}:image;};
     const rowData=row=>({id:row.id,storeUrl:row.store_url,brandName:row.brand_name,homepageScreenshot:snapshot(row),alternativeUrls:row.screenshot?[JSON.parse(row.screenshot).sourceUrl]:[],captureStatus:row.capture_status,captureError:row.capture_error});
     if(req.method==='GET')return res.json({stores:(await db.execute('SELECT * FROM store_reference_captures ORDER BY updated_at DESC')).rows.map(rowData)});
     const body=req.body||{}, t=target(body.url), id=t.marketplace+':'+t.pageId.toUpperCase();
     if(body.brandName!==undefined && (typeof body.brandName!=='string'||body.brandName.length>150))throw Error('Markenname ungültig.');
     const now=Date.now();
     await db.execute({sql:`INSERT INTO store_reference_captures(id,store_url,brand_name) VALUES(?,?,?) ON CONFLICT(id) DO NOTHING`,args:[id,t.url,body.brandName?.trim()||'Brand Store']});
-    const lock=await db.execute({sql:`UPDATE store_reference_captures SET capture_status='capturing',capture_error='',started_at=?,brand_name=CASE WHEN ?='' THEN brand_name ELSE ? END WHERE id=? AND (capture_status!='capturing' OR started_at<?)`,args:[now,body.brandName?.trim()||'',body.brandName?.trim()||'',id,now-180000]});
+    const lock=await db.execute({sql:`UPDATE store_reference_captures SET capture_status='capturing',capture_error='',started_at=?,brand_name=CASE WHEN ?='' THEN brand_name ELSE ? END WHERE id=? AND (capture_status!='capturing' OR started_at<?)`,args:[now,body.brandName?.trim()||'',body.brandName?.trim()||'',id,now-330000]});
     if(!lock.rowsAffected)return res.status(409).json({error:'Für diesen Store läuft bereits eine Aufnahme.'});
     try{
       const result=await captureReference(t.url);
