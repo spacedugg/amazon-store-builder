@@ -89,6 +89,31 @@ async function settlePage(page, options={}) {
   throw Error('Der Seitenaufbau ist noch nicht stabil. Bitte die Aufnahme erneut starten.');
 }
 
+// Decode original responsive images explicitly: some offscreen Amazon slots
+// have src/srcset but no selected resource and a zero-height image box.
+async function loadOriginalAssets(page) {
+  const result=await page.evaluate(async()=>{
+    const jobs=[];
+    for(const image of document.images){
+      const source=image.naturalWidth>2?(image.currentSrc||image.src):image.src;
+      if(!/\/images\/(?:S|I)\//.test(source))continue;
+      jobs.push(async()=>{
+        image.loading='eager';
+        if(image.naturalWidth<3){image.removeAttribute('srcset');image.src=source;}
+        try{await Promise.race([image.decode(),new Promise((_,reject)=>setTimeout(()=>reject(Error('timeout')),15000))]);return image.naturalWidth>2;}catch{return false;}
+      });
+    }
+    for(const video of document.querySelectorAll('video[poster]')){
+      video.pause();const source=video.poster;
+      jobs.push(async()=>{const image=new Image();image.src=source;try{await Promise.race([image.decode(),new Promise((_,reject)=>setTimeout(()=>reject(Error('timeout')),15000))]);return image.naturalWidth>2;}catch{return false;}});
+    }
+    let index=0,failed=0;await Promise.all(Array.from({length:4},async()=>{while(index<jobs.length){const job=jobs[index++];if(!await job())failed++;}}));
+    return {total:jobs.length,failed};
+  });
+  if(result.failed)throw Error(result.failed+' Originalbilder oder Videovorschaubilder konnten nicht geladen werden. Die alte Aufnahme wurde nicht ersetzt.');
+  return result;
+}
+
 async function dismissConsent(page){
   let changed=false;
   const buttons=await page.getByRole('button',{name:/^(Ablehnen|Alle ablehnen|Reject|Reject all|Decline)$/i}).all();
@@ -117,10 +142,16 @@ async function captureOriginalPage(url,options={}) {
     await page.goto(source,{waitUntil:'domcontentloaded',timeout:75000});
     const body=await page.locator('body').innerText();
     if(/Wir unterstützen deine Sitzung|automated access|robot check/i.test(body))throw Error('Amazon hat keine verwendbare Originalseite geliefert.');
+    await page.addStyleTag({content:'[id^="sp-cc"]{display:none!important}'});
     await page.waitForTimeout(1500);
     await dismissConsent(page);
+    await loadOriginalAssets(page);
     let selector=await page.evaluate(storeSelector);
     let state=await settlePage(page,{...options,selector});
+    const assets=await loadOriginalAssets(page);
+    const loaded=await page.evaluate(pageReadiness,selector);
+    if(loaded.region.height!==state.region.height || loaded.region.width!==state.region.width || loaded.missing || loaded.skeletons)state=await settlePage(page,{...options,selector});
+    else {assertReady(loaded);state={...state,...loaded};}
     const completeSelector=await page.evaluate(storeSelector);
     if(completeSelector!==selector){selector=completeSelector;state=await settlePage(page,{...options,selector});}
     const storeImages=await page.evaluate(()=>[...document.images].filter(i=>i.getBoundingClientRect().width>=60 && [i.currentSrc,i.src,i.getAttribute('data-src'),i.getAttribute('data-a-dynamic-image')].some(value=>/\/images\/(?:S|I)\//.test(value||''))).length);
@@ -142,7 +173,7 @@ async function captureOriginalPage(url,options={}) {
     const bytes=PNG.sync.write(output);
     const {pngSize}=require('./reference-capture.cjs'),size=pngSize(bytes);
     if(Math.abs(size.height-state.region.height)>2 || Math.abs(size.width-state.region.width)>2)throw Error('Die Store-Aufnahme wurde abgeschnitten.');
-    return {bytes,...size,quality:{version:2,imagesComplete:true,tiled:true,imageCount:state.images,scrollPasses:state.scrollPasses,documentHeight:state.region.height,originalPageHeight:state.height,sourceHtmlHash:createHash('sha256').update(options.html).digest('hex')}};
+    return {bytes,...size,quality:{version:2,imagesComplete:true,tiled:true,decodedAssetCount:assets.total,imageCount:state.images,scrollPasses:state.scrollPasses,documentHeight:state.region.height,originalPageHeight:state.height,sourceHtmlHash:createHash('sha256').update(options.html).digest('hex')}};
   } finally {clearTimeout(timeout);await browser?.close().catch(()=>{});}
 }
-module.exports={loadOriginalPage,anonymousCookies,permittedResource,pageReadiness,assertReady,settlePage,storeSelector,captureOriginalPage};
+module.exports={loadOriginalPage,anonymousCookies,permittedResource,pageReadiness,assertReady,settlePage,storeSelector,captureOriginalPage,loadOriginalAssets};

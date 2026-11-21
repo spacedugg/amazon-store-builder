@@ -12,12 +12,12 @@ export function referenceKey(url) {
 export function mergeReferenceCatalog(catalog, additions = []) {
   const rows = new Map();
   for (const row of [...catalog, ...additions]) {
-    if (!row || !referenceKey(row.storeUrl) || referenceKey(row.storeUrl).endsWith(':91172724-C342-482B-A300-564D9EA5E09F')) continue;
+    if (!row || !referenceKey(row.storeUrl) || ['amazon.de:91172724-C342-482B-A300-564D9EA5E09F','amazon.de:1758941C-AE87-4628-AB45-62C0A2BDB75C','product:B0CLDWHKCB'].includes(referenceKey(row.storeUrl))) continue;
     const key = referenceKey(row.storeUrl);
     if (rows.has(key) && row.captureStatus) { const current=rows.get(key); rows.set(key, { ...current, brandName: row.brandName || current.brandName, alternativeUrls: [...new Set([...(current.alternativeUrls || []),...(row.alternativeUrls || [])])], homepageScreenshot: row.homepageScreenshot || current.homepageScreenshot, captureStatus: row.captureStatus, captureError: row.captureError }); }
     if (!rows.has(key)) rows.set(key, { ...row, id: key, kind: key.startsWith('product:') ? 'product' : 'store', images: row.images || [], modules: row.modules || [] });
   }
-  return [...rows.values()];
+  return [...rows.values()].sort((a,b)=>Number(b.id==='amazon.de:8B640FD7-98E9-4C48-9BF0-422ED3F14A3A')-Number(a.id==='amazon.de:8B640FD7-98E9-4C48-9BF0-422ED3F14A3A'));
 }
 
 export function appendReferenceChoices(current, choices) {
